@@ -172,6 +172,37 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
     print(f"wrote candidate {out}")
+
+    # Written beside the candidate rather than inside it: promote reads the
+    # candidate on every run and has no use for this, while this exists purely
+    # so a later question can be asked of today's data.
+    if combined.archive:
+        archive = Path(args.archive)
+        archive.parent.mkdir(parents=True, exist_ok=True)
+        archive.write_text(
+            json.dumps(
+                {
+                    "scraped_at": date.today().isoformat(),
+                    "source": "liveaboard.com",
+                    "note": (
+                        "Structured data exactly as the source published it, "
+                        "including fields nothing parses yet. Kept because "
+                        "current prices can be re-scraped and past ones cannot."
+                    ),
+                    "pages": combined.archive,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        nodes = sum(len(page["nodes"]) for page in combined.archive)
+        print(
+            f"archived {len(combined.archive)} pages, {nodes} nodes "
+            f"-> {archive} ({archive.stat().st_size / 1024:.0f} KB)"
+        )
+
     return 1 if blocked else 0
 
 
@@ -257,6 +288,7 @@ def main(argv: list[str] | None = None) -> int:
     scrape.add_argument("--source", choices=sorted(ADAPTERS), default=None)
     scrape.add_argument("--out", default=Path("data/candidate.json"), type=Path)
     scrape.add_argument("--snapshots", default=DEFAULT_SNAPSHOTS, type=Path)
+    scrape.add_argument("--archive", default=Path("data/archive.json"), type=Path)
     scrape.add_argument(
         "--warnings", type=int, default=10, help="how many warnings to print"
     )

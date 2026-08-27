@@ -215,6 +215,20 @@ class LiveaboardComAdapter(SourceAdapter):
                 f"inspect the snapshot ({result.digest}) and add a markup parser"
             )
 
+        # Keep what the page published before reading anything out of it. The
+        # nodes below carry cabin types, vessel specifications, ratings and
+        # review counts that nothing here parses today; storing them costs a few
+        # hundred kilobytes a run and is the only way a later question about
+        # today's prices can still be answered.
+        output.archive.append(
+            {
+                "url": result.url,
+                "retrieved": result.fetched_at.date().isoformat(),
+                "digest": result.digest,
+                "nodes": products + events,
+            }
+        )
+
         if products:
             product = products[0]
             # Fees are a property of the vessel, not the sailing: the same
