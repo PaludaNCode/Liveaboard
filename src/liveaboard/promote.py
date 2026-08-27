@@ -328,6 +328,10 @@ def _default_fx() -> dict[str, Any]:
     return {
         "display_currency": "EUR",
         "as_of": date.today().isoformat(),
+        # Named a placeholder on purpose: money.PLACEHOLDER_SOURCE matches it,
+        # so the page warns instead of passing this off as a looked-up rate.
+        # tools/fetch_fx.py replaces the whole table with ECB reference rates;
+        # this only applies when that has never run.
         "source": "placeholder — replace with a real rate source",
-        "rates": {"USD": 0.92, "GBP": 1.17, "EGP": 0.019},
+        "rates": {"USD": 0.92, "GBP": 1.17},
     }

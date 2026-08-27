@@ -471,16 +471,29 @@
     /* Separate from the seed banner: prices can be genuinely scraped while the
        rate that turns them into euro is not. The source quotes many trips in
        dollars, so this caveat applies to real data too. */
-    if (DATA.meta.fx && DATA.meta.fx.sourced === false) {
+    var fx = DATA.meta.fx;
+    if (fx && fx.sourced === false) {
       var fxNotice = el("div", "notice");
       fxNotice.appendChild(el("strong", null, "Euro figures use an approximate rate"));
       fxNotice.appendChild(document.createTextNode(
-        "Several operators quote in dollars. Those prices are converted at a " +
+        "Most operators quote in dollars. Those prices are converted at a " +
         "stand-in rate, not one taken from a rate source, so euro totals here " +
         "may differ by a few percent from what your card is charged. Prices " +
         "quoted in euro are unaffected."
       ));
       host.appendChild(fxNotice);
+    } else if (fx && fx.stale) {
+      /* Sourced but no longer moving. The build keeps the last good rate when
+         a fetch fails, which is right -- a real rate from last week beats an
+         invented one today -- but it must not pass as current. */
+      var staleNotice = el("div", "notice");
+      staleNotice.appendChild(el("strong", null, "The exchange rate is out of date"));
+      staleNotice.appendChild(document.createTextNode(
+        "Dollar prices are converted at the rate published on " + fx.as_of +
+        ", " + fx.age_days + " days ago. It is a real rate, but currencies have " +
+        "moved since, so euro totals may be off."
+      ));
+      host.appendChild(staleNotice);
     }
   }
 

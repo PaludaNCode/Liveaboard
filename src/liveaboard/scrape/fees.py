@@ -118,7 +118,10 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
      FeeCode.GEAR_RENTAL),
     (r"\bnaturalist\s+guide\b|\bsnorkell?(?:ing)?\s+guide\b", FeeCode.NATURALIST_GUIDE),
     (r"\bextra\s+dives?\b|\badditional\s+dives?\b", FeeCode.EXTRA_DIVES),
-    (r"\b(?:land\s+)?excursions?\b", FeeCode.LAND_EXCURSION),
+    # Not only land: a full run turned up "Glass Bottom Boat Excursion"
+    # alongside "Land Excursions", and calling the first one a land
+    # excursion renames a charge into something it is not.
+    (r"\bexcursions?\b", FeeCode.LAND_EXCURSION),
     # Narrow on purpose: the boat-features list that follows the disclosure
     # carries "Beer available" and "Wine Available" as amenities, not charges.
     (r"\balcoholic\s+(?:beverages?|drinks?)\b|\balcohol\b", FeeCode.ALCOHOL),

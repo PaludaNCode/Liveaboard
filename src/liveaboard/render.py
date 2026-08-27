@@ -132,6 +132,11 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 # says where it came from — or admits that it did not.
                 "source": dataset.fx.source,
                 "sourced": dataset.fx.is_sourced,
+                # Sourced but no longer refreshed is a third state. The fetcher
+                # keeps the last good rate when a fetch fails, so a broken feed
+                # looks exactly like a quiet one unless the date is watched.
+                "age_days": dataset.fx.age_days(),
+                "stale": dataset.fx.is_stale(),
             },
             "counts": {
                 "departures": len(departures),
