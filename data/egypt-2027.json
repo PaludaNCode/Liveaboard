@@ -6,11 +6,12 @@
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-08-27",
-    "source": "placeholder — replace with a real rate source",
+    "source": "European Central Bank euro foreign exchange reference rates",
+    "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+    "retrieved": "2026-08-27",
     "rates": {
-      "USD": 0.92,
-      "GBP": 1.17,
-      "EGP": 0.019
+      "GBP": 1.166317,
+      "USD": 0.858738
     }
   },
   "operators": [
@@ -8246,6 +8247,197 @@
       ]
     },
     {
+      "id": "blue-melody--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "blue-melody",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=8/2027",
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_night",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 8.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 90.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 90.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 135.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Nitrox\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 259.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+          },
+          "amount": {
+            "amount": 6.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 9.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Snorkel Gear\" as a range"
+        }
+      ]
+    },
+    {
       "id": "blue-melody--brothers-daedalus-elphinstone-port-ghalib-hurghada",
       "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)",
       "operator_id": "unknown-operator",
@@ -11961,6 +12153,212 @@
       ]
     },
     {
+      "id": "discovery-i--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "discovery-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027",
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Fuel Surcharge\" as a range"
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Gratuities\" as a range"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 500.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 300.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        }
+      ]
+    },
+    {
       "id": "discovery-i--brothers-daedalus-elphinstone-port-ghalib-hurghada",
       "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
       "operator_id": "unknown-operator",
@@ -11969,6 +12367,212 @@
       "dives": 0,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027",
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Fuel Surcharge\" as a range"
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Gratuities\" as a range"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 500.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 300.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "discovery-i--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
+      "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "discovery-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -12382,6 +12986,212 @@
       "dive_sites": [
         "brothers",
         "tiran"
+      ],
+      "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027",
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Fuel Surcharge\" as a range"
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Gratuities\" as a range"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 500.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": {
+            "amount": 300.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "discovery-i--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
+      "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "discovery-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "elphinstone",
+        "st johns",
+        "fury shoal"
       ],
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
       "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027",
@@ -54473,6 +55283,41 @@
       }
     },
     {
+      "id": "blue-melody-2027-05-01-0",
+      "itinerary_id": "blue-melody--brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1715.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+      }
+    },
+    {
+      "id": "blue-melody-2027-05-08-1",
+      "itinerary_id": "blue-melody--brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1372.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+      },
+      "promotion": "20% Off"
+    },
+    {
       "id": "blue-melody-2027-08-28-3",
       "itinerary_id": "blue-melody--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-08-28",
@@ -54488,6 +55333,24 @@
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=8/2027"
       }
+    },
+    {
+      "id": "blue-melody-2027-05-15-2",
+      "itinerary_id": "blue-melody--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1372.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+      },
+      "promotion": "20% Off"
     },
     {
       "id": "blue-melody-2027-06-19-2",
@@ -54521,6 +55384,41 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=8/2027"
+      }
+    },
+    {
+      "id": "blue-melody-2027-05-22-3",
+      "itinerary_id": "blue-melody--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1372.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
+      },
+      "promotion": "20% Off"
+    },
+    {
+      "id": "blue-melody-2027-05-29-4",
+      "itinerary_id": "blue-melody--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1715.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027"
       }
     },
     {
@@ -54691,91 +55589,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=7/2027"
-      }
-    },
-    {
-      "id": "carlton-2027-05-01-0",
-      "itinerary_id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
-      "start": "2027-05-01",
-      "end": "2027-05-08",
-      "price": {
-        "amount": 1084.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
-      }
-    },
-    {
-      "id": "carlton-2027-05-08-1",
-      "itinerary_id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
-      "start": "2027-05-08",
-      "end": "2027-05-15",
-      "price": {
-        "amount": 1084.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
-      }
-    },
-    {
-      "id": "carlton-2027-05-15-2",
-      "itinerary_id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1084.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
-      }
-    },
-    {
-      "id": "carlton-2027-05-22-3",
-      "itinerary_id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1084.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
-      }
-    },
-    {
-      "id": "carlton-2027-05-29-4",
-      "itinerary_id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1084.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
       }
     },
     {
@@ -55308,6 +56121,24 @@
       "promotion": "15% Off"
     },
     {
+      "id": "discovery-i-2027-07-17-2",
+      "itinerary_id": "discovery-i--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1015.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027"
+      },
+      "promotion": "15% Off"
+    },
+    {
       "id": "discovery-i-2027-08-07-0",
       "itinerary_id": "discovery-i--brothers-daedalus-elphinstone-port-ghalib-hurghada",
       "start": "2027-08-07",
@@ -55324,6 +56155,23 @@
         "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027"
       },
       "promotion": "15% Off"
+    },
+    {
+      "id": "discovery-i-2027-07-31-4",
+      "itinerary_id": "discovery-i--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1015.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027"
+      }
     },
     {
       "id": "discovery-i-2027-05-08-1",
@@ -55433,6 +56281,42 @@
       }
     },
     {
+      "id": "discovery-i-2027-07-03-0",
+      "itinerary_id": "discovery-i--north-wrecks-ras-mohamed-tiran-hurghada-hurghada",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 892.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027"
+      },
+      "promotion": "15% Off"
+    },
+    {
+      "id": "discovery-i-2027-07-10-1",
+      "itinerary_id": "discovery-i--north-wrecks-ras-mohamed-tiran-hurghada-hurghada",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 892.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027"
+      },
+      "promotion": "15% Off"
+    },
+    {
       "id": "discovery-i-2027-08-14-1",
       "itinerary_id": "discovery-i--north-wrecks-ras-mohamed-tiran-hurghada-hurghada",
       "start": "2027-08-14",
@@ -55500,6 +56384,24 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027"
+      },
+      "promotion": "15% Off"
+    },
+    {
+      "id": "discovery-i-2027-07-24-3",
+      "itinerary_id": "discovery-i--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 991.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027"
       },
       "promotion": "15% Off"
     },
@@ -59614,6 +60516,74 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=7/2027"
+      }
+    },
+    {
+      "id": "new-sambo-2027-08-07-0",
+      "itinerary_id": "new-sambo--deep-south-hamata-hamata",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=8/2027"
+      }
+    },
+    {
+      "id": "new-sambo-2027-08-14-1",
+      "itinerary_id": "new-sambo--deep-south-hamata-hamata",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=8/2027"
+      }
+    },
+    {
+      "id": "new-sambo-2027-08-21-2",
+      "itinerary_id": "new-sambo--deep-south-hamata-hamata",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=8/2027"
+      }
+    },
+    {
+      "id": "new-sambo-2027-08-28-3",
+      "itinerary_id": "new-sambo--deep-south-hamata-hamata",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=8/2027"
       }
     },
     {
@@ -63770,6 +64740,295 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=5/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-02-0",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-02",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-06-1",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-06",
+      "end": "2027-06-09",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-09-2",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-09",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-13-3",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-13",
+      "end": "2027-06-16",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-16-4",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-16",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-20-5",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-20",
+      "end": "2027-06-23",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-23-6",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-23",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-27-7",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-27",
+      "end": "2027-06-30",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-06-30-8",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-06-30",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-04-0",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-04",
+      "end": "2027-07-07",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-07-1",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-07",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-11-2",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-11",
+      "end": "2027-07-14",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-14-3",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-14",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-18-4",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-18",
+      "end": "2027-07-21",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-21-5",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-21",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-25-6",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-25",
+      "end": "2027-07-28",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
+      }
+    },
+    {
+      "id": "snefro-pearl-2027-07-28-7",
+      "itinerary_id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
+      "start": "2027-07-28",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 678.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027"
       }
     },
     {
