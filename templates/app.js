@@ -191,21 +191,34 @@
         return "<b>" + span(m) + "</b>" +
           (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "");
       } },
-    /* Price per dive is what divers compare on, so it earns a column even
-       though the denominator is worked out rather than published. Marked with
-       a tilde wherever it is: a figure divided by an assumption is a weaker
-       claim than one divided by a stated count, and the two must not look
-       alike on the same page. */
+    /* What divers actually compare on, and the reason price per night is not
+       here: two denominators over the same total, and only one of them is the
+       thing being bought.
+
+       Shown only where the operator publishes a count. The rest used to carry
+       three dives per full day, and checking that against the ten vessels that
+       do publish one settled it: they state 15 to 21 for the same seven-night
+       week. A third of the figure, and the whole of what this column exists to
+       tell apart. An empty cell is what this page already says for a dive site
+       nobody named. */
     { k: "perdive", t: "Per dive", num: true,
       v: function (d, i, m) { return i.dives > 0 ? m.total / i.dives : -1; },
       show: function (d, i, m) {
-        if (!d.mandatory_known || !i.dives) return '<span class="dim">—</span>';
-        var value = eur(m.total / i.dives);
-        return i.dives_estimated
-          ? '<span class="est" title="' + i.dives +
-            ' dives assumed: three a day for every full day at sea. The ' +
-            'operator does not publish a count.">~' + value + "</span>"
-          : value;
+        if (!i.dives) {
+          return '<span class="dim" title="This operator does not publish a ' +
+                 'dive count. Assuming one would divide the bill by a number ' +
+                 'nobody stated.">not stated</span>';
+        }
+        if (!d.mandatory_known) return '<span class="dim">—</span>';
+        /* The operator quotes a range and this is the fewest, so the figure is
+           a ceiling: a week with less steaming fits more dives in and costs
+           less each. Erring this way on purpose — the other direction would
+           flatter every trip. */
+        return '<b>' + eur(m.total / i.dives) + "</b>" +
+               '<span class="dim" title="' + i.dives + '+ dives — the fewest ' +
+               'this operator states for the week. Boats that cross further, ' +
+               'or spend longer in the parks where night dives are not ' +
+               'allowed, fit fewer in.">↓ ' + i.dives + "+</span>";
       } },
     /* Included or extra, said plainly. Half this fleet bundles nitrox and half
        bills for it, and on a page for comparing trips that difference has to be
@@ -545,7 +558,9 @@
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
-    D.meta.counts.boats + " boats · " +
+    /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are
+       never linked from the search pages, so the crawl cannot see them. */
+    D.meta.counts.boats + " boats bookable by the berth · " +
     D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
     " · built " + D.meta.generated;
 

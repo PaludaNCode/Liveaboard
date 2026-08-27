@@ -141,6 +141,13 @@ class FeeItem:
         """Normalise the quoted basis to a per-person trip low and high."""
         if self.amount is None:
             return None, None
+        if self.basis is FeeBasis.PER_DIVE and dives <= 0:
+            # A charge per dive on a trip whose dive count nobody publishes is
+            # a known cost of unknown size, which the breakdown already has a
+            # state for. Multiplying by zero would show it as free, and a fee
+            # rendered free because a denominator is missing is the exact
+            # failure this project exists to expose in other people.
+            return None, None
         low = self._scale(self.amount, nights, dives)
         high = self._scale(self.amount_max, nights, dives) if self.amount_max else low
         return low, high
@@ -276,14 +283,6 @@ class Itinerary:
     title said north. Absent whenever real sites were found, because a list of
     reefs is strictly better than a direction.
     """
-    dives_estimated: bool = False
-    """Whether ``dives`` was counted from the listing or worked out from nights.
-
-    The source publishes no per-trip dive count, so for now this is true
-    everywhere a count exists at all. It has to reach the page: price per dive
-    computed from an assumed denominator is a weaker claim than one computed
-    from a stated count, and the two must not look alike.
-    """
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Itinerary:
@@ -306,7 +305,6 @@ class Itinerary:
             summary=payload.get("summary"),
             title=payload.get("title"),
             region=payload.get("region"),
-            dives_estimated=bool(payload.get("dives_estimated", False)),
         )
 
 

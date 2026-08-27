@@ -133,6 +133,23 @@ class LiveaboardComAdapter(SourceAdapter):
     source_id = "liveaboard.com"
     host = HOST
 
+    skip_vessels: frozenset[str] = frozenset()
+    """Vessels a recent run found to sell nothing in the season.
+
+    Twelve of the fleet publish no May-August sailing at all, and each costs
+    four fetches a night to learn that again -- forty-eight requests daily
+    against someone else's server for an answer that changes with the season,
+    not with the day.
+
+    The obvious cheaper fix does not work and is written down in
+    docs/sources/liveaboard.com.md so it is not retried: the month listings are
+    not month-filtered, so a vessel's absence from May proves nothing.
+
+    This is set by the caller from a cache it re-checks weekly, so a boat that
+    opens a season is picked up within seven days rather than never. Empty by
+    default -- the adapter never decides on its own to stop looking at a boat.
+    """
+
     @staticmethod
     def boat_links(html: str) -> set[str]:
         """Vessel paths on a listing page, with regions and dive sites removed."""
@@ -165,6 +182,7 @@ class LiveaboardComAdapter(SourceAdapter):
     def discover(self) -> Iterator[str]:
         """Crawl the month searches, then each boat page they link to."""
         seen: set[str] = set()
+        skipped = 0
 
         for listing_url in self._listing_urls():
             yield listing_url
@@ -174,6 +192,9 @@ class LiveaboardComAdapter(SourceAdapter):
                 if link in seen:
                     continue
                 seen.add(link)
+                if link.rstrip("/").rsplit("/", 1)[-1] in self.skip_vessels:
+                    skipped += 1
+                    continue
                 if len(seen) > self.max_pages:
                     self.note(f"stopped at {self.max_pages} vessels; more were available")
                     return
@@ -182,6 +203,14 @@ class LiveaboardComAdapter(SourceAdapter):
                 for query in SEASON_QUERIES:
                     yield f"https://{self.host}{link}{query}"
 
+        if skipped:
+            # Said out loud, every run. A quiet skip list is how a fleet
+            # silently shrinks, and the count is what makes an over-eager
+            # cache visible before it starts hiding real boats.
+            self.note(
+                f"skipped {skipped} vessel(s) a recent run found to sell nothing "
+                "this season; they are re-checked weekly"
+            )
         if not seen:
             self.note("no boat pages were discovered from any listing")
 

@@ -98,6 +98,33 @@ FAMILY_PRECEDENCE: tuple[Route, ...] = (
 Zabargad and St John's region, so it wins a tie against the narrower St John's.
 """
 
+ROUTE_PILLARS: dict[Route, tuple[tuple[str, ...], ...]] = {
+    Route.BDE: (
+        # Numidia and Aida are wrecks on Big Brother, so naming either is
+        # naming the Brothers.
+        ("big brother", "little brother", "brothers", "numidia", "aida"),
+        ("daedalus",),
+        ("elphinstone",),
+    ),
+}
+"""Routes that are a named set of places, not a score.
+
+BDE *is* Brothers, Daedalus and Elphinstone. A week reaching two of the three
+is not a weaker BDE, it is a different trip -- so every pillar has to be
+present or the route is not a candidate at all.
+
+Counting instead of requiring got this wrong in a way that flipped on a single
+word. "Daedalus & St. John's" read as deep south, correctly; adding Elphinstone
+to the same trip gave the offshore family two hits against the south's one and
+tipped it to BDE, even though St John's is 150 nautical miles further south and
+is what the week is actually for.
+
+Eighteen itineraries name two pillars. Those that also name a southern site now
+read as southern, which is what they are; the handful naming only Daedalus and
+Elphinstone come out unclassified, because there is no honest label for an
+offshore pair and the dive-site column already says exactly where they go.
+"""
+
 MIN_FAMILY_MATCHES = 2
 """Site hits before a family counts as genuinely visited rather than passed."""
 
@@ -175,22 +202,42 @@ def infer_route(itinerary: Itinerary) -> Route | None:
     if not any(scores.values()):
         return None
 
-    best_per_family: dict[str, tuple[int, Route]] = {}
-    for route, score in scores.items():
-        if not score:
-            continue
-        family = ROUTE_FAMILY[route]
-        rank = -FAMILY_PRECEDENCE.index(route)
-        current = best_per_family.get(family)
-        if current is None or (score, rank) > (current[0], -FAMILY_PRECEDENCE.index(current[1])):
-            best_per_family[family] = (score, route)
+    def best(among: dict[Route, int]) -> dict[str, tuple[int, Route]]:
+        chosen: dict[str, tuple[int, Route]] = {}
+        for route, score in among.items():
+            if not score:
+                continue
+            family = ROUTE_FAMILY[route]
+            rank = -FAMILY_PRECEDENCE.index(route)
+            current = chosen.get(family)
+            if current is None or (score, rank) > (
+                current[0], -FAMILY_PRECEDENCE.index(current[1])
+            ):
+                chosen[family] = (score, route)
+        return chosen
 
-    visited = [f for f, (score, _) in best_per_family.items() if score >= MIN_FAMILY_MATCHES]
+    # Where a trip has *been* and what it should be *called* are different
+    # questions, and the pillar rule only answers the second. A week naming
+    # Brothers and Daedalus was offshore whether or not it earns the BDE label,
+    # so the combination count is taken before the rule is applied -- otherwise
+    # a genuine north-offshore-south crossing loses a whole cruising ground and
+    # stops reading as a combination.
+    visited = [f for f, (score, _) in best(scores).items() if score >= MIN_FAMILY_MATCHES]
     if len(visited) >= MIN_FAMILIES_FOR_COMBINATION:
         return Route.COMBINATION
 
+    # A route defined by a named set is all-or-nothing. Scored like the others,
+    # two of BDE's three places outrank one southern site and a St John's week
+    # gets badged as an offshore one. See ROUTE_PILLARS.
+    eligible = dict(scores)
+    for route, pillars in ROUTE_PILLARS.items():
+        if not all(_matches(itinerary.dive_sites, pillar) for pillar in pillars):
+            eligible[route] = 0
+    if not any(eligible.values()):
+        return None
+
     _, winner = max(
-        best_per_family.values(),
+        best(eligible).values(),
         key=lambda pair: (pair[0], -FAMILY_PRECEDENCE.index(pair[1])),
     )
     return winner

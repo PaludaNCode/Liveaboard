@@ -294,3 +294,64 @@ class TestCrawlDelay(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestBarrenVesselsAreSkippedButNotForgotten(unittest.TestCase):
+    """Twelve vessels sell nothing in the season and cost 48 fetches a night.
+
+    Skipping them is worth doing and dangerous to do quietly: a cache that
+    never expires is a fleet that silently shrinks.
+    """
+
+    def test_a_skipped_vessel_is_not_fetched(self):
+        from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter
+
+        listing = '<a href="/diving/egypt/alia-soul">A</a><a href="/diving/egypt/topaz">B</a>'
+
+        class Stub(LiveaboardComAdapter):
+            def _listing_urls(self):
+                return iter(["https://www.liveaboard.com/diving/search/egypt/may/2027"])
+
+        adapter = Stub(_FetcherReturning(listing))
+        adapter.skip_vessels = frozenset({"topaz"})
+        urls = list(adapter.discover())
+        self.assertTrue(any("alia-soul" in u for u in urls))
+        self.assertFalse(any("topaz" in u for u in urls))
+
+    def test_the_skip_is_announced_every_run(self):
+        """A silent skip list is how a fleet quietly shrinks."""
+        from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter
+
+        listing = '<a href="/diving/egypt/topaz">B</a>'
+
+        class Stub(LiveaboardComAdapter):
+            def _listing_urls(self):
+                return iter(["https://www.liveaboard.com/diving/search/egypt/may/2027"])
+
+        adapter = Stub(_FetcherReturning(listing))
+        adapter.skip_vessels = frozenset({"topaz"})
+        list(adapter.discover())
+        self.assertTrue(any("skipped 1 vessel" in n for n in adapter._notes))
+
+    def test_nothing_is_skipped_by_default(self):
+        """The adapter never decides on its own to stop looking at a boat."""
+        from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter
+
+        self.assertEqual(LiveaboardComAdapter.skip_vessels, frozenset())
+
+
+class _FetcherReturning:
+    """Minimal fetcher stub: every request returns the same listing body."""
+
+    def __init__(self, body: str):
+        self.body = body
+
+    def get(self, url: str):
+        from datetime import datetime, timezone
+
+        from liveaboard.scrape.base import FetchResult
+
+        return FetchResult(
+            url=url, status=200, body=self.body,
+            fetched_at=datetime.now(timezone.utc), from_cache=False,
+        )

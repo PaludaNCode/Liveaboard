@@ -57,6 +57,14 @@ Break these and the site starts lying quietly rather than failing loudly.
 - **A vessel summary is the boat's year-round brochure, not the trip's.** Never
   a source for where one trip goes: Aphrodite's names St John's, so its *North
   Wrecks* week would be tagged with a reef 600 km away.
+- **Never derive a dive count.** Ten vessels publish one and they state 15 to
+  21 for the same seven-night week, so a fixed three-a-day is wrong by up to a
+  third — and at €60–100 a dive that is the whole difference between two boats.
+  The spread has a cause: a week that crosses further, or sits longer in the
+  parks where night dives are not permitted, fits fewer in. Operators quote a
+  range and the dataset keeps the **low end**, so price per dive is a ceiling.
+  A count is a per-vessel figure for a standard week (`dives_for_nights`), not
+  a per-trip one; unknown stays 0 and the column says "not stated".
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
 - **Zero runtime dependencies**, stdlib only, and the site stays one

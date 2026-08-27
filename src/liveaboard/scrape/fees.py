@@ -428,3 +428,68 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             entry["note"] = f"{fee.label}: listed with no price"
         out.append(entry)
     return out
+
+
+NOT_FROM_THE_DISCLOSURE = frozenset({FeeCode.GEAR_RENTAL})
+"""Codes the extras text names but does not price.
+
+The disclosure lists "Rental Gear" and stops; the figures are in the
+``#modal-gear`` dialog, and the fee scrape overwrites the unpriced line with
+the priced one. So re-reading the text alone can never reproduce what is
+stored, and comparing them reported all seventy-nine vessels as drifted on the
+first run of :func:`drift`. Excluded rather than special-cased, because the
+question this check asks is only about what the text parser owns.
+"""
+
+
+def _comparable(fee: dict) -> tuple:
+    """The parts of a fee line a parser change would move.
+
+    Provenance and note are excluded: the first records when a thing was
+    fetched and the second is wording, and neither says what a diver pays.
+    """
+    amount = fee.get("amount") or {}
+    high = fee.get("amount_max") or {}
+    return (
+        fee.get("code"), fee.get("tier"), fee.get("basis"), bool(fee.get("included")),
+        amount.get("amount"), amount.get("currency"), high.get("amount"),
+    )
+
+
+def drift(book: dict) -> dict[str, tuple[list[str], list[str]]]:
+    """Vessels whose stored fees are not what today's parser reads.
+
+    ``promote`` prefers the committed fee book over the daily run's own parse,
+    and that preference is right -- a browser sees extras the raw HTML never
+    will. The consequence is that a fee-parser fix reaches nothing until the
+    weekly browser run happens to go again, so a refresh can run entirely green
+    and change nothing while the page keeps charges the fix was written to
+    remove. That happened, and every step reported success.
+
+    This closes the gap without inverting the preference, because the book also
+    stores the disclosure text each parse was made from. Re-reading that text
+    with the current parser and comparing says whether the book is what this
+    code would produce -- offline, in milliseconds, with no fetch.
+
+    Returns ``{slug: (gained, lost)}`` describing what today's parser would add
+    and drop. An empty result means the book is current.
+    """
+    out: dict[str, tuple[list[str], list[str]]] = {}
+    for slug, entry in (book.get("vessels") or {}).items():
+        disclosure = entry.get("disclosure")
+        if not disclosure:
+            # Collected before the text was kept. Not drift, just unanswerable.
+            continue
+        text = "\n".join(
+            f"{heading.title()} Extras: {body}" for heading, body in disclosure.items()
+        )
+        fresh = to_fee_dicts(parse_extras(text), {})
+        skip = {c.value for c in NOT_FROM_THE_DISCLOSURE}
+        was = {_comparable(f) for f in entry.get("fees") or [] if f.get("code") not in skip}
+        now = {_comparable(f) for f in fresh if f.get("code") not in skip}
+        if was == now:
+            continue
+        gained = sorted(f"{c[0]}={c[4]}" for c in now - was)
+        lost = sorted(f"{c[0]}={c[4]}" for c in was - now)
+        out[slug] = (gained, lost)
+    return out

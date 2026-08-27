@@ -478,40 +478,34 @@ class TestPortNames(unittest.TestCase):
 
 
 class TestDiveCount(unittest.TestCase):
-    """Price per dive is what divers compare on; the count is not published."""
+    """The count is the operator's or it is nothing.
 
-    def dives(self, nights, stated=None):
+    It used to be worked out from nights at three dives a full day, which was
+    a defensible average and still the wrong thing to publish: price per dive
+    is total over dives, so at a fixed rate that is a constant multiple of
+    price per night. 292 of 317 trips run seven nights, so the column ranked
+    them in exactly the same order as the one beside it while looking like an
+    independent measurement.
+    """
+
+    def dives(self, stated=None):
         from liveaboard.promote import _dives
 
-        return _dives(nights, stated)
+        return _dives(stated)
 
-    def test_a_week_matches_the_only_figure_operators_publish(self):
-        """Two vessels state "up to 18 dives per week". Nothing states more."""
-        self.assertEqual(self.dives(7), 18)
+    def test_an_operator_count_is_kept(self):
+        self.assertEqual(self.dives(22), 22)
 
-    def test_the_first_and_last_days_are_not_diving_days(self):
-        """Arrival plus a check dive, then a dry day before flying."""
-        self.assertEqual(self.dives(4), 9)
-        self.assertEqual(self.dives(14), 39)
+    def test_no_count_is_zero_not_a_guess(self):
+        self.assertEqual(self.dives(None), 0)
+        self.assertEqual(self.dives(0), 0)
 
-    def test_an_operator_count_wins_outright(self):
-        self.assertEqual(self.dives(7, 22), 22)
-
-    def test_it_errs_low_rather_than_high(self):
-        """Assuming more dives divides the bill by a bigger number and makes
-        every trip look cheaper per dive than it is."""
-        self.assertLess(self.dives(7), 7 * 3)
-
-    def test_the_shortest_trip_still_dives(self):
-        self.assertGreaterEqual(self.dives(1), 1)
-
-    def test_the_page_is_told_the_count_was_assumed(self):
+    def test_an_unstated_count_reaches_the_page_as_zero(self):
+        """The page prints "not stated" rather than dividing by an assumption."""
         payload = promote(candidate([departure()]), season=SEASON)
-        itinerary = payload["itineraries"][0]
-        self.assertEqual(itinerary["dives"], 18)
-        self.assertTrue(itinerary["dives_estimated"])
+        self.assertEqual(payload["itineraries"][0]["dives"], 0)
 
-    def test_a_scraped_count_is_not_flagged_as_assumed(self):
+    def test_a_scraped_count_survives_promotion(self):
         payload = promote(
             candidate(
                 [departure()],
@@ -520,16 +514,6 @@ class TestDiveCount(unittest.TestCase):
             season=SEASON,
         )
         self.assertEqual(payload["itineraries"][0]["dives"], 20)
-        self.assertFalse(payload["itineraries"][0]["dives_estimated"])
-
-    def test_the_flag_survives_into_the_rendered_page(self):
-        rendered = build_payload(
-            Dataset.from_dict(promote(candidate([departure()]), season=SEASON))
-        )
-        itinerary = next(iter(rendered["itineraries"].values()))
-        self.assertTrue(itinerary["dives_estimated"])
-        self.assertEqual(itinerary["dives"], 18)
-
 
 class TestAvailability(unittest.TestCase):
     """127 of 886 departures were sold out and the page could not say so."""
@@ -792,3 +776,112 @@ class TestFreeNitrox(unittest.TestCase):
             fees=fee_book(specs={"nitrox_free": False, "nitrox_available": True}),
         )
         self.assertIsNone(self.nitrox(payload))
+
+
+class TestHandReadFactsDoNotOutliveTheScrape(unittest.TestCase):
+    """A typed-in figure fills a gap; it does not beat a fresher reading.
+
+    ``data/operator_facts.json`` covers ten vessels and never refreshes, while
+    the weekly browser run rewrites the fee book. Left as an unconditional
+    override, last month's hand-read number quietly wins over this week's
+    scrape, and nothing says so -- a stale fact that wins is worse than none.
+    """
+
+    def book(self, amount, collected):
+        return {
+            "scraped_at": collected,
+            "vessels": {"alia-soul": {
+                "collected": collected,
+                "fees": [{"code": "marine_park", "tier": "mandatory",
+                          "basis": "per_trip", "included": False,
+                          "amount": {"amount": amount, "currency": "EUR"}}],
+            }},
+        }
+
+    def facts(self, amount, collected):
+        return {
+            "collected": collected,
+            "vessels": {"alia-soul": {
+                "fees": [{"code": "marine_park", "tier": "mandatory",
+                          "basis": "per_trip", "included": False,
+                          "amount": {"amount": amount, "currency": "EUR"}}],
+            }},
+        }
+
+    def park(self, payload):
+        fees = {f["code"]: f for f in payload["itineraries"][0]["fees"]}
+        return fees["marine_park"]["amount"]["amount"]
+
+    def test_a_fresher_scrape_beats_a_hand_read_figure(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=self.book(250.0, "2026-08-27"),
+            facts=self.facts(150.0, "2026-08-01"),
+        )
+        self.assertEqual(self.park(payload), 250.0)
+        self.assertIn("alia-soul/marine_park", payload["facts_superseded"])
+
+    def test_a_hand_read_figure_still_wins_when_it_is_newer(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=self.book(250.0, "2026-08-01"),
+            facts=self.facts(150.0, "2026-08-27"),
+        )
+        self.assertEqual(self.park(payload), 150.0)
+        self.assertNotIn("facts_superseded", payload)
+
+    def test_it_still_fills_a_gap_the_scrape_left_unpriced(self):
+        """The case the file exists for: the disclosure names the charge and
+        gives no number, so there is nothing fresher to lose to."""
+        book = self.book(250.0, "2026-08-27")
+        book["vessels"]["alia-soul"]["fees"][0]["amount"] = None
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=book, facts=self.facts(150.0, "2026-08-01"),
+        )
+        self.assertEqual(self.park(payload), 150.0)
+
+
+class TestADiveCountIsAFloorForOneTripLength(unittest.TestCase):
+    """Operators quote a range and the dataset keeps its low end.
+
+    The range is not sloppiness. A week that crosses further, or spends longer
+    inside the marine parks where night dives are not permitted, fits fewer
+    dives into the same seven nights. So the count is the fewest stated, price
+    per dive is a ceiling, and the figure belongs to the trip length it was
+    quoted for and no other.
+    """
+
+    def dives(self, stated, nights=None, for_nights=None):
+        from liveaboard.promote import _dives
+
+        return _dives(stated, nights=nights, for_nights=for_nights)
+
+    def test_a_count_applies_to_the_length_it_was_quoted_for(self):
+        self.assertEqual(self.dives(17, nights=7, for_nights=7), 17)
+
+    def test_a_weekly_count_is_not_applied_to_a_mini_safari(self):
+        """Seventeen dives in three nights would be nearly six a day."""
+        self.assertEqual(self.dives(17, nights=3, for_nights=7), 0)
+
+    def test_nor_is_it_stretched_over_a_longer_trip(self):
+        """Ten nights is not seven, and the operator did not say."""
+        self.assertEqual(self.dives(17, nights=10, for_nights=7), 0)
+
+    def test_a_count_with_no_stated_length_is_taken_at_face_value(self):
+        """Older entries predate the field; they are not silently discarded."""
+        self.assertEqual(self.dives(17, nights=7), 17)
+
+    def test_the_page_gets_zero_rather_than_a_derivation(self):
+        payload = promote(
+            candidate(
+                [departure(start="2027-05-01", end="2027-05-04")],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul"}],
+            ),
+            season=SEASON,
+            facts={"collected": "2026-08-27", "vessels": {
+                "alia-soul": {"dives": 17, "dives_for_nights": 7}}},
+        )
+        itinerary = payload["itineraries"][0]
+        self.assertEqual(itinerary["nights"], 3)
+        self.assertEqual(itinerary["dives"], 0)

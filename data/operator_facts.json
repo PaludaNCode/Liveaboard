@@ -1,7 +1,7 @@
 {
   "source": "liveaboard.com",
   "collected": "2026-08-27",
-  "note": "Figures read from liveaboard.com vessel pages by hand, for the ten boats where the extras block the scrape reads carries no number. Covers only vessels already in the dataset; nothing here invents a boat, a trip or a price. Dive counts are the low end of the range the page states, to keep price per dive from flattering a trip. Nitrox is marked included on the five vessels whose pages say so; the extras block the scrape reads simply omits nitrox on those boats, and absence there is not the same claim as inclusion.",
+  "note": "Figures read from liveaboard.com vessel pages by hand, for the ten boats where the extras block the scrape reads carries no number. Covers only vessels already in the dataset; nothing here invents a boat, a trip or a price. Dive counts are the low end of the range the page states, to keep price per dive from flattering a trip. Nitrox is marked included on the five vessels whose pages say so; the extras block the scrape reads simply omits nitrox on those boats, and absence there is not the same claim as inclusion. Dive counts are the figure the page states for a standard seven-night week, and dives_for_nights records that: the same boat's three-night mini-safari does not run seventeen dives, so the count is not applied to trips of another length.",
   "vessels": {
     "blue-seas": {
       "guests": 24,
@@ -72,7 +72,8 @@
             "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "blue-storm": {
       "guests": 24,
@@ -143,7 +144,8 @@
             "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "red-sea-explorer": {
       "guests": 24,
@@ -218,7 +220,8 @@
             "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "odyssey": {
       "guests": 26,
@@ -324,7 +327,8 @@
             "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "hammerhead-ii": {
       "guests": 32,
@@ -413,7 +417,8 @@
             "currency": "EUR"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "jp-marine": {
       "guests": 28,
@@ -493,7 +498,8 @@
             "currency": "EUR"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "queen-sherry": {
       "guests": 24,
@@ -583,7 +589,8 @@
           "amount": null,
           "note": "listed without an amount"
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "alsuraya": {
       "guests": 24,
@@ -655,7 +662,8 @@
             "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "safy-mar": {
       "guests": 34,
@@ -758,7 +766,8 @@
             "currency": "EUR"
           }
         }
-      ]
+      ],
+      "dives_for_nights": 7
     },
     "red-sea-aggressor-iv": {
       "guests": 26,
@@ -859,7 +868,8 @@
           "amount": null,
           "note": "listed without an amount"
         }
-      ]
+      ],
+      "dives_for_nights": 7
     }
   }
 }
