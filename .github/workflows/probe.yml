@@ -74,3 +74,11 @@ jobs:
             --vessel "${{ inputs.itinerary_vessel || 'emperor-asmaa' }}" \
             --tours "${{ inputs.itinerary_tours || '353503,353505' }}" \
             ${{ inputs.dump_html && '--dump-html' || '' }}
+
+      # The #tourid= fragment opens nothing, so the detail arrives after the
+      # page does. This watches the network while a departure row is clicked.
+      - name: Find how the trip detail is fetched
+        run: |
+          python3 tools/probe_trip_detail.py \
+            --vessel "${{ inputs.itinerary_vessel || 'emperor-asmaa' }}" \
+            ${{ inputs.dump_html && '--dump-body' || '' }}
