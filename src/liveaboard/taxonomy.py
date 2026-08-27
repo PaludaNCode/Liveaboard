@@ -122,7 +122,7 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.LAUNDRY: "Laundry & pressing",
     FeeCode.SNORKEL_GEAR: "Snorkel gear",
     FeeCode.EXTRA_DIVES: "Extra dives",
-    FeeCode.LAND_EXCURSION: "Land excursions",
+    FeeCode.LAND_EXCURSION: "Excursions",
     FeeCode.NATURALIST_GUIDE: "Naturalist / snorkelling guide",
     FeeCode.NITROX_COURSE: "Nitrox course",
 }

@@ -422,6 +422,7 @@ class TestExtrasWeUsedToDrop(unittest.TestCase):
         for text, code in (
             ("Extra Dives", FeeCode.EXTRA_DIVES),
             ("Land Excursions", FeeCode.LAND_EXCURSION),
+            ("Glass Bottom Boat Excursion", FeeCode.LAND_EXCURSION),
             ("Naturalist Guide", FeeCode.NATURALIST_GUIDE),
             ("Snorkeling Guide", FeeCode.NATURALIST_GUIDE),
         ):
