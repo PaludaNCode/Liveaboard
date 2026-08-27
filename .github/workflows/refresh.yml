@@ -70,7 +70,7 @@ jobs:
           PYTHONPATH=src python3 -m liveaboard.cli promote \
             --candidate data/candidate.json \
             --out data/egypt-2027.json \
-            ${{ inputs.force_promote == 'true' && '--force' || '' }}
+            ${{ inputs.force_promote && '--force' || '' }}
 
       - name: Report a blocked or empty scrape
         if: steps.scrape.outcome == 'failure'
