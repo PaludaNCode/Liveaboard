@@ -244,5 +244,44 @@ class TestRequirementExtraction(unittest.TestCase):
         self.assertIsNone(PadiComAdapter.extract_requirements("<p>A lovely boat.</p>"))
 
 
+class TestFxHonesty(unittest.TestCase):
+    """Every euro figure on the page rests on one rate."""
+
+    def table(self, source):
+        from liveaboard.money import FxTable
+
+        return FxTable.from_dict(
+            {"display_currency": "EUR", "as_of": "2026-08-27",
+             "source": source, "rates": {"USD": 0.92}}
+        )
+
+    def test_the_shipped_default_admits_it_is_a_placeholder(self):
+        from liveaboard.promote import _default_fx
+        from liveaboard.money import FxTable
+
+        self.assertFalse(FxTable.from_dict(_default_fx()).is_sourced)
+
+    def test_a_named_source_counts_as_sourced(self):
+        self.assertTrue(
+            self.table("European Central Bank daily reference rate").is_sourced
+        )
+
+    def test_the_ways_a_table_admits_it_is_a_stand_in(self):
+        for source in ("placeholder", "unknown", "TODO: real rates",
+                       "example rate", "stand-in"):
+            self.assertFalse(self.table(source).is_sourced, source)
+
+    def test_the_page_is_told_whether_the_rate_is_sourced(self):
+        import json
+        from liveaboard.dataset import Dataset
+        from liveaboard.render import build_payload
+
+        payload = build_payload(Dataset.from_dict(json.loads(
+            (Path(__file__).resolve().parents[1] / "data/seed/egypt-2027.json")
+            .read_text(encoding="utf-8")
+        )))
+        self.assertIn("sourced", payload["meta"]["fx"])
+
+
 if __name__ == "__main__":
     unittest.main()
