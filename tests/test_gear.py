@@ -7,7 +7,11 @@ against that rather than against a shape invented to be easy to parse.
 
 from __future__ import annotations
 
+import io
+import json
+import sys
 import unittest
+from contextlib import redirect_stderr
 from pathlib import Path
 
 from liveaboard.models import FeeItem
@@ -135,6 +139,42 @@ class TestWeeklyHireOverATripThatIsNotAWeek(unittest.TestCase):
     def test_a_fortnight_is_two_weeks(self):
         low, _ = self.fee().span_for_trip(nights=13, dives=36)
         self.assertEqual(float(low.amount), 412.0)
+
+
+class TestACappedRunCannotEmptyTheFeeBook(unittest.TestCase):
+    """``--limit 6`` visits six vessels and knows nothing about the other 73.
+
+    Writing only what such a run saw would delete the rest, which is a partial
+    view overwriting a complete one -- and it would look like a successful
+    refresh in the log.
+    """
+
+    def setUp(self):
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
+        import scrape_fees
+
+        self.previous = scrape_fees.previous
+        self.tmp = Path(__file__).parent / "fixtures" / "_fee_book_probe.json"
+
+    def tearDown(self):
+        self.tmp.unlink(missing_ok=True)
+
+    def test_the_existing_book_is_the_starting_point(self):
+        self.tmp.write_text(
+            json.dumps({"vessels": {"aphrodite": {"fees": []}, "blue-seas": {"fees": []}}}),
+            encoding="utf-8",
+        )
+        self.assertEqual(sorted(self.previous(self.tmp)), ["aphrodite", "blue-seas"])
+
+    def test_a_first_run_starts_empty(self):
+        self.assertEqual(self.previous(self.tmp), {})
+
+    def test_an_unreadable_book_does_not_stop_the_run(self):
+        """Better to rebuild than to halt -- but it says so on stderr."""
+        self.tmp.write_text("{ not json", encoding="utf-8")
+        with redirect_stderr(io.StringIO()) as noise:
+            self.assertEqual(self.previous(self.tmp), {})
+        self.assertIn("fresh fee book", noise.getvalue())
 
 
 if __name__ == "__main__":

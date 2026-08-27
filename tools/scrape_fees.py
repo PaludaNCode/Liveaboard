@@ -123,6 +123,19 @@ def read_gear(page: Any) -> str:
         return ""
 
 
+def previous(path: Path) -> dict[str, Any]:
+    """The fee book already on disk, or nothing on a first run."""
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("vessels", {})
+    except (OSError, ValueError) as exc:
+        # Better to rebuild from scratch than to stop, but say so: a silently
+        # emptied fee book is exactly the failure this file guards against.
+        print(f"could not read {path} ({exc}); starting a fresh fee book", file=sys.stderr)
+        return {}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", default=Path("data/fees.json"), type=Path)
@@ -142,7 +155,13 @@ def main() -> int:
     if executable:
         launch["executable_path"] = executable
 
-    collected: dict[str, Any] = {}
+    # Start from what is already on disk. A --limit run visits the first N
+    # vessels and knows nothing about the rest, so writing only what it saw
+    # would delete the other seventy-odd fee disclosures -- a partial view
+    # overwriting a complete one. Merging makes a capped run an incremental
+    # update, which is the only thing it can honestly be.
+    collected: dict[str, Any] = dict(previous(args.out))
+    known = len(collected)
     missing: list[str] = []
 
     with sync_playwright() as p:
@@ -194,6 +213,10 @@ def main() -> int:
 
                 collected[slug] = {
                     "source_url": url,
+                    # Per vessel, because the book is now merged across runs
+                    # and a single top-level date would claim every entry was
+                    # collected on the day of the last capped run.
+                    "collected": date.today().isoformat(),
                     # What the parse was made from. Without it a parser fix
                     # cannot be checked without driving a browser at the live
                     # site all over again.
@@ -221,6 +244,12 @@ def main() -> int:
         print("no fees collected from any vessel", file=sys.stderr)
         return 1
 
+    # A run that visited vessels and learned nothing from any of them has not
+    # produced a fee book; it has kept the old one. Say so rather than letting
+    # a silent no-op read as a successful refresh.
+    if len(collected) == known and not missing:
+        print("no vessel yielded fees this run; previous book kept", file=sys.stderr)
+
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
         json.dumps(
@@ -236,7 +265,10 @@ def main() -> int:
         + "\n",
         encoding="utf-8",
     )
-    print(f"\nwrote {args.out}: {len(collected)} vessels with fees, {len(missing)} without")
+    print(
+        f"\nwrote {args.out}: {len(collected)} vessels with fees "
+        f"({len(collected) - known} new this run), {len(missing)} without"
+    )
     return 0
 
 
