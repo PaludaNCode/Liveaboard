@@ -45,13 +45,26 @@ jobs:
       - name: Run tests
         run: PYTHONPATH=src python3 -m unittest discover -s tests
 
-      - name: Scrape sources
+      # padi.com is parked: both its entry paths 404 and it contributes
+      # requirements, not prices. Scraping only what works keeps a failing
+      # source from muddying a good run.
+      - name: Scrape liveaboard.com
         id: scrape
         continue-on-error: true
         run: |
           PYTHONPATH=src python3 -m liveaboard.cli scrape \
+            --source liveaboard.com \
             --out data/candidate.json \
             --snapshots data/snapshots
+
+      - name: Promote the candidate
+        id: promote
+        if: steps.scrape.outcome == 'success'
+        continue-on-error: true
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli promote \
+            --candidate data/candidate.json \
+            --out data/egypt-2027.json
 
       - name: Report a blocked or empty scrape
         if: steps.scrape.outcome == 'failure'
@@ -69,11 +82,22 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
+      - name: Pick the dataset to publish
+        id: dataset
+        run: |
+          # Prefer promoted, scraped data; fall back to the seed so a failed
+          # scrape publishes yesterday's site rather than nothing.
+          if [ -f data/egypt-2027.json ]; then
+            echo "path=data/egypt-2027.json" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=data/seed/egypt-2027.json" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Validate the dataset
-        run: PYTHONPATH=src python3 -m liveaboard.cli check
+        run: PYTHONPATH=src python3 -m liveaboard.cli check --data ${{ steps.dataset.outputs.path }}
 
       - name: Build the site
-        run: PYTHONPATH=src python3 -m liveaboard.cli build
+        run: PYTHONPATH=src python3 -m liveaboard.cli build --data ${{ steps.dataset.outputs.path }}
 
       - name: Commit changes
         run: |

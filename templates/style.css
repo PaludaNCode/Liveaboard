@@ -268,6 +268,19 @@ select {
 .markup { font-weight: 650; color: var(--bad); }
 .markup.none { color: var(--good); }
 
+.advertised .unknown { color: var(--text-faint); font-style: italic; }
+
+.honesty-unknown {
+  margin-top: 8px;
+  padding: 3px 8px;
+  display: inline-block;
+  font-size: .76rem;
+  color: var(--warn);
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: var(--radius-sm);
+}
+
 .honesty { margin-top: 9px; }
 .honesty-label { font-size: .72rem; color: var(--text-faint); letter-spacing: .05em; text-transform: uppercase; }
 .honesty-bar { height: 5px; margin-top: 3px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
@@ -349,3 +362,5 @@ table.fees tr.base-row td { background: var(--surface); }
   .price-block { text-align: left; min-width: 0; }
   .honesty-bar { max-width: 200px; }
 }
+
+.summary-caveat { color: var(--warn); }

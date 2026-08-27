@@ -20,7 +20,7 @@ from typing import Any
 from .classify import classify, themes_in_season
 from .dataset import Dataset
 from .money import DISPLAY_CURRENCY
-from .pricing import DEFAULT_TOGGLES, compute, transparency_score
+from .pricing import DEFAULT_TOGGLES, compute, resolve_fees, transparency_score
 from .taxonomy import (
     DIVER_LEVEL_LABELS,
     DIVER_LEVEL_ORDER,
@@ -84,9 +84,16 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         breakdown = compute(itinerary, departure, dataset.fx)
         themes = classifications[itinerary.id].themes
 
+        # An itinerary with no fee lines is not one with no fees; it is one
+        # nobody has looked at yet. Reporting a true cost equal to the
+        # advertised price, and a perfect honesty score, would make this site
+        # commit exactly the omission it exists to expose.
+        fees_known = bool(resolve_fees(itinerary, departure))
+
         departures.append(
             {
                 "id": departure.id,
+                "fees_known": fees_known,
                 "itinerary_id": itinerary.id,
                 "boat_id": itinerary.boat_id,
                 "start": departure.start.isoformat(),
@@ -97,7 +104,11 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "booking_url": departure.booking_url,
                 "base": float(breakdown.base.rounded),
                 "lines": [line.as_dict() for line in breakdown.lines],
-                "transparency": round(transparency_score(itinerary, departure, dataset.fx), 4),
+                "transparency": (
+                    round(transparency_score(itinerary, departure, dataset.fx), 4)
+                    if fees_known
+                    else None
+                ),
                 "peak_themes": [t.value for t in themes_in_season(themes, departure.start.month)],
                 "verified": departure.price_provenance.is_verified,
             }

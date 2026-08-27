@@ -87,7 +87,13 @@
     per_night: function (a, b) { return metricsFor(a).perNight - metricsFor(b).perNight; },
     base: function (a, b) { return a.base - b.base; },
     markup: function (a, b) { return metricsFor(b).markup - metricsFor(a).markup; },
-    transparency: function (a, b) { return b.transparency - a.transparency; }
+    /* Departures with no fee data sort last rather than winning on a score
+       they were never given. */
+    transparency: function (a, b) {
+      var x = a.transparency === null ? -1 : a.transparency;
+      var y = b.transparency === null ? -1 : b.transparency;
+      return y - x;
+    }
   };
 
   function groupsFor(departures) {
@@ -168,6 +174,17 @@
 
     block.appendChild(el("div", "per-night", euro.format(m.perNight) + " per night"));
 
+    /* Without fee data there is no true cost to report. Saying "no extras to
+       add" would claim we checked, and claiming a perfect honesty score would
+       reward an operator for our own missing homework. */
+    if (!dep.fees_known) {
+      var unknown = el("div", "advertised");
+      unknown.appendChild(el("span", "unknown", "advertised price only"));
+      block.appendChild(unknown);
+      block.appendChild(el("div", "honesty-unknown", "Extra fees not yet captured"));
+      return block;
+    }
+
     var advertised = el("div", "advertised");
     if (m.surcharge > 0.5) {
       advertised.appendChild(el("span", "was", "advertised " + euro.format(dep.base)));
@@ -239,11 +256,22 @@
     });
 
     var totalRow = el("tr", "total");
-    totalRow.appendChild(el("td", null, "True cost"));
+    totalRow.appendChild(el("td", null, dep.fees_known ? "True cost" : "Advertised price"));
     totalRow.appendChild(el("td"));
     totalRow.appendChild(el("td"));
     totalRow.appendChild(el("td", "num", euro.format(m.total)));
     body.appendChild(totalRow);
+
+    if (!dep.fees_known) {
+      var caveat = el("tr");
+      var cell = el("td", "fee-note",
+        "Marine park fees, port dues, fuel, nitrox and gratuities are not " +
+        "included above because they have not been captured for this trip yet. " +
+        "On comparable trips they add 30–60%.");
+      cell.colSpan = 4;
+      caveat.appendChild(cell);
+      body.appendChild(caveat);
+    }
 
     table.appendChild(body);
     return table;
@@ -313,7 +341,9 @@
 
     var isOpen = state.open.has(dep.id);
     var button = el("button", "disclose",
-      isOpen ? "Hide the breakdown" : "Where does " + euro.format(m.total) + " come from?");
+      isOpen ? "Hide the breakdown"
+             : dep.fees_known ? "Where does " + euro.format(m.total) + " come from?"
+                              : "What is missing from " + euro.format(m.total) + "?");
     button.type = "button";
     button.setAttribute("aria-expanded", isOpen ? "true" : "false");
     button.addEventListener("click", function () {
@@ -407,13 +437,26 @@
     var totals = matching.map(function (d) { return metricsFor(d).total; });
     var cheapest = Math.min.apply(null, totals);
     var dearest = Math.max.apply(null, totals);
+    var priced = matching.filter(function (d) { return d.fees_known; }).length;
+
+    /* Only call it a true cost when it is one. With no fee data the range is
+       just the advertised prices, and labelling it otherwise would repeat the
+       claim this site exists to challenge. */
+    var label = priced === matching.length ? " · true cost "
+              : priced === 0 ? " · advertised "
+              : " · advertised or true cost ";
+
     summary.innerHTML = "";
     summary.appendChild(document.createTextNode("Showing "));
     summary.appendChild(el("b", null, String(matching.length)));
     summary.appendChild(document.createTextNode(
-      " of " + DATA.departures.length + " departures · true cost " +
+      " of " + DATA.departures.length + " departures" + label +
       euro.format(cheapest) + " to " + euro.format(dearest)
     ));
+    if (priced < matching.length) {
+      summary.appendChild(el("span", "summary-caveat",
+        " · fees not yet captured for " + (matching.length - priced)));
+    }
 
     groupsFor(matching).forEach(function (group) {
       var heading = el("h2", "group-heading");

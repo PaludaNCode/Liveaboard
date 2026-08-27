@@ -121,8 +121,9 @@ class TestDepartureExtraction(unittest.TestCase):
     def test_booking_url_is_carried(self):
         self.assertEqual(self.output.departures[0]["booking_url"], "/BookingStep1?x=1")
 
-    def test_departure_is_tied_to_the_page_slug(self):
-        self.assertEqual(self.output.departures[0]["itinerary_id"], "a-boat")
+    def test_departure_is_tied_to_the_vessel_page(self):
+        """The itinerary is formed later, by grouping departures at promote time."""
+        self.assertEqual(self.output.departures[0]["boat_slug"], "a-boat")
 
     def test_the_product_becomes_an_itinerary(self):
         self.assertEqual(len(self.output.itineraries), 1)

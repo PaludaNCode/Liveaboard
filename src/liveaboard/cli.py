@@ -15,7 +15,8 @@ from pathlib import Path
 
 from .classify import classify
 from .dataset import Dataset, DatasetError
-from .pricing import compute, transparency_score
+from .pricing import compute, resolve_fees, transparency_score
+from .promote import promote
 from .render import render
 from .scrape.base import FetchBlocked, PoliteFetcher, ScrapeOutput
 from .scrape.liveaboard_com import LiveaboardComAdapter
@@ -57,27 +58,42 @@ def cmd_check(args: argparse.Namespace) -> int:
     print(f"  sources: {', '.join(sorted(k.value for k in dataset.source_kinds))}")
     print()
 
-    rows: list[tuple[str, float, float, float, float]] = []
+    rows: list[tuple[str, float, float, float | None, float | None]] = []
+    unknown = 0
     for key, itinerary in dataset.itineraries.items():
         departures = [d for d in dataset.departures if d.itinerary_id == key]
         if not departures:
             continue
         first = departures[0]
         breakdown = compute(itinerary, first, dataset.fx)
+        # Same rule as the rendered page: no fee lines means nobody has looked,
+        # not that the advertised price is the whole bill.
+        known = bool(resolve_fees(itinerary, first))
+        if not known:
+            unknown += 1
         rows.append(
             (
                 itinerary.name,
                 float(breakdown.base.rounded),
                 float(breakdown.total.rounded),
-                breakdown.markup_pct,
-                transparency_score(itinerary, first, dataset.fx) * 100,
+                breakdown.markup_pct if known else None,
+                transparency_score(itinerary, first, dataset.fx) * 100 if known else None,
             )
         )
 
-    width = max(len(r[0]) for r in rows) if rows else 20
+    width = min(max((len(r[0]) for r in rows), default=20), 44)
     print(f"  {'itinerary'.ljust(width)}  {'advertised':>11} {'true cost':>10} {'markup':>8} {'honesty':>8}")
-    for name, base, total, markup, honesty in sorted(rows, key=lambda r: -r[3]):
-        print(f"  {name.ljust(width)}  {base:>11,.0f} {total:>10,.0f} {markup:>7.0f}% {honesty:>7.0f}%")
+    for name, base, total, markup, honesty in sorted(rows, key=lambda r: -(r[3] or -1)):
+        if markup is None:
+            print(f"  {name[:width].ljust(width)}  {base:>11,.0f} {'unknown':>10} {'—':>8} {'—':>8}")
+        else:
+            print(
+                f"  {name[:width].ljust(width)}  {base:>11,.0f} {total:>10,.0f} "
+                f"{markup:>7.0f}% {honesty:>7.0f}%"
+            )
+
+    if unknown:
+        print(f"\n  {unknown} of {len(rows)} itineraries have no fee data captured yet")
 
     print()
     for key, itinerary in dataset.itineraries.items():
@@ -154,6 +170,47 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     return 1 if blocked else 0
 
 
+def cmd_promote(args: argparse.Namespace) -> int:
+    """Turn a scrape candidate into a dataset, refusing to publish a worse one.
+
+    The size check is the guard that matters: a source redesign that halves the
+    departure count should stop the pipeline, not quietly shrink the site.
+    """
+    candidate = json.loads(Path(args.candidate).read_text(encoding="utf-8"))
+    season = (date.fromisoformat(args.season_start), date.fromisoformat(args.season_end))
+    payload = promote(candidate, season=season)
+
+    incoming = len(payload["departures"])
+    if incoming == 0:
+        print("candidate contains no departures in the season window", file=sys.stderr)
+        return 1
+
+    target = Path(args.out)
+    if target.exists() and not args.force:
+        existing = json.loads(target.read_text(encoding="utf-8"))
+        previous = len(existing.get("departures", []))
+        floor = int(previous * args.min_ratio)
+        if previous and incoming < floor:
+            print(
+                f"refusing to promote: {incoming} departures against {previous} already "
+                f"published (floor {floor}). Re-run, or pass --force if the drop is real.",
+                file=sys.stderr,
+            )
+            return 1
+
+    Dataset.from_dict(payload)  # validates, raising DatasetError on a bad shape
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(
+        f"promoted {target}: {incoming} departures, "
+        f"{len(payload['itineraries'])} itineraries, {len(payload['boats'])} boats"
+    )
+    for skipped in payload.get("promotion_skipped", [])[:10]:
+        print(f"  ! {skipped}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="liveaboard", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -186,6 +243,20 @@ def main(argv: list[str] | None = None) -> int:
         help="print each page's structure: JSON-LD types, link shapes, price hints",
     )
     scrape.set_defaults(func=cmd_scrape)
+
+    promote_cmd = sub.add_parser("promote", help="turn a scrape candidate into the dataset")
+    promote_cmd.add_argument("--candidate", default=Path("data/candidate.json"), type=Path)
+    promote_cmd.add_argument("--out", default=Path("data/egypt-2027.json"), type=Path)
+    promote_cmd.add_argument("--season-start", default="2027-05-01")
+    promote_cmd.add_argument("--season-end", default="2027-08-31")
+    promote_cmd.add_argument(
+        "--min-ratio",
+        type=float,
+        default=0.6,
+        help="refuse to publish below this fraction of the current departure count",
+    )
+    promote_cmd.add_argument("--force", action="store_true", help="publish despite a large drop")
+    promote_cmd.set_defaults(func=cmd_promote)
 
     args = parser.parse_args(argv)
     return int(args.func(args))

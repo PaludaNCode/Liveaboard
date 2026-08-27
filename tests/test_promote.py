@@ -1,0 +1,179 @@
+"""Tests for turning a scrape candidate into a publishable dataset."""
+
+from __future__ import annotations
+
+import unittest
+from datetime import date
+
+from liveaboard.dataset import Dataset
+from liveaboard.promote import promote, slugify
+from liveaboard.render import build_payload
+
+SEASON = (date(2027, 5, 1), date(2027, 8, 31))
+
+PROV = {"kind": "scraped", "source_id": "liveaboard.com", "retrieved": "2026-08-27"}
+
+
+def departure(
+    boat: str = "alia-soul",
+    name: str = "Brothers, Daedalus & Elphinstone",
+    start: str = "2027-05-01",
+    end: str = "2027-05-08",
+    price: float = 1450.0,
+    currency: str = "USD",
+    **extra,
+) -> dict:
+    return {
+        "id": f"{boat}-{start}",
+        "boat_slug": boat,
+        "name": name,
+        "start": start,
+        "end": end,
+        "price": {"amount": price, "currency": currency},
+        "provenance": PROV,
+        **extra,
+    }
+
+
+def candidate(departures, itineraries=None) -> dict:
+    return {
+        "scraped_at": "2026-08-27",
+        "itineraries": itineraries
+        or [{"id": "alia-soul", "name": "Alia Soul", "boat": "Alia Soul"}],
+        "departures": departures,
+    }
+
+
+class TestGrouping(unittest.TestCase):
+    def test_same_boat_different_trips_stay_separate(self):
+        """A boat sells several routes; averaging them hides the difference."""
+        payload = promote(
+            candidate(
+                [
+                    departure(name="Brothers, Daedalus & Elphinstone"),
+                    departure(name="Northern Wrecks", start="2027-05-15", end="2027-05-22"),
+                ]
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(len(payload["itineraries"]), 2)
+        self.assertEqual(len(payload["boats"]), 1)
+
+    def test_same_trip_across_dates_is_one_itinerary(self):
+        payload = promote(
+            candidate(
+                [
+                    departure(start="2027-05-01", end="2027-05-08"),
+                    departure(start="2027-06-05", end="2027-06-12"),
+                ]
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(len(payload["itineraries"]), 1)
+        self.assertEqual(len(payload["departures"]), 2)
+
+    def test_nights_are_derived_from_the_dates(self):
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.assertEqual(payload["itineraries"][0]["nights"], 7)
+
+    def test_port_comes_from_the_event_location(self):
+        payload = promote(
+            candidate([departure(location="Port Ghalib")]), season=SEASON
+        )
+        self.assertEqual(payload["itineraries"][0]["port_from"], "Port Ghalib")
+
+
+class TestRejection(unittest.TestCase):
+    def test_departures_outside_the_season_are_dropped(self):
+        payload = promote(
+            candidate([departure(start="2027-11-06", end="2027-11-13")]), season=SEASON
+        )
+        self.assertEqual(payload["departures"], [])
+
+    def test_implausible_dates_are_skipped_and_reported(self):
+        """A 400-night cruise is a parsing error, not a product."""
+        payload = promote(
+            candidate([departure(start="2027-05-01", end="2028-06-01")]), season=SEASON
+        )
+        self.assertEqual(payload["departures"], [])
+        self.assertTrue(payload["promotion_skipped"])
+
+    def test_a_departure_with_no_boat_is_skipped(self):
+        broken = departure()
+        del broken["boat_slug"]
+        payload = promote(candidate([broken]), season=SEASON)
+        self.assertEqual(payload["departures"], [])
+
+
+class TestFeesAreUnknownNotZero(unittest.TestCase):
+    """The distinction this whole project turns on."""
+
+    def setUp(self):
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.dataset = Dataset.from_dict(payload)
+        self.rendered = build_payload(self.dataset)["departures"][0]
+
+    def test_scraped_itineraries_carry_no_fee_lines(self):
+        self.assertEqual(self.dataset.itineraries[
+            list(self.dataset.itineraries)[0]
+        ].fees, [])
+
+    def test_the_page_is_told_the_fees_are_unknown(self):
+        self.assertFalse(self.rendered["fees_known"])
+
+    def test_no_honesty_score_is_invented(self):
+        """A perfect score here would reward the operator for our missing work."""
+        self.assertIsNone(self.rendered["transparency"])
+
+
+class TestClassificationSurvivesTheMissingSiteList(unittest.TestCase):
+    def test_dive_sites_are_recovered_from_the_trip_name(self):
+        """The source publishes no site list, but names routes after sites."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        sites = payload["itineraries"][0]["dive_sites"]
+        self.assertIn("brothers", sites)
+        self.assertIn("daedalus", sites)
+
+    def test_a_scraped_trip_still_gets_a_route(self):
+        dataset = Dataset.from_dict(promote(candidate([departure()]), season=SEASON))
+        classification = next(iter(dataset.classifications().values()))
+        self.assertIsNotNone(classification.route)
+
+    def test_an_unrecognisable_name_yields_no_sites(self):
+        payload = promote(
+            candidate([departure(name="Summer Special Week")]), season=SEASON
+        )
+        self.assertEqual(payload["itineraries"][0]["dive_sites"], [])
+
+
+class TestPayloadValidity(unittest.TestCase):
+    def test_promoted_payload_passes_dataset_validation(self):
+        payload = promote(
+            candidate(
+                [
+                    departure(),
+                    departure(boat="all-star-ghani", start="2027-07-03", end="2027-07-10"),
+                ],
+                itineraries=[
+                    {"id": "alia-soul", "boat": "Alia Soul"},
+                    {"id": "all-star-ghani", "boat": "All Star Ghani"},
+                ],
+            ),
+            season=SEASON,
+        )
+        dataset = Dataset.from_dict(payload)
+        self.assertEqual(len(dataset.departures), 2)
+        self.assertEqual(len(dataset.boats), 2)
+
+    def test_prices_keep_their_scraped_currency(self):
+        payload = promote(candidate([departure(currency="USD")]), season=SEASON)
+        self.assertEqual(payload["departures"][0]["price"]["currency"], "USD")
+
+
+class TestSlugify(unittest.TestCase):
+    def test_punctuation_collapses(self):
+        self.assertEqual(slugify("Brothers, Daedalus & Elphinstone"), "brothers-daedalus-elphinstone")
+
+
+if __name__ == "__main__":
+    unittest.main()
