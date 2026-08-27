@@ -146,6 +146,24 @@ class TestFetchCache(unittest.TestCase):
         self.assertTrue(again.from_cache)
         self.assertEqual(again.body, stored.body)
 
+class TestSeasonMonthSelector(unittest.TestCase):
+    """A vessel page shows the month it is asked for, not the season by default."""
+
+    def test_boat_urls_carry_the_season_month(self):
+        from liveaboard.scrape.liveaboard_com import SEASON_QUERY, SEASON_MONTHS, SEASON_YEAR
+
+        self.assertEqual(SEASON_QUERY, f"?m={SEASON_MONTHS[0]}/{SEASON_YEAR}")
+
+    def test_listing_pages_are_not_treated_as_parse_failures(self):
+        """They are crawled for links; calling that a failure buries real ones."""
+        adapter = LiveaboardComAdapter(PoliteFetcher(snapshot_dir="/tmp/unused"))
+        output = adapter.parse(
+            result("<html><body>no structured data</body></html>",
+                   url="https://www.liveaboard.com/diving/search/egypt/may/2027")
+        )
+        self.assertEqual(output.warnings, [])
+        self.assertTrue(output.is_empty)
+
 
 if __name__ == "__main__":
     unittest.main()
