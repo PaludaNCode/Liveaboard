@@ -20,8 +20,14 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
+from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from pw_browser import resolve as resolve_browser  # noqa: E402
 
 DEFAULT_URLS = [
     "https://www.liveaboard.com/diving/search/egypt/may/2027",
@@ -165,10 +171,12 @@ def main() -> int:
 
     urls = (args.url or DEFAULT_URLS)[: args.max_pages]
     launch: dict[str, Any] = {"args": ["--no-sandbox"]}
-    if args.executable:
-        launch["executable_path"] = args.executable
 
     with sync_playwright() as p:
+        executable, reason = resolve_browser(p, args.executable)
+        if executable:
+            launch["executable_path"] = executable
+        print(f"browser: {reason}")
         browser = p.chromium.launch(**launch)
         for url in urls:
             print(f"\n{'=' * 78}\n{url}\n{'=' * 78}")

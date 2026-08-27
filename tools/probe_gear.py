@@ -23,10 +23,11 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from pw_browser import resolve as resolve_browser  # noqa: E402
 
 from liveaboard.scrape.liveaboard_com import HOST, SEASON_QUERY  # noqa: E402
-
-CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 
 DEFAULT_VESSELS = ("aphrodite", "blue-seas", "emperor-asmaa")
 
@@ -113,7 +114,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--vessels", default=",".join(DEFAULT_VESSELS))
     parser.add_argument("--dump-html", action="store_true")
-    parser.add_argument("--executable", default=None)
+    # No default: tools/pw_browser.py explains why, and resolves it.
+    parser.add_argument(
+        "--executable", default=None, help="chromium binary path (default: Playwright's own)"
+    )
     args = parser.parse_args()
 
     try:
@@ -123,11 +127,12 @@ def main() -> int:
         return 2
 
     launch: dict[str, Any] = {"args": ["--no-sandbox"]}
-    executable = args.executable or (CHROMIUM if Path(CHROMIUM).exists() else None)
-    if executable:
-        launch["executable_path"] = executable
 
     with sync_playwright() as p:
+        executable, reason = resolve_browser(p, args.executable)
+        if executable:
+            launch["executable_path"] = executable
+        print(f"browser: {reason}")
         browser = p.chromium.launch(**launch)
         page = browser.new_page(viewport={"width": 1400, "height": 1200})
         for slug in [s.strip() for s in args.vessels.split(",") if s.strip()]:
