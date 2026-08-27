@@ -51,6 +51,7 @@ def promote(
     season: tuple[date, date] | None = None,
     fx: dict[str, Any] | None = None,
     notes: str | None = None,
+    fees: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -59,6 +60,16 @@ def promote(
     average away the difference between a wreck week and a shark week.
     """
     scraped_boats = {i.get("id"): i for i in candidate.get("itineraries", []) if i.get("id")}
+
+    # Fees come from a separate, slower browser-driven run because the source
+    # renders them client-side. They are keyed by vessel and reused across
+    # every itinerary that vessel sells, which is what the operator does too:
+    # the extras do not change with the month.
+    fee_book: dict[str, list[dict[str, Any]]] = {}
+    if fees:
+        for slug, entry in (fees.get("vessels") or {}).items():
+            if entry.get("fees"):
+                fee_book[slug] = entry["fees"]
 
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     skipped: list[str] = []
@@ -109,9 +120,9 @@ def promote(
                 "dive_sites": _sites_from_name(name),
                 "summary": source.get("summary"),
                 "source_url": source.get("source_url"),
-                # No fee data was scraped. The renderer must show this as
-                # unknown rather than as zero.
-                "fees": [],
+                # Empty when the fee run has not covered this vessel. The
+                # renderer shows that as unknown, never as zero.
+                "fees": fee_book.get(slug, source.get("fees") or []),
             }
         )
 

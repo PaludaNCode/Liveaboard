@@ -178,7 +178,21 @@ def cmd_promote(args: argparse.Namespace) -> int:
     """
     candidate = json.loads(Path(args.candidate).read_text(encoding="utf-8"))
     season = (date.fromisoformat(args.season_start), date.fromisoformat(args.season_end))
-    payload = promote(candidate, season=season)
+
+    # Optional: fees collected by the weekly browser run. Absent is normal on a
+    # fresh checkout and must not fail the daily pipeline.
+    fees = None
+    fee_path = Path(args.fees)
+    if fee_path.exists():
+        fees = json.loads(fee_path.read_text(encoding="utf-8"))
+
+    payload = promote(candidate, season=season, fees=fees)
+
+    priced = sum(1 for i in payload["itineraries"] if i["fees"])
+    if fees:
+        print(f"  fees applied to {priced}/{len(payload['itineraries'])} itineraries")
+    else:
+        print(f"  no {fee_path} found; fees will render as unknown")
 
     incoming = len(payload["departures"])
     if incoming == 0:
@@ -247,6 +261,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd = sub.add_parser("promote", help="turn a scrape candidate into the dataset")
     promote_cmd.add_argument("--candidate", default=Path("data/candidate.json"), type=Path)
     promote_cmd.add_argument("--out", default=Path("data/egypt-2027.json"), type=Path)
+    promote_cmd.add_argument("--fees", default=Path("data/fees.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

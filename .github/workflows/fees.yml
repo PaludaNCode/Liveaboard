@@ -1,0 +1,80 @@
+name: Weekly fee refresh
+
+# Collects vessel fee disclosures with a real browser.
+#
+# Separate from the daily refresh, and slower, because the two have different
+# natures. Prices and availability change constantly and are cheap to fetch.
+# Fees are a property of the vessel and do not change with the month, so
+# re-rendering ninety pages every night would spend a lot of someone else's CPU
+# to learn the same answer.
+#
+# Writes data/fees.json. The daily promote step picks it up if present, so the
+# two schedules stay independent: a failed fee run leaves last week's fees in
+# place rather than blanking them.
+
+on:
+  schedule:
+    # Sundays 03:10 UTC — quiet, and it lands before the daily refresh so the
+    # week starts with fresh fees.
+    - cron: "10 3 * * 0"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap vessels visited (0 = all)"
+        type: string
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fee-refresh
+  cancel-in-progress: false
+
+jobs:
+  fees:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Playwright
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      - name: Collect fees
+        id: collect
+        run: |
+          python3 tools/scrape_fees.py \
+            --out data/fees.json \
+            --limit "${{ inputs.limit || 0 }}"
+
+      - name: Rebuild with the new fees
+        if: steps.collect.outcome == 'success'
+        run: |
+          if [ -f data/candidate.json ]; then
+            PYTHONPATH=src python3 -m liveaboard.cli promote \
+              --candidate data/candidate.json \
+              --fees data/fees.json \
+              --out data/egypt-2027.json
+          fi
+          PYTHONPATH=src python3 -m liveaboard.cli build \
+            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data site
+          if git diff --cached --quiet; then
+            echo "fees unchanged this week"
+            exit 0
+          fi
+          git commit -m "data: weekly fee refresh $(date -u +%Y-%m-%d)"
+          git push
