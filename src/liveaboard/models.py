@@ -128,11 +128,13 @@ class FeeItem:
         if self.basis is FeeBasis.PER_DIVE:
             return money * dives
         if self.basis is FeeBasis.PER_WEEK:
-            # Rounded up, and the trip is nights + 1 days aboard. See
-            # FeeBasis.PER_WEEK: the operator states a weekly rate and says
-            # nothing about part weeks, so this takes the reading that does
-            # not undercharge.
-            return money * max(1, -(-(nights + 1) // 7))
+            # Counted in nights, not in days aboard. A seven-night Red Sea
+            # liveaboard *is* the week the operator prices -- it spans eight
+            # calendar days, and rounding those up billed the fleet's single
+            # most common trip length as a fortnight's hire, doubling it.
+            # Part weeks beyond that still round up: the kit is kept for the
+            # whole trip and the page says nothing about pro-rata.
+            return money * max(1, -(-nights // 7))
         raise ValueError(f"unhandled fee basis {self.basis}")
 
     def span_for_trip(self, nights: int, dives: int) -> tuple[Money | None, Money | None]:

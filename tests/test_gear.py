@@ -123,22 +123,30 @@ class TestWeeklyHireOverATripThatIsNotAWeek(unittest.TestCase):
             "EUR",
         )
 
+    def weeks(self, nights):
+        low, _ = self.fee(amount=206.0).span_for_trip(nights=nights, dives=nights * 3)
+        return float(low.amount) / 206.0
+
     def test_a_short_trip_is_still_one_week(self):
         """Nobody hires a BCD for three sevenths of a week."""
-        low, _ = self.fee().span_for_trip(nights=3, dives=6)
-        self.assertEqual(float(low.amount), 206.0)
+        self.assertEqual(self.weeks(3), 1)
 
-    def test_a_seven_night_trip_is_one_week(self):
-        low, _ = self.fee().span_for_trip(nights=6, dives=15)
-        self.assertEqual(float(low.amount), 206.0)
+    def test_the_standard_seven_night_week_is_one_week(self):
+        """The case that matters most, and the one that was wrong.
+
+        A seven-night liveaboard *is* the week the operator prices. Counting
+        days aboard rather than nights makes it eight, tips it over the
+        boundary, and bills the fleet's commonest trip as a fortnight -- so
+        the gear line came out at double on more departures than any other.
+        """
+        self.assertEqual(self.weeks(7), 1)
 
     def test_a_longer_trip_rounds_up_rather_than_undercharging(self):
-        low, _ = self.fee().span_for_trip(nights=9, dives=24)
-        self.assertEqual(float(low.amount), 412.0)
+        """Nine nights is more than a week and the page states no pro-rata."""
+        self.assertEqual(self.weeks(9), 2)
 
-    def test_a_fortnight_is_two_weeks(self):
-        low, _ = self.fee().span_for_trip(nights=13, dives=36)
-        self.assertEqual(float(low.amount), 412.0)
+    def test_a_fortnight_is_two_weeks_not_three(self):
+        self.assertEqual(self.weeks(14), 2)
 
 
 class TestACappedRunCannotEmptyTheFeeBook(unittest.TestCase):
