@@ -27,11 +27,12 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from pw_browser import resolve as resolve_browser  # noqa: E402
 
 from liveaboard.promote import SITE_HINTS, _sites_from_name  # noqa: E402
 from liveaboard.scrape.liveaboard_com import HOST, SEASON_QUERY  # noqa: E402
-
-CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 
 # Cast wide: the point is to learn what the dialog is called.
 CANDIDATES = (
@@ -103,7 +104,10 @@ def main() -> int:
     parser.add_argument("--vessel", default="emperor-asmaa")
     parser.add_argument("--tours", default="353503,353505")
     parser.add_argument("--dump-html", action="store_true")
-    parser.add_argument("--executable", default=None)
+    # No default: tools/pw_browser.py explains why, and resolves it.
+    parser.add_argument(
+        "--executable", default=None, help="chromium binary path (default: Playwright's own)"
+    )
     args = parser.parse_args()
 
     try:
@@ -113,11 +117,12 @@ def main() -> int:
         return 2
 
     launch: dict[str, Any] = {"args": ["--no-sandbox"]}
-    executable = args.executable or (CHROMIUM if Path(CHROMIUM).exists() else None)
-    if executable:
-        launch["executable_path"] = executable
 
     with sync_playwright() as p:
+        executable, reason = resolve_browser(p, args.executable)
+        if executable:
+            launch["executable_path"] = executable
+        print(f"browser: {reason}")
         browser = p.chromium.launch(**launch)
         page = browser.new_page(viewport={"width": 1400, "height": 1200})
         for tour in [t.strip() for t in args.tours.split(",") if t.strip()]:

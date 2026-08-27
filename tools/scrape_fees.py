@@ -29,6 +29,9 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from pw_browser import resolve as resolve_browser  # noqa: E402
 
 from liveaboard.scrape.fees import (  # noqa: E402
     extras_excerpt,
@@ -43,8 +46,6 @@ from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     LiveaboardComAdapter,
     search_paths,
 )
-
-CHROMIUM = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 
 # Buttons that reveal collapsed detail. The live page carries a "+4" control,
 # and the extras may sit behind it.
@@ -161,7 +162,10 @@ def main() -> int:
     parser.add_argument("--out", default=Path("data/fees.json"), type=Path)
     parser.add_argument("--limit", type=int, default=0, help="cap vessels (0 = all)")
     parser.add_argument("--delay", type=float, default=4.0, help="seconds between vessels")
-    parser.add_argument("--executable", default=None)
+    # No default: tools/pw_browser.py explains why, and resolves it.
+    parser.add_argument(
+        "--executable", default=None, help="chromium binary path (default: Playwright's own)"
+    )
     args = parser.parse_args()
 
     try:
@@ -171,9 +175,6 @@ def main() -> int:
         return 2
 
     launch: dict[str, Any] = {"args": ["--no-sandbox"]}
-    executable = args.executable or (CHROMIUM if Path(CHROMIUM).exists() else None)
-    if executable:
-        launch["executable_path"] = executable
 
     # Start from what is already on disk. A --limit run visits the first N
     # vessels and knows nothing about the rest, so writing only what it saw
@@ -185,6 +186,10 @@ def main() -> int:
     missing: list[str] = []
 
     with sync_playwright() as p:
+        executable, reason = resolve_browser(p, args.executable)
+        if executable:
+            launch["executable_path"] = executable
+        print(f"browser: {reason}")
         browser = p.chromium.launch(**launch)
         page = browser.new_page(viewport={"width": 1400, "height": 1200})
 
