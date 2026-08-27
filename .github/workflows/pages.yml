@@ -16,8 +16,17 @@ name: Publish site
 on:
   push:
     branches: [main]
+    # The job rebuilds the page from the dataset rather than publishing the
+    # committed HTML, so anything that changes what `cli build` emits belongs
+    # here. Watching site/** alone meant a fix to the template or the renderer
+    # never reached the live page: the commit changed no file under site/, so
+    # nothing fired, and the deployed HTML kept whatever the last data commit
+    # happened to build.
     paths:
       - "site/**"
+      - "templates/**"
+      - "src/**"
+      - "data/**"
       - ".github/workflows/pages.yml"
   workflow_run:
     workflows: ["Daily refresh", "Weekly fee refresh"]
