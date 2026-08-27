@@ -51,7 +51,11 @@ PYTHONPATH=src python3 -m liveaboard.cli scrape   # refresh from the sources
 PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
-`build` emits one self-contained HTML file — CSS and JS inlined, no CDN.
+`build` emits one self-contained HTML file — CSS and JS inlined, no CDN. That
+makes page weight a first-class concern: there is no lazy second request to hide
+behind, so a visitor on a phone in a dive shop downloads all of it before seeing
+a row. Fees are written once per itinerary rather than once per departure, which
+is what they are a property of.
 
 ## Design
 
@@ -132,5 +136,3 @@ that would change what the page can say:
   naming 42 companies, and the parser discards the field.
 - **#50** price per dive is derived from nights on 256 of 317 trips, so it
   carries no information its own denominator did not invent.
-- **#49** the page is 5.4 MB, and 63% of that is the same fee lines written once
-  per departure instead of once per itinerary.

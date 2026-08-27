@@ -17,19 +17,17 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from .classify import classify, themes_in_season
 from .dataset import Dataset
 from .money import DISPLAY_CURRENCY
-from .pricing import DEFAULT_TOGGLES, compute, mandatory_known, resolve_fees
-from .taxonomy import (
-    DIVER_LEVEL_LABELS,
-    DIVER_LEVEL_ORDER,
-    FEE_LABELS,
-    ROUTE_LABELS,
-    THEME_LABELS,
-    FeeCode,
-    SourceKind,
+from .pricing import (
+    DEFAULT_TOGGLES,
+    base_line,
+    compute,
+    itinerary_lines,
+    mandatory_known,
+    resolve_fees,
 )
+from .taxonomy import FEE_LABELS
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -53,12 +51,24 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     classifications = dataset.classifications()
 
     itineraries: dict[str, Any] = {}
+    # The resolved fee rows, once per itinerary. Reused below to decide whether
+    # a departure needs its own copy, which is why they are kept as dicts here
+    # rather than re-serialised per departure.
+    shared_lines: dict[str, list[dict[str, Any]]] = {}
     for key, itinerary in dataset.itineraries.items():
         classification = classifications[key]
         boat = dataset.boat_for(itinerary)
         operator = dataset.operator_for(itinerary)
+        shared_lines[key] = [line.as_dict() for line in itinerary_lines(itinerary, dataset.fx)]
         itineraries[key] = {
             "id": key,
+            # Fees belong to the vessel's disclosure, not to the sailing: the
+            # extras do not change with the month, which is why the fee book is
+            # collected weekly and keyed by boat. Writing them per departure
+            # wrote the same ten rows 878 times for 314 distinct answers -- 4.4
+            # MB of a 5.6 MB page, and every byte shipped to every visitor on a
+            # site that is deliberately one file with no CDN to lazy-load from.
+            "lines": shared_lines[key],
             "name": itinerary.name,
             # What the trip-name column prints. Falls back to the full name so
             # a dataset promoted before this field existed still renders.
@@ -84,8 +94,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     departures: list[dict[str, Any]] = []
     for departure in sorted(dataset.departures, key=lambda d: (d.start, d.id)):
         itinerary = dataset.itinerary_for(departure)
-        breakdown = compute(itinerary, departure, dataset.fx)
-        themes = classifications[itinerary.id].themes
+        first = base_line(departure, dataset.fx)
 
         # An itinerary with no fee lines is not one with no fees; it is one
         # nobody has looked at yet. Reporting a true cost equal to the
@@ -97,32 +106,37 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # the top of the honesty ranking. See pricing.mandatory_known.
         mandatory = mandatory_known(itinerary, departure)
 
-        departures.append(
-            {
-                "id": departure.id,
-                "fees_known": fees_known,
-                "mandatory_known": mandatory,
-                "itinerary_id": itinerary.id,
-                "boat_id": itinerary.boat_id,
-                "start": departure.start.isoformat(),
-                "end": departure.end.isoformat(),
-                "month": departure.start.month,
-                "nights": itinerary.nights,
-                "spaces_left": departure.spaces_left,
-                "availability": departure.availability,
-                "bookable": departure.bookable,
-                "booking_url": departure.booking_url,
-                "base": float(breakdown.base.rounded),
-                "lines": [line.as_dict() for line in breakdown.lines],
-                "peak_themes": [t.value for t in themes_in_season(themes, departure.start.month)],
-                "verified": departure.price_provenance.is_verified,
-            }
-        )
+        entry: dict[str, Any] = {
+            "id": departure.id,
+            "fees_known": fees_known,
+            "mandatory_known": mandatory,
+            "itinerary_id": itinerary.id,
+            "boat_id": itinerary.boat_id,
+            "start": departure.start.isoformat(),
+            "end": departure.end.isoformat(),
+            "month": departure.start.month,
+            "nights": itinerary.nights,
+            "spaces_left": departure.spaces_left,
+            "availability": departure.availability,
+            "bookable": departure.bookable,
+            "booking_url": departure.booking_url,
+            "base": float(first.display.rounded),
+            "base_line": first.as_dict(),
+            "verified": departure.price_provenance.is_verified,
+        }
+
+        # A departure-level fee replaces the route's for its code, so a sailing
+        # can genuinely price a fee differently. No departure in the dataset
+        # does today, but the possibility is in the model, and silently reusing
+        # the itinerary's rows would publish the wrong bill on the one sailing
+        # that ever exercises it. So compare, and give that departure its own.
+        own = [line.as_dict() for line in compute(itinerary, departure, dataset.fx).lines[1:]]
+        if own != shared_lines[itinerary.id]:
+            entry["lines"] = own
+
+        departures.append(entry)
 
     months = sorted({d["month"] for d in departures})
-    used_routes = [i["route"] for i in itineraries.values() if i["route"]]
-    used_themes = {t for i in itineraries.values() for t in i["themes"]}
-    used_levels = {i["level"] for i in itineraries.values()}
 
     return {
         "meta": {
@@ -150,20 +164,15 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "operators": len(dataset.operators),
             },
         },
+        # Months and toggles only. The route, level and theme facets were built
+        # here for filter chips that have since been removed from the table --
+        # app.js references none of them. Small beside the fee duplication, but
+        # it is payload nobody reads, and a facet list that nothing renders is
+        # also a thing a reader has to check before changing.
+        #
+        # The per-itinerary route, level and themes stay: they are what a route
+        # badge would render from, and #34 is about filling them in.
         "facets": {
-            "routes": [
-                {"id": r, "label": ROUTE_LABELS[_route_enum(r)]}
-                for r in _ordered_unique(used_routes)
-            ],
-            "levels": [
-                {"id": lvl.value, "label": DIVER_LEVEL_LABELS[lvl]}
-                for lvl in DIVER_LEVEL_ORDER
-                if lvl.value in used_levels
-            ],
-            "themes": [
-                {"id": t, "label": THEME_LABELS[_theme_enum(t)]}
-                for t in sorted(used_themes)
-            ],
             "months": [{"id": m, "label": MONTH_NAMES[m]} for m in months],
             "toggles": [
                 {"id": key, "label": TOGGLE_LABELS[key], "default": DEFAULT_TOGGLES[key]}
@@ -174,27 +183,6 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         "itineraries": itineraries,
         "departures": departures,
     }
-
-
-def _route_enum(value: str):
-    from .taxonomy import Route
-
-    return Route(value)
-
-
-def _theme_enum(value: str):
-    from .taxonomy import Theme
-
-    return Theme(value)
-
-
-def _ordered_unique(values: list[str]) -> list[str]:
-    """Preserve the taxonomy's route order rather than first-seen order."""
-    from .taxonomy import Route
-
-    order = [r.value for r in Route]
-    present = set(values)
-    return [v for v in order if v in present]
 
 
 def render(dataset: Dataset, out_dir: Path | str, template_dir: Path | None = None) -> Path:

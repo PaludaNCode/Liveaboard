@@ -111,8 +111,17 @@ class TestPayload(unittest.TestCase):
         self.payload = build_payload(Dataset.load(SEED))
 
     def test_facets_are_populated(self):
-        for facet in ("routes", "levels", "themes", "months", "toggles"):
+        for facet in ("months", "toggles"):
             self.assertTrue(self.payload["facets"][facet], f"{facet} is empty")
+
+    def test_only_the_facets_the_page_renders_are_shipped(self):
+        """routes, levels and themes were built for chips that no longer exist.
+
+        app.js reads neither, so they were payload nobody rendered. Asserted
+        rather than merely deleted, because the cheapest way for dead payload
+        to come back is for nobody to notice it did.
+        """
+        self.assertEqual(set(self.payload["facets"]), {"months", "toggles"})
 
     def test_every_departure_resolves_to_an_itinerary(self):
         for departure in self.payload["departures"]:
@@ -120,8 +129,60 @@ class TestPayload(unittest.TestCase):
 
     def test_every_departure_has_a_base_fare_line(self):
         for departure in self.payload["departures"]:
-            codes = [line["code"] for line in departure["lines"]]
-            self.assertEqual(codes[0], "base_fare")
+            self.assertEqual(departure["base_line"]["code"], "base_fare")
+
+    def test_fee_lines_live_on_the_itinerary(self):
+        """The fees are the vessel's, so they are written once, not per sailing.
+
+        878 departures across 314 itineraries meant each fee block shipped 2.8
+        times over, and every byte of it reaches every visitor: the page is one
+        self-contained file with no CDN to lazy-load a second request from.
+        """
+        for itinerary in self.payload["itineraries"].values():
+            self.assertIn("lines", itinerary)
+        # The seed's departures do not price anything differently, so none of
+        # them needs its own copy.
+        for departure in self.payload["departures"]:
+            self.assertNotIn("lines", departure)
+
+    def test_a_departure_that_prices_a_fee_itself_keeps_its_own_lines(self):
+        """A departure-level fee replaces the route's, so it must not be shared.
+
+        No sailing in the dataset does this today, but the model allows it, and
+        reusing the itinerary's rows for one that did would publish the wrong
+        bill on exactly the departure that differs.
+        """
+        raw = json.loads(SEED.read_text(encoding="utf-8"))
+        target = raw["departures"][0]
+        target["fees"] = [
+            {
+                "code": "fuel_surcharge",
+                "tier": "mandatory",
+                "basis": "per_trip",
+                "amount": {"amount": 999.0, "currency": "EUR"},
+                "provenance": {
+                    "kind": "operator_stated",
+                    "source_id": "liveaboard.com",
+                    "retrieved": "2026-08-27",
+                },
+            }
+        ]
+        payload = build_payload(Dataset.from_dict(raw))
+
+        own = [d for d in payload["departures"] if d["id"] == target["id"]]
+        self.assertEqual(len(own), 1)
+        self.assertIn("lines", own[0])
+        fuel = [x for x in own[0]["lines"] if x["code"] == "fuel_surcharge"]
+        self.assertEqual(fuel[0]["display"]["amount"], 999.0)
+
+        # And its siblings on the same itinerary still share the route's.
+        siblings = [
+            d for d in payload["departures"]
+            if d["itinerary_id"] == own[0]["itinerary_id"] and d["id"] != target["id"]
+        ]
+        self.assertTrue(siblings)
+        for sibling in siblings:
+            self.assertNotIn("lines", sibling)
 
     def test_the_page_grades_no_operators(self):
         """The site compares what trips cost; it does not score who sells them."""
