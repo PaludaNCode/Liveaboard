@@ -708,3 +708,87 @@ class TestDisplayTitle(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def fee_book(slug="alia-soul", *, specs=None, fees=None) -> dict:
+    """A fee-scrape result, in the shape ``promote`` reads it."""
+    entry = {"source_url": "https://example.invalid", "fees": fees or []}
+    if specs is not None:
+        entry["specs"] = specs
+    return {"scraped_at": "2026-08-27", "source": "liveaboard.com",
+            "vessels": {slug: entry}}
+
+
+class TestTheSpecificationTable(unittest.TestCase):
+    """The guest count the marketing prose does not carry."""
+
+    def test_the_table_beats_the_prose(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                              "summary": "A fine boat for 12 guests."}],
+            ),
+            season=SEASON,
+            fees=fee_book(specs={"guests": 20, "cabins": 9}),
+        )
+        boat = payload["boats"][0]
+        self.assertEqual(boat["guests"], 20)
+        self.assertEqual(boat["cabins"], 9)
+
+    def test_the_prose_still_answers_when_the_table_does_not(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                              "summary": "A fine boat for 12 guests."}],
+            ),
+            season=SEASON,
+            fees=fee_book(specs={"guests": None}),
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 12)
+
+
+class TestFreeNitrox(unittest.TestCase):
+    """"Free Nitrox" is a real statement, and a weaker one than a price."""
+
+    def nitrox(self, payload):
+        fees = {f["code"]: f for f in payload["itineraries"][0]["fees"]}
+        return fees.get("nitrox")
+
+    def test_a_ticked_box_marks_nitrox_included(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": True}),
+        )
+        nitrox = self.nitrox(payload)
+        self.assertIsNotNone(nitrox)
+        self.assertTrue(nitrox["included"])
+        self.assertIsNone(nitrox["amount"])
+
+    def test_it_never_overwrites_a_stated_price(self):
+        """The one direction of error this site must not make.
+
+        A vessel that both ticks "Free Nitrox" and quotes a figure has
+        contradicted itself; the figure is the operator typing a number and
+        the tick is a checkbox, so turning the cost into "free" would
+        understate the bill on the strength of the weaker claim.
+        """
+        priced = {
+            "code": "nitrox", "tier": "conditional", "included": False,
+            "basis": "per_trip", "amount": {"amount": 30.0, "currency": "EUR"},
+        }
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": True}, fees=[priced]),
+        )
+        nitrox = self.nitrox(payload)
+        self.assertFalse(nitrox["included"])
+        self.assertEqual(nitrox["amount"]["amount"], 30.0)
+
+    def test_availability_alone_claims_nothing(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": False, "nitrox_available": True}),
+        )
+        self.assertIsNone(self.nitrox(payload))

@@ -36,6 +36,7 @@ from liveaboard.scrape.fees import (  # noqa: E402
     to_fee_dicts,
 )
 from liveaboard.scrape.gear import parse_gear, to_fee_dict as gear_fee_dict  # noqa: E402
+from liveaboard.scrape.vessel import read_vessel  # noqa: E402
 from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     HOST,
     SEASON_QUERY,
@@ -105,6 +106,25 @@ def read_extras(page: Any, url: str) -> tuple[str, bool]:
         page.wait_for_timeout(600)
         text = page.evaluate("() => document.body.innerText || ''")
     return text, clicked > 0
+
+
+SPECS_ID = "#help-content-boat-amenities-specifications"
+DIVING_ID = "#help-content-boat-amenities-diving"
+
+
+def read_markup(page: Any, selector: str) -> str:
+    """One hidden panel's markup, or empty when the vessel has no such panel.
+
+    Every one of these is in the document at load time, so reading them costs
+    no request beyond the page already fetched for the fee disclosure.
+    """
+    node = page.query_selector(selector)
+    if node is None:
+        return ""
+    try:
+        return node.inner_html() or ""
+    except Exception:  # noqa: BLE001 - a detached node is not a failure
+        return ""
 
 
 def read_gear(page: Any) -> str:
@@ -196,7 +216,15 @@ def main() -> int:
             gear = parse_gear(read_gear(page))
             gear_fee = gear_fee_dict(gear, provenance)
 
-            if not fees and gear_fee is None:
+            # The specification table carries the guest count that the prose
+            # match misses on half the fleet, and the diving amenities state
+            # "Free Nitrox" outright -- which is the answer a hand-written
+            # file has been standing in for on ten vessels.
+            facts = read_vessel(
+                read_markup(page, SPECS_ID), read_markup(page, DIVING_ID)
+            )
+
+            if not fees and gear_fee is None and not facts:
                 print(f"  [{index}/{len(slugs)}] {slug}: no extras found", flush=True)
                 missing.append(slug)
             else:
@@ -222,6 +250,16 @@ def main() -> int:
                     # site all over again.
                     "disclosure": extras_excerpt(text),
                     "gear": [i.as_text() for i in gear.items] or None,
+                    "specs": {
+                        "guests": facts.guests,
+                        "cabins": facts.cabins,
+                        "length_m": facts.length_m,
+                        "year_built": facts.year_built,
+                        # Stated, not inferred. "Free Nitrox" and "Nitrox
+                        # available" are different claims and both are kept.
+                        "nitrox_free": facts.nitrox_free,
+                        "nitrox_available": facts.nitrox_available,
+                    } if facts else None,
                     "fees": priced,
                 }
                 gear_note = (
@@ -229,10 +267,17 @@ def main() -> int:
                     else f", {len(gear.items)} gear items unbundled" if gear.items
                     else ""
                 )
+                spec_note = "".join(
+                    part for part in (
+                        f", {facts.guests} guests" if facts.guests else "",
+                        ", free nitrox" if facts.nitrox_free else "",
+                    ) if part
+                )
                 print(
                     f"  [{index}/{len(slugs)}] {slug}: {len(fees)} extras "
                     f"({required} required, {ranges} ranged, {unpriced} unpriced)"
                     + gear_note
+                    + spec_note
                     + (" [expanded]" if expanded else ""),
                     flush=True,
                 )

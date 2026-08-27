@@ -20,6 +20,7 @@ from datetime import date
 from typing import Any
 
 from .classify import normalise
+from .taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
 
 UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
@@ -333,10 +334,17 @@ def promote(
     # every itinerary that vessel sells, which is what the operator does too:
     # the extras do not change with the month.
     fee_book: dict[str, list[dict[str, Any]]] = {}
+    # The same run reads the vessel's specification table and diving amenities,
+    # which are structured and were previously being worked around: the guest
+    # count was mined out of marketing prose and missed half the fleet, and
+    # nitrox inclusion was not read at all.
+    spec_book: dict[str, dict[str, Any]] = {}
     if fees:
         for slug, entry in (fees.get("vessels") or {}).items():
             if entry.get("fees"):
                 fee_book[slug] = entry["fees"]
+            if entry.get("specs"):
+                spec_book[slug] = entry["specs"]
 
     # Figures read off a vessel page by hand, for the boats whose extras block
     # names a charge without a number. They win per fee code: a page that says
@@ -352,6 +360,34 @@ def promote(
         merged = {f["code"]: f for f in fee_book.get(slug, [])}
         merged.update({f["code"]: f for f in entry["fees"]})
         fee_book[slug] = list(merged.values())
+
+    # "Free Nitrox" in the vessel's diving amenities is the operator saying it
+    # does not charge for fills. Note what it does *not* do: overwrite a stated
+    # nitrox price. Where a vessel both ticks the box and quotes a figure, the
+    # figure wins -- turning a stated cost into "free" is the one direction of
+    # error this site must never make, and a marketing tick is weaker evidence
+    # than a number the operator typed.
+    for slug, spec in spec_book.items():
+        if not spec.get("nitrox_free"):
+            continue
+        existing = {f["code"]: f for f in fee_book.get(slug, [])}
+        nitrox = existing.get(FeeCode.NITROX.value)
+        if nitrox is not None and nitrox.get("amount") is not None:
+            continue
+        existing[FeeCode.NITROX.value] = {
+            "code": FeeCode.NITROX.value,
+            "tier": FeeTier.CONDITIONAL.value,
+            "included": True,
+            "amount": None,
+            "basis": FeeBasis.PER_TRIP.value,
+            "note": "Vessel lists nitrox as free",
+            "provenance": {
+                "kind": SourceKind.SCRAPED.value,
+                "source_id": "liveaboard.com",
+                "retrieved": (fees or {}).get("scraped_at") or date.today().isoformat(),
+            },
+        }
+        fee_book[slug] = list(existing.values())
 
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     skipped: list[str] = []
@@ -387,8 +423,15 @@ def promote(
                 "id": slug,
                 "name": boat_name,
                 "operator_id": UNKNOWN_OPERATOR["id"],
-                "guests": (hand.get(slug, {}).get("guests")
+                # The specification table first: it is the operator stating a
+                # number in a field labelled "Max guests", which beats both a
+                # hand-typed figure and a regex over the marketing copy. The
+                # prose match stays as the fallback for vessels whose table is
+                # missing the row.
+                "guests": (spec_book.get(slug, {}).get("guests")
+                           or hand.get(slug, {}).get("guests")
                            or _guests(source.get("summary"))),
+                "cabins": spec_book.get(slug, {}).get("cabins"),
             },
         )
 
