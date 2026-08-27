@@ -77,10 +77,15 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 A fee an operator **includes** still appears in the breakdown, at zero —
 deleting it would hide the exact difference this site exists to show.
 
-**Honesty score**: what share of the bill the headline discloses, measured
-against a fixed basket rather than the visitor's toggles, so it describes the
-operator rather than the visitor. Two boats can reach the same true cost and
-score 60% vs 83%.
+**Comparison, not a scoreboard**: the lists sort by true cost, cost per night,
+advertised price, and how much lands after the headline figure. There is no
+per-operator rating — two boats reaching the same true cost by different routes
+show that in their breakdowns, which is the part a diver can act on.
+
+**Unstated is not zero**: a vessel listing only optional extras gets no true
+cost at all. Every Egyptian liveaboard pays park and port fees, so silence
+means either bundled or collected at the dock, and the listing does not say
+which.
 
 **Classification** is derived from each trip's dive-site list, not from operator
 marketing, so "Simply the Best", "Ultimate Red Sea" and "BDE" get one label.

@@ -20,13 +20,7 @@ from typing import Any
 from .classify import classify, themes_in_season
 from .dataset import Dataset
 from .money import DISPLAY_CURRENCY
-from .pricing import (
-    DEFAULT_TOGGLES,
-    compute,
-    mandatory_known,
-    resolve_fees,
-    transparency_score,
-)
+from .pricing import DEFAULT_TOGGLES, compute, mandatory_known, resolve_fees
 from .taxonomy import (
     DIVER_LEVEL_LABELS,
     DIVER_LEVEL_ORDER,
@@ -115,11 +109,6 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "booking_url": departure.booking_url,
                 "base": float(breakdown.base.rounded),
                 "lines": [line.as_dict() for line in breakdown.lines],
-                "transparency": (
-                    round(transparency_score(itinerary, departure, dataset.fx), 4)
-                    if fees_known and mandatory
-                    else None
-                ),
                 "peak_themes": [t.value for t in themes_in_season(themes, departure.start.month)],
                 "verified": departure.price_provenance.is_verified,
             }

@@ -105,12 +105,12 @@
     true_cost: function (a, b) { return metricsFor(a).total - metricsFor(b).total; },
     per_night: function (a, b) { return metricsFor(a).perNight - metricsFor(b).perNight; },
     base: function (a, b) { return a.base - b.base; },
-    markup: function (a, b) { return metricsFor(b).markup - metricsFor(a).markup; },
-    /* Departures with no fee data sort last rather than winning on a score
-       they were never given. */
-    transparency: function (a, b) {
-      var x = a.transparency === null ? -1 : a.transparency;
-      var y = b.transparency === null ? -1 : b.transparency;
+    /* Biggest surprise first: how much lands after the headline price.
+       Trips whose required extras are unstated sort last -- there is no gap
+       to report, and putting them first would read as "nothing to add". */
+    later: function (a, b) {
+      var x = a.mandatory_known ? metricsFor(a).surcharge : -1;
+      var y = b.mandatory_known ? metricsFor(b).surcharge : -1;
       return y - x;
     }
   };
@@ -158,10 +158,6 @@
     return a + " – " + b;
   }
 
-  function honestyClass(score) {
-    return score >= 0.85 ? "good" : score >= 0.7 ? "mid" : "bad";
-  }
-
   function labelFor(list, id) {
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].label;
     return id;
@@ -199,13 +195,12 @@
     }
 
     /* Without fee data there is no true cost to report. Saying "no extras to
-       add" would claim we checked, and claiming a perfect honesty score would
-       reward an operator for our own missing homework. */
+       add" would claim we checked when nobody has. */
     if (!dep.fees_known) {
       var unknown = el("div", "advertised");
       unknown.appendChild(el("span", "unknown", "advertised price only"));
       block.appendChild(unknown);
-      block.appendChild(el("div", "honesty-unknown", "Extra fees not yet captured"));
+      block.appendChild(el("div", "cost-unknown", "Extra fees not yet captured"));
       return block;
     }
 
@@ -226,24 +221,13 @@
     /* The operator listed extras, but none of them required. Every Egyptian
        liveaboard pays park and port fees, so that silence means either that
        they are bundled into the fare or that they are collected at the dock
-       unadvertised — and it does not say which. Scoring it as a clean bill
-       put the least forthcoming operators at the top of the ranking. */
+       unadvertised — and it does not say which, so no total is claimed. */
     if (!dep.mandatory_known) {
-      block.appendChild(el("div", "honesty-unknown",
+      block.appendChild(el("div", "cost-unknown",
         "Operator lists no required extras — park and port fees may be " +
         "bundled, or charged at the dock"));
       return block;
     }
-
-    var honesty = el("div", "honesty");
-    honesty.appendChild(el("span", "honesty-label", "Honesty "));
-    honesty.appendChild(el("span", "honesty-value", Math.round(dep.transparency * 100) + "%"));
-    var bar = el("div", "honesty-bar");
-    var fill = el("div", "honesty-fill " + honestyClass(dep.transparency));
-    fill.style.width = Math.round(dep.transparency * 100) + "%";
-    bar.appendChild(fill);
-    honesty.appendChild(bar);
-    block.appendChild(honesty);
 
     return block;
   }

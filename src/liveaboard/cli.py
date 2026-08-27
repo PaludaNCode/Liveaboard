@@ -15,7 +15,7 @@ from pathlib import Path
 
 from .classify import classify
 from .dataset import Dataset, DatasetError
-from .pricing import compute, mandatory_known, resolve_fees, transparency_score
+from .pricing import compute, mandatory_known, resolve_fees
 from .promote import promote
 from .render import render
 from .scrape.base import FetchBlocked, PoliteFetcher, ScrapeOutput
@@ -58,7 +58,7 @@ def cmd_check(args: argparse.Namespace) -> int:
     print(f"  sources: {', '.join(sorted(k.value for k in dataset.source_kinds))}")
     print()
 
-    rows: list[tuple[str, float, float, float | None, float | None]] = []
+    rows: list[tuple[str, float, float, float | None]] = []
     unknown = 0
     for key, itinerary in dataset.itineraries.items():
         departures = [d for d in dataset.departures if d.itinerary_id == key]
@@ -80,19 +80,18 @@ def cmd_check(args: argparse.Namespace) -> int:
                 float(breakdown.base.rounded),
                 float(breakdown.total.rounded),
                 breakdown.markup_pct if known else None,
-                transparency_score(itinerary, first, dataset.fx) * 100 if known else None,
             )
         )
 
     width = min(max((len(r[0]) for r in rows), default=20), 44)
-    print(f"  {'itinerary'.ljust(width)}  {'advertised':>11} {'true cost':>10} {'markup':>8} {'honesty':>8}")
-    for name, base, total, markup, honesty in sorted(rows, key=lambda r: -(r[3] or -1)):
+    print(f"  {'itinerary'.ljust(width)}  {'advertised':>11} {'true cost':>10} {'lands later':>12}")
+    for name, base, total, markup in sorted(rows, key=lambda r: -(r[3] or -1)):
         if markup is None:
-            print(f"  {name[:width].ljust(width)}  {base:>11,.0f} {'unknown':>10} {'—':>8} {'—':>8}")
+            print(f"  {name[:width].ljust(width)}  {base:>11,.0f} {'unknown':>10} {'—':>12}")
         else:
             print(
                 f"  {name[:width].ljust(width)}  {base:>11,.0f} {total:>10,.0f} "
-                f"{markup:>7.0f}% {honesty:>7.0f}%"
+                f"{total - base:>7,.0f} ({markup:>2.0f}%)"
             )
 
     if unknown:

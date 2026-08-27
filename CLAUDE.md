@@ -26,8 +26,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   are switched on. Do not add pricing logic to the JS.
 - **Included fees stay in the breakdown at zero.** Removing them hides the
   difference between a bundled operator and one that bills at the dock.
-- **The honesty score uses `REFERENCE_BASKET`, never the visitor's toggles.**
-  It describes the operator's pricing, not the person looking.
+- **No score grading operators.** The site compares what trips cost; it does
+  not rank who sells them. A per-operator "honesty" percentage was removed:
+  it read as a league table and contradicted the total beside it.
+- **Never claim a total the disclosure does not support.** No fee lines means
+  nobody looked; only optional ones means the operator did not state its
+  required extras. Neither is a clean bill.
 - **Classification derives from dive sites**, not from trip names. An explicit
   value in the dataset wins; a stated safety requirement is never softened.
 - **Zero runtime dependencies**, stdlib only, and the site stays one

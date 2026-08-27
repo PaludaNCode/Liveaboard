@@ -13,13 +13,7 @@ from decimal import Decimal
 from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
 from liveaboard.dataset import Dataset
-from liveaboard.pricing import (
-    REFERENCE_BASKET,
-    compute,
-    mandatory_known,
-    resolve_fees,
-    transparency_score,
-)
+from liveaboard.pricing import compute, mandatory_known, resolve_fees
 from liveaboard.render import build_payload
 from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
 
@@ -104,7 +98,7 @@ class TestTotals(unittest.TestCase):
         itinerary = make_itinerary(
             [fee(FeeCode.SINGLE_SUPPLEMENT, FeeTier.OPTIONAL, "400 EUR")]
         )
-        result = compute(itinerary, make_departure(), FX, REFERENCE_BASKET)
+        result = compute(itinerary, make_departure(), FX, {"nitrox": True, "gear": True})
         self.assertEqual(result.total.amount, Decimal("1000"))
 
     def test_conditional_fee_follows_its_toggle(self):
@@ -173,35 +167,16 @@ class TestFeeResolution(unittest.TestCase):
         )
 
 
-class TestTransparencyScore(unittest.TestCase):
-    def test_all_inclusive_scores_perfectly(self):
-        itinerary = make_itinerary(
-            [
-                fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "0 EUR", included=True),
-                fee(FeeCode.NITROX, FeeTier.CONDITIONAL, "0 EUR", included=True),
-            ]
-        )
-        self.assertEqual(transparency_score(itinerary, make_departure(), FX), 1.0)
+class TestBundlingIsVisibleWithoutAScore(unittest.TestCase):
+    """Two boats can cost the same and price very differently.
 
-    def test_hidden_fees_lower_the_score(self):
-        itinerary = make_itinerary([fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "250 EUR")])
-        self.assertAlmostEqual(transparency_score(itinerary, make_departure(), FX), 0.8)
+    The site used to express that as an honesty percentage per operator, which
+    made the page a league table and contradicted the total beside it. The
+    difference still has to be visible -- it is the whole point -- but as lines
+    in the breakdown rather than as a grade.
+    """
 
-    def test_score_ignores_visitor_toggles(self):
-        """The score describes the operator, so it must not move with the UI."""
-        itinerary = make_itinerary(
-            [
-                fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "100 EUR"),
-                fee(FeeCode.NITROX, FeeTier.CONDITIONAL, "150 EUR"),
-            ]
-        )
-        departure = make_departure()
-        first = transparency_score(itinerary, departure, FX)
-        compute(itinerary, departure, FX, {"nitrox": False})
-        self.assertEqual(first, transparency_score(itinerary, departure, FX))
-
-    def test_bundling_beats_itemising_at_equal_true_cost(self):
-        """Two boats costing the same in the end must not score the same."""
+    def test_equal_true_cost_still_reads_differently(self):
         hidden = make_itinerary([fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "200 EUR")])
         bundled = make_itinerary(
             [fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "0 EUR", included=True)]
@@ -213,10 +188,22 @@ class TestTransparencyScore(unittest.TestCase):
             compute(hidden, cheap, FX).total.amount,
             compute(bundled, dear, FX).total.amount,
         )
-        self.assertGreater(
-            transparency_score(bundled, dear, FX),
-            transparency_score(hidden, cheap, FX),
+        # The advertised prices are what differ, and that is what a visitor
+        # comparing the two actually needs to see.
+        self.assertLess(
+            compute(hidden, cheap, FX).base.amount,
+            compute(bundled, dear, FX).base.amount,
         )
+
+    def test_a_bundled_fee_keeps_its_line_at_zero(self):
+        """Deleting it would erase the difference between the two boats."""
+        bundled = make_itinerary(
+            [fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "0 EUR", included=True)]
+        )
+        result = compute(bundled, make_departure("1200 EUR"), FX)
+        park = [line for line in result.lines if line.code is FeeCode.MARINE_PARK]
+        self.assertEqual(len(park), 1)
+        self.assertTrue(park[0].included)
 
 
 class TestOnlyOptionalExtrasIsNotACleanBill(unittest.TestCase):
@@ -279,36 +266,26 @@ class TestOnlyOptionalExtrasIsNotACleanBill(unittest.TestCase):
         ])
         self.assertTrue(mandatory_known(itinerary, departure))
 
-    def test_the_page_withholds_the_score_rather_than_awarding_it(self):
+    def test_the_page_is_told_the_required_picture_is_missing(self):
         payload = build_payload(self.dataset([
             self.fee("gratuities", "customary"),
             self.fee("course", "optional", 250.0),
         ]))
-        rendered = payload["departures"][0]
-        self.assertFalse(rendered["mandatory_known"])
-        self.assertIsNone(rendered["transparency"])
+        self.assertFalse(payload["departures"][0]["mandatory_known"])
 
-    def test_a_disclosing_operator_still_gets_scored(self):
+    def test_a_disclosing_operator_gets_a_total(self):
         payload = build_payload(self.dataset([
             self.fee("marine_park", "mandatory", 150.0),
             self.fee("gratuities", "customary"),
         ]))
-        rendered = payload["departures"][0]
-        self.assertTrue(rendered["mandatory_known"])
-        self.assertIsNotNone(rendered["transparency"])
+        self.assertTrue(payload["departures"][0]["mandatory_known"])
 
-    def test_silence_no_longer_outranks_disclosure(self):
-        """The regression in one line: quiet operator vs forthcoming one."""
-        quiet = build_payload(self.dataset([
-            self.fee("gratuities", "customary"),
-        ]))["departures"][0]
-        forthcoming = build_payload(self.dataset([
+    def test_the_page_carries_no_score_to_rank_operators_by(self):
+        """Comparing trips is the job; grading operators is not."""
+        payload = build_payload(self.dataset([
             self.fee("marine_park", "mandatory", 150.0),
-            self.fee("port_fees", "mandatory", 80.0),
-            self.fee("gratuities", "customary"),
-        ]))["departures"][0]
-        self.assertIsNone(quiet["transparency"])
-        self.assertIsNotNone(forthcoming["transparency"])
+        ]))
+        self.assertNotIn("transparency", payload["departures"][0])
 
 
 if __name__ == "__main__":

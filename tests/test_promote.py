@@ -122,9 +122,9 @@ class TestFeesAreUnknownNotZero(unittest.TestCase):
     def test_the_page_is_told_the_fees_are_unknown(self):
         self.assertFalse(self.rendered["fees_known"])
 
-    def test_no_honesty_score_is_invented(self):
-        """A perfect score here would reward the operator for our missing work."""
-        self.assertIsNone(self.rendered["transparency"])
+    def test_no_true_cost_is_claimed(self):
+        """Nobody has looked, so the advertised price is all we can show."""
+        self.assertFalse(self.rendered["mandatory_known"])
 
 
 class TestClassificationSurvivesTheMissingSiteList(unittest.TestCase):
