@@ -5,6 +5,13 @@ name: Publish site
 # Requires a one-time manual step: Settings -> Pages -> Source: GitHub Actions.
 # Until that is set, this workflow fails and nothing is published — deliberate,
 # so the site cannot go public without someone choosing to make it public.
+#
+# The workflow_run triggers are load-bearing. GitHub deliberately does not start
+# a workflow from a push made with the default GITHUB_TOKEN, so the scheduled
+# jobs' data commits never fired the push trigger below: three refreshes landed
+# on main and the published page kept serving the build from the first deploy.
+# workflow_run fires on another workflow finishing, whoever pushed, which is the
+# only trigger that actually sees a bot commit.
 
 on:
   push:
@@ -12,6 +19,9 @@ on:
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
+  workflow_run:
+    workflows: ["Daily refresh", "Weekly fee refresh"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -26,6 +36,11 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # A refresh that failed mid-way may still have rebuilt the page from stale
+    # data; publishing that would present a broken run's output as current.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success' 
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
