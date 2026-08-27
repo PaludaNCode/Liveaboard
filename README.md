@@ -23,6 +23,10 @@ Brothers, Daedalus & Elphinstone · 1–8 May 2027
 
 Scope: Egypt, May–August 2027. Euro only.
 
+**→ [paludancode.github.io/Liveaboard](https://paludancode.github.io/Liveaboard/)**
+— goes live once this branch reaches `main` and **Settings → Pages → Source** is
+set to **GitHub Actions**. Locally: `build`, then open `site/index.html`.
+
 ## Status
 
 Everything downstream of the scrape works and is tested. **The scrape itself is
