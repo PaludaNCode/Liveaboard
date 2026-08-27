@@ -80,6 +80,14 @@ class PoliteFetcher:
     artifact cannot be opened from where the parser is being written."""
     _robots: dict[str, urllib.robotparser.RobotFileParser] = field(default_factory=dict)
     _last_request: dict[str, float] = field(default_factory=dict)
+    _cache: dict[str, FetchResult] = field(default_factory=dict)
+    """Responses already fetched in this run.
+
+    Listing pages are read twice by design — once by ``discover`` to find links,
+    once by ``run`` to parse — and at a five second crawl delay paying for that
+    twice is both slow and rude. The cache lives for one run only; the daily
+    schedule is what makes data fresh, not re-fetching within a single pass.
+    """
 
     def _robots_for(self, url: str) -> urllib.robotparser.RobotFileParser:
         host = urlparse(url).netloc
@@ -111,6 +119,16 @@ class PoliteFetcher:
 
     def get(self, url: str) -> FetchResult:
         """Fetch one URL, refusing if robots.txt disallows it."""
+        cached = self._cache.get(url)
+        if cached is not None:
+            return FetchResult(
+                url=cached.url,
+                status=cached.status,
+                body=cached.body,
+                fetched_at=cached.fetched_at,
+                from_cache=True,
+            )
+
         if not self.allowed(url):
             raise FetchBlocked(f"robots.txt disallows {url}")
 
@@ -128,6 +146,7 @@ class PoliteFetcher:
             raise FetchBlocked(f"{url} unreachable: {exc.reason}") from exc
 
         result = FetchResult(url=url, status=status, body=body, fetched_at=_now())
+        self._cache[url] = result
         self.snapshot(result)
         if self.diagnose:
             from . import diagnose as _diagnose
