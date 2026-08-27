@@ -66,6 +66,36 @@ reading off the only place the source puts it.
 """
 
 
+PORT_ALIASES: dict[str, str] = {
+    # Port Ghalib's marina is written three ways across the fleet. "Marsa" is
+    # Arabic for the harbour itself, and Ras Galep is the headland it sits on.
+    "marsa ghalib": "Port Ghalib",
+    "ras galep | port ghalib": "Port Ghalib",
+    # A hotel pickup point, not a port.
+    "hurghada, marriott": "Hurghada",
+    # Soma Bay is a resort bay ten kilometres up the coast from Safaga, and the
+    # operator names both because it uses whichever berth it is given.
+    "safaga/soma bay": "Safaga",
+}
+"""Ports that are one place under several spellings.
+
+Left unmerged they made ten filter chips out of six real harbours, and split
+the departures leaving from one marina across three of them -- which is worse
+than cosmetic on a filter whose whole job is "which airport do I fly into".
+
+Deliberately narrow. Marsa Alam is sixty kilometres south of Port Ghalib and
+stays its own port, however similar the names look.
+"""
+
+
+def _port(name: str | None) -> str:
+    """Fold an operator's spelling of a harbour onto one name."""
+    if not name:
+        return "Unknown"
+    cleaned = " ".join(name.split())
+    return PORT_ALIASES.get(cleaned.lower(), cleaned)
+
+
 def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     """Split a scraped trip title into route, promotion and ports."""
     promotion = None
@@ -206,6 +236,7 @@ def promote(
         port_from, port_to = titled_ports or (
             (located[0], located[0]) if located else ("Unknown", "Unknown")
         )
+        port_from, port_to = _port(port_from), _port(port_to)
 
         itineraries.append(
             {
