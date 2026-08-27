@@ -149,10 +149,19 @@ class TestFetchCache(unittest.TestCase):
 class TestSeasonMonthSelector(unittest.TestCase):
     """A vessel page shows the month it is asked for, not the season by default."""
 
-    def test_boat_urls_carry_the_season_month(self):
-        from liveaboard.scrape.liveaboard_com import SEASON_QUERY, SEASON_MONTHS, SEASON_YEAR
+    def test_one_query_per_season_month(self):
+        """The selector returns that month alone; a live run proved it.
 
-        self.assertEqual(SEASON_QUERY, f"?m={SEASON_MONTHS[0]}/{SEASON_YEAR}")
+        Asking only for the opening month produced 250 departures, every one
+        of them in May.
+        """
+        from liveaboard.scrape.liveaboard_com import (
+            SEASON_MONTHS, SEASON_QUERIES, SEASON_YEAR,
+        )
+
+        self.assertEqual(len(SEASON_QUERIES), len(SEASON_MONTHS))
+        self.assertEqual(SEASON_QUERIES[0], f"?m={SEASON_MONTHS[0]}/{SEASON_YEAR}")
+        self.assertEqual(SEASON_QUERIES[-1], f"?m={SEASON_MONTHS[-1]}/{SEASON_YEAR}")
 
     def test_listing_pages_are_not_treated_as_parse_failures(self):
         """They are crawled for links; calling that a failure buries real ones."""

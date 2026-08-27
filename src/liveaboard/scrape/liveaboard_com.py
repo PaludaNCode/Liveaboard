@@ -32,19 +32,26 @@ SEASON_MONTHS = (5, 6, 7, 8)
 SEASON_YEAR = 2027
 DESTINATION = "egypt"
 
-SEASON_QUERY = f"?m={SEASON_MONTHS[0]}/{SEASON_YEAR}"
-"""Month selector for a vessel page: ``?m=5/2027``.
+SEASON_QUERIES: tuple[str, ...] = tuple(
+    f"?m={month}/{SEASON_YEAR}" for month in SEASON_MONTHS
+)
+"""Month selectors for a vessel page: ``?m=5/2027`` through ``?m=8/2027``.
 
-Without it a boat page returns whatever window it defaults to, which starts
-from today. A first full run scraped 746 departures spanning 2026-09 to
-2027-10 and kept just 14 — everything else fell outside the season, not
-because the boats do not sail it but because we never asked about it.
+Without one, a boat page returns whatever window it defaults to, starting from
+today: a full run scraped 746 departures spanning 2026-09 to 2027-10 and kept
+just 14.
 
-Each page returns roughly ten events running forward from the selected month,
-so asking for the season's first month covers May to August in the same single
-request per vessel. Anchoring on the start of the window rather than iterating
-every month is what keeps a polite crawl inside one CI job.
+The first attempt asked only for the season's opening month, on the assumption
+that each page returns events running forward from it. It does not — a live run
+came back with 250 departures, every single one in May. The selector means that
+month and no other, so covering the season means asking four times per vessel.
+
+That is four times the requests, which is why the crawl is capped on vessels
+rather than on pages and the job is given room to finish.
 """
+
+SEASON_QUERY = SEASON_QUERIES[0]
+"""The season's opening month, for tools that need a single representative URL."""
 
 
 def search_paths() -> tuple[str, ...]:
@@ -159,14 +166,16 @@ class LiveaboardComAdapter(SourceAdapter):
             # Already cached by the fetcher, so re-reading costs nothing.
             listing = self.fetcher.get(listing_url)
             for link in sorted(self.boat_links(listing.body)):
-                boat_url = f"https://{self.host}{link}{SEASON_QUERY}"
-                if boat_url in seen:
+                if link in seen:
                     continue
-                seen.add(boat_url)
+                seen.add(link)
                 if len(seen) > self.max_pages:
-                    self.note(f"stopped at {self.max_pages} boat pages; more were available")
+                    self.note(f"stopped at {self.max_pages} vessels; more were available")
                     return
-                yield boat_url
+                # One request per season month: the selector returns that month
+                # alone, so a single fetch would publish a May-only season.
+                for query in SEASON_QUERIES:
+                    yield f"https://{self.host}{link}{query}"
 
         if not seen:
             self.note("no boat pages were discovered from any listing")
