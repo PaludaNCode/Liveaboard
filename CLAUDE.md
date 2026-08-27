@@ -6,20 +6,26 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 304 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 316 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
 ```
 
-Re-promoting is offline and takes seconds — do it after any `promote.py` change
-rather than waiting for a crawl (see #53):
+Re-promoting is offline and takes seconds — do it after any change to
+`src/liveaboard/`, rather than waiting for a crawl. **CI enforces this**
+(`promote --check`), so skipping it is a red build rather than a site that is
+quietly a parser behind:
 
 ```bash
-PYTHONPATH=src python3 -m liveaboard.cli promote --candidate data/candidate.json \
-  --fees data/fees.json --facts data/operator_facts.json --fx data/fx.json \
-  --out data/egypt-2027.json
+PYTHONPATH=src python3 -m liveaboard.cli promote --check   # did I forget?
+PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
+PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
+
+Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml` and the CI check all
+promote on them, so one canonical set of inputs lives in `cli.py` and cannot
+drift apart across four workflows.
 
 ## Invariants
 
@@ -57,6 +63,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   self-contained HTML file with no CDN. Tests use `unittest`, not pytest.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
+- **The committed dataset must match what `promote` produces from the committed
+  inputs** — CI enforces it too (`promote --check`). Promotion is pure, so the
+  two agreeing is the statement "the published page is this code's output". A
+  parser fix that never reaches `data/` is a green build and a site that is
+  still slightly wrong, which is the failure this project exists to correct in
+  other people.
 
 ## Sources
 

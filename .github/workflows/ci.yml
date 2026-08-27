@@ -27,6 +27,30 @@ jobs:
       - name: Site builds
         run: PYTHONPATH=src python3 -m liveaboard.cli build
 
+      # The same rule as the seed check below, extended to the real dataset.
+      #
+      # promote is pure -- candidate, fees, facts and FX in, dataset out, no
+      # network -- so the committed dataset must be what the committed code
+      # produces from the committed inputs. When it is not, somebody changed a
+      # parser and data/egypt-2027.json is still the previous parser's output.
+      #
+      # That state used to be invisible. PORT_ALIASES was merged with passing
+      # tests, folding three spellings of Port Ghalib into one, and the
+      # published page went on offering ten harbour filters for six real
+      # harbours: CI tests fixtures, not data/, so nothing failed. The site
+      # quietly continuing to be slightly wrong is the exact failure this
+      # project exists to correct in other people.
+      #
+      # Re-promoting is offline and takes seconds, so this is cheap to satisfy:
+      # run the command the failure message prints, and commit the result.
+      # No path arguments on purpose. refresh.yml and fees.yml both promote on
+      # argparse's defaults, so taking the defaults here means this check and
+      # the jobs that write the dataset cannot be looking at different inputs.
+      # Spelling the paths out would be one more thing to keep in step, and a
+      # mismatch would turn every scheduled run into a red build.
+      - name: Dataset matches the parser
+        run: PYTHONPATH=src python3 -m liveaboard.cli promote --check
+
       - name: Seed generator is reproducible
         # The committed seed must match what the generator produces, so nobody
         # can hand-edit a price into the dataset without it showing up here.
