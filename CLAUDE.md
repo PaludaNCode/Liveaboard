@@ -66,6 +66,13 @@ by the environment's network policy (see README); GitHub's runners are not.
 runner, read what came back, then parse. `tools/probe_*.py` write nothing and
 exist for exactly this.
 
+**`docs/sources/{host}.md` says where every fact lives** — URL, JSON-LD path or
+selector, browser or not — and, with equal weight, what has already been ruled
+out. Read it before opening a parser and before writing a probe. **A probe that
+discovers something updates that file in the same commit**, negative results
+included: a lead ruled out and not written down gets followed again, and a
+stale map is worse than none.
+
 Fees, gear prices and the specification table are rendered client-side, so
 `tools/scrape_fees.py` drives a browser weekly and reads all three panels from
 one page load. A capped run (`--limit N`) merges into the existing fee book
