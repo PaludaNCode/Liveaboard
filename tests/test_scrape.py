@@ -8,7 +8,11 @@ from __future__ import annotations
 import unittest
 from datetime import datetime, timezone
 
-from liveaboard.scrape.base import FetchResult, PoliteFetcher
+from liveaboard.scrape.base import (
+    DEFAULT_DELAY_SECONDS,
+    FetchResult,
+    PoliteFetcher,
+)
 from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter, _iso_date
 
 NOW = datetime(2026, 8, 27, tzinfo=timezone.utc)
@@ -245,6 +249,47 @@ class TestArchive(unittest.TestCase):
         combined.extend(self.output)
         combined.extend(self.output)
         self.assertEqual(len(combined.archive), 2)
+
+
+class TestCrawlDelay(unittest.TestCase):
+    """The pace is a courtesy, and a stated one is not ours to shorten."""
+
+    class Robots:
+        def __init__(self, stated):
+            self.stated = stated
+
+        def crawl_delay(self, agent):
+            return self.stated
+
+    def fetcher(self, stated=None):
+        f = PoliteFetcher(snapshot_dir="/tmp/unused")
+        f._robots["www.liveaboard.com"] = self.Robots(stated)
+        f._robots["example.test"] = self.Robots(stated)
+        return f
+
+    URL = "https://www.liveaboard.com/diving/egypt/alia-soul"
+
+    def test_a_checked_host_uses_its_recorded_pace(self):
+        """liveaboard.com states no Crawl-delay, so two seconds is our choice."""
+        self.assertEqual(self.fetcher().crawl_delay(self.URL), 2.0)
+
+    def test_an_unchecked_host_stays_slow(self):
+        """A source nobody has read robots.txt for starts conservative."""
+        self.assertEqual(
+            self.fetcher().crawl_delay("https://example.test/page"),
+            DEFAULT_DELAY_SECONDS,
+        )
+
+    def test_a_stated_delay_beats_our_faster_choice(self):
+        """Nothing in CHECKED_HOSTS may make this crawler faster than asked."""
+        self.assertEqual(self.fetcher(stated=10).crawl_delay(self.URL), 10.0)
+
+    def test_a_stated_delay_slower_than_ours_is_honoured(self):
+        self.assertEqual(self.fetcher(stated=6).crawl_delay(self.URL), 6.0)
+
+    def test_we_do_not_speed_up_to_a_stated_delay(self):
+        """A site permitting one second does not oblige us to take it."""
+        self.assertEqual(self.fetcher(stated=1).crawl_delay(self.URL), 2.0)
 
 
 if __name__ == "__main__":
