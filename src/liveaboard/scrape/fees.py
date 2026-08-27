@@ -49,7 +49,7 @@ ENTRY = re.compile(
         \s*(?:/\s*(?P<basis>trip|item|day|night|dive|person))?
         [^)]*
     \))?
-    \s*(?:,|\.|$)
+    \s*(?P<end>[,.]|$)
     """,
     re.I | re.X,
 )
@@ -96,16 +96,32 @@ none reaches seven words, while every fabrication above exceeds it.
 # match whole words, and the vaguest ones ("fuel", "course", "transfer") carry
 # enough context to mean only the fee.
 LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
+    # Required on three of twelve vessels and previously nameless, so it was
+    # dropped from the true cost of every one of them.
+    (r"\b(?:mandatory\s+)?service\s+charge\b", FeeCode.SERVICE_CHARGE),
     (r"\bnational park\b|\bmarine park\b|\bpark fees?\b", FeeCode.MARINE_PARK),
     (r"\benvironment(?:al)?\s+tax\b|\beco\s+tax\b", FeeCode.ENVIRONMENT_TAX),
     (r"\bfuel\s+(?:surcharge|fee|supplement)\b", FeeCode.FUEL_SURCHARGE),
     (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
-    (r"\bnitrox\s+course\b|\bdiving\s+courses?\b|\bscuba\s+courses?\b|\bcourses?\b",
-     FeeCode.COURSE),
+    # Split from the general course line for the same reason as snorkel gear:
+    # vessels list "Nitrox Course (€99)" and "Scuba Diving Courses (€79-110)"
+    # as separate priced entries, and one entry per code drops the second.
+    (r"\bnitrox\s+course\b|\benriched\s+air\s+course\b", FeeCode.NITROX_COURSE),
+    (r"\bdiving\s+courses?\b|\bscuba\s+courses?\b|\bcourses?\b", FeeCode.COURSE),
     (r"\bnitrox\b|\benriched\s+air\b", FeeCode.NITROX),
     (r"\b(?:private\s+)?dive\s+guide\b|\bprivate\s+guide\b", FeeCode.PRIVATE_GUIDE),
+    # Ahead of the general gear line so "Snorkel Gear" keeps its own code.
+    # They are separate lines on the operator's own list, and one entry per
+    # code means folding them together would drop whichever came second.
+    (r"\bsnorkell?(?:ing)?\s+(?:gear|equipment|set)\b", FeeCode.SNORKEL_GEAR),
     (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b",
      FeeCode.GEAR_RENTAL),
+    (r"\bnaturalist\s+guide\b|\bsnorkell?(?:ing)?\s+guide\b", FeeCode.NATURALIST_GUIDE),
+    (r"\bextra\s+dives?\b|\badditional\s+dives?\b", FeeCode.EXTRA_DIVES),
+    (r"\b(?:land\s+)?excursions?\b", FeeCode.LAND_EXCURSION),
+    # Narrow on purpose: the boat-features list that follows the disclosure
+    # carries "Beer available" and "Wine Available" as amenities, not charges.
+    (r"\balcoholic\s+(?:beverages?|drinks?)\b|\balcohol\b", FeeCode.ALCOHOL),
     (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btipping\b", FeeCode.GRATUITIES),
     (r"\blaundry\b|\bpressing\s+services?\b", FeeCode.LAUNDRY),
     (r"\bvisas?\s*(?:fees?|on\s+arrival)?\b(?!\w)", FeeCode.VISA),
@@ -166,6 +182,37 @@ braces or angle brackets is page furniture, not a price.
 """
 
 
+COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
+    re.compile(p, re.I)
+    for p in (
+        r"\bparks?\b",
+        r"\bports?\b|\bharbou?rs?\b",
+        r"\bfuel\b",
+        r"\benvironment(?:al)?\b|\beco\b",
+    )
+)
+COMBINED_TAIL = re.compile(r"\b(?:fees?|charges?|taxes?|dues)\b", re.I)
+
+
+def _combined_fee(label: str) -> bool:
+    """Is this one charge covering several of the mandatory fees at once?
+
+    Operators bill "Park, Port and Fuel Fees (€200-450 / trip)" and "Park and
+    Port Fees (€130 / trip)" as a single line. Matching those against the
+    individual patterns either failed outright — the words are not adjacent, so
+    one vessel lost its whole required block, €280 to €530 of mandatory cost —
+    or filed the lot under whichever component happened to sit last, calling a
+    combined charge "port dues".
+
+    It stays one line carrying the whole amount. Splitting €200-450 across
+    three codes would mean inventing three prices the operator never quoted,
+    which is the one thing this parser must never do.
+    """
+    if not COMBINED_TAIL.search(label):
+        return False
+    return sum(1 for part in COMBINED_PARTS if part.search(label)) >= 2
+
+
 def classify_label(label: str) -> FeeCode | None:
     """Resolve one entry's label, or ``None`` when it is not a fee we know.
 
@@ -178,6 +225,10 @@ def classify_label(label: str) -> FeeCode | None:
         or NOT_A_LABEL.search(label)
     ):
         return None
+    # Ahead of the individual patterns, which would otherwise claim one
+    # component of a combined charge and drop the rest of its meaning.
+    if _combined_fee(label):
+        return FeeCode.COMBINED_FEES
     for pattern, code in COMPILED_LABELS:
         if pattern.search(label):
             return code
@@ -252,7 +303,27 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
         required = required_word.lower() == "required"
         for match in ENTRY.finditer(body):
             label = " ".join(match.group("label").split())
+
+            # The operator ends the list with a full stop, and everything after
+            # it is the rest of the page. Stored disclosures from six vessels
+            # show the real list running 55 to 273 characters inside a block
+            # that runs to 1500, closing "Snorkel Gear." or "Land Excursions."
+            # before the booking copy and the boat's feature list begin.
+            #
+            # Read before the entry is judged, not after, because the last
+            # genuine extra is often one we do not model: stopping only on
+            # recognised entries would let the whole page through behind an
+            # unrecognised "Snorkel Gear."
+            #
+            # This is what the label bounds below were standing in for. They
+            # stay as a second line of defence -- a page that never closes its
+            # list still must not mine prose -- but this one matches how the
+            # source is actually written.
+            last = match.group("end") == "."
+
             if not label or NOISE.match(label):
+                if last:
+                    break
                 continue
 
             # The block regex runs to the next heading or the end of the page,
@@ -270,6 +341,8 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
 
             code = classify_label(label)
             if code is None or code in seen:
+                if last:
+                    break
                 continue
             seen.add(code)
 
@@ -289,6 +362,9 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
                     basis=basis,
                 )
             )
+
+            if last:
+                break
     return found
 
 
