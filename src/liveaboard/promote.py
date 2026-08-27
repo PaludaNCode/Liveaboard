@@ -111,7 +111,13 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
         # A parenthetical is only a port pair when it reads like one. "(Brothers
         # - Daedalus)" is a route, and filing Daedalus as a harbour would put a
         # reef on the page as somewhere to fly into.
-        if not _sites_from_name(f"{first} {second}"):
+        #
+        # Some names are both. Safaga and Dahab are harbours you sail from and
+        # stretches of reef you dive, so a plain "does this contain a dive
+        # site" test rejected "(Port Ghalib - Safaga/Soma Bay)" as a route and
+        # threw away a real port pair. Names that are ports in their own right
+        # are set aside before the question is asked.
+        if not _sites_from_name(_without_ports(f"{first} {second}")):
             ports = (first, second)
     return name.strip(), promotion, ports
 
@@ -217,6 +223,31 @@ def _availability(raw: str | None) -> str | None:
     return AVAILABILITY.get(token)
 
 
+PORTS_THAT_ARE_ALSO_SITES = (
+    "safaga", "dahab", "soma bay", "hurghada", "marsa alam", "port ghalib",
+    "sharm el sheikh", "hamata", "marsa ghalib",
+)
+"""Names that are a harbour and a dive area at once.
+
+Egypt sails from the same places it dives. Treating these as evidence that a
+bracketed pair is a route rather than a port pair loses the port pair, which is
+the more useful reading: a diver books flights off it.
+"""
+
+
+def _without_ports(text: str) -> str:
+    """Drop names that are harbours before asking whether text names a reef.
+
+    Substituted on word boundaries rather than by replacing " name ": adjacent
+    repeats share the space between them, so "Safaga - Safaga" lost only the
+    first and the leftover looked like a reef.
+    """
+    lowered = normalise(text)
+    for port in PORTS_THAT_ARE_ALSO_SITES:
+        lowered = re.sub(rf"\b{re.escape(normalise(port))}\b", " ", lowered)
+    return lowered
+
+
 def _nights(start: str, end: str) -> int | None:
     try:
         delta = (date.fromisoformat(end) - date.fromisoformat(start)).days
@@ -232,6 +263,7 @@ def promote(
     fx: dict[str, Any] | None = None,
     notes: str | None = None,
     fees: dict[str, Any] | None = None,
+    facts: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -250,6 +282,21 @@ def promote(
         for slug, entry in (fees.get("vessels") or {}).items():
             if entry.get("fees"):
                 fee_book[slug] = entry["fees"]
+
+    # Figures read off a vessel page by hand, for the boats whose extras block
+    # names a charge without a number. They win per fee code: a page that says
+    # "Rental Gear EUR 135" is a better answer than the same page's summary
+    # line saying "Rental Gear" and stopping, and both are the same source.
+    #
+    # Merged per code rather than wholesale, so a vessel covered here keeps
+    # every scraped fee this file does not mention.
+    hand: dict[str, dict[str, Any]] = (facts or {}).get("vessels") or {}
+    for slug, entry in hand.items():
+        if not entry.get("fees"):
+            continue
+        merged = {f["code"]: f for f in fee_book.get(slug, [])}
+        merged.update({f["code"]: f for f in entry["fees"]})
+        fee_book[slug] = list(merged.values())
 
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     skipped: list[str] = []
@@ -285,7 +332,8 @@ def promote(
                 "id": slug,
                 "name": boat_name,
                 "operator_id": UNKNOWN_OPERATOR["id"],
-                "guests": _guests(source.get("summary")),
+                "guests": (hand.get(slug, {}).get("guests")
+                           or _guests(source.get("summary"))),
             },
         )
 
@@ -307,8 +355,10 @@ def promote(
                 "operator_id": UNKNOWN_OPERATOR["id"],
                 "boat_id": slug,
                 "nights": nights,
-                "dives": _dives(nights, source.get("dives")),
-                "dives_estimated": not source.get("dives"),
+                "dives": _dives(nights, hand.get(slug, {}).get("dives")
+                                        or source.get("dives")),
+                "dives_estimated": not (hand.get(slug, {}).get("dives")
+                                        or source.get("dives")),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Left empty on purpose. Route and theme are derived from dive
@@ -407,6 +457,11 @@ SITE_HINTS = (
     "gubal", "abu dabab", "samadai", "habili ali", "dangerous reef",
     "gota kebir", "sha'ab", "shaab", "elphinstone reef", "big brother",
     "little brother", "numidia", "aida", "carnatic", "giannis d",
+    # Named on titles that previously yielded nothing at all.
+    "dahab", "safaga", "elba reef", "turkia", "sataya reef",
+    "marsa shouna", "gota abu ramada", "panorama reef", "middle reef",
+    "small giftun", "shaab sheer", "umm gamar", "ras disha", "tobia arbaa",
+    "chrisoula k", "kimon m", "ulysses", "rosalie moller",
 )
 """Dive-site names that routinely appear in itinerary titles.
 
@@ -421,6 +476,20 @@ SITE_ALIASES: dict[str, str] = {
     "rocky": "rocky island",
     "st john": "st johns",
     "saint johns": "st johns",
+    # Plurals. The match is on whole words, so "Fury Shoals" misses a hint
+    # spelled "fury shoal" -- and the plural is what most titles use.
+    "fury shoals": "fury shoal",
+    "brother islands": "brothers",
+    "brother island": "brothers",
+    "the brothers": "brothers",
+    # One m or two, both spellings are on the listing.
+    "ras mohamed": "ras mohammed",
+    "ras muhammad": "ras mohammed",
+    "ras mohamad": "ras mohammed",
+    "shaab abu nuhas": "abu nuhas",
+    "ss thistlegorm": "thistlegorm",
+    "sha ab": "shaab",
+    "elba borders": "elba reef",
 }
 """How operators actually spell a site in a trip title.
 

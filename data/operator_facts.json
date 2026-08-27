@@ -1,0 +1,865 @@
+{
+  "source": "liveaboard.com",
+  "collected": "2026-08-27",
+  "note": "Figures read from liveaboard.com vessel pages by hand, for the ten boats where the extras block the scrape reads carries no number. Covers only vessels already in the dataset; nothing here invents a boat, a trip or a price. Dive counts are the low end of the range the page states, to keep price per dive from flattering a trip. Nitrox is marked included on the five vessels whose pages say so; the extras block the scrape reads simply omits nitrox on those boats, and absence there is not the same claim as inclusion.",
+  "vessels": {
+    "blue-seas": {
+      "guests": 24,
+      "dives": 17,
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 390,
+            "currency": "EUR"
+          },
+          "note": "local fees and diesel surcharge, payable at the boat"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 135,
+            "currency": "EUR"
+          },
+          "note": "complete set excluding torch and dive computer"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        }
+      ]
+    },
+    "blue-storm": {
+      "guests": 24,
+      "dives": 19,
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 390,
+            "currency": "EUR"
+          },
+          "note": "local fees and diesel surcharge, payable at the boat"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 135,
+            "currency": "EUR"
+          },
+          "note": "complete set excluding torch and dive computer"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        }
+      ]
+    },
+    "red-sea-explorer": {
+      "guests": 24,
+      "dives": 20,
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 280,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 340,
+            "currency": "EUR"
+          },
+          "note": "park, port and fuel; the operator quotes a band"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 170,
+            "currency": "EUR"
+          },
+          "note": "includes a dive light"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        }
+      ]
+    },
+    "odyssey": {
+      "guests": 26,
+      "dives": 15,
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 70,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 50,
+            "currency": "EUR"
+          },
+          "note": "conservation fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "note": "harbour fees included in the fare"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 0,
+            "currency": "EUR"
+          },
+          "note": "crew tips included in the fare"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 140,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        }
+      ]
+    },
+    "hammerhead-ii": {
+      "guests": 32,
+      "dives": 17,
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 117,
+            "currency": "EUR"
+          },
+          "note": "EUR 16.66 a day over seven trip days"
+        },
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 80,
+            "currency": "EUR"
+          },
+          "note": "park and port fees"
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 45,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 292,
+            "currency": "EUR"
+          },
+          "note": "EUR 41.66 a day over seven trip days"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 80,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    "jp-marine": {
+      "guests": 28,
+      "dives": 18,
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 145,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 215,
+            "currency": "EUR"
+          },
+          "note": "park, port and fuel; the operator quotes a band"
+        },
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 70,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 220,
+            "currency": "EUR"
+          },
+          "note": "bundles a dive computer"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 70,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 125,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    "queen-sherry": {
+      "guests": 24,
+      "dives": 21,
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 145,
+            "currency": "EUR"
+          },
+          "note": "park, port and fuel, quoted flat"
+        },
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 70,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 220,
+            "currency": "EUR"
+          },
+          "note": "bundles a dive computer"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 70,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 125,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        }
+      ]
+    },
+    "alsuraya": {
+      "guests": 24,
+      "dives": 18,
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 250,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 100,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 250,
+            "currency": "EUR"
+          },
+          "note": "bundles computer, torch and SMB; EUR 160 without"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        }
+      ]
+    },
+    "safy-mar": {
+      "guests": 34,
+      "dives": 16,
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 100,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 80,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 50,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 50,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 80,
+            "currency": "EUR"
+          },
+          "note": "BCD and regulator only; no wetsuit or fins listed"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 80,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    "red-sea-aggressor-iv": {
+      "guests": 26,
+      "dives": 20,
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 90,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 39,
+            "currency": "EUR"
+          },
+          "note": "harbour fees"
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 43,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 150,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": {
+            "amount": 86,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        }
+      ]
+    }
+  }
+}

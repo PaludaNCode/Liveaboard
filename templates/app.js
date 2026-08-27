@@ -153,8 +153,6 @@
     { k: "trip", t: "Trip", cls: "trip", v: function (d, i) { return tripName(i); } },
     { k: "from", t: "From", v: function (d, i) { return i.port_from; } },
     { k: "to", t: "To", v: function (d, i) { return i.port_to; } },
-    { k: "route", t: "Route",
-      v: function (d, i) { return i.route ? label(D.facets.routes, i.route) : "—"; } },
     { k: "sites", t: "Dive sites", cls: "sites",
       v: function (d, i) { return (i.dive_sites || []).join(", ") || "—"; } },
     { k: "base", t: "Advertised", num: true,
