@@ -4,6 +4,10 @@
   "vessels": {
     "alia-soul": {
       "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027",
+      "disclosure": {
+        "required": "Environment Tax (€24 / night), Port Fees (€80 / trip).,",
+        "optional": "Alcoholic Beverages, Nitrox Course (€99), Private Dive Guide (€50 / day), Rental Gear, Scuba Diving Courses (€79-110), Snorkel Gear., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Warm Water Showers, Air Conditioned saloon, Sun Deck, Budget Friendly Cruise, Family Friendly Cruise, Nearly 1:1 Crew-to-Guest Ratio, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Audio & video entertainment, Safe Box in Cabin, Available for Charter, Snorkeling Equipment, Separate Rinse for u/w Camera, Daily housekeeping, Bar, Dedicated Local Crew, Food & Drinks, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Fine Wines Selection, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox, S"
+      },
       "fees": [
         {
           "code": "environment_tax",
@@ -84,67 +88,15 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area Sidemount diving – Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Lower Deck Twin Cabin Upper Deck Double Cabin Upper Deck Twin Cabin Boat Specifications Year built 2014 Year renovated 2025 Length 36 meters Deck area 260 sq: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "meters Top speed 11 Knots Cruising speed 11 Knots Engines 2x Caterpillar 450 hp Max guests 20 Number of cabins 10 Number of bathrooms 12 Tenders 1 x Yamaha 100hp 1x Yamaha 40hp Water capacity 18 tons Fuel capacity 12 tons Freshwater maker 10000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     "all-star-ghani": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027",
+      "disclosure": {
+        "required": "Port Fees ($200).,",
+        "optional": "Gratuities, Alcoholic Beverages, Nitrox ($100 / trip), Nitrox Course ($182 / activity), Private Dive Guide, Rental Gear, Scuba Diving Courses ($285 / activity), Land Excursions., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Budget Friendly Cruise, Boutique / Souvenir Shop, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, Hair Dryer in Cabin, BBQ Area, Available for Charter, Local & International Crew, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Naturalist Guide, Food & Drinks, Fine Cuisine, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Snacks All Day, Buffet style, Western Food, Local Food, Set Menu Dinner, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on ste"
+      },
       "fees": [
         {
           "code": "port_fees",
@@ -237,53 +189,15 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide Food & Drinks Fine Cuisine Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Standard Cabins Master Cabins Boat Specifications Year built 2003 Year renovated 2025 Length 138 feet Beam 25 feet Cruising speed 10 knots Engines 2x Model Man 1300 HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2 Water capacity 170000 liters Fuel capacity 25485 liters Freshwater maker 600 liters per hour Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     "all-star-red-sea": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027",
+      "disclosure": {
+        "required": "National Park Fees ($250).,",
+        "optional": "Gratuities, Alcoholic Beverages ($4-15 / item), Nitrox ($100), Nitrox Course ($182), Rental Gear, Scuba Diving Courses ($285-627)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Jacuzzi / Hot Tub, Naturalist Guide, En-Suite bathrooms, Aircon Cabins, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Nearly 1:1 Crew-to-Guest Ratio, Seaview Cabins, Naturalist Itineraries, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Laundry Service, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, BBQ Area, Available for Charter, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Fine Cuisine, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Fine Wines Selection, Snacks All Day, Buffet style, Western Food, Local Food, Set Menu Dinner, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advis"
+      },
       "fees": [
         {
           "code": "marine_park",
@@ -362,81 +276,15 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
     "alsuraya": {
       "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027",
+      "disclosure": {
+        "required": "National Park Fees (€150-250 / trip).,",
+        "optional": "Gratuities (€100 / trip), Alcoholic Beverages, Nitrox Course (€220 / activity), Private Dive Guide (€450 / trip), Rental Gear, Scuba Diving Courses (€220-270 / activity), Snorkel Gear (€50)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Budget Friendly Cruise, Family Friendly Cruise, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Audio & video entertainment, Observation Deck, Available for Charter, Local & International Crew, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Fine Cuisine, Al Fresco Dining, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Beach BBQ, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, Set Menu Dinner, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your"
+      },
       "fees": [
         {
           "code": "marine_park",
@@ -522,67 +370,15 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     "amelie": {
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027",
+      "disclosure": {
+        "required": "Fuel Surcharge (€10 / day), National Park Fees (€15 / day), Port Fees (€25 / trip).,",
+        "optional": "Gratuities, Alcoholic Beverages, Extra Dives (€50 / activity), Nitrox Course (€132), Private Dive Guide (€55), Rental Gear, Scuba Diving Courses (€210-370), Land Excursions (€35 / trip), Naturalist Guide (€50 / day), Snorkel Gear (€6 / day), Snorkeling Guide (€50 / day)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Naturalist Guide, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Sun Deck, Camera Station, Naturalist Itineraries, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, BBQ Area, Available for Charter, Local & International Crew, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Food & Drinks, Fine Cuisine, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special "
+      },
       "fees": [
         {
           "code": "fuel_surcharge",
@@ -694,23 +490,66 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        }
+      ]
+    },
+    "amelie-adventures": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027",
+      "disclosure": {
+        "required": "National Park Fees (€15 / day), Port Fees (€20 / trip).,",
+        "optional": "Gratuities, Alcoholic Beverages, Extra Dives (€35 / activity), Nitrox Course (€132 / activity), Private Dive Guide (€55 / activity), Rental Gear, Scuba Diving Courses (€100 / activity), Naturalist Guide, Snorkel Gear (€6 / day), Snorkeling Guide., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Naturalist Guide, En-Suite bathrooms, Family Cabins, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Seaview Cabins, Naturalist Itineraries, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, BBQ Area, Available for Charter, Local & International Crew, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Fine Cuisine, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst "
+      },
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
         },
         {
-          "code": "airport_transfer",
-          "tier": "conditional",
+          "code": "port_fees",
+          "tier": "mandatory",
           "basis": "per_trip",
           "included": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "liveaboard.com",
             "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
           },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
+          "amount": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
         },
         {
-          "code": "tax_vat",
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -718,13 +557,32 @@
             "kind": "scraped",
             "source_id": "liveaboard.com",
             "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
           },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Sun Deck Camera Station Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Welcome Cocktails Snacks All Day Buffet style Western Food Local Food If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
+          "amount": {
+            "amount": 132.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
         },
         {
-          "code": "nitrox",
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 55.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
           "tier": "conditional",
           "basis": "per_trip",
           "included": false,
@@ -732,10 +590,10 @@
             "kind": "scraped",
             "source_id": "liveaboard.com",
             "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
           },
           "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
+          "note": "Rental Gear: listed with no price"
         }
       ]
     }

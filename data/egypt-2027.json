@@ -49,8 +49,8 @@
       "boat_id": "alia-soul",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Safaga/Soma Bay",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -138,62 +138,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area Sidemount diving – Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Lower Deck Twin Cabin Upper Deck Double Cabin Upper Deck Twin Cabin Boat Specifications Year built 2014 Year renovated 2025 Length 36 meters Deck area 260 sq: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "meters Top speed 11 Knots Cruising speed 11 Knots Engines 2x Caterpillar 450 hp Max guests 20 Number of cabins 10 Number of bathrooms 12 Tenders 1 x Yamaha 100hp 1x Yamaha 40hp Water capacity 18 tons Fuel capacity 12 tons Freshwater maker 10000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -204,8 +148,8 @@
       "boat_id": "alia-soul",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Safaga/Soma Bay",
+      "port_to": "Safaga/Soma Bay",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -293,62 +237,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area Sidemount diving – Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Lower Deck Twin Cabin Upper Deck Double Cabin Upper Deck Twin Cabin Boat Specifications Year built 2014 Year renovated 2025 Length 36 meters Deck area 260 sq: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "meters Top speed 11 Knots Cruising speed 11 Knots Engines 2x Caterpillar 450 hp Max guests 20 Number of cabins 10 Number of bathrooms 12 Tenders 1 x Yamaha 100hp 1x Yamaha 40hp Water capacity 18 tons Fuel capacity 12 tons Freshwater maker 10000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -359,12 +247,13 @@
       "boat_id": "alia-soul",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "zabargad"
+        "zabargad",
+        "rocky island"
       ],
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=8/2027",
@@ -448,62 +337,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area Sidemount diving – Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Lower Deck Twin Cabin Upper Deck Double Cabin Upper Deck Twin Cabin Boat Specifications Year built 2014 Year renovated 2025 Length 36 meters Deck area 260 sq: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "meters Top speed 11 Knots Cruising speed 11 Knots Engines 2x Caterpillar 450 hp Max guests 20 Number of cabins 10 Number of bathrooms 12 Tenders 1 x Yamaha 100hp 1x Yamaha 40hp Water capacity 18 tons Fuel capacity 12 tons Freshwater maker 10000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -514,8 +347,8 @@
       "boat_id": "alia-soul",
       "nights": 5,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [],
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=8/2027",
@@ -599,62 +432,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area Sidemount diving – Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Lower Deck Twin Cabin Upper Deck Double Cabin Upper Deck Twin Cabin Boat Specifications Year built 2014 Year renovated 2025 Length 36 meters Deck area 260 sq: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
-          },
-          "amount": null,
-          "note": "meters Top speed 11 Knots Cruising speed 11 Knots Engines 2x Caterpillar 450 hp Max guests 20 Number of cabins 10 Number of bathrooms 12 Tenders 1 x Yamaha 100hp 1x Yamaha 40hp Water capacity 18 tons Fuel capacity 12 tons Freshwater maker 10000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -665,8 +442,8 @@
       "boat_id": "all-star-ghani",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -766,48 +543,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide Food & Drinks Fine Cuisine Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Standard Cabins Master Cabins Boat Specifications Year built 2003 Year renovated 2025 Length 138 feet Beam 25 feet Cruising speed 10 knots Engines 2x Model Man 1300 HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2 Water capacity 170000 liters Fuel capacity 25485 liters Freshwater maker 600 liters per hour Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -818,8 +553,8 @@
       "boat_id": "all-star-ghani",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers"
       ],
@@ -917,48 +652,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide Food & Drinks Fine Cuisine Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Standard Cabins Master Cabins Boat Specifications Year built 2003 Year renovated 2025 Length 138 feet Beam 25 feet Cruising speed 10 knots Engines 2x Model Man 1300 HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2 Water capacity 170000 liters Fuel capacity 25485 liters Freshwater maker 600 liters per hour Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -969,8 +662,8 @@
       "boat_id": "all-star-ghani",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran"
       ],
@@ -1068,48 +761,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide Food & Drinks Fine Cuisine Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Standard Cabins Master Cabins Boat Specifications Year built 2003 Year renovated 2025 Length 138 feet Beam 25 feet Cruising speed 10 knots Engines 2x Model Man 1300 HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2 Water capacity 170000 liters Fuel capacity 25485 liters Freshwater maker 600 liters per hour Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -1120,8 +771,8 @@
       "boat_id": "all-star-ghani",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "summary": "Explore the Red Sea aboard the All Star Ghani liveaboard, offering 12 cabins for 24 guests, up to 18 dives weekly, and access to Egypt&rsquo;s top reefs, wrecks, and shark hotspots.",
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=8/2027",
@@ -1217,710 +868,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide Food & Drinks Fine Cuisine Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Standard Cabins Master Cabins Boat Specifications Year built 2003 Year renovated 2025 Length 138 feet Beam 25 feet Cruising speed 10 knots Engines 2x Model Man 1300 HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2 Water capacity 170000 liters Fuel capacity 25485 liters Freshwater maker 600 liters per hour Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "all-star-red-sea--20-off-brothers-daedalus-elphinstone-hurghada-hurghada",
-      "name": "20% Off: Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
-      "operator_id": "unknown-operator",
-      "boat_id": "all-star-red-sea",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [
-        "brothers",
-        "daedalus",
-        "elphinstone"
-      ],
-      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 250.0,
-            "currency": "USD"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 182.0,
-            "currency": "USD"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "all-star-red-sea--20-off-brothers-daedalus-elphinstone-hurghada-port-ghalib",
-      "name": "20% Off: Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
-      "operator_id": "unknown-operator",
-      "boat_id": "all-star-red-sea",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [
-        "brothers",
-        "daedalus",
-        "elphinstone"
-      ],
-      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 250.0,
-            "currency": "USD"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 182.0,
-            "currency": "USD"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "all-star-red-sea--20-off-north-tiran-hurghada-hurghada",
-      "name": "20% Off: North & Tiran (Hurghada - Hurghada)",
-      "operator_id": "unknown-operator",
-      "boat_id": "all-star-red-sea",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [
-        "tiran"
-      ],
-      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 250.0,
-            "currency": "USD"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 182.0,
-            "currency": "USD"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "all-star-red-sea--20-off-ultimate-red-sea-port-ghalib-hurghada",
-      "name": "20% Off: Ultimate Red Sea (Port Ghalib - Hurghada)",
-      "operator_id": "unknown-operator",
-      "boat_id": "all-star-red-sea",
-      "nights": 14,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [],
-      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 250.0,
-            "currency": "USD"
-          },
-          "note": "National Park Fees"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": {
-            "amount": 182.0,
-            "currency": "USD"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
@@ -1931,8 +878,8 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -2018,9 +965,92 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "all-star-red-sea--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "all-star-red-sea",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
+      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "USD"
+          },
+          "note": "National Park Fees"
         },
         {
-          "code": "airport_transfer",
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 182.0,
+            "currency": "USD"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "gear_rental",
           "tier": "conditional",
           "basis": "per_trip",
           "included": false,
@@ -2031,63 +1061,7 @@
             "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
           },
           "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
+          "note": "Rental Gear: listed with no price"
         }
       ]
     },
@@ -2098,8 +1072,8 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "fury shoal"
@@ -2184,76 +1158,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
@@ -2264,10 +1168,11 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus"
+        "daedalus",
+        "st johns"
       ],
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
@@ -2349,76 +1254,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
@@ -2429,8 +1264,8 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers"
       ],
@@ -2514,76 +1349,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
@@ -2594,8 +1359,8 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran"
       ],
@@ -2679,76 +1444,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
         }
       ]
     },
@@ -2759,8 +1454,8 @@
       "boat_id": "all-star-red-sea",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
@@ -2842,9 +1537,88 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "all-star-red-sea--ultimate-red-sea-port-ghalib-hurghada",
+      "name": "Ultimate Red Sea (Port Ghalib - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "all-star-red-sea",
+      "nights": 14,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
+      "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "USD"
+          },
+          "note": "National Park Fees"
         },
         {
-          "code": "airport_transfer",
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 182.0,
+            "currency": "USD"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "gear_rental",
           "tier": "conditional",
           "basis": "per_trip",
           "included": false,
@@ -2855,75 +1629,19 @@
             "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
           },
           "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "laundry",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat features Free Internet Jacuzzi / Hot Tub Naturalist Guide En-Suite bathrooms Aircon Cabins Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Nearly 1:1 Crew-to-Guest Ratio Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Laundry Service Library Outdoor Dining Audio & video entertainment Observation Deck BBQ Area Available for Charter Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegan Options Vegetarian Options Free Soft Drinks Beer available Wine Available Fine Wines Selection Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Boat Specifications Year built 2023 Year renovated 2023 Length 48: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "5 meters Top speed 14 knots Cruising speed 10 knots Engines 2x Mantrac 1300HP Max guests 28 Number of cabins 14 Number of bathrooms 17 Tenders 3 Water capacity 16 tons Fuel capacity 60 tons Freshwater maker 20 tons/day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-          },
-          "amount": null,
-          "note": "Enthusiastic dive guides who visibly enjoyed themselves when the group went into the water and came back on deck full of stories: listed with no price"
+          "note": "Rental Gear: listed with no price"
         }
       ]
     },
     {
-      "id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-hurghada",
-      "name": "10% Off: Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
+      "id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-hurghada",
+      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
       "operator_id": "unknown-operator",
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -3016,74 +1734,18 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     {
-      "id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
-      "name": "10% Off: Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
+      "id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
+      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
       "operator_id": "unknown-operator",
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -3176,74 +1838,18 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     {
-      "id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
-      "name": "10% Off: Brothers, Daedalus and Elphinstone (Port Ghalib - Hurghada)",
+      "id": "alsuraya--brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
+      "name": "Brothers, Daedalus and Elphinstone (Port Ghalib - Hurghada)",
       "operator_id": "unknown-operator",
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -3336,78 +1942,23 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
     {
-      "id": "alsuraya--10-off-daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
-      "name": "10% Off: Daedalus, Rocky, Zabargad & Elphinstone (Port Ghalib - Port Ghalib)",
+      "id": "alsuraya--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
+      "name": "Daedalus, Rocky, Zabargad & Elphinstone (Port Ghalib - Port Ghalib)",
       "operator_id": "unknown-operator",
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "zabargad"
+        "zabargad",
+        "rocky island"
       ],
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027",
@@ -3496,378 +2047,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "alsuraya--10-off-deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
-      "name": "10% Off: Deadalus, St. John´s & Elphinstone (Port Ghalib - Port Ghalib)",
-      "operator_id": "unknown-operator",
-      "boat_id": "alsuraya",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [
-        "elphinstone"
-      ],
-      "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"National Park Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          },
-          "note": "Gratuities"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 220.0,
-            "currency": "EUR"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 450.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
-        }
-      ]
-    },
-    {
-      "id": "alsuraya--10-off-north-and-brothers-hurghada-hurghada",
-      "name": "10% Off: North and Brothers (Hurghada - Hurghada)",
-      "operator_id": "unknown-operator",
-      "boat_id": "alsuraya",
-      "nights": 7,
-      "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
-      "dive_sites": [
-        "brothers"
-      ],
-      "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027",
-      "fees": [
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"National Park Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          },
-          "note": "Gratuities"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 220.0,
-            "currency": "EUR"
-          },
-          "note": "Nitrox Course"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": {
-            "amount": 450.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -3878,10 +2057,12 @@
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone"
+        "elphinstone",
+        "daedalus",
+        "st johns"
       ],
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027",
@@ -3970,62 +2151,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     },
@@ -4036,8 +2161,8 @@
       "boat_id": "alsuraya",
       "nights": 7,
       "dives": 0,
-      "port_from": "Egypt",
-      "port_to": "Egypt",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers"
       ],
@@ -4128,62 +2253,6 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Pay by bank transfer or online with Best Price Guaranteed You're getting the lowest rate: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Food & Drinks Fine Cuisine Al Fresco Dining Vegetarian Options Free Soft Drinks Beer available Wine Available Full-board Option Beach BBQ Welcome Cocktails Snacks All Day Buffet style Western Food Local Food Set Menu Dinner If you have any specific dietary requirements whilst on-board your cruise: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Diving Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rinse Hoses Dive deck Tenders for diving Sidemount Diving Languages Spoken The crew speaks English: listed with no price"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-          },
-          "amount": null,
-          "note": "Show prices Drawings & Vessel Layouts Cabin Types Main Deck Twin Cabin Upper Deck Twin Cabin Upper Deck Bunk Bed Cabin Upper Deck Suite Sun Deck Suite Boat Specifications Year built 2024 Length 37 meters Beam 8 meters Top speed 16 knots Cruising speed 10 knots Engines 2x Mercedes turbo diesel 1000HP Max guests 24 Number of cabins 12 Number of bathrooms 14 Tenders 2x Yamaha 85HP Water capacity 8000 liters Fuel capacity 15710 liters Freshwater maker 20000 liters per day Boat navigation and safety Radar Depth Sounder GPS Radio VHF/DSC/SSB E: listed with no price"
         }
       ]
     }
@@ -4598,74 +2667,6 @@
       }
     },
     {
-      "id": "all-star-red-sea-2027-05-17-2",
-      "itinerary_id": "all-star-red-sea--20-off-brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-05-17",
-      "end": "2027-05-24",
-      "price": {
-        "amount": 1756.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-      }
-    },
-    {
-      "id": "all-star-red-sea-2027-05-31-4",
-      "itinerary_id": "all-star-red-sea--20-off-brothers-daedalus-elphinstone-hurghada-port-ghalib",
-      "start": "2027-05-31",
-      "end": "2027-06-07",
-      "price": {
-        "amount": 1756.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-      }
-    },
-    {
-      "id": "all-star-red-sea-2027-05-24-3",
-      "itinerary_id": "all-star-red-sea--20-off-north-tiran-hurghada-hurghada",
-      "start": "2027-05-24",
-      "end": "2027-05-31",
-      "price": {
-        "amount": 1652.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
-      }
-    },
-    {
-      "id": "all-star-red-sea-2027-07-05-0",
-      "itinerary_id": "all-star-red-sea--20-off-ultimate-red-sea-port-ghalib-hurghada",
-      "start": "2027-07-05",
-      "end": "2027-07-19",
-      "price": {
-        "amount": 3780.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=07/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=7/2027"
-      }
-    },
-    {
       "id": "all-star-red-sea-2027-05-03-0",
       "itinerary_id": "all-star-red-sea--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-05-03",
@@ -4700,6 +2701,24 @@
       }
     },
     {
+      "id": "all-star-red-sea-2027-05-17-2",
+      "itinerary_id": "all-star-red-sea--brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-05-17",
+      "end": "2027-05-24",
+      "price": {
+        "amount": 1756.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+      },
+      "promotion": "20% Off"
+    },
+    {
       "id": "all-star-red-sea-2027-07-19-1",
       "itinerary_id": "all-star-red-sea--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-07-19",
@@ -4732,6 +2751,24 @@
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027"
       }
+    },
+    {
+      "id": "all-star-red-sea-2027-05-31-4",
+      "itinerary_id": "all-star-red-sea--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "start": "2027-05-31",
+      "end": "2027-06-07",
+      "price": {
+        "amount": 1756.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+      },
+      "promotion": "20% Off"
     },
     {
       "id": "all-star-red-sea-2027-06-21-2",
@@ -4836,6 +2873,24 @@
       }
     },
     {
+      "id": "all-star-red-sea-2027-05-24-3",
+      "itinerary_id": "all-star-red-sea--north-tiran-hurghada-hurghada",
+      "start": "2027-05-24",
+      "end": "2027-05-31",
+      "price": {
+        "amount": 1652.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+      },
+      "promotion": "20% Off"
+    },
+    {
       "id": "all-star-red-sea-2027-08-23-2",
       "itinerary_id": "all-star-red-sea--north-tiran-hurghada-hurghada",
       "start": "2027-08-23",
@@ -4870,8 +2925,26 @@
       }
     },
     {
+      "id": "all-star-red-sea-2027-07-05-0",
+      "itinerary_id": "all-star-red-sea--ultimate-red-sea-port-ghalib-hurghada",
+      "start": "2027-07-05",
+      "end": "2027-07-19",
+      "price": {
+        "amount": 3780.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=7/2027"
+      },
+      "promotion": "20% Off"
+    },
+    {
       "id": "alsuraya-2027-06-05-0",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-hurghada",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-hurghada",
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
@@ -4884,11 +2957,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-08-21-2",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-hurghada",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-hurghada",
       "start": "2027-08-21",
       "end": "2027-08-28",
       "price": {
@@ -4901,11 +2975,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-05-01-0",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
@@ -4918,11 +2993,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-06-19-2",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
@@ -4935,11 +3011,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-07-17-2",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
@@ -4952,11 +3029,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-05-22-3",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
@@ -4969,11 +3047,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-07-03-0",
-      "itinerary_id": "alsuraya--10-off-brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
+      "itinerary_id": "alsuraya--brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
       "start": "2027-07-03",
       "end": "2027-07-10",
       "price": {
@@ -4986,11 +3065,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-05-08-1",
-      "itinerary_id": "alsuraya--10-off-daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
+      "itinerary_id": "alsuraya--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
@@ -5003,11 +3083,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-07-24-3",
-      "itinerary_id": "alsuraya--10-off-daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
+      "itinerary_id": "alsuraya--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
@@ -5020,11 +3101,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-05-15-2",
-      "itinerary_id": "alsuraya--10-off-deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
+      "itinerary_id": "alsuraya--deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
@@ -5037,11 +3119,12 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
-      }
+      },
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-06-26-3",
-      "itinerary_id": "alsuraya--10-off-deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
+      "itinerary_id": "alsuraya--deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
@@ -5054,75 +3137,8 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027"
-      }
-    },
-    {
-      "id": "alsuraya-2027-06-12-1",
-      "itinerary_id": "alsuraya--10-off-north-and-brothers-hurghada-hurghada",
-      "start": "2027-06-12",
-      "end": "2027-06-19",
-      "price": {
-        "amount": 1311.0,
-        "currency": "USD"
       },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=06/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027"
-      }
-    },
-    {
-      "id": "alsuraya-2027-07-10-1",
-      "itinerary_id": "alsuraya--10-off-north-and-brothers-hurghada-hurghada",
-      "start": "2027-07-10",
-      "end": "2027-07-17",
-      "price": {
-        "amount": 1311.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=07/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027"
-      }
-    },
-    {
-      "id": "alsuraya-2027-08-14-1",
-      "itinerary_id": "alsuraya--10-off-north-and-brothers-hurghada-hurghada",
-      "start": "2027-08-14",
-      "end": "2027-08-21",
-      "price": {
-        "amount": 1311.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=08/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
-      }
-    },
-    {
-      "id": "alsuraya-2027-08-28-3",
-      "itinerary_id": "alsuraya--10-off-north-and-brothers-hurghada-hurghada",
-      "start": "2027-08-28",
-      "end": "2027-09-04",
-      "price": {
-        "amount": 1311.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=08/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
-      }
+      "promotion": "10% Off"
     },
     {
       "id": "alsuraya-2027-08-07-0",
@@ -5157,6 +3173,78 @@
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
       }
+    },
+    {
+      "id": "alsuraya-2027-06-12-1",
+      "itinerary_id": "alsuraya--north-and-brothers-hurghada-hurghada",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1311.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027"
+      },
+      "promotion": "10% Off"
+    },
+    {
+      "id": "alsuraya-2027-07-10-1",
+      "itinerary_id": "alsuraya--north-and-brothers-hurghada-hurghada",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1311.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027"
+      },
+      "promotion": "10% Off"
+    },
+    {
+      "id": "alsuraya-2027-08-14-1",
+      "itinerary_id": "alsuraya--north-and-brothers-hurghada-hurghada",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1311.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
+      },
+      "promotion": "10% Off"
+    },
+    {
+      "id": "alsuraya-2027-08-28-3",
+      "itinerary_id": "alsuraya--north-and-brothers-hurghada-hurghada",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1311.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
+      },
+      "promotion": "10% Off"
     }
   ]
 }
