@@ -158,6 +158,8 @@ thead th.stick { z-index:25; }
 
 .later { color:var(--later); font-weight:600; }
 .inc { color:var(--ok); font-weight:600; }
+/* A direction, not a site list. Reads as the weaker statement it is. */
+.region { color:var(--ink-faint); font-style:italic; }
 /* Not part of the number beside it, and must not read as though it were. */
 .plus { color:var(--later); font-weight:500; font-size:11px; }
 /* A number divided by an assumption. Dotted underline rather than a colour:

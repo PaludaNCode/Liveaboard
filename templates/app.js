@@ -31,10 +31,16 @@
   /* ---------- pricing ---------- */
 
   /* Whether a line counts at all, independent of what it costs. A line with no
-     stated price still counts — it just cannot be added up. */
+     stated price still counts — it just cannot be added up.
+
+     The toggle is asked before the tier. Nitrox and gear are filed under the
+     site's Optional Extras, so testing the tier first returned false before
+     the toggle was ever read and both switches on the page added nothing to
+     any total. Mirrors pricing._is_counted — keep the two in step. */
   function lineCounts(line) {
-    if (line.included || line.tier === "optional") return false;
+    if (line.included) return false;
     if (line.toggle) return !!state.toggles[line.toggle];
+    if (line.tier === "optional") return false;
     return !!DEFAULT_ON_TIERS[line.tier];
   }
 
@@ -91,20 +97,13 @@
 
   /* ---------- derived facets ---------- */
 
-  /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)".
-     With From and To as their own columns that is the same fact printed twice,
-     and it is the longest part of the longest column.
-
-     Stripped only when the brackets hold exactly the ports parsed out of them.
-     Some titles carry a route in brackets instead — "(Brothers - Daedalus)" —
-     and cutting that would delete the trip's actual content. The name keeps
-     its ports in the dataset regardless: two trips differing only by port are
-     different trips, and the itinerary id is built from the name. */
+  /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)" —
+     which From and To already say. Python cuts the suffix, next to the alias
+     table that decides what is a port; this used to compare the bracket text
+     against port_from here, which only worked while the two were spelled the
+     same and broke as soon as an alias folded them apart. */
   function tripName(itin) {
-    var m = itin.name.match(/^(.*?)\s*\(([^()]+?)\s+[-–]\s+([^()]+?)\)\s*$/);
-    if (!m) return itin.name;
-    if (m[2].trim() !== itin.port_from || m[3].trim() !== itin.port_to) return itin.name;
-    return m[1].trim() || itin.name;
+    return itin.title || itin.name;
   }
 
   function tally(pick) {
@@ -154,7 +153,16 @@
     { k: "from", t: "From", v: function (d, i) { return i.port_from; } },
     { k: "to", t: "To", v: function (d, i) { return i.port_to; } },
     { k: "sites", t: "Dive sites", cls: "sites",
-      v: function (d, i) { return (i.dive_sites || []).join(", ") || "—"; } },
+      v: function (d, i) {
+        return (i.dive_sites || []).join(", ") || i.region || "—";
+      },
+      show: function (d, i) {
+        if (i.dive_sites && i.dive_sites.length) return esc(i.dive_sites.join(", "));
+        /* The operator named no reef. Their own word for the region, marked as
+           the weaker statement it is. */
+        if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
+        return '<span class="dim">—</span>';
+      } },
     { k: "base", t: "Advertised", num: true,
       v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
     { k: "total", t: "True cost", num: true,

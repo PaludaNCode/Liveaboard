@@ -46,6 +46,14 @@ class FeeBasis(str, Enum):
     PER_DAY = "per_day"
     PER_DIVE = "per_dive"
     PER_PERSON_PER_DAY = "per_person_per_day"
+    PER_WEEK = "per_week"
+    """Hire priced by the week, which is how the gear dialog quotes everything.
+
+    Trips run from three nights to fourteen, so this needs a rule and the page
+    states none. It rounds up: a diver keeps the kit for the whole trip, so
+    nine nights is two weeks' hire, and rounding down would undercharge the
+    one number this site exists to get right.
+    """
 
 
 class FeeCode(str, Enum):

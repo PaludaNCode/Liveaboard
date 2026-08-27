@@ -14,7 +14,7 @@ from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
 from liveaboard.dataset import Dataset
 from liveaboard.pricing import compute, mandatory_known, resolve_fees
-from liveaboard.render import build_payload
+from liveaboard.render import TEMPLATE_DIR, build_payload
 from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
 
 FX = FxTable.from_dict(
@@ -100,6 +100,36 @@ class TestTotals(unittest.TestCase):
         )
         result = compute(itinerary, make_departure(), FX, {"nitrox": True, "gear": True})
         self.assertEqual(result.total.amount, Decimal("1000"))
+
+    def test_an_optional_fee_with_a_toggle_follows_the_toggle(self):
+        """The switch on the page has to change the number beside it.
+
+        liveaboard.com files rental gear under *Optional* Extras, and the
+        counting rule tested the tier before the toggle -- so the optional
+        branch returned first and turning "Rental gear" on added nothing to
+        any total. A switch that changes no number answers the visitor's
+        question with a figure that ignored them.
+        """
+        itinerary = make_itinerary([fee(FeeCode.GEAR_RENTAL, FeeTier.OPTIONAL, "200 EUR")])
+        off = compute(itinerary, make_departure(), FX, {"gear": False})
+        on = compute(itinerary, make_departure(), FX, {"gear": True})
+        self.assertEqual(off.total.amount, Decimal("1000"))
+        self.assertEqual(on.total.amount, Decimal("1200"))
+
+    def test_the_page_counts_lines_the_same_way_python_does(self):
+        """DEFAULT_ON_TIERS is not the only rule the JS mirrors.
+
+        The order of the toggle and tier checks is load-bearing too, and the
+        two copies drifted apart once already.
+        """
+        js = (TEMPLATE_DIR / "app.js").read_text(encoding="utf-8")
+        body = js[js.index("function lineCounts"):]
+        body = body[: body.index("}")]
+        self.assertLess(
+            body.index("line.toggle"),
+            body.index('line.tier === "optional"'),
+            "app.js must ask the toggle before the tier, as pricing._is_counted does",
+        )
 
     def test_conditional_fee_follows_its_toggle(self):
         itinerary = make_itinerary([fee(FeeCode.NITROX, FeeTier.CONDITIONAL, "120 EUR")])

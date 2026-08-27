@@ -20,6 +20,7 @@ from datetime import date
 from typing import Any
 
 from .classify import normalise
+from .taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
 
 UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
@@ -96,8 +97,39 @@ def _port(name: str | None) -> str:
     return PORT_ALIASES.get(cleaned.lower(), cleaned)
 
 
+TIDY = (
+    # Tabs and runs of spaces. Four titles carry a tab, which renders as a
+    # ragged gap mid-name and breaks the column's alignment.
+    (re.compile(r"\s+"), " "),
+    # A space wedged before the closing bracket: "(Safaga - Safaga )".
+    (re.compile(r"\s+\)"), ")"),
+    (re.compile(r"\(\s+"), "("),
+    # One dash. Three titles use an en dash where 314 use a hyphen, so the
+    # same route reads as two different names down the column.
+    (re.compile(r"\s*[–—]\s*"), " - "),
+    # Spacing around the separators operators are inconsistent about.
+    (re.compile(r"\s*&\s*"), " & "),
+    (re.compile(r"\s*,\s*"), ", "),
+    (re.compile(r"\s*:\s*"), ": "),
+)
+"""Whitespace and punctuation fixes, applied before anything reads the title.
+
+Purely presentational: none of these change a word. They exist because the
+titles arrive from dozens of operators typing freely, and a column of trip
+names only reads as a column when the separators are the same shape.
+"""
+
+
+def _tidy(name: str) -> str:
+    """Even out an operator's spacing without touching their wording."""
+    for pattern, replacement in TIDY:
+        name = pattern.sub(replacement, name)
+    return name.strip(" -,:")
+
+
 def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     """Split a scraped trip title into route, promotion and ports."""
+    name = _tidy(name)
     promotion = None
     match = PROMOTION.match(name)
     if match:
@@ -120,6 +152,30 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
         if not _sites_from_name(_without_ports(f"{first} {second}")):
             ports = (first, second)
     return name.strip(), promotion, ports
+
+
+def _display_title(name: str) -> str:
+    """The trip name with its port pair removed, for the column that shows it.
+
+    Titles end with the ports -- "North & Tiran (Hurghada - Hurghada)" -- and
+    From and To are columns of their own, so printing the brackets is the same
+    fact twice in the widest column on the page.
+
+    Cut here rather than in the browser. The page used to strip the suffix by
+    checking the bracket text against ``port_from``, which held while the two
+    were the same string and would have broken the moment ``PORT_ALIASES``
+    started folding "Ras Galep | Port Ghalib" down to "Port Ghalib": the
+    comparison fails, and seven titles quietly get their ports back. Deciding
+    it beside the alias table, where the raw pair is still in hand, is the
+    difference between a rule and a coincidence.
+
+    Only a real port pair goes. "(Brothers - Daedalus)" is a route, and cutting
+    it would delete what the trip actually is.
+    """
+    stripped, _, ports = _split_title(name)
+    if ports is None:
+        return stripped
+    return PORTS.sub("", stripped).strip(" -,:") or stripped
 
 
 GUESTS = (
@@ -278,10 +334,17 @@ def promote(
     # every itinerary that vessel sells, which is what the operator does too:
     # the extras do not change with the month.
     fee_book: dict[str, list[dict[str, Any]]] = {}
+    # The same run reads the vessel's specification table and diving amenities,
+    # which are structured and were previously being worked around: the guest
+    # count was mined out of marketing prose and missed half the fleet, and
+    # nitrox inclusion was not read at all.
+    spec_book: dict[str, dict[str, Any]] = {}
     if fees:
         for slug, entry in (fees.get("vessels") or {}).items():
             if entry.get("fees"):
                 fee_book[slug] = entry["fees"]
+            if entry.get("specs"):
+                spec_book[slug] = entry["specs"]
 
     # Figures read off a vessel page by hand, for the boats whose extras block
     # names a charge without a number. They win per fee code: a page that says
@@ -297,6 +360,34 @@ def promote(
         merged = {f["code"]: f for f in fee_book.get(slug, [])}
         merged.update({f["code"]: f for f in entry["fees"]})
         fee_book[slug] = list(merged.values())
+
+    # "Free Nitrox" in the vessel's diving amenities is the operator saying it
+    # does not charge for fills. Note what it does *not* do: overwrite a stated
+    # nitrox price. Where a vessel both ticks the box and quotes a figure, the
+    # figure wins -- turning a stated cost into "free" is the one direction of
+    # error this site must never make, and a marketing tick is weaker evidence
+    # than a number the operator typed.
+    for slug, spec in spec_book.items():
+        if not spec.get("nitrox_free"):
+            continue
+        existing = {f["code"]: f for f in fee_book.get(slug, [])}
+        nitrox = existing.get(FeeCode.NITROX.value)
+        if nitrox is not None and nitrox.get("amount") is not None:
+            continue
+        existing[FeeCode.NITROX.value] = {
+            "code": FeeCode.NITROX.value,
+            "tier": FeeTier.CONDITIONAL.value,
+            "included": True,
+            "amount": None,
+            "basis": FeeBasis.PER_TRIP.value,
+            "note": "Vessel lists nitrox as free",
+            "provenance": {
+                "kind": SourceKind.SCRAPED.value,
+                "source_id": "liveaboard.com",
+                "retrieved": (fees or {}).get("scraped_at") or date.today().isoformat(),
+            },
+        }
+        fee_book[slug] = list(existing.values())
 
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     skipped: list[str] = []
@@ -332,8 +423,15 @@ def promote(
                 "id": slug,
                 "name": boat_name,
                 "operator_id": UNKNOWN_OPERATOR["id"],
-                "guests": (hand.get(slug, {}).get("guests")
+                # The specification table first: it is the operator stating a
+                # number in a field labelled "Max guests", which beats both a
+                # hand-typed figure and a regex over the marketing copy. The
+                # prose match stays as the fallback for vessels whose table is
+                # missing the row.
+                "guests": (spec_book.get(slug, {}).get("guests")
+                           or hand.get(slug, {}).get("guests")
                            or _guests(source.get("summary"))),
+                "cabins": spec_book.get(slug, {}).get("cabins"),
             },
         )
 
@@ -352,6 +450,10 @@ def promote(
             {
                 "id": itinerary_id,
                 "name": name,
+                # The name minus its port suffix. The full name stays: two
+                # trips differing only by port are different trips, and the
+                # itinerary id is built from it.
+                "title": _display_title(name),
                 "operator_id": UNKNOWN_OPERATOR["id"],
                 "boat_id": slug,
                 "nights": nights,
@@ -365,6 +467,10 @@ def promote(
                 # sites, which this source does not publish; the classifier
                 # falls back to the trip name, which usually carries them.
                 "dive_sites": _sites_from_name(name),
+                # Only when the title names no reef at all, so the column says
+                # something true rather than sitting empty on 51 trips.
+                "region": (None if _sites_from_name(name)
+                           else _region_from_name(name)),
                 "summary": source.get("summary"),
                 "source_url": source.get("source_url"),
                 # Empty when the fee run has not covered this vessel. The
@@ -504,6 +610,34 @@ Keys are matched after :func:`~liveaboard.classify.normalise`, so accents and
 apostrophes are already folded; only genuine misspellings and short forms
 belong here.
 """
+
+
+REGIONS = (
+    (re.compile(r"\bdeep south\b|\bsouthern\b|\bsouth\b", re.I), "southern route"),
+    (re.compile(r"\bsinai\b|\btiran\b", re.I), "Sinai and Tiran"),
+    (re.compile(r"\bnorthern\b|\bnorth\b", re.I), "northern route"),
+    (re.compile(r"\bwreck\w*\b", re.I), "wreck route"),
+)
+"""What a title says about where it goes when it names no reef.
+
+Fifty-one trips are sold as "North", "Deep South" or "Get Wrecked" and never
+name a site. This transcribes the operator's own word rather than classifying
+anything -- a title saying "North" is evidence it goes north, and nothing more
+is claimed.
+
+The vessel description was the tempting alternative and is unusable: it is the
+boat's brochure, listing everywhere it sails all year. Aphrodite's names
+St John's, so its "North Wrecks" week would have been tagged with a site
+six hundred kilometres from where it goes.
+"""
+
+
+def _region_from_name(name: str) -> str | None:
+    """Transcribe the region a site-less title states, or admit it states none."""
+    for pattern, label in REGIONS:
+        if pattern.search(name):
+            return label
+    return None
 
 
 def _sites_from_name(name: str) -> list[str]:

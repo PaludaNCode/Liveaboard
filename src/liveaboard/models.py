@@ -127,6 +127,14 @@ class FeeItem:
             return money * (nights + 1)
         if self.basis is FeeBasis.PER_DIVE:
             return money * dives
+        if self.basis is FeeBasis.PER_WEEK:
+            # Counted in nights, not in days aboard. A seven-night Red Sea
+            # liveaboard *is* the week the operator prices -- it spans eight
+            # calendar days, and rounding those up billed the fleet's single
+            # most common trip length as a fortnight's hire, doubling it.
+            # Part weeks beyond that still round up: the kit is kept for the
+            # whole trip and the page says nothing about pro-rata.
+            return money * max(1, -(-nights // 7))
         raise ValueError(f"unhandled fee basis {self.basis}")
 
     def span_for_trip(self, nights: int, dives: int) -> tuple[Money | None, Money | None]:
@@ -253,6 +261,21 @@ class Itinerary:
     fees: list[FeeItem] = field(default_factory=list)
     source_url: str | None = None
     summary: str | None = None
+    title: str | None = None
+    """The name as the page prints it: the same words, minus the port pair.
+
+    ``name`` stays whole because it is the trip's identity -- the itinerary id
+    is built from it, and two sailings differing only by port are two trips.
+    This is the presentation of it, resolved in Python beside the port aliases
+    that decide what counts as a port at all.
+    """
+    region: str | None = None
+    """What a title says about where it goes when it names no dive site.
+
+    Transcribed from the operator's own word, never inferred: "North" means the
+    title said north. Absent whenever real sites were found, because a list of
+    reefs is strictly better than a direction.
+    """
     dives_estimated: bool = False
     """Whether ``dives`` was counted from the listing or worked out from nights.
 
@@ -281,6 +304,8 @@ class Itinerary:
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             source_url=payload.get("source_url"),
             summary=payload.get("summary"),
+            title=payload.get("title"),
+            region=payload.get("region"),
             dives_estimated=bool(payload.get("dives_estimated", False)),
         )
 

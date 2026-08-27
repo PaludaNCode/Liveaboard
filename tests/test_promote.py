@@ -577,5 +577,218 @@ class TestAvailability(unittest.TestCase):
         self.assertTrue(rendered["bookable"])
 
 
+class TestTitleTidying(unittest.TestCase):
+    """A column of trip names reads as a column only if the separators match."""
+
+    def tidy(self, name):
+        from liveaboard.promote import _tidy
+
+        return _tidy(name)
+
+    def test_a_tab_mid_title_becomes_a_space(self):
+        self.assertEqual(
+            self.tidy("Get Wrecked (Hurghada\t- Hurghada)"),
+            "Get Wrecked (Hurghada - Hurghada)",
+        )
+
+    def test_a_space_before_the_bracket_goes(self):
+        self.assertEqual(
+            self.tidy("Golden Triangle (Safaga - Safaga )"),
+            "Golden Triangle (Safaga - Safaga)",
+        )
+
+    def test_one_dash_not_three(self):
+        self.assertEqual(self.tidy("Big fish – Hammerheads"), "Big fish - Hammerheads")
+
+    def test_wording_is_never_touched(self):
+        """Presentation only. Changing an operator's words is not formatting."""
+        for name in ("Simply The Best", "Elba Reef Expedition!", "Tec only Safari Trip"):
+            self.assertEqual(self.tidy(name), name)
+
+
+class TestRegionWhenNoSiteIsNamed(unittest.TestCase):
+    """Fifty-one trips name a direction and no reef."""
+
+    def region(self, name):
+        from liveaboard.promote import _region_from_name
+
+        return _region_from_name(name)
+
+    def test_it_transcribes_the_operators_own_word(self):
+        self.assertEqual(self.region("North (Hurghada - Hurghada)"), "northern route")
+        self.assertEqual(self.region("Deep South (Hamata - Hamata)"), "southern route")
+        self.assertEqual(self.region("Get Wrecked"), "wreck route")
+
+    def test_a_title_naming_nothing_gets_nothing(self):
+        self.assertIsNone(self.region("Yachtiano Deluxe"))
+        self.assertIsNone(self.region("Famous Five"))
+
+    def test_it_is_absent_whenever_real_sites_were_found(self):
+        """A list of reefs beats a direction, so the direction is not carried."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        itinerary = payload["itineraries"][0]
+        self.assertTrue(itinerary["dive_sites"])
+        self.assertIsNone(itinerary["region"])
+
+    def test_the_vessel_summary_is_never_used_for_sites(self):
+        """It is the boat's brochure: Aphrodite's names St John's, so its
+        northern week would have been tagged with a southern site."""
+        payload = promote(
+            candidate(
+                [departure(name="North Wrecks (Hurghada - Hurghada)")],
+                itineraries=[{
+                    "id": "alia-soul", "boat": "Alia Soul",
+                    "summary": "Sails to Brothers, Daedalus and St John's.",
+                }],
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(payload["itineraries"][0]["dive_sites"], [])
+        self.assertEqual(payload["itineraries"][0]["region"], "northern route")
+
+
+class TestDisplayTitle(unittest.TestCase):
+    """The name column should not reprint what From and To already say."""
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_the_port_pair_goes(self):
+        self.assertEqual(
+            self.title("Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)"),
+            "Brothers - Daedalus - Elphinstone",
+        )
+
+    def test_it_survives_a_port_being_aliased(self):
+        """The regression this field exists to prevent.
+
+        The browser used to cut the suffix by matching the bracket text against
+        ``port_from``. Fold "Ras Galep | Port Ghalib" down to "Port Ghalib" and
+        that comparison fails, so the ports come back on exactly the titles the
+        alias table was added to tidy.
+        """
+        for name in (
+            "Golden Triangle (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
+            "Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
+        ):
+            self.assertEqual(self.title(name), "Golden Triangle")
+        self.assertEqual(
+            self.title("Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)"),
+            "Tiran & North Ras Mohamed",
+        )
+
+    def test_a_route_in_brackets_stays(self):
+        """Cutting it would delete what the trip actually is."""
+        self.assertEqual(
+            self.title("Sataya (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)"),
+            "Sataya (Fury Shoals) - St. John's",
+        )
+
+    def test_it_tidies_and_drops_the_discount_too(self):
+        self.assertEqual(
+            self.title("20% Off: Get Wrecked (Hurghada\t- Hurghada)"), "Get Wrecked"
+        )
+
+    def test_a_title_that_is_only_ports_keeps_them(self):
+        """Better a redundant name than an empty cell."""
+        self.assertEqual(self.title("(Hurghada - Hurghada)"), "(Hurghada - Hurghada)")
+
+    def test_it_reaches_the_itinerary(self):
+        payload = promote(
+            candidate([departure(name="Brothers & Daedalus (Hurghada - Hurghada)")]),
+            season=SEASON,
+        )
+        itinerary = payload["itineraries"][0]
+        self.assertEqual(itinerary["title"], "Brothers & Daedalus")
+        # The full name is the trip's identity and stays whole.
+        self.assertIn("Hurghada", itinerary["name"])
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
+def fee_book(slug="alia-soul", *, specs=None, fees=None) -> dict:
+    """A fee-scrape result, in the shape ``promote`` reads it."""
+    entry = {"source_url": "https://example.invalid", "fees": fees or []}
+    if specs is not None:
+        entry["specs"] = specs
+    return {"scraped_at": "2026-08-27", "source": "liveaboard.com",
+            "vessels": {slug: entry}}
+
+
+class TestTheSpecificationTable(unittest.TestCase):
+    """The guest count the marketing prose does not carry."""
+
+    def test_the_table_beats_the_prose(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                              "summary": "A fine boat for 12 guests."}],
+            ),
+            season=SEASON,
+            fees=fee_book(specs={"guests": 20, "cabins": 9}),
+        )
+        boat = payload["boats"][0]
+        self.assertEqual(boat["guests"], 20)
+        self.assertEqual(boat["cabins"], 9)
+
+    def test_the_prose_still_answers_when_the_table_does_not(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                              "summary": "A fine boat for 12 guests."}],
+            ),
+            season=SEASON,
+            fees=fee_book(specs={"guests": None}),
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 12)
+
+
+class TestFreeNitrox(unittest.TestCase):
+    """"Free Nitrox" is a real statement, and a weaker one than a price."""
+
+    def nitrox(self, payload):
+        fees = {f["code"]: f for f in payload["itineraries"][0]["fees"]}
+        return fees.get("nitrox")
+
+    def test_a_ticked_box_marks_nitrox_included(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": True}),
+        )
+        nitrox = self.nitrox(payload)
+        self.assertIsNotNone(nitrox)
+        self.assertTrue(nitrox["included"])
+        self.assertIsNone(nitrox["amount"])
+
+    def test_it_never_overwrites_a_stated_price(self):
+        """The one direction of error this site must not make.
+
+        A vessel that both ticks "Free Nitrox" and quotes a figure has
+        contradicted itself; the figure is the operator typing a number and
+        the tick is a checkbox, so turning the cost into "free" would
+        understate the bill on the strength of the weaker claim.
+        """
+        priced = {
+            "code": "nitrox", "tier": "conditional", "included": False,
+            "basis": "per_trip", "amount": {"amount": 30.0, "currency": "EUR"},
+        }
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": True}, fees=[priced]),
+        )
+        nitrox = self.nitrox(payload)
+        self.assertFalse(nitrox["included"])
+        self.assertEqual(nitrox["amount"]["amount"], 30.0)
+
+    def test_availability_alone_claims_nothing(self):
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            fees=fee_book(specs={"nitrox_free": False, "nitrox_available": True}),
+        )
+        self.assertIsNone(self.nitrox(payload))

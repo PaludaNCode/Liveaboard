@@ -35,6 +35,8 @@ from liveaboard.scrape.fees import (  # noqa: E402
     parse_extras,
     to_fee_dicts,
 )
+from liveaboard.scrape.gear import parse_gear, to_fee_dict as gear_fee_dict  # noqa: E402
+from liveaboard.scrape.vessel import read_vessel  # noqa: E402
 from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     HOST,
     SEASON_QUERY,
@@ -106,6 +108,54 @@ def read_extras(page: Any, url: str) -> tuple[str, bool]:
     return text, clicked > 0
 
 
+SPECS_ID = "#help-content-boat-amenities-specifications"
+DIVING_ID = "#help-content-boat-amenities-diving"
+
+
+def read_markup(page: Any, selector: str) -> str:
+    """One hidden panel's markup, or empty when the vessel has no such panel.
+
+    Every one of these is in the document at load time, so reading them costs
+    no request beyond the page already fetched for the fee disclosure.
+    """
+    node = page.query_selector(selector)
+    if node is None:
+        return ""
+    try:
+        return node.inner_html() or ""
+    except Exception:  # noqa: BLE001 - a detached node is not a failure
+        return ""
+
+
+def read_gear(page: Any) -> str:
+    """The gear dialog's markup, or empty when the vessel has none.
+
+    Read from the same page load rather than a second visit: the dialog is in
+    the document already, hidden, so this costs no request. A vessel that does
+    not rent gear simply has no such node, which is not a failure.
+    """
+    node = page.query_selector("#modal-gear")
+    if node is None:
+        return ""
+    try:
+        return node.inner_html() or ""
+    except Exception:  # noqa: BLE001 - a detached node is not a failure
+        return ""
+
+
+def previous(path: Path) -> dict[str, Any]:
+    """The fee book already on disk, or nothing on a first run."""
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("vessels", {})
+    except (OSError, ValueError) as exc:
+        # Better to rebuild from scratch than to stop, but say so: a silently
+        # emptied fee book is exactly the failure this file guards against.
+        print(f"could not read {path} ({exc}); starting a fresh fee book", file=sys.stderr)
+        return {}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", default=Path("data/fees.json"), type=Path)
@@ -125,7 +175,13 @@ def main() -> int:
     if executable:
         launch["executable_path"] = executable
 
-    collected: dict[str, Any] = {}
+    # Start from what is already on disk. A --limit run visits the first N
+    # vessels and knows nothing about the rest, so writing only what it saw
+    # would delete the other seventy-odd fee disclosures -- a partial view
+    # overwriting a complete one. Merging makes a capped run an incremental
+    # update, which is the only thing it can honestly be.
+    collected: dict[str, Any] = dict(previous(args.out))
+    known = len(collected)
     missing: list[str] = []
 
     with sync_playwright() as p:
@@ -146,32 +202,82 @@ def main() -> int:
                 continue
 
             fees = parse_extras(text)
-            if not fees:
+            provenance = {
+                "kind": "scraped",
+                "source_id": "liveaboard.com",
+                "retrieved": date.today().isoformat(),
+                "url": url,
+            }
+
+            # The extras list names "Rental Gear" and leaves it blank; the
+            # figures are in the dialog behind it. Read before the no-fees
+            # check so a vessel that publishes gear prices and nothing else
+            # is not filed as having disclosed nothing.
+            gear = parse_gear(read_gear(page))
+            gear_fee = gear_fee_dict(gear, provenance)
+
+            # The specification table carries the guest count that the prose
+            # match misses on half the fleet, and the diving amenities state
+            # "Free Nitrox" outright -- which is the answer a hand-written
+            # file has been standing in for on ten vessels.
+            facts = read_vessel(
+                read_markup(page, SPECS_ID), read_markup(page, DIVING_ID)
+            )
+
+            if not fees and gear_fee is None and not facts:
                 print(f"  [{index}/{len(slugs)}] {slug}: no extras found", flush=True)
                 missing.append(slug)
             else:
                 required = sum(1 for f in fees if f.tier.value == "mandatory")
                 ranges = sum(1 for f in fees if f.is_range)
                 unpriced = sum(1 for f in fees if not f.has_price)
+
+                # The dialog's gear line replaces the extras list's blank one:
+                # same code, and one of them carries a figure.
+                priced = to_fee_dicts(fees, provenance)
+                if gear_fee is not None:
+                    priced = [f for f in priced if f["code"] != gear_fee["code"]]
+                    priced.append(gear_fee)
+
                 collected[slug] = {
                     "source_url": url,
+                    # Per vessel, because the book is now merged across runs
+                    # and a single top-level date would claim every entry was
+                    # collected on the day of the last capped run.
+                    "collected": date.today().isoformat(),
                     # What the parse was made from. Without it a parser fix
                     # cannot be checked without driving a browser at the live
                     # site all over again.
                     "disclosure": extras_excerpt(text),
-                    "fees": to_fee_dicts(
-                        fees,
-                        {
-                            "kind": "scraped",
-                            "source_id": "liveaboard.com",
-                            "retrieved": date.today().isoformat(),
-                            "url": url,
-                        },
-                    ),
+                    "gear": [i.as_text() for i in gear.items] or None,
+                    "specs": {
+                        "guests": facts.guests,
+                        "cabins": facts.cabins,
+                        "length_m": facts.length_m,
+                        "year_built": facts.year_built,
+                        # Stated, not inferred. "Free Nitrox" and "Nitrox
+                        # available" are different claims and both are kept.
+                        "nitrox_free": facts.nitrox_free,
+                        "nitrox_available": facts.nitrox_available,
+                    } if facts else None,
+                    "fees": priced,
                 }
+                gear_note = (
+                    f", gear {gear.bundle.as_text()}" if gear.bundle
+                    else f", {len(gear.items)} gear items unbundled" if gear.items
+                    else ""
+                )
+                spec_note = "".join(
+                    part for part in (
+                        f", {facts.guests} guests" if facts.guests else "",
+                        ", free nitrox" if facts.nitrox_free else "",
+                    ) if part
+                )
                 print(
                     f"  [{index}/{len(slugs)}] {slug}: {len(fees)} extras "
                     f"({required} required, {ranges} ranged, {unpriced} unpriced)"
+                    + gear_note
+                    + spec_note
                     + (" [expanded]" if expanded else ""),
                     flush=True,
                 )
@@ -182,6 +288,12 @@ def main() -> int:
     if not collected:
         print("no fees collected from any vessel", file=sys.stderr)
         return 1
+
+    # A run that visited vessels and learned nothing from any of them has not
+    # produced a fee book; it has kept the old one. Say so rather than letting
+    # a silent no-op read as a successful refresh.
+    if len(collected) == known and not missing:
+        print("no vessel yielded fees this run; previous book kept", file=sys.stderr)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
@@ -198,7 +310,10 @@ def main() -> int:
         + "\n",
         encoding="utf-8",
     )
-    print(f"\nwrote {args.out}: {len(collected)} vessels with fees, {len(missing)} without")
+    print(
+        f"\nwrote {args.out}: {len(collected)} vessels with fees "
+        f"({len(collected) - known} new this run), {len(missing)} without"
+    )
     return 0
 
 
