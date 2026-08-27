@@ -26,6 +26,11 @@
       "operator_id": "unknown-operator"
     },
     {
+      "id": "avo",
+      "name": "AVO",
+      "operator_id": "unknown-operator"
+    },
+    {
       "id": "alia-soul",
       "name": "Alia Soul",
       "operator_id": "unknown-operator"
@@ -38,6 +43,26 @@
     {
       "id": "all-star-red-sea",
       "name": "All Star Scuba Scene",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "amelie",
+      "name": "Amelie",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "amelie-adventures",
+      "name": "Amelie Adventures",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "aphrodite",
+      "name": "Aphrodite",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "bismarck",
+      "name": "Bismarck",
       "operator_id": "unknown-operator"
     }
   ],
@@ -93,7 +118,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -106,8 +145,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -138,6 +176,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -192,7 +265,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -205,8 +292,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -237,6 +323,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -292,7 +413,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -305,8 +440,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -337,6 +471,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -387,7 +556,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -400,8 +583,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -432,6 +614,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -484,6 +701,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -500,7 +731,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -513,8 +744,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -543,6 +773,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -593,6 +854,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -609,7 +884,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -622,8 +897,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -652,6 +926,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -702,6 +1007,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -718,7 +1037,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -731,8 +1050,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -761,6 +1079,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -809,6 +1158,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -825,7 +1188,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -838,8 +1201,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -868,6 +1230,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -920,6 +1313,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -936,7 +1350,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -949,8 +1363,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -965,6 +1378,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1017,6 +1451,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1033,7 +1488,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1046,8 +1501,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1062,6 +1516,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1113,6 +1588,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1129,7 +1625,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1142,8 +1638,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1158,6 +1653,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1209,6 +1725,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1225,7 +1762,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1238,8 +1775,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1254,6 +1790,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1304,6 +1861,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1320,7 +1898,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1333,8 +1911,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1349,6 +1926,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1399,6 +1997,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1415,7 +2034,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1428,8 +2047,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1444,6 +2062,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1492,6 +2131,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1508,7 +2168,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1521,8 +2181,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1537,6 +2196,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1585,6 +2265,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1601,7 +2302,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1614,8 +2315,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1630,6 +2330,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1689,7 +2410,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1702,8 +2437,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1734,6 +2468,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -1793,7 +2564,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1806,8 +2591,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1838,6 +2622,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -1897,7 +2718,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1910,8 +2745,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1942,6 +2776,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2002,7 +2873,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2015,8 +2900,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2047,6 +2931,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2106,7 +3027,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2119,8 +3054,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2151,6 +3085,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2208,7 +3179,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2221,8 +3206,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2253,6 +3237,2339 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    {
+      "id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "name": "Mini Safari: Best of Hurghada (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "amelie",
+      "nights": 3,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "With only 12 guests onboard the Amelie Safari offers a more bespoke Red Sea liveaboard experience.Choose from 3 or 7-night dive itineraries.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027",
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 10.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 25.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 132.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 55.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 210.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 370.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Naturalist Guide"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+          },
+          "amount": {
+            "amount": 6.0,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    {
+      "id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "name": "Mini Safari: Best of Hurghada (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "amelie-adventures",
+      "nights": 3,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "The Amelie Adventures is a 27-meter/88.6-foot-long liveaboard taking 16 guests on diving adventures in the Red Sea. Snorkeler friendly and available for charters.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 15.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 132.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 55.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": null,
+          "note": "Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+          },
+          "amount": {
+            "amount": 6.0,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--best-of-red-sea-2-weeks-hurghada-hurghada",
+      "name": "Best of Red Sea 2 Weeks (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 14,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--brothers-daedalus-elphinstone-port-ghalib-hurghada",
+      "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--brothers-safaga-reefs-port-ghalib-hurghada",
+      "name": "Brothers, Safaga Reefs (Port Ghalib - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "brothers"
+      ],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--deep-south-st-john-port-ghalib-port-ghalib",
+      "name": "Deep South, St. John  (Port Ghalib\t- Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "st johns"
+      ],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--north-straits-of-tiran-hurghada-hurghada",
+      "name": "North - Straits of Tiran (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "tiran"
+      ],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--north-classic-hurghada-hurghada",
+      "name": "North Classic (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--north-dolphins-hurghada-hurghada",
+      "name": "North Dolphins (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "aphrodite--north-wrecks-hurghada-hurghada",
+      "name": "North Wrecks (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "aphrodite",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [],
+      "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "avo--daedalus-elphinstone-port-ghalib-port-ghalib",
+      "name": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "avo",
+      "nights": 5,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=8/2027",
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 450.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 550.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 230.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 360.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkeling Guide: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "bismarck--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",
+      "name": "Sataya (Fury Shoals) - St. John's (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "bismarck",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "st johns",
+        "sataya"
+      ],
+      "summary": "Experience luxury and adventure aboard the Bismarck, a 46-meter Red Sea liveaboard offering 17 cabins and thrilling dives in sites like Brothers, Daedalus, and Ras Muhammad.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=8/2027",
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 120.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 130.0,
+            "currency": "EUR"
+          },
+          "note": "Park and Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Extra Dives: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Scuba Diving Courses: listed with no price"
         }
       ]
     }
@@ -3245,6 +6562,1367 @@
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027"
       },
       "promotion": "10% Off"
+    },
+    {
+      "id": "amelie-2027-05-01-0",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-01",
+      "end": "2027-05-04",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-05-1",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-05",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-09-2",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-09",
+      "end": "2027-05-12",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-13-3",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-13",
+      "end": "2027-05-16",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-17-4",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-17",
+      "end": "2027-05-20",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-21-5",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-21",
+      "end": "2027-05-24",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-25-6",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-25",
+      "end": "2027-05-28",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-05-29-7",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-29",
+      "end": "2027-06-01",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-03-0",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-03",
+      "end": "2027-06-06",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-07-1",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-07",
+      "end": "2027-06-10",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-11-2",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-11",
+      "end": "2027-06-14",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-15-3",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-15",
+      "end": "2027-06-18",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-19-4",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-19",
+      "end": "2027-06-22",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-23-5",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-23",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-06-27-6",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-27",
+      "end": "2027-06-30",
+      "price": {
+        "amount": 508.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-01-0",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-01",
+      "end": "2027-07-04",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-05-1",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-05",
+      "end": "2027-07-08",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-09-2",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-09",
+      "end": "2027-07-12",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-13-3",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-13",
+      "end": "2027-07-16",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-17-4",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-17",
+      "end": "2027-07-20",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-21-5",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-21",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-25-6",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-25",
+      "end": "2027-07-28",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-07-29-7",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-29",
+      "end": "2027-08-01",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-02-0",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-02",
+      "end": "2027-08-05",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-06-1",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-06",
+      "end": "2027-08-09",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-10-2",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-10",
+      "end": "2027-08-13",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-14-3",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-14",
+      "end": "2027-08-17",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-18-4",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-18",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-22-5",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-22",
+      "end": "2027-08-25",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-26-6",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-26",
+      "end": "2027-08-29",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-2027-08-30-7",
+      "itinerary_id": "amelie--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-30",
+      "end": "2027-09-02",
+      "price": {
+        "amount": 507.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-01-0",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-01",
+      "end": "2027-05-04",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-05-1",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-05",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-09-2",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-09",
+      "end": "2027-05-12",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-13-3",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-13",
+      "end": "2027-05-16",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-17-4",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-17",
+      "end": "2027-05-20",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-21-5",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-21",
+      "end": "2027-05-24",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-25-6",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-25",
+      "end": "2027-05-28",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-05-29-7",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-05-29",
+      "end": "2027-06-01",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-06-11-0",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-11",
+      "end": "2027-06-14",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-06-15-1",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-15",
+      "end": "2027-06-18",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-06-19-2",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-19",
+      "end": "2027-06-22",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-06-23-3",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-23",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-06-27-4",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-06-27",
+      "end": "2027-06-30",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-01-0",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-01",
+      "end": "2027-07-04",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-05-1",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-05",
+      "end": "2027-07-08",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-09-2",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-09",
+      "end": "2027-07-12",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-13-3",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-13",
+      "end": "2027-07-16",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-17-4",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-17",
+      "end": "2027-07-20",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-21-5",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-21",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-25-6",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-25",
+      "end": "2027-07-28",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-07-29-7",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-07-29",
+      "end": "2027-08-01",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-02-0",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-02",
+      "end": "2027-08-05",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-06-1",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-06",
+      "end": "2027-08-09",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-10-2",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-10",
+      "end": "2027-08-13",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-14-3",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-14",
+      "end": "2027-08-17",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-18-4",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-18",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-22-5",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-22",
+      "end": "2027-08-25",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-26-6",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-26",
+      "end": "2027-08-29",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "amelie-adventures-2027-08-30-7",
+      "itinerary_id": "amelie-adventures--mini-safari-best-of-hurghada-hurghada-hurghada",
+      "start": "2027-08-30",
+      "end": "2027-09-02",
+      "price": {
+        "amount": 565.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-07-10-1",
+      "itinerary_id": "aphrodite--best-of-red-sea-2-weeks-hurghada-hurghada",
+      "start": "2027-07-10",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 2182.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-05-15-2",
+      "itinerary_id": "aphrodite--brothers-daedalus-elphinstone-hurghada-port-ghalib",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 2389.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-05-29-4",
+      "itinerary_id": "aphrodite--brothers-daedalus-elphinstone-port-ghalib-hurghada",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 2436.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-06-05-0",
+      "itinerary_id": "aphrodite--brothers-daedalus-elphinstone-port-ghalib-hurghada",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 2182.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=6/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-07-31-4",
+      "itinerary_id": "aphrodite--brothers-safaga-reefs-port-ghalib-hurghada",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 2273.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-05-22-3",
+      "itinerary_id": "aphrodite--deep-south-st-john-port-ghalib-port-ghalib",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 2308.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-06-12-1",
+      "itinerary_id": "aphrodite--north-straits-of-tiran-hurghada-hurghada",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 2266.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=6/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-06-26-3",
+      "itinerary_id": "aphrodite--north-straits-of-tiran-hurghada-hurghada",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 2266.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=6/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-07-03-0",
+      "itinerary_id": "aphrodite--north-straits-of-tiran-hurghada-hurghada",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 2266.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-05-01-0",
+      "itinerary_id": "aphrodite--north-classic-hurghada-hurghada",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 2238.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-06-19-2",
+      "itinerary_id": "aphrodite--north-classic-hurghada-hurghada",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 2266.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=6/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-07-17-2",
+      "itinerary_id": "aphrodite--north-classic-hurghada-hurghada",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 2182.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-08-14-1",
+      "itinerary_id": "aphrodite--north-classic-hurghada-hurghada",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 2331.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-08-28-3",
+      "itinerary_id": "aphrodite--north-classic-hurghada-hurghada",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 2238.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-07-24-3",
+      "itinerary_id": "aphrodite--north-dolphins-hurghada-hurghada",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 2389.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-08-07-0",
+      "itinerary_id": "aphrodite--north-dolphins-hurghada-hurghada",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 2266.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-05-08-1",
+      "itinerary_id": "aphrodite--north-wrecks-hurghada-hurghada",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 2308.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+      }
+    },
+    {
+      "id": "aphrodite-2027-08-21-2",
+      "itinerary_id": "aphrodite--north-wrecks-hurghada-hurghada",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 2389.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027"
+      }
+    },
+    {
+      "id": "avo-2027-07-24-0",
+      "itinerary_id": "avo--daedalus-elphinstone-port-ghalib-port-ghalib",
+      "start": "2027-07-24",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 940.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/avo?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/avo?m=7/2027"
+      },
+      "promotion": "5% Off"
+    },
+    {
+      "id": "bismarck-2027-07-31-0",
+      "itinerary_id": "bismarck--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1399.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=7/2027"
+      }
     }
   ]
 }
