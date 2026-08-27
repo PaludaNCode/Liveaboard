@@ -255,7 +255,12 @@ def _guests(summary: str | None) -> int | None:
     return None
 
 
-def _dives(stated: int | None = None) -> int:
+def _dives(
+    stated: int | None = None,
+    *,
+    nights: int | None = None,
+    for_nights: int | None = None,
+) -> int:
     """The operator's own dive count, or ``0`` when it does not publish one.
 
     This used to work the count out from nights at three dives a full day, and
@@ -269,12 +274,26 @@ def _dives(stated: int | None = None) -> int:
     while looking like an independent measurement. A number whose denominator
     was invented cannot say anything its numerator did not already say.
 
-    Only 61 of 317 operators publish a count, and a probe established the rest
-    is not on the page at all. So the honest answer for the other 253 is that
-    nobody has said -- the same answer this project gives for a dive site it
-    cannot name and a fee nobody has read.
+    Checking the formula against the counts operators do publish settled it.
+    For a seven-night week they state anything from 15 to 21 while the formula
+    says 18 for all of them -- a six-dive spread, a third of the figure, and
+    the whole of what price per dive is meant to distinguish.
+
+    Ten vessels publish a count, and a probe established the rest is not on the
+    page at all. So the honest answer for the others is that nobody has said --
+    the same answer this project gives for a dive site it cannot name and a fee
+    nobody has read.
+
+    ``for_nights`` guards the second half of the problem. A published count is
+    the figure for that vessel's standard week, and applying it to every trip
+    the boat sells put seventeen dives on a three-night mini-safari. A count is
+    used only for the trip length it was quoted for.
     """
-    return stated if stated and stated > 0 else 0
+    if not stated or stated <= 0:
+        return 0
+    if for_nights is not None and nights is not None and nights != for_nights:
+        return 0
+    return stated
 
 
 AVAILABILITY = {
@@ -533,8 +552,11 @@ def promote(
                 "nights": nights,
                 # Zero means the operator does not publish one, and the page
                 # says so rather than dividing by a number nobody stated.
-                "dives": _dives(hand.get(slug, {}).get("dives")
-                                or source.get("dives")),
+                "dives": _dives(
+                    hand.get(slug, {}).get("dives") or source.get("dives"),
+                    nights=nights,
+                    for_nights=hand.get(slug, {}).get("dives_for_nights"),
+                ),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Left empty on purpose. Route and theme are derived from dive

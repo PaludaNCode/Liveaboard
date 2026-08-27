@@ -191,24 +191,27 @@
         return "<b>" + span(m) + "</b>" +
           (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "");
       } },
-    /* Price per dive is what divers compare on, and it is shown only where the
-       operator publishes a dive count — 61 trips of 317.
+    /* What divers actually compare on, and the reason price per night is not
+       here: two denominators over the same total, and only one of them is the
+       thing being bought.
 
-       The other 253 used to carry a figure worked out from nights at three
-       dives a day. It looked like a measurement and was not one: total over
-       3*(nights-1) is a constant multiple of price per night, and 292 of the
-       trips run seven nights, so down almost the whole table the column ranked
-       trips in exactly the same order as the column beside it. An empty cell
-       is the same answer this page gives for a dive site nobody named. */
+       Shown only where the operator publishes a count. The rest used to carry
+       three dives per full day, and checking that against the ten vessels that
+       do publish one settled it: they state 15 to 21 for the same seven-night
+       week. A third of the figure, and the whole of what this column exists to
+       tell apart. An empty cell is what this page already says for a dive site
+       nobody named. */
     { k: "perdive", t: "Per dive", num: true,
       v: function (d, i, m) { return i.dives > 0 ? m.total / i.dives : -1; },
       show: function (d, i, m) {
         if (!i.dives) {
-          return '<span class="dim" title="The operator does not publish a ' +
-                 'dive count for this trip.">not stated</span>';
+          return '<span class="dim" title="This operator does not publish a ' +
+                 'dive count. Assuming one would divide the bill by a number ' +
+                 'nobody stated.">not stated</span>';
         }
         if (!d.mandatory_known) return '<span class="dim">—</span>';
-        return eur(m.total / i.dives);
+        return '<b>' + eur(m.total / i.dives) + "</b>" +
+               '<span class="dim"> /' + i.dives + "</span>";
       } },
     /* Included or extra, said plainly. Half this fleet bundles nitrox and half
        bills for it, and on a page for comparing trips that difference has to be

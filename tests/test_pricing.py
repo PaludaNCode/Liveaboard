@@ -189,12 +189,14 @@ class TestTotals(unittest.TestCase):
         result = compute(itinerary, make_departure(), FX)
         self.assertEqual(result.total.amount, Decimal("1120"))
 
-    def test_markup_and_per_night(self):
+    def test_what_lands_after_the_headline(self):
+        """Price per night is gone: divers compare per dive, not per night, and
+        a second denominator on the same total said nothing the first did not."""
         itinerary = make_itinerary([fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "400 EUR")])
         result = compute(itinerary, make_departure(), FX)
         self.assertEqual(result.surcharge.amount, Decimal("400"))
         self.assertAlmostEqual(result.markup_pct, 40.0)
-        self.assertEqual(result.per_night.amount, Decimal("200"))
+        self.assertNotIn("per_night", result.as_dict())
 
 
 class TestCurrency(unittest.TestCase):

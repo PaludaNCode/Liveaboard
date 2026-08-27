@@ -160,12 +160,6 @@ class Breakdown:
         return Money(self.total.amount - self.base.amount, self.total.currency)
 
     @property
-    def per_night(self) -> Money:
-        if self.nights <= 0:
-            return self.total
-        return Money(self.total.amount / Decimal(self.nights), self.total.currency)
-
-    @property
     def markup_pct(self) -> float:
         """How much the headline understates the bill, as a percentage."""
         if self.base.amount <= 0:
@@ -188,7 +182,6 @@ class Breakdown:
             "is_range": self.is_range,
             "unpriced": [line.code.value for line in self.unpriced],
             "surcharge": float(self.surcharge.rounded),
-            "per_night": float(self.per_night.rounded),
             "markup_pct": round(self.markup_pct, 1),
             "has_unverified": self.has_unverified,
             "lines": [line.as_dict() for line in self.lines],

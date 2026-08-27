@@ -10680,7 +10680,7 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 10,
-      "dives": 17,
+      "dives": 0,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -27423,7 +27423,7 @@
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 4,
-      "dives": 17,
+      "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Marsa Alam",
       "dive_sites": [
@@ -27630,7 +27630,7 @@
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 3,
-      "dives": 17,
+      "dives": 0,
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -35416,7 +35416,7 @@
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 10,
-      "dives": 15,
+      "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [],
