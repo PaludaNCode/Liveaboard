@@ -6,11 +6,14 @@ import json
 import re
 import tempfile
 import unittest
+from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
 from liveaboard.render import build_payload, render
-from liveaboard.scrape import jsonld
+from liveaboard.scrape import jsonld, liveaboard_com
+from liveaboard.scrape.base import FetchResult
+from liveaboard.scrape.diagnose import describe
 from liveaboard.scrape.padi_com import PadiComAdapter
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -168,6 +171,61 @@ class TestJsonLd(unittest.TestCase):
     def test_offer_is_extracted(self):
         offer = jsonld.first_offer(jsonld.of_type(self.HTML, "Product")[0])
         self.assertEqual(offer["priceCurrency"], "EUR")
+
+
+class TestSearchPaths(unittest.TestCase):
+    def test_one_path_per_season_month(self):
+        paths = liveaboard_com.search_paths()
+        self.assertEqual(len(paths), len(liveaboard_com.SEASON_MONTHS))
+
+    def test_paths_match_the_published_url_shape(self):
+        self.assertIn("/diving/search/egypt/may/2027", liveaboard_com.search_paths())
+        self.assertIn("/diving/search/egypt/august/2027", liveaboard_com.search_paths())
+
+    def test_boat_links_match_relative_and_absolute(self):
+        """The first attempt anchored on a literal prefix and matched nothing live."""
+        html = (
+            '<a href="/diving/egypt/blue-horizon">a</a>'
+            '<a href="https://www.liveaboard.com/diving/egypt/sea-serpent">b</a>'
+        )
+        found = {m.group(1) for m in liveaboard_com.BOAT_LINK.finditer(html)}
+        self.assertEqual(
+            found, {"/diving/egypt/blue-horizon", "/diving/egypt/sea-serpent"}
+        )
+
+
+class TestDiagnose(unittest.TestCase):
+    HTML = (
+        "<html><head><title>Egypt May 2027</title>"
+        '<script type="application/ld+json">{"@type":"Product",'
+        '"offers":{"@type":"Offer","price":"1200","priceCurrency":"EUR"}}</script>'
+        '</head><body><a href="/diving/egypt/a-boat">x</a>'
+        "<span>From &euro;1,335</span></body></html>"
+    )
+
+    def setUp(self):
+        self.result = FetchResult(
+            url="https://example.test/x",
+            status=200,
+            body=self.HTML,
+            fetched_at=datetime(2026, 8, 27, tzinfo=timezone.utc),
+        )
+
+    def test_reports_structured_data_types(self):
+        self.assertIn("Product", describe(self.result))
+
+    def test_reports_link_shapes(self):
+        self.assertIn("/diving/egypt/*", describe(self.result))
+
+    def test_flags_a_client_rendered_page(self):
+        """No links at all is the signature of a listing built in the browser."""
+        bare = FetchResult(
+            url="https://example.test/y",
+            status=200,
+            body="<html><body><div id=root></div></body></html>",
+            fetched_at=datetime(2026, 8, 27, tzinfo=timezone.utc),
+        )
+        self.assertIn("client-side", describe(bare))
 
 
 class TestRequirementExtraction(unittest.TestCase):

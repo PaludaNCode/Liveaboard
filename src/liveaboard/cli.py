@@ -93,11 +93,11 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     Deliberately does not overwrite the live dataset: a scrape writes a
     candidate file, and promoting it is a separate, reviewable step.
     """
-    fetcher = PoliteFetcher(snapshot_dir=Path(args.snapshots))
+    fetcher = PoliteFetcher(snapshot_dir=Path(args.snapshots), diagnose=args.diagnose)
     selected = [args.source] if args.source else list(ADAPTERS)
 
     combined = ScrapeOutput()
-    failures = 0
+    blocked = 0
 
     for name in selected:
         adapter_cls = ADAPTERS.get(name)
@@ -106,21 +106,33 @@ def cmd_scrape(args: argparse.Namespace) -> int:
             return 2
 
         adapter = adapter_cls(fetcher)
+        if args.max_pages:
+            adapter.max_pages = args.max_pages
         print(f"-- {name}")
         try:
             output = adapter.run()
         except FetchBlocked as exc:
             print(f"   blocked: {exc}", file=sys.stderr)
-            failures += 1
+            blocked += 1
             continue
 
         print(
             f"   {len(output.itineraries)} itineraries, "
             f"{len(output.departures)} departures, {len(output.warnings)} warnings"
         )
-        for warning in output.warnings[: args.limit or 5]:
+        for warning in output.warnings[: args.warnings]:
             print(f"   ! {warning}")
+        remaining = len(output.warnings) - args.warnings
+        if remaining > 0:
+            print(f"   ! ... and {remaining} more")
         combined.extend(output)
+
+    if combined.is_empty:
+        # No candidate file is written, so an empty scrape leaves nothing for
+        # CI to commit. A run that fetched nothing must not look like a quiet
+        # day on which nothing changed.
+        print("scrape produced no itineraries or departures", file=sys.stderr)
+        return 1
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -139,7 +151,7 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
     print(f"wrote candidate {out}")
-    return 1 if failures and combined.is_empty else 0
+    return 1 if blocked else 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -159,7 +171,20 @@ def main(argv: list[str] | None = None) -> int:
     scrape.add_argument("--source", choices=sorted(ADAPTERS), default=None)
     scrape.add_argument("--out", default=Path("data/candidate.json"), type=Path)
     scrape.add_argument("--snapshots", default=DEFAULT_SNAPSHOTS, type=Path)
-    scrape.add_argument("--limit", type=int, default=0, help="cap warnings printed")
+    scrape.add_argument(
+        "--warnings", type=int, default=10, help="how many warnings to print"
+    )
+    scrape.add_argument(
+        "--max-pages",
+        type=int,
+        default=0,
+        help="cap detail pages fetched per source (0 keeps the adapter default)",
+    )
+    scrape.add_argument(
+        "--diagnose",
+        action="store_true",
+        help="print each page's structure: JSON-LD types, link shapes, price hints",
+    )
     scrape.set_defaults(func=cmd_scrape)
 
     args = parser.parse_args(argv)
