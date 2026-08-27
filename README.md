@@ -40,6 +40,12 @@ A sandbox cannot reach liveaboard.com (network policy, see #1); GitHub's runners
 can. So anything about what the source actually returns is settled by running a
 `tools/probe_*.py` on a runner, never by guessing at markup.
 
+**Where each fact comes from is written down**, per source, in
+[`docs/sources/`](docs/sources/) — the URL, the JSON-LD path or selector, and
+whether reading it needs a browser. Read that before opening a parser, and
+before probing for something: it also records what has already been ruled out,
+which is the half a code-reading exercise cannot recover.
+
 ## Usage
 
 Python 3.11+, no dependencies.
