@@ -13,9 +13,9 @@ from decimal import Decimal
 from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
 from liveaboard.dataset import Dataset
-from liveaboard.pricing import compute, mandatory_known, resolve_fees
+from liveaboard.pricing import _is_counted, compute, mandatory_known, resolve_fees
 from liveaboard.render import TEMPLATE_DIR, build_payload
-from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
+from liveaboard.taxonomy import DEFAULT_ON_TIERS, FeeBasis, FeeCode, FeeTier, SourceKind
 
 FX = FxTable.from_dict(
     {
@@ -130,6 +130,51 @@ class TestTotals(unittest.TestCase):
             body.index('line.tier === "optional"'),
             "app.js must ask the toggle before the tier, as pricing._is_counted does",
         )
+
+    def test_the_page_counts_the_same_tiers_by_default(self):
+        """The other half of the mirror: *which* tiers count, not just the order.
+
+        CLAUDE.md names both -- "both DEFAULT_ON_TIERS and the order of its
+        checks" -- and only the order was pinned. So adding a tier to the Python
+        frozenset, or dropping one from the JS object, changed what the page
+        totals with nothing failing. Two implementations of the same rule need
+        both halves held together or the pin is only half a pin.
+
+        Read out of the JS source rather than executed: the suite runs on the
+        standard library, and the declaration is a literal.
+        """
+        js = (TEMPLATE_DIR / "app.js").read_text(encoding="utf-8")
+        literal = js[js.index("var DEFAULT_ON_TIERS"):]
+        literal = literal[literal.index("{") + 1: literal.index("}")]
+
+        in_js = set()
+        for entry in literal.split(","):
+            if not entry.strip():
+                continue
+            key, _, value = entry.partition(":")
+            # A tier present but set false counts for nothing, so it is not in
+            # the set -- matching how the JS itself reads the object.
+            if value.strip() == "true":
+                in_js.add(key.strip().strip("\"'"))
+
+        self.assertEqual(
+            in_js,
+            {tier.value for tier in DEFAULT_ON_TIERS},
+            "app.js DEFAULT_ON_TIERS must name the same tiers as liveaboard.taxonomy",
+        )
+
+    def test_the_two_counting_rules_agree_on_every_tier(self):
+        """Belt and braces: drive both rules over every tier and compare.
+
+        The two tests above check the JS text. This checks the *behaviour* they
+        are meant to guarantee, so a rule that stops being expressible as a set
+        plus an ordering still has to agree tier by tier.
+        """
+        for tier in FeeTier:
+            with self.subTest(tier=tier.value):
+                counted = _is_counted(fee(FeeCode.PORT_FEES, tier, "50 EUR"), {})
+                expected = tier is not FeeTier.OPTIONAL and tier in DEFAULT_ON_TIERS
+                self.assertEqual(counted, expected)
 
     def test_conditional_fee_follows_its_toggle(self):
         itinerary = make_itinerary([fee(FeeCode.NITROX, FeeTier.CONDITIONAL, "120 EUR")])
