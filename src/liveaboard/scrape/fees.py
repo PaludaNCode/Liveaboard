@@ -163,10 +163,49 @@ def _number(raw: str | None) -> float | None:
         return None
 
 
+CONTINUATION = re.compile(r"^\s*[(\-–—/]")
+"""A line that continues the one above rather than starting a new entry."""
+
+
+def normalise_disclosure(text: str) -> str:
+    """Turn a browser's ``innerText`` into comma-separated entries.
+
+    Rendered text puts each extra on its own line and often its amount on the
+    next one again::
+
+        Environment Tax
+        (€45)
+        Fuel Surcharge
+        (€60-70 / trip)
+
+    Naively swapping every newline for a comma separates each label from its
+    own price and silently reports seven priced extras as unpriced — worse than
+    the run-together text it was meant to fix. So a line opening with a bracket
+    or a dash is rejoined to the line above, and only the remaining breaks
+    become separators.
+
+    Idempotent on text that is already comma-separated, so both the raw-HTML
+    and rendered-text paths can call it.
+    """
+    joined: list[str] = []
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if joined and CONTINUATION.match(line):
+            joined[-1] = f"{joined[-1]} {line}"
+        else:
+            joined.append(line)
+    return ", ".join(joined)
+
+
 def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
     """Extract every stated extra from a vessel page's disclosure text."""
     found: list[ParsedFee] = []
     seen: set[FeeCode] = set()
+
+    if "\n" in text:
+        text = normalise_disclosure(text)
 
     for required_word, body in BLOCK.findall(text):
         required = required_word.lower() == "required"

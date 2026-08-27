@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 from liveaboard.models import FeeItem
 from liveaboard.scrape.base import FetchResult, PoliteFetcher
-from liveaboard.scrape.fees import parse_extras, to_fee_dicts
+from liveaboard.scrape.fees import normalise_disclosure, parse_extras, to_fee_dicts
 from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter, _page_text
 from liveaboard.taxonomy import FeeCode, FeeTier
 
@@ -164,6 +164,43 @@ class TestNoise(unittest.TestCase):
     def test_unrecognised_labels_are_dropped_not_guessed(self):
         fees = parse_extras("Required Extras: Sun Cream (€9), Port Fees (€35).")
         self.assertEqual([f.code for f in fees], [FeeCode.PORT_FEES])
+
+
+class TestRenderedTextLayout(unittest.TestCase):
+    """A browser's innerText puts each extra, and often its amount, on its own line."""
+
+    INNER = (
+        "Required Extras:\n"
+        "Environment Tax\n(\u20ac45)\n"
+        "Fuel Surcharge\n(\u20ac60-70 / trip)\n"
+        "National Park Fees\n(\u20ac35-100 / trip)\n"
+        "Optional Extras:\n"
+        "Gratuities\n(\u20ac80)\n"
+        "Rental Gear"
+    )
+
+    def setUp(self):
+        self.byc = by_code(parse_extras(self.INNER))
+
+    def test_amounts_survive_the_line_break(self):
+        """Swapping every newline for a comma orphans each label from its price."""
+        self.assertEqual(self.byc[FeeCode.ENVIRONMENT_TAX].low, 45.0)
+        self.assertEqual(self.byc[FeeCode.GRATUITIES].low, 80.0)
+
+    def test_ranges_survive_the_line_break(self):
+        park = self.byc[FeeCode.MARINE_PARK]
+        self.assertEqual((park.low, park.high), (35.0, 100.0))
+
+    def test_a_genuinely_unpriced_extra_is_still_unpriced(self):
+        self.assertFalse(self.byc[FeeCode.GEAR_RENTAL].has_price)
+
+    def test_only_one_extra_lacks_a_price(self):
+        """A first live run reported five to seven per vessel; that was the bug."""
+        unpriced = [f for f in parse_extras(self.INNER) if not f.has_price]
+        self.assertEqual(len(unpriced), 1)
+
+    def test_normalising_is_idempotent_on_comma_separated_text(self):
+        self.assertEqual(len(parse_extras(REAL)), len(parse_extras(normalise_disclosure(REAL))))
 
 
 if __name__ == "__main__":
