@@ -20,7 +20,13 @@ from typing import Any
 from .classify import classify, themes_in_season
 from .dataset import Dataset
 from .money import DISPLAY_CURRENCY
-from .pricing import DEFAULT_TOGGLES, compute, resolve_fees, transparency_score
+from .pricing import (
+    DEFAULT_TOGGLES,
+    compute,
+    mandatory_known,
+    resolve_fees,
+    transparency_score,
+)
 from .taxonomy import (
     DIVER_LEVEL_LABELS,
     DIVER_LEVEL_ORDER,
@@ -89,11 +95,16 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # advertised price, and a perfect honesty score, would make this site
         # commit exactly the omission it exists to expose.
         fees_known = bool(resolve_fees(itinerary, departure))
+        # Listing only optional extras is not the same as having no required
+        # ones, and scoring it as such put the least forthcoming operators at
+        # the top of the honesty ranking. See pricing.mandatory_known.
+        mandatory = mandatory_known(itinerary, departure)
 
         departures.append(
             {
                 "id": departure.id,
                 "fees_known": fees_known,
+                "mandatory_known": mandatory,
                 "itinerary_id": itinerary.id,
                 "boat_id": itinerary.boat_id,
                 "start": departure.start.isoformat(),
@@ -106,7 +117,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "lines": [line.as_dict() for line in breakdown.lines],
                 "transparency": (
                     round(transparency_score(itinerary, departure, dataset.fx), 4)
-                    if fees_known
+                    if fees_known and mandatory
                     else None
                 ),
                 "peak_themes": [t.value for t in themes_in_season(themes, departure.start.month)],

@@ -214,10 +214,26 @@
       advertised.appendChild(el("span", "was", "advertised " + euro.format(dep.base)));
       advertised.appendChild(document.createTextNode(" · "));
       advertised.appendChild(el("span", "markup", "+" + Math.round(m.markup) + "%"));
-    } else {
+    } else if (dep.mandatory_known) {
       advertised.appendChild(el("span", "markup none", "no extras to add"));
+    } else {
+      /* "No extras to add" would claim the operator charges none. It only
+         published optional ones. */
+      advertised.appendChild(el("span", "markup none", "no required extras listed"));
     }
     block.appendChild(advertised);
+
+    /* The operator listed extras, but none of them required. Every Egyptian
+       liveaboard pays park and port fees, so that silence means either that
+       they are bundled into the fare or that they are collected at the dock
+       unadvertised — and it does not say which. Scoring it as a clean bill
+       put the least forthcoming operators at the top of the ranking. */
+    if (!dep.mandatory_known) {
+      block.appendChild(el("div", "honesty-unknown",
+        "Operator lists no required extras — park and port fees may be " +
+        "bundled, or charged at the dock"));
+      return block;
+    }
 
     var honesty = el("div", "honesty");
     honesty.appendChild(el("span", "honesty-label", "Honesty "));
@@ -300,7 +316,10 @@
     });
 
     var totalRow = el("tr", "total");
-    totalRow.appendChild(el("td", null, dep.fees_known ? "True cost" : "Advertised price"));
+    totalRow.appendChild(el("td", null,
+      !dep.fees_known ? "Advertised price"
+        : dep.mandatory_known ? "True cost"
+                              : "Advertised price plus listed extras"));
     totalRow.appendChild(el("td"));
     totalRow.appendChild(el("td"));
     totalRow.appendChild(el("td", "num", "€" + formatSpan(m)));
@@ -316,12 +335,17 @@
       body.appendChild(extra);
     }
 
-    if (!dep.fees_known) {
+    if (!dep.fees_known || !dep.mandatory_known) {
       var caveat = el("tr");
       var cell = el("td", "fee-note",
-        "Marine park fees, port dues, fuel, nitrox and gratuities are not " +
-        "included above because they have not been captured for this trip yet. " +
-        "On comparable trips they add 30–60%.");
+        !dep.fees_known
+          ? "Marine park fees, port dues, fuel, nitrox and gratuities are not " +
+            "included above because they have not been captured for this trip yet. " +
+            "On comparable trips they add 30–60%."
+          : "This operator publishes no required extras. Every Egyptian liveaboard " +
+            "pays marine park and port fees, so either they are already inside the " +
+            "advertised price or they are collected at the dock — the listing does " +
+            "not say which, so no true cost is claimed here.");
       cell.colSpan = 4;
       caveat.appendChild(cell);
       body.appendChild(caveat);

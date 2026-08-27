@@ -15,7 +15,7 @@ from pathlib import Path
 
 from .classify import classify
 from .dataset import Dataset, DatasetError
-from .pricing import compute, resolve_fees, transparency_score
+from .pricing import compute, mandatory_known, resolve_fees, transparency_score
 from .promote import promote
 from .render import render
 from .scrape.base import FetchBlocked, PoliteFetcher, ScrapeOutput
@@ -66,9 +66,12 @@ def cmd_check(args: argparse.Namespace) -> int:
             continue
         first = departures[0]
         breakdown = compute(itinerary, first, dataset.fx)
-        # Same rule as the rendered page: no fee lines means nobody has looked,
-        # not that the advertised price is the whole bill.
-        known = bool(resolve_fees(itinerary, first))
+        # Same rule as the rendered page. No fee lines means nobody has
+        # looked; only optional ones means the operator did not state its
+        # unavoidable costs. Neither means the advertised price is the whole
+        # bill, and scoring them as if it were ranked the least forthcoming
+        # operators highest.
+        known = bool(resolve_fees(itinerary, first)) and mandatory_known(itinerary, first)
         if not known:
             unknown += 1
         rows.append(
@@ -93,7 +96,10 @@ def cmd_check(args: argparse.Namespace) -> int:
             )
 
     if unknown:
-        print(f"\n  {unknown} of {len(rows)} itineraries have no fee data captured yet")
+        print(
+            f"\n  {unknown} of {len(rows)} itineraries have no stated mandatory "
+            f"fees, so no true cost or honesty score is claimed for them"
+        )
 
     print()
     for key, itinerary in dataset.itineraries.items():
