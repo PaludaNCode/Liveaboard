@@ -67,7 +67,160 @@
       ],
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
       "source_url": "https://www.liveaboard.com/diving/egypt/avo",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 450.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": {
+            "amount": 550.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "Boat features Food & Drinks Diving Languages Spoken Gear Rental Boat Specifications Boat navigation and safety: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Rooms with Balcony Budget Friendly Cruise Family Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Camera room Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment TV in cabins Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "T The Au Co Tip Top II Tip Top IV Treasure of Galapagos Tribute: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "blue--brothers-daedalus-and-elphinstone-hurghada-hurghada",
@@ -85,7 +238,162 @@
       ],
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
       "source_url": "https://www.liveaboard.com/diving/egypt/blue",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": {
+            "amount": 290.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 320.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Rebreather Support Rinse Hoses Dive deck Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "We would go on a liveaboard with you again at any time and can recommend Blue without reservation! Recommended for Crew: listed with no price"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "All the dive guides are helpful and kind: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "blue--north-tiran-hurghada-hurghada",
@@ -101,7 +409,162 @@
       ],
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
       "source_url": "https://www.liveaboard.com/diving/egypt/blue",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": {
+            "amount": 290.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 320.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area DIN Adaptors Rebreather Support Rinse Hoses Dive deck Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "We would go on a liveaboard with you again at any time and can recommend Blue without reservation! Recommended for Crew: listed with no price"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "All the dive guides are helpful and kind: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
@@ -118,7 +581,158 @@
       ],
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 490.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Outdoor Dining Audio & video entertainment TV in cabins Observation Deck BBQ Area Available for Charter Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
@@ -138,7 +752,158 @@
       ],
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 490.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Outdoor Dining Audio & video entertainment TV in cabins Observation Deck BBQ Area Available for Charter Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-dahab-hurghada-hurghada",
@@ -154,7 +919,158 @@
       ],
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 490.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Seaview Cabins Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Outdoor Dining Audio & video entertainment TV in cabins Observation Deck BBQ Area Available for Charter Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Free Nitrox Shaded Diving Area DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "marselia-star--safari-trip-hurghada-and-safaga-hurghada-hurghada",
@@ -168,7 +1084,162 @@
       "dive_sites": [],
       "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/marselia-star",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": {
+            "amount": 155.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Non-Smoking Rooms Camera room Custom built for diving Charging stations Indoor Saloon Outdoor Dining Audio & video entertainment Observation Deck Available for Charter Local & International Crew Separate Rinse for u/w Camera Leisure Deck Daily housekeeping Bar Dedicated Local Crew Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "T The Au Co Tip Top II Tip Top IV Treasure of Galapagos Tribute: listed with no price"
+        },
+        {
+          "code": "marine_park",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "K Koh Tachai Komodo Kimud Shoal Koror Keith Tibbetts Komodo National Park Koh Bon King Cruiser Wreck Kona Kimbe Bay Kapalai Kupang Kaimana Koon Island Kwajalein: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "oceanix--10-off-brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -186,7 +1257,191 @@
       ],
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
       "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
-      "fees": []
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 160.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area Sidemount diving &#x2013; Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "oceanix--10-off-north-wrecks-tour-hurghada-hurghada",
@@ -200,7 +1455,191 @@
       "dive_sites": [],
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
       "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
-      "fees": []
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 160.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area Sidemount diving &#x2013; Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "oceanix--south-safaga-hurghada-marsa-alam",
@@ -214,7 +1653,191 @@
       "dive_sites": [],
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
       "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
-      "fees": []
+      "fees": [
+        {
+          "code": "environment_tax",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 75.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 160.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Pay by bank transfer or online with: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Custom built for diving Charging stations Indoor Saloon Library Outdoor Dining Audio & video entertainment Observation Deck Hair Dryer in Cabin BBQ Area Available for Charter Local & International Crew Snorkeling Equipment Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Dedicated Local Crew Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "] [&>*]:mx-3 -mx-3\"> Nitrox available Free Nitrox Shaded Diving Area Sidemount diving &#x2013; Single Tank Only DIN Adaptors Tech diving Rebreather Support Rinse Hoses Dive deck Tenders for diving Sidemount Diving: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "safy-mar--best-of-the-south-port-ghalib-port-ghalib",
@@ -228,7 +1851,184 @@
       "dive_sites": [],
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
       "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Airport Transfer\" as a range"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 165.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Massage Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Camera room Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Safe Box in Cabin Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "T The Au Co Tip Top II Tip Top IV Treasure of Galapagos Tribute: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     },
     {
       "id": "safy-mar--central-red-sea-route-port-ghalib-hurghada",
@@ -242,7 +2042,184 @@
       "dive_sites": [],
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
       "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar",
-      "fees": []
+      "fees": [
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Airport Transfer\" as a range"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 80.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 165.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "Friendly Warm Water Showers Massage Air Conditioned saloon Sun Deck Camera Station Budget Friendly Cruise Family Friendly Cruise Boutique / Souvenir Shop Seaview Cabins Naturalist Itineraries Non-Smoking Rooms Camera room Custom built for diving Charging stations Indoor Saloon Audio & video entertainment Observation Deck Safe Box in Cabin Available for Charter Local & International Crew Separate Rinse for u/w Camera Outside Showers Leisure Deck Daily housekeeping Bar Naturalist Guide: listed with no price"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "T The Au Co Tip Top II Tip Top IV Treasure of Galapagos Tribute: listed with no price"
+        },
+        {
+          "code": "visa",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+          },
+          "amount": null,
+          "note": "V Visayas Viti Levu Vicente Vaavu Atoll: listed with no price"
+        }
+      ]
     }
   ],
   "departures": [
