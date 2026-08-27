@@ -242,7 +242,12 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
             # A segment too long to be a label is where the list ended: stop
             # rather than skip, or the vessel's spec sheet and the site's
             # destination menu get mined for fees that were never charged.
-            if len(label) > MAX_LABEL_CHARS:
+            #
+            # A priced segment is spared that test. Truncating on length alone
+            # would silently drop every remaining extra the moment one genuine
+            # entry ran long, and losing real mandatory fees is the same lie as
+            # inventing them, told the other way round.
+            if len(label) > MAX_LABEL_CHARS and match.group("low") is None:
                 break
 
             code = classify_label(label)

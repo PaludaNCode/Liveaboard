@@ -242,5 +242,31 @@ class TestRejectsPageFurniture(unittest.TestCase):
         self.assertNotIn(FeeCode.MARINE_PARK, self.codes)
 
 
+class TestTruncation(unittest.TestCase):
+    """Where the list stops matters as much as what is in it."""
+
+    def test_a_long_priced_entry_does_not_end_the_list(self):
+        """Losing real mandatory fees is the same lie as inventing them."""
+        text = (
+            "Required Extras: Environment Tax (€45), "
+            "A rather verbosely named harbour and mooring facility charge "
+            "levied per trip (€35), Fuel Surcharge (€60-70 / trip)."
+        )
+        codes = {f.code for f in parse_extras(text)}
+        self.assertIn(FeeCode.ENVIRONMENT_TAX, codes)
+        self.assertIn(FeeCode.FUEL_SURCHARGE, codes)
+
+    def test_a_long_unpriced_segment_still_ends_the_list(self):
+        """That segment is the page running on past the disclosure."""
+        text = (
+            "Required Extras: Port Fees (€35), "
+            "Year built 2014 Year renovated 2025 Length 40 meters Top speed 11 Knots, "
+            "Visa on arrival (€25)."
+        )
+        codes = {f.code for f in parse_extras(text)}
+        self.assertIn(FeeCode.PORT_FEES, codes)
+        self.assertNotIn(FeeCode.VISA, codes)
+
+
 if __name__ == "__main__":
     unittest.main()
