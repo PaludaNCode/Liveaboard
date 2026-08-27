@@ -134,6 +134,32 @@ class FxTable:
             return rate.source
         return None
 
+    MAX_FRESH_DAYS = 7
+    """How old a published rate may be before the page should say so.
+
+    The ECB publishes on working days only, so a Monday build legitimately
+    carries Friday's rate and a holiday can stretch that to four or five days.
+    A week means the fetch has been failing rather than resting.
+    """
+
+    def age_days(self, today: date | None = None) -> int | None:
+        as_of = self.as_of
+        if as_of is None:
+            return None
+        return ((today or date.today()) - as_of).days
+
+    def is_stale(self, today: date | None = None) -> bool:
+        """A sourced rate that has stopped being refreshed.
+
+        Distinct from unsourced: this one came from somewhere real, it is just
+        old. The fetcher keeps the previous file when a fetch fails rather than
+        reverting to a placeholder, which is the right call -- yesterday's real
+        rate beats a made-up one -- but it means silence looks identical to
+        success unless something notices the date stopped moving.
+        """
+        age = self.age_days(today)
+        return age is not None and age > self.MAX_FRESH_DAYS
+
     @property
     def is_sourced(self) -> bool:
         """Does the rate come from somewhere, or is it a stand-in?

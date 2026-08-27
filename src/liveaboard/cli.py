@@ -97,7 +97,7 @@ def cmd_check(args: argparse.Namespace) -> int:
     if unknown:
         print(
             f"\n  {unknown} of {len(rows)} itineraries have no stated mandatory "
-            f"fees, so no true cost or honesty score is claimed for them"
+            f"fees, so no true cost is claimed for them"
         )
 
     print()
@@ -222,7 +222,20 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if fee_path.exists():
         fees = json.loads(fee_path.read_text(encoding="utf-8"))
 
-    payload = promote(candidate, season=season, fees=fees)
+    # Exchange rates from the ECB, fetched by CI. Absent means the fetch has
+    # never run, and promote falls back to a rate it labels as a placeholder --
+    # which the page then warns about rather than passing off as sourced.
+    fx = None
+    fx_path = Path(args.fx)
+    if fx_path.exists():
+        fx = json.loads(fx_path.read_text(encoding="utf-8"))
+
+    payload = promote(candidate, season=season, fees=fees, fx=fx)
+
+    if fx:
+        print(f"  rates from {fx.get('source', 'an unnamed source')}, quoted {fx.get('as_of')}")
+    else:
+        print(f"  no {fx_path} found; euro figures use a placeholder rate and say so")
 
     priced = sum(1 for i in payload["itineraries"] if i["fees"])
     if fees:
@@ -309,6 +322,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--candidate", default=Path("data/candidate.json"), type=Path)
     promote_cmd.add_argument("--out", default=Path("data/egypt-2027.json"), type=Path)
     promote_cmd.add_argument("--fees", default=Path("data/fees.json"), type=Path)
+    promote_cmd.add_argument("--fx", default=Path("data/fx.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

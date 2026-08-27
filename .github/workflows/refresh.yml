@@ -49,6 +49,17 @@ jobs:
       - name: Run tests
         run: PYTHONPATH=src python3 -m unittest discover -s tests
 
+      # Every advertised price is quoted in dollars and the site shows euro,
+      # so this one number sits under every figure on the page. Runs before the
+      # scrape so a slow crawl cannot push it past the ECB's publication.
+      #
+      # continue-on-error because a missed rate is not worth losing a whole
+      # refresh over: the tool keeps the previous file, which still records the
+      # day it was quoted, and the page says when a rate has stopped moving.
+      - name: Refresh exchange rates
+        continue-on-error: true
+        run: python3 tools/fetch_fx.py --out data/fx.json
+
       # padi.com is parked: both its entry paths 404 and it contributes
       # requirements, not prices. Scraping only what works keeps a failing
       # source from muddying a good run.
