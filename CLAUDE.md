@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 304 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 321 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
@@ -76,3 +76,9 @@ rather than replacing it: it knows nothing about the vessels it did not visit.
 published, parsed or not — re-scraping recovers today's prices, never
 yesterday's. Add fields to the parser freely; do not trim the archive to match
 what the parser happens to read.
+
+When the parser learns to read a field the archive already has,
+`tools/reparse_candidate.py` fills it onto the committed candidate offline —
+re-crawling 320 pages to re-read data already in the repository is both slow and
+rude. It only ever fills, never overwrites, so it is a no-op after a fresh
+crawl.

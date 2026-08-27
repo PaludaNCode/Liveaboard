@@ -26,10 +26,38 @@ UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
     "name": "Operator not captured",
 }
-"""liveaboard.com is an agency listing: it names the vessel, not who runs it.
+"""For a departure whose source published no organizer.
 
-Inventing an operator would be worse than admitting we do not know one.
+This used to be every departure in the dataset -- 317 of 317 -- on the belief
+that an agency listing names the vessel and not who runs it. It names both:
+every ``Event`` node carries ``organizer.name``. The field was parsed and
+dropped, so the fallback became the only answer.
+
+It stays, because a source that says nothing must not be given an invented
+company. On current evidence it is never reached.
 """
+
+OPERATOR_ALIASES: dict[str, str] = {
+    # A missing space, in the operator's own listing. Both halves are real
+    # fleets under one company, and "Aggressor Fleet& Dancer Fleet" is 50
+    # departures filed under a typo.
+    "aggressor fleet& dancer fleet": "Aggressor Fleet & Dancer Fleet",
+}
+"""Operator names that are one company under more than one spelling.
+
+Folded the way :data:`PORT_ALIASES` folds harbours: deliberately, in a table,
+with a comment saying why. Not by fuzzy matching -- "Red Sea Explorers" and
+"Red Sea Relax" are two companies four characters apart, and a similarity
+threshold that merges the Aggressor typo also merges those.
+
+Names are otherwise kept **verbatim**. "XPLORER AQUARIUS Safari" is shouted and
+"MV Legends II" is a vessel name doing duty as a company, but both are what the
+operator publishes, and tidying someone's capitalisation is a short step from
+deciding what they are called.
+
+Keys are matched lowercased with whitespace already collapsed by the scraper.
+"""
+
 
 MIN_NIGHTS = 1
 MAX_NIGHTS = 30
@@ -38,6 +66,16 @@ MAX_NIGHTS = 30
 
 def slugify(value: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", value.lower())).strip("-")
+
+
+def operator_record(name: str) -> dict[str, str]:
+    """One operator, as the dataset stores it.
+
+    The id is a slug of the folded name, so two spellings of one company reach
+    one record and one page grouping.
+    """
+    folded = OPERATOR_ALIASES.get(name.lower(), name)
+    return {"id": slugify(folded) or UNKNOWN_OPERATOR["id"], "name": folded}
 
 
 PROMOTION = re.compile(r"^\s*(\d{1,2}\s*%\s*off)\s*:\s*", re.I)
@@ -408,6 +446,30 @@ def promote(
             {**departure, "nights": nights, "promotion": promotion}
         )
 
+    # Who runs each boat, from the organizer its own departures name.
+    #
+    # Resolved per vessel rather than per departure because that is how the
+    # source states it: across 878 archived events no boat's departures ever
+    # disagreed about their operator, and one boat under two companies would be
+    # a fact worth noticing rather than averaging. A disagreement therefore
+    # warns and takes the most common answer.
+    operators: dict[str, dict[str, str]] = {}
+    boat_operator: dict[str, str] = {}
+    for (slug, _), group in grouped.items():
+        stated = [d["operator"] for d in group if d.get("operator")]
+        if not stated:
+            continue
+        counts: dict[str, int] = defaultdict(int)
+        for value in stated:
+            counts[value] += 1
+        if len(counts) > 1:
+            listed = ", ".join(f"{n}x {v!r}" for v, n in sorted(counts.items()))
+            skipped.append(f"{slug}: departures name more than one operator ({listed})")
+        winner = max(counts.items(), key=lambda kv: (kv[1], kv[0]))[0]
+        record = operator_record(winner)
+        operators.setdefault(record["id"], record)
+        boat_operator[slug] = record["id"]
+
     boats: dict[str, dict[str, Any]] = {}
     itineraries: list[dict[str, Any]] = []
     departures: list[dict[str, Any]] = []
@@ -422,7 +484,7 @@ def promote(
             {
                 "id": slug,
                 "name": boat_name,
-                "operator_id": UNKNOWN_OPERATOR["id"],
+                "operator_id": boat_operator.get(slug, UNKNOWN_OPERATOR["id"]),
                 # The specification table first: it is the operator stating a
                 # number in a field labelled "Max guests", which beats both a
                 # hand-typed figure and a regex over the marketing copy. The
@@ -454,7 +516,7 @@ def promote(
                 # trips differing only by port are different trips, and the
                 # itinerary id is built from it.
                 "title": _display_title(name),
-                "operator_id": UNKNOWN_OPERATOR["id"],
+                "operator_id": boat_operator.get(slug, UNKNOWN_OPERATOR["id"]),
                 "boat_id": slug,
                 "nights": nights,
                 "dives": _dives(nights, hand.get(slug, {}).get("dives")
@@ -510,7 +572,10 @@ def promote(
         "default_currency": "EUR",
         "notes": notes or _notes_for(itineraries),
         "fx": fx or _default_fx(),
-        "operators": [UNKNOWN_OPERATOR],
+        # Only the operators actually named. UNKNOWN_OPERATOR joins the list
+        # only when something is filed under it -- carrying an unused "Operator
+        # not captured" row would put a company on the page that does not exist.
+        "operators": _operators_for(operators, itineraries),
         "boats": sorted(boats.values(), key=lambda b: b["name"]),
         "itineraries": itineraries,
         "departures": departures,
@@ -518,6 +583,24 @@ def promote(
     if skipped:
         payload["promotion_skipped"] = skipped
     return payload
+
+
+def _operators_for(
+    named: dict[str, dict[str, str]], itineraries: list[dict[str, Any]]
+) -> list[dict[str, str]]:
+    """The operator rows the dataset needs, and no others.
+
+    Every ``operator_id`` an itinerary references must resolve -- ``dataset``
+    validates that and refuses to load otherwise -- so the fallback row is
+    included exactly when something is filed under it. Carrying it
+    unconditionally would put "Operator not captured" on a page where every
+    trip has a real company behind it.
+    """
+    used = {i["operator_id"] for i in itineraries}
+    rows = [record for key, record in sorted(named.items()) if key in used]
+    if UNKNOWN_OPERATOR["id"] in used:
+        rows.append(dict(UNKNOWN_OPERATOR))
+    return rows or [dict(UNKNOWN_OPERATOR)]
 
 
 def _notes_for(itineraries: list[dict[str, Any]]) -> str:

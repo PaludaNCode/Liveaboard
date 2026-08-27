@@ -22,7 +22,7 @@
 
   var state = {
     sort: "start", dir: 1, q: "",
-    months: new Set(), ports: new Set(), sites: new Set(),
+    months: new Set(), ports: new Set(), sites: new Set(), operators: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
     toggles: {}, open: null
   };
@@ -127,6 +127,13 @@
      diver is choosing between, and it is what the operator names in the title. */
   var SITES = tally(function (i) { return i.dive_sites || []; });
 
+  /* The company that runs the trip, which the source names on every departure.
+     Grouping by it is useful — one operator's boats may all bundle nitrox
+     while another's all bill for it, and that is a fact about prices. Ranking
+     them is not: a per-operator honesty score was removed for reading as a
+     league table, and naming who sells a trip must not bring it back. */
+  var OPERATORS = tally(function (i) { return [i.operator]; });
+
   /* ---------- columns ---------- */
 
   function disclosure(dep) {
@@ -140,6 +147,10 @@
     { k: "end", t: "Return", v: function (d) { return d.end; } },
     { k: "nights", t: "Nts", num: true, v: function (d) { return d.nights; } },
     { k: "boat", t: "Boat", v: function (d, i) { return i.boat; } },
+    /* Who sells the trip. Every one of these used to read "Operator not
+       captured": the source states it on every event and the parser dropped
+       the field. */
+    { k: "operator", t: "Operator", v: function (d, i) { return i.operator; } },
     /* Berth price is per person, so this says whether you are buying into a
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
@@ -258,6 +269,7 @@
       if (state.nightsMin !== null && dep.nights < state.nightsMin) return;
       if (state.nightsMax !== null && dep.nights > state.nightsMax) return;
       if (state.ports.size && !state.ports.has(itin.port_from)) return;
+      if (state.operators.size && !state.operators.has(itin.operator)) return;
       if (state.sites.size) {
         /* Any, not all: picking Brothers and Daedalus means "either", which is
            how somebody shops for a week rather than a checklist. */
@@ -266,8 +278,9 @@
         if (!hit) return;
       }
       if (state.q) {
-        var hay = (itin.boat + " " + itin.name + " " + itin.port_from + " " +
-                   itin.port_to + " " + (itin.dive_sites || []).join(" ")).toLowerCase();
+        var hay = (itin.boat + " " + itin.operator + " " + itin.name + " " +
+                   itin.port_from + " " + itin.port_to + " " +
+                   (itin.dive_sites || []).join(" ")).toLowerCase();
         if (hay.indexOf(state.q) < 0) return;
       }
       out.push({ d: dep, i: itin, m: metricsFor(dep) });
@@ -468,6 +481,7 @@
   }), state.months, true);
   chips("ports", PORTS, state.ports, false);
   chips("sites", SITES, state.sites, false);
+  chips("operators", OPERATORS, state.operators, false);
 
   /* A range rather than chips: the fleet runs three to fourteen nights but
      sits overwhelmingly at seven, so a chip per length would be one useful
@@ -506,6 +520,7 @@
 
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
+    state.operators.clear();
     state.q = "";
     state.nightsMin = state.nightsMax = null;
     state.hideSoldOut = false;
@@ -522,7 +537,8 @@
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
-    D.meta.counts.boats + " boats · all prices in " + D.meta.currency +
+    D.meta.counts.boats + " boats · " +
+    D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
     " · built " + D.meta.generated;
 
   drawNotice();
