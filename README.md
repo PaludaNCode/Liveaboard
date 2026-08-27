@@ -58,7 +58,9 @@ PYTHONPATH=src python3 -m liveaboard.cli scrape   # refresh from the sources
 PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
-`build` emits one self-contained HTML file — CSS and JS inlined, no CDN. That
+`build` emits one self-contained HTML file — CSS, JS and data all inlined, no
+CDN. (One exception, tracked as #59: the page still links a webfont stylesheet
+from Google. It renders and prices correctly without it.) That
 makes page weight a first-class concern: there is no lazy second request to hide
 behind, so a visitor on a phone in a dive shop downloads all of it before seeing
 a row. Fees are written once per itinerary rather than once per departure, which

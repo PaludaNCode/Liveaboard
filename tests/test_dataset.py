@@ -200,9 +200,6 @@ class TestRender(unittest.TestCase):
         self.assertNotIn("/*APP*/", html)
         self.assertNotIn('"__DATA__"', html)
 
-        # No external requests: the page must work from a file:// URL offline.
-        for pattern in (r'src="https?://', r'href="https?://[^"]*\.css'):
-            self.assertIsNone(re.search(pattern, html), f"external reference: {pattern}")
 
     def test_embedded_json_does_not_break_out_of_the_script_tag(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -210,6 +207,95 @@ class TestRender(unittest.TestCase):
         payload = html.split('<script id="payload" type="application/json">')[1]
         payload = payload.split("</script>")[0]
         self.assertGreater(len(json.loads(payload)["departures"]), 0)
+
+
+# Every external host the page is currently allowed to reach, spelled out.
+#
+# The webfont stylesheet is a known violation of the "no CDN" invariant, not an
+# endorsement of it -- see #59. It is listed here so that it is *visible*: the
+# previous test looked for `href="https://..." ending in .css`, and the Google
+# Fonts URL is `/css2?family=...`, so the one external reference that existed
+# was the one shape the check could not match. A test that passes on a page
+# breaking its own stated invariant is worse than no test, because it gets read
+# as evidence.
+#
+# Removing entries from this list is the fix for #59. Adding one means the page
+# reaches somewhere new, which should be a deliberate, reviewed act rather than
+# something a regex quietly permits.
+ALLOWED_EXTERNAL = frozenset(
+    {
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+    }
+)
+
+# Any absolute URL in an attribute -- src, href, and the url() of a stylesheet.
+EXTERNAL_REF = re.compile(r"""(?:src|href)\s*=\s*["'](https?://[^"']+)["']|url\(\s*["']?(https?://[^"')]+)""")
+
+
+class TestNoUnexpectedExternalReferences(unittest.TestCase):
+    """The page ships as one file; anything it fetches at runtime is a claim.
+
+    CLAUDE.md: "the site stays one self-contained HTML file with no CDN."
+    README: "CSS and JS inlined, no CDN."
+    """
+
+    def setUp(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.html = render(Dataset.load(SEED), tmp).read_text(encoding="utf-8")
+
+    def _hosts(self) -> set[str]:
+        found = set()
+        for match in EXTERNAL_REF.finditer(self.html):
+            url = match.group(1) or match.group(2)
+            scheme, _, rest = url.partition("://")
+            found.add(f"{scheme}://{rest.split('/')[0]}")
+        return found
+
+    def test_reaches_only_hosts_on_the_list(self):
+        unexpected = self._hosts() - ALLOWED_EXTERNAL
+        self.assertEqual(
+            unexpected,
+            set(),
+            f"the page reaches {sorted(unexpected)}, which is not on ALLOWED_EXTERNAL. "
+            f"One self-contained file with no CDN is an invariant: inline it, or add "
+            f"the host deliberately and say why.",
+        )
+
+    def test_no_external_script_or_stylesheet_slips_through_as_a_query_url(self):
+        """The shape that defeated the old check: an extensionless asset URL.
+
+        Pinned as its own case because the failure was not "we forgot to test
+        it" -- it was tested, with a pattern that could not match the thing.
+        """
+        css2 = re.findall(r'href="(https?://[^"]*css2\?[^"]*)"', self.html)
+        for url in css2:
+            host = url.split("/")[2]
+            self.assertIn(
+                f"https://{host}",
+                ALLOWED_EXTERNAL,
+                f"extensionless stylesheet from an unlisted host: {url}",
+            )
+
+    def test_the_page_still_works_with_nothing_external(self):
+        """Everything the page needs to function must already be inline.
+
+        The fonts are cosmetic and every stack falls back, so stripping every
+        external reference must leave a page that still carries its own data,
+        styles and behaviour.
+        """
+        stripped = EXTERNAL_REF.sub("", self.html)
+        self.assertIn('<script id="payload"', stripped)
+        # The real stylesheet and app are inlined, not linked.
+        self.assertIn("font-family:", stripped)
+        self.assertIn("function lineCounts", stripped)
+        payload = stripped.split('<script id="payload" type="application/json">')[1]
+        self.assertGreater(len(json.loads(payload.split("</script>")[0])["departures"]), 0)
+
+    def test_every_allowed_host_is_actually_used(self):
+        """A stale allowlist is how an exception outlives the thing it excused."""
+        for host in ALLOWED_EXTERNAL:
+            self.assertIn(host, self.html, f"{host} is allowlisted but unused; drop it")
 
 
 class TestJsonLd(unittest.TestCase):

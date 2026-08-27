@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 336 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 342 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
@@ -60,9 +60,15 @@ Break these and the site starts lying quietly rather than failing loudly.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
-  self-contained HTML file with no CDN. Tests use `unittest`, not pytest. One
-  file makes page weight load-bearing: nothing is lazily fetched, so anything
-  written per departure ships 878 times. Fees belong to the itinerary.
+  self-contained HTML file. Tests use `unittest`, not pytest. One file makes
+  page weight load-bearing: nothing is lazily fetched, so anything written per
+  departure ships 878 times. Fees belong to the itinerary.
+  **No CDN for code, styles or data** — all inlined. The one exception is the
+  webfont stylesheet from `fonts.googleapis.com`, which is a known violation
+  (#59), not a precedent: the page functions fully without it and every stack
+  falls back. `tests/test_dataset.py` pins the external hosts to an explicit
+  allowlist, so anything *new* fails the build. Adding to that list needs a
+  reason; the fix for #59 is emptying it.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
 - **The committed dataset must match what `promote` produces from the committed
