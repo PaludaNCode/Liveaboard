@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-08-27",
   "default_currency": "EUR",
-  "notes": "Prices scraped from liveaboard.com. Fees are not yet captured, so true cost is shown as unknown rather than as the advertised price.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-08-27",
