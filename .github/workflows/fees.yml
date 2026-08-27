@@ -17,6 +17,20 @@ on:
     # Sundays 03:10 UTC — quiet, and it lands before the daily refresh so the
     # week starts with fresh fees.
     - cron: "10 3 * * 0"
+
+  # A fee-parser fix reaches nothing until this run happens again: promote
+  # prefers the committed book, rightly, because a browser sees extras the raw
+  # HTML never will. So the parser changing is itself a reason to re-collect.
+  # Scoped to main and to the three files that decide what a fee means, so an
+  # unrelated push does not send a browser at seventy-nine of someone else's
+  # pages.
+  push:
+    branches: [main]
+    paths:
+      - "src/liveaboard/scrape/fees.py"
+      - "src/liveaboard/scrape/gear.py"
+      - "src/liveaboard/scrape/vessel.py"
+
   workflow_dispatch:
     inputs:
       limit:

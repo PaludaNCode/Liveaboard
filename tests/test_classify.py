@@ -128,3 +128,79 @@ class TestLevelInference(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestBdeIsAllThreeOrNothing(unittest.TestCase):
+    """BDE is a named set of places, not a score.
+
+    A week reaching two of the three is not a weaker BDE; it is a different
+    trip. Counting made the label flip on a single word -- see #36.
+    """
+
+    def test_all_three_is_bde(self):
+        self.assertIs(
+            infer_route(make(["brothers", "daedalus", "elphinstone"])), Route.BDE
+        )
+
+    def test_a_wreck_on_big_brother_names_the_brothers(self):
+        """Numidia and Aida lie on Big Brother, so naming either is naming it."""
+        self.assertIs(
+            infer_route(make(["numidia", "daedalus", "elphinstone"])), Route.BDE
+        )
+
+    def test_st_johns_with_two_pillars_is_southern_not_offshore(self):
+        """The bug this rule exists for.
+
+        "Daedalus & St. John's" read as deep south correctly. Adding
+        Elphinstone gave the offshore family two hits against the south's one
+        and flipped it to BDE -- though St John's is 150 nautical miles further
+        south and is what the week is for.
+        """
+        self.assertIs(
+            infer_route(make(["daedalus", "elphinstone", "st johns"])),
+            Route.DEEP_SOUTH,
+        )
+
+    def test_the_two_site_version_was_already_right_and_stays_right(self):
+        self.assertIs(infer_route(make(["daedalus", "st johns"])), Route.DEEP_SOUTH)
+
+    def test_the_brothers_alone_are_not_bde(self):
+        """"North & Brothers" names one pillar. It is a northern week that adds
+        the Brothers, and calling it BDE was wrong."""
+        self.assertIsNot(infer_route(make(["brothers"])), Route.BDE)
+
+    def test_an_offshore_pair_gets_no_label_rather_than_a_wrong_one(self):
+        """There is no honest name for Daedalus and Elphinstone without the
+        Brothers, and the dive-site column already says where the trip goes."""
+        self.assertIsNone(infer_route(make(["daedalus", "elphinstone"])))
+
+    def test_a_real_bde_week_is_not_swallowed_by_the_combination_rule(self):
+        """A genuine cross-coast run stays a combination; BDE plus a passing
+        northern day does not become one."""
+        self.assertIs(
+            infer_route(make(["brothers", "daedalus", "elphinstone", "thistlegorm"])),
+            Route.BDE,
+        )
+
+    def test_an_explicit_route_still_wins(self):
+        """A value stated in the dataset is never second-guessed."""
+        self.assertIs(
+            infer_route(make(["daedalus", "elphinstone"], route=Route.BDE)), Route.BDE
+        )
+
+    def test_a_cross_coast_run_keeps_its_combination(self):
+        """#36's own warning: a decisive-site rule must not swallow these.
+
+        Where a trip has *been* and what it should be *called* are different
+        questions. Brothers and Daedalus without Elphinstone is not a BDE week,
+        but the boat was still offshore -- so the crossing still counts three
+        cruising grounds.
+        """
+        self.assertIs(
+            infer_route(make([
+                "SS Thistlegorm", "Abu Nuhas",
+                "Big Brother", "Daedalus Reef",
+                "Rocky Island", "Zabargad",
+            ])),
+            Route.COMBINATION,
+        )

@@ -528,3 +528,59 @@ class TestEveryCodeCanBeNamed(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestFeeBookDrift(unittest.TestCase):
+    """Whether the committed book is what today's parser would produce.
+
+    ``promote`` prefers the book over the daily run's own parse, rightly -- a
+    browser sees extras the raw HTML never will. The cost is that a fee-parser
+    fix reaches nothing until the weekly browser run goes again, and a refresh
+    can run entirely green while the page keeps charges the fix removed.
+    """
+
+    def book(self, fees, disclosure=None):
+        return {"vessels": {"alia-soul": {
+            "disclosure": disclosure or {
+                "required": "National Park Fees (€35 / trip).",
+            },
+            "fees": fees,
+        }}}
+
+    def test_a_book_matching_the_parser_reports_nothing(self):
+        from liveaboard.scrape.fees import drift, parse_extras, to_fee_dicts
+
+        text = "Required Extras: National Park Fees (€35 / trip)."
+        fresh = to_fee_dicts(parse_extras(text), {})
+        self.assertEqual(drift(self.book(fresh)), {})
+
+    def test_a_book_the_parser_no_longer_agrees_with_is_reported(self):
+        from liveaboard.scrape.fees import drift
+
+        stale = [{"code": "marine_park", "tier": "mandatory", "basis": "per_trip",
+                  "included": False, "amount": {"amount": 999.0, "currency": "EUR"}}]
+        report = drift(self.book(stale))
+        self.assertIn("alia-soul", report)
+        gained, lost = report["alia-soul"]
+        self.assertTrue(any("999" in entry for entry in lost))
+
+    def test_gear_is_excluded_because_its_price_is_not_in_the_text(self):
+        """The first run of this check reported all seventy-nine vessels.
+
+        The disclosure lists "Rental Gear" and stops; the figure is in the
+        #modal-gear dialog and overwrites the unpriced line. Re-reading the
+        text alone can never reproduce it, so comparing them is meaningless.
+        """
+        from liveaboard.scrape.fees import drift
+
+        priced_gear = [{"code": "gear_rental", "tier": "optional",
+                        "basis": "per_week", "included": False,
+                        "amount": {"amount": 206.0, "currency": "EUR"}}]
+        book = self.book(priced_gear, disclosure={"optional": "Rental Gear."})
+        self.assertEqual(drift(book), {})
+
+    def test_a_vessel_with_no_stored_text_is_not_called_drifted(self):
+        """Collected before the text was kept. Unanswerable, not wrong."""
+        from liveaboard.scrape.fees import drift
+
+        self.assertEqual(drift({"vessels": {"x": {"fees": [], "disclosure": {}}}}), {})

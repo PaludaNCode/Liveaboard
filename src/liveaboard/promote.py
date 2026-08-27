@@ -255,37 +255,26 @@ def _guests(summary: str | None) -> int | None:
     return None
 
 
-DIVES_PER_FULL_DAY = 3
-"""Dives on a day spent at sea, which is the industry's own standard shape.
+def _dives(stated: int | None = None) -> int:
+    """The operator's own dive count, or ``0`` when it does not publish one.
 
-Egyptian liveaboards run a three-dive day plus night dives on request. This is
-the number every operator's schedule is built around, and the one divers assume
-when they compare a week against a mini-safari.
-"""
+    This used to work the count out from nights at three dives a full day, and
+    the arithmetic was defensible -- eighteen for a seven-night week is what the
+    vessels that do state a figure publish. The problem was never accuracy.
 
+    Price per dive is ``total / dives``, and at a fixed rate per night that is
+    ``total / (3 * (nights - 1))`` -- a constant multiple of price per night.
+    292 of 317 itineraries run seven nights, so across almost the whole table
+    the column ranked trips in exactly the same order as the column beside it,
+    while looking like an independent measurement. A number whose denominator
+    was invented cannot say anything its numerator did not already say.
 
-def _dives(nights: int, stated: int | None = None) -> int:
-    """How many dives a trip of this length runs.
-
-    An operator's own figure wins whenever there is one. There is not: the
-    source publishes no per-trip count, and what does appear on a vessel page
-    is a marketing maximum -- "up to 18 dives per week" -- attached to the boat
-    rather than the sailing.
-
-    So this is worked out from nights, and the arithmetic is deliberately
-    conservative. Full diving days are ``nights - 1``: the first day is arrival
-    and a check dive, the last is a dry day before flying. Three dives on each
-    of those gives eighteen for a seven-night week, which is exactly the figure
-    the two vessels stating one both publish.
-
-    Erring low matters in one direction only. Assuming *more* dives divides the
-    bill by a bigger number and makes every trip look cheaper per dive, which
-    is the failure this site exists to correct. A trip that turns out to run
-    more dives than this is a better deal than the page claims, never worse.
+    Only 61 of 317 operators publish a count, and a probe established the rest
+    is not on the page at all. So the honest answer for the other 253 is that
+    nobody has said -- the same answer this project gives for a dive site it
+    cannot name and a fee nobody has read.
     """
-    if stated and stated > 0:
-        return stated
-    return max(1, (nights - 1) * DIVES_PER_FULL_DAY)
+    return stated if stated and stated > 0 else 0
 
 
 AVAILABILITY = {
@@ -392,11 +381,34 @@ def promote(
     # Merged per code rather than wholesale, so a vessel covered here keeps
     # every scraped fee this file does not mention.
     hand: dict[str, dict[str, Any]] = (facts or {}).get("vessels") or {}
+    hand_read_on = (facts or {}).get("collected") or ""
+    superseded: list[str] = []
     for slug, entry in hand.items():
         if not entry.get("fees"):
             continue
         merged = {f["code"]: f for f in fee_book.get(slug, [])}
-        merged.update({f["code"]: f for f in entry["fees"]})
+        # The scrape's own date, per vessel, falling back to the book's.
+        scraped_on = (
+            (fees or {}).get("vessels", {}).get(slug, {}).get("collected")
+            or (fees or {}).get("scraped_at")
+            or ""
+        )
+        for fee in entry["fees"]:
+            existing = merged.get(fee["code"])
+            # A hand-read figure fills a gap; it does not outlive the scrape
+            # that replaced it. Once the browser run reads a real price for a
+            # code, a typed-in number collected earlier is last month's answer
+            # winning over this week's, and nothing would ever say so.
+            if (
+                existing is not None
+                and existing.get("amount") is not None
+                and scraped_on
+                and hand_read_on
+                and scraped_on > hand_read_on
+            ):
+                superseded.append(f"{slug}/{fee['code']}")
+                continue
+            merged[fee["code"]] = fee
         fee_book[slug] = list(merged.values())
 
     # "Free Nitrox" in the vessel's diving amenities is the operator saying it
@@ -519,10 +531,10 @@ def promote(
                 "operator_id": boat_operator.get(slug, UNKNOWN_OPERATOR["id"]),
                 "boat_id": slug,
                 "nights": nights,
-                "dives": _dives(nights, hand.get(slug, {}).get("dives")
-                                        or source.get("dives")),
-                "dives_estimated": not (hand.get(slug, {}).get("dives")
-                                        or source.get("dives")),
+                # Zero means the operator does not publish one, and the page
+                # says so rather than dividing by a number nobody stated.
+                "dives": _dives(hand.get(slug, {}).get("dives")
+                                or source.get("dives")),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Left empty on purpose. Route and theme are derived from dive
@@ -582,6 +594,12 @@ def promote(
     }
     if skipped:
         payload["promotion_skipped"] = skipped
+    if superseded:
+        # Reported rather than silent: every entry here is a hand-typed figure
+        # the scrape has since read for itself, and the honest response is to
+        # delete it from data/operator_facts.json rather than leave it as a
+        # redundant override that will one day be wrong.
+        payload["facts_superseded"] = sorted(superseded)
     return payload
 
 

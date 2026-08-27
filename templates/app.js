@@ -191,21 +191,24 @@
         return "<b>" + span(m) + "</b>" +
           (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "");
       } },
-    /* Price per dive is what divers compare on, so it earns a column even
-       though the denominator is worked out rather than published. Marked with
-       a tilde wherever it is: a figure divided by an assumption is a weaker
-       claim than one divided by a stated count, and the two must not look
-       alike on the same page. */
+    /* Price per dive is what divers compare on, and it is shown only where the
+       operator publishes a dive count — 61 trips of 317.
+
+       The other 253 used to carry a figure worked out from nights at three
+       dives a day. It looked like a measurement and was not one: total over
+       3*(nights-1) is a constant multiple of price per night, and 292 of the
+       trips run seven nights, so down almost the whole table the column ranked
+       trips in exactly the same order as the column beside it. An empty cell
+       is the same answer this page gives for a dive site nobody named. */
     { k: "perdive", t: "Per dive", num: true,
       v: function (d, i, m) { return i.dives > 0 ? m.total / i.dives : -1; },
       show: function (d, i, m) {
-        if (!d.mandatory_known || !i.dives) return '<span class="dim">—</span>';
-        var value = eur(m.total / i.dives);
-        return i.dives_estimated
-          ? '<span class="est" title="' + i.dives +
-            ' dives assumed: three a day for every full day at sea. The ' +
-            'operator does not publish a count.">~' + value + "</span>"
-          : value;
+        if (!i.dives) {
+          return '<span class="dim" title="The operator does not publish a ' +
+                 'dive count for this trip.">not stated</span>';
+        }
+        if (!d.mandatory_known) return '<span class="dim">—</span>';
+        return eur(m.total / i.dives);
       } },
     /* Included or extra, said plainly. Half this fleet bundles nitrox and half
        bills for it, and on a page for comparing trips that difference has to be
@@ -545,7 +548,9 @@
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
-    D.meta.counts.boats + " boats · " +
+    /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are
+       never linked from the search pages, so the crawl cannot see them. */
+    D.meta.counts.boats + " boats bookable by the berth · " +
     D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
     " · built " + D.meta.generated;
 

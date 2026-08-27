@@ -132,6 +132,35 @@ def cmd_check(args: argparse.Namespace) -> int:
     return 0
 
 
+BARREN_RECHECK_DAYS = 7
+"""How long a "sells nothing this season" verdict is trusted.
+
+Long enough to save the forty-eight daily fetches those vessels cost, short
+enough that a boat opening a season is picked up within a week. Never
+permanent: a cache that stops expiring is a fleet that quietly shrinks.
+"""
+
+
+def _barren(path: Path) -> tuple[set[str], dict[str, str]]:
+    """Vessels to skip this run, and the full record they came from."""
+    if not path.exists():
+        return set(), {}
+    try:
+        record = json.loads(path.read_text(encoding="utf-8")).get("vessels") or {}
+    except (OSError, ValueError):
+        return set(), {}
+    today = date.today()
+    fresh = set()
+    for slug, checked in record.items():
+        try:
+            age = (today - date.fromisoformat(checked)).days
+        except (TypeError, ValueError):
+            continue
+        if 0 <= age < BARREN_RECHECK_DAYS:
+            fresh.add(slug)
+    return fresh, record
+
+
 def cmd_scrape(args: argparse.Namespace) -> int:
     """Run the source adapters and write their raw output.
 
@@ -144,6 +173,14 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     combined = ScrapeOutput()
     blocked = 0
 
+    barren_path = Path(args.barren)
+    skip_vessels, barren_record = _barren(barren_path)
+    if skip_vessels:
+        print(
+            f"-- skipping {len(skip_vessels)} vessel(s) that sold nothing this season "
+            f"when last checked; re-checked after {BARREN_RECHECK_DAYS} days"
+        )
+
     for name in selected:
         adapter_cls = ADAPTERS.get(name)
         if adapter_cls is None:
@@ -153,6 +190,8 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         adapter = adapter_cls(fetcher)
         if args.max_pages:
             adapter.max_pages = args.max_pages
+        if skip_vessels and hasattr(adapter, "skip_vessels"):
+            adapter.skip_vessels = frozenset(skip_vessels)
         print(f"-- {name}")
         try:
             output = adapter.run()
@@ -196,6 +235,36 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
     print(f"wrote candidate {out}")
+
+    # Which vessels this run fetched and got nothing from. Only recorded for
+    # boats actually visited: a vessel skipped this run keeps its earlier date,
+    # so the seven-day clock runs from when it was last really looked at rather
+    # than being reset by the skip itself -- otherwise the cache would renew
+    # its own verdict forever and the boat would never be checked again.
+    visited = {i.get("id") for i in combined.itineraries if i.get("id")}
+    selling = {d.get("boat_slug") for d in combined.departures}
+    for slug in sorted(visited - selling):
+        barren_record[slug] = date.today().isoformat()
+    for slug in sorted(visited & selling):
+        barren_record.pop(slug, None)
+    if barren_record:
+        barren_path.parent.mkdir(parents=True, exist_ok=True)
+        barren_path.write_text(
+            json.dumps(
+                {
+                    "note": (
+                        "Vessels that published no departure when last fetched. "
+                        "Skipped for a week to save the requests, then re-checked. "
+                        "Delete this file to force a full crawl."
+                    ),
+                    "vessels": dict(sorted(barren_record.items())),
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        print(f"wrote {barren_path}: {len(barren_record)} vessel(s) selling nothing")
 
     # Written beside the candidate rather than inside it: promote reads the
     # candidate on every run and has no use for this, while this exists purely
@@ -316,7 +385,18 @@ def cmd_promote(args: argparse.Namespace) -> int:
 
     if facts:
         covered = len(facts.get("vessels") or {})
-        print(f"  hand-read figures applied for {covered} vessels from {facts_path}")
+        print(
+            f"  hand-read figures applied for {covered} vessels from {facts_path}"
+            f" (read {facts.get('collected', 'undated')})"
+        )
+        stale = payload.get("facts_superseded") or []
+        if stale:
+            print(
+                f"::warning::{len(stale)} hand-read figure(s) in {facts_path} have been "
+                f"overtaken by a fresher scrape and are no longer used; delete them"
+            )
+            for entry in stale[:10]:
+                print(f"    {entry}")
 
     if fx:
         print(f"  rates from {fx.get('source', 'an unnamed source')}, quoted {fx.get('as_of')}")
@@ -336,6 +416,21 @@ def cmd_promote(args: argparse.Namespace) -> int:
             f"  fees applied to {priced}/{len(payload['itineraries'])} itineraries"
             f" from {fee_path} collected {fees.get('scraped_at', 'unknown date')}"
         )
+
+        # The book stores the disclosure text each parse was made from, so
+        # whether it is what today's parser would produce is answerable here,
+        # offline. A run that reports drift is a run whose fee parsing did not
+        # reach the page: the fix is to re-run fees.yml, not to change this.
+        from .scrape.fees import drift
+
+        drifted = drift(fees)
+        if drifted:
+            print(
+                f"::warning::{len(drifted)} vessel(s) in {fee_path} were parsed by an "
+                f"older version of scrape/fees.py; re-run fees.yml to apply the change"
+            )
+            for slug, (gained, lost) in sorted(drifted.items())[:10]:
+                print(f"    {slug}: +{gained or '-'} -{lost or '-'}")
     else:
         print(f"  no {fee_path} found; fees will render as unknown")
 
@@ -487,6 +582,10 @@ def main(argv: list[str] | None = None) -> int:
     scrape.add_argument("--out", default=Path("data/candidate.json"), type=Path)
     scrape.add_argument("--snapshots", default=DEFAULT_SNAPSHOTS, type=Path)
     scrape.add_argument("--archive", default=Path("data/archive.json"), type=Path)
+    scrape.add_argument(
+        "--barren", default=Path("data/barren.json"), type=Path,
+        help="cache of vessels selling nothing this season; delete to force a full crawl",
+    )
     scrape.add_argument(
         "--warnings", type=int, default=10, help="how many warnings to print"
     )
