@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "generated": "2026-08-27",
+  "default_currency": "EUR",
+  "notes": "Prices scraped from liveaboard.com. Fees are not yet captured, so true cost is shown as unknown rather than as the advertised price.",
+  "fx": {
+    "display_currency": "EUR",
+    "as_of": "2026-08-27",
+    "source": "placeholder — replace with a real rate source",
+    "rates": {
+      "USD": 0.92,
+      "GBP": 1.17,
+      "EGP": 0.019
+    }
+  },
+  "operators": [
+    {
+      "id": "unknown-operator",
+      "name": "Operator not captured"
+    }
+  ],
+  "boats": [
+    {
+      "id": "avo",
+      "name": "AVO",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "blue",
+      "name": "Blue",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "golden-imperial",
+      "name": "Golden Imperial",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "marselia-star",
+      "name": "Marselia Star",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "oceanix",
+      "name": "Oceanix",
+      "operator_id": "unknown-operator"
+    },
+    {
+      "id": "safy-mar",
+      "name": "Safy Mar",
+      "operator_id": "unknown-operator"
+    }
+  ],
+  "itineraries": [
+    {
+      "id": "avo--5-off-daedalus-elphinstone-port-ghalib-port-ghalib",
+      "name": "5% Off: Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "avo",
+      "nights": 5,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/avo",
+      "fees": []
+    },
+    {
+      "id": "blue--brothers-daedalus-and-elphinstone-hurghada-hurghada",
+      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "blue",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue",
+      "fees": []
+    },
+    {
+      "id": "blue--north-tiran-hurghada-hurghada",
+      "name": "North & Tiran (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "blue",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "tiran"
+      ],
+      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue",
+      "fees": []
+    },
+    {
+      "id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
+      "name": "Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-imperial",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
+      "fees": []
+    },
+    {
+      "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
+      "name": "North - Straits of Tiran - Brother Islands - Daedalus - Rocky Island - Zabargad - Salem Express (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-imperial",
+      "nights": 14,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "daedalus",
+        "rocky island",
+        "zabargad",
+        "tiran",
+        "salem express"
+      ],
+      "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
+      "fees": []
+    },
+    {
+      "id": "golden-imperial--north-straits-of-tiran-dahab-hurghada-hurghada",
+      "name": "North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-imperial",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "tiran"
+      ],
+      "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial",
+      "fees": []
+    },
+    {
+      "id": "marselia-star--safari-trip-hurghada-and-safaga-hurghada-hurghada",
+      "name": "Safari Trip: Hurghada and Safaga (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "marselia-star",
+      "nights": 5,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [],
+      "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/marselia-star",
+      "fees": []
+    },
+    {
+      "id": "oceanix--10-off-brothers-daedalus-elphinstone-hurghada-hurghada",
+      "name": "10% Off: Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "oceanix",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
+      "fees": []
+    },
+    {
+      "id": "oceanix--10-off-north-wrecks-tour-hurghada-hurghada",
+      "name": "10% Off: North & Wrecks Tour (Hurghada - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "oceanix",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [],
+      "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
+      "fees": []
+    },
+    {
+      "id": "oceanix--south-safaga-hurghada-marsa-alam",
+      "name": "South & Safaga (Hurghada - Marsa Alam)",
+      "operator_id": "unknown-operator",
+      "boat_id": "oceanix",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [],
+      "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/oceanix",
+      "fees": []
+    },
+    {
+      "id": "safy-mar--best-of-the-south-port-ghalib-port-ghalib",
+      "name": "Best of the South (Port Ghalib - Port Ghalib)",
+      "operator_id": "unknown-operator",
+      "boat_id": "safy-mar",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [],
+      "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar",
+      "fees": []
+    },
+    {
+      "id": "safy-mar--central-red-sea-route-port-ghalib-hurghada",
+      "name": "Central Red Sea Route (Port Ghalib - Hurghada)",
+      "operator_id": "unknown-operator",
+      "boat_id": "safy-mar",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Egypt",
+      "port_to": "Egypt",
+      "dive_sites": [],
+      "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar",
+      "fees": []
+    }
+  ],
+  "departures": [
+    {
+      "id": "avo-2027-07-24-7",
+      "itinerary_id": "avo--5-off-daedalus-elphinstone-port-ghalib-port-ghalib",
+      "start": "2027-07-24",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 940.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/avo?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/avo"
+      }
+    },
+    {
+      "id": "blue-2027-08-12-8",
+      "itinerary_id": "blue--brothers-daedalus-and-elphinstone-hurghada-hurghada",
+      "start": "2027-08-12",
+      "end": "2027-08-19",
+      "price": {
+        "amount": 1655.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue"
+      }
+    },
+    {
+      "id": "blue-2027-08-19-9",
+      "itinerary_id": "blue--north-tiran-hurghada-hurghada",
+      "start": "2027-08-19",
+      "end": "2027-08-26",
+      "price": {
+        "amount": 1503.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue"
+      }
+    },
+    {
+      "id": "golden-imperial-2027-06-24-6",
+      "itinerary_id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-06-24",
+      "end": "2027-07-01",
+      "price": {
+        "amount": 1603.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+      }
+    },
+    {
+      "id": "golden-imperial-2027-07-22-8",
+      "itinerary_id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-07-22",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 1514.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+      }
+    },
+    {
+      "id": "golden-imperial-2027-08-12-9",
+      "itinerary_id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
+      "start": "2027-08-12",
+      "end": "2027-08-26",
+      "price": {
+        "amount": 2563.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=08/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+      }
+    },
+    {
+      "id": "golden-imperial-2027-06-10-5",
+      "itinerary_id": "golden-imperial--north-straits-of-tiran-dahab-hurghada-hurghada",
+      "start": "2027-06-10",
+      "end": "2027-06-17",
+      "price": {
+        "amount": 1603.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=06/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+      }
+    },
+    {
+      "id": "golden-imperial-2027-07-08-7",
+      "itinerary_id": "golden-imperial--north-straits-of-tiran-dahab-hurghada-hurghada",
+      "start": "2027-07-08",
+      "end": "2027-07-15",
+      "price": {
+        "amount": 1514.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=07/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/golden-imperial"
+      }
+    },
+    {
+      "id": "marselia-star-2027-05-24-9",
+      "itinerary_id": "marselia-star--safari-trip-hurghada-and-safaga-hurghada-hurghada",
+      "start": "2027-05-24",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1399.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/marselia-star"
+      }
+    },
+    {
+      "id": "oceanix-2027-05-08-7",
+      "itinerary_id": "oceanix--10-off-brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1154.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+      }
+    },
+    {
+      "id": "oceanix-2027-05-15-8",
+      "itinerary_id": "oceanix--10-off-north-wrecks-tour-hurghada-hurghada",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1049.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+      }
+    },
+    {
+      "id": "oceanix-2027-05-22-9",
+      "itinerary_id": "oceanix--south-safaga-hurghada-marsa-alam",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1154.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/oceanix"
+      }
+    },
+    {
+      "id": "safy-mar-2027-05-01-8",
+      "itinerary_id": "safy-mar--best-of-the-south-port-ghalib-port-ghalib",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1772.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+      }
+    },
+    {
+      "id": "safy-mar-2027-05-08-9",
+      "itinerary_id": "safy-mar--central-red-sea-route-port-ghalib-hurghada",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1690.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=05/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/safy-mar"
+      }
+    }
+  ]
+}
