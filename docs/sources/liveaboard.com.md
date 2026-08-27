@@ -49,11 +49,23 @@ constant per vessel across all 67.
 **Cost: one request per itinerary, not per departure.** There are 878 distinct
 tour ids — one per sailing — but dive sites, dive count and the entry bar are
 properties of the trip, so every departure of one itinerary returns the same
-answer. 340 requests covers everything; fetching all 878 would spend 538
+answer. 314 requests covers everything; fetching all 878 would spend 564
 re-reading what was already in hand.
 
 `showPrices=false` is passed because prices come from the `Event` offers. A
 price-bearing variant presumably exists and has not been looked at.
+
+**Group by the promoted trip name, not the raw one.** `Event.name` carries the
+operator's discount banner — `20% Off: Ultimate Red Sea (Port Ghalib -
+Hurghada)` — and `promote` strips it before grouping, because a week on sale is
+the same week. Keyed on the raw string, 71 of 314 itineraries matched nothing
+and the fetcher asked for 97 trips it already had under their banner spellings.
+`promote.itinerary_key` is that rule, exported so there is one copy of it.
+
+`tools/fetch_itineraries.py` writes the answers to `data/itineraries.json` and
+`promote` merges them the way it merges the fee book. It is **incremental**: a
+trip's reefs do not change from night to night, so only genuinely new trips are
+fetched, which is what makes the daily refresh affordable.
 
 ## Facts, and where each one is
 

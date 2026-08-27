@@ -116,9 +116,10 @@ its own floor. liveaboard.com states none, so the crawl runs at 2s.
 src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   dataset, render, cli
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
-                  fees, gear, vessel        (the last three need a browser)
+                  itinerary, fees, gear, vessel   (the last three need a browser)
 templates/        index.html + style.css + app.js, inlined at build time
-tools/            make_seed, fetch_fx, scrape_fees, reparse_candidate, probe_*
+tools/            make_seed, fetch_fx, fetch_itineraries, scrape_fees,
+                  reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
 ```
@@ -131,10 +132,11 @@ tests/            stdlib unittest, no dependencies
 | `data/candidate.json` | the raw scrape, before promotion | yes |
 | `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
+| `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
 The dataset is **regenerated, not edited**. `promote` is pure — candidate, fees,
-facts and FX in, dataset out, no network — so `data/egypt-2027.json` must always
+fees, facts, the per-trip book and FX in, dataset out, no network — so `data/egypt-2027.json` must always
 be what the committed code produces from the committed inputs. CI checks it
 (`promote --check`), and a merge touching `src/liveaboard/` re-promotes on main,
 so the published page is never more than one merge behind the parser. Without

@@ -73,6 +73,28 @@ jobs:
             --out data/candidate.json \
             --snapshots data/snapshots
 
+      # What each trip says about itself: the reefs it visits, its dive count,
+      # its group size and its entry bar. A separate endpoint from the vessel
+      # page, and the only per-*trip* source there is — everything else here
+      # describes the boat's year, which is why "Simply the Best" had no reefs
+      # and a St John's week once carried a badge for a reef 600 km away.
+      #
+      # After the scrape because it reads the tour ids out of the archive that
+      # scrape just wrote, and before the promote that consumes its output.
+      #
+      # Incremental by design: a trip's reefs do not change from night to
+      # night, so only genuinely new trips are fetched. The first run is about
+      # 314 requests at the fetcher's usual delay; every run after it is a
+      # handful, which is what makes this affordable to do daily at all.
+      - name: Read what each trip says about itself
+        if: steps.scrape.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python3 tools/fetch_itineraries.py \
+            --archive data/archive.json \
+            --out data/itineraries.json \
+            --snapshots data/snapshots
+
       - name: Promote the candidate
         id: promote
         if: steps.scrape.outcome == 'success'

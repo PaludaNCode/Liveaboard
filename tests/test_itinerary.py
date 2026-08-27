@@ -7,15 +7,21 @@ closing tags the page really omits.
 
 from __future__ import annotations
 
+import sys
 import unittest
 from pathlib import Path
 
+from liveaboard.promote import itinerary_key
 from liveaboard.scrape.itinerary import (
     TripDetail,
     min_logged_dives,
     parse_regions,
     parse_trip,
 )
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
+
+import fetch_itineraries  # noqa: E402
 
 FIXTURE = Path(__file__).parent / "fixtures" / "itinerary_fragment.html"
 
@@ -109,3 +115,86 @@ class TestTheLoggedDiveBar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def archive(*events) -> dict:
+    """An archive page, shaped as ``data/archive.json`` stores one."""
+    return {
+        "pages": [
+            {
+                "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027",
+                "nodes": [
+                    {"@type": "Product", "sku": "LA-1-4418"},
+                    *[{"@type": "Event", "@id": i, "name": n} for i, n in events],
+                ],
+            }
+        ]
+    }
+
+
+class TestWhichTripsGetFetched(unittest.TestCase):
+    """One request per itinerary. 878 tour ids exist and 314 trips do.
+
+    Every field this book fills has a fallback in ``promote``, so asking for
+    the wrong things is not a red build -- it is a page that quietly keeps
+    yesterday's answers. These are the tests that would catch it.
+    """
+
+    def wanted(self, *events):
+        return fetch_itineraries.wanted(archive(*events))
+
+    def test_the_ids_come_out_of_the_event_id(self):
+        picked = self.wanted(("LA-1-4418-353504", "North & Tiran (Hurghada - Hurghada)"))
+        slug, boat, tour, _ = next(iter(picked.values()))
+        self.assertEqual((slug, boat, tour), ("alia-soul", "4418", "353504"))
+
+    def test_the_slug_survives_the_month_query(self):
+        """``?m=5/2027`` contains a slash, so splitting the path last gives
+        "2027" and every trip is filed under a vessel that does not exist."""
+        slug = next(iter(self.wanted(("LA-1-4418-1", "North & Tiran")).values()))[0]
+        self.assertEqual(slug, "alia-soul")
+
+    def test_every_sailing_of_one_trip_is_one_request(self):
+        picked = self.wanted(
+            ("LA-1-4418-1", "North & Tiran (Hurghada - Hurghada)"),
+            ("LA-1-4418-2", "North & Tiran (Hurghada - Hurghada)"),
+            ("LA-1-4418-3", "North & Tiran (Hurghada - Hurghada)"),
+        )
+        self.assertEqual(len(picked), 1)
+
+    def test_a_trip_on_sale_is_the_same_trip(self):
+        """The banner is on the Event name and promote strips it before
+        grouping. Keyed raw, this asks for a trip it already has and files the
+        answer under a key no itinerary will ever look up."""
+        picked = self.wanted(
+            ("LA-1-4418-1", "Ultimate Red Sea (Port Ghalib - Hurghada)"),
+            ("LA-1-4418-2", "20% Off: Ultimate Red Sea (Port Ghalib - Hurghada)"),
+        )
+        self.assertEqual(len(picked), 1)
+
+    def test_two_ports_are_two_trips(self):
+        picked = self.wanted(
+            ("LA-1-4418-1", "Brothers & Daedalus (Hurghada - Hurghada)"),
+            ("LA-1-4418-2", "Brothers & Daedalus (Hurghada - Port Ghalib)"),
+        )
+        self.assertEqual(len(picked), 2)
+
+    def test_the_key_is_the_one_promote_looks_up(self):
+        picked = self.wanted(("LA-1-4418-1", "20% Off: Ultimate Red Sea"))
+        self.assertIn(itinerary_key("alia-soul", "Ultimate Red Sea"), picked)
+
+    def test_an_id_in_another_shape_is_skipped_not_guessed(self):
+        """A url built from a misread id asks the source for nothing useful."""
+        self.assertEqual(self.wanted(("LA-1-4418", "North & Tiran")), {})
+        self.assertEqual(self.wanted((None, "North & Tiran")), {})
+
+    def test_a_nameless_event_is_skipped(self):
+        """Its key would be the vessel alone, colliding with every other."""
+        self.assertEqual(self.wanted(("LA-1-4418-1", "")), {})
+
+    def test_the_endpoint_carries_both_ids_and_asks_for_no_prices(self):
+        """Prices come from the Event offers; this is about the trip."""
+        url = fetch_itineraries.endpoint("4418", "353504")
+        self.assertIn("boatID=4418", url)
+        self.assertIn("tourID=353504", url)
+        self.assertIn("showPrices=false", url)

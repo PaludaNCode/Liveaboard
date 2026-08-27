@@ -28,6 +28,10 @@ on:
       # code changing at all.
       - "data/operator_facts.json"
       - "data/fx.json"
+      # The per-trip book, written by its own crawl in refresh.yml. It fills
+      # dive sites, dive counts and the entry bar, so a fresh one is a new
+      # dataset with no code change at all.
+      - "data/itineraries.json"
       - ".github/workflows/promote.yml"
   workflow_dispatch:
     inputs:
