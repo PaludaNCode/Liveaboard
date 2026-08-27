@@ -32,6 +32,20 @@ SEASON_MONTHS = (5, 6, 7, 8)
 SEASON_YEAR = 2027
 DESTINATION = "egypt"
 
+SEASON_QUERY = f"?m={SEASON_MONTHS[0]}/{SEASON_YEAR}"
+"""Month selector for a vessel page: ``?m=5/2027``.
+
+Without it a boat page returns whatever window it defaults to, which starts
+from today. A first full run scraped 746 departures spanning 2026-09 to
+2027-10 and kept just 14 — everything else fell outside the season, not
+because the boats do not sail it but because we never asked about it.
+
+Each page returns roughly ten events running forward from the selected month,
+so asking for the season's first month covers May to August in the same single
+request per vessel. Anchoring on the start of the window rather than iterating
+every month is what keeps a polite crawl inside one CI job.
+"""
+
 
 def search_paths() -> tuple[str, ...]:
     """Month-scoped search URLs for the configured season.
@@ -142,10 +156,10 @@ class LiveaboardComAdapter(SourceAdapter):
 
         for listing_url in self._listing_urls():
             yield listing_url
-            # Already snapshotted by the fetcher, so re-reading is free.
+            # Already cached by the fetcher, so re-reading costs nothing.
             listing = self.fetcher.get(listing_url)
             for link in sorted(self.boat_links(listing.body)):
-                boat_url = f"https://{self.host}{link}"
+                boat_url = f"https://{self.host}{link}{SEASON_QUERY}"
                 if boat_url in seen:
                     continue
                 seen.add(boat_url)
@@ -166,7 +180,17 @@ class LiveaboardComAdapter(SourceAdapter):
         no use for comparing what a specific sailing costs.
         """
         output = ScrapeOutput()
-        slug = urlparse(result.url).path.rstrip("/").rsplit("/", 1)[-1]
+        path = urlparse(result.url).path
+        slug = path.rstrip("/").rsplit("/", 1)[-1]
+
+        # Listing pages are crawled for their links, not their content. They
+        # carry no structured data, and reporting that as a parse failure buries
+        # the real failures in noise.
+        if path.startswith(f"/diving/search/") or path.rstrip("/") in {
+            f"/diving/{DESTINATION}",
+            *(p.rstrip("/") for p in DESTINATION_PATHS),
+        }:
+            return output
 
         events = jsonld.of_type(result.body, "Event", "TouristTrip", "Trip")
         products = jsonld.of_type(result.body, "Product")
