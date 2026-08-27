@@ -123,10 +123,10 @@ class TestPayload(unittest.TestCase):
             codes = [line["code"] for line in departure["lines"]]
             self.assertEqual(codes[0], "base_fare")
 
-    def test_transparency_is_a_fraction(self):
+    def test_the_page_grades_no_operators(self):
+        """The site compares what trips cost; it does not score who sells them."""
         for departure in self.payload["departures"]:
-            self.assertGreaterEqual(departure["transparency"], 0.0)
-            self.assertLessEqual(departure["transparency"], 1.0)
+            self.assertNotIn("transparency", departure)
 
 
 class TestRender(unittest.TestCase):

@@ -3,16 +3,17 @@
 Given a departure and a set of visitor toggles, produce the full stack of what
 a diver actually pays, in euro, with every line attributable to a source.
 
-Two design decisions are load-bearing:
+One design decision is load-bearing: **included fees still appear**, at zero
+additional cost. An operator that bundles marine park fees should be visibly
+different from one that bills at the dock, and deleting the line would hide
+exactly the difference the site exists to show.
 
-1. **Included fees still appear**, at zero additional cost. An operator that
-   bundles marine park fees should be visibly rewarded for it, and deleting the
-   line would hide exactly the difference the site exists to show.
-
-2. **The transparency score is computed against a fixed reference basket**, not
-   against the visitor's live toggles. A score that moved every time someone
-   flicked "nitrox" would rank operators by the visitor's mood rather than by
-   how much of the real cost they disclose up front.
+This module deliberately produces no score. It used to derive an "honesty"
+percentage per operator, which turned the page into a league table and, worse,
+disagreed with the total beside it: the score was measured against a fixed
+basket while the total followed the visitor's own toggles. Two numbers about
+the same trip, contradicting each other. What a diver needs is what the trip
+costs them, so that is all this returns.
 """
 
 from __future__ import annotations
@@ -39,21 +40,6 @@ DEFAULT_TOGGLES: dict[str, bool] = {
 Transfers and gratuities default on because almost nobody actually skips them;
 nitrox and gear default off because plenty of divers bring their own.
 """
-
-REFERENCE_BASKET: dict[str, bool] = {
-    "nitrox": True,
-    "gear": True,
-    "insurance": True,
-    "transfers": True,
-    "gratuities": True,
-}
-"""The fixed basket the transparency score is measured against.
-
-Deliberately the most inclusive reading: every conditional cost a typical diver
-could face. It makes the score a property of the operator's pricing, not of the
-person looking at it.
-"""
-
 
 @dataclass(frozen=True, slots=True)
 class BreakdownLine:
@@ -328,16 +314,3 @@ def _sorted_fees(fees: Iterable[FeeItem]) -> list[FeeItem]:
     return sorted(fees, key=lambda f: (_TIER_ORDER[f.tier], f.code.value))
 
 
-def transparency_score(itinerary: Itinerary, departure: Departure, fx: FxTable) -> float:
-    """Fraction of the reference-basket cost that the headline price discloses.
-
-    ``1.0`` means the advertised number is the whole bill. ``0.7`` means three
-    euro in every ten arrive later, at the dock or on the final invoice.
-    """
-    reference = compute(itinerary, departure, fx, REFERENCE_BASKET)
-    total = reference.total.amount
-    if total <= 0:
-        return 1.0
-    # Bundled fees need no separate credit here: they are already inside the
-    # advertised price, which is precisely why that price is more honest.
-    return min(1.0, float(reference.base.amount / total))

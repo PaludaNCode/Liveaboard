@@ -270,7 +270,7 @@ select {
 
 .advertised .unknown { color: var(--text-faint); font-style: italic; }
 
-.honesty-unknown {
+.cost-unknown {
   margin-top: 8px;
   padding: 3px 8px;
   display: inline-block;
@@ -281,14 +281,6 @@ select {
   border-radius: var(--radius-sm);
 }
 
-.honesty { margin-top: 9px; }
-.honesty-label { font-size: .72rem; color: var(--text-faint); letter-spacing: .05em; text-transform: uppercase; }
-.honesty-bar { height: 5px; margin-top: 3px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
-.honesty-fill { height: 100%; border-radius: 3px; }
-.honesty-fill.good { background: var(--good); }
-.honesty-fill.mid { background: var(--mid); }
-.honesty-fill.bad { background: var(--bad); }
-.honesty-value { font-size: .78rem; font-variant-numeric: tabular-nums; color: var(--text-dim); }
 
 .disclose {
   width: 100%;
@@ -360,7 +352,6 @@ table.fees tr.base-row td { background: var(--surface); }
 @media (max-width: 620px) {
   .trip-main { grid-template-columns: 1fr; }
   .price-block { text-align: left; min-width: 0; }
-  .honesty-bar { max-width: 200px; }
 }
 
 .summary-caveat { color: var(--warn); }
