@@ -225,7 +225,11 @@ class SourceAdapter(ABC):
     #: Cap on detail pages per run. At a five second crawl delay an uncapped
     #: listing can outlast the CI job timeout, and a truncated scrape that says
     #: so beats one that is killed halfway through.
-    max_pages: int = 60
+    #:
+    #: Egypt lists 79 vessels, so 60 would have silently dropped a quarter of
+    #: the season. 120 covers it with headroom; at five seconds apiece that is
+    #: about ten minutes, well inside the job's thirty.
+    max_pages: int = 120
 
     def __init__(self, fetcher: PoliteFetcher) -> None:
         self.fetcher = fetcher
