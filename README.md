@@ -28,8 +28,9 @@ Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Live on real data: **886 departures, 317 itineraries, 67 boats**, every price
-`scraped`. padi.com is not wired up; liveaboard.com is the only source in use.
+Live on real data: **878 departures, 314 itineraries, 67 boats, 42 operators**,
+every price `scraped`. padi.com is not wired up; liveaboard.com is the only
+source in use.
 
 Prices and availability come from a nightly crawl. Fees, rental-gear prices and
 the vessel specification table need a browser — the site renders them
@@ -77,7 +78,10 @@ deleting it would hide the exact difference this site exists to show.
 **Comparison, not a scoreboard**: the lists sort by true cost, cost per night,
 advertised price, and how much lands after the headline figure. There is no
 per-operator rating — two boats reaching the same true cost by different routes
-show that in their breakdowns, which is the part a diver can act on.
+show that in their breakdowns, which is the part a diver can act on. The
+operator is named and filterable, because one company's boats may all bundle
+nitrox while another's all bill for it; that is a fact about prices. Scoring
+them against each other is the thing that was tried and removed.
 
 **Unstated is not zero**: a vessel listing only optional extras gets no true
 cost at all. Every Egyptian liveaboard pays park and port fees, so silence
@@ -106,7 +110,7 @@ src/liveaboard/   taxonomy, money, models, pricing, classify, promote,
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
                   fees, gear, vessel        (the last three need a browser)
 templates/        index.html + style.css + app.js, inlined at build time
-tools/            make_seed, fetch_fx, scrape_fees, probe_*
+tools/            make_seed, fetch_fx, scrape_fees, reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
 ```
@@ -142,8 +146,6 @@ that would change what the page can say:
 
 - **#48** report what changed since the last run — new trips, gone trips, moved
   prices. The git history is already the record; nothing reads it back.
-- **#35** name the operator. All 886 archived events carry `organizer.name`
-  naming 42 companies, and the parser discards the field.
 - **#50** price per dive is derived from nights on 256 of 317 trips, so it
   carries no information its own denominator did not invent.
 - **#49** the page is 5.4 MB, and 63% of that is the same fee lines written once

@@ -299,8 +299,42 @@ class LiveaboardComAdapter(SourceAdapter):
             "availability": offer.get("availability"),
             "booking_url": offer.get("url") or node.get("url"),
             "location": _place_name(node.get("location")),
+            "operator": organizer_name(node),
             "provenance": self.provenance(result.url),
         }
+
+
+def organizer_name(node: dict[str, Any]) -> str | None:
+    """Who runs this trip, from an ``Event``'s ``organizer``.
+
+    liveaboard.com is an agency listing and was assumed to name the vessel but
+    not the company behind it, so every itinerary on the site was filed under
+    "Operator not captured". It does name the company, on every event it
+    publishes: 878 of 878 archived events carry an ``organizer.name``, across 42
+    operators. The field was read and dropped.
+
+    ``Product.brand.name`` says the same thing and agrees on all 878, so either
+    would do. This reads the Event's own organizer because that is the node the
+    departure comes from -- the operator of *this* sailing, not of the boat in
+    general. They happen to coincide today; if a vessel is ever chartered to a
+    second company mid-season, the Event is the one that would notice.
+
+    Returns ``None`` when the field is absent, which on current evidence never
+    happens. Inventing an operator would be worse than admitting we lack one.
+    """
+    organizer = node.get("organizer")
+    if isinstance(organizer, list):
+        organizer = organizer[0] if organizer else None
+    if not isinstance(organizer, dict):
+        return None
+    name = organizer.get("name")
+    if not isinstance(name, str):
+        return None
+    # Collapsed here rather than in promote: "Tauch Safari Aegypten " arrives
+    # with a trailing space, and a name that differs from another only by
+    # whitespace is not a second company.
+    cleaned = " ".join(name.split())
+    return cleaned or None
 
 
 SCRIPT_OR_STYLE = re.compile(r"<(script|style)\b[^>]*>.*?</\1>", re.I | re.S)
