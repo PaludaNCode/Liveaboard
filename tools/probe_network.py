@@ -99,6 +99,57 @@ def describe_json(payload: Any) -> list[str]:
     return lines
 
 
+FEE_WORDS = re.compile(
+    r"not\s+included|excluded|extra(?:s)?\b|surcharge|marine\s*park|park\s*fee|"
+    r"port\s*fee|harbou?r|fuel|nitrox|visa|gratuit|tip(?:s|ping)\b|"
+    r"equipment\s*rental|rental\s*equipment|mandatory|payable\s+(?:on|at)",
+    re.I,
+)
+"""The vocabulary operators use for the costs they leave out of the headline."""
+
+
+def hunt_fees(page: Any, html: str) -> None:
+    """Locate the fee disclosure on a page, in markup or in embedded JSON.
+
+    This is the missing half of the dataset: prices scrape cleanly, fees do
+    not, and until they do the site can only report an advertised number and
+    admit it does not know the rest.
+    """
+    print("\n  -- fee disclosure --")
+
+    blocks = page.eval_on_selector_all(
+        "li, td, dd, p, span, div",
+        """els => els
+             .filter(e => e.children.length === 0)
+             .map(e => (e.textContent || '').replace(/\\s+/g, ' ').trim())
+             .filter(t => t.length > 3 && t.length < 160)""",
+    )
+    hits, seen = [], set()
+    for text in blocks:
+        if FEE_WORDS.search(text) and text.lower() not in seen:
+            seen.add(text.lower())
+            hits.append(text)
+    if hits:
+        print(f"    {len(hits)} fee-ish text nodes; first 30:")
+        for text in hits[:30]:
+            print(f"      · {text}")
+    else:
+        print("    no fee wording found in rendered text")
+
+    # Embedded state often carries the fees as data long before the DOM shows
+    # them, and data beats scraping prose off a layout.
+    for script in re.findall(r"<script[^>]*>(.*?)</script>", html, re.S)[:60]:
+        if not FEE_WORDS.search(script) or len(script) > 400_000:
+            continue
+        keys = sorted(set(re.findall(r'"([A-Za-z_][A-Za-z0-9_]{2,40})"\s*:', script)))
+        fee_keys = [k for k in keys if FEE_WORDS.search(k) or PRICE_KEY.search(k)]
+        if fee_keys:
+            print(f"    embedded JSON keys of interest: {fee_keys[:30]}")
+            for match in re.finditer(r'"([^"]{0,40}(?:ee|harge|ax|ip)s?)"\s*:\s*([0-9.]+)', script):
+                print(f"      {match.group(1)} = {match.group(2)}")
+            break
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", action="append", default=None)
@@ -211,6 +262,8 @@ def probe_one(browser: Any, url: str) -> None:
         )
     except Exception as exc:  # noqa: BLE001 - the probe must not die on one navigation
         print(f"    ?page=2 navigation failed: {exc}")
+
+    hunt_fees(page, html)
 
     if not calls:
         print("  no XHR/fetch calls — the listing is server-rendered, parse the HTML")

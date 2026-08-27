@@ -231,15 +231,37 @@ class LiveaboardComAdapter(SourceAdapter):
 
         return {
             "id": f"{slug}-{start}-{index}",
-            "itinerary_id": slug,
+            "boat_slug": slug,
             "name": node.get("name"),
             "start": start,
             "end": end,
             "price": {"amount": amount, "currency": str(currency).upper()},
             "availability": offer.get("availability"),
             "booking_url": offer.get("url") or node.get("url"),
+            "location": _place_name(node.get("location")),
             "provenance": self.provenance(result.url),
         }
+
+
+def _place_name(location: Any) -> str | None:
+    """The departure port, from an Event's ``location``.
+
+    Each Event carries a Place with a PostalAddress. The town is the useful
+    part — Hurghada, Port Ghalib, Marsa Alam — because it is what a diver books
+    flights against.
+    """
+    if isinstance(location, list):
+        location = location[0] if location else None
+    if not isinstance(location, dict):
+        return None
+    address = location.get("address")
+    if isinstance(address, dict):
+        for key in ("addressLocality", "addressRegion", "streetAddress"):
+            value = address.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    name = location.get("name")
+    return name.strip() if isinstance(name, str) and name.strip() else None
 
 
 def _iso_date(value: Any) -> str | None:
