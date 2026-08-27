@@ -202,6 +202,45 @@ class TestRenderedTextLayout(unittest.TestCase):
     def test_normalising_is_idempotent_on_comma_separated_text(self):
         self.assertEqual(len(parse_extras(REAL)), len(parse_extras(normalise_disclosure(REAL))))
 
+class TestRejectsPageFurniture(unittest.TestCase):
+    """A live run mined fees out of CSS, a spec sheet and a destination menu."""
+
+    JUNK = (
+        "Optional Extras: Gratuities (€80), Rental Gear, "
+        "Pay by bank transfer or online with: listed cards, "
+        '] [&>*]:mx-3 -mx-3"> Nitrox available Free Internet En-Suite, '
+        "Year built 2014 Year renovated 2025 Length 40 meters Top speed 11 Knots, "
+        "K Koh Tachai Komodo Kimud Shoal Koror Kerama, "
+        "V Visayas Viti Levu Vicente Vaavu Atoll, "
+        "T The Au Co Tip Top II Tip Top IV Treasure."
+    )
+
+    def setUp(self):
+        self.codes = {f.code for f in parse_extras(self.JUNK)}
+
+    def test_only_the_genuine_entries_survive(self):
+        self.assertEqual(self.codes, {FeeCode.GRATUITIES, FeeCode.GEAR_RENTAL})
+
+    def test_renovated_is_not_vat(self):
+        self.assertNotIn(FeeCode.TAX_VAT, self.codes)
+
+    def test_visayas_is_not_a_visa(self):
+        self.assertNotIn(FeeCode.VISA, self.codes)
+
+    def test_bank_transfer_is_not_an_airport_transfer(self):
+        self.assertNotIn(FeeCode.AIRPORT_TRANSFER, self.codes)
+
+    def test_a_boat_named_tip_top_is_not_a_gratuity_source(self):
+        """Gratuities appear here legitimately; the point is the label matched."""
+        fees = {f.code: f for f in parse_extras(self.JUNK)}
+        self.assertEqual(fees[FeeCode.GRATUITIES].label, "Gratuities")
+
+    def test_leaked_css_does_not_become_a_nitrox_charge(self):
+        self.assertNotIn(FeeCode.NITROX, self.codes)
+
+    def test_a_destination_menu_yields_no_park_fee(self):
+        self.assertNotIn(FeeCode.MARINE_PARK, self.codes)
+
 
 if __name__ == "__main__":
     unittest.main()

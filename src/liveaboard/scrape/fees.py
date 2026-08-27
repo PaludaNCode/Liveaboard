@@ -65,37 +65,45 @@ BASES = {
     "person": FeeBasis.PER_TRIP,
 }
 
-# Matched longest-first so "Nitrox Course" never resolves as "Nitrox".
-LABEL_CODES: tuple[tuple[str, FeeCode], ...] = (
-    ("national park", FeeCode.MARINE_PARK),
-    ("marine park", FeeCode.MARINE_PARK),
-    ("park fee", FeeCode.MARINE_PARK),
-    ("environment tax", FeeCode.ENVIRONMENT_TAX),
-    ("environmental tax", FeeCode.ENVIRONMENT_TAX),
-    ("fuel surcharge", FeeCode.FUEL_SURCHARGE),
-    ("fuel", FeeCode.FUEL_SURCHARGE),
-    ("port fee", FeeCode.PORT_FEES),
-    ("harbour", FeeCode.PORT_FEES),
-    ("nitrox course", FeeCode.COURSE),
-    ("scuba diving course", FeeCode.COURSE),
-    ("diving course", FeeCode.COURSE),
-    ("course", FeeCode.COURSE),
-    ("nitrox", FeeCode.NITROX),
-    ("private dive guide", FeeCode.PRIVATE_GUIDE),
-    ("dive guide", FeeCode.PRIVATE_GUIDE),
-    ("rental gear", FeeCode.GEAR_RENTAL),
-    ("gear rental", FeeCode.GEAR_RENTAL),
-    ("equipment rental", FeeCode.GEAR_RENTAL),
-    ("rental equipment", FeeCode.GEAR_RENTAL),
-    ("gratuit", FeeCode.GRATUITIES),
-    ("tip", FeeCode.GRATUITIES),
-    ("laundry", FeeCode.LAUNDRY),
-    ("pressing", FeeCode.LAUNDRY),
-    ("visa", FeeCode.VISA),
-    ("insurance", FeeCode.DIVE_INSURANCE),
-    ("transfer", FeeCode.AIRPORT_TRANSFER),
-    ("single supplement", FeeCode.SINGLE_SUPPLEMENT),
-    ("vat", FeeCode.TAX_VAT),
+MAX_LABEL_CHARS = 60
+"""Longest plausible label for one extra.
+
+Anything longer is the page running on past the end of the list, and it is
+where the entry list stops. A live run without this bound swallowed the vessel
+specifications, a global destination menu and raw CSS.
+"""
+
+# Ordered longest-first so "Nitrox Course" never resolves as "Nitrox", and
+# anchored on word boundaries throughout.
+#
+# Substring matching produced fees out of thin air on a live run: "vat" inside
+# "renovated", "visa" inside "Visayas", "tip" inside a boat named Tip Top II,
+# "transfer" inside "pay by bank transfer". Every needle below must therefore
+# match whole words, and the vaguest ones ("fuel", "course", "transfer") carry
+# enough context to mean only the fee.
+LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
+    (r"\bnational park\b|\bmarine park\b|\bpark fees?\b", FeeCode.MARINE_PARK),
+    (r"\benvironment(?:al)?\s+tax\b|\beco\s+tax\b", FeeCode.ENVIRONMENT_TAX),
+    (r"\bfuel\s+(?:surcharge|fee|supplement)\b", FeeCode.FUEL_SURCHARGE),
+    (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
+    (r"\bnitrox\s+course\b|\bdiving\s+courses?\b|\bscuba\s+courses?\b|\bcourses?\b",
+     FeeCode.COURSE),
+    (r"\bnitrox\b|\benriched\s+air\b", FeeCode.NITROX),
+    (r"\b(?:private\s+)?dive\s+guide\b|\bprivate\s+guide\b", FeeCode.PRIVATE_GUIDE),
+    (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b",
+     FeeCode.GEAR_RENTAL),
+    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btipping\b", FeeCode.GRATUITIES),
+    (r"\blaundry\b|\bpressing\s+services?\b", FeeCode.LAUNDRY),
+    (r"\bvisas?\s*(?:fees?|on\s+arrival)?\b(?!\w)", FeeCode.VISA),
+    (r"\b(?:dive|diving|travel)\s+insurance\b|\binsurance\b", FeeCode.DIVE_INSURANCE),
+    (r"\b(?:airport|hotel)\s+transfers?\b|\btransfers?\b(?!\s*(?:or|and)\b)",
+     FeeCode.AIRPORT_TRANSFER),
+    (r"\bsingle\s+(?:cabin\s+)?supplement\b", FeeCode.SINGLE_SUPPLEMENT),
+    (r"\bvat\b|\bsales\s+tax\b|\blocal\s+tax\b", FeeCode.TAX_VAT),
+)
+
+COMPILED_LABELS: tuple[tuple[re.Pattern[str], FeeCode], ...] = tuple(
+    (re.compile(pattern, re.I), code) for pattern, code in LABEL_PATTERNS
 )
 
 # Optional-block codes that are nevertheless paid by nearly everyone, or that
@@ -135,10 +143,25 @@ class ParsedFee:
         return self.low is not None
 
 
+NOT_A_LABEL = re.compile(r'[\[\]{}<>"|\\]|:\s*\S')
+"""Characters that never appear in a fee label but do in leaked markup.
+
+A live run mined ``] [&>*]:mx-3 -mx-3"> Nitrox available`` — a fragment of
+Tailwind CSS — and charged a nitrox fee for it. A label carrying brackets,
+braces or angle brackets is page furniture, not a price.
+"""
+
+
 def classify_label(label: str) -> FeeCode | None:
-    lowered = label.lower()
-    for needle, code in LABEL_CODES:
-        if needle in lowered:
+    """Resolve one entry's label, or ``None`` when it is not a fee we know.
+
+    Returns ``None`` freely. An unrecognised extra costs a line of data; a
+    misrecognised one puts an invented charge on the page.
+    """
+    if len(label) > MAX_LABEL_CHARS or NOT_A_LABEL.search(label):
+        return None
+    for pattern, code in COMPILED_LABELS:
+        if pattern.search(label):
             return code
     return None
 
@@ -213,6 +236,15 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
             label = " ".join(match.group("label").split())
             if not label or NOISE.match(label):
                 continue
+
+            # The block regex runs to the next heading or the end of the page,
+            # so on a flattened page it keeps going long after the extras stop.
+            # A segment too long to be a label is where the list ended: stop
+            # rather than skip, or the vessel's spec sheet and the site's
+            # destination menu get mined for fees that were never charged.
+            if len(label) > MAX_LABEL_CHARS:
+                break
+
             code = classify_label(label)
             if code is None or code in seen:
                 continue
