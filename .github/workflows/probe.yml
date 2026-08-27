@@ -82,3 +82,10 @@ jobs:
           python3 tools/probe_trip_detail.py \
             --vessel "${{ inputs.itinerary_vessel || 'emperor-asmaa' }}" \
             ${{ inputs.dump_html && '--dump-body' || '' }}
+
+      # Read the fragment that endpoint returns, and establish whether a plain
+      # GET is enough -- which decides whether this belongs in the nightly
+      # crawl or the weekly browser run.
+      - name: Read the itinerary fragment
+        run: |
+          python3 tools/probe_itinerary_endpoint.py --tours 6 --full
