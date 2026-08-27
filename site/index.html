@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Egypt Liveaboards, May–August 2027 — what they actually cost</title>
 <meta name="description" content="Red Sea liveaboard trips for the 2027 summer season, priced with every mandatory fee included rather than hidden under the headline number.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>/* Dense table layout.
  *
  * The page is scanned and operated, not read, so the craft is in information
@@ -24,6 +21,34 @@
   --later:#a8500f; --later-soft:#fbeee2;
   --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
+
+  /* Fonts the visitor already has.
+   *
+   * These used to be IBM Plex, pulled from fonts.googleapis.com. That link sat
+   * in <head>, where a stylesheet is render-blocking and a script cannot run
+   * until the CSSOM is ready -- so the table did not exist until the request
+   * resolved, and where Google is unreachable it hangs rather than failing
+   * fast. Measured: first row after 13.04s against 0.58s with the request
+   * gone, on a page whose own JSON parses in nine milliseconds. Thirteen
+   * seconds of blank screen for anyone on hotel wifi, behind a proxy, or where
+   * Google is blocked -- which is a fair description of someone booking a dive
+   * trip. See #59.
+   *
+   * IBM Plex stays first in each stack: costs nothing, and a visitor who has
+   * it installed still gets the intended face. Everyone else gets their own
+   * system's, which is faster and looks native.
+   */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  /* Tabular figures are load-bearing on this page -- sixteen numeric columns
+     only line up if the digits are one width. Every face here has them. */
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+               Consolas, "Liberation Mono", monospace;
+  /* No system font is reliably condensed, so this names the usual suspects and
+     then gives up gracefully into the sans stack rather than pretending. */
+  --font-narrow: "IBM Plex Sans Condensed", "Avenir Next Condensed",
+                 "Roboto Condensed", "Liberation Sans Narrow", "Arial Narrow",
+                 var(--font-sans);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -53,14 +78,14 @@ html, body { height:100%; }
 
 body {
   margin:0; background:var(--ground); color:var(--ink);
-  font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-sans);
   font-size:13px; line-height:1.45; -webkit-font-smoothing:antialiased;
   display:flex; flex-direction:column; overflow:hidden;
 }
 body > * { flex:none; }
 
 h1 {
-  font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;
+  font-family:var(--font-narrow);
   font-size:19px; font-weight:600; margin:0; letter-spacing:.01em;
   text-wrap:balance;
 }
@@ -75,7 +100,7 @@ h1 {
 .stats { display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
 .stat { display:flex; flex-direction:column; gap:1px; }
 .stat b {
-  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:15px;
+  font-family:var(--font-mono); font-size:15px;
   font-weight:600; font-variant-numeric:tabular-nums;
 }
 .stat span {
@@ -119,7 +144,7 @@ button:focus-visible, input:focus-visible, a:focus-visible, th:focus-visible {
 input[type="number"] {
   font:inherit; font-size:12px; padding:3px 6px; border-radius:2px; width:56px;
   border:1px solid var(--rule-strong); background:var(--ground); color:var(--ink);
-  font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;
+  font-family:var(--font-mono); font-variant-numeric:tabular-nums;
 }
 input[type="search"] {
   font:inherit; font-size:12px; padding:3px 8px; border-radius:2px;
@@ -135,7 +160,7 @@ table { border-collapse:separate; border-spacing:0; width:max-content; min-width
 
 thead th {
   position:sticky; top:0; z-index:20; background:var(--panel);
-  font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;
+  font-family:var(--font-narrow);
   font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.07em;
   color:var(--ink-dim); text-align:left; white-space:nowrap;
   padding:7px 9px; border-bottom:1px solid var(--rule-strong); cursor:pointer;
@@ -153,7 +178,7 @@ tbody tr.row:nth-of-type(even) { background:var(--row-alt); }
 tbody tr.row:hover { background:var(--row-hover); }
 
 .num {
-  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-family:var(--font-mono);
   font-variant-numeric:tabular-nums;
 }
 
@@ -221,7 +246,7 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 }
 .site-footer > summary {
   padding:9px 18px; cursor:pointer; list-style:none;
-  font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;
+  font-family:var(--font-narrow);
   font-size:11px; text-transform:uppercase; letter-spacing:.09em;
   color:var(--ink-faint); font-weight:600;
   display:flex; gap:14px; align-items:baseline;

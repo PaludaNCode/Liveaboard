@@ -63,12 +63,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
   departure ships 878 times. Fees belong to the itinerary.
-  **No CDN for code, styles or data** — all inlined. The one exception is the
-  webfont stylesheet from `fonts.googleapis.com`, which is a known violation
-  (#59), not a precedent: the page functions fully without it and every stack
-  falls back. `tests/test_dataset.py` pins the external hosts to an explicit
-  allowlist, so anything *new* fails the build. Adding to that list needs a
-  reason; the fix for #59 is emptying it.
+  **No CDN — nothing external at all**, and `ALLOWED_EXTERNAL` in
+  `tests/test_dataset.py` is empty to keep it that way. The page used to pull a
+  webfont stylesheet from Google; because a `<link>` in `<head>` is
+  render-blocking, that cost **13 seconds to first row** whenever the host was
+  slow or unreachable, against 0.6 seconds without it (#59). Fonts are the
+  visitor's own now. Adding a host back is adding a way for the page to be
+  blank on somebody else's network.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
 - **The committed dataset must match what `promote` produces from the committed

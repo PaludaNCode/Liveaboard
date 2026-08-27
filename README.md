@@ -59,9 +59,10 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
 `build` emits one self-contained HTML file — CSS, JS and data all inlined, no
-CDN. (One exception, tracked as #59: the page still links a webfont stylesheet
-from Google. It renders and prices correctly without it.) That
-makes page weight a first-class concern: there is no lazy second request to hide
+CDN, nothing fetched at runtime. Type is the visitor's own system font: a
+webfont link in `<head>` is render-blocking, which cost 13 seconds to first row
+whenever Google was slow to answer and 0.6 seconds when it was not there at all
+(#59). That makes page weight a first-class concern: there is no lazy second request to hide
 behind, so a visitor on a phone in a dive shop downloads all of it before seeing
 a row. Fees are written once per itinerary rather than once per departure, which
 is what they are a property of.
