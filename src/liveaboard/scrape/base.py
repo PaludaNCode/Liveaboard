@@ -73,6 +73,11 @@ class PoliteFetcher:
     delay: float = DEFAULT_DELAY_SECONDS
     timeout: float = 30.0
     user_agent: str = USER_AGENT
+    diagnose: bool = False
+    """Print each page's structure as it is fetched.
+
+    Set when the only channel back from a scrape is a CI log and the snapshot
+    artifact cannot be opened from where the parser is being written."""
     _robots: dict[str, urllib.robotparser.RobotFileParser] = field(default_factory=dict)
     _last_request: dict[str, float] = field(default_factory=dict)
 
@@ -124,6 +129,10 @@ class PoliteFetcher:
 
         result = FetchResult(url=url, status=status, body=body, fetched_at=_now())
         self.snapshot(result)
+        if self.diagnose:
+            from . import diagnose as _diagnose
+
+            print(_diagnose.describe(result), flush=True)
         return result
 
     def snapshot(self, result: FetchResult) -> Path:
@@ -194,8 +203,24 @@ class SourceAdapter(ABC):
     #: is missing when the environment blocks it.
     host: str = ""
 
+    #: Cap on detail pages per run. At a five second crawl delay an uncapped
+    #: listing can outlast the CI job timeout, and a truncated scrape that says
+    #: so beats one that is killed halfway through.
+    max_pages: int = 60
+
     def __init__(self, fetcher: PoliteFetcher) -> None:
         self.fetcher = fetcher
+        self._notes: list[str] = []
+
+    def note(self, message: str) -> None:
+        """Record something the run should report but which is not fatal.
+
+        Discovery is a generator, so it cannot return warnings; without this a
+        404 listing page or an unmatched link pattern disappears silently, and
+        an empty scrape becomes indistinguishable from a site with nothing on
+        it. That is the failure this project can least afford.
+        """
+        self._notes.append(message)
 
     def provenance(self, url: str, retrieved: date | None = None) -> dict[str, Any]:
         return {
@@ -233,14 +258,23 @@ class SourceAdapter(ABC):
         """Fetch and parse everything this adapter can see."""
         self.preflight()
         output = ScrapeOutput()
+        fetched = 0
+
         for url in self.discover():
             try:
                 result = self.fetcher.get(url)
             except FetchBlocked as exc:
                 output.warnings.append(f"skipped {url}: {exc}")
                 continue
+            fetched += 1
             try:
                 output.extend(self.parse(result))
             except ScrapeError as exc:
                 output.warnings.append(f"unparsed {url}: {exc}")
+
+        output.warnings.extend(self._notes)
+        if fetched == 0:
+            output.warnings.append(
+                f"{self.source_id}: no page was fetched at all — check the entry paths"
+            )
         return output

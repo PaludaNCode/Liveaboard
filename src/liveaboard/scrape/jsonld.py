@@ -80,6 +80,12 @@ def walk(node: Any) -> Iterator[dict[str, Any]]:
             yield from walk(item)
 
 
+def walk_documents(html: str) -> Iterator[dict[str, Any]]:
+    """Yield every JSON-LD node in the page, across all blocks."""
+    for document in extract_blocks(html):
+        yield from walk(document)
+
+
 def of_type(html: str, *types: str) -> list[dict[str, Any]]:
     """Find every JSON-LD node whose ``@type`` matches one of ``types``."""
     wanted = {t.lower() for t in types}
