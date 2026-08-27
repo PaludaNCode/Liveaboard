@@ -116,6 +116,15 @@ jobs:
       - name: Build the site
         run: PYTHONPATH=src python3 -m liveaboard.cli build --data ${{ steps.dataset.outputs.path }}
 
+      # Before the commit, while HEAD is still yesterday's dataset. Afterwards
+      # the comparison would be against the run's own output.
+      - name: Report what changed
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --data ${{ steps.dataset.outputs.path }} \
+            --revision HEAD \
+            >> "$GITHUB_STEP_SUMMARY"
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"

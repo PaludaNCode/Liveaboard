@@ -399,6 +399,76 @@ def cmd_promote(args: argparse.Namespace) -> int:
     return 0
 
 
+def _git_show(revision: str, path: Path) -> dict[str, Any] | None:
+    """A committed version of a file, or ``None`` when there is not one.
+
+    The refresh commits the dataset on every run, so the previous state is
+    already in the history and nothing extra has to be stored. ``HEAD~1`` is
+    the usual argument; a run that is the repository's first commit has no
+    predecessor and gets ``None`` rather than an error.
+    """
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["git", "show", f"{revision}:{path.as_posix()}"],
+            capture_output=True, text=True, timeout=60, check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    try:
+        return json.loads(result.stdout)
+    except ValueError:
+        return None
+
+
+def cmd_changes(args: argparse.Namespace) -> int:
+    """Report what moved between two datasets."""
+    from .changes import compare, render as render_changes
+
+    after = json.loads(Path(args.data).read_text(encoding="utf-8"))
+
+    if args.before is not None:
+        before = json.loads(Path(args.before).read_text(encoding="utf-8"))
+        before_label = str(args.before)
+    else:
+        before = _git_show(args.revision, Path(args.data))
+        before_label = args.revision
+        if before is None:
+            # Not a failure. A first run has nothing to compare against, and
+            # saying so beats printing an empty report that reads as "nothing
+            # changed" when the truth is "nothing to compare".
+            print(f"no earlier {args.data} at {args.revision}; nothing to compare")
+            return 0
+
+    report = compare(before, after)
+    text = render_changes(
+        report,
+        before=before_label,
+        after=after.get("generated") or str(args.data),
+        limit=args.limit,
+    )
+    print(text)
+
+    if args.out:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.out).write_text(text + "\n", encoding="utf-8")
+        print(f"\nwrote {args.out}")
+
+    # A vessel losing every departure at once is the one finding worth a
+    # non-zero exit: it usually means a fetch failed rather than a season
+    # ending, and a silent green run would bury it.
+    if report.vessels_gone and args.fail_on_missing:
+        print(
+            f"\n::error::{len(report.vessels_gone)} vessel(s) lost every departure",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="liveaboard", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -454,6 +524,24 @@ def main(argv: list[str] | None = None) -> int:
         help="write nothing; fail if --out is not what promote produces",
     )
     promote_cmd.set_defaults(func=cmd_promote)
+
+    changes = sub.add_parser("changes", help="report what moved since the last run")
+    changes.add_argument("--data", default=LIVE_DATA, type=Path)
+    changes.add_argument(
+        "--before", default=None, type=Path,
+        help="an earlier dataset file; defaults to reading one out of the git history",
+    )
+    changes.add_argument(
+        "--revision", default="HEAD~1",
+        help="which commit to compare against when --before is not given",
+    )
+    changes.add_argument("--out", default=None, type=Path, help="also write the report here")
+    changes.add_argument("--limit", type=int, default=12, help="rows per section")
+    changes.add_argument(
+        "--fail-on-missing", action="store_true",
+        help="exit non-zero when a vessel loses every departure at once",
+    )
+    changes.set_defaults(func=cmd_changes)
 
     args = parser.parse_args(argv)
     return int(args.func(args))
