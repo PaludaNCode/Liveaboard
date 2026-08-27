@@ -14,6 +14,14 @@ on:
         description: "Vessel slugs to open the gear modal on"
         type: string
         default: "aphrodite,blue-seas,emperor-asmaa"
+      itinerary_vessel:
+        description: "Vessel whose trip detail to open"
+        type: string
+        default: "emperor-asmaa"
+      itinerary_tours:
+        description: "Tour ids (from the Event url's #tourid= fragment)"
+        type: string
+        default: "353503,353505"
       dump_html:
         description: "Print the modal's markup, not just its text"
         type: boolean
@@ -57,4 +65,12 @@ jobs:
         run: |
           python3 tools/probe_gear.py \
             --vessels "${{ inputs.gear_vessels || 'aphrodite,blue-seas,emperor-asmaa' }}" \
+            ${{ inputs.dump_html && '--dump-html' || '' }}
+
+      # Whether a trip's own detail view names the reefs its title does not.
+      - name: Probe a trip's detail view
+        run: |
+          python3 tools/probe_itinerary.py \
+            --vessel "${{ inputs.itinerary_vessel || 'emperor-asmaa' }}" \
+            --tours "${{ inputs.itinerary_tours || '353503,353505' }}" \
             ${{ inputs.dump_html && '--dump-html' || '' }}
