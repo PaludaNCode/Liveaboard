@@ -397,5 +397,51 @@ class TestNotesDescribeTheRun(unittest.TestCase):
         self.assertEqual(payload["notes"], "custom")
 
 
+class TestGuestCount(unittest.TestCase):
+    """Berth price is per person, so how many share the boat is part of it."""
+
+    def guests(self, summary):
+        from liveaboard.promote import _guests
+
+        return _guests(summary)
+
+    def test_the_phrasing_the_fleet_actually_uses(self):
+        for text, expected in (
+            ("a 36m (118ft) diving boat with 10 cabins for 20 guests", 20),
+            ("offering 12 cabins for 24 guests, up to 18 dives weekly", 24),
+            ("accommodates up to 26 divers", 26),
+            ("carries 16 passengers in eight cabins", 16),
+        ):
+            self.assertEqual(self.guests(text), expected, text)
+
+    def test_a_vessel_that_does_not_say_stays_unknown(self):
+        """Half the fleet. Unknown is not zero and must not render as a number."""
+        self.assertIsNone(self.guests("Dive the Red Sea aboard a classic safari boat."))
+        self.assertIsNone(self.guests(None))
+        self.assertIsNone(self.guests(""))
+
+    def test_a_length_is_not_a_guest_count(self):
+        """"36m (118ft)" sits in the same sentence as the real number."""
+        self.assertIsNone(self.guests("a 118ft steel hull built in 2019"))
+
+    def test_an_implausible_count_is_refused(self):
+        self.assertIsNone(self.guests("host 250 guests"))
+
+    def test_it_lands_on_the_boat_not_the_itinerary(self):
+        """The same vessel carries the same people whichever week you book."""
+        payload = promote(
+            candidate(
+                [departure(), departure(start="2027-06-05", end="2027-06-12")],
+                itineraries=[{
+                    "id": "alia-soul", "boat": "Alia Soul",
+                    "summary": "a 36m boat with 10 cabins for 20 guests",
+                }],
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 20)
+        self.assertNotIn("guests", payload["itineraries"][0])
+
+
 if __name__ == "__main__":
     unittest.main()
