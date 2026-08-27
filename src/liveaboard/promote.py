@@ -86,6 +86,45 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     return name.strip(), promotion, ports
 
 
+GUESTS = (
+    re.compile(r"\bfor\s+(\d{1,3})\s+guests?\b", re.I),
+    re.compile(r"\b(\d{1,3})\s+guests?\b", re.I),
+    re.compile(r"\b(\d{1,3})\s+passengers?\b", re.I),
+    re.compile(r"\baccommodat\w*\s+(?:up\s+to\s+)?(\d{1,3})\b", re.I),
+)
+"""How a vessel description states how many people it carries.
+
+Berth price is per person, so the guest count is what tells a diver whether
+they are buying into a boat of twelve or of thirty-four -- a difference in
+group size, dive-deck crowding and how the same reef feels.
+
+Read from the vessel description, which is the only place the scrape currently
+has it. That covers about half the fleet: the number also sits in the page's
+specification table, which nothing parses yet, so a vessel without one here has
+not been asked rather than declined to say.
+"""
+
+MAX_GUESTS = 60
+"""Above this the match is not a guest count.
+
+Liveaboards in this fleet run from eight to thirty-four berths. A larger number
+in the same sentence is a length in feet, a year, or a price.
+"""
+
+
+def _guests(summary: str | None) -> int | None:
+    """Pull a guest count out of a vessel description, or admit there is none."""
+    if not summary:
+        return None
+    for pattern in GUESTS:
+        match = pattern.search(summary)
+        if match:
+            value = int(match.group(1))
+            if 0 < value <= MAX_GUESTS:
+                return value
+    return None
+
+
 def _nights(start: str, end: str) -> int | None:
     try:
         delta = (date.fromisoformat(end) - date.fromisoformat(start)).days
@@ -146,9 +185,16 @@ def promote(
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
         boat_name = source.get("boat") or source.get("name") or slug.replace("-", " ").title()
+        # Guests belong to the vessel, not the sailing: the same boat carries
+        # the same number of people whichever week you book.
         boats.setdefault(
             slug,
-            {"id": slug, "name": boat_name, "operator_id": UNKNOWN_OPERATOR["id"]},
+            {
+                "id": slug,
+                "name": boat_name,
+                "operator_id": UNKNOWN_OPERATOR["id"],
+                "guests": _guests(source.get("summary")),
+            },
         )
 
         itinerary_id = f"{slug}--{slugify(name)}"[:96]
