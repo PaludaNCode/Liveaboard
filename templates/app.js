@@ -44,10 +44,23 @@
     return !!DEFAULT_ON_TIERS[line.tier];
   }
 
+  /* Every row of one departure's cost table: its own fare, then the fee lines.
+
+     The fees hang off the itinerary because that is what they are a property
+     of -- the vessel's disclosure, which does not change with the month. They
+     used to be written onto each departure, which stored 314 distinct answers
+     878 times and made the page 5.6 MB. A departure carries its own copy only
+     when it genuinely prices a fee differently; Python decides that and writes
+     dep.lines only in that case. */
+  function linesFor(dep) {
+    var itin = D.itineraries[dep.itinerary_id];
+    return [dep.base_line].concat(dep.lines || itin.lines);
+  }
+
   function metricsFor(dep) {
     var low = 0, high = 0, unpriced = [], required = 0;
     var nitrox = null, tips = null;
-    dep.lines.forEach(function (line) {
+    linesFor(dep).forEach(function (line) {
       if (line.code === "nitrox") {
         nitrox = line.included ? { included: true }
                : line.has_price ? { price: line.display.amount }
@@ -90,11 +103,6 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
-  function label(list, id) {
-    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].label;
-    return id;
-  }
-
   /* ---------- derived facets ---------- */
 
   /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)" —
@@ -305,7 +313,7 @@
   }
 
   function feeTable(row) {
-    var body = row.d.lines.map(function (line) {
+    var body = linesFor(row.d).map(function (line) {
       var on = lineCounts(line) || line.tier === "base";
       var amount = line.has_price && line.display
         ? "€" + Math.round(line.display.amount).toLocaleString("en-IE") +

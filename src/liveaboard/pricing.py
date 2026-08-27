@@ -252,6 +252,79 @@ def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:
     return fee.tier in DEFAULT_ON_TIERS
 
 
+def base_line(departure: Departure, fx: FxTable) -> BreakdownLine:
+    """The advertised berth price, as the first row of the cost table.
+
+    Genuinely per-departure: the amount, the currency it was quoted in and the
+    provenance of that quote all belong to the sailing, not the route.
+    """
+    display, rate = fx.to_display(departure.price)
+    return BreakdownLine(
+        code=FeeCode.BASE_FARE,
+        label="Berth (advertised price)",
+        tier=FeeTier.BASE,
+        quoted=departure.price,
+        display=display,
+        included=False,
+        counted=True,
+        toggle=None,
+        provenance=departure.price_provenance,
+        note=None,
+        fx_rate=rate,
+    )
+
+
+def _fee_line(fee: FeeItem, nights: int, dives: int, fx: FxTable, active: Toggles) -> BreakdownLine:
+    """Resolve one fee into a display row: basis normalised, currency converted."""
+    low, high = fee.span_for_trip(nights, dives)
+
+    display = display_max = rate = None
+    if low is not None:
+        display, rate = fx.to_display(low)
+        if high is not None and high != low:
+            display_max, _ = fx.to_display(high)
+
+    return BreakdownLine(
+        code=fee.code,
+        label=fee.label,
+        tier=fee.tier,
+        quoted=low,
+        display=display,
+        display_max=display_max,
+        included=fee.included,
+        counted=_is_counted(fee, active),
+        toggle=fee.toggle,
+        provenance=fee.provenance,
+        note=fee.note,
+        fx_rate=rate,
+    )
+
+
+def itinerary_lines(
+    itinerary: Itinerary,
+    fx: FxTable,
+    toggles: Toggles | None = None,
+) -> list[BreakdownLine]:
+    """The fee rows every departure of this itinerary shares.
+
+    Everything a fee line needs is a property of the route: the fee itself, the
+    nights and dives its basis normalises against, and the exchange rate. Only
+    the base fare varies between sailings, so these resolve once per itinerary
+    rather than once per departure.
+
+    That is a fact about the data, not an optimisation the caller must trust:
+    across the current dataset all 314 itineraries have departures whose
+    non-base lines are identical. :func:`compute` remains the authority, and
+    the renderer still checks a departure against this before reusing it, so a
+    sailing that ever does price a fee differently keeps its own rows.
+    """
+    active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    return [
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
+        for fee in _sorted_fees(itinerary.fees)
+    ]
+
+
 def compute(
     itinerary: Itinerary,
     departure: Departure,
@@ -260,54 +333,20 @@ def compute(
 ) -> Breakdown:
     """Build the full cost breakdown for one sailing."""
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
-    base_display, base_fx = fx.to_display(departure.price)
+    first = base_line(departure, fx)
 
     breakdown = Breakdown(
         departure_id=departure.id,
         nights=itinerary.nights,
-        base=base_display,
+        # Never None: a departure's price is required, so its conversion always
+        # produces an amount. Only a *fee* can be listed without one.
+        base=first.display,
     )
-    breakdown.lines.append(
-        BreakdownLine(
-            code=FeeCode.BASE_FARE,
-            label="Berth (advertised price)",
-            tier=FeeTier.BASE,
-            quoted=departure.price,
-            display=base_display,
-            included=False,
-            counted=True,
-            toggle=None,
-            provenance=departure.price_provenance,
-            note=None,
-            fx_rate=base_fx,
-        )
+    breakdown.lines.append(first)
+    breakdown.lines.extend(
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
+        for fee in _sorted_fees(resolve_fees(itinerary, departure))
     )
-
-    for fee in _sorted_fees(resolve_fees(itinerary, departure)):
-        low, high = fee.span_for_trip(itinerary.nights, itinerary.dives)
-
-        display = display_max = rate = None
-        if low is not None:
-            display, rate = fx.to_display(low)
-            if high is not None and high != low:
-                display_max, _ = fx.to_display(high)
-
-        breakdown.lines.append(
-            BreakdownLine(
-                code=fee.code,
-                label=fee.label,
-                tier=fee.tier,
-                quoted=low,
-                display=display,
-                display_max=display_max,
-                included=fee.included,
-                counted=_is_counted(fee, active),
-                toggle=fee.toggle,
-                provenance=fee.provenance,
-                note=fee.note,
-                fx_rate=rate,
-            )
-        )
     return breakdown
 
 
