@@ -108,6 +108,8 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "month": departure.start.month,
                 "nights": itinerary.nights,
                 "spaces_left": departure.spaces_left,
+                "availability": departure.availability,
+                "bookable": departure.bookable,
                 "booking_url": departure.booking_url,
                 "base": float(breakdown.base.rounded),
                 "lines": [line.as_dict() for line in breakdown.lines],

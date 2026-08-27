@@ -171,6 +171,11 @@ thead th.stick { z-index:25; }
 .pill.full { color:var(--ok); }
 .pill.partial { color:var(--warn); }
 .pill.none { color:var(--unknown); }
+.pill.open { color:var(--ok); }
+.pill.few { color:var(--warn); }
+.pill.gone { color:var(--unknown); background:var(--rule); border-color:transparent; }
+/* A sold-out row stays legible but stops competing for attention. */
+tbody tr.row.gone td:not(.stick) { opacity:.55; }
 
 .expand {
   background:none; border:0; color:var(--ink-faint); cursor:pointer;

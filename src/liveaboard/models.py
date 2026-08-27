@@ -296,8 +296,21 @@ class Departure:
     price: Money
     price_provenance: Provenance
     spaces_left: int | None = None
+    availability: str | None = None
+    """Whether this sailing can still be booked.
+
+    ``"available"``, ``"limited"``, ``"sold_out"``, or ``None`` when the source
+    did not say. A sold-out departure priced alongside bookable ones is a
+    comparison site recommending something nobody can buy, so this has to reach
+    the page rather than being dropped on the way.
+    """
     fees: list[FeeItem] = field(default_factory=list)
     booking_url: str | None = None
+
+    @property
+    def bookable(self) -> bool:
+        """Anything but a stated sold-out. Unknown is not a refusal."""
+        return self.availability != "sold_out"
 
     @property
     def month(self) -> int:
@@ -313,6 +326,7 @@ class Departure:
             price=Money.parse(payload["price"], default_currency),
             price_provenance=Provenance.from_dict(payload["provenance"]),
             spaces_left=payload.get("spaces_left"),
+            availability=payload.get("availability"),
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             booking_url=payload.get("booking_url"),
         )
