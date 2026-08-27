@@ -127,18 +127,13 @@ class TestFeesAreUnknownNotZero(unittest.TestCase):
         self.assertFalse(self.rendered["mandatory_known"])
 
 
-class TestClassificationSurvivesTheMissingSiteList(unittest.TestCase):
+class TestSitesAreRecoveredFromTheTitle(unittest.TestCase):
     def test_dive_sites_are_recovered_from_the_trip_name(self):
         """The source publishes no site list, but names routes after sites."""
         payload = promote(candidate([departure()]), season=SEASON)
         sites = payload["itineraries"][0]["dive_sites"]
         self.assertIn("brothers", sites)
         self.assertIn("daedalus", sites)
-
-    def test_a_scraped_trip_still_gets_a_route(self):
-        dataset = Dataset.from_dict(promote(candidate([departure()]), season=SEASON))
-        classification = next(iter(dataset.classifications().values()))
-        self.assertIsNotNone(classification.route)
 
     def test_an_unrecognisable_name_yields_no_sites(self):
         payload = promote(

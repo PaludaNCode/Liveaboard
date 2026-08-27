@@ -8,7 +8,6 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Iterator
 
-from .classify import Classification, classify
 from .models import Boat, Departure, Itinerary, Operator
 from .money import DISPLAY_CURRENCY, FxTable
 from .taxonomy import SourceKind
@@ -112,8 +111,6 @@ class Dataset:
             if start <= departure.start <= end:
                 yield departure
 
-    def classifications(self) -> dict[str, Classification]:
-        return {key: classify(itin) for key, itin in self.itineraries.items()}
 
     @property
     def is_fully_verified(self) -> bool:

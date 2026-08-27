@@ -5,7 +5,7 @@
 Red Sea liveaboards advertise a berth price. That price is not the bill. Park
 fees, port dues, fuel, visa, nitrox, gear and the expected crew tip arrive
 afterwards and routinely add **30–60%**. This mines trip data from padi.com and
-liveaboard.com, reclassifies it, and reprices it the way you actually pay.
+liveaboard.com and reprices it the way you actually pay.
 
 ```
 Brothers, Daedalus & Elphinstone · 1–8 May 2027
@@ -82,7 +82,7 @@ is what they are a property of.
 A fee an operator **includes** still appears in the breakdown, at zero —
 deleting it would hide the exact difference this site exists to show.
 
-**Comparison, not a scoreboard**: the lists sort by true cost, cost per night,
+**Comparison, not a scoreboard**: the table sorts by true cost, price per dive,
 advertised price, and how much lands after the headline figure. There is no
 per-operator rating — two boats reaching the same true cost by different routes
 show that in their breakdowns, which is the part a diver can act on. The
@@ -95,16 +95,17 @@ cost at all. Every Egyptian liveaboard pays park and port fees, so silence
 means either bundled or collected at the dock, and the listing does not say
 which.
 
-**Classification** is derived from each trip's dive-site list, not from operator
-marketing, so "Simply the Best", "Ultimate Red Sea" and "BDE" get one label.
-Sites are read from the trip title, which is all the source publishes: 254 of
-317 name reefs, 40 name only a direction and say so, and 23 name neither and
+**Dive sites, not route labels.** Filtering is on the sites themselves — a BDE
+week is one naming Brothers, Daedalus and Elphinstone — because a name for a
+set of sites is a layer that can be wrong and answers nothing the sites do not.
+Sites are read from the trip title, which is all the source publishes: 251 of
+314 name reefs, 40 name only a direction and say so, and 23 name neither and
 stay blank rather than being guessed at (#52).
 
 **Provenance**: every price and fee records where it came from and when
 (`scraped`, `operator_stated`, `seed_estimate`, `derived`).
 
-The scrape takes **facts** — dates, routes, sites, prices, prerequisites. All
+The scrape takes **facts** — dates, ports, sites, prices, prerequisites. All
 descriptions are written here; no marketing copy or photography is reproduced.
 The fetcher obeys `robots.txt` and `Crawl-delay`, taking the larger of that and
 its own floor. liveaboard.com states none, so the crawl runs at 2s.
@@ -112,7 +113,7 @@ its own floor. liveaboard.com states none, so the crawl runs at 2s.
 ## Layout
 
 ```
-src/liveaboard/   taxonomy, money, models, pricing, classify, promote,
+src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   dataset, render, cli
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
                   fees, gear, vessel        (the last three need a browser)
@@ -151,7 +152,13 @@ next month can still be put to this month's data. Every run is a commit, so
 Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). The ones
 that would change what the page can say:
 
-- **#48** report what changed since the last run — new trips, gone trips, moved
-  prices. The git history is already the record; nothing reads it back.
-- **#50** price per dive is derived from nights on 256 of 317 trips, so it
-  carries no information its own denominator did not invent.
+- **#52** 23 trips name no dive site and no direction, so the column a diver
+  filters on is blank for them. The trip detail is loaded by something other
+  than the `#tourid=` hash; finding that endpoint would give a per-trip site
+  list for all 314, not just the 23.
+- **#47** the gear spread is €40–333 a trip and unexplained. Whether the boats
+  with the cheapest berths charge most for kit is answerable from data already
+  committed, and would be a real finding for a price-transparency site.
+- **#6** price history from the git log. Every run is a commit, so *"this trip
+  was €200 cheaper in March"* costs only the reading — and #48 built the diff.
+

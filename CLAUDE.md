@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 342 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 348 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
@@ -52,8 +52,12 @@ Break these and the site starts lying quietly rather than failing loudly.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
   required extras. Neither is a clean bill.
-- **Classification derives from dive sites**, not from trip names. An explicit
-  value in the dataset wins; a stated safety requirement is never softened.
+- **No route, theme or level labels.** They were inferred from the dive sites,
+  read by nothing on the page, and removable without loss: if you want a BDE
+  week you filter on Brothers, Daedalus and Elphinstone. A name for a set of
+  sites is a layer that can be wrong — a St John's week was badged BDE — and
+  answers nothing the site filter does not. `Itinerary.requirements` stays: a
+  stated safety requirement is the operator's claim, and is never softened.
 - **A vessel summary is the boat's year-round brochure, not the trip's.** Never
   a source for where one trip goes: Aphrodite's names St John's, so its *North
   Wrecks* week would be tagged with a reef 600 km away.

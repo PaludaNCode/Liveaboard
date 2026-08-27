@@ -21,9 +21,7 @@ from .taxonomy import (
     FeeBasis,
     FeeCode,
     FeeTier,
-    Route,
     SourceKind,
-    Theme,
 )
 
 
@@ -262,8 +260,6 @@ class Itinerary:
     port_from: str
     port_to: str
     dive_sites: list[str] = field(default_factory=list)
-    route: Route | None = None
-    themes: list[Theme] = field(default_factory=list)
     requirements: Requirements = field(default_factory=Requirements)
     fees: list[FeeItem] = field(default_factory=list)
     source_url: str | None = None
@@ -286,7 +282,6 @@ class Itinerary:
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Itinerary:
-        route = payload.get("route")
         return cls(
             id=payload["id"],
             name=payload["name"],
@@ -297,8 +292,6 @@ class Itinerary:
             port_from=payload["port_from"],
             port_to=payload.get("port_to", payload["port_from"]),
             dive_sites=list(payload.get("dive_sites", [])),
-            route=Route(route) if route else None,
-            themes=[Theme(t) for t in payload.get("themes", [])],
             requirements=Requirements.from_dict(payload.get("requirements")),
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             source_url=payload.get("source_url"),

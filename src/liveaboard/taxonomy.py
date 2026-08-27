@@ -143,27 +143,8 @@ FEE_LABELS: dict[FeeCode, str] = {
 }
 
 
-class Route(str, Enum):
-    """The itinerary families Egyptian liveaboards actually sell."""
-
-    NORTH_WRECKS_REEFS = "north_wrecks_reefs"
-    RAS_MOHAMMED_TIRAN = "ras_mohammed_tiran"
-    BDE = "bde"
-    DEEP_SOUTH = "deep_south"
-    FURY_SHOAL = "fury_shoal"
-    ST_JOHNS = "st_johns"
-    COMBINATION = "combination"
 
 
-ROUTE_LABELS: dict[Route, str] = {
-    Route.NORTH_WRECKS_REEFS: "North — Wrecks & Reefs",
-    Route.RAS_MOHAMMED_TIRAN: "Ras Mohammed & Tiran",
-    Route.BDE: "Brothers, Daedalus & Elphinstone",
-    Route.DEEP_SOUTH: "Deep South",
-    Route.FURY_SHOAL: "Fury Shoal & Sataya",
-    Route.ST_JOHNS: "St John's",
-    Route.COMBINATION: "Combination / Ultimate",
-}
 
 
 class DiverLevel(str, Enum):
@@ -190,33 +171,8 @@ DIVER_LEVEL_ORDER: list[DiverLevel] = [
 ]
 
 
-class Theme(str, Enum):
-    """What a trip is actually for, beyond the route name."""
-
-    SHARKS_PELAGIC = "sharks_pelagic"
-    HAMMERHEADS = "hammerheads"
-    OCEANIC_WHITETIP = "oceanic_whitetip"
-    WRECKS = "wrecks"
-    REEF = "reef"
-    DOLPHINS = "dolphins"
-    MACRO = "macro"
-    PHOTOGRAPHY = "photography"
-    TECH = "tech"
-    CURRENT = "current"
 
 
-THEME_LABELS: dict[Theme, str] = {
-    Theme.SHARKS_PELAGIC: "Sharks & pelagics",
-    Theme.HAMMERHEADS: "Hammerheads",
-    Theme.OCEANIC_WHITETIP: "Oceanic whitetips",
-    Theme.WRECKS: "Wrecks",
-    Theme.REEF: "Coral reef",
-    Theme.DOLPHINS: "Dolphins",
-    Theme.MACRO: "Macro",
-    Theme.PHOTOGRAPHY: "Photography",
-    Theme.TECH: "Technical diving",
-    Theme.CURRENT: "Strong current",
-}
 
 
 class SourceKind(str, Enum):

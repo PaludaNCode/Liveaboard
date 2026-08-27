@@ -48,15 +48,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     if dataset.fx is None:
         raise ValueError("dataset has no FX table; cannot render euro prices")
 
-    classifications = dataset.classifications()
-
     itineraries: dict[str, Any] = {}
     # The resolved fee rows, once per itinerary. Reused below to decide whether
     # a departure needs its own copy, which is why they are kept as dicts here
     # rather than re-serialised per departure.
     shared_lines: dict[str, list[dict[str, Any]]] = {}
     for key, itinerary in dataset.itineraries.items():
-        classification = classifications[key]
         boat = dataset.boat_for(itinerary)
         operator = dataset.operator_for(itinerary)
         shared_lines[key] = [line.as_dict() for line in itinerary_lines(itinerary, dataset.fx)]
@@ -88,8 +85,10 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "guests": boat.guests,
             "summary": itinerary.summary,
             "source_url": itinerary.source_url,
+            # What the operator states about the entry bar. Kept because it
+            # is their claim; the route, theme and level the site used to
+            # infer beside it were ours, unread by the page, and gone.
             "requirements": itinerary.requirements.as_dict(),
-            **classification.as_dict(),
         }
 
     departures: list[dict[str, Any]] = []
