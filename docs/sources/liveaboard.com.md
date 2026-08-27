@@ -31,6 +31,30 @@ an earlier version accepted any two-segment `/diving/` path and the crawler
 walked off into Indonesia and the Rhine. About twenty `/diving/egypt/` links
 are dive sites and regions rather than vessels; `NON_BOAT_SLUGS` skips them.
 
+### The per-trip itinerary fragment
+
+```
+GET /itinerary/getpopupv2?boatID={boat}&tourID={tour}&languageID=1&curr=USD&showPrices=false
+→ 200 text/html, ~11–19 KB, an HTML fragment (a `#help-content-travel-itinerary-modal-{tour}` dialog)
+```
+
+**No browser needed.** A probe fetched six tours over plain `urllib` and through
+Playwright: byte-identical every time. This belongs in the nightly crawl with
+the polite fetcher, not the weekly browser run.
+
+**Both ids come from the repository, not from a crawl.** `Event.@id` is
+`LA-{x}-{boatID}-{tourID}` on all 878 archived events, and the boatID is
+constant per vessel across all 67.
+
+**Cost: one request per itinerary, not per departure.** There are 878 distinct
+tour ids — one per sailing — but dive sites, dive count and the entry bar are
+properties of the trip, so every departure of one itinerary returns the same
+answer. 340 requests covers everything; fetching all 878 would spend 538
+re-reading what was already in hand.
+
+`showPrices=false` is passed because prices come from the `Event` offers. A
+price-bearing variant presumably exists and has not been looked at.
+
 ## Facts, and where each one is
 
 Everything in the "no" column comes from JSON-LD in the served HTML
@@ -48,6 +72,10 @@ and needs Playwright.
 | Rental gear prices | `#modal-gear` → `<h5>` per section, then `<li><strong>ITEM</strong><span>PRICE / week</span></li>` (`scrape/gear.py`) | **yes** (already in the DOM; the URL hash alone opens it) |
 | Guests, cabins, length, year built | `#help-content-boat-amenities-specifications` → `<dl><dt>Max guests</dt><dd>20</dd></dl>` (`scrape/vessel.py`) | **yes** |
 | Nitrox inclusion | `#help-content-boat-amenities-diving` → `<li>Free Nitrox</li>` | **yes** |
+| **Per-trip dive sites** | `/itinerary/getpopupv2` → `<h4>Key regions</h4>` then `<li title="The Brothers">` (`scrape/itinerary.py`) | no |
+| **Per-trip dive count** | same fragment → `<dt>Dives <dd>Approximately 18 dives in total` | no |
+| **Per-trip guests** | same fragment → `<dt>Group Size <dd>Up to 20 guests` | no |
+| **Stated entry bar** | same fragment → `<strong>Experience</strong><span>Advanced Open Water - 50 minimum logged dives required.</span>` | no |
 
 `Product.offers` is an `AggregateOffer` on all 318 archived pages —
 `lowPrice`/`highPrice` for the vessel, i.e. a "from" price. Useless for what a
@@ -100,7 +128,8 @@ Each of these cost a cycle at least once.
 
 | Question | Answer | Established by |
 |---|---|---|
-| Does `#tourid=NNN` open the trip detail, the way `#modal-gear` opens the gear dialog? | **No.** The fragment opens nothing; the trip detail is not in the document at load. ~50 dialogs enumerated, not one named a dive site. | `tools/probe_itinerary.py`, a CI run |
+| Does `#tourid=NNN` open the trip detail, the way `#modal-gear` opens the gear dialog? | **No.** The fragment opens nothing; the trip detail is not in the document at load. ~50 dialogs enumerated, not one named a dive site. The id is real and useful — it is the `tourID` the fragment endpoint takes — but the hash alone does not fetch it. | `tools/probe_itinerary.py`, a CI run |
+| Does the itinerary fragment need a browser? | **No.** Six tours over plain `urllib` and through Playwright returned byte-identical bodies. | `tools/probe_itinerary_endpoint.py` |
 | Are the month listings filtered by month? | **No.** All four return the same 80 vessels, so a vessel's absence from May's listing proves nothing. Kills the planned ~30% request saving — skipping on that basis would drop real departures. | `tools/probe_crawl.py` |
 | Does `robots.txt` state a `Crawl-delay`? | **No.** The pace is ours to choose. | `tools/probe_crawl.py` |
 | Does `?page=2` return a second page of results? | **No.** Byte-identical to page 1, `pageCount:0`, all results already present. | a live probe; noted in `liveaboard_com.py` |
