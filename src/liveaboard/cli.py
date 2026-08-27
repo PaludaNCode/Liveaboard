@@ -22,7 +22,27 @@ from .scrape.base import FetchBlocked, PoliteFetcher, ScrapeOutput
 from .scrape.liveaboard_com import LiveaboardComAdapter
 from .scrape.padi_com import PadiComAdapter
 
-DEFAULT_DATA = Path("data/seed/egypt-2027.json")
+SEED_DATA = Path("data/seed/egypt-2027.json")
+LIVE_DATA = Path("data/egypt-2027.json")
+
+
+def default_data() -> Path:
+    """The dataset to use when nobody names one.
+
+    This was a constant pointing at the seed, and the deploy job builds with no
+    --data. So every published page was built from five placeholder boats while
+    the repository beside it held sixty-seven scraped ones, and the seed banner
+    on the live site was telling the truth about a page nobody meant to ship.
+
+    Verifying it did not catch this: rebuilding from main with an explicit
+    --data reproduces what the *commit* step builds, not what the *deploy* step
+    builds. The two only diverged because of this default.
+
+    Preferring the real dataset means the seed is what you get on a fresh
+    checkout that has never scraped, which is the only time it is the right
+    answer.
+    """
+    return LIVE_DATA if LIVE_DATA.exists() else SEED_DATA
 DEFAULT_OUT = Path("site")
 DEFAULT_SNAPSHOTS = Path("data/snapshots")
 
@@ -33,7 +53,9 @@ ADAPTERS = {
 
 
 def cmd_build(args: argparse.Namespace) -> int:
-    dataset = Dataset.load(args.data)
+    data = args.data or default_data()
+    dataset = Dataset.load(data)
+    print(f"building from {data}")
     target = render(dataset, args.out)
     payload_size = target.stat().st_size
     print(f"built {target} ({payload_size / 1024:.0f} KB)")
@@ -48,13 +70,14 @@ def cmd_build(args: argparse.Namespace) -> int:
 
 def cmd_check(args: argparse.Namespace) -> int:
     """Validate the dataset and print what the engine makes of it."""
+    data = args.data or default_data()
     try:
-        dataset = Dataset.load(args.data)
+        dataset = Dataset.load(data)
     except DatasetError as exc:
         print(f"dataset invalid: {exc}", file=sys.stderr)
         return 1
 
-    print(f"{args.data}: valid")
+    print(f"{data}: valid")
     print(f"  sources: {', '.join(sorted(k.value for k in dataset.source_kinds))}")
     print()
 
@@ -289,12 +312,12 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     build = sub.add_parser("build", help="render the static site")
-    build.add_argument("--data", default=DEFAULT_DATA, type=Path)
+    build.add_argument("--data", default=None, type=Path)
     build.add_argument("--out", default=DEFAULT_OUT, type=Path)
     build.set_defaults(func=cmd_build)
 
     check = sub.add_parser("check", help="validate the dataset and summarise it")
-    check.add_argument("--data", default=DEFAULT_DATA, type=Path)
+    check.add_argument("--data", default=None, type=Path)
     check.set_defaults(func=cmd_check)
 
     scrape = sub.add_parser("scrape", help="refresh from the source sites")

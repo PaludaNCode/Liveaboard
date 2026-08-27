@@ -283,5 +283,35 @@ class TestFxHonesty(unittest.TestCase):
         self.assertIn("sourced", payload["meta"]["fx"])
 
 
+class TestDefaultDataset(unittest.TestCase):
+    """The default decided what got published, and it pointed at the seed."""
+
+    def test_the_real_dataset_wins_when_it_exists(self):
+        from liveaboard.cli import LIVE_DATA, default_data
+
+        if not LIVE_DATA.exists():
+            self.skipTest("no scraped dataset in this checkout")
+        self.assertEqual(default_data(), LIVE_DATA)
+
+    def test_the_seed_is_the_fallback_not_the_default(self):
+        """A fresh checkout that has never scraped is the only time it is right."""
+        import liveaboard.cli as cli
+
+        original = cli.LIVE_DATA
+        try:
+            cli.LIVE_DATA = Path("data/definitely-not-here.json")
+            self.assertEqual(cli.default_data(), cli.SEED_DATA)
+        finally:
+            cli.LIVE_DATA = original
+
+    def test_the_deploy_names_its_dataset(self):
+        """Relying on the default published five placeholder boats for hours."""
+        workflow = (
+            Path(__file__).resolve().parents[1] / ".github/workflows/pages.yml"
+        ).read_text(encoding="utf-8")
+        build = workflow.split("- name: Build", 1)[1]
+        self.assertIn("--data", build.split("- uses:", 1)[0])
+
+
 if __name__ == "__main__":
     unittest.main()

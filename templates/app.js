@@ -15,8 +15,6 @@
      liveaboard/taxonomy.py — change one and you must change the other. */
   var DEFAULT_ON_TIERS = { base: true, mandatory: true, customary: true };
 
-  var LEVEL_ORDER = DATA.facets.levels.map(function (l) { return l.id; });
-
   var euro = new Intl.NumberFormat("en-IE", {
     style: "currency", currency: DATA.meta.currency,
     minimumFractionDigits: 0, maximumFractionDigits: 0
@@ -28,8 +26,6 @@
     toggles: {},
     months: new Set(),
     routes: new Set(),
-    levels: new Set(),
-    themes: new Set(),
     open: new Set()
   };
 
@@ -84,19 +80,6 @@
     var itin = DATA.itineraries[dep.itinerary_id];
     if (state.months.size && !state.months.has(dep.month)) return false;
     if (state.routes.size && !state.routes.has(itin.route)) return false;
-    if (state.themes.size) {
-      var hit = itin.themes.some(function (t) { return state.themes.has(t); });
-      if (!hit) return false;
-    }
-    if (state.levels.size) {
-      /* "I am qualified to X" means show everything at or below X, not only
-         trips demanding exactly X. */
-      var ceiling = -1;
-      state.levels.forEach(function (l) {
-        ceiling = Math.max(ceiling, LEVEL_ORDER.indexOf(l));
-      });
-      if (LEVEL_ORDER.indexOf(itin.level) > ceiling) return false;
-    }
     return true;
   }
 
@@ -511,8 +494,6 @@
     drawToggles();
     chipRow("months", DATA.facets.months, state.months);
     chipRow("routes", DATA.facets.routes, state.routes);
-    chipRow("levels", DATA.facets.levels, state.levels);
-    chipRow("themes", DATA.facets.themes, state.themes);
 
     var matching = DATA.departures.filter(passesFilters);
     var results = document.getElementById("results");
@@ -589,8 +570,6 @@
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear();
     state.routes.clear();
-    state.levels.clear();
-    state.themes.clear();
     DATA.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
     draw();
   });

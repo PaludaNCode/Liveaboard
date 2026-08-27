@@ -62,8 +62,16 @@ jobs:
 
       # Rebuild rather than trusting the committed file, so the published page
       # always matches the dataset in the same commit.
+      #
+      # The dataset is named explicitly. This step used to rely on the build
+      # default, which pointed at the seed, so every deploy published five
+      # placeholder boats while the repository held sixty-seven scraped ones.
+      # The default now prefers the real dataset, but a deploy should not be
+      # the thing that discovers a default changed underneath it.
       - name: Build
-        run: PYTHONPATH=src python3 -m liveaboard.cli build
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli build \
+            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
