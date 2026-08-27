@@ -48,6 +48,22 @@ class TestBoatLinks(unittest.TestCase):
     def test_finds_exactly_the_two_boats(self):
         self.assertEqual(len(self.found), 2)
 
+    def test_rejects_the_dive_sites_the_search_page_actually_links(self):
+        """Taken verbatim from a live search page's destination nav."""
+        sites = [
+            "red-sea", "thistlegorm", "ras-mohammed", "the-brothers",
+            "straits-of-tiran", "abu-nuhas", "daedalus", "elphinstone",
+            "st-johns", "abu-dabab",
+        ]
+        html = "".join(f'<a href="/diving/egypt/{slug}">x</a>' for slug in sites)
+        self.assertEqual(LiveaboardComAdapter.boat_links(html), set())
+
+    def test_keeps_the_boats_the_same_page_links(self):
+        html = "".join(
+            f'<a href="/diving/egypt/{slug}">x</a>' for slug in ("alia-soul", "all-star-ghani")
+        )
+        self.assertEqual(len(LiveaboardComAdapter.boat_links(html)), 2)
+
 
 class TestIsoDate(unittest.TestCase):
     def test_plain_date_passes_through(self):

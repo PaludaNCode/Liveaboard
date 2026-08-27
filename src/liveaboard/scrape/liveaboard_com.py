@@ -49,12 +49,12 @@ def search_paths() -> tuple[str, ...]:
     )
 
 
-MAX_SEARCH_PAGES = 5
-"""Result pages to walk per month.
-
-August is known to run to three. Five leaves headroom without crawling
-forever; the walk stops early as soon as a page yields no new boats.
-"""
+# Paging deliberately not implemented. A live probe showed ?page=2 returning
+# byte-identical content to page 1, "pageCount":0 in the markup, and 100 boat
+# links already present on the first response against a title of "79 Egypt
+# liveaboards". The site's "Next" button pages the rendered view in the
+# browser; the server sends every result at once. One fetch per month is the
+# whole month.
 
 DESTINATION_PATHS = (
     "/diving/egypt",
@@ -81,15 +81,23 @@ what the page is about.
 
 NON_BOAT_SLUGS = frozenset(
     {
-        "red-sea", "sharm-el-sheikh", "hurghada", "marsa-alam", "port-ghalib",
-        "safaga", "brothers-islands", "daedalus-reef", "elphinstone",
-        "st-johns", "fury-shoal", "ras-mohammed", "tiran", "thistlegorm",
-        "abu-nuhas", "liveaboards", "reviews", "deals",
+        # Regions and dive sites seen in the search page's own destination nav.
+        "red-sea", "thistlegorm", "ras-mohammed", "the-brothers",
+        "straits-of-tiran", "abu-nuhas", "daedalus", "elphinstone", "st-johns",
+        "abu-dabab", "brothers-islands", "daedalus-reef", "fury-shoal", "tiran",
+        "sharm-el-sheikh", "hurghada", "marsa-alam", "port-ghalib", "safaga",
+        # Site furniture.
+        "liveaboards", "reviews", "deals",
     }
 )
-"""Second-path segments under ``/diving/egypt/`` that are regions, dive sites or
-site furniture rather than vessels. ``/diving/egypt/red-sea`` matched the boat
-pattern in the last run and is not a boat."""
+"""Segments under ``/diving/egypt/`` that are places, not vessels.
+
+The search page links roughly twenty of these from its destination nav, and
+they take the same URL shape as a boat. Skipping them by name saves a wasted
+fetch each; the real guarantee is downstream, where a page with no ``Event``
+nodes yields no departures and says so. This list is an optimisation, not a
+correctness boundary — an unknown dive site costs one request, not a bad price.
+"""
 
 
 class LiveaboardComAdapter(SourceAdapter):
@@ -109,40 +117,22 @@ class LiveaboardComAdapter(SourceAdapter):
         return found
 
     def _listing_urls(self) -> Iterator[str]:
-        """Every result page of every month search, then the fallback listings.
-
-        Paging is walked rather than assumed: the loop stops as soon as a page
-        adds no boat the previous ones did not, so a month with one page costs
-        one extra request and a month with three is covered in full.
-        """
-        for base in search_paths():
-            per_month: set[str] = set()
-            for page in range(1, MAX_SEARCH_PAGES + 1):
-                url = f"https://{self.host}{base}" + (f"?page={page}" if page > 1 else "")
-                try:
-                    listing = self.fetcher.get(url)
-                except Exception as exc:  # noqa: BLE001 - a dead page must not end the run
-                    self.note(f"listing unavailable {url}: {exc}")
-                    break
-
-                links = self.boat_links(listing.body)
-                fresh = links - per_month
-                if page > 1 and not fresh:
-                    break
-                if not links:
-                    self.note(f"no boat links matched on {url}")
-                    break
-                per_month |= links
-                yield url
-            self.note(f"{base}: {len(per_month)} boats across up to {MAX_SEARCH_PAGES} pages")
-
-        for path in DESTINATION_PATHS:
+        """One search page per season month, then the fallback listings."""
+        for path in search_paths() + DESTINATION_PATHS:
             url = f"https://{self.host}{path}"
             try:
-                self.fetcher.get(url)
-            except Exception as exc:  # noqa: BLE001
+                listing = self.fetcher.get(url)
+            except Exception as exc:  # noqa: BLE001 - a dead listing must not end the run
+                # Reported rather than swallowed: a silently skipped listing is
+                # indistinguishable from a site with nothing to sell.
                 self.note(f"listing unavailable {url}: {exc}")
                 continue
+
+            count = len(self.boat_links(listing.body))
+            if not count:
+                self.note(f"no boat links matched on {url}")
+            else:
+                self.note(f"{path}: {count} boats")
             yield url
 
     def discover(self) -> Iterator[str]:
