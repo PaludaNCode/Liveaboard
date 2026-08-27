@@ -18,8 +18,12 @@ on:
     - cron: "15 4 * * *"
   workflow_dispatch:
     inputs:
-      promote:
-        description: "Promote the scrape into the live dataset"
+      max_pages:
+        description: "Cap vessels crawled (0 = the adapter default)"
+        type: string
+        default: "0"
+      force_promote:
+        description: "Publish even if the dataset shrinks sharply"
         type: boolean
         default: false
 
@@ -54,6 +58,7 @@ jobs:
         run: |
           PYTHONPATH=src python3 -m liveaboard.cli scrape \
             --source liveaboard.com \
+            --max-pages "${{ inputs.max_pages || 0 }}" \
             --out data/candidate.json \
             --snapshots data/snapshots
 
@@ -64,7 +69,8 @@ jobs:
         run: |
           PYTHONPATH=src python3 -m liveaboard.cli promote \
             --candidate data/candidate.json \
-            --out data/egypt-2027.json
+            --out data/egypt-2027.json \
+            ${{ inputs.force_promote == 'true' && '--force' || '' }}
 
       - name: Report a blocked or empty scrape
         if: steps.scrape.outcome == 'failure'
