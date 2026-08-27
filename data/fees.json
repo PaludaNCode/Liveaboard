@@ -596,6 +596,551 @@
           "note": "Rental Gear: listed with no price"
         }
       ]
+    },
+    "aphrodite": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027",
+      "disclosure": {
+        "required": "Park, Port and Fuel Fees (€150-250 / trip).,",
+        "optional": "Gratuities (€100 / trip), Local Flights, Alcoholic Beverages, Extra Dives, Nitrox Course (€150), Private Dive Guide, Rental Gear, Scuba Diving Courses (€100-250), Snorkel Gear, Complimentary Toiletries, Laundry / Pressing Services., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Naturalist Guide, En-Suite bathrooms, Family Cabins, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Massage, Air Conditioned saloon, Sun Deck, Camera Station, Seaview Cabins, Non-Smoking Rooms, Camera room, Custom built for diving, Charging stations, Indoor Saloon, Library, Audio & video entertainment, TV in cabins, Observation Deck, BBQ Area, Available for Charter, Local & International Crew, Snorkeling Equipment, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Naturalist Guide, Food & Drinks, Fine Cuisine, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Beach BBQ, Fine Wines Selection, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board yo"
+      },
+      "fees": [
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    "ashrafi": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027",
+      "disclosure": {
+        "required": "Park, Port and Fuel Fees (€145 / trip).,",
+        "optional": "Gratuities (€70 / trip), Nitrox (€70 / week), Nitrox Course, Private Dive Guide (€500 / trip), Rental Gear, Scuba Diving Courses., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Family Cabins, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Budget Friendly Cruise, Family Friendly Cruise, Wakeboarding, Boutique / Souvenir Shop, Seaview Cabins, Non-Smoking Rooms, Camera room, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Smart Voyager accreditation, Observation Deck, Hair Dryer in Cabin, BBQ Area, Available for Charter, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Dedicated Local Crew, Food & Drinks, Fine Cuisine, Vegan Options, Vegetarian Options, Free Soft Drinks, Full-board Option, Beach BBQ, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board you"
+      },
+      "fees": [
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox Course: listed with no price"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027"
+          },
+          "amount": {
+            "amount": 500.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        }
+      ]
+    },
+    "avo": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027",
+      "disclosure": {
+        "required": "Mandatory Service Charge (€80), Park, Port and Fuel Fees (€200-450 / trip).,",
+        "optional": "Alcoholic Beverages, Nitrox Course (€180), Private Dive Guide (€550 / week), Scuba Diving Courses (€230-360), Snorkel Gear, Snorkeling Guide., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Pool, Jacuzzi / Hot Tub, Naturalist Guide, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Rooms with Balcony, Budget Friendly Cruise, Family Friendly Cruise, Boutique / Souvenir Shop, Seaview Cabins, Non-Smoking Rooms, Camera room, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, TV in cabins, Observation Deck, Hair Dryer in Cabin, BBQ Area, Available for Charter, Local & International Crew, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Naturalist Guide, Food & Drinks, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Fine Wines Selection, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Fo"
+      },
+      "fees": [
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
+          },
+          "amount": {
+            "amount": 550.0,
+            "currency": "EUR"
+          }
+        }
+      ]
+    },
+    "bella-2": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027",
+      "disclosure": {
+        "required": "Mandatory Service Charge (€10 / day), National Park Fees (€10 / day), Port Fees (€5 / trip).,",
+        "optional": "Airport Transfer, Hotel Transfer, Alcoholic Beverages, Alcoholic Drinks at Dinner, Nitrox Course (€100-200 / activity), Rental Gear, Laundry / Pressing Services., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, BBQ Area, Available for Charter, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Welcome Cocktails, Snacks All Day, Local Food, Set Menu Dinner, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Shaded Diving Area, DIN Adaptors, Dive deck, Languages Spoken, The crew speaks English, Spanish, Russian, and Italian., Gear Rental, Equipment is available for rent on th"
+      },
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": {
+            "amount": 10.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    "bella-3": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027",
+      "disclosure": {
+        "required": "Mandatory Service Charge (€10 / day), National Park Fees (€10 / day), Port Fees (€5 / trip).,",
+        "optional": "Airport Transfer (€30 / activity), Hotel Transfer, Extra Dives, Nitrox Course (€100-200 / activity), Private Dive Guide, Rental Gear, Scuba Diving Courses (€275-365 / activity), Snorkel Gear, Laundry / Pressing Services., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, BBQ Area, Available for Charter, Outside Showers, Leisure Deck, Daily housekeeping, Food & Drinks, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, Set Menu Dinner, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Shaded Diving Area, DIN Adaptors, Dive deck, Tenders for di"
+      },
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": {
+            "amount": 10.0,
+            "currency": "EUR"
+          },
+          "note": "National Park Fees"
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "note": "Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "note": "Airport Transfer"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "laundry",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027"
+          },
+          "amount": null,
+          "note": "Laundry / Pressing Services: listed with no price"
+        }
+      ]
+    },
+    "bismarck": {
+      "source_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027",
+      "disclosure": {
+        "required": "Mandatory Service Charge (€120 / trip), Park and Port Fees (€130 / trip).,",
+        "optional": "Airport Transfer, Hotel Transfer, Extra Dives, Nitrox (€70 / trip), Nitrox Course (€150 / item), Private Dive Guide (€450 / trip), Rental Gear, Scuba Diving Courses, Massage., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Jacuzzi / Hot Tub, Naturalist Guide, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Massage, Air Conditioned saloon, Sun Deck, Camera Station, Budget Friendly Cruise, Family Friendly Cruise, Seaview Cabins, Naturalist Itineraries, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Laundry Service, Outdoor Dining, Audio & video entertainment, Smart Voyager accreditation, Hair Dryer in Cabin, BBQ Area, Available for Charter, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Fine Cuisine, Vegan Options, Vegetarian Options, Free Soft Drinks, Full-board Option, Beach BBQ, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cr"
+      },
+      "fees": [
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 130.0,
+            "currency": "EUR"
+          },
+          "note": "Park and Port Fees"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Nitrox Course"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": {
+            "amount": 450.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        }
+      ]
     }
   },
   "missing": []
