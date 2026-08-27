@@ -209,25 +209,19 @@ class TestRender(unittest.TestCase):
         self.assertGreater(len(json.loads(payload)["departures"]), 0)
 
 
-# Every external host the page is currently allowed to reach, spelled out.
+# Every external host the page is allowed to reach. Empty, and meant to stay
+# that way: one self-contained HTML file, no CDN.
 #
-# The webfont stylesheet is a known violation of the "no CDN" invariant, not an
-# endorsement of it -- see #59. It is listed here so that it is *visible*: the
-# previous test looked for `href="https://..." ending in .css`, and the Google
-# Fonts URL is `/css2?family=...`, so the one external reference that existed
-# was the one shape the check could not match. A test that passes on a page
-# breaking its own stated invariant is worse than no test, because it gets read
-# as evidence.
+# It had two entries until #59 -- a webfont stylesheet from Google and the host
+# it pulled the fonts from. That was not merely untidy. The link sat in <head>
+# where a stylesheet is render-blocking, so the table did not exist until the
+# request resolved, and where the host is unreachable it hangs instead of
+# failing fast: first row after 13.04s, against 0.58s once it was gone.
 #
-# Removing entries from this list is the fix for #59. Adding one means the page
-# reaches somewhere new, which should be a deliberate, reviewed act rather than
-# something a regex quietly permits.
-ALLOWED_EXTERNAL = frozenset(
-    {
-        "https://fonts.googleapis.com",
-        "https://fonts.gstatic.com",
-    }
-)
+# Adding an entry here is adding a way for the page to be slow, or blank, on
+# somebody else's network. It needs a better reason than convenience.
+ALLOWED_EXTERNAL: frozenset[str] = frozenset()
+
 
 # Any absolute URL in an attribute -- src, href, and the url() of a stylesheet.
 EXTERNAL_REF = re.compile(r"""(?:src|href)\s*=\s*["'](https?://[^"']+)["']|url\(\s*["']?(https?://[^"')]+)""")
