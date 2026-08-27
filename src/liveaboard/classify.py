@@ -32,7 +32,12 @@ def normalise(name: str) -> str:
     # Apostrophes are dropped rather than spaced, so "Sha'ab" and "Shaab" agree
     # and "St John's" matches "St Johns". Spacing them apart would split one
     # word into two and quietly break every signature that contains one.
-    folded = re.sub(r"['’ʿʼ`]", "", folded)
+    #
+    # The acute accent and the left single quote are in this class because
+    # operators type them for an apostrophe: a live title read "St. John´s"
+    # (U+00B4) and folded to "st john s", so the St John's route went
+    # unrecognised on two of four vessels.
+    folded = re.sub(r"['’‘ʿʼ`´]", "", folded)
     folded = re.sub(r"[^a-z0-9]+", " ", folded)
     return re.sub(r"\s+", " ", folded).strip()
 

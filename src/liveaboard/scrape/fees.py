@@ -292,6 +292,37 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
     return found
 
 
+EXCERPT_CHARS = 1500
+"""How much of each Required/Optional block is kept as evidence.
+
+The reference disclosure is under 300 characters. This is generous enough to
+hold a long one whole, and small enough that keeping one per vessel does not
+turn the fee book into a page dump.
+"""
+
+
+def extras_excerpt(text: str, limit: int = EXCERPT_CHARS) -> dict[str, str]:
+    """Return the disclosure text :func:`parse_extras` reads, for the record.
+
+    The fee book is the one input this project cannot rebuild without a
+    browser, and it stored only the parsed result. So when the parser was found
+    to be inventing charges, there was no way to check the fix against what the
+    page had actually said — the published fabrications had to be re-derived
+    from their own ``note`` fields, and confirming the fix meant driving a
+    browser at the live site again.
+
+    Keeping the text the parse was made from turns the next parser fix into a
+    replay instead of another live run, and makes "did the operator change
+    this, or did we?" answerable from the repository alone.
+    """
+    blocks: dict[str, str] = {}
+    for heading, body in BLOCK.findall(normalise_disclosure(text)):
+        excerpt = " ".join(body.split())[:limit]
+        if excerpt:
+            blocks[heading.lower()] = excerpt
+    return blocks
+
+
 def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
     """Render parsed extras into the dataset's fee shape."""
     out = []

@@ -19,6 +19,8 @@ from collections import defaultdict
 from datetime import date
 from typing import Any
 
+from .classify import normalise
+
 UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
     "name": "Operator not captured",
@@ -35,6 +37,53 @@ MAX_NIGHTS = 30
 
 def slugify(value: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", value.lower())).strip("-")
+
+
+PROMOTION = re.compile(r"^\s*(\d{1,2}\s*%\s*off)\s*:\s*", re.I)
+"""A discount banner the operator glues to the front of a trip title.
+
+Every scraped title carrying one has a twin without it — "20% Off: North &
+Tiran (Hurghada - Hurghada)" and "North & Tiran (Hurghada - Hurghada)" are the
+same week on the same boat, differing only in which departures were on offer.
+Grouping on the raw title split them into two cards, so a vessel appeared to
+sell routes it does not and the discounted departures sat under a separate
+heading from the rest.
+
+The discount is real price information, so it moves to the departures it
+applies to rather than being dropped. The route name stays a route name:
+carrying an operator's marketing into our own headline is the opposite of what
+this site is for.
+"""
+
+PORTS = re.compile(r"\(([^()]{2,60}?)\s+[-–]\s+([^()]{2,60}?)\)\s*$")
+"""The departure and return ports, which the title states and the data does not.
+
+liveaboard.com's Event location is the country — every itinerary promoted as
+"Egypt → Egypt", which tells a visitor nothing. The title ends with the real
+pair: "(Port Ghalib - Safaga/Soma Bay)". That distinction decides which
+airport someone flies into and whether they need two of them, so it is worth
+reading off the only place the source puts it.
+"""
+
+
+def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
+    """Split a scraped trip title into route, promotion and ports."""
+    promotion = None
+    match = PROMOTION.match(name)
+    if match:
+        promotion = " ".join(match.group(1).split())
+        name = name[match.end():].strip()
+
+    ports = None
+    match = PORTS.search(name)
+    if match:
+        first, second = (" ".join(p.split()) for p in match.groups())
+        # A parenthetical is only a port pair when it reads like one. "(Brothers
+        # - Daedalus)" is a route, and filing Daedalus as a harbour would put a
+        # reef on the page as somewhere to fly into.
+        if not _sites_from_name(f"{first} {second}"):
+            ports = (first, second)
+    return name.strip(), promotion, ports
 
 
 def _nights(start: str, end: str) -> int | None:
@@ -85,8 +134,10 @@ def promote(
             continue
         if season and not (season[0] <= date.fromisoformat(departure["start"]) <= season[1]):
             continue
-        name = (departure.get("name") or "Unnamed itinerary").strip()
-        grouped[(slug, name)].append({**departure, "nights": nights})
+        name, promotion, _ = _split_title(departure.get("name") or "Unnamed itinerary")
+        grouped[(slug, name or "Unnamed itinerary")].append(
+            {**departure, "nights": nights, "promotion": promotion}
+        )
 
     boats: dict[str, dict[str, Any]] = {}
     itineraries: list[dict[str, Any]] = []
@@ -102,7 +153,13 @@ def promote(
 
         itinerary_id = f"{slug}--{slugify(name)}"[:96]
         nights = _most_common(d["nights"] for d in group)
-        ports = [d.get("location") for d in group if d.get("location")]
+
+        # The title's port pair beats the Event location, which is the country.
+        _, _, titled_ports = _split_title(name)
+        located = [d.get("location") for d in group if d.get("location")]
+        port_from, port_to = titled_ports or (
+            (located[0], located[0]) if located else ("Unknown", "Unknown")
+        )
 
         itineraries.append(
             {
@@ -112,8 +169,8 @@ def promote(
                 "boat_id": slug,
                 "nights": nights,
                 "dives": 0,
-                "port_from": ports[0] if ports else "Unknown",
-                "port_to": ports[0] if ports else "Unknown",
+                "port_from": port_from,
+                "port_to": port_to,
                 # Left empty on purpose. Route and theme are derived from dive
                 # sites, which this source does not publish; the classifier
                 # falls back to the trip name, which usually carries them.
@@ -127,17 +184,21 @@ def promote(
         )
 
         for item in group:
-            departures.append(
-                {
-                    "id": item["id"],
-                    "itinerary_id": itinerary_id,
-                    "start": item["start"],
-                    "end": item["end"],
-                    "price": item["price"],
-                    "booking_url": item.get("booking_url"),
-                    "provenance": item["provenance"],
-                }
-            )
+            entry = {
+                "id": item["id"],
+                "itinerary_id": itinerary_id,
+                "start": item["start"],
+                "end": item["end"],
+                "price": item["price"],
+                "booking_url": item.get("booking_url"),
+                "provenance": item["provenance"],
+            }
+            # Carried on the departure, not the itinerary: the operator
+            # discounts specific dates, and the price shown is already the
+            # discounted one. This says why it is lower than its neighbours.
+            if item.get("promotion"):
+                entry["promotion"] = item["promotion"]
+            departures.append(entry)
 
     payload: dict[str, Any] = {
         "schema_version": 1,
@@ -182,11 +243,53 @@ it goes. Pulling the names back out of the title lets the existing classifier
 work unchanged instead of leaving every scraped trip unclassified.
 """
 
+SITE_ALIASES: dict[str, str] = {
+    "deadalus": "daedalus",
+    "rocky": "rocky island",
+    "st john": "st johns",
+    "saint johns": "st johns",
+}
+"""How operators actually spell a site in a trip title.
+
+Titles are marketing copy, not a gazetteer. Two of four vessels sell
+"Deadalus, St. John´s & Elphinstone" — one transposition and one acute accent
+— and a third abbreviates Rocky Island to "Rocky". Matching only the correct
+spelling dropped Daedalus and St John's from those routes, and since
+classification derives from dive sites, it filed a southern shark itinerary as
+a single-site trip.
+
+Keys are matched after :func:`~liveaboard.classify.normalise`, so accents and
+apostrophes are already folded; only genuine misspellings and short forms
+belong here.
+"""
+
 
 def _sites_from_name(name: str) -> list[str]:
-    """Recover dive-site names from an itinerary title."""
-    lowered = name.lower()
-    return [hint for hint in SITE_HINTS if hint in lowered]
+    """Recover dive-site names from an itinerary title.
+
+    Both sides are folded through the classifier's own :func:`normalise`, so
+    "St. John´s" in a title reaches the same key as "St Johns" in the hints
+    rather than missing it over punctuation.
+    """
+    folded = f" {normalise(name)} "
+    found: list[str] = []
+    # Keyed on the folded form: SITE_HINTS lists "st johns" and "st john's"
+    # separately for readability, and they are one site.
+    seen: set[str] = set()
+
+    def add(site: str) -> None:
+        key = normalise(site)
+        if key not in seen:
+            seen.add(key)
+            found.append(site)
+
+    for hint in SITE_HINTS:
+        if f" {normalise(hint)} " in folded:
+            add(hint)
+    for alias, canonical in SITE_ALIASES.items():
+        if f" {normalise(alias)} " in folded:
+            add(canonical)
+    return found
 
 
 def _default_fx() -> dict[str, Any]:
