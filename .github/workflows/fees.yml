@@ -76,5 +76,22 @@ jobs:
             echo "fees unchanged this week"
             exit 0
           fi
+          # Every run is a commit, so the git history doubles as price history:
+          # `git log -p data/` shows exactly which fee moved, and when.
           git commit -m "data: weekly fee refresh $(date -u +%Y-%m-%d)"
-          git push
+
+          # A scrape takes minutes, and anything can land on main meanwhile --
+          # the other scheduled job, or a merge. A plain push is rejected and
+          # the whole run's data is thrown away. Rebase and retry instead.
+          # -X theirs favours the commit being replayed, which is ours: these
+          # files are regenerated output, so the fresh copy always wins.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt); rebasing onto origin/main"
+            git fetch origin main
+            git rebase -X theirs origin/main || { git rebase --abort; exit 1; }
+          done
+          echo "::error::could not push after 3 attempts"
+          exit 1
