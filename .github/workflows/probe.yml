@@ -1,25 +1,14 @@
-name: Probe sources
+name: Probe the crawl
 
-# Diagnostics only — never commits anything.
+# Answers questions a development sandbox cannot: the sandbox is behind a
+# strict egress allowlist and cannot reach the source at all, so anything about
+# what the site actually returns has to be measured from a runner.
 #
-# Two questions this answers that a sandbox behind a network allowlist cannot:
-#   1. What does a fetched page actually contain? (scrape --diagnose)
-#   2. Is the listing assembled from a JSON endpoint we could query directly,
-#      and how is it paged? (tools/probe_network.py, a real browser)
-#
-# Read the job log. Nothing here is committed, so run it as often as needed.
+# Deliberately separate from the scrape and manual only. It makes five requests
+# and writes nothing, so it can be run while wondering rather than scheduled.
 
 on:
   workflow_dispatch:
-    inputs:
-      urls:
-        description: "Space-separated URLs for the network probe (blank = the four season searches)"
-        type: string
-        default: ""
-      max_pages:
-        description: "URLs to visit in the network probe"
-        type: string
-        default: "2"
 
 permissions:
   contents: read
@@ -27,39 +16,11 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Structural diagnosis of fetched pages
-        continue-on-error: true
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli scrape \
-            --diagnose --max-pages 3 --warnings 25 \
-            --out /tmp/candidate.json --snapshots /tmp/snapshots
-
-      - name: Install Playwright
-        run: |
-          pip install --quiet playwright
-          playwright install --with-deps chromium
-
-      - name: Network probe
-        continue-on-error: true
-        run: |
-          ARGS=""
-          for u in ${{ inputs.urls }}; do ARGS="$ARGS --url $u"; done
-          python3 tools/probe_network.py $ARGS --max-pages "${{ inputs.max_pages || 2 }}"
-
-      - name: Keep the raw pages
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: probe-snapshots-${{ github.run_id }}
-          path: /tmp/snapshots/
-          retention-days: 7
-          if-no-files-found: ignore
+      - name: Probe
+        run: python3 tools/probe_crawl.py

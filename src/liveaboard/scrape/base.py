@@ -33,10 +33,29 @@ USER_AGENT = (
 )
 
 DEFAULT_DELAY_SECONDS = 5.0
-"""Conservative default when a site states no ``Crawl-delay``.
+"""Conservative default for a host nobody has checked.
 
 Slower than necessary on purpose: this scrape has a whole day to finish and
-nothing is gained by leaning on someone else's origin server.
+nothing is gained by leaning on someone else's origin server. A host stays at
+this pace until somebody has actually read its robots.txt and recorded the
+answer in CHECKED_HOSTS below.
+"""
+
+CHECKED_HOSTS: dict[str, float] = {
+    # robots.txt states no Crawl-delay (tools/probe_crawl.py, 2026-08-27), so
+    # the pace here is ours to choose rather than the site's to dictate. Two
+    # seconds is still slower than a person clicking through the same pages,
+    # for a job that runs once a day.
+    #
+    # This is deliberately a per-host note rather than a lower global default:
+    # the next source added has not been checked, and should start slow.
+    "www.liveaboard.com": 2.0,
+}
+"""Hosts whose robots.txt has been read, and the pace chosen for each.
+
+Never overrides a stated Crawl-delay -- crawl_delay takes the larger of the
+two -- so a site that starts asking for more gets it without anyone noticing
+this table.
 """
 
 
@@ -84,8 +103,8 @@ class PoliteFetcher:
     """Responses already fetched in this run.
 
     Listing pages are read twice by design — once by ``discover`` to find links,
-    once by ``run`` to parse — and at a five second crawl delay paying for that
-    twice is both slow and rude. The cache lives for one run only; the daily
+    once by ``run`` to parse — and paying the crawl delay for that twice is
+    both slow and rude. The cache lives for one run only; the daily
     schedule is what makes data fresh, not re-fetching within a single pass.
     """
 
@@ -105,9 +124,12 @@ class PoliteFetcher:
         return self._robots_for(url).can_fetch(self.user_agent, url)
 
     def crawl_delay(self, url: str) -> float:
-        """The site's stated delay, or our conservative default if it states none."""
+        """The politest of: the site's stated delay, ours for this host, ours by default."""
+        ours = CHECKED_HOSTS.get(urlparse(url).netloc, self.delay)
         stated = self._robots_for(url).crawl_delay(self.user_agent)
-        return max(float(stated), self.delay) if stated else self.delay
+        # A stated delay always wins when it is the slower of the two. Nothing
+        # in CHECKED_HOSTS can make this crawler faster than a site asked for.
+        return max(float(stated), ours) if stated else ours
 
     def _wait(self, url: str) -> None:
         host = urlparse(url).netloc
@@ -240,13 +262,17 @@ class SourceAdapter(ABC):
     #: is missing when the environment blocks it.
     host: str = ""
 
-    #: Cap on detail pages per run. At a five second crawl delay an uncapped
-    #: listing can outlast the CI job timeout, and a truncated scrape that says
-    #: so beats one that is killed halfway through.
+    #: Cap on detail pages per run. An uncapped listing can outlast the CI job
+    #: timeout, and a truncated scrape that says so beats one killed halfway.
     #:
-    #: Egypt lists 79 vessels, so 60 would have silently dropped a quarter of
-    #: the season. 120 covers it with headroom; at five seconds apiece that is
-    #: about ten minutes, well inside the job's thirty.
+    #: Egypt listed 79 vessels and now lists 80, so 60 would have silently
+    #: dropped a quarter of the season. 120 covers it with headroom.
+    #:
+    #: The cap counts vessels, and each one costs four requests -- the month
+    #: selector returns a single month, and the listings are not month-filtered
+    #: (tools/probe_crawl.py), so there is no way to learn a vessel does not
+    #: sail in July without asking. Roughly a third of a run comes back empty
+    #: for that reason and it is the price of the answer, not waste to remove.
     max_pages: int = 120
 
     def __init__(self, fetcher: PoliteFetcher) -> None:
