@@ -246,5 +246,116 @@ class TestFeeMerge(unittest.TestCase):
         self.assertGreater(breakdown.total_max.amount, breakdown.total.amount)
 
 
+class TestPortsFromTitle(unittest.TestCase):
+    """The source's Event location is "Egypt"; the title names real harbours."""
+
+    def promote_one(self, name: str, location: str | None = "Egypt") -> dict:
+        payload = promote(
+            candidate([departure(name=name, location=location)]), season=SEASON
+        )
+        return payload["itineraries"][0]
+
+    def test_a_round_trip_reads_both_ports(self):
+        itinerary = self.promote_one("North & Tiran (Hurghada - Hurghada)")
+        self.assertEqual(itinerary["port_from"], "Hurghada")
+        self.assertEqual(itinerary["port_to"], "Hurghada")
+
+    def test_a_one_way_keeps_its_two_ports(self):
+        """A visitor books two airports off this; averaging them is a lie."""
+        itinerary = self.promote_one(
+            "Marine Park North: Brothers - Daedalus & Elphinstone "
+            "(Port Ghalib - Safaga/Soma Bay)"
+        )
+        self.assertEqual(itinerary["port_from"], "Port Ghalib")
+        self.assertEqual(itinerary["port_to"], "Safaga/Soma Bay")
+
+    def test_the_title_beats_the_country_the_source_reports(self):
+        itinerary = self.promote_one("North (Hurghada - Hurghada)")
+        self.assertNotEqual(itinerary["port_from"], "Egypt")
+
+    def test_a_route_in_brackets_is_not_mistaken_for_ports(self):
+        """"(Brothers - Daedalus)" is a route. Neither is a harbour."""
+        itinerary = self.promote_one("Red Sea Classic (Brothers - Daedalus)")
+        self.assertEqual(itinerary["port_from"], "Egypt")
+
+    def test_no_ports_anywhere_stays_unknown(self):
+        itinerary = self.promote_one("Ultimate Red Sea", location=None)
+        self.assertEqual(itinerary["port_from"], "Unknown")
+
+
+class TestPromotionalTitles(unittest.TestCase):
+    """A discount banner on the title split one trip across two cards."""
+
+    NAME = "North & Tiran (Hurghada - Hurghada)"
+
+    def setUp(self):
+        self.payload = promote(
+            candidate(
+                [
+                    departure(name=f"20% Off: {self.NAME}", start="2027-05-01",
+                              end="2027-05-08", price=1100.0),
+                    departure(name=self.NAME, start="2027-06-05",
+                              end="2027-06-12", price=1450.0),
+                ]
+            ),
+            season=SEASON,
+        )
+
+    def test_the_same_route_is_one_itinerary(self):
+        self.assertEqual(len(self.payload["itineraries"]), 1)
+
+    def test_the_route_name_carries_no_marketing(self):
+        self.assertEqual(self.payload["itineraries"][0]["name"], self.NAME)
+
+    def test_both_departures_survive_the_merge(self):
+        self.assertEqual(len(self.payload["departures"]), 2)
+
+    def test_the_discount_moves_to_the_departure_it_applies_to(self):
+        """It explains why one date is cheaper, so it is kept, not dropped."""
+        by_start = {d["start"]: d for d in self.payload["departures"]}
+        self.assertEqual(by_start["2027-05-01"]["promotion"], "20% Off")
+        self.assertNotIn("promotion", by_start["2027-06-05"])
+
+    def test_a_percentage_inside_the_route_name_is_left_alone(self):
+        payload = promote(
+            candidate([departure(name="Nitrox 32% Special (Hurghada - Hurghada)")]),
+            season=SEASON,
+        )
+        self.assertEqual(
+            payload["itineraries"][0]["name"], "Nitrox 32% Special (Hurghada - Hurghada)"
+        )
+
+
+class TestSiteRecoveryFromTitles(unittest.TestCase):
+    """Operators spell sites the way they like; the classifier needs them anyway."""
+
+    def sites(self, name: str) -> list[str]:
+        from liveaboard.promote import _sites_from_name
+
+        return _sites_from_name(name)
+
+    def test_an_acute_accent_still_reads_as_st_johns(self):
+        """A live title read "St. John´s" and folded to "st john s"."""
+        self.assertIn("st johns", self.sites("Deadalus, St. John´s & Elphinstone"))
+
+    def test_a_transposed_daedalus_is_still_daedalus(self):
+        self.assertIn("daedalus", self.sites("Deadalus, St. John´s & Elphinstone"))
+
+    def test_rocky_is_rocky_island(self):
+        self.assertIn(
+            "rocky island", self.sites("Marine Park South: Daedalus - Rocky - Zabargad")
+        )
+
+    def test_one_site_is_listed_once_however_it_is_spelled(self):
+        """SITE_HINTS carries "st johns" and "st john's"; they are one site."""
+        found = self.sites("Daedalus & St. John's")
+        self.assertEqual(len(found), len(set(found)))
+        self.assertEqual(len(found), 2)
+
+    def test_a_site_name_inside_a_longer_word_is_not_a_match(self):
+        """Substring matching is what put invented data on the page once."""
+        self.assertEqual(self.sites("Saidian Coast Special"), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -12,6 +12,7 @@ from liveaboard.models import FeeItem
 from liveaboard.scrape.base import FetchResult, PoliteFetcher
 from liveaboard.scrape.fees import (
     classify_label,
+    extras_excerpt,
     normalise_disclosure,
     parse_extras,
     to_fee_dicts,
@@ -310,6 +311,39 @@ class TestPublishedFabrications(unittest.TestCase):
         """Six words is the line: no real extra needs a seventh."""
         self.assertIsNotNone(classify_label("Laundry / Pressing Services"))
         self.assertIsNone(classify_label("Nitrox is available on request for all guests"))
+
+
+class TestDisclosureExcerpt(unittest.TestCase):
+    """The fee book keeps what it parsed, so a fix can be replayed offline."""
+
+    def setUp(self):
+        self.blocks = extras_excerpt(REAL)
+
+    def test_both_blocks_are_kept(self):
+        self.assertEqual(set(self.blocks), {"required", "optional"})
+
+    def test_the_text_the_parser_read_is_recoverable(self):
+        self.assertIn("Environment Tax", self.blocks["required"])
+        self.assertIn("Laundry / Pressing Services", self.blocks["optional"])
+
+    def test_a_page_dump_is_bounded(self):
+        """One vessel's evidence must not become a copy of its whole page."""
+        flooded = REAL + " " + ("filler words that run on and on " * 400)
+        for excerpt in extras_excerpt(flooded).values():
+            self.assertLessEqual(len(excerpt), 1500)
+
+    def test_replaying_the_excerpt_reproduces_the_parse(self):
+        """The point of storing it: same text in, same fees out."""
+        replayed = parse_extras(
+            "Required Extras: " + self.blocks["required"]
+            + " Optional Extras: " + self.blocks["optional"]
+        )
+        self.assertEqual(
+            [f.code for f in replayed], [f.code for f in parse_extras(REAL)]
+        )
+
+    def test_a_page_with_no_disclosure_yields_nothing(self):
+        self.assertEqual(extras_excerpt("Boat Specifications Year built 2023"), {})
 
 
 if __name__ == "__main__":

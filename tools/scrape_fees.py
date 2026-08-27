@@ -30,7 +30,11 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.scrape.fees import parse_extras, to_fee_dicts  # noqa: E402
+from liveaboard.scrape.fees import (  # noqa: E402
+    extras_excerpt,
+    parse_extras,
+    to_fee_dicts,
+)
 from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     HOST,
     SEASON_QUERY,
@@ -151,6 +155,10 @@ def main() -> int:
                 unpriced = sum(1 for f in fees if not f.has_price)
                 collected[slug] = {
                     "source_url": url,
+                    # What the parse was made from. Without it a parser fix
+                    # cannot be checked without driving a browser at the live
+                    # site all over again.
+                    "disclosure": extras_excerpt(text),
                     "fees": to_fee_dicts(
                         fees,
                         {
