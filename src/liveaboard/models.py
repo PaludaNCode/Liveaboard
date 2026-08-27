@@ -253,6 +253,14 @@ class Itinerary:
     fees: list[FeeItem] = field(default_factory=list)
     source_url: str | None = None
     summary: str | None = None
+    dives_estimated: bool = False
+    """Whether ``dives`` was counted from the listing or worked out from nights.
+
+    The source publishes no per-trip dive count, so for now this is true
+    everywhere a count exists at all. It has to reach the page: price per dive
+    computed from an assumed denominator is a weaker claim than one computed
+    from a stated count, and the two must not look alike.
+    """
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Itinerary:
@@ -273,6 +281,7 @@ class Itinerary:
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             source_url=payload.get("source_url"),
             summary=payload.get("summary"),
+            dives_estimated=bool(payload.get("dives_estimated", False)),
         )
 
 

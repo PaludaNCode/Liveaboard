@@ -68,6 +68,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "operator": operator.name,
             "nights": itinerary.nights,
             "dives": itinerary.dives,
+            "dives_estimated": itinerary.dives_estimated,
             "port_from": itinerary.port_from,
             "port_to": itinerary.port_to,
             "one_way": itinerary.port_from != itinerary.port_to,
