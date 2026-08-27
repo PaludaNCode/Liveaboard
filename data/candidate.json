@@ -8432,6 +8432,180 @@
       "name": "Blue Diamond",
       "boat": "Blue Diamond",
       "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+      },
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Nitrox Course: listed with no price"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": {
+            "amount": 500.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 350.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027"
+          },
+          "amount": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Snorkeling Guide"
+        }
+      ]
+    },
+    {
+      "id": "blue-diamond",
+      "name": "Blue Diamond",
+      "boat": "Blue Diamond",
+      "summary": "Dive the Red Sea aboard Blue Diamond, a 35m liveaboard for 28 guests, with 14 ensuite cabins, spacious social areas, and varied itineraries.",
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=7/2027",
       "provenance": {
         "kind": "scraped",
@@ -11957,6 +12131,190 @@
             "source_id": "liveaboard.com",
             "retrieved": "2026-08-27",
             "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=8/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        }
+      ]
+    },
+    {
+      "id": "carlton",
+      "name": "Carlton",
+      "boat": "Carlton",
+      "summary": "The Carlton liveaboard sails 7-day Red Sea itineraries to Ras Mohammed, Tiran, and St. John's, with 10 en suite cabins for up to 20 guests.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      },
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Mandatory Service Charge\" as a range"
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "note": "Airport Transfer"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 225.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
           },
           "amount": null,
           "note": "Snorkel Gear: listed with no price"
@@ -43186,135 +43544,6 @@
       "name": "Snefro Target",
       "boat": "Snefro Target",
       "summary": "Join the Snefro Target for fantastic Northern Red Sea diving. Explore Shark &amp; Yolanda, the Thistlegorm as well as the famous reefs in the Straits of Tiran.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      },
-      "fees": [
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": {
-            "amount": 65.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 130.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": {
-            "amount": 30.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 80.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Gratuities\" as a range"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": {
-            "amount": 185.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": {
-            "amount": 110.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 245.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Rental Gear\" as a range"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-          },
-          "amount": {
-            "amount": 80.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 325.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        }
-      ]
-    },
-    {
-      "id": "snefro-target",
-      "name": "Snefro Target",
-      "boat": "Snefro Target",
-      "summary": "Join the Snefro Target for fantastic Northern Red Sea diving. Explore Shark &amp; Yolanda, the Thistlegorm as well as the famous reefs in the Straits of Tiran.",
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=8/2027",
       "provenance": {
         "kind": "scraped",
@@ -45794,172 +46023,6 @@
             "source_id": "liveaboard.com",
             "retrieved": "2026-08-27",
             "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
-          },
-          "amount": {
-            "amount": 180.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 300.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        }
-      ]
-    },
-    {
-      "id": "star-jet",
-      "name": "Star Jet",
-      "boat": "Star Jet",
-      "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-      },
-      "fees": [
-        {
-          "code": "service_charge",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "EUR"
-          },
-          "note": "Park and Port Fees"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 17.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 90.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Airport Transfer\" as a range"
-        },
-        {
-          "code": "extra_dives",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": null,
-          "note": "Extra Dives: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 70.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": {
-            "amount": 450.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "gear_rental",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-          },
-          "amount": null,
-          "note": "Rental Gear: listed with no price"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
           },
           "amount": {
             "amount": 180.0,
@@ -53610,6 +53673,106 @@
       }
     },
     {
+      "id": "carlton-2027-05-01-0",
+      "boat_slug": "carlton",
+      "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1084.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
+      "location": "Egypt",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      }
+    },
+    {
+      "id": "carlton-2027-05-08-1",
+      "boat_slug": "carlton",
+      "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1084.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
+      "location": "Egypt",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      }
+    },
+    {
+      "id": "carlton-2027-05-15-2",
+      "boat_slug": "carlton",
+      "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1084.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
+      "location": "Egypt",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      }
+    },
+    {
+      "id": "carlton-2027-05-22-3",
+      "boat_slug": "carlton",
+      "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1084.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
+      "location": "Egypt",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      }
+    },
+    {
+      "id": "carlton-2027-05-29-4",
+      "boat_slug": "carlton",
+      "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1084.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/carlton?m=05/2027",
+      "location": "Egypt",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-27",
+        "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+      }
+    },
+    {
       "id": "carlton-2027-06-05-0",
       "boat_slug": "carlton",
       "name": " Classic North (Sharm El Sheikh - Sharm El Sheikh)",
@@ -59067,66 +59230,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=8/2027"
-      }
-    },
-    {
-      "id": "new-sambo-2027-05-15-0",
-      "boat_slug": "new-sambo",
-      "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1399.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027"
-      }
-    },
-    {
-      "id": "new-sambo-2027-05-22-1",
-      "boat_slug": "new-sambo",
-      "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1399.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027"
-      }
-    },
-    {
-      "id": "new-sambo-2027-05-29-2",
-      "boat_slug": "new-sambo",
-      "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1399.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027"
       }
     },
     {
@@ -64830,106 +64933,6 @@
       }
     },
     {
-      "id": "snefro-target-2027-07-03-0",
-      "boat_slug": "snefro-target",
-      "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
-      "start": "2027-07-03",
-      "end": "2027-07-10",
-      "price": {
-        "amount": 1471.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      }
-    },
-    {
-      "id": "snefro-target-2027-07-10-1",
-      "boat_slug": "snefro-target",
-      "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
-      "start": "2027-07-10",
-      "end": "2027-07-17",
-      "price": {
-        "amount": 1471.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      }
-    },
-    {
-      "id": "snefro-target-2027-07-17-2",
-      "boat_slug": "snefro-target",
-      "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
-      "start": "2027-07-17",
-      "end": "2027-07-24",
-      "price": {
-        "amount": 1471.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      }
-    },
-    {
-      "id": "snefro-target-2027-07-24-3",
-      "boat_slug": "snefro-target",
-      "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
-      "start": "2027-07-24",
-      "end": "2027-07-31",
-      "price": {
-        "amount": 1471.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      }
-    },
-    {
-      "id": "snefro-target-2027-07-31-4",
-      "boat_slug": "snefro-target",
-      "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
-      "start": "2027-07-31",
-      "end": "2027-08-07",
-      "price": {
-        "amount": 1471.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/SoldOut",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027"
-      }
-    },
-    {
       "id": "snefro-target-2027-08-07-0",
       "boat_slug": "snefro-target",
       "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
@@ -65307,106 +65310,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-27",
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
-      }
-    },
-    {
-      "id": "star-jet-2027-07-03-0",
-      "boat_slug": "star-jet",
-      "name": " Rocky & Zabargad - St. John's - Elphinstone (Marsa Alam - Marsa Alam)",
-      "start": "2027-07-03",
-      "end": "2027-07-10",
-      "price": {
-        "amount": 1224.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-      }
-    },
-    {
-      "id": "star-jet-2027-07-10-1",
-      "boat_slug": "star-jet",
-      "name": " Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)",
-      "start": "2027-07-10",
-      "end": "2027-07-17",
-      "price": {
-        "amount": 1224.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-      }
-    },
-    {
-      "id": "star-jet-2027-07-17-2",
-      "boat_slug": "star-jet",
-      "name": " Rocky & Zabargad - St. John's - Sataya (Marsa Alam - Marsa Alam)",
-      "start": "2027-07-17",
-      "end": "2027-07-24",
-      "price": {
-        "amount": 1224.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-      }
-    },
-    {
-      "id": "star-jet-2027-07-24-3",
-      "boat_slug": "star-jet",
-      "name": " Daedalus - Elphinstone - Sataya/Fury Shoals (Marsa Alam - Marsa Alam)",
-      "start": "2027-07-24",
-      "end": "2027-07-31",
-      "price": {
-        "amount": 1224.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/OnlineOnly",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
-      }
-    },
-    {
-      "id": "star-jet-2027-07-31-4",
-      "boat_slug": "star-jet",
-      "name": " Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)",
-      "start": "2027-07-31",
-      "end": "2027-08-07",
-      "price": {
-        "amount": 1224.0,
-        "currency": "USD"
-      },
-      "availability": "https://schema.org/LimitedAvailability",
-      "booking_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
-      "location": "Egypt",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-27",
-        "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       }
     },
     {
@@ -67874,7 +67777,7 @@
     "https://www.liveaboard.com/diving/egypt/blue?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue?m=7/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-diamond?m=5/2027: Product node but no Event nodes",
-    "unparsed https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027: no JSON-LD Event or Product node in https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027; inspect the snapshot (bbf6c672d7c798bb) and add a markup parser",
+    "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-diamond?m=7/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-diamond?m=8/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027: Product node but no Event nodes",
@@ -67886,7 +67789,6 @@
     "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-storm?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/blue-storm?m=8/2027: Product node but no Event nodes",
-    "unparsed https://www.liveaboard.com/diving/egypt/carlton?m=5/2027: no JSON-LD Event or Product node in https://www.liveaboard.com/diving/egypt/carlton?m=5/2027; inspect the snapshot (01b003757bf4738a) and add a markup parser",
     "https://www.liveaboard.com/diving/egypt/cu?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/cu?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/cu?m=7/2027: Product node but no Event nodes",
@@ -67912,6 +67814,7 @@
     "https://www.liveaboard.com/diving/egypt/lady-m?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/lady-m?m=7/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/lady-m?m=8/2027: Product node but no Event nodes",
+    "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/oceanix?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/oceanix?m=8/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/reef-voyager?m=5/2027: Product node but no Event nodes",
@@ -67934,6 +67837,7 @@
     "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=8/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/sinaistar?m=7/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/sinaistar?m=8/2027: Product node but no Event nodes",
+    "unparsed https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027: no JSON-LD Event or Product node in https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027; inspect the snapshot (97ce6b76838deb7e) and add a markup parser",
     "https://www.liveaboard.com/diving/egypt/south-moon-1?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/south-moon-1?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/south-moon-1?m=7/2027: Product node but no Event nodes",
@@ -67943,6 +67847,7 @@
     "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=6/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=8/2027: Product node but no Event nodes",
+    "unparsed https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027: no JSON-LD Event or Product node in https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027; inspect the snapshot (cee8def51bb6a6f2) and add a markup parser",
     "https://www.liveaboard.com/diving/egypt/zabargad?m=5/2027: no Required/Optional Extras block found",
     "https://www.liveaboard.com/diving/egypt/zabargad?m=5/2027: Product node but no Event nodes",
     "https://www.liveaboard.com/diving/egypt/zabargad?m=6/2027: no Required/Optional Extras block found",
