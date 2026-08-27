@@ -6,10 +6,19 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 60 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 304 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
+```
+
+Re-promoting is offline and takes seconds — do it after any `promote.py` change
+rather than waiting for a crawl (see #53):
+
+```bash
+PYTHONPATH=src python3 -m liveaboard.cli promote --candidate data/candidate.json \
+  --fees data/fees.json --facts data/operator_facts.json --fx data/fx.json \
+  --out data/egypt-2027.json
 ```
 
 ## Invariants
@@ -19,11 +28,16 @@ Break these and the site starts lying quietly rather than failing loudly.
 - **Never invent a price.** Every price and fee needs a `Provenance`. A parser
   that cannot find a number returns `None`; it does not guess. `seed_estimate`
   triggers the "not real quotes" banner — do not suppress it.
-- **`DEFAULT_ON_TIERS` is mirrored in `templates/app.js`.** Change the tier
-  rules in `taxonomy.py` and you must change the JS to match.
-- **Normalisation happens in Python only.** Fee basis (per night / day / dive)
-  and FX conversion resolve in `pricing.py`; the browser only sums lines that
-  are switched on. Do not add pricing logic to the JS.
+- **`pricing._is_counted` is mirrored by `lineCounts` in `templates/app.js`** —
+  both `DEFAULT_ON_TIERS` and the order of its checks. The toggle is asked
+  before the tier: nitrox and gear are filed under the source's *Optional*
+  extras, and testing the tier first made both switches on the page add nothing
+  to any total.
+- **Normalisation happens in Python only.** Fee basis (per night / day / dive /
+  week) and FX conversion resolve in `pricing.py`; the browser only sums lines
+  that are switched on. Do not add pricing logic to the JS. Operators quote the
+  same gear set per day, per trip *and* per week, so comparing raw amounts
+  across vessels is meaningless — normalise first.
 - **Included fees stay in the breakdown at zero.** Removing them hides the
   difference between a bundled operator and one that bills at the dock.
 - **No score grading operators.** The site compares what trips cost; it does
@@ -34,6 +48,11 @@ Break these and the site starts lying quietly rather than failing loudly.
   required extras. Neither is a clean bill.
 - **Classification derives from dive sites**, not from trip names. An explicit
   value in the dataset wins; a stated safety requirement is never softened.
+- **A vessel summary is the boat's year-round brochure, not the trip's.** Never
+  a source for where one trip goes: Aphrodite's names St John's, so its *North
+  Wrecks* week would be tagged with a reef 600 km away.
+- **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
+  built from `name`, and two sailings differing only by port are two trips.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file with no CDN. Tests use `unittest`, not pytest.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
@@ -41,10 +60,16 @@ Break these and the site starts lying quietly rather than failing loudly.
 
 ## Sources
 
-`padi.com` and `liveaboard.com` are the only permitted sources. Both are
-blocked by the environment's network policy (see README), so the adapters in
-`src/liveaboard/scrape/` are structural. **Do not write markup parsers for
-pages nobody has fetched** — run a scrape, read the snapshot, then parse.
+`padi.com` and `liveaboard.com` are the only permitted sources. Both are blocked
+by the environment's network policy (see README); GitHub's runners are not.
+**Do not write markup parsers for pages nobody has fetched** — run a probe on a
+runner, read what came back, then parse. `tools/probe_*.py` write nothing and
+exist for exactly this.
+
+Fees, gear prices and the specification table are rendered client-side, so
+`tools/scrape_fees.py` drives a browser weekly and reads all three panels from
+one page load. A capped run (`--limit N`) merges into the existing fee book
+rather than replacing it: it knows nothing about the vessels it did not visit.
 
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page

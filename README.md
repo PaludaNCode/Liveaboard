@@ -24,30 +24,21 @@ Brothers, Daedalus & Elphinstone · 1–8 May 2027
 Scope: Egypt, May–August 2027. Euro only.
 
 **→ [paludancode.github.io/Liveaboard](https://paludancode.github.io/Liveaboard/)**
-— goes live once this branch reaches `main` and **Settings → Pages → Source** is
-set to **GitHub Actions**. Locally: `build`, then open `site/index.html`.
+Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Everything downstream of the scrape works and is tested. **The scrape itself is
-a stub** — both source sites are blocked by the environment's network policy and
-have never been reached, so the adapters have a polite fetcher, snapshot trail
-and JSON-LD extraction but no markup parser. The dataset ships as researched
-**seed estimates** with placeholder operator names, and the page says so in a
-banner until every price is `scraped`.
+Live on real data: **886 departures, 317 itineraries, 67 boats**, every price
+`scraped`. padi.com is not wired up; liveaboard.com is the only source in use.
 
-### Unblocking the sources
+Prices and availability come from a nightly crawl. Fees, rental-gear prices and
+the vessel specification table need a browser — the site renders them
+client-side — so they come from a weekly Playwright run and are keyed by vessel,
+because they do not change with the month.
 
-Environment → **Network access** → **Custom**, then add:
-
-```text
-liveaboard.com    *.liveaboard.com    padi.com    *.padi.com
-```
-
-Tick **"Also include default list of common package managers"**, or package
-installs break. Then start a **new session** — the policy applies at container
-boot. GitHub's runners are not behind this policy, so the daily workflow can
-scrape even when a sandbox cannot.
+A sandbox cannot reach liveaboard.com (network policy, see #1); GitHub's runners
+can. So anything about what the source actually returns is settled by running a
+`tools/probe_*.py` on a runner, never by guessing at markup.
 
 ## Usage
 
@@ -70,7 +61,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests
 | --- | --- | --- |
 | `base` | advertised price | yes |
 | `mandatory` | park fees, port dues, fuel, visa | yes |
-| `conditional` | nitrox, gear, insurance, transfers | follows a toggle |
+| `conditional` | nitrox, gear | follows a toggle |
 | `customary` | crew tips | yes |
 | `optional` | single supplement, courses, alcohol | no |
 
@@ -89,22 +80,27 @@ which.
 
 **Classification** is derived from each trip's dive-site list, not from operator
 marketing, so "Simply the Best", "Ultimate Red Sea" and "BDE" get one label.
+Sites are read from the trip title, which is all the source publishes: 254 of
+317 name reefs, 40 name only a direction and say so, and 23 name neither and
+stay blank rather than being guessed at (#52).
 
 **Provenance**: every price and fee records where it came from and when
 (`scraped`, `operator_stated`, `seed_estimate`, `derived`).
 
 The scrape takes **facts** — dates, routes, sites, prices, prerequisites. All
 descriptions are written here; no marketing copy or photography is reproduced.
-The fetcher obeys `robots.txt` and `Crawl-delay`, and defaults to 5s between
-requests.
+The fetcher obeys `robots.txt` and `Crawl-delay`, taking the larger of that and
+its own floor. liveaboard.com states none, so the crawl runs at 2s.
 
 ## Layout
 
 ```
-src/liveaboard/   taxonomy, money, models, pricing, classify, dataset, render, cli
-        scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com
+src/liveaboard/   taxonomy, money, models, pricing, classify, promote,
+                  dataset, render, cli
+        scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
+                  fees, gear, vessel        (the last three need a browser)
 templates/        index.html + style.css + app.js, inlined at build time
-tools/make_seed.py
+tools/            make_seed, fetch_fx, scrape_fees, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
 ```
@@ -127,8 +123,14 @@ next month can still be put to this month's data. Every run is a commit, so
 
 ## Next
 
-1. Allowlist the hosts, run `scrape --source liveaboard.com --limit 1`.
-2. Read the snapshot, finish `parse()` against real markup.
-3. Replace the seed data; the banner clears itself.
-4. Let the daily workflow accumulate history — every run is a commit, so
-   `git log -p data/` becomes a price record.
+Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). The ones
+that would change what the page can say:
+
+- **#48** report what changed since the last run — new trips, gone trips, moved
+  prices. The git history is already the record; nothing reads it back.
+- **#35** name the operator. All 886 archived events carry `organizer.name`
+  naming 42 companies, and the parser discards the field.
+- **#50** price per dive is derived from nights on 256 of 317 trips, so it
+  carries no information its own denominator did not invent.
+- **#49** the page is 5.4 MB, and 63% of that is the same fee lines written once
+  per departure instead of once per itinerary.
