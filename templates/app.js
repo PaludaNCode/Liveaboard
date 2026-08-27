@@ -40,7 +40,19 @@
 
   function metricsFor(dep) {
     var low = 0, high = 0, unpriced = [], required = 0;
+    var nitrox = null, tips = null;
     dep.lines.forEach(function (line) {
+      if (line.code === "nitrox") {
+        nitrox = line.included ? { included: true }
+               : line.has_price ? { price: line.display.amount }
+               : { listed: true };
+      }
+      /* Tips are customary rather than optional, so a stated amount is in the
+         total. An operator who lists them without a figure leaves a real cost
+         outside the arithmetic, and the total has to say so. */
+      if (line.code === "gratuities") {
+        tips = line.included ? "included" : line.has_price ? "counted" : "unpriced";
+      }
       if (lineCounts(line)) {
         if (line.has_price) {
           low += line.display ? line.display.amount : 0;
@@ -56,7 +68,7 @@
     });
     return {
       total: low, totalMax: high, isRange: high > low + 0.5,
-      unpriced: unpriced, required: required,
+      unpriced: unpriced, required: required, nitrox: nitrox, tips: tips,
       later: low - dep.base
     };
   }
@@ -141,8 +153,6 @@
     { k: "trip", t: "Trip", cls: "trip", v: function (d, i) { return tripName(i); } },
     { k: "from", t: "From", v: function (d, i) { return i.port_from; } },
     { k: "to", t: "To", v: function (d, i) { return i.port_to; } },
-    { k: "route", t: "Route",
-      v: function (d, i) { return i.route ? label(D.facets.routes, i.route) : "—"; } },
     { k: "sites", t: "Dive sites", cls: "sites",
       v: function (d, i) { return (i.dive_sites || []).join(", ") || "—"; } },
     { k: "base", t: "Advertised", num: true,
@@ -150,7 +160,9 @@
     { k: "total", t: "True cost", num: true,
       v: function (d, i, m) { return m.total; },
       show: function (d, i, m) {
-        return d.mandatory_known ? "<b>" + span(m) + "</b>" : '<span class="dim">—</span>';
+        if (!d.mandatory_known) return '<span class="dim">—</span>';
+        return "<b>" + span(m) + "</b>" +
+          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "");
       } },
     /* Price per dive is what divers compare on, so it earns a column even
        though the denominator is worked out rather than published. Marked with
@@ -167,6 +179,20 @@
             ' dives assumed: three a day for every full day at sea. The ' +
             'operator does not publish a count.">~' + value + "</span>"
           : value;
+      } },
+    /* Included or extra, said plainly. Half this fleet bundles nitrox and half
+       bills for it, and on a page for comparing trips that difference has to be
+       readable without opening a row. */
+    { k: "nitrox", t: "Nitrox", num: true,
+      v: function (d, i, m) {
+        return !m.nitrox ? 9e9 : m.nitrox.included ? -1
+             : m.nitrox.price != null ? m.nitrox.price : 9e8;
+      },
+      show: function (d, i, m) {
+        if (!m.nitrox) return '<span class="dim">not listed</span>';
+        if (m.nitrox.included) return '<span class="inc">included</span>';
+        if (m.nitrox.price != null) return eur(m.nitrox.price);
+        return '<span class="dim">extra, no price</span>';
       } },
     { k: "later", t: "Lands later", num: true,
       v: function (d, i, m) { return m.later; },

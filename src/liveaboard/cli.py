@@ -253,7 +253,18 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if fx_path.exists():
         fx = json.loads(fx_path.read_text(encoding="utf-8"))
 
-    payload = promote(candidate, season=season, fees=fees, fx=fx)
+    # Hand-read figures for vessels whose extras block names a charge without
+    # a number. Same source as the scrape, read where the scrape cannot see.
+    facts = None
+    facts_path = Path(args.facts)
+    if facts_path.exists():
+        facts = json.loads(facts_path.read_text(encoding="utf-8"))
+
+    payload = promote(candidate, season=season, fees=fees, fx=fx, facts=facts)
+
+    if facts:
+        covered = len(facts.get("vessels") or {})
+        print(f"  hand-read figures applied for {covered} vessels from {facts_path}")
 
     if fx:
         print(f"  rates from {fx.get('source', 'an unnamed source')}, quoted {fx.get('as_of')}")
@@ -346,6 +357,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--out", default=Path("data/egypt-2027.json"), type=Path)
     promote_cmd.add_argument("--fees", default=Path("data/fees.json"), type=Path)
     promote_cmd.add_argument("--fx", default=Path("data/fx.json"), type=Path)
+    promote_cmd.add_argument("--facts", default=Path("data/operator_facts.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

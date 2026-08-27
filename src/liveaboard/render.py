@@ -42,9 +42,6 @@ MONTH_NAMES = {
 TOGGLE_LABELS: dict[str, str] = {
     "nitrox": "Nitrox",
     "gear": "Rental gear",
-    "insurance": "Dive insurance",
-    "transfers": "Airport transfers",
-    "gratuities": "Crew tips",
 }
 
 
