@@ -559,9 +559,11 @@ def promote(
                 ),
                 "port_from": port_from,
                 "port_to": port_to,
-                # Left empty on purpose. Route and theme are derived from dive
-                # sites, which this source does not publish; the classifier
-                # falls back to the trip name, which usually carries them.
+                # The source publishes no site list, so these are read off the
+                # trip title, which usually names the reefs. This is what the
+                # page filters on -- there is no route label over the top of
+                # it any more, because a name for a set of sites could be
+                # wrong about a trip in a way the sites themselves cannot.
                 "dive_sites": _sites_from_name(name),
                 # Only when the title names no reef at all, so the column says
                 # something true rather than sitting empty on 51 trips.

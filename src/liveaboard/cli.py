@@ -14,7 +14,6 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from .classify import classify
 from .dataset import Dataset, DatasetError
 from .pricing import compute, mandatory_known, resolve_fees
 from .promote import promote
@@ -124,11 +123,12 @@ def cmd_check(args: argparse.Namespace) -> int:
             f"fees, so no true cost is claimed for them"
         )
 
+    # Dive sites rather than a route label: the label was ours, the sites are
+    # the operator's, and the page filters on the sites.
     print()
-    for key, itinerary in dataset.itineraries.items():
-        c = classify(itinerary)
-        route = c.route.value if c.route else "unclassified"
-        print(f"  {itinerary.name[:40]:42} {route:20} {c.level.value}")
+    for itinerary in dataset.itineraries.values():
+        sites = ", ".join(itinerary.dive_sites) or itinerary.region or "not named"
+        print(f"  {itinerary.title or itinerary.name:44.44} {sites:44.44}")
     return 0
 
 
