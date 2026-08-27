@@ -1,0 +1,262 @@
+"""The true-cost engine.
+
+Given a departure and a set of visitor toggles, produce the full stack of what
+a diver actually pays, in euro, with every line attributable to a source.
+
+Two design decisions are load-bearing:
+
+1. **Included fees still appear**, at zero additional cost. An operator that
+   bundles marine park fees should be visibly rewarded for it, and deleting the
+   line would hide exactly the difference the site exists to show.
+
+2. **The transparency score is computed against a fixed reference basket**, not
+   against the visitor's live toggles. A score that moved every time someone
+   flicked "nitrox" would rank operators by the visitor's mood rather than by
+   how much of the real cost they disclose up front.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from decimal import Decimal
+from typing import Any, Iterable, Mapping
+
+from .models import Departure, FeeItem, Itinerary, Provenance
+from .money import DISPLAY_CURRENCY, FxRate, FxTable, Money, zero
+from .taxonomy import DEFAULT_ON_TIERS, FeeCode, FeeTier
+
+Toggles = Mapping[str, bool]
+
+DEFAULT_TOGGLES: dict[str, bool] = {
+    "nitrox": False,
+    "gear": False,
+    "insurance": False,
+    "transfers": True,
+    "gratuities": True,
+}
+"""What the site starts with.
+
+Transfers and gratuities default on because almost nobody actually skips them;
+nitrox and gear default off because plenty of divers bring their own.
+"""
+
+REFERENCE_BASKET: dict[str, bool] = {
+    "nitrox": True,
+    "gear": True,
+    "insurance": True,
+    "transfers": True,
+    "gratuities": True,
+}
+"""The fixed basket the transparency score is measured against.
+
+Deliberately the most inclusive reading: every conditional cost a typical diver
+could face. It makes the score a property of the operator's pricing, not of the
+person looking at it.
+"""
+
+
+@dataclass(frozen=True, slots=True)
+class BreakdownLine:
+    """One row of the cost table shown to the visitor."""
+
+    code: FeeCode
+    label: str
+    tier: FeeTier
+    quoted: Money
+    display: Money
+    included: bool
+    counted: bool
+    toggle: str | None
+    provenance: Provenance | None
+    note: str | None
+    fx_rate: FxRate | None
+
+    @property
+    def charged(self) -> Money:
+        """What this line adds to the total: zero when bundled or switched off."""
+        if self.included or not self.counted:
+            return zero(self.display.currency)
+        return self.display
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "code": self.code.value,
+            "label": self.label,
+            "tier": self.tier.value,
+            "quoted": self.quoted.as_dict(),
+            "display": self.display.as_dict(),
+            "charged": float(self.charged.rounded),
+            "included": self.included,
+            "counted": self.counted,
+            "toggle": self.toggle,
+            "note": self.note,
+            "converted": self.fx_rate is not None,
+            "fx": (
+                {
+                    "rate": float(self.fx_rate.rate),
+                    "as_of": self.fx_rate.as_of.isoformat(),
+                    "source": self.fx_rate.source,
+                }
+                if self.fx_rate
+                else None
+            ),
+            "provenance": self.provenance.as_dict() if self.provenance else None,
+        }
+
+
+@dataclass(slots=True)
+class Breakdown:
+    """The complete answer to 'what does this trip actually cost?'"""
+
+    departure_id: str
+    nights: int
+    base: Money
+    lines: list[BreakdownLine] = field(default_factory=list)
+
+    @property
+    def total(self) -> Money:
+        total = zero(DISPLAY_CURRENCY)
+        for line in self.lines:
+            total = total + line.charged
+        return total
+
+    @property
+    def surcharge(self) -> Money:
+        """Everything on top of the advertised price."""
+        return Money(self.total.amount - self.base.amount, self.total.currency)
+
+    @property
+    def per_night(self) -> Money:
+        if self.nights <= 0:
+            return self.total
+        return Money(self.total.amount / Decimal(self.nights), self.total.currency)
+
+    @property
+    def markup_pct(self) -> float:
+        """How much the headline understates the bill, as a percentage."""
+        if self.base.amount <= 0:
+            return 0.0
+        return float(self.surcharge.amount / self.base.amount * 100)
+
+    @property
+    def has_unverified(self) -> bool:
+        return any(
+            line.provenance is not None and not line.provenance.is_verified
+            for line in self.lines
+        )
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "departure_id": self.departure_id,
+            "base": float(self.base.rounded),
+            "total": float(self.total.rounded),
+            "surcharge": float(self.surcharge.rounded),
+            "per_night": float(self.per_night.rounded),
+            "markup_pct": round(self.markup_pct, 1),
+            "has_unverified": self.has_unverified,
+            "lines": [line.as_dict() for line in self.lines],
+        }
+
+
+def resolve_fees(itinerary: Itinerary, departure: Departure) -> list[FeeItem]:
+    """Merge itinerary-level and departure-level fees.
+
+    A departure-level entry wins outright for its code: a sailing that has its
+    own fuel surcharge replaces the route's standard one rather than stacking
+    on top of it.
+    """
+    merged: dict[FeeCode, FeeItem] = {fee.code: fee for fee in itinerary.fees}
+    for fee in departure.fees:
+        merged[fee.code] = fee
+    return list(merged.values())
+
+
+def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:
+    """Whether this fee lands in the total under the given toggles."""
+    if fee.tier is FeeTier.OPTIONAL:
+        return False
+    toggle = fee.toggle
+    if toggle is not None:
+        return bool(toggles.get(toggle, DEFAULT_TOGGLES.get(toggle, False)))
+    return fee.tier in DEFAULT_ON_TIERS
+
+
+def compute(
+    itinerary: Itinerary,
+    departure: Departure,
+    fx: FxTable,
+    toggles: Toggles | None = None,
+) -> Breakdown:
+    """Build the full cost breakdown for one sailing."""
+    active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    base_display, base_fx = fx.to_display(departure.price)
+
+    breakdown = Breakdown(
+        departure_id=departure.id,
+        nights=itinerary.nights,
+        base=base_display,
+    )
+    breakdown.lines.append(
+        BreakdownLine(
+            code=FeeCode.BASE_FARE,
+            label="Berth (advertised price)",
+            tier=FeeTier.BASE,
+            quoted=departure.price,
+            display=base_display,
+            included=False,
+            counted=True,
+            toggle=None,
+            provenance=departure.price_provenance,
+            note=None,
+            fx_rate=base_fx,
+        )
+    )
+
+    for fee in _sorted_fees(resolve_fees(itinerary, departure)):
+        quoted = fee.for_trip(itinerary.nights, itinerary.dives)
+        display, rate = fx.to_display(quoted)
+        breakdown.lines.append(
+            BreakdownLine(
+                code=fee.code,
+                label=fee.label,
+                tier=fee.tier,
+                quoted=quoted,
+                display=display,
+                included=fee.included,
+                counted=_is_counted(fee, active),
+                toggle=fee.toggle,
+                provenance=fee.provenance,
+                note=fee.note,
+                fx_rate=rate,
+            )
+        )
+    return breakdown
+
+
+_TIER_ORDER = {
+    FeeTier.BASE: 0,
+    FeeTier.MANDATORY: 1,
+    FeeTier.CONDITIONAL: 2,
+    FeeTier.CUSTOMARY: 3,
+    FeeTier.OPTIONAL: 4,
+}
+
+
+def _sorted_fees(fees: Iterable[FeeItem]) -> list[FeeItem]:
+    """Order fees the way the cost table should read: least avoidable first."""
+    return sorted(fees, key=lambda f: (_TIER_ORDER[f.tier], f.code.value))
+
+
+def transparency_score(itinerary: Itinerary, departure: Departure, fx: FxTable) -> float:
+    """Fraction of the reference-basket cost that the headline price discloses.
+
+    ``1.0`` means the advertised number is the whole bill. ``0.7`` means three
+    euro in every ten arrive later, at the dock or on the final invoice.
+    """
+    reference = compute(itinerary, departure, fx, REFERENCE_BASKET)
+    total = reference.total.amount
+    if total <= 0:
+        return 1.0
+    # Bundled fees need no separate credit here: they are already inside the
+    # advertised price, which is precisely why that price is more honest.
+    return min(1.0, float(reference.base.amount / total))

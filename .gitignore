@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Raw page snapshots are the scrape's audit trail, but they are large and
+# regenerate daily. Committing them would add megabytes a week to the history
+# for evidence that only matters while a parse failure is being diagnosed.
+# CI keeps them as build artifacts instead.
+data/snapshots/
+
+.DS_Store
