@@ -210,8 +210,15 @@
                  'nobody stated.">not stated</span>';
         }
         if (!d.mandatory_known) return '<span class="dim">—</span>';
+        /* The operator quotes a range and this is the fewest, so the figure is
+           a ceiling: a week with less steaming fits more dives in and costs
+           less each. Erring this way on purpose — the other direction would
+           flatter every trip. */
         return '<b>' + eur(m.total / i.dives) + "</b>" +
-               '<span class="dim"> /' + i.dives + "</span>";
+               '<span class="dim" title="' + i.dives + '+ dives — the fewest ' +
+               'this operator states for the week. Boats that cross further, ' +
+               'or spend longer in the parks where night dives are not ' +
+               'allowed, fit fewer in.">↓ ' + i.dives + "+</span>";
       } },
     /* Included or extra, said plainly. Half this fleet bundles nitrox and half
        bills for it, and on a page for comparing trips that difference has to be

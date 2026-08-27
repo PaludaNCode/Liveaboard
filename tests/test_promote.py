@@ -840,3 +840,48 @@ class TestHandReadFactsDoNotOutliveTheScrape(unittest.TestCase):
             fees=book, facts=self.facts(150.0, "2026-08-01"),
         )
         self.assertEqual(self.park(payload), 150.0)
+
+
+class TestADiveCountIsAFloorForOneTripLength(unittest.TestCase):
+    """Operators quote a range and the dataset keeps its low end.
+
+    The range is not sloppiness. A week that crosses further, or spends longer
+    inside the marine parks where night dives are not permitted, fits fewer
+    dives into the same seven nights. So the count is the fewest stated, price
+    per dive is a ceiling, and the figure belongs to the trip length it was
+    quoted for and no other.
+    """
+
+    def dives(self, stated, nights=None, for_nights=None):
+        from liveaboard.promote import _dives
+
+        return _dives(stated, nights=nights, for_nights=for_nights)
+
+    def test_a_count_applies_to_the_length_it_was_quoted_for(self):
+        self.assertEqual(self.dives(17, nights=7, for_nights=7), 17)
+
+    def test_a_weekly_count_is_not_applied_to_a_mini_safari(self):
+        """Seventeen dives in three nights would be nearly six a day."""
+        self.assertEqual(self.dives(17, nights=3, for_nights=7), 0)
+
+    def test_nor_is_it_stretched_over_a_longer_trip(self):
+        """Ten nights is not seven, and the operator did not say."""
+        self.assertEqual(self.dives(17, nights=10, for_nights=7), 0)
+
+    def test_a_count_with_no_stated_length_is_taken_at_face_value(self):
+        """Older entries predate the field; they are not silently discarded."""
+        self.assertEqual(self.dives(17, nights=7), 17)
+
+    def test_the_page_gets_zero_rather_than_a_derivation(self):
+        payload = promote(
+            candidate(
+                [departure(start="2027-05-01", end="2027-05-04")],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul"}],
+            ),
+            season=SEASON,
+            facts={"collected": "2026-08-27", "vessels": {
+                "alia-soul": {"dives": 17, "dives_for_nights": 7}}},
+        )
+        itinerary = payload["itineraries"][0]
+        self.assertEqual(itinerary["nights"], 3)
+        self.assertEqual(itinerary["dives"], 0)
