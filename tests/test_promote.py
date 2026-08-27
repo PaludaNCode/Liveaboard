@@ -477,5 +477,59 @@ class TestPortNames(unittest.TestCase):
         self.assertEqual(self.port(""), "Unknown")
 
 
+class TestDiveCount(unittest.TestCase):
+    """Price per dive is what divers compare on; the count is not published."""
+
+    def dives(self, nights, stated=None):
+        from liveaboard.promote import _dives
+
+        return _dives(nights, stated)
+
+    def test_a_week_matches_the_only_figure_operators_publish(self):
+        """Two vessels state "up to 18 dives per week". Nothing states more."""
+        self.assertEqual(self.dives(7), 18)
+
+    def test_the_first_and_last_days_are_not_diving_days(self):
+        """Arrival plus a check dive, then a dry day before flying."""
+        self.assertEqual(self.dives(4), 9)
+        self.assertEqual(self.dives(14), 39)
+
+    def test_an_operator_count_wins_outright(self):
+        self.assertEqual(self.dives(7, 22), 22)
+
+    def test_it_errs_low_rather_than_high(self):
+        """Assuming more dives divides the bill by a bigger number and makes
+        every trip look cheaper per dive than it is."""
+        self.assertLess(self.dives(7), 7 * 3)
+
+    def test_the_shortest_trip_still_dives(self):
+        self.assertGreaterEqual(self.dives(1), 1)
+
+    def test_the_page_is_told_the_count_was_assumed(self):
+        payload = promote(candidate([departure()]), season=SEASON)
+        itinerary = payload["itineraries"][0]
+        self.assertEqual(itinerary["dives"], 18)
+        self.assertTrue(itinerary["dives_estimated"])
+
+    def test_a_scraped_count_is_not_flagged_as_assumed(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul", "dives": 20}],
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(payload["itineraries"][0]["dives"], 20)
+        self.assertFalse(payload["itineraries"][0]["dives_estimated"])
+
+    def test_the_flag_survives_into_the_rendered_page(self):
+        rendered = build_payload(
+            Dataset.from_dict(promote(candidate([departure()]), season=SEASON))
+        )
+        itinerary = next(iter(rendered["itineraries"].values()))
+        self.assertTrue(itinerary["dives_estimated"])
+        self.assertEqual(itinerary["dives"], 18)
+
+
 if __name__ == "__main__":
     unittest.main()

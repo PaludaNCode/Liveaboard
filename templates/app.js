@@ -152,6 +152,22 @@
       show: function (d, i, m) {
         return d.mandatory_known ? "<b>" + span(m) + "</b>" : '<span class="dim">—</span>';
       } },
+    /* Price per dive is what divers compare on, so it earns a column even
+       though the denominator is worked out rather than published. Marked with
+       a tilde wherever it is: a figure divided by an assumption is a weaker
+       claim than one divided by a stated count, and the two must not look
+       alike on the same page. */
+    { k: "perdive", t: "Per dive", num: true,
+      v: function (d, i, m) { return i.dives > 0 ? m.total / i.dives : -1; },
+      show: function (d, i, m) {
+        if (!d.mandatory_known || !i.dives) return '<span class="dim">—</span>';
+        var value = eur(m.total / i.dives);
+        return i.dives_estimated
+          ? '<span class="est" title="' + i.dives +
+            ' dives assumed: three a day for every full day at sea. The ' +
+            'operator does not publish a count.">~' + value + "</span>"
+          : value;
+      } },
     { k: "later", t: "Lands later", num: true,
       v: function (d, i, m) { return m.later; },
       show: function (d, i, m) {

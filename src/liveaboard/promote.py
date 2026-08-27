@@ -155,6 +155,39 @@ def _guests(summary: str | None) -> int | None:
     return None
 
 
+DIVES_PER_FULL_DAY = 3
+"""Dives on a day spent at sea, which is the industry's own standard shape.
+
+Egyptian liveaboards run a three-dive day plus night dives on request. This is
+the number every operator's schedule is built around, and the one divers assume
+when they compare a week against a mini-safari.
+"""
+
+
+def _dives(nights: int, stated: int | None = None) -> int:
+    """How many dives a trip of this length runs.
+
+    An operator's own figure wins whenever there is one. There is not: the
+    source publishes no per-trip count, and what does appear on a vessel page
+    is a marketing maximum -- "up to 18 dives per week" -- attached to the boat
+    rather than the sailing.
+
+    So this is worked out from nights, and the arithmetic is deliberately
+    conservative. Full diving days are ``nights - 1``: the first day is arrival
+    and a check dive, the last is a dry day before flying. Three dives on each
+    of those gives eighteen for a seven-night week, which is exactly the figure
+    the two vessels stating one both publish.
+
+    Erring low matters in one direction only. Assuming *more* dives divides the
+    bill by a bigger number and makes every trip look cheaper per dive, which
+    is the failure this site exists to correct. A trip that turns out to run
+    more dives than this is a better deal than the page claims, never worse.
+    """
+    if stated and stated > 0:
+        return stated
+    return max(1, (nights - 1) * DIVES_PER_FULL_DAY)
+
+
 def _nights(start: str, end: str) -> int | None:
     try:
         delta = (date.fromisoformat(end) - date.fromisoformat(start)).days
@@ -245,7 +278,8 @@ def promote(
                 "operator_id": UNKNOWN_OPERATOR["id"],
                 "boat_id": slug,
                 "nights": nights,
-                "dives": 0,
+                "dives": _dives(nights, source.get("dives")),
+                "dives_estimated": not source.get("dives"),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Left empty on purpose. Route and theme are derived from dive
