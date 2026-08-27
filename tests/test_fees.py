@@ -508,5 +508,22 @@ class TestMandatoryFeesNoOneNamed(unittest.TestCase):
         )
 
 
+class TestEveryCodeCanBeNamed(unittest.TestCase):
+    """render.py hands FEE_LABELS to the page as the only source of names."""
+
+    def test_no_code_would_render_as_its_slug(self):
+        from liveaboard.taxonomy import FEE_LABELS
+
+        missing = sorted(c.value for c in FeeCode if c not in FEE_LABELS)
+        self.assertEqual(missing, [], f"unnamed fee codes: {missing}")
+
+    def test_every_code_the_parser_can_emit_has_a_label(self):
+        from liveaboard.scrape.fees import LABEL_PATTERNS
+        from liveaboard.taxonomy import FEE_LABELS
+
+        for _, code in LABEL_PATTERNS:
+            self.assertIn(code, FEE_LABELS, code)
+
+
 if __name__ == "__main__":
     unittest.main()
