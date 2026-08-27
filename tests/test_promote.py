@@ -531,5 +531,51 @@ class TestDiveCount(unittest.TestCase):
         self.assertEqual(itinerary["dives"], 18)
 
 
+class TestAvailability(unittest.TestCase):
+    """127 of 886 departures were sold out and the page could not say so."""
+
+    def avail(self, raw):
+        from liveaboard.promote import _availability
+
+        return _availability(raw)
+
+    def test_the_values_the_source_actually_returns(self):
+        for raw, expected in (
+            ("https://schema.org/SoldOut", "sold_out"),
+            ("https://schema.org/OnlineOnly", "available"),
+            ("https://schema.org/LimitedAvailability", "limited"),
+            ("https://schema.org/InStock", "available"),
+        ):
+            self.assertEqual(self.avail(raw), expected, raw)
+
+    def test_silence_is_not_a_refusal(self):
+        """A source that says nothing has not said the trip is full."""
+        self.assertIsNone(self.avail(None))
+        self.assertIsNone(self.avail(""))
+        self.assertIsNone(self.avail("https://schema.org/SomethingNew"))
+
+    def test_it_reaches_the_departure(self):
+        payload = promote(
+            candidate([departure(availability="https://schema.org/SoldOut")]),
+            season=SEASON,
+        )
+        self.assertEqual(payload["departures"][0]["availability"], "sold_out")
+
+    def test_the_page_is_told_what_cannot_be_booked(self):
+        rendered = build_payload(Dataset.from_dict(promote(
+            candidate([departure(availability="https://schema.org/SoldOut")]),
+            season=SEASON,
+        )))["departures"][0]
+        self.assertFalse(rendered["bookable"])
+
+    def test_an_unknown_availability_stays_bookable(self):
+        """Hiding a trip because the source was quiet would lose real options."""
+        rendered = build_payload(Dataset.from_dict(promote(
+            candidate([departure()]), season=SEASON
+        )))["departures"][0]
+        self.assertIsNone(rendered["availability"])
+        self.assertTrue(rendered["bookable"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -23,7 +23,7 @@
   var state = {
     sort: "start", dir: 1, q: "",
     months: new Set(), ports: new Set(), sites: new Set(),
-    nightsMin: null, nightsMax: null,
+    nightsMin: null, nightsMax: null, hideSoldOut: false,
     toggles: {}, open: null
   };
   D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
@@ -187,6 +187,19 @@
           ? '<span class="later">' + m.unpriced.length + "</span>"
           : '<span class="dim">0</span>';
       } },
+    /* 127 of 886 departures are sold out. Priced alongside bookable ones with
+       no way to tell them apart, a cheapest-first sort could put a trip nobody
+       can buy at the top of the list. */
+    { k: "availability", t: "Places",
+      v: function (d) {
+        return d.availability === "sold_out" ? 2 : d.availability === "limited" ? 0 : 1;
+      },
+      show: function (d) {
+        if (d.availability === "sold_out") return '<span class="pill gone">sold out</span>';
+        if (d.availability === "limited") return '<span class="pill few">few left</span>';
+        if (d.availability === "available") return '<span class="pill open">available</span>';
+        return '<span class="dim">—</span>';
+      } },
     { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
       show: function (d) {
         var s = disclosure(d);
@@ -207,6 +220,7 @@
     D.departures.forEach(function (dep) {
       var itin = D.itineraries[dep.itinerary_id];
       if (state.months.size && !state.months.has(dep.month)) return;
+      if (state.hideSoldOut && !dep.bookable) return;
       if (state.nightsMin !== null && dep.nights < state.nightsMin) return;
       if (state.nightsMax !== null && dep.nights > state.nightsMax) return;
       if (state.ports.size && !state.ports.has(itin.port_from)) return;
@@ -304,7 +318,7 @@
               (c.stick ? " stick" : "") + '">' + v + "</td>";
           }).join("");
           var open = state.open === row.d.id;
-          return '<tr class="row">' + tds + '<td><button class="expand" data-n="' + n +
+          return '<tr class="row' + (row.d.bookable ? "" : " gone") + '">' + tds + '<td><button class="expand" data-n="' + n +
             '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td></tr>" +
             (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
               feeTable(row) + "</td></tr>" : "");
@@ -444,6 +458,13 @@
   nmin.addEventListener("input", readNights);
   nmax.addEventListener("input", readNights);
 
+  var soldOut = document.getElementById("hideSold");
+  soldOut.addEventListener("click", function () {
+    state.hideSoldOut = !state.hideSoldOut;
+    soldOut.setAttribute("aria-pressed", state.hideSoldOut);
+    draw();
+  });
+
   document.getElementById("q").addEventListener("input", function (event) {
     state.q = event.target.value.toLowerCase().trim();
     draw();
@@ -453,6 +474,8 @@
     state.months.clear(); state.ports.clear(); state.sites.clear();
     state.q = "";
     state.nightsMin = state.nightsMax = null;
+    state.hideSoldOut = false;
+    soldOut.setAttribute("aria-pressed", "false");
     document.getElementById("q").value = "";
     nmin.value = ""; nmax.value = "";
     D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });

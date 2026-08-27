@@ -188,6 +188,35 @@ def _dives(nights: int, stated: int | None = None) -> int:
     return max(1, (nights - 1) * DIVES_PER_FULL_DAY)
 
 
+AVAILABILITY = {
+    "soldout": "sold_out",
+    "outofstock": "sold_out",
+    "limitedavailability": "limited",
+    "instock": "available",
+    "onlineonly": "available",
+    "instoreonly": "available",
+    "preorder": "available",
+}
+"""schema.org availability, folded to what a diver needs to know.
+
+The scrape has carried this from the start and promote threw it away, so 127
+sold-out departures sat on the page priced exactly like the 746 bookable ones.
+On a page whose whole job is comparison that is worse than a missing column:
+sorting by cheapest could put a trip nobody can buy at the top of the list.
+
+Unknown stays unknown. A source that says nothing about availability has not
+said the trip is full.
+"""
+
+
+def _availability(raw: str | None) -> str | None:
+    """Read schema.org's availability URL, or admit the source was silent."""
+    if not raw:
+        return None
+    token = str(raw).rstrip("/").rsplit("/", 1)[-1].replace("_", "").lower()
+    return AVAILABILITY.get(token)
+
+
 def _nights(start: str, end: str) -> int | None:
     try:
         delta = (date.fromisoformat(end) - date.fromisoformat(start)).days
@@ -302,6 +331,7 @@ def promote(
                 "end": item["end"],
                 "price": item["price"],
                 "booking_url": item.get("booking_url"),
+                "availability": _availability(item.get("availability")),
                 "provenance": item["provenance"],
             }
             # Carried on the departure, not the itinerary: the operator
