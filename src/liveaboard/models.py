@@ -80,7 +80,22 @@ class FeeItem:
 
     code: FeeCode
     tier: FeeTier
-    amount: Money
+    amount: Money | None
+    """The stated amount, or the low end of a stated range.
+
+    ``None`` means the operator listed the extra without a figure — "Rental
+    Gear" with no price beside it. That is a real cost of unknown size, and
+    treating it as zero would be a straightforward falsehood.
+    """
+
+    amount_max: Money | None = None
+    """The high end, when the page quotes a range like "€35-100".
+
+    Ranges are common and wide: park fees quoted at 35 to 100 euro are a 65 euro
+    spread on a supposedly fixed charge. Keeping only the low end would
+    understate the bill, which is the failure this project exists to correct.
+    """
+
     basis: FeeBasis = FeeBasis.PER_TRIP
     included: bool = False
     provenance: Provenance | None = None
@@ -95,25 +110,50 @@ class FeeItem:
         """The site toggle that governs this fee, if any."""
         return TOGGLEABLE.get(self.code)
 
-    def for_trip(self, nights: int, dives: int) -> Money:
-        """Normalise the quoted basis to a single per-person trip total."""
+    @property
+    def has_price(self) -> bool:
+        return self.amount is not None
+
+    @property
+    def is_range(self) -> bool:
+        return self.amount_max is not None and self.amount_max != self.amount
+
+    def _scale(self, money: Money, nights: int, dives: int) -> Money:
         if self.basis is FeeBasis.PER_TRIP:
-            return self.amount
+            return money
         if self.basis is FeeBasis.PER_NIGHT:
-            return self.amount * nights
+            return money * nights
         if self.basis in (FeeBasis.PER_DAY, FeeBasis.PER_PERSON_PER_DAY):
-            return self.amount * (nights + 1)
+            return money * (nights + 1)
         if self.basis is FeeBasis.PER_DIVE:
-            return self.amount * dives
+            return money * dives
         raise ValueError(f"unhandled fee basis {self.basis}")
+
+    def span_for_trip(self, nights: int, dives: int) -> tuple[Money | None, Money | None]:
+        """Normalise the quoted basis to a per-person trip low and high."""
+        if self.amount is None:
+            return None, None
+        low = self._scale(self.amount, nights, dives)
+        high = self._scale(self.amount_max, nights, dives) if self.amount_max else low
+        return low, high
+
+    def for_trip(self, nights: int, dives: int) -> Money:
+        """The low end, normalised. Raises when no price was stated."""
+        low, _ = self.span_for_trip(nights, dives)
+        if low is None:
+            raise ValueError(f"{self.code.value} has no stated price")
+        return low
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any], default_currency: str) -> FeeItem:
         prov = payload.get("provenance")
+        raw = payload.get("amount")
+        raw_max = payload.get("amount_max")
         return cls(
             code=FeeCode(payload["code"]),
             tier=FeeTier(payload["tier"]),
-            amount=Money.parse(payload["amount"], default_currency),
+            amount=Money.parse(raw, default_currency) if raw is not None else None,
+            amount_max=Money.parse(raw_max, default_currency) if raw_max is not None else None,
             basis=FeeBasis(payload.get("basis", FeeBasis.PER_TRIP.value)),
             included=bool(payload.get("included", False)),
             provenance=Provenance.from_dict(prov) if prov else None,

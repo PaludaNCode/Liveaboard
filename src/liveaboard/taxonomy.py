@@ -63,6 +63,7 @@ class FeeCode(str, Enum):
     FUEL_SURCHARGE = "fuel_surcharge"
     VISA = "visa"
     TAX_VAT = "tax_vat"
+    ENVIRONMENT_TAX = "environment_tax"
 
     NITROX = "nitrox"
     GEAR_RENTAL = "gear_rental"
@@ -77,6 +78,7 @@ class FeeCode(str, Enum):
     COURSE = "course"
     TANK_15L = "tank_15l"
     ALCOHOL = "alcohol"
+    LAUNDRY = "laundry"
 
 
 TOGGLEABLE: dict[FeeCode, str] = {
@@ -96,6 +98,7 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.FUEL_SURCHARGE: "Fuel surcharge",
     FeeCode.VISA: "Egypt visa on arrival",
     FeeCode.TAX_VAT: "VAT / local tax",
+    FeeCode.ENVIRONMENT_TAX: "Environment tax",
     FeeCode.NITROX: "Nitrox",
     FeeCode.GEAR_RENTAL: "Equipment rental",
     FeeCode.DIVE_INSURANCE: "Dive insurance",
@@ -107,6 +110,7 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.COURSE: "Course",
     FeeCode.TANK_15L: "15 L tank",
     FeeCode.ALCOHOL: "Alcoholic drinks",
+    FeeCode.LAUNDRY: "Laundry & pressing",
 }
 
 

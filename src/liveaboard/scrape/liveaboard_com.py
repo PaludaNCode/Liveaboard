@@ -24,6 +24,7 @@ from urllib.parse import urlparse
 
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
+from .fees import parse_extras, to_fee_dicts
 
 HOST = "www.liveaboard.com"
 
@@ -178,6 +179,10 @@ class LiveaboardComAdapter(SourceAdapter):
 
         if products:
             product = products[0]
+            # Fees are a property of the vessel, not the sailing: the same
+            # extras apply whichever month you book. So they are read once per
+            # boat page and attached to every itinerary it yields.
+            extras = parse_extras(_page_text(result.body))
             output.itineraries.append(
                 {
                     "id": slug,
@@ -186,8 +191,11 @@ class LiveaboardComAdapter(SourceAdapter):
                     "summary": product.get("description"),
                     "source_url": result.url,
                     "provenance": self.provenance(result.url),
+                    "fees": to_fee_dicts(extras, self.provenance(result.url)),
                 }
             )
+            if not extras:
+                output.warnings.append(f"{result.url}: no Required/Optional Extras block found")
 
         for index, event in enumerate(events):
             departure = self._departure_from(event, result, slug, index)
@@ -241,6 +249,36 @@ class LiveaboardComAdapter(SourceAdapter):
             "location": _place_name(node.get("location")),
             "provenance": self.provenance(result.url),
         }
+
+
+SCRIPT_OR_STYLE = re.compile(r"<(script|style)\b[^>]*>.*?</\1>", re.I | re.S)
+BLOCK_END = re.compile(r"</(li|p|td|tr|div|h[1-6]|ul|ol|dd|dt)\s*>|<br\s*/?>", re.I)
+TAG = re.compile(r"<[^>]+>")
+
+
+def _page_text(html: str) -> str:
+    """Flatten markup to readable text.
+
+    The extras block is read from text rather than from selectors on purpose.
+    A probe that looked only at leaf elements missed it entirely, because
+    "Environment Tax (€45)" is split across an anchor and a span — the labels
+    and their amounts live in different nodes. Flattening puts them back
+    together and survives a redesign that moves them around again.
+    """
+    without_code = SCRIPT_OR_STYLE.sub(" ", html)
+    # Block boundaries become commas before the tags go. The extras are usually
+    # list items, and flattening them without a separator runs "Port Fees (€35)"
+    # straight into the next entry, destroying exactly the boundaries the parser
+    # needs. Prose renders the same list comma-separated anyway.
+    delimited = BLOCK_END.sub(", ", without_code)
+    text = TAG.sub(" ", delimited)
+    text = (
+        text.replace("&euro;", "€")
+        .replace("&pound;", "£")
+        .replace("&nbsp;", " ")
+        .replace("&amp;", "&")
+    )
+    return re.sub(r"\s+", " ", text)
 
 
 def _place_name(location: Any) -> str | None:
