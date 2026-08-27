@@ -253,9 +253,15 @@
       nameCell.appendChild(document.createTextNode(line.label));
       if (line.note) nameCell.appendChild(el("span", "fee-note", line.note));
       if (line.converted && line.fx) {
+        /* "at 0.92 (2026-08-27)" reads as a rate someone looked up that day.
+           When it is a stand-in, say so here rather than let the euro figure
+           borrow authority the rate does not have. */
         nameCell.appendChild(el("span", "fee-note",
           "converted from " + line.quoted.amount + " " + line.quoted.currency +
-          " at " + line.fx.rate + " (" + line.fx.as_of + ")"));
+          " at " + line.fx.rate +
+          (DATA.meta.fx && DATA.meta.fx.sourced === false
+            ? " (approximate rate, not a sourced one)"
+            : " (" + line.fx.as_of + ")")));
       }
       row.appendChild(nameCell);
 
@@ -444,13 +450,30 @@
   function drawNotice() {
     var host = document.getElementById("dataNotice");
     host.textContent = "";
-    if (DATA.meta.verified) return;
-    var notice = el("div", "notice");
-    notice.appendChild(el("strong", null, "Seed data — these are not real quotes"));
-    notice.appendChild(document.createTextNode(
-      DATA.meta.notes || "Prices are researched placeholders pending a live scrape."
-    ));
-    host.appendChild(notice);
+
+    if (!DATA.meta.verified) {
+      var notice = el("div", "notice");
+      notice.appendChild(el("strong", null, "Seed data — these are not real quotes"));
+      notice.appendChild(document.createTextNode(
+        DATA.meta.notes || "Prices are researched placeholders pending a live scrape."
+      ));
+      host.appendChild(notice);
+    }
+
+    /* Separate from the seed banner: prices can be genuinely scraped while the
+       rate that turns them into euro is not. The source quotes many trips in
+       dollars, so this caveat applies to real data too. */
+    if (DATA.meta.fx && DATA.meta.fx.sourced === false) {
+      var fxNotice = el("div", "notice");
+      fxNotice.appendChild(el("strong", null, "Euro figures use an approximate rate"));
+      fxNotice.appendChild(document.createTextNode(
+        "Several operators quote in dollars. Those prices are converted at a " +
+        "stand-in rate, not one taken from a rate source, so euro totals here " +
+        "may differ by a few percent from what your card is charged. Prices " +
+        "quoted in euro are unaffected."
+      ));
+      host.appendChild(fxNotice);
+    }
   }
 
   function drawMeta() {

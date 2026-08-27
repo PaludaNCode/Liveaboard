@@ -128,6 +128,10 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "notes": dataset.notes,
             "fx": {
                 "as_of": dataset.fx.as_of.isoformat() if dataset.fx.as_of else None,
+                # Every euro figure on the page rests on this rate, so the page
+                # says where it came from — or admits that it did not.
+                "source": dataset.fx.source,
+                "sourced": dataset.fx.is_sourced,
             },
             "counts": {
                 "departures": len(departures),

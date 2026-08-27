@@ -8,6 +8,7 @@ and this module keeps the two distinguishable all the way to the rendered page.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
@@ -69,6 +70,10 @@ def zero(currency: str = DISPLAY_CURRENCY) -> Money:
     return Money(Decimal("0"), currency)
 
 
+PLACEHOLDER_SOURCE = re.compile(r"placeholder|unknown|example|todo|stand-?in", re.I)
+"""How a rate table admits it is not a real rate source."""
+
+
 @dataclass(frozen=True, slots=True)
 class FxRate:
     """One currency pair on one day, with an attributed source."""
@@ -122,3 +127,24 @@ class FxTable:
         for rate in self._rates.values():
             return rate.as_of
         return None
+
+    @property
+    def source(self) -> str | None:
+        for rate in self._rates.values():
+            return rate.source
+        return None
+
+    @property
+    def is_sourced(self) -> bool:
+        """Does the rate come from somewhere, or is it a stand-in?
+
+        The shipped table is a hardcoded 0.92 labelled "placeholder — replace
+        with a real rate source". The page was showing it as "converted at 0.92
+        (2026-08-27)", which reads as a rate someone looked up on that date.
+
+        Every euro figure on a site about advertised prices being wrong rests
+        on this number, so the one thing it must not do is look more certain
+        than it is.
+        """
+        source = self.source
+        return bool(source) and not PLACEHOLDER_SOURCE.search(source or "")
