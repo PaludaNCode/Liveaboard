@@ -190,7 +190,17 @@ def cmd_promote(args: argparse.Namespace) -> int:
 
     priced = sum(1 for i in payload["itineraries"] if i["fees"])
     if fees:
-        print(f"  fees applied to {priced}/{len(payload['itineraries'])} itineraries")
+        # The date matters as much as the count. The fee book wins over this
+        # run's own parse -- rightly, a browser sees extras the raw HTML does
+        # not -- which also means a fee-parser fix cannot reach the site
+        # through this command at all. A daily refresh once ran green and
+        # changed nothing while the published page kept four invented charges
+        # per vessel, because the book that held them was a week old and
+        # silent about it.
+        print(
+            f"  fees applied to {priced}/{len(payload['itineraries'])} itineraries"
+            f" from {fee_path} collected {fees.get('scraped_at', 'unknown date')}"
+        )
     else:
         print(f"  no {fee_path} found; fees will render as unknown")
 
