@@ -37,26 +37,45 @@
 
   /* ---------- pricing ---------- */
 
-  function lineCharged(line) {
-    if (line.included || line.tier === "optional") return 0;
-    if (line.toggle) return state.toggles[line.toggle] ? line.display.amount : 0;
-    return DEFAULT_ON_TIERS[line.tier] ? line.display.amount : 0;
+  /* Whether a line counts at all, independent of what it costs. A line with no
+     stated price still counts — it just cannot be added up. */
+  function lineCounts(line) {
+    if (line.included || line.tier === "optional") return false;
+    if (line.toggle) return !!state.toggles[line.toggle];
+    return !!DEFAULT_ON_TIERS[line.tier];
   }
 
-  function totalFor(dep) {
-    var sum = 0;
-    for (var i = 0; i < dep.lines.length; i++) sum += lineCharged(dep.lines[i]);
-    return sum;
+  function lineCharged(line, high) {
+    if (!lineCounts(line) || !line.has_price) return 0;
+    var top = high && line.display_max ? line.display_max.amount : line.display.amount;
+    return top;
   }
 
   function metricsFor(dep) {
-    var total = totalFor(dep);
+    var low = 0, high = 0, unpriced = [];
+    for (var i = 0; i < dep.lines.length; i++) {
+      var line = dep.lines[i];
+      low += lineCharged(line, false);
+      high += lineCharged(line, true);
+      if (lineCounts(line) && !line.has_price) unpriced.push(line.label);
+    }
     return {
-      total: total,
-      perNight: dep.nights > 0 ? total / dep.nights : total,
-      surcharge: total - dep.base,
-      markup: dep.base > 0 ? (total - dep.base) / dep.base * 100 : 0
+      total: low,
+      totalMax: high,
+      isRange: high > low + 0.5,
+      unpriced: unpriced,
+      perNight: dep.nights > 0 ? low / dep.nights : low,
+      surcharge: low - dep.base,
+      markup: dep.base > 0 ? (low - dep.base) / dep.base * 100 : 0
     };
+  }
+
+  /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
+     Collapsing a range to one number would be the site's own hidden cost. */
+  function formatSpan(m) {
+    var low = Math.round(m.total).toLocaleString("en-IE");
+    if (!m.isRange) return low;
+    return low + "–" + Math.round(m.totalMax).toLocaleString("en-IE");
   }
 
   /* ---------- filtering ---------- */
@@ -169,10 +188,15 @@
 
     var cost = el("div", "true-cost");
     cost.appendChild(el("span", "cur", "€"));
-    cost.appendChild(document.createTextNode(Math.round(m.total).toLocaleString("en-IE")));
+    cost.appendChild(document.createTextNode(formatSpan(m)));
     block.appendChild(cost);
 
     block.appendChild(el("div", "per-night", euro.format(m.perNight) + " per night"));
+
+    if (m.unpriced.length) {
+      block.appendChild(el("div", "plus-unpriced",
+        "plus " + m.unpriced.join(", ").toLowerCase() + " at an unstated price"));
+    }
 
     /* Without fee data there is no true cost to report. Saying "no extras to
        add" would claim we checked, and claiming a perfect honesty score would
@@ -220,9 +244,9 @@
 
     var body = el("tbody");
     dep.lines.forEach(function (line) {
-      var charged = lineCharged(line);
+      var charged = lineCharged(line, false);
       var isBase = line.code === "base_fare";
-      var counted = isBase || charged > 0;
+      var counted = isBase || lineCounts(line);
       var row = el("tr", (counted ? "" : "off") + (isBase ? " base-row" : ""));
 
       var nameCell = el("td");
@@ -239,13 +263,27 @@
       if (!isBase) tierCell.appendChild(el("span", "tier " + line.tier, line.tier));
       row.appendChild(tierCell);
 
-      row.appendChild(el("td", "num", euro.format(line.display.amount)));
+      var amountCell = el("td", "num");
+      if (!line.has_price) {
+        amountCell.appendChild(el("span", "pill-off", "not stated"));
+      } else if (line.is_range) {
+        amountCell.appendChild(document.createTextNode(
+          euro.format(line.display.amount) + "–" + euro.format(line.display_max.amount)));
+      } else {
+        amountCell.appendChild(document.createTextNode(euro.format(line.display.amount)));
+      }
+      row.appendChild(amountCell);
 
       var statusCell = el("td", "num");
       if (line.included) {
         statusCell.appendChild(el("span", "pill-included", "in the fare"));
+      } else if (counted && !line.has_price) {
+        statusCell.appendChild(el("span", "pill-unpriced", "payable, amount unknown"));
       } else if (counted) {
-        statusCell.appendChild(document.createTextNode(euro.format(charged)));
+        statusCell.appendChild(document.createTextNode(
+          line.is_range
+            ? euro.format(line.display.amount) + "–" + euro.format(line.display_max.amount)
+            : euro.format(charged)));
       } else {
         statusCell.appendChild(el("span", "pill-off",
           line.tier === "optional" ? "optional" : "switched off"));
@@ -259,8 +297,18 @@
     totalRow.appendChild(el("td", null, dep.fees_known ? "True cost" : "Advertised price"));
     totalRow.appendChild(el("td"));
     totalRow.appendChild(el("td"));
-    totalRow.appendChild(el("td", "num", euro.format(m.total)));
+    totalRow.appendChild(el("td", "num", "€" + formatSpan(m)));
     body.appendChild(totalRow);
+
+    if (m.unpriced.length) {
+      var extra = el("tr");
+      var note = el("td", "fee-note",
+        "Plus " + m.unpriced.join(", ") + ": listed by the operator with no price, " +
+        "so it cannot be added up here. It is not free.");
+      note.colSpan = 4;
+      extra.appendChild(note);
+      body.appendChild(extra);
+    }
 
     if (!dep.fees_known) {
       var caveat = el("tr");
@@ -329,7 +377,8 @@
     var sub = el("p", "trip-sub");
     sub.appendChild(document.createTextNode(dateRange(dep)));
     sub.appendChild(el("span", "sep", "·"));
-    sub.appendChild(document.createTextNode(itin.nights + " nights, " + itin.dives + " dives"));
+    sub.appendChild(document.createTextNode(
+      itin.nights + " nights" + (itin.dives > 0 ? ", " + itin.dives + " dives" : "")));
     sub.appendChild(el("span", "sep", "·"));
     sub.appendChild(document.createTextNode(itin.boat));
     left.appendChild(sub);
@@ -342,7 +391,7 @@
     var isOpen = state.open.has(dep.id);
     var button = el("button", "disclose",
       isOpen ? "Hide the breakdown"
-             : dep.fees_known ? "Where does " + euro.format(m.total) + " come from?"
+             : dep.fees_known ? "Where does €" + formatSpan(m) + " come from?"
                               : "What is missing from " + euro.format(m.total) + "?");
     button.type = "button";
     button.setAttribute("aria-expanded", isOpen ? "true" : "false");

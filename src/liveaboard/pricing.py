@@ -62,30 +62,55 @@ class BreakdownLine:
     code: FeeCode
     label: str
     tier: FeeTier
-    quoted: Money
-    display: Money
+    quoted: Money | None
+    display: Money | None
     included: bool
     counted: bool
     toggle: str | None
     provenance: Provenance | None
     note: str | None
     fx_rate: FxRate | None
+    display_max: Money | None = None
+    """High end of a quoted range, in display currency. ``None`` when fixed."""
+
+    @property
+    def has_price(self) -> bool:
+        return self.display is not None
+
+    @property
+    def is_range(self) -> bool:
+        return self.display_max is not None and self.display_max != self.display
 
     @property
     def charged(self) -> Money:
-        """What this line adds to the total: zero when bundled or switched off."""
-        if self.included or not self.counted:
-            return zero(self.display.currency)
+        """What this line adds to the total at the low end.
+
+        An unpriced line adds nothing to the arithmetic but is *not* free; the
+        breakdown flags it separately so the page can say so.
+        """
+        if self.included or not self.counted or self.display is None:
+            return zero(DISPLAY_CURRENCY)
         return self.display
+
+    @property
+    def charged_max(self) -> Money:
+        """What this line adds at the high end of its stated range."""
+        if self.included or not self.counted or self.display is None:
+            return zero(DISPLAY_CURRENCY)
+        return self.display_max or self.display
 
     def as_dict(self) -> dict[str, Any]:
         return {
             "code": self.code.value,
             "label": self.label,
             "tier": self.tier.value,
-            "quoted": self.quoted.as_dict(),
-            "display": self.display.as_dict(),
+            "quoted": self.quoted.as_dict() if self.quoted else None,
+            "display": self.display.as_dict() if self.display else None,
+            "display_max": self.display_max.as_dict() if self.is_range else None,
             "charged": float(self.charged.rounded),
+            "charged_max": float(self.charged_max.rounded),
+            "has_price": self.has_price,
+            "is_range": self.is_range,
             "included": self.included,
             "counted": self.counted,
             "toggle": self.toggle,
@@ -121,6 +146,31 @@ class Breakdown:
         return total
 
     @property
+    def total_max(self) -> Money:
+        """The total at the top of every quoted range."""
+        total = zero(DISPLAY_CURRENCY)
+        for line in self.lines:
+            total = total + line.charged_max
+        return total
+
+    @property
+    def is_range(self) -> bool:
+        return self.total_max.amount != self.total.amount
+
+    @property
+    def unpriced(self) -> list[BreakdownLine]:
+        """Counted lines the operator listed without a figure.
+
+        These sit outside the arithmetic entirely: they are known costs of
+        unknown size, so the honest total is "at least this much, plus these".
+        """
+        return [
+            line
+            for line in self.lines
+            if line.counted and not line.included and not line.has_price
+        ]
+
+    @property
     def surcharge(self) -> Money:
         """Everything on top of the advertised price."""
         return Money(self.total.amount - self.base.amount, self.total.currency)
@@ -150,6 +200,9 @@ class Breakdown:
             "departure_id": self.departure_id,
             "base": float(self.base.rounded),
             "total": float(self.total.rounded),
+            "total_max": float(self.total_max.rounded),
+            "is_range": self.is_range,
+            "unpriced": [line.code.value for line in self.unpriced],
             "surcharge": float(self.surcharge.rounded),
             "per_night": float(self.per_night.rounded),
             "markup_pct": round(self.markup_pct, 1),
@@ -213,15 +266,22 @@ def compute(
     )
 
     for fee in _sorted_fees(resolve_fees(itinerary, departure)):
-        quoted = fee.for_trip(itinerary.nights, itinerary.dives)
-        display, rate = fx.to_display(quoted)
+        low, high = fee.span_for_trip(itinerary.nights, itinerary.dives)
+
+        display = display_max = rate = None
+        if low is not None:
+            display, rate = fx.to_display(low)
+            if high is not None and high != low:
+                display_max, _ = fx.to_display(high)
+
         breakdown.lines.append(
             BreakdownLine(
                 code=fee.code,
                 label=fee.label,
                 tier=fee.tier,
-                quoted=quoted,
+                quoted=low,
                 display=display,
+                display_max=display_max,
                 included=fee.included,
                 counted=_is_counted(fee, active),
                 toggle=fee.toggle,
