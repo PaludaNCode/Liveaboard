@@ -175,5 +175,76 @@ class TestSlugify(unittest.TestCase):
         self.assertEqual(slugify("Brothers, Daedalus & Elphinstone"), "brothers-daedalus-elphinstone")
 
 
+class TestFeeMerge(unittest.TestCase):
+    """Fees arrive from a separate weekly browser run, keyed by vessel."""
+
+    FEES = {
+        "scraped_at": "2026-08-27",
+        "vessels": {
+            "alia-soul": {
+                "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul",
+                "fees": [
+                    {
+                        "code": "marine_park",
+                        "tier": "mandatory",
+                        "basis": "per_trip",
+                        "included": False,
+                        "amount": {"amount": 35.0, "currency": "EUR"},
+                        "amount_max": {"amount": 100.0, "currency": "EUR"},
+                        "provenance": PROV,
+                    }
+                ],
+            }
+        },
+    }
+
+    def test_fees_reach_the_itinerary(self):
+        payload = promote(candidate([departure()]), season=SEASON, fees=self.FEES)
+        self.assertEqual(len(payload["itineraries"][0]["fees"]), 1)
+
+    def test_the_same_fees_apply_to_every_trip_that_vessel_sells(self):
+        """They are a property of the boat, not the sailing."""
+        payload = promote(
+            candidate(
+                [
+                    departure(name="Brothers, Daedalus & Elphinstone"),
+                    departure(name="Northern Wrecks", start="2027-06-05", end="2027-06-12"),
+                ]
+            ),
+            season=SEASON,
+            fees=self.FEES,
+        )
+        self.assertEqual(len(payload["itineraries"]), 2)
+        for itinerary in payload["itineraries"]:
+            self.assertEqual(len(itinerary["fees"]), 1)
+
+    def test_a_vessel_the_fee_run_missed_stays_unknown(self):
+        """Absent fees must never render as no fees."""
+        payload = promote(
+            candidate(
+                [departure(boat="unvisited")],
+                itineraries=[{"id": "unvisited", "boat": "Unvisited"}],
+            ),
+            season=SEASON,
+            fees=self.FEES,
+        )
+        self.assertEqual(payload["itineraries"][0]["fees"], [])
+
+    def test_no_fee_file_at_all_is_not_an_error(self):
+        payload = promote(candidate([departure()]), season=SEASON, fees=None)
+        self.assertEqual(payload["itineraries"][0]["fees"], [])
+
+    def test_merged_fees_produce_a_cost_range(self):
+        from liveaboard.pricing import compute
+
+        dataset = Dataset.from_dict(
+            promote(candidate([departure()]), season=SEASON, fees=self.FEES)
+        )
+        itinerary = next(iter(dataset.itineraries.values()))
+        breakdown = compute(itinerary, dataset.departures[0], dataset.fx)
+        self.assertTrue(breakdown.is_range)
+        self.assertGreater(breakdown.total_max.amount, breakdown.total.amount)
+
+
 if __name__ == "__main__":
     unittest.main()
