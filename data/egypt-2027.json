@@ -93,7 +93,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -106,8 +120,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -138,6 +151,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -192,7 +240,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -205,8 +267,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -237,6 +298,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -292,7 +388,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -305,8 +415,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -337,6 +446,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -387,7 +531,21 @@
           "note": "Port Fees"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -400,8 +558,7 @@
           "amount": {
             "amount": 99.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -432,6 +589,41 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": {
+            "amount": 79.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
         }
       ]
     },
@@ -484,6 +676,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -500,7 +706,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -513,8 +719,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -543,6 +748,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -593,6 +829,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -609,7 +859,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -622,8 +872,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -652,6 +901,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -702,6 +982,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -718,7 +1012,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -731,8 +1025,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -761,6 +1054,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -809,6 +1133,20 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -825,7 +1163,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -838,8 +1176,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -868,6 +1205,37 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "land_excursion",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027"
+          },
+          "amount": null,
+          "note": "Land Excursions: listed with no price"
         }
       ]
     },
@@ -920,6 +1288,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -936,7 +1325,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -949,8 +1338,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -965,6 +1353,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1017,6 +1426,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1033,7 +1463,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1046,8 +1476,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1062,6 +1491,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1113,6 +1563,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1129,7 +1600,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1142,8 +1613,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1158,6 +1628,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1209,6 +1700,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1225,7 +1737,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1238,8 +1750,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1254,6 +1765,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1304,6 +1836,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1320,7 +1873,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1333,8 +1886,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1349,6 +1901,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1399,6 +1972,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1415,7 +2009,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1428,8 +2022,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1444,6 +2037,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1492,6 +2106,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1508,7 +2143,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1521,8 +2156,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1537,6 +2171,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1585,6 +2240,27 @@
           "note": "Gratuities: listed with no price"
         },
         {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 4.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 15.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
           "code": "nitrox",
           "tier": "conditional",
           "basis": "per_trip",
@@ -1601,7 +2277,7 @@
           }
         },
         {
-          "code": "course",
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1614,8 +2290,7 @@
           "amount": {
             "amount": 182.0,
             "currency": "USD"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "gear_rental",
@@ -1630,6 +2305,27 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027"
+          },
+          "amount": {
+            "amount": 285.0,
+            "currency": "USD"
+          },
+          "amount_max": {
+            "amount": 627.0,
+            "currency": "USD"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
         }
       ]
     },
@@ -1689,7 +2385,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1702,8 +2412,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1734,6 +2443,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -1793,7 +2539,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1806,8 +2566,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1838,6 +2597,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -1897,7 +2693,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -1910,8 +2720,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -1942,6 +2751,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2002,7 +2848,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2015,8 +2875,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2047,6 +2906,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2106,7 +3002,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2119,8 +3029,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2151,6 +3060,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     },
@@ -2208,7 +3154,21 @@
           "note": "Gratuities"
         },
         {
-          "code": "course",
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
           "tier": "optional",
           "basis": "per_trip",
           "included": false,
@@ -2221,8 +3181,7 @@
           "amount": {
             "amount": 220.0,
             "currency": "EUR"
-          },
-          "note": "Nitrox Course"
+          }
         },
         {
           "code": "private_guide",
@@ -2253,6 +3212,43 @@
           },
           "amount": null,
           "note": "Rental Gear: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 270.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
         }
       ]
     }
