@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import unittest
 from datetime import date
 
@@ -316,6 +317,13 @@ class TestPromotionalTitles(unittest.TestCase):
         self.assertEqual(by_start["2027-05-01"]["promotion"], "20% Off")
         self.assertNotIn("promotion", by_start["2027-06-05"])
 
+    def test_the_discount_never_reaches_the_page(self):
+        """It is the operator's claim about a list price we have not seen."""
+        dataset = Dataset.from_dict(self.payload)
+        self.assertFalse(any(hasattr(d, "promotion") for d in dataset.departures))
+        rendered = build_payload(dataset)
+        self.assertNotIn("20% Off", json.dumps(rendered))
+
     def test_a_percentage_inside_the_route_name_is_left_alone(self):
         payload = promote(
             candidate([departure(name="Nitrox 32% Special (Hurghada - Hurghada)")]),
@@ -355,6 +363,38 @@ class TestSiteRecoveryFromTitles(unittest.TestCase):
     def test_a_site_name_inside_a_longer_word_is_not_a_match(self):
         """Substring matching is what put invented data on the page once."""
         self.assertEqual(self.sites("Saidian Coast Special"), [])
+
+
+class TestNotesDescribeTheRun(unittest.TestCase):
+    """The page's own note is data too, and it went stale for a week."""
+
+    FEES = TestFeeMerge.FEES
+
+    def test_no_fees_says_so(self):
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.assertIn("not yet captured", payload["notes"])
+
+    def test_full_coverage_stops_claiming_fees_are_missing(self):
+        payload = promote(candidate([departure()]), season=SEASON, fees=self.FEES)
+        self.assertNotIn("not yet captured", payload["notes"])
+        self.assertIn("fee disclosures", payload["notes"].lower())
+
+    def test_partial_coverage_is_counted_not_rounded(self):
+        payload = promote(
+            candidate(
+                [departure(), departure(boat="unvisited", start="2027-06-05",
+                                        end="2027-06-12")],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul"},
+                             {"id": "unvisited", "boat": "Unvisited"}],
+            ),
+            season=SEASON,
+            fees=self.FEES,
+        )
+        self.assertIn("1 of 2", payload["notes"])
+
+    def test_an_explicit_note_still_wins(self):
+        payload = promote(candidate([departure()]), season=SEASON, notes="custom")
+        self.assertEqual(payload["notes"], "custom")
 
 
 if __name__ == "__main__":

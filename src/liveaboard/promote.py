@@ -194,8 +194,15 @@ def promote(
                 "provenance": item["provenance"],
             }
             # Carried on the departure, not the itinerary: the operator
-            # discounts specific dates, and the price shown is already the
-            # discounted one. This says why it is lower than its neighbours.
+            # discounts specific dates, and the price scraped is already the
+            # discounted one.
+            #
+            # Recorded, not rendered. "20% Off" is the operator's claim about a
+            # list price we have never seen, so putting it on the page would
+            # repeat a number we cannot check — on a site whose whole argument
+            # is that advertised prices should be checked. It stays in the
+            # dataset to explain why two departures of one trip cost different
+            # amounts, and why a title once differed from its twin.
             if item.get("promotion"):
                 entry["promotion"] = item["promotion"]
             departures.append(entry)
@@ -204,11 +211,7 @@ def promote(
         "schema_version": 1,
         "generated": candidate.get("scraped_at") or date.today().isoformat(),
         "default_currency": "EUR",
-        "notes": notes
-        or (
-            "Prices scraped from liveaboard.com. Fees are not yet captured, so "
-            "true cost is shown as unknown rather than as the advertised price."
-        ),
+        "notes": notes or _notes_for(itineraries),
         "fx": fx or _default_fx(),
         "operators": [UNKNOWN_OPERATOR],
         "boats": sorted(boats.values(), key=lambda b: b["name"]),
@@ -218,6 +221,35 @@ def promote(
     if skipped:
         payload["promotion_skipped"] = skipped
     return payload
+
+
+def _notes_for(itineraries: list[dict[str, Any]]) -> str:
+    """Describe what this run actually captured.
+
+    The note used to be a constant reading "Fees are not yet captured, so true
+    cost is shown as unknown". It outlived the fee run by a week: the page
+    carried a full breakdown for every trip while telling its visitors it had
+    none. A site that exists to catch operators describing their prices
+    inaccurately cannot describe its own data inaccurately.
+    """
+    total = len(itineraries)
+    with_fees = sum(1 for i in itineraries if i["fees"])
+    if not total or not with_fees:
+        return (
+            "Prices scraped from liveaboard.com. Fees are not yet captured, so "
+            "true cost is shown as unknown rather than as the advertised price."
+        )
+    if with_fees == total:
+        return (
+            "Prices and fee disclosures scraped from liveaboard.com. True cost "
+            "adds every fee the operator lists, including the ones it states "
+            "without a price."
+        )
+    return (
+        f"Prices scraped from liveaboard.com. Fee disclosures captured for "
+        f"{with_fees} of {total} itineraries; the rest show true cost as "
+        f"unknown rather than as the advertised price."
+    )
 
 
 def _most_common(values) -> int:
