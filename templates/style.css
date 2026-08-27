@@ -157,6 +157,9 @@ tbody tr.row:hover .stick { background:var(--row-hover); }
 thead th.stick { z-index:25; }
 
 .later { color:var(--later); font-weight:600; }
+.inc { color:var(--ok); font-weight:600; }
+/* Not part of the number beside it, and must not read as though it were. */
+.plus { color:var(--later); font-weight:500; font-size:11px; }
 /* A number divided by an assumption. Dotted underline rather than a colour:
    it is a weaker claim, not a warning. */
 .est { border-bottom:1px dotted var(--ink-faint); cursor:help; }

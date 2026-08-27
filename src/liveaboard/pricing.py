@@ -31,14 +31,12 @@ Toggles = Mapping[str, bool]
 DEFAULT_TOGGLES: dict[str, bool] = {
     "nitrox": False,
     "gear": False,
-    "insurance": False,
-    "transfers": True,
-    "gratuities": True,
 }
 """What the site starts with.
 
-Transfers and gratuities default on because almost nobody actually skips them;
-nitrox and gear default off because plenty of divers bring their own.
+Both default off because plenty of divers bring their own. Everything a diver
+cannot avoid is already in the total and has no switch: a comparison is only
+easy when the headline number means the same thing on every row.
 """
 
 @dataclass(frozen=True, slots=True)

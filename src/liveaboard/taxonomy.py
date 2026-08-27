@@ -91,11 +91,18 @@ class FeeCode(str, Enum):
 TOGGLEABLE: dict[FeeCode, str] = {
     FeeCode.NITROX: "nitrox",
     FeeCode.GEAR_RENTAL: "gear",
-    FeeCode.DIVE_INSURANCE: "insurance",
-    FeeCode.AIRPORT_TRANSFER: "transfers",
-    FeeCode.GRATUITIES: "gratuities",
 }
-"""Fee codes the visitor can switch on and off, mapped to the site's toggle id."""
+"""Fee codes the visitor can switch on and off, mapped to the site's toggle id.
+
+Two, because the page is for comparing trips and every extra control is one
+more way two rows can differ for a reason that is not the boat.
+
+Insurance and transfers left: they are not part of what an operator charges
+for the week, and carrying them made the headline number answer a different
+question per visitor. Gratuities left for the opposite reason -- tips are
+customary rather than optional, so they now always count where an operator
+states an amount, and the total says "+ tips" where one does not.
+"""
 
 
 FEE_LABELS: dict[FeeCode, str] = {
