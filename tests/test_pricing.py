@@ -12,7 +12,15 @@ from decimal import Decimal
 
 from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
-from liveaboard.pricing import REFERENCE_BASKET, compute, resolve_fees, transparency_score
+from liveaboard.dataset import Dataset
+from liveaboard.pricing import (
+    REFERENCE_BASKET,
+    compute,
+    mandatory_known,
+    resolve_fees,
+    transparency_score,
+)
+from liveaboard.render import build_payload
 from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
 
 FX = FxTable.from_dict(
@@ -209,6 +217,98 @@ class TestTransparencyScore(unittest.TestCase):
             transparency_score(bundled, dear, FX),
             transparency_score(hidden, cheap, FX),
         )
+
+
+class TestOnlyOptionalExtrasIsNotACleanBill(unittest.TestCase):
+    """Seven of seventy-nine vessels publish optional extras and no required ones.
+
+    Counting that silence as zero made the site rank them as its most honest
+    operators: odyssey scored 96% and emperor-asmaa 93%, against 86% for a
+    vessel that published its park and port fees in full.
+    """
+
+    PROV = {"kind": "scraped", "source_id": "liveaboard.com", "retrieved": "2026-08-27"}
+
+    def dataset(self, fees):
+        return Dataset.from_dict({
+            "schema_version": 1, "generated": "2026-08-27", "default_currency": "EUR",
+            "notes": "t",
+            "fx": {"display_currency": "EUR", "as_of": "2026-08-27",
+                   "source": "test", "rates": {"USD": 0.92}},
+            "operators": [{"id": "o", "name": "O"}],
+            "boats": [{"id": "b", "name": "B", "operator_id": "o"}],
+            "itineraries": [{
+                "id": "i", "name": "I", "operator_id": "o", "boat_id": "b",
+                "nights": 7, "dives": 0, "port_from": "Hurghada",
+                "port_to": "Hurghada", "dive_sites": ["brothers"], "fees": fees,
+            }],
+            "departures": [{
+                "id": "d", "itinerary_id": "i", "start": "2027-05-01",
+                "end": "2027-05-08", "price": {"amount": 1500.0, "currency": "EUR"},
+                "provenance": self.PROV,
+            }],
+        })
+
+    def fee(self, code, tier, amount=100.0, included=False):
+        entry = {"code": code, "tier": tier, "basis": "per_trip",
+                 "included": included, "provenance": self.PROV}
+        entry["amount"] = {"amount": amount, "currency": "EUR"} if amount else None
+        return entry
+
+    def parts(self, fees):
+        d = self.dataset(fees)
+        itinerary = next(iter(d.itineraries.values()))
+        return itinerary, d.departures[0], d
+
+    def test_optional_extras_alone_leave_the_mandatory_picture_unknown(self):
+        itinerary, departure, _ = self.parts([
+            self.fee("gratuities", "customary"),
+            self.fee("gear_rental", "conditional", None),
+            self.fee("course", "optional", 250.0),
+        ])
+        self.assertFalse(mandatory_known(itinerary, departure))
+
+    def test_one_required_line_is_enough_to_know(self):
+        itinerary, departure, _ = self.parts([self.fee("marine_park", "mandatory", 80.0)])
+        self.assertTrue(mandatory_known(itinerary, departure))
+
+    def test_a_bundled_fee_still_counts_as_stated(self):
+        """An operator saying "it is in the fare" is the honest case."""
+        itinerary, departure, _ = self.parts([
+            self.fee("marine_park", "mandatory", 0.0, included=True),
+        ])
+        self.assertTrue(mandatory_known(itinerary, departure))
+
+    def test_the_page_withholds_the_score_rather_than_awarding_it(self):
+        payload = build_payload(self.dataset([
+            self.fee("gratuities", "customary"),
+            self.fee("course", "optional", 250.0),
+        ]))
+        rendered = payload["departures"][0]
+        self.assertFalse(rendered["mandatory_known"])
+        self.assertIsNone(rendered["transparency"])
+
+    def test_a_disclosing_operator_still_gets_scored(self):
+        payload = build_payload(self.dataset([
+            self.fee("marine_park", "mandatory", 150.0),
+            self.fee("gratuities", "customary"),
+        ]))
+        rendered = payload["departures"][0]
+        self.assertTrue(rendered["mandatory_known"])
+        self.assertIsNotNone(rendered["transparency"])
+
+    def test_silence_no_longer_outranks_disclosure(self):
+        """The regression in one line: quiet operator vs forthcoming one."""
+        quiet = build_payload(self.dataset([
+            self.fee("gratuities", "customary"),
+        ]))["departures"][0]
+        forthcoming = build_payload(self.dataset([
+            self.fee("marine_park", "mandatory", 150.0),
+            self.fee("port_fees", "mandatory", 80.0),
+            self.fee("gratuities", "customary"),
+        ]))["departures"][0]
+        self.assertIsNone(quiet["transparency"])
+        self.assertIsNotNone(forthcoming["transparency"])
 
 
 if __name__ == "__main__":

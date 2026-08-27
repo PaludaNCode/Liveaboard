@@ -49,11 +49,18 @@ class TestBoatLinks(unittest.TestCase):
         self.assertEqual(len(self.found), 2)
 
     def test_rejects_the_dive_sites_the_search_page_actually_links(self):
-        """Taken verbatim from a live search page's destination nav."""
+        """Taken verbatim from a live search page's destination nav.
+
+        The second group came back from a full 79-vessel fee run listed as
+        vessels it had failed on -- Gordon, Jackson and Woodhouse are reefs in
+        the Straits of Tiran and the Salem Express is a wreck.
+        """
         sites = [
             "red-sea", "thistlegorm", "ras-mohammed", "the-brothers",
             "straits-of-tiran", "abu-nuhas", "daedalus", "elphinstone",
             "st-johns", "abu-dabab",
+            "gordon-reef", "jackson-reef", "woodhouse-reef",
+            "shark-and-yolanda", "salem-express", "hamata", "sinai", "rocky",
         ]
         html = "".join(f'<a href="/diving/egypt/{slug}">x</a>' for slug in sites)
         self.assertEqual(LiveaboardComAdapter.boat_links(html), set())

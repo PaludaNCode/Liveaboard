@@ -108,6 +108,11 @@ NON_BOAT_SLUGS = frozenset(
         "straits-of-tiran", "abu-nuhas", "daedalus", "elphinstone", "st-johns",
         "abu-dabab", "brothers-islands", "daedalus-reef", "fury-shoal", "tiran",
         "sharm-el-sheikh", "hurghada", "marsa-alam", "port-ghalib", "safaga",
+        # Found by a full 79-vessel run: these reached the fee collector and
+        # came back as vessels it had failed on, which is a different thing
+        # from a boat whose disclosure could not be read.
+        "gordon-reef", "jackson-reef", "woodhouse-reef", "shark-and-yolanda",
+        "salem-express", "hamata", "sinai", "rocky", "dahab",
         # Site furniture.
         "liveaboards", "reviews", "deals",
     }

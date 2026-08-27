@@ -224,6 +224,27 @@ def resolve_fees(itinerary: Itinerary, departure: Departure) -> list[FeeItem]:
     return list(merged.values())
 
 
+def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
+    """Has the operator said anything about its unavoidable costs?
+
+    Seven of seventy-nine vessels publish an extras disclosure listing only
+    optional items — gratuities, gear, courses — and no required block at all.
+    Every Egyptian liveaboard pays marine park and port fees, so that silence
+    means one of two things and does not say which: the fees are bundled into
+    the fare, or they are collected at the dock and simply not advertised.
+
+    Counting the silence as zero made the site rank those operators as its most
+    honest: ``odyssey`` scored 96% and ``emperor-asmaa`` 93%, against 86% for a
+    vessel that published its park and port fees in full. A page built to argue
+    that advertised prices hide costs cannot reward the operators that disclose
+    the least.
+
+    An *included* mandatory line still counts as known — that is an operator
+    stating the fee is in the fare, which is the honest case this rewards.
+    """
+    return any(fee.tier is FeeTier.MANDATORY for fee in resolve_fees(itinerary, departure))
+
+
 def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:
     """Whether this fee lands in the total under the given toggles."""
     if fee.tier is FeeTier.OPTIONAL:
