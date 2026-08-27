@@ -121,6 +121,14 @@ tests/            stdlib unittest, no dependencies
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
+The dataset is **regenerated, not edited**. `promote` is pure — candidate, fees,
+facts and FX in, dataset out, no network — so `data/egypt-2027.json` must always
+be what the committed code produces from the committed inputs. CI checks it
+(`promote --check`), and a merge touching `src/liveaboard/` re-promotes on main,
+so the published page is never more than one merge behind the parser. Without
+that, a parser fix passes CI and changes nothing until an unrelated crawl runs
+(#53).
+
 `archive.json` exists because current prices can always be re-scraped and past
 ones cannot. It carries ratings, cabin counts, occupancy, amenities and
 remaining capacity — none of which the site uses today — so a question asked

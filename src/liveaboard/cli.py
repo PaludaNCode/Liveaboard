@@ -12,6 +12,7 @@ import json
 import sys
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 from .classify import classify
 from .dataset import Dataset, DatasetError
@@ -229,11 +230,62 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     return 1 if blocked else 0
 
 
+def _describe_drift(committed: Any, fresh: Any, path: str = "") -> list[str]:
+    """Say where two datasets disagree, in terms a reader can act on.
+
+    "The committed dataset differs" is not an actionable message -- the useful
+    part is *which* itinerary gained a fee, or that every operator id changed.
+    So this walks both structures and names the first handful of differences
+    rather than dumping two megabytes of JSON.
+    """
+    if type(committed) is not type(fresh):
+        return [f"{path or '<root>'}: {type(committed).__name__} -> {type(fresh).__name__}"]
+
+    if isinstance(committed, dict):
+        out: list[str] = []
+        for key in sorted(set(committed) | set(fresh)):
+            here = f"{path}.{key}" if path else key
+            if key not in committed:
+                out.append(f"{here}: added")
+            elif key not in fresh:
+                out.append(f"{here}: removed")
+            else:
+                out.extend(_describe_drift(committed[key], fresh[key], here))
+            if len(out) > 40:
+                break
+        return out
+
+    if isinstance(committed, list):
+        if len(committed) != len(fresh):
+            return [f"{path}: {len(committed)} entries -> {len(fresh)}"]
+        out = []
+        for index, (a, b) in enumerate(zip(committed, fresh)):
+            # Name the entry rather than its index where the data gives it one:
+            # "itineraries[142]" sends a reader counting, "itineraries[eagle--
+            # north-wrecks]" sends them to the trip.
+            tag = b.get("id") if isinstance(b, dict) and b.get("id") else index
+            out.extend(_describe_drift(a, b, f"{path}[{tag}]"))
+            if len(out) > 40:
+                break
+        return out
+
+    if committed != fresh:
+        return [f"{path}: {committed!r} -> {fresh!r}"]
+    return []
+
+
 def cmd_promote(args: argparse.Namespace) -> int:
     """Turn a scrape candidate into a dataset, refusing to publish a worse one.
 
     The size check is the guard that matters: a source redesign that halves the
     departure count should stop the pipeline, not quietly shrink the site.
+
+    With ``--check`` nothing is written: the freshly promoted payload is
+    compared against what is committed, and a difference is an error. Promotion
+    is pure -- candidate, fees, facts and FX in, dataset out, no network -- so
+    the two agreeing is exactly the statement "the published dataset is what
+    this code produces from the committed inputs". When they disagree, somebody
+    changed the parser and the dataset is still the old parser's output.
     """
     candidate = json.loads(Path(args.candidate).read_text(encoding="utf-8"))
     season = (date.fromisoformat(args.season_start), date.fromisoformat(args.season_end))
@@ -293,6 +345,35 @@ def cmd_promote(args: argparse.Namespace) -> int:
         return 1
 
     target = Path(args.out)
+
+    if args.check:
+        # Deliberately before the size guard and before validation: this is a
+        # question about whether two files agree, and answering "they differ"
+        # is useful even on a candidate that would refuse to publish.
+        if not target.exists():
+            print(f"{target} does not exist; nothing to compare against", file=sys.stderr)
+            return 1
+        committed = json.loads(target.read_text(encoding="utf-8"))
+        if committed == payload:
+            print(
+                f"{target} matches what promote produces from the committed inputs "
+                f"({incoming} departures, {len(payload['itineraries'])} itineraries)"
+            )
+            return 0
+        drift = _describe_drift(committed, payload)
+        print(
+            f"{target} is not what promote produces from the committed inputs.\n"
+            f"  The dataset was built by an older parser. Re-promote and commit "
+            f"the result:\n"
+            f"    PYTHONPATH=src python3 -m liveaboard.cli promote "
+            f"--candidate {args.candidate} --out {target}\n"
+            f"  {len(drift)} difference(s), first {min(len(drift), 20)}:",
+            file=sys.stderr,
+        )
+        for line in drift[:20]:
+            print(f"    {line}", file=sys.stderr)
+        return 1
+
     if target.exists() and not args.force:
         existing = json.loads(target.read_text(encoding="utf-8"))
         previous = len(existing.get("departures", []))
@@ -367,6 +448,11 @@ def main(argv: list[str] | None = None) -> int:
         help="refuse to publish below this fraction of the current departure count",
     )
     promote_cmd.add_argument("--force", action="store_true", help="publish despite a large drop")
+    promote_cmd.add_argument(
+        "--check",
+        action="store_true",
+        help="write nothing; fail if --out is not what promote produces",
+    )
     promote_cmd.set_defaults(func=cmd_promote)
 
     args = parser.parse_args(argv)
