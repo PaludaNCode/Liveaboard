@@ -27,6 +27,28 @@ jobs:
       - name: Site builds
         run: PYTHONPATH=src python3 -m liveaboard.cli build
 
+      # templates/app.js is the whole interactive layer and no Python test can
+      # execute it. tests/test_page.py drives the built page in Chromium, and
+      # skips itself where Playwright is absent so a bare checkout still runs
+      # the suite on the standard library alone.
+      #
+      # A skip is silent, and a permanently skipped test looks exactly like a
+      # passing one. So CI installs the browser and runs that file by name: the
+      # skip is a local convenience, never the normal outcome. `-v` so the run
+      # log shows which cases actually executed.
+      #
+      # Cheap, because the tests block every external request before loading
+      # the page -- which is also how they assert the page needs nothing but
+      # itself. Leaving the render-blocking webfont request to time out instead
+      # costs thirteen seconds per page load (#59).
+      - name: Install Playwright
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      - name: Page works in a browser
+        run: PYTHONPATH=src python3 -m unittest tests.test_page -v
+
       # The same rule as the seed check below, extended to the real dataset.
       #
       # promote is pure -- candidate, fees, facts and FX in, dataset out, no
