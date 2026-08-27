@@ -10,7 +10,12 @@ from datetime import datetime, timezone
 
 from liveaboard.models import FeeItem
 from liveaboard.scrape.base import FetchResult, PoliteFetcher
-from liveaboard.scrape.fees import normalise_disclosure, parse_extras, to_fee_dicts
+from liveaboard.scrape.fees import (
+    classify_label,
+    normalise_disclosure,
+    parse_extras,
+    to_fee_dicts,
+)
 from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter, _page_text
 from liveaboard.taxonomy import FeeCode, FeeTier
 
@@ -240,6 +245,71 @@ class TestRejectsPageFurniture(unittest.TestCase):
 
     def test_a_destination_menu_yields_no_park_fee(self):
         self.assertNotIn(FeeCode.MARINE_PARK, self.codes)
+
+
+class TestTruncation(unittest.TestCase):
+    """Where the list stops matters as much as what is in it."""
+
+    def test_a_long_priced_entry_does_not_end_the_list(self):
+        """Losing real mandatory fees is the same lie as inventing them."""
+        text = (
+            "Required Extras: Environment Tax (€45), "
+            "A rather verbosely named harbour and mooring facility charge "
+            "levied per trip (€35), Fuel Surcharge (€60-70 / trip)."
+        )
+        codes = {f.code for f in parse_extras(text)}
+        self.assertIn(FeeCode.ENVIRONMENT_TAX, codes)
+        self.assertIn(FeeCode.FUEL_SURCHARGE, codes)
+
+    def test_a_long_unpriced_segment_still_ends_the_list(self):
+        """That segment is the page running on past the disclosure."""
+        text = (
+            "Required Extras: Port Fees (€35), "
+            "Year built 2014 Year renovated 2025 Length 40 meters Top speed 11 Knots, "
+            "Visa on arrival (€25)."
+        )
+        codes = {f.code for f in parse_extras(text)}
+        self.assertIn(FeeCode.PORT_FEES, codes)
+        self.assertNotIn(FeeCode.VISA, codes)
+
+
+class TestPublishedFabrications(unittest.TestCase):
+    """Verbatim label text from a dataset that reached the live site.
+
+    Each of these produced a fee line nobody was ever charged. They are kept
+    word for word so the same page furniture cannot come back quietly.
+    """
+
+    FABRICATIONS = (
+        "Pay by bank transfer or online with Best Price Guarantee",
+        "Diving Nitrox available Free Nitrox Shaded Dive Deck",
+        "Show prices Drawings & Vessel Layouts Cabin Types",
+        "meters Top speed 11 Knots Cruising speed 11",
+        "Year built 2014 Year renovated 2025 Length 40 meters",
+        "V Visayas Viti Levu Vicente Vaavu Atoll",
+        "T The Au Co Tip Top II Tip Top IV",
+    )
+
+    def test_none_of_them_resolves_to_a_fee(self):
+        for text in self.FABRICATIONS:
+            self.assertIsNone(classify_label(text), text)
+
+    def test_real_labels_are_untouched(self):
+        for text, code in (
+            ("Environment Tax", FeeCode.ENVIRONMENT_TAX),
+            ("National Park Fees", FeeCode.MARINE_PARK),
+            ("Fuel Surcharge", FeeCode.FUEL_SURCHARGE),
+            ("Rental Gear", FeeCode.GEAR_RENTAL),
+            ("Laundry / Pressing Services", FeeCode.LAUNDRY),
+            ("Private Dive Guide", FeeCode.PRIVATE_GUIDE),
+            ("Scuba Diving Courses", FeeCode.COURSE),
+        ):
+            self.assertEqual(classify_label(text), code, text)
+
+    def test_a_label_is_a_noun_phrase_not_a_sentence(self):
+        """Six words is the line: no real extra needs a seventh."""
+        self.assertIsNotNone(classify_label("Laundry / Pressing Services"))
+        self.assertIsNone(classify_label("Nitrox is available on request for all guests"))
 
 
 if __name__ == "__main__":
