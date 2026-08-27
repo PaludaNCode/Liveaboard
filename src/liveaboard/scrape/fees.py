@@ -73,6 +73,20 @@ where the entry list stops. A live run without this bound swallowed the vessel
 specifications, a global destination menu and raw CSS.
 """
 
+MAX_LABEL_WORDS = 6
+"""Most words a fee label ever has.
+
+The length cap alone was not enough: a published dataset still carried an
+airport transfer charged from "Pay by bank transfer or online with…", nitrox
+from "Diving Nitrox available Free Nitrox Shaded…", VAT from "Show prices
+Drawings & Vessel Layouts Cabin…" and a fuel surcharge from "meters Top speed
+11 Knots Cruising speed…".
+
+Each of those is a sentence or a specification row. Real entries are short noun
+phrases — "Environment Tax", "Rental Gear", "Laundry / Pressing Services" — and
+none reaches seven words, while every fabrication above exceeds it.
+"""
+
 # Ordered longest-first so "Nitrox Course" never resolves as "Nitrox", and
 # anchored on word boundaries throughout.
 #
@@ -158,7 +172,11 @@ def classify_label(label: str) -> FeeCode | None:
     Returns ``None`` freely. An unrecognised extra costs a line of data; a
     misrecognised one puts an invented charge on the page.
     """
-    if len(label) > MAX_LABEL_CHARS or NOT_A_LABEL.search(label):
+    if (
+        len(label) > MAX_LABEL_CHARS
+        or len(label.split()) > MAX_LABEL_WORDS
+        or NOT_A_LABEL.search(label)
+    ):
         return None
     for pattern, code in COMPILED_LABELS:
         if pattern.search(label):
