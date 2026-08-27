@@ -38,6 +38,13 @@ PAGING_KEYS = ("page", "offset", "start", "limit", "per_page", "size", "cursor")
 
 PRICE_KEY = re.compile(r"price|cost|amount|fare|rate", re.I)
 
+BOAT_SLUG = re.compile(r'href="(?:https?://[^"/]+)?(/diving/egypt/[a-z0-9\-]+)"', re.I)
+
+
+def _boat_slugs(html: str) -> set[str]:
+    """Egypt boat paths in a page, used to tell one result page from another."""
+    return {m.group(1).lower() for m in BOAT_SLUG.finditer(html)}
+
 
 def shape(value: Any, depth: int = 0) -> str:
     """Summarise a JSON value's structure rather than dumping its content."""
@@ -156,12 +163,54 @@ def probe_one(browser: Any, url: str) -> None:
     html = page.content()
     print(f"  rendered size: {len(html) / 1024:.0f} KB")
 
-    # Does anything on the page look like a paginator?
-    paging = page.eval_on_selector_all(
-        "a[href*='page'], [class*='pagin'] a, [class*='Pagin'] a",
-        "els => els.map(e => e.getAttribute('href')).filter(Boolean).slice(0, 12)",
+    # Paging is the immediate blocker, so look for it several ways rather than
+    # trusting one selector: an anchor, a button, a rel=next hint, or the word
+    # "page" anywhere in the rendered markup.
+    print("\n  -- pagination --")
+
+    anchors = page.eval_on_selector_all(
+        "a[href*='page'], a[href*='Page'], [class*='pagin'] a, [class*='Pagin'] a, "
+        "nav a, [aria-label*='age'] , link[rel='next'], a[rel='next']",
+        """els => els.map(e => ({
+             tag: e.tagName,
+             href: e.getAttribute('href'),
+             rel: e.getAttribute('rel'),
+             label: (e.getAttribute('aria-label') || e.textContent || '').trim().slice(0, 30)
+           })).filter(x => x.href || x.label).slice(0, 25)""",
     )
-    print(f"  pagination links: {paging if paging else 'none found in DOM'}")
+    for item in anchors:
+        print(f"    {item['tag']:6} {str(item['href'])[:70]:72} {item['label']}")
+    if not anchors:
+        print("    no paginator anchors matched")
+
+    buttons = page.eval_on_selector_all(
+        "button, [role='button']",
+        """els => els.map(e => (e.textContent || '').trim())
+             .filter(t => /next|more|page|\\d+$/i.test(t) && t.length < 24).slice(0, 15)""",
+    )
+    if buttons:
+        print(f"    button labels: {buttons}")
+
+    for pattern in (r"[?&]page=\d+", r"[?&]p=\d+", r"/page/\d+", r'"totalPages"\s*:\s*\d+',
+                    r'"pageCount"\s*:\s*\d+', r"showing\s+\d+\s*[-–]\s*\d+\s+of\s+\d+"):
+        hits = re.findall(pattern, html, re.I)
+        if hits:
+            unique = sorted(set(hits))[:8]
+            print(f"    markup matches {pattern}: {unique}")
+
+    # Does ?page=2 actually return different boats, or silently repeat page 1?
+    first_ids = _boat_slugs(html)
+    print(f"    boat links on this page: {len(first_ids)}")
+    try:
+        page.goto(f"{url}?page=2", wait_until="domcontentloaded", timeout=45000)
+        second = _boat_slugs(page.content())
+        overlap = len(first_ids & second)
+        print(
+            f"    ?page=2 -> {len(second)} boat links, {overlap} shared with page 1"
+            + ("  (SAME PAGE — paging is not ?page=)" if second and overlap == len(second) else "")
+        )
+    except Exception as exc:  # noqa: BLE001 - the probe must not die on one navigation
+        print(f"    ?page=2 navigation failed: {exc}")
 
     if not calls:
         print("  no XHR/fetch calls — the listing is server-rendered, parse the HTML")
