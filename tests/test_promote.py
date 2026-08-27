@@ -268,7 +268,11 @@ class TestPortsFromTitle(unittest.TestCase):
             "(Port Ghalib - Safaga/Soma Bay)"
         )
         self.assertEqual(itinerary["port_from"], "Port Ghalib")
-        self.assertEqual(itinerary["port_to"], "Safaga/Soma Bay")
+        # Folded onto Safaga: Soma Bay is a resort bay ten kilometres up the
+        # coast and the operator names both because it takes whichever berth
+        # it is given. Still two different ports, which is the point here.
+        self.assertEqual(itinerary["port_to"], "Safaga")
+        self.assertNotEqual(itinerary["port_from"], itinerary["port_to"])
 
     def test_the_title_beats_the_country_the_source_reports(self):
         itinerary = self.promote_one("North (Hurghada - Hurghada)")
@@ -441,6 +445,36 @@ class TestGuestCount(unittest.TestCase):
         )
         self.assertEqual(payload["boats"][0]["guests"], 20)
         self.assertNotIn("guests", payload["itineraries"][0])
+
+
+class TestPortNames(unittest.TestCase):
+    """One harbour under several spellings made ten chips out of six ports."""
+
+    def port(self, name):
+        from liveaboard.promote import _port
+
+        return _port(name)
+
+    def test_the_ghalib_marina_is_one_place(self):
+        for spelling in ("Port Ghalib", "Marsa Ghalib", "Ras Galep | Port Ghalib"):
+            self.assertEqual(self.port(spelling), "Port Ghalib", spelling)
+
+    def test_a_hotel_pickup_is_not_a_port(self):
+        self.assertEqual(self.port("Hurghada, Marriott"), "Hurghada")
+
+    def test_marsa_alam_is_not_port_ghalib(self):
+        """Sixty kilometres apart, however similar the names look."""
+        self.assertEqual(self.port("Marsa Alam"), "Marsa Alam")
+
+    def test_an_unknown_port_keeps_its_own_name(self):
+        self.assertEqual(self.port("Berenice"), "Berenice")
+
+    def test_whitespace_does_not_defeat_the_match(self):
+        self.assertEqual(self.port("  Marsa   Ghalib "), "Port Ghalib")
+
+    def test_a_missing_port_is_unknown_not_blank(self):
+        self.assertEqual(self.port(None), "Unknown")
+        self.assertEqual(self.port(""), "Unknown")
 
 
 if __name__ == "__main__":
