@@ -64,6 +64,8 @@ class FeeCode(str, Enum):
     VISA = "visa"
     TAX_VAT = "tax_vat"
     ENVIRONMENT_TAX = "environment_tax"
+    SERVICE_CHARGE = "service_charge"
+    COMBINED_FEES = "combined_fees"
 
     NITROX = "nitrox"
     GEAR_RENTAL = "gear_rental"
@@ -79,6 +81,11 @@ class FeeCode(str, Enum):
     TANK_15L = "tank_15l"
     ALCOHOL = "alcohol"
     LAUNDRY = "laundry"
+    SNORKEL_GEAR = "snorkel_gear"
+    EXTRA_DIVES = "extra_dives"
+    LAND_EXCURSION = "land_excursion"
+    NATURALIST_GUIDE = "naturalist_guide"
+    NITROX_COURSE = "nitrox_course"
 
 
 TOGGLEABLE: dict[FeeCode, str] = {
@@ -99,6 +106,8 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.VISA: "Egypt visa on arrival",
     FeeCode.TAX_VAT: "VAT / local tax",
     FeeCode.ENVIRONMENT_TAX: "Environment tax",
+    FeeCode.SERVICE_CHARGE: "Mandatory service charge",
+    FeeCode.COMBINED_FEES: "Park, port & fuel fees (billed together)",
     FeeCode.NITROX: "Nitrox",
     FeeCode.GEAR_RENTAL: "Equipment rental",
     FeeCode.DIVE_INSURANCE: "Dive insurance",
@@ -111,6 +120,11 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.TANK_15L: "15 L tank",
     FeeCode.ALCOHOL: "Alcoholic drinks",
     FeeCode.LAUNDRY: "Laundry & pressing",
+    FeeCode.SNORKEL_GEAR: "Snorkel gear",
+    FeeCode.EXTRA_DIVES: "Extra dives",
+    FeeCode.LAND_EXCURSION: "Land excursions",
+    FeeCode.NATURALIST_GUIDE: "Naturalist / snorkelling guide",
+    FeeCode.NITROX_COURSE: "Nitrox course",
 }
 
 

@@ -40,7 +40,8 @@ class TestRealDisclosure(unittest.TestCase):
         self.byc = by_code(self.fees)
 
     def test_every_extra_is_found(self):
-        self.assertEqual(len(self.fees), 10)
+        """Eleven: the two courses are separate priced lines, not one."""
+        self.assertEqual(len(self.fees), 11)
 
     def test_required_block_becomes_mandatory(self):
         for code in (
@@ -72,7 +73,12 @@ class TestRealDisclosure(unittest.TestCase):
 
     def test_nitrox_course_does_not_resolve_as_nitrox(self):
         self.assertEqual(self.byc[FeeCode.NITROX].low, 30.0)
-        self.assertEqual(self.byc[FeeCode.COURSE].low, 250.0)
+        self.assertEqual(self.byc[FeeCode.NITROX_COURSE].low, 250.0)
+
+    def test_the_two_courses_keep_their_own_prices(self):
+        """One code for both dropped whichever the page listed second."""
+        self.assertEqual(self.byc[FeeCode.NITROX_COURSE].low, 250.0)
+        self.assertEqual(self.byc[FeeCode.COURSE].low, 300.0)
 
     def test_gratuities_are_customary_despite_being_listed_optional(self):
         """The site's split says escapable; it does not say who actually escapes."""
@@ -94,7 +100,7 @@ class TestFeeDicts(unittest.TestCase):
         self.byc = {item.code: item for item in self.items}
 
     def test_dicts_load_as_fee_items(self):
-        self.assertEqual(len(self.items), 10)
+        self.assertEqual(len(self.items), 11)
 
     def test_range_survives_the_round_trip(self):
         park = self.byc[FeeCode.MARINE_PARK]
@@ -344,6 +350,162 @@ class TestDisclosureExcerpt(unittest.TestCase):
 
     def test_a_page_with_no_disclosure_yields_nothing(self):
         self.assertEqual(extras_excerpt("Boat Specifications Year built 2023"), {})
+
+
+# Verbatim from the stored disclosure of amelie, whose Optional block runs 273
+# characters of real list inside 1500 characters of page.
+AMELIE = (
+    "Optional Extras: Gratuities, Alcoholic Beverages, Extra Dives "
+    "(\u20ac50 / activity), Nitrox Course (\u20ac132), Private Dive Guide (\u20ac55), "
+    "Rental Gear, Scuba Diving Courses (\u20ac210-370), Land Excursions "
+    "(\u20ac35 / trip), Naturalist Guide (\u20ac50 / day), Snorkel Gear."
+    " Book now, pay later: You can easily place your booking online."
+    " Best Price Guaranteed, You're getting the lowest rate."
+    " Boat features, Free Internet, Jacuzzi / Hot Tub, Naturalist Guide,"
+    " Beer available, Wine Available, Bar, Nitrox, Library."
+)
+
+
+class TestListEndsAtTheFullStop(unittest.TestCase):
+    """The operator closes the list with a period; the page continues after it."""
+
+    def setUp(self):
+        self.fees = parse_extras(AMELIE)
+        self.byc = by_code(self.fees)
+
+    def test_every_extra_before_the_stop_is_captured(self):
+        for code in (
+            FeeCode.GRATUITIES, FeeCode.ALCOHOL, FeeCode.EXTRA_DIVES,
+            FeeCode.NITROX_COURSE, FeeCode.PRIVATE_GUIDE, FeeCode.GEAR_RENTAL,
+            FeeCode.COURSE, FeeCode.LAND_EXCURSION, FeeCode.NATURALIST_GUIDE,
+            FeeCode.SNORKEL_GEAR,
+        ):
+            self.assertIn(code, self.byc, code)
+
+    def test_nothing_after_the_stop_becomes_a_fee(self):
+        """"Bar", "Beer available" and "Nitrox" are amenities down there."""
+        self.assertNotIn(FeeCode.NITROX, self.byc)
+        self.assertNotIn(FeeCode.LAUNDRY, self.byc)
+
+    def test_the_stop_holds_on_an_extra_we_do_not_model(self):
+        """Breaking only on recognised entries let the whole page through."""
+        fees = parse_extras(
+            "Optional Extras: Gratuities, Yoga Sessions."
+            " Boat features, Nitrox, Bar, Free Internet, Laundry."
+        )
+        self.assertEqual([f.code for f in fees], [FeeCode.GRATUITIES])
+
+    def test_a_block_that_never_closes_still_stops(self):
+        """The label bounds remain the second line of defence."""
+        fees = parse_extras(
+            "Optional Extras: Gratuities, "
+            + "Pay by bank transfer or online with Best Price Guaranteed, " * 5
+        )
+        self.assertEqual([f.code for f in fees], [FeeCode.GRATUITIES])
+
+
+class TestExtrasWeUsedToDrop(unittest.TestCase):
+    """Six real entries the taxonomy had no code for, several of them priced."""
+
+    def test_alcohol_is_charged_on_every_vessel_seen(self):
+        self.assertEqual(classify_label("Alcoholic Beverages"), FeeCode.ALCOHOL)
+
+    def test_snorkel_gear_is_not_folded_into_rental_gear(self):
+        """One entry per code: folding them dropped whichever came second."""
+        fees = by_code(parse_extras(
+            "Optional Extras: Rental Gear, Snorkel Gear (\u20ac50)."
+        ))
+        self.assertIn(FeeCode.GEAR_RENTAL, fees)
+        self.assertEqual(fees[FeeCode.SNORKEL_GEAR].low, 50.0)
+
+    def test_the_rest_classify(self):
+        for text, code in (
+            ("Extra Dives", FeeCode.EXTRA_DIVES),
+            ("Land Excursions", FeeCode.LAND_EXCURSION),
+            ("Naturalist Guide", FeeCode.NATURALIST_GUIDE),
+            ("Snorkeling Guide", FeeCode.NATURALIST_GUIDE),
+        ):
+            self.assertEqual(classify_label(text), code, text)
+
+    def test_an_amenity_is_not_an_alcohol_charge(self):
+        """The feature list carries "Beer available" and "Wine Available"."""
+        self.assertIsNone(classify_label("Beer available"))
+        self.assertIsNone(classify_label("Wine Available"))
+
+    def test_a_naturalist_guide_is_not_a_private_dive_guide(self):
+        self.assertEqual(classify_label("Naturalist Guide"), FeeCode.NATURALIST_GUIDE)
+        self.assertEqual(classify_label("Private Dive Guide"), FeeCode.PRIVATE_GUIDE)
+
+    def test_the_new_codes_are_optional_so_no_default_total_moves(self):
+        """None is base, mandatory or customary, so DEFAULT_ON_TIERS is untouched."""
+        for fee in parse_extras(AMELIE):
+            if fee.code in (
+                FeeCode.SNORKEL_GEAR, FeeCode.EXTRA_DIVES,
+                FeeCode.LAND_EXCURSION, FeeCode.NATURALIST_GUIDE,
+                FeeCode.ALCOHOL, FeeCode.NITROX_COURSE,
+            ):
+                self.assertEqual(fee.tier, FeeTier.OPTIONAL, fee.code)
+
+
+class TestMandatoryFeesNoOneNamed(unittest.TestCase):
+    """Required-block charges the parser had no code for, so it dropped them.
+
+    Understating a bill is the same failure as inventing one, told the other
+    way round -- and it also flatters the honesty score, because a fee that
+    never reaches the breakdown cannot count against the operator.
+    """
+
+    AVO = (
+        "Required Extras: Mandatory Service Charge (\u20ac80), "
+        "Park, Port and Fuel Fees (\u20ac200-450 / trip)."
+    )
+
+    def test_a_whole_required_block_is_no_longer_lost(self):
+        """This vessel published two mandatory charges and we showed neither."""
+        fees = parse_extras(self.AVO)
+        self.assertEqual(len(fees), 2)
+        self.assertTrue(all(f.tier is FeeTier.MANDATORY for f in fees))
+
+    def test_the_service_charge_is_captured(self):
+        byc = by_code(parse_extras(self.AVO))
+        self.assertEqual(byc[FeeCode.SERVICE_CHARGE].low, 80.0)
+
+    def test_a_combined_charge_keeps_its_whole_amount(self):
+        """Splitting it across three codes would invent three prices."""
+        byc = by_code(parse_extras(self.AVO))
+        combined = byc[FeeCode.COMBINED_FEES]
+        self.assertEqual((combined.low, combined.high), (200.0, 450.0))
+        self.assertTrue(combined.is_range)
+
+    def test_two_components_make_a_combined_charge(self):
+        for label in ("Park, Port and Fuel Fees", "Park and Port Fees",
+                      "Port and Fuel Fees"):
+            self.assertEqual(classify_label(label), FeeCode.COMBINED_FEES, label)
+
+    def test_one_component_stays_its_own_fee(self):
+        """The combined check must not swallow the ordinary single lines."""
+        for label, code in (
+            ("National Park Fees", FeeCode.MARINE_PARK),
+            ("Port Fees", FeeCode.PORT_FEES),
+            ("Fuel Surcharge", FeeCode.FUEL_SURCHARGE),
+            ("Environment Tax", FeeCode.ENVIRONMENT_TAX),
+            ("Harbour Dues", FeeCode.PORT_FEES),
+        ):
+            self.assertEqual(classify_label(label), code, label)
+
+    def test_a_bare_component_with_no_fee_word_is_not_a_charge(self):
+        """"Park" alone is the comma-split remains of the label above it."""
+        self.assertIsNone(classify_label("Park"))
+
+    def test_separately_billed_fees_are_still_separate(self):
+        fees = by_code(parse_extras(
+            "Required Extras: Mandatory Service Charge (\u20ac10 / day), "
+            "National Park Fees (\u20ac10 / day), Port Fees (\u20ac5 / trip)."
+        ))
+        self.assertEqual(
+            set(fees),
+            {FeeCode.SERVICE_CHARGE, FeeCode.MARINE_PARK, FeeCode.PORT_FEES},
+        )
 
 
 if __name__ == "__main__":
