@@ -35,6 +35,7 @@ from liveaboard.scrape.fees import (  # noqa: E402
     parse_extras,
     to_fee_dicts,
 )
+from liveaboard.scrape.gear import parse_gear, to_fee_dict as gear_fee_dict  # noqa: E402
 from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     HOST,
     SEASON_QUERY,
@@ -106,6 +107,22 @@ def read_extras(page: Any, url: str) -> tuple[str, bool]:
     return text, clicked > 0
 
 
+def read_gear(page: Any) -> str:
+    """The gear dialog's markup, or empty when the vessel has none.
+
+    Read from the same page load rather than a second visit: the dialog is in
+    the document already, hidden, so this costs no request. A vessel that does
+    not rent gear simply has no such node, which is not a failure.
+    """
+    node = page.query_selector("#modal-gear")
+    if node is None:
+        return ""
+    try:
+        return node.inner_html() or ""
+    except Exception:  # noqa: BLE001 - a detached node is not a failure
+        return ""
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", default=Path("data/fees.json"), type=Path)
@@ -146,32 +163,53 @@ def main() -> int:
                 continue
 
             fees = parse_extras(text)
-            if not fees:
+            provenance = {
+                "kind": "scraped",
+                "source_id": "liveaboard.com",
+                "retrieved": date.today().isoformat(),
+                "url": url,
+            }
+
+            # The extras list names "Rental Gear" and leaves it blank; the
+            # figures are in the dialog behind it. Read before the no-fees
+            # check so a vessel that publishes gear prices and nothing else
+            # is not filed as having disclosed nothing.
+            gear = parse_gear(read_gear(page))
+            gear_fee = gear_fee_dict(gear, provenance)
+
+            if not fees and gear_fee is None:
                 print(f"  [{index}/{len(slugs)}] {slug}: no extras found", flush=True)
                 missing.append(slug)
             else:
                 required = sum(1 for f in fees if f.tier.value == "mandatory")
                 ranges = sum(1 for f in fees if f.is_range)
                 unpriced = sum(1 for f in fees if not f.has_price)
+
+                # The dialog's gear line replaces the extras list's blank one:
+                # same code, and one of them carries a figure.
+                priced = to_fee_dicts(fees, provenance)
+                if gear_fee is not None:
+                    priced = [f for f in priced if f["code"] != gear_fee["code"]]
+                    priced.append(gear_fee)
+
                 collected[slug] = {
                     "source_url": url,
                     # What the parse was made from. Without it a parser fix
                     # cannot be checked without driving a browser at the live
                     # site all over again.
                     "disclosure": extras_excerpt(text),
-                    "fees": to_fee_dicts(
-                        fees,
-                        {
-                            "kind": "scraped",
-                            "source_id": "liveaboard.com",
-                            "retrieved": date.today().isoformat(),
-                            "url": url,
-                        },
-                    ),
+                    "gear": [i.as_text() for i in gear.items] or None,
+                    "fees": priced,
                 }
+                gear_note = (
+                    f", gear {gear.bundle.as_text()}" if gear.bundle
+                    else f", {len(gear.items)} gear items unbundled" if gear.items
+                    else ""
+                )
                 print(
                     f"  [{index}/{len(slugs)}] {slug}: {len(fees)} extras "
                     f"({required} required, {ranges} ranged, {unpriced} unpriced)"
+                    + gear_note
                     + (" [expanded]" if expanded else ""),
                     flush=True,
                 )

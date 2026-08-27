@@ -230,12 +230,25 @@ def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
 
 
 def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:
-    """Whether this fee lands in the total under the given toggles."""
-    if fee.tier is FeeTier.OPTIONAL:
-        return False
+    """Whether this fee lands in the total under the given toggles.
+
+    A toggle is asked first, and the tier only decides fees that have none.
+    The order used to be the other way round, which made both switches on the
+    page inert: nitrox and gear are filed under the site's *Optional* Extras,
+    the optional tier returned False before the toggle was read, and turning
+    "Rental gear" on added nothing to any total. A switch that changes no
+    number is worse than no switch -- it answers the visitor's question with a
+    number that ignored them.
+
+    Untoggled optional extras -- alcohol, courses, laundry -- still stay out.
+    They are in the breakdown to be seen, not to be added to a comparison
+    nobody asked for.
+    """
     toggle = fee.toggle
     if toggle is not None:
         return bool(toggles.get(toggle, DEFAULT_TOGGLES.get(toggle, False)))
+    if fee.tier is FeeTier.OPTIONAL:
+        return False
     return fee.tier in DEFAULT_ON_TIERS
 
 

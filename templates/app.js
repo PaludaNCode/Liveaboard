@@ -31,10 +31,16 @@
   /* ---------- pricing ---------- */
 
   /* Whether a line counts at all, independent of what it costs. A line with no
-     stated price still counts — it just cannot be added up. */
+     stated price still counts — it just cannot be added up.
+
+     The toggle is asked before the tier. Nitrox and gear are filed under the
+     site's Optional Extras, so testing the tier first returned false before
+     the toggle was ever read and both switches on the page added nothing to
+     any total. Mirrors pricing._is_counted — keep the two in step. */
   function lineCounts(line) {
-    if (line.included || line.tier === "optional") return false;
+    if (line.included) return false;
     if (line.toggle) return !!state.toggles[line.toggle];
+    if (line.tier === "optional") return false;
     return !!DEFAULT_ON_TIERS[line.tier];
   }
 
