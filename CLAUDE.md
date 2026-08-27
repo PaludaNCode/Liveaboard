@@ -6,17 +6,11 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 359 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 342 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
 ```
-
-`tests/test_page.py` drives the built page in Chromium and **skips itself when
-Playwright is absent**, so the suite above stays stdlib-only. CI installs the
-browser and runs it by name, because a permanently skipped test looks exactly
-like a passing one. To run it locally: `pip install playwright && playwright
-install chromium`.
 
 Re-promoting is offline and takes seconds — do it after any change to
 `src/liveaboard/`, rather than waiting for a crawl. **CI enforces this**
