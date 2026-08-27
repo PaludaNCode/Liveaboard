@@ -253,6 +253,14 @@ class Itinerary:
     fees: list[FeeItem] = field(default_factory=list)
     source_url: str | None = None
     summary: str | None = None
+    title: str | None = None
+    """The name as the page prints it: the same words, minus the port pair.
+
+    ``name`` stays whole because it is the trip's identity -- the itinerary id
+    is built from it, and two sailings differing only by port are two trips.
+    This is the presentation of it, resolved in Python beside the port aliases
+    that decide what counts as a port at all.
+    """
     region: str | None = None
     """What a title says about where it goes when it names no dive site.
 
@@ -288,6 +296,7 @@ class Itinerary:
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             source_url=payload.get("source_url"),
             summary=payload.get("summary"),
+            title=payload.get("title"),
             region=payload.get("region"),
             dives_estimated=bool(payload.get("dives_estimated", False)),
         )

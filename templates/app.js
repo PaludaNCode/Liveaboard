@@ -91,20 +91,13 @@
 
   /* ---------- derived facets ---------- */
 
-  /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)".
-     With From and To as their own columns that is the same fact printed twice,
-     and it is the longest part of the longest column.
-
-     Stripped only when the brackets hold exactly the ports parsed out of them.
-     Some titles carry a route in brackets instead — "(Brothers - Daedalus)" —
-     and cutting that would delete the trip's actual content. The name keeps
-     its ports in the dataset regardless: two trips differing only by port are
-     different trips, and the itinerary id is built from the name. */
+  /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)" —
+     which From and To already say. Python cuts the suffix, next to the alias
+     table that decides what is a port; this used to compare the bracket text
+     against port_from here, which only worked while the two were spelled the
+     same and broke as soon as an alias folded them apart. */
   function tripName(itin) {
-    var m = itin.name.match(/^(.*?)\s*\(([^()]+?)\s+[-–]\s+([^()]+?)\)\s*$/);
-    if (!m) return itin.name;
-    if (m[2].trim() !== itin.port_from || m[3].trim() !== itin.port_to) return itin.name;
-    return m[1].trim() || itin.name;
+    return itin.title || itin.name;
   }
 
   function tally(pick) {

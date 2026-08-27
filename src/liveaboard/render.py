@@ -60,6 +60,9 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         itineraries[key] = {
             "id": key,
             "name": itinerary.name,
+            # What the trip-name column prints. Falls back to the full name so
+            # a dataset promoted before this field existed still renders.
+            "title": itinerary.title or itinerary.name,
             "boat_id": boat.id,
             "boat": boat.name,
             "operator": operator.name,

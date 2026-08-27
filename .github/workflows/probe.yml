@@ -9,6 +9,15 @@ name: Probe the crawl
 
 on:
   workflow_dispatch:
+    inputs:
+      gear_vessels:
+        description: "Vessel slugs to open the gear modal on"
+        type: string
+        default: "aphrodite,blue-seas,emperor-asmaa"
+      dump_html:
+        description: "Print the modal's markup, not just its text"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -27,3 +36,25 @@ jobs:
 
       - name: Probe for dive counts
         run: python3 tools/probe_dives.py --limit 8
+
+  # Separate job: the gear modal is built client-side, so this one needs a
+  # browser and the plain-HTTP probes above do not.
+  gear:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Playwright
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      - name: Probe the rental-gear modal
+        run: |
+          python3 tools/probe_gear.py \
+            --vessels "${{ inputs.gear_vessels || 'aphrodite,blue-seas,emperor-asmaa' }}" \
+            ${{ inputs.dump_html && '--dump-html' || '' }}

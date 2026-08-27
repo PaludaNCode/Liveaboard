@@ -153,6 +153,30 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     return name.strip(), promotion, ports
 
 
+def _display_title(name: str) -> str:
+    """The trip name with its port pair removed, for the column that shows it.
+
+    Titles end with the ports -- "North & Tiran (Hurghada - Hurghada)" -- and
+    From and To are columns of their own, so printing the brackets is the same
+    fact twice in the widest column on the page.
+
+    Cut here rather than in the browser. The page used to strip the suffix by
+    checking the bracket text against ``port_from``, which held while the two
+    were the same string and would have broken the moment ``PORT_ALIASES``
+    started folding "Ras Galep | Port Ghalib" down to "Port Ghalib": the
+    comparison fails, and seven titles quietly get their ports back. Deciding
+    it beside the alias table, where the raw pair is still in hand, is the
+    difference between a rule and a coincidence.
+
+    Only a real port pair goes. "(Brothers - Daedalus)" is a route, and cutting
+    it would delete what the trip actually is.
+    """
+    stripped, _, ports = _split_title(name)
+    if ports is None:
+        return stripped
+    return PORTS.sub("", stripped).strip(" -,:") or stripped
+
+
 GUESTS = (
     re.compile(r"\bfor\s+(\d{1,3})\s+guests?\b", re.I),
     re.compile(r"\b(\d{1,3})\s+guests?\b", re.I),
@@ -383,6 +407,10 @@ def promote(
             {
                 "id": itinerary_id,
                 "name": name,
+                # The name minus its port suffix. The full name stays: two
+                # trips differing only by port are different trips, and the
+                # itinerary id is built from it.
+                "title": _display_title(name),
                 "operator_id": UNKNOWN_OPERATOR["id"],
                 "boat_id": slug,
                 "nights": nights,

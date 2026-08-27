@@ -647,5 +647,64 @@ class TestRegionWhenNoSiteIsNamed(unittest.TestCase):
         self.assertEqual(payload["itineraries"][0]["region"], "northern route")
 
 
+class TestDisplayTitle(unittest.TestCase):
+    """The name column should not reprint what From and To already say."""
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_the_port_pair_goes(self):
+        self.assertEqual(
+            self.title("Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)"),
+            "Brothers - Daedalus - Elphinstone",
+        )
+
+    def test_it_survives_a_port_being_aliased(self):
+        """The regression this field exists to prevent.
+
+        The browser used to cut the suffix by matching the bracket text against
+        ``port_from``. Fold "Ras Galep | Port Ghalib" down to "Port Ghalib" and
+        that comparison fails, so the ports come back on exactly the titles the
+        alias table was added to tidy.
+        """
+        for name in (
+            "Golden Triangle (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
+            "Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
+        ):
+            self.assertEqual(self.title(name), "Golden Triangle")
+        self.assertEqual(
+            self.title("Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)"),
+            "Tiran & North Ras Mohamed",
+        )
+
+    def test_a_route_in_brackets_stays(self):
+        """Cutting it would delete what the trip actually is."""
+        self.assertEqual(
+            self.title("Sataya (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)"),
+            "Sataya (Fury Shoals) - St. John's",
+        )
+
+    def test_it_tidies_and_drops_the_discount_too(self):
+        self.assertEqual(
+            self.title("20% Off: Get Wrecked (Hurghada\t- Hurghada)"), "Get Wrecked"
+        )
+
+    def test_a_title_that_is_only_ports_keeps_them(self):
+        """Better a redundant name than an empty cell."""
+        self.assertEqual(self.title("(Hurghada - Hurghada)"), "(Hurghada - Hurghada)")
+
+    def test_it_reaches_the_itinerary(self):
+        payload = promote(
+            candidate([departure(name="Brothers & Daedalus (Hurghada - Hurghada)")]),
+            season=SEASON,
+        )
+        itinerary = payload["itineraries"][0]
+        self.assertEqual(itinerary["title"], "Brothers & Daedalus")
+        # The full name is the trip's identity and stays whole.
+        self.assertIn("Hurghada", itinerary["name"])
+
+
 if __name__ == "__main__":
     unittest.main()
