@@ -154,7 +154,16 @@
     { k: "from", t: "From", v: function (d, i) { return i.port_from; } },
     { k: "to", t: "To", v: function (d, i) { return i.port_to; } },
     { k: "sites", t: "Dive sites", cls: "sites",
-      v: function (d, i) { return (i.dive_sites || []).join(", ") || "—"; } },
+      v: function (d, i) {
+        return (i.dive_sites || []).join(", ") || i.region || "—";
+      },
+      show: function (d, i) {
+        if (i.dive_sites && i.dive_sites.length) return esc(i.dive_sites.join(", "));
+        /* The operator named no reef. Their own word for the region, marked as
+           the weaker statement it is. */
+        if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
+        return '<span class="dim">—</span>';
+      } },
     { k: "base", t: "Advertised", num: true,
       v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
     { k: "total", t: "True cost", num: true,

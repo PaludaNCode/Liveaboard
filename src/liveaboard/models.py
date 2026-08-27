@@ -253,6 +253,13 @@ class Itinerary:
     fees: list[FeeItem] = field(default_factory=list)
     source_url: str | None = None
     summary: str | None = None
+    region: str | None = None
+    """What a title says about where it goes when it names no dive site.
+
+    Transcribed from the operator's own word, never inferred: "North" means the
+    title said north. Absent whenever real sites were found, because a list of
+    reefs is strictly better than a direction.
+    """
     dives_estimated: bool = False
     """Whether ``dives`` was counted from the listing or worked out from nights.
 
@@ -281,6 +288,7 @@ class Itinerary:
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             source_url=payload.get("source_url"),
             summary=payload.get("summary"),
+            region=payload.get("region"),
             dives_estimated=bool(payload.get("dives_estimated", False)),
         )
 

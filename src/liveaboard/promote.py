@@ -96,8 +96,39 @@ def _port(name: str | None) -> str:
     return PORT_ALIASES.get(cleaned.lower(), cleaned)
 
 
+TIDY = (
+    # Tabs and runs of spaces. Four titles carry a tab, which renders as a
+    # ragged gap mid-name and breaks the column's alignment.
+    (re.compile(r"\s+"), " "),
+    # A space wedged before the closing bracket: "(Safaga - Safaga )".
+    (re.compile(r"\s+\)"), ")"),
+    (re.compile(r"\(\s+"), "("),
+    # One dash. Three titles use an en dash where 314 use a hyphen, so the
+    # same route reads as two different names down the column.
+    (re.compile(r"\s*[–—]\s*"), " - "),
+    # Spacing around the separators operators are inconsistent about.
+    (re.compile(r"\s*&\s*"), " & "),
+    (re.compile(r"\s*,\s*"), ", "),
+    (re.compile(r"\s*:\s*"), ": "),
+)
+"""Whitespace and punctuation fixes, applied before anything reads the title.
+
+Purely presentational: none of these change a word. They exist because the
+titles arrive from dozens of operators typing freely, and a column of trip
+names only reads as a column when the separators are the same shape.
+"""
+
+
+def _tidy(name: str) -> str:
+    """Even out an operator's spacing without touching their wording."""
+    for pattern, replacement in TIDY:
+        name = pattern.sub(replacement, name)
+    return name.strip(" -,:")
+
+
 def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     """Split a scraped trip title into route, promotion and ports."""
+    name = _tidy(name)
     promotion = None
     match = PROMOTION.match(name)
     if match:
@@ -365,6 +396,10 @@ def promote(
                 # sites, which this source does not publish; the classifier
                 # falls back to the trip name, which usually carries them.
                 "dive_sites": _sites_from_name(name),
+                # Only when the title names no reef at all, so the column says
+                # something true rather than sitting empty on 51 trips.
+                "region": (None if _sites_from_name(name)
+                           else _region_from_name(name)),
                 "summary": source.get("summary"),
                 "source_url": source.get("source_url"),
                 # Empty when the fee run has not covered this vessel. The
@@ -504,6 +539,34 @@ Keys are matched after :func:`~liveaboard.classify.normalise`, so accents and
 apostrophes are already folded; only genuine misspellings and short forms
 belong here.
 """
+
+
+REGIONS = (
+    (re.compile(r"\bdeep south\b|\bsouthern\b|\bsouth\b", re.I), "southern route"),
+    (re.compile(r"\bsinai\b|\btiran\b", re.I), "Sinai and Tiran"),
+    (re.compile(r"\bnorthern\b|\bnorth\b", re.I), "northern route"),
+    (re.compile(r"\bwreck\w*\b", re.I), "wreck route"),
+)
+"""What a title says about where it goes when it names no reef.
+
+Fifty-one trips are sold as "North", "Deep South" or "Get Wrecked" and never
+name a site. This transcribes the operator's own word rather than classifying
+anything -- a title saying "North" is evidence it goes north, and nothing more
+is claimed.
+
+The vessel description was the tempting alternative and is unusable: it is the
+boat's brochure, listing everywhere it sails all year. Aphrodite's names
+St John's, so its "North Wrecks" week would have been tagged with a site
+six hundred kilometres from where it goes.
+"""
+
+
+def _region_from_name(name: str) -> str | None:
+    """Transcribe the region a site-less title states, or admit it states none."""
+    for pattern, label in REGIONS:
+        if pattern.search(name):
+            return label
+    return None
 
 
 def _sites_from_name(name: str) -> list[str]:

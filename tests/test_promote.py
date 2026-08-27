@@ -577,5 +577,75 @@ class TestAvailability(unittest.TestCase):
         self.assertTrue(rendered["bookable"])
 
 
+class TestTitleTidying(unittest.TestCase):
+    """A column of trip names reads as a column only if the separators match."""
+
+    def tidy(self, name):
+        from liveaboard.promote import _tidy
+
+        return _tidy(name)
+
+    def test_a_tab_mid_title_becomes_a_space(self):
+        self.assertEqual(
+            self.tidy("Get Wrecked (Hurghada\t- Hurghada)"),
+            "Get Wrecked (Hurghada - Hurghada)",
+        )
+
+    def test_a_space_before_the_bracket_goes(self):
+        self.assertEqual(
+            self.tidy("Golden Triangle (Safaga - Safaga )"),
+            "Golden Triangle (Safaga - Safaga)",
+        )
+
+    def test_one_dash_not_three(self):
+        self.assertEqual(self.tidy("Big fish – Hammerheads"), "Big fish - Hammerheads")
+
+    def test_wording_is_never_touched(self):
+        """Presentation only. Changing an operator's words is not formatting."""
+        for name in ("Simply The Best", "Elba Reef Expedition!", "Tec only Safari Trip"):
+            self.assertEqual(self.tidy(name), name)
+
+
+class TestRegionWhenNoSiteIsNamed(unittest.TestCase):
+    """Fifty-one trips name a direction and no reef."""
+
+    def region(self, name):
+        from liveaboard.promote import _region_from_name
+
+        return _region_from_name(name)
+
+    def test_it_transcribes_the_operators_own_word(self):
+        self.assertEqual(self.region("North (Hurghada - Hurghada)"), "northern route")
+        self.assertEqual(self.region("Deep South (Hamata - Hamata)"), "southern route")
+        self.assertEqual(self.region("Get Wrecked"), "wreck route")
+
+    def test_a_title_naming_nothing_gets_nothing(self):
+        self.assertIsNone(self.region("Yachtiano Deluxe"))
+        self.assertIsNone(self.region("Famous Five"))
+
+    def test_it_is_absent_whenever_real_sites_were_found(self):
+        """A list of reefs beats a direction, so the direction is not carried."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        itinerary = payload["itineraries"][0]
+        self.assertTrue(itinerary["dive_sites"])
+        self.assertIsNone(itinerary["region"])
+
+    def test_the_vessel_summary_is_never_used_for_sites(self):
+        """It is the boat's brochure: Aphrodite's names St John's, so its
+        northern week would have been tagged with a southern site."""
+        payload = promote(
+            candidate(
+                [departure(name="North Wrecks (Hurghada - Hurghada)")],
+                itineraries=[{
+                    "id": "alia-soul", "boat": "Alia Soul",
+                    "summary": "Sails to Brothers, Daedalus and St John's.",
+                }],
+            ),
+            season=SEASON,
+        )
+        self.assertEqual(payload["itineraries"][0]["dive_sites"], [])
+        self.assertEqual(payload["itineraries"][0]["region"], "northern route")
+
+
 if __name__ == "__main__":
     unittest.main()
