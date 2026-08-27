@@ -1,0 +1,269 @@
+"""The domain objects.
+
+The shape here is deliberately two-level: an :class:`Itinerary` is the product
+an operator sells over and over, a :class:`Departure` is one sailing of it with
+its own date and price. Fees hang off whichever level actually owns them —
+marine park fees belong to the route, a fuel surcharge to the sailing — so the
+true-cost engine can resolve them without the dataset repeating itself.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from datetime import date
+from typing import Any
+
+from .money import Money
+from .taxonomy import (
+    FEE_LABELS,
+    TOGGLEABLE,
+    DiverLevel,
+    FeeBasis,
+    FeeCode,
+    FeeTier,
+    Route,
+    SourceKind,
+    Theme,
+)
+
+
+@dataclass(frozen=True, slots=True)
+class Provenance:
+    """Where a value came from, and when.
+
+    Carried on every price and every fee. A transparency site that cannot say
+    where its own numbers came from has no standing to complain about opacity
+    in anyone else's.
+    """
+
+    kind: SourceKind
+    source_id: str
+    retrieved: date | None = None
+    url: str | None = None
+    note: str | None = None
+
+    @property
+    def is_verified(self) -> bool:
+        return self.kind is not SourceKind.SEED_ESTIMATE
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any]) -> Provenance:
+        retrieved = payload.get("retrieved")
+        return cls(
+            kind=SourceKind(payload["kind"]),
+            source_id=payload["source_id"],
+            retrieved=date.fromisoformat(retrieved) if retrieved else None,
+            url=payload.get("url"),
+            note=payload.get("note"),
+        )
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "kind": self.kind.value,
+            "source_id": self.source_id,
+            "retrieved": self.retrieved.isoformat() if self.retrieved else None,
+            "url": self.url,
+            "note": self.note,
+            "verified": self.is_verified,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class FeeItem:
+    """One line of the true cost.
+
+    ``included`` is the crux: the same fee is bundled by one operator and billed
+    at the dock by another, and that difference is the whole story this site is
+    trying to tell. An included fee still appears in the breakdown, at zero
+    additional cost, so a generous operator gets visible credit for it.
+    """
+
+    code: FeeCode
+    tier: FeeTier
+    amount: Money
+    basis: FeeBasis = FeeBasis.PER_TRIP
+    included: bool = False
+    provenance: Provenance | None = None
+    note: str | None = None
+
+    @property
+    def label(self) -> str:
+        return FEE_LABELS.get(self.code, self.code.value.replace("_", " ").title())
+
+    @property
+    def toggle(self) -> str | None:
+        """The site toggle that governs this fee, if any."""
+        return TOGGLEABLE.get(self.code)
+
+    def for_trip(self, nights: int, dives: int) -> Money:
+        """Normalise the quoted basis to a single per-person trip total."""
+        if self.basis is FeeBasis.PER_TRIP:
+            return self.amount
+        if self.basis is FeeBasis.PER_NIGHT:
+            return self.amount * nights
+        if self.basis in (FeeBasis.PER_DAY, FeeBasis.PER_PERSON_PER_DAY):
+            return self.amount * (nights + 1)
+        if self.basis is FeeBasis.PER_DIVE:
+            return self.amount * dives
+        raise ValueError(f"unhandled fee basis {self.basis}")
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any], default_currency: str) -> FeeItem:
+        prov = payload.get("provenance")
+        return cls(
+            code=FeeCode(payload["code"]),
+            tier=FeeTier(payload["tier"]),
+            amount=Money.parse(payload["amount"], default_currency),
+            basis=FeeBasis(payload.get("basis", FeeBasis.PER_TRIP.value)),
+            included=bool(payload.get("included", False)),
+            provenance=Provenance.from_dict(prov) if prov else None,
+            note=payload.get("note"),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class Operator:
+    id: str
+    name: str
+    website: str | None = None
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any]) -> Operator:
+        return cls(id=payload["id"], name=payload["name"], website=payload.get("website"))
+
+
+@dataclass(frozen=True, slots=True)
+class Boat:
+    """A vessel.
+
+    Kept deliberately thin. Boats are a grouping axis for the by-boat view, not
+    a subject in their own right: no cabin scoring, no luxury tiers.
+    """
+
+    id: str
+    name: str
+    operator_id: str
+    cabins: int | None = None
+    guests: int | None = None
+    length_m: float | None = None
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any]) -> Boat:
+        return cls(
+            id=payload["id"],
+            name=payload["name"],
+            operator_id=payload["operator_id"],
+            cabins=payload.get("cabins"),
+            guests=payload.get("guests"),
+            length_m=payload.get("length_m"),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class Requirements:
+    """The entry bar, as a filter rather than a paragraph of prose."""
+
+    min_level: DiverLevel = DiverLevel.OPEN_WATER
+    min_logged_dives: int = 0
+    max_depth_m: int | None = None
+    nitrox_recommended: bool = False
+    strong_current: bool = False
+    notes: str | None = None
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any] | None) -> Requirements:
+        if not payload:
+            return cls()
+        return cls(
+            min_level=DiverLevel(payload.get("min_level", DiverLevel.OPEN_WATER.value)),
+            min_logged_dives=int(payload.get("min_logged_dives", 0)),
+            max_depth_m=payload.get("max_depth_m"),
+            nitrox_recommended=bool(payload.get("nitrox_recommended", False)),
+            strong_current=bool(payload.get("strong_current", False)),
+            notes=payload.get("notes"),
+        )
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "min_level": self.min_level.value,
+            "min_logged_dives": self.min_logged_dives,
+            "max_depth_m": self.max_depth_m,
+            "nitrox_recommended": self.nitrox_recommended,
+            "strong_current": self.strong_current,
+            "notes": self.notes,
+        }
+
+
+@dataclass(slots=True)
+class Itinerary:
+    """A route sold repeatedly through a season."""
+
+    id: str
+    name: str
+    operator_id: str
+    boat_id: str
+    nights: int
+    dives: int
+    port_from: str
+    port_to: str
+    dive_sites: list[str] = field(default_factory=list)
+    route: Route | None = None
+    themes: list[Theme] = field(default_factory=list)
+    requirements: Requirements = field(default_factory=Requirements)
+    fees: list[FeeItem] = field(default_factory=list)
+    source_url: str | None = None
+    summary: str | None = None
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Itinerary:
+        route = payload.get("route")
+        return cls(
+            id=payload["id"],
+            name=payload["name"],
+            operator_id=payload["operator_id"],
+            boat_id=payload["boat_id"],
+            nights=int(payload["nights"]),
+            dives=int(payload.get("dives", 0)),
+            port_from=payload["port_from"],
+            port_to=payload.get("port_to", payload["port_from"]),
+            dive_sites=list(payload.get("dive_sites", [])),
+            route=Route(route) if route else None,
+            themes=[Theme(t) for t in payload.get("themes", [])],
+            requirements=Requirements.from_dict(payload.get("requirements")),
+            fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
+            source_url=payload.get("source_url"),
+            summary=payload.get("summary"),
+        )
+
+
+@dataclass(slots=True)
+class Departure:
+    """One sailing: a date, a price, and any fees specific to that date."""
+
+    id: str
+    itinerary_id: str
+    start: date
+    end: date
+    price: Money
+    price_provenance: Provenance
+    spaces_left: int | None = None
+    fees: list[FeeItem] = field(default_factory=list)
+    booking_url: str | None = None
+
+    @property
+    def month(self) -> int:
+        return self.start.month
+
+    @classmethod
+    def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Departure:
+        return cls(
+            id=payload["id"],
+            itinerary_id=payload["itinerary_id"],
+            start=date.fromisoformat(payload["start"]),
+            end=date.fromisoformat(payload["end"]),
+            price=Money.parse(payload["price"], default_currency),
+            price_provenance=Provenance.from_dict(payload["provenance"]),
+            spaces_left=payload.get("spaces_left"),
+            fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
+            booking_url=payload.get("booking_url"),
+        )

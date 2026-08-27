@@ -1,0 +1,2223 @@
+{
+  "schema_version": 1,
+  "generated": "2026-08-27",
+  "default_currency": "EUR",
+  "season": {
+    "start": "2027-05-01",
+    "end": "2027-08-31"
+  },
+  "notes": "Seed dataset. Prices are researched placeholders, not quotes, and operator and boat names are placeholders. Fee structures reflect published Red Sea operator terms and are the part worth keeping.",
+  "fx": {
+    "display_currency": "EUR",
+    "as_of": "2026-08-27",
+    "source": "seed:placeholder-rate",
+    "rates": {
+      "USD": 0.92,
+      "GBP": 1.17,
+      "EGP": 0.019
+    }
+  },
+  "operators": [
+    {
+      "id": "op-a",
+      "name": "Sample Operator A",
+      "website": null
+    },
+    {
+      "id": "op-b",
+      "name": "Sample Operator B",
+      "website": null
+    },
+    {
+      "id": "op-c",
+      "name": "Sample Operator C",
+      "website": null
+    },
+    {
+      "id": "op-d",
+      "name": "Sample Operator D",
+      "website": null
+    }
+  ],
+  "boats": [
+    {
+      "id": "boat-1",
+      "name": "Sample Vessel I",
+      "operator_id": "op-a",
+      "cabins": 11,
+      "guests": 22,
+      "length_m": 38.0
+    },
+    {
+      "id": "boat-2",
+      "name": "Sample Vessel II",
+      "operator_id": "op-a",
+      "cabins": 10,
+      "guests": 20,
+      "length_m": 36.0
+    },
+    {
+      "id": "boat-3",
+      "name": "Sample Vessel III",
+      "operator_id": "op-b",
+      "cabins": 12,
+      "guests": 24,
+      "length_m": 40.0
+    },
+    {
+      "id": "boat-4",
+      "name": "Sample Vessel IV",
+      "operator_id": "op-c",
+      "cabins": 9,
+      "guests": 18,
+      "length_m": 34.0
+    },
+    {
+      "id": "boat-5",
+      "name": "Sample Vessel V",
+      "operator_id": "op-d",
+      "cabins": 11,
+      "guests": 22,
+      "length_m": 39.0
+    }
+  ],
+  "itineraries": [
+    {
+      "id": "itin-north-wrecks",
+      "name": "Northern Wrecks & Reefs",
+      "operator_id": "op-a",
+      "boat_id": "boat-1",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "Abu Nuhas",
+        "Giannis D",
+        "Carnatic",
+        "Chrisoula K",
+        "SS Thistlegorm",
+        "Rosalie Moller",
+        "Bluff Point",
+        "Small Crack"
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 20,
+        "max_depth_m": 30,
+        "nitrox_recommended": true,
+        "notes": "Thistlegorm sits at 30 m; repeated deep profiles make nitrox worthwhile."
+      },
+      "summary": "The classic wreck week out of Hurghada, built around the Thistlegorm and the four Abu Nuhas casualties.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Northern parks, per week",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 120.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 170.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 120.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "itin-bde",
+      "name": "Brothers, Daedalus & Elphinstone",
+      "operator_id": "op-b",
+      "boat_id": "boat-3",
+      "nights": 7,
+      "dives": 19,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "Big Brother",
+        "Little Brother",
+        "Numidia",
+        "Aida",
+        "Daedalus Reef",
+        "Elphinstone Reef"
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": 40,
+        "nitrox_recommended": true,
+        "strong_current": true,
+        "notes": "Open Water divers not accepted. Blue-water and drift experience expected; no decompression diving."
+      },
+      "summary": "Egypt's offshore shark run. Three exposed reefs, real current, and the reason most people book a Red Sea summer.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Offshore marine park, per week",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 170.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "itin-deep-south",
+      "name": "Deep South — St John's, Rocky & Zabargad",
+      "operator_id": "op-b",
+      "boat_id": "boat-3",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "Rocky Island",
+        "Zabargad",
+        "St John's",
+        "Habili Ali",
+        "Gota Kebir",
+        "Umm Kharerim",
+        "Dangerous Reef"
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": 40,
+        "strong_current": true,
+        "notes": "Long crossings and exposed pinnacles; the southern parks carry the highest fees in Egypt."
+      },
+      "summary": "The far south: caverns at St John's, hard coral at Zabargad, and Rocky Island's wall when the weather allows it.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Southern marine parks, highest band",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 65.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Long southern crossings",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 170.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 120.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "itin-fury-shoal",
+      "name": "Fury Shoal & Sataya",
+      "operator_id": "op-c",
+      "boat_id": "boat-4",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Marsa Alam",
+      "port_to": "Marsa Alam",
+      "dive_sites": [
+        "Fury Shoal",
+        "Sataya",
+        "Abu Galawa",
+        "Claudia",
+        "Malahi",
+        "Sha'ab Maksur",
+        "Dolphin House"
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 0,
+        "max_depth_m": 25,
+        "notes": "Sheltered, forgiving and shallow. The one summer route that genuinely suits fresh Open Water divers."
+      },
+      "summary": "Gentle southern reef week: swim-throughs, hard coral gardens and a resident spinner dolphin pod at Sataya.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 110.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "itin-all-inclusive-bde",
+      "name": "Brothers & Daedalus, all fees included",
+      "operator_id": "op-d",
+      "boat_id": "boat-5",
+      "nights": 7,
+      "dives": 19,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "Big Brother",
+        "Little Brother",
+        "Numidia",
+        "Aida",
+        "Daedalus Reef"
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": 40,
+        "strong_current": true
+      },
+      "summary": "Same offshore reefs as the standard BDE week, priced with park, port, fuel and nitrox already inside the headline number.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": true,
+          "note": "Bundled into the fare",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": true,
+          "note": "Bundled into the fare",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": true,
+          "note": "Bundled into the fare",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": true,
+          "note": "Free nitrox for certified divers",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 170.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "itin-ultimate",
+      "name": "Ultimate Red Sea — North to Deep South",
+      "operator_id": "op-a",
+      "boat_id": "boat-2",
+      "nights": 10,
+      "dives": 28,
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "SS Thistlegorm",
+        "Abu Nuhas",
+        "Big Brother",
+        "Little Brother",
+        "Daedalus Reef",
+        "Elphinstone Reef",
+        "Rocky Island",
+        "Zabargad"
+      ],
+      "requirements": {
+        "min_level": "experienced_100",
+        "min_logged_dives": 100,
+        "max_depth_m": 40,
+        "nitrox_recommended": true,
+        "strong_current": true,
+        "notes": "Ten nights, one-way, wrecks through to the southern pinnacles. The most demanding schedule sold in Egypt."
+      },
+      "summary": "One-way marathon from the northern wrecks to the far south, taking in the offshore sharks on the way through.",
+      "fees": [
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Crosses three fee bands",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "port_fees",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Two ports, one-way itinerary",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "fuel_surcharge",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "amount": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": null,
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "conditional",
+          "amount": {
+            "amount": 240.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "BCD, regulator, wetsuit, computer",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "dive_insurance",
+          "tier": "conditional",
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Mandatory cover, own policy accepted",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Airport to marina, return",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "amount": {
+            "amount": 180.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Suggested crew tip, not contractual",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        },
+        {
+          "code": "visa",
+          "tier": "mandatory",
+          "amount": {
+            "amount": 25.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "included": false,
+          "note": "Egypt visa on arrival",
+          "provenance": {
+            "kind": "seed_estimate",
+            "source_id": "seed:research-2026-08",
+            "retrieved": "2026-08-27",
+            "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+          }
+        }
+      ]
+    }
+  ],
+  "departures": [
+    {
+      "id": "itin-north-wrecks-2027-05-01",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1060,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-05-15",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1060,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-05-29",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1060,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-06-12",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1150,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-06-26",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1150,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-07-10",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-07-24",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1290,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-08-07",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1320,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-north-wrecks-2027-08-21",
+      "itinerary_id": "itin-north-wrecks",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 1320,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-05-01",
+      "itinerary_id": "itin-bde",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1335,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-05-15",
+      "itinerary_id": "itin-bde",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1335,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-05-29",
+      "itinerary_id": "itin-bde",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1335,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-06-12",
+      "itinerary_id": "itin-bde",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1450,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-06-26",
+      "itinerary_id": "itin-bde",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1450,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-07-10",
+      "itinerary_id": "itin-bde",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1625,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-07-24",
+      "itinerary_id": "itin-bde",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1625,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-08-07",
+      "itinerary_id": "itin-bde",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1665,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-bde-2027-08-21",
+      "itinerary_id": "itin-bde",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 1665,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-05-08",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1280,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-05-22",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1280,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-06-05",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-06-19",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1390,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-07-03",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1555,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-07-17",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1555,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-07-31",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1555,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-08-14",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1600,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-deep-south-2027-08-28",
+      "itinerary_id": "itin-deep-south",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1600,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-05-01",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 965,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-05-08",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 965,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-05-15",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 965,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-05-22",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 965,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-05-29",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 965,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-06-05",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 1050,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-06-12",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1050,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-06-19",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1050,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-06-26",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1050,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-07-03",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1175,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-07-10",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1175,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-07-17",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1175,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-07-24",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1175,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-07-31",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1175,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-08-07",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1210,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-08-14",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1210,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-08-21",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 1210,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-fury-shoal-2027-08-28",
+      "itinerary_id": "itin-fury-shoal",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1210,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-05-08",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1740,
+        "currency": "EUR"
+      },
+      "spaces_left": 5,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-05-22",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1740,
+        "currency": "EUR"
+      },
+      "spaces_left": 1,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-06-05",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 1890,
+        "currency": "EUR"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-06-19",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1890,
+        "currency": "EUR"
+      },
+      "spaces_left": 2,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-07-03",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 2115,
+        "currency": "EUR"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-07-17",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 2115,
+        "currency": "EUR"
+      },
+      "spaces_left": 3,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-07-31",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 2115,
+        "currency": "EUR"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-08-14",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 2175,
+        "currency": "EUR"
+      },
+      "spaces_left": 4,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-all-inclusive-bde-2027-08-28",
+      "itinerary_id": "itin-all-inclusive-bde",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 2175,
+        "currency": "EUR"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-ultimate-2027-05-15",
+      "itinerary_id": "itin-ultimate",
+      "start": "2027-05-15",
+      "end": "2027-05-25",
+      "price": {
+        "amount": 2070,
+        "currency": "USD"
+      },
+      "spaces_left": 6,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-ultimate-2027-06-12",
+      "itinerary_id": "itin-ultimate",
+      "start": "2027-06-12",
+      "end": "2027-06-22",
+      "price": {
+        "amount": 2250,
+        "currency": "USD"
+      },
+      "spaces_left": 7,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-ultimate-2027-07-10",
+      "itinerary_id": "itin-ultimate",
+      "start": "2027-07-10",
+      "end": "2027-07-20",
+      "price": {
+        "amount": 2520,
+        "currency": "USD"
+      },
+      "spaces_left": 8,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    },
+    {
+      "id": "itin-ultimate-2027-08-07",
+      "itinerary_id": "itin-ultimate",
+      "start": "2027-08-07",
+      "end": "2027-08-17",
+      "price": {
+        "amount": 2590,
+        "currency": "USD"
+      },
+      "spaces_left": null,
+      "provenance": {
+        "kind": "seed_estimate",
+        "source_id": "seed:research-2026-08",
+        "retrieved": "2026-08-27",
+        "note": "Researched placeholder, not a quote. Replaced once padi.com and liveaboard.com are reachable."
+      },
+      "fees": []
+    }
+  ]
+}

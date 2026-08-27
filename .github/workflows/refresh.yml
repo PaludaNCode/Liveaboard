@@ -1,0 +1,90 @@
+name: Daily refresh
+
+# Re-scrape the source sites, rebuild the site, and commit the result.
+#
+# This runs on GitHub's runners, which have ordinary internet access — so the
+# scrape works here even when a development sandbox is behind a restrictive
+# egress allowlist and cannot reach the sources at all.
+#
+# The scrape writes a *candidate* file. Promoting a candidate into the live
+# dataset is a separate, reviewable step, so a source site changing its markup
+# degrades into "yesterday's prices plus a warning" rather than a site full of
+# blanks.
+
+on:
+  schedule:
+    # 04:15 UTC daily — outside European browsing hours, and after operators
+    # have typically published overnight availability changes.
+    - cron: "15 4 * * *"
+  workflow_dispatch:
+    inputs:
+      promote:
+        description: "Promote the scrape into the live dataset"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run tests
+        run: PYTHONPATH=src python3 -m unittest discover -s tests
+
+      - name: Scrape sources
+        id: scrape
+        continue-on-error: true
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli scrape \
+            --out data/candidate.json \
+            --snapshots data/snapshots
+
+      - name: Report a blocked or empty scrape
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "::warning::Scrape did not complete. The site will rebuild from the"
+          echo "::warning::last good dataset. Download the snapshots artifact to see"
+          echo "::warning::what the source sites actually returned."
+
+      - name: Keep the raw pages as evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots-${{ github.run_id }}
+          path: data/snapshots/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Validate the dataset
+        run: PYTHONPATH=src python3 -m liveaboard.cli check
+
+      - name: Build the site
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data site
+          if git diff --cached --quiet; then
+            echo "nothing changed today"
+            exit 0
+          fi
+          # Every run is a commit, so the git history doubles as price history:
+          # `git log -p data/` shows exactly which fee moved, and when.
+          git commit -m "data: daily refresh $(date -u +%Y-%m-%d)"
+          git push

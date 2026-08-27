@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Tests
+        run: PYTHONPATH=src python3 -m unittest discover -s tests -v
+
+      - name: Dataset validates
+        run: PYTHONPATH=src python3 -m liveaboard.cli check
+
+      - name: Site builds
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Seed generator is reproducible
+        # The committed seed must match what the generator produces, so nobody
+        # can hand-edit a price into the dataset without it showing up here.
+        run: |
+          python3 tools/make_seed.py --out /tmp/regenerated.json
+          python3 - <<'PY'
+          import json, sys
+          a = json.load(open("data/seed/egypt-2027.json"))
+          b = json.load(open("/tmp/regenerated.json"))
+          for payload in (a, b):
+              payload.pop("generated", None)
+          if a != b:
+              sys.exit("data/seed/egypt-2027.json is out of sync with tools/make_seed.py")
+          print("seed matches generator")
+          PY

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Egypt Liveaboards, May–August 2027 — what they actually cost</title>
+<meta name="description" content="Red Sea liveaboard trips for the 2027 summer season, priced with every mandatory fee included rather than hidden under the headline number.">
+<style>/*STYLE*/</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1>Egypt liveaboards, May&ndash;August 2027</h1>
+    <p class="tagline">
+      The advertised price is not the price. Every trip below is shown at
+      <strong>true cost</strong> &mdash; berth plus marine park fees, port dues,
+      fuel, visa and everything else that lands on the bill later.
+    </p>
+    <p class="meta-line" id="metaLine"></p>
+  </div>
+</header>
+
+<div class="wrap" id="dataNotice"></div>
+
+<main class="wrap">
+
+  <section class="controls" aria-label="Filters and price options">
+
+    <div class="control-row">
+      <div class="control-group">
+        <span class="control-label" id="viewLabel">View</span>
+        <div class="segmented" role="radiogroup" aria-labelledby="viewLabel">
+          <button type="button" role="radio" data-view="date" aria-checked="true" class="on">By date</button>
+          <button type="button" role="radio" data-view="boat" aria-checked="false">By boat</button>
+        </div>
+      </div>
+
+      <div class="control-group grow">
+        <label class="control-label" for="sort">Sort by</label>
+        <select id="sort">
+          <option value="date">Departure date</option>
+          <option value="true_cost">True cost, lowest first</option>
+          <option value="per_night">Cost per night</option>
+          <option value="base">Advertised price</option>
+          <option value="markup">Biggest gap to advertised price</option>
+          <option value="transparency">Most honest pricing</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label" id="inclLabel">What do you want included in the price?</span>
+      <div class="chips" id="toggles" role="group" aria-labelledby="inclLabel"></div>
+      <p class="hint">
+        Marine park fees, port dues, fuel and visa are always counted &mdash; nobody
+        sails without paying them.
+      </p>
+    </div>
+
+    <div class="control-row filters">
+      <div class="control-group">
+        <span class="control-label" id="monthLabel">Month</span>
+        <div class="chips" id="months" role="group" aria-labelledby="monthLabel"></div>
+      </div>
+      <div class="control-group">
+        <span class="control-label" id="routeLabel">Route</span>
+        <div class="chips" id="routes" role="group" aria-labelledby="routeLabel"></div>
+      </div>
+      <div class="control-group">
+        <span class="control-label" id="levelLabel">I am qualified to</span>
+        <div class="chips" id="levels" role="group" aria-labelledby="levelLabel"></div>
+      </div>
+      <div class="control-group">
+        <span class="control-label" id="themeLabel">Looking for</span>
+        <div class="chips" id="themes" role="group" aria-labelledby="themeLabel"></div>
+      </div>
+    </div>
+
+    <div class="control-row summary-row">
+      <p class="result-summary" id="summary" role="status"></p>
+      <button type="button" class="link-button" id="reset">Reset filters</button>
+    </div>
+
+  </section>
+
+  <section id="results" aria-live="polite"></section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <h2>How the numbers are built</h2>
+    <div class="footer-grid">
+      <div>
+        <h3>True cost</h3>
+        <p>
+          The advertised berth price, plus every fee a diver cannot avoid: marine
+          park charges, port and harbour dues, fuel surcharges and the visa on
+          arrival. Optional extras are added only when you switch them on above.
+        </p>
+      </div>
+      <div>
+        <h3>Honesty score</h3>
+        <p>
+          What share of the full bill the advertised price actually discloses,
+          measured against a fixed basket of every conditional cost. It is a
+          property of the operator's pricing, so it does not move when you change
+          the toggles.
+        </p>
+      </div>
+      <div>
+        <h3>Classification</h3>
+        <p>
+          Routes, themes and the experience bar are derived from each trip's dive
+          site list rather than copied from operator marketing, so the same
+          stretch of water is labelled the same way whoever is selling it.
+        </p>
+      </div>
+      <div>
+        <h3>Currency</h3>
+        <p>
+          Everything is shown in euro. Amounts an operator quoted in another
+          currency are marked as converted, with the rate and its date, because a
+          conversion is a weaker claim than a quote.
+        </p>
+      </div>
+    </div>
+    <p class="colophon">Generated __GENERATED__.</p>
+  </div>
+</footer>
+
+<script id="payload" type="application/json">"__DATA__"</script>
+<script>/*APP*/</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+name: Publish site
+
+# Deploys site/index.html to GitHub Pages.
+#
+# Requires a one-time manual step: Settings -> Pages -> Source: GitHub Actions.
+# Until that is set, this workflow fails and nothing is published — deliberate,
+# so the site cannot go public without someone choosing to make it public.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Rebuild rather than trusting the committed file, so the published page
+      # always matches the dataset in the same commit.
+      - name: Build
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
