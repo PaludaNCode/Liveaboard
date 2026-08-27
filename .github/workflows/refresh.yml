@@ -22,6 +22,10 @@ on:
         description: "Cap vessels crawled (0 = the adapter default)"
         type: string
         default: "0"
+      itinerary_limit:
+        description: "Cap trip fragments fetched (0 = every trip not yet read)"
+        type: string
+        default: "0"
       force_promote:
         description: "Publish even if the dataset shrinks sharply"
         type: boolean
@@ -86,6 +90,12 @@ jobs:
       # night, so only genuinely new trips are fetched. The first run is about
       # 314 requests at the fetcher's usual delay; every run after it is a
       # handful, which is what makes this affordable to do daily at all.
+      #
+      # `itinerary_limit` caps a dispatched run. A capped run *merges* into the
+      # book rather than replacing it — it knows nothing about the trips it did
+      # not visit — which is what makes it safe to prove a new parser against
+      # three real trips before pointing it at three hundred of somebody
+      # else's pages. The same rule as `scrape_fees.py --limit`.
       - name: Read what each trip says about itself
         if: steps.scrape.outcome == 'success'
         continue-on-error: true
@@ -93,7 +103,8 @@ jobs:
           python3 tools/fetch_itineraries.py \
             --archive data/archive.json \
             --out data/itineraries.json \
-            --snapshots data/snapshots
+            --snapshots data/snapshots \
+            --limit "${{ inputs.itinerary_limit || 0 }}"
 
       - name: Promote the candidate
         id: promote

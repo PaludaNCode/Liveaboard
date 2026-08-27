@@ -23,9 +23,9 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml` and the CI check all
-promote on them, so one canonical set of inputs lives in `cli.py` and cannot
-drift apart across four workflows.
+Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
+and the CI check all promote on them, so one canonical set of inputs lives in
+`cli.py` and cannot drift apart across five workflows.
 
 ## Invariants
 
@@ -127,6 +127,10 @@ What one *trip* says about itself needs no browser and no crawl to find:
 daily refresh. Incremental — a trip already in `data/itineraries.json` is not
 re-fetched — so the first run is ~314 requests and every run after it is a
 handful. Everything else in the pipeline describes the boat's year.
+`itineraries.yml` runs it alone, capped (`--limit N`), which is how a change to
+the parser gets proved against three real trips before it is pointed at three
+hundred of somebody else's pages. A capped run merges into the book, like
+`scrape_fees.py --limit`.
 
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page
