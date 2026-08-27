@@ -194,6 +194,23 @@ class ScrapeOutput:
     itineraries: list[dict[str, Any]] = field(default_factory=list)
     departures: list[dict[str, Any]] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    archive: list[dict[str, Any]] = field(default_factory=list)
+    """The structured data each page published, whether or not we parse it.
+
+    Everything else in this class is what the adapter chose to read today. This
+    is what the page actually said, kept so a question nobody has asked yet can
+    still be answered later.
+
+    That matters because the two are not equally recoverable. Current prices can
+    always be re-scraped; the prices as they stood on a given day cannot. A
+    field we start caring about next month would otherwise arrive attached to
+    next month's data, with today's gone for good.
+
+    Snapshots do not cover this: they are gitignored and expire from CI after
+    fourteen days. This is committed, and it is JSON rather than HTML, so it
+    stays queryable without a browser -- which is precisely how the stored fee
+    disclosures turned a live re-run into an offline audit.
+    """
 
     def extend(self, other: ScrapeOutput) -> None:
         self.operators.extend(other.operators)
@@ -201,6 +218,7 @@ class ScrapeOutput:
         self.itineraries.extend(other.itineraries)
         self.departures.extend(other.departures)
         self.warnings.extend(other.warnings)
+        self.archive.extend(other.archive)
 
     @property
     def is_empty(self) -> bool:

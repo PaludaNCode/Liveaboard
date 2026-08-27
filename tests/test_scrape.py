@@ -181,5 +181,71 @@ class TestSeasonMonthSelector(unittest.TestCase):
         self.assertTrue(output.is_empty)
 
 
+class TestArchive(unittest.TestCase):
+    """Keep what the page published, not only what we chose to read.
+
+    Current prices can always be re-scraped; the prices as they stood on a
+    given day cannot. A field that starts mattering next month would otherwise
+    arrive attached to next month's data, with today's gone.
+    """
+
+    HTML = """
+    <html><head>
+    <script type="application/ld+json">
+    {"@type":"Product","name":"MY Example","description":"A vessel.",
+     "aggregateRating":{"@type":"AggregateRating","ratingValue":"9.1","reviewCount":"214"},
+     "numberOfRooms":10,"occupancy":20,"amenityFeature":["Nitrox","Jacuzzi"],
+     "offers":{"@type":"AggregateOffer","lowPrice":"900","priceCurrency":"USD"}}
+    </script>
+    <script type="application/ld+json">
+    {"@type":"Event","name":"Brothers","startDate":"2027-05-01","endDate":"2027-05-08",
+     "remainingAttendeeCapacity":3,
+     "offers":{"@type":"Offer","price":"1450","priceCurrency":"USD"}}
+    </script>
+    </head><body></body></html>
+    """
+
+    def setUp(self):
+        adapter = LiveaboardComAdapter(PoliteFetcher(snapshot_dir="/tmp/unused"))
+        self.output = adapter.parse(result(self.HTML))
+        self.page = self.output.archive[0]
+
+    def test_the_page_is_archived_once(self):
+        self.assertEqual(len(self.output.archive), 1)
+
+    def test_it_records_where_and_when(self):
+        self.assertEqual(self.page["url"], result(self.HTML).url)
+        self.assertEqual(self.page["retrieved"], "2026-08-27")
+        self.assertTrue(self.page["digest"])
+
+    def test_fields_nothing_parses_today_are_kept(self):
+        product = self.page["nodes"][0]
+        self.assertEqual(product["numberOfRooms"], 10)
+        self.assertEqual(product["occupancy"], 20)
+        self.assertEqual(product["aggregateRating"]["reviewCount"], "214")
+        self.assertEqual(product["amenityFeature"], ["Nitrox", "Jacuzzi"])
+
+    def test_remaining_capacity_survives(self):
+        """Availability on a given day is the one thing a re-scrape cannot recover."""
+        event = self.page["nodes"][1]
+        self.assertEqual(event["remainingAttendeeCapacity"], 3)
+
+    def test_a_listing_page_archives_nothing(self):
+        adapter = LiveaboardComAdapter(PoliteFetcher(snapshot_dir="/tmp/unused"))
+        output = adapter.parse(
+            result("<html><body>nav only</body></html>",
+                   url="https://www.liveaboard.com/diving/search/egypt/may/2027")
+        )
+        self.assertEqual(output.archive, [])
+
+    def test_archives_merge_across_pages(self):
+        from liveaboard.scrape.base import ScrapeOutput
+
+        combined = ScrapeOutput()
+        combined.extend(self.output)
+        combined.extend(self.output)
+        self.assertEqual(len(combined.archive), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

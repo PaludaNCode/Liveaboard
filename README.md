@@ -106,8 +106,24 @@ src/liveaboard/   taxonomy, money, models, pricing, classify, dataset, render, c
 templates/        index.html + style.css + app.js, inlined at build time
 tools/make_seed.py
 data/seed/        the seed dataset
-tests/            60 tests, stdlib unittest
+tests/            stdlib unittest, no dependencies
 ```
+
+### What is kept
+
+| file | holds | committed |
+|---|---|---|
+| `data/egypt-2027.json` | the published dataset | yes |
+| `data/candidate.json` | the raw scrape, before promotion | yes |
+| `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
+| `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
+| `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
+
+`archive.json` exists because current prices can always be re-scraped and past
+ones cannot. It carries ratings, cabin counts, occupancy, amenities and
+remaining capacity — none of which the site uses today — so a question asked
+next month can still be put to this month's data. Every run is a commit, so
+`git log -p data/` is the history.
 
 ## Next
 

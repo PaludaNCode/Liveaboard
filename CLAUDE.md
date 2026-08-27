@@ -46,4 +46,8 @@ blocked by the environment's network policy (see README), so the adapters in
 `src/liveaboard/scrape/` are structural. **Do not write markup parsers for
 pages nobody has fetched** — run a scrape, read the snapshot, then parse.
 
-`data/snapshots/` is gitignored; CI keeps it as a build artifact.
+`data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
+`data/archive.json` is committed and holds every JSON-LD node each page
+published, parsed or not — re-scraping recovers today's prices, never
+yesterday's. Add fields to the parser freely; do not trim the archive to match
+what the parser happens to read.
