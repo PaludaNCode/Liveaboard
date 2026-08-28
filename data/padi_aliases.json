@@ -1,0 +1,30 @@
+{
+  "_comment": [
+    "Which PADI Travel vessel is which of ours. Hand-maintained, one deliberate",
+    "call per entry, because similarity on vessel names ranks garbage above",
+    "truth here: 'Destiny' scores 0.67 against PADI's 'eriny' while the real",
+    "'New Sambo' -> 'new-sambo-safari-boat-2' pair scores 0.59. No threshold",
+    "separates those two, so there is no automatic version of this file.",
+    "",
+    "Boats whose folded names already agree need no entry -- they resolve on",
+    "their own. This file is for the exceptions and, with equal weight, for the",
+    "boats confirmed absent: a boat reviewed and found not to be on PADI is a",
+    "different state from one nobody has looked at, and only writing both down",
+    "stops the tail being re-reviewed every time.",
+    "",
+    "PADI slugs are ids and nothing more -- see docs/sources/padi.com.md on why",
+    "an itinerary slug contradicts its own page 15 times out of 22. The same",
+    "caution applies here: a vessel slug is not evidence of the vessel's name.",
+    "",
+    "Keyed on our boat_id, not on the boat's name. 'MY Odyssey Liveaboard' has boat_id 'odyssey', and keying on a folded name got that entry wrong on the first attempt -- the id is what promote() builds every itinerary id from, so it is the thing that cannot quietly drift."
+  ],
+  "reviewed": "2026-08-28",
+  "country": "egypt",
+  "aliases": {
+    "amelie": "amelie-safari",
+    "new-sambo": "new-sambo-safari-boat-2",
+    "odyssey": "my-odyssey"
+  },
+  "absent": [],
+  "unlisted": []
+}

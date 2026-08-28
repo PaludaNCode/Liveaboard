@@ -162,6 +162,38 @@ class PadiComAdapter(SourceAdapter):
 
     country = COUNTRY
 
+    @staticmethod
+    def vessel_for(boat_id: str, aliases: dict[str, object]) -> str | None:
+        """Which PADI slug is this boat of ours, or ``None``.
+
+        Keyed on our ``boat_id``, which is what `promote` builds every itinerary
+        id from and so the one identifier that cannot quietly drift. Keying on a
+        folded *name* got the first entry in the map wrong: "MY Odyssey
+        Liveaboard" has boat_id ``odyssey``.
+
+        Three answers, and they are deliberately different:
+
+        - a slug, for a boat somebody has paired;
+        - ``None`` for a boat listed in `absent`, meaning somebody looked and
+          PADI does not sell it;
+        - ``None`` for a boat in neither, which the caller should report as
+          unreviewed rather than treat as absent.
+
+        Use :meth:`is_reviewed` to tell the last two apart. A boat nobody has
+        looked at and a boat confirmed missing produce the same empty result
+        here, and only the caller can say which silence it is looking at.
+        """
+        table = aliases.get("aliases") or {}
+        slug = table.get(boat_id)
+        return str(slug) if slug else None
+
+    @staticmethod
+    def is_reviewed(boat_id: str, aliases: dict[str, object]) -> bool:
+        """Has a person decided about this boat yet?"""
+        table = aliases.get("aliases") or {}
+        absent = aliases.get("absent") or []
+        return boat_id in table or boat_id in absent
+
     def discover(self) -> Iterator[str]:
         """Every vessel page for one country, from the operator sitemap.
 
