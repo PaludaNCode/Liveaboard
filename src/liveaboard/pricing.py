@@ -29,14 +29,22 @@ from .taxonomy import DEFAULT_ON_TIERS, FeeCode, FeeTier
 Toggles = Mapping[str, bool]
 
 DEFAULT_TOGGLES: dict[str, bool] = {
-    "nitrox": False,
-    "gear": False,
+    "nitrox": True,
+    "gear": True,
 }
 """What the site starts with.
 
-Both default off because plenty of divers bring their own. Everything a diver
-cannot avoid is already in the total and has no switch: a comparison is only
-easy when the headline number means the same thing on every row.
+Both default **on**. They were off, on the reasoning that plenty of divers own
+kit and the headline number should be the unavoidable minimum -- but a page
+whose whole argument is that the advertised price is not the price should not
+itself open on a number below what most visitors will pay. Rental gear is about
+EUR 200 a week and nitrox EUR 70 where it is charged; a diver who owns a set and
+breathes air can switch both off and watch the total fall, which is a better
+first impression than one who does not own a set watching it rise.
+
+Everything a diver cannot avoid is still in the total and still has no switch.
+These two remain the only optional extras, so the headline number goes on
+meaning the same thing on every row -- it is now the same fuller thing.
 """
 
 @dataclass(frozen=True, slots=True)

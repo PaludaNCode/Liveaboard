@@ -11,21 +11,20 @@
   --ground:#f7f8fa; --panel:#ffffff; --rule:#dde3ec; --rule-strong:#c3ccd9;
   --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#66707c;
   --accent:#0d5c8c; --accent-soft:#e4eef6;
-  --later:#a8500f; --later-soft:#fbeee2;
-  --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481; --sold:#9c3535;
+  --later:#a44d0e; --later-soft:#fbeee2;
+  --ok:#1f6b45; --warn:#855f0f; --unknown:#5c6570; --sold:#9c3535;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
-  /* A marked row, painted on the pinned identity columns only -- never across
-     the whole row, and that is a contrast result rather than a style choice.
-     Tinting the full row puts a colour behind the Places and Disclosure pills,
-     and those are the two weakest colours in this palette: --unknown is 4.72:1
-     on plain white, so *any* tint at all drops it under AA. There is no fill
-     light enough to be visible and still safe -- at #f4f9fd, nearly white, it
-     is still 4.45.
-     The pinned cells carry dates, the boat and the guest count in --ink at
-     14:1, so a much stronger tint is safe there, and they are the columns that
-     stay on screen at every scroll position anyway. Which is the whole point:
-     the mark has to be legible when you have scrolled 900px right to read
-     Mandatory fees. */
+  /* A marked row, painted across the whole row.
+     It was the pinned columns alone at first, because tinting the full row put
+     a colour behind the Places and Disclosure pills and those were the two
+     weakest colours in the palette -- --unknown was 4.72:1 on plain white, so
+     any tint at all dropped it under AA, and no fill was light enough to be
+     visible and still safe.
+     The fix was the palette rather than the feature: --unknown, --warn and
+     --later are each a shade deeper now, and dark --unknown a shade lighter.
+     All four were sitting near the AA floor on a plain row anyway, which is a
+     poor place for a page about not misleading people. Every colour now clears
+     4.5 against the tint as well as against the panel. */
   --row-marked:#dbe9f5; --row-marked-edge:var(--accent);
 
   /* The pinned columns, left to right, and therefore each one's offset from
@@ -77,7 +76,7 @@
     --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
     --accent:#63b3e3; --accent-soft:#152a3a;
     --later:#e8a86a; --later-soft:#2e2015;
-    --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
+    --ok:#6cc394; --warn:#d6ad55; --unknown:#939db0; --sold:#e08379;
     --row-alt:#111820; --row-hover:#1b2531;
     --row-marked:#203446; --row-marked-edge:var(--accent);
   }
@@ -87,7 +86,7 @@
   --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
   --accent:#63b3e3; --accent-soft:#152a3a;
   --later:#e8a86a; --later-soft:#2e2015;
-  --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
+  --ok:#6cc394; --warn:#d6ad55; --unknown:#939db0; --sold:#e08379;
   --row-alt:#111820; --row-hover:#1b2531;
   --row-marked:#203446; --row-marked-edge:var(--accent);
 }
@@ -257,8 +256,15 @@ tbody tr.row:hover { background:var(--row-hover); }
  * to the scrollbar -- so the number and the row it belongs to are separated by
  * a screen's width and nothing joins them. This does.
  *
- * The paint is on the pinned columns, below, not here: see --row-marked for
- * why a full-row tint cannot be made accessible. */
+ * Last of the three row rules, so a marked row stays marked while hovered: a
+ * decision the visitor made outranks where the mouse happens to be. The pinned
+ * cells repeat it below -- they paint their own background or the columns
+ * sliding beneath would show through -- and the edge bar on the expander is
+ * what carries at a glance, including when the row is dimmed for being sold
+ * out. */
+tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
+  background:var(--row-marked);
+}
 
 .num {
   font-family:var(--font-mono);
