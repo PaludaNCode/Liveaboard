@@ -1623,17 +1623,24 @@ class TestThreeReefsGetOneSpelling(unittest.TestCase):
 
         return _display_title(name)
 
-    def test_five_spellings_of_st_johns(self):
+    def test_six_spellings_of_st_johns(self):
         for written in ("St. John's", "St. Johns", "St Johns", "St John's",
-                        "St. John"):
+                        "St. John", "Saint John's", "Saint Johns"):
             with self.subTest(written):
                 self.assertEqual(self.title(written), "St. John's")
 
-    def test_three_spellings_of_brothers(self):
-        for written in ("Brothers", "Brother Islands", "Brother Island",
-                        "Brother"):
+    def test_five_spellings_of_brothers(self):
+        for written in ("Brothers", "Brother Islands", "Brothers Islands",
+                        "Brother Island", "Brothers Island", "Brother"):
             with self.subTest(written):
                 self.assertEqual(self.title(written), "Brothers")
+
+    def test_the_plural_does_not_strand_the_second_word(self):
+        """Written as an alternation, "s" wins on "Brothers Islands" and leaves
+        "Islands" behind -- which reads as a different reef, not a tidied one."""
+        self.assertEqual(self.title("North Reefs, Tiran & Brothers Islands"),
+                         "North Reefs, Tiran & Brothers")
+        self.assertNotIn("Islands", self.title("Brothers Islands"))
 
     def test_two_spellings_of_fury_shoals(self):
         for written in ("Fury Shoals", "Fury Shoal"):

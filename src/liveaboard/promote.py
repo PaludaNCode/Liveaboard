@@ -308,18 +308,23 @@ def _fix_title_errors(title: str) -> str:
 
 
 REEF_ALIASES = (
-    # St John's, five ways: "St. John's" (19), "St. Johns" (13), "St Johns"
-    # (6), "St John's" (4), "St. John" (2). The saint sorts in five places and
-    # matches in one. Folded onto the plurality spelling, which is also the one
-    # carrying both the stop and the apostrophe -- and TITLE_FIXES has already
-    # settled the apostrophe's character, so this sees only "'".
-    (re.compile(r"\bSt\.?\s+John(?:'s|s)?\b", re.I), "St. John's"),
-    # Brothers, three ways: "Brothers" (109), "Brother Islands" (5), "Brother"
-    # (1). Guarded against "Big Brother" and "Little Brother", which name the
-    # two islands separately: neither appears in the fleet today, and folding
-    # one of them to the pair would delete which island the trip dives.
+    # St John's, six ways: "St. John's" (19), "St. Johns" (13), "St Johns"
+    # (6), "St John's" (4), "Saint John's" (3), "St. John" (2). The saint sorts
+    # in six places and matches in one. Folded onto the plurality spelling,
+    # which is also the one carrying both the stop and the apostrophe -- and
+    # TITLE_FIXES has already settled the apostrophe's character, so this sees
+    # only "'".
+    (re.compile(r"\b(?:St\.?|Saint)\s+John(?:'s|s)?\b", re.I), "St. John's"),
+    # Brothers, five ways: "Brothers" (109), "Brother Islands" (5), "Brothers
+    # Islands" (5), "Brother" (1), "Brothers Island" (1). The optional plural
+    # comes before the optional "Islands" rather than beside it -- written as
+    # an alternation, "s" wins on "Brothers Islands" and leaves the second word
+    # stranded. Same shape as BDE's own brother clause, for the same reason.
+    # Guarded against "Big Brother" and "Little Brother", which name the two
+    # islands separately: neither appears in the fleet today, and folding one
+    # of them into the pair would delete which island the trip dives.
     (
-        re.compile(r"\b(?<!Big )(?<!Little )Brother(?:\s+Islands?|s)?\b", re.I),
+        re.compile(r"\b(?<!Big )(?<!Little )Brother(?:s)?(?:\s+Islands?)?\b", re.I),
         "Brothers",
     ),
     # Fury Shoals, two ways: "Fury Shoals" (17), "Fury Shoal" (12) -- the
