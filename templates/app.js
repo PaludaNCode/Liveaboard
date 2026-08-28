@@ -667,14 +667,6 @@
     rows.forEach(function (r) { boats[r.i.boat_id] = 1; itins[r.i.id] = 1; });
     document.getElementById("nboats").textContent = Object.keys(boats).length;
     document.getElementById("nitin").textContent = Object.keys(itins).length;
-
-    /* Only average what has a figure: a trip whose required extras are
-       unstated has no gap to average, and counting it as zero would drag the
-       number toward "no fees on top". */
-    var known = rows.filter(function (r) { return r.d.mandatory_known; });
-    document.getElementById("gap").textContent = known.length
-      ? eur(known.reduce(function (s, r) { return s + r.m.later; }, 0) / known.length)
-      : "—";
   }
 
   /* How many chips a bank shows before the rest go behind "more".
