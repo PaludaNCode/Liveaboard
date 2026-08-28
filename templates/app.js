@@ -124,10 +124,10 @@
   var BAR_TRACK = 68;
 
   /* Where the total is a range, the bar is drawn from its low end -- the same
-     figure Lands later is worked out from. Said out loud, because a graphic
+     figure Mandatory fees is worked out from. Said out loud, because a graphic
      that answers a narrower question than the number above it should not do so
      silently. */
-  var BAR_TITLE = "Advertised, then what lands later. Scaled against the " +
+  var BAR_TITLE = "Advertised, then the fees on top of it. Scaled against the " +
     "dearest trip shown; drawn from the low end where the total is a range.";
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -219,9 +219,9 @@
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
         return '<span class="dim">—</span>';
       } },
-    { k: "base", t: "Advertised", num: true,
+    { k: "base", t: "Advertised", num: true, cls: "money",
       v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
-    { k: "total", t: "True cost", num: true, cls: "cost",
+    { k: "total", t: "Total", num: true, cls: "cost",
       v: function (d, i, m) { return m.total; },
       show: function (d, i, m) {
         if (!d.mandatory_known) return '<span class="dim">—</span>';
@@ -295,17 +295,18 @@
         if (m.nitrox.price != null) return eur(m.nitrox.price);
         return '<span class="dim">extra, no price</span>';
       } },
-    { k: "later", t: "Lands later", num: true,
+    /* Everything on top of the advertised price. Under the page's defaults
+       that is the fees a diver cannot refuse -- marine park, port dues, fuel,
+       the visa, and crew tips where an operator states a figure -- which is
+       what the heading says. Switching on nitrox or rental gear above adds
+       those to it too, because they are then part of what you will pay; the
+       footer says so, and the Nitrox column beside it shows one of them. */
+    { k: "later", t: "Mandatory fees", num: true,
       v: function (d, i, m) { return m.later; },
       show: function (d, i, m) {
         return d.mandatory_known
           ? '<span class="later">+' + eur(m.later) + "</span>"
           : '<span class="dim">—</span>';
-      } },
-    { k: "required", t: "Required fees", num: true,
-      v: function (d, i, m) { return m.required; },
-      show: function (d, i, m) {
-        return m.required > 0 ? eur(m.required) : '<span class="dim">—</span>';
       } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
@@ -348,9 +349,9 @@
      publishing. */
   var ORDER = [
     "start", "end", "boat", "guests",
-    "from", "to", "trip",
-    "total", "later", "base", "perdive", "nitrox", "sites",
-    "required", "availability", "disclosure", "source"
+    "from", "to", "trip", "sites",
+    "base", "nitrox", "later", "total", "perdive",
+    "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, reordered again.
      A phone shows about two columns beside the two pinned ones, and on the
@@ -358,13 +359,17 @@
      title and you scrolled 600px to find out what it cost. Here the money
      comes first and the descriptive columns sit behind it: nothing is hidden,
      the reading order is just inverted to match how much screen there is. */
-  /* The same columns wherever there is not room for the reading order above.
-     Identity, then the money, then everything the money is for.
+  /* The same columns, and the same price order within them, wherever there is
+     not room for the reading order above. Identity, then the money, then
+     everything the money is for.
 
-     Measured: with Guests, From, To and Trip ahead of it, True cost sits at
-     x 919-1083, so it needs 1083px of window to be on screen at all -- it fell
-     off a 900px and a 1024px laptop, which is most of them. The wide order is
-     the better read where it fits; this is the same table where it does not. */
+     The wide order reads as a bill and puts the Total last, which is right on
+     paper and expensive on screen: with Guests, From, To, Trip and Dive sites
+     ahead of the price block, and the Total at the end of it, the Total needs
+     about 1500px of window to be visible at all. It fell off a 1200px and a
+     1440px laptop, which is most of them. Below that the price block moves in
+     front of the descriptive columns -- Advertised, Nitrox, Mandatory fees,
+     Total, in that order still. */
   /* A phone fits the expander, two pinned columns and the price, and nothing
      else before it: 24 + 66 + 96 + 160 is 346 of 390. A third pinned column
      makes 412, and Return merely sitting third rather than pinned still makes
@@ -374,22 +379,27 @@
      you read once you have found the row. */
   var PHONE_ORDER = [
     "start", "boat",
-    "total", "later", "base", "perdive", "nitrox",
+    /* The one place the bill order gives way. A phone fits the expander, two
+       pinned columns and one price: Advertised, Nitrox and Mandatory fees
+       ahead of the Total put it at x 436 of a 390px screen. The Total is what
+       one row is compared with another by, so here it leads and its parts
+       follow it. */
+    "total", "later", "base", "nitrox", "perdive",
     "end", "guests", "from", "to", "trip", "sites",
-    "required", "availability", "disclosure", "source"
+    "availability", "disclosure", "source"
   ];
 
   var COMPACT_ORDER = [
     "start", "end", "boat",
-    "total", "later", "base", "perdive", "nitrox",
+    "base", "nitrox", "later", "total", "perdive",
     "guests", "from", "to", "trip", "sites",
-    "required", "availability", "disclosure", "source"
+    "availability", "disclosure", "source"
   ];
 
   /* Two questions, two breakpoints. `compact` is about how much room there is
      before the money column; `narrow` is about how much room there is at all,
      and drives the pinned-column widths and the folded filter banks. */
-  var compact = window.matchMedia("(max-width: 1100px)");
+  var compact = window.matchMedia("(max-width: 1700px)");
   var narrow = window.matchMedia("(max-width: 760px)");
 
   /* How many of the leading columns are pinned. By position, never by name:
@@ -510,7 +520,7 @@
       caveat = "This operator publishes no required extras. Every Egyptian " +
         "liveaboard pays marine park and port fees, so either they are already " +
         "inside the advertised price or they are collected at the dock — the " +
-        "listing does not say which, so no true cost is claimed here.";
+        "listing does not say which, so no total is claimed here.";
     } else if (row.m.unpriced.length) {
       caveat = "Plus " + row.m.unpriced.join(", ") + ": listed by the operator " +
         "with no price, so it cannot be added up here. It is not free.";
@@ -574,7 +584,7 @@
 
     /* Only average what has a figure: a trip whose required extras are
        unstated has no gap to average, and counting it as zero would drag the
-       number toward "nothing lands later". */
+       number toward "no fees on top". */
     var known = rows.filter(function (r) { return r.d.mandatory_known; });
     document.getElementById("gap").textContent = known.length
       ? eur(known.reduce(function (s, r) { return s + r.m.later; }, 0) / known.length)

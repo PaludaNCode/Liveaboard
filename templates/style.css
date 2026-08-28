@@ -194,9 +194,12 @@ thead th .dir { color:var(--accent); font-weight:700; }
 thead th[data-k]:has(.dir) { color:var(--accent); }
 th.num, .num { text-align:right; }
 
-/* Where the money starts. The one vertical rule in the table, because it is
-   the one place a reader needs telling that the columns changed subject. */
-thead th[data-k="total"], tbody td.cost { border-left:1px solid var(--rule-strong); }
+/* Where the money starts -- now Advertised, since the price columns read as a
+   bill: what was advertised, what nitrox costs, what you cannot avoid, what it
+   comes to. The one vertical rule in the table apart from the pinned group,
+   because it is the one place a reader needs telling that the columns have
+   changed subject. */
+thead th[data-k="base"], tbody td.money { border-left:1px solid var(--rule-strong); }
 
 tbody td {
   padding:5px 9px; border-bottom:1px solid var(--rule);
@@ -313,8 +316,15 @@ tr.detail td > * { position:sticky; left:0; }
    96px on a phone. Clamping these would mean wrapping their contents in a
    span, which is more markup on every one of 882 rows for 115 rows that run
    to a second line. */
-.trip { white-space:normal; min-width:210px; max-width:320px; }
-.sites { white-space:normal; min-width:150px; max-width:210px; color:var(--ink-dim); font-size:11px; }
+/* `width`, not just `max-width`: in auto table layout a max-width on a cell is
+   a suggestion the algorithm may ignore, and these two took 397px and 261px of
+   a wide window between them -- enough on their own to push the Total off the
+   right-hand edge. A preferred width the text can wrap inside binds. */
+.trip { white-space:normal; width:240px; min-width:190px; max-width:240px; }
+.sites {
+  white-space:normal; width:180px; min-width:140px; max-width:180px;
+  color:var(--ink-dim); font-size:11px;
+}
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;

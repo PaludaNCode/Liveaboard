@@ -201,9 +201,12 @@ thead th .dir { color:var(--accent); font-weight:700; }
 thead th[data-k]:has(.dir) { color:var(--accent); }
 th.num, .num { text-align:right; }
 
-/* Where the money starts. The one vertical rule in the table, because it is
-   the one place a reader needs telling that the columns changed subject. */
-thead th[data-k="total"], tbody td.cost { border-left:1px solid var(--rule-strong); }
+/* Where the money starts -- now Advertised, since the price columns read as a
+   bill: what was advertised, what nitrox costs, what you cannot avoid, what it
+   comes to. The one vertical rule in the table apart from the pinned group,
+   because it is the one place a reader needs telling that the columns have
+   changed subject. */
+thead th[data-k="base"], tbody td.money { border-left:1px solid var(--rule-strong); }
 
 tbody td {
   padding:5px 9px; border-bottom:1px solid var(--rule);
@@ -320,8 +323,15 @@ tr.detail td > * { position:sticky; left:0; }
    96px on a phone. Clamping these would mean wrapping their contents in a
    span, which is more markup on every one of 882 rows for 115 rows that run
    to a second line. */
-.trip { white-space:normal; min-width:210px; max-width:320px; }
-.sites { white-space:normal; min-width:150px; max-width:210px; color:var(--ink-dim); font-size:11px; }
+/* `width`, not just `max-width`: in auto table layout a max-width on a cell is
+   a suggestion the algorithm may ignore, and these two took 397px and 261px of
+   a wide window between them -- enough on their own to push the Total off the
+   right-hand edge. A preferred width the text can wrap inside binds. */
+.trip { white-space:normal; width:240px; min-width:190px; max-width:240px; }
+.sites {
+  white-space:normal; width:180px; min-width:140px; max-width:180px;
+  color:var(--ink-dim); font-size:11px;
+}
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -519,16 +529,17 @@ a { color:var(--accent); }
     <h1>Egypt liveaboards &middot; May&ndash;August 2027</h1>
     <p class="sub">
       The advertised price is not the price. Every departure below is shown at
-      <strong>true cost</strong> &mdash; berth plus marine park fees, port dues,
-      fuel and everything else that lands on the bill later. Sort any column;
-      expand a row for the whole bill and where each number came from.
+      the <strong>total</strong> &mdash; the advertised berth plus marine park
+      fees, port dues, fuel and everything else that lands on the bill later.
+      Sort any column; expand a row for the whole bill and where each number
+      came from.
     </p>
   </div>
   <div class="stats">
     <div class="stat"><b id="shown">0</b><span>rows shown</span></div>
     <div class="stat"><b id="nboats">0</b><span>boats</span></div>
     <div class="stat"><b id="nitin">0</b><span>itineraries</span></div>
-    <div class="stat"><b id="gap">&mdash;</b><span>avg lands later</span></div>
+    <div class="stat"><b id="gap">&mdash;</b><span>avg mandatory fees</span></div>
   </div>
 </div>
 
@@ -588,7 +599,7 @@ a { color:var(--accent); }
 </div>
 
 <p class="hint">
-  Every fee a diver cannot avoid is already in the true cost &mdash; marine park,
+  Every fee a diver cannot avoid is already in the total &mdash; marine park,
   port, fuel, service charges and crew tips where an operator states an amount.
   The two switches above are the only optional extras, because a comparison is
   only easy when the headline number means the same thing on every row.
@@ -608,20 +619,33 @@ a { color:var(--accent); }
   </summary>
   <div class="footer-grid">
     <div>
-      <h3>True cost</h3>
+      <h3>Reading the price columns</h3>
       <p>
-        The advertised berth price, plus every fee a diver cannot avoid: marine
-        park charges, port and harbour dues, fuel surcharges and the visa on
-        arrival. Optional extras are added only when you switch them on above.
+        They are a bill, left to right: <b>Advertised</b> is the berth price the
+        operator leads with. <b>Nitrox</b> is what breathing gas costs on that
+        boat, or that it is bundled. <b>Mandatory fees</b> is everything on top
+        of the advertised price. <b>Total</b> is what you will actually pay.
+      </p>
+      <p>
+        Advertised plus Mandatory fees is the Total, on every row. Sort by
+        Mandatory fees to see which trips hold the most back &mdash; but there
+        is no rating of operators here: two boats can reach the same total by
+        pricing very differently, and expanding a row shows how.
       </p>
     </div>
     <div>
-      <h3>What lands later</h3>
+      <h3>Mandatory fees</h3>
       <p>
-        The gap between the advertised price and what you actually pay. Sort by
-        it to see which trips hold back the most. There is no rating of
-        operators here: two boats can reach the same true cost by pricing very
-        differently, and the breakdown shows how.
+        Marine park and conservation charges, port and harbour dues, fuel
+        surcharges, the visa on arrival, and crew tips wherever an operator
+        publishes a figure. Nothing here is avoidable by declining it, which is
+        why it is in the total rather than beside it.
+      </p>
+      <p>
+        The two switches above are the exception: turn on rental gear or nitrox
+        and those amounts join this column too, because at that point they are
+        part of what you will pay. With both off &mdash; the default &mdash;
+        this column is the unavoidable extras and nothing else.
       </p>
     </div>
     <div>
@@ -640,12 +664,15 @@ a { color:var(--accent); }
       </p>
     </div>
     <div>
-      <h3>Unpriced</h3>
+      <h3>Extras with no price</h3>
       <p>
-        Extras the operator lists without a number &mdash; &ldquo;Rental
-        Gear&rdquo; named and left blank. Not zero and not absent: you will be
-        billed, and the listing does not say how much. The count says how
-        incomplete a true cost figure is.
+        Some operators list an extra and leave the number blank &mdash;
+        &ldquo;Rental Gear&rdquo;, named and empty. Not zero and not absent:
+        you will be billed, and the listing does not say how much.
+      </p>
+      <p>
+        Expand the row and each one is named under the bill, so a total built
+        on an incomplete disclosure says so rather than looking finished.
       </p>
     </div>
     <div>
@@ -705,7 +732,7 @@ a { color:var(--accent); }
       <h3>Disclosure</h3>
       <p>
         Whether the operator published its required extras at all. A listing
-        naming only optional ones gets no true cost: every Egyptian liveaboard
+        naming only optional ones gets no total: every Egyptian liveaboard
         pays park and port fees, so silence means either bundled or collected
         at the dock, and it does not say which.
       </p>
@@ -857,10 +884,10 @@ a { color:var(--accent); }
   var BAR_TRACK = 68;
 
   /* Where the total is a range, the bar is drawn from its low end -- the same
-     figure Lands later is worked out from. Said out loud, because a graphic
+     figure Mandatory fees is worked out from. Said out loud, because a graphic
      that answers a narrower question than the number above it should not do so
      silently. */
-  var BAR_TITLE = "Advertised, then what lands later. Scaled against the " +
+  var BAR_TITLE = "Advertised, then the fees on top of it. Scaled against the " +
     "dearest trip shown; drawn from the low end where the total is a range.";
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -952,9 +979,9 @@ a { color:var(--accent); }
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
         return '<span class="dim">—</span>';
       } },
-    { k: "base", t: "Advertised", num: true,
+    { k: "base", t: "Advertised", num: true, cls: "money",
       v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
-    { k: "total", t: "True cost", num: true, cls: "cost",
+    { k: "total", t: "Total", num: true, cls: "cost",
       v: function (d, i, m) { return m.total; },
       show: function (d, i, m) {
         if (!d.mandatory_known) return '<span class="dim">—</span>';
@@ -1028,17 +1055,18 @@ a { color:var(--accent); }
         if (m.nitrox.price != null) return eur(m.nitrox.price);
         return '<span class="dim">extra, no price</span>';
       } },
-    { k: "later", t: "Lands later", num: true,
+    /* Everything on top of the advertised price. Under the page's defaults
+       that is the fees a diver cannot refuse -- marine park, port dues, fuel,
+       the visa, and crew tips where an operator states a figure -- which is
+       what the heading says. Switching on nitrox or rental gear above adds
+       those to it too, because they are then part of what you will pay; the
+       footer says so, and the Nitrox column beside it shows one of them. */
+    { k: "later", t: "Mandatory fees", num: true,
       v: function (d, i, m) { return m.later; },
       show: function (d, i, m) {
         return d.mandatory_known
           ? '<span class="later">+' + eur(m.later) + "</span>"
           : '<span class="dim">—</span>';
-      } },
-    { k: "required", t: "Required fees", num: true,
-      v: function (d, i, m) { return m.required; },
-      show: function (d, i, m) {
-        return m.required > 0 ? eur(m.required) : '<span class="dim">—</span>';
       } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
@@ -1081,9 +1109,9 @@ a { color:var(--accent); }
      publishing. */
   var ORDER = [
     "start", "end", "boat", "guests",
-    "from", "to", "trip",
-    "total", "later", "base", "perdive", "nitrox", "sites",
-    "required", "availability", "disclosure", "source"
+    "from", "to", "trip", "sites",
+    "base", "nitrox", "later", "total", "perdive",
+    "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, reordered again.
      A phone shows about two columns beside the two pinned ones, and on the
@@ -1091,13 +1119,17 @@ a { color:var(--accent); }
      title and you scrolled 600px to find out what it cost. Here the money
      comes first and the descriptive columns sit behind it: nothing is hidden,
      the reading order is just inverted to match how much screen there is. */
-  /* The same columns wherever there is not room for the reading order above.
-     Identity, then the money, then everything the money is for.
+  /* The same columns, and the same price order within them, wherever there is
+     not room for the reading order above. Identity, then the money, then
+     everything the money is for.
 
-     Measured: with Guests, From, To and Trip ahead of it, True cost sits at
-     x 919-1083, so it needs 1083px of window to be on screen at all -- it fell
-     off a 900px and a 1024px laptop, which is most of them. The wide order is
-     the better read where it fits; this is the same table where it does not. */
+     The wide order reads as a bill and puts the Total last, which is right on
+     paper and expensive on screen: with Guests, From, To, Trip and Dive sites
+     ahead of the price block, and the Total at the end of it, the Total needs
+     about 1500px of window to be visible at all. It fell off a 1200px and a
+     1440px laptop, which is most of them. Below that the price block moves in
+     front of the descriptive columns -- Advertised, Nitrox, Mandatory fees,
+     Total, in that order still. */
   /* A phone fits the expander, two pinned columns and the price, and nothing
      else before it: 24 + 66 + 96 + 160 is 346 of 390. A third pinned column
      makes 412, and Return merely sitting third rather than pinned still makes
@@ -1107,22 +1139,27 @@ a { color:var(--accent); }
      you read once you have found the row. */
   var PHONE_ORDER = [
     "start", "boat",
-    "total", "later", "base", "perdive", "nitrox",
+    /* The one place the bill order gives way. A phone fits the expander, two
+       pinned columns and one price: Advertised, Nitrox and Mandatory fees
+       ahead of the Total put it at x 436 of a 390px screen. The Total is what
+       one row is compared with another by, so here it leads and its parts
+       follow it. */
+    "total", "later", "base", "nitrox", "perdive",
     "end", "guests", "from", "to", "trip", "sites",
-    "required", "availability", "disclosure", "source"
+    "availability", "disclosure", "source"
   ];
 
   var COMPACT_ORDER = [
     "start", "end", "boat",
-    "total", "later", "base", "perdive", "nitrox",
+    "base", "nitrox", "later", "total", "perdive",
     "guests", "from", "to", "trip", "sites",
-    "required", "availability", "disclosure", "source"
+    "availability", "disclosure", "source"
   ];
 
   /* Two questions, two breakpoints. `compact` is about how much room there is
      before the money column; `narrow` is about how much room there is at all,
      and drives the pinned-column widths and the folded filter banks. */
-  var compact = window.matchMedia("(max-width: 1100px)");
+  var compact = window.matchMedia("(max-width: 1700px)");
   var narrow = window.matchMedia("(max-width: 760px)");
 
   /* How many of the leading columns are pinned. By position, never by name:
@@ -1243,7 +1280,7 @@ a { color:var(--accent); }
       caveat = "This operator publishes no required extras. Every Egyptian " +
         "liveaboard pays marine park and port fees, so either they are already " +
         "inside the advertised price or they are collected at the dock — the " +
-        "listing does not say which, so no true cost is claimed here.";
+        "listing does not say which, so no total is claimed here.";
     } else if (row.m.unpriced.length) {
       caveat = "Plus " + row.m.unpriced.join(", ") + ": listed by the operator " +
         "with no price, so it cannot be added up here. It is not free.";
@@ -1307,7 +1344,7 @@ a { color:var(--accent); }
 
     /* Only average what has a figure: a trip whose required extras are
        unstated has no gap to average, and counting it as zero would drag the
-       number toward "nothing lands later". */
+       number toward "no fees on top". */
     var known = rows.filter(function (r) { return r.d.mandatory_known; });
     document.getElementById("gap").textContent = known.length
       ? eur(known.reduce(function (s, r) { return s + r.m.later; }, 0) / known.length)
