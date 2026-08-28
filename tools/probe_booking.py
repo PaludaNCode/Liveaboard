@@ -90,13 +90,17 @@ def dump_cabin_section(body: str, width: int) -> None:
     """
     starts = [m.start() for m in CABIN_BUTTON.finditer(body)]
     selects = [m.start() for m in CABIN_SELECT.finditer(body)]
-    if not starts or not selects:
+    if not starts:
         print("    no cabin markup found -- not dumping a guess at it")
         return
 
     start = max(0, starts[0] - 400)
-    # Past the last select by enough to show whatever closes the list.
-    end = min(len(body), selects[-1] + 14000)
+    # Past the last select by enough to show whatever closes the list. A page
+    # with no selects at all is the shape that matters most here: a sold-out
+    # sailing still *lists* its cabins, it just offers none of them, and
+    # "listed, none bookable" has to be told apart from "page unreadable".
+    # Requiring a select to dump anything is what hid that shape first time.
+    end = min(len(body), (selects[-1] if selects else starts[-1]) + 14000)
     print(f"    --- cabin section: {len(starts)} name button(s), "
           f"{len(selects)} select(s), offsets {start:,}-{end:,} ---")
     section = body[start:end]
