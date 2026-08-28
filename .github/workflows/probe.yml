@@ -104,7 +104,8 @@ jobs:
       - name: Read the booking page (#79)
         run: |
           python3 tools/probe_booking.py \
-            --tours "${{ inputs.booking_tours || '6240:415714' }}"
+            --tours "${{ inputs.booking_tours || '6240:415714' }}" \
+            --dump-cabins
 
       # Thirteen of the fifteen vessels on the skip list are not linked from
       # any Egypt listing, so the crawl never reaches them -- and from inside

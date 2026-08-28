@@ -97,6 +97,8 @@ def main() -> int:
                         help="page text to print per departure")
     parser.add_argument("--tours", default="",
                         help="explicit boatid:tourid pairs, e.g. 6240:415714")
+    parser.add_argument("--dump-cabins", action="store_true",
+                        help="print the markup around each cabin block")
     args = parser.parse_args()
 
     if args.tours:
@@ -152,6 +154,18 @@ def main() -> int:
             for key in keys[:15]:
                 print(f"      {key}")
 
+        if args.dump_cabins:
+            # The markup, not the flattened text. A parser written against
+            # text loses which element holds the price and which the count,
+            # and this project does not write parsers for markup nobody has
+            # read. Anchored on the phrase the page uses for the count.
+            for match in re.finditer(r"spaces? left", result.body, re.I):
+                start = max(0, match.start() - 3000)
+                print(f"    --- markup around {match.group(0)!r} "
+                      f"(offset {match.start():,}) ---")
+                print(result.body[start:match.end() + 600])
+                print()
+                break
         print(f"    --- first {args.chars} chars of page text ---")
         print("    " + text[: args.chars])
 
