@@ -16,14 +16,19 @@
     "an itinerary slug contradicts its own page 15 times out of 22. The same",
     "caution applies here: a vessel slug is not evidence of the vessel's name.",
     "",
-    "Keyed on our boat_id, not on the boat's name. 'MY Odyssey Liveaboard' has boat_id 'odyssey', and keying on a folded name got that entry wrong on the first attempt -- the id is what promote() builds every itinerary id from, so it is the thing that cannot quietly drift."
+    "Keyed on our boat_id, not on the boat's name. 'MY Odyssey Liveaboard' has boat_id 'odyssey', and keying on a folded name got that entry wrong on the first attempt -- the id is what promote() builds every itinerary id from, so it is the thing that cannot quietly drift.",
+    "",
+    "Amelie -> amelie-safari, new-sambo -> new-sambo-safari-boat-2 and odyssey ->",
+    "my-odyssey were here and were wrong. They came from substring containment,",
+    "which looked stronger than similarity scoring and is not: sharing a word with",
+    "a vessel's name says nothing about being that vessel. Every entry below is",
+    "confirmed against hull facts -- shop kind, country, trip lengths, ports --",
+    "and never against a name alone."
   ],
   "reviewed": "2026-08-28",
   "country": "egypt",
   "aliases": {
-    "amelie": "amelie-safari",
-    "new-sambo": "new-sambo-safari-boat-2",
-    "odyssey": "my-odyssey"
+    "iceberg": "my-iceberg"
   },
   "absent": [],
   "unlisted": []
