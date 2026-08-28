@@ -1,11 +1,29 @@
 """Adapter for padi.com.
 
-Status: **structural, and its crawl shape is now known to be wrong.** A probe
-on 2026-08-28 found PADI Travel on `travel.padi.com` — not under
-`www.padi.com/travel` — with a client-rendered listing that publishes no trip
-links to follow. `extract_requirements()` is unaffected and still the useful
-part; `TRAVEL_PATHS` and `discover()` need rewriting against a real response
-before this adapter is run. See `docs/sources/padi.com.md`.
+Status: **discovery and identity are verified against live pages; the entry bar
+itself is not yet reachable.** A probe on 2026-08-28 read the Egypt vessel pages
+on `travel.padi.com` and settled three things.
+
+Discovery needs no crawl and no browser. The operator sitemap enumerates all 269
+liveaboards, 58 of them Egyptian, so there is no listing to page through --
+which matters, because the listing at `/s/liveaboards/egypt/` is a Next.js app
+that server-renders a count and nothing else.
+
+Vessel pages *are* server-rendered, and carry the vessel, its fleet, and every
+itinerary title the operator sells. That is the identity half of the join.
+
+The entry bar is not in that HTML. PADI stores it per itinerary as two coded
+enums, and the page ships only their vocabulary -- reproduced verbatim below --
+while the values arrive over an AngularJS XHR whose bundle is CDN-hosted. So
+this module can map the vocabulary, and does; nothing here reads a value yet.
+
+One trap is load-bearing enough to state up front: **an itinerary slug is an
+opaque id, never a fact.** Fifteen of Hammerhead II's twenty-two slugs
+contradict the page they serve -- `mini-wrecks-and-nature-hurghada-hurghada-5-
+nights` answers with *Brothers Light 3 (Marsa Alam - Marsa Alam) 3 Nights*.
+Reading nights, ports or reefs out of a URL here produces confident nonsense.
+
+See `docs/sources/padi.com.md`.
 
 PADI plays a different role in this dataset than liveaboard.com does. It is
 weak on departure-level pricing and strong on the things the price comparison
@@ -23,26 +41,80 @@ from __future__ import annotations
 import re
 from typing import Iterator
 
+from html import unescape
+
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel
 
-HOST = "www.padi.com"
+HOST = "travel.padi.com"
+"""PADI Travel is its own host. `www.padi.com/travel` redirects here, and the
+`www` sitemap -- 3304 URLs of certification and dive-centre pages -- contains no
+travel URL at all."""
 
-TRAVEL_PATHS = (
-    "/travel/liveaboards",
-    "/travel/destinations/egypt",
-)
-"""Entry points for PADI Travel's liveaboard listings.
+OPERATOR_SITEMAP = f"https://{HOST}/sitemap-travel-dive-operators-page_1.xml"
+"""Every liveaboard and dive resort PADI Travel sells, in one 3 MB file.
 
-**Both 404.** Written from a guess at the URL shape and disproved by the first
-fetch: PADI Travel is a separate host (`travel.padi.com/s/liveaboards/all/`,
-`travel.padi.com/diving-in/egypt/`). Left in place rather than swapped, because
-pointing at the real listing would fetch a page that `TRIP_LINK` cannot read —
-see `docs/sources/padi.com.md`.
+This replaces a listing crawl rather than seeding one. The search page cannot be
+paged through without a browser, and does not need to be.
 """
 
-TRIP_LINK = re.compile(r'href="(/travel/[a-z0-9\-/]*liveaboard[a-z0-9\-/]*)"', re.IGNORECASE)
+COUNTRY = "egypt"
+
+VESSEL_URL = re.compile(
+    rf"https://{re.escape(HOST)}/liveaboard/(?P<country>[a-z0-9-]+)/(?P<slug>[a-z0-9-]+)/"
+)
+"""A vessel page in the sitemap. Localised paths (`/de/tauchsafari-tauchen/...`)
+are five per vessel and deliberately not matched: one language is enough."""
+
+# The vessel page's itinerary nav, which is where the operator's own trip titles
+# live. Paired by the anchor that carries them, never by the slug: see the
+# module docstring on why a slug is not evidence.
+ITINERARY_NAV = re.compile(
+    r'href="/liveaboard/[a-z0-9-]+/[a-z0-9-]+/(?P<slug>[a-z0-9-]+)/"[^>]*>(?P<title>[^<]+)</a>',
+    re.IGNORECASE,
+)
+
+TRIP_TITLE = re.compile(
+    r"^(?P<name>.+?)\s*\((?P<ports>[^)]*)\)\s*(?P<nights>\d+)\s*Nights?$", re.IGNORECASE
+)
+"""PADI's trip title: "Name (Port - Port) N Nights".
+
+Minus the night count that is our own `Itinerary.name`, ports included, which is
+what makes the two sources joinable without inventing a key.
+"""
+
+NIGHTS_SUFFIX = re.compile(r"\s*\d+\s*Nights?\s*$", re.IGNORECASE)
+
+ZERO_WIDTH = dict.fromkeys(map(ord, "\u200b\u200c\u200d\ufeff"))
+"""Both sources carry zero-width spaces inside operator titles -- "Red Sea
+Charm\u200b:" reaches us that way from liveaboard.com too. They are part of the
+string; discarding them is a comparison's job, not a reader's."""
+
+CERTIFICATION_CHOICES: dict[int, DiverLevel] = {
+    10: DiverLevel.OPEN_WATER,       # "Open Water"
+    20: DiverLevel.OPEN_WATER,       # "Open Water + Nitrox"
+    30: DiverLevel.ADVANCED,         # "Advanced Open Water"
+    40: DiverLevel.ADVANCED,         # "Advanced Open Water + Nitrox"
+    50: DiverLevel.EXPERIENCED_100,  # "Tec Diver"
+}
+"""`ITINERARY_CERTIFICATION_CHOICES`, read verbatim off a live vessel page.
+
+Nitrox rides along with the certification in PADI's vocabulary but is a gas, not
+an entry bar, so 10 and 20 land on the same level and so do 30 and 40. Whether
+the trip charges for nitrox is a fee question, and `pricing.py` already answers
+it from the source that quotes a number.
+"""
+
+EXPERIENCE_DIVES: dict[int, int] = {0: 0, 10: 20, 20: 50, 30: 100}
+"""`EXPERIENCE_REQUIRED_DIVES`, likewise verbatim.
+
+PADI words every one of these as *recommended* -- "50+ dives recommended" --
+and a recommendation is not a gate. It is reported separately from
+`min_logged_dives` for that reason: hardening somebody's advice into a
+requirement is the same class of error as softening their requirement into
+advice, and this project does neither.
+"""
 
 CERT_PATTERNS: tuple[tuple[re.Pattern[str], DiverLevel], ...] = (
     (re.compile(r"\b(master\s+scuba|divemaster)\b", re.I), DiverLevel.EXPERIENCED_100),
@@ -64,37 +136,156 @@ class PadiComAdapter(SourceAdapter):
     source_id = "padi.com"
     host = HOST
 
+    country = COUNTRY
+
     def discover(self) -> Iterator[str]:
+        """Every vessel page for one country, from the operator sitemap.
+
+        One request, then no crawl: the sitemap already knows the whole
+        inventory, so there is nothing to page and nothing to guess. Scoped to a
+        country because the dataset is -- 58 Egyptian vessels out of 269, and the
+        other 211 are pages nobody here will read.
+        """
+        sitemap = self.fetcher.get(OPERATOR_SITEMAP)
         seen: set[str] = set()
-        for path in TRAVEL_PATHS:
-            url = f"https://{self.host}{path}"
-            try:
-                listing = self.fetcher.get(url)
-            except Exception:  # noqa: BLE001 - a dead listing must not end the run
+        for match in VESSEL_URL.finditer(sitemap.body):
+            if match.group("country") != self.country:
                 continue
-            yield url
-            for match in TRIP_LINK.finditer(listing.body):
-                trip_url = f"https://{self.host}{match.group(1)}"
-                if trip_url not in seen:
-                    seen.add(trip_url)
-                    yield trip_url
+            url = match.group(0)
+            if url not in seen:
+                seen.add(url)
+                yield url
 
     def parse(self, result: FetchResult) -> ScrapeOutput:
+        """Read one vessel page for what it actually states.
+
+        A vessel page names the boat and every itinerary the operator sells on
+        it. It does not state an entry bar -- that arrives over an XHR -- so this
+        emits the identity and says so in a warning rather than raising. A page
+        that names twenty-two trips is not a failed fetch; it is the join half of
+        the answer, and discarding it because the other half is missing would
+        leave the run with nothing at all.
+        """
         output = ScrapeOutput()
         name = self._name(result)
-        requirements = self.extract_requirements(result.body)
-        if not requirements:
-            raise ScrapeError(f"no certification requirements found in {result.url}")
+        if not name:
+            raise ScrapeError(f"no vessel name found in {result.url}")
 
-        output.itineraries.append(
-            {
-                "name": name,
-                "requirements": requirements,
-                "source_url": result.url,
-                "provenance": self.provenance(result.url),
+        provenance = self.provenance(result.url)
+        titles = self.itinerary_titles(result.body)
+        requirements = self.extract_requirements(result.body)
+
+        output.boats.append({"name": name, "source_url": result.url, "provenance": provenance})
+        for slug, title in sorted(titles.items()):
+            split = self.split_title(title)
+            itinerary: dict[str, object] = {
+                "name": split[0] if split else title,
+                "title": title,
+                "padi_slug": slug,
+                "boat_name": name,
+                "source_url": f"{result.url}{slug}/",
+                "provenance": provenance,
             }
-        )
+            if split:
+                itinerary["nights"] = split[2]
+            if requirements:
+                itinerary["requirements"] = requirements
+            output.itineraries.append(itinerary)
+
+        if not titles:
+            output.warnings.append(f"no itinerary titles in {result.url}")
+        if not requirements:
+            output.warnings.append(
+                f"no stated entry bar in {result.url} -- PADI serves it over an XHR, "
+                "so a vessel page cannot supply one"
+            )
         return output
+
+    @staticmethod
+    def compare_key(value: str) -> str:
+        """Letters and digits only, so two spellings of one title agree.
+
+        Operator titles reach the two sources with different punctuation and the
+        odd zero-width space; joining on the raw string loses matches that are
+        plainly the same trip.
+        """
+        return re.sub(r"[^a-z0-9]", "", value.translate(ZERO_WIDTH).lower())
+
+    @staticmethod
+    def split_title(title: str) -> tuple[str, str, int] | None:
+        """"Name (Port - Port) N Nights" -> (name-with-ports, ports, nights).
+
+        The night suffix is stripped before anything is matched, and in a loop,
+        because PADI sometimes appends it twice -- *"... (Marsa Alam - Hurghada)
+        7 Nights 7 Nights"* is a live title, not a typo of ours. Anchoring a
+        pattern on the end of the string instead just fails on that trip.
+
+        Two suffixes that disagree return ``None``. There is no way to tell which
+        one the operator meant, and a trip length is the denominator under every
+        per-night price on the page.
+
+        The name keeps its ports: two sailings differing only by port are two
+        trips, here as everywhere else in this codebase.
+        """
+        text = title.strip()
+        counts: list[int] = []
+        while True:
+            match = NIGHTS_SUFFIX.search(text)
+            if not match:
+                break
+            digits = re.search(r"\d+", match.group(0))
+            if not digits:
+                break
+            counts.append(int(digits.group()))
+            text = text[: match.start()].strip()
+        if not counts or len(set(counts)) > 1:
+            return None
+        ports = re.match(r"^(?P<name>.+?)\s*\((?P<ports>[^)]*)\)$", text)
+        if not ports:
+            return None
+        return text, ports.group("ports").strip(), counts[0]
+
+    @classmethod
+    def itinerary_titles(cls, html: str) -> dict[str, str]:
+        """Slug -> the operator's own title, from the vessel page's nav.
+
+        Keyed by slug only because something has to key it; the slug carries no
+        information and is never parsed. Titles without a night count are other
+        navigation -- destinations, deals -- and are dropped.
+        """
+        found: dict[str, str] = {}
+        for match in ITINERARY_NAV.finditer(html):
+            title = unescape(unescape(match.group("title"))).strip()
+            if title and cls.split_title(title):
+                found.setdefault(match.group("slug"), title)
+        return found
+
+    @staticmethod
+    def requirements_from_choices(
+        certification: int | None, experience: int | None = None
+    ) -> dict[str, object] | None:
+        """PADI's two coded enums -> this project's entry bar.
+
+        The vocabulary is verified; the plumbing that delivers values is not, so
+        this takes the codes as arguments rather than digging them out of a
+        payload nobody has seen. An unknown code returns ``None`` instead of a
+        default: a new enum member is a thing to go and read, not to guess at.
+        """
+        level = CERTIFICATION_CHOICES.get(certification) if certification is not None else None
+        dives = EXPERIENCE_DIVES.get(experience) if experience is not None else None
+        if level is None and dives is None:
+            return None
+        if certification is not None and level is None:
+            return None
+        if experience is not None and dives is None:
+            return None
+        requirements: dict[str, object] = {}
+        if level is not None:
+            requirements["min_level"] = level.value
+        if dives:
+            # Recommended, not required -- see EXPERIENCE_DIVES.
+            requirements["recommended_logged_dives"] = dives
+        return requirements or None
 
     @staticmethod
     def extract_requirements(html: str) -> dict[str, object] | None:
