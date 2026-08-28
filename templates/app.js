@@ -22,7 +22,7 @@
 
   var state = {
     sort: "start", dir: 1, q: "",
-    months: new Set(), ports: new Set(), sites: new Set(), operators: new Set(),
+    months: new Set(), ports: new Set(), sites: new Set(), boats: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
     toggles: {}, open: null
   };
@@ -164,19 +164,18 @@
      diver is choosing between, and it is what the operator names in the title. */
   var SITES = tally(function (i) { return i.dive_sites || []; });
 
-  /* The company that runs the trip, which the source names on every departure.
-     Grouping by it is useful — one operator's boats may all bundle nitrox
-     while another's all bill for it, and that is a fact about prices. Ranking
-     them is not: a per-operator honesty score was removed for reading as a
-     league table, and naming who sells a trip must not bring it back.
+  /* The vessel, which is what a diver is actually choosing.
+     Every boat here sells several trips across the season, so this is the
+     filter that answers "show me everything this boat runs" -- the question
+     the operator bank could not answer, because a company with six boats
+     returned six boats' worth of rows and no way to tell them apart.
 
-     A filter and a search term, deliberately not a column. Who sells a trip is
-     how you narrow the table, not something you compare two rows on: the
-     column repeated one of 42 names on every row and answered no question the
-     price columns beside it did not answer better. The field stays in the
-     dataset and in the search haystack, so a diver looking for a particular
-     company still finds them. */
-  var OPERATORS = tally(function (i) { return [i.operator]; });
+     The operator is not lost: it stays on every itinerary in the dataset and
+     in the search haystack, so typing a company's name still finds its whole
+     fleet. It is one word in a search box rather than 42 buttons above the
+     prices, which is the right weight for a question asked far less often
+     than "which boat". */
+  var BOATS = tally(function (i) { return [i.boat]; });
 
   /* ---------- columns ---------- */
 
@@ -451,7 +450,7 @@
       if (state.nightsMin !== null && dep.nights < state.nightsMin) return;
       if (state.nightsMax !== null && dep.nights > state.nightsMax) return;
       if (state.ports.size && !state.ports.has(itin.port_from)) return;
-      if (state.operators.size && !state.operators.has(itin.operator)) return;
+      if (state.boats.size && !state.boats.has(itin.boat)) return;
       if (state.sites.size) {
         /* Any, not all: picking Brothers and Daedalus means "either", which is
            how somebody shops for a week rather than a checklist. */
@@ -592,7 +591,7 @@
   }
 
   /* How many chips a bank shows before the rest go behind "more".
-     42 operators, 17 dive sites and 6 ports were all printed at once, which
+     67 boats, 17 dive sites and 6 ports would all print at once, which
      put 66 buttons above the table: the first row of data began 596px down a
      1440x900 window and 1708px down a phone, where nothing was visible at all
      without scrolling past two screens of filters. A filter you have not
@@ -717,7 +716,7 @@
   }), state.months, true);
   chips("ports", PORTS, state.ports, false);
   chips("sites", SITES, state.sites, false);
-  chips("operators", OPERATORS, state.operators, false);
+  chips("boats", BOATS, state.boats, false);
 
   /* A range rather than chips: the fleet runs three to fourteen nights but
      sits overwhelmingly at seven, so a chip per length would be one useful
@@ -756,7 +755,7 @@
 
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
-    state.operators.clear();
+    state.boats.clear();
     state.q = "";
     state.nightsMin = state.nightsMax = null;
     state.hideSoldOut = false;
@@ -775,7 +774,7 @@
        chip out of its hidden tail, has to be rebuilt from the cleared set --
        repainting is the only thing that puts those chips back where they
        belong. */
-    ["months", "ports", "sites", "operators"].forEach(function (id) {
+    ["months", "ports", "sites", "boats"].forEach(function (id) {
       var node = document.getElementById(id);
       if (node && node.repaint) node.repaint();
     });
@@ -798,10 +797,10 @@
      is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
   function labelFilters() {
-    var n = state.ports.size + state.sites.size + state.operators.size;
+    var n = state.ports.size + state.sites.size + state.boats.size;
     filtersToggle.textContent = n
-      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or operator"
-      : "Filter by port, site or operator";
+      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or boat"
+      : "Filter by port, site or boat";
     filtersToggle.classList.toggle("active", n > 0);
   }
   filtersToggle.addEventListener("click", function () {
