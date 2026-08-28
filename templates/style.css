@@ -194,9 +194,17 @@ tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-s
 /* The advertised price and what was added, drawn to scale under the total:
    bar length compares down the column, the split compares within one row.
    Three pixels, because it is a second reading of numbers already printed --
-   not a chart. */
+   not a chart.
+
+   Laid over the cell rather than stacked under the number. In the flow it
+   added nine pixels to every row -- 675 of 882 rows went from 30px to 39 for
+   a 3px graphic, and cost three rows of the twelve visible on a laptop. The
+   bar is a second reading of the figure above it, so it belongs in that
+   figure's space, not in a line of its own. */
+tbody td.cost { position:relative; }
 .anchor {
-  display:block; height:3px; margin:3px 0 1px auto; min-width:14px;
+  position:absolute; right:9px; bottom:3px;
+  height:3px; min-width:14px;
   border-radius:2px; overflow:hidden; background:var(--rule);
 }
 .anchor i { display:block; height:100%; float:left; }
@@ -247,6 +255,12 @@ thead th.stick, thead th.stick2 { z-index:25; }
 /* Not part of the number beside it, and must not read as though it were. */
 .plus { color:var(--later); font-weight:500; font-size:11px; }
 .dim { color:var(--ink-faint); }
+/* Deliberately not line-clamped. `-webkit-line-clamp` needs
+   `display:-webkit-box`, which on a `<td>` replaces `display:table-cell` and
+   takes the cell out of the table layout entirely -- rows went from 30px to
+   96px on a phone. Clamping these would mean wrapping their contents in a
+   span, which is more markup on every one of 882 rows for 115 rows that run
+   to a second line. */
 .trip { white-space:normal; min-width:210px; max-width:320px; }
 .sites { white-space:normal; min-width:150px; max-width:210px; color:var(--ink-dim); font-size:11px; }
 
@@ -328,12 +342,39 @@ a { color:var(--accent); }
    =========================================================================== */
 .filters-toggle { display:none; }
 
+/* Two breakpoints, because the page has two different problems.
+ *
+ * Measured chrome height above the table, at 900px tall:
+ *
+ *     390px  222px      1024px  454px
+ *     760px  222px      1200px  424px
+ *     768px  596px      1440px  373px
+ *
+ * The cliff at 768 is not the columns -- True cost is on screen from 390px up.
+ * It is the three filter banks wrapping to three lines each, which costs 8 of
+ * the rows a 900px-tall window could hold. So folding the banks away starts at
+ * 1000px, where they first stop fitting on one line each, while the column
+ * reorder and the narrow sticky widths wait for an actually narrow screen.
+ */
+@media (max-width: 1000px) {
+  .hint { display:none; }
+  .filters-toggle {
+    display:block; width:100%; text-align:left; font:inherit; font-size:11px;
+    text-transform:uppercase; letter-spacing:.09em; color:var(--ink-faint);
+    background:var(--panel); border:0; border-bottom:1px solid var(--rule);
+    padding:9px 12px; cursor:pointer;
+  }
+  .filters-toggle::after { content:" ▸"; color:var(--accent); }
+  body.filters-open .filters-toggle::after { content:" ▾"; }
+  .filterbar { display:none; }
+  body.filters-open .filterbar { display:flex; }
+}
+
 @media (max-width: 760px) {
   /* The thesis paragraph is the argument, and it is in the README, the footer
      and the page title. On a phone it is 150px of prose in front of the
      evidence for it. */
   .sub { display:none; }
-  .hint { display:none; }
   h1 { font-size:16px; }
   .masthead { padding:10px 12px; gap:8px 16px; }
   .stats { gap:14px; margin-left:0; }
@@ -347,17 +388,7 @@ a { color:var(--accent); }
   .tgroup.meta-right #metaLine { display:none; }
   input[type="search"] { min-width:0; width:100%; }
   .tgroup:has(input[type="search"]) { flex:1 1 100%; }
-
-  .filters-toggle {
-    display:block; width:100%; text-align:left; font:inherit; font-size:11px;
-    text-transform:uppercase; letter-spacing:.09em; color:var(--ink-faint);
-    background:var(--panel); border:0; border-bottom:1px solid var(--rule);
-    padding:9px 12px; cursor:pointer;
-  }
-  .filters-toggle::after { content:" ▸"; color:var(--accent); }
-  body.filters-open .filters-toggle::after { content:" ▾"; }
-  .filterbar { display:none; }
-  body.filters-open .filterbar { display:flex; }
+  .filters-toggle { padding:9px 12px; }
 
   /* Two pinned columns still name every row, but narrower: at 390px they were
      taking 214px and leaving 176 for the numbers. */
@@ -375,8 +406,15 @@ a { color:var(--accent); }
   tbody tr.row.alt .expander { background:var(--row-alt); }
   tbody tr.row:hover .expander { background:var(--row-hover); }
   tbody td, thead th { padding:6px 7px; }
-  .trip { min-width:150px; max-width:190px; }
-  .sites { min-width:120px; max-width:160px; }
+  /* One line each, ellipsised, on this screen only. Both columns sit behind
+     the horizontal scroll here, yet their wrapping still set the height of
+     every row: rows ran 35 to 88px and the tallest of them pushed six rows of
+     prices off a screen that had ten. The ellipsis is visible, so a truncated
+     name reads as truncated rather than as the whole of it. */
+  .trip, .sites {
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    min-width:0; max-width:170px;
+  }
   /* Comfortably tappable without making the row taller than it has to be. */
   .expand { min-width:26px; min-height:26px; }
   .site-footer { max-height:60vh; }
