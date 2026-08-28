@@ -242,13 +242,17 @@ class ScrapeOutput:
     departures: list[dict[str, Any]] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     unread: list[str] = field(default_factory=list)
-    """Pages this run could not read: blocked, or fetched and unparseable.
+    """Pages this run did not read: skipped, blocked, or fetched unparseable.
 
     Not the same as a page that said nothing. A vessel page carrying a Product
     node and no Events is a boat selling nothing that month, and its absence
     from ``departures`` is the answer. A page that came back with no structured
     data at all answers nothing, and treating the two alike is how a run that
     failed to read five sailings publishes a site that says they do not exist.
+
+    A vessel the barren list skipped belongs here for the same reason, even
+    though nothing went wrong: the run chose not to ask, so it has no more
+    evidence about that boat than if the page had failed.
     """
     archive: list[dict[str, Any]] = field(default_factory=list)
     """The structured data each page published, whether or not we parse it.
@@ -313,6 +317,7 @@ class SourceAdapter(ABC):
     def __init__(self, fetcher: PoliteFetcher) -> None:
         self.fetcher = fetcher
         self._notes: list[str] = []
+        self._unread: list[str] = []
 
     def note(self, message: str) -> None:
         """Record something the run should report but which is not fatal.
@@ -323,6 +328,21 @@ class SourceAdapter(ABC):
         it. That is the failure this project can least afford.
         """
         self._notes.append(message)
+
+    def not_looked_at(self, url: str) -> None:
+        """Record a page this run decided not to fetch.
+
+        Deliberately the same channel as a page that came back unreadable,
+        because the consequence is identical: this run learned nothing about
+        it, and publishing its absence would delete whatever it holds. A
+        vessel skipped by the barren list did exactly that -- AVO's and Blue's
+        three sailings were dropped from the site and reported as withdrawn by
+        a run that never asked the source about them.
+
+        Discovery is a generator and cannot return this, which is why it lands
+        here rather than on the output directly. Same reason as ``note``.
+        """
+        self._unread.append(url)
 
     def provenance(self, url: str, retrieved: date | None = None) -> dict[str, Any]:
         return {
@@ -400,6 +420,7 @@ class SourceAdapter(ABC):
                 )
 
         output.warnings.extend(self._notes)
+        output.unread.extend(self._unread)
         if fetched == 0:
             output.warnings.append(
                 f"{self.source_id}: no page was fetched at all — check the entry paths"

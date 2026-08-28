@@ -180,17 +180,27 @@ def carry_unread(
     unread: Iterable[str],
     today: date,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
-    """Departures and vessels the last run read and this one could not.
+    """Departures and vessels the last run read and this one did not.
 
     A vessel page is fetched once per season month, so one unreadable response
     empties that boat's month while the other three come back fine. Publishing
     that absence deleted five real, bookable DUNE Longara sailings from the
     site and reported them as withdrawn.
 
-    The same rule the fee book already follows: a run that could not look at
+    The barren skip list did the same thing without anything going wrong: it
+    holds a vessel back for a week to save four requests, and while it does,
+    that vessel's departures were dropped and reported as withdrawn. AVO and
+    Blue lost three real, bookable sailings that way, and a probe found them
+    still on sale.
+
+    The same rule the fee book already follows: a run that did not look at
     something knows nothing about it, and knowing nothing is not the same as
     knowing there is nothing. Carried rows keep their original ``retrieved``
     date, so the page still says exactly when each price was last read.
+
+    ``CARRY_MAX_DAYS`` deliberately outlasts ``BARREN_RECHECK_DAYS``: a skipped
+    vessel is re-read within a week, so the carry never has to hold longer than
+    the skip does.
 
     Returns the departures, the vessel records they need, and one note per
     page carried.
@@ -217,11 +227,16 @@ def carry_unread(
     # promote cannot find a vessel for is a departure dropped. Offered rather
     # than imposed -- the caller keeps this run's record wherever it has one,
     # so a stale summary never displaces a fresh one.
+    # One per vessel. The candidate holds a record per *month page*, so a boat
+    # whose whole season is carried would otherwise arrive four times over.
     carried_slugs = {row.get("boat_slug") for row in departures}
-    itineraries = [
-        row for row in previous.get("itineraries", [])
-        if row.get("id") in carried_slugs and fresh(row)
-    ]
+    itineraries: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in previous.get("itineraries", []):
+        slug = row.get("id")
+        if slug in carried_slugs and slug not in seen and fresh(row):
+            seen.add(slug)
+            itineraries.append(row)
 
     notes = []
     for url in sorted(pages):
@@ -232,8 +247,8 @@ def carry_unread(
         if kept:
             notes.append(
                 f"carried {kept} departure(s) forward from the last run: "
-                f"{url} could not be read, and an unreadable page is not an "
-                f"empty one"
+                f"{url} was not read this run, and a page nobody looked at is "
+                f"not an empty one"
             )
     return departures, itineraries, notes
 

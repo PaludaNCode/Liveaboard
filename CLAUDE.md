@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 465 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 470 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -104,6 +104,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   slow or unreachable, against 0.6 seconds without it (#59). Fonts are the
   visitor's own now. Adding a host back is adding a way for the page to be
   blank on somebody else's network.
+- **A page nobody read is not an empty one**, however it went unread. Two
+  mechanisms have now deleted real, bookable trips this way and both were
+  reported as withdrawals. A vessel-month page that answers nothing is asked
+  again (`PARSE_ATTEMPTS`) and carried forward if it fails twice. A vessel the
+  **barren skip list** holds back is carried too: nothing goes wrong there at
+  all, the run simply chooses not to look, and AVO's and Blue's three sailings
+  were dropped by a run that never asked — a probe found all three still on
+  sale. `discover()` records what it skips via `not_looked_at`, so the skip and
+  the failure travel down the same channel. `CARRY_MAX_DAYS` outlasts
+  `BARREN_RECHECK_DAYS` by design.
 - **An unreadable page is not an empty one.** A vessel page is fetched once per
   season month, so one response with no JSON-LD empties that boat's month while
   the other three come back fine — and it looks exactly like a boat that sells
