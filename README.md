@@ -168,8 +168,15 @@ response and not the page: the crawl now asks a second time, which recovers
 them. A markup parser is ruled out; the JSON-LD is there, it just occasionally
 is not served.
 
-Where a page answers nothing twice, `scrape` carries the previous run's
-departures forward for up to a fortnight, keeping each row's original `retrieved` date so the page still says
+The barren skip list turned out to lose trips the same way, with nothing going
+wrong at all: it holds a vessel back for a week to save four requests, and
+while it does, that vessel's departures were dropped and reported as
+withdrawn. AVO's and Blue's three sailings went that way, and a probe found
+all three still on sale. A skipped page is now recorded exactly like a failed
+one, because the consequence is identical: the run did not look.
+
+Where a page goes unread — skipped, or answering nothing twice — `scrape`
+carries the previous run's departures forward for up to a fortnight, keeping each row's original `retrieved` date so the page still says
 when every price was last read, and noting each carried page in the candidate's
 warnings. After that they drop out — a page unread for two weeks is one we can
 no longer claim to see. The same rule the fee book already followed: a run that
