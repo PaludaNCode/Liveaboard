@@ -24,7 +24,12 @@
     sort: "start", dir: 1, q: "",
     months: new Set(), ports: new Set(), sites: new Set(), boats: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
-    toggles: {}, open: null
+    toggles: {}, open: null,
+    /* Rows the visitor has marked to keep their place while scrolling
+       sideways. Keyed on the departure id rather than the row index, so a
+       mark survives sorting, filtering and the table being redrawn under it --
+       an index would follow the position and mark whatever moved into it. */
+    marked: new Set()
   };
   D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
 
@@ -651,8 +656,10 @@
              `:nth-of-type(even)`. That selector counts every `tr` in the
              tbody, and an expanded row injects one -- so opening any row
              inverted the stripes of every row below it. */
+          var marked = state.marked.has(row.d.id);
           return '<tr class="row' + (n % 2 ? " alt" : "") +
-            (row.d.bookable ? "" : " gone") + '">' +
+            (row.d.bookable ? "" : " gone") + (marked ? " marked" : "") +
+            '" aria-selected="' + marked + '" data-id="' + esc(row.d.id) + '">' +
             '<td class="expander"><button class="expand" data-n="' + n +
             '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td>" +
             tds + "</tr>" +
@@ -771,9 +778,36 @@
 
   document.getElementById("body").addEventListener("click", function (event) {
     var button = event.target.closest(".expand");
-    if (!button) return;
-    var row = visible()[+button.dataset.n];
-    state.open = state.open === row.d.id ? null : row.d.id;
+    if (button) {
+      var row = visible()[+button.dataset.n];
+      state.open = state.open === row.d.id ? null : row.d.id;
+      draw();
+      return;
+    }
+
+    /* Anywhere else on a row marks it, so the visitor can keep their place
+       while scrolling sixteen columns sideways.
+     *
+       Three things it must not do. It must not steal a click meant for a
+       link -- the Source column opens the operator's own listing, and a
+       marked row is no consolation for not going there. It must not fire
+       inside an expanded bill, which is a panel the visitor opened and not
+       part of the row's own surface. And it must not fire at the end of a
+       drag: selecting a price to copy it ends in a mouseup over the row, and
+       toggling a highlight underneath the text being selected reads as the
+       page fighting back. `isCollapsed` is false exactly when text was
+       dragged, which is the distinction wanted -- not whether a selection
+       exists, since an old one elsewhere on the page would then block every
+       mark. */
+    if (event.target.closest("a, button")) return;
+    var tr = event.target.closest("tr.row");
+    if (!tr) return;
+    var selection = window.getSelection && window.getSelection();
+    if (selection && !selection.isCollapsed) return;
+
+    var id = tr.dataset.id;
+    if (state.marked.has(id)) state.marked.delete(id);
+    else state.marked.add(id);
     draw();
   });
 
@@ -835,6 +869,10 @@
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
     state.boats.clear();
+    /* Marks go with the filters. Reset puts the table back to how it opened,
+       and a highlight left behind on a row the visitor can no longer find is
+       worse than no highlight at all. */
+    state.marked.clear();
     state.q = "";
     state.nightsMin = state.nightsMax = null;
     state.hideSoldOut = false;
