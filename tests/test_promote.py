@@ -638,9 +638,11 @@ class TestDisplayTitle(unittest.TestCase):
         # Deliberately not the Brothers/Daedalus/Elphinstone route: that one is
         # also folded onto a house spelling, which would make this pass or fail
         # for a reason that has nothing to do with the ports.
+        # The dashes become house separators on the way through -- it is a
+        # route list -- so the assertion is about the bracket, not the commas.
         self.assertEqual(
             self.title("Daedalus - Rocky - Zabargad (Hurghada - Hurghada)"),
-            "Daedalus - Rocky - Zabargad",
+            "Daedalus, Rocky & Zabargad",
         )
 
     def test_it_survives_a_port_being_aliased(self):
@@ -1469,14 +1471,14 @@ class TestNoOtherRouteIsRewritten(unittest.TestCase):
 
     UNTOUCHED = [
         "North & Brothers",
-        "North - Brothers",
-        "Daedalus - Rocky - Zabargad - Elphinstone",
         "Daedalus, Rocky, Zabargad & Elphinstone",
         "North & Tiran",
-        "North - Tiran",
     ]
 
-    def test_other_routes_keep_their_own_punctuation(self):
+    def test_other_routes_keep_their_own_words(self):
+        """Only Brothers/Daedalus/Elphinstone is folded onto a house *name*.
+        Other routes take the house separators and keep their own reefs, in
+        their own order."""
         for name in self.UNTOUCHED:
             with self.subTest(name):
                 data = promote(candidate([departure(name=name)]), season=SEASON)
@@ -1579,13 +1581,13 @@ class TestErrorsInATitleAreCorrected(unittest.TestCase):
 
     def test_the_two_misspellings_of_daedalus(self):
         self.assertEqual(self.title("Daedulus, Sataya, Elphinstone"),
-                         "Daedalus, Sataya, Elphinstone")
+                         "Daedalus, Sataya & Elphinstone")
         self.assertEqual(self.title("Deadalus & Elba Reef"),
                          "Daedalus & Elba Reef")
 
     def test_the_one_misspelling_of_zabargad(self):
         self.assertEqual(self.title("Rocky, Zarbagad, St. John's"),
-                         "Rocky, Zabargad, St. John's")
+                         "Rocky, Zabargad & St. John's")
 
     def test_the_correction_is_listed_not_guessed(self):
         """A near-miss rule that catches those also catches a reef that only
@@ -1683,11 +1685,14 @@ class TestFourReefsGetOneSpelling(unittest.TestCase):
                 self.assertEqual(self.title(written), "Ras Mohammed")
 
     def test_four_reefs_and_nothing_generalised(self):
-        """Separators and word order stay the operators' own, and the reef
-        names the fleet also splits are left exactly as they were written."""
-        for name in ("North - Brothers", "North Brothers", "Rocky & Rocky Island",
-                     "Zabargad Islands",
-                     "Sataya - Fury Shoals", "Elphinstone, Daedalus"):
+        """The reef names the fleet also splits are left exactly as written.
+
+        Separators are no longer in this list: route lists take the house
+        punctuation. Word order still is -- these differ from their twins by
+        sequence and stay two titles.
+        """
+        for name in ("North Brothers", "Rocky & Rocky Island",
+                     "Zabargad Islands", "Elphinstone & Daedalus"):
             with self.subTest(name):
                 self.assertEqual(self.title(name), name)
 
@@ -1703,3 +1708,91 @@ class TestFourReefsGetOneSpelling(unittest.TestCase):
         accepts both, so the route still prints once."""
         self.assertEqual(self.title("Brother Islands - Daedalus - Elphinstone"),
                          "Brothers, Daedalus & Elphinstone")
+
+
+class TestHouseSeparatorsOnRouteLists(unittest.TestCase):
+    """One punctuation for a list of stops: commas, then & before the last.
+
+    The fleet writes the same two-stop route as "North & Brothers", "North -
+    Brothers" and "North and Brothers", and prints all three a row apart.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_every_separator_reaches_one_punctuation(self):
+        for written in ("North & Brothers", "North - Brothers",
+                        "North and Brothers", "North + Brothers",
+                        "North, Brothers", "North | Brothers"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "North & Brothers")
+
+    def test_a_longer_list_takes_commas_and_one_ampersand(self):
+        self.assertEqual(
+            self.title("Daedalus - Rocky - Zabargad - Elphinstone"),
+            "Daedalus, Rocky, Zabargad & Elphinstone")
+
+    def test_a_doubled_separator_collapses(self):
+        """"Tiran, & Dahab" is a comma and an ampersand doing one job."""
+        self.assertEqual(self.title("North Reefs, Wrecks, Tiran, & Dahab"),
+                         "North Reefs, Wrecks, Tiran & Dahab")
+
+    def test_word_order_is_still_the_operators(self):
+        """The line held from the start. Two titles naming the same reefs in a
+        different sequence stay two titles: nothing here can verify the order
+        means something, and nothing may assume it means nothing."""
+        self.assertEqual(self.title("St. John's & Daedalus"), "St. John's & Daedalus")
+        self.assertEqual(self.title("Daedalus & St. John's"), "Daedalus & St. John's")
+
+    def test_a_single_stop_is_not_a_list(self):
+        for name in ("Fury Shoals", "North", "Brothers"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+
+class TestProseIsNotRepunctuated(unittest.TestCase):
+    """The boundary that makes house separators safe.
+
+    "Daedalus - Rocky - Zabargad" is a list whose dashes are separators.
+    "Dancing with Dolphins - Dolphin Liveaboard Safari" is a sentence whose
+    dash is not, and "Best of Dahab and Tiran" is English rather than two
+    stops joined by "and". Rewriting either would be editing prose.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_sentences_keep_their_own_punctuation(self):
+        for name in ("Best of Dahab and Tiran",
+                     "Dancing with Dolphins - Dolphin Liveaboard Safari",
+                     "Deep South Expedition: Secrets of Zabargad",
+                     "Northern Red Sea - Best Wreck Diving",
+                     "Best of the North",
+                     "Tec only Safari Trip: Northern Wrecks and Reefs"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_a_labelled_route_keeps_its_label_and_its_dashes(self):
+        """A colon means the operator is naming the trip, not listing stops.
+        The label is theirs, and the part after it is not a bare list."""
+        for name in ("Marine Park North: Brothers - Daedalus & Elphinstone",
+                     "Marine Park South: Daedalus - Rocky - Zabargad - Elphinstone"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_one_unrecognised_word_makes_it_prose(self):
+        """The test is that every part is something the dataset already knows.
+        A single unknown stop means we are not reading a list of stops."""
+        self.assertEqual(self.title("Daedalus - Somewhere Nobody Parses"),
+                         "Daedalus - Somewhere Nobody Parses")
+
+    def test_the_vocabulary_is_the_one_promote_already_reads_titles_with(self):
+        """A second list would drift from SITE_HINTS and start repunctuating
+        prose the moment a reef was added to one and not the other."""
+        from liveaboard.promote import SITE_HINTS, _is_place_list
+
+        self.assertTrue(_is_place_list(f"{SITE_HINTS[0]} - {SITE_HINTS[1]}"))

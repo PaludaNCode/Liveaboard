@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 501 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 510 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -93,7 +93,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
-  Only `title` is ever tidied, and it is tidied in exactly four ways.
+  Only `title` is ever tidied, and it is tidied in exactly five ways.
   **One route, not a house style.** `BDE`/`BDE_TITLE` fold the seven spellings
   of Brothers/Daedalus/Elphinstone onto one; the pattern is anchored at both
   ends, so *Marine Park North: Brothers - Daedalus & Elphinstone* and
@@ -101,7 +101,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   differ the same way and are deliberately left as their operators wrote them —
   do not generalise this into a rule that rewrites every title, and never
   reorder words: nothing here can verify the order means something, and nothing
-  may assume it means nothing. **Case only, otherwise.**
+  may assume it means nothing — *St. John's & Daedalus* and *Daedalus & St.
+  John's* stay two titles. **House separators, on route lists only.**
+  `_house_separators` prints a list of stops as commas then `&` before the
+  last, so *North - Brothers*, *North and Brothers* and *North & Brothers*
+  print once. It fires only where `_is_place_list` holds — every part between
+  the separators is something `SITE_HINTS`/`SITE_ALIASES` already recognises —
+  because *Dancing with Dolphins - Dolphin Liveaboard Safari* is a sentence
+  whose dash is not a separator and *Best of Dahab and Tiran* is English.
+  Reuse that vocabulary rather than writing a second one: a copy drifts, and
+  the day it drifts is the day the site starts repunctuating prose.
+  **Case only, otherwise.**
   `_settle_title_case` picks one spelling where titles differ *only* by
   capitalisation, and always one the operator actually used — never title-cased
   into a spelling nobody wrote, because the fleet is full of names a casing

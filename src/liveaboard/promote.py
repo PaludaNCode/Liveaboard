@@ -385,6 +385,59 @@ def _fold_reef_names(title: str) -> str:
     return title
 
 
+LIST_SEPARATOR = re.compile(r"\s*(?:,|&|\+|\||-|\band\b)\s*", re.I)
+"""What operators put between the stops of a route: , & + | - and."""
+
+LIST_WORDS = ("north", "south", "deep south", "wrecks", "wreck", "reefs",
+              "reef", "north reefs", "north reef", "north wrecks")
+"""Words that stand in for a place in a route list without being a reef.
+
+"North & Brothers" is a list of two stops, and the first is a direction. They
+are listed here rather than added to ``SITE_HINTS`` because they are not dive
+sites and must not become filter chips -- this table decides only whether a
+title is a list, never what the trip dives.
+"""
+
+
+def _is_place_list(title: str) -> bool:
+    """Whether a title is nothing but stops and the punctuation between them.
+
+    The boundary for house separators, and the reason they are safe to apply.
+    "Daedalus - Rocky - Zabargad" is a list whose dashes are separators;
+    "Dancing with Dolphins - Dolphin Liveaboard Safari" is a sentence whose
+    dash is not, and "Best of Dahab and Tiran" is English rather than two
+    stops joined by "and". Rewriting either would be editing prose.
+
+    Every part has to be something the dataset already recognises, so the test
+    is the site vocabulary the rest of promote reads titles with rather than a
+    second list that could drift from it.
+    """
+    parts = [p.strip() for p in LIST_SEPARATOR.split(title) if p.strip()]
+    if len(parts) < 2:
+        return False
+    known = {normalise(h) for h in SITE_HINTS}
+    known |= {normalise(a) for a in SITE_ALIASES}
+    known |= {normalise(w) for w in LIST_WORDS}
+    return all(normalise(p) in known for p in parts)
+
+
+def _house_separators(title: str) -> str:
+    """Commas, then an ampersand before the last -- on route lists only.
+
+    Order is left exactly as the operator wrote it. Two titles naming the same
+    reefs in a different sequence stay two titles: nothing here can verify the
+    order means something, and nothing here may assume it means nothing.
+
+    So this folds "North - Brothers", "North and Brothers" and "North &
+    Brothers" onto one, and leaves "Daedalus & St. John's" and "St. John's &
+    Daedalus" as the two different sentences their operators wrote.
+    """
+    if not _is_place_list(title):
+        return title
+    parts = [p.strip() for p in LIST_SEPARATOR.split(title) if p.strip()]
+    return f"{', '.join(parts[:-1])} & {parts[-1]}"
+
+
 def _settle_title_case(itineraries: list[dict[str, Any]]) -> None:
     """One spelling per title, where the only difference is capitalisation.
 
@@ -434,7 +487,9 @@ def _display_title(name: str) -> str:
     if ports is not None:
         stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
     stripped = _fold_reef_names(_fix_title_errors(stripped))
-    return BDE_TITLE if BDE.match(stripped) else stripped
+    if BDE.match(stripped):
+        return BDE_TITLE
+    return _house_separators(stripped)
 
 
 GUESTS = (

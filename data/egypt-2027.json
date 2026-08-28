@@ -4171,7 +4171,7 @@
     {
       "id": "alsuraya--north-and-brothers-hurghada-hurghada",
       "name": "North and Brothers (Hurghada - Hurghada)",
-      "title": "North and Brothers",
+      "title": "North & Brothers",
       "operator_id": "alsuraya",
       "boat_id": "alsuraya",
       "nights": 7,
@@ -5626,7 +5626,7 @@
     {
       "id": "aphrodite--deep-south-st-john-port-ghalib-port-ghalib",
       "name": "Deep South, St. John (Port Ghalib - Port Ghalib)",
-      "title": "Deep South, St. John's",
+      "title": "Deep South & St. John's",
       "operator_id": "aphrodite-liveaboard-safaris",
       "boat_id": "aphrodite",
       "nights": 7,
@@ -12207,7 +12207,7 @@
     {
       "id": "destiny--daedalus-fury-shoals-st-john-s-port-ghalib-port-ghalib",
       "name": "Daedalus - Fury Shoals - St. John's (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Fury Shoals - St. John's",
+      "title": "Daedalus, Fury Shoals & St. John's",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12410,7 +12410,7 @@
     {
       "id": "destiny--fury-shoals-elphinstone-safaga-port-ghalib-hurghada",
       "name": "Fury Shoals - Elphinstone - Safaga (Port Ghalib - Hurghada)",
-      "title": "Fury Shoals - Elphinstone - Safaga",
+      "title": "Fury Shoals, Elphinstone & Safaga",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12614,7 +12614,7 @@
     {
       "id": "destiny--north-brothers-hurghada-hurghada",
       "name": "North - Brothers (Hurghada - Hurghada)",
-      "title": "North - Brothers",
+      "title": "North & Brothers",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12815,7 +12815,7 @@
     {
       "id": "destiny--north-tiran-hurghada-hurghada",
       "name": "North - Tiran (Hurghada - Hurghada)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -13019,7 +13019,7 @@
     {
       "id": "destiny--north-wrecks-hurghada-hurghada",
       "name": "North - Wrecks (Hurghada - Hurghada)",
-      "title": "North - Wrecks",
+      "title": "North & Wrecks",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -13631,7 +13631,7 @@
     {
       "id": "destiny--st-john-s-fury-shoals-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's - Fury Shoals - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's - Fury Shoals - Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -14762,7 +14762,7 @@
     {
       "id": "discovery-i--north-wrecks-ras-mohamed-tiran-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohammed, Tiran",
+      "title": "North Wrecks, Ras Mohammed & Tiran",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -14997,7 +14997,7 @@
     {
       "id": "discovery-i--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers, Safaga",
+      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers & Safaga",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -15232,7 +15232,7 @@
     {
       "id": "discovery-i--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoals, Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -16150,7 +16150,7 @@
     {
       "id": "discovery-ii--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky, Zabargad, Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16379,7 +16379,7 @@
     {
       "id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers, Safaga",
+      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers & Safaga",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16610,7 +16610,7 @@
     {
       "id": "discovery-ii--rocky-zabargad-st-john-s-elphinstone-port-ghalib-port-ghalib",
       "name": "Rocky, Zabargad, St. John's, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad, St. John's, Elphinstone",
+      "title": "Rocky, Zabargad, St. John's & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16839,7 +16839,7 @@
     {
       "id": "discovery-ii--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoals, Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -19328,7 +19328,7 @@
     {
       "id": "dune-silky--north-tiran-safaga-safaga",
       "name": "North - Tiran (Safaga - Safaga)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "dune-world",
       "boat_id": "dune-silky",
       "nights": 7,
@@ -20604,7 +20604,7 @@
     {
       "id": "dune-titan--north-tiran-safaga-safaga",
       "name": "North - Tiran (Safaga - Safaga)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "dune-world",
       "boat_id": "dune-titan",
       "nights": 7,
@@ -22186,7 +22186,7 @@
     {
       "id": "emperor-asmaa--reefs-and-wrecks-hurghada-hurghada",
       "name": "Reefs and Wrecks (Hurghada - Hurghada)",
-      "title": "Reefs and Wrecks",
+      "title": "Reefs & Wrecks",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -22792,7 +22792,7 @@
     {
       "id": "emperor-asmaa--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. John's",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -23554,7 +23554,7 @@
     {
       "id": "emperor-elite--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. John's",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
@@ -24169,7 +24169,7 @@
     {
       "id": "emperor-superior--reefs-and-wrecks-hurghada-hurghada",
       "name": "Reefs and Wrecks (Hurghada - Hurghada)",
-      "title": "Reefs and Wrecks",
+      "title": "Reefs & Wrecks",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-superior",
       "nights": 7,
@@ -26994,7 +26994,7 @@
     {
       "id": "golden-dolphin--north-brother-islands-hurghada-port-ghalib",
       "name": "North - Brother Islands (Hurghada - Port Ghalib)",
-      "title": "North - Brothers",
+      "title": "North & Brothers",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
@@ -27865,7 +27865,7 @@
     {
       "id": "golden-dolphin-iv--daedalus-rocky-island-zabargad-st-johns-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky Island - Zabargad - St. Johns- Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky Island - Zabargad - St. John's - Elphinstone",
+      "title": "Daedalus, Rocky Island, Zabargad, St. John's & Elphinstone",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 10,
@@ -35136,7 +35136,7 @@
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
       "name": "North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
-      "title": "North Reefs - Wrecks - Ras Mohammed - Tiran - Brothers",
+      "title": "North Reefs, Wrecks, Ras Mohammed, Tiran & Brothers",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -35312,7 +35312,7 @@
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
       "name": "North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab (Hurghada - Hurghada)",
-      "title": "North Reefs, Wrecks, Ras Mohammed, Tiran, & Dahab",
+      "title": "North Reefs, Wrecks, Ras Mohammed, Tiran & Dahab",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -37018,7 +37018,7 @@
     {
       "id": "odyssey--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky - Zabargad - Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -39948,7 +39948,7 @@
     {
       "id": "red-sea-aggressor-v--deep-south-elba-reef-hamata-hamata",
       "name": "Deep South - Elba Reef (Hamata - Hamata)",
-      "title": "Deep South - Elba Reef",
+      "title": "Deep South & Elba Reef",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-v",
       "nights": 7,
@@ -43071,7 +43071,7 @@
     {
       "id": "royal-evolution--elba-reef-elba-borders-port-ghalib-port-ghalib",
       "name": "Elba Reef | Elba borders (Port Ghalib - Port Ghalib)",
-      "title": "Elba Reef | Elba borders",
+      "title": "Elba Reef & Elba borders",
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 10,
@@ -44571,7 +44571,7 @@
     {
       "id": "safy-mar--fury-shoals-and-daedalus-port-ghalib-port-ghalib",
       "name": "Fury Shoals and Daedalus (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoals and Daedalus",
+      "title": "Fury Shoals & Daedalus",
       "operator_id": "humpback-safari-yacht",
       "boat_id": "safy-mar",
       "nights": 7,
@@ -47863,7 +47863,7 @@
     {
       "id": "serenity--north-ras-mohamed-tiran-dahab-hurghada-hurghada",
       "name": "North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)",
-      "title": "North - Ras Mohammed, Tiran, Dahab",
+      "title": "North, Ras Mohammed, Tiran & Dahab",
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
@@ -48030,7 +48030,7 @@
     {
       "id": "serenity--north-and-wrecks-hurghada-hurghada",
       "name": "North and Wrecks (Hurghada - Hurghada)",
-      "title": "North and Wrecks",
+      "title": "North & Wrecks",
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
@@ -48367,7 +48367,7 @@
     {
       "id": "sinaistar--north-reefs-wrecks-and-tiran-hurghada-hurghada",
       "name": "North Reefs, Wrecks and Tiran (Hurghada - Hurghada)",
-      "title": "North Reefs, Wrecks and Tiran",
+      "title": "North Reefs, Wrecks & Tiran",
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
@@ -49449,7 +49449,7 @@
     {
       "id": "sindalahs--daedalus-st-johns-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus, St. Johns, Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, St. John's, Fury Shoals",
+      "title": "Daedalus, St. John's & Fury Shoals",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49689,7 +49689,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-hurghada",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Hurghada)",
-      "title": "Daedalus, Fury Shoals, Elphinstone",
+      "title": "Daedalus, Fury Shoals & Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49927,7 +49927,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Fury Shoals, Elphinstone",
+      "title": "Daedalus, Fury Shoals & Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -50165,7 +50165,7 @@
     {
       "id": "sindalahs--north-reef-ras-mohamed-tiran-brothers-island-hurghada-hurghada",
       "name": "North Reef, Ras Mohamed, Tiran, Brothers Island (Hurghada - Hurghada)",
-      "title": "North Reef, Ras Mohammed, Tiran, Brothers",
+      "title": "North Reef, Ras Mohammed, Tiran & Brothers",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -51432,7 +51432,7 @@
     {
       "id": "star-jet--abu-nuhas-ras-mohammed-tiran-dahab-hurghada-hurghada",
       "name": "Abu Nuhas - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)",
-      "title": "Abu Nuhas - Ras Mohammed - Tiran - Dahab",
+      "title": "Abu Nuhas, Ras Mohammed, Tiran & Dahab",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -51616,7 +51616,7 @@
     {
       "id": "star-jet--abu-nuhas-ras-muhammad-tiran-hurghada-hurghada",
       "name": "Abu Nuhas - Ras Muhammad - Tiran (Hurghada - Hurghada)",
-      "title": "Abu Nuhas - Ras Mohammed - Tiran",
+      "title": "Abu Nuhas, Ras Mohammed & Tiran",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52538,7 +52538,7 @@
     {
       "id": "star-jet--rocky-zabargad-st-john-s-elphinstone-marsa-alam-marsa-alam",
       "name": "Rocky & Zabargad - St. John's - Elphinstone (Marsa Alam - Marsa Alam)",
-      "title": "Rocky & Zabargad - St. John's - Elphinstone",
+      "title": "Rocky, Zabargad, St. John's & Elphinstone",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52724,7 +52724,7 @@
     {
       "id": "star-jet--rocky-zabargad-st-john-s-sataya-marsa-alam-marsa-alam",
       "name": "Rocky & Zabargad - St. John's - Sataya (Marsa Alam - Marsa Alam)",
-      "title": "Rocky & Zabargad - St. John's - Sataya",
+      "title": "Rocky, Zabargad, St. John's & Sataya",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52909,7 +52909,7 @@
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-hurghada-hurghada",
       "name": "Safaga - Brothers - Abu Nuhas (Hurghada - Hurghada)",
-      "title": "Safaga - Brothers - Abu Nuhas",
+      "title": "Safaga, Brothers & Abu Nuhas",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53094,7 +53094,7 @@
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-ss-thistlegorm-hurghada-hurghada",
       "name": "Safaga - Brothers - Abu Nuhas - SS Thistlegorm (Hurghada - Hurghada)",
-      "title": "Safaga - Brothers - Abu Nuhas - SS Thistlegorm",
+      "title": "Safaga, Brothers, Abu Nuhas & SS Thistlegorm",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53279,7 +53279,7 @@
     {
       "id": "star-jet--safaga-daedalus-brothers-marsa-alam-hurghada",
       "name": "Safaga - Daedalus - Brothers (Marsa Alam - Hurghada)",
-      "title": "Safaga - Daedalus - Brothers",
+      "title": "Safaga, Daedalus & Brothers",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53648,7 +53648,7 @@
     {
       "id": "star-jet--tiran-ras-muhammad-ss-thistlegorm-hurghada-hurghada",
       "name": "Tiran - Ras Muhammad - SS Thistlegorm (Hurghada - Hurghada)",
-      "title": "Tiran - Ras Mohammed - SS Thistlegorm",
+      "title": "Tiran, Ras Mohammed & SS Thistlegorm",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -54458,7 +54458,7 @@
     {
       "id": "sunshine--brothers-safaga-hurghada-hurghada",
       "name": "Brothers + Safaga (Hurghada - Hurghada)",
-      "title": "Brothers + Safaga",
+      "title": "Brothers & Safaga",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54584,7 +54584,7 @@
     {
       "id": "sunshine--north-safaga-hurghada-hurghada",
       "name": "North + Safaga (Hurghada - Hurghada)",
-      "title": "North + Safaga",
+      "title": "North & Safaga",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54714,7 +54714,7 @@
     {
       "id": "sunshine--north-dahab-hurghada-hurghada",
       "name": "North - Dahab (Hurghada - Hurghada)",
-      "title": "North - Dahab",
+      "title": "North & Dahab",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54842,7 +54842,7 @@
     {
       "id": "sunshine--north-tiran-hurghada-hurghada",
       "name": "North - Tiran (Hurghada - Hurghada)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -56213,7 +56213,7 @@
     {
       "id": "tala--rocky-zarbagad-st-johns-port-ghalib-port-ghalib",
       "name": "Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad, St. John's",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "red-sea-explorers",
       "boat_id": "tala",
       "nights": 7,
@@ -56942,7 +56942,7 @@
     {
       "id": "topaz--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky - Zabargad - Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -58748,7 +58748,7 @@
     {
       "id": "topaz--north-reef-wrecks-and-tiran-hurghada-hurghada",
       "name": "North Reef, Wrecks and Tiran (Hurghada - Hurghada)",
-      "title": "North Reef, Wrecks and Tiran",
+      "title": "North Reef, Wrecks & Tiran",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -59666,7 +59666,7 @@
     {
       "id": "unity--north-and-brothers-hurghada-hurghada",
       "name": "North and Brothers (Hurghada - Hurghada)",
-      "title": "North and Brothers",
+      "title": "North & Brothers",
       "operator_id": "red-sea-relax",
       "boat_id": "unity",
       "nights": 7,
@@ -59952,7 +59952,7 @@
     {
       "id": "vita-xplorer--daedalus-zabargad-rocky-island-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Zabargad - Rocky Island - Elphinstone",
+      "title": "Daedalus, Zabargad, Rocky Island & Elphinstone",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
