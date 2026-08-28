@@ -15,9 +15,19 @@
   --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481; --sold:#9c3535;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
 
-  /* Width of the sticky date column, and therefore the left offset of the
-     sticky boat column beside it. One value so the two cannot drift. */
-  --stick-w:82px;
+  /* The pinned columns, left to right, and therefore each one's offset from
+     the one before. Fixed widths rather than floors: content wider than a
+     minimum stretches the cell, and a pinned column whose neighbour is offset
+     by a number it has outgrown overlaps it while scrolled -- which is exactly
+     what happened at 79px against a 74px offset.
+
+     Which columns these are is decided in app.js by position, not by name, so
+     they are always adjacent. Two pinned columns with a third between them is
+     the same overlap by a different route. */
+  --st0:26px;   /* the expander */
+  --st1:82px;   /* Depart */
+  --st2:78px;   /* Return */
+  --st3:132px;  /* Boat   */
 
   /* Fonts the visitor already has.
    *
@@ -225,23 +235,48 @@ tbody tr.row:hover { background:var(--row-hover); }
   font-variant-numeric:tabular-nums;
 }
 
-/* Sticky first column: at sixteen columns the date is what identifies a row. */
-.stick {
-  position:sticky; left:0; z-index:10; background:var(--panel);
-  border-right:1px solid var(--rule-strong);
+/* The pinned columns: at twenty columns, when and on what is what identifies a
+   row, and a row that scrolls away from its own dates and boat cannot be
+   compared with anything. */
+.stick1, .stick2, .stick3 {
+  position:sticky; z-index:10; background:var(--panel);
+  overflow:hidden; text-overflow:ellipsis;
 }
-tbody tr.row.alt .stick, tbody tr.row.alt .stick2 { background:var(--row-alt); }
-tbody tr.row:hover .stick, tbody tr.row:hover .stick2 { background:var(--row-hover); }
-thead th.stick, thead th.stick2 { z-index:25; }
+.stick1 {
+  left:var(--st0); width:var(--st1); min-width:var(--st1); max-width:var(--st1);
+}
+.stick2 {
+  left:calc(var(--st0) + var(--st1));
+  width:var(--st2); min-width:var(--st2); max-width:var(--st2);
+}
+.stick3 {
+  left:calc(var(--st0) + var(--st1) + var(--st2));
+  width:var(--st3); min-width:var(--st3); max-width:var(--st3);
+}
+.stick3, .pins-2 .stick2 { border-right:1px solid var(--rule-strong); }
+tbody tr.row.alt .stick1, tbody tr.row.alt .stick2, tbody tr.row.alt .stick3 {
+  background:var(--row-alt);
+}
+tbody tr.row:hover .stick1, tbody tr.row:hover .stick2, tbody tr.row:hover .stick3 {
+  background:var(--row-hover);
+}
+thead th.stick1, thead th.stick2, thead th.stick3 { z-index:25; }
 
-/* The control that opens the bill, pinned to the right edge at every width.
-   Left at the end of the row it was the last column of a table 2446px wide, so
-   clicking it scrolled the table sideways to reach it -- and the fee panel,
-   which starts at the left edge of a detail cell that wide, went off screen
-   entirely. You pressed + and got an empty band. */
+/* The control that opens the bill, at the start of the row and pinned with the
+   columns that identify it.
+ *
+ * It began as the last column of a table 2100px wide, so clicking it scrolled
+ * the table sideways -- and the fee panel, anchored to the left of a cell that
+ * wide, went off screen: you pressed + and got an empty band. Pinning it to
+ * the right edge fixed that and caused the next thing, because a control
+ * pinned over the right edge sits on top of whatever is under it: at 390px it
+ * covered the last 30px of True cost, which is right-aligned, in the default
+ * unscrolled view. A row's controls belong at its start, where nothing is
+ * right-aligned into them. */
 td.expander, th.expander {
-  position:sticky; right:0; z-index:10; background:var(--panel);
-  border-left:1px solid var(--rule-strong);
+  position:sticky; left:0; z-index:10; background:var(--panel);
+  width:var(--st0); min-width:var(--st0); max-width:var(--st0);
+  padding:4px 4px;
 }
 thead th.expander { z-index:25; }
 tbody tr.row.alt .expander { background:var(--row-alt); }
@@ -252,26 +287,7 @@ tbody tr.row:hover .expander { background:var(--row-hover); }
    horizontal scroll left them. */
 tr.detail td > * { position:sticky; left:0; }
 
-/* The boat's name, pinned beside the date.
- *
- * The money columns moved left of the wide text ones, which puts True cost on
- * screen at a laptop width for the first time -- but the table is still wider
- * than a phone, and a row that scrolls away from its own boat's name cannot be
- * compared with anything. Two sticky columns need a known offset, so the date
- * column is given a fixed width rather than left to the content. */
-/* Fixed, not merely floored: content wider than the minimum stretched the
-   cell to 79px while the boat column beside it was still pinned at 74px, so
-   the two sticky columns overlapped by five pixels while scrolled. */
-.stick {
-  width:var(--stick-w); min-width:var(--stick-w); max-width:var(--stick-w);
-  overflow:hidden; text-overflow:ellipsis;
-}
-.stick2 {
-  position:sticky; left:var(--stick-w); z-index:10; background:var(--panel);
-  border-right:1px solid var(--rule-strong);
-  min-width:132px; max-width:132px;
-  overflow:hidden; text-overflow:ellipsis;
-}
+
 
 .later { color:var(--later); font-weight:600; }
 .inc { color:var(--ok); font-weight:500; font-size:11px; }
@@ -448,8 +464,12 @@ a { color:var(--accent); }
 
   /* Two pinned columns still name every row, but narrower: at 390px they were
      taking 214px and leaving 176 for the numbers. */
-  :root { --stick-w:76px; }
-  .stick2 { min-width:104px; max-width:104px; }
+  /* Still three pinned columns, but narrower. When, until when, and on what
+     is the least a row can be identified by, and dropping one of the three
+     would leave a row that scrolls away from either its dates or its boat. At
+     66 + 66 + 96 they take 228px of 390 and True cost, the next column, lands
+     inside the remaining 162. */
+  :root { --st0:24px; --st1:66px; --st2:96px; }
 
   td.expander, th.expander { padding:4px 6px; }
   tbody td, thead th { padding:6px 7px; }
@@ -463,7 +483,10 @@ a { color:var(--accent); }
     min-width:0; max-width:170px;
   }
   /* Comfortably tappable without making the row taller than it has to be. */
-  .expand { min-width:26px; min-height:26px; }
+  .expand { min-width:22px; min-height:24px; }
+  /* "DEPART ▲" needs 74px of the 66 the pinned date column has here, and a
+     header that reads "DEPAR…" is worse than a slightly smaller one. */
+  thead th { font-size:9px; letter-spacing:.04em; }
   /* Cell padding is 7px here, not 9, and the bar has to end where the number
      above it ends. */
   .anchor { right:7px; }

@@ -168,7 +168,14 @@
      Grouping by it is useful — one operator's boats may all bundle nitrox
      while another's all bill for it, and that is a fact about prices. Ranking
      them is not: a per-operator honesty score was removed for reading as a
-     league table, and naming who sells a trip must not bring it back. */
+     league table, and naming who sells a trip must not bring it back.
+
+     A filter and a search term, deliberately not a column. Who sells a trip is
+     how you narrow the table, not something you compare two rows on: the
+     column repeated one of 42 names on every row and answered no question the
+     price columns beside it did not answer better. The field stays in the
+     dataset and in the search haystack, so a diver looking for a particular
+     company still finds them. */
   var OPERATORS = tally(function (i) { return [i.operator]; });
 
   /* ---------- columns ---------- */
@@ -184,20 +191,11 @@
        one season, so the year is the same four characters on 882 rows and
        repeating it crowds out the day and month, which is the part being
        compared. The heading still names the season. */
-    { k: "start", t: "Depart", stick: true, v: function (d) { return d.start; },
+    { k: "start", t: "Depart", v: function (d) { return d.start; },
       show: function (d) { return shortDate(d.start); } },
     { k: "end", t: "Return", v: function (d) { return d.end; },
       show: function (d) { return shortDate(d.end); } },
-    { k: "nights", t: "Nts", num: true, v: function (d) { return d.nights; } },
-    /* Sticky beside the date: with the money moved left of the wide text
-       columns, a horizontal scroll still happens on a narrow window, and a row
-       that scrolls away from its own boat's name cannot be compared to
-       anything. */
-    { k: "boat", t: "Boat", stick2: true, v: function (d, i) { return i.boat; } },
-    /* Who sells the trip. Every one of these used to read "Operator not
-       captured": the source states it on every event and the parser dropped
-       the field. */
-    { k: "operator", t: "Operator", v: function (d, i) { return i.operator; } },
+    { k: "boat", t: "Boat", v: function (d, i) { return i.boat; } },
     /* Berth price is per person, so this says whether you are buying into a
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
@@ -309,13 +307,6 @@
       show: function (d, i, m) {
         return m.required > 0 ? eur(m.required) : '<span class="dim">—</span>';
       } },
-    { k: "unpriced", t: "Unpriced", num: true,
-      v: function (d, i, m) { return m.unpriced.length; },
-      show: function (d, i, m) {
-        return m.unpriced.length
-          ? '<span class="later">' + m.unpriced.length + "</span>"
-          : '<span class="dim">0</span>';
-      } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
        can buy at the top of the list. */
@@ -356,10 +347,9 @@
      a column that silently vanished would be a fact the page stopped
      publishing. */
   var ORDER = [
-    "start", "boat", "nights", "trip",
-    "total", "later", "base", "perdive", "nitrox",
-    "sites", "guests", "from", "to", "end", "operator",
-    "required", "unpriced", "availability", "disclosure", "source"
+    "start", "end", "boat", "guests", "from", "to", "trip",
+    "total", "later", "base", "perdive", "nitrox", "sites",
+    "required", "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, reordered again.
      A phone shows about two columns beside the two pinned ones, and on the
@@ -367,16 +357,53 @@
      title and you scrolled 600px to find out what it cost. Here the money
      comes first and the descriptive columns sit behind it: nothing is hidden,
      the reading order is just inverted to match how much screen there is. */
-  var NARROW_ORDER = [
-    "start", "boat", "total", "later", "nights", "base", "perdive", "nitrox",
-    "trip", "sites", "guests", "from", "to", "end", "operator",
-    "required", "unpriced", "availability", "disclosure", "source"
+  /* The same columns wherever there is not room for the reading order above.
+     Identity, then the money, then everything the money is for.
+
+     Measured: with Guests, From, To and Trip ahead of it, True cost sits at
+     x 919-1083, so it needs 1083px of window to be on screen at all -- it fell
+     off a 900px and a 1024px laptop, which is most of them. The wide order is
+     the better read where it fits; this is the same table where it does not. */
+  /* A phone fits the expander, two pinned columns and the price, and nothing
+     else before it: 24 + 66 + 96 + 160 is 346 of 390. A third pinned column
+     makes 412, and Return merely sitting third rather than pinned still makes
+     424 -- either way the number the page exists to show is off the edge.
+     So here Return follows the money rather than leading it. Of the two
+     identifiers, the boat's name is what a row is compared by; the return date
+     you read once you have found the row. */
+  var PHONE_ORDER = [
+    "start", "boat",
+    "total", "later", "base", "perdive", "nitrox",
+    "end", "guests", "from", "to", "trip", "sites",
+    "required", "availability", "disclosure", "source"
   ];
 
+  var COMPACT_ORDER = [
+    "start", "end", "boat",
+    "total", "later", "base", "perdive", "nitrox",
+    "guests", "from", "to", "trip", "sites",
+    "required", "availability", "disclosure", "source"
+  ];
+
+  /* Two questions, two breakpoints. `compact` is about how much room there is
+     before the money column; `narrow` is about how much room there is at all,
+     and drives the pinned-column widths and the folded filter banks. */
+  var compact = window.matchMedia("(max-width: 1100px)");
   var narrow = window.matchMedia("(max-width: 760px)");
 
+  /* How many of the leading columns are pinned. By position, never by name:
+     two pinned columns with a third between them overlap exactly as badly as
+     two with a wrong offset, and naming them let that happen the moment the
+     order changed. Three fit a laptop; on a phone 82 + 78 + 132 would be three
+     quarters of the screen, so a phone pins two and Return scrolls. */
+  function pinned() { return narrow.matches ? 2 : 3; }
+
   function orderColumns() {
-    var order = narrow.matches ? NARROW_ORDER : ORDER;
+    /* The rule that closes the pinned group goes on whichever column is last
+       in it, and that changes with the breakpoint. */
+    document.body.classList.toggle("pins-2", narrow.matches);
+    var order = narrow.matches ? PHONE_ORDER
+              : compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
       var x = order.indexOf(a.k), y = order.indexOf(b.k);
       return (x < 0 ? order.length : x) - (y < 0 ? order.length : y);
@@ -491,20 +518,25 @@
       return r.d.mandatory_known && r.m.total > top ? r.m.total : top;
     }, 0);
 
-    document.getElementById("head").innerHTML = "<tr>" + COLS.map(function (c) {
+    /* `stick1`..`stickN` on the leading columns, so the CSS offsets line up
+       with the order actually being rendered. */
+    var pins = pinned();
+    function pin(index) { return index < pins ? "stick" + (index + 1) : ""; }
+
+    document.getElementById("head").innerHTML = '<tr><th class="expander"></th>' +
+      COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
-      return '<th tabindex="0" class="' + (c.num ? "num " : "") +
-        (c.stick ? "stick" : c.stick2 ? "stick2" : "") +
+      return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
         '" data-k="' + c.k + '">' + c.t + " " + dir + "</th>";
-    }).join("") + '<th class="expander"></th></tr>';
+    }).join("") + "</tr>";
 
     document.getElementById("body").innerHTML = rows.length
       ? rows.map(function (row, n) {
-          var tds = COLS.map(function (c) {
+          var tds = COLS.map(function (c, col) {
             var v = c.show ? c.show(row.d, row.i, row.m) : esc(c.v(row.d, row.i, row.m));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
-              (c.stick ? " stick" : c.stick2 ? " stick2" : "") + '">' + v + "</td>";
+              " " + pin(col) + '">' + v + "</td>";
           }).join("");
           var open = state.open === row.d.id;
           /* Banding is written here from the row's own position, not left to
@@ -512,9 +544,10 @@
              tbody, and an expanded row injects one -- so opening any row
              inverted the stripes of every row below it. */
           return '<tr class="row' + (n % 2 ? " alt" : "") +
-            (row.d.bookable ? "" : " gone") + '">' + tds +
+            (row.d.bookable ? "" : " gone") + '">' +
             '<td class="expander"><button class="expand" data-n="' + n +
-            '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td></tr>" +
+            '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td>" +
+            tds + "</tr>" +
             (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
               feeTable(row) + "</td></tr>" : "");
         }).join("")
@@ -731,8 +764,10 @@
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
   var onWidthChange = function () { orderColumns(); draw(); };
-  if (narrow.addEventListener) narrow.addEventListener("change", onWidthChange);
-  else if (narrow.addListener) narrow.addListener(onWidthChange);
+  [compact, narrow].forEach(function (mq) {
+    if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
+    else if (mq.addListener) mq.addListener(onWidthChange);
+  });
 
   /* The banks fold away from 1000px down, and a chosen filter folds away with
      them: at 900px you could pick one operator, collapse the panel, and the
