@@ -48,6 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from liveaboard.promote import itinerary_key  # noqa: E402
 from liveaboard.scrape.padi_com import (  # noqa: E402
+    HOST,
     ITINERARY_DETAIL,
     ITINERARY_LIST,
     PadiComAdapter,
@@ -71,6 +72,33 @@ def get(url: str, timeout: int = 40) -> dict | None:
         # boat 34 of 38, after 13 MB of responses were already on disk. One
         # dropped connection must cost the itinerary, not the run.
         return None
+
+
+def shop_country(slug: str, fallback: str) -> str:
+    """The country PADI files this shop under, which the detail URL needs.
+
+    Not the cruising ground. All three Red Sea Aggressors are filed under
+    `united-states-of-america-usa` -- Aggressor Fleet is American -- while
+    sailing Hurghada, Port Ghalib and Hamata. Sending "egypt" for them 404s
+    every itinerary, which is exactly the 13 failures this import kept
+    reporting.
+
+    Read per boat rather than stored in the alias map: it is PADI's fact about
+    its own record, and a copy of it here is a copy that can go stale.
+    """
+    import re
+
+    url = f"https://{HOST}/liveaboard/{fallback}/{slug}/"
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=35) as r:
+            html = r.read().decode("utf-8", "replace")
+    except Exception:  # noqa: BLE001 - fall back rather than lose the boat
+        return fallback
+    if "window.shop = " not in html:
+        return fallback
+    block = html[html.index("window.shop = "):][:1200]
+    match = re.search(r'\bcountrySlug:\s*["\']?([^,"\'\n]*)', block)
+    return (match.group(1).strip() if match else "") or fallback
 
 
 def load(path: Path, default: dict) -> dict:
@@ -108,14 +136,21 @@ def main() -> int:
             print(f"{boat_id:<24} {slug:<28} no itineraries")
             continue
 
-        print(f"{boat_id:<24} {slug:<28} {listing['count']} itineraries")
+        country = args.country
+        wanted = [r for r in listing["results"]
+                  if f"{slug}::{r['slug']}" not in stored or args.refresh]
+        if wanted:
+            country = shop_country(slug, args.country)
+            time.sleep(args.delay)
+        note = "" if country == args.country else f"  (filed under {country})"
+        print(f"{boat_id:<24} {slug:<28} {listing['count']} itineraries{note}")
         for row in listing["results"]:
             store_key = f"{slug}::{row['slug']}"
             if store_key in stored and not args.refresh:
                 skipped += 1
                 continue
             detail = get(ITINERARY_DETAIL.format(
-                country=args.country, vessel=slug, slug=row["slug"]))
+                country=country, vessel=slug, slug=row["slug"]))
             time.sleep(args.delay)
             if not detail:
                 failed += 1
