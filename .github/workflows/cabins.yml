@@ -1,0 +1,124 @@
+name: Read cabin prices and berths left
+
+# Fetch each departure's cabin ladder from the booking page and commit the
+# book, on demand.
+#
+# Separate from the daily refresh for the same reason `itineraries.yml` is: it
+# needs no crawl. Both ids in the URL come out of the committed
+# `data/archive.json`, so this asks liveaboard.com for nothing but the booking
+# pages themselves — where a capped run through refresh.yml would scrape 320
+# vessel pages first to test three requests, which is worse for the source than
+# the thing being tested.
+#
+# So this is how a change to `scrape/cabins.py` gets proved: run it with
+# `limit: 3`, read what came back, then take the cap off. A capped run merges
+# into the book rather than replacing it — it knows nothing about the sailings
+# it did not visit — exactly as `scrape_fees.py --limit` does.
+#
+# Unlike the itinerary book this is **not incremental**. A trip's reefs do not
+# change overnight; a berth count changes the moment somebody books. An
+# uncapped run is therefore about 890 requests, one per departure, and is a
+# real cost to spend deliberately rather than on a schedule that nobody chose.
+#
+# Reading, not booking. Step one of a booking flow is a page with a form on it;
+# a GET renders it and submits nothing. The polite fetcher asks robots.txt
+# first, and a refusal there is the answer rather than an obstacle.
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap departures fetched (0 = every departure, ~890 requests)"
+        type: string
+        default: "3"
+      tours:
+        description: "Explicit boatid:tourid pairs, for proving one page"
+        type: string
+        default: ""
+      delay:
+        description: "Seconds between requests"
+        type: string
+        default: "2"
+
+permissions:
+  contents: write
+
+concurrency:
+  # Never beside itself: two jobs writing and pushing data/cabins.json is a
+  # guaranteed conflict.
+  group: cabins-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run tests
+        run: PYTHONPATH=src python3 -m unittest discover -s tests
+
+      # The run summary is where a capped run is actually read: it prints each
+      # sailing's cabin count, its cheapest berth and how many are left at it,
+      # and flags any sailing whose cheapest cabin is not the price the vessel
+      # page advertised — which is the claim the whole tool rests on.
+      - name: Read what each departure costs, cabin by cabin
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/fetch_cabins.py \
+            --archive data/archive.json \
+            --out data/cabins.json \
+            --snapshots data/snapshots \
+            --delay "${{ inputs.delay || 2 }}" \
+            ${{ inputs.tours && format('--tours {0}', inputs.tours) || format('--limit {0}', inputs.limit || 3) }} \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Keep the pages themselves, so a parse that silently found nothing can
+      # be diagnosed from what the source actually returned rather than by
+      # asking it again.
+      - name: Keep the raw pages as evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: booking-snapshots-${{ github.run_id }}
+          path: data/snapshots/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      # No promote and no build: nothing in the dataset reads this book yet.
+      # Committing it is what makes the fleet-wide shape readable before any
+      # decision about how the page should show it.
+      - name: Commit the cabin book
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/cabins.json
+          if git diff --cached --quiet; then
+            echo "nothing read; nothing to commit"
+            exit 0
+          fi
+          git commit -m "data: read $(date -u +%Y-%m-%d) cabin prices and berths"
+
+          # Same recovery as the other data-writing workflows, onto the branch
+          # this run is actually on. -X theirs favours the commit being
+          # replayed, which is ours: this file is regenerated output.
+          branch="${GITHUB_REF_NAME}"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${branch}"; then
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
+            git fetch origin "$branch"
+            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
+          done
+          echo "::error::could not push after 3 attempts"
+          exit 1

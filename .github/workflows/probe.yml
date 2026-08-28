@@ -46,6 +46,18 @@ on:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
         default: "2"
+      spaces_targets:
+        description: "vessel:month pairs to check for a remaining-berth count"
+        type: string
+        default: "dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7"
+      booking_tours:
+        description: "boatid:tourid pairs to read BookingStep1 for (#79)"
+        type: string
+        # Three shapes, not one: the trip the owner pointed at (three cabins,
+        # all discounted, all with a berth count), a sold-out sailing, and a
+        # longer, dearer week on another vessel. A cabin parser proved against
+        # a single page is a parser proved against one page's coincidences.
+        default: "6240:415714,6568:412135,6565:421166"
 
 permissions:
   contents: read
@@ -86,13 +98,6 @@ jobs:
   padi:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-  # Its own job, not another step above: fourteen pages at two fetches each,
-  # paced by the crawl delay, is minutes on its own and the probe job is
-  # already close to its budget. It is also a different question from the rest
-  # of them, and worth being able to read — or re-run — by itself.
-  unread:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -106,6 +111,20 @@ jobs:
             --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
             ${{ inputs.padi_only_base && '--only-base' || '' }} \
             ${{ inputs.padi_dump_context && '--dump-context' || '' }}
+
+  # Its own job, not another step above: fourteen pages at two fetches each,
+  # paced by the crawl delay, is minutes on its own and the probe job is
+  # already close to its budget. It is also a different question from the rest
+  # of them, and worth being able to read — or re-run — by itself.
+  unread:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
       # The pages the last crawl could not read at all. Fourteen of them on
       # 2026-08-28, and publishing their absence deleted 49 real, bookable
       # sailings. carry_unread stops the site lying about them; this settles
@@ -115,6 +134,21 @@ jobs:
         run: |
           python3 tools/probe_unread.py \
             --retries "${{ inputs.unread_retries || 2 }}"
+
+      # #79, and the last place a berth count could be. The vessel page does
+      # not state one anywhere, and the site's owner pointed at the booking
+      # flow. Both ids are already in the archive -- every Event.@id is
+      # LA-{x}-{boatID}-{tourID} -- so the URL is built rather than crawled.
+      #
+      # Reading only: step one of a booking is a page with a form on it, a GET
+      # renders it and submits nothing, and the polite fetcher asks robots.txt
+      # first. A refusal there is the answer, not an obstacle.
+      - name: Read the booking page (#79)
+        run: |
+          python3 tools/probe_booking.py \
+            --tours "${{ inputs.booking_tours || '6240:415714,6568:412135,6565:421166' }}" \
+            --chars 1200 \
+            --dump-cabins
 
       # Thirteen of the fifteen vessels on the skip list are not linked from
       # any Egypt listing, so the crawl never reaches them -- and from inside
@@ -168,3 +202,14 @@ jobs:
       - name: Read the itinerary fragment
         run: |
           python3 tools/probe_itinerary_endpoint.py --tours 6 --full
+
+      # #79. Nothing we already fetch carries a remaining-berth count: no
+      # Offer key in 889 archived events, and the only inventory wording in
+      # any description is a numberless "No more spaces available". So either
+      # the number is rendered client-side like the fee and gear panels, or
+      # the source does not publish it -- and those need opposite answers.
+      - name: Probe for a remaining-berth count
+        run: |
+          python3 tools/probe_spaces.py \
+            --targets "${{ inputs.spaces_targets || 'dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7' }}" \
+            ${{ inputs.dump_html && '--dump-html' || '' }}
