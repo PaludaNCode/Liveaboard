@@ -15,3 +15,11 @@ data/snapshots/
 # already committed under data/, and a second copy per refresh would double
 # what the repository grows by to hold two identical files.
 site/data/
+
+# The PADI import's raw store. Kept locally so a re-parse never needs a
+# re-crawl -- 307 responses, 290 requests against somebody else's server --
+# but not in history: 13MB rewritten whole on every refresh, against
+# archive.json's 1.8MB. What it holds is stable, an entry bar and a dive
+# count rather than a price that is gone tomorrow, so yesterday's copy is
+# worth far less here than archive.json's is there.
+data/padi_raw.json

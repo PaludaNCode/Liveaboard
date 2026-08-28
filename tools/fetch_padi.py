@@ -4,16 +4,22 @@
 Reads `/api/v2/travel/shop/...` for every boat in `data/padi_aliases.json` and
 writes two files:
 
-`data/padi_raw.json` -- committed
+`data/padi_raw.json` -- gitignored
     Every field each response published, less two. Same principle as
-    `data/archive.json`, and committed for the same reason: re-parsing must never
-    need a re-crawl, and a field we start caring about next month would otherwise
-    arrive attached to next month's data.
+    `data/archive.json`: re-parsing must never need a re-crawl, and a field we
+    start caring about next month would otherwise arrive attached to next
+    month's data. A parser fix that cannot be tested offline does not get
+    tested, and the re-crawl it saves is 290 requests against somebody else's
+    server.
 
-    It is large -- around 12 MB at full fleet, against archive.json's 1.8 MB --
-    and rewritten whole on every refresh. That cost was weighed and accepted:
-    290 requests against somebody else's server is the thing being avoided, and
-    a parser fix that cannot be tested offline does not get tested.
+    Kept out of history all the same. It is 13 MB against archive.json's 1.8 MB
+    and rewritten whole on every refresh, and the two files are not comparable
+    in what they preserve: the archive holds prices, which are gone tomorrow,
+    while this holds an entry bar and a dive count, which are not. Delete it and
+    a re-run rebuilds it; delete `archive.json` and yesterday is unrecoverable.
+
+    Rebuild with a plain `python3 tools/fetch_padi.py` -- incremental, so it
+    fetches only what is missing.
 
     `photos` and `marineLife` are dropped on the way in. They are 17% of the
     payload and consist of CDN thumbnail URLs, and this site loads nothing
