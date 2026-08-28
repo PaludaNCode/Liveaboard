@@ -88,8 +88,12 @@
     "red-sea-aggressor-v": "red-sea-aggressor-v",
     "odyssey": "my-odyssey"
   },
-  "absent": [],
-  "unlisted": [],
+  "absent": [
+    "destiny"
+  ],
+  "unlisted": [
+    "eriny"
+  ],
   "specs_differ_accepted": [
     "topaz",
     "serenity",
