@@ -22,9 +22,19 @@
   --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481; --sold:#9c3535;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
 
-  /* Width of the sticky date column, and therefore the left offset of the
-     sticky boat column beside it. One value so the two cannot drift. */
-  --stick-w:82px;
+  /* The pinned columns, left to right, and therefore each one's offset from
+     the one before. Fixed widths rather than floors: content wider than a
+     minimum stretches the cell, and a pinned column whose neighbour is offset
+     by a number it has outgrown overlaps it while scrolled -- which is exactly
+     what happened at 79px against a 74px offset.
+
+     Which columns these are is decided in app.js by position, not by name, so
+     they are always adjacent. Two pinned columns with a third between them is
+     the same overlap by a different route. */
+  --st0:26px;   /* the expander */
+  --st1:82px;   /* Depart */
+  --st2:78px;   /* Return */
+  --st3:132px;  /* Boat   */
 
   /* Fonts the visitor already has.
    *
@@ -232,23 +242,48 @@ tbody tr.row:hover { background:var(--row-hover); }
   font-variant-numeric:tabular-nums;
 }
 
-/* Sticky first column: at sixteen columns the date is what identifies a row. */
-.stick {
-  position:sticky; left:0; z-index:10; background:var(--panel);
-  border-right:1px solid var(--rule-strong);
+/* The pinned columns: at twenty columns, when and on what is what identifies a
+   row, and a row that scrolls away from its own dates and boat cannot be
+   compared with anything. */
+.stick1, .stick2, .stick3 {
+  position:sticky; z-index:10; background:var(--panel);
+  overflow:hidden; text-overflow:ellipsis;
 }
-tbody tr.row.alt .stick, tbody tr.row.alt .stick2 { background:var(--row-alt); }
-tbody tr.row:hover .stick, tbody tr.row:hover .stick2 { background:var(--row-hover); }
-thead th.stick, thead th.stick2 { z-index:25; }
+.stick1 {
+  left:var(--st0); width:var(--st1); min-width:var(--st1); max-width:var(--st1);
+}
+.stick2 {
+  left:calc(var(--st0) + var(--st1));
+  width:var(--st2); min-width:var(--st2); max-width:var(--st2);
+}
+.stick3 {
+  left:calc(var(--st0) + var(--st1) + var(--st2));
+  width:var(--st3); min-width:var(--st3); max-width:var(--st3);
+}
+.stick3, .pins-2 .stick2 { border-right:1px solid var(--rule-strong); }
+tbody tr.row.alt .stick1, tbody tr.row.alt .stick2, tbody tr.row.alt .stick3 {
+  background:var(--row-alt);
+}
+tbody tr.row:hover .stick1, tbody tr.row:hover .stick2, tbody tr.row:hover .stick3 {
+  background:var(--row-hover);
+}
+thead th.stick1, thead th.stick2, thead th.stick3 { z-index:25; }
 
-/* The control that opens the bill, pinned to the right edge at every width.
-   Left at the end of the row it was the last column of a table 2446px wide, so
-   clicking it scrolled the table sideways to reach it -- and the fee panel,
-   which starts at the left edge of a detail cell that wide, went off screen
-   entirely. You pressed + and got an empty band. */
+/* The control that opens the bill, at the start of the row and pinned with the
+   columns that identify it.
+ *
+ * It began as the last column of a table 2100px wide, so clicking it scrolled
+ * the table sideways -- and the fee panel, anchored to the left of a cell that
+ * wide, went off screen: you pressed + and got an empty band. Pinning it to
+ * the right edge fixed that and caused the next thing, because a control
+ * pinned over the right edge sits on top of whatever is under it: at 390px it
+ * covered the last 30px of True cost, which is right-aligned, in the default
+ * unscrolled view. A row's controls belong at its start, where nothing is
+ * right-aligned into them. */
 td.expander, th.expander {
-  position:sticky; right:0; z-index:10; background:var(--panel);
-  border-left:1px solid var(--rule-strong);
+  position:sticky; left:0; z-index:10; background:var(--panel);
+  width:var(--st0); min-width:var(--st0); max-width:var(--st0);
+  padding:4px 4px;
 }
 thead th.expander { z-index:25; }
 tbody tr.row.alt .expander { background:var(--row-alt); }
@@ -259,26 +294,7 @@ tbody tr.row:hover .expander { background:var(--row-hover); }
    horizontal scroll left them. */
 tr.detail td > * { position:sticky; left:0; }
 
-/* The boat's name, pinned beside the date.
- *
- * The money columns moved left of the wide text ones, which puts True cost on
- * screen at a laptop width for the first time -- but the table is still wider
- * than a phone, and a row that scrolls away from its own boat's name cannot be
- * compared with anything. Two sticky columns need a known offset, so the date
- * column is given a fixed width rather than left to the content. */
-/* Fixed, not merely floored: content wider than the minimum stretched the
-   cell to 79px while the boat column beside it was still pinned at 74px, so
-   the two sticky columns overlapped by five pixels while scrolled. */
-.stick {
-  width:var(--stick-w); min-width:var(--stick-w); max-width:var(--stick-w);
-  overflow:hidden; text-overflow:ellipsis;
-}
-.stick2 {
-  position:sticky; left:var(--stick-w); z-index:10; background:var(--panel);
-  border-right:1px solid var(--rule-strong);
-  min-width:132px; max-width:132px;
-  overflow:hidden; text-overflow:ellipsis;
-}
+
 
 .later { color:var(--later); font-weight:600; }
 .inc { color:var(--ok); font-weight:500; font-size:11px; }
@@ -455,8 +471,12 @@ a { color:var(--accent); }
 
   /* Two pinned columns still name every row, but narrower: at 390px they were
      taking 214px and leaving 176 for the numbers. */
-  :root { --stick-w:76px; }
-  .stick2 { min-width:104px; max-width:104px; }
+  /* Still three pinned columns, but narrower. When, until when, and on what
+     is the least a row can be identified by, and dropping one of the three
+     would leave a row that scrolls away from either its dates or its boat. At
+     66 + 66 + 96 they take 228px of 390 and True cost, the next column, lands
+     inside the remaining 162. */
+  :root { --st0:24px; --st1:66px; --st2:96px; }
 
   td.expander, th.expander { padding:4px 6px; }
   tbody td, thead th { padding:6px 7px; }
@@ -470,7 +490,10 @@ a { color:var(--accent); }
     min-width:0; max-width:170px;
   }
   /* Comfortably tappable without making the row taller than it has to be. */
-  .expand { min-width:26px; min-height:26px; }
+  .expand { min-width:22px; min-height:24px; }
+  /* "DEPART ▲" needs 74px of the 66 the pinned date column has here, and a
+     header that reads "DEPAR…" is worse than a slightly smaller one. */
+  thead th { font-size:9px; letter-spacing:.04em; }
   /* Cell padding is 7px here, not 9, and the bar has to end where the number
      above it ends. */
   .anchor { right:7px; }
@@ -890,16 +913,11 @@ a { color:var(--accent); }
        one season, so the year is the same four characters on 882 rows and
        repeating it crowds out the day and month, which is the part being
        compared. The heading still names the season. */
-    { k: "start", t: "Depart", stick: true, v: function (d) { return d.start; },
+    { k: "start", t: "Depart", v: function (d) { return d.start; },
       show: function (d) { return shortDate(d.start); } },
     { k: "end", t: "Return", v: function (d) { return d.end; },
       show: function (d) { return shortDate(d.end); } },
-    { k: "nights", t: "Nts", num: true, v: function (d) { return d.nights; } },
-    /* Sticky beside the date: with the money moved left of the wide text
-       columns, a horizontal scroll still happens on a narrow window, and a row
-       that scrolls away from its own boat's name cannot be compared to
-       anything. */
-    { k: "boat", t: "Boat", stick2: true, v: function (d, i) { return i.boat; } },
+    { k: "boat", t: "Boat", v: function (d, i) { return i.boat; } },
     /* Berth price is per person, so this says whether you are buying into a
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
@@ -1011,13 +1029,6 @@ a { color:var(--accent); }
       show: function (d, i, m) {
         return m.required > 0 ? eur(m.required) : '<span class="dim">—</span>';
       } },
-    { k: "unpriced", t: "Unpriced", num: true,
-      v: function (d, i, m) { return m.unpriced.length; },
-      show: function (d, i, m) {
-        return m.unpriced.length
-          ? '<span class="later">' + m.unpriced.length + "</span>"
-          : '<span class="dim">0</span>';
-      } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
        can buy at the top of the list. */
@@ -1058,10 +1069,9 @@ a { color:var(--accent); }
      a column that silently vanished would be a fact the page stopped
      publishing. */
   var ORDER = [
-    "start", "boat", "nights", "trip",
-    "total", "later", "base", "perdive", "nitrox",
-    "sites", "guests", "from", "to", "end",
-    "required", "unpriced", "availability", "disclosure", "source"
+    "start", "end", "boat", "guests", "from", "to", "trip",
+    "total", "later", "base", "perdive", "nitrox", "sites",
+    "required", "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, reordered again.
      A phone shows about two columns beside the two pinned ones, and on the
@@ -1069,16 +1079,53 @@ a { color:var(--accent); }
      title and you scrolled 600px to find out what it cost. Here the money
      comes first and the descriptive columns sit behind it: nothing is hidden,
      the reading order is just inverted to match how much screen there is. */
-  var NARROW_ORDER = [
-    "start", "boat", "total", "later", "nights", "base", "perdive", "nitrox",
-    "trip", "sites", "guests", "from", "to", "end",
-    "required", "unpriced", "availability", "disclosure", "source"
+  /* The same columns wherever there is not room for the reading order above.
+     Identity, then the money, then everything the money is for.
+
+     Measured: with Guests, From, To and Trip ahead of it, True cost sits at
+     x 919-1083, so it needs 1083px of window to be on screen at all -- it fell
+     off a 900px and a 1024px laptop, which is most of them. The wide order is
+     the better read where it fits; this is the same table where it does not. */
+  /* A phone fits the expander, two pinned columns and the price, and nothing
+     else before it: 24 + 66 + 96 + 160 is 346 of 390. A third pinned column
+     makes 412, and Return merely sitting third rather than pinned still makes
+     424 -- either way the number the page exists to show is off the edge.
+     So here Return follows the money rather than leading it. Of the two
+     identifiers, the boat's name is what a row is compared by; the return date
+     you read once you have found the row. */
+  var PHONE_ORDER = [
+    "start", "boat",
+    "total", "later", "base", "perdive", "nitrox",
+    "end", "guests", "from", "to", "trip", "sites",
+    "required", "availability", "disclosure", "source"
   ];
 
+  var COMPACT_ORDER = [
+    "start", "end", "boat",
+    "total", "later", "base", "perdive", "nitrox",
+    "guests", "from", "to", "trip", "sites",
+    "required", "availability", "disclosure", "source"
+  ];
+
+  /* Two questions, two breakpoints. `compact` is about how much room there is
+     before the money column; `narrow` is about how much room there is at all,
+     and drives the pinned-column widths and the folded filter banks. */
+  var compact = window.matchMedia("(max-width: 1100px)");
   var narrow = window.matchMedia("(max-width: 760px)");
 
+  /* How many of the leading columns are pinned. By position, never by name:
+     two pinned columns with a third between them overlap exactly as badly as
+     two with a wrong offset, and naming them let that happen the moment the
+     order changed. Three fit a laptop; on a phone 82 + 78 + 132 would be three
+     quarters of the screen, so a phone pins two and Return scrolls. */
+  function pinned() { return narrow.matches ? 2 : 3; }
+
   function orderColumns() {
-    var order = narrow.matches ? NARROW_ORDER : ORDER;
+    /* The rule that closes the pinned group goes on whichever column is last
+       in it, and that changes with the breakpoint. */
+    document.body.classList.toggle("pins-2", narrow.matches);
+    var order = narrow.matches ? PHONE_ORDER
+              : compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
       var x = order.indexOf(a.k), y = order.indexOf(b.k);
       return (x < 0 ? order.length : x) - (y < 0 ? order.length : y);
@@ -1193,20 +1240,25 @@ a { color:var(--accent); }
       return r.d.mandatory_known && r.m.total > top ? r.m.total : top;
     }, 0);
 
-    document.getElementById("head").innerHTML = "<tr>" + COLS.map(function (c) {
+    /* `stick1`..`stickN` on the leading columns, so the CSS offsets line up
+       with the order actually being rendered. */
+    var pins = pinned();
+    function pin(index) { return index < pins ? "stick" + (index + 1) : ""; }
+
+    document.getElementById("head").innerHTML = '<tr><th class="expander"></th>' +
+      COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
-      return '<th tabindex="0" class="' + (c.num ? "num " : "") +
-        (c.stick ? "stick" : c.stick2 ? "stick2" : "") +
+      return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
         '" data-k="' + c.k + '">' + c.t + " " + dir + "</th>";
-    }).join("") + '<th class="expander"></th></tr>';
+    }).join("") + "</tr>";
 
     document.getElementById("body").innerHTML = rows.length
       ? rows.map(function (row, n) {
-          var tds = COLS.map(function (c) {
+          var tds = COLS.map(function (c, col) {
             var v = c.show ? c.show(row.d, row.i, row.m) : esc(c.v(row.d, row.i, row.m));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
-              (c.stick ? " stick" : c.stick2 ? " stick2" : "") + '">' + v + "</td>";
+              " " + pin(col) + '">' + v + "</td>";
           }).join("");
           var open = state.open === row.d.id;
           /* Banding is written here from the row's own position, not left to
@@ -1214,9 +1266,10 @@ a { color:var(--accent); }
              tbody, and an expanded row injects one -- so opening any row
              inverted the stripes of every row below it. */
           return '<tr class="row' + (n % 2 ? " alt" : "") +
-            (row.d.bookable ? "" : " gone") + '">' + tds +
+            (row.d.bookable ? "" : " gone") + '">' +
             '<td class="expander"><button class="expand" data-n="' + n +
-            '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td></tr>" +
+            '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td>" +
+            tds + "</tr>" +
             (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
               feeTable(row) + "</td></tr>" : "");
         }).join("")
@@ -1433,8 +1486,10 @@ a { color:var(--accent); }
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
   var onWidthChange = function () { orderColumns(); draw(); };
-  if (narrow.addEventListener) narrow.addEventListener("change", onWidthChange);
-  else if (narrow.addListener) narrow.addListener(onWidthChange);
+  [compact, narrow].forEach(function (mq) {
+    if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
+    else if (mq.addListener) mq.addListener(onWidthChange);
+  });
 
   /* The banks fold away from 1000px down, and a chosen filter folds away with
      them: at 900px you could pick one operator, collapse the panel, and the
