@@ -40,15 +40,21 @@ from typing import Any
 
 Dataset = dict[str, Any]
 
-ROUNDING_MOVE = 2.0
-"""Below this a "price change" is the source rounding, not an operator.
+MIN_MOVE = 5.0
+"""The floor for a price move worth a reader's attention.
 
-Measured, not guessed: on the 2026-08-28 refresh 174 fares "changed", and
-every single one of them by exactly -1 on a four-figure sum. Nobody reprices a
-1,469 berth by a dollar; the site had re-rounded. Left in, they filled both
-price blocks and pushed the real moves past the cap. Suppressed ones are still
-counted and still stated -- a report that quietly drops rows is the failure
-this project exists to correct in other people.
+Nothing under five on a four-figure berth is a decision anyone would change,
+and most of what sits below it is not a decision anyone made: on the
+2026-08-28 refresh 174 fares "changed" and every single one of them by exactly
+-1, which is the source re-rounding. Left in, they filled both price blocks
+and pushed the real moves past the cap.
+
+The comparison is on the fare in the currency the operator quoted it in, so
+nothing here is an exchange-rate artefact -- an FX move is reported on its own
+line and never as a reprice.
+
+Suppressed moves are still counted and still stated. A report that quietly
+drops rows is the failure this project exists to correct in other people.
 """
 
 MISSING_VESSEL_MIN = 3
@@ -134,7 +140,7 @@ class Report:
     """Vessel-months that emptied while the vessel kept selling other months."""
     vessels_new: list[str] = field(default_factory=list)
     price_rounding: int = 0
-    """Fares that moved by less than ``ROUNDING_MOVE`` -- counted, not listed."""
+    """Fares that moved by less than ``MIN_MOVE`` -- counted, not listed."""
     availability_newly_read: bool = False
     """The older dataset stated availability nowhere, so no transition is real."""
     fx: list[FxMove] = field(default_factory=list)
@@ -327,7 +333,7 @@ def compare(before: Dataset, after: Dataset) -> Report:
         was, now = old_price.get("amount"), new_price.get("amount")
         if was is None or now is None or was == now:
             continue
-        if abs(now - was) < ROUNDING_MOVE:
+        if abs(now - was) < MIN_MOVE:
             report.price_rounding += 1
             continue
         boat, title = _describe(new, new_its, new_boats)
@@ -413,8 +419,8 @@ def headline(report: Report) -> str:
     moved = len(report.price_up) + len(report.price_down)
     if moved:
         biggest = max(report.price_up + report.price_down, key=lambda m: abs(m.delta))
-        bits.append(f"{moved} prices moved (to {biggest.delta:+,.0f} "
-                    f"{biggest.currency} on {biggest.boat})")
+        bits.append(f"{moved} prices moved (biggest {biggest.boat} "
+                    f"{biggest.was:,.0f} -> {biggest.now:,.0f} {biggest.currency})")
     if report.fees:
         # Named, not just counted. The weekly fee run cannot move a fare -- it
         # re-promotes the same candidate -- so a fee change is the only thing
@@ -451,7 +457,7 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     if report.is_quiet and not report.fx_moved and not report.availability_newly_read:
         lines.append("\nnothing moved." if not report.price_rounding else
                      f"\nnothing moved, beyond {report.price_rounding} fare(s) "
-                     f"re-rounded by under {ROUNDING_MOVE:,.0f}.")
+                     f"shifting by under {MIN_MOVE:,.0f}.")
         return "\n".join(lines)
 
     if report.availability_newly_read:
@@ -500,12 +506,18 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
         f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.returned])
     block("withdrawn", [
         f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.withdrawn])
-    block("price up", [
-        f"{m.start}  {m.boat:22.22} {m.was:,.0f} -> {m.now:,.0f} {m.currency}"
-        f"  ({m.pct:+.0f}%)" for m in report.price_up])
-    block("price down", [
-        f"{m.start}  {m.boat:22.22} {m.was:,.0f} -> {m.now:,.0f} {m.currency}"
-        f"  ({m.pct:+.0f}%)" for m in report.price_down])
+    def moved(m: PriceMove) -> str:
+        """Both ends, the difference, and the trip it is for.
+
+        The percentage carries a decimal: a real 20 move on a 2,400 berth is
+        0.8%, and printing that as "+1%" -- or worse, "+0%" -- reads as the
+        rounding noise this report is at pains to exclude.
+        """
+        return (f"{m.start}  {m.boat:20.20} {m.was:>7,.0f} -> {m.now:>7,.0f} "
+                f"{m.currency}  {m.delta:+,.0f} ({m.pct:+.1f}%)  {m.title:.34}")
+
+    block("price up", [moved(m) for m in report.price_up])
+    block("price down", [moved(m) for m in report.price_down])
     block("fees", [
         f"{f.boat:22.22} {f.code:16.16} {f.was} -> {f.now}" for f in report.fees])
     if report.vessels_new:
@@ -514,8 +526,8 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     if report.price_rounding:
         lines.append(
             f"\n{report.price_rounding} further fare(s) moved by less than "
-            f"{ROUNDING_MOVE:,.0f} — the source re-rounding, not a reprice; "
-            "counted here rather than listed above"
+            f"{MIN_MOVE:,.0f} — too small to be a decision, and mostly the "
+            "source re-rounding; counted here rather than listed above"
         )
 
     # Last, and separate: it explains a euro figure moving on every row, and it

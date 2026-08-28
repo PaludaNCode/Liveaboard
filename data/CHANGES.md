@@ -34,7 +34,7 @@ withdrawn (3)
   2027-08-12  Blue                   Brothers, Daedalus and Elphinstone    
   2027-08-19  Blue                   North & Tiran                         
 
-174 further fare(s) moved by less than 2 — the source re-rounding, not a reprice; counted here rather than listed above
+174 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
 
 fx: USD 0.858738 -> 0.858885 (+0.02%) — every euro figure converted from USD moves with it; no operator changed a price
 ```

@@ -10,7 +10,7 @@ from __future__ import annotations
 import unittest
 
 from liveaboard.changes import (
-    MISSING_VESSEL_MIN, ROUNDING_MOVE, compare, headline, render,
+    MISSING_VESSEL_MIN, MIN_MOVE, compare, headline, render,
 )
 
 
@@ -243,10 +243,21 @@ class TestRoundingIsNotARepricing(unittest.TestCase):
         text = render(compare(before, after))
         self.assertIn("3 further fare(s) moved by less than", text)
 
+    def test_the_report_shows_what_it_was_and_what_it_is(self):
+        """"It went up" is not the answer to "by how much, from what?"."""
+        text = render(compare(
+            dataset([departure("d1", price=2400.0)]),
+            dataset([departure("d1", price=2560.0)]),
+        ))
+        self.assertIn("2,400 ->   2,560 USD", text)
+        self.assertIn("+160", text)
+        # A decimal, because +6.7% printed as +7% is a different claim.
+        self.assertIn("+6.7%", text)
+
     def test_a_real_move_still_gets_through(self):
         report = compare(
             dataset([departure("d1", price=1000.0)]),
-            dataset([departure("d1", price=1000.0 + ROUNDING_MOVE)]),
+            dataset([departure("d1", price=1000.0 + MIN_MOVE)]),
         )
         self.assertEqual(len(report.price_up), 1)
         self.assertEqual(report.price_rounding, 0)
@@ -257,7 +268,7 @@ class TestRoundingIsNotARepricing(unittest.TestCase):
             dataset([departure("d1", price=999.0)]),
         )
         self.assertTrue(report.is_quiet)
-        self.assertIn("re-rounded", render(report))
+        self.assertIn("shifting by under", render(report))
 
 
 class TestHeadline(unittest.TestCase):
@@ -288,7 +299,9 @@ class TestHeadline(unittest.TestCase):
             dataset([departure("d1", price=1200.0)]),
         )
         line = headline(report)
-        self.assertIn("+200 USD", line)
+        # Both ends, not just the delta: "what was it before" is the first
+        # thing anyone asks of a price change.
+        self.assertIn("1,000 -> 1,200 USD", line)
         self.assertIn("Alia Soul", line)
 
     def test_a_fee_change_names_the_vessel(self):
