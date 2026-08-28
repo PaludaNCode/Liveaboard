@@ -280,9 +280,19 @@
                'or spend longer in the parks where night dives are not ' +
                'allowed, fit fewer in.">↓ ' + i.dives + "+</span>";
       } },
-    /* Included or extra, said plainly. Half this fleet bundles nitrox and half
-       bills for it, and on a page for comparing trips that difference has to be
-       readable without opening a row. */
+    /* Included or extra, said plainly. Two thirds of this fleet bundles nitrox
+       and a third bills for it -- 44 vessels against 21 -- and on a page for
+       comparing trips that difference has to be readable without opening a row.
+
+       Four answers, of which three occur. "not listed" is two vessels whose
+       extras block never mentions nitrox: not free, not priced, unknown. The
+       fourth -- a nitrox line that is neither included nor priced, the way
+       "Rental Gear" is routinely named with no figure -- currently matches
+       nothing. It stays because without it the function returns undefined and
+       the cell would print that word rather than an answer, and because the
+       gear case proves an operator can list an extra and leave the number
+       blank. A branch nothing reaches yet is cheaper than a cell reading
+       "undefined" on the day one does. */
     { k: "nitrox", t: "Nitrox", num: true,
       v: function (d, i, m) {
         return !m.nitrox ? 9e9 : m.nitrox.included ? -1
