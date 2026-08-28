@@ -1,0 +1,393 @@
+{
+  "collected": "2026-08-28",
+  "source": "liveaboard.com",
+  "note": "One cabin ladder per departure, from /BookingStep1. Every price, the list price where the cabin is discounted, the berths the operator claims remain (data-allocation, not the red banner, which only appears at four or fewer) and the stated single-occupancy surcharge. Berth counts are the operator's claim on the day in `collected`, not verified inventory, and they go stale within hours. Not incremental: every departure is re-read every run.",
+  "departures": {
+    "335597": {
+      "boat": "red-sea-aggressor-ii",
+      "tour_id": "335597",
+      "start": "2027-05-01",
+      "name": "33% Off: Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1849",
+      "cabins": [
+        {
+          "cabin_id": "8959",
+          "name": "Deluxe Stateroom",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1849.0,
+          "list_price": 2760.0,
+          "berths": 16,
+          "single_supplement_pct": 100,
+          "shareable": true,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "occupancy_options": [
+            "1 person",
+            "2 people",
+            "3 people",
+            "4 people",
+            "5 people",
+            "6 people",
+            "7 people",
+            "8 people",
+            "9 people",
+            "10 people",
+            "11 people",
+            "12 people",
+            "13 people",
+            "14 people",
+            "15 people",
+            "16 people"
+          ]
+        },
+        {
+          "cabin_id": "8960",
+          "name": "Master Staterooms",
+          "sleeps": 2,
+          "beds": "1 Queen bed",
+          "price": 1983.0,
+          "list_price": 2960.0,
+          "berths": 4,
+          "single_supplement_pct": 100,
+          "shareable": false,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "occupancy_options": [
+            "1 person",
+            "2 people",
+            "3 people",
+            "4 people"
+          ]
+        },
+        {
+          "cabin_id": "8961",
+          "name": "Suite",
+          "sleeps": 2,
+          "beds": "1 Queen bed",
+          "price": 2050.0,
+          "list_price": 3060.0,
+          "berths": 2,
+          "single_supplement_pct": 100,
+          "shareable": false,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "occupancy_options": [
+            "1 person",
+            "2 people"
+          ]
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=335597&boatid=5690"
+    },
+    "335640": {
+      "boat": "red-sea-aggressor-iv",
+      "tour_id": "335640",
+      "start": "2027-05-01",
+      "name": "33% Off: St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1808",
+      "cabins": [
+        {
+          "cabin_id": "10519",
+          "name": "Deluxe Staterooms",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1808.0,
+          "list_price": 2699.0,
+          "berths": 18,
+          "single_supplement_pct": 100,
+          "shareable": true,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "occupancy_options": [
+            "1 person",
+            "2 people",
+            "3 people",
+            "4 people",
+            "5 people",
+            "6 people",
+            "7 people",
+            "8 people",
+            "9 people",
+            "10 people",
+            "11 people",
+            "12 people",
+            "13 people",
+            "14 people",
+            "15 people",
+            "16 people",
+            "17 people",
+            "18 people"
+          ]
+        },
+        {
+          "cabin_id": "10518",
+          "name": "Master Staterooms",
+          "sleeps": 2,
+          "beds": "1 Queen bed",
+          "price": 1875.0,
+          "list_price": 2799.0,
+          "berths": 8,
+          "single_supplement_pct": 100,
+          "shareable": false,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "occupancy_options": [
+            "1 person",
+            "2 people",
+            "3 people",
+            "4 people",
+            "5 people",
+            "6 people",
+            "7 people",
+            "8 people"
+          ]
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=335640&boatid=6189"
+    },
+    "340058": {
+      "boat": "blue-horizon",
+      "tour_id": "340058",
+      "start": "2027-05-01",
+      "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1715",
+      "cabins": [
+        {
+          "cabin_id": "6079",
+          "name": "Classic Twin Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1715.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "6080",
+          "name": "Classic Twin/Double Cabins",
+          "sleeps": 2,
+          "beds": "1 Double or Twin (convertible)",
+          "price": 1715.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "9888",
+          "name": "Premium Double Cabins",
+          "sleeps": 2,
+          "beds": "1 King bed",
+          "price": 1820.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=340058&boatid=4407",
+      "nothing_bookable": true
+    },
+    "353111": {
+      "boat": "emperor-superior",
+      "tour_id": "353111",
+      "start": "2027-05-01",
+      "name": "Reefs and Wrecks (Hurghada - Hurghada)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1527",
+      "cabins": [
+        {
+          "cabin_id": "5983",
+          "name": "Lower Deck Bunk Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1527.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "5982",
+          "name": "Lower Deck Twin Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1573.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "5985",
+          "name": "Main Deck Twin Cabin",
+          "sleeps": 2,
+          "beds": "1 Double or Twin (convertible)",
+          "price": 1690.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "11012",
+          "name": "Main Deck Double Cabin",
+          "sleeps": 2,
+          "beds": "1 Single + 1 Queen bed",
+          "price": 1748.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "5984",
+          "name": "Upper Deck Twin Cabin",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1806.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "11011",
+          "name": "Upper Deck Double Cabin",
+          "sleeps": 2,
+          "beds": "1 Queen bed",
+          "price": 1806.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=353111&boatid=4420",
+      "nothing_bookable": true
+    },
+    "353503": {
+      "boat": "emperor-asmaa",
+      "tour_id": "353503",
+      "start": "2027-05-01",
+      "name": "Simply The Best (Hurghada - Marsa Ghalib)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1515",
+      "cabins": [
+        {
+          "cabin_id": "5980",
+          "name": "Lower Deck Twin Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1515.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "9639",
+          "name": "Upper Deck Twin Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1690.0,
+          "berths": 0,
+          "single_supplement_pct": 50,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=353503&boatid=4418",
+      "nothing_bookable": true
+    },
+    "354218": {
+      "boat": "sea-serpent",
+      "tour_id": "354218",
+      "start": "2027-05-01",
+      "name": "North & Brothers (Hurghada - Hurghada)",
+      "collected": "2026-08-28",
+      "currency": "USD",
+      "advertised": "1572",
+      "cabins": [
+        {
+          "cabin_id": "8342",
+          "name": "Standard Twin Lower Deck Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1572.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "8343",
+          "name": "Double Bed Upper Deck Cabins",
+          "sleeps": 2,
+          "beds": "1 Double bed",
+          "price": 1630.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        },
+        {
+          "cabin_id": "9609",
+          "name": "Standard Twin Upper Deck Cabins",
+          "sleeps": 2,
+          "beds": "2 Single beds",
+          "price": 1630.0,
+          "berths": 0,
+          "single_supplement_pct": 80,
+          "amenities": [
+            "Aircon with control"
+          ],
+          "sold_out": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/BookingStep1?tourid=354218&boatid=5487",
+      "nothing_bookable": true
+    }
+  }
+}
