@@ -26,6 +26,22 @@ on:
         description: "Print the modal's markup, not just its text"
         type: boolean
         default: false
+      padi_vessel:
+        description: "PADI Travel vessel whose bundle to read"
+        type: string
+        default: "hammerhead-ii"
+      padi_dump_context:
+        description: "Print the JS around each path literal PADI's bundle holds"
+        type: boolean
+        default: false
+      padi_max_candidates:
+        description: "PADI endpoints to call (0 reads the bundles without calling)"
+        type: string
+        default: "24"
+      padi_only_base:
+        description: "Print only where PADI's API client gets its base URL"
+        type: boolean
+        default: false
       unread_retries:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
@@ -62,6 +78,14 @@ jobs:
       - name: Read the Route block nothing has parsed
         run: python3 tools/probe_itinerary_route.py --boats 6
 
+  # PADI's app bundles are on CloudFront, which the sandbox's egress policy
+  # refuses outright -- and a browser is no help there either, since it would
+  # load the page and then fail to load the app. So the one place the itinerary
+  # endpoint can be found is here. Its own job: it reads two hosts and neither
+  # of them is liveaboard.com.
+  padi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
   # Its own job, not another step above: fourteen pages at two fetches each,
   # paced by the crawl delay, is minutes on its own and the probe job is
   # already close to its budget. It is also a different question from the rest
@@ -75,6 +99,13 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Find the endpoint PADI's itinerary popup calls
+        run: |
+          python3 tools/probe_padi_bundle.py \
+            --vessel "${{ inputs.padi_vessel || 'hammerhead-ii' }}" \
+            --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
+            ${{ inputs.padi_only_base && '--only-base' || '' }} \
+            ${{ inputs.padi_dump_context && '--dump-context' || '' }}
       # The pages the last crawl could not read at all. Fourteen of them on
       # 2026-08-28, and publishing their absence deleted 49 real, bookable
       # sailings. carry_unread stops the site lying about them; this settles
