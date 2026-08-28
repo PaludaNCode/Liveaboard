@@ -98,13 +98,6 @@ jobs:
   padi:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-  # Its own job, not another step above: fourteen pages at two fetches each,
-  # paced by the crawl delay, is minutes on its own and the probe job is
-  # already close to its budget. It is also a different question from the rest
-  # of them, and worth being able to read — or re-run — by itself.
-  unread:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -118,6 +111,20 @@ jobs:
             --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
             ${{ inputs.padi_only_base && '--only-base' || '' }} \
             ${{ inputs.padi_dump_context && '--dump-context' || '' }}
+
+  # Its own job, not another step above: fourteen pages at two fetches each,
+  # paced by the crawl delay, is minutes on its own and the probe job is
+  # already close to its budget. It is also a different question from the rest
+  # of them, and worth being able to read — or re-run — by itself.
+  unread:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
       # The pages the last crawl could not read at all. Fourteen of them on
       # 2026-08-28, and publishing their absence deleted 49 real, bookable
       # sailings. carry_unread stops the site lying about them; this settles
