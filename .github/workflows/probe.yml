@@ -26,6 +26,14 @@ on:
         description: "Print the modal's markup, not just its text"
         type: boolean
         default: false
+      padi_vessel:
+        description: "PADI Travel vessel whose bundle to read"
+        type: string
+        default: "hammerhead-ii"
+      padi_dump_context:
+        description: "Print the JS around each path literal PADI's bundle holds"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -57,6 +65,26 @@ jobs:
       # so it is read before anything is written against it.
       - name: Read the Route block nothing has parsed
         run: python3 tools/probe_itinerary_route.py --boats 6
+
+  # PADI's app bundles are on CloudFront, which the sandbox's egress policy
+  # refuses outright -- and a browser is no help there either, since it would
+  # load the page and then fail to load the app. So the one place the itinerary
+  # endpoint can be found is here. Its own job: it reads two hosts and neither
+  # of them is liveaboard.com.
+  padi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Find the endpoint PADI's itinerary popup calls
+        run: |
+          python3 tools/probe_padi_bundle.py \
+            --vessel "${{ inputs.padi_vessel || 'hammerhead-ii' }}" \
+            ${{ inputs.padi_dump_context && '--dump-context' || '' }}
 
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
