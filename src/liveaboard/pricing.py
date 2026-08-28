@@ -92,33 +92,57 @@ class BreakdownLine:
         return self.display_max or self.display
 
     def as_dict(self) -> dict[str, Any]:
-        return {
+        """The line as the page needs it, and nothing else.
+
+        Every byte here ships 838 times inside one HTML file, so what the
+        browser never reads is not merely untidy -- it is the page's weight.
+        Five fields were shipped and never read once: `charged` and
+        `charged_max` (the browser sums `display` itself), `counted` (it
+        re-decides that from the visitor's toggles), `basis` (already resolved
+        to per-trip in Python) and `provenance` -- a whole nested object with a
+        URL in it, on every line of every itinerary. Dropping them halved the
+        payload, 2716 KB to 1328.
+
+        The rest is omitted when it says nothing: a null, a false, a `quoted`
+        equal to the `display` beside it, a `display_max` equal to `display`.
+        The reader treats a missing key and a false one the same way, which is
+        what `has_price` and `included` already relied on.
+
+        Anything added here has to be read by `templates/app.js`, and
+        `tests/test_dataset.py` asserts that both ways round.
+        """
+        out: dict[str, Any] = {
             "code": self.code.value,
             "label": self.label,
             "tier": self.tier.value,
-            "quoted": self.quoted.as_dict() if self.quoted else None,
-            "display": self.display.as_dict() if self.display else None,
-            "display_max": self.display_max.as_dict() if self.is_range else None,
-            "charged": float(self.charged.rounded),
-            "charged_max": float(self.charged_max.rounded),
-            "has_price": self.has_price,
-            "is_range": self.is_range,
-            "included": self.included,
-            "counted": self.counted,
-            "toggle": self.toggle,
-            "note": self.note,
-            "converted": self.fx_rate is not None,
-            "fx": (
-                {
-                    "rate": float(self.fx_rate.rate),
-                    "as_of": self.fx_rate.as_of.isoformat(),
-                    "source": self.fx_rate.source,
-                }
-                if self.fx_rate
-                else None
-            ),
-            "provenance": self.provenance.as_dict() if self.provenance else None,
         }
+        if self.display:
+            out["display"] = self.display.as_dict()
+        if self.is_range and self.display_max:
+            out["display_max"] = self.display_max.as_dict()
+        if self.has_price:
+            out["has_price"] = True
+        if self.is_range:
+            out["is_range"] = True
+        if self.included:
+            out["included"] = True
+        if self.toggle:
+            out["toggle"] = self.toggle
+        if self.note:
+            out["note"] = self.note
+        if self.fx_rate is not None:
+            # Only a converted line needs its original quote: the page prints
+            # "converted from 1631 USD at 0.858738". On the 96% that were
+            # quoted in euro, `quoted` was a byte-for-byte copy of `display`.
+            out["converted"] = True
+            if self.quoted:
+                out["quoted"] = self.quoted.as_dict()
+            out["fx"] = {
+                "rate": float(self.fx_rate.rate),
+                "as_of": self.fx_rate.as_of.isoformat(),
+                "source": self.fx_rate.source,
+            }
+        return out
 
 
 @dataclass(slots=True)

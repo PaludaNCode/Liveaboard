@@ -523,30 +523,44 @@
 
   /* ---------- filtering and sorting ---------- */
 
+  /* One predicate, so the table and the filter counts can never disagree
+     about what a filter means. `skip` names a facet to ignore, which is what
+     makes a chip's number the answer to "what if I picked this too?" rather
+     than "what did I already pick". */
+  function passes(dep, itin, skip) {
+    if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
+    if (state.hideSoldOut && !dep.bookable) return false;
+    if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
+    if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
+    if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
+    if (skip !== "boats" && state.boats.size && !state.boats.has(itin.boat)) return false;
+    if (state.sites.size) {
+      /* All, not any: picking Brothers and Daedalus means a week that visits
+         both. It was "either" once, on the reasoning that people shop rather
+         than tick boxes -- but "either" is what one chip already does, so a
+         second chip that only ever widens the result cannot narrow a search
+         down to the trip you want.
+         This is the one filter where it is a real question. A departure has
+         one month, one departure port and one boat, so requiring two of any
+         of those returns nothing; a trip visits several reefs. */
+      var sites = itin.dive_sites || [], all = true;
+      state.sites.forEach(function (s) { if (sites.indexOf(s) < 0) all = false; });
+      if (!all) return false;
+    }
+    if (state.q) {
+      var hay = (itin.boat + " " + itin.operator + " " + itin.name + " " +
+                 itin.port_from + " " + itin.port_to + " " +
+                 (itin.dive_sites || []).join(" ")).toLowerCase();
+      if (hay.indexOf(state.q) < 0) return false;
+    }
+    return true;
+  }
+
   function visible() {
     var out = [];
     D.departures.forEach(function (dep) {
       var itin = D.itineraries[dep.itinerary_id];
-      if (state.months.size && !state.months.has(dep.month)) return;
-      if (state.hideSoldOut && !dep.bookable) return;
-      if (state.nightsMin !== null && dep.nights < state.nightsMin) return;
-      if (state.nightsMax !== null && dep.nights > state.nightsMax) return;
-      if (state.ports.size && !state.ports.has(itin.port_from)) return;
-      if (state.boats.size && !state.boats.has(itin.boat)) return;
-      if (state.sites.size) {
-        /* Any, not all: picking Brothers and Daedalus means "either", which is
-           how somebody shops for a week rather than a checklist. */
-        var sites = itin.dive_sites || [], hit = false;
-        state.sites.forEach(function (s) { if (sites.indexOf(s) >= 0) hit = true; });
-        if (!hit) return;
-      }
-      if (state.q) {
-        var hay = (itin.boat + " " + itin.operator + " " + itin.name + " " +
-                   itin.port_from + " " + itin.port_to + " " +
-                   (itin.dive_sites || []).join(" ")).toLowerCase();
-        if (hay.indexOf(state.q) < 0) return;
-      }
-      out.push({ d: dep, i: itin, m: metricsFor(dep) });
+      if (passes(dep, itin, null)) out.push({ d: dep, i: itin, m: metricsFor(dep) });
     });
 
     var col = COLS.filter(function (c) { return c.k === state.sort; })[0] || COLS[0];
@@ -610,8 +624,28 @@
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "");
   }
 
+  /* How many rows reach the DOM before the visitor scrolls.
+     All 838 used to, which put 25,062 nodes and 14,246 table cells on the
+     page and cost 37ms of `innerHTML` parsing on every redraw -- paid again
+     on every keystroke in the search box. Nothing else in a redraw is
+     measurable beside it: walking all 8,745 fee lines is 1.3ms and building
+     the HTML string is 0.2ms.
+     Rows are appended as the table is scrolled, so nothing is hidden and no
+     count changes -- "838 rows shown" still says 838. Only the moment of
+     construction moves. */
+  var PAGE_ROWS = 120;
+  var drawn = 0;
+  var lastRows = [];
+  /* Module scope, not inside draw(): appending on scroll builds rows through
+     the same renderRows() and has to give them the same pinned classes, or
+     rows added below would lose their sticky columns. */
+  var pins = pinned();
+  function pin(index) { return index < pins ? "stick" + (index + 1) : ""; }
+
   function draw() {
     var rows = visible();
+    drawn = 0;
+    lastRows = rows;
 
     /* Before any cell is rendered: the anchor bars scale against the dearest
        trip on screen, so filtering to three boats redraws the bars against
@@ -623,8 +657,7 @@
 
     /* `stick1`..`stickN` on the leading columns, so the CSS offsets line up
        with the order actually being rendered. */
-    var pins = pinned();
-    function pin(index) { return index < pins ? "stick" + (index + 1) : ""; }
+    pins = pinned();
 
     document.getElementById("head").innerHTML = '<tr><th class="expander"></th>' +
       COLS.map(function (c, n) {
@@ -645,7 +678,18 @@
     }).join("") + "</tr>";
 
     document.getElementById("body").innerHTML = rows.length
-      ? rows.map(function (row, n) {
+      ? renderRows(rows, 0, PAGE_ROWS)
+      : '<tr><td class="empty" colspan="' + (COLS.length + 1) +
+        '">Nothing matches those filters.</td></tr>';
+    drawn = Math.min(rows.length, PAGE_ROWS);
+    afterDraw(rows);
+  }
+
+  /* Kept as a separate function so appending on scroll and drawing from
+     scratch build a row exactly the same way. */
+  function renderRows(rows, from, count) {
+    return rows.slice(from, from + count).map(function (row, offset) {
+          var n = from + offset;
           var tds = COLS.map(function (c, col) {
             var v = c.show ? c.show(row.d, row.i, row.m) : esc(c.v(row.d, row.i, row.m));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
@@ -665,10 +709,14 @@
             tds + "</tr>" +
             (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
               feeTable(row) + "</td></tr>" : "");
-        }).join("")
-      : '<tr><td class="empty" colspan="' + (COLS.length + 1) +
-        '">Nothing matches those filters.</td></tr>';
+        }).join("");
+  }
 
+  function afterDraw(rows) {
+    /* Every bank re-counted against the filters now in force. Cheap enough to
+       do unconditionally: one pass over 838 departures per bank, and the whole
+       redraw it sits inside measures 16ms. */
+    BANKS.forEach(function (bank) { bank.recount(); });
     document.getElementById("shown").textContent = rows.length.toLocaleString("en-IE");
     var boats = {}, itins = {};
     rows.forEach(function (r) { boats[r.i.boat_id] = 1; itins[r.i.id] = 1; });
@@ -684,24 +732,62 @@
      chosen yet should not outrank the prices you came to read. */
   var CHIP_LIMIT = 8;
 
-  function chips(host, items, picked, numeric) {
+  /* What each chip in a bank would give you, under the filters in force now.
+     The numbers were counted once at load and never moved, so a bank could
+     read "Hurghada 435" while the table showed 18 rows -- a filter offering a
+     number that was true for a page you are no longer looking at.
+
+     An OR bank skips its own selection: picking Hurghada must not zero every
+     other port, because picking Safaga as well would *add* those rows, and 0
+     would say the opposite. The sites bank does not skip itself, because
+     there the chips are ANDed: its number is what you would narrow to. Each
+     bank's arithmetic therefore matches its own operator. */
+  function countsFor(skip, pick) {
+    var n = {};
+    D.departures.forEach(function (dep) {
+      var itin = D.itineraries[dep.itinerary_id];
+      if (!passes(dep, itin, skip)) return;
+      pick(itin, dep).forEach(function (v) { if (v) n[v] = (n[v] || 0) + 1; });
+    });
+    return n;
+  }
+
+  var BANKS = [];
+
+  function chips(host, items, picked, numeric, skip, pick) {
     var node = document.getElementById(host);
     var expanded = false;
+    var counts = null;
+    BANKS.push({
+      recount: function () {
+        counts = skip === false ? null : countsFor(skip, pick);
+        paint();
+      }
+    });
 
     function paint() {
       /* A chosen filter is always shown, wherever it sits in the list: a
          chip hidden behind "more" while switched on is a filter that appears
          to have been ignored. */
-      var shown = expanded ? items : items.filter(function (it, n) {
+      /* A value no longer reachable is dropped rather than shown as 0: the
+         bank is a list of what you can still do. A chosen one always stays,
+         even at zero, or turning it off would mean hunting for a chip that
+         had vanished. */
+      var live = counts === null ? items : items.filter(function (it) {
+        var v = numeric ? +it.id : it.id;
+        return counts[it.id] || picked.has(v);
+      });
+      var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
         return n < CHIP_LIMIT || picked.has(v);
       });
-      var hidden = items.length - shown.length;
+      var hidden = live.length - shown.length;
       node.innerHTML = shown.map(function (it) {
         var v = numeric ? +it.id : it.id;
+        var n = counts === null ? it.n : (counts[it.id] || 0);
         return '<button class="chip" data-v="' +
           esc(it.id).replace(/"/g, "&quot;") + '" aria-pressed="' + picked.has(v) + '">' +
-          esc(it.label || it.id) + ' <span class="dim">' + it.n + "</span></button>";
+          esc(it.label || it.id) + ' <span class="dim">' + n + "</span></button>";
       }).join("") +
         (hidden > 0 || expanded
           ? '<button class="chip more" data-more="1" aria-expanded="' + expanded + '">' +
@@ -826,10 +912,14 @@
   chips("months", D.facets.months.map(function (m) {
     return { id: m.id, label: m.label,
              n: D.departures.filter(function (d) { return d.month === m.id; }).length };
-  }), state.months, true);
-  chips("ports", PORTS, state.ports, false);
-  chips("sites", SITES, state.sites, false);
-  chips("boats", BOATS, state.boats, false);
+  }), state.months, true, "months", function (i, dep) { return [dep.month]; });
+  chips("ports", PORTS, state.ports, false, "ports",
+        function (i) { return [i.port_from]; });
+  /* Not skipped: these chips are ANDed, so the number is what you narrow to. */
+  chips("sites", SITES, state.sites, false, null,
+        function (i) { return i.dive_sites || []; });
+  chips("boats", BOATS, state.boats, false, "boats",
+        function (i) { return [i.boat]; });
 
   /* A range rather than chips: the fleet runs three to fourteen nights but
      sits overwhelmingly at seven, so a chip per length would be one useful
@@ -861,10 +951,10 @@
     draw();
   });
 
-  document.getElementById("q").addEventListener("input", function (event) {
+  document.getElementById("q").addEventListener("input", debounce(function (event) {
     state.q = event.target.value.toLowerCase().trim();
     draw();
-  });
+  }, 120));
 
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
@@ -898,6 +988,32 @@
     labelFilters();
     draw();
   });
+
+  /* Append the next page of rows as the table is scrolled. Guarded on
+     `state.open` being unchanged is unnecessary -- an expanded row is drawn
+     inside its own page and appending after it does not disturb it. */
+  document.querySelector(".shell").addEventListener("scroll", function () {
+    if (drawn >= lastRows.length) return;
+    var shell = this;
+    if (shell.scrollTop + shell.clientHeight < shell.scrollHeight - 600) return;
+    document.getElementById("body").insertAdjacentHTML(
+      "beforeend", renderRows(lastRows, drawn, PAGE_ROWS)
+    );
+    drawn = Math.min(lastRows.length, drawn + PAGE_ROWS);
+  }, { passive: true });
+
+  /* Typing is the one input that fires per character, and a redraw is the
+     most expensive thing this file does. Without this, "elphinstone" cost
+     eleven full redraws; with it, one. 120ms is below the point a pause
+     between keystrokes reads as lag. */
+  function debounce(fn, ms) {
+    var timer = null;
+    return function () {
+      var self = this, args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(function () { fn.apply(self, args); }, ms);
+    };
+  }
 
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */

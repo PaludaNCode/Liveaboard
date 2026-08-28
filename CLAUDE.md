@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 348 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 432 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 python3 tools/make_seed.py                             # regenerate seed data
@@ -26,6 +26,17 @@ PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
 and the CI check all promote on them, so one canonical set of inputs lives in
 `cli.py` and cannot drift apart across five workflows.
+
+**Read the published page without checking anything out.** After a merge, to
+see what actually shipped:
+
+```bash
+git show origin/main:site/index.html > /tmp/prod.html   # no checkout, no reset
+```
+
+Resetting the working branch onto `main` to look at it works and then leaves
+the branch one merge commit "ahead" of its own remote, which reads as unpushed
+work every time. `git show` answers the same question and disturbs nothing.
 
 ## Invariants
 

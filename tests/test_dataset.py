@@ -596,3 +596,85 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
             "app.js has lost the fallback branch; a nitrox line that is "
             "neither included nor priced would render as 'undefined'",
         )
+
+
+class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
+    """Every byte here ships inside one HTML file, 838 times over.
+
+    Five fields were serialised on every fee line and read by nothing:
+    `charged` and `charged_max` (the browser sums `display` itself), `counted`
+    (it re-decides that from the visitor's toggles), `basis` (already resolved
+    to per-trip in Python) and `provenance` — a nested object with a URL in it.
+    Dropping them took the payload from 2716 KB to 1328 and the page from
+    2801 KB to 1501.
+
+    Asserted both ways round: nothing dead comes back, and nothing the page
+    actually reads goes missing.
+    """
+
+    LIVE = ROOT / "data" / "egypt-2027.json"
+    APP = ROOT / "templates" / "app.js"
+
+    NEVER_SHIPPED = ("charged", "charged_max", "counted", "basis", "provenance")
+
+    def lines(self, live=False):
+        """The live dataset where asked for: the seed prices no fee as a range,
+        so `display_max` legitimately appears on none of its lines."""
+        source = self.LIVE if live and self.LIVE.exists() else SEED
+        payload = build_payload(Dataset.load(source))
+        out = []
+        for itinerary in payload["itineraries"].values():
+            out.extend(itinerary.get("lines") or [])
+        for departure in payload["departures"]:
+            if departure.get("base_line"):
+                out.append(departure["base_line"])
+        return out
+
+    def test_no_fee_line_carries_a_field_the_page_never_reads(self):
+        app = self.APP.read_text(encoding="utf-8")
+        for field in self.NEVER_SHIPPED:
+            with self.subTest(field=field):
+                self.assertNotIn(
+                    "line." + field, app,
+                    f"app.js reads {field}; it must then be shipped",
+                )
+                present = [x for x in self.lines() if field in x]
+                self.assertFalse(
+                    present,
+                    f"{len(present)} fee lines still ship {field!r}, which "
+                    f"app.js never reads",
+                )
+
+    def test_the_fields_the_page_does_read_are_all_present(self):
+        """The other half of the guard. Trimming further has to fail here."""
+        app = self.APP.read_text(encoding="utf-8")
+        if not self.LIVE.exists():
+            self.skipTest("no scraped dataset in this checkout")
+        needed = [f for f in ("code", "label", "tier", "display", "display_max",
+                              "has_price", "included", "toggle", "note", "fx")
+                  if "line." + f in app or "." + f in app]
+        lines = self.lines(live=True)
+        for field in needed:
+            with self.subTest(field=field):
+                self.assertTrue(
+                    any(field in x for x in lines),
+                    f"app.js reads line.{field} and no line ships it",
+                )
+
+    def test_a_quote_already_in_euro_is_not_shipped_twice(self):
+        """`quoted` was a byte-for-byte copy of `display` on the 96% of lines
+        nobody converted. It ships only where the page prints it, which is
+        where a conversion happened."""
+        for line in self.lines():
+            if "quoted" in line:
+                self.assertTrue(
+                    line.get("converted"),
+                    f"{line['code']} ships a quote it will never print",
+                )
+
+    def test_nulls_and_falses_are_omitted_rather_than_serialised(self):
+        for line in self.lines():
+            for key, value in line.items():
+                with self.subTest(code=line["code"], key=key):
+                    self.assertIsNotNone(value, f"{key} ships as null")
+                    self.assertIsNot(value, False, f"{key} ships as false")
