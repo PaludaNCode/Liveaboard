@@ -108,10 +108,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   rule would ruin (*MY Odyssey*, *St. John's*, *SS Turkia*). Ties break
   alphabetically: `promote` is pure and CI compares its output byte for byte.
   `TITLE_FIXES` corrects what is *wrong* rather than what is merely different —
-  zero-width spaces, three characters doing one apostrophe's job, and the two
-  misspellings of Daedalus, listed the way `PORT_ALIASES` lists harbours
-  because a near-miss rule that catches those also catches a reef that only
-  looks like another. **Three reefs, not every reef.** `REEF_ALIASES` folds the
+  zero-width spaces, three characters doing one apostrophe's job, the two
+  misspellings of Daedalus and the one of Zabargad, listed the way
+  `PORT_ALIASES` lists harbours because a near-miss rule that catches those
+  also catches a reef that only looks like another. A misspelling goes in the
+  table only where the trip's own `dive_sites`, parsed from the operator's
+  description, already name the reef correctly — the dataset confirming the
+  reef independently of its title is what separates a correction from a guess. **Three reefs, not every reef.** `REEF_ALIASES` folds the
   five spellings of *St. John's*, the three of *Brothers* and the two of *Fury
   Shoals* onto one each — differences rather than mistakes, folded for the
   reason `BDE` folds one route: the reader should not have to work out that the

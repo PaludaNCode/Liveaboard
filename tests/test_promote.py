@@ -1581,10 +1581,15 @@ class TestErrorsInATitleAreCorrected(unittest.TestCase):
         self.assertEqual(self.title("Deadalus & Elba Reef"),
                          "Daedalus & Elba Reef")
 
+    def test_the_one_misspelling_of_zabargad(self):
+        self.assertEqual(self.title("Rocky, Zarbagad, St. John's"),
+                         "Rocky, Zabargad, St. John's")
+
     def test_the_correction_is_listed_not_guessed(self):
         """A near-miss rule that catches those also catches a reef that only
         looks like another. Nothing else is touched."""
-        for name in ("Dadalus", "Daedalos", "Deadelus", "Zabargad", "Sataya"):
+        for name in ("Dadalus", "Daedalos", "Deadelus", "Zabargad", "Sataya",
+                     "Zabagad", "Zarbagard", "Zabargad Islands"):
             with self.subTest(name):
                 self.assertEqual(self.title(name), name)
 

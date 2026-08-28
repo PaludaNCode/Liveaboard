@@ -275,13 +275,21 @@ TITLE_FIXES = (
     # read from the operator's own description, so this corrects the spelling
     # of something the dataset has independently confirmed.
     (re.compile(r"\b(?:daedulus|deadalus)\b", re.I), "Daedalus"),
+    # Zabargad, once, with two letters swapped: "Zarbagad". Listed for the
+    # same reason, and confirmed the same way -- that trip carries `zabargad`
+    # in its dive sites, read from the operator's own description, and the
+    # fleet writes the reef 26 other times without ever writing it this way.
+    (re.compile(r"\bzarbagad\b", re.I), "Zabargad"),
 )
 """Errors in a title, as opposed to a style we happen not to share.
 
 The distinction is the whole reason this is a short list. Separators and word
 order are the operators' own and are left alone -- see the note on ``BDE``.
-These three are things nobody intended: an invisible control character, three
-characters doing one apostrophe's job, and a reef with its letters swapped.
+These four are things nobody intended: an invisible control character, three
+characters doing one apostrophe's job, and two reefs with their letters
+swapped. Each misspelling is corrected only where the trip's own dive sites,
+read from the operator's description, already name the reef correctly -- so the
+dataset has confirmed the reef independently of its title.
 The three reefs the fleet spells several ways are folded separately, in
 :data:`REEF_ALIASES`, because they are differences rather than mistakes.
 
