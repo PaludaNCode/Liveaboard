@@ -20,7 +20,7 @@ from datetime import date
 from typing import Any, Mapping, Sequence
 
 from .classify import normalise
-from .taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier, SourceKind
+from .taxonomy import DIVER_LEVEL_LABELS, DIVER_LEVEL_ORDER, DiverLevel, FeeBasis, FeeCode, FeeTier, SourceKind
 
 UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
@@ -336,6 +336,62 @@ Deliberately no keyword reaches ``EXPERIENCED_100``. That level's label is
 hundred-dive bar on a trip whose operator named no number at all. The count
 comes from the count.
 """
+
+
+def _strictest(
+    ours: dict[str, Any] | None, theirs: dict[str, Any] | None
+) -> dict[str, Any] | None:
+    """The higher of two stated entry bars, with both claims kept.
+
+    liveaboard.com and PADI disagree about the bar on 49 of the 105 trips both
+    describe, and in both directions: PADI is stricter on twelve and softer on
+    thirteen. Neither source is the authority -- both are quoting the same
+    operator -- so preferring one wholesale would publish a bar softer than
+    somebody stated roughly half the time.
+
+    Taking the higher level never softens either claim. It does state a bar
+    stricter than one of them, which is the trade made deliberately: a diver
+    turned away at the dock has been misled, and a diver who over-prepared has
+    not.
+
+    The winner's bar is taken whole rather than combined field by field. Mixing
+    one source's level with the other's dive count produces a requirement
+    neither operator stated, which is the same fabrication this module refuses
+    everywhere else. It also matters that PADI's ``minimalNumberOfDives`` is a
+    field whose semantics are recorded as unverified in
+    `docs/sources/padi.com.md`: taking a maximum across it would raise a stated
+    15-dive bar to 50 on the strength of a number nobody has confirmed is a
+    requirement at all.
+
+    Where they disagree the note says so and names both, because a visitor
+    comparing two boats deserves to know the two sources do not agree rather
+    than to see one number presented as settled.
+    """
+    if not ours or not theirs:
+        return ours or theirs
+
+    order = {level.value: n for n, level in enumerate(DIVER_LEVEL_ORDER)}
+    ours_level = order.get(str(ours.get("min_level")), 0)
+    theirs_level = order.get(str(theirs.get("min_level")), 0)
+    winner = ours if ours_level >= theirs_level else theirs
+
+    bar = dict(winner)
+
+    if ours.get("min_level") != theirs.get("min_level"):
+        labels = {level.value: text for level, text in DIVER_LEVEL_LABELS.items()}
+        bar["notes"] = " ".join(
+            part for part in (
+                winner.get("notes"),
+                f"Sources disagree: liveaboard.com states "
+                f"{labels.get(str(ours.get('min_level')), ours.get('min_level'))}, "
+                f"PADI Travel states "
+                f"{labels.get(str(theirs.get('min_level')), theirs.get('min_level'))}. "
+                f"The stricter is shown.",
+            ) if part
+        )
+    elif theirs.get("notes") and theirs["notes"] not in (winner.get("notes") or ""):
+        bar["notes"] = " ".join(p for p in (winner.get("notes"), theirs["notes"]) if p)
+    return bar
 
 
 def padi_key(slug: str, name: str) -> str:
@@ -766,12 +822,12 @@ def promote(
                 # be withheld from every other trip length that boat sells to
                 # stay honest. A per-trip figure needs no such guard, so it is
                 # taken as stated and the vessel figure remains the fallback.
-                # PADI sits between the two: like the fragment it is a per-trip
-                # figure the operator wrote down, so it needs no ``for_nights``
-                # guard, and it answers for trips the fragment has not reached.
-                # It is the low end of a stated range -- price per dive is a
-                # ceiling, as everywhere else here.
-                "dives": trip.get("dives") or padi_trip.get("dives") or _dives(
+                # PADI's count is deliberately not consulted. It reads as a
+                # per-trip figure and on some boats is not one: every All Star
+                # Ghani itinerary says 16 where ours say 17, 19, 20 and 21. A
+                # number less differentiated than what we hold cannot improve
+                # the column it would be filling.
+                "dives": trip.get("dives") or _dives(
                     hand.get(slug, {}).get("dives") or source.get("dives"),
                     nights=nights,
                     for_nights=hand.get(slug, {}).get("dives_for_nights"),
@@ -802,10 +858,11 @@ def promote(
         # An absent key loads as the default bar, which asks for nothing --
         # and that is the safe way round: an unread trip must not carry a
         # requirement nobody stated.
-        # liveaboard.com's own sentence first, PADI's coded fields where it said
-        # nothing. Never merged: two sources describing one safety gate in
-        # different vocabularies produce a bar neither of them stated.
-        bar = _requirements(trip) or _padi_requirements(padi_trip)
+        # The stricter of the two, never the first to answer. Both are operators'
+        # claims about a safety gate, and where they disagree, showing the lower
+        # one publishes a bar softer than somebody stated -- the one direction
+        # this project does not go. See _strictest.
+        bar = _strictest(_requirements(trip), _padi_requirements(padi_trip))
         if bar:
             itineraries[-1]["requirements"] = bar
 

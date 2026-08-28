@@ -443,5 +443,58 @@ class TestAliasMap(unittest.TestCase):
         self.assertEqual(stale, [], f"absent entries matching no boat: {stale}")
 
 
+class TestStricterBar(unittest.TestCase):
+    """Where two sources state different gates, neither is softened."""
+
+    from liveaboard.promote import _strictest
+
+    OURS = {"min_level": "open_water", "min_logged_dives": 0, "notes": "Open Water."}
+    THEIRS = {"min_level": "advanced", "min_logged_dives": 30, "notes": None}
+
+    def test_the_higher_bar_wins(self) -> None:
+        from liveaboard.promote import _strictest
+
+        got = _strictest(self.OURS, self.THEIRS)
+        self.assertEqual(got["min_level"], "advanced")
+
+    def test_the_winner_is_taken_whole(self) -> None:
+        """Not combined field by field.
+
+        Mixing one source's level with the other's dive count states a bar
+        neither operator gave, and PADI's minimalNumberOfDives has semantics
+        this repo records as unverified -- a maximum across it would raise a
+        stated 15-dive bar to 50 on an unconfirmed number.
+        """
+        from liveaboard.promote import _strictest
+
+        ours = {"min_level": "advanced", "min_logged_dives": 15, "notes": "15 required."}
+        theirs = {"min_level": "open_water", "min_logged_dives": 50, "notes": None}
+        got = _strictest(ours, theirs)
+        self.assertEqual(got["min_level"], "advanced")
+        self.assertEqual(got["min_logged_dives"], 15)
+
+    def test_a_disagreement_is_disclosed(self) -> None:
+        from liveaboard.promote import _strictest
+
+        got = _strictest(self.OURS, self.THEIRS)
+        self.assertIn("Sources disagree", got["notes"] or "")
+        self.assertIn("liveaboard.com", got["notes"])
+        self.assertIn("PADI Travel", got["notes"])
+
+    def test_agreement_says_nothing(self) -> None:
+        from liveaboard.promote import _strictest
+
+        same = {"min_level": "advanced", "min_logged_dives": 0, "notes": "Advanced."}
+        got = _strictest(same, dict(same))
+        self.assertNotIn("Sources disagree", got["notes"] or "")
+
+    def test_one_source_alone_passes_through(self) -> None:
+        from liveaboard.promote import _strictest
+
+        self.assertEqual(_strictest(self.OURS, None), self.OURS)
+        self.assertEqual(_strictest(None, self.THEIRS), self.THEIRS)
+        self.assertIsNone(_strictest(None, None))
+
+
 if __name__ == "__main__":
     unittest.main()

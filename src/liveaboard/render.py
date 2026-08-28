@@ -27,7 +27,7 @@ from .pricing import (
     mandatory_known,
     resolve_fees,
 )
-from .taxonomy import FEE_LABELS
+from .taxonomy import DIVER_LEVEL_LABELS, FEE_LABELS
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -180,6 +180,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             ],
         },
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
+        # Shipped rather than restated in the browser, for the same reason the
+        # fee labels are: one vocabulary, defined once. The page needs them to
+        # print an entry bar the operator stated.
+        "level_labels": {
+            level.value: label for level, label in DIVER_LEVEL_LABELS.items()
+        },
         "itineraries": itineraries,
         "departures": departures,
     }
