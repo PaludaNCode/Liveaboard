@@ -821,6 +821,7 @@ def promote(
     facts: dict[str, Any] | None = None,
     trips: dict[str, Any] | None = None,
     padi: dict[str, Any] | None = None,
+    padi_departures: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -868,6 +869,15 @@ def promote(
     for record in ((padi or {}).get("trips") or {}).values():
         if record.get("boat") and record.get("name"):
             padi_book[padi_key(record["boat"], record["name"])] = record
+
+    # The same sailing, as PADI sells it. Keyed on vessel and day -- an exact
+    # key, unlike the itinerary join, because a date has no spelling. It fills a
+    # field on a departure that already exists and can create none: the row
+    # count is the candidate's, and merging a second seller must not change it.
+    sailing_book: dict[str, dict[str, Any]] = {
+        key: record
+        for key, record in ((padi_departures or {}).get("departures") or {}).items()
+    }
 
     # A vessel's guest count, as its own trips state it. Fallback only: the
     # specification table's "Max guests" is the hull's number and this is one
@@ -990,6 +1000,13 @@ def promote(
         record = operator_record(winner)
         operators.setdefault(record["id"], record)
         boat_operator[slug] = record["id"]
+
+    # Our boat id -> PADI's slug, for the provenance URL. The alias map is the
+    # only place that pairing is recorded, and it is recorded by hand.
+    padi_slug_for: dict[str, str] = {
+        record["boat"]: record.get("slug", "")
+        for record in sailing_book.values() if record.get("boat")
+    }
 
     boats: dict[str, dict[str, Any]] = {}
     itineraries: list[dict[str, Any]] = []
@@ -1148,6 +1165,25 @@ def promote(
             # amounts, and why a title once differed from its twin.
             if item.get("promotion"):
                 entry["promotion"] = item["promotion"]
+
+            # PADI's price for this exact sailing, in the currency its vessel
+            # page states. Left absent rather than zeroed where PADI does not
+            # sell the date -- a berth nobody offered has no price, and a zero
+            # would read as free.
+            sailing = sailing_book.get(f"{slug}::{item['start']}")
+            if sailing and sailing.get("price") and sailing.get("currency"):
+                entry["padi_price"] = {
+                    "amount": sailing["price"],
+                    "currency": sailing["currency"],
+                }
+                entry["padi_provenance"] = {
+                    "kind": "scraped",
+                    "source_id": "padi.com",
+                    "retrieved": (padi_departures or {}).get("collected") or "",
+                    "url": f"https://travel.padi.com/liveaboard/"
+                           f"{sailing.get('country', 'egypt')}/"
+                           f"{padi_slug_for.get(slug, slug)}/",
+                }
             departures.append(entry)
 
     _settle_title_case(itineraries)

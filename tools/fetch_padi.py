@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 import http.client
@@ -66,6 +67,16 @@ DROP = ("photos", "marineLife")
 """Media arrays. See the module docstring: nothing here can ever render them."""
 RAW = Path("data/padi_raw.json")
 BOOK = Path("data/padi.json")
+DEPARTURES = Path("data/padi_departures.json")
+
+TRIP_LIST = "https://travel.padi.com/api/v2/travel/shop/{vessel}/trips/"
+"""Every sailing one vessel has on sale: dates, price, availability.
+
+A different endpoint from the itineraries one and answering a different
+question. `ITINERARY_DETAIL` describes a trip *template* -- harbours, airports,
+the entry bar -- and carries no date and no price at all. This carries both, and
+is what makes a sailing comparable rather than a trip merely describable.
+"""
 
 
 def get(url: str, timeout: int = 40) -> dict | None:
@@ -78,6 +89,43 @@ def get(url: str, timeout: int = 40) -> dict | None:
         # boat 34 of 38, after 13 MB of responses were already on disk. One
         # dropped connection must cost the itinerary, not the run.
         return None
+
+
+def shop_facts(slug: str, fallback: str) -> tuple[str, str | None]:
+    """The country PADI files this shop under, and the currency it prices in.
+
+    Both come off the vessel page's ``window.shop`` and both are needed:
+
+    ``countrySlug`` is not the cruising ground. All three Red Sea Aggressors are
+    filed under `united-states-of-america-usa` while sailing Hurghada, Port
+    Ghalib and Hamata; sending "egypt" for them 404s every itinerary.
+
+    ``currency`` is the only place a price's unit is stated. The trips endpoint
+    returns a bare ``price`` with no currency beside it, and the ``Currency-code``
+    header the app sends does not convert -- EUR, USD and GBP all answered 1473.0
+    for the same sailing. So the number is in the vessel's own currency, and a
+    boat whose page does not state one has its prices dropped rather than
+    assumed: this project does not invent a price, and a price in an unknown
+    unit is an invented one.
+    """
+    import re
+
+    url = f"https://{HOST}/liveaboard/{fallback}/{slug}/"
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=35) as r:
+            html = r.read().decode("utf-8", "replace")
+    except Exception:  # noqa: BLE001 - fall back rather than lose the boat
+        return fallback, None
+    if "window.shop = " not in html:
+        return fallback, None
+    block = html[html.index("window.shop = "):][:1200]
+
+    def field(name: str) -> str | None:
+        match = re.search(rf'\b{name}:\s*["\']?([^,"\'\n]*)', block)
+        value = match.group(1).strip() if match else ""
+        return value or None
+
+    return field("countrySlug") or fallback, field("currency")
 
 
 def shop_country(slug: str, fallback: str) -> str:
@@ -113,6 +161,93 @@ def load(path: Path, default: dict) -> dict:
     return dict(default)
 
 
+def _iso_day(value: str | None) -> str | None:
+    """PADI dates are midnight-Z timestamps; a sailing is a day.
+
+    "2027-05-01T00:00:00Z" -> "2027-05-01". Compared against our own departure
+    dates, which are plain days, so the timestamp has to go before the two can
+    be keyed together -- and it has to go by truncation rather than by parsing
+    into a local timezone, which would move a midnight-UTC sailing to the
+    previous day for anyone west of Greenwich.
+    """
+    if not value or len(value) < 10:
+        return None
+    day = value[:10]
+    return day if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) else None
+
+
+def _fetch_trips(aliases: dict[str, str], raw: dict, args) -> None:
+    """Every sailing each mapped vessel sells, with the currency to read it in.
+
+    Stored whole, like the itineraries: `promote` reads four fields today and
+    the response carries eighteen, and trimming an archive to what the parser
+    happens to want is how a question nobody has asked yet becomes unanswerable.
+    """
+    trips: dict = raw.setdefault("trips", {})
+    shops: dict = raw.setdefault("shops", {})
+
+    boats = sorted(aliases.items())
+    if args.limit:
+        boats = boats[: args.limit]
+    for boat_id, slug in boats:
+        country, currency = shop_facts(slug, args.country)
+        time.sleep(args.delay)
+        shops[slug] = {"country": country, "currency": currency, "boat": boat_id}
+
+        listing = get(TRIP_LIST.format(vessel=slug))
+        time.sleep(args.delay)
+        if not listing:
+            print(f"{boat_id:<24} {slug:<28} trips unavailable")
+            continue
+
+        results = listing.get("results") or []
+        trips[slug] = results
+        dated = sum(1 for r in results if _iso_day(r.get("startDate")))
+        note = "" if currency else "   NO CURRENCY -- prices unusable"
+        print(f"{boat_id:<24} {slug:<28} {len(results):>3} sailings, "
+              f"{dated} dated, {currency or '?'}{note}")
+
+        raw["fetched"] = time.strftime("%Y-%m-%d")
+        RAW.write_text(json.dumps(raw, indent=1, sort_keys=True) + "\n")
+
+
+def _departure_book(aliases: dict[str, str], raw: dict) -> dict:
+    """Sailings keyed the way `promote` will look them up: boat and day.
+
+    An exact key, deliberately. The itinerary join needed folding because two
+    sites spell a trip differently; a date has no spelling, and 602 of our 627
+    departures on these boats match one of PADI's on the day alone.
+
+    A sailing with no price, or a price in a currency the vessel page never
+    stated, is left out entirely rather than stored as zero.
+    """
+    shops = raw.get("shops") or {}
+    book: dict[str, dict] = {}
+    for slug, results in (raw.get("trips") or {}).items():
+        shop = shops.get(slug) or {}
+        boat_id, currency = shop.get("boat"), shop.get("currency")
+        if not boat_id or not currency:
+            continue
+        for trip in results:
+            day = _iso_day(trip.get("startDate"))
+            price = trip.get("price")
+            if not day or not isinstance(price, (int, float)) or price <= 0:
+                continue
+            book[f"{boat_id}::{day}"] = {
+                "boat": boat_id,
+                "start": day,
+                "end": _iso_day(trip.get("endDate")),
+                "nights": trip.get("duration"),
+                "price": float(price),
+                "currency": currency,
+                "was": trip.get("compareAtPrice"),
+                "availability": trip.get("availability"),
+                "padi_id": trip.get("id"),
+                "itinerary": (trip.get("itinerary") or {}).get("title"),
+            }
+    return book
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--aliases", default="data/padi_aliases.json")
@@ -122,6 +257,8 @@ def main() -> int:
                         help="seconds between requests; the edge rate-limits AI agents at 30/min")
     parser.add_argument("--refresh", action="store_true",
                         help="re-fetch itineraries already stored")
+    parser.add_argument("--trips", action="store_true",
+                        help="fetch sailings and prices as well as itineraries")
     args = parser.parse_args()
 
     aliases = json.loads(Path(args.aliases).read_text())["aliases"]
@@ -169,6 +306,9 @@ def main() -> int:
         raw["fetched"] = time.strftime("%Y-%m-%d")
         RAW.write_text(json.dumps(raw, indent=1, sort_keys=True) + "\n")
 
+    if args.trips:
+        _fetch_trips(aliases, raw, args)
+
     # The book is rebuilt from the raw store every time, so it is always exactly
     # what the current parser makes of the archive -- the same relationship
     # `promote --check` enforces between the dataset and its inputs.
@@ -187,6 +327,14 @@ def main() -> int:
     book["trips"] = trips
     book["collected"] = raw["fetched"]
     BOOK.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n")
+
+    sailings = _departure_book(aliases, raw)
+    if sailings:
+        DEPARTURES.write_text(json.dumps(
+            {"collected": raw.get("fetched", ""), "source": "padi.com",
+             "departures": sailings}, indent=1, sort_keys=True) + "\n")
+        currencies = sorted({s["currency"] for s in sailings.values()})
+        print(f"{DEPARTURES}: {len(sailings)} sailings priced in {', '.join(currencies)}")
 
     with_bar = sum(1 for t in trips.values() if t.get("requirements"))
     with_dives = sum(1 for t in trips.values() if t.get("dives"))
