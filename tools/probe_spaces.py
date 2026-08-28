@@ -22,12 +22,18 @@ live page can tell them apart. Hence a probe, before any parser.
 What it does, per vessel-month:
 
 1. loads the page in a browser and waits for it to settle;
-2. prints the rendered text of each departure row, which is where a count
-   would have to appear;
-3. greps that text for every phrasing a count could take, and for bare numbers
-   next to booking words;
+2. finds the departure rows **by their content** -- the smallest element
+   holding both a 2027 date and a price -- rather than by a class name;
+3. greps that text for every phrasing a count could take;
 4. reports every XHR the page made whose body carries an inventory-shaped
-   field, since the panels this site renders late are fed that way.
+   field, since the panels this site renders late are fed that way;
+5. and when it matches no rows at all, says it has no conclusion and dumps
+   the body text instead of reporting a negative.
+
+That last point is the whole discipline. The first version of this probe
+guessed at selectors, matched zero elements on all four pages, and printed
+"nothing states a remaining-berth count" -- a confident finding about the
+site derived from having read none of it.
 
 Aimed at vessel-months holding a **limited** departure. "Available" says
 nothing about how many, and "sold out" is zero; if a number exists anywhere it
@@ -96,7 +102,7 @@ def main() -> int:
 
     from playwright.sync_api import sync_playwright
 
-    found_text, found_xhr, looked = [], [], 0
+    found_text, found_xhr, looked, read_rows = [], [], 0, 0
 
     with sync_playwright() as play:
         browser = play.chromium.launch()
@@ -127,30 +133,66 @@ def main() -> int:
                 page.close()
                 continue
 
-            # 2. The departure rows, as rendered.
-            rows = page.query_selector_all(
-                "[class*='trip'],[class*='departure'],[class*='date-row'],"
-                "[class*='availability'],tr"
-            )
-            print(f"    {len(rows)} candidate row element(s)")
+            # 2. Find the departure rows by their *content*, not by a class
+            # name nobody has read. The first version of this probe guessed at
+            # selectors -- [class*='trip'], tr and three others -- matched zero
+            # elements on all four pages, and then reported "nothing states a
+            # count" as though that were a finding about the site. It was a
+            # finding about the selectors.
+            #
+            # A departure row is whatever element holds a 2027 date and a
+            # price. Walk up from the date to the smallest ancestor that has
+            # both, which is the row whatever it happens to be called.
+            body = page.inner_text("body") or ""
+            print(f"    page title : {page.title()!r}")
+            print(f"    body text  : {len(body):,} chars")
+            for probe_word in ("2027", "US$", "Book", "Sold", "space"):
+                print(f"      contains {probe_word!r}: {probe_word in body}")
+
+            rows = page.evaluate("""() => {
+              const out = [];
+              const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+              const seen = new Set();
+              while (walk.nextNode()) {
+                const t = walk.currentNode.nodeValue || '';
+                if (!/20\\d\\d/.test(t)) continue;
+                let el = walk.currentNode.parentElement;
+                for (let i = 0; el && i < 8; i++, el = el.parentElement) {
+                  const txt = el.innerText || '';
+                  if (/20\\d\\d/.test(txt) && /(US\\$|€|£|\\d[\\d,]{3,})/.test(txt)) {
+                    if (!seen.has(el)) { seen.add(el); out.push({
+                      tag: el.tagName.toLowerCase(),
+                      cls: (el.className || '').toString().slice(0, 120),
+                      text: txt.replace(/\\s+/g, ' ').slice(0, 500),
+                    }); }
+                    break;
+                  }
+                }
+              }
+              return out.slice(0, 40);
+            }""")
+            print(f"    {len(rows)} element(s) holding a date and a price")
+            read_rows += len(rows)
             shown = 0
             for row in rows:
-                try:
-                    text = " ".join((row.inner_text() or "").split())
-                except Exception:  # noqa: BLE001
-                    continue
-                if not text or len(text) < 20:
-                    continue
+                text = row["text"]
                 hit = COUNT.search(text)
                 if shown < args.rows or hit:
                     marker = "  <-- MATCH" if hit else ""
-                    print(f"      {text[:args.chars]}{marker}")
-                    if hit and args.dump_html:
-                        print("      --- markup ---")
-                        print("      " + (row.inner_html() or "")[:1500])
+                    print(f"      <{row['tag']} class={row['cls']!r}>")
+                    print(f"        {text[:args.chars]}{marker}")
                     shown += 1
                 if hit:
                     found_text.append((url, hit.group(0), text[:160]))
+
+            # If nothing on the page holds a date and a price, the probe has
+            # not read the departures at all and any negative is worthless.
+            if not rows:
+                print("      !! no element holds both a date and a price --")
+                print("      !! this probe has not seen the departures, so it")
+                print("      !! cannot say anything about what they contain.")
+                print("      --- first 3000 chars of body text ---")
+                print("      " + body[:3000].replace("\n", "\n      "))
 
             # 4. Anything inventory-shaped in what the page fetched.
             for reply_url, body in replies:
@@ -162,6 +204,7 @@ def main() -> int:
     print("\n" + "=" * 78)
     print("SUMMARY")
     print(f"  vessel-months read              : {looked}")
+    print(f"  departure rows actually read    : {read_rows}")
     print(f"  rendered rows naming a count    : {len(found_text)}")
     print(f"  inventory-shaped keys in XHR    : {len(found_xhr)}")
     for url, phrase, text in found_text[:20]:
@@ -169,11 +212,17 @@ def main() -> int:
     for url, reply_url, key in found_xhr[:20]:
         print(f"    {key} from {reply_url[:90]}  (on {url})")
     print()
-    if not found_text and not found_xhr:
-        print("  Nothing states a remaining-berth count, in the markup or in")
-        print("  anything the page fetched. On this evidence #79 cannot be")
-        print("  sourced from liveaboard.com and should say so rather than")
-        print("  ship a column that is empty on every row.")
+    if not read_rows:
+        print("  NO CONCLUSION. Nothing matched the departure rows on any")
+        print("  page, so this run says nothing about whether a count exists.")
+        print("  Read the body text dumped above and fix the probe first: a")
+        print("  negative from a probe that read nothing is not a negative.")
+    elif not found_text and not found_xhr:
+        print(f"  {read_rows} departure row(s) read, and none states a")
+        print("  remaining-berth count -- in the markup or in anything the")
+        print("  page fetched. On this evidence #79 cannot be sourced from")
+        print("  liveaboard.com and should say so rather than ship a column")
+        print("  that is empty on every row.")
     else:
         print("  Read the matches above before writing a parser: what matters")
         print("  is whether the number is per departure and whether it is the")
