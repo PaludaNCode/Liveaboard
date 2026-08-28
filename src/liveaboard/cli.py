@@ -390,8 +390,17 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if trips_path.exists():
         trips = json.loads(trips_path.read_text(encoding="utf-8"))
 
+    # What PADI Travel states about the same trip: a coded certification bar
+    # and a dive count the operator wrote down. Fallback only -- see promote's
+    # padi_book -- so its absence changes nothing that was there before.
+    padi = None
+    padi_path = Path(args.padi)
+    if padi_path.exists():
+        padi = json.loads(padi_path.read_text(encoding="utf-8"))
+
     payload = promote(
-        candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips
+        candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
+        padi=padi,
     )
 
     if trips:
@@ -649,6 +658,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--fx", default=Path("data/fx.json"), type=Path)
     promote_cmd.add_argument("--facts", default=Path("data/operator_facts.json"), type=Path)
     promote_cmd.add_argument("--trips", default=Path("data/itineraries.json"), type=Path)
+    promote_cmd.add_argument("--padi", default=Path("data/padi.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(
