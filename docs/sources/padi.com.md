@@ -107,14 +107,106 @@ Written down so nobody spends the afternoon again.
   templates live on `d2p1cf6997m1ir.cloudfront.net`, which the egress policy
   blocks (403 to CONNECT). `travel.padi.com/static/...` 404s — the CDN is the
   only route. This also means **a browser-driven probe cannot work from here**:
-  Chromium loads the page, then cannot load the app. Runners can reach the CDN.
+  Chromium loads the page, then cannot load the app. Runners can reach the CDN,
+  and reading the bundle there is what produced the endpoint above. The *data*
+  needs no runner — only that one read did.
+- **`api.padi.com` is not it.** It answers JSON and is an AWS API Gateway, so
+  every unmatched route returns 403 `{"message":"Missing Authentication Token"}`
+  — including `/travel/` itself. That 403 reads like a route that exists behind
+  auth and is not one; do not take it as a lead. `api-ecomm.padi.com` does not
+  resolve, and the `"api-ecomm."` string in the bundle is a test in the client's
+  auth branch, not a host to point at.
 
-## The one thing still missing
+## The JSON endpoint
 
-Per-itinerary requirement **values**. PADI stores the entry bar as two coded
-fields, and a vessel page ships their vocabulary but never a value —
-`"certification"`, `"experience_required"` and `"min_certification"` appear zero
-times in 395 KB of HTML. The vocabulary, verbatim from `window.info.shop`:
+**Found, called, unauthenticated.** The entry bar this file called missing is a
+first-class field on an endpoint that needs no token, no CSRF cookie and no
+headers at all — a plain GET answers 200 with JSON, and nothing under
+`/api/v2/travel/` is disallowed by robots.
+
+| Endpoint | Returns |
+|---|---|
+| `/api/v2/travel/shop/{vessel}/itineraries/?kind=10` | Paginated DRF list: `{"count": 22, "results": [{title, slug, id, totalNumberOfDives, totalNumberOfDivesMax}]}` |
+| `/api/v2/travel/shop/{country}/{vessel}/itineraries/{slug}/` | One itinerary, **95 fields** |
+
+One request per vessel for the list — 58 for Egypt — then one per itinerary.
+
+### How it was found
+
+Not by guessing. Eight bases were tried against the known path and all 404'd,
+including `/api/`, `/api/v2/` and `/api/travel/v1/`, because the prefix is never
+one literal. `tools/probe_padi_bundle.py` read `itinerary.*.js` on a runner and
+printed the client's own resolver:
+
+```js
+getUrl() {
+  return this.endpoint.includes("https://")        ? this.endpoint
+       : (adventure | recipients | account paths)  ? `${origin}${this.endpoint}`
+       : this.chinaApi                             ? `https://china-wechat-api.padi.com.cn${...}`
+       : this.endpointAsUrl                        ? this.endpoint
+       :                                             `${origin}/api/v2/travel/${this.endpoint}`;
+}
+```
+
+`/api/v2/travel/` was the one combination not guessed. Two lessons worth the
+space: the call sites are handed **relative** paths (`shop/egypt/…`), so a
+pattern anchored on a leading slash finds none of them; and a runner log read
+through the API truncates from the front, so a probe that prints its findings
+after eighty candidate 404s hides the answer — hence `--only-base`.
+
+### The fields that matter
+
+| Field | Example | Note |
+|---|---|---|
+| `requiredCertification` | `30` | `ITINERARY_CERTIFICATION_CHOICES`. A requirement |
+| `experienceRequiredDives` | `20` | The enum, every label of which reads *recommended* |
+| `minimalNumberOfDives` | `50` | A plain integer, **not** the enum restated — see below |
+| `totalNumberOfDives` / `…Max` | `17` / `18` | The dive count per trip, with a low end |
+| `length` | `7` | Nights, stated |
+| `harbourDepartureTitle` / `…Arrival…` | `Marsa Alam` | Ports as fields, not parsed out of a title |
+| `days`, `descriptions`, `highlightsDescription`, `goodToKnow` | | Day-by-day and prose |
+| `mandatoryOnBoard`, `optionalInAdvance`, `notIncludedInfo`, `whatsIncludedNew` | | The fee book, structured |
+| `cancellationMilestones`, `paymentInformation` | | Deposit schedule and cancellation terms |
+
+**`minimalNumberOfDives` is independent of the enum beside it.** Blue Melody
+states 30, and the enum can only resolve to 0, 20, 50 or 100 — so it is the
+operator's own number, not a rendering of the code. The two are reported
+separately (`min_logged_dives` and `recommended_logged_dives`) for that reason.
+Whether PADI shows a diver that integer as required or as advice has not been
+checked; until it has, it is carried under its own name and folded into nothing.
+
+### It varies per itinerary, which is the point
+
+Sampled across five Egyptian vessels:
+
+| Vessel | Entry bar |
+|---|---|
+| My Blue Melody | **Open Water**, 30 dives, 15 dives over 7 nights |
+| Snefro Pearl | Advanced Open Water, 20 dives, 9 dives over 3 nights |
+| My Aphrodite | Advanced Open Water — and **50 / 30 / 50 dives across its own three trips** |
+| All Star Ghani | Advanced Open Water, 50 dives, 16 dives over 7 nights |
+| DUNE Silky | Advanced Open Water, 50 dives, 14 dives over 7 nights |
+
+Aphrodite settles it: the field is per *itinerary*, not a vessel default. That is
+exactly the comparison [#3](https://github.com/PaludaNCode/Liveaboard/issues/3)
+was opened for — a beginner week and a 50-dive week are not the same product, and
+until now nothing in the dataset could say so.
+
+The endpoint also answers the dive-count problem the invariants describe: it
+states a per-trip range, so the low end is a stated figure rather than a derived
+one. `itinerary_from_payload()` keeps `totalNumberOfDives`.
+
+### Still to do
+
+Nothing in the pipeline fetches this yet. `requirements_from_payload()` and
+`itinerary_from_payload()` read a response, with tests pinned to a real one, but
+no tool walks the 58 vessels and no promotion consumes the result. The join is
+already measured (below) and unchanged: PADI's title minus its night suffix is
+our `Itinerary.name`.
+
+## The vocabulary
+
+Verbatim from `window.info.shop` on any vessel page:
 
 ```
 ITINERARY_CERTIFICATION_CHOICES = [[10, "Open Water"], [20, "Open Water + Nitrox"],
@@ -126,22 +218,9 @@ EXPERIENCE_REQUIRED_DIVES       = [[0, "No min. logged dives required"],
 ```
 
 `CERTIFICATION_CHOICES` and `EXPERIENCE_DIVES` in `padi_com.py` map both onto
-`DiverLevel`, with tests. What is *not* written is the plumbing that finds a
-value, because no value has been seen — the fetch-first rule applies to the
-payload shape exactly as it applied to the URL shape, and guessing the latter is
-what produced the 404s above.
-
-Two ways to get one, both needing a runner:
-
-1. **Read the bundle.** `static/travel-app/dist/itinerary.*.js` on the CDN
-   builds the URL the popup calls. Cheaper, and the answer is a plain URL that
-   this environment can then fetch directly.
-2. **Drive the browser.** `tools/probe_network.py --url <a vessel page>` already
-   records XHR and reports JSON shape; the popup opens via an Angular click, so
-   this needs a click step the tool does not have yet.
-
-Take (1) first. If the endpoint turns out to need a session or a signed
-parameter, (2) is the fallback and the fee scrape's browser is already there.
+`DiverLevel`, with tests. Nitrox rides along with the certification in PADI's
+vocabulary (10 vs 20, 30 vs 40) but is a gas rather than an entry bar, so each
+pair lands on one level.
 
 ## The join, measured
 

@@ -139,6 +139,89 @@ class TestRequirementsFromChoices(unittest.TestCase):
         self.assertIsNone(PadiComAdapter.requirements_from_choices(None, None))
 
 
+# Trimmed from the live response for
+# /api/v2/travel/shop/egypt/hammerhead-ii/itineraries/red-sea-charm-abu-nuhas-ss-thistlegorm-the-brother/
+# on 2026-08-28. 95 fields came back; these are the ones read.
+DETAIL = {
+    "title": "Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's "
+             "(Marsa Alam - Marsa Alam) 7 Nights",
+    "slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-brother",
+    "id": 21681,
+    "shopTitle": "Hammerhead II",
+    "length": 7,
+    "harbourDepartureTitle": "Marsa Alam",
+    "harbourArrivalTitle": "Marsa Alam",
+    "totalNumberOfDives": 17,
+    "totalNumberOfDivesMax": 18,
+    "requiredCertification": 30,
+    "experienceRequiredDives": 20,
+    "minimalNumberOfDives": 50,
+    "experienceRequired": None,
+}
+
+
+class TestPayload(unittest.TestCase):
+    """What the JSON endpoint states, once the bundle gave up its address."""
+
+    def test_entry_bar(self) -> None:
+        got = PadiComAdapter.requirements_from_payload(DETAIL)
+        self.assertEqual(got["min_level"], DiverLevel.ADVANCED.value)
+        self.assertEqual(got["recommended_logged_dives"], 50)
+        self.assertEqual(got["min_logged_dives"], 50)
+
+    def test_minimum_is_not_the_enum_restated(self) -> None:
+        """Blue Melody states 30, which the enum cannot produce.
+
+        The enum resolves to 0, 20, 50 or 100 only, so a 30 proves the integer
+        field is the operator's own number and not a rendering of the code beside
+        it. Folding the two together would lose that.
+        """
+        payload = {**DETAIL, "requiredCertification": 10,
+                   "experienceRequiredDives": 10, "minimalNumberOfDives": 30}
+        got = PadiComAdapter.requirements_from_payload(payload)
+        self.assertEqual(got["min_level"], DiverLevel.OPEN_WATER.value)
+        self.assertEqual(got["recommended_logged_dives"], 20)
+        self.assertEqual(got["min_logged_dives"], 30)
+
+    def test_nothing_stated(self) -> None:
+        self.assertIsNone(PadiComAdapter.requirements_from_payload(
+            {"requiredCertification": None, "minimalNumberOfDives": 0}))
+
+    def test_dive_count_keeps_the_low_end(self) -> None:
+        """17-18 is reported as 17. A range shown as its ceiling flatters
+        the price per dive, which is the number this site exists to get right."""
+        self.assertEqual(PadiComAdapter.itinerary_from_payload(DETAIL)["dives"], 17)
+
+    def test_facts_are_stated_not_parsed(self) -> None:
+        record = PadiComAdapter.itinerary_from_payload(DETAIL)
+        self.assertEqual(record["nights"], 7)
+        self.assertEqual(record["ports"], "Marsa Alam - Marsa Alam")
+        self.assertEqual(record["boat_name"], "Hammerhead II")
+        self.assertEqual(record["padi_id"], 21681)
+
+    def test_name_still_joins_to_ours(self) -> None:
+        """The payload title minus its nights is our Itinerary.name."""
+        record = PadiComAdapter.itinerary_from_payload(DETAIL)
+        ours = ("Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - "
+                "St. John's (Marsa Alam - Marsa Alam)")
+        self.assertEqual(
+            PadiComAdapter.compare_key(str(record["name"])),
+            PadiComAdapter.compare_key(ours),
+        )
+
+    def test_url_shapes(self) -> None:
+        from liveaboard.scrape.padi_com import ITINERARY_DETAIL, ITINERARY_LIST
+
+        self.assertEqual(
+            ITINERARY_LIST.format(vessel="hammerhead-ii"),
+            "https://travel.padi.com/api/v2/travel/shop/hammerhead-ii/itineraries/?kind=10",
+        )
+        self.assertEqual(
+            ITINERARY_DETAIL.format(country="egypt", vessel="hammerhead-ii", slug="a-trip"),
+            "https://travel.padi.com/api/v2/travel/shop/egypt/hammerhead-ii/itineraries/a-trip/",
+        )
+
+
 class TestItineraryTitles(unittest.TestCase):
     """Titles come from the anchor. Slugs are ids and nothing more."""
 

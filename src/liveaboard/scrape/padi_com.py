@@ -61,6 +61,30 @@ paged through without a browser, and does not need to be.
 
 COUNTRY = "egypt"
 
+API_BASE = f"https://{HOST}/api/v2/travel"
+"""Where PADI Travel's own JSON lives.
+
+Found by reading `itinerary.*.js` on a runner (`tools/probe_padi_bundle.py`).
+Its API client resolves a relative endpoint as ```${origin}/api/v2/travel/${e}`
+`` unless the path names the adventure or account service, so the prefix is
+never spelled out in one literal -- which is why eight guessed bases, `/api/`
+and `/api/v2/` among them, all 404 before the bundle was read.
+
+**Unauthenticated, and needs no headers at all.** No token, no CSRF cookie, no
+`X-Requested-With`: a plain GET answers 200 with JSON. Nothing under
+`/api/v2/travel/` is disallowed by robots.
+"""
+
+ITINERARY_LIST = API_BASE + "/shop/{vessel}/itineraries/?kind=10"
+"""Every itinerary one vessel sells: title, slug, id, dive-count range.
+
+Paginated DRF -- ``{"count": 22, "next": null, "results": [...]}`` -- and one
+request per vessel, which is 58 for Egypt.
+"""
+
+ITINERARY_DETAIL = API_BASE + "/shop/{country}/{vessel}/itineraries/{slug}/"
+"""One itinerary, 95 fields, and the only place the entry bar is stated."""
+
 VESSEL_URL = re.compile(
     rf"https://{re.escape(HOST)}/liveaboard/(?P<country>[a-z0-9-]+)/(?P<slug>[a-z0-9-]+)/"
 )
@@ -259,6 +283,73 @@ class PadiComAdapter(SourceAdapter):
             if title and cls.split_title(title):
                 found.setdefault(match.group("slug"), title)
         return found
+
+    @classmethod
+    def requirements_from_payload(cls, detail: dict[str, object]) -> dict[str, object] | None:
+        """The entry bar out of an `ITINERARY_DETAIL` response.
+
+        Three fields carry it, and they are not the same claim:
+
+        ``requiredCertification``
+            The coded certification, mapped through `CERTIFICATION_CHOICES`. A
+            requirement.
+        ``experienceRequiredDives``
+            The coded dive count, whose every label reads *recommended*.
+        ``minimalNumberOfDives``
+            A plain integer, and **not** the enum restated -- Blue Melody states
+            30, which is not among the enum's 0/20/50/100. So it is the
+            operator's own number rather than a rendering of the code beside it.
+
+        The two dive fields are reported separately for that reason. Whether PADI
+        presents `minimalNumberOfDives` to a diver as required or as advice has
+        not been checked, so it is carried under its own name and not folded into
+        either the level or the recommendation.
+        """
+        certification = detail.get("requiredCertification")
+        experience = detail.get("experienceRequiredDives")
+        requirements = cls.requirements_from_choices(
+            certification if isinstance(certification, int) else None,
+            experience if isinstance(experience, int) else None,
+        ) or {}
+
+        minimum = detail.get("minimalNumberOfDives")
+        if isinstance(minimum, int) and minimum > 0:
+            requirements["min_logged_dives"] = minimum
+        return requirements or None
+
+    @classmethod
+    def itinerary_from_payload(cls, detail: dict[str, object]) -> dict[str, object]:
+        """One itinerary's facts, stated rather than parsed.
+
+        Everything the title parser had to infer is a field here: `length` for
+        nights, the two harbour titles for ports. The dive count keeps the low
+        end of `totalNumberOfDives`/`totalNumberOfDivesMax`, as everywhere else
+        in this codebase -- a range reported as its ceiling flatters the price
+        per dive.
+        """
+        title = str(detail.get("title") or "")
+        record: dict[str, object] = {
+            "title": title,
+            "padi_slug": detail.get("slug"),
+            "padi_id": detail.get("id"),
+            "boat_name": detail.get("shopTitle"),
+        }
+        split = cls.split_title(title)
+        if split:
+            record["name"] = split[0]
+        if isinstance(detail.get("length"), int):
+            record["nights"] = detail["length"]
+        departure = detail.get("harbourDepartureTitle")
+        arrival = detail.get("harbourArrivalTitle")
+        if departure and arrival:
+            record["ports"] = f"{departure} - {arrival}"
+        low = detail.get("totalNumberOfDives")
+        if isinstance(low, int) and low > 0:
+            record["dives"] = low
+        requirements = cls.requirements_from_payload(detail)
+        if requirements:
+            record["requirements"] = requirements
+        return record
 
     @staticmethod
     def requirements_from_choices(
