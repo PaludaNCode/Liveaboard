@@ -1,0 +1,4438 @@
+{
+ "collected": "2026-08-28",
+ "source": "padi.com",
+ "trips": {
+  "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada-Hurghada)": {
+   "boat": "all-star-ghani",
+   "boat_name": "All Star - Ghani",
+   "dives": 16,
+   "name": "Brothers Daedalus Elphinstone (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 15933,
+   "padi_slug": "bde-golden-triangle-port-ghalib-port-ghalib-7-nigh",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts"
+  },
+  "all-star-ghani::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "all-star-ghani",
+   "boat_name": "All Star - Ghani",
+   "dives": 16,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23275,
+   "padi_slug": "north-hurghada-hurghada-7-nights-17",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-ghani::North & Tiran (Hurghada - Hurghada)": {
+   "boat": "all-star-ghani",
+   "boat_name": "All Star - Ghani",
+   "dives": 16,
+   "name": "North & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23272,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-19",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-ghani::North (Hurghada - Hurghada)": {
+   "boat": "all-star-ghani",
+   "boat_name": "All Star - Ghani",
+   "dives": 16,
+   "name": "North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23273,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-11",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22659,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-15",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::Brothers Daedalus Elphinstone (Hurghada-Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "Brothers Daedalus Elphinstone (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 22628,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-14",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts"
+  },
+  "all-star-red-sea::Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22663,
+   "padi_slug": "daedalus-rockyzabargad-shark-week-port-ghalib-port",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib) 7 Nights"
+  },
+  "all-star-red-sea::Daedalus & St. Johns (Port ghalib - Port ghalib)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "Daedalus & St. Johns (Port ghalib - Port ghalib)",
+   "nights": 7,
+   "padi_id": 22664,
+   "padi_slug": "daedalus-rockyzabargad-shark-week-port-ghalib-po-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & St. Johns (Port ghalib - Port ghalib) 7 Nights"
+  },
+  "all-star-red-sea::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22669,
+   "padi_slug": "ultimate-red-seaport-ghalib-hurghada-7-nights",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::North & Tiran (Hurghada - Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "North & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22670,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-15",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::North (Hurghada - Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 16,
+   "name": "North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22671,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North (Hurghada - Hurghada) 7 Nights"
+  },
+  "all-star-red-sea::Ultimate Red Sea(Port ghalib - Hurghada)": {
+   "boat": "all-star-red-sea",
+   "boat_name": "All Star - Scuba Scene",
+   "dives": 32,
+   "name": "Ultimate Red Sea(Port ghalib - Hurghada)",
+   "nights": 14,
+   "padi_id": 22668,
+   "padi_slug": "south-port-ghalib-port-ghalib-7-nights-2",
+   "ports": "Port Ghalib - Hurghada - Marriott Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Ultimate Red Sea(Port ghalib - Hurghada) 14 Nights"
+  },
+  "alsuraya::Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22576,
+   "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-por-3",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "alsuraya::Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22184,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "alsuraya::Brother, Deadalus and Elphinstone (Hurghada - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22433,
+   "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-hurgh",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "alsuraya::Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 22432,
+   "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-por-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "alsuraya::Brothers, North & Wreck (Hurghada - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 12,
+   "name": "Brothers, North & Wreck (Hurghada - Hurghada)",
+   "nights": 5,
+   "padi_id": 22936,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, North & Wreck (Hurghada - Hurghada) 5 Nights"
+  },
+  "alsuraya::Daedalus - St. John\u2019s - Elphinstone.(Port Ghalib - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Daedalus - St. John\u2019s - Elphinstone.(Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22185,
+   "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-port",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - St. John\u2019s \u2013 Elphinstone.(Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "alsuraya::Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22186,
+   "padi_slug": "deadalus-st-john-s-port-ghalib-port-ghalib-7-night",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "alsuraya::North - Wrecks And Reefs (Hurghada - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "North - Wrecks And Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22181,
+   "padi_slug": "north-hurghada-hurghada-7-nights-11",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Wrecks And Reefs (Hurghada - Hurghada) 7 Nights"
+  },
+  "alsuraya::North and Brothers (Hurghada - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "North and Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22183,
+   "padi_slug": "north-and-dahab-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North and Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "alsuraya::North and Straits of Tiran (Hurghada - Hurghada)": {
+   "boat": "alsuraya",
+   "boat_name": "Alsuraya",
+   "dives": 18,
+   "name": "North and Straits of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22182,
+   "padi_slug": "north-hurghada-hurghada-7-nights-12",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North and Straits of Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "amelie-adventures::Best Of Hurghada (Hurghada - Hurghada)": {
+   "boat": "amelie-adventures",
+   "boat_name": "Amelie Adventures",
+   "dives": 8,
+   "name": "Best Of Hurghada (Hurghada - Hurghada)",
+   "nights": 3,
+   "padi_id": 21604,
+   "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights"
+  },
+  "amelie::Best of Hurghada (Hurghada - Hurghada)": {
+   "boat": "amelie",
+   "boat_name": "Amelie Safari",
+   "dives": 18,
+   "name": "Best of Hurghada (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16540,
+   "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "title": "Best of Hurghada (Hurghada - Hurghada) 7 nights"
+  },
+  "amelie::Best of Hurghada - Mini Safari (Hurghada - Hurghada)": {
+   "boat": "amelie",
+   "boat_name": "Amelie Safari",
+   "dives": 8,
+   "name": "Best of Hurghada - Mini Safari (Hurghada - Hurghada)",
+   "nights": 3,
+   "padi_id": 16541,
+   "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "title": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights"
+  },
+  "aphrodite::Brothers - Daedalus (Hurghada - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Brothers - Daedalus (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15835,
+   "padi_slug": "brothers-daedalus-port-ghalib-port-ghalib-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus (Hurghada - Port Ghalib) 7 nights"
+  },
+  "aphrodite::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15618,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15832,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-5",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "aphrodite::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15622,
+   "padi_slug": "samadai-elphinstone-carlos-reef-port-ghalib-hurgha",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "aphrodite::Brothers Islands (Port Ghalib - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Brothers Islands (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15619,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers Islands (Port Ghalib - Hurghada) 7 nights"
+  },
+  "aphrodite::Brothers, Safaga Reefs (Port Ghalib - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Brothers, Safaga Reefs (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 16113,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurghada",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Safaga Reefs (Port Ghalib - Hurghada) 7 nights"
+  },
+  "aphrodite::Deep South, St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "Deep South,St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15592,
+   "padi_slug": "north-brother-islands",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deep South,St Johns (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "aphrodite::North - Brothers (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "North - Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15834,
+   "padi_slug": "north-brother-islands-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::North - Straits of Tiran (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "North - Straits of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15615,
+   "padi_slug": "north-straits-of-tiran-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North \u2013 Straits of Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::North - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23067,
+   "padi_slug": "north-classic-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "aphrodite::North Brother Islands (Hurghada - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "North Brother Islands (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15623,
+   "padi_slug": "rocky-zabargad-st-johns-port-ghalib-port-ghalib-7",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brother Islands (Hurghada - Port Ghalib) 7 nights"
+  },
+  "aphrodite::North Classic (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "North Classic (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15620,
+   "padi_slug": "brother-islands-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Classic (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::North Classic - Safaga Reefs (Hurghada - Hurghada)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 18,
+   "name": "North Classic - Safaga Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16320,
+   "padi_slug": "sharkproject-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Classic - Safaga Reefs (Hurghada - Hurghada) 7 nights"
+  },
+  "aphrodite::Sataya, Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "aphrodite",
+   "boat_name": "M/Y Aphrodite",
+   "dives": 17,
+   "name": "Sataya, Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15617,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sataya, Fury Shoals (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 13721,
+   "padi_slug": "simply-the-best-7-nights-hurghada-hurghada-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Port Galib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib)",
+   "nights": 7,
+   "padi_id": 13698,
+   "padi_slug": "simply-the-best-7-nights-hurghada-port-galib",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib) 7 nights"
+  },
+  "blue-horizon::Brothers, Daedalus & Elphinstone (Port Galib - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada)",
+   "nights": 7,
+   "padi_id": 13722,
+   "padi_slug": "simply-the-best-7-nights-port-galib-hurghada",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights"
+  },
+  "blue-horizon::Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14215,
+   "padi_slug": "project-shark-simply-the-best-hurghada-hurghada-7",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "blue-horizon::Daedalus & St Johns (Port Galib - Port Galib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Daedalus & St Johns  (Port Galib - Port Galib)",
+   "nights": 7,
+   "padi_id": 13680,
+   "padi_slug": "best-of-daedalus-7-nights-port-galib-port-galib",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights"
+  },
+  "blue-horizon::Northern Red Sea & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Northern Red Sea & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 13691,
+   "padi_slug": "north-brothers-7-nights-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-horizon::Northern Red Sea & Brothers (Hurghada - Port Ghalib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Northern Red Sea & Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 13831,
+   "padi_slug": "north-brothers-7-nights-port-ghalib-hurghada",
+   "ports": "Hurghada Marina - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights"
+  },
+  "blue-horizon::Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 18,
+   "name": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 13692,
+   "padi_slug": "northern-wrecks-reefs-7-nights-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-horizon::Red Sea Wrecks (Hurghada - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Red Sea Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 13684,
+   "padi_slug": "best-of-wrecks-7-nights-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-horizon::Rocky, Zabargad & St. Johns (Port Galib -Port Galib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 15,
+   "name": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib)",
+   "nights": 7,
+   "padi_id": 13697,
+   "padi_slug": "rocky-zabargad-st-johns-7-nights-port-galib-port-g",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights"
+  },
+  "blue-horizon::Strait of Tiran & North (Hurghada - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 18,
+   "name": "Strait of Tiran & North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 13723,
+   "padi_slug": "strait-of-tiran-north-7-nights-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Strait of Tiran & North (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-horizon::Ultimate Red Sea (Hurghada - Port Ghalib)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 26,
+   "name": "Ultimate Red Sea (Hurghada - Port Ghalib)",
+   "nights": 10,
+   "padi_id": 18237,
+   "padi_slug": "ultimate-red-sea-hurghada-hurghada-10-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ultimate Red Sea (Hurghada - Port Ghalib) 10 Nights"
+  },
+  "blue-horizon::Ultimate Red Sea (Port Galib - Hurghada)": {
+   "boat": "blue-horizon",
+   "boat_name": "MV Blue Horizon",
+   "dives": 26,
+   "name": "Ultimate Red Sea (Port Galib - Hurghada)",
+   "nights": 10,
+   "padi_id": 13693,
+   "padi_slug": "project-shark-daedalus-st-johns-7-nights-port-gali",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ultimate Red Sea (Port Galib - Hurghada) 10 nights"
+  },
+  "blue-melody::Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 17,
+   "name": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11968,
+   "padi_slug": "project-shark-simply-the-best-7-nights-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-melody::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11955,
+   "padi_slug": "simply-the-best-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-melody::Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11961,
+   "padi_slug": "simply-the-best-hurghada-ghalib-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "blue-melody::Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 11953,
+   "padi_slug": "north-and-ras-mohamed-7-nights-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "blue-melody::Daedalus and St Johns (Port Ghalib- Port Ghalib)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Daedalus and St Johns (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11966,
+   "padi_slug": "daedalus-and-st-johns-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue-melody::Northern Red Sea & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Northern Red Sea & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11952,
+   "padi_slug": "north-and-brothers-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-melody::Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 18,
+   "name": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11954,
+   "padi_slug": "northern-wrecks-and-reefs-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-melody::Red Sea Wrecks (Hurghada - Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Red Sea Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11950,
+   "padi_slug": "best-of-wrecks-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights"
+  },
+  "blue-melody::Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 15,
+   "name": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11967,
+   "padi_slug": "project-shark-daedalus-and-st-johns-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "blue-melody::Strait of Tiran and North (Hurghada- Hurghada)": {
+   "boat": "blue-melody",
+   "boat_name": "MY Blue Melody",
+   "dives": 18,
+   "name": "Strait of Tiran and North (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11956,
+   "padi_slug": "strait-of-tiran-and-north-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Strait of Tiran and North (Hurghada- Hurghada) 7 nights"
+  },
+  "blue-seas::Brothers & Safaga (Port Ghalib - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Brothers & Safaga (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23315,
+   "padi_slug": "zabargad-special-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers & Safaga (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "blue-seas::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22334,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-11",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "blue-seas::Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12536,
+   "padi_slug": "brothers-daedalus-elphinstone-marsa-ghalib-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue-seas::Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 21624,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-10",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "blue-seas::Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Daedalus &\u00a0Fury Shoal (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 9755,
+   "padi_slug": "daedalus-fury-shoal",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus &\u00a0Fury Shoal (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue-seas::Daedalus - Rockys & Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Daedalus - Rockys & Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12538,
+   "padi_slug": "daedalus-zabargad-rockys",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - Rockys & Zabargad (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "blue-seas::North & Safaga (Hurghada - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "North & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23317,
+   "padi_slug": "tiran-special-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-seas::North & Tiran (Hurghada - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "North & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21626,
+   "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-seas::North - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 15,
+   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21303,
+   "padi_slug": "rocky-zabargad-stjohns-port-ghalib-port-ghalib-7-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-seas::Rocky - Elba - St.Johns - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 28,
+   "name": "Rocky - Elba - St.Johns - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 11,
+   "padi_id": 21304,
+   "padi_slug": "rocky-elba-stjohns-elphinstone-port-ghalib-port-gh",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky - Elba - St.Johns - Elphinstone (Port Ghalib - Port Ghalib) 11 Nights"
+  },
+  "blue-seas::Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23318,
+   "padi_slug": "zabargad-special-port-ghalib-port-ghalib-7-night-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-seas::St John's (Port Ghalib- Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "St John's (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12535,
+   "padi_slug": "saint-john-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "St John's (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue-seas::Tiran Special (Hurghada - Hurghada)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Tiran Special (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23316,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-20",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Tiran Special (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-seas::Zabargad Special (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-seas",
+   "boat_name": "MY Blue Seas",
+   "dives": 17,
+   "name": "Zabargad Special (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23314,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-19",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Zabargad Special (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21838,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-14",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 21836,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-13",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "blue-storm::Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21835,
+   "padi_slug": "daedalus-fury-shoals-port-ghalib-port-ghalib-7-n-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::Daedalus & Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Daedalus & Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21831,
+   "padi_slug": "stjohns-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::Daedalus-Rocky-Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Daedalus-Rocky-Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21829,
+   "padi_slug": "north-brothers-hurghada-port-ghalib-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus-Rocky-Zabargad (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22692,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-16",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-storm::North & Safaga (Hurghada - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "North & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23311,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-12",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-storm::North & Tiran (Hurghada - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "North & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22693,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-13",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-storm::North & Wrecks (Hurghada - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "North & Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23313,
+   "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Wrecks (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-storm::North-Tiran-Dahab (Hurghada - Hurghada)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "North-Tiran-Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23312,
+   "padi_slug": "north-safaga-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North-Tiran-Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-storm::Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21830,
+   "padi_slug": "daedalus-rocky-zabargad-port-ghalib-port-ghalib-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "blue-storm::St.Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-storm",
+   "boat_name": "MY Blue Storm",
+   "dives": 19,
+   "name": "St.Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21832,
+   "padi_slug": "stjohns-port-ghalib-port-ghalib-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "St.Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "carlton",
+   "boat_name": "MY Carlton",
+   "dives": 20,
+   "name": "Classic North (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 22606,
+   "padi_slug": "northeren-route-wrecks-7-nights-5",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "carlton::Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "carlton",
+   "boat_name": "MY Carlton",
+   "dives": 6,
+   "name": "Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 2,
+   "padi_id": 22605,
+   "padi_slug": "tiran-ras-mohamed-minisafari-4-nights",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh) 2 Nights"
+  },
+  "carlton::Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "carlton",
+   "boat_name": "MY Carlton",
+   "dives": 12,
+   "name": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 4,
+   "padi_id": 19628,
+   "padi_slug": "northeren-route-wrecks-7-nights-4",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights"
+  },
+  "discovery-i::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12525,
+   "padi_slug": "daedalus-rocky-and-zabargad-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib) - 7 Nights"
+  },
+  "discovery-i::Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 12524,
+   "padi_slug": "brothers-daedalus-and-elphinstone-hrg-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights"
+  },
+  "discovery-i::Brothers/ Daedalus and Elphinstone (Hurghada- Port Ghalib)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "Brothers/ Daedalus and Elphinstone (Hurghada- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12528,
+   "padi_slug": "brothers-daedalus-and-elphinstone-hrgmg-7-nights-2",
+   "ports": "Hurghada Marina - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers/ Daedalus and Elphinstone (Hurghada- Port Ghalib) - 7 Nights"
+  },
+  "discovery-i::Brothers/ Daedalus and Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "Brothers/ Daedalus and Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 12529,
+   "padi_slug": "brothers-daedalus-and-elphinstone-mghrg-7-nights-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers/ Daedalus and Elphinstone (Port Ghalib - Hurghada) - 7 Nights"
+  },
+  "discovery-i::North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 12526,
+   "padi_slug": "north-wrecks-and-ras-mohamed-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 20
+   },
+   "title": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights"
+  },
+  "discovery-i::North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11903,
+   "padi_slug": "brothers-mghrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 50
+   },
+   "title": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "discovery-i::St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "discovery-i",
+   "boat_name": "MY Discovery I",
+   "dives": 17,
+   "name": "St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11894,
+   "padi_slug": "deep-south-and-elphinstone-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "recommended_logged_dives": 20
+   },
+   "title": "St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib) - 7 Nights"
+  },
+  "discovery-ii::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 17,
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23033,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-17",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "discovery-ii::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 17,
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23034,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-7",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "discovery-ii::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 17,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14602,
+   "padi_slug": "brothers-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "discovery-ii::Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 18,
+   "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23038,
+   "padi_slug": "rocky-zabargad-st-johns-elphinstone-port-ghalib-po",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "discovery-ii::North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 18,
+   "name": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 12082,
+   "padi_slug": "north-wrecks-ras-mohamed-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "discovery-ii::Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 18,
+   "name": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 12087,
+   "padi_slug": "north-and-brothers-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights"
+  },
+  "discovery-ii::Rocky - Zabargad - St. John\u2019s - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 18,
+   "name": "Rocky - Zabargad - St. John\u2019s - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23037,
+   "padi_slug": "st-johns-fury-shoal-elphinstone-port-ghalib-port-g",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Rocky - Zabargad - St. John\u2019s - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "discovery-ii::St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "discovery-ii",
+   "boat_name": "MY Discovery II",
+   "dives": 18,
+   "name": "St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23035,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-8",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "dune-longara::Best of Egypt (Hurghada - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 33,
+   "name": "Best of Egypt (Hurghada - Port Ghalib)",
+   "nights": 14,
+   "padi_id": 23153,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-7",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights"
+  },
+  "dune-longara::Elba (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 21,
+   "name": "Elba (Port Ghalib - Port Ghalib)",
+   "nights": 10,
+   "padi_id": 23157,
+   "padi_slug": "elba-port-ghalib-port-ghalib-11-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Elba (Port Ghalib - Port Ghalib) 10 Nights"
+  },
+  "dune-longara::Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "name": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23161,
+   "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-longara::Golden Triangle (Hurghada - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "Golden Triangle (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23160,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-2",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-longara::Golden Triangle (Port Ghalib - Hurghada)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "Golden Triangle (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23154,
+   "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-6",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-longara::Golden Triangle (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "Golden Triangle (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23158,
+   "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-longara::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23147,
+   "padi_slug": "mixed-south-daedalus-rocky-zabargad-ras-galep-ras",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-longara::North Brothers (Hurghada - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "North Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23162,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-16",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-longara::North Brothers (Port Ghalib - Hurghada)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "North Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23149,
+   "padi_slug": "mixed-south-daedalus-rocky-zabargad-ras-galep-ra-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-longara::North Dahab Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "North Dahab Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23150,
+   "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-longara::North Ras Mohamed (Hurghada - Hurghada)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "North Ras Mohamed (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23151,
+   "padi_slug": "north-dahab-tiran-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-longara::North Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "North Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23152,
+   "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-longara::St. John\u2019s Reefs (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-longara",
+   "boat_name": "Dune Longara",
+   "dives": 14,
+   "name": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23159,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::Best of Egypt (Hurghada - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 33,
+   "name": "Best of Egypt (Hurghada - Port Ghalib)",
+   "nights": 14,
+   "padi_id": 23205,
+   "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-4",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Best of Egypt (Hurghada - Port Ghalib) 14 Nights"
+  },
+  "dune-silky::Elba (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 24,
+   "name": "Elba (Port Ghalib - Port Ghalib)",
+   "nights": 11,
+   "padi_id": 23206,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-5",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Elba (Port Ghalib - Port Ghalib) 11 Nights"
+  },
+  "dune-silky::Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "name": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23204,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::Golden Triangle (Hurghada - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "Golden Triangle (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23195,
+   "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-silky::Golden Triangle (Hurghada - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "Golden Triangle (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23194,
+   "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::Golden Triangle (Port Ghalib - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "Golden Triangle (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23196,
+   "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-silky::Golden Triangle (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "Golden Triangle (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23197,
+   "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23203,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::North Brothers (Hurghada - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23200,
+   "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-9",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-silky::North Brothers (Hurghada - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23199,
+   "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-8",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-silky::North Brothers (Port Ghalib - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23198,
+   "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-silky::North Dahab Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Dahab Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23208,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-8",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-silky::North Ras Mohamed (Hurghada - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Ras Mohamed (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23201,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-17",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-silky::North Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "North Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23202,
+   "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-silky::St John's Reefs (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-silky",
+   "boat_name": "DUNE Silky",
+   "dives": 14,
+   "name": "St John's Reefs (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23209,
+   "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-6",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "St John's Reefs (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::Daedalus, Elphinstone & Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Daedalus, Elphinstone & Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23217,
+   "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus, Elphinstone & Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::Elba (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 24,
+   "name": "Elba (Port Ghalib - Port Ghalib)",
+   "nights": 11,
+   "padi_id": 23221,
+   "padi_slug": "daedalus-elphinstone-fury-shoals-port-ghalib-por-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Elba (Port Ghalib - Port Ghalib) 11 Nights"
+  },
+  "dune-titan::Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "name": "Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23435,
+   "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::Golden Triangle (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Golden Triangle (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23224,
+   "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::Golden Triangle (Hurghada - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Golden Triangle (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23219,
+   "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-4",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::Golden Triangle (Port Ghalib - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Golden Triangle (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23218,
+   "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Golden Triangle (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-titan::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23226,
+   "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::North Brothers (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23223,
+   "padi_slug": "north-brothers-hurghada-port-ghalib-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::North Brothers (Hurghada - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23216,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-9",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "dune-titan::North Brothers (Port Ghalib - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23436,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-22",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Brothers (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "dune-titan::North Dahab Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Dahab Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23214,
+   "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Dahab Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::North Ras Mohamed (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Ras Mohamed (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23213,
+   "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::North Tiran (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "North Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23215,
+   "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-6",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::Safaga routes (Hurghada - Hurghada)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "Safaga routes (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23222,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-10",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Safaga routes (Hurghada - Hurghada) 7 Nights"
+  },
+  "dune-titan::St John's Reefs (Port Ghalib - Port Ghalib)": {
+   "boat": "dune-titan",
+   "boat_name": "DUNE Titan",
+   "dives": 14,
+   "name": "St John's Reefs (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23225,
+   "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "St John's Reefs (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "emperor-asmaa::Daedalus, Fury & Elphinstone (Port Ghalib- Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Daedalus, Fury & Elphinstone (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15135,
+   "padi_slug": "daedalus-elphinstone-port-ghalib-port-ghalib-7-n-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus, Fury & Elphinstone (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "emperor-asmaa::Famous Five (Hurghada - Hurghada)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Famous Five (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11622,
+   "padi_slug": "fury-and-st-johns-tuesday-departure-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Famous Five (Hurghada - Hurghada) 7 nights"
+  },
+  "emperor-asmaa::Famous Five (Hurghada - Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Famous Five (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 13257,
+   "padi_slug": "safaga-brothers-and-elphistone-hurghada-port-ghali",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Famous Five (Hurghada - Port Ghalib) 7 nights"
+  },
+  "emperor-asmaa::Famous Five (Port Ghalib - Hurghada)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Famous Five (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15170,
+   "padi_slug": "famous-five-hurghada-hurghada-7-nights-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Famous Five (Port Ghalib - Hurghada) 7 nights"
+  },
+  "emperor-asmaa::North & Easy (Hurghada - Hurghada)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "North & Easy (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11623,
+   "padi_slug": "fury-and-st-johns-wednesday-departure-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North & Easy (Hurghada - Hurghada) 7 nights"
+  },
+  "emperor-asmaa::Reefs & Wrecks (Hurghada- Hurghada)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Reefs & Wrecks (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11627,
+   "padi_slug": "reefs-wrecks-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Reefs & Wrecks (Hurghada- Hurghada) 7 nights"
+  },
+  "emperor-asmaa::Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)",
+   "nights": 7,
+   "padi_id": 12280,
+   "padi_slug": "safaga-brothers-elphinstone",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada) 7 nights"
+  },
+  "emperor-asmaa::Simple The Best (Port Ghalib- Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Simple The Best (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 13255,
+   "padi_slug": "simple-the-best-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Simple The Best (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "emperor-asmaa::Simply the Best (Hurghada - Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Simply the Best (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12281,
+   "padi_slug": "southern-sharks",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Simply the Best (Hurghada - Port Ghalib) - 7 Nights"
+  },
+  "emperor-asmaa::South & St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 21,
+   "name": "South & St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 13256,
+   "padi_slug": "tech-south-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "South & St Johns (Port Ghalib - Port Ghalib) - 7 nights"
+  },
+  "emperor-asmaa::Southern Solitude (Port Ghalib - Port Ghalib)": {
+   "boat": "emperor-asmaa",
+   "boat_name": "MV Emperor Asmaa",
+   "dives": 20,
+   "name": "Southern Solitude (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11624,
+   "padi_slug": "fury-and-st-johns-thursday-departure-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Southern Solitude (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "emperor-elite::Daedalus, Fury & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Daedalus, Fury & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14700,
+   "padi_slug": "deadalus-elphinstone-port-ghalib-port-ghalib-7-nig",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus, Fury & Elphinstone (Port Ghalib - Port Ghalib) - 7 Nights"
+  },
+  "emperor-elite::Famous Five Cruise (Hurghada - Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Famous Five Cruise (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14701,
+   "padi_slug": "famous-five-cruise-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Famous Five Cruise (Hurghada - Port Ghalib) - 7 nights"
+  },
+  "emperor-elite::Reefs & Wrecks (Hurghada- Hurghada)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Reefs & Wrecks (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 12444,
+   "padi_slug": "reefs-wrecks",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Reefs & Wrecks (Hurghada- Hurghada) 7 nights"
+  },
+  "emperor-elite::Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)",
+   "nights": 7,
+   "padi_id": 11703,
+   "padi_slug": "safaga-brothers-elphinstone-marsa-ghalib-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada) - 7 Nights"
+  },
+  "emperor-elite::Simple The Best (Hurghada - Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Simple The Best (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 13253,
+   "padi_slug": "simple-the-best-hurghada-port-ghalib-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Simple The Best (Hurghada - Port Ghalib) 7 nights"
+  },
+  "emperor-elite::Simply the Best (Port Ghalib- Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "Simply the Best (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11704,
+   "padi_slug": "simply-the-best-marsa-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Simply the Best (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "emperor-elite::South & St. Johns (Port Ghalib- Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 20,
+   "name": "South & St. Johns (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11702,
+   "padi_slug": "south-st-johns-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "South & St. Johns (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "emperor-elite::Southern Solitude (Port Ghalib - Port Ghalib)": {
+   "boat": "emperor-elite",
+   "boat_name": "MV Emperor Elite",
+   "dives": 21,
+   "name": "Southern Solitude (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14555,
+   "padi_slug": "south-for-winter-with-duxy-port-ghalib-port-ghalib",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Southern Solitude (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "emperor-superior::Famous Five (Hurghada- Hurghada)": {
+   "boat": "emperor-superior",
+   "boat_name": "MV Emperor Superior",
+   "dives": 20,
+   "name": "Famous Five (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11714,
+   "padi_slug": "famous-five-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Famous Five (Hurghada- Hurghada) 7 nights"
+  },
+  "emperor-superior::Get Wrecked (Hurghada- Hurghada)": {
+   "boat": "emperor-superior",
+   "boat_name": "MV Emperor Superior",
+   "dives": 20,
+   "name": "Get Wrecked (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11709,
+   "padi_slug": "get-wrecked-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Get Wrecked (Hurghada- Hurghada) 7 nights"
+  },
+  "emperor-superior::North & Easy (Hurghada - Hurghada)": {
+   "boat": "emperor-superior",
+   "boat_name": "MV Emperor Superior",
+   "dives": 20,
+   "name": "North & Easy (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 19953,
+   "padi_slug": "north-easy-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North & Easy (Hurghada - Hurghada) 7 Nights"
+  },
+  "emperor-superior::Reefs and Wrecks (Hurghada- Hurghada)": {
+   "boat": "emperor-superior",
+   "boat_name": "MV Emperor Superior",
+   "dives": 20,
+   "name": "Reefs and Wrecks (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11710,
+   "padi_slug": "reefs-and-wrecks-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Reefs and Wrecks (Hurghada- Hurghada) 7 nights"
+  },
+  "ghazala-adventure::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22362,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-12",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22480,
+   "padi_slug": "north-safaga-area-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "ghazala-adventure::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 22481,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-6",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23439,
+   "padi_slug": "daedalus-rocky-st-johns-port-ghalib-port-ghalib-3",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus, Rocky & St Johns (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "ghazala-adventure::Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22482,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-7",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "ghazala-adventure::Get Wrecked (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "Get Wrecked (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22365,
+   "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Get Wrecked (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22364,
+   "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::North & Safaga Area (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "North & Safaga Area (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22479,
+   "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-6",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Safaga Area (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::North - Tiran & Dahab (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "North - Tiran & Dahab ( Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22366,
+   "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Tiran & Dahab ( Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-adventure::North: Wrecks & Reefs (Hurghada - Hurghada)": {
+   "boat": "ghazala-adventure",
+   "boat_name": "Ghazala Adventure",
+   "dives": 21,
+   "name": "North: Wrecks & Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22363,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-13",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North: Wrecks & Reefs (Hurghada - Hurghada) 7 Night"
+  },
+  "ghazala-explorer::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16882,
+   "padi_slug": "brothers-daedalus-elphinstone-p",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16883,
+   "padi_slug": "deep-south-hurghada-hurghada",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "ghazala-explorer::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 16886,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23437,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-6",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "ghazala-explorer::Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 17065,
+   "padi_slug": "daedalus-zabargad-rocky-island-hurghada-port-ghali",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus, Rocky & St Johns (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "ghazala-explorer::Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 17062,
+   "padi_slug": "daedalus-zabargad-rocky-island-port-ghalib-port-gh",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "ghazala-explorer::Deep South - St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Deep South - St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23438,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Deep South - St Johns (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "Get Wrecked (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 17064,
+   "padi_slug": "escorted-get-wrecked-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Get Wrecked (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16879,
+   "padi_slug": "north-brothers-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::North & Safaga (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 18,
+   "name": "North & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 19227,
+   "padi_slug": "north-safaga-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::North - Tiran & Dahab (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "North - Tiran & Dahab ( Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16880,
+   "padi_slug": "north-dahab-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Tiran & Dahab ( Hurghada - Hurghada) 7 Nights"
+  },
+  "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)": {
+   "boat": "ghazala-explorer",
+   "boat_name": "Ghazala Explorer",
+   "dives": 21,
+   "name": "North: Wrecks & Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16881,
+   "padi_slug": "north-wrecks-reefs-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North: Wrecks & Reefs (Hurghada - Hurghada) 7 Night"
+  },
+  "grand-discovery::Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)": {
+   "boat": "grand-discovery",
+   "boat_name": "MY Grand Discovery",
+   "dives": 17,
+   "name": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 22758,
+   "padi_slug": "bde-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 10
+   },
+   "title": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights"
+  },
+  "grand-discovery::North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
+   "boat": "grand-discovery",
+   "boat_name": "MY Grand Discovery",
+   "dives": 17,
+   "name": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22761,
+   "padi_slug": "north-wrecks-ras-mohamed-tiran-hurghada-hurghada-7",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 10
+   },
+   "title": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Brothers Light (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 11,
+   "name": "Brothers Light (Marsa Alam - Marsa Alam)",
+   "nights": 4,
+   "padi_id": 21698,
+   "padi_slug": "brothers-light-marsa-alam-hurghada-4-nights",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers Light (Marsa Alam - Marsa Alam) 4 Nights"
+  },
+  "hammerhead-ii::Brothers Light 3 (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 8,
+   "name": "Brothers Light 3 (Marsa Alam - Marsa Alam)",
+   "nights": 3,
+   "padi_id": 21685,
+   "padi_slug": "mini-wrecks-and-nature-hurghada-hurghada-5-nights",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers Light 3 (Marsa Alam - Marsa Alam) 3 Nights"
+  },
+  "hammerhead-ii::Daedalus Light (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 8,
+   "name": "Daedalus Light (Marsa Alam - Marsa Alam)",
+   "nights": 3,
+   "padi_id": 21696,
+   "padi_slug": "daedalus-light-marsa-alam-marsa-alam-4-nights",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus Light (Marsa Alam - Marsa Alam) 3 Nights"
+  },
+  "hammerhead-ii::Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21681,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-brother",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21683,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 9,
+   "name": "Mini Safari :Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada)",
+   "nights": 4,
+   "padi_id": 21687,
+   "padi_slug": "wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohamed",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Safari :Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada) 4 Nights"
+  },
+  "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21697,
+   "padi_slug": "daedalus-light-marsa-alam-marsa-alam-4-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21777,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-5",
+   "ports": "Hurghada - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Marsa Alam - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Marsa Alam - Hurghada)",
+   "nights": 7,
+   "padi_id": 21682,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-2",
+   "ports": "Marsa Alam - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Marsa Alam - Hurghada) 7 Nights 7 Nights"
+  },
+  "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23231,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-7",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Sharks & Dolphins (Marsa Alam - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks & Dolphins (Marsa Alam - Hurghada)",
+   "nights": 7,
+   "padi_id": 23271,
+   "padi_slug": "sharks-dolphins-marsa-alam-marsa-alam-7-nights",
+   "ports": "Marsa Alam - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks & Dolphins (Marsa Alam - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Sharks & Dolphins (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks & Dolphins (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21699,
+   "padi_slug": "brothers-light-marsa-alam-marsa-alam-4-nights",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks & Dolphins (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21689,
+   "padi_slug": "wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohame-2",
+   "ports": "Hurghada - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23227,
+   "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-h-2",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Hurghada)",
+   "nights": 7,
+   "padi_id": 21695,
+   "padi_slug": "south-parks-zabargad-rocky-saint-johns-sataya-mars",
+   "ports": "Marsa Alam - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21690,
+   "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-hur",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23228,
+   "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-h-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "hammerhead-ii::South Parks: Zabargad & Rocky - Saint John's (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "South Parks: Zabargad & Rocky - Saint John's (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21693,
+   "padi_slug": "super-diversity-daedalus-saint-johns-sataya-marsa",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "South Parks: Zabargad & Rocky - Saint John's (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21684,
+   "padi_slug": "exploring-north-abu-nuhas-ss-thistlegorm-ras-moham",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23229,
+   "padi_slug": "southern-charm-daedalus-zabargad-rocky-island-sata",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "hammerhead-ii::Super Diversity: Daedalus - Saint John's - Sataya (Marsa Alam - Marsa Alam)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Super Diversity: Daedalus - Saint John's - Sataya (Marsa Alam - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 21692,
+   "padi_slug": "exploring-south-zabargad-rocky-saint-johns-sataya",
+   "ports": "Marsa Alam - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Super Diversity: Daedalus - Saint John's - Sataya (Marsa Alam - Marsa Alam) 7 Nights"
+  },
+  "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)": {
+   "boat": "hammerhead-ii",
+   "boat_name": "Hammerhead II",
+   "dives": 17,
+   "name": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21686,
+   "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada) 7 Nights"
+  },
+  "new-sambo::Deep South, St. John & Zabargad (Hamata - Hamata)": {
+   "boat": "new-sambo",
+   "boat_name": "New Sambo Safari Boat",
+   "dives": 18,
+   "name": "Deep South, St. John & Zabargad (Hamata - Hamata)",
+   "nights": 7,
+   "padi_id": 23432,
+   "padi_slug": "fury-shoals-hamata-hamata-7-nights-8-days",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights"
+  },
+  "odyssey::BDE (Hurghada - Port Ghalib)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "BDE  (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15571,
+   "padi_slug": "bde-port-ghalib-hurghada-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE  (Hurghada - Port Ghalib) 7 nights"
+  },
+  "odyssey::BDE (Hurghada- Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "BDE (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 8798,
+   "padi_slug": "bde-hurghada-2",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE (Hurghada- Hurghada) 7 nights"
+  },
+  "odyssey::BDE (Port Ghalib - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "BDE  (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15570,
+   "padi_slug": "bde-the-golden-triangle-hurghada-hurghada-7-nigh-2",
+   "ports": "Port Ghalib - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE  (Port Ghalib - Hurghada) 7 nights"
+  },
+  "odyssey::Best of Dahab and Tiran (Hurghada - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Best of Dahab and Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15841,
+   "padi_slug": "souakin-et-legends-port-soudan-port-soudan-7-night",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Best of Dahab and Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "odyssey::Best of Tiran (Hurghada - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Best of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 8806,
+   "padi_slug": "souakin-et-legends-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Best of Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "odyssey::Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 8802,
+   "padi_slug": "rocky-featuring-zabargad-and-daedalus-hurghada-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "odyssey::Fury Shoal (Port Ghalib - Port Ghalib)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15323,
+   "padi_slug": "fury-shoal-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Fury Shoal (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "odyssey::Premium Expedition (Hurghada - Port Ghalib)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 27,
+   "name": "Premium Expedition (Hurghada - Port Ghalib)",
+   "nights": 10,
+   "padi_id": 23330,
+   "padi_slug": "premium-expedition-hurghada-hurghada-10-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Premium Expedition (Hurghada - Port Ghalib) 10 nights"
+  },
+  "odyssey::Premium Expedition (Port Ghalib - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 27,
+   "name": "Premium Expedition (Port Ghalib - Hurghada)",
+   "nights": 10,
+   "padi_id": 15324,
+   "padi_slug": "the-golden-loop-brothers-north-hurghada-hurghada-7",
+   "ports": "Port Ghalib - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Premium Expedition (Port Ghalib - Hurghada) 10 nights"
+  },
+  "odyssey::The Golden Loop North/Brother (Hurghada - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "The Golden Loop North/Brother (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15326,
+   "padi_slug": "north-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "The Golden Loop North/Brother (Hurghada - Hurghada) 7 nights"
+  },
+  "odyssey::The Golden Loop North/Brother (Port Ghalib - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "The Golden Loop North/Brother (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15989,
+   "padi_slug": "the-golden-loop-northbrother-hurghada-port-ghalib",
+   "ports": "Port Ghalib - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "The Golden Loop North/Brother (Port Ghalib - Hurghada) 7 nights"
+  },
+  "odyssey::Treasures of the North (Hurghada - Hurghada)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Treasures of the North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22825,
+   "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 10
+   },
+   "title": "Treasures of the North (Hurghada - Hurghada) 7 Nights"
+  },
+  "odyssey::Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "odyssey",
+   "boat_name": "MY Odyssey",
+   "dives": 15,
+   "name": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22989,
+   "padi_slug": "fury-shoal-port-ghalib-port-ghalib-7-nights-5",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "red-sea-blue-force-2::North Route (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "red-sea-blue-force-2",
+   "boat_name": "Red Sea Blue Force 2",
+   "dives": 21,
+   "name": "North Route (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 15406,
+   "padi_slug": "north-sharm-el-sheikh-sharm-el-sheikh-7-nights",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights"
+  },
+  "royal-evolution::Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 30,
+   "name": "Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib)",
+   "nights": 10,
+   "padi_id": 21933,
+   "padi_slug": "brothers-deadalus-rock-zabarged-elba-reef-port-gha",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib) 10 Nights"
+  },
+  "royal-evolution::Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 16,
+   "name": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21934,
+   "padi_slug": "borthers-deadalus-rocky-stjohn-elba-itinerary-port",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "royal-evolution::Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 16,
+   "name": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 17383,
+   "padi_slug": "deadalus-sudan-border-elba-reef-port-ghalib-port-g",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "royal-evolution::Egypt / Elba Reef - Elba borders (Port Ghalib - Port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 36,
+   "name": "Egypt / Elba Reef - Elba borders (Port Ghalib - Port Ghalib)",
+   "nights": 14,
+   "padi_id": 17709,
+   "padi_slug": "deadalus-sudan-border-elba-reef-port-ghalib-port-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Egypt / Elba Reef - Elba borders (Port Ghalib - Port Ghalib) 14 Nights"
+  },
+  "royal-evolution::Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 24,
+   "name": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib)",
+   "nights": 10,
+   "padi_id": 23356,
+   "padi_slug": "egypt-elba-reef-elba-borders-port-ghalib-port-ghal",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 10 nights"
+  },
+  "royal-evolution::Red sea grand tour - BDRZ (Port Ghalib - Port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 16,
+   "name": "Red sea grand tour - BDRZ (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16784,
+   "padi_slug": "brothers-deadalus-rocky-st-john-port-ghalib-port-g",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red sea grand tour - BDRZ (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "royal-evolution::Special wreck (Hurghada - Hurghada)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 16,
+   "name": "Special wreck (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16927,
+   "padi_slug": "special-wreck-hurghada-hurghada-6-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Special wreck (Hurghada - Hurghada) 7 Nights"
+  },
+  "royal-evolution::Special wreck (Hurghada - port Ghalib)": {
+   "boat": "royal-evolution",
+   "boat_name": "MS Royal Evolution",
+   "dives": 16,
+   "name": "Special wreck (Hurghada - port Ghalib)",
+   "nights": 7,
+   "padi_id": 18402,
+   "padi_slug": "special-wreck-hurghada-hurghada-6-nights-2",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Special wreck (Hurghada - port Ghalib) 7 Nights"
+  },
+  "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 16,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 18436,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-10",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::Mini - Hurghada (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 9,
+   "name": "Mini - Hurghada (Hurghada - Hurghada)",
+   "nights": 3,
+   "padi_id": 20713,
+   "padi_slug": "reefs-wrecks-gouna-gouna-3-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini - Hurghada (Hurghada - Hurghada) 3 Nights"
+  },
+  "serenity::Mini - Wrecks (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 9,
+   "name": "Mini - Wrecks (Hurghada - Hurghada)",
+   "nights": 3,
+   "padi_id": 21554,
+   "padi_slug": "reefs-wrecks-hurghada-hurghada-3-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini - Wrecks (Hurghada - Hurghada) 3 Nights"
+  },
+  "serenity::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21611,
+   "padi_slug": "ras-mohamed-wrecks-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::North & Wrecks (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "North & Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 17072,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-9",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Wrecks (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22950,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::North - Tiran (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "North - Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 17075,
+   "padi_slug": "north-ras-mohamed-tiran-hurghada-hurghada-7-nigh-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::Safaga & Hurghada (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "Safaga & Hurghada (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 20712,
+   "padi_slug": "reefs-wrecks-gouna-gouna-3-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Safaga & Hurghada (Hurghada - Hurghada) 7 Nights"
+  },
+  "serenity::\ud83d\udc49 PADI COURSES Training Safari \ud83d\udca5 \"Dive, Learn, Live On board\"- The Ultimate Zero to Advanced Dive Week\" (Hurghada - Hurghada)": {
+   "boat": "serenity",
+   "boat_name": "Serenity",
+   "dives": 18,
+   "name": "\ud83d\udc49 PADI COURSES  Training Safari \ud83d\udca5 \"Dive, Learn,Live On board\"-  The Ultimate Zero to Advanced  Dive Week\" (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22951,
+   "padi_slug": "padi-training-safari-red-sea",
+   "ports": "Hurghada - Hurghada",
+   "title": "\ud83d\udc49 PADI COURSES  Training Safari \ud83d\udca5 \"Dive, Learn,Live On board\"\u2013  The Ultimate Zero to Advanced  Dive Week\" (Hurghada - Hurghada) 7 Nights"
+  },
+  "snefro-love::Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "snefro-love",
+   "boat_name": "Snefro Love",
+   "dives": 12,
+   "name": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 4,
+   "padi_id": 23266,
+   "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-7",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights"
+  },
+  "snefro-love::Sinai Classic (Sharm el Sheikh- Sharm el sheikh)": {
+   "boat": "snefro-love",
+   "boat_name": "Snefro Love",
+   "dives": 19,
+   "name": "Sinai Classic (Sharm el Sheikh- Sharm el sheikh)",
+   "nights": 7,
+   "padi_id": 9213,
+   "padi_slug": "sinai-classic-5",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 15
+   },
+   "title": "Sinai Classic (Sharm el Sheikh- Sharm el sheikh) 7 nights"
+  },
+  "snefro-pearl::Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "snefro-pearl",
+   "boat_name": "Snefro Pearl",
+   "dives": 9,
+   "name": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 3,
+   "padi_id": 15669,
+   "padi_slug": "ras-mohamed-thistlegorm-sharm-el-sheikh-sharm-el-s",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights"
+  },
+  "snefro-target::Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)": {
+   "boat": "snefro-target",
+   "boat_name": "Snefro Target",
+   "dives": 19,
+   "name": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 9209,
+   "padi_slug": "sinai-classic-4",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 15
+   },
+   "title": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights"
+  },
+  "snefro-target::Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "snefro-target",
+   "boat_name": "Snefro Target",
+   "dives": 19,
+   "name": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 15818,
+   "padi_slug": "sinai-wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)  - 7 Nights"
+  },
+  "tala::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 7037,
+   "padi_slug": "deep-south-and-st-johns",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "tala::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 7042,
+   "padi_slug": "north-featuring-dahab",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "tala::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 13778,
+   "padi_slug": "far-south-expedition-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "tala::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 21518,
+   "padi_slug": "north-hurghada-hurghada-7-nights-10",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "tala::Deadalus, Rocky, Zabargad (Port Ghalib - Port Ghalib)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Deadalus, Rocky, Zabargad (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16031,
+   "padi_slug": "deadalus-rocky-zabargad-hurghada-hurghada-7-nigh-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deadalus, Rocky, Zabargad (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "tala::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 7038,
+   "padi_slug": "north-and-brothers-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "tala::North & Brothers (Port Ghalib - Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "North & Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 16033,
+   "padi_slug": "north-brothers-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Port Ghalib - Hurghada) 7 nights"
+  },
+  "tala::North & Dahab (Hurghada - Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "North & Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14549,
+   "padi_slug": "classic-sudan-port-sudan-port-sudan-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North & Dahab (Hurghada - Hurghada) 7 nights"
+  },
+  "tala::North (Hurghada- Hurghada)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "North (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 7039,
+   "padi_slug": "north-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North (Hurghada- Hurghada) 7 nights"
+  },
+  "tala::Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)": {
+   "boat": "tala",
+   "boat_name": "MV Tala",
+   "dives": 18,
+   "name": "Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 7041,
+   "padi_slug": "brothers-featuring-daedalus-and-elphinstone",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "topaz::Best of Dahab and Tiran (Hurghada - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Best of Dahab and Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23418,
+   "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Best of Dahab and Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "topaz::Best of Tiran (Hurghada - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Best of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23410,
+   "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Best of Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "topaz::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23420,
+   "padi_slug": "treasures-of-the-north-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "topaz::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23421,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-21",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "topaz::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23422,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-22",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "topaz::Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23416,
+   "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "topaz::Fury Shoal (Port Ghalib - Port Ghalib)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23415,
+   "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Fury Shoal (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "topaz::The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23417,
+   "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada) 7 nights"
+  },
+  "topaz::The Golden Loop - North/Brother/Safaga (Hurghada - Port Ghalib)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "The Golden Loop - North/Brother/Safaga (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23424,
+   "padi_slug": "the-golden-loop-northbrothersafaga-hurghada-hurgha",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "The Golden Loop - North/Brother/Safaga (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "topaz::Treasures of the North (Hurghada - Hurghada)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Treasures of the North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23419,
+   "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-5",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Treasures of the North (Hurghada - Hurghada) 7 nights"
+  },
+  "topaz::Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "topaz",
+   "boat_name": "Topaz",
+   "dives": 15,
+   "name": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23409,
+   "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-po",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "unity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
+   "boat": "unity",
+   "boat_name": "Unity",
+   "dives": 15,
+   "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23063,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-7",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphinstone (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  },
+  "unity::North and Brothers (Hurghada - Hurghada)": {
+   "boat": "unity",
+   "boat_name": "Unity",
+   "dives": 17,
+   "name": "North and Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23062,
+   "padi_slug": "northern-reach-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North and Brothers (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  },
+  "unity::Northern Reach (Hurghada - Hurghada)": {
+   "boat": "unity",
+   "boat_name": "Unity",
+   "dives": 17,
+   "name": "Northern Reach (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23061,
+   "padi_slug": "northern-wrecks-and-reefs-hurghada-hurghada-7-ni-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Reach (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  },
+  "unity::Northern Wrecks and Reefs (Hurghada - Hurghada)": {
+   "boat": "unity",
+   "boat_name": "Unity",
+   "dives": 18,
+   "name": "Northern Wrecks and Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23060,
+   "padi_slug": "northern-wrecks-and-reefs-hurghada-hurghada-7-nigh",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Wrecks and Reefs (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  },
+  "unity::The Grand Tour (Hurghada - Hurghada)": {
+   "boat": "unity",
+   "boat_name": "Unity",
+   "dives": 15,
+   "name": "The Grand Tour (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23064,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-18",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "The Grand Tour (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  }
+ }
+}
