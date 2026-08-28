@@ -23,12 +23,21 @@
     "which looked stronger than similarity scoring and is not: sharing a word with",
     "a vessel's name says nothing about being that vessel. Every entry below is",
     "confirmed against hull facts -- shop kind, country, trip lengths, ports --",
-    "and never against a name alone."
+    "and never against a name alone.",
+    "",
+    "amelie-safari (PADI id 18156, 6 cabins) and amelie-adventures (id 93484, 8",
+    "cabins) are two different hulls under one operator, confirmed by the fleet",
+    "owner. Both are kind 10 and both sell a 3-night Best of Hurghada, so the",
+    "cabin count is the only thing that tells them apart -- 6 against our Amelie's",
+    "6, 8 against Amelie Adventures' 8. Two boats sharing a name, an operator and",
+    "an itinerary is the case a name-based match cannot survive."
   ],
   "reviewed": "2026-08-28",
   "country": "egypt",
   "aliases": {
-    "iceberg": "my-iceberg"
+    "iceberg": "my-iceberg",
+    "amelie": "amelie-safari",
+    "amelie-adventures": "amelie-adventures"
   },
   "absent": [],
   "unlisted": []
