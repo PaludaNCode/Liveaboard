@@ -1,7 +1,11 @@
 """Adapter for padi.com.
 
-Status: **structural, not yet validated against the live site.** The host is
-blocked by this environment's network policy.
+Status: **structural, and its crawl shape is now known to be wrong.** A probe
+on 2026-08-28 found PADI Travel on `travel.padi.com` — not under
+`www.padi.com/travel` — with a client-rendered listing that publishes no trip
+links to follow. `extract_requirements()` is unaffected and still the useful
+part; `TRAVEL_PATHS` and `discover()` need rewriting against a real response
+before this adapter is run. See `docs/sources/padi.com.md`.
 
 PADI plays a different role in this dataset than liveaboard.com does. It is
 weak on departure-level pricing and strong on the things the price comparison
@@ -29,7 +33,14 @@ TRAVEL_PATHS = (
     "/travel/liveaboards",
     "/travel/destinations/egypt",
 )
-"""Entry points for PADI Travel's liveaboard listings. Verify before trusting."""
+"""Entry points for PADI Travel's liveaboard listings.
+
+**Both 404.** Written from a guess at the URL shape and disproved by the first
+fetch: PADI Travel is a separate host (`travel.padi.com/s/liveaboards/all/`,
+`travel.padi.com/diving-in/egypt/`). Left in place rather than swapped, because
+pointing at the real listing would fetch a page that `TRIP_LINK` cannot read —
+see `docs/sources/padi.com.md`.
+"""
 
 TRIP_LINK = re.compile(r'href="(/travel/[a-z0-9\-/]*liveaboard[a-z0-9\-/]*)"', re.IGNORECASE)
 
