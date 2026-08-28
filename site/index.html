@@ -1519,8 +1519,19 @@ a { color:var(--accent); }
   var pins = pinned();
   function pin(index) { return index < pins ? "stick" + (index + 1) : ""; }
 
-  function draw() {
+  /* `keep` holds the table where the visitor left it.
+     Every redraw used to rebuild the first 120 rows and no more, whatever had
+     been drawn before -- so marking a row 700 deep, after scrolling or after
+     Ctrl+F had filled the table, redrew 120 rows and the row just clicked
+     vanished. The mark survived in state, which made it worse: the page had
+     done what was asked and looked like it had not.
+     Sorting, marking, expanding a bill and rotating the device all keep what
+     is drawn. Changing a filter does not: the list is a different list, the
+     visitor is back at the top of it, and starting from 120 again is what
+     makes filtering fast. */
+  function draw(keep) {
     var rows = visible();
+    var target = keep ? Math.max(PAGE_ROWS, drawn) : PAGE_ROWS;
     drawn = 0;
     lastRows = rows;
 
@@ -1555,10 +1566,10 @@ a { color:var(--accent); }
     }).join("") + "</tr>";
 
     document.getElementById("body").innerHTML = rows.length
-      ? renderRows(rows, 0, PAGE_ROWS)
+      ? renderRows(rows, 0, target)
       : '<tr><td class="empty" colspan="' + (COLS.length + 1) +
         '">Nothing matches those filters.</td></tr>';
-    drawn = Math.min(rows.length, PAGE_ROWS);
+    drawn = Math.min(rows.length, target);
     afterDraw(rows);
   }
 
@@ -1729,7 +1740,7 @@ a { color:var(--accent); }
     if (!th) return;
     if (th.dataset.k === state.sort) state.dir = -state.dir;
     else { state.sort = th.dataset.k; state.dir = 1; }
-    draw();
+    draw(true);
   });
   document.getElementById("head").addEventListener("keydown", function (event) {
     if (event.key !== "Enter" && event.key !== " ") return;
@@ -1744,7 +1755,7 @@ a { color:var(--accent); }
     if (button) {
       var row = visible()[+button.dataset.n];
       state.open = state.open === row.d.id ? null : row.d.id;
-      draw();
+      draw(true);
       return;
     }
 
@@ -1771,7 +1782,7 @@ a { color:var(--accent); }
     var id = tr.dataset.id;
     if (state.marked.has(id)) state.marked.delete(id);
     else state.marked.add(id);
-    draw();
+    draw(true);
   });
 
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {
@@ -1879,6 +1890,30 @@ a { color:var(--accent); }
     drawn = Math.min(lastRows.length, drawn + PAGE_ROWS);
   }, { passive: true });
 
+  /* Draw the rest of the rows the moment the browser's own find is opened.
+     Chunking means only the drawn rows are in the DOM, so Ctrl+F would search
+     120 of 838 -- the one thing it costs. The keydown arrives before the find
+     bar does, so the remaining rows can be in place by the time it is typed
+     into. Cmd+F on a Mac, F3 on Windows, and "/" in Firefox's quick find. */
+  function drawEverything() {
+    if (drawn >= lastRows.length) return;
+    document.getElementById("body").insertAdjacentHTML(
+      "beforeend", renderRows(lastRows, drawn, lastRows.length - drawn)
+    );
+    drawn = lastRows.length;
+  }
+  window.addEventListener("keydown", function (event) {
+    var find = (event.key === "f" || event.key === "F") && (event.ctrlKey || event.metaKey);
+    if (find || event.key === "F3") drawEverything();
+  });
+  /* And on print, for the same reason: a printed page of 120 rows would be a
+     silent truncation of one showing 838. */
+  if (window.matchMedia) {
+    var print = window.matchMedia("print");
+    if (print.addEventListener) print.addEventListener("change", drawEverything);
+  }
+  window.addEventListener("beforeprint", drawEverything);
+
   /* Typing is the one input that fires per character, and a redraw is the
      most expensive thing this file does. Without this, "elphinstone" cost
      eleven full redraws; with it, one. 120ms is below the point a pause
@@ -1894,7 +1929,7 @@ a { color:var(--accent); }
 
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
-  var onWidthChange = function () { orderColumns(); draw(); };
+  var onWidthChange = function () { orderColumns(); draw(true); };
   [compact, narrow, tiny].forEach(function (mq) {
     if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
     else if (mq.addListener) mq.addListener(onWidthChange);
