@@ -490,7 +490,24 @@ a { color:var(--accent); }
      would leave a row that scrolls away from either its dates or its boat. At
      66 + 66 + 96 they take 228px of 390 and True cost, the next column, lands
      inside the remaining 162. */
-  :root { --st0:24px; --st1:66px; --st2:96px; }
+  /* Three here, not two: Depart, Boat and Guests. Guests joined the identity
+     columns in the order, and a group is only a group if the rule that closes
+     it falls after the last of them -- left pinned at two, the strong edge
+     landed between Boat and Guests and filed the guest count with the money,
+     which is the same mistake the wide table made before Guests was pinned
+     there. 24 + 66 + 96 + 45 is 231 of 390, and the Total still lands whole
+     inside what is left. Below 386px Guests is not in front of the money at
+     all, so the count drops back to two -- see `pinned()`. */
+  :root { --st0:24px; --st1:66px; --st2:96px; --st3:45px; }
+
+  /* The group rules, by what the columns mean rather than by where they sit.
+     On a wide screen the light rule falls on `.stick3`, because the pinned
+     four are Depart, Return, Boat, Guests and Boat is third. Here the pinned
+     three are Depart, Boat, Guests, so Boat is second and Guests is third:
+     the light rule moves to `.stick2` and must come off `.stick3`, or it
+     would split the boat from its own guest count. */
+  .stick2 { border-left:1px solid var(--rule); }
+  .stick3 { border-left:0; }
 
   td.expander, th.expander { padding:4px 6px; }
   /* 6px, not 7. Guests moved in front of the money here to sit with the boat,

@@ -199,7 +199,7 @@
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
        than an operator declining to say. */
-    { k: "guests", t: "Guests", num: true,
+    { k: "guests", t: "Guests", short: "Pax", num: true,
       v: function (d, i) { return i.guests == null ? -1 : i.guests; },
       show: function (d, i) {
         return i.guests == null ? '<span class="dim">—</span>' : i.guests;
@@ -460,9 +460,20 @@
      many people you share a dive deck with -- and the pinned group's closing
      rule is what says where the identity columns end. Left at three, that rule
      fell between Boat and Guests and filed the guest count as the first of the
-     route columns. It is on the boat's side of it now. */
+     route columns. It is on the boat's side of it now.
+
+     Three on a phone for the same reason and not a different one. Guests sits
+     with the boat in PHONE_ORDER, so pinning two would put the closing rule
+     between them and undo on a phone exactly what the fourth pin fixed on a
+     desktop -- the group would say the guest count belongs to the money. Here
+     the three are Depart, Boat, Guests: 24 + 66 + 96 + 45 of 390, with the
+     Total whole in what remains.
+
+     Two below 386px, where Guests is behind the money rather than in front of
+     it (see TINY_ORDER). Pinning it there would freeze 59% of the screen to
+     hold a column that is not even next to the boat any more. */
   function pinned() {
-    return narrow.matches ? 2 : compact.matches ? 3 : 4;
+    return tiny.matches ? 2 : narrow.matches ? 3 : compact.matches ? 3 : 4;
   }
 
   function orderColumns() {
@@ -604,8 +615,18 @@
       COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
+      /* The short label where one is set and the screen is narrow. A pinned
+         column is a fixed width, and "GUESTS" wants 65px of the 45 it has
+         there -- so the choice is a header reading "GUES…" or a shorter word
+         that is whole. The same call the date column already made when it
+         took a smaller font rather than print "DEPAR…": a truncated value can
+         be read as truncated, a truncated column name cannot. */
+      var label = (narrow.matches && c.short) ? c.short : c.t;
+      /* The tooltip only where the word was shortened, so it names the column
+         rather than repeating it. */
+      var full = label === c.t ? "" : ' title="' + esc(c.t) + '"';
       return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
-        '" data-k="' + c.k + '">' + c.t + " " + dir + "</th>";
+        '" data-k="' + c.k + '"' + full + ">" + label + " " + dir + "</th>";
     }).join("") + "</tr>";
 
     document.getElementById("body").innerHTML = rows.length
