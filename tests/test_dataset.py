@@ -506,3 +506,93 @@ class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
                 f"{departure['id']} departs {departure['start']} and links to {url}",
             )
         self.assertTrue(checked, "no booking_url carried a month to check")
+
+
+class TestTheFooterCountsMatchTheData(unittest.TestCase):
+    """Numbers written into the page's prose, checked against the dataset.
+
+    The footer said nitrox was "roughly half" included. It is two thirds --
+    44 vessels against 21 -- and the sentence had simply been true once, before
+    the fee scrape covered the whole fleet. It also advertised a state the
+    column has never once rendered, "extra, no price", while omitting the one
+    it does: "not listed", which is the case where nobody has said whether you
+    will be charged at all.
+
+    That is the failure this project exists to correct in other people, in our
+    own words: a page confidently stating a figure that stopped being true. So
+    the prose is now asserted rather than proof-read, the way `promote --check`
+    asserts the dataset and `ALLOWED_EXTERNAL` asserts the page fetches nothing.
+    """
+
+    LIVE = ROOT / "data" / "egypt-2027.json"
+    TEMPLATE = ROOT / "templates" / "index.html"
+
+    def nitrox_by_vessel(self) -> dict[str, int]:
+        """How many *boats* fall in each state. Nitrox is a vessel's policy."""
+        payload = build_payload(Dataset.load(self.LIVE))
+        state: dict[str, str] = {}
+        for departure in payload["departures"]:
+            itinerary = payload["itineraries"][departure["itinerary_id"]]
+            lines = [departure["base_line"]] + (
+                departure.get("lines") or itinerary["lines"]
+            )
+            line = next((x for x in lines if x.get("code") == "nitrox"), None)
+            state[itinerary["boat"]] = (
+                "absent" if line is None
+                else "included" if line.get("included")
+                else "priced" if line.get("has_price")
+                else "listed_unpriced"
+            )
+        counts: dict[str, int] = {}
+        for value in state.values():
+            counts[value] = counts.get(value, 0) + 1
+        return counts
+
+    def test_the_stated_vessel_counts_are_the_real_ones(self):
+        if not self.LIVE.exists():
+            self.skipTest("no scraped dataset in this checkout")
+        counts = self.nitrox_by_vessel()
+        html = self.TEMPLATE.read_text(encoding="utf-8")
+        for number, state in (
+            (counts.get("included", 0), "included"),
+            (counts.get("priced", 0), "publish a price"),
+            (counts.get("absent", 0), "never mention it"),
+        ):
+            # assertTrue rather than assertIn: the failure message for a
+            # missing substring prints the whole haystack, and the haystack
+            # here is the entire page.
+            self.assertTrue(
+                f"<b>{number}</b>" in html,
+                f"the footer does not say <b>{number}</b> vessels for "
+                f"{state!r}; the committed dataset says it should",
+            )
+
+    def test_the_footer_names_only_states_the_column_can_reach(self):
+        """It advertised "extra, no price", which no vessel has ever produced.
+
+        Naming a state nobody will see is a smaller sin than the reverse and
+        still a claim about the data that the data does not support.
+        """
+        if not self.LIVE.exists():
+            self.skipTest("no scraped dataset in this checkout")
+        html = self.TEMPLATE.read_text(encoding="utf-8")
+        if not self.nitrox_by_vessel().get("listed_unpriced"):
+            self.assertTrue(
+                "extra, no price" not in html,
+                "the footer offers 'extra, no price' as a nitrox state, and no "
+                "vessel in the dataset produces it",
+            )
+
+    def test_the_unreachable_branch_is_still_in_the_renderer(self):
+        """Unreached is not unnecessary.
+
+        No vessel lists nitrox without a price today, but "Rental Gear" is
+        routinely named with no figure, so the shape is real. Without the
+        branch the function falls off the end and the cell prints "undefined".
+        """
+        app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
+        self.assertTrue(
+            "extra, no price" in app,
+            "app.js has lost the fallback branch; a nitrox line that is "
+            "neither included nor priced would render as 'undefined'",
+        )
