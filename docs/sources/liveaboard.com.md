@@ -217,6 +217,34 @@ Each of these cost a cycle at least once.
 
 ## Negatives — checked, ruled out, do not re-check
 
+- **No remaining-berth count anywhere on a vessel page** (#79, probe run
+  33216105137). Availability is binary and that is all the source gives:
+  - the `Offer` on all 889 archived `Event` nodes carries exactly seven keys —
+    url, availabilityEnds, availability, price, priceCurrency, validFrom,
+    @type — and none is a count;
+  - the only inventory wording in any `Event.description` is *"No more spaces
+    available"*, 128 times, with no numeric form of it anywhere;
+  - a browser probe of four vessel-months chosen because they hold a
+    **limited** departure read 43 rendered elements carrying a date and a
+    price, and none states a count. The single grep hit was the vessel
+    brochure — *"welcomes up to 30 guests … 4 cabin"* — which is the boat's
+    capacity, not what is left on a sailing;
+  - no XHR the page makes carries an inventory-shaped key (avail, space,
+    berth, seat, capacity, remaining, slot, quantity, stock).
+
+  So `spaces_left` cannot be filled from the vessel page, and a "spots left"
+  column would be empty on every row. **Not** ruled out: the booking flow
+  itself, which nobody has entered — starting a booking to read an inventory
+  number is a different kind of request and needs a deliberate decision.
+
+  Two earlier passes of this probe were wrong in ways worth remembering. The
+  first guessed at CSS selectors, matched zero elements on all four pages, and
+  printed a confident "nothing states a count" — a finding about the selectors.
+  The second found rows by content and matched the embedded JSON-LD `<script>`
+  and the month `<select>`, both of which carry every date and price on the
+  page, then reported their prose as a berth count. A probe that has not read
+  the thing cannot produce a negative about it.
+
 | Question | Answer | Established by |
 |---|---|---|
 | Does `#tourid=NNN` open the trip detail, the way `#modal-gear` opens the gear dialog? | **No.** The fragment opens nothing; the trip detail is not in the document at load. ~50 dialogs enumerated, not one named a dive site. The id is real and useful — it is the `tourID` the fragment endpoint takes — but the hash alone does not fetch it. | `tools/probe_itinerary.py`, a CI run |
