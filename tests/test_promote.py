@@ -656,9 +656,11 @@ class TestDisplayTitle(unittest.TestCase):
             "Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
         ):
             self.assertEqual(self.title(name), "Golden Triangle")
+        # "Ras Mohamed" also folds to "Ras Mohammed" on the way through; what
+        # this case is about is the port suffix, which goes either way.
         self.assertEqual(
             self.title("Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)"),
-            "Tiran & North Ras Mohamed",
+            "Tiran & North Ras Mohammed",
         )
 
     def test_a_route_in_brackets_stays(self):
@@ -1609,8 +1611,8 @@ class TestErrorsInATitleAreCorrected(unittest.TestCase):
         self.assertEqual(itinerary["name"], raw)
 
 
-class TestThreeReefsGetOneSpelling(unittest.TestCase):
-    """One spelling for the three reefs the fleet writes several ways.
+class TestFourReefsGetOneSpelling(unittest.TestCase):
+    """One spelling for the four reefs the fleet writes several ways.
 
     Not mistakes, unlike the corrections above -- "Fury Shoal" and "Brother
     Islands" are what those operators call those reefs. Folded anyway, for the
@@ -1650,7 +1652,7 @@ class TestThreeReefsGetOneSpelling(unittest.TestCase):
     def test_the_chosen_spelling_is_one_an_operator_used(self):
         """Never a spelling invented to be consistent. Each of the three is
         the plurality of what the fleet actually wrote."""
-        for chosen in ("St. John's", "Brothers", "Fury Shoals"):
+        for chosen in ("St. John's", "Brothers", "Fury Shoals", "Ras Mohammed"):
             with self.subTest(chosen):
                 self.assertEqual(self.title(chosen), chosen)
 
@@ -1667,13 +1669,24 @@ class TestThreeReefsGetOneSpelling(unittest.TestCase):
             with self.subTest(name):
                 self.assertEqual(self.title(name), name)
 
-    def test_three_reefs_and_nothing_generalised(self):
+    def test_three_spellings_of_ras_mohammed(self):
+        """All three are real transliterations, so none is a misspelling --
+        this is a fold, not a correction. What settles it is not the title
+        count (15 / 6 / 2) but the dive sites parsed from the operators' own
+        descriptions, which say "ras mohammed" 101 times out of 101: the
+        column was disagreeing with the filter chip beside it."""
+        # All three the fleet writes. "Ras Muhammad" is the one a narrower
+        # pattern missed, and it took reading the whole title list to find:
+        # two trips, a different vowel in both halves of the word.
+        for written in ("Ras Mohamed", "Ras Mohammed", "Ras Muhammad"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "Ras Mohammed")
+
+    def test_four_reefs_and_nothing_generalised(self):
         """Separators and word order stay the operators' own, and the reef
-        names the fleet also splits are left exactly as they were written --
-        Ras Mohamed against Ras Mohammed among them, both being real
-        transliterations rather than one being wrong."""
+        names the fleet also splits are left exactly as they were written."""
         for name in ("North - Brothers", "North Brothers", "Rocky & Rocky Island",
-                     "Zabargad Islands", "Ras Mohamed & Ras Mohammed",
+                     "Zabargad Islands",
                      "Sataya - Fury Shoals", "Elphinstone, Daedalus"):
             with self.subTest(name):
                 self.assertEqual(self.title(name), name)

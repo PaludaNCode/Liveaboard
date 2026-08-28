@@ -280,16 +280,35 @@ TITLE_FIXES = (
     # in its dive sites, read from the operator's own description, and the
     # fleet writes the reef 26 other times without ever writing it this way.
     (re.compile(r"\bzarbagad\b", re.I), "Zabargad"),
+    # Gubal, once written "Gobal". The only correction here whose evidence is
+    # the fleet's rather than the trip's own: that title names Thistlegorm, Abu
+    # Nuhas and "Small Gobal", and its parsed sites name neither spelling, so
+    # nothing confirms it from inside the trip. What decides it is that the
+    # fleet writes "gubal" 46 times in parsed dive sites and "gobal" not once,
+    # against a single title -- one operator's typing against everybody else's.
+    (re.compile(r"\bgobal\b", re.I), "Gubal"),
+    # A separator with a space on one side only: "St. John's- Elphinstone".
+    # Both sides or neither. A hyphen with no space at all is spacing the
+    # operator chose -- "Thistlegorm-Abu Nuhas" -- and is left exactly as it
+    # is; a hyphen with one space is a space they dropped.
+    (re.compile(r"(?<=\S)-(?=\s)"), " -"),
+    (re.compile(r"(?<=\s)-(?=\S)"), "- "),
 )
 """Errors in a title, as opposed to a style we happen not to share.
 
 The distinction is the whole reason this is a short list. Separators and word
 order are the operators' own and are left alone -- see the note on ``BDE``.
-These four are things nobody intended: an invisible control character, three
-characters doing one apostrophe's job, and two reefs with their letters
-swapped. Each misspelling is corrected only where the trip's own dive sites,
-read from the operator's description, already name the reef correctly -- so the
-dataset has confirmed the reef independently of its title.
+These are things nobody intended: an invisible control character, three
+characters doing one apostrophe's job, reefs with their letters swapped, and a
+dash with a space on one side.
+
+A misspelling is corrected where the trip's own dive sites, read from the
+operator's description, already name the reef correctly -- the dataset
+confirming the reef independently of its title is what separates a correction
+from a guess. ``Gobal`` is the one exception and is marked as such: its trip
+names no Gubal at all, so the evidence is the fleet's instead -- 46 parsed
+"gubal" against a single "gobal" in one title. A weaker warrant, taken
+deliberately and only where the count is that lopsided.
 The three reefs the fleet spells several ways are folded separately, in
 :data:`REEF_ALIASES`, because they are differences rather than mistakes.
 
@@ -330,6 +349,14 @@ REEF_ALIASES = (
     # Fury Shoals, two ways: "Fury Shoals" (17), "Fury Shoal" (12) -- the
     # narrowest split in the fleet and the one least likely to mean anything.
     (re.compile(r"\bFury\s+Shoals?\b", re.I), "Fury Shoals"),
+    # Ras Mohammed, three ways: "Ras Mohamed" (15), "Ras Mohammed" (6) and
+    # "Ras Muhammad" (2). All three are real transliterations of the Arabic,
+    # so none is a misspelling and this belongs here rather than in
+    # TITLE_FIXES. What settles the spelling is not the title count but the
+    # dive sites parsed from the operators' own descriptions, which say "ras
+    # mohammed" 101 times out of 101 -- the dataset had already picked one,
+    # and the column was disagreeing with the filter chip beside it.
+    (re.compile(r"\bRas\s+M[ou]h?a?mm?[ae]d\b", re.I), "Ras Mohammed"),
 )
 """One spelling for the three reefs the fleet writes several ways.
 

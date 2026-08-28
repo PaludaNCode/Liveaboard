@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 489 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 501 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -93,7 +93,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
-  Only `title` is ever tidied, and it is tidied in exactly three ways.
+  Only `title` is ever tidied, and it is tidied in exactly four ways.
   **One route, not a house style.** `BDE`/`BDE_TITLE` fold the seven spellings
   of Brothers/Daedalus/Elphinstone onto one; the pattern is anchored at both
   ends, so *Marine Park North: Brothers - Daedalus & Elphinstone* and
@@ -108,25 +108,33 @@ Break these and the site starts lying quietly rather than failing loudly.
   rule would ruin (*MY Odyssey*, *St. John's*, *SS Turkia*). Ties break
   alphabetically: `promote` is pure and CI compares its output byte for byte.
   `TITLE_FIXES` corrects what is *wrong* rather than what is merely different —
-  zero-width spaces, three characters doing one apostrophe's job, the two
-  misspellings of Daedalus and the one of Zabargad, listed the way
+  zero-width spaces, three characters doing one apostrophe's job, a dash with
+  a space on one side only, the two misspellings of Daedalus and the one each
+  of Zabargad and Gubal, listed the way
   `PORT_ALIASES` lists harbours because a near-miss rule that catches those
   also catches a reef that only looks like another. A misspelling goes in the
   table only where the trip's own `dive_sites`, parsed from the operator's
   description, already name the reef correctly — the dataset confirming the
-  reef independently of its title is what separates a correction from a guess. **Three reefs, not every reef.** `REEF_ALIASES` folds the
-  five spellings of *St. John's*, the three of *Brothers* and the two of *Fury
-  Shoals* onto one each — differences rather than mistakes, folded for the
+  reef independently of its title is what separates a correction from a guess.
+  *Gobal* is the single exception and is commented as one: its trip names no
+  Gubal at all, so the warrant is the fleet's instead — 46 parsed *gubal*
+  against one *gobal* — a weaker warrant taken deliberately, and only at that
+  margin. **Four reefs, not every reef.** `REEF_ALIASES` folds the
+  five spellings of *St. John's*, the three of *Brothers*, the two of *Fury
+  Shoals* and the three of *Ras Mohammed* onto one each — differences rather than mistakes, folded for the
   reason `BDE` folds one route: the reader should not have to work out that the
   reef is the same reef before comparing the prices beside it. Each replacement
   is the *plurality* of what the fleet wrote, never a spelling invented to be
   consistent, so the table re-derives from the data instead of from taste. The
   guard on `Brother` is the shape of the risk — *Big Brother* and *Little
   Brother* name the two islands separately, and folding either into the pair
-  would delete which island the trip dives. Reefs the fleet also splits are
-  deliberately left alone (*Ras Mohamed*/*Ras Mohammed* are both real
-  transliterations, so neither is wrong); do not lengthen this table without
-  counting the spellings first.
+  would delete which island the trip dives. *Ras Mohamed*/*Ras Mohammed*/*Ras
+  Muhammad* are all real transliterations and none is wrong, so this is a fold
+  and not a correction; what picks the spelling is not the title count but the
+  parsed `dive_sites`, which say *ras mohammed* 101 times out of 101 — the
+  column was disagreeing with the filter chip beside it. Do not lengthen this
+  table without counting the spellings first, and count in the *names* rather
+  than the titles: counting folded titles hid *Ras Muhammad* entirely.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
