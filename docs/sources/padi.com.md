@@ -173,6 +173,7 @@ headers at all — a plain GET answers 200 with JSON, and nothing under
 |---|---|
 | `/api/v2/travel/shop/{vessel}/itineraries/?kind=10` | Paginated DRF list: `{"count": 22, "results": [{title, slug, id, totalNumberOfDives, totalNumberOfDivesMax}]}` |
 | `/api/v2/travel/shop/{country}/{vessel}/itineraries/{slug}/` | One itinerary, **95 fields** |
+| `/api/v2/travel/shop/{vessel}/trips/` | **Every sailing on sale**: `startDate`, `endDate`, `duration`, `price`, `compareAtPrice`, `availability`, and the itinerary it belongs to |
 
 One request per vessel for the list — 58 for Egypt — then one per itinerary.
 
@@ -198,6 +199,31 @@ space: the call sites are handed **relative** paths (`shop/egypt/…`), so a
 pattern anchored on a leading slash finds none of them; and a runner log read
 through the API truncates from the front, so a probe that prints its findings
 after eighty candidate 404s hides the answer — hence `--only-base`.
+
+### Sailings, and the two traps in their prices
+
+`shop/{vessel}/trips/` is the only place PADI states a date or a price — the
+itinerary endpoint carries neither. 2,797 sailings across the 38 mapped boats,
+669 of them in our May–August 2027 window.
+
+**The price has no currency beside it**, and the `Currency-code` header the app
+sends does not convert: EUR, USD and GBP all answer `1473.0` for the same
+sailing. The unit is the vessel's own `window.shop.currency` — Hammerhead II
+prices in EUR, Red Sea Aggressor II in USD. Assuming one currency would have put
+every Aggressor price out by the EUR/USD rate. A vessel whose page states no
+currency has its prices dropped rather than guessed.
+
+**It is a berth price, comparable only to a berth price.** PADI publishes no fee
+book at all, so setting its figure against our *total* would show it cheaper by
+exactly the fees it never disclosed — the failure this site exists to expose,
+committed by the site itself. `padi_delta` is measured against `base`, and
+`tests/test_padi_sailings.py` asserts it.
+
+Match quality on (boat, date) is **601 of 892 departures**, and the key is exact:
+a date has no spelling, where the itinerary-title join needed en-dash folding and
+a harbour alias table to reach a third of that. PADI's calendar coverage varies
+per boat — `my-iceberg` lists 22 sailings and none in our window — so a missing
+PADI price is evidence of nothing.
 
 ### The fields that matter
 

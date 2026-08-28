@@ -609,3 +609,11 @@ a { color:var(--accent); }
   line-height: 1.45;
   white-space: pre;
 }
+
+/* The other seller's berth price against ours. Colour carries the direction so
+   the column can be scanned, and the sign carries it again for anyone who
+   cannot separate the two hues -- the same reason the fee table prints a filled
+   or hollow square rather than relying on the row's tint. */
+.cheaper { color:var(--ok); }
+.dearer  { color:var(--sold); }
+.caveat.padi { border-left:2px solid var(--unknown); padding-left:.6em; }

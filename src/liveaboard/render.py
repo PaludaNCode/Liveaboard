@@ -126,6 +126,19 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "verified": departure.price_provenance.is_verified,
         }
 
+        # What PADI advertises for this same sailing, converted like every other
+        # price on the page.
+        #
+        # Compared against ``base``, never against the total. Both are berth
+        # prices; the total adds fees PADI does not publish, so measuring one
+        # against the other would show PADI cheaper by exactly the fees it never
+        # disclosed. Two numbers only, and only where PADI sells the date: a
+        # field written per departure ships 892 times.
+        if departure.padi_price is not None:
+            padi_display, _ = dataset.fx.to_display(departure.padi_price)
+            entry["padi"] = float(padi_display.rounded)
+            entry["padi_delta"] = round(float(padi_display.rounded) - entry["base"], 2)
+
         # A departure-level fee replaces the route's for its code, so a sailing
         # can genuinely price a fee differently. No departure in the dataset
         # does today, but the possibility is in the model, and silently reusing
@@ -212,6 +225,9 @@ DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
     "itineraries.json": ("What liveaboard.com says per trip",
                          "reefs, dive count, group size and entry bar, from the "
                          "operator's own itinerary panel"),
+    "padi_departures.json": ("What PADI Travel charges per sailing",
+                            "its own berth price for the same boat on the same "
+                            "date, for 601 of the departures here"),
     "padi.json": ("What PADI Travel says per trip",
                   "the certification it states and the dives it counts, for the "
                   "38 boats both sites sell"),
@@ -267,7 +283,8 @@ def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[
     (folder / "egypt-2027.csv").write_text(to_csv(dataset), encoding="utf-8")
     written.append("egypt-2027.csv")
 
-    for name in ("egypt-2027.json", "CHANGES.md", "itineraries.json", "padi.json"):
+    for name in ("egypt-2027.json", "CHANGES.md", "itineraries.json", "padi.json",
+                 "padi_departures.json"):
         source = (data_dir / name) if data_dir else None
         if source and source.exists():
             (folder / name).write_text(source.read_text(encoding="utf-8"),
