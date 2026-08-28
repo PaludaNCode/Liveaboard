@@ -40,6 +40,17 @@ from typing import Any
 
 Dataset = dict[str, Any]
 
+ROUNDING_MOVE = 2.0
+"""Below this a "price change" is the source rounding, not an operator.
+
+Measured, not guessed: on the 2026-08-28 refresh 174 fares "changed", and
+every single one of them by exactly -1 on a four-figure sum. Nobody reprices a
+1,469 berth by a dollar; the site had re-rounded. Left in, they filled both
+price blocks and pushed the real moves past the cap. Suppressed ones are still
+counted and still stated -- a report that quietly drops rows is the failure
+this project exists to correct in other people.
+"""
+
 MISSING_VESSEL_MIN = 3
 """Departures a vessel must lose *all* of before it counts as gone missing.
 
@@ -107,6 +118,8 @@ class Report:
     vessels_gone: list[str] = field(default_factory=list)
     """Vessels that lost every departure at once -- a failed fetch, most likely."""
     vessels_new: list[str] = field(default_factory=list)
+    price_rounding: int = 0
+    """Fares that moved by less than ``ROUNDING_MOVE`` -- counted, not listed."""
     availability_newly_read: bool = False
     """The older dataset stated availability nowhere, so no transition is real."""
     fx_was: float | None = None
@@ -271,6 +284,9 @@ def compare(before: Dataset, after: Dataset) -> Report:
         was, now = old_price.get("amount"), new_price.get("amount")
         if was is None or now is None or was == now:
             continue
+        if abs(now - was) < ROUNDING_MOVE:
+            report.price_rounding += 1
+            continue
         boat, title = _describe(new, new_its, new_boats)
         move = PriceMove(dep_id, boat, title, new.get("start", ""),
                          float(was), float(now), new_price.get("currency", ""))
@@ -312,6 +328,46 @@ def compare(before: Dataset, after: Dataset) -> Report:
     return report
 
 
+def headline(report: Report) -> str:
+    """One line, for the subject of the commit that carries the new dataset.
+
+    The refresh has always committed as "data: daily refresh <date>", which
+    tells a reader the pipeline ran and nothing about whether anything
+    happened. With this, ``git log --oneline data/`` *is* the changelog: the
+    history is already one commit per run, and the only thing missing was a
+    subject that said what the run found.
+
+    Ordered by what would make someone look: a vessel that went missing is a
+    broken fetch and comes first, then new stock, then money, then
+    availability. Everything else the full report has.
+    """
+    if report.vessels_gone:
+        return f"{len(report.vessels_gone)} vessel(s) lost every departure"
+
+    bits: list[str] = []
+    if report.vessels_new:
+        bits.append(f"{len(report.vessels_new)} new vessel(s)")
+    if report.added:
+        bits.append(f"{len(report.added)} new departures")
+    if report.withdrawn:
+        bits.append(f"{len(report.withdrawn)} withdrawn")
+    moved = len(report.price_up) + len(report.price_down)
+    if moved:
+        biggest = max(report.price_up + report.price_down, key=lambda m: abs(m.delta))
+        bits.append(f"{moved} prices moved (to {biggest.delta:+,.0f} "
+                    f"{biggest.currency} on {biggest.boat})")
+    if report.fees:
+        bits.append(f"{len(report.fees)} fee change(s)")
+    if report.sold_out:
+        bits.append(f"{len(report.sold_out)} sold out")
+    if report.returned:
+        bits.append(f"{len(report.returned)} bookable again")
+
+    if not bits:
+        return "no change to trips, prices or availability"
+    return ", ".join(bits[:3]) + (f", and {len(bits) - 3} more" if len(bits) > 3 else "")
+
+
 def render(report: Report, *, before: str = "", after: str = "", limit: int = 12) -> str:
     """The report as plain text, longest-first and capped.
 
@@ -327,7 +383,9 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     lines.append("=" * len(header))
 
     if report.is_quiet and not report.fx_moved and not report.availability_newly_read:
-        lines.append("\nnothing moved.")
+        lines.append("\nnothing moved." if not report.price_rounding else
+                     f"\nnothing moved, beyond {report.price_rounding} fare(s) "
+                     f"re-rounded by under {ROUNDING_MOVE:,.0f}.")
         return "\n".join(lines)
 
     if report.availability_newly_read:
@@ -374,6 +432,13 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
         f"{f.boat:22.22} {f.code:16.16} {f.was} -> {f.now}" for f in report.fees])
     if report.vessels_new:
         block("vessels seen for the first time", report.vessels_new)
+
+    if report.price_rounding:
+        lines.append(
+            f"\n{report.price_rounding} further fare(s) moved by less than "
+            f"{ROUNDING_MOVE:,.0f} — the source re-rounding, not a reprice; "
+            "counted here rather than listed above"
+        )
 
     # Last, and separate: it explains a euro figure moving on every row, and it
     # is not an operator changing anything.

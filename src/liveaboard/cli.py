@@ -559,9 +559,16 @@ def _git_show(revision: str, path: Path) -> dict[str, Any] | None:
         return None
 
 
+HISTORY_HEADER = (
+    "# What changed\n\n"
+    "One entry per refresh, newest first, written by `liveaboard.cli changes`.\n"
+    "Do not edit by hand — the next run rewrites the file around this header.\n"
+)
+
+
 def cmd_changes(args: argparse.Namespace) -> int:
     """Report what moved between two datasets."""
-    from .changes import compare, render as render_changes
+    from .changes import compare, headline, render as render_changes
 
     after = json.loads(Path(args.data).read_text(encoding="utf-8"))
 
@@ -575,10 +582,14 @@ def cmd_changes(args: argparse.Namespace) -> int:
             # Not a failure. A first run has nothing to compare against, and
             # saying so beats printing an empty report that reads as "nothing
             # changed" when the truth is "nothing to compare".
-            print(f"no earlier {args.data} at {args.revision}; nothing to compare")
+            print("first dataset; nothing to compare against" if args.headline
+                  else f"no earlier {args.data} at {args.revision}; nothing to compare")
             return 0
 
     report = compare(before, after)
+    if args.headline:
+        print(headline(report))
+        return 0
     text = render_changes(
         report,
         before=before_label,
@@ -591,6 +602,17 @@ def cmd_changes(args: argparse.Namespace) -> int:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(text + "\n", encoding="utf-8")
         print(f"\nwrote {args.out}")
+
+    if args.append:
+        # Newest first, and committed: the workflow run summary vanishes with
+        # the run, so the only durable copy is the one in the repository.
+        path = Path(args.append)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        previous = path.read_text(encoding="utf-8") if path.exists() else ""
+        body = previous.split(HISTORY_HEADER, 1)[-1].lstrip("\n")
+        entry = f"## {after.get('generated') or before_label}\n\n```\n{text}\n```\n"
+        path.write_text(f"{HISTORY_HEADER}\n{entry}\n{body}", encoding="utf-8")
+        print(f"\nappended to {args.append}")
 
     # A vessel losing every departure at once is the one finding worth a
     # non-zero exit: it usually means a fetch failed rather than a season
@@ -676,6 +698,14 @@ def main(argv: list[str] | None = None) -> int:
         help="which commit to compare against when --before is not given",
     )
     changes.add_argument("--out", default=None, type=Path, help="also write the report here")
+    changes.add_argument(
+        "--append", default=None, type=Path,
+        help="prepend this run's entry to a running history file, newest first",
+    )
+    changes.add_argument(
+        "--headline", action="store_true",
+        help="print one line instead of the report, for a commit subject",
+    )
     changes.add_argument("--limit", type=int, default=12, help="rows per section")
     changes.add_argument(
         "--fail-on-missing", action="store_true",

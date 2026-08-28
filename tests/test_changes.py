@@ -9,7 +9,9 @@ from __future__ import annotations
 
 import unittest
 
-from liveaboard.changes import MISSING_VESSEL_MIN, compare, render
+from liveaboard.changes import (
+    MISSING_VESSEL_MIN, ROUNDING_MOVE, compare, headline, render,
+)
 
 
 def dataset(departures, itineraries=None, boats=None, fx=None):
@@ -164,6 +166,84 @@ class TestChangesThatDidNotHappen(unittest.TestCase):
                        "amount": {"amount": 80.0, "currency": "EUR"}}]}])
         codes = {(f.code, f.now) for f in compare(before, after).fees}
         self.assertIn(("marine_park", "no longer listed"), codes)
+
+
+class TestRoundingIsNotARepricing(unittest.TestCase):
+    """The real one, again. On 2026-08-28 every one of 174 "price changes"
+    was exactly -1 on a four-figure fare: the source had re-rounded. Left in,
+    they filled both price blocks and pushed the real moves past the cap."""
+
+    def test_a_one_unit_move_is_not_listed(self):
+        report = compare(
+            dataset([departure("d1", price=1469.0)]),
+            dataset([departure("d1", price=1468.0)]),
+        )
+        self.assertFalse(report.price_down)
+        self.assertEqual(report.price_rounding, 1)
+
+    def test_it_is_counted_and_said_out_loud(self):
+        """Suppressed, never silently dropped."""
+        before = dataset([departure(f"d{i}", price=1000.0) for i in range(3)])
+        after = dataset([departure(f"d{i}", price=999.0) for i in range(3)]
+                        + [departure("new", start="2027-06-05")])
+        text = render(compare(before, after))
+        self.assertIn("3 further fare(s) moved by less than", text)
+
+    def test_a_real_move_still_gets_through(self):
+        report = compare(
+            dataset([departure("d1", price=1000.0)]),
+            dataset([departure("d1", price=1000.0 + ROUNDING_MOVE)]),
+        )
+        self.assertEqual(len(report.price_up), 1)
+        self.assertEqual(report.price_rounding, 0)
+
+    def test_rounding_alone_is_still_a_quiet_run(self):
+        report = compare(
+            dataset([departure("d1", price=1000.0)]),
+            dataset([departure("d1", price=999.0)]),
+        )
+        self.assertTrue(report.is_quiet)
+        self.assertIn("re-rounded", render(report))
+
+
+class TestHeadline(unittest.TestCase):
+    """One line for the commit subject, so `git log` is the changelog."""
+
+    def test_a_quiet_run_says_nothing_changed(self):
+        report = compare(dataset([departure("d1")]), dataset([departure("d1")]))
+        self.assertEqual(headline(report), "no change to trips, prices or availability")
+
+    def test_a_missing_vessel_outranks_everything_else(self):
+        """It means a fetch broke, and it is the one thing worth interrupting
+        a reader for -- so it must not be buried behind eighty withdrawals."""
+        deps = [departure(f"d{i}", start=f"2027-05-{i+1:02}")
+                for i in range(MISSING_VESSEL_MIN + 2)]
+        line = headline(compare(dataset(deps), dataset([])))
+        self.assertIn("lost every departure", line)
+
+    def test_new_departures_are_counted(self):
+        report = compare(
+            dataset([departure("d1")]),
+            dataset([departure("d1"), departure("d2", start="2027-05-08")]),
+        )
+        self.assertIn("1 new departures", headline(report))
+
+    def test_a_price_move_names_the_biggest(self):
+        report = compare(
+            dataset([departure("d1", price=1000.0)]),
+            dataset([departure("d1", price=1200.0)]),
+        )
+        line = headline(report)
+        self.assertIn("+200 USD", line)
+        self.assertIn("Alia Soul", line)
+
+    def test_it_is_always_one_line(self):
+        """It becomes a commit subject; a newline would split the message."""
+        before = dataset([departure(f"d{i}", price=1000.0) for i in range(8)])
+        after = dataset([departure(f"d{i}", price=1000.0 + i * 50) for i in range(8)]
+                        + [departure("new", start="2027-06-05")])
+        for report in (compare(before, after), compare(after, before)):
+            self.assertNotIn("\n", headline(report))
 
 
 class TestSoldOutAndWithdrawnAreDifferent(unittest.TestCase):

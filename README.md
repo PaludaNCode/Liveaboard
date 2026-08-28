@@ -133,6 +133,7 @@ tests/            stdlib unittest, no dependencies
 | `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
+| `data/CHANGES.md` | what moved on each refresh, newest first | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
 The dataset is **regenerated, not edited**. `promote` is pure — candidate, fees,
@@ -148,6 +149,34 @@ ones cannot. It carries ratings, cabin counts, occupancy, amenities and
 remaining capacity — none of which the site uses today — so a question asked
 next month can still be put to this month's data. Every run is a commit, so
 `git log -p data/` is the history.
+
+### Noticing that something moved
+
+The history was always there and nobody could read it: five new departures
+show up as `886` where yesterday said `881`, and a two-hundred-dollar rise is
+a two-megabyte JSON diff. `changes` turns two datasets into a few lines —
+which boats and trips appeared, which departures were added or withdrawn,
+which fares moved and by how much, which fees changed, what sold out.
+
+```bash
+PYTHONPATH=src python3 -m liveaboard.cli changes                    # vs HEAD~1
+PYTHONPATH=src python3 -m liveaboard.cli changes --revision HEAD~7  # a week
+PYTHONPATH=src python3 -m liveaboard.cli changes --headline         # one line
+```
+
+The daily refresh writes it to three places, because a workflow run summary
+disappears when the run ages out: the run summary, `data/CHANGES.md`
+(committed, newest first), and the subject of the data commit itself — so
+`git log --oneline data/` reads as the changelog rather than 23 identical
+lines saying `data: daily refresh`.
+
+Four distinctions decide whether it is worth reading, and all four are
+false positives it used to report: a euro figure moving because the ECB moved
+is not an operator repricing; a fare moving by one dollar is the source
+re-rounding (174 of them in one run); a vessel that lost *every* departure at
+once is a failed fetch, not a cancelled season; and a field a parser has just
+learned to read has not changed — the first run after `availability` was
+parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
 ## Next
 
