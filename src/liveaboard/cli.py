@@ -56,7 +56,9 @@ def cmd_build(args: argparse.Namespace) -> int:
     data = args.data or default_data()
     dataset = Dataset.load(data)
     print(f"building from {data}")
-    target = render(dataset, args.out)
+    # The dataset's own folder is where the downloadable copies come from, so a
+    # build from the seed publishes the seed's files and never the live ones.
+    target = render(dataset, args.out, data_dir=Path(data).parent)
     payload_size = target.stat().st_size
     print(f"built {target} ({payload_size / 1024:.0f} KB)")
     print(

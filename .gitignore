@@ -10,3 +10,8 @@ venv/
 data/snapshots/
 
 .DS_Store
+
+# Published beside the page, generated at build time — the dataset is
+# already committed under data/, and a second copy per refresh would double
+# what the repository grows by to hold two identical files.
+site/data/

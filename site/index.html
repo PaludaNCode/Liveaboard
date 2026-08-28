@@ -593,6 +593,29 @@ a { color:var(--accent); }
   .anchor { right:5px; }
   .site-footer { max-height:60vh; }
 }
+
+/* The data panel: downloads and the last refresh's report.
+   Spans the footer grid because a change report is fixed-width text and
+   wrapping it into a narrow column makes the columns meaningless. */
+.footer-wide { grid-column: 1 / -1; }
+.downloads { list-style: none; margin: 0 0 1.2em; padding: 0; }
+.downloads li { margin: 0 0 .45em; }
+.downloads a { font-weight: 600; }
+.dl-note { color: var(--ink-dim); }
+/* Its own scroller: the report is preformatted and must never be the reason
+   the page itself scrolls sideways. */
+.changelog {
+  overflow-x: auto;
+  max-height: 20em;
+  overflow-y: auto;
+  background: var(--row-alt);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: .8em 1em;
+  font-size: .82em;
+  line-height: 1.45;
+  white-space: pre;
+}
 </style>
 </head>
 <body>
@@ -862,6 +885,49 @@ a { color:var(--accent); }
         you would look for them: the Giannis&nbsp;D is Abu Nuhas, Numidia is the
         Brothers, Shaab Claudio is Fury Shoal.
       </p>
+    </div>
+    <div class="footer-wide">
+      <h3>The data itself</h3>
+      <p>
+        Everything on this page, in files you can keep. A trip whose operator
+        never stated its required extras has no total here either &mdash; the
+        column is empty and says why, because turning &ldquo;not disclosed&rdquo;
+        into a number the moment it reaches a spreadsheet would make the least
+        forthcoming operators look like the cheapest.
+      </p>
+      <ul class="downloads"><li><a href="data/egypt-2027.csv" download>Every trip as a spreadsheet</a> <span class="dl-note">&mdash; one row per departure, with the advertised price, the fees and the total</span></li><li><a href="data/egypt-2027.json" download>The dataset</a> <span class="dl-note">&mdash; exactly what the page is built from</span></li><li><a href="data/CHANGES.md" download>What changed, refresh by refresh</a> <span class="dl-note">&mdash; boats and trips added, fares moved, berths sold out</span></li></ul>
+      <h3>What changed on the last refresh</h3>
+      <pre class="changelog">changes: a32d170 -&gt; 2026-08-28
+==============================
+
+!! 10 vessel-month(s) lost every departure while the vessel kept selling other months — a page that came back unreadable, not a withdrawn month. Those sailings are missing from the site until the next crawl reads them.
+  Blue Horizon 2027-05
+  DUNE Longara 2027-05
+  Discovery II 2027-06
+  Discovery II 2027-08
+  Emperor Asmaa 2027-05
+  Ocean Lovers 2027-07
+  Red Sea Aggressor V 2027-08
+  Yachtiano 2027-05
+  Yachtiano 2027-06
+  Yachtiano 2027-07
+
+new departures (6)
+  2027-07-24  Oceanix                Brothers, Daedalus, Elphinstone        1,154 USD
+  2027-08-02  Ghazala Adventure      North, Tiran &amp; Dahab                   1,608 USD
+  2027-08-09  Ghazala Adventure      North: Wrecks &amp; Reefs                  1,571 USD
+  2027-08-16  Ghazala Adventure      North: Wrecks &amp; Reefs                  1,571 USD
+  2027-08-23  Ghazala Adventure      Brothers, Daedalus, Elphinstone        1,684 USD
+  2027-08-30  Ghazala Adventure      North &amp; Brothers                       1,748 USD
+
+withdrawn (3)
+  2027-07-24  AVO                    Daedalus &amp; Elphinstone                
+  2027-08-12  Blue                   Brothers, Daedalus and Elphinstone    
+  2027-08-19  Blue                   North &amp; Tiran                         
+
+174 further fare(s) moved by less than 2 — the source re-rounding, not a reprice; counted here rather than listed above
+
+fx: USD 0.858738 -&gt; 0.858885 (+0.02%) — every euro figure converted from USD moves with it; no operator changed a price</pre><p><a href="data/CHANGES.md">Every refresh before this one</a>.</p>
     </div>
     <div>
       <h3>Currency</h3>

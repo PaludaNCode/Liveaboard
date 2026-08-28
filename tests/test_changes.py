@@ -117,6 +117,60 @@ class TestChangesThatDidNotHappen(unittest.TestCase):
         self.assertEqual(report.vessels_gone, [])
         self.assertEqual(len(report.withdrawn), 2)
 
+    def test_a_month_that_went_unread_is_not_five_withdrawals(self):
+        """The real one, reported by the site's owner. A vessel page is fetched
+        once per season month, so one unreadable response empties that boat's
+        month while the other three come back fine -- and the vessel-level
+        guard never fires, because the boat did not lose everything.
+
+        DUNE Longara's five May sailings were reported as withdrawn while
+        liveaboard.com was still selling every one of them."""
+        may = [departure(f"m{i}", start=f"2027-05-{i+1:02}") for i in range(5)]
+        june = [departure(f"j{i}", start=f"2027-06-{i+1:02}") for i in range(4)]
+        report = compare(dataset(may + june), dataset(june))
+        self.assertEqual(report.months_gone, ["Alia Soul 2027-05"])
+        self.assertEqual(report.withdrawn, [])
+        self.assertIn("came back unreadable", render(report))
+
+    def test_a_month_a_vessel_barely_sold_is_still_withdrawn(self):
+        """Below the threshold a boat can legitimately lose its only sailing
+        that month, and calling that an unread page would hide a real change."""
+        may = [departure("m0", start="2027-05-01")]
+        june = [departure(f"j{i}", start=f"2027-06-{i+1:02}") for i in range(4)]
+        report = compare(dataset(may + june), dataset(june))
+        self.assertEqual(report.months_gone, [])
+        self.assertEqual(len(report.withdrawn), 1)
+
+    def test_a_vessel_losing_everything_is_reported_once_not_twice(self):
+        """Both guards match when a boat vanishes entirely. It is one event."""
+        deps = [departure(f"d{i}", start=f"2027-05-{i+1:02}")
+                for i in range(MISSING_VESSEL_MIN + 1)]
+        report = compare(dataset(deps), dataset([]))
+        self.assertEqual(report.vessels_gone, ["Alia Soul"])
+        self.assertEqual(report.months_gone, [])
+
+    def test_a_rate_nothing_is_priced_in_is_not_reported(self):
+        """The FX table carries every rate the feed publishes. GBP is in it and
+        no vessel here quotes GBP, but it sorted first -- so a GBP wobble was
+        reported as the reason every euro figure on the page had moved."""
+        report = compare(
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.858885}}),
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.900000, "USD": 0.858885}}),
+        )
+        self.assertFalse(report.fx_moved)
+        self.assertNotIn("GBP", render(report))
+
+    def test_the_rate_the_fares_are_quoted_in_is_reported(self):
+        report = compare(
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.858885}}),
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.900000}}),
+        )
+        self.assertEqual([m.currency for m in report.fx], ["USD"])
+
     def test_a_currency_switch_is_not_a_price_move(self):
         """1000 USD against 1000 EUR is not a flat price; it is two numbers
         that cannot be compared."""
