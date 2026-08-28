@@ -140,9 +140,14 @@ Break these and the site starts lying quietly rather than failing loudly.
   Brother* name the two islands separately, and folding either into the pair
   would delete which island the trip dives. *Ras Mohamed*/*Ras Mohammed*/*Ras
   Muhammad* are all real transliterations and none is wrong, so this is a fold
-  and not a correction; what picks the spelling is not the title count but the
-  parsed `dive_sites`, which say *ras mohammed* 101 times out of 101 — the
-  column was disagreeing with the filter chip beside it. Do not lengthen this
+  and not a correction. **What picks a spelling is `SITE_HINTS`, not a count of
+  the data.** The parsed `dive_sites` agree unanimously on any reef only
+  because the alias table folds them there — quoting that agreement as evidence
+  is this project's own choice reflected back at itself, and an earlier version
+  of this note made exactly that mistake. The real reason to fold a title is
+  that the trip-name column and the filter chip beside it must not disagree,
+  which is also why `SITE_HINTS` and the title tables have to move together:
+  *Fury Shoals* was changed in both when the two drifted apart. Do not lengthen this
   table without counting the spellings first, and count in the *names* rather
   than the titles: counting folded titles hid *Ras Muhammad* entirely.
 - **Zero runtime dependencies**, stdlib only, and the site stays one

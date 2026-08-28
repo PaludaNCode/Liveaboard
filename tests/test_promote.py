@@ -1363,7 +1363,7 @@ class TestTheReefsDescriptionsName(unittest.TestCase):
         for reef in ("Shaab Maksur", "Shaab Claudio", "Abu Galawa",
                      "Shaab Hamam", "El Malahi", "Shilineat", "Abu Fendera"):
             with self.subTest(reef=reef):
-                self.assertEqual(self.sites(f"Dive 4 at {reef}"), ["fury shoal"])
+                self.assertEqual(self.sites(f"Dive 4 at {reef}"), ["fury shoals"])
 
     def test_st_johns_reefs_fold_into_st_johns(self):
         for reef in ("Umm Aruk", "Cave Reef", "Small Gota"):
@@ -1406,7 +1406,7 @@ class TestTheReefsDescriptionsName(unittest.TestCase):
         for name, expected in (("Daedalus Reef", "daedalus"),
                                ("Elphinstone", "elphinstone"),
                                ("St John's", "st johns"),
-                               ("Fury Shoal", "fury shoal"),
+                               ("Fury Shoal", "fury shoals"),
                                ("Gubal Island", "gubal")):
             with self.subTest(name=name):
                 self.assertEqual(self.sites(name), [expected])

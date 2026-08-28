@@ -352,10 +352,17 @@ REEF_ALIASES = (
     # Ras Mohammed, three ways: "Ras Mohamed" (15), "Ras Mohammed" (6) and
     # "Ras Muhammad" (2). All three are real transliterations of the Arabic,
     # so none is a misspelling and this belongs here rather than in
-    # TITLE_FIXES. What settles the spelling is not the title count but the
-    # dive sites parsed from the operators' own descriptions, which say "ras
-    # mohammed" 101 times out of 101 -- the dataset had already picked one,
-    # and the column was disagreeing with the filter chip beside it.
+    # TITLE_FIXES.
+    #
+    # What settles it is that SITE_HINTS already calls the reef "ras mohammed"
+    # and folds the rest onto it, so every filter chip says that -- and a title
+    # column printing "Ras Mohamed" beside a chip reading "ras mohammed" is one
+    # page disagreeing with itself. Not, as an earlier version of this comment
+    # claimed, that the parsed sites "say ras mohammed 101 times out of 101":
+    # they do, but only because the alias table put it there. That count is
+    # this project's own choice reflected back, not evidence from the
+    # operators. The title plurality (15 to 6) points the other way and is
+    # overruled by the need for the two to agree.
     (re.compile(r"\bRas\s+M[ou]h?a?mm?[ae]d\b", re.I), "Ras Mohammed"),
 )
 """One spelling for the three reefs the fleet writes several ways.
@@ -1090,7 +1097,7 @@ def _most_common(values) -> int:
 
 SITE_HINTS = (
     "brothers", "daedalus", "elphinstone", "thistlegorm", "abu nuhas",
-    "rocky island", "zabargad", "st johns", "st john's", "fury shoal",
+    "rocky island", "zabargad", "st johns", "st john's", "fury shoals",
     "sataya", "ras mohammed", "tiran", "salem express", "rosalie moller",
     "gubal", "abu dabab", "samadai", "habili ali", "dangerous reef",
     "gota kebir",
@@ -1129,9 +1136,12 @@ SITE_ALIASES: dict[str, str] = {
     "rocky": "rocky island",
     "st john": "st johns",
     "saint johns": "st johns",
-    # Plurals. The match is on whole words, so "Fury Shoals" misses a hint
-    # spelled "fury shoal" -- and the plural is what most titles use.
-    "fury shoals": "fury shoal",
+    # Plurals. The match is on whole words, so one spelling misses a hint
+    # written as the other. The plural is canonical because it is what the
+    # operators mostly write -- 17 names against 12 -- and because the title
+    # column and the filter chip have to agree: printing "Fury Shoals" beside
+    # a chip reading "fury shoal" is the mismatch this folding exists to end.
+    "fury shoal": "fury shoals",
     "brother islands": "brothers",
     "brother island": "brothers",
     # The individual reefs in the Straits of Tiran, and the signature dive at
@@ -1209,17 +1219,17 @@ SITE_ALIASES: dict[str, str] = {
     # A typo in the operator's own day plan, on three trips.
     "gota abu ramad": "gota abu ramada",
     # The Fury Shoals, reef by reef.
-    "shaab maksur": "fury shoal",
-    "shaab claudio": "fury shoal",
-    "shaab claudia": "fury shoal",
-    "abu galawa": "fury shoal",
-    "gotat abu galawa": "fury shoal",
-    "shaab hamam": "fury shoal",
-    "el malahi": "fury shoal",
-    "malahi": "fury shoal",
-    "shilineat": "fury shoal",
-    "abu fendera": "fury shoal",
-    "abu fandira": "fury shoal",
+    "shaab maksur": "fury shoals",
+    "shaab claudio": "fury shoals",
+    "shaab claudia": "fury shoals",
+    "abu galawa": "fury shoals",
+    "gotat abu galawa": "fury shoals",
+    "shaab hamam": "fury shoals",
+    "el malahi": "fury shoals",
+    "malahi": "fury shoals",
+    "shilineat": "fury shoals",
+    "abu fendera": "fury shoals",
+    "abu fandira": "fury shoals",
     # St John's, reef by reef.
     "umm aruk": "st johns",
     "cave reef": "st johns",
