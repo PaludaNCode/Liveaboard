@@ -184,25 +184,6 @@
 
   /* ---------- columns ---------- */
 
-  /* The entry bar an operator stated, and whether the two sources agree on it.
-   *
-   * This is not the inferred "level" the site used to print beside a route and
-   * a theme; those were ours and are gone. This is the operator's own claim,
-   * and where liveaboard.com and PADI Travel state different bars the stricter
-   * is shown -- so the visitor is told, rather than shown one number as though
-   * it were settled. A trip nobody has read shows nothing at all. */
-  function entry(itin) {
-    var req = itin.requirements;
-    if (!req || !req.min_level) return null;
-    var label = D.level_labels[req.min_level] || req.min_level;
-    var note = req.notes || "";
-    return {
-      label: label,
-      disputed: note.indexOf("Sources disagree") === 0 || note.indexOf("Sources disagree") > 0,
-      note: note
-    };
-  }
-
   function disclosure(dep) {
     if (!dep.fees_known) return ["none", "not looked at"];
     if (!dep.mandatory_known) return ["partial", "optional only"];
@@ -353,23 +334,6 @@
         if (d.availability === "limited") return '<span class="pill few">few left</span>';
         if (d.availability === "available") return '<span class="pill open">available</span>';
         return '<span class="dim">—</span>';
-      } },
-    /* Sorted by how demanding the bar is, not alphabetically: "Advanced + 100
-       dives" sorting under "Open Water" would put the hardest trip above the
-       easiest. */
-    { k: "entry", t: "Entry",
-      v: function (d, i) {
-        var e = entry(i);
-        if (!e) return -1;
-        var order = Object.keys(D.level_labels);
-        return order.indexOf(i.requirements.min_level);
-      },
-      show: function (d, i) {
-        var e = entry(i);
-        if (!e) return '<span class="dim">not stated</span>';
-        if (!e.disputed) return esc(e.label);
-        return '<span class="pill partial" title="' + esc(e.note) + '">' +
-          esc(e.label) + " ?</span>";
       } },
     { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
       show: function (d) {
