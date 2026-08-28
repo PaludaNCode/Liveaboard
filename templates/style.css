@@ -14,6 +14,19 @@
   --later:#a8500f; --later-soft:#fbeee2;
   --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481; --sold:#9c3535;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
+  /* A marked row, painted on the pinned identity columns only -- never across
+     the whole row, and that is a contrast result rather than a style choice.
+     Tinting the full row puts a colour behind the Places and Disclosure pills,
+     and those are the two weakest colours in this palette: --unknown is 4.72:1
+     on plain white, so *any* tint at all drops it under AA. There is no fill
+     light enough to be visible and still safe -- at #f4f9fd, nearly white, it
+     is still 4.45.
+     The pinned cells carry dates, the boat and the guest count in --ink at
+     14:1, so a much stronger tint is safe there, and they are the columns that
+     stay on screen at every scroll position anyway. Which is the whole point:
+     the mark has to be legible when you have scrolled 900px right to read
+     Mandatory fees. */
+  --row-marked:#dbe9f5; --row-marked-edge:var(--accent);
 
   /* The pinned columns, left to right, and therefore each one's offset from
      the one before. Fixed widths rather than floors: content wider than a
@@ -66,6 +79,7 @@
     --later:#e8a86a; --later-soft:#2e2015;
     --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
     --row-alt:#111820; --row-hover:#1b2531;
+    --row-marked:#203446; --row-marked-edge:var(--accent);
   }
 }
 :root[data-theme="dark"] {
@@ -75,6 +89,7 @@
   --later:#e8a86a; --later-soft:#2e2015;
   --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
   --row-alt:#111820; --row-hover:#1b2531;
+  --row-marked:#203446; --row-marked-edge:var(--accent);
 }
 
 * { box-sizing: border-box; }
@@ -234,6 +249,17 @@ tbody td.cost { position:relative; }
 tbody tr.row.alt { background:var(--row-alt); }
 tbody tr.row:hover { background:var(--row-hover); }
 
+/* A row the visitor has marked, to keep their place.
+ *
+ * The table is 2400px wide on a desktop and the window is not, so reading
+ * Mandatory fees means scrolling until the boat's name is gone. Hover tracks
+ * the pointer and nothing else, which is no help the moment the pointer moves
+ * to the scrollbar -- so the number and the row it belongs to are separated by
+ * a screen's width and nothing joins them. This does.
+ *
+ * The paint is on the pinned columns, below, not here: see --row-marked for
+ * why a full-row tint cannot be made accessible. */
+
 .num {
   font-family:var(--font-mono);
   font-variant-numeric:tabular-nums;
@@ -274,6 +300,16 @@ tbody tr.row.alt .stick1, tbody tr.row.alt .stick2,
 tbody tr.row.alt .stick3, tbody tr.row.alt .stick4 { background:var(--row-alt); }
 tbody tr.row:hover .stick1, tbody tr.row:hover .stick2,
 tbody tr.row:hover .stick3, tbody tr.row:hover .stick4 { background:var(--row-hover); }
+/* Where a mark is actually drawn. The pinned cells already paint their own
+   background -- they have to, or the columns sliding beneath would show
+   through -- so this is both the safe place to tint and the one that stays
+   on screen however far right the table is scrolled. */
+tbody tr.row.marked .stick1, tbody tr.row.marked .stick2,
+tbody tr.row.marked .stick3, tbody tr.row.marked .stick4,
+tbody tr.row.marked:hover .stick1, tbody tr.row.marked:hover .stick2,
+tbody tr.row.marked:hover .stick3, tbody tr.row.marked:hover .stick4 {
+  background:var(--row-marked);
+}
 thead th.stick1, thead th.stick2, thead th.stick3, thead th.stick4 { z-index:25; }
 
 /* The control that opens the bill, at the start of the row and pinned with the
@@ -295,6 +331,15 @@ td.expander, th.expander {
 thead th.expander { z-index:25; }
 tbody tr.row.alt .expander { background:var(--row-alt); }
 tbody tr.row:hover .expander { background:var(--row-hover); }
+/* The mark itself: a bar down the pinned first cell, which is the one column
+   that is on screen at every scroll position and every width. Drawn with an
+   inset shadow rather than a border so it costs the row no height and shifts
+   no column by a pixel -- the same reason the anchor bar is positioned rather
+   than laid out. */
+tbody tr.row.marked .expander, tbody tr.row.marked:hover .expander {
+  background:var(--row-marked);
+  box-shadow:inset 3px 0 0 0 var(--row-marked-edge);
+}
 
 /* And the bill itself stays put while the table scrolls under it. The detail
    cell spans the full 2446px, so its contents would otherwise sit wherever the
