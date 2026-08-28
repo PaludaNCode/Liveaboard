@@ -151,14 +151,30 @@ jobs:
 
       # Before the commit, while HEAD is still yesterday's dataset. Afterwards
       # the comparison would be against the run's own output.
+      #
+      # Three destinations, because a run summary is gone once the run ages
+      # out: the summary for whoever opens the run, data/CHANGES.md for the
+      # durable history, and one line captured for the commit subject so
+      # `git log --oneline data/` reads as the changelog it always was.
       - name: Report what changed
+        id: changed
         run: |
           PYTHONPATH=src python3 -m liveaboard.cli changes \
             --data ${{ steps.dataset.outputs.path }} \
             --revision HEAD \
+            --append data/CHANGES.md \
             >> "$GITHUB_STEP_SUMMARY"
+          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --data ${{ steps.dataset.outputs.path }} --revision HEAD --headline)
+          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
 
       - name: Commit changes
+        # Through the environment, not `${{ }}`: the headline carries boat
+        # names that came off somebody else's web page, and interpolating
+        # those straight into a shell line is how a scraped string becomes a
+        # command.
+        env:
+          HEADLINE: ${{ steps.changed.outputs.headline }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -168,8 +184,9 @@ jobs:
             exit 0
           fi
           # Every run is a commit, so the git history doubles as price history:
-          # `git log -p data/` shows exactly which fee moved, and when.
-          git commit -m "data: daily refresh $(date -u +%Y-%m-%d)"
+          # `git log -p data/` shows exactly which fee moved, and when — and
+          # the subject says which, so finding it does not mean opening 2 MB.
+          git commit -m "data: daily refresh $(date -u +%Y-%m-%d) — ${HEADLINE}"
 
           # A scrape takes minutes, and anything can land meanwhile -- the
           # other scheduled job, or a merge. A plain push is rejected and the

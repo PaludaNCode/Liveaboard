@@ -6,9 +6,10 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 432 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 445 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
+PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
 python3 tools/make_seed.py                             # regenerate seed data
 ```
 
@@ -103,6 +104,14 @@ Break these and the site starts lying quietly rather than failing loudly.
   slow or unreachable, against 0.6 seconds without it (#59). Fonts are the
   visitor's own now. Adding a host back is adding a way for the page to be
   blank on somebody else's network.
+- **A change report never drops a row silently.** `changes` caps its blocks and
+  suppresses sub-unit price moves as source rounding — and says so, with a
+  count, every time. A truncated list that does not admit it reads as "that was
+  everything", which is exactly the failure this project exists to correct in
+  other people. The same rule kills four false positives it used to report: an
+  FX move is not a reprice, a vessel losing *every* departure is a failed fetch
+  and not a cancelled season, a newly parsed field has not changed, and a
+  currency switch is not a price move.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
 - **The committed dataset must match what `promote` produces from the committed
