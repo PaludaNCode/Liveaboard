@@ -15,7 +15,12 @@ So this probes candidate slugs and then **verifies the record is a boat**:
   exists twice, as `deep-breath-diving-safari-the-iceberg` (kind 0, no
   itineraries) and as `my-iceberg` (kind 10, the boat). A page's ``<title>`` is
   no help -- the boat's says "PADI Dive Center".
-- ``countrySlug`` must be the country we are mapping.
+- The trips it sells must name a port we already sail from. **Not**
+  ``countrySlug``: that field is the *operator's registered country*, and
+  filtering on it dropped all three Red Sea Aggressors, which read
+  ``united-states-of-america-usa`` while sailing Hurghada, Port Ghalib and
+  Hamata. Where a boat cruises is in its itineraries, not in its owner's
+  address.
 - The trip lengths it sells are printed against the ones we hold, so a person
   can reject a pairing the slug and the kind both accept.
 
@@ -127,6 +132,10 @@ def main() -> int:
             if itinerary.get(key):
                 ports[boat].add(itinerary[key])
 
+    # The port vocabulary we already sail, taken from our own data rather than
+    # hard-coded: it is what decides whether a PADI record cruises where we do.
+    harbours = {p.lower() for group in ports.values() for p in group}
+
     todo = [b for b in data["boats"] if b["id"] not in mapped and b["id"] not in absent]
     todo.sort(key=lambda b: -departures[b["id"]])
     if args.limit:
@@ -150,8 +159,10 @@ def main() -> int:
             if kind != str(LIVEABOARD_KIND):
                 print(f"skip {boat['name']:<26} {slug:<28} shop kind {kind!r}, not a liveaboard")
                 continue
-            if facts.get("countrySlug") not in (args.country, None):
-                print(f"skip {boat['name']:<26} {slug:<28} country {facts.get('countrySlug')!r}")
+            titles = " | ".join(r["title"] for r in payload["results"]).lower()
+            if harbours and not any(port in titles for port in harbours):
+                print(f"skip {boat['name']:<26} {slug:<28} names no port we sail from "
+                      f"(operator country {facts.get('countrySlug')!r})")
                 continue
 
             theirs = sorted({

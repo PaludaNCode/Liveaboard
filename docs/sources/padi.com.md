@@ -19,7 +19,7 @@ Everything below answers 200 over plain HTTP, no browser.
 
 | URL | What it gives |
 |---|---|
-| `sitemap-travel-dive-operators-page_1.xml` | **All 269 liveaboards, 58 of them `/liveaboard/egypt/`.** The whole inventory in one 3 MB file |
+| `sitemap-travel-dive-operators-page_1.xml` | 269 liveaboards, 58 of them `/liveaboard/egypt/`. A starting set, **not** the whole inventory — see below |
 | `/liveaboard/egypt/{vessel-slug}/` | Server-rendered. Vessel, fleet, JSON-LD `Product`, every itinerary title, PADI courses taught, spec table |
 | `/liveaboard/egypt/{vessel}/{itinerary-slug}/` | `<title>` and `<meta description>` per trip, server-rendered — and **nothing else**: the body is filled by XHR |
 | `/liveaboard-diving/egypt/` | Country landing page. Four featured vessels; the sitemap is the real inventory |
@@ -42,6 +42,51 @@ every run after the first offline, for the same reason
 | Requirement **vocabulary** | `window.info.shop` | Verbatim in `padi_com.py` |
 | Requirement **values** | Not in the HTML | AngularJS XHR; see below |
 | Next few departures | JSON-LD `offers[]` | See traps: not a departure feed |
+
+## Matching a PADI vessel to one of ours
+
+`data/padi_aliases.json` maps our `boat_id` to a PADI slug. **Hand-maintained**,
+because nothing automatic survives this data:
+
+- Similarity ranks garbage first. "Destiny" scores 0.67 against PADI's "eriny";
+  the real "New Sambo" pair scores 0.59. No threshold separates them.
+- Containment is no better, and three wrong pairs were committed and removed
+  proving it. Dive centres, boats, dive sites and fleets all borrow each other's
+  names.
+- **Two hulls can share a name, an operator *and* an itinerary.** `amelie-safari`
+  (id 18156, 6 cabins) and `amelie-adventures` (id 93484, 8 cabins) are separate
+  boats of one operator, both selling a 3-night *Best of Hurghada*. Only the
+  cabin count tells them apart. Any matcher that would have merged those is
+  wrong regardless of how well it scores elsewhere.
+
+So a pairing needs evidence from the hull, and `tools/probe_padi_slugs.py`
+gathers it: slug candidates (PADI prefixes many hulls `my-`, `mv-`, `ms-`), then
+`window.shop.kind == 10`, then the ports its trips name, then trip lengths and
+cabin count printed against ours for a person to accept or reject.
+
+**`SHOP_KIND` is the record type**, and it matters: `0` Dive center, `10`
+Liveaboard, `20` Dive resort. "Iceberg" exists twice — as
+`deep-breath-diving-safari-the-iceberg` (kind 0, no itineraries) and as
+`my-iceberg` (kind 10, the boat). A page's `<title>` is no guide at all: the
+boat's reads *"My Iceberg | Hurghada City | PADI Dive Center"*.
+
+**`countrySlug` is the operator's registered country, not the cruising ground.**
+All three Red Sea Aggressors read `united-states-of-america-usa` while sailing
+Hurghada, Port Ghalib and Hamata — Aggressor Fleet is American. Filtering on it
+silently dropped three real Egyptian boats, so the probe tests the ports its
+itineraries name instead.
+
+State as of 2026-08-28: **36 boats paired** of 65, `odyssey` held pending a call,
+29 unreviewed. `absent` records a boat looked for and not found, which
+`is_reviewed()` distinguishes from one nobody has checked — both give no slug,
+and a tail that passes as settled never gets finished. A test asserts every key
+names a boat we actually hold, because a key that matches nothing fails silently.
+
+Specs disagree by small amounts and that is expected, not disqualifying: 26 of 32
+probe-verified pairs agree on cabins exactly and the other six are off by one or
+two, which is two sources counting a crew berth differently. Amelie is the reason
+a small delta still gets read rather than waved through — there, two real hulls
+differed by exactly two cabins.
 
 ## Traps
 

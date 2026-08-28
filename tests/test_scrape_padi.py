@@ -328,5 +328,48 @@ class TestParse(unittest.TestCase):
         self.assertNotIn("red sea charm", str(itinerary["name"]).lower())
 
 
+class TestAliasMap(unittest.TestCase):
+    """The committed map, and the distinction it exists to keep."""
+
+    MAP = {
+        "aliases": {"iceberg": "my-iceberg", "amelie": "amelie-safari"},
+        "absent": ["golden-dolphin"],
+    }
+
+    def test_a_pair_resolves(self) -> None:
+        self.assertEqual(PadiComAdapter.vessel_for("iceberg", self.MAP), "my-iceberg")
+
+    def test_absent_and_unreviewed_both_resolve_to_nothing(self) -> None:
+        self.assertIsNone(PadiComAdapter.vessel_for("golden-dolphin", self.MAP))
+        self.assertIsNone(PadiComAdapter.vessel_for("sea-serpent", self.MAP))
+
+    def test_but_they_are_not_the_same_state(self) -> None:
+        """Somebody looked and found nothing, versus nobody looked yet.
+
+        Both give no slug, so only this tells a finished review from an
+        unstarted one -- and a tail that passes as settled never gets finished.
+        """
+        self.assertTrue(PadiComAdapter.is_reviewed("golden-dolphin", self.MAP))
+        self.assertFalse(PadiComAdapter.is_reviewed("sea-serpent", self.MAP))
+
+    def test_the_committed_map_keys_on_real_boat_ids(self) -> None:
+        """Every key must be a boat we actually hold.
+
+        A key that matches nothing fails silently -- vessel_for returns None,
+        which is indistinguishable from unreviewed -- and that is exactly how
+        the first version of this file went wrong, keying "MY Odyssey
+        Liveaboard" as its folded name when its boat_id is "odyssey".
+        """
+        import json
+        from pathlib import Path
+
+        aliases = json.loads(Path("data/padi_aliases.json").read_text())
+        boats = {b["id"] for b in json.loads(Path("data/egypt-2027.json").read_text())["boats"]}
+        unknown = sorted(set(aliases["aliases"]) - boats)
+        self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
+        stale = sorted(set(aliases.get("absent") or []) - boats)
+        self.assertEqual(stale, [], f"absent entries matching no boat: {stale}")
+
+
 if __name__ == "__main__":
     unittest.main()
