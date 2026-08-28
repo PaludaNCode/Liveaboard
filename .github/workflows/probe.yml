@@ -34,6 +34,10 @@ on:
         description: "vessel:month pairs to check for a remaining-berth count"
         type: string
         default: "dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7"
+      booking_tours:
+        description: "boatid:tourid pairs to read BookingStep1 for (#79)"
+        type: string
+        default: "6240:415714"
 
 permissions:
   contents: read
@@ -88,6 +92,19 @@ jobs:
         run: |
           python3 tools/probe_unread.py \
             --retries "${{ inputs.unread_retries || 2 }}"
+
+      # #79, and the last place a berth count could be. The vessel page does
+      # not state one anywhere, and the site's owner pointed at the booking
+      # flow. Both ids are already in the archive -- every Event.@id is
+      # LA-{x}-{boatID}-{tourID} -- so the URL is built rather than crawled.
+      #
+      # Reading only: step one of a booking is a page with a form on it, a GET
+      # renders it and submits nothing, and the polite fetcher asks robots.txt
+      # first. A refusal there is the answer, not an obstacle.
+      - name: Read the booking page (#79)
+        run: |
+          python3 tools/probe_booking.py \
+            --tours "${{ inputs.booking_tours || '6240:415714' }}"
 
       # Thirteen of the fifteen vessels on the skip list are not linked from
       # any Egypt listing, so the crawl never reaches them -- and from inside
