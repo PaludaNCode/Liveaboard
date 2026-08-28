@@ -37,7 +37,11 @@ on:
       booking_tours:
         description: "boatid:tourid pairs to read BookingStep1 for (#79)"
         type: string
-        default: "6240:415714"
+        # Three shapes, not one: the trip the owner pointed at (three cabins,
+        # all discounted, all with a berth count), a sold-out sailing, and a
+        # longer, dearer week on another vessel. A cabin parser proved against
+        # a single page is a parser proved against one page's coincidences.
+        default: "6240:415714,6568:412135,6565:421166"
 
 permissions:
   contents: read
@@ -104,7 +108,8 @@ jobs:
       - name: Read the booking page (#79)
         run: |
           python3 tools/probe_booking.py \
-            --tours "${{ inputs.booking_tours || '6240:415714' }}" \
+            --tours "${{ inputs.booking_tours || '6240:415714,6568:412135,6565:421166' }}" \
+            --chars 1200 \
             --dump-cabins
 
       # Thirteen of the fifteen vessels on the skip list are not linked from

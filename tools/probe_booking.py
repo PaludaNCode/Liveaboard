@@ -70,6 +70,41 @@ INVENTORY_KEY = re.compile(
 )
 
 
+CABIN_BUTTON = re.compile(r"aria-controls=help-content-cabin-details-\d+", re.I)
+CABIN_SELECT = re.compile(r"<select[^>]*\bname=input-cabin-guests-\d+", re.I)
+
+
+def dump_cabin_section(body: str, width: int) -> None:
+    """Print the whole cabin list as markup, first name button to last cabin.
+
+    The *whole* section, not a window around one phrase. A cabin's price and
+    berth count sit before its guest-count select and its single-occupancy
+    prose sits after it, so a dump that stops at the select shows one end of
+    each cabin and hides the other -- and a parser cutting blocks on the wrong
+    boundary files every cabin's surcharge under the cabin below it. Three
+    cabins in full is what tells the boundaries apart; one cabin in half is
+    what makes them look settled.
+
+    The tail past the last select is what says where the list *ends*, which is
+    the other thing a block parser has to know and cannot infer from repeats.
+    """
+    starts = [m.start() for m in CABIN_BUTTON.finditer(body)]
+    selects = [m.start() for m in CABIN_SELECT.finditer(body)]
+    if not starts or not selects:
+        print("    no cabin markup found -- not dumping a guess at it")
+        return
+
+    start = max(0, starts[0] - 400)
+    # Past the last select by enough to show whatever closes the list.
+    end = min(len(body), selects[-1] + 14000)
+    print(f"    --- cabin section: {len(starts)} name button(s), "
+          f"{len(selects)} select(s), offsets {start:,}-{end:,} ---")
+    section = body[start:end]
+    for offset in range(0, len(section), width):
+        print(section[offset:offset + width])
+    print("    --- end of cabin section ---\n")
+
+
 def departures(limit: int) -> list[tuple[str, str, str]]:
     """(boatID, tourID, name) for a few real departures, from the archive."""
     archive = json.loads(ARCHIVE.read_text(encoding="utf-8"))
@@ -98,7 +133,9 @@ def main() -> int:
     parser.add_argument("--tours", default="",
                         help="explicit boatid:tourid pairs, e.g. 6240:415714")
     parser.add_argument("--dump-cabins", action="store_true",
-                        help="print the markup around each cabin block")
+                        help="print the whole cabin list as markup")
+    parser.add_argument("--dump-width", type=int, default=1600,
+                        help="wrap the markup dump at this many characters")
     args = parser.parse_args()
 
     if args.tours:
@@ -155,17 +192,7 @@ def main() -> int:
                 print(f"      {key}")
 
         if args.dump_cabins:
-            # The markup, not the flattened text. A parser written against
-            # text loses which element holds the price and which the count,
-            # and this project does not write parsers for markup nobody has
-            # read. Anchored on the phrase the page uses for the count.
-            for match in re.finditer(r"spaces? left", result.body, re.I):
-                start = max(0, match.start() - 3000)
-                print(f"    --- markup around {match.group(0)!r} "
-                      f"(offset {match.start():,}) ---")
-                print(result.body[start:match.end() + 600])
-                print()
-                break
+            dump_cabin_section(result.body, args.dump_width)
         print(f"    --- first {args.chars} chars of page text ---")
         print("    " + text[: args.chars])
 
