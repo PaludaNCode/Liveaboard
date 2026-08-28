@@ -30,7 +30,22 @@
     "owner. Both are kind 10 and both sell a 3-night Best of Hurghada, so the",
     "cabin count is the only thing that tells them apart -- 6 against our Amelie's",
     "6, 8 against Amelie Adventures' 8. Two boats sharing a name, an operator and",
-    "an itinerary is the case a name-based match cannot survive."
+    "an itinerary is the case a name-based match cannot survive.",
+    "",
+    "odyssey -> my-odyssey was held back for several rounds after an early",
+    "name-based guess was rejected, and confirmed on evidence instead: six exact",
+    "trip joins, the distinctive Premium Expedition at 10 nights on both sides,",
+    "and PADI's 'BDE' being our 'Brothers - Daedalus - Elphinstone'. Its cabin",
+    "count is one short of ours, which is the noise the fleet owner said to",
+    "expect on specs.",
+    "",
+    "Cabin counts disagree on six of these pairs by one or two -- Topaz 14/16,",
+    "Serenity 10/12, Unity 13/14, Ghazala Explorer 13/12, Emperor Asmaa 9/10,",
+    "odyssey 14/13 -- and the fleet owner accepted all six: two sources counting a",
+    "crew berth differently. Do not 'fix' our figure to match theirs, and do not",
+    "reopen these pairs on the strength of the delta alone. The reason a small",
+    "delta still gets read rather than waved through is the two Amelies, which are",
+    "genuinely different hulls two cabins apart."
   ],
   "reviewed": "2026-08-28",
   "country": "egypt",
@@ -70,8 +85,17 @@
     "blue-storm": "my-blue-storm",
     "red-sea-aggressor-ii": "red-sea-aggressor-ii",
     "red-sea-aggressor-iv": "red-sea-aggressor-iv",
-    "red-sea-aggressor-v": "red-sea-aggressor-v"
+    "red-sea-aggressor-v": "red-sea-aggressor-v",
+    "odyssey": "my-odyssey"
   },
   "absent": [],
-  "unlisted": []
+  "unlisted": [],
+  "specs_differ_accepted": [
+    "topaz",
+    "serenity",
+    "unity",
+    "ghazala-explorer",
+    "emperor-asmaa",
+    "odyssey"
+  ]
 }
