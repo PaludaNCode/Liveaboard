@@ -395,7 +395,7 @@
   var ORDER = [
     "start", "end", "boat", "guests",
     "from", "to", "trip", "sites",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "padi",
     "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, and as much of the same order as 390px holds.
@@ -428,7 +428,7 @@
        Advertised, Nitrox, Mandatory fees -- rather than in a third order
        invented for this width. Scrolling right reads the bill; not scrolling
        still shows the answer. */
-    "total", "base", "nitrox", "later", "perdive",
+    "total", "base", "nitrox", "later", "perdive", "padi",
     "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -447,7 +447,7 @@
      silent -- the row still renders, it just does not answer the question. */
   var TINY_ORDER = [
     "start", "boat",
-    "total", "base", "nitrox", "later", "perdive",
+    "total", "base", "nitrox", "later", "perdive", "padi",
     "guests", "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -465,7 +465,7 @@
      Total, in that order still. */
   var COMPACT_ORDER = [
     "start", "end", "boat",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "padi",
     "guests", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];

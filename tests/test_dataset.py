@@ -678,3 +678,69 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
                 with self.subTest(code=line["code"], key=key):
                     self.assertIsNotNone(value, f"{key} ships as null")
                     self.assertIsNot(value, False, f"{key} ships as false")
+
+
+class TestColumnOrders(unittest.TestCase):
+    """Every column has a place at every width.
+
+    app.js orders its columns from four lists -- one per breakpoint -- and
+    appends anything missing from one, with a console.warn nobody sees unless
+    they have devtools open. A column added to COLS and to the widest list only
+    looks correct on the laptop it was written on and falls off the right-hand
+    edge of a phone, which is the device most people open this page on.
+
+    That is exactly what happened when the "vs PADI" column was added, and it
+    reached production. A warning in a console is not a check; this is.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    ORDERS = ("ORDER", "COMPACT_ORDER", "PHONE_ORDER", "TINY_ORDER")
+
+    def source(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def column_keys(self) -> list[str]:
+        """The `k` of every entry in COLS."""
+        source = self.source()
+        start = source.index("var COLS = [")
+        end = source.index("\n  ];", start)
+        return re.findall(r'\{\s*k:\s*"([^"]+)"', source[start:end])
+
+    def order(self, name: str) -> list[str]:
+        source = self.source()
+        block = re.search(rf"var {name} = \[(.*?)\];", source, re.S)
+        assert block, f"{name} not found in app.js"
+        return re.findall(r'"([^"]+)"', block.group(1))
+
+    def test_columns_were_found(self) -> None:
+        """A guard on the guard: if COLS stops parsing, the rest passes
+        vacuously and the check quietly stops checking."""
+        keys = self.column_keys()
+        self.assertGreater(len(keys), 10, keys)
+        self.assertIn("total", keys)
+
+    def test_every_column_is_placed_at_every_width(self) -> None:
+        keys = set(self.column_keys())
+        for name in self.ORDERS:
+            missing = sorted(keys - set(self.order(name)))
+            self.assertEqual(
+                missing, [],
+                f"{name} does not place {missing}; those columns print last, "
+                f"which on a phone means off the right-hand edge",
+            )
+
+    def test_no_order_names_a_column_that_does_not_exist(self) -> None:
+        """The other direction: a renamed or removed column leaves a dead entry
+        that silently orders nothing."""
+        keys = set(self.column_keys())
+        for name in self.ORDERS:
+            unknown = sorted(set(self.order(name)) - keys)
+            self.assertEqual(unknown, [], f"{name} names columns that are gone: {unknown}")
+
+    def test_the_money_is_never_last(self) -> None:
+        """The Total off the right-hand edge is the failure the phone orders
+        exist to prevent, and it would be silent: the row still renders."""
+        for name in ("PHONE_ORDER", "TINY_ORDER"):
+            order = self.order(name)
+            self.assertLess(order.index("total"), order.index("trip"), name)
