@@ -181,9 +181,11 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             ],
         },
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
-        # Shipped rather than restated in the browser, for the same reason the
-        # fee labels are: one vocabulary, defined once. The page needs them to
-        # print an entry bar the operator stated.
+        # Shipped for the same reason the fee labels are: one vocabulary,
+        # defined once. Nothing on the page prints these today -- the Entry
+        # column that did was removed as noise -- but the bar is in every
+        # itinerary record and in the published downloads, so a reader who
+        # wants it has the vocabulary to read it with.
         "level_labels": {
             level.value: label for level, label in DIVER_LEVEL_LABELS.items()
         },
