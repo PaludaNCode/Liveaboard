@@ -3748,6 +3748,156 @@
    },
    "title": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
   },
+  "red-sea-aggressor-ii::Northern Red Sea & Dahab (Hurghada - Hurghada)": {
+   "boat": "red-sea-aggressor-ii",
+   "boat_name": "Red Sea Aggressor II",
+   "dives": 18,
+   "name": "Northern Red Sea & Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21376,
+   "padi_slug": "northern-red-sea-the-best-of-wreck-diving-hurghada",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "open_water",
+    "recommended_logged_dives": 50
+   },
+   "title": "Northern Red Sea & Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "red-sea-aggressor-ii::Northern Red Sea, the Best of Wreck diving (Hurghada - Hurghada)": {
+   "boat": "red-sea-aggressor-ii",
+   "boat_name": "Red Sea Aggressor II",
+   "dives": 18,
+   "name": "Northern Red Sea, the Best of Wreck diving  (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16768,
+   "padi_slug": "northern-red-sea-ras-mohamed-and-straits-of-tira-2",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "open_water",
+    "recommended_logged_dives": 50
+   },
+   "title": "Northern Red Sea, the Best of Wreck diving  (Hurghada - Hurghada) 7 Nights"
+  },
+  "red-sea-aggressor-iv::Brothers/Daedalus/Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 24,
+   "name": "Brothers/Daedalus/Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 9,
+   "padi_id": 23320,
+   "padi_slug": "brothersdaedaluselphinstone-port-ghalib-hurghada-9",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Brothers/Daedalus/Elphinstone (Hurghada - Port Ghalib) 9 nights"
+  },
+  "red-sea-aggressor-iv::Brothers/Daedalus/Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 24,
+   "name": "Brothers/Daedalus/Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 9,
+   "padi_id": 23319,
+   "padi_slug": "brothersdaedaluselphinstone-port-ghalib-port-gha-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Brothers/Daedalus/Elphinstone (Port Ghalib - Hurghada) 9 nights"
+  },
+  "red-sea-aggressor-iv::Brothers/Daedalus/Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 18,
+   "name": "Brothers/Daedalus/Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16500,
+   "padi_slug": "brothersdaedaluselphinstone-port-ghalib-port-ghali",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Brothers/Daedalus/Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "red-sea-aggressor-iv::Deep South Egypt (Port Ghalib - Port Ghalib)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 18,
+   "name": "Deep South Egypt (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16965,
+   "padi_slug": "deep-south-egypt-port-ghalib-port-ghalib-7-night-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Deep South Egypt (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "red-sea-aggressor-iv::St. Johns & Daedalus (Hurghada - Port Ghalib)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 24,
+   "name": "St. Johns & Daedalus (Hurghada - Port Ghalib)",
+   "nights": 9,
+   "padi_id": 23321,
+   "padi_slug": "st-johns-daedalus-port-ghalib-port-ghalib-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "St. Johns & Daedalus (Hurghada - Port Ghalib) 9 nights"
+  },
+  "red-sea-aggressor-iv::St. Johns & Daedalus (Port Ghalib - Port Ghalib)": {
+   "boat": "red-sea-aggressor-iv",
+   "boat_name": "Red Sea Aggressor IV",
+   "dives": 18,
+   "name": "St. Johns & Daedalus (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16501,
+   "padi_slug": "st-john-daedalus-port-ghalib-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "St. Johns & Daedalus (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "red-sea-aggressor-v::Deep South - Elba Reef (Hamata - Hamata)": {
+   "boat": "red-sea-aggressor-v",
+   "boat_name": "Red Sea Aggressor V",
+   "dives": 26,
+   "name": "Deep South - Elba Reef (Hamata - Hamata)",
+   "nights": 9,
+   "padi_id": 22870,
+   "padi_slug": "deep-south-elba-reef-hamata-hamata-7-nights",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Deep South - Elba Reef (Hamata - Hamata) 9 Nights"
+  },
+  "red-sea-aggressor-v::Deep South - Rocky & Zabargad Islands (Hamata - Hamata)": {
+   "boat": "red-sea-aggressor-v",
+   "boat_name": "Red Sea Aggressor V",
+   "dives": 26,
+   "name": "Deep South - Rocky & Zabargad Islands (Hamata - Hamata)",
+   "nights": 9,
+   "padi_id": 22871,
+   "padi_slug": "deep-south-rocky-zabargad-islands-hamata-hamata-7",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 10
+   },
+   "title": "Deep South - Rocky & Zabargad Islands (Hamata - Hamata) 9 Nights"
+  },
   "red-sea-blue-force-2::Extended North Route (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "red-sea-blue-force-2",
    "boat_name": "Red Sea Blue Force 2",
