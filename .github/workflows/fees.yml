@@ -81,7 +81,33 @@ jobs:
           PYTHONPATH=src python3 -m liveaboard.cli build \
             --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
 
+      # Before the commit, while HEAD is still last week's dataset. Afterwards
+      # the comparison would be against this run's own output.
+      #
+      # The same three destinations as the daily refresh: the run summary for
+      # whoever opens the run, data/CHANGES.md for the durable history, and one
+      # line for the commit subject. This run re-promotes from the *existing*
+      # candidate, so departures and fares cannot move -- a fee change is the
+      # only thing it can report, which is exactly what it is for.
+      - name: Report what changed
+        id: changed
+        if: hashFiles('data/egypt-2027.json') != ''
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD \
+            --append data/CHANGES.md \
+            >> "$GITHUB_STEP_SUMMARY"
+          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD --headline)
+          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+
       - name: Commit
+        # Through the environment, not `${{ }}`: the headline carries boat
+        # names that came off somebody else's web page, and interpolating
+        # those straight into a shell line is how a scraped string becomes a
+        # command.
+        env:
+          HEADLINE: ${{ steps.changed.outputs.headline }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -91,8 +117,16 @@ jobs:
             exit 0
           fi
           # Every run is a commit, so the git history doubles as price history:
-          # `git log -p data/` shows exactly which fee moved, and when.
-          git commit -m "data: weekly fee refresh $(date -u +%Y-%m-%d)"
+          # `git log -p data/` shows exactly which fee moved, and when — and
+          # the subject says which, so finding it does not mean opening 2 MB.
+          # An `&&` guard here would be the last statement of the step under
+          # `set -e`, so an empty headline (the report step skipped, because
+          # there is no dataset yet) would fail the run rather than fall back.
+          subject="data: weekly fee refresh $(date -u +%Y-%m-%d)"
+          if [ -n "${HEADLINE}" ]; then
+            subject="${subject} — ${HEADLINE}"
+          fi
+          git commit -m "${subject}"
 
           # A scrape takes minutes, and anything can land meanwhile -- the
           # other scheduled job, or a merge. A plain push is rejected and the

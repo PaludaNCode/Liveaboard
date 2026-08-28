@@ -357,7 +357,14 @@ def headline(report: Report) -> str:
         bits.append(f"{moved} prices moved (to {biggest.delta:+,.0f} "
                     f"{biggest.currency} on {biggest.boat})")
     if report.fees:
-        bits.append(f"{len(report.fees)} fee change(s)")
+        # Named, not just counted. The weekly fee run cannot move a fare -- it
+        # re-promotes the same candidate -- so a fee change is the only thing
+        # it ever reports, and "3 fee change(s)" would make every one of those
+        # subjects identical.
+        first = report.fees[0]
+        rest = f", and {len(report.fees) - 1} more" if len(report.fees) > 1 else ""
+        bits.append(f"{len(report.fees)} fee change(s) "
+                    f"({first.boat} {first.code}{rest})")
     if report.sold_out:
         bits.append(f"{len(report.sold_out)} sold out")
     if report.returned:

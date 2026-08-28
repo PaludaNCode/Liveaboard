@@ -237,6 +237,18 @@ class TestHeadline(unittest.TestCase):
         self.assertIn("+200 USD", line)
         self.assertIn("Alia Soul", line)
 
+    def test_a_fee_change_names_the_vessel(self):
+        """The weekly fee run re-promotes the same candidate, so a fee change
+        is the only thing it can report. Counting them alone would make every
+        one of those commit subjects identical."""
+        before = dataset([departure("d1")], itineraries=[
+            {"id": "it1", "boat_id": "alia-soul", "title": "T", "fees": [park(100.0)]}])
+        after = dataset([departure("d1")], itineraries=[
+            {"id": "it1", "boat_id": "alia-soul", "title": "T", "fees": [park(140.0)]}])
+        line = headline(compare(before, after))
+        self.assertIn("Alia Soul", line)
+        self.assertIn("marine_park", line)
+
     def test_it_is_always_one_line(self):
         """It becomes a commit subject; a newline would split the message."""
         before = dataset([departure(f"d{i}", price=1000.0) for i in range(8)])
