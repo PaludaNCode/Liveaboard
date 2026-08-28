@@ -54,6 +54,15 @@
   </div>
 </div>
 
+<!-- Narrow screens only. The three filter banks below are a screen and a half
+     of buttons on a phone, and the layout gives the table whatever height is
+     left over — so they pushed every price off the bottom and the page opened
+     on nothing but filters. Folded away by default there; untouched on a
+     laptop, where they fit. -->
+<button type="button" class="filters-toggle" id="filtersToggle" aria-expanded="false">
+  Filter by port, site or operator
+</button>
+
 <div class="filterbar">
   <span class="tlabel">Departs from</span>
   <span id="ports"></span>

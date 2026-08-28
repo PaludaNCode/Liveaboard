@@ -100,6 +100,24 @@
     return "€" + lo + "–" + Math.round(m.totalMax).toLocaleString("en-IE");
   }
   function eur(n) { return euro.format(n); }
+
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  /* "2027-05-01" printed as "01 May". Formatted from the string rather than
+     through Date, which would read the ISO date as UTC midnight and print the
+     day before for anyone west of Greenwich. */
+  function shortDate(iso) {
+    var p = String(iso).split("-");
+    if (p.length !== 3) return esc(iso);
+    return p[2] + " " + MONTHS[+p[1] - 1];
+  }
+
+  /* The dearest true cost among the rows on screen, which is what the anchor
+     bars are drawn against. Recomputed on every draw so the bars always
+     compare the trips being looked at, not a fleet maximum that filtering has
+     already excluded. */
+  var barMax = 0;
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
@@ -151,10 +169,20 @@
   }
 
   var COLS = [
-    { k: "start", t: "Depart", stick: true, v: function (d) { return d.start; } },
-    { k: "end", t: "Return", v: function (d) { return d.end; } },
+    /* Sorted on the ISO string and printed short. Every departure here is in
+       one season, so the year is the same four characters on 882 rows and
+       repeating it crowds out the day and month, which is the part being
+       compared. The heading still names the season. */
+    { k: "start", t: "Depart", stick: true, v: function (d) { return d.start; },
+      show: function (d) { return shortDate(d.start); } },
+    { k: "end", t: "Return", v: function (d) { return d.end; },
+      show: function (d) { return shortDate(d.end); } },
     { k: "nights", t: "Nts", num: true, v: function (d) { return d.nights; } },
-    { k: "boat", t: "Boat", v: function (d, i) { return i.boat; } },
+    /* Sticky beside the date: with the money moved left of the wide text
+       columns, a horizontal scroll still happens on a narrow window, and a row
+       that scrolls away from its own boat's name cannot be compared to
+       anything. */
+    { k: "boat", t: "Boat", stick2: true, v: function (d, i) { return i.boat; } },
     /* Who sells the trip. Every one of these used to read "Operator not
        captured": the source states it on every event and the parser dropped
        the field. */
@@ -184,12 +212,28 @@
       } },
     { k: "base", t: "Advertised", num: true,
       v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
-    { k: "total", t: "True cost", num: true,
+    { k: "total", t: "True cost", num: true, cls: "cost",
       v: function (d, i, m) { return m.total; },
       show: function (d, i, m) {
         if (!d.mandatory_known) return '<span class="dim">—</span>';
+        /* The two numbers already in this row, drawn to scale: how much of the
+           bill was advertised, and how much of it was not. Scaled against the
+           dearest trip currently in view, so bar length compares down the
+           column and the split compares within one row.
+
+           Only where the required extras are stated. A bar is a claim about
+           proportion, and a trip nobody has read the fees for has no
+           proportion to claim -- it gets no bar rather than a full one. */
+        var bar = "";
+        if (barMax > 0 && m.total > 0) {
+          var advertised = Math.max(0, Math.min(100, (d.base / m.total) * 100));
+          bar = '<span class="anchor" style="width:' +
+            ((m.total / barMax) * 100).toFixed(1) + '%">' +
+            '<i class="was" style="width:' + advertised.toFixed(1) + '%"></i>' +
+            '<i class="add" style="width:' + (100 - advertised).toFixed(1) + '%"></i></span>';
+        }
         return "<b>" + span(m) + "</b>" +
-          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "");
+          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "") + bar;
       } },
     /* What divers actually compare on, and the reason price per night is not
        here: two denominators over the same total, and only one of them is the
@@ -278,6 +322,55 @@
           : '<span class="dim">—</span>';
       } }
   ];
+
+  /* The order the columns are printed in, which is not the order they are
+     defined in above: definitions are grouped by what they mean, and this is
+     grouped by what a visitor reads first.
+
+     It exists because True cost sat in column twelve of a table 2522px wide
+     inside a 1440px window -- the one number this site is for was off the
+     right-hand edge at every screen size anyone actually has, and on a phone
+     the whole table was. Identity first, then the money, then everything the
+     money is for, then the provenance a visitor only wants once they care.
+
+     Anything missing here is appended rather than dropped, and says so, because
+     a column that silently vanished would be a fact the page stopped
+     publishing. */
+  var ORDER = [
+    "start", "boat", "nights", "trip",
+    "total", "later", "base", "perdive", "nitrox",
+    "sites", "guests", "from", "to", "end", "operator",
+    "required", "unpriced", "availability", "disclosure", "source"
+  ];
+  /* The same columns on a phone, reordered again.
+     A phone shows about two columns beside the two pinned ones, and on the
+     desktop order those two were Nts and Trip -- so the table opened on a trip
+     title and you scrolled 600px to find out what it cost. Here the money
+     comes first and the descriptive columns sit behind it: nothing is hidden,
+     the reading order is just inverted to match how much screen there is. */
+  var NARROW_ORDER = [
+    "start", "boat", "total", "later", "nights", "base", "perdive", "nitrox",
+    "trip", "sites", "guests", "from", "to", "end", "operator",
+    "required", "unpriced", "availability", "disclosure", "source"
+  ];
+
+  var narrow = window.matchMedia("(max-width: 760px)");
+
+  function orderColumns() {
+    var order = narrow.matches ? NARROW_ORDER : ORDER;
+    COLS.sort(function (a, b) {
+      var x = order.indexOf(a.k), y = order.indexOf(b.k);
+      return (x < 0 ? order.length : x) - (y < 0 ? order.length : y);
+    });
+  }
+  COLS.forEach(function (c) {
+    /* Appended rather than dropped, and said out loud: a column that quietly
+       vanished from both lists would be a fact the page stopped publishing. */
+    if (ORDER.indexOf(c.k) < 0 && window.console) {
+      console.warn("column " + c.k + " is not in ORDER; printed last");
+    }
+  });
+  orderColumns();
 
   /* ---------- filtering and sorting ---------- */
 
@@ -371,22 +464,37 @@
   function draw() {
     var rows = visible();
 
+    /* Before any cell is rendered: the anchor bars scale against the dearest
+       trip on screen, so filtering to three boats redraws the bars against
+       those three rather than against a fleet maximum that is no longer
+       visible. Only priced rows count -- an unpriced one has no total. */
+    barMax = rows.reduce(function (top, r) {
+      return r.d.mandatory_known && r.m.total > top ? r.m.total : top;
+    }, 0);
+
     document.getElementById("head").innerHTML = "<tr>" + COLS.map(function (c) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
-      return '<th tabindex="0" class="' + (c.num ? "num " : "") + (c.stick ? "stick" : "") +
+      return '<th tabindex="0" class="' + (c.num ? "num " : "") +
+        (c.stick ? "stick" : c.stick2 ? "stick2" : "") +
         '" data-k="' + c.k + '">' + c.t + " " + dir + "</th>";
-    }).join("") + "<th></th></tr>";
+    }).join("") + '<th class="expander"></th></tr>';
 
     document.getElementById("body").innerHTML = rows.length
       ? rows.map(function (row, n) {
           var tds = COLS.map(function (c) {
             var v = c.show ? c.show(row.d, row.i, row.m) : esc(c.v(row.d, row.i, row.m));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
-              (c.stick ? " stick" : "") + '">' + v + "</td>";
+              (c.stick ? " stick" : c.stick2 ? " stick2" : "") + '">' + v + "</td>";
           }).join("");
           var open = state.open === row.d.id;
-          return '<tr class="row' + (row.d.bookable ? "" : " gone") + '">' + tds + '<td><button class="expand" data-n="' + n +
+          /* Banding is written here from the row's own position, not left to
+             `:nth-of-type(even)`. That selector counts every `tr` in the
+             tbody, and an expanded row injects one -- so opening any row
+             inverted the stripes of every row below it. */
+          return '<tr class="row' + (n % 2 ? " alt" : "") +
+            (row.d.bookable ? "" : " gone") + '">' + tds +
+            '<td class="expander"><button class="expand" data-n="' + n +
             '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td></tr>" +
             (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
               feeTable(row) + "</td></tr>" : "");
@@ -409,21 +517,53 @@
       : "—";
   }
 
+  /* How many chips a bank shows before the rest go behind "more".
+     42 operators, 17 dive sites and 6 ports were all printed at once, which
+     put 66 buttons above the table: the first row of data began 596px down a
+     1440x900 window and 1708px down a phone, where nothing was visible at all
+     without scrolling past two screens of filters. A filter you have not
+     chosen yet should not outrank the prices you came to read. */
+  var CHIP_LIMIT = 8;
+
   function chips(host, items, picked, numeric) {
     var node = document.getElementById(host);
-    node.innerHTML = items.map(function (it) {
-      return '<button class="chip" data-v="' +
-        esc(it.id).replace(/"/g, "&quot;") + '" aria-pressed="false">' +
-        esc(it.label || it.id) + ' <span class="dim">' + it.n + "</span></button>";
-    }).join("");
+    var expanded = false;
+
+    function paint() {
+      /* A chosen filter is always shown, wherever it sits in the list: a
+         chip hidden behind "more" while switched on is a filter that appears
+         to have been ignored. */
+      var shown = expanded ? items : items.filter(function (it, n) {
+        var v = numeric ? +it.id : it.id;
+        return n < CHIP_LIMIT || picked.has(v);
+      });
+      var hidden = items.length - shown.length;
+      node.innerHTML = shown.map(function (it) {
+        var v = numeric ? +it.id : it.id;
+        return '<button class="chip" data-v="' +
+          esc(it.id).replace(/"/g, "&quot;") + '" aria-pressed="' + picked.has(v) + '">' +
+          esc(it.label || it.id) + ' <span class="dim">' + it.n + "</span></button>";
+      }).join("") +
+        (hidden > 0 || expanded
+          ? '<button class="chip more" data-more="1">' +
+            (expanded ? "− fewer" : "+ " + hidden + " more") + "</button>"
+          : "");
+    }
+
     node.addEventListener("click", function (event) {
       var button = event.target.closest("button");
       if (!button) return;
+      if (button.dataset.more) { expanded = !expanded; paint(); return; }
       var v = numeric ? +button.dataset.v : button.dataset.v;
       if (picked.has(v)) picked.delete(v); else picked.add(v);
       button.setAttribute("aria-pressed", picked.has(v));
       draw();
     });
+
+    /* Reset clears the picked set directly, so the bank has to be repainted
+       from it rather than left showing chips it is no longer holding. */
+    node.repaint = paint;
+    paint();
   }
 
   function drawNotice() {
@@ -553,7 +693,27 @@
       chip.setAttribute("aria-pressed",
         chip.dataset.t ? String(!!state.toggles[chip.dataset.t]) : "false");
     });
+    /* A bank that was expanded to reach a chip, or that is holding a chosen
+       chip out of its hidden tail, has to be rebuilt from the cleared set --
+       repainting is the only thing that puts those chips back where they
+       belong. */
+    ["months", "ports", "sites", "operators"].forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node && node.repaint) node.repaint();
+    });
     draw();
+  });
+
+  /* Rotating the device changes which order the columns should be in, and a
+     table left in the other one is the bug this exists to prevent. */
+  var onWidthChange = function () { orderColumns(); draw(); };
+  if (narrow.addEventListener) narrow.addEventListener("change", onWidthChange);
+  else if (narrow.addListener) narrow.addListener(onWidthChange);
+
+  var filtersToggle = document.getElementById("filtersToggle");
+  filtersToggle.addEventListener("click", function () {
+    var open = document.body.classList.toggle("filters-open");
+    filtersToggle.setAttribute("aria-expanded", String(open));
   });
 
   document.getElementById("metaLine").textContent =

@@ -15,6 +15,10 @@
   --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
 
+  /* Width of the sticky date column, and therefore the left offset of the
+     sticky boat column beside it. One value so the two cannot drift. */
+  --stick-w:82px;
+
   /* Fonts the visitor already has.
    *
    * These used to be IBM Plex, pulled from fonts.googleapis.com. That link sat
@@ -123,6 +127,13 @@ button.chip {
   border:1px solid var(--rule-strong); background:transparent; color:var(--ink-dim);
   border-radius:2px;
 }
+/* Not a filter: the handle on the rest of a bank. Reads as a control
+   rather than a value so it is not mistaken for a port called "+34 more". */
+button.chip.more {
+  border-style:dashed; color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+}
+button.chip.more:hover { color:var(--accent); border-color:var(--accent); }
 button.chip[aria-pressed="true"] {
   background:var(--accent-soft); border-color:var(--accent);
   color:var(--accent); font-weight:500;
@@ -161,13 +172,37 @@ thead th {
 }
 thead th:hover { color:var(--accent); }
 thead th .dir { color:var(--accent); font-weight:700; }
+/* The column being sorted on, named in the header rather than only arrowed. */
+thead th[data-k]:has(.dir) { color:var(--accent); }
 th.num, .num { text-align:right; }
+
+/* Where the money starts. The one vertical rule in the table, because it is
+   the one place a reader needs telling that the columns changed subject. */
+thead th[data-k="total"], tbody td.cost { border-left:1px solid var(--rule-strong); }
 
 tbody td {
   padding:5px 9px; border-bottom:1px solid var(--rule);
   white-space:nowrap; vertical-align:top;
 }
-tbody tr.row:nth-of-type(even) { background:var(--row-alt); }
+tbody tr.row td { transition:background-color .08s linear; }
+
+/* The number this site exists to show, and the only place the accent is spent
+   inside the table. Everything else is ink, dim ink, or the one warm colour
+   reserved for what lands later. */
+tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-spacing:-.01em; }
+
+/* The advertised price and what was added, drawn to scale under the total:
+   bar length compares down the column, the split compares within one row.
+   Three pixels, because it is a second reading of numbers already printed --
+   not a chart. */
+.anchor {
+  display:block; height:3px; margin:3px 0 1px auto; min-width:14px;
+  border-radius:2px; overflow:hidden; background:var(--rule);
+}
+.anchor i { display:block; height:100%; float:left; }
+.anchor .was { background:var(--accent); opacity:.65; }
+.anchor .add { background:var(--later); }
+tbody tr.row.alt { background:var(--row-alt); }
 tbody tr.row:hover { background:var(--row-hover); }
 
 .num {
@@ -180,19 +215,37 @@ tbody tr.row:hover { background:var(--row-hover); }
   position:sticky; left:0; z-index:10; background:var(--panel);
   border-right:1px solid var(--rule-strong);
 }
-tbody tr.row:nth-of-type(even) .stick { background:var(--row-alt); }
-tbody tr.row:hover .stick { background:var(--row-hover); }
-thead th.stick { z-index:25; }
+tbody tr.row.alt .stick, tbody tr.row.alt .stick2 { background:var(--row-alt); }
+tbody tr.row:hover .stick, tbody tr.row:hover .stick2 { background:var(--row-hover); }
+thead th.stick, thead th.stick2 { z-index:25; }
+
+/* The boat's name, pinned beside the date.
+ *
+ * The money columns moved left of the wide text ones, which puts True cost on
+ * screen at a laptop width for the first time -- but the table is still wider
+ * than a phone, and a row that scrolls away from its own boat's name cannot be
+ * compared with anything. Two sticky columns need a known offset, so the date
+ * column is given a fixed width rather than left to the content. */
+/* Fixed, not merely floored: content wider than the minimum stretched the
+   cell to 79px while the boat column beside it was still pinned at 74px, so
+   the two sticky columns overlapped by five pixels while scrolled. */
+.stick {
+  width:var(--stick-w); min-width:var(--stick-w); max-width:var(--stick-w);
+  overflow:hidden; text-overflow:ellipsis;
+}
+.stick2 {
+  position:sticky; left:var(--stick-w); z-index:10; background:var(--panel);
+  border-right:1px solid var(--rule-strong);
+  min-width:132px; max-width:132px;
+  overflow:hidden; text-overflow:ellipsis;
+}
 
 .later { color:var(--later); font-weight:600; }
-.inc { color:var(--ok); font-weight:600; }
+.inc { color:var(--ok); font-weight:500; font-size:11px; }
 /* A direction, not a site list. Reads as the weaker statement it is. */
 .region { color:var(--ink-faint); font-style:italic; }
 /* Not part of the number beside it, and must not read as though it were. */
 .plus { color:var(--later); font-weight:500; font-size:11px; }
-/* A number divided by an assumption. Dotted underline rather than a colour:
-   it is a weaker claim, not a warning. */
-.est { border-bottom:1px dotted var(--ink-faint); cursor:help; }
 .dim { color:var(--ink-faint); }
 .trip { white-space:normal; min-width:210px; max-width:320px; }
 .sites { white-space:normal; min-width:150px; max-width:210px; color:var(--ink-dim); font-size:11px; }
@@ -261,4 +314,70 @@ a { color:var(--accent); }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition:none !important; animation:none !important; }
+}
+
+/* ===========================================================================
+   NARROW SCREENS
+   ---------------------------------------------------------------------------
+   The page is an app shell: body does not scroll, and the table gets whatever
+   vertical space the chrome above it leaves. On a laptop that was 900 − 403px
+   of masthead, toolbar and filters. On a 390×844 phone the chrome alone came
+   to 1069px, so what was left over was nothing: the first row of prices sat
+   below the fold with zero rows visible, and True cost was off the right-hand
+   edge as well. Every rule here is spent buying that space back.
+   =========================================================================== */
+.filters-toggle { display:none; }
+
+@media (max-width: 760px) {
+  /* The thesis paragraph is the argument, and it is in the README, the footer
+     and the page title. On a phone it is 150px of prose in front of the
+     evidence for it. */
+  .sub { display:none; }
+  .hint { display:none; }
+  h1 { font-size:16px; }
+  .masthead { padding:10px 12px; gap:8px 16px; }
+  .stats { gap:14px; margin-left:0; }
+  .stat b { font-size:13px; }
+
+  .toolbar, .filterbar { padding:8px 12px; }
+  .toolbar { gap:6px 12px; }
+  /* Reset and the build line are a laptop convenience; on a phone they are a
+     second row of chrome above the prices. Reset still reachable at the end
+     of the toolbar. */
+  .tgroup.meta-right #metaLine { display:none; }
+  input[type="search"] { min-width:0; width:100%; }
+  .tgroup:has(input[type="search"]) { flex:1 1 100%; }
+
+  .filters-toggle {
+    display:block; width:100%; text-align:left; font:inherit; font-size:11px;
+    text-transform:uppercase; letter-spacing:.09em; color:var(--ink-faint);
+    background:var(--panel); border:0; border-bottom:1px solid var(--rule);
+    padding:9px 12px; cursor:pointer;
+  }
+  .filters-toggle::after { content:" ▸"; color:var(--accent); }
+  body.filters-open .filters-toggle::after { content:" ▾"; }
+  .filterbar { display:none; }
+  body.filters-open .filterbar { display:flex; }
+
+  /* Two pinned columns still name every row, but narrower: at 390px they were
+     taking 214px and leaving 176 for the numbers. */
+  :root { --stick-w:76px; }
+  .stick2 { min-width:104px; max-width:104px; }
+
+  /* Pinned to the right edge rather than left at the end of a table 2400px
+     wide: the control that opens the bill was reachable only by scrolling
+     past every column, on the screen where scrolling costs the most. */
+  td.expander, th.expander {
+    position:sticky; right:0; z-index:10; background:var(--panel);
+    border-left:1px solid var(--rule-strong); padding:4px 6px;
+  }
+  thead th.expander { z-index:25; }
+  tbody tr.row.alt .expander { background:var(--row-alt); }
+  tbody tr.row:hover .expander { background:var(--row-hover); }
+  tbody td, thead th { padding:6px 7px; }
+  .trip { min-width:150px; max-width:190px; }
+  .sites { min-width:120px; max-width:160px; }
+  /* Comfortably tappable without making the row taller than it has to be. */
+  .expand { min-width:26px; min-height:26px; }
+  .site-footer { max-height:60vh; }
 }
