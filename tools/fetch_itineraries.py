@@ -37,7 +37,11 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.promote import _sites_from_name, itinerary_key  # noqa: E402
+from liveaboard.promote import (  # noqa: E402
+    _sites_from_name,
+    _sites_from_regions,
+    itinerary_key,
+)
 from liveaboard.scrape.base import PoliteFetcher  # noqa: E402
 from liveaboard.scrape.itinerary import min_logged_dives, parse_trip  # noqa: E402
 from liveaboard.scrape.liveaboard_com import HOST  # noqa: E402
@@ -149,7 +153,7 @@ def main() -> int:
         # titles use keeps one vocabulary on the page; anything it does not know
         # is reported rather than dropped silently, because a reef the operator
         # names and we cannot is a gap in SITE_HINTS worth closing deliberately.
-        sites = _sites_from_name(" , ".join(detail.regions))
+        sites = _sites_from_regions(detail.regions)
         for region in detail.regions:
             if not _sites_from_name(region):
                 unknown[region] = unknown.get(region, 0) + 1
