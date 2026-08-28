@@ -28,7 +28,7 @@ from .pricing import (
     mandatory_known,
     resolve_fees,
 )
-from .taxonomy import FEE_LABELS
+from .taxonomy import DIVER_LEVEL_LABELS, FEE_LABELS
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -181,6 +181,14 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             ],
         },
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
+        # Shipped for the same reason the fee labels are: one vocabulary,
+        # defined once. Nothing on the page prints these today -- the Entry
+        # column that did was removed as noise -- but the bar is in every
+        # itinerary record and in the published downloads, so a reader who
+        # wants it has the vocabulary to read it with.
+        "level_labels": {
+            level.value: label for level, label in DIVER_LEVEL_LABELS.items()
+        },
         "itineraries": itineraries,
         "departures": departures,
     }
@@ -197,6 +205,16 @@ DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
     "egypt-2027.json": ("The dataset", "exactly what the page is built from"),
     "CHANGES.md": ("What changed, refresh by refresh",
                    "boats and trips added, fares moved, berths sold out"),
+    # The two sources, unmerged. The dataset above is what this project made of
+    # them; these are what each site said, so a reader can check the working
+    # rather than take the merge on trust -- which is the whole argument this
+    # page makes about operators and their fees.
+    "itineraries.json": ("What liveaboard.com says per trip",
+                         "reefs, dive count, group size and entry bar, from the "
+                         "operator's own itinerary panel"),
+    "padi.json": ("What PADI Travel says per trip",
+                  "the certification it states and the dives it counts, for the "
+                  "38 boats both sites sell"),
 }
 
 
@@ -249,7 +267,7 @@ def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[
     (folder / "egypt-2027.csv").write_text(to_csv(dataset), encoding="utf-8")
     written.append("egypt-2027.csv")
 
-    for name in ("egypt-2027.json", "CHANGES.md"):
+    for name in ("egypt-2027.json", "CHANGES.md", "itineraries.json", "padi.json"):
         source = (data_dir / name) if data_dir else None
         if source and source.exists():
             (folder / name).write_text(source.read_text(encoding="utf-8"),

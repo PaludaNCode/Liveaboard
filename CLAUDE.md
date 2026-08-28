@@ -39,6 +39,17 @@ Resetting the working branch onto `main` to look at it works and then leaves
 the branch one merge commit "ahead" of its own remote, which reads as unpushed
 work every time. `git show` answers the same question and disturbs nothing.
 
+## Answering
+
+Short. The finding, not the derivation. This is a codebase whose owner knows it
+better than you do, so a table of evidence for a conclusion he can reach in one
+glance is noise, not rigour.
+
+- Lead with the answer. Detail only if asked.
+- One decision per message when a decision is wanted.
+- Skip restating what was just said, and skip the recap section.
+- Findings that matter go in `docs/` or a commit message, not into chat twice.
+
 ## Invariants
 
 Break these and the site starts lying quietly rather than failing loudly.
