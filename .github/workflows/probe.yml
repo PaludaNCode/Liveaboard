@@ -30,6 +30,10 @@ on:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
         default: "2"
+      spaces_targets:
+        description: "vessel:month pairs to check for a remaining-berth count"
+        type: string
+        default: "dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7"
 
 permissions:
   contents: read
@@ -137,3 +141,14 @@ jobs:
       - name: Read the itinerary fragment
         run: |
           python3 tools/probe_itinerary_endpoint.py --tours 6 --full
+
+      # #79. Nothing we already fetch carries a remaining-berth count: no
+      # Offer key in 889 archived events, and the only inventory wording in
+      # any description is a numberless "No more spaces available". So either
+      # the number is rendered client-side like the fee and gear panels, or
+      # the source does not publish it -- and those need opposite answers.
+      - name: Probe for a remaining-berth count
+        run: |
+          python3 tools/probe_spaces.py \
+            --targets "${{ inputs.spaces_targets || 'dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7' }}" \
+            ${{ inputs.dump_html && '--dump-html' || '' }}
