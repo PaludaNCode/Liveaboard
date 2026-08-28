@@ -60,10 +60,27 @@ CONCAT = re.compile(
     r"""['"`](/[a-zA-Z0-9][a-zA-Z0-9/_:-]{2,60})['"`]\s*\+\s*(\w[\w.$\[\]()]*)"""
 )
 
-# Call sites. Minified Angular still writes the URL as a literal somewhere, and
-# the argument to .get()/.post() or a `url:` property is where it ends up.
+# Call sites. The URL still appears as a literal somewhere, but PADI's API client
+# is called with a *relative* path -- `shop/egypt/hammerhead-ii/itineraries/` --
+# so a pattern anchored on a leading slash finds none of them. That is what the
+# second runner pass got wrong, and why it reported zero call sites while the
+# context dump had the endpoint in it.
 CALL_SITE = re.compile(
-    r"""(?:\.(?:get|post|put)\(|url\s*:\s*)\s*['"`](?P<url>[^'"`]{4,120})['"`]"""
+    r"""(?:\.(?:get|post|put)\(|url\s*:\s*)\s*['"`](?P<url>[a-zA-Z/][^'"`]{3,120})['"`]"""
+)
+
+# The relative paths that client is handed, template placeholders included.
+API_PATH = re.compile(
+    r"""['"`](?P<path>(?:shop|booking|search|itinerar|liveaboard|account)"""
+    r"""[a-zA-Z0-9/_${}.:-]{3,90}/)['"`]"""
+)
+
+# Where that client gets its prefix. Without this the path is known and
+# uncallable, which is exactly where the second pass left off: every obvious
+# base -- /api/, /api/v1/, /travel/api/ and five more -- 404s.
+BASE_NEEDLES = (
+    "baseURL", "baseUrl", "axios.create", "API_URL", "apiUrl", "API_BASE",
+    "apiBase", "API_ROOT", "/api", "X-CSRFToken", "fetch(", "XMLHttpRequest",
 )
 
 # Any literal that mentions an itinerary at all, path-shaped or not. The endpoint
@@ -141,7 +158,7 @@ def main() -> int:
     parser.add_argument("--country", default="egypt")
     parser.add_argument("--dump-context", action="store_true",
                         help="print the JS around each interesting literal")
-    parser.add_argument("--max-candidates", type=int, default=40)
+    parser.add_argument("--max-candidates", type=int, default=80)
     parser.add_argument("--include-vendors", action="store_true",
                         help="also read vendors.js (third-party, multi-megabyte)")
     args = parser.parse_args()
@@ -208,6 +225,7 @@ def main() -> int:
     print("=" * 72)
     sources: dict[str, str] = {}
     routes: dict[str, str] = {}
+    relative_paths: set[str] = set()
     call_sites: set[str] = set()
     itinerary_words: set[str] = set()
 
@@ -230,6 +248,13 @@ def main() -> int:
         for path in sorted(calls):
             print(f"    {path}")
 
+        api_paths = {m.group("path") for m in API_PATH.finditer(body)}
+        if api_paths:
+            print(f"  relative API paths: {len(api_paths)}")
+            for path in sorted(api_paths):
+                print(f"    {path}")
+            relative_paths.update(api_paths)
+
         words = {m.group("value") for m in ITINERARY_LITERAL.finditer(body)}
         itinerary_words |= words
         print(f"  literals mentioning an itinerary: {len(words)}")
@@ -248,6 +273,21 @@ def main() -> int:
                 index = body.find(value)
                 print(f"\n  --- context for {value!r} ---")
                 print("  " + body[max(0, index - 260):index + 260].replace("\n", " "))
+
+    print()
+    print("=" * 72)
+    print("2b. where the API client gets its base URL")
+    print("=" * 72)
+    for url, body in sources.items():
+        name = url.rsplit("/", 1)[-1]
+        for needle in BASE_NEEDLES:
+            positions = [m.start() for m in re.finditer(re.escape(needle), body)][:4]
+            if not positions:
+                continue
+            print(f"\n  {name}: {needle!r} x{len(positions)}")
+            for index in positions:
+                window = body[max(0, index - 200):index + 240].replace("\n", " ")
+                print(f"    ...{window}...")
 
     print("\n--- the app's whole route table ---")
     for name, path in sorted(routes.items(), key=lambda kv: kv[1]):
@@ -287,9 +327,22 @@ def main() -> int:
             out = out.replace(f":{name}", value)
         return out
 
+    # A relative API path is useless without its prefix, so every path found is
+    # crossed with every base worth trying. Eight bases x a handful of paths is
+    # still a small number of requests, and it either finds the endpoint or rules
+    # the whole family out in one run.
+    bases = ("/api/", "/api/v1/", "/api/v2/", "/travel/api/", "/tapi/", "/rest/",
+             "/v1/", "/v2/", "/_api/", "/")
+    crossed: set[str] = set()
+    for path in relative_paths:
+        filled = re.sub(r"\$\{[^}]*countrySlug[^}]*\}|\$\{t\}", args.country, path)
+        filled = re.sub(r"\$\{[^}]*\}", args.vessel, filled)
+        for base in bases:
+            crossed.add(f"{base}{filled}")
+
     seen: set[str] = set()
     candidates: list[str] = []
-    for source in (call_sites, set(routes.values()),
+    for source in (crossed, call_sites, set(routes.values()),
                    {w for w in itinerary_words if w.startswith("/")}):
         for path in sorted(source):
             if not INTERESTING.search(path):
