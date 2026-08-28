@@ -108,14 +108,11 @@ Minus the night count that is our own `Itinerary.name`, ports included, which is
 what makes the two sources joinable without inventing a key.
 """
 
-NIGHTS_SUFFIX = re.compile(r"[\s\u2010-\u2015-]*\d+\s*Nights?\s*$", re.IGNORECASE)
-"""The night count, and any dash that introduces it.
+ONLY_NIGHTS = re.compile(r"[\s\u2010-\u2015-]*(?:\d+\s*nights?[\s\u2010-\u2015-]*)+", re.IGNORECASE)
+"""A tail that is nothing but night counts, possibly repeated.
 
-PADI writes three shapes for one thing: "... 7 Nights", "... 7 nights" and
-"... (Hurghada \u2013 Hurghada) \u2013 7 nights". Anchoring on whitespace alone left the
-trailing en-dash behind, the ports pattern then failed to match a string not
-ending in ")", and `split_title` returned None -- which cost Unity all three of
-its itinerary matches while the boat pairing was perfectly correct.
+Used to decide whether two disagreeing counts are a contradiction to refuse or a
+trip length followed by something else -- a hotel night, a day count.
 """
 
 DASHES = dict.fromkeys(map(ord, "\u2010\u2011\u2012\u2013\u2014\u2015"), "-")
@@ -301,35 +298,46 @@ class PadiComAdapter(SourceAdapter):
     def split_title(title: str) -> tuple[str, str, int] | None:
         """"Name (Port - Port) N Nights" -> (name-with-ports, ports, nights).
 
-        The night suffix is stripped before anything is matched, and in a loop,
-        because PADI sometimes appends it twice -- *"... (Marsa Alam - Hurghada)
-        7 Nights 7 Nights"* is a live title, not a typo of ours. Anchoring a
-        pattern on the end of the string instead just fails on that trip.
+        The night count is read *after* the ports rather than off the end of the
+        string, because PADI ends a title six ways:
 
-        Two suffixes that disagree return ``None``. There is no way to tell which
-        one the operator meant, and a trip length is the denominator under every
-        per-night price on the page.
+            ... (Hurghada - Hurghada) 7 Nights
+            ... (Hurghada \u2013 Hurghada) \u2013 7 nights
+            ... (Marsa Alam - Hurghada) 7 Nights 7 Nights
+            ... (Hurghada - Hurghada) 4 nights/4 days diving
+            ... (Hamata - Hamata) 7 nights / 8 days
+            ... (Sharm el Sheikh - ...) 7 nights liveabaord + 1 night hotel
+
+        An end-anchored pattern reads the first three and silently drops the
+        rest, which cost seven trips their entry bar -- they were fetched, stored
+        and then not keyed.
+
+        Where the tail is nothing but repeated counts they must agree: "7 Nights
+        7 Nights" is 7, and a tail claiming both 4 and 7 returns ``None`` rather
+        than picking, since a trip length is the denominator under every
+        per-night price. Where the tail says anything else, the first count wins
+        -- "7 nights liveaboard + 1 night hotel" is a seven-night trip, and the
+        hotel night is not part of it.
 
         The name keeps its ports: two sailings differing only by port are two
         trips, here as everywhere else in this codebase.
         """
         text = title.strip().translate(DASHES)
-        counts: list[int] = []
-        while True:
-            match = NIGHTS_SUFFIX.search(text)
-            if not match:
-                break
-            digits = re.search(r"\d+", match.group(0))
-            if not digits:
-                break
-            counts.append(int(digits.group()))
-            text = text[: match.start()].strip()
-        if not counts or len(set(counts)) > 1:
+        close = text.rfind(")")
+        if close == -1:
             return None
-        ports = re.match(r"^(?P<name>.+?)\s*\((?P<ports>[^)]*)\)$", text)
+        head, tail = text[: close + 1], text[close + 1 :]
+
+        counts = [int(m.group(1)) for m in re.finditer(r"(\d+)\s*nights?\b", tail, re.I)]
+        if not counts:
+            return None
+        if ONLY_NIGHTS.fullmatch(tail) and len(set(counts)) > 1:
+            return None
+
+        ports = re.match(r"^(?P<name>.+?)\s*\((?P<ports>[^()]*)\)$", head)
         if not ports:
             return None
-        return text, ports.group("ports").strip(), counts[0]
+        return head.strip(), ports.group("ports").strip(), counts[0]
 
     @classmethod
     def itinerary_titles(cls, html: str) -> dict[str, str]:

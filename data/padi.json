@@ -3438,6 +3438,53 @@
    },
    "title": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada) 7 Nights"
   },
+  "iceberg::Hurghada North (Hurghada - Hurghada)": {
+   "boat": "iceberg",
+   "boat_name": "My Iceberg",
+   "dives": 12,
+   "name": "Hurghada North (Hurghada - Hurghada)",
+   "nights": 4,
+   "padi_id": 22729,
+   "padi_slug": "hurghada-north-4-nights-5-days-4-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 5
+   },
+   "title": "Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving"
+  },
+  "iceberg::Special Wrecks / Hurghada North (Hurghada - Hurghada)": {
+   "boat": "iceberg",
+   "boat_name": "My Iceberg",
+   "dives": 12,
+   "name": "Special Wrecks / Hurghada North (Hurghada - Hurghada)",
+   "nights": 4,
+   "padi_id": 22824,
+   "padi_slug": "hurghada-north-hurghada-hurghada-4-nights4-days-di",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Special Wrecks / Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving"
+  },
+  "new-sambo::BDE - Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "new-sambo",
+   "boat_name": "New Sambo Safari Boat",
+   "dives": 18,
+   "name": "BDE - Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22434,
+   "padi_slug": "sataya-dolphin-reef-hamata-hamata-2-days-1-night",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE \u2013 Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 nights / 8 days"
+  },
   "new-sambo::Deep South, St. John & Zabargad (Hamata - Hamata)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
@@ -3451,6 +3498,48 @@
     "min_level": "open_water"
    },
    "title": "Deep South, St. John & Zabargad (Hamata - Hamata) 7 Nights"
+  },
+  "new-sambo::Fury Shoals (Hamata - Hamata)": {
+   "boat": "new-sambo",
+   "boat_name": "New Sambo Safari Boat",
+   "dives": 16,
+   "name": "Fury Shoals (Hamata - Hamata)",
+   "nights": 7,
+   "padi_id": 22437,
+   "padi_slug": "st-johns-reef-mini-safari-trip-hamata-hamata-4-day",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Fury Shoals (Hamata - Hamata) 7 nights / 8 days"
+  },
+  "new-sambo::Mini-Safari Sataya (Hamata - Hamata)": {
+   "boat": "new-sambo",
+   "boat_name": "New Sambo Safari Boat",
+   "dives": 6,
+   "name": "Mini-Safari Sataya (Hamata - Hamata)",
+   "nights": 2,
+   "padi_id": 23431,
+   "padi_slug": "overnight-sataya-hamata-hamata-1-night-2-days",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days"
+  },
+  "new-sambo::Overnight Sataya (Hamata - Hamata)": {
+   "boat": "new-sambo",
+   "boat_name": "New Sambo Safari Boat",
+   "dives": 3,
+   "name": "Overnight Sataya (Hamata - Hamata)",
+   "nights": 1,
+   "padi_id": 22449,
+   "padi_slug": "st-johns-reef-mini-safari-trip-hamata-hamata-4-d-2",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days"
   },
   "odyssey::BDE (Hurghada - Port Ghalib)": {
    "boat": "odyssey",
@@ -3658,6 +3747,20 @@
     "recommended_logged_dives": 20
    },
    "title": "Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "red-sea-blue-force-2::Extended North Route (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "red-sea-blue-force-2",
+   "boat_name": "Red Sea Blue Force 2",
+   "dives": 21,
+   "name": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 8,
+   "padi_id": 15407,
+   "padi_slug": "north-sharm-el-sheikh-sharm-el-sheikh-7-nights-2",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel"
   },
   "red-sea-blue-force-2::North Route (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "red-sea-blue-force-2",

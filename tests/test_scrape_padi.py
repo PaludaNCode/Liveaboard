@@ -62,6 +62,26 @@ class TestSplitTitle(unittest.TestCase):
         self.assertTrue(split[0].endswith("(Marsa Alam - Hurghada)"), split[0])
         self.assertNotIn("Nights", split[0])
 
+    def test_nights_followed_by_a_day_count(self) -> None:
+        """Live titles PADI ends six different ways. All were fetched and stored,
+        then dropped at keying by a pattern anchored on end-of-string."""
+        for title, nights in (
+            ("Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving", 4),
+            ("Fury Shoals (Hamata - Hamata) 7 nights / 8 days", 7),
+            ("Overnight Sataya (Hamata - Hamata) 1 night / 2 days", 1),
+        ):
+            split = PadiComAdapter.split_title(title)
+            self.assertIsNotNone(split, title)
+            assert split
+            self.assertEqual(split[2], nights, title)
+
+    def test_a_hotel_night_is_not_part_of_the_trip(self) -> None:
+        split = PadiComAdapter.split_title(
+            "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) "
+            "7 nights liveabaord + 1 night hotel")
+        assert split
+        self.assertEqual(split[2], 7)
+
     def test_disagreeing_night_counts_are_not_resolved(self) -> None:
         """A trip length is the denominator under every per-night price."""
         self.assertIsNone(
