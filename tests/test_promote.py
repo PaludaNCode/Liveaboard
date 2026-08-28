@@ -880,3 +880,271 @@ class TestADiveCountIsAFloorForOneTripLength(unittest.TestCase):
         itinerary = payload["itineraries"][0]
         self.assertEqual(itinerary["nights"], 3)
         self.assertEqual(itinerary["dives"], 0)
+
+
+def trip_book(
+    boat="alia-soul",
+    name="Brothers, Daedalus & Elphinstone",
+    **fields,
+) -> dict:
+    """One itinerary book entry, as ``tools/fetch_itineraries.py`` writes it."""
+    return {
+        "collected": "2026-08-27",
+        "source": "liveaboard.com",
+        "trips": {
+            f"{boat}::{name}": {"boat": boat, "name": name, **fields},
+        },
+    }
+
+
+class TestTheItineraryKeyIsWhatJoinsTheTwoSides(unittest.TestCase):
+    """The book is built from archived ``Event`` names; promote has tidied them.
+
+    Every field the book fills has a fallback, so a key that matches nothing
+    fails silently -- the page keeps yesterday's answers and nothing is red.
+    That makes these the tests that matter most in this file.
+    """
+
+    def key(self, slug, name):
+        from liveaboard.promote import itinerary_key
+
+        return itinerary_key(slug, name)
+
+    def test_a_discount_banner_is_not_part_of_the_trip(self):
+        """A week on sale is the same week.
+
+        The archive stores "20% Off: Ultimate Red Sea (...)"; promote strips
+        the banner before grouping. Keyed on the raw string, 71 of 314
+        itineraries matched nothing and the fetcher spent 97 requests
+        re-reading trips it already had under their banner spellings.
+        """
+        self.assertEqual(
+            self.key("all-star-red-sea", "20% Off: Ultimate Red Sea (Port Ghalib - Hurghada)"),
+            self.key("all-star-red-sea", "Ultimate Red Sea (Port Ghalib - Hurghada)"),
+        )
+
+    def test_the_port_pair_is_part_of_the_trip(self):
+        """Two sailings differing only by port are two trips, and the itinerary
+        id is built from the whole name."""
+        self.assertNotEqual(
+            self.key("alsuraya", "Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)"),
+            self.key("alsuraya", "Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)"),
+        )
+
+    def test_operator_spacing_does_not_make_a_second_trip(self):
+        self.assertEqual(
+            self.key("alia-soul", "Brothers , Daedalus  &  Elphinstone"),
+            self.key("alia-soul", "Brothers, Daedalus & Elphinstone"),
+        )
+
+    def test_the_vessel_is_part_of_it(self):
+        self.assertNotEqual(
+            self.key("alia-soul", "North & Tiran"),
+            self.key("blue-seas", "North & Tiran"),
+        )
+
+
+class TestWhatOneTripSaysAboutItself(unittest.TestCase):
+    """The itinerary fragment, merged the way the fee book is.
+
+    Everything here is the operator's own words about a single trip, where the
+    dataset previously had a guess off the title or a figure about the hull.
+    """
+
+    def promoted(self, trips=None, **kwargs):
+        payload = promote(
+            candidate([departure(name="Simply the Best (Hurghada - Hurghada)")]),
+            season=SEASON,
+            trips=trips,
+            **kwargs,
+        )
+        return payload["itineraries"][0]
+
+    def test_the_operators_own_reefs_beat_the_title(self):
+        """"Simply the Best" names no reef. The fragment names four."""
+        self.assertEqual(self.promoted()["dive_sites"], [])
+        itinerary = self.promoted(
+            trips=trip_book(
+                name="Simply the Best (Hurghada - Hurghada)",
+                dive_sites=["brothers", "daedalus", "elphinstone"],
+            )
+        )
+        self.assertEqual(
+            itinerary["dive_sites"], ["brothers", "daedalus", "elphinstone"]
+        )
+
+    def test_the_fragment_replaces_the_title_rather_than_joining_it(self):
+        """A title is wrong about some trips -- a St John's week matched two of
+        BDE's three reefs and was badged accordingly. Unioning the two would
+        reimport exactly the error this source removes."""
+        itinerary = self.promoted(
+            trips=trip_book(
+                name="Simply the Best (Hurghada - Hurghada)",
+                dive_sites=["st johns"],
+            )
+        )
+        payload = promote(
+            candidate([departure(name="Brothers & Daedalus (Hurghada - Hurghada)")]),
+            season=SEASON,
+            trips=trip_book(
+                name="Brothers & Daedalus (Hurghada - Hurghada)",
+                dive_sites=["st johns"],
+            ),
+        )
+        self.assertEqual(itinerary["dive_sites"], ["st johns"])
+        self.assertEqual(payload["itineraries"][0]["dive_sites"], ["st johns"])
+
+    def test_an_unread_trip_keeps_the_sites_the_title_gave_it(self):
+        """A fetch that has not reached a trip must not blank it."""
+        payload = promote(
+            candidate([departure(name="Brothers & Daedalus (Hurghada - Hurghada)")]),
+            season=SEASON,
+            trips=trip_book(boat="another-boat", name="Something Else"),
+        )
+        self.assertEqual(
+            payload["itineraries"][0]["dive_sites"], ["brothers", "daedalus"]
+        )
+
+    def test_a_region_is_dropped_once_the_fragment_names_reefs(self):
+        """The region exists only for titles that name no site at all."""
+        payload = promote(
+            candidate([departure(name="Northern Red Sea (Hurghada - Hurghada)")]),
+            season=SEASON,
+        )
+        self.assertIsNotNone(payload["itineraries"][0]["region"])
+        payload = promote(
+            candidate([departure(name="Northern Red Sea (Hurghada - Hurghada)")]),
+            season=SEASON,
+            trips=trip_book(
+                name="Northern Red Sea (Hurghada - Hurghada)", dive_sites=["thistlegorm"]
+            ),
+        )
+        self.assertIsNone(payload["itineraries"][0]["region"])
+
+    def test_a_per_trip_dive_count_needs_no_trip_length_guard(self):
+        """The vessel-level count is a standard week's, so it is withheld from
+        every other length that boat sells. This one is stated for this trip."""
+        payload = promote(
+            candidate([departure(start="2027-05-01", end="2027-05-04")]),
+            season=SEASON,
+            trips=trip_book(dives=9),
+        )
+        self.assertEqual(payload["itineraries"][0]["nights"], 3)
+        self.assertEqual(payload["itineraries"][0]["dives"], 9)
+
+    def test_the_vessel_count_remains_the_fallback(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul", "dives": 20}],
+            ),
+            season=SEASON,
+            trips=trip_book(dives=None),
+        )
+        self.assertEqual(payload["itineraries"][0]["dives"], 20)
+
+    def test_a_trip_the_fragment_is_silent_about_still_says_nothing(self):
+        payload = promote(candidate([departure()]), season=SEASON, trips=trip_book())
+        self.assertEqual(payload["itineraries"][0]["dives"], 0)
+
+
+class TestTheStatedEntryBar(unittest.TestCase):
+    """A safety requirement is the operator's claim and is never softened."""
+
+    def bar(self, **fields):
+        payload = promote(candidate([departure()]), season=SEASON,
+                          trips=trip_book(**fields))
+        return payload["itineraries"][0].get("requirements")
+
+    def test_a_certification_and_a_dive_count_are_both_kept(self):
+        bar = self.bar(
+            experience="Advanced Open Water - 50 minimum logged dives required.",
+            min_logged_dives=50,
+        )
+        self.assertEqual(bar["min_level"], "advanced_50")
+        self.assertEqual(bar["min_logged_dives"], 50)
+        self.assertEqual(
+            bar["notes"], "Advanced Open Water - 50 minimum logged dives required."
+        )
+
+    def test_a_certification_with_no_number_asks_for_none(self):
+        """Filling in a plausible count would soften a stated requirement."""
+        bar = self.bar(experience="Advanced Open Water required.", min_logged_dives=0)
+        self.assertEqual(bar["min_level"], "advanced")
+        self.assertEqual(bar["min_logged_dives"], 0)
+
+    def test_a_hundred_dive_level_needs_a_hundred_dives_stated(self):
+        """"Advanced + 100 dives" is what that level says. Reading it out of
+        the word "experienced" puts a bar on a trip nobody set one for."""
+        bar = self.bar(experience="Suitable for experienced divers.",
+                       min_logged_dives=0)
+        self.assertEqual(bar["min_level"], "advanced")
+        self.assertEqual(bar["min_logged_dives"], 0)
+        self.assertEqual(self.bar(experience="x", min_logged_dives=120)["min_level"],
+                         "experienced_100")
+
+    def test_an_unread_trip_states_no_bar_at_all(self):
+        """Absent means nobody looked, not that the operator asks for nothing
+        -- the same distinction this module makes about fees. The key is left
+        out rather than written as null, so a diff that gains one is somebody
+        having read a safety requirement.
+        """
+        self.assertIsNone(self.bar())
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.assertNotIn("requirements", payload["itineraries"][0])
+
+    def test_the_wording_survives_the_dataset(self):
+        payload = promote(
+            candidate([departure()]),
+            season=SEASON,
+            trips=trip_book(
+                experience="Advanced Open Water - 50 minimum logged dives required.",
+                min_logged_dives=50,
+            ),
+        )
+        itinerary = next(iter(Dataset.from_dict(payload).itineraries.values()))
+        self.assertEqual(itinerary.requirements.min_logged_dives, 50)
+        self.assertIn("50 minimum logged", itinerary.requirements.notes)
+
+
+class TestGuestsFromATripAreAFallback(unittest.TestCase):
+    """The specification table states the hull's maximum; a fragment states one
+    sailing's. The table wins, and this fills the rows it is missing."""
+
+    def test_the_specification_table_still_wins(self):
+        payload = promote(
+            candidate([departure()]),
+            season=SEASON,
+            fees=fee_book(specs={"guests": 26}),
+            trips=trip_book(guests=20),
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 26)
+
+    def test_a_trip_beats_a_regex_over_the_marketing_copy(self):
+        payload = promote(
+            candidate(
+                [departure()],
+                itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                              "summary": "A 36m boat for 34 guests."}],
+            ),
+            season=SEASON,
+            trips=trip_book(guests=20),
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 20)
+
+    def test_the_answer_does_not_depend_on_the_order_of_the_file(self):
+        """A boat's trips can disagree; the most common answer wins, not
+        whichever one sorts first."""
+        book = trip_book(name="Trip A", guests=12)
+        book["trips"]["alia-soul::Trip B"] = {
+            "boat": "alia-soul", "name": "Trip B", "guests": 20}
+        book["trips"]["alia-soul::Trip C"] = {
+            "boat": "alia-soul", "name": "Trip C", "guests": 20}
+        payload = promote(
+            candidate([departure(name="Trip A"), departure(name="Trip B",
+                                                          start="2027-05-08",
+                                                          end="2027-05-15")]),
+            season=SEASON,
+            trips=book,
+        )
+        self.assertEqual(payload["boats"][0]["guests"], 20)

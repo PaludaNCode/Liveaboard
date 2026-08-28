@@ -16,7 +16,7 @@ from typing import Any
 
 from .dataset import Dataset, DatasetError
 from .pricing import compute, mandatory_known, resolve_fees
-from .promote import promote
+from .promote import itinerary_key, promote
 from .render import render
 from .scrape.base import FetchBlocked, PoliteFetcher, ScrapeOutput
 from .scrape.liveaboard_com import LiveaboardComAdapter
@@ -381,7 +381,47 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if facts_path.exists():
         facts = json.loads(facts_path.read_text(encoding="utf-8"))
 
-    payload = promote(candidate, season=season, fees=fees, fx=fx, facts=facts)
+    # What the operator says about each trip -- reefs, dive count, group size,
+    # entry bar -- read from the itinerary fragment by its own incremental
+    # crawl. Absent means nothing has been fetched yet, and every field it
+    # fills has a fallback, so the pipeline degrades to what it read before.
+    trips = None
+    trips_path = Path(args.trips)
+    if trips_path.exists():
+        trips = json.loads(trips_path.read_text(encoding="utf-8"))
+
+    payload = promote(
+        candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips
+    )
+
+    if trips:
+        book = {
+            itinerary_key(t["boat"], t["name"])
+            for t in (trips.get("trips") or {}).values()
+            if t.get("boat") and t.get("name")
+        }
+        read = len(trips.get("trips") or {})
+        total = len(payload["itineraries"])
+        matched = sum(
+            1 for i in payload["itineraries"]
+            if itinerary_key(i["boat_id"], i["name"]) in book
+        )
+        with_dives = sum(1 for i in payload["itineraries"] if i["dives"])
+        with_bar = sum(1 for i in payload["itineraries"] if i.get("requirements"))
+        print(
+            f"  itinerary fragments read for {read} trips from {trips_path}"
+            f" (collected {trips.get('collected', 'undated')});"
+            f" matched {matched}/{total} itineraries,"
+            f" {with_dives} with a dive count, {with_bar} with an entry bar"
+        )
+        if read and not matched:
+            # The book keys on vessel plus trip name. A book full of trips
+            # that matches nothing is a rename at the source, not an empty
+            # file, and it fails silently by falling back everywhere.
+            print(
+                f"::warning::{read} trips in {trips_path} matched no itinerary;"
+                f" the trip names it was built from no longer exist"
+            )
 
     if facts:
         covered = len(facts.get("vessels") or {})
@@ -608,6 +648,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--fees", default=Path("data/fees.json"), type=Path)
     promote_cmd.add_argument("--fx", default=Path("data/fx.json"), type=Path)
     promote_cmd.add_argument("--facts", default=Path("data/operator_facts.json"), type=Path)
+    promote_cmd.add_argument("--trips", default=Path("data/itineraries.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

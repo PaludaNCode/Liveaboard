@@ -20,7 +20,7 @@ from datetime import date
 from typing import Any
 
 from .classify import normalise
-from .taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
+from .taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier, SourceKind
 
 UNKNOWN_OPERATOR = {
     "id": "unknown-operator",
@@ -192,6 +192,30 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
     return name.strip(), promotion, ports
 
 
+def itinerary_key(slug: str, name: str) -> str:
+    """One itinerary, identified as ``promote`` groups them: vessel + trip name.
+
+    Departures are grouped by ``(slug, name)`` below, so anything read per
+    *trip* rather than per sailing -- the itinerary book that
+    ``tools/fetch_itineraries.py`` writes -- has to key on the same pair or it
+    finds nothing.
+
+    Put through :func:`_split_title` rather than compared raw, because the two
+    sides do not spell a trip the same way. The book is built from archived
+    ``Event`` names, which carry the operator's discount banner -- "20% Off:
+    Ultimate Red Sea (Port Ghalib - Hurghada)" -- and the promoted name has
+    already had it removed, because a week on sale is the same week. Keyed on
+    the raw string, 71 of 314 itineraries matched nothing and the fetcher spent
+    97 requests re-reading trips under their banner spellings.
+
+    Exported so the fetcher imports it rather than reimplementing it. Two
+    copies of this rule drifting apart is a book that silently matches nothing,
+    and every field it fills has a fallback, so nothing would fail loudly.
+    """
+    trip, _, _ = _split_title(name)
+    return f"{slug}::{trip}"
+
+
 def _display_title(name: str) -> str:
     """The trip name with its port pair removed, for the column that shows it.
 
@@ -296,6 +320,61 @@ def _dives(
     return stated
 
 
+ABOVE_OPEN_WATER = re.compile(
+    r"\b(?:advanced|experienced|technical|tec|tech)\b", re.I
+)
+"""Words that put an experience line above the entry level.
+
+The line is free text -- "Advanced Open Water - 50 minimum logged dives
+required." on the one trip a probe has read, and the spread across the fleet is
+unknown -- so it is matched rather than mapped from a fixed vocabulary, and
+anything unrecognised stays Open Water. Nothing is lost either way: the
+operator's sentence is kept verbatim beside the level.
+
+Deliberately no keyword reaches ``EXPERIENCED_100``. That level's label is
+"Advanced + 100 dives", so reading it out of the word "experienced" would put a
+hundred-dive bar on a trip whose operator named no number at all. The count
+comes from the count.
+"""
+
+
+def _requirements(trip: dict[str, Any]) -> dict[str, Any] | None:
+    """The entry bar a trip states, or ``None`` when none was read.
+
+    ``None`` means nobody has looked, not that the operator asks for nothing --
+    the same distinction this module makes about fees. It is the safer way
+    round for a safety requirement: an unread trip shows no bar rather than a
+    bar somebody invented.
+
+    The operator's sentence is kept verbatim in ``notes``. The level and the
+    logged-dive count are only ever read *out* of it, never added to it: a line
+    naming a certification and no number gets ``min_logged_dives`` of zero,
+    because filling in a plausible one would soften a stated requirement.
+    """
+    experience = (trip.get("experience") or "").strip()
+    logged = int(trip.get("min_logged_dives") or 0)
+    if not experience and not logged:
+        return None
+
+    if logged >= 100:
+        level = DiverLevel.EXPERIENCED_100
+    elif logged >= 50:
+        level = DiverLevel.ADVANCED_50
+    elif ABOVE_OPEN_WATER.search(experience):
+        level = DiverLevel.ADVANCED
+    else:
+        level = DiverLevel.OPEN_WATER
+
+    return {
+        "min_level": level.value,
+        "min_logged_dives": logged,
+        "max_depth_m": None,
+        "nitrox_recommended": False,
+        "strong_current": False,
+        "notes": experience or None,
+    }
+
+
 AVAILABILITY = {
     "soldout": "sold_out",
     "outofstock": "sold_out",
@@ -366,6 +445,7 @@ def promote(
     notes: str | None = None,
     fees: dict[str, Any] | None = None,
     facts: dict[str, Any] | None = None,
+    trips: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -391,6 +471,31 @@ def promote(
                 fee_book[slug] = entry["fees"]
             if entry.get("specs"):
                 spec_book[slug] = entry["specs"]
+
+    # What the operator says about *one trip*: the reefs it visits, how many
+    # dives it fits in, how many people are aboard and who it will take. Read
+    # from the itinerary fragment by ``tools/fetch_itineraries.py`` and merged
+    # here the way the fee book is, because it is a separate crawl with its own
+    # cadence -- a trip's reefs do not change from night to night.
+    #
+    # Keyed on vessel plus trip name, which is what an itinerary is here.
+    trip_book: dict[str, dict[str, Any]] = {}
+    for trip in ((trips or {}).get("trips") or {}).values():
+        if trip.get("boat") and trip.get("name"):
+            trip_book[itinerary_key(trip["boat"], trip["name"])] = trip
+
+    # A vessel's guest count, as its own trips state it. Fallback only: the
+    # specification table's "Max guests" is the hull's number and this is one
+    # sailing's, so it is used where the table is missing the row. Taken as the
+    # most common answer across that boat's trips rather than whichever trip
+    # sorts first, so the figure does not depend on the order of the file.
+    trip_guests: dict[str, int] = {}
+    stated_guests: dict[str, dict[int, int]] = defaultdict(lambda: defaultdict(int))
+    for trip in trip_book.values():
+        if trip.get("guests"):
+            stated_guests[trip["boat"]][int(trip["guests"])] += 1
+    for boat_slug, counts in stated_guests.items():
+        trip_guests[boat_slug] = max(counts.items(), key=lambda kv: (kv[1], kv[0]))[0]
 
     # Figures read off a vessel page by hand, for the boats whose extras block
     # names a charge without a number. They win per fee code: a page that says
@@ -523,6 +628,7 @@ def promote(
                 # missing the row.
                 "guests": (spec_book.get(slug, {}).get("guests")
                            or hand.get(slug, {}).get("guests")
+                           or trip_guests.get(slug)
                            or _guests(source.get("summary"))),
                 "cabins": spec_book.get(slug, {}).get("cabins"),
             },
@@ -530,6 +636,16 @@ def promote(
 
         itinerary_id = f"{slug}--{slugify(name)}"[:96]
         nights = _most_common(d["nights"] for d in group)
+        trip = trip_book.get(itinerary_key(slug, name), {})
+
+        # The operator's own list of reefs for this trip, when it has been
+        # read. It beats the title outright rather than being merged with it:
+        # a title is branding on 23 itineraries and actively wrong on some --
+        # a St John's week matched two of BDE's three reefs and was badged
+        # accordingly -- so unioning the two would reimport exactly the error
+        # this source exists to remove. The title stays as the fallback, so a
+        # trip the fetcher has not reached keeps the sites it already had.
+        sites = trip.get("dive_sites") or _sites_from_name(name)
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
@@ -552,23 +668,30 @@ def promote(
                 "nights": nights,
                 # Zero means the operator does not publish one, and the page
                 # says so rather than dividing by a number nobody stated.
-                "dives": _dives(
+                #
+                # The itinerary fragment states a count for *this trip*, which
+                # is what the column has always wanted: the vessel-level
+                # figures behind ``_dives`` are a standard week's, and had to
+                # be withheld from every other trip length that boat sells to
+                # stay honest. A per-trip figure needs no such guard, so it is
+                # taken as stated and the vessel figure remains the fallback.
+                "dives": trip.get("dives") or _dives(
                     hand.get(slug, {}).get("dives") or source.get("dives"),
                     nights=nights,
                     for_nights=hand.get(slug, {}).get("dives_for_nights"),
                 ),
                 "port_from": port_from,
                 "port_to": port_to,
-                # The source publishes no site list, so these are read off the
-                # trip title, which usually names the reefs. This is what the
-                # page filters on -- there is no route label over the top of
-                # it any more, because a name for a set of sites could be
-                # wrong about a trip in a way the sites themselves cannot.
-                "dive_sites": _sites_from_name(name),
-                # Only when the title names no reef at all, so the column says
-                # something true rather than sitting empty on 51 trips.
-                "region": (None if _sites_from_name(name)
-                           else _region_from_name(name)),
+                # Where the trip goes: the operator's own "Key regions" list
+                # when the fragment has been read, otherwise the trip title,
+                # which usually names the reefs. This is what the page filters
+                # on -- there is no route label over the top of it any more,
+                # because a name for a set of sites could be wrong about a
+                # trip in a way the sites themselves cannot.
+                "dive_sites": sites,
+                # Only when nothing names a reef at all, so the column says
+                # something true rather than sitting empty.
+                "region": None if sites else _region_from_name(name),
                 "summary": source.get("summary"),
                 "source_url": source.get("source_url"),
                 # Empty when the fee run has not covered this vessel. The
@@ -576,6 +699,16 @@ def promote(
                 "fees": fee_book.get(slug, source.get("fees") or []),
             }
         )
+
+        # Written only when the operator has actually stated one, rather than
+        # as 314 nulls. A key appearing in a dataset diff then means somebody
+        # read a safety requirement, which is the only reason to look at it.
+        # An absent key loads as the default bar, which asks for nothing --
+        # and that is the safe way round: an unread trip must not carry a
+        # requirement nobody stated.
+        bar = _requirements(trip)
+        if bar:
+            itineraries[-1]["requirements"] = bar
 
         for item in group:
             entry = {

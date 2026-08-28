@@ -23,9 +23,9 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml` and the CI check all
-promote on them, so one canonical set of inputs lives in `cli.py` and cannot
-drift apart across four workflows.
+Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
+and the CI check all promote on them, so one canonical set of inputs lives in
+`cli.py` and cannot drift apart across five workflows.
 
 ## Invariants
 
@@ -67,8 +67,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   The spread has a cause: a week that crosses further, or sits longer in the
   parks where night dives are not permitted, fits fewer in. Operators quote a
   range and the dataset keeps the **low end**, so price per dive is a ceiling.
-  A count is a per-vessel figure for a standard week (`dives_for_nights`), not
-  a per-trip one; unknown stays 0 and the column says "not stated".
+  A vessel-level count is for a standard week (`dives_for_nights`) and is
+  withheld from every other trip length that boat sells; the itinerary fragment
+  states one per *trip*, which needs no such guard and wins. Unknown stays 0 and
+  the column says "not stated".
+- **The per-trip book beats the trip title, and never joins it.** `promote`
+  merges `data/itineraries.json` — the operator's own reefs, dive count, group
+  size and entry bar for one trip — the way it merges the fee book. Where it is
+  silent the title parser still answers, so a fetch that has not reached a trip
+  never blanks it. Unioning the two would reimport the titles' errors, which is
+  the whole reason the fragment is fetched. Both sides key on
+  `promote.itinerary_key`; every field has a fallback, so a key that stops
+  matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
@@ -110,6 +120,17 @@ Fees, gear prices and the specification table are rendered client-side, so
 `tools/scrape_fees.py` drives a browser weekly and reads all three panels from
 one page load. A capped run (`--limit N`) merges into the existing fee book
 rather than replacing it: it knows nothing about the vessels it did not visit.
+
+What one *trip* says about itself needs no browser and no crawl to find:
+`tools/fetch_itineraries.py` builds every URL from ids already in
+`data/archive.json` and fetches `/itinerary/getpopupv2` over plain HTTP, in the
+daily refresh. Incremental — a trip already in `data/itineraries.json` is not
+re-fetched — so the first run is ~314 requests and every run after it is a
+handful. Everything else in the pipeline describes the boat's year.
+`itineraries.yml` runs it alone, capped (`--limit N`), which is how a change to
+the parser gets proved against three real trips before it is pointed at three
+hundred of somebody else's pages. A capped run merges into the book, like
+`scrape_fees.py --limit`.
 
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page
