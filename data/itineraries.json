@@ -8839,6 +8839,64 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6513&tourID=425366&languageID=1&curr=USD&showPrices=false"
     },
+    "ghazala-adventure::North, Tiran & Dahab (Hurghada - Hurghada)": {
+      "boat": "ghazala-adventure",
+      "name": "North, Tiran & Dahab (Hurghada - Hurghada)",
+      "tour_id": "425369",
+      "collected": "2026-08-28",
+      "regions": [
+        "Ras Mohammed",
+        "Straits Of Tiran",
+        "Abu Dabab",
+        "Abu Nuhas",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "tiran",
+        "abu dabab",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 20,
+      "guests": 26,
+      "experience": "Advanced Open Water - 20 minimum logged dives required.",
+      "min_logged_dives": 20,
+      "intro": "(*) the itinerary described below is provided by the boat operator Great variety of dive sites: some of the greatest wrecks, Ras Mohamed National Park, the world-famous Blue Hole, and Canyon of Dahab. The wrecks of Abu Nuhas are mainly accessible to divers of all levels. Yet, they still astonish and exceed the expectations of the most seasoned wreck divers. This route is famous for its wrecks, healthy reefs, and a good chance to spend time with friendly bottlenose dolphins.",
+      "sections": [
+        {
+          "heading": "DAY 1",
+          "text": "Arrive from the airport to our yacht. Welcome briefing by our Cruise Director & cabin allocation",
+          "is_day": true
+        },
+        {
+          "heading": "DAY 2 - 6",
+          "text": "3 - 4 dives, including a night dive if permitted by the authorities",
+          "is_day": true
+        },
+        {
+          "heading": "DAY 7",
+          "text": "Max 2 dives on the last day & returns to port",
+          "is_day": true
+        },
+        {
+          "heading": "DAY 8",
+          "text": "Trip debriefing, check out, and airport transport",
+          "is_day": true
+        },
+        {
+          "heading": "Dive Sites",
+          "text": "SS Thistlegorm Dahab Straits of Tiran Ras Mohammed Abu Nuhas",
+          "is_day": false
+        },
+        {
+          "heading": "Note",
+          "text": "Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion. Night dives are prohibited at all marine park islands. The last dive will be on the penultimate day of the trip at around 12.00. Divers are recommended to wait for 24hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6513&tourID=425369&languageID=1&curr=USD&showPrices=false"
+    },
     "ghazala-adventure::North: Wrecks & Reefs (Hurghada - Hurghada)": {
       "boat": "ghazala-adventure",
       "name": "North: Wrecks & Reefs (Hurghada - Hurghada)",

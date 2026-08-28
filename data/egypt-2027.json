@@ -5,13 +5,13 @@
   "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price.",
   "fx": {
     "display_currency": "EUR",
-    "as_of": "2026-08-27",
+    "as_of": "2026-08-28",
     "source": "European Central Bank euro foreign exchange reference rates",
     "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
     "retrieved": "2026-08-28",
     "rates": {
-      "GBP": 1.166317,
-      "USD": 0.858738
+      "GBP": 1.166589,
+      "USD": 0.858885
     }
   },
   "operators": [
@@ -164,10 +164,6 @@
       "name": "Seafari International"
     },
     {
-      "id": "seamad-cruises",
-      "name": "Seamad Cruises"
-    },
-    {
       "id": "sindalahs-yacht",
       "name": "Sindalahs Yacht"
     },
@@ -189,13 +185,6 @@
       "id": "alsuraya",
       "name": "ALSURAYA",
       "operator_id": "alsuraya",
-      "guests": 24,
-      "cabins": 12
-    },
-    {
-      "id": "avo",
-      "name": "AVO",
-      "operator_id": "seamad-cruises",
       "guests": 24,
       "cabins": 12
     },
@@ -247,13 +236,6 @@
       "operator_id": "blue-shades-diving",
       "guests": 34,
       "cabins": 17
-    },
-    {
-      "id": "blue",
-      "name": "Blue",
-      "operator_id": "blue-planet-liveaboards",
-      "guests": 24,
-      "cabins": 12
     },
     {
       "id": "blue-horizon",
@@ -6603,197 +6585,6 @@
       }
     },
     {
-      "id": "avo--daedalus-elphinstone-port-ghalib-port-ghalib",
-      "name": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Elphinstone",
-      "operator_id": "seamad-cruises",
-      "boat_id": "avo",
-      "nights": 5,
-      "dives": 12,
-      "port_from": "Port Ghalib",
-      "port_to": "Port Ghalib",
-      "dive_sites": [
-        "elphinstone",
-        "daedalus",
-        "marsa shouna"
-      ],
-      "region": null,
-      "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=8/2027",
-      "fees": [
-        {
-          "code": "service_charge",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 80.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 450.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 180.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 550.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 230.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 360.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkeling Guide: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "advanced_50",
-        "min_logged_dives": 50,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
       "id": "bismarck--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",
       "name": "Sataya (Fury Shoals) - St. John's (Port Ghalib - Port Ghalib)",
       "title": "Sataya (Fury Shoals) - St. John's",
@@ -6960,348 +6751,6 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
-    },
-    {
-      "id": "blue--brothers-daedalus-and-elphinstone-hurghada-hurghada",
-      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
-      "title": "Brothers, Daedalus and Elphinstone",
-      "operator_id": "blue-planet-liveaboards",
-      "boat_id": "blue",
-      "nights": 7,
-      "dives": 18,
-      "port_from": "Hurghada",
-      "port_to": "Hurghada",
-      "dive_sites": [
-        "brothers",
-        "daedalus",
-        "elphinstone"
-      ],
-      "region": null,
-      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
-      "fees": [
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 290.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 320.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 3.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 190.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 135.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "advanced_50",
-        "min_logged_dives": 50,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
-      "id": "blue--north-tiran-hurghada-hurghada",
-      "name": "North & Tiran (Hurghada - Hurghada)",
-      "title": "North & Tiran",
-      "operator_id": "blue-planet-liveaboards",
-      "boat_id": "blue",
-      "nights": 7,
-      "dives": 18,
-      "port_from": "Hurghada",
-      "port_to": "Hurghada",
-      "dive_sites": [
-        "tiran",
-        "abu nuhas",
-        "thistlegorm"
-      ],
-      "region": null,
-      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
-      "fees": [
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 290.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 320.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 3.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 190.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 135.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "open_water",
-        "min_logged_dives": 30,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
       }
     },
     {
@@ -8151,213 +7600,6 @@
         "elphinstone",
         "daedalus",
         "fury shoal"
-      ],
-      "region": null,
-      "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=8/2027",
-      "fees": [
-        {
-          "code": "fuel_surcharge",
-          "tier": "mandatory",
-          "basis": "per_day",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 8.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "marine_park",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 200.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"National Park Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 135.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Nitrox\" as a range"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 100.0,
-            "currency": "USD"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": null,
-          "note": "Private Dive Guide: listed with no price"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 6.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 9.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Snorkel Gear\" as a range"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-          },
-          "amount": {
-            "amount": 210.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 315.0,
-            "currency": "USD"
-          },
-          "basis": "per_trip",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
-        }
-      ],
-      "requirements": {
-        "min_level": "open_water",
-        "min_logged_dives": 30,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
-    },
-    {
-      "id": "blue-horizon--northern-red-sea-brothers-hurghada-port-ghalib",
-      "name": "Northern Red Sea & Brothers (Hurghada - Port Ghalib)",
-      "title": "Northern Red Sea & Brothers",
-      "operator_id": "scuba-tours-worldwide",
-      "boat_id": "blue-horizon",
-      "nights": 7,
-      "dives": 21,
-      "port_from": "Hurghada",
-      "port_to": "Port Ghalib",
-      "dive_sites": [
-        "brothers",
-        "ras mohammed"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -15441,7 +14683,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -15669,7 +14911,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -15897,7 +15139,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -16126,7 +15368,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -16358,7 +15600,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -16587,7 +15829,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -16815,7 +16057,7 @@
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
-      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "fees": [
         {
           "code": "environment_tax",
@@ -17427,409 +16669,6 @@
       }
     },
     {
-      "id": "dune-longara--golden-triangle-safaga-ras-galep-port-ghalib",
-      "name": "Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
-      "title": "Golden Triangle",
-      "operator_id": "dune-world",
-      "boat_id": "dune-longara",
-      "nights": 7,
-      "dives": 15,
-      "port_from": "Safaga",
-      "port_to": "Port Ghalib",
-      "dive_sites": [
-        "brothers",
-        "daedalus",
-        "elphinstone"
-      ],
-      "region": null,
-      "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=8/2027",
-      "fees": [
-        {
-          "code": "environment_tax",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 300.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Environment Tax\" as a range"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "mandatory",
-          "basis": "per_day",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 10.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Fuel Surcharge\" as a range"
-        },
-        {
-          "code": "service_charge",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 60.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 120.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Mandatory Service Charge\" as a range"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Hotel Transfer: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 185.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 210.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 500.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkeling Guide: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 25.0,
-            "currency": "EUR"
-          },
-          "basis": "per_day",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "advanced_50",
-        "min_logged_dives": 50,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
-      "id": "dune-longara--golden-triangle-safaga-safaga",
-      "name": "Golden Triangle (Safaga - Safaga)",
-      "title": "Golden Triangle",
-      "operator_id": "dune-world",
-      "boat_id": "dune-longara",
-      "nights": 7,
-      "dives": 15,
-      "port_from": "Safaga",
-      "port_to": "Safaga",
-      "dive_sites": [
-        "brothers",
-        "daedalus",
-        "elphinstone",
-        "safaga"
-      ],
-      "region": null,
-      "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=8/2027",
-      "fees": [
-        {
-          "code": "environment_tax",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 300.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Environment Tax\" as a range"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "mandatory",
-          "basis": "per_day",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 10.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Fuel Surcharge\" as a range"
-        },
-        {
-          "code": "service_charge",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 60.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 120.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Mandatory Service Charge\" as a range"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Hotel Transfer: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 185.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 210.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 500.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkeling Guide: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 25.0,
-            "currency": "EUR"
-          },
-          "basis": "per_day",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "advanced_50",
-        "min_logged_dives": 50,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
       "id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
       "name": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
       "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s",
@@ -18031,210 +16870,6 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
-      "id": "dune-longara--north-dahab-tiran-safaga-safaga",
-      "name": "North Dahab Tiran (Safaga - Safaga)",
-      "title": "North Dahab Tiran",
-      "operator_id": "dune-world",
-      "boat_id": "dune-longara",
-      "nights": 7,
-      "dives": 16,
-      "port_from": "Safaga",
-      "port_to": "Safaga",
-      "dive_sites": [
-        "safaga",
-        "ras mohammed",
-        "tiran",
-        "abu nuhas",
-        "thistlegorm",
-        "dahab"
-      ],
-      "region": null,
-      "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=8/2027",
-      "fees": [
-        {
-          "code": "environment_tax",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 300.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Environment Tax\" as a range"
-        },
-        {
-          "code": "fuel_surcharge",
-          "tier": "mandatory",
-          "basis": "per_day",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 10.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "USD"
-          },
-          "note": "Operator quotes \"Fuel Surcharge\" as a range"
-        },
-        {
-          "code": "service_charge",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 60.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 120.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Mandatory Service Charge\" as a range"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Hotel Transfer: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Alcoholic Beverages: listed with no price"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 185.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 210.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 500.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkeling Guide: listed with no price"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-          },
-          "amount": {
-            "amount": 25.0,
-            "currency": "EUR"
-          },
-          "basis": "per_day",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "open_water",
-        "min_logged_dives": 20,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Open Water - 20 minimum logged dives required."
       }
     },
     {
@@ -21826,156 +20461,6 @@
       }
     },
     {
-      "id": "emperor-asmaa--daedalus-fury-and-elphinstone-marsa-ghalib-marsa-ghalib",
-      "name": "Daedalus, Fury and Elphinstone (Marsa Ghalib - Marsa Ghalib)",
-      "title": "Daedalus, Fury and Elphinstone",
-      "operator_id": "emperor-divers",
-      "boat_id": "emperor-asmaa",
-      "nights": 7,
-      "dives": 18,
-      "port_from": "Port Ghalib",
-      "port_to": "Port Ghalib",
-      "dive_sites": [
-        "daedalus",
-        "elphinstone",
-        "fury shoal"
-      ],
-      "region": null,
-      "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=8/2027",
-      "fees": [
-        {
-          "code": "gratuities",
-          "tier": "customary",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 120.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Gratuities\" as a range"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 3.5,
-            "currency": "EUR"
-          },
-          "note": "Alcoholic Beverages"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 160.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "private_guide",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 599.0,
-            "currency": "EUR"
-          }
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 69.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-          },
-          "amount": {
-            "amount": 206.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "included": true,
-          "amount": null,
-          "basis": "per_trip",
-          "note": "Vessel lists nitrox as free",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27"
-          }
-        }
-      ],
-      "requirements": {
-        "min_level": "advanced_50",
-        "min_logged_dives": 50,
-        "max_depth_m": null,
-        "nitrox_recommended": false,
-        "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
-    },
-    {
       "id": "emperor-asmaa--famous-five-marsa-ghalib-hurghada",
       "name": "Famous Five (Marsa Ghalib - Hurghada)",
       "title": "Famous Five",
@@ -24421,7 +22906,7 @@
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "fees": [
         {
           "code": "gratuities",
@@ -24551,7 +23036,7 @@
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "fees": [
         {
           "code": "gratuities",
@@ -24680,7 +23165,7 @@
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "fees": [
         {
           "code": "gratuities",
@@ -24810,7 +23295,138 @@
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
+      "fees": [
+        {
+          "code": "gratuities",
+          "tier": "customary",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox Course: listed with no price"
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": null,
+          "note": "Private Dive Guide: listed with no price"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": null,
+          "note": "Scuba Diving Courses: listed with no price"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "included": true,
+          "amount": null,
+          "basis": "per_trip",
+          "note": "Vessel lists nitrox as free",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27"
+          }
+        }
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 20,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 20 minimum logged dives required."
+      }
+    },
+    {
+      "id": "ghazala-adventure--north-tiran-dahab-hurghada-hurghada",
+      "name": "North, Tiran & Dahab (Hurghada - Hurghada)",
+      "title": "North, Tiran & Dahab",
+      "operator_id": "ocean-tribe-fleet",
+      "boat_id": "ghazala-adventure",
+      "nights": 7,
+      "dives": 20,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "ras mohammed",
+        "tiran",
+        "abu dabab",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "region": null,
+      "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "fees": [
         {
           "code": "gratuities",
@@ -24940,7 +23556,7 @@
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "fees": [
         {
           "code": "gratuities",
@@ -39735,7 +38351,7 @@
       ],
       "region": null,
       "summary": "The Red Sea Aggressor V is a liveaboard offering comfortable accommodations, top-tier amenities, and diving adventures in Egypt&rsquo;s southern Red Sea.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=7/2027",
       "fees": [
         {
           "code": "fuel_surcharge",
@@ -39930,7 +38546,7 @@
       ],
       "region": null,
       "summary": "The Red Sea Aggressor V is a liveaboard offering comfortable accommodations, top-tier amenities, and diving adventures in Egypt&rsquo;s southern Red Sea.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027",
+      "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=7/2027",
       "fees": [
         {
           "code": "fuel_surcharge",
@@ -61444,7 +60060,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1469.0,
+        "amount": 1468.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=05/2027",
@@ -61463,7 +60079,7 @@
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
-        "amount": 1469.0,
+        "amount": 1468.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=07/2027",
@@ -62712,7 +61328,7 @@
       "start": "2027-07-10",
       "end": "2027-07-24",
       "price": {
-        "amount": 2182.0,
+        "amount": 2181.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
@@ -62748,7 +61364,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 2436.0,
+        "amount": 2435.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
@@ -62766,7 +61382,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 2182.0,
+        "amount": 2181.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
@@ -62784,7 +61400,7 @@
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 2273.0,
+        "amount": 2272.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
@@ -62802,7 +61418,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 2308.0,
+        "amount": 2307.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
@@ -62820,7 +61436,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 2266.0,
+        "amount": 2265.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
@@ -62838,7 +61454,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 2266.0,
+        "amount": 2265.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
@@ -62856,7 +61472,7 @@
       "start": "2027-07-03",
       "end": "2027-07-10",
       "price": {
-        "amount": 2266.0,
+        "amount": 2265.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
@@ -62874,7 +61490,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 2238.0,
+        "amount": 2237.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
@@ -62892,7 +61508,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 2266.0,
+        "amount": 2265.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=06/2027",
@@ -62910,7 +61526,7 @@
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
-        "amount": 2182.0,
+        "amount": 2181.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=07/2027",
@@ -62946,7 +61562,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 2238.0,
+        "amount": 2237.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
@@ -62982,7 +61598,7 @@
       "start": "2027-08-07",
       "end": "2027-08-14",
       "price": {
-        "amount": 2266.0,
+        "amount": 2265.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=08/2027",
@@ -63000,7 +61616,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 2308.0,
+        "amount": 2307.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=05/2027",
@@ -63031,31 +61647,12 @@
       }
     },
     {
-      "id": "avo-2027-07-24-0",
-      "itinerary_id": "avo--daedalus-elphinstone-port-ghalib-port-ghalib",
-      "start": "2027-07-24",
-      "end": "2027-07-29",
-      "price": {
-        "amount": 940.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/avo?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/avo?m=7/2027"
-      },
-      "promotion": "5% Off"
-    },
-    {
       "id": "bismarck-2027-07-31-0",
       "itinerary_id": "bismarck--sataya-fury-shoals-st-john-s-port-ghalib-port-ghalib",
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=07/2027",
@@ -63066,79 +61663,6 @@
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=7/2027"
       }
-    },
-    {
-      "id": "blue-2027-08-12-0",
-      "itinerary_id": "blue--brothers-daedalus-and-elphinstone-hurghada-hurghada",
-      "start": "2027-08-12",
-      "end": "2027-08-19",
-      "price": {
-        "amount": 1655.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027"
-      }
-    },
-    {
-      "id": "blue-2027-08-19-1",
-      "itinerary_id": "blue--north-tiran-hurghada-hurghada",
-      "start": "2027-08-19",
-      "end": "2027-08-26",
-      "price": {
-        "amount": 1503.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027"
-      }
-    },
-    {
-      "id": "blue-horizon-2027-05-01-0",
-      "itinerary_id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-05-01",
-      "end": "2027-05-08",
-      "price": {
-        "amount": 1715.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
-      "availability": "sold_out",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-      }
-    },
-    {
-      "id": "blue-horizon-2027-05-08-1",
-      "itinerary_id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-05-08",
-      "end": "2027-05-15",
-      "price": {
-        "amount": 1372.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-      },
-      "promotion": "20% Off"
     },
     {
       "id": "blue-horizon-2027-07-17-1",
@@ -63231,43 +61755,6 @@
       }
     },
     {
-      "id": "blue-horizon-2027-05-22-3",
-      "itinerary_id": "blue-horizon--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1372.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-      },
-      "promotion": "20% Off"
-    },
-    {
-      "id": "blue-horizon-2027-05-29-4",
-      "itinerary_id": "blue-horizon--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1715.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
-      "availability": "sold_out",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-      }
-    },
-    {
       "id": "blue-horizon-2027-08-07-0",
       "itinerary_id": "blue-horizon--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
       "start": "2027-08-07",
@@ -63284,25 +61771,6 @@
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=8/2027"
       }
-    },
-    {
-      "id": "blue-horizon-2027-05-15-2",
-      "itinerary_id": "blue-horizon--northern-red-sea-brothers-hurghada-port-ghalib",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1204.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
-      },
-      "promotion": "20% Off"
     },
     {
       "id": "blue-horizon-2027-07-10-0",
@@ -63691,7 +62159,7 @@
       "start": "2027-07-29",
       "end": "2027-08-05",
       "price": {
-        "amount": 1836.0,
+        "amount": 1835.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=07/2027",
@@ -64069,7 +62537,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=06/2027",
@@ -64087,7 +62555,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=06/2027",
@@ -64105,7 +62573,7 @@
       "start": "2027-07-03",
       "end": "2027-07-10",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -64123,7 +62591,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=05/2027",
@@ -64159,7 +62627,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=05/2027",
@@ -64177,7 +62645,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=05/2027",
@@ -64195,7 +62663,7 @@
       "start": "2027-08-21",
       "end": "2027-08-28",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=08/2027",
@@ -64213,7 +62681,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -64231,7 +62699,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=08/2027",
@@ -64249,7 +62717,7 @@
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=08/2027",
@@ -64267,7 +62735,7 @@
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -64285,7 +62753,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=05/2027",
@@ -64303,7 +62771,7 @@
       "start": "2027-06-09",
       "end": "2027-06-19",
       "price": {
-        "amount": 2272.0,
+        "amount": 2271.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=06/2027",
@@ -64339,7 +62807,7 @@
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
-        "amount": 1631.0,
+        "amount": 1630.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/destiny?m=07/2027",
@@ -64489,7 +62957,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=06/2027",
@@ -64508,7 +62976,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=06/2027",
@@ -64527,7 +62995,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=06/2027",
@@ -64546,7 +63014,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=06/2027",
@@ -64564,7 +63032,7 @@
       "start": "2027-07-03",
       "end": "2027-07-10",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
@@ -64583,7 +63051,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=07/2027",
@@ -64602,7 +63070,7 @@
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=08/2027",
@@ -64621,7 +63089,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 892.0,
+        "amount": 891.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=08/2027",
@@ -64729,44 +63197,6 @@
       "promotion": "15% Off"
     },
     {
-      "id": "discovery-ii-2027-08-07-0",
-      "itinerary_id": "discovery-ii--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-08-07",
-      "end": "2027-08-14",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-08-28-3",
-      "itinerary_id": "discovery-ii--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-08-28",
-      "end": "2027-09-04",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
       "id": "discovery-ii-2027-05-15-2",
       "itinerary_id": "discovery-ii--brothers-daedalus-elphinstone-hurghada-port-ghalib",
       "start": "2027-05-15",
@@ -64782,44 +63212,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=5/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-06-26-3",
-      "itinerary_id": "discovery-ii--brothers-daedalus-elphinstone-hurghada-port-ghalib",
-      "start": "2027-06-26",
-      "end": "2027-07-03",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-06-05-0",
-      "itinerary_id": "discovery-ii--brothers-daedalus-elphinstone-port-ghalib-hurghada",
-      "start": "2027-06-05",
-      "end": "2027-06-12",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
       },
       "promotion": "15% Off"
     },
@@ -64881,44 +63273,6 @@
       "promotion": "15% Off"
     },
     {
-      "id": "discovery-ii-2027-06-12-1",
-      "itinerary_id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
-      "start": "2027-06-12",
-      "end": "2027-06-19",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-06-19-2",
-      "itinerary_id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
-      "start": "2027-06-19",
-      "end": "2027-06-26",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
       "id": "discovery-ii-2027-07-24-3",
       "itinerary_id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "start": "2027-07-24",
@@ -64934,44 +63288,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-08-14-1",
-      "itinerary_id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
-      "start": "2027-08-14",
-      "end": "2027-08-21",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
-      },
-      "promotion": "15% Off"
-    },
-    {
-      "id": "discovery-ii-2027-08-21-2",
-      "itinerary_id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
-      "start": "2027-08-21",
-      "end": "2027-08-28",
-      "price": {
-        "amount": 1040.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
       },
       "promotion": "15% Off"
     },
@@ -65069,30 +63385,12 @@
       }
     },
     {
-      "id": "dune-longara-2027-05-22-3",
-      "itinerary_id": "dune-longara--golden-triangle-ras-galep-port-ghalib-ras-galep-port-ghalib",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1865.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-      }
-    },
-    {
       "id": "dune-longara-2027-06-05-0",
       "itinerary_id": "dune-longara--golden-triangle-ras-galep-port-ghalib-ras-galep-port-ghalib",
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=06/2027",
@@ -65110,7 +63408,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=06/2027",
@@ -65128,7 +63426,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=06/2027",
@@ -65141,66 +63439,12 @@
       }
     },
     {
-      "id": "dune-longara-2027-05-15-2",
-      "itinerary_id": "dune-longara--golden-triangle-safaga-ras-galep-port-ghalib",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1865.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-      }
-    },
-    {
-      "id": "dune-longara-2027-05-08-1",
-      "itinerary_id": "dune-longara--golden-triangle-safaga-safaga",
-      "start": "2027-05-08",
-      "end": "2027-05-15",
-      "price": {
-        "amount": 1865.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
-      "availability": "limited",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-      }
-    },
-    {
-      "id": "dune-longara-2027-05-29-4",
-      "itinerary_id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1573.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
-      }
-    },
-    {
       "id": "dune-longara-2027-08-14-1",
       "itinerary_id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=08/2027",
@@ -65218,7 +63462,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=08/2027",
@@ -65228,24 +63472,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=8/2027"
-      }
-    },
-    {
-      "id": "dune-longara-2027-05-01-0",
-      "itinerary_id": "dune-longara--north-dahab-tiran-safaga-safaga",
-      "start": "2027-05-01",
-      "end": "2027-05-08",
-      "price": {
-        "amount": 1690.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
       }
     },
     {
@@ -65308,7 +63534,7 @@
       "start": "2027-07-17",
       "end": "2027-07-31",
       "price": {
-        "amount": 2681.0,
+        "amount": 2680.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=07/2027",
@@ -65344,7 +63570,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=05/2027",
@@ -65362,7 +63588,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=05/2027",
@@ -65380,7 +63606,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=05/2027",
@@ -65398,7 +63624,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=06/2027",
@@ -65632,7 +63858,7 @@
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=07/2027",
@@ -65650,7 +63876,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=05/2027",
@@ -65668,7 +63894,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=05/2027",
@@ -65830,7 +64056,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=05/2027",
@@ -65848,7 +64074,7 @@
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=07/2027",
@@ -65858,24 +64084,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=7/2027"
-      }
-    },
-    {
-      "id": "emperor-asmaa-2027-05-08-1",
-      "itinerary_id": "emperor-asmaa--daedalus-fury-and-elphinstone-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-08",
-      "end": "2027-05-15",
-      "price": {
-        "amount": 1457.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
       }
     },
     {
@@ -65902,7 +64110,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=06/2027",
@@ -65912,24 +64120,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=6/2027"
-      }
-    },
-    {
-      "id": "emperor-asmaa-2027-05-01-0",
-      "itinerary_id": "emperor-asmaa--simply-the-best-hurghada-marsa-ghalib",
-      "start": "2027-05-01",
-      "end": "2027-05-08",
-      "price": {
-        "amount": 1515.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
-      "availability": "sold_out",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
       }
     },
     {
@@ -65948,24 +64138,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=7/2027"
-      }
-    },
-    {
-      "id": "emperor-asmaa-2027-05-15-2",
-      "itinerary_id": "emperor-asmaa--simply-the-best-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1573.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
       }
     },
     {
@@ -66041,24 +64213,6 @@
       }
     },
     {
-      "id": "emperor-asmaa-2027-05-29-4",
-      "itinerary_id": "emperor-asmaa--south-and-st-johns-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1515.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
-      }
-    },
-    {
       "id": "emperor-asmaa-2027-06-12-1",
       "itinerary_id": "emperor-asmaa--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "start": "2027-06-12",
@@ -66074,24 +64228,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=6/2027"
-      }
-    },
-    {
-      "id": "emperor-asmaa-2027-05-22-3",
-      "itinerary_id": "emperor-asmaa--southern-solitude-marsa-ghalib-marsa-ghalib",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1573.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
       }
     },
     {
@@ -66154,7 +64290,7 @@
       "start": "2027-06-10",
       "end": "2027-06-17",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=06/2027",
@@ -66172,7 +64308,7 @@
       "start": "2027-06-24",
       "end": "2027-07-01",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=06/2027",
@@ -66190,7 +64326,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=07/2027",
@@ -66208,7 +64344,7 @@
       "start": "2027-07-22",
       "end": "2027-07-29",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=07/2027",
@@ -66226,7 +64362,7 @@
       "start": "2027-06-17",
       "end": "2027-06-24",
       "price": {
-        "amount": 1807.0,
+        "amount": 1806.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=06/2027",
@@ -66244,7 +64380,7 @@
       "start": "2027-05-06",
       "end": "2027-05-13",
       "price": {
-        "amount": 1807.0,
+        "amount": 1806.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=05/2027",
@@ -66262,7 +64398,7 @@
       "start": "2027-07-01",
       "end": "2027-07-08",
       "price": {
-        "amount": 1807.0,
+        "amount": 1806.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=07/2027",
@@ -66280,7 +64416,7 @@
       "start": "2027-07-08",
       "end": "2027-07-15",
       "price": {
-        "amount": 1807.0,
+        "amount": 1806.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=07/2027",
@@ -66298,7 +64434,7 @@
       "start": "2027-05-13",
       "end": "2027-05-20",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=05/2027",
@@ -66316,7 +64452,7 @@
       "start": "2027-05-27",
       "end": "2027-06-03",
       "price": {
-        "amount": 1865.0,
+        "amount": 1864.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=05/2027",
@@ -66568,7 +64704,7 @@
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 2751.0,
+        "amount": 2750.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=07/2027",
@@ -66614,6 +64750,24 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027"
+      }
+    },
+    {
+      "id": "ghazala-adventure-2027-08-23-3",
+      "itinerary_id": "ghazala-adventure--brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-08-23",
+      "end": "2027-08-30",
+      "price": {
+        "amount": 1684.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=08/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027"
       }
     },
     {
@@ -66671,6 +64825,42 @@
       }
     },
     {
+      "id": "ghazala-adventure-2027-08-30-4",
+      "itinerary_id": "ghazala-adventure--north-brothers-hurghada-hurghada",
+      "start": "2027-08-30",
+      "end": "2027-09-06",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=08/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027"
+      }
+    },
+    {
+      "id": "ghazala-adventure-2027-08-02-0",
+      "itinerary_id": "ghazala-adventure--north-tiran-dahab-hurghada-hurghada",
+      "start": "2027-08-02",
+      "end": "2027-08-09",
+      "price": {
+        "amount": 1608.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=08/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027"
+      }
+    },
+    {
       "id": "ghazala-adventure-2027-05-24-3",
       "itinerary_id": "ghazala-adventure--north-wrecks-reefs-hurghada-hurghada",
       "start": "2027-05-24",
@@ -66704,6 +64894,42 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027"
+      }
+    },
+    {
+      "id": "ghazala-adventure-2027-08-09-1",
+      "itinerary_id": "ghazala-adventure--north-wrecks-reefs-hurghada-hurghada",
+      "start": "2027-08-09",
+      "end": "2027-08-16",
+      "price": {
+        "amount": 1571.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=08/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027"
+      }
+    },
+    {
+      "id": "ghazala-adventure-2027-08-16-2",
+      "itinerary_id": "ghazala-adventure--north-wrecks-reefs-hurghada-hurghada",
+      "start": "2027-08-16",
+      "end": "2027-08-23",
+      "price": {
+        "amount": 1571.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=08/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027"
       }
     },
     {
@@ -66982,7 +65208,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1166.0,
+        "amount": 1165.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=07/2027",
@@ -67000,7 +65226,7 @@
       "start": "2027-05-13",
       "end": "2027-05-20",
       "price": {
-        "amount": 1385.0,
+        "amount": 1384.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=05/2027",
@@ -67018,7 +65244,7 @@
       "start": "2027-05-27",
       "end": "2027-06-03",
       "price": {
-        "amount": 1385.0,
+        "amount": 1384.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=05/2027",
@@ -67036,7 +65262,7 @@
       "start": "2027-06-17",
       "end": "2027-06-24",
       "price": {
-        "amount": 1385.0,
+        "amount": 1384.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=06/2027",
@@ -67108,7 +65334,7 @@
       "start": "2027-07-01",
       "end": "2027-07-08",
       "price": {
-        "amount": 1166.0,
+        "amount": 1165.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=07/2027",
@@ -67126,7 +65352,7 @@
       "start": "2027-08-21",
       "end": "2027-08-31",
       "price": {
-        "amount": 2563.0,
+        "amount": 2562.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=08/2027",
@@ -67198,7 +65424,7 @@
       "start": "2027-06-24",
       "end": "2027-07-01",
       "price": {
-        "amount": 1603.0,
+        "amount": 1602.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=06/2027",
@@ -67234,7 +65460,7 @@
       "start": "2027-08-12",
       "end": "2027-08-26",
       "price": {
-        "amount": 2563.0,
+        "amount": 2562.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=08/2027",
@@ -67252,7 +65478,7 @@
       "start": "2027-06-10",
       "end": "2027-06-17",
       "price": {
-        "amount": 1603.0,
+        "amount": 1602.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=06/2027",
@@ -67534,7 +65760,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1214.0,
+        "amount": 1213.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=06/2027",
@@ -67553,7 +65779,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1214.0,
+        "amount": 1213.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=06/2027",
@@ -67572,7 +65798,7 @@
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
-        "amount": 1214.0,
+        "amount": 1213.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=07/2027",
@@ -67591,7 +65817,7 @@
       "start": "2027-08-07",
       "end": "2027-08-14",
       "price": {
-        "amount": 1214.0,
+        "amount": 1213.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=08/2027",
@@ -67610,7 +65836,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 1214.0,
+        "amount": 1213.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=08/2027",
@@ -67648,7 +65874,7 @@
       "start": "2027-05-15",
       "end": "2027-05-18",
       "price": {
-        "amount": 658.0,
+        "amount": 657.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=05/2027",
@@ -67723,7 +65949,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 1110.0,
+        "amount": 1109.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=06/2027",
@@ -67761,7 +65987,7 @@
       "start": "2027-08-07",
       "end": "2027-08-14",
       "price": {
-        "amount": 1413.0,
+        "amount": 1412.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=08/2027",
@@ -67836,7 +66062,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1110.0,
+        "amount": 1109.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=06/2027",
@@ -68704,7 +66930,7 @@
       "start": "2027-05-24",
       "end": "2027-05-29",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=05/2027",
@@ -68740,7 +66966,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=06/2027",
@@ -68758,7 +66984,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
@@ -68776,7 +67002,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
@@ -68794,7 +67020,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
@@ -68812,7 +67038,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=06/2027",
@@ -68830,7 +67056,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=06/2027",
@@ -68848,7 +67074,7 @@
       "start": "2027-06-19",
       "end": "2027-06-26",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=06/2027",
@@ -69046,7 +67272,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=06/2027",
@@ -69065,7 +67291,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=06/2027",
@@ -69079,50 +67305,12 @@
       "promotion": "10% Off"
     },
     {
-      "id": "ocean-lovers-2027-07-10-1",
-      "itinerary_id": "ocean-lovers--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-07-10",
-      "end": "2027-07-17",
-      "price": {
-        "amount": 1490.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
-      "id": "ocean-lovers-2027-07-24-3",
-      "itinerary_id": "ocean-lovers--brothers-daedalus-elphinstone-hurghada-hurghada",
-      "start": "2027-07-24",
-      "end": "2027-07-31",
-      "price": {
-        "amount": 1490.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
       "id": "ocean-lovers-2027-08-14-1",
       "itinerary_id": "ocean-lovers--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=08/2027",
@@ -69141,7 +67329,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=08/2027",
@@ -69160,7 +67348,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=05/2027",
@@ -69179,7 +67367,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=05/2027",
@@ -69197,7 +67385,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=05/2027",
@@ -69216,7 +67404,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=05/2027",
@@ -69235,7 +67423,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=05/2027",
@@ -69264,25 +67452,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=6/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
-      "id": "ocean-lovers-2027-07-17-2",
-      "itinerary_id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
-      "start": "2027-07-17",
-      "end": "2027-07-24",
-      "price": {
-        "amount": 1458.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
       },
       "promotion": "10% Off"
     },
@@ -69325,44 +67494,6 @@
       "promotion": "10% Off"
     },
     {
-      "id": "ocean-lovers-2027-07-03-0",
-      "itinerary_id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
-      "start": "2027-07-03",
-      "end": "2027-07-10",
-      "price": {
-        "amount": 1458.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
-      "id": "ocean-lovers-2027-07-31-4",
-      "itinerary_id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
-      "start": "2027-07-31",
-      "end": "2027-08-07",
-      "price": {
-        "amount": 1458.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
       "id": "ocean-lovers-2027-08-21-2",
       "itinerary_id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
       "start": "2027-08-21",
@@ -69396,6 +67527,25 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=5/2027"
+      },
+      "promotion": "10% Off"
+    },
+    {
+      "id": "oceanix-2027-07-24-0",
+      "itinerary_id": "oceanix--brothers-daedalus-elphinstone-hurghada-hurghada",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1154.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=07/2027",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=7/2027"
       },
       "promotion": "10% Off"
     },
@@ -69442,7 +67592,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1772.0,
+        "amount": 1771.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=05/2027",
@@ -69659,7 +67809,7 @@
       "start": "2027-07-17",
       "end": "2027-07-27",
       "price": {
-        "amount": 2506.0,
+        "amount": 2505.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=07/2027",
@@ -69677,7 +67827,7 @@
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 1772.0,
+        "amount": 1771.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=08/2027",
@@ -69731,7 +67881,7 @@
       "start": "2027-06-05",
       "end": "2027-06-12",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=06/2027",
@@ -69749,7 +67899,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=06/2027",
@@ -69767,7 +67917,7 @@
       "start": "2027-07-24",
       "end": "2027-07-31",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=07/2027",
@@ -69785,7 +67935,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=05/2027",
@@ -69803,7 +67953,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=07/2027",
@@ -69821,7 +67971,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=05/2027",
@@ -69839,7 +67989,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=05/2027",
@@ -69857,7 +68007,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=06/2027",
@@ -69875,7 +68025,7 @@
       "start": "2027-07-03",
       "end": "2027-07-10",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=07/2027",
@@ -69893,7 +68043,7 @@
       "start": "2027-08-14",
       "end": "2027-08-21",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=08/2027",
@@ -69911,7 +68061,7 @@
       "start": "2027-08-28",
       "end": "2027-09-04",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=08/2027",
@@ -69929,7 +68079,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=05/2027",
@@ -69947,7 +68097,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=05/2027",
@@ -69965,7 +68115,7 @@
       "start": "2027-07-17",
       "end": "2027-07-24",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=07/2027",
@@ -70001,7 +68151,7 @@
       "start": "2027-08-07",
       "end": "2027-08-14",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=08/2027",
@@ -70019,7 +68169,7 @@
       "start": "2027-08-21",
       "end": "2027-08-28",
       "price": {
-        "amount": 1230.0,
+        "amount": 1229.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=08/2027",
@@ -70896,78 +69046,6 @@
       "promotion": "33% Off"
     },
     {
-      "id": "red-sea-aggressor-v-2027-08-07-0",
-      "itinerary_id": "red-sea-aggressor-v--deep-south-rocky-zabargad-islands-hamata-hamata",
-      "start": "2027-08-07",
-      "end": "2027-08-14",
-      "price": {
-        "amount": 2799.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
-      }
-    },
-    {
-      "id": "red-sea-aggressor-v-2027-08-14-1",
-      "itinerary_id": "red-sea-aggressor-v--deep-south-rocky-zabargad-islands-hamata-hamata",
-      "start": "2027-08-14",
-      "end": "2027-08-21",
-      "price": {
-        "amount": 2799.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
-      }
-    },
-    {
-      "id": "red-sea-aggressor-v-2027-08-21-2",
-      "itinerary_id": "red-sea-aggressor-v--deep-south-rocky-zabargad-islands-hamata-hamata",
-      "start": "2027-08-21",
-      "end": "2027-08-28",
-      "price": {
-        "amount": 2799.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
-      }
-    },
-    {
-      "id": "red-sea-aggressor-v-2027-08-28-3",
-      "itinerary_id": "red-sea-aggressor-v--deep-south-rocky-zabargad-islands-hamata-hamata",
-      "start": "2027-08-28",
-      "end": "2027-09-04",
-      "price": {
-        "amount": 2799.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
-      }
-    },
-    {
       "id": "red-sea-blue-force-2-2027-05-01-0",
       "itinerary_id": "red-sea-blue-force-2--egypt-north-route-sharm-el-sheikh-sharm-el-sheikh",
       "start": "2027-05-01",
@@ -71099,7 +69177,7 @@
       "start": "2027-05-08",
       "end": "2027-05-16",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=05/2027",
@@ -71117,7 +69195,7 @@
       "start": "2027-05-15",
       "end": "2027-05-23",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=05/2027",
@@ -71135,7 +69213,7 @@
       "start": "2027-05-22",
       "end": "2027-05-30",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=05/2027",
@@ -71153,7 +69231,7 @@
       "start": "2027-06-05",
       "end": "2027-06-13",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=06/2027",
@@ -71171,7 +69249,7 @@
       "start": "2027-06-19",
       "end": "2027-06-27",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=06/2027",
@@ -71189,7 +69267,7 @@
       "start": "2027-07-03",
       "end": "2027-07-11",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=07/2027",
@@ -71207,7 +69285,7 @@
       "start": "2027-07-17",
       "end": "2027-07-25",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=07/2027",
@@ -71225,7 +69303,7 @@
       "start": "2027-07-31",
       "end": "2027-08-08",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=07/2027",
@@ -71243,7 +69321,7 @@
       "start": "2027-08-07",
       "end": "2027-08-15",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=08/2027",
@@ -71261,7 +69339,7 @@
       "start": "2027-08-14",
       "end": "2027-08-22",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=08/2027",
@@ -71279,7 +69357,7 @@
       "start": "2027-08-21",
       "end": "2027-08-29",
       "price": {
-        "amount": 1737.0,
+        "amount": 1736.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=08/2027",
@@ -71297,7 +69375,7 @@
       "start": "2027-07-22",
       "end": "2027-07-29",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=07/2027",
@@ -71315,7 +69393,7 @@
       "start": "2027-05-06",
       "end": "2027-05-13",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=05/2027",
@@ -71333,7 +69411,7 @@
       "start": "2027-06-03",
       "end": "2027-06-10",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=06/2027",
@@ -71351,7 +69429,7 @@
       "start": "2027-06-17",
       "end": "2027-06-24",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=06/2027",
@@ -71369,7 +69447,7 @@
       "start": "2027-06-24",
       "end": "2027-07-01",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=06/2027",
@@ -71387,7 +69465,7 @@
       "start": "2027-05-20",
       "end": "2027-05-27",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=05/2027",
@@ -71405,7 +69483,7 @@
       "start": "2027-08-26",
       "end": "2027-09-02",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=08/2027",
@@ -71423,7 +69501,7 @@
       "start": "2027-06-10",
       "end": "2027-06-17",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=06/2027",
@@ -71441,7 +69519,7 @@
       "start": "2027-08-12",
       "end": "2027-08-19",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=08/2027",
@@ -71459,7 +69537,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=07/2027",
@@ -71477,7 +69555,7 @@
       "start": "2027-07-01",
       "end": "2027-07-08",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=07/2027",
@@ -71495,7 +69573,7 @@
       "start": "2027-07-08",
       "end": "2027-07-15",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=07/2027",
@@ -71513,7 +69591,7 @@
       "start": "2027-05-27",
       "end": "2027-06-03",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=05/2027",
@@ -71531,7 +69609,7 @@
       "start": "2027-08-19",
       "end": "2027-08-26",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=08/2027",
@@ -71549,7 +69627,7 @@
       "start": "2027-05-13",
       "end": "2027-05-20",
       "price": {
-        "amount": 1632.0,
+        "amount": 1631.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=05/2027",
@@ -71700,7 +69778,7 @@
       "start": "2027-05-13",
       "end": "2027-05-20",
       "price": {
-        "amount": 1730.0,
+        "amount": 1729.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=05/2027",
@@ -71719,7 +69797,7 @@
       "start": "2027-05-20",
       "end": "2027-05-27",
       "price": {
-        "amount": 1730.0,
+        "amount": 1729.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=05/2027",
@@ -71832,7 +69910,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1772.0,
+        "amount": 1771.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=05/2027",
@@ -71868,7 +69946,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1772.0,
+        "amount": 1771.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=05/2027",
@@ -71958,7 +70036,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 2040.0,
+        "amount": 2039.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=05/2027",
@@ -72120,7 +70198,7 @@
       "start": "2027-07-22",
       "end": "2027-07-29",
       "price": {
-        "amount": 1899.0,
+        "amount": 1898.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=07/2027",
@@ -72307,7 +70385,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/serenity?m=06/2027",
@@ -72611,7 +70689,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=05/2027",
@@ -72630,7 +70708,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=05/2027",
@@ -72649,7 +70727,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=05/2027",
@@ -72668,7 +70746,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=06/2027",
@@ -72687,7 +70765,7 @@
       "start": "2027-06-26",
       "end": "2027-07-03",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=06/2027",
@@ -72725,7 +70803,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=07/2027",
@@ -72744,7 +70822,7 @@
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 1596.0,
+        "amount": 1595.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=07/2027",
@@ -74285,7 +72363,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1724.0,
+        "amount": 1723.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=05/2027",
@@ -74303,7 +72381,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1293.0,
+        "amount": 1292.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=07/2027",
@@ -75545,7 +73623,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1490.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/topaz?m=05/2027",
@@ -75932,7 +74010,7 @@
       "start": "2027-07-31",
       "end": "2027-08-07",
       "price": {
-        "amount": 1265.0,
+        "amount": 1264.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
@@ -76058,7 +74136,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1364.0,
+        "amount": 1363.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/unity?m=05/2027",
@@ -76076,7 +74154,7 @@
       "start": "2027-06-12",
       "end": "2027-06-19",
       "price": {
-        "amount": 1329.0,
+        "amount": 1328.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/unity?m=06/2027",
@@ -76094,7 +74172,7 @@
       "start": "2027-07-10",
       "end": "2027-07-17",
       "price": {
-        "amount": 1364.0,
+        "amount": 1363.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
@@ -76112,7 +74190,7 @@
       "start": "2027-08-07",
       "end": "2027-08-14",
       "price": {
-        "amount": 1364.0,
+        "amount": 1363.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/unity?m=08/2027",
@@ -76130,7 +74208,7 @@
       "start": "2027-05-01",
       "end": "2027-05-08",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
@@ -76148,7 +74226,7 @@
       "start": "2027-05-08",
       "end": "2027-05-15",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
@@ -76166,7 +74244,7 @@
       "start": "2027-05-15",
       "end": "2027-05-22",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
@@ -76184,7 +74262,7 @@
       "start": "2027-05-22",
       "end": "2027-05-29",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
@@ -76202,7 +74280,7 @@
       "start": "2027-05-29",
       "end": "2027-06-05",
       "price": {
-        "amount": 1399.0,
+        "amount": 1398.0,
         "currency": "USD"
       },
       "booking_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
@@ -76359,43 +74437,6 @@
       }
     },
     {
-      "id": "yachtiano-2027-06-12-1",
-      "itinerary_id": "yachtiano--north-tiran-hurghada-hurghada",
-      "start": "2027-06-12",
-      "end": "2027-06-19",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-07-31-4",
-      "itinerary_id": "yachtiano--north-tiran-hurghada-hurghada",
-      "start": "2027-07-31",
-      "end": "2027-08-07",
-      "price": {
-        "amount": 1573.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
-      },
-      "promotion": "10% Off"
-    },
-    {
       "id": "yachtiano-2027-08-07-0",
       "itinerary_id": "yachtiano--north-tiran-hurghada-hurghada",
       "start": "2027-08-07",
@@ -76414,24 +74455,6 @@
       }
     },
     {
-      "id": "yachtiano-2027-06-05-0",
-      "itinerary_id": "yachtiano--north-hurghada-hurghada",
-      "start": "2027-06-05",
-      "end": "2027-06-12",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
-      }
-    },
-    {
       "id": "yachtiano-2027-08-28-3",
       "itinerary_id": "yachtiano--north-hurghada-hurghada",
       "start": "2027-08-28",
@@ -76447,204 +74470,6 @@
         "source_id": "liveaboard.com",
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-05-01-0",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-05-01",
-      "end": "2027-05-08",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-05-08-1",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-05-08",
-      "end": "2027-05-15",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
-      "availability": "sold_out",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-05-15-2",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-05-15",
-      "end": "2027-05-22",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
-      "availability": "sold_out",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-05-22-3",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-05-22",
-      "end": "2027-05-29",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-05-29-4",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-05-29",
-      "end": "2027-06-05",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-06-19-2",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-06-19",
-      "end": "2027-06-26",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-06-26-3",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-06-26",
-      "end": "2027-07-03",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-07-03-0",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-07-03",
-      "end": "2027-07-10",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-07-10-1",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-07-10",
-      "end": "2027-07-17",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-07-17-2",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-07-17",
-      "end": "2027-07-24",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
-      }
-    },
-    {
-      "id": "yachtiano-2027-07-24-3",
-      "itinerary_id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
-      "start": "2027-07-24",
-      "end": "2027-07-31",
-      "price": {
-        "amount": 1748.0,
-        "currency": "USD"
-      },
-      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
-      "availability": "available",
-      "provenance": {
-        "kind": "scraped",
-        "source_id": "liveaboard.com",
-        "retrieved": "2026-08-28",
-        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
       }
     },
     {
