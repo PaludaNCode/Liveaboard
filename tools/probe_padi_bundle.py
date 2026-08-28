@@ -79,9 +79,26 @@ API_PATH = re.compile(
 # uncallable, which is exactly where the second pass left off: every obvious
 # base -- /api/, /api/v1/, /travel/api/ and five more -- 404s.
 BASE_NEEDLES = (
-    "baseURL", "baseUrl", "axios.create", "API_URL", "apiUrl", "API_BASE",
-    "apiBase", "API_ROOT", "/api", "X-CSRFToken", "fetch(", "XMLHttpRequest",
+    "getUrl", "api-ecomm", "ecomm", "apiHost", "this.host", "baseURL", "baseUrl",
+    "API_URL", "API_BASE", "apiBase", "X-CSRFToken",
 )
+"""Needles for the client's base URL, in the order the third runner pass made
+worth trying.
+
+That pass found the client but not its prefix. Its `fetch` call reads
+`this.getUrl()`, and 200 characters upstream of the request headers sat the tail
+of a hostname -- `"pi-ecomm."` -- cut off by too narrow a window. So `getUrl`
+and `api-ecomm` lead now, and the window around them is wide enough to hold a
+function body rather than a fragment of one.
+
+`/api` is dropped: it matched the adventure endpoints
+(`/api/adventure/v1/wishlists/...`) four times in every bundle and the travel
+calls are not in that family -- `/api/adventure/v1/`, `/api/travel/v1/` and five
+more all 404 with the itineraries path.
+"""
+
+WIDE_WINDOW = ("getUrl", "api-ecomm", "ecomm", "apiHost", "this.host")
+"""Needles whose answer is a function body, not a line."""
 
 # Any literal that mentions an itinerary at all, path-shaped or not. The endpoint
 # may be built from a name rather than spelled out, and this is what shows that.
@@ -158,7 +175,8 @@ def main() -> int:
     parser.add_argument("--country", default="egypt")
     parser.add_argument("--dump-context", action="store_true",
                         help="print the JS around each interesting literal")
-    parser.add_argument("--max-candidates", type=int, default=80)
+    parser.add_argument("--max-candidates", type=int, default=24,
+                        help="0 to read the bundles without calling anything")
     parser.add_argument("--include-vendors", action="store_true",
                         help="also read vendors.js (third-party, multi-megabyte)")
     args = parser.parse_args()
@@ -281,12 +299,15 @@ def main() -> int:
     for url, body in sources.items():
         name = url.rsplit("/", 1)[-1]
         for needle in BASE_NEEDLES:
-            positions = [m.start() for m in re.finditer(re.escape(needle), body)][:4]
+            wide = needle in WIDE_WINDOW
+            limit = 3 if wide else 2
+            positions = [m.start() for m in re.finditer(re.escape(needle), body)][:limit]
             if not positions:
                 continue
             print(f"\n  {name}: {needle!r} x{len(positions)}")
+            before, after = (700, 500) if wide else (200, 240)
             for index in positions:
-                window = body[max(0, index - 200):index + 240].replace("\n", " ")
+                window = body[max(0, index - before):index + after].replace("\n", " ")
                 print(f"    ...{window}...")
 
     print("\n--- the app's whole route table ---")
