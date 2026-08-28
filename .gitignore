@@ -11,8 +11,3 @@ data/snapshots/
 
 .DS_Store
 
-# The PADI import's raw store: a local safety net so re-parsing needs no
-# re-crawl, but ~12MB rewritten whole on every refresh, against archive.json's
-# 1.8MB. What it holds is stable -- an entry bar and a dive count, not a price
-# that is gone tomorrow -- so it is CI-artifact material, not history.
-data/padi_raw.json

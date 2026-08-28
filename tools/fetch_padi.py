@@ -4,17 +4,16 @@
 Reads `/api/v2/travel/shop/...` for every boat in `data/padi_aliases.json` and
 writes two files:
 
-`data/padi_raw.json` -- **gitignored**
+`data/padi_raw.json` -- committed
     Every field each response published, less two. Same principle as
-    `data/archive.json`: re-parsing must never need a re-crawl, and a field we
-    start caring about next month would otherwise arrive attached to next
-    month's data.
+    `data/archive.json`, and committed for the same reason: re-parsing must never
+    need a re-crawl, and a field we start caring about next month would otherwise
+    arrive attached to next month's data.
 
-    Not committed, unlike `archive.json`, because it does not earn the space.
-    Around 12 MB at full fleet against that file's 1.8 MB, rewritten whole on
-    every refresh -- and what it holds is stable: an entry bar and a dive count,
-    not a price that is gone tomorrow. The re-crawl it saves is 290 requests, so
-    it is a local safety net and CI's business to keep as an artifact, not git's.
+    It is large -- around 12 MB at full fleet, against archive.json's 1.8 MB --
+    and rewritten whole on every refresh. That cost was weighed and accepted:
+    290 requests against somebody else's server is the thing being avoided, and
+    a parser fix that cannot be tested offline does not get tested.
 
     `photos` and `marineLife` are dropped on the way in. They are 17% of the
     payload and consist of CDN thumbnail URLs, and this site loads nothing
