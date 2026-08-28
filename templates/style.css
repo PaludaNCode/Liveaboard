@@ -28,6 +28,7 @@
   --st1:82px;   /* Depart */
   --st2:78px;   /* Return */
   --st3:132px;  /* Boat   */
+  --st4:62px;   /* Guests */
 
   /* Fonts the visitor already has.
    *
@@ -238,7 +239,7 @@ tbody tr.row:hover { background:var(--row-hover); }
 /* The pinned columns: at twenty columns, when and on what is what identifies a
    row, and a row that scrolls away from its own dates and boat cannot be
    compared with anything. */
-.stick1, .stick2, .stick3 {
+.stick1, .stick2, .stick3, .stick4 {
   position:sticky; z-index:10; background:var(--panel);
   overflow:hidden; text-overflow:ellipsis;
 }
@@ -253,14 +254,24 @@ tbody tr.row:hover { background:var(--row-hover); }
   left:calc(var(--st0) + var(--st1) + var(--st2));
   width:var(--st3); min-width:var(--st3); max-width:var(--st3);
 }
-.stick3, .pins-2 .stick2 { border-right:1px solid var(--rule-strong); }
-tbody tr.row.alt .stick1, tbody tr.row.alt .stick2, tbody tr.row.alt .stick3 {
-  background:var(--row-alt);
+.stick4 {
+  left:calc(var(--st0) + var(--st1) + var(--st2) + var(--st3));
+  width:var(--st4); min-width:var(--st4); max-width:var(--st4);
 }
-tbody tr.row:hover .stick1, tbody tr.row:hover .stick2, tbody tr.row:hover .stick3 {
-  background:var(--row-hover);
+/* The rule that closes the pinned group sits on whichever column ends it. */
+.pins-4 .stick4, .pins-3 .stick3, .pins-2 .stick2 {
+  border-right:1px solid var(--rule-strong);
 }
-thead th.stick1, thead th.stick2, thead th.stick3 { z-index:25; }
+/* And a lighter one inside it, between when the trip runs and what it runs on.
+   Guests is a fact about the vessel -- how many people you are sharing a dive
+   deck with -- so it belongs on the boat's side of that line, not at the head
+   of the route columns where the pinned edge used to leave it. */
+.stick3 { border-left:1px solid var(--rule); }
+tbody tr.row.alt .stick1, tbody tr.row.alt .stick2,
+tbody tr.row.alt .stick3, tbody tr.row.alt .stick4 { background:var(--row-alt); }
+tbody tr.row:hover .stick1, tbody tr.row:hover .stick2,
+tbody tr.row:hover .stick3, tbody tr.row:hover .stick4 { background:var(--row-hover); }
+thead th.stick1, thead th.stick2, thead th.stick3, thead th.stick4 { z-index:25; }
 
 /* The control that opens the bill, at the start of the row and pinned with the
    columns that identify it.

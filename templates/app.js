@@ -347,7 +347,8 @@
      a column that silently vanished would be a fact the page stopped
      publishing. */
   var ORDER = [
-    "start", "end", "boat", "guests", "from", "to", "trip",
+    "start", "end", "boat", "guests",
+    "from", "to", "trip",
     "total", "later", "base", "perdive", "nitrox", "sites",
     "required", "availability", "disclosure", "source"
   ];
@@ -395,13 +396,24 @@
      two pinned columns with a third between them overlap exactly as badly as
      two with a wrong offset, and naming them let that happen the moment the
      order changed. Three fit a laptop; on a phone 82 + 78 + 132 would be three
-     quarters of the screen, so a phone pins two and Return scrolls. */
-  function pinned() { return narrow.matches ? 2 : 3; }
+     quarters of the screen, so a phone pins two and Return scrolls.
+
+     Four on a wide screen, because Guests is a fact about the vessel -- how
+     many people you share a dive deck with -- and the pinned group's closing
+     rule is what says where the identity columns end. Left at three, that rule
+     fell between Boat and Guests and filed the guest count as the first of the
+     route columns. It is on the boat's side of it now. */
+  function pinned() {
+    return narrow.matches ? 2 : compact.matches ? 3 : 4;
+  }
 
   function orderColumns() {
     /* The rule that closes the pinned group goes on whichever column is last
        in it, and that changes with the breakpoint. */
-    document.body.classList.toggle("pins-2", narrow.matches);
+    var n = pinned();
+    document.body.classList.toggle("pins-2", n === 2);
+    document.body.classList.toggle("pins-3", n === 3);
+    document.body.classList.toggle("pins-4", n === 4);
     var order = narrow.matches ? PHONE_ORDER
               : compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
