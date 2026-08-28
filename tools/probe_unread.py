@@ -125,9 +125,8 @@ def main() -> int:
         for attempt in range(1, args.retries + 1):
             # The whole question is whether a second *real* request answers
             # differently, and the fetcher's cache would hand back the first
-            # body. Dropping the entry is the probe's business, not a reason to
-            # widen `get()` for production code that always wants the cache.
-            fetcher._cache.pop(url, None)  # noqa: SLF001
+            # body.
+            fetcher.forget(url)
             try:
                 result = fetcher.get(url)
             except FetchBlocked as exc:

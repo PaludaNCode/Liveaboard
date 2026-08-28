@@ -12,6 +12,9 @@ from liveaboard.scrape.base import (
     DEFAULT_DELAY_SECONDS,
     FetchResult,
     PoliteFetcher,
+    ScrapeError,
+    ScrapeOutput,
+    SourceAdapter,
 )
 from liveaboard.scrape.liveaboard_com import LiveaboardComAdapter, _iso_date
 
@@ -355,3 +358,85 @@ class _FetcherReturning:
             url=url, status=200, body=self.body,
             fetched_at=datetime.now(timezone.utc), from_cache=False,
         )
+
+
+class TestAPageThatAnswersNothingIsAskedAgain(unittest.TestCase):
+    """A response with no structured data is not a month with no trips.
+
+    Fourteen vessel-month pages came back with no JSON-LD on 2026-08-28 and
+    the crawl believed every one of them, deleting 49 real, bookable sailings
+    -- DUNE Longara's whole May, still on sale at the source. A probe re-read
+    all fourteen: thirteen answered in full on the first retry, and the
+    fourteenth was a genuinely empty month. The failure is the response.
+    """
+
+    class _Adapter(SourceAdapter):
+        source_id = "test"
+        host = "example.test"
+
+        def __init__(self, fetcher, fail_times: int):
+            super().__init__(fetcher)
+            self.fail_times = fail_times
+            self.parses = 0
+
+        def preflight(self) -> None:
+            """No robots check: the stub fetcher is not a PoliteFetcher."""
+
+        def discover(self):
+            yield "https://example.test/boat?m=5/2027"
+
+        def parse(self, result):
+            self.parses += 1
+            if self.parses <= self.fail_times:
+                raise ScrapeError("no JSON-LD Event or Product node")
+            out = ScrapeOutput()
+            out.departures.append({"id": "d1"})
+            return out
+
+    class _CountingFetcher:
+        """Counts real requests, and honours forget() like the real one."""
+
+        def __init__(self):
+            self.requests = 0
+            self._cache: dict[str, object] = {}
+
+        def forget(self, url):
+            self._cache.pop(url, None)
+
+        def get(self, url):
+            from datetime import datetime, timezone
+
+            if url in self._cache:
+                return self._cache[url]
+            self.requests += 1
+            result = FetchResult(url=url, status=200, body="<html></html>",
+                                 fetched_at=datetime.now(timezone.utc))
+            self._cache[url] = result
+            return result
+
+    def test_a_transient_empty_response_is_retried_and_recovered(self):
+        fetcher = self._CountingFetcher()
+        adapter = self._Adapter(fetcher, fail_times=1)
+        output = adapter.run()
+        self.assertEqual(len(output.departures), 1)
+        self.assertEqual(output.unread, [])
+        self.assertEqual(fetcher.requests, 2, "the retry must be a real request")
+        self.assertTrue(any("re-read" in w for w in output.warnings),
+                        "a recovered page is said out loud, not silently fixed")
+
+    def test_a_page_that_fails_twice_is_still_reported_unread(self):
+        """carry_unread is the net under this, and it needs to be told."""
+        fetcher = self._CountingFetcher()
+        adapter = self._Adapter(fetcher, fail_times=99)
+        output = adapter.run()
+        self.assertEqual(len(output.unread), 1)
+        self.assertTrue(any("unparsed" in w for w in output.warnings))
+
+    def test_a_page_that_reads_first_time_is_fetched_once(self):
+        """The retry must cost nothing on the 254 pages that are fine."""
+        fetcher = self._CountingFetcher()
+        adapter = self._Adapter(fetcher, fail_times=0)
+        output = adapter.run()
+        self.assertEqual(fetcher.requests, 1)
+        self.assertEqual(len(output.departures), 1)
+        self.assertFalse(any("re-read" in w for w in output.warnings))
