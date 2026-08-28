@@ -34,6 +34,10 @@ on:
         description: "Print the JS around each path literal PADI's bundle holds"
         type: boolean
         default: false
+      padi_max_candidates:
+        description: "PADI endpoints to call (0 reads the bundles without calling)"
+        type: string
+        default: "24"
 
 permissions:
   contents: read
@@ -84,6 +88,7 @@ jobs:
         run: |
           python3 tools/probe_padi_bundle.py \
             --vessel "${{ inputs.padi_vessel || 'hammerhead-ii' }}" \
+            --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
             ${{ inputs.padi_dump_context && '--dump-context' || '' }}
 
   # Separate job: the gear modal is built client-side, so this one needs a
