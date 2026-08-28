@@ -14,6 +14,7 @@ from pathlib import Path
 from liveaboard.promote import itinerary_key
 from liveaboard.scrape.itinerary import (
     TripDetail,
+    parse_prose,
     min_logged_dives,
     parse_regions,
     parse_trip,
@@ -97,6 +98,100 @@ class TestTheOverviewRows(unittest.TestCase):
     def test_an_empty_fragment_is_an_empty_record(self):
         self.assertFalse(parse_trip(""))
         self.assertFalse(TripDetail())
+
+
+def other(name: str) -> str:
+    return (Path(__file__).parent / "fixtures" / name).read_text(encoding="utf-8")
+
+
+class TestTheOperatorsOwnProse(unittest.TestCase):
+    """What the operator writes about where the boat actually goes.
+
+    The richest statement on the fragment and the only one in sentences: a
+    "Key regions" list is a summary, this is an account. Kept verbatim --
+    nothing here decides which words are places, so improving the site
+    vocabulary later does not mean fetching 315 pages again.
+
+    The three shapes below are not hypothetical. They were measured across all
+    67 vessels before any of this was written, after a first attempt was
+    written against one hand-trimmed fixture and matched nothing on any of
+    them.
+    """
+
+    def setUp(self):
+        self.intro, self.sections = parse_prose(markup())
+
+    def test_the_prose_is_found_past_the_itinerary_map(self):
+        """A `<figure>` holding the map, a magnify button and two inline SVGs
+        sits between the heading and the prose. Requiring them adjacent is what
+        made the first parser match on none of the 67 vessels."""
+        self.assertIn("<figure", markup())
+        self.assertTrue(self.sections)
+
+    def test_the_lead_paragraph_is_kept(self):
+        self.assertIn("northern Red Sea", self.intro)
+        self.assertNotIn("<", self.intro)
+
+    def test_each_heading_is_paired_with_its_own_text(self):
+        self.assertEqual([s.heading for s in self.sections],
+                         ["Day 2", "Day 3", "Day 5", "Day 7"])
+        self.assertEqual(self.sections[1].text, "Brothers, overnight stay.")
+
+    def test_the_days_are_not_contiguous(self):
+        """2, 3, 5, 7 -- a sketch of the week, not a log of it, and the page
+        calls it a Sample Itinerary. Nothing may present it as a guarantee."""
+        self.assertNotEqual(len(self.sections), 7)
+
+    def test_a_label_with_nothing_under_it_is_not_a_section(self):
+        """"Sample Itinerary" is a bold run exactly like a day heading is."""
+        self.assertNotIn("Sample Itinerary", [s.heading for s in self.sections])
+
+    def test_it_says_things_the_region_list_does_not(self):
+        """The reason to read it at all. This trip's regions name Abu Dabab
+        and not Tobia Kebir; the prose is the other way round. Neither is a
+        superset, so one cannot stand in for the other."""
+        text = " ".join(s.text for s in self.sections)
+        self.assertIn("Tobia Kebir", text)
+        self.assertNotIn("Abu Dabab", text)
+
+    def test_a_harbour_appears_in_the_prose(self):
+        """"Elphinstone, Port Ghalib, overnight stay in harbour" -- reading
+        places out of this is not the same as reading dive sites out of it."""
+        self.assertIn("Port Ghalib", self.sections[-1].text)
+
+    def test_a_day_whose_content_is_a_bullet_list(self):
+        """Some operators put the day under a `<ul>`, so the content is not a
+        paragraph at all. Splitting on paragraphs found none of these."""
+        _, sections = parse_prose(other("itinerary_days_bulleted.html"))
+        self.assertEqual([s.heading for s in sections], ["Day 1:", "Day 2:"])
+        self.assertIn("boarding begins at 5:00 pm", sections[0].text)
+        self.assertIn("Marsa Bareika", sections[1].text)
+
+    def test_bullets_do_not_run_into_each_other(self):
+        """Tags are replaced by a space, not removed: "5:00 pmThe crew" is
+        what deleting them outright produces."""
+        _, sections = parse_prose(other("itinerary_days_bulleted.html"))
+        self.assertIn("5:00 pm The", sections[0].text)
+
+    def test_some_vessels_describe_places_and_never_a_day(self):
+        """Four of the 67 never write "Day": the headings are reefs and the
+        text describes them. A parser that assumes days reads nothing here."""
+        _, sections = parse_prose(other("itinerary_places_not_days.html"))
+        self.assertEqual([s.heading for s in sections],
+                         ["Brothers Islands", "Daedalus Reef"])
+        self.assertFalse(any(s.is_day for s in sections))
+
+    def test_a_day_heading_is_told_from_a_place_heading(self):
+        self.assertTrue(all(s.is_day for s in self.sections))
+
+    def test_markup_without_the_block_yields_nothing(self):
+        self.assertEqual(parse_prose("<div>Key regions</div>"), (None, ()))
+        self.assertEqual(parse_prose(""), (None, ()))
+
+    def test_a_trip_carries_it(self):
+        detail = parse_trip(markup())
+        self.assertTrue(detail.sections)
+        self.assertTrue(detail.intro)
 
 
 class TestTheLoggedDiveBar(unittest.TestCase):

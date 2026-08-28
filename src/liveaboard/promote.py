@@ -17,7 +17,7 @@ from __future__ import annotations
 import re
 from collections import defaultdict
 from datetime import date
-from typing import Any
+from typing import Any, Mapping, Sequence
 
 from .classify import normalise
 from .taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier, SourceKind
@@ -655,9 +655,13 @@ def promote(
         # re-read words already in the repository is the same slow and rude
         # thing `reparse_candidate.py` exists to avoid. `dive_sites` stays as
         # the fallback for a book written before regions were kept.
+        # One region at a time, for the reason `_sites_from_prose` explains:
+        # `normalise` eats any separator, so matching the joined string lets a
+        # site be assembled across two entries that neither one names.
         regions = trip.get("regions")
-        sites = (_sites_from_name(" , ".join(regions)) if regions
+        sites = (_sites_from_regions(regions) if regions
                  else trip.get("dive_sites") or [])
+        sites = _also(sites, _sites_from_prose(trip))
         sites = sites or _sites_from_name(name)
 
         # The title's port pair beats the Event location, which is the country.
@@ -832,20 +836,35 @@ SITE_HINTS = (
     "rocky island", "zabargad", "st johns", "st john's", "fury shoal",
     "sataya", "ras mohammed", "tiran", "salem express", "rosalie moller",
     "gubal", "abu dabab", "samadai", "habili ali", "dangerous reef",
-    "gota kebir", "sha'ab", "shaab", "elphinstone reef", "big brother",
-    "little brother", "numidia", "aida", "carnatic", "giannis d",
+    "gota kebir",
     # Named on titles that previously yielded nothing at all.
     "dahab", "safaga", "elba reef", "turkia", "sataya reef",
     "marsa shouna", "gota abu ramada", "panorama reef", "middle reef",
     "small giftun", "shaab sheer", "umm gamar", "ras disha", "tobia arbaa",
-    "chrisoula k", "kimon m", "ulysses", "rosalie moller",
+    # Named in the operators' own prose. "Sha'ab el Erg" is where the resident
+    # pod is, and is asked for as Dolphin House -- which is an alias below,
+    # because the two are one reef.
+    "sha'ab el erg",
 )
-"""Dive-site names that routinely appear in itinerary titles.
+"""Dive-site names operators actually write, in a title or in their own prose.
 
 liveaboard.com does not publish a per-trip site list, but operators name their
 routes after the sites — "Brothers, Daedalus & Elphinstone" says exactly where
 it goes. Pulling the names back out of the title lets the existing classifier
 work unchanged instead of leaving every scraped trip unclassified.
+
+**A hint is a destination; a dive on one is an alias.** Thistlegorm and the
+Salem Express are here because a week is sold to reach them and nothing else
+on this list contains them. The Giannis D is not, because it is one of four
+wrecks on Abu Nuhas, which is here — and a diver who wants it filters on Abu
+Nuhas. Reading the prose is what forced the distinction: it names the
+individual dives, so without the fold a Brothers week grew five chips
+(Brothers, Big Brother, Little Brother, Numidia, Aida) for one place.
+
+"sha'ab" and "shaab" were hints and are gone. It is Arabic for *reef*, so it
+matched inside Sha'ab Sheer, Sha'ab Abu Nuhas and Sha'ab el Erg alike and put
+a chip reading "reef" on **113 of 315** trips. No title's site list depended on
+it.
 """
 
 SITE_ALIASES: dict[str, str] = {
@@ -887,9 +906,44 @@ SITE_ALIASES: dict[str, str] = {
     "ras mohamad": "ras mohammed",
     "shaab abu nuhas": "abu nuhas",
     "ss thistlegorm": "thistlegorm",
-    "sha ab": "shaab",
     "elba borders": "elba reef",
+    # Same fold, forced by the operators' own prose rather than by titles. A
+    # day plan names the dive, not the destination -- "Dive 2: Giannis D" --
+    # so on 267 trips the prose offered sites the region list did not, and
+    # most of them were parts of a place already on the row. Left unfolded, an
+    # Abu Nuhas week showed five chips for one reef and a Brothers week five
+    # for one island pair, which is the precision nobody asked for that
+    # Tiran's reefs were folded away for.
+    #
+    # The four wrecks on Abu Nuhas.
+    "giannis d": "abu nuhas",
+    "carnatic": "abu nuhas",
+    "chrisoula k": "abu nuhas",
+    "kimon m": "abu nuhas",
+    # The two islands, and the two wrecks down Big Brother's wall.
+    "big brother": "brothers",
+    "little brother": "brothers",
+    "numidia": "brothers",
+    "aida": "brothers",
+    # Ulysses lies on Gubal Seghir.
+    "ulysses": "gubal",
+    # Ras Mohammed's own dives. "Shark & Yolanda" is one dive over two reefs
+    # and operators name either half; `normalise` turns "&" into "and", so the
+    # spelling above covers the pair.
+    "yolanda": "ras mohammed",
+    "yolanda reef": "ras mohammed",
+    "shark reef": "ras mohammed",
+    # Beacon Rock, inside the national park.
+    "dunraven": "ras mohammed",
+    # Elphinstone is on the list under its bare name; the prose adds "Reef".
+    "elphinstone reef": "elphinstone",
 }
+# "Dolphin House" is deliberately absent. It is two reefs 400 km apart --
+# Sha'ab el Erg off Hurghada and Sha'ab Samadai off Marsa Alam -- and both are
+# sold under the name. A southern trip's own prose lists it beside Sataya and
+# Fury Shoal, so folding it to the northern reef would have moved nine deep
+# south itineraries to Hurghada. A nickname that needs the region to
+# disambiguate cannot be resolved by a table that has no region.
 """How operators actually spell a site in a trip title.
 
 Titles are marketing copy, not a gazetteer. Two of four vessels sell
@@ -931,6 +985,81 @@ def _region_from_name(name: str) -> str | None:
         if pattern.search(name):
             return label
     return None
+
+
+def _sites_from_regions(regions: Sequence[str]) -> list[str]:
+    """The operator's curated place list, one entry at a time.
+
+    Exported as its own function so the fetcher matches it exactly rather than
+    keeping a second copy of the rule -- the same reason `itinerary_key` is
+    shared.
+    """
+    sites: list[str] = []
+    for region in regions:
+        sites = _also(sites, _sites_from_name(region))
+    return sites
+
+
+def _sites_from_prose(trip: Mapping[str, Any]) -> list[str]:
+    """Reefs the operator names as *places* in its own account of the trip.
+
+    Only the headings of non-day sections, which is a deliberate and measured
+    narrowing. The prose has two kinds of section: a place and its description
+    ("Brothers Islands — are one of the best diving spots in the world"), and a
+    day of the week. Read across all 315 trips, the two are not equally
+    trustworthy.
+
+    Reading **every word** would add sites to 203 trips and would also import
+    the operator's mistakes wholesale. Aphrodite sells a "North - Straits of
+    Tiran" week whose region list, whose title and whose place descriptions all
+    say Sinai — and whose day plan is a deep-south research expedition, Rocky
+    to Zabargad to St John's to Fury Shoals, evidently pasted from another
+    trip. Taken from all the text that one row claims eight reefs spanning the
+    whole sea; taken from the headings it reproduces the region list exactly.
+
+    Reading only the **headings** adds sites to 49 trips instead, and the one
+    row it gets wrong is wrong the same way the region lists already are:
+    Dune Silky's northern week opens with two paragraphs about St John's, 700
+    km away, before Day 1. That is the operator's boilerplate, not our
+    inference, and the same error is live today in the curated lists — Topaz
+    sells "North Wrecks Reefs, Tiran and Dahab" with St Johns and Zabargad in
+    its own regions.
+
+    So this trades recall for the thing the site is for. What it buys is not
+    only detail: three trips whose region list is empty are named here and
+    nowhere else, among them a dolphin week whose only source for Sha'ab el Erg
+    is the operator writing the reef's name over a paragraph about it.
+
+    Read one heading at a time rather than from the lot joined together.
+    Joining and matching once looks equivalent and is not: :func:`normalise`
+    reduces every punctuation mark to a space, so a separator disappears into
+    the text and a section headed "Ras" followed by one headed "Mohammed"
+    would invent a reef neither of them names.
+    """
+    sites: list[str] = []
+    for section in trip.get("sections") or ():
+        if section.get("is_day"):
+            continue
+        sites = _also(sites, _sites_from_name(section.get("heading") or ""))
+    return sites
+
+
+def _also(sites: list[str], extra: list[str]) -> list[str]:
+    """``sites`` with anything genuinely new appended, order kept.
+
+    Deduplicated on the folded key rather than the string, so "Elphinstone"
+    from a region list and "Elphinstone Reef" from a heading stay one chip.
+    """
+    if not extra:
+        return sites
+    out = list(sites)
+    seen = {normalise(site) for site in out}
+    for site in extra:
+        key = normalise(site)
+        if key not in seen:
+            seen.add(key)
+            out.append(site)
+    return out
 
 
 def _sites_from_name(name: str) -> list[str]:

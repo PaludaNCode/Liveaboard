@@ -37,7 +37,11 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.promote import _sites_from_name, itinerary_key  # noqa: E402
+from liveaboard.promote import (  # noqa: E402
+    _sites_from_name,
+    _sites_from_regions,
+    itinerary_key,
+)
 from liveaboard.scrape.base import PoliteFetcher  # noqa: E402
 from liveaboard.scrape.itinerary import min_logged_dives, parse_trip  # noqa: E402
 from liveaboard.scrape.liveaboard_com import HOST  # noqa: E402
@@ -104,13 +108,22 @@ def main() -> int:
 
     archive = json.loads(args.archive.read_text(encoding="utf-8"))
     trips = wanted(archive)
-    book = {} if args.refresh else load(args.out)
 
-    todo = [k for k in trips if k not in book]
+    # The book is always loaded and always merged into, even on --refresh.
+    #
+    # --refresh used to start from an empty book, which is right for a full run
+    # and destroys the file on a capped one: `--refresh --limit 6` re-read six
+    # trips and wrote a book containing only those six, dropping 309 records
+    # and taking 247 dive counts and 305 entry bars out of the dataset with
+    # them. A run knows nothing about the trips it did not visit, which is the
+    # same rule `scrape_fees.py --limit` already follows.
+    book = load(args.out)
+
+    todo = list(trips) if args.refresh else [k for k in trips if k not in book]
     if args.limit:
         todo = todo[: args.limit]
     print(f"{len(trips)} itineraries in the archive, {len(book)} already read, "
-          f"{len(todo)} to fetch")
+          f"{len(todo)} to {'re-read' if args.refresh else 'fetch'}")
     if not todo:
         print("nothing to do")
         return 0
@@ -140,7 +153,7 @@ def main() -> int:
         # titles use keeps one vocabulary on the page; anything it does not know
         # is reported rather than dropped silently, because a reef the operator
         # names and we cannot is a gap in SITE_HINTS worth closing deliberately.
-        sites = _sites_from_name(" , ".join(detail.regions))
+        sites = _sites_from_regions(detail.regions)
         for region in detail.regions:
             if not _sites_from_name(region):
                 unknown[region] = unknown.get(region, 0) + 1
@@ -156,12 +169,27 @@ def main() -> int:
             "guests": detail.guests,
             "experience": detail.experience,
             "min_logged_dives": min_logged_dives(detail.experience),
+            # The operator's own prose, verbatim. Stored rather than
+            # interpreted: which words in it are dive sites is a question for
+            # one vocabulary in `promote`, asked offline, so that improving
+            # that vocabulary never means fetching these pages again -- the
+            # same reason `data/archive.json` keeps nodes nothing parses yet.
+            #
+            # It is headed "Sample Itinerary" and its days are not contiguous,
+            # so it is a sketch of the week. Anything that renders it should
+            # say so rather than presenting it as a log.
+            "intro": detail.intro,
+            "sections": [
+                {"heading": x.heading, "text": x.text, "is_day": x.is_day}
+                for x in detail.sections
+            ],
             "source_url": endpoint(boat_id, tour_id),
         }
         added += 1
         print(
             f"  [{index}/{len(todo)}] {slug:22.22} {name[:34]:34} "
-            f"sites={sites or '-'} dives={detail.dives or '-'}",
+            f"sites={sites or '-'} dives={detail.dives or '-'} "
+            f"sections={len(detail.sections) or '-'}",
             flush=True,
         )
 
@@ -180,9 +208,12 @@ def main() -> int:
                 "source": "liveaboard.com",
                 "note": (
                     "One itinerary fragment per trip, from /itinerary/getpopupv2. "
-                    "Regions, dive count, group size and entry bar are the "
-                    "operator's own words about this trip rather than the boat. "
-                    "Incremental: a trip already here is not re-fetched."
+                    "Regions, dive count, group size, entry bar and the "
+                    "operator's own sample itinerary are its words about this "
+                    "trip rather than about the boat. `days` is kept verbatim; "
+                    "which of those words are dive sites is decided in promote. "
+                    "Incremental: a trip already here is not re-fetched, so a "
+                    "parser change needs --refresh to reach trips already read."
                 ),
                 "trips": dict(sorted(book.items())),
             },

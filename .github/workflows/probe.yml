@@ -45,6 +45,13 @@ jobs:
       - name: Probe for dive counts
         run: python3 tools/probe_dives.py --limit 8
 
+      # What the "What to expect" prose looks like on every vessel. A parser
+      # written against one hand-trimmed fixture matched nothing on six real
+      # trips, so this establishes the shape across the fleet before another
+      # pattern is written against a guess.
+      - name: Probe the itinerary prose across every vessel
+        run: python3 tools/probe_itinerary_prose.py
+
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
   gear:

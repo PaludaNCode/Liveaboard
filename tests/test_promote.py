@@ -1148,3 +1148,151 @@ class TestGuestsFromATripAreAFallback(unittest.TestCase):
             trips=book,
         )
         self.assertEqual(payload["boats"][0]["guests"], 20)
+
+
+def section(heading, text="Some description of the place.", is_day=False):
+    """One section of the operator's prose, as the fetcher stores it."""
+    return {"heading": heading, "text": text, "is_day": is_day}
+
+
+class TestTheOperatorsProseNamesPlaces(unittest.TestCase):
+    """Reefs read from the operator's own account of the trip.
+
+    Only the headings of non-day sections, and the reason is measured rather
+    than assumed: across all 315 trips, reading every word of the prose adds
+    sites to 203 of them and imports the operators' pasted-in mistakes with
+    them; reading the headings adds to 49 and reproduces the curated region
+    list exactly on the trip where the two disagree most.
+    """
+
+    def promoted(self, name="Brothers & Daedalus (Hurghada - Hurghada)", **fields):
+        payload = promote(
+            candidate([departure(name=name)]),
+            season=SEASON,
+            trips=trip_book(name=name, **fields),
+        )
+        return payload["itineraries"][0]
+
+    def test_a_place_heading_adds_a_reef_the_region_list_missed(self):
+        """All-Star Ghani's northern weeks stop at Gubal and say so over a
+        paragraph about it; their "Key regions" list never mentions it."""
+        itinerary = self.promoted(
+            regions=["Ras Mohammed", "Thistlegorm"],
+            sections=[section("Gubal Island")],
+        )
+        self.assertEqual(
+            itinerary["dive_sites"], ["ras mohammed", "thistlegorm", "gubal"]
+        )
+
+    def test_a_days_text_is_never_read_for_sites(self):
+        """The failure this narrowing exists for. Aphrodite sells a "North -
+        Straits of Tiran" week whose title, region list and place descriptions
+        all say Sinai, and whose day plan is a deep-south expedition pasted
+        from another trip. Reading it would claim eight reefs and the whole
+        sea; here the row stays northern."""
+        itinerary = self.promoted(
+            name="North - Straits of Tiran (Hurghada - Hurghada)",
+            regions=["Straits Of Tiran", "Ras Mohammed"],
+            sections=[
+                section("Ras Mohammed", "The marine park offers dreamlike diving."),
+                section("Day 3:", "Rocky and Zabargad.", is_day=True),
+                section("Day 4:", "St John's Reef. Collecting data.", is_day=True),
+                section("Day 6:", "Fury Shoals.", is_day=True),
+            ],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["tiran", "ras mohammed"])
+
+    def test_the_prose_answers_when_the_region_list_is_empty(self):
+        """Aphrodite's dolphin week lists no region at all. The reef's name is
+        written over the paragraph describing it, and nowhere else."""
+        itinerary = self.promoted(
+            name="North Dolphins (Hurghada - Hurghada)",
+            regions=[],
+            sections=[section("Sha'ab El Erg — Dolphin Safari")],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["sha'ab el erg"])
+
+    def test_a_site_is_not_assembled_across_two_headings(self):
+        """Headings are joined with a separator. Without one, a section called
+        "Ras" followed by one called "Mohammed" would invent a reef."""
+        itinerary = self.promoted(
+            regions=[],
+            sections=[section("Ras"), section("Mohammed")],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["brothers", "daedalus"])
+
+    def test_a_heading_that_names_no_place_adds_nothing(self):
+        """Most non-day headings are "Highlights" or "Marine Life"."""
+        itinerary = self.promoted(
+            regions=["Thistlegorm"],
+            sections=[section("Highlights"), section("Marine Life"),
+                      section("Daily Routine")],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["thistlegorm"])
+
+    def test_the_same_reef_spelled_two_ways_stays_one_chip(self):
+        """The region list says Elphinstone and the heading says Elphinstone
+        Reef. Deduplication is on the folded key, not the string."""
+        itinerary = self.promoted(
+            regions=["Elphinstone"],
+            sections=[section("Elphinstone Reef")],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["elphinstone"])
+
+    def test_a_book_written_before_prose_was_kept_still_works(self):
+        """The fetch is incremental, so records predating the parser have no
+        sections at all. They must keep the sites they had."""
+        itinerary = self.promoted(regions=["Ras Mohammed"])
+        self.assertEqual(itinerary["dive_sites"], ["ras mohammed"])
+
+
+class TestADiveOnAPlaceFoldsIntoIt(unittest.TestCase):
+    """A hint is a destination; a dive on one is an alias.
+
+    Forced by the prose, which names the individual dives rather than the
+    destination -- "Dive 2: Giannis D". Left unfolded, an Abu Nuhas week showed
+    five chips for one reef. This is the rule that already folded Jackson,
+    Gordon, Woodhouse and Thomas into Tiran.
+    """
+
+    def sites(self, text):
+        from liveaboard.promote import _sites_from_name
+
+        return _sites_from_name(text)
+
+    def test_the_four_abu_nuhas_wrecks_are_abu_nuhas(self):
+        for wreck in ("Giannis D", "Carnatic", "Chrisoula K", "Kimon M"):
+            with self.subTest(wreck=wreck):
+                self.assertEqual(self.sites(f"The {wreck} lies here"), ["abu nuhas"])
+
+    def test_both_brothers_and_their_wrecks_are_the_brothers(self):
+        for name in ("Big Brother", "Little Brother", "Numidia", "Aida"):
+            with self.subTest(name=name):
+                self.assertEqual(self.sites(f"Diving the {name} today"), ["brothers"])
+
+    def test_ras_mohammeds_own_dives_are_ras_mohammed(self):
+        for name in ("Shark Reef", "Yolanda Reef", "Dunraven"):
+            with self.subTest(name=name):
+                self.assertEqual(self.sites(f"A dive at {name}"), ["ras mohammed"])
+
+    def test_a_destination_is_not_folded_away(self):
+        """Thistlegorm and the Salem Express are wrecks too, and stay their own
+        chips: a week is sold to reach them, and nothing else on the list
+        contains them."""
+        self.assertEqual(self.sites("SS Thistlegorm"), ["thistlegorm"])
+        self.assertEqual(self.sites("The Salem Express"), ["salem express"])
+
+    def test_the_arabic_word_for_reef_is_not_a_dive_site(self):
+        """"Sha'ab" was a hint and matched inside Sha'ab Sheer, Sha'ab Abu
+        Nuhas and Sha'ab el Erg alike, putting a chip reading "reef" on 113 of
+        315 trips. The named reefs still resolve."""
+        self.assertEqual(self.sites("Sha'ab Sheer"), ["shaab sheer"])
+        self.assertEqual(self.sites("Sha'ab Abu Nuhas"), ["abu nuhas"])
+        self.assertEqual(self.sites("Sha'ab el Erg"), ["sha'ab el erg"])
+        self.assertEqual(self.sites("a lovely sha'ab"), [])
+
+    def test_dolphin_house_is_two_reefs_and_resolves_to_neither(self):
+        """Sha'ab el Erg off Hurghada and Sha'ab Samadai off Marsa Alam are
+        both sold under the name, 400 km apart. A southern trip's own prose
+        lists it beside Sataya and Fury Shoal."""
+        self.assertEqual(self.sites("Dolphin House"), [])
