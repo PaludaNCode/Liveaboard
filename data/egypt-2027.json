@@ -42796,11 +42796,12 @@
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 10,
-      "dives": 0,
+      "dives": 30,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elba reef"
+        "elphinstone",
+        "st johns"
       ],
       "region": null,
       "summary": "The Royal Evolution is a 39-meter liveaboard accommodating 24 passengers in 12 air-conditioned cabins, comprising 2 double suites, 2 twin suites, and 8 standard suite cabins, all with private bathrooms with hot showers.",
@@ -42980,7 +42981,15 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      }
     },
     {
       "id": "royal-evolution--special-wrecks-hurghada-hurghada",
@@ -47550,13 +47559,12 @@
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
-        "dahab",
-        "ras mohammed"
+        "ras mohammed",
+        "tiran"
       ],
       "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
@@ -47700,7 +47708,15 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      }
     },
     {
       "id": "serenity--north-and-wrecks-hurghada-hurghada",
@@ -48220,13 +48236,16 @@
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
         "tiran",
-        "ras mohammed"
+        "salem express"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Sinaistar&mdash;13 cabins, spacious dive deck, sun deck, and weekly trips from Hurghada.",
@@ -48379,7 +48398,15 @@
             "retrieved": "2026-08-27"
           }
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      }
     },
     {
       "id": "sindalahs--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -57842,12 +57869,14 @@
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
-        "brothers"
+        "brothers",
+        "thistlegorm",
+        "ras mohammed",
+        "safaga"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -58081,7 +58110,15 @@
             "retrieved": "2026-08-27"
           }
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 40,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 40 minimum logged dives required."
+      }
     },
     {
       "id": "topaz--north-reef-safaga-brother-islands-port-ghalib-hurghada",
