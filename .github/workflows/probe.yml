@@ -85,6 +85,14 @@ jobs:
           python3 tools/probe_unread.py \
             --retries "${{ inputs.unread_retries || 2 }}"
 
+      # Thirteen of the fifteen vessels on the skip list are not linked from
+      # any Egypt listing, so the crawl never reaches them -- and from inside
+      # the dataset "gone from the site" and "still selling, just invisible to
+      # us" look identical. The second would mean discover() is losing real
+      # trips, which is a bug in the crawl and not in the skip list.
+      - name: Find out what happened to the delisted vessels
+        run: python3 tools/probe_delisted.py
+
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
   gear:
