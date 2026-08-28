@@ -52,6 +52,12 @@ jobs:
       - name: Probe the itinerary prose across every vessel
         run: python3 tools/probe_itinerary_prose.py
 
+      # The fourth heading on every fragment, and the only one never parsed.
+      # Named "Route", which is exactly the question the dive-site column asks,
+      # so it is read before anything is written against it.
+      - name: Read the Route block nothing has parsed
+        run: python3 tools/probe_itinerary_route.py --boats 6
+
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
   gear:
