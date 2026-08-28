@@ -15,7 +15,7 @@ expose hidden costs would be hiding them itself.
 from __future__ import annotations
 
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date
 from typing import Any, Mapping, Sequence
 
@@ -216,6 +216,74 @@ def itinerary_key(slug: str, name: str) -> str:
     return f"{slug}::{trip}"
 
 
+BDE = re.compile(
+    r"""^\s*
+        brother(?:s)?(?:\s+islands?)?   # Brother / Brothers / Brother Islands
+        \s*(?:,|&|and|-|–|—|\+|\s)\s*
+        daedalus
+        \s*(?:,|&|and|-|–|—|\+|\s)\s*
+        elphinstone
+        \s*$""",
+    re.I | re.X,
+)
+"""The one route the fleet writes seven different ways.
+
+    Brother - Daedalus - Elphinstone
+    Brother Islands - Daedalus - Elphinstone
+    Brother Islands, Daedalus & Elphinstone
+    Brothers - Daedalus - Elphinstone
+    Brothers, Daedalus & Elphinstone
+    Brothers, Daedalus and Elphinstone
+    Brothers, Daedalus, Elphinstone
+
+Seven spellings of one week, sitting next to each other in the widest column
+on the page, and a visitor comparing them has to notice that they are the same
+trip before they can compare anything else.
+
+Deliberately only this route. Twelve other groups differ the same way -- North
+& Brothers against North - Brothers, and so on -- and are left exactly as their
+operators wrote them. A rule that rewrote every title would be a house style
+imposed on somebody else's words, and it would eventually merge two trips that
+only look alike. This matches one route, in one order, and rewrites nothing
+else: the pattern is anchored at both ends, so "Brothers, Daedalus &
+Elphinstone + Safaga" does not match and is left alone.
+
+Never touches ``Itinerary.name``. The id is built from the name and
+``data/itineraries.json`` keys on it, so the operator's own wording stays the
+identity and this is presentation only.
+"""
+
+BDE_TITLE = "Brothers, Daedalus & Elphinstone"
+"""House style: commas, then an ampersand before the last."""
+
+
+def _settle_title_case(itineraries: list[dict[str, Any]]) -> None:
+    """One spelling per title, where the only difference is capitalisation.
+
+    Emperor Divers sells "Simply The Best" and "Simply the Best" -- two real
+    trips with different ports, written two ways, and the page prints both a
+    row apart as though the difference meant something.
+
+    The chosen spelling is always **one the operator actually used**: the most
+    common of them, alphabetical on a tie so the dataset is reproducible.
+    Nothing is title-cased and no word is changed, which is what keeps this
+    safe on names full of things a casing rule would ruin -- "MY Odyssey",
+    "St. John's", "SS Turkia".
+
+    Case only. A title differing by a word is a different title and is left
+    alone, the same way the route rewriting is confined to one route.
+    """
+    spellings: dict[str, Counter[str]] = defaultdict(Counter)
+    for itinerary in itineraries:
+        spellings[itinerary["title"].casefold()][itinerary["title"]] += 1
+    settled = {
+        folded: min(counts.most_common(), key=lambda kv: (-kv[1], kv[0]))[0]
+        for folded, counts in spellings.items()
+    }
+    for itinerary in itineraries:
+        itinerary["title"] = settled[itinerary["title"].casefold()]
+
+
 def _display_title(name: str) -> str:
     """The trip name with its port pair removed, for the column that shows it.
 
@@ -235,9 +303,9 @@ def _display_title(name: str) -> str:
     it would delete what the trip actually is.
     """
     stripped, _, ports = _split_title(name)
-    if ports is None:
-        return stripped
-    return PORTS.sub("", stripped).strip(" -,:") or stripped
+    if ports is not None:
+        stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
+    return BDE_TITLE if BDE.match(stripped) else stripped
 
 
 GUESTS = (
@@ -754,6 +822,8 @@ def promote(
             if item.get("promotion"):
                 entry["promotion"] = item["promotion"]
             departures.append(entry)
+
+    _settle_title_case(itineraries)
 
     payload: dict[str, Any] = {
         "schema_version": 1,

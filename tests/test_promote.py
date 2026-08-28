@@ -635,9 +635,12 @@ class TestDisplayTitle(unittest.TestCase):
         return _display_title(name)
 
     def test_the_port_pair_goes(self):
+        # Deliberately not the Brothers/Daedalus/Elphinstone route: that one is
+        # also folded onto a house spelling, which would make this pass or fail
+        # for a reason that has nothing to do with the ports.
         self.assertEqual(
-            self.title("Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)"),
-            "Brothers - Daedalus - Elphinstone",
+            self.title("Daedalus - Rocky - Zabargad (Hurghada - Hurghada)"),
+            "Daedalus - Rocky - Zabargad",
         )
 
     def test_it_survives_a_port_being_aliased(self):
@@ -1403,3 +1406,138 @@ class TestTheReefsDescriptionsName(unittest.TestCase):
                                ("Gubal Island", "gubal")):
             with self.subTest(name=name):
                 self.assertEqual(self.sites(name), [expected])
+
+
+class TestTheFleetsSevenSpellingsOfOneWeek(unittest.TestCase):
+    """One route, written seven ways, sitting next to each other in the widest
+    column on the page. A visitor comparing them has to work out that they are
+    the same trip before they can compare anything about them.
+
+    Titles only. The name is identity -- the itinerary id is built from it and
+    data/itineraries.json keys on it -- so the operator's own wording stays
+    exactly where the rest of the pipeline reads it.
+    """
+
+    VARIANTS = [
+        "Brother - Daedalus - Elphinstone",
+        "Brother Islands - Daedalus - Elphinstone",
+        "Brother Islands, Daedalus & Elphinstone",
+        "Brothers - Daedalus - Elphinstone",
+        "Brothers, Daedalus & Elphinstone",
+        "Brothers, Daedalus and Elphinstone",
+        "Brothers, Daedalus, Elphinstone",
+    ]
+
+    def _titles(self, names, boat="alia-soul"):
+        deps = [departure(boat=f"boat{n}", name=name, start=f"2027-05-{n + 1:02}")
+                for n, name in enumerate(names)]
+        its = [{"id": f"boat{n}", "name": f"Boat {n}", "boat": f"Boat {n}"}
+               for n in range(len(names))]
+        data = promote(candidate(deps, its), season=SEASON)
+        return [i["title"] for i in data["itineraries"]]
+
+    def test_every_spelling_reaches_one_title(self):
+        self.assertEqual(set(self._titles(self.VARIANTS)),
+                         {"Brothers, Daedalus & Elphinstone"})
+
+    def test_the_operators_own_wording_survives_as_the_name(self):
+        deps = [departure(name="Brother - Daedalus - Elphinstone")]
+        data = promote(candidate(deps), season=SEASON)
+        itinerary = data["itineraries"][0]
+        self.assertEqual(itinerary["title"], "Brothers, Daedalus & Elphinstone")
+        self.assertEqual(itinerary["name"], "Brother - Daedalus - Elphinstone")
+
+    def test_the_id_is_still_built_from_the_name(self):
+        """A title that rewrote the id would break every key that matches on
+        it -- the per-trip book among them, silently."""
+        deps = [departure(name="Brother - Daedalus - Elphinstone")]
+        data = promote(candidate(deps), season=SEASON)
+        self.assertIn("brother-daedalus-elphinstone", data["itineraries"][0]["id"])
+
+    def test_the_port_suffix_is_still_cut(self):
+        titles = self._titles(["Brothers, Daedalus and Elphinstone (Hurghada - Safaga)"])
+        self.assertEqual(titles, ["Brothers, Daedalus & Elphinstone"])
+
+
+class TestNoOtherRouteIsRewritten(unittest.TestCase):
+    """Twelve other groups differ the same way and are deliberately left as
+    their operators wrote them. A rule that rewrote every title would be a
+    house style imposed on somebody else's words, and would eventually merge
+    two trips that only look alike."""
+
+    UNTOUCHED = [
+        "North & Brothers",
+        "North - Brothers",
+        "Daedalus - Rocky - Zabargad - Elphinstone",
+        "Daedalus, Rocky, Zabargad & Elphinstone",
+        "North & Tiran",
+        "North - Tiran",
+    ]
+
+    def test_other_routes_keep_their_own_punctuation(self):
+        for name in self.UNTOUCHED:
+            with self.subTest(name):
+                data = promote(candidate([departure(name=name)]), season=SEASON)
+                self.assertEqual(data["itineraries"][0]["title"], name)
+
+    def test_a_longer_route_containing_the_three_is_not_matched(self):
+        """The pattern is anchored at both ends. A week that adds Safaga is a
+        different week, and renaming it would delete where it goes."""
+        for name in ("Brothers, Daedalus, Elphinstone & Safaga",
+                     "Brothers, Daedalus and Elphinstone plus Fury Shoal",
+                     "Deep South: Brothers, Daedalus, Elphinstone"):
+            with self.subTest(name):
+                data = promote(candidate([departure(name=name)]), season=SEASON)
+                self.assertEqual(data["itineraries"][0]["title"], name)
+
+    def test_the_reverse_order_is_left_alone(self):
+        """Word order is the operator's. Nothing here can verify it means
+        something, and nothing here may assume it means nothing."""
+        name = "Elphinstone, Daedalus & Brothers"
+        data = promote(candidate([departure(name=name)]), season=SEASON)
+        self.assertEqual(data["itineraries"][0]["title"], name)
+
+    def test_two_of_the_three_is_a_different_trip(self):
+        for name in ("Brothers & Daedalus", "Daedalus & Elphinstone"):
+            with self.subTest(name):
+                data = promote(candidate([departure(name=name)]), season=SEASON)
+                self.assertEqual(data["itineraries"][0]["title"], name)
+
+
+class TestOneSpellingWhereOnlyTheCaseDiffers(unittest.TestCase):
+    """Emperor Divers sells "Simply The Best" and "Simply the Best" -- two real
+    trips with different ports, written two ways, printed a row apart as though
+    the difference meant something."""
+
+    def _promote(self, *names):
+        deps = [departure(boat=f"boat{n}", name=name, start=f"2027-05-{n + 1:02}")
+                for n, name in enumerate(names)]
+        its = [{"id": f"boat{n}", "name": f"Boat {n}", "boat": f"Boat {n}"}
+               for n in range(len(names))]
+        return promote(candidate(deps, its), season=SEASON)
+
+    def test_one_spelling_wins(self):
+        data = self._promote("Simply The Best", "Simply the Best", "Simply the Best")
+        self.assertEqual({i["title"] for i in data["itineraries"]},
+                         {"Simply the Best"})
+
+    def test_the_winner_is_one_the_operator_actually_used(self):
+        """Never title-cased into a spelling nobody wrote. The fleet is full of
+        names a casing rule would ruin: MY Odyssey, St. John's, SS Turkia."""
+        data = self._promote("SS Turkia & Ras Mohammed", "ss turkia & ras mohammed",
+                             "SS Turkia & Ras Mohammed")
+        self.assertEqual({i["title"] for i in data["itineraries"]},
+                         {"SS Turkia & Ras Mohammed"})
+
+    def test_a_tie_is_broken_the_same_way_every_run(self):
+        """promote is pure and CI compares its output byte for byte, so a tie
+        settled by dict order would be a build that fails at random."""
+        first = self._promote("Deep South", "deep south")
+        second = self._promote("deep south", "Deep South")
+        self.assertEqual({i["title"] for i in first["itineraries"]},
+                         {i["title"] for i in second["itineraries"]})
+
+    def test_titles_differing_by_a_word_are_left_alone(self):
+        data = self._promote("North & Tiran", "North & Dahab")
+        self.assertEqual({i["title"] for i in data["itineraries"]},
+                         {"North & Tiran", "North & Dahab"})

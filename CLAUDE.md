@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 470 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 482 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -93,6 +93,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
+  Only `title` is ever tidied, and it is tidied in exactly two ways.
+  **One route, not a house style.** `BDE`/`BDE_TITLE` fold the seven spellings
+  of Brothers/Daedalus/Elphinstone onto one; the pattern is anchored at both
+  ends, so *Marine Park North: Brothers - Daedalus & Elphinstone* and
+  *Brothers, Daedalus, Elphinstone & Safaga* are untouched. Twelve other groups
+  differ the same way and are deliberately left as their operators wrote them —
+  do not generalise this into a rule that rewrites every title, and never
+  reorder words: nothing here can verify the order means something, and nothing
+  may assume it means nothing. **Case only, otherwise.**
+  `_settle_title_case` picks one spelling where titles differ *only* by
+  capitalisation, and always one the operator actually used — never title-cased
+  into a spelling nobody wrote, because the fleet is full of names a casing
+  rule would ruin (*MY Odyssey*, *St. John's*, *SS Turkia*). Ties break
+  alphabetically: `promote` is pure and CI compares its output byte for byte.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
