@@ -104,13 +104,22 @@ def main() -> int:
 
     archive = json.loads(args.archive.read_text(encoding="utf-8"))
     trips = wanted(archive)
-    book = {} if args.refresh else load(args.out)
 
-    todo = [k for k in trips if k not in book]
+    # The book is always loaded and always merged into, even on --refresh.
+    #
+    # --refresh used to start from an empty book, which is right for a full run
+    # and destroys the file on a capped one: `--refresh --limit 6` re-read six
+    # trips and wrote a book containing only those six, dropping 309 records
+    # and taking 247 dive counts and 305 entry bars out of the dataset with
+    # them. A run knows nothing about the trips it did not visit, which is the
+    # same rule `scrape_fees.py --limit` already follows.
+    book = load(args.out)
+
+    todo = list(trips) if args.refresh else [k for k in trips if k not in book]
     if args.limit:
         todo = todo[: args.limit]
     print(f"{len(trips)} itineraries in the archive, {len(book)} already read, "
-          f"{len(todo)} to fetch")
+          f"{len(todo)} to {'re-read' if args.refresh else 'fetch'}")
     if not todo:
         print("nothing to do")
         return 0
