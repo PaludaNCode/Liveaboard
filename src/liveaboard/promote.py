@@ -645,7 +645,20 @@ def promote(
         # accordingly -- so unioning the two would reimport exactly the error
         # this source exists to remove. The title stays as the fallback, so a
         # trip the fetcher has not reached keeps the sites it already had.
-        sites = trip.get("dive_sites") or _sites_from_name(name)
+        #
+        # Folded here, from the operator's own words, rather than read out of
+        # the book's `dive_sites`. That field is the same fold done by the
+        # fetcher at crawl time, which made it a cache of whatever SITE_HINTS
+        # knew that day: teaching the parser four Sinai reefs recovered 86
+        # mentions in the parser and changed nothing in the dataset, because
+        # promote was reading yesterday's answer. Re-crawling 315 trips to
+        # re-read words already in the repository is the same slow and rude
+        # thing `reparse_candidate.py` exists to avoid. `dive_sites` stays as
+        # the fallback for a book written before regions were kept.
+        regions = trip.get("regions")
+        sites = (_sites_from_name(" , ".join(regions)) if regions
+                 else trip.get("dive_sites") or [])
+        sites = sites or _sites_from_name(name)
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
@@ -845,6 +858,28 @@ SITE_ALIASES: dict[str, str] = {
     "fury shoals": "fury shoal",
     "brother islands": "brothers",
     "brother island": "brothers",
+    # The individual reefs in the Straits of Tiran, and the signature dive at
+    # Ras Mohammed. Operators name these on their own per-trip region lists,
+    # where nothing here knew the words at all: 86 mentions across 61 trips
+    # went into the parser and came out empty, and Topaz's dolphin safari --
+    # whose only region is Gordon Reef -- lost its site list entirely.
+    #
+    # Folded to the area rather than carried as their own chips. A filter is
+    # only useful if a diver recognises what is in it, and "Tiran" and "Ras
+    # Mohammed" are how these dives are asked for; four more chips naming
+    # reefs inside them is precision nobody was looking for. 55 of the 61
+    # trips name the area as well, so almost all of this is a fold onto a
+    # chip that was already there.
+    #
+    # `normalise` turns "&" into "and", so one spelling covers "Shark &
+    # Yolanda" too.
+    "jackson reef": "tiran",
+    "gordon reef": "tiran",
+    "woodhouse reef": "tiran",
+    # Thomas Reef completes the four; no trip names it yet, and the set is
+    # only meaningful whole.
+    "thomas reef": "tiran",
+    "shark and yolanda": "ras mohammed",
     "the brothers": "brothers",
     # One m or two, both spellings are on the listing.
     "ras mohamed": "ras mohammed",
