@@ -108,7 +108,18 @@ Minus the night count that is our own `Itinerary.name`, ports included, which is
 what makes the two sources joinable without inventing a key.
 """
 
-NIGHTS_SUFFIX = re.compile(r"\s*\d+\s*Nights?\s*$", re.IGNORECASE)
+NIGHTS_SUFFIX = re.compile(r"[\s\u2010-\u2015-]*\d+\s*Nights?\s*$", re.IGNORECASE)
+"""The night count, and any dash that introduces it.
+
+PADI writes three shapes for one thing: "... 7 Nights", "... 7 nights" and
+"... (Hurghada \u2013 Hurghada) \u2013 7 nights". Anchoring on whitespace alone left the
+trailing en-dash behind, the ports pattern then failed to match a string not
+ending in ")", and `split_title` returned None -- which cost Unity all three of
+its itinerary matches while the boat pairing was perfectly correct.
+"""
+
+DASHES = dict.fromkeys(map(ord, "\u2010\u2011\u2012\u2013\u2014\u2015"), "-")
+"""Every dash PADI uses, folded to a hyphen. Their titles mix them freely."""
 
 ZERO_WIDTH = dict.fromkeys(map(ord, "\u200b\u200c\u200d\ufeff"))
 """Both sources carry zero-width spaces inside operator titles -- "Red Sea
@@ -268,6 +279,25 @@ class PadiComAdapter(SourceAdapter):
         return re.sub(r"[^a-z0-9]", "", value.translate(ZERO_WIDTH).lower())
 
     @staticmethod
+    def fold_ports(value: str, aliases: dict[str, str] | None = None) -> str:
+        """One harbour, one spelling.
+
+        Operators name the same terminal differently inside a trip title, and the
+        two sources disagree: our Emperor Asmaa trips say "Marsa Ghalib" where
+        PADI's say "Port Ghalib". `promote.PORT_ALIASES` already folds that pair
+        for the port *columns*; a title carrying the other spelling is the same
+        fact in a place nothing was folding, and it cost that boat all seven of
+        its matches.
+        """
+        from ..promote import PORT_ALIASES
+
+        table = aliases if aliases is not None else PORT_ALIASES
+        out = value
+        for spelling, canonical in table.items():
+            out = re.sub(rf"\b{re.escape(spelling)}\b", canonical, out, flags=re.I)
+        return out
+
+    @staticmethod
     def split_title(title: str) -> tuple[str, str, int] | None:
         """"Name (Port - Port) N Nights" -> (name-with-ports, ports, nights).
 
@@ -283,7 +313,7 @@ class PadiComAdapter(SourceAdapter):
         The name keeps its ports: two sailings differing only by port are two
         trips, here as everywhere else in this codebase.
         """
-        text = title.strip()
+        text = title.strip().translate(DASHES)
         counts: list[int] = []
         while True:
             match = NIGHTS_SUFFIX.search(text)

@@ -267,6 +267,31 @@ EXPERIENCE_REQUIRED_DIVES       = [[0, "No min. logged dives required"],
 vocabulary (10 vs 20, 30 vs 40) but is a gas rather than an entry bar, so each
 pair lands on one level.
 
+## Two things that lost matches on correct pairings
+
+Both were found by reading a vessel's trips beside ours rather than by any test
+failing, and both made a correct boat pairing look like a wrong one.
+
+**PADI mixes dash characters.** It writes *"Name (Hurghada – Hurghada) – 7
+nights"* with en-dashes as readily as hyphens. A night-suffix pattern anchored on
+whitespace left the trailing dash behind, the ports pattern then failed on a
+string not ending in `)`, and `split_title` returned `None` — so the whole title
+became the join key. That cost **Unity all three of its matches** while PADI was
+plainly selling all three: *North and Brothers*, *The Grand Tour*, *Brothers,
+Daedalus, Elphinstone*.
+
+**A harbour is spelled differently inside a trip name.** Our Emperor Asmaa trips
+say *"Marsa Ghalib"* where PADI's say *"Port Ghalib"* — the same terminal, and
+`promote.PORT_ALIASES` has folded that pair for the port columns all along.
+Nothing was folding it inside a title, and it cost that boat **all seven**
+matches. `fold_ports()` now applies the same table before the key is taken.
+
+Together with the wider mapping these moved the join from 81 of 308 itineraries
+to 104. The lesson is worth more than the nine matches: **a zero join is not
+evidence against a pairing.** It was the signal that flagged Unity and Emperor
+Asmaa as doubtful, and in both cases the pairing was right and the reader was
+wrong.
+
 ## The join, measured
 
 Against `data/egypt-2027.json` for Hammerhead II — 14 itineraries ours, 22

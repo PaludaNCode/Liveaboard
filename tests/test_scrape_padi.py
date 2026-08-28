@@ -73,6 +73,58 @@ class TestSplitTitle(unittest.TestCase):
         self.assertIsNone(PadiComAdapter.split_title("Diving in Egypt"))
 
 
+class TestJoinRepairs(unittest.TestCase):
+    """Two bugs that lost matches on boats that were paired correctly.
+
+    Both were found by reading a real side-by-side rather than by a failing
+    assertion, which is why they are pinned here with the live strings.
+    """
+
+    def test_en_dash_before_the_night_count(self) -> None:
+        """Unity's titles cost it all three matches on a correct pairing.
+
+        PADI writes "Name (Hurghada - Hurghada) - 7 nights" with en-dashes. The
+        suffix pattern matched only the digits, left the dash behind, and the
+        ports pattern then failed on a string not ending in ")".
+        """
+        split = PadiComAdapter.split_title(
+            "North and Brothers (Hurghada \u2013 Hurghada) \u2013 7 nights")
+        self.assertIsNotNone(split)
+        assert split
+        self.assertEqual(split[0], "North and Brothers (Hurghada - Hurghada)")
+        self.assertEqual(split[2], 7)
+
+    def test_every_dash_shape_gives_one_name(self) -> None:
+        keys = {
+            PadiComAdapter.compare_key(PadiComAdapter.split_title(title)[0])
+            for title in (
+                "Fury Shoal (Port Ghalib - Port Ghalib) 7 nights",
+                "Fury Shoal (Port Ghalib \u2013 Port Ghalib) \u2013 7 nights",
+                "Fury Shoal (Port Ghalib \u2014 Port Ghalib) 7 Nights",
+            )
+        }
+        self.assertEqual(len(keys), 1, keys)
+
+    def test_port_spelling_inside_a_trip_name(self) -> None:
+        """Emperor Asmaa's seven trips matched nothing over one harbour's name.
+
+        Ours say "Marsa Ghalib", PADI's say "Port Ghalib". PORT_ALIASES folds
+        that pair for the port columns; nothing was folding it inside a title.
+        """
+        ours = PadiComAdapter.fold_ports("South & St Johns (Marsa Ghalib - Marsa Ghalib)")
+        theirs = PadiComAdapter.split_title(
+            PadiComAdapter.fold_ports("South & St Johns (Port Ghalib - Port Ghalib) - 7 nights"))
+        assert theirs
+        self.assertEqual(
+            PadiComAdapter.compare_key(ours), PadiComAdapter.compare_key(theirs[0]))
+
+    def test_folding_leaves_an_unaliased_port_alone(self) -> None:
+        self.assertEqual(
+            PadiComAdapter.fold_ports("Fury Shoal (Hamata - Hamata)"),
+            "Fury Shoal (Hamata - Hamata)",
+        )
+
+
 class TestCompareKey(unittest.TestCase):
     """The join: our itinerary name against PADI's title minus its nights."""
 
