@@ -33,6 +33,21 @@ USER_AGENT = (
 )
 
 DEFAULT_DELAY_SECONDS = 5.0
+
+PARSE_ATTEMPTS = 2
+"""How many times to ask for a page that comes back without structured data.
+
+Measured, not assumed. Fourteen vessel-month pages returned no JSON-LD at all
+on 2026-08-28; a probe re-read all fourteen and thirteen answered in full on
+the very first retry, the fourteenth being a genuinely empty month. So the
+failure is the response, not the page, and one more request settles it --
+against 49 real, bookable sailings that the first version of this loop deleted
+from the site by believing the empty answer.
+
+Two, not more: the pages that fail are a handful out of 268, the retry is
+paced by the same crawl delay as everything else, and a page that answers
+nothing twice is a genuine unknown that `carry_unread` then covers.
+"""
 """Conservative default for a host nobody has checked.
 
 Slower than necessary on purpose: this scrape has a whole day to finish and
@@ -138,6 +153,16 @@ class PoliteFetcher:
         if elapsed < delay:
             time.sleep(delay - elapsed)
         self._last_request[host] = time.monotonic()
+
+    def forget(self, url: str) -> None:
+        """Drop one cached body so the next ``get`` is a real request.
+
+        For the one case where the cache is the wrong answer: a page that came
+        back without its structured data. Asking again through the cache would
+        hand back the same nothing, and the whole point of a retry is to find
+        out whether the *response* was the problem.
+        """
+        self._cache.pop(url, None)
 
     def get(self, url: str) -> FetchResult:
         """Fetch one URL, refusing if robots.txt disallows it."""
@@ -345,11 +370,34 @@ class SourceAdapter(ABC):
                 output.unread.append(url)
                 continue
             fetched += 1
-            try:
-                output.extend(self.parse(result))
-            except ScrapeError as exc:
-                output.warnings.append(f"unparsed {url}: {exc}")
+
+            error: ScrapeError | None = None
+            for attempt in range(PARSE_ATTEMPTS):
+                if attempt:
+                    # The cached body is the one that just failed, so asking
+                    # again through the cache would return the same nothing.
+                    self.fetcher.forget(url)
+                    try:
+                        result = self.fetcher.get(url)
+                    except FetchBlocked as exc:
+                        error = ScrapeError(str(exc))
+                        break
+                    fetched += 1
+                try:
+                    output.extend(self.parse(result))
+                    error = None
+                    break
+                except ScrapeError as exc:
+                    error = exc
+
+            if error is not None:
+                output.warnings.append(f"unparsed {url}: {error}")
                 output.unread.append(url)
+            elif attempt:
+                output.warnings.append(
+                    f"re-read {url} on attempt {attempt + 1}; the first "
+                    f"response carried no structured data"
+                )
 
         output.warnings.extend(self._notes)
         if fetched == 0:

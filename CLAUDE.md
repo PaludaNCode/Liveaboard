@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 462 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 465 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -113,8 +113,11 @@ Break these and the site starts lying quietly rather than failing loudly.
   keeping each row's original `retrieved` date, and says so. The distinction is
   the source's own: a *Product* node with no *Event* nodes is a boat selling
   nothing that month and its absence is the answer; no structured data at all
-  answers nothing. Same rule as the fee book — a run that could not look at
-  something knows nothing about it.
+  answers nothing. Probed rather than guessed: 13 of the 14 answered in full
+  on the first retry, so `PARSE_ATTEMPTS = 2` asks again and `carry_unread` is
+  the net under a page that fails twice. A markup parser for them is ruled
+  out — the JSON-LD is there, it just occasionally is not served. Same rule as
+  the fee book: a run that could not look at something knows nothing about it.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

@@ -160,9 +160,16 @@ sailings, DUNE Longara's whole May among them.
 
 The source itself distinguishes the two, and now so does the scrape: a
 `Product` node with no `Event` nodes is a boat selling nothing that month, and
-its absence is the answer; no structured data at all answers nothing. For the
-second, `scrape` carries the previous run's departures forward for up to a
-fortnight, keeping each row's original `retrieved` date so the page still says
+its absence is the answer; no structured data at all answers nothing.
+
+A probe re-read all fourteen and **thirteen answered in full on the first
+retry** — the fourteenth was a genuinely empty month. So the failure is the
+response and not the page: the crawl now asks a second time, which recovers
+them. A markup parser is ruled out; the JSON-LD is there, it just occasionally
+is not served.
+
+Where a page answers nothing twice, `scrape` carries the previous run's
+departures forward for up to a fortnight, keeping each row's original `retrieved` date so the page still says
 when every price was last read, and noting each carried page in the candidate's
 warnings. After that they drop out — a page unread for two weeks is one we can
 no longer claim to see. The same rule the fee book already followed: a run that
