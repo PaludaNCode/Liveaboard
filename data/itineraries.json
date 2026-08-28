@@ -1,0 +1,76 @@
+{
+  "collected": "2026-08-28",
+  "source": "liveaboard.com",
+  "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size and entry bar are the operator's own words about this trip rather than the boat. Incremental: a trip already here is not re-fetched.",
+  "trips": {
+    "alia-soul::Marine Park North: Brothers - Daedalus & Elphinstone (Safaga/Soma Bay - Safaga/Soma Bay)": {
+      "boat": "alia-soul",
+      "name": "Marine Park North: Brothers - Daedalus & Elphinstone (Safaga/Soma Bay - Safaga/Soma Bay)",
+      "tour_id": "436214",
+      "collected": "2026-08-28",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus",
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone",
+        "abu dabab"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6565&tourID=436214&languageID=1&curr=USD&showPrices=false"
+    },
+    "alia-soul::Marine Park South: Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "alia-soul",
+      "name": "Marine Park South: Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "421166",
+      "collected": "2026-08-28",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "Abu Dabab",
+        "Rocky",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "zabargad",
+        "abu dabab",
+        "rocky island"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6565&tourID=421166&languageID=1&curr=USD&showPrices=false"
+    },
+    "alia-soul::South (Port Ghalib - Port Ghalib)": {
+      "boat": "alia-soul",
+      "name": "South (Port Ghalib - Port Ghalib)",
+      "tour_id": "435258",
+      "collected": "2026-08-28",
+      "regions": [
+        "St. Johns",
+        "Elphinstone",
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "st johns",
+        "abu dabab"
+      ],
+      "dives": 12,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6565&tourID=435258&languageID=1&curr=USD&showPrices=false"
+    }
+  }
+}

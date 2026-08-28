@@ -1,12 +1,12 @@
 {
-  "scraped_at": "2026-08-27",
+  "scraped_at": "2026-08-28",
   "source": "liveaboard.com",
   "note": "Structured data exactly as the source published it, including fields nothing parses yet. Kept because current prices can be re-scraped and past ones cannot.",
   "pages": [
     {
       "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "60fb3c51f2e0941e",
+      "digest": "86e459ff81a1713c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -211,7 +211,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "2a8f96c05bee0c26",
+      "digest": "4cbff0f4dd1753ac",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -287,7 +287,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "8e5c272d78f04b29",
+      "digest": "4c7413aa5813a80f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -320,7 +320,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "fd30d6a5ebd36426",
+      "digest": "7df1b91398b81208",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -396,7 +396,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "329f99e79ba6d4ed",
+      "digest": "13106170079ac054",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -644,7 +644,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "a6db75e312d323df",
+      "digest": "4ae1f4b7edefa4bd",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -849,7 +849,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d2905948f3d47a7e",
+      "digest": "86a70dd1f7fd284f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -1054,7 +1054,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "72f7dfd0336b21b8",
+      "digest": "8a9afd238e626f13",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -1302,7 +1302,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "213c7daef3527417",
+      "digest": "b30b7da76cd5eaed",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -1557,7 +1557,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "ce2c8acf8099d760",
+      "digest": "b35a38106c4b900d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -1769,7 +1769,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4a4c33f937f61d54",
+      "digest": "b635b6656108371e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -1938,7 +1938,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "e10d4ad44bfb1fa8",
+      "digest": "4752874f3e3fa073",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -2150,7 +2150,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "3a6ae0dff0e65e4d",
+      "digest": "4ef591545bda0f5c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -2405,7 +2405,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "e04aef8666012d48",
+      "digest": "d29a844d37e045f9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -2617,7 +2617,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "746ff53fb8722374",
+      "digest": "7dbb3c83b11798e7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -2829,7 +2829,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "63cd8fa64fef7ee6",
+      "digest": "0861409f576f1788",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -3041,7 +3041,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "fa70647316f758f3",
+      "digest": "d3c009032f446736",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -3425,7 +3425,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "87eb6008b0fec6dc",
+      "digest": "63e25330ffa99447",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -3766,7 +3766,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d04248b5a0b09a1f",
+      "digest": "b937f3da4bf261fc",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -4150,7 +4150,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "dd8bde5afa6ea364",
+      "digest": "8eb5c0fec156eec6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -4534,7 +4534,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "0df74dce35f7c5c9",
+      "digest": "52a008f72a2407fd",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -4918,7 +4918,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "db39f1390043add3",
+      "digest": "7e4014304a99f11c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -5173,7 +5173,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "83e2865469407937",
+      "digest": "7521259afc956497",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -5557,7 +5557,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "0937e87eafeec31b",
+      "digest": "dbbd65ef8bec2ac2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -5941,7 +5941,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "0dfcfb5099e7f762",
+      "digest": "dcae6d8d55340d1b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6196,7 +6196,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "c5de7abb699cfc17",
+      "digest": "8550d948ed88168d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6408,7 +6408,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "58e41974c2f940a1",
+      "digest": "ca75a8960f1801ea",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6663,7 +6663,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "81ec99f57449532b",
+      "digest": "292fe616b92e4b71",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6875,7 +6875,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "bb328454f19a8ff0",
+      "digest": "a1fd555b3c405c56",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6915,7 +6915,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "fc119e6fdd8f1d00",
+      "digest": "7d6b0b006a7429cb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6955,7 +6955,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "e31fcb2523349a87",
+      "digest": "cf1d418eb42cad63",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -6995,7 +6995,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "24883bc89a26c7ea",
+      "digest": "c448d69558aa4733",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7035,7 +7035,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "d807780d20b21c0d",
+      "digest": "20be064774f205bf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7068,7 +7068,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/avo?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "b5f59ae8735c6fdc",
+      "digest": "5aac3286e659e527",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7101,7 +7101,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/avo?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "de88d496daef5548",
+      "digest": "e676e03ccfa4e62e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7177,7 +7177,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/avo?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "1d5ef55b7fd1c11e",
+      "digest": "0763d15f10189918",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7210,7 +7210,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "fe39ca5e03c9699e",
+      "digest": "56affde06e33dc8d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7250,7 +7250,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "3cbbd12b2f79294d",
+      "digest": "2e52e2a74335bc06",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7290,7 +7290,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "78b8d476c398b39f",
+      "digest": "af6b09b80a43e541",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7330,7 +7330,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "e8ad5f04603f4ce8",
+      "digest": "3a468892d2f64fb9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7370,7 +7370,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "795bd6a5e941aca7",
+      "digest": "c4796a36b4d57ece",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7410,7 +7410,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "a3c745e9eea42129",
+      "digest": "66de44723275cc40",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7450,7 +7450,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "9fc90d943b42d0bc",
+      "digest": "e80388aafa996fe5",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7490,7 +7490,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bella-3?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "81bc06c681cb3cd4",
+      "digest": "a4e7798d975e295b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7530,7 +7530,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "8f25dfba33cacf39",
+      "digest": "f4ec492becde224e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7570,7 +7570,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "2c01a7ae3efe3ec5",
+      "digest": "dfc7d6c7831a9b6b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7610,7 +7610,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "1f1eccf7cae54d92",
+      "digest": "a1be7232f8b0449f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7693,7 +7693,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/bismarck?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "41735d813fea7044",
+      "digest": "0dfb1ad7f1204847",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7733,7 +7733,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "d48b3f65d690b3a6",
+      "digest": "04ad4a85dc08e668",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7773,7 +7773,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "4cb9b1c570377882",
+      "digest": "0d4619190e2ced4f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7813,7 +7813,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "afd018fbaff34d44",
+      "digest": "cedc38785404d6df",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7853,7 +7853,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "c023f684a235e6ec",
+      "digest": "ab348f88dc565eb7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -7979,7 +7979,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "f4a52d6616c37cd2",
+      "digest": "32b7eb26f705b143",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8012,7 +8012,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "a665247f945b5356",
+      "digest": "8e52368ef146054c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8045,7 +8045,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4ff9081ff6148675",
+      "digest": "f316124fb0c9c92a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8078,7 +8078,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "1fa1710ed392ddd4",
+      "digest": "a3e501b1d9632fca",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8111,7 +8111,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "045c97f7dd48c705",
+      "digest": "0c0b453830498cc1",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8366,7 +8366,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "0d7604b59fef1381",
+      "digest": "9710b2bee8c6acdb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8535,7 +8535,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "755498098b51509b",
+      "digest": "e94ab8d03022f266",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8747,7 +8747,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "7e6e241130ba1ae4",
+      "digest": "e16c31d35a5b7264",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -8959,7 +8959,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "2cec2a572bb9e8d5",
+      "digest": "90738b668926c434",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9214,7 +9214,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "19dd517893da5ec7",
+      "digest": "15009d6856605614",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9426,7 +9426,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "99628ff81ae7a71c",
+      "digest": "ddb5116cedd24ceb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9595,7 +9595,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "4b80fbd1085a8ac3",
+      "digest": "b8a83af0c816aab2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9807,7 +9807,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "b3b92b6f9598b9eb",
+      "digest": "9155634349e23f93",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9847,7 +9847,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "03b9e7c675fe5b63",
+      "digest": "12fbf04780be994d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9887,7 +9887,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "7cd3d37efb517bee",
+      "digest": "30aa32b101655b58",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9927,7 +9927,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "6d7ee3636faed8d0",
+      "digest": "e2142b73c4f5f59c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -9967,7 +9967,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "f494ad13b3bb0d0f",
+      "digest": "8cec69e51b638653",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10050,7 +10050,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "f967ceb4d45ac557",
+      "digest": "44ee0bcedd49fe83",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10090,7 +10090,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "41bd731f44a5eef3",
+      "digest": "8c093c875cfe58e0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10173,7 +10173,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f6d44130ea3e545c",
+      "digest": "9432f0d04e3b8752",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10213,7 +10213,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "7960f9b41948bbe6",
+      "digest": "00dbc8f66dd2f47c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10253,7 +10253,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "74a39d6b9821b0d0",
+      "digest": "b779fa91ac7bb87e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10293,7 +10293,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "bfe00e7af9fb0e10",
+      "digest": "7e840803541f0001",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10376,7 +10376,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "da8d7e673d4e5ac7",
+      "digest": "078f56349d8da103",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10416,7 +10416,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "6683e6f53f7702b0",
+      "digest": "63bf718f255679d9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10664,7 +10664,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/carlton?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "19d155a8f9d84b69",
+      "digest": "6950bc13c6879db9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -10869,7 +10869,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/carlton?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "7251652fdb5ffc3e",
+      "digest": "a0cc707b6b7411e0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11117,7 +11117,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/carlton?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "3e593496d36d1d24",
+      "digest": "e15d5549740bc05e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11322,7 +11322,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "a83d8cfbe515b016",
+      "digest": "f3e9816f16ff8deb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11362,7 +11362,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/cu?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "ba49ef97016fae39",
+      "digest": "6abae83d0b5880fe",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11402,7 +11402,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/cu?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4d8b725eef2a9b4c",
+      "digest": "581299d7d7ec8c6c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11442,7 +11442,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/cu?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "497e393a2215033d",
+      "digest": "a36e32874527d996",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11482,7 +11482,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/destiny?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "a2f5e80cdef646c5",
+      "digest": "010b3d4e98de2d1b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11737,7 +11737,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/destiny?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "4396382bdcc47293",
+      "digest": "f5415dfe922df874",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -11949,7 +11949,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/destiny?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "be498d17eabdd787",
+      "digest": "ae5d583e335017ab",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -12161,7 +12161,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/destiny?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "caf29fa37f1d10d2",
+      "digest": "086089d12957032f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -12330,7 +12330,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "3ffb1a7b91a6f7de",
+      "digest": "a6f38f88133bfbce",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -12585,7 +12585,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "73fc1f5e3bdec080",
+      "digest": "058c43745d6f9935",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -12797,7 +12797,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "97cc333181708316",
+      "digest": "395b551eaae9d12d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -13052,7 +13052,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "0da8d8a02aac3096",
+      "digest": "e45b8db7504cd4db",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -13264,7 +13264,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "1aa6f384d617963d",
+      "digest": "38fef4a5834aec95",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -13519,7 +13519,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "f70441dbf3a00570",
+      "digest": "81ed80b9530a9a2d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -13731,7 +13731,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "da04d76e289a63b8",
+      "digest": "feb6a300aa079a39",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -13986,7 +13986,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "63051232185cf700",
+      "digest": "e26f332071936272",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -14198,7 +14198,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "6d0e981751cf1430",
+      "digest": "157a0885c8e814df",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -14446,7 +14446,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "f9b65ebb955a5dfa",
+      "digest": "90464a02cecab3d2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -14651,7 +14651,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "7e7b112e2c85be85",
+      "digest": "47dedfd09b31ebc7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -14770,7 +14770,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "dc5500bcf179c0ef",
+      "digest": "823eed54bba0b207",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -14975,7 +14975,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "fd994ec02b1b2faa",
+      "digest": "e01a443ba0fccf3b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -15230,7 +15230,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "6ffe03150e9c20f7",
+      "digest": "d86fb6d6c7b59022",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -15442,7 +15442,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "47efb88d5c4e713e",
+      "digest": "ac7cbe3372fd2559",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -15654,7 +15654,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "656c4c8a2e9ffc1c",
+      "digest": "e1986371c0a676f4",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -15866,7 +15866,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "e1be8ad9236dbaef",
+      "digest": "96112f27c0211066",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -16121,7 +16121,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "c9311abae8219098",
+      "digest": "c07ce78147e47275",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -16333,7 +16333,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "af9e7eb60dd7e54b",
+      "digest": "fef550d4e0101ab5",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -16588,7 +16588,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "0e767519b2a00359",
+      "digest": "7476f13cbf352026",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -16628,7 +16628,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "c4e8fc7c68486562",
+      "digest": "2d5fea0574a83f66",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -16883,7 +16883,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "fd63d65f2b9976d3",
+      "digest": "71b87b4da55be421",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -17095,7 +17095,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "f7e1e57a0a69a44a",
+      "digest": "94890291943bec0f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -17178,7 +17178,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "c39b550ce55fbcc2",
+      "digest": "8112b01dc3e20932",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -17390,7 +17390,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "87dd97cc5c838262",
+      "digest": "4e04d431f9cc4524",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -17602,7 +17602,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "03d6efdbdef9f43e",
+      "digest": "e9164597ba679281",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -17814,7 +17814,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4df8f2b6c15a79ec",
+      "digest": "ee4fe458966abd29",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18026,7 +18026,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "913d1982f48d1301",
+      "digest": "621272cda3673b16",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18066,7 +18066,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "240552a17011442f",
+      "digest": "504d825330a1ddd4",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18278,7 +18278,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "d5a1317fb373c009",
+      "digest": "ced15fe9de63c84e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18447,7 +18447,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "45f10c79d9085cac",
+      "digest": "89bd239b18b828c6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18616,7 +18616,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f29212778415e0f8",
+      "digest": "8577ee6f5a8d2c39",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18828,7 +18828,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/eriny?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "be779b04442ff78c",
+      "digest": "d4fc499408d4a26a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18868,7 +18868,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/eriny?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "29c54a80f310429a",
+      "digest": "ae6dd1b7c01c4d8f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18908,7 +18908,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/eriny?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "de55ac5a80796169",
+      "digest": "907bb6bc4a5426c5",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18948,7 +18948,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/eriny?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "fb70d19978ff99ab",
+      "digest": "ea7c6b1b2003f2e4",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -18988,7 +18988,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "458a078c00f5b3c7",
+      "digest": "3d45bbc4205dc57e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19028,7 +19028,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "8e710266ba564396",
+      "digest": "a604b898b9a34c87",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19068,7 +19068,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "63f6efd1ad845fae",
+      "digest": "31f6854365cf296e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19108,7 +19108,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f2aff74976ead6ac",
+      "digest": "bb70b88c7e103c7f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19148,7 +19148,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "4d9a6d54f6849a06",
+      "digest": "daf3a19a00f22262",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19188,7 +19188,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "8132eaf6565745d7",
+      "digest": "99c2ae2e4bbfe663",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19228,7 +19228,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "1f1968c587d450e0",
+      "digest": "f60452ffc74ff208",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19268,7 +19268,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f1fd619c16b80754",
+      "digest": "150b8196d2ab3331",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19308,7 +19308,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "8bed94ad33f15d5c",
+      "digest": "2b01f41d9df855b0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19563,7 +19563,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "c56445dd6214c2c0",
+      "digest": "6c0c90def43ee50b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19603,7 +19603,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d0f5d4c89fe13efe",
+      "digest": "b7abe3ae2ed390ca",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19729,7 +19729,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f30285e75aef7bd9",
+      "digest": "6a200aaa38900819",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -19984,7 +19984,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "1fe2b2cd09ed77b6",
+      "digest": "c779e2fc5f224e6f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -20196,7 +20196,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "f91d59c1de958dc4",
+      "digest": "edb94a4ce1be951f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -20279,7 +20279,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "2b3711e331e2445c",
+      "digest": "6122f246b5773b3a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -20448,7 +20448,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "0aaad13a40171f41",
+      "digest": "83ed592e8cba952f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -20703,7 +20703,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "2552487a8378daeb",
+      "digest": "d0418057bd373859",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -20915,7 +20915,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "37fa3e6dad226c62",
+      "digest": "a708cce901b21f46",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21041,7 +21041,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "a50db700731f6f1d",
+      "digest": "a988f3fda7181045",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21210,7 +21210,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "8d8ad1227102a7e3",
+      "digest": "ba2ba980ce6a9235",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21293,7 +21293,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "6870d64de97a1f39",
+      "digest": "795e9e83ef32b3b2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21333,7 +21333,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "887f42585ef6c62d",
+      "digest": "92fc4fa7bee84bce",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21416,7 +21416,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "3cdb4dee21bca5fb",
+      "digest": "5dcbd2d1fdd9b6f3",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21542,7 +21542,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "e63ffff8f4391a4d",
+      "digest": "e337f93010f2d069",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21625,7 +21625,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "5d87f9b13a010ae4",
+      "digest": "eba6bf491600ede7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21658,7 +21658,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "138702d4537e9806",
+      "digest": "8399b9472dfec4ef",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21777,7 +21777,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "9dc10a83663d75d6",
+      "digest": "824dc4e5d8cbc98b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21896,7 +21896,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "4aaf6794710e5b16",
+      "digest": "b5d96c843371dded",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -21972,7 +21972,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "b5924fda55ae3419",
+      "digest": "b1a69362884e854d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -22227,7 +22227,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "81aa7dd6be8590a8",
+      "digest": "66693a380667795c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -22439,7 +22439,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "17f883474cfd65f4",
+      "digest": "2796c72fa5d824f4",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -22694,7 +22694,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "3dc72067c915f567",
+      "digest": "546a1afa8b51392b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -22906,7 +22906,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "a0ad6406a40e0500",
+      "digest": "c8f95d7e5d9cb10b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -23161,7 +23161,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "82349a97ee08d216",
+      "digest": "c9bcc5c465376fc7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -23373,7 +23373,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d12ff48898c97938",
+      "digest": "3c06f8e1fb374d6e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -23628,7 +23628,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f541ef7d6c60d500",
+      "digest": "31a462deca68c288",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -23840,7 +23840,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "8d74ec39bbd96a8c",
+      "digest": "7ca0ca777abb594d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -24095,7 +24095,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "d415c3b383957739",
+      "digest": "0162d294ee10346a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -24307,7 +24307,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "726e21723fad7ed1",
+      "digest": "9c9bfaa003026b3d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -24519,7 +24519,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "010cfeb97b269bd2",
+      "digest": "55154e10b448b14a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -24731,7 +24731,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "54ca8248a271e6eb",
+      "digest": "8f908e1893ed5f04",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -24986,7 +24986,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "e6f2fa89ead5faf8",
+      "digest": "bc01e9a62976b59d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25198,7 +25198,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "38b60e5fbb324b29",
+      "digest": "dccd5faf754e239c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25453,7 +25453,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "fbf6bfb2a903d735",
+      "digest": "0c3b8cc77bf7f0c7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25665,7 +25665,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/lady-m?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "252ff7abe99e0740",
+      "digest": "6ea8e26fbec67180",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25698,7 +25698,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/lady-m?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "edb236f50321c5aa",
+      "digest": "5ab12df0daf9e651",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25731,7 +25731,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/lady-m?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "06f27db3512eae07",
+      "digest": "4423483cc11693ba",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25764,7 +25764,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/lady-m?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "c62b5ccb16473e91",
+      "digest": "6540477dfc18a4ed",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25797,7 +25797,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "5629c8bfc611827b",
+      "digest": "4b77586e89b5446e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25916,7 +25916,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "48409ca353722496",
+      "digest": "aee375dc6bf6756c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -25992,7 +25992,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "638453e9c8436d51",
+      "digest": "40b60bf6d78b489c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26068,7 +26068,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "738510e1192ec41d",
+      "digest": "8d904322b3a3748b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26230,7 +26230,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "67dec3a472e433d2",
+      "digest": "f428ed69349ec512",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26257,13 +26257,142 @@
               "name": "LiveAboard.com"
             }
           }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1473-6318-436936",
+          "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+          "description": "‘Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)’ with the New Sambo in Egypt for 8 days and 7 nights, departing 15 May 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6318/whatsapp-image-2026-05-31-at-23.42.46-1-.jpeg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-05-15",
+          "endDate": "2027-05-22",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/new-sambo#tourid=436936",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Sambo Divers",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "New Sambo"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
+            "availabilityEnds": "2027-05-15",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1399",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-27"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1473-6318-436937",
+          "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+          "description": "‘Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)’ with the New Sambo in Egypt for 8 days and 7 nights, departing 22 May 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6318/whatsapp-image-2026-05-31-at-23.42.46-1-.jpeg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-05-22",
+          "endDate": "2027-05-29",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/new-sambo#tourid=436937",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Sambo Divers",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "New Sambo"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
+            "availabilityEnds": "2027-05-22",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1399",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-27"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1473-6318-436962",
+          "name": " Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+          "description": "‘Brother - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)’ with the New Sambo in Egypt for 8 days and 7 nights, departing 29 May 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6318/whatsapp-image-2026-05-31-at-23.42.46-1-.jpeg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-05-29",
+          "endDate": "2027-06-05",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/new-sambo#tourid=436962",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Sambo Divers",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "New Sambo"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=05/2027",
+            "availabilityEnds": "2027-05-29",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1399",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-27"
+          }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "ed98e9eabff6a98e",
+      "digest": "06560fe2cbe62c0a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26425,7 +26554,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "099f4795064b0c06",
+      "digest": "77f7db2bc6b76679",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26673,7 +26802,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "b1a6a1511051c27f",
+      "digest": "d244499715dfb7a0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -26878,7 +27007,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "d3f2618fa40afc79",
+      "digest": "eb8e25fe78f1e55b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -27133,7 +27262,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "e3f8722ba4e59aa6",
+      "digest": "935e79b784525543",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -27345,7 +27474,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "b1e77288cd9241b4",
+      "digest": "06210374660152fb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -27600,7 +27729,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f7e623b66967705c",
+      "digest": "65c43b7d5b1818bf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -27812,7 +27941,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "ac84957620306535",
+      "digest": "5b6b41f1740f5482",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -27974,7 +28103,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "97ec69bf12bf3287",
+      "digest": "99a1a9de188d286a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28007,7 +28136,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "004472cb5edd68a0",
+      "digest": "e460cff57106e5db",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28083,7 +28212,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/oceanix?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "b9d051fdc58a701d",
+      "digest": "08cb7551eed7594f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28116,7 +28245,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/odyssey?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "07236b026ad40f4f",
+      "digest": "6bc9cc35dd6740cf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28371,7 +28500,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/odyssey?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "34b98744f7cd6632",
+      "digest": "3443e845e5f78c13",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28583,7 +28712,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/odyssey?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "f5dd80d5582f5993",
+      "digest": "ec51ebfc6392e4b2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28752,7 +28881,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/odyssey?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "36c0d57b9e31527e",
+      "digest": "41983e4b4fa18525",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -28964,7 +29093,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "b24c1aa894385b8a",
+      "digest": "e0fb722f77960b73",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -29212,7 +29341,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "45f0e683464cbb89",
+      "digest": "f686e024492a7ebd",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -29374,7 +29503,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "48d09bc5610a6740",
+      "digest": "f5f538b6c1436ebb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -29622,7 +29751,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "a4c10f7c75bde18e",
+      "digest": "ae0b25ad13cc42c0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -29827,7 +29956,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "b96d9290aec8c7c1",
+      "digest": "4aae22a60019f3c9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -30082,7 +30211,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "7b556f16f170fa51",
+      "digest": "f616a031b689fc17",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -30294,7 +30423,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4f6592d108d68ce3",
+      "digest": "f3f5c1627efe3ca6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -30506,7 +30635,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "77b19c8e363e040a",
+      "digest": "2e8e51d7d978ba2e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -30718,7 +30847,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "02a6298c935de31e",
+      "digest": "9e77c2d39679fb4c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -30973,7 +31102,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "30b9930c3702e6b9",
+      "digest": "10459a73c4f05660",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -31185,7 +31314,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "09a3d52684068ae5",
+      "digest": "09f6d6faa90740fb",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -31397,7 +31526,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "b7757833343ddb1d",
+      "digest": "c273740072b94e67",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -31566,7 +31695,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "b3a2bcad8a5f1cea",
+      "digest": "d4bdc4278cd4fd54",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -31821,7 +31950,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "74d044a30a15ba80",
+      "digest": "c885eb4837eb3d80",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -32033,7 +32162,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "48584597a04b60db",
+      "digest": "7506b91d85308093",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -32245,7 +32374,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "b4bbdcdd59137a0e",
+      "digest": "9e4bb8124014a9b8",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -32457,7 +32586,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "23b2a072c18da5fa",
+      "digest": "648f1bb28352f155",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -32712,7 +32841,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "42e7994b0ad07527",
+      "digest": "dd5c97fcb4f405f7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -32924,7 +33053,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "c30d4a7d77f47e36",
+      "digest": "59a11e5038d49bf9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -33179,7 +33308,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "c5584cc2f188baa9",
+      "digest": "35f9261aa1935d50",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -33391,7 +33520,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "10c6de6652b58da5",
+      "digest": "b38d12bff6f35639",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -33603,7 +33732,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "00facd2f952f16dc",
+      "digest": "a5e354a5d19c994c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -33815,7 +33944,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d288d6a23c0296cc",
+      "digest": "c647f29e83e12d14",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34027,7 +34156,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "dc780ba6dbf4349e",
+      "digest": "2a1097f0d0b78bd9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34196,7 +34325,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "feb1ef7354de632a",
+      "digest": "5a1d1643a5520f55",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34229,7 +34358,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "7bf802e3f0eeb66e",
+      "digest": "643e69e1e5d1d287",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34262,7 +34391,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "730f399ecde0d196",
+      "digest": "e13f5e8d37466987",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34295,7 +34424,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "44ad10070f949a52",
+      "digest": "a6304ff0d548135f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34328,7 +34457,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "c990f09d9a53fc08",
+      "digest": "edc7c58df21fd2bf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34540,7 +34669,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "81dceceadbea5a0c",
+      "digest": "de1ead41dfa2b2af",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34709,7 +34838,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "32c392228c517d3d",
+      "digest": "2df144377594f8af",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -34878,7 +35007,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "cabeb7bbc6c2d0de",
+      "digest": "cebc05e1e897276d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35047,7 +35176,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "77b7f0cd38c04b61",
+      "digest": "a6b54d110213e610",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35295,7 +35424,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "18e89915449dc21a",
+      "digest": "ab1add6f0a35edc9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35457,7 +35586,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "27ca54e63df2a18b",
+      "digest": "a761bd4ddb5a326f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35490,7 +35619,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "df5024165fb9cb4b",
+      "digest": "2f14941fe6811059",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35523,7 +35652,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "6c8ef602e541e5ac",
+      "digest": "364bc9d5806206b6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35606,7 +35735,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "4c973c8974eead62",
+      "digest": "5df95aceff0ce8a7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35646,7 +35775,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "e08bb46f050ca85d",
+      "digest": "4250f9043a2e1dfa",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35686,7 +35815,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "1178d685707c2570",
+      "digest": "596570eb403dc09a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35726,7 +35855,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "92f14c5a4d8a9391",
+      "digest": "02b3bc3703692f03",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35852,7 +35981,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "879ead5195c9282e",
+      "digest": "9caa39e08801a83b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35892,7 +36021,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "4984852067efa0a6",
+      "digest": "636121bccf9cb059",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -35975,7 +36104,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "f3d3fc596071bb26",
+      "digest": "ef33078002998c43",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36015,7 +36144,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "be1a8f7855b3a8ba",
+      "digest": "b8430101ee40411b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36141,7 +36270,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "9589d8c1f628ecb0",
+      "digest": "ecf39b58b51be851",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36267,7 +36396,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "1c8b5230524b2cd8",
+      "digest": "249cad6f1b17c749",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36307,7 +36436,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "80592246c307ddc9",
+      "digest": "e6fbba58edf004f1",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36347,7 +36476,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "e5390eb5232924df",
+      "digest": "31f479a695839978",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36430,7 +36559,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "d49a6bb70d4aada6",
+      "digest": "786d00f08900ae24",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36470,7 +36599,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "953c0654af9c9a1a",
+      "digest": "7964224a972df3f0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36510,7 +36639,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "e57d9e014c182457",
+      "digest": "0a5ec7ec90c5ee81",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36550,7 +36679,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "9571dfc4b89feb3c",
+      "digest": "70acd3d4aa09e290",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36633,7 +36762,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "201f78b3ad062735",
+      "digest": "c240259c6d9bc4aa",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36673,7 +36802,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "05c4d3bda7cfc90d",
+      "digest": "16147a4d8d3a5321",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36799,7 +36928,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "c7c6fa75ad21b951",
+      "digest": "109cda0a70c531bf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -36839,7 +36968,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/serenity?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "51a8b0b6402fad62",
+      "digest": "b2c0e0c006eba588",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -37137,7 +37266,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/serenity?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "1d1b07ffb0f7890f",
+      "digest": "09ae5923fe3f6c43",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -37349,7 +37478,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/serenity?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "18fb67e34986ce63",
+      "digest": "af31c5e7f186d779",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -37432,7 +37561,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/serenity?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "675e4e6f1865d7ac",
+      "digest": "50b1f28522ab1e97",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -37601,7 +37730,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "1241205c3ae87a83",
+      "digest": "eb57e4494a35380f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -37849,7 +37978,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "1e81093459a7347c",
+      "digest": "8074250eeebb65b0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38054,7 +38183,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "d6ed59bb4eb3413d",
+      "digest": "4c9130ed346a6794",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38087,7 +38216,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "fe3be5bf7da8c363",
+      "digest": "d8946e6d3a76e5cf",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38120,7 +38249,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "d382a624b9e3098f",
+      "digest": "23c631613de6995b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38375,7 +38504,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "434f3b99cb5651fb",
+      "digest": "daedbb548c4fd19f",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38587,7 +38716,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "ae0923d37e9872fe",
+      "digest": "3525fcba90eb2e67",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -38842,7 +38971,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "7f950948b155e894",
+      "digest": "ed64010397c4c3d0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -39054,7 +39183,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "0684cfc0c433253b",
+      "digest": "017420bc04051cf3",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -39266,7 +39395,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "2990db03b9ea88b2",
+      "digest": "9886fad40d0987f2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -39478,7 +39607,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "cfa85fb7703fc6db",
+      "digest": "8096e73aebfbe49d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -39733,7 +39862,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=8/2027",
       "retrieved": "2026-08-27",
-      "digest": "398081ddd0592311",
+      "digest": "55589ca47c0c84fa",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -39945,7 +40074,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=5/2027",
       "retrieved": "2026-08-27",
-      "digest": "3d94c080ad4c91b7",
+      "digest": "ec67091e9084ace7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -40372,7 +40501,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=6/2027",
       "retrieved": "2026-08-27",
-      "digest": "b3194f182be9b32e",
+      "digest": "a77d81679b2f7a18",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -40799,7 +40928,7 @@
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=7/2027",
       "retrieved": "2026-08-27",
-      "digest": "f47dec19d951e414",
+      "digest": "0ba5281f6adc1c5e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -41182,8 +41311,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "30296422f1f36960",
+      "retrieved": "2026-08-28",
+      "digest": "4e6379adae87a6db",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -41609,8 +41738,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "e4ab13b1b9f9cab7",
+      "retrieved": "2026-08-28",
+      "digest": "abcbe19cd631c1f1",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -41685,7 +41814,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -41728,7 +41857,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -41771,7 +41900,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -41814,7 +41943,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -41857,15 +41986,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "4b76324e89b070a6",
+      "retrieved": "2026-08-28",
+      "digest": "21f54c93032dcd13",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -41940,7 +42069,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -41983,7 +42112,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42026,7 +42155,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42069,15 +42198,270 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
+          }
+        }
+      ]
+    },
+    {
+      "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=7/2027",
+      "retrieved": "2026-08-28",
+      "digest": "06aff5befa2988ac",
+      "nodes": [
+        {
+          "@context": "http://schema.org/",
+          "@type": "Product",
+          "name": "Snefro Target",
+          "sameAs": "https://www.liveaboard.com/diving/egypt/snefro-target",
+          "image": [
+            "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-1200,h-628,f-jpeg,fo-boat",
+            "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-857,h-570,f-webp,fo-boat"
+          ],
+          "description": "Join the Snefro Target for fantastic Northern Red Sea diving. Explore Shark &amp; Yolanda, the Thistlegorm as well as the famous reefs in the Straits of Tiran.",
+          "sku": "LA-1072-5442",
+          "brand": {
+            "@type": "Brand",
+            "name": "King Snefro Group"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "9.1",
+            "reviewCount": "36",
+            "bestRating": "10",
+            "worstRating": "1"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": 1164.33,
+            "highPrice": 1685.31,
+            "seller": {
+              "@type": "Organization",
+              "name": "LiveAboard.com"
+            }
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1072-5442-436295",
+          "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+          "description": "‘Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)’ with the Snefro Target in Egypt for 8 days and 7 nights, departing 03 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-03",
+          "endDate": "2027-07-10",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/snefro-target#tourid=436295",
+          "organizer": {
+            "@type": "Organization",
+            "name": "King Snefro Group",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Snefro Target"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
+            "availabilityEnds": "2027-07-03",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1471",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1072-5442-431911",
+          "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+          "description": "‘Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)’ with the Snefro Target in Egypt for 8 days and 7 nights, departing 10 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-10",
+          "endDate": "2027-07-17",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/snefro-target#tourid=431911",
+          "organizer": {
+            "@type": "Organization",
+            "name": "King Snefro Group",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Snefro Target"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
+            "availabilityEnds": "2027-07-10",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1471",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1072-5442-431912",
+          "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+          "description": "‘Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)’ with the Snefro Target in Egypt for 8 days and 7 nights, departing 17 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-17",
+          "endDate": "2027-07-24",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/snefro-target#tourid=431912",
+          "organizer": {
+            "@type": "Organization",
+            "name": "King Snefro Group",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Snefro Target"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
+            "availabilityEnds": "2027-07-17",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1471",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1072-5442-431913",
+          "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+          "description": "‘Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)’ with the Snefro Target in Egypt for 8 days and 7 nights, departing 24 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-24",
+          "endDate": "2027-07-31",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/snefro-target#tourid=431913",
+          "organizer": {
+            "@type": "Organization",
+            "name": "King Snefro Group",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Snefro Target"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
+            "availabilityEnds": "2027-07-24",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1471",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1072-5442-431914",
+          "name": " Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+          "description": "‘Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)’ with the Snefro Target in Egypt for 8 days and 7 nights, departing 31 Jul 2027. No more spaces available.",
+          "image": "https://img.liveaboard.com/picture_library/boat/5442/snefro-target_outside-main-final_0524.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-31",
+          "endDate": "2027-08-07",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/snefro-target#tourid=431914",
+          "organizer": {
+            "@type": "Organization",
+            "name": "King Snefro Group",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Snefro Target"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=07/2027",
+            "availabilityEnds": "2027-07-31",
+            "availability": "https://schema.org/SoldOut",
+            "price": "1471",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "117e1ceb5f0b8def",
+      "retrieved": "2026-08-28",
+      "digest": "609253a79cded04a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42152,7 +42536,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42195,7 +42579,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42238,7 +42622,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42281,15 +42665,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1471",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "22649ca4bfc59531",
+      "retrieved": "2026-08-28",
+      "digest": "62f6857be40eda6a",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42321,8 +42705,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "9f2a1e2257cb5a77",
+      "retrieved": "2026-08-28",
+      "digest": "d6e172adebff8d23",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42354,8 +42738,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "443e0c2213e7ff0e",
+      "retrieved": "2026-08-28",
+      "digest": "cc5f8bb42d42f654",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42387,8 +42771,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "531271ce4be93ae6",
+      "retrieved": "2026-08-28",
+      "digest": "cfb1b4be1709f3e8",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42420,8 +42804,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1c1ec405e5d84c56",
+      "retrieved": "2026-08-28",
+      "digest": "71a2f9a14da73a44",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42496,7 +42880,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1607",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42539,7 +42923,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1724",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42582,15 +42966,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1607",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "457c0b703a50f529",
+      "retrieved": "2026-08-28",
+      "digest": "f4ab9a45275d1737",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42665,7 +43049,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1607",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -42708,15 +43092,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1607",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "cc0228d5e80c276a",
+      "retrieved": "2026-08-28",
+      "digest": "54da8b48b43c240c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42755,8 +43139,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "8d2d025774f10100",
+      "retrieved": "2026-08-28",
+      "digest": "40c9f034c2e5702d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42795,8 +43179,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1f21388b036a8c12",
+      "retrieved": "2026-08-28",
+      "digest": "a5f00203c6267974",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42835,8 +43219,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "a4fda35baf54db94",
+      "retrieved": "2026-08-28",
+      "digest": "3e043688db7052d9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42875,8 +43259,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "35d52788c3fe04f1",
+      "retrieved": "2026-08-28",
+      "digest": "1aea0c37ea1908ae",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42951,15 +43335,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1293",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "fc469081a302d8e0",
+      "retrieved": "2026-08-28",
+      "digest": "29fd81a0b8ddcfa6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -42998,8 +43382,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "5790ede36ee961d3",
+      "retrieved": "2026-08-28",
+      "digest": "16891bcc235981a9",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -43074,7 +43458,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43117,7 +43501,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43160,7 +43544,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43203,7 +43587,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43246,15 +43630,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "e4aea096c0279b9b",
+      "retrieved": "2026-08-28",
+      "digest": "e14953dc236b9487",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -43329,7 +43713,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43372,7 +43756,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43415,7 +43799,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43458,15 +43842,270 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1282",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
+          }
+        }
+      ]
+    },
+    {
+      "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027",
+      "retrieved": "2026-08-28",
+      "digest": "efc36cbc54dd855d",
+      "nodes": [
+        {
+          "@context": "http://schema.org/",
+          "@type": "Product",
+          "name": "Star Jet",
+          "sameAs": "https://www.liveaboard.com/diving/egypt/star-jet",
+          "image": [
+            "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-1200,h-628,f-jpeg,fo-boat",
+            "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-857,h-570,f-webp,fo-boat"
+          ],
+          "description": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
+          "sku": "LA-1502-6448",
+          "brand": {
+            "@type": "Brand",
+            "name": "Blue Shades Diving"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "9.8",
+            "reviewCount": "4",
+            "bestRating": "10",
+            "worstRating": "1"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": 1165.5,
+            "highPrice": 1456.88,
+            "seller": {
+              "@type": "Organization",
+              "name": "LiveAboard.com"
+            }
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1502-6448-409002",
+          "name": " Rocky & Zabargad - St. John's - Elphinstone (Marsa Alam - Marsa Alam)",
+          "description": "‘Rocky & Zabargad - St. John's - Elphinstone (Marsa Alam - Marsa Alam)’ with the Star Jet in Egypt for 8 days and 7 nights, departing 03 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-03",
+          "endDate": "2027-07-10",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/star-jet#tourid=409002",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Blue Shades Diving",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Star Jet"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
+            "availabilityEnds": "2027-07-03",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1224",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1502-6448-409003",
+          "name": " Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)",
+          "description": "‘Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)’ with the Star Jet in Egypt for 8 days and 7 nights, departing 10 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-10",
+          "endDate": "2027-07-17",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/star-jet#tourid=409003",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Blue Shades Diving",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Star Jet"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
+            "availabilityEnds": "2027-07-10",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1224",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1502-6448-409004",
+          "name": " Rocky & Zabargad - St. John's - Sataya (Marsa Alam - Marsa Alam)",
+          "description": "‘Rocky & Zabargad - St. John's - Sataya (Marsa Alam - Marsa Alam)’ with the Star Jet in Egypt for 8 days and 7 nights, departing 17 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-17",
+          "endDate": "2027-07-24",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/star-jet#tourid=409004",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Blue Shades Diving",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Star Jet"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
+            "availabilityEnds": "2027-07-17",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1224",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1502-6448-409005",
+          "name": " Daedalus - Elphinstone - Sataya/Fury Shoals (Marsa Alam - Marsa Alam)",
+          "description": "‘Daedalus - Elphinstone - Sataya/Fury Shoals (Marsa Alam - Marsa Alam)’ with the Star Jet in Egypt for 8 days and 7 nights, departing 24 Jul 2027.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-24",
+          "endDate": "2027-07-31",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/star-jet#tourid=409005",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Blue Shades Diving",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Star Jet"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
+            "availabilityEnds": "2027-07-24",
+            "availability": "https://schema.org/OnlineOnly",
+            "price": "1224",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "LA-1502-6448-409006",
+          "name": " Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)",
+          "description": "‘Elphinstone - St. John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)’ with the Star Jet in Egypt for 8 days and 7 nights, departing 31 Jul 2027. Female Shared Cabin. 2.",
+          "image": "https://img.liveaboard.com/picture_library/boat/6448/main-photo-3.jpg?tr=w-360,h-240,f-webp,fo-boat",
+          "startDate": "2027-07-31",
+          "endDate": "2027-08-07",
+          "duration": "P8D",
+          "url": "https://www.liveaboard.com/diving/egypt/star-jet#tourid=409006",
+          "organizer": {
+            "@type": "Organization",
+            "name": "Blue Shades Diving",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet"
+          },
+          "performer": {
+            "@type": "Organization",
+            "name": "Star Jet"
+          },
+          "potentialAction": {
+            "@type": "PlayAction",
+            "name": "Liveaboard Diving"
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "EventScheduled",
+          "location": {
+            "@type": "Place",
+            "name": "Egypt",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "Egypt"
+            }
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=07/2027",
+            "availabilityEnds": "2027-07-31",
+            "availability": "https://schema.org/LimitedAvailability",
+            "price": "1224",
+            "priceCurrency": "USD",
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "eb8e100660a4ecc6",
+      "retrieved": "2026-08-28",
+      "digest": "897ea68a33b84b50",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -43541,7 +44180,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43584,7 +44223,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43627,7 +44266,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43670,15 +44309,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunlight?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "29943e8475319580",
+      "retrieved": "2026-08-28",
+      "digest": "9590544978acda48",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -43753,7 +44392,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43796,7 +44435,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43839,7 +44478,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43882,7 +44521,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -43925,15 +44564,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunlight?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "e0c28f84ae5b4d8b",
+      "retrieved": "2026-08-28",
+      "digest": "d3392471216e7eb0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -44008,7 +44647,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44051,7 +44690,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44094,15 +44733,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunlight?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "61239f16e4903a75",
+      "retrieved": "2026-08-28",
+      "digest": "b2af509366476543",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -44177,7 +44816,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44220,7 +44859,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44263,7 +44902,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44306,15 +44945,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunlight?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1e9e9a44661cdbd1",
+      "retrieved": "2026-08-28",
+      "digest": "18c1dc8a1b30dda4",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -44389,7 +45028,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44432,7 +45071,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44475,7 +45114,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44518,15 +45157,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1049",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunshine?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "3d20243a9d54ebdb",
+      "retrieved": "2026-08-28",
+      "digest": "76bdb384642e86dc",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -44601,7 +45240,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44644,7 +45283,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44687,7 +45326,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "991",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44730,7 +45369,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44773,15 +45412,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunshine?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "5e209e54261407bb",
+      "retrieved": "2026-08-28",
+      "digest": "c61fc6f863984e8e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -44856,7 +45495,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "932",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44899,7 +45538,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44942,7 +45581,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -44985,15 +45624,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunshine?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "dc12d6cfb42ac456",
+      "retrieved": "2026-08-28",
+      "digest": "8bbb3f94a1378ab6",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -45068,7 +45707,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45111,7 +45750,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "932",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45154,7 +45793,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45197,7 +45836,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "991",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45240,15 +45879,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/sunshine?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "22795f7411bcd773",
+      "retrieved": "2026-08-28",
+      "digest": "ef34ca0a7d386a10",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -45323,7 +45962,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45366,7 +46005,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "991",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45409,7 +46048,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "932",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45452,15 +46091,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "874",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/tala?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "7b5c38886bc4f19b",
+      "retrieved": "2026-08-28",
+      "digest": "031373c112f35231",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -45535,7 +46174,7 @@
             "availability": "https://schema.org/LimitedAvailability",
             "price": "1573",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45578,7 +46217,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1340",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45621,7 +46260,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45664,15 +46303,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/tala?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "20ca19d263a3dbab",
+      "retrieved": "2026-08-28",
+      "digest": "959170782a0223e8",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -45747,7 +46386,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45790,7 +46429,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45833,7 +46472,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -45876,15 +46515,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/tala?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "87e2a757d31b2fe9",
+      "retrieved": "2026-08-28",
+      "digest": "389655f6683b9454",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -45959,7 +46598,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46002,7 +46641,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1340",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46045,7 +46684,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1340",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46088,15 +46727,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/tala?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1a63a16d286d1f6b",
+      "retrieved": "2026-08-28",
+      "digest": "8597a76ff0674cd7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -46171,7 +46810,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46214,7 +46853,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1457",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46257,7 +46896,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1340",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46300,15 +46939,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1224",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/topaz?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "44eea8979f50b255",
+      "retrieved": "2026-08-28",
+      "digest": "f2d009947a3f429e",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -46383,7 +47022,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1458",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46426,7 +47065,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1490",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46469,7 +47108,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1678",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46512,7 +47151,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1407",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46555,15 +47194,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1458",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/topaz?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "8f7a348e6b0db22b",
+      "retrieved": "2026-08-28",
+      "digest": "91b485194f32daba",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -46638,7 +47277,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1377",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46681,7 +47320,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1407",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46724,7 +47363,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1377",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46767,15 +47406,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1605",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/topaz?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "e6354cfd29ee3892",
+      "retrieved": "2026-08-28",
+      "digest": "b57cd86571acb4fc",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -46850,7 +47489,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1377",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46893,7 +47532,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1296",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46936,7 +47575,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1377",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -46979,7 +47618,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1407",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47022,15 +47661,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1407",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/topaz?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "70493a45d7f11e52",
+      "retrieved": "2026-08-28",
+      "digest": "3b7c1dc868cb81b8",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -47105,7 +47744,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1324",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47148,7 +47787,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1324",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47191,7 +47830,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1377",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47234,15 +47873,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1296",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/unity?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "ae360027e2451dd4",
+      "retrieved": "2026-08-28",
+      "digest": "7deebfb4568a3ce2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -47310,7 +47949,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1189",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47353,7 +47992,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1189",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47396,7 +48035,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1364",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47439,15 +48078,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1259",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/unity?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1ac27847ed7576ed",
+      "retrieved": "2026-08-28",
+      "digest": "1003498f46ecece7",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -47515,7 +48154,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1259",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47558,7 +48197,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1329",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47601,220 +48240,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1259",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        }
-      ]
-    },
-    {
-      "url": "https://www.liveaboard.com/diving/egypt/unity?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "b0a9a20c79969fe7",
-      "nodes": [
-        {
-          "@context": "http://schema.org/",
-          "@type": "Product",
-          "name": "Unity",
-          "sameAs": "https://www.liveaboard.com/diving/egypt/unity",
-          "image": [
-            "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-1200,h-628,f-jpeg,fo-boat",
-            "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-857,h-570,f-webp,fo-boat"
-          ],
-          "description": "Discover the Unity Liveaboard in the Red Sea, offering 13 ensuite cabins for 24 guests. Enjoy unforgettable dive trips to iconic reefs, wrecks, and shark hotspots.",
-          "sku": "LA-1324-6598",
-          "brand": {
-            "@type": "Brand",
-            "name": "Red Sea Relax"
-          },
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "USD",
-            "lowPrice": 881.12,
-            "highPrice": 1928.9,
-            "seller": {
-              "@type": "Organization",
-              "name": "LiveAboard.com"
-            }
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1324-6598-433161",
-          "name": " Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
-          "description": "‘Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)’ with the Unity in Egypt for 8 days and 7 nights, departing 03 Jul 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-07-03",
-          "endDate": "2027-07-10",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/unity#tourid=433161",
-          "organizer": {
-            "@type": "Organization",
-            "name": "Red Sea Relax",
-            "url": "https://www.liveaboard.com/diving/egypt/unity"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Unity"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
-            "availabilityEnds": "2027-07-03",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1259",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1324-6598-433162",
-          "name": " The Grand Tour (Hurghada - Hurghada)",
-          "description": "‘The Grand Tour (Hurghada - Hurghada)’ with the Unity in Egypt for 8 days and 7 nights, departing 10 Jul 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-07-10",
-          "endDate": "2027-07-17",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/unity#tourid=433162",
-          "organizer": {
-            "@type": "Organization",
-            "name": "Red Sea Relax",
-            "url": "https://www.liveaboard.com/diving/egypt/unity"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Unity"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
-            "availabilityEnds": "2027-07-10",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1364",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1324-6598-433164",
-          "name": " North and Brothers (Hurghada - Hurghada)",
-          "description": "‘North and Brothers (Hurghada - Hurghada)’ with the Unity in Egypt for 8 days and 7 nights, departing 24 Jul 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-07-24",
-          "endDate": "2027-07-31",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/unity#tourid=433164",
-          "organizer": {
-            "@type": "Organization",
-            "name": "Red Sea Relax",
-            "url": "https://www.liveaboard.com/diving/egypt/unity"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Unity"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
-            "availabilityEnds": "2027-07-24",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1259",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1324-6598-433165",
-          "name": " Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
-          "description": "‘Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)’ with the Unity in Egypt for 8 days and 7 nights, departing 31 Jul 2027. No more spaces available.",
-          "image": "https://img.liveaboard.com/picture_library/boat/6598/r3.unity-sinai.jpg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-07-31",
-          "endDate": "2027-08-07",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/unity#tourid=433165",
-          "organizer": {
-            "@type": "Organization",
-            "name": "Red Sea Relax",
-            "url": "https://www.liveaboard.com/diving/egypt/unity"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Unity"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/unity?m=07/2027",
-            "availabilityEnds": "2027-07-31",
-            "availability": "https://schema.org/SoldOut",
-            "price": "1265",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/unity?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "5b335ff93548084b",
+      "retrieved": "2026-08-28",
+      "digest": "e8a02f64210dbf6c",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -47882,7 +48316,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1364",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47925,7 +48359,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1259",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -47968,270 +48402,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1259",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        }
-      ]
-    },
-    {
-      "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "03b2727d7526ebc3",
-      "nodes": [
-        {
-          "@context": "http://schema.org/",
-          "@type": "Product",
-          "name": "Vita Xplorer",
-          "sameAs": "https://www.liveaboard.com/diving/egypt/vita-xplorer",
-          "image": [
-            "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-1200,h-628,f-jpeg,fo-boat",
-            "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-857,h-570,f-webp,fo-boat"
-          ],
-          "description": "Explore some of the best Red Sea dive sites aboard the Vita Xplorer. Dive the Ras Mohammed Marine Park, Thistlegorm, &amp; Abu Nuhas Wrecks, as well as Elphinstone, Brothers, &amp; Daedalus Reef.",
-          "sku": "LA-1208-5742",
-          "brand": {
-            "@type": "Brand",
-            "name": "XPLORER AQUARIUS Safari"
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "8.1",
-            "reviewCount": "15",
-            "bestRating": "10",
-            "worstRating": "1"
-          },
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "USD",
-            "lowPrice": 1209.79,
-            "highPrice": 1689.98,
-            "seller": {
-              "@type": "Organization",
-              "name": "LiveAboard.com"
-            }
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1208-5742-422479",
-          "name": " Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-          "description": "‘Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)’ with the Vita Xplorer in Egypt for 8 days and 7 nights, departing 01 May 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-05-01",
-          "endDate": "2027-05-08",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer#tourid=422479",
-          "organizer": {
-            "@type": "Organization",
-            "name": "XPLORER AQUARIUS Safari",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Vita Xplorer"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
-            "availabilityEnds": "2027-05-01",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1399",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1208-5742-422480",
-          "name": " Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-          "description": "‘Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)’ with the Vita Xplorer in Egypt for 8 days and 7 nights, departing 08 May 2027. No more spaces available.",
-          "image": "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-05-08",
-          "endDate": "2027-05-15",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer#tourid=422480",
-          "organizer": {
-            "@type": "Organization",
-            "name": "XPLORER AQUARIUS Safari",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Vita Xplorer"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
-            "availabilityEnds": "2027-05-08",
-            "availability": "https://schema.org/SoldOut",
-            "price": "1399",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1208-5742-422481",
-          "name": " Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-          "description": "‘Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)’ with the Vita Xplorer in Egypt for 8 days and 7 nights, departing 15 May 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-05-15",
-          "endDate": "2027-05-22",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer#tourid=422481",
-          "organizer": {
-            "@type": "Organization",
-            "name": "XPLORER AQUARIUS Safari",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Vita Xplorer"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
-            "availabilityEnds": "2027-05-15",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1399",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1208-5742-422482",
-          "name": " Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-          "description": "‘Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)’ with the Vita Xplorer in Egypt for 8 days and 7 nights, departing 22 May 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-05-22",
-          "endDate": "2027-05-29",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer#tourid=422482",
-          "organizer": {
-            "@type": "Organization",
-            "name": "XPLORER AQUARIUS Safari",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Vita Xplorer"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
-            "availabilityEnds": "2027-05-22",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1399",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
-          }
-        },
-        {
-          "@type": "Event",
-          "@id": "LA-1208-5742-422483",
-          "name": " Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-          "description": "‘Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)’ with the Vita Xplorer in Egypt for 8 days and 7 nights, departing 29 May 2027.",
-          "image": "https://img.liveaboard.com/picture_library/boat/5742/VITA.jpeg?tr=w-360,h-240,f-webp,fo-boat",
-          "startDate": "2027-05-29",
-          "endDate": "2027-06-05",
-          "duration": "P8D",
-          "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer#tourid=422483",
-          "organizer": {
-            "@type": "Organization",
-            "name": "XPLORER AQUARIUS Safari",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer"
-          },
-          "performer": {
-            "@type": "Organization",
-            "name": "Vita Xplorer"
-          },
-          "potentialAction": {
-            "@type": "PlayAction",
-            "name": "Liveaboard Diving"
-          },
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "eventStatus": "EventScheduled",
-          "location": {
-            "@type": "Place",
-            "name": "Egypt",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "Egypt"
-            }
-          },
-          "offers": {
-            "@type": "Offer",
-            "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=05/2027",
-            "availabilityEnds": "2027-05-29",
-            "availability": "https://schema.org/OnlineOnly",
-            "price": "1399",
-            "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "c787e93af1f14ece",
+      "retrieved": "2026-08-28",
+      "digest": "b75247512a69347d",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -48306,7 +48485,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48349,7 +48528,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48392,7 +48571,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48435,15 +48614,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "ae3423c9f587b4a8",
+      "retrieved": "2026-08-28",
+      "digest": "aeb7c9ce1e5f6f93",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -48518,7 +48697,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48561,7 +48740,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48604,7 +48783,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48647,7 +48826,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48690,15 +48869,15 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "f337ad9f8c5966e1",
+      "retrieved": "2026-08-28",
+      "digest": "fcdccd734f302eb0",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -48773,7 +48952,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48816,7 +48995,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48859,7 +49038,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -48902,15 +49081,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1253",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "ff9138940fc44b9d",
+      "retrieved": "2026-08-28",
+      "digest": "5d81cb834596170b",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -48978,7 +49157,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49021,7 +49200,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49064,7 +49243,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49107,7 +49286,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49150,15 +49329,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "1ab02ad0950c598a",
+      "retrieved": "2026-08-28",
+      "digest": "a1802a9a1508bb16",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49226,7 +49405,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49269,7 +49448,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49312,7 +49491,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49355,15 +49534,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "70b4c2622e291f5e",
+      "retrieved": "2026-08-28",
+      "digest": "890eb24372cae741",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49431,7 +49610,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49474,7 +49653,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49517,7 +49696,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49560,7 +49739,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49603,15 +49782,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1573",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "edb14838ce8b456e",
+      "retrieved": "2026-08-28",
+      "digest": "850956a39a576a88",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49679,7 +49858,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49722,7 +49901,7 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49765,7 +49944,7 @@
             "availability": "https://schema.org/SoldOut",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         },
         {
@@ -49808,15 +49987,15 @@
             "availability": "https://schema.org/OnlineOnly",
             "price": "1748",
             "priceCurrency": "USD",
-            "validFrom": "2026-08-27"
+            "validFrom": "2026-08-28"
           }
         }
       ]
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/zabargad?m=5/2027",
-      "retrieved": "2026-08-27",
-      "digest": "ba09fc2c3e75467b",
+      "retrieved": "2026-08-28",
+      "digest": "7d0f33d044297567",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49846,8 +50025,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/zabargad?m=6/2027",
-      "retrieved": "2026-08-27",
-      "digest": "25e9cefb0b4f0cf8",
+      "retrieved": "2026-08-28",
+      "digest": "0f71e851fcf8b3c1",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49877,8 +50056,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/zabargad?m=7/2027",
-      "retrieved": "2026-08-27",
-      "digest": "d9977211640cf8f9",
+      "retrieved": "2026-08-28",
+      "digest": "9c4460dcfbf7b1e2",
       "nodes": [
         {
           "@context": "http://schema.org/",
@@ -49908,8 +50087,8 @@
     },
     {
       "url": "https://www.liveaboard.com/diving/egypt/zabargad?m=8/2027",
-      "retrieved": "2026-08-27",
-      "digest": "96976dce2b4aa2a0",
+      "retrieved": "2026-08-28",
+      "digest": "8f78cb4b2a5a6f36",
       "nodes": [
         {
           "@context": "http://schema.org/",
