@@ -18,7 +18,7 @@ Brothers, Daedalus & Elphinstone · 1–8 May 2027
   Airport transfers           conditional        €40
   Crew gratuities             customary         €140
   ───────────────────────────────────────────────────
-  True cost                                   €1,783      +34%
+  Total                                       €1,783      +34%
 ```
 
 Scope: Egypt, May–August 2027. Euro only.
@@ -82,9 +82,9 @@ is what they are a property of.
 A fee an operator **includes** still appears in the breakdown, at zero —
 deleting it would hide the exact difference this site exists to show.
 
-**Comparison, not a scoreboard**: the table sorts by true cost, price per dive,
+**Comparison, not a scoreboard**: the table sorts by total, price per dive,
 advertised price, and how much lands after the headline figure. There is no
-per-operator rating — two boats reaching the same true cost by different routes
+per-operator rating — two boats reaching the same total by different routes
 show that in their breakdowns, which is the part a diver can act on. The
 operator is named and filterable, because one company's boats may all bundle
 nitrox while another's all bill for it; that is a fact about prices. Scoring
