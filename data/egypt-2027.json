@@ -649,10 +649,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Safaga",
       "dive_sites": [
-        "elphinstone",
-        "abu dabab",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
@@ -826,6 +826,7 @@
         "brothers",
         "daedalus",
         "elphinstone",
+        "shaab sheer",
         "abu dabab"
       ],
       "region": null,
@@ -997,11 +998,11 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu dabab",
-        "elphinstone",
-        "rocky island",
         "daedalus",
-        "zabargad"
+        "elphinstone",
+        "zabargad",
+        "rocky island",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
@@ -1172,9 +1173,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu dabab",
+        "elphinstone",
         "st johns",
-        "elphinstone"
+        "sataya",
+        "abu dabab",
+        "habili ali",
+        "fury shoal"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
@@ -1347,7 +1351,10 @@
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "marsa shouna",
+        "small giftun"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the All Star Ghani liveaboard, offering 12 cabins for 24 guests, up to 18 dives weekly, and access to Egypt&rsquo;s top reefs, wrecks, and shark hotspots.",
@@ -1513,11 +1520,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "gubal",
         "ras mohammed",
         "brothers",
-        "abu nuhas",
-        "thistlegorm",
-        "gubal"
+        "sha'ab el erg",
+        "small giftun"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the All Star Ghani liveaboard, offering 12 cabins for 24 guests, up to 18 dives weekly, and access to Egypt&rsquo;s top reefs, wrecks, and shark hotspots.",
@@ -1683,10 +1692,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
+        "gubal",
         "ras mohammed",
         "tiran",
-        "thistlegorm",
-        "gubal"
+        "sha'ab el erg"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the All Star Ghani liveaboard, offering 12 cabins for 24 guests, up to 18 dives weekly, and access to Egypt&rsquo;s top reefs, wrecks, and shark hotspots.",
@@ -1852,10 +1862,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
         "thistlegorm",
-        "gubal"
+        "abu nuhas",
+        "gubal",
+        "ras mohammed",
+        "sha'ab el erg",
+        "umm gamar"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the All Star Ghani liveaboard, offering 12 cabins for 24 guests, up to 18 dives weekly, and access to Egypt&rsquo;s top reefs, wrecks, and shark hotspots.",
@@ -2021,9 +2033,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
+        "gota abu ramada",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone",
+        "marsa shouna",
+        "small giftun"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2172,9 +2187,12 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "gota abu ramada",
         "brothers",
+        "daedalus",
         "elphinstone",
-        "daedalus"
+        "marsa shouna",
+        "small giftun"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2323,10 +2341,11 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
         "abu dabab",
+        "daedalus",
+        "fury shoal",
         "elphinstone",
-        "fury shoal"
+        "marsa shouna"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2476,9 +2495,13 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "abu dabab",
-        "elphinstone",
+        "habili ali",
+        "dangerous reef",
+        "st johns",
+        "sataya",
         "daedalus",
-        "st johns"
+        "elphinstone",
+        "marsa shouna"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2628,10 +2651,12 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "abu nuhas",
+        "sha'ab el erg",
         "thistlegorm",
-        "brothers",
+        "gubal",
         "ras mohammed",
-        "daedalus"
+        "brothers",
+        "small giftun"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2780,11 +2805,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
         "ras mohammed",
+        "tiran",
         "thistlegorm",
-        "abu nuhas",
-        "gubal"
+        "gubal",
+        "sha'ab el erg",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -2934,8 +2960,11 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "abu nuhas",
+        "ras mohammed",
         "thistlegorm",
-        "ras mohammed"
+        "gubal",
+        "umm gamar",
+        "sha'ab el erg"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -3084,14 +3113,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
-        "brothers",
-        "ras mohammed",
         "tiran",
+        "brothers",
         "daedalus",
+        "elphinstone",
         "abu nuhas",
-        "st johns",
-        "rocky island"
+        "rocky island",
+        "gubal",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Red Sea wrecks and reefs! All Star Scuba Scene takes you to Egypt's iconic dive sites and untouched treasures",
@@ -3240,9 +3269,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -3418,10 +3447,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
-        "abu dabab",
-        "brothers",
-        "daedalus"
+        "brothers"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -3597,9 +3625,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -3775,9 +3803,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
-        "rocky island",
-        "zabargad"
+        "zabargad",
+        "rocky island"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -3954,8 +3983,9 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
+        "elphinstone",
         "st johns",
-        "elphinstone"
+        "abu dabab"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -4131,11 +4161,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
-        "salem express",
-        "abu nuhas",
         "thistlegorm",
-        "ras mohammed"
+        "abu nuhas",
+        "gota abu ramada",
+        "brothers",
+        "safaga"
       ],
       "region": null,
       "summary": "The ALSURAYA is a Red Sea liveaboard offering spacious cabins, top-tier amenities, and unforgettable diving and kiteboarding adventures across world-class sites.",
@@ -4781,12 +4811,12 @@
       "dive_sites": [
         "brothers",
         "daedalus",
-        "salem express",
-        "st johns",
         "elphinstone",
         "thistlegorm",
-        "fury shoal",
-        "sataya"
+        "st johns",
+        "salem express",
+        "sataya",
+        "fury shoal"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -4985,9 +5015,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
+        "brothers",
         "daedalus",
-        "brothers"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -5387,7 +5417,6 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
         "brothers"
       ],
       "region": null,
@@ -5587,12 +5616,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
         "rocky island",
-        "abu dabab",
+        "st johns",
         "fury shoal",
+        "sataya",
         "elphinstone",
-        "sataya"
+        "abu dabab"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -5791,10 +5820,14 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
-        "ras mohammed",
         "thistlegorm",
-        "abu nuhas"
+        "ras mohammed",
+        "abu nuhas",
+        "tiran",
+        "rocky island",
+        "zabargad",
+        "st johns",
+        "fury shoal"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -5993,9 +6026,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "brothers",
+        "abu nuhas",
         "ras mohammed"
       ],
       "region": null,
@@ -6394,8 +6426,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "ras mohammed"
       ],
       "region": null,
@@ -6595,9 +6627,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu dabab",
+        "st johns",
+        "sataya",
         "fury shoal",
-        "st johns"
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience luxury and adventure aboard the Bismarck, a 46-meter Red Sea liveaboard offering 17 cabins and thrilling dives in sites like Brothers, Daedalus, and Ras Muhammad.",
@@ -6765,8 +6798,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "elphinstone",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -6972,9 +7005,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
+        "brothers",
         "daedalus",
-        "brothers"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -7180,9 +7213,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -7597,9 +7630,9 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "elphinstone",
+        "fury shoal",
         "daedalus",
-        "fury shoal"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -7806,6 +7839,7 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "ras mohammed",
+        "brothers",
         "thistlegorm"
       ],
       "region": null,
@@ -8012,11 +8046,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
         "fury shoal",
-        "st johns",
-        "elphinstone",
-        "rocky island"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -8222,11 +8253,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
-        "st johns",
-        "rocky island",
         "zabargad",
-        "elphinstone"
+        "st johns",
+        "rocky island"
       ],
       "region": null,
       "summary": "The award-winning Blue Horizon yacht offers fantastic Red Sea dive safaris covering all the world-class dive sites of Egypt.",
@@ -8433,8 +8462,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "elphinstone",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -8640,9 +8669,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
+        "brothers",
         "daedalus",
-        "brothers"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -8848,9 +8877,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -9265,9 +9294,9 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "elphinstone",
+        "fury shoal",
         "daedalus",
-        "fury shoal"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -9680,8 +9709,8 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
-        "ras mohammed"
+        "ras mohammed",
+        "brothers"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -10095,10 +10124,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "fury shoal",
-        "zabargad",
-        "st johns",
-        "elphinstone",
-        "rocky island"
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Blue Melody yacht offers year-round diving in the Red Sea. She caters to 26 divers in 13 air-conditioned, ensuite cabins.",
@@ -10304,6 +10330,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "sataya",
         "fury shoal",
         "elphinstone",
         "daedalus"
@@ -10817,9 +10844,10 @@
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
-        "thistlegorm",
+        "ras mohammed",
         "tiran",
-        "ras mohammed"
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": "The Carlton liveaboard sails 7-day Red Sea itineraries to Ras Mohammed, Tiran, and St. John's, with 10 en suite cabins for up to 20 guests.",
@@ -11018,10 +11046,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu dabab",
+        "brothers",
         "daedalus",
         "elphinstone",
-        "brothers"
+        "abu dabab"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -11222,10 +11250,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
-        "abu dabab",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -11630,8 +11658,9 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "elphinstone",
-        "fury shoal",
-        "safaga"
+        "safaga",
+        "panorama reef",
+        "fury shoal"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -12033,8 +12062,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "ras mohammed",
         "tiran",
-        "ras mohammed"
+        "gubal",
+        "small giftun"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -12235,11 +12266,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "tiran",
-        "abu nuhas",
         "thistlegorm",
-        "rosalie moller"
+        "abu nuhas",
+        "rosalie moller",
+        "small giftun",
+        "ras mohammed",
+        "tiran"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -12441,8 +12473,8 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "safaga",
-        "brothers",
-        "panorama reef"
+        "panorama reef",
+        "brothers"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -12644,7 +12676,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "ras mohammed",
-        "tiran"
+        "tiran",
+        "dahab"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -13049,8 +13082,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "elphinstone",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -13280,9 +13313,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
-        "brothers",
-        "daedalus"
+        "brothers"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -13744,9 +13777,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -13976,10 +14009,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
         "abu nuhas",
-        "thistlegorm",
-        "ras mohammed"
+        "gubal",
+        "sha'ab el erg",
+        "ras mohammed",
+        "tiran",
+        "thistlegorm"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -14209,13 +14244,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
-        "brothers",
+        "gubal",
         "ras mohammed",
-        "tiran",
-        "salem express",
         "abu nuhas",
-        "thistlegorm"
+        "tiran",
+        "thistlegorm",
+        "brothers"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -14445,9 +14479,11 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "elphinstone",
         "st johns",
-        "elphinstone"
+        "habili ali",
+        "gota kebir",
+        "fury shoal"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -14905,9 +14941,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -15133,8 +15169,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "daedalus",
         "brothers",
+        "daedalus",
         "elphinstone"
       ],
       "region": null,
@@ -15363,8 +15399,8 @@
       "dive_sites": [
         "daedalus",
         "zabargad",
-        "elphinstone",
-        "rocky island"
+        "rocky island",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -15590,13 +15626,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
-        "brothers",
+        "gubal",
         "ras mohammed",
-        "tiran",
-        "salem express",
         "abu nuhas",
-        "thistlegorm"
+        "tiran",
+        "thistlegorm",
+        "brothers"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -15822,9 +15857,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "rocky island",
         "zabargad",
+        "rocky island",
+        "st johns",
         "elphinstone"
       ],
       "region": null,
@@ -16051,9 +16086,11 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "elphinstone",
         "st johns",
-        "elphinstone"
+        "habili ali",
+        "gota kebir",
+        "fury shoal"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -16279,7 +16316,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal"
+        "fury shoal",
+        "sataya"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -16478,9 +16516,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "abu dabab",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -16679,12 +16718,13 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
-        "zabargad",
-        "fury shoal",
         "daedalus",
+        "rocky island",
+        "zabargad",
         "st johns",
-        "rocky island"
+        "fury shoal",
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -16883,10 +16923,9 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
+        "thistlegorm",
         "ras mohammed",
-        "safaga",
-        "abu nuhas",
-        "thistlegorm"
+        "safaga"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -17085,8 +17124,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "st johns",
         "fury shoal",
-        "st johns"
+        "sataya",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -17285,17 +17326,20 @@
       "port_from": "Safaga",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
-        "fury shoal",
-        "st johns",
         "tiran",
-        "rocky island",
+        "dahab",
+        "thistlegorm",
+        "ras mohammed",
+        "gubal",
+        "abu nuhas",
         "brothers",
         "daedalus",
         "zabargad",
-        "elphinstone",
-        "safaga"
+        "rocky island",
+        "st johns",
+        "fury shoal",
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -17503,6 +17547,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "sataya",
         "fury shoal"
       ],
       "region": null,
@@ -17714,7 +17759,7 @@
         "brothers",
         "daedalus",
         "elphinstone",
-        "safaga"
+        "abu dabab"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -17922,12 +17967,12 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
+        "thistlegorm",
         "ras mohammed",
-        "salem express",
-        "safaga",
         "tiran",
+        "safaga",
         "abu nuhas",
-        "thistlegorm"
+        "salem express"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -18135,10 +18180,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Safaga",
       "dive_sites": [
-        "safaga",
         "thistlegorm",
         "brothers",
         "ras mohammed",
+        "safaga",
         "salem express"
       ],
       "region": null,
@@ -18347,13 +18392,13 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "brothers",
-        "ras mohammed",
-        "salem express",
+        "st johns",
         "safaga",
-        "thistlegorm",
         "abu nuhas",
-        "st johns"
+        "thistlegorm",
+        "ras mohammed",
+        "brothers",
+        "salem express"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -18562,7 +18607,8 @@
       "port_to": "Safaga",
       "dive_sites": [
         "safaga",
-        "tiran"
+        "tiran",
+        "dahab"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -18770,10 +18816,10 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "safaga",
         "ras mohammed",
+        "safaga",
+        "abu nuhas",
         "gubal"
       ],
       "region": null,
@@ -18982,12 +19028,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "elphinstone",
-        "rocky island",
         "daedalus",
+        "elphinstone",
         "zabargad",
-        "fury shoal"
+        "st johns",
+        "sataya",
+        "rocky island",
+        "fury shoal",
+        "sataya reef"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -19195,12 +19243,12 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "safaga",
-        "ras mohammed",
-        "salem express",
-        "abu nuhas",
         "thistlegorm",
-        "tiran"
+        "ras mohammed",
+        "tiran",
+        "safaga",
+        "abu nuhas",
+        "salem express"
       ],
       "region": null,
       "summary": "Join the DUNE Titan for a budget-friendly Red Sea liveaboard. The 39m Titan offers year-round dive safaris to the best Egyptian dive sites, including the Ras Mohammed Marine Park, Straits of Tiran, St. Johns, Brothers, and Elphinstone.",
@@ -19411,7 +19459,6 @@
         "thistlegorm",
         "brothers",
         "ras mohammed",
-        "salem express",
         "safaga"
       ],
       "region": null,
@@ -19620,13 +19667,13 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "brothers",
-        "ras mohammed",
-        "salem express",
+        "st johns",
         "safaga",
-        "thistlegorm",
         "abu nuhas",
-        "st johns"
+        "thistlegorm",
+        "ras mohammed",
+        "brothers",
+        "salem express"
       ],
       "region": null,
       "summary": "Join the DUNE Titan for a budget-friendly Red Sea liveaboard. The 39m Titan offers year-round dive safaris to the best Egyptian dive sites, including the Ras Mohammed Marine Park, Straits of Tiran, St. Johns, Brothers, and Elphinstone.",
@@ -19834,10 +19881,10 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "safaga",
         "ras mohammed",
+        "safaga",
+        "abu nuhas",
         "gubal"
       ],
       "region": null,
@@ -20046,11 +20093,12 @@
       "port_from": "Safaga",
       "port_to": "Safaga",
       "dive_sites": [
-        "safaga",
         "salem express",
+        "safaga",
         "shaab sheer",
         "panorama reef",
-        "middle reef"
+        "middle reef",
+        "tobia arbaa"
       ],
       "region": null,
       "summary": "Join the DUNE Titan for a budget-friendly Red Sea liveaboard. The 39m Titan offers year-round dive safaris to the best Egyptian dive sites, including the Ras Mohammed Marine Park, Straits of Tiran, St. Johns, Brothers, and Elphinstone.",
@@ -20258,12 +20306,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "elphinstone",
-        "rocky island",
         "daedalus",
+        "elphinstone",
         "zabargad",
-        "fury shoal"
+        "st johns",
+        "sataya",
+        "rocky island",
+        "fury shoal",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Join the DUNE Titan for a budget-friendly Red Sea liveaboard. The 39m Titan offers year-round dive safaris to the best Egyptian dive sites, including the Ras Mohammed Marine Park, Straits of Tiran, St. Johns, Brothers, and Elphinstone.",
@@ -20624,12 +20674,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
-        "thistlegorm",
         "sha'ab el erg",
+        "abu nuhas",
         "gubal",
-        "tiran"
+        "ras mohammed",
+        "tiran",
+        "thistlegorm"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -20777,9 +20827,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -20927,8 +20977,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
         "brothers",
+        "daedalus",
         "elphinstone"
       ],
       "region": null,
@@ -21232,7 +21282,11 @@
       "dive_sites": [
         "st johns",
         "elphinstone",
+        "zabargad",
         "abu dabab",
+        "habili ali",
+        "gota kebir",
+        "rocky island",
         "fury shoal"
       ],
       "region": null,
@@ -21381,12 +21435,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "zabargad",
         "st johns",
         "rocky island",
-        "fury shoal",
-        "zabargad",
-        "daedalus",
-        "elphinstone"
+        "fury shoal"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -21536,6 +21590,7 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
+        "sataya",
         "fury shoal"
       ],
       "region": null,
@@ -21989,7 +22044,11 @@
       "dive_sites": [
         "st johns",
         "elphinstone",
+        "zabargad",
         "abu dabab",
+        "habili ali",
+        "gota kebir",
+        "rocky island",
         "fury shoal"
       ],
       "region": null,
@@ -22138,12 +22197,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "zabargad",
         "st johns",
         "rocky island",
-        "fury shoal",
-        "zabargad",
-        "daedalus",
-        "elphinstone"
+        "fury shoal"
       ],
       "region": null,
       "summary": "The Emperor Elite, winner of Best Liveaboard 2020 offers year-round diving to some of the best spots in the Red Sea. Free nitrox and WiFi are included.",
@@ -22291,12 +22350,15 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
         "brothers",
-        "salem express",
-        "abu nuhas",
         "thistlegorm",
-        "safaga"
+        "abu nuhas",
+        "salem express",
+        "rosalie moller",
+        "gubal",
+        "safaga",
+        "panorama reef",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The Emperor Superior is perfectly set up for photographers to enjoy week-long itineraries in the Red Sea. Many trips allow for 21+ dives per week.",
@@ -22444,9 +22506,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
+        "thistlegorm",
         "tiran",
-        "thistlegorm"
+        "sha'ab el erg",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The Emperor Superior is perfectly set up for photographers to enjoy week-long itineraries in the Red Sea. Many trips allow for 21+ dives per week.",
@@ -22594,12 +22657,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
-        "thistlegorm",
         "sha'ab el erg",
+        "abu nuhas",
         "gubal",
-        "tiran"
+        "ras mohammed",
+        "tiran",
+        "thistlegorm"
       ],
       "region": null,
       "summary": "The Emperor Superior is perfectly set up for photographers to enjoy week-long itineraries in the Red Sea. Many trips allow for 21+ dives per week.",
@@ -23288,9 +23351,6 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
-        "ras mohammed",
-        "abu nuhas",
         "thistlegorm"
       ],
       "region": null,
@@ -23418,11 +23478,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "tiran",
-        "abu dabab",
         "abu nuhas",
-        "thistlegorm"
+        "dahab",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Ghazala Adventure, hosting 26 guests with air-conditioned cabins, gourmet buffets, free Nitrox, and diverse itineraries from wrecks to pristine reefs.",
@@ -24152,9 +24210,9 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "daedalus",
-        "st johns",
         "rocky island",
-        "zabargad"
+        "zabargad",
+        "st johns"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -24309,9 +24367,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "st johns",
         "fury shoal",
-        "elphinstone",
-        "st johns"
+        "sataya"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -24780,9 +24838,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
         "salem express",
         "safaga",
-        "thistlegorm"
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -24937,11 +24996,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu dabab",
         "abu nuhas",
-        "thistlegorm",
-        "ras mohammed",
-        "tiran"
+        "dahab",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -25096,10 +25153,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
         "thistlegorm",
-        "abu dabab"
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -25254,9 +25309,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
+        "thistlegorm",
         "abu nuhas",
-        "thistlegorm"
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The MY Golden Dolphin liveaboard offers year-round diving to the best Red Sea dive sites, from the north to far south. 10 en-suite, air-conditioned cabins cater to 20 guests. Nitrox is available onboard.",
@@ -25427,9 +25482,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "brothers",
+        "thistlegorm",
+        "abu nuhas",
         "ras mohammed"
       ],
       "region": null,
@@ -25601,10 +25656,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "tiran",
+        "thistlegorm",
         "abu nuhas",
-        "thistlegorm"
+        "tiran",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The MY Golden Dolphin liveaboard offers year-round diving to the best Red Sea dive sites, from the north to far south. 10 en-suite, air-conditioned cabins cater to 20 guests. Nitrox is available onboard.",
@@ -25775,9 +25830,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu dabab",
-        "tiran",
         "thistlegorm",
+        "tiran",
+        "dahab",
+        "turkia",
         "ras mohammed"
       ],
       "region": null,
@@ -25949,9 +26005,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -26297,11 +26353,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "rocky island",
         "daedalus",
+        "elphinstone",
+        "rocky island",
         "zabargad",
-        "elphinstone"
+        "st johns",
+        "brothers"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -26472,9 +26529,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
@@ -26645,17 +26702,17 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "salem express",
-        "tiran",
-        "zabargad",
-        "thistlegorm",
-        "brothers",
-        "ras mohammed",
         "daedalus",
+        "thistlegorm",
         "abu nuhas",
-        "elphinstone",
         "rocky island",
-        "safaga"
+        "zabargad",
+        "tiran",
+        "salem express",
+        "safaga",
+        "shaab sheer",
+        "brothers",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
@@ -26826,11 +26883,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "tiran",
-        "abu dabab"
+        "dahab",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Luxury Red Sea diving aboard the Golden Imperial with 14 cabins, Nitrox, spacious decks, and routes to Brothers, Daedalus &amp; St. Johns.",
@@ -27002,9 +27059,12 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "daedalus",
+        "elphinstone",
         "brothers",
+        "small giftun",
         "salem express",
-        "elphinstone"
+        "gota abu ramada",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Experience luxury diving in the Red Sea aboard MY Grand Discovery&mdash;24 cabins, Jacuzzi skydeck, full-service bar, and epic itineraries to Thistlegorm, Brothers, Daedalus, and beyond.",
@@ -27226,12 +27286,17 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
-        "thistlegorm",
         "brothers",
+        "thistlegorm",
+        "abu nuhas",
+        "tiran",
         "ras mohammed",
         "salem express",
-        "safaga"
+        "gota abu ramada",
+        "panorama reef",
+        "tobia arbaa",
+        "safaga",
+        "small giftun"
       ],
       "region": null,
       "summary": "Experience luxury diving in the Red Sea aboard MY Grand Discovery&mdash;24 cabins, Jacuzzi skydeck, full-service bar, and epic itineraries to Thistlegorm, Brothers, Daedalus, and beyond.",
@@ -27453,7 +27518,8 @@
       "port_from": "Hurghada",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -27668,7 +27734,8 @@
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -27884,7 +27951,9 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "fury shoal",
-        "st johns"
+        "st johns",
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -28099,11 +28168,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
-        "abu dabab",
         "ras mohammed",
-        "tiran"
+        "tiran",
+        "thistlegorm",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -28318,9 +28386,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "brothers"
       ],
       "region": null,
@@ -28536,10 +28603,9 @@
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
-        "brothers",
+        "thistlegorm",
         "abu nuhas",
-        "thistlegorm"
+        "brothers"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -28754,7 +28820,7 @@
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
-        "daedalus"
+        "sataya"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -28969,7 +29035,7 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "daedalus"
+        "sataya"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -29185,8 +29251,8 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "brothers",
-        "elphinstone",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -29401,9 +29467,9 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
+        "brothers",
         "daedalus",
-        "elphinstone",
-        "brothers"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -29618,9 +29684,10 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "st johns",
+        "zabargad",
         "rocky island",
-        "zabargad"
+        "st johns",
+        "sataya"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -29838,7 +29905,7 @@
         "daedalus",
         "rocky island",
         "zabargad",
-        "fury shoal"
+        "sataya"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -30054,8 +30121,8 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
-        "st johns"
+        "st johns",
+        "sataya"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -30870,9 +30937,8 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "daedalus",
-        "elphinstone",
-        "brothers"
+        "brothers",
+        "daedalus"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -31040,11 +31106,11 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "st johns",
-        "rocky island",
         "zabargad",
+        "st johns",
         "fury shoal",
-        "sataya"
+        "sataya",
+        "rocky island"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -31213,11 +31279,11 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
-        "zabargad",
         "fury shoal",
+        "sataya",
         "st johns",
-        "rocky island",
-        "sataya"
+        "zabargad",
+        "rocky island"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -31386,9 +31452,9 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
         "elphinstone",
-        "sataya"
+        "sataya",
+        "fury shoal"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -31558,9 +31624,9 @@
       "dive_sites": [
         "brothers",
         "daedalus",
+        "gota abu ramada",
         "abu dabab",
-        "elphinstone",
-        "gota abu ramada"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
@@ -31694,9 +31760,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
@@ -31830,12 +31896,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "brothers",
+        "ras mohammed",
         "sha'ab el erg",
         "gubal",
-        "rosalie moller"
+        "rosalie moller",
+        "thistlegorm",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
@@ -32371,10 +32438,11 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "abu dabab",
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "marsa shouna",
+        "abu dabab"
       ],
       "region": null,
       "summary": "The New Sambo liveaboard offers a Red Sea diving experience with daily happy hours, onboard yoga classes, and a unique outdoor BBQ on a spacious sun terrace.",
@@ -32527,9 +32595,9 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
+        "fury shoal",
         "rocky island",
-        "zabargad",
-        "fury shoal"
+        "zabargad"
       ],
       "region": null,
       "summary": "The New Sambo liveaboard offers a Red Sea diving experience with daily happy hours, onboard yoga classes, and a unique outdoor BBQ on a spacious sun terrace.",
@@ -32682,10 +32750,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
+        "elphinstone",
+        "brothers",
         "salem express",
-        "elphinstone"
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -32854,10 +32925,13 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
         "daedalus",
-        "salem express"
+        "elphinstone",
+        "salem express",
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33026,9 +33100,13 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
+        "daedalus",
         "elphinstone",
-        "daedalus"
+        "brothers",
+        "salem express",
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33197,10 +33275,13 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
         "brothers",
-        "daedalus",
-        "salem express"
+        "salem express",
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33369,12 +33450,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
         "daedalus",
+        "rocky island",
         "zabargad",
         "st johns",
-        "rocky island",
-        "elphinstone"
+        "fury shoal",
+        "sataya"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33543,12 +33624,14 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
-        "ras mohammed",
-        "salem express",
-        "tiran",
+        "thistlegorm",
         "abu nuhas",
-        "thistlegorm"
+        "tiran",
+        "gubal",
+        "ras mohammed",
+        "brothers",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33717,12 +33800,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "salem express",
-        "abu nuhas",
         "thistlegorm",
         "tiran",
-        "gubal"
+        "ras mohammed",
+        "gubal",
+        "abu nuhas",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -33892,8 +33976,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "elphinstone",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
@@ -34115,8 +34199,8 @@
       "dive_sites": [
         "thistlegorm",
         "abu nuhas",
-        "sha'ab el erg",
-        "rosalie moller"
+        "rosalie moller",
+        "sha'ab el erg"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
@@ -34336,10 +34420,12 @@
       "port_from": "Hurghada",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "abu dabab",
+        "daedalus",
         "elphinstone",
+        "sataya",
         "safaga",
-        "daedalus"
+        "abu dabab",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
@@ -34560,7 +34646,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "tiran",
-        "thistlegorm"
+        "dahab",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -34773,10 +34860,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "ras mohammed",
+        "thistlegorm",
         "tiran",
-        "thistlegorm"
+        "gubal",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -35419,11 +35506,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
-        "daedalus",
         "zabargad",
+        "rocky island",
         "st johns",
-        "rocky island"
+        "daedalus"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -35849,12 +35935,12 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
+        "sha'ab el erg",
         "ras mohammed",
-        "thistlegorm",
-        "daedalus",
         "tiran",
-        "sha'ab el erg"
+        "thistlegorm",
+        "brothers",
+        "daedalus"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -36067,11 +36153,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "st johns",
-        "brothers",
+        "gubal",
         "ras mohammed",
+        "st johns",
+        "sha'ab el erg",
         "thistlegorm",
-        "sha'ab el erg"
+        "brothers"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -36284,12 +36371,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
+        "gubal",
         "ras mohammed",
-        "thistlegorm",
         "st johns",
-        "safaga",
-        "sha'ab el erg"
+        "sha'ab el erg",
+        "thistlegorm",
+        "brothers"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -36502,10 +36589,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
-        "thistlegorm",
         "sha'ab el erg",
+        "abu nuhas",
         "rosalie moller"
       ],
       "region": null,
@@ -36906,9 +36991,9 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -37093,10 +37178,11 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "fury shoal",
-        "st johns",
+        "zabargad",
         "rocky island",
-        "zabargad"
+        "st johns",
+        "fury shoal",
+        "sataya"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -37281,10 +37367,12 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "st johns",
-        "rocky island",
         "daedalus",
-        "zabargad"
+        "st johns",
+        "fury shoal",
+        "sataya",
+        "zabargad",
+        "rocky island"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -37469,9 +37557,10 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
         "fury shoal",
-        "daedalus"
+        "sataya"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -37656,11 +37745,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
-        "safaga",
         "salem express",
+        "abu nuhas",
         "ras mohammed",
+        "thistlegorm",
         "gubal"
       ],
       "region": null,
@@ -37850,11 +37938,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "tiran",
-        "ras mohammed",
+        "thistlegorm",
         "gubal",
+        "ras mohammed",
+        "abu nuhas",
         "sha'ab el erg"
       ],
       "region": null,
@@ -38348,7 +38436,8 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
-        "elba reef"
+        "elba reef",
+        "fury shoal"
       ],
       "region": null,
       "summary": "The Red Sea Aggressor V is a liveaboard offering comfortable accommodations, top-tier amenities, and diving adventures in Egypt&rsquo;s southern Red Sea.",
@@ -38541,10 +38630,11 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
+        "fury shoal",
         "zabargad",
         "rocky island",
-        "fury shoal",
-        "dangerous reef"
+        "dangerous reef",
+        "st johns"
       ],
       "region": null,
       "summary": "The Red Sea Aggressor V is a liveaboard offering comfortable accommodations, top-tier amenities, and diving adventures in Egypt&rsquo;s southern Red Sea.",
@@ -38912,9 +39002,10 @@
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
-        "tiran",
+        "thistlegorm",
         "ras mohammed",
-        "thistlegorm"
+        "tiran",
+        "gubal"
       ],
       "region": null,
       "summary": "The Red Sea Blue Force 2 offers itineraries that cover the best of the Red Sea dive sites. Catering to up to 18 guests she has 10 en-suite cabins with air-conditioning, lounge, dining room &amp; sun deck.",
@@ -39086,9 +39177,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -39282,9 +39373,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -39478,8 +39569,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "fury shoal",
+        "elphinstone",
         "daedalus"
       ],
       "region": null,
@@ -39674,9 +39765,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
+        "fury shoal",
         "elphinstone",
-        "fury shoal"
+        "daedalus"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -39870,10 +39961,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "daedalus",
         "zabargad",
-        "rocky island"
+        "rocky island",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -40067,8 +40158,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "brothers"
       ],
       "region": null,
@@ -40263,10 +40354,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "ras mohammed",
-        "tiran"
+        "abu nuhas",
+        "tiran",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -40460,8 +40551,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "fury shoal"
+        "fury shoal",
+        "st johns"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -40656,8 +40747,8 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "rocky island",
-        "zabargad"
+        "zabargad",
+        "rocky island"
       ],
       "region": null,
       "summary": "Sail the Red Sea on MY Red Sea Explorer, a 43m (141ft) liveaboard with 12 cabins for 24 guests, offering up to 4 dives daily, Nitrox, and departures from Hurghada or Port Ghalib.",
@@ -41054,13 +41145,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
-        "st johns",
-        "elphinstone",
-        "rocky island",
         "brothers",
+        "elphinstone",
+        "abu dabab",
         "daedalus",
-        "abu dabab"
+        "rocky island",
+        "zabargad",
+        "elba reef",
+        "st johns"
       ],
       "region": null,
       "summary": "The Royal Evolution is a 39-meter liveaboard accommodating 24 passengers in 12 air-conditioned cabins, comprising 2 double suites, 2 twin suites, and 8 standard suite cabins, all with private bathrooms with hot showers.",
@@ -41261,11 +41353,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
-        "st johns",
+        "daedalus",
         "elphinstone",
         "rocky island",
-        "daedalus"
+        "zabargad",
+        "elba reef",
+        "st johns"
       ],
       "region": null,
       "summary": "The Royal Evolution is a 39-meter liveaboard accommodating 24 passengers in 12 air-conditioned cabins, comprising 2 double suites, 2 twin suites, and 8 standard suite cabins, all with private bathrooms with hot showers.",
@@ -41466,8 +41559,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
-        "elphinstone"
+        "elba reef",
+        "elphinstone",
+        "st johns"
       ],
       "region": null,
       "summary": "The Royal Evolution is a 39-meter liveaboard accommodating 24 passengers in 12 air-conditioned cabins, comprising 2 double suites, 2 twin suites, and 8 standard suite cabins, all with private bathrooms with hot showers.",
@@ -41871,12 +41965,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "brothers",
+        "thistlegorm",
+        "abu nuhas",
         "ras mohammed",
         "salem express",
-        "safaga"
+        "safaga",
+        "panorama reef",
+        "sha'ab el erg"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -42088,12 +42184,14 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
         "daedalus",
+        "elphinstone",
+        "rocky island",
         "zabargad",
         "st johns",
-        "elphinstone",
-        "rocky island"
+        "fury shoal",
+        "sataya",
+        "habili ali"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -42305,11 +42403,13 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "salem express",
         "daedalus",
-        "safaga"
+        "elphinstone",
+        "salem express",
+        "safaga",
+        "panorama reef",
+        "marsa shouna"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -42522,11 +42622,11 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "safaga",
         "elphinstone",
-        "abu dabab",
-        "salem express",
         "fury shoal",
+        "salem express",
+        "abu dabab",
+        "safaga",
         "sataya",
         "panorama reef"
       ],
@@ -42740,12 +42840,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
         "fury shoal",
-        "safaga",
-        "daedalus",
         "salem express",
         "abu dabab",
+        "safaga",
         "sataya",
         "panorama reef"
       ],
@@ -42961,8 +43061,10 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
-        "abu dabab"
+        "sataya",
+        "abu dabab",
+        "marsa shouna",
+        "fury shoal"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -43174,11 +43276,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
         "ras mohammed",
         "salem express",
         "safaga",
-        "abu nuhas",
-        "thistlegorm"
+        "gota abu ramada",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -43390,10 +43494,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "ras mohammed",
-        "tiran"
+        "tiran",
+        "gota abu ramada"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -43605,9 +43710,10 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
-        "fury shoal",
+        "sataya",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "fury shoal"
       ],
       "region": null,
       "summary": "The Sea Friend liveaboard departs directly from Hamata to offer less time for traveling and more time for exploring the stunning reefs of the southern Red Sea. Each cabin features en-suite bathrooms, AC, and storage space.",
@@ -43763,9 +43869,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
         "daedalus",
-        "elphinstone"
+        "fury shoal",
+        "elphinstone",
+        "sataya"
       ],
       "region": null,
       "summary": "The unique hull design of the 34m MY Sea Serpent ensures the smoothest voyage to&nbsp;the best&nbsp;Red Sea diving destinations, including the spectacular Brother Islands, Elphinstone Reef and Daedalus.",
@@ -43968,9 +44075,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "fury shoal",
-        "sataya"
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The unique hull design of the 34m MY Sea Serpent ensures the smoothest voyage to&nbsp;the best&nbsp;Red Sea diving destinations, including the spectacular Brother Islands, Elphinstone Reef and Daedalus.",
@@ -44173,9 +44280,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "brothers",
+        "abu nuhas",
+        "sha'ab el erg",
+        "thistlegorm",
         "safaga"
       ],
       "region": null,
@@ -44379,10 +44487,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
+        "safaga",
         "brothers",
         "daedalus",
-        "safaga"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Offering year-round trips to the Red Sea, the 34m&nbsp;Sea Serpent Contessa accommodates up to 24 divers in 12 spacious cabins, each fitted with air conditioning and en-suite bathrooms.",
@@ -44585,9 +44693,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "ras mohammed"
+        "abu nuhas",
+        "ras mohammed",
+        "sha'ab el erg",
+        "gubal",
+        "rosalie moller"
       ],
       "region": null,
       "summary": "Offering year-round trips to the Red Sea, the 34m&nbsp;Sea Serpent Contessa accommodates up to 24 divers in 12 spacious cabins, each fitted with air conditioning and en-suite bathrooms.",
@@ -44790,9 +44901,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
         "daedalus",
-        "elphinstone"
+        "fury shoal",
+        "elphinstone",
+        "sataya"
       ],
       "region": null,
       "summary": "Itineraries aboard the MY Sea Serpent Excellence include the famous sites of the Red Sea, such as the Tiran Strait, the Brother Islands, Daedalus, and Elphinstone. The Sea Serpent Excellence is fitted with 12 en-suite cabins.",
@@ -44995,10 +45107,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
+        "safaga",
         "brothers",
         "daedalus",
-        "safaga"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Exploring the wreck of the SS Thistlegorm is about as comfortable as it can possibly get while sailing aboard the huge 45m MY Sea Serpent Grand. Her 14 luxury en-suite cabins ensure maximum comfort.",
@@ -45202,9 +45314,11 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "tiran",
-        "ras mohammed",
         "abu nuhas",
-        "thistlegorm"
+        "sha'ab el erg",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": "Exploring the wreck of the SS Thistlegorm is about as comfortable as it can possibly get while sailing aboard the huge 45m MY Sea Serpent Grand. Her 14 luxury en-suite cabins ensure maximum comfort.",
@@ -45407,9 +45521,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
@@ -45739,7 +45853,9 @@
       "dives": 6,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "gubal"
+      ],
       "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
       "source_url": "https://www.liveaboard.com/diving/egypt/serenity?m=8/2027",
@@ -45903,8 +46019,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "brothers"
+        "brothers",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
@@ -46235,9 +46351,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "tiran",
         "thistlegorm",
+        "ras mohammed",
         "gubal"
       ],
       "region": null,
@@ -46403,9 +46518,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
-        "thistlegorm",
         "ras mohammed",
+        "thistlegorm",
         "gubal"
       ],
       "region": null,
@@ -46572,11 +46686,11 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "safaga",
-        "abu nuhas",
         "panorama reef",
         "middle reef",
         "shaab sheer",
-        "gubal"
+        "gubal",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "The Serenity is a 33-meter/108-foot liveaboard taking 24 guests on diving trips through Egypt&rsquo;s Red Sea in 12 spacious air-conditioned cabins with ensuite facilities.",
@@ -46741,10 +46855,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "tiran",
-        "brothers",
+        "gubal",
         "ras mohammed"
       ],
       "region": null,
@@ -46920,12 +47034,13 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "tiran",
-        "abu nuhas",
-        "thistlegorm",
+        "safaga",
         "brothers",
         "ras mohammed",
+        "thistlegorm",
         "salem express",
-        "safaga"
+        "abu nuhas",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Sinaistar&mdash;13 cabins, spacious dive deck, sun deck, and weekly trips from Hurghada.",
@@ -47101,7 +47216,11 @@
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "marsa shouna",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -47336,9 +47455,13 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
+        "gota abu ramada",
         "brothers",
-        "daedalus"
+        "marsa shouna",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -47575,7 +47698,11 @@
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "marsa shouna",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -48050,9 +48177,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "fury shoal",
+        "daedalus",
         "elphinstone",
-        "daedalus"
+        "fury shoal",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -48287,9 +48415,10 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "daedalus",
         "elphinstone",
         "fury shoal",
-        "daedalus"
+        "abu dabab"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -48524,11 +48653,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "abu nuhas",
-        "thistlegorm",
         "brothers",
-        "tiran"
+        "abu nuhas",
+        "sha'ab el erg",
+        "thistlegorm",
+        "ras mohammed",
+        "salem express",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -48763,9 +48894,9 @@
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
+        "ras mohammed",
         "thistlegorm",
-        "tiran",
-        "ras mohammed"
+        "tiran"
       ],
       "region": null,
       "summary": "The Snefro Love liveaboard departs from Sharm el Sheikh for week-long dive safaris in the Straits of Tiran. She caters for 20 guests in 10 cabins.",
@@ -49062,7 +49193,8 @@
       "dive_sites": [
         "thistlegorm",
         "tiran",
-        "ras mohammed"
+        "ras mohammed",
+        "gubal"
       ],
       "region": null,
       "summary": "Join the Snefro Target for fantastic Northern Red Sea diving. Explore Shark &amp; Yolanda, the Thistlegorm as well as the famous reefs in the Straits of Tiran.",
@@ -49209,9 +49341,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "fury shoal",
-        "sataya"
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Sea Serpent Glorious Miss Nouran liveaboard operates in the Egyptian Red Sea and has 13 ensuite cabins for up to 26 guests. Itineraries visit favorite sites such as Daedalus, Brothers, Elphinstone, and the SS Thistlegorm.",
@@ -49396,8 +49528,8 @@
       "dive_sites": [
         "st johns",
         "fury shoal",
-        "elphinstone",
-        "sataya"
+        "sataya",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Sea Serpent Glorious Miss Nouran liveaboard operates in the Egyptian Red Sea and has 13 ensuite cabins for up to 26 guests. Itineraries visit favorite sites such as Daedalus, Brothers, Elphinstone, and the SS Thistlegorm.",
@@ -49580,9 +49712,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "ras mohammed"
+        "abu nuhas",
+        "ras mohammed",
+        "sha'ab el erg",
+        "gubal",
+        "rosalie moller"
       ],
       "region": null,
       "summary": "Join the fantastic Sea Serpent Serena Dreams for a Red Sea diving liveaboard to remember. Built by divers for divers to offer unforgettable diving in the Red Sea. 9 en-suite guest cabins accommodate 18 passengers.",
@@ -49785,10 +49920,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran",
         "abu nuhas",
-        "abu dabab",
-        "ras mohammed"
+        "ras mohammed",
+        "tiran",
+        "dahab"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -50338,10 +50473,10 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
+        "daedalus",
         "elphinstone",
         "safaga",
-        "abu dabab",
-        "daedalus"
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -50523,6 +50658,8 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
+        "elphinstone",
+        "abu dabab",
         "fury shoal"
       ],
       "region": null,
@@ -50704,9 +50841,11 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "fury shoal",
         "elphinstone",
-        "abu dabab"
+        "st johns",
+        "sataya",
+        "abu dabab",
+        "fury shoal"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -50887,11 +51026,12 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "st johns",
-        "elphinstone",
         "rocky island",
         "zabargad",
-        "abu dabab"
+        "st johns",
+        "sataya",
+        "abu dabab",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51072,10 +51212,11 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "abu dabab",
+        "rocky island",
         "zabargad",
         "st johns",
-        "rocky island"
+        "sataya",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51257,9 +51398,10 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "abu nuhas",
-        "safaga",
+        "salem express",
+        "panorama reef",
         "brothers",
-        "salem express"
+        "middle reef"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51440,10 +51582,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "panorama reef",
         "brothers",
         "abu nuhas",
         "thistlegorm",
-        "safaga"
+        "small giftun"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51624,10 +51767,11 @@
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu dabab",
-        "safaga",
+        "brothers",
         "daedalus",
-        "brothers"
+        "safaga",
+        "panorama reef",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51808,10 +51952,10 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "fury shoal",
+        "sataya",
         "abu dabab",
         "st johns",
-        "sataya"
+        "fury shoal"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -51992,10 +52136,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
-        "ras mohammed",
-        "tiran"
+        "abu nuhas",
+        "tiran",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -52176,11 +52320,9 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
-        "salem express",
-        "zabargad",
-        "daedalus"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
@@ -52302,8 +52444,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "daedalus",
         "brothers",
+        "daedalus",
         "elphinstone"
       ],
       "region": null,
@@ -52426,11 +52568,9 @@
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
         "brothers",
         "daedalus",
-        "salem express",
-        "zabargad"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
@@ -52552,11 +52692,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "rocky island",
+        "abu dabab",
         "daedalus",
-        "elphinstone",
+        "zabargad",
+        "rocky island",
         "fury shoal",
-        "zabargad"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
@@ -52678,10 +52819,12 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone",
+        "abu dabab",
+        "zabargad",
         "rocky island",
+        "st johns",
         "fury shoal",
-        "zabargad"
+        "elphinstone"
       ],
       "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
@@ -52804,7 +52947,8 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "safaga"
+        "daedalus",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
@@ -52928,9 +53072,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "safaga",
-        "salem express"
+        "abu nuhas",
+        "sha'ab el erg",
+        "gubal",
+        "salem express",
+        "panorama reef",
+        "middle reef"
       ],
       "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
@@ -53054,11 +53202,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu nuhas",
         "thistlegorm",
+        "abu nuhas",
         "tiran",
-        "abu dabab",
-        "ras mohammed"
+        "ras mohammed",
+        "dahab"
       ],
       "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
@@ -53182,9 +53330,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
         "ras mohammed",
         "tiran",
-        "thistlegorm"
+        "abu nuhas"
       ],
       "region": null,
       "summary": "The M/Y Sunshine yacht offers year-round dive safaris in the Red Sea. 10 en-suite cabins with AC cater to 20 guests. Itineraries are 5-7 nights long and explore the northern and southern routes.",
@@ -54762,7 +54911,10 @@
         "daedalus",
         "elphinstone",
         "brothers",
-        "salem express"
+        "salem express",
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -55017,10 +55169,13 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
+        "elphinstone",
+        "brothers",
         "salem express",
-        "elphinstone"
+        "middle reef",
+        "ras disha",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -55276,9 +55431,9 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "zabargad",
         "elphinstone",
-        "rocky island"
+        "rocky island",
+        "zabargad"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -55533,7 +55688,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "tiran"
+        "sataya"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -56043,9 +56198,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
+        "thistlegorm",
         "abu nuhas",
-        "thistlegorm"
+        "rosalie moller",
+        "gubal",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -56300,10 +56457,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
         "thistlegorm",
-        "gubal",
         "abu nuhas",
+        "safaga",
+        "ras mohammed",
+        "sha'ab el erg",
+        "gubal",
         "panorama reef",
         "middle reef"
       ],
@@ -56560,10 +56719,7 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
-        "brothers",
-        "safaga",
-        "thistlegorm"
+        "brothers"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -56818,13 +56974,13 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "thistlegorm",
-        "safaga",
         "brothers",
-        "ras mohammed",
         "sha'ab el erg",
+        "ras mohammed",
+        "thistlegorm",
         "gubal",
         "abu nuhas",
+        "safaga",
         "panorama reef"
       ],
       "region": null,
@@ -57080,9 +57236,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
         "ras mohammed",
         "tiran",
-        "thistlegorm"
+        "abu nuhas",
+        "umm gamar"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -57337,12 +57495,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
-        "daedalus",
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
         "tiran",
-        "zabargad",
-        "st johns",
-        "abu dabab"
+        "dahab",
+        "gubal"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -57598,9 +57756,9 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
         "elphinstone",
-        "abu dabab"
+        "sataya",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -57855,10 +58013,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
-        "safaga",
         "brothers",
-        "daedalus"
+        "daedalus",
+        "elphinstone",
+        "safaga"
       ],
       "region": null,
       "summary": "Discover the Unity Liveaboard in the Red Sea, offering 13 ensuite cabins for 24 guests. Enjoy unforgettable dive trips to iconic reefs, wrecks, and shark hotspots.",
@@ -57996,11 +58154,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "safaga",
         "brothers",
+        "thistlegorm",
         "ras mohammed",
         "tiran",
-        "thistlegorm"
+        "safaga"
       ],
       "region": null,
       "summary": "Discover the Unity Liveaboard in the Red Sea, offering 13 ensuite cabins for 24 guests. Enjoy unforgettable dive trips to iconic reefs, wrecks, and shark hotspots.",
@@ -58138,11 +58296,13 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "elphinstone",
         "brothers",
         "daedalus",
-        "thistlegorm",
-        "fury shoal"
+        "elphinstone",
+        "sataya",
+        "panorama reef",
+        "fury shoal",
+        "safaga"
       ],
       "region": null,
       "summary": "Discover the Unity Liveaboard in the Red Sea, offering 13 ensuite cabins for 24 guests. Enjoy unforgettable dive trips to iconic reefs, wrecks, and shark hotspots.",
@@ -58281,9 +58441,8 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "zabargad",
-        "rocky island",
-        "elphinstone"
+        "elphinstone",
+        "zabargad"
       ],
       "region": null,
       "summary": "Explore some of the best Red Sea dive sites aboard the Vita Xplorer. Dive the Ras Mohammed Marine Park, Thistlegorm, &amp; Abu Nuhas Wrecks, as well as Elphinstone, Brothers, &amp; Daedalus Reef.",
@@ -58439,9 +58598,9 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns",
         "sataya",
-        "fury shoal"
+        "fury shoal",
+        "st johns"
       ],
       "region": null,
       "summary": "Explore some of the best Red Sea dive sites aboard the Vita Xplorer. Dive the Ras Mohammed Marine Park, Thistlegorm, &amp; Abu Nuhas Wrecks, as well as Elphinstone, Brothers, &amp; Daedalus Reef.",
@@ -58597,9 +58756,8 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
         "tiran",
-        "thistlegorm"
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Explore some of the best Red Sea dive sites aboard the Vita Xplorer. Dive the Ras Mohammed Marine Park, Thistlegorm, &amp; Abu Nuhas Wrecks, as well as Elphinstone, Brothers, &amp; Daedalus Reef.",
@@ -58755,10 +58913,11 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
         "tiran",
         "abu nuhas",
-        "thistlegorm"
+        "ras mohammed",
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": "The Yachtiano is a 45.5-meter/149-foot liveaboard that accommodates 34 passengers for diving in the Red Sea. It offers exclusive itineraries full of wrecks, walls, coral gardens, and marine life.",
@@ -58908,9 +59067,12 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed",
+        "sha'ab el erg",
         "abu nuhas",
-        "thistlegorm"
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "rosalie moller"
       ],
       "region": null,
       "summary": "The Yachtiano is a 45.5-meter/149-foot liveaboard that accommodates 34 passengers for diving in the Red Sea. It offers exclusive itineraries full of wrecks, walls, coral gardens, and marine life.",
@@ -59060,7 +59222,10 @@
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "salem express"
+        "sha'ab el erg",
+        "umm gamar",
+        "panorama reef",
+        "tobia arbaa"
       ],
       "region": null,
       "summary": "The Yachtiano is a 45.5-meter/149-foot liveaboard that accommodates 34 passengers for diving in the Red Sea. It offers exclusive itineraries full of wrecks, walls, coral gardens, and marine life.",

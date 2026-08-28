@@ -658,11 +658,14 @@ def promote(
         # One region at a time, for the reason `_sites_from_prose` explains:
         # `normalise` eats any separator, so matching the joined string lets a
         # site be assembled across two entries that neither one names.
-        regions = trip.get("regions")
-        sites = (_sites_from_regions(regions) if regions
-                 else trip.get("dive_sites") or [])
-        sites = _also(sites, _sites_from_prose(trip))
-        sites = sites or _sites_from_name(name)
+        # The description, then the operator's region list, then the title.
+        # The regions are last-resort only, never merged: they are what this
+        # ordering exists to stop trusting, but a trip whose description names
+        # no reef at all -- "Famous Five", "Get Wrecked" -- would otherwise
+        # publish an empty cell where the operator did say something.
+        sites = (_sites_from_description(trip)
+                 or _sites_from_regions(trip.get("regions") or [])
+                 or _sites_from_name(name))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
@@ -1054,47 +1057,43 @@ def _sites_from_regions(regions: Sequence[str]) -> list[str]:
     return sites
 
 
-def _sites_from_prose(trip: Mapping[str, Any]) -> list[str]:
-    """Reefs the operator names as *places* in its own account of the trip.
+def _sites_from_description(trip: Mapping[str, Any]) -> list[str]:
+    """Every reef the operator names in its own description of the trip.
 
-    Only the headings of non-day sections, which is a deliberate and measured
-    narrowing. The prose has two kinds of section: a place and its description
-    ("Brothers Islands — are one of the best diving spots in the world"), and a
-    day of the week. Read across all 315 trips, the two are not equally
-    trustworthy.
+    The whole description -- its lead paragraph, its section headings and its
+    day plan -- and **not** the curated "Key regions" list beside it. That list
+    is a summary somebody typed once and it is demonstrably wrong: All Star Red
+    Sea sells a "North & Brothers" week whose regions name Daedalus, 180 km
+    from anywhere its own day plan goes, and an "Ultimate Red Sea" fortnight
+    whose regions name St John's while its description lists nine sites and
+    omits it. Across 293 trips the regions claim a site the description never
+    mentions on 42 of them.
 
-    Reading **every word** would add sites to 203 trips and would also import
-    the operator's mistakes wholesale. Aphrodite sells a "North - Straits of
-    Tiran" week whose region list, whose title and whose place descriptions all
-    say Sinai — and whose day plan is a deep-south research expedition, Rocky
-    to Zabargad to St John's to Fury Shoals, evidently pasted from another
-    trip. Taken from all the text that one row claims eight reefs spanning the
-    whole sea; taken from the headings it reproduces the region list exactly.
+    The description wins because it is what the buyer reads. A diver books on
+    the sentences, not on the sidebar, so those sentences are the operator's
+    actual claim -- which is the only thing this site ever reports.
 
-    Reading only the **headings** adds sites to 49 trips instead, and the one
-    row it gets wrong is wrong the same way the region lists already are:
-    Dune Silky's northern week opens with two paragraphs about St John's, 700
-    km away, before Day 1. That is the operator's boilerplate, not our
-    inference, and the same error is live today in the curated lists — Topaz
-    sells "North Wrecks Reefs, Tiran and Dahab" with St Johns and Zabargad in
-    its own regions.
+    The fragment's fourth heading, "Route", is not read and cannot be: it is a
+    single ``<figure>`` holding a map image, with zero characters of text on
+    every vessel probed. Recorded in ``docs/sources/liveaboard.com.md``.
 
-    So this trades recall for the thing the site is for. What it buys is not
-    only detail: three trips whose region list is empty are named here and
-    nowhere else, among them a dolphin week whose only source for Sha'ab el Erg
-    is the operator writing the reef's name over a paragraph about it.
-
-    Read one heading at a time rather than from the lot joined together.
+    Read one section at a time rather than from the lot joined together.
     Joining and matching once looks equivalent and is not: :func:`normalise`
     reduces every punctuation mark to a space, so a separator disappears into
     the text and a section headed "Ras" followed by one headed "Mohammed"
     would invent a reef neither of them names.
     """
-    sites: list[str] = []
+    sites = _sites_from_name(trip.get("intro") or "")
     for section in trip.get("sections") or ():
-        if section.get("is_day"):
-            continue
         sites = _also(sites, _sites_from_name(section.get("heading") or ""))
+        # A day says what you dive; a heading names a place; the body of a
+        # place section is an essay about it and will mention anywhere.
+        # All Star Red Sea describes Daedalus as "Much like the Brothers
+        # Islands, Daedalus also sits in open water" -- a comparison, on a
+        # trip that goes nowhere near the Brothers. Reading it put the
+        # Brothers on that row and on two others.
+        if section.get("is_day"):
+            sites = _also(sites, _sites_from_name(section.get("text") or ""))
     return sites
 
 

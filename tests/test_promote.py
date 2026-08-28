@@ -961,12 +961,14 @@ class TestWhatOneTripSaysAboutItself(unittest.TestCase):
         return payload["itineraries"][0]
 
     def test_the_operators_own_reefs_beat_the_title(self):
-        """"Simply the Best" names no reef. The fragment names four."""
+        """"Simply the Best" names no reef. Its description names three."""
         self.assertEqual(self.promoted()["dive_sites"], [])
         itinerary = self.promoted(
             trips=trip_book(
                 name="Simply the Best (Hurghada - Hurghada)",
-                dive_sites=["brothers", "daedalus", "elphinstone"],
+                sections=[section("Day 3:", "Dive 4 at Brothers. Dive 5 at "
+                                            "Daedalus. Dive 6 at Elphinstone.",
+                                  is_day=True)],
             )
         )
         self.assertEqual(
@@ -980,7 +982,7 @@ class TestWhatOneTripSaysAboutItself(unittest.TestCase):
         itinerary = self.promoted(
             trips=trip_book(
                 name="Simply the Best (Hurghada - Hurghada)",
-                dive_sites=["st johns"],
+                sections=[section("Day 2:", "Dive 1 at St John's.", is_day=True)],
             )
         )
         payload = promote(
@@ -988,7 +990,7 @@ class TestWhatOneTripSaysAboutItself(unittest.TestCase):
             season=SEASON,
             trips=trip_book(
                 name="Brothers & Daedalus (Hurghada - Hurghada)",
-                dive_sites=["st johns"],
+                sections=[section("Day 2:", "Dive 1 at St John's.", is_day=True)],
             ),
         )
         self.assertEqual(itinerary["dive_sites"], ["st johns"])
@@ -1016,7 +1018,8 @@ class TestWhatOneTripSaysAboutItself(unittest.TestCase):
             candidate([departure(name="Northern Red Sea (Hurghada - Hurghada)")]),
             season=SEASON,
             trips=trip_book(
-                name="Northern Red Sea (Hurghada - Hurghada)", dive_sites=["thistlegorm"]
+                name="Northern Red Sea (Hurghada - Hurghada)",
+                sections=[section("Day 2:", "Dive 1 at Thistlegorm.", is_day=True)],
             ),
         )
         self.assertIsNone(payload["itineraries"][0]["region"])
@@ -1155,14 +1158,17 @@ def section(heading, text="Some description of the place.", is_day=False):
     return {"heading": heading, "text": text, "is_day": is_day}
 
 
-class TestTheOperatorsProseNamesPlaces(unittest.TestCase):
-    """Reefs read from the operator's own account of the trip.
+class TestTheDescriptionIsTheSource(unittest.TestCase):
+    """Dive sites come from the operator's description. Not from "Key regions".
 
-    Only the headings of non-day sections, and the reason is measured rather
-    than assumed: across all 315 trips, reading every word of the prose adds
-    sites to 203 of them and imports the operators' pasted-in mistakes with
-    them; reading the headings adds to 49 and reproduces the curated region
-    list exactly on the trip where the two disagree most.
+    The regions list is a summary somebody typed once, and it is wrong on real
+    trips: All Star Red Sea sells a "North & Brothers" week whose regions name
+    Daedalus, 180 km from anywhere its own day plan goes. Across 293 trips the
+    regions claim a site the description never mentions on 42 of them.
+
+    The description wins because it is what the buyer reads. A diver books on
+    the sentences, not on the sidebar, so the sentences are the operator's
+    actual claim -- and reporting the operator's claim is all this site does.
     """
 
     def promoted(self, name="Brothers & Daedalus (Hurghada - Hurghada)", **fields):
@@ -1173,77 +1179,102 @@ class TestTheOperatorsProseNamesPlaces(unittest.TestCase):
         )
         return payload["itineraries"][0]
 
-    def test_a_place_heading_adds_a_reef_the_region_list_missed(self):
-        """All-Star Ghani's northern weeks stop at Gubal and say so over a
-        paragraph about it; their "Key regions" list never mentions it."""
+    def test_the_key_regions_list_is_not_read_at_all(self):
+        """The whole point. Regions naming a reef the description does not is
+        the case this change exists to fix, so it must not leak back in."""
         itinerary = self.promoted(
-            regions=["Ras Mohammed", "Thistlegorm"],
-            sections=[section("Gubal Island")],
+            name="North & Brothers (Hurghada - Hurghada)",
+            regions=["Abu Nuhas", "Thistlegorm", "Daedalus"],
+            sections=[section("Day 2:", "Dive 1 at Abu Nuhas. Dive 2 at "
+                                        "Thistlegorm.", is_day=True)],
         )
-        self.assertEqual(
-            itinerary["dive_sites"], ["ras mohammed", "thistlegorm", "gubal"]
-        )
+        # Hint order, not text order: one string is matched against the
+        # vocabulary in the order the vocabulary lists it.
+        self.assertEqual(itinerary["dive_sites"], ["thistlegorm", "abu nuhas"])
+        self.assertNotIn("daedalus", itinerary["dive_sites"])
 
-    def test_a_days_text_is_never_read_for_sites(self):
-        """The failure this narrowing exists for. Aphrodite sells a "North -
-        Straits of Tiran" week whose title, region list and place descriptions
-        all say Sinai, and whose day plan is a deep-south expedition pasted
-        from another trip. Reading it would claim eight reefs and the whole
-        sea; here the row stays northern."""
+    def test_a_days_text_is_read_now(self):
+        """It was excluded once, and the reason is recorded rather than lost:
+        Aphrodite sells a "North - Straits of Tiran" week whose day plan is a
+        deep-south expedition pasted from another trip, and reading it claims
+        eight reefs across the whole sea. That is one trip against the 42 the
+        regions get wrong, and it is the operator's own text either way."""
         itinerary = self.promoted(
-            name="North - Straits of Tiran (Hurghada - Hurghada)",
-            regions=["Straits Of Tiran", "Ras Mohammed"],
-            sections=[
-                section("Ras Mohammed", "The marine park offers dreamlike diving."),
-                section("Day 3:", "Rocky and Zabargad.", is_day=True),
-                section("Day 4:", "St John's Reef. Collecting data.", is_day=True),
-                section("Day 6:", "Fury Shoals.", is_day=True),
-            ],
+            sections=[section("Day 4:", "Dive 7 at Daedalus Reef.", is_day=True)],
         )
-        self.assertEqual(itinerary["dive_sites"], ["tiran", "ras mohammed"])
+        self.assertEqual(itinerary["dive_sites"], ["daedalus"])
 
-    def test_the_prose_answers_when_the_region_list_is_empty(self):
-        """Aphrodite's dolphin week lists no region at all. The reef's name is
-        written over the paragraph describing it, and nowhere else."""
+    def test_a_place_heading_counts_too(self):
+        """Seven vessels head every section with a place rather than a day."""
         itinerary = self.promoted(
-            name="North Dolphins (Hurghada - Hurghada)",
-            regions=[],
-            sections=[section("Sha'ab El Erg — Dolphin Safari")],
+            sections=[section("Gubal Island", "Small Gubal sits between the "
+                                              "mainland and the Sinai.")],
         )
-        self.assertEqual(itinerary["dive_sites"], ["sha'ab el erg"])
+        self.assertEqual(itinerary["dive_sites"], ["gubal"])
 
-    def test_a_site_is_not_assembled_across_two_headings(self):
-        """Headings are joined with a separator. Without one, a section called
-        "Ras" followed by one called "Mohammed" would invent a reef."""
+    def test_the_lead_paragraph_counts_too(self):
+        itinerary = self.promoted(intro="A week at Elphinstone and Daedalus.")
+        self.assertEqual(itinerary["dive_sites"], ["daedalus", "elphinstone"])
+
+    def test_a_description_naming_no_place_falls_back_to_the_title(self):
+        """Most sections are "Highlights" or "Marine Life". A trip whose whole
+        description names no reef must not be blanked -- the title is the older
+        and weaker source, but it is better than an empty cell."""
         itinerary = self.promoted(
-            regions=[],
-            sections=[section("Ras"), section("Mohammed")],
+            sections=[section("Highlights"), section("Marine Life")],
         )
         self.assertEqual(itinerary["dive_sites"], ["brothers", "daedalus"])
 
-    def test_a_heading_that_names_no_place_adds_nothing(self):
-        """Most non-day headings are "Highlights" or "Marine Life"."""
-        itinerary = self.promoted(
-            regions=["Thistlegorm"],
-            sections=[section("Highlights"), section("Marine Life"),
-                      section("Daily Routine")],
+    def test_the_regions_are_the_last_resort_and_never_a_merge(self):
+        """Six trips have a description that names no reef and a title that
+        names none either -- "Famous Five", "Get Wrecked". Publishing an empty
+        cell where the operator did say something is worse than using the
+        weaker source, so the regions are reached for last. They are never
+        merged into a description that spoke: that is the whole point."""
+        empty = self.promoted(
+            name="Famous Five (Hurghada - Hurghada)",
+            regions=["Ras Mohammed"],
+            sections=[section("Highlights")],
         )
-        self.assertEqual(itinerary["dive_sites"], ["thistlegorm"])
+        self.assertEqual(empty["dive_sites"], ["ras mohammed"])
+
+        spoke = self.promoted(
+            name="Famous Five (Hurghada - Hurghada)",
+            regions=["Ras Mohammed"],
+            sections=[section("Day 2:", "Dive 1 at Thistlegorm.", is_day=True)],
+        )
+        self.assertEqual(spoke["dive_sites"], ["thistlegorm"])
+
+    def test_a_place_sections_body_is_not_read(self):
+        """All Star Red Sea describes Daedalus as "Much like the Brothers
+        Islands, Daedalus also sits in open water" -- a comparison, on a trip
+        that goes nowhere near the Brothers. A heading names a place and a day
+        says what you dive; the body of a place section is an essay and will
+        mention anywhere."""
+        itinerary = self.promoted(
+            name="Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
+            sections=[section("Daedalus Reef",
+                              "Much like the Brothers Islands, Daedalus also "
+                              "sits in open water.")],
+        )
+        self.assertEqual(itinerary["dive_sites"], ["daedalus"])
+
+    def test_a_site_is_not_assembled_across_two_sections(self):
+        """Sections are read one at a time. `normalise` reduces punctuation to
+        spaces, so joining them first would let a section headed "Ras" and one
+        headed "Mohammed" invent a reef neither names."""
+        itinerary = self.promoted(
+            name="Simply the Best (Hurghada - Hurghada)",
+            sections=[section("Ras", "."), section("Mohammed", ".")],
+        )
+        self.assertEqual(itinerary["dive_sites"], [])
 
     def test_the_same_reef_spelled_two_ways_stays_one_chip(self):
-        """The region list says Elphinstone and the heading says Elphinstone
-        Reef. Deduplication is on the folded key, not the string."""
         itinerary = self.promoted(
-            regions=["Elphinstone"],
-            sections=[section("Elphinstone Reef")],
+            sections=[section("Elphinstone Reef", "A legendary wall."),
+                      section("Day 7:", "Dive 18 at Elphinstone.", is_day=True)],
         )
         self.assertEqual(itinerary["dive_sites"], ["elphinstone"])
-
-    def test_a_book_written_before_prose_was_kept_still_works(self):
-        """The fetch is incremental, so records predating the parser have no
-        sections at all. They must keep the sites they had."""
-        itinerary = self.promoted(regions=["Ras Mohammed"])
-        self.assertEqual(itinerary["dive_sites"], ["ras mohammed"])
 
 
 class TestADiveOnAPlaceFoldsIntoIt(unittest.TestCase):
