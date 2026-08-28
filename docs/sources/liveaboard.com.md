@@ -67,6 +67,57 @@ and the fetcher asked for 97 trips it already had under their banner spellings.
 trip's reefs do not change from night to night, so only genuinely new trips are
 fetched, which is what makes the daily refresh affordable.
 
+#### "What to expect": the operator's own prose
+
+The fragment's fourth heading. Everything else on it is a field; this is the
+only place the operator writes in sentences, and it names reefs the "Key
+regions" list does not — `Dive 1: Elerok  Dive 2: Gota Abu Ramada` against a
+region list saying "Hurghada".
+
+```
+<h4>What to expect</h4>
+  <figure> … itinerary map, magnify button, two inline SVGs … </figure>
+  <div class="prose …">
+     intro paragraph
+     <strong>Day 2</strong> … <strong>Day 3</strong> …
+  </div>
+```
+
+**The `<figure>` is the thing to know.** A pattern requiring the heading and
+the prose div to be adjacent matched on **0 of 67** vessels while the regions
+on the same fragments parsed fine, so the failure read as "the operators write
+nothing" rather than "the pattern is wrong". `EXPECT_BLOCK` allows the gap.
+
+**Bold runs are the structure; days are not.** Measured on one trip from each
+of the 67 vessels, headings split as:
+
+| | vessels |
+|---|---|
+| mixed days and places | 48 |
+| every heading a day | 12 |
+| every heading a place — no "Day" anywhere | 7 |
+
+So a section is a heading and its text, and `is_day` is a question asked of a
+heading rather than a claim built into the parser. Day markers themselves are
+219 `<strong>`, 10 `<p>`, 5 bare, 2 `<li>` and 1 `<br>` — splitting on
+paragraphs reaches neither the bulleted vessels nor the place-headed ones.
+
+Three shapes, one fixture each in `tests/fixtures/`:
+
+| Shape | Example vessel | Fixture |
+|---|---|---|
+| `<strong>Day 2</strong>` + paragraph | alia-soul | `itinerary_fragment.html` |
+| `<strong>Day 1:</strong>` + `<ul><li>` | all-star-red-sea | `itinerary_days_bulleted.html` |
+| `<strong>Brothers Islands</strong>` + description | all-star-ghani | `itinerary_places_not_days.html` |
+
+Tags become a **space** when stripped, not nothing, or the bullets under a
+"Day 1:" heading close up into `5:00 pmThe crew will`.
+
+**Read it as a sketch, never as a schedule.** The days are not contiguous — 2,
+3, 5, 7 on one trip — and some vessels say so outright: Miss Nouran's own
+"Sample Itinerary" section reads *"We do not announce a day-by-day plan"*, and
+Serenity's is conditional on the marine parks. Anything rendering it says so.
+
 ## Facts, and where each one is
 
 Everything in the "no" column comes from JSON-LD in the served HTML
@@ -88,6 +139,7 @@ and needs Playwright.
 | **Per-trip dive count** | same fragment → `<dt>Dives <dd>Approximately 18 dives in total` | no |
 | **Per-trip guests** | same fragment → `<dt>Group Size <dd>Up to 20 guests` | no |
 | **Stated entry bar** | same fragment → `<strong>Experience</strong><span>Advanced Open Water - 50 minimum logged dives required.</span>` | no |
+| **The trip's own prose** | same fragment → `<h4>What to expect</h4>`, a `<figure>`, then `<div class="prose">` split on `<strong>` runs. **67/67 vessels.** See above | no |
 
 `Product.offers` is an `AggregateOffer` on all 318 archived pages —
 `lowPrice`/`highPrice` for the vessel, i.e. a "from" price. Useless for what a
@@ -149,6 +201,8 @@ Each of these cost a cycle at least once.
 | Does a destination listing carry a priced offer? | **No.** `/diving/egypt` and `/diving/egypt/red-sea` are overviews. Boat links only. | a live run |
 | Does the fee disclosure text name any dive site? | **No.** Checked for Emperor Asmaa and Emperor Elite — no reef mentioned. | `data/fees.json` disclosure text |
 | Is there a per-trip dive count on the page? | **Partly.** 61 of 317 itineraries state one; the rest is derived from nights and carries no new information ([#50](https://github.com/PaludaNCode/Liveaboard/issues/50)). | `tools/probe_dives.py` |
+| Is "What to expect" a day-by-day itinerary? | **Not reliably.** Only 12 of 67 vessels head every section with a day; 7 head none with one, and 48 mix days with places. Parse it as headings, not as days — and the days that do appear are a sketch, non-contiguous, and disclaimed outright by some operators. | `tools/probe_itinerary_prose.py`, all 67 vessels |
+| Does every vessel publish that prose? | **Yes, 67/67** — and every one of the four headings (`Overview`, `Route`, `What to expect`, `Key regions`) appears on all 67, so a fragment missing one is a parse failure rather than a quiet operator. | same run |
 
 ## Still open
 
