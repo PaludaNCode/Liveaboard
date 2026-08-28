@@ -1196,7 +1196,7 @@
         "sataya",
         "abu dabab",
         "habili ali",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Alia Soul liveaboard, a 36m (118ft) diving boat with 10 cabins for 20 guests, spacious dive decks, Nitrox, and itineraries to top northern and southern dive sites.",
@@ -2351,7 +2351,7 @@
     {
       "id": "all-star-red-sea--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "all-star-liveaboards",
       "boat_id": "all-star-red-sea",
       "nights": 7,
@@ -2361,7 +2361,7 @@
       "dive_sites": [
         "abu dabab",
         "daedalus",
-        "fury shoal",
+        "fury shoals",
         "elphinstone",
         "marsa shouna"
       ],
@@ -3992,7 +3992,7 @@
     {
       "id": "alsuraya--deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
       "name": "Deadalus, St. John´s & Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Deadalus, St. John´s & Elphinstone",
+      "title": "Daedalus, St. John's & Elphinstone",
       "operator_id": "alsuraya",
       "boat_id": "alsuraya",
       "nights": 7,
@@ -4171,7 +4171,7 @@
     {
       "id": "alsuraya--north-and-brothers-hurghada-hurghada",
       "name": "North and Brothers (Hurghada - Hurghada)",
-      "title": "North and Brothers",
+      "title": "North & Brothers",
       "operator_id": "alsuraya",
       "boat_id": "alsuraya",
       "nights": 7,
@@ -4833,8 +4833,8 @@
         "thistlegorm",
         "st johns",
         "salem express",
-        "sataya",
-        "fury shoal"
+        "fury shoals",
+        "sataya"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -5626,7 +5626,7 @@
     {
       "id": "aphrodite--deep-south-st-john-port-ghalib-port-ghalib",
       "name": "Deep South, St. John (Port Ghalib - Port Ghalib)",
-      "title": "Deep South, St. John",
+      "title": "Deep South & St. John's",
       "operator_id": "aphrodite-liveaboard-safaris",
       "boat_id": "aphrodite",
       "nights": 7,
@@ -5636,7 +5636,7 @@
       "dive_sites": [
         "rocky island",
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone",
         "abu dabab"
@@ -5845,7 +5845,7 @@
         "rocky island",
         "zabargad",
         "st johns",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "The MY Aphrodite offers year-round dive safaris in the Egyptian Red Sea. Itineraries cover the best Red Sea dive areas, from northern dive sites such as Ras Mohammed to the deep south of St. Johns.",
@@ -6838,8 +6838,8 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
+        "fury shoals",
         "sataya",
-        "fury shoal",
         "abu dabab"
       ],
       "region": null,
@@ -8184,7 +8184,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "daedalus",
         "elphinstone"
       ],
@@ -8799,7 +8799,7 @@
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-horizon",
       "nights": 7,
@@ -8807,7 +8807,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "elphinstone"
       ],
       "region": null,
@@ -9006,7 +9006,7 @@
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-port-ghalib-port-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-horizon",
       "nights": 7,
@@ -10055,7 +10055,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "daedalus",
         "elphinstone"
       ],
@@ -10876,7 +10876,7 @@
     {
       "id": "blue-melody--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-melody",
       "nights": 7,
@@ -10884,7 +10884,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "elphinstone"
       ],
       "region": null,
@@ -11083,7 +11083,7 @@
     {
       "id": "blue-seas--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
@@ -11091,8 +11091,8 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "fury shoals",
         "sataya",
-        "fury shoal",
         "elphinstone",
         "daedalus"
       ],
@@ -12207,7 +12207,7 @@
     {
       "id": "destiny--daedalus-fury-shoals-st-john-s-port-ghalib-port-ghalib",
       "name": "Daedalus - Fury Shoals - St. John's (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Fury Shoals - St. John's",
+      "title": "Daedalus, Fury Shoals & St. John's",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12216,7 +12216,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
+        "fury shoals",
         "st johns"
       ],
       "region": null,
@@ -12410,7 +12410,7 @@
     {
       "id": "destiny--fury-shoals-elphinstone-safaga-port-ghalib-hurghada",
       "name": "Fury Shoals - Elphinstone - Safaga (Port Ghalib - Hurghada)",
-      "title": "Fury Shoals - Elphinstone - Safaga",
+      "title": "Fury Shoals, Elphinstone & Safaga",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12419,9 +12419,9 @@
       "port_to": "Hurghada",
       "dive_sites": [
         "elphinstone",
+        "fury shoals",
         "safaga",
-        "panorama reef",
-        "fury shoal"
+        "panorama reef"
       ],
       "region": null,
       "summary": "Destiny is a luxurious Red Sea liveaboard&nbsp;accommodating&nbsp;20 divers in 10 ensuite cabins. Eco-minded &agrave;-la-carte dining, spacious dive deck, sun deck, and iconic routes (BD/E, St. John&rsquo;s).",
@@ -12614,7 +12614,7 @@
     {
       "id": "destiny--north-brothers-hurghada-hurghada",
       "name": "North - Brothers (Hurghada - Hurghada)",
-      "title": "North - Brothers",
+      "title": "North & Brothers",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -12815,7 +12815,7 @@
     {
       "id": "destiny--north-tiran-hurghada-hurghada",
       "name": "North - Tiran (Hurghada - Hurghada)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -13019,7 +13019,7 @@
     {
       "id": "destiny--north-wrecks-hurghada-hurghada",
       "name": "North - Wrecks (Hurghada - Hurghada)",
-      "title": "North - Wrecks",
+      "title": "North & Wrecks",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -13631,7 +13631,7 @@
     {
       "id": "destiny--st-john-s-fury-shoals-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's - Fury Shoals - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's - Fury Shoals - Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "scarabaeus-safari",
       "boat_id": "destiny",
       "nights": 7,
@@ -13640,7 +13640,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "elphinstone"
       ],
       "region": null,
@@ -14762,7 +14762,7 @@
     {
       "id": "discovery-i--north-wrecks-ras-mohamed-tiran-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohamed, Tiran",
+      "title": "North Wrecks, Ras Mohammed & Tiran",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -14997,7 +14997,7 @@
     {
       "id": "discovery-i--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
+      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers & Safaga",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -15232,7 +15232,7 @@
     {
       "id": "discovery-i--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoal, Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -15242,9 +15242,9 @@
       "dive_sites": [
         "elphinstone",
         "st johns",
+        "fury shoals",
         "habili ali",
-        "gota kebir",
-        "fury shoal"
+        "gota kebir"
       ],
       "region": null,
       "summary": "The Discovery I liveaboard offers 7-night itineraries covering the best of the Red Sea. 10 en-suite cabins cater to 20 guests. Sea view cabins are available.",
@@ -16150,7 +16150,7 @@
     {
       "id": "discovery-ii--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky, Zabargad, Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16379,7 +16379,7 @@
     {
       "id": "discovery-ii--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
+      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers & Safaga",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16610,7 +16610,7 @@
     {
       "id": "discovery-ii--rocky-zabargad-st-john-s-elphinstone-port-ghalib-port-ghalib",
       "name": "Rocky, Zabargad, St. John's, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad, St. John's, Elphinstone",
+      "title": "Rocky, Zabargad, St. John's & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16839,7 +16839,7 @@
     {
       "id": "discovery-ii--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoal, Elphinstone",
+      "title": "St. John's, Fury Shoals & Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -16849,9 +16849,9 @@
       "dive_sites": [
         "elphinstone",
         "st johns",
+        "fury shoals",
         "habili ali",
-        "gota kebir",
-        "fury shoal"
+        "gota kebir"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -17077,7 +17077,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "sataya"
       ],
       "region": null,
@@ -17875,7 +17875,7 @@
     {
       "id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
       "name": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
-      "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s",
+      "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St. John's",
       "operator_id": "dune-world",
       "boat_id": "dune-longara",
       "nights": 7,
@@ -17887,7 +17887,7 @@
         "rocky island",
         "zabargad",
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone"
       ],
@@ -18485,7 +18485,7 @@
     {
       "id": "dune-longara--saint-john-s-reef-port-ghalib-port-ghalib",
       "name": "Saint John’s Reef (Port Ghalib - Port Ghalib)",
-      "title": "Saint John’s Reef",
+      "title": "St. John's Reef",
       "operator_id": "dune-world",
       "boat_id": "dune-longara",
       "nights": 7,
@@ -18494,7 +18494,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "sataya reef"
       ],
@@ -18706,7 +18706,7 @@
         "zabargad",
         "rocky island",
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone"
       ],
@@ -18917,7 +18917,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "sataya",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "DUNE Silky liveaboard is a modern, spacious yacht in the Red Sea, Egypt. With 13 twin en-suite and air-conditioned cabins for up to 26 guests, Alia offers dive itineraries to top Red Sea spots such as Daedalus, St, John&rsquo;s and Brothers.",
@@ -19328,7 +19328,7 @@
     {
       "id": "dune-silky--north-tiran-safaga-safaga",
       "name": "North - Tiran (Safaga - Safaga)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "dune-world",
       "boat_id": "dune-silky",
       "nights": 7,
@@ -20389,7 +20389,7 @@
     {
       "id": "dune-silky--st-john-s-reef-marsa-ghalib-marsa-ghalib",
       "name": "St John's Reef (Marsa Ghalib - Marsa Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "dune-world",
       "boat_id": "dune-silky",
       "nights": 7,
@@ -20403,7 +20403,7 @@
         "st johns",
         "sataya",
         "rocky island",
-        "fury shoal",
+        "fury shoals",
         "sataya reef"
       ],
       "region": null,
@@ -20604,7 +20604,7 @@
     {
       "id": "dune-titan--north-tiran-safaga-safaga",
       "name": "North - Tiran (Safaga - Safaga)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "dune-world",
       "boat_id": "dune-titan",
       "nights": 7,
@@ -21667,7 +21667,7 @@
     {
       "id": "dune-titan--st-john-s-reef-marsa-ghalib-marsa-ghalib",
       "name": "St John's Reef (Marsa Ghalib - Marsa Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "dune-world",
       "boat_id": "dune-titan",
       "nights": 7,
@@ -21681,7 +21681,7 @@
         "st johns",
         "sataya",
         "rocky island",
-        "fury shoal",
+        "fury shoals",
         "sataya reef"
       ],
       "region": null,
@@ -21892,8 +21892,8 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "sataya",
-        "fury shoal"
+        "fury shoals",
+        "sataya"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -22186,7 +22186,7 @@
     {
       "id": "emperor-asmaa--reefs-and-wrecks-hurghada-hurghada",
       "name": "Reefs and Wrecks (Hurghada - Hurghada)",
-      "title": "Reefs and Wrecks",
+      "title": "Reefs & Wrecks",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -22639,7 +22639,7 @@
     {
       "id": "emperor-asmaa--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -22647,7 +22647,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "st johns",
         "elphinstone",
         "rocky island",
@@ -22792,7 +22792,7 @@
     {
       "id": "emperor-asmaa--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -22803,11 +22803,11 @@
         "st johns",
         "elphinstone",
         "zabargad",
+        "fury shoals",
         "abu dabab",
         "habili ali",
         "gota kebir",
-        "rocky island",
-        "fury shoal"
+        "rocky island"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -22959,8 +22959,8 @@
         "elphinstone",
         "zabargad",
         "st johns",
-        "rocky island",
-        "fury shoal"
+        "fury shoals",
+        "rocky island"
       ],
       "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
@@ -23110,8 +23110,8 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "sataya",
-        "fury shoal"
+        "fury shoals",
+        "sataya"
       ],
       "region": null,
       "summary": "The Emperor Elite, winner of Best Liveaboard 2020 offers year-round diving to some of the best spots in the Red Sea. Free nitrox and WiFi are included.",
@@ -23401,7 +23401,7 @@
     {
       "id": "emperor-elite--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
@@ -23409,7 +23409,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "st johns",
         "elphinstone",
         "rocky island",
@@ -23554,7 +23554,7 @@
     {
       "id": "emperor-elite--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
@@ -23565,11 +23565,11 @@
         "st johns",
         "elphinstone",
         "zabargad",
+        "fury shoals",
         "abu dabab",
         "habili ali",
         "gota kebir",
-        "rocky island",
-        "fury shoal"
+        "rocky island"
       ],
       "region": null,
       "summary": "The Emperor Elite, winner of Best Liveaboard 2020 offers year-round diving to some of the best spots in the Red Sea. Free nitrox and WiFi are included.",
@@ -23721,8 +23721,8 @@
         "elphinstone",
         "zabargad",
         "st johns",
-        "rocky island",
-        "fury shoal"
+        "fury shoals",
+        "rocky island"
       ],
       "region": null,
       "summary": "The Emperor Elite, winner of Best Liveaboard 2020 offers year-round diving to some of the best spots in the Red Sea. Free nitrox and WiFi are included.",
@@ -24169,7 +24169,7 @@
     {
       "id": "emperor-superior--reefs-and-wrecks-hurghada-hurghada",
       "name": "Reefs and Wrecks (Hurghada - Hurghada)",
-      "title": "Reefs and Wrecks",
+      "title": "Reefs & Wrecks",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-superior",
       "nights": 7,
@@ -24322,7 +24322,7 @@
     {
       "id": "emperor-superior--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-superior",
       "nights": 7,
@@ -24330,7 +24330,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "st johns",
         "elphinstone",
         "rocky island",
@@ -24734,7 +24734,7 @@
     {
       "id": "ghazala-adventure--daedalus-rocky-st-johns-hurghada-port-ghalib",
       "name": "Daedalus Rocky & St. Johns (Hurghada - Port Ghalib)",
-      "title": "Daedalus Rocky & St. Johns",
+      "title": "Daedalus Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-adventure",
       "nights": 7,
@@ -25564,7 +25564,7 @@
     {
       "id": "ghazala-explorer--daedalus-rocky-st-johns-hurghada-port-ghalib",
       "name": "Daedalus Rocky & St. Johns (Hurghada - Port Ghalib)",
-      "title": "Daedalus Rocky & St. Johns",
+      "title": "Daedalus Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -25721,7 +25721,7 @@
     {
       "id": "ghazala-explorer--daedalus-rocky-st-johns-hurghada-hurghada",
       "name": "Daedalus, Rocky & St Johns (Hurghada - Hurghada)",
-      "title": "Daedalus, Rocky & St Johns",
+      "title": "Daedalus, Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -25879,7 +25879,7 @@
     {
       "id": "ghazala-explorer--deep-south-st-johns-port-ghalib-port-ghalib",
       "name": "Deep South & St. Johns (Port Ghalib - Port Ghalib)",
-      "title": "Deep South & St. Johns",
+      "title": "Deep South & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -25888,8 +25888,8 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
-        "sataya"
+        "sataya",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -26994,7 +26994,7 @@
     {
       "id": "golden-dolphin--north-brother-islands-hurghada-port-ghalib",
       "name": "North - Brother Islands (Hurghada - Port Ghalib)",
-      "title": "North - Brother Islands",
+      "title": "North & Brothers",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
@@ -27342,7 +27342,7 @@
     {
       "id": "golden-dolphin-iv--10-days-north-ss-turkia-ras-mohamed-dahab-hurghada-hurghada",
       "name": "10 days: North - SS Turkia - Ras Mohamed - Dahab (Hurghada - Hurghada)",
-      "title": "10 days: North - SS Turkia - Ras Mohamed - Dahab",
+      "title": "10 days: North - SS Turkia - Ras Mohammed - Dahab",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 10,
@@ -27690,7 +27690,7 @@
     {
       "id": "golden-dolphin-iv--clean-up-safari-north-safaga-brother-islands-elphinstone-hurghada-port-ghalib",
       "name": "Clean up Safari: North - Safaga - Brother Islands - Elphinstone (Hurghada - Port Ghalib)",
-      "title": "Clean up Safari: North - Safaga - Brother Islands - Elphinstone",
+      "title": "Clean up Safari: North - Safaga - Brothers - Elphinstone",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 7,
@@ -27865,7 +27865,7 @@
     {
       "id": "golden-dolphin-iv--daedalus-rocky-island-zabargad-st-johns-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky Island - Zabargad - St. Johns- Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky Island - Zabargad - St. Johns- Elphinstone",
+      "title": "Daedalus, Rocky Island, Zabargad, St. John's & Elphinstone",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 10,
@@ -28214,7 +28214,7 @@
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
       "name": "North - Straits of Tiran - Brother Islands - Daedalus - Rocky Island - Zabargad - Salem Express (Hurghada - Hurghada)",
-      "title": "North - Straits of Tiran - Brother Islands - Daedalus - Rocky Island - Zabargad - Salem Express",
+      "title": "North - Straits of Tiran - Brothers - Daedalus - Rocky Island - Zabargad - Salem Express",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-imperial",
       "nights": 14,
@@ -28798,7 +28798,7 @@
     {
       "id": "grand-discovery--north-wrecks-ras-mohamed-tiran-brothers-safaga-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohamed, Tiran, Brothers & Safaga",
+      "title": "North Wrecks, Ras Mohammed, Tiran, Brothers & Safaga",
       "operator_id": "discovery-divers",
       "boat_id": "grand-discovery",
       "nights": 7,
@@ -29462,7 +29462,7 @@
     {
       "id": "hammerhead-ii--deepest-south-abu-fandira-sataya-fury-shoals-st-john-s-marsa-alam-marsa-alam",
       "name": "Deepest South: Abu Fandira - Sataya​​ (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)",
-      "title": "Deepest South: Abu Fandira - Sataya​​ (Fury Shoals) - St. John's",
+      "title": "Deepest South: Abu Fandira - Sataya (Fury Shoals) - St. John's",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -29470,7 +29470,7 @@
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "st johns",
         "sataya",
         "elphinstone"
@@ -29898,7 +29898,7 @@
     {
       "id": "hammerhead-ii--red-sea-charm-abu-nuhas-ss-thistlegorm-the-brothers-islands-safaga-hurghada-hurgh",
       "name": "Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)",
-      "title": "Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga",
+      "title": "Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers - Safaga",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -30115,7 +30115,7 @@
     {
       "id": "hammerhead-ii--red-sea-charm-abu-nuhas-ss-thistlegorm-the-brothers-islands-safaga-marsa-alam-hur",
       "name": "Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Marsa Alam - Hurghada)",
-      "title": "Red Sea Charm​: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga",
+      "title": "Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers - Safaga",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -31196,7 +31196,7 @@
     {
       "id": "hammerhead-ii--south-parks-zabargad-rocky-saint-john-s-marsa-alam-marsa-alam",
       "name": "South Parks: Zabargad & Rocky - Saint John's (Marsa Alam - Marsa Alam)",
-      "title": "South Parks: Zabargad & Rocky - Saint John's",
+      "title": "South Parks: Zabargad & Rocky - St. John's",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -31632,7 +31632,7 @@
     {
       "id": "hammerhead-ii--super-diversity-daedalus-saint-john-s-sataya-fury-shoals-marsa-alam-marsa-alam",
       "name": "Super Diversity: Daedalus - Saint John's - Sataya (Fury Shoals) (Marsa Alam - Marsa Alam)",
-      "title": "Super Diversity: Daedalus - Saint John's - Sataya (Fury Shoals)",
+      "title": "Super Diversity: Daedalus - St. John's - Sataya (Fury Shoals)",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -31849,7 +31849,7 @@
     {
       "id": "hammerhead-ii--wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohamed-hurghada-hurghada",
       "name": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)",
-      "title": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed",
+      "title": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohammed",
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
@@ -32257,7 +32257,7 @@
     {
       "id": "iceberg--special-wreck-trip-thistlegorm-abu-nuhas-small-gobal-hurghada-hurghada",
       "name": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gobal (Hurghada - Hurghada)",
-      "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gobal",
+      "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
       "operator_id": "deep-breath-diving-safari",
       "boat_id": "iceberg",
       "nights": 4,
@@ -32628,9 +32628,9 @@
       "dive_sites": [
         "zabargad",
         "st johns",
-        "fury shoal",
         "sataya",
-        "rocky island"
+        "rocky island",
+        "fury shoals"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -32790,7 +32790,7 @@
     {
       "id": "jp-marine--golden-mix-daedalus-sataya-st-johns-rocky-zabargad-marsa-alam-marsa-alam",
       "name": "Golden Mix: Daedalus, Sataya, St Johns, Rocky, Zabargad (Marsa Alam - Marsa Alam)",
-      "title": "Golden Mix: Daedalus, Sataya, St Johns, Rocky, Zabargad",
+      "title": "Golden Mix: Daedalus, Sataya, St. John's, Rocky, Zabargad",
       "operator_id": "dive-safari-master",
       "boat_id": "jp-marine",
       "nights": 7,
@@ -32799,8 +32799,8 @@
       "port_to": "Marsa Alam",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
         "sataya",
+        "fury shoals",
         "st johns",
         "zabargad",
         "rocky island"
@@ -32974,7 +32974,7 @@
         "daedalus",
         "elphinstone",
         "sataya",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "MY JP Marine is a spacious liveaboard designed for the comfort of divers. 14 en-suite bathrooms, 2 sundecks, lounge, dining room &amp; bar. The JP Marine yacht explores the best dive sites of the Red Sea.",
@@ -34115,7 +34115,7 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "rocky island",
         "zabargad"
       ],
@@ -34962,7 +34962,7 @@
     {
       "id": "ocean-lovers--daedalus-rocky-zabargad-st-johns-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad, St. John's, Fury Shoals & Elphinstone",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -34974,8 +34974,8 @@
         "rocky island",
         "zabargad",
         "st johns",
-        "fury shoal",
-        "sataya"
+        "sataya",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Dive Egypt's Red Sea treasures! Ocean Lovers liveaboard offers iconic wrecks and stunning marine life",
@@ -35136,7 +35136,7 @@
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
       "name": "North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
-      "title": "North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands",
+      "title": "North Reefs, Wrecks, Ras Mohammed, Tiran & Brothers",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -35312,7 +35312,7 @@
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
       "name": "North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab (Hurghada - Hurghada)",
-      "title": "North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab",
+      "title": "North Reefs, Wrecks, Ras Mohammed, Tiran & Dahab",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -37018,7 +37018,7 @@
     {
       "id": "odyssey--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky - Zabargad - Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -37234,7 +37234,7 @@
     {
       "id": "odyssey--fury-shoal-port-ghalib-port-ghalib",
       "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoal",
+      "title": "Fury Shoals",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -37242,7 +37242,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
@@ -37665,7 +37665,7 @@
     {
       "id": "odyssey--the-golden-loop-north-brother-safaga-hurghada-hurghada",
       "name": "The Golden Loop: North - Brother - Safaga (Hurghada - Hurghada)",
-      "title": "The Golden Loop: North - Brother - Safaga",
+      "title": "The Golden Loop: North - Brothers - Safaga",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -37883,7 +37883,7 @@
     {
       "id": "odyssey--the-golden-loop-north-brother-safaga-port-ghalib-hurghada",
       "name": "The Golden Loop: North - Brother - Safaga (Port Ghalib - Hurghada)",
-      "title": "The Golden Loop: North - Brother - Safaga",
+      "title": "The Golden Loop: North - Brothers - Safaga",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -38701,8 +38701,8 @@
         "zabargad",
         "rocky island",
         "st johns",
-        "fury shoal",
-        "sataya"
+        "sataya",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -38879,7 +38879,7 @@
     {
       "id": "queen-sherry--golden-mix-deadalus-sataya-st-john-s-rocky-zabargad-marsa-alam-marsa-alam",
       "name": "Golden Mix: Deadalus, Sataya, St. John's, Rocky, Zabargad (Marsa Alam - Marsa Alam)",
-      "title": "Golden Mix: Deadalus, Sataya, St. John's, Rocky, Zabargad",
+      "title": "Golden Mix: Daedalus, Sataya, St. John's, Rocky, Zabargad",
       "operator_id": "cruise-company-yachts",
       "boat_id": "queen-sherry",
       "nights": 7,
@@ -38889,8 +38889,8 @@
       "dive_sites": [
         "daedalus",
         "st johns",
-        "fury shoal",
         "sataya",
+        "fury shoals",
         "zabargad",
         "rocky island"
       ],
@@ -39079,8 +39079,8 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
-        "sataya"
+        "sataya",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
@@ -39450,7 +39450,7 @@
     {
       "id": "red-sea-aggressor-ii--northern-red-sea-ras-mohamed-straits-of-tiran-hurghada-hurghada",
       "name": "Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)",
-      "title": "Northern Red Sea, Ras Mohamed, Straits of Tiran",
+      "title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-ii",
       "nights": 7,
@@ -39796,7 +39796,7 @@
     {
       "id": "red-sea-aggressor-iv--st-johns-daedalus-marsa-alam-marsa-alam",
       "name": "St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
-      "title": "St. Johns & Daedalus",
+      "title": "St. John's & Daedalus",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-iv",
       "nights": 7,
@@ -39948,7 +39948,7 @@
     {
       "id": "red-sea-aggressor-v--deep-south-elba-reef-hamata-hamata",
       "name": "Deep South - Elba Reef (Hamata - Hamata)",
-      "title": "Deep South - Elba Reef",
+      "title": "Deep South & Elba Reef",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-v",
       "nights": 7,
@@ -39957,7 +39957,7 @@
       "port_to": "Hamata",
       "dive_sites": [
         "elba reef",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "The Red Sea Aggressor V is a liveaboard offering comfortable accommodations, top-tier amenities, and diving adventures in Egypt&rsquo;s southern Red Sea.",
@@ -40150,7 +40150,7 @@
       "port_from": "Hamata",
       "port_to": "Hamata",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "zabargad",
         "rocky island",
         "dangerous reef",
@@ -41081,7 +41081,7 @@
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-hurghada",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Hurghada)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -41089,7 +41089,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "elphinstone",
         "daedalus"
       ],
@@ -41277,7 +41277,7 @@
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -41285,7 +41285,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "elphinstone",
         "daedalus"
       ],
@@ -42071,7 +42071,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "st johns"
       ],
       "region": null,
@@ -42258,7 +42258,7 @@
     {
       "id": "red-sea-explorer--st-johns-zabargad-rocky-port-ghalib-port-ghalib",
       "name": "St. Johns, Zabargad & Rocky (Port Ghalib - Port Ghalib)",
-      "title": "St. Johns, Zabargad & Rocky",
+      "title": "St. John's, Zabargad & Rocky",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -42657,7 +42657,7 @@
     {
       "id": "royal-evolution--brothers-daedalus-rocky-st-john-elba-port-ghalib-port-ghalib",
       "name": "Brothers, Daedalus, Rocky, St. John & Elba (Port Ghalib - Port Ghalib)",
-      "title": "Brothers, Daedalus, Rocky, St. John & Elba",
+      "title": "Brothers, Daedalus, Rocky, St. John's & Elba",
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 10,
@@ -42865,7 +42865,7 @@
     {
       "id": "royal-evolution--deadalus-elba-reef-port-ghalib-port-ghalib",
       "name": "Deadalus & Elba Reef (Port Ghalib - Port Ghalib)",
-      "title": "Deadalus & Elba Reef",
+      "title": "Daedalus & Elba Reef",
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 7,
@@ -43071,7 +43071,7 @@
     {
       "id": "royal-evolution--elba-reef-elba-borders-port-ghalib-port-ghalib",
       "name": "Elba Reef | Elba borders (Port Ghalib - Port Ghalib)",
-      "title": "Elba Reef | Elba borders",
+      "title": "Elba Reef & Elba borders",
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 10,
@@ -43709,9 +43709,9 @@
         "rocky island",
         "zabargad",
         "st johns",
-        "fury shoal",
         "sataya",
-        "habili ali"
+        "habili ali",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -44143,10 +44143,10 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
         "salem express",
         "abu dabab",
         "safaga",
+        "fury shoals",
         "sataya",
         "panorama reef"
       ],
@@ -44362,10 +44362,10 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
         "salem express",
         "abu dabab",
         "safaga",
+        "fury shoals",
         "sataya",
         "panorama reef"
       ],
@@ -44571,7 +44571,7 @@
     {
       "id": "safy-mar--fury-shoals-and-daedalus-port-ghalib-port-ghalib",
       "name": "Fury Shoals and Daedalus (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoals and Daedalus",
+      "title": "Fury Shoals & Daedalus",
       "operator_id": "humpback-safari-yacht",
       "boat_id": "safy-mar",
       "nights": 7,
@@ -44581,10 +44581,10 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
+        "fury shoals",
         "sataya",
         "abu dabab",
-        "marsa shouna",
-        "fury shoal"
+        "marsa shouna"
       ],
       "region": null,
       "summary": "Dive the Egyptian Red Sea aboard Safy Mar, a 2024-built liveaboard for 34 divers, with routes to St. John's, Fury Shoal, the Brothers and Tiran.",
@@ -45233,7 +45233,7 @@
         "sataya",
         "brothers",
         "daedalus",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "The Sea Friend liveaboard departs directly from Hamata to offer less time for traveling and more time for exploring the stunning reefs of the southern Red Sea. Each cabin features en-suite bathrooms, AC, and storage space.",
@@ -45390,7 +45390,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
+        "fury shoals",
         "elphinstone",
         "sataya"
       ],
@@ -45595,7 +45595,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone"
       ],
@@ -46422,7 +46422,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "fury shoal",
+        "fury shoals",
         "elphinstone",
         "sataya"
       ],
@@ -47863,7 +47863,7 @@
     {
       "id": "serenity--north-ras-mohamed-tiran-dahab-hurghada-hurghada",
       "name": "North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)",
-      "title": "North - Ras Mohamed, Tiran, Dahab",
+      "title": "North, Ras Mohammed, Tiran & Dahab",
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
@@ -48030,7 +48030,7 @@
     {
       "id": "serenity--north-and-wrecks-hurghada-hurghada",
       "name": "North and Wrecks (Hurghada - Hurghada)",
-      "title": "North and Wrecks",
+      "title": "North & Wrecks",
       "operator_id": "divers-co",
       "boat_id": "serenity",
       "nights": 7,
@@ -48367,7 +48367,7 @@
     {
       "id": "sinaistar--north-reefs-wrecks-and-tiran-hurghada-hurghada",
       "name": "North Reefs, Wrecks and Tiran (Hurghada - Hurghada)",
-      "title": "North Reefs, Wrecks and Tiran",
+      "title": "North Reefs, Wrecks & Tiran",
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
@@ -48545,7 +48545,7 @@
     {
       "id": "sinaistar--north-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
       "name": "North Wrecks, Ras Mohamed, Tiran & Brothers Islands (Hurghada - Hurghada)",
-      "title": "North Wrecks, Ras Mohamed, Tiran & Brothers Islands",
+      "title": "North Wrecks, Ras Mohammed, Tiran & Brothers",
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
@@ -49449,7 +49449,7 @@
     {
       "id": "sindalahs--daedalus-st-johns-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus, St. Johns, Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, St. Johns, Fury Shoal",
+      "title": "Daedalus, St. John's & Fury Shoals",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49459,7 +49459,7 @@
       "dive_sites": [
         "st johns",
         "elphinstone",
-        "fury shoal",
+        "fury shoals",
         "abu dabab",
         "rocky island",
         "zabargad"
@@ -49689,7 +49689,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-hurghada",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Hurghada)",
-      "title": "Daedulus, Fury Shoal, Elphinstone",
+      "title": "Daedalus, Fury Shoals & Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49699,7 +49699,7 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
+        "fury shoals",
         "abu dabab"
       ],
       "region": null,
@@ -49927,7 +49927,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedulus, Fury Shoal, Elphinstone",
+      "title": "Daedalus, Fury Shoals & Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49937,7 +49937,7 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "fury shoal",
+        "fury shoals",
         "abu dabab"
       ],
       "region": null,
@@ -50165,7 +50165,7 @@
     {
       "id": "sindalahs--north-reef-ras-mohamed-tiran-brothers-island-hurghada-hurghada",
       "name": "North Reef, Ras Mohamed, Tiran, Brothers Island (Hurghada - Hurghada)",
-      "title": "North Reef, Ras Mohamed, Tiran, Brothers Island",
+      "title": "North Reef, Ras Mohammed, Tiran & Brothers",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -50406,7 +50406,7 @@
     {
       "id": "snefro-love--mini-plus-thistlegorm-tiran-ras-mohamed-sharm-el-sheikh-sharm-el-sheikh",
       "name": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
-      "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed",
+      "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
       "operator_id": "king-snefro-group",
       "boat_id": "snefro-love",
       "nights": 4,
@@ -50861,7 +50861,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone"
       ],
@@ -51047,7 +51047,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "sataya",
         "elphinstone"
       ],
@@ -51432,7 +51432,7 @@
     {
       "id": "star-jet--abu-nuhas-ras-mohammed-tiran-dahab-hurghada-hurghada",
       "name": "Abu Nuhas - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)",
-      "title": "Abu Nuhas - Ras Mohammed - Tiran - Dahab",
+      "title": "Abu Nuhas, Ras Mohammed, Tiran & Dahab",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -51616,7 +51616,7 @@
     {
       "id": "star-jet--abu-nuhas-ras-muhammad-tiran-hurghada-hurghada",
       "name": "Abu Nuhas - Ras Muhammad - Tiran (Hurghada - Hurghada)",
-      "title": "Abu Nuhas - Ras Muhammad - Tiran",
+      "title": "Abu Nuhas, Ras Mohammed & Tiran",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52179,8 +52179,8 @@
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "abu dabab",
-        "fury shoal"
+        "fury shoals",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -52365,7 +52365,7 @@
         "st johns",
         "sataya",
         "abu dabab",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -52538,7 +52538,7 @@
     {
       "id": "star-jet--rocky-zabargad-st-john-s-elphinstone-marsa-alam-marsa-alam",
       "name": "Rocky & Zabargad - St. John's - Elphinstone (Marsa Alam - Marsa Alam)",
-      "title": "Rocky & Zabargad - St. John's - Elphinstone",
+      "title": "Rocky, Zabargad, St. John's & Elphinstone",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52724,7 +52724,7 @@
     {
       "id": "star-jet--rocky-zabargad-st-john-s-sataya-marsa-alam-marsa-alam",
       "name": "Rocky & Zabargad - St. John's - Sataya (Marsa Alam - Marsa Alam)",
-      "title": "Rocky & Zabargad - St. John's - Sataya",
+      "title": "Rocky, Zabargad, St. John's & Sataya",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -52909,7 +52909,7 @@
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-hurghada-hurghada",
       "name": "Safaga - Brothers - Abu Nuhas (Hurghada - Hurghada)",
-      "title": "Safaga - Brothers - Abu Nuhas",
+      "title": "Safaga, Brothers & Abu Nuhas",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53094,7 +53094,7 @@
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-ss-thistlegorm-hurghada-hurghada",
       "name": "Safaga - Brothers - Abu Nuhas - SS Thistlegorm (Hurghada - Hurghada)",
-      "title": "Safaga - Brothers - Abu Nuhas - SS Thistlegorm",
+      "title": "Safaga, Brothers, Abu Nuhas & SS Thistlegorm",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53279,7 +53279,7 @@
     {
       "id": "star-jet--safaga-daedalus-brothers-marsa-alam-hurghada",
       "name": "Safaga - Daedalus - Brothers (Marsa Alam - Hurghada)",
-      "title": "Safaga - Daedalus - Brothers",
+      "title": "Safaga, Daedalus & Brothers",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -53475,7 +53475,7 @@
         "sataya",
         "abu dabab",
         "st johns",
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "Experience the Red Sea aboard Star Jet, a liveaboard with 15 cabins, sundecks, gourmet cuisine, and itineraries to Brothers, Daedalus, Ras Mohammed, and the Thistlegorm.",
@@ -53648,7 +53648,7 @@
     {
       "id": "star-jet--tiran-ras-muhammad-ss-thistlegorm-hurghada-hurghada",
       "name": "Tiran - Ras Muhammad - SS Thistlegorm (Hurghada - Hurghada)",
-      "title": "Tiran - Ras Muhammad - SS Thistlegorm",
+      "title": "Tiran, Ras Mohammed & SS Thistlegorm",
       "operator_id": "blue-shades-diving",
       "boat_id": "star-jet",
       "nights": 7,
@@ -54216,7 +54216,7 @@
         "daedalus",
         "zabargad",
         "rocky island",
-        "fury shoal",
+        "fury shoals",
         "elphinstone"
       ],
       "region": null,
@@ -54343,7 +54343,7 @@
         "zabargad",
         "rocky island",
         "st johns",
-        "fury shoal",
+        "fury shoals",
         "elphinstone"
       ],
       "region": null,
@@ -54458,7 +54458,7 @@
     {
       "id": "sunshine--brothers-safaga-hurghada-hurghada",
       "name": "Brothers + Safaga (Hurghada - Hurghada)",
-      "title": "Brothers + Safaga",
+      "title": "Brothers & Safaga",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54584,7 +54584,7 @@
     {
       "id": "sunshine--north-safaga-hurghada-hurghada",
       "name": "North + Safaga (Hurghada - Hurghada)",
-      "title": "North + Safaga",
+      "title": "North & Safaga",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54714,7 +54714,7 @@
     {
       "id": "sunshine--north-dahab-hurghada-hurghada",
       "name": "North - Dahab (Hurghada - Hurghada)",
-      "title": "North - Dahab",
+      "title": "North & Dahab",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -54842,7 +54842,7 @@
     {
       "id": "sunshine--north-tiran-hurghada-hurghada",
       "name": "North - Tiran (Hurghada - Hurghada)",
-      "title": "North - Tiran",
+      "title": "North & Tiran",
       "operator_id": "sadko-travel",
       "boat_id": "sunshine",
       "nights": 7,
@@ -56213,7 +56213,7 @@
     {
       "id": "tala--rocky-zarbagad-st-johns-port-ghalib-port-ghalib",
       "name": "Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zarbagad, St Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "red-sea-explorers",
       "boat_id": "tala",
       "nights": 7,
@@ -56942,7 +56942,7 @@
     {
       "id": "topaz--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky - Zabargad - Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad & Elphinstone",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -57455,7 +57455,7 @@
     {
       "id": "topaz--fury-shoal-port-ghalib-port-ghalib",
       "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoal",
+      "title": "Fury Shoals",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -57463,7 +57463,7 @@
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoal"
+        "fury shoals"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -58231,7 +58231,7 @@
     {
       "id": "topaz--north-reef-safaga-brother-islands-hurghada-hurghada",
       "name": "North Reef, Safaga & Brother Islands (Hurghada - Hurghada)",
-      "title": "North Reef, Safaga & Brother Islands",
+      "title": "North Reef, Safaga & Brothers",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -58486,7 +58486,7 @@
     {
       "id": "topaz--north-reef-safaga-brother-islands-port-ghalib-hurghada",
       "name": "North Reef, Safaga & Brother Islands (Port Ghalib - Hurghada)",
-      "title": "North Reef, Safaga & Brother Islands",
+      "title": "North Reef, Safaga & Brothers",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -58748,7 +58748,7 @@
     {
       "id": "topaz--north-reef-wrecks-and-tiran-hurghada-hurghada",
       "name": "North Reef, Wrecks and Tiran (Hurghada - Hurghada)",
-      "title": "North Reef, Wrecks and Tiran",
+      "title": "North Reef, Wrecks & Tiran",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -59666,7 +59666,7 @@
     {
       "id": "unity--north-and-brothers-hurghada-hurghada",
       "name": "North and Brothers (Hurghada - Hurghada)",
-      "title": "North and Brothers",
+      "title": "North & Brothers",
       "operator_id": "red-sea-relax",
       "boat_id": "unity",
       "nights": 7,
@@ -59819,9 +59819,9 @@
         "brothers",
         "daedalus",
         "elphinstone",
+        "fury shoals",
         "sataya",
         "panorama reef",
-        "fury shoal",
         "safaga"
       ],
       "region": null,
@@ -59952,7 +59952,7 @@
     {
       "id": "vita-xplorer--daedalus-zabargad-rocky-island-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Zabargad - Rocky Island - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Zabargad - Rocky Island - Elphinstone",
+      "title": "Daedalus, Zabargad, Rocky Island & Elphinstone",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
@@ -60110,7 +60110,7 @@
     {
       "id": "vita-xplorer--ras-mohamed-brothers-islands-hurghada-marriott-hurghada-marriott",
       "name": "Ras Mohamed & Brothers Islands (Hurghada, Marriott - Hurghada, Marriott)",
-      "title": "Ras Mohamed & Brothers Islands",
+      "title": "Ras Mohammed & Brothers",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
@@ -60274,7 +60274,7 @@
     {
       "id": "vita-xplorer--st-john-s-reef-port-ghalib-port-ghalib",
       "name": "St John's Reef (Port Ghalib - Port Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
@@ -60283,7 +60283,7 @@
       "port_to": "Port Ghalib",
       "dive_sites": [
         "sataya",
-        "fury shoal",
+        "fury shoals",
         "st johns"
       ],
       "region": null,
@@ -60432,7 +60432,7 @@
     {
       "id": "vita-xplorer--tiran-north-ras-mohamed-hurghada-marriott-hurghada-marriott",
       "name": "Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)",
-      "title": "Tiran & North Ras Mohamed",
+      "title": "Tiran & North Ras Mohammed",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,

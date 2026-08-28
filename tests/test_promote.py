@@ -638,9 +638,11 @@ class TestDisplayTitle(unittest.TestCase):
         # Deliberately not the Brothers/Daedalus/Elphinstone route: that one is
         # also folded onto a house spelling, which would make this pass or fail
         # for a reason that has nothing to do with the ports.
+        # The dashes become house separators on the way through -- it is a
+        # route list -- so the assertion is about the bracket, not the commas.
         self.assertEqual(
             self.title("Daedalus - Rocky - Zabargad (Hurghada - Hurghada)"),
-            "Daedalus - Rocky - Zabargad",
+            "Daedalus, Rocky & Zabargad",
         )
 
     def test_it_survives_a_port_being_aliased(self):
@@ -656,9 +658,11 @@ class TestDisplayTitle(unittest.TestCase):
             "Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
         ):
             self.assertEqual(self.title(name), "Golden Triangle")
+        # "Ras Mohamed" also folds to "Ras Mohammed" on the way through; what
+        # this case is about is the port suffix, which goes either way.
         self.assertEqual(
             self.title("Tiran & North Ras Mohamed (Hurghada, Marriott - Hurghada, Marriott)"),
-            "Tiran & North Ras Mohamed",
+            "Tiran & North Ras Mohammed",
         )
 
     def test_a_route_in_brackets_stays(self):
@@ -1359,7 +1363,7 @@ class TestTheReefsDescriptionsName(unittest.TestCase):
         for reef in ("Shaab Maksur", "Shaab Claudio", "Abu Galawa",
                      "Shaab Hamam", "El Malahi", "Shilineat", "Abu Fendera"):
             with self.subTest(reef=reef):
-                self.assertEqual(self.sites(f"Dive 4 at {reef}"), ["fury shoal"])
+                self.assertEqual(self.sites(f"Dive 4 at {reef}"), ["fury shoals"])
 
     def test_st_johns_reefs_fold_into_st_johns(self):
         for reef in ("Umm Aruk", "Cave Reef", "Small Gota"):
@@ -1402,7 +1406,7 @@ class TestTheReefsDescriptionsName(unittest.TestCase):
         for name, expected in (("Daedalus Reef", "daedalus"),
                                ("Elphinstone", "elphinstone"),
                                ("St John's", "st johns"),
-                               ("Fury Shoal", "fury shoal"),
+                               ("Fury Shoal", "fury shoals"),
                                ("Gubal Island", "gubal")):
             with self.subTest(name=name):
                 self.assertEqual(self.sites(name), [expected])
@@ -1467,14 +1471,14 @@ class TestNoOtherRouteIsRewritten(unittest.TestCase):
 
     UNTOUCHED = [
         "North & Brothers",
-        "North - Brothers",
-        "Daedalus - Rocky - Zabargad - Elphinstone",
         "Daedalus, Rocky, Zabargad & Elphinstone",
         "North & Tiran",
-        "North - Tiran",
     ]
 
-    def test_other_routes_keep_their_own_punctuation(self):
+    def test_other_routes_keep_their_own_words(self):
+        """Only Brothers/Daedalus/Elphinstone is folded onto a house *name*.
+        Other routes take the house separators and keep their own reefs, in
+        their own order."""
         for name in self.UNTOUCHED:
             with self.subTest(name):
                 data = promote(candidate([departure(name=name)]), season=SEASON)
@@ -1484,7 +1488,7 @@ class TestNoOtherRouteIsRewritten(unittest.TestCase):
         """The pattern is anchored at both ends. A week that adds Safaga is a
         different week, and renaming it would delete where it goes."""
         for name in ("Brothers, Daedalus, Elphinstone & Safaga",
-                     "Brothers, Daedalus and Elphinstone plus Fury Shoal",
+                     "Brothers, Daedalus and Elphinstone plus Zabargad",
                      "Deep South: Brothers, Daedalus, Elphinstone"):
             with self.subTest(name):
                 data = promote(candidate([departure(name=name)]), season=SEASON)
@@ -1541,3 +1545,254 @@ class TestOneSpellingWhereOnlyTheCaseDiffers(unittest.TestCase):
         data = self._promote("North & Tiran", "North & Dahab")
         self.assertEqual({i["title"] for i in data["itineraries"]},
                          {"North & Tiran", "North & Dahab"})
+
+
+class TestErrorsInATitleAreCorrected(unittest.TestCase):
+    """Errors, as opposed to a style we happen not to share.
+
+    That distinction is the whole point: separators and word order are the
+    operators' own and are left alone. These are things nobody intended. The
+    three reefs the fleet spells several ways are folded separately, by
+    REEF_ALIASES, because they are differences rather than mistakes.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_zero_width_spaces_are_removed(self):
+        """Invisible on the page and not invisible to anything else: they
+        defeat a search for the words either side."""
+        self.assertEqual(self.title("Red Sea Charm​: Abu Nuhas"),
+                         "Red Sea Charm: Abu Nuhas")
+        self.assertEqual(self.title("Sataya​​ (Fury Shoals)"),
+                         "Sataya (Fury Shoals)")
+
+    def test_they_are_removed_not_turned_into_spaces(self):
+        self.assertEqual(self.title("Deep​South"), "DeepSouth")
+
+    def test_one_apostrophe(self):
+        """Three characters for one reef, so the same saint sorts in three
+        places and matches in one."""
+        for written in ("St. John’s", "St. John´s", "St. John‘s"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "St. John's")
+
+    def test_the_two_misspellings_of_daedalus(self):
+        self.assertEqual(self.title("Daedulus, Sataya, Elphinstone"),
+                         "Daedalus, Sataya & Elphinstone")
+        self.assertEqual(self.title("Deadalus & Elba Reef"),
+                         "Daedalus & Elba Reef")
+
+    def test_the_one_misspelling_of_zabargad(self):
+        self.assertEqual(self.title("Rocky, Zarbagad, St. John's"),
+                         "Rocky, Zabargad & St. John's")
+
+    def test_the_correction_is_listed_not_guessed(self):
+        """A near-miss rule that catches those also catches a reef that only
+        looks like another. Nothing else is touched."""
+        for name in ("Dadalus", "Daedalos", "Deadelus", "Zabargad", "Sataya",
+                     "Zabagad", "Zarbagard", "Zabargad Islands"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_a_correct_title_is_left_exactly_as_it_is(self):
+        for name in ("Daedalus & Elphinstone", "St. John's & Fury Shoals",
+                     "North & Tiran"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_the_operators_own_text_survives_as_the_name(self):
+        """Correcting a name would re-key the per-trip book, and what the
+        operator published is the identity."""
+        raw = "Deadalus, St. John´s & Elphinstone"
+        data = promote(candidate([departure(name=raw)]), season=SEASON)
+        itinerary = data["itineraries"][0]
+        self.assertEqual(itinerary["title"], "Daedalus, St. John's & Elphinstone")
+        self.assertEqual(itinerary["name"], raw)
+
+
+class TestFourReefsGetOneSpelling(unittest.TestCase):
+    """One spelling for the four reefs the fleet writes several ways.
+
+    Not mistakes, unlike the corrections above -- "Fury Shoal" and "Brother
+    Islands" are what those operators call those reefs. Folded anyway, for the
+    reason BDE folds one route: a visitor comparing two rows should not have to
+    work out that the reefs are the same reef first.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_six_spellings_of_st_johns(self):
+        for written in ("St. John's", "St. Johns", "St Johns", "St John's",
+                        "St. John", "Saint John's", "Saint Johns"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "St. John's")
+
+    def test_five_spellings_of_brothers(self):
+        for written in ("Brothers", "Brother Islands", "Brothers Islands",
+                        "Brother Island", "Brothers Island", "Brother"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "Brothers")
+
+    def test_the_plural_does_not_strand_the_second_word(self):
+        """Written as an alternation, "s" wins on "Brothers Islands" and leaves
+        "Islands" behind -- which reads as a different reef, not a tidied one."""
+        self.assertEqual(self.title("North Reefs, Tiran & Brothers Islands"),
+                         "North Reefs, Tiran & Brothers")
+        self.assertNotIn("Islands", self.title("Brothers Islands"))
+
+    def test_two_spellings_of_fury_shoals(self):
+        for written in ("Fury Shoals", "Fury Shoal"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "Fury Shoals")
+
+    def test_the_chosen_spelling_is_one_an_operator_used(self):
+        """Never a spelling invented to be consistent. Each of the three is
+        the plurality of what the fleet actually wrote."""
+        for chosen in ("St. John's", "Brothers", "Fury Shoals", "Ras Mohammed"):
+            with self.subTest(chosen):
+                self.assertEqual(self.title(chosen), chosen)
+
+    def test_the_reef_is_folded_mid_title(self):
+        self.assertEqual(
+            self.title("Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elba"),
+            "Daedalus, Rocky, Zabargad, St. John's, Fury Shoals & Elba")
+
+    def test_big_and_little_brother_are_not_folded_into_the_pair(self):
+        """They name the two islands separately, and folding one to the pair
+        would delete which island the trip dives."""
+        for name in ("Big Brother & Daedalus", "Little Brother Wall",
+                     "Big Brother, Little Brother & Elphinstone"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_three_spellings_of_ras_mohammed(self):
+        """All three are real transliterations, so none is a misspelling --
+        this is a fold, not a correction. What settles it is not the title
+        count (15 / 6 / 2) but the dive sites parsed from the operators' own
+        descriptions, which say "ras mohammed" 101 times out of 101: the
+        column was disagreeing with the filter chip beside it."""
+        # All three the fleet writes. "Ras Muhammad" is the one a narrower
+        # pattern missed, and it took reading the whole title list to find:
+        # two trips, a different vowel in both halves of the word.
+        for written in ("Ras Mohamed", "Ras Mohammed", "Ras Muhammad"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "Ras Mohammed")
+
+    def test_four_reefs_and_nothing_generalised(self):
+        """The reef names the fleet also splits are left exactly as written.
+
+        Separators are no longer in this list: route lists take the house
+        punctuation. Word order still is -- these differ from their twins by
+        sequence and stay two titles.
+        """
+        for name in ("North Brothers", "Rocky & Rocky Island",
+                     "Zabargad Islands", "Elphinstone & Daedalus"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_the_operators_own_text_survives_as_the_name(self):
+        raw = "North Reef, Safaga & Brother Islands"
+        data = promote(candidate([departure(name=raw)]), season=SEASON)
+        itinerary = data["itineraries"][0]
+        self.assertEqual(itinerary["title"], "North Reef, Safaga & Brothers")
+        self.assertEqual(itinerary["name"], raw)
+
+    def test_the_folded_route_still_reaches_the_one_bde_title(self):
+        """Brother Islands folds to Brothers before BDE is matched, and BDE
+        accepts both, so the route still prints once."""
+        self.assertEqual(self.title("Brother Islands - Daedalus - Elphinstone"),
+                         "Brothers, Daedalus & Elphinstone")
+
+
+class TestHouseSeparatorsOnRouteLists(unittest.TestCase):
+    """One punctuation for a list of stops: commas, then & before the last.
+
+    The fleet writes the same two-stop route as "North & Brothers", "North -
+    Brothers" and "North and Brothers", and prints all three a row apart.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_every_separator_reaches_one_punctuation(self):
+        for written in ("North & Brothers", "North - Brothers",
+                        "North and Brothers", "North + Brothers",
+                        "North, Brothers", "North | Brothers"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "North & Brothers")
+
+    def test_a_longer_list_takes_commas_and_one_ampersand(self):
+        self.assertEqual(
+            self.title("Daedalus - Rocky - Zabargad - Elphinstone"),
+            "Daedalus, Rocky, Zabargad & Elphinstone")
+
+    def test_a_doubled_separator_collapses(self):
+        """"Tiran, & Dahab" is a comma and an ampersand doing one job."""
+        self.assertEqual(self.title("North Reefs, Wrecks, Tiran, & Dahab"),
+                         "North Reefs, Wrecks, Tiran & Dahab")
+
+    def test_word_order_is_still_the_operators(self):
+        """The line held from the start. Two titles naming the same reefs in a
+        different sequence stay two titles: nothing here can verify the order
+        means something, and nothing may assume it means nothing."""
+        self.assertEqual(self.title("St. John's & Daedalus"), "St. John's & Daedalus")
+        self.assertEqual(self.title("Daedalus & St. John's"), "Daedalus & St. John's")
+
+    def test_a_single_stop_is_not_a_list(self):
+        for name in ("Fury Shoals", "North", "Brothers"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+
+class TestProseIsNotRepunctuated(unittest.TestCase):
+    """The boundary that makes house separators safe.
+
+    "Daedalus - Rocky - Zabargad" is a list whose dashes are separators.
+    "Dancing with Dolphins - Dolphin Liveaboard Safari" is a sentence whose
+    dash is not, and "Best of Dahab and Tiran" is English rather than two
+    stops joined by "and". Rewriting either would be editing prose.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_sentences_keep_their_own_punctuation(self):
+        for name in ("Best of Dahab and Tiran",
+                     "Dancing with Dolphins - Dolphin Liveaboard Safari",
+                     "Deep South Expedition: Secrets of Zabargad",
+                     "Northern Red Sea - Best Wreck Diving",
+                     "Best of the North",
+                     "Tec only Safari Trip: Northern Wrecks and Reefs"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_a_labelled_route_keeps_its_label_and_its_dashes(self):
+        """A colon means the operator is naming the trip, not listing stops.
+        The label is theirs, and the part after it is not a bare list."""
+        for name in ("Marine Park North: Brothers - Daedalus & Elphinstone",
+                     "Marine Park South: Daedalus - Rocky - Zabargad - Elphinstone"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_one_unrecognised_word_makes_it_prose(self):
+        """The test is that every part is something the dataset already knows.
+        A single unknown stop means we are not reading a list of stops."""
+        self.assertEqual(self.title("Daedalus - Somewhere Nobody Parses"),
+                         "Daedalus - Somewhere Nobody Parses")
+
+    def test_the_vocabulary_is_the_one_promote_already_reads_titles_with(self):
+        """A second list would drift from SITE_HINTS and start repunctuating
+        prose the moment a reef was added to one and not the other."""
+        from liveaboard.promote import SITE_HINTS, _is_place_list
+
+        self.assertTrue(_is_place_list(f"{SITE_HINTS[0]} - {SITE_HINTS[1]}"))

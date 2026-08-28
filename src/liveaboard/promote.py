@@ -257,6 +257,194 @@ BDE_TITLE = "Brothers, Daedalus & Elphinstone"
 """House style: commas, then an ampersand before the last."""
 
 
+TITLE_FIXES = (
+    # Zero-width spaces, pasted in from wherever the title was written. Two
+    # titles carry them -- "Red Sea Charm[]:" and "Sataya[][] (Fury Shoals)" --
+    # invisible on the page and not invisible to anything else: they defeat a
+    # search for the words either side and sort as though they were there.
+    # Removed rather than spaced, because they are not spaces.
+    (re.compile(r"[​‌‍﻿]"), ""),
+    # One apostrophe. The fleet writes St John's with a typewriter quote, a
+    # curly quote and an acute accent -- three characters for one reef, so the
+    # same saint sorts in three places and matches in one.
+    (re.compile(r"[‘’´]"), "'"),
+    # Daedalus, twice misspelled: "Daedulus" and "Deadalus". Listed rather
+    # than matched loosely, the same way PORT_ALIASES folds harbours -- a
+    # near-miss rule that catches these also catches a reef that only looks
+    # like another. Both trips already carry `daedalus` in their dive sites,
+    # read from the operator's own description, so this corrects the spelling
+    # of something the dataset has independently confirmed.
+    (re.compile(r"\b(?:daedulus|deadalus)\b", re.I), "Daedalus"),
+    # Zabargad, once, with two letters swapped: "Zarbagad". Listed for the
+    # same reason, and confirmed the same way -- that trip carries `zabargad`
+    # in its dive sites, read from the operator's own description, and the
+    # fleet writes the reef 26 other times without ever writing it this way.
+    (re.compile(r"\bzarbagad\b", re.I), "Zabargad"),
+    # Gubal, once written "Gobal". The only correction here whose evidence is
+    # the fleet's rather than the trip's own: that title names Thistlegorm, Abu
+    # Nuhas and "Small Gobal", and its parsed sites name neither spelling, so
+    # nothing confirms it from inside the trip. What decides it is that the
+    # fleet writes "gubal" 46 times in parsed dive sites and "gobal" not once,
+    # against a single title -- one operator's typing against everybody else's.
+    (re.compile(r"\bgobal\b", re.I), "Gubal"),
+    # A separator with a space on one side only: "St. John's- Elphinstone".
+    # Both sides or neither. A hyphen with no space at all is spacing the
+    # operator chose -- "Thistlegorm-Abu Nuhas" -- and is left exactly as it
+    # is; a hyphen with one space is a space they dropped.
+    (re.compile(r"(?<=\S)-(?=\s)"), " -"),
+    (re.compile(r"(?<=\s)-(?=\S)"), "- "),
+)
+"""Errors in a title, as opposed to a style we happen not to share.
+
+The distinction is the whole reason this is a short list. Separators and word
+order are the operators' own and are left alone -- see the note on ``BDE``.
+These are things nobody intended: an invisible control character, three
+characters doing one apostrophe's job, reefs with their letters swapped, and a
+dash with a space on one side.
+
+A misspelling is corrected where the trip's own dive sites, read from the
+operator's description, already name the reef correctly -- the dataset
+confirming the reef independently of its title is what separates a correction
+from a guess. ``Gobal`` is the one exception and is marked as such: its trip
+names no Gubal at all, so the evidence is the fleet's instead -- 46 parsed
+"gubal" against a single "gobal" in one title. A weaker warrant, taken
+deliberately and only where the count is that lopsided.
+The three reefs the fleet spells several ways are folded separately, in
+:data:`REEF_ALIASES`, because they are differences rather than mistakes.
+
+Applied to the display title only. ``Itinerary.name`` keeps the operator's
+text verbatim because the id is built from it and ``itinerary_key`` matches
+the per-trip book on it, so correcting a name would silently re-key the trips
+it corrected -- and what the operator published is, after all, the identity.
+"""
+
+
+def _fix_title_errors(title: str) -> str:
+    """Correct what is wrong in a title, never what is merely different."""
+    for pattern, replacement in TITLE_FIXES:
+        title = pattern.sub(replacement, title)
+    return title
+
+
+REEF_ALIASES = (
+    # St John's, six ways: "St. John's" (19), "St. Johns" (13), "St Johns"
+    # (6), "St John's" (4), "Saint John's" (3), "St. John" (2). The saint sorts
+    # in six places and matches in one. Folded onto the plurality spelling,
+    # which is also the one carrying both the stop and the apostrophe -- and
+    # TITLE_FIXES has already settled the apostrophe's character, so this sees
+    # only "'".
+    (re.compile(r"\b(?:St\.?|Saint)\s+John(?:'s|s)?\b", re.I), "St. John's"),
+    # Brothers, five ways: "Brothers" (109), "Brother Islands" (5), "Brothers
+    # Islands" (5), "Brother" (1), "Brothers Island" (1). The optional plural
+    # comes before the optional "Islands" rather than beside it -- written as
+    # an alternation, "s" wins on "Brothers Islands" and leaves the second word
+    # stranded. Same shape as BDE's own brother clause, for the same reason.
+    # Guarded against "Big Brother" and "Little Brother", which name the two
+    # islands separately: neither appears in the fleet today, and folding one
+    # of them into the pair would delete which island the trip dives.
+    (
+        re.compile(r"\b(?<!Big )(?<!Little )Brother(?:s)?(?:\s+Islands?)?\b", re.I),
+        "Brothers",
+    ),
+    # Fury Shoals, two ways: "Fury Shoals" (17), "Fury Shoal" (12) -- the
+    # narrowest split in the fleet and the one least likely to mean anything.
+    (re.compile(r"\bFury\s+Shoals?\b", re.I), "Fury Shoals"),
+    # Ras Mohammed, three ways: "Ras Mohamed" (15), "Ras Mohammed" (6) and
+    # "Ras Muhammad" (2). All three are real transliterations of the Arabic,
+    # so none is a misspelling and this belongs here rather than in
+    # TITLE_FIXES.
+    #
+    # What settles it is that SITE_HINTS already calls the reef "ras mohammed"
+    # and folds the rest onto it, so every filter chip says that -- and a title
+    # column printing "Ras Mohamed" beside a chip reading "ras mohammed" is one
+    # page disagreeing with itself. Not, as an earlier version of this comment
+    # claimed, that the parsed sites "say ras mohammed 101 times out of 101":
+    # they do, but only because the alias table put it there. That count is
+    # this project's own choice reflected back, not evidence from the
+    # operators. The title plurality (15 to 6) points the other way and is
+    # overruled by the need for the two to agree.
+    (re.compile(r"\bRas\s+M[ou]h?a?mm?[ae]d\b", re.I), "Ras Mohammed"),
+)
+"""One spelling for the three reefs the fleet writes several ways.
+
+Not mistakes, unlike :data:`TITLE_FIXES` -- "Fury Shoal" and "Brother Islands"
+are what those operators call those reefs. They are folded anyway, for the
+reason ``BDE`` folds one route: a visitor comparing two rows has to work out
+that the reefs are the same reef before they can compare the prices beside
+them, and the titles sit in the widest column on the page.
+
+Each replacement is **a spelling an operator actually used** -- the plurality
+of them -- never one invented to be consistent. Chosen by count rather than by
+taste, so the table can be re-derived from the data rather than argued about.
+
+Three reefs, listed, and nothing generalised. The same restraint as the
+``BDE`` note: separators and word order stay the operators' own, and no rule
+here rewrites a title it was not written for. The ``Brother`` guard is the
+shape of the risk -- a reef name that is a prefix of a different reef name.
+Display title only, for the reason given on :data:`TITLE_FIXES`.
+"""
+
+
+def _fold_reef_names(title: str) -> str:
+    """One spelling per reef, chosen from the spellings the fleet used."""
+    for pattern, replacement in REEF_ALIASES:
+        title = pattern.sub(replacement, title)
+    return title
+
+
+LIST_SEPARATOR = re.compile(r"\s*(?:,|&|\+|\||-|\band\b)\s*", re.I)
+"""What operators put between the stops of a route: , & + | - and."""
+
+LIST_WORDS = ("north", "south", "deep south", "wrecks", "wreck", "reefs",
+              "reef", "north reefs", "north reef", "north wrecks")
+"""Words that stand in for a place in a route list without being a reef.
+
+"North & Brothers" is a list of two stops, and the first is a direction. They
+are listed here rather than added to ``SITE_HINTS`` because they are not dive
+sites and must not become filter chips -- this table decides only whether a
+title is a list, never what the trip dives.
+"""
+
+
+def _is_place_list(title: str) -> bool:
+    """Whether a title is nothing but stops and the punctuation between them.
+
+    The boundary for house separators, and the reason they are safe to apply.
+    "Daedalus - Rocky - Zabargad" is a list whose dashes are separators;
+    "Dancing with Dolphins - Dolphin Liveaboard Safari" is a sentence whose
+    dash is not, and "Best of Dahab and Tiran" is English rather than two
+    stops joined by "and". Rewriting either would be editing prose.
+
+    Every part has to be something the dataset already recognises, so the test
+    is the site vocabulary the rest of promote reads titles with rather than a
+    second list that could drift from it.
+    """
+    parts = [p.strip() for p in LIST_SEPARATOR.split(title) if p.strip()]
+    if len(parts) < 2:
+        return False
+    known = {normalise(h) for h in SITE_HINTS}
+    known |= {normalise(a) for a in SITE_ALIASES}
+    known |= {normalise(w) for w in LIST_WORDS}
+    return all(normalise(p) in known for p in parts)
+
+
+def _house_separators(title: str) -> str:
+    """Commas, then an ampersand before the last -- on route lists only.
+
+    Order is left exactly as the operator wrote it. Two titles naming the same
+    reefs in a different sequence stay two titles: nothing here can verify the
+    order means something, and nothing here may assume it means nothing.
+
+    So this folds "North - Brothers", "North and Brothers" and "North &
+    Brothers" onto one, and leaves "Daedalus & St. John's" and "St. John's &
+    Daedalus" as the two different sentences their operators wrote.
+    """
+    if not _is_place_list(title):
+        return title
+    parts = [p.strip() for p in LIST_SEPARATOR.split(title) if p.strip()]
+    return f"{', '.join(parts[:-1])} & {parts[-1]}"
+
+
 def _settle_title_case(itineraries: list[dict[str, Any]]) -> None:
     """One spelling per title, where the only difference is capitalisation.
 
@@ -305,7 +493,10 @@ def _display_title(name: str) -> str:
     stripped, _, ports = _split_title(name)
     if ports is not None:
         stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
-    return BDE_TITLE if BDE.match(stripped) else stripped
+    stripped = _fold_reef_names(_fix_title_errors(stripped))
+    if BDE.match(stripped):
+        return BDE_TITLE
+    return _house_separators(stripped)
 
 
 GUESTS = (
@@ -906,7 +1097,7 @@ def _most_common(values) -> int:
 
 SITE_HINTS = (
     "brothers", "daedalus", "elphinstone", "thistlegorm", "abu nuhas",
-    "rocky island", "zabargad", "st johns", "st john's", "fury shoal",
+    "rocky island", "zabargad", "st johns", "st john's", "fury shoals",
     "sataya", "ras mohammed", "tiran", "salem express", "rosalie moller",
     "gubal", "abu dabab", "samadai", "habili ali", "dangerous reef",
     "gota kebir",
@@ -945,9 +1136,12 @@ SITE_ALIASES: dict[str, str] = {
     "rocky": "rocky island",
     "st john": "st johns",
     "saint johns": "st johns",
-    # Plurals. The match is on whole words, so "Fury Shoals" misses a hint
-    # spelled "fury shoal" -- and the plural is what most titles use.
-    "fury shoals": "fury shoal",
+    # Plurals. The match is on whole words, so one spelling misses a hint
+    # written as the other. The plural is canonical because it is what the
+    # operators mostly write -- 17 names against 12 -- and because the title
+    # column and the filter chip have to agree: printing "Fury Shoals" beside
+    # a chip reading "fury shoal" is the mismatch this folding exists to end.
+    "fury shoal": "fury shoals",
     "brother islands": "brothers",
     "brother island": "brothers",
     # The individual reefs in the Straits of Tiran, and the signature dive at
@@ -1025,17 +1219,17 @@ SITE_ALIASES: dict[str, str] = {
     # A typo in the operator's own day plan, on three trips.
     "gota abu ramad": "gota abu ramada",
     # The Fury Shoals, reef by reef.
-    "shaab maksur": "fury shoal",
-    "shaab claudio": "fury shoal",
-    "shaab claudia": "fury shoal",
-    "abu galawa": "fury shoal",
-    "gotat abu galawa": "fury shoal",
-    "shaab hamam": "fury shoal",
-    "el malahi": "fury shoal",
-    "malahi": "fury shoal",
-    "shilineat": "fury shoal",
-    "abu fendera": "fury shoal",
-    "abu fandira": "fury shoal",
+    "shaab maksur": "fury shoals",
+    "shaab claudio": "fury shoals",
+    "shaab claudia": "fury shoals",
+    "abu galawa": "fury shoals",
+    "gotat abu galawa": "fury shoals",
+    "shaab hamam": "fury shoals",
+    "el malahi": "fury shoals",
+    "malahi": "fury shoals",
+    "shilineat": "fury shoals",
+    "abu fendera": "fury shoals",
+    "abu fandira": "fury shoals",
     # St John's, reef by reef.
     "umm aruk": "st johns",
     "cave reef": "st johns",

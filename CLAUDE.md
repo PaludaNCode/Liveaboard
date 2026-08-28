@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 482 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 510 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -93,7 +93,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
-  Only `title` is ever tidied, and it is tidied in exactly two ways.
+  Only `title` is ever tidied, and it is tidied in exactly five ways.
   **One route, not a house style.** `BDE`/`BDE_TITLE` fold the seven spellings
   of Brothers/Daedalus/Elphinstone onto one; the pattern is anchored at both
   ends, so *Marine Park North: Brothers - Daedalus & Elphinstone* and
@@ -101,12 +101,55 @@ Break these and the site starts lying quietly rather than failing loudly.
   differ the same way and are deliberately left as their operators wrote them —
   do not generalise this into a rule that rewrites every title, and never
   reorder words: nothing here can verify the order means something, and nothing
-  may assume it means nothing. **Case only, otherwise.**
+  may assume it means nothing — *St. John's & Daedalus* and *Daedalus & St.
+  John's* stay two titles. **House separators, on route lists only.**
+  `_house_separators` prints a list of stops as commas then `&` before the
+  last, so *North - Brothers*, *North and Brothers* and *North & Brothers*
+  print once. It fires only where `_is_place_list` holds — every part between
+  the separators is something `SITE_HINTS`/`SITE_ALIASES` already recognises —
+  because *Dancing with Dolphins - Dolphin Liveaboard Safari* is a sentence
+  whose dash is not a separator and *Best of Dahab and Tiran* is English.
+  Reuse that vocabulary rather than writing a second one: a copy drifts, and
+  the day it drifts is the day the site starts repunctuating prose.
+  **Case only, otherwise.**
   `_settle_title_case` picks one spelling where titles differ *only* by
   capitalisation, and always one the operator actually used — never title-cased
   into a spelling nobody wrote, because the fleet is full of names a casing
   rule would ruin (*MY Odyssey*, *St. John's*, *SS Turkia*). Ties break
   alphabetically: `promote` is pure and CI compares its output byte for byte.
+  `TITLE_FIXES` corrects what is *wrong* rather than what is merely different —
+  zero-width spaces, three characters doing one apostrophe's job, a dash with
+  a space on one side only, the two misspellings of Daedalus and the one each
+  of Zabargad and Gubal, listed the way
+  `PORT_ALIASES` lists harbours because a near-miss rule that catches those
+  also catches a reef that only looks like another. A misspelling goes in the
+  table only where the trip's own `dive_sites`, parsed from the operator's
+  description, already name the reef correctly — the dataset confirming the
+  reef independently of its title is what separates a correction from a guess.
+  *Gobal* is the single exception and is commented as one: its trip names no
+  Gubal at all, so the warrant is the fleet's instead — 46 parsed *gubal*
+  against one *gobal* — a weaker warrant taken deliberately, and only at that
+  margin. **Four reefs, not every reef.** `REEF_ALIASES` folds the
+  five spellings of *St. John's*, the three of *Brothers*, the two of *Fury
+  Shoals* and the three of *Ras Mohammed* onto one each — differences rather than mistakes, folded for the
+  reason `BDE` folds one route: the reader should not have to work out that the
+  reef is the same reef before comparing the prices beside it. Each replacement
+  is the *plurality* of what the fleet wrote, never a spelling invented to be
+  consistent, so the table re-derives from the data instead of from taste. The
+  guard on `Brother` is the shape of the risk — *Big Brother* and *Little
+  Brother* name the two islands separately, and folding either into the pair
+  would delete which island the trip dives. *Ras Mohamed*/*Ras Mohammed*/*Ras
+  Muhammad* are all real transliterations and none is wrong, so this is a fold
+  and not a correction. **What picks a spelling is `SITE_HINTS`, not a count of
+  the data.** The parsed `dive_sites` agree unanimously on any reef only
+  because the alias table folds them there — quoting that agreement as evidence
+  is this project's own choice reflected back at itself, and an earlier version
+  of this note made exactly that mistake. The real reason to fold a title is
+  that the trip-name column and the filter chip beside it must not disagree,
+  which is also why `SITE_HINTS` and the title tables have to move together:
+  *Fury Shoals* was changed in both when the two drifted apart. Do not lengthen this
+  table without counting the spellings first, and count in the *names* rather
+  than the titles: counting folded titles hid *Ras Muhammad* entirely.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
