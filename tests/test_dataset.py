@@ -456,3 +456,53 @@ class TestDefaultDataset(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
+    """The listing link under a row must open that row's listing.
+
+    The Source column used the *itinerary's* `source_url`, which is the vessel
+    page at whichever month the crawl was reading when it found the boat -- 310
+    of 315 itineraries point at August. So every row used one month's listing:
+    881 of 881 departures linked to the wrong one, and a visitor checking a May
+    price landed on the August page and saw a different number.
+    """
+
+    LIVE = ROOT / "data" / "egypt-2027.json"
+
+    def test_the_column_prefers_the_departure_over_the_vessel_page(self):
+        """Asserted on the built page, because this is a choice app.js makes.
+
+        The same shape as the `lineCounts` check above: a rule that lives in
+        the JS and has no Python to test, so the guard is that the built page
+        still contains it.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            html = render(Dataset.load(SEED), tmp).read_text(encoding="utf-8")
+        self.assertIn("d.booking_url || i.source_url", html)
+
+    def test_every_linked_departure_names_its_own_month(self):
+        """`?m=05/2027` on a May sailing.
+
+        Run against the committed dataset rather than the seed: the seed
+        publishes no booking urls, and this is a property of what the scrape
+        collected. Both spellings occur in the wild -- `m=5/2027` from a vessel
+        page, `m=05/2027` from a departure -- so the comparison is on the
+        number, not the text.
+        """
+        if not self.LIVE.exists():
+            self.skipTest("no scraped dataset in this checkout")
+        payload = build_payload(Dataset.load(self.LIVE))
+        checked = 0
+        for departure in payload["departures"]:
+            url = departure.get("booking_url") or ""
+            match = re.search(r"[?&]m=(\d{1,2})/(\d{4})", url)
+            if not match:
+                continue
+            checked += 1
+            self.assertEqual(
+                (int(match.group(2)), int(match.group(1))),
+                (int(departure["start"][:4]), int(departure["start"][5:7])),
+                f"{departure['id']} departs {departure['start']} and links to {url}",
+            )
+        self.assertTrue(checked, "no booking_url carried a month to check")

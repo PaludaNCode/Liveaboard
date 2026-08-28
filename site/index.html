@@ -1088,10 +1088,25 @@ a { color:var(--accent); }
         var s = disclosure(d);
         return '<span class="pill ' + s[0] + '">' + s[1] + "</span>";
       } },
-    { k: "source", t: "Source", v: function (d, i) { return i.source_url || ""; },
+    /* The listing for *this departure*, not for its boat.
+     *
+     * The itinerary's `source_url` is the vessel page at whichever month the
+     * crawl happened to be reading when it found the boat -- 310 of 315 point
+     * at August. Every row used it, so the link under a May departure opened
+     * the August listing: 881 of 881 departures pointed at the wrong month,
+     * and a visitor checking a May price landed on a page showing a different
+     * number.
+     *
+     * The departure carries its own url, with its own month, because that is
+     * what the source published beside that sailing's price. That is the one
+     * to follow: somebody clicking through from a row is checking that row.
+     * The vessel page stays as the fallback for a departure that has none. */
+    { k: "source", t: "Source",
+      v: function (d, i) { return d.booking_url || i.source_url || ""; },
       show: function (d, i) {
-        return i.source_url
-          ? '<a href="' + esc(i.source_url) + '" target="_blank" rel="noopener">listing ↗</a>'
+        var url = d.booking_url || i.source_url;
+        return url
+          ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">listing ↗</a>'
           : '<span class="dim">—</span>';
       } }
   ];
