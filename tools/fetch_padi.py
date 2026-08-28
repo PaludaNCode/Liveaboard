@@ -39,6 +39,7 @@ import argparse
 import json
 import sys
 import time
+import http.client
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -64,7 +65,11 @@ def get(url: str, timeout: int = 40) -> dict | None:
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
             return json.loads(r.read())
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError,
+            http.client.HTTPException, ConnectionError, json.JSONDecodeError):
+        # http.client.RemoteDisconnected is not a URLError and killed a run at
+        # boat 34 of 38, after 13 MB of responses were already on disk. One
+        # dropped connection must cost the itinerary, not the run.
         return None
 
 
