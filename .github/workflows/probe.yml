@@ -38,6 +38,10 @@ on:
         description: "PADI endpoints to call (0 reads the bundles without calling)"
         type: string
         default: "24"
+      padi_only_base:
+        description: "Print only where PADI's API client gets its base URL"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -89,6 +93,7 @@ jobs:
           python3 tools/probe_padi_bundle.py \
             --vessel "${{ inputs.padi_vessel || 'hammerhead-ii' }}" \
             --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
+            ${{ inputs.padi_only_base && '--only-base' || '' }} \
             ${{ inputs.padi_dump_context && '--dump-context' || '' }}
 
   # Separate job: the gear modal is built client-side, so this one needs a

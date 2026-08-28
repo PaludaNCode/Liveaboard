@@ -177,6 +177,10 @@ def main() -> int:
                         help="print the JS around each interesting literal")
     parser.add_argument("--max-candidates", type=int, default=24,
                         help="0 to read the bundles without calling anything")
+    parser.add_argument("--only-base", action="store_true",
+                        help="print only the base-URL hunt. A runner log is read "
+                             "through an API that truncates from the front, so a "
+                             "full pass hides the section worth reading.")
     parser.add_argument("--include-vendors", action="store_true",
                         help="also read vendors.js (third-party, multi-megabyte)")
     args = parser.parse_args()
@@ -247,6 +251,8 @@ def main() -> int:
     call_sites: set[str] = set()
     itinerary_words: set[str] = set()
 
+    if args.only_base:
+        bundles = bundles[:1]
     for url in bundles:
         status, content_type, body = get(url)
         name = url.rsplit("/", 1)[-1]
@@ -258,26 +264,30 @@ def main() -> int:
 
         found = {m.group("name"): m.group("path") for m in ROUTE_ENTRY.finditer(body)}
         routes.update(found)
-        print(f"  route-table entries: {len(found)}")
+        if not args.only_base:
+            print(f"  route-table entries: {len(found)}")
 
         calls = {m.group("url") for m in CALL_SITE.finditer(body) if m.group("url").startswith("/")}
         call_sites |= calls
-        print(f"  call sites with a literal path: {len(calls)}")
-        for path in sorted(calls):
-            print(f"    {path}")
+        if not args.only_base:
+            print(f"  call sites with a literal path: {len(calls)}")
+            for path in sorted(calls):
+                print(f"    {path}")
 
         api_paths = {m.group("path") for m in API_PATH.finditer(body)}
         if api_paths:
-            print(f"  relative API paths: {len(api_paths)}")
-            for path in sorted(api_paths):
-                print(f"    {path}")
             relative_paths.update(api_paths)
+            if not args.only_base:
+                print(f"  relative API paths: {len(api_paths)}")
+                for path in sorted(api_paths):
+                    print(f"    {path}")
 
         words = {m.group("value") for m in ITINERARY_LITERAL.finditer(body)}
         itinerary_words |= words
-        print(f"  literals mentioning an itinerary: {len(words)}")
-        for value in sorted(words)[:40]:
-            print(f"    {value!r}")
+        if not args.only_base:
+            print(f"  literals mentioning an itinerary: {len(words)}")
+            for value in sorted(words)[:40]:
+                print(f"    {value!r}")
 
         joins = {(m.group(1), m.group(2)) for m in CONCAT.finditer(body)
                  if INTERESTING.search(m.group(1))}
@@ -309,6 +319,9 @@ def main() -> int:
             for index in positions:
                 window = body[max(0, index - before):index + after].replace("\n", " ")
                 print(f"    ...{window}...")
+
+    if args.only_base:
+        return 0
 
     print("\n--- the app's whole route table ---")
     for name, path in sorted(routes.items(), key=lambda kv: kv[1]):
