@@ -153,12 +153,19 @@ def main() -> int:
               const out = [];
               const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
               const seen = new Set();
+              const SKIP = new Set(['SCRIPT','STYLE','OPTION','SELECT','NOSCRIPT']);
               while (walk.nextNode()) {
                 const t = walk.currentNode.nodeValue || '';
                 if (!/20\\d\\d/.test(t)) continue;
                 let el = walk.currentNode.parentElement;
+                // The embedded JSON-LD and the month <select> both carry dates
+                // and prices and are not departure rows. The first content
+                // pass matched them and reported their prose as a berth count.
+                if (el && el.closest('script,style,select,noscript')) continue;
+                if (el && !el.offsetParent) continue;
                 for (let i = 0; el && i < 8; i++, el = el.parentElement) {
                   const txt = el.innerText || '';
+                  if (SKIP.has(el.tagName)) break;
                   if (/20\\d\\d/.test(txt) && /(US\\$|€|£|\\d[\\d,]{3,})/.test(txt)) {
                     if (!seen.has(el)) { seen.add(el); out.push({
                       tag: el.tagName.toLowerCase(),
