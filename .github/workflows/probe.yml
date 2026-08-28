@@ -26,6 +26,10 @@ on:
         description: "Print the modal's markup, not just its text"
         type: boolean
         default: false
+      unread_retries:
+        description: "Fetches per unreadable page, to tell transient from persistent"
+        type: string
+        default: "2"
 
 permissions:
   contents: read
@@ -57,6 +61,16 @@ jobs:
       # so it is read before anything is written against it.
       - name: Read the Route block nothing has parsed
         run: python3 tools/probe_itinerary_route.py --boats 6
+
+      # The pages the last crawl could not read at all. Fourteen of them on
+      # 2026-08-28, and publishing their absence deleted 49 real, bookable
+      # sailings. carry_unread stops the site lying about them; this settles
+      # what to actually do -- retry, markup parser, or neither -- by reading
+      # what the pages return rather than guessing at it.
+      - name: Re-read the pages the crawl could not
+        run: |
+          python3 tools/probe_unread.py \
+            --retries "${{ inputs.unread_retries || 2 }}"
 
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
