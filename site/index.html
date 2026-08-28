@@ -16,10 +16,10 @@
 
 :root {
   --ground:#f7f8fa; --panel:#ffffff; --rule:#dde3ec; --rule-strong:#c3ccd9;
-  --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#8a94a3;
+  --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#66707c;
   --accent:#0d5c8c; --accent-soft:#e4eef6;
   --later:#a8500f; --later-soft:#fbeee2;
-  --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481;
+  --ok:#1f6b45; --warn:#8a6410; --unknown:#6c7481; --sold:#9c3535;
   --row-alt:#fbfcfd; --row-hover:#eef4f9;
 
   /* Width of the sticky date column, and therefore the left offset of the
@@ -57,19 +57,19 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
-    --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#6b7788;
+    --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
     --accent:#63b3e3; --accent-soft:#152a3a;
     --later:#e8a86a; --later-soft:#2e2015;
-    --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798;
+    --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
     --row-alt:#111820; --row-hover:#1b2531;
   }
 }
 :root[data-theme="dark"] {
   --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
-  --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#6b7788;
+  --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
   --accent:#63b3e3; --accent-soft:#152a3a;
   --later:#e8a86a; --later-soft:#2e2015;
-  --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798;
+  --ok:#6cc394; --warn:#d6ad55; --unknown:#7d8798; --sold:#e08379;
   --row-alt:#111820; --row-hover:#1b2531;
 }
 
@@ -149,8 +149,15 @@ button.chip[aria-pressed="true"] {
   font:inherit; font-size:11px; background:none; border:0; cursor:pointer;
   color:var(--accent); text-decoration:underline; padding:0;
 }
-button:focus-visible, input:focus-visible, a:focus-visible, th:focus-visible {
+button:focus-visible, input:focus-visible, a:focus-visible {
   outline:2px solid var(--accent); outline-offset:1px;
+}
+/* Inset and lifted. A sticky header sits at the very top of its scroll box, so
+   an outset ring is clipped by `.shell`'s own overflow; and at equal z-index
+   the next header's opaque background paints over the right edge. The ring was
+   rendering as an L. */
+th:focus-visible {
+  outline:2px solid var(--accent); outline-offset:-2px; z-index:30;
 }
 input[type="number"] {
   font:inherit; font-size:12px; padding:3px 6px; border-radius:2px; width:56px;
@@ -210,9 +217,9 @@ tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-s
    figure's space, not in a line of its own. */
 tbody td.cost { position:relative; }
 .anchor {
-  position:absolute; right:9px; bottom:3px;
-  height:3px; min-width:14px;
-  border-radius:2px; overflow:hidden; background:var(--rule);
+  position:absolute; right:9px; top:22px;
+  height:3px; min-width:3px;
+  border-radius:2px; overflow:hidden;
 }
 .anchor i { display:block; height:100%; float:left; }
 .anchor .was { background:var(--accent); opacity:.65; }
@@ -233,6 +240,24 @@ tbody tr.row:hover { background:var(--row-hover); }
 tbody tr.row.alt .stick, tbody tr.row.alt .stick2 { background:var(--row-alt); }
 tbody tr.row:hover .stick, tbody tr.row:hover .stick2 { background:var(--row-hover); }
 thead th.stick, thead th.stick2 { z-index:25; }
+
+/* The control that opens the bill, pinned to the right edge at every width.
+   Left at the end of the row it was the last column of a table 2446px wide, so
+   clicking it scrolled the table sideways to reach it -- and the fee panel,
+   which starts at the left edge of a detail cell that wide, went off screen
+   entirely. You pressed + and got an empty band. */
+td.expander, th.expander {
+  position:sticky; right:0; z-index:10; background:var(--panel);
+  border-left:1px solid var(--rule-strong);
+}
+thead th.expander { z-index:25; }
+tbody tr.row.alt .expander { background:var(--row-alt); }
+tbody tr.row:hover .expander { background:var(--row-hover); }
+
+/* And the bill itself stays put while the table scrolls under it. The detail
+   cell spans the full 2446px, so its contents would otherwise sit wherever the
+   horizontal scroll left them. */
+tr.detail td > * { position:sticky; left:0; }
 
 /* The boat's name, pinned beside the date.
  *
@@ -280,9 +305,36 @@ thead th.stick, thead th.stick2 { z-index:25; }
 .pill.none { color:var(--unknown); }
 .pill.open { color:var(--ok); }
 .pill.few { color:var(--warn); }
-.pill.gone { color:var(--unknown); background:var(--rule); border-color:transparent; }
+/* A border rather than a fill, in a colour of its own: this is the row's whole
+   point and it was arriving at 1.9:1 on a `--rule` fill. */
+.pill.gone { color:var(--sold); background:transparent; border-color:var(--sold); }
+tbody tr.row.gone .pill.gone { color:var(--sold); }
 /* A sold-out row stays legible but stops competing for attention. */
-tbody tr.row.gone td:not(.stick) { opacity:.55; }
+/* Sold out: told by colour, not by transparency.
+ *
+ * This was `opacity:.55` on every cell but the first, and opacity was the
+ * wrong instrument twice over. It paints an element's *background*
+ * translucently too, so the sticky columns let every column sliding underneath
+ * print straight through them -- three overlapping texts in one cell on 127 of
+ * 882 rows, once `.stick2` and the pinned expander joined `.stick` and were
+ * not added to the exclusion. And it applies to a subtree as a group, so a
+ * child cannot opt out: "SOLD OUT" arrived at 1.9:1 against its own background
+ * and stayed at 3.8:1 even after its colour was fixed, because the cell around
+ * it was still at .72.
+ *
+ * Dropping the accent, the ochre and the green instead says the same thing --
+ * this row is not one of the ones you are choosing between -- while leaving
+ * every figure in it fully legible, which matters because its price is still
+ * a real data point about the fleet. */
+tbody tr.row.gone td { color:var(--ink-dim); }
+tbody tr.row.gone .cost b,
+tbody tr.row.gone .later,
+tbody tr.row.gone .inc,
+tbody tr.row.gone .region,
+tbody tr.row.gone .plus,
+tbody tr.row.gone .dim { color:var(--ink-dim); }
+tbody tr.row.gone .anchor .was { background:var(--ink-faint); }
+tbody tr.row.gone .anchor .add { background:var(--ink-faint); opacity:.5; }
 
 .expand {
   background:none; border:0; color:var(--ink-faint); cursor:pointer;
@@ -372,6 +424,7 @@ a { color:var(--accent); }
     padding:9px 12px; cursor:pointer;
   }
   .filters-toggle::after { content:" ▸"; color:var(--accent); }
+  .filters-toggle.active { color:var(--accent); }
   body.filters-open .filters-toggle::after { content:" ▾"; }
   .filterbar { display:none; }
   body.filters-open .filterbar { display:flex; }
@@ -396,22 +449,16 @@ a { color:var(--accent); }
   input[type="search"] { min-width:0; width:100%; }
   .tgroup:has(input[type="search"]) { flex:1 1 100%; }
   .filters-toggle { padding:9px 12px; }
+  /* Bounded, and scrolls inside itself: three banks unfolded filled a phone
+     screen and left exactly one row of prices under them. */
+  body.filters-open .filterbar { max-height:34vh; overflow-y:auto; }
 
   /* Two pinned columns still name every row, but narrower: at 390px they were
      taking 214px and leaving 176 for the numbers. */
   :root { --stick-w:76px; }
   .stick2 { min-width:104px; max-width:104px; }
 
-  /* Pinned to the right edge rather than left at the end of a table 2400px
-     wide: the control that opens the bill was reachable only by scrolling
-     past every column, on the screen where scrolling costs the most. */
-  td.expander, th.expander {
-    position:sticky; right:0; z-index:10; background:var(--panel);
-    border-left:1px solid var(--rule-strong); padding:4px 6px;
-  }
-  thead th.expander { z-index:25; }
-  tbody tr.row.alt .expander { background:var(--row-alt); }
-  tbody tr.row:hover .expander { background:var(--row-hover); }
+  td.expander, th.expander { padding:4px 6px; }
   tbody td, thead th { padding:6px 7px; }
   /* One line each, ellipsised, on this screen only. Both columns sit behind
      the horizontal scroll here, yet their wrapping still set the height of
@@ -424,6 +471,9 @@ a { color:var(--accent); }
   }
   /* Comfortably tappable without making the row taller than it has to be. */
   .expand { min-width:26px; min-height:26px; }
+  /* Cell padding is 7px here, not 9, and the bar has to end where the number
+     above it ends. */
+  .anchor { right:7px; }
   .site-footer { max-height:60vh; }
 }
 </style>
@@ -480,9 +530,8 @@ a { color:var(--accent); }
      left over — so they pushed every price off the bottom and the page opened
      on nothing but filters. Folded away by default there; untouched on a
      laptop, where they fit. -->
-<button type="button" class="filters-toggle" id="filtersToggle" aria-expanded="false">
-  Filter by port, site or operator
-</button>
+<button type="button" class="filters-toggle" id="filtersToggle"
+        aria-expanded="false" aria-controls="ports sites operators">Filter by port, site or operator</button>
 
 <div class="filterbar">
   <span class="tlabel">Departs from</span>
@@ -768,6 +817,17 @@ a { color:var(--accent); }
      compare the trips being looked at, not a fleet maximum that filtering has
      already excluded. */
   var barMax = 0;
+
+  /* The bar's full length, in pixels, for the dearest trip on screen. Fixed so
+     the bar is measured against the column it is printed in. */
+  var BAR_TRACK = 68;
+
+  /* Where the total is a range, the bar is drawn from its low end -- the same
+     figure Lands later is worked out from. Said out loud, because a graphic
+     that answers a narrower question than the number above it should not do so
+     silently. */
+  var BAR_TITLE = "Advertised, then what lands later. Scaled against the " +
+    "dearest trip shown; drawn from the low end where the total is a range.";
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
@@ -877,8 +937,16 @@ a { color:var(--accent); }
         var bar = "";
         if (barMax > 0 && m.total > 0) {
           var advertised = Math.max(0, Math.min(100, (d.base / m.total) * 100));
-          bar = '<span class="anchor" style="width:' +
-            ((m.total / barMax) * 100).toFixed(1) + '%">' +
+          /* Sized in pixels against a fixed track rather than as a percentage
+             of the cell. A percentage width on an absolutely positioned box
+             resolves against the containing block's padding box, but this box
+             is inset from it by `right`, so a full-length bar came out wider
+             than the space it sits in and hung across the one vertical rule in
+             the table -- 14 of 50 rows once a filter brought more totals near
+             the maximum. A track in px cannot do that, and it also means every
+             bar is drawn on the axis it is read against. */
+          bar = '<span class="anchor" title="' + BAR_TITLE + '" style="width:' +
+            ((m.total / barMax) * BAR_TRACK).toFixed(1) + 'px">' +
             '<i class="was" style="width:' + advertised.toFixed(1) + '%"></i>' +
             '<i class="add" style="width:' + (100 - advertised).toFixed(1) + '%"></i></span>';
         }
@@ -908,7 +976,7 @@ a { color:var(--accent); }
            a ceiling: a week with less steaming fits more dives in and costs
            less each. Erring this way on purpose — the other direction would
            flatter every trip. */
-        return '<b>' + eur(m.total / i.dives) + "</b>" +
+        return '<b>' + eur(m.total / i.dives) + "</b> " +
                '<span class="dim" title="' + i.dives + '+ dives — the fewest ' +
                'this operator states for the week. Boats that cross further, ' +
                'or spend longer in the parks where night dives are not ' +
@@ -1195,7 +1263,7 @@ a { color:var(--accent); }
           esc(it.label || it.id) + ' <span class="dim">' + it.n + "</span></button>";
       }).join("") +
         (hidden > 0 || expanded
-          ? '<button class="chip more" data-more="1">' +
+          ? '<button class="chip more" data-more="1" aria-expanded="' + expanded + '">' +
             (expanded ? "− fewer" : "+ " + hidden + " more") + "</button>"
           : "");
     }
@@ -1207,12 +1275,13 @@ a { color:var(--accent); }
       var v = numeric ? +button.dataset.v : button.dataset.v;
       if (picked.has(v)) picked.delete(v); else picked.add(v);
       button.setAttribute("aria-pressed", picked.has(v));
+      labelFilters();
       draw();
     });
 
     /* Reset clears the picked set directly, so the bank has to be repainted
        from it rather than left showing chips it is no longer holding. */
-    node.repaint = paint;
+    node.repaint = function () { expanded = false; paint(); };
     paint();
   }
 
@@ -1340,6 +1409,9 @@ a { color:var(--accent); }
     nmin.value = ""; nmax.value = "";
     D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (chip) {
+      /* The "more" control is a disclosure, not a filter -- writing
+         aria-pressed onto it would give it toggle semantics it does not have. */
+      if (chip.dataset.more) return;
       chip.setAttribute("aria-pressed",
         chip.dataset.t ? String(!!state.toggles[chip.dataset.t]) : "false");
     });
@@ -1351,6 +1423,7 @@ a { color:var(--accent); }
       var node = document.getElementById(id);
       if (node && node.repaint) node.repaint();
     });
+    labelFilters();
     draw();
   });
 
@@ -1360,11 +1433,25 @@ a { color:var(--accent); }
   if (narrow.addEventListener) narrow.addEventListener("change", onWidthChange);
   else if (narrow.addListener) narrow.addListener(onWidthChange);
 
+  /* The banks fold away from 1000px down, and a chosen filter folds away with
+     them: at 900px you could pick one operator, collapse the panel, and the
+     page would show 40 of 882 rows with nothing on screen saying why. The
+     label carries the count so the fold never hides the fact that something
+     is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
+  function labelFilters() {
+    var n = state.ports.size + state.sites.size + state.operators.size;
+    filtersToggle.textContent = n
+      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or operator"
+      : "Filter by port, site or operator";
+    filtersToggle.classList.toggle("active", n > 0);
+  }
   filtersToggle.addEventListener("click", function () {
     var open = document.body.classList.toggle("filters-open");
     filtersToggle.setAttribute("aria-expanded", String(open));
   });
+
+  labelFilters();
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +

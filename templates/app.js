@@ -118,6 +118,17 @@
      compare the trips being looked at, not a fleet maximum that filtering has
      already excluded. */
   var barMax = 0;
+
+  /* The bar's full length, in pixels, for the dearest trip on screen. Fixed so
+     the bar is measured against the column it is printed in. */
+  var BAR_TRACK = 68;
+
+  /* Where the total is a range, the bar is drawn from its low end -- the same
+     figure Lands later is worked out from. Said out loud, because a graphic
+     that answers a narrower question than the number above it should not do so
+     silently. */
+  var BAR_TITLE = "Advertised, then what lands later. Scaled against the " +
+    "dearest trip shown; drawn from the low end where the total is a range.";
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
@@ -227,8 +238,16 @@
         var bar = "";
         if (barMax > 0 && m.total > 0) {
           var advertised = Math.max(0, Math.min(100, (d.base / m.total) * 100));
-          bar = '<span class="anchor" style="width:' +
-            ((m.total / barMax) * 100).toFixed(1) + '%">' +
+          /* Sized in pixels against a fixed track rather than as a percentage
+             of the cell. A percentage width on an absolutely positioned box
+             resolves against the containing block's padding box, but this box
+             is inset from it by `right`, so a full-length bar came out wider
+             than the space it sits in and hung across the one vertical rule in
+             the table -- 14 of 50 rows once a filter brought more totals near
+             the maximum. A track in px cannot do that, and it also means every
+             bar is drawn on the axis it is read against. */
+          bar = '<span class="anchor" title="' + BAR_TITLE + '" style="width:' +
+            ((m.total / barMax) * BAR_TRACK).toFixed(1) + 'px">' +
             '<i class="was" style="width:' + advertised.toFixed(1) + '%"></i>' +
             '<i class="add" style="width:' + (100 - advertised).toFixed(1) + '%"></i></span>';
         }
@@ -258,7 +277,7 @@
            a ceiling: a week with less steaming fits more dives in and costs
            less each. Erring this way on purpose — the other direction would
            flatter every trip. */
-        return '<b>' + eur(m.total / i.dives) + "</b>" +
+        return '<b>' + eur(m.total / i.dives) + "</b> " +
                '<span class="dim" title="' + i.dives + '+ dives — the fewest ' +
                'this operator states for the week. Boats that cross further, ' +
                'or spend longer in the parks where night dives are not ' +
@@ -545,7 +564,7 @@
           esc(it.label || it.id) + ' <span class="dim">' + it.n + "</span></button>";
       }).join("") +
         (hidden > 0 || expanded
-          ? '<button class="chip more" data-more="1">' +
+          ? '<button class="chip more" data-more="1" aria-expanded="' + expanded + '">' +
             (expanded ? "− fewer" : "+ " + hidden + " more") + "</button>"
           : "");
     }
@@ -557,12 +576,13 @@
       var v = numeric ? +button.dataset.v : button.dataset.v;
       if (picked.has(v)) picked.delete(v); else picked.add(v);
       button.setAttribute("aria-pressed", picked.has(v));
+      labelFilters();
       draw();
     });
 
     /* Reset clears the picked set directly, so the bank has to be repainted
        from it rather than left showing chips it is no longer holding. */
-    node.repaint = paint;
+    node.repaint = function () { expanded = false; paint(); };
     paint();
   }
 
@@ -690,6 +710,9 @@
     nmin.value = ""; nmax.value = "";
     D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (chip) {
+      /* The "more" control is a disclosure, not a filter -- writing
+         aria-pressed onto it would give it toggle semantics it does not have. */
+      if (chip.dataset.more) return;
       chip.setAttribute("aria-pressed",
         chip.dataset.t ? String(!!state.toggles[chip.dataset.t]) : "false");
     });
@@ -701,6 +724,7 @@
       var node = document.getElementById(id);
       if (node && node.repaint) node.repaint();
     });
+    labelFilters();
     draw();
   });
 
@@ -710,11 +734,25 @@
   if (narrow.addEventListener) narrow.addEventListener("change", onWidthChange);
   else if (narrow.addListener) narrow.addListener(onWidthChange);
 
+  /* The banks fold away from 1000px down, and a chosen filter folds away with
+     them: at 900px you could pick one operator, collapse the panel, and the
+     page would show 40 of 882 rows with nothing on screen saying why. The
+     label carries the count so the fold never hides the fact that something
+     is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
+  function labelFilters() {
+    var n = state.ports.size + state.sites.size + state.operators.size;
+    filtersToggle.textContent = n
+      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or operator"
+      : "Filter by port, site or operator";
+    filtersToggle.classList.toggle("active", n > 0);
+  }
   filtersToggle.addEventListener("click", function () {
     var open = document.body.classList.toggle("filters-open");
     filtersToggle.setAttribute("aria-expanded", String(open));
   });
+
+  labelFilters();
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
