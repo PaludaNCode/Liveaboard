@@ -1541,3 +1541,63 @@ class TestOneSpellingWhereOnlyTheCaseDiffers(unittest.TestCase):
         data = self._promote("North & Tiran", "North & Dahab")
         self.assertEqual({i["title"] for i in data["itineraries"]},
                          {"North & Tiran", "North & Dahab"})
+
+
+class TestErrorsInATitleAreCorrected(unittest.TestCase):
+    """Errors, as opposed to a style we happen not to share.
+
+    That distinction is the whole point: separators, word order and the
+    fleet's several spellings of a reef are the operators' own and are left
+    alone. These are things nobody intended.
+    """
+
+    def title(self, name):
+        from liveaboard.promote import _display_title
+
+        return _display_title(name)
+
+    def test_zero_width_spaces_are_removed(self):
+        """Invisible on the page and not invisible to anything else: they
+        defeat a search for the words either side."""
+        self.assertEqual(self.title("Red Sea Charm​: Abu Nuhas"),
+                         "Red Sea Charm: Abu Nuhas")
+        self.assertEqual(self.title("Sataya​​ (Fury Shoals)"),
+                         "Sataya (Fury Shoals)")
+
+    def test_they_are_removed_not_turned_into_spaces(self):
+        self.assertEqual(self.title("Deep​South"), "DeepSouth")
+
+    def test_one_apostrophe(self):
+        """Three characters for one reef, so the same saint sorts in three
+        places and matches in one."""
+        for written in ("St. John’s", "St. John´s", "St. John‘s"):
+            with self.subTest(written):
+                self.assertEqual(self.title(written), "St. John's")
+
+    def test_the_two_misspellings_of_daedalus(self):
+        self.assertEqual(self.title("Daedulus, Fury Shoal, Elphinstone"),
+                         "Daedalus, Fury Shoal, Elphinstone")
+        self.assertEqual(self.title("Deadalus & Elba Reef"),
+                         "Daedalus & Elba Reef")
+
+    def test_the_correction_is_listed_not_guessed(self):
+        """A near-miss rule that catches those also catches a reef that only
+        looks like another. Nothing else is touched."""
+        for name in ("Dadalus", "Daedalos", "Deadelus", "Zabargad", "Sataya"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_a_correct_title_is_left_exactly_as_it_is(self):
+        for name in ("Daedalus & Elphinstone", "St. John's & Fury Shoal",
+                     "North & Tiran"):
+            with self.subTest(name):
+                self.assertEqual(self.title(name), name)
+
+    def test_the_operators_own_text_survives_as_the_name(self):
+        """Correcting a name would re-key the per-trip book, and what the
+        operator published is the identity."""
+        raw = "Deadalus, St. John´s & Elphinstone"
+        data = promote(candidate([departure(name=raw)]), season=SEASON)
+        itinerary = data["itineraries"][0]
+        self.assertEqual(itinerary["title"], "Daedalus, St. John's & Elphinstone")
+        self.assertEqual(itinerary["name"], raw)

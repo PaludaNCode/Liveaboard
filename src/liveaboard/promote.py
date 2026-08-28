@@ -257,6 +257,47 @@ BDE_TITLE = "Brothers, Daedalus & Elphinstone"
 """House style: commas, then an ampersand before the last."""
 
 
+TITLE_FIXES = (
+    # Zero-width spaces, pasted in from wherever the title was written. Two
+    # titles carry them -- "Red Sea Charm[]:" and "Sataya[][] (Fury Shoals)" --
+    # invisible on the page and not invisible to anything else: they defeat a
+    # search for the words either side and sort as though they were there.
+    # Removed rather than spaced, because they are not spaces.
+    (re.compile(r"[​‌‍﻿]"), ""),
+    # One apostrophe. The fleet writes St John's with a typewriter quote, a
+    # curly quote and an acute accent -- three characters for one reef, so the
+    # same saint sorts in three places and matches in one.
+    (re.compile(r"[‘’´]"), "'"),
+    # Daedalus, twice misspelled: "Daedulus" and "Deadalus". Listed rather
+    # than matched loosely, the same way PORT_ALIASES folds harbours -- a
+    # near-miss rule that catches these also catches a reef that only looks
+    # like another. Both trips already carry `daedalus` in their dive sites,
+    # read from the operator's own description, so this corrects the spelling
+    # of something the dataset has independently confirmed.
+    (re.compile(r"\b(?:daedulus|deadalus)\b", re.I), "Daedalus"),
+)
+"""Errors in a title, as opposed to a style we happen not to share.
+
+The distinction is the whole reason this is a short list. Separators, word
+order and the fleet's several spellings of a reef are the operators' own and
+are left alone -- see the note on ``BDE``. These three are things nobody
+intended: an invisible control character, three characters doing one
+apostrophe's job, and a reef with its letters swapped.
+
+Applied to the display title only. ``Itinerary.name`` keeps the operator's
+text verbatim because the id is built from it and ``itinerary_key`` matches
+the per-trip book on it, so correcting a name would silently re-key the trips
+it corrected -- and what the operator published is, after all, the identity.
+"""
+
+
+def _fix_title_errors(title: str) -> str:
+    """Correct what is wrong in a title, never what is merely different."""
+    for pattern, replacement in TITLE_FIXES:
+        title = pattern.sub(replacement, title)
+    return title
+
+
 def _settle_title_case(itineraries: list[dict[str, Any]]) -> None:
     """One spelling per title, where the only difference is capitalisation.
 
@@ -305,6 +346,7 @@ def _display_title(name: str) -> str:
     stripped, _, ports = _split_title(name)
     if ports is not None:
         stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
+    stripped = _fix_title_errors(stripped)
     return BDE_TITLE if BDE.match(stripped) else stripped
 
 

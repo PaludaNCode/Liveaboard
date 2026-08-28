@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 482 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 489 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -107,6 +107,11 @@ Break these and the site starts lying quietly rather than failing loudly.
   into a spelling nobody wrote, because the fleet is full of names a casing
   rule would ruin (*MY Odyssey*, *St. John's*, *SS Turkia*). Ties break
   alphabetically: `promote` is pure and CI compares its output byte for byte.
+  `TITLE_FIXES` corrects what is *wrong* rather than what is merely different —
+  zero-width spaces, three characters doing one apostrophe's job, and the two
+  misspellings of Daedalus, listed the way `PORT_ALIASES` lists harbours
+  because a near-miss rule that catches those also catches a reef that only
+  looks like another.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
