@@ -14,6 +14,7 @@ from pathlib import Path
 from liveaboard.promote import itinerary_key
 from liveaboard.scrape.itinerary import (
     TripDetail,
+    parse_expect,
     min_logged_dives,
     parse_regions,
     parse_trip,
@@ -97,6 +98,64 @@ class TestTheOverviewRows(unittest.TestCase):
     def test_an_empty_fragment_is_an_empty_record(self):
         self.assertFalse(parse_trip(""))
         self.assertFalse(TripDetail())
+
+
+class TestTheSampleItinerary(unittest.TestCase):
+    """What the operator writes about where the boat actually goes.
+
+    The richest statement on the fragment, and the only one in sentences: a
+    "Key regions" list is a summary, this is a schedule. It is kept verbatim --
+    nothing here decides which words are places, so that improving the site
+    vocabulary later does not mean fetching 315 pages again.
+    """
+
+    def setUp(self):
+        self.intro, self.days = parse_expect(markup())
+
+    def test_the_lead_paragraph_is_kept(self):
+        self.assertIn("northern Red Sea", self.intro)
+        self.assertNotIn("<", self.intro)
+
+    def test_each_day_is_paired_with_its_own_text(self):
+        self.assertEqual([d.label for d in self.days],
+                         ["Day 2", "Day 3", "Day 5", "Day 7"])
+        self.assertEqual(self.days[1].text, "Brothers, overnight stay.")
+
+    def test_the_days_are_not_contiguous(self):
+        """2, 3, 5, 7 -- it is a sketch of the week, not a log of it, and the
+        page calls it a Sample Itinerary. Anything reading it must not present
+        it as a guarantee."""
+        self.assertNotEqual(len(self.days), 7)
+
+    def test_the_list_label_is_not_read_as_a_day(self):
+        """"Sample Itinerary" is a bold paragraph like the day markers are."""
+        for day in self.days:
+            self.assertNotIn("Sample Itinerary", day.text)
+        self.assertNotIn("Sample Itinerary", self.intro)
+
+    def test_it_says_things_the_region_list_does_not(self):
+        """The reason to read it at all. This trip's regions name Abu Dabab
+        and not Tobia Kebir or Sha'ab Sheer; the day plan is the other way
+        round. Neither is a superset, so one of them cannot stand in for the
+        other."""
+        text = " ".join(d.text for d in self.days)
+        self.assertIn("Tobia Kebir", text)
+        self.assertNotIn("Abu Dabab", text)
+
+    def test_a_harbour_appears_in_the_prose(self):
+        """"Elphinstone, Port Ghalib, overnight stay in harbour" -- the day
+        text mixes where you dive with where you tie up, so reading places out
+        of it is not the same as reading dive sites out of it."""
+        self.assertIn("Port Ghalib", self.days[-1].text)
+
+    def test_markup_without_the_block_yields_nothing(self):
+        self.assertEqual(parse_expect("<div>Key regions</div>"), (None, ()))
+        self.assertEqual(parse_expect(""), (None, ()))
+
+    def test_a_trip_carries_it(self):
+        detail = parse_trip(markup())
+        self.assertTrue(detail.days)
+        self.assertTrue(detail.intro)
 
 
 class TestTheLoggedDiveBar(unittest.TestCase):

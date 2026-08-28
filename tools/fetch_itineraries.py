@@ -156,12 +156,24 @@ def main() -> int:
             "guests": detail.guests,
             "experience": detail.experience,
             "min_logged_dives": min_logged_dives(detail.experience),
+            # The operator's own prose, verbatim. Stored rather than
+            # interpreted: which words in it are dive sites is a question for
+            # one vocabulary in `promote`, asked offline, so that improving
+            # that vocabulary never means fetching these pages again -- the
+            # same reason `data/archive.json` keeps nodes nothing parses yet.
+            #
+            # It is headed "Sample Itinerary" and its days are not contiguous,
+            # so it is a sketch of the week. Anything that renders it should
+            # say so rather than presenting it as a log.
+            "intro": detail.intro,
+            "days": [{"day": d.label, "text": d.text} for d in detail.days],
             "source_url": endpoint(boat_id, tour_id),
         }
         added += 1
         print(
             f"  [{index}/{len(todo)}] {slug:22.22} {name[:34]:34} "
-            f"sites={sites or '-'} dives={detail.dives or '-'}",
+            f"sites={sites or '-'} dives={detail.dives or '-'} "
+            f"days={len(detail.days) or '-'}",
             flush=True,
         )
 
@@ -180,9 +192,12 @@ def main() -> int:
                 "source": "liveaboard.com",
                 "note": (
                     "One itinerary fragment per trip, from /itinerary/getpopupv2. "
-                    "Regions, dive count, group size and entry bar are the "
-                    "operator's own words about this trip rather than the boat. "
-                    "Incremental: a trip already here is not re-fetched."
+                    "Regions, dive count, group size, entry bar and the "
+                    "operator's own sample itinerary are its words about this "
+                    "trip rather than about the boat. `days` is kept verbatim; "
+                    "which of those words are dive sites is decided in promote. "
+                    "Incremental: a trip already here is not re-fetched, so a "
+                    "parser change needs --refresh to reach trips already read."
                 ),
                 "trips": dict(sorted(book.items())),
             },

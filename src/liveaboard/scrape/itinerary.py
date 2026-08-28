@@ -92,6 +92,40 @@ MAX_DIVES = 60
 """A fortnight at four a day is 56. More than this is a misparse."""
 
 
+EXPECT_BLOCK = re.compile(
+    r"What\s+to\s+expect\s*</h\d>\s*<div[^>]*>(.*?)</div>", re.I | re.S
+)
+"""The operator's own prose about the trip, taken by its heading.
+
+Everything else on this fragment is a field. This is the only place the boat
+says, in sentences, where it actually goes -- and it is the closest thing the
+source has to an authority on that, because a "Key regions" list is a summary
+and this is a schedule.
+"""
+
+PARAGRAPH = re.compile(r"<p[^>]*>(.*?)(?=<p[^>]*>|\Z)", re.I | re.S)
+"""One paragraph. Matched up to the next one rather than to a closing tag,
+because the page omits ``</p>`` throughout."""
+
+DAY_HEADING = re.compile(r"^\s*<strong>\s*(Day\s*\d+[^<]*?)\s*</strong>\s*$", re.I)
+"""A day marker: a paragraph that is nothing but a bold "Day 3"."""
+
+SECTION_HEADING = re.compile(r"^\s*<strong>.*</strong>\s*$", re.I | re.S)
+"""Any other bold-only paragraph -- "Sample Itinerary" is the one that occurs.
+Skipped rather than read as prose: it labels the list, it is not part of it."""
+
+MAX_DAYS = 30
+"""Above this the parse has run into something that is not a day list."""
+
+
+@dataclass(frozen=True, slots=True)
+class TripDay:
+    """One line of the operator's sample itinerary."""
+
+    label: str
+    text: str
+
+
 @dataclass(frozen=True, slots=True)
 class TripDetail:
     """What one itinerary fragment states about the trip."""
@@ -100,9 +134,12 @@ class TripDetail:
     dives: int | None = None
     guests: int | None = None
     experience: str | None = None
+    intro: str | None = None
+    days: tuple[TripDay, ...] = ()
 
     def __bool__(self) -> bool:
-        return bool(self.regions or self.dives or self.guests or self.experience)
+        return bool(self.regions or self.dives or self.guests or self.experience
+                    or self.intro or self.days)
 
 
 def _text(value: str) -> str:
@@ -140,6 +177,53 @@ def parse_regions(markup: str) -> tuple[str, ...]:
     return tuple(out)
 
 
+def parse_expect(markup: str) -> tuple[str | None, tuple[TripDay, ...]]:
+    """The lead paragraph and the sample itinerary, as the operator writes them.
+
+    Returns the prose *verbatim*. Nothing here decides what a day means or
+    which words in it are places -- that is a separate question, asked later
+    against one vocabulary, so that improving the vocabulary does not require
+    fetching these pages again.
+
+    The list is headed "Sample Itinerary" on the pages seen so far, and the days
+    it names are not contiguous -- 2, 3, 5, 7 on the fixture. It is a sketch of
+    the week rather than a contract, and anything reading it should say so.
+    """
+    block = EXPECT_BLOCK.search(markup or "")
+    if not block:
+        return None, ()
+
+    intro: list[str] = []
+    days: list[TripDay] = []
+    current: str | None = None
+    body: list[str] = []
+
+    def close() -> None:
+        if current is not None and body:
+            days.append(TripDay(label=current, text=" ".join(body)))
+
+    for match in PARAGRAPH.finditer(block.group(1)):
+        chunk = match.group(1).strip()
+        heading = DAY_HEADING.match(chunk)
+        if heading:
+            close()
+            current, body[:] = _text(heading.group(1)), []
+            continue
+        if SECTION_HEADING.match(chunk):
+            # "Sample Itinerary" and friends label the list; they are not in it.
+            continue
+        text = _text(re.sub(r"<[^>]+>", " ", chunk))
+        if not text:
+            continue
+        if current is None:
+            intro.append(text)
+        else:
+            body.append(text)
+    close()
+
+    return (" ".join(intro) or None, tuple(days[:MAX_DAYS]))
+
+
 def parse_trip(markup: str) -> TripDetail:
     """Read one fragment. Returns an empty record rather than guessing."""
     if not markup:
@@ -152,7 +236,10 @@ def parse_trip(markup: str) -> TripDetail:
     else:
         experience = _field(markup, "Experience")
 
+    intro, days = parse_expect(markup)
     return TripDetail(
+        intro=intro,
+        days=days,
         regions=parse_regions(markup),
         # "Approximately 18 dives in total" -- the word matters, so the figure
         # stays a floor the way the vessel-level counts already are.
