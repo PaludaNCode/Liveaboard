@@ -184,6 +184,33 @@ Each of these cost a cycle at least once.
 - **The extras block is split across elements.** `Environment Tax (€45)` puts
   the label in an anchor and the amount in a span, so a leaf-element probe
   reports the block absent. Flatten to text first.
+- **A vessel-month page sometimes returns no JSON-LD at all**, and it is not
+  the same as a month with no trips. Two shapes come back and they mean
+  opposite things:
+  - a `Product` node with no `Event` nodes — the page loaded, that boat sells
+    nothing that month. The absence *is* the answer. 42 pages on 2026-08-28.
+  - no `Product` and no `Event` — the page answered nothing. 14 pages on
+    2026-08-28, spread across all four months and 11 vessels, so it is a flaky
+    response rather than a bad month or a broken vessel. Re-fetching the same
+    URL usually succeeds.
+
+  Treating the second as the first deleted 49 real, bookable sailings from the
+  site — DUNE Longara's entire May, still on sale at the source — and the
+  change report called them withdrawn.
+
+  **Probed, and it is transient.** `tools/probe_unread.py` re-read all
+  fourteen (run 33206151057): **thirteen answered in full on the very first
+  retry** — DUNE Longara's May came back with its 5 Events, Blue Horizon's
+  with 5, Yachtiano's three months with 5/4/5 — and the fourteenth,
+  `bismarck?m=5/2027`, returned a `Product` with no Events, which is a real
+  empty month. Bodies were normal size (0.9–1.1 MB) on both the failing and
+  the succeeding fetch, so it is not a truncation or a bot wall.
+
+  So the answer is **a retry, not a markup parser**: `PARSE_ATTEMPTS = 2` in
+  `scrape/base.py`, with `PoliteFetcher.forget()` to make the second attempt a
+  real request. `carry_unread` stays as the net under a page that fails twice.
+  A markup parser for these pages is ruled out and should not be revisited —
+  the JSON-LD is there, it just occasionally is not served.
 - **`?m=` is zero-padded in the data and unpadded in our crawl.**
   `Offer.url` says `?m=05/2027`; `SEASON_QUERIES` builds `?m=5/2027`. Both
   work — worth knowing before treating one as canonical.

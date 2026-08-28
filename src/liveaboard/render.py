@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .dataset import Dataset
+from .export import latest_entry, to_csv
 from .money import DISPLAY_CURRENCY
 from .pricing import (
     DEFAULT_TOGGLES,
@@ -191,7 +192,84 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     }
 
 
-def render(dataset: Dataset, out_dir: Path | str, template_dir: Path | None = None) -> Path:
+def _escape(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
+    "egypt-2027.csv": ("Every trip as a spreadsheet",
+                       "one row per departure, with the advertised price, the "
+                       "fees and the total"),
+    "egypt-2027.json": ("The dataset", "exactly what the page is built from"),
+    "CHANGES.md": ("What changed, refresh by refresh",
+                   "boats and trips added, fares moved, berths sold out"),
+}
+
+
+def _downloads_html(available: list[str]) -> str:
+    """Links to the files the build actually wrote, and nothing more.
+
+    Relative, so they resolve wherever the site is served from and add no
+    external host: the no-CDN invariant is about what the page reaches for,
+    and these sit beside it.
+    """
+    if not available:
+        return ""
+    items = []
+    for name in DOWNLOAD_LABELS:
+        if name not in available:
+            continue
+        label, blurb = DOWNLOAD_LABELS[name]
+        items.append(
+            f'<li><a href="data/{name}" download>{label}</a> '
+            f'<span class="dl-note">&mdash; {blurb}</span></li>'
+        )
+    return "<ul class=\"downloads\">" + "".join(items) + "</ul>"
+
+
+def _changes_html(entry: str, linked: bool) -> str:
+    """The last refresh's report, verbatim, in a block that scrolls."""
+    if not entry:
+        return ""
+    more = ('<p><a href="data/CHANGES.md">Every refresh before this one</a>.</p>'
+            if linked else "")
+    return (f'<pre class="changelog">{_escape(entry)}</pre>{more}')
+
+
+def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[str]:
+    """Put the numbers next to the page, and say which ones arrived.
+
+    Published, not committed: ``site/data/`` is gitignored. A copy of a 2.4 MB
+    dataset committed beside the original on every refresh would double what
+    the repository grows by, daily, to hold two identical files. The Pages
+    workflow uploads the whole ``site/`` directory, so generating them at build
+    time puts them online without putting them in the history twice.
+
+    Returns the names that exist, so the page only ever links to a file that
+    is actually there.
+    """
+    folder = out / "data"
+    folder.mkdir(parents=True, exist_ok=True)
+    written = []
+
+    (folder / "egypt-2027.csv").write_text(to_csv(dataset), encoding="utf-8")
+    written.append("egypt-2027.csv")
+
+    for name in ("egypt-2027.json", "CHANGES.md"):
+        source = (data_dir / name) if data_dir else None
+        if source and source.exists():
+            (folder / name).write_text(source.read_text(encoding="utf-8"),
+                                       encoding="utf-8")
+            written.append(name)
+    return written
+
+
+def render(
+    dataset: Dataset,
+    out_dir: Path | str,
+    template_dir: Path | None = None,
+    data_dir: Path | None = None,
+) -> Path:
     """Write ``index.html`` and return its path."""
     templates = template_dir or TEMPLATE_DIR
     out = Path(out_dir)
@@ -206,10 +284,23 @@ def render(dataset: Dataset, out_dir: Path | str, template_dir: Path | None = No
     # would close the tag early. Escaping the slash keeps the JSON valid.
     data = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
+    available = write_downloads(dataset, out, data_dir)
+
+    # What moved on the last refresh, inline. The whole history is a file the
+    # page links to: it grows by an entry a day, and this site ships as one
+    # download with nothing fetched lazily, so an unbounded log inside it would
+    # be paid for by every visitor forever.
+    history = (data_dir / "CHANGES.md") if data_dir else None
+    entry = ""
+    if history and history.exists():
+        entry = latest_entry(history.read_text(encoding="utf-8"))
+
     html = html.replace("/*STYLE*/", css)
     html = html.replace("/*APP*/", js)
     html = html.replace('"__DATA__"', data)
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
+    html = html.replace("__DOWNLOADS__", _downloads_html(available))
+    html = html.replace("__CHANGES__", _changes_html(entry, "CHANGES.md" in available))
 
     target = out / "index.html"
     target.write_text(html, encoding="utf-8")

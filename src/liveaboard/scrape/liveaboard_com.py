@@ -194,6 +194,13 @@ class LiveaboardComAdapter(SourceAdapter):
                 seen.add(link)
                 if link.rstrip("/").rsplit("/", 1)[-1] in self.skip_vessels:
                     skipped += 1
+                    # Skipping the fetch must not delete what the vessel
+                    # already published. The run is choosing not to look, and
+                    # not looking is not evidence of absence -- AVO and Blue
+                    # lost three real, bookable sailings this way, reported as
+                    # withdrawn by a run that never asked the source.
+                    for query in SEASON_QUERIES:
+                        self.not_looked_at(f"https://{self.host}{link}{query}")
                     continue
                 if len(seen) > self.max_pages:
                     self.note(f"stopped at {self.max_pages} vessels; more were available")

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Iterable
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -56,7 +57,9 @@ def cmd_build(args: argparse.Namespace) -> int:
     data = args.data or default_data()
     dataset = Dataset.load(data)
     print(f"building from {data}")
-    target = render(dataset, args.out)
+    # The dataset's own folder is where the downloadable copies come from, so a
+    # build from the seed publishes the seed's files and never the live ones.
+    target = render(dataset, args.out, data_dir=Path(data).parent)
     payload_size = target.stat().st_size
     print(f"built {target} ({payload_size / 1024:.0f} KB)")
     print(
@@ -161,6 +164,95 @@ def _barren(path: Path) -> tuple[set[str], dict[str, str]]:
     return fresh, record
 
 
+CARRY_MAX_DAYS = 14
+"""How long a departure may be carried through unreadable pages.
+
+Long enough to ride out a bad week -- a page that fails today usually reads
+fine tomorrow -- and short enough that we stop asserting a sailing exists on
+the strength of a fortnight-old reading. After this the departures drop out
+and the change report says the vessel-month emptied, which is then true: we
+have not been able to see it for two weeks and should not keep implying we can.
+"""
+
+
+def carry_unread(
+    previous: dict[str, Any] | None,
+    unread: Iterable[str],
+    today: date,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
+    """Departures and vessels the last run read and this one did not.
+
+    A vessel page is fetched once per season month, so one unreadable response
+    empties that boat's month while the other three come back fine. Publishing
+    that absence deleted five real, bookable DUNE Longara sailings from the
+    site and reported them as withdrawn.
+
+    The barren skip list did the same thing without anything going wrong: it
+    holds a vessel back for a week to save four requests, and while it does,
+    that vessel's departures were dropped and reported as withdrawn. AVO and
+    Blue lost three real, bookable sailings that way, and a probe found them
+    still on sale.
+
+    The same rule the fee book already follows: a run that did not look at
+    something knows nothing about it, and knowing nothing is not the same as
+    knowing there is nothing. Carried rows keep their original ``retrieved``
+    date, so the page still says exactly when each price was last read.
+
+    ``CARRY_MAX_DAYS`` deliberately outlasts ``BARREN_RECHECK_DAYS``: a skipped
+    vessel is re-read within a week, so the carry never has to hold longer than
+    the skip does.
+
+    Returns the departures, the vessel records they need, and one note per
+    page carried.
+    """
+    if not previous:
+        return [], [], []
+    pages = {url for url in unread if url}
+    if not pages:
+        return [], [], []
+
+    def fresh(row: dict[str, Any]) -> bool:
+        stamp = (row.get("provenance") or {}).get("retrieved")
+        try:
+            return (today - date.fromisoformat(stamp)).days <= CARRY_MAX_DAYS
+        except (TypeError, ValueError):
+            return False
+
+    departures = [
+        row for row in previous.get("departures", [])
+        if (row.get("provenance") or {}).get("url") in pages and fresh(row)
+    ]
+    # The vessel record too, for any boat something was carried for: a boat
+    # whose every page failed has no record in this run either, and a departure
+    # promote cannot find a vessel for is a departure dropped. Offered rather
+    # than imposed -- the caller keeps this run's record wherever it has one,
+    # so a stale summary never displaces a fresh one.
+    # One per vessel. The candidate holds a record per *month page*, so a boat
+    # whose whole season is carried would otherwise arrive four times over.
+    carried_slugs = {row.get("boat_slug") for row in departures}
+    itineraries: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in previous.get("itineraries", []):
+        slug = row.get("id")
+        if slug in carried_slugs and slug not in seen and fresh(row):
+            seen.add(slug)
+            itineraries.append(row)
+
+    notes = []
+    for url in sorted(pages):
+        kept = sum(
+            1 for row in departures
+            if (row.get("provenance") or {}).get("url") == url
+        )
+        if kept:
+            notes.append(
+                f"carried {kept} departure(s) forward from the last run: "
+                f"{url} was not read this run, and a page nobody looked at is "
+                f"not an empty one"
+            )
+    return departures, itineraries, notes
+
+
 def cmd_scrape(args: argparse.Namespace) -> int:
     """Run the source adapters and write their raw output.
 
@@ -210,6 +302,31 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         if remaining > 0:
             print(f"   ! ... and {remaining} more")
         combined.extend(output)
+
+    # Before the empty check: a run whose pages all failed has carried rows to
+    # publish, and dropping them because "the scrape produced nothing" is the
+    # same deletion one level up.
+    out = Path(args.out)
+    previous = None
+    if out.exists():
+        try:
+            previous = json.loads(out.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            previous = None
+
+    carried, carried_boats, carry_notes = carry_unread(
+        previous, combined.unread, date.today()
+    )
+    if carried:
+        seen_deps = {d.get("id") for d in combined.departures}
+        combined.departures.extend(d for d in carried if d.get("id") not in seen_deps)
+        seen_boats = {i.get("id") for i in combined.itineraries}
+        combined.itineraries.extend(
+            i for i in carried_boats if i.get("id") not in seen_boats
+        )
+        combined.warnings.extend(carry_notes)
+        print(f"   carried {len(carried)} departure(s) forward from "
+              f"{len(carry_notes)} unreadable page(s)")
 
     if combined.is_empty:
         # No candidate file is written, so an empty scrape leaves nothing for
@@ -568,9 +685,16 @@ def _git_show(revision: str, path: Path) -> dict[str, Any] | None:
         return None
 
 
+HISTORY_HEADER = (
+    "# What changed\n\n"
+    "One entry per refresh, newest first, written by `liveaboard.cli changes`.\n"
+    "Do not edit by hand — the next run rewrites the file around this header.\n"
+)
+
+
 def cmd_changes(args: argparse.Namespace) -> int:
     """Report what moved between two datasets."""
-    from .changes import compare, render as render_changes
+    from .changes import compare, headline, render as render_changes
 
     after = json.loads(Path(args.data).read_text(encoding="utf-8"))
 
@@ -584,10 +708,14 @@ def cmd_changes(args: argparse.Namespace) -> int:
             # Not a failure. A first run has nothing to compare against, and
             # saying so beats printing an empty report that reads as "nothing
             # changed" when the truth is "nothing to compare".
-            print(f"no earlier {args.data} at {args.revision}; nothing to compare")
+            print("first dataset; nothing to compare against" if args.headline
+                  else f"no earlier {args.data} at {args.revision}; nothing to compare")
             return 0
 
     report = compare(before, after)
+    if args.headline:
+        print(headline(report))
+        return 0
     text = render_changes(
         report,
         before=before_label,
@@ -600,6 +728,17 @@ def cmd_changes(args: argparse.Namespace) -> int:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(text + "\n", encoding="utf-8")
         print(f"\nwrote {args.out}")
+
+    if args.append:
+        # Newest first, and committed: the workflow run summary vanishes with
+        # the run, so the only durable copy is the one in the repository.
+        path = Path(args.append)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        previous = path.read_text(encoding="utf-8") if path.exists() else ""
+        body = previous.split(HISTORY_HEADER, 1)[-1].lstrip("\n")
+        entry = f"## {after.get('generated') or before_label}\n\n```\n{text}\n```\n"
+        path.write_text(f"{HISTORY_HEADER}\n{entry}\n{body}", encoding="utf-8")
+        print(f"\nappended to {args.append}")
 
     # A vessel losing every departure at once is the one finding worth a
     # non-zero exit: it usually means a fetch failed rather than a season
@@ -686,6 +825,14 @@ def main(argv: list[str] | None = None) -> int:
         help="which commit to compare against when --before is not given",
     )
     changes.add_argument("--out", default=None, type=Path, help="also write the report here")
+    changes.add_argument(
+        "--append", default=None, type=Path,
+        help="prepend this run's entry to a running history file, newest first",
+    )
+    changes.add_argument(
+        "--headline", action="store_true",
+        help="print one line instead of the report, for a commit subject",
+    )
     changes.add_argument("--limit", type=int, default=12, help="rows per section")
     changes.add_argument(
         "--fail-on-missing", action="store_true",

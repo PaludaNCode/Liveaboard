@@ -133,6 +133,7 @@ tests/            stdlib unittest, no dependencies
 | `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
+| `data/CHANGES.md` | what moved on each refresh, newest first | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
 The dataset is **regenerated, not edited**. `promote` is pure — candidate, fees,
@@ -148,6 +149,66 @@ ones cannot. It carries ratings, cabin counts, occupancy, amenities and
 remaining capacity — none of which the site uses today — so a question asked
 next month can still be put to this month's data. Every run is a commit, so
 `git log -p data/` is the history.
+
+### When a page cannot be read
+
+A vessel page is fetched once per season month, so one response with no
+structured data empties that boat's month while the other three come back
+fine — and it looks exactly like a boat that sells nothing in May. On
+2026-08-28 fourteen pages did this and the site deleted 49 real, bookable
+sailings, DUNE Longara's whole May among them.
+
+The source itself distinguishes the two, and now so does the scrape: a
+`Product` node with no `Event` nodes is a boat selling nothing that month, and
+its absence is the answer; no structured data at all answers nothing.
+
+A probe re-read all fourteen and **thirteen answered in full on the first
+retry** — the fourteenth was a genuinely empty month. So the failure is the
+response and not the page: the crawl now asks a second time, which recovers
+them. A markup parser is ruled out; the JSON-LD is there, it just occasionally
+is not served.
+
+The barren skip list turned out to lose trips the same way, with nothing going
+wrong at all: it holds a vessel back for a week to save four requests, and
+while it does, that vessel's departures were dropped and reported as
+withdrawn. AVO's and Blue's three sailings went that way, and a probe found
+all three still on sale. A skipped page is now recorded exactly like a failed
+one, because the consequence is identical: the run did not look.
+
+Where a page goes unread — skipped, or answering nothing twice — `scrape`
+carries the previous run's departures forward for up to a fortnight, keeping each row's original `retrieved` date so the page still says
+when every price was last read, and noting each carried page in the candidate's
+warnings. After that they drop out — a page unread for two weeks is one we can
+no longer claim to see. The same rule the fee book already followed: a run that
+could not look at something knows nothing about it.
+
+### Noticing that something moved
+
+The history was always there and nobody could read it: five new departures
+show up as `886` where yesterday said `881`, and a two-hundred-dollar rise is
+a two-megabyte JSON diff. `changes` turns two datasets into a few lines —
+which boats and trips appeared, which departures were added or withdrawn,
+which fares moved and by how much, which fees changed, what sold out.
+
+```bash
+PYTHONPATH=src python3 -m liveaboard.cli changes                    # vs HEAD~1
+PYTHONPATH=src python3 -m liveaboard.cli changes --revision HEAD~7  # a week
+PYTHONPATH=src python3 -m liveaboard.cli changes --headline         # one line
+```
+
+The daily refresh writes it to three places, because a workflow run summary
+disappears when the run ages out: the run summary, `data/CHANGES.md`
+(committed, newest first), and the subject of the data commit itself — so
+`git log --oneline data/` reads as the changelog rather than 23 identical
+lines saying `data: daily refresh`.
+
+Four distinctions decide whether it is worth reading, and all four are
+false positives it used to report: a euro figure moving because the ECB moved
+is not an operator repricing; a fare moving by one dollar is the source
+re-rounding (174 of them in one run); a vessel that lost *every* departure at
+once is a failed fetch, not a cancelled season; and a field a parser has just
+learned to read has not changed — the first run after `availability` was
+parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
 ## Next
 

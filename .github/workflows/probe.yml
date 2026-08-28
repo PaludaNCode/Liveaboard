@@ -42,6 +42,10 @@ on:
         description: "Print only where PADI's API client gets its base URL"
         type: boolean
         default: false
+      unread_retries:
+        description: "Fetches per unreadable page, to tell transient from persistent"
+        type: string
+        default: "2"
 
 permissions:
   contents: read
@@ -82,6 +86,13 @@ jobs:
   padi:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+  # Its own job, not another step above: fourteen pages at two fetches each,
+  # paced by the crawl delay, is minutes on its own and the probe job is
+  # already close to its budget. It is also a different question from the rest
+  # of them, and worth being able to read — or re-run — by itself.
+  unread:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -95,6 +106,23 @@ jobs:
             --max-candidates "${{ inputs.padi_max_candidates || '24' }}" \
             ${{ inputs.padi_only_base && '--only-base' || '' }} \
             ${{ inputs.padi_dump_context && '--dump-context' || '' }}
+      # The pages the last crawl could not read at all. Fourteen of them on
+      # 2026-08-28, and publishing their absence deleted 49 real, bookable
+      # sailings. carry_unread stops the site lying about them; this settles
+      # what to actually do -- retry, markup parser, or neither -- by reading
+      # what the pages return rather than guessing at it.
+      - name: Re-read the pages the crawl could not
+        run: |
+          python3 tools/probe_unread.py \
+            --retries "${{ inputs.unread_retries || 2 }}"
+
+      # Thirteen of the fifteen vessels on the skip list are not linked from
+      # any Egypt listing, so the crawl never reaches them -- and from inside
+      # the dataset "gone from the site" and "still selling, just invisible to
+      # us" look identical. The second would mean discover() is losing real
+      # trips, which is a bug in the crawl and not in the skip list.
+      - name: Find out what happened to the delisted vessels
+        run: python3 tools/probe_delisted.py
 
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
