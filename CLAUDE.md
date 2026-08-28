@@ -93,7 +93,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   matching fails silently.
 - **`Itinerary.name` is identity; `Itinerary.title` is presentation.** The id is
   built from `name`, and two sailings differing only by port are two trips.
-  Only `title` is ever tidied, and it is tidied in exactly two ways.
+  Only `title` is ever tidied, and it is tidied in exactly three ways.
   **One route, not a house style.** `BDE`/`BDE_TITLE` fold the seven spellings
   of Brothers/Daedalus/Elphinstone onto one; the pattern is anchored at both
   ends, so *Marine Park North: Brothers - Daedalus & Elphinstone* and
@@ -111,7 +111,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   zero-width spaces, three characters doing one apostrophe's job, and the two
   misspellings of Daedalus, listed the way `PORT_ALIASES` lists harbours
   because a near-miss rule that catches those also catches a reef that only
-  looks like another.
+  looks like another. **Three reefs, not every reef.** `REEF_ALIASES` folds the
+  five spellings of *St. John's*, the three of *Brothers* and the two of *Fury
+  Shoals* onto one each — differences rather than mistakes, folded for the
+  reason `BDE` folds one route: the reader should not have to work out that the
+  reef is the same reef before comparing the prices beside it. Each replacement
+  is the *plurality* of what the fleet wrote, never a spelling invented to be
+  consistent, so the table re-derives from the data instead of from taste. The
+  guard on `Brother` is the shape of the risk — *Big Brother* and *Little
+  Brother* name the two islands separately, and folding either into the pair
+  would delete which island the trip dives. Reefs the fleet also splits are
+  deliberately left alone (*Ras Mohamed*/*Ras Mohammed* are both real
+  transliterations, so neither is wrong); do not lengthen this table without
+  counting the spellings first.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per

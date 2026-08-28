@@ -278,11 +278,12 @@ TITLE_FIXES = (
 )
 """Errors in a title, as opposed to a style we happen not to share.
 
-The distinction is the whole reason this is a short list. Separators, word
-order and the fleet's several spellings of a reef are the operators' own and
-are left alone -- see the note on ``BDE``. These three are things nobody
-intended: an invisible control character, three characters doing one
-apostrophe's job, and a reef with its letters swapped.
+The distinction is the whole reason this is a short list. Separators and word
+order are the operators' own and are left alone -- see the note on ``BDE``.
+These three are things nobody intended: an invisible control character, three
+characters doing one apostrophe's job, and a reef with its letters swapped.
+The three reefs the fleet spells several ways are folded separately, in
+:data:`REEF_ALIASES`, because they are differences rather than mistakes.
 
 Applied to the display title only. ``Itinerary.name`` keeps the operator's
 text verbatim because the id is built from it and ``itinerary_key`` matches
@@ -294,6 +295,52 @@ it corrected -- and what the operator published is, after all, the identity.
 def _fix_title_errors(title: str) -> str:
     """Correct what is wrong in a title, never what is merely different."""
     for pattern, replacement in TITLE_FIXES:
+        title = pattern.sub(replacement, title)
+    return title
+
+
+REEF_ALIASES = (
+    # St John's, five ways: "St. John's" (19), "St. Johns" (13), "St Johns"
+    # (6), "St John's" (4), "St. John" (2). The saint sorts in five places and
+    # matches in one. Folded onto the plurality spelling, which is also the one
+    # carrying both the stop and the apostrophe -- and TITLE_FIXES has already
+    # settled the apostrophe's character, so this sees only "'".
+    (re.compile(r"\bSt\.?\s+John(?:'s|s)?\b", re.I), "St. John's"),
+    # Brothers, three ways: "Brothers" (109), "Brother Islands" (5), "Brother"
+    # (1). Guarded against "Big Brother" and "Little Brother", which name the
+    # two islands separately: neither appears in the fleet today, and folding
+    # one of them to the pair would delete which island the trip dives.
+    (
+        re.compile(r"\b(?<!Big )(?<!Little )Brother(?:\s+Islands?|s)?\b", re.I),
+        "Brothers",
+    ),
+    # Fury Shoals, two ways: "Fury Shoals" (17), "Fury Shoal" (12) -- the
+    # narrowest split in the fleet and the one least likely to mean anything.
+    (re.compile(r"\bFury\s+Shoals?\b", re.I), "Fury Shoals"),
+)
+"""One spelling for the three reefs the fleet writes several ways.
+
+Not mistakes, unlike :data:`TITLE_FIXES` -- "Fury Shoal" and "Brother Islands"
+are what those operators call those reefs. They are folded anyway, for the
+reason ``BDE`` folds one route: a visitor comparing two rows has to work out
+that the reefs are the same reef before they can compare the prices beside
+them, and the titles sit in the widest column on the page.
+
+Each replacement is **a spelling an operator actually used** -- the plurality
+of them -- never one invented to be consistent. Chosen by count rather than by
+taste, so the table can be re-derived from the data rather than argued about.
+
+Three reefs, listed, and nothing generalised. The same restraint as the
+``BDE`` note: separators and word order stay the operators' own, and no rule
+here rewrites a title it was not written for. The ``Brother`` guard is the
+shape of the risk -- a reef name that is a prefix of a different reef name.
+Display title only, for the reason given on :data:`TITLE_FIXES`.
+"""
+
+
+def _fold_reef_names(title: str) -> str:
+    """One spelling per reef, chosen from the spellings the fleet used."""
+    for pattern, replacement in REEF_ALIASES:
         title = pattern.sub(replacement, title)
     return title
 
@@ -346,7 +393,7 @@ def _display_title(name: str) -> str:
     stripped, _, ports = _split_title(name)
     if ports is not None:
         stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
-    stripped = _fix_title_errors(stripped)
+    stripped = _fold_reef_names(_fix_title_errors(stripped))
     return BDE_TITLE if BDE.match(stripped) else stripped
 
 

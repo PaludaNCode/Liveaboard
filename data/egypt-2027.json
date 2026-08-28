@@ -2351,7 +2351,7 @@
     {
       "id": "all-star-red-sea--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "all-star-liveaboards",
       "boat_id": "all-star-red-sea",
       "nights": 7,
@@ -5626,7 +5626,7 @@
     {
       "id": "aphrodite--deep-south-st-john-port-ghalib-port-ghalib",
       "name": "Deep South, St. John (Port Ghalib - Port Ghalib)",
-      "title": "Deep South, St. John",
+      "title": "Deep South, St. John's",
       "operator_id": "aphrodite-liveaboard-safaris",
       "boat_id": "aphrodite",
       "nights": 7,
@@ -8799,7 +8799,7 @@
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-horizon",
       "nights": 7,
@@ -9006,7 +9006,7 @@
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-port-ghalib-port-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-horizon",
       "nights": 7,
@@ -10876,7 +10876,7 @@
     {
       "id": "blue-melody--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "Rocky, Zabargad & St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "Rocky, Zabargad & St. Johns",
+      "title": "Rocky, Zabargad & St. John's",
       "operator_id": "scuba-tours-worldwide",
       "boat_id": "blue-melody",
       "nights": 7,
@@ -11083,7 +11083,7 @@
     {
       "id": "blue-seas--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
@@ -15232,7 +15232,7 @@
     {
       "id": "discovery-i--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoal, Elphinstone",
+      "title": "St. John's, Fury Shoals, Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-i",
       "nights": 7,
@@ -16839,7 +16839,7 @@
     {
       "id": "discovery-ii--st-john-s-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "St. John's, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "St. John's, Fury Shoal, Elphinstone",
+      "title": "St. John's, Fury Shoals, Elphinstone",
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
@@ -17875,7 +17875,7 @@
     {
       "id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
       "name": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
-      "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John's",
+      "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St. John's",
       "operator_id": "dune-world",
       "boat_id": "dune-longara",
       "nights": 7,
@@ -20389,7 +20389,7 @@
     {
       "id": "dune-silky--st-john-s-reef-marsa-ghalib-marsa-ghalib",
       "name": "St John's Reef (Marsa Ghalib - Marsa Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "dune-world",
       "boat_id": "dune-silky",
       "nights": 7,
@@ -21667,7 +21667,7 @@
     {
       "id": "dune-titan--st-john-s-reef-marsa-ghalib-marsa-ghalib",
       "name": "St John's Reef (Marsa Ghalib - Marsa Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "dune-world",
       "boat_id": "dune-titan",
       "nights": 7,
@@ -22639,7 +22639,7 @@
     {
       "id": "emperor-asmaa--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -22792,7 +22792,7 @@
     {
       "id": "emperor-asmaa--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. Johns",
+      "title": "South and St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-asmaa",
       "nights": 7,
@@ -23401,7 +23401,7 @@
     {
       "id": "emperor-elite--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
@@ -23554,7 +23554,7 @@
     {
       "id": "emperor-elite--south-and-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South and St. Johns",
+      "title": "South and St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
@@ -24322,7 +24322,7 @@
     {
       "id": "emperor-superior--south-st-johns-marsa-ghalib-marsa-ghalib",
       "name": "South & St Johns (Marsa Ghalib - Marsa Ghalib)",
-      "title": "South & St Johns",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-superior",
       "nights": 7,
@@ -24734,7 +24734,7 @@
     {
       "id": "ghazala-adventure--daedalus-rocky-st-johns-hurghada-port-ghalib",
       "name": "Daedalus Rocky & St. Johns (Hurghada - Port Ghalib)",
-      "title": "Daedalus Rocky & St. Johns",
+      "title": "Daedalus Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-adventure",
       "nights": 7,
@@ -25564,7 +25564,7 @@
     {
       "id": "ghazala-explorer--daedalus-rocky-st-johns-hurghada-port-ghalib",
       "name": "Daedalus Rocky & St. Johns (Hurghada - Port Ghalib)",
-      "title": "Daedalus Rocky & St. Johns",
+      "title": "Daedalus Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -25721,7 +25721,7 @@
     {
       "id": "ghazala-explorer--daedalus-rocky-st-johns-hurghada-hurghada",
       "name": "Daedalus, Rocky & St Johns (Hurghada - Hurghada)",
-      "title": "Daedalus, Rocky & St Johns",
+      "title": "Daedalus, Rocky & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -25879,7 +25879,7 @@
     {
       "id": "ghazala-explorer--deep-south-st-johns-port-ghalib-port-ghalib",
       "name": "Deep South & St. Johns (Port Ghalib - Port Ghalib)",
-      "title": "Deep South & St. Johns",
+      "title": "Deep South & St. John's",
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
@@ -26994,7 +26994,7 @@
     {
       "id": "golden-dolphin--north-brother-islands-hurghada-port-ghalib",
       "name": "North - Brother Islands (Hurghada - Port Ghalib)",
-      "title": "North - Brother Islands",
+      "title": "North - Brothers",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
@@ -27690,7 +27690,7 @@
     {
       "id": "golden-dolphin-iv--clean-up-safari-north-safaga-brother-islands-elphinstone-hurghada-port-ghalib",
       "name": "Clean up Safari: North - Safaga - Brother Islands - Elphinstone (Hurghada - Port Ghalib)",
-      "title": "Clean up Safari: North - Safaga - Brother Islands - Elphinstone",
+      "title": "Clean up Safari: North - Safaga - Brothers - Elphinstone",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 7,
@@ -27865,7 +27865,7 @@
     {
       "id": "golden-dolphin-iv--daedalus-rocky-island-zabargad-st-johns-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky Island - Zabargad - St. Johns- Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus - Rocky Island - Zabargad - St. Johns- Elphinstone",
+      "title": "Daedalus - Rocky Island - Zabargad - St. John's- Elphinstone",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 10,
@@ -28214,7 +28214,7 @@
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
       "name": "North - Straits of Tiran - Brother Islands - Daedalus - Rocky Island - Zabargad - Salem Express (Hurghada - Hurghada)",
-      "title": "North - Straits of Tiran - Brother Islands - Daedalus - Rocky Island - Zabargad - Salem Express",
+      "title": "North - Straits of Tiran - Brothers - Daedalus - Rocky Island - Zabargad - Salem Express",
       "operator_id": "golden-dolphin",
       "boat_id": "golden-imperial",
       "nights": 14,
@@ -32790,7 +32790,7 @@
     {
       "id": "jp-marine--golden-mix-daedalus-sataya-st-johns-rocky-zabargad-marsa-alam-marsa-alam",
       "name": "Golden Mix: Daedalus, Sataya, St Johns, Rocky, Zabargad (Marsa Alam - Marsa Alam)",
-      "title": "Golden Mix: Daedalus, Sataya, St Johns, Rocky, Zabargad",
+      "title": "Golden Mix: Daedalus, Sataya, St. John's, Rocky, Zabargad",
       "operator_id": "dive-safari-master",
       "boat_id": "jp-marine",
       "nights": 7,
@@ -34962,7 +34962,7 @@
     {
       "id": "ocean-lovers--daedalus-rocky-zabargad-st-johns-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky, Zabargad, St. Johns, Fury Shoal & Elphinstone",
+      "title": "Daedalus, Rocky, Zabargad, St. John's, Fury Shoals & Elphinstone",
       "operator_id": "sea-breeze-liveaboard",
       "boat_id": "ocean-lovers",
       "nights": 7,
@@ -37234,7 +37234,7 @@
     {
       "id": "odyssey--fury-shoal-port-ghalib-port-ghalib",
       "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoal",
+      "title": "Fury Shoals",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -37665,7 +37665,7 @@
     {
       "id": "odyssey--the-golden-loop-north-brother-safaga-hurghada-hurghada",
       "name": "The Golden Loop: North - Brother - Safaga (Hurghada - Hurghada)",
-      "title": "The Golden Loop: North - Brother - Safaga",
+      "title": "The Golden Loop: North - Brothers - Safaga",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -37883,7 +37883,7 @@
     {
       "id": "odyssey--the-golden-loop-north-brother-safaga-port-ghalib-hurghada",
       "name": "The Golden Loop: North - Brother - Safaga (Port Ghalib - Hurghada)",
-      "title": "The Golden Loop: North - Brother - Safaga",
+      "title": "The Golden Loop: North - Brothers - Safaga",
       "operator_id": "seafari-international",
       "boat_id": "odyssey",
       "nights": 7,
@@ -39796,7 +39796,7 @@
     {
       "id": "red-sea-aggressor-iv--st-johns-daedalus-marsa-alam-marsa-alam",
       "name": "St. Johns & Daedalus (Marsa Alam - Marsa Alam)",
-      "title": "St. Johns & Daedalus",
+      "title": "St. John's & Daedalus",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "boat_id": "red-sea-aggressor-iv",
       "nights": 7,
@@ -41081,7 +41081,7 @@
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-hurghada",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Hurghada)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -41277,7 +41277,7 @@
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus & Fury Shoal",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -42258,7 +42258,7 @@
     {
       "id": "red-sea-explorer--st-johns-zabargad-rocky-port-ghalib-port-ghalib",
       "name": "St. Johns, Zabargad & Rocky (Port Ghalib - Port Ghalib)",
-      "title": "St. Johns, Zabargad & Rocky",
+      "title": "St. John's, Zabargad & Rocky",
       "operator_id": "extra-divers-worldwide",
       "boat_id": "red-sea-explorer",
       "nights": 7,
@@ -42657,7 +42657,7 @@
     {
       "id": "royal-evolution--brothers-daedalus-rocky-st-john-elba-port-ghalib-port-ghalib",
       "name": "Brothers, Daedalus, Rocky, St. John & Elba (Port Ghalib - Port Ghalib)",
-      "title": "Brothers, Daedalus, Rocky, St. John & Elba",
+      "title": "Brothers, Daedalus, Rocky, St. John's & Elba",
       "operator_id": "royal-evolution",
       "boat_id": "royal-evolution",
       "nights": 10,
@@ -49449,7 +49449,7 @@
     {
       "id": "sindalahs--daedalus-st-johns-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus, St. Johns, Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, St. Johns, Fury Shoal",
+      "title": "Daedalus, St. John's, Fury Shoals",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49689,7 +49689,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-hurghada",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Hurghada)",
-      "title": "Daedalus, Fury Shoal, Elphinstone",
+      "title": "Daedalus, Fury Shoals, Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -49927,7 +49927,7 @@
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedulus, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Fury Shoal, Elphinstone",
+      "title": "Daedalus, Fury Shoals, Elphinstone",
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
@@ -56213,7 +56213,7 @@
     {
       "id": "tala--rocky-zarbagad-st-johns-port-ghalib-port-ghalib",
       "name": "Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)",
-      "title": "Rocky, Zarbagad, St Johns",
+      "title": "Rocky, Zarbagad, St. John's",
       "operator_id": "red-sea-explorers",
       "boat_id": "tala",
       "nights": 7,
@@ -57455,7 +57455,7 @@
     {
       "id": "topaz--fury-shoal-port-ghalib-port-ghalib",
       "name": "Fury Shoal (Port Ghalib - Port Ghalib)",
-      "title": "Fury Shoal",
+      "title": "Fury Shoals",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -58231,7 +58231,7 @@
     {
       "id": "topaz--north-reef-safaga-brother-islands-hurghada-hurghada",
       "name": "North Reef, Safaga & Brother Islands (Hurghada - Hurghada)",
-      "title": "North Reef, Safaga & Brother Islands",
+      "title": "North Reef, Safaga & Brothers",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -58486,7 +58486,7 @@
     {
       "id": "topaz--north-reef-safaga-brother-islands-port-ghalib-hurghada",
       "name": "North Reef, Safaga & Brother Islands (Port Ghalib - Hurghada)",
-      "title": "North Reef, Safaga & Brother Islands",
+      "title": "North Reef, Safaga & Brothers",
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
@@ -60274,7 +60274,7 @@
     {
       "id": "vita-xplorer--st-john-s-reef-port-ghalib-port-ghalib",
       "name": "St John's Reef (Port Ghalib - Port Ghalib)",
-      "title": "St John's Reef",
+      "title": "St. John's Reef",
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
