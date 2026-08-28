@@ -57807,6 +57807,1035 @@
         "retrieved": "2026-08-28",
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027"
       }
+    },
+    {
+      "id": "avo-2027-07-24-0",
+      "boat_slug": "avo",
+      "name": "5% Off: Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+      "start": "2027-07-24",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 940.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/avo?m=07/2027",
+      "location": "Egypt",
+      "operator": "Seamad Cruises",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/avo?m=7/2027"
+      }
+    },
+    {
+      "id": "blue-2027-08-12-0",
+      "boat_slug": "blue",
+      "name": " Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-08-12",
+      "end": "2027-08-19",
+      "price": {
+        "amount": 1655.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
+      "location": "Egypt",
+      "operator": "Blue Planet Liveaboards",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027"
+      }
+    },
+    {
+      "id": "blue-2027-08-19-1",
+      "boat_slug": "blue",
+      "name": " North & Tiran (Hurghada - Hurghada)",
+      "start": "2027-08-19",
+      "end": "2027-08-26",
+      "price": {
+        "amount": 1503.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue?m=08/2027",
+      "location": "Egypt",
+      "operator": "Blue Planet Liveaboards",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027"
+      }
+    },
+    {
+      "id": "blue-horizon-2027-05-01-0",
+      "boat_slug": "blue-horizon",
+      "name": " Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1715.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
+      "location": "Egypt",
+      "operator": "Scuba Tours Worldwide",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
+      }
+    },
+    {
+      "id": "blue-horizon-2027-05-08-1",
+      "boat_slug": "blue-horizon",
+      "name": "20% Off: Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1372.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
+      "location": "Egypt",
+      "operator": "Scuba Tours Worldwide",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
+      }
+    },
+    {
+      "id": "blue-horizon-2027-05-15-2",
+      "boat_slug": "blue-horizon",
+      "name": "20% Off: Northern Red Sea & Brothers (Hurghada - Port Ghalib)",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1204.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
+      "location": "Egypt",
+      "operator": "Scuba Tours Worldwide",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
+      }
+    },
+    {
+      "id": "blue-horizon-2027-05-22-3",
+      "boat_slug": "blue-horizon",
+      "name": "20% Off: Daedalus & St. John's (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1372.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
+      "location": "Egypt",
+      "operator": "Scuba Tours Worldwide",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
+      }
+    },
+    {
+      "id": "blue-horizon-2027-05-29-4",
+      "boat_slug": "blue-horizon",
+      "name": " Daedalus & St. John's (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1715.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=05/2027",
+      "location": "Egypt",
+      "operator": "Scuba Tours Worldwide",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-06-05-0",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-06-12-1",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-06-19-2",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-06-26-3",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=06/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-08-07-0",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-08-14-1",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-08-21-2",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga (Hurghada - Hurghada)",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
+      }
+    },
+    {
+      "id": "discovery-ii-2027-08-28-3",
+      "boat_slug": "discovery-ii",
+      "name": "15% Off: Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 1040.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=08/2027",
+      "location": "Egypt",
+      "operator": "Discovery Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027"
+      }
+    },
+    {
+      "id": "dune-longara-2027-05-01-0",
+      "boat_slug": "dune-longara",
+      "name": " North Dahab Tiran (Safaga - Safaga)",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1690.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
+      "location": "Egypt",
+      "operator": "Dune-World",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
+      }
+    },
+    {
+      "id": "dune-longara-2027-05-08-1",
+      "boat_slug": "dune-longara",
+      "name": " Golden Triangle (Safaga - Safaga )",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1865.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/LimitedAvailability",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
+      "location": "Egypt",
+      "operator": "Dune-World",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
+      }
+    },
+    {
+      "id": "dune-longara-2027-05-15-2",
+      "boat_slug": "dune-longara",
+      "name": " Golden Triangle (Safaga - Ras Galep | Port Ghalib)",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1865.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
+      "location": "Egypt",
+      "operator": "Dune-World",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
+      }
+    },
+    {
+      "id": "dune-longara-2027-05-22-3",
+      "boat_slug": "dune-longara",
+      "name": " Golden Triangle (Ras Galep | Port Ghalib - Ras Galep | Port Ghalib)",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1865.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
+      "location": "Egypt",
+      "operator": "Dune-World",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
+      }
+    },
+    {
+      "id": "dune-longara-2027-05-29-4",
+      "boat_slug": "dune-longara",
+      "name": " Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s (Port Ghalib - Port Ghalib)",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=05/2027",
+      "location": "Egypt",
+      "operator": "Dune-World",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027"
+      }
+    },
+    {
+      "id": "emperor-asmaa-2027-05-01-0",
+      "boat_slug": "emperor-asmaa",
+      "name": " Simply The Best (Hurghada - Marsa Ghalib)",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
+      "location": "Egypt",
+      "operator": "Emperor Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
+      }
+    },
+    {
+      "id": "emperor-asmaa-2027-05-08-1",
+      "boat_slug": "emperor-asmaa",
+      "name": " Daedalus, Fury and Elphinstone (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1457.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
+      "location": "Egypt",
+      "operator": "Emperor Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
+      }
+    },
+    {
+      "id": "emperor-asmaa-2027-05-15-2",
+      "boat_slug": "emperor-asmaa",
+      "name": " Simply the Best (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
+      "location": "Egypt",
+      "operator": "Emperor Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
+      }
+    },
+    {
+      "id": "emperor-asmaa-2027-05-22-3",
+      "boat_slug": "emperor-asmaa",
+      "name": " Southern Solitude (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
+      "location": "Egypt",
+      "operator": "Emperor Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
+      }
+    },
+    {
+      "id": "emperor-asmaa-2027-05-29-4",
+      "boat_slug": "emperor-asmaa",
+      "name": " South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1515.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=05/2027",
+      "location": "Egypt",
+      "operator": "Emperor Divers",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027"
+      }
+    },
+    {
+      "id": "ocean-lovers-2027-07-03-0",
+      "boat_slug": "ocean-lovers",
+      "name": "10% Off: North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab (Hurghada - Hurghada)",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1458.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
+      "location": "Egypt",
+      "operator": "Sea Breeze Liveaboard",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
+      }
+    },
+    {
+      "id": "ocean-lovers-2027-07-10-1",
+      "boat_slug": "ocean-lovers",
+      "name": "10% Off: Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1490.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
+      "location": "Egypt",
+      "operator": "Sea Breeze Liveaboard",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
+      }
+    },
+    {
+      "id": "ocean-lovers-2027-07-17-2",
+      "boat_slug": "ocean-lovers",
+      "name": "10% Off: North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands (Hurghada - Hurghada)",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1458.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
+      "location": "Egypt",
+      "operator": "Sea Breeze Liveaboard",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
+      }
+    },
+    {
+      "id": "ocean-lovers-2027-07-24-3",
+      "boat_slug": "ocean-lovers",
+      "name": "10% Off: Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1490.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
+      "location": "Egypt",
+      "operator": "Sea Breeze Liveaboard",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
+      }
+    },
+    {
+      "id": "ocean-lovers-2027-07-31-4",
+      "boat_slug": "ocean-lovers",
+      "name": "10% Off: North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab (Hurghada - Hurghada)",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1458.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=07/2027",
+      "location": "Egypt",
+      "operator": "Sea Breeze Liveaboard",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027"
+      }
+    },
+    {
+      "id": "red-sea-aggressor-v-2027-08-07-0",
+      "boat_slug": "red-sea-aggressor-v",
+      "name": " Deep South – Rocky & Zabargad Islands (Hamata - Hamata)",
+      "start": "2027-08-07",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 2799.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
+      "location": "Egypt",
+      "operator": "Aggressor Fleet& Dancer Fleet",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
+      }
+    },
+    {
+      "id": "red-sea-aggressor-v-2027-08-14-1",
+      "boat_slug": "red-sea-aggressor-v",
+      "name": " Deep South – Rocky & Zabargad Islands (Hamata - Hamata)",
+      "start": "2027-08-14",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 2799.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
+      "location": "Egypt",
+      "operator": "Aggressor Fleet& Dancer Fleet",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
+      }
+    },
+    {
+      "id": "red-sea-aggressor-v-2027-08-21-2",
+      "boat_slug": "red-sea-aggressor-v",
+      "name": " Deep South – Rocky & Zabargad Islands (Hamata - Hamata)",
+      "start": "2027-08-21",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 2799.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
+      "location": "Egypt",
+      "operator": "Aggressor Fleet& Dancer Fleet",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
+      }
+    },
+    {
+      "id": "red-sea-aggressor-v-2027-08-28-3",
+      "boat_slug": "red-sea-aggressor-v",
+      "name": " Deep South – Rocky & Zabargad Islands (Hamata - Hamata)",
+      "start": "2027-08-28",
+      "end": "2027-09-04",
+      "price": {
+        "amount": 2799.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=08/2027",
+      "location": "Egypt",
+      "operator": "Aggressor Fleet& Dancer Fleet",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-05-01-0",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-05-01",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-05-08-1",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-05-08",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-05-15-2",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-05-15",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/SoldOut",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-05-22-3",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-05-22",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-05-29-4",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-05-29",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=05/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-06-05-0",
+      "boat_slug": "yachtiano",
+      "name": " North (Hurghada - Hurghada)",
+      "start": "2027-06-05",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-06-12-1",
+      "boat_slug": "yachtiano",
+      "name": " North & Tiran (Hurghada - Hurghada)",
+      "start": "2027-06-12",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-06-19-2",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-06-19",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-06-26-3",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-06-26",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=06/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-07-03-0",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-07-03",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-07-10-1",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-07-17-2",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-07-17",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-07-24-3",
+      "boat_slug": "yachtiano",
+      "name": " Yachtiano Deluxe (Hurghada - Hurghada)",
+      "start": "2027-07-24",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 1748.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
+      }
+    },
+    {
+      "id": "yachtiano-2027-07-31-4",
+      "boat_slug": "yachtiano",
+      "name": "10% Off: North & Tiran (Hurghada - Hurghada)",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1573.0,
+        "currency": "USD"
+      },
+      "availability": "https://schema.org/OnlineOnly",
+      "booking_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=07/2027",
+      "location": "Egypt",
+      "operator": "Yachtiano",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "liveaboard.com",
+        "retrieved": "2026-08-28",
+        "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
+      }
     }
   ],
   "warnings": [
@@ -57872,6 +58901,18 @@
     "/diving/search/egypt/august/2027: 80 boats",
     "no boat links matched on https://www.liveaboard.com/diving/egypt",
     "no boat links matched on https://www.liveaboard.com/diving/egypt/red-sea",
-    "skipped 13 vessel(s) a recent run found to sell nothing this season; they are re-checked weekly"
+    "skipped 13 vessel(s) a recent run found to sell nothing this season; they are re-checked weekly",
+    "carried 1 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/avo?m=7/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 2 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/blue?m=8/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 4 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/discovery-ii?m=6/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 4 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/discovery-ii?m=8/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/ocean-lovers?m=7/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 4 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=8/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 4 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027 could not be read, and an unreadable page is not an empty one",
+    "carried 5 departure(s) forward from the last run: https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027 could not be read, and an unreadable page is not an empty one"
   ]
 }

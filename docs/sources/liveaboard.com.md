@@ -184,6 +184,23 @@ Each of these cost a cycle at least once.
 - **The extras block is split across elements.** `Environment Tax (€45)` puts
   the label in an anchor and the amount in a span, so a leaf-element probe
   reports the block absent. Flatten to text first.
+- **A vessel-month page sometimes returns no JSON-LD at all**, and it is not
+  the same as a month with no trips. Two shapes come back and they mean
+  opposite things:
+  - a `Product` node with no `Event` nodes — the page loaded, that boat sells
+    nothing that month. The absence *is* the answer. 42 pages on 2026-08-28.
+  - no `Product` and no `Event` — the page answered nothing. 14 pages on
+    2026-08-28, spread across all four months and 11 vessels, so it is a flaky
+    response rather than a bad month or a broken vessel. Re-fetching the same
+    URL usually succeeds.
+
+  Treating the second as the first deleted 49 real, bookable sailings from the
+  site — DUNE Longara's entire May, still on sale at the source — and the
+  change report called them withdrawn. `scrape` now carries those departures
+  forward from the previous candidate (`carry_unread`, `CARRY_MAX_DAYS`).
+  **Do not "fix" this by writing a markup parser for those pages before
+  probing one**: nobody has yet checked whether the HTML carries the
+  departures when the JSON-LD does not.
 - **`?m=` is zero-padded in the data and unpadded in our crawl.**
   `Offer.url` says `?m=05/2027`; `SEASON_QUERIES` builds `?m=5/2027`. Both
   work — worth knowing before treating one as canonical.

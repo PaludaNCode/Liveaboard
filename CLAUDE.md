@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 445 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # 462 tests, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -104,6 +104,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   slow or unreachable, against 0.6 seconds without it (#59). Fonts are the
   visitor's own now. Adding a host back is adding a way for the page to be
   blank on somebody else's network.
+- **An unreadable page is not an empty one.** A vessel page is fetched once per
+  season month, so one response with no JSON-LD empties that boat's month while
+  the other three come back fine — and it looks exactly like a boat that sells
+  nothing in May. Fourteen pages did this on 2026-08-28 and the site deleted 49
+  real, bookable sailings, DUNE Longara's whole May among them. `scrape` now
+  carries those departures forward from the last run for up to `CARRY_MAX_DAYS`,
+  keeping each row's original `retrieved` date, and says so. The distinction is
+  the source's own: a *Product* node with no *Event* nodes is a boat selling
+  nothing that month and its absence is the answer; no structured data at all
+  answers nothing. Same rule as the fee book — a run that could not look at
+  something knows nothing about it.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

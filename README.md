@@ -150,6 +150,24 @@ remaining capacity — none of which the site uses today — so a question asked
 next month can still be put to this month's data. Every run is a commit, so
 `git log -p data/` is the history.
 
+### When a page cannot be read
+
+A vessel page is fetched once per season month, so one response with no
+structured data empties that boat's month while the other three come back
+fine — and it looks exactly like a boat that sells nothing in May. On
+2026-08-28 fourteen pages did this and the site deleted 49 real, bookable
+sailings, DUNE Longara's whole May among them.
+
+The source itself distinguishes the two, and now so does the scrape: a
+`Product` node with no `Event` nodes is a boat selling nothing that month, and
+its absence is the answer; no structured data at all answers nothing. For the
+second, `scrape` carries the previous run's departures forward for up to a
+fortnight, keeping each row's original `retrieved` date so the page still says
+when every price was last read, and noting each carried page in the candidate's
+warnings. After that they drop out — a page unread for two weeks is one we can
+no longer claim to see. The same rule the fee book already followed: a run that
+could not look at something knows nothing about it.
+
 ### Noticing that something moved
 
 The history was always there and nobody could read it: five new departures

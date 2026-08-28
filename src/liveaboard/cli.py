@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Iterable
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -163,6 +164,80 @@ def _barren(path: Path) -> tuple[set[str], dict[str, str]]:
     return fresh, record
 
 
+CARRY_MAX_DAYS = 14
+"""How long a departure may be carried through unreadable pages.
+
+Long enough to ride out a bad week -- a page that fails today usually reads
+fine tomorrow -- and short enough that we stop asserting a sailing exists on
+the strength of a fortnight-old reading. After this the departures drop out
+and the change report says the vessel-month emptied, which is then true: we
+have not been able to see it for two weeks and should not keep implying we can.
+"""
+
+
+def carry_unread(
+    previous: dict[str, Any] | None,
+    unread: Iterable[str],
+    today: date,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[str]]:
+    """Departures and vessels the last run read and this one could not.
+
+    A vessel page is fetched once per season month, so one unreadable response
+    empties that boat's month while the other three come back fine. Publishing
+    that absence deleted five real, bookable DUNE Longara sailings from the
+    site and reported them as withdrawn.
+
+    The same rule the fee book already follows: a run that could not look at
+    something knows nothing about it, and knowing nothing is not the same as
+    knowing there is nothing. Carried rows keep their original ``retrieved``
+    date, so the page still says exactly when each price was last read.
+
+    Returns the departures, the vessel records they need, and one note per
+    page carried.
+    """
+    if not previous:
+        return [], [], []
+    pages = {url for url in unread if url}
+    if not pages:
+        return [], [], []
+
+    def fresh(row: dict[str, Any]) -> bool:
+        stamp = (row.get("provenance") or {}).get("retrieved")
+        try:
+            return (today - date.fromisoformat(stamp)).days <= CARRY_MAX_DAYS
+        except (TypeError, ValueError):
+            return False
+
+    departures = [
+        row for row in previous.get("departures", [])
+        if (row.get("provenance") or {}).get("url") in pages and fresh(row)
+    ]
+    # The vessel record too, for any boat something was carried for: a boat
+    # whose every page failed has no record in this run either, and a departure
+    # promote cannot find a vessel for is a departure dropped. Offered rather
+    # than imposed -- the caller keeps this run's record wherever it has one,
+    # so a stale summary never displaces a fresh one.
+    carried_slugs = {row.get("boat_slug") for row in departures}
+    itineraries = [
+        row for row in previous.get("itineraries", [])
+        if row.get("id") in carried_slugs and fresh(row)
+    ]
+
+    notes = []
+    for url in sorted(pages):
+        kept = sum(
+            1 for row in departures
+            if (row.get("provenance") or {}).get("url") == url
+        )
+        if kept:
+            notes.append(
+                f"carried {kept} departure(s) forward from the last run: "
+                f"{url} could not be read, and an unreadable page is not an "
+                f"empty one"
+            )
+    return departures, itineraries, notes
+
+
 def cmd_scrape(args: argparse.Namespace) -> int:
     """Run the source adapters and write their raw output.
 
@@ -212,6 +287,31 @@ def cmd_scrape(args: argparse.Namespace) -> int:
         if remaining > 0:
             print(f"   ! ... and {remaining} more")
         combined.extend(output)
+
+    # Before the empty check: a run whose pages all failed has carried rows to
+    # publish, and dropping them because "the scrape produced nothing" is the
+    # same deletion one level up.
+    out = Path(args.out)
+    previous = None
+    if out.exists():
+        try:
+            previous = json.loads(out.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            previous = None
+
+    carried, carried_boats, carry_notes = carry_unread(
+        previous, combined.unread, date.today()
+    )
+    if carried:
+        seen_deps = {d.get("id") for d in combined.departures}
+        combined.departures.extend(d for d in carried if d.get("id") not in seen_deps)
+        seen_boats = {i.get("id") for i in combined.itineraries}
+        combined.itineraries.extend(
+            i for i in carried_boats if i.get("id") not in seen_boats
+        )
+        combined.warnings.extend(carry_notes)
+        print(f"   carried {len(carried)} departure(s) forward from "
+              f"{len(carry_notes)} unreadable page(s)")
 
     if combined.is_empty:
         # No candidate file is written, so an empty scrape leaves nothing for
