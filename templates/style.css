@@ -493,7 +493,12 @@ a { color:var(--accent); }
   :root { --st0:24px; --st1:66px; --st2:96px; }
 
   td.expander, th.expander { padding:4px 6px; }
-  tbody td, thead th { padding:6px 7px; }
+  /* 6px, not 7. Guests moved in front of the money here to sit with the boat,
+     and its 49px put the Total's right edge 4px past a 390px screen -- which
+     clipped the "+ tips" that says the total is not the whole bill. Two pixels
+     a side on the one unpinned column ahead of the price, and two off the
+     price column's own padding, is the whole difference. */
+  tbody td, thead th { padding:6px 5px; }
   /* One line each, ellipsised, on this screen only. Both columns sit behind
      the horizontal scroll here, yet their wrapping still set the height of
      every row: rows ran 35 to 88px and the tallest of them pushed six rows of
@@ -508,8 +513,8 @@ a { color:var(--accent); }
   /* "DEPART ▲" needs 74px of the 66 the pinned date column has here, and a
      header that reads "DEPAR…" is worse than a slightly smaller one. */
   thead th { font-size:9px; letter-spacing:.04em; }
-  /* Cell padding is 7px here, not 9, and the bar has to end where the number
+  /* Cell padding is 5px here, not 9, and the bar has to end where the number
      above it ends. */
-  .anchor { right:7px; }
+  .anchor { right:5px; }
   .site-footer { max-height:60vh; }
 }

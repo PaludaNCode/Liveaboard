@@ -367,12 +367,60 @@
     "base", "nitrox", "later", "total", "perdive",
     "availability", "disclosure", "source"
   ];
-  /* The same columns on a phone, reordered again.
-     A phone shows about two columns beside the two pinned ones, and on the
-     desktop order those two were Nts and Trip -- so the table opened on a trip
-     title and you scrolled 600px to find out what it cost. Here the money
-     comes first and the descriptive columns sit behind it: nothing is hidden,
-     the reading order is just inverted to match how much screen there is. */
+  /* The same columns on a phone, and as much of the same order as 390px holds.
+     Three of the four rules above survive here unchanged: no Operator or
+     Nights column, Guests grouped with the Boat, and Dive sites straight after
+     Trip. The fourth -- the price block reading Advertised, Nitrox, Mandatory
+     fees, Total -- cannot, and the note on the block below says what it costs.
+
+     What does not fit in front of the money, measured at 390px: Return is
+     62px, From and To are 120px each, and the pinned pair plus the expander
+     already spend 186. Return therefore follows the money rather than leading
+     it, as it does nowhere else. Of the two identifiers, the boat's name is
+     what a row is compared by; the return date you read once you have found
+     the row. Nothing is dropped -- the order is what changes. */
+  var PHONE_ORDER = [
+    /* Guests sits with the boat here, as it does at every other width: how
+       many people share the dive deck is a fact about the vessel, not about
+       the route. It is the one descriptive column that fits in front of the
+       money -- 45px, against 62 for Return and 120 for From. */
+    "start", "boat", "guests",
+    /* The one place the bill order gives way, and only in its first term.
+       Everywhere else the prices read Advertised, Nitrox, Mandatory fees,
+       Total, which is the order a bill is read in and the order the footer
+       explains. A phone cannot have it: measured at 390px, the three parts
+       ahead of the Total put the Total's left edge at x=1247 on the wide
+       order and x=477 even with nothing but the pinned columns before them.
+       The number this page exists to publish would be off the edge on the
+       device most people open it on.
+       So the Total leads and its parts follow it, in the bill's own order --
+       Advertised, Nitrox, Mandatory fees -- rather than in a third order
+       invented for this width. Scrolling right reads the bill; not scrolling
+       still shows the answer. */
+    "total", "base", "nitrox", "later", "perdive",
+    "end", "from", "to", "trip", "sites",
+    "availability", "disclosure", "source"
+  ];
+
+  /* The same again on a screen too small to afford Guests in front of the
+     money. Guests is 45px and the Total is 155 behind 186px of expander and
+     pinned columns, so the Total's right edge lands at 386: fine on a 390px
+     phone and 26px past the edge of a 360px one, which is a Galaxy S-series
+     and most older Androids. Measured, not assumed -- putting Guests ahead of
+     the price took the Total from 186..345 to 231..386.
+
+     So below that width Guests goes back behind the price block, at the head
+     of the descriptive columns rather than buried among them. The money is
+     the one thing that cannot move: a Total off the right-hand edge is the
+     exact failure this whole ordering exists to prevent, and it would be
+     silent -- the row still renders, it just does not answer the question. */
+  var TINY_ORDER = [
+    "start", "boat",
+    "total", "base", "nitrox", "later", "perdive",
+    "guests", "end", "from", "to", "trip", "sites",
+    "availability", "disclosure", "source"
+  ];
+
   /* The same columns, and the same price order within them, wherever there is
      not room for the reading order above. Identity, then the money, then
      everything the money is for.
@@ -384,25 +432,6 @@
      1440px laptop, which is most of them. Below that the price block moves in
      front of the descriptive columns -- Advertised, Nitrox, Mandatory fees,
      Total, in that order still. */
-  /* A phone fits the expander, two pinned columns and the price, and nothing
-     else before it: 24 + 66 + 96 + 160 is 346 of 390. A third pinned column
-     makes 412, and Return merely sitting third rather than pinned still makes
-     424 -- either way the number the page exists to show is off the edge.
-     So here Return follows the money rather than leading it. Of the two
-     identifiers, the boat's name is what a row is compared by; the return date
-     you read once you have found the row. */
-  var PHONE_ORDER = [
-    "start", "boat",
-    /* The one place the bill order gives way. A phone fits the expander, two
-       pinned columns and one price: Advertised, Nitrox and Mandatory fees
-       ahead of the Total put it at x 436 of a 390px screen. The Total is what
-       one row is compared with another by, so here it leads and its parts
-       follow it. */
-    "total", "later", "base", "nitrox", "perdive",
-    "end", "guests", "from", "to", "trip", "sites",
-    "availability", "disclosure", "source"
-  ];
-
   var COMPACT_ORDER = [
     "start", "end", "boat",
     "base", "nitrox", "later", "total", "perdive",
@@ -415,6 +444,11 @@
      and drives the pinned-column widths and the folded filter banks. */
   var compact = window.matchMedia("(max-width: 1700px)");
   var narrow = window.matchMedia("(max-width: 760px)");
+  /* A third question, and the narrowest one: is there room for a descriptive
+     column in front of the price at all? 385 is where the measurement falls,
+     not a round number chosen first -- Guests ahead of the money puts the
+     Total's right edge at 386. */
+  var tiny = window.matchMedia("(max-width: 385px)");
 
   /* How many of the leading columns are pinned. By position, never by name:
      two pinned columns with a third between them overlap exactly as badly as
@@ -438,19 +472,26 @@
     document.body.classList.toggle("pins-2", n === 2);
     document.body.classList.toggle("pins-3", n === 3);
     document.body.classList.toggle("pins-4", n === 4);
-    var order = narrow.matches ? PHONE_ORDER
+    var order = tiny.matches ? TINY_ORDER
+              : narrow.matches ? PHONE_ORDER
               : compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
       var x = order.indexOf(a.k), y = order.indexOf(b.k);
       return (x < 0 ? order.length : x) - (y < 0 ? order.length : y);
     });
   }
+  /* Appended rather than dropped, and said out loud: a column missing from one
+     of these lists is a fact the page stops publishing at that width only,
+     which is the hardest kind of gap to notice -- the laptop everyone develops
+     on would look right. So every list is checked, not just the widest. */
   COLS.forEach(function (c) {
-    /* Appended rather than dropped, and said out loud: a column that quietly
-       vanished from both lists would be a fact the page stopped publishing. */
-    if (ORDER.indexOf(c.k) < 0 && window.console) {
-      console.warn("column " + c.k + " is not in ORDER; printed last");
-    }
+    [["ORDER", ORDER], ["COMPACT_ORDER", COMPACT_ORDER],
+     ["PHONE_ORDER", PHONE_ORDER], ["TINY_ORDER", TINY_ORDER]
+    ].forEach(function (pair) {
+      if (pair[1].indexOf(c.k) < 0 && window.console) {
+        console.warn("column " + c.k + " is not in " + pair[0] + "; printed last");
+      }
+    });
   });
   orderColumns();
 
@@ -800,7 +841,7 @@
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
   var onWidthChange = function () { orderColumns(); draw(); };
-  [compact, narrow].forEach(function (mq) {
+  [compact, narrow, tiny].forEach(function (mq) {
     if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
     else if (mq.addListener) mq.addListener(onWidthChange);
   });
