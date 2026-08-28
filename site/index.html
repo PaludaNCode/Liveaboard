@@ -561,7 +561,6 @@ a { color:var(--accent); }
     <div class="stat"><b id="shown">0</b><span>rows shown</span></div>
     <div class="stat"><b id="nboats">0</b><span>boats</span></div>
     <div class="stat"><b id="nitin">0</b><span>itineraries</span></div>
-    <div class="stat"><b id="gap">&mdash;</b><span>avg mandatory fees</span></div>
   </div>
 </div>
 
@@ -722,8 +721,8 @@ a { color:var(--accent); }
       <h3>Nitrox and tips</h3>
       <p>
         Two thirds of this fleet bundles nitrox and a third bills for it:
-        <b>44</b> vessels say <b>included</b>, <b>21</b> publish a price
-        &mdash; &euro;30 to &euro;100, most often around &euro;77 a week
+        <b>42</b> vessels say <b>included</b>, <b>21</b> publish a price
+        &mdash; &euro;30 to &euro;100, most often around &euro;70 a week
         &mdash; and <b>2</b> never mention it at all. Those two read
         <b>not listed</b>, which is the one thing on this page nitrox can say
         that is neither yes nor a number: nobody has said whether you will be
@@ -1484,14 +1483,6 @@ a { color:var(--accent); }
     rows.forEach(function (r) { boats[r.i.boat_id] = 1; itins[r.i.id] = 1; });
     document.getElementById("nboats").textContent = Object.keys(boats).length;
     document.getElementById("nitin").textContent = Object.keys(itins).length;
-
-    /* Only average what has a figure: a trip whose required extras are
-       unstated has no gap to average, and counting it as zero would drag the
-       number toward "no fees on top". */
-    var known = rows.filter(function (r) { return r.d.mandatory_known; });
-    document.getElementById("gap").textContent = known.length
-      ? eur(known.reduce(function (s, r) { return s + r.m.later; }, 0) / known.length)
-      : "—";
   }
 
   /* How many chips a bank shows before the rest go behind "more".
