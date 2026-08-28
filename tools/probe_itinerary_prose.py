@@ -28,7 +28,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.scrape.itinerary import EXPECT_BLOCK, parse_expect  # noqa: E402
+from liveaboard.scrape.itinerary import EXPECT_BLOCK, parse_prose  # noqa: E402
 from liveaboard.scrape.liveaboard_com import HOST  # noqa: E402
 
 EVENT_ID = re.compile(r"^LA-(\d+)-(\d+)-(\d+)$")
@@ -104,9 +104,11 @@ def main() -> int:
     headings: Counter[str] = Counter()
     shapes: Counter[str] = Counter()
     day_markup: Counter[str] = Counter()
+    forms: Counter[str] = Counter()
     matched = has_days = empty = 0
     dumped = 0
     misses: list[str] = []
+    thin: list[str] = []
 
     for n, (slug, boat_id, tour_id, name) in enumerate(boats, 1):
         body = fetch(endpoint(boat_id, tour_id))
@@ -118,7 +120,7 @@ def main() -> int:
             headings[text] += 1
 
         block = EXPECT_BLOCK.search(body)
-        intro, days = parse_expect(body)
+        intro, sections = parse_prose(body)
         bold = BOLD_DAY.findall(body)
         any_day = DAY_ANY.findall(body)
         if any_day:
@@ -126,15 +128,35 @@ def main() -> int:
             for tag, _ in any_day[:4]:
                 day_markup[(tag or "(bare text)").split()[0].rstrip(">") + ">"] += 1
 
+        # Which of the three shapes this vessel writes in. The parser is meant
+        # to be indifferent to it; counting them is how that claim is checked
+        # against the fleet rather than against the three fixtures.
+        days = [x for x in sections if x.is_day]
+        if not sections:
+            forms["no sections parsed"] += 1
+        elif len(days) == len(sections):
+            forms["all headings are days"] += 1
+        elif not days:
+            forms["all headings are places"] += 1
+        else:
+            forms["mixed days and places"] += 1
+
         shape = (
             f"prose_div={'y' if PROSE_DIV.search(body) else 'n'} "
             f"expect_block={'y' if block else 'n'} "
             f"day_markers={len(any_day)} bold_days={len(bold)} "
-            f"parsed_days={len(days)}"
+            f"intro={'y' if intro else 'n'} "
+            f"sections={len(sections)} days={len(days)}"
         )
         shapes[shape] += 1
-        if days:
+        if sections:
             matched += 1
+            # A section whose text is a fragment usually means the split landed
+            # inside a sentence. Cheap to spot, and the only way a silently
+            # wrong parse shows up short of reading 67 pages by hand.
+            short = [x for x in sections if len(x.text) < 25]
+            if short or len(sections) == 1 and not intro:
+                thin.append(f"{slug} ({len(short)}/{len(sections)} short)")
         else:
             empty += 1
             misses.append(slug)
@@ -146,12 +168,19 @@ def main() -> int:
                 print("--- end ---\n")
 
         print(f"  [{n}/{len(boats)}] {slug:24.24} {shape}", flush=True)
+        if sections:
+            for section in sections[:2]:
+                print(f"          {'day  ' if section.is_day else 'place'} "
+                      f"{section.heading[:28]:28.28} | {section.text[:70]}")
 
     print("\n================ SUMMARY ================")
     print(f"vessels read              : {len(boats)}")
-    print(f"parser produced days      : {matched}")
+    print(f"parser produced sections  : {matched}")
     print(f"parser produced none      : {empty}")
     print(f"page mentions 'Day N'     : {has_days}")
+    print("\nshape of what was parsed:")
+    for form, count in forms.most_common():
+        print(f"   {count:4}  {form}")
     print("\nstructures seen:")
     for shape, count in shapes.most_common():
         print(f"   {count:4}  {shape}")
@@ -161,6 +190,10 @@ def main() -> int:
     print("\nheadings on these pages:")
     for text, count in headings.most_common(20):
         print(f"   {count:4}  {text!r}")
+    if thin:
+        print(f"\nvessels with suspiciously short sections ({len(thin)}):")
+        for line in thin[:20]:
+            print(f"   {line}")
     if misses:
         print(f"\nvessels the parser found nothing on ({len(misses)}):")
         print("   " + ", ".join(misses[:40]))

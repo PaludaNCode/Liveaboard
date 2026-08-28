@@ -175,14 +175,17 @@ def main() -> int:
             # so it is a sketch of the week. Anything that renders it should
             # say so rather than presenting it as a log.
             "intro": detail.intro,
-            "days": [{"day": d.label, "text": d.text} for d in detail.days],
+            "sections": [
+                {"heading": x.heading, "text": x.text, "is_day": x.is_day}
+                for x in detail.sections
+            ],
             "source_url": endpoint(boat_id, tour_id),
         }
         added += 1
         print(
             f"  [{index}/{len(todo)}] {slug:22.22} {name[:34]:34} "
             f"sites={sites or '-'} dives={detail.dives or '-'} "
-            f"days={len(detail.days) or '-'}",
+            f"sections={len(detail.sections) or '-'}",
             flush=True,
         )
 

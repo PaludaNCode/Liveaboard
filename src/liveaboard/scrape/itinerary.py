@@ -41,7 +41,7 @@ from __future__ import annotations
 
 import html as html_module
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 REGION_BLOCK = re.compile(
     r"Key\s+regions\s*</h\d>\s*<ol[^>]*>(.*?)</ol>", re.I | re.S
@@ -93,7 +93,10 @@ MAX_DIVES = 60
 
 
 EXPECT_BLOCK = re.compile(
-    r"What\s+to\s+expect\s*</h\d>\s*<div[^>]*>(.*?)</div>", re.I | re.S
+    r"What\s+to\s+expect\s*</h\d>"
+    r".{0,6000}?"
+    r"<div[^>]*\bclass=[\"\']?prose\b[^>]*>(.*?)</div>",
+    re.I | re.S,
 )
 """The operator's own prose about the trip, taken by its heading.
 
@@ -101,29 +104,57 @@ Everything else on this fragment is a field. This is the only place the boat
 says, in sentences, where it actually goes -- and it is the closest thing the
 source has to an authority on that, because a "Key regions" list is a summary
 and this is a schedule.
+
+The gap between the heading and the prose is deliberate, and is what an earlier
+version got wrong. It required the two to be adjacent, having been written
+against a hand-trimmed fixture where they were; on the real pages a ``<figure>``
+sits between them, holding the itinerary map and its magnify button with two
+inline SVGs. The pattern matched on none of the 67 vessels, while the regions on
+the same pages parsed fine -- so the failure looked like missing content rather
+than a missing figure.
 """
 
-PARAGRAPH = re.compile(r"<p[^>]*>(.*?)(?=<p[^>]*>|\Z)", re.I | re.S)
-"""One paragraph. Matched up to the next one rather than to a closing tag,
-because the page omits ``</p>`` throughout."""
+SECTION = re.compile(
+    r"<strong>\s*(.*?)\s*</strong>(.*?)(?=<strong>|\Z)", re.I | re.S
+)
+"""One bold heading and everything under it, up to the next bold heading.
 
-DAY_HEADING = re.compile(r"^\s*<strong>\s*(Day\s*\d+[^<]*?)\s*</strong>\s*$", re.I)
-"""A day marker: a paragraph that is nothing but a bold "Day 3"."""
+Split on the bold runs rather than on paragraphs, because the operators do not
+agree on what goes under one. Measured across all 67 vessels, the prose comes
+in three shapes:
 
-SECTION_HEADING = re.compile(r"^\s*<strong>.*</strong>\s*$", re.I | re.S)
-"""Any other bold-only paragraph -- "Sample Itinerary" is the one that occurs.
-Skipped rather than read as prose: it labels the list, it is not part of it."""
+* ``<strong>Day 2</strong>`` then a paragraph -- the most common;
+* ``<strong>Day 1:</strong>`` then a ``<ul>`` of bullets, so the content is not
+  a paragraph at all;
+* ``<strong>Brothers Islands</strong>`` then a description of the place, with
+  no days anywhere -- four vessels never write "Day".
 
-MAX_DAYS = 30
-"""Above this the parse has run into something that is not a day list."""
+A section is therefore a heading and its text, and whether that heading is a
+day or a reef is left to whatever reads it. Splitting by ``<p>`` handled only
+the first shape.
+"""
+
+MAX_SECTIONS = 40
+"""Above this the parse has run into something that is not an itinerary."""
+
+DAY_LABEL = re.compile(r"^\s*day\s*\d+", re.I)
+"""Whether a section heading is a day rather than a place."""
 
 
 @dataclass(frozen=True, slots=True)
-class TripDay:
-    """One line of the operator's sample itinerary."""
+class TripSection:
+    """One heading in the operator's prose, and the text under it.
 
-    label: str
+    The heading is a day on most vessels and a place name on some. Kept as
+    written either way -- deciding which is a judgement, and this is a record.
+    """
+
+    heading: str
     text: str
+
+    @property
+    def is_day(self) -> bool:
+        return bool(DAY_LABEL.match(self.heading))
 
 
 @dataclass(frozen=True, slots=True)
@@ -135,11 +166,11 @@ class TripDetail:
     guests: int | None = None
     experience: str | None = None
     intro: str | None = None
-    days: tuple[TripDay, ...] = ()
+    sections: tuple[TripSection, ...] = ()
 
     def __bool__(self) -> bool:
         return bool(self.regions or self.dives or self.guests or self.experience
-                    or self.intro or self.days)
+                    or self.intro or self.sections)
 
 
 def _text(value: str) -> str:
@@ -177,51 +208,46 @@ def parse_regions(markup: str) -> tuple[str, ...]:
     return tuple(out)
 
 
-def parse_expect(markup: str) -> tuple[str | None, tuple[TripDay, ...]]:
-    """The lead paragraph and the sample itinerary, as the operator writes them.
+def parse_prose(markup: str) -> tuple[str | None, tuple[TripSection, ...]]:
+    """The lead paragraph and the operator's own account of the trip.
 
-    Returns the prose *verbatim*. Nothing here decides what a day means or
+    Returns the prose *verbatim*. Nothing here decides what a section means or
     which words in it are places -- that is a separate question, asked later
     against one vocabulary, so that improving the vocabulary does not require
     fetching these pages again.
 
-    The list is headed "Sample Itinerary" on the pages seen so far, and the days
-    it names are not contiguous -- 2, 3, 5, 7 on the fixture. It is a sketch of
-    the week rather than a contract, and anything reading it should say so.
+    Where the sections are days, the list is headed "Sample Itinerary" and the
+    days are not contiguous -- 2, 3, 5, 7 on one trip. It is a sketch of the
+    week rather than a contract, and anything reading it should say so.
     """
     block = EXPECT_BLOCK.search(markup or "")
     if not block:
         return None, ()
+    body = block.group(1)
 
-    intro: list[str] = []
-    days: list[TripDay] = []
-    current: str | None = None
-    body: list[str] = []
+    first = body.find("<strong")
+    intro = _text(_strip(body if first < 0 else body[:first]))
 
-    def close() -> None:
-        if current is not None and body:
-            days.append(TripDay(label=current, text=" ".join(body)))
+    sections: list[TripSection] = []
+    for match in SECTION.finditer(body):
+        heading = _text(_strip(match.group(1)))
+        text = _text(_strip(match.group(2)))
+        # A bold run with nothing under it is a label for what follows --
+        # "Sample Itinerary" is the one that occurs -- not a section of its own.
+        if heading and text:
+            sections.append(TripSection(heading=heading, text=text))
 
-    for match in PARAGRAPH.finditer(block.group(1)):
-        chunk = match.group(1).strip()
-        heading = DAY_HEADING.match(chunk)
-        if heading:
-            close()
-            current, body[:] = _text(heading.group(1)), []
-            continue
-        if SECTION_HEADING.match(chunk):
-            # "Sample Itinerary" and friends label the list; they are not in it.
-            continue
-        text = _text(re.sub(r"<[^>]+>", " ", chunk))
-        if not text:
-            continue
-        if current is None:
-            intro.append(text)
-        else:
-            body.append(text)
-    close()
+    return (intro or None, tuple(sections[:MAX_SECTIONS]))
 
-    return (" ".join(intro) or None, tuple(days[:MAX_DAYS]))
+
+def _strip(html: str) -> str:
+    """Tags out, one space in their place.
+
+    A space rather than nothing: the bullets under a "Day 1:" heading run
+    together into "5:00 pmThe crew will" if the tags between them simply
+    vanish.
+    """
+    return re.sub(r"<[^>]+>", " ", html or "")
 
 
 def parse_trip(markup: str) -> TripDetail:
@@ -236,10 +262,10 @@ def parse_trip(markup: str) -> TripDetail:
     else:
         experience = _field(markup, "Experience")
 
-    intro, days = parse_expect(markup)
+    intro, sections = parse_prose(markup)
     return TripDetail(
         intro=intro,
-        days=days,
+        sections=sections,
         regions=parse_regions(markup),
         # "Approximately 18 dives in total" -- the word matters, so the figure
         # stays a floor the way the vessel-level counts already are.
