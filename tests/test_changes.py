@@ -10,7 +10,7 @@ from __future__ import annotations
 import unittest
 
 from liveaboard.changes import (
-    MISSING_VESSEL_MIN, ROUNDING_MOVE, compare, headline, render,
+    MISSING_VESSEL_MIN, MIN_MOVE, compare, headline, render,
 )
 
 
@@ -117,6 +117,60 @@ class TestChangesThatDidNotHappen(unittest.TestCase):
         self.assertEqual(report.vessels_gone, [])
         self.assertEqual(len(report.withdrawn), 2)
 
+    def test_a_month_that_went_unread_is_not_five_withdrawals(self):
+        """The real one, reported by the site's owner. A vessel page is fetched
+        once per season month, so one unreadable response empties that boat's
+        month while the other three come back fine -- and the vessel-level
+        guard never fires, because the boat did not lose everything.
+
+        DUNE Longara's five May sailings were reported as withdrawn while
+        liveaboard.com was still selling every one of them."""
+        may = [departure(f"m{i}", start=f"2027-05-{i+1:02}") for i in range(5)]
+        june = [departure(f"j{i}", start=f"2027-06-{i+1:02}") for i in range(4)]
+        report = compare(dataset(may + june), dataset(june))
+        self.assertEqual(report.months_gone, ["Alia Soul 2027-05"])
+        self.assertEqual(report.withdrawn, [])
+        self.assertIn("came back unreadable", render(report))
+
+    def test_a_month_a_vessel_barely_sold_is_still_withdrawn(self):
+        """Below the threshold a boat can legitimately lose its only sailing
+        that month, and calling that an unread page would hide a real change."""
+        may = [departure("m0", start="2027-05-01")]
+        june = [departure(f"j{i}", start=f"2027-06-{i+1:02}") for i in range(4)]
+        report = compare(dataset(may + june), dataset(june))
+        self.assertEqual(report.months_gone, [])
+        self.assertEqual(len(report.withdrawn), 1)
+
+    def test_a_vessel_losing_everything_is_reported_once_not_twice(self):
+        """Both guards match when a boat vanishes entirely. It is one event."""
+        deps = [departure(f"d{i}", start=f"2027-05-{i+1:02}")
+                for i in range(MISSING_VESSEL_MIN + 1)]
+        report = compare(dataset(deps), dataset([]))
+        self.assertEqual(report.vessels_gone, ["Alia Soul"])
+        self.assertEqual(report.months_gone, [])
+
+    def test_a_rate_nothing_is_priced_in_is_not_reported(self):
+        """The FX table carries every rate the feed publishes. GBP is in it and
+        no vessel here quotes GBP, but it sorted first -- so a GBP wobble was
+        reported as the reason every euro figure on the page had moved."""
+        report = compare(
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.858885}}),
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.900000, "USD": 0.858885}}),
+        )
+        self.assertFalse(report.fx_moved)
+        self.assertNotIn("GBP", render(report))
+
+    def test_the_rate_the_fares_are_quoted_in_is_reported(self):
+        report = compare(
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.858885}}),
+            dataset([departure("d1", currency="USD")],
+                    fx={"rates": {"GBP": 1.166317, "USD": 0.900000}}),
+        )
+        self.assertEqual([m.currency for m in report.fx], ["USD"])
+
     def test_a_currency_switch_is_not_a_price_move(self):
         """1000 USD against 1000 EUR is not a flat price; it is two numbers
         that cannot be compared."""
@@ -189,10 +243,21 @@ class TestRoundingIsNotARepricing(unittest.TestCase):
         text = render(compare(before, after))
         self.assertIn("3 further fare(s) moved by less than", text)
 
+    def test_the_report_shows_what_it_was_and_what_it_is(self):
+        """"It went up" is not the answer to "by how much, from what?"."""
+        text = render(compare(
+            dataset([departure("d1", price=2400.0)]),
+            dataset([departure("d1", price=2560.0)]),
+        ))
+        self.assertIn("2,400 ->   2,560 USD", text)
+        self.assertIn("+160", text)
+        # A decimal, because +6.7% printed as +7% is a different claim.
+        self.assertIn("+6.7%", text)
+
     def test_a_real_move_still_gets_through(self):
         report = compare(
             dataset([departure("d1", price=1000.0)]),
-            dataset([departure("d1", price=1000.0 + ROUNDING_MOVE)]),
+            dataset([departure("d1", price=1000.0 + MIN_MOVE)]),
         )
         self.assertEqual(len(report.price_up), 1)
         self.assertEqual(report.price_rounding, 0)
@@ -203,7 +268,7 @@ class TestRoundingIsNotARepricing(unittest.TestCase):
             dataset([departure("d1", price=999.0)]),
         )
         self.assertTrue(report.is_quiet)
-        self.assertIn("re-rounded", render(report))
+        self.assertIn("shifting by under", render(report))
 
 
 class TestHeadline(unittest.TestCase):
@@ -234,8 +299,22 @@ class TestHeadline(unittest.TestCase):
             dataset([departure("d1", price=1200.0)]),
         )
         line = headline(report)
-        self.assertIn("+200 USD", line)
+        # Both ends, not just the delta: "what was it before" is the first
+        # thing anyone asks of a price change.
+        self.assertIn("1,000 -> 1,200 USD", line)
         self.assertIn("Alia Soul", line)
+
+    def test_a_fee_change_names_the_vessel(self):
+        """The weekly fee run re-promotes the same candidate, so a fee change
+        is the only thing it can report. Counting them alone would make every
+        one of those commit subjects identical."""
+        before = dataset([departure("d1")], itineraries=[
+            {"id": "it1", "boat_id": "alia-soul", "title": "T", "fees": [park(100.0)]}])
+        after = dataset([departure("d1")], itineraries=[
+            {"id": "it1", "boat_id": "alia-soul", "title": "T", "fees": [park(140.0)]}])
+        line = headline(compare(before, after))
+        self.assertIn("Alia Soul", line)
+        self.assertIn("marine_park", line)
 
     def test_it_is_always_one_line(self):
         """It becomes a commit subject; a newline would split the message."""

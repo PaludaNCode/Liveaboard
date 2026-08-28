@@ -216,6 +216,15 @@ class ScrapeOutput:
     itineraries: list[dict[str, Any]] = field(default_factory=list)
     departures: list[dict[str, Any]] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    unread: list[str] = field(default_factory=list)
+    """Pages this run could not read: blocked, or fetched and unparseable.
+
+    Not the same as a page that said nothing. A vessel page carrying a Product
+    node and no Events is a boat selling nothing that month, and its absence
+    from ``departures`` is the answer. A page that came back with no structured
+    data at all answers nothing, and treating the two alike is how a run that
+    failed to read five sailings publishes a site that says they do not exist.
+    """
     archive: list[dict[str, Any]] = field(default_factory=list)
     """The structured data each page published, whether or not we parse it.
 
@@ -240,6 +249,7 @@ class ScrapeOutput:
         self.itineraries.extend(other.itineraries)
         self.departures.extend(other.departures)
         self.warnings.extend(other.warnings)
+        self.unread.extend(other.unread)
         self.archive.extend(other.archive)
 
     @property
@@ -332,12 +342,14 @@ class SourceAdapter(ABC):
                 result = self.fetcher.get(url)
             except FetchBlocked as exc:
                 output.warnings.append(f"skipped {url}: {exc}")
+                output.unread.append(url)
                 continue
             fetched += 1
             try:
                 output.extend(self.parse(result))
             except ScrapeError as exc:
                 output.warnings.append(f"unparsed {url}: {exc}")
+                output.unread.append(url)
 
         output.warnings.extend(self._notes)
         if fetched == 0:

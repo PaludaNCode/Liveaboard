@@ -40,15 +40,21 @@ from typing import Any
 
 Dataset = dict[str, Any]
 
-ROUNDING_MOVE = 2.0
-"""Below this a "price change" is the source rounding, not an operator.
+MIN_MOVE = 5.0
+"""The floor for a price move worth a reader's attention.
 
-Measured, not guessed: on the 2026-08-28 refresh 174 fares "changed", and
-every single one of them by exactly -1 on a four-figure sum. Nobody reprices a
-1,469 berth by a dollar; the site had re-rounded. Left in, they filled both
-price blocks and pushed the real moves past the cap. Suppressed ones are still
-counted and still stated -- a report that quietly drops rows is the failure
-this project exists to correct in other people.
+Nothing under five on a four-figure berth is a decision anyone would change,
+and most of what sits below it is not a decision anyone made: on the
+2026-08-28 refresh 174 fares "changed" and every single one of them by exactly
+-1, which is the source re-rounding. Left in, they filled both price blocks
+and pushed the real moves past the cap.
+
+The comparison is on the fare in the currency the operator quoted it in, so
+nothing here is an exchange-rate artefact -- an FX move is reported on its own
+line and never as a reprice.
+
+Suppressed moves are still counted and still stated. A report that quietly
+drops rows is the failure this project exists to correct in other people.
 """
 
 MISSING_VESSEL_MIN = 3
@@ -79,6 +85,19 @@ class PriceMove:
     @property
     def pct(self) -> float:
         return (self.delta / self.was * 100) if self.was else 0.0
+
+
+@dataclass(frozen=True, slots=True)
+class FxMove:
+    """One exchange rate that moved, and that something on the page uses."""
+
+    currency: str
+    was: float
+    now: float
+
+    @property
+    def pct(self) -> float:
+        return ((self.now - self.was) / self.was * 100) if self.was else 0.0
 
 
 @dataclass(frozen=True, slots=True)
@@ -117,22 +136,19 @@ class Report:
     fees: list[FeeMove] = field(default_factory=list)
     vessels_gone: list[str] = field(default_factory=list)
     """Vessels that lost every departure at once -- a failed fetch, most likely."""
+    months_gone: list[str] = field(default_factory=list)
+    """Vessel-months that emptied while the vessel kept selling other months."""
     vessels_new: list[str] = field(default_factory=list)
     price_rounding: int = 0
-    """Fares that moved by less than ``ROUNDING_MOVE`` -- counted, not listed."""
+    """Fares that moved by less than ``MIN_MOVE`` -- counted, not listed."""
     availability_newly_read: bool = False
     """The older dataset stated availability nowhere, so no transition is real."""
-    fx_was: float | None = None
-    fx_now: float | None = None
-    fx_currency: str = ""
+    fx: list[FxMove] = field(default_factory=list)
+    """Rates that moved *and* that a price on the page is quoted in."""
 
     @property
     def fx_moved(self) -> bool:
-        return (
-            self.fx_was is not None
-            and self.fx_now is not None
-            and abs(self.fx_now - self.fx_was) > 1e-9
-        )
+        return bool(self.fx)
 
     @property
     def is_quiet(self) -> bool:
@@ -140,7 +156,7 @@ class Report:
         return not any(
             (self.added, self.sold_out, self.withdrawn, self.returned,
              self.price_up, self.price_down, self.fees, self.vessels_gone,
-             self.vessels_new)
+             self.months_gone, self.vessels_new)
         )
 
 
@@ -229,6 +245,24 @@ def compare(before: Dataset, after: Dataset) -> Report:
                 grouped.setdefault(boat, set()).add(dep["id"])
         return grouped
 
+    # The same failure one level down. A vessel page is fetched once per season
+    # month, so one unreadable response empties that boat's month while the
+    # other three come back fine -- and the vessel-level guard above never
+    # fires, because the boat did not lose everything.
+    #
+    # This is not hypothetical. On 2026-08-28 fourteen vessel-month pages came
+    # back with no structured data at all, and DUNE Longara's five May sailings
+    # were reported as withdrawn while liveaboard.com was still selling every
+    # one of them.
+    def by_boat_month(deps: dict, its: dict) -> dict[tuple[str, str], set[str]]:
+        grouped: dict[tuple[str, str], set[str]] = {}
+        for dep in deps.values():
+            boat = its.get(dep.get("itinerary_id"), {}).get("boat_id")
+            month = (dep.get("start") or "")[:7]
+            if boat and month:
+                grouped.setdefault((boat, month), set()).add(dep["id"])
+        return grouped
+
     old_by_boat = by_boat(old_deps, old_its)
     new_by_boat = by_boat(new_deps, new_its)
     vanished = {
@@ -244,6 +278,19 @@ def compare(before: Dataset, after: Dataset) -> Report:
         if b not in old_by_boat
     )
 
+    old_months, new_months = by_boat_month(old_deps, old_its), by_boat_month(new_deps, new_its)
+    blank_months = {
+        (boat, month) for (boat, month), ids in old_months.items()
+        if len(ids) >= MISSING_VESSEL_MIN
+        and not new_months.get((boat, month))
+        and boat not in vanished        # already reported as a missing vessel
+        and new_by_boat.get(boat)       # still selling other months, so it is there
+    }
+    report.months_gone = sorted(
+        f"{old_boats.get(boat, {}).get('name') or boat} {month}"
+        for boat, month in blank_months
+    )
+
     for dep_id, dep in new_deps.items():
         if dep_id not in old_deps:
             report.added.append(_as_departed(dep, new_its, new_boats))
@@ -254,6 +301,8 @@ def compare(before: Dataset, after: Dataset) -> Report:
         boat = old_its.get(dep.get("itinerary_id"), {}).get("boat_id")
         if boat in vanished:
             continue  # already reported once, as a missing vessel
+        if (boat, (dep.get("start") or "")[:7]) in blank_months:
+            continue  # a month that went unread, not sailings that went away
         report.withdrawn.append(_as_departed(dep, old_its, old_boats))
 
     # A field the older dataset never carried cannot have changed. Before
@@ -284,7 +333,7 @@ def compare(before: Dataset, after: Dataset) -> Report:
         was, now = old_price.get("amount"), new_price.get("amount")
         if was is None or now is None or was == now:
             continue
-        if abs(now - was) < ROUNDING_MOVE:
+        if abs(now - was) < MIN_MOVE:
             report.price_rounding += 1
             continue
         boat, title = _describe(new, new_its, new_boats)
@@ -313,12 +362,26 @@ def compare(before: Dataset, after: Dataset) -> Report:
             if code not in fees:
                 report.fees.append(FeeMove(name, code, was, "no longer listed"))
 
+    # Only the rates something is actually priced in. The table carries every
+    # rate the feed publishes -- GBP among them, which no vessel here quotes --
+    # and taking the first key out of it reported a GBP move as the reason
+    # every euro figure on the page had shifted. Nothing on the page is
+    # converted from GBP; every fare is quoted in dollars.
     old_fx, new_fx = before.get("fx") or {}, after.get("fx") or {}
-    currency = next(iter(new_fx.get("rates") or {}), "")
-    if currency:
-        report.fx_currency = currency
-        report.fx_was = (old_fx.get("rates") or {}).get(currency)
-        report.fx_now = (new_fx.get("rates") or {}).get(currency)
+    old_rates, new_rates = old_fx.get("rates") or {}, new_fx.get("rates") or {}
+    display = new_fx.get("display_currency")
+    priced_in = {
+        (dep.get("price") or {}).get("currency") for dep in new_deps.values()
+    } | {
+        (fee.get("amount") or {}).get("currency")
+        for itinerary in new_its.values()
+        for fee in itinerary.get("fees") or []
+    }
+    for currency in sorted(c for c in priced_in if c and c != display):
+        was, now = old_rates.get(currency), new_rates.get(currency)
+        if was is None or now is None or abs(now - was) <= 1e-9:
+            continue
+        report.fx.append(FxMove(currency, float(was), float(now)))
 
     for bucket in (report.added, report.sold_out, report.withdrawn, report.returned):
         bucket.sort(key=lambda d: (d.start, d.boat))
@@ -343,6 +406,8 @@ def headline(report: Report) -> str:
     """
     if report.vessels_gone:
         return f"{len(report.vessels_gone)} vessel(s) lost every departure"
+    if report.months_gone:
+        return f"{len(report.months_gone)} vessel-month(s) went unread"
 
     bits: list[str] = []
     if report.vessels_new:
@@ -354,10 +419,17 @@ def headline(report: Report) -> str:
     moved = len(report.price_up) + len(report.price_down)
     if moved:
         biggest = max(report.price_up + report.price_down, key=lambda m: abs(m.delta))
-        bits.append(f"{moved} prices moved (to {biggest.delta:+,.0f} "
-                    f"{biggest.currency} on {biggest.boat})")
+        bits.append(f"{moved} prices moved (biggest {biggest.boat} "
+                    f"{biggest.was:,.0f} -> {biggest.now:,.0f} {biggest.currency})")
     if report.fees:
-        bits.append(f"{len(report.fees)} fee change(s)")
+        # Named, not just counted. The weekly fee run cannot move a fare -- it
+        # re-promotes the same candidate -- so a fee change is the only thing
+        # it ever reports, and "3 fee change(s)" would make every one of those
+        # subjects identical.
+        first = report.fees[0]
+        rest = f", and {len(report.fees) - 1} more" if len(report.fees) > 1 else ""
+        bits.append(f"{len(report.fees)} fee change(s) "
+                    f"({first.boat} {first.code}{rest})")
     if report.sold_out:
         bits.append(f"{len(report.sold_out)} sold out")
     if report.returned:
@@ -385,7 +457,7 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     if report.is_quiet and not report.fx_moved and not report.availability_newly_read:
         lines.append("\nnothing moved." if not report.price_rounding else
                      f"\nnothing moved, beyond {report.price_rounding} fare(s) "
-                     f"re-rounded by under {ROUNDING_MOVE:,.0f}.")
+                     f"shifting by under {MIN_MOVE:,.0f}.")
         return "\n".join(lines)
 
     if report.availability_newly_read:
@@ -411,6 +483,18 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
         for name in report.vessels_gone[:limit]:
             lines.append(f"  {name}")
 
+    if report.months_gone:
+        lines.append(
+            f"\n!! {len(report.months_gone)} vessel-month(s) lost every departure "
+            "while the vessel kept selling other months — a page that came back "
+            "unreadable, not a withdrawn month. Those sailings are missing from "
+            "the site until the next crawl reads them."
+        )
+        for name in report.months_gone[:limit]:
+            lines.append(f"  {name}")
+        if len(report.months_gone) > limit:
+            lines.append(f"  ... and {len(report.months_gone) - limit} more not shown")
+
     def money(d: Departed) -> str:
         return f"{d.price:,.0f} {d.currency}" if d.price is not None else "no price"
 
@@ -422,12 +506,18 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
         f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.returned])
     block("withdrawn", [
         f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.withdrawn])
-    block("price up", [
-        f"{m.start}  {m.boat:22.22} {m.was:,.0f} -> {m.now:,.0f} {m.currency}"
-        f"  ({m.pct:+.0f}%)" for m in report.price_up])
-    block("price down", [
-        f"{m.start}  {m.boat:22.22} {m.was:,.0f} -> {m.now:,.0f} {m.currency}"
-        f"  ({m.pct:+.0f}%)" for m in report.price_down])
+    def moved(m: PriceMove) -> str:
+        """Both ends, the difference, and the trip it is for.
+
+        The percentage carries a decimal: a real 20 move on a 2,400 berth is
+        0.8%, and printing that as "+1%" -- or worse, "+0%" -- reads as the
+        rounding noise this report is at pains to exclude.
+        """
+        return (f"{m.start}  {m.boat:20.20} {m.was:>7,.0f} -> {m.now:>7,.0f} "
+                f"{m.currency}  {m.delta:+,.0f} ({m.pct:+.1f}%)  {m.title:.34}")
+
+    block("price up", [moved(m) for m in report.price_up])
+    block("price down", [moved(m) for m in report.price_down])
     block("fees", [
         f"{f.boat:22.22} {f.code:16.16} {f.was} -> {f.now}" for f in report.fees])
     if report.vessels_new:
@@ -436,16 +526,16 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     if report.price_rounding:
         lines.append(
             f"\n{report.price_rounding} further fare(s) moved by less than "
-            f"{ROUNDING_MOVE:,.0f} — the source re-rounding, not a reprice; "
-            "counted here rather than listed above"
+            f"{MIN_MOVE:,.0f} — too small to be a decision, and mostly the "
+            "source re-rounding; counted here rather than listed above"
         )
 
     # Last, and separate: it explains a euro figure moving on every row, and it
     # is not an operator changing anything.
-    if report.fx_moved:
-        pct = (report.fx_now - report.fx_was) / report.fx_was * 100
+    for move in report.fx:
         lines.append(
-            f"\nfx: {report.fx_currency} {report.fx_was:.6f} -> {report.fx_now:.6f} "
-            f"({pct:+.2f}%) — every euro figure moves with it; no operator changed a price"
+            f"\nfx: {move.currency} {move.was:.6f} -> {move.now:.6f} "
+            f"({move.pct:+.2f}%) — every euro figure converted from "
+            f"{move.currency} moves with it; no operator changed a price"
         )
     return "\n".join(lines)
