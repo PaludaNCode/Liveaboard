@@ -61,7 +61,7 @@
      on nothing but filters. Folded away by default there; untouched on a
      laptop, where they fit. -->
 <button type="button" class="filters-toggle" id="filtersToggle"
-        aria-expanded="false" aria-controls="ports sites operators">Filter by port, site or operator</button>
+        aria-expanded="false" aria-controls="ports sites boats">Filter by port, site or boat</button>
 
 <div class="filterbar">
   <span class="tlabel">Departs from</span>
@@ -73,14 +73,17 @@
   <span id="sites"></span>
 </div>
 
-<!-- Who runs the trip. A filter, deliberately not a ranking: it groups the
-     fleet by company so a diver can see that one operator's boats all charge
-     for nitrox while another's do not, which is a fact about prices. Scoring
-     operators against each other was tried and removed — it read as a league
-     table and contradicted the total beside it. -->
+<!-- The vessel. A filter, deliberately not a ranking: it shows everything one
+     boat runs across the season, which is the question a diver who has settled
+     on a boat actually asks. This replaced a filter on the operating company —
+     that answered a question asked far less often, and a company with six
+     boats returned six boats' worth of rows with no way to tell them apart.
+     The operator is still searchable, so typing a company name finds its
+     fleet. Scoring operators against each other was tried and removed: it read
+     as a league table and contradicted the total beside it. -->
 <div class="filterbar">
-  <span class="tlabel">Operator</span>
-  <span id="operators"></span>
+  <span class="tlabel">Boat</span>
+  <span id="boats"></span>
 </div>
 
 <p class="hint">
