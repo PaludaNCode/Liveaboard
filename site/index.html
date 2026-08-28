@@ -867,7 +867,14 @@ a { color:var(--accent); }
      Grouping by it is useful — one operator's boats may all bundle nitrox
      while another's all bill for it, and that is a fact about prices. Ranking
      them is not: a per-operator honesty score was removed for reading as a
-     league table, and naming who sells a trip must not bring it back. */
+     league table, and naming who sells a trip must not bring it back.
+
+     A filter and a search term, deliberately not a column. Who sells a trip is
+     how you narrow the table, not something you compare two rows on: the
+     column repeated one of 42 names on every row and answered no question the
+     price columns beside it did not answer better. The field stays in the
+     dataset and in the search haystack, so a diver looking for a particular
+     company still finds them. */
   var OPERATORS = tally(function (i) { return [i.operator]; });
 
   /* ---------- columns ---------- */
@@ -893,10 +900,6 @@ a { color:var(--accent); }
        that scrolls away from its own boat's name cannot be compared to
        anything. */
     { k: "boat", t: "Boat", stick2: true, v: function (d, i) { return i.boat; } },
-    /* Who sells the trip. Every one of these used to read "Operator not
-       captured": the source states it on every event and the parser dropped
-       the field. */
-    { k: "operator", t: "Operator", v: function (d, i) { return i.operator; } },
     /* Berth price is per person, so this says whether you are buying into a
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
@@ -1057,7 +1060,7 @@ a { color:var(--accent); }
   var ORDER = [
     "start", "boat", "nights", "trip",
     "total", "later", "base", "perdive", "nitrox",
-    "sites", "guests", "from", "to", "end", "operator",
+    "sites", "guests", "from", "to", "end",
     "required", "unpriced", "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, reordered again.
@@ -1068,7 +1071,7 @@ a { color:var(--accent); }
      the reading order is just inverted to match how much screen there is. */
   var NARROW_ORDER = [
     "start", "boat", "total", "later", "nights", "base", "perdive", "nitrox",
-    "trip", "sites", "guests", "from", "to", "end", "operator",
+    "trip", "sites", "guests", "from", "to", "end",
     "required", "unpriced", "availability", "disclosure", "source"
   ];
 
