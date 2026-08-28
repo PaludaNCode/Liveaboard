@@ -1,23 +1,30 @@
 """What the booking page says a departure costs, cabin by cabin.
 
-Both fixtures are markup a probe run returned from live booking pages, trimmed
-at each end to a whole tag and otherwise untouched -- entities, unquoted
-attributes, minified spacing and all. Everything here is checked against those
-rather than against a shape invented to be easy to parse, because the three
-bugs this parser has already had were all things a tidied fixture would have
-hidden:
+All three fixtures are markup a probe run returned from live booking pages,
+trimmed at each end to a whole tag and otherwise untouched -- entities,
+unquoted attributes, minified spacing and all. Everything here is checked
+against those rather than against a shape invented to be easy to parse,
+because every bug this parser has had was one a tidied fixture would have
+hidden, and each was found by reading one more real page:
 
 * the first dump stopped inside the guest-count select, so the single-occupancy
-  surcharge below it was never seen and blocks were cut on the wrong boundary;
+  surcharge below it was never seen and blocks were cut on the wrong boundary,
+  giving each cabin the surcharge of the one above it;
 * ``title=Suite`` is unquoted -- the site quotes an attribute only when it has
   to -- so a pattern requiring quotes named one of Iceberg's three cabins after
   its database id;
 * the "Save 10%" badge is an ``<li><span>`` in the price list, and reading
-  every ``<li><span>`` in the block filed it as a cabin amenity.
+  every ``<li><span>`` in the block filed it as a cabin amenity;
+* each cabin's modal carries a close button with the same cabin id and no
+  title, so counting ids doubles every cabin on a page read whole;
+* a sold-out sailing states its whole ladder and prints ``FULL`` where the
+  select would be, so a parser anchored on the select reads nothing from it;
+* and a bed is not always called one -- "1 Double or Twin (convertible)".
 
-The two pages are deliberately different shapes: Iceberg discounts all three
+The three pages are deliberately different shapes. Iceberg discounts all three
 cabins and prints a berth banner on each; Alia Soul discounts none, prints a
-banner on two of three, and has a twelve-berth cabin.
+banner on two of three, and has a twelve-berth cabin; Red Sea Aggressor II is
+sold out and prices every cabin anyway.
 """
 
 from __future__ import annotations
@@ -36,6 +43,10 @@ DISCOUNTED = FIXTURES / "booking_cabins.html"
 # https://www.liveaboard.com/BookingStep1?tourid=421166&boatid=6565
 # Alia Soul, 19-26 May 2027, "Marine Park South".
 UNDISCOUNTED = FIXTURES / "booking_cabins_undiscounted.html"
+
+# https://www.liveaboard.com/BookingStep1?tourid=412135&boatid=6568
+# Red Sea Aggressor II, "North & Brothers" -- sold out, and still priced.
+SOLD_OUT = FIXTURES / "booking_cabins_sold_out.html"
 
 
 def read(path: Path) -> str:
@@ -157,7 +168,7 @@ class TestTheSingleSupplement(unittest.TestCase):
 
         cabin = Cabin(
             cabin_id="1", name="x", sleeps=2, beds=None, amenities=(),
-            price=100.0, list_price=None, berths=2,
+            price=100.0, list_price=None, berths=2, sold_out=False,
             single_supplement_pct=None, shareable=None, occupancy_options=(),
         )
         self.assertIsNone(cabin.single_price)
@@ -213,23 +224,45 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
         self.assertEqual(reading.cabins, [])
         self.assertFalse(reading)
         self.assertIsNone(reading.berths_at_cheapest)
+        self.assertFalse(reading.nothing_bookable)
         self.assertEqual(reading.warnings, [])
+
+    def test_a_failed_page_is_not_a_full_boat(self):
+        # The distinction the dataset depends on. A page that listed its
+        # cabins and marked them all FULL knows the boat is full; a page that
+        # returned nothing knows nothing, and writing it as zero berths would
+        # publish a sold-out sign for a page that merely failed.
+        self.assertFalse(parse_cabins("", "USD").nothing_bookable)
+        self.assertTrue(parse_cabins(read(SOLD_OUT), "USD").nothing_bookable)
 
     def test_empty_input_is_not_a_crash(self):
         self.assertEqual(parse_cabins("", "USD").cabins, [])
 
-    def test_cabins_listed_but_not_offered_are_reported_not_dropped(self):
-        # The sold-out shape: named cabins, no guest-count select. "Nothing
-        # bookable" is the page's answer to how many berths are left, and is
-        # not the same as a page that failed to load.
-        listed = (
-            '<button aria-controls=help-content-cabin-details-99 '
-            'title="Standard Cabin">Standard Cabin</button>'
+    def test_a_dialog_is_not_a_cabin(self):
+        # Every cabin's modal carries a close button with the same
+        # `aria-controls=help-content-cabin-details-{id}` and no title. Reading
+        # ids alone doubles every cabin on a page read whole -- which the first
+        # fixtures could not show, because the probe dump stopped before the
+        # modals began.
+        page = (
+            '<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<em>$</em> <span translate=no>500</span>'
+            '<select name=input-cabin-guests-7 data-cabinid=7 data-allocation=3>'
+            '<option value=0>-<option value=1>1 person</select>'
+            '<div id=help-content-cabin-details-7 role=dialog>'
+            '<button aria-controls=help-content-cabin-details-7 '
+            'aria-label="Close dialog">x</button></div>'
         )
-        reading = parse_cabins(listed, "USD")
-        self.assertEqual(reading.cabins, [])
-        self.assertEqual(reading.listed_only, 1)
-        self.assertTrue(any("none offered" in w for w in reading.warnings))
+        reading = parse_cabins(page, "USD")
+        self.assertEqual([c.cabin_id for c in reading.cabins], ["7"])
+
+    def test_an_id_with_no_price_is_not_a_cabin(self):
+        page = (
+            '<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<select name=input-cabin-guests-7 data-cabinid=7 data-allocation=3>'
+            '<option value=0>-</select>'
+        )
+        self.assertEqual(parse_cabins(page, "USD").cabins, [])
 
     def test_the_currency_is_the_callers_not_the_glyph(self):
         # "$" is the Australian, Canadian, Singapore and US dollar alike, and
@@ -252,6 +285,7 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
     def test_a_banner_disagreeing_with_the_attribute_is_reported(self):
         page = (
             '<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<em>$</em> <span translate=no>500</span>'
             '<span>only 9 spaces left!</span>'
             '<select name=input-cabin-guests-7 data-cabinid=7 data-allocation=3>'
             '<option value=0>-<option value=1>1 person</select>'
@@ -266,6 +300,7 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
         # False would state something the page does not.
         page = (
             '<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<em>$</em> <span translate=no>500</span>'
             '<select name=input-cabin-guests-7 data-cabinid=7 '
             'data-shareable=undefined data-allocation=3>'
             '<option value=0>-<option value=1>1 person</select>'
@@ -275,6 +310,7 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
     def test_a_cabin_with_no_stated_berths_is_unknown_rather_than_zero(self):
         page = (
             '<button aria-controls=help-content-cabin-details-7 title=Cabin>x</button>'
+            '<em>$</em> <span translate=no>500</span>'
             '<select name=input-cabin-guests-7 data-cabinid=7>'
             '<option value=0>-<option value=1>1 person</select>'
         )
@@ -282,14 +318,75 @@ class TestWhatItRefusesToInvent(unittest.TestCase):
         self.assertIsNone(cabin.berths)
         self.assertNotIn("berths", cabin.as_dict())
 
-    def test_a_cabin_with_no_name_button_says_so(self):
+    def test_a_cabin_with_an_empty_name_says_so(self):
         page = (
+            '<button aria-controls=help-content-cabin-details-7 title="">x</button>'
+            '<em>$</em> <span translate=no>500</span>'
             '<select name=input-cabin-guests-7 data-cabinid=7 data-allocation=3>'
             '<option value=0>-<option value=1>1 person</select>'
         )
         reading = parse_cabins(page, "USD")
         self.assertEqual(reading.cabins[0].name, "Cabin 7")
-        self.assertTrue(any("no name button" in w for w in reading.warnings))
+        self.assertTrue(any("no name stated" in w for w in reading.warnings))
+
+
+class TestASoldOutSailing(unittest.TestCase):
+    """A full boat still states its whole ladder.
+
+    Where the guest-count select would be, the page prints ``FULL``. Everything
+    else -- name, beds, occupancy, price, single supplement -- is exactly as it
+    is on a bookable sailing, so the prices are readable and only the berths
+    are zero. A parser anchored on the select reads nothing here at all, and on
+    a boat with one full cabin among three it would quietly drop a rung of the
+    ladder rather than showing it as gone.
+    """
+
+    def setUp(self):
+        self.reading = parse_cabins(read(SOLD_OUT), "USD")
+
+    def test_the_cabins_are_still_read(self):
+        self.assertEqual(
+            [c.name for c in self.reading.cabins], ["Standard Cabins", "Master Cabins"]
+        )
+
+    def test_the_prices_are_still_stated(self):
+        self.assertEqual([c.price for c in self.reading.cabins], [1320.0, 1420.0])
+
+    def test_the_cheapest_cabin_is_still_the_advertised_price(self):
+        # The vessel page advertises $1,320 for this sailing and its cheapest
+        # cabin is $1,320 -- true on a sold-out page as much as a bookable one.
+        self.assertEqual(self.reading.cheapest.price, 1320.0)
+
+    def test_every_cabin_is_marked_full(self):
+        self.assertTrue(all(c.sold_out for c in self.reading.cabins))
+        self.assertTrue(self.reading.nothing_bookable)
+
+    def test_full_means_zero_berths_not_unknown_berths(self):
+        self.assertEqual([c.berths for c in self.reading.cabins], [0, 0])
+        self.assertEqual(self.reading.berths_at_cheapest, 0)
+
+    def test_a_full_cabin_offers_no_occupancies(self):
+        self.assertEqual(self.reading.cabins[0].occupancy_options, ())
+
+    def test_a_bed_with_no_word_bed_in_it_is_still_a_bed(self):
+        # "1 Double or Twin (convertible)". The site marks the sleeping
+        # arrangement structurally -- it is the one detail whose span carries
+        # a title -- so matching on the word "bed" files this as an amenity.
+        cabin = self.reading.cabins[0]
+        self.assertEqual(cabin.beds, "1 Double or Twin (convertible)")
+        self.assertEqual(cabin.amenities, ("Aircon with control",))
+
+    def test_the_occupancy_is_read_from_the_text_with_no_attribute_to_read(self):
+        # `data-cabin-occupancy` lives on the select, and there is no select.
+        self.assertEqual([c.sleeps for c in self.reading.cabins], [2, 2])
+
+    def test_the_single_supplement_survives_the_cabin_being_full(self):
+        self.assertEqual(
+            [c.single_supplement_pct for c in self.reading.cabins], [65, 65]
+        )
+
+    def test_being_full_is_said_once_and_plainly(self):
+        self.assertEqual(self.reading.warnings, ["2 cabin(s) listed, every one full"])
 
 
 class TestWhatIsWrittenDown(unittest.TestCase):

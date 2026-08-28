@@ -24,12 +24,63 @@ Verified against the parsers and `data/archive.json` on 2026-08-27.
 | Fleet for a month | `/diving/search/egypt/{month}/{year}` | Returns **every** result at once. `?page=2` came back byte-identical with `pageCount:0` — the Next button pages the rendered view, not the server. One fetch per month is the whole month. Built by `liveaboard_com.search_paths()`. |
 | Vessel page | `/diving/egypt/{slug}?m={M}/{YYYY}` | The `?m=` selector means **that month and no other**. Without it the page returns a window starting from today: one run scraped 746 departures spanning 2026-09 to 2027-10 and kept 14. Covering May–Aug is four fetches per vessel (`SEASON_QUERIES`). |
 | Destination listing | `/diving/egypt`, `/diving/egypt/red-sea` | Confirmed live, but neither yields a priced offer — overview pages. Boat-link fallback only (`DESTINATION_PATHS`). |
+| **Booking step 1** | `/BookingStep1?tourid={tour}&boatid={boat}` | The cabin ladder and the only stated berth count anywhere on the site. Plain GET, no browser, ~190 KB. Both ids come from `Event.@id`, so the URL is built rather than crawled. One request per **departure**. See below. |
 
 The month listings are a **global template**: they link every destination the
 site sells. Scoping the boat-link pattern to `/diving/egypt/` is load-bearing —
 an earlier version accepted any two-segment `/diving/` path and the crawler
 walked off into Indonesia and the Rhine. About twenty `/diving/egypt/` links
 are dive sites and regions rather than vessels; `NON_BOAT_SLUGS` skips them.
+
+### The booking page: the cabin ladder, and the berth count (#79)
+
+Established by `tools/probe_booking.py` on runs 33217225920, 33217903323 and
+33218390727, reading three deliberately different sailings in full.
+
+The vessel page advertises one price per departure. The booking page shows what
+that figure is the bottom of — and **the advertised price is the cheapest
+cabin's per-person price**, checked on all three: Iceberg advertises $619 and
+its cheapest cabin is $619, Alia Soul $1,923 against $1,923, Red Sea Aggressor
+II $1,320 against $1,320. `fetch_cabins.py` re-checks it on every sailing and
+prints any that disagree, rather than trusting three.
+
+| Fact | Where | Notes |
+|---|---|---|
+| Cabin listing | a `<fieldset>` per cabin, opened by `<button aria-controls=help-content-cabin-details-{id} title="...">` | The **title** is what separates a listing from a dialog: the close button inside each cabin's modal carries the same `aria-controls` and no title. |
+| Cabin name | that button's `title` | Quoted only when it must be — `title=Suite` beside `title="Cabin 1 &amp; 2"`. |
+| Sleeps / beds / amenities | the `<ol>` under the name | Item 1 is occupancy, item 2 is the sleeping arrangement, the rest are amenities. The bed line is the one whose `<span>` carries a `title`, on 8 of 8 cabins — *not* a word match: Red Sea Aggressor II's "1 Double or Twin (convertible)" contains no "bed". |
+| Price now | `<em>$</em><span translate=no>619</span>` | `translate=no` is on the numbers and nothing else, which beats the Tailwind classes around them. |
+| List price | `<del translate=no>$ 688</del>` | Absent entirely when the cabin is not discounted — the absence is the answer, not a list price equal to the price. |
+| **Berths left** | `data-allocation` on `<select name=input-cabin-guests-{id}>` | See below. |
+| Sleeps, shareable, privacy | `data-cabin-occupancy`, `data-shareable`, `data-privacy-optional` on the same select | `data-privacy-optional=undefined` occurs (Iceberg's Suite) — a JavaScript value reaching the markup, and not an answer. |
+| Single-occupancy surcharge | `<div id=private-cabin-help-text-{id}>` or `<div id=privacy-optional-help-text-{id}>` | Two phrasings, one number, **keyed by cabin id** — the div sits *after* that cabin's select and before the next cabin, so anything positional gives each cabin the number belonging to the one above it. 60% on Iceberg, 50% on Alia Soul, 65% on Red Sea Aggressor II. |
+| Sold out | `<span class="... text-red-600">FULL</span>` where the select would be | The cabin is still listed and priced in full. |
+
+**The berth count is `data-allocation`, not the red banner.** Three things on
+the page state the number and they agree: the attribute, the `only N spaces
+left!` banner, and the select's own options, which run `1..allocation`. But the
+banner only appears at **four or fewer** — Alia Soul's twelve-berth cabin has
+none — so a parser reading the banner reports the roomiest cabins as unknown.
+`parse_cabins` reads the attribute and reports a disagreement rather than
+choosing. On a `FULL` cabin the count is zero, stated.
+
+It is still the **operator's claim**, not verified inventory, and it is the most
+perishable thing the crawl reads: true at fetch, stale by morning. Every record
+carries the day it was read and anything rendering it must say so.
+
+**A sold-out page is not an unreadable one.** Red Sea Aggressor II's sailing
+lists both cabins, prices both, states the surcharge, and prints `FULL` in
+place of each select. So the ladder is fully readable and only the berths are
+zero — where a page returning no cabin markup at all knows nothing, and writing
+that as zero would publish a sold-out sign for a page that merely failed.
+
+**Reading, not booking.** Step one of a booking flow is a page with a form on
+it; a GET renders it and submits nothing. `robots.txt` allows the path, and the
+polite fetcher asks it first.
+
+**The cost is one request per departure**, ~890 a night, because a berth count
+changes the moment somebody books. That is why `cabins.yml` is manual and
+capped by default rather than folded into the daily refresh.
 
 ### The per-trip itinerary fragment
 
@@ -233,9 +284,13 @@ Each of these cost a cycle at least once.
     berth, seat, capacity, remaining, slot, quantity, stock).
 
   So `spaces_left` cannot be filled from the vessel page, and a "spots left"
-  column would be empty on every row. **Not** ruled out: the booking flow
-  itself, which nobody has entered — starting a booking to read an inventory
-  number is a different kind of request and needs a deliberate decision.
+  column sourced from it would be empty on every row.
+
+  **This is now a negative about the vessel page only.** The booking flow was
+  the one lead left, and it answers: `/BookingStep1` states `data-allocation`
+  on every cabin. See *The booking page* above. The vessel-page negative still
+  stands and is still worth not re-checking — but "liveaboard.com does not
+  publish a berth count" would be wrong, and #79 is answerable.
 
   Two earlier passes of this probe were wrong in ways worth remembering. The
   first guessed at CSS selectors, matched zero elements on all four pages, and

@@ -167,27 +167,15 @@ def main() -> int:
             disagreed += 1
 
         if not reading.cabins:
-            # Two different silences, and they must not be written the same
-            # way. A page that listed its cabins and offered none is a full
-            # boat, which is an answer; a page with no cabin markup at all
-            # answers nothing, and writing it as "no berths" would publish a
-            # sold-out sign for a page that merely failed.
-            if reading.listed_only:
-                book[tour] = {
-                    "boat": entry["boat"], "tour_id": tour,
-                    "start": entry["start"], "name": entry["name"],
-                    "collected": today, "currency": entry["currency"],
-                    "cabins": [], "nothing_bookable": True,
-                    "source_url": url,
-                }
-                print(f"  [{index}/{len(todo)}] {entry['boat']:22.22} "
-                      f"{entry['start']}  nothing bookable "
-                      f"({reading.listed_only} cabin(s) listed)", flush=True)
-            else:
-                print(f"  [{index}/{len(todo)}] {entry['boat']:22.22} "
-                      f"{entry['start']}  no cabin markup; left as it was",
-                      flush=True)
-                nothing += 1
+            # A page with no cabin markup at all answers nothing, and writing
+            # it as "no berths" would publish a sold-out sign for a page that
+            # merely failed. A full boat is not this case: it lists every
+            # cabin, prices them, and marks each FULL, so it reads normally
+            # below with zero berths.
+            print(f"  [{index}/{len(todo)}] {entry['boat']:22.22} "
+                  f"{entry['start']}  no cabin markup; left as it was",
+                  flush=True)
+            nothing += 1
             continue
 
         cheapest = reading.cheapest
@@ -211,13 +199,21 @@ def main() -> int:
             "cabins": [c.as_dict() for c in reading.cabins],
             "source_url": url,
         }
+        if reading.nothing_bookable:
+            book[tour]["nothing_bookable"] = True
         read += 1
+        # "from -" rather than a crash: a cabin listed with no readable figure
+        # is a parse worth seeing in the log, not one worth ending the run on.
+        from_price = f"{cheapest.price:g}" if cheapest and cheapest.price else "-"
+        berths = reading.berths_at_cheapest
         print(f"  [{index}/{len(todo)}] {entry['boat']:22.22} {entry['start']}  "
-              f"{len(reading.cabins)} cabin(s), from {cheapest.price:g} "
-              f"{reading.currency}, {reading.berths_at_cheapest} berth(s) "
-              f"at it{note}", flush=True)
+              f"{len(reading.cabins)} cabin(s), from {from_price} "
+              f"{reading.currency}, "
+              f"{berths if berths is not None else 'unknown'} berth(s) "
+              f"at it{note}"
+              f"{'  FULL' if reading.nothing_bookable else ''}", flush=True)
 
-    if not read and not any(v.get("nothing_bookable") for v in book.values()):
+    if not read:
         # A run that read nothing must not rewrite the file. The only thing
         # that would change is the collected date, which would report the book
         # as fresh on the strength of a few hundred failed requests.

@@ -54,23 +54,40 @@ from dataclasses import dataclass, field
 from html import unescape
 from typing import Any
 
-# Each cabin's guest-count select is the anchor, and it carries the cabin's own
-# id plus everything the site knows about it as data attributes. The dialog the
-# name button opens repeats elsewhere in the document, so splitting on that id
-# double-counts; every bookable cabin has exactly one select.
+# A cabin listing begins at the button that opens that cabin's own dialog, and
+# `title` is its name -- the button text sits in a truncating element, and the
+# title is what the site itself considers the full name.
+#
+# **The title is what separates a listing from a dialog.** The same
+# `aria-controls=help-content-cabin-details-{id}` sits on the close button
+# inside each cabin's modal, where it carries `aria-label="Close dialog"` and
+# no title. Counting those doubles every cabin on a page read whole -- which a
+# probe dump that stopped before the modals could not show.
+CABIN_NAME = re.compile(
+    r"aria-controls=help-content-cabin-details-(\d+)[^>]*\btitle=[^>]*>", re.I
+)
+
+# Each bookable cabin has exactly one guest-count select, and it carries
+# everything the site knows about that cabin as data attributes.
 CABIN_SELECT = re.compile(r"<select[^>]*\bname=input-cabin-guests-(\d+)[^>]*>", re.I)
 
-# The name, from the button that opens the cabin's own dialog. `title` rather
-# than the button text: the text sits inside a truncating element and the title
-# is what the site itself considers the full name.
-CABIN_NAME = re.compile(r"aria-controls=help-content-cabin-details-(\d+)[^>]*>", re.I)
+# What stands where the select would be on a cabin nobody can book. The cabin
+# is still listed in full -- name, beds, price -- so a sold-out sailing has a
+# readable ladder and only its berths are zero.
+FULL = re.compile(r">\s*FULL\s*<", re.I)
 
 # What the cabin sleeps and in what: the <ol> under the name, and only that
 # one. The "Save 10%" badge is an <li><span> too, in the price list, and
 # reading every <li><span> on the block files it as an amenity.
 DETAILS_LIST = re.compile(r"<ol[^>]*>(.*?)</ol>", re.I | re.S)
-DETAIL_ITEM = re.compile(r"<li[^>]*>\s*<span[^>]*>([^<]+)</span>", re.I)
+DETAIL_ITEM = re.compile(r"<li[^>]*>\s*(<span[^>]*>)([^<]+)</span>", re.I)
 PEOPLE = re.compile(r"^\s*(\d{1,2})\s*(?:People|Person|Guests?)\s*$", re.I)
+
+# The sleeping arrangement is the one detail whose span carries a `title`, on
+# all eight cabins read across three vessels -- the occupancy and the amenities
+# never do. Structure rather than vocabulary, because the vocabulary runs out:
+# Red Sea Aggressor II's "1 Double or Twin (convertible)" contains no word a
+# bed pattern would match, and matching on "bed" alone files it as an amenity.
 BEDS = re.compile(r"\bbeds?\b", re.I)
 
 # The struck-through list price and the price actually charged. `translate=no`
@@ -125,8 +142,11 @@ class Cabin:
     berths: int | None
     """**The operator's claim** of how many berths remain, and perishable.
 
-    From ``data-allocation``. ``None`` only where the page states none.
+    From ``data-allocation``, or zero on a cabin the page marks ``FULL``.
+    ``None`` only where the page states neither.
     """
+    sold_out: bool
+    """Marked ``FULL``: listed, priced, and not for sale."""
     single_supplement_pct: int | None
     shareable: bool | None
     """Whether the site will seat a stranger in the other bunk.
@@ -167,6 +187,8 @@ class Cabin:
             out["amenities"] = list(self.amenities)
         if self.occupancy_options:
             out["occupancy_options"] = list(self.occupancy_options)
+        if self.sold_out:
+            out["sold_out"] = True
         return out
 
 
@@ -176,26 +198,31 @@ class CabinReading:
 
     cabins: list[Cabin] = field(default_factory=list)
     currency: str = ""
-    listed_only: int = 0
-    """Cabins the page named but did not offer -- no guest-count select.
-
-    A sold-out sailing still lists its cabins; it just cannot be booked. That
-    is a different answer from a page with no cabin markup at all, and
-    collapsing the two would report a full boat as an unreadable page.
-    """
     warnings: list[str] = field(default_factory=list)
 
     @property
     def cheapest(self) -> Cabin | None:
+        """The rung the advertised price is quoting, sold out or not.
+
+        Not "the cheapest one still for sale": the vessel page advertises this
+        cabin's figure either way, and answering a different question here
+        would make the berth count beside that figure belong to some other
+        cabin.
+        """
         priced = [c for c in self.cabins if c.price is not None]
         return min(priced, key=lambda c: c.price) if priced else None
 
     @property
     def berths_at_cheapest(self) -> int | None:
         """How many berths are left at the advertised price -- the question
-        the vessel page cannot answer."""
+        the vessel page cannot answer. Zero is an answer; ``None`` is not."""
         cabin = self.cheapest
         return cabin.berths if cabin else None
+
+    @property
+    def nothing_bookable(self) -> bool:
+        """Every cabin listed and every one of them full."""
+        return bool(self.cabins) and all(c.sold_out for c in self.cabins)
 
     def __bool__(self) -> bool:
         return bool(self.cabins)
@@ -281,8 +308,38 @@ def _supplement(html: str, cabin_id: str) -> int | None:
     return None
 
 
+
+
+def _listings(html: str) -> list[tuple[re.Match[str], int, int]]:
+    """``(name button, start, end)`` for each cabin the page lists, in order.
+
+    A listing runs from its own name button to the next cabin's, and is kept
+    only if it holds a price *and* either a guest-count select or the ``FULL``
+    marker. Three corroborating signals, because one is not enough: the cabin
+    ids reappear later in the document on the dialogs the buttons open, and a
+    block that is only an id is a dialog rather than a cabin for sale.
+    """
+    buttons = list(CABIN_NAME.finditer(html))
+    out: list[tuple[re.Match[str], int, int]] = []
+    for index, button in enumerate(buttons):
+        end = buttons[index + 1].start() if index + 1 < len(buttons) else len(html)
+        block = html[button.start():end]
+        if not NOW_PRICE.search(block):
+            continue
+        if not (CABIN_SELECT.search(block) or FULL.search(block)):
+            continue
+        out.append((button, button.start(), end))
+    return out
+
+
 def parse_cabins(html: str, currency: str) -> CabinReading:
-    """Every cabin the booking page offers, in the order it lists them.
+    """Every cabin the booking page lists, in the order it lists them.
+
+    Listings, not offers: a sold-out sailing states each cabin's name, beds and
+    price in full and puts ``FULL`` where the guest-count select would be. A
+    parser anchored on the select reads nothing at all from such a page, and a
+    boat with one full cabin among three would quietly lose a rung of its
+    ladder -- including, on the wrong day, the rung the advertised price quotes.
 
     ``currency`` is what the caller asked the page for. It is not re-derived
     from the glyph beside the price: ``$`` is four currencies the site sells
@@ -292,54 +349,27 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
     """
     reading = CabinReading(currency=currency)
 
-    selects = list(CABIN_SELECT.finditer(html))
-    named = {m.group(1) for m in CABIN_NAME.finditer(html)}
-    reading.listed_only = len(named - {m.group(1) for m in selects})
+    for button, start, end in _listings(html):
+        cabin_id = button.group(1)
+        block = html[start:end]
+        select = CABIN_SELECT.search(block)
+        tag = select.group(0) if select else ""
 
-    if not selects:
-        if named:
-            # Every cabin named and none bookable. The page's own answer to
-            # "what is left", and not the same as a page that failed to load.
-            reading.warnings.append(
-                f"{len(named)} cabin(s) listed, none offered: nothing bookable"
-            )
-        return reading
-
-    for index, select in enumerate(selects):
-        tag = select.group(0)
-        cabin_id = _attr(tag, "data-cabinid") or select.group(1)
-        closed = html.find("</select>", select.start())
-        select_end = closed + len("</select>") if closed != -1 else select.end()
-        previous_end = 0 if index == 0 else _select_end(html, selects[index - 1])
-
-        # Start the block at this cabin's own name button. Without that anchor
-        # the first cabin's block begins at the top of the document and takes
-        # the page header's figures for its own.
-        head_start = previous_end
-        for match in CABIN_NAME.finditer(html[previous_end:select.start()]):
-            if match.group(1) == cabin_id:
-                head_start = previous_end + match.start()
-        block = html[head_start:select_end]
-
-        name = ""
-        for match in CABIN_NAME.finditer(block):
-            if match.group(1) == cabin_id:
-                name = _attr(match.group(0), "title") or ""
+        name = _attr(button.group(0), "title") or ""
         if not name:
-            reading.warnings.append(f"cabin {cabin_id}: no name button; using its id")
+            reading.warnings.append(f"cabin {cabin_id}: no name stated; using its id")
             name = f"Cabin {cabin_id}"
 
+        # `data-cabin-occupancy` only exists on the select, so a full cabin has
+        # only the "2 People" line. Both are read and they are cross-checked.
         sleeps = _int(_attr(tag, "data-cabin-occupancy"))
         beds = None
         amenities: list[str] = []
         details = DETAILS_LIST.search(block)
-        for raw in DETAIL_ITEM.findall(details.group(1) if details else ""):
+        for span, raw in DETAIL_ITEM.findall(details.group(1) if details else ""):
             item = " ".join(unescape(raw).split())
             people = PEOPLE.match(item)
             if people:
-                # The prose and the attribute both state it. They agree on
-                # every cabin read so far; if they ever stop, say so rather
-                # than picking one.
                 if sleeps is None:
                     sleeps = int(people.group(1))
                 elif sleeps != int(people.group(1)):
@@ -347,7 +377,7 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
                         f"cabin {cabin_id}: sleeps {sleeps} by attribute, "
                         f"{people.group(1)} in the text"
                     )
-            elif BEDS.search(item) and beds is None:
+            elif beds is None and (_attr(span, "title") or BEDS.search(item)):
                 beds = item
             elif item:
                 amenities.append(item)
@@ -367,15 +397,21 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
                 f"({code}), not the {currency} that was asked for"
             )
 
-        berths = _int(_attr(tag, "data-allocation"))
-        claimed = SPACES_LEFT.search(_prose(block))
-        if claimed and berths is not None and int(claimed.group(1)) != berths:
-            # Three things on the page state this number. Two of them
-            # disagreeing is worth a line in the run, not a silent choice.
-            reading.warnings.append(
-                f"cabin {cabin_id}: {berths} berths by attribute, "
-                f"{claimed.group(1)} in the banner"
-            )
+        sold_out = select is None
+        if sold_out:
+            # FULL, stated. Zero berths is what the page says, and is a
+            # different thing from a berth count it did not state.
+            berths: int | None = 0
+        else:
+            berths = _int(_attr(tag, "data-allocation"))
+            claimed = SPACES_LEFT.search(_prose(block))
+            if claimed and berths is not None and int(claimed.group(1)) != berths:
+                # Three things on the page state this number. Two of them
+                # disagreeing is worth a line in the run, not a silent choice.
+                reading.warnings.append(
+                    f"cabin {cabin_id}: {berths} berths by attribute, "
+                    f"{claimed.group(1)} in the banner"
+                )
 
         reading.cabins.append(Cabin(
             cabin_id=cabin_id,
@@ -386,18 +422,14 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
             price=price,
             list_price=list_price,
             berths=berths,
+            sold_out=sold_out,
             single_supplement_pct=_supplement(html, cabin_id),
             shareable=_flag(tag, "data-shareable"),
-            occupancy_options=_options(html[select.end():select_end]),
+            occupancy_options=_options(block) if select else (),
         ))
 
-    if reading.listed_only:
+    if reading.nothing_bookable:
         reading.warnings.append(
-            f"{reading.listed_only} cabin(s) listed but not offered"
+            f"{len(reading.cabins)} cabin(s) listed, every one full"
         )
     return reading
-
-
-def _select_end(html: str, select: re.Match[str]) -> int:
-    closed = html.find("</select>", select.start())
-    return closed + len("</select>") if closed != -1 else select.end()
