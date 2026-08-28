@@ -1296,3 +1296,79 @@ class TestADiveOnAPlaceFoldsIntoIt(unittest.TestCase):
         both sold under the name, 400 km apart. A southern trip's own prose
         lists it beside Sataya and Fury Shoal."""
         self.assertEqual(self.sites("Dolphin House"), [])
+
+
+class TestTheReefsDescriptionsName(unittest.TestCase):
+    """Vocabulary read out of the operators' own descriptions.
+
+    A description names the dive; a key-regions list names the destination.
+    Until these existed, comparing the two measured our ignorance as much as
+    the operator's mistakes: "Daedalus & Fury Shoal" appeared to visit no Fury
+    Shoal, because its week is spent at Shaab Claudio, Abu Galawa and
+    Shilineat and nothing here knew those are Fury Shoal. That comparison is
+    what decides whether a region is wrong, so a gap in it is not cosmetic.
+    """
+
+    def sites(self, text):
+        from liveaboard.promote import _sites_from_name
+
+        return _sites_from_name(text)
+
+    def test_abu_dabbab_and_abu_dabab_are_one_reef(self):
+        """The single most expensive spelling in the dataset: descriptions
+        write two b's, region lists write one, and the same reef read as two
+        different places on 16 trips."""
+        self.assertEqual(self.sites("Dive 1 at Abu Dabbab 3"), ["abu dabab"])
+        self.assertEqual(self.sites("Abu Dabab"), ["abu dabab"])
+
+    def test_the_fury_shoals_are_named_reef_by_reef(self):
+        for reef in ("Shaab Maksur", "Shaab Claudio", "Abu Galawa",
+                     "Shaab Hamam", "El Malahi", "Shilineat", "Abu Fendera"):
+            with self.subTest(reef=reef):
+                self.assertEqual(self.sites(f"Dive 4 at {reef}"), ["fury shoal"])
+
+    def test_st_johns_reefs_fold_into_st_johns(self):
+        for reef in ("Umm Aruk", "Cave Reef", "Small Gota"):
+            with self.subTest(reef=reef):
+                self.assertEqual(self.sites(f"Dive 8 at {reef}"), ["st johns"])
+
+    def test_the_straits_of_gubal_dives_fold_into_gubal(self):
+        """Shag Rock carries the Kingston; the Barge and Bluff Point are Small
+        Gubal's two best-known dives."""
+        for reef in ("Shag Rock", "Kingston", "Bluff Point",
+                     "Small Gubal Isl.", "Big Gubal Isl."):
+            with self.subTest(reef=reef):
+                self.assertEqual(self.sites(f"Dive 13 at {reef}"), ["gubal"])
+
+    def test_ras_mohammeds_park_reaches_past_the_headland(self):
+        """Shaab Mahmoud and the Alternatives are dived on the same day as
+        Shark and Yolanda, and half the fleet spells Yolanda with a J."""
+        for reef in ("Shaab Mahmoud", "The Alternatives", "Jolanda Reef",
+                     "Beacon Rock"):
+            with self.subTest(reef=reef):
+                self.assertEqual(self.sites(f"Dive 9 at {reef}"), ["ras mohammed"])
+
+    def test_the_abu_nuhas_wrecks_without_their_letter(self):
+        """"Dive 4 at Abu Nuhas - Giannis D" matches the full name; elsewhere
+        the prose drops the letter."""
+        for wreck in ("Giannis", "Chrisoula", "Kimon"):
+            with self.subTest(wreck=wreck):
+                self.assertEqual(self.sites(f"the {wreck} wreck"), ["abu nuhas"])
+
+    def test_a_typo_in_the_operators_own_day_plan(self):
+        self.assertEqual(self.sites("Dive 1 at Gota Abu Ramad"), ["gota abu ramada"])
+
+    def test_safagas_house_reef(self):
+        """Its region lists name Safaga and its descriptions name the reef."""
+        self.assertEqual(self.sites("Ras Abu Soma"), ["safaga"])
+
+    def test_none_of_this_folds_a_destination_away(self):
+        """The rule stays: a hint is a destination, an alias is a dive on one.
+        These additions are all dives; nothing they touch was a chip before."""
+        for name, expected in (("Daedalus Reef", "daedalus"),
+                               ("Elphinstone", "elphinstone"),
+                               ("St John's", "st johns"),
+                               ("Fury Shoal", "fury shoal"),
+                               ("Gubal Island", "gubal")):
+            with self.subTest(name=name):
+                self.assertEqual(self.sites(name), [expected])

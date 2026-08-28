@@ -937,6 +937,60 @@ SITE_ALIASES: dict[str, str] = {
     "dunraven": "ras mohammed",
     # Elphinstone is on the list under its bare name; the prose adds "Reef".
     "elphinstone reef": "elphinstone",
+    # ---- Read out of the operators' own descriptions, not their titles ----
+    #
+    # A description names the dive; a key-regions list names the destination.
+    # Until these were here, comparing the two measured our ignorance as much
+    # as the operator's mistakes: "Daedalus & Fury Shoal" appeared to visit no
+    # Fury Shoal because its week is spent at Shaab Claudio, Abu Galawa and
+    # Shilineat, and nothing here knew those are Fury Shoal.
+    #
+    # One spelling variant, and the single most expensive one: the descriptions
+    # write Abu Dabbab with two b's and the region lists write Abu Dabab with
+    # one, so the same reef read as two different places on 16 trips.
+    "abu dabbab": "abu dabab",
+    # A typo in the operator's own day plan, on three trips.
+    "gota abu ramad": "gota abu ramada",
+    # The Fury Shoals, reef by reef.
+    "shaab maksur": "fury shoal",
+    "shaab claudio": "fury shoal",
+    "shaab claudia": "fury shoal",
+    "abu galawa": "fury shoal",
+    "gotat abu galawa": "fury shoal",
+    "shaab hamam": "fury shoal",
+    "el malahi": "fury shoal",
+    "malahi": "fury shoal",
+    "shilineat": "fury shoal",
+    "abu fendera": "fury shoal",
+    "abu fandira": "fury shoal",
+    # St John's, reef by reef.
+    "umm aruk": "st johns",
+    "cave reef": "st johns",
+    "small gota": "st johns",
+    "habili gafaar": "st johns",
+    # The Straits of Gubal. Shag Rock carries the Kingston, and the Barge and
+    # Bluff Point are Small Gubal's two best-known dives.
+    "shag rock": "gubal",
+    "kingston": "gubal",
+    "bluff point": "gubal",
+    "small gubal": "gubal",
+    "big gubal": "gubal",
+    # Ras Mohammed's park, which reaches past the headland: Shaab Mahmoud and
+    # the Alternatives are dived on the same day as Shark and Yolanda, and
+    # Jolanda is how half the fleet spells Yolanda.
+    "shaab mahmoud": "ras mohammed",
+    "the alternatives": "ras mohammed",
+    "jolanda": "ras mohammed",
+    "beacon rock": "ras mohammed",
+    # Safaga's own house reef, which its region lists name and its
+    # descriptions do not.
+    "ras abu soma": "safaga",
+    # The Abu Nuhas wrecks again, as the day plans abbreviate them: "Dive 4 at
+    # Abu Nuhas - Giannis D" is matched by the full name above, but the prose
+    # elsewhere drops the letter.
+    "giannis": "abu nuhas",
+    "chrisoula": "abu nuhas",
+    "kimon": "abu nuhas",
 }
 # "Dolphin House" is deliberately absent. It is two reefs 400 km apart --
 # Sha'ab el Erg off Hurghada and Sha'ab Samadai off Marsa Alam -- and both are
