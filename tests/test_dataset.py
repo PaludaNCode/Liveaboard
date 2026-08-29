@@ -864,3 +864,96 @@ class TestPayloadIsRead(unittest.TestCase):
             "a bare number decides whether two sellers agree; use PADI_SAME "
             "so the column and the panel cannot disagree",
         )
+
+
+class TestBothSellersSpan(unittest.TestCase):
+    """Each end of a printed price span is one seller's whole bill.
+
+    The money columns print `lo-hi` across the two sellers, and Advertised plus
+    Mandatory fees has to equal Total at *both* ends. The obvious way to build
+    the span breaks that: take the minimum of each component and the maximum of
+    each, independently. Our berth is sometimes the cheaper while their fee book
+    is, so min(base) + min(fees) is then a bill neither seller quoted -- a
+    number this site invented, on a page whose whole argument is that invented
+    numbers are the problem.
+
+    Measured before it was believed. The independent-minima version broke the
+    sum on 74 of the 108 rows where both sellers' bills add up; naming one
+    seller per end fixes all 874 priced rows, single-seller rows included.
+
+    Numbers cannot be checked from Python without a second adder that would
+    drift from `metricsOf`, so this checks the shape instead: every endpoint in
+    a `best()` return must read its fields off *one* object. That is the
+    property, and it is the one an editor can lose without any test noticing.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    #: `total`/`base`/`later` for a floor, `totalMax`/`base`/`totalMax - base`
+    #: for a ceiling. Both add up given `metricsOf`'s `later = total - base`,
+    #: which `test_later_is_total_minus_base` pins.
+    SOUND = {
+        ("S.total", "S.base", "S.later"),
+        ("S.totalMax", "S.base", "S.totalMax - S.base"),
+    }
+
+    def best_returns(self) -> list[str]:
+        source = self.APP.read_text(encoding="utf-8")
+        start = source.index("function best(row) {")
+        end = source.index("\n  }", start)
+        body = source[start:end]
+        body = re.sub(r"/\*.*?\*/", "", body, flags=re.S)
+        returns = re.findall(r"return \{(.*?)\};", body, re.S)
+        self.assertEqual(len(returns), 2, "best() no longer has two returns")
+        return returns
+
+    @staticmethod
+    def field(block: str, name: str) -> str:
+        match = re.search(rf"\b{name}:\s*([^,\n}}]+)", block)
+        assert match, f"{name} missing from a best() return"
+        return " ".join(match.group(1).split())
+
+    def ends(self, block: str) -> list[tuple[str, str, str]]:
+        return [
+            (self.field(block, "lo"), self.field(block, "baseLo"),
+             self.field(block, "laterLo")),
+            (self.field(block, "hi"), self.field(block, "baseHi"),
+             self.field(block, "laterHi")),
+        ]
+
+    def test_each_end_reads_one_seller(self) -> None:
+        for block in self.best_returns():
+            for end in self.ends(block):
+                names = {re.match(r"\w+", part).group(0)
+                         for expr in end for part in expr.split() if re.match(r"\w+", part)}
+                self.assertEqual(
+                    len(names), 1,
+                    f"an endpoint is spliced from {sorted(names)}; each end of "
+                    f"the span must be one seller's whole bill",
+                )
+
+    def test_each_end_adds_up(self) -> None:
+        """Advertised + Mandatory fees = Total, at the floor and the ceiling."""
+        for block in self.best_returns():
+            for end in self.ends(block):
+                seller = re.match(r"\w+", end[0]).group(0)
+                shape = tuple(expr.replace(seller + ".", "S.") for expr in end)
+                self.assertIn(
+                    shape, self.SOUND,
+                    f"{shape} is not a form where Advertised + Mandatory "
+                    f"equals Total",
+                )
+
+    def test_later_is_total_minus_base(self) -> None:
+        """The algebra above rests on this one line of `metricsOf`."""
+        source = self.APP.read_text(encoding="utf-8")
+        self.assertRegex(source, r"\blater:\s*low - base\b")
+
+    def test_the_span_collapses_when_the_ends_round_alike(self) -> None:
+        """"E1,757-1,757" would read as a spread that is not there, so
+        `sellerSpan` rounds before it compares."""
+        source = self.APP.read_text(encoding="utf-8")
+        body = re.search(r"function sellerSpan\(lo, hi\) \{(.*?)\n  \}", source, re.S)
+        self.assertIsNotNone(body, "sellerSpan is gone")
+        self.assertRegex(body.group(1), r"Math\.round\(lo\).*Math\.round\(hi\)", )
+        self.assertRegex(body.group(1), r"if \(\w+ === \w+\) return")
