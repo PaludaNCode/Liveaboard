@@ -182,11 +182,6 @@ input[type="number"] {
   border:1px solid var(--rule-strong); background:var(--ground); color:var(--ink);
   font-family:var(--font-mono); font-variant-numeric:tabular-nums;
 }
-input[type="search"] {
-  font:inherit; font-size:12px; padding:3px 8px; border-radius:2px;
-  border:1px solid var(--rule-strong); background:var(--ground); color:var(--ink);
-  min-width:200px;
-}
 
 /* The only scrolling region on the page. min-height:0 is load-bearing: without
    it a flex child refuses to shrink below its content and pushes the footer
@@ -555,8 +550,6 @@ a { color:var(--accent); }
      second row of chrome above the prices. Reset still reachable at the end
      of the toolbar. */
   .tgroup.meta-right #metaLine { display:none; }
-  input[type="search"] { min-width:0; width:100%; }
-  .tgroup:has(input[type="search"]) { flex:1 1 100%; }
   .filters-toggle { padding:9px 12px; }
   /* Bounded, and scrolls inside itself: three banks unfolded filled a phone
      screen and left exactly one row of prices under them. */
