@@ -104,6 +104,16 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
 
+    # Where the other seller lists each boat. A PADI listing url is a fact
+    # about the vessel, not about the sailing -- it is built from the boat's
+    # slug and its country -- so it ships once per boat rather than on each of
+    # the 601 departures PADI sells, which is 4 KB against 33 KB.
+    padi_urls: dict[str, str] = {}
+    for departure in dataset.departures:
+        if departure.padi_provenance and departure.padi_provenance.url:
+            itinerary = dataset.itinerary_for(departure)
+            padi_urls.setdefault(itinerary.boat_id, departure.padi_provenance.url)
+
     departures: list[dict[str, Any]] = []
     for departure in sorted(dataset.departures, key=lambda d: (d.start, d.id)):
         itinerary = dataset.itinerary_for(departure)
@@ -231,6 +241,11 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # reason the fee labels are: one vocabulary, defined in one place.
         "cabin_names": dataset.cabin_names,
         "sellers": dataset.sellers,
+        # Keyed by boat, and read only for departures the other seller prices:
+        # the vessel having a PADI page says nothing about whether PADI sells
+        # a given date, and a link that lands on a calendar without the sailing
+        # on it is worse than no link.
+        "padi_urls": padi_urls,
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
         # Shipped for the same reason the fee labels are: one vocabulary,
         # defined once. Nothing on the page prints these today -- the Entry

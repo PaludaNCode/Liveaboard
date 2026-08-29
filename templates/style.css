@@ -720,13 +720,16 @@ a { color:var(--accent); }
    surface, and it is one hover deep already. */
 #berths .verdict.bad { background: var(--sold); color: var(--panel); }
 #berths .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
-#berths .pnote {
-  margin: 0;
-  padding: .45em .7em .5em;
-  border-top: 1px solid var(--rule);
+/* The read date, set against the sailing it qualifies rather than under the
+   ladder as a paragraph. A count without its date is presented as a fact when
+   it is a claim with a shelf life; a count with three sentences of method
+   under it is a panel nobody finishes reading. */
+#berths .pread {
+  float: right;
+  font-family: var(--font-narrow);
+  font-weight: 400;
+  font-size: .82em;
   color: var(--ink-faint);
-  font-size: .78em;
-  line-height: 1.4;
 }
 
 #berths table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
