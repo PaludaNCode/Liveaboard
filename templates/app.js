@@ -15,6 +15,21 @@
      liveaboard/taxonomy.py — change one and you must change the other. */
   var DEFAULT_ON_TIERS = { base: true, mandatory: true, customary: true };
 
+  /* Below this, the two sellers are quoting the same price and the column says
+     so rather than printing a difference.
+
+     Five euro, and the data picked the number rather than taste. Under one
+     euro, 317 of the 601 matched sailings read "same"; under two, 526 do. The
+     209 rows in that gap are almost all the same figure -- €1.02 -- which is
+     not a price difference at all but the rounding on a dollar price converted
+     to euro, and printing it as "−€1" invited a reader to compare two boats on
+     the arithmetic of an exchange rate. Widening to five adds ten more rows on
+     top of that and no further cluster: 536 of 601 at €5, and still 536 at €10.
+     So the threshold sits past the noise and well short of anything a diver
+     would choose a boat over, and it is one number here rather than two that
+     can drift -- the column and the sentence in the expanded row read it. */
+  var PADI_SAME = 5;
+
   var euro = new Intl.NumberFormat("en-IE", {
     style: "currency", currency: D.meta.currency,
     minimumFractionDigits: 0, maximumFractionDigits: 0
@@ -63,9 +78,30 @@
   }
 
   function metricsFor(dep) {
+    return metricsOf(linesFor(dep), dep.base);
+  }
+
+  /* The same trip as the other seller bills it, or null.
+   *
+     Two things have to be true and they fail independently. PADI must sell
+     that date -- 601 of 892 -- and its fee book for the trip must be complete,
+     every charge it names classified and priced. 169 rows clear both. Where
+     only the first holds there is a second price and no second total, and the
+     page says exactly that rather than comparing a bill against half of one.
+
+     Deliberately the same `metricsOf` as our own side. Two adders would drift,
+     and the one thing this column must never do is show a difference that is
+     an artefact of how the two were summed. */
+  function padiMetricsFor(dep) {
+    var itin = D.itineraries[dep.itinerary_id];
+    if (!dep.padi_base_line || !itin.padi_lines) return null;
+    return metricsOf([dep.padi_base_line].concat(itin.padi_lines), dep.padi);
+  }
+
+  function metricsOf(lines, base) {
     var low = 0, high = 0, unpriced = [], required = 0;
     var nitrox = null, tips = null;
-    linesFor(dep).forEach(function (line) {
+    lines.forEach(function (line) {
       if (line.code === "nitrox") {
         nitrox = line.included ? { included: true }
                : line.has_price ? { price: line.display.amount }
@@ -91,10 +127,117 @@
       }
     });
     return {
+      /* The berth this bill starts from, carried so a row can print one
+         seller's whole bill rather than one seller's total beside another
+         seller's advertised price. Advertised plus Mandatory fees is the
+         Total on every row, and that has to keep holding when the Total is
+         the second seller's. */
+      base: base,
       total: low, totalMax: high, isRange: high > low + 0.5,
       unpriced: unpriced, required: required, nitrox: nitrox, tips: tips,
-      later: low - dep.base
+      later: low - base
     };
+  }
+
+  /* What this sailing costs, across everyone selling it.
+   *
+     `.m` is the bill from the seller whose fee book this site was built on;
+     `.p` is the second seller's, present only where its own disclosure is
+     complete.
+
+     Where both exist the page prints the **span**, not one of them. Picking the
+     lower was the obvious thing and it was wrong in a way that took a fleet
+     owner to see: the two sellers do not disclose at the same resolution.
+     liveaboard.com publishes one fee figure per vessel; PADI publishes one per
+     itinerary, and its numbers move with the trip -- Tala's northern week is
+     €100 against its deep-south week at €280, where ours is €200 for both.
+     Taking the cheaper therefore takes our flat figure exactly where it
+     understates and theirs where ours overstates, and pulls the published
+     number toward the low side at both ends. On a site whose argument is that
+     advertised prices are too low, that is the house error.
+
+     So neither is "the" price. The columns print both sellers' figures, and
+     **each end is one seller's whole bill** -- the cheaper seller's Advertised
+     and Mandatory fees make the low end, the dearer seller's make the high
+     end. Not the minimum of each part: our berth is sometimes the cheaper
+     while their fee book is, and min(base) + min(fees) is then a bill neither
+     seller quoted. Measured before it was believed -- taking the parts
+     independently broke the sum on 74 of the 108 rows where both bills add
+     up. That ordering is why Advertised and Mandatory fees print through
+     `sellerPair` and not `sellerSpan`: they follow the Total's seller order
+     rather than running low to high, and on 27 rows that order is backwards.
+
+     `cheapest` still says who is lower, for the Sellers column. Under
+     `PADI_SAME` they are one price and the span collapses. */
+  function best(row) {
+    var ours = row.d.mandatory_known ? row.m : null;
+    var theirs = row.p;
+    if (!ours && !theirs) return null;
+    if (!ours || !theirs) {
+      var only = ours || theirs;
+      return {
+        m: only, cheapest: ours ? "ours" : "padi", varies: 0, both: false,
+        lo: only.total, hi: only.totalMax,
+        baseLo: only.base, baseHi: only.base,
+        /* The berth is one figure and the ranges sit on the fees, so a ranged
+           total is a ranged fee bill. Printing the midpoint here beside a
+           ranged Total would put the difference nowhere. */
+        laterLo: only.later, laterHi: only.totalMax - only.base
+      };
+    }
+    var gap = row.m.total - row.p.total;
+    var same = Math.abs(gap) < PADI_SAME;
+    var cheap = gap <= 0 ? row.m : row.p;
+    var dear = gap <= 0 ? row.p : row.m;
+    var top = cheap.totalMax > dear.totalMax ? cheap : dear;
+    return {
+      /* The bill the expanded row leads with, and the one the proportion bar
+         is drawn from: the cheaper, because a bar and a fee table have to come
+         from one coherent bill even when the headline is a span. */
+      m: cheap,
+      cheapest: same ? "same" : gap < 0 ? "ours" : "padi",
+      varies: Math.abs(gap),
+      both: true,
+      /* One seller per end. The high end is `top`'s ceiling rather than the
+         dearer seller's midpoint, because an operator's own quoted range can
+         reach past the other seller entirely and hiding it behind a seller
+         comparison would be this site's own suppressed cost. `top` is a whole
+         bill either way, so Advertised + Mandatory fees still equals Total at
+         both ends -- the ranges sit on the fee lines, never on the berth, so
+         the ceiling is carried by Mandatory fees. */
+      lo: cheap.total,
+      hi: top.totalMax,
+      baseLo: cheap.base, baseHi: top.base,
+      laterLo: cheap.later, laterHi: top.totalMax - top.base
+    };
+  }
+
+  /* "€1,757" when the two agree, "€1,757–2,057" when they do not.
+     Rounded before comparing, so a pair that prints identically never prints
+     as a range: "€1,757–1,757" would read as a spread that is not there.
+
+     For the Total only, where the low end is always the low end. */
+  function sellerSpan(lo, hi) {
+    var a = Math.round(lo), b = Math.round(hi);
+    if (a === b) return "€" + a.toLocaleString("en-IE");
+    return "€" + a.toLocaleString("en-IE") + "–" + b.toLocaleString("en-IE");
+  }
+
+  /* The same two sellers, for a *part* of the bill: the low-total seller's
+     figure then the high-total seller's, in that order and never sorted.
+
+     The order is load-bearing -- Advertised + Mandatory fees has to equal
+     Total at each end, so sorting either column would break the row's
+     arithmetic. But the parts do not have to run the same way as the whole,
+     and on 27 of the 108 rows they do not: the seller with the cheaper total
+     advertises the *dearer* berth, which is this site's entire argument
+     happening inside one row. Printed with an en dash that reads as
+     "€2,152–2,150", a broken range. An arrow reads as an order rather than a
+     span, so a pair that runs backwards is legible instead of wrong. */
+  function sellerPair(lo, hi) {
+    var a = Math.round(lo), b = Math.round(hi);
+    if (a === b) return "€" + a.toLocaleString("en-IE");
+    return "€" + a.toLocaleString("en-IE") + " \u2192 " + b.toLocaleString("en-IE");
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -260,12 +403,41 @@
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
         return '<span class="dim">—</span>';
       } },
+    /* The berth price of whichever seller's bill this row is printing. It read
+       ours unconditionally, which on a row won by the second seller put two
+       sellers' numbers in one arithmetic: Advertised plus Mandatory fees no
+       longer made the Total, and a reader checking the sum would find the page
+       wrong rather than find two sellers. One row, one bill. */
     { k: "base", t: "Advertised", num: true, cls: "money",
-      v: function (d) { return d.base; }, show: function (d) { return eur(d.base); } },
+      /* Sorted on the cheaper of the two, which is the smaller of the pair
+         rather than its first member: the pair runs in the Total's seller
+         order and that order is not the price order on 27 rows. A sort key is
+         not a printed figure, so taking the minimum here splices nothing. */
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return b ? Math.min(b.baseLo, b.baseHi) : d.base;
+      },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (!b) return eur(d.base);
+        return sellerPair(b.baseLo, b.baseHi);
+      } },
+    /* The cheapest bill anyone quotes for this sailing, not this site's own.
+     *
+       Two sites sell the same berth on the same boat on the same day and they
+       do not agree -- 43 of the 74 trips where both fee books can be added up
+       differ, and 16 of those by more than €150. Printing one seller's number
+       as "Total" was answering "what does liveaboard.com charge" on a page
+       whose question is "what does this trip cost". Where the second seller's
+       disclosure is complete and cheaper, its bill is the one printed, marked
+       so nobody mistakes which. */
     { k: "total", t: "Total", num: true, cls: "cost",
-      v: function (d, i, m) { return m.total; },
-      show: function (d, i, m) {
-        if (!d.mandatory_known) return '<span class="dim">—</span>';
+      /* Sorted on the low end, so "cheapest first" still means what it says. */
+      v: function (d, i, m, row) { var b = best(row); return b ? b.lo : Infinity; },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (!b) return '<span class="dim">—</span>';
+        m = b.m;
         /* The two numbers already in this row, drawn to scale: how much of the
            bill was advertised, and how much of it was not. Scaled against the
            dearest trip currently in view, so bar length compares down the
@@ -290,8 +462,22 @@
             '<i class="was" style="width:' + advertised.toFixed(1) + '%"></i>' +
             '<i class="add" style="width:' + (100 - advertised).toFixed(1) + '%"></i></span>';
         }
-        return "<b>" + span(m) + "</b>" +
-          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "") + bar;
+        /* The span is the answer, so the marker only has to name its cause.
+           It sits on the number rather than in a column of its own because it
+           qualifies this number: €1,757–2,057 is not an operator quoting a
+           range, it is two sellers who do not agree, and those are different
+           facts that would otherwise print identically. */
+        var varies = b.both && b.cheapest !== "same"
+          ? '<span class="varies" title="Two sellers price this sailing and ' +
+            'they differ by €' + Math.round(b.varies).toLocaleString("en-IE") +
+            '. Both are shown; the Sellers column says which end is whose. ' +
+            'They disclose at different resolutions -- liveaboard.com states ' +
+            'one fee figure per boat, PADI Travel one per itinerary -- so ' +
+            'neither end is the price.">2 sellers</span>'
+          : "";
+        return "<b>" + sellerSpan(b.lo, b.hi) + "</b>" +
+          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "") +
+          varies + bar;
       } },
     /* What divers actually compare on, and the reason price per night is not
        here: two denominators over the same total, and only one of them is the
@@ -304,14 +490,21 @@
        tell apart. An empty cell is what this page already says for a dive site
        nobody named. */
     { k: "perdive", t: "Per dive", num: true,
-      v: function (d, i, m) { return i.dives > 0 ? m.total / i.dives : -1; },
-      show: function (d, i, m) {
+      /* Divides the total the row prints -- the cheaper seller's -- so the two
+         money columns cannot disagree about what a dive costs on one row. */
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return i.dives > 0 && b ? b.m.total / i.dives : -1;
+      },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (b) m = b.m;
         if (!i.dives) {
           return '<span class="dim" title="This operator does not publish a ' +
                  'dive count. Assuming one would divide the bill by a number ' +
                  'nobody stated.">not stated</span>';
         }
-        if (!d.mandatory_known) return '<span class="dim">—</span>';
+        if (!b) return '<span class="dim">—</span>';
         /* The operator quotes a range and this is the fewest, so the figure is
            a ceiling: a week with less steaming fits more dives in and costs
            less each. Erring this way on purpose — the other direction would
@@ -336,11 +529,13 @@
        blank. A branch nothing reaches yet is cheaper than a cell reading
        "undefined" on the day one does. */
     { k: "nitrox", t: "Nitrox", num: true,
-      v: function (d, i, m) {
+      v: function (d, i, m, row) {
+        var b = best(row); if (b) m = b.m;
         return !m.nitrox ? 9e9 : m.nitrox.included ? -1
              : m.nitrox.price != null ? m.nitrox.price : 9e8;
       },
-      show: function (d, i, m) {
+      show: function (d, i, m, row) {
+        var b = best(row); if (b) m = b.m;
         if (!m.nitrox) return '<span class="dim">not listed</span>';
         if (m.nitrox.included) return '<span class="inc">included</span>';
         if (m.nitrox.price != null) return eur(m.nitrox.price);
@@ -352,12 +547,20 @@
        what the heading says. Switching on nitrox or rental gear above adds
        those to it too, because they are then part of what you will pay; the
        footer says so, and the Nitrox column beside it shows one of them. */
+    /* The column the two sellers actually disagree in. Their berth prices are
+       within €5 on 89% of matched sailings; the fee books differ on 43 of the
+       74 trips where both add up, and by more than €150 on sixteen. Printing
+       one figure here hid the whole finding. */
     { k: "later", t: "Mandatory fees", num: true,
-      v: function (d, i, m) { return m.later; },
-      show: function (d, i, m) {
-        return d.mandatory_known
-          ? '<span class="later">+' + eur(m.later) + "</span>"
-          : '<span class="dim">—</span>';
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return b ? Math.min(b.laterLo, b.laterHi) : m.later;
+      },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (!b) return '<span class="dim">—</span>';
+        return '<span class="later">+' +
+          sellerPair(b.laterLo, b.laterHi) + "</span>";
       } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
@@ -399,21 +602,69 @@
           '<span class="lbl">' + label + "</span>" +
           '<span class="caret" aria-hidden="true">▾</span></button>';
       } },
-    /* Only where PADI sells the same sailing -- 601 of 892 rows. A dash on the
-       rest would be a column of dashes; nothing said is nothing printed.
+    /* Who else sells this sailing, and whether they agree about the price.
+     *
+       This replaced a column that measured PADI's berth price against ours and
+       called the gap "vs PADI". It was comparing the wrong halves. Both
+       sellers publish a fee book -- PADI's is on its itinerary endpoint rather
+       than beside its price, which is why it was written off as absent -- and
+       the books disagree far more than the berths do: 43 of the 74 comparable
+       trips, 16 of them by over €150, against a berth gap that is under five
+       euro on 89% of the rows the old column could measure. So the column was
+       showing the half the sellers agree about and hiding the half they do
+       not, on a site whose entire argument is that the extras are where the
+       money is.
 
-       Sorted on the difference itself so a visitor can bring the widest gaps to
-       the top, which is the one thing this column is for. Rows PADI does not
-       price sort last rather than as zero: no quote is not a match. */
-    { k: "padi", t: "vs PADI",
-      v: function (d) { return d.padi_delta == null ? Infinity : d.padi_delta; },
-      show: function (d) {
-        if (d.padi_delta == null) return '<span class="dim">—</span>';
-        if (Math.abs(d.padi_delta) < 1) return '<span class="dim">same</span>';
-        var sign = d.padi_delta < 0 ? "−" : "+";
-        return '<span class="' + (d.padi_delta < 0 ? "cheaper" : "dearer") + '">' +
-          sign + "€" + Math.round(Math.abs(d.padi_delta)).toLocaleString("en-IE") +
-          "</span>";
+       Four states, and they are four different facts:
+
+         both, differ  who holds the low end of the span, and by how much.
+                       What the column is for.
+         both, same    one price sold twice.
+         price only    PADI sells the date and does not disclose a full bill,
+                       so there is a second price and no second total -- 432
+                       rows. Printing a berth gap here would be the old
+                       column's mistake with a new heading.
+         nothing       PADI does not sell that date. Evidence of nothing: its
+                       calendar runs to a different depth on every boat.
+
+       Sorted by the size of the disagreement so the widest come to the top,
+       which is the one thing this column is for. */
+    { k: "padi", t: "Sellers",
+      hint: "Whether PADI Travel sells this same sailing, and which end of the "
+          + "price span is whose -- berth plus the fees each seller discloses. "
+          + "Both totals carry the same on-board extras, because nitrox and "
+          + "rental gear are the vessel's charge whoever sold the berth. "
+          + "\u201cberth only\u201d means PADI prices the date but does not "
+          + "publish a complete fee book for the trip, so no second total is "
+          + "claimed. A dash means PADI does not sell that date, which is "
+          + "evidence of nothing.",
+      v: function (d, i, m, row) {
+        var b = best(row);
+        /* Rows with nothing to compare sort last rather than as zero: no
+           second quote is not agreement. */
+        return b && b.both ? -b.varies : Infinity;
+      },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (b && b.both) {
+          if (b.cheapest === "same") return '<span class="dim">both, same</span>';
+          /* Named, not graded. Both hues in `.cheaper`/`.dearer` mean good and
+             bad elsewhere on this page, and neither applies: the money columns
+             print both bills, so there is no saving being missed and no seller
+             being beaten. What is left to say is which end of that span is
+             whose, which is the one thing the span itself cannot show. */
+          return (b.cheapest === "padi" ? "PADI" : "here") +
+            '<span class="dim"> low, by €' +
+            Math.round(b.varies).toLocaleString("en-IE") + "</span>";
+        }
+        if (d.padi != null) {
+          return '<span class="dim" title="PADI Travel advertises this berth ' +
+            'at €' + Math.round(d.padi).toLocaleString("en-IE") + ' and does ' +
+            'not publish a complete fee book for the trip, so its total is ' +
+            'not known. A berth price is not comparable to a total.">' +
+            "berth only</span>";
+        }
+        return '<span class="dim">—</span>';
       } },
     { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
       show: function (d) {
@@ -640,12 +891,14 @@
     var out = [];
     D.departures.forEach(function (dep) {
       var itin = D.itineraries[dep.itinerary_id];
-      if (passes(dep, itin, null)) out.push({ d: dep, i: itin, m: metricsFor(dep) });
+      if (passes(dep, itin, null)) {
+        out.push({ d: dep, i: itin, m: metricsFor(dep), p: padiMetricsFor(dep) });
+      }
     });
 
     var col = COLS.filter(function (c) { return c.k === state.sort; })[0] || COLS[0];
     out.sort(function (a, b) {
-      var x = col.v(a.d, a.i, a.m), y = col.v(b.d, b.i, b.m);
+      var x = col.v(a.d, a.i, a.m, a), y = col.v(b.d, b.i, b.m, b);
       if (typeof x === "number" && typeof y === "number") return (x - y) * state.dir;
       return String(x).localeCompare(String(y)) * state.dir;
     });
@@ -661,8 +914,67 @@
     return node;
   }
 
-  function feeTable(row) {
-    var body = linesFor(row.d).map(function (line) {
+  /* The entry bar this trip states, in words rather than a code.
+   *
+   * It had a column of its own and lost it: sixteen columns already competed
+   * for the width, the bar is the same three words on most rows, and its
+   * "sources disagree" marker was styled like the disclosure pill beside it,
+   * so two unrelated warnings looked identical in adjacent columns. All three
+   * were arguments against the column and none was an argument against the
+   * fact -- but removing the column removed the fact, because nothing else on
+   * the page printed it. `level_labels` and every itinerary's `requirements`
+   * went on shipping in the payload with no code reading either: 892
+   * departures carrying a stated safety requirement that a visitor could only
+   * reach by downloading the JSON.
+   *
+   * So it lives here instead, under the bill, where there is room for the part
+   * that actually needs saying: liveaboard.com and PADI Travel disagree about
+   * the bar on 49 of these trips, the stricter one is what is shown, and a
+   * diver deserves to know the two sources do not agree rather than to see one
+   * number presented as settled.
+   *
+   * The dim line under it is the sources' own wording, printed for the same
+   * reason the fee rows print the operator's: a normalised label is this
+   * project's phrasing, and the sentence it was normalised from is the
+   * evidence for it. */
+  function entryBar(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level) return "";
+    var level = (D.level_labels && D.level_labels[req.min_level]) || req.min_level;
+    /* The dive count beside the certification, unless the certification's own
+       label already states it: two of the four levels are written "Advanced +
+       50 dives", and appending the number again printed "Advanced + 50 dives,
+       50 logged dives" on the single commonest bar in the fleet. Matched on a
+       word boundary rather than as a substring, so a ten-dive bar is not
+       swallowed by a label that happens to read "+ 100 dives". */
+    var stated = req.min_logged_dives &&
+      new RegExp("\\b" + req.min_logged_dives + "\\b").test(level);
+    var dives = req.min_logged_dives && !stated
+      ? ", " + req.min_logged_dives + " logged dives" : "";
+    /* The note, on the trips where it says more than the line above it.
+     *
+       Every trip has one and 222 of the 317 are the winning source restating
+       the bar in its own words -- true, attributable, and on its own a dim
+       line repeating the black one directly above. What the note is *for* is
+       the other 95: the ones where a second source was read, so the reader can
+       see that the number shown was chosen between two claims rather than
+       simply reported. Where a source is named the whole note prints, first
+       sentence included, because there the restatement is no longer a
+       repetition -- it is which of the two bars was taken. */
+    var note = req.notes && /PADI|liveaboard\.com/.test(req.notes) ? req.notes : "";
+    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level + dives) +
+      "</span>" +
+      (note ? '<span class="dim">' + esc(note) + "</span>" : "") +
+      "</p>";
+  }
+
+  /* One seller's bill, as rows. Factored out because there are two of them
+     now, and they must be built by the same code for the same reason both
+     totals are added by the same code: the whole claim the panel makes is that
+     these are two disclosures of one trip, and a reader comparing them must be
+     comparing what each seller said rather than how each table was made. */
+  function feeRows(lines) {
+    return lines.map(function (line) {
       var on = lineCounts(line) || line.tier === "base";
       var amount = line.has_price && line.display
         ? "€" + Math.round(line.display.amount).toLocaleString("en-IE") +
@@ -685,6 +997,10 @@
         "</td><td>" + esc(line.tier) + '</td><td class="prov">' +
         esc(prov.join(" · ")) + "</td></tr>";
     }).join("");
+  }
+
+  function feeTable(row) {
+    var body = feeRows(linesFor(row.d));
 
     var caveat = "";
     if (!row.d.fees_known) {
@@ -700,29 +1016,57 @@
       caveat = "Plus " + row.m.unpriced.join(", ") + ": listed by the operator " +
         "with no price, so it cannot be added up here. It is not free.";
     }
-    /* The same sailing, as the other seller prices it.
+    /* The same sailing, as the other seller bills it.
      *
-     * Compared against the berth price and said so in words, because the number
-     * directly above it is the total and a reader would otherwise assume that
-     * is what was compared. PADI publishes no fee book at all, so the honest
-     * statement is that its figure is a berth price and what it excludes is
-     * unknown -- exactly the caveat this page applies to an operator that lists
-     * no required extras. */
+     * Three states, and the one in the middle is the one worth being careful
+     * about: a second price with no second total. Saying "PADI charges €1,215"
+     * beside a total is an invitation to compare them, and they are not the
+     * same kind of number -- which is the mistake the old column made in the
+     * table and would be no better here. */
     var padi = "";
-    if (row.d.padi != null) {
-      var diff = row.d.padi_delta;
-      var same = Math.abs(diff) < 1;
-      padi = "PADI Travel advertises this sailing at €" +
-        Math.round(row.d.padi).toLocaleString("en-IE") + " — " +
-        (same ? "the same berth price"
-              : "€" + Math.round(Math.abs(diff)).toLocaleString("en-IE") + " " +
-                (diff < 0 ? "less" : "more")) +
-        " than the berth price above. PADI lists no fees, so what its figure " +
-        "leaves out is unknown; the total on this row is not the same kind of " +
-        "number.";
+    if (row.p) {
+      var gap = row.m.total - row.p.total;
+      padi = "PADI Travel sells this same sailing and publishes its own "
+        + "required extras. Its bill comes to €"
+        + Math.round(row.p.total).toLocaleString("en-IE") + " against €"
+        + Math.round(row.m.total).toLocaleString("en-IE") + " here"
+        + (Math.abs(gap) < PADI_SAME
+            ? " — the same price, give or take a few euro."
+            : ", a difference of €" +
+              Math.round(Math.abs(gap)).toLocaleString("en-IE") + ".")
+        + " Both include the same nitrox and rental gear, because those are "
+        + "the vessel's charge on board whoever sold the berth; where the two "
+        + "sellers differ is the berth price and the fees each one discloses.";
+    } else if (row.d.padi != null) {
+      padi = "PADI Travel advertises this berth at €"
+        + Math.round(row.d.padi).toLocaleString("en-IE")
+        + ", and does not publish a complete set of required extras for this "
+        + "trip. So there is a second price here and no second total, and the "
+        + "two are not comparable: what that figure leaves out is exactly what "
+        + "the table above is for.";
     }
 
-    return '<table class="fees"><tbody>' + body + "</tbody></table>" +
+    /* The bar leads the panel rather than following the bill. Whether a diver
+       may board this trip at all is prior to what boarding it costs, and a
+       reader who opens a row to check a 50-dive requirement should not have to
+       read a fee table first to find it. */
+    /* Both bills, each under the name of the seller who published it, and
+       never merged. They are two claims about one trip and the reader is here
+       to see where they part company -- fold them together and the page would
+       be publishing a bill neither site quotes, which is the thing it accuses
+       operators of. Ours first because its fee book is the one every row on
+       the page is built from; PADI's beneath it, only where its own disclosure
+       is complete enough to add up. */
+    var second = row.p
+      ? '<p class="whose">PADI Travel\u2019s bill for the same trip</p>' +
+        '<table class="fees"><tbody>' +
+        feeRows([row.d.padi_base_line].concat(row.i.padi_lines)) +
+        "</tbody></table>"
+      : "";
+    return entryBar(row.i) +
+      (second ? '<p class="whose">This site\u2019s source, liveaboard.com</p>' : "") +
+      '<table class="fees"><tbody>' + body + "</tbody></table>" +
+      second +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
       (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
   }
@@ -766,7 +1110,11 @@
        those three rather than against a fleet maximum that is no longer
        visible. Only priced rows count -- an unpriced one has no total. */
     barMax = rows.reduce(function (top, r) {
-      return r.d.mandatory_known && r.m.total > top ? r.m.total : top;
+      /* Against the total the column prints, which is now the cheaper of the
+         two sellers'. Measured against ours, a row whose PADI bill undercut it
+         drew a bar longer than the number beside it. */
+      var b = best(r);
+      return b && b.m.total > top ? b.m.total : top;
     }, 0);
 
     /* `stick1`..`stickN` on the leading columns, so the CSS offsets line up
@@ -785,8 +1133,13 @@
          be read as truncated, a truncated column name cannot. */
       var label = (narrow.matches && c.short) ? c.short : c.t;
       /* The tooltip only where the word was shortened, so it names the column
-         rather than repeating it. */
-      var full = label === c.t ? "" : ' title="' + esc(c.t) + '"';
+         rather than repeating it -- or, on a column that needs a sentence
+         rather than a name, whatever `hint` says. A heading a visitor cannot
+         interpret is worse than no heading: "vs PADI" printed a dash on 291
+         rows and read as missing data rather than as a second seller that does
+         not sell that date. */
+      var full = label !== c.t ? ' title="' + esc(c.t) + '"'
+               : c.hint ? ' title="' + esc(c.hint) + '"' : "";
       return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
         '" data-k="' + c.k + '"' + full + ">" + label + " " + dir + "</th>";
     }).join("") + "</tr>";
@@ -805,7 +1158,8 @@
     return rows.slice(from, from + count).map(function (row, offset) {
           var n = from + offset;
           var tds = COLS.map(function (c, col) {
-            var v = c.show ? c.show(row.d, row.i, row.m) : esc(c.v(row.d, row.i, row.m));
+            var v = c.show ? c.show(row.d, row.i, row.m, row)
+                           : esc(c.v(row.d, row.i, row.m, row));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
               " " + pin(col) + '">' + v + "</td>";
           }).join("");

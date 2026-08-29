@@ -744,3 +744,242 @@ class TestColumnOrders(unittest.TestCase):
         for name in ("PHONE_ORDER", "TINY_ORDER"):
             order = self.order(name)
             self.assertLess(order.index("total"), order.index("trip"), name)
+
+
+class TestPayloadIsRead(unittest.TestCase):
+    """Every fact the page ships is a fact the page prints.
+
+    The payload is the whole of what a visitor's browser is given, and it is
+    written by `render.py` and read by `app.js` with nothing between them to
+    say the two still agree. So a key can go on being serialised after the code
+    that printed it is deleted, and the page looks finished while quietly
+    publishing less than it holds.
+
+    That is not hypothetical. `level_labels` and every itinerary's
+    `requirements` shipped in the payload of eleven refreshes with no line of
+    `app.js` reading either: 892 departures each carrying a stated entry
+    requirement -- the certification and logged dives an operator will turn a
+    diver away for -- reachable only by downloading the JSON. The column that
+    printed it was removed for good reasons and nothing replaced it, which is
+    the exact shape of failure this class exists to catch: not a wrong number,
+    a fact silently withdrawn.
+
+    Deliberately a check on the *keys*, not on the rendering. Whether the bar
+    reads well is a matter of taste; whether anything reads it at all is not.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    #: Payload keys with no reader, and the reason each is allowed to stay.
+    #: Empty on purpose -- an entry here is a decision someone made out loud,
+    #: and the point of the list is that it is short enough to argue with.
+    UNREAD: dict[str, str] = {
+        "fee_labels": "one vocabulary defined once; app.js prints each line's "
+                      "own label, which is built from this table in Python",
+    }
+
+    def app(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def payload(self) -> dict:
+        return build_payload(Dataset.load(SEED))
+
+    def test_every_top_level_key_has_a_reader(self) -> None:
+        source = self.app()
+        for key in self.payload():
+            if key in self.UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertIn(
+                    key, source,
+                    f"the payload ships {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_the_entry_bar_reaches_the_page(self) -> None:
+        """The specific fact this class was written for.
+
+        A stated safety requirement is the one kind of number here that is not
+        about money, and it is the whole of what the second source was added
+        for. It travels from the itinerary record through `level_labels` into
+        the expanded row, and every step of that has to be present.
+        """
+        source, payload = self.app(), self.payload()
+        self.assertIn("requirements", source, "app.js reads no entry bar")
+        self.assertIn("level_labels", source, "app.js has no vocabulary for it")
+        self.assertIn("min_level", source, "app.js reads no certification level")
+        bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
+        self.assertTrue(bars, "the seed itself states no entry bar to print")
+
+    def test_the_padi_column_explains_itself(self) -> None:
+        """The one column whose heading a visitor cannot interpret.
+
+        Every other column is named for what it holds, and each has a section
+        in the footer. "Sellers" is one word for a second site pricing the same
+        berth; its cells say "berth only" and "—" and mean two quite different
+        things by them, and a reader has no way to work either out. So it
+        explains itself in the heading and in the footer, or this fails.
+        """
+        self.assertIn("hint:", self.app(), "no column carries an explanation")
+        footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("<h3>Sellers</h3>", footer,
+                      "the footer explains every column but this one")
+        self.assertIn("berth only", footer,
+                      "the footer never says what an uncomparable row means")
+        self.assertIn("Entry requirements", footer,
+                      "the footer never says where the entry bar comes from")
+
+    def test_a_row_prints_one_seller_and_not_a_blend(self) -> None:
+        """Advertised plus Mandatory fees is the Total, on every row.
+
+        The Total can now be the second seller's, and the three money columns
+        beside it have to follow it there. Left reading our own source, a row
+        won by PADI printed our berth price against PADI's total and the
+        arithmetic across the row was simply wrong -- silently, since every
+        figure in it is real.
+        """
+        source = self.app()
+        for key in ('k: "base"', 'k: "later"', 'k: "total"'):
+            start = source.index(key)
+            block = source[start:start + 900]
+            with self.subTest(key):
+                self.assertIn("best(row)", block,
+                              f"{key} does not follow the bill the row prints")
+
+    def test_the_same_price_threshold_is_one_number(self) -> None:
+        """Two sellers agreeing is decided in two places -- the column and the
+        sentence in the expanded row -- and they have to agree with each other.
+
+        Written as a literal in both, they read the same only until someone
+        widens one of them, and the failure is silent: the table says the
+        prices are the same while the panel underneath prints a difference.
+        """
+        source = self.app()
+        self.assertIn("var PADI_SAME = ", source, "the threshold has no name")
+        # Two places decide it: `best`, which the Total and Sellers columns
+        # both read, and the sentence in the expanded row.
+        self.assertGreaterEqual(source.count("PADI_SAME"), 3, "declared and unused")
+        self.assertIsNone(
+            re.search(r"Math\.abs\((?:gap|diff)\)\s*<\s*\d", source),
+            "a bare number decides whether two sellers agree; use PADI_SAME "
+            "so the column and the panel cannot disagree",
+        )
+
+
+class TestBothSellersSpan(unittest.TestCase):
+    """Each end of a printed price span is one seller's whole bill.
+
+    The money columns print `lo-hi` across the two sellers, and Advertised plus
+    Mandatory fees has to equal Total at *both* ends. The obvious way to build
+    the span breaks that: take the minimum of each component and the maximum of
+    each, independently. Our berth is sometimes the cheaper while their fee book
+    is, so min(base) + min(fees) is then a bill neither seller quoted -- a
+    number this site invented, on a page whose whole argument is that invented
+    numbers are the problem.
+
+    Measured before it was believed. The independent-minima version broke the
+    sum on 74 of the 108 rows where both sellers' bills add up; naming one
+    seller per end fixes all 874 priced rows, single-seller rows included.
+
+    Numbers cannot be checked from Python without a second adder that would
+    drift from `metricsOf`, so this checks the shape instead: every endpoint in
+    a `best()` return must read its fields off *one* object. That is the
+    property, and it is the one an editor can lose without any test noticing.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    #: `total`/`base`/`later` for a floor, `totalMax`/`base`/`totalMax - base`
+    #: for a ceiling. Both add up given `metricsOf`'s `later = total - base`,
+    #: which `test_later_is_total_minus_base` pins.
+    SOUND = {
+        ("S.total", "S.base", "S.later"),
+        ("S.totalMax", "S.base", "S.totalMax - S.base"),
+    }
+
+    def best_returns(self) -> list[str]:
+        source = self.APP.read_text(encoding="utf-8")
+        start = source.index("function best(row) {")
+        end = source.index("\n  }", start)
+        body = source[start:end]
+        body = re.sub(r"/\*.*?\*/", "", body, flags=re.S)
+        returns = re.findall(r"return \{(.*?)\};", body, re.S)
+        self.assertEqual(len(returns), 2, "best() no longer has two returns")
+        return returns
+
+    @staticmethod
+    def field(block: str, name: str) -> str:
+        match = re.search(rf"\b{name}:\s*([^,\n}}]+)", block)
+        assert match, f"{name} missing from a best() return"
+        return " ".join(match.group(1).split())
+
+    def ends(self, block: str) -> list[tuple[str, str, str]]:
+        return [
+            (self.field(block, "lo"), self.field(block, "baseLo"),
+             self.field(block, "laterLo")),
+            (self.field(block, "hi"), self.field(block, "baseHi"),
+             self.field(block, "laterHi")),
+        ]
+
+    def test_each_end_reads_one_seller(self) -> None:
+        for block in self.best_returns():
+            for end in self.ends(block):
+                names = {re.match(r"\w+", part).group(0)
+                         for expr in end for part in expr.split() if re.match(r"\w+", part)}
+                self.assertEqual(
+                    len(names), 1,
+                    f"an endpoint is spliced from {sorted(names)}; each end of "
+                    f"the span must be one seller's whole bill",
+                )
+
+    def test_each_end_adds_up(self) -> None:
+        """Advertised + Mandatory fees = Total, at the floor and the ceiling."""
+        for block in self.best_returns():
+            for end in self.ends(block):
+                seller = re.match(r"\w+", end[0]).group(0)
+                shape = tuple(expr.replace(seller + ".", "S.") for expr in end)
+                self.assertIn(
+                    shape, self.SOUND,
+                    f"{shape} is not a form where Advertised + Mandatory "
+                    f"equals Total",
+                )
+
+    def test_later_is_total_minus_base(self) -> None:
+        """The algebra above rests on this one line of `metricsOf`."""
+        source = self.APP.read_text(encoding="utf-8")
+        self.assertRegex(source, r"\blater:\s*low - base\b")
+
+    def test_the_span_collapses_when_the_ends_round_alike(self) -> None:
+        """A pair that prints identically must not print as a range:
+        "1,757-1,757" reads as a spread that is not there. Both printers round
+        before they compare, because the rounding is what makes them equal."""
+        source = self.APP.read_text(encoding="utf-8")
+        for name in ("sellerSpan", "sellerPair"):
+            body = re.search(rf"function {name}\(lo, hi\) \{{(.*?)\n  \}}", source, re.S)
+            self.assertIsNotNone(body, f"{name} is gone")
+            self.assertRegex(body.group(1), r"Math\.round\(lo\)[\s\S]*Math\.round\(hi\)", name)
+            self.assertRegex(body.group(1), r"if \(\w+ === \w+\) return", name)
+
+    def test_the_component_columns_never_sort_their_pair(self) -> None:
+        """Advertised and Mandatory fees print the low-total seller's figure
+        then the high-total seller's, and that order is what makes the row add
+        up. On 27 of the 108 both-seller rows the pair runs backwards -- the
+        seller with the cheaper total advertises the dearer berth -- and
+        sorting it to look tidy would break Advertised + Mandatory = Total.
+
+        So those two columns use `sellerPair`, whose separator is an arrow
+        rather than an en dash, and the Total keeps `sellerSpan`. Swapping one
+        for the other is a silent change: both take the same two arguments and
+        both render.
+        """
+        source = self.APP.read_text(encoding="utf-8")
+        for lo, hi, printer in (("baseLo", "baseHi", "sellerPair"),
+                                ("laterLo", "laterHi", "sellerPair"),
+                                ("lo", "hi", "sellerSpan")):
+            self.assertRegex(
+                source, rf"{printer}\(b\.{lo}, b\.{hi}\)",
+                f"b.{lo}/b.{hi} is no longer printed by {printer}",
+            )
+        pair = re.search(r"function sellerPair\(lo, hi\) \{(.*?)\n  \}", source, re.S)
+        self.assertNotIn("Math.min", pair.group(1))
+        self.assertNotIn("Math.max", pair.group(1))

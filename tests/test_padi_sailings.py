@@ -4,10 +4,18 @@ The match is (boat, start date) and it is exact -- 601 of 892 departures find a
 PADI price on the day alone, where the itinerary-title join reached a third of
 that. A date has no spelling.
 
-The regression these tests exist for is the comparison itself. Our ``total``
-adds fees; PADI publishes none. Measuring PADI's berth price against our total
-would show it cheaper by exactly the fees it never disclosed, on a site whose
-whole argument is that undisclosed fees are the problem.
+The regression these tests exist for is the comparison itself, and what counts
+as one has changed. It used to be berth against berth, on the stated grounds
+that PADI publishes no fee book. It does -- on its itinerary endpoint rather
+than beside its price -- and the two books disagree far more than the berths
+do: 43 of the 74 trips where both can be added up, 16 of them by over €150,
+against a berth gap under five euro on 89% of the rows. Comparing berths was
+comparing the half the sellers agree about.
+
+So the rule now has two halves and both are load-bearing. A total may be set
+against a total, never against a berth price. And a PADI total exists only
+where PADI's own disclosure is complete: a bill built from part of a fee book
+is the exact thing this site exists to catch other people doing.
 """
 
 from __future__ import annotations
@@ -133,27 +141,106 @@ class TestComparison(unittest.TestCase):
                         "retrieved": "2026-08-27"}},
     ]}}}
 
-    def test_the_delta_is_berth_against_berth(self) -> None:
-        """Ours advertises 1450 and carries 150 of fees; PADI advertises 1300.
+    #: PADI's book for the same trip, complete: one charge, named and priced.
+    PADI = {
+        "collected": "2026-08-28",
+        "trips": {
+            "alia-soul::brothers-7-nights": {
+                "boat": "alia-soul",
+                # The join is `promote.padi_key`: PADI's title minus its
+                # night suffix is our itinerary's name.
+                "name": "Brothers, Daedalus & Elphinstone",
+                "fees": {
+                    "complete": True,
+                    "unreadable": [],
+                    "lines": [{
+                        "code": "marine_park", "tier": "mandatory",
+                        "basis": "per_trip", "note": "National park fees",
+                        "amount": {"amount": 60.0, "currency": "USD"},
+                    }],
+                },
+            }
+        },
+    }
 
-        The difference is -150 against the berth price. Measured against the
-        total it would read as -300 and PADI would look twice as cheap, entirely
-        because it publishes no fees.
-        """
+    def padi_book(self, **fees) -> dict:
+        """The book above with its fee block overridden."""
+        trip = dict(next(iter(self.PADI["trips"].values())))
+        trip["fees"] = {**trip["fees"], **fees}
+        return {**self.PADI, "trips": {"alia-soul::brothers-7-nights": trip}}
+
+    def page(self, padi: dict | None) -> dict:
         payload = promote(candidate([departure()]), season=SEASON,
-                          fees=self.FEES, padi_departures=BOOK)
+                          fees=self.FEES, padi_departures=BOOK, padi=padi)
+        return build_payload(Dataset.from_dict(payload))
+
+    def test_a_complete_padi_book_reaches_the_page_as_lines(self) -> None:
+        """Lines, not a number: the browser adds PADI's bill up with the same
+        code it adds ours up with, so the visitor's toggles reach both sides and
+        a difference can never be an artefact of two adders."""
+        page = self.page(self.padi_book())
+        itinerary = next(iter(page["itineraries"].values()))
+        self.assertIn("padi_lines", itinerary)
+        codes = [line["code"] for line in itinerary["padi_lines"]]
+        self.assertIn("marine_park", codes)
+        self.assertIn("base", [line["tier"] for line in [page["departures"][0]["padi_base_line"]]])
+
+    def test_the_shared_on_board_extras_are_on_both_sides(self) -> None:
+        """Nitrox and rental gear are the vessel's charge, billed on board to
+        whoever walks up the gangway, so they belong to both bills.
+
+        Left off PADI's side, its total would be short by whatever the visitor
+        has switched on -- and both switches start on -- so PADI would win every
+        row for a reason that has nothing to do with PADI.
+        """
+        fees = {"vessels": {"alia-soul": {"fees": [
+            *self.FEES["vessels"]["alia-soul"]["fees"],
+            {"code": "gear_rental", "label": "Equipment rental",
+             "tier": "conditional", "basis": "per_trip", "included": False,
+             "amount": {"amount": 200.0, "currency": "USD"},
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+        ]}}}
+        payload = promote(candidate([departure()]), season=SEASON, fees=fees,
+                          padi_departures=BOOK, padi=self.padi_book())
         page = build_payload(Dataset.from_dict(payload))
-        row = page["departures"][0]
-        self.assertAlmostEqual(row["padi_delta"], row["padi"] - row["base"], places=2)
-        self.assertLess(row["base"], row["padi"] + 200)  # sanity: same order
-        self.assertNotEqual(row["padi_delta"], row["padi"] - row["base"] - 150)
+        itinerary = next(iter(page["itineraries"].values()))
+        codes = [line["code"] for line in itinerary["padi_lines"]]
+        self.assertIn("gear_rental", codes)
+        # And exactly once -- a shared line duplicated is a fee charged twice.
+        self.assertEqual(codes.count("gear_rental"), 1)
+
+    def test_an_incomplete_padi_book_yields_no_second_total(self) -> None:
+        """The invariant, in the one place it can be broken silently.
+
+        An unpriced charge, or one whose name this project cannot resolve, means
+        the bill does not add up -- and a total built from part of a disclosure
+        would show PADI cheaper by whatever it left out, which is the failure
+        this site reports in operators.
+        """
+        for label, book in (
+            ("unpriced", self.padi_book(complete=False)),
+            ("unreadable", self.padi_book(complete=False, unreadable=["Local Fees"])),
+        ):
+            with self.subTest(label):
+                page = self.page(book)
+                itinerary = next(iter(page["itineraries"].values()))
+                self.assertNotIn("padi_lines", itinerary)
+                # The berth price survives; it is the *total* that is withheld.
+                self.assertIn("padi", page["departures"][0])
+
+    def test_no_padi_book_leaves_the_berth_price_alone(self) -> None:
+        """432 rows are this: a second price, no second bill."""
+        page = self.page(None)
+        self.assertNotIn("padi_lines", next(iter(page["itineraries"].values())))
+        self.assertIn("padi", page["departures"][0])
 
     def test_nothing_is_emitted_where_padi_is_silent(self) -> None:
         payload = promote(candidate([departure(start="2027-06-05", end="2027-06-12")]),
                           season=SEASON, padi_departures=BOOK)
         row = build_payload(Dataset.from_dict(payload))["departures"][0]
         self.assertNotIn("padi", row)
-        self.assertNotIn("padi_delta", row)
+        self.assertNotIn("padi_base_line", row)
 
     def test_the_difference_needs_one_currency(self) -> None:
         """Ours in USD, PADI's in EUR: the model refuses rather than subtracting."""

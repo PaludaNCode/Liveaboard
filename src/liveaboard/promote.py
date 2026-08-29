@@ -712,6 +712,45 @@ def _padi_requirements(record: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+PADI_FEE_PROVENANCE: dict[str, Any] = {
+    "kind": "scraped",
+    "source_id": "padi.com",
+}
+"""Where a PADI fee line came from.
+
+Every price and fee on this page carries one, and a second seller's fees are no
+exception -- a line whose origin is not recorded is indistinguishable from one
+this project made up, which is the whole distinction the site exists to police.
+The retrieval date is stamped on by the caller, which is the only part of this
+that varies per run.
+"""
+
+
+def _padi_fees(record: dict[str, Any]) -> dict[str, Any] | None:
+    """PADI's mandatory charges in this dataset's fee shape.
+
+    The parser has already done the reading -- classified each title against
+    the same table liveaboard.com's wording goes through, mapped PADI's
+    charging unit onto a `FeeBasis`, and decided whether what is left adds up.
+    All this does is unwrap the money into the two keys `FeeItem.from_dict`
+    expects, and pass the verdict through untouched.
+
+    Returns ``None`` for a trip PADI has not been read for, which is not the
+    same as a trip PADI says has no required extras: the first writes no key
+    and claims nothing, the second writes an empty list and a complete bill,
+    and only the second is a disclosure. Fifty of PADI's 307 itineraries are
+    the second kind.
+    """
+    fees = record.get("fees")
+    if not isinstance(fees, dict) or "lines" not in fees:
+        return None
+    return {
+        "lines": [dict(line, provenance=dict(PADI_FEE_PROVENANCE))
+                  for line in fees["lines"]],
+        "complete": bool(fees.get("complete")),
+    }
+
+
 def _requirements(trip: dict[str, Any]) -> dict[str, Any] | None:
     """The entry bar a trip states, or ``None`` when none was read.
 
@@ -1299,6 +1338,22 @@ def promote(
         if bar:
             itineraries[-1]["requirements"] = bar
 
+        # The second seller's own required extras, beside ours and never mixed
+        # into them. Written only where PADI states at least one charge or
+        # states a complete bill of none, so a trip PADI has not been read for
+        # carries no key rather than an empty list that reads as "no fees".
+        padi_fees = _padi_fees(padi_trip)
+        if padi_fees is not None:
+            retrieved = (padi or {}).get("collected") or ""
+            for line in padi_fees["lines"]:
+                line["provenance"]["retrieved"] = retrieved
+                line["provenance"]["url"] = (
+                    f"https://travel.padi.com/liveaboard/egypt/"
+                    f"{padi_slug_for.get(slug, slug)}/"
+                )
+            itineraries[-1]["padi_fees"] = padi_fees["lines"]
+            itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]
+
         for item in group:
             entry = {
                 "id": item["id"],
@@ -1360,7 +1415,7 @@ def promote(
         "schema_version": 1,
         "generated": candidate.get("scraped_at") or date.today().isoformat(),
         "default_currency": "EUR",
-        "notes": notes or _notes_for(itineraries),
+        "notes": notes or _notes_for(itineraries, departures),
         "fx": fx or _default_fx(),
         # Only the operators actually named. UNKNOWN_OPERATOR joins the list
         # only when something is filed under it -- carrying an unused "Operator
@@ -1423,7 +1478,10 @@ def _operators_for(
     return rows or [dict(UNKNOWN_OPERATOR)]
 
 
-def _notes_for(itineraries: list[dict[str, Any]]) -> str:
+def _notes_for(
+    itineraries: list[dict[str, Any]],
+    departures: list[dict[str, Any]] | None = None,
+) -> str:
     """Describe what this run actually captured.
 
     The note used to be a constant reading "Fees are not yet captured, so true
@@ -1431,6 +1489,13 @@ def _notes_for(itineraries: list[dict[str, Any]]) -> str:
     carried a full breakdown for every trip while telling its visitors it had
     none. A site that exists to catch operators describing their prices
     inaccurately cannot describe its own data inaccurately.
+
+    The same rule is why the second source is named here. This sentence is the
+    page's own statement of where its numbers come from, and for eleven
+    refreshes it named liveaboard.com alone while a "vs PADI" column sat in the
+    table and PADI's entry bar decided what 95 trips print. A source a page
+    reads and does not admit to is the reverse of the failure this project
+    reports in operators, and no less a failure for being an omission.
     """
     total = len(itineraries)
     with_fees = sum(1 for i in itineraries if i["fees"])
@@ -1438,17 +1503,50 @@ def _notes_for(itineraries: list[dict[str, Any]]) -> str:
         return (
             "Prices scraped from liveaboard.com. Fees are not yet captured, so "
             "true cost is shown as unknown rather than as the advertised price."
-        )
+        ) + _padi_note(itineraries, departures)
     if with_fees == total:
         return (
             "Prices and fee disclosures scraped from liveaboard.com. True cost "
             "adds every fee the operator lists, including the ones it states "
             "without a price."
-        )
+        ) + _padi_note(itineraries, departures)
     return (
         f"Prices scraped from liveaboard.com. Fee disclosures captured for "
         f"{with_fees} of {total} itineraries; the rest show true cost as "
         f"unknown rather than as the advertised price."
+    ) + _padi_note(itineraries, departures)
+
+
+def _padi_note(
+    itineraries: list[dict[str, Any]],
+    departures: list[dict[str, Any]] | None,
+) -> str:
+    """What the second source contributed, counted rather than claimed.
+
+    Two numbers, because PADI contributes two different things and their
+    coverage is not the same: a berth price on the sailings whose date it also
+    sells, and an entry bar on the trips it also describes. Naming the source
+    without either count would let a run that read nothing from PADI go on
+    saying it did, which is the failure the fee sentence above was written to
+    stop.
+    """
+    priced = sum(1 for d in (departures or []) if d.get("padi_price") is not None)
+    barred = sum(
+        1 for i in itineraries
+        if "PADI" in ((i.get("requirements") or {}).get("notes") or "")
+    )
+    if not priced and not barred:
+        return ""
+    parts = []
+    if priced:
+        parts.append(
+            f"its own berth price on {priced} of {len(departures or [])} sailings"
+        )
+    if barred:
+        parts.append(f"the entry bar on {barred} of {len(itineraries)} trips")
+    return (
+        " PADI Travel is read as a second source for " + " and ".join(parts) +
+        "; where the two disagree about the bar the stricter is shown."
     )
 
 
