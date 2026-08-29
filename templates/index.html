@@ -50,12 +50,21 @@
   <div class="tgroup">
     <button type="button" class="chip" id="hideSold" aria-pressed="false">Hide sold out</button>
   </div>
+  <!-- Who sells the sailing. Chips rather than a select, like every other
+       filter here, and three states because there are three: both sites list
+       it, only this site's own source does, or only PADI Travel does. The
+       third is 230 rows and had no way to be found before -- the column that
+       named it was dropped when Seller took over the job of linking both
+       sellers. -->
   <div class="tgroup">
-    <input id="q" type="search" placeholder="boat, route, port, site&hellip;" aria-label="Search">
+    <span class="tlabel">Sold by</span>
+    <span id="sellers"></span>
+  </div>
+  <div class="tgroup">
+    <button type="button" class="link-button" id="reset">Reset</button>
   </div>
   <div class="tgroup meta-right">
     <span id="metaLine"></span>
-    <button type="button" class="link-button" id="reset">Reset</button>
   </div>
 </div>
 
@@ -82,9 +91,12 @@
      on a boat actually asks. This replaced a filter on the operating company —
      that answered a question asked far less often, and a company with six
      boats returned six boats' worth of rows with no way to tell them apart.
-     The operator is still searchable, so typing a company name finds its
-     fleet. Scoring operators against each other was tried and removed: it read
-     as a league table and contradicted the total beside it. -->
+     The operator was left reachable through the search box instead, and that
+     box has since gone too — it was a second way to ask what the chips ask,
+     costing a redraw on every keystroke, and the one question it answered
+     alone was the company. A diver picks the boat. Scoring operators against
+     each other was tried and removed: it read as a league table and
+     contradicted the total beside it. -->
 <div class="filterbar">
   <span class="tlabel">Boat</span>
   <span id="boats"></span>
@@ -305,8 +317,10 @@
         the money columns compare is a <b>total against a total</b> &mdash;
         never a berth price against a bill, which would show whichever seller
         discloses less as the cheaper one. Where both sell a sailing, the
-        <b>Source</b> column links each of them, so either price can be checked
-        at the place that published it.
+        <b>Seller</b> column links each of them, so either price can be checked
+        at the place that published it. On the 230 sailings only PADI lists it
+        links PADI alone and says so, and the <b>Sold by</b> filter above the
+        table is how you narrow to any of the three cases.
       </p>
       <p>
         They differ more than you would expect for one cabin on one boat on one

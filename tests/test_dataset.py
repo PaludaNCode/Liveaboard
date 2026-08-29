@@ -828,12 +828,12 @@ class TestPayloadIsRead(unittest.TestCase):
         source = self.app()
         self.assertIn("padi_urls", source,
                       "the page has no way to link the other seller")
-        self.assertIn("PADI ↗", source, "the Source column never names PADI")
+        self.assertIn("PADI ↗", source, "the Seller column never names PADI")
 
         footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
         self.assertIn("<h3>Sellers</h3>", footer,
                       "the footer never explains the second seller")
-        self.assertIn("Source", footer,
+        self.assertIn("<b>Seller</b>", footer,
                       "the footer never says where the second seller is linked")
         self.assertIn("Entry requirements", footer,
                       "the footer never says where the entry bar comes from")
@@ -1120,3 +1120,100 @@ class TestTheMethodPanelCanBeClosedFromAnywhere(unittest.TestCase):
                       "closing leaves a stale scroll position inside the panel")
         self.assertIn("scrollIntoView", source,
                       "closing can leave the reader in blank space below the table")
+
+
+class TestTheSellerFilter(unittest.TestCase):
+    """Who sells a sailing is filterable, and the text box is gone.
+
+    The Sellers *column* was removed when Seller took over linking both sites,
+    which left 230 PADI-only rows with no way to be found: nothing in the
+    toolbar asked the question and the search box could not either, because
+    "who sells this" is not a word in any of the fields it searched.
+
+    The box itself went with it. It was a second way to ask what the chips ask,
+    redrawing the table on every keystroke, and the only question it answered
+    alone was the operating company -- which the boat bank already answers
+    better, a company with six boats being six boats' worth of rows.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    PAGE = ROOT / "templates" / "index.html"
+
+    def app(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def page(self) -> str:
+        return self.PAGE.read_text(encoding="utf-8")
+
+    def test_the_text_filter_is_gone_from_both_sides(self) -> None:
+        """Half a removal is worse than none: an input with no handler filters
+        nothing and says otherwise."""
+        self.assertNotIn('id="q"', self.page(), "the search input is still in the page")
+        self.assertNotIn("state.q", self.app(), "app.js still reads a text query")
+        self.assertNotIn("debounce", self.app(),
+                         "debounce outlived its only caller")
+
+    def test_the_bank_exists_on_both_sides(self) -> None:
+        self.assertIn('id="sellers"', self.page())
+        self.assertIn('chips("sellers"', self.app())
+
+    def test_reset_clears_it(self) -> None:
+        """A filter Reset does not reach is one a visitor cannot get out of
+        without reloading."""
+        app = self.app()
+        self.assertIn("state.sellers.clear()", app)
+        self.assertRegex(app, r'"boats",\s*"sellers"\]',
+                         "the seller bank is never repainted on reset")
+
+    def test_the_three_states_partition_every_row(self) -> None:
+        """Three chips, three facts, and no row in two of them or none.
+
+        Read off the same two keys the Seller column branches on -- a second
+        derivation of "who sells this" would be a second answer, and the chip
+        counts would drift from the links beside them.
+        """
+        if not (ROOT / "data" / "egypt-2027.json").exists():
+            self.skipTest("no dataset in this checkout")
+        payload = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))
+        counts = {"both": 0, "here": 0, "padi": 0}
+        for d in payload["departures"]:
+            counts["padi" if d.get("padi_only")
+                   else "both" if d.get("padi") is not None
+                   else "here"] += 1
+        self.assertEqual(sum(counts.values()), len(payload["departures"]))
+        for state, n in counts.items():
+            self.assertGreater(n, 0, f"the {state!r} chip would render with no rows")
+
+    def test_the_column_is_named_for_what_it_holds(self) -> None:
+        """It stopped being one source the day it started linking two."""
+        self.assertIn('{ k: "source", t: "Seller",', self.app())
+
+
+class TestTheBuiltStampIsTheBuild(unittest.TestCase):
+    """The toolbar's "built" is the build, to the minute.
+
+    It printed `meta.generated` -- the day the *data* was scraped -- under the
+    word "built". Two different facts under one label, and the one it showed
+    was not the one it named: they diverge whenever a parser or template change
+    ships without a fresh crawl, which is most of them.
+
+    Minutes because the page is rebuilt several times an hour on a busy day and
+    a date alone cannot tell two of those apart, which is the whole question
+    somebody reading that line is asking.
+    """
+
+    def test_the_payload_carries_a_build_stamp(self) -> None:
+        if not (ROOT / "data" / "egypt-2027.json").exists():
+            self.skipTest("no dataset in this checkout")
+        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        self.assertRegex(meta["built"], r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC$")
+
+    def test_it_is_not_the_crawl_date_wearing_a_new_name(self) -> None:
+        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        self.assertNotEqual(meta["built"], meta["generated"])
+        self.assertRegex(meta["generated"], r"^\d{4}-\d{2}-\d{2}$",
+                         "the crawl date must stay a date: it is a day, not a moment")
+
+    def test_the_toolbar_prints_the_build(self) -> None:
+        app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
+        self.assertIn('" · built " + (D.meta.built || D.meta.generated)', app)

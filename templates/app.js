@@ -36,8 +36,11 @@
   });
 
   var state = {
-    sort: "start", dir: 1, q: "",
+    sort: "start", dir: 1,
     months: new Set(), ports: new Set(), sites: new Set(), boats: new Set(),
+    /* Who sells the sailing. Empty means every seller, like every other chip
+       bank here -- a filter nobody has touched must never be a filter. */
+    sellers: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
     toggles: {}, open: null,
     /* Rows the visitor has marked to keep their place while scrolling
@@ -355,12 +358,42 @@
      the operator bank could not answer, because a company with six boats
      returned six boats' worth of rows and no way to tell them apart.
 
-     The operator is not lost: it stays on every itinerary in the dataset and
-     in the search haystack, so typing a company's name still finds its whole
-     fleet. It is one word in a search box rather than 42 buttons above the
-     prices, which is the right weight for a question asked far less often
-     than "which boat". */
+     The operator is not lost -- it stays on every itinerary in the dataset and
+     in the expanded row -- but it is no longer *filterable*. It was reachable
+     through the search box, and that box has gone: a second way to ask what
+     the chips ask, redrawing the table on every keystroke, and the only
+     question it answered alone was the company. 42 buttons above the prices
+     is the wrong weight for a question asked far less often than "which
+     boat", and so, it turns out, is a permanent input. */
   var BOATS = tally(function (i) { return [i.boat]; });
+
+  /* Which sites sell this sailing. Three states and they are three different
+     facts, so they are three chips rather than one "PADI" switch:
+
+       both        both sites list the date. The money columns print a span
+                   across the two, and this is where a reader who wants only
+                   the comparable rows finds them.
+       here only   liveaboard.com lists it and PADI does not. Its calendar
+                   runs to a different depth on every boat, so this is a fact
+                   about who was asked and not about the trip.
+       PADI only   liveaboard.com does not list the date -- and on 22 boats
+                   does not sell berths at all.
+
+     Read off `padi_only` and `padi` rather than recomputed, because those are
+     the same two keys the Seller column branches on and the row's own bill is
+     built from. A second derivation here would be a second answer to "who
+     sells this", and the two would drift. */
+  function sellerOf(dep) {
+    return dep.padi_only ? "padi" : dep.padi != null ? "both" : "here";
+  }
+
+  var SELLER_LABELS = { both: "Both", here: "Here only", padi: "PADI only" };
+  var SELLERS = ["both", "here", "padi"].map(function (id) {
+    return {
+      id: id, label: SELLER_LABELS[id],
+      n: D.departures.filter(function (d) { return sellerOf(d) === id; }).length
+    };
+  }).filter(function (it) { return it.n; });
 
   /* ---------- columns ---------- */
 
@@ -666,7 +699,7 @@
      * A vessel having a PADI page says nothing about whether a given sailing
      * is on its calendar, and a link landing on a calendar without the trip on
      * it is worse than no link. */
-    { k: "source", t: "Source",
+    { k: "source", t: "Seller",
       v: function (d, i) { return d.booking_url || i.source_url || ""; },
       show: function (d, i) {
         var links = [];
@@ -875,11 +908,10 @@
       state.sites.forEach(function (s) { if (sites.indexOf(s) < 0) all = false; });
       if (!all) return false;
     }
-    if (state.q) {
-      var hay = (itin.boat + " " + itin.operator + " " + itin.name + " " +
-                 itin.port_from + " " + itin.port_to + " " +
-                 (itin.dive_sites || []).join(" ")).toLowerCase();
-      if (hay.indexOf(state.q) < 0) return false;
+    /* Any-of, like months and ports and unlike dive sites: a sailing has
+       exactly one answer here, so requiring two would return nothing. */
+    if (skip !== "sellers" && state.sellers.size && !state.sellers.has(sellerOf(dep))) {
+      return false;
     }
     return true;
   }
@@ -1639,6 +1671,8 @@
         function (i) { return i.dive_sites || []; });
   chips("boats", BOATS, state.boats, false, "boats",
         function (i) { return [i.boat]; });
+  chips("sellers", SELLERS, state.sellers, false, "sellers",
+        function (i, dep) { return [sellerOf(dep)]; });
 
   /* A range rather than chips: the fleet runs three to fourteen nights but
      sits overwhelmingly at seven, so a chip per length would be one useful
@@ -1670,11 +1704,6 @@
     draw();
   });
 
-  document.getElementById("q").addEventListener("input", debounce(function (event) {
-    state.q = event.target.value.toLowerCase().trim();
-    draw();
-  }, 120));
-
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
     state.boats.clear();
@@ -1682,11 +1711,10 @@
        and a highlight left behind on a row the visitor can no longer find is
        worse than no highlight at all. */
     state.marked.clear();
-    state.q = "";
+    state.sellers.clear();
     state.nightsMin = state.nightsMax = null;
     state.hideSoldOut = false;
     soldOut.setAttribute("aria-pressed", "false");
-    document.getElementById("q").value = "";
     nmin.value = ""; nmax.value = "";
     D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (chip) {
@@ -1700,7 +1728,7 @@
        chip out of its hidden tail, has to be rebuilt from the cleared set --
        repainting is the only thing that puts those chips back where they
        belong. */
-    ["months", "ports", "sites", "boats"].forEach(function (id) {
+    ["months", "ports", "sites", "boats", "sellers"].forEach(function (id) {
       var node = document.getElementById(id);
       if (node && node.repaint) node.repaint();
     });
@@ -1744,19 +1772,6 @@
     if (print.addEventListener) print.addEventListener("change", drawEverything);
   }
   window.addEventListener("beforeprint", drawEverything);
-
-  /* Typing is the one input that fires per character, and a redraw is the
-     most expensive thing this file does. Without this, "elphinstone" cost
-     eleven full redraws; with it, one. 120ms is below the point a pause
-     between keystrokes reads as lag. */
-  function debounce(fn, ms) {
-    var timer = null;
-    return function () {
-      var self = this, args = arguments;
-      clearTimeout(timer);
-      timer = setTimeout(function () { fn.apply(self, args); }, ms);
-    };
-  }
 
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
@@ -1814,7 +1829,13 @@
        never linked from the search pages, so the crawl cannot see them. */
     D.meta.counts.boats + " boats bookable by the berth · " +
     D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
-    " · built " + D.meta.generated;
+    /* The build, not the crawl. `generated` is the day the data was read and
+       is what the colophon prints beside the sources; this line says when the
+       page you are looking at was made, which is a different day whenever a
+       template or parser change ships without a fresh crawl. To the minute,
+       because several builds an hour is normal and a date cannot tell them
+       apart. */
+    " · built " + (D.meta.built || D.meta.generated);
 
   drawNotice();
   draw();

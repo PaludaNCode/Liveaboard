@@ -13,7 +13,7 @@ step, no dependencies, no CDN. Open it from disk or serve it from anywhere.
 from __future__ import annotations
 
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -208,6 +208,20 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     return {
         "meta": {
             "generated": (dataset.generated or date.today()).isoformat(),
+            # When this page was rendered, to the minute, in UTC.
+            #
+            # Distinct from `generated`, which is the day the *data* was
+            # scraped, and the toolbar had been printing that under the word
+            # "built" -- two different facts under one label, and the one it
+            # showed was not the one it named. They diverge whenever a parser
+            # or template change is promoted without a fresh crawl, which is
+            # most of them.
+            #
+            # To the minute because the page is rebuilt several times an hour
+            # on a busy day and a date alone cannot tell two of those apart --
+            # which is the whole question somebody reading this line is asking.
+            # UTC, and stamped as such: the runner's clock is not the reader's.
+            "built": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
             "currency": DISPLAY_CURRENCY,
             "verified": dataset.is_fully_verified,
             "source_kinds": sorted(k.value for k in dataset.source_kinds),
