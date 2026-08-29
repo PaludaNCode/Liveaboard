@@ -290,6 +290,21 @@ class Itinerary:
     preferring one wholesale would hide the difference this site exists to show.
     """
     padi_fees_complete: bool = False
+
+    padi_sourced_fees: bool = False
+    """True where this trip's own fee rows came from PADI Travel.
+
+    Every other itinerary takes them from the vessel panel liveaboard.com
+    publishes, which is per boat and does not change with the month. The 22
+    vessels liveaboard.com does not sell have no such panel, so PADI's
+    per-itinerary book is the only one there is and becomes theirs.
+
+    A fallback where ours is absent, never a merge: the two disclose at
+    different resolutions -- one figure per vessel against one per itinerary --
+    and taking a line from each would build a bill neither seller quotes. The
+    flag exists because the page names the source under the fee table, and
+    naming the wrong one is the failure this project reports in other people.
+    """
     """Whether every charge PADI states here is named and priced.
 
     False is the ordinary case for a trip PADI has not been read for *and* for
@@ -323,6 +338,7 @@ class Itinerary:
                 for f in payload.get("padi_fees", [])
             ],
             padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
+            padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )
 
 
@@ -390,6 +406,20 @@ class Departure:
                 return int(block["spots"])
         return None
 
+    padi_only: bool = False
+    """True where PADI Travel is the only seller listing this sailing.
+
+    Not a quality of the trip -- a fact about who was asked. 53 of the dataset's
+    sailings are here, on 14 boats it already carried, and Blue Storm and Blue
+    Seas contribute 29 between them: near-complete weekly seasons PADI sells and
+    liveaboard.com does not list at all.
+
+    Such a row's :attr:`price` and :attr:`price_provenance` are PADI's, and its
+    :attr:`padi_price` is always ``None``. One seller's figure repeated into the
+    second seller's field would read on the page as two sellers agreeing, which
+    is the opposite of what this flag records.
+    """
+
     @property
     def padi_difference(self) -> Money | None:
         """PADI's berth price minus ours, or ``None`` if either is missing.
@@ -429,5 +459,6 @@ class Departure:
                         if payload.get("padi_price") else None),
             padi_provenance=(Provenance.from_dict(payload["padi_provenance"])
                              if payload.get("padi_provenance") else None),
+            padi_only=bool(payload.get("padi_only")),
             berths=list(payload.get("berths") or []),
         )

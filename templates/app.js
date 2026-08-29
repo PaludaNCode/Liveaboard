@@ -615,15 +615,22 @@
        not, on a site whose entire argument is that the extras are where the
        money is.
 
-       Four states, and they are four different facts:
+       Five states, and they are five different facts:
 
          both, differ  who holds the low end of the span, and by how much.
                        What the column is for.
          both, same    one price sold twice.
-         price only    PADI sells the date and does not disclose a full bill,
+         berth only    PADI sells the date and does not disclose a full bill,
                        so there is a second price and no second total -- 432
                        rows. Printing a berth gap here would be the old
                        column's mistake with a new heading.
+         PADI only     PADI is the only seller listing this sailing -- 53 rows,
+                       on 14 boats the page already carried. Read as a dash it
+                       would say the opposite of the truth: not "PADI does not
+                       sell this date" but "PADI is why this row is here".
+                       There is one bill, and it is PADI's berth against the
+                       vessel's own fee book, so there is nothing to compare
+                       and that is the whole statement.
          nothing       PADI does not sell that date. Evidence of nothing: its
                        calendar runs to a different depth on every boat.
 
@@ -666,8 +673,15 @@
         var url = d.booking_url || i.source_url;
         var padi = d.padi != null ? (D.padi_urls || {})[i.boat_id] : null;
         if (url) {
+          /* Named, not "listing", on the rows where the one link is not the
+             usual source. 230 sailings are sold only by PADI -- liveaboard.com
+             does not list the date, and on 22 boats does not sell berths at
+             all -- so their single url points at travel.padi.com. Calling that
+             "listing" is the name a reader would give the *other* site, which
+             is the one thing this column must not get wrong now that it is
+             where both sellers are reached from. */
           links.push('<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
-            (padi ? "liveaboard" : "listing") + " ↗</a>");
+            (d.padi_only ? "PADI" : padi ? "liveaboard" : "listing") + " ↗</a>");
         }
         if (padi) {
           links.push('<a href="' + esc(padi) + '" target="_blank" rel="noopener">' +
@@ -1027,6 +1041,29 @@
         + "trip. So there is a second price here and no second total, and the "
         + "two are not comparable: what that figure leaves out is exactly what "
         + "the table above is for.";
+    } else if (row.d.padi_only) {
+      /* Two sentences, because there are two cases and the difference is
+         which source the fee rows came from.
+
+         On a boat both sites sell, the table is a mixture and the reader is
+         owed the join: the berth is PADI's, the fees are the vessel's own
+         panel on liveaboard.com. That is not a spliced bill -- the marine
+         park, the port and the fuel are charged on board by the boat whoever
+         sold the berth, which is the same reason both sellers' totals carry
+         the same nitrox and gear.
+
+         On a boat only PADI sells there is no such panel and no mixture: one
+         seller published the whole bill. Saying "the vessel's own fees" there
+         would name a source the row does not have. */
+      padi = row.i.padi_sourced_fees
+        ? "liveaboard.com does not sell this boat at all, so PADI Travel is "
+          + "the only seller and everything above is PADI’s: the berth price "
+          + "and the required extras its itinerary publishes. There is no "
+          + "second bill to set against it."
+        : "liveaboard.com does not list this sailing, so PADI Travel is the "
+          + "only seller and there is one bill rather than two. The berth "
+          + "price above is PADI’s; the fees under it are the vessel’s own, "
+          + "which it charges on board whoever sold the berth.";
     }
 
     /* The bar leads the panel rather than following the bill. Whether a diver

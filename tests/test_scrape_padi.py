@@ -92,6 +92,75 @@ class TestSplitTitle(unittest.TestCase):
         self.assertIsNone(PadiComAdapter.split_title("Liveaboard Deals"))
         self.assertIsNone(PadiComAdapter.split_title("Diving in Egypt"))
 
+    def test_a_count_in_front_of_the_ports_is_still_the_trip_length(self) -> None:
+        """The seventh ending form, and the one that leaves nothing to end on.
+
+        Red Sea Aggressor II writes it this way and no other boat does. Read
+        only off the tail, the title parses to nothing -- which is not a
+        harmless miss now that an unparsable title is a sailing the page does
+        not publish.
+        """
+        split = PadiComAdapter.split_title(
+            "Northern Red Sea, Ras Mohamed and Straits of Tiran 7 Nights "
+            "(Hurghada -Hurghada)"
+        )
+        assert split is not None
+        name, ports, nights = split
+        self.assertEqual(nights, 7)
+        self.assertEqual(ports, "Hurghada -Hurghada")
+        self.assertEqual(
+            name, "Northern Red Sea, Ras Mohamed and Straits of Tiran (Hurghada -Hurghada)",
+            "the length is struck out of the name: it is how long the trip is, "
+            "not what the trip is called",
+        )
+
+    def test_the_tail_still_wins_where_it_speaks(self) -> None:
+        """The head is a fallback, never a second opinion. A count in the name
+        competing with one after the ports is the ambiguity the tail rule
+        already refuses to guess at."""
+        split = PadiComAdapter.split_title("Brothers 3 Nights (Marsa Alam - Hurghada) 7 Nights")
+        assert split is not None
+        self.assertEqual(split[2], 7)
+        self.assertEqual(split[0], "Brothers 3 Nights (Marsa Alam - Hurghada)")
+
+    def test_two_counts_in_the_name_are_refused(self) -> None:
+        self.assertIsNone(
+            PadiComAdapter.split_title("Brothers 4 Nights and 7 Nights (Marsa Alam - Hurghada)")
+        )
+
+
+class TestCompareKey(unittest.TestCase):
+    """The conjunction is a separator, so it folds with the punctuation.
+
+    Stripping symbols makes *A & B* and *A, B* one key and leaves *A and B* a
+    third, so an operator writing one list three ways reached us as two trips.
+    It cost Red Sea Aggressor II and Blue Storm a match each -- and worse than a
+    miss, since a near-duplicate itinerary splits a trip's dates and can slugify
+    onto the id of the trip it duplicates.
+
+    Counted over all 317 trips of the dataset this was written against: the fold
+    merges two pairs and no others, both one trip typed twice.
+    """
+
+    def key(self, value: str) -> str:
+        return PadiComAdapter.compare_key(value)
+
+    def test_the_three_spellings_of_one_list_agree(self) -> None:
+        self.assertEqual(self.key("Brothers & Daedalus"), self.key("Brothers, Daedalus"))
+        self.assertEqual(self.key("Brothers & Daedalus"), self.key("Brothers and Daedalus"))
+
+    def test_the_live_pair_it_was_written_for(self) -> None:
+        self.assertEqual(
+            self.key("Northern Red Sea, Ras Mohamed and Straits of Tiran (Hurghada -Hurghada)"),
+            self.key("Northern Red Sea, Ras Mohamed, Straits of Tiran (Hurghada - Hurghada)"),
+        )
+
+    def test_it_does_not_fold_two_different_trips(self) -> None:
+        """A word cannot separate a title from a different trip unless the two
+        are otherwise identical, in which case they were the same trip."""
+        self.assertNotEqual(self.key("North & Tiran"), self.key("North & Safaga"))
+        self.assertNotEqual(self.key("St John's"), self.key("St John's & Daedalus"))
+
 
 class TestJoinRepairs(unittest.TestCase):
     """Two bugs that lost matches on boats that were paired correctly.
@@ -425,22 +494,57 @@ class TestAliasMap(unittest.TestCase):
         self.assertFalse(PadiComAdapter.is_reviewed("sea-serpent", self.MAP))
 
     def test_the_committed_map_keys_on_real_boat_ids(self) -> None:
-        """Every key must be a boat we actually hold.
+        """Every key must be a boat we hold, or one we minted for PADI.
 
         A key that matches nothing fails silently -- vessel_for returns None,
         which is indistinguishable from unreviewed -- and that is exactly how
         the first version of this file went wrong, keying "MY Odyssey
         Liveaboard" as its folded name when its boat_id is "odyssey".
+
+        `padi_only` is the exemption and needs one: those ids are minted in this
+        file rather than by the first source, and a vessel with no sailing
+        inside the published season never becomes a boat in the dataset. Twelve
+        of the 22 are in that state today -- PADI's calendar for them stops
+        before May 2027, or in VIP One's case prices every sailing at zero. They
+        are still reviewed, still mapped, and still fetched every refresh, so
+        the day one of them opens a season it appears without anybody editing
+        this file.
         """
         import json
         from pathlib import Path
 
         aliases = json.loads(Path("data/padi_aliases.json").read_text())
         boats = {b["id"] for b in json.loads(Path("data/egypt-2027.json").read_text())["boats"]}
-        unknown = sorted(set(aliases["aliases"]) - boats)
+        minted = set(aliases.get("padi_only") or [])
+        unknown = sorted(set(aliases["aliases"]) - boats - minted)
         self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
         stale = sorted(set(aliases.get("absent") or []) - boats)
         self.assertEqual(stale, [], f"absent entries matching no boat: {stale}")
+
+    def test_every_minted_id_is_mapped(self) -> None:
+        """The exemption above must not become a place to park a typo.
+
+        A `padi_only` entry that is not also in `aliases` names no PADI slug,
+        so nothing would ever fetch it -- and it would read as a reviewed boat
+        rather than as the dead string it is.
+        """
+        import json
+        from pathlib import Path
+
+        aliases = json.loads(Path("data/padi_aliases.json").read_text())
+        orphan = sorted(set(aliases.get("padi_only") or []) - set(aliases["aliases"]))
+        self.assertEqual(orphan, [], f"padi_only entries with no slug: {orphan}")
+
+    def test_no_boat_is_both_ours_and_padi_s_alone(self) -> None:
+        """AVO and Blue sat outside every list in this file until 2026-08-29,
+        which is the one state it exists to make impossible. Neither may now be
+        in two."""
+        import json
+        from pathlib import Path
+
+        aliases = json.loads(Path("data/padi_aliases.json").read_text())
+        both = sorted(set(aliases.get("padi_only") or []) & set(aliases.get("absent") or []))
+        self.assertEqual(both, [], f"listed as both PADI-only and absent: {both}")
 
 
 class TestStricterBar(unittest.TestCase):

@@ -862,6 +862,652 @@
    "ports": "Hurghada - Hurghada",
    "title": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights"
   },
+  "andromeda::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
+   "boat": "andromeda",
+   "boat_name": "MY Andromeda",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "15% Local GST (on onboard purchases)",
+     "Environmental/Government Fee",
+     "Navy fee"
+    ]
+   },
+   "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22515,
+   "padi_slug": "south-hurghada-marsa-alam-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "andromeda::North (Hurghada - Hurghada)": {
+   "boat": "andromeda",
+   "boat_name": "MY Andromeda",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "15% Local GST (on onboard purchases)",
+     "Environmental/Government Fee",
+     "Navy fee"
+    ]
+   },
+   "name": "North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22516,
+   "padi_slug": "brothers-elphinstone-safaga-hurghada-hurghada-7-ni",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North (Hurghada - Hurghada) 7 Nights"
+  },
+  "andromeda::South (Hurghada - Marsa Alam)": {
+   "boat": "andromeda",
+   "boat_name": "MY Andromeda",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "15% Local GST (on onboard purchases)",
+     "Environmental/Government Fee",
+     "Navy fee"
+    ]
+   },
+   "name": "South (Hurghada - Marsa Alam)",
+   "nights": 7,
+   "padi_id": 22513,
+   "padi_slug": "south-hurghada-marsa-alam-7-nights",
+   "ports": "Hurghada - Marsa Alam",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "South (Hurghada - Marsa Alam) 7 Nights"
+  },
+  "andromeda::South (Marsa Alam - Hurghada)": {
+   "boat": "andromeda",
+   "boat_name": "MY Andromeda",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "15% Local GST (on onboard purchases)",
+     "Environmental/Government Fee",
+     "Navy fee"
+    ]
+   },
+   "name": "South (Marsa Alam - Hurghada)",
+   "nights": 7,
+   "padi_id": 22514,
+   "padi_slug": "south-hurghada-marsa-alam-7-nights-2",
+   "ports": "Marsa Alam - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "South (Marsa Alam - Hurghada) 7 Nights"
+  },
+  "anemone::Brothers - Daedalus - Elphistone (Hurghada - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphistone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21447,
+   "padi_slug": "brothers-saint-johns-hurghada-hurghada-7-nights",
+   "ports": "Hurghada Marina - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphistone (Hurghada - Hurghada) 7 Nights"
+  },
+  "anemone::Brothers - Daedalus - Elphistone (Port Galib - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphistone (Port Galib - Port Galib)",
+   "nights": 7,
+   "padi_id": 22859,
+   "padi_slug": "north-wrecks-and-safaga-hurghada-hurghada-7-nigh-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers - Daedalus - Elphistone (Port Galib - Port Galib) 7 Nights"
+  },
+  "anemone::Daedalus - Fury Shoals (Port Galib - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus - Fury Shoals (Port Galib - Port Galib)",
+   "nights": 7,
+   "padi_id": 21441,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - Fury Shoals (Port Galib - Port Galib) 7 Nights"
+  },
+  "anemone::Daedalus - Rocky - Zabargad (Hurghada - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus - Rocky - Zabargad (Hurghada - Port Galib)",
+   "nights": 7,
+   "padi_id": 22728,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-port-galib-7",
+   "ports": "Hurghada Marina - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - Rocky - Zabargad (Hurghada - Port Galib) 7 Nights"
+  },
+  "anemone::Elba - Rocky - Zabargad - Saint John's (Hurghada - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Elba - Rocky - Zabargad - Saint John's (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21450,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-6",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Elba - Rocky - Zabargad - Saint John's (Hurghada - Hurghada) 7 Nights"
+  },
+  "anemone::Elba - Rocky - Zabargad - Saint John's (Hurghada - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 36,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Elba - Rocky - Zabargad - Saint John's (Hurghada - Port Galib)",
+   "nights": 14,
+   "padi_id": 22727,
+   "padi_slug": "elba-rocky-zabargad-saint-johns-hurghada-hurghada",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Elba - Rocky - Zabargad - Saint John's (Hurghada - Port Galib) 14 Nights"
+  },
+  "anemone::Fury Shoals (Port Galib - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Fury Shoals (Port Galib - Port Galib)",
+   "nights": 7,
+   "padi_id": 21442,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Fury Shoals (Port Galib - Port Galib) 7 Nights"
+  },
+  "anemone::North - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21449,
+   "padi_slug": "north-brothers-islands-hurghada-hurghada-7-nights",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "anemone::North Wrecks - Ras Mohammed - Strait of Tiran (Hurghada - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks - Ras Mohammed - Strait of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21443,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-5",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Wrecks - Ras Mohammed - Strait of Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "anemone::North Wrecks and Brothers islands (Hurghada - Hurghada)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks and Brothers islands (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21448,
+   "padi_slug": "brothers-islands-hurghada-hurghada-7-nights",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Wrecks and Brothers islands (Hurghada - Hurghada) 7 Nights"
+  },
+  "anemone::Saint John's (Port Galib - Port Galib)": {
+   "boat": "anemone",
+   "boat_name": "MY Anemone",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Saint John's (Port Galib - Port Galib)",
+   "nights": 7,
+   "padi_id": 21446,
+   "padi_slug": "north-wrecks-and-safaga-hurghada-hurghada-7-nigh-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Saint John's (Port Galib - Port Galib) 7 Nights"
+  },
   "aphrodite::Brothers - Daedalus (Hurghada - Port Ghalib)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
@@ -1309,6 +1955,542 @@
     "recommended_logged_dives": 50
    },
    "title": "Sataya, Fury Shoals (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "ashrafi::Brothers Daedalus & Elphinstone (Hurghada - Hurghada)": {
+   "boat": "ashrafi",
+   "boat_name": "MY Ashrafi",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 145.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers Daedalus & Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23179,
+   "padi_slug": "southern-red-sea-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "ashrafi::North and Brothers (Hurghada - Hurghada)": {
+   "boat": "ashrafi",
+   "boat_name": "MY Ashrafi",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 145.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North and Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23176,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-8",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "North and Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "ashrafi::Northen Red Sea (Hurghada - Hurghada)": {
+   "boat": "ashrafi",
+   "boat_name": "MY Ashrafi",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 145.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Northen Red Sea (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23177,
+   "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-9",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northen Red Sea (Hurghada - Hurghada) 7 nights"
+  },
+  "ashrafi::Total Wrecks (Hurghada - Hurghada)": {
+   "boat": "ashrafi",
+   "boat_name": "MY Ashrafi",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 145.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Total Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23180,
+   "padi_slug": "southern-red-sea-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Total Wrecks (Hurghada - Hurghada) 7 nights"
+  },
+  "avo::BDE - Golden Triangle (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "BDE - Golden Triangle (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22924,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE - Golden Triangle (Hurghada - Hurghada) 7 Nights"
+  },
+  "avo::BDE - Golden Triangle (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "BDE - Golden Triangle (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22925,
+   "padi_slug": "bde-golden-triangle-hurghada-hurghada-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE - Golden Triangle (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 11,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 5,
+   "padi_id": 22931,
+   "padi_slug": "daedalus-elphinstone-port-ghalib-port-ghalib-7-n-4",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 5 Nights"
+  },
+  "avo::Dahab Sinai (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Dahab Sinai (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22919,
+   "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Dahab Sinai (Hurghada - Hurghada) 7 Nights"
+  },
+  "avo::North Tiran (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22920,
+   "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Tiran (Hurghada - Hurghada) 7 Nights"
+  },
+  "avo::North and Brothers (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North and Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22923,
+   "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North and Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "avo::Saint John\u00b4s (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Saint John\u00b4s (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22927,
+   "padi_slug": "the-best-of-the-south-port-ghalib-port-ghalib-7-ni",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Saint John\u00b4s (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::The Best of the South (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "The Best of the South (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22926,
+   "padi_slug": "bde-golden-triangle-port-ghalib-port-ghalib-7-ni-3",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "The Best of the South (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "bella-2::Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)": {
+   "boat": "bella-2",
+   "boat_name": "Bella 2",
+   "dives": 9,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Coast Guard Fee"
+    ]
+   },
+   "name": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)",
+   "nights": 3,
+   "padi_id": 16474,
+   "padi_slug": "dahab-tiran-sharm-el-sheikh-sharm-el-sheik-4-nig-2",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik) 3 nights"
+  },
+  "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "bella-2",
+   "boat_name": "Bella 2",
+   "dives": 9,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Coast Guard Fee"
+    ]
+   },
+   "name": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 3,
+   "padi_id": 16471,
+   "padi_slug": "north-route-mini-sharm-el-sheikh-sharm-el-sheikh-3",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 nights"
+  },
+  "bella-3::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "bella-3",
+   "boat_name": "Bella 3",
+   "dives": 9,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Coast Guard Fee"
+    ]
+   },
+   "name": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 3,
+   "padi_id": 21582,
+   "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-5",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 Nights"
+  },
+  "bella-3::Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "bella-3",
+   "boat_name": "Bella 3",
+   "dives": 13,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Coast Guard Fee"
+    ]
+   },
+   "name": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 4,
+   "padi_id": 21583,
+   "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-6-ni",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights"
   },
   "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
@@ -2330,6 +3512,294 @@
    },
    "title": "Strait of Tiran and North (Hurghada- Hurghada) 7 nights"
   },
+  "blue-pearl::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23341,
+   "padi_slug": "north-safaga-hurghada-hurghada-7-nights-3",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "blue-pearl::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23342,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-8",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "blue-pearl::Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 320.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21820,
+   "padi_slug": "wrecks-only-salem-express-hurghada-hurghada-7-nigh",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers-Daedalus-Elphinstone (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-pearl::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 260.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 18138,
+   "padi_slug": "north-wrecks-hurghada-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-pearl::North & Safaga (Hurghada - Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 260.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23340,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-21",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Safaga (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-pearl::North & Tiran (Hurghada-Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 230.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Tiran (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 12532,
+   "padi_slug": "north-and-tiran-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada-Hurghada) 7 nights"
+  },
+  "blue-pearl::North & Wrecks (Hurghada- Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 230.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Wrecks (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 12531,
+   "padi_slug": "north-and-wrecks-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Wrecks (Hurghada- Hurghada) 7 nights"
+  },
+  "blue-pearl::North - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 245.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22858,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue-pearl::St.Johns & Fury Shoal (Port Ghalib - Port Ghalib)": {
+   "boat": "blue-pearl",
+   "boat_name": "MY Blue Pearl",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 260.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Local charges and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "St.Johns & Fury Shoal (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23343,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-9",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "St.Johns & Fury Shoal (Port Ghalib - Port Ghalib) 7 Nights"
+  },
   "blue-seas::Brothers & Safaga (Port Ghalib - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
@@ -3105,6 +4575,346 @@
    },
    "title": "St.Johns (Port Ghalib - Port Ghalib) 7 Nights"
   },
+  "blue::Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12781,
+   "padi_slug": "selectable-tour",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib) 7 nights"
+  },
+  "blue::Brothers - Daedalus - Fury Shoal - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "Brothers - Daedalus - Fury Shoal - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14523,
+   "padi_slug": "daedalus-rocky-island-and-zabargad-port-ghalib-por",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Fury Shoal - Elphinstone (Port Ghalib - Port Ghalib) -7 nights"
+  },
+  "blue::Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12780,
+   "padi_slug": "brother-daedalus-and-elphinstone",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib) 7 nights"
+  },
+  "blue::Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "Daedalus &\u00a0Fury Shoal (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12774,
+   "padi_slug": "daedalus-fury-shoal-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus &\u00a0Fury Shoal (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue::Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14220,
+   "padi_slug": "daedalus-fury-shoal-port-ghalib-port-ghalib-7-nigh",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "blue::North & Brothers (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "North & Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14219,
+   "padi_slug": "brother-daedalus-and-elphinstone-port-ghalib-hur-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Brothers (Hurghada - Hurghada) 7 nights"
+  },
+  "blue::North & Safaga (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "North & Safaga (Hurghada -  Hurghada)",
+   "nights": 7,
+   "padi_id": 23300,
+   "padi_slug": "north-brothers-hurghada-hurghada-7-nights-18",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Safaga (Hurghada -  Hurghada) 7 nights"
+  },
+  "blue::North & Tiran (Hurghada- Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "North & Tiran (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 12773,
+   "padi_slug": "brothers-island-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Tiran (Hurghada- Hurghada) 7 nights"
+  },
+  "blue::North - Tiran - Dahab (Hurghada - Hurghada)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22952,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-6",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
+  },
+  "blue::St. John's (Port Ghalib - Port Ghalib)": {
+   "boat": "blue",
+   "boat_name": "MY Blue",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Local fees"
+    ]
+   },
+   "name": "St. John's (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12778,
+   "padi_slug": "st-johns-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "St. John's (Port Ghalib - Port Ghalib) 7 nights"
+  },
   "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "carlton",
    "boat_name": "MY Carlton",
@@ -3218,6 +5028,132 @@
     "recommended_logged_dives": 20
    },
    "title": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights"
+  },
+  "cassiopeia-glory::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+   "boat": "cassiopeia-glory",
+   "boat_name": "MY Cassiopeia Glory",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_week",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Navy fee"
+    ]
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23301,
+   "padi_slug": "north-hurghada-hurghada-7-nights-18",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "cassiopeia-glory::North (Hurghada - Hurghada)": {
+   "boat": "cassiopeia-glory",
+   "boat_name": "MY Cassiopeia Glory",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_week",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Navy fee"
+    ]
+   },
+   "name": "North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23094,
+   "padi_slug": "north-hurghada-hurghada-7-nights-13",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North (Hurghada - Hurghada) 7 nights"
+  },
+  "cassiopeia-glory::North + Tiran (Hurghada - Hurghada)": {
+   "boat": "cassiopeia-glory",
+   "boat_name": "MY Cassiopeia Glory",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_week",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Navy fee"
+    ]
+   },
+   "name": "North + Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23095,
+   "padi_slug": "north-hurghada-hurghada-7-nights-14",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North + Tiran (Hurghada - Hurghada) 7 nights"
   },
   "discovery-i::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-i",
@@ -6671,6 +8607,546 @@
    },
    "title": "Reefs and Wrecks (Hurghada- Hurghada) 7 nights"
   },
+  "eriny::Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Cost Gard Fee"
+    ]
+   },
+   "name": "Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 21615,
+   "padi_slug": "wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh-7-nig",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "eriny::Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Cost Gard Fee"
+    ]
+   },
+   "name": "Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 21613,
+   "padi_slug": "ras-mohammed-thistlegorm-sharm-el-sheikh-sharm-e-2",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sinai Classic (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "eriny::Sinai Wrecks - Northern Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Cost Gard Fee"
+    ]
+   },
+   "name": "Sinai Wrecks - Northern Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 21616,
+   "padi_slug": "wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh-7-n-2",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sinai Wrecks - Northern Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "eriny::Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Cost Gard Fee"
+    ]
+   },
+   "name": "Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 21614,
+   "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-6",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "explorer-ventures-grand-sea-explorer::Brothers, Daedalus, Elphistone (Hurghada - Port Ghalib)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "Brothers, Daedalus, Elphistone  (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 16442,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-2",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphistone  (Hurghada - Port Ghalib) 7 nights"
+  },
+  "explorer-ventures-grand-sea-explorer::Brothers, Daedalus, Elphistone (Hurghada-Hurghada)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "Brothers, Daedalus, Elphistone  (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 16440,
+   "padi_slug": "brothers-daedalus-elphistone-port-ghalib-hurghad-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Brothers, Daedalus, Elphistone  (Hurghada-Hurghada) 7 nights"
+  },
+  "explorer-ventures-grand-sea-explorer::North (Hurghada-Hurghada)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "North (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 16511,
+   "padi_slug": "north-and-tiran-hurghada-hurghada-7-nights-8",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North (Hurghada-Hurghada) 7 nights"
+  },
+  "explorer-ventures-grand-sea-explorer::North - Tiran And Dahab (Hurghada - Hurghada)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 16,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "North - Tiran And Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 16441,
+   "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-n",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North - Tiran And Dahab (Hurghada - Hurghada) 7 nights"
+  },
+  "explorer-ventures-grand-sea-explorer::North and Brothers (Hurghada-Hurghada)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "North and Brothers (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 16514,
+   "padi_slug": "north-and-brothers-port-ghalib-hurghada-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "North and Brothers (Hurghada-Hurghada) 7 nights"
+  },
+  "explorer-ventures-grand-sea-explorer::North and Tiran (Hurghada-Hurghada)": {
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dives": 17,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "North and Tiran (Hurghada-Hurghada)",
+   "nights": 7,
+   "padi_id": 16510,
+   "padi_slug": "north-and-tiran-hurghada-hurghada-7-nights-7",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North and Tiran (Hurghada-Hurghada) 7 nights"
+  },
+  "freedom-iii::Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "freedom-iii",
+   "boat_name": "Freedom III",
+   "dives": 9,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 25.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Hyperbaric chamber contribution"
+    ]
+   },
+   "name": "Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 3,
+   "padi_id": 13808,
+   "padi_slug": "ras-mohamed-4-nights",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh) 3 nights"
+  },
+  "freedom-iii::Thistlegorm, Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "freedom-iii",
+   "boat_name": "Freedom III",
+   "dives": 12,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 25.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": [
+     "Hyperbaric chamber contribution"
+    ]
+   },
+   "name": "Thistlegorm, Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 4,
+   "padi_id": 13829,
+   "padi_slug": "thistlegorm",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Thistlegorm, Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh) 4 nights"
+  },
+  "freedom-iv::Northern Wrecks and Reefs Route (Umbi - Umbi)": {
+   "boat": "freedom-iv",
+   "boat_name": "Freedom IV",
+   "dives": 20,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Northern Wrecks and Reefs Route (Umbi - Umbi)",
+   "nights": 7,
+   "padi_id": 19232,
+   "padi_slug": "thistlegorm-dunraven-ras-mohammed-umbi-umbi-3-ni-3",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Northern Wrecks and Reefs Route (Umbi - Umbi) 7 Nights"
+  },
+  "freedom-iv::Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi)": {
+   "boat": "freedom-iv",
+   "boat_name": "Freedom IV",
+   "dives": 11,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi)",
+   "nights": 4,
+   "padi_id": 19230,
+   "padi_slug": "thistlegorm-dunraven-ras-mohammed-umbi-umbi-3-ni-2",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 30,
+    "recommended_logged_dives": 20
+   },
+   "title": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi) 4 Nights"
+  },
+  "galaxy::Brothers-Daedalus\u00ad-Elphinstone (Hurghada- Hurghada)": {
+   "boat": "galaxy",
+   "boat_name": "MY Galaxy",
+   "dives": 15,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port fees, fuel surcharges and VAT",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers-Daedalus\u00ad-Elphinstone (Hurghada- Hurghada)",
+   "nights": 7,
+   "padi_id": 11719,
+   "padi_slug": "north-program-hrg-hrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers\u2010Daedalus\u00ad\u2010Elphinstone (Hurghada- Hurghada) - 7 Nights"
+  },
+  "galaxy::Brothers-\u00adDaedalus-\u00adElphinstone (Hurghada - Port Ghalib)": {
+   "boat": "galaxy",
+   "boat_name": "MY Galaxy",
+   "dives": 15,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port fees, fuel surcharges and VAT",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers-\u00adDaedalus-\u00adElphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11727,
+   "padi_slug": "brother-islands-pg-hrg-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers-\u00adDaedalus-\u00adElphinstone (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "galaxy::Brothers-\u00adDaedalus-\u00adElphinstone (Port Ghalib-Port Ghalib)": {
+   "boat": "galaxy",
+   "boat_name": "MY Galaxy",
+   "dives": 15,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port fees, fuel surcharges and VAT",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers-\u00adDaedalus-\u00adElphinstone (Port Ghalib-Port Ghalib)",
+   "nights": 7,
+   "padi_id": 11726,
+   "padi_slug": "brother-islands-hrg-hrg-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "Brothers-\u00adDaedalus-\u00adElphinstone (Port Ghalib-Port Ghalib) - 7 Nights"
+  },
+  "galaxy::North - Brothers (Hurghada - Hurghada)": {
+   "boat": "galaxy",
+   "boat_name": "MY Galaxy",
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port fees, fuel surcharges and VAT",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Brothers (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 11732,
+   "padi_slug": "north-program-pg-hrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "North - Brothers (Hurghada - Hurghada) 7 Nights"
+  },
   "ghazala-adventure::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
@@ -8359,6 +10835,673 @@
    },
    "title": "Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada) 7 Nights"
   },
+  "heaven-saphir::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15337,
+   "padi_slug": "north-brothers-daedalus-elphinstone-safaga-hurghad",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "heaven-saphir::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23429,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-23",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 15281,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-ghalib-7-ni",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 nights"
+  },
+  "heaven-saphir::Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14590,
+   "padi_slug": "brothers-daedalus-elphinstone-ghalib-ghalib-7-nigh",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Daedalus - Rocky island - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus - Rocky island - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14595,
+   "padi_slug": "daedalus-rocky-island-zabargad-port-ghalib-port-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Daedalus \u2013 Rocky island \u2013 Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Daedalus Reef - Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus Reef - Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14591,
+   "padi_slug": "brothers-safaga-port-ghalib-hurghada-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Daedalus Reef \u2013 Fury Shoals (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Daedalus Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14599,
+   "padi_slug": "southern-route-fury-shoals-port-ghalib-port-ghalib",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Daedalus Reef \u2013 St. John's - Elphinstone (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Dolphin Freedive & Yoga Trip (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Dolphin Freedive & Yoga Trip (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14593,
+   "padi_slug": "brothers-safaga-hurghada-port-ghalib-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Dolphin Freedive & Yoga Trip (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Elphinstone - Rocky Island - St. John\u2019s (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Elphinstone - Rocky Island - St. John\u2019s (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14598,
+   "padi_slug": "rocky-island-zabargad-st-johns-port-ghalib-port-gh",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Elphinstone - Rocky Island \u2013 St. John\u2019s (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "heaven-saphir::Extreme Deep South - Elba Reef (Hamata - Hamata)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Extreme Deep South - Elba Reef (Hamata - Hamata)",
+   "nights": 7,
+   "padi_id": 14867,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-2",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Extreme Deep South - Elba Reef (Hamata - Hamata) 7 Nights"
+  },
+  "heaven-saphir::North + Tiran - Wrecks & Reefs (Hurghada - Hurghada)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North + Tiran - Wrecks & Reefs (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14597,
+   "padi_slug": "north-tirana-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North + Tiran - Wrecks & Reefs (Hurghada - Hurghada) 7 nights"
+  },
+  "heaven-saphir::North - Brothers - Safaga (Hurghada - Hurghada)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Brothers - Safaga (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14592,
+   "padi_slug": "brothers-safaga-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced"
+   },
+   "title": "North - Brothers - Safaga (Hurghada - Hurghada) 7 nights"
+  },
+  "heaven-saphir::North Wreck & Reef (Hurghada - Hurghada)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wreck & Reef (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14594,
+   "padi_slug": "classical-north-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "North Wreck & Reef (Hurghada - Hurghada) 7 nights"
+  },
+  "heaven-saphir::Southern Route - St. John\u2019s (Port Ghalib - Port Ghalib)": {
+   "boat": "heaven-saphir",
+   "boat_name": "MY Heaven Saphir",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 160.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 85.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Southern Route - St. John\u2019s (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14600,
+   "padi_slug": "southern-route-st-johns-port-ghalib-port-ghalib-7",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Southern Route \u2013 St. John\u2019s (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "high-wave::North (Hurghada - Hurghada)": {
+   "boat": "high-wave",
+   "boat_name": "High Wave",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Environmental and Route Fees"
+    ]
+   },
+   "name": "North (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21675,
+   "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North (Hurghada - Hurghada) 7 Nights"
+  },
   "iceberg::Hurghada North (Hurghada - Hurghada)": {
    "boat": "iceberg",
    "boat_name": "My Iceberg",
@@ -8421,6 +11564,562 @@
     "recommended_logged_dives": 20
    },
    "title": "Special Wrecks / Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving"
+  },
+  "independence-ii::Best of North - Brothers (Hurghada - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Best of North - Brothers (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 17070,
+   "padi_slug": "fury-shoals-elphinstone-port-ghalib-port-ghalib-7",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Best of North - Brothers (Hurghada - Port Ghalib) 7 nights"
+  },
+  "independence-ii::Best of North - Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 25,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Best of North - Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 10,
+   "padi_id": 22865,
+   "padi_slug": "best-of-north-brothers-hurghada-port-ghalib-7-nigh",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Best of North - Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 10 Nights"
+  },
+  "independence-ii::Best of North - Wrecks (Hurghada - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Best of North - Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23068,
+   "padi_slug": "best-of-north-strait-of-tiran-brothers-hurghada-hu",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Best of North - Wrecks (Hurghada - Hurghada) 7 Nights"
+  },
+  "independence-ii::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 15056,
+   "padi_slug": "rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "independence-ii::Brothers - Daedalus - Elphinstone (Port Ghalib- Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Elphinstone (Port Ghalib- Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14530,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-gha",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib- Port Ghalib) 7 nights"
+  },
+  "independence-ii::Brothers - Daedalus - Rocky Island - St. John's - Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 40,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Daedalus - Rocky Island - St. John's - Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 14,
+   "padi_id": 17259,
+   "padi_slug": "strait-of-tiran-best-of-north-wracks-hurghada-hurg",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Daedalus - Rocky Island - St. John's - Elphinstone (Hurghada - Port Ghalib) 14 Nights"
+  },
+  "independence-ii::Brothers - Safaga (Port Ghalib - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Safaga (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 12034,
+   "padi_slug": "brothers-daedalus-elphinstone-7-nights-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Safaga (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "independence-ii::Brothers - Safaga - Best of North - Tiran (Hurghada - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 40,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brothers - Safaga - Best of North - Tiran (Hurghada - Hurghada)",
+   "nights": 14,
+   "padi_id": 14084,
+   "padi_slug": "daedalus-rockyzabargad-elphinstone-port-ghalib-por",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brothers - Safaga - Best of North - Tiran (Hurghada - Hurghada) 14 nights"
+  },
+  "independence-ii::Daedalus - Elphinstone - Brothers (Port Ghalib - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Daedalus - Elphinstone - Brothers (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 17258,
+   "padi_slug": "daedalus-elphinstone-brothers-best-of-north-port-g",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Daedalus - Elphinstone - Brothers (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "independence-ii::Fury Shoals - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Fury Shoals - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14016,
+   "padi_slug": "st-johns-fury-shoals-daedalus-elphinstone-port-gha",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Fury Shoals - Daedalus - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "independence-ii::Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 30,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)",
+   "nights": 11,
+   "padi_id": 17257,
+   "padi_slug": "rocky-island-elba-riffe-st-johns-elphinstone-port",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib) 11 Nights"
+  },
+  "independence-ii::Safaga - Best of North (Wrecks) - Strait of Tiran (Port Ghalib - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Safaga - Best of North (Wrecks) - Strait of Tiran (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 17255,
+   "padi_slug": "north-wracks-hurghada-hurghada-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Safaga - Best of North (Wrecks) - Strait of Tiran (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "independence-ii::St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 17069,
+   "padi_slug": "st-johns-elphinstone-port-ghalib-port-ghalib-7-nig",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "St. John's - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "independence-ii::Strait of Tiran - Brothers - Safaga (Hurghada - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 26,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Strait of Tiran - Brothers - Safaga (Hurghada - Hurghada)",
+   "nights": 11,
+   "padi_id": 23069,
+   "padi_slug": "best-of-north-wracks-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Strait of Tiran - Brothers - Safaga (Hurghada - Hurghada) 11 Nights"
+  },
+  "independence-ii::Strait of Tiran without wrecks (Hurghada - Hurghada)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dives": 18,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Strait of Tiran without wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 14018,
+   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghalib",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Strait of Tiran without wrecks (Hurghada - Hurghada) 7 nights"
+  },
+  "lady-m::Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata)": {
+   "boat": "lady-m",
+   "boat_name": "MY Lady M",
+   "dives": 7,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata)",
+   "nights": 4,
+   "padi_id": 21274,
+   "padi_slug": "mini-safari-wadi-el-gemal-marsa-alam-marsa-alam-3",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata) 4 nights"
+  },
+  "lady-m::Mini Safari Fury shoals & sataya (Hamata - Hamata)": {
+   "boat": "lady-m",
+   "boat_name": "MY Lady M",
+   "dives": 7,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Route supplement"
+    ]
+   },
+   "name": "Mini Safari Fury shoals & sataya (Hamata - Hamata)",
+   "nights": 3,
+   "padi_id": 21275,
+   "padi_slug": "mini-safari-wadi-el-gemal-hamata-hamata-3-nights",
+   "ports": "Hamata - Hamata",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 25,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Safari Fury shoals & sataya (Hamata - Hamata) 3 nights"
   },
   "new-sambo::BDE - Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "new-sambo",
@@ -9360,6 +13059,67 @@
    },
    "title": "Northern Red Sea & Dahab (Hurghada - Hurghada) 7 Nights"
   },
+  "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed and Straits of Tiran (Hurghada -Hurghada)": {
+   "boat": "red-sea-aggressor-ii",
+   "boat_name": "Red Sea Aggressor II",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "fuel_surcharge",
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Northern Red Sea, Ras Mohamed and Straits of Tiran (Hurghada -Hurghada)",
+   "nights": 7,
+   "padi_id": 13994,
+   "padi_slug": "northern-red-sea-ras-mohamed-and-straits-of-tiran",
+   "ports": "Hurghada Marina - Hurghada Marina",
+   "requirements": {
+    "min_level": "open_water",
+    "recommended_logged_dives": 50
+   },
+   "title": "Northern Red Sea, Ras Mohamed and Straits of Tiran 7 Nights (Hurghada -Hurghada)"
+  },
   "red-sea-aggressor-ii::Northern Red Sea, the Best of Wreck diving (Hurghada - Hurghada)": {
    "boat": "red-sea-aggressor-ii",
    "boat_name": "Red Sea Aggressor II",
@@ -10009,6 +13769,132 @@
    },
    "title": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights"
   },
+  "reef-voyager::Mini Safari - Ras Mohamed - Thistlegorm (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "reef-voyager",
+   "boat_name": "Reef Voyager",
+   "dives": 10,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 60.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service charge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Mini Safari - Ras Mohamed - Thistlegorm  (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 3,
+   "padi_id": 22867,
+   "padi_slug": "sharm-ras-mohamed-brothers-islands-sharm-el-sheikh",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Safari - Ras Mohamed - Thistlegorm  (Sharm el Sheikh - Sharm el Sheikh) 3 Nights"
+  },
+  "reef-voyager::North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "reef-voyager",
+   "boat_name": "Reef Voyager",
+   "dives": 20,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service charge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 22726,
+   "padi_slug": "north-route-sharm-el-sheikh-sharm-el-sheikh-7n",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh) 7 nights"
+  },
+  "reef-voyager::Sharm - Ras Mohamed - Brothers Islands (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "reef-voyager",
+   "boat_name": "Reef Voyager",
+   "dives": 20,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Marine Park/Port Fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service charge",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sharm - Ras Mohamed - Brothers Islands (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 22866,
+   "padi_slug": "north-route-sharm-el-sheikh-sharm-el-sheikh-7-nigh",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sharm - Ras Mohamed - Brothers Islands (Sharm el Sheikh - Sharm el Sheikh) 7 Nights"
+  },
   "royal-evolution::Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
@@ -10312,6 +14198,1158 @@
     "recommended_logged_dives": 50
    },
    "title": "Special wreck (Hurghada - port Ghalib) 7 Nights"
+  },
+  "seawolf-dominator::Brother Islands - Elphinstone (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 225.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brother Islands - Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21630,
+   "padi_slug": "north-brothers-elphinstone-hurghada-hurghada-7-nig",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother Islands - Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "seawolf-dominator::Deep South-St.John's (Port Ghalib-Port Ghalib)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Deep South-St.John's  (Port Ghalib-Port Ghalib)",
+   "nights": 7,
+   "padi_id": 14715,
+   "padi_slug": "daedalus-brothers-elphinstone-abu-nuhas-rosalie-mo",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deep South-St.John's  (Port Ghalib-Port Ghalib) 7 Nights"
+  },
+  "seawolf-dominator::Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12097,
+   "padi_slug": "sudan-north-7-nights-2",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Fury Shoals (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 19726,
+   "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-4",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Hurghada) 7 nights"
+  },
+  "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22862,
+   "padi_slug": "red-sea-classic-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib) 7 nights"
+  },
+  "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Port Ghalib- Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Marine Park North: Brothers-Daedalus-Elphinstone (Port Ghalib- Hurghada)",
+   "nights": 7,
+   "padi_id": 12101,
+   "padi_slug": "mp-north-brothers-daedalus-elphinstone-7-nights",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Marine Park North: Brothers-Daedalus-Elphinstone (Port Ghalib- Hurghada) 7 Nights"
+  },
+  "seawolf-dominator::North - Wrecks (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North - Wrecks (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 12100,
+   "padi_slug": "deep-southst-johns-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North - Wrecks (Hurghada - Hurghada) 7 nights"
+  },
+  "seawolf-dominator::North Wrecks - Brother Islands (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 225.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks - Brother Islands (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21913,
+   "padi_slug": "brother-islands-elphinstone-hurghada-hurghada-7-ni",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Wrecks - Brother Islands (Hurghada - Hurghada) 7 Nights"
+  },
+  "seawolf-dominator::North/Strait of Tiran (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 180.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North/Strait of Tiran (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 15146,
+   "padi_slug": "north-wrecks-hurghada-hurghada-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North/Strait of Tiran (Hurghada - Hurghada) 7 nights"
+  },
+  "seawolf-dominator::Red Sea Classic (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Classic (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 22861,
+   "padi_slug": "daedalus-fury-shoals-elphinstone-hurghada-hurghada",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Classic (Hurghada - Hurghada) 7 Nights"
+  },
+  "seawolf-dominator::Red Sea Classic (Hurghada - Port Ghalib)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Classic (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 12102,
+   "padi_slug": "north-wrecks-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Classic (Hurghada - Port Ghalib) 7 nights"
+  },
+  "seawolf-dominator::Red Sea Classic (Port Ghalib - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Classic (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 14811,
+   "padi_slug": "marine-park-north-brothers-daedalus-elphinstone-3",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Red Sea Classic (Port Ghalib - Hurghada) 7 Nights"
+  },
+  "seawolf-dominator::Strait of Tiran / Dahab (Hurghada - Hurghada)": {
+   "boat": "seawolf-dominator",
+   "boat_name": "MY Seawolf Dominator",
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Strait of Tiran / Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 19727,
+   "padi_slug": "daedalusst-johnselphinstone-port-ghalib-port-ghali",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Strait of Tiran / Dahab (Hurghada - Hurghada) 7 nights"
+  },
+  "seawolf-steel::Brother Islands/Elphinstone (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Brother Islands/Elphinstone (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23377,
+   "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-3",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Brother Islands/Elphinstone (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::Deep South/St. Johns (PRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 215.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Deep South/St. Johns (PRG - PRG)",
+   "nights": 7,
+   "padi_id": 23383,
+   "padi_slug": "mp-south-classic-zabargadrockyst-johns-prg-prg-7-n",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Deep South/St. Johns (PRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::Family Safari (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 195.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Family Safari (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23375,
+   "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water"
+   },
+   "title": "Family Safari (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::Fury Shoals (PRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 195.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Fury Shoals (PRG - PRG)",
+   "nights": 7,
+   "padi_id": 23384,
+   "padi_slug": "deep-southst-johns-prg-prg-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Fury Shoals (PRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::MP North (Brothers/Daedalus/Elphinstone) (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "MP North (Brothers/Daedalus/Elphinstone) (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23376,
+   "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "MP North (Brothers/Daedalus/Elphinstone) (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::MP North: Brothers / Daedalus / Elphinstone (HRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "MP North: Brothers / Daedalus / Elphinstone (HRG - PRG)",
+   "nights": 7,
+   "padi_id": 23390,
+   "padi_slug": "mp-north-brothersdaedaluselphinstone-hrg-hrg-7-nig",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "MP North: Brothers / Daedalus / Elphinstone (HRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::MP North: Brothers / Daedalus / Elphinstone (PRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "MP North: Brothers / Daedalus / Elphinstone (PRG - HRG)",
+   "nights": 7,
+   "padi_id": 23391,
+   "padi_slug": "mp-north-brothers-daedalus-elphinstone-hrg-prg-7-n",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "MP North: Brothers / Daedalus / Elphinstone (PRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::MP South Classic (Zabargad/Rocky/St. Johns) (HRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "MP South Classic (Zabargad/Rocky/St. Johns) (HRG - PRG)",
+   "nights": 7,
+   "padi_id": 23380,
+   "padi_slug": "red-sea-classic-hrg-prg-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "MP South Classic (Zabargad/Rocky/St. Johns) (HRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::MP South Classic (Zabargad/Rocky/St. Johns) (PRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "MP South Classic (Zabargad/Rocky/St. Johns) (PRG - PRG)",
+   "nights": 7,
+   "padi_id": 23381,
+   "padi_slug": "mp-south-classic-zabargadrockyst-johns-hrg-prg-7-n",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "MP South Classic (Zabargad/Rocky/St. Johns) (PRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::North Wrecks (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 185.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23371,
+   "padi_slug": "north-wrecks-hrg-hrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North Wrecks (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::North Wrecks /Brother Islands (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Wrecks /Brother Islands (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23373,
+   "padi_slug": "northstrait-of-tiran-hrg-hrg-7-nights",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Wrecks /Brother Islands (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::North/Brothers/Elphinstone (HRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North/Brothers/Elphinstone (HRG - PRG)",
+   "nights": 7,
+   "padi_id": 23387,
+   "padi_slug": "northbrotherselphinstone-prg-hrg-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North/Brothers/Elphinstone (HRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::North/Brothers/Elphinstone (PRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North/Brothers/Elphinstone (PRG - HRG)",
+   "nights": 7,
+   "padi_id": 23386,
+   "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-5",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North/Brothers/Elphinstone (PRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::North/Strait of Tiran (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 185.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North/Strait of Tiran (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23372,
+   "padi_slug": "north-wrecks-hrg-hrg-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "North/Strait of Tiran (HRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::Red Sea Classic (HRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 195.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Classic (HRG - PRG)",
+   "nights": 7,
+   "padi_id": 23379,
+   "padi_slug": "north-wrecks-safaga-hrg-prg-7-nights",
+   "ports": "Hurghada - Port Ghalib",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Red Sea Classic (HRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::Red Sea Classic (PRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 195.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Red Sea Classic (PRG - HRG)",
+   "nights": 7,
+   "padi_id": 23389,
+   "padi_slug": "red-sea-classic-hrg-prg-7-nights-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Red Sea Classic (PRG - HRG) 7 Nights"
+  },
+  "seawolf-steel::Sataya-Deadalus-Red Sea Classic 11 days (PRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 28,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Sataya-Deadalus-Red Sea Classic 11 days (PRG - HRG)",
+   "nights": 10,
+   "padi_id": 23388,
+   "padi_slug": "northbrotherselphinstone-prg-hrg-7-nights-2",
+   "ports": "Port Ghalib - Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Sataya-Deadalus-Red Sea Classic 11 days (PRG - HRG) 10 Nights"
+  },
+  "seawolf-steel::Solar Eclipse South Tour (PRG - PRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 255.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Solar Eclipse South Tour (PRG - PRG)",
+   "nights": 7,
+   "padi_id": 23385,
+   "padi_slug": "fury-shoals-prg-prg-7-nights",
+   "ports": "Port Ghalib - Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Solar Eclipse South Tour (PRG - PRG) 7 Nights"
+  },
+  "seawolf-steel::Strait of Tiran/Dahab (HRG - HRG)": {
+   "boat": "seawolf-steel",
+   "boat_name": "Seawolf Steel",
+   "dives": 19,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 195.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Dive permission, taxes, Marine Park fee and harbor fee",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Strait of Tiran/Dahab (HRG - HRG)",
+   "nights": 7,
+   "padi_id": 23374,
+   "padi_slug": "northstrait-of-tiran-hrg-hrg-7-nights-2",
+   "ports": "Hurghada - Hurghada",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Strait of Tiran/Dahab (HRG - HRG) 7 Nights"
   },
   "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "serenity",
@@ -10682,6 +15720,52 @@
    },
    "title": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights"
   },
+  "snefro-spirit::Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh)": {
+   "boat": "snefro-spirit",
+   "boat_name": "Snefro Spirit",
+   "dives": 12,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Local Fees"
+    ]
+   },
+   "name": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh)",
+   "nights": 4,
+   "padi_id": 14231,
+   "padi_slug": "mini-ras-mohamed-thistlegorm-sharm-el-sheikh-sharm",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh) 4 nights"
+  },
+  "snefro-spirit::Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)": {
+   "boat": "snefro-spirit",
+   "boat_name": "Snefro Spirit",
+   "dives": 19,
+   "fees": {
+    "complete": false,
+    "lines": [],
+    "unreadable": [
+     "Local Fees"
+    ]
+   },
+   "name": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)",
+   "nights": 7,
+   "padi_id": 9193,
+   "padi_slug": "deep-north",
+   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh) 7 nights"
+  },
   "snefro-target::Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)": {
    "boat": "snefro-target",
    "boat_name": "Snefro Target",
@@ -10726,6 +15810,48 @@
     "recommended_logged_dives": 20
    },
    "title": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)  - 7 Nights"
+  },
+  "south-moon-1::Best of Sinai (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "south-moon-1",
+   "boat_name": "South Moon 1",
+   "dives": 20,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 1.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "port_fees",
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 22032,
+   "padi_slug": "best-of-sinai-sharm-el-sheikh-sharm-el-sheikh-7-ni",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights"
   },
   "tala::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "tala",
@@ -11503,6 +16629,475 @@
     "recommended_logged_dives": 20
    },
    "title": "The Grand Tour (Hurghada \u2013 Hurghada) \u2013 7 nights"
+  },
+  "vip-one::North Red Sea Route (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "vip-one",
+   "boat_name": "VIP One",
+   "dives": 23,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Red Sea Route (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 7,
+   "padi_id": 15232,
+   "padi_slug": "north-red-sea-route-sharm-el-sheikh-sharm-el-she-3",
+   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "requirements": {
+    "min_level": "open_water",
+    "min_logged_dives": 15
+   },
+   "title": "North Red Sea Route (Sharm El Sheikh - Sharm El Sheikh) 7 nights"
+  }
+ },
+ "vessels": {
+  "all-star-ghani": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "All Star - Ghani",
+   "operator": "ALL STAR LIVEABOARDS",
+   "slug": "all-star-ghani"
+  },
+  "all-star-red-sea": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "All Star - Scuba Scene",
+   "operator": "ALL STAR LIVEABOARDS",
+   "slug": "all-star-scuba-scene"
+  },
+  "alsuraya": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Alsuraya",
+   "operator": null,
+   "slug": "alsuraya"
+  },
+  "amelie": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Amelie Safari",
+   "operator": "AMELIE SAFARI",
+   "slug": "amelie-safari"
+  },
+  "amelie-adventures": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Amelie Adventures",
+   "operator": "AMELIE SAFARI",
+   "slug": "amelie-adventures"
+  },
+  "andromeda": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Andromeda",
+   "operator": null,
+   "slug": "my-andromeda"
+  },
+  "anemone": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Anemone",
+   "operator": null,
+   "slug": "my-anemone"
+  },
+  "aphrodite": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "M/Y Aphrodite",
+   "operator": null,
+   "slug": "my-aphrodite"
+  },
+  "ashrafi": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Ashrafi",
+   "operator": null,
+   "slug": "my-ashrafi"
+  },
+  "avo": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY AVO",
+   "operator": null,
+   "slug": "my-avo"
+  },
+  "bella-2": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Bella 2",
+   "operator": "BELLA LIVEABOARDS",
+   "slug": "bella-2"
+  },
+  "bella-3": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Bella 3",
+   "operator": "BELLA LIVEABOARDS",
+   "slug": "bella-3"
+  },
+  "blue": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Blue",
+   "operator": "BLUE PLANET",
+   "slug": "my-blue"
+  },
+  "blue-horizon": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "MV Blue Horizon",
+   "operator": "MASTER LIVEABOARDS",
+   "slug": "mv-blue-horizon"
+  },
+  "blue-melody": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "MY Blue Melody",
+   "operator": "MASTER LIVEABOARDS",
+   "slug": "my-blue-melody"
+  },
+  "blue-pearl": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Blue Pearl",
+   "operator": "BLUE PLANET",
+   "slug": "my-blue-pearl"
+  },
+  "blue-seas": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Blue Seas",
+   "operator": "BLUE PLANET",
+   "slug": "my-blue-seas"
+  },
+  "blue-storm": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Blue Storm",
+   "operator": "BLUE PLANET",
+   "slug": "my-blue-storm"
+  },
+  "carlton": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Carlton",
+   "operator": null,
+   "slug": "my-carlton"
+  },
+  "cassiopeia-glory": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Cassiopeia Glory",
+   "operator": null,
+   "slug": "my-cassiopeia-glory"
+  },
+  "discovery-i": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Discovery I",
+   "operator": "DISCOVERY DIVERS",
+   "slug": "my-discovery-i"
+  },
+  "discovery-ii": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Discovery II",
+   "operator": "DISCOVERY DIVERS",
+   "slug": "my-discovery-ii"
+  },
+  "dune-longara": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Dune Longara",
+   "operator": "DUNE",
+   "slug": "dune-longara"
+  },
+  "dune-silky": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "DUNE Silky",
+   "operator": "DUNE",
+   "slug": "dune-silky"
+  },
+  "dune-titan": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "DUNE Titan",
+   "operator": "DUNE",
+   "slug": "dune-titan"
+  },
+  "emperor-asmaa": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MV Emperor Asmaa",
+   "operator": "EMPEROR DIVERS",
+   "slug": "mv-emperor-asmaa"
+  },
+  "emperor-elite": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MV Emperor Elite",
+   "operator": "EMPEROR DIVERS",
+   "slug": "mv-emperor-elite"
+  },
+  "emperor-superior": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MV Emperor Superior",
+   "operator": "EMPEROR DIVERS",
+   "slug": "mv-emperor-superior"
+  },
+  "eriny": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Eriny",
+   "operator": "BELLA LIVEABOARDS",
+   "slug": "eriny"
+  },
+  "explorer-ventures-grand-sea-explorer": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "Explorer Ventures -  Grand Sea Explorer",
+   "operator": "EXPLORER VENTURES",
+   "slug": "explorer-ventures-grand-sea-explorer"
+  },
+  "freedom-iii": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Freedom III",
+   "operator": "UMBI DIVERS",
+   "slug": "freedom-iii"
+  },
+  "freedom-iv": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Freedom IV",
+   "operator": "UMBI DIVERS",
+   "slug": "freedom-iv"
+  },
+  "galaxy": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Galaxy",
+   "operator": null,
+   "slug": "my-galaxy"
+  },
+  "ghazala-adventure": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Ghazala Adventure",
+   "operator": "OCEAN TRIBE",
+   "slug": "ghazala-adventure"
+  },
+  "ghazala-explorer": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Ghazala Explorer",
+   "operator": "OCEAN TRIBE",
+   "slug": "ghazala-explorer"
+  },
+  "grand-discovery": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Grand Discovery",
+   "operator": "DISCOVERY DIVERS",
+   "slug": "my-grand-discovery"
+  },
+  "hammerhead-ii": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Hammerhead II",
+   "operator": null,
+   "slug": "hammerhead-ii"
+  },
+  "heaven-saphir": {
+   "country": "egypt",
+   "currency": "USD",
+   "name": "MY Heaven Saphir",
+   "operator": null,
+   "slug": "my-heaven-saphir"
+  },
+  "high-wave": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "High Wave",
+   "operator": "RED SEA EXPLORERS",
+   "slug": "high-wave"
+  },
+  "iceberg": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "My Iceberg",
+   "operator": null,
+   "slug": "my-iceberg"
+  },
+  "independence-ii": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Independence II",
+   "operator": null,
+   "slug": "my-independence-ii"
+  },
+  "lady-m": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Lady M",
+   "operator": null,
+   "slug": "my-lady-m"
+  },
+  "new-sambo": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "New Sambo Safari Boat",
+   "operator": null,
+   "slug": "new-sambo-safari-boat-2"
+  },
+  "odyssey": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Odyssey",
+   "operator": "SEAFARI",
+   "slug": "my-odyssey"
+  },
+  "red-sea-aggressor-ii": {
+   "country": "united-states-of-america-usa",
+   "currency": "USD",
+   "name": "Red Sea Aggressor II",
+   "operator": "AGGRESSOR",
+   "slug": "red-sea-aggressor-ii"
+  },
+  "red-sea-aggressor-iv": {
+   "country": "united-states-of-america-usa",
+   "currency": "USD",
+   "name": "Red Sea Aggressor IV",
+   "operator": "AGGRESSOR",
+   "slug": "red-sea-aggressor-iv"
+  },
+  "red-sea-aggressor-v": {
+   "country": "united-states-of-america-usa",
+   "currency": "USD",
+   "name": "Red Sea Aggressor V",
+   "operator": "AGGRESSOR",
+   "slug": "red-sea-aggressor-v"
+  },
+  "red-sea-blue-force-2": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Red Sea Blue Force 2",
+   "operator": "BLUE FORCE",
+   "slug": "red-sea-blue-force-2"
+  },
+  "reef-voyager": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Reef Voyager",
+   "operator": null,
+   "slug": "reef-voyager"
+  },
+  "royal-evolution": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MS Royal Evolution",
+   "operator": null,
+   "slug": "ms-royal-evolution"
+  },
+  "seawolf-dominator": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MY Seawolf Dominator",
+   "operator": "SEAWOLF DIVING SAFARI",
+   "slug": "my-seawolf-dominator"
+  },
+  "seawolf-steel": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Seawolf Steel",
+   "operator": "SEAWOLF DIVING SAFARI",
+   "slug": "seawolf-steel"
+  },
+  "serenity": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Serenity",
+   "operator": null,
+   "slug": "serenity"
+  },
+  "snefro-love": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Snefro Love",
+   "operator": "KING SNEFRO",
+   "slug": "snefro-love"
+  },
+  "snefro-pearl": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Snefro Pearl",
+   "operator": "KING SNEFRO",
+   "slug": "snefro-pearl"
+  },
+  "snefro-spirit": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Snefro Spirit",
+   "operator": "KING SNEFRO",
+   "slug": "snefro-spirit"
+  },
+  "snefro-target": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Snefro Target",
+   "operator": "KING SNEFRO",
+   "slug": "snefro-target"
+  },
+  "south-moon-1": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "South Moon 1",
+   "operator": null,
+   "slug": "south-moon-1"
+  },
+  "tala": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "MV Tala",
+   "operator": "RED SEA EXPLORERS",
+   "slug": "mv-tala"
+  },
+  "topaz": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Topaz",
+   "operator": "SEAFARI",
+   "slug": "topaz"
+  },
+  "unity": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "Unity",
+   "operator": null,
+   "slug": "unity"
+  },
+  "vip-one": {
+   "country": "egypt",
+   "currency": "EUR",
+   "name": "VIP One",
+   "operator": null,
+   "slug": "vip-one"
   }
  }
 }

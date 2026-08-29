@@ -26,13 +26,21 @@ Reading nights, ports or reefs out of a URL here produces confident nonsense.
 See `docs/sources/padi.com.md`.
 
 PADI plays a different role in this dataset than liveaboard.com does. It is
-weak on departure-level pricing and strong on the things the price comparison
-needs in order to be fair: which certification a trip demands, how many logged
-dives, and what the operator is accredited to run. So this adapter is scoped to
-*requirements and accreditation* rather than to prices, and its output enriches
-itineraries matched from the other source instead of creating departures.
+strong on the things the price comparison needs in order to be fair: which
+certification a trip demands, how many logged dives, what the operator is
+accredited to run, and a fee book stated per itinerary rather than per vessel.
+So this adapter is scoped to *requirements, fees and sailings* rather than to
+being a second crawl of everything.
 
-Keeping it narrow also keeps the crawl small, which is the polite thing to do
+Its output mostly enriches itineraries matched from the other source. It is no
+longer true that it never creates departures: of the 654 PADI sailings inside
+the published season, 601 land on a row we already had and 53 do not, and those
+53 are real, bookable trips -- Blue Storm's and Blue Seas' near-complete weekly
+seasons among them -- that liveaboard.com does not list. `promote` creates a
+row for each. A trip nobody asked about is not a trip that does not exist,
+which is the same rule that stops an unreadable vessel page emptying a month.
+
+Keeping the crawl narrow is still the point, and still the polite thing to do
 when the useful part of a site is a fraction of its pages.
 """
 
@@ -310,8 +318,26 @@ class PadiComAdapter(SourceAdapter):
         Operator titles reach the two sources with different punctuation and the
         odd zero-width space; joining on the raw string loses matches that are
         plainly the same trip.
+
+        The conjunction goes with the punctuation, because otherwise it is the
+        one separator that survives it. Stripping symbols folds *A & B* onto
+        *A, B* but leaves *A and B* a third spelling, so operators writing one
+        list three ways got two keys instead of one -- Red Sea Aggressor II's
+        *Northern Red Sea, Ras Mohamed and Straits of Tiran* against our
+        *...Ras Mohamed, Straits of Tiran*, and Blue Storm's
+        *Brothers-Daedalus-Elphinstone* against *Brothers, Daedalus and
+        Elphinstone*.
+
+        Counted before it was believed, over all 317 trips of the dataset this
+        was written against: the fold merges two pairs and no others, and both
+        pairs are one trip typed twice (*South & St Johns* / *South and St.
+        Johns*, on two Emperor boats). Nothing in PADI's own book collides
+        either way. A word cannot separate a title from a different trip unless
+        the two are otherwise identical, in which case they were already the
+        same trip.
         """
-        return re.sub(r"[^a-z0-9]", "", value.translate(ZERO_WIDTH).lower())
+        text = re.sub(r"\band\b", " ", value.translate(ZERO_WIDTH).lower())
+        return re.sub(r"[^a-z0-9]", "", text)
 
     @staticmethod
     def fold_ports(value: str, aliases: dict[str, str] | None = None) -> str:
@@ -332,8 +358,8 @@ class PadiComAdapter(SourceAdapter):
             out = re.sub(rf"\b{re.escape(spelling)}\b", canonical, out, flags=re.I)
         return out
 
-    @staticmethod
-    def split_title(title: str) -> tuple[str, str, int] | None:
+    @classmethod
+    def split_title(cls, title: str) -> tuple[str, str, int] | None:
         """"Name (Port - Port) N Nights" -> (name-with-ports, ports, nights).
 
         The night count is read *after* the ports rather than off the end of the
@@ -349,6 +375,18 @@ class PadiComAdapter(SourceAdapter):
         An end-anchored pattern reads the first three and silently drops the
         rest, which cost seven trips their entry bar -- they were fetched, stored
         and then not keyed.
+
+        A seventh form puts the count *before* the ports and leaves nothing
+        after them:
+
+            Northern Red Sea, Ras Mohamed and Straits of Tiran 7 Nights (Hurghada -Hurghada)
+
+        so the count is looked for in the head when the tail has none, and
+        struck out of the returned name -- "7 Nights" is the trip's length
+        wherever it is written, not part of what the trip is called. One trip
+        in the fleet is written this way and it is Red Sea Aggressor II's; the
+        fallback is deliberately second, because a head count competing with a
+        tail count is the ambiguity the tail rule already refuses to guess at.
 
         Where the tail is nothing but repeated counts they must agree: "7 Nights
         7 Nights" is 7, and a tail claiming both 4 and 7 returns ``None`` rather
@@ -367,15 +405,34 @@ class PadiComAdapter(SourceAdapter):
         head, tail = text[: close + 1], text[close + 1 :]
 
         counts = [int(m.group(1)) for m in re.finditer(r"(\d+)\s*nights?\b", tail, re.I)]
-        if not counts:
+        if counts and ONLY_NIGHTS.fullmatch(tail) and len(set(counts)) > 1:
             return None
-        if ONLY_NIGHTS.fullmatch(tail) and len(set(counts)) > 1:
+        if not counts:
+            head, counts = cls._nights_in_head(head)
+        if not counts:
             return None
 
         ports = re.match(r"^(?P<name>.+?)\s*\((?P<ports>[^()]*)\)$", head)
         if not ports:
             return None
         return head.strip(), ports.group("ports").strip(), counts[0]
+
+    #: "... 7 Nights (Port - Port)" -- the count sitting in front of the ports.
+    HEAD_NIGHTS = re.compile(r"\s*\b(\d+)\s*nights?\b", re.IGNORECASE)
+
+    @classmethod
+    def _nights_in_head(cls, head: str) -> tuple[str, list[int]]:
+        """The count read from in front of the ports, and the head without it.
+
+        Only consulted where the tail is silent, and it must be unanimous:
+        two different counts in one name is the same refusal to guess as the
+        tail rule, for the same reason -- a trip length is the denominator
+        under every per-night price on the page.
+        """
+        counts = [int(m.group(1)) for m in cls.HEAD_NIGHTS.finditer(head)]
+        if len(set(counts)) != 1:
+            return head, []
+        return cls.HEAD_NIGHTS.sub(" ", head, count=1).replace("  ", " "), counts
 
     @classmethod
     def itinerary_titles(cls, html: str) -> dict[str, str]:

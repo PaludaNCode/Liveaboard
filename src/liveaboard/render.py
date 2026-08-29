@@ -104,6 +104,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
 
+        # Where the rows above came from, on the trips whose answer is not the
+        # usual one. Written only where true: a key written per itinerary is a
+        # key written 402 times, and this is the answer for 22 boats.
+        if itinerary.padi_sourced_fees:
+            itineraries[key]["padi_sourced_fees"] = True
+
     # Where the other seller lists each boat. A PADI listing url is a fact
     # about the vessel, not about the sailing -- it is built from the boat's
     # slug and its country -- so it ships once per boat rather than on each of
@@ -167,6 +173,13 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second_base is not None:
             entry["padi"] = float(second_base.display.rounded)
             entry["padi_base_line"] = second_base.as_dict()
+
+        # Who lists this sailing at all, where the answer is "PADI, and only
+        # PADI". A row like this has one seller and one bill, so the Sellers
+        # column must not read it as the state it looks like -- a dash, meaning
+        # PADI does not sell the date, when PADI is the reason the row exists.
+        if departure.padi_only:
+            entry["padi_only"] = True
 
         # The cabin ladder, one block per seller, exactly as promote wrote it.
         # Passed through rather than reshaped: it is already normalised and
