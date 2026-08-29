@@ -533,6 +533,32 @@ a { color:var(--accent); }
   body.filters-open .filters-toggle::after { content:" ▾"; }
   .filterbar { display:none; }
   body.filters-open .filterbar { display:flex; }
+  /* Bounded, and scrolls as one box: unfolded, the three banks are taller
+     than a phone screen between them, and the page itself does not scroll --
+     so whatever did not fit was simply unreachable, the Boat bank first.
+     40vh is the whole panel now rather than each bank's share of it, so
+     unfolding the dive sites lengthens what scrolls inside the box instead of
+     pushing the bank below it off the bottom edge. The toggle that closes it
+     stays outside, above. */
+  body.filters-open .filterbanks {
+    max-height:40vh; overflow-y:auto; overscroll-behavior:contain;
+    /* 40vh is the most it may take, not what it takes: `flex:0 1` lets it
+       give way when the chrome above it has already used the screen. A
+       768x600 window has 175px under the toolbar and the fold, and a panel
+       that insisted on its 240 pushed its own last 65px past the bottom edge
+       -- where scrolling the box cannot bring them back, because it is the
+       box that is off-screen. */
+    flex:0 1 auto; min-height:0;
+    /* The banks' own rules scroll with them, so the last one is no longer the
+       edge of anything: the box needs a line of its own where it stops. */
+    border-bottom:1px solid var(--rule);
+  }
+  /* And the table gives way first. Both are shrinkable, and flex shares a
+     shortfall in proportion to what each asked for -- the table asks for its
+     whole 4,000px of rows, so it would have taken 96% of the panel with it
+     and left an 11px slot. Measured from zero it asks for nothing, and the
+     panel is bounded by the room actually left instead. */
+  body.filters-open .shell { flex-basis:0; }
 }
 
 @media (max-width: 760px) {
@@ -552,9 +578,6 @@ a { color:var(--accent); }
      of the toolbar. */
   .tgroup.meta-right #metaLine { display:none; }
   .filters-toggle { padding:9px 12px; }
-  /* Bounded, and scrolls inside itself: three banks unfolded filled a phone
-     screen and left exactly one row of prices under them. */
-  body.filters-open .filterbar { max-height:34vh; overflow-y:auto; }
 
   /* One pinned column here -- the depart date, and nothing else. Depart, Boat
      and Guests pinned held 231px of a 390px screen still while the sixteen

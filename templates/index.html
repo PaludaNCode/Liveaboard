@@ -84,30 +84,39 @@
 <button type="button" class="filters-toggle" id="filtersToggle"
         aria-expanded="false" aria-controls="ports sites boats">Filter by port, site or boat</button>
 
-<div class="filterbar">
-  <span class="tlabel">Departs from</span>
-  <span id="ports"></span>
-</div>
+<!-- One scroll box, not three. Folded open on a phone the three banks came
+     to more than a screen between them -- and each carried its own cap and its
+     own scrollbar, so the overflow went to the *page*, which does not scroll:
+     with the dive sites unfolded the Boat bank's last chips sat below the
+     bottom edge with no way to reach them. Capped and scrolled here instead,
+     the cap is the panel's whole height however tall its banks are, and every
+     chip is reachable by scrolling the panel the reader is already looking at. -->
+<div class="filterbanks">
+  <div class="filterbar">
+    <span class="tlabel">Departs from</span>
+    <span id="ports"></span>
+  </div>
 
-<div class="filterbar">
-  <span class="tlabel">Dive sites</span>
-  <span id="sites"></span>
-</div>
+  <div class="filterbar">
+    <span class="tlabel">Dive sites</span>
+    <span id="sites"></span>
+  </div>
 
-<!-- The vessel. A filter, deliberately not a ranking: it shows everything one
-     boat runs across the season, which is the question a diver who has settled
-     on a boat actually asks. This replaced a filter on the operating company —
-     that answered a question asked far less often, and a company with six
-     boats returned six boats' worth of rows with no way to tell them apart.
-     The operator was left reachable through the search box instead, and that
-     box has since gone too — it was a second way to ask what the chips ask,
-     costing a redraw on every keystroke, and the one question it answered
-     alone was the company. A diver picks the boat. Scoring operators against
-     each other was tried and removed: it read as a league table and
-     contradicted the total beside it. -->
-<div class="filterbar">
-  <span class="tlabel">Boat</span>
-  <span id="boats"></span>
+  <!-- The vessel. A filter, deliberately not a ranking: it shows everything one
+       boat runs across the season, which is the question a diver who has settled
+       on a boat actually asks. This replaced a filter on the operating company —
+       that answered a question asked far less often, and a company with six
+       boats returned six boats' worth of rows with no way to tell them apart.
+       The operator was left reachable through the search box instead, and that
+       box has since gone too — it was a second way to ask what the chips ask,
+       costing a redraw on every keystroke, and the one question it answered
+       alone was the company. A diver picks the boat. Scoring operators against
+       each other was tried and removed: it read as a league table and
+       contradicted the total beside it. -->
+  <div class="filterbar">
+    <span class="tlabel">Boat</span>
+    <span id="boats"></span>
+  </div>
 </div>
 
 <p class="hint">
