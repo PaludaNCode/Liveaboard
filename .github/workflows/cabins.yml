@@ -85,8 +85,14 @@ jobs:
       # Keep the pages themselves, so a parse that silently found nothing can
       # be diagnosed from what the source actually returned rather than by
       # asking it again.
+      #
+      # Capped runs only. A capped run is one being *read* — a handful of pages
+      # proving a parser change, and the evidence is the point. An uncapped one
+      # is 890 pages at ~190 KB, which is 170 MB of artifact nobody opens; if
+      # a full run needs diagnosing, the way to do it is to re-read the few
+      # departures that failed, which the run itself names.
       - name: Keep the raw pages as evidence
-        if: always()
+        if: always() && (inputs.tours != '' || inputs.limit != '0')
         uses: actions/upload-artifact@v4
         with:
           name: booking-snapshots-${{ github.run_id }}

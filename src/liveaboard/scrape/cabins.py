@@ -201,23 +201,53 @@ class CabinReading:
     warnings: list[str] = field(default_factory=list)
 
     @property
-    def cheapest(self) -> Cabin | None:
-        """The rung the advertised price is quoting, sold out or not.
+    def cheapest_price(self) -> float | None:
+        """The figure the vessel page advertises, sold out or not.
 
         Not "the cheapest one still for sale": the vessel page advertises this
-        cabin's figure either way, and answering a different question here
-        would make the berth count beside that figure belong to some other
-        cabin.
+        number either way, and answering a different question here would put a
+        berth count beside a price that is not the one on the row.
         """
-        priced = [c for c in self.cabins if c.price is not None]
-        return min(priced, key=lambda c: c.price) if priced else None
+        priced = [c.price for c in self.cabins if c.price is not None]
+        return min(priced) if priced else None
+
+    @property
+    def at_cheapest(self) -> list[Cabin]:
+        """Every cabin at that price. Usually one; on 233 of 864 sailings, more.
+
+        A boat can sell two different rooms for the same money -- Yachtiano
+        lists a Lower Deck Twin and a Lower Deck Suite A+ at $1,748 apiece --
+        and one of them being full says nothing about the other.
+        """
+        price = self.cheapest_price
+        return [] if price is None else [c for c in self.cabins if c.price == price]
+
+    @property
+    def cheapest(self) -> Cabin | None:
+        """One cabin at that price, preferring one somebody can actually book.
+
+        Document order picked a sold-out room over an available one at the
+        same money on thirteen Yachtiano sailings, which reads as "the
+        advertised price is gone" when it is not.
+        """
+        at = self.at_cheapest
+        return min(at, key=lambda c: c.sold_out) if at else None
 
     @property
     def berths_at_cheapest(self) -> int | None:
-        """How many berths are left at the advertised price -- the question
-        the vessel page cannot answer. Zero is an answer; ``None`` is not."""
-        cabin = self.cheapest
-        return cabin.berths if cabin else None
+        """How many berths are left at the advertised price, **across every
+        room selling at it** -- the question the vessel page cannot answer.
+
+        A total, not one room's share: the buyer is asking how many places
+        exist at the price on the row, and the boat may split them over two
+        cabins. Zero is an answer; ``None`` is not, and a partial sum would be
+        a lower bound wearing a total's clothes, so one unstated count makes
+        the whole total unknown.
+        """
+        at = self.at_cheapest
+        if not at or any(c.berths is None for c in at):
+            return None
+        return sum(c.berths for c in at)
 
     @property
     def nothing_bookable(self) -> bool:

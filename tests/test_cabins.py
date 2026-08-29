@@ -416,3 +416,81 @@ class TestWhatIsWrittenDown(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestSpotsAtTheAdvertisedPrice(unittest.TestCase):
+    """The site's own question: how many places exist at the price on the row.
+
+    A total across every room selling at that price, because a boat can split
+    them: 233 of the 864 sailings read list more than one cabin at their
+    cheapest price, so this is a quarter of the fleet rather than an edge.
+    """
+
+    def page(self, *cabins: tuple[str, int, int, bool]) -> str:
+        out = []
+        for index, (name, price, berths, full) in enumerate(cabins):
+            out.append(
+                f'<button aria-controls=help-content-cabin-details-{index} '
+                f'title="{name}">{name}</button>'
+                f'<em>$</em> <span translate=no>{price}</span>'
+            )
+            out.append(
+                '<span>FULL</span>' if full else
+                f'<select name=input-cabin-guests-{index} data-cabinid={index} '
+                f'data-allocation={berths}><option value=0>-</select>'
+            )
+        return "".join(out)
+
+    def test_two_rooms_at_one_price_are_added_up(self):
+        reading = parse_cabins(
+            self.page(("Twin", 1748, 4, False), ("Suite A+", 1748, 8, False),
+                      ("Suite B", 2039, 8, False)), "USD")
+        self.assertEqual(reading.cheapest_price, 1748.0)
+        self.assertEqual(reading.berths_at_cheapest, 12)
+
+    def test_a_dearer_room_is_not_counted_at_the_cheaper_price(self):
+        reading = parse_cabins(
+            self.page(("Twin", 1748, 4, False), ("Suite", 2039, 8, False)), "USD")
+        self.assertEqual(reading.berths_at_cheapest, 4)
+
+    def test_one_room_full_at_a_price_another_still_sells(self):
+        # Yachtiano: a Lower Deck Twin and a Lower Deck Suite A+ both at
+        # $1,748, the twin full. Taking the first cabin in document order
+        # reported the advertised price as gone on thirteen sailings when
+        # eight berths were on sale at exactly that price.
+        reading = parse_cabins(
+            self.page(("Twin A", 1748, 0, True), ("Suite A+", 1748, 8, False)), "USD")
+        self.assertEqual(reading.berths_at_cheapest, 8)
+        self.assertEqual(reading.cheapest.name, "Suite A+")
+        self.assertFalse(reading.cheapest.sold_out)
+
+    def test_the_advertised_price_is_still_the_advertised_price(self):
+        # Preferring a bookable cabin must not move the *price*: the row says
+        # $1,748 whichever room is left.
+        reading = parse_cabins(
+            self.page(("Twin A", 1748, 0, True), ("Suite A+", 1748, 8, False)), "USD")
+        self.assertEqual(reading.cheapest_price, 1748.0)
+
+    def test_every_room_at_the_price_full_is_zero_not_unknown(self):
+        reading = parse_cabins(
+            self.page(("Twin A", 1748, 0, True), ("Twin B", 1748, 0, True),
+                      ("Suite", 2039, 6, False)), "USD")
+        self.assertEqual(reading.berths_at_cheapest, 0)
+        self.assertFalse(reading.nothing_bookable)
+
+    def test_one_unstated_count_makes_the_total_unknown(self):
+        # A partial sum is a lower bound wearing a total's clothes, and this
+        # site does not publish those.
+        page = (
+            '<button aria-controls=help-content-cabin-details-1 title=A>A</button>'
+            '<em>$</em> <span translate=no>500</span>'
+            '<select name=input-cabin-guests-1 data-cabinid=1 data-allocation=4>'
+            '<option value=0>-</select>'
+            '<button aria-controls=help-content-cabin-details-2 title=B>B</button>'
+            '<em>$</em> <span translate=no>500</span>'
+            '<select name=input-cabin-guests-2 data-cabinid=2>'
+            '<option value=0>-</select>'
+        )
+        reading = parse_cabins(page, "USD")
+        self.assertEqual([c.berths for c in reading.cabins], [4, None])
+        self.assertIsNone(reading.berths_at_cheapest)
