@@ -950,10 +950,36 @@ class TestBothSellersSpan(unittest.TestCase):
         self.assertRegex(source, r"\blater:\s*low - base\b")
 
     def test_the_span_collapses_when_the_ends_round_alike(self) -> None:
-        """"E1,757-1,757" would read as a spread that is not there, so
-        `sellerSpan` rounds before it compares."""
+        """A pair that prints identically must not print as a range:
+        "1,757-1,757" reads as a spread that is not there. Both printers round
+        before they compare, because the rounding is what makes them equal."""
         source = self.APP.read_text(encoding="utf-8")
-        body = re.search(r"function sellerSpan\(lo, hi\) \{(.*?)\n  \}", source, re.S)
-        self.assertIsNotNone(body, "sellerSpan is gone")
-        self.assertRegex(body.group(1), r"Math\.round\(lo\).*Math\.round\(hi\)", )
-        self.assertRegex(body.group(1), r"if \(\w+ === \w+\) return")
+        for name in ("sellerSpan", "sellerPair"):
+            body = re.search(rf"function {name}\(lo, hi\) \{{(.*?)\n  \}}", source, re.S)
+            self.assertIsNotNone(body, f"{name} is gone")
+            self.assertRegex(body.group(1), r"Math\.round\(lo\)[\s\S]*Math\.round\(hi\)", name)
+            self.assertRegex(body.group(1), r"if \(\w+ === \w+\) return", name)
+
+    def test_the_component_columns_never_sort_their_pair(self) -> None:
+        """Advertised and Mandatory fees print the low-total seller's figure
+        then the high-total seller's, and that order is what makes the row add
+        up. On 27 of the 108 both-seller rows the pair runs backwards -- the
+        seller with the cheaper total advertises the dearer berth -- and
+        sorting it to look tidy would break Advertised + Mandatory = Total.
+
+        So those two columns use `sellerPair`, whose separator is an arrow
+        rather than an en dash, and the Total keeps `sellerSpan`. Swapping one
+        for the other is a silent change: both take the same two arguments and
+        both render.
+        """
+        source = self.APP.read_text(encoding="utf-8")
+        for lo, hi, printer in (("baseLo", "baseHi", "sellerPair"),
+                                ("laterLo", "laterHi", "sellerPair"),
+                                ("lo", "hi", "sellerSpan")):
+            self.assertRegex(
+                source, rf"{printer}\(b\.{lo}, b\.{hi}\)",
+                f"b.{lo}/b.{hi} is no longer printed by {printer}",
+            )
+        pair = re.search(r"function sellerPair\(lo, hi\) \{(.*?)\n  \}", source, re.S)
+        self.assertNotIn("Math.min", pair.group(1))
+        self.assertNotIn("Math.max", pair.group(1))

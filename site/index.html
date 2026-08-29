@@ -668,8 +668,9 @@ a { color:var(--accent); }
       the <strong>total</strong> &mdash; the advertised berth plus marine park
       fees, port dues, fuel and everything else that lands on the bill later.
       Two sites sell many of these berths and they do not agree, so the money
-      columns print both &mdash; a span from one seller&rsquo;s whole bill to
-      the other&rsquo;s, never a figure spliced from the two. Sort any
+      columns print both &mdash; the total runs from one seller&rsquo;s whole
+      bill to the other&rsquo;s, and the parts above it follow in that same
+      order (<code>&rarr;</code>), never spliced together. Sort any
       column; expand a row for both bills, the entry bar the trip sets and
       where each number came from; click a row to mark it, so you can still
       tell which is which once you have scrolled sideways.
@@ -1196,14 +1197,16 @@ price down (644)
      number toward the low side at both ends. On a site whose argument is that
      advertised prices are too low, that is the house error.
 
-     So neither is "the" price. The columns print `lo–hi` across the two, and
+     So neither is "the" price. The columns print both sellers' figures, and
      **each end is one seller's whole bill** -- the cheaper seller's Advertised
      and Mandatory fees make the low end, the dearer seller's make the high
      end. Not the minimum of each part: our berth is sometimes the cheaper
      while their fee book is, and min(base) + min(fees) is then a bill neither
      seller quoted. Measured before it was believed -- taking the parts
      independently broke the sum on 74 of the 108 rows where both bills add
-     up.
+     up. That ordering is why Advertised and Mandatory fees print through
+     `sellerPair` and not `sellerSpan`: they follow the Total's seller order
+     rather than running low to high, and on 27 rows that order is backwards.
 
      `cheapest` still says who is lower, for the Sellers column. Under
      `PADI_SAME` they are one price and the span collapses. */
@@ -1252,11 +1255,30 @@ price down (644)
 
   /* "€1,757" when the two agree, "€1,757–2,057" when they do not.
      Rounded before comparing, so a pair that prints identically never prints
-     as a range: "€1,757–1,757" would read as a spread that is not there. */
+     as a range: "€1,757–1,757" would read as a spread that is not there.
+
+     For the Total only, where the low end is always the low end. */
   function sellerSpan(lo, hi) {
     var a = Math.round(lo), b = Math.round(hi);
     if (a === b) return "€" + a.toLocaleString("en-IE");
     return "€" + a.toLocaleString("en-IE") + "–" + b.toLocaleString("en-IE");
+  }
+
+  /* The same two sellers, for a *part* of the bill: the low-total seller's
+     figure then the high-total seller's, in that order and never sorted.
+
+     The order is load-bearing -- Advertised + Mandatory fees has to equal
+     Total at each end, so sorting either column would break the row's
+     arithmetic. But the parts do not have to run the same way as the whole,
+     and on 27 of the 108 rows they do not: the seller with the cheaper total
+     advertises the *dearer* berth, which is this site's entire argument
+     happening inside one row. Printed with an en dash that reads as
+     "€2,152–2,150", a broken range. An arrow reads as an order rather than a
+     span, so a pair that runs backwards is legible instead of wrong. */
+  function sellerPair(lo, hi) {
+    var a = Math.round(lo), b = Math.round(hi);
+    if (a === b) return "€" + a.toLocaleString("en-IE");
+    return "€" + a.toLocaleString("en-IE") + " \u2192 " + b.toLocaleString("en-IE");
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -1391,13 +1413,18 @@ price down (644)
        longer made the Total, and a reader checking the sum would find the page
        wrong rather than find two sellers. One row, one bill. */
     { k: "base", t: "Advertised", num: true, cls: "money",
-      /* Sorted on the low end: the question a sort answers is "cheapest
-         first", and the cheapest is what somebody could pay. */
-      v: function (d, i, m, row) { var b = best(row); return b ? b.baseLo : d.base; },
+      /* Sorted on the cheaper of the two, which is the smaller of the pair
+         rather than its first member: the pair runs in the Total's seller
+         order and that order is not the price order on 27 rows. A sort key is
+         not a printed figure, so taking the minimum here splices nothing. */
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return b ? Math.min(b.baseLo, b.baseHi) : d.base;
+      },
       show: function (d, i, m, row) {
         var b = best(row);
         if (!b) return eur(d.base);
-        return sellerSpan(b.baseLo, b.baseHi);
+        return sellerPair(b.baseLo, b.baseHi);
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -1529,12 +1556,15 @@ price down (644)
        74 trips where both add up, and by more than €150 on sixteen. Printing
        one figure here hid the whole finding. */
     { k: "later", t: "Mandatory fees", num: true,
-      v: function (d, i, m, row) { var b = best(row); return b ? b.laterLo : m.later; },
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return b ? Math.min(b.laterLo, b.laterHi) : m.later;
+      },
       show: function (d, i, m, row) {
         var b = best(row);
         if (!b) return '<span class="dim">—</span>';
         return '<span class="later">+' +
-          sellerSpan(b.laterLo, b.laterHi) + "</span>";
+          sellerPair(b.laterLo, b.laterHi) + "</span>";
       } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
