@@ -744,3 +744,85 @@ class TestColumnOrders(unittest.TestCase):
         for name in ("PHONE_ORDER", "TINY_ORDER"):
             order = self.order(name)
             self.assertLess(order.index("total"), order.index("trip"), name)
+
+
+class TestPayloadIsRead(unittest.TestCase):
+    """Every fact the page ships is a fact the page prints.
+
+    The payload is the whole of what a visitor's browser is given, and it is
+    written by `render.py` and read by `app.js` with nothing between them to
+    say the two still agree. So a key can go on being serialised after the code
+    that printed it is deleted, and the page looks finished while quietly
+    publishing less than it holds.
+
+    That is not hypothetical. `level_labels` and every itinerary's
+    `requirements` shipped in the payload of eleven refreshes with no line of
+    `app.js` reading either: 892 departures each carrying a stated entry
+    requirement -- the certification and logged dives an operator will turn a
+    diver away for -- reachable only by downloading the JSON. The column that
+    printed it was removed for good reasons and nothing replaced it, which is
+    the exact shape of failure this class exists to catch: not a wrong number,
+    a fact silently withdrawn.
+
+    Deliberately a check on the *keys*, not on the rendering. Whether the bar
+    reads well is a matter of taste; whether anything reads it at all is not.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    #: Payload keys with no reader, and the reason each is allowed to stay.
+    #: Empty on purpose -- an entry here is a decision someone made out loud,
+    #: and the point of the list is that it is short enough to argue with.
+    UNREAD: dict[str, str] = {
+        "fee_labels": "one vocabulary defined once; app.js prints each line's "
+                      "own label, which is built from this table in Python",
+    }
+
+    def app(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def payload(self) -> dict:
+        return build_payload(Dataset.load(SEED))
+
+    def test_every_top_level_key_has_a_reader(self) -> None:
+        source = self.app()
+        for key in self.payload():
+            if key in self.UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertIn(
+                    key, source,
+                    f"the payload ships {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_the_entry_bar_reaches_the_page(self) -> None:
+        """The specific fact this class was written for.
+
+        A stated safety requirement is the one kind of number here that is not
+        about money, and it is the whole of what the second source was added
+        for. It travels from the itinerary record through `level_labels` into
+        the expanded row, and every step of that has to be present.
+        """
+        source, payload = self.app(), self.payload()
+        self.assertIn("requirements", source, "app.js reads no entry bar")
+        self.assertIn("level_labels", source, "app.js has no vocabulary for it")
+        self.assertIn("min_level", source, "app.js reads no certification level")
+        bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
+        self.assertTrue(bars, "the seed itself states no entry bar to print")
+
+    def test_the_padi_column_explains_itself(self) -> None:
+        """The one column whose heading a visitor cannot interpret.
+
+        Every other column is named for what it holds, and each has a section
+        in the footer. "vs PADI" is two words for a second seller, prints a
+        dash wherever that seller does not sell the date, and read as missing
+        data rather than as an absent quote -- so it says so, in the heading
+        and in the footer, or this fails.
+        """
+        self.assertIn("hint:", self.app(), "no column carries an explanation")
+        footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("vs PADI", footer,
+                      "the footer explains every column but this one")
+        self.assertIn("Entry requirements", footer,
+                      "the footer never says where the entry bar comes from")

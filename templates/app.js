@@ -342,6 +342,11 @@
        the top, which is the one thing this column is for. Rows PADI does not
        price sort last rather than as zero: no quote is not a match. */
     { k: "padi", t: "vs PADI",
+      hint: "PADI Travel's price for this same sailing, against the Advertised "
+          + "column -- berth against berth, because PADI publishes no fee book "
+          + "and its figure cannot be set against a total. A dash means PADI "
+          + "does not sell that date, which is evidence of nothing: its "
+          + "calendar coverage varies by boat.",
       v: function (d) { return d.padi_delta == null ? Infinity : d.padi_delta; },
       show: function (d) {
         if (d.padi_delta == null) return '<span class="dim">—</span>';
@@ -597,6 +602,60 @@
     return node;
   }
 
+  /* The entry bar this trip states, in words rather than a code.
+   *
+   * It had a column of its own and lost it: sixteen columns already competed
+   * for the width, the bar is the same three words on most rows, and its
+   * "sources disagree" marker was styled like the disclosure pill beside it,
+   * so two unrelated warnings looked identical in adjacent columns. All three
+   * were arguments against the column and none was an argument against the
+   * fact -- but removing the column removed the fact, because nothing else on
+   * the page printed it. `level_labels` and every itinerary's `requirements`
+   * went on shipping in the payload with no code reading either: 892
+   * departures carrying a stated safety requirement that a visitor could only
+   * reach by downloading the JSON.
+   *
+   * So it lives here instead, under the bill, where there is room for the part
+   * that actually needs saying: liveaboard.com and PADI Travel disagree about
+   * the bar on 49 of these trips, the stricter one is what is shown, and a
+   * diver deserves to know the two sources do not agree rather than to see one
+   * number presented as settled.
+   *
+   * The dim line under it is the sources' own wording, printed for the same
+   * reason the fee rows print the operator's: a normalised label is this
+   * project's phrasing, and the sentence it was normalised from is the
+   * evidence for it. */
+  function entryBar(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level) return "";
+    var level = (D.level_labels && D.level_labels[req.min_level]) || req.min_level;
+    /* The dive count beside the certification, unless the certification's own
+       label already states it: two of the four levels are written "Advanced +
+       50 dives", and appending the number again printed "Advanced + 50 dives,
+       50 logged dives" on the single commonest bar in the fleet. Matched on a
+       word boundary rather than as a substring, so a ten-dive bar is not
+       swallowed by a label that happens to read "+ 100 dives". */
+    var stated = req.min_logged_dives &&
+      new RegExp("\\b" + req.min_logged_dives + "\\b").test(level);
+    var dives = req.min_logged_dives && !stated
+      ? ", " + req.min_logged_dives + " logged dives" : "";
+    /* The note, on the trips where it says more than the line above it.
+     *
+       Every trip has one and 222 of the 317 are the winning source restating
+       the bar in its own words -- true, attributable, and on its own a dim
+       line repeating the black one directly above. What the note is *for* is
+       the other 95: the ones where a second source was read, so the reader can
+       see that the number shown was chosen between two claims rather than
+       simply reported. Where a source is named the whole note prints, first
+       sentence included, because there the restatement is no longer a
+       repetition -- it is which of the two bars was taken. */
+    var note = req.notes && /PADI|liveaboard\.com/.test(req.notes) ? req.notes : "";
+    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level + dives) +
+      "</span>" +
+      (note ? '<span class="dim">' + esc(note) + "</span>" : "") +
+      "</p>";
+  }
+
   function feeTable(row) {
     var body = linesFor(row.d).map(function (line) {
       var on = lineCounts(line) || line.tier === "base";
@@ -658,7 +717,12 @@
         "number.";
     }
 
-    return '<table class="fees"><tbody>' + body + "</tbody></table>" +
+    /* The bar leads the panel rather than following the bill. Whether a diver
+       may board this trip at all is prior to what boarding it costs, and a
+       reader who opens a row to check a 50-dive requirement should not have to
+       read a fee table first to find it. */
+    return entryBar(row.i) +
+      '<table class="fees"><tbody>' + body + "</tbody></table>" +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
       (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
   }
@@ -721,8 +785,13 @@
          be read as truncated, a truncated column name cannot. */
       var label = (narrow.matches && c.short) ? c.short : c.t;
       /* The tooltip only where the word was shortened, so it names the column
-         rather than repeating it. */
-      var full = label === c.t ? "" : ' title="' + esc(c.t) + '"';
+         rather than repeating it -- or, on a column that needs a sentence
+         rather than a name, whatever `hint` says. A heading a visitor cannot
+         interpret is worse than no heading: "vs PADI" printed a dash on 291
+         rows and read as missing data rather than as a second seller that does
+         not sell that date. */
+      var full = label !== c.t ? ' title="' + esc(c.t) + '"'
+               : c.hint ? ' title="' + esc(c.hint) + '"' : "";
       return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
         '" data-k="' + c.k + '"' + full + ">" + label + " " + dir + "</th>";
     }).join("") + "</tr>";

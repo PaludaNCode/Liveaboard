@@ -430,6 +430,22 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 .fees .prov { white-space:normal; max-width:52ch; color:var(--ink-faint); font-size:10px; }
 .caveat { margin:8px 0 0; max-width:80ch; color:var(--ink-dim); font-size:11px; }
 
+/* The entry bar, at the head of the expanded panel and ahead of the bill.
+   A label with a value beside it, because the bar is a fact the trip states
+   rather than a warning about one -- and the sources' own wording on its own
+   line beneath, at the fee table's provenance size, so the panel has one
+   hierarchy rather than two.
+
+   The note is a block and not a third item on the flex line, which is what it
+   was first: the detail cell is as wide as the fee table inside it, so on a
+   phone a sentence sharing that line ran off the right-hand edge of the
+   screen with the two words naming it. Under the bar it wraps where every
+   other sentence in this panel wraps. */
+.entry { margin:0 0 10px; font-size:11px; }
+.entry b { font-weight:600; color:var(--ink-dim); margin-right:14px; }
+.entry .dim { display:block; margin-top:3px; max-width:80ch; font-size:10px;
+              white-space:normal; }
+
 .notice {
   margin:0; padding:10px 18px; background:var(--later-soft); color:var(--later);
   border-bottom:1px solid var(--rule); font-size:12px;

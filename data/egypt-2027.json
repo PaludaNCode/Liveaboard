@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-08-28",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 601 of 892 sailings and the entry bar on 95 of 317 trips; where the two disagree about the bar the stricter is shown.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-08-28",

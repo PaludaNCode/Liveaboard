@@ -1192,7 +1192,7 @@ def promote(
         "schema_version": 1,
         "generated": candidate.get("scraped_at") or date.today().isoformat(),
         "default_currency": "EUR",
-        "notes": notes or _notes_for(itineraries),
+        "notes": notes or _notes_for(itineraries, departures),
         "fx": fx or _default_fx(),
         # Only the operators actually named. UNKNOWN_OPERATOR joins the list
         # only when something is filed under it -- carrying an unused "Operator
@@ -1231,7 +1231,10 @@ def _operators_for(
     return rows or [dict(UNKNOWN_OPERATOR)]
 
 
-def _notes_for(itineraries: list[dict[str, Any]]) -> str:
+def _notes_for(
+    itineraries: list[dict[str, Any]],
+    departures: list[dict[str, Any]] | None = None,
+) -> str:
     """Describe what this run actually captured.
 
     The note used to be a constant reading "Fees are not yet captured, so true
@@ -1239,6 +1242,13 @@ def _notes_for(itineraries: list[dict[str, Any]]) -> str:
     carried a full breakdown for every trip while telling its visitors it had
     none. A site that exists to catch operators describing their prices
     inaccurately cannot describe its own data inaccurately.
+
+    The same rule is why the second source is named here. This sentence is the
+    page's own statement of where its numbers come from, and for eleven
+    refreshes it named liveaboard.com alone while a "vs PADI" column sat in the
+    table and PADI's entry bar decided what 95 trips print. A source a page
+    reads and does not admit to is the reverse of the failure this project
+    reports in operators, and no less a failure for being an omission.
     """
     total = len(itineraries)
     with_fees = sum(1 for i in itineraries if i["fees"])
@@ -1246,17 +1256,50 @@ def _notes_for(itineraries: list[dict[str, Any]]) -> str:
         return (
             "Prices scraped from liveaboard.com. Fees are not yet captured, so "
             "true cost is shown as unknown rather than as the advertised price."
-        )
+        ) + _padi_note(itineraries, departures)
     if with_fees == total:
         return (
             "Prices and fee disclosures scraped from liveaboard.com. True cost "
             "adds every fee the operator lists, including the ones it states "
             "without a price."
-        )
+        ) + _padi_note(itineraries, departures)
     return (
         f"Prices scraped from liveaboard.com. Fee disclosures captured for "
         f"{with_fees} of {total} itineraries; the rest show true cost as "
         f"unknown rather than as the advertised price."
+    ) + _padi_note(itineraries, departures)
+
+
+def _padi_note(
+    itineraries: list[dict[str, Any]],
+    departures: list[dict[str, Any]] | None,
+) -> str:
+    """What the second source contributed, counted rather than claimed.
+
+    Two numbers, because PADI contributes two different things and their
+    coverage is not the same: a berth price on the sailings whose date it also
+    sells, and an entry bar on the trips it also describes. Naming the source
+    without either count would let a run that read nothing from PADI go on
+    saying it did, which is the failure the fee sentence above was written to
+    stop.
+    """
+    priced = sum(1 for d in (departures or []) if d.get("padi_price") is not None)
+    barred = sum(
+        1 for i in itineraries
+        if "PADI" in ((i.get("requirements") or {}).get("notes") or "")
+    )
+    if not priced and not barred:
+        return ""
+    parts = []
+    if priced:
+        parts.append(
+            f"its own berth price on {priced} of {len(departures or [])} sailings"
+        )
+    if barred:
+        parts.append(f"the entry bar on {barred} of {len(itineraries)} trips")
+    return (
+        " PADI Travel is read as a second source for " + " and ".join(parts) +
+        "; where the two disagree about the bar the stricter is shown."
     )
 
 
