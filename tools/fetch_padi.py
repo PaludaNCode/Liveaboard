@@ -235,6 +235,14 @@ def _departure_book(aliases: dict[str, str], raw: dict) -> dict:
                 continue
             book[f"{boat_id}::{day}"] = {
                 "boat": boat_id,
+                # PADI's own slug for the vessel, which is the only thing that
+                # builds a link back to the page this price came from. `promote`
+                # has been reading a `slug` key here since the sailings landed
+                # and nothing was writing one, so every PADI provenance URL in
+                # the dataset read ".../liveaboard/egypt//" -- a link to
+                # nothing, on the one field whose job is to let a reader check
+                # the claim.
+                "slug": slug,
                 "start": day,
                 "end": _iso_day(trip.get("endDate")),
                 "nights": trip.get("duration"),
@@ -323,6 +331,14 @@ def main() -> int:
         if not name:
             continue
         record["boat"] = boat_id
+        # The vessel's own currency, not the payload's: nothing in an itinerary
+        # or a sailing states one, and the app's Currency-code header does not
+        # convert -- EUR, USD and GBP all answer the same number. A vessel whose
+        # page stated none gets no fees rather than fees assumed to be euro,
+        # which is the same rule `_departure_book` applies to its prices.
+        currency = (raw.get("shops", {}).get(slug) or {}).get("currency")
+        if currency:
+            record["fees"] = PadiComAdapter.fees_from_payload(detail, currency)
         trips[itinerary_key(boat_id, str(name))] = record
     book["trips"] = trips
     book["collected"] = raw["fetched"]
@@ -338,10 +354,17 @@ def main() -> int:
 
     with_bar = sum(1 for t in trips.values() if t.get("requirements"))
     with_dives = sum(1 for t in trips.values() if t.get("dives"))
+    with_fees = sum(1 for t in trips.values() if (t.get("fees") or {}).get("lines"))
+    complete = sum(1 for t in trips.values() if (t.get("fees") or {}).get("complete"))
     print(f"\nfetched {fetched}, skipped {skipped}, failed {failed}")
     print(f"{RAW}: {len(stored)} itineraries")
     print(f"{BOOK}: {len(trips)} keyed trips, {with_bar} with an entry bar, "
           f"{with_dives} with a stated dive count")
+    # Both numbers, because they are different claims: a trip can state four
+    # charges and leave one of them unpriced, and only the second number says
+    # whether a total may be built from what it states.
+    print(f"{'':>{len(str(BOOK))}}  {with_fees} state a mandatory charge, "
+          f"{complete} state a bill that adds up")
     return 0
 
 

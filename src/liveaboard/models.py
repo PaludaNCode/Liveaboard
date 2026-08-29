@@ -279,6 +279,26 @@ class Itinerary:
     title said north. Absent whenever real sites were found, because a list of
     reefs is strictly better than a direction.
     """
+    padi_fees: list[FeeItem] = field(default_factory=list)
+    """The charges PADI Travel says a diver cannot decline on this same trip.
+
+    A second seller's own disclosure, kept apart from ``fees`` and never merged
+    into it. The two genuinely differ: of the 74 trips where both books can be
+    added up, 43 disagree and 16 by €150 or more -- Odyssey's *Premium
+    Expedition* is €120 of required extras through one seller and €420 through
+    the other. Unioning them would produce a bill neither site quotes, and
+    preferring one wholesale would hide the difference this site exists to show.
+    """
+    padi_fees_complete: bool = False
+    """Whether every charge PADI states here is named and priced.
+
+    False is the ordinary case for a trip PADI has not been read for *and* for
+    one where it named a charge without a figure, and both mean the same thing
+    downstream: no total may be claimed on PADI's behalf. Separate from
+    ``padi_fees`` being empty, which is PADI stating that the fare covers
+    everything -- a disclosure, not a gap. See
+    `PadiComAdapter.fees_from_payload`.
+    """
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any], default_currency: str) -> Itinerary:
@@ -298,6 +318,11 @@ class Itinerary:
             summary=payload.get("summary"),
             title=payload.get("title"),
             region=payload.get("region"),
+            padi_fees=[
+                FeeItem.from_dict(f, default_currency)
+                for f in payload.get("padi_fees", [])
+            ],
+            padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
         )
 
 
@@ -325,14 +350,17 @@ class Departure:
     padi_price: Money | None = None
     """What PADI Travel advertises for this same sailing, when it sells it.
 
-    A berth price like :attr:`price`, and comparable only to that -- never to
-    the total. PADI publishes no fee book, so a comparison against a figure that
-    includes marine park fees would show it cheaper by exactly the fees it never
-    disclosed, on a site whose argument is that undisclosed fees are the problem.
+    A berth price like :attr:`price`, and comparable only to a berth price. It
+    becomes comparable to a total once PADI's own required extras are added to
+    it, which is what `Itinerary.padi_fees` carries and what
+    `Itinerary.padi_fees_complete` decides is safe to do. Where that is false
+    this figure stays a berth price and the page says so rather than setting it
+    beside a bill: a total measured against a fare shows whichever seller
+    discloses less as the cheaper one, on a site whose argument is that
+    undisclosed fees are the problem.
 
-    ``None`` where PADI does not sell the sailing, which is 25 of our 627 on the
-    mapped boats and every departure on the 29 boats it does not list. Not zero,
-    and not the operator's price copied across.
+    ``None`` where PADI does not sell the sailing, which is 291 of our 892. Not
+    zero, and not the operator's price copied across.
     """
     padi_provenance: Provenance | None = None
 

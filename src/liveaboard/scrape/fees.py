@@ -98,10 +98,25 @@ none reaches seven words, while every fabrication above exceeds it.
 LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # Required on three of twelve vessels and previously nameless, so it was
     # dropped from the true cost of every one of them.
-    (r"\b(?:mandatory\s+)?service\s+charge\b", FeeCode.SERVICE_CHARGE),
+    # Every one of these takes a plural. They were written singular against
+    # liveaboard.com's wording and read as complete, and the gap only showed
+    # when the same table was pointed at a second source that happens to
+    # pluralise: "Fuel surcharges" is PADI's commonest mandatory charge, 116
+    # entries of it, and not one matched "fuel surcharge". The words are the
+    # operators' either way -- the fleet is shared -- so the plurals are a fix
+    # to both readers and not an accommodation of one.
+    (r"\b(?:mandatory\s+)?service\s+(?:charges?|fees?)\b", FeeCode.SERVICE_CHARGE),
     (r"\bnational park\b|\bmarine park\b|\bpark fees?\b", FeeCode.MARINE_PARK),
-    (r"\benvironment(?:al)?\s+tax\b|\beco\s+tax\b", FeeCode.ENVIRONMENT_TAX),
-    (r"\bfuel\s+(?:surcharge|fee|supplement)\b", FeeCode.FUEL_SURCHARGE),
+    # Conservation and reef tax sit here rather than under the park fee. Both
+    # are the Red Sea's environmental levy under the name the operator gives
+    # it -- "Governamental Reef Tax", misspelling and all, is what one boat
+    # calls the charge another bills as "Environmental tax" -- and the park fee
+    # is a separate line that several of them bill alongside it. Folding the
+    # two would merge two charges a diver pays both of.
+    (r"\benvironment(?:al)?\s+tax(?:es)?\b|\beco\s+tax\b"
+     r"|\bconservation\s+(?:fees?|charges?)\b|\breef\s+tax(?:es)?\b",
+     FeeCode.ENVIRONMENT_TAX),
+    (r"\bfuel\s+(?:surcharges?|fees?|supplements?)\b", FeeCode.FUEL_SURCHARGE),
     (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
     # Split from the general course line for the same reason as snorkel gear:
     # vessels list "Nitrox Course (€99)" and "Scuba Diving Courses (€79-110)"
@@ -216,13 +231,25 @@ def _combined_fee(label: str) -> bool:
     return sum(1 for part in COMBINED_PARTS if part.search(label)) >= 2
 
 
-def classify_label(label: str) -> FeeCode | None:
+def classify_label(label: str, *, prose: bool = True) -> FeeCode | None:
     """Resolve one entry's label, or ``None`` when it is not a fee we know.
 
     Returns ``None`` freely. An unrecognised extra costs a line of data; a
     misrecognised one puts an invented charge on the page.
+
+    ``prose=False`` drops the length and punctuation guards, and is for a label
+    that arrived as its own field rather than as a line cut out of a page. The
+    guards are not a view about what a fee is called; they are a defence
+    against `parse_extras` reading a sentence off a vessel page and calling it
+    a charge -- VAT out of "renovated", a fuel surcharge out of a paragraph
+    about cruising speed. A JSON field named ``title`` in an entry already
+    flagged ``isMandatory`` cannot fail that way, and applying the guards there
+    silently dropped real, priced charges for being long: "Environmental tax,
+    Park fees, Harbour fees and Fuel surcharge" is nine words and one of the
+    largest mandatory lines in the book. Where there is no sentence to mistake
+    for a label, a word count is not evidence of anything.
     """
-    if (
+    if prose and (
         len(label) > MAX_LABEL_CHARS
         or len(label.split()) > MAX_LABEL_WORDS
         or NOT_A_LABEL.search(label)

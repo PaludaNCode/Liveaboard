@@ -26,6 +26,8 @@ from .pricing import (
     compute,
     itinerary_lines,
     mandatory_known,
+    padi_base_line,
+    padi_lines,
     resolve_fees,
 )
 from .taxonomy import DIVER_LEVEL_LABELS, FEE_LABELS
@@ -92,6 +94,16 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "requirements": itinerary.requirements.as_dict(),
         }
 
+        # The second seller's bill for the same trip, in the same shape as the
+        # rows above it, so the browser adds it up with the same code and the
+        # visitor's toggles reach both sides. Written only where PADI's
+        # disclosure is complete; where it is not there is no key, and the page
+        # shows its berth price with a note instead of a total it cannot stand
+        # behind.
+        second = padi_lines(itinerary, dataset.fx)
+        if second is not None:
+            itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
+
     departures: list[dict[str, Any]] = []
     for departure in sorted(dataset.departures, key=lambda d: (d.start, d.id)):
         itinerary = dataset.itinerary_for(departure)
@@ -129,15 +141,22 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # What PADI advertises for this same sailing, converted like every other
         # price on the page.
         #
-        # Compared against ``base``, never against the total. Both are berth
-        # prices; the total adds fees PADI does not publish, so measuring one
-        # against the other would show PADI cheaper by exactly the fees it never
-        # disclosed. Two numbers only, and only where PADI sells the date: a
-        # field written per departure ships 892 times.
-        if departure.padi_price is not None:
-            padi_display, _ = dataset.fx.to_display(departure.padi_price)
-            entry["padi"] = float(padi_display.rounded)
-            entry["padi_delta"] = round(float(padi_display.rounded) - entry["base"], 2)
+        # This used to be compared against ``base`` and never against the total,
+        # on the stated grounds that PADI publishes no fee book. It does. It
+        # publishes one per itinerary rather than beside the price, which is
+        # why it looked absent -- and it is not a formality: of the 74 trips
+        # where both books can be added up, 43 disagree and 16 by more than
+        # €150. So a berth-to-berth column was comparing the two sellers on the
+        # half of the bill they agree about most and hiding the half they do
+        # not, which is the failure this site reports in operators.
+        #
+        # The line, not just the number, because the browser adds this up beside
+        # the fee rows and needs the same shape. Only where PADI sells the date:
+        # a field written per departure ships 892 times.
+        second_base = padi_base_line(departure, dataset.fx)
+        if second_base is not None:
+            entry["padi"] = float(second_base.display.rounded)
+            entry["padi_base_line"] = second_base.as_dict()
 
         # A departure-level fee replaces the route's for its code, so a sailing
         # can genuinely price a fee differently. No departure in the dataset

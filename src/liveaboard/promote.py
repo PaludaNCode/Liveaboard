@@ -712,6 +712,45 @@ def _padi_requirements(record: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+PADI_FEE_PROVENANCE: dict[str, Any] = {
+    "kind": "scraped",
+    "source_id": "padi.com",
+}
+"""Where a PADI fee line came from.
+
+Every price and fee on this page carries one, and a second seller's fees are no
+exception -- a line whose origin is not recorded is indistinguishable from one
+this project made up, which is the whole distinction the site exists to police.
+The retrieval date is stamped on by the caller, which is the only part of this
+that varies per run.
+"""
+
+
+def _padi_fees(record: dict[str, Any]) -> dict[str, Any] | None:
+    """PADI's mandatory charges in this dataset's fee shape.
+
+    The parser has already done the reading -- classified each title against
+    the same table liveaboard.com's wording goes through, mapped PADI's
+    charging unit onto a `FeeBasis`, and decided whether what is left adds up.
+    All this does is unwrap the money into the two keys `FeeItem.from_dict`
+    expects, and pass the verdict through untouched.
+
+    Returns ``None`` for a trip PADI has not been read for, which is not the
+    same as a trip PADI says has no required extras: the first writes no key
+    and claims nothing, the second writes an empty list and a complete bill,
+    and only the second is a disclosure. Fifty of PADI's 307 itineraries are
+    the second kind.
+    """
+    fees = record.get("fees")
+    if not isinstance(fees, dict) or "lines" not in fees:
+        return None
+    return {
+        "lines": [dict(line, provenance=dict(PADI_FEE_PROVENANCE))
+                  for line in fees["lines"]],
+        "complete": bool(fees.get("complete")),
+    }
+
+
 def _requirements(trip: dict[str, Any]) -> dict[str, Any] | None:
     """The entry bar a trip states, or ``None`` when none was read.
 
@@ -1141,6 +1180,22 @@ def promote(
         bar = _strictest(_requirements(trip), _padi_requirements(padi_trip))
         if bar:
             itineraries[-1]["requirements"] = bar
+
+        # The second seller's own required extras, beside ours and never mixed
+        # into them. Written only where PADI states at least one charge or
+        # states a complete bill of none, so a trip PADI has not been read for
+        # carries no key rather than an empty list that reads as "no fees".
+        padi_fees = _padi_fees(padi_trip)
+        if padi_fees is not None:
+            retrieved = (padi or {}).get("collected") or ""
+            for line in padi_fees["lines"]:
+                line["provenance"]["retrieved"] = retrieved
+                line["provenance"]["url"] = (
+                    f"https://travel.padi.com/liveaboard/egypt/"
+                    f"{padi_slug_for.get(slug, slug)}/"
+                )
+            itineraries[-1]["padi_fees"] = padi_fees["lines"]
+            itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]
 
         for item in group:
             entry = {

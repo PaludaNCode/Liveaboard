@@ -45,7 +45,7 @@ from html import unescape
 
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
-from ..taxonomy import DiverLevel
+from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
 
 HOST = "travel.padi.com"
 """PADI Travel is its own host. `www.padi.com/travel` redirects here, and the
@@ -137,6 +137,44 @@ an entry bar, so 10 and 20 land on the same level and so do 30 and 40. Whether
 the trip charges for nitrox is a fee question, and `pricing.py` already answers
 it from the source that quotes a number.
 """
+
+PAYED_PER: dict[int, FeeBasis] = {
+    0: FeeBasis.PER_PERSON_PER_DAY,  # "Day/Person"
+    10: FeeBasis.PER_NIGHT,          # "Night/Person"
+    20: FeeBasis.PER_DIVE,           # "Dive"
+    30: FeeBasis.PER_TRIP,           # "Trip"
+    40: FeeBasis.PER_DAY,            # "Diving day"
+    70: FeeBasis.PER_WEEK,           # "Week"
+}
+"""`LIVEABOARD_EXTRA_PAYED_PER`, read verbatim off a live vessel page, and
+deliberately only the part of it that is a per-person trip charge.
+
+The enum has eighteen members. The twelve missing here are transfers ("From,
+per vehicle", "Return, per person"), courses, activities, an "Offset", and two
+priced per *cabin* -- "Day/Cabin" and "Night/Cabin". None of them normalises to
+what this dataset compares, which is one diver's bill for one trip: a per-cabin
+charge needs an occupancy nobody publishes, and a transfer is not part of the
+sailing. `basis_for` returns ``None`` for all of them rather than guessing, and
+a mandatory charge whose basis will not normalise makes the whole PADI bill
+incomplete rather than being quietly dropped from it. Same rule as an extra
+listed with no price: what cannot be added up is not zero.
+"""
+
+
+MANDATORY_FIELDS: tuple[str, ...] = ("mandatoryOnBoard", "mandatoryInAdvance")
+"""Where PADI keeps the charges a diver cannot decline.
+
+**Membership of these two lists is the fact; `section` and `kind` are not.**
+Every entry in them carries ``isMandatory: true`` and ``isIncluded: false``, so
+the field name is the claim. The codes beside it are unreliable in the way the
+itinerary slugs are: All Star Ghani's "Marine Park/Port Fees" is filed under
+``section: 10`` ("Information") and ``kind: 10`` ("Full board, including"), and
+reading either would have made a €200 park fee into a meal. 333 of the 623
+entries are ``kind: 600`` ("Other fees"), which says nothing at all. The title
+is the only field that describes the charge, and it is classified with the same
+table liveaboard.com's wording goes through.
+"""
+
 
 EXPERIENCE_DIVES: dict[int, int] = {0: 0, 10: 20, 20: 50, 30: 100}
 """`EXPERIENCE_REQUIRED_DIVES`, likewise verbatim.
@@ -420,6 +458,100 @@ class PadiComAdapter(SourceAdapter):
         if requirements:
             record["requirements"] = requirements
         return record
+
+    @staticmethod
+    def basis_for(payed_per: object) -> FeeBasis | None:
+        """PADI's charging unit as one of this project's, or ``None``."""
+        return PAYED_PER.get(payed_per) if isinstance(payed_per, int) else None
+
+    @classmethod
+    def fees_from_payload(
+        cls, detail: dict[str, object], currency: str
+    ) -> dict[str, object]:
+        """The charges PADI says a diver cannot decline, and whether they add up.
+
+        This is the half of the comparison the site was missing. Set against our
+        *total*, PADI's headline price would have looked cheaper by exactly the
+        fees nobody had read -- the trick this project exists to expose,
+        committed by the page itself -- and the column dodged that by comparing
+        berth to berth instead, which answers a question no diver asks. PADI
+        does publish its fee book; it publishes it on the itinerary endpoint
+        rather than beside the price, which is why it looked absent.
+
+        Returns the lines *and* a verdict on whether they are complete, because
+        those are different facts and only the pair of them is safe to use. A
+        bill is complete when every mandatory entry both names a charge this
+        project can classify and states a price in a unit that normalises. Where
+        it is not, ``complete`` is false and no PADI total may be claimed:
+
+        - **Unclassified.** "14% GST (on onboard purchases)", "Hospitality Fee",
+          "Local Fees". Naming them is guesswork and pricing them is worse --
+          the GST line carries ``price: 14.0``, so counting it would put
+          fourteen euro on the bill for a percentage of an unrelated purchase.
+        - **Unpriced.** 142 of the 623 entries name a charge and give no figure,
+          exactly as a third of the liveaboard.com book does. The line is kept,
+          with no amount, so the reader sees the charge exists.
+        - **A basis that will not normalise.** See `PAYED_PER`.
+
+        The currency is the vessel's own, taken from `window.shop.currency` and
+        passed in, because nothing in the payload states it -- the same trap as
+        the sailing prices, where EUR, USD and GBP headers all return the same
+        number. A vessel whose page states no currency gets no fees rather than
+        fees assumed to be euro.
+        """
+        from .fees import classify_label
+
+        lines: list[dict[str, object]] = []
+        unreadable: list[str] = []
+        for field in MANDATORY_FIELDS:
+            entries = detail.get(field)
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if not isinstance(entry, dict):
+                    continue
+                title = str(entry.get("title") or "").strip()
+                # `prose=False`: this is a field, not a line cut out of a page.
+                code = classify_label(title, prose=False) if title else None
+                basis = cls.basis_for(entry.get("payedPer"))
+                price = entry.get("price")
+                amount = float(price) if isinstance(price, (int, float)) else None
+                if code is None or basis is None:
+                    unreadable.append(title or f"<untitled {entry.get('id')}>")
+                    continue
+                # `note` rather than a label of our own, and shaped like
+                # liveaboard.com's lines: the code is this project's name for
+                # the charge and the note is the seller's, which is the pair the
+                # fee table already prints. Whether PADI collects it in advance
+                # or at the dock is not kept -- it does not move the total, and
+                # this dataset models no such distinction on its own fees
+                # either.
+                line: dict[str, object] = {
+                    "code": code.value,
+                    "tier": FeeTier.MANDATORY.value,
+                    "basis": basis.value,
+                    "note": title,
+                }
+                if amount is not None:
+                    line["amount"] = {"amount": amount, "currency": currency}
+                lines.append(line)
+
+        # Two entries with one title are kept as two. DUNE Longara lists
+        # "Environmental taxes" twice on six of its trips -- €100 and €200,
+        # under separate `extraId`s -- and they are two charges the operator
+        # bills, not one charge listed twice: no pair in the book is an exact
+        # duplicate. Folding them on the title would halve a real bill, which
+        # is the direction this project never rounds.
+        priced = all("amount" in line for line in lines)
+        return {
+            "lines": lines,
+            # Complete means "every charge PADI states is on this list, named
+            # and priced". An itinerary with no mandatory entries at all is
+            # complete and empty -- 50 of the 307 are, and that is PADI saying
+            # the fare covers everything, which is a disclosure and not a gap.
+            "complete": not unreadable and priced,
+            "unreadable": sorted(set(unreadable)),
+        }
 
     @staticmethod
     def requirements_from_choices(

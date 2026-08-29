@@ -815,17 +815,36 @@ class TestPayloadIsRead(unittest.TestCase):
         """The one column whose heading a visitor cannot interpret.
 
         Every other column is named for what it holds, and each has a section
-        in the footer. "vs PADI" is two words for a second seller, prints a
-        dash wherever that seller does not sell the date, and read as missing
-        data rather than as an absent quote -- so it says so, in the heading
-        and in the footer, or this fails.
+        in the footer. "Sellers" is one word for a second site pricing the same
+        berth; its cells say "berth only" and "—" and mean two quite different
+        things by them, and a reader has no way to work either out. So it
+        explains itself in the heading and in the footer, or this fails.
         """
         self.assertIn("hint:", self.app(), "no column carries an explanation")
         footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
-        self.assertIn("vs PADI", footer,
+        self.assertIn("<h3>Sellers</h3>", footer,
                       "the footer explains every column but this one")
+        self.assertIn("berth only", footer,
+                      "the footer never says what an uncomparable row means")
         self.assertIn("Entry requirements", footer,
                       "the footer never says where the entry bar comes from")
+
+    def test_a_row_prints_one_seller_and_not_a_blend(self) -> None:
+        """Advertised plus Mandatory fees is the Total, on every row.
+
+        The Total can now be the second seller's, and the three money columns
+        beside it have to follow it there. Left reading our own source, a row
+        won by PADI printed our berth price against PADI's total and the
+        arithmetic across the row was simply wrong -- silently, since every
+        figure in it is real.
+        """
+        source = self.app()
+        for key in ('k: "base"', 'k: "later"', 'k: "total"'):
+            start = source.index(key)
+            block = source[start:start + 900]
+            with self.subTest(key):
+                self.assertIn("best(row)", block,
+                              f"{key} does not follow the bill the row prints")
 
     def test_the_same_price_threshold_is_one_number(self) -> None:
         """Two sellers agreeing is decided in two places -- the column and the
@@ -837,10 +856,11 @@ class TestPayloadIsRead(unittest.TestCase):
         """
         source = self.app()
         self.assertIn("var PADI_SAME = ", source, "the threshold has no name")
-        for pattern in (r"Math\.abs\(d\.padi_delta\)\s*<\s*\d",
-                        r"Math\.abs\(diff\)\s*<\s*\d"):
-            self.assertIsNone(
-                re.search(pattern, source),
-                "a bare number decides whether two prices are the same; "
-                "use PADI_SAME so the column and the panel cannot disagree",
-            )
+        # Two places decide it: `best`, which the Total and Sellers columns
+        # both read, and the sentence in the expanded row.
+        self.assertGreaterEqual(source.count("PADI_SAME"), 3, "declared and unused")
+        self.assertIsNone(
+            re.search(r"Math\.abs\((?:gap|diff)\)\s*<\s*\d", source),
+            "a bare number decides whether two sellers agree; use PADI_SAME "
+            "so the column and the panel cannot disagree",
+        )

@@ -633,3 +633,19 @@ a { color:var(--accent); }
 .cheaper { color:var(--ok); }
 .dearer  { color:var(--sold); }
 .caveat.padi { border-left:2px solid var(--unknown); padding-left:.6em; }
+/* Whose bill the table under it is. Only printed when there are two, because
+   with one there is nothing to tell apart and a heading over every panel would
+   be a label nobody needs. */
+.whose { margin:12px 0 3px; font-size:10px; letter-spacing:.06em;
+         text-transform:uppercase; color:var(--ink-dim); }
+.entry + .whose { margin-top:0; }
+
+/* On the total, not beside it: the mark qualifies that number rather than
+   standing on its own. Small, uppercase and unobtrusive -- it is a footnote to
+   a price, and a price the reader can act on, so it must not compete with the
+   figure it annotates. */
+.varies {
+  display:inline-block; margin-left:.45em; font-size:9px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink-faint); vertical-align:.12em;
+  border-bottom:1px dotted var(--rule); cursor:help;
+}
