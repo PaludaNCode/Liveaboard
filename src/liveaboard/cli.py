@@ -530,10 +530,49 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if cabins_path.exists():
         cabins = json.loads(cabins_path.read_text(encoding="utf-8"))
 
+    # What PADI Travel is discounting, one entry per day it was read. Committed
+    # rather than gitignored, because the change log is a diff between two
+    # committed days: a re-read recovers today's deals and never yesterday's.
+    # Absent means the daily read has not run and the page carries no panel.
+    deals = None
+    deals_path = Path(args.deals)
+    if deals_path.exists():
+        deals = json.loads(deals_path.read_text(encoding="utf-8"))
+
     payload = promote(
         candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
-        padi=padi, padi_departures=padi_departures, cabins=cabins,
+        padi=padi, padi_departures=padi_departures, cabins=cabins, deals=deals,
     )
+
+    block = payload.get("deals")
+    if deals and not block:
+        print(f"::warning::{deals_path} holds no readable day; no deals panel will be built")
+    elif block:
+        unmatched = block.get("unmatched") or []
+        print(
+            f"  deals read {block['read']} from {deals_path}:"
+            f" {len(block['offers'])} on boats this site carries,"
+            f" {len(unmatched)} on vessels it does not"
+        )
+        for row in unmatched:
+            # Named every day, not counted. The query asks PADI for the USA as
+            # well as Egypt because three Egyptian boats are filed there, and
+            # the same breadth returns Caribbean ones -- so an unmatched vessel
+            # is ordinarily a boat from another sea and occasionally an Egyptian
+            # one nothing has paired yet. Only a name tells those apart, and
+            # only if somebody sees it.
+            print(f"::warning::PADI deal on a vessel this site does not carry: {row['name']}")
+        moved = block.get("changes") or {}
+        if moved.get("partial"):
+            print("    a reading was truncated; new and withdrawn are not reported for it")
+        elif block.get("first_reading"):
+            print("    first reading in the book; nothing to compare it against yet")
+        else:
+            print(
+                f"    since {block['previous']}: {len(moved.get('new') or [])} new,"
+                f" {len(moved.get('withdrawn') or [])} withdrawn,"
+                f" {len(moved.get('changed') or [])} changed"
+            )
 
     if trips:
         book = {
@@ -816,6 +855,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--padi-departures",
                              default=Path("data/padi_departures.json"), type=Path)
     promote_cmd.add_argument("--cabins", default=Path("data/cabins.json"), type=Path)
+    promote_cmd.add_argument("--deals", default=Path("data/deals.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

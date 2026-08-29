@@ -40,6 +40,25 @@
 
 <div id="dataNotice"></div>
 
+<!-- What the other seller is discounting today, and what moved since the last
+     day the deals book holds.
+
+     A `details` rather than an open panel, and the summary carries the whole
+     overview -- how many sailings are discounted, how many changed, and the day
+     it was read. That is the front-page statement; the list under it is for
+     somebody who wants the boats. An open block of thirteen rows would push the
+     table -- which is what this site is -- below the fold on every visit, to
+     say something a line says.
+
+     Empty in the markup and hidden until app.js finds a deals block. A fresh
+     checkout has never run the daily read, and a panel that renders its own
+     absence as "no deals today" would be the site claiming a fact about PADI
+     from a file that does not exist. -->
+<details class="deals" id="deals" hidden>
+  <summary id="dealsLine">Deals</summary>
+  <div class="deals-body" id="dealsBody"></div>
+</details>
+
 <div class="toolbar">
   <div class="tgroup">
     <span class="tlabel">Include</span><span id="toggles"></span>

@@ -1388,6 +1388,203 @@
     }
   }
 
+  /* ---------- what the other seller is discounting ---------- */
+
+  /* PADI Travel's deals listing, read daily and diffed against the last day
+     the book holds. Everything here was settled in Python: the join that
+     decided which of these boats is one of ours, the conversion into euro, and
+     the comparison with yesterday. This draws it.
+
+     Two things it must not do, both of them versions of the same rule. It must
+     not present a first reading as "nothing changed" -- there is a flag for
+     that, because the two are different claims. And it must not present a
+     truncated reading's absences as withdrawals: a listing the fetcher could
+     not finish knows nothing about the offers it did not reach, exactly as a
+     vessel page that fails to load knows nothing about the month behind it. */
+  function dealsSummary(deals, changed) {
+    var n = deals.offers.length;
+    var line = n + (n === 1 ? " discounted sailing" : " discounted sailings") +
+      " on this fleet";
+    if (deals.first_reading) line += " · first reading";
+    else if (changed) line += " · " + changed + " changed since " + shortDate(deals.previous);
+    else if (deals.previous) line += " · nothing moved since " + shortDate(deals.previous);
+    return "PADI deals · " + line + " · read " + shortDate(deals.read);
+  }
+
+  /* "20% off" where PADI states a percentage, and the money either way.
+
+     Its own word, not a percentage worked out from the two prices: a "Free
+     night(s)" offer takes nothing off the nightly rate and dividing one price
+     by the other would print it as a discount PADI never claimed. Where the
+     kind is a percentage the value is that percentage and is printed; where it
+     is not, the saving is the whole of what can be said. */
+  function offerOff(row) {
+    var saved = row.was - row.price;
+    if (row.kind === "Discount %" && row.value) {
+      return row.value + "% off · " + eur(saved);
+    }
+    return saved > 0 ? eur(saved) + " off" : (row.kind || "offer");
+  }
+
+  function dealRow(row) {
+    var tr = el("tr", null);
+    tr.appendChild(el("td", "d-when", shortDate(row.start) +
+      (row.nights ? " · " + row.nights + "n" : "")));
+
+    var boat = el("td", "d-boat");
+    if (row.url) {
+      var a = document.createElement("a");
+      a.href = row.url;
+      a.rel = "noopener";
+      a.target = "_blank";
+      a.textContent = row.boat_name;
+      /* The page the offer was read from, per row. A price whose source
+         cannot be opened is a price this site is asking to be taken on
+         trust, which is the thing it exists to object to. */
+      a.title = "The PADI Travel page this offer was read from";
+      boat.appendChild(a);
+    } else {
+      boat.textContent = row.boat_name;
+    }
+    tr.appendChild(boat);
+
+    /* Money before the offer's name, because the name is the longest column
+       and a phone reads this table left to right through a 390px window: with
+       the name third, every price on it sat off the right-hand edge behind a
+       horizontal scroll. What it costs is the column somebody came for. */
+    tr.appendChild(el("td", "d-now", eur(row.price)));
+    /* Struck through only where it is genuinely a different number. A "was"
+       equal to the price is PADI stating an offer that takes nothing off this
+       figure, and printing it crossed out would invent a saving. */
+    tr.appendChild(el("td", "d-was", row.was > row.price ? eur(row.was) : "—"));
+    tr.appendChild(el("td", "d-off", offerOff(row)));
+    tr.appendChild(el("td", "d-offer", row.title || "—"));
+
+    /* What PADI actually published, beside what this page converted it to.
+       Every other price here is converted the same way and says so once in the
+       footer; a deal is a number somebody is being asked to act on today, so it
+       says so on its own row. A dash where the two currencies already agree:
+       repeating "EUR 720" beside "€720" is a column of noise on eight of
+       thirteen rows. */
+    function quoted(amount) {
+      return row.currency + " " + Math.round(amount).toLocaleString("en-IE");
+    }
+    var native = el("td", "d-native",
+      row.currency === D.meta.currency ? "—" : quoted(row.quoted));
+    native.title = row.was > row.price
+      ? "As PADI quotes it, before conversion: " + quoted(row.quoted) +
+        ", against " + quoted(row.quoted_was)
+      : "As PADI quotes it, before conversion";
+    tr.appendChild(native);
+    return tr;
+  }
+
+  function dealsTable(rows) {
+    var table = el("table", "deals-table");
+    var head = document.createElement("thead");
+    var hr = el("tr", null);
+    ["Sails", "Boat", "Now", "Was", "Saving", "Offer", "As quoted"].forEach(function (h) {
+      hr.appendChild(el("th", null, h));
+    });
+    head.appendChild(hr);
+    table.appendChild(head);
+    var body = document.createElement("tbody");
+    rows.forEach(function (row) { body.appendChild(dealRow(row)); });
+    table.appendChild(body);
+    return table;
+  }
+
+  function dealsChanges(deals) {
+    var moved = deals.changes || {};
+    var names = moved.names || {};
+    var box = el("div", "deals-moved");
+    box.appendChild(el("h4", null, "What moved since " + shortDate(deals.previous)));
+
+    if (moved.partial) {
+      /* The distinction the whole pipeline turns on: a reading nobody could
+         finish is not a day on which nothing was on sale. */
+      box.appendChild(el("p", "deals-note",
+        "One of the two readings did not finish, so new and withdrawn offers " +
+        "are not reported for it. An offer missing from a listing that could " +
+        "not be read has not been withdrawn — it has not been looked at."));
+    }
+
+    var list = el("ul", "deals-changes");
+    (moved.new || []).forEach(function (id) {
+      list.appendChild(el("li", "d-new", "New — " + (names[id] || id)));
+    });
+    (moved.withdrawn || []).forEach(function (id) {
+      list.appendChild(el("li", "d-gone", "Withdrawn — " + (names[id] || id)));
+    });
+    /* One clause per thing that actually moved, and none for anything that did
+       not. An earlier version always printed a "before → after" for the offer
+       name, so a sailing that had merely shifted a week read "15% Early Bird →
+       15% Early Bird", which is a change log reporting a change to a field that
+       is identical on both sides. */
+    (moved.changed || []).forEach(function (change) {
+      var before = change.before, after = change.after, said = [];
+      if (before.price !== after.price) said.push(eur(before.price) + " → " + eur(after.price));
+      if (before.title !== after.title) {
+        said.push("“" + (before.title || "no name") + "” → “" + (after.title || "no name") + "”");
+      }
+      if (before.start !== after.start || before.end !== after.end) {
+        said.push("sailing " + shortDate(before.start) + " → " + shortDate(after.start));
+      }
+      if (!said.length) said.push(change.moved.join(", ") + " changed");
+      list.appendChild(el("li", "d-moved", after.boat_name + " — " + said.join("; ")));
+    });
+
+    if (!list.childNodes.length) {
+      box.appendChild(el("p", "deals-note", "No offer was added, withdrawn or repriced."));
+    } else {
+      box.appendChild(list);
+    }
+    return box;
+  }
+
+  function drawDeals() {
+    var deals = D.deals;
+    var host = document.getElementById("deals");
+    if (!host || !deals || !deals.offers || !deals.offers.length) return;
+
+    var changed = ((deals.changes || {}).new || []).length +
+      ((deals.changes || {}).withdrawn || []).length +
+      ((deals.changes || {}).changed || []).length;
+    document.getElementById("dealsLine").textContent = dealsSummary(deals, changed);
+
+    var body = document.getElementById("dealsBody");
+    body.textContent = "";
+    body.appendChild(el("p", "deals-note",
+      "What PADI Travel advertised as discounted on " + shortDate(deals.read) +
+      ", for sailings in this season. It is a berth price and an offer on one, " +
+      "not a total: the fees in the table below still land on the bill. Every " +
+      "boat here links to the page its offer was read from, and an offer is " +
+      "what one seller claimed when it was read — operators change them " +
+      "without notice."));
+    body.appendChild(dealsTable(deals.offers));
+
+    if (deals.previous) body.appendChild(dealsChanges(deals));
+
+    var strangers = deals.unmatched || [];
+    if (strangers.length) {
+      /* Named rather than counted, and on the page rather than only in a build
+         log. The query asks PADI for the USA as well as Egypt because three
+         Egyptian boats are filed there; the same breadth returns Caribbean
+         ones. So an unmatched vessel is usually a boat from another sea and
+         occasionally an Egyptian one nothing here has paired yet — and only a
+         name somebody reads tells those apart. */
+      body.appendChild(el("p", "deals-note",
+        "PADI also advertises deals on " + strangers.length + " vessel" +
+        (strangers.length === 1 ? "" : "s") + " this site does not carry: " +
+        strangers.map(function (v) { return v.name; }).join(", ") +
+        ". They are here because the query asks PADI for the USA as well as " +
+        "Egypt — which is how the three Red Sea Aggressors, filed under the " +
+        "USA, reach us at all."));
+    }
+
+    host.hidden = false;
+  }
+
   /* ---------- wiring ---------- */
 
   document.getElementById("head").addEventListener("click", function (event) {
@@ -1861,5 +2058,6 @@
     " · built " + (D.meta.built || D.meta.generated);
 
   drawNotice();
+  drawDeals();
   draw();
 })();

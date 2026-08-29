@@ -214,6 +214,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   where ours exists it wins outright. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
   line from each is a bill neither seller quotes.
+- **A deal is placed by its vessel, never by the country beside it.** PADI's
+  deals listing has to be asked for the USA as well as Egypt, because all three
+  Red Sea Aggressors are filed under the USA and asking Egypt alone drops them.
+  The same breadth returns Bahamas, Belize, Cayman and Roatan: 5 of 18 offers in
+  the published season sail another ocean, so the field is wrong about where a
+  boat is more than a quarter of the time and cannot place anything. `promote`
+  joins the deal's vessel to a boat of ours and lets that decide. A vessel that
+  joins to nothing is **named** — in the build log and on the page — rather than
+  dropped: an Egyptian boat under a USA label that nothing has paired is exactly
+  what the breadth is for, and only a name a person reads tells it apart from a
+  Caribbean one. The change log obeys the unread-page rule too: absences in a
+  reading the fetcher could not finish are not withdrawals, and it says so
+  instead of reporting them.
 - **Two itineraries must never share an id.** `Dataset.from_dict` keys them by
   id, so a collision keeps one and serves every departure of the loser the
   winner's reefs, fees and dive count: the row count stays right and the page
@@ -304,6 +317,18 @@ handful. Everything else in the pipeline describes the boat's year.
 the parser gets proved against three real trips before it is pointed at three
 hundred of somebody else's pages. A capped run merges into the book, like
 `scrape_fees.py --limit`.
+
+**A deal is a promotion, and PADI publishes them without a browser.**
+`/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`
+that page 99 answers with page 1 — but `/api/v2/travel/promotions/` takes that
+page's own `country` and `date` parameters over plain HTTP and pages honestly.
+`tools/fetch_deals.py` reads it in the daily refresh and appends one entry per
+day to `data/deals.json`, which is **committed**: a change log is a diff between
+two committed days, and one computed from an artifact silently becomes "no
+changes" once the artifact ages out. A re-run on a day already in the book makes
+no request at all. Paging stops when a page adds no offer identity already seen
+— never on a page number, because the page beside it proves a page number here
+carries no information.
 
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page
