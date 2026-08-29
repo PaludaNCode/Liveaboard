@@ -32,6 +32,23 @@ class Dataset:
     fx: FxTable | None = None
     generated: date | None = None
     notes: str | None = None
+    cabin_names: list[str] = field(default_factory=list)
+    """Cabin names, pooled once and indexed by every ladder on every departure.
+
+    2,982 cabins share 157 names — a boat calls its rooms the same thing on
+    every week it sells — so the page ships the names once and the rungs ship
+    an index. Halves what the ladder costs a one-file site.
+    """
+    sellers: list[str] = field(default_factory=list)
+    """Who sells these sailings, pooled and indexed by every berth block."""
+    berths_read: str | None = None
+    """The day the berth counts were read.
+
+    One date for the whole book, and the most load-bearing caveat attached to
+    it: a count is what the seller claimed when it was read, not a verified
+    number, and it is stale by morning. Stated once rather than on each of 864
+    departures.
+    """
 
     # -- construction ----------------------------------------------------
 
@@ -58,6 +75,9 @@ class Dataset:
             fx=FxTable.from_dict(payload["fx"]) if "fx" in payload else None,
             generated=date.fromisoformat(generated) if generated else None,
             notes=payload.get("notes"),
+            cabin_names=list(payload.get("cabin_names") or []),
+            sellers=list(payload.get("sellers") or []),
+            berths_read=payload.get("berths_read") or None,
         )
         dataset.validate()
         return dataset

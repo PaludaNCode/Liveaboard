@@ -522,9 +522,17 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if padi_departures_path.exists():
         padi_departures = json.loads(padi_departures_path.read_text(encoding="utf-8"))
 
+    # What each sailing costs cabin by cabin, and how many berths are left at
+    # the advertised price. Its own nightly pass, because these counts are the
+    # most perishable thing in the dataset. Absent means the pass has not run.
+    cabins = None
+    cabins_path = Path(args.cabins)
+    if cabins_path.exists():
+        cabins = json.loads(cabins_path.read_text(encoding="utf-8"))
+
     payload = promote(
         candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
-        padi=padi, padi_departures=padi_departures,
+        padi=padi, padi_departures=padi_departures, cabins=cabins,
     )
 
     if trips:
@@ -807,6 +815,7 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--padi", default=Path("data/padi.json"), type=Path)
     promote_cmd.add_argument("--padi-departures",
                              default=Path("data/padi_departures.json"), type=Path)
+    promote_cmd.add_argument("--cabins", default=Path("data/cabins.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

@@ -280,6 +280,43 @@
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
+
+  /* ---------- the cabin ladder ---------- */
+
+  /* What a berth actually costs, rung by rung, and how many are left on each.
+     The advertised price is the bottom of this ladder rather than a figure of
+     its own: on all 864 sailings read, the two agree.
+
+     Positional in the payload -- a block is written once per departure and a
+     rung 2,982 times, so named keys there cost more than the numbers they
+     label. Named here instead, so nothing in this file counts array offsets.
+
+     Every price arrives already converted: normalisation is Python's job, and
+     the only arithmetic below is picking a minimum out of numbers it settled. */
+  var CABIN_NAMES = D.cabin_names || [];
+  var SELLERS = D.sellers || [];
+  var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2;
+  var RUNG_NAME = 0, RUNG_PRICE = 1, RUNG_LEFT = 2, RUNG_SUPP = 3;
+
+  /* Berths left at the advertised price, across every room selling at it.
+     `null` is "nobody stated a count", which is not the same as none left --
+     a sailing nobody could read has no answer, and 0 is an answer. */
+  function spotsLeft(d) {
+    var blocks = d.berths || [];
+    for (var n = 0; n < blocks.length; n++) {
+      if (blocks[n][BLOCK_SPOTS] != null) return blocks[n][BLOCK_SPOTS];
+    }
+    return null;
+  }
+
+  /* The cheapest rung anyone can still book. A minimum over prices Python
+     already converted -- not a second opinion about what a trip costs. */
+  function cheapestOnSale(block) {
+    var open = (block[BLOCK_CABINS] || []).filter(function (c) { return c[RUNG_LEFT]; });
+    if (!open.length) return null;
+    return Math.min.apply(null, open.map(function (c) { return c[RUNG_PRICE]; }));
+  }
+
   /* ---------- derived facets ---------- */
 
   /* Trip titles end with their ports — "North & Tiran (Hurghada - Hurghada)" —
@@ -528,15 +565,42 @@
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
        can buy at the top of the list. */
-    { k: "availability", t: "Places",
+    /* How many berths are left at the price on the row, and -- on hover or
+       click -- the whole ladder that price is the bottom of.
+
+       This column used to print the operator's adjective: available, few left,
+       sold out. The booking page states a number, so the number is what it
+       says now. The adjective survives only where there is no number to print.
+
+       Sorted on the count rather than on the old three-way code. A column of
+       figures whose header sorted them into "limited, available, sold out"
+       would be a trap laid for the first person to click it. Unknown sorts
+       last: nobody looked is not the same as none left, and it must not
+       collide with zero. */
+    { k: "availability", t: "Places", cls: "places",
       v: function (d) {
-        return d.availability === "sold_out" ? 2 : d.availability === "limited" ? 0 : 1;
+        var spots = spotsLeft(d);
+        if (spots != null) return spots;
+        if (d.availability === "sold_out") return 0;
+        return Infinity;
       },
       show: function (d) {
-        if (d.availability === "sold_out") return '<span class="pill gone">sold out</span>';
-        if (d.availability === "limited") return '<span class="pill few">few left</span>';
-        if (d.availability === "available") return '<span class="pill open">available</span>';
-        return '<span class="dim">—</span>';
+        var spots = spotsLeft(d);
+        if (spots == null) {
+          /* No ladder read for this sailing. The operator's own word is all
+             there is, and it is printed as the weaker statement it is. */
+          if (d.availability === "sold_out") return '<span class="pill gone">sold out</span>';
+          if (d.availability === "limited") return '<span class="pill few">few left</span>';
+          if (d.availability === "available") return '<span class="pill open">available</span>';
+          return '<span class="dim">—</span>';
+        }
+        var tone = spots === 0 ? "none" : spots <= 3 ? "low" : "many";
+        var label = spots === 0 ? "at this price" : spots === 1 ? "place" : "places";
+        return '<button class="berths" type="button" data-berths="' + esc(d.id) +
+          '" aria-expanded="false" aria-haspopup="dialog">' +
+          '<span class="n ' + tone + '">' + spots + "</span>" +
+          '<span class="lbl">' + label + "</span>" +
+          '<span class="caret" aria-hidden="true">▾</span></button>';
       } },
     /* Who else sells this sailing, and whether they agree about the price.
      *
@@ -1300,6 +1364,234 @@
     else state.marked.add(id);
     draw(true);
   });
+
+  /* ---------- the ladder, on hover ---------- */
+
+  /* Hover to peek, click to pin, Escape to close, and nothing on the page
+     moves. The expanding row this replaces pushed every row below it down,
+     which is a poor trade for a panel most visitors open to read one number.
+
+     Both gestures, not either. Hover alone does not exist on a phone; click
+     alone makes a reader hold still for something they wanted to glance at. */
+  var pop = document.getElementById("berths");
+  var byId = {};
+  D.departures.forEach(function (d) { byId[d.id] = d; });
+  var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
+
+  function ladderRows(block) {
+    var cheapest = Math.min.apply(null, block[BLOCK_CABINS].map(function (c) {
+      return c[RUNG_PRICE];
+    }));
+    return block[BLOCK_CABINS].map(function (c) {
+      var full = c[RUNG_LEFT] === 0;
+      /* The rung the row's own price came from, marked so the ladder always
+         says which one you were looking at -- including when it is the one
+         that has sold out. */
+      var here = c[RUNG_PRICE] === cheapest;
+      var left = c[RUNG_LEFT] == null
+        ? '<span class="dim">not stated</span>'
+        : full ? '<span class="full">full</span>' : c[RUNG_LEFT];
+      return '<tr class="' + (full ? "out" : "") + (here ? " here" : "") + '">' +
+        "<td>" + esc(CABIN_NAMES[c[RUNG_NAME]] || "Cabin") + "</td>" +
+        '<td class="num">' + eur(c[RUNG_PRICE]) + "</td>" +
+        '<td class="num">' + left + "</td></tr>";
+    }).join("");
+  }
+
+  function ladderBody(d, block) {
+    var cabins = block[BLOCK_CABINS] || [];
+    var spots = block[BLOCK_SPOTS];
+    var sale = cheapestOnSale(block);
+    var advertised = Math.min.apply(null, cabins.map(function (c) { return c[RUNG_PRICE]; }));
+
+    var verdict;
+    if (sale === null) {
+      verdict = '<p class="verdict bad">Every cabin is full. Nothing on this ' +
+        "sailing is for sale.</p>";
+    } else if (sale > advertised) {
+      /* The strongest thing the ladder catches: a price on the row that
+         nobody can buy. Ten sailings do this, and burying it would waste the
+         whole exercise. */
+      verdict = '<p class="verdict bad">The ' + eur(advertised) +
+        " berth is gone. The cheapest you can book is <b>" + eur(sale) + "</b> — " +
+        Math.round((sale / advertised - 1) * 100) + "% more.</p>";
+    } else {
+      var at = cabins.filter(function (c) { return c[RUNG_PRICE] === advertised; });
+      verdict = '<p class="verdict"><b>' + spots +
+        (spots === 1 ? " place" : " places") + "</b> left at " + eur(advertised) +
+        (at.length > 1 ? ", across " + at.length + " rooms sold at that price" : "") +
+        ".</p>";
+    }
+
+    /* One cabin type is not a ladder. Drawing a one-row table would dress a
+       flat price up as a range; 39 of 864 sailings sell exactly one rung. */
+    var body;
+    if (cabins.length === 1) {
+      body = '<p class="single">This boat sells <b>one cabin type</b> — ' +
+        esc(CABIN_NAMES[cabins[0][RUNG_NAME]] || "Cabin") + " at " +
+        eur(cabins[0][RUNG_PRICE]) + " a head. There is no ladder to climb: " +
+        (cabins[0][RUNG_LEFT] ? "every berth on board is this price."
+                              : "and it is full.") + "</p>";
+    } else {
+      body = '<table class="cabins"><thead><tr><th>Cabin</th>' +
+        '<th class="num">Per person</th><th class="num">Left</th></tr></thead>' +
+        "<tbody>" + ladderRows(block) + "</tbody></table>";
+    }
+
+    /* Checked rather than assumed: on all 864 sailings every cabin quotes the
+       same supplement, so it is one line rather than a column repeating one
+       number down the ladder. */
+    var supp = cabins[0][RUNG_SUPP];
+    var solo = supp == null
+      ? '<p class="single">This vessel states <b>no single-occupancy ' +
+        "supplement</b>, so what a cabin to yourself costs is unknown.</p>"
+      : '<p class="single">A cabin to yourself: <b>+' + supp + "%</b>" +
+        (supp >= 100 ? " — double the price above." : ".") + "</p>";
+
+    var seller = SELLERS[block[BLOCK_SELLER]] || "the seller";
+    return verdict + body + solo +
+      '<p class="pnote">Places left are ' + esc(seller) + "&rsquo;s own claim on " +
+      "its booking page" + (D.meta.berths_read ? ", read " + esc(D.meta.berths_read) : "") +
+      " — not a verified count, and the most perishable figure on this page. " +
+      "Prices are per person sharing.</p>";
+  }
+
+  function fill(d) {
+    var blocks = (d.berths || []).filter(function (b) { return (b[BLOCK_CABINS] || []).length; });
+    var head = '<p class="pwho">' + esc(boatOf(d)) + " &middot; " +
+      shortDate(d.start) + " &middot; " + d.nights + " nights</p>";
+    if (!blocks.length) { pop.innerHTML = head; return; }
+    /* One section per seller. Only liveaboard.com fills one today; PADI sells
+       601 of these same sailings, and a loop costs nothing against the day it
+       does (#92). */
+    pop.innerHTML = head + blocks.map(function (block) {
+      return (blocks.length > 1
+        ? '<p class="pseller">' + esc(SELLERS[block[BLOCK_SELLER]] || "") + "</p>"
+        : "") + ladderBody(d, block);
+    }).join("");
+  }
+
+  function boatOf(d) {
+    var itin = D.itineraries[d.itinerary_id];
+    return itin ? itin.boat : "";
+  }
+
+  /* Positioned against the button rather than nested under it, so the table's
+     own horizontal scroll cannot clip the panel. Flips above where there is no
+     room below, and is clamped to the viewport on both axes. */
+  function place(trigger) {
+    var box = trigger.getBoundingClientRect();
+    pop.hidden = false;
+    pop.style.visibility = "hidden";
+    var w = pop.offsetWidth, h = pop.offsetHeight, pad = 8;
+    var left = Math.min(Math.max(pad, box.left), window.innerWidth - w - pad);
+    var below = window.innerHeight - box.bottom;
+    var top = below > h + pad || below > box.top ? box.bottom + 4 : box.top - h - 4;
+    pop.style.left = Math.round(left) + "px";
+    pop.style.top = Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
+    pop.style.visibility = "";
+  }
+
+  function openBerths(trigger) {
+    var d = byId[trigger.dataset.berths];
+    if (!d) return;
+    fill(d);
+    place(trigger);
+    trigger.setAttribute("aria-expanded", "true");
+  }
+
+  function shutBerths() {
+    pop.hidden = true;
+    var open = document.querySelector('.berths[aria-expanded="true"]');
+    if (open) open.setAttribute("aria-expanded", "false");
+    held = null;
+    peeked = null;
+  }
+
+  var body = document.getElementById("body");
+
+  body.addEventListener("pointerover", function (event) {
+    var trigger = event.target.closest(".berths");
+    if (!trigger || held || trigger === peeked) return;
+    clearTimeout(shutTimer);
+    clearTimeout(openTimer);
+    /* A beat before opening, so running the pointer down the column does not
+       flash a panel open on every row it crosses. */
+    openTimer = setTimeout(function () { peeked = trigger; openBerths(trigger); }, 120);
+  });
+
+  body.addEventListener("pointerout", function (event) {
+    if (held || !event.target.closest(".berths")) return;
+    clearTimeout(openTimer);
+    shutTimer = setTimeout(shutBerths, 160);
+  });
+
+  /* Staying open while the pointer is inside it means a six-rung ladder can be
+     read without pinning it first. */
+  pop.addEventListener("pointerenter", function () { clearTimeout(shutTimer); });
+  pop.addEventListener("pointerleave", function () {
+    if (!held) shutTimer = setTimeout(shutBerths, 160);
+  });
+
+  body.addEventListener("click", function (event) {
+    var trigger = event.target.closest(".berths");
+    if (!trigger) return;
+    clearTimeout(openTimer);
+    clearTimeout(shutTimer);
+    var again = held === trigger;
+    shutBerths();
+    if (again) return;
+    held = trigger;
+    openBerths(trigger);
+  });
+
+  /* Tabbing to the cell opens it too: the panel is the column's content, not
+     a reward for owning a mouse. */
+  body.addEventListener("focusin", function (event) {
+    var trigger = event.target.closest(".berths");
+    if (!trigger || held) return;
+    /* Escape returns focus to the button it dismissed, which lands right back
+       here -- so without this the panel reopened the instant it closed and
+       Escape did nothing at all. Cleared as soon as focus reaches any other
+       trigger, so dismissing one cell does not mute the next. */
+    if (trigger === dismissed) return;
+    dismissed = null;
+    peeked = trigger;
+    openBerths(trigger);
+  });
+
+  /* Leaving the cell forgets that it was dismissed, so tabbing away and back
+     opens it again. Without this, one Escape muted that cell for good. */
+  body.addEventListener("focusout", function (event) {
+    if (dismissed && event.target === dismissed) dismissed = null;
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape" || pop.hidden) return;
+    var trigger = held || peeked;
+    shutBerths();
+    if (trigger && document.contains(trigger)) {
+      dismissed = trigger;
+      trigger.focus();
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (held && !event.target.closest(".berths") && !event.target.closest("#berths")) {
+      shutBerths();
+    }
+  });
+
+  /* Fixed positioning is relative to the viewport, so the panel has to be
+     moved with whatever scrolled -- the page or the table. Closing on resize
+     rather than chasing it: a reflow can move the button out from under it. */
+  window.addEventListener("scroll", function () {
+    var trigger = held || peeked;
+    if (pop.hidden || !trigger) return;
+    if (!document.contains(trigger)) { shutBerths(); return; }
+    place(trigger);
+  }, true);
+  window.addEventListener("resize", shutBerths);
 
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {
     return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default + '">' +

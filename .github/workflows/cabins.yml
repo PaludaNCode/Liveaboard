@@ -25,6 +25,14 @@ name: Read cabin prices and berths left
 # first, and a refusal there is the answer rather than an obstacle.
 
 on:
+  # An hour after the daily refresh, which runs at 04:15 and takes well under
+  # that. Ordering is load-bearing rather than tidy: the row's berth price and
+  # the ladder behind it come from two passes, and the source re-prices
+  # overnight. Read a day apart, all 864 ladders sat 0.0–0.6% above their own
+  # row — small, but it is the panel disagreeing with the number that opened
+  # it, on a site about prices being what they say they are.
+  schedule:
+    - cron: "20 5 * * *"
   workflow_dispatch:
     inputs:
       limit:
@@ -54,6 +62,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
+    # Resolved once, because `inputs` is null on a scheduled run and every
+    # `inputs.limit || 3` below would quietly become "fetch three sailings" --
+    # a nightly job that reads 3 of 890 and commits the other 887 unchanged,
+    # looking exactly like a healthy run. The schedule means every departure.
+    env:
+      LIMIT: ${{ github.event_name == 'schedule' && '0' || (inputs.limit || '3') }}
+      TOURS: ${{ github.event_name == 'schedule' && '' || inputs.tours }}
+      DELAY: ${{ inputs.delay || '2' }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -71,12 +88,13 @@ jobs:
       - name: Read what each departure costs, cabin by cabin
         run: |
           echo '```' >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$TOURS" ]; then scope=(--tours "$TOURS"); else scope=(--limit "$LIMIT"); fi
           python3 tools/fetch_cabins.py \
             --archive data/archive.json \
             --out data/cabins.json \
             --snapshots data/snapshots \
-            --delay "${{ inputs.delay || 2 }}" \
-            ${{ inputs.tours && format('--tours {0}', inputs.tours) || format('--limit {0}', inputs.limit || 3) }} \
+            --delay "$DELAY" \
+            "${scope[@]}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
@@ -92,7 +110,7 @@ jobs:
       # a full run needs diagnosing, the way to do it is to re-read the few
       # departures that failed, which the run itself names.
       - name: Keep the raw pages as evidence
-        if: always() && (inputs.tours != '' || inputs.limit != '0')
+        if: always() && (env.TOURS != '' || env.LIMIT != '0')
         uses: actions/upload-artifact@v4
         with:
           name: booking-snapshots-${{ github.run_id }}
@@ -100,14 +118,23 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
-      # No promote and no build: nothing in the dataset reads this book yet.
-      # Committing it is what makes the fleet-wide shape readable before any
-      # decision about how the page should show it.
+      # The dataset reads this book now, and CI compares the committed dataset
+      # against what promote makes of the committed inputs. So a run that
+      # writes cabins.json and stops leaves the two disagreeing — a red build,
+      # and before that a page one pass behind its own data.
+      #
+      # Promotion is offline and takes seconds; the fetch above took thirty
+      # minutes. There is no argument for skipping it.
+      - name: Rebuild the dataset and the page
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli promote
+          PYTHONPATH=src python3 -m liveaboard.cli build
+
       - name: Commit the cabin book
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/cabins.json
+          git add -A data/cabins.json data/egypt-2027.json site/index.html
           if git diff --cached --quiet; then
             echo "nothing read; nothing to commit"
             exit 0

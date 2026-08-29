@@ -363,6 +363,32 @@ class Departure:
     zero, and not the operator's price copied across.
     """
     padi_provenance: Provenance | None = None
+    berths: list[dict[str, Any]] = field(default_factory=list)
+    """What is left on this sailing and at what price, one block per seller.
+
+    A list because a sailing has more than one seller: liveaboard.com fills a
+    block today and PADI sells 601 of the same departures ([#92]). Carried
+    through in the shape ``promote`` wrote it — the ladder is normalised and
+    converted there, and re-deriving it here would be a second place for the
+    two to disagree.
+
+    Empty where the booking page could not be read, which is not the same as a
+    sailing with no cabins: 25 of 889 answered nothing and are absent rather
+    than recorded as having none.
+    """
+
+    @property
+    def spots_at_advertised(self) -> int | None:
+        """Berths left at the price on the row, as the seller states it.
+
+        Across every room selling at that price — a boat can split them, and
+        233 of 864 sailings do. ``None`` where no seller stated a count;
+        ``0`` is an answer and means nothing is on sale at that price.
+        """
+        for block in self.berths:
+            if block.get("spots") is not None:
+                return int(block["spots"])
+        return None
 
     @property
     def padi_difference(self) -> Money | None:
@@ -403,4 +429,5 @@ class Departure:
                         if payload.get("padi_price") else None),
             padi_provenance=(Provenance.from_dict(payload["padi_provenance"])
                              if payload.get("padi_provenance") else None),
+            berths=list(payload.get("berths") or []),
         )
