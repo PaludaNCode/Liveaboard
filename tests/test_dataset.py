@@ -1069,3 +1069,54 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
         }
         self.assertEqual(sorted(watched - names), [],
                          "pages.yml watches workflows that no longer exist")
+
+
+class TestTheMethodPanelCanBeClosedFromAnywhere(unittest.TestCase):
+    """The footer scrolls inside itself, so its own heading must stay reachable.
+
+    `.site-footer` is `max-height:52vh; overflow:auto` — a scroll box, not a
+    page section. Without a pinned summary the only control that closes it
+    scrolls away with the first paragraph, and shutting it again means
+    scrolling back through everything you just read.
+
+    Both halves are asserted because either alone is useless: the sticky rule
+    without an opaque background has the text sliding through the heading, and
+    the sticky heading without the toggle handler leaves the panel holding a
+    stale scroll position and the reader in blank space under the table.
+    """
+
+    CSS = Path(__file__).resolve().parents[1] / "templates" / "style.css"
+    APP = Path(__file__).resolve().parents[1] / "templates" / "app.js"
+
+    def summary_rule(self) -> str:
+        css = self.CSS.read_text(encoding="utf-8")
+        match = re.search(r"\.site-footer > summary \{(.*?)\}", css, re.S)
+        self.assertIsNotNone(match, "the footer summary has no rule of its own")
+        return match.group(1)
+
+    def test_the_panel_is_its_own_scroll_box(self):
+        """The premise. If this stops being true the sticky heading is
+        pointless and the toggle handler is resetting nothing."""
+        css = self.CSS.read_text(encoding="utf-8")
+        rule = re.search(r"\.site-footer \{(.*?)\}", css, re.S)
+        self.assertIsNotNone(rule)
+        self.assertIn("overflow:auto", rule.group(1).replace(" ", ""))
+
+    def test_the_heading_is_pinned(self):
+        rule = self.summary_rule().replace(" ", "")
+        self.assertIn("position:sticky", rule)
+        self.assertIn("top:0", rule)
+
+    def test_the_pinned_heading_is_opaque(self):
+        """A sticky element without its own background has the content
+        scrolling visibly through it — the panel's background is on the box
+        behind, not on the heading."""
+        self.assertIn("background", self.summary_rule())
+
+    def test_closing_it_resets_the_panel_and_returns_to_the_heading(self):
+        source = self.APP.read_text(encoding="utf-8")
+        self.assertIn('.site-footer', source, "app.js never finds the panel")
+        self.assertIn("scrollTop = 0", source,
+                      "closing leaves a stale scroll position inside the panel")
+        self.assertIn("scrollIntoView", source,
+                      "closing can leave the reader in blank space below the table")

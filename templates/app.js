@@ -1749,6 +1749,28 @@
 
   labelFilters();
 
+  /* Closing the method panel puts the reader back at its heading.
+   *
+   * The panel scrolls inside itself, and its summary is pinned to the top of
+   * that box, so it can be shut from wherever you got to. Two things are then
+   * wrong if nothing is done. The box keeps the scroll position it had, so
+   * reopening it drops you back into the middle of a paragraph you had
+   * finished with. And the page may be scrolled to where the panel filled the
+   * screen a moment ago, which after it collapses to one line is blank space
+   * under the table.
+   *
+   * `nearest` rather than a jump to the top: when the heading is already on
+   * screen -- which it is whenever the panel was opened without scrolling --
+   * the right amount of movement is none. */
+  var method = document.querySelector(".site-footer");
+  if (method) {
+    method.addEventListener("toggle", function () {
+      if (method.open) return;
+      method.scrollTop = 0;
+      method.scrollIntoView({ block: "nearest" });
+    });
+  }
+
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
     /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are

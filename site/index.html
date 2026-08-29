@@ -467,13 +467,25 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
   border-top:1px solid var(--rule); background:var(--panel); color:var(--ink-dim);
   max-height:52vh; overflow:auto;
 }
+/* Pinned to the top of the panel's own scroll box, which is what the box
+   already is: 52vh with overflow:auto. Without this the only control that
+   closes the section scrolls away with the first paragraph, so shutting it
+   again means scrolling back through everything you just read.
+
+   It needs its own opaque background: the panel's is on the box behind, and a
+   sticky element without one has the content sliding through it. */
 .site-footer > summary {
+  position:sticky; top:0; z-index:2; background:var(--panel);
   padding:9px 18px; cursor:pointer; list-style:none;
   font-family:var(--font-narrow);
   font-size:11px; text-transform:uppercase; letter-spacing:.09em;
   color:var(--ink-faint); font-weight:600;
   display:flex; gap:14px; align-items:baseline;
 }
+/* A rule under it only while there is something to be above. Closed, the
+   summary is the bottom edge of the page and a second line there is one
+   border too many. */
+.site-footer[open] > summary { border-bottom:1px solid var(--rule); }
 .site-footer > summary::-webkit-details-marker { display:none; }
 .site-footer > summary::before { content:"▸"; color:var(--accent); }
 .site-footer[open] > summary::before { content:"▾"; }
@@ -2934,6 +2946,28 @@ fees (14)
   });
 
   labelFilters();
+
+  /* Closing the method panel puts the reader back at its heading.
+   *
+   * The panel scrolls inside itself, and its summary is pinned to the top of
+   * that box, so it can be shut from wherever you got to. Two things are then
+   * wrong if nothing is done. The box keeps the scroll position it had, so
+   * reopening it drops you back into the middle of a paragraph you had
+   * finished with. And the page may be scrolled to where the panel filled the
+   * screen a moment ago, which after it collapses to one line is blank space
+   * under the table.
+   *
+   * `nearest` rather than a jump to the top: when the heading is already on
+   * screen -- which it is whenever the panel was opened without scrolling --
+   * the right amount of movement is none. */
+  var method = document.querySelector(".site-footer");
+  if (method) {
+    method.addEventListener("toggle", function () {
+      if (method.open) return;
+      method.scrollTop = 0;
+      method.scrollIntoView({ block: "nearest" });
+    });
+  }
 
   document.getElementById("metaLine").textContent =
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
