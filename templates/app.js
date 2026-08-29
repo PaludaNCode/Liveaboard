@@ -15,6 +15,21 @@
      liveaboard/taxonomy.py — change one and you must change the other. */
   var DEFAULT_ON_TIERS = { base: true, mandatory: true, customary: true };
 
+  /* Below this, the two sellers are quoting the same price and the column says
+     so rather than printing a difference.
+
+     Five euro, and the data picked the number rather than taste. Under one
+     euro, 317 of the 601 matched sailings read "same"; under two, 526 do. The
+     209 rows in that gap are almost all the same figure -- €1.02 -- which is
+     not a price difference at all but the rounding on a dollar price converted
+     to euro, and printing it as "−€1" invited a reader to compare two boats on
+     the arithmetic of an exchange rate. Widening to five adds ten more rows on
+     top of that and no further cluster: 536 of 601 at €5, and still 536 at €10.
+     So the threshold sits past the noise and well short of anything a diver
+     would choose a boat over, and it is one number here rather than two that
+     can drift -- the column and the sentence in the expanded row read it. */
+  var PADI_SAME = 5;
+
   var euro = new Intl.NumberFormat("en-IE", {
     style: "currency", currency: D.meta.currency,
     minimumFractionDigits: 0, maximumFractionDigits: 0
@@ -350,7 +365,7 @@
       v: function (d) { return d.padi_delta == null ? Infinity : d.padi_delta; },
       show: function (d) {
         if (d.padi_delta == null) return '<span class="dim">—</span>';
-        if (Math.abs(d.padi_delta) < 1) return '<span class="dim">same</span>';
+        if (Math.abs(d.padi_delta) < PADI_SAME) return '<span class="dim">same</span>';
         var sign = d.padi_delta < 0 ? "−" : "+";
         return '<span class="' + (d.padi_delta < 0 ? "cheaper" : "dearer") + '">' +
           sign + "€" + Math.round(Math.abs(d.padi_delta)).toLocaleString("en-IE") +
@@ -706,15 +721,21 @@
     var padi = "";
     if (row.d.padi != null) {
       var diff = row.d.padi_delta;
-      var same = Math.abs(diff) < 1;
+      var same = Math.abs(diff) < PADI_SAME;
+      /* Two sentences rather than one with a hole in it. Built as a single
+         string it read "the same berth price than the berth price above"
+         whenever the two agreed -- broken on the 53% of matched rows that
+         already said "same", and about to be broken on 89% of them. The
+         agreeing branch also has to hedge, because agreement is now agreement
+         to within five euro and not to the cent. */
       padi = "PADI Travel advertises this sailing at €" +
-        Math.round(row.d.padi).toLocaleString("en-IE") + " — " +
-        (same ? "the same berth price"
-              : "€" + Math.round(Math.abs(diff)).toLocaleString("en-IE") + " " +
-                (diff < 0 ? "less" : "more")) +
-        " than the berth price above. PADI lists no fees, so what its figure " +
-        "leaves out is unknown; the total on this row is not the same kind of " +
-        "number.";
+        Math.round(row.d.padi).toLocaleString("en-IE") +
+        (same
+          ? " — the same berth price as the one above, give or take a few euro."
+          : " — €" + Math.round(Math.abs(diff)).toLocaleString("en-IE") + " " +
+            (diff < 0 ? "less" : "more") + " than the berth price above.") +
+        " PADI lists no fees, so what its figure leaves out is unknown; the " +
+        "total on this row is not the same kind of number.";
     }
 
     /* The bar leads the panel rather than following the bill. Whether a diver

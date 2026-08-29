@@ -826,3 +826,21 @@ class TestPayloadIsRead(unittest.TestCase):
                       "the footer explains every column but this one")
         self.assertIn("Entry requirements", footer,
                       "the footer never says where the entry bar comes from")
+
+    def test_the_same_price_threshold_is_one_number(self) -> None:
+        """Two sellers agreeing is decided in two places -- the column and the
+        sentence in the expanded row -- and they have to agree with each other.
+
+        Written as a literal in both, they read the same only until someone
+        widens one of them, and the failure is silent: the table says the
+        prices are the same while the panel underneath prints a difference.
+        """
+        source = self.app()
+        self.assertIn("var PADI_SAME = ", source, "the threshold has no name")
+        for pattern in (r"Math\.abs\(d\.padi_delta\)\s*<\s*\d",
+                        r"Math\.abs\(diff\)\s*<\s*\d"):
+            self.assertIsNone(
+                re.search(pattern, source),
+                "a bare number decides whether two prices are the same; "
+                "use PADI_SAME so the column and the panel cannot disagree",
+            )
