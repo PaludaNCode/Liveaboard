@@ -597,3 +597,40 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
             stray = sorted(u for u in urls
                            if "travel.padi.com" in u and f"/{slug}/" not in u)
             self.assertEqual(stray, [], f"{boat} carries another vessel's PADI link: {stray}")
+
+
+class TestTheSoleSellerIsNamedInSource(unittest.TestCase):
+    """A PADI-only row's one link points at PADI, so it must say so.
+
+    The Sellers column was dropped and Source became where both sellers are
+    reached from. It labels the first link "liveaboard" when PADI also sells
+    the date and "listing" when it does not -- and "does not" is true of a
+    PADI-only row for the opposite reason: there is no second seller because
+    the *first* one is missing. Left alone, 230 rows would offer one link named
+    for the site it does not come from, in the one column whose job is to say
+    where a number came from.
+    """
+
+    APP = ROOT_APP = None
+
+    def source_column(self) -> str:
+        from pathlib import Path
+        app = Path(__file__).resolve().parent.parent / "templates" / "app.js"
+        text = app.read_text(encoding="utf-8")
+        start = text.index('{ k: "source"')
+        return text[start:text.index("\n  ];", start)]
+
+    def test_the_label_branches_on_padi_only(self) -> None:
+        self.assertIn("d.padi_only ?", self.source_column())
+
+    def test_a_padi_only_row_carries_a_padi_url(self) -> None:
+        """The label is only right because the url is. Both come from the same
+        provenance, so this fails if either moves."""
+        payload = build_payload(Dataset.from_dict(
+            promote(candidate([departure()]), season=SEASON,
+                    padi=VESSEL_BOOK, padi_departures=VESSEL_SAILINGS)))
+        row = next(d for d in payload["departures"] if d.get("padi_only"))
+        self.assertTrue(row["booking_url"].startswith("https://travel.padi.com/"),
+                        row["booking_url"])
+        self.assertNotIn("padi", {k for k in row if k == "padi"},
+                         "a sole-seller row must not also claim a second price")

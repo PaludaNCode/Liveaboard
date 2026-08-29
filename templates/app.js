@@ -636,52 +636,6 @@
 
        Sorted by the size of the disagreement so the widest come to the top,
        which is the one thing this column is for. */
-    { k: "padi", t: "Sellers",
-      hint: "Whether PADI Travel sells this same sailing, and which end of the "
-          + "price span is whose -- berth plus the fees each seller discloses. "
-          + "Both totals carry the same on-board extras, because nitrox and "
-          + "rental gear are the vessel's charge whoever sold the berth. "
-          + "\u201cberth only\u201d means PADI prices the date but does not "
-          + "publish a complete fee book for the trip, so no second total is "
-          + "claimed. \u201cPADI only\u201d means liveaboard.com does not list "
-          + "the sailing at all, so there is one seller and one bill. A dash "
-          + "means PADI does not sell that date, which is evidence of nothing.",
-      v: function (d, i, m, row) {
-        var b = best(row);
-        /* Rows with nothing to compare sort last rather than as zero: no
-           second quote is not agreement. A single-seller row sorts with them
-           for the same reason, whichever seller it is. */
-        return b && b.both ? -b.varies : Infinity;
-      },
-      show: function (d, i, m, row) {
-        var b = best(row);
-        if (d.padi_only) {
-          return '<span class="dim" title="liveaboard.com does not list this ' +
-            'sailing, so PADI Travel is the only seller and there is one bill ' +
-            'rather than two. The berth price is PADI\u2019s; the fees are the ' +
-            'vessel\u2019s own, which it bills on board whoever sold the ' +
-            'berth.">PADI only</span>';
-        }
-        if (b && b.both) {
-          if (b.cheapest === "same") return '<span class="dim">both, same</span>';
-          /* Named, not graded. Both hues in `.cheaper`/`.dearer` mean good and
-             bad elsewhere on this page, and neither applies: the money columns
-             print both bills, so there is no saving being missed and no seller
-             being beaten. What is left to say is which end of that span is
-             whose, which is the one thing the span itself cannot show. */
-          return (b.cheapest === "padi" ? "PADI" : "here") +
-            '<span class="dim"> low, by €' +
-            Math.round(b.varies).toLocaleString("en-IE") + "</span>";
-        }
-        if (d.padi != null) {
-          return '<span class="dim" title="PADI Travel advertises this berth ' +
-            'at €' + Math.round(d.padi).toLocaleString("en-IE") + ' and does ' +
-            'not publish a complete fee book for the trip, so its total is ' +
-            'not known. A berth price is not comparable to a total.">' +
-            "berth only</span>";
-        }
-        return '<span class="dim">—</span>';
-      } },
     { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
       show: function (d) {
         var s = disclosure(d);
@@ -700,13 +654,40 @@
      * what the source published beside that sailing's price. That is the one
      * to follow: somebody clicking through from a row is checking that row.
      * The vessel page stays as the fallback for a departure that has none. */
+    /* Both sellers, where both sell the sailing.
+     *
+     * The money columns already price this row against whichever of them is
+     * cheaper, so a reader who wants to check the figure needs the page it
+     * came from -- and on 601 rows that is two pages, not one. Named rather
+     * than numbered: "listing" alone was fine while there was one, and would
+     * now be the more important half of an ambiguity.
+     *
+     * PADI's link is per boat and printed only where PADI prices *this date*.
+     * A vessel having a PADI page says nothing about whether a given sailing
+     * is on its calendar, and a link landing on a calendar without the trip on
+     * it is worse than no link. */
     { k: "source", t: "Source",
       v: function (d, i) { return d.booking_url || i.source_url || ""; },
       show: function (d, i) {
+        var links = [];
         var url = d.booking_url || i.source_url;
-        return url
-          ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">listing ↗</a>'
-          : '<span class="dim">—</span>';
+        var padi = d.padi != null ? (D.padi_urls || {})[i.boat_id] : null;
+        if (url) {
+          /* Named, not "listing", on the rows where the one link is not the
+             usual source. 230 sailings are sold only by PADI -- liveaboard.com
+             does not list the date, and on 22 boats does not sell berths at
+             all -- so their single url points at travel.padi.com. Calling that
+             "listing" is the name a reader would give the *other* site, which
+             is the one thing this column must not get wrong now that it is
+             where both sellers are reached from. */
+          links.push('<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
+            (d.padi_only ? "PADI" : padi ? "liveaboard" : "listing") + " ↗</a>");
+        }
+        if (padi) {
+          links.push('<a href="' + esc(padi) + '" target="_blank" rel="noopener">' +
+            "PADI ↗</a>");
+        }
+        return links.length ? links.join(" ") : '<span class="dim">—</span>';
       } }
   ];
 
@@ -726,7 +707,7 @@
   var ORDER = [
     "start", "end", "boat", "guests",
     "from", "to", "trip", "sites",
-    "base", "nitrox", "later", "total", "perdive", "padi",
+    "base", "nitrox", "later", "total", "perdive",
     "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, and as much of the same order as 390px holds.
@@ -759,7 +740,7 @@
        Advertised, Nitrox, Mandatory fees -- rather than in a third order
        invented for this width. Scrolling right reads the bill; not scrolling
        still shows the answer. */
-    "total", "base", "nitrox", "later", "perdive", "padi",
+    "total", "base", "nitrox", "later", "perdive",
     "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -778,7 +759,7 @@
      silent -- the row still renders, it just does not answer the question. */
   var TINY_ORDER = [
     "start", "boat",
-    "total", "base", "nitrox", "later", "perdive", "padi",
+    "total", "base", "nitrox", "later", "perdive",
     "guests", "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -796,7 +777,7 @@
      Total, in that order still. */
   var COMPACT_ORDER = [
     "start", "end", "boat",
-    "base", "nitrox", "later", "total", "perdive", "padi",
+    "base", "nitrox", "later", "total", "perdive",
     "guests", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -1487,18 +1468,21 @@
       : '<p class="single">A cabin to yourself: <b>+' + supp + "%</b>" +
         (supp >= 100 ? " — double the price above." : ".") + "</p>";
 
-    var seller = SELLERS[block[BLOCK_SELLER]] || "the seller";
-    return verdict + body + solo +
-      '<p class="pnote">Places left are ' + esc(seller) + "&rsquo;s own claim on " +
-      "its booking page" + (D.meta.berths_read ? ", read " + esc(D.meta.berths_read) : "") +
-      " — not a verified count, and the most perishable figure on this page. " +
-      "Prices are per person sharing.</p>";
+    return verdict + body + solo;
   }
 
   function fill(d) {
     var blocks = (d.berths || []).filter(function (b) { return (b[BLOCK_CABINS] || []).length; });
+    /* The read date, and nothing else by way of explanation -- what a count is
+       and how perishable it is belongs in the footer with the rest of the
+       method, not in a panel opened to glance at a number. But the date itself
+       is not commentary: it is the difference between "two left" and "two left
+       last Tuesday", and it travels with the figure or not at all. */
     var head = '<p class="pwho">' + esc(boatOf(d)) + " &middot; " +
-      shortDate(d.start) + " &middot; " + d.nights + " nights</p>";
+      shortDate(d.start) + " &middot; " + d.nights + " nights" +
+      (D.meta.berths_read
+        ? '<span class="pread">read ' + shortDate(D.meta.berths_read) + "</span>"
+        : "") + "</p>";
     if (!blocks.length) { pop.innerHTML = head; return; }
     /* One section per seller. Only liveaboard.com fills one today; PADI sells
        601 of these same sailings, and a loop costs nothing against the day it

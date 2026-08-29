@@ -811,23 +811,44 @@ class TestPayloadIsRead(unittest.TestCase):
         bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
         self.assertTrue(bars, "the seed itself states no entry bar to print")
 
-    def test_the_padi_column_explains_itself(self) -> None:
-        """The one column whose heading a visitor cannot interpret.
+    def test_the_second_seller_is_reachable_and_explained(self) -> None:
+        """A second seller prices these rows, so a reader can get to it.
 
-        Every other column is named for what it holds, and each has a section
-        in the footer. "Sellers" is one word for a second site pricing the same
-        berth; its cells say "berth only" and "—" and mean two quite different
-        things by them, and a reader has no way to work either out. So it
-        explains itself in the heading and in the footer, or this fails.
+        There is no Sellers column any more: it named which end of the price
+        span was whose, which the expanded row already says under each
+        seller's name. What a column cannot replace is the *link* — the money
+        columns can price a row on PADI's bill, and somebody checking that
+        figure needs the page it came from. So the Source column carries both
+        where both sell the sailing, and the footer says so.
+
+        The link is per boat and printed only where PADI prices that date: a
+        vessel having a PADI page says nothing about whether one sailing is on
+        its calendar.
         """
-        self.assertIn("hint:", self.app(), "no column carries an explanation")
+        source = self.app()
+        self.assertIn("padi_urls", source,
+                      "the page has no way to link the other seller")
+        self.assertIn("PADI ↗", source, "the Source column never names PADI")
+
         footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
         self.assertIn("<h3>Sellers</h3>", footer,
-                      "the footer explains every column but this one")
-        self.assertIn("berth only", footer,
-                      "the footer never says what an uncomparable row means")
+                      "the footer never explains the second seller")
+        self.assertIn("Source", footer,
+                      "the footer never says where the second seller is linked")
         self.assertIn("Entry requirements", footer,
                       "the footer never says where the entry bar comes from")
+
+    def test_no_column_is_left_unexplained_by_the_footer(self) -> None:
+        """Every column heading a visitor cannot read off its own name has a
+        footer section. Removing a column must take its explanation with it, or
+        the footer documents something nobody can find."""
+        footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        headings = set(re.findall(r"<h3>([^<]+)</h3>", footer))
+        source = self.app()
+        titles = set(re.findall(r'\bt: "([^"]+)"', source))
+        for heading in ("Places", "Disclosure", "Per dive"):
+            self.assertIn(heading, headings, f"the footer dropped {heading}")
+            self.assertIn(heading, titles, f"{heading} is documented but gone")
 
     def test_a_row_prints_one_seller_and_not_a_blend(self) -> None:
         """Advertised plus Mandatory fees is the Total, on every row.
@@ -983,3 +1004,68 @@ class TestBothSellersSpan(unittest.TestCase):
         pair = re.search(r"function sellerPair\(lo, hi\) \{(.*?)\n  \}", source, re.S)
         self.assertNotIn("Math.min", pair.group(1))
         self.assertNotIn("Math.max", pair.group(1))
+
+
+class TestEveryDataCommitReachesThePage(unittest.TestCase):
+    """A workflow that commits the published files must trigger the deploy.
+
+    GitHub deliberately does not start a workflow from a push made with the
+    default ``GITHUB_TOKEN``, so `pages.yml`'s `push` trigger never sees a
+    scheduled job's data commit. `workflow_run` is the only trigger that does,
+    and it names the workflows explicitly -- which means the list goes stale
+    every time one is added.
+
+    It fails silently and in the worst direction: the commit lands on main, the
+    repository says the site was updated, and the published page keeps serving
+    an older build. It has already happened once, to three refreshes in a row,
+    and again to three workflows at once. Hence a test rather than a comment.
+    """
+
+    WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
+    PUBLISHED = ("data", "site")
+
+    def commits_published_files(self, text: str) -> bool:
+        """Whether the workflow git-adds anything the page is built from."""
+        for line in re.findall(r"^\s*git add\s+(.*)$", text, re.M):
+            for path in re.findall(r"[\w./-]+", line):
+                if path.split("/")[0] in self.PUBLISHED:
+                    return True
+        return False
+
+    def test_the_deploy_watches_every_workflow_that_writes_the_site(self):
+        pages = (self.WORKFLOWS / "pages.yml").read_text(encoding="utf-8")
+        block = re.search(r"workflow_run:(.*?)^  \w", pages, re.S | re.M)
+        self.assertIsNotNone(block, "pages.yml has no workflow_run trigger")
+        watched = set(re.findall(r'"([^"]+)"', block.group(1)))
+
+        missing = []
+        for path in sorted(self.WORKFLOWS.glob("*.yml")):
+            if path.name == "pages.yml":
+                continue
+            text = path.read_text(encoding="utf-8")
+            if not self.commits_published_files(text):
+                continue
+            name = re.search(r"^name:\s*(.+)$", text, re.M)
+            self.assertIsNotNone(name, f"{path.name} has no name:")
+            if name.group(1).strip() not in watched:
+                missing.append(f"{name.group(1).strip()} ({path.name})")
+
+        self.assertEqual(
+            missing, [],
+            "these workflows commit data/ or site/ but do not trigger the "
+            "deploy, so their commits land on main and the published page "
+            f"keeps serving an older build: {missing}",
+        )
+
+    def test_the_watch_list_names_no_workflow_that_does_not_exist(self):
+        """The other direction: a renamed workflow leaves a dead entry that
+        watches nothing, which looks exactly like a watch that works."""
+        pages = (self.WORKFLOWS / "pages.yml").read_text(encoding="utf-8")
+        block = re.search(r"workflow_run:(.*?)^  \w", pages, re.S | re.M)
+        watched = set(re.findall(r'"([^"]+)"', block.group(1)))
+        names = {
+            re.search(r"^name:\s*(.+)$", p.read_text(encoding="utf-8"), re.M).group(1).strip()
+            for p in self.WORKFLOWS.glob("*.yml")
+        }
+        self.assertEqual(sorted(watched - names), [],
+                         "pages.yml watches workflows that no longer exist")
