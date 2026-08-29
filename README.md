@@ -117,7 +117,7 @@ src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   dataset, render, cli
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
                   itinerary, fees, gear, vessel   (the last three need a browser)
-templates/        index.html + style.css + app.js, inlined at build time
+templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, scrape_fees,
                   reparse_candidate, probe_*
 data/seed/        the seed dataset

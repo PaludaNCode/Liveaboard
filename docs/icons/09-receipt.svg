@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="A receipt whose torn edge is a wave"><style>.a{fill:#0d5c8c}.b{fill:#a44d0e}.c{fill:#5b6675}.p{fill:#f7f8fa}@media(prefers-color-scheme:dark){.a{fill:#63b3e3}.b{fill:#e8a86a}.c{fill:#9aa7b7}.p{fill:#0d1219}}</style>
+  <path class="a" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/>
+  <g class="p">
+    <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/>
+    <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/>
+    <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/>
+  </g>
+  <path class="b" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/>
+</svg>

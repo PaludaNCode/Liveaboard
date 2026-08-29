@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ten marks for the waterline</title>
+</head>
+<body>
+<style>
+/* The site's own tokens (templates/style.css), verbatim, so a candidate is
+   judged against the ground it will actually sit on. No webfont request: the
+   page it belongs to does not make one either. */
+:root{
+  --ground:#f7f8fa; --panel:#ffffff; --rule:#dde3ec; --rule-strong:#c3ccd9;
+  --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#66707c;
+  --accent:#0d5c8c; --accent-soft:#e4eef6; --later:#a44d0e;
+  --font-sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --font-narrow:"IBM Plex Sans Condensed","Avenir Next Condensed","Roboto Condensed","Liberation Sans Narrow","Arial Narrow",var(--font-sans);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
+  --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
+  --accent:#63b3e3; --accent-soft:#152a3a; --later:#e8a86a;
+}}
+:root[data-theme="dark"]{
+  --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
+  --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
+  --accent:#63b3e3; --accent-soft:#152a3a; --later:#e8a86a;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-sans);
+     font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:34px 20px 72px;display:flex;flex-direction:column;gap:28px}
+
+/* Masthead, in the shape of the site's own. */
+.masthead{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;justify-content:space-between;
+          border-bottom:2px solid var(--rule-strong);padding-bottom:20px}
+.masthead h1{margin:0 0 8px;font-size:25px;line-height:1.2;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.masthead p{margin:0;max-width:62ch;color:var(--ink-dim)}
+.masthead strong{color:var(--ink);font-weight:600}
+
+/* Three tests, not decoration: each one is a rule a candidate is failed on. */
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;
+       background:var(--rule);border:1px solid var(--rule)}
+.test{background:var(--panel);padding:13px 15px}
+.test b{display:block;font-family:var(--font-narrow);text-transform:uppercase;letter-spacing:.09em;
+        font-size:11px;color:var(--accent);margin-bottom:5px}
+.test span{color:var(--ink-dim);font-size:13px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--rule);display:flex;flex-direction:column;gap:12px;padding:15px}
+.card.picked{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.card.picked .chead h2{color:var(--accent)}
+.chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;border-bottom:1px solid var(--rule);padding-bottom:9px}
+.chead h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.005em}
+.num{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.claim{margin-left:auto;font-family:var(--font-narrow);text-transform:uppercase;letter-spacing:.07em;
+       font-size:11px;color:var(--later);text-align:right}
+
+/* Every preview names its own palette; the shipped SVG carries a
+   prefers-color-scheme block, so both tiles are the same file. */
+.light{--i-a:#0d5c8c;--i-b:#a44d0e;--i-c:#5b6675;--i-p:#ffffff;--i-rule:#c3ccd9;
+       background:#ffffff;color:#141a22}
+.dark{--i-a:#63b3e3;--i-b:#e8a86a;--i-c:#9aa7b7;--i-p:#131a23;--i-rule:#334154;
+      background:#131a23;color:#e6ecf3}
+
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.tile{display:flex;align-items:center;justify-content:center;padding:20px 0}
+.mark{display:inline-flex;width:var(--s);height:var(--s);flex:0 0 auto}
+.mark svg{width:100%;height:100%;display:block}
+
+.ladders{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.ladder{display:flex;align-items:flex-end;justify-content:center;gap:14px;padding:11px 8px}
+.rung{display:flex;flex-direction:column;align-items:center;gap:5px}
+.px{font-family:var(--font-mono);font-size:9px;opacity:.55;font-variant-numeric:tabular-nums}
+
+/* The only test that matters: the mark in a tab, at the size a tab gives it. */
+.tabbar{display:flex;gap:4px;padding:7px 7px 0;border:1px solid var(--rule);border-bottom:none;
+        align-items:flex-end;overflow:hidden}
+.tab{display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:6px 6px 0 0;
+     background:var(--panel);border:1px solid var(--rule);border-bottom:none;max-width:100%}
+.tabbar.light .tab{background:#f7f8fa;border-color:#dde3ec}
+.tab.ghost{flex:1;background:transparent;border-color:transparent}
+.tabtext{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#5b6675}
+
+.note{margin:0;color:var(--ink)}
+.risk{margin:0;color:var(--ink-dim);font-size:13px;border-left:2px solid var(--later);padding-left:10px}
+.rl{display:block;font-family:var(--font-narrow);text-transform:uppercase;letter-spacing:.08em;
+    font-size:10.5px;color:var(--later)}
+.file{margin:auto 0 0;padding-top:9px;border-top:1px solid var(--rule)}
+.file code,.wiring code{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint)}
+
+.wiring{background:var(--panel);border:1px solid var(--rule);padding:16px 17px;display:flex;
+        flex-direction:column;gap:10px}
+.wiring h3{margin:0;font-size:15px;font-weight:600}
+.wiring p{margin:0;color:var(--ink-dim);max-width:70ch}
+.wiring pre{margin:0;overflow-x:auto;background:var(--ground);border:1px solid var(--rule);
+            padding:11px 13px;font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--ink)}
+.wiring pre b{color:var(--accent);font-weight:400}
+@media (max-width:620px){.masthead h1{font-size:21px}.wrap{padding:24px 14px 52px}}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div>
+    <h1>Ten marks for the waterline</h1>
+    <p>
+      Ten candidate icons for the price&ndash;transparency page, each a single
+      SVG of a few hundred bytes drawn on the site&rsquo;s own palette:
+      <strong>accent for what you were quoted</strong>, the
+      <strong>orange the table reserves for what lands later</strong>.
+      <strong>08 Porthole</strong> was chosen and is now in
+      <code>&lt;head&gt;</code>; the other nine are kept as the record of what
+      it was picked over.
+    </p>
+  </div>
+</header>
+
+<section class="tests">
+  <div class="test"><b>Judged at 16px</b><span>A favicon is a tab, a bookmark and a phone shortcut. Every candidate is shown at 64, 32, 24 and 16, and in a tab beside the real page title.</span></div>
+  <div class="test"><b>Two colours, both meaning something</b><span>Where a mark is two-tone it borrows the table&rsquo;s own semantic rather than inventing one: the berth, and the bill that follows it.</span></div>
+  <div class="test"><b>Nothing fetched</b><span>One file, no PNG set, no external host. Each SVG carries its own <code>prefers-color-scheme</code> block, so the dark tile beside every mark is the same file, not a second export.</span></div>
+</section>
+
+<div class="grid">
+
+<article class="card">
+  <header class="chead">
+    <span class="num">01</span>
+    <h2>Waterline</h2>
+    <span class="claim">Boat &amp; bill</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M3 9h26l-5 9H8z"/> <path fill="var(--i-b)" d="M8 21.6h16l5 6.4H3z" opacity=".55"/> <rect fill="var(--i-a)" x="1" y="18.6" width="30" height="2.6" rx="1.3"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">The hull you were quoted, above the line; the hull that turns up, below it. The site&rsquo;s entire argument in one shape, in the two colours the table already uses for it.</p>
+  <p class="risk"><span class="rl">Against it</span>Two stacked trapezoids need the rule between them to read as water; it holds at 16px, but only just.</p>
+  <p class="file"><code>docs/icons/01-waterline-hull.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">02</span>
+    <h2>Two bars</h2>
+    <span class="claim">Advertised vs. total</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" x="3" y="17" width="11" height="10" rx="2"/> <rect fill="var(--i-b)" x="18" y="3" width="11" height="24" rx="2"/> <rect fill="var(--i-a)" x="1" y="28" width="30" height="2.6" rx="1.3"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">The advertised berth beside the whole bill, at the height the difference actually is. Nothing to decode.</p>
+  <p class="risk"><span class="rl">Against it</span>Reads as a chart, not a dive trip. Interchangeable with any analytics tool&rsquo;s icon.</p>
+  <p class="file"><code>docs/icons/02-two-bars.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">03</span>
+    <h2>Submerged tag</h2>
+    <span class="claim">Price, half hidden</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M17 2h9a4 4 0 0 1 4 4v9a4 4 0 0 1-1.2 2.8l-11 11a4 4 0 0 1-5.6 0L3.2 20.8a4 4 0 0 1 0-5.6l11-11A4 4 0 0 1 17 2z"/> <circle fill="var(--i-p)" cx="23.5" cy="8.5" r="2.6"/> <path fill="var(--i-b)" d="M0 21q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">A price tag with two thirds of it under water &mdash; the fees you are not shown until the dock.</p>
+  <p class="risk"><span class="rl">Against it</span>Best of the set at 64px, muddiest at 16: the tag hole and the wave crest fight for the same three pixels.</p>
+  <p class="file"><code>docs/icons/03-tag-submerged.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">04</span>
+    <h2>Rising bubbles</h2>
+    <span class="claim">Grows as it rises</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <circle fill="var(--i-a)" cx="8" cy="26" r="3"/> <circle fill="var(--i-a)" cx="15" cy="17" r="4.6"/> <circle fill="var(--i-b)" cx="23" cy="7" r="6.5"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">Exhaled bubbles expand as they rise. So does the number. The one candidate that is a joke and a diagram at once.</p>
+  <p class="risk"><span class="rl">Against it</span>Abstract enough that the joke needs explaining, which is the definition of an icon that failed.</p>
+  <p class="file"><code>docs/icons/04-rising-bubbles.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">05</span>
+    <h2>Code flag A</h2>
+    <span class="claim">Divers down</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-c)" x="2" y="3" width="3" height="26" rx="1.5"/> <path fill="var(--i-p)" d="M5 5h11v15H5z" stroke="var(--i-rule)" stroke-width="1"/> <path fill="var(--i-a)" d="M16 5h14l-5 7.5 5 7.5H16z"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">The international signal every boat in the Red Sea flies with people in the water. Correct, specific, and nobody else&rsquo;s logo.</p>
+  <p class="risk"><span class="rl">Against it</span>White half needs a hairline to survive a light background, and it says diving rather than money.</p>
+  <p class="file"><code>docs/icons/05-alpha-flag.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">06</span>
+    <h2>Mask</h2>
+    <span class="claim">The kit</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M4 8h24a3 3 0 0 1 3 3v5a9 9 0 0 1-9 9h-1.5a2.5 2.5 0 0 1-2.2-1.4L16 19l-2.3 4.6A2.5 2.5 0 0 1 11.5 25H10a9 9 0 0 1-9-9v-5a3 3 0 0 1 3-3z"/> <rect fill="var(--i-p)" x="4" y="11" width="10.5" height="9" rx="3"/> <rect fill="var(--i-p)" x="17.5" y="11" width="10.5" height="9" rx="3"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">Instantly legible as diving at any size above 24px, and the nose notch keeps it from being sunglasses.</p>
+  <p class="risk"><span class="rl">Against it</span>At 16px the notch disappears and it is a pair of glasses. Generic: half the dive industry ships this mark.</p>
+  <p class="file"><code>docs/icons/06-mask.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">07</span>
+    <h2>Anchor</h2>
+    <span class="claim">The baseline to beat</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <g fill="none" stroke="var(--i-a)" stroke-width="3" stroke-linecap="round" stroke="var(--i-a)"> <circle cx="16" cy="6" r="3.2"/> <path d="M16 10v18M9.5 14h13M4 18c0 6.6 5.4 11 12 11s12-4.4 12-11"/> </g> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">Included honestly, as the obvious choice. Strokes rather than fills, so it stays open at small sizes.</p>
+  <p class="risk"><span class="rl">Against it</span>Every dive shop on the Hurghada seafront already uses one. Says boat, says nothing else.</p>
+  <p class="file"><code>docs/icons/07-anchor.svg</code></p>
+</article>
+
+<article class="card picked">
+  <header class="chead">
+    <span class="num">08</span>
+    <h2>Porthole</h2>
+    <span class="claim">Chosen &mdash; now the site&rsquo;s icon</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">The waterline idea inside a circle, and a circle is the one shape that survives being masked round by a phone or a tab bar. Above the line the berth you were quoted; below it, at full strength, the part of the bill that arrives later.</p>
+  <p class="risk"><span class="rl">What changed before it shipped</span>The sketch had two wave crests, which merged into one thick band at 16px, and a deep band at 60% over the water, which mixed to a muddy grey-brown at any size. One crest now, a straight boundary under it, and the second colour at full strength.</p>
+  <p class="file"><code>docs/icons/08-porthole.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">09</span>
+    <h2>Receipt</h2>
+    <span class="claim">The bill, torn into a wave</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <path fill="var(--i-a)" d="M6 2h20v20q-2.5 3-5 0t-5 0-5 0-5 0z"/> <g fill="var(--i-p)"> <rect x="9.5" y="6" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="11" width="13" height="2.4" rx="1.2"/> <rect x="9.5" y="16" width="8" height="2.4" rx="1.2"/> </g> <path fill="var(--i-b)" d="M0 25q4-3 8 0t8 0 8 0 8 0V32H0Z" opacity=".55"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">The only mark here that says money before it says sea, which is the right order for this site.</p>
+  <p class="risk"><span class="rl">Against it</span>Document-shaped: at 16px it is any invoicing app, with an orange smudge underneath.</p>
+  <p class="file"><code>docs/icons/09-receipt.svg</code></p>
+</article>
+
+<article class="card">
+  <header class="chead">
+    <span class="num">10</span>
+    <h2>Solid badge</h2>
+    <span class="claim">Designed at 16px first</span>
+  </header>
+
+  <div class="proof">
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></div>
+  </div>
+
+  <div class="ladders">
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span></span></div>
+  </div>
+
+  <div class="tabbar light">
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect fill="var(--i-a)" width="32" height="32" rx="7"/> <path fill="var(--i-p)" d="M5 9h22l-4.5 8H9.5z"/> <path fill="var(--i-p)" d="M3 21q3.5-3 6.5 0t6.5 0 6.5 0 6.5 0V24q-3.5 3-6.5 0t-6.5 0-6.5 0T3 24Z" opacity=".75"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
+  </div>
+
+  <p class="note">Hull and wave knocked out of a filled tile. A solid ground beats line work in a favicon slot, and it is the only candidate drawn that way round.</p>
+  <p class="risk"><span class="rl">Against it</span>A filled tile ignores the host page&rsquo;s ground, so it looks like an app icon wherever it lands &mdash; deliberate, but not neutral.</p>
+  <p class="file"><code>docs/icons/10-badge.svg</code></p>
+</article>
+</div>
+
+<section class="wiring">
+  <h3>How it ships</h3>
+  <p>
+    The page stays one self-contained file, so the mark goes in as a data URI
+    rather than a second request: <code>templates/icon.svg</code> is the
+    editable source, and <code>render.py</code> strips its comments and
+    percent-encodes it into <code>&lt;head&gt;</code> at build time, the way it
+    already inlines the stylesheet and the data. 877 bytes in the attribute.
+  </p>
+  <pre>&lt;link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27&gt;<b>&hellip;</b>&lt;/svg&gt;"&gt;</pre>
+  <p>
+    Four tests hold it there: the placeholder is gone from the built page, the
+    <code>href</code> really is a <code>data:</code> URI, every
+    <code>#</code> is escaped &mdash; one unescaped hash starts a fragment and
+    the icon stops at it, which is a blank tab and markup that still looks
+    right &mdash; and both palettes are inside the one file.
+  </p>
+</section>
+
+</div>
+
+</body>
+</html>
