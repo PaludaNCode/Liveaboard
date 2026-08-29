@@ -412,12 +412,12 @@
       show: function (d) { return shortDate(d.start); } },
     { k: "end", t: "Return", v: function (d) { return d.end; },
       show: function (d) { return shortDate(d.end); } },
-    { k: "boat", t: "Boat", v: function (d, i) { return i.boat; } },
+    { k: "boat", t: "Boat", cls: "boat", v: function (d, i) { return i.boat; } },
     /* Berth price is per person, so this says whether you are buying into a
        boat of twelve or of thirty-four. Null where the description does not
        state it — about half the fleet, which is a gap in the scrape rather
        than an operator declining to say. */
-    { k: "guests", t: "Guests", short: "Pax", num: true,
+    { k: "guests", t: "Guests", short: "Pax", cls: "guests", num: true,
       v: function (d, i) { return i.guests == null ? -1 : i.guests; },
       show: function (d, i) {
         return i.guests == null ? '<span class="dim">—</span>' : i.guests;
@@ -829,8 +829,7 @@
   /* How many of the leading columns are pinned. By position, never by name:
      two pinned columns with a third between them overlap exactly as badly as
      two with a wrong offset, and naming them let that happen the moment the
-     order changed. Three fit a laptop; on a phone 82 + 78 + 132 would be three
-     quarters of the screen, so a phone pins two and Return scrolls.
+     order changed. Three fit a laptop; Return scrolls there.
 
      Four on a wide screen, because Guests is a fact about the vessel -- how
      many people you share a dive deck with -- and the pinned group's closing
@@ -838,24 +837,26 @@
      fell between Boat and Guests and filed the guest count as the first of the
      route columns. It is on the boat's side of it now.
 
-     Three on a phone for the same reason and not a different one. Guests sits
-     with the boat in PHONE_ORDER, so pinning two would put the closing rule
-     between them and undo on a phone exactly what the fourth pin fixed on a
-     desktop -- the group would say the guest count belongs to the money. Here
-     the three are Depart, Boat, Guests: 24 + 66 + 96 + 45 of 390, with the
-     Total whole in what remains.
-
-     Two below 386px, where Guests is behind the money rather than in front of
-     it (see TINY_ORDER). Pinning it there would freeze 59% of the screen to
-     hold a column that is not even next to the boat any more. */
+     One on a phone, and the date is the one. Pinning Depart, Boat and Guests
+     froze 231px of a 390px screen: three fifths of the display held still
+     while the visitor dragged the sixteen columns the page exists to compare
+     through the 159px that were left. Every column pinned is a column the
+     money has to be read next to, and on a phone there is only room to read
+     the money next to one thing. The date is that thing -- it is what a row
+     is looked up by, it is the sort the table opens on, and at 66px it is the
+     cheapest of the three to hold. The boat and the guest count keep their
+     widths and their place in front of the money (see PHONE_ORDER); they
+     simply scroll away with everything else once you go looking down the
+     bill, and scrolling back is one gesture. */
   function pinned() {
-    return tiny.matches ? 2 : narrow.matches ? 3 : compact.matches ? 3 : 4;
+    return narrow.matches ? 1 : compact.matches ? 3 : 4;
   }
 
   function orderColumns() {
     /* The rule that closes the pinned group goes on whichever column is last
        in it, and that changes with the breakpoint. */
     var n = pinned();
+    document.body.classList.toggle("pins-1", n === 1);
     document.body.classList.toggle("pins-2", n === 2);
     document.body.classList.toggle("pins-3", n === 3);
     document.body.classList.toggle("pins-4", n === 4);

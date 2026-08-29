@@ -782,6 +782,51 @@ class TestColumnOrders(unittest.TestCase):
             self.assertLess(order.index("total"), order.index("trip"), name)
 
 
+class TestPinnedColumns(unittest.TestCase):
+    """A pinned group is only as good as the rule that closes it.
+
+    `pinned()` says how many leading columns are frozen, and the count changes
+    with the breakpoint -- four on a wide screen, three on a laptop, one on a
+    phone, where freezing Depart, Boat and Guests held 231px of a 390px screen
+    still. Each count paints a `pins-N` class on the body, and the CSS draws
+    the strong edge on `.pins-N .stickN`. Miss one and nothing throws: the
+    columns still freeze, they just stop saying where the identity ends, which
+    is the difference between a group and three columns that happen to be
+    adjacent.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+
+    def counts(self) -> list[int]:
+        body = re.search(r"function pinned\(\) \{(.*?)\}", self.APP.read_text(encoding="utf-8"), re.S)
+        assert body, "pinned() not found in app.js"
+        return sorted({int(n) for n in re.findall(r"\b(\d+)\b", body.group(1))})
+
+    def test_the_counts_were_found(self):
+        counts = self.counts()
+        self.assertTrue(counts, "pinned() parsed to no counts at all")
+        self.assertTrue(all(1 <= n <= 4 for n in counts), counts)
+
+    def test_every_count_paints_its_body_class(self):
+        source = self.APP.read_text(encoding="utf-8")
+        for n in self.counts():
+            self.assertIn(f'classList.toggle("pins-{n}"', source)
+
+    def test_every_count_closes_its_group(self):
+        css = self.CSS.read_text(encoding="utf-8")
+        for n in self.counts():
+            self.assertIn(
+                f".pins-{n} .stick{n}", css,
+                f"pinned() can return {n}, but no rule closes a group of {n}",
+            )
+
+    def test_every_pinned_column_has_an_offset(self):
+        css = self.CSS.read_text(encoding="utf-8")
+        for n in range(1, max(self.counts()) + 1):
+            self.assertIn(f".stick{n} {{", css)
+
+
 class TestPayloadIsRead(unittest.TestCase):
     """Every fact the page ships is a fact the page prints.
 
