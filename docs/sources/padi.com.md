@@ -384,10 +384,17 @@ field, and `itinerary_from_payload` stores them — joined with `" - "`, under
 `ports`, in `data/padi.json`. **Nothing in `promote` reads them.** Ports come
 off the trip title instead, at both sources.
 
-Checked against each other across the 212 itineraries carrying both: the stated
-harbour and the parsed one are the **same place every time**, with no
-contradiction anywhere. What the field settles is the spellings a title parser
-has to guess at:
+**Quality: it is the better source, and it does not cover the fleet.** All 441
+trips carry both harbour titles — no nulls, no blanks — across eight distinct
+harbour names. Checked against the parsed port on the 212 itineraries carrying
+both, the stated harbour and the parsed one are the **same place every time**,
+with no contradiction anywhere; and all 28 rows the port fix corrected have a
+stated harbour, so the field alone would have answered every one of them. But
+**190 of 402 itineraries, on 51 boats, have no PADI trip at all**, and no crawl
+changes that — PADI does not sell them. The title parser is not replaceable by
+this field; it is checkable against it, which is worth more.
+
+What the field settles is the spellings a title parser has to guess at:
 
 | The title writes | The field states | PADI trips |
 |---|---|---|
@@ -399,7 +406,12 @@ Most of Blue Horizon's reach the page under our own spelling, because its trips
 match liveaboard.com's and take the name from there; the rest of the column is
 PADI's spelling standing alone.
 
-Those are folded in `promote.PORT_ALIASES` for now, on this evidence. **PRG is
+Those are folded in `promote.PORT_ALIASES` for now, on this evidence — which
+also recovered five correct pairings, because `fold_ports()` runs the same
+table over a title before the join key is taken. Blue Horizon went from four of
+its nine trips matched to all nine, and those five now carry PADI's fee panel
+and its recommended-dives note where they carried nothing. One of them needed
+both halves of the fix at once: PADI titles it `(Port Galib -Port Galib)`. **PRG is
 the reason to read the field rather than the letters**: HRG really is
 Hurghada's IATA code, but PRG is Prague's and no Egyptian harbour's, so a rule
 that resolved airport codes would have filed those seven sailings in the Czech

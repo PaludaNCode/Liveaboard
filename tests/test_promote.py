@@ -547,6 +547,54 @@ class TestPortNames(unittest.TestCase):
             self.assertEqual(self.port(spelling), "Sharm El Sheikh", spelling)
 
 
+class TestHarbourSpellingWinsBackMatches(unittest.TestCase):
+    """The table folds the join key too, and that is not a side effect.
+
+    ``fold_ports`` runs ``PORT_ALIASES`` over a title before ``padi_key`` is
+    taken, which is why "Marsa Ghalib" against "Port Ghalib" stopped costing
+    Emperor Asmaa all seven of its matches. Adding harbours to the table
+    therefore recovers pairings as well as chips: Blue Horizon went from four
+    of its nine trips matched to nine, and those five now carry the second
+    seller's fee panel and its recommended-dives note where they carried
+    nothing. Pinned here so the gain is a decision rather than a surprise.
+    """
+
+    def key(self, slug: str, name: str) -> str:
+        from liveaboard.promote import padi_key
+
+        return padi_key(slug, name)
+
+    def test_the_misspelt_marina_keys_onto_ours(self):
+        self.assertEqual(
+            self.key("blue-horizon",
+                     "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib)"),
+            self.key("blue-horizon",
+                     "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)"),
+        )
+
+    def test_a_misspelling_and_a_tight_dash_at_once(self):
+        """PADI writes both in one bracket: "(Port Galib -Port Galib)"."""
+        self.assertEqual(
+            self.key("blue-horizon",
+                     "Rocky, Zabargad & St. Johns (Port Galib -Port Galib)"),
+            self.key("blue-horizon",
+                     "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)"),
+        )
+
+    def test_the_codes_key_onto_the_harbours_they_stand_for(self):
+        self.assertEqual(
+            self.key("seawolf-steel", "Red Sea Classic (HRG - PRG)"),
+            self.key("seawolf-steel", "Red Sea Classic (Hurghada - Port Ghalib)"),
+        )
+
+    def test_the_fold_does_not_merge_a_trip_with_its_reverse(self):
+        """Two sailings differing only by port are two trips, folded or not."""
+        self.assertNotEqual(
+            self.key("seawolf-steel", "Red Sea Classic (HRG - PRG)"),
+            self.key("seawolf-steel", "Red Sea Classic (PRG - HRG)"),
+        )
+
+
 class TestDiveCount(unittest.TestCase):
     """The count is the operator's or it is nothing.
 
