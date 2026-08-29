@@ -13,9 +13,11 @@ step, no dependencies, no CDN. Open it from disk or serve it from anywhere.
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 from .dataset import Dataset
 from .export import latest_entry, to_csv
@@ -373,6 +375,29 @@ def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[
     return written
 
 
+# Characters a data: URI can carry unescaped. Everything else -- the "#" of
+# every colour above all, which would otherwise start a fragment and truncate
+# the icon -- is percent-encoded.
+ICON_SAFE = "/:;=,()'"
+
+
+def icon_data_uri(svg: str) -> str:
+    """Inline ``templates/icon.svg`` into an attribute.
+
+    A favicon is normally a second request, and this page makes none: the mark
+    ships in the same file as everything else. Comments and the whitespace
+    between tags go, because the file is read once by a human and served on
+    every page load.
+
+    The SVG carries its own ``prefers-color-scheme`` block, so one file covers
+    both themes -- there is no second export to keep in step with the first.
+    """
+    svg = re.sub(r"<!--.*?-->", "", svg, flags=re.S)
+    svg = re.sub(r"\s+", " ", svg).strip()
+    svg = re.sub(r">\s+<", "><", svg)
+    return "data:image/svg+xml," + quote(svg, safe=ICON_SAFE)
+
+
 def render(
     dataset: Dataset,
     out_dir: Path | str,
@@ -388,6 +413,7 @@ def render(
     html = (templates / "index.html").read_text(encoding="utf-8")
     css = (templates / "style.css").read_text(encoding="utf-8")
     js = (templates / "app.js").read_text(encoding="utf-8")
+    icon = (templates / "icon.svg").read_text(encoding="utf-8")
 
     # json.dumps escapes nothing that matters here except "</script>", which
     # would close the tag early. Escaping the slash keeps the JSON valid.
@@ -406,6 +432,7 @@ def render(
 
     html = html.replace("/*STYLE*/", css)
     html = html.replace("/*APP*/", js)
+    html = html.replace("__ICON__", icon_data_uri(icon))
     html = html.replace('"__DATA__"', data)
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
     html = html.replace("__DOWNLOADS__", _downloads_html(available))

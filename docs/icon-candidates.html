@@ -51,7 +51,9 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-s
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
 .card{background:var(--panel);border:1px solid var(--rule);display:flex;flex-direction:column;gap:12px;padding:15px}
-.chead{display:flex;align-items:baseline;gap:9px;border-bottom:1px solid var(--rule);padding-bottom:9px}
+.card.picked{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.card.picked .chead h2{color:var(--accent)}
+.chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;border-bottom:1px solid var(--rule);padding-bottom:9px}
 .chead h2{margin:0;font-size:16px;font-weight:600;letter-spacing:-.005em}
 .num{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .claim{margin-left:auto;font-family:var(--font-narrow);text-transform:uppercase;letter-spacing:.07em;
@@ -106,12 +108,13 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-s
   <div>
     <h1>Ten marks for the waterline</h1>
     <p>
-      Candidate icons for the price&ndash;transparency page. Each is a single
-      SVG of a few hundred bytes, drawn on the site&rsquo;s own palette:
+      Ten candidate icons for the price&ndash;transparency page, each a single
+      SVG of a few hundred bytes drawn on the site&rsquo;s own palette:
       <strong>accent for what you were quoted</strong>, the
-      <strong>orange the table reserves for what lands later</strong>. None is
-      wired in &mdash; pick one and it becomes a
-      <code>data:</code> URI in <code>&lt;head&gt;</code>.
+      <strong>orange the table reserves for what lands later</strong>.
+      <strong>08 Porthole</strong> was chosen and is now in
+      <code>&lt;head&gt;</code>; the other nine are kept as the record of what
+      it was picked over.
     </p>
   </div>
 </header>
@@ -313,30 +316,30 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-s
   <p class="file"><code>docs/icons/07-anchor.svg</code></p>
 </article>
 
-<article class="card">
+<article class="card picked">
   <header class="chead">
     <span class="num">08</span>
     <h2>Porthole</h2>
-    <span class="claim">Waterline, framed</span>
+    <span class="claim">Chosen &mdash; now the site&rsquo;s icon</span>
   </header>
 
   <div class="proof">
-    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></div>
-    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></div>
+    <div class="tile light"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></div>
+    <div class="tile dark"><span class="mark" style="--s:64px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></div>
   </div>
 
   <div class="ladders">
-    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span></div>
-    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span></span></div>
+    <div class="ladder light"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span></div>
+    <div class="ladder dark"><span class="rung"><span class="px">32</span><span class="mark" style="--s:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">24</span><span class="mark" style="--s:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span><span class="rung"><span class="px">16</span><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span></span></div>
   </div>
 
   <div class="tabbar light">
-    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <defs><clipPath id="p"><circle cx="16" cy="16" r="11"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 17q3.5-3 7 0t7 0 7 0 7 0V29H2Z"/> <path fill="var(--i-b)" d="M2 21q3.5-3 7 0t7 0 7 0 7 0V29H2Z" opacity=".5"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="11" fill="none" stroke="var(--i-a)" stroke-width="4"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
+    <span class="tab"><span class="mark" style="--s:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"> <!-- A porthole with the waterline across it: the advertised price above, the part of the bill that arrives later below. Both colours are the table's own (--accent, --later), and the boundary between them is a straight line rather than a second wave, because at 16px two crests merge into one thick band and the mark loses its point. --> <defs><clipPath id="p"><circle cx="16" cy="16" r="11.4"/></clipPath></defs> <circle fill="var(--i-p)" cx="16" cy="16" r="11.4"/> <g clip-path="url(#p)"> <path fill="var(--i-a)" d="M2 15.4q3.5-3.2 7 0t7 0 7 0 7 0V30H2Z"/> <path fill="var(--i-b)" d="M2 22.6h28V30H2Z"/> </g> <circle stroke="var(--i-a)" cx="16" cy="16" r="13" fill="none" stroke-width="3.4"/> </svg></span><span class="tabtext">Egypt liveaboards &middot; May&ndash;Aug 2027</span></span>
     <span class="tab ghost"><span class="tabtext">&nbsp;</span></span>
   </div>
 
-  <p class="note">The same waterline idea inside a circle &mdash; and a circle is the one shape that survives being masked round by a phone or a tab bar.</p>
-  <p class="risk"><span class="rl">Against it</span>The second wave is decoration; at 16px the two crests merge into one thick band.</p>
+  <p class="note">The waterline idea inside a circle, and a circle is the one shape that survives being masked round by a phone or a tab bar. Above the line the berth you were quoted; below it, at full strength, the part of the bill that arrives later.</p>
+  <p class="risk"><span class="rl">What changed before it shipped</span>The sketch had two wave crests, which merged into one thick band at 16px, and a deep band at 60% over the water, which mixed to a muddy grey-brown at any size. One crest now, a straight boundary under it, and the second colour at full strength.</p>
   <p class="file"><code>docs/icons/08-porthole.svg</code></p>
 </article>
 
@@ -396,17 +399,21 @@ body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-s
 </div>
 
 <section class="wiring">
-  <h3>What shipping one looks like</h3>
+  <h3>How it ships</h3>
   <p>
     The page stays one self-contained file, so the mark goes in as a data URI
-    rather than a second request &mdash; <code>render.py</code> inlines it the
-    way it already inlines the stylesheet and the data.
+    rather than a second request: <code>templates/icon.svg</code> is the
+    editable source, and <code>render.py</code> strips its comments and
+    percent-encodes it into <code>&lt;head&gt;</code> at build time, the way it
+    already inlines the stylesheet and the data. 877 bytes in the attribute.
   </p>
   <pre>&lt;link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27&gt;<b>&hellip;</b>&lt;/svg&gt;"&gt;</pre>
   <p>
-    Say which number and it gets drawn to final, wired into
-    <code>templates/index.html</code>, and covered by the dataset test that
-    keeps <code>ALLOWED_EXTERNAL</code> empty.
+    Four tests hold it there: the placeholder is gone from the built page, the
+    <code>href</code> really is a <code>data:</code> URI, every
+    <code>#</code> is escaped &mdash; one unescaped hash starts a fragment and
+    the icon stops at it, which is a blank tab and markup that still looks
+    right &mdash; and both palettes are inside the one file.
   </p>
 </section>
 

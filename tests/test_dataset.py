@@ -6,11 +6,12 @@ import json
 import re
 import tempfile
 import unittest
+from urllib.parse import unquote
 from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
-from liveaboard.render import build_payload, render
+from liveaboard.render import build_payload, icon_data_uri, render
 from liveaboard.scrape import jsonld, liveaboard_com
 from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.diagnose import describe
@@ -199,6 +200,41 @@ class TestRender(unittest.TestCase):
         self.assertNotIn("/*STYLE*/", html)
         self.assertNotIn("/*APP*/", html)
         self.assertNotIn('"__DATA__"', html)
+        self.assertNotIn("__ICON__", html)
+
+
+class TestIcon(unittest.TestCase):
+    """The favicon is part of the page, not a request the page makes."""
+
+    def setUp(self):
+        self.svg = (ROOT / "templates" / "icon.svg").read_text(encoding="utf-8")
+
+    def test_the_icon_ships_inside_the_page(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            html = render(Dataset.load(SEED), tmp).read_text(encoding="utf-8")
+        self.assertIn('<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,', html)
+
+    def test_every_hash_is_escaped(self):
+        """An unescaped "#" starts a fragment, and the icon stops there.
+
+        Every colour in the file begins with one, so this is the failure that
+        renders a blank tab while the markup still looks right.
+        """
+        uri = icon_data_uri(self.svg)
+        self.assertNotIn("#", uri)
+        self.assertIn("%23", uri)
+
+    def test_both_themes_travel_in_the_one_file(self):
+        """One file, two themes: the dark palette is inside the icon itself."""
+        svg = unquote(icon_data_uri(self.svg).split(",", 1)[1])
+        self.assertIn("prefers-color-scheme:dark", svg)
+        self.assertIn("#0d5c8c", svg)
+        self.assertIn("#63b3e3", svg)
+
+    def test_comments_do_not_ship(self):
+        """The file is commented for a reader; the attribute is served 878 times."""
+        self.assertIn("<!--", self.svg)
+        self.assertNotIn("%3C!--", icon_data_uri(self.svg))
 
 
     def test_embedded_json_does_not_break_out_of_the_script_tag(self):
