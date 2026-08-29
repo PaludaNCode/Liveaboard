@@ -327,13 +327,19 @@ def _fix_title_errors(title: str) -> str:
 
 
 REEF_ALIASES = (
-    # St John's, six ways: "St. John's" (19), "St. Johns" (13), "St Johns"
-    # (6), "St John's" (4), "Saint John's" (3), "St. John" (2). The saint sorts
-    # in six places and matches in one. Folded onto the plurality spelling,
-    # which is also the one carrying both the stop and the apostrophe -- and
-    # TITLE_FIXES has already settled the apostrophe's character, so this sees
-    # only "'".
-    (re.compile(r"\b(?:St\.?|Saint)\s+John(?:'s|s)?\b", re.I), "St. John's"),
+    # St John's, seven ways: "St. John's" (18), "St. Johns" (15), "St Johns"
+    # (8), "St John's" (5), "St. John" (3), "St.Johns" (3), "Saint John's" (3).
+    # The saint sorts in seven places and matches in one. Folded onto the
+    # plurality spelling, which is also the one carrying both the stop and the
+    # apostrophe -- and TITLE_FIXES has already settled the apostrophe's
+    # character, so this sees only "'".
+    #
+    # The space is optional because PADI writes the reef closed up: "St.Johns"
+    # and "Rocky-Zabargad-St.Johns" arrived with the sailings PADI sells and
+    # liveaboard.com does not, and a required space left them printing a
+    # seventh spelling in the same column as the other six. `\b` before the
+    # abbreviation is what keeps `\s*` safe -- it can only start a word.
+    (re.compile(r"\b(?:St\.?|Saint)\s*John(?:'s|s)?\b", re.I), "St. John's"),
     # Brothers, five ways: "Brothers" (109), "Brother Islands" (5), "Brothers
     # Islands" (5), "Brother" (1), "Brothers Island" (1). The optional plural
     # comes before the optional "Islands" rather than beside it -- written as
@@ -850,6 +856,104 @@ def _nights(start: str, end: str) -> int | None:
     return delta if MIN_NIGHTS <= delta <= MAX_NIGHTS else None
 
 
+def _padi_only_departures(
+    sailing_book: dict[str, dict[str, Any]],
+    known: set[tuple[str, str]],
+    named: dict[str, str],
+    *,
+    season: tuple[date, date] | None,
+    retrieved: str,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """The sailings PADI sells on dates the first source does not list.
+
+    Shaped as candidate departures so they join `grouped` and go through the
+    rest of promotion unchanged -- the same itinerary build, the same vessel fee
+    book, the same title tidying. A second code path that assembled its own rows
+    would be a second set of rules for what a row means, and the two would
+    drift.
+
+    Three things make a sailing eligible and each one can fail on its own:
+
+    * the date is inside the published season,
+    * `(boat, start)` is not already a row -- an exact key, because a date has
+      no spelling, and the whole point is not to publish the same sailing twice,
+    * PADI's title parses into a trip name and a night count.
+
+    The title is what the itinerary is *named*, so an unparsable one is
+    reported rather than filled in: a row under "Unnamed itinerary" would be a
+    trip whose identity this code invented, and identity is what the id is
+    built from.
+
+    The price is PADI's and is recorded as PADI's. These rows carry no
+    `padi_price`: a second seller's figure beside its own is not two sellers
+    agreeing, and the Sellers column would read "both, same" on a sailing only
+    one site offers.
+
+    `named` maps `padi_key` to the trip name the first source already uses for
+    that boat, and a hit means the new sailing joins that itinerary rather than
+    founding one. PADI sells dates on trips we already carry -- Blue Seas
+    writes *Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)* where our source
+    writes the same name with the missing space restored -- and two itineraries
+    that are one trip would split its dates, its fees and its dive count in
+    two. Worse, it can be silent: those two names slugify to one id, and a
+    dataset keyed by id keeps whichever was built last.
+
+    Deliberately the same `padi_key` the fee book and the trip book join on,
+    not a new comparison. It exists because PADI does not spell our titles, it
+    has been read against the whole fleet, and a second rule for the same
+    question is a second rule to keep in step. Where it does not match, PADI's
+    name stands as written: an unrecognised trip is a trip we do not have, and
+    guessing it onto the nearest one we do is how a St John's week gets badged
+    with a reef 600 km away.
+    """
+    from .scrape.padi_com import PadiComAdapter
+
+    made: list[dict[str, Any]] = []
+    unparsed: list[str] = []
+    for key, sailing in sorted(sailing_book.items()):
+        slug, start = sailing.get("boat"), sailing.get("start")
+        if not slug or not start or not sailing.get("end"):
+            continue
+        if (slug, start) in known:
+            continue
+        if season and not (season[0] <= date.fromisoformat(start) <= season[1]):
+            continue
+        if not sailing.get("price") or not sailing.get("currency"):
+            continue
+        title = sailing.get("itinerary") or ""
+        split = PadiComAdapter.split_title(title)
+        if not split:
+            unparsed.append(f"{key}: PADI title does not parse ({title!r})")
+            continue
+        url = (f"https://travel.padi.com/liveaboard/"
+               f"{sailing.get('country', 'egypt')}/{sailing.get('slug', slug)}/")
+        name = named.get(padi_key(slug, split[0]), split[0])
+        made.append({
+            "id": f"{slug}-{start}-padi",
+            "boat_slug": slug,
+            "start": start,
+            "end": sailing["end"],
+            "name": name,
+            "price": {"amount": sailing["price"], "currency": sailing["currency"]},
+            "booking_url": url,
+            # PADI states berths left rather than a schema.org token. Zero is
+            # sold out and a positive count is in stock -- that is what the
+            # field means, not an inference from it -- and where PADI omits it
+            # entirely the row says nothing, as a silent source should.
+            "availability": (None if sailing.get("availability") is None
+                             else "SoldOut" if sailing["availability"] == 0
+                             else "InStock"),
+            "padi_only": True,
+            "provenance": {
+                "kind": SourceKind.SCRAPED.value,
+                "source_id": "padi.com",
+                "retrieved": retrieved,
+                "url": url,
+            },
+        })
+    return made, unparsed
+
+
 def promote(
     candidate: dict[str, Any],
     *,
@@ -910,9 +1014,21 @@ def promote(
             padi_book[padi_key(record["boat"], record["name"])] = record
 
     # The same sailing, as PADI sells it. Keyed on vessel and day -- an exact
-    # key, unlike the itinerary join, because a date has no spelling. It fills a
-    # field on a departure that already exists and can create none: the row
-    # count is the candidate's, and merging a second seller must not change it.
+    # key, unlike the itinerary join, because a date has no spelling.
+    #
+    # It fills a field on a departure that already exists, and -- since
+    # `_padi_only_departures` -- creates a row where the second seller sells a
+    # date the first does not. That reverses this comment's own earlier rule
+    # that the row count was the candidate's, and it was reversed on evidence:
+    # 601 of the 654 PADI sailings inside the season land on a row we already
+    # had, and the other 53 are real, bookable trips the page was silent about.
+    # Blue Storm and Blue Seas are near-complete weekly seasons on PADI that
+    # liveaboard.com does not sell at all -- 29 of the 53 between them -- so
+    # "one row per sailing" was quietly meaning "one row per sailing
+    # liveaboard.com happens to list". A trip nobody looked at is not a trip
+    # that does not exist; that rule is why `carry_unread` and the barren skip
+    # list exist, and it applies to a second seller exactly as it applies to a
+    # page that failed to load.
     sailing_book: dict[str, dict[str, Any]] = {
         key: record
         for key, record in ((padi_departures or {}).get("departures") or {}).items()
@@ -1013,6 +1129,44 @@ def promote(
             continue
         name, promotion, _ = _split_title(departure.get("name") or "Unnamed itinerary")
         grouped[(slug, name or "Unnamed itinerary")].append(
+            {**departure, "nights": nights, "promotion": promotion}
+        )
+
+    # The second seller's own sailings, on dates the first does not list.
+    #
+    # Injected here rather than merged later so they are grouped into
+    # itineraries by the same rule as everything else, and injected *after* the
+    # candidate so `known` is the full set of first-source rows: a PADI sailing
+    # is only ever added where nothing already stands on that (boat, date).
+    known = {
+        (d["boat_slug"], d["start"])
+        for group in grouped.values() for d in group if d.get("boat_slug")
+    }
+    # Only where the key names exactly one of our trips. Two of a boat's
+    # itineraries can share it -- Blue Horizon sells *Rocky, Zabargad & St.
+    # Johns* from two harbours, and `fold_ports` is what makes those one key --
+    # and a dict would silently keep whichever was built last, filing PADI's
+    # sailing under a port it may not sail from. Two sailings differing only by
+    # port are two trips here; where the lookup cannot say which, PADI's own
+    # name stands and the trip lands on its own row rather than the wrong one.
+    by_key: dict[str, set[str]] = defaultdict(set)
+    for slug, name in grouped:
+        by_key[padi_key(slug, name)].add(name)
+
+    padi_only, unparsed = _padi_only_departures(
+        sailing_book, known,
+        {key: next(iter(names)) for key, names in by_key.items() if len(names) == 1},
+        season=season,
+        retrieved=(padi_departures or {}).get("collected") or "",
+    )
+    skipped.extend(unparsed)
+    for departure in padi_only:
+        nights = _nights(departure["start"], departure["end"])
+        if nights is None:
+            skipped.append(f"{departure['id']}: implausible dates")
+            continue
+        name, promotion, _ = _split_title(departure["name"])
+        grouped[(departure["boat_slug"], name or departure["name"])].append(
             {**departure, "nights": nights, "promotion": promotion}
         )
 
@@ -1208,6 +1362,13 @@ def promote(
                 "availability": _availability(item.get("availability")),
                 "provenance": item["provenance"],
             }
+            # Which sellers list this sailing at all. Written only where the
+            # answer is "not the one every other row comes from", so the field
+            # ships on 53 departures rather than 945: a key written per
+            # departure is a key written once per departure, and this page is
+            # one file.
+            if item.get("padi_only"):
+                entry["padi_only"] = True
             # Carried on the departure, not the itinerary: the operator
             # discounts specific dates, and the price scraped is already the
             # discounted one.
@@ -1225,7 +1386,13 @@ def promote(
             # page states. Left absent rather than zeroed where PADI does not
             # sell the date -- a berth nobody offered has no price, and a zero
             # would read as free.
-            sailing = sailing_book.get(f"{slug}::{item['start']}")
+            #
+            # Never on a row PADI is the only seller of: its price is already
+            # this row's price, and repeating it in the second seller's field
+            # would print a comparison of PADI against itself -- "both sellers,
+            # same price" on a sailing one of them does not offer.
+            sailing = (None if item.get("padi_only")
+                       else sailing_book.get(f"{slug}::{item['start']}"))
             if sailing and sailing.get("price") and sailing.get("currency"):
                 entry["padi_price"] = {
                     "amount": sailing["price"],
@@ -1242,6 +1409,24 @@ def promote(
             departures.append(entry)
 
     _settle_title_case(itineraries)
+
+    # Two itineraries under one id is silent data loss, not a warning.
+    # `Dataset.from_dict` keys itineraries by id, so the second simply replaces
+    # the first and every departure of the loser is served the winner's reefs,
+    # fees and dive count -- a page that is confidently wrong rather than
+    # visibly broken. It has happened: *Daedalus & Fury Shoal (Port Ghalib -
+    # Port Ghalib)* and PADI's spelling of it without the space slugify to the
+    # same string, and the row count stayed right while two trips became one.
+    # Promotion is pure and CI compares its output byte for byte, so raising
+    # here turns that into a red build at the moment it is introduced.
+    clashes = sorted(
+        key for key, count in Counter(i["id"] for i in itineraries).items() if count > 1
+    )
+    if clashes:
+        raise ValueError(
+            "two itineraries share an id, which would silently discard one: "
+            + ", ".join(clashes)
+        )
 
     payload: dict[str, Any] = {
         "schema_version": 1,
@@ -1331,19 +1516,26 @@ def _padi_note(
 ) -> str:
     """What the second source contributed, counted rather than claimed.
 
-    Two numbers, because PADI contributes two different things and their
+    Three numbers, because PADI contributes three different things and their
     coverage is not the same: a berth price on the sailings whose date it also
-    sells, and an entry bar on the trips it also describes. Naming the source
-    without either count would let a run that read nothing from PADI go on
-    saying it did, which is the failure the fee sentence above was written to
-    stop.
+    sells, an entry bar on the trips it also describes, and -- on 53 rows --
+    the sailing itself. Naming the source without the counts would let a run
+    that read nothing from PADI go on saying it did, which is the failure the
+    fee sentence above was written to stop.
+
+    The third count is the one the sentence before it would otherwise
+    contradict outright. "Prices scraped from liveaboard.com" stopped being
+    true of every row the day promotion began creating them, and a page that
+    names the wrong seller for a berth is doing the thing this project exists
+    to report.
     """
     priced = sum(1 for d in (departures or []) if d.get("padi_price") is not None)
+    only = sum(1 for d in (departures or []) if d.get("padi_only"))
     barred = sum(
         1 for i in itineraries
         if "PADI" in ((i.get("requirements") or {}).get("notes") or "")
     )
-    if not priced and not barred:
+    if not priced and not barred and not only:
         return ""
     parts = []
     if priced:
@@ -1352,10 +1544,19 @@ def _padi_note(
         )
     if barred:
         parts.append(f"the entry bar on {barred} of {len(itineraries)} trips")
-    return (
-        " PADI Travel is read as a second source for " + " and ".join(parts) +
-        "; where the two disagree about the bar the stricter is shown."
-    )
+    note = ""
+    if parts:
+        note = (
+            " PADI Travel is read as a second source for " + " and ".join(parts) +
+            "; where the two disagree about the bar the stricter is shown."
+        )
+    if only:
+        note += (
+            f" On {only} sailings it is the only seller: liveaboard.com does not "
+            f"list those dates, so the berth price is PADI's and the fees are "
+            f"the vessel's own."
+        )
+    return note
 
 
 def _most_common(values) -> int:

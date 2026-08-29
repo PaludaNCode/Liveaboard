@@ -182,6 +182,29 @@ Break these and the site starts lying quietly rather than failing loudly.
   sale. `discover()` records what it skips via `not_looked_at`, so the skip and
   the failure travel down the same channel. `CARRY_MAX_DAYS` outlasts
   `BARREN_RECHECK_DAYS` by design.
+- **A seller nobody asked is the same blindness.** The two sources merge on
+  `(boat, date)` — exact, because a date has no spelling — and for eleven
+  refreshes that merge could only ever fill a field, on the rule that the row
+  count was the candidate's. It made "one row per sailing" quietly mean "one
+  row per sailing liveaboard.com happens to list": 601 of PADI's 654 in-season
+  sailings landed on a row we had and the other **53 were dropped**, among them
+  Blue Storm's and Blue Seas' near-complete weekly seasons, on boats the page
+  already carried. `promote` creates those rows now. The berth price is PADI's
+  and says so; the fees are the vessel's own book, which the boat charges on
+  board whoever sold the berth. Such a row carries **no `padi_price`** — one
+  seller's figure repeated into the second seller's field prints as two sellers
+  agreeing about a sailing one of them does not offer — and the page marks it
+  `PADI only`, which is a fact about who was asked and not about the trip.
+- **Two itineraries must never share an id.** `Dataset.from_dict` keys them by
+  id, so a collision keeps one and serves every departure of the loser the
+  winner's reefs, fees and dive count: the row count stays right and the page
+  is confidently wrong. Ids are truncated to 96 characters and the ports sit at
+  the end, so two long names can collide without anybody typing a wrong
+  character — which would break "two sailings differing only by port are two
+  trips" silently. `promote` raises instead. A foreign trip name is folded onto
+  ours through `padi_key` and only where that key names exactly one of our
+  trips; where two of a boat's own itineraries share it the fold is refused,
+  because nothing can say which harbour the other source meant.
 - **An unreadable page is not an empty one.** A vessel page is fetched once per
   season month, so one response with no JSON-LD empties that boat's month while
   the other three come back fine — and it looks exactly like a boat that sells

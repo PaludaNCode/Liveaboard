@@ -551,15 +551,22 @@
        not, on a site whose entire argument is that the extras are where the
        money is.
 
-       Four states, and they are four different facts:
+       Five states, and they are five different facts:
 
          both, differ  who holds the low end of the span, and by how much.
                        What the column is for.
          both, same    one price sold twice.
-         price only    PADI sells the date and does not disclose a full bill,
+         berth only    PADI sells the date and does not disclose a full bill,
                        so there is a second price and no second total -- 432
                        rows. Printing a berth gap here would be the old
                        column's mistake with a new heading.
+         PADI only     PADI is the only seller listing this sailing -- 53 rows,
+                       on 14 boats the page already carried. Read as a dash it
+                       would say the opposite of the truth: not "PADI does not
+                       sell this date" but "PADI is why this row is here".
+                       There is one bill, and it is PADI's berth against the
+                       vessel's own fee book, so there is nothing to compare
+                       and that is the whole statement.
          nothing       PADI does not sell that date. Evidence of nothing: its
                        calendar runs to a different depth on every boat.
 
@@ -572,16 +579,25 @@
           + "rental gear are the vessel's charge whoever sold the berth. "
           + "\u201cberth only\u201d means PADI prices the date but does not "
           + "publish a complete fee book for the trip, so no second total is "
-          + "claimed. A dash means PADI does not sell that date, which is "
-          + "evidence of nothing.",
+          + "claimed. \u201cPADI only\u201d means liveaboard.com does not list "
+          + "the sailing at all, so there is one seller and one bill. A dash "
+          + "means PADI does not sell that date, which is evidence of nothing.",
       v: function (d, i, m, row) {
         var b = best(row);
         /* Rows with nothing to compare sort last rather than as zero: no
-           second quote is not agreement. */
+           second quote is not agreement. A single-seller row sorts with them
+           for the same reason, whichever seller it is. */
         return b && b.both ? -b.varies : Infinity;
       },
       show: function (d, i, m, row) {
         var b = best(row);
+        if (d.padi_only) {
+          return '<span class="dim" title="liveaboard.com does not list this ' +
+            'sailing, so PADI Travel is the only seller and there is one bill ' +
+            'rather than two. The berth price is PADI\u2019s; the fees are the ' +
+            'vessel\u2019s own, which it bills on board whoever sold the ' +
+            'berth.">PADI only</span>';
+        }
         if (b && b.both) {
           if (b.cheapest === "same") return '<span class="dim">both, same</span>';
           /* Named, not graded. Both hues in `.cheaper`/`.dearer` mean good and
@@ -980,6 +996,16 @@
         + "trip. So there is a second price here and no second total, and the "
         + "two are not comparable: what that figure leaves out is exactly what "
         + "the table above is for.";
+    } else if (row.d.padi_only) {
+      /* Said plainly because the table above it is a mixture and the reader
+         is owed the join: the berth is PADI's, the fees are the boat's. That
+         is not a spliced bill -- the marine park, the port and the fuel are
+         charged on board by the vessel whoever sold the berth, which is the
+         same reason both sellers' totals carry the same nitrox and gear. */
+      padi = "liveaboard.com does not list this sailing, so PADI Travel is "
+        + "the only seller and there is one bill rather than two. The berth "
+        + "price above is PADI’s; the fees under it are the vessel’s "
+        + "own, which it charges on board whoever sold the berth.";
     }
 
     /* The bar leads the panel rather than following the bill. Whether a diver

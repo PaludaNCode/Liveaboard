@@ -158,6 +158,13 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             entry["padi"] = float(second_base.display.rounded)
             entry["padi_base_line"] = second_base.as_dict()
 
+        # Who lists this sailing at all, where the answer is "PADI, and only
+        # PADI". A row like this has one seller and one bill, so the Sellers
+        # column must not read it as the state it looks like -- a dash, meaning
+        # PADI does not sell the date, when PADI is the reason the row exists.
+        if departure.padi_only:
+            entry["padi_only"] = True
+
         # A departure-level fee replaces the route's for its code, so a sailing
         # can genuinely price a fee differently. No departure in the dataset
         # does today, but the possibility is in the model, and silently reusing

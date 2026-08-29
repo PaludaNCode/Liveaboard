@@ -93,7 +93,7 @@ class TestDepartureBook(unittest.TestCase):
 
 
 class TestMerge(unittest.TestCase):
-    """One row per sailing. A second seller must not create one."""
+    """One row per sailing, and the second seller fills it in."""
 
     def payload(self, book=BOOK):
         return promote(candidate([departure()]), season=SEASON, padi_departures=book)
@@ -116,13 +116,9 @@ class TestMerge(unittest.TestCase):
         )
         self.assertNotIn("padi_price", payload["departures"][0])
 
-    def test_the_row_count_is_ours_alone(self) -> None:
-        """PADI sells 2,797 sailings we do not carry. None of them is a row."""
-        extra = {"departures": {**BOOK["departures"],
-                                "alia-soul::2027-07-04": {
-                                    "boat": "alia-soul", "start": "2027-07-04",
-                                    "price": 999.0, "currency": "EUR"}}}
-        payload = promote(candidate([departure()]), season=SEASON, padi_departures=extra)
+    def test_a_date_we_already_carry_is_never_added_twice(self) -> None:
+        """The whole point of keying on the day: one row per sailing."""
+        payload = self.payload()
         self.assertEqual(len(payload["departures"]), 1)
 
     def test_no_book_changes_nothing(self) -> None:
@@ -255,3 +251,187 @@ class TestComparison(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+SOLE = {
+    "collected": "2026-08-28",
+    "departures": {
+        # A date the candidate does not sell. Written the way PADI writes one:
+        # a berth count rather than a schema.org token, and a title carrying its
+        # ports and its night count.
+        "alia-soul::2027-07-04": {
+            "boat": "alia-soul", "slug": "my-alia-soul", "start": "2027-07-04",
+            "end": "2027-07-11", "nights": 7, "price": 999.0, "currency": "EUR",
+            "availability": 6, "padi_id": 2,
+            "itinerary": "Deep South (Port Ghalib - Port Ghalib) 7 Nights",
+        },
+    },
+}
+
+
+class TestTheSecondSellerCanCreateARow(unittest.TestCase):
+    """A sailing only PADI lists is still a sailing.
+
+    Promotion used to refuse this outright: the row count was the candidate's,
+    and merging a second seller could only ever fill a field. That rule was
+    reversed on a count. Of the 654 PADI sailings inside the published season,
+    601 land on a row we already had -- and the other 53 are real, bookable
+    trips the page was silent about. Blue Storm and Blue Seas contribute 29
+    between them: near-complete weekly seasons PADI sells and liveaboard.com
+    does not list at all.
+
+    So "one row per sailing" was quietly meaning "one row per sailing
+    liveaboard.com happens to list", which is the same mistake as reading an
+    unreadable vessel page as an empty one. A trip nobody asked about is not a
+    trip that does not exist.
+
+    What must not change is everything else. These tests pin the creation and
+    the four things that make it honest: the price is PADI's and says so, no
+    row is duplicated, the second-seller field stays empty, and a trip whose
+    name cannot be read is reported rather than invented.
+    """
+
+    def payload(self, book=SOLE, deps=None):
+        return promote(candidate(deps or [departure()]), season=SEASON,
+                       padi_departures=book)
+
+    def rows(self, payload):
+        return {d["start"]: d for d in payload["departures"]}
+
+    def test_the_sailing_becomes_a_row(self) -> None:
+        rows = self.rows(self.payload())
+        self.assertEqual(sorted(rows), ["2027-05-01", "2027-07-04"])
+
+    def test_the_price_is_padi_s_and_says_so(self) -> None:
+        row = self.rows(self.payload())["2027-07-04"]
+        self.assertEqual(row["price"], {"amount": 999.0, "currency": "EUR"})
+        self.assertEqual(row["provenance"]["source_id"], "padi.com")
+        self.assertEqual(row["provenance"]["retrieved"], "2026-08-28")
+        self.assertEqual(
+            row["provenance"]["url"],
+            "https://travel.padi.com/liveaboard/egypt/my-alia-soul/",
+        )
+
+    def test_it_carries_no_second_price(self) -> None:
+        """One seller's figure repeated into the second seller's field would
+        print on the page as two sellers agreeing about a sailing one of them
+        does not offer."""
+        row = self.rows(self.payload())["2027-07-04"]
+        self.assertNotIn("padi_price", row)
+        self.assertTrue(row["padi_only"])
+
+    def test_a_date_the_candidate_sells_is_not_created(self) -> None:
+        """The exact key, doing the one job it exists for."""
+        both = {"collected": "2026-08-28",
+                "departures": {**BOOK["departures"], **SOLE["departures"]}}
+        rows = self.rows(self.payload(book=both))
+        self.assertEqual(len(rows), 2)
+        self.assertNotIn("padi_only", rows["2027-05-01"])
+        self.assertEqual(rows["2027-05-01"]["padi_price"],
+                         {"amount": 1300.0, "currency": "USD"})
+
+    def test_a_sailing_outside_the_season_is_not_created(self) -> None:
+        book = {"collected": "2026-08-28", "departures": {
+            "alia-soul::2029-07-04": {**SOLE["departures"]["alia-soul::2027-07-04"],
+                                      "start": "2029-07-04", "end": "2029-07-11"}}}
+        self.assertEqual(len(self.payload(book=book)["departures"]), 1)
+
+    def test_an_unreadable_title_is_reported_not_invented(self) -> None:
+        """A row under "Unnamed itinerary" is a trip whose identity this code
+        made up, and the id is built from the name."""
+        book = {"collected": "2026-08-28", "departures": {
+            "alia-soul::2027-07-04": {**SOLE["departures"]["alia-soul::2027-07-04"],
+                                      "itinerary": "Deep South"}}}
+        payload = self.payload(book=book)
+        self.assertEqual(len(payload["departures"]), 1)
+        self.assertTrue(any("does not parse" in s
+                            for s in payload.get("promotion_skipped", [])),
+                        payload.get("promotion_skipped"))
+
+    def test_a_sold_out_sailing_says_so(self) -> None:
+        """PADI states berths left. Zero is sold out; that is what the field
+        means, not an inference from it."""
+        book = {"collected": "2026-08-28", "departures": {
+            "alia-soul::2027-07-04": {**SOLE["departures"]["alia-soul::2027-07-04"],
+                                      "availability": 0}}}
+        self.assertEqual(self.rows(self.payload(book=book))["2027-07-04"]["availability"],
+                         "sold_out")
+
+    def test_it_joins_a_trip_we_already_have_rather_than_founding_a_twin(self) -> None:
+        """PADI does not spell our titles. Two itineraries that are one trip
+        would split its dates, its fees and its dive count -- and can do it
+        silently, since the two names slugify to one id."""
+        ours = departure(name="Deep South & Port Ghalib (Port Ghalib - Port Ghalib)")
+        book = {"collected": "2026-08-28", "departures": {
+            "alia-soul::2027-07-04": {
+                **SOLE["departures"]["alia-soul::2027-07-04"],
+                "itinerary": "Deep South and Port Ghalib (Port Ghalib- Port Ghalib) 7 Nights"}}}
+        payload = self.payload(book=book, deps=[ours])
+        self.assertEqual(len(payload["itineraries"]), 1, payload["itineraries"])
+        self.assertEqual(len(payload["departures"]), 2)
+
+    def test_the_page_is_told_which_rows_have_one_seller(self) -> None:
+        payload = self.payload()
+        entries = {d["start"]: d for d in
+                   build_payload(Dataset.from_dict(payload))["departures"]}
+        self.assertTrue(entries["2027-07-04"]["padi_only"])
+        self.assertNotIn("padi_only", entries["2027-05-01"])
+
+    def test_the_note_counts_them(self) -> None:
+        """A page that names the wrong seller for a berth is doing the thing
+        this project exists to report."""
+        self.assertIn("On 1 sailings it is the only seller", self.payload()["notes"])
+
+
+class TestTwoTripsNeverShareAnId(unittest.TestCase):
+    """The failure mode that stays quiet: a collision, not a crash.
+
+    `Dataset.from_dict` keys itineraries by id, so a second itinerary under an
+    existing id simply replaces the first, and every departure of the loser is
+    then served the winner's reefs, fees and dive count. The row count stays
+    right and the page is confidently wrong.
+
+    It happened the day promotion started creating rows. Blue Seas' *Daedalus &
+    Fury Shoal (Port Ghalib - Port Ghalib)* and PADI's spelling of it without
+    the space slugify to one string; so do Ghazala Explorer's *Deep South & St.
+    Johns* and *Deep South - St Johns*. Both are handled upstream now -- the
+    name folds onto the trip we already carry -- but the guard is what makes
+    the next one a red build instead of a silent merge, and promotion is pure,
+    so CI compares its output byte for byte.
+    """
+
+    #: An id is `f"{boat}--{slugify(name)}"[:96]`, so two trips whose names
+    #: agree for long enough collide however differently they end -- and the
+    #: end is where the ports are. "Two sailings differing only by port are two
+    #: trips" is this dataset's rule, and truncation is the one thing that can
+    #: break it without anybody typing a wrong character. Egypt's reef lists run
+    #: long enough for it: DUNE Longara already sells *Mixed South - Daedalus,
+    #: Rocky & Zabargad Islands and St John's*, and PADI writes them at its own
+    #: length.
+    LONG = ("Daedalus, Rocky, Zabargad, Elphinstone, Fury Shoals and Saint Johns "
+            "Reef Expedition")
+
+    def test_a_collision_raises(self) -> None:
+        book = {"collected": "2026-08-28", "departures": {
+            "alia-soul::2027-07-04": {
+                **SOLE["departures"]["alia-soul::2027-07-04"],
+                "itinerary": f"{self.LONG} (Port Ghalib - Hurghada) 7 Nights"}}}
+        ours = departure(name=f"{self.LONG} (Port Ghalib - Port Ghalib)")
+        with self.assertRaises(ValueError) as caught:
+            promote(candidate([ours]), season=SEASON, padi_departures=book)
+        self.assertIn("share an id", str(caught.exception))
+
+    def test_the_names_that_collide_are_genuinely_two_trips(self) -> None:
+        """A guard on the guard. If the two folded instead, the test above would
+        pass by never building a second itinerary at all -- and would go on
+        passing after the guard was deleted."""
+        from liveaboard.promote import padi_key
+        self.assertNotEqual(
+            padi_key("alia-soul", f"{self.LONG} (Port Ghalib - Hurghada)"),
+            padi_key("alia-soul", f"{self.LONG} (Port Ghalib - Port Ghalib)"),
+        )
+
+    def test_the_real_dataset_has_none(self) -> None:
+        payload = promote(candidate([departure()]), season=SEASON, padi_departures=SOLE)
+        ids = [i["id"] for i in payload["itineraries"]]
+        self.assertEqual(len(ids), len(set(ids)))

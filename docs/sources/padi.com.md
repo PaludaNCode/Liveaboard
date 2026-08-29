@@ -427,6 +427,51 @@ human or a reef-set comparison. Loosening the key to close them would also merge
 the port variants, which is worse. Twelve of their 22 have no counterpart of
 ours, mostly 3- and 4-night short trips and extra port permutations.
 
+## Sailings PADI sells and liveaboard.com does not
+
+Counted on 2026-08-29, over the published May–Aug 2027 season:
+
+| | sailings | boats |
+|---|---|---|
+| PADI sailings fetched | 2,797 | 38 |
+| …inside the season window | 654 | 37 |
+| …landing on a row we already had | 601 | |
+| …on a date we do not list | **53** | 14 |
+
+All 14 are boats the dataset already carries. Blue Storm (15) and Blue Seas
+(14) are near-complete weekly seasons PADI sells that liveaboard.com does not
+list at all; Ghazala Adventure (6) and Ghazala Explorer (5) follow, then nine
+boats with one or two each.
+
+`promote` creates a row for each. **The berth price is PADI's and its
+provenance says so; the fees are the vessel's own fee book**, which the boat
+charges on board whoever sold the berth — the same reason both sellers' totals
+already carry the same nitrox and gear. Such a row carries no `padi_price`:
+repeating one seller's figure into the second seller's field would print as two
+sellers agreeing about a sailing one of them does not offer. The page marks
+them `PADI only`.
+
+The trip name is PADI's title minus its night count, folded onto ours where
+`padi_key` matches — 19 of the 53 join a trip we already carry, and the rest
+found 24 new ones. Where two of a boat's own itineraries share that key the
+fold is refused rather than guessed: Blue Horizon sells *Rocky, Zabargad & St.
+Johns* from two harbours and nothing can say which one PADI means.
+
+Two things this uncovered:
+
+- **`compare_key` kept the word "and" while stripping `&` and `,`**, so an
+  operator writing one reef list three ways reached us as two trips. Folding
+  the conjunction merges exactly two pairs across all 317 trips of the dataset
+  it was measured on, both one trip typed twice, and nothing in PADI's own
+  book. It also gained a PADI fee book on 13 itineraries that had none.
+- **Itinerary ids are truncated to 96 characters**, so two long names that
+  agree up to the cut collide — and the ports are at the end. `Dataset.from_dict`
+  keys by id and would silently keep one. `promote` now raises.
+
+What is *not* imported: the 24 PADI Egypt liveaboards that map to no boat of
+ours (`unlisted` in `data/padi_aliases.json`). Their sailings have never been
+fetched, so their volume is unknown.
+
 ## One property to preserve
 
 A stated requirement is a safety gate, and PADI's two fields are not the same
