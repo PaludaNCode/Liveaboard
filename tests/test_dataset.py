@@ -1256,11 +1256,11 @@ class TestTheSellerFilter(unittest.TestCase):
         if not (ROOT / "data" / "egypt-2027.json").exists():
             self.skipTest("no dataset in this checkout")
         payload = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))
-        counts = {"both": 0, "here": 0, "padi": 0}
+        counts = {"both": 0, "liveaboard": 0, "padi": 0}
         for d in payload["departures"]:
             counts["padi" if d.get("padi_only")
                    else "both" if d.get("padi") is not None
-                   else "here"] += 1
+                   else "liveaboard"] += 1
         self.assertEqual(sum(counts.values()), len(payload["departures"]))
         for state, n in counts.items():
             self.assertGreater(n, 0, f"the {state!r} chip would render with no rows")
@@ -1268,6 +1268,35 @@ class TestTheSellerFilter(unittest.TestCase):
     def test_the_column_is_named_for_what_it_holds(self) -> None:
         """It stopped being one source the day it started linking two."""
         self.assertIn('{ k: "source", t: "Seller",', self.app())
+
+    def labels(self) -> str:
+        block = re.search(r"var SELLER_LABELS = \{(.*?)\};", self.app(), re.S)
+        assert block, "SELLER_LABELS not found in app.js"
+        return block.group(1)
+
+    def test_every_chip_names_its_seller(self) -> None:
+        """A filter that says who sells a berth has to say who.
+
+        The middle chip read "Here only", which asks the reader to work out
+        which of the two sites "here" is -- and this page is neither of them:
+        it is a third thing that reads both and compares them.
+        """
+        labels = self.labels()
+        self.assertIn('"liveaboard only"', labels)
+        self.assertIn('"PADI only"', labels)
+        self.assertNotIn("Here", labels)
+
+    def test_the_chip_and_the_link_call_the_seller_one_thing(self) -> None:
+        """The chip filters to rows whose Seller column links that same site.
+
+        Two names for one seller is the drift this whole column exists to
+        avoid: a reader who narrows to "liveaboard only" and then reads
+        something else in the link beside the row has to work out whether they
+        are the same place.
+        """
+        word = re.search(r'liveaboard: "(\w+)', self.labels()).group(1)
+        self.assertIn(f'? "{word}"', self.app(),
+                      "the Seller column names that seller something else")
 
 
 class TestTheBuiltStampIsTheBuild(unittest.TestCase):

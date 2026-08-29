@@ -370,25 +370,36 @@
   /* Which sites sell this sailing. Three states and they are three different
      facts, so they are three chips rather than one "PADI" switch:
 
-       both        both sites list the date. The money columns print a span
-                   across the two, and this is where a reader who wants only
-                   the comparable rows finds them.
-       here only   liveaboard.com lists it and PADI does not. Its calendar
-                   runs to a different depth on every boat, so this is a fact
-                   about who was asked and not about the trip.
-       PADI only   liveaboard.com does not list the date -- and on 22 boats
-                   does not sell berths at all.
+       both              both sites list the date. The money columns print a
+                         span across the two, and this is where a reader who
+                         wants only the comparable rows finds them.
+       liveaboard only   liveaboard.com lists it and PADI does not. Its
+                         calendar runs to a different depth on every boat, so
+                         this is a fact about who was asked and not about the
+                         trip.
+       PADI only         liveaboard.com does not list the date -- and on 22
+                         boats does not sell berths at all.
+
+     Both sellers are named, and named the way the Seller column names them.
+     The middle chip read "Here only", which asks the reader to know which of
+     the two sites "here" is -- and this page is neither of them: it is a
+     third thing that reads both. A filter that says who sells a berth must
+     say who, and the row it filters to links "liveaboard ↗" in the Seller
+     column, so the chip says liveaboard too. One name per seller, in every
+     place the page prints one.
 
      Read off `padi_only` and `padi` rather than recomputed, because those are
      the same two keys the Seller column branches on and the row's own bill is
      built from. A second derivation here would be a second answer to "who
      sells this", and the two would drift. */
   function sellerOf(dep) {
-    return dep.padi_only ? "padi" : dep.padi != null ? "both" : "here";
+    return dep.padi_only ? "padi" : dep.padi != null ? "both" : "liveaboard";
   }
 
-  var SELLER_LABELS = { both: "Both", here: "Here only", padi: "PADI only" };
-  var SELLERS = ["both", "here", "padi"].map(function (id) {
+  var SELLER_LABELS = {
+    both: "Both", liveaboard: "liveaboard only", padi: "PADI only"
+  };
+  var SELLERS = ["both", "liveaboard", "padi"].map(function (id) {
     return {
       id: id, label: SELLER_LABELS[id],
       n: D.departures.filter(function (d) { return sellerOf(d) === id; }).length
