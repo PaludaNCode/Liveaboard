@@ -1261,8 +1261,18 @@
      put 66 buttons above the table: the first row of data began 596px down a
      1440x900 window and 1708px down a phone, where nothing was visible at all
      without scrolling past two screens of filters. A filter you have not
-     chosen yet should not outrank the prices you came to read. */
-  var CHIP_LIMIT = 8;
+     chosen yet should not outrank the prices you came to read.
+
+     Six on a phone rather than eight, because the cost of a chip is a row of
+     screen and a phone's rows are narrower: eight boat chips wrap to four
+     lines at 390px where they take two on a laptop, and four banks doing that
+     is the same wall of filters this limit exists to prevent. The tail is not
+     lost -- "+ n more" still opens it -- and the chips that survive the cut
+     are the ones with the most departures behind them, which are the ones a
+     filter is most likely to be reached for. `narrow` is the breakpoint the
+     rest of the phone layout already turns on, so the banks fold at the same
+     width as the columns they sit above. */
+  function chipLimit() { return narrow.matches ? 6 : 8; }
 
   /* What each chip in a bank would give you, under the filters in force now.
      The numbers were counted once at load and never moved, so a bank could
@@ -1309,9 +1319,10 @@
         var v = numeric ? +it.id : it.id;
         return counts[it.id] || picked.has(v);
       });
+      var limit = chipLimit();
       var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
-        return n < CHIP_LIMIT || picked.has(v);
+        return n < limit || picked.has(v);
       });
       var hidden = live.length - shown.length;
       node.innerHTML = shown.map(function (it) {
