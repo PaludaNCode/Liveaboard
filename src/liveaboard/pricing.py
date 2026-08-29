@@ -350,6 +350,70 @@ def itinerary_lines(
     ]
 
 
+def padi_base_line(departure: Departure, fx: FxTable) -> BreakdownLine | None:
+    """What the second seller advertises for this same berth.
+
+    ``None`` where PADI does not sell the date, which is most of the time and
+    is evidence of nothing: its calendar runs to a different depth on every
+    boat. A berth nobody offered has no price, and a zero would read as free.
+    """
+    if departure.padi_price is None:
+        return None
+    display, rate = fx.to_display(departure.padi_price)
+    return BreakdownLine(
+        code=FeeCode.BASE_FARE,
+        label="Berth (PADI Travel)",
+        tier=FeeTier.BASE,
+        quoted=departure.padi_price,
+        display=display,
+        included=False,
+        counted=True,
+        toggle=None,
+        provenance=departure.padi_provenance,
+        note=None,
+        fx_rate=rate,
+    )
+
+
+def padi_lines(
+    itinerary: Itinerary,
+    fx: FxTable,
+    toggles: Toggles | None = None,
+) -> list[BreakdownLine] | None:
+    """The same trip's fee rows as the second seller discloses them.
+
+    ``None`` unless PADI's bill for this trip is complete -- every charge it
+    names both classified and priced in a unit that normalises. A partial fee
+    book cannot produce a total, and a total built from part of a disclosure is
+    the precise thing this site was built to catch other people doing. The
+    caller shows the price on its own instead, and says why there is no total
+    beside it.
+
+    **Two sellers, one dive deck.** The mandatory lines are PADI's own and are
+    where the two sellers actually differ -- 43 of the 74 comparable trips
+    disagree, Odyssey's *Premium Expedition* by €300. The rest of the bill is
+    not the seller's at all: nitrox and rental gear are billed by the vessel,
+    on board, out of one price list, to whoever walks up the gangway. So they
+    are the same rows on both sides, taken from the vessel's disclosure, and
+    the page says so.
+
+    Doing anything else makes the comparison lie in a way a reader cannot see.
+    Leave them out of PADI's side and its total is short by whatever the
+    visitor has switched on -- about €200 with rental gear on, which is the
+    default -- so PADI wins every row for a reason that has nothing to do with
+    PADI. Leave them out of both and the column stops comparing the number the
+    page is about.
+    """
+    if not itinerary.padi_fees_complete:
+        return None
+    active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    shared = [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
+    return [
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
+        for fee in _sorted_fees(list(itinerary.padi_fees) + shared)
+    ]
+
+
 def compute(
     itinerary: Itinerary,
     departure: Departure,

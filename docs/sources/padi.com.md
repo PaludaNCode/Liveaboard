@@ -1,17 +1,27 @@
 # padi.com — source interface
 
-**Egypt only, and not wired up yet.** Nothing on the site reads from padi.com
-today. The host became reachable from this environment on 2026-08-28 and the
-Egyptian vessel pages have now been read, so this file has stopped being a list
-of guesses; it is a map. Nothing is promoted from it.
+**Egypt only, and wired up.** The site reads three things from padi.com: the
+entry bar, the price of a sailing, and — since 2026-08-29 — the fee book behind
+that price. All three are promoted.
 
-The scope stays what [#3](https://github.com/PaludaNCode/Liveaboard/issues/3)
-set: **requirements and accreditation, not prices.** PADI Travel is weak on
-departure-level pricing and strong on the certification bar, which is what the
-price comparison needs in order to be fair — comparing a week that requires 50
-logged dives against one that takes beginners is not comparing like with like.
-The probe confirmed both halves of that: the entry bar is a first-class coded
-field on their side, and the prices are the next four departures at best.
+The scope [#3](https://github.com/PaludaNCode/Liveaboard/issues/3) set was
+**requirements and accreditation, not prices**, on the reading that PADI Travel
+is weak on departure-level pricing and strong on the certification bar. Half of
+that held and half did not, and the half that did not is now the more useful:
+the vessel page's `offers[]` really is four departures at best, but
+`shop/{vessel}/trips/` prices every sailing on sale, and the itinerary endpoint
+publishes the operator's **required extras** as structured, priced records. So
+PADI is a second seller here and not only a second opinion.
+
+**The claim "PADI publishes no fee book at all" was wrong, and it shaped the
+design for a while.** It is true of the endpoint that states the price and
+false of the one next to it. The cost of believing it was a column that set
+PADI's berth price against ours — which compares the half the two sellers agree
+about (under €5 apart on 89% of matched sailings) and hides the half they do
+not: of the 74 trips where both books add up, **43 disagree and 16 by more than
+€150**, one of them by €300 on a single week. The lesson is the file's own rule
+turned on itself: a negative result is only as good as the probe behind it, and
+this one had no probe behind it at all.
 
 ## Entry points
 
@@ -213,11 +223,13 @@ prices in EUR, Red Sea Aggressor II in USD. Assuming one currency would have put
 every Aggressor price out by the EUR/USD rate. A vessel whose page states no
 currency has its prices dropped rather than guessed.
 
-**It is a berth price, comparable only to a berth price.** PADI publishes no fee
-book at all, so setting its figure against our *total* would show it cheaper by
-exactly the fees it never disclosed — the failure this site exists to expose,
-committed by the site itself. `padi_delta` is measured against `base`, and
-`tests/test_padi_sailings.py` asserts it.
+**It is a berth price, and stays one until PADI's own extras are added to it.**
+Set against our *total* on its own it would show PADI cheaper by exactly the
+fees that endpoint does not carry — the failure this site exists to expose,
+committed by the site itself. The fee book below is what makes a total out of
+it, and only where that book is complete: 169 of 892 departures. On the other
+432 the page prints *berth only* and compares nothing.
+`tests/test_padi_sailings.py` asserts both halves.
 
 Match quality on (boat, date) is **601 of 892 departures**, and the key is exact:
 a date has no spelling, where the itinerary-title join needed en-dash folding and
@@ -267,13 +279,66 @@ The endpoint also answers the dive-count problem the invariants describe: it
 states a per-trip range, so the low end is a stated figure rather than a derived
 one. `itinerary_from_payload()` keeps `totalNumberOfDives`.
 
-### Still to do
+### The fee book, and where it hides
 
-Nothing in the pipeline fetches this yet. `requirements_from_payload()` and
-`itinerary_from_payload()` read a response, with tests pinned to a real one, but
-no tool walks the 58 vessels and no promotion consumes the result. The join is
-already measured (below) and unchanged: PADI's title minus its night suffix is
-our `Itinerary.name`.
+**`mandatoryOnBoard` and `mandatoryInAdvance` are the charges a diver cannot
+decline**, and membership of those two lists is the whole of the claim: every
+one of the 623 entries across 307 itineraries carries `isMandatory: true` and
+`isIncluded: false`. 257 itineraries state at least one; 50 state none, which is
+PADI saying the fare covers everything and is a disclosure rather than a gap.
+
+**`section` and `kind` are fossils, exactly like the itinerary slugs.** All Star
+Ghani's "Marine Park/Port Fees" — a €200 charge — is filed under `section: 10`
+("Information") and `kind: 10` ("Full board, including"). Reading either would
+have turned a park fee into a meal. 333 of the 623 are `kind: 600` ("Other
+fees"), which says nothing. **The `title` is the only field that describes the
+charge**, and it goes through the same `LABEL_PATTERNS` table liveaboard.com's
+wording does — the fleet is shared, so the words are.
+
+Pointing that table at a second source found gaps in it that had read as
+complete: every pattern was written singular, and "Fuel surcharges" is PADI's
+commonest mandatory line at 116 entries and matched none of them. Fixing the
+plurals, and adding conservation fees and reef tax under the environmental
+levy, took the classifier from 182 of 623 entries to 560. It improves both
+readers, which is the argument for one table rather than two.
+
+| Field | Note |
+|---|---|
+| `title` | The charge, and the only field that names it |
+| `price` / `priceGross` | 481 of 623 have one. The other 142 name a charge with no figure — the same state a third of the liveaboard.com book is in |
+| `payedPer` | `LIVEABOARD_EXTRA_PAYED_PER`, verbatim below. Trip on 506, then Night/Person, Week, Dive, Day/Person |
+| currency | **Not in the payload.** The vessel's own `window.shop.currency`, same trap as the prices |
+
+`PAYED_PER` maps only the six members that normalise to one diver's bill for
+one trip. The twelve it leaves out are transfers, courses, activities, an
+"Offset", and two priced per *cabin* — a per-cabin charge needs an occupancy
+nobody publishes. An unmapped basis does not drop the line; it makes the whole
+bill incomplete, which is the same rule an unpriced line follows.
+
+**A total is claimed only where the bill is complete** — every charge named,
+classified and priced in a unit that normalises. 174 of 307 itineraries clear
+that, 74 of them join to a trip of ours, and 169 of our 892 departures end up
+comparable total-to-total. The rest keep PADI's berth price and print *berth
+only*: a second price with no second total, and the two are not the same kind
+of number. That is the whole discipline here — a bill assembled from part of a
+disclosure would show PADI cheaper by exactly what it left out.
+
+Two entries with one title are kept as two. DUNE Longara lists "Environmental
+taxes" twice on six trips, €100 and €200 under separate `extraId`s; no pair in
+the book is an exact duplicate, so folding on the title would halve a real bill.
+
+### Not read yet
+
+- **`whatsIncludedNew`, `optionalInAdvance`, `optionalOnBoard`.** PADI's
+  inclusions and optional extras. Not needed for the comparison as it stands:
+  nitrox and rental gear are billed by the *vessel* on board, out of one price
+  list, to whoever walks up the gangway, so both totals carry the same rows for
+  them from the vessel's own disclosure. Reading PADI's would let the page show
+  what PADI says is bundled, which is a real gap but not a wrong number.
+- **63 entries the classifier still declines**, and it should: "14% GST (on
+  onboard purchases)" carries `price: 14.0` and is a percentage of an unrelated
+  purchase; "Supervision fees for Level 1 divers…" is conditional on the diver.
+  Each of them makes its trip's bill incomplete, which is the safe direction.
 
 ## The vocabulary
 
@@ -287,6 +352,25 @@ EXPERIENCE_REQUIRED_DIVES       = [[0, "No min. logged dives required"],
                                    [10, "20+ dives recommended"], [20, "50+ dives recommended"],
                                    [30, "100+ dives recommended"]]
 ```
+
+`LIVEABOARD_EXTRA_PAYED_PER`, from the same object, is the fee book's charging
+unit and is reproduced in `PAYED_PER`:
+
+```
+LIVEABOARD_EXTRA_PAYED_PER = [[0, "Day/Person"], [10, "Night/Person"], [20, "Dive"],
+                              [30, "Trip"], [40, "Diving day"], [42, "From, per person"],
+                              [44, "From, per vehicle"], [46, "To, per person"],
+                              [48, "To, per vehicle"], [49, "Return, per person"],
+                              [50, "Transfer"], [55, "Return, per vehicle"], [60, "Activity"],
+                              [70, "Week"], [80, "Course"], [90, "Day/Cabin"],
+                              [100, "Night/Cabin"], [110, "Offset"]]
+LIVEABOARD_EXTRA_SECTION   = [[10, "Information"], [20, "Optional extras"],
+                              [30, "Compulsive charges"]]
+```
+
+`LIVEABOARD_EXTRA_SECTION` is listed to be explicit that it is *not* used: only
+43 of 307 itineraries file anything under "Compulsive charges", while 257 state
+a mandatory charge. The section is not where the answer is.
 
 `CERTIFICATION_CHOICES` and `EXPERIENCE_DIVES` in `padi_com.py` map both onto
 `DiverLevel`, with tests. Nitrox rides along with the certification in PADI's
