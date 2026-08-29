@@ -2,10 +2,8 @@
   "note": "Vessels that published no departure when last fetched. Skipped for a week to save the requests, then re-checked. Delete this file to force a full crawl.",
   "vessels": {
     "ashrafi": "2026-08-28",
-    "avo": "2026-08-28",
     "bella-2": "2026-08-28",
     "bella-3": "2026-08-28",
-    "blue": "2026-08-28",
     "blue-diamond": "2026-08-28",
     "blue-pearl": "2026-08-28",
     "cu": "2026-08-28",

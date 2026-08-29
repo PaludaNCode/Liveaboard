@@ -335,6 +335,22 @@
         if (d.availability === "available") return '<span class="pill open">available</span>';
         return '<span class="dim">—</span>';
       } },
+    /* Only where PADI sells the same sailing -- 601 of 892 rows. A dash on the
+       rest would be a column of dashes; nothing said is nothing printed.
+
+       Sorted on the difference itself so a visitor can bring the widest gaps to
+       the top, which is the one thing this column is for. Rows PADI does not
+       price sort last rather than as zero: no quote is not a match. */
+    { k: "padi", t: "vs PADI",
+      v: function (d) { return d.padi_delta == null ? Infinity : d.padi_delta; },
+      show: function (d) {
+        if (d.padi_delta == null) return '<span class="dim">—</span>';
+        if (Math.abs(d.padi_delta) < 1) return '<span class="dim">same</span>';
+        var sign = d.padi_delta < 0 ? "−" : "+";
+        return '<span class="' + (d.padi_delta < 0 ? "cheaper" : "dearer") + '">' +
+          sign + "€" + Math.round(Math.abs(d.padi_delta)).toLocaleString("en-IE") +
+          "</span>";
+      } },
     { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
       show: function (d) {
         var s = disclosure(d);
@@ -379,7 +395,7 @@
   var ORDER = [
     "start", "end", "boat", "guests",
     "from", "to", "trip", "sites",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "padi",
     "availability", "disclosure", "source"
   ];
   /* The same columns on a phone, and as much of the same order as 390px holds.
@@ -412,7 +428,7 @@
        Advertised, Nitrox, Mandatory fees -- rather than in a third order
        invented for this width. Scrolling right reads the bill; not scrolling
        still shows the answer. */
-    "total", "base", "nitrox", "later", "perdive",
+    "total", "base", "nitrox", "later", "perdive", "padi",
     "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -431,7 +447,7 @@
      silent -- the row still renders, it just does not answer the question. */
   var TINY_ORDER = [
     "start", "boat",
-    "total", "base", "nitrox", "later", "perdive",
+    "total", "base", "nitrox", "later", "perdive", "padi",
     "guests", "end", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -449,7 +465,7 @@
      Total, in that order still. */
   var COMPACT_ORDER = [
     "start", "end", "boat",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "padi",
     "guests", "from", "to", "trip", "sites",
     "availability", "disclosure", "source"
   ];
@@ -620,8 +636,31 @@
       caveat = "Plus " + row.m.unpriced.join(", ") + ": listed by the operator " +
         "with no price, so it cannot be added up here. It is not free.";
     }
+    /* The same sailing, as the other seller prices it.
+     *
+     * Compared against the berth price and said so in words, because the number
+     * directly above it is the total and a reader would otherwise assume that
+     * is what was compared. PADI publishes no fee book at all, so the honest
+     * statement is that its figure is a berth price and what it excludes is
+     * unknown -- exactly the caveat this page applies to an operator that lists
+     * no required extras. */
+    var padi = "";
+    if (row.d.padi != null) {
+      var diff = row.d.padi_delta;
+      var same = Math.abs(diff) < 1;
+      padi = "PADI Travel advertises this sailing at €" +
+        Math.round(row.d.padi).toLocaleString("en-IE") + " — " +
+        (same ? "the same berth price"
+              : "€" + Math.round(Math.abs(diff)).toLocaleString("en-IE") + " " +
+                (diff < 0 ? "less" : "more")) +
+        " than the berth price above. PADI lists no fees, so what its figure " +
+        "leaves out is unknown; the total on this row is not the same kind of " +
+        "number.";
+    }
+
     return '<table class="fees"><tbody>' + body + "</tbody></table>" +
-      (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "");
+      (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
+      (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
   }
 
   /* How many rows reach the DOM before the visitor scrolls.

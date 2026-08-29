@@ -322,6 +322,32 @@ class Departure:
     """
     fees: list[FeeItem] = field(default_factory=list)
     booking_url: str | None = None
+    padi_price: Money | None = None
+    """What PADI Travel advertises for this same sailing, when it sells it.
+
+    A berth price like :attr:`price`, and comparable only to that -- never to
+    the total. PADI publishes no fee book, so a comparison against a figure that
+    includes marine park fees would show it cheaper by exactly the fees it never
+    disclosed, on a site whose argument is that undisclosed fees are the problem.
+
+    ``None`` where PADI does not sell the sailing, which is 25 of our 627 on the
+    mapped boats and every departure on the 29 boats it does not list. Not zero,
+    and not the operator's price copied across.
+    """
+    padi_provenance: Provenance | None = None
+
+    @property
+    def padi_difference(self) -> Money | None:
+        """PADI's berth price minus ours, or ``None`` if either is missing.
+
+        Both sides are advertised prices in their own currencies here; the
+        conversion to one currency happens where every other price is converted,
+        so this is not the number the page prints. It exists so the comparison
+        is defined in one place rather than in the renderer.
+        """
+        if self.padi_price is None or self.padi_price.currency != self.price.currency:
+            return None
+        return Money(self.padi_price.amount - self.price.amount, self.price.currency)
 
     @property
     def bookable(self) -> bool:
@@ -345,4 +371,8 @@ class Departure:
             availability=payload.get("availability"),
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             booking_url=payload.get("booking_url"),
+            padi_price=(Money.parse(payload["padi_price"], default_currency)
+                        if payload.get("padi_price") else None),
+            padi_provenance=(Provenance.from_dict(payload["padi_provenance"])
+                             if payload.get("padi_provenance") else None),
         )
