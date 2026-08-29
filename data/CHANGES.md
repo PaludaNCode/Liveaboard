@@ -9,6 +9,28 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-08-29
 ===========================
 
+fees (14)
+  ALSURAYA               marine_park      250 EUR / per_trip -> 150-250 EUR / per_trip
+  Blue Seas              combined_fees    390 EUR / per_trip -> 200-380 EUR / per_trip
+  Blue Seas              gear_rental      135 EUR / per_trip -> 135 EUR / per_week
+  Blue Storm             combined_fees    390 EUR / per_trip -> 200-380 EUR / per_trip
+  Hammerhead II          gear_rental      292 EUR / per_trip -> 41.66 EUR / per_day
+  Hammerhead II          service_charge   117 EUR / per_trip -> 16.66 EUR / per_day
+  JP Marine              gear_rental      220 EUR / per_trip -> 220 EUR / per_week
+  MY Odyssey Liveaboard  gear_rental      140 EUR / per_trip -> 140 EUR / per_week
+  MY Odyssey Liveaboard  gratuities       included -> 60-70 EUR / per_trip
+  Red Sea Aggressor IV   fuel_surcharge   43 EUR / per_trip -> 50 USD / per_trip
+  Red Sea Aggressor IV   gear_rental      150 EUR / per_trip -> 175-260 USD / per_trip
+  Red Sea Aggressor IV   marine_park      90 EUR / per_trip -> 105 USD / per_trip
+  ... and 2 more not shown
+```
+
+## 2026-08-29
+
+```
+changes: HEAD -> 2026-08-29
+===========================
+
 price down (644)
   2027-07-29  Golden Dolphin IV      2,796 ->   2,779 USD  -17 (-0.6%)  Daedalus, Rocky Island, Zabargad, 
   2027-07-31  Queen Sherry           2,797 ->   2,780 USD  -17 (-0.6%)  Pelagic Trail: Big Fish - Hammerhe
