@@ -633,6 +633,126 @@ a { color:var(--accent); }
 .cheaper { color:var(--ok); }
 .dearer  { color:var(--sold); }
 .caveat.padi { border-left:2px solid var(--unknown); padding-left:.6em; }
+
+/* ---------- the cabin ladder, on hover ---------- */
+
+/* The Places cell became a control when it stopped printing an adjective and
+   started printing a count: behind the number is the ladder that number is the
+   bottom of. It has to look operable without shouting -- a dashed underline
+   that only resolves on hover, in a column read a hundred rows at a time. */
+.berths {
+  font: inherit;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed transparent;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  gap: .3em;
+  align-items: baseline;
+  width: 100%;
+  text-align: left;
+}
+.berths:hover, .berths[aria-expanded="true"] {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+.berths:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.berths .n { font-weight: 600; }
+/* Zero is the only one worth alarming about, and it is the one this site
+   exists to catch: a price on the row that nothing is selling at. */
+.berths .n.none { color: var(--sold); }
+.berths .n.low  { color: var(--warn); }
+.berths .n.many { color: var(--ok); }
+.berths:hover .n, .berths[aria-expanded="true"] .n { color: inherit; }
+.berths .lbl { font-family: var(--font-sans); font-size: .82em; color: var(--ink-faint); }
+.berths .caret { margin-left: auto; font-size: .7em; opacity: 0; }
+.berths:hover .caret, .berths[aria-expanded="true"] .caret { opacity: 1; }
+
+/* Positioned from JS against the button that opened it, and fixed rather than
+   absolute: the table scrolls sideways inside a clipping container and the
+   Places column sits at its right edge, so a panel nested inside would be cut
+   off exactly where it has to appear. */
+#berths {
+  position: fixed;
+  z-index: 60;
+  background: var(--panel);
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 6px 22px rgba(20, 26, 34, .22);
+  min-width: 21em;
+  max-width: 25em;
+  font-size: .84rem;
+  line-height: 1.45;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #berths { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+}
+:root[data-theme="dark"] #berths { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+
+#berths .pwho {
+  margin: 0;
+  padding: .45em .7em .4em;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-narrow);
+  font-weight: 600;
+}
+#berths .pseller {
+  margin: 0;
+  padding: .35em .7em .2em;
+  font-family: var(--font-narrow);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .72em;
+  color: var(--ink-dim);
+}
+#berths .verdict {
+  margin: 0;
+  padding: .45em .7em;
+  border-bottom: 1px solid var(--rule);
+  background: var(--accent-soft);
+}
+/* The ten sailings advertising a berth nobody can buy, and the ones with
+   nothing left at all. Loud on purpose: it is the finding the ladder exists to
+   surface, and it is one hover deep already. */
+#berths .verdict.bad { background: var(--sold); color: var(--panel); }
+#berths .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
+#berths .pnote {
+  margin: 0;
+  padding: .45em .7em .5em;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: .78em;
+  line-height: 1.4;
+}
+
+#berths table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
+#berths table.cabins th {
+  font-family: var(--font-narrow);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .72em;
+  color: var(--ink-dim);
+  text-align: left;
+  font-weight: 600;
+  padding: .35em .7em .2em;
+}
+#berths table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+#berths table.cabins .num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#berths table.cabins th.num { font-family: var(--font-narrow); }
+/* The rung the row's own price came from, so the ladder always says which one
+   you were looking at -- including when that is the one that has sold out. */
+#berths table.cabins tr.here td { background: var(--accent-soft); }
+#berths table.cabins tr.out td { color: var(--ink-faint); }
+#berths .full { color: var(--sold); font-weight: 600; }
 /* Whose bill the table under it is. Only printed when there are two, because
    with one there is nothing to tell apart and a heading over every panel would
    be a label nobody needs. */

@@ -106,6 +106,14 @@
   </table>
 </main>
 
+<!-- The cabin ladder behind a Places figure, opened on hover or click.
+     Outside <main> deliberately: the table scrolls sideways inside a clipping
+     container, and the Places column sits at its right edge, so a panel drawn
+     inside it would be cut off exactly where this one has to appear. One
+     element at document level, positioned against the button that opened
+     it. -->
+<div id="berths" role="dialog" aria-label="Cabin prices and places left" hidden></div>
+
 <details class="site-footer">
   <summary>
     How the numbers are built

@@ -233,6 +233,25 @@ Break these and the site starts lying quietly rather than failing loudly.
   the net under a page that fails twice. A markup parser for them is ruled
   out — the JSON-LD is there, it just occasionally is not served. Same rule as
   the fee book: a run that could not look at something knows nothing about it.
+- **Places left is a total across every room at that price, and it is a claim.**
+  The advertised price is the bottom of a cabin ladder — on 864 of 864 sailings
+  read, with no exceptions — so "how many spots at that price" is summed over
+  every room selling at it: **233 of 864 sailings list more than one**, and
+  taking the first in document order reported the price as gone on thirteen
+  Yachtiano sailings while 8 berths were on sale at exactly it. One unstated
+  count makes the whole total unknown rather than a partial sum. The rule lives
+  in `promote._berth_blocks` and nowhere else; `app.js` displays it and takes
+  only a plain minimum of its own, for the cheapest rung still on sale.
+  A count is **the seller's claim on its booking page**, not a verified
+  number — true when read and stale by morning — so the page prints the date
+  beside it and `cabins.yml` runs an hour after the refresh. Ordering is
+  load-bearing: read a day apart, all 864 ladders sat up to 0.6% above their
+  own row, which is the panel disagreeing with the number that opened it.
+  `berths` is a **list of seller blocks** because a sailing has more than one
+  seller: PADI sells 601 of these same departures and publishes an availability
+  figure of its own ([#92]). A seller that states a count but no ladder gets no
+  cabin list — *24 places* and *24 places at a stated price* are different
+  claims, and only the second is a ladder.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was
