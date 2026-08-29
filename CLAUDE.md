@@ -204,7 +204,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   source, so both come from `window.shop` — `title`, and `fleetTitle` minus
   PADI's trailing "Fleet" — kept **verbatim**, shouting included, because
   `OPERATOR_ALIASES` already rules that tidying a company's capitalisation is a
-  short step from deciding what it is called. Where our fee book is absent
+  short step from deciding what it is called. **A fleet is not an operator**:
+  PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET Fleet", and
+  folding that onto our Blue's stated "Blue Planet Liveaboards" removed a
+  duplicate row by asserting a company for a hull our own source connects to
+  nobody. Two operator rows that may be one company is cosmetic; the assertion
+  is not. Where our fee book is absent
   PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
   where ours exists it wins outright. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a

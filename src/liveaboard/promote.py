@@ -42,13 +42,6 @@ OPERATOR_ALIASES: dict[str, str] = {
     # fleets under one company, and "Aggressor Fleet& Dancer Fleet" is 50
     # departures filed under a typo.
     "aggressor fleet& dancer fleet": "Aggressor Fleet & Dancer Fleet",
-    # One company, one name per source: liveaboard.com writes it in full and
-    # PADI's fleet field gives the short form. Confirmed rather than guessed --
-    # PADI files MY Blue and MY Blue Pearl under the same fleet, and MY Blue is
-    # our Blue, whose own departures name "Blue Planet Liveaboards". Without
-    # this the page carries both spellings as two operators, which is the one
-    # thing a folding table exists to stop.
-    "blue planet": "Blue Planet Liveaboards",
 }
 """Operator names that are one company under more than one spelling.
 
@@ -1384,10 +1377,19 @@ def promote(
 
     # The fleet PADI files a vessel under, for the boats whose departures name
     # no operator because the first source has none of them. Second, never a
-    # tie-breaker: where our own departures state a company that is the answer,
-    # and reading a second source over the top of it would put two spellings of
-    # one fleet on the page under two ids. `operator_record` folds spellings,
-    # so PADI's wording lands on our record where the two do meet.
+    # tie-breaker: where our own departures state a company that is the answer.
+    #
+    # Taken verbatim, and deliberately not folded onto a company we already
+    # hold. The temptation was MY Blue Pearl: PADI files it in "BLUE PLANET
+    # Fleet" and so files MY Blue, which is our Blue, whose own departures say
+    # "Blue Planet Liveaboards" -- so an OPERATOR_ALIASES entry made the two one
+    # operator and tidied a duplicate off the page. It also asserted, on nothing
+    # but a fleet label, that a boat we know almost nothing about is run by a
+    # company our own source never connected it to. A fleet on a booking site is
+    # not established to be the operating company, and these are two different
+    # hulls -- 24 guests at 43 m against 20 at 36 m. Two operator rows that may
+    # be one company is a cosmetic cost; naming the wrong company is the kind of
+    # claim this site exists to catch other people making.
     for slug, vessel in sorted(padi_vessels.items()):
         if slug in boat_operator or not vessel.get("operator"):
             continue

@@ -546,3 +546,54 @@ class TestABoatOnlyPadiSells(unittest.TestCase):
         payload = build_payload(Dataset.from_dict(self.payload()))
         trip = next(v for k, v in payload["itineraries"].items() if "seawolf" in k)
         self.assertTrue(trip["padi_sourced_fees"])
+
+
+class TestAFleetIsNotAnOperator(unittest.TestCase):
+    """PADI's fleet label must not rename a boat's operator to one of ours.
+
+    MY Blue and MY Blue Pearl are two hulls -- 24 guests at 43 m against 20 at
+    36 m, different shop ids, different sailings -- that PADI files under one
+    "BLUE PLANET Fleet". MY Blue is our Blue, whose own liveaboard.com
+    departures say "Blue Planet Liveaboards", so folding the fleet label onto
+    that company tidied a duplicate off the operator list. It also asserted, on
+    nothing but a fleet label, that Blue Pearl is run by a company our own
+    source never connected it to.
+
+    A fleet on a booking site is not established to be the operating company.
+    Two operator rows that may be one company is a cosmetic cost; naming the
+    wrong company is the claim this site exists to catch other people making.
+    """
+
+    def test_padi_s_fleet_is_kept_verbatim(self) -> None:
+        payload = promote(candidate([departure()]), season=SEASON,
+                          padi=VESSEL_BOOK, padi_departures=VESSEL_SAILINGS)
+        boat = next(b for b in payload["boats"] if b["id"] == "seawolf-steel")
+        operator = next(o for o in payload["operators"]
+                        if o["id"] == boat["operator_id"])
+        self.assertEqual(operator["name"], "SEAWOLF DIVING SAFARI")
+
+    def test_no_alias_folds_a_fleet_label(self) -> None:
+        """The table is for one company under two spellings *of its own name*,
+        which is a different claim from two boats sharing a shelf."""
+        from liveaboard.promote import OPERATOR_ALIASES
+        self.assertEqual(sorted(OPERATOR_ALIASES), ["aggressor fleet& dancer fleet"])
+
+    def test_the_two_blues_stay_apart_in_the_committed_dataset(self) -> None:
+        import json
+        from pathlib import Path
+
+        data = json.loads(Path("data/egypt-2027.json").read_text())
+        boats = {b["id"]: b for b in data["boats"]}
+        if "blue" not in boats or "blue-pearl" not in boats:
+            self.skipTest("neither Blue is in this checkout's dataset")
+        self.assertNotEqual(boats["blue"]["operator_id"], boats["blue-pearl"]["operator_id"])
+        self.assertNotEqual(boats["blue"]["guests"], boats["blue-pearl"]["guests"])
+
+        # And no sailing of one is filed under the other.
+        itineraries = {i["id"]: i for i in data["itineraries"]}
+        for boat, slug in (("blue", "my-blue"), ("blue-pearl", "my-blue-pearl")):
+            urls = {d.get("booking_url") or "" for d in data["departures"]
+                    if itineraries[d["itinerary_id"]]["boat_id"] == boat}
+            stray = sorted(u for u in urls
+                           if "travel.padi.com" in u and f"/{slug}/" not in u)
+            self.assertEqual(stray, [], f"{boat} carries another vessel's PADI link: {stray}")

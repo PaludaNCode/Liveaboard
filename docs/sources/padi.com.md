@@ -498,11 +498,20 @@ Two facts a PADI-only vessel has nowhere else to get:
 - **Name** — `window.shop`'s `title`. A boat published under a title-cased slug
   is one this code named rather than one anybody wrote.
 - **Operator** — `window.shop`'s `fleetTitle`, minus the trailing "Fleet" that
-  is PADI's furniture. Kept verbatim otherwise, shouting included, per
-  `OPERATOR_ALIASES`' standing rule. The one fold added is `BLUE PLANET` →
-  `Blue Planet Liveaboards`: PADI files MY Blue and MY Blue Pearl under the same
-  fleet, and MY Blue is our Blue, whose own departures name the company in full.
-  Without it the page carried both spellings as two operators.
+  is PADI's furniture. Kept **verbatim**, shouting included, per
+  `OPERATOR_ALIASES`' standing rule, and deliberately never folded onto a
+  company we already hold.
+
+  That fold was written and removed. PADI files MY Blue and MY Blue Pearl in one
+  "BLUE PLANET Fleet"; MY Blue is our Blue, whose own departures say "Blue
+  Planet Liveaboards", so a `BLUE PLANET` → `Blue Planet Liveaboards` alias
+  tidied a duplicate off the operator list. It also asserted, on nothing but a
+  fleet label, that a boat our own source says nothing about is run by that
+  company. **A fleet on a booking site is not established to be the operating
+  company**, and these are two different hulls: shop ids 19679 and 16676, 24
+  guests at 43 m built 2016 against 20 at 36 m built 2003. Two operator rows
+  that may be one company is a cosmetic cost; naming the wrong company is the
+  claim this site exists to catch other people making.
 
 Not every boat states a fleet; three of the ten land under "Operator not
 captured", which is true rather than tidy.
