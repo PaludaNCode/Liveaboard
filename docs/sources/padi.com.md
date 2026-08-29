@@ -246,7 +246,7 @@ PADI price is evidence of nothing.
 | `minimalNumberOfDives` | `50` | A plain integer, **not** the enum restated — see below |
 | `totalNumberOfDives` / `…Max` | `17` / `18` | The dive count per trip, with a low end |
 | `length` | `7` | Nights, stated |
-| `harbourDepartureTitle` / `…Arrival…` | `Marsa Alam` | Ports as fields, not parsed out of a title |
+| `harbourDepartureTitle` / `…Arrival…` | `Marsa Alam` | Ports as fields, not parsed out of a title. Collected, **not yet read** — see below |
 | `days`, `descriptions`, `highlightsDescription`, `goodToKnow` | | Day-by-day and prose |
 | `mandatoryOnBoard`, `optionalInAdvance`, `notIncludedInfo`, `whatsIncludedNew` | | The fee book, structured |
 | `cancellationMilestones`, `paymentInformation` | | Deposit schedule and cancellation terms |
@@ -376,6 +376,51 @@ a mandatory charge. The section is not where the answer is.
 `DiverLevel`, with tests. Nitrox rides along with the certification in PADI's
 vocabulary (10 vs 20, 30 vs 40) but is a gas rather than an entry bar, so each
 pair lands on one level.
+
+### The stated harbour, and why nothing reads it yet
+
+`harbourDepartureTitle` / `harbourArrivalTitle` are the harbour as PADI's own
+field, and `itinerary_from_payload` stores them — joined with `" - "`, under
+`ports`, in `data/padi.json`. **Nothing in `promote` reads them.** Ports come
+off the trip title instead, at both sources.
+
+Checked against each other across the 212 itineraries carrying both: the stated
+harbour and the parsed one are the **same place every time**, with no
+contradiction anywhere. What the field settles is the spellings a title parser
+has to guess at:
+
+| The title writes | The field states | PADI trips |
+|---|---|---|
+| `HRG`, `PRG` | `Hurghada`, `Port Ghalib` | 19, all Seawolf Steel |
+| `Port Galib` | `Port Ghalib` | 11 — MY Anemone and Blue Horizon |
+| `Sharm El sheikh`, `Sharm El Sheik` | `Sharm El Sheikh` | 1, Bella 2 |
+
+Most of Blue Horizon's reach the page under our own spelling, because its trips
+match liveaboard.com's and take the name from there; the rest of the column is
+PADI's spelling standing alone.
+
+Those are folded in `promote.PORT_ALIASES` for now, on this evidence. **PRG is
+the reason to read the field rather than the letters**: HRG really is
+Hurghada's IATA code, but PRG is Prague's and no Egyptian harbour's, so a rule
+that resolved airport codes would have filed those seven sailings in the Czech
+Republic. The abbreviation is the operator's, and only the field says what it
+stands for.
+
+Reading it properly is blocked on the record shape, not on a fetch. `ports` is
+one string, and two of the eight harbours PADI names contain the separator
+itself:
+
+```
+Hurghada - Marriott Marina - Hurghada - Marriott Marina    (9 trips)
+Port Ghalib - Hurghada - Marriott Marina                   (1 trip)
+```
+
+so the join cannot be undone without guessing where the middle is. The fix is
+to store the two harbours as two fields and let them beat a port parsed out of
+the same source's title — which takes a crawl to populate, and three more
+marina spellings folded (`Hurghada Marina`, `Hurghada - Marriott Marina`, `New
+Marina Sharm El Sheikh (El Wataneya)`). Until then the field is collected and
+unread, and that is a deliberate state rather than an oversight.
 
 ## Two things that lost matches on correct pairings
 

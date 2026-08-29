@@ -283,6 +283,59 @@ class TestPortsFromTitle(unittest.TestCase):
         self.assertEqual(itinerary["port_from"], "Unknown")
 
 
+class TestPortsWrittenTight(unittest.TestCase):
+    """A hyphen with no space around it is still a hyphen between two ports.
+
+    Thirteen titles are punctuated this way and every one of them was read as
+    having no ports at all: 32 bookable sailings printed "Unknown" under the
+    column a visitor books flights from, and kept the bracket in their trip
+    name where the other 389 had it cut. Nobody withheld the harbour -- it is
+    written there in full.
+    """
+
+    def promote_one(self, name: str) -> dict:
+        payload = promote(
+            candidate([departure(name=name, location="Egypt")]), season=SEASON
+        )
+        return payload["itineraries"][0]
+
+    def test_no_spaces_at_all(self):
+        itinerary = self.promote_one("North & Tiran (Hurghada-Hurghada)")
+        self.assertEqual(itinerary["port_from"], "Hurghada")
+        self.assertEqual(itinerary["port_to"], "Hurghada")
+
+    def test_a_space_on_the_left_only(self):
+        itinerary = self.promote_one("Fury Shoals (Port Ghalib -Port Ghalib)")
+        self.assertEqual(itinerary["port_from"], "Port Ghalib")
+
+    def test_a_space_on_the_right_only(self):
+        itinerary = self.promote_one("Fury Shoals (Hurghada- Port Ghalib)")
+        self.assertEqual(itinerary["port_from"], "Hurghada")
+        self.assertEqual(itinerary["port_to"], "Port Ghalib")
+
+    def test_the_ports_leave_the_title_however_they_are_spaced(self):
+        """The other half of the same bug: From and To are columns already."""
+        itinerary = self.promote_one("Famous Five (Hurghada-Hurghada)")
+        self.assertNotIn("(", itinerary["title"])
+        self.assertEqual(itinerary["title"], "Famous Five")
+
+    def test_a_spaced_dash_is_still_the_separator(self):
+        """Order matters, and it is fixed before a title needs it to be.
+
+        Read tight-first, "(Sharm el-Sheikh - Hurghada)" splits into "Sharm el"
+        and "Sheikh - Hurghada" -- a harbour that does not exist and a return
+        port that is two. The strict pattern is asked first for this reason.
+        """
+        itinerary = self.promote_one("Deep South (Sharm el-Sheikh - Hurghada)")
+        self.assertEqual(itinerary["port_from"], "Sharm el-Sheikh")
+        self.assertEqual(itinerary["port_to"], "Hurghada")
+
+    def test_a_tight_route_is_still_a_route(self):
+        """Loosening the spacing does not loosen what counts as a port."""
+        itinerary = self.promote_one("Red Sea Classic (Brothers-Daedalus)")
+        self.assertEqual(itinerary["port_from"], "Egypt")
+
+
 class TestPromotionalTitles(unittest.TestCase):
     """A discount banner on the title split one trip across two cards."""
 
@@ -470,6 +523,28 @@ class TestPortNames(unittest.TestCase):
     def test_a_missing_port_is_unknown_not_blank(self):
         self.assertEqual(self.port(None), "Unknown")
         self.assertEqual(self.port(""), "Unknown")
+
+    def test_the_airport_codes_are_the_harbours_the_source_states(self):
+        """PADI states the harbour in a field beside the title it shortens."""
+        self.assertEqual(self.port("HRG"), "Hurghada")
+        self.assertEqual(self.port("PRG"), "Port Ghalib")
+
+    def test_an_abbreviation_nothing_states_stays_its_own_name(self):
+        """A code is folded because a source names the harbour, not because
+        it looks like a code.
+
+        RMF is Marsa Alam's airport and no title in the fleet uses it. Folding
+        it would be guessing which harbour a stranger meant, which is the one
+        thing this table does not do.
+        """
+        self.assertEqual(self.port("RMF"), "RMF")
+
+    def test_the_misspelt_marina_is_the_same_marina(self):
+        self.assertEqual(self.port("Port Galib"), "Port Ghalib")
+
+    def test_sharm_settles_on_one_spelling_and_one_capital(self):
+        for spelling in ("Sharm El Sheikh", "Sharm El sheikh", "Sharm El Sheik"):
+            self.assertEqual(self.port(spelling), "Sharm El Sheikh", spelling)
 
 
 class TestDiveCount(unittest.TestCase):

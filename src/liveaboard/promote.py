@@ -115,6 +115,31 @@ airport someone flies into and whether they need two of them, so it is worth
 reading off the only place the source puts it.
 """
 
+PORTS_TIGHT = re.compile(r"\(([^()]{2,60}?)\s*[-–]\s*([^()]{2,60}?)\)\s*$")
+"""The same pair, written without the spaces around the dash.
+
+Thirteen titles space the hyphen on one side or on neither -- "(Hurghada-
+Hurghada)", "(Port Ghalib -Port Ghalib)" -- because ``TIDY`` evens out the
+spacing around ``&`` and around an en dash but not around a hyphen. They read
+as a port pair to anybody and as nothing at all to :data:`PORTS`, so 32 real
+sailings printed "Unknown" in the column whose whole job is which airport to
+fly into, and kept the bracket in their trip name where their 389 neighbours
+had it cut.
+
+Tried only after :data:`PORTS` fails, never in place of it. A spaced dash,
+where a title has one, is the separator: "(Sharm el-Sheikh - Hurghada)" is two
+harbours under that rule and "Sharm el" plus "Sheikh - Hurghada" under this
+one. No name in the fleet is written that way today -- of 872 names across
+every source in the repository, none has two dashes inside the trailing
+bracket -- which is why the order is settled now rather than the first time
+one is.
+"""
+
+
+def _ports_match(name: str) -> "re.Match[str] | None":
+    """The port pair at the end of a title, a spaced dash preferred."""
+    return PORTS.search(name) or PORTS_TIGHT.search(name)
+
 
 PORT_ALIASES: dict[str, str] = {
     # Port Ghalib's marina is written three ways across the fleet. "Marsa" is
@@ -126,15 +151,50 @@ PORT_ALIASES: dict[str, str] = {
     # Soma Bay is a resort bay ten kilometres up the coast from Safaga, and the
     # operator names both because it uses whichever berth it is given.
     "safaga/soma bay": "Safaga",
+    # One hull abbreviates both its harbours to airport codes. What folds them
+    # is not the letters but the same source saying the harbour outright:
+    # every Seawolf Steel trip titled "(HRG - PRG)" carries PADI's
+    # `harbourDepartureTitle` "Hurghada" and `harbourArrivalTitle` "Port
+    # Ghalib". (HRG is indeed Hurghada's IATA code. PRG is Prague's, and no
+    # Egyptian harbour's, which is the reason to read the field instead.)
+    "hrg": "Hurghada",
+    "prg": "Port Ghalib",
+    # A letter short of the 130 itineraries that spell it out, on a Fury Shoals
+    # week whose stated harbour is "Port Ghalib".
+    "port galib": "Port Ghalib",
+    # One title prints the same harbour two wrong ways inside one bracket:
+    # "(Sharm El sheikh - Sharm El Sheik)". The stated harbour is "Sharm El
+    # Sheikh" both ends, so the case row settles the capital with the spelling.
+    "sharm el sheik": "Sharm El Sheikh",
+    "sharm el sheikh": "Sharm El Sheikh",
 }
 """Ports that are one place under several spellings.
 
 Left unmerged they made ten filter chips out of six real harbours, and split
 the departures leaving from one marina across three of them -- which is worse
 than cosmetic on a filter whose whole job is "which airport do I fly into".
+The second seller put the count back up to eleven: PADI's titles carry the
+abbreviations and the misspellings this table's first half was written for,
+and 19 departures sat under four chips that name no place.
 
 Deliberately narrow. Marsa Alam is sixty kilometres south of Port Ghalib and
-stays its own port, however similar the names look.
+stays its own port, however similar the names look. Each row here folds a
+spelling onto one the *same fleet* already uses of the *same harbour* --
+never a guess at which harbour an unfamiliar name might mean.
+
+Folds the column, not the name. Ids are built from the trip name and the port
+pair is inside them for a PADI-minted trip, so rewriting a name to settle a
+chip moves the id under every departure hanging off it -- and Seawolf Steel
+carries two trips differing only by their ports.
+
+The bottom four rows are checked against the second source rather than argued
+for: PADI publishes the harbour as a field next to the title it abbreviates,
+and on all 212 itineraries that carry both, the stated harbour and the parsed
+one are the same place -- no contradictions, only the spellings folded here.
+That field is collected into ``data/padi.json`` and read by nothing yet; when
+it is, it should beat a port parsed out of the same source's title, and this
+half of the table becomes a net rather than the answer. See
+``docs/sources/padi.com.md``.
 """
 
 
@@ -186,7 +246,7 @@ def _split_title(name: str) -> tuple[str, str | None, tuple[str, str] | None]:
         name = name[match.end():].strip()
 
     ports = None
-    match = PORTS.search(name)
+    match = _ports_match(name)
     if match:
         first, second = (" ".join(p.split()) for p in match.groups())
         # A parenthetical is only a port pair when it reads like one. "(Brothers
@@ -508,8 +568,9 @@ def _display_title(name: str) -> str:
     it would delete what the trip actually is.
     """
     stripped, _, ports = _split_title(name)
-    if ports is not None:
-        stripped = PORTS.sub("", stripped).strip(" -,:") or stripped
+    match = _ports_match(stripped) if ports is not None else None
+    if match is not None:
+        stripped = stripped[: match.start()].strip(" -,:") or stripped
     stripped = _fold_reef_names(_fix_title_errors(stripped))
     if BDE.match(stripped):
         return BDE_TITLE
