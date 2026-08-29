@@ -811,23 +811,44 @@ class TestPayloadIsRead(unittest.TestCase):
         bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
         self.assertTrue(bars, "the seed itself states no entry bar to print")
 
-    def test_the_padi_column_explains_itself(self) -> None:
-        """The one column whose heading a visitor cannot interpret.
+    def test_the_second_seller_is_reachable_and_explained(self) -> None:
+        """A second seller prices these rows, so a reader can get to it.
 
-        Every other column is named for what it holds, and each has a section
-        in the footer. "Sellers" is one word for a second site pricing the same
-        berth; its cells say "berth only" and "—" and mean two quite different
-        things by them, and a reader has no way to work either out. So it
-        explains itself in the heading and in the footer, or this fails.
+        There is no Sellers column any more: it named which end of the price
+        span was whose, which the expanded row already says under each
+        seller's name. What a column cannot replace is the *link* — the money
+        columns can price a row on PADI's bill, and somebody checking that
+        figure needs the page it came from. So the Source column carries both
+        where both sell the sailing, and the footer says so.
+
+        The link is per boat and printed only where PADI prices that date: a
+        vessel having a PADI page says nothing about whether one sailing is on
+        its calendar.
         """
-        self.assertIn("hint:", self.app(), "no column carries an explanation")
+        source = self.app()
+        self.assertIn("padi_urls", source,
+                      "the page has no way to link the other seller")
+        self.assertIn("PADI ↗", source, "the Source column never names PADI")
+
         footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
         self.assertIn("<h3>Sellers</h3>", footer,
-                      "the footer explains every column but this one")
-        self.assertIn("berth only", footer,
-                      "the footer never says what an uncomparable row means")
+                      "the footer never explains the second seller")
+        self.assertIn("Source", footer,
+                      "the footer never says where the second seller is linked")
         self.assertIn("Entry requirements", footer,
                       "the footer never says where the entry bar comes from")
+
+    def test_no_column_is_left_unexplained_by_the_footer(self) -> None:
+        """Every column heading a visitor cannot read off its own name has a
+        footer section. Removing a column must take its explanation with it, or
+        the footer documents something nobody can find."""
+        footer = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        headings = set(re.findall(r"<h3>([^<]+)</h3>", footer))
+        source = self.app()
+        titles = set(re.findall(r'\bt: "([^"]+)"', source))
+        for heading in ("Places", "Disclosure", "Per dive"):
+            self.assertIn(heading, headings, f"the footer dropped {heading}")
+            self.assertIn(heading, titles, f"{heading} is documented but gone")
 
     def test_a_row_prints_one_seller_and_not_a_blend(self) -> None:
         """Advertised plus Mandatory fees is the Total, on every row.
