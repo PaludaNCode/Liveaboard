@@ -288,8 +288,9 @@ tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
   left:calc(var(--st0) + var(--st1) + var(--st2) + var(--st3));
   width:var(--st4); min-width:var(--st4); max-width:var(--st4);
 }
-/* The rule that closes the pinned group sits on whichever column ends it. */
-.pins-4 .stick4, .pins-3 .stick3, .pins-2 .stick2 {
+/* The rule that closes the pinned group sits on whichever column ends it --
+   including where the group is one column, which is what a phone pins. */
+.pins-4 .stick4, .pins-3 .stick3, .pins-2 .stick2, .pins-1 .stick1 {
   border-right:1px solid var(--rule-strong);
 }
 /* And a lighter one inside it, between when the trip runs and what it runs on.
@@ -555,31 +556,24 @@ a { color:var(--accent); }
      screen and left exactly one row of prices under them. */
   body.filters-open .filterbar { max-height:34vh; overflow-y:auto; }
 
-  /* Two pinned columns still name every row, but narrower: at 390px they were
-     taking 214px and leaving 176 for the numbers. */
-  /* Still three pinned columns, but narrower. When, until when, and on what
-     is the least a row can be identified by, and dropping one of the three
-     would leave a row that scrolls away from either its dates or its boat. At
-     66 + 66 + 96 they take 228px of 390 and True cost, the next column, lands
-     inside the remaining 162. */
-  /* Three here, not two: Depart, Boat and Guests. Guests joined the identity
-     columns in the order, and a group is only a group if the rule that closes
-     it falls after the last of them -- left pinned at two, the strong edge
-     landed between Boat and Guests and filed the guest count with the money,
-     which is the same mistake the wide table made before Guests was pinned
-     there. 24 + 66 + 96 + 45 is 231 of 390, and the Total still lands whole
-     inside what is left. Below 386px Guests is not in front of the money at
-     all, so the count drops back to two -- see `pinned()`. */
-  :root { --st0:24px; --st1:66px; --st2:96px; --st3:45px; }
+  /* One pinned column here -- the depart date, and nothing else. Depart, Boat
+     and Guests pinned held 231px of a 390px screen still while the sixteen
+     columns this page exists to compare were dragged through the 159 that
+     were left. See `pinned()` for why the date is the one that stays. */
+  :root { --st0:24px; --st1:66px; }
 
-  /* The group rules, by what the columns mean rather than by where they sit.
-     On a wide screen the light rule falls on `.stick3`, because the pinned
-     four are Depart, Return, Boat, Guests and Boat is third. Here the pinned
-     three are Depart, Boat, Guests, so Boat is second and Guests is third:
-     the light rule moves to `.stick2` and must come off `.stick3`, or it
-     would split the boat from its own guest count. */
-  .stick2 { border-left:1px solid var(--rule); }
-  .stick3 { border-left:0; }
+  /* Boat and Guests scroll here, but they keep the widths they had while they
+     were pinned. The widths were never about being sticky: they are what puts
+     the Total whole inside 390px in the default unscrolled view -- 24 + 66 +
+     96 + 45 in front of a 155px price column lands its right edge at 386. A
+     boat name is 140px unconstrained, which pushes the number this page
+     exists to publish off the edge of the screen it is most often read on,
+     and does it silently: the row still renders. */
+  .boat, .guests {
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .boat { width:96px; min-width:96px; max-width:96px; }
+  .guests { width:45px; min-width:45px; max-width:45px; }
 
   td.expander, th.expander { padding:4px 6px; }
   /* 6px, not 7. Guests moved in front of the money here to sit with the boat,
