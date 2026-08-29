@@ -494,22 +494,57 @@ class TestAliasMap(unittest.TestCase):
         self.assertFalse(PadiComAdapter.is_reviewed("sea-serpent", self.MAP))
 
     def test_the_committed_map_keys_on_real_boat_ids(self) -> None:
-        """Every key must be a boat we actually hold.
+        """Every key must be a boat we hold, or one we minted for PADI.
 
         A key that matches nothing fails silently -- vessel_for returns None,
         which is indistinguishable from unreviewed -- and that is exactly how
         the first version of this file went wrong, keying "MY Odyssey
         Liveaboard" as its folded name when its boat_id is "odyssey".
+
+        `padi_only` is the exemption and needs one: those ids are minted in this
+        file rather than by the first source, and a vessel with no sailing
+        inside the published season never becomes a boat in the dataset. Twelve
+        of the 22 are in that state today -- PADI's calendar for them stops
+        before May 2027, or in VIP One's case prices every sailing at zero. They
+        are still reviewed, still mapped, and still fetched every refresh, so
+        the day one of them opens a season it appears without anybody editing
+        this file.
         """
         import json
         from pathlib import Path
 
         aliases = json.loads(Path("data/padi_aliases.json").read_text())
         boats = {b["id"] for b in json.loads(Path("data/egypt-2027.json").read_text())["boats"]}
-        unknown = sorted(set(aliases["aliases"]) - boats)
+        minted = set(aliases.get("padi_only") or [])
+        unknown = sorted(set(aliases["aliases"]) - boats - minted)
         self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
         stale = sorted(set(aliases.get("absent") or []) - boats)
         self.assertEqual(stale, [], f"absent entries matching no boat: {stale}")
+
+    def test_every_minted_id_is_mapped(self) -> None:
+        """The exemption above must not become a place to park a typo.
+
+        A `padi_only` entry that is not also in `aliases` names no PADI slug,
+        so nothing would ever fetch it -- and it would read as a reviewed boat
+        rather than as the dead string it is.
+        """
+        import json
+        from pathlib import Path
+
+        aliases = json.loads(Path("data/padi_aliases.json").read_text())
+        orphan = sorted(set(aliases.get("padi_only") or []) - set(aliases["aliases"]))
+        self.assertEqual(orphan, [], f"padi_only entries with no slug: {orphan}")
+
+    def test_no_boat_is_both_ours_and_padi_s_alone(self) -> None:
+        """AVO and Blue sat outside every list in this file until 2026-08-29,
+        which is the one state it exists to make impossible. Neither may now be
+        in two."""
+        import json
+        from pathlib import Path
+
+        aliases = json.loads(Path("data/padi_aliases.json").read_text())
+        both = sorted(set(aliases.get("padi_only") or []) & set(aliases.get("absent") or []))
+        self.assertEqual(both, [], f"listed as both PADI-only and absent: {both}")
 
 
 class TestStricterBar(unittest.TestCase):

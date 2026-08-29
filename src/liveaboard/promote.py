@@ -42,6 +42,13 @@ OPERATOR_ALIASES: dict[str, str] = {
     # fleets under one company, and "Aggressor Fleet& Dancer Fleet" is 50
     # departures filed under a typo.
     "aggressor fleet& dancer fleet": "Aggressor Fleet & Dancer Fleet",
+    # One company, one name per source: liveaboard.com writes it in full and
+    # PADI's fleet field gives the short form. Confirmed rather than guessed --
+    # PADI files MY Blue and MY Blue Pearl under the same fleet, and MY Blue is
+    # our Blue, whose own departures name "Blue Planet Liveaboards". Without
+    # this the page carries both spellings as two operators, which is the one
+    # thing a folding table exists to stop.
+    "blue planet": "Blue Planet Liveaboards",
 }
 """Operator names that are one company under more than one spelling.
 
@@ -66,6 +73,17 @@ MAX_NIGHTS = 30
 
 def slugify(value: str) -> str:
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", value.lower())).strip("-")
+
+
+def _collapsed(value: str | None) -> str | None:
+    """Runs of whitespace folded to one space.
+
+    Not a spelling change, which is why it is safe where re-casing is not: the
+    first source's scraper already collapses whitespace on everything it reads,
+    so this only brings the second source to the same footing. PADI ships
+    "Explorer Ventures -  Grand Sea Explorer" with two spaces in the middle.
+    """
+    return " ".join(value.split()) if value else None
 
 
 def operator_record(name: str) -> dict[str, str]:
@@ -1013,6 +1031,19 @@ def promote(
         if record.get("boat") and record.get("name"):
             padi_book[padi_key(record["boat"], record["name"])] = record
 
+    # What PADI says about a vessel rather than about one of its trips: its
+    # name and the fleet it belongs to.
+    #
+    # Read for every boat and used for almost none. A vessel liveaboard.com
+    # also sells takes its name and operator from there, because those are the
+    # strings the rest of the dataset is keyed and sorted on, and having one
+    # source of them is the point. It is the boats PADI sells alone that have
+    # no other name to take.
+    padi_vessels: dict[str, dict[str, Any]] = {
+        boat: record
+        for boat, record in ((padi or {}).get("vessels") or {}).items()
+    }
+
     # The same sailing, as PADI sells it. Keyed on vessel and day -- an exact
     # key, unlike the itinerary join, because a date has no spelling.
     #
@@ -1194,12 +1225,28 @@ def promote(
         operators.setdefault(record["id"], record)
         boat_operator[slug] = record["id"]
 
+    # The fleet PADI files a vessel under, for the boats whose departures name
+    # no operator because the first source has none of them. Second, never a
+    # tie-breaker: where our own departures state a company that is the answer,
+    # and reading a second source over the top of it would put two spellings of
+    # one fleet on the page under two ids. `operator_record` folds spellings,
+    # so PADI's wording lands on our record where the two do meet.
+    for slug, vessel in sorted(padi_vessels.items()):
+        if slug in boat_operator or not vessel.get("operator"):
+            continue
+        record = operator_record(_collapsed(vessel["operator"]) or "")
+        operators.setdefault(record["id"], record)
+        boat_operator[slug] = record["id"]
+
     # Our boat id -> PADI's slug, for the provenance URL. The alias map is the
     # only place that pairing is recorded, and it is recorded by hand.
     padi_slug_for: dict[str, str] = {
+        boat: (vessel.get("slug") or "") for boat, vessel in padi_vessels.items()
+    }
+    padi_slug_for.update({
         record["boat"]: record.get("slug", "")
         for record in sailing_book.values() if record.get("boat")
-    }
+    })
 
     boats: dict[str, dict[str, Any]] = {}
     itineraries: list[dict[str, Any]] = []
@@ -1207,7 +1254,14 @@ def promote(
 
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
-        boat_name = source.get("boat") or source.get("name") or slug.replace("-", " ").title()
+        # PADI's name only where the first source has none, which is the 22
+        # vessels it does not sell. Falling through to a title-cased slug is
+        # the last resort it has always been, and it now means something worse
+        # than it used to: a boat published under a name this code invented
+        # rather than one anybody wrote.
+        boat_name = (source.get("boat") or source.get("name")
+                     or _collapsed((padi_vessels.get(slug) or {}).get("name"))
+                     or slug.replace("-", " ").title())
         # Guests belong to the vessel, not the sailing: the same boat carries
         # the same number of people whichever week you book.
         boats.setdefault(
@@ -1271,6 +1325,24 @@ def promote(
         )
         port_from, port_to = _port(port_from), _port(port_to)
 
+        # The second seller's own required extras, beside ours and never mixed
+        # into them. Written only where PADI states at least one charge or
+        # states a complete bill of none, so a trip PADI has not been read for
+        # carries no key rather than an empty list that reads as "no fees".
+        #
+        # Resolved before the itinerary is built rather than bolted on after,
+        # because for a vessel liveaboard.com does not sell this *is* the
+        # itinerary's fee book -- see "fees" below.
+        padi_fees = _padi_fees(padi_trip)
+        if padi_fees is not None:
+            retrieved = (padi or {}).get("collected") or ""
+            for line in padi_fees["lines"]:
+                line["provenance"]["retrieved"] = retrieved
+                line["provenance"]["url"] = (
+                    f"https://travel.padi.com/liveaboard/egypt/"
+                    f"{padi_slug_for.get(slug, slug)}/"
+                )
+
         itineraries.append(
             {
                 "id": itinerary_id,
@@ -1317,7 +1389,23 @@ def promote(
                 "source_url": source.get("source_url"),
                 # Empty when the fee run has not covered this vessel. The
                 # renderer shows that as unknown, never as zero.
-                "fees": fee_book.get(slug, source.get("fees") or []),
+                #
+                # PADI's own book last, and only for the 22 vessels the fee run
+                # can never cover because liveaboard.com does not sell them.
+                # This is a fallback where ours is absent, not a merge: the two
+                # sources disclose at different resolutions -- one figure per
+                # vessel against one per itinerary -- and adding a line from
+                # each would build a bill neither seller quotes. Where our book
+                # exists it wins outright, and PADI's stays beside it under its
+                # own name as `padi_fees`, which is what the page compares.
+                #
+                # Without this the ten PADI-only boats with sailings in the
+                # season would publish 166 berth prices and not one total, on a
+                # site whose whole subject is the difference between the two.
+                "fees": (fee_book.get(slug)
+                         or source.get("fees")
+                         or (padi_fees or {}).get("lines")
+                         or []),
             }
         )
 
@@ -1335,21 +1423,20 @@ def promote(
         if bar:
             itineraries[-1]["requirements"] = bar
 
-        # The second seller's own required extras, beside ours and never mixed
-        # into them. Written only where PADI states at least one charge or
-        # states a complete bill of none, so a trip PADI has not been read for
-        # carries no key rather than an empty list that reads as "no fees".
-        padi_fees = _padi_fees(padi_trip)
         if padi_fees is not None:
-            retrieved = (padi or {}).get("collected") or ""
-            for line in padi_fees["lines"]:
-                line["provenance"]["retrieved"] = retrieved
-                line["provenance"]["url"] = (
-                    f"https://travel.padi.com/liveaboard/egypt/"
-                    f"{padi_slug_for.get(slug, slug)}/"
-                )
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
             itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]
+
+        # Whether this trip's own fee rows came from PADI rather than from the
+        # vessel panel every other itinerary uses. Written only where true, so
+        # it marks the 22 boats liveaboard.com does not sell rather than
+        # shipping a false on 341 itineraries. The page needs it because the
+        # sentence it prints under the table names a source, and naming the
+        # wrong one is the failure this project reports in other people.
+        if (itineraries[-1]["fees"]
+                and padi_fees is not None
+                and itineraries[-1]["fees"] is padi_fees["lines"]):
+            itineraries[-1]["padi_sourced_fees"] = True
 
         for item in group:
             entry = {
@@ -1552,10 +1639,23 @@ def _padi_note(
         )
     if only:
         note += (
-            f" On {only} sailings it is the only seller: liveaboard.com does not "
-            f"list those dates, so the berth price is PADI's and the fees are "
-            f"the vessel's own."
+            f" On {only} sailings it is the only seller and the berth price is "
+            f"PADI's."
         )
+        # Which fee book those rows use is not one answer, and the sentence
+        # above would be false for the second kind if it claimed it was. Most
+        # are boats liveaboard.com sells on other dates, so the vessel's own
+        # panel applies; the rest are boats it publishes no departures for at
+        # all, and PADI's per-itinerary book is the only one there is.
+        sourced = sum(1 for i in itineraries if i.get("padi_sourced_fees"))
+        if sourced:
+            note += (
+                f" The fees are the vessel's own panel, except on {sourced} "
+                f"trips whose boats liveaboard.com does not sell, where they "
+                f"are PADI's too."
+            )
+        else:
+            note += " The fees are the vessel's own."
     return note
 
 

@@ -290,6 +290,21 @@ class Itinerary:
     preferring one wholesale would hide the difference this site exists to show.
     """
     padi_fees_complete: bool = False
+
+    padi_sourced_fees: bool = False
+    """True where this trip's own fee rows came from PADI Travel.
+
+    Every other itinerary takes them from the vessel panel liveaboard.com
+    publishes, which is per boat and does not change with the month. The 22
+    vessels liveaboard.com does not sell have no such panel, so PADI's
+    per-itinerary book is the only one there is and becomes theirs.
+
+    A fallback where ours is absent, never a merge: the two disclose at
+    different resolutions -- one figure per vessel against one per itinerary --
+    and taking a line from each would build a bill neither seller quotes. The
+    flag exists because the page names the source under the fee table, and
+    naming the wrong one is the failure this project reports in other people.
+    """
     """Whether every charge PADI states here is named and priced.
 
     False is the ordinary case for a trip PADI has not been read for *and* for
@@ -323,6 +338,7 @@ class Itinerary:
                 for f in payload.get("padi_fees", [])
             ],
             padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
+            padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )
 
 

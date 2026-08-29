@@ -104,6 +104,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
 
+        # Where the rows above came from, on the trips whose answer is not the
+        # usual one. Written only where true: a key written per itinerary is a
+        # key written 341 times, and this is the answer for 22 boats.
+        if itinerary.padi_sourced_fees:
+            itineraries[key]["padi_sourced_fees"] = True
+
     departures: list[dict[str, Any]] = []
     for departure in sorted(dataset.departures, key=lambda d: (d.start, d.id)):
         itinerary = dataset.itinerary_for(departure)

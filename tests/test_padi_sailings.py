@@ -435,3 +435,114 @@ class TestTwoTripsNeverShareAnId(unittest.TestCase):
         payload = promote(candidate([departure()]), season=SEASON, padi_departures=SOLE)
         ids = [i["id"] for i in payload["itineraries"]]
         self.assertEqual(len(ids), len(set(ids)))
+
+
+VESSEL_BOOK = {
+    "collected": "2026-08-28",
+    "vessels": {
+        "seawolf-steel": {"slug": "seawolf-steel", "name": "Seawolf Steel",
+                          "operator": "SEAWOLF DIVING SAFARI",
+                          "country": "egypt", "currency": "EUR"},
+    },
+    "trips": {
+        "seawolf-steel::Fury Shoals (PRG - PRG)": {
+            "boat": "seawolf-steel", "boat_name": "Seawolf Steel",
+            "name": "Fury Shoals (PRG - PRG)", "nights": 7, "dives": 19,
+            "fees": {"complete": True, "unreadable": [], "lines": [
+                {"code": "combined_fees", "tier": "mandatory",
+                 "basis": "per_trip", "note": "Marine Park and harbour fees",
+                 "amount": {"amount": 255.0, "currency": "EUR"}},
+            ]},
+        },
+    },
+}
+
+VESSEL_SAILINGS = {
+    "collected": "2026-08-28",
+    "departures": {
+        "seawolf-steel::2027-07-04": {
+            "boat": "seawolf-steel", "slug": "seawolf-steel",
+            "start": "2027-07-04", "end": "2027-07-11", "nights": 7,
+            "price": 1400.0, "currency": "EUR", "availability": 8, "padi_id": 9,
+            "itinerary": "Fury Shoals (PRG - PRG) 7 Nights",
+        },
+    },
+}
+
+
+class TestABoatOnlyPadiSells(unittest.TestCase):
+    """A vessel the first source has no departures for at all.
+
+    Twenty-two of PADI's Egyptian liveaboards are in this state, ten of them
+    with sailings inside the published season. They arrive with no name, no
+    operator and, for twelve of the twenty-two, no fee panel either, because
+    every one of those normally comes from the site that sells the berths.
+
+    Two rules keep such a boat honest. Its name and operator are PADI's own
+    strings, verbatim -- a vessel published under a title-cased slug is one this
+    code named rather than one anybody wrote. And PADI's per-itinerary fee book
+    becomes the itinerary's own, but only as a fallback: where our per-vessel
+    book exists it wins outright, because the two disclose at different
+    resolutions and taking a line from each builds a bill neither seller quotes.
+    """
+
+    def payload(self):
+        return promote(candidate([departure()]), season=SEASON,
+                       padi=VESSEL_BOOK, padi_departures=VESSEL_SAILINGS)
+
+    def boat(self, payload):
+        return next(b for b in payload["boats"] if b["id"] == "seawolf-steel")
+
+    def trip(self, payload):
+        return next(i for i in payload["itineraries"] if i["boat_id"] == "seawolf-steel")
+
+    def test_the_boat_appears(self) -> None:
+        payload = self.payload()
+        self.assertEqual(len(payload["boats"]), 2)
+        self.assertEqual(len(payload["departures"]), 2)
+
+    def test_it_takes_padi_s_name_rather_than_its_slug(self) -> None:
+        self.assertEqual(self.boat(self.payload())["name"], "Seawolf Steel")
+
+    def test_it_takes_padi_s_fleet_as_its_operator(self) -> None:
+        """Shouted, and left that way. Tidying an operator's capitalisation is
+        a short step from deciding what they are called -- the rule
+        OPERATOR_ALIASES already states."""
+        payload = self.payload()
+        operator = next(o for o in payload["operators"]
+                        if o["id"] == self.boat(payload)["operator_id"])
+        self.assertEqual(operator["name"], "SEAWOLF DIVING SAFARI")
+
+    def test_padi_s_fee_book_becomes_the_trip_s_own(self) -> None:
+        """Otherwise the row is a berth price with no total, on a site whose
+        subject is the difference between the two."""
+        trip = self.trip(self.payload())
+        self.assertEqual([f["code"] for f in trip["fees"]], ["combined_fees"])
+        self.assertEqual(trip["fees"][0]["provenance"]["source_id"], "padi.com")
+        self.assertTrue(trip["padi_sourced_fees"])
+
+    def test_our_own_fee_book_still_wins_where_it_exists(self) -> None:
+        """The fallback must not become a merge. Ten of the twenty-two do have
+        a liveaboard.com fee panel -- that site carries the vessel and simply
+        publishes no departures for it -- and those take it."""
+        fees = {"vessels": {"seawolf-steel": {"fees": [
+            {"code": "marine_park", "label": "Marine park fees", "tier": "mandatory",
+             "amount": {"amount": 150.0, "currency": "EUR"}, "basis": "per_trip",
+             "included": False,
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+        ]}}}
+        payload = promote(candidate([departure()]), season=SEASON, fees=fees,
+                          padi=VESSEL_BOOK, padi_departures=VESSEL_SAILINGS)
+        trip = self.trip(payload)
+        self.assertEqual([f["code"] for f in trip["fees"]], ["marine_park"])
+        self.assertNotIn("padi_sourced_fees", trip)
+        self.assertEqual([f["code"] for f in trip["padi_fees"]], ["combined_fees"],
+                         "PADI's book stays beside ours under its own name")
+
+    def test_the_page_is_told_where_the_fee_rows_came_from(self) -> None:
+        """The sentence under the fee table names a source, and naming the
+        wrong one is the failure this project reports in other people."""
+        payload = build_payload(Dataset.from_dict(self.payload()))
+        trip = next(v for k, v in payload["itineraries"].items() if "seawolf" in k)
+        self.assertTrue(trip["padi_sourced_fees"])

@@ -997,15 +997,28 @@
         + "two are not comparable: what that figure leaves out is exactly what "
         + "the table above is for.";
     } else if (row.d.padi_only) {
-      /* Said plainly because the table above it is a mixture and the reader
-         is owed the join: the berth is PADI's, the fees are the boat's. That
-         is not a spliced bill -- the marine park, the port and the fuel are
-         charged on board by the vessel whoever sold the berth, which is the
-         same reason both sellers' totals carry the same nitrox and gear. */
-      padi = "liveaboard.com does not list this sailing, so PADI Travel is "
-        + "the only seller and there is one bill rather than two. The berth "
-        + "price above is PADI’s; the fees under it are the vessel’s "
-        + "own, which it charges on board whoever sold the berth.";
+      /* Two sentences, because there are two cases and the difference is
+         which source the fee rows came from.
+
+         On a boat both sites sell, the table is a mixture and the reader is
+         owed the join: the berth is PADI's, the fees are the vessel's own
+         panel on liveaboard.com. That is not a spliced bill -- the marine
+         park, the port and the fuel are charged on board by the boat whoever
+         sold the berth, which is the same reason both sellers' totals carry
+         the same nitrox and gear.
+
+         On a boat only PADI sells there is no such panel and no mixture: one
+         seller published the whole bill. Saying "the vessel's own fees" there
+         would name a source the row does not have. */
+      padi = row.i.padi_sourced_fees
+        ? "liveaboard.com does not sell this boat at all, so PADI Travel is "
+          + "the only seller and everything above is PADI’s: the berth price "
+          + "and the required extras its itinerary publishes. There is no "
+          + "second bill to set against it."
+        : "liveaboard.com does not list this sailing, so PADI Travel is the "
+          + "only seller and there is one bill rather than two. The berth "
+          + "price above is PADI’s; the fees under it are the vessel’s own, "
+          + "which it charges on board whoever sold the berth.";
     }
 
     /* The bar leads the panel rather than following the bill. Whether a diver

@@ -91,8 +91,8 @@ def get(url: str, timeout: int = 40) -> dict | None:
         return None
 
 
-def shop_facts(slug: str, fallback: str) -> tuple[str, str | None]:
-    """The country PADI files this shop under, and the currency it prices in.
+def shop_facts(slug: str, fallback: str) -> dict[str, str | None]:
+    """What the vessel page states about the vessel: country, currency, names.
 
     Both come off the vessel page's ``window.shop`` and both are needed:
 
@@ -107,6 +107,16 @@ def shop_facts(slug: str, fallback: str) -> tuple[str, str | None]:
     boat whose page does not state one has its prices dropped rather than
     assumed: this project does not invent a price, and a price in an unknown
     unit is an invented one.
+
+    ``title`` and ``fleetTitle`` matter only for the boats PADI sells and
+    liveaboard.com does not. Every other vessel takes its name and its operator
+    from the source the prices come from, and should: those are the strings the
+    rest of the dataset is keyed and sorted on. But a PADI-only vessel has no
+    such entry, and naming it from its slug would print "Seawolf Steel" as
+    *Seawolf Steel* by luck and "Bella 2" as *Bella 2* by luck too -- until the
+    first slug that does not survive the round trip. `fleetTitle` is the
+    operator: "SEAWOLF DIVING SAFARI Fleet" for Seawolf Steel, and the trailing
+    word is PADI's own furniture rather than part of the company's name.
     """
     import re
 
@@ -115,17 +125,23 @@ def shop_facts(slug: str, fallback: str) -> tuple[str, str | None]:
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=35) as r:
             html = r.read().decode("utf-8", "replace")
     except Exception:  # noqa: BLE001 - fall back rather than lose the boat
-        return fallback, None
+        return {"country": fallback, "currency": None, "name": None, "operator": None}
     if "window.shop = " not in html:
-        return fallback, None
-    block = html[html.index("window.shop = "):][:1200]
+        return {"country": fallback, "currency": None, "name": None, "operator": None}
+    block = html[html.index("window.shop = "):][:1600]
 
     def field(name: str) -> str | None:
         match = re.search(rf'\b{name}:\s*["\']?([^,"\'\n]*)', block)
         value = match.group(1).strip() if match else ""
         return value or None
 
-    return field("countrySlug") or fallback, field("currency")
+    fleet = field("fleetTitle")
+    return {
+        "country": field("countrySlug") or fallback,
+        "currency": field("currency"),
+        "name": field("title"),
+        "operator": re.sub(r"\s+Fleet$", "", fleet) if fleet else None,
+    }
 
 
 def shop_country(slug: str, fallback: str) -> str:
@@ -190,9 +206,10 @@ def _fetch_trips(aliases: dict[str, str], raw: dict, args) -> None:
     if args.limit:
         boats = boats[: args.limit]
     for boat_id, slug in boats:
-        country, currency = shop_facts(slug, args.country)
+        facts = shop_facts(slug, args.country)
+        currency = facts["currency"]
         time.sleep(args.delay)
-        shops[slug] = {"country": country, "currency": currency, "boat": boat_id}
+        shops[slug] = {**facts, "boat": boat_id}
 
         listing = get(TRIP_LIST.format(vessel=slug))
         time.sleep(args.delay)
@@ -341,6 +358,25 @@ def main() -> int:
             record["fees"] = PadiComAdapter.fees_from_payload(detail, currency)
         trips[itinerary_key(boat_id, str(name))] = record
     book["trips"] = trips
+    # What PADI says about each vessel, as opposed to about one of its trips.
+    #
+    # Read for every boat and used for almost none: a vessel liveaboard.com
+    # also sells takes its name and its operator from there, because those are
+    # the strings the rest of the dataset is keyed and sorted on and one source
+    # of them is the point. It is the ten boats PADI sells alone that have no
+    # other name to take -- and a boat published under a title-cased slug is a
+    # vessel this code named rather than one anybody did.
+    book["vessels"] = {
+        shop["boat"]: {
+            "slug": slug,
+            "name": shop.get("name"),
+            "operator": shop.get("operator"),
+            "country": shop.get("country"),
+            "currency": shop.get("currency"),
+        }
+        for slug, shop in sorted((raw.get("shops") or {}).items())
+        if shop.get("boat")
+    }
     book["collected"] = raw["fetched"]
     BOOK.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n")
 

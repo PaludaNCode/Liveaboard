@@ -195,6 +195,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   seller's figure repeated into the second seller's field prints as two sellers
   agreeing about a sailing one of them does not offer — and the page marks it
   `PADI only`, which is a fact about who was asked and not about the trip.
+- **A boat only the second seller lists is still a boat.** 22 Egyptian
+  liveaboards on PADI mapped to nothing of ours; ids for them are minted in
+  `data/padi_aliases.json` under `padi_only` and 10 carry season sailings, so
+  the fleet is 77 rather than 67. `padi_only` means PADI is the only source of
+  *sailings*: ten of the 22 have a liveaboard.com fee panel and simply no
+  departures there. Such a vessel has no name and no operator from the first
+  source, so both come from `window.shop` — `title`, and `fleetTitle` minus
+  PADI's trailing "Fleet" — kept **verbatim**, shouting included, because
+  `OPERATOR_ALIASES` already rules that tidying a company's capitalisation is a
+  short step from deciding what it is called. Where our fee book is absent
+  PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
+  where ours exists it wins outright. Never a merge of the two: one figure per
+  vessel against one per itinerary is not a difference you can add up, and a
+  line from each is a bill neither seller quotes.
 - **Two itineraries must never share an id.** `Dataset.from_dict` keys them by
   id, so a collision keeps one and serves every departure of the loser the
   winner's reefs, fees and dive count: the row count stays right and the page

@@ -468,9 +468,44 @@ Two things this uncovered:
   agree up to the cut collide — and the ports are at the end. `Dataset.from_dict`
   keys by id and would silently keep one. `promote` now raises.
 
-What is *not* imported: the 24 PADI Egypt liveaboards that map to no boat of
-ours (`unlisted` in `data/padi_aliases.json`). Their sailings have never been
-fetched, so their volume is unknown.
+## The 24 vessels that mapped to no boat of ours
+
+Fetched 2026-08-29, all 24, no failures, 737 sailings. Two turned out not to be
+PADI's side at all: **`my-avo` is our AVO and `my-blue` is our Blue**, and both
+sat outside `aliases` and `absent` alike — the one state that file exists to
+make impossible. Confirmed the way every other pair there was, on trips rather
+than names: PADI's *Daedalus & Elphinstone (Port Ghalib - Port Ghalib)* is
+byte-identical to AVO's only trip, and Blue matches on two independently.
+
+The other 22 are now in `aliases` too, with ids minted in that file, and listed
+under `padi_only`. **179 of their sailings fall inside the published season, on
+12 boats** — far short of the ~424 a per-boat average predicts, because these
+calendars are much shallower: twelve of the 24 have nothing in the window at
+all, and VIP One prices all 18 of its sailings at zero, which `_departure_book`
+drops rather than storing as free.
+
+`padi_only` means PADI is the only source of **sailings**, not of the vessel.
+Ten of the 22 have a liveaboard.com fee panel in `data/fees.json` — that site
+carries the boat and publishes no departures for it. `promote` needs no flag for
+the difference: a boat with our fee book uses it like any other, and one without
+falls back to PADI's per-itinerary book, which is what `Itinerary.padi_sourced_fees`
+records. Where both exist ours wins outright; the fallback is never a merge,
+because the two disclose at different resolutions and a line from each builds a
+bill neither seller quotes.
+
+Two facts a PADI-only vessel has nowhere else to get:
+
+- **Name** — `window.shop`'s `title`. A boat published under a title-cased slug
+  is one this code named rather than one anybody wrote.
+- **Operator** — `window.shop`'s `fleetTitle`, minus the trailing "Fleet" that
+  is PADI's furniture. Kept verbatim otherwise, shouting included, per
+  `OPERATOR_ALIASES`' standing rule. The one fold added is `BLUE PLANET` →
+  `Blue Planet Liveaboards`: PADI files MY Blue and MY Blue Pearl under the same
+  fleet, and MY Blue is our Blue, whose own departures name the company in full.
+  Without it the page carried both spellings as two operators.
+
+Not every boat states a fleet; three of the ten land under "Operator not
+captured", which is true rather than tidy.
 
 ## One property to preserve
 
