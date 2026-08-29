@@ -29,7 +29,19 @@ on:
       - "data/**"
       - ".github/workflows/pages.yml"
   workflow_run:
-    workflows: ["Daily refresh", "Weekly fee refresh"]
+    # Every workflow that commits under data/ or site/ belongs here, and the
+    # list is only ever wrong in the silent direction: a data commit lands on
+    # main, nothing fires, and the published page keeps serving an older build
+    # while the repository says it was updated. That is the failure described
+    # above, and it recurred -- three of these were missing. `Read cabin prices
+    # and berths left` writes a berth count that is stale by morning, so a
+    # nightly run whose result never reaches the page is the worst case of it.
+    workflows:
+      - "Daily refresh"
+      - "Weekly fee refresh"
+      - "Read cabin prices and berths left"
+      - "Read trip itineraries"
+      - "Re-promote"
     types: [completed]
   workflow_dispatch:
 
