@@ -778,6 +778,141 @@ def _availability(raw: str | None) -> str | None:
     return AVAILABILITY.get(token)
 
 
+def berth_key(slug: str, start: str) -> str:
+    """Vessel and day, which is what one sailing is across every seller.
+
+    The same key the PADI departure join uses, and for the same reason: a date
+    has no spelling, so this is exact where the itinerary join has to be
+    forgiving. Unique across all 864 records in the cabin book.
+    """
+    return f"{slug}::{start}"
+
+
+# One rung of a cabin ladder, positional to keep 2,982 of them off the wire as
+# repeated keys: name index into the pooled list, price in the display
+# currency, places left, and the single-occupancy surcharge as a percentage.
+#
+# Terse because the page is one file: anything written per departure ships on
+# every visit whether it is read or not, and named keys here cost more than the
+# numbers they label. Measured — the first, fully named shape cost the page
+# 136 KB against 76 KB for this one. The layout is stated in the dataset's own
+# notes and named in `app.js`, so nothing has to count fields to read it.
+CABIN_FIELDS = 4
+
+SELLERS = ["liveaboard.com", "padi.com"]
+"""Who is selling, pooled and indexed by every berth block.
+
+Both names are here though only the first fills a block today: PADI sells 601
+of these same sailings and publishes an availability figure of its own, so the
+list that holds two answers is the list to write now rather than after a second
+seller arrives ([#92]). An index costs two bytes against a repeated string's
+twenty-two, on a field written once per departure.
+"""
+
+
+def _berth_blocks(
+    record: dict[str, Any] | None,
+    names: dict[str, int],
+    fx_table: Any,
+) -> list[dict[str, Any]]:
+    """What each seller says is left on this sailing, and at what price.
+
+    A **list**, one block per seller, though only liveaboard.com fills one
+    today. PADI sells 601 of these same sailings and publishes an availability
+    figure of its own, so the shape that holds two answers is the shape to
+    write now -- a second seller arriving must not mean rewriting the page's
+    only view of what is left ([#92]).
+
+    A seller that states a count but no ladder simply has no ``cabins`` key.
+    That is not a gap to fill with one invented rung: "24 places" and "24
+    places at £1,748" are different claims, and only the second is a ladder.
+    """
+    if not record or not record.get("cabins"):
+        return []
+
+    rungs: list[list[Any]] = []
+    for cabin in record["cabins"]:
+        price = cabin.get("price")
+        if price is None:
+            # A cabin with no price is a rung with no height. It is dropped
+            # rather than drawn at zero, which would read as free.
+            continue
+        name = cabin.get("name") or "Cabin"
+        if name not in names:
+            names[name] = len(names)
+        # Normalisation happens in Python only: the browser sums lines that are
+        # switched on and converts nothing, so the ladder arrives in the
+        # display currency like every other figure on the page.
+        display = _to_display(price, record.get("currency") or "USD", fx_table)
+        rungs.append([
+            names[name],
+            display,
+            0 if cabin.get("sold_out") else cabin.get("berths"),
+            cabin.get("single_supplement_pct"),
+        ])
+
+    if not rungs:
+        return []
+
+    cheapest = min(rung[1] for rung in rungs)
+    at_cheapest = [rung for rung in rungs if rung[1] == cheapest]
+    # Across every room selling at that price, because a boat can split them:
+    # 233 of 864 sailings list more than one cabin at their cheapest. One
+    # unstated count makes the whole total unknown rather than a partial sum.
+    #
+    # Kept here rather than left to the browser because it is a *rule* — which
+    # rooms count, and when the answer is unknown — and this project keeps its
+    # rules in one tested place. The cheapest rung still on sale is not a rule
+    # but a minimum over numbers already normalised, so the page takes that one
+    # itself rather than paying to ship it 864 times.
+    spots: int | None = None
+    if all(rung[2] is not None for rung in at_cheapest):
+        spots = sum(rung[2] for rung in at_cheapest)
+
+    # Positional, and the seller is an index into the dataset's pool: a block
+    # is written once per departure, so a repeated "liveaboard.com" string is
+    # 22 KB of one word. [seller, spots, cabins].
+    return [[SELLERS.index("liveaboard.com"), spots, rungs]]
+
+
+def _fx_table(fx: dict[str, Any] | None) -> Any:
+    """The rate table promote converts cabin prices with, or ``None``.
+
+    Built from the same payload the dataset publishes, so a ladder and the
+    berth price above it are converted at one rate. A payload that will not
+    parse yields ``None`` and the ladder stays in its quoted currency rather
+    than failing the promotion: an unconverted number is wrong by an FX move,
+    a missing dataset is wrong by everything.
+    """
+    from .money import FxTable
+
+    try:
+        return FxTable.from_dict(fx or _default_fx())
+    except (KeyError, ValueError):
+        return None
+
+
+def _to_display(amount: float, currency: str, fx_table: Any) -> int:
+    """One cabin price in the display currency, rounded as the page prints it.
+
+    An ``int``, because the page prints whole euros and ``1501.0`` is two
+    characters of nothing 2,982 times over.
+    """
+    from .money import Money
+
+    money = Money(_dec_money(amount), currency)
+    if fx_table is None:
+        return int(round(money.amount))
+    converted, _ = fx_table.to_display(money)
+    return int(round(converted.amount))
+
+
+def _dec_money(amount: float):
+    from decimal import Decimal
+
+    return Decimal(str(amount))
+
+
 PORTS_THAT_ARE_ALSO_SITES = (
     "safaga", "dahab", "soma bay", "hurghada", "marsa alam", "port ghalib",
     "sharm el sheikh", "hamata", "marsa ghalib",
@@ -822,6 +957,7 @@ def promote(
     trips: dict[str, Any] | None = None,
     padi: dict[str, Any] | None = None,
     padi_departures: dict[str, Any] | None = None,
+    cabins: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -878,6 +1014,27 @@ def promote(
         key: record
         for key, record in ((padi_departures or {}).get("departures") or {}).items()
     }
+
+    # What each sailing costs cabin by cabin, and how many berths are left at
+    # each rung. Read from the booking page by ``tools/fetch_cabins.py``, which
+    # is its own nightly pass because the counts are the most perishable thing
+    # in the dataset -- true when read, stale by morning.
+    #
+    # Keyed on vessel and day like the PADI join above rather than on the tour
+    # id it was fetched with: a departure knows its boat and its date, and
+    # putting the tour id on the departure to join with would be a second key
+    # doing the first one's job. Unique across all 864 records.
+    cabin_book: dict[str, dict[str, Any]] = {}
+    cabin_read = (cabins or {}).get("collected") or ""
+    for record in ((cabins or {}).get("departures") or {}).values():
+        if record.get("boat") and record.get("start"):
+            cabin_book[berth_key(record["boat"], record["start"])] = record
+
+    # Cabin names pooled across the whole dataset rather than repeated per
+    # sailing: 2,982 cabins share 157 names, and a boat's rooms are called the
+    # same thing on every week it sells. Halves what the ladder costs the page.
+    cabin_names: dict[str, int] = {}
+    fx_table = _fx_table(fx)
 
     # A vessel's guest count, as its own trips state it. Fallback only: the
     # specification table's "Max guests" is the hull's number and this is one
@@ -1184,6 +1341,17 @@ def promote(
                            f"{sailing.get('country', 'egypt')}/"
                            f"{padi_slug_for.get(slug, slug)}/",
                 }
+
+            # What is left on this sailing and at what price, per seller.
+            # Absent where the booking page could not be read -- 25 of 889 --
+            # rather than written as a sailing with no cabins, which is the
+            # same distinction the crawl draws between an empty page and an
+            # unread one.
+            berths = _berth_blocks(
+                cabin_book.get(berth_key(slug, item["start"])), cabin_names, fx_table
+            )
+            if berths:
+                entry["berths"] = berths
             departures.append(entry)
 
     _settle_title_case(itineraries)
@@ -1202,6 +1370,30 @@ def promote(
         "itineraries": itineraries,
         "departures": departures,
     }
+    if cabin_names:
+        # The pool the ladder's first field indexes into, in the order names
+        # were first seen -- which is promotion order, and promotion is pure,
+        # so the same inputs give the same list byte for byte.
+        payload["cabin_names"] = [
+            name for name, _ in sorted(cabin_names.items(), key=lambda kv: kv[1])
+        ]
+        payload["sellers"] = list(SELLERS)
+        # One date for the whole book, so it is stated once rather than on 864
+        # departures. It is the most load-bearing caveat here: a berth count is
+        # what the seller claimed when it was read, and stale by morning.
+        payload["berths_read"] = cabin_read
+        payload["berths_note"] = (
+            "departures[].berths is one block per seller: "
+            "[seller index into sellers, places left at the advertised price, "
+            "[cabins]]. Each cabin is [name index into cabin_names, price per "
+            "person in the display currency, places left (0 = full, null = not "
+            "stated), single-occupancy surcharge %]. Places left at the "
+            "advertised price is the total across every room selling at it, "
+            "and is null where any of those rooms does not state a count. A "
+            "seller that publishes a count but no ladder has a null cabin "
+            "list: 24 places and 24 places at a stated price are different "
+            "claims, and only the second is a ladder."
+        )
     if skipped:
         payload["promotion_skipped"] = skipped
     if superseded:

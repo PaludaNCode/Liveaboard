@@ -139,6 +139,17 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             entry["padi"] = float(padi_display.rounded)
             entry["padi_delta"] = round(float(padi_display.rounded) - entry["base"], 2)
 
+        # The cabin ladder, one block per seller, exactly as promote wrote it.
+        # Passed through rather than reshaped: it is already normalised and
+        # converted, and a second shaping here would be a second place for the
+        # page and the dataset to disagree about what a sailing costs.
+        #
+        # Absent where the booking page could not be read. That is not a
+        # sailing with no cabins, and the page has to be able to tell those
+        # apart -- the same distinction the crawl draws for an unread page.
+        if departure.berths:
+            entry["berths"] = departure.berths
+
         # A departure-level fee replaces the route's for its code, so a sailing
         # can genuinely price a fee differently. No departure in the dataset
         # does today, but the possibility is in the model, and silently reusing
@@ -171,6 +182,10 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 "age_days": dataset.fx.age_days(),
                 "stale": dataset.fx.is_stale(),
             },
+            # The day the berth counts were read. On the page beside every
+            # count, because a count without its date is presented as a fact
+            # when it is a claim with a shelf life.
+            "berths_read": dataset.berths_read,
             "counts": {
                 "departures": len(departures),
                 "itineraries": len(itineraries),
@@ -193,6 +208,10 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 for key in TOGGLE_LABELS
             ],
         },
+        # The pools every cabin ladder indexes into. Shipped once for the same
+        # reason the fee labels are: one vocabulary, defined in one place.
+        "cabin_names": dataset.cabin_names,
+        "sellers": dataset.sellers,
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
         # Shipped for the same reason the fee labels are: one vocabulary,
         # defined once. Nothing on the page prints these today -- the Entry
