@@ -1035,7 +1035,10 @@ class TestPayloadIsRead(unittest.TestCase):
     diver away for -- reachable only by downloading the JSON. The column that
     printed it was removed for good reasons and nothing replaced it, which is
     the exact shape of failure this class exists to catch: not a wrong number,
-    a fact silently withdrawn.
+    a fact silently withdrawn. The column is back, the vocabulary it reads is
+    `entry_bars`, and `level_labels` is gone from the payload rather than left
+    in it unread -- which is this class getting the outcome it was written for,
+    in both directions.
 
     Deliberately a check on the *keys*, not on the rendering. Whether the bar
     reads well is a matter of taste; whether anything reads it at all is not.
@@ -1074,15 +1077,54 @@ class TestPayloadIsRead(unittest.TestCase):
 
         A stated safety requirement is the one kind of number here that is not
         about money, and it is the whole of what the second source was added
-        for. It travels from the itinerary record through `level_labels` into
-        the expanded row, and every step of that has to be present.
+        for. It travels from the itinerary record through `entry_bars` into a
+        column and a filter bank, and every step of that has to be present.
+
+        `level_labels` used to be the vocabulary named here, and this assertion
+        outlived it: once the phrase was built from the certification and the
+        dive count instead, the only "level_labels" left in `app.js` was the
+        word inside a comment -- which this test would have accepted. A check
+        that passes on its own history is the failure this module exists to
+        catch, so it names the reader rather than the string.
         """
         source, payload = self.app(), self.payload()
         self.assertIn("requirements", source, "app.js reads no entry bar")
-        self.assertIn("level_labels", source, "app.js has no vocabulary for it")
+        self.assertIn("entry_bars", source, "app.js has no vocabulary for it")
         self.assertIn("min_level", source, "app.js reads no certification level")
+        self.assertIn("min_logged_dives", source, "app.js reads no dive count")
+        self.assertIn('k: "entry"', source, "the page has no Entry bar column")
         bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
         self.assertTrue(bars, "the seed itself states no entry bar to print")
+
+    def test_the_entry_bar_column_is_in_every_column_order(self) -> None:
+        """A column missing from an order is appended, so it cannot vanish --
+        but it lands after the provenance columns, at the far right of a table
+        this wide, which for the one column that says whether a row is bookable
+        at all is barely different from being gone. Four orders, four layouts,
+        and the phone one is where it matters most."""
+        source = self.app()
+        for name in ("var ORDER", "var PHONE_ORDER", "var TINY_ORDER",
+                     "var COMPACT_ORDER"):
+            with self.subTest(order=name):
+                body = source[source.index(name):]
+                body = body[: body.index("]")]
+                self.assertIn('"entry"', body, f"{name} does not place the column")
+
+    def test_the_entry_bar_is_never_softened_by_the_page(self) -> None:
+        """The printed dive count is the greater of the two numbers.
+
+        `advanced_50` means fifty dives by definition, and a trip stating a
+        smaller `min_logged_dives` beside it must not print the smaller one:
+        that would publish a bar below the certification the same record also
+        demands. The rule is one `Math.max` in `entryDives`, which is exactly
+        the kind of line a later edit reverses without noticing.
+        """
+        source = self.app()
+        body = source[source.index("function entryDives"):]
+        body = body[: body.index("}")]
+        self.assertIn("Math.max", body,
+                      "entryDives must take the greater of the stated and the "
+                      "implied dive count, never the stated one alone")
 
     def test_the_second_seller_is_reachable_and_explained(self) -> None:
         """A second seller prices these rows, so a reader can get to it.

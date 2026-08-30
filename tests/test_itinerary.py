@@ -12,6 +12,11 @@ import unittest
 from pathlib import Path
 
 from liveaboard.promote import itinerary_key
+from liveaboard.taxonomy import (
+    DIVER_LEVEL_BARS,
+    DIVER_LEVEL_ORDER,
+    DiverLevel,
+)
 from liveaboard.scrape.itinerary import (
     TripDetail,
     parse_prose,
@@ -206,6 +211,46 @@ class TestTheLoggedDiveBar(unittest.TestCase):
         count. Inventing one would soften a stated safety requirement."""
         self.assertEqual(min_logged_dives("Advanced Open Water required."), 0)
         self.assertEqual(min_logged_dives(None), 0)
+
+
+class TestTheEntryBarVocabularyIsOrdered(unittest.TestCase):
+    """`DIVER_LEVEL_BARS` is the page's ladder, and its order is the rung.
+
+    The Entry bar column sorts on a level's *position* in this list and its
+    filter chips are painted in that order, so the list is not a lookup table
+    that happens to be written in a tidy sequence -- the sequence is the claim
+    "this bar is harder than that one". `DIVER_LEVEL_ORDER` makes the same
+    claim for `_strictest`, which is what decides whose bar gets published when
+    the two sellers disagree. Two copies of one ordering, and if they drift the
+    page sorts by one rule while the dataset was built by the other.
+    """
+
+    def test_the_bars_run_in_the_declared_order(self):
+        self.assertEqual([level for level, _, _ in DIVER_LEVEL_BARS],
+                         DIVER_LEVEL_ORDER)
+
+    def test_every_level_has_a_bar(self):
+        """A level with no entry here prints as an empty cell, which the page
+        reads as "nobody stated one" -- the one thing a stated safety
+        requirement must never be mistaken for."""
+        self.assertEqual({level for level, _, _ in DIVER_LEVEL_BARS}, set(DiverLevel))
+
+    def test_the_implied_dive_count_never_falls(self):
+        """The dives a level implies rise with the level, because the column
+        prints the greater of this and the trip's own number: a ladder whose
+        implied count went down at some rung would let a higher certification
+        print a lower bar than the rung below it."""
+        implied = [dives for _, _, dives in DIVER_LEVEL_BARS]
+        self.assertEqual(implied, sorted(implied))
+
+    def test_a_certification_name_states_no_dive_count(self):
+        """The two facts are separate fields here precisely so the phrase can
+        be built without the "Advanced + 50 dives, 50 logged dives" the old
+        rendering produced. A number back in the certification name would
+        reintroduce it, and the regex that used to paper over it is gone."""
+        for _, cert, _ in DIVER_LEVEL_BARS:
+            with self.subTest(cert=cert):
+                self.assertFalse(any(c.isdigit() for c in cert), cert)
 
 
 if __name__ == "__main__":

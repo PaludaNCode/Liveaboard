@@ -32,7 +32,7 @@ from .pricing import (
     padi_lines,
     resolve_fees,
 )
-from .taxonomy import DIVER_LEVEL_LABELS, FEE_LABELS
+from .taxonomy import DIVER_LEVEL_BARS, FEE_LABELS
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -289,14 +289,24 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # on it is worse than no link.
         "padi_urls": padi_urls,
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
-        # Shipped for the same reason the fee labels are: one vocabulary,
-        # defined once. Nothing on the page prints these today -- the Entry
-        # column that did was removed as noise -- but the bar is in every
-        # itinerary record and in the published downloads, so a reader who
-        # wants it has the vocabulary to read it with.
-        "level_labels": {
-            level.value: label for level, label in DIVER_LEVEL_LABELS.items()
-        },
+        # The entry bar's vocabulary: each level split into the certification
+        # and the dive count it implies, which is what the Entry bar column
+        # prints and what its filter chips are keyed on.
+        #
+        # This replaced `level_labels`, which shipped the four full level names
+        # and was read by exactly one line of the page -- and then by none,
+        # once the column and the expanded row started building the phrase from
+        # the pair instead. `DIVER_LEVEL_LABELS` is still where a level's own
+        # name comes from; it is `promote` that needs it, for the sentence
+        # naming which seller stated what, and that sentence arrives already
+        # written in `requirements.notes`. Nothing on the page assembles it,
+        # so nothing on the page needs the table.
+        #
+        # A list, not a mapping, and in `DIVER_LEVEL_ORDER`: the column's rank
+        # is the position, so shipping the order with the labels keeps the
+        # browser from carrying a second copy of which bar is the harder one.
+        "entry_bars": [[level.value, cert, dives]
+                       for level, cert, dives in DIVER_LEVEL_BARS],
         # What PADI Travel is discounting on these boats, and what moved since
         # the day before. Passed through exactly as `promote` wrote it, for the
         # same reason the cabin ladder is: it is already joined, converted and

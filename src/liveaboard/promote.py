@@ -689,11 +689,17 @@ def _strictest(
 ) -> dict[str, Any] | None:
     """The higher of two stated entry bars, with both claims kept.
 
-    liveaboard.com and PADI disagree about the bar on 49 of the 105 trips both
-    describe, and in both directions: PADI is stricter on twelve and softer on
-    thirteen. Neither source is the authority -- both are quoting the same
-    operator -- so preferring one wholesale would publish a bar softer than
-    somebody stated roughly half the time.
+    liveaboard.com and PADI disagree about the bar on 60 of the 127 trips both
+    describe, and in both directions: PADI is stricter on 19 and softer on 41.
+    Neither source is the authority -- both are quoting the same operator -- so
+    preferring one wholesale would publish a bar softer than somebody stated
+    roughly half the time.
+
+    Between them they cover the season completely: of the 402 itineraries, 190
+    are described by liveaboard.com alone, 85 by PADI alone, 127 by both, and
+    none by neither. That is why the Entry bar column never prints "not
+    stated" -- not because the page declines to, but because nothing here is
+    unread.
 
     Taking the higher level never softens either claim. It does state a bar
     stricter than one of them, which is the trade made deliberately: a diver

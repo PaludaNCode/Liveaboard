@@ -194,6 +194,36 @@ DIVER_LEVEL_ORDER: list[DiverLevel] = [
 ]
 
 
+DIVER_LEVEL_BARS: list[tuple[DiverLevel, str, int]] = [
+    (DiverLevel.OPEN_WATER, "Open Water", 0),
+    (DiverLevel.ADVANCED, "Advanced", 0),
+    (DiverLevel.ADVANCED_50, "Advanced", 50),
+    (DiverLevel.EXPERIENCED_100, "Advanced", 100),
+]
+"""The entry bar as the table prints it: a certification and a dive count.
+
+`DIVER_LEVEL_LABELS` names each level on its own, which is what a sentence
+needs -- "PADI Travel states Advanced Open Water". A column cannot use those:
+two of the four fold the dive count into the label, so printing the level
+beside `min_logged_dives` gave "Advanced + 50 dives, 50 logged dives" on the
+commonest bar in the fleet, and the page carried a regex to spot it.
+
+So the two facts are separated here instead. The middle field is the
+certification alone -- *Advanced*, the shorthand every operator writes, not
+the card's full name -- and the last is the dive count the level itself
+implies, which is 50 for `ADVANCED_50` by definition and 0 where the level
+says nothing about dives. The printed count is the greater of that and the
+trip's own `min_logged_dives`, so a level's implied bar can never be softened
+by a trip that states a smaller number, and a trip stating a larger one is
+shown as it stated it.
+
+Ordered least to most demanding, like `DIVER_LEVEL_ORDER`, because the page
+sorts and ranks on the position: shipped as a list rather than a mapping so
+the order travels with the labels instead of being a second copy in the
+browser. `TestTheEntryBarVocabularyIsOrdered` holds the two in step.
+"""
+
+
 
 
 

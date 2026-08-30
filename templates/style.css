@@ -372,6 +372,16 @@ tr.detail td > * { position:sticky; left:0; }
   white-space:normal; width:180px; min-width:140px; max-width:180px;
   color:var(--ink-dim); font-size:11px;
 }
+/* The entry bar. Bounded for the same reason and in the same way as the two
+   above: the phrase is at most "Advanced + 50 dives", which is 105px at this
+   size, and the width is stated so auto table layout treats it as binding
+   rather than as a suggestion. Dim and small like Dive sites, because it
+   qualifies the trip rather than pricing it -- the money is what this column
+   must not compete with. */
+.entry-col {
+  white-space:normal; width:120px; min-width:100px; max-width:120px;
+  color:var(--ink-dim); font-size:11px;
+}
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -695,7 +705,7 @@ a { color:var(--accent); }
      every row: rows ran 35 to 88px and the tallest of them pushed six rows of
      prices off a screen that had ten. The ellipsis is visible, so a truncated
      name reads as truncated rather than as the whole of it. */
-  .trip, .sites {
+  .trip, .sites, .entry-col {
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     min-width:0; max-width:170px;
   }

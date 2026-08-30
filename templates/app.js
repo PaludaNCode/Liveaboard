@@ -38,6 +38,11 @@
   var state = {
     sort: "start", dir: 1,
     months: new Set(), ports: new Set(), sites: new Set(), boats: new Set(),
+    /* The certification and logged dives a trip demands, as one value: the
+       two halves are a single question -- "can I book this" -- and filtering
+       them apart lets a reader clear the level and still be turned away at
+       the dock by the dive count. */
+    entry: new Set(),
     /* Who sells the sailing. Empty means every seller, like every other chip
        bank here -- a filter nobody has touched must never be a filter. */
     sellers: new Set(),
@@ -403,6 +408,54 @@
     return itin.title || itin.name;
   }
 
+  /* The entry bar as one phrase, and as one number to sort it by.
+   *
+     The bar is two facts -- a certification and a count of logged dives -- and
+     the fleet spreads across both. Printed as a level alone it is three values
+     with 47% of the rows on one of them; printed as the pair it is seventeen
+     with 26% on the largest, and the difference is not decoration: an *Open
+     Water* week demanding 30 logged dives turns away a diver that an *Advanced*
+     week demanding none would take. Neither half answers "can I book this" on
+     its own.
+
+     `D.entry_bars` carries the vocabulary and the order together, so the
+     certification's short name and the dives a level implies are the dataset's
+     words rather than a second copy written here. See taxonomy.DIVER_LEVEL_BARS.
+
+     Two facts, one string, because the string is what the reader compares --
+     but the *rank* keeps them apart: level first, then dives, which is
+     `DIVER_LEVEL_ORDER`'s own claim about which bar is the harder one rather
+     than an arithmetic this file invented. */
+  var BAR_RANK = {}, BAR_CERT = {}, BAR_DIVES = {};
+  (D.entry_bars || []).forEach(function (bar, n) {
+    BAR_RANK[bar[0]] = n; BAR_CERT[bar[0]] = bar[1]; BAR_DIVES[bar[0]] = bar[2];
+  });
+
+  /* The greater of what the trip states and what its level already implies.
+     Never the smaller: a safety requirement is not softened here, and an
+     `advanced_50` trip that stated 20 would otherwise print a bar 30 dives
+     below the certification it also demands. */
+  function entryDives(req) {
+    return Math.max(req.min_logged_dives || 0, BAR_DIVES[req.min_level] || 0);
+  }
+
+  function entryText(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level || BAR_CERT[req.min_level] === undefined) return "";
+    var dives = entryDives(req);
+    return BAR_CERT[req.min_level] + (dives ? " + " + dives + " dives" : "");
+  }
+
+  /* -1 for a trip stating no bar, so it sorts to the same end as an unstated
+     guest count or dive count does. Every one of the 402 itineraries states
+     one today; the branch is here because "nobody said" must never sort as
+     though somebody had said "nothing required". */
+  function entryRank(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level || BAR_RANK[req.min_level] === undefined) return -1;
+    return BAR_RANK[req.min_level] * 1000 + entryDives(req);
+  }
+
   function tally(pick) {
     var n = {};
     D.departures.forEach(function (dep) {
@@ -438,6 +491,27 @@
      is the wrong weight for a question asked far less often than "which
      boat", and so, it turns out, is a permanent input. */
   var BOATS = tally(function (i) { return [i.boat]; });
+
+  /* The entry bar, and the one bank that is not ordered by how many rows carry
+     it. `tally` sorts by count because a port or a boat has no order of its
+     own; a bar does -- least demanding to most -- and it is an order the reader
+     is reading the bank *along*, looking for the last chip they still clear.
+     Sorted by count, "Advanced + 50 dives" opened the bank and "Open Water"
+     sat fourth, which reads as a list of popular options rather than as a
+     ladder. Ranked by `entryRank`, so the bank and the column's sort agree. */
+  var ENTRY = (function () {
+    var n = {}, rank = {};
+    D.departures.forEach(function (dep) {
+      var itin = D.itineraries[dep.itinerary_id];
+      var text = entryText(itin);
+      if (!text) return;
+      n[text] = (n[text] || 0) + 1;
+      rank[text] = entryRank(itin);
+    });
+    return Object.keys(n).sort(function (a, b) {
+      return rank[a] - rank[b] || a.localeCompare(b);
+    }).map(function (v) { return { id: v, n: n[v] }; });
+  })();
 
   /* Which sites sell this sailing. Three states and they are three different
      facts, so they are three chips rather than one "PADI" switch:
@@ -525,6 +599,38 @@
            the weaker statement it is. */
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
         return '<span class="dim">—</span>';
+      } },
+    /* The entry bar, which decides whether a row is a trip you can book at all.
+     *
+       It had a column of its own once and lost it, for three reasons recorded
+       where the expanded row prints the same fact. Two of them were answered by
+       printing the pair rather than the level: it is no longer "the same three
+       words on most rows" (seventeen values, the largest 26% of rows, against
+       three and 47%), and the disagreement marker is the `varies` footnote the
+       Total already uses for the same fact -- two sellers who do not agree --
+       rather than a second pill that looked like the Disclosure one beside it.
+
+       The third was width, and that is answered by where it sits: after Dive
+       sites, so on every layout below 1700px it falls behind the price block
+       and the Total's position is unchanged. See ORDER.
+
+       The fact itself is the operator's safety claim, so the cell states it
+       and never softens it; where the two sellers disagree the stricter is
+       shown and the mark says so. */
+    { k: "entry", t: "Entry bar", short: "Entry", cls: "entry-col",
+      v: function (d, i) { return entryRank(i); },
+      show: function (d, i) {
+        var text = entryText(i);
+        if (!text) return '<span class="dim">—</span>';
+        var req = i.requirements;
+        /* Named for what it is rather than for which way it went: the reader
+           who wants to know which seller said what has the note in the hover
+           and the whole sentence in the expanded row. */
+        var split = req.notes && req.notes.indexOf("Sources disagree") >= 0
+          ? '<span class="varies" title="' +
+            esc(req.notes).replace(/"/g, "&quot;") + '">2 sellers</span>'
+          : "";
+        return esc(text) + split;
       } },
     /* The berth price of whichever seller's bill this row is printing. It read
        ours unconditionally, which on a row won by the second seller put two
@@ -847,10 +953,18 @@
 
      Anything missing here is appended rather than dropped, and says so, because
      a column that silently vanished would be a fact the page stopped
-     publishing. */
+     publishing.
+
+     Entry bar sits after Dive sites and before the money, which is the one
+     place a seventeenth column costs nothing: this order is only used above
+     1700px, and every narrower order already puts the price block first, so
+     the Total's position is identical with the column and without it. It goes
+     there rather than among the provenance columns at the end because it is
+     not provenance -- it decides whether the row is a trip you can book, which
+     is the same kind of question as where the trip goes. */
   var ORDER = [
     "start", "end", "boat", "guests",
-    "from", "to", "trip", "sites",
+    "from", "to", "trip", "sites", "entry",
     "base", "nitrox", "later", "total", "perdive",
     "availability", "disclosure", "source"
   ];
@@ -885,7 +999,7 @@
        invented for this width. Scrolling right reads the bill; not scrolling
        still shows the answer. */
     "total", "base", "nitrox", "later", "perdive",
-    "end", "from", "to", "trip", "sites",
+    "end", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -904,7 +1018,7 @@
   var TINY_ORDER = [
     "start", "boat",
     "total", "base", "nitrox", "later", "perdive",
-    "guests", "end", "from", "to", "trip", "sites",
+    "guests", "end", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -922,7 +1036,7 @@
   var COMPACT_ORDER = [
     "start", "end", "boat",
     "base", "nitrox", "later", "total", "perdive",
-    "guests", "from", "to", "trip", "sites",
+    "guests", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -1026,6 +1140,13 @@
     if (skip !== "sellers" && state.sellers.size && !state.sellers.has(sellerOf(dep))) {
       return false;
     }
+    /* Any-of for the same reason: one trip states one bar. Matched on the
+       printed phrase rather than on the level, so what the chip says and what
+       the column says cannot come apart -- the same rule the site chips follow
+       against the Dive sites column. */
+    if (skip !== "entry" && state.entry.size && !state.entry.has(entryText(itin))) {
+      return false;
+    }
     return true;
   }
 
@@ -1058,22 +1179,28 @@
 
   /* The entry bar this trip states, in words rather than a code.
    *
-   * It had a column of its own and lost it: sixteen columns already competed
-   * for the width, the bar is the same three words on most rows, and its
-   * "sources disagree" marker was styled like the disclosure pill beside it,
-   * so two unrelated warnings looked identical in adjacent columns. All three
-   * were arguments against the column and none was an argument against the
-   * fact -- but removing the column removed the fact, because nothing else on
-   * the page printed it. `level_labels` and every itinerary's `requirements`
-   * went on shipping in the payload with no code reading either: 892
-   * departures carrying a stated safety requirement that a visitor could only
-   * reach by downloading the JSON.
+   * There is a column for it again -- see COLS -- and this is not the leftover
+   * of its absence. The two say different things about one fact. The column
+   * states the bar, which is what a reader scanning 1,122 rows for a trip they
+   * can book needs; this says who stated it, which nobody needs until they
+   * have found the row.
    *
-   * So it lives here instead, under the bill, where there is room for the part
-   * that actually needs saying: liveaboard.com and PADI Travel disagree about
-   * the bar on 49 of these trips, the stricter one is what is shown, and a
-   * diver deserves to know the two sources do not agree rather than to see one
-   * number presented as settled.
+   * That split is what the column's first removal got wrong rather than right.
+   * Three things were true of it -- sixteen columns already competed for the
+   * width, the bar was the same three words on most rows, and its "sources
+   * disagree" marker was styled like the disclosure pill beside it, so two
+   * unrelated warnings looked identical in adjacent columns -- and none of
+   * them was an argument against the fact. Removing the column removed the
+   * fact: `level_labels` and every itinerary's `requirements` went on shipping
+   * in the payload with no code reading either, and 892 departures carried a
+   * stated safety requirement a visitor could only reach by downloading the
+   * JSON. The answer was a better column, and the width, the repetition and
+   * the marker are each answered where the column is defined.
+   *
+   * What stays here is the part a column cannot hold: liveaboard.com and PADI
+   * Travel disagree about the bar on 60 of the 127 trips both describe, the
+   * stricter one is what is shown, and a diver deserves to know the two
+   * sources do not agree rather than to see one number presented as settled.
    *
    * The dim line under it is the sources' own wording, printed for the same
    * reason the fee rows print the operator's: a normalised label is this
@@ -1082,17 +1209,15 @@
   function entryBar(itin) {
     var req = itin.requirements;
     if (!req || !req.min_level) return "";
-    var level = (D.level_labels && D.level_labels[req.min_level]) || req.min_level;
-    /* The dive count beside the certification, unless the certification's own
-       label already states it: two of the four levels are written "Advanced +
-       50 dives", and appending the number again printed "Advanced + 50 dives,
-       50 logged dives" on the single commonest bar in the fleet. Matched on a
-       word boundary rather than as a substring, so a ten-dive bar is not
-       swallowed by a label that happens to read "+ 100 dives". */
-    var stated = req.min_logged_dives &&
-      new RegExp("\\b" + req.min_logged_dives + "\\b").test(level);
-    var dives = req.min_logged_dives && !stated
-      ? ", " + req.min_logged_dives + " logged dives" : "";
+    /* The same phrase the Entry bar column prints, from the same function.
+       This used to build its own -- the level's full label, then the dive
+       count appended unless a regex spotted the label already stating it --
+       and that was two renderings of one fact which could disagree about the
+       commonest bar in the fleet. The column made the duplication worse rather
+       than introducing it, so the phrase moved to `entryText` and both read it.
+       The full certification name is still what the note below says, because a
+       sentence naming a source wants the card's real name. */
+    var level = entryText(itin);
     /* The note, on the trips where it says more than the line above it.
      *
        Every trip has one and 222 of the 317 are the winning source restating
@@ -1104,7 +1229,7 @@
        sentence included, because there the restatement is no longer a
        repetition -- it is which of the two bars was taken. */
     var note = req.notes && /PADI|liveaboard\.com/.test(req.notes) ? req.notes : "";
-    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level + dives) +
+    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level) +
       "</span>" +
       (note ? '<span class="dim">' + esc(note) + "</span>" : "") +
       "</p>";
@@ -1412,7 +1537,20 @@
 
   var BANKS = [];
 
-  function chips(host, items, picked, numeric, skip, pick) {
+  /* `uncapped` shows the whole bank however long it is, and exactly one bank
+     asks for it. The cap is right for a list -- the eight commonest ports, or
+     boats, is a fair sample of a set with no order of its own, and the rest
+     are one click away. It is wrong for a *ladder*: the entry bar runs least
+     demanding to most, so cutting it at eight leaves every Open Water rung on
+     screen and folds all nine Advanced ones away, and the bar 46% of these
+     sailings actually set -- Advanced + 50 dives, on 289 rows -- is behind a
+     "+ 9 more" a reader has no reason to open. Sorting it by popularity
+     instead would fix the cap and break the reading: see the ENTRY bank.
+
+     Seventeen short chips is roughly what the Ports bank already costs, and
+     the panel they sit in scrolls, which is what the markup's own note says
+     the cap is for. */
+  function chips(host, items, picked, numeric, skip, pick, uncapped) {
     var node = document.getElementById(host);
     var expanded = false;
     var counts = null;
@@ -1435,7 +1573,7 @@
         var v = numeric ? +it.id : it.id;
         return counts[it.id] || picked.has(v);
       });
-      var limit = chipLimit();
+      var limit = uncapped ? live.length : chipLimit();
       var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
         return n < limit || picked.has(v);
@@ -2205,6 +2343,8 @@
         function (i) { return i.dive_sites || []; });
   chips("boats", BOATS, state.boats, false, "boats",
         function (i) { return [i.boat]; });
+  chips("entry", ENTRY, state.entry, false, "entry",
+        function (i) { return [entryText(i)]; }, true);
   chips("sellers", SELLERS, state.sellers, false, "sellers",
         function (i, dep) { return [sellerOf(dep)]; });
 
@@ -2257,7 +2397,7 @@
 
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
-    state.boats.clear();
+    state.boats.clear(); state.entry.clear();
     /* Marks go with the filters. Reset puts the table back to how it opened,
        and a highlight left behind on a row the visitor can no longer find is
        worse than no highlight at all. */
@@ -2341,10 +2481,11 @@
      is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
   function labelFilters() {
-    var n = state.ports.size + state.sites.size + state.boats.size;
+    var n = state.ports.size + state.sites.size + state.boats.size +
+      state.entry.size;
     filtersToggle.textContent = n
-      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or boat"
-      : "Filter by port, site or boat";
+      ? n + (n === 1 ? " filter" : " filters") + " on — port, site, boat or entry bar"
+      : "Filter by port, site, boat or entry bar";
     filtersToggle.classList.toggle("active", n > 0);
   }
   filtersToggle.addEventListener("click", function () {
