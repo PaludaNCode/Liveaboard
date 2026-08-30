@@ -113,11 +113,40 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # calls the charge another bills as "Environmental tax" -- and the park fee
     # is a separate line that several of them bill alongside it. Folding the
     # two would merge two charges a diver pays both of.
+    # `Environmental/Government Fee` joins them rather than getting a code of
+    # its own: this is the same Red Sea levy under a name that also credits the
+    # government, which is precisely the case the paragraph above describes --
+    # one boat's "Governamental Reef Tax" is another's "Environmental tax". It
+    # is spelled out rather than generalised to "environmental anything",
+    # because the fleet also writes `Environmental and Route Fees`, which names
+    # two charges and is left declined rather than filed under half of itself.
     (r"\benvironment(?:al)?\s+tax(?:es)?\b|\beco\s+tax\b"
-     r"|\bconservation\s+(?:fees?|charges?)\b|\breef\s+tax(?:es)?\b",
+     r"|\bconservation\s+(?:fees?|charges?)\b|\breef\s+tax(?:es)?\b"
+     r"|\benvironmental\s*/\s*government\s+fees?\b",
      FeeCode.ENVIRONMENT_TAX),
     (r"\bfuel\s+(?:surcharges?|fees?|supplements?)\b", FeeCode.FUEL_SURCHARGE),
     (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
+    # Six wordings PADI's fee book uses and liveaboard.com's does not. Each is
+    # `isMandatory` on the source's own say-so, each is priced, and between
+    # them they were the *only* thing keeping 41 trips from claiming a total --
+    # a berth price on the page with no bill beside it, which is the state this
+    # site exists to correct in other people.
+    #
+    # The same fix that paid last time. Pointing this table at a second source
+    # showed every needle was singular and that "Fuel surcharges", PADI's
+    # commonest mandatory line at 116 entries, matched none of them.
+    #
+    # Listed as the operators write them rather than generalised into "any
+    # authority charge", on the rule PORT_ALIASES and TITLE_FIXES already keep:
+    # a near-miss rule that catches these also catches something that only
+    # looks like them. `Cost Gard Fee` is a misspelling on the operator's side
+    # and is in the table for the same reason the two misspellings of Daedalus
+    # are -- the trip's own sibling entries name the charge correctly.
+    (r"\blocal\s+fees?\b", FeeCode.LOCAL_FEES),
+    (r"\bhospitality\s+(?:fees?|charges?)\b", FeeCode.HOSPITALITY_FEE),
+    (r"\broute\s+supplements?\b", FeeCode.ROUTE_SUPPLEMENT),
+    (r"\bcoast\s*guard\b|\bcost\s+gard\b", FeeCode.COAST_GUARD),
+    (r"\bnavy\s+(?:fees?|charges?)\b", FeeCode.NAVY_FEE),
     # Split from the general course line for the same reason as snorkel gear:
     # vessels list "Nitrox Course (€99)" and "Scuba Diving Courses (€79-110)"
     # as separate priced entries, and one entry per code drops the second.
