@@ -54,6 +54,14 @@ class Dataset:
     a fresh checkout and renders as no panel rather than as no deals.
     """
 
+    padi_berths_read: str | None = None
+    """The day the second seller's berth counts were read.
+
+    Its own crawl on its own day, a day off ``berths_read``, and stated apart
+    from it: a count's date is the whole of what makes it a claim rather than a
+    fact, so one date printed over two sellers dates half of them wrong.
+    """
+
     berths_read: str | None = None
     """The day the berth counts were read.
 
@@ -91,6 +99,7 @@ class Dataset:
             cabin_names=list(payload.get("cabin_names") or []),
             sellers=list(payload.get("sellers") or []),
             berths_read=payload.get("berths_read") or None,
+            padi_berths_read=payload.get("padi_berths_read") or None,
             deals=dict(payload.get("deals") or {}),
         )
         dataset.validate()

@@ -284,10 +284,38 @@ Break these and the site starts lying quietly rather than failing loudly.
   load-bearing: read a day apart, all 864 ladders sat up to 0.6% above their
   own row, which is the panel disagreeing with the number that opened it.
   `berths` is a **list of seller blocks** because a sailing has more than one
-  seller: PADI sells 601 of these same departures and publishes an availability
-  figure of its own ([#92]). A seller that states a count but no ladder gets no
-  cabin list — *24 places* and *24 places at a stated price* are different
-  claims, and only the second is a ladder.
+  seller, and both fill one ([#92]). A seller that states a count but no ladder
+  gets no cabin list — *24 places* and *24 places at a stated price* are
+  different claims, and only the second is a ladder.
+- **Two sellers, two counts, and never one number.** A block carries both
+  *at the advertised price* and *on the sailing*, because they are different
+  questions and only a ladder answers the first. **Which one PADI's
+  `availability` answers was measured, not assumed**: against liveaboard.com's
+  whole-sailing total it is exact on 77% of the 584 sailings where both speak
+  and within two berths on 88% — a day between the crawls — against 22% and a
+  mean error of seven berths for the count at the advertised price. So it fills
+  the second slot only. Putting it in the first would have relabelled *22
+  aboard* as *22 at this price* on the 249 rows with no ladder to contradict
+  it, which is why the page prints **aboard** and **places** as different words.
+  They disagree outright on 24 sailings — 21 where PADI still sells berths
+  liveaboard.com calls full — and both are printed under the name of whoever
+  said it and the day they said it. The two crawls run on different days, so
+  `berths_read` and `padi_berths_read` are separate: one date over two sellers
+  dates half of them wrong.
+- **A ladder that contradicts its row is not that row's ladder.** The advertised
+  price *is* the bottom rung, on 864 of 864, so a rung far below it is not a
+  cheaper berth on offer — it is last week's prices still on the shelf. The day
+  the Red Sea Aggressors' 33% sale ended, the daily refresh re-priced 36
+  sailings to list while the booking pages behind them had been read two days
+  earlier, and the page offered a €1,588 berth on a €2,371 sailing: a price
+  nobody can buy, published by the site that exists to catch that. `promote`
+  drops such a ladder past `STALE_LADDER` (3%, which leaves room for the 0.6%
+  the whole fleet drifts overnight) and **names every one it dropped** — the
+  fix is a fresh `cabins.yml`, and nothing in the dataset can put it back. The
+  other seller's count survives the drop: it is not a ladder and has nothing to
+  contradict. **CI never saw this**, because the scheduled data commits push
+  with `GITHUB_TOKEN` and GitHub does not run workflows on those — so a refresh
+  can turn `main` red and the next human PR is what finds out.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was
