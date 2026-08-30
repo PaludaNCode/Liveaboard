@@ -284,6 +284,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         "level_labels": {
             level.value: label for level, label in DIVER_LEVEL_LABELS.items()
         },
+        # What PADI Travel is discounting on these boats, and what moved since
+        # the day before. Passed through exactly as `promote` wrote it, for the
+        # same reason the cabin ladder is: it is already joined, converted and
+        # diffed, and a second shaping here would be a second place for the page
+        # and the dataset to disagree. Absent until the daily read has run.
+        **({"deals": dataset.deals} if dataset.deals.get("offers") else {}),
         "itineraries": itineraries,
         "departures": departures,
     }
@@ -313,6 +319,13 @@ DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
     "padi.json": ("What PADI Travel says per trip",
                   "the certification it states and the dives it counts, for the "
                   "38 boats both sites sell"),
+    # Every day of it, not just today's. The panel on the page shows one
+    # reading and one diff; the book behind it holds a month, which is what
+    # answers whether a boat's "Early Bird" has been running since spring or
+    # appeared this morning.
+    "deals.json": ("What PADI Travel is discounting, day by day",
+                   "the deals listing read daily, so a price move is a diff "
+                   "between two readings rather than a claim"),
 }
 
 
@@ -366,7 +379,7 @@ def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[
     written.append("egypt-2027.csv")
 
     for name in ("egypt-2027.json", "CHANGES.md", "itineraries.json", "padi.json",
-                 "padi_departures.json"):
+                 "padi_departures.json", "deals.json"):
         source = (data_dir / name) if data_dir else None
         if source and source.exists():
             (folder / name).write_text(source.read_text(encoding="utf-8"),

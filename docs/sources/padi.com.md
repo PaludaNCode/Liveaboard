@@ -1,8 +1,8 @@
 # padi.com — source interface
 
-**Egypt only, and wired up.** The site reads three things from padi.com: the
-entry bar, the price of a sailing, and — since 2026-08-29 — the fee book behind
-that price. All three are promoted.
+**Egypt only, and wired up.** The site reads four things from padi.com: the
+entry bar, the price of a sailing, the fee book behind that price, and — since
+2026-08-29 — what PADI is discounting. All four are promoted.
 
 The scope [#3](https://github.com/PaludaNCode/Liveaboard/issues/3) set was
 **requirements and accreditation, not prices**, on the reading that PADI Travel
@@ -33,6 +33,7 @@ Everything below answers 200 over plain HTTP, no browser.
 | `/liveaboard/egypt/{vessel-slug}/` | Server-rendered. Vessel, fleet, JSON-LD `Product`, every itinerary title, PADI courses taught, spec table |
 | `/liveaboard/egypt/{vessel}/{itinerary-slug}/` | `<title>` and `<meta description>` per trip, server-rendered — and **nothing else**: the body is filled by XHR |
 | `/liveaboard-diving/egypt/` | Country landing page. Four featured vessels; the sitemap is the real inventory |
+| `/liveaboard-deals/?country=…&date=…` | **Nothing.** An AngularJS shell; see *The deals listing* below |
 
 `tools/probe_padi_vessel.py --slug hammerhead-ii --boat hammerhead-ii` reads one
 vessel page and holds it against `data/egypt-2027.json`. `--cache DIR` makes
@@ -158,6 +159,13 @@ Written down so nobody spends the afternoon again.
   `?format=json` and `X-Requested-With: XMLHttpRequest` on an itinerary URL
   return the same HTML shell. `/graphql` 301s to `/graphql/`, which 404s — that
   is Django's `APPEND_SLASH`, not an endpoint.
+- **`/liveaboard-deals/` cannot be parsed, at any effort.** An AngularJS shell
+  with no prices and a `page=` that is decorative; see *The deals listing*.
+  Its data is `/api/v2/travel/promotions/`, over plain HTTP.
+- **Ten guessed paths for the deals endpoint, all 404.** Every shape built on
+  the word *deal* under `/api/v2/travel/`. PADI's own word is **promotion**, and
+  the vocabulary that says so is in `window.info` on the shell — which is
+  cheaper to read than the CDN bundle and was sitting there the whole time.
 - **The app's own JS is unreachable from this environment.** Bundles and Angular
   templates live on `d2p1cf6997m1ir.cloudfront.net`, which the egress policy
   blocks (403 to CONNECT). `travel.padi.com/static/...` 404s — the CDN is the
@@ -183,7 +191,8 @@ headers at all — a plain GET answers 200 with JSON, and nothing under
 |---|---|
 | `/api/v2/travel/shop/{vessel}/itineraries/?kind=10` | Paginated DRF list: `{"count": 22, "results": [{title, slug, id, totalNumberOfDives, totalNumberOfDivesMax}]}` |
 | `/api/v2/travel/shop/{country}/{vessel}/itineraries/{slug}/` | One itinerary, **95 fields** |
-| `/api/v2/travel/shop/{vessel}/trips/` | **Every sailing on sale**: `startDate`, `endDate`, `duration`, `price`, `compareAtPrice`, `availability`, and the itinerary it belongs to |
+| `/api/v2/travel/shop/{vessel}/trips/` | **Every sailing on sale**: `startDate`, `endDate`, `duration`, `price`, `compareAtPrice`, `availability`, `promotion`, and the itinerary it belongs to |
+| `/api/v2/travel/promotions/?country=…&date=…` | **The deals listing.** One row per discounted vessel, with a currency |
 
 One request per vessel for the list — 58 for Egypt — then one per itinerary.
 
@@ -236,6 +245,93 @@ a date has no spelling, where the itinerary-title join needed en-dash folding an
 a harbour alias table to reach a third of that. PADI's calendar coverage varies
 per boat — `my-iceberg` lists 22 sailings and none in our window — so a missing
 PADI price is evidence of nothing.
+
+### The deals listing
+
+Read 2026-08-29. `/liveaboard-deals/` is the page; `promotions/` is the answer.
+
+**The page cannot be read and never will be.** Probed 2026-08-28 on pages 1, 2,
+3 and 99, paced two seconds apart:
+
+| page | HTTP | bytes | deals in HTML |
+|---|---|---|---|
+| 1 | 200 | 272,103 | 0 |
+| 2 | 200 | 272,103 | 0 |
+| 3 | 200 | 272,103 | 0 |
+| 99 | 200 | 272,110 | 0 |
+
+Zero `application/ld+json`, zero vessel links, no prices. The only difference
+between any two of them is the URL echoed back in `og:url` and the `hreflang`
+alternates — 30 lines of navigation chrome. `page=` is reflected and never acted
+on. `window.pageType = "la_deals"` and the bundle is
+`static/travel-app/dist/special_deals.*.js` on the CDN, which the sandbox
+refuses with a 403 to CONNECT. **A markup parser for this page is ruled out**,
+as is a browser probe from here.
+
+**The endpoint took eleven guesses and one vocabulary.** Ten shapes built on the
+word "deal" — `special-deals/`, `special_deals/`, `deals/`, `liveaboard-deals/`,
+`liveaboards/deals/`, `shop/deals/`, `trip/deals/`, `trips/deals/`, `deal/`,
+`specialdeals/` — all 404 under `/api/v2/travel/`. What found it was reading
+`window.info` on the shell itself: the vocabulary there is
+`PROMOTION_KIND`/`PROMOTION_SELECTION_KIND`, not "deals", and
+`/api/v2/travel/promotions/` answers 200 on the first try. **PADI's word for a
+deal is a promotion**, and that is worth more than the endpoint: `promotion` is
+also a field on every row of `shop/{vessel}/trips/`, which this file had been
+reading for a fortnight without noticing.
+
+It takes the deals page's own query verbatim — repeated `country=`, repeated
+`date=` — and **pages honestly**, unlike the HTML: on a 24-row query `page=2`
+returns the last four with `next: null` and `page=3` answers 404. The fetcher
+still terminates on offer identity rather than on either signal, because a
+listing whose HTML lies about paging has no standing to be trusted about it.
+
+| Field | Note |
+|---|---|
+| `url` | The vessel page. **The only thing that places the deal** — see below |
+| `shopTitle`, `shopId` | The vessel, as PADI names it |
+| `price` / `compareAtPrice` | The offer and what it is against |
+| `currency` | **Stated here**, unlike on `trips/`, where a bare number is in the vessel's own unit and the `Currency-code` header does not convert |
+| `dateFrom` / `dateTo` | One exemplar sailing, not the offer's validity |
+| `promotion` | `title`, `kind` (`PROMOTION_KIND`), `value`, `description` |
+| `countryTitle` | Not read. See below |
+
+**One row per vessel per query**, quoting that vessel's earliest promoted
+sailing in the window. So the unit is a boat's offer, not a sailing's — which
+is why `promote` keys the change log on the vessel and reports a moved exemplar
+as a change rather than as a withdrawal and a new offer.
+
+#### `country` is not where the boat sails, and this is where it costs most
+
+The deals query has to ask for **110 (USA) as well as 120 (Egypt)**, because all
+three Red Sea Aggressors are filed under the USA — Aggressor Fleet is American,
+the same fact `countrySlug` records on the vessel page. Asking Egypt alone drops
+them silently.
+
+Asking for the USA as well is coarse, and the measurement is the argument.
+Of **18 deals** in the May–August 2027 window:
+
+| | |
+|---|---|
+| join to a boat this site carries | **13** |
+| join to nothing | **5** — Bahamas Aggressor II, Belize Aggressor III and IV, Cayman Aggressor IV, Roatan Aggressor |
+
+Every one of the five sails the Caribbean. So the country field is wrong about
+where a boat is on **28% of what it returns here**, and it cannot place a deal.
+The join does: a vessel that maps to one of ours is Egyptian because our own
+fleet is, and one that does not is **named rather than dropped** — in the build
+log and on the page — because an Egyptian boat filed under the USA and unmatched
+is precisely the case the breadth exists to catch. Only a name a person reads
+separates that from a boat in another ocean.
+
+#### Access
+
+`/liveaboard-deals/` is `Allow` for `User-agent: *`, nothing under
+`/api/v2/travel/` is disallowed, and plain `date=` is not in the
+disallowed-parameter list — unlike `trip_date=`, `departure_date=`,
+`date_from=`, `dateStart=`, `dateTo=`, `date_after=` and `activity_date=`, which
+are. Paced at one request every two seconds, per the Cloudflare AI-bot limit of
+30/min/IP that `www.padi.com/robots.txt` documents. The whole daily read is one
+or two requests.
 
 ### The fields that matter
 

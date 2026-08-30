@@ -47,9 +47,10 @@ when the useful part of a site is a fraction of its pages.
 from __future__ import annotations
 
 import re
-from typing import Iterator
+from typing import Callable, Iterator, Mapping, Sequence
 
 from html import unescape
+from urllib.parse import urlencode
 
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
@@ -92,6 +93,66 @@ request per vessel, which is 58 for Egypt.
 
 ITINERARY_DETAIL = API_BASE + "/shop/{country}/{vessel}/itineraries/{slug}/"
 """One itinerary, 95 fields, and the only place the entry bar is stated."""
+
+PROMOTIONS = API_BASE + "/promotions/"
+"""What PADI Travel is discounting: the deals page, without the deals page.
+
+`/liveaboard-deals/` is an AngularJS shell -- 272 KB of chrome, zero prices,
+`page=` reflected in `og:url` and never acted on, so page 99 serves page 1 --
+and its bundle is `special_deals.*.js` on the CDN the sandbox cannot reach.
+This is the XHR behind it, and it takes **the deals page's own query verbatim**:
+repeated `country=` ids, repeated `date=` months, and a `page=` that works.
+
+Paging is honest here in a way the HTML is not: on a 24-row query `page=2`
+returns the last four with `next: null`, and `page=3` answers 404 rather than
+recycling page 1. The fetcher still terminates on offer identity rather than on
+either signal -- see `tools/fetch_deals.py` -- because a listing that lies about
+its own paging once has no standing to be trusted about it twice.
+
+One row per vessel per query, quoting the vessel's earliest promoted sailing in
+the window. So a boat's deal is the unit, not a sailing's.
+"""
+
+DEAL_COUNTRIES: tuple[int, ...] = (110, 120)
+"""The countries the deals query asks for: 110 is the USA, 120 is Egypt.
+
+Both on purpose, and the reason is the whole of why this cannot be filtered on
+PADI's side. **Some Egyptian boats are filed under the USA** -- all three Red Sea
+Aggressors are, because Aggressor Fleet is American -- so asking for Egypt alone
+silently drops them, which is the failure this query exists to avoid.
+
+Asking for the USA as well is coarse rather than clever: of 18 deals in the
+published season it also returns Bahamas, Belize (twice), Cayman and Roatan,
+which sail nowhere near the Red Sea. That is not a flaw in the query, it is the
+measurement -- 5 of those 18, so **more than a quarter** of what PADI's country
+field returns here is somewhere else entirely. The field cannot place a deal and
+nothing downstream asks it to: `promote` joins the deal's vessel to a boat of
+ours and lets that decide.
+"""
+
+DEAL_MAX_PAGES = 25
+"""A cap, because a listing has to be able to end even when it will not say so.
+
+The HTML this endpoint sits behind serves page 1 for every value of `page`, so
+a loop that trusted a page number there would never stop. This endpoint does
+page properly, and the loop still does not trust it: it stops when a page adds
+no offer it has not already seen, and this is the backstop under that. Twenty-
+five pages is 500 offers, against 18 in the published season and 97 worldwide.
+"""
+
+PROMOTION_KIND: dict[int, str] = {
+    10: "Fixed amount",
+    20: "Discount %",
+    30: "Free night(s)",
+    40: "Other",
+}
+"""`PROMOTION_KIND`, verbatim from `window.info.promotions` on any travel page.
+
+Kept as PADI's own words rather than folded into a percentage: a free night and
+a third off are different offers, and the money saved is stated separately in
+`compareAtPrice` anyway. `value` means whatever the kind says it means, which is
+why neither is read as the other.
+"""
 
 VESSEL_URL = re.compile(
     rf"https://{re.escape(HOST)}/liveaboard/(?P<country>[a-z0-9-]+)/(?P<slug>[a-z0-9-]+)/"
@@ -515,6 +576,188 @@ class PadiComAdapter(SourceAdapter):
         if requirements:
             record["requirements"] = requirements
         return record
+
+    @staticmethod
+    def iso_day(value: object) -> str | None:
+        """A PADI timestamp as the day it names, or ``None``.
+
+        ``"2027-05-08T00:00:00Z"`` -> ``"2027-05-08"``. By truncation rather
+        than by parsing into a local timezone, which would move a midnight-UTC
+        sailing to the previous day for every reader west of Greenwich.
+        """
+        if not isinstance(value, str) or len(value) < 10:
+            return None
+        day = value[:10]
+        return day if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) else None
+
+    @classmethod
+    def deal_from_payload(cls, record: dict[str, object]) -> dict[str, object] | None:
+        """One row of `PROMOTIONS` as a deal, or ``None`` if it states no price.
+
+        Four things have to be present for this to be an offer rather than a
+        banner: the vessel it is on, a price, the price it is *against*, and the
+        currency both are in. PADI states the currency here, which the sailings
+        endpoint next door does not -- a `price` there is a bare number in the
+        vessel's own unit, and assuming one put every Aggressor out by the
+        EUR/USD rate. A row missing any of the four is dropped rather than
+        completed: this project does not invent a price, and a discount with no
+        "was" beside it is a claim about a number nobody published.
+
+        The vessel comes off the URL's path, which is the one place a slug is
+        load-bearing here rather than decorative -- it is how the deal joins to
+        a boat of ours. `countryTitle` is deliberately not read: it says United
+        States of America for all three Red Sea Aggressors, and asking PADI for
+        the USA in order to catch them also returns Bahamas, Belize, Cayman and
+        Roatan. Where a deal sails is the join's answer, never the label's.
+        """
+        url = record.get("url")
+        match = VESSEL_URL.match(str(url)) if url else None
+        price, was = record.get("price"), record.get("compareAtPrice")
+        currency = record.get("currency")
+        if not match or not isinstance(currency, str) or not currency.strip():
+            return None
+        if not isinstance(price, (int, float)) or not isinstance(was, (int, float)):
+            return None
+        if price <= 0 or was <= 0:
+            return None
+
+        promotion = record.get("promotion")
+        offer = promotion if isinstance(promotion, dict) else {}
+        kind = offer.get("kind")
+        deal: dict[str, object] = {
+            "slug": match.group("slug"),
+            "country": match.group("country"),
+            "shop": str(record.get("shopTitle") or "").strip() or None,
+            "shop_id": record.get("shopId"),
+            "title": str(offer.get("title") or "").strip() or None,
+            # PADI's own word for what sort of offer this is, not a reading of
+            # it. `value` is 33.0 under "Discount %" and 1761.0 under "Fixed
+            # amount", so the two are only meaningful together.
+            "kind": kind if isinstance(kind, int) else None,
+            "kind_label": PROMOTION_KIND.get(kind) if isinstance(kind, int) else None,
+            "value": offer.get("value") if isinstance(offer.get("value"), (int, float)) else None,
+            "price": float(price),
+            "was": float(was),
+            "currency": currency.strip(),
+            "start": cls.iso_day(record.get("dateFrom")),
+            "end": cls.iso_day(record.get("dateTo")),
+            "url": str(url),
+        }
+        return deal
+
+    @staticmethod
+    def deals_url(months: Sequence[str], countries: Sequence[int] = DEAL_COUNTRIES) -> str:
+        """The deals query, spelled the way the deals page spells it.
+
+        Repeated `country=` and repeated `date=`, in the order the page writes
+        them, so the URL in `data/deals.json` is one somebody can paste into a
+        browser and check. `date=` is the first of each season month; robots
+        disallows `trip_date=`, `departure_date=`, `date_from=`, `dateStart=`,
+        `dateTo=`, `date_after=` and `activity_date=`, and plain `date=` is not
+        among them.
+        """
+        query = [("country", str(c)) for c in countries] + [("date", d) for d in months]
+        return PROMOTIONS + "?" + urlencode(query)
+
+    @staticmethod
+    def deal_identity(deal: Mapping[str, object]) -> tuple:
+        """What makes this offer this offer, for the paging guard.
+
+        Vessel, the sailing it is quoted on, its price and the offer's own name.
+        The issue that asked for this said "vessel + trip name + departure date
+        + price"; the listing publishes no trip name, and the offer's title is
+        what stands in its place -- *"333 FLASH SALE"* against *15% Early Bird*
+        distinguishes two offers on one hull the way a trip name would.
+        """
+        return (deal.get("slug"), deal.get("start"), deal.get("end"),
+                deal.get("price"), deal.get("title"))
+
+    @classmethod
+    def collect_deals(
+        cls,
+        fetch: Callable[[str], object],
+        url: str,
+        *,
+        max_pages: int = DEAL_MAX_PAGES,
+    ) -> tuple[dict[str, dict[str, object]], dict[str, object]]:
+        """Page a deals query to its end, and say how it ended.
+
+        **Termination is on offer identity, never on a page number or a status
+        code.** The page this endpoint backs returns page 1's content for every
+        value of `page`, including 99, so "the listing ran out" is a question
+        the page number cannot answer -- and a loop that asked it would either
+        stop at one page or never stop at all. This one stops when a page adds
+        no offer it has not already seen, which is true of a repeated page, an
+        empty page and a page that 404s alike.
+
+        Keyed by vessel, because PADI publishes one deal per vessel per query.
+        A second row for a vessel already held is *kept out and reported*
+        rather than allowed to overwrite the first: silently keeping one of two
+        is how a row count stays right while the content is wrong.
+
+        `fetch` returns the parsed body or ``None``, so the network lives in
+        `tools/fetch_deals.py` and this is testable without one.
+        """
+        deals: dict[str, dict[str, object]] = {}
+        seen: set[tuple] = set()
+        crowded: list[str] = []
+        pages = read = 0
+        stopped = "page cap"
+        # Whether the last page read claimed there was another. It decides
+        # nothing about when to stop -- identity does that -- and decides
+        # everything about what a failed fetch *meant*. A page that answers
+        # nothing after the listing said it had ended is the end confirmed; the
+        # same silence after it said there was more is a page we did not read,
+        # which is not the same as a page with nothing on it.
+        promised_more = True
+
+        while pages < max_pages:
+            separator = "&" if "?" in url else "?"
+            body = fetch(url if pages == 0 else f"{url}{separator}page={pages + 1}")
+            pages += 1
+            if not isinstance(body, dict):
+                stopped = "unreadable" if promised_more else "listing ended"
+                break
+            promised_more = bool(body.get("next"))
+            results = body.get("results")
+            if not isinstance(results, list) or not results:
+                stopped = "empty page"
+                break
+            read += len(results)
+
+            fresh = 0
+            for row in results:
+                if not isinstance(row, dict):
+                    continue
+                deal = cls.deal_from_payload(row)
+                if not deal:
+                    continue
+                identity = cls.deal_identity(deal)
+                if identity in seen:
+                    continue
+                seen.add(identity)
+                fresh += 1
+                slug = str(deal["slug"])
+                if slug in deals:
+                    crowded.append(f"{slug}: {deal.get('title') or 'a second offer'}")
+                    continue
+                deals[slug] = deal
+            if not fresh:
+                stopped = "no new offer"
+                break
+
+        return deals, {
+            "pages": pages,
+            "rows": read,
+            "stopped": stopped,
+            # Never silent, for the same reason `changes` never truncates
+            # without saying so: a listing that ran into its cap looks exactly
+            # like one that ended, and only one of those is the whole answer.
+            # A page that could not be read counts here too -- the run does not
+            # know what was on it, and the honest word for that is not "none".
+            "truncated": stopped in ("page cap", "unreadable"),
+            "crowded": crowded,
+        }
 
     @staticmethod
     def basis_for(payed_per: object) -> FeeBasis | None:
