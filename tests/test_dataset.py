@@ -1035,7 +1035,10 @@ class TestPayloadIsRead(unittest.TestCase):
     diver away for -- reachable only by downloading the JSON. The column that
     printed it was removed for good reasons and nothing replaced it, which is
     the exact shape of failure this class exists to catch: not a wrong number,
-    a fact silently withdrawn.
+    a fact silently withdrawn. The column is back, the vocabulary it reads is
+    `entry_bars`, and `level_labels` is gone from the payload rather than left
+    in it unread -- which is this class getting the outcome it was written for,
+    in both directions.
 
     Deliberately a check on the *keys*, not on the rendering. Whether the bar
     reads well is a matter of taste; whether anything reads it at all is not.
@@ -1051,8 +1054,47 @@ class TestPayloadIsRead(unittest.TestCase):
                       "own label, which is built from this table in Python",
     }
 
+    #: The same, per itinerary and per departure. Also empty, and the emptiness
+    #: is worth more here: a top-level key ships once, an itinerary key ships
+    #: 402 times and a departure key 1,122, so this is the level where an
+    #: unread field is measured in tens of kilobytes rather than in bytes.
+    ITINERARY_UNREAD: dict[str, str] = {}
+    DEPARTURE_UNREAD: dict[str, str] = {}
+
     def app(self) -> str:
         return self.APP.read_text(encoding="utf-8")
+
+    def code(self) -> str:
+        """`app.js` with its comments removed.
+
+        Searching the raw source cannot tell a reader from a mention, and this
+        file is a third prose by weight -- 69 KB of the 190. Four fields were
+        unread while every one of them appeared in a comment, and `operator`
+        appeared five times in code as an ordinary English word inside a
+        sentence the page prints ("This operator publishes no required
+        extras"), never once as a property. A guard that accepted those would
+        be green for the wrong reason, which is the failure this class is
+        about.
+
+        Block comments only, because `app.js` has no line comments at all --
+        stripping `//` would cut the tail off any URL in a string literal.
+        `test_the_source_has_no_line_comments` holds that assumption up.
+        """
+        return re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+
+    def reads(self, key: str) -> bool:
+        """Whether the page reads `key` as a property, in code rather than prose.
+
+        Dot access or a quoted subscript. A key that appears only as a bare
+        word is not a reader.
+        """
+        pattern = r"\." + re.escape(key) + r"\b|[\[(,]\s*[\"']" + re.escape(key) + r"[\"']"
+        return re.search(pattern, self.code()) is not None
+
+    def rows(self, payload: dict, level: str) -> list[dict]:
+        source = (payload["itineraries"].values() if level == "itineraries"
+                  else payload["departures"])
+        return list(source)
 
     def payload(self) -> dict:
         return build_payload(Dataset.load(SEED))
@@ -1069,20 +1111,123 @@ class TestPayloadIsRead(unittest.TestCase):
                     f"either print it or stop serialising it",
                 )
 
+    def test_the_source_has_no_line_comments(self) -> None:
+        """`code()` strips block comments only, and this is why that is enough.
+
+        If `//` comments ever appear, either they start hiding readers from
+        the guard or stripping them starts cutting URLs in half. Either way
+        somebody has to decide, rather than find out from a green build.
+        """
+        stripped = re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+        offenders = [n for n, line in enumerate(stripped.splitlines(), 1)
+                     if re.match(r"\s*//", line)]
+        self.assertEqual(offenders, [], "app.js has line comments now")
+
+    def test_every_itinerary_key_has_a_reader(self) -> None:
+        """The level where the bytes are.
+
+        `test_every_top_level_key_has_a_reader` walked the payload's top level
+        and nothing walked below it, so four fields shipped unread to every
+        visitor -- `summary` at 63 KB, `operator`, `one_way` and a
+        `spaces_left` that was null on all 1,122 rows. 75 KB of a page that
+        lazily fetches nothing, past a guard whose docstring says every fact
+        the page ships is a fact the page prints.
+        """
+        for key in {k for row in self.rows(self.payload(), "itineraries") for k in row}:
+            if key in self.ITINERARY_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"every itinerary ships {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_every_departure_key_has_a_reader(self) -> None:
+        """The same, one level down and 1,122 rows wide."""
+        for key in {k for row in self.rows(self.payload(), "departures") for k in row}:
+            if key in self.DEPARTURE_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"departures ship {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_the_committed_dataset_ships_no_unread_key_the_seed_lacks(self) -> None:
+        """The two tests above run on the seed, which is what keeps them ahead
+        of the fetch. The seed carries neither seller's second bill, no cabin
+        ladder and no sale, so five keys exist only once real data is loaded --
+        and a dead one among them would never be reached. This is the same
+        assertion over the committed payload, which makes it a publication gate
+        rather than a code test, and it goes through `published` for that.
+        """
+        payload = published.page()
+        for level, allowed in (("itineraries", self.ITINERARY_UNREAD),
+                               ("departures", self.DEPARTURE_UNREAD)):
+            for key in {k for row in self.rows(payload, level) for k in row}:
+                if key in allowed:
+                    continue
+                with self.subTest(level=level, key=key):
+                    self.assertTrue(
+                        self.reads(key),
+                        f"{level} ship {key!r} and app.js never reads it",
+                    )
+
     def test_the_entry_bar_reaches_the_page(self) -> None:
         """The specific fact this class was written for.
 
         A stated safety requirement is the one kind of number here that is not
         about money, and it is the whole of what the second source was added
-        for. It travels from the itinerary record through `level_labels` into
-        the expanded row, and every step of that has to be present.
+        for. It travels from the itinerary record through `entry_bars` into a
+        column and a filter bank, and every step of that has to be present.
+
+        `level_labels` used to be the vocabulary named here, and this assertion
+        outlived it: once the phrase was built from the certification and the
+        dive count instead, the only "level_labels" left in `app.js` was the
+        word inside a comment -- which this test would have accepted. A check
+        that passes on its own history is the failure this module exists to
+        catch, so it names the reader rather than the string.
         """
         source, payload = self.app(), self.payload()
         self.assertIn("requirements", source, "app.js reads no entry bar")
-        self.assertIn("level_labels", source, "app.js has no vocabulary for it")
+        self.assertIn("entry_bars", source, "app.js has no vocabulary for it")
         self.assertIn("min_level", source, "app.js reads no certification level")
+        self.assertIn("min_logged_dives", source, "app.js reads no dive count")
+        self.assertIn('k: "entry"', source, "the page has no Entry bar column")
         bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
         self.assertTrue(bars, "the seed itself states no entry bar to print")
+
+    def test_the_entry_bar_column_is_in_every_column_order(self) -> None:
+        """A column missing from an order is appended, so it cannot vanish --
+        but it lands after the provenance columns, at the far right of a table
+        this wide, which for the one column that says whether a row is bookable
+        at all is barely different from being gone. Four orders, four layouts,
+        and the phone one is where it matters most."""
+        source = self.app()
+        for name in ("var ORDER", "var PHONE_ORDER", "var TINY_ORDER",
+                     "var COMPACT_ORDER"):
+            with self.subTest(order=name):
+                body = source[source.index(name):]
+                body = body[: body.index("]")]
+                self.assertIn('"entry"', body, f"{name} does not place the column")
+
+    def test_the_entry_bar_is_never_softened_by_the_page(self) -> None:
+        """The printed dive count is the greater of the two numbers.
+
+        `advanced_50` means fifty dives by definition, and a trip stating a
+        smaller `min_logged_dives` beside it must not print the smaller one:
+        that would publish a bar below the certification the same record also
+        demands. The rule is one `Math.max` in `entryDives`, which is exactly
+        the kind of line a later edit reverses without noticing.
+        """
+        source = self.app()
+        body = source[source.index("function entryDives"):]
+        body = body[: body.index("}")]
+        self.assertIn("Math.max", body,
+                      "entryDives must take the greater of the stated and the "
+                      "implied dive count, never the stated one alone")
 
     def test_the_second_seller_is_reachable_and_explained(self) -> None:
         """A second seller prices these rows, so a reader can get to it.
