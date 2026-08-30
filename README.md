@@ -45,9 +45,16 @@ specification table need a browser — the site renders them client-side — so
 they come from a weekly Playwright run and are keyed by vessel, because they do
 not change with the month.
 
-A sandbox cannot reach liveaboard.com (network policy, see #1); GitHub's runners
-can. So anything about what the source actually returns is settled by running a
-`tools/probe_*.py` on a runner, never by guessing at markup.
+Both sources are reachable locally since the allowlist landed (#1), and from
+GitHub's runners. Either way, anything about what a source actually returns is
+settled by running a `tools/probe_*.py` against it and reading the answer, never
+by guessing at markup.
+
+Two paths this crawl uses are **disallowed by liveaboard.com's robots.txt**, and
+only a formatting bug in that file lets `can_fetch()` say otherwise. Carrying on
+is a deliberate call rather than an oversight; the reasoning, and what reversing
+it would cost, are in [`docs/sources/liveaboard.com.md`](docs/sources/liveaboard.com.md)
+under *robots.txt, and the blank line* (#121).
 
 **Where each fact comes from is written down**, per source, in
 [`docs/sources/`](docs/sources/) — the URL, the JSON-LD path or selector, and

@@ -441,8 +441,17 @@ Break these and the site starts lying quietly rather than failing loudly.
 
 ## Sources
 
-`padi.com` and `liveaboard.com` are the only permitted sources. Both are blocked
-by the environment's network policy (see README); GitHub's runners are not.
+`padi.com` and `liveaboard.com` are the only permitted sources. Both are
+reachable locally since the allowlist landed (#1), and from GitHub's runners.
+
+**`/BookingStep1` and the `?m=` selector are disallowed by liveaboard.com's
+robots.txt, and we fetch them anyway** — a blank line after `User-agent: *`
+orphans all 31 rules, so `urllib.robotparser` discards them and `can_fetch()`
+says yes. That is a deliberate call taken 2026-08-30, not an oversight, and the
+reasoning and the price of reversing it are in
+`docs/sources/liveaboard.com.md` under *robots.txt, and the blank line*. Do not
+re-derive it as a fresh discovery; do read it before quoting `can_fetch()` as
+permission.
 **Do not write markup parsers for pages nobody has fetched** — run a probe on a
 runner, read what came back, then parse. `tools/probe_*.py` write nothing and
 exist for exactly this.

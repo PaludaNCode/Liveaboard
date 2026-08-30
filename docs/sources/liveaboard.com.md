@@ -75,8 +75,9 @@ zero — where a page returning no cabin markup at all knows nothing, and writin
 that as zero would publish a sold-out sign for a page that merely failed.
 
 **Reading, not booking.** Step one of a booking flow is a page with a form on
-it; a GET renders it and submits nothing. `robots.txt` allows the path, and the
-polite fetcher asks it first.
+it; a GET renders it and submits nothing. The polite fetcher asks `robots.txt`
+first and it answers yes — but read *"robots.txt, and the blank line"* below
+before taking that at face value, because the yes is an accident.
 
 **The cost is one request per departure**, ~890 a night, because a berth count
 changes the moment somebody books. That is why `cabins.yml` is manual and
@@ -465,13 +466,63 @@ Each of these cost a cycle at least once.
   does, that is four fetches per vessel down to one. Unprobed — do not assume
   either way.
 
+## robots.txt, and the blank line
+
+**Read this before relying on `can_fetch()`.** `https://www.liveaboard.com/robots.txt`,
+read 2026-08-30, disallows 31 paths for `User-agent: *`. Two of them are ours:
+
+```
+Disallow: /BookingStep1     <- tools/fetch_cabins.py, ~890 pages nightly
+Disallow: /*?*m=*           <- the ?m={M}/{YYYY} selector the whole crawl uses
+```
+
+`PoliteFetcher` obeys `robots.txt`, and that part works. It is not refusing
+these because **the file is malformed**:
+
+```
+User-agent: *
+                              <- a blank line, which ends the record
+    Disallow: /BookingStep1
+    …
+```
+
+A blank line terminates a group, so all 31 rules belong to no user-agent and
+Python's `urllib.robotparser` discards them: `can_fetch()` returns `True` for
+every path in the file. Delete that one line locally and `/BookingStep1` flips
+to `False`. Both readings were checked. (The indentation is a red herring —
+stripping it changes nothing. It is the blank line.)
+
+**The decision, taken 2026-08-30 and deliberate rather than an oversight:
+carry on, and write it down.** That is what this section is. The letter of the
+file permits it; the intent plainly does not, and leaning on somebody else's
+typo is a poor position for a project whose whole argument is the difference
+between what a site technically discloses and what it means to. So it is
+recorded here rather than left for the next reader to rediscover as a
+curiosity.
+
+What honouring it would cost, stated so the choice can be revisited with the
+price in view: the cabin ladder on 828 sailings and the "advertised price is
+the bottom rung" check with it; berths left at the advertised price, which has
+no other source; the sale detection and the change log built on the same pages;
+and the `?m=` selector, without which a vessel-page fetch returns a rolling
+window from today and the season has to be filtered out of 746 departures to
+keep 14. There is no second route to any of it — `/liveaboard-deals` is prose
+and the JSON-LD carries no list price, both checked and recorded above.
+
+Asking them remains open and is the better answer than either parser: they
+publish an affiliate programme and a partners page, and a reply settles it.
+See [#121](https://github.com/PaludaNCode/Liveaboard/issues/121).
+
 ## Access
 
-Both source hosts are denied by this environment's egress policy:
+Both source hosts were denied by this environment's egress policy until
+2026-08-30, when the allowlist landed:
 
 ```
-connect_rejected — gateway answered 403 to CONNECT   www.liveaboard.com:443
+$ curl -o /dev/null -w "%{http_code}" https://www.liveaboard.com/robots.txt
+200
 ```
 
-GitHub Actions runners are not behind it, which is why every probe here runs on
-a runner. See [#1](https://github.com/PaludaNCode/Liveaboard/issues/1).
+Probes can now be run locally as well as on a runner. Everything scheduled
+still runs on GitHub Actions. See
+[#1](https://github.com/PaludaNCode/Liveaboard/issues/1), closed.
