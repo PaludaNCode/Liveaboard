@@ -50,7 +50,7 @@ prints any that disagree, rather than trusting three.
 | Cabin name | that button's `title` | Quoted only when it must be — `title=Suite` beside `title="Cabin 1 &amp; 2"`. |
 | Sleeps / beds / amenities | the `<ol>` under the name | Item 1 is occupancy, item 2 is the sleeping arrangement, the rest are amenities. The bed line is the one whose `<span>` carries a `title`, on 8 of 8 cabins — *not* a word match: Red Sea Aggressor II's "1 Double or Twin (convertible)" contains no "bed". |
 | Price now | `<em>$</em><span translate=no>619</span>` | `translate=no` is on the numbers and nothing else, which beats the Tailwind classes around them. |
-| List price | `<del translate=no>$ 688</del>` | Absent entirely when the cabin is not discounted — the absence is the answer, not a list price equal to the price. |
+| List price | `<del translate=no>$ 688</del>` | Absent entirely when the cabin is not discounted — the absence is the answer, not a list price equal to the price. **This is the sale**; see below. |
 | **Berths left** | `data-allocation` on `<select name=input-cabin-guests-{id}>` | See below. |
 | Sleeps, shareable, privacy | `data-cabin-occupancy`, `data-shareable`, `data-privacy-optional` on the same select | `data-privacy-optional=undefined` occurs (Iceberg's Suite) — a JavaScript value reaching the markup, and not an answer. |
 | Single-occupancy surcharge | `<div id=private-cabin-help-text-{id}>` or `<div id=privacy-optional-help-text-{id}>` | Two phrasings, one number, **keyed by cabin id** — the div sits *after* that cabin's select and before the next cabin, so anything positional gives each cabin the number belonging to the one above it. 60% on Iceberg, 50% on Alia Soul, 65% on Red Sea Aggressor II. |
@@ -81,6 +81,59 @@ polite fetcher asks it first.
 **The cost is one request per departure**, ~890 a night, because a berth count
 changes the moment somebody books. That is why `cabins.yml` is manual and
 capped by default rather than folded into the daily refresh.
+
+### What is on sale, and where it is not
+
+**There is no deals listing on this site.** `/liveaboard-deals` exists — the
+same path PADI uses — and is SEO prose: shoulder-season advice and a newsletter
+signup, zero offers, zero prices, one JSON-LD block carrying none. Beside it in
+the sitemap sit `spring-sale`, `spring-sale-cruises`, `deep-blue-friday`,
+`singles-day`, `summer-of-scuba`, `wave-season` and `mediterranean-cruise-deals`;
+all are campaign landing pages whose only discount text is a destination badge —
+*"Up to 30% OFF"* over a region card, with no vessel, date or price behind it.
+`/spring-sale` still said **"Spring Sale 2026"** when read on 2026-08-30, so a
+campaign URL is a stale input as well as an empty one. Checked 2026-08-30; do
+not go looking again.
+
+**The sale is on the booking page instead, and it is better than a listing.**
+The `<del>` list price beside each cabin is the whole answer, and
+`tools/fetch_cabins.py` has been reading it nightly since #79 without anything
+downstream using it. Measured on `data/cabins.json` of 2026-08-28:
+
+| | |
+|---|---|
+| departures with a discounted cabin | **263 of 864**, on 22 boats |
+| discounted cabins | 901 of 2,982 |
+| ladders discounted in part | **0** — a sale marks down every cabin, or none |
+| cheapest cabin left at list while a dearer one is cut | **0** |
+
+Those last two rows are what make a per-sailing answer possible at all: the
+advertised price is the cheapest rung, so that rung against its own `<del>` is
+the sailing's discount. Setting the cheapest *price* against the dearest room's
+*list price* is the mistake this invites, and it reports Red Sea Aggressor II's
+33% sale as 40%.
+
+**The trip name carries the same claim, and is not used.** `Event.name` begins
+`33% Off: ` on 241 of 864 departures, which `promote.PROMOTION` has always
+stripped before grouping. It is exactly right — the banner's percentage equals
+the ladder's on **241 of 241** — and it is still the weaker source: the ladder
+carries the money as well as the rate, and finds **22 discounted sailings that
+carry no banner at all**. Corroboration, not input.
+
+**Both sellers agree about the discount, and disagree about its extent.**
+Against PADI's `compareAtPrice` over the published season:
+
+| | |
+|---|---|
+| both sellers say on sale | 158 — and they agree on the percentage on **158 of 158** |
+| liveaboard.com only | 105 |
+| PADI only | 5 — of which 3 have no ladder read at all, so this site said nothing rather than "no" |
+
+The three Red Sea Aggressors settle it: on the sailing PADI advertises for each
+hull, every cabin is 33.0% off on both sites, at the same dollar figures. What
+differs is coverage. PADI publishes one exemplar sailing per vessel; this
+publishes the whole window, and the window has a cliff — Red Sea Aggressor II is
+33% off every week from 1 May to 24 July and full price from 31 July.
 
 ### The per-trip itinerary fragment
 

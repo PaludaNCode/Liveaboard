@@ -214,6 +214,24 @@ Break these and the site starts lying quietly rather than failing loudly.
   where ours exists it wins outright. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
   line from each is a bill neither seller quotes.
+- **A sale is the list price a seller prints beside its own, never a banner.**
+  liveaboard.com publishes no deals listing at all — `/liveaboard-deals` is SEO
+  prose and the seasonal campaign pages carry only *"Up to 30% OFF"* over a
+  region — but strikes the list price through beside every discounted cabin, and
+  `fetch_cabins.py` has read that nightly since #79. It is a **whole-ladder**
+  fact: of 263 discounted sailings, none is discounted in part and none leaves
+  its cheapest cabin at list, so the advertised price against its own `<del>` is
+  the sailing's discount. Setting the cheapest price against the *dearest*
+  room's list price is the mistake here and reports a 33% sale as 40%.
+  `Event.name`'s `33% Off:` prefix agrees on 241 of 241 and is still not the
+  input: the ladder carries the money as well as the rate and finds 22 sales
+  that carry no banner. **Neither seller marks down the other's price.** They
+  agree on the percentage on 158 of 158 sailings where both speak, but a row
+  states `pct` only from the seller whose fare it prints — two Red Sea Aggressor
+  IV sailings are cut on PADI and at list here, and are *on sale* with no
+  percentage rather than showing PADI's 33% off a fare nobody cut. An unread
+  booking page states nothing, which is not "no": 3 of the 5 PADI-only
+  discounts are exactly that.
 - **A deal is placed by its vessel, never by the country beside it.** PADI's
   deals listing has to be asked for the USA as well as Egypt, because all three
   Red Sea Aggressors are filed under the USA and asking Egypt alone drops them.

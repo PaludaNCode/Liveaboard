@@ -194,6 +194,13 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if departure.berths:
             entry["berths"] = departure.berths
 
+        # Whether this berth is marked down, as promote read it off the two
+        # sellers' own list prices. Written only where one of them says so --
+        # 268 of 1,122 rows — because a key written per departure is a key
+        # written 1,122 times, and "not on sale" is the absence.
+        if departure.sale:
+            entry["sale"] = departure.sale
+
         # A departure-level fee replaces the route's for its code, so a sailing
         # can genuinely price a fee differently. No departure in the dataset
         # does today, but the possibility is in the model, and silently reusing
@@ -289,7 +296,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # same reason the cabin ladder is: it is already joined, converted and
         # diffed, and a second shaping here would be a second place for the page
         # and the dataset to disagree. Absent until the daily read has run.
-        **({"deals": dataset.deals} if dataset.deals.get("offers") else {}),
+        **({"deals": dataset.deals} if dataset.deals else {}),
         "itineraries": itineraries,
         "departures": departures,
     }
@@ -301,7 +308,8 @@ def _escape(text: str) -> str:
 
 DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
     "egypt-2027.csv": ("Every trip as a spreadsheet",
-                       "one row per departure, with the advertised price, the "
+                       "one row per departure, with the advertised price, what "
+                       "it is down from where a seller has marked it down, the "
                        "fees and the total"),
     "egypt-2027.json": ("The dataset", "exactly what the page is built from"),
     "CHANGES.md": ("What changed, refresh by refresh",

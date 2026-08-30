@@ -406,6 +406,22 @@ class Departure:
                 return int(block["spots"])
         return None
 
+    sale: dict[str, Any] = field(default_factory=dict)
+    """Whether this berth is marked down, and which sellers say so.
+
+    ``{"sellers": [0, 1], "pct": 33, "was": 2565}`` — the seller indices point
+    into the dataset's own pool, and ``pct``/``was`` describe *this row's*
+    advertised price, so they are present only where the seller who set that
+    price is the one discounting it. A row can therefore be on sale with no
+    percentage beside it: two Red Sea Aggressor IV sailings are discounted on
+    PADI and at list price on the site this row's figure comes from, and
+    printing PADI's 33% against our undiscounted fare would invent a saving.
+
+    Empty is "no seller published a list price above what they charge", which
+    is not quite "not on sale": a booking page nobody could read states
+    nothing, and three of the five PADI-only discounts are exactly that.
+    """
+
     padi_only: bool = False
     """True where PADI Travel is the only seller listing this sailing.
 
@@ -461,4 +477,5 @@ class Departure:
                              if payload.get("padi_provenance") else None),
             padi_only=bool(payload.get("padi_only")),
             berths=list(payload.get("berths") or []),
+            sale=dict(payload.get("sale") or {}),
         )

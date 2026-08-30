@@ -74,6 +74,14 @@
   </div>
   <div class="tgroup">
     <button type="button" class="chip" id="hideSold" aria-pressed="false">Hide sold out</button>
+    <!-- Sailings a seller has marked down, read from the list price it prints
+         beside its own — the struck-through figure on each cabin of the
+         booking page, and PADI's compareAtPrice. Its label carries the count
+         for the same reason the Sold by chips do: a filter whose result you
+         cannot size before pressing it is a filter you press twice. Hidden
+         until app.js finds at least one, because a chip reading "On sale 0" is
+         a control that does nothing dressed as one that does. -->
+    <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
   <!-- Who sells the sailing. Chips rather than a select, like every other
        filter here, and three states because there are three: both sites list
@@ -175,6 +183,17 @@
         operator leads with. <b>Nitrox</b> is what breathing gas costs on that
         boat, or that it is bundled. <b>Mandatory fees</b> is everything on top
         of the advertised price. <b>Total</b> is what you will actually pay.
+      </p>
+      <p>
+        A <b>&minus;15%</b> beside the Advertised price means a seller is
+        printing a higher list price next to the one it charges &mdash; struck
+        through against every cabin on the booking page, or stated outright by
+        PADI Travel. It is not read from the &ldquo;20% Off&rdquo; some
+        operators write into a trip name; that agrees with it everywhere it
+        appears, and misses the sailings discounted without one. Hover it for
+        what the fare is down from and who says so. The <b>On sale</b> filter
+        shows only these. A markdown is what a seller claimed on the day the
+        booking pages were read, and can end overnight.
       </p>
       <p>
         The Total is the cheapest bill anyone quotes for that sailing, which is

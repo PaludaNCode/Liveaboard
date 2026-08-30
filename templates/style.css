@@ -515,10 +515,21 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 .deals-table .d-off { color:var(--ok); white-space:nowrap; }
 .deals-table .d-native { font-family:var(--font-mono); color:var(--ink-faint); white-space:nowrap; }
 
-.deals-moved h4 {
+/* The markdown, beside the price it comes off. Deliberately quiet: it is a
+   fact about the fare, not a badge competing with it, and 268 of 1,122 rows
+   carry one — a loud treatment at that density is a page of shouting. */
+.sale-mark {
+  margin-left:6px; font-size:10px; font-weight:600; color:var(--ok);
+  font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
+}
+
+.deals-body h4 {
   margin:0 0 6px; font-family:var(--font-narrow); font-size:10px;
   text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
 }
+/* The second and third headings inside the panel need air above them; the
+   first sits under the summary's own rule and would be pushed off it. */
+.deals-body h4 ~ h4, .deals-moved h4 { margin-top:16px; }
 .deals-changes { margin:0 0 10px; padding-left:18px; font-size:12px; line-height:1.6; }
 .deals-changes .d-new { color:var(--ok); }
 .deals-changes .d-gone { color:var(--sold); }
