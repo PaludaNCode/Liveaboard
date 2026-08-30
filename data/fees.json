@@ -160,7 +160,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Orca Dive Clubs"
     },
     "all-star-ghani": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027",
@@ -327,7 +328,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "All Star Liveaboards"
     },
     "all-star-red-sea": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027",
@@ -477,7 +479,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "All Star Liveaboards"
     },
     "alsuraya": {
       "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027",
@@ -647,7 +650,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Alsuraya"
     },
     "amelie": {
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027",
@@ -894,7 +898,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Amelie Safari"
     },
     "amelie-adventures": {
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027",
@@ -1101,7 +1106,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Amelie Safari"
     },
     "aphrodite": {
       "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027",
@@ -1290,7 +1296,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40/week; BCD €40/week; Dive Computer €40/week; Dive Light €36/week; Fins €12/week; Mask €12/week; Regulator €40/week; SMB €10/week; Snorkel Gear €6/week; Wetsuit €40/week"
         }
-      ]
+      ],
+      "operator": "Aphrodite Liveaboard Safaris"
     },
     "ashrafi": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027",
@@ -1432,7 +1439,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Crystal Reef Adventures"
     },
     "avo": {
       "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027",
@@ -1604,7 +1612,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Seamad Cruises"
     },
     "bella-2": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027",
@@ -1765,7 +1774,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Bella Liveaboard"
     },
     "bella-3": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027",
@@ -1981,7 +1991,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Bella Liveaboard"
     },
     "bismarck": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027",
@@ -2154,7 +2165,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Shades Diving"
     },
     "blue": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027",
@@ -2313,7 +2325,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Planet Liveaboards"
     },
     "blue-diamond": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=5/2027",
@@ -2504,7 +2517,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Horus Liveaboard"
     },
     "blue-horizon": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027",
@@ -2714,7 +2728,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Scuba Tours Worldwide"
     },
     "blue-melody": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027",
@@ -2924,7 +2939,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Scuba Tours Worldwide"
     },
     "blue-pearl": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027",
@@ -3084,7 +3100,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Planet Liveaboards"
     },
     "blue-seas": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=5/2027",
@@ -3244,7 +3261,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: Request upon booking"
         }
-      ]
+      ],
+      "operator": "Blue Planet Liveaboards"
     },
     "blue-storm": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027",
@@ -3401,7 +3419,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Planet Liveaboards"
     },
     "carlton": {
       "source_url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027",
@@ -3603,7 +3622,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Carlton Fleet"
     },
     "cu": {
       "source_url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027",
@@ -3779,7 +3799,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Light, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Horus Star Fleet"
     },
     "destiny": {
       "source_url": "https://www.liveaboard.com/diving/egypt/destiny?m=5/2027",
@@ -3970,7 +3991,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Nitrox Refills, Regulator"
         }
-      ]
+      ],
+      "operator": "Scarabaeus Safari"
     },
     "discovery-i": {
       "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027",
@@ -4192,7 +4214,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Discovery Divers"
     },
     "discovery-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=5/2027",
@@ -4410,7 +4433,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Discovery Divers"
     },
     "dune-longara": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027",
@@ -4596,7 +4620,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Dune-World"
     },
     "dune-silky": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=5/2027",
@@ -4791,7 +4816,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Dune-World"
     },
     "dune-titan": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=5/2027",
@@ -4986,7 +5012,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Dune-World"
     },
     "emperor-asmaa": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027",
@@ -5123,7 +5150,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Emperor Divers"
     },
     "emperor-elite": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=5/2027",
@@ -5260,7 +5288,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Emperor Divers"
     },
     "emperor-superior": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027",
@@ -5397,7 +5426,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Emperor Divers"
     },
     "eriny": {
       "source_url": "https://www.liveaboard.com/diving/egypt/eriny?m=5/2027",
@@ -5632,7 +5662,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Bella Liveaboard"
     },
     "freedom-iii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=5/2027",
@@ -5827,7 +5858,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sharks Bay Umbi"
     },
     "freedom-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=5/2027",
@@ -6021,7 +6053,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sharks Bay Umbi"
     },
     "ghazala-adventure": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027",
@@ -6136,7 +6169,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Ocean Tribe Fleet"
     },
     "ghazala-explorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=5/2027",
@@ -6280,7 +6314,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Ocean Tribe Fleet"
     },
     "golden-dolphin": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=5/2027",
@@ -6442,7 +6477,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Golden Dolphin"
     },
     "golden-dolphin-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=5/2027",
@@ -6603,7 +6639,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Golden Dolphin"
     },
     "golden-imperial": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=5/2027",
@@ -6765,7 +6802,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Golden Dolphin"
     },
     "grand-discovery": {
       "source_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=5/2027",
@@ -6991,7 +7029,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Discovery Divers"
     },
     "hammerhead-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=5/2027",
@@ -7209,7 +7248,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Hammerhead Fleet"
     },
     "iceberg": {
       "source_url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027",
@@ -7390,7 +7430,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Deep Breath Diving Safari"
     },
     "jp-marine": {
       "source_url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=5/2027",
@@ -7563,7 +7604,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Dive Safari Master"
     },
     "lady-m": {
       "source_url": "https://www.liveaboard.com/diving/egypt/lady-m?m=5/2027",
@@ -7762,7 +7804,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Ocean Diving Centers & Resorts"
     },
     "marselia-star": {
       "source_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=5/2027",
@@ -7900,7 +7943,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "MV Legends II"
     },
     "new-sambo": {
       "source_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027",
@@ -8056,7 +8100,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sambo Divers"
     },
     "ocean-lovers": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=5/2027",
@@ -8215,7 +8260,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Breeze Liveaboard"
     },
     "oceanix": {
       "source_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=5/2027",
@@ -8426,7 +8472,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40/trip; BCD €35/trip; Dive Computer €35/trip; Dive Light €35/trip; Fins €15/trip; Mask €15/trip; Nitrox Refills included; Regulator €35/trip; SMB €15/trip; Snorkel Gear €25/trip; Wetsuit €35/trip"
         }
-      ]
+      ],
+      "operator": "Tauch Safari Aegypten"
     },
     "odyssey": {
       "source_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=5/2027",
@@ -8580,7 +8627,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Seafari International"
     },
     "queen-sherry": {
       "source_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=5/2027",
@@ -8755,7 +8803,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Cruise Company Yachts"
     },
     "red-sea-aggressor-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=5/2027",
@@ -8948,7 +8997,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator"
         }
-      ]
+      ],
+      "operator": "Aggressor Fleet& Dancer Fleet"
     },
     "red-sea-aggressor-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=5/2027",
@@ -9113,7 +9163,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Snorkel Gear"
         }
-      ]
+      ],
+      "operator": "Aggressor Fleet& Dancer Fleet"
     },
     "red-sea-aggressor-v": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=5/2027",
@@ -9305,7 +9356,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Snorkel Gear"
         }
-      ]
+      ],
+      "operator": "Aggressor Fleet& Dancer Fleet"
     },
     "red-sea-blue-force-2": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=5/2027",
@@ -9479,7 +9531,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "BlueForce"
     },
     "red-sea-explorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027",
@@ -9659,7 +9712,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Extra Divers Worldwide"
     },
     "reef-voyager": {
       "source_url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=5/2027",
@@ -9853,7 +9907,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, U/W video camera rental, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Reef Oasis Fleet"
     },
     "royal-evolution": {
       "source_url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=5/2027",
@@ -10056,7 +10111,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Royal Evolution"
     },
     "safy-mar": {
       "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=5/2027",
@@ -10266,7 +10322,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €35/trip; BCD €40/trip; Dive Computer €25/trip; Dive Light €25/trip; Nitrox Refills €80/trip; Regulator €40/trip"
         }
-      ]
+      ],
+      "operator": "Humpback Safari Yacht"
     },
     "sea-friend": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=5/2027",
@@ -10424,7 +10481,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: Request upon booking"
         }
-      ]
+      ],
+      "operator": "Hamata Mangroves"
     },
     "sea-serpent": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027",
@@ -10619,7 +10677,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "sea-serpent-contessa": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=5/2027",
@@ -10814,7 +10873,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "sea-serpent-excellence": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=5/2027",
@@ -11009,7 +11069,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "sea-serpent-grand": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027",
@@ -11204,7 +11265,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "serenity": {
       "source_url": "https://www.liveaboard.com/diving/egypt/serenity?m=5/2027",
@@ -11372,7 +11434,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Divers & Co"
     },
     "sinaistar": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=5/2027",
@@ -11537,7 +11600,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Ambassador Liveaboards Company"
     },
     "sindalahs": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=5/2027",
@@ -11775,7 +11839,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sindalahs Yacht"
     },
     "snefro-love": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=5/2027",
@@ -11913,7 +11978,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €20-40/trip; BCD €25-60/trip; Dive Computer €25-60/trip; Dive Light €25-60/trip; Fins €9-35/trip; Mask €5-25/trip; Nitrox tank included; Regulator €25-60/trip; SMB €5-25/trip; Snorkel Gear €20-40/trip; Wetsuit €25-60/trip"
         }
-      ]
+      ],
+      "operator": "King Snefro Group"
     },
     "snefro-pearl": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=5/2027",
@@ -12051,7 +12117,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €20-40/trip; BCD €25-60/trip; Dive Computer €25-60/trip; Dive Light €25-60/trip; Fins €9-35/trip; Mask €5-25/trip; Nitrox tank included; Regulator €25-60/trip; SMB €5-25/trip; Snorkel Gear €20-40/trip; Wetsuit €25-60/trip"
         }
-      ]
+      ],
+      "operator": "King Snefro Group"
     },
     "snefro-target": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=5/2027",
@@ -12189,7 +12256,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €20-40/trip; BCD €25-60/trip; Dive Computer €25-60/trip; Dive Light €25-60/trip; Fins €9-35/trip; Mask €5-25/trip; Nitrox tank included; Regulator €25-60/trip; SMB €5-25/trip; Snorkel Gear €20-40/trip; Wetsuit €25-60/trip"
         }
-      ]
+      ],
+      "operator": "King Snefro Group"
     },
     "south-moon-1": {
       "source_url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=5/2027",
@@ -12387,7 +12455,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Queen Fleet"
     },
     "ss-glorious-miss-nouran": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=5/2027",
@@ -12562,7 +12631,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "ss-serena-dreams": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=5/2027",
@@ -12757,7 +12827,8 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Sea Serpent Fleet"
     },
     "star-jet": {
       "source_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027",
@@ -12945,7 +13016,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Blue Shades Diving"
     },
     "sunlight": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sunlight?m=5/2027",
@@ -13057,7 +13129,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Regulator €5/day; SMB €10/week; Wetsuit €5/trip"
         }
-      ]
+      ],
+      "operator": "Sadko Travel"
     },
     "sunshine": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sunshine?m=5/2027",
@@ -13172,7 +13245,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Nitrox tank included; Regulator €5/day; SMB €10/week; Wetsuit €5/day"
         }
-      ]
+      ],
+      "operator": "Sadko Travel"
     },
     "tala": {
       "source_url": "https://www.liveaboard.com/diving/egypt/tala?m=5/2027",
@@ -13381,7 +13455,8 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Red Sea Explorers"
     },
     "topaz": {
       "source_url": "https://www.liveaboard.com/diving/egypt/topaz?m=5/2027",
@@ -13627,7 +13702,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Regulator, Snorkel Gear"
         }
-      ]
+      ],
+      "operator": "Sea Pirates"
     },
     "unity": {
       "source_url": "https://www.liveaboard.com/diving/egypt/unity?m=5/2027",
@@ -13755,7 +13831,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Red Sea Relax"
     },
     "vita-xplorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=5/2027",
@@ -13902,7 +13979,8 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40-50/week; BCD €35/week; Dive Computer €35/week; Dive Light €6/trip; Fins €25/week; Mask €25/week; Nitrox tank included; Regulator €35/week; SMB €3/day; Snorkel Gear €25/week; Wetsuit €35/week"
         }
-      ]
+      ],
+      "operator": "XPLORER AQUARIUS Safari"
     },
     "yachtiano": {
       "source_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027",
@@ -14041,7 +14119,8 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Dive Light, Mask, Nitrox tank, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "operator": "Yachtiano"
     }
   },
   "missing": [

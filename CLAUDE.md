@@ -276,12 +276,23 @@ Break these and the site starts lying quietly rather than failing loudly.
   source, so both come from `window.shop` — `title`, and `fleetTitle` minus
   PADI's trailing "Fleet" — kept **verbatim**, shouting included, because
   `OPERATOR_ALIASES` already rules that tidying a company's capitalisation is a
-  short step from deciding what it is called. **A fleet is not an operator**:
+  short step from deciding what it is called. **But the vessel page states the
+  company, and it beats the fleet label outright** — `Product.brand.name` in
+  the page's own JSON-LD, read by the fee run because that is the only pass
+  visiting a boat with no departures. It is the *same source* every other
+  operator here comes from, so preferring it is not a judgement call; 79 of 79
+  vessels state one. It ends the shouting without anybody deciding how a
+  company spells itself (`Bella Liveaboard` is that source's own words, not a
+  tidy-up of PADI's `BELLA LIVEABOARDS`), and it settles Blue Pearl. **A fleet
+  is not an operator**:
   PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET Fleet", and
   folding that onto our Blue's stated "Blue Planet Liveaboards" removed a
   duplicate row by asserting a company for a hull our own source connects to
   nobody. Two operator rows that may be one company is cosmetic; the assertion
-  is not. Where our fee book is absent
+  is not. **The two are one row now, and the rule is why that is allowed** —
+  not folded on the fleet label, which still folds nothing, but on Blue Pearl's
+  own page saying `"brand": {"name": "Blue Planet Liveaboards"}`. The fold is a
+  fact rather than a tidy-up, which is the whole difference. Where our fee book is absent
   PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
   where ours exists it wins outright. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a

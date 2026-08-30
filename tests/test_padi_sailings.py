@@ -572,6 +572,16 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
     A fleet on a booking site is not established to be the operating company.
     Two operator rows that may be one company is a cosmetic cost; naming the
     wrong company is the claim this site exists to catch other people making.
+
+    **The two Blues are now one operator, and the rule above is why that is
+    allowed.** They were not folded on the fleet label; the fold was refused on
+    exactly this reasoning and stayed refused. What changed is the evidence:
+    Blue Pearl's own liveaboard.com page states
+    `"brand": {"name": "Blue Planet Liveaboards"}` -- the same source every
+    other operator here comes from, naming the company for that hull directly
+    (#115). So the assertions below pin the *rule* rather than the outcome it
+    happened to produce: the fleet label is still kept verbatim, still folds
+    nothing, and the merge rests on a statement instead.
     """
 
     def test_padi_s_fleet_is_kept_verbatim(self) -> None:
@@ -588,12 +598,40 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
         from liveaboard.promote import OPERATOR_ALIASES
         self.assertEqual(sorted(OPERATOR_ALIASES), ["aggressor fleet& dancer fleet"])
 
-    def test_the_two_blues_stay_apart_in_the_committed_dataset(self) -> None:
+    def test_a_fleet_label_alone_still_folds_nothing(self) -> None:
+        """The case that made the rule, with only the evidence it had.
+
+        PADI files both hulls under "BLUE PLANET Fleet" and our own source
+        connects Blue Pearl to nobody. That must stay two operators: the tidier
+        answer is an assertion the data does not support.
+        """
+        payload = promote(
+            candidate([departure(boat="blue", operator="Blue Planet Liveaboards"),
+                       # Blue Pearl sells too, and states no operator of its
+                       # own -- which is the whole reason PADI's label is
+                       # reached for at all.
+                       departure(boat="blue-pearl", name="Deep South")],
+                      itineraries=[{"id": "blue", "name": "Blue", "boat": "MY Blue"},
+                                   {"id": "blue-pearl", "name": "Blue Pearl",
+                                    "boat": "MY Blue Pearl"}]),
+            season=SEASON,
+            padi={"collected": "2026-08-29", "vessels": {
+                "blue-pearl": {"slug": "my-blue-pearl", "name": "MY Blue Pearl",
+                               "operator": "BLUE PLANET"}}},
+        )
+        names = {o["name"] for o in payload["operators"]}
+        self.assertIn("Blue Planet Liveaboards", names)
+        self.assertIn("BLUE PLANET", names)
+
+    def test_the_two_blues_are_one_company_on_a_stated_one(self) -> None:
+        """And the committed dataset shows the fold, because the statement
+        arrived. Still two hulls: the guest counts differ, and neither carries
+        the other's sailings."""
         data = published.raw()
         boats = {b["id"]: b for b in data["boats"]}
         if "blue" not in boats or "blue-pearl" not in boats:
             self.skipTest("neither Blue is in this checkout's dataset")
-        self.assertNotEqual(boats["blue"]["operator_id"], boats["blue-pearl"]["operator_id"])
+        self.assertEqual(boats["blue"]["operator_id"], boats["blue-pearl"]["operator_id"])
         self.assertNotEqual(boats["blue"]["guests"], boats["blue-pearl"]["guests"])
 
         # And no sailing of one is filed under the other.

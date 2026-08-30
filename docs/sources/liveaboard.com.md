@@ -82,6 +82,43 @@ polite fetcher asks it first.
 changes the moment somebody books. That is why `cabins.yml` is manual and
 capped by default rather than folded into the daily refresh.
 
+### The operator, on a vessel page with no departures
+
+`Product.brand.name`, in the page's own JSON-LD:
+
+```json
+"brand": {"@type": "Brand", "name": "Blue Planet Liveaboards"}
+```
+
+Every operator this site publishes otherwise comes from an `Event.organizer`.
+A vessel liveaboard.com sells **no berths** on has no `Event`, so 22 hulls fell
+back to PADI's `fleetTitle` — a shelf on a booking site rather than a company,
+and shouted. The brand is on the page either way, which is the point.
+
+Read 2026-08-30 over all 79 vessels in the fee book: **79 of 79 state one**,
+50 distinct companies, no nulls. On the 10 PADI-only vessels that have a page
+here at all, every one is the operating company rather than a fleet label:
+
+| vessel | `brand.name` | PADI's `fleetTitle` |
+|---|---|---|
+| blue-pearl | Blue Planet Liveaboards | `BLUE PLANET` |
+| bella-2, bella-3, eriny | Bella Liveaboard | `BELLA LIVEABOARDS` |
+| ashrafi | Crystal Reef Adventures | — |
+| freedom-iii, freedom-iv | Sharks Bay Umbi | — |
+| lady-m | Blue Ocean Diving Centers & Resorts | — |
+| reef-voyager | Reef Oasis Fleet | — |
+| south-moon-1 | Sea Queen Fleet | — |
+
+Read by `scrape_fees.py`, because the weekly fee run is the only pass that
+visits a vessel with no departures. Plain JSON-LD, so no browser is needed for
+the field itself — it is read there only because that pass is already open on
+the page.
+
+**It is what settled MY Blue Pearl** ([#115](https://github.com/PaludaNCode/Liveaboard/issues/115)).
+PADI shelves it and MY Blue under one "BLUE PLANET Fleet", and folding the two
+on that alone asserts a company for a hull our own source connects to nobody.
+This is that source connecting it.
+
 ### What is on sale, and where it is not
 
 **There is no deals listing on this site.** `/liveaboard-deals` exists — the
