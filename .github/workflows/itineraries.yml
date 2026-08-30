@@ -15,6 +15,13 @@ name: Read trip itineraries
 # did not visit — exactly as `scrape_fees.py --limit` does.
 
 on:
+  # Daily, inherited from the refresh that used to carry it (#123). It stays
+  # cheap: the book is incremental, so a trip already in it is never re-read
+  # and an ordinary run is a handful of requests. It ran as a step gated on the
+  # crawl succeeding, which was the wrong coupling — a trip's own description
+  # does not depend on whether the vessel-page crawl finished.
+  schedule:
+    - cron: "0 5 * * *"
   workflow_dispatch:
     inputs:
       limit:

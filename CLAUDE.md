@@ -57,6 +57,29 @@ itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` �
 are outside it: no crawl touches them, so nothing asserted about them can ever
 be cleared by fetching.
 
+**One source per workflow, and two shared actions.** `refresh.yml` bundled the
+ECB rates, the liveaboard.com crawl, the itinerary fragments and PADI's deals,
+so proving a two-request change to `fetch_deals.py` meant a run that first
+fetched 320 vessel pages from a site with nothing to do with it. Each source is
+its own dispatchable job now — `fx.yml`, `refresh.yml` (the crawl alone),
+`deals.yml`, `itineraries.yml`, `padi.yml`, `cabins.yml`, `fees.yml` — and each
+ends the same way, because the shape is identical and six copies of it drifted:
+
+- `.github/actions/checks` — everything CI asserts. `ci.yml` uses it too, which
+  is what makes "the same bar" true rather than intended.
+- `.github/actions/publish` — stage, commit, push with rebase-and-retry. Its
+  `subject` takes `{today}` and `{sha}`; a `headline` carrying scraped text is
+  its own input and never reaches a shell as code.
+
+Every one of those files is a **promote input**, so a job commits its data
+*and* the dataset built from it. Committing an input alone leaves
+`promote --check` red until something unrelated heals it.
+
+Three guards police this and two of them have already been blinded once, by the
+refactor that moved `git add` and `git push` into the action: they now assert
+they can still see what they are checking, because a check that stops checking
+is green for the wrong reason.
+
 **Read the published page without checking anything out.** After a merge, to
 see what actually shipped:
 

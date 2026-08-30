@@ -1,0 +1,92 @@
+name: Read PADI deals
+
+# What PADI Travel is discounting, for the season this site publishes.
+#
+# **One or two requests, and that is the whole argument for #123.** Proving a
+# change to `tools/fetch_deals.py` used to mean running the daily refresh,
+# which fetches **320 vessel pages from liveaboard.com** first — a site with
+# nothing to do with the change, fifteen minutes before the step under test
+# even starts. The alternative was merging it on fixtures alone.
+#
+# `/liveaboard-deals/` is an AngularJS shell whose bundle is CDN-hosted, but
+# the XHR behind it takes that page's own `country` and `date` parameters over
+# plain HTTP and pages properly — so this needs no browser and no runner-only
+# step.
+#
+# **A committed file rather than an artifact, and that is the design.** A
+# change log is a diff between two committed days; re-reading recovers today's
+# deals and never yesterday's, so a log computed from something that ages out
+# becomes "no changes" a fortnight later without saying so.
+#
+# A same-day re-run fetches nothing at all — not one request whose answer would
+# be discarded — so a dispatch to check the parser is free after the first.
+
+on:
+  # After the crawl and before the PADI sailings read, which is arbitrary: this
+  # shares no input with either. Staggered only so the pushes do not collide.
+  schedule:
+    - cron: "35 4 * * *"
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Re-read a day already in the book"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deals-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      REFRESH: ${{ github.event_name != 'schedule' && inputs.refresh && '--refresh' || '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Only the tests that answer to `src/`. An assertion about committed data
+      # gates the commit below and must never stop the fetch that would correct
+      # it. See tests/published.py.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+
+      # The run summary is where a dispatched run is read: it prints every
+      # offer, its price against its undiscounted one, and warns on a vessel
+      # this site does not carry — which is how an Egyptian boat filed under
+      # the USA gets noticed rather than dropped.
+      - name: Read what PADI is discounting
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/fetch_deals.py --out data/deals.json $REFRESH \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # `data/deals.json` is a promote input, so one commit carries the new
+      # reading *and* the dataset built from it. Committing the book alone
+      # would leave `promote --check` red until something unrelated healed it.
+      - name: Rebuild the dataset and the page
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli promote
+          PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
+
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          subject: "data: read {today} PADI deals"
+          nothing: "today's deals were already in the book"

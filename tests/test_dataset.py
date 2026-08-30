@@ -1221,14 +1221,41 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
 
     WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
     PUBLISHED = ("data", "site")
+    PUBLISH = "uses: ./.github/actions/publish"
 
     def commits_published_files(self, text: str) -> bool:
-        """Whether the workflow git-adds anything the page is built from."""
+        """Whether the workflow commits anything the page is built from.
+
+        Two spellings, and the second is why this reads the action rather than
+        the shell. It used to scan for `git add`, and #123 moved every one of
+        those into `.github/actions/publish` — after which no workflow matched,
+        every workflow was skipped, and this test passed by having nothing left
+        to look at. Same failure as the push guard above, from the same commit.
+        """
+        if self.PUBLISH in text:
+            staged = re.search(r"^\s*paths:\s*[\"']?(.*?)[\"']?\s*$", text, re.M)
+            # No `paths` means the action's default, which is `data site`.
+            names = re.findall(r"[\w./-]+", staged.group(1)) if staged else ["data"]
+            if any(n.split("/")[0] in self.PUBLISHED for n in names):
+                return True
         for line in re.findall(r"^\s*git add\s+(.*)$", text, re.M):
             for path in re.findall(r"[\w./-]+", line):
                 if path.split("/")[0] in self.PUBLISHED:
                     return True
         return False
+
+    def test_the_guard_can_still_see_a_data_commit(self):
+        """Asserted, because this test has already been silently blinded once.
+
+        A check that stops checking is worse than no check: it is green for the
+        wrong reason, and green is what everybody reads.
+        """
+        seen = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                if p.name != "pages.yml"
+                and self.commits_published_files(p.read_text(encoding="utf-8"))]
+        self.assertGreaterEqual(
+            len(seen), 5,
+            f"only {seen} appear to commit data; has the mechanism moved again?")
 
     def test_the_deploy_watches_every_workflow_that_writes_the_site(self):
         pages = (self.WORKFLOWS / "pages.yml").read_text(encoding="utf-8")

@@ -1,16 +1,24 @@
 name: Daily refresh
 
-# Re-scrape the source sites, rebuild the site, and commit the result.
+# The liveaboard.com crawl, and nothing else.
 #
-# This runs on GitHub's runners, which have ordinary internet access — so the
-# scrape works here even when a development sandbox is behind a restrictive
-# egress allowlist and cannot reach the sources at all.
+# It used to be four sources in one job — the ECB rates, this crawl, the
+# per-trip itinerary fragments and PADI's deals listing — so proving a change
+# to any of them meant running all of them. `tools/fetch_deals.py` makes **two
+# requests**, and the only way to exercise it on a runner was a job that
+# fetched 320 vessel pages from a site with nothing to do with the change
+# (#123). Those three now have their own workflows: `fx.yml`, `deals.yml` and
+# `itineraries.yml`, each dispatchable, each capped where a cap makes sense.
 #
-# The scrape writes a *candidate* file. Promoting a candidate into the live
-# dataset is a separate, reviewable step, so a source site changing its markup
-# degrades into "yesterday's prices plus a warning" rather than a site full of
-# blanks.
-
+# What is left is the expensive one. Four month listings plus one page per
+# vessel per season month, at the polite delay — roughly 320 requests and a
+# quarter of an hour — which is why it keeps the schedule and why it is worth
+# not running to test something else.
+#
+# Each of the four commits its own data *and* the dataset built from it,
+# because every one of those files is a promote input: committing an input
+# without re-promoting leaves `promote --check` red until something unrelated
+# heals it.
 on:
   schedule:
     # 04:15 UTC daily — outside European browsing hours, and after operators
@@ -20,10 +28,6 @@ on:
     inputs:
       max_pages:
         description: "Cap vessels crawled (0 = the adapter default)"
-        type: string
-        default: "0"
-      itinerary_limit:
-        description: "Cap trip fragments fetched (0 = every trip not yet read)"
         type: string
         default: "0"
       force_promote:
@@ -62,17 +66,6 @@ jobs:
       - name: Run the code's own tests
         run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
-      # Every advertised price is quoted in dollars and the site shows euro,
-      # so this one number sits under every figure on the page. Runs before the
-      # scrape so a slow crawl cannot push it past the ECB's publication.
-      #
-      # continue-on-error because a missed rate is not worth losing a whole
-      # refresh over: the tool keeps the previous file, which still records the
-      # day it was quoted, and the page says when a rate has stopped moving.
-      - name: Refresh exchange rates
-        continue-on-error: true
-        run: python3 tools/fetch_fx.py --out data/fx.json
-
       # One source here, and not because the other is parked — that comment
       # stood until 2026-08-30 and both halves of it had stopped being true:
       # padi.com's entry paths answer 200, and it contributes a berth price on
@@ -109,41 +102,6 @@ jobs:
       # not visit — which is what makes it safe to prove a new parser against
       # three real trips before pointing it at three hundred of somebody
       # else's pages. The same rule as `scrape_fees.py --limit`.
-      - name: Read what each trip says about itself
-        if: steps.scrape.outcome == 'success'
-        continue-on-error: true
-        run: |
-          python3 tools/fetch_itineraries.py \
-            --archive data/archive.json \
-            --out data/itineraries.json \
-            --snapshots data/snapshots \
-            --limit "${{ inputs.itinerary_limit || 0 }}"
-
-      # What the other seller is discounting, for the season this site
-      # publishes.
-      #
-      # One or two requests. `/liveaboard-deals/` is an AngularJS shell whose
-      # bundle is CDN-hosted, but the XHR behind it takes that page's own
-      # `country` and `date` parameters over plain HTTP and pages properly, so
-      # this needs no browser and no runner-only step.
-      #
-      # Unconditional, because it is a different source from the scrape above
-      # and a failed crawl says nothing about it. Immediately before the
-      # promote, because `data/deals.json` is a promote input: one commit
-      # should carry the new reading *and* the dataset built from it, or
-      # `promote --check` goes red until promote.yml heals it on the next push.
-      #
-      # A committed file rather than an artifact, and that is the whole design:
-      # a change log is a diff between two committed days. Re-reading recovers
-      # today's deals and never yesterday's, so a log computed from something
-      # that ages out becomes "no changes" a fortnight later without saying so.
-      #
-      # A same-day re-run fetches nothing at all -- not one request whose answer
-      # would be discarded.
-      - name: Read what PADI is discounting
-        continue-on-error: true
-        run: python3 tools/fetch_deals.py --out data/deals.json
-
       - name: Promote the candidate
         id: promote
         if: steps.scrape.outcome == 'success'

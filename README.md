@@ -77,7 +77,8 @@ only job able to refresh that book — and a run that fetches and then refuses t
 publish is recoverable where one that refuses to fetch is not.
 
 CI's list lives in `.github/actions/checks` rather than in `ci.yml`, because
-every job that commits data runs it too. They push with the default
+every job that commits data runs it too, and the commit-and-push tail lives in
+`.github/actions/publish` for the same reason. They push with the default
 `GITHUB_TOKEN`, and GitHub does not trigger workflows on those pushes, so that
 step is the only CI a scheduled commit will ever get.
 

@@ -38,6 +38,8 @@ on:
     # nightly run whose result never reaches the page is the worst case of it.
     workflows:
       - "Daily refresh"
+      - "Refresh exchange rates"
+      - "Read PADI deals"
       - "Weekly fee refresh"
       - "Read cabin prices and berths left"
       - "Read trip itineraries"
