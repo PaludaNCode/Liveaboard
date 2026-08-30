@@ -34,7 +34,8 @@ from .pricing import compute, mandatory_known
 COLUMNS = [
     "departure_id", "boat", "operator", "trip", "start", "end", "nights",
     "dives", "guests", "port_from", "port_to", "dive_sites",
-    "advertised", "mandatory_fees_min", "mandatory_fees_max",
+    "advertised", "list_price", "discount_pct",
+    "mandatory_fees_min", "mandatory_fees_max",
     "total_min", "total_max", "currency",
     "disclosure", "availability", "spaces_left", "booking_url",
 ]
@@ -90,6 +91,16 @@ def to_csv(dataset: Dataset) -> str:
             itinerary.port_to,
             "; ".join(itinerary.dive_sites),
             f"{breakdown.base.rounded:.2f}",
+            # What the advertised price is down from, and by how much, where a
+            # seller publishes a list price above what it charges. Empty on the
+            # 854 rows nobody has marked down -- and empty, too, where the
+            # discount belongs to the *other* seller, since `advertised` beside
+            # it is this one's. The page can filter on a sale, so the file a
+            # reader takes away has to be able to as well; a spreadsheet that
+            # cannot answer a question the table can is evidence with a hole in
+            # it.
+            departure.sale.get("was", ""),
+            departure.sale.get("pct", ""),
             money(breakdown.surcharge),
             money(surcharge_max),
             money(breakdown.total),

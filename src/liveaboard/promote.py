@@ -1021,21 +1021,28 @@ def _sale_for(
     that could not be read contributes no opinion rather than a "no"; three of
     the five sailings where only PADI reports a discount have no ladder at all.
     """
-    figures: dict[str, tuple[float, float, str]] = {}
+    # (price, list price, the currency both are in). The currency may be
+    # missing and that is survivable *here* and nowhere else in this file: a
+    # percentage is a ratio of two figures in the same unit, whatever that unit
+    # is, so it needs no currency at all. Only the cash "was" does, and it is
+    # withheld rather than converted at an assumed rate -- the rule the sailing
+    # book already applies to PADI's prices, where guessing euro would have put
+    # every Aggressor out by the EUR/USD rate.
+    figures: dict[str, tuple[float, float, str | None]] = {}
 
     priced = [c for c in ((cabins or {}).get("cabins") or []) if c.get("price") is not None]
     if priced:
         cheapest = min(priced, key=lambda c: c["price"])
         listed = cheapest.get("list_price")
-        if listed and listed > cheapest["price"]:
+        if listed and listed > cheapest["price"] > 0:
             figures["liveaboard.com"] = (
-                float(cheapest["price"]), float(listed), (cabins or {}).get("currency") or "USD",
+                float(cheapest["price"]), float(listed), (cabins or {}).get("currency"),
             )
 
-    if sailing and sailing.get("currency"):
+    if sailing:
         price, was = sailing.get("price"), sailing.get("was")
         if isinstance(price, (int, float)) and isinstance(was, (int, float)) and was > price > 0:
-            figures["padi.com"] = (float(price), float(was), str(sailing["currency"]))
+            figures["padi.com"] = (float(price), float(was), sailing.get("currency"))
 
     if not figures:
         return None
@@ -1046,8 +1053,15 @@ def _sale_for(
     mine = figures.get(own)
     if mine:
         price, was, currency = mine
-        sale["pct"] = int(round(100 * (1 - price / was)))
-        sale["was"] = _to_display(was, currency, fx_table)
+        # A markdown too small to state is not a stated markdown. Under half a
+        # percent rounds to zero, and "0% off" beside a price is worse than the
+        # nothing it is trying to say; the row stays on sale on the strength of
+        # `sellers`, which is the fact that does not round away.
+        cut = int(round(100 * (1 - price / was)))
+        if cut:
+            sale["pct"] = cut
+            if currency:
+                sale["was"] = _to_display(was, currency, fx_table)
     return sale
 
 
@@ -1074,10 +1088,16 @@ def _on_sale_summary(
         return None
 
     total: Counter = Counter(boat_of[d["itinerary_id"]] for d in departures)
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in on_sale:
+        grouped[boat_of[row["itinerary_id"]]].append(row)
+
     rows: list[dict[str, Any]] = []
+    # By the name the panel prints, not by the id it does not. Sorted on the id
+    # this read "Ocean Lovers, Oceanix, MY Odyssey Liveaboard" -- alphabetical
+    # in a column nobody can see. The id breaks ties so promotion stays pure.
     for boat_id, group in sorted(
-        {b: [d for d in on_sale if boat_of[d["itinerary_id"]] == b]
-         for b in {boat_of[d["itinerary_id"]] for d in on_sale}}.items()
+        grouped.items(), key=lambda kv: (str(boats[kv[0]]["name"]).lower(), kv[0])
     ):
         cuts = sorted({d["sale"]["pct"] for d in group if d["sale"].get("pct")})
         starts = sorted(d["start"] for d in group)

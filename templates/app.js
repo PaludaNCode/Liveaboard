@@ -264,12 +264,22 @@
   function saleTag(d) {
     if (!d.sale) return "";
     var who = (d.sale.sellers || []).map(function (s) { return SELLER_NAMES[s] || "a seller"; });
+    var read = D.meta.berths_read ? ", read " + D.meta.berths_read : "";
+    /* No percentage has two causes — the discounting seller is not the one
+       whose fare this row prints, or the markdown rounds to nothing — and the
+       row does not carry which. So the tooltip states what is true of both
+       rather than picking one and being wrong on the other. */
     if (!d.sale.pct) {
-      return '<span class="sale-mark" title="On sale through ' + esc(who.join(" and ")) +
-        ', which is not the seller whose price this row prints">on sale</span>';
+      return '<span class="sale-mark" title="' +
+        esc("On sale through " + who.join(" and ") +
+            ", with no percentage stated against the fare on this row" + read) +
+        '">on sale</span>';
     }
-    var title = "Down from " + eur(d.sale.was) + ", per " + who.join(" and ") +
-      (D.meta.berths_read ? ", read " + D.meta.berths_read : "");
+    /* "Down from" only where there is a figure to be down from. `was` is
+       withheld when the seller stated no currency, and a converted amount
+       built from a missing one printed "€NaN" into the tooltip. */
+    var title = (d.sale.was ? "Down from " + eur(d.sale.was) + ", per " : "Marked down by ") +
+      who.join(" and ") + read;
     return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
   }
 
@@ -1447,10 +1457,11 @@
      figure stays PADI's and says so — it is the only half with a day-by-day
      committed book to diff, because the cabin file keeps one reading. */
   function dealsSummary(deals, changed) {
-    var sale = deals.on_sale, n = sale ? sale.sailings : deals.offers.length;
+    var sale = deals.on_sale, offers = deals.offers || [];
+    var n = sale ? sale.sailings : offers.length;
     var line = n + (n === 1 ? " discounted sailing" : " discounted sailings");
     if (sale) line += " on " + sale.boats.length + " boats";
-    if (!deals.offers || !deals.offers.length) return "On sale · " + line;
+    if (!offers.length) return "On sale · " + line;
     if (deals.first_reading) line += " · PADI's listing, first reading";
     else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
     else if (deals.previous) line += " · nothing moved on PADI since " + shortDate(deals.previous);

@@ -130557,6 +130557,18 @@
           "pct": 10
         },
         {
+          "boat": "odyssey",
+          "boat_name": "MY Odyssey Liveaboard",
+          "sailings": 1,
+          "of": 17,
+          "first": "2027-08-28",
+          "last": "2027-08-28",
+          "sellers": [
+            0
+          ],
+          "pct": 10
+        },
+        {
           "boat": "ocean-lovers",
           "boat_name": "Ocean Lovers",
           "sailings": 17,
@@ -130575,18 +130587,6 @@
           "of": 4,
           "first": "2027-05-08",
           "last": "2027-07-24",
-          "sellers": [
-            0
-          ],
-          "pct": 10
-        },
-        {
-          "boat": "odyssey",
-          "boat_name": "MY Odyssey Liveaboard",
-          "sailings": 1,
-          "of": 17,
-          "first": "2027-08-28",
-          "last": "2027-08-28",
           "sellers": [
             0
           ],

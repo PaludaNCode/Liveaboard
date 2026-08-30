@@ -24,6 +24,8 @@ that.
 
 from __future__ import annotations
 
+import csv
+import io
 import sys
 import unittest
 from datetime import date, timedelta
@@ -567,3 +569,69 @@ class TestTheOnSaleSummary(unittest.TestCase):
         _, payload = self._summary()
         self.assertNotIn("offers", payload["deals"])
         self.assertIn("on_sale", payload["deals"])
+
+
+class TestTheEdgesOfASale(unittest.TestCase):
+    def test_a_markdown_too_small_to_state_gets_no_percentage(self):
+        """"0% off" beside a price is worse than the nothing it means.
+
+        The row stays on sale on the strength of `sellers`, which is the fact
+        that does not round away.
+        """
+        payload = with_books(cabin_book(ladder(("Twin", 997.0, 1000.0))))
+        sale = only_row(payload)["sale"]
+        self.assertEqual(sale["sellers"], [0])
+        self.assertNotIn("pct", sale)
+
+    def test_a_ladder_with_no_currency_still_yields_a_percentage(self):
+        """A ratio needs no unit; a cash figure does.
+
+        The percentage survives because both numbers are in whatever the
+        unnamed currency is. `was` is withheld rather than converted at an
+        assumed rate — the rule that stops a dollar price being read as euro.
+        """
+        record = ladder(("Twin", 900.0, 1000.0))
+        record.pop("currency")
+        payload = with_books(cabin_book(record))
+        sale = only_row(payload)["sale"]
+        self.assertEqual(sale["pct"], 10)
+        self.assertNotIn("was", sale)
+
+
+class TestTheSummaryReadsInOrder(unittest.TestCase):
+    def test_boats_are_ordered_by_the_name_the_panel_prints(self):
+        """Sorted on the boat id this read "Ocean Lovers, Oceanix, MY Odyssey
+        Liveaboard" — alphabetical in a column nobody can see."""
+        payload = promote(
+            FLEET, season=SEASON, padi=PADI,
+            cabins=cabin_book(
+                ladder(("Twin", 900.0, 1000.0)),
+                ladder(("Twin", 800.0, 1000.0), boat="serenity"),
+            ),
+        )
+        names = [b["boat_name"] for b in payload["deals"]["on_sale"]["boats"]]
+        self.assertEqual(names, sorted(names, key=str.lower))
+
+
+class TestTheTakeawayCarriesIt(unittest.TestCase):
+    def test_the_csv_states_the_list_price_and_the_cut(self):
+        """The page can filter on a sale, so the file a reader takes away has
+        to be able to as well."""
+        from liveaboard.export import to_csv
+
+        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1000.0), currency="EUR")))
+        payload["fx"] = {"base": "EUR", "as_of": "2026-08-28", "source": "test",
+                         "rates": {"USD": 1.17}}
+        rows = list(csv.DictReader(io.StringIO(to_csv(Dataset.from_dict(payload)))))
+        self.assertEqual(rows[0]["list_price"], "1000")
+        self.assertEqual(rows[0]["discount_pct"], "10")
+
+    def test_an_undiscounted_row_leaves_both_columns_empty(self):
+        """Not a zero. A 0 in a spreadsheet gets averaged."""
+        from liveaboard.export import to_csv
+
+        payload = promote(candidate([departure()]), season=SEASON)
+        payload["fx"] = {"base": "EUR", "as_of": "2026-08-28", "source": "test",
+                         "rates": {"USD": 1.17}}
+        rows = list(csv.DictReader(io.StringIO(to_csv(Dataset.from_dict(payload)))))
+        self.assertEqual((rows[0]["list_price"], rows[0]["discount_pct"]), ("", ""))

@@ -308,7 +308,8 @@ def _escape(text: str) -> str:
 
 DOWNLOAD_LABELS: dict[str, tuple[str, str]] = {
     "egypt-2027.csv": ("Every trip as a spreadsheet",
-                       "one row per departure, with the advertised price, the "
+                       "one row per departure, with the advertised price, what "
+                       "it is down from where a seller has marked it down, the "
                        "fees and the total"),
     "egypt-2027.json": ("The dataset", "exactly what the page is built from"),
     "CHANGES.md": ("What changed, refresh by refresh",
