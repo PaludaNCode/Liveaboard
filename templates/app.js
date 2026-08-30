@@ -483,13 +483,20 @@
      the operator bank could not answer, because a company with six boats
      returned six boats' worth of rows and no way to tell them apart.
 
-     The operator is not lost -- it stays on every itinerary in the dataset and
-     in the expanded row -- but it is no longer *filterable*. It was reachable
-     through the search box, and that box has gone: a second way to ask what
-     the chips ask, redrawing the table on every keystroke, and the only
-     question it answered alone was the company. 42 buttons above the prices
-     is the wrong weight for a question asked far less often than "which
-     boat", and so, it turns out, is a permanent input. */
+     The operator is off the page entirely now, and this comment used to say
+     otherwise: "it stays on every itinerary in the dataset and in the expanded
+     row". Only the first half was ever true. Nothing printed the company, and
+     the field went on shipping to every visitor 402 times a page -- so the
+     sentence described a fallback that did not exist, which is how a fact gets
+     withdrawn without anyone deciding to withdraw it.
+
+     It is a decision now: a diver picks the boat. The filter bank went because
+     a company with six boats returned six boats' worth of rows and no way to
+     tell them apart; the search box that reached it went too, being a second
+     way to ask what the chips ask, redrawing the table on every keystroke, for
+     a question asked far less often than "which boat"; and a per-operator
+     score went before either, for reading as a league table. The company is in
+     the dataset and in the CSV for anyone who wants to group by it. */
   var BOATS = tally(function (i) { return [i.boat]; });
 
   /* The entry bar, and the one bank that is not ordered by how many rows carry
@@ -2521,8 +2528,8 @@
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
     /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are
        never linked from the search pages, so the crawl cannot see them. */
-    D.meta.counts.boats + " boats bookable by the berth · " +
-    D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
+    D.meta.counts.boats + " boats bookable by the berth · all prices in " +
+    D.meta.currency +
     /* The build, not the crawl. `generated` is the day the data was read and
        is what the colophon prints beside the sources; this line says when the
        page you are looking at was made, which is a different day whenever a

@@ -60,7 +60,6 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     shared_lines: dict[str, list[dict[str, Any]]] = {}
     for key, itinerary in dataset.itineraries.items():
         boat = dataset.boat_for(itinerary)
-        operator = dataset.operator_for(itinerary)
         shared_lines[key] = [line.as_dict() for line in itinerary_lines(itinerary, dataset.fx)]
         itineraries[key] = {
             "id": key,
@@ -76,19 +75,34 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # a dataset promoted before this field existed still renders.
             "title": itinerary.title or itinerary.name,
             "boat_id": boat.id,
+            # The vessel, and not the company behind it. The operating
+            # company shipped here for eleven refreshes with nothing reading
+            # it: the operator filter bank was removed because a company with
+            # six boats returned six boats' worth of rows and no way to tell
+            # them apart, the search box that reached it went too, and a
+            # per-operator score was removed before both for reading as a
+            # league table. A diver picks the boat. It stays in the dataset
+            # and in the CSV, where a reader who wants to group by company
+            # can, and it is off the page rather than on it unread.
             "boat": boat.name,
-            "operator": operator.name,
             "nights": itinerary.nights,
             # Zero where the operator publishes no count. The page prints
             # nothing rather than dividing by an assumption.
             "dives": itinerary.dives,
             "port_from": itinerary.port_from,
             "port_to": itinerary.port_to,
-            "one_way": itinerary.port_from != itinerary.port_to,
+            # `one_way` was here, and it was `port_from != port_to` computed
+            # over the two fields immediately above it. A derived field is
+            # cheap once and 402 times it is not.
             "dive_sites": itinerary.dive_sites,
             "region": itinerary.region,
             "guests": boat.guests,
-            "summary": itinerary.summary,
+            # `summary` was here: the vessel's year-round brochure, 63 KB
+            # across 347 itineraries, read by no line of the page. It is the
+            # boat's prose rather than the trip's -- this file's own rule says
+            # it can never be a source for where one sailing goes -- so there
+            # was never a column it belonged in. `promote` still reads it, off
+            # the *dataset*, to pull a guest count out of the sentence.
             "source_url": itinerary.source_url,
             # What the operator states about the entry bar. Kept because it
             # is their claim; the route, theme and level the site used to
@@ -147,7 +161,10 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             "end": departure.end.isoformat(),
             "month": departure.start.month,
             "nights": itinerary.nights,
-            "spaces_left": departure.spaces_left,
+            # `spaces_left` was here and was `null` on all 1,122 rows -- the
+            # key, not a number, 4.4 KB of the word itself. The cabin ladder in
+            # `berths` answers this now, per seller and with the date it was
+            # read beside it.
             "availability": departure.availability,
             "bookable": departure.bookable,
             "booking_url": departure.booking_url,
@@ -257,11 +274,16 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # the true one on a dataset built without its book.
             **({"padi_berths_read": dataset.padi_berths_read}
                if dataset.padi_berths_read else {}),
+            # `operators` was counted here and printed in the line under the
+            # filters -- "46 operators". It was the last of the operating
+            # company on the page, and it said nothing a reader could act on:
+            # a diver picks the boat, and the number of companies behind 77
+            # hulls is not a fact about any trip. The dataset still models
+            # them, and the CSV still names one per row.
             "counts": {
                 "departures": len(departures),
                 "itineraries": len(itineraries),
                 "boats": len(dataset.boats),
-                "operators": len(dataset.operators),
             },
         },
         # Months and toggles only. The route, level and theme facets were built

@@ -1054,8 +1054,47 @@ class TestPayloadIsRead(unittest.TestCase):
                       "own label, which is built from this table in Python",
     }
 
+    #: The same, per itinerary and per departure. Also empty, and the emptiness
+    #: is worth more here: a top-level key ships once, an itinerary key ships
+    #: 402 times and a departure key 1,122, so this is the level where an
+    #: unread field is measured in tens of kilobytes rather than in bytes.
+    ITINERARY_UNREAD: dict[str, str] = {}
+    DEPARTURE_UNREAD: dict[str, str] = {}
+
     def app(self) -> str:
         return self.APP.read_text(encoding="utf-8")
+
+    def code(self) -> str:
+        """`app.js` with its comments removed.
+
+        Searching the raw source cannot tell a reader from a mention, and this
+        file is a third prose by weight -- 69 KB of the 190. Four fields were
+        unread while every one of them appeared in a comment, and `operator`
+        appeared five times in code as an ordinary English word inside a
+        sentence the page prints ("This operator publishes no required
+        extras"), never once as a property. A guard that accepted those would
+        be green for the wrong reason, which is the failure this class is
+        about.
+
+        Block comments only, because `app.js` has no line comments at all --
+        stripping `//` would cut the tail off any URL in a string literal.
+        `test_the_source_has_no_line_comments` holds that assumption up.
+        """
+        return re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+
+    def reads(self, key: str) -> bool:
+        """Whether the page reads `key` as a property, in code rather than prose.
+
+        Dot access or a quoted subscript. A key that appears only as a bare
+        word is not a reader.
+        """
+        pattern = r"\." + re.escape(key) + r"\b|[\[(,]\s*[\"']" + re.escape(key) + r"[\"']"
+        return re.search(pattern, self.code()) is not None
+
+    def rows(self, payload: dict, level: str) -> list[dict]:
+        source = (payload["itineraries"].values() if level == "itineraries"
+                  else payload["departures"])
+        return list(source)
 
     def payload(self) -> dict:
         return build_payload(Dataset.load(SEED))
@@ -1071,6 +1110,70 @@ class TestPayloadIsRead(unittest.TestCase):
                     f"the payload ships {key!r} and app.js never reads it; "
                     f"either print it or stop serialising it",
                 )
+
+    def test_the_source_has_no_line_comments(self) -> None:
+        """`code()` strips block comments only, and this is why that is enough.
+
+        If `//` comments ever appear, either they start hiding readers from
+        the guard or stripping them starts cutting URLs in half. Either way
+        somebody has to decide, rather than find out from a green build.
+        """
+        stripped = re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+        offenders = [n for n, line in enumerate(stripped.splitlines(), 1)
+                     if re.match(r"\s*//", line)]
+        self.assertEqual(offenders, [], "app.js has line comments now")
+
+    def test_every_itinerary_key_has_a_reader(self) -> None:
+        """The level where the bytes are.
+
+        `test_every_top_level_key_has_a_reader` walked the payload's top level
+        and nothing walked below it, so four fields shipped unread to every
+        visitor -- `summary` at 63 KB, `operator`, `one_way` and a
+        `spaces_left` that was null on all 1,122 rows. 75 KB of a page that
+        lazily fetches nothing, past a guard whose docstring says every fact
+        the page ships is a fact the page prints.
+        """
+        for key in {k for row in self.rows(self.payload(), "itineraries") for k in row}:
+            if key in self.ITINERARY_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"every itinerary ships {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_every_departure_key_has_a_reader(self) -> None:
+        """The same, one level down and 1,122 rows wide."""
+        for key in {k for row in self.rows(self.payload(), "departures") for k in row}:
+            if key in self.DEPARTURE_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"departures ship {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_the_committed_dataset_ships_no_unread_key_the_seed_lacks(self) -> None:
+        """The two tests above run on the seed, which is what keeps them ahead
+        of the fetch. The seed carries neither seller's second bill, no cabin
+        ladder and no sale, so five keys exist only once real data is loaded --
+        and a dead one among them would never be reached. This is the same
+        assertion over the committed payload, which makes it a publication gate
+        rather than a code test, and it goes through `published` for that.
+        """
+        payload = published.page()
+        for level, allowed in (("itineraries", self.ITINERARY_UNREAD),
+                               ("departures", self.DEPARTURE_UNREAD)):
+            for key in {k for row in self.rows(payload, level) for k in row}:
+                if key in allowed:
+                    continue
+                with self.subTest(level=level, key=key):
+                    self.assertTrue(
+                        self.reads(key),
+                        f"{level} ship {key!r} and app.js never reads it",
+                    )
 
     def test_the_entry_bar_reaches_the_page(self) -> None:
         """The specific fact this class was written for.
