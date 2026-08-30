@@ -1,5 +1,5 @@
 {
- "collected": "2026-08-29",
+ "collected": "2026-08-30",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada-Hurghada)": {
@@ -870,6 +870,12 @@
     "complete": false,
     "lines": [
      {
+      "basis": "per_trip",
+      "code": "environment_tax",
+      "note": "Environmental/Government Fee",
+      "tier": "mandatory"
+     },
+     {
       "amount": {
        "amount": 40.0,
        "currency": "EUR"
@@ -888,12 +894,20 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
     "unreadable": [
-     "15% Local GST (on onboard purchases)",
-     "Environmental/Government Fee",
-     "Navy fee"
+     "15% Local GST (on onboard purchases)"
     ]
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
@@ -916,6 +930,12 @@
     "complete": false,
     "lines": [
      {
+      "basis": "per_trip",
+      "code": "environment_tax",
+      "note": "Environmental/Government Fee",
+      "tier": "mandatory"
+     },
+     {
       "amount": {
        "amount": 40.0,
        "currency": "EUR"
@@ -934,12 +954,20 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
     "unreadable": [
-     "15% Local GST (on onboard purchases)",
-     "Environmental/Government Fee",
-     "Navy fee"
+     "15% Local GST (on onboard purchases)"
     ]
    },
    "name": "North (Hurghada - Hurghada)",
@@ -962,6 +990,12 @@
     "complete": false,
     "lines": [
      {
+      "basis": "per_trip",
+      "code": "environment_tax",
+      "note": "Environmental/Government Fee",
+      "tier": "mandatory"
+     },
+     {
       "amount": {
        "amount": 40.0,
        "currency": "EUR"
@@ -980,12 +1014,20 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
     "unreadable": [
-     "15% Local GST (on onboard purchases)",
-     "Environmental/Government Fee",
-     "Navy fee"
+     "15% Local GST (on onboard purchases)"
     ]
    },
    "name": "South (Hurghada - Marsa Alam)",
@@ -1008,6 +1050,12 @@
     "complete": false,
     "lines": [
      {
+      "basis": "per_trip",
+      "code": "environment_tax",
+      "note": "Environmental/Government Fee",
+      "tier": "mandatory"
+     },
+     {
       "amount": {
        "amount": 40.0,
        "currency": "EUR"
@@ -1026,12 +1074,20 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
     "unreadable": [
-     "15% Local GST (on onboard purchases)",
-     "Environmental/Government Fee",
-     "Navy fee"
+     "15% Local GST (on onboard purchases)"
     ]
    },
    "name": "South (Marsa Alam - Hurghada)",
@@ -1508,38 +1564,6 @@
    },
    "title": "Saint John's (Port Galib - Port Galib) 7 Nights"
   },
-  "aphrodite::Brothers - Daedalus (Hurghada - Port Ghalib)": {
-   "boat": "aphrodite",
-   "boat_name": "M/Y Aphrodite",
-   "dives": 17,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 210.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
-      "tier": "mandatory"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Brothers - Daedalus (Hurghada - Port Ghalib)",
-   "nights": 7,
-   "padi_id": 15835,
-   "padi_slug": "brothers-daedalus-port-ghalib-port-ghalib-7-nights",
-   "ports": "Hurghada - Port Ghalib",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Brothers - Daedalus (Hurghada - Port Ghalib) 7 nights"
-  },
   "aphrodite::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
@@ -1635,38 +1659,6 @@
     "recommended_logged_dives": 50
    },
    "title": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib - Hurghada) 7 nights"
-  },
-  "aphrodite::Brothers Islands (Port Ghalib - Hurghada)": {
-   "boat": "aphrodite",
-   "boat_name": "M/Y Aphrodite",
-   "dives": 17,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 240.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
-      "tier": "mandatory"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Brothers Islands (Port Ghalib - Hurghada)",
-   "nights": 7,
-   "padi_id": 15619,
-   "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-3",
-   "ports": "Port Ghalib - Hurghada",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Brothers Islands (Port Ghalib - Hurghada) 7 nights"
   },
   "aphrodite::Brothers, Safaga Reefs (Port Ghalib - Hurghada)": {
    "boat": "aphrodite",
@@ -1795,38 +1787,6 @@
     "recommended_logged_dives": 20
    },
    "title": "North \u2013 Straits of Tiran (Hurghada - Hurghada) 7 nights"
-  },
-  "aphrodite::North - Tiran - Dahab (Hurghada - Hurghada)": {
-   "boat": "aphrodite",
-   "boat_name": "M/Y Aphrodite",
-   "dives": 17,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 190.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Safari Package (Marine Park fees, harbour fees and fuel)",
-      "tier": "mandatory"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
-   "nights": 7,
-   "padi_id": 23067,
-   "padi_slug": "north-classic-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 30,
-    "recommended_logged_dives": 20
-   },
-   "title": "North - Tiran - Dahab (Hurghada - Hurghada) 7 Nights"
   },
   "aphrodite::North Brother Islands (Hurghada - Port Ghalib)": {
    "boat": "aphrodite",
@@ -2358,15 +2318,19 @@
       "tier": "mandatory"
      },
      {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Coast Guard Fee",
+      "tier": "mandatory"
+     },
+     {
       "basis": "per_person_per_day",
       "code": "service_charge",
       "note": "Service fees",
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Coast Guard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)",
    "nights": 3,
@@ -2398,15 +2362,19 @@
       "tier": "mandatory"
      },
      {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Coast Guard Fee",
+      "tier": "mandatory"
+     },
+     {
       "basis": "per_person_per_day",
       "code": "service_charge",
       "note": "Service fees",
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Coast Guard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 3,
@@ -2438,11 +2406,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Coast Guard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Coast Guard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 3,
@@ -2474,11 +2446,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Coast Guard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Coast Guard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 4,
@@ -4591,11 +4567,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib)",
    "nights": 7,
@@ -4625,11 +4605,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "Brothers - Daedalus - Fury Shoal - Elphinstone (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -4659,11 +4643,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib)",
    "nights": 7,
@@ -4693,11 +4681,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "Daedalus &\u00a0Fury Shoal (Port Ghalib- Port Ghalib)",
    "nights": 7,
@@ -4727,11 +4719,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib)",
    "nights": 7,
@@ -4761,11 +4757,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "North & Brothers (Hurghada - Hurghada)",
    "nights": 7,
@@ -4795,11 +4795,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "North & Safaga (Hurghada -  Hurghada)",
    "nights": 7,
@@ -4829,11 +4833,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "North & Tiran (Hurghada- Hurghada)",
    "nights": 7,
@@ -4863,11 +4871,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "North - Tiran - Dahab (Hurghada - Hurghada)",
    "nights": 7,
@@ -4897,11 +4909,15 @@
       "code": "visa",
       "note": "Visa fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local fees",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Local fees"
-    ]
+    "unreadable": []
    },
    "name": "St. John's (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -5053,11 +5069,15 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Navy fee"
-    ]
+    "unreadable": []
    },
    "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
    "nights": 7,
@@ -5095,11 +5115,15 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Navy fee"
-    ]
+    "unreadable": []
    },
    "name": "North (Hurghada - Hurghada)",
    "nights": 7,
@@ -5137,11 +5161,15 @@
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "navy_fee",
+      "note": "Navy fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Navy fee"
-    ]
+    "unreadable": []
    },
    "name": "North + Tiran (Hurghada - Hurghada)",
    "nights": 7,
@@ -5162,16 +5190,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 250.0,
@@ -5203,16 +5221,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 250.0,
@@ -5253,16 +5261,6 @@
       "code": "combined_fees",
       "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
       "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -5294,16 +5292,6 @@
       "code": "combined_fees",
       "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
       "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -5326,16 +5314,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 125.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 175.0,
@@ -5369,16 +5347,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 220.0,
        "currency": "EUR"
       },
@@ -5408,16 +5376,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 259.0,
@@ -5451,16 +5409,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 250.0,
        "currency": "EUR"
       },
@@ -5489,16 +5437,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 250.0,
@@ -5531,16 +5469,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 250.0,
        "currency": "EUR"
       },
@@ -5569,16 +5497,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 250.0,
@@ -5612,16 +5530,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 125.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 170.0,
        "currency": "EUR"
       },
@@ -5650,16 +5558,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 220.0,
@@ -5692,16 +5590,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 250.0,
        "currency": "EUR"
       },
@@ -5731,16 +5619,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Environmental tax, Park fees, Harbour fees and Fuel surcharge",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 250.0,
@@ -5776,16 +5654,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 100.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -5838,16 +5706,6 @@
      },
      {
       "amount": {
-       "amount": 100.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 200.0,
        "currency": "EUR"
       },
@@ -5895,16 +5753,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 60.0,
        "currency": "EUR"
       },
@@ -5947,16 +5795,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -6009,16 +5847,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 60.0,
        "currency": "EUR"
       },
@@ -6063,16 +5891,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -6125,16 +5943,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 60.0,
        "currency": "EUR"
       },
@@ -6183,16 +5991,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 60.0,
        "currency": "EUR"
       },
@@ -6237,16 +6035,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -6309,16 +6097,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -6353,16 +6131,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -6425,16 +6193,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -6469,16 +6227,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental taxes",
       "tier": "mandatory"
      },
      {
@@ -6541,16 +6289,6 @@
      },
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 300.0,
        "currency": "EUR"
       },
@@ -6597,16 +6335,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 100.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -6660,16 +6388,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -6714,16 +6432,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -6778,16 +6486,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -6834,16 +6532,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -6898,16 +6586,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -6954,16 +6632,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -7018,16 +6686,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -7074,16 +6732,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -7138,16 +6786,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -7194,16 +6832,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -7258,16 +6886,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -7318,16 +6936,6 @@
      },
      {
       "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 150.0,
        "currency": "EUR"
       },
@@ -7374,16 +6982,6 @@
       "basis": "per_night",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Environmental tax",
       "tier": "mandatory"
      },
      {
@@ -8625,11 +8223,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Cost Gard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 7,
@@ -8661,11 +8263,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Cost Gard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 7,
@@ -8697,11 +8303,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Cost Gard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Sinai Wrecks - Northern Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 7,
@@ -8733,11 +8343,15 @@
       "code": "marine_park",
       "note": "National park fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Cost Gard Fee"
-    ]
+    "unreadable": []
    },
    "name": "Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)",
    "nights": 7,
@@ -8756,11 +8370,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 17,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus, Elphistone  (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -8779,11 +8402,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 17,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus, Elphistone  (Hurghada-Hurghada)",
    "nights": 7,
@@ -8802,11 +8434,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 17,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "North (Hurghada-Hurghada)",
    "nights": 7,
@@ -8823,11 +8464,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 16,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "North - Tiran And Dahab (Hurghada - Hurghada)",
    "nights": 7,
@@ -8844,11 +8494,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 17,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "North and Brothers (Hurghada-Hurghada)",
    "nights": 7,
@@ -8867,11 +8526,20 @@
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
    "dives": 17,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 400.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "North and Tiran (Hurghada-Hurghada)",
    "nights": 7,
@@ -9625,16 +9293,6 @@
       "code": "combined_fees",
       "note": "National Park fees, environmental tax, port fees and fuel surcharge",
       "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "National Park fees, environmental tax, port fees and fuel surcharge",
-      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -9660,16 +9318,6 @@
      {
       "amount": {
        "amount": 220.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "National Park fees, environmental tax, port fees and fuel surcharge",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -12078,36 +11726,54 @@
   "lady-m::Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata)": {
    "boat": "lady-m",
    "boat_name": "MY Lady M",
-   "dives": 7,
+   "dives": 8,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 120.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata)",
-   "nights": 4,
-   "padi_id": 21274,
-   "padi_slug": "mini-safari-wadi-el-gemal-marsa-alam-marsa-alam-3",
+   "nights": 3,
+   "padi_id": 16161,
+   "padi_slug": "st-johns-sataya-hamata-hamata-3-nights",
    "ports": "Hamata - Hamata",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
     "recommended_logged_dives": 20
    },
-   "title": "Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata) 4 nights"
+   "title": "Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata) 3 nights"
   },
   "lady-m::Mini Safari Fury shoals & sataya (Hamata - Hamata)": {
    "boat": "lady-m",
    "boat_name": "MY Lady M",
    "dives": 7,
    "fees": {
-    "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Route supplement"
-    ]
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 120.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "route_supplement",
+      "note": "Route supplement",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Mini Safari Fury shoals & sataya (Hamata - Hamata)",
    "nights": 3,
@@ -12332,16 +11998,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12382,16 +12038,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -12436,16 +12082,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12486,16 +12122,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -12540,16 +12166,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12590,16 +12206,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -12644,16 +12250,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12694,16 +12290,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -12748,16 +12334,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12798,16 +12374,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -12852,16 +12418,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12904,16 +12460,6 @@
     "lines": [
      {
       "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -12953,16 +12499,6 @@
    "fees": {
     "complete": true,
     "lines": [
-     {
-      "amount": {
-       "amount": 150.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Conservation fees",
-      "tier": "mandatory"
-     },
      {
       "amount": {
        "amount": 70.0,
@@ -13027,16 +12563,6 @@
      },
      {
       "amount": {
-       "amount": 100.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "marine_park",
-      "note": "National park fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 200.0,
        "currency": "USD"
       },
@@ -13088,16 +12614,6 @@
      },
      {
       "amount": {
-       "amount": 100.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "marine_park",
-      "note": "National park fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
        "amount": 200.0,
        "currency": "USD"
       },
@@ -13145,16 +12661,6 @@
       "basis": "per_week",
       "code": "fuel_surcharge",
       "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 100.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "marine_park",
-      "note": "National park fees",
       "tier": "mandatory"
      },
      {
@@ -15356,7 +14862,7 @@
    "boat_name": "Serenity",
    "dives": 16,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15367,11 +14873,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)",
    "nights": 7,
@@ -15390,7 +14904,7 @@
    "boat_name": "Serenity",
    "dives": 9,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15401,11 +14915,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "Mini - Hurghada (Hurghada - Hurghada)",
    "nights": 3,
@@ -15424,7 +14946,7 @@
    "boat_name": "Serenity",
    "dives": 9,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15435,11 +14957,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "Mini - Wrecks (Hurghada - Hurghada)",
    "nights": 3,
@@ -15458,7 +14988,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15469,11 +14999,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "North & Brothers (Hurghada - Hurghada)",
    "nights": 7,
@@ -15492,7 +15030,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15503,11 +15041,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "North & Wrecks (Hurghada - Hurghada)",
    "nights": 7,
@@ -15526,7 +15072,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15537,11 +15083,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)",
    "nights": 7,
@@ -15560,7 +15114,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15571,11 +15125,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "North - Tiran (Hurghada - Hurghada)",
    "nights": 7,
@@ -15594,7 +15156,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15605,11 +15167,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "Safaga & Hurghada (Hurghada - Hurghada)",
    "nights": 7,
@@ -15628,7 +15198,7 @@
    "boat_name": "Serenity",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -15639,11 +15209,19 @@
       "code": "combined_fees",
       "note": "Park Fees, port fees and fuel surcharges",
       "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "hospitality_fee",
+      "note": "Hospitality Fee",
+      "tier": "mandatory"
      }
     ],
-    "unreadable": [
-     "Hospitality Fee"
-    ]
+    "unreadable": []
    },
    "name": "\ud83d\udc49 PADI COURSES  Training Safari \ud83d\udca5 \"Dive, Learn,Live On board\"-  The Ultimate Zero to Advanced  Dive Week\" (Hurghada - Hurghada)",
    "nights": 7,
@@ -15658,10 +15236,15 @@
    "dives": 12,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)",
    "nights": 4,
@@ -15681,10 +15264,15 @@
    "dives": 19,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Sinai Classic (Sharm el Sheikh- Sharm el sheikh)",
    "nights": 7,
@@ -15703,10 +15291,15 @@
    "dives": 9,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)",
    "nights": 3,
@@ -15726,10 +15319,15 @@
    "dives": 12,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh)",
    "nights": 4,
@@ -15749,10 +15347,15 @@
    "dives": 19,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)",
    "nights": 7,
@@ -15772,10 +15375,15 @@
    "dives": 19,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)",
    "nights": 7,
@@ -15794,10 +15402,15 @@
    "dives": 19,
    "fees": {
     "complete": false,
-    "lines": [],
-    "unreadable": [
-     "Local Fees"
-    ]
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "local_fees",
+      "note": "Local Fees",
+      "tier": "mandatory"
+     }
+    ],
+    "unreadable": []
    },
    "name": "Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)",
    "nights": 7,

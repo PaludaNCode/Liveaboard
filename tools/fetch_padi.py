@@ -19,7 +19,10 @@ writes two files:
     a re-run rebuilds it; delete `archive.json` and yesterday is unrecoverable.
 
     Rebuild with a plain `python3 tools/fetch_padi.py` -- incremental, so it
-    fetches only what is missing.
+    fetches only what is missing. `--rebuild` goes further and fetches nothing
+    at all: both books are pure functions of this store, so a parser change is
+    proved against it offline, the way `reparse_candidate.py` fills a
+    newly-read field onto the committed candidate rather than re-crawling.
 
     `photos` and `marineLife` are dropped on the way in. They are 17% of the
     payload and consist of CDN thumbnail URLs, and this site loads nothing
@@ -50,6 +53,7 @@ it -- a green job, a valid file, and five published facts gone. See
 `MIN_BOOK_RATIO`.
 
     python3 tools/fetch_padi.py [--limit N] [--refresh] [--trips] [--force]
+    python3 tools/fetch_padi.py --rebuild          # re-parse, no requests
 """
 
 from __future__ import annotations
@@ -71,6 +75,7 @@ from liveaboard.scrape.padi_com import (  # noqa: E402
     HOST,
     ITINERARY_DETAIL,
     ITINERARY_LIST,
+    SEASON,
     PadiComAdapter,
 )
 
@@ -333,6 +338,13 @@ def main() -> int:
                         help="fetch sailings and prices as well as itineraries")
     parser.add_argument("--force", action="store_true",
                         help="write data/padi.json even if it loses trips (see MIN_BOOK_RATIO)")
+    parser.add_argument("--rebuild", action="store_true",
+                        help="rebuild both books from the raw store, fetching nothing")
+    # The fee book has to be read against the season, because PADI keeps a
+    # charge's old price beside its new one and only the dates tell them apart.
+    # Spelled here like `fetch_deals.py` so a season that moves moves in both.
+    parser.add_argument("--season-start", default=SEASON[0])
+    parser.add_argument("--season-end", default=SEASON[1])
     args = parser.parse_args()
 
     aliases = json.loads(Path(args.aliases).read_text())["aliases"]
@@ -346,7 +358,20 @@ def main() -> int:
     boats = sorted(aliases.items())
     if args.limit:
         boats = boats[: args.limit]
-    print(f"{len(boats)} boats, {len(stored)} itineraries already stored\n")
+    if args.rebuild:
+        # Both books are pure functions of the raw store, so a parser change
+        # needs no request at all -- the same discipline as
+        # `reparse_candidate.py`, which fills a newly-read field onto the
+        # committed candidate rather than re-crawling 320 pages to read data
+        # already in the repository. Here it is 530 pages, and the fields the
+        # open issues want (`whatsIncludedNew`, the unclassified charge
+        # labels, PADI's own reef descriptions) are all in the store already.
+        boats = []
+        print(f"--rebuild: no requests; {len(stored)} itineraries and "
+              f"{len(raw.get('trips') or {})} vessels' sailings from {RAW}, "
+              f"collected {raw.get('fetched') or 'undated'}\n")
+    else:
+        print(f"{len(boats)} boats, {len(stored)} itineraries already stored\n")
 
     fetched = skipped = failed = 0
     for boat_id, slug in boats:
@@ -383,7 +408,7 @@ def main() -> int:
         raw["fetched"] = time.strftime("%Y-%m-%d")
         RAW.write_text(json.dumps(raw, indent=1, sort_keys=True) + "\n")
 
-    if args.trips:
+    if args.trips and not args.rebuild:
         _fetch_trips(aliases, raw, args)
 
     # The book is rebuilt from the raw store every time, so it is always exactly
@@ -407,7 +432,8 @@ def main() -> int:
         # which is the same rule `_departure_book` applies to its prices.
         currency = (raw.get("shops", {}).get(slug) or {}).get("currency")
         if currency:
-            record["fees"] = PadiComAdapter.fees_from_payload(detail, currency)
+            record["fees"] = PadiComAdapter.fees_from_payload(
+                detail, currency, (args.season_start, args.season_end))
         trips[itinerary_key(boat_id, str(name))] = record
     book["trips"] = trips
     # What PADI says about each vessel, as opposed to about one of its trips.

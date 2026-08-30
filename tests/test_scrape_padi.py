@@ -603,3 +603,72 @@ class TestStricterBar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestACharePricedForLastYearIsNotThisYearsCharge(unittest.TestCase):
+    """`validFrom`/`validTo` sit on every fee entry and nothing read them.
+
+    PADI keeps a charge's old price beside its new one. Grand Sea Explorer
+    lists "Route supplement" twice on every trip -- 300 valid to 2026-12-31,
+    400 valid from 2027-01-01 -- and DUNE Longara lists "Environmental taxes"
+    at 100 and 200, the second taking over on 2026-06-14. Both reached the bill
+    and the parser kept whichever it happened to, on the largest mandatory
+    lines in the book.
+
+    A comment in `fees_from_payload` used to reason that two entries under one
+    title are two charges the operator bills. The dates were in the same
+    payload and refute it: across the store, all **69** such pairs resolve to
+    exactly one entry valid in the published season, and not one has two.
+    """
+
+    def entry(self, title="Route supplement", price=400.0, **extra):
+        return {"title": title, "price": price, "payedPer": 30,
+                "isMandatory": True, **extra}
+
+    def fees(self, *entries, season=("2027-05-01", "2027-08-31")):
+        return PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": list(entries)}, "USD", season)
+
+    def test_an_entry_dated_out_before_the_season_is_dropped(self):
+        book = self.fees(
+            self.entry(price=300.0, validFrom="2025-12-01", validTo="2026-12-31"),
+            self.entry(price=400.0, validFrom="2027-01-01", validTo="2030-01-01"),
+        )
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [400.0])
+
+    def test_an_entry_that_starts_after_the_season_is_dropped_too(self):
+        book = self.fees(
+            self.entry(price=400.0, validFrom="2027-01-01", validTo="2030-01-01"),
+            self.entry(price=500.0, validFrom="2028-01-01", validTo="2030-01-01"),
+        )
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [400.0])
+
+    def test_an_entry_stating_no_window_is_kept(self):
+        """Silence is not expiry -- 750 of the 896 entries state no window, and
+        dropping those would empty most of the book."""
+        self.assertEqual(len(self.fees(self.entry())["lines"]), 1)
+
+    def test_a_window_that_merely_overlaps_the_season_is_kept(self):
+        """The charge applies for part of the window we publish, which is the
+        operator saying it applies. Requiring containment would drop a price
+        that is live on the day the trip sails."""
+        book = self.fees(self.entry(validFrom="2027-06-01", validTo="2027-06-30"))
+        self.assertEqual(len(book["lines"]), 1)
+
+    def test_two_undated_entries_under_one_title_are_still_two_charges(self):
+        """What the dates cannot settle, the title must not settle either.
+        Folding these would halve a real bill, which is the direction this
+        project never rounds."""
+        book = self.fees(self.entry(price=100.0), self.entry(price=200.0))
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [100.0, 200.0])
+
+    def test_an_expired_entry_never_blocks_a_bill(self):
+        """Dropped before its title is read, so an unclassifiable charge that
+        stopped applying last year cannot hold a trip's total hostage."""
+        book = self.fees(
+            self.entry(title="Some charge nobody can classify",
+                       validFrom="2025-01-01", validTo="2026-01-01"),
+            self.entry(),
+        )
+        self.assertEqual(book["unreadable"], [])
+        self.assertTrue(book["complete"])

@@ -245,6 +245,46 @@ table liveaboard.com's wording goes through.
 """
 
 
+SEASON: tuple[str, str] = ("2027-05-01", "2027-08-31")
+"""The window the site publishes, as the fee book has to be read against it.
+
+Only a default. `fetch_padi.py` takes `--season-start` / `--season-end` like
+`fetch_deals.py`, so a season that moves moves here too.
+"""
+
+
+def _in_season(entry: dict[str, object], season: tuple[str, str]) -> bool:
+    """Whether a fee entry's stated validity window reaches the season.
+
+    **A charge PADI priced for last year is not this year's charge, and the
+    payload keeps both.** Grand Sea Explorer lists "Route supplement" twice on
+    every trip -- 300 valid to 2026-12-31, 400 valid from 2027-01-01 -- and
+    DUNE Longara lists "Environmental taxes" at 100 and 200, the second taking
+    over on 2026-06-14. Nothing read `validFrom`/`validTo`, so the bill got
+    whichever the parser happened to keep.
+
+    A comment here used to reason the opposite way: that two entries under one
+    title are two charges the operator bills, "no pair in the book is an exact
+    duplicate". The dates were in the same payload and refute it. Across the
+    whole store there are **69 such pairs, and every one resolves to exactly a
+    single entry valid in the published season** -- not one has two. They are
+    one charge repriced, and they sit on the largest mandatory lines there are:
+    the combined park/port/fuel charge, conservation fees, the environmental
+    tax.
+
+    **Silence is not expiry**, as everywhere else here: 750 of the 896 entries
+    state no window at all and every one of them is kept. Only an entry that
+    states a window the season cannot reach is dropped, which is the source
+    saying this price stopped applying before the trip sails.
+    """
+    start, end = season
+    valid_from = str(entry.get("validFrom") or "")[:10]
+    valid_to = str(entry.get("validTo") or "")[:10]
+    if valid_to and valid_to < start:
+        return False
+    return not (valid_from and valid_from > end)
+
+
 EXPERIENCE_DIVES: dict[int, int] = {0: 0, 10: 20, 20: 50, 30: 100}
 """`EXPERIENCE_REQUIRED_DIVES`, likewise verbatim.
 
@@ -766,7 +806,10 @@ class PadiComAdapter(SourceAdapter):
 
     @classmethod
     def fees_from_payload(
-        cls, detail: dict[str, object], currency: str
+        cls,
+        detail: dict[str, object],
+        currency: str,
+        season: tuple[str, str] = SEASON,
     ) -> dict[str, object]:
         """The charges PADI says a diver cannot decline, and whether they add up.
 
@@ -810,6 +853,12 @@ class PadiComAdapter(SourceAdapter):
             for entry in entries:
                 if not isinstance(entry, dict):
                     continue
+                # Before the title is even read: an entry the source has
+                # already dated out of the season is not this trip's charge,
+                # and letting it reach `unreadable` would block a bill on a
+                # price nobody will be asked to pay.
+                if not _in_season(entry, season):
+                    continue
                 title = str(entry.get("title") or "").strip()
                 # `prose=False`: this is a field, not a line cut out of a page.
                 code = classify_label(title, prose=False) if title else None
@@ -836,12 +885,21 @@ class PadiComAdapter(SourceAdapter):
                     line["amount"] = {"amount": amount, "currency": currency}
                 lines.append(line)
 
-        # Two entries with one title are kept as two. DUNE Longara lists
-        # "Environmental taxes" twice on six of its trips -- €100 and €200,
-        # under separate `extraId`s -- and they are two charges the operator
-        # bills, not one charge listed twice: no pair in the book is an exact
-        # duplicate. Folding them on the title would halve a real bill, which
-        # is the direction this project never rounds.
+        # Two entries with one title are still kept as two, and the reason has
+        # changed. It used to be that they are two charges the operator bills,
+        # on the evidence that no pair in the book is an exact duplicate --
+        # DUNE Longara's "Environmental taxes" at €100 and €200 being the case
+        # in point. The dates were in the same payload and refute it: those two
+        # are one charge that changed price on 2026-06-14, and across the whole
+        # store all 69 such pairs resolve to exactly one entry valid in the
+        # published season. `_in_season` above drops the other, so what reaches
+        # here is already one line per charge and the title no longer has to
+        # carry that weight.
+        #
+        # Kept as two anyway, for the case the dates do not cover: an operator
+        # that genuinely bills one title twice inside one season states no
+        # window on either, and folding those on the title would halve a real
+        # bill -- the direction this project never rounds.
         priced = all("amount" in line for line in lines)
         return {
             "lines": lines,
