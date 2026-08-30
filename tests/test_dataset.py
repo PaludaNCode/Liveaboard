@@ -337,20 +337,51 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
 
     WORKFLOWS = ROOT / ".github" / "workflows"
     CHECKS = "uses: ./.github/actions/checks"
+    PUBLISH = "uses: ./.github/actions/publish"
 
-    def test_the_shared_check_list_exists(self):
-        self.assertTrue((ROOT / ".github" / "actions" / "checks" / "action.yml").exists())
+    def test_the_shared_actions_exist(self):
+        for name in ("checks", "publish"):
+            self.assertTrue((ROOT / ".github" / "actions" / name / "action.yml").exists(), name)
 
     def test_ci_runs_the_shared_list_rather_than_its_own(self):
         """Otherwise the two drift, and the data jobs are running yesterday's
         idea of what a commit has to satisfy."""
         self.assertIn(self.CHECKS, (self.WORKFLOWS / "ci.yml").read_text(encoding="utf-8"))
 
+    def test_the_guard_can_still_see_a_push(self):
+        """This test nearly stopped working the day the push moved.
+
+        It keyed on the string `git push origin`, and #123 factored that into
+        `.github/actions/publish` — after which no workflow contained it, every
+        workflow trivially passed, and the guard was green because it had
+        nothing left to look at. A check that silently stops checking is worse
+        than no check, so the thing it looks for is asserted to exist.
+        """
+        pushing = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                   if self._pushes(p.read_text(encoding="utf-8"))]
+        self.assertGreaterEqual(
+            len(pushing), 5,
+            "no workflow appears to push; has the mechanism moved again?")
+
+    @staticmethod
+    def _pushes(body: str) -> bool:
+        """Whether a workflow commits to the repository, however it does it."""
+        return ("git push origin" in body
+                or TestEveryPushingWorkflowChecksItself.PUBLISH in body)
+
+    def test_only_the_shared_action_carries_the_push(self):
+        """One definition of the rebase-and-retry. It is subtle — `-X theirs`
+        so the replayed commit wins, and the branch from `GITHUB_REF_NAME`
+        rather than main — and six copies of it were six chances to drift."""
+        loose = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                 if "push rejected (attempt" in p.read_text(encoding="utf-8")]
+        self.assertEqual(loose, [], f"these re-implement the push loop: {loose}")
+
     def test_every_workflow_that_pushes_runs_them_first(self):
         unchecked = [
             path.name
             for path in sorted(self.WORKFLOWS.glob("*.yml"))
-            if "git push origin" in (body := path.read_text(encoding="utf-8"))
+            if self._pushes(body := path.read_text(encoding="utf-8"))
             and self.CHECKS not in body
         ]
         self.assertEqual(

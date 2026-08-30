@@ -97,34 +97,9 @@ jobs:
       - name: Check what is about to be published
         uses: ./.github/actions/checks
 
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data site
-          if git diff --cached --quiet; then
-            # The normal outcome on a merge that changed the library without
-            # changing its output. Not a failure, and worth saying plainly:
-            # it is also the proof that the dataset was already current.
-            echo "dataset already matches the parser; nothing to commit"
-            exit 0
-          fi
-          git commit -m "data: re-promote after ${GITHUB_SHA:0:7}"
-
-          # Same recovery as the scraping workflows, and for the same reason:
-          # anything can land while this runs. Rebase onto the branch being
-          # pushed -- not onto main unconditionally, which is a no-op on any
-          # other ref and retries the identical rejected push three times.
-          # -X theirs favours the commit being replayed, which is ours: these
-          # files are regenerated output, so the fresh copy always wins.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          paths: "data site"
+          subject: "data: re-promote after {sha}"
+          nothing: "dataset already matches the parser; nothing to commit"

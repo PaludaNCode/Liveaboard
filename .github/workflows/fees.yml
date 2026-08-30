@@ -115,52 +115,9 @@ jobs:
             --revision HEAD --headline)
           echo "headline=${headline}" >> "$GITHUB_OUTPUT"
 
-      - name: Commit
-        # Through the environment, not `${{ }}`: the headline carries boat
-        # names that came off somebody else's web page, and interpolating
-        # those straight into a shell line is how a scraped string becomes a
-        # command.
-        env:
-          HEADLINE: ${{ steps.changed.outputs.headline }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data site
-          if git diff --cached --quiet; then
-            echo "fees unchanged this week"
-            exit 0
-          fi
-          # Every run is a commit, so the git history doubles as price history:
-          # `git log -p data/` shows exactly which fee moved, and when — and
-          # the subject says which, so finding it does not mean opening 2 MB.
-          # An `&&` guard here would be the last statement of the step under
-          # `set -e`, so an empty headline (the report step skipped, because
-          # there is no dataset yet) would fail the run rather than fall back.
-          subject="data: weekly fee refresh $(date -u +%Y-%m-%d)"
-          if [ -n "${HEADLINE}" ]; then
-            subject="${subject} — ${HEADLINE}"
-          fi
-          git commit -m "${subject}"
-
-          # A scrape takes minutes, and anything can land meanwhile -- the
-          # other scheduled job, or a merge. A plain push is rejected and the
-          # whole run's data is thrown away. Rebase and retry instead.
-          # -X theirs favours the commit being replayed, which is ours: these
-          # files are regenerated output, so the fresh copy always wins.
-          #
-          # Rebase onto the branch this run is actually on. It used to rebase
-          # onto origin/main unconditionally, which is a no-op on any other
-          # branch -- so a run dispatched against a feature branch retried
-          # three times against the wrong ref, reported "up to date" each time
-          # and threw away eight minutes of scraping.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          subject: "data: weekly fee refresh {today}"
+          headline: ${{ steps.changed.outputs.headline }}
+          nothing: "fees unchanged this week"

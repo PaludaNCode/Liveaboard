@@ -176,28 +176,9 @@ jobs:
       - name: Check what is about to be published
         uses: ./.github/actions/checks
 
-      - name: Commit the cabin book
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/cabins.json data/sales.json data/egypt-2027.json site/index.html
-          if git diff --cached --quiet; then
-            echo "nothing read; nothing to commit"
-            exit 0
-          fi
-          git commit -m "data: read $(date -u +%Y-%m-%d) cabin prices and berths"
-
-          # Same recovery as the other data-writing workflows, onto the branch
-          # this run is actually on. -X theirs favours the commit being
-          # replayed, which is ours: this file is regenerated output.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          paths: "data/cabins.json data/sales.json data/egypt-2027.json site/index.html"
+          subject: "data: read {today} cabin prices and berths"
+          nothing: "nothing read; nothing to commit"

@@ -1,0 +1,110 @@
+name: Commit and push what a data job produced
+description: >
+  Stage, commit and push, retrying onto the branch when something lands first.
+
+# Six workflows carried a byte-identical copy of this — the git identity, the
+# "nothing to commit" early exit, and the rebase-and-retry loop — differing in
+# three things only: what to stage, the commit subject, and what to say when
+# there is nothing. Forty lines of subtle shell, six times over.
+#
+# Subtle in a way that matters. `-X theirs` favours the commit being replayed,
+# which is ours, because these files are regenerated output and the fresh copy
+# must win. The rebase targets `GITHUB_REF_NAME` rather than main, because
+# rebasing onto main unconditionally is a no-op on any other ref and retries
+# the identical rejected push three times. Neither is obvious, and a copy that
+# drifts from the others is a copy that loses a run's data on a conflict.
+#
+# It is also what makes splitting the daily refresh affordable (#123): a
+# seventh source-specific workflow costs three lines here instead of forty.
+#
+# The caller must have run `actions/checkout` with a token that can push, and
+# should have run `./.github/actions/checks` first — these commits are pushed
+# with the default `GITHUB_TOKEN`, which GitHub does not trigger workflows on,
+# so that step is the only CI they will ever get (#119).
+
+inputs:
+  paths:
+    description: "What to stage, space separated. `data site` unless a job writes something narrower."
+    required: false
+    default: "data site"
+  subject:
+    description: >
+      The commit subject. Every run is a commit, so `git log --oneline data/`
+      is the price history — say which figure moved, not that one did.
+
+      Two tokens are substituted: `{today}` for the UTC date and `{sha}` for
+      the short commit. They exist because the subjects used to be built by the
+      shell (`$(date -u +%Y-%m-%d)`) and an action input is not shell — passed
+      through unchanged it would commit the dollar-sign literally. Substituted
+      rather than evaluated: a subject carries scraped boat names, and `eval`
+      on one is the injection the env-var handling below exists to prevent.
+    required: true
+  headline:
+    description: >
+      What moved, appended after an em dash when it is not empty.
+
+      Its own input rather than part of `subject`, for two reasons. It is the
+      one field that carries **scraped** text — boat names off somebody else's
+      page — so it wants the env-var handling below stated once rather than
+      re-derived by each caller. And it is often absent: `fees.yml` guarded
+      that and `refresh.yml` did not, so a refresh with nothing to report
+      committed `data: daily refresh 2026-08-30 — ` with a dangling dash. One
+      guard, in one place.
+    required: false
+    default: ""
+  nothing:
+    description: "What to print when there is nothing to commit. Not a failure."
+    required: false
+    default: "nothing changed"
+
+runs:
+  using: composite
+  steps:
+    - name: Commit and push
+      shell: bash
+      # Through the environment, never `${{ }}` inside the script. A subject
+      # carries boat names that came off somebody else's web page, and
+      # interpolating those straight into a shell line is how a scraped string
+      # becomes a command.
+      env:
+        PUBLISH_PATHS: ${{ inputs.paths }}
+        PUBLISH_SUBJECT: ${{ inputs.subject }}
+        PUBLISH_HEADLINE: ${{ inputs.headline }}
+        PUBLISH_NOTHING: ${{ inputs.nothing }}
+      run: |
+        set -euo pipefail
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Unquoted on purpose: `paths` is a list written by a workflow author,
+        # never by a source, and it has to word-split into several arguments.
+        # shellcheck disable=SC2086
+        git add -A $PUBLISH_PATHS
+
+        if git diff --cached --quiet; then
+          echo "${PUBLISH_NOTHING}"
+          exit 0
+        fi
+        # Two fixed tokens, expanded by parameter substitution rather than by
+        # evaluating the subject. Nothing else in it is interpreted.
+        subject=${PUBLISH_SUBJECT//\{today\}/$(date -u +%Y-%m-%d)}
+        subject=${subject//\{sha\}/${GITHUB_SHA:0:7}}
+        if [ -n "${PUBLISH_HEADLINE}" ]; then
+          subject="${subject} — ${PUBLISH_HEADLINE}"
+        fi
+        git commit -m "${subject}"
+
+        # Anything can land while a crawl runs -- another scheduled job, or a
+        # merge. A plain push is rejected and the whole run's data is thrown
+        # away, so rebase and retry instead.
+        branch="${GITHUB_REF_NAME}"
+        for attempt in 1 2 3; do
+          if git push origin "HEAD:${branch}"; then
+            exit 0
+          fi
+          echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
+          git fetch origin "$branch"
+          git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
+        done
+        echo "::error::could not push after 3 attempts"
+        exit 1
