@@ -451,6 +451,8 @@ Each of these cost a cycle at least once.
 | Do the operators' own region lists ever name the wrong sea? | **Yes, and it is theirs, not ours.** Topaz sells "North Wrecks Reefs, Tiran and Dahab" with St Johns and Zabargad in its curated regions; Odyssey's "Golden Loop: North" carries St Johns. Both are live. Worth knowing before blaming a parser for a southern reef on a northern row. | same |
 | Is "What to expect" a day-by-day itinerary? | **Not reliably.** Only 12 of 67 vessels head every section with a day; 7 head none with one, and 48 mix days with places. Parse it as headings, not as days — and the days that do appear are a sketch, non-contiguous, and disclaimed outright by some operators. | `tools/probe_itinerary_prose.py`, all 67 vessels |
 | Does every vessel publish that prose? | **Yes, 67/67** — and every one of the four headings (`Overview`, `Route`, `What to expect`, `Key regions`) appears on all 67, so a fragment missing one is a parse failure rather than a quiet operator. | same run |
+| Does a vessel page carry all four season months at once, so one fetch could replace four? | **No, and it is not close.** A bare fetch returns **the next ten sailings from today** — a count cap, not a date window: five vessels, exactly 10 `Event` nodes each, and 0 in season on four of them. The season is nine months out. Marselia Star is the apparent exception and proves the rule — it reaches 2027-05 with 2 of its 7 season sailings only because it sails so rarely that ten sailings carry it that far. This also explains the "746 departures spanning 2026-09 to 2027-10" recorded against an early bare-fetch run: ten per vessel across ~75 vessels, a range produced by the sparse boats, never a wide window. **The 320-fetch saving does not exist.** | `tools/probe_season_months.py`, 5 vessels × 5 fetches |
+| Do multi-month selector forms work — `?m=5/2027&m=6/2027`, or `?m=5-8/2027`? | **No, and they fail dangerously.** Both are guesses (neither appears anywhere on the site) and both were *accepted* rather than rejected: each returned 4 `Event` nodes, all in 2026-09 — **fewer than the bare page's 10**, with no error and no empty response. A selector the server does not understand degrades to a silent subset, which is the one failure mode this crawl must never build on. Do not try these again, and do not invent a third form without probing it. | same run |
 | Is a vessel on the barren skip list actually empty, or is the crawl cementing a parse failure? | **Actually empty.** The four the second seller contradicts — Bella 2, Bella 3, Eriny, Blue Pearl, on which PADI sells 87 season sailings — answered all sixteen vessel-months with **1 `Product` node and 0 `Event` nodes**: the source stating this boat sells nothing that month, which is an answer, and never the no-structured-data state `carry_unread` exists for. So `barren.json` is holding back boats that really do sell nothing here, and the second seller is simply the only one selling them. This does **not** make `padi_only` the right label for those rows ([#110](https://github.com/PaludaNCode/Liveaboard/issues/110)): `promote` knows what the run recorded, and the run recorded a skip, so `not_asked` stays the honest output. Re-probe only if a boat's PADI season grows while its skip persists. | `tools/probe_barren.py`, 16 pages |
 
 ## Still open
@@ -463,9 +465,17 @@ Each of these cost a cycle at least once.
   ([#52](https://github.com/PaludaNCode/Liveaboard/issues/52),
   [#34](https://github.com/PaludaNCode/Liveaboard/issues/34),
   [#36](https://github.com/PaludaNCode/Liveaboard/issues/36)).
-- **Whether the vessel page carries all four season months at once.** If it
-  does, that is four fetches per vessel down to one. Unprobed — do not assume
-  either way.
+- **Whether a `?m=` month page can truncate.** The bare page caps at ten
+  sailings (below), and nothing says the month pages do not share that cap. It
+  has never been reached: the busiest vessel-month this site has read is
+  Snefro Pearl's May 2027 at **9**, and no vessel-month in the dataset reaches
+  10. So the cap is untestable from the season and unprovable either way —
+  what is written down instead is the trigger. **A vessel-month that reads
+  exactly 10 is a truncation suspect, not a busy boat**, and should be checked
+  against the vessel's own cadence before it is believed. Probed as far as it
+  goes: near-term months on the two busiest boats returned 4, 8, 9, 8 and 8,
+  every one consistent with a boat sailing every three days rather than with a
+  ceiling.
 
 ## robots.txt, and the blank line
 
