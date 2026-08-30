@@ -449,8 +449,15 @@
                          calendar runs to a different depth on every boat, so
                          this is a fact about who was asked and not about the
                          trip.
-       PADI only         liveaboard.com does not list the date -- and on 22
-                         boats does not sell berths at all.
+       PADI only         PADI is the only seller this site has a price from.
+                         On most of those rows liveaboard.com does not list
+                         the date, and on 22 boats does not sell berths at
+                         all -- but on 87 it was simply never asked, because
+                         the barren list held its vessel back for the week.
+                         The chip is a fact about who was asked, which is why
+                         it can hold all three; the *sentence* in the expanded
+                         row is the one that must not overstate, and it does
+                         not.
 
      Both sellers are named, and named the way the Seller column names them.
      The middle chip read "Here only", which asks the reader to know which of
@@ -1198,6 +1205,21 @@
           + "the only seller and everything above is PADI’s: the berth price "
           + "and the required extras its itinerary publishes. There is no "
           + "second bill to set against it."
+        : row.d.not_asked
+        /* The third case, and the reason it exists: `data/barren.json` holds
+           a vessel back for a week after a crawl found it selling nothing,
+           and while it does, nobody reads that boat's pages. Saying
+           "liveaboard.com does not list this sailing" about it states a
+           result for a page this site did not open — on 87 sailings across
+           four boats. Not asked is weaker and it is what the data supports.
+           Same rule as `fees_known`: no fee lines means nobody looked, not
+           that there are none. */
+        ? "liveaboard.com was not asked about this sailing — a recent crawl "
+          + "found this boat selling nothing and it is re-checked weekly, so "
+          + "its pages were not read this run. PADI Travel is the seller this "
+          + "site has a price from; whether the other one lists the date is "
+          + "not something this page knows. The fees under the berth price "
+          + "are the vessel’s own, which it charges on board whoever sold it."
         : "liveaboard.com does not list this sailing, so PADI Travel is the "
           + "only seller and there is one bill rather than two. The berth "
           + "price above is PADI’s; the fees under it are the vessel’s own, "

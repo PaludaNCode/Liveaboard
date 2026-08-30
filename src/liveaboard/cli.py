@@ -345,6 +345,18 @@ def cmd_scrape(args: argparse.Namespace) -> int:
                 "itineraries": combined.itineraries,
                 "departures": combined.departures,
                 "warnings": combined.warnings,
+                # The vessels this run chose not to visit, by name rather than
+                # as a count. The warning above already says "skipped 13
+                # vessel(s)", which is enough for a person reading the log and
+                # useless to `promote`: without the names it cannot tell a boat
+                # the other seller does not sell from a boat nobody asked
+                # about, and it published the stronger claim for both.
+                #
+                # Recorded rather than re-derived. The skip rule is
+                # `_barren`'s, it is date-dependent, and promotion is pure --
+                # so the only honest source of "was this vessel visited" is the
+                # run that did or did not visit it.
+                "not_asked": sorted(skip_vessels),
             },
             indent=2,
             ensure_ascii=False,

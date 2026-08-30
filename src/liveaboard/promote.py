@@ -1612,6 +1612,7 @@ def _padi_only_departures(
     *,
     season: tuple[date, date] | None,
     retrieved: str,
+    not_asked: frozenset[str] = frozenset(),
 ) -> tuple[list[dict[str, Any]], list[str]]:
     """The sailings PADI sells on dates the first source does not list.
 
@@ -1693,6 +1694,23 @@ def _padi_only_departures(
                              else "SoldOut" if sailing["availability"] == 0
                              else "InStock"),
             "padi_only": True,
+            # ...but "the other seller does not list this" is a claim about a
+            # page somebody read, and on a vessel the barren list held back
+            # nobody read one. `data/barren.json` skips a boat found selling
+            # nothing for a week at a time to save the requests, and PADI sells
+            # 87 season sailings on four of those -- Bella 2, Bella 3, Eriny
+            # and Blue Pearl -- every one of which the page was calling
+            # "liveaboard.com does not list this sailing" on the strength of a
+            # run that chose not to look.
+            #
+            # That is the precise distinction the barren list was built to
+            # preserve, arriving one layer further down: `discover` keeps it
+            # through `not_looked_at`, and `promote` lost it because a boat
+            # with no candidate departures is indistinguishable from a boat
+            # nobody asked about. It costs one key, and it is the same shape as
+            # `fees_known` -- no fee lines means nobody looked, not that there
+            # are none.
+            **({"not_asked": True} if slug in not_asked else {}),
             "provenance": {
                 "kind": SourceKind.SCRAPED.value,
                 "source_id": "padi.com",
@@ -1948,6 +1966,7 @@ def promote(
         {key: next(iter(names)) for key, names in by_key.items() if len(names) == 1},
         season=season,
         retrieved=(padi_departures or {}).get("collected") or "",
+        not_asked=frozenset(candidate.get("not_asked") or ()),
     )
     skipped.extend(unparsed)
     for departure in padi_only:
@@ -2269,6 +2288,11 @@ def promote(
             # one file.
             if item.get("padi_only"):
                 entry["padi_only"] = True
+                # A weaker claim than the one beside it, and the honest one:
+                # PADI is the only seller *this run asked*. See
+                # `_padi_only_departures`.
+                if item.get("not_asked"):
+                    entry["not_asked"] = True
             # Carried on the departure, not the itinerary: the operator
             # discounts specific dates, and the price scraped is already the
             # discounted one.

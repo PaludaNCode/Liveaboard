@@ -257,6 +257,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   seller's figure repeated into the second seller's field prints as two sellers
   agreeing about a sailing one of them does not offer — and the page marks it
   `PADI only`, which is a fact about who was asked and not about the trip.
+  **And on a vessel the barren list held back, even that is too strong.** The
+  crawl keeps the distinction — `discover` records a skip through
+  `not_looked_at` — and `promote` lost it, publishing *"liveaboard.com does not
+  list this sailing"* on 87 sailings across Bella 2, Bella 3, Eriny and Blue
+  Pearl: a result for a page nobody opened. All four have a vessel page the fee
+  scraper read in full. `candidate.not_asked` names what the run declined to
+  visit, recorded by the crawl rather than re-derived — the skip rule is
+  date-dependent and promotion is pure — and the row says *not asked* instead.
+  Same rule as `fees_known`: no fee lines means nobody looked, not that there
+  are none.
 - **A boat only the second seller lists is still a boat.** 22 Egyptian
   liveaboards on PADI mapped to nothing of ours; ids for them are minted in
   `data/padi_aliases.json` under `padi_only` and 10 carry season sailings, so
