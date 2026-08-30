@@ -1498,14 +1498,32 @@
   /* The overview, in one line, and it leads with the number that answers the
      question. Both sellers are counted, and the sailing count wins over the
      offer count: 268 discounted sailings is what a reader can act on, where
-     PADI's 13 is thirteen boats' worth of "there is a sale on". The change
-     figure stays PADI's and says so — it is the only half with a day-by-day
-     committed book to diff, because the cabin file keeps one reading. */
+     PADI's 13 is thirteen boats' worth of "there is a sale on".
+
+     Both halves now say what moved, and each says it under its own seller's
+     name and its own reading date. They are different books read on different
+     days — `data/deals.json` from PADI's listing, `data/sales.json` derived
+     from the booking pages — and one date over two sellers dates half of them
+     wrong. The liveaboard half leads because it is the larger signal: the day
+     the Red Sea Aggressors' sale ended, PADI's listing moved three offers and
+     the booking pages moved 36 sailings. */
   function dealsSummary(deals, changed) {
     var sale = deals.on_sale, offers = deals.offers || [];
     var n = sale ? sale.sailings : offers.length;
-    var line = n + (n === 1 ? " discounted sailing" : " discounted sailings");
+    var line = sale || offers.length
+      ? n + (n === 1 ? " discounted sailing" : " discounted sailings")
+      : "nothing discounted";
     if (sale) line += " on " + sale.boats.length + " boats";
+
+    var shifted = deals.on_sale_changes;
+    if (shifted && !shifted.first_reading) {
+      var moved = 0;
+      (shifted.moves || []).forEach(function (m) { moved += m.sailings; });
+      line += " · " + (moved
+        ? moved + " moved on liveaboard.com"
+        : "nothing moved on liveaboard.com") + " since " + shortDate(shifted.previous);
+    }
+
     if (!offers.length) return "On sale · " + line;
     if (deals.first_reading) line += " · PADI's listing, first reading";
     else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
@@ -1600,7 +1618,11 @@
     var moved = deals.changes || {};
     var names = moved.names || {};
     var box = el("div", "deals-moved");
-    box.appendChild(el("h4", null, "What moved since " + shortDate(deals.previous)));
+    /* Named, now that both sellers have a change log. Two adjacent sections
+       headed "What moved since …" over two different books read on two
+       different days is exactly the splice this page refuses everywhere else. */
+    box.appendChild(el("h4", null, "What moved on padi.com since " +
+      shortDate(deals.previous)));
 
     if (moved.partial) {
       /* The distinction the whole pipeline turns on: a reading nobody could
@@ -1690,12 +1712,82 @@
     return table;
   }
 
+  /* What moved on the booking pages between the last two readings of them.
+
+     The other seller's half of "what changed", and the bigger one: 263
+     discounted sailings on 22 boats against PADI's 13, with nine of those
+     boats appearing in no deals listing anywhere. It could not be drawn until
+     there was a second committed day to diff — `data/cabins.json` is rewritten
+     whole each run — which is what `data/sales.json` is for.
+
+     Grouped by boat, per move, because that is the unit an operator discounts
+     in and because the ungrouped list is the failure being fixed: "36 sailings
+     no longer 33% off" is one line that says more than 36 identical ones. */
+  function salesChanges(shifted) {
+    var box = el("div", "deals-moved");
+    box.appendChild(el("h4", null, "What moved on liveaboard.com since " +
+      shortDate(shifted.previous)));
+
+    var list = el("ul", "deals-changes");
+    (shifted.moves || []).forEach(function (m) {
+      var n = m.sailings + (m.sailings === 1 ? " sailing" : " sailings");
+      var when = " (" + shortDate(m.first) +
+        (m.last !== m.first ? " – " + shortDate(m.last) : "") + ")";
+      var off = m.pct ? m.pct + (m.pct_max ? "–" + m.pct_max : "") + "% off" : "discounted";
+      var said, cls;
+      if (m.kind === "started") {
+        cls = "d-new";
+        said = n + " newly " + off;
+      } else if (m.kind === "ended") {
+        cls = "d-gone";
+        /* The rate it *was*, not a rate it is: a sale that ended is described
+           by what came off the price while it ran. */
+        said = n + " no longer " + off;
+      } else {
+        cls = "d-moved";
+        said = n + " " + (m.was_pct + (m.was_pct_max ? "–" + m.was_pct_max : "")) +
+          "% → " + off;
+      }
+      list.appendChild(el("li", cls, m.boat_name + " — " + said + when));
+    });
+
+    if (!list.childNodes.length) {
+      box.appendChild(el("p", "deals-note",
+        "No sailing started, ended or changed its discount."));
+    } else {
+      box.appendChild(list);
+    }
+
+    /* Said out loud, with a count, every time. A sailing missing from either
+       reading has not come off sale — its booking page was not read — and a
+       change list that quietly narrows its own scope reads as "that was
+       everything", which is the thing this site exists to object to. */
+    var one = shifted.compared === 1;
+    var note = shifted.compared + (one ? " sailing was" : " sailings were") +
+      " read on both days and compared.";
+    if (shifted.not_compared) {
+      note += " " + shifted.not_compared + " more " +
+        (shifted.not_compared === 1 ? "was" : "were") + " read on only one of " +
+        "them and " + (shifted.not_compared === 1 ? "is" : "are") +
+        " not compared: a sailing missing from a reading has not come off sale, " +
+        "it has not been looked at.";
+    }
+    box.appendChild(el("p", "deals-note", note));
+    return box;
+  }
+
   function drawDeals() {
     var deals = D.deals;
     var host = document.getElementById("deals");
     if (!host || !deals) return;
     var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
-    if (!offers.length && !fleet.length) return;
+    /* The change log counts as content of its own. The day every sale on the
+       fleet ends there is no table to draw and "36 sailings are no longer 33%
+       off" is the whole of what the panel has to say — which is precisely the
+       thing it could not say before. */
+    var shifted = deals.on_sale_changes;
+    var moved = shifted && !shifted.first_reading;
+    if (!offers.length && !fleet.length && !moved) return;
 
     var changed = ((deals.changes || {}).new || []).length +
       ((deals.changes || {}).withdrawn || []).length +
@@ -1720,6 +1812,7 @@
         "read, and can end overnight."));
       body.appendChild(fleetTable(fleet));
     }
+    if (moved) body.appendChild(salesChanges(shifted));
 
     if (!offers.length) { host.hidden = false; return; }
 

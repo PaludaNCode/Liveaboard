@@ -135,6 +135,45 @@ differs is coverage. PADI publishes one exemplar sailing per vessel; this
 publishes the whole window, and the window has a cliff — Red Sea Aggressor II is
 33% off every week from 1 May to 24 July and full price from 31 July.
 
+### Saying what moved, without keeping the ladders
+
+`data/cabins.json` is rewritten whole every run and carries one `collected`
+date, so for eleven readings this source could say what was on sale today and
+nothing at all about what had changed. That is the same failure `data/deals.json`
+was shaped to avoid — *a change log is a diff between two committed days* — and
+the cabin book predates the rule.
+
+It showed on 2026-08-30, when the Red Sea Aggressors' 33% sale ended. The page
+reported it **from PADI**, which publishes one exemplar sailing per vessel, so
+it said *three offers withdrawn* for an event that moved **36 sailings**. The
+bigger of the two signals was the one that could not speak, and nine of the 22
+boats discounted here appear in no deals listing anywhere.
+
+Thirty days of `cabins.json` is not a file this repository should carry — 70,000
+lines, mostly cabin names and amenities that never change. So the book kept is a
+**projection**: `tools/derive_sales.py` reads the committed cabin book and
+writes `data/sales.json`, one entry per day, three fields per sailing.
+
+```
+"red-sea-aggressor-ii::2027-05-01": [1849.0, 2760.0, "USD"]
+                                     price   list     currency
+```
+
+Two things about its shape are load-bearing:
+
+* **Filed by each record's own `collected`, never the book's header.** A capped
+  `fetch_cabins.py --limit N` run merges, so most of the file is older than the
+  header says; taking the whole file would report a week-old price as this
+  morning's.
+* **A census, not a list of sales.** Every sailing read that day is in it,
+  discounted or not, because the keys are the only thing separating *not on
+  sale* from *not looked at*. `promote` compares the two days over the sailings
+  both readings covered and prints the count of those it could not.
+
+Measured: a day is 864 sailings and ~66 KB, so seven days is ~460 KB against
+`cabins.json`'s 1.9 MB beside it. Thirty days — the deals book's own figure —
+would be 2 MB, which is why `KEEP_DAYS` differs between the two books.
+
 ### The per-trip itinerary fragment
 
 ```

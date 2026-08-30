@@ -119,6 +119,7 @@ src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   itinerary, fees, gear, vessel   (the last three need a browser)
 templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, fetch_deals,
+                  fetch_cabins, derive_sales,
                   scrape_fees, reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
@@ -134,6 +135,7 @@ tests/            stdlib unittest, no dependencies
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
 | `data/deals.json` | what PADI Travel is discounting, one entry per day it was read | yes |
+| `data/sales.json` | what liveaboard.com's booking pages were advertising, one entry per day they were read | yes |
 | `data/CHANGES.md` | what moved on each refresh, newest first | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
@@ -150,6 +152,16 @@ carries a **change log**, and a change log is a diff between two committed days.
 Re-reading the listing recovers today's offers and never yesterday's, so a log
 computed from a build artifact would go quietly silent the moment the artifact
 aged out — reporting "no changes" rather than "nothing to compare against".
+
+`sales.json` is that rule applied to the other seller. liveaboard.com publishes
+no deals listing at all — it strikes the list price through beside every
+discounted cabin — and `cabins.json` is rewritten whole each run, so the larger
+of the two signals could say what was on sale and not what had moved. It is a
+projection of the cabin book onto the three fields a diff needs (advertised
+price, the list price beside it, the currency), written by
+`tools/derive_sales.py` and filed under the day each booking page was read. The
+day the Red Sea Aggressors' 33% sale ended, PADI's half reported three offers
+withdrawn; this one reports the 36 sailings that actually moved.
 
 `archive.json` exists because current prices can always be re-scraped and past
 ones cannot. It carries ratings, cabin counts, occupancy, amenities and

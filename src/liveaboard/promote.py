@@ -1172,6 +1172,134 @@ def _on_sale_summary(
     }
 
 
+def _cut(price: float, was: float) -> int:
+    """A markdown as a percentage, the way ``_sale_for`` states one.
+
+    One function rather than two so the change log and the row it explains can
+    never round differently -- "36 sailings no longer 33% off" beside a table
+    that had said 32% is the panel disagreeing with itself.
+    """
+    return int(round(100 * (1 - price / was)))
+
+
+def _sales_block(
+    sales: dict[str, Any] | None,
+    boats: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """What moved on liveaboard.com's booking pages between the last two readings.
+
+    The half of the change log that could not previously speak. PADI publishes
+    a deals *listing* and `data/deals.json` keeps a day per reading of it, so
+    `_deals_block` can diff two committed days; liveaboard.com publishes no
+    listing at all and `data/cabins.json` keeps only the last reading, so there
+    was no second day here to diff against. `tools/derive_sales.py` writes one
+    -- three fields per sailing, filed under the day the booking page was read.
+
+    It is the bigger of the two signals: 263 discounted sailings on 22 boats
+    against PADI's 13, and nine of those boats appear in no deals listing
+    anywhere. The day the Red Sea Aggressors' 33% sale ended, PADI's half
+    reported *three offers withdrawn* -- one exemplar sailing per vessel -- for
+    an event that moved **36 sailings**.
+
+    **Only over the sailings both readings covered.** A key is in a day's
+    census exactly when that booking page was read, so a sailing missing from
+    either side has not come off sale: nobody looked at it. The count of those
+    is reported rather than dropped, which is the same rule `_deals_block`
+    applies through `partial` and the crawl applies through `not_looked_at`.
+
+    Grouped by boat because an operator discounts a season rather than a
+    sailing, and because the ungrouped list is the failure being fixed: 36
+    identical lines say less than one line saying 36. Bounded by the fleet --
+    at most three moves per boat -- so nothing is capped and nothing is
+    silently dropped.
+    """
+    days = (sales or {}).get("days") or {}
+    if not days:
+        return None
+    order = sorted(days)
+    today = order[-1]
+    now = (days[today] or {}).get("sailings") or {}
+    if not now:
+        return None
+
+    block: dict[str, Any] = {"read": today, "sailings": len(now)}
+    if len(order) < 2:
+        # A first reading has nothing to be a change from, and saying so is not
+        # the same as saying nothing changed.
+        block["first_reading"] = True
+        return block
+
+    previous = order[-2]
+    before = (days[previous] or {}).get("sailings") or {}
+    block["previous"] = previous
+
+    both = set(now) & set(before)
+    listed = {key for key in both if key.split("::")[0] in boats}
+    block["compared"] = len(listed)
+    # Stated every time, with a count, because a change report that quietly
+    # narrows its own scope reads as "that was everything" -- the failure this
+    # project exists to correct in other people.
+    block["not_compared"] = len(set(now) ^ set(before))
+    if len(both) != len(listed):
+        block["unlisted"] = len(both) - len(listed)
+
+    started: dict[str, list[tuple[str, int | None]]] = defaultdict(list)
+    ended: dict[str, list[tuple[str, int | None]]] = defaultdict(list)
+    changed: dict[str, list[tuple[str, int, int]]] = defaultdict(list)
+
+    for key in sorted(listed):
+        boat, _, start = key.partition("::")
+        (was_now, was_before) = (now[key][1], before[key][1])
+        if was_now and not was_before:
+            started[boat].append((start, _cut(now[key][0], was_now)))
+        elif was_before and not was_now:
+            ended[boat].append((start, _cut(before[key][0], was_before)))
+        elif was_now and was_before:
+            after, first = _cut(now[key][0], was_now), _cut(before[key][0], was_before)
+            if after != first:
+                changed[boat].append((start, first, after))
+
+    moves: list[dict[str, Any]] = []
+
+    def move(boat: str, kind: str, sailings: list[tuple[str, Any]]) -> dict[str, Any]:
+        cuts = sorted({c for _, c in sailings if c})
+        row: dict[str, Any] = {
+            "boat": boat,
+            "boat_name": str(boats[boat]["name"]),
+            "kind": kind,
+            "sailings": len(sailings),
+            "first": min(s for s, _ in sailings),
+            "last": max(s for s, _ in sailings),
+        }
+        # A range only where the boat really runs more than one, as the fleet
+        # table does: an operator discounts a season at one rate, and printing
+        # "33–33%" everywhere to accommodate the exception is noise on every
+        # other row.
+        if cuts:
+            row["pct"] = cuts[0]
+            if cuts[-1] != cuts[0]:
+                row["pct_max"] = cuts[-1]
+        return row
+
+    for boat, rows in started.items():
+        moves.append(move(boat, "started", rows))
+    for boat, rows in ended.items():
+        moves.append(move(boat, "ended", rows))
+    for boat, rows in changed.items():
+        row = move(boat, "changed", [(s, after) for s, _, after in rows])
+        was = sorted({first for _, first, _ in rows})
+        row["was_pct"] = was[0]
+        if was[-1] != was[0]:
+            row["was_pct_max"] = was[-1]
+        moves.append(row)
+
+    # By the name the panel prints, then by what happened, so the order does
+    # not depend on the order of a dict. Promotion is pure and CI compares its
+    # output byte for byte.
+    block["moves"] = sorted(moves, key=lambda m: (m["boat_name"].lower(), m["kind"], m["boat"]))
+    return block
+
+
 STALE_LADDER = 0.03
 """How far a ladder's bottom rung may sit from the row's advertised price.
 
@@ -1579,6 +1707,7 @@ def promote(
     padi_departures: dict[str, Any] | None = None,
     cabins: dict[str, Any] | None = None,
     deals: dict[str, Any] | None = None,
+    sales: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -2271,10 +2400,13 @@ def promote(
     # cabin pass already reads. That is 263 sailings on 22 boats, and 9 of
     # those boats appear in no deals listing anywhere.
     #
-    # No change log for this half, and the reason is the same rule that gives
-    # PADI's one: `data/deals.json` keeps a day per reading and
-    # `data/cabins.json` keeps only the last, so there is no second committed
-    # day here to diff against. Promotion is pure and cannot go to git for one.
+    # It has a change log of its own now, and by the same rule that gives PADI
+    # one: `data/sales.json` keeps a day per reading of the booking pages, so
+    # there is a second committed day to diff against. The cabin book itself
+    # still keeps only the last reading -- 70,000 lines of cabin names and
+    # amenities that never change -- so the sale book is a projection of it
+    # onto the three fields a diff needs. Promotion stays pure either way: it
+    # reads two committed days and never goes to git for one.
     on_sale = _on_sale_summary(
         departures,
         {i["id"]: i["boat_id"] for i in itineraries},
@@ -2283,6 +2415,12 @@ def promote(
     )
     if on_sale:
         deals_block["on_sale"] = on_sale
+    # Beside the summary rather than inside it, because the day every sale on
+    # the fleet ends is the day there is no summary to hang it off -- and it is
+    # also the day the change log is the only thing left worth printing.
+    moved = _sales_block(sales, boats)
+    if moved:
+        deals_block["on_sale_changes"] = moved
     if deals_block:
         payload["deals"] = deals_block
 

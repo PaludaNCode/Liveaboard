@@ -376,6 +376,21 @@ no request at all. Paging stops when a page adds no offer identity already seen
 — never on a page number, because the page beside it proves a page number here
 carries no information.
 
+**The other seller's sales are kept the same way, as a projection.**
+liveaboard.com publishes no listing, so its markdowns are read off the booking
+pages by `fetch_cabins.py` — and `data/cabins.json` is rewritten whole each run,
+which left the *bigger* signal (263 sailings on 22 boats against PADI's 13) able
+to say what was on sale and not what had moved. `tools/derive_sales.py` reads
+the committed cabin book and writes `data/sales.json`: one day per reading,
+three fields per sailing, no request of its own. Two things are load-bearing. It
+files each sailing under **that record's own `collected`**, never the book's
+header, because a capped run merges and leaves most of the file older than its
+header says. And a day is a **census, not a list of sales** — every sailing read
+that day is in it, discounted or not, because the keys are the only thing
+separating *not on sale* from *not looked at*; `promote` diffs over the sailings
+both readings covered and prints the count of those it could not. Thirty days of
+it would be 2 MB, so `KEEP_DAYS` is a week here and a month there.
+
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page
 published, parsed or not — re-scraping recovers today's prices, never

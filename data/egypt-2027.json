@@ -136475,6 +136475,11 @@
           "pct": 10
         }
       ]
+    },
+    "on_sale_changes": {
+      "read": "2026-08-28",
+      "sailings": 864,
+      "first_reading": true
     }
   },
   "stale_ladders": [

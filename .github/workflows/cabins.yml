@@ -118,6 +118,28 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
+      # The cabin book is rewritten whole every run and keeps one `collected`
+      # date, so it can say what is on sale today and nothing about what moved.
+      # This projects the reading onto the three fields a diff needs — the
+      # advertised price, the list price struck through beside it, and the
+      # currency — and files it under the day each booking page was actually
+      # read. It fetches nothing; it is a projection of the file above.
+      #
+      # Immediately after the fetch and before promotion, because `promote`
+      # reads the sale book to build the change log: a run that wrote
+      # cabins.json and skipped this would publish today's sales against
+      # yesterday's diff.
+      - name: Keep the day's sales, so the change log has a second day to diff
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/derive_sales.py \
+            --cabins data/cabins.json \
+            --out data/sales.json \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
       # The dataset reads this book now, and CI compares the committed dataset
       # against what promote makes of the committed inputs. So a run that
       # writes cabins.json and stops leaves the two disagreeing — a red build,
@@ -134,7 +156,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/cabins.json data/egypt-2027.json site/index.html
+          git add -A data/cabins.json data/sales.json data/egypt-2027.json site/index.html
           if git diff --cached --quiet; then
             echo "nothing read; nothing to commit"
             exit 0

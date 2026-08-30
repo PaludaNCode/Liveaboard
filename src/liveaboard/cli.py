@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections import Counter
 from collections.abc import Iterable
 from datetime import date
 from pathlib import Path
@@ -539,9 +540,21 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if deals_path.exists():
         deals = json.loads(deals_path.read_text(encoding="utf-8"))
 
+    # And the same question asked of the other seller, which publishes no deals
+    # listing at all: what its booking pages were advertising, one entry per day
+    # they were read. Derived from the cabin book by tools/derive_sales.py
+    # rather than fetched, because the cabin book keeps one reading and a change
+    # log is a diff between two committed days. Absent means the panel states
+    # today's sales without saying which of them moved.
+    sales = None
+    sales_path = Path(args.sales)
+    if sales_path.exists():
+        sales = json.loads(sales_path.read_text(encoding="utf-8"))
+
     payload = promote(
         candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
         padi=padi, padi_departures=padi_departures, cabins=cabins, deals=deals,
+        sales=sales,
     )
 
     block = payload.get("deals")
@@ -573,6 +586,34 @@ def cmd_promote(args: argparse.Namespace) -> int:
                 f" {len(moved.get('withdrawn') or [])} withdrawn,"
                 f" {len(moved.get('changed') or [])} changed"
             )
+
+    # The other seller's half of the same panel. Reported separately because it
+    # is a different book read on a different day, and one date over two
+    # sellers dates half of them wrong.
+    shifted = (block or {}).get("on_sale_changes")
+    if sales and not shifted:
+        print(f"::warning::{sales_path} holds no readable day; "
+              f"the liveaboard.com half of the change log will be blank")
+    elif shifted:
+        print(f"  booking pages read {shifted['read']} from {sales_path}:"
+              f" {shifted['sailings']} sailing(s) in that day's reading")
+        if shifted.get("first_reading"):
+            print("    first reading in the book; nothing to compare it against yet")
+        else:
+            counts: Counter = Counter()
+            for row in shifted.get("moves") or []:
+                counts[row["kind"]] += row["sailings"]
+            print(
+                f"    since {shifted['previous']}: {counts['started']} sailing(s)"
+                f" newly discounted, {counts['ended']} no longer,"
+                f" {counts['changed']} at a different rate,"
+                f" over {shifted['compared']} sailing(s) both readings covered"
+            )
+            if shifted.get("not_compared"):
+                # Never silent. A sailing only one reading covered has not come
+                # off sale; nobody looked at it.
+                print(f"    {shifted['not_compared']} sailing(s) were read on only"
+                      f" one of the two days and are not compared")
 
     if trips:
         book = {
@@ -867,6 +908,7 @@ def main(argv: list[str] | None = None) -> int:
                              default=Path("data/padi_departures.json"), type=Path)
     promote_cmd.add_argument("--cabins", default=Path("data/cabins.json"), type=Path)
     promote_cmd.add_argument("--deals", default=Path("data/deals.json"), type=Path)
+    promote_cmd.add_argument("--sales", default=Path("data/sales.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(
