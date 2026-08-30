@@ -24,21 +24,18 @@ on:
       # Any change to the library can change promote's output: promote.py most
       # directly, but classification, taxonomy and money feed it too.
       - "src/liveaboard/**"
-      # A hand-edited fact or exchange rate changes the dataset without any
-      # code changing at all.
+      # A hand-edited fact changes the dataset without any code changing at
+      # all, and nothing else re-promotes after it.
       - "data/operator_facts.json"
-      - "data/fx.json"
-      # The per-trip book, written by its own crawl in refresh.yml. It fills
-      # dive sites, dive counts and the entry bar, so a fresh one is a new
-      # dataset with no code change at all.
-      - "data/itineraries.json"
-      # The deals book, written daily by refresh.yml. A day added to it is a
-      # new panel and a new change log with no code change at all -- and the
-      # refresh commits it in the same breath as the dataset, so this is the
-      # net under the case where it does not: a deals fetch that lands while
-      # the promote step is skipped would otherwise leave `promote --check`
-      # red until something unrelated happened to touch the library.
-      - "data/deals.json"
+      #
+      # `data/fx.json`, `data/itineraries.json` and `data/deals.json` were
+      # listed here too, as a net: they were written by steps inside
+      # refresh.yml, and a fetch that landed while the promote step was
+      # skipped would leave `promote --check` red until something unrelated
+      # touched the library. #123 gave each of them its own workflow, and each
+      # of those promotes, rebuilds and runs the checks before committing --
+      # so the case the net covered no longer exists, and watching them only
+      # fired a second re-promote with nothing to do.
       - ".github/workflows/promote.yml"
   workflow_dispatch:
     inputs:
