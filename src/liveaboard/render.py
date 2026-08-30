@@ -251,6 +251,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # count, because a count without its date is presented as a fact
             # when it is a claim with a shelf life.
             "berths_read": dataset.berths_read,
+            # PADI's counts are a separate crawl on a separate day. Written
+            # only where it ran: a null beside a real date reads as "unknown",
+            # and an absent key reads as "that seller is not here", which is
+            # the true one on a dataset built without its book.
+            **({"padi_berths_read": dataset.padi_berths_read}
+               if dataset.padi_berths_read else {}),
             "counts": {
                 "departures": len(departures),
                 "itineraries": len(itineraries),

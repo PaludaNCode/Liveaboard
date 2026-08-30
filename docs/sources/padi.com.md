@@ -333,6 +333,42 @@ are. Paced at one request every two seconds, per the Cloudflare AI-bot limit of
 30/min/IP that `www.padi.com/robots.txt` documents. The whole daily read is one
 or two requests.
 
+### `availability` is berths left on the sailing, not at the price
+
+Read 2026-08-30 off `data/padi_departures.json`, which has carried the field
+since the sailings landed and used it for nothing. A plain integer on all 3,521
+sailings, 833 of them in the published season, every one of which lands on a row
+this site already publishes. **No request to anybody was needed to establish
+any of this.**
+
+Two hypotheses, both tested, one wrong:
+
+- **The hull's capacity.** Ruled out. The value varies across the calendar on 58
+  of 61 boats and sits at or under the vessel's stated guest count. It exceeds
+  it on 18 sailings, all by one or two — spec tables disagreeing about a crew
+  berth, the same margin the cabin counts disagree by.
+- **Berths left at the advertised price**, which is what liveaboard.com's ladder
+  states. **Ruled out, and this is the one that mattered.**
+
+Against the 584 season sailings where both sellers state a count:
+
+| PADI's figure vs | exact | within 2 | mean error |
+|---|---|---|---|
+| liveaboard.com's whole-sailing total | **451 (77%)** | 514 (88%) | 1.5 berths |
+| liveaboard.com's count at the advertised price | 126 (22%) | 176 (30%) | 7.3 berths |
+
+The two crawls run a day apart, which is what the 23% of near-misses are. So
+PADI answers *how many berths are left on this sailing at any price* — the
+weaker of the two claims the invariants already distinguish, and the only one
+obtainable without a ladder. `promote` puts it in its own slot; letting it fill
+the advertised-price slot would have relabelled "22 aboard" as "22 at this
+price" on the 249 rows that have no ladder to contradict it.
+
+**They disagree outright on 24 sailings** — 21 where PADI still sells berths
+liveaboard.com calls full, 3 the other way. Both are printed under the name of
+whoever said it and the day they said it, which are a day apart and stated
+separately for that reason.
+
 ### The fields that matter
 
 | Field | Example | Note |

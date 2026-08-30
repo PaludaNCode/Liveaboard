@@ -929,23 +929,55 @@ twenty-two, on a field written once per departure.
 
 def _berth_blocks(
     record: dict[str, Any] | None,
+    sailing: dict[str, Any] | None,
     names: dict[str, int],
     fx_table: Any,
 ) -> list[dict[str, Any]]:
     """What each seller says is left on this sailing, and at what price.
 
-    A **list**, one block per seller, though only liveaboard.com fills one
-    today. PADI sells 601 of these same sailings and publishes an availability
-    figure of its own, so the shape that holds two answers is the shape to
-    write now -- a second seller arriving must not mean rewriting the page's
-    only view of what is left ([#92]).
+    A **list**, one block per seller, and both sellers fill one now ([#92]).
+    They are answering two different questions and the block has a slot for
+    each, because merging them would be a number neither of them published:
 
-    A seller that states a count but no ladder simply has no ``cabins`` key.
-    That is not a gap to fill with one invented rung: "24 places" and "24
-    places at £1,748" are different claims, and only the second is a ladder.
+    * **at the advertised price** -- summed across every room selling at it.
+      Only a ladder can say this, so only liveaboard.com does.
+    * **on the sailing** -- every berth still for sale at any price. Both say
+      it: liveaboard.com by adding its ladder up, PADI Travel as the single
+      figure it publishes instead of a ladder.
+
+    Which of the two PADI states was measured rather than assumed, and the
+    answer is the second. Across the 584 sailings where both speak, PADI's
+    figure equals liveaboard's whole-sailing total on 77% exactly and 88%
+    within two berths -- a day's drift between the two crawls -- against 22%
+    and a mean error of 7 berths for the count at the advertised price. Putting
+    it in the first slot would have relabelled "22 aboard" as "22 at this
+    price" on 258 rows that have no ladder to contradict it.
+
+    They disagree outright on 24 sailings: 21 where PADI still sells berths
+    liveaboard.com calls full, 3 the other way. That is not a reason to prefer
+    one -- it is the thing this site exists to show, and both are printed under
+    the name of whoever said it.
+
+    A seller that states a count but no ladder simply has no ``cabins``. That
+    is not a gap to fill with one invented rung: "24 places" and "24 places at
+    £1,748" are different claims, and only the second is a ladder.
     """
+    blocks: list[list[Any]] = []
+
+    # PADI's, built first and appended last so liveaboard.com stays the block
+    # the page reads for the advertised price. Its `availability` is a plain
+    # integer on all 3,521 sailings and needs no currency, no ladder and no
+    # conversion -- which is why it can be published from data already
+    # committed, with no request to anybody.
+    padi_left = (sailing or {}).get("availability")
+    padi_block = (
+        [SELLERS.index("padi.com"), None, None, int(padi_left)]
+        if isinstance(padi_left, int) and padi_left >= 0
+        else None
+    )
+
     if not record or not record.get("cabins"):
-        return []
+        return [padi_block] if padi_block else []
 
     rungs: list[list[Any]] = []
     for cabin in record["cabins"]:
@@ -969,7 +1001,7 @@ def _berth_blocks(
         ])
 
     if not rungs:
-        return []
+        return [padi_block] if padi_block else []
 
     cheapest = min(rung[1] for rung in rungs)
     at_cheapest = [rung for rung in rungs if rung[1] == cheapest]
@@ -986,10 +1018,21 @@ def _berth_blocks(
     if all(rung[2] is not None for rung in at_cheapest):
         spots = sum(rung[2] for rung in at_cheapest)
 
+    # The whole sailing, by the same rule one rung up: one unstated count makes
+    # the total unknown rather than a partial sum. This is what PADI's single
+    # figure is comparable to, and publishing it is what lets the two be set
+    # beside each other instead of taken on trust.
+    aboard: int | None = None
+    if all(rung[2] is not None for rung in rungs):
+        aboard = sum(rung[2] for rung in rungs)
+
     # Positional, and the seller is an index into the dataset's pool: a block
     # is written once per departure, so a repeated "liveaboard.com" string is
-    # 22 KB of one word. [seller, spots, cabins].
-    return [[SELLERS.index("liveaboard.com"), spots, rungs]]
+    # 22 KB of one word. [seller, spots at the advertised price, cabins,
+    # berths left on the sailing].
+    return [[SELLERS.index("liveaboard.com"), spots, rungs, aboard]] + (
+        [padi_block] if padi_block else []
+    )
 
 
 def _sale_for(
@@ -1582,6 +1625,10 @@ def promote(
     # doing the first one's job. Unique across all 864 records.
     cabin_book: dict[str, dict[str, Any]] = {}
     cabin_read = (cabins or {}).get("collected") or ""
+    # The second seller's berth counts are read by their own crawl on their own
+    # day. Kept apart from `cabin_read` because they are, and because a count's
+    # date is the whole of what makes it a claim rather than a fact.
+    padi_read = (padi_departures or {}).get("collected") or ""
     for record in ((cabins or {}).get("departures") or {}).values():
         if record.get("boat") and record.get("start"):
             cabin_book[berth_key(record["boat"], record["start"])] = record
@@ -2046,7 +2093,9 @@ def promote(
             # same distinction the crawl draws between an empty page and an
             # unread one.
             ladder = cabin_book.get(berth_key(slug, item["start"]))
-            berths = _berth_blocks(ladder, cabin_names, fx_table)
+            berths = _berth_blocks(
+                ladder, sailing_book.get(f"{slug}::{item['start']}"), cabin_names, fx_table
+            )
             if berths:
                 entry["berths"] = berths
 
@@ -2106,7 +2155,11 @@ def promote(
         "itineraries": itineraries,
         "departures": departures,
     }
-    if cabin_names:
+    # Any berth block at all, not just a ladder. PADI publishes a count and no
+    # cabins, so a run with its book and no booking pages would otherwise ship
+    # blocks whose seller index points into a `sellers` list that was never
+    # written -- a number on the page attributed to nobody.
+    if cabin_names or any(d.get("berths") for d in departures):
         # The pool the ladder's first field indexes into, in the order names
         # were first seen -- which is promotion order, and promotion is pure,
         # so the same inputs give the same list byte for byte.
@@ -2118,17 +2171,28 @@ def promote(
         # departures. It is the most load-bearing caveat here: a berth count is
         # what the seller claimed when it was read, and stale by morning.
         payload["berths_read"] = cabin_read
+        # PADI's counts come from its own crawl on its own day, and the two are
+        # not the same day. One date printed over both would date half the
+        # panel wrong, on the figure whose whole caveat is when it was true.
+        if padi_read:
+            payload["padi_berths_read"] = padi_read
         payload["berths_note"] = (
             "departures[].berths is one block per seller: "
             "[seller index into sellers, places left at the advertised price, "
-            "[cabins]]. Each cabin is [name index into cabin_names, price per "
-            "person in the display currency, places left (0 = full, null = not "
-            "stated), single-occupancy surcharge %]. Places left at the "
-            "advertised price is the total across every room selling at it, "
-            "and is null where any of those rooms does not state a count. A "
-            "seller that publishes a count but no ladder has a null cabin "
-            "list: 24 places and 24 places at a stated price are different "
-            "claims, and only the second is a ladder."
+            "[cabins], berths left on the sailing]. Each cabin is [name index "
+            "into cabin_names, price per person in the display currency, "
+            "places left (0 = full, null = not stated), single-occupancy "
+            "surcharge %]. Both counts are totals -- the first across every "
+            "room selling at the advertised price, the second across every "
+            "room at any price -- and either is null where any room it covers "
+            "does not state a count, because one unstated figure makes the sum "
+            "unknown rather than partial. The two are different claims and are "
+            "never merged: PADI Travel publishes only the second, and it was "
+            "measured against liveaboard.com's rather than assumed (77% exact, "
+            "88% within two berths, against 22% for the count at the "
+            "advertised price). A seller that publishes a count but no ladder "
+            "has a null cabin list: 24 places and 24 places at a stated price "
+            "are different claims, and only the second is a ladder."
         )
     # What PADI is discounting today, and what moved since the last day the
     # book holds. Its own committed input, diffed here rather than in the

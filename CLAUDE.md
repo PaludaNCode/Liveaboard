@@ -284,10 +284,24 @@ Break these and the site starts lying quietly rather than failing loudly.
   load-bearing: read a day apart, all 864 ladders sat up to 0.6% above their
   own row, which is the panel disagreeing with the number that opened it.
   `berths` is a **list of seller blocks** because a sailing has more than one
-  seller: PADI sells 601 of these same departures and publishes an availability
-  figure of its own ([#92]). A seller that states a count but no ladder gets no
-  cabin list — *24 places* and *24 places at a stated price* are different
-  claims, and only the second is a ladder.
+  seller, and both fill one ([#92]). A seller that states a count but no ladder
+  gets no cabin list — *24 places* and *24 places at a stated price* are
+  different claims, and only the second is a ladder.
+- **Two sellers, two counts, and never one number.** A block carries both
+  *at the advertised price* and *on the sailing*, because they are different
+  questions and only a ladder answers the first. **Which one PADI's
+  `availability` answers was measured, not assumed**: against liveaboard.com's
+  whole-sailing total it is exact on 77% of the 584 sailings where both speak
+  and within two berths on 88% — a day between the crawls — against 22% and a
+  mean error of seven berths for the count at the advertised price. So it fills
+  the second slot only. Putting it in the first would have relabelled *22
+  aboard* as *22 at this price* on the 249 rows with no ladder to contradict
+  it, which is why the page prints **aboard** and **places** as different words.
+  They disagree outright on 24 sailings — 21 where PADI still sells berths
+  liveaboard.com calls full — and both are printed under the name of whoever
+  said it and the day they said it. The two crawls run on different days, so
+  `berths_read` and `padi_berths_read` are separate: one date over two sellers
+  dates half of them wrong.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

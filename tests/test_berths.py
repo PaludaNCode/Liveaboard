@@ -1,10 +1,13 @@
 """How many berths are left at the price on the row, and the ladder behind it.
 
-The dataset's job here is one rule and one shape. The rule: places left at the
-advertised price is the total across *every* room selling at that price, and is
-unknown the moment one of them does not state a count. The shape: a list of
-seller blocks, so the day PADI's own availability figure arrives it is another
-block rather than a rewrite ([#92]).
+The dataset's job here is two rules and one shape. The rules: a count is the
+total across *every* room it covers, and is unknown the moment one of them does
+not state a figure -- once for the rooms at the advertised price and once for
+the whole sailing. The shape: a list of seller blocks, written that way so the
+day PADI's own availability figure arrived it was another block rather than a
+rewrite ([#92]). It has arrived, and the two counts are why it needed two
+slots: PADI answers the second question and not the first, so its figure must
+never reach the field the Places column reads.
 
 Everything the browser does with this is display. The arithmetic that decides
 what a berth costs stays here, where it is tested.
@@ -36,7 +39,7 @@ class TestSpotsAtTheAdvertisedPrice(unittest.TestCase):
     """One rule, in one place, because the page must not re-derive it."""
 
     def blocks(self, *cabins: dict[str, object]):
-        return _berth_blocks(record(*cabins), {}, None)
+        return _berth_blocks(record(*cabins), None, {}, None)
 
     def spots(self, *cabins: dict[str, object]):
         return self.blocks(*cabins)[0][1]
@@ -82,37 +85,106 @@ class TestSpotsAtTheAdvertisedPrice(unittest.TestCase):
 
 
 class TestTheShapeTheresPadiRoomIn(unittest.TestCase):
-    """A list of sellers, written that way before the second one arrives."""
+    """A list of sellers, written that way before the second one arrived.
+
+    It has arrived (#92), and the shape held: PADI's figure is another block
+    rather than a migration of every departure in the dataset.
+    """
 
     def test_a_block_names_its_seller_by_index(self):
-        blocks = _berth_blocks(record(cabin("Twin", 1200, 4)), {}, None)
+        blocks = _berth_blocks(record(cabin("Twin", 1200, 4)), None, {}, None)
         self.assertEqual(len(blocks), 1)
         self.assertEqual(SELLERS[blocks[0][0]], "liveaboard.com")
 
     def test_padi_has_a_seat_at_the_table_already(self):
-        # The pool is written now so a second seller is another block rather
-        # than a migration of every departure in the dataset.
         self.assertIn("padi.com", SELLERS)
 
     def test_names_are_pooled_across_sailings(self):
         # 2,982 cabins share 157 names; a boat calls its rooms the same thing
         # every week it sells them.
         names: dict[str, int] = {}
-        first = _berth_blocks(record(cabin("Twin", 1200, 4)), names, None)
-        second = _berth_blocks(record(cabin("Twin", 1300, 2)), names, None)
+        first = _berth_blocks(record(cabin("Twin", 1200, 4)), None, names, None)
+        second = _berth_blocks(record(cabin("Twin", 1300, 2)), None, names, None)
         self.assertEqual(names, {"Twin": 0})
         self.assertEqual(first[0][2][0][0], second[0][2][0][0])
 
     def test_an_unread_sailing_gets_no_block_at_all(self):
         # Not a sailing with no cabins. The crawl draws the same distinction
         # between a page that answered nothing and a boat selling nothing.
-        self.assertEqual(_berth_blocks(None, {}, None), [])
-        self.assertEqual(_berth_blocks({"cabins": []}, {}, None), [])
+        self.assertEqual(_berth_blocks(None, None, {}, None), [])
+        self.assertEqual(_berth_blocks({"cabins": []}, None, {}, None), [])
 
     def test_a_cabin_with_no_price_is_not_a_rung_at_zero(self):
         blocks = _berth_blocks(record(cabin("Twin", 1200, 4),
-                                      {"name": "Mystery", "berths": 2}), {}, None)
+                                      {"name": "Mystery", "berths": 2}), None, {}, None)
         self.assertEqual([rung[0] for rung in blocks[0][2]], [0])
+
+
+def sailing(availability: int | None = 24) -> dict[str, object]:
+    """One row of PADI's sailing book, of which only `availability` is read."""
+    return {"boat": "test-boat", "start": "2027-05-01", "price": 1400.0,
+            "currency": "USD", "availability": availability}
+
+
+class TestTheSecondSellersCount(unittest.TestCase):
+    """Two sellers, two questions, and no arithmetic between them.
+
+    PADI publishes one figure and no ladder. Which of the two counts it is was
+    measured rather than assumed: across the 584 sailings where both speak it
+    matches liveaboard.com's whole-sailing total on 77% exactly and 88% within
+    two berths, against 22% and a mean error of seven berths for the count at
+    the advertised price.
+    """
+
+    def test_it_lands_in_its_own_slot_never_the_advertised_one(self):
+        """The mistake this shape exists to prevent.
+
+        Slot 1 means "at the price on the row". Putting a whole-sailing figure
+        there would relabel "22 aboard" as "22 at this price" on the 249 rows
+        with no ladder to contradict it.
+        """
+        blocks = _berth_blocks(record(cabin("Twin", 1200, 4)), sailing(24), {}, None)
+        padi = [b for b in blocks if SELLERS[b[0]] == "padi.com"][0]
+        self.assertIsNone(padi[1])
+        self.assertEqual(padi[3], 24)
+
+    def test_a_seller_with_a_count_and_no_ladder_gets_no_cabins(self):
+        """"24 places" and "24 places at a stated price" are different claims,
+        and inventing a rung to carry the first dresses it up as the second."""
+        blocks = _berth_blocks(None, sailing(20), {}, None)
+        self.assertEqual(len(blocks), 1)
+        self.assertEqual(SELLERS[blocks[0][0]], "padi.com")
+        self.assertIsNone(blocks[0][2])
+        self.assertEqual(blocks[0][3], 20)
+
+    def test_liveaboard_states_the_whole_sailing_too(self):
+        """Which is what makes the two comparable rather than merely adjacent."""
+        blocks = _berth_blocks(
+            record(cabin("Twin", 1200, 4), cabin("Suite", 1500, 3)), None, {}, None)
+        self.assertEqual(blocks[0][1], 4)   # at the advertised price
+        self.assertEqual(blocks[0][3], 7)   # aboard, at any price
+
+    def test_one_unstated_cabin_makes_the_whole_sailing_unknown(self):
+        """The same rule one rung up: a partial sum is not a total."""
+        blocks = _berth_blocks(
+            record(cabin("Twin", 1200, 4), cabin("Suite", 1500, None)), None, {}, None)
+        self.assertEqual(blocks[0][1], 4)
+        self.assertIsNone(blocks[0][3])
+
+    def test_liveaboard_comes_first(self):
+        """The page reads slot 1 off the first block that fills it, and only
+        one seller can answer for the advertised price."""
+        blocks = _berth_blocks(record(cabin("Twin", 1200, 4)), sailing(), {}, None)
+        self.assertEqual([SELLERS[b[0]] for b in blocks], ["liveaboard.com", "padi.com"])
+
+    def test_a_sailing_neither_seller_counted_gets_no_block(self):
+        self.assertEqual(_berth_blocks(None, sailing(None), {}, None), [])
+        self.assertEqual(_berth_blocks(None, {}, {}, None), [])
+
+    def test_zero_aboard_is_an_answer_and_is_kept(self):
+        """Sold out is a count. Dropping it would print "not stated"."""
+        blocks = _berth_blocks(None, sailing(0), {}, None)
+        self.assertEqual(blocks[0][3], 0)
 
 
 class TestConversionHappensInPython(unittest.TestCase):
@@ -130,14 +202,14 @@ class TestConversionHappensInPython(unittest.TestCase):
         blocks = _berth_blocks(
             {"boat": "b", "start": "2027-05-01", "currency": "USD",
              "cabins": [cabin("Twin", 1000, 2)]},
-            {}, fx,
+            None, {}, fx,
         )
         self.assertEqual(blocks[0][2][0][1], 500)
 
     def test_prices_are_whole_numbers(self):
         # The page prints whole euros; "1501.0" is two characters of nothing,
         # 2,982 times over.
-        blocks = _berth_blocks(record(cabin("Twin", 1200.4, 2)), {}, None)
+        blocks = _berth_blocks(record(cabin("Twin", 1200.4, 2)), None, {}, None)
         self.assertIsInstance(blocks[0][2][0][1], int)
 
 
@@ -175,7 +247,9 @@ class TestTheCommittedDataset(unittest.TestCase):
         names = self.payload["cabin_names"]
         for departure in self.payload["departures"]:
             for block in departure.get("berths", []):
-                for rung in block[2]:
+                # A seller that counted the sailing and published no ladder has
+                # no cabin list at all, which is the shape rather than a gap.
+                for rung in block[2] or []:
                     self.assertLess(rung[0], len(names), departure["id"])
 
     def test_every_block_names_a_seller_that_exists(self):

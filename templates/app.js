@@ -346,18 +346,42 @@
      `blocks.length > 1`, which is why nothing has shown it yet. Two different
      lists cannot share one name. */
   var SELLER_NAMES = D.sellers || [];
-  var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2;
+  var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2, BLOCK_ABOARD = 3;
   var RUNG_NAME = 0, RUNG_PRICE = 1, RUNG_LEFT = 2, RUNG_SUPP = 3;
 
   /* Berths left at the advertised price, across every room selling at it.
      `null` is "nobody stated a count", which is not the same as none left --
-     a sailing nobody could read has no answer, and 0 is an answer. */
+     a sailing nobody could read has no answer, and 0 is an answer.
+
+     Reads slot 1 and only slot 1. PADI Travel publishes a count too and it is
+     a different quantity -- every berth aboard rather than every berth at this
+     price -- so it lives in its own slot and is read by `aboardLeft`. Letting
+     it answer here would relabel "22 aboard" as "22 at this price" on the 249
+     rows that have no ladder to contradict it. */
   function spotsLeft(d) {
     var blocks = d.berths || [];
     for (var n = 0; n < blocks.length; n++) {
       if (blocks[n][BLOCK_SPOTS] != null) return blocks[n][BLOCK_SPOTS];
     }
     return null;
+  }
+
+  /* Berths left on the sailing at any price, and who says so. The weaker
+     claim, and on 249 rows the only one anybody makes. */
+  function aboardLeft(d) {
+    var blocks = d.berths || [];
+    for (var n = 0; n < blocks.length; n++) {
+      if (blocks[n][BLOCK_ABOARD] != null) {
+        return { n: blocks[n][BLOCK_ABOARD], who: SELLER_NAMES[blocks[n][BLOCK_SELLER]] || "" };
+      }
+    }
+    return null;
+  }
+
+  /* The day a seller's counts were read. Two crawls, two days, and the date is
+     the whole of what makes a count a claim rather than a fact. */
+  function readOn(block) {
+    return block[BLOCK_SELLER] === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
   }
 
   /* The cheapest rung anyone can still book. A minimum over prices Python
@@ -673,21 +697,42 @@
       v: function (d) {
         var spots = spotsLeft(d);
         if (spots != null) return spots;
+        /* The whole-sailing count where there is no per-price one. Sorting the
+           two together is sorting on "how many can I still get", which is the
+           question the column is for; the cell says which of the two it is. */
+        var aboard = aboardLeft(d);
+        if (aboard) return aboard.n;
         if (d.availability === "sold_out") return 0;
         return Infinity;
       },
       show: function (d) {
-        var spots = spotsLeft(d);
+        var spots = spotsLeft(d), label, tone;
         if (spots == null) {
-          /* No ladder read for this sailing. The operator's own word is all
-             there is, and it is printed as the weaker statement it is. */
+          /* No ladder for this sailing. The second seller's whole-sailing
+             count is the next best answer and is printed under its own word:
+             "aboard", never "places", because it is berths left at any price
+             and the column's usual figure is berths left at this one. Same
+             number of characters, different claim, and the label is the only
+             thing that can carry the difference. */
+          var aboard = aboardLeft(d);
+          if (aboard) {
+            tone = aboard.n === 0 ? "none" : aboard.n <= 3 ? "low" : "many";
+            return '<button class="berths" type="button" data-berths="' + esc(d.id) +
+              '" aria-expanded="false" aria-haspopup="dialog" title="' +
+              esc("Berths left on this sailing at any price, per " + aboard.who) + '">' +
+              '<span class="n ' + tone + '">' + aboard.n + "</span>" +
+              '<span class="lbl">aboard</span>' +
+              '<span class="caret" aria-hidden="true">▾</span></button>';
+          }
+          /* Nobody counted. The operator's own word is all there is, and it is
+             printed as the weaker statement it is. */
           if (d.availability === "sold_out") return '<span class="pill gone">sold out</span>';
           if (d.availability === "limited") return '<span class="pill few">few left</span>';
           if (d.availability === "available") return '<span class="pill open">available</span>';
           return '<span class="dim">—</span>';
         }
-        var tone = spots === 0 ? "none" : spots <= 3 ? "low" : "many";
-        var label = spots === 0 ? "at this price" : spots === 1 ? "place" : "places";
+        tone = spots === 0 ? "none" : spots <= 3 ? "low" : "many";
+        label = spots === 0 ? "at this price" : spots === 1 ? "place" : "places";
         return '<button class="berths" type="button" data-berths="' + esc(d.id) +
           '" aria-expanded="false" aria-haspopup="dialog">' +
           '<span class="n ' + tone + '">' + spots + "</span>" +
@@ -1848,26 +1893,55 @@
     return verdict + body + solo;
   }
 
+  /* A seller who counted the sailing and published no ladder. One sentence,
+     because one figure is all there is: "24 places" and "24 places at £1,748"
+     are different claims, and inventing a rung to carry the first would dress
+     it up as the second. */
+  function aboardOnly(block) {
+    var n = block[BLOCK_ABOARD];
+    return '<p class="verdict' + (n ? "" : " bad") + '"><b>' + n +
+      (n === 1 ? " berth" : " berths") + "</b> left on this sailing, at any " +
+      "price. No cabin prices are published here, so there is no ladder to " +
+      "read and no way to say how many are left at the fare on the row.</p>";
+  }
+
   function fill(d) {
-    var blocks = (d.berths || []).filter(function (b) { return (b[BLOCK_CABINS] || []).length; });
+    /* Every block, not only the ones with a ladder. Filtering on cabins was
+       right while liveaboard.com was the only seller that counted; it now
+       throws away the answer on the 249 sailings where PADI is the only one
+       that did. */
+    var blocks = (d.berths || []).filter(function (b) {
+      return (b[BLOCK_CABINS] || []).length || b[BLOCK_ABOARD] != null;
+    });
     /* The read date, and nothing else by way of explanation -- what a count is
        and how perishable it is belongs in the footer with the rest of the
        method, not in a panel opened to glance at a number. But the date itself
        is not commentary: it is the difference between "two left" and "two left
        last Tuesday", and it travels with the figure or not at all. */
+    /* The read date moved off the header and onto each seller's own line: two
+       crawls run on two days, and one date over both dates half of them wrong.
+       It stays in the header only while a single seller is speaking. */
+    /* Only where one seller speaks *and* it publishes a ladder, which is the
+       case that shows no seller heading for the date to ride on. Everywhere
+       else the date sits against the name whose claim it dates. */
+    var lone = (blocks.length === 1 && (blocks[0][BLOCK_CABINS] || []).length)
+      ? readOn(blocks[0]) : "";
     var head = '<p class="pwho">' + esc(boatOf(d)) + " &middot; " +
       shortDate(d.start) + " &middot; " + d.nights + " nights" +
-      (D.meta.berths_read
-        ? '<span class="pread">read ' + shortDate(D.meta.berths_read) + "</span>"
-        : "") + "</p>";
+      (lone ? '<span class="pread">read ' + shortDate(lone) + "</span>" : "") + "</p>";
     if (!blocks.length) { pop.innerHTML = head; return; }
-    /* One section per seller. Only liveaboard.com fills one today; PADI sells
-       601 of these same sailings, and a loop costs nothing against the day it
-       does (#92). */
+    /* One section per seller, and both fill one now (#92). The seller is named
+       whenever two are speaking, and also whenever the only one speaking has
+       no ladder — a bare count with nobody's name on it is a number the page
+       is asking to be taken on trust. */
     pop.innerHTML = head + blocks.map(function (block) {
-      return (blocks.length > 1
-        ? '<p class="pseller">' + esc(SELLER_NAMES[block[BLOCK_SELLER]] || "") + "</p>"
-        : "") + ladderBody(d, block);
+      var ladder = (block[BLOCK_CABINS] || []).length;
+      var read = readOn(block);
+      var name = (blocks.length > 1 || !ladder)
+        ? '<p class="pseller">' + esc(SELLER_NAMES[block[BLOCK_SELLER]] || "") +
+          (read ? '<span class="pread">read ' + shortDate(read) + "</span>" : "") + "</p>"
+        : "";
+      return name + (ladder ? ladderBody(d, block) : aboardOnly(block));
     }).join("");
   }
 
