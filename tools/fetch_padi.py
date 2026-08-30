@@ -336,6 +336,85 @@ def _fetch_trips(aliases: dict[str, str], raw: dict, args) -> None:
         RAW.write_text(json.dumps(raw, indent=1, sort_keys=True) + "\n")
 
 
+def _sailing_counts(results: list, season: tuple[str, str]) -> dict:
+    """Why a vessel produces no row, in numbers, per vessel.
+
+    `_departure_book` drops a sailing with no date, with no price, or outside
+    the published window, and it drops all three the same way: silently. So a
+    mapped vessel with no rows on the page is one of several quite different
+    things and the run cannot say which --
+
+    * **nothing returned at all**, which is the endpoint answering nothing;
+    * **a calendar that stops short of the window**, where the absence *is* the
+      answer -- South Moon 1 sells 22 priced sailings, every one of them before
+      May 2027;
+    * **dated berths at no stated price**, which is a fact about the source
+      worth surfacing rather than a silence. VIP One lists 17 sailings and
+      prices none of them.
+
+    -- and that is the same shape as every failure this repo has already been
+    bitten by, where *not looked at* and *nothing there* travelled down one
+    channel until somebody separated them.
+
+    Recorded rather than acted on. `promote` does not read this; the point is
+    that a refresh can report it and a person can see that VIP One is a
+    different kind of empty from South Moon 1. The counts are computed from the
+    raw store at book-build time rather than at fetch time, so `--rebuild`
+    reproduces them offline like everything else here.
+
+    The issue that asked for this expected one number -- sailings dropped for
+    want of a price -- on the evidence that VIP One published 18 season
+    sailings priced at zero. Its calendar has since moved on, and today that
+    number is 0 for all twelve vessels: the reason they are empty is the
+    window, not the price. One number would have reported nothing at all.
+    """
+    start, end = season
+    dated = [(_iso_day(t.get("startDate")), t.get("price"))
+             for t in results or [] if isinstance(t, dict)]
+    dated = [(day, price) for day, price in dated if day]
+    inside = [(day, price) for day, price in dated if start <= day <= end]
+    priced = [1 for _, price in inside if isinstance(price, (int, float)) and price > 0]
+    counts = {
+        "read": len(results or []),
+        "dated": len(dated),
+        "in_season": len(inside),
+        "priced": len(priced),
+        # Over every dated sailing, not only the in-season ones. A vessel that
+        # prices nothing at all is a fact about the source whatever its
+        # calendar does, and counting it inside the window alone would have
+        # hidden VIP One entirely -- it lists 17 sailings, prices none, and its
+        # window happens to stop in December.
+        "unpriced": sum(1 for _, price in dated
+                        if not isinstance(price, (int, float)) or price <= 0),
+    }
+    if dated:
+        # What makes "the calendar stops short" legible rather than inferred
+        # from a zero: the boat is selling, just not yet in the window.
+        counts["first"], counts["last"] = min(d for d, _ in dated), max(d for d, _ in dated)
+    return counts
+
+
+def why_empty(counts: dict) -> str:
+    """One phrase for a vessel that produced no row, or "" for one that did."""
+    if not counts or counts.get("priced"):
+        return ""
+    if not counts.get("read"):
+        return "the trips endpoint returned no sailing at all"
+    if not counts.get("dated"):
+        return f"{counts['read']} sailing(s), none carrying a readable date"
+    if not counts.get("in_season"):
+        note = (f"{counts['dated']} dated sailing(s), none in the season "
+                f"({counts.get('first')} to {counts.get('last')})")
+        # Two facts where both hold. The window is why there is no row; that
+        # the source prices nothing is a separate thing worth knowing, and it
+        # is the one that would bite the day the calendar does reach us.
+        if counts["unpriced"] == counts["dated"]:
+            note += " — and none of them priced"
+        return note
+    return (f"{counts['in_season']} sailing(s) in the season, "
+            f"none of them priced")
+
+
 def _departure_book(aliases: dict[str, str], raw: dict) -> dict:
     """Sailings keyed the way `promote` will look them up: boat and day.
 
@@ -513,6 +592,11 @@ def main() -> int:
             "operator": shop.get("operator"),
             "country": shop.get("country"),
             "currency": shop.get("currency"),
+            # Why this vessel has the rows it has, or none. See
+            # `_sailing_counts`: three quite different silences reached
+            # `promote` identically before this.
+            "sailings": _sailing_counts((raw.get("trips") or {}).get(slug) or [],
+                                        (args.season_start, args.season_end)),
         }
         for slug, shop in sorted((raw.get("shops") or {}).items())
         if shop.get("boat")
@@ -564,6 +648,19 @@ def main() -> int:
     # already covers. Printed beside the charges because two bills that state
     # only one of the two are not disclosing at the same depth.
     print(f"{'':>{len(str(BOOK))}}  {with_included} state what the fare includes")
+
+    # Named, never counted. A mapped vessel with no rows is the state this
+    # pipeline has been bitten by three times over -- the barren skip list,
+    # `carry_unread`, `PARSE_ATTEMPTS` -- and the fix each time was to stop
+    # letting "nothing there" and "nobody looked" travel down one channel.
+    # Nothing acts on this; a person reading the run does.
+    empty = [(boat, why_empty(v.get("sailings") or {}))
+             for boat, v in sorted((book.get("vessels") or {}).items())]
+    empty = [(boat, why) for boat, why in empty if why]
+    if empty:
+        print(f"\n{len(empty)} mapped vessel(s) contribute no priced sailing in the season:")
+        for boat, why in empty:
+            print(f"  {boat:<26} {why}")
     return 0
 
 

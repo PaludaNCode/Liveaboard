@@ -232,6 +232,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   sale. `discover()` records what it skips via `not_looked_at`, so the skip and
   the failure travel down the same channel. `CARRY_MAX_DAYS` outlasts
   `BARREN_RECHECK_DAYS` by design.
+- **And a vessel that sells nothing is not one that prices nothing.**
+  `_departure_book` drops a sailing with no date, with no price, and outside
+  the window, all three the same way: silently. So twelve mapped PADI vessels
+  produced no row and the run could not say which of those it was.
+  `fetch_padi._sailing_counts` records the lot per vessel and `why_empty`
+  names it in the run log: *"22 dated sailing(s), none in the season
+  (2026-09-05 to 2027-01-30)"* is a calendar that has not reached us, where
+  *"17 … — and none of them priced"* is VIP One, which lists dated berths at no
+  stated price. **Unpriced is counted over every dated sailing, not only the
+  in-season ones** — VIP One's window stops in December, so counting inside it
+  would have hidden the fact entirely. Recorded, never acted on: `promote` does
+  not read it, and a boat with no price still gets no row.
 - **A seller nobody asked is the same blindness.** The two sources merge on
   `(boat, date)` — exact, because a date has no spelling — and for eleven
   refreshes that merge could only ever fill a field, on the rule that the row

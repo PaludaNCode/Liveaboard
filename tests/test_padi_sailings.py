@@ -30,6 +30,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 import published  # noqa: E402
 from fetch_padi import (  # noqa: E402
     MIN_BOOK_RATIO,
+    _sailing_counts,
+    why_empty,
     _padi_sites,
     _departure_book,
     _iso_day,
@@ -830,3 +832,62 @@ class TestTheHarbourPadiStates(unittest.TestCase):
     def test_a_trip_padi_has_not_been_read_for_keeps_its_parsed_ports(self):
         row = self.itinerary(padi=self.trip())
         self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))
+
+
+class TestWhyAVesselHasNoRows(unittest.TestCase):
+    """Twelve mapped vessels publish nothing and the run could not say why.
+
+    `_departure_book` drops a sailing with no date, with no price, and outside
+    the window, and it drops all three the same way: silently. So a mapped
+    vessel with no rows was one of several quite different things, and that is
+    the shape of every failure this repo has already been bitten by -- the
+    barren skip list, `carry_unread`, `PARSE_ATTEMPTS` -- where *not looked at*
+    and *nothing there* travelled down one channel until somebody separated
+    them.
+
+    Recorded, not acted on. `promote` does not read it; a person reading the
+    run does.
+    """
+
+    SEASON = ("2027-05-01", "2027-08-31")
+
+    def counts(self, *sailings):
+        return _sailing_counts(
+            [{"startDate": d, "price": p} for d, p in sailings], self.SEASON)
+
+    def test_a_vessel_selling_in_the_window_is_not_reported(self):
+        self.assertEqual(why_empty(self.counts(("2027-06-05", 1200.0))), "")
+
+    def test_an_endpoint_that_answered_nothing_says_so(self):
+        self.assertEqual(why_empty(self.counts()),
+                         "the trips endpoint returned no sailing at all")
+
+    def test_a_calendar_that_stops_short_names_the_window_it_reaches(self):
+        """South Moon 1 sells 22 priced sailings, every one before May 2027.
+        The absence *is* the answer there, and a bare zero cannot say so."""
+        why = why_empty(self.counts(("2026-09-05", 900.0), ("2027-01-30", 950.0)))
+        self.assertIn("none in the season", why)
+        self.assertIn("2026-09-05 to 2027-01-30", why)
+
+    def test_a_vessel_that_prices_nothing_is_a_different_kind_of_empty(self):
+        """VIP One lists 17 sailings and prices none. Two facts hold at once --
+        the window is why there is no row, and the missing prices are what
+        would bite the day the calendar does reach us."""
+        why = why_empty(self.counts(("2026-09-05", 0.0), ("2026-12-27", None)))
+        self.assertIn("none in the season", why)
+        self.assertIn("none of them priced", why)
+
+    def test_unpriced_is_counted_over_every_dated_sailing(self):
+        """Not only the in-season ones. Counting inside the window alone would
+        have hidden VIP One entirely, whose calendar stops in December."""
+        self.assertEqual(self.counts(("2026-09-05", 0.0), ("2026-12-27", None))["unpriced"], 2)
+
+    def test_a_sailing_with_no_readable_date_is_neither_dated_nor_in_season(self):
+        counts = _sailing_counts([{"startDate": None, "price": 900.0}], self.SEASON)
+        self.assertEqual((counts["read"], counts["dated"]), (1, 0))
+        self.assertEqual(why_empty(counts),
+                         "1 sailing(s), none carrying a readable date")
+
+    def test_a_season_with_unpriced_sailings_in_it_says_that_and_not_the_window(self):
+        why = why_empty(self.counts(("2027-06-05", 0.0), ("2027-06-12", None)))
+        self.assertEqual(why, "2 sailing(s) in the season, none of them priced")

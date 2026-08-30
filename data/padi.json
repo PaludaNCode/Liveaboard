@@ -25667,6 +25667,15 @@
    "currency": "USD",
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
+   "sailings": {
+    "dated": 62,
+    "first": "2026-08-31",
+    "in_season": 18,
+    "last": "2027-12-27",
+    "priced": 18,
+    "read": 62,
+    "unpriced": 0
+   },
    "slug": "all-star-ghani"
   },
   "all-star-red-sea": {
@@ -25674,6 +25683,15 @@
    "currency": "USD",
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
+   "sailings": {
+    "dated": 61,
+    "first": "2026-08-31",
+    "in_season": 17,
+    "last": "2027-12-27",
+    "priced": 17,
+    "read": 61,
+    "unpriced": 0
+   },
    "slug": "all-star-scuba-scene"
   },
   "alsuraya": {
@@ -25681,6 +25699,15 @@
    "currency": "EUR",
    "name": "Alsuraya",
    "operator": null,
+   "sailings": {
+    "dated": 65,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-09-02",
+    "priced": 17,
+    "read": 65,
+    "unpriced": 2
+   },
    "slug": "alsuraya"
   },
   "amelie": {
@@ -25688,6 +25715,15 @@
    "currency": "EUR",
    "name": "Amelie Safari",
    "operator": "AMELIE SAFARI",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-03",
+    "in_season": 31,
+    "last": "2027-10-17",
+    "priced": 31,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "amelie-safari"
   },
   "amelie-adventures": {
@@ -25695,6 +25731,15 @@
    "currency": "EUR",
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
+   "sailings": {
+    "dated": 87,
+    "first": "2026-09-03",
+    "in_season": 29,
+    "last": "2027-09-03",
+    "priced": 28,
+    "read": 87,
+    "unpriced": 1
+   },
    "slug": "amelie-adventures"
   },
   "andromeda": {
@@ -25702,6 +25747,15 @@
    "currency": "EUR",
    "name": "MY Andromeda",
    "operator": null,
+   "sailings": {
+    "dated": 4,
+    "first": "2026-09-19",
+    "in_season": 0,
+    "last": "2026-10-31",
+    "priced": 0,
+    "read": 4,
+    "unpriced": 0
+   },
    "slug": "my-andromeda"
   },
   "anemone": {
@@ -25709,6 +25763,15 @@
    "currency": "EUR",
    "name": "MY Anemone",
    "operator": null,
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-11-18",
+    "priced": 4,
+    "read": 100,
+    "unpriced": 77
+   },
    "slug": "my-anemone"
   },
   "aphrodite": {
@@ -25716,6 +25779,15 @@
    "currency": "EUR",
    "name": "M/Y Aphrodite",
    "operator": null,
+   "sailings": {
+    "dated": 63,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 63,
+    "unpriced": 0
+   },
    "slug": "my-aphrodite"
   },
   "ashrafi": {
@@ -25723,6 +25795,15 @@
    "currency": "EUR",
    "name": "MY Ashrafi",
    "operator": null,
+   "sailings": {
+    "dated": 17,
+    "first": "2026-09-07",
+    "in_season": 0,
+    "last": "2026-12-26",
+    "priced": 0,
+    "read": 17,
+    "unpriced": 0
+   },
    "slug": "my-ashrafi"
   },
   "avo": {
@@ -25730,6 +25811,15 @@
    "currency": "EUR",
    "name": "MY AVO",
    "operator": null,
+   "sailings": {
+    "dated": 63,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 1,
+    "read": 63,
+    "unpriced": 53
+   },
    "slug": "my-avo"
   },
   "bella-2": {
@@ -25737,6 +25827,15 @@
    "currency": "EUR",
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
+   "sailings": {
+    "dated": 97,
+    "first": "2026-09-06",
+    "in_season": 32,
+    "last": "2027-12-28",
+    "priced": 32,
+    "read": 97,
+    "unpriced": 28
+   },
    "slug": "bella-2"
   },
   "bella-3": {
@@ -25744,6 +25843,15 @@
    "currency": "EUR",
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
+   "sailings": {
+    "dated": 80,
+    "first": "2026-08-31",
+    "in_season": 22,
+    "last": "2027-12-25",
+    "priced": 20,
+    "read": 80,
+    "unpriced": 26
+   },
    "slug": "bella-3"
   },
   "blue": {
@@ -25751,6 +25859,15 @@
    "currency": "EUR",
    "name": "MY Blue",
    "operator": "BLUE PLANET",
+   "sailings": {
+    "dated": 58,
+    "first": "2026-09-03",
+    "in_season": 14,
+    "last": "2027-12-30",
+    "priced": 12,
+    "read": 58,
+    "unpriced": 8
+   },
    "slug": "my-blue"
   },
   "blue-horizon": {
@@ -25758,6 +25875,15 @@
    "currency": "USD",
    "name": "MV Blue Horizon",
    "operator": "MASTER LIVEABOARDS",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 16,
+    "last": "2029-01-27",
+    "priced": 16,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "mv-blue-horizon"
   },
   "blue-melody": {
@@ -25765,6 +25891,15 @@
    "currency": "USD",
    "name": "MY Blue Melody",
    "operator": "MASTER LIVEABOARDS",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 16,
+    "last": "2028-11-11",
+    "priced": 16,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "my-blue-melody"
   },
   "blue-pearl": {
@@ -25772,6 +25907,15 @@
    "currency": "EUR",
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
+   "sailings": {
+    "dated": 62,
+    "first": "2026-09-03",
+    "in_season": 17,
+    "last": "2027-12-30",
+    "priced": 17,
+    "read": 62,
+    "unpriced": 0
+   },
    "slug": "my-blue-pearl"
   },
   "blue-seas": {
@@ -25779,6 +25923,15 @@
    "currency": "EUR",
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
+   "sailings": {
+    "dated": 59,
+    "first": "2026-09-03",
+    "in_season": 16,
+    "last": "2027-12-30",
+    "priced": 16,
+    "read": 59,
+    "unpriced": 0
+   },
    "slug": "my-blue-seas"
   },
   "blue-storm": {
@@ -25786,6 +25939,15 @@
    "currency": "EUR",
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
+   "sailings": {
+    "dated": 62,
+    "first": "2026-09-03",
+    "in_season": 17,
+    "last": "2027-12-30",
+    "priced": 16,
+    "read": 62,
+    "unpriced": 1
+   },
    "slug": "my-blue-storm"
   },
   "carlton": {
@@ -25793,6 +25955,15 @@
    "currency": "EUR",
    "name": "MY Carlton",
    "operator": null,
+   "sailings": {
+    "dated": 50,
+    "first": "2026-09-08",
+    "in_season": 18,
+    "last": "2027-11-27",
+    "priced": 18,
+    "read": 50,
+    "unpriced": 1
+   },
    "slug": "my-carlton"
   },
   "cassiopeia-glory": {
@@ -25800,6 +25971,15 @@
    "currency": "EUR",
    "name": "MY Cassiopeia Glory",
    "operator": null,
+   "sailings": {
+    "dated": 4,
+    "first": "2026-09-19",
+    "in_season": 0,
+    "last": "2026-10-17",
+    "priced": 0,
+    "read": 4,
+    "unpriced": 0
+   },
    "slug": "my-cassiopeia-glory"
   },
   "discovery-i": {
@@ -25807,6 +25987,15 @@
    "currency": "EUR",
    "name": "MY Discovery I",
    "operator": "DISCOVERY DIVERS",
+   "sailings": {
+    "dated": 69,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 69,
+    "unpriced": 0
+   },
    "slug": "my-discovery-i"
   },
   "discovery-ii": {
@@ -25814,6 +26003,15 @@
    "currency": "EUR",
    "name": "MY Discovery II",
    "operator": "DISCOVERY DIVERS",
+   "sailings": {
+    "dated": 56,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-11-27",
+    "priced": 18,
+    "read": 56,
+    "unpriced": 0
+   },
    "slug": "my-discovery-ii"
   },
   "dune-longara": {
@@ -25821,6 +26019,15 @@
    "currency": "EUR",
    "name": "Dune Longara",
    "operator": "DUNE",
+   "sailings": {
+    "dated": 99,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-12-30",
+    "priced": 16,
+    "read": 99,
+    "unpriced": 3
+   },
    "slug": "dune-longara"
   },
   "dune-silky": {
@@ -25828,6 +26035,15 @@
    "currency": "EUR",
    "name": "DUNE Silky",
    "operator": "DUNE",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 17,
+    "last": "2028-12-09",
+    "priced": 17,
+    "read": 100,
+    "unpriced": 5
+   },
    "slug": "dune-silky"
   },
   "dune-titan": {
@@ -25835,6 +26051,15 @@
    "currency": "EUR",
    "name": "DUNE Titan",
    "operator": "DUNE",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 14,
+    "last": "2028-11-11",
+    "priced": 14,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "dune-titan"
   },
   "emperor-asmaa": {
@@ -25842,6 +26067,15 @@
    "currency": "EUR",
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
+   "sailings": {
+    "dated": 94,
+    "first": "2026-09-05",
+    "in_season": 16,
+    "last": "2028-11-18",
+    "priced": 16,
+    "read": 94,
+    "unpriced": 0
+   },
    "slug": "mv-emperor-asmaa"
   },
   "emperor-elite": {
@@ -25849,6 +26083,15 @@
    "currency": "EUR",
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
+   "sailings": {
+    "dated": 80,
+    "first": "2026-09-03",
+    "in_season": 13,
+    "last": "2028-07-20",
+    "priced": 13,
+    "read": 80,
+    "unpriced": 0
+   },
    "slug": "mv-emperor-elite"
   },
   "emperor-superior": {
@@ -25856,6 +26099,15 @@
    "currency": "EUR",
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
+   "sailings": {
+    "dated": 95,
+    "first": "2026-09-05",
+    "in_season": 15,
+    "last": "2028-12-01",
+    "priced": 15,
+    "read": 95,
+    "unpriced": 0
+   },
    "slug": "mv-emperor-superior"
   },
   "eriny": {
@@ -25863,6 +26115,15 @@
    "currency": "EUR",
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
+   "sailings": {
+    "dated": 58,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 58,
+    "unpriced": 0
+   },
    "slug": "eriny"
   },
   "explorer-ventures-grand-sea-explorer": {
@@ -25870,6 +26131,15 @@
    "currency": "USD",
    "name": "Explorer Ventures -  Grand Sea Explorer",
    "operator": "EXPLORER VENTURES",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-03",
+    "in_season": 17,
+    "last": "2028-10-05",
+    "priced": 17,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "explorer-ventures-grand-sea-explorer"
   },
   "freedom-iii": {
@@ -25877,6 +26147,15 @@
    "currency": "EUR",
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
+   "sailings": {
+    "dated": 18,
+    "first": "2026-09-06",
+    "in_season": 0,
+    "last": "2026-12-27",
+    "priced": 0,
+    "read": 18,
+    "unpriced": 1
+   },
    "slug": "freedom-iii"
   },
   "freedom-iv": {
@@ -25884,6 +26163,15 @@
    "currency": "EUR",
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
+   "sailings": {
+    "dated": 20,
+    "first": "2026-09-02",
+    "in_season": 0,
+    "last": "2027-02-03",
+    "priced": 0,
+    "read": 20,
+    "unpriced": 1
+   },
    "slug": "freedom-iv"
   },
   "galaxy": {
@@ -25891,6 +26179,15 @@
    "currency": "EUR",
    "name": "MY Galaxy",
    "operator": null,
+   "sailings": {
+    "dated": 13,
+    "first": "2026-09-05",
+    "in_season": 0,
+    "last": "2026-11-28",
+    "priced": 0,
+    "read": 13,
+    "unpriced": 11
+   },
    "slug": "my-galaxy"
   },
   "ghazala-adventure": {
@@ -25898,6 +26195,15 @@
    "currency": "EUR",
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
+   "sailings": {
+    "dated": 65,
+    "first": "2026-08-31",
+    "in_season": 18,
+    "last": "2028-01-03",
+    "priced": 18,
+    "read": 65,
+    "unpriced": 0
+   },
    "slug": "ghazala-adventure"
   },
   "ghazala-explorer": {
@@ -25905,6 +26211,15 @@
    "currency": "EUR",
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
+   "sailings": {
+    "dated": 65,
+    "first": "2026-08-31",
+    "in_season": 18,
+    "last": "2028-01-03",
+    "priced": 18,
+    "read": 65,
+    "unpriced": 0
+   },
    "slug": "ghazala-explorer"
   },
   "grand-discovery": {
@@ -25912,6 +26227,15 @@
    "currency": "EUR",
    "name": "MY Grand Discovery",
    "operator": "DISCOVERY DIVERS",
+   "sailings": {
+    "dated": 69,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 69,
+    "unpriced": 0
+   },
    "slug": "my-grand-discovery"
   },
   "hammerhead-ii": {
@@ -25919,6 +26243,15 @@
    "currency": "EUR",
    "name": "Hammerhead II",
    "operator": null,
+   "sailings": {
+    "dated": 67,
+    "first": "2026-09-05",
+    "in_season": 20,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 67,
+    "unpriced": 9
+   },
    "slug": "hammerhead-ii"
   },
   "heaven-saphir": {
@@ -25926,6 +26259,15 @@
    "currency": "USD",
    "name": "MY Heaven Saphir",
    "operator": null,
+   "sailings": {
+    "dated": 66,
+    "first": "2026-09-03",
+    "in_season": 17,
+    "last": "2027-12-30",
+    "priced": 17,
+    "read": 66,
+    "unpriced": 1
+   },
    "slug": "my-heaven-saphir"
   },
   "high-wave": {
@@ -25933,6 +26275,15 @@
    "currency": "EUR",
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
+   "sailings": {
+    "dated": 6,
+    "first": "2026-09-06",
+    "in_season": 0,
+    "last": "2026-11-29",
+    "priced": 0,
+    "read": 6,
+    "unpriced": 0
+   },
    "slug": "high-wave"
   },
   "iceberg": {
@@ -25940,6 +26291,15 @@
    "currency": "EUR",
    "name": "My Iceberg",
    "operator": null,
+   "sailings": {
+    "dated": 21,
+    "first": "2026-09-06",
+    "in_season": 0,
+    "last": "2027-01-25",
+    "priced": 0,
+    "read": 21,
+    "unpriced": 1
+   },
    "slug": "my-iceberg"
   },
   "independence-ii": {
@@ -25947,6 +26307,15 @@
    "currency": "EUR",
    "name": "MY Independence II",
    "operator": null,
+   "sailings": {
+    "dated": 27,
+    "first": "2026-09-07",
+    "in_season": 8,
+    "last": "2027-10-14",
+    "priced": 6,
+    "read": 27,
+    "unpriced": 6
+   },
    "slug": "my-independence-ii"
   },
   "lady-m": {
@@ -25954,6 +26323,15 @@
    "currency": "EUR",
    "name": "MY Lady M",
    "operator": null,
+   "sailings": {
+    "dated": 11,
+    "first": "2026-09-07",
+    "in_season": 0,
+    "last": "2026-12-19",
+    "priced": 0,
+    "read": 11,
+    "unpriced": 3
+   },
    "slug": "my-lady-m"
   },
   "new-sambo": {
@@ -25961,6 +26339,15 @@
    "currency": "EUR",
    "name": "New Sambo Safari Boat",
    "operator": null,
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-01",
+    "in_season": 19,
+    "last": "2028-04-29",
+    "priced": 16,
+    "read": 100,
+    "unpriced": 25
+   },
    "slug": "new-sambo-safari-boat-2"
   },
   "odyssey": {
@@ -25968,6 +26355,15 @@
    "currency": "EUR",
    "name": "MY Odyssey",
    "operator": "SEAFARI",
+   "sailings": {
+    "dated": 53,
+    "first": "2026-09-05",
+    "in_season": 17,
+    "last": "2027-12-04",
+    "priced": 17,
+    "read": 53,
+    "unpriced": 0
+   },
    "slug": "my-odyssey"
   },
   "red-sea-aggressor-ii": {
@@ -25975,6 +26371,15 @@
    "currency": "USD",
    "name": "Red Sea Aggressor II",
    "operator": "AGGRESSOR",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-11-18",
+    "priced": 18,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "red-sea-aggressor-ii"
   },
   "red-sea-aggressor-iv": {
@@ -25982,6 +26387,15 @@
    "currency": "USD",
    "name": "Red Sea Aggressor IV",
    "operator": "AGGRESSOR",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-11-18",
+    "priced": 18,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "red-sea-aggressor-iv"
   },
   "red-sea-aggressor-v": {
@@ -25989,6 +26403,15 @@
    "currency": "USD",
    "name": "Red Sea Aggressor V",
    "operator": "AGGRESSOR",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-11-18",
+    "priced": 18,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "red-sea-aggressor-v"
   },
   "red-sea-blue-force-2": {
@@ -25996,6 +26419,15 @@
    "currency": "EUR",
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
+   "sailings": {
+    "dated": 58,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 58,
+    "unpriced": 0
+   },
    "slug": "red-sea-blue-force-2"
   },
   "reef-voyager": {
@@ -26003,6 +26435,15 @@
    "currency": "EUR",
    "name": "Reef Voyager",
    "operator": null,
+   "sailings": {
+    "dated": 20,
+    "first": "2026-09-05",
+    "in_season": 0,
+    "last": "2026-12-26",
+    "priced": 0,
+    "read": 20,
+    "unpriced": 2
+   },
    "slug": "reef-voyager"
   },
   "royal-evolution": {
@@ -26010,6 +26451,15 @@
    "currency": "EUR",
    "name": "MS Royal Evolution",
    "operator": null,
+   "sailings": {
+    "dated": 53,
+    "first": "2026-09-03",
+    "in_season": 13,
+    "last": "2028-04-27",
+    "priced": 13,
+    "read": 53,
+    "unpriced": 0
+   },
    "slug": "ms-royal-evolution"
   },
   "seawolf-dominator": {
@@ -26017,6 +26467,15 @@
    "currency": "EUR",
    "name": "MY Seawolf Dominator",
    "operator": "SEAWOLF DIVING SAFARI",
+   "sailings": {
+    "dated": 57,
+    "first": "2026-09-05",
+    "in_season": 17,
+    "last": "2027-12-25",
+    "priced": 17,
+    "read": 57,
+    "unpriced": 0
+   },
    "slug": "my-seawolf-dominator"
   },
   "seawolf-steel": {
@@ -26024,6 +26483,15 @@
    "currency": "EUR",
    "name": "Seawolf Steel",
    "operator": "SEAWOLF DIVING SAFARI",
+   "sailings": {
+    "dated": 58,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 58,
+    "unpriced": 10
+   },
    "slug": "seawolf-steel"
   },
   "serenity": {
@@ -26031,6 +26499,15 @@
    "currency": "EUR",
    "name": "Serenity",
    "operator": null,
+   "sailings": {
+    "dated": 65,
+    "first": "2026-09-05",
+    "in_season": 14,
+    "last": "2027-12-25",
+    "priced": 14,
+    "read": 65,
+    "unpriced": 0
+   },
    "slug": "serenity"
   },
   "snefro-love": {
@@ -26038,6 +26515,15 @@
    "currency": "EUR",
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
+   "sailings": {
+    "dated": 59,
+    "first": "2026-09-01",
+    "in_season": 17,
+    "last": "2027-12-23",
+    "priced": 17,
+    "read": 59,
+    "unpriced": 0
+   },
    "slug": "snefro-love"
   },
   "snefro-pearl": {
@@ -26045,6 +26531,15 @@
    "currency": "EUR",
    "name": "Snefro Pearl",
    "operator": "KING SNEFRO",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-02",
+    "in_season": 31,
+    "last": "2027-08-15",
+    "priced": 31,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "snefro-pearl"
   },
   "snefro-spirit": {
@@ -26052,6 +26547,15 @@
    "currency": "EUR",
    "name": "Snefro Spirit",
    "operator": "KING SNEFRO",
+   "sailings": {
+    "dated": 2,
+    "first": "2026-11-11",
+    "in_season": 0,
+    "last": "2027-04-24",
+    "priced": 0,
+    "read": 2,
+    "unpriced": 1
+   },
    "slug": "snefro-spirit"
   },
   "snefro-target": {
@@ -26059,6 +26563,15 @@
    "currency": "EUR",
    "name": "Snefro Target",
    "operator": "KING SNEFRO",
+   "sailings": {
+    "dated": 67,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 18,
+    "read": 67,
+    "unpriced": 0
+   },
    "slug": "snefro-target"
   },
   "south-moon-1": {
@@ -26066,6 +26579,15 @@
    "currency": "EUR",
    "name": "South Moon 1",
    "operator": null,
+   "sailings": {
+    "dated": 22,
+    "first": "2026-09-05",
+    "in_season": 0,
+    "last": "2027-01-30",
+    "priced": 0,
+    "read": 22,
+    "unpriced": 0
+   },
    "slug": "south-moon-1"
   },
   "tala": {
@@ -26073,6 +26595,15 @@
    "currency": "EUR",
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
+   "sailings": {
+    "dated": 100,
+    "first": "2026-09-03",
+    "in_season": 16,
+    "last": "2028-11-16",
+    "priced": 16,
+    "read": 100,
+    "unpriced": 0
+   },
    "slug": "mv-tala"
   },
   "topaz": {
@@ -26080,6 +26611,15 @@
    "currency": "EUR",
    "name": "Topaz",
    "operator": "SEAFARI",
+   "sailings": {
+    "dated": 65,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2028-01-01",
+    "priced": 17,
+    "read": 65,
+    "unpriced": 27
+   },
    "slug": "topaz"
   },
   "unity": {
@@ -26087,6 +26627,15 @@
    "currency": "EUR",
    "name": "Unity",
    "operator": null,
+   "sailings": {
+    "dated": 60,
+    "first": "2026-09-05",
+    "in_season": 18,
+    "last": "2027-12-25",
+    "priced": 14,
+    "read": 60,
+    "unpriced": 13
+   },
    "slug": "unity"
   },
   "vip-one": {
@@ -26094,6 +26643,15 @@
    "currency": "EUR",
    "name": "VIP One",
    "operator": null,
+   "sailings": {
+    "dated": 17,
+    "first": "2026-09-05",
+    "in_season": 0,
+    "last": "2026-12-27",
+    "priced": 0,
+    "read": 17,
+    "unpriced": 17
+   },
    "slug": "vip-one"
   }
  }
