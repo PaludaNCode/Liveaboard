@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-08-29
 ===========================
 
+nothing moved.
+```
+
+## 2026-08-29
+
+```
+changes: HEAD -> 2026-08-29
+===========================
+
 fees (14)
   ALSURAYA               marine_park      250 EUR / per_trip -> 150-250 EUR / per_trip
   Blue Seas              combined_fees    390 EUR / per_trip -> 200-380 EUR / per_trip
