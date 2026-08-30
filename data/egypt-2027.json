@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-08-29",
   "default_currency": "EUR",
-  "notes": "Prices scraped from liveaboard.com. Fee disclosures captured for 399 of 402 itineraries; the rest show true cost as unknown rather than as the advertised price. PADI Travel is read as a second source for its own berth price on 603 of 1122 sailings and the entry bar on 178 of 402 trips; where the two disagree about the bar the stricter is shown. On 230 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 38 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices scraped from liveaboard.com. Fee disclosures captured for 399 of 402 itineraries; the rest show true cost as unknown rather than as the advertised price. PADI Travel is read as a second source for its own berth price on 603 of 1122 sailings and the entry bar on 183 of 402 trips; where the two disagree about the bar the stricter is shown. On 230 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 38 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-08-28",
@@ -5578,8 +5578,8 @@
       "boat_id": "anemone",
       "nights": 7,
       "dives": 0,
-      "port_from": "Port Galib",
-      "port_to": "Port Galib",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "fury shoals"
       ],
@@ -7990,8 +7990,8 @@
       "boat_id": "bella-2",
       "nights": 3,
       "dives": 0,
-      "port_from": "Sharm El sheikh",
-      "port_to": "Sharm El Sheik",
+      "port_from": "Sharm El Sheikh",
+      "port_to": "Sharm El Sheikh",
       "dive_sites": [
         "ras mohammed",
         "tiran"
@@ -8775,13 +8775,13 @@
     {
       "id": "blue--brother-daedalus-and-elphinstone-port-ghalib-port-ghalib",
       "name": "Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib)",
-      "title": "Brothers, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)",
+      "title": "Brothers, Daedalus & Elphinstone",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "elphinstone"
@@ -8964,13 +8964,13 @@
     {
       "id": "blue--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
       "name": "Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib)",
-      "title": "Brothers - Daedalus and Elphinstone (Hurghada - Port Ghalib)",
+      "title": "Brothers, Daedalus & Elphinstone",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -9325,13 +9325,13 @@
     {
       "id": "blue--daedalus-fury-shoal-port-ghalib-port-ghalib",
       "name": "Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)",
-      "title": "Daedalus & Fury Shoals (Port Ghalib - Port Ghalib)",
+      "title": "Daedalus & Fury Shoals",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "fury shoals"
@@ -9514,13 +9514,13 @@
     {
       "id": "blue--daedalus-rocky-island-and-zabargad-port-ghalib-port-ghalib",
       "name": "Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib)",
-      "title": "Daedalus, Rocky Island and Zabargad (Port Ghalib - Port Ghalib)",
+      "title": "Daedalus, Rocky Island & Zabargad",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
         "rocky island",
@@ -10717,8 +10717,43 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
+        "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
+      },
+      "padi_fees": [
+        {
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "environment_tax",
+          "note": "Governamental Reef Tax",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 56.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "fuel_surcharge",
+          "note": "Fuel surcharges",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        }
+      ],
+      "padi_fees_complete": false
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -10925,8 +10960,43 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
+        "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
+      },
+      "padi_fees": [
+        {
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "environment_tax",
+          "note": "Governamental Reef Tax",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 56.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "fuel_surcharge",
+          "note": "Fuel surcharges",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        }
+      ],
+      "padi_fees_complete": false
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -11377,8 +11447,43 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
+        "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
+      },
+      "padi_fees": [
+        {
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "environment_tax",
+          "note": "Governamental Reef Tax",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 56.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "fuel_surcharge",
+          "note": "Fuel surcharges",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        }
+      ],
+      "padi_fees_complete": false
     },
     {
       "id": "blue-horizon--northern-red-sea-brothers-hurghada-port-ghalib",
@@ -12069,8 +12174,43 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
+        "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
+      },
+      "padi_fees": [
+        {
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "environment_tax",
+          "note": "Governamental Reef Tax",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 56.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "fuel_surcharge",
+          "note": "Fuel surcharges",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        }
+      ],
+      "padi_fees_complete": false
     },
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-port-ghalib-port-ghalib",
@@ -12277,8 +12417,43 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 30 minimum logged dives required."
-      }
+        "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
+      },
+      "padi_fees": [
+        {
+          "amount": {
+            "amount": 200.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "environment_tax",
+          "note": "Governamental Reef Tax",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 56.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "fuel_surcharge",
+          "note": "Fuel surcharges",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-08-29",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        }
+      ],
+      "padi_fees_complete": false
     },
     {
       "id": "blue-melody--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -15378,13 +15553,13 @@
     {
       "id": "blue-pearl--north-tiran-hurghada-hurghada",
       "name": "North & Tiran (Hurghada-Hurghada)",
-      "title": "North & Tiran (Hurghada-Hurghada)",
+      "title": "North & Tiran",
       "operator_id": "blue-planet",
       "boat_id": "blue-pearl",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran"
       ],
@@ -15566,13 +15741,13 @@
     {
       "id": "blue-pearl--north-wrecks-hurghada-hurghada",
       "name": "North & Wrecks (Hurghada- Hurghada)",
-      "title": "North & Wrecks (Hurghada - Hurghada)",
+      "title": "North & Wrecks",
       "operator_id": "blue-planet",
       "boat_id": "blue-pearl",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "region": "northern route",
       "summary": null,
@@ -16509,13 +16684,13 @@
     {
       "id": "blue-seas--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
       "name": "Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib)",
-      "title": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
+      "title": "Brothers, Daedalus & Elphinstone",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
       "dives": 17,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -17835,13 +18010,13 @@
     {
       "id": "blue-seas--st-john-s-port-ghalib-port-ghalib",
       "name": "St John's (Port Ghalib- Port Ghalib)",
-      "title": "St. John's (Port Ghalib - Port Ghalib)",
+      "title": "St. John's",
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
       "dives": 17,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns"
       ],
@@ -32515,13 +32690,13 @@
     {
       "id": "emperor-elite--south-st-johns-port-ghalib-port-ghalib",
       "name": "South & St. Johns (Port Ghalib- Port Ghalib)",
-      "title": "South & St. John's (Port Ghalib - Port Ghalib)",
+      "title": "South & St. John's",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-elite",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns"
       ],
@@ -32977,13 +33152,13 @@
     {
       "id": "emperor-superior--famous-five-hurghada-hurghada",
       "name": "Famous Five (Hurghada- Hurghada)",
-      "title": "Famous Five (Hurghada - Hurghada)",
+      "title": "Famous Five",
       "operator_id": "emperor-divers",
       "boat_id": "emperor-superior",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "region": null,
       "summary": "The Emperor Superior is perfectly set up for photographers to enjoy week-long itineraries in the Red Sea. Many trips allow for 21+ dives per week.",
@@ -34281,13 +34456,13 @@
     {
       "id": "explorer-ventures-grand-sea-explorer--north-and-brothers-hurghada-hurghada",
       "name": "North and Brothers (Hurghada-Hurghada)",
-      "title": "North and Brothers (Hurghada-Hurghada)",
+      "title": "North & Brothers",
       "operator_id": "explorer-ventures",
       "boat_id": "explorer-ventures-grand-sea-explorer",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers"
       ],
@@ -34309,13 +34484,13 @@
     {
       "id": "explorer-ventures-grand-sea-explorer--north-and-tiran-hurghada-hurghada",
       "name": "North and Tiran (Hurghada-Hurghada)",
-      "title": "North and Tiran (Hurghada-Hurghada)",
+      "title": "North & Tiran",
       "operator_id": "explorer-ventures",
       "boat_id": "explorer-ventures-grand-sea-explorer",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran"
       ],
@@ -60581,13 +60756,13 @@
     {
       "id": "seawolf-dominator--deep-south-st-john-s-port-ghalib-port-ghalib",
       "name": "Deep South-St.John's (Port Ghalib-Port Ghalib)",
-      "title": "Deep South-St. John's (Port Ghalib-Port Ghalib)",
+      "title": "Deep South & St. John's",
       "operator_id": "seawolf-diving-safari",
       "boat_id": "seawolf-dominator",
       "nights": 7,
       "dives": 0,
-      "port_from": "Unknown",
-      "port_to": "Unknown",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns"
       ],
@@ -61152,8 +61327,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "PRG",
-      "port_to": "PRG",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "st johns"
       ],
@@ -61215,8 +61390,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "HRG",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "region": null,
       "summary": null,
@@ -61276,8 +61451,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "HRG",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -61341,8 +61516,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "PRG",
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
@@ -61406,8 +61581,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "PRG",
-      "port_to": "PRG",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "zabargad",
         "st johns",
@@ -61471,8 +61646,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "HRG",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "region": "northern route",
       "summary": null,
@@ -61532,8 +61707,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "PRG",
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "elphinstone"
@@ -61596,8 +61771,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "PRG",
-      "port_to": "HRG",
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "elphinstone"
@@ -61660,8 +61835,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "HRG",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran"
       ],
@@ -61723,8 +61898,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "PRG",
+      "port_from": "Hurghada",
+      "port_to": "Port Ghalib",
       "dive_sites": [],
       "region": null,
       "summary": null,
@@ -61784,8 +61959,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "PRG",
-      "port_to": "HRG",
+      "port_from": "Port Ghalib",
+      "port_to": "Hurghada",
       "dive_sites": [],
       "region": null,
       "summary": null,
@@ -61845,8 +62020,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "PRG",
-      "port_to": "PRG",
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
       "dive_sites": [],
       "region": "southern route",
       "summary": null,
@@ -61906,8 +62081,8 @@
       "boat_id": "seawolf-steel",
       "nights": 7,
       "dives": 0,
-      "port_from": "HRG",
-      "port_to": "HRG",
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
       "dive_sites": [
         "tiran",
         "dahab"
