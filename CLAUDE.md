@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 510 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # everything, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -27,6 +27,26 @@ PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
 and the CI check all promote on them, so one canonical set of inputs lives in
 `cli.py` and cannot drift apart across five workflows.
+
+**A test over committed data gates the commit, never the fetch.** The suite
+holds both kinds and the default command runs both; only the three jobs that
+fetch run it twice, and the first of those runs opts out:
+
+```bash
+LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+```
+
+This is not a convenience. `cabins.yml`, `refresh.yml` and `itineraries.yml`
+ran the whole suite as their *first* step, so on 2026-08-30 a stale cabin book
+contradicting the rows the refresh had just written failed the suite in front
+of the only job that could refresh that book — the guard gating the fetch that
+would clear the condition the guard was testing for. A run that fetches and
+then refuses to publish is recoverable; one that refuses to fetch is not.
+Committed data is reached through `tests/published.py`, which is the gate, and
+`TestThePublicationGateIsComplete` refuses a test that opens `data/` for
+itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` —
+are outside it: no crawl touches them, so nothing asserted about them can ever
+be cleared by fetching.
 
 **Read the published page without checking anything out.** After a merge, to
 see what actually shipped:

@@ -27,6 +27,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
+import published  # noqa: E402
 from fetch_padi import _departure_book, _iso_day  # noqa: E402
 from liveaboard.dataset import Dataset  # noqa: E402
 from liveaboard.promote import promote  # noqa: E402
@@ -579,10 +580,7 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
         self.assertEqual(sorted(OPERATOR_ALIASES), ["aggressor fleet& dancer fleet"])
 
     def test_the_two_blues_stay_apart_in_the_committed_dataset(self) -> None:
-        import json
-        from pathlib import Path
-
-        data = json.loads(Path("data/egypt-2027.json").read_text())
+        data = published.raw()
         boats = {b["id"]: b for b in data["boats"]}
         if "blue" not in boats or "blue-pearl" not in boats:
             self.skipTest("neither Blue is in this checkout's dataset")

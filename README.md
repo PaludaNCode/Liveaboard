@@ -58,6 +58,16 @@ PYTHONPATH=src python3 -m liveaboard.cli scrape   # refresh from the sources
 PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
+The suite holds two kinds of test and the command above runs both. Some assert
+against **committed data** — that the advertised price really is the bottom of
+every shipped cabin ladder, that the footer's vessel counts are the dataset's.
+Those are a *publication* gate: they are reached through `tests/published.py`,
+and the three jobs that fetch skip them on their pre-flight run
+(`LIVEABOARD_TESTS=code`) and run them again before committing. Put in front of
+a fetch they deadlock it — a stale cabin book failed the suite in front of the
+only job able to refresh that book — and a run that fetches and then refuses to
+publish is recoverable where one that refuses to fetch is not.
+
 `build` emits one self-contained HTML file — CSS, JS and data all inlined, no
 CDN, nothing fetched at runtime. Type is the visitor's own system font: a
 webfont link in `<head>` is render-blocking, which cost 13 seconds to first row

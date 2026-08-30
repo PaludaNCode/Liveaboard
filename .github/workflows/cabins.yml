@@ -78,8 +78,17 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run tests
-        run: PYTHONPATH=src python3 -m unittest discover -s tests
+      # Only the tests that answer to `src/`. The ones that assert against
+      # committed data are a **publication** gate and are deliberately not run
+      # here — see tests/published.py. Running them in front of a fetch is how
+      # cabins.yml deadlocked on 2026-08-30: a stale cabin book contradicted
+      # the rows the refresh had just written, the suite failed on that, and
+      # the only job able to refresh the book exited before its fetch step.
+      #
+      # A run that fetches and then refuses to publish is recoverable. One
+      # that refuses to fetch is not.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
       # The run summary is where a capped run is actually read: it prints each
       # sailing's cabin count, its cheapest berth and how many are left at it,
@@ -151,6 +160,15 @@ jobs:
         run: |
           PYTHONPATH=src python3 -m liveaboard.cli promote
           PYTHONPATH=src python3 -m liveaboard.cli build
+
+      # The publication gate: the whole suite, now that the data it asserts
+      # against is the data this run just wrote. A failure here stops the
+      # commit and the push, which is where an assertion about published
+      # output belongs — this run publishes nothing, and the next run still
+      # reaches its fetch step whatever this one said. That is the whole
+      # difference: the loop is broken, at the cost of one run's fetch.
+      - name: Check what is about to be published
+        run: PYTHONPATH=src python3 -m unittest discover -s tests
 
       - name: Commit the cabin book
         run: |

@@ -35,6 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
+import published  # noqa: E402
 from derive_sales import prune, sailings_read_on  # noqa: E402
 from liveaboard.dataset import Dataset  # noqa: E402
 from liveaboard.promote import promote  # noqa: E402
@@ -332,14 +333,16 @@ class TestPromotionStaysPure(unittest.TestCase):
 
 class TestTheCommittedBook(unittest.TestCase):
     """The book in `data/` is what the published page's change log is built
-    from, so its shape is checked here rather than only in a fixture."""
+    from, so its shape is checked here rather than only in a fixture.
 
-    BOOK = Path(__file__).resolve().parent.parent / "data" / "sales.json"
+    Through `published`, because it is an assertion about a file the cabin
+    pass writes: read directly it would sit in front of `cabins.yml`'s fetch
+    and could stop the only job able to correct whatever it was complaining
+    about.
+    """
 
     def setUp(self):
-        if not self.BOOK.exists():
-            self.skipTest(f"{self.BOOK} has not been derived yet")
-        self.book = json.loads(self.BOOK.read_text(encoding="utf-8"))
+        self.book = published.raw("sales.json")
 
     def test_every_day_is_a_census_with_a_count_that_matches_it(self):
         for name, entry in self.book["days"].items():

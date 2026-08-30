@@ -17,6 +17,8 @@ from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.diagnose import describe
 from liveaboard.scrape.padi_com import PadiComAdapter
 
+import published
+
 ROOT = Path(__file__).resolve().parent.parent
 SEED = ROOT / "data" / "seed" / "egypt-2027.json"
 
@@ -263,6 +265,56 @@ ALLOWED_EXTERNAL: frozenset[str] = frozenset()
 EXTERNAL_REF = re.compile(r"""(?:src|href)\s*=\s*["'](https?://[^"']+)["']|url\(\s*["']?(https?://[^"')]+)""")
 
 
+class TestThePublicationGateIsComplete(unittest.TestCase):
+    """No test may open a fetched file for itself; that is what locks a fetcher out.
+
+    `cabins.yml` runs the suite before it fetches, so an assertion about
+    committed data sitting outside the gate can stop the only job able to
+    refresh that data — which is exactly what happened on 2026-08-30 and left
+    the pipeline circling. `tests/published.py` is the one door in, and this is
+    what keeps it the only one.
+
+    A convention would not do. The failure it guards against is a *new* test
+    written next month, by somebody with no reason to know any of this, that
+    reads `data/egypt-2027.json` because that is the obvious thing to do.
+
+    Textual rather than a walk of the syntax tree, because the thing being
+    forbidden is a path spelled out in source, and the two spellings of one are
+    easy to state. Prose is not matched: a docstring naming `data/fees.json` in
+    backticks carries no quote before `data/`, which is what the patterns
+    require.
+    """
+
+    PATH_LITERAL = re.compile(r"""["']data/(?P<name>[\w.-]+)["']""")
+    PATH_JOINED = re.compile(r"""["']data["']\s*/\s*["'](?P<name>[\w.-]+)["']""")
+
+    def test_no_test_opens_a_fetched_file_for_itself(self):
+        found: list[str] = []
+        for path in sorted((ROOT / "tests").glob("test_*.py")):
+            body = path.read_text(encoding="utf-8")
+            for pattern in (self.PATH_LITERAL, self.PATH_JOINED):
+                for match in pattern.finditer(body):
+                    if match.group("name") not in published.PUBLISHED:
+                        continue
+                    line = body[: match.start()].count("\n") + 1
+                    found.append(f"{path.name}:{line} {match.group(0)}")
+        self.assertEqual(
+            found, [],
+            "these reach into data/ directly; go through tests/published.py so "
+            "the assertion gates the commit rather than the fetch:\n  "
+            + "\n  ".join(found),
+        )
+
+    def test_the_gate_is_opted_into_and_never_out_of(self):
+        """A flag that must be remembered to get the *full* suite is a
+        publication gate that quietly stops running. `LIVEABOARD_TESTS=code` is
+        opted into, by the four jobs that fetch, and by nothing else."""
+        self.assertFalse(published.code_only({}))
+        self.assertFalse(published.code_only({published.GATE: ""}))
+        self.assertFalse(published.code_only({published.GATE: "all"}))
+        self.assertTrue(published.code_only({published.GATE: "code"}))
+
+
 class TestNoUnexpectedExternalReferences(unittest.TestCase):
     """The page ships as one file; anything it fetches at runtime is a claim.
 
@@ -504,7 +556,6 @@ class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
     price landed on the August page and saw a different number.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
 
     def test_the_column_prefers_the_departure_over_the_vessel_page(self):
         """Asserted on the built page, because this is a choice app.js makes.
@@ -526,9 +577,7 @@ class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
         page, `m=05/2027` from a departure -- so the comparison is on the
         number, not the text.
         """
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
-        payload = build_payload(Dataset.load(self.LIVE))
+        payload = published.page()
         checked = 0
         for departure in payload["departures"]:
             url = departure.get("booking_url") or ""
@@ -560,12 +609,11 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
     asserts the dataset and `ALLOWED_EXTERNAL` asserts the page fetches nothing.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
     TEMPLATE = ROOT / "templates" / "index.html"
 
     def nitrox_by_vessel(self) -> dict[str, int]:
         """How many *boats* fall in each state. Nitrox is a vessel's policy."""
-        payload = build_payload(Dataset.load(self.LIVE))
+        payload = published.page()
         state: dict[str, str] = {}
         for departure in payload["departures"]:
             itinerary = payload["itineraries"][departure["itinerary_id"]]
@@ -585,8 +633,6 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         return counts
 
     def test_the_stated_vessel_counts_are_the_real_ones(self):
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
         counts = self.nitrox_by_vessel()
         html = self.TEMPLATE.read_text(encoding="utf-8")
         for number, state in (
@@ -609,10 +655,9 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         Naming a state nobody will see is a smaller sin than the reverse and
         still a claim about the data that the data does not support.
         """
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
+        counts = self.nitrox_by_vessel()
         html = self.TEMPLATE.read_text(encoding="utf-8")
-        if not self.nitrox_by_vessel().get("listed_unpriced"):
+        if not counts.get("listed_unpriced"):
             self.assertTrue(
                 "extra, no price" not in html,
                 "the footer offers 'extra, no price' as a nitrox state, and no "
@@ -648,7 +693,6 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     actually reads goes missing.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
     APP = ROOT / "templates" / "app.js"
 
     NEVER_SHIPPED = ("charged", "charged_max", "counted", "basis", "provenance")
@@ -656,8 +700,7 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     def lines(self, live=False):
         """The live dataset where asked for: the seed prices no fee as a range,
         so `display_max` legitimately appears on none of its lines."""
-        source = self.LIVE if live and self.LIVE.exists() else SEED
-        payload = build_payload(Dataset.load(source))
+        payload = published.page() if live else build_payload(Dataset.load(SEED))
         out = []
         for itinerary in payload["itineraries"].values():
             out.extend(itinerary.get("lines") or [])
@@ -684,8 +727,6 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     def test_the_fields_the_page_does_read_are_all_present(self):
         """The other half of the guard. Trimming further has to fail here."""
         app = self.APP.read_text(encoding="utf-8")
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
         needed = [f for f in ("code", "label", "tier", "display", "display_max",
                               "has_price", "included", "toggle", "note", "fx")
                   if "line." + f in app or "." + f in app]
@@ -1253,9 +1294,7 @@ class TestTheSellerFilter(unittest.TestCase):
         derivation of "who sells this" would be a second answer, and the chip
         counts would drift from the links beside them.
         """
-        if not (ROOT / "data" / "egypt-2027.json").exists():
-            self.skipTest("no dataset in this checkout")
-        payload = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))
+        payload = published.page()
         counts = {"both": 0, "liveaboard": 0, "padi": 0}
         for d in payload["departures"]:
             counts["padi" if d.get("padi_only")
@@ -1313,13 +1352,11 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
     """
 
     def test_the_payload_carries_a_build_stamp(self) -> None:
-        if not (ROOT / "data" / "egypt-2027.json").exists():
-            self.skipTest("no dataset in this checkout")
-        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        meta = published.page()["meta"]
         self.assertRegex(meta["built"], r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC$")
 
     def test_it_is_not_the_crawl_date_wearing_a_new_name(self) -> None:
-        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        meta = published.page()["meta"]
         self.assertNotEqual(meta["built"], meta["generated"])
         self.assertRegex(meta["generated"], r"^\d{4}-\d{2}-\d{2}$",
                          "the crawl date must stay a date: it is a day, not a moment")

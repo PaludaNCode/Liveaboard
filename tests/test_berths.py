@@ -15,10 +15,9 @@ what a berth costs stays here, where it is tested.
 
 from __future__ import annotations
 
-import json
 import unittest
-from pathlib import Path
 
+import published
 from liveaboard.promote import (
     SELLERS,
     STALE_LADDER,
@@ -28,9 +27,6 @@ from liveaboard.promote import (
     berth_key,
     promote,
 )
-
-DATASET = Path(__file__).resolve().parents[1] / "data" / "egypt-2027.json"
-
 
 def cabin(name: str, price: float, berths: int | None, *, sold_out: bool = False,
           supp: int | None = None) -> dict[str, object]:
@@ -227,10 +223,7 @@ class TestTheJoin(unittest.TestCase):
 
     def test_a_sailing_with_no_cabin_record_keeps_its_row(self):
         """Merging a second source must never change the row count."""
-        candidate = json.loads(
-            (Path(__file__).resolve().parents[1] / "data" / "candidate.json")
-            .read_text(encoding="utf-8")
-        )
+        candidate = published.raw("candidate.json")
         with_book = promote(candidate, cabins={
             "collected": "2026-08-28",
             "departures": {"x": record(cabin("Twin", 1200, 4))},
@@ -244,7 +237,7 @@ class TestTheCommittedDataset(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.payload = json.loads(DATASET.read_text(encoding="utf-8"))
+        cls.payload = published.raw()
 
     def test_the_pools_are_published(self):
         self.assertTrue(self.payload["cabin_names"])
@@ -380,6 +373,6 @@ class TestAStaleLadderIsRefused(unittest.TestCase):
     def test_promote_names_every_ladder_it_refused(self):
         """Never silent: each one is a booking page this pipeline read and then
         declined to publish, and only a fresh crawl can put it back."""
-        payload = json.loads(DATASET.read_text(encoding="utf-8"))
+        payload = published.raw()
         for line in payload.get("stale_ladders") or []:
             self.assertIn("ladder starts at", line)

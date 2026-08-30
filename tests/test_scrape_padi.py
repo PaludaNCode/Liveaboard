@@ -12,6 +12,7 @@ from __future__ import annotations
 import unittest
 from datetime import datetime, timezone
 
+import published
 from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.padi_com import PadiComAdapter
 from liveaboard.taxonomy import DiverLevel
@@ -514,7 +515,7 @@ class TestAliasMap(unittest.TestCase):
         from pathlib import Path
 
         aliases = json.loads(Path("data/padi_aliases.json").read_text())
-        boats = {b["id"] for b in json.loads(Path("data/egypt-2027.json").read_text())["boats"]}
+        boats = {b["id"] for b in published.raw()["boats"]}
         minted = set(aliases.get("padi_only") or [])
         unknown = sorted(set(aliases["aliases"]) - boats - minted)
         self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
