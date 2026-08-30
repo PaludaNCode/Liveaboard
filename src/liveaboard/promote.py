@@ -2076,9 +2076,25 @@ def promote(
         # ordering exists to stop trusting, but a trip whose description names
         # no reef at all -- "Famous Five", "Get Wrecked" -- would otherwise
         # publish an empty cell where the operator did say something.
+        # And, last of all, what the *second* seller says about the same trip.
+        # Last because it is the least structured thing here: PADI publishes a
+        # blurb and a day plan where liveaboard.com publishes headed sections,
+        # and against the 180 trips both describe, PADI's words add 173 reef
+        # mentions ours does not -- among them Elphinstone on a Brothers and
+        # Safaga week, off a sentence saying the two "are quite distant from
+        # one another". Merged in, that is the BDE-badging failure this project
+        # already removed once.
+        #
+        # It only ever answers where everything else is silent, and there it is
+        # the difference between a row the filter can reach and one it cannot:
+        # 19 itineraries and 47 rows have no site at all, and PADI describes 16
+        # of them. The other three name no reef in any field -- "Best Of
+        # Hurghada", "Specialty Photography Safari" -- and stay blank, which is
+        # right. A trip whose sites nobody states has none to show.
         sites = (_sites_from_description(trip)
                  or _sites_from_regions(trip.get("regions") or [])
-                 or _sites_from_name(name))
+                 or _sites_from_name(name)
+                 or list(padi_trip.get("dive_sites") or []))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)

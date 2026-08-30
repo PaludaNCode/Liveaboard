@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 import published  # noqa: E402
 from fetch_padi import (  # noqa: E402
     MIN_BOOK_RATIO,
+    _padi_sites,
     _departure_book,
     _iso_day,
     keeps_the_book,
@@ -672,3 +673,69 @@ class TestTheBookIsNeverQuietlyEmptied(unittest.TestCase):
         """As `promote --force` is the way past its own ratio guard: the
         shrinkage may be real, and then a person says so."""
         self.assertTrue(keeps_the_book(0, 441, force=True))
+
+
+class TestPadiIsTheLastWordOnReefs(unittest.TestCase):
+    """The dive-site filter is what the page is for, and 47 rows could not be
+    reached by it: a trip with no sites is invisible to the handle the route
+    labels were removed in favour of.
+
+    PADI-only trips went blank fourteen times more often than the rest, and for
+    a structural reason -- the operator's description and region list both come
+    from liveaboard.com's archive, which has no entry for a boat it sells no
+    berths on, so the title parser answered alone against titles like *Premium
+    Expedition* and *Family Safari (HRG - HRG)*.
+
+    PADI describes those trips. It is put **last** because it describes them
+    least precisely: against the 180 trips both sellers cover, its blurb adds
+    173 reef mentions ours does not, including Elphinstone on a Brothers and
+    Safaga week off a sentence saying the two "are quite distant from one
+    another". Merged in, that is the BDE-badging failure this project removed
+    once already.
+    """
+
+    def sites(self, detail):
+        return _padi_sites(detail)
+
+    def test_the_day_plan_is_read_before_the_blurb(self):
+        """A day says what you dive; a blurb is an essay that will mention
+        anywhere. The same distinction promote already draws between a day
+        section and a place section on the other source."""
+        self.assertEqual(
+            self.sites({
+                "days": [{"description": "<p>Diving at Ras Mohammed</p>"}],
+                "highlightsDescription": "<p>Unlike the Brothers, this week ...</p>",
+            }),
+            ["ras mohammed"])
+
+    def test_the_blurb_answers_only_where_the_day_plan_is_silent(self):
+        """Most day plans carry nothing, or "Up to three dives are offered
+        daily" -- so dropping the blurb entirely would leave the trips this
+        exists for still blank."""
+        self.assertEqual(
+            self.sites({
+                "days": [{"description": "Up to three dives are offered daily."}],
+                "highlightsDescription": "<p>The route includes the Straits of Tiran.</p>",
+            }),
+            ["tiran"])
+
+    def test_markup_is_stripped_before_the_reefs_are_read(self):
+        self.assertEqual(
+            self.sites({"days": [{"description":
+                                  "<p><span style='x'>Thistlegorm</span></p>"}]}),
+            ["thistlegorm"])
+
+    def test_a_reef_named_twice_is_one_site(self):
+        self.assertEqual(
+            self.sites({"days": [{"description": "Thistlegorm"},
+                                 {"description": "Thistlegorm again"}]}),
+            ["thistlegorm"])
+
+    def test_a_trip_that_names_no_reef_yields_nothing(self):
+        """"Best Of Hurghada", "Specialty Photography Safari" and "Solar
+        Eclipse South Tour" name no reef in any field, and stay blank. A trip
+        whose sites nobody states has none to show."""
+        self.assertEqual(
+            self.sites({"days": [{"description": "A relaxed week of photography."}],
+                        "highlightsDescription": "<p>Best of Hurghada.</p>"}),
+            [])

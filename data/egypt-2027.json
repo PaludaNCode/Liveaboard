@@ -17558,8 +17558,12 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -33663,8 +33667,13 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "thistlegorm",
+        "tiran",
+        "sha'ab el erg",
+        "ras mohammed"
+      ],
+      "region": null,
       "summary": "Emperor Asmaa offers true value for money while diving the Red Sea. 10 ensuite cabins to cater for 20 guests on board. Free nitrox, WiFi and wine with dinner.",
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=8/2027",
       "fees": [
@@ -36834,7 +36843,16 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "brothers",
+        "thistlegorm",
+        "abu nuhas",
+        "salem express",
+        "rosalie moller",
+        "safaga",
+        "panorama reef",
+        "ras mohammed"
+      ],
       "region": null,
       "summary": "The Emperor Superior is perfectly set up for photographers to enjoy week-long itineraries in the Red Sea. Many trips allow for 21+ dives per week.",
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=8/2027",
@@ -37836,8 +37854,13 @@
       "dives": 0,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
-      "dive_sites": [],
-      "region": "Sinai and Tiran",
+      "dive_sites": [
+        "thistlegorm",
+        "tiran",
+        "ras mohammed",
+        "gubal"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -38103,8 +38126,14 @@
       "dives": 0,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
-      "dive_sites": [],
-      "region": "Sinai and Tiran",
+      "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
+        "tiran",
+        "gubal"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -49405,8 +49434,15 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "sha'ab el erg",
+        "abu nuhas",
+        "ras mohammed",
+        "gubal",
+        "thistlegorm",
+        "rosalie moller"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -49976,8 +50012,14 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "tiran",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "abu nuhas"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -56131,7 +56173,12 @@
       "dives": 0,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone",
+        "ras mohammed"
+      ],
       "region": null,
       "summary": "Join the Odyssey yacht for an exciting Red Sea dive safari. Bright &amp; colourful she caters for up to 26 guests in 13 en-suite modern cabins, dining room, indoor &amp; outdoor lounge &amp; sundeck with hot tub.",
       "source_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=8/2027",
@@ -58708,8 +58755,12 @@
       "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
-      "dive_sites": [],
-      "region": "southern route",
+      "dive_sites": [
+        "st johns",
+        "fury shoals",
+        "samadai"
+      ],
+      "region": null,
       "summary": "The Red Sea Aggressor IV is a 43.5 meters/142.7 feet long liveaboard sailing from Port Ghalib, in Egypt&rsquo;s Red Sea, taking 26 passengers in 13 cabins to the best dive sites in the Southern Red Sea.",
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=8/2027",
       "fees": [
@@ -66867,8 +66918,14 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "rosalie moller",
+        "gubal",
+        "sha'ab el erg"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -67159,7 +67216,15 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
-      "dive_sites": [],
+      "dive_sites": [
+        "elphinstone",
+        "thistlegorm",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "panorama reef",
+        "sha'ab el erg"
+      ],
       "region": null,
       "summary": null,
       "source_url": null,
@@ -67304,7 +67369,15 @@
       "dives": 0,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "elphinstone",
+        "thistlegorm",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "panorama reef",
+        "sha'ab el erg"
+      ],
       "region": null,
       "summary": null,
       "source_url": null,
@@ -67538,7 +67611,10 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "abu nuhas",
+        "gubal"
+      ],
       "region": null,
       "summary": null,
       "source_url": null,
@@ -67898,8 +67974,15 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "northern route",
+      "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
+        "rosalie moller",
+        "gubal",
+        "sha'ab el erg"
+      ],
+      "region": null,
       "summary": null,
       "source_url": null,
       "fees": [
@@ -68254,7 +68337,15 @@
       "dives": 0,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
-      "dive_sites": [],
+      "dive_sites": [
+        "elphinstone",
+        "thistlegorm",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "panorama reef",
+        "ras mohammed"
+      ],
       "region": null,
       "summary": null,
       "source_url": null,
@@ -68341,7 +68432,15 @@
       "dives": 0,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "elphinstone",
+        "thistlegorm",
+        "abu nuhas",
+        "salem express",
+        "gubal",
+        "panorama reef",
+        "ras mohammed"
+      ],
       "region": null,
       "summary": null,
       "source_url": null,

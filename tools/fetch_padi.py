@@ -70,7 +70,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.promote import itinerary_key  # noqa: E402
+from liveaboard.promote import _sites_from_name, itinerary_key, normalise  # noqa: E402
 from liveaboard.scrape.padi_com import (  # noqa: E402
     HOST,
     ITINERARY_DETAIL,
@@ -229,6 +229,62 @@ def _iso_day(value: str | None) -> str | None:
         return None
     day = value[:10]
     return day if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) else None
+
+
+TAG = re.compile(r"<[^>]+>")
+
+SAMPLE_CAVEAT = "sample itinerary"
+"""PADI labels its day plans as samples, in the operators' own words.
+
+Kept as prose rather than acted on: it is a caveat about *which* sites and in
+what order, not a statement that the trip goes somewhere else. The page says
+where every site list came from, and this one is the operator describing this
+trip.
+"""
+
+
+def _padi_sites(detail: dict) -> list[str]:
+    """Reefs from PADI's own account of one trip: the day plan, then the blurb.
+
+    **A last resort, and `promote` uses it as one.** It is put behind the
+    operator's structured description, its region list and the trip title,
+    because neither PADI field is structured the way liveaboard.com's
+    description is and both name reefs the trip does not visit. Measured
+    against the 180 trips where both sellers describe the same week, the blurb
+    adds 173 reef mentions our side does not have -- and the ones it adds
+    include *"Brothers and Elphinstone are quite distant from one another"* on
+    a Brothers/Safaga trip, which is the BDE-badging failure this project
+    already removed once.
+
+    So it never joins a list that has anything in it. On the 19 itineraries
+    with no sites at all -- 47 rows the dive-site filter cannot reach -- it is
+    the only thing there is, and it is the operator's own words about that
+    trip: *Sinai Classic* yields Thistlegorm, Tiran and Ras Mohammed, and
+    *Deep South Egypt* yields Zabargad, St John's, Sataya and Rocky Island.
+
+    **The day plan first.** `days` is per-day text, and a day says what you
+    dive where a blurb is an essay that will mention anywhere -- the same
+    distinction `promote._sites_from_description` already draws between a day
+    section and a place section on the other source. The blurb answers only
+    where the day plan is silent, which it often is: most days carry either
+    nothing or "Up to three dives are offered daily".
+    """
+    found: list[str] = []
+    seen: set[str] = set()
+
+    def take(text: str) -> None:
+        for site in _sites_from_name(" ".join(TAG.sub(" ", text or "").split())):
+            key = normalise(site)
+            if key not in seen:
+                seen.add(key)
+                found.append(site)
+
+    for day in detail.get("days") or []:
+        if isinstance(day, dict):
+            take(str(day.get("description") or ""))
+    if not found:
+        take(str(detail.get("highlightsDescription") or ""))
+    return found
 
 
 def keeps_the_book(rebuilt: int, held: int, *, force: bool = False) -> bool:
@@ -425,6 +481,12 @@ def main() -> int:
         if not name:
             continue
         record["boat"] = boat_id
+        # The reefs PADI's own account of the trip names. Folded here rather
+        # than in `padi_com`, so the site vocabulary stays in one module and
+        # this book cannot drift from the one `promote` matches titles with.
+        sites = _padi_sites(detail)
+        if sites:
+            record["dive_sites"] = sites
         # The vessel's own currency, not the payload's: nothing in an itinerary
         # or a sailing states one, and the app's Currency-code header does not
         # convert -- EUR, USD and GBP all answer the same number. A vessel whose

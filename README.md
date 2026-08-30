@@ -121,9 +121,14 @@ which.
 **Dive sites, not route labels.** Filtering is on the sites themselves — a BDE
 week is one naming Brothers, Daedalus and Elphinstone — because a name for a
 set of sites is a layer that can be wrong and answers nothing the sites do not.
-Sites are read from the trip title, which is all the source publishes: 251 of
-314 name reefs, 40 name only a direction and say so, and 23 name neither and
-stay blank rather than being guessed at (#52).
+Sites come from the operator's own description of the trip, then its region
+list, then the trip title, then — last, and only where all three are silent —
+the second seller's account of the same week. **399 of 402** itineraries name
+reefs, one names only a direction and says so, and two name neither and stay
+blank rather than being guessed at (#52, #113). The ordering is the point: a
+source is never merged into one above it, because PADI's blurb says Elphinstone
+and Brothers "are quite distant from one another" on a week that visits neither
+together, and unioning that in is how a St John's week once got badged BDE.
 
 **Provenance**: every price and fee records where it came from and when
 (`scraped`, `operator_stated`, `seed_estimate`, `derived`).

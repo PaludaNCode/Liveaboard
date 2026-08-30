@@ -132,6 +132,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   withheld from every other trip length that boat sells; the itinerary fragment
   states one per *trip*, which needs no such guard and wins. Unknown stays 0 and
   the column says "not stated".
+- **Four sources for a trip's reefs, in order, never merged.** The operator's
+  own description, then its region list, then the trip title, then — last —
+  what the *second* seller says about the same week (`padi.json`'s
+  `dive_sites`, folded by `fetch_padi._padi_sites` from the day plan and then
+  the blurb). PADI is last because it is the least structured: against the 180
+  trips both sellers describe, its words add 173 reef mentions ours does not,
+  among them Elphinstone on a Brothers and Safaga week off a sentence saying
+  the two "are quite distant from one another". Merged in, that is the
+  BDE-badging failure removed once already; used only where the three above are
+  silent, it is the difference between a row the site filter can reach and one
+  it cannot — 47 rows on 19 itineraries, down to 4 on 3. The three that stay
+  blank name no reef in any field, and blank is right for them.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is

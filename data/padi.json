@@ -5,6 +5,10 @@
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada-Hurghada)": {
    "boat": "all-star-ghani",
    "boat_name": "All Star - Ghani",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -44,6 +48,13 @@
   "all-star-ghani::North & Brothers (Hurghada - Hurghada)": {
    "boat": "all-star-ghani",
    "boat_name": "All Star - Ghani",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -83,6 +94,12 @@
   "all-star-ghani::North & Tiran (Hurghada - Hurghada)": {
    "boat": "all-star-ghani",
    "boat_name": "All Star - Ghani",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -122,6 +139,12 @@
   "all-star-ghani::North (Hurghada - Hurghada)": {
    "boat": "all-star-ghani",
    "boat_name": "All Star - Ghani",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -161,6 +184,10 @@
   "all-star-red-sea::Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -213,6 +240,10 @@
   "all-star-red-sea::Brothers Daedalus Elphinstone (Hurghada-Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -265,6 +296,10 @@
   "all-star-red-sea::Daedalus & Rocky/Zabargad (Port ghalib - Port ghalib)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -317,6 +352,10 @@
   "all-star-red-sea::Daedalus & St. Johns (Port ghalib - Port ghalib)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -369,6 +408,13 @@
   "all-star-red-sea::North & Brothers (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -421,6 +467,12 @@
   "all-star-red-sea::North & Tiran (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -473,6 +525,12 @@
   "all-star-red-sea::North (Hurghada - Hurghada)": {
    "boat": "all-star-red-sea",
    "boat_name": "All Star - Scuba Scene",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -577,6 +635,12 @@
   "alsuraya::Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu dabab",
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -623,6 +687,12 @@
   "alsuraya::Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu dabab",
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -669,6 +739,12 @@
   "alsuraya::Brother, Deadalus and Elphinstone (Hurghada - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu dabab",
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -715,6 +791,12 @@
   "alsuraya::Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu dabab",
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -761,6 +843,13 @@
   "alsuraya::Brothers, North & Wreck (Hurghada - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "thistlegorm",
+    "gubal",
+    "brothers",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 12,
    "fees": {
     "complete": true,
@@ -807,6 +896,11 @@
   "alsuraya::Daedalus - St. John\u2019s - Elphinstone.(Port Ghalib - Port Ghalib)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -853,6 +947,12 @@
   "alsuraya::Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "zabargad",
+    "rocky island"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -899,6 +999,14 @@
   "alsuraya::North - Wrecks And Reefs (Hurghada - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "umm gamar",
+    "sha'ab el erg",
+    "gota abu ramada"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -945,6 +1053,13 @@
   "alsuraya::North and Brothers (Hurghada - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "thistlegorm",
+    "brothers",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -991,6 +1106,13 @@
   "alsuraya::North and Straits of Tiran (Hurghada - Hurghada)": {
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed",
+    "dahab",
+    "gota abu ramada",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1089,6 +1211,12 @@
   "amelie::Best of Hurghada (Hurghada - Hurghada)": {
    "boat": "amelie",
    "boat_name": "Amelie Safari",
+   "dive_sites": [
+    "abu nuhas",
+    "rosalie moller",
+    "gubal",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -1145,6 +1273,12 @@
   "amelie::Best of Hurghada - Mini Safari (Hurghada - Hurghada)": {
    "boat": "amelie",
    "boat_name": "Amelie Safari",
+   "dive_sites": [
+    "abu nuhas",
+    "rosalie moller",
+    "gubal",
+    "sha'ab el erg"
+   ],
    "dives": 8,
    "fees": {
     "complete": false,
@@ -1201,6 +1335,12 @@
   "andromeda::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "andromeda",
    "boat_name": "MY Andromeda",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "salem express",
+    "safaga"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -1268,6 +1408,10 @@
   "andromeda::North (Hurghada - Hurghada)": {
    "boat": "andromeda",
    "boat_name": "MY Andromeda",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -1469,6 +1613,11 @@
   "anemone::Brothers - Daedalus - Elphistone (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1539,6 +1688,9 @@
   "anemone::Brothers - Daedalus - Elphistone (Port Galib - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1609,6 +1761,12 @@
   "anemone::Daedalus - Fury Shoals (Port Galib - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "daedalus",
+    "fury shoals",
+    "sataya",
+    "sataya reef"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1679,6 +1837,11 @@
   "anemone::Daedalus - Rocky - Zabargad (Hurghada - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1749,6 +1912,12 @@
   "anemone::Elba - Rocky - Zabargad - Saint John's (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "elba reef",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1819,6 +1988,12 @@
   "anemone::Elba - Rocky - Zabargad - Saint John's (Hurghada - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "zabargad",
+    "elba reef",
+    "rocky island",
+    "st johns"
+   ],
    "dives": 36,
    "fees": {
     "complete": true,
@@ -1889,6 +2064,11 @@
   "anemone::Fury Shoals (Port Galib - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "fury shoals",
+    "sataya",
+    "sataya reef"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -1959,6 +2139,13 @@
   "anemone::North - Ras Mohammed - Tiran - Dahab (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "thistlegorm",
+    "small giftun"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2029,6 +2216,12 @@
   "anemone::North Wrecks - Ras Mohammed - Strait of Tiran (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2099,6 +2292,13 @@
   "anemone::North Wrecks and Brothers islands (Hurghada - Hurghada)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "brothers",
+    "safaga",
+    "salem express"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2169,6 +2369,11 @@
   "anemone::Saint John's (Port Galib - Port Galib)": {
    "boat": "anemone",
    "boat_name": "MY Anemone",
+   "dive_sites": [
+    "habili ali",
+    "dangerous reef",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2239,6 +2444,11 @@
   "aphrodite::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2285,6 +2495,12 @@
   "aphrodite::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2331,6 +2547,10 @@
   "aphrodite::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "daedalus"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2377,6 +2597,10 @@
   "aphrodite::Brothers, Safaga Reefs (Port Ghalib - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2423,6 +2647,12 @@
   "aphrodite::Deep South, St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2469,6 +2699,12 @@
   "aphrodite::North - Brothers (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2515,6 +2751,12 @@
   "aphrodite::North - Straits of Tiran (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2561,6 +2803,11 @@
   "aphrodite::North Brother Islands (Hurghada - Port Ghalib)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2607,6 +2854,9 @@
   "aphrodite::North Classic (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2653,6 +2903,13 @@
   "aphrodite::North Classic - Safaga Reefs (Hurghada - Hurghada)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "st johns",
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -2699,6 +2956,11 @@
   "aphrodite::Sataya, Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "aphrodite",
    "boat_name": "M/Y Aphrodite",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2745,6 +3007,11 @@
   "ashrafi::Brothers Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "ashrafi",
    "boat_name": "MY Ashrafi",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2784,6 +3051,13 @@
   "ashrafi::North and Brothers (Hurghada - Hurghada)": {
    "boat": "ashrafi",
    "boat_name": "MY Ashrafi",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "brothers",
+    "panorama reef"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2823,6 +3097,13 @@
   "ashrafi::Northen Red Sea (Hurghada - Hurghada)": {
    "boat": "ashrafi",
    "boat_name": "MY Ashrafi",
+   "dive_sites": [
+    "abu nuhas",
+    "sha'ab el erg",
+    "thistlegorm",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2862,6 +3143,14 @@
   "ashrafi::Total Wrecks (Hurghada - Hurghada)": {
    "boat": "ashrafi",
    "boat_name": "MY Ashrafi",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "salem express",
+    "rosalie moller",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2901,6 +3190,15 @@
   "avo::BDE - Golden Triangle (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "gota abu ramada",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "marsa shouna",
+    "small giftun"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2947,6 +3245,14 @@
   "avo::BDE - Golden Triangle (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "gota abu ramada",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "marsa shouna"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -2993,6 +3299,11 @@
   "avo::Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 11,
    "fees": {
     "complete": true,
@@ -3039,6 +3350,15 @@
   "avo::Dahab Sinai (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu nuhas",
+    "sha'ab el erg",
+    "dahab",
+    "tiran",
+    "ras mohammed",
+    "thistlegorm",
+    "small giftun"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -3085,6 +3405,17 @@
   "avo::North Tiran (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "sha'ab el erg",
+    "ras mohammed",
+    "tiran",
+    "thistlegorm",
+    "gubal",
+    "abu nuhas",
+    "rosalie moller",
+    "gota abu ramada",
+    "small giftun"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -3131,6 +3462,17 @@
   "avo::North and Brothers (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu nuhas",
+    "sha'ab el erg",
+    "ras mohammed",
+    "thistlegorm",
+    "salem express",
+    "panorama reef",
+    "brothers",
+    "gota abu ramada",
+    "small giftun"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -3177,6 +3519,17 @@
   "avo::Saint John\u00b4s (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "habili ali",
+    "dangerous reef",
+    "gota kebir",
+    "st johns",
+    "sataya",
+    "sataya reef",
+    "fury shoals",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -3223,6 +3576,17 @@
   "avo::The Best of the South (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "sataya reef",
+    "fury shoals",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -3269,6 +3633,10 @@
   "bella-2::Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)": {
    "boat": "bella-2",
    "boat_name": "Bella 2",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 9,
    "fees": {
     "complete": false,
@@ -3327,6 +3695,10 @@
   "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "bella-2",
    "boat_name": "Bella 2",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 9,
    "fees": {
     "complete": false,
@@ -3385,6 +3757,11 @@
   "bella-3::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "bella-3",
    "boat_name": "Bella 3",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 9,
    "fees": {
     "complete": false,
@@ -3439,6 +3816,11 @@
   "bella-3::Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "bella-3",
    "boat_name": "Bella 3",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm",
+    "tiran"
+   ],
    "dives": 13,
    "fees": {
     "complete": false,
@@ -3493,6 +3875,11 @@
   "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3551,6 +3938,11 @@
   "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Port Galib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3609,6 +4001,11 @@
   "blue-horizon::Brothers, Daedalus & Elphinstone (Port Galib - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3667,6 +4064,11 @@
   "blue-horizon::Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3725,6 +4127,10 @@
   "blue-horizon::Daedalus & St Johns (Port Galib - Port Galib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "daedalus",
+    "st johns"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3783,6 +4189,12 @@
   "blue-horizon::Northern Red Sea & Brothers (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "safaga",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3841,6 +4253,12 @@
   "blue-horizon::Northern Red Sea & Brothers (Hurghada - Port Ghalib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "safaga",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -3899,6 +4317,11 @@
   "blue-horizon::Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -3956,6 +4379,13 @@
   "blue-horizon::Red Sea Wrecks (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4014,6 +4444,13 @@
   "blue-horizon::Rocky, Zabargad & St. Johns (Port Galib -Port Galib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "elphinstone",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "rocky island"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4072,6 +4509,11 @@
   "blue-horizon::Strait of Tiran & North (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -4130,6 +4572,17 @@
   "blue-horizon::Ultimate Red Sea (Hurghada - Port Ghalib)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "salem express",
+    "safaga",
+    "ras mohammed"
+   ],
    "dives": 26,
    "fees": {
     "complete": false,
@@ -4188,6 +4641,11 @@
   "blue-horizon::Ultimate Red Sea (Port Galib - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 26,
    "fees": {
     "complete": false,
@@ -4246,6 +4704,11 @@
   "blue-melody::Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -4305,6 +4768,11 @@
   "blue-melody::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4364,6 +4832,11 @@
   "blue-melody::Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4423,6 +4896,11 @@
   "blue-melody::Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4482,6 +4960,10 @@
   "blue-melody::Daedalus and St Johns (Port Ghalib- Port Ghalib)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "daedalus",
+    "st johns"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4541,6 +5023,12 @@
   "blue-melody::Northern Red Sea & Brothers (Hurghada - Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "safaga",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4600,6 +5088,11 @@
   "blue-melody::Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -4658,6 +5151,13 @@
   "blue-melody::Red Sea Wrecks (Hurghada - Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4717,6 +5217,11 @@
   "blue-melody::Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -4776,6 +5281,11 @@
   "blue-melody::Strait of Tiran and North (Hurghada- Hurghada)": {
    "boat": "blue-melody",
    "boat_name": "MY Blue Melody",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -4835,6 +5345,11 @@
   "blue-pearl::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -4881,6 +5396,11 @@
   "blue-pearl::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -4927,6 +5447,11 @@
   "blue-pearl::Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -4973,6 +5498,12 @@
   "blue-pearl::North & Brothers (Hurghada - Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "brothers",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -5019,6 +5550,12 @@
   "blue-pearl::North & Safaga (Hurghada - Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "safaga",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5065,6 +5602,12 @@
   "blue-pearl::North & Tiran (Hurghada-Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5111,6 +5654,11 @@
   "blue-pearl::North & Wrecks (Hurghada- Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5157,6 +5705,13 @@
   "blue-pearl::North - Tiran - Dahab (Hurghada - Hurghada)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "dahab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5203,6 +5758,10 @@
   "blue-pearl::St.Johns & Fury Shoal (Port Ghalib - Port Ghalib)": {
    "boat": "blue-pearl",
    "boat_name": "MY Blue Pearl",
+   "dive_sites": [
+    "st johns",
+    "fury shoals"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -5249,6 +5808,10 @@
   "blue-seas::Brothers & Safaga (Port Ghalib - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "brothers",
+    "safaga"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5291,6 +5854,11 @@
   "blue-seas::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5333,6 +5901,11 @@
   "blue-seas::Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5375,6 +5948,11 @@
   "blue-seas::Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5417,6 +5995,11 @@
   "blue-seas::Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "fury shoals"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5459,6 +6042,11 @@
   "blue-seas::Daedalus - Rockys & Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "zabargad"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5501,6 +6089,9 @@
   "blue-seas::North & Safaga (Hurghada - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "safaga"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5543,6 +6134,12 @@
   "blue-seas::North & Tiran (Hurghada - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5584,6 +6181,14 @@
   "blue-seas::North - Tiran - Dahab (Hurghada - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "dahab",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": false,
@@ -5626,6 +6231,11 @@
   "blue-seas::Rocky - Elba - St.Johns - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "rocky island"
+   ],
    "dives": 28,
    "fees": {
     "complete": false,
@@ -5668,6 +6278,11 @@
   "blue-seas::Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5710,6 +6325,9 @@
   "blue-seas::St John's (Port Ghalib- Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "st johns"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5752,6 +6370,9 @@
   "blue-seas::Tiran Special (Hurghada - Hurghada)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "tiran"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5794,6 +6415,9 @@
   "blue-seas::Zabargad Special (Port Ghalib - Port Ghalib)": {
    "boat": "blue-seas",
    "boat_name": "MY Blue Seas",
+   "dive_sites": [
+    "zabargad"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -5836,6 +6460,11 @@
   "blue-storm::Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5882,6 +6511,11 @@
   "blue-storm::Brothers-Daedalus-Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5928,6 +6562,11 @@
   "blue-storm::Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -5974,6 +6613,11 @@
   "blue-storm::Daedalus & Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "fury shoals"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6020,6 +6664,11 @@
   "blue-storm::Daedalus-Rocky-Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "zabargad"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6066,6 +6715,12 @@
   "blue-storm::North & Brothers (Hurghada - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6112,6 +6767,9 @@
   "blue-storm::North & Safaga (Hurghada - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "safaga"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6158,6 +6816,9 @@
   "blue-storm::North & Tiran (Hurghada - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "tiran"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6204,6 +6865,12 @@
   "blue-storm::North & Wrecks (Hurghada - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6250,6 +6917,10 @@
   "blue-storm::North-Tiran-Dahab (Hurghada - Hurghada)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "tiran",
+    "dahab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6296,6 +6967,11 @@
   "blue-storm::Rocky-Zabargad-St.Johns (Port Ghalib - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6342,6 +7018,9 @@
   "blue-storm::St.Johns (Port Ghalib - Port Ghalib)": {
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
+   "dive_sites": [
+    "st johns"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -6388,6 +7067,11 @@
   "blue::Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6440,6 +7124,11 @@
   "blue::Brothers - Daedalus - Fury Shoal - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "zabargad",
+    "st johns",
+    "rocky island"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6492,6 +7181,11 @@
   "blue::Brothers - Daedalus and Elphinstone (Hurghada- Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6544,6 +7238,11 @@
   "blue::Daedalus & Fury Shoal (Port Ghalib- Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6596,6 +7295,11 @@
   "blue::Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6648,6 +7352,12 @@
   "blue::North & Brothers (Hurghada - Hurghada)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "thistlegorm",
+    "brothers",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6700,6 +7410,9 @@
   "blue::North & Safaga (Hurghada - Hurghada)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "safaga"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6752,6 +7465,12 @@
   "blue::North & Tiran (Hurghada- Hurghada)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6804,6 +7523,11 @@
   "blue::North - Tiran - Dahab (Hurghada - Hurghada)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran",
+    "dahab"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6856,6 +7580,9 @@
   "blue::St. John's (Port Ghalib - Port Ghalib)": {
    "boat": "blue",
    "boat_name": "MY Blue",
+   "dive_sites": [
+    "st johns"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -6908,6 +7635,12 @@
   "carlton::Classic North (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "carlton",
    "boat_name": "MY Carlton",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm",
+    "gubal",
+    "tiran"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -6946,6 +7679,10 @@
   "carlton::Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "carlton",
    "boat_name": "MY Carlton",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm"
+   ],
    "dives": 6,
    "fees": {
     "complete": false,
@@ -6984,6 +7721,10 @@
   "carlton::Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "carlton",
    "boat_name": "MY Carlton",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 12,
    "fees": {
     "complete": false,
@@ -7022,6 +7763,11 @@
   "cassiopeia-glory::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
    "boat": "cassiopeia-glory",
    "boat_name": "MY Cassiopeia Glory",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -7068,6 +7814,11 @@
   "cassiopeia-glory::North (Hurghada - Hurghada)": {
    "boat": "cassiopeia-glory",
    "boat_name": "MY Cassiopeia Glory",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -7114,6 +7865,11 @@
   "cassiopeia-glory::North + Tiran (Hurghada - Hurghada)": {
    "boat": "cassiopeia-glory",
    "boat_name": "MY Cassiopeia Glory",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -7160,6 +7916,14 @@
   "discovery-i::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "habili ali",
+    "gota kebir"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7205,6 +7969,11 @@
   "discovery-i::Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7250,6 +8019,11 @@
   "discovery-i::Brothers/ Daedalus and Elphinstone (Hurghada- Port Ghalib)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7295,6 +8069,11 @@
   "discovery-i::Brothers/ Daedalus and Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7340,6 +8119,13 @@
   "discovery-i::North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "gubal",
+    "sha'ab el erg"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7385,6 +8171,17 @@
   "discovery-i::North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "salem express",
+    "gubal",
+    "safaga",
+    "panorama reef",
+    "sha'ab el erg",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7430,6 +8227,13 @@
   "discovery-i::St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-i",
    "boat_name": "MY Discovery I",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "fury shoals",
+    "habili ali",
+    "gota kebir"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7475,6 +8279,11 @@
   "discovery-ii::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7519,6 +8328,11 @@
   "discovery-ii::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7563,6 +8377,11 @@
   "discovery-ii::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -7607,6 +8426,12 @@
   "discovery-ii::Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -7652,6 +8477,12 @@
   "discovery-ii::North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -7696,6 +8527,15 @@
   "discovery-ii::Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "brothers",
+    "abu nuhas",
+    "tiran",
+    "salem express",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -7740,6 +8580,12 @@
   "discovery-ii::Rocky - Zabargad - St. John\u2019s - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -7785,6 +8631,11 @@
   "discovery-ii::St. Johns, Fury Shoal, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "discovery-ii",
    "boat_name": "MY Discovery II",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "fury shoals"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -7830,6 +8681,24 @@
   "dune-longara::Best of Egypt (Hurghada - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "thistlegorm",
+    "ras mohammed",
+    "gubal",
+    "abu nuhas",
+    "safaga",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 33,
    "fees": {
     "complete": false,
@@ -7892,6 +8761,15 @@
   "dune-longara::Elba (Port Ghalib - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 21,
    "fees": {
     "complete": false,
@@ -7954,6 +8832,10 @@
   "dune-longara::Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
    "fees": {
     "complete": false,
     "lines": [
@@ -8013,6 +8895,11 @@
   "dune-longara::Golden Triangle (Hurghada - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8075,6 +8962,11 @@
   "dune-longara::Golden Triangle (Port Ghalib - Hurghada)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8137,6 +9029,11 @@
   "dune-longara::Golden Triangle (Port Ghalib - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8199,6 +9096,15 @@
   "dune-longara::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8261,6 +9167,13 @@
   "dune-longara::North Brothers (Hurghada - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8323,6 +9236,13 @@
   "dune-longara::North Brothers (Port Ghalib - Hurghada)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8385,6 +9305,14 @@
   "dune-longara::North Dahab Tiran (Hurghada - Hurghada)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "thistlegorm",
+    "ras mohammed",
+    "abu nuhas",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8447,6 +9375,11 @@
   "dune-longara::North Ras Mohamed (Hurghada - Hurghada)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8509,6 +9442,14 @@
   "dune-longara::North Tiran (Hurghada - Hurghada)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "thistlegorm",
+    "safaga",
+    "salem express"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8571,6 +9512,11 @@
   "dune-longara::St. John\u2019s Reefs (Port Ghalib - Port Ghalib)": {
    "boat": "dune-longara",
    "boat_name": "Dune Longara",
+   "dive_sites": [
+    "st johns",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8633,6 +9579,24 @@
   "dune-silky::Best of Egypt (Hurghada - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "thistlegorm",
+    "ras mohammed",
+    "gubal",
+    "abu nuhas",
+    "safaga",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 33,
    "fees": {
     "complete": false,
@@ -8697,6 +9661,15 @@
   "dune-silky::Elba (Port Ghalib - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -8761,6 +9734,10 @@
   "dune-silky::Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
    "fees": {
     "complete": false,
     "lines": [
@@ -8822,6 +9799,11 @@
   "dune-silky::Golden Triangle (Hurghada - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8886,6 +9868,11 @@
   "dune-silky::Golden Triangle (Hurghada - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -8950,6 +9937,11 @@
   "dune-silky::Golden Triangle (Port Ghalib - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9014,6 +10006,11 @@
   "dune-silky::Golden Triangle (Port Ghalib - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9078,6 +10075,15 @@
   "dune-silky::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9142,6 +10148,13 @@
   "dune-silky::North Brothers (Hurghada - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9206,6 +10219,13 @@
   "dune-silky::North Brothers (Hurghada - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9270,6 +10290,13 @@
   "dune-silky::North Brothers (Port Ghalib - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9334,6 +10361,14 @@
   "dune-silky::North Dahab Tiran (Hurghada - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "thistlegorm",
+    "ras mohammed",
+    "abu nuhas",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9398,6 +10433,11 @@
   "dune-silky::North Ras Mohamed (Hurghada - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9462,6 +10502,14 @@
   "dune-silky::North Tiran (Hurghada - Hurghada)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "thistlegorm",
+    "safaga",
+    "salem express"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9526,6 +10574,11 @@
   "dune-silky::St John's Reefs (Port Ghalib - Port Ghalib)": {
    "boat": "dune-silky",
    "boat_name": "DUNE Silky",
+   "dive_sites": [
+    "st johns",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9590,6 +10643,12 @@
   "dune-titan::Daedalus, Elphinstone & Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "daedalus",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9652,6 +10711,15 @@
   "dune-titan::Elba (Port Ghalib - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -9714,6 +10782,10 @@
   "dune-titan::Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "sataya",
+    "fury shoals"
+   ],
    "fees": {
     "complete": false,
     "lines": [
@@ -9775,6 +10847,11 @@
   "dune-titan::Golden Triangle (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9837,6 +10914,11 @@
   "dune-titan::Golden Triangle (Hurghada - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9899,6 +10981,11 @@
   "dune-titan::Golden Triangle (Port Ghalib - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -9961,6 +11048,15 @@
   "dune-titan::Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10023,6 +11119,13 @@
   "dune-titan::North Brothers (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10085,6 +11188,13 @@
   "dune-titan::North Brothers (Hurghada - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10147,6 +11257,13 @@
   "dune-titan::North Brothers (Port Ghalib - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "brothers",
+    "safaga",
+    "ras mohammed",
+    "thistlegorm",
+    "abu nuhas"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10209,6 +11326,14 @@
   "dune-titan::North Dahab Tiran (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "thistlegorm",
+    "ras mohammed",
+    "abu nuhas",
+    "safaga"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10271,6 +11396,11 @@
   "dune-titan::North Ras Mohamed (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10333,6 +11463,14 @@
   "dune-titan::North Tiran (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "thistlegorm",
+    "safaga",
+    "salem express"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10395,6 +11533,14 @@
   "dune-titan::Safaga routes (Hurghada - Hurghada)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "safaga",
+    "shaab sheer",
+    "salem express",
+    "panorama reef",
+    "middle reef",
+    "tobia arbaa"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10455,6 +11601,11 @@
   "dune-titan::St John's Reefs (Port Ghalib - Port Ghalib)": {
    "boat": "dune-titan",
    "boat_name": "DUNE Titan",
+   "dive_sites": [
+    "st johns",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 14,
    "fees": {
     "complete": false,
@@ -10517,6 +11668,10 @@
   "emperor-asmaa::Daedalus, Fury & Elphinstone (Port Ghalib- Port Ghalib)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "daedalus",
+    "fury shoals"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10581,6 +11736,16 @@
   "emperor-asmaa::Famous Five (Hurghada - Hurghada)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10645,6 +11810,16 @@
   "emperor-asmaa::Famous Five (Hurghada - Port Ghalib)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "salem express",
+    "abu dabab",
+    "safaga",
+    "panorama reef",
+    "middle reef",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10709,6 +11884,16 @@
   "emperor-asmaa::Famous Five (Port Ghalib - Hurghada)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10773,6 +11958,12 @@
   "emperor-asmaa::North & Easy (Hurghada - Hurghada)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10835,6 +12026,13 @@
   "emperor-asmaa::Reefs & Wrecks (Hurghada- Hurghada)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10899,6 +12097,13 @@
   "emperor-asmaa::Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "salem express",
+    "safaga",
+    "panorama reef"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -10963,6 +12168,11 @@
   "emperor-asmaa::Simple The Best (Port Ghalib- Port Ghalib)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11027,6 +12237,11 @@
   "emperor-asmaa::Simply the Best (Hurghada - Port Ghalib)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11091,6 +12306,13 @@
   "emperor-asmaa::South & St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "emperor-asmaa",
    "boat_name": "MV Emperor Asmaa",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "zabargad",
+    "st johns",
+    "rocky island"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -11219,6 +12441,10 @@
   "emperor-elite::Daedalus, Fury & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "daedalus",
+    "fury shoals"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11283,6 +12509,16 @@
   "emperor-elite::Famous Five Cruise (Hurghada - Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11347,6 +12583,13 @@
   "emperor-elite::Reefs & Wrecks (Hurghada- Hurghada)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11411,6 +12654,13 @@
   "emperor-elite::Safaga, Brothers & Elphinstone (Port Ghalib- Hurghada)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "salem express",
+    "safaga",
+    "panorama reef"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11475,6 +12725,11 @@
   "emperor-elite::Simple The Best (Hurghada - Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11539,6 +12794,11 @@
   "emperor-elite::Simply the Best (Port Ghalib- Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11603,6 +12863,10 @@
   "emperor-elite::South & St. Johns (Port Ghalib- Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11665,6 +12929,13 @@
   "emperor-elite::Southern Solitude (Port Ghalib - Port Ghalib)": {
    "boat": "emperor-elite",
    "boat_name": "MV Emperor Elite",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "zabargad",
+    "st johns",
+    "rocky island"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -11729,6 +13000,16 @@
   "emperor-superior::Famous Five (Hurghada- Hurghada)": {
    "boat": "emperor-superior",
    "boat_name": "MV Emperor Superior",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11793,6 +13074,13 @@
   "emperor-superior::Get Wrecked (Hurghada- Hurghada)": {
    "boat": "emperor-superior",
    "boat_name": "MV Emperor Superior",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11857,6 +13145,12 @@
   "emperor-superior::North & Easy (Hurghada - Hurghada)": {
    "boat": "emperor-superior",
    "boat_name": "MV Emperor Superior",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11919,6 +13213,13 @@
   "emperor-superior::Reefs and Wrecks (Hurghada- Hurghada)": {
    "boat": "emperor-superior",
    "boat_name": "MV Emperor Superior",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -11983,6 +13284,13 @@
   "eriny::Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
    "boat_name": "Eriny",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm",
+    "tiran",
+    "gubal",
+    "dahab"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -12023,6 +13331,12 @@
   "eriny::Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
    "boat_name": "Eriny",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -12063,6 +13377,13 @@
   "eriny::Sinai Wrecks - Northern Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
    "boat_name": "Eriny",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "gubal"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -12103,6 +13424,13 @@
   "eriny::Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
    "boat_name": "Eriny",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "gubal"
+   ],
    "dives": 17,
    "fees": {
     "complete": false,
@@ -12196,6 +13524,11 @@
   "explorer-ventures-grand-sea-explorer::Brothers, Daedalus, Elphistone (Hurghada-Hurghada)": {
    "boat": "explorer-ventures-grand-sea-explorer",
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -12249,6 +13582,11 @@
   "explorer-ventures-grand-sea-explorer::North (Hurghada-Hurghada)": {
    "boat": "explorer-ventures-grand-sea-explorer",
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dive_sites": [
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -12300,6 +13638,12 @@
   "explorer-ventures-grand-sea-explorer::North - Tiran And Dahab (Hurghada - Hurghada)": {
    "boat": "explorer-ventures-grand-sea-explorer",
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dive_sites": [
+    "abu nuhas",
+    "tiran",
+    "dahab",
+    "ras mohammed"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -12351,6 +13695,11 @@
   "explorer-ventures-grand-sea-explorer::North and Brothers (Hurghada-Hurghada)": {
    "boat": "explorer-ventures-grand-sea-explorer",
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dive_sites": [
+    "brothers",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -12404,6 +13753,10 @@
   "explorer-ventures-grand-sea-explorer::North and Tiran (Hurghada-Hurghada)": {
    "boat": "explorer-ventures-grand-sea-explorer",
    "boat_name": "Explorer Ventures -  Grand Sea Explorer",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -12455,6 +13808,10 @@
   "freedom-iii::Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "freedom-iii",
    "boat_name": "Freedom III",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 9,
    "fees": {
     "complete": false,
@@ -12506,6 +13863,11 @@
   "freedom-iii::Thistlegorm, Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "freedom-iii",
    "boat_name": "Freedom III",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 12,
    "fees": {
     "complete": false,
@@ -12557,6 +13919,12 @@
   "freedom-iv::Northern Wrecks and Reefs Route (Umbi - Umbi)": {
    "boat": "freedom-iv",
    "boat_name": "Freedom IV",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 20,
    "fees": {
     "complete": false,
@@ -12599,6 +13967,11 @@
   "freedom-iv::Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi)": {
    "boat": "freedom-iv",
    "boat_name": "Freedom IV",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 11,
    "fees": {
     "complete": false,
@@ -12641,6 +14014,11 @@
   "galaxy::Brothers-Daedalus\u00ad-Elphinstone (Hurghada- Hurghada)": {
    "boat": "galaxy",
    "boat_name": "MY Galaxy",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -12685,6 +14063,11 @@
   "galaxy::Brothers-\u00adDaedalus-\u00adElphinstone (Hurghada - Port Ghalib)": {
    "boat": "galaxy",
    "boat_name": "MY Galaxy",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -12729,6 +14112,11 @@
   "galaxy::Brothers-\u00adDaedalus-\u00adElphinstone (Port Ghalib-Port Ghalib)": {
    "boat": "galaxy",
    "boat_name": "MY Galaxy",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -12773,6 +14161,16 @@
   "galaxy::North - Brothers (Hurghada - Hurghada)": {
    "boat": "galaxy",
    "boat_name": "MY Galaxy",
+   "dive_sites": [
+    "gubal",
+    "sha'ab el erg",
+    "thistlegorm",
+    "ras mohammed",
+    "brothers",
+    "safaga",
+    "salem express",
+    "panorama reef"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -12817,6 +14215,12 @@
   "ghazala-adventure::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -12874,6 +14278,12 @@
   "ghazala-adventure::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -12931,6 +14341,12 @@
   "ghazala-adventure::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -12988,6 +14404,11 @@
   "ghazala-adventure::Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "st johns"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13045,6 +14466,11 @@
   "ghazala-adventure::Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "st johns"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13102,6 +14528,14 @@
   "ghazala-adventure::Get Wrecked (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13159,6 +14593,13 @@
   "ghazala-adventure::North & Brothers (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13216,6 +14657,15 @@
   "ghazala-adventure::North & Safaga Area (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "safaga",
+    "panorama reef",
+    "middle reef",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13273,6 +14723,13 @@
   "ghazala-adventure::North - Tiran & Dahab (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "gubal",
+    "dahab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13330,6 +14787,13 @@
   "ghazala-adventure::North: Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "ghazala-adventure",
    "boat_name": "Ghazala Adventure",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13387,6 +14851,12 @@
   "ghazala-explorer::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13437,6 +14907,12 @@
   "ghazala-explorer::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13487,6 +14963,12 @@
   "ghazala-explorer::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13537,6 +15019,12 @@
   "ghazala-explorer::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13587,6 +15075,14 @@
   "ghazala-explorer::Daedalus, Rocky & St Johns (Hurghada - Port Ghalib)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "fury shoals",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13637,6 +15133,14 @@
   "ghazala-explorer::Daedalus, Rocky & St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "fury shoals",
+    "abu dabab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13687,6 +15191,10 @@
   "ghazala-explorer::Deep South - St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "st johns",
+    "fury shoals"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13737,6 +15245,14 @@
   "ghazala-explorer::Get Wrecked (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "rosalie moller",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13787,6 +15303,13 @@
   "ghazala-explorer::North & Brothers (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13837,6 +15360,15 @@
   "ghazala-explorer::North & Safaga (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -13887,6 +15419,13 @@
   "ghazala-explorer::North - Tiran & Dahab (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "gubal",
+    "dahab"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13937,6 +15476,13 @@
   "ghazala-explorer::North: Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "ghazala-explorer",
    "boat_name": "Ghazala Explorer",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": true,
@@ -13987,6 +15533,14 @@
   "grand-discovery::Brothers- Daedalus and Elphinstone (Hurghada- Hurghada)": {
    "boat": "grand-discovery",
    "boat_name": "MY Grand Discovery",
+   "dive_sites": [
+    "brothers",
+    "small giftun",
+    "daedalus",
+    "elphinstone",
+    "salem express",
+    "panorama reef"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14032,6 +15586,16 @@
   "grand-discovery::North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada)": {
    "boat": "grand-discovery",
    "boat_name": "MY Grand Discovery",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran",
+    "thistlegorm",
+    "brothers",
+    "salem express",
+    "panorama reef",
+    "safaga",
+    "small giftun"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14077,6 +15641,10 @@
   "hammerhead-ii::Brothers Light (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "brothers",
+    "elphinstone"
+   ],
    "dives": 11,
    "fees": {
     "complete": true,
@@ -14129,6 +15697,11 @@
   "hammerhead-ii::Brothers Light 3 (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 8,
    "fees": {
     "complete": true,
@@ -14181,6 +15754,10 @@
   "hammerhead-ii::Daedalus Light (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 8,
    "fees": {
     "complete": true,
@@ -14233,6 +15810,12 @@
   "hammerhead-ii::Deepest South: Abu Fandira - Sataya\u200b\u200b (Fury Shoals) - St. John's (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "fury shoals",
+    "st johns",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14285,6 +15868,13 @@
   "hammerhead-ii::Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "ras mohammed",
+    "tiran",
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14337,6 +15927,11 @@
   "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 9,
    "fees": {
     "complete": true,
@@ -14389,6 +15984,11 @@
   "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14441,6 +16041,11 @@
   "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Hurghada - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14493,6 +16098,11 @@
   "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga (Marsa Alam - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14545,6 +16155,13 @@
   "hammerhead-ii::Red Sea Charm\u200b: Abu Nuhas - SS Thistlegorm - The Brothers Islands - Safaga Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "panorama reef",
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "sha'ab el erg"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14597,6 +16214,12 @@
   "hammerhead-ii::Sharks & Dolphins (Marsa Alam - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "sataya",
+    "sataya reef",
+    "fury shoals"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14649,6 +16272,12 @@
   "hammerhead-ii::Sharks & Dolphins (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "sataya",
+    "sataya reef",
+    "fury shoals"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14701,6 +16330,11 @@
   "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "elphinstone",
+    "brothers",
+    "daedalus"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14753,6 +16387,11 @@
   "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "elphinstone",
+    "brothers",
+    "daedalus"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14805,6 +16444,11 @@
   "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "elphinstone",
+    "brothers",
+    "daedalus"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14857,6 +16501,11 @@
   "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "elphinstone",
+    "brothers",
+    "daedalus"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14909,6 +16558,11 @@
   "hammerhead-ii::Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "elphinstone",
+    "daedalus",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -14961,6 +16615,11 @@
   "hammerhead-ii::South Parks: Zabargad & Rocky - Saint John's (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -15013,6 +16672,13 @@
   "hammerhead-ii::Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -15065,6 +16731,13 @@
   "hammerhead-ii::Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya - Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -15117,6 +16790,11 @@
   "hammerhead-ii::Super Diversity: Daedalus - Saint John's - Sataya (Marsa Alam - Marsa Alam)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "daedalus",
+    "st johns",
+    "sataya"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -15169,6 +16847,11 @@
   "hammerhead-ii::Wrecks & Reefs: Abu Nuhas - SS Thistlegorm - Ras Mohamed (Hurghada - Hurghada)": {
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
+   "dive_sites": [
+    "abu nuhas",
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -15221,6 +16904,11 @@
   "heaven-saphir::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15274,6 +16962,11 @@
   "heaven-saphir::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15327,6 +17020,11 @@
   "heaven-saphir::Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15380,6 +17078,11 @@
   "heaven-saphir::Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15433,6 +17136,13 @@
   "heaven-saphir::Daedalus - Rocky island - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "elphinstone",
+    "abu dabab",
+    "daedalus",
+    "zabargad",
+    "rocky island"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15486,6 +17196,13 @@
   "heaven-saphir::Daedalus Reef - Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "abu dabab",
+    "daedalus",
+    "sataya",
+    "fury shoals",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15539,6 +17256,16 @@
   "heaven-saphir::Daedalus Reef - St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "abu dabab",
+    "dangerous reef",
+    "st johns",
+    "sataya",
+    "habili ali",
+    "sataya reef",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15592,6 +17319,9 @@
   "heaven-saphir::Dolphin Freedive & Yoga Trip (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "sataya"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15645,6 +17375,13 @@
   "heaven-saphir::Elphinstone - Rocky Island - St. John\u2019s (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "elphinstone",
+    "abu dabab",
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15698,6 +17435,9 @@
   "heaven-saphir::Extreme Deep South - Elba Reef (Hamata - Hamata)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "elba reef"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15751,6 +17491,13 @@
   "heaven-saphir::North + Tiran - Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed",
+    "abu nuhas",
+    "thistlegorm",
+    "rosalie moller"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15804,6 +17551,10 @@
   "heaven-saphir::North - Brothers - Safaga (Hurghada - Hurghada)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "brothers",
+    "salem express"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15857,6 +17608,14 @@
   "heaven-saphir::North Wreck & Reef (Hurghada - Hurghada)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "sha'ab el erg",
+    "abu nuhas",
+    "ras mohammed",
+    "gubal",
+    "thistlegorm",
+    "rosalie moller"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15910,6 +17669,13 @@
   "heaven-saphir::Southern Route - St. John\u2019s (Port Ghalib - Port Ghalib)": {
    "boat": "heaven-saphir",
    "boat_name": "MY Heaven Saphir",
+   "dive_sites": [
+    "elphinstone",
+    "abu dabab",
+    "st johns",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -15963,6 +17729,12 @@
   "high-wave::North (Hurghada - Hurghada)": {
    "boat": "high-wave",
    "boat_name": "High Wave",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16008,6 +17780,11 @@
   "iceberg::Hurghada North (Hurghada - Hurghada)": {
    "boat": "iceberg",
    "boat_name": "My Iceberg",
+   "dive_sites": [
+    "abu nuhas",
+    "umm gamar",
+    "sha'ab el erg"
+   ],
    "dives": 12,
    "fees": {
     "complete": true,
@@ -16053,6 +17830,9 @@
   "iceberg::Special Wrecks / Hurghada North (Hurghada - Hurghada)": {
    "boat": "iceberg",
    "boat_name": "My Iceberg",
+   "dive_sites": [
+    "abu nuhas"
+   ],
    "dives": 12,
    "fees": {
     "complete": true,
@@ -16099,6 +17879,9 @@
   "independence-ii::Best of North - Brothers (Hurghada - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16140,6 +17923,16 @@
   "independence-ii::Best of North - Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "ras mohammed",
+    "daedalus",
+    "brothers",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 25,
    "fees": {
     "complete": false,
@@ -16181,6 +17974,13 @@
   "independence-ii::Best of North - Wrecks (Hurghada - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed",
+    "thistlegorm",
+    "gubal",
+    "abu nuhas"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16222,6 +18022,11 @@
   "independence-ii::Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16263,6 +18068,11 @@
   "independence-ii::Brothers - Daedalus - Elphinstone (Port Ghalib- Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16304,6 +18114,13 @@
   "independence-ii::Brothers - Daedalus - Rocky Island - St. John's - Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "rocky island",
+    "st johns",
+    "elphinstone"
+   ],
    "dives": 40,
    "fees": {
     "complete": false,
@@ -16345,6 +18162,12 @@
   "independence-ii::Brothers - Safaga (Port Ghalib - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "safaga",
+    "panorama reef",
+    "middle reef"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16386,6 +18209,11 @@
   "independence-ii::Brothers - Safaga - Best of North - Tiran (Hurghada - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "brothers",
+    "safaga",
+    "tiran"
+   ],
    "dives": 40,
    "fees": {
     "complete": false,
@@ -16427,6 +18255,11 @@
   "independence-ii::Daedalus - Elphinstone - Brothers (Port Ghalib - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16468,6 +18301,12 @@
   "independence-ii::Fury Shoals - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "fury shoals",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16509,6 +18348,10 @@
   "independence-ii::Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "rocky island",
+    "daedalus"
+   ],
    "dives": 30,
    "fees": {
     "complete": false,
@@ -16550,6 +18393,10 @@
   "independence-ii::Safaga - Best of North (Wrecks) - Strait of Tiran (Port Ghalib - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "safaga",
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16591,6 +18438,10 @@
   "independence-ii::St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "st johns",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16632,6 +18483,14 @@
   "independence-ii::Strait of Tiran - Brothers - Safaga (Hurghada - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers",
+    "salem express",
+    "safaga",
+    "panorama reef"
+   ],
    "dives": 26,
    "fees": {
     "complete": false,
@@ -16673,6 +18532,9 @@
   "independence-ii::Strait of Tiran without wrecks (Hurghada - Hurghada)": {
    "boat": "independence-ii",
    "boat_name": "MY Independence II",
+   "dive_sites": [
+    "tiran"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -16714,6 +18576,10 @@
   "lady-m::Mini Safari - Satayah - freediving, snorkeling (Hamata - Hamata)": {
    "boat": "lady-m",
    "boat_name": "MY Lady M",
+   "dive_sites": [
+    "st johns",
+    "sataya"
+   ],
    "dives": 8,
    "fees": {
     "complete": true,
@@ -16753,6 +18619,10 @@
   "lady-m::Mini Safari Fury shoals & sataya (Hamata - Hamata)": {
    "boat": "lady-m",
    "boat_name": "MY Lady M",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 7,
    "fees": {
     "complete": true,
@@ -16792,6 +18662,13 @@
   "new-sambo::BDE - Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "marsa shouna",
+    "abu dabab"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -16834,6 +18711,16 @@
   "new-sambo::Deep South, St. John & Zabargad (Hamata - Hamata)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
+   "dive_sites": [
+    "fury shoals",
+    "st johns",
+    "habili ali",
+    "dangerous reef",
+    "rocky island",
+    "zabargad",
+    "sataya",
+    "sataya reef"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -16874,6 +18761,10 @@
   "new-sambo::Fury Shoals (Hamata - Hamata)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -16914,6 +18805,10 @@
   "new-sambo::Mini-Safari Sataya (Hamata - Hamata)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
+   "dive_sites": [
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 6,
    "fees": {
     "complete": true,
@@ -16954,6 +18849,10 @@
   "new-sambo::Overnight Sataya (Hamata - Hamata)": {
    "boat": "new-sambo",
    "boat_name": "New Sambo Safari Boat",
+   "dive_sites": [
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 3,
    "fees": {
     "complete": true,
@@ -16994,6 +18893,11 @@
   "odyssey::BDE (Hurghada - Port Ghalib)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17057,6 +18961,11 @@
   "odyssey::BDE (Hurghada- Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17120,6 +19029,11 @@
   "odyssey::BDE (Port Ghalib - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17183,6 +19097,12 @@
   "odyssey::Best of Dahab and Tiran (Hurghada - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17246,6 +19166,13 @@
   "odyssey::Best of Tiran (Hurghada - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17309,6 +19236,12 @@
   "odyssey::Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17372,6 +19305,10 @@
   "odyssey::Fury Shoal (Port Ghalib - Port Ghalib)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17435,6 +19372,12 @@
   "odyssey::Premium Expedition (Hurghada - Port Ghalib)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "ras mohammed"
+   ],
    "dives": 27,
    "fees": {
     "complete": true,
@@ -17498,6 +19441,12 @@
   "odyssey::Premium Expedition (Port Ghalib - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "ras mohammed"
+   ],
    "dives": 27,
    "fees": {
     "complete": true,
@@ -17561,6 +19510,11 @@
   "odyssey::The Golden Loop North/Brother (Hurghada - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "brothers"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17624,6 +19578,11 @@
   "odyssey::The Golden Loop North/Brother (Port Ghalib - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "brothers"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17687,6 +19646,13 @@
   "odyssey::Treasures of the North (Hurghada - Hurghada)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "safaga",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17749,6 +19715,14 @@
   "odyssey::Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "odyssey",
    "boat_name": "MY Odyssey",
+   "dive_sites": [
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -17812,6 +19786,12 @@
   "red-sea-aggressor-ii::Northern Red Sea & Dahab (Hurghada - Hurghada)": {
    "boat": "red-sea-aggressor-ii",
    "boat_name": "Red Sea Aggressor II",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "dahab",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -17863,6 +19843,12 @@
   "red-sea-aggressor-ii::Northern Red Sea, Ras Mohamed and Straits of Tiran (Hurghada -Hurghada)": {
    "boat": "red-sea-aggressor-ii",
    "boat_name": "Red Sea Aggressor II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -17914,6 +19900,13 @@
   "red-sea-aggressor-ii::Northern Red Sea, the Best of Wreck diving (Hurghada - Hurghada)": {
    "boat": "red-sea-aggressor-ii",
    "boat_name": "Red Sea Aggressor II",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -17965,6 +19958,11 @@
   "red-sea-aggressor-iv::Brothers/Daedalus/Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "red-sea-aggressor-iv",
    "boat_name": "Red Sea Aggressor IV",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -18039,6 +20037,11 @@
   "red-sea-aggressor-iv::Brothers/Daedalus/Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "red-sea-aggressor-iv",
    "boat_name": "Red Sea Aggressor IV",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "brothers"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -18187,6 +20190,11 @@
   "red-sea-aggressor-iv::Deep South Egypt (Port Ghalib - Port Ghalib)": {
    "boat": "red-sea-aggressor-iv",
    "boat_name": "Red Sea Aggressor IV",
+   "dive_sites": [
+    "st johns",
+    "fury shoals",
+    "samadai"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -18261,6 +20269,12 @@
   "red-sea-aggressor-iv::St. Johns & Daedalus (Hurghada - Port Ghalib)": {
    "boat": "red-sea-aggressor-iv",
    "boat_name": "Red Sea Aggressor IV",
+   "dive_sites": [
+    "daedalus",
+    "st johns",
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -18335,6 +20349,12 @@
   "red-sea-aggressor-iv::St. Johns & Daedalus (Port Ghalib - Port Ghalib)": {
    "boat": "red-sea-aggressor-iv",
    "boat_name": "Red Sea Aggressor IV",
+   "dive_sites": [
+    "daedalus",
+    "st johns",
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 18,
    "fees": {
     "complete": false,
@@ -18409,6 +20429,13 @@
   "red-sea-aggressor-v::Deep South - Elba Reef (Hamata - Hamata)": {
    "boat": "red-sea-aggressor-v",
    "boat_name": "Red Sea Aggressor V",
+   "dive_sites": [
+    "sataya",
+    "elba reef",
+    "sataya reef",
+    "fury shoals",
+    "st johns"
+   ],
    "dives": 26,
    "fees": {
     "complete": false,
@@ -18456,6 +20483,13 @@
   "red-sea-aggressor-v::Deep South - Rocky & Zabargad Islands (Hamata - Hamata)": {
    "boat": "red-sea-aggressor-v",
    "boat_name": "Red Sea Aggressor V",
+   "dive_sites": [
+    "sataya",
+    "fury shoals",
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 26,
    "fees": {
     "complete": false,
@@ -18503,6 +20537,13 @@
   "red-sea-blue-force-2::Extended North Route (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "red-sea-blue-force-2",
    "boat_name": "Red Sea Blue Force 2",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "abu nuhas",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 21,
    "fees": {
     "complete": false,
@@ -18556,6 +20597,12 @@
   "red-sea-blue-force-2::North Route (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "red-sea-blue-force-2",
    "boat_name": "Red Sea Blue Force 2",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 21,
    "fees": {
     "complete": false,
@@ -18609,6 +20656,10 @@
   "reef-voyager::Mini Safari - Ras Mohamed - Thistlegorm (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "reef-voyager",
    "boat_name": "Reef Voyager",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm"
+   ],
    "dives": 10,
    "fees": {
     "complete": true,
@@ -18658,6 +20709,13 @@
   "reef-voyager::North Route - Sinai Classic (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "reef-voyager",
    "boat_name": "Reef Voyager",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed",
+    "abu nuhas",
+    "gubal",
+    "thistlegorm"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -18707,6 +20765,15 @@
   "reef-voyager::Sharm - Ras Mohamed - Brothers Islands (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "reef-voyager",
    "boat_name": "Reef Voyager",
+   "dive_sites": [
+    "abu nuhas",
+    "gota abu ramada",
+    "ras mohammed",
+    "brothers",
+    "panorama reef",
+    "safaga",
+    "thistlegorm"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -18756,6 +20823,16 @@
   "royal-evolution::Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "abu dabab",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "elba reef",
+    "st johns"
+   ],
    "dives": 30,
    "fees": {
     "complete": false,
@@ -18801,6 +20878,11 @@
   "royal-evolution::Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -18846,6 +20928,14 @@
   "royal-evolution::Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "elba reef",
+    "st johns"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -18891,6 +20981,11 @@
   "royal-evolution::Egypt / Elba Reef - Elba borders (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "elba reef"
+   ],
    "dives": 36,
    "fees": {
     "complete": false,
@@ -18936,6 +21031,11 @@
   "royal-evolution::Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "elba reef"
+   ],
    "dives": 24,
    "fees": {
     "complete": false,
@@ -18981,6 +21081,14 @@
   "royal-evolution::Red sea grand tour - BDRZ (Port Ghalib - Port Ghalib)": {
    "boat": "royal-evolution",
    "boat_name": "MS Royal Evolution",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns"
+   ],
    "dives": 16,
    "fees": {
     "complete": false,
@@ -19116,6 +21224,10 @@
   "seawolf-dominator::Brother Islands - Elphinstone (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "brothers",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19172,6 +21284,9 @@
   "seawolf-dominator::Deep South-St.John's (Port Ghalib-Port Ghalib)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19228,6 +21343,9 @@
   "seawolf-dominator::Fury Shoals (Port Ghalib - Port Ghalib)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "fury shoals"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19284,6 +21402,11 @@
   "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "st johns"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19340,6 +21463,11 @@
   "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19396,6 +21524,12 @@
   "seawolf-dominator::Marine Park North: Brothers-Daedalus-Elphinstone (Port Ghalib- Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19452,6 +21586,13 @@
   "seawolf-dominator::North - Wrecks (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "gubal",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19508,6 +21649,15 @@
   "seawolf-dominator::North Wrecks - Brother Islands (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "sha'ab el erg",
+    "abu nuhas",
+    "ras mohammed",
+    "thistlegorm",
+    "brothers",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19564,6 +21714,12 @@
   "seawolf-dominator::North/Strait of Tiran (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "rosalie moller",
+    "abu nuhas"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19620,6 +21776,14 @@
   "seawolf-dominator::Red Sea Classic (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "panorama reef",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19676,6 +21840,15 @@
   "seawolf-dominator::Red Sea Classic (Hurghada - Port Ghalib)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "panorama reef",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19732,6 +21905,15 @@
   "seawolf-dominator::Red Sea Classic (Port Ghalib - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "panorama reef",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19788,6 +21970,14 @@
   "seawolf-dominator::Strait of Tiran / Dahab (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "panorama reef",
+    "sha'ab el erg"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -19844,6 +22034,12 @@
   "seawolf-steel::Brother Islands/Elphinstone (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "elphinstone",
+    "abu dabab",
+    "ras disha",
+    "brothers"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -19883,6 +22079,12 @@
   "seawolf-steel::Deep South/St. Johns (PRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "elphinstone",
+    "st johns",
+    "sataya",
+    "fury shoals"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -19922,6 +22124,10 @@
   "seawolf-steel::Family Safari (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -19959,6 +22165,10 @@
   "seawolf-steel::Fury Shoals (PRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "fury shoals",
+    "sataya"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -19998,6 +22208,12 @@
   "seawolf-steel::MP North (Brothers/Daedalus/Elphinstone) (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20037,6 +22253,12 @@
   "seawolf-steel::MP North: Brothers / Daedalus / Elphinstone (HRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20076,6 +22298,12 @@
   "seawolf-steel::MP North: Brothers / Daedalus / Elphinstone (PRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20115,6 +22343,15 @@
   "seawolf-steel::MP South Classic (Zabargad/Rocky/St. Johns) (HRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "habili ali",
+    "fury shoals",
+    "elphinstone"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20154,6 +22391,15 @@
   "seawolf-steel::MP South Classic (Zabargad/Rocky/St. Johns) (PRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "habili ali",
+    "fury shoals",
+    "elphinstone"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20193,6 +22439,14 @@
   "seawolf-steel::North Wrecks (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "rosalie moller",
+    "gubal",
+    "sha'ab el erg"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20232,6 +22486,15 @@
   "seawolf-steel::North Wrecks /Brother Islands (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "salem express",
+    "panorama reef",
+    "brothers",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20271,6 +22534,15 @@
   "seawolf-steel::North/Brothers/Elphinstone (HRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "abu dabab",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20310,6 +22582,15 @@
   "seawolf-steel::North/Brothers/Elphinstone (PRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "brothers",
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "abu dabab",
+    "sha'ab el erg",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20349,6 +22630,13 @@
   "seawolf-steel::North/Strait of Tiran (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "sha'ab el erg"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20388,6 +22676,15 @@
   "seawolf-steel::Red Sea Classic (HRG - PRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20427,6 +22724,15 @@
   "seawolf-steel::Red Sea Classic (PRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "salem express",
+    "gubal",
+    "panorama reef",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20466,6 +22772,15 @@
   "seawolf-steel::Sataya-Deadalus-Red Sea Classic 11 days (PRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "thistlegorm",
+    "abu nuhas",
+    "sataya",
+    "salem express",
+    "panorama reef"
+   ],
    "dives": 28,
    "fees": {
     "complete": true,
@@ -20544,6 +22859,12 @@
   "seawolf-steel::Strait of Tiran/Dahab (HRG - HRG)": {
    "boat": "seawolf-steel",
    "boat_name": "Seawolf Steel",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "tiran",
+    "dahab"
+   ],
    "dives": 19,
    "fees": {
     "complete": true,
@@ -20583,6 +22904,11 @@
   "serenity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 16,
    "fees": {
     "complete": true,
@@ -20639,6 +22965,10 @@
   "serenity::Mini - Hurghada (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas"
+   ],
    "dives": 9,
    "fees": {
     "complete": true,
@@ -20695,6 +23025,10 @@
   "serenity::Mini - Wrecks (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "abu nuhas",
+    "gubal"
+   ],
    "dives": 9,
    "fees": {
     "complete": true,
@@ -20751,6 +23085,10 @@
   "serenity::North & Brothers (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "brothers",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -20807,6 +23145,11 @@
   "serenity::North & Wrecks (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -20863,6 +23206,11 @@
   "serenity::North - Ras Mohamed, Tiran, Dahab (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -20919,6 +23267,10 @@
   "serenity::North - Tiran (Hurghada - Hurghada)": {
    "boat": "serenity",
    "boat_name": "Serenity",
+   "dive_sites": [
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21082,6 +23434,12 @@
   "snefro-love::Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "snefro-love",
    "boat_name": "Snefro Love",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm",
+    "gubal",
+    "tiran"
+   ],
    "dives": 12,
    "fees": {
     "complete": false,
@@ -21138,6 +23496,12 @@
   "snefro-love::Sinai Classic (Sharm el Sheikh- Sharm el sheikh)": {
    "boat": "snefro-love",
    "boat_name": "Snefro Love",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": false,
@@ -21193,6 +23557,10 @@
   "snefro-pearl::Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "snefro-pearl",
    "boat_name": "Snefro Pearl",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed"
+   ],
    "dives": 9,
    "fees": {
     "complete": false,
@@ -21249,6 +23617,11 @@
   "snefro-spirit::Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el sheikh)": {
    "boat": "snefro-spirit",
    "boat_name": "Snefro Spirit",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed",
+    "tiran"
+   ],
    "dives": 12,
    "fees": {
     "complete": false,
@@ -21305,6 +23678,11 @@
   "snefro-spirit::Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "snefro-spirit",
    "boat_name": "Snefro Spirit",
+   "dive_sites": [
+    "tiran",
+    "dahab",
+    "ras mohammed"
+   ],
    "dives": 19,
    "fees": {
     "complete": false,
@@ -21361,6 +23739,12 @@
   "snefro-target::Sinai Classic (Sharm el Sheikh- Sharm el Sheikh)": {
    "boat": "snefro-target",
    "boat_name": "Snefro Target",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "ras mohammed",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": false,
@@ -21416,6 +23800,14 @@
   "snefro-target::Sinai Wrecks & Reefs (Sharm el Sheikh - Sharm el Sheikh)": {
    "boat": "snefro-target",
    "boat_name": "Snefro Target",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "rosalie moller",
+    "gubal"
+   ],
    "dives": 19,
    "fees": {
     "complete": false,
@@ -21472,6 +23864,12 @@
   "south-moon-1::Best of Sinai (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "south-moon-1",
    "boat_name": "South Moon 1",
+   "dive_sites": [
+    "ras mohammed",
+    "thistlegorm",
+    "gubal",
+    "tiran"
+   ],
    "dives": 20,
    "fees": {
     "complete": true,
@@ -21638,6 +24036,11 @@
   "tala::Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "gubal"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21677,6 +24080,13 @@
   "tala::Deadalus, Rocky, Zabargad (Port Ghalib - Port Ghalib)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "daedalus",
+    "elphinstone",
+    "rocky island",
+    "zabargad",
+    "fury shoals"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21716,6 +24126,13 @@
   "tala::North & Brothers (Hurghada - Hurghada)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "gubal",
+    "brothers",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21755,6 +24172,12 @@
   "tala::North & Brothers (Port Ghalib - Hurghada)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21794,6 +24217,14 @@
   "tala::North & Dahab (Hurghada - Hurghada)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "rosalie moller",
+    "dahab",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21833,6 +24264,13 @@
   "tala::North (Hurghada- Hurghada)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "rosalie moller",
+    "gubal",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21872,6 +24310,11 @@
   "tala::Rocky, Zarbagad, St Johns (Port Ghalib - Port Ghalib)": {
    "boat": "tala",
    "boat_name": "MV Tala",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -21911,6 +24354,13 @@
   "topaz::Best of Dahab and Tiran (Hurghada - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "thistlegorm",
+    "tiran",
+    "dahab",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -21957,6 +24407,12 @@
   "topaz::Best of Tiran (Hurghada - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22003,6 +24459,11 @@
   "topaz::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22049,6 +24510,12 @@
   "topaz::Brothers, Daedalus, Elphinstone (Hurghada - Port Ghalib)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "abu dabab"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22095,6 +24562,11 @@
   "topaz::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22141,6 +24613,12 @@
   "topaz::Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "daedalus",
+    "zabargad",
+    "rocky island",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22187,6 +24665,11 @@
   "topaz::Fury Shoal (Port Ghalib - Port Ghalib)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "sataya",
+    "abu dabab",
+    "fury shoals"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22233,6 +24716,14 @@
   "topaz::The Golden Loop - North/Brother/Safaga (Hurghada - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "safaga",
+    "panorama reef",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22279,6 +24770,14 @@
   "topaz::The Golden Loop - North/Brother/Safaga (Hurghada - Port Ghalib)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "brothers",
+    "thistlegorm",
+    "safaga",
+    "panorama reef",
+    "ras mohammed",
+    "abu nuhas"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22325,6 +24824,15 @@
   "topaz::Treasures of the North (Hurghada - Hurghada)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "thistlegorm",
+    "safaga",
+    "panorama reef",
+    "middle reef",
+    "ras mohammed",
+    "abu nuhas",
+    "gubal"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22371,6 +24879,13 @@
   "topaz::Zabargad - Rocky - St John's - Elphinstone (Port Ghalib - Port Ghalib)": {
    "boat": "topaz",
    "boat_name": "Topaz",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22417,6 +24932,11 @@
   "unity::Brothers, Daedalus, Elphinstone (Hurghada - Hurghada)": {
    "boat": "unity",
    "boat_name": "Unity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22460,6 +24980,11 @@
   "unity::North and Brothers (Hurghada - Hurghada)": {
    "boat": "unity",
    "boat_name": "Unity",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "brothers"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -22503,6 +25028,13 @@
   "unity::Northern Reach (Hurghada - Hurghada)": {
    "boat": "unity",
    "boat_name": "Unity",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "dahab",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 17,
    "fees": {
     "complete": true,
@@ -22546,6 +25078,12 @@
   "unity::Northern Wrecks and Reefs (Hurghada - Hurghada)": {
    "boat": "unity",
    "boat_name": "Unity",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "ras mohammed"
+   ],
    "dives": 18,
    "fees": {
     "complete": true,
@@ -22589,6 +25127,14 @@
   "unity::The Grand Tour (Hurghada - Hurghada)": {
    "boat": "unity",
    "boat_name": "Unity",
+   "dive_sites": [
+    "brothers",
+    "daedalus",
+    "fury shoals",
+    "sataya",
+    "sataya reef",
+    "elphinstone"
+   ],
    "dives": 15,
    "fees": {
     "complete": true,
@@ -22632,6 +25178,13 @@
   "vip-one::North Red Sea Route (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "vip-one",
    "boat_name": "VIP One",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "ras mohammed",
+    "tiran",
+    "gubal"
+   ],
    "dives": 23,
    "fees": {
     "complete": false,
