@@ -28,14 +28,22 @@ Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Live on real data: **878 departures, 314 itineraries, 67 boats, 42 operators**,
-every price `scraped`. padi.com is not wired up; liveaboard.com is the only
-source in use.
+Live on real data: **1,122 departures, 402 itineraries, 77 boats, 47
+operators**, every price `scraped`.
 
-Prices and availability come from a nightly crawl. Fees, rental-gear prices and
-the vessel specification table need a browser — the site renders them
-client-side — so they come from a weekly Playwright run and are keyed by vessel,
-because they do not change with the month.
+**Both sources are in use.** This said "padi.com is not wired up" until
+2026-08-30, by which point PADI Travel was supplying a berth price on 654
+sailings — 53 of which it is the only seller of — a berth count on 833, the
+entry bar and stated dive count on 441 trips, and the only fee book the 22
+vessels liveaboard.com sells no berths on have. Neither seller is ever allowed
+to speak for the other: a row states a discount only from the seller whose fare
+it prints, and a row PADI alone lists carries no second price at all.
+
+Prices and availability come from a nightly crawl, and PADI's from a second one
+half an hour later (`padi.yml`). Fees, rental-gear prices and the vessel
+specification table need a browser — the site renders them client-side — so
+they come from a weekly Playwright run and are keyed by vessel, because they do
+not change with the month.
 
 A sandbox cannot reach liveaboard.com (network policy, see #1); GitHub's runners
 can. So anything about what the source actually returns is settled by running a
@@ -62,14 +70,14 @@ The suite holds two kinds of test and the command above runs both. Some assert
 against **committed data** — that the advertised price really is the bottom of
 every shipped cabin ladder, that the footer's vessel counts are the dataset's.
 Those are a *publication* gate: they are reached through `tests/published.py`,
-and the three jobs that fetch skip them on their pre-flight run
+and the jobs that fetch skip them on their pre-flight run
 (`LIVEABOARD_TESTS=code`) and run them again before committing. Put in front of
 a fetch they deadlock it — a stale cabin book failed the suite in front of the
 only job able to refresh that book — and a run that fetches and then refuses to
 publish is recoverable where one that refuses to fetch is not.
 
 CI's list lives in `.github/actions/checks` rather than in `ci.yml`, because
-the five jobs that commit data run it too. They push with the default
+every job that commits data runs it too. They push with the default
 `GITHUB_TOKEN`, and GitHub does not trigger workflows on those pushes, so that
 step is the only CI a scheduled commit will ever get.
 
@@ -134,7 +142,7 @@ src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   itinerary, fees, gear, vessel   (the last three need a browser)
 templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, fetch_deals,
-                  fetch_cabins, derive_sales,
+                  fetch_cabins, derive_sales, fetch_padi,
                   scrape_fees, reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
@@ -149,6 +157,9 @@ tests/            stdlib unittest, no dependencies
 | `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
+| `data/padi.json` | what PADI states per trip: the entry bar, the dive count, its own fee book | yes |
+| `data/padi_departures.json` | the same sailings as PADI sells them: one price and berth count per boat and day | yes |
+| `data/padi_raw.json` | every field each PADI response published, parsed or not | no — gitignored, cached on the runner, CI artifact for 14 days |
 | `data/deals.json` | what PADI Travel is discounting, one entry per day it was read | yes |
 | `data/sales.json` | what liveaboard.com's booking pages were advertising, one entry per day they were read | yes |
 | `data/CHANGES.md` | what moved on each refresh, newest first | yes |

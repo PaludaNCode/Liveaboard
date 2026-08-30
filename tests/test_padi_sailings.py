@@ -28,7 +28,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
 import published  # noqa: E402
-from fetch_padi import _departure_book, _iso_day  # noqa: E402
+from fetch_padi import (  # noqa: E402
+    MIN_BOOK_RATIO,
+    _departure_book,
+    _iso_day,
+    keeps_the_book,
+)
 from liveaboard.dataset import Dataset  # noqa: E402
 from liveaboard.promote import promote  # noqa: E402
 from liveaboard.render import build_payload  # noqa: E402
@@ -632,3 +637,38 @@ class TestTheSoleSellerIsNamedInSource(unittest.TestCase):
                         row["booking_url"])
         self.assertNotIn("padi", {k for k in row if k == "padi"},
                          "a sole-seller row must not also claim a second price")
+
+
+class TestTheBookIsNeverQuietlyEmptied(unittest.TestCase):
+    """`data/padi.json` is rebuilt whole from a raw store that is gitignored.
+
+    Fine on a machine that has one; a landmine on a fresh runner, which is
+    every scheduled run. An empty store rebuilds the book with zero trips and
+    writes it, deleting the entry bar, the stated dive count and the only fee
+    book the 22 PADI-only vessels have — with a green job, a valid file, and
+    five published facts quietly gone.
+
+    The same rule the other fetchers already keep: a run that read nothing must
+    not rewrite the file, and an empty read is not a read that found nothing.
+    """
+
+    def test_a_run_that_stored_nothing_never_replaces_the_book(self):
+        self.assertFalse(keeps_the_book(0, 441))
+
+    def test_a_first_run_has_nothing_to_lose(self):
+        self.assertTrue(keeps_the_book(441, 0))
+        self.assertTrue(keeps_the_book(0, 0))
+
+    def test_a_book_that_lost_a_third_is_an_unfinished_crawl(self):
+        self.assertFalse(keeps_the_book(300, 441))
+
+    def test_an_itinerary_or_two_moving_is_not(self):
+        """PADI's count moves by ones. A guard that fired on those would be a
+        guard somebody routes around with --force every week."""
+        self.assertTrue(keeps_the_book(439, 441))
+        self.assertTrue(keeps_the_book(int(441 * MIN_BOOK_RATIO) + 1, 441))
+
+    def test_force_is_the_way_past_it(self):
+        """As `promote --force` is the way past its own ratio guard: the
+        shrinkage may be real, and then a person says so."""
+        self.assertTrue(keeps_the_book(0, 441, force=True))

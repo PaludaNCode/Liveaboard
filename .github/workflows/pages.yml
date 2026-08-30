@@ -41,6 +41,7 @@ on:
       - "Weekly fee refresh"
       - "Read cabin prices and berths left"
       - "Read trip itineraries"
+      - "Read PADI Travel"
       - "Re-promote"
     types: [completed]
   workflow_dispatch:

@@ -36,7 +36,20 @@ re-fetched, and both files are written after every boat, so a run killed
 halfway keeps what it got. `--limit N` merges rather than replaces, like
 `scrape_fees.py --limit`.
 
-    python3 tools/fetch_padi.py [--limit N] [--refresh]
+**`padi.yml` runs it daily, with `--trips`.** It ran in no workflow at all
+until then, and by that point five published facts depended on it -- two of
+them prices. Everything else in the pipeline has a cadence and reports its own
+failures; this one's failure mode was "nobody ran it", which nothing reported.
+The runner caches the raw store rather than committing it, so an ordinary run
+re-fetches only the itinerary *listings* and the sailings: ~80 requests against
+~530 from cold.
+
+**The book is never quietly emptied.** It is rebuilt whole from a raw store
+that is gitignored, so a cold runner would rebuild it with zero trips and write
+it -- a green job, a valid file, and five published facts gone. See
+`MIN_BOOK_RATIO`.
+
+    python3 tools/fetch_padi.py [--limit N] [--refresh] [--trips] [--force]
 """
 
 from __future__ import annotations
@@ -68,6 +81,27 @@ DROP = ("photos", "marineLife")
 RAW = Path("data/padi_raw.json")
 BOOK = Path("data/padi.json")
 DEPARTURES = Path("data/padi_departures.json")
+
+MIN_BOOK_RATIO = 0.9
+"""How far `data/padi.json` may shrink in one run before it is refused.
+
+**The book is rebuilt whole from the raw store, and the raw store is
+gitignored.** That is fine on a machine that has one and a landmine on a fresh
+runner, which is every scheduled run: an empty store rebuilds the book with
+*zero* trips and writes it, deleting the entry bar, the dive count and the only
+fee book the 22 PADI-only vessels have. Nothing about that looks like a
+failure -- the job is green, the file is valid JSON, and the page quietly loses
+five published facts.
+
+So the same rule the other fetchers already keep. `fetch_cabins.py`: a run that
+read nothing must not rewrite the file. `fetch_deals.py`: an empty read is not
+a read that found no deals. Here: a book that has lost a tenth of its trips is
+reporting a crawl that did not finish, not a fleet that shrank.
+
+Ten percent because the real thing this catches is a book collapsing to a
+fraction of itself, and PADI's itinerary count moves by ones. `--force` is the
+way past it, the way `promote --force` is the way past its own ratio guard.
+"""
 
 TRIP_LIST = "https://travel.padi.com/api/v2/travel/shop/{vessel}/trips/"
 """Every sailing one vessel has on sale: dates, price, availability.
@@ -192,6 +226,19 @@ def _iso_day(value: str | None) -> str | None:
     return day if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day) else None
 
 
+def keeps_the_book(rebuilt: int, held: int, *, force: bool = False) -> bool:
+    """Whether a rebuilt book may replace the one on disk.
+
+    Pure, and separate from the run, so the rule can be asserted rather than
+    reasoned about. A first run has nothing to lose and always passes; a run
+    that came back with nothing at all never does, whatever the ratio says,
+    because zero trips is not a fleet that shrank.
+    """
+    if force or not held:
+        return True
+    return bool(rebuilt) and rebuilt >= held * MIN_BOOK_RATIO
+
+
 def _fetch_trips(aliases: dict[str, str], raw: dict, args) -> None:
     """Every sailing each mapped vessel sells, with the currency to read it in.
 
@@ -284,12 +331,17 @@ def main() -> int:
                         help="re-fetch itineraries already stored")
     parser.add_argument("--trips", action="store_true",
                         help="fetch sailings and prices as well as itineraries")
+    parser.add_argument("--force", action="store_true",
+                        help="write data/padi.json even if it loses trips (see MIN_BOOK_RATIO)")
     args = parser.parse_args()
 
     aliases = json.loads(Path(args.aliases).read_text())["aliases"]
     raw = load(RAW, {"fetched": "", "country": args.country, "itineraries": {}})
     book = load(BOOK, {"collected": "", "source": "padi.com", "trips": {}})
     stored: dict = raw["itineraries"]
+    # Counted before anything overwrites it: the book below is rebuilt whole,
+    # and the guard needs to know what it is replacing.
+    held = len(book.get("trips") or {})
 
     boats = sorted(aliases.items())
     if args.limit:
@@ -378,6 +430,17 @@ def main() -> int:
         if shop.get("boat")
     }
     book["collected"] = raw["fetched"]
+    if not keeps_the_book(len(trips), held, force=args.force):
+        # Reported and refused, never quietly written. Every one of these
+        # trips is a fee book, an entry bar or a dive count the page is
+        # publishing, and a run whose raw store came up short knows nothing
+        # about the ones it is missing -- exactly as an unreadable vessel page
+        # knows nothing about the month behind it.
+        print(f"::error::{BOOK} holds {held} trips and this run rebuilt only "
+              f"{len(trips)}; the raw store is incomplete, so the book is left "
+              f"as it was. Re-run without --limit to fill {RAW}, or pass "
+              f"--force if the fleet really did shrink", file=sys.stderr)
+        return 1
     BOOK.write_text(json.dumps(book, indent=1, sort_keys=True) + "\n")
 
     sailings = _departure_book(aliases, raw)

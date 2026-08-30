@@ -393,6 +393,21 @@ the parser gets proved against three real trips before it is pointed at three
 hundred of somebody else's pages. A capped run merges into the book, like
 `scrape_fees.py --limit`.
 
+**What PADI states has a cadence too, and it is `padi.yml`, daily.**
+`tools/fetch_padi.py` ran in no workflow at all until then, and by that point
+five published facts rested on it — the entry bar, the stated dive count, the
+only fee book the 22 PADI-only vessels have, PADI's berth price on 654 sailings
+and its berth count on 833. Everything else here reports its own failures; this
+one's failure mode was **"nobody ran it"**, which nothing reports. `data/
+padi_raw.json` stays gitignored and is *cached* on the runner instead, so an
+ordinary run re-fetches only the itinerary listings and the sailings — ~80
+requests against ~530 from cold — and every run uploads it as an artifact,
+because a re-parse that needs the raw store should download it rather than
+re-crawl 530 pages. **The book is rebuilt whole from that store**, so a cold
+runner would rebuild it with zero trips and write it: green job, valid file,
+five facts gone. `MIN_BOOK_RATIO` refuses that, the way `fetch_cabins.py`
+refuses to rewrite its file after reading nothing.
+
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`
 that page 99 answers with page 1 — but `/api/v2/travel/promotions/` takes that
