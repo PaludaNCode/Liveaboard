@@ -24,13 +24,17 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
-and the CI check all promote on them, so one canonical set of inputs lives in
-`cli.py` and cannot drift apart across five workflows.
+Take the defaults. All seven source workflows promote on them, as do
+`promote.yml` and the CI check, so one canonical set of inputs lives in
+`cli.py` and cannot drift apart across nine callers.
 
 **A test over committed data gates the commit, never the fetch.** The suite
-holds both kinds and the default command runs both; only the three jobs that
-fetch run it twice, and the first of those runs opts out:
+holds both kinds and the default command runs both. Seven workflows run the
+code-only suite up front — six of them before fetching — and every one of them
+runs the whole suite afterwards through `.github/actions/checks`, so an
+assertion about committed data is reached only once there is a commit to gate.
+`fees.yml` drives a browser and runs no up-front suite at all, which is the
+same rule taken to its end rather than an exception to it:
 
 ```bash
 LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
@@ -70,15 +74,29 @@ ends the same way, because the shape is identical and six copies of it drifted:
 - `.github/actions/publish` — stage, commit, push with rebase-and-retry. Its
   `subject` takes `{today}` and `{sha}`; a `headline` carrying scraped text is
   its own input and never reaches a shell as code.
+  **A rebuild is not news.** `cli build` stamps the page with the minute it
+  ran, so `site/index.html` differs on every run whether or not any data did
+  and the "nothing to commit" exit could never fire: seven jobs a day committed
+  seven times a day regardless. Each was a line in `git log --oneline data/` —
+  which this file calls the price history — that moved no price, and a deploy
+  that published nothing. So when nothing but the page is staged and the page
+  differs only by that stamp, the action says so and commits nothing. Compared
+  with the stamp normalised on both sides, never by reading the shape of a
+  diff: the payload is one enormous line, so a real change and the stamp land
+  on it together and no line-wise filter can tell them apart.
 
 Every one of those files is a **promote input**, so a job commits its data
 *and* the dataset built from it. Committing an input alone leaves
 `promote --check` red until something unrelated heals it.
 
-Three guards police this and two of them have already been blinded once, by the
-refactor that moved `git add` and `git push` into the action: they now assert
-they can still see what they are checking, because a check that stops checking
-is green for the wrong reason.
+Five guards police this contract — `TestThePublicationGateIsComplete`,
+`TestEveryPushingWorkflowChecksItself`, `TestEveryDataCommitReachesThePage`,
+`TestThePageAnnouncesTheNewsInTheCommitThatMakesIt` and `TestARebuildIsNotNews`
+— and two of them have already been blinded once, by the refactor that moved
+`git add` and `git push` into the action: they now assert they can still see
+what they are checking, because a check that stops checking is green for the
+wrong reason. Add a guard here rather than trusting the next refactor to leave
+the shape alone.
 
 **Read the published page without checking anything out.** After a merge, to
 see what actually shipped:
@@ -136,6 +154,20 @@ Break these and the site starts lying quietly rather than failing loudly.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
   required extras. Neither is a clean bill.
+- **A charge priced for last year is not this year's charge, and silence is not
+  expiry.** PADI's payload states `validFrom`/`validTo` on a fee and keeps both
+  sides of a repricing: Grand Sea Explorer lists *Route supplement* twice on
+  every trip — 300 valid to 2026-12-31, 400 from 2027-01-01 — and DUNE Longara
+  lists *Environmental taxes* at 100 and 200. Nothing read the dates, so the
+  bill got whichever entry the parser happened to keep. A comment used to
+  reason the opposite way, that two entries under one title are two charges the
+  operator bills; the dates sat in the same payload and refute it. All **69
+  such pairs resolve to exactly one entry valid in the published season**, not
+  one has two, and they sit on the largest mandatory lines there are. The other
+  half of the rule is the usual one: 750 of 896 entries state no window at all
+  and every one is kept. Only an entry stating a window the season cannot reach
+  is dropped, which is the source saying this price stopped applying before the
+  trip sails.
 - **No route, theme or level labels.** They were inferred from the dive sites,
   read by nothing on the page, and removable without loss: if you want a BDE
   week you filter on Brothers, Daedalus and Elphinstone. A name for a set of
@@ -361,6 +393,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   ours through `padi_key` and only where that key names exactly one of our
   trips; where two of a boat's own itineraries share it the fold is refused,
   because nothing can say which harbour the other source meant.
+- **A joined string is not a record, and no parser makes it one again.** PADI
+  states a trip's two harbours in two fields; `itinerary_from_payload` stored
+  them joined into one `ports`, and nothing read it because nothing could:
+  **two of the eight harbour names contain the separator.** *Hurghada -
+  Marriott Marina - Hurghada - Marriott Marina* is either `("A", "B - C")` or
+  `("A - B", "C")` and the string does not say. 436 of 447 split cleanly and
+  the other 11 cannot be split without guessing — and a closed-vocabulary parse
+  over today's eight names is exactly the rule that breaks silently the first
+  time PADI names a ninth marina. The fix is the record: `port_from` and
+  `port_to`, with `ports` dropped rather than left beside them for something to
+  read by accident. Where a source hands you two facts, keep two fields;
+  re-deriving them later is a guess wearing a parser's clothes.
 - **An unreadable page is not an empty one.** A vessel page is fetched once per
   season month, so one response with no JSON-LD empties that boat's month while
   the other three come back fine — and it looks exactly like a boat that sells

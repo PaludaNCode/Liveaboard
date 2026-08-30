@@ -263,6 +263,14 @@ disappears when the run ages out: the run summary, `data/CHANGES.md`
 `git log --oneline data/` reads as the changelog rather than 23 identical
 lines saying `data: daily refresh`.
 
+And a run that moved nothing writes no line at all. The page carries the minute
+it was built, so `site/index.html` differs on every run whether or not any data
+did; seven scheduled jobs a day therefore committed seven times a day
+regardless, each one a log entry that moved no price. The publish action now
+compares the page with that stamp normalised and commits nothing when the stamp
+is the only difference, which is what lets the log be read as a price history
+rather than skimmed for the entries that mean something.
+
 Four distinctions decide whether it is worth reading, and all four are
 false positives it used to report: a euro figure moving because the ECB moved
 is not an operator repricing; a fare moving by one dollar is the source
