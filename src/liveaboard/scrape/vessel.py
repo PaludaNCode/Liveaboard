@@ -34,6 +34,8 @@ import html as html_module
 import re
 from dataclasses import dataclass
 
+from . import jsonld
+
 SPEC_ROW = re.compile(
     r"<dl[^>]*>\s*<dt[^>]*>\s*(?P<label>[^<]+?)\s*</dt>\s*<dd[^>]*>\s*(?P<value>[^<]*?)\s*</dd>",
     re.I,
@@ -120,6 +122,43 @@ def parse_amenities(markup: str) -> tuple[str, ...]:
         for m in TICK.finditer(markup or "")
         if m.group("item").strip()
     )
+
+
+def operator_from_markup(html: str) -> str | None:
+    """The company a vessel page names as its brand, or ``None``.
+
+    `Product.brand.name` in the page's own JSON-LD. It matters because a vessel
+    **liveaboard.com sells no berths on** has no `Event` node and therefore no
+    `organizer` -- which is where every other boat's operator comes from -- so
+    22 hulls fell back to PADI's `fleetTitle`. That is a shelf on a booking
+    site rather than a company, and it is shouted: `BELLA LIVEABOARDS` where
+    this field says `Bella Liveaboard`.
+
+    The page carries it whether or not the boat has departures, which is the
+    whole point. Measured on the 10 PADI-only vessels that have a
+    liveaboard.com page at all: **10 of 10** state a brand, and every one is
+    the operating company rather than a fleet label --
+
+        blue-pearl    Blue Planet Liveaboards      bella-2/3, eriny  Bella Liveaboard
+        ashrafi       Crystal Reef Adventures      freedom-iii/iv    Sharks Bay Umbi
+        lady-m        Blue Ocean Diving Centers    reef-voyager      Reef Oasis Fleet
+        south-moon-1  Sea Queen Fleet
+
+    Blue Pearl is the case this was looked for. PADI shelves it and MY Blue
+    under one "BLUE PLANET Fleet", and folding the two on that alone asserted a
+    company for a hull our own source connected to nobody -- so the alias was
+    written and removed. This is the evidence that was missing: the *same
+    source* the rest of the dataset takes operators from, naming the company
+    for that hull directly.
+    """
+    for node in jsonld.of_type(html, "Product"):
+        brand = node.get("brand")
+        if isinstance(brand, list):
+            brand = brand[0] if brand else None
+        name = brand.get("name") if isinstance(brand, dict) else brand
+        if isinstance(name, str) and name.strip():
+            return " ".join(name.split())
+    return None
 
 
 def read_vessel(specs_markup: str, diving_markup: str = "") -> VesselFacts:

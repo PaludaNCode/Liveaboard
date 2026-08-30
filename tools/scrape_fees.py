@@ -39,7 +39,7 @@ from liveaboard.scrape.fees import (  # noqa: E402
     to_fee_dicts,
 )
 from liveaboard.scrape.gear import parse_gear, to_fee_dict as gear_fee_dict  # noqa: E402
-from liveaboard.scrape.vessel import read_vessel  # noqa: E402
+from liveaboard.scrape.vessel import operator_from_markup, read_vessel  # noqa: E402
 from liveaboard.scrape.liveaboard_com import (  # noqa: E402
     HOST,
     SEASON_QUERY,
@@ -246,6 +246,13 @@ def main() -> int:
 
                 collected[slug] = {
                     "source_url": url,
+                    # The company the page names as the vessel's brand. Only
+                    # ever used for a boat with no departures of its own --
+                    # every other operator comes from an `Event.organizer` --
+                    # but read for all of them, because the field is on the
+                    # page either way and a fee run is the only pass that
+                    # visits a vessel liveaboard.com sells no berths on.
+                    "operator": operator_from_markup(page.content()),
                     # Per vessel, because the book is now merged across runs
                     # and a single top-level date would claim every entry was
                     # collected on the day of the last capped run.

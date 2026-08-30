@@ -1754,12 +1754,18 @@ def promote(
     # count was mined out of marketing prose and missed half the fleet, and
     # nitrox inclusion was not read at all.
     spec_book: dict[str, dict[str, Any]] = {}
+    # And the company the page names as the vessel's brand, which is the only
+    # statement of it for a boat with no departures of its own. See where it is
+    # consumed, below.
+    page_operator: dict[str, str] = {}
     if fees:
         for slug, entry in (fees.get("vessels") or {}).items():
             if entry.get("fees"):
                 fee_book[slug] = entry["fees"]
             if entry.get("specs"):
                 spec_book[slug] = entry["specs"]
+            if entry.get("operator"):
+                page_operator[slug] = entry["operator"]
 
     # What the operator says about *one trip*: the reefs it visits, how many
     # dives it fits in, how many people are aboard and who it will take. Read
@@ -2018,6 +2024,32 @@ def promote(
     # hulls -- 24 guests at 43 m against 20 at 36 m. Two operator rows that may
     # be one company is a cosmetic cost; naming the wrong company is the kind of
     # claim this site exists to catch other people making.
+    # First, though: the vessel page's own `Product.brand.name`, which the fee
+    # run reads for every boat it visits. It beats PADI's fleet label outright
+    # and is not a judgement call -- it is the *same source* every other
+    # operator on this page comes from, naming the company for a hull whose
+    # lack of departures is the only reason it had no `Event.organizer`.
+    #
+    # It is what settles MY Blue Pearl. PADI shelves it and MY Blue under one
+    # "BLUE PLANET Fleet", and folding the two on that alone asserted a company
+    # for a hull our own source connected to nobody -- so an OPERATOR_ALIASES
+    # entry was written and then removed, correctly. Blue Pearl's own page
+    # says `"brand": {"name": "Blue Planet Liveaboards"}`, which is Blue's
+    # operator stated outright rather than inferred from a shelf. The two rows
+    # become one because the evidence arrived, not because the duplicate was
+    # untidy.
+    #
+    # It also ends the shouting without anybody deciding how a company spells
+    # itself: `BELLA LIVEABOARDS` is PADI's rendering, `Bella Liveaboard` is
+    # this field's, and preferring the second is taking a different source's
+    # own words rather than editing the first's.
+    for slug, stated in sorted(page_operator.items()):
+        if slug in boat_operator or not stated:
+            continue
+        record = operator_record(_collapsed(stated) or "")
+        operators.setdefault(record["id"], record)
+        boat_operator[slug] = record["id"]
+
     for slug, vessel in sorted(padi_vessels.items()):
         if slug in boat_operator or not vessel.get("operator"):
             continue
