@@ -1172,6 +1172,53 @@ def _on_sale_summary(
     }
 
 
+STALE_LADDER = 0.03
+"""How far a ladder's bottom rung may sit from the row's advertised price.
+
+The two are read by different passes on different days, so a little drift is
+ordinary: with `cabins.yml` running an hour behind the refresh, all 864 ladders
+sat within 0.6% of their own row. Three percent is loose enough that a night's
+repricing is not a problem and tight enough to catch a ladder that is no longer
+this sailing's, since the rungs across this fleet run from €500 to €2,900.
+"""
+
+
+def _drop_stale_ladder(
+    blocks: list[list[Any]], advertised: int | None
+) -> tuple[list[list[Any]], int | None]:
+    """Refuse a ladder that contradicts the price it is supposed to explain.
+
+    The advertised price *is* the bottom rung -- checked on 864 of 864 -- so a
+    bottom rung far below it is not a cheaper berth, it is last week's prices
+    still on the shelf. It happened the day the Red Sea Aggressors' 33% sale
+    ended: the refresh re-priced 36 sailings to their list price while the
+    booking pages behind them had been read two days earlier, and the page was
+    left offering a €1,588 berth on a €2,371 sailing. A price nobody can buy,
+    published by the site that exists to catch exactly that.
+
+    Dropping the ladder rather than the row, in both directions and whichever
+    of the two is the stale one, because it is the conservative loss: a sailing
+    with no ladder falls back to what its sellers say is left, and the panel
+    that would have opened is not worth a figure that is wrong.
+
+    Returns the surviving blocks and, when one went, the rung that disagreed --
+    so the caller can name it rather than drop it in silence.
+    """
+    if not advertised:
+        return blocks, None
+    kept: list[list[Any]] = []
+    dropped: int | None = None
+    for block in blocks:
+        rungs = block[2] if len(block) > 2 else None
+        if rungs:
+            cheapest = min(rung[1] for rung in rungs)
+            if abs(cheapest - advertised) / advertised > STALE_LADDER:
+                dropped = cheapest
+                continue
+        kept.append(block)
+    return kept, dropped
+
+
 def _fx_table(fx: dict[str, Any] | None) -> Any:
     """The rate table promote converts cabin prices with, or ``None``.
 
@@ -1834,6 +1881,10 @@ def promote(
     boats: dict[str, dict[str, Any]] = {}
     itineraries: list[dict[str, Any]] = []
     departures: list[dict[str, Any]] = []
+    # Ladders refused for contradicting the row above them. Reported, never
+    # silent: each one is a booking page this pipeline read and then declined
+    # to publish, and the fix is a fresh `cabins.yml` rather than anything here.
+    stale_ladders: list[str] = []
 
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
@@ -2096,6 +2147,17 @@ def promote(
             berths = _berth_blocks(
                 ladder, sailing_book.get(f"{slug}::{item['start']}"), cabin_names, fx_table
             )
+            # A ladder whose bottom rung is nowhere near the price above it is
+            # not this sailing's any more. Dropped and named rather than
+            # published; see `_drop_stale_ladder`.
+            advertised = _to_display(
+                float(item["price"]["amount"]), item["price"]["currency"], fx_table
+            )
+            berths, outdated = _drop_stale_ladder(berths, advertised)
+            if outdated is not None:
+                stale_ladders.append(
+                    f"{slug} {item['start']}: row {advertised}, ladder starts at {outdated}"
+                )
             if berths:
                 entry["berths"] = berths
 
@@ -2224,6 +2286,8 @@ def promote(
     if deals_block:
         payload["deals"] = deals_block
 
+    if stale_ladders:
+        payload["stale_ladders"] = sorted(stale_ladders)
     if skipped:
         payload["promotion_skipped"] = skipped
     if superseded:

@@ -3,6 +3,72 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-08-30
+
+```
+changes: HEAD -> 2026-08-30
+===========================
+
+new departures (7)
+  2027-06-07  Ghazala Adventure      North: Wrecks & Reefs                  1,813 USD
+  2027-06-14  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
+  2027-06-21  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
+  2027-07-05  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
+  2027-07-12  Ghazala Adventure      Brothers, Daedalus & Elphinstone       1,819 USD
+  2027-07-19  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
+  2027-07-26  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
+
+withdrawn (7)
+  2027-06-07  Ghazala Adventure      North: Wrecks & Reefs                 
+  2027-06-14  Ghazala Adventure      North: Wrecks & Reefs                 
+  2027-06-21  Ghazala Adventure      North: Wrecks & Reefs                 
+  2027-07-05  Ghazala Adventure      North: Wrecks & Reefs                 
+  2027-07-12  Ghazala Adventure      Brothers, Daedalus & Elphinstone      
+  2027-07-19  Ghazala Adventure      North: Wrecks & Reefs                 
+  2027-07-26  Ghazala Adventure      North: Wrecks & Reefs                 
+
+price up (36)
+  2027-05-08  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South & Elba Reef
+  2027-05-22  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South & Elba Reef
+  2027-06-05  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South & Elba Reef
+  2027-06-19  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South & Elba Reef
+  2027-07-03  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South & Elba Reef
+  2027-05-01  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-05-15  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-05-29  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-06-12  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-06-26  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-07-10  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  2027-07-17  Red Sea Aggressor V    1,875 ->   2,799 USD  +924 (+49.3%)  Deep South - Rocky & Zabargad Isla
+  ... and 24 more not shown
+
+price down (18)
+  2027-07-17  MY Odyssey Liveaboar   2,505 ->   2,490 USD  -15 (-0.6%)  Premium Expedition
+  2027-07-03  MY Odyssey Liveaboar   1,876 ->   1,865 USD  -11 (-0.6%)  Daedalus, Rocky, Zabargad & Elphin
+  2027-06-12  Yachtiano              1,748 ->   1,737 USD  -11 (-0.6%)  North & Tiran
+  2027-06-05  Yachtiano              1,748 ->   1,737 USD  -11 (-0.6%)  North
+  2027-06-19  Yachtiano              1,748 ->   1,737 USD  -11 (-0.6%)  Yachtiano Deluxe
+  2027-06-26  Yachtiano              1,748 ->   1,737 USD  -11 (-0.6%)  Yachtiano Deluxe
+  2027-08-12  Blue                   1,655 ->   1,645 USD  -10 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-07-10  MY Odyssey Liveaboar   1,655 ->   1,645 USD  -10 (-0.6%)  Fury Shoals
+  2027-08-19  Blue                   1,503 ->   1,494 USD  -9 (-0.6%)  North & Tiran
+  2027-06-12  Ocean Lovers           1,489 ->   1,480 USD  -9 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  Ocean Lovers           1,489 ->   1,480 USD  -9 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-06-19  Ocean Lovers           1,458 ->   1,449 USD  -9 (-0.6%)  North Reefs, Wrecks, Ras Mohammed,
+  ... and 6 more not shown
+
+150 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
+## 2026-08-29
+
+```
+changes: HEAD -> 2026-08-29
+===========================
+
+nothing moved.
+```
+
 ## 2026-08-29
 
 ```

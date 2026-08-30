@@ -709,6 +709,17 @@ def cmd_promote(args: argparse.Namespace) -> int:
         f"promoted {target}: {incoming} departures, "
         f"{len(payload['itineraries'])} itineraries, {len(payload['boats'])} boats"
     )
+    stale = payload.get("stale_ladders") or []
+    if stale:
+        # A warning rather than a note: every one is a sailing whose cabin
+        # panel the page has lost, and the fix is a fresh `cabins.yml` run --
+        # nothing in the dataset or the parser can put it back.
+        print(
+            f"::warning::{len(stale)} cabin ladder(s) contradicted the price above them "
+            f"and were dropped; re-run cabins.yml to read those booking pages again"
+        )
+        for line in stale[:10]:
+            print(f"    {line}")
     for skipped in payload.get("promotion_skipped", [])[:10]:
         print(f"  ! {skipped}")
     return 0

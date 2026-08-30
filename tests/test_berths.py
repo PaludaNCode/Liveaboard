@@ -19,7 +19,15 @@ import json
 import unittest
 from pathlib import Path
 
-from liveaboard.promote import SELLERS, _berth_blocks, _fx_table, berth_key, promote
+from liveaboard.promote import (
+    SELLERS,
+    STALE_LADDER,
+    _berth_blocks,
+    _drop_stale_ladder,
+    _fx_table,
+    berth_key,
+    promote,
+)
 
 DATASET = Path(__file__).resolve().parents[1] / "data" / "egypt-2027.json"
 
@@ -272,8 +280,11 @@ class TestTheCommittedDataset(unittest.TestCase):
         Compared as a percentage rather than exactly, because the row and the
         ladder come from two passes and liveaboard.com re-prices overnight.
         Measured on a book read the day before the refresh: every one of the
-        864 sat within 0.6%. The threshold is 3% — loose enough that a night's
-        drift is not a red build, tight enough that a ladder on the wrong
+        864 sat within 0.6%. The threshold is `promote.STALE_LADDER`, imported
+        rather than repeated so the rule that drops a ladder and the test that
+        checks none survived cannot drift apart. It is 3% — loose enough that a
+        night's
+        repricing is not a red build, tight enough that a ladder on the wrong
         sailing is, since the rungs across this fleet run from €500 to €2,900.
         Running the two passes an hour apart (``cabins.yml``) is what keeps
         the real figure near zero; this is the net under that.
@@ -290,7 +301,7 @@ class TestTheCommittedDataset(unittest.TestCase):
                 advertised = float(fx.to_display(quoted)[0].amount)
                 cheapest = min(rung[1] for rung in block[2])
                 self.assertLessEqual(
-                    abs(cheapest - advertised) / advertised, 0.03,
+                    abs(cheapest - advertised) / advertised, STALE_LADDER,
                     f"{departure['id']}: row says {advertised:.0f}, "
                     f"ladder starts at {cheapest} — too far apart to be a "
                     f"night's repricing, so check the join",
@@ -313,3 +324,62 @@ class TestTheCommittedDataset(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestAStaleLadderIsRefused(unittest.TestCase):
+    """A ladder that contradicts its row is not that row's ladder.
+
+    The advertised price *is* the bottom rung — checked on 864 of 864 — so a
+    bottom rung far below it is not a cheaper berth on offer, it is last week's
+    prices still on the shelf. It happened live: the day the Red Sea Aggressors'
+    33% sale ended, the daily refresh re-priced 36 sailings to list while the
+    booking pages behind them had been read two days earlier, and the published
+    page offered a €1,588 berth on a €2,371 sailing.
+    """
+
+    def ladder(self, cheapest: float):
+        return [[0, 4, [[0, cheapest, 4, None]], 4]]
+
+    def test_a_ladder_that_agrees_survives(self):
+        kept, dropped = _drop_stale_ladder(self.ladder(1000), 1000)
+        self.assertEqual(len(kept), 1)
+        self.assertIsNone(dropped)
+
+    def test_a_night_s_repricing_is_not_a_contradiction(self):
+        """All 864 ladders sat within 0.6% of their row when read an hour
+        apart; the threshold has to leave room for that."""
+        kept, dropped = _drop_stale_ladder(self.ladder(1000), int(1000 * (1 + STALE_LADDER / 2)))
+        self.assertEqual(len(kept), 1)
+        self.assertIsNone(dropped)
+
+    def test_a_ladder_from_before_a_sale_ended_is_dropped(self):
+        kept, dropped = _drop_stale_ladder(self.ladder(1588), 2371)
+        self.assertEqual(kept, [])
+        self.assertEqual(dropped, 1588)
+
+    def test_it_cuts_both_ways(self):
+        """Whichever of the two is stale, they cannot both describe this
+        sailing, and the ladder is the one the page can do without."""
+        kept, dropped = _drop_stale_ladder(self.ladder(2371), 1588)
+        self.assertEqual(kept, [])
+
+    def test_the_other_seller_s_count_survives_the_drop(self):
+        """PADI's figure is not a ladder and has nothing to contradict.
+
+        Dropping it too would lose the only count left on those rows.
+        """
+        blocks = [[0, 4, [[0, 1588, 4, None]], 4], [1, None, None, 22]]
+        kept, _ = _drop_stale_ladder(blocks, 2371)
+        self.assertEqual(kept, [[1, None, None, 22]])
+
+    def test_a_row_with_no_price_to_check_against_keeps_its_ladder(self):
+        kept, dropped = _drop_stale_ladder(self.ladder(1000), None)
+        self.assertEqual(len(kept), 1)
+        self.assertIsNone(dropped)
+
+    def test_promote_names_every_ladder_it_refused(self):
+        """Never silent: each one is a booking page this pipeline read and then
+        declined to publish, and only a fresh crawl can put it back."""
+        payload = json.loads(DATASET.read_text(encoding="utf-8"))
+        for line in payload.get("stale_ladders") or []:
+            self.assertIn("ladder starts at", line)

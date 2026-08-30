@@ -302,6 +302,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   said it and the day they said it. The two crawls run on different days, so
   `berths_read` and `padi_berths_read` are separate: one date over two sellers
   dates half of them wrong.
+- **A ladder that contradicts its row is not that row's ladder.** The advertised
+  price *is* the bottom rung, on 864 of 864, so a rung far below it is not a
+  cheaper berth on offer — it is last week's prices still on the shelf. The day
+  the Red Sea Aggressors' 33% sale ended, the daily refresh re-priced 36
+  sailings to list while the booking pages behind them had been read two days
+  earlier, and the page offered a €1,588 berth on a €2,371 sailing: a price
+  nobody can buy, published by the site that exists to catch that. `promote`
+  drops such a ladder past `STALE_LADDER` (3%, which leaves room for the 0.6%
+  the whole fleet drifts overnight) and **names every one it dropped** — the
+  fix is a fresh `cabins.yml`, and nothing in the dataset can put it back. The
+  other seller's count survives the drop: it is not a ladder and has nothing to
+  contradict. **CI never saw this**, because the scheduled data commits push
+  with `GITHUB_TOKEN` and GitHub does not run workflows on those — so a refresh
+  can turn `main` red and the next human PR is what finds out.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was
