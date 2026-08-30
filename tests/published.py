@@ -89,6 +89,7 @@ PUBLISHED = (
     "padi.json",
     "padi_departures.json",
     "barren.json",
+    "CHANGES.md",
 )
 """The committed files a fetch rewrites, and therefore the ones behind the gate.
 

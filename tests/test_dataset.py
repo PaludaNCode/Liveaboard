@@ -6,12 +6,18 @@ import json
 import re
 import tempfile
 import unittest
+from html import unescape
 from urllib.parse import unquote
 from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
-from liveaboard.render import build_payload, icon_data_uri, render
+from liveaboard.render import (
+    build_payload,
+    icon_data_uri,
+    latest_entry,
+    render,
+)
 from liveaboard.scrape import jsonld, liveaboard_com
 from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.diagnose import describe
@@ -313,6 +319,35 @@ class TestThePublicationGateIsComplete(unittest.TestCase):
         self.assertFalse(published.code_only({published.GATE: ""}))
         self.assertFalse(published.code_only({published.GATE: "all"}))
         self.assertTrue(published.code_only({published.GATE: "code"}))
+
+
+class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
+    """The changelog panel must be the newest entry in `data/CHANGES.md`.
+
+    The page embeds that entry, and both data workflows **built the page before
+    appending to the file** — so the commit that produced the news shipped a
+    panel still showing the previous refresh's. It self-corrected on the next
+    rebuild, so nothing published was ever wrong; it was, on exactly the commit
+    that mattered, one refresh behind in saying so. On a site whose argument is
+    that published figures should be current, that is the wrong way round.
+
+    Asserted on the committed pair rather than on the order of steps in a YAML
+    file, because the property is what matters and a step order is only one way
+    to break it.
+    """
+
+    def test_the_committed_page_shows_the_committed_latest_entry(self):
+        history = latest_entry(published.committed("CHANGES.md")
+                               .read_text(encoding="utf-8"))
+        if not history.strip():
+            self.skipTest("no entry in data/CHANGES.md yet")
+        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        panel = re.search(r'<pre class="changelog">(.*?)</pre>', page, re.S)
+        self.assertIsNotNone(panel, "the built page has no changelog panel")
+        self.assertEqual(
+            unescape(panel.group(1)).strip(), history.strip(),
+            "the published page's changelog is not the newest entry in "
+            "data/CHANGES.md -- something built the page before appending to it")
 
 
 class TestEveryPushingWorkflowChecksItself(unittest.TestCase):

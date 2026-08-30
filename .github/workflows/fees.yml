@@ -69,7 +69,7 @@ jobs:
             --out data/fees.json \
             --limit "${{ inputs.limit || 0 }}"
 
-      - name: Rebuild with the new fees
+      - name: Re-promote with the new fees
         if: steps.collect.outcome == 'success'
         run: |
           if [ -f data/candidate.json ]; then
@@ -78,25 +78,18 @@ jobs:
               --fees data/fees.json \
               --out data/egypt-2027.json
           fi
-          PYTHONPATH=src python3 -m liveaboard.cli build \
-            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
 
-      # This job ran no tests at all, and it writes prices. Its commits are
-      # pushed with the default `GITHUB_TOKEN`, which GitHub deliberately does
-      # not trigger workflows on, so nothing has ever checked one of them —
-      # not before the push and not after it, until whoever opens the next
-      # pull request finds out.
+      # Between the promote and the build, and before the commit.
       #
-      # Here rather than in front of the browser run, on the same rule as the
-      # other three: a fee book two days stale is a thing a *fetch* corrects,
-      # and an assertion about it must never stop the fetch. The cost of a
-      # failure is one week's collection; the cost of the alternative is a job
-      # that can never run.
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      # Before the commit, while HEAD is still last week's dataset. Afterwards
-      # the comparison would be against this run's own output.
+      # Before the *commit* because HEAD must still be last week's dataset:
+      # afterwards the comparison would be against this run's own output.
+      #
+      # Before the *build* because the page embeds the newest entry in
+      # data/CHANGES.md. Building first shipped a panel that had not yet seen
+      # the entry this run was about to write, so the commit announcing the
+      # news carried a page still showing the previous week's. Never wrong —
+      # it self-corrected on the next rebuild — and exactly one refresh behind
+      # on the commit that mattered.
       #
       # The same three destinations as the daily refresh: the run summary for
       # whoever opens the run, data/CHANGES.md for the durable history, and one
@@ -114,6 +107,27 @@ jobs:
           headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
             --revision HEAD --headline)
           echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+
+      - name: Build the site
+        if: steps.collect.outcome == 'success'
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli build \
+            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
+
+      # This job ran no tests at all, and it writes prices. Its commits are
+      # pushed with the default `GITHUB_TOKEN`, which GitHub deliberately does
+      # not trigger workflows on, so nothing has ever checked one of them —
+      # not before the push and not after it, until whoever opens the next
+      # pull request finds out.
+      #
+      # Here rather than in front of the browser run, on the same rule as the
+      # other three: a fee book two days stale is a thing a *fetch* corrects,
+      # and an assertion about it must never stop the fetch. The cost of a
+      # failure is one week's collection; the cost of the alternative is a job
+      # that can never run.
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
+
 
       - name: Commit and push
         uses: ./.github/actions/publish

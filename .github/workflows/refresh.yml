@@ -142,6 +142,35 @@ jobs:
       - name: Validate the dataset
         run: PYTHONPATH=src python3 -m liveaboard.cli check --data ${{ steps.dataset.outputs.path }}
 
+      # Before the build, and before the commit.
+      #
+      # Before the *commit* because HEAD must still be yesterday's dataset:
+      # afterwards the comparison would be against this run's own output.
+      #
+      # Before the *build* because the page embeds the newest entry in
+      # data/CHANGES.md, and building first shipped a panel that had not yet
+      # seen the entry this very run was about to write. It self-corrected on
+      # the next rebuild, so the page was never wrong — only, on the commit
+      # that produced the news, one refresh behind in announcing it. On a site
+      # whose argument is that published figures should be current, that is
+      # the wrong way round.
+      #
+      # Three destinations, because a run summary is gone once the run ages
+      # out: the summary for whoever opens the run, data/CHANGES.md for the
+      # durable history, and one line captured for the commit subject so
+      # `git log --oneline data/` reads as the changelog it always was.
+      - name: Report what changed
+        id: changed
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --data ${{ steps.dataset.outputs.path }} \
+            --revision HEAD \
+            --append data/CHANGES.md \
+            >> "$GITHUB_STEP_SUMMARY"
+          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --data ${{ steps.dataset.outputs.path }} --revision HEAD --headline)
+          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+
       - name: Build the site
         run: PYTHONPATH=src python3 -m liveaboard.cli build --data ${{ steps.dataset.outputs.path }}
 
@@ -160,24 +189,6 @@ jobs:
       - name: Check what is about to be published
         uses: ./.github/actions/checks
 
-      # Before the commit, while HEAD is still yesterday's dataset. Afterwards
-      # the comparison would be against the run's own output.
-      #
-      # Three destinations, because a run summary is gone once the run ages
-      # out: the summary for whoever opens the run, data/CHANGES.md for the
-      # durable history, and one line captured for the commit subject so
-      # `git log --oneline data/` reads as the changelog it always was.
-      - name: Report what changed
-        id: changed
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --data ${{ steps.dataset.outputs.path }} \
-            --revision HEAD \
-            --append data/CHANGES.md \
-            >> "$GITHUB_STEP_SUMMARY"
-          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --data ${{ steps.dataset.outputs.path }} --revision HEAD --headline)
-          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
 
       - name: Commit and push
         uses: ./.github/actions/publish
