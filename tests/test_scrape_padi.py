@@ -672,3 +672,93 @@ class TestACharePricedForLastYearIsNotThisYearsCharge(unittest.TestCase):
         )
         self.assertEqual(book["unreadable"], [])
         self.assertTrue(book["complete"])
+
+
+class TestWhatTheFareAlreadyCovers(unittest.TestCase):
+    """`whatsIncludedNew`, present on 447 of 447 itineraries and read by nothing.
+
+    The other half of a disclosure. The site read what PADI charges on top and
+    not what it says is already in, and **included fees stay in the breakdown
+    at zero** by invariant -- removing them hides the difference between a
+    bundled operator and one that bills at the dock. That rule was being kept
+    on one seller's side only.
+    """
+
+    def payload(self, *included, mandatory=()):
+        return {
+            "mandatoryOnBoard": [
+                {"title": t, "price": p, "payedPer": 30} for t, p in mandatory
+            ],
+            "whatsIncludedNew": [{"title": t} for t in included],
+        }
+
+    def book(self, *included, mandatory=()):
+        return PadiComAdapter.fees_from_payload(
+            self.payload(*included, mandatory=mandatory), "USD")
+
+    def lines(self, *included, mandatory=()):
+        return [(l["code"], l["tier"], bool(l.get("included")))
+                for l in self.book(*included, mandatory=mandatory)["lines"]]
+
+    def test_an_inclusion_is_a_line_at_no_amount(self):
+        line = self.book("Free nitrox (for certified nitrox divers)")["lines"][0]
+        self.assertTrue(line["included"])
+        self.assertNotIn("amount", line)
+        self.assertEqual(line["note"], "Free nitrox (for certified nitrox divers)")
+
+    def test_the_tier_is_what_the_charge_would_have_been(self):
+        """Mandatory unless the site already treats it as something you choose.
+        It agrees with the other seller's parser, which is the check that
+        matters: nitrox conditional, harbour fees mandatory."""
+        self.assertEqual(
+            self.lines("Free nitrox (for certified nitrox divers)", "Harbour fees"),
+            [("nitrox", "conditional", True), ("port_fees", "mandatory", True)])
+
+    def test_a_visa_service_is_not_the_visa_being_included(self):
+        """The expensive one, and the reason `PARENTHETICAL` is a rule rather
+        than a table of exceptions. "Airport Meet & Greet (VISA assistance,
+        eligible countries only)" classified as `visa`, which would have told
+        eight itineraries' readers that the €25 they still pay at the airport
+        was covered. Help with the paperwork is not the charge."""
+        self.assertEqual(
+            self.lines("Airport Meet & Greet (VISA assistance, eligible countries only)"),
+            [])
+
+    def test_a_parenthetical_does_not_stop_a_real_inclusion_reading(self):
+        """The rule strips a qualifier, not the name. Measured over all 63
+        titles the field uses, it changes the answer on the visa one alone."""
+        self.assertEqual(
+            self.lines("Transfer from/to the airport (round-trip, only on boat "
+                       "arrival & departure days)"),
+            [("airport_transfer", "conditional", True)])
+
+    def test_an_amenity_is_not_a_fee_and_never_blocks_a_bill(self):
+        """4,493 of the 5,662 entries are Water, Coffee, Free WiFi, a shisha
+        lounge. Letting those reach `unreadable` would have taken the book from
+        259 complete trips to none."""
+        book = self.book("Water", "Coffee", "Free WiFi", "Shisha in the shisha lounge onboard")
+        self.assertEqual(book["lines"], [])
+        self.assertEqual(book["unreadable"], [])
+        self.assertTrue(book["complete"])
+
+    def test_a_charge_that_is_billed_is_never_also_reported_as_covered(self):
+        """A stated amount is the stronger claim. They do not collide anywhere
+        in the book today, and if they ever do the money wins."""
+        lines = self.lines("Harbour fees", mandatory=[("Harbour fees", 40.0)])
+        self.assertEqual(lines, [("port_fees", "mandatory", False)])
+
+    def test_one_line_per_code_however_many_wordings_state_it(self):
+        """Operators list four transfer entries -- airport, hotel, scheduled
+        times, night flights. They are one inclusion, and four lines reading
+        "Airport transfers - included" is a breakdown repeating itself."""
+        lines = self.lines("Transfer from/to the airport (round-trip)",
+                           "Transfer from/to local hotels (round-trip)",
+                           "Airport transfer to/from the boat")
+        self.assertEqual(lines, [("airport_transfer", "conditional", True)])
+
+    def test_an_inclusion_dated_out_of_the_season_is_dropped_like_a_charge(self):
+        book = PadiComAdapter.fees_from_payload(
+            {"whatsIncludedNew": [{"title": "Harbour fees",
+                                   "validFrom": "2025-01-01", "validTo": "2026-01-01"}]},
+            "USD")
+        self.assertEqual(book["lines"], [])

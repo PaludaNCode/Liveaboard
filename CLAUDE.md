@@ -97,7 +97,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   same gear set per day, per trip *and* per week, so comparing raw amounts
   across vessels is meaningless — normalise first.
 - **Included fees stay in the breakdown at zero.** Removing them hides the
-  difference between a bundled operator and one that bills at the dock.
+  difference between a bundled operator and one that bills at the dock. Both
+  sellers are read for it now: PADI states it in `whatsIncludedNew`, on 447 of
+  447 itineraries, and reading only what it charges *on top* left two bills in
+  one expanded row disclosing at different depths. The list is prose rather
+  than labels, so a **parenthetical is a qualifier and never the name** —
+  *Airport Meet & Greet (VISA assistance)* classified as the visa fee and would
+  have told eight itineraries' readers that the €25 they still pay at the
+  airport was covered. And an amenity nobody can classify — Water, Coffee, Free
+  WiFi — is not a hole in a fee book: inclusions never reach `unreadable`,
+  which would have taken the book from 259 complete trips to none.
 - **No score grading operators.** The site compares what trips cost; it does
   not rank who sells them. A per-operator "honesty" percentage was removed:
   it read as a league table and contradicted the total beside it.

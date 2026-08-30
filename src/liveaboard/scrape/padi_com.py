@@ -285,6 +285,63 @@ def _in_season(entry: dict[str, object], season: tuple[str, str]) -> bool:
     return not (valid_from and valid_from > end)
 
 
+def _tier_for_inclusion(code: FeeCode) -> FeeTier:
+    """Which column an included charge belongs in.
+
+    A charge is worth stating as covered exactly because you would otherwise
+    have to pay it, so an inclusion is **mandatory unless this site already
+    treats that charge as something you choose** -- nitrox and gear follow a
+    toggle, tips are customary. No new table: the two sets already exist and
+    are the ones `_tier_for` consults for a charge that is billed.
+
+    It agrees with what the other seller's parser already produces, which is
+    the check that matters: of the 243 included lines in the dataset today,
+    nitrox is conditional and harbour fees are mandatory.
+    """
+    from .fees import CUSTOMARY_CODES, TOGGLED_CODES, _tier_for
+
+    return _tier_for(code, required=code not in TOGGLED_CODES | CUSTOMARY_CODES)
+
+
+INCLUDED_FIELD = "whatsIncludedNew"
+"""What PADI says the fare already covers, on 447 of 447 itineraries.
+
+The other half of a disclosure, and the site was reading only one of them: what
+PADI charges *on top* (`MANDATORY_FIELDS`) and not what it says is already in.
+Those are different claims, and **included fees stay in the breakdown at zero**
+by invariant -- removing them hides the difference between a bundled operator
+and one that bills at the dock. That rule was being kept on liveaboard.com's
+side only, so two bills in one expanded row were disclosing at different
+depths with nothing saying which was the shallower.
+
+Membership is the claim, as with `MANDATORY_FIELDS`: nothing in an entry says
+"included", the field it sits in does. `section` and `kind` are the same
+fossils they are next door -- a marine park charge is filed under "Full board,
+including" -- so the title is again the only field that describes the thing.
+"""
+
+PARENTHETICAL = re.compile(r"\s*\([^)]*\)")
+"""A qualifier, never the name of the charge.
+
+The inclusions list is prose where the mandatory list is labels: *"Transfer
+from/to the airport (round-trip, only on boat arrival & departure days)"*. The
+bracket qualifies what is included; it does not say what it is.
+
+It matters exactly once, and expensively. **"Airport Meet & Greet (VISA
+assistance, eligible countries only)"** classified as `visa`, which would have
+published *"Egypt visa on arrival -- included"* on eight itineraries. Help with
+the paperwork is not the €25 the diver still pays at the airport, and this
+project telling somebody a government charge is bundled when it is not is the
+whole failure it exists to report in other people.
+
+Measured across all 63 distinct titles the field uses: stripping the
+parenthetical changes the answer on that one and on nothing else. A rule rather
+than an entry in a table of exceptions, because it says something true about
+the shape of the field -- and the table would only have caught the wording
+already seen.
+"""
+
+
 EXPERIENCE_DIVES: dict[int, int] = {0: 0, 10: 20, 20: 50, 30: 100}
 """`EXPERIENCE_REQUIRED_DIVES`, likewise verbatim.
 
@@ -901,15 +958,70 @@ class PadiComAdapter(SourceAdapter):
         # window on either, and folding those on the title would halve a real
         # bill -- the direction this project never rounds.
         priced = all("amount" in line for line in lines)
+
+        # What the fare already covers, appended at zero. A charge cannot be
+        # billed and bundled on one trip, so anything already on the list wins
+        # -- a stated amount is the stronger claim, and the two do not in fact
+        # collide anywhere in the book today.
+        charged = {line["code"] for line in lines}
+        for code, title in cls._inclusions(detail, season):
+            if code.value in charged:
+                continue
+            charged.add(code.value)
+            lines.append({
+                "code": code.value,
+                # The tier the fee would have had if it were charged. An
+                # included line is drawn at zero rather than counted, so the
+                # tier is what tells the page which column it belongs in.
+                "tier": _tier_for_inclusion(code).value,
+                "basis": FeeBasis.PER_TRIP.value,
+                "included": True,
+                "note": title,
+            })
+
         return {
             "lines": lines,
             # Complete means "every charge PADI states is on this list, named
             # and priced". An itinerary with no mandatory entries at all is
             # complete and empty -- 50 of the 307 are, and that is PADI saying
             # the fare covers everything, which is a disclosure and not a gap.
+            #
+            # Inclusions cannot make it false. 4,493 of the 5,662 entries in
+            # that list are amenities -- Water, Coffee, Free WiFi, a shisha
+            # lounge -- and an amenity nobody can classify is not a hole in a
+            # fee book. Letting them reach `unreadable` would have taken the
+            # book from 259 complete trips to none.
             "complete": not unreadable and priced,
             "unreadable": sorted(set(unreadable)),
         }
+
+    @classmethod
+    def _inclusions(
+        cls, detail: dict[str, object], season: tuple[str, str]
+    ) -> list[tuple[FeeCode, str]]:
+        """The charges PADI says the fare already covers, in list order.
+
+        Through the same `LABEL_PATTERNS` both sources' wording already goes
+        through. A second vocabulary drifts, and the day it drifts is the day
+        one seller's "Harbour fees" and the other's mean different things.
+        """
+        from .fees import classify_label
+
+        entries = detail.get(INCLUDED_FIELD)
+        if not isinstance(entries, list):
+            return []
+        out: list[tuple[FeeCode, str]] = []
+        seen: set[FeeCode] = set()
+        for entry in entries:
+            if not isinstance(entry, dict) or not _in_season(entry, season):
+                continue
+            title = str(entry.get("title") or "").strip()
+            code = classify_label(PARENTHETICAL.sub("", title).strip(), prose=False)
+            if code is None or code in seen:
+                continue
+            seen.add(code)
+            out.append((code, title))
+        return out
 
     @staticmethod
     def requirements_from_choices(

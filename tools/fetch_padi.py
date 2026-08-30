@@ -479,7 +479,15 @@ def main() -> int:
 
     with_bar = sum(1 for t in trips.values() if t.get("requirements"))
     with_dives = sum(1 for t in trips.values() if t.get("dives"))
-    with_fees = sum(1 for t in trips.values() if (t.get("fees") or {}).get("lines"))
+    # Charged lines only. An included line is a charge the fare *covers*, and
+    # counting those here would report a trip that states no mandatory charge
+    # at all as one that states several.
+    with_fees = sum(1 for t in trips.values()
+                    if any(not line.get("included")
+                           for line in (t.get("fees") or {}).get("lines") or []))
+    with_included = sum(1 for t in trips.values()
+                        if any(line.get("included")
+                               for line in (t.get("fees") or {}).get("lines") or []))
     complete = sum(1 for t in trips.values() if (t.get("fees") or {}).get("complete"))
     print(f"\nfetched {fetched}, skipped {skipped}, failed {failed}")
     print(f"{RAW}: {len(stored)} itineraries")
@@ -490,6 +498,10 @@ def main() -> int:
     # whether a total may be built from what it states.
     print(f"{'':>{len(str(BOOK))}}  {with_fees} state a mandatory charge, "
           f"{complete} state a bill that adds up")
+    # The other half of the disclosure, and a different claim: what the fare
+    # already covers. Printed beside the charges because two bills that state
+    # only one of the two are not disclosing at the same depth.
+    print(f"{'':>{len(str(BOOK))}}  {with_included} state what the fare includes")
     return 0
 
 
