@@ -52,8 +52,11 @@ by guessing at markup.
 
 Two paths this crawl uses are **disallowed by liveaboard.com's robots.txt**, and
 only a formatting bug in that file lets `can_fetch()` say otherwise. Carrying on
-is a deliberate call rather than an oversight; the reasoning, and what reversing
-it would cost, are in [`docs/sources/liveaboard.com.md`](docs/sources/liveaboard.com.md)
+is a call the owner took on 2026-08-30 rather than an oversight, and it is
+conditional on the crawl staying small — 2 seconds a request, once a day, from
+one runner. The reasoning, what reversing it would cost, and the two options
+weighed and not taken are in
+[`docs/sources/liveaboard.com.md`](docs/sources/liveaboard.com.md)
 under *robots.txt, and the blank line* (#121).
 
 **Where each fact comes from is written down**, per source, in

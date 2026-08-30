@@ -493,13 +493,20 @@ every path in the file. Delete that one line locally and `/BookingStep1` flips
 to `False`. Both readings were checked. (The indentation is a red herring —
 stripping it changes nothing. It is the blank line.)
 
-**The decision, taken 2026-08-30 and deliberate rather than an oversight:
-carry on, and write it down.** That is what this section is. The letter of the
-file permits it; the intent plainly does not, and leaning on somebody else's
-typo is a poor position for a project whose whole argument is the difference
-between what a site technically discloses and what it means to. So it is
-recorded here rather than left for the next reader to rediscover as a
-curiosity.
+**The decision — the owner's, taken 2026-08-30 with the alternatives and their
+prices in front of him: carry on, and write it down.** That is what this
+section is. The letter of the file permits it; the intent plainly does not, and
+leaning on somebody else's typo is a poor position for a project whose whole
+argument is the difference between what a site technically discloses and what
+it means to. So it is recorded here, as a call somebody made, rather than left
+for the next reader to rediscover as a curiosity — and it stays reversible: the
+three options below were all live and none was ruled out, only outweighed.
+
+Carrying on is conditional on the crawl staying the small thing it is. The
+pace is 2 seconds a request against a stated `Crawl-delay` of none, taken once
+a day, from one runner, identifying itself truthfully — slower than a person
+clicking the same pages. If any of that changes the decision needs taking
+again, because it was taken about *this* crawl.
 
 What honouring it would cost, stated so the choice can be revisited with the
 price in view: the cabin ladder on 828 sailings and the "advertised price is
@@ -510,9 +517,14 @@ window from today and the season has to be filtered out of 746 departures to
 keep 14. There is no second route to any of it — `/liveaboard-deals` is prose
 and the JSON-LD carries no list price, both checked and recorded above.
 
-Asking them remains open and is the better answer than either parser: they
-publish an affiliate programme and a partners page, and a reply settles it.
-See [#121](https://github.com/PaludaNCode/Liveaboard/issues/121).
+Asking them remains the better answer than any reading of the file, and is not
+foreclosed by this: they publish an affiliate programme and a partners page,
+and a reply would settle it in a way no parser can. Cutting the ~890 nightly
+`/BookingStep1` fetches to weekly was also on the table and was not taken —
+the ladder is what the `STALE_LADDER` guard reads to catch a row offering a
+price nobody can buy, and a week-old ladder is exactly the input that guard
+exists to reject. See
+[#121](https://github.com/PaludaNCode/Liveaboard/issues/121).
 
 ## Access
 
