@@ -1055,6 +1055,184 @@ def _without_ports(text: str) -> str:
     return lowered
 
 
+def _deal_row(
+    deal: Mapping[str, Any],
+    boat_id: str,
+    boat_name: str,
+    fx_table: Any,
+) -> dict[str, Any]:
+    """One offer as the page needs it: converted here, never in the browser.
+
+    Both figures survive the conversion. The euro is what the rest of the page
+    is denominated in and is what makes two deals comparable; the quoted amount
+    and its currency are what PADI actually published, and a converted number
+    presented as the seller's own is the small dishonesty this project spends
+    its whole codebase not committing.
+    """
+    nights = _nights(str(deal.get("start") or ""), str(deal.get("end") or ""))
+    price, was = float(deal["price"]), float(deal["was"])
+    currency = str(deal["currency"])
+    row: dict[str, Any] = {
+        "boat": boat_id,
+        "boat_name": boat_name,
+        "title": deal.get("title"),
+        "kind": deal.get("kind_label"),
+        "value": deal.get("value"),
+        "price": _to_display(price, currency, fx_table),
+        "was": _to_display(was, currency, fx_table),
+        "quoted": price,
+        "quoted_was": was,
+        "currency": currency,
+        "start": deal.get("start"),
+        "end": deal.get("end"),
+        "url": deal.get("url"),
+    }
+    if nights:
+        row["nights"] = nights
+    return row
+
+
+def _deal_change(before: Mapping[str, Any], after: Mapping[str, Any]) -> list[str]:
+    """What moved between two readings of one vessel's offer, in words.
+
+    Empty when nothing did, which is what makes it the test as well as the
+    report -- there is no separate predicate to keep in step with this list.
+    """
+    moved: list[str] = []
+    if before.get("price") != after.get("price"):
+        moved.append("price")
+    if before.get("was") != after.get("was"):
+        moved.append("undiscounted price")
+    if before.get("title") != after.get("title"):
+        moved.append("offer")
+    if (before.get("kind_label"), before.get("value")) != (
+            after.get("kind_label"), after.get("value")):
+        moved.append("discount")
+    if (before.get("start"), before.get("end")) != (after.get("start"), after.get("end")):
+        moved.append("sailing")
+    return moved
+
+
+def _deals_block(
+    deals: dict[str, Any] | None,
+    padi_vessels: Mapping[str, Mapping[str, Any]],
+    boats: Mapping[str, Mapping[str, Any]],
+    fx_table: Any,
+) -> dict[str, Any] | None:
+    """Today's deals, and what moved since the last day in the book.
+
+    **The join places the deal, never PADI's country field.** That field says
+    United States of America for all three Red Sea Aggressors, which is why the
+    query has to ask for the USA as well as Egypt -- and asking for it also
+    returns Bahamas, Belize, Cayman and Roatan, which sail an ocean away. Five
+    of eighteen, so the label is wrong about where a boat is more than a quarter
+    of the time. A vessel that joins to a boat of ours is Egyptian because our
+    own fleet is; one that does not is **reported rather than dropped**, because
+    an Egyptian boat filed under the USA and unmatched here is precisely the
+    case worth catching, and deleting it silently would reproduce the bug.
+
+    Pure, like the rest of promotion: the book is committed, so the diff is a
+    diff between two committed days and `promote --check` proves the panel on
+    the page is this code's reading of them. A change log computed from a
+    gitignored snapshot would quietly become "no changes" once the artifact
+    aged out.
+    """
+    days = (deals or {}).get("days") or {}
+    if not days:
+        return None
+    order = sorted(days)
+    today, entry = order[-1], days[order[-1]] or {}
+    offers = entry.get("offers") or {}
+    if not offers:
+        return None
+
+    by_slug = {
+        str(record.get("slug")): boat
+        for boat, record in padi_vessels.items()
+        if record.get("slug")
+    }
+
+    def joined(book: Mapping[str, Any]) -> dict[str, tuple[str, Mapping[str, Any]]]:
+        """The offers in one day's reading that land on a boat this site holds."""
+        out: dict[str, tuple[str, Mapping[str, Any]]] = {}
+        for slug, deal in book.items():
+            boat_id = by_slug.get(slug)
+            if boat_id and boat_id in boats:
+                out[boat_id] = (slug, deal)
+        return out
+
+    here = joined(offers)
+    rows = sorted(
+        (_deal_row(deal, boat_id, str(boats[boat_id]["name"]), fx_table)
+         for boat_id, (_, deal) in here.items()),
+        # By when you would sail, not by how much comes off. Ordering deals by
+        # the size of the discount is a best-value ranking wearing a sort order,
+        # and this site does not grade what it lists.
+        key=lambda row: (row["start"] or "", row["boat_name"], row["boat"]),
+    )
+
+    elsewhere = sorted(
+        {
+            (str(deal.get("shop") or slug), str(deal.get("url") or ""))
+            for slug, deal in offers.items()
+            if slug not in {s for s, _ in here.values()}
+        }
+    )
+
+    block: dict[str, Any] = {
+        "read": today,
+        "source": "padi.com",
+        "url": entry.get("url"),
+        "offers": rows,
+        # Named, not counted. A number would say five vessels did not match;
+        # the names are what let a reader notice that one of them is Egyptian.
+        "unmatched": [{"name": name, "url": url} for name, url in elsewhere],
+    }
+
+    previous = order[-2] if len(order) > 1 else None
+    if previous is None:
+        # A first reading has nothing to be a change from, and saying so is not
+        # the same as saying nothing changed.
+        block["first_reading"] = True
+        return block
+
+    before_entry = days[previous] or {}
+    before = joined(before_entry.get("offers") or {})
+    block["previous"] = previous
+
+    # A day either reading could not finish is a day neither of them knows what
+    # was on. An offer absent from a truncated reading has not been withdrawn;
+    # it has not been looked at -- the same rule that stops an unreadable vessel
+    # page emptying a boat's month, arriving through a different door.
+    partial = bool(entry.get("truncated")) or bool(before_entry.get("truncated"))
+
+    changed: list[dict[str, Any]] = []
+    for boat_id in sorted(set(before) & set(here)):
+        moved = _deal_change(before[boat_id][1], here[boat_id][1])
+        if not moved:
+            continue
+        was_row = _deal_row(before[boat_id][1], boat_id,
+                            str(boats[boat_id]["name"]), fx_table)
+        now_row = _deal_row(here[boat_id][1], boat_id,
+                            str(boats[boat_id]["name"]), fx_table)
+        changed.append({"moved": moved, "before": was_row, "after": now_row})
+
+    block["changes"] = {
+        "new": [] if partial else sorted(set(here) - set(before)),
+        "withdrawn": [] if partial else sorted(set(before) - set(here)),
+        "changed": changed,
+        # The names, so a withdrawal reads as a boat rather than as an id.
+        "names": {
+            boat_id: str(boats[boat_id]["name"])
+            for boat_id in sorted(set(before) | set(here))
+            if boat_id in boats
+        },
+    }
+    if partial:
+        block["changes"]["partial"] = True
+    return block
+
+
 def _nights(start: str, end: str) -> int | None:
     try:
         delta = (date.fromisoformat(end) - date.fromisoformat(start)).days
@@ -1173,6 +1351,7 @@ def promote(
     padi: dict[str, Any] | None = None,
     padi_departures: dict[str, Any] | None = None,
     cabins: dict[str, Any] | None = None,
+    deals: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -1784,6 +1963,15 @@ def promote(
             "list: 24 places and 24 places at a stated price are different "
             "claims, and only the second is a ladder."
         )
+    # What PADI is discounting today, and what moved since the last day the
+    # book holds. Its own committed input, diffed here rather than in the
+    # browser, so `promote --check` proves the panel on the page is this code's
+    # reading of the deals book -- the same relationship every other number on
+    # the page has with the file it came from.
+    deals_block = _deals_block(deals, padi_vessels, boats, fx_table)
+    if deals_block:
+        payload["deals"] = deals_block
+
     if skipped:
         payload["promotion_skipped"] = skipped
     if superseded:

@@ -41,6 +41,19 @@ class Dataset:
     """
     sellers: list[str] = field(default_factory=list)
     """Who sells these sailings, pooled and indexed by every berth block."""
+    deals: dict[str, Any] = field(default_factory=dict)
+    """What PADI Travel is discounting, and what moved since the day before.
+
+    Not a price the site quotes anywhere: an offer on a berth, dated, with the
+    vessel page it was read from beside it. It is carried on the dataset rather
+    than fetched by the page because everything here is — the site is one file
+    with nothing lazily loaded, and a panel that reached out for its own numbers
+    would be the first thing on it that could arrive blank.
+
+    Empty until ``tools/fetch_deals.py`` has run, which is the ordinary state of
+    a fresh checkout and renders as no panel rather than as no deals.
+    """
+
     berths_read: str | None = None
     """The day the berth counts were read.
 
@@ -78,6 +91,7 @@ class Dataset:
             cabin_names=list(payload.get("cabin_names") or []),
             sellers=list(payload.get("sellers") or []),
             berths_read=payload.get("berths_read") or None,
+            deals=dict(payload.get("deals") or {}),
         )
         dataset.validate()
         return dataset
