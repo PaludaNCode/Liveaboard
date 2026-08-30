@@ -350,6 +350,46 @@ class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
             "data/CHANGES.md -- something built the page before appending to it")
 
 
+class TestARebuildIsNotNews(unittest.TestCase):
+    """The publish action must normalise the same stamp `render` writes.
+
+    `cli build` stamps the page with the minute it ran — deliberately, so two
+    builds an hour apart can be told apart — which means `site/index.html`
+    differs on every run whether or not any data did. So the "nothing to
+    commit" exit could never fire, and seven data jobs a day committed seven
+    times a day regardless: a line in `git log --oneline data/` that moved no
+    price, and a deploy that published nothing new. Three of fourteen commits
+    on `main` were that.
+
+    `.github/actions/publish` now treats a page differing *only* by that stamp
+    as nothing to say. The two are coupled by the literal JSON key, and
+    silently: rename it in `render` and the action's normalisation stops
+    matching, the check stops firing, and the no-op commits come back with
+    nothing failing. Same shape as `pricing._is_counted` and `lineCounts`, and
+    pinned for the same reason.
+    """
+
+    ACTION = ROOT / ".github" / "actions" / "publish" / "action.yml"
+
+    def test_the_page_carries_a_build_stamp_under_the_key_the_action_strips(self):
+        key = re.search(r'"(\w+)": datetime\.now', (ROOT / "src" / "liveaboard"
+                        / "render.py").read_text(encoding="utf-8"))
+        self.assertIsNotNone(key, "render.py no longer stamps the payload")
+        # assertTrue rather than assertIn: a missing substring prints the
+        # whole haystack, and the haystack is the entire action.
+        self.assertTrue(
+            f'"{key.group(1)}":' in self.ACTION.read_text(encoding="utf-8"),
+            f"render stamps {key.group(1)!r} and the publish action does not "
+            f"normalise it; every rebuild would commit again, silently")
+
+    def test_the_action_still_has_the_check(self):
+        body = self.ACTION.read_text(encoding="utf-8")
+        self.assertTrue("site/index.html" in body, "the stamp check is gone")
+        self.assertTrue("exclude" in body,
+                        "the check must ignore the page when deciding whether "
+                        "anything else was staged")
+
+
 class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     """A job that pushes is the only CI its own commit will ever get.
 
