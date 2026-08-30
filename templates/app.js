@@ -42,6 +42,10 @@
        bank here -- a filter nobody has touched must never be a filter. */
     sellers: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
+    /* Only sailings a seller has marked down. Off by default, like every
+       other filter here: a page that opened showing 268 of 1,122 rows would
+       be answering a question nobody asked. */
+    onSaleOnly: false,
     toggles: {}, open: null,
     /* Rows the visitor has marked to keep their place while scrolling
        sideways. Keyed on the departure id rather than the row index, so a
@@ -243,6 +247,32 @@
     return "€" + a.toLocaleString("en-IE") + " \u2192 " + b.toLocaleString("en-IE");
   }
 
+  /* ---------- what is marked down ---------- */
+
+  /* A sale is one seller's list price beside the price it charges — read off
+     the struck-through figure on each cabin and off PADI's compareAtPrice,
+     both of which the sellers publish themselves. Never off the "20% Off:" an
+     operator writes into a trip name: that is a claim about a number, and this
+     is the number. They agree on all 241 sailings carrying such a banner, and
+     22 more are discounted without one.
+
+     `pct` describes *this row's* advertised price, so it is absent whenever
+     the seller who set that price is not the one discounting. Such a row is
+     still on sale and still filters as one — it just gets no percentage,
+     because the alternative is printing another seller's markdown against a
+     fare nobody marked down. */
+  function saleTag(d) {
+    if (!d.sale) return "";
+    var who = (d.sale.sellers || []).map(function (s) { return SELLER_NAMES[s] || "a seller"; });
+    if (!d.sale.pct) {
+      return '<span class="sale-mark" title="On sale through ' + esc(who.join(" and ")) +
+        ', which is not the seller whose price this row prints">on sale</span>';
+    }
+    var title = "Down from " + eur(d.sale.was) + ", per " + who.join(" and ") +
+      (D.meta.berths_read ? ", read " + D.meta.berths_read : "");
+    return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
+  }
+
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
      Collapsing a range to one number would be the site's own hidden cost. */
   function span(m) {
@@ -297,7 +327,15 @@
      Every price arrives already converted: normalisation is Python's job, and
      the only arithmetic below is picking a minimum out of numbers it settled. */
   var CABIN_NAMES = D.cabin_names || [];
-  var SELLERS = D.sellers || [];
+  /* SELLER_NAMES, not SELLERS. The Sold by chips further down declare their
+     own `var SELLERS` in this same function scope — an array of {id,label,n}
+     objects — and `var` has no block scope, so that second declaration wins
+     for the whole file including the lines above it. The ladder's own seller
+     heading was already reading it and would have printed "[object Object]"
+     the day a second seller filled a block (#92); it is guarded by
+     `blocks.length > 1`, which is why nothing has shown it yet. Two different
+     lists cannot share one name. */
+  var SELLER_NAMES = D.sellers || [];
   var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2;
   var RUNG_NAME = 0, RUNG_PRICE = 1, RUNG_LEFT = 2, RUNG_SUPP = 3;
 
@@ -463,8 +501,8 @@
       },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return eur(d.base);
-        return sellerPair(b.baseLo, b.baseHi);
+        if (!b) return eur(d.base) + saleTag(d);
+        return sellerPair(b.baseLo, b.baseHi) + saleTag(d);
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -903,6 +941,7 @@
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
     if (state.hideSoldOut && !dep.bookable) return false;
+    if (state.onSaleOnly && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
@@ -1401,14 +1440,21 @@
      truncated reading's absences as withdrawals: a listing the fetcher could
      not finish knows nothing about the offers it did not reach, exactly as a
      vessel page that fails to load knows nothing about the month behind it. */
+  /* The overview, in one line, and it leads with the number that answers the
+     question. Both sellers are counted, and the sailing count wins over the
+     offer count: 268 discounted sailings is what a reader can act on, where
+     PADI's 13 is thirteen boats' worth of "there is a sale on". The change
+     figure stays PADI's and says so — it is the only half with a day-by-day
+     committed book to diff, because the cabin file keeps one reading. */
   function dealsSummary(deals, changed) {
-    var n = deals.offers.length;
-    var line = n + (n === 1 ? " discounted sailing" : " discounted sailings") +
-      " on this fleet";
-    if (deals.first_reading) line += " · first reading";
-    else if (changed) line += " · " + changed + " changed since " + shortDate(deals.previous);
-    else if (deals.previous) line += " · nothing moved since " + shortDate(deals.previous);
-    return "PADI deals · " + line + " · read " + shortDate(deals.read);
+    var sale = deals.on_sale, n = sale ? sale.sailings : deals.offers.length;
+    var line = n + (n === 1 ? " discounted sailing" : " discounted sailings");
+    if (sale) line += " on " + sale.boats.length + " boats";
+    if (!deals.offers || !deals.offers.length) return "On sale · " + line;
+    if (deals.first_reading) line += " · PADI's listing, first reading";
+    else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
+    else if (deals.previous) line += " · nothing moved on PADI since " + shortDate(deals.previous);
+    return "On sale · " + line + " · read " + shortDate(deals.read);
   }
 
   /* "20% off" where PADI states a percentage, and the money either way.
@@ -1542,10 +1588,58 @@
     return box;
   }
 
+  /* What the first seller is discounting, per boat and across the season.
+
+     A different shape from PADI's list because it is a different claim. PADI
+     publishes a deals *listing*: one exemplar sailing per vessel, which says a
+     boat is on sale and nothing about when. liveaboard.com publishes no such
+     listing at all — its /liveaboard-deals is prose — but strikes out the list
+     price on every discounted cabin of every booking page, so the answer here
+     is per sailing, and what it supports is a **window**: Red Sea Aggressor II
+     is 33% off every week from 1 May to 24 July and full price from 31 July.
+     That is the difference between knowing a boat is on sale and knowing which
+     week to book, and it is worth a table of its own rather than 263 rows
+     spliced into a list of 13. */
+  function fleetTable(rows) {
+    var table = el("table", "deals-table");
+    var head = document.createElement("thead");
+    var hr = el("tr", null);
+    ["Boat", "On sale", "Off", "From", "To", "Per"].forEach(function (h) {
+      hr.appendChild(el("th", null, h));
+    });
+    head.appendChild(hr);
+    table.appendChild(head);
+    var body = document.createElement("tbody");
+    rows.forEach(function (r) {
+      var tr = el("tr", null);
+      tr.appendChild(el("td", "d-boat", r.boat_name));
+      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
+         situations and the bare number cannot tell them apart. */
+      tr.appendChild(el("td", "d-when", r.sailings + " of " + r.of));
+      tr.appendChild(el("td", "d-off", r.pct
+        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
+        : "—"));
+      tr.appendChild(el("td", "d-when", shortDate(r.first)));
+      tr.appendChild(el("td", "d-when", shortDate(r.last)));
+      /* Who publishes the markdown, named rather than assumed. Most of this
+         table is liveaboard.com's booking pages, but not all of it — and a
+         section headed with one seller's name over a count that includes the
+         other's would be exactly the splice this page refuses everywhere
+         else. */
+      tr.appendChild(el("td", "d-native",
+        (r.sellers || []).map(function (s) { return SELLER_NAMES[s] || "?"; }).join(", ")));
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    return table;
+  }
+
   function drawDeals() {
     var deals = D.deals;
     var host = document.getElementById("deals");
-    if (!host || !deals || !deals.offers || !deals.offers.length) return;
+    if (!host || !deals) return;
+    var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
+    if (!offers.length && !fleet.length) return;
 
     var changed = ((deals.changes || {}).new || []).length +
       ((deals.changes || {}).withdrawn || []).length +
@@ -1554,14 +1648,34 @@
 
     var body = document.getElementById("dealsBody");
     body.textContent = "";
+
+    if (fleet.length) {
+      var read = deals.on_sale.read;
+      body.appendChild(el("h4", null, "Every discounted sailing, by boat"));
+      body.appendChild(el("p", "deals-note",
+        deals.on_sale.sailings + " sailings on " + fleet.length +
+        " boats are marked down, read " + shortDate(read) + ". Taken from the " +
+        "list price each seller prints beside its own — struck through against " +
+        "every cabin on a booking page, and stated outright by PADI — never " +
+        "from the “20% Off” an operator writes into a trip name. The banner " +
+        "and the list price agree on every sailing carrying one, and the list " +
+        "price finds 22 more that carry none. The On sale filter below shows " +
+        "these same sailings. A sale is what a seller claimed when it was " +
+        "read, and can end overnight."));
+      body.appendChild(fleetTable(fleet));
+    }
+
+    if (!offers.length) { host.hidden = false; return; }
+
+    body.appendChild(el("h4", null, "Advertised on padi.com"));
     body.appendChild(el("p", "deals-note",
       "What PADI Travel advertised as discounted on " + shortDate(deals.read) +
-      ", for sailings in this season. It is a berth price and an offer on one, " +
-      "not a total: the fees in the table below still land on the bill. Every " +
-      "boat here links to the page its offer was read from, and an offer is " +
-      "what one seller claimed when it was read — operators change them " +
-      "without notice."));
-    body.appendChild(dealsTable(deals.offers));
+      ", for sailings in this season. One offer per boat: PADI names an " +
+      "exemplar sailing rather than every discounted one, which is why the " +
+      "table above is the longer answer. It is a berth price and an offer on " +
+      "one, not a total: the fees in the table below still land on the bill. " +
+      "Every boat here links to the page its offer was read from."));
+    body.appendChild(dealsTable(offers));
 
     if (deals.previous) body.appendChild(dealsChanges(deals));
 
@@ -1741,7 +1855,7 @@
        does (#92). */
     pop.innerHTML = head + blocks.map(function (block) {
       return (blocks.length > 1
-        ? '<p class="pseller">' + esc(SELLERS[block[BLOCK_SELLER]] || "") + "</p>"
+        ? '<p class="pseller">' + esc(SELLER_NAMES[block[BLOCK_SELLER]] || "") + "</p>"
         : "") + ladderBody(d, block);
     }).join("");
   }
@@ -1917,6 +2031,23 @@
   nmin.addEventListener("input", readNights);
   nmax.addEventListener("input", readNights);
 
+  /* The On sale chip. Its count is of the whole dataset rather than of what
+     is on screen, deliberately: it says how much there is to find, not how
+     much the filters have already left, and a count that fell to 0 under an
+     unrelated month filter would read as "no sales" rather than "none in
+     June". */
+  var onSale = document.getElementById("onSale");
+  var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
+  if (onSaleCount) {
+    onSale.hidden = false;
+    onSale.textContent = "On sale " + onSaleCount;
+    onSale.addEventListener("click", function () {
+      state.onSaleOnly = !state.onSaleOnly;
+      onSale.setAttribute("aria-pressed", state.onSaleOnly);
+      draw();
+    });
+  }
+
   var soldOut = document.getElementById("hideSold");
   soldOut.addEventListener("click", function () {
     state.hideSoldOut = !state.hideSoldOut;
@@ -1935,6 +2066,8 @@
     state.nightsMin = state.nightsMax = null;
     state.hideSoldOut = false;
     soldOut.setAttribute("aria-pressed", "false");
+    state.onSaleOnly = false;
+    onSale.setAttribute("aria-pressed", "false");
     nmin.value = ""; nmax.value = "";
     D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (chip) {

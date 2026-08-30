@@ -26,7 +26,7 @@ from __future__ import annotations
 
 import sys
 import unittest
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
@@ -387,3 +387,183 @@ class TestPromotionStaysPure(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def ladder(*cabins, currency="USD", boat="alia-soul", start="2027-05-01") -> dict:
+    """One booking page's cabin ladder, as `fetch_cabins.py` records it."""
+    return {
+        "boat": boat, "start": start, "currency": currency,
+        "cabins": [{"name": n, "price": p, "list_price": lp} for n, p, lp in cabins],
+    }
+
+
+def cabin_book(*records) -> dict:
+    return {"collected": "2026-08-28",
+            "departures": {f"{r['boat']}::{r['start']}": r for r in records}}
+
+
+def padi_book(*rows) -> dict:
+    return {"collected": "2026-08-29",
+            "departures": {f"{r['boat']}::{r['start']}": r for r in rows}}
+
+
+def sailing(boat="alia-soul", start="2027-05-01", price=1450.0, was=None,
+            currency="USD", nights=7, **extra) -> dict:
+    # `end` is derived rather than pinned: a fixed end date with a later start
+    # is a negative night count, and `promote` drops such a row rather than
+    # publishing a sailing that arrives before it leaves. A helper that can
+    # produce one silently tests nothing.
+    finish = (date.fromisoformat(start) + timedelta(days=nights)).isoformat()
+    row = {"boat": boat, "slug": boat, "start": start, "end": finish,
+           "nights": nights, "price": price, "currency": currency, "was": was or price}
+    row.update(extra)
+    return row
+
+
+def with_books(cabins=None, padi_departures=None):
+    return promote(candidate([departure()]), season=SEASON,
+                   cabins=cabins, padi_departures=padi_departures)
+
+
+def only_row(payload):
+    return payload["departures"][0]
+
+
+class TestFlaggingASale(unittest.TestCase):
+    """A sale is one seller's list price beside the price it charges."""
+
+    def test_the_cheapest_rung_carries_the_answer(self):
+        """The advertised price is the bottom of the ladder, on 864 of 864.
+
+        And a discount is a whole-ladder fact: on all 263 discounted sailings
+        read, every cabin is marked down by the same percentage.
+        """
+        payload = with_books(cabin_book(ladder(
+            ("Twin", 900.0, 1000.0), ("Suite", 1350.0, 1500.0))))
+        self.assertEqual(only_row(payload)["sale"]["pct"], 10)
+
+    def test_the_cheapest_price_is_never_set_against_a_dearer_room_s_list_price(self):
+        """The obvious mistake here, pinned so it cannot come back.
+
+        Comparing the cheapest cabin's price to the dearest cabin's list price
+        reports Red Sea Aggressor II's 33% sale as 40%.
+        """
+        payload = with_books(cabin_book(ladder(
+            ("Deluxe", 1849.0, 2760.0), ("Master", 1983.0, 2960.0),
+            ("Suite", 2050.0, 3060.0))))
+        self.assertEqual(only_row(payload)["sale"]["pct"], 33)
+
+    def test_a_ladder_at_list_price_is_not_a_sale(self):
+        payload = with_books(cabin_book(ladder(("Twin", 1000.0, 1000.0))))
+        self.assertNotIn("sale", only_row(payload))
+
+    def test_padi_s_compare_at_price_is_read_too(self):
+        """It flags the row, and does not price it.
+
+        The row prints liveaboard.com's fare, so PADI's markdown says a sale
+        exists without saying this fare is 20% off — which it is not.
+        """
+        payload = with_books(padi_departures=padi_book(sailing(price=1000.0, was=1250.0)))
+        sale = only_row(payload)["sale"]
+        self.assertEqual(sale["sellers"], [1])
+        self.assertNotIn("pct", sale)
+
+    def test_padi_prices_the_sale_on_a_row_it_is_the_only_seller_of(self):
+        """There PADI *is* the row's own seller, so its percentage is the row's.
+
+        `promote` blanks its PADI-price variable on such a row to keep one
+        seller out of the other's field; the sale must not be read from that
+        blanked value or a PADI-only row could never show a discount.
+        """
+        payload = promote(
+            candidate([departure()]), season=SEASON,
+            padi_departures=padi_book(sailing(
+                start="2027-06-05", price=900.0, was=1200.0,
+                # A parsable title, because that is what founds the itinerary a
+                # PADI-only row hangs on; without one the row is reported and
+                # skipped rather than published under a name this code invented.
+                itinerary="Northern Wrecks (Hurghada - Hurghada) 7 Nights")),
+        )
+        row = next(d for d in payload["departures"] if d["start"] == "2027-06-05")
+        self.assertTrue(row["padi_only"])
+        self.assertEqual(row["sale"], {"sellers": [1], "pct": 25, "was": row["sale"]["was"]})
+
+    def test_a_booking_page_nobody_read_states_nothing(self):
+        """Not a "no". Three of the five PADI-only discounts are exactly this.
+
+        An unread ladder must not read as an undiscounted one, and must not
+        stop the other seller reporting what it does know.
+        """
+        payload = with_books(cabins=cabin_book(),
+                             padi_departures=padi_book(sailing(price=1000.0, was=1250.0)))
+        self.assertEqual(only_row(payload)["sale"]["sellers"], [1])
+
+    def test_both_sellers_are_named_when_both_discount(self):
+        payload = with_books(cabin_book(ladder(("Twin", 800.0, 1000.0))),
+                             padi_book(sailing(price=800.0, was=1000.0)))
+        self.assertEqual(only_row(payload)["sale"]["sellers"], [0, 1])
+
+    def test_one_seller_never_marks_down_the_other_s_price(self):
+        """The two Red Sea Aggressor IV sailings, in miniature.
+
+        PADI discounts; the site this row's price comes from does not. The row
+        is on sale and says so, and carries no percentage — printing PADI's
+        33% against an undiscounted fare would invent a saving.
+        """
+        payload = with_books(cabin_book(ladder(("Twin", 1000.0, 1000.0))),
+                             padi_book(sailing(price=900.0, was=1200.0)))
+        sale = only_row(payload)["sale"]
+        self.assertEqual(sale["sellers"], [1])
+        self.assertNotIn("pct", sale)
+        self.assertNotIn("was", sale)
+
+    def test_the_was_price_is_converted_like_every_other_figure(self):
+        """Normalisation happens in Python only; the browser converts nothing."""
+        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1200.0), currency="USD")))
+        self.assertLess(only_row(payload)["sale"]["was"], 1200)
+
+
+class TestTheOnSaleSummary(unittest.TestCase):
+    def _summary(self):
+        payload = promote(
+            FLEET, season=SEASON, padi=PADI,
+            cabins=cabin_book(
+                ladder(("Twin", 900.0, 1000.0)),
+                ladder(("Twin", 800.0, 1000.0), boat="serenity"),
+            ),
+        )
+        return payload["deals"]["on_sale"], payload
+
+    def test_it_counts_the_very_departures_the_filter_selects(self):
+        """Panel and chip cannot disagree, because there is one list.
+
+        A summary computed down a second path is a summary that drifts from
+        the thing it summarises.
+        """
+        summary, payload = self._summary()
+        flagged = [d for d in payload["departures"] if d.get("sale")]
+        self.assertEqual(summary["sailings"], len(flagged))
+
+    def test_each_boat_states_its_window(self):
+        """What PADI's exemplar cannot say: which weeks are actually on sale."""
+        summary, _ = self._summary()
+        row = next(b for b in summary["boats"] if b["boat"] == "alia-soul")
+        self.assertEqual((row["first"], row["last"]), ("2027-05-01", "2027-05-01"))
+        self.assertEqual((row["sailings"], row["of"]), (1, 1))
+        self.assertEqual(row["pct"], 10)
+
+    def test_it_carries_the_day_the_ladders_were_read(self):
+        """A sale is what a seller claimed when it was looked at."""
+        summary, _ = self._summary()
+        self.assertEqual(summary["read"], "2026-08-28")
+
+    def test_a_fleet_with_nothing_discounted_produces_no_summary(self):
+        payload = promote(FLEET, season=SEASON, padi=PADI,
+                          cabins=cabin_book(ladder(("Twin", 1000.0, 1000.0))))
+        self.assertNotIn("deals", payload)
+
+    def test_the_panel_ships_without_padi_s_listing(self):
+        """The two halves are independent: one file can be absent."""
+        _, payload = self._summary()
+        self.assertNotIn("offers", payload["deals"])
+        self.assertIn("on_sale", payload["deals"])

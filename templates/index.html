@@ -74,6 +74,14 @@
   </div>
   <div class="tgroup">
     <button type="button" class="chip" id="hideSold" aria-pressed="false">Hide sold out</button>
+    <!-- Sailings a seller has marked down, read from the list price it prints
+         beside its own — the struck-through figure on each cabin of the
+         booking page, and PADI's compareAtPrice. Its label carries the count
+         for the same reason the Sold by chips do: a filter whose result you
+         cannot size before pressing it is a filter you press twice. Hidden
+         until app.js finds at least one, because a chip reading "On sale 0" is
+         a control that does nothing dressed as one that does. -->
+    <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
   <!-- Who sells the sailing. Chips rather than a select, like every other
        filter here, and three states because there are three: both sites list
