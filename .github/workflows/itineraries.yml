@@ -100,14 +100,20 @@ jobs:
       - name: Build the site
         run: PYTHONPATH=src python3 -m liveaboard.cli build --data data/egypt-2027.json
 
-      # The publication gate: the whole suite, now that the data it asserts
-      # against is the data this run just wrote. A failure here stops the
-      # commit and the push, which is where an assertion about published
-      # output belongs — this run publishes nothing, and the next run still
-      # reaches its fetch step whatever this one said. That is the whole
-      # difference: the loop is broken, at the cost of one run's fetch.
+      # The publication gate, and it is CI's own list rather than a subset of
+      # it. These commits are pushed with the default `GITHUB_TOKEN`, which
+      # GitHub deliberately does not trigger workflows on, so this step is the
+      # only CI a scheduled data commit will ever get — and without it a
+      # refresh can turn main red for however long it takes somebody to open
+      # an unrelated pull request. It happened, for about seven hours.
+      #
+      # After the fetch and before the commit, which is the distinction #118
+      # exists for. A failure here stops the commit and the push: this run
+      # publishes nothing, and the next run still reaches its fetch step
+      # whatever this one said. The loop is broken, at the cost of one run's
+      # fetch.
       - name: Check what is about to be published
-        run: PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/checks
 
       - name: Commit changes
         run: |

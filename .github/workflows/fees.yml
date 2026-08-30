@@ -81,6 +81,20 @@ jobs:
           PYTHONPATH=src python3 -m liveaboard.cli build \
             --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
 
+      # This job ran no tests at all, and it writes prices. Its commits are
+      # pushed with the default `GITHUB_TOKEN`, which GitHub deliberately does
+      # not trigger workflows on, so nothing has ever checked one of them —
+      # not before the push and not after it, until whoever opens the next
+      # pull request finds out.
+      #
+      # Here rather than in front of the browser run, on the same rule as the
+      # other three: a fee book two days stale is a thing a *fetch* corrects,
+      # and an assertion about it must never stop the fetch. The cost of a
+      # failure is one week's collection; the cost of the alternative is a job
+      # that can never run.
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
+
       # Before the commit, while HEAD is still last week's dataset. Afterwards
       # the comparison would be against this run's own output.
       #

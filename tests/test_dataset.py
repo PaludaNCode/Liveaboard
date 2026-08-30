@@ -315,6 +315,51 @@ class TestThePublicationGateIsComplete(unittest.TestCase):
         self.assertTrue(published.code_only({published.GATE: "code"}))
 
 
+class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
+    """A job that pushes is the only CI its own commit will ever get.
+
+    GitHub does not trigger workflows on pushes made with the default
+    `GITHUB_TOKEN` -- the standard guard against a job triggering itself -- and
+    every scheduled job here pushes with exactly that token. So no scheduled
+    data commit has ever had a CI run against it, and on 2026-08-30 that let
+    the daily refresh publish 36 sailings advertising a berth nobody could buy
+    and leave `main` red for about seven hours. The only thing that noticed was
+    a person opening an unrelated pull request.
+
+    So a workflow that pushes must run CI's own list before it does, and it
+    must be *the* list rather than a copy: `.github/actions/checks` is used by
+    `ci.yml` too, which is what makes "the same bar" a fact instead of an
+    intention.
+
+    Textual, because the alternative is a YAML parser and this project has no
+    runtime dependencies to spend one on.
+    """
+
+    WORKFLOWS = ROOT / ".github" / "workflows"
+    CHECKS = "uses: ./.github/actions/checks"
+
+    def test_the_shared_check_list_exists(self):
+        self.assertTrue((ROOT / ".github" / "actions" / "checks" / "action.yml").exists())
+
+    def test_ci_runs_the_shared_list_rather_than_its_own(self):
+        """Otherwise the two drift, and the data jobs are running yesterday's
+        idea of what a commit has to satisfy."""
+        self.assertIn(self.CHECKS, (self.WORKFLOWS / "ci.yml").read_text(encoding="utf-8"))
+
+    def test_every_workflow_that_pushes_runs_them_first(self):
+        unchecked = [
+            path.name
+            for path in sorted(self.WORKFLOWS.glob("*.yml"))
+            if "git push origin" in (body := path.read_text(encoding="utf-8"))
+            and self.CHECKS not in body
+        ]
+        self.assertEqual(
+            unchecked, [],
+            "these push commits that no CI run will ever see; add "
+            f"`{self.CHECKS}` before the commit step: {unchecked}",
+        )
+
+
 class TestNoUnexpectedExternalReferences(unittest.TestCase):
     """The page ships as one file; anything it fetches at runtime is a claim.
 

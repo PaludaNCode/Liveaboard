@@ -68,6 +68,11 @@ a fetch they deadlock it — a stale cabin book failed the suite in front of the
 only job able to refresh that book — and a run that fetches and then refuses to
 publish is recoverable where one that refuses to fetch is not.
 
+CI's list lives in `.github/actions/checks` rather than in `ci.yml`, because
+the five jobs that commit data run it too. They push with the default
+`GITHUB_TOKEN`, and GitHub does not trigger workflows on those pushes, so that
+step is the only CI a scheduled commit will ever get.
+
 `build` emits one self-contained HTML file — CSS, JS and data all inlined, no
 CDN, nothing fetched at runtime. Type is the visitor's own system font: a
 webfont link in `<head>` is render-blocking, which cost 13 seconds to first row

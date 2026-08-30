@@ -1,0 +1,100 @@
+name: Repository checks
+description: >
+  Everything CI asserts about a commit, in one place, so a scheduled data
+  commit is held to the same bar as a pull request.
+
+# GitHub does not trigger workflows on pushes made with the default
+# `GITHUB_TOKEN` — the standard guard against a job triggering itself. Every
+# data workflow here pushes with exactly that token, so **not one scheduled
+# data commit has ever had a CI run against it**. The history on `main` shows
+# it: the only runs are `Merge pull request #…`.
+#
+# That is not academic. On 2026-08-30 the daily refresh re-priced the Red Sea
+# Aggressors when their 33% sale ended, while `data/cabins.json` had last been
+# read on the 28th, and the published page carried 36 sailings advertising
+# €2,371 above a cabin ladder starting at €1,588 — a berth nobody could buy, on
+# the site whose whole argument is that advertised prices should be checked.
+# `test_the_advertised_price_is_the_bottom_of_the_ladder` catches exactly that
+# and had been in the suite for days. It never ran against the commit that
+# introduced it. Main sat red for about seven hours and the only thing that
+# noticed was a human opening an unrelated pull request. And `pages.yml`
+# deploys on `workflow_run`, so that page went out.
+#
+# Of the three ways to close it — a PAT on the push, a scheduled CI run on
+# main, or the job checking its own work — this is the third: no secret to
+# manage, and the job that broke the data is the job that reports it, rather
+# than whoever opens the next pull request.
+#
+# It lives here rather than being repeated in five workflows because a copy
+# drifts, and a check that drifts is one the data jobs are not really running.
+# `ci.yml` uses this too, which is what makes "the same bar" true rather than
+# intended.
+#
+# The caller must have run `actions/checkout` and `actions/setup-python`.
+
+inputs:
+  verbose:
+    description: "Name every test as it runs. Worth it on a pull request, noise in a data job's log."
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    # The whole suite, publication gate included. In a data job this step sits
+    # after the fetch and before the commit, which is the distinction #118
+    # exists for: an assertion about committed data must gate what is
+    # published and must never stop the fetch that would correct it.
+    - name: Tests
+      shell: bash
+      run: PYTHONPATH=src python3 -m unittest discover -s tests ${{ inputs.verbose == 'true' && '-v' || '' }}
+
+    - name: Dataset validates
+      shell: bash
+      run: PYTHONPATH=src python3 -m liveaboard.cli check
+
+    - name: Site builds
+      shell: bash
+      run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+    # promote is pure -- candidate, fees, facts and FX in, dataset out, no
+    # network -- so the committed dataset must be what the committed code
+    # produces from the committed inputs. When it is not, somebody changed a
+    # parser and data/egypt-2027.json is still the previous parser's output.
+    #
+    # That state used to be invisible. PORT_ALIASES was merged with passing
+    # tests, folding three spellings of Port Ghalib into one, and the published
+    # page went on offering ten harbour filters for six real harbours: CI
+    # tested fixtures, not data/, so nothing failed. The site quietly
+    # continuing to be slightly wrong is the exact failure this project exists
+    # to correct in other people.
+    #
+    # In a data job it is also the guard against half a commit: a run that
+    # writes a fresh candidate and whose promote refused it would otherwise
+    # push the one without the other, and leave main red for whoever opens the
+    # next pull request.
+    #
+    # No path arguments on purpose. Every job that writes the dataset promotes
+    # on argparse's defaults, so taking the defaults here means this check and
+    # those jobs cannot be looking at different inputs. Spelling the paths out
+    # would be one more thing to keep in step.
+    - name: Dataset matches the parser
+      shell: bash
+      run: PYTHONPATH=src python3 -m liveaboard.cli promote --check
+
+    - name: Seed generator is reproducible
+      # The committed seed must match what the generator produces, so nobody
+      # can hand-edit a price into the dataset without it showing up here.
+      shell: bash
+      run: |
+        python3 tools/make_seed.py --out /tmp/regenerated.json
+        python3 - <<'PY'
+        import json, sys
+        a = json.load(open("data/seed/egypt-2027.json"))
+        b = json.load(open("/tmp/regenerated.json"))
+        for payload in (a, b):
+            payload.pop("generated", None)
+        if a != b:
+            sys.exit("data/seed/egypt-2027.json is out of sync with tools/make_seed.py")
+        print("seed matches generator")
+        PY

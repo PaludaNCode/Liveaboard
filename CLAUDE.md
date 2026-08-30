@@ -36,6 +36,15 @@ fetch run it twice, and the first of those runs opts out:
 LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
+**And a job that pushes runs CI's own list before it does.** GitHub does not
+trigger workflows on pushes made with the default `GITHUB_TOKEN`, so not one
+scheduled data commit has ever had a CI run against it — which is how a refresh
+published 36 sailings advertising a berth nobody could buy and left `main` red
+for seven hours, found by a person opening an unrelated PR. `.github/actions/
+checks` holds the list once and `ci.yml` uses it too, so the two cannot drift;
+`TestEveryPushingWorkflowChecksItself` refuses a workflow that pushes without
+it. Add a check there rather than to `ci.yml`.
+
 This is not a convenience. `cabins.yml`, `refresh.yml` and `itineraries.yml`
 ran the whole suite as their *first* step, so on 2026-08-30 a stale cabin book
 contradicting the rows the refresh had just written failed the suite in front

@@ -68,8 +68,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run tests
-        run: PYTHONPATH=src python3 -m unittest discover -s tests
+      # Only the tests that answer to `src/`. This job exists to heal a
+      # dataset that has fallen behind its parser, and the tests that assert
+      # against the committed dataset are asserting against exactly the state
+      # it is here to fix — in front of the step that fixes it. The same
+      # deadlock the fetching jobs had, arriving through a different door.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
       # On the defaults, like refresh.yml, fees.yml and CI's drift check. One
       # canonical set of inputs, defined in cli.py, that cannot drift apart
@@ -84,6 +89,13 @@ jobs:
 
       - name: Build the site
         run: PYTHONPATH=src python3 -m liveaboard.cli build --data data/egypt-2027.json
+
+      # This job pushes with the default `GITHUB_TOKEN` like the four data
+      # workflows, so GitHub triggers no CI on what it writes. Its own list,
+      # run against what is about to be pushed, is the only check these
+      # commits get.
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
 
       - name: Commit changes
         run: |
