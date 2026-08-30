@@ -662,10 +662,25 @@ class PadiComAdapter(SourceAdapter):
             record["name"] = split[0]
         if isinstance(detail.get("length"), int):
             record["nights"] = detail["length"]
+        # Two fields, kept as two. They were joined into one `ports` string
+        # that nothing read, and could not have been read: two of the eight
+        # harbour names PADI uses contain the separator, so
+        # "Hurghada - Marriott Marina - Hurghada - Marriott Marina" is either
+        # ("Hurghada", "Marriott Marina - Hurghada - Marriott Marina") or
+        # ("Hurghada - Marriott Marina", "Hurghada - Marriott Marina") and the
+        # string does not say which. 436 of the 447 split cleanly; the other 11
+        # cannot be split without guessing, and a closed-vocabulary parse over
+        # today's eight names is exactly the rule that breaks silently the
+        # first time PADI names a ninth marina.
+        #
+        # So the fix was the record, not a parser. `ports` is dropped: nothing
+        # read it, and leaving a lossy field beside the lossless one is an
+        # invitation to read the wrong one.
         departure = detail.get("harbourDepartureTitle")
         arrival = detail.get("harbourArrivalTitle")
         if departure and arrival:
-            record["ports"] = f"{departure} - {arrival}"
+            record["port_from"] = " ".join(str(departure).split())
+            record["port_to"] = " ".join(str(arrival).split())
         low = detail.get("totalNumberOfDives")
         if isinstance(low, int) and low > 0:
             record["dives"] = low

@@ -162,6 +162,15 @@ PORT_ALIASES: dict[str, str] = {
     # A letter short of the 130 itineraries that spell it out, on a Fury Shoals
     # week whose stated harbour is "Port Ghalib".
     "port galib": "Port Ghalib",
+    # The stated harbour is more granular than the title: it names berths where
+    # a title names towns. Three of PADI's eight harbour names are a marina
+    # inside a town this page already lists, and left unfolded each would open
+    # a fourth and fifth harbour chip for a port the filter already has.
+    # "hurghada, marriott" above is the same berth reached from the other
+    # source's own spelling of it.
+    "hurghada marina": "Hurghada",
+    "hurghada - marriott marina": "Hurghada",
+    "new marina sharm el sheikh (el wataneya)": "Sharm El Sheikh",
     # One title prints the same harbour two wrong ways inside one bracket:
     # "(Sharm El sheikh - Sharm El Sheik)". The stated harbour is "Sharm El
     # Sheikh" both ends, so the case row settles the capital with the spelling.
@@ -2103,6 +2112,31 @@ def promote(
             (located[0], located[0]) if located else ("Unknown", "Unknown")
         )
         port_from, port_to = _port(port_from), _port(port_to)
+
+        # And PADI states its harbours outright, in two fields, on 447 of 447
+        # itineraries -- where every port on this page is otherwise parsed out
+        # of a trip title. A statement beats a parse of the same source's own
+        # title, which is not a judgement call; and a statement beats nothing
+        # at all, wherever the title named no harbour this code could read.
+        #
+        # Nothing else. liveaboard.com's title stays authoritative for a
+        # liveaboard.com trip, the way our fee book beats PADI's where both
+        # exist -- the second source is a check here, not a replacement, and
+        # two independent readings agreeing is worth more than one reading
+        # nobody can check. They do agree: **207 of 207** trips where both
+        # speak, with no contradiction anywhere.
+        #
+        # So this changes no port today, deliberately. What it buys is that the
+        # next abbreviation answers itself instead of waiting for somebody to
+        # notice a filter chip that is not a place -- which is how "(HRG - PRG)"
+        # was found, by hand, after it had shipped.
+        stated_from = _port(padi_trip.get("port_from"))
+        stated_to = _port(padi_trip.get("port_to"))
+        if stated_from != "Unknown" and stated_to != "Unknown" and (
+            all(d.get("padi_only") for d in group)
+            or "Unknown" in (port_from, port_to)
+        ):
+            port_from, port_to = stated_from, stated_to
 
         # The second seller's own required extras, beside ours and never mixed
         # into them. Written only where PADI states at least one charge or

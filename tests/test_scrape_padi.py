@@ -337,7 +337,11 @@ class TestPayload(unittest.TestCase):
     def test_facts_are_stated_not_parsed(self) -> None:
         record = PadiComAdapter.itinerary_from_payload(DETAIL)
         self.assertEqual(record["nights"], 7)
-        self.assertEqual(record["ports"], "Marsa Alam - Marsa Alam")
+        # Two fields, not one joined string. Two of PADI's eight harbour names
+        # contain the " - " a joined string would have to be split on, so
+        # `ports` was unreadable on 11 trips and is gone.
+        self.assertEqual((record["port_from"], record["port_to"]),
+                         ("Marsa Alam", "Marsa Alam"))
         self.assertEqual(record["boat_name"], "Hammerhead II")
         self.assertEqual(record["padi_id"], 21681)
 

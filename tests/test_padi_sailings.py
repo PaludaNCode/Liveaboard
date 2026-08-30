@@ -36,7 +36,8 @@ from fetch_padi import (  # noqa: E402
     keeps_the_book,
 )
 from liveaboard.dataset import Dataset  # noqa: E402
-from liveaboard.promote import promote  # noqa: E402
+from liveaboard.promote import _port, promote  # noqa: E402
+from liveaboard.scrape.padi_com import PadiComAdapter  # noqa: E402
 from liveaboard.render import build_payload  # noqa: E402
 
 from test_promote import SEASON, candidate, departure  # noqa: E402
@@ -739,3 +740,93 @@ class TestPadiIsTheLastWordOnReefs(unittest.TestCase):
             self.sites({"days": [{"description": "A relaxed week of photography."}],
                         "highlightsDescription": "<p>Best of Hurghada.</p>"}),
             [])
+
+
+class TestTheHarbourPadiStates(unittest.TestCase):
+    """Every port on this page is parsed out of a trip title. PADI states two.
+
+    `harbourDepartureTitle` and `harbourArrivalTitle` are on **447 of 447**
+    itineraries, name eight real places, and were being stored joined into one
+    `ports` string that nothing read -- and could not have read, because two of
+    those eight names contain the separator:
+
+        Hurghada - Marriott Marina - Hurghada - Marriott Marina
+
+    is either `("Hurghada", "Marriott Marina - Hurghada - Marriott Marina")` or
+    `("Hurghada - Marriott Marina", "Hurghada - Marriott Marina")`, and the
+    string does not say. 436 of 447 split cleanly and the other 11 cannot be
+    split without guessing. So the fix was the record, not a parser: a
+    closed-vocabulary split over today's eight names is the rule that breaks
+    silently the first time PADI names a ninth marina.
+    """
+
+    #: The itinerary name promote looks the book up under. `padi_key` is
+    #: computed from the record's own boat and name, never from the dict key --
+    #: and the name a PADI record carries keeps its port bracket, because
+    #: `itinerary_from_payload` stores the title's head and the head includes
+    #: it. Two sailings differing only by port are two trips.
+    TRIP = "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)"
+
+    def trip(self, name=TRIP, **extra):
+        return {"collected": "2026-08-28", "trips": {"t": {
+            "boat": "alia-soul", "name": name, **extra}}}
+
+    def itinerary(self, name=TRIP,
+                  padi=None, padi_only=False):
+        extra = {"padi_only": True} if padi_only else {}
+        payload = promote(candidate([departure(name=name, **extra)]),
+                          season=SEASON, padi=padi)
+        return payload["itineraries"][0]
+
+    def test_the_two_harbours_are_stored_as_two_fields(self):
+        record = PadiComAdapter.itinerary_from_payload({
+            "title": "Brothers (Hurghada - Hurghada) 7 Nights",
+            "harbourDepartureTitle": "Hurghada - Marriott Marina",
+            "harbourArrivalTitle": "Hurghada - Marriott Marina",
+        })
+        self.assertEqual(record["port_from"], "Hurghada - Marriott Marina")
+        self.assertEqual(record["port_to"], "Hurghada - Marriott Marina")
+        self.assertNotIn("ports", record)
+
+    def test_a_marina_folds_onto_the_town_the_filter_already_lists(self):
+        """The stated field is more granular than a title: it names berths
+        where a title names towns. Unfolded, each would open a second harbour
+        chip for a port the filter already has."""
+        for stated, expected in (("Hurghada Marina", "Hurghada"),
+                                 ("Hurghada - Marriott Marina", "Hurghada"),
+                                 ("New Marina Sharm El Sheikh (El Wataneya)",
+                                  "Sharm El Sheikh")):
+            with self.subTest(stated=stated):
+                self.assertEqual(_port(stated), expected)
+
+    def test_a_statement_fills_a_port_the_title_never_named(self):
+        """A statement beats nothing at all, whatever the trip's own source.
+        This is what stops the next abbreviation waiting to be noticed by hand
+        the way "(HRG - PRG)" was, after it had shipped."""
+        blind = self.itinerary(name="Premium Expedition")
+        self.assertEqual((blind["port_from"], blind["port_to"]), ("Unknown", "Unknown"))
+        filled = self.itinerary(
+            name="Premium Expedition",
+            padi=self.trip(name="Premium Expedition",
+                           port_from="Port Ghalib", port_to="Hurghada"))
+        self.assertEqual((filled["port_from"], filled["port_to"]),
+                         ("Port Ghalib", "Hurghada"))
+
+    def test_it_does_not_overrule_the_other_seller_s_own_title(self):
+        """liveaboard.com's title stays authoritative for a liveaboard.com
+        trip, the way our fee book beats PADI's where both exist. The second
+        source is a check here, not a replacement -- and two independent
+        readings agreeing is worth more than one reading nobody can check."""
+        row = self.itinerary(padi=self.trip(port_from="Port Ghalib", port_to="Hamata"))
+        self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))
+
+    def test_a_padi_titled_trip_takes_the_stated_harbour_over_its_own_parse(self):
+        """A statement beating a parse of the *same source's* title is not a
+        judgement call."""
+        row = self.itinerary(padi_only=True,
+                             padi=self.trip(port_from="Port Ghalib", port_to="Hamata"))
+        self.assertEqual((row["port_from"], row["port_to"]), ("Port Ghalib", "Hamata"))
+
+    def test_a_trip_padi_has_not_been_read_for_keeps_its_parsed_ports(self):
+        row = self.itinerary(padi=self.trip())
+        self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))

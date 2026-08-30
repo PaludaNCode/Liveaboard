@@ -37,7 +37,8 @@
    "nights": 7,
    "padi_id": 15933,
    "padi_slug": "bde-golden-triangle-port-ghalib-port-ghalib-7-nigh",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -83,7 +84,8 @@
    "nights": 7,
    "padi_id": 23275,
    "padi_slug": "north-hurghada-hurghada-7-nights-17",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -128,7 +130,8 @@
    "nights": 7,
    "padi_id": 23272,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-19",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -173,7 +176,8 @@
    "nights": 7,
    "padi_id": 23273,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-11",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -229,7 +233,8 @@
    "nights": 7,
    "padi_id": 22659,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-15",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -285,7 +290,8 @@
    "nights": 7,
    "padi_id": 22628,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-14",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -341,7 +347,8 @@
    "nights": 7,
    "padi_id": 22663,
    "padi_slug": "daedalus-rockyzabargad-shark-week-port-ghalib-port",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -397,7 +404,8 @@
    "nights": 7,
    "padi_id": 22664,
    "padi_slug": "daedalus-rockyzabargad-shark-week-port-ghalib-po-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -456,7 +464,8 @@
    "nights": 7,
    "padi_id": 22669,
    "padi_slug": "ultimate-red-seaport-ghalib-hurghada-7-nights",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -514,7 +523,8 @@
    "nights": 7,
    "padi_id": 22670,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-15",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -572,7 +582,8 @@
    "nights": 7,
    "padi_id": 22671,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Marriott Marina - Hurghada - Marriott Marina",
+   "port_from": "Hurghada - Marriott Marina",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -624,7 +635,8 @@
    "nights": 14,
    "padi_id": 22668,
    "padi_slug": "south-port-ghalib-port-ghalib-7-nights-2",
-   "ports": "Port Ghalib - Hurghada - Marriott Marina",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada - Marriott Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -676,7 +688,8 @@
    "nights": 7,
    "padi_id": 22576,
    "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-por-3",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -728,7 +741,8 @@
    "nights": 7,
    "padi_id": 22184,
    "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -780,7 +794,8 @@
    "nights": 7,
    "padi_id": 22433,
    "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-hurgh",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -832,7 +847,8 @@
    "nights": 7,
    "padi_id": 22432,
    "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-por-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -885,7 +901,8 @@
    "nights": 5,
    "padi_id": 22936,
    "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -936,7 +953,8 @@
    "nights": 7,
    "padi_id": 22185,
    "padi_slug": "brother-deadalus-and-elphinstone-port-ghalib-port",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -988,7 +1006,8 @@
    "nights": 7,
    "padi_id": 22186,
    "padi_slug": "deadalus-st-john-s-port-ghalib-port-ghalib-7-night",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1042,7 +1061,8 @@
    "nights": 7,
    "padi_id": 22181,
    "padi_slug": "north-hurghada-hurghada-7-nights-11",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1095,7 +1115,8 @@
    "nights": 7,
    "padi_id": 22183,
    "padi_slug": "north-and-dahab-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1148,7 +1169,8 @@
    "nights": 7,
    "padi_id": 22182,
    "padi_slug": "north-hurghada-hurghada-7-nights-12",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1202,7 +1224,8 @@
    "nights": 3,
    "padi_id": 21604,
    "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "open_water"
    },
@@ -1267,7 +1290,8 @@
    "nights": 7,
    "padi_id": 16540,
    "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "title": "Best of Hurghada (Hurghada - Hurghada) 7 nights"
   },
   "amelie::Best of Hurghada - Mini Safari (Hurghada - Hurghada)": {
@@ -1329,7 +1353,8 @@
    "nights": 3,
    "padi_id": 16541,
    "padi_slug": "best-of-hurghada-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "title": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights"
   },
   "andromeda::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
@@ -1397,7 +1422,8 @@
    "nights": 7,
    "padi_id": 22515,
    "padi_slug": "south-hurghada-marsa-alam-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1468,7 +1494,8 @@
    "nights": 7,
    "padi_id": 22516,
    "padi_slug": "brothers-elphinstone-safaga-hurghada-hurghada-7-ni",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1535,7 +1562,8 @@
    "nights": 7,
    "padi_id": 22513,
    "padi_slug": "south-hurghada-marsa-alam-7-nights",
-   "ports": "Hurghada - Marsa Alam",
+   "port_from": "Hurghada",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1602,7 +1630,8 @@
    "nights": 7,
    "padi_id": 22514,
    "padi_slug": "south-hurghada-marsa-alam-7-nights-2",
-   "ports": "Marsa Alam - Hurghada",
+   "port_from": "Marsa Alam",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1677,7 +1706,8 @@
    "nights": 7,
    "padi_id": 21447,
    "padi_slug": "brothers-saint-johns-hurghada-hurghada-7-nights",
-   "ports": "Hurghada Marina - Hurghada",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1750,7 +1780,8 @@
    "nights": 7,
    "padi_id": 22859,
    "padi_slug": "north-wrecks-and-safaga-hurghada-hurghada-7-nigh-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -1826,7 +1857,8 @@
    "nights": 7,
    "padi_id": 21441,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1901,7 +1933,8 @@
    "nights": 7,
    "padi_id": 22728,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-port-galib-7",
-   "ports": "Hurghada Marina - Port Ghalib",
+   "port_from": "Hurghada Marina",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -1977,7 +2010,8 @@
    "nights": 7,
    "padi_id": 21450,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-6",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2053,7 +2087,8 @@
    "nights": 14,
    "padi_id": 22727,
    "padi_slug": "elba-rocky-zabargad-saint-johns-hurghada-hurghada",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2128,7 +2163,8 @@
    "nights": 7,
    "padi_id": 21442,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2205,7 +2241,8 @@
    "nights": 7,
    "padi_id": 21449,
    "padi_slug": "north-brothers-islands-hurghada-hurghada-7-nights",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2281,7 +2318,8 @@
    "nights": 7,
    "padi_id": 21443,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-5",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -2358,7 +2396,8 @@
    "nights": 7,
    "padi_id": 21448,
    "padi_slug": "brothers-islands-hurghada-hurghada-7-nights",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2433,7 +2472,8 @@
    "nights": 7,
    "padi_id": 21446,
    "padi_slug": "north-wrecks-and-safaga-hurghada-hurghada-7-nigh-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2484,7 +2524,8 @@
    "nights": 7,
    "padi_id": 15618,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2536,7 +2577,8 @@
    "nights": 7,
    "padi_id": 15832,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-5",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2586,7 +2628,8 @@
    "nights": 7,
    "padi_id": 15622,
    "padi_slug": "samadai-elphinstone-carlos-reef-port-ghalib-hurgha",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2636,7 +2679,8 @@
    "nights": 7,
    "padi_id": 16113,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurghada",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2688,7 +2732,8 @@
    "nights": 7,
    "padi_id": 15592,
    "padi_slug": "north-brother-islands",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2740,7 +2785,8 @@
    "nights": 7,
    "padi_id": 15834,
    "padi_slug": "north-brother-islands-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2792,7 +2838,8 @@
    "nights": 7,
    "padi_id": 15615,
    "padi_slug": "north-straits-of-tiran-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -2843,7 +2890,8 @@
    "nights": 7,
    "padi_id": 15623,
    "padi_slug": "rocky-zabargad-st-johns-port-ghalib-port-ghalib-7",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -2892,7 +2940,8 @@
    "nights": 7,
    "padi_id": 15620,
    "padi_slug": "brother-islands-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -2945,7 +2994,8 @@
    "nights": 7,
    "padi_id": 16320,
    "padi_slug": "sharkproject-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -2996,7 +3046,8 @@
    "nights": 7,
    "padi_id": 15617,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3040,7 +3091,8 @@
    "nights": 7,
    "padi_id": 23179,
    "padi_slug": "southern-red-sea-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -3086,7 +3138,8 @@
    "nights": 7,
    "padi_id": 23176,
    "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-8",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -3132,7 +3185,8 @@
    "nights": 7,
    "padi_id": 23177,
    "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-9",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -3179,7 +3233,8 @@
    "nights": 7,
    "padi_id": 23180,
    "padi_slug": "southern-red-sea-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -3234,7 +3289,8 @@
    "nights": 7,
    "padi_id": 22924,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3288,7 +3344,8 @@
    "nights": 7,
    "padi_id": 22925,
    "padi_slug": "bde-golden-triangle-hurghada-hurghada-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3339,7 +3396,8 @@
    "nights": 5,
    "padi_id": 22931,
    "padi_slug": "daedalus-elphinstone-port-ghalib-port-ghalib-7-n-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3394,7 +3452,8 @@
    "nights": 7,
    "padi_id": 22919,
    "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -3451,7 +3510,8 @@
    "nights": 7,
    "padi_id": 22920,
    "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -3508,7 +3568,8 @@
    "nights": 7,
    "padi_id": 22923,
    "padi_slug": "dahab-sinai-hurghada-hurghada-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -3565,7 +3626,8 @@
    "nights": 7,
    "padi_id": 22927,
    "padi_slug": "the-best-of-the-south-port-ghalib-port-ghalib-7-ni",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3622,7 +3684,8 @@
    "nights": 7,
    "padi_id": 22926,
    "padi_slug": "bde-golden-triangle-port-ghalib-port-ghalib-7-ni-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -3684,7 +3747,8 @@
    "nights": 3,
    "padi_id": 16474,
    "padi_slug": "dahab-tiran-sharm-el-sheikh-sharm-el-sheik-4-nig-2",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -3746,7 +3810,8 @@
    "nights": 3,
    "padi_id": 16471,
    "padi_slug": "north-route-mini-sharm-el-sheikh-sharm-el-sheikh-3",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -3805,7 +3870,8 @@
    "nights": 3,
    "padi_id": 21582,
    "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-5",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -3864,7 +3930,8 @@
    "nights": 4,
    "padi_id": 21583,
    "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-6-ni",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -3927,7 +3994,8 @@
    "nights": 7,
    "padi_id": 13721,
    "padi_slug": "simply-the-best-7-nights-hurghada-hurghada-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -3990,7 +4058,8 @@
    "nights": 7,
    "padi_id": 13698,
    "padi_slug": "simply-the-best-7-nights-hurghada-port-galib",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4053,7 +4122,8 @@
    "nights": 7,
    "padi_id": 13722,
    "padi_slug": "simply-the-best-7-nights-port-galib-hurghada",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4116,7 +4186,8 @@
    "nights": 7,
    "padi_id": 14215,
    "padi_slug": "project-shark-simply-the-best-hurghada-hurghada-7",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4178,7 +4249,8 @@
    "nights": 7,
    "padi_id": 13680,
    "padi_slug": "best-of-daedalus-7-nights-port-galib-port-galib",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4242,7 +4314,8 @@
    "nights": 7,
    "padi_id": 13691,
    "padi_slug": "north-brothers-7-nights-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4306,7 +4379,8 @@
    "nights": 7,
    "padi_id": 13831,
    "padi_slug": "north-brothers-7-nights-port-ghalib-hurghada",
-   "ports": "Hurghada Marina - Port Ghalib",
+   "port_from": "Hurghada Marina",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4369,7 +4443,8 @@
    "nights": 7,
    "padi_id": 13692,
    "padi_slug": "northern-wrecks-reefs-7-nights-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -4433,7 +4508,8 @@
    "nights": 7,
    "padi_id": 13684,
    "padi_slug": "best-of-wrecks-7-nights-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4498,7 +4574,8 @@
    "nights": 7,
    "padi_id": 13697,
    "padi_slug": "rocky-zabargad-st-johns-7-nights-port-galib-port-g",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4561,7 +4638,8 @@
    "nights": 7,
    "padi_id": 13723,
    "padi_slug": "strait-of-tiran-north-7-nights-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -4630,7 +4708,8 @@
    "nights": 10,
    "padi_id": 18237,
    "padi_slug": "ultimate-red-sea-hurghada-hurghada-10-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4693,7 +4772,8 @@
    "nights": 10,
    "padi_id": 13693,
    "padi_slug": "project-shark-daedalus-st-johns-7-nights-port-gali",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4757,7 +4837,8 @@
    "nights": 7,
    "padi_id": 11968,
    "padi_slug": "project-shark-simply-the-best-7-nights-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4821,7 +4902,8 @@
    "nights": 7,
    "padi_id": 11955,
    "padi_slug": "simply-the-best-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4885,7 +4967,8 @@
    "nights": 7,
    "padi_id": 11961,
    "padi_slug": "simply-the-best-hurghada-ghalib-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -4949,7 +5032,8 @@
    "nights": 7,
    "padi_id": 11953,
    "padi_slug": "north-and-ras-mohamed-7-nights-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -5012,7 +5096,8 @@
    "nights": 7,
    "padi_id": 11966,
    "padi_slug": "daedalus-and-st-johns-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -5077,7 +5162,8 @@
    "nights": 7,
    "padi_id": 11952,
    "padi_slug": "north-and-brothers-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -5141,7 +5227,8 @@
    "nights": 7,
    "padi_id": 11954,
    "padi_slug": "northern-wrecks-and-reefs-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -5206,7 +5293,8 @@
    "nights": 7,
    "padi_id": 11950,
    "padi_slug": "best-of-wrecks-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -5270,7 +5358,8 @@
    "nights": 7,
    "padi_id": 11967,
    "padi_slug": "project-shark-daedalus-and-st-johns-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -5334,7 +5423,8 @@
    "nights": 7,
    "padi_id": 11956,
    "padi_slug": "strait-of-tiran-and-north-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -5385,7 +5475,8 @@
    "nights": 7,
    "padi_id": 23341,
    "padi_slug": "north-safaga-hurghada-hurghada-7-nights-3",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5436,7 +5527,8 @@
    "nights": 7,
    "padi_id": 23342,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-8",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5487,7 +5579,8 @@
    "nights": 7,
    "padi_id": 21820,
    "padi_slug": "wrecks-only-salem-express-hurghada-hurghada-7-nigh",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5539,7 +5632,8 @@
    "nights": 7,
    "padi_id": 18138,
    "padi_slug": "north-wrecks-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5591,7 +5685,8 @@
    "nights": 7,
    "padi_id": 23340,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-21",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5643,7 +5738,8 @@
    "nights": 7,
    "padi_id": 12532,
    "padi_slug": "north-and-tiran-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5694,7 +5790,8 @@
    "nights": 7,
    "padi_id": 12531,
    "padi_slug": "north-and-wrecks-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5747,7 +5844,8 @@
    "nights": 7,
    "padi_id": 22858,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5797,7 +5895,8 @@
    "nights": 7,
    "padi_id": 23343,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-9",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5843,7 +5942,8 @@
    "nights": 7,
    "padi_id": 23315,
    "padi_slug": "zabargad-special-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5890,7 +5990,8 @@
    "nights": 7,
    "padi_id": 22334,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-11",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5937,7 +6038,8 @@
    "nights": 7,
    "padi_id": 12536,
    "padi_slug": "brothers-daedalus-elphinstone-marsa-ghalib-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -5984,7 +6086,8 @@
    "nights": 7,
    "padi_id": 21624,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-10",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6031,7 +6134,8 @@
    "nights": 7,
    "padi_id": 9755,
    "padi_slug": "daedalus-fury-shoal",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6078,7 +6182,8 @@
    "nights": 7,
    "padi_id": 12538,
    "padi_slug": "daedalus-zabargad-rockys",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6123,7 +6228,8 @@
    "nights": 7,
    "padi_id": 23317,
    "padi_slug": "tiran-special-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6171,7 +6277,8 @@
    "nights": 7,
    "padi_id": 21626,
    "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -6220,7 +6327,8 @@
    "nights": 7,
    "padi_id": 21303,
    "padi_slug": "rocky-zabargad-stjohns-port-ghalib-port-ghalib-7-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6267,7 +6375,8 @@
    "nights": 11,
    "padi_id": 21304,
    "padi_slug": "rocky-elba-stjohns-elphinstone-port-ghalib-port-gh",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6314,7 +6423,8 @@
    "nights": 7,
    "padi_id": 23318,
    "padi_slug": "zabargad-special-port-ghalib-port-ghalib-7-night-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6359,7 +6469,8 @@
    "nights": 7,
    "padi_id": 12535,
    "padi_slug": "saint-john-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6404,7 +6515,8 @@
    "nights": 7,
    "padi_id": 23316,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-20",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6449,7 +6561,8 @@
    "nights": 7,
    "padi_id": 23314,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-19",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6500,7 +6613,8 @@
    "nights": 7,
    "padi_id": 21838,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-14",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6551,7 +6665,8 @@
    "nights": 7,
    "padi_id": 21836,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-13",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6602,7 +6717,8 @@
    "nights": 7,
    "padi_id": 21835,
    "padi_slug": "daedalus-fury-shoals-port-ghalib-port-ghalib-7-n-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6653,7 +6769,8 @@
    "nights": 7,
    "padi_id": 21831,
    "padi_slug": "stjohns-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6704,7 +6821,8 @@
    "nights": 7,
    "padi_id": 21829,
    "padi_slug": "north-brothers-hurghada-port-ghalib-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6756,7 +6874,8 @@
    "nights": 7,
    "padi_id": 22692,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-16",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6805,7 +6924,8 @@
    "nights": 7,
    "padi_id": 23311,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-12",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6854,7 +6974,8 @@
    "nights": 7,
    "padi_id": 22693,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-13",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6906,7 +7027,8 @@
    "nights": 7,
    "padi_id": 23313,
    "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -6956,7 +7078,8 @@
    "nights": 7,
    "padi_id": 23312,
    "padi_slug": "north-safaga-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7007,7 +7130,8 @@
    "nights": 7,
    "padi_id": 21830,
    "padi_slug": "daedalus-rocky-zabargad-port-ghalib-port-ghalib-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7056,7 +7180,8 @@
    "nights": 7,
    "padi_id": 21832,
    "padi_slug": "stjohns-port-ghalib-port-ghalib-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7113,7 +7238,8 @@
    "nights": 7,
    "padi_id": 12781,
    "padi_slug": "selectable-tour",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7170,7 +7296,8 @@
    "nights": 7,
    "padi_id": 14523,
    "padi_slug": "daedalus-rocky-island-and-zabargad-port-ghalib-por",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7227,7 +7354,8 @@
    "nights": 7,
    "padi_id": 12780,
    "padi_slug": "brother-daedalus-and-elphinstone",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7284,7 +7412,8 @@
    "nights": 7,
    "padi_id": 12774,
    "padi_slug": "daedalus-fury-shoal-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7341,7 +7470,8 @@
    "nights": 7,
    "padi_id": 14220,
    "padi_slug": "daedalus-fury-shoal-port-ghalib-port-ghalib-7-nigh",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7399,7 +7529,8 @@
    "nights": 7,
    "padi_id": 14219,
    "padi_slug": "brother-daedalus-and-elphinstone-port-ghalib-hur-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7454,7 +7585,8 @@
    "nights": 7,
    "padi_id": 23300,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-18",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7512,7 +7644,8 @@
    "nights": 7,
    "padi_id": 12773,
    "padi_slug": "brothers-island-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7569,7 +7702,8 @@
    "nights": 7,
    "padi_id": 22952,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-6",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7624,7 +7758,8 @@
    "nights": 7,
    "padi_id": 12778,
    "padi_slug": "st-johns-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7668,7 +7803,8 @@
    "nights": 7,
    "padi_id": 22606,
    "padi_slug": "northeren-route-wrecks-7-nights-5",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -7710,7 +7846,8 @@
    "nights": 2,
    "padi_id": 22605,
    "padi_slug": "tiran-ras-mohamed-minisafari-4-nights",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -7752,7 +7889,8 @@
    "nights": 4,
    "padi_id": 19628,
    "padi_slug": "northeren-route-wrecks-7-nights-4",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -7803,7 +7941,8 @@
    "nights": 7,
    "padi_id": 23301,
    "padi_slug": "north-hurghada-hurghada-7-nights-18",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7854,7 +7993,8 @@
    "nights": 7,
    "padi_id": 23094,
    "padi_slug": "north-hurghada-hurghada-7-nights-13",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7905,7 +8045,8 @@
    "nights": 7,
    "padi_id": 23095,
    "padi_slug": "north-hurghada-hurghada-7-nights-14",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -7959,7 +8100,8 @@
    "nights": 7,
    "padi_id": 12525,
    "padi_slug": "daedalus-rocky-and-zabargad-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -8009,7 +8151,8 @@
    "nights": 7,
    "padi_id": 12524,
    "padi_slug": "brothers-daedalus-and-elphinstone-hrg-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -8059,7 +8202,8 @@
    "nights": 7,
    "padi_id": 12528,
    "padi_slug": "brothers-daedalus-and-elphinstone-hrgmg-7-nights-2",
-   "ports": "Hurghada Marina - Port Ghalib",
+   "port_from": "Hurghada Marina",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -8109,7 +8253,8 @@
    "nights": 7,
    "padi_id": 12529,
    "padi_slug": "brothers-daedalus-and-elphinstone-mghrg-7-nights-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -8161,7 +8306,8 @@
    "nights": 7,
    "padi_id": 12526,
    "padi_slug": "north-wrecks-and-ras-mohamed-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 20
@@ -8217,7 +8363,8 @@
    "nights": 7,
    "padi_id": 11903,
    "padi_slug": "brothers-mghrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 50
@@ -8269,7 +8416,8 @@
    "nights": 7,
    "padi_id": 11894,
    "padi_slug": "deep-south-and-elphinstone-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "recommended_logged_dives": 20
@@ -8319,7 +8467,8 @@
    "nights": 7,
    "padi_id": 23033,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-17",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced"
    },
@@ -8368,7 +8517,8 @@
    "nights": 7,
    "padi_id": 23034,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-7",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -8417,7 +8567,8 @@
    "nights": 7,
    "padi_id": 14602,
    "padi_slug": "brothers-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -8467,7 +8618,8 @@
    "nights": 7,
    "padi_id": 23038,
    "padi_slug": "rocky-zabargad-st-johns-elphinstone-port-ghalib-po",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -8518,7 +8670,8 @@
    "nights": 7,
    "padi_id": 12082,
    "padi_slug": "north-wrecks-ras-mohamed-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -8571,7 +8724,8 @@
    "nights": 7,
    "padi_id": 12087,
    "padi_slug": "north-and-brothers-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -8621,7 +8775,8 @@
    "nights": 7,
    "padi_id": 23037,
    "padi_slug": "st-johns-fury-shoal-elphinstone-port-ghalib-port-g",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -8671,7 +8826,8 @@
    "nights": 7,
    "padi_id": 23035,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-8",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -8750,7 +8906,8 @@
    "nights": 14,
    "padi_id": 23153,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-7",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -8821,7 +8978,8 @@
    "nights": 10,
    "padi_id": 23157,
    "padi_slug": "elba-port-ghalib-port-ghalib-11-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -8886,7 +9044,8 @@
    "nights": 7,
    "padi_id": 23161,
    "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -8951,7 +9110,8 @@
    "nights": 7,
    "padi_id": 23160,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-2",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9018,7 +9178,8 @@
    "nights": 7,
    "padi_id": 23154,
    "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-6",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9085,7 +9246,8 @@
    "nights": 7,
    "padi_id": 23158,
    "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9156,7 +9318,8 @@
    "nights": 7,
    "padi_id": 23147,
    "padi_slug": "mixed-south-daedalus-rocky-zabargad-ras-galep-ras",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9225,7 +9388,8 @@
    "nights": 7,
    "padi_id": 23162,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-16",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9294,7 +9458,8 @@
    "nights": 7,
    "padi_id": 23149,
    "padi_slug": "mixed-south-daedalus-rocky-zabargad-ras-galep-ra-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9364,7 +9529,8 @@
    "nights": 7,
    "padi_id": 23150,
    "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -9431,7 +9597,8 @@
    "nights": 7,
    "padi_id": 23151,
    "padi_slug": "north-dahab-tiran-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -9501,7 +9668,8 @@
    "nights": 7,
    "padi_id": 23152,
    "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -9568,7 +9736,8 @@
    "nights": 7,
    "padi_id": 23159,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -9650,7 +9819,8 @@
    "nights": 14,
    "padi_id": 23205,
    "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-4",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9723,7 +9893,8 @@
    "nights": 11,
    "padi_id": 23206,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-5",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9790,7 +9961,8 @@
    "nights": 7,
    "padi_id": 23204,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -9857,7 +10029,8 @@
    "nights": 7,
    "padi_id": 23195,
    "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9926,7 +10099,8 @@
    "nights": 7,
    "padi_id": 23194,
    "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -9995,7 +10169,8 @@
    "nights": 7,
    "padi_id": 23196,
    "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10064,7 +10239,8 @@
    "nights": 7,
    "padi_id": 23197,
    "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10137,7 +10313,8 @@
    "nights": 7,
    "padi_id": 23203,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10208,7 +10385,8 @@
    "nights": 7,
    "padi_id": 23200,
    "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-9",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10279,7 +10457,8 @@
    "nights": 7,
    "padi_id": 23199,
    "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-8",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10350,7 +10529,8 @@
    "nights": 7,
    "padi_id": 23198,
    "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10422,7 +10602,8 @@
    "nights": 7,
    "padi_id": 23208,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-8",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -10491,7 +10672,8 @@
    "nights": 7,
    "padi_id": 23201,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-17",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -10563,7 +10745,8 @@
    "nights": 7,
    "padi_id": 23202,
    "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -10632,7 +10815,8 @@
    "nights": 7,
    "padi_id": 23209,
    "padi_slug": "golden-triangle-port-ghalib-port-ghalib-7-nights-6",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -10700,7 +10884,8 @@
    "nights": 7,
    "padi_id": 23217,
    "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10771,7 +10956,8 @@
    "nights": 11,
    "padi_id": 23221,
    "padi_slug": "daedalus-elphinstone-fury-shoals-port-ghalib-por-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10836,7 +11022,8 @@
    "nights": 7,
    "padi_id": 23435,
    "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -10903,7 +11090,8 @@
    "nights": 7,
    "padi_id": 23224,
    "padi_slug": "golden-triangle-hurghada-port-ghalib-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -10970,7 +11158,8 @@
    "nights": 7,
    "padi_id": 23219,
    "padi_slug": "golden-triangle-port-ghalib-hurghada-7-nights-4",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11037,7 +11226,8 @@
    "nights": 7,
    "padi_id": 23218,
    "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11108,7 +11298,8 @@
    "nights": 7,
    "padi_id": 23226,
    "padi_slug": "st-johns-reefs-port-ghalib-port-ghalib-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11177,7 +11368,8 @@
    "nights": 7,
    "padi_id": 23223,
    "padi_slug": "north-brothers-hurghada-port-ghalib-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11246,7 +11438,8 @@
    "nights": 7,
    "padi_id": 23216,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-9",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11315,7 +11508,8 @@
    "nights": 7,
    "padi_id": 23436,
    "padi_slug": "north-brothers-hurghada-hurghada-7-nights-22",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11385,7 +11579,8 @@
    "nights": 7,
    "padi_id": 23214,
    "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -11452,7 +11647,8 @@
    "nights": 7,
    "padi_id": 23213,
    "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -11522,7 +11718,8 @@
    "nights": 7,
    "padi_id": 23215,
    "padi_slug": "north-ras-mohamed-hurghada-hurghada-7-nights-6",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -11592,7 +11789,8 @@
    "nights": 7,
    "padi_id": 23222,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-10",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -11657,7 +11855,8 @@
    "nights": 7,
    "padi_id": 23225,
    "padi_slug": "st-johns-reefs-port-ghalib-hurghada-7-nights-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -11725,7 +11924,8 @@
    "nights": 7,
    "padi_id": 15135,
    "padi_slug": "daedalus-elphinstone-port-ghalib-port-ghalib-7-n-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11799,7 +11999,8 @@
    "nights": 7,
    "padi_id": 11622,
    "padi_slug": "fury-and-st-johns-tuesday-departure-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -11873,7 +12074,8 @@
    "nights": 7,
    "padi_id": 13257,
    "padi_slug": "safaga-brothers-and-elphistone-hurghada-port-ghali",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -11947,7 +12149,8 @@
    "nights": 7,
    "padi_id": 15170,
    "padi_slug": "famous-five-hurghada-hurghada-7-nights-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12017,7 +12220,8 @@
    "nights": 7,
    "padi_id": 11623,
    "padi_slug": "fury-and-st-johns-wednesday-departure-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -12086,7 +12290,8 @@
    "nights": 7,
    "padi_id": 11627,
    "padi_slug": "reefs-wrecks-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -12157,7 +12362,8 @@
    "nights": 7,
    "padi_id": 12280,
    "padi_slug": "safaga-brothers-elphinstone",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12226,7 +12432,8 @@
    "nights": 7,
    "padi_id": 13255,
    "padi_slug": "simple-the-best-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12295,7 +12502,8 @@
    "nights": 7,
    "padi_id": 12281,
    "padi_slug": "southern-sharks",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12366,7 +12574,8 @@
    "nights": 7,
    "padi_id": 13256,
    "padi_slug": "tech-south-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12430,7 +12639,8 @@
    "nights": 7,
    "padi_id": 11624,
    "padi_slug": "fury-and-st-johns-thursday-departure-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12498,7 +12708,8 @@
    "nights": 7,
    "padi_id": 14700,
    "padi_slug": "deadalus-elphinstone-port-ghalib-port-ghalib-7-nig",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12572,7 +12783,8 @@
    "nights": 7,
    "padi_id": 14701,
    "padi_slug": "famous-five-cruise-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12643,7 +12855,8 @@
    "nights": 7,
    "padi_id": 12444,
    "padi_slug": "reefs-wrecks",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -12714,7 +12927,8 @@
    "nights": 7,
    "padi_id": 11703,
    "padi_slug": "safaga-brothers-elphinstone-marsa-ghalib-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12783,7 +12997,8 @@
    "nights": 7,
    "padi_id": 13253,
    "padi_slug": "simple-the-best-hurghada-port-ghalib-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12852,7 +13067,8 @@
    "nights": 7,
    "padi_id": 11704,
    "padi_slug": "simply-the-best-marsa-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -12920,7 +13136,8 @@
    "nights": 7,
    "padi_id": 11702,
    "padi_slug": "south-st-johns-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -12989,7 +13206,8 @@
    "nights": 7,
    "padi_id": 14555,
    "padi_slug": "south-for-winter-with-duxy-port-ghalib-port-ghalib",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -13063,7 +13281,8 @@
    "nights": 7,
    "padi_id": 11714,
    "padi_slug": "famous-five-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -13134,7 +13353,8 @@
    "nights": 7,
    "padi_id": 11709,
    "padi_slug": "get-wrecked-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13204,7 +13424,8 @@
    "nights": 7,
    "padi_id": 19953,
    "padi_slug": "north-easy-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -13273,7 +13494,8 @@
    "nights": 7,
    "padi_id": 11710,
    "padi_slug": "reefs-and-wrecks-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13320,7 +13542,8 @@
    "nights": 7,
    "padi_id": 21615,
    "padi_slug": "wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh-7-nig",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13366,7 +13589,8 @@
    "nights": 7,
    "padi_id": 21613,
    "padi_slug": "ras-mohammed-thistlegorm-sharm-el-sheikh-sharm-e-2",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13413,7 +13637,8 @@
    "nights": 7,
    "padi_id": 21616,
    "padi_slug": "wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh-7-n-2",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13460,7 +13685,8 @@
    "nights": 7,
    "padi_id": 21614,
    "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-6",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -13513,7 +13739,8 @@
    "nights": 7,
    "padi_id": 16442,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-2",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -13571,7 +13798,8 @@
    "nights": 7,
    "padi_id": 16440,
    "padi_slug": "brothers-daedalus-elphistone-port-ghalib-hurghad-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -13629,7 +13857,8 @@
    "nights": 7,
    "padi_id": 16511,
    "padi_slug": "north-and-tiran-hurghada-hurghada-7-nights-8",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -13686,7 +13915,8 @@
    "nights": 7,
    "padi_id": 16441,
    "padi_slug": "brothers-daedalus-elphistone-hurghada-hurghada-7-n",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -13742,7 +13972,8 @@
    "nights": 7,
    "padi_id": 16514,
    "padi_slug": "north-and-brothers-port-ghalib-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -13799,7 +14030,8 @@
    "nights": 7,
    "padi_id": 16510,
    "padi_slug": "north-and-tiran-hurghada-hurghada-7-nights-7",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -13852,7 +14084,8 @@
    "nights": 3,
    "padi_id": 13808,
    "padi_slug": "ras-mohamed-4-nights",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -13908,7 +14141,8 @@
    "nights": 4,
    "padi_id": 13829,
    "padi_slug": "thistlegorm",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -13956,7 +14190,8 @@
    "nights": 7,
    "padi_id": 19232,
    "padi_slug": "thistlegorm-dunraven-ras-mohammed-umbi-umbi-3-ni-3",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -14003,7 +14238,8 @@
    "nights": 4,
    "padi_id": 19230,
    "padi_slug": "thistlegorm-dunraven-ras-mohammed-umbi-umbi-3-ni-2",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -14054,7 +14290,8 @@
    "nights": 7,
    "padi_id": 11719,
    "padi_slug": "north-program-hrg-hrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -14103,7 +14340,8 @@
    "nights": 7,
    "padi_id": 11727,
    "padi_slug": "brother-islands-pg-hrg-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced"
    },
@@ -14152,7 +14390,8 @@
    "nights": 7,
    "padi_id": 11726,
    "padi_slug": "brother-islands-hrg-hrg-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced"
    },
@@ -14206,7 +14445,8 @@
    "nights": 7,
    "padi_id": 11732,
    "padi_slug": "north-program-pg-hrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -14267,7 +14507,8 @@
    "nights": 7,
    "padi_id": 22362,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-12",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -14330,7 +14571,8 @@
    "nights": 7,
    "padi_id": 22480,
    "padi_slug": "north-safaga-area-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14393,7 +14635,8 @@
    "nights": 7,
    "padi_id": 22481,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghal-6",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14455,7 +14698,8 @@
    "nights": 7,
    "padi_id": 23439,
    "padi_slug": "daedalus-rocky-st-johns-port-ghalib-port-ghalib-3",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -14517,7 +14761,8 @@
    "nights": 7,
    "padi_id": 22482,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-7",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -14582,7 +14827,8 @@
    "nights": 7,
    "padi_id": 22365,
    "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14646,7 +14892,8 @@
    "nights": 7,
    "padi_id": 22364,
    "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -14712,7 +14959,8 @@
    "nights": 7,
    "padi_id": 22479,
    "padi_slug": "north-tiran-dahab-hurghada-hurghada-7-nights-6",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14776,7 +15024,8 @@
    "nights": 7,
    "padi_id": 22366,
    "padi_slug": "north-wrecks-reefs-hurghada-hurghada-7-night-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14840,7 +15089,8 @@
    "nights": 7,
    "padi_id": 22363,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-13",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -14896,7 +15146,8 @@
    "nights": 7,
    "padi_id": 16882,
    "padi_slug": "brothers-daedalus-elphinstone-p",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -14952,7 +15203,8 @@
    "nights": 7,
    "padi_id": 16883,
    "padi_slug": "deep-south-hurghada-hurghada",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -15008,7 +15260,8 @@
    "nights": 7,
    "padi_id": 16886,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -15064,7 +15317,8 @@
    "nights": 7,
    "padi_id": 23437,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-hurgha-6",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -15122,7 +15376,8 @@
    "nights": 7,
    "padi_id": 17065,
    "padi_slug": "daedalus-zabargad-rocky-island-hurghada-port-ghali",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -15180,7 +15435,8 @@
    "nights": 7,
    "padi_id": 17062,
    "padi_slug": "daedalus-zabargad-rocky-island-port-ghalib-port-gh",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 25,
@@ -15234,7 +15490,8 @@
    "nights": 7,
    "padi_id": 23438,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -15292,7 +15549,8 @@
    "nights": 7,
    "padi_id": 17064,
    "padi_slug": "escorted-get-wrecked-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -15349,7 +15607,8 @@
    "nights": 7,
    "padi_id": 16879,
    "padi_slug": "north-brothers-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -15408,7 +15667,8 @@
    "nights": 7,
    "padi_id": 19227,
    "padi_slug": "north-safaga-hurghada-hurghada-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -15465,7 +15725,8 @@
    "nights": 7,
    "padi_id": 16880,
    "padi_slug": "north-dahab-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -15522,7 +15783,8 @@
    "nights": 7,
    "padi_id": 16881,
    "padi_slug": "north-wrecks-reefs-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -15576,7 +15838,8 @@
    "nights": 7,
    "padi_id": 22758,
    "padi_slug": "bde-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 10
@@ -15631,7 +15894,8 @@
    "nights": 7,
    "padi_id": 22761,
    "padi_slug": "north-wrecks-ras-mohamed-tiran-hurghada-hurghada-7",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 10
@@ -15686,7 +15950,8 @@
    "nights": 4,
    "padi_id": 21698,
    "padi_slug": "brothers-light-marsa-alam-hurghada-4-nights",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -15743,7 +16008,8 @@
    "nights": 3,
    "padi_id": 21685,
    "padi_slug": "mini-wrecks-and-nature-hurghada-hurghada-5-nights",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -15799,7 +16065,8 @@
    "nights": 3,
    "padi_id": 21696,
    "padi_slug": "daedalus-light-marsa-alam-marsa-alam-4-nights",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -15857,7 +16124,8 @@
    "nights": 7,
    "padi_id": 21681,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-brother",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -15916,7 +16184,8 @@
    "nights": 7,
    "padi_id": 21683,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -15973,7 +16242,8 @@
    "nights": 4,
    "padi_id": 21687,
    "padi_slug": "wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohamed",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -16030,7 +16300,8 @@
    "nights": 7,
    "padi_id": 21697,
    "padi_slug": "daedalus-light-marsa-alam-marsa-alam-4-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16087,7 +16358,8 @@
    "nights": 7,
    "padi_id": 21777,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-5",
-   "ports": "Hurghada - Marsa Alam",
+   "port_from": "Hurghada",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16144,7 +16416,8 @@
    "nights": 7,
    "padi_id": 21682,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-2",
-   "ports": "Marsa Alam - Hurghada",
+   "port_from": "Marsa Alam",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16203,7 +16476,8 @@
    "nights": 7,
    "padi_id": 23231,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-7",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16261,7 +16535,8 @@
    "nights": 7,
    "padi_id": 23271,
    "padi_slug": "sharks-dolphins-marsa-alam-marsa-alam-7-nights",
-   "ports": "Marsa Alam - Hurghada",
+   "port_from": "Marsa Alam",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16319,7 +16594,8 @@
    "nights": 7,
    "padi_id": 21699,
    "padi_slug": "brothers-light-marsa-alam-marsa-alam-4-nights",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16376,7 +16652,8 @@
    "nights": 7,
    "padi_id": 21689,
    "padi_slug": "wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohame-2",
-   "ports": "Hurghada - Marsa Alam",
+   "port_from": "Hurghada",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16433,7 +16710,8 @@
    "nights": 7,
    "padi_id": 23227,
    "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-h-2",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16490,7 +16768,8 @@
    "nights": 7,
    "padi_id": 21695,
    "padi_slug": "south-parks-zabargad-rocky-saint-johns-sataya-mars",
-   "ports": "Marsa Alam - Hurghada",
+   "port_from": "Marsa Alam",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16547,7 +16826,8 @@
    "nights": 7,
    "padi_id": 21690,
    "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-hur",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16604,7 +16884,8 @@
    "nights": 7,
    "padi_id": 23228,
    "padi_slug": "sharks-obsession-brothers-daedalus-elphinstone-h-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16661,7 +16942,8 @@
    "nights": 7,
    "padi_id": 21693,
    "padi_slug": "super-diversity-daedalus-saint-johns-sataya-marsa",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16720,7 +17002,8 @@
    "nights": 7,
    "padi_id": 21684,
    "padi_slug": "exploring-north-abu-nuhas-ss-thistlegorm-ras-moham",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16779,7 +17062,8 @@
    "nights": 7,
    "padi_id": 23229,
    "padi_slug": "southern-charm-daedalus-zabargad-rocky-island-sata",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16836,7 +17120,8 @@
    "nights": 7,
    "padi_id": 21692,
    "padi_slug": "exploring-south-zabargad-rocky-saint-johns-sataya",
-   "ports": "Marsa Alam - Marsa Alam",
+   "port_from": "Marsa Alam",
+   "port_to": "Marsa Alam",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16893,7 +17178,8 @@
    "nights": 7,
    "padi_id": 21686,
    "padi_slug": "red-sea-charm-abu-nuhas-ss-thistlegorm-the-broth-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -16953,7 +17239,8 @@
    "nights": 7,
    "padi_id": 15337,
    "padi_slug": "north-brothers-daedalus-elphinstone-safaga-hurghad",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17011,7 +17298,8 @@
    "nights": 7,
    "padi_id": 23429,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-23",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17069,7 +17357,8 @@
    "nights": 7,
    "padi_id": 15281,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-ghalib-7-ni",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17127,7 +17416,8 @@
    "nights": 7,
    "padi_id": 14590,
    "padi_slug": "brothers-daedalus-elphinstone-ghalib-ghalib-7-nigh",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17187,7 +17477,8 @@
    "nights": 7,
    "padi_id": 14595,
    "padi_slug": "daedalus-rocky-island-zabargad-port-ghalib-port-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17247,7 +17538,8 @@
    "nights": 7,
    "padi_id": 14591,
    "padi_slug": "brothers-safaga-port-ghalib-hurghada-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17310,7 +17602,8 @@
    "nights": 7,
    "padi_id": 14599,
    "padi_slug": "southern-route-fury-shoals-port-ghalib-port-ghalib",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17366,7 +17659,8 @@
    "nights": 7,
    "padi_id": 14593,
    "padi_slug": "brothers-safaga-hurghada-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17426,7 +17720,8 @@
    "nights": 7,
    "padi_id": 14598,
    "padi_slug": "rocky-island-zabargad-st-johns-port-ghalib-port-gh",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17482,7 +17777,8 @@
    "nights": 7,
    "padi_id": 14867,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-2",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17542,7 +17838,8 @@
    "nights": 7,
    "padi_id": 14597,
    "padi_slug": "north-tirana-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17599,7 +17896,8 @@
    "nights": 7,
    "padi_id": 14592,
    "padi_slug": "brothers-safaga-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced"
    },
@@ -17660,7 +17958,8 @@
    "nights": 7,
    "padi_id": 14594,
    "padi_slug": "classical-north-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17720,7 +18019,8 @@
    "nights": 7,
    "padi_id": 14600,
    "padi_slug": "southern-route-st-johns-port-ghalib-port-ghalib-7",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water"
    },
@@ -17769,7 +18069,8 @@
    "nights": 7,
    "padi_id": 21675,
    "padi_slug": "north-brothers-port-ghalib-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -17820,7 +18121,8 @@
    "nights": 4,
    "padi_id": 22729,
    "padi_slug": "hurghada-north-4-nights-5-days-4-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 5
@@ -17868,7 +18170,8 @@
    "nights": 4,
    "padi_id": 22824,
    "padi_slug": "hurghada-north-hurghada-hurghada-4-nights4-days-di",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -17912,7 +18215,8 @@
    "nights": 7,
    "padi_id": 17070,
    "padi_slug": "fury-shoals-elphinstone-port-ghalib-port-ghalib-7",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -17963,7 +18267,8 @@
    "nights": 10,
    "padi_id": 22865,
    "padi_slug": "best-of-north-brothers-hurghada-port-ghalib-7-nigh",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18011,7 +18316,8 @@
    "nights": 7,
    "padi_id": 23068,
    "padi_slug": "best-of-north-strait-of-tiran-brothers-hurghada-hu",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18057,7 +18363,8 @@
    "nights": 7,
    "padi_id": 15056,
    "padi_slug": "rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18103,7 +18410,8 @@
    "nights": 7,
    "padi_id": 14530,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-gha",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18151,7 +18459,8 @@
    "nights": 14,
    "padi_id": 17259,
    "padi_slug": "strait-of-tiran-best-of-north-wracks-hurghada-hurg",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18198,7 +18507,8 @@
    "nights": 7,
    "padi_id": 12034,
    "padi_slug": "brothers-daedalus-elphinstone-7-nights-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18244,7 +18554,8 @@
    "nights": 14,
    "padi_id": 14084,
    "padi_slug": "daedalus-rockyzabargad-elphinstone-port-ghalib-por",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18290,7 +18601,8 @@
    "nights": 7,
    "padi_id": 17258,
    "padi_slug": "daedalus-elphinstone-brothers-best-of-north-port-g",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18337,7 +18649,8 @@
    "nights": 7,
    "padi_id": 14016,
    "padi_slug": "st-johns-fury-shoals-daedalus-elphinstone-port-gha",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18382,7 +18695,8 @@
    "nights": 11,
    "padi_id": 17257,
    "padi_slug": "rocky-island-elba-riffe-st-johns-elphinstone-port",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18427,7 +18741,8 @@
    "nights": 7,
    "padi_id": 17255,
    "padi_slug": "north-wracks-hurghada-hurghada-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18472,7 +18787,8 @@
    "nights": 7,
    "padi_id": 17069,
    "padi_slug": "st-johns-elphinstone-port-ghalib-port-ghalib-7-nig",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18521,7 +18837,8 @@
    "nights": 11,
    "padi_id": 23069,
    "padi_slug": "best-of-north-wracks-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18565,7 +18882,8 @@
    "nights": 7,
    "padi_id": 14018,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-port-ghalib",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18608,7 +18926,8 @@
    "nights": 3,
    "padi_id": 16161,
    "padi_slug": "st-johns-sataya-hamata-hamata-3-nights",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -18651,7 +18970,8 @@
    "nights": 3,
    "padi_id": 21275,
    "padi_slug": "mini-safari-wadi-el-gemal-hamata-hamata-3-nights",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 25,
@@ -18700,7 +19020,8 @@
    "nights": 7,
    "padi_id": 22434,
    "padi_slug": "sataya-dolphin-reef-hamata-hamata-2-days-1-night",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -18752,7 +19073,8 @@
    "nights": 7,
    "padi_id": 23432,
    "padi_slug": "fury-shoals-hamata-hamata-7-nights-8-days",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water"
    },
@@ -18796,7 +19118,8 @@
    "nights": 7,
    "padi_id": 22437,
    "padi_slug": "st-johns-reef-mini-safari-trip-hamata-hamata-4-day",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water"
    },
@@ -18840,7 +19163,8 @@
    "nights": 2,
    "padi_id": 23431,
    "padi_slug": "overnight-sataya-hamata-hamata-1-night-2-days",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water"
    },
@@ -18884,7 +19208,8 @@
    "nights": 1,
    "padi_id": 22449,
    "padi_slug": "st-johns-reef-mini-safari-trip-hamata-hamata-4-d-2",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water"
    },
@@ -18950,7 +19275,8 @@
    "nights": 7,
    "padi_id": 15571,
    "padi_slug": "bde-port-ghalib-hurghada-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19018,7 +19344,8 @@
    "nights": 7,
    "padi_id": 8798,
    "padi_slug": "bde-hurghada-2",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19086,7 +19413,8 @@
    "nights": 7,
    "padi_id": 15570,
    "padi_slug": "bde-the-golden-triangle-hurghada-hurghada-7-nigh-2",
-   "ports": "Port Ghalib - Hurghada Marina",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19155,7 +19483,8 @@
    "nights": 7,
    "padi_id": 15841,
    "padi_slug": "souakin-et-legends-port-soudan-port-soudan-7-night",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -19225,7 +19554,8 @@
    "nights": 7,
    "padi_id": 8806,
    "padi_slug": "souakin-et-legends-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -19294,7 +19624,8 @@
    "nights": 7,
    "padi_id": 8802,
    "padi_slug": "rocky-featuring-zabargad-and-daedalus-hurghada-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19361,7 +19692,8 @@
    "nights": 7,
    "padi_id": 15323,
    "padi_slug": "fury-shoal-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -19430,7 +19762,8 @@
    "nights": 10,
    "padi_id": 23330,
    "padi_slug": "premium-expedition-hurghada-hurghada-10-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19499,7 +19832,8 @@
    "nights": 10,
    "padi_id": 15324,
    "padi_slug": "the-golden-loop-brothers-north-hurghada-hurghada-7",
-   "ports": "Port Ghalib - Hurghada Marina",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19567,7 +19901,8 @@
    "nights": 7,
    "padi_id": 15326,
    "padi_slug": "north-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19635,7 +19970,8 @@
    "nights": 7,
    "padi_id": 15989,
    "padi_slug": "the-golden-loop-northbrother-hurghada-port-ghalib",
-   "ports": "Port Ghalib - Hurghada Marina",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -19705,7 +20041,8 @@
    "nights": 7,
    "padi_id": 22825,
    "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 10
@@ -19775,7 +20112,8 @@
    "nights": 7,
    "padi_id": 22989,
    "padi_slug": "fury-shoal-port-ghalib-port-ghalib-7-nights-5",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -19833,7 +20171,8 @@
    "nights": 7,
    "padi_id": 21376,
    "padi_slug": "northern-red-sea-the-best-of-wreck-diving-hurghada",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "open_water",
     "recommended_logged_dives": 50
@@ -19890,7 +20229,8 @@
    "nights": 7,
    "padi_id": 13994,
    "padi_slug": "northern-red-sea-ras-mohamed-and-straits-of-tiran",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "open_water",
     "recommended_logged_dives": 50
@@ -19948,7 +20288,8 @@
    "nights": 7,
    "padi_id": 16768,
    "padi_slug": "northern-red-sea-ras-mohamed-and-straits-of-tira-2",
-   "ports": "Hurghada Marina - Hurghada Marina",
+   "port_from": "Hurghada Marina",
+   "port_to": "Hurghada Marina",
    "requirements": {
     "min_level": "open_water",
     "recommended_logged_dives": 50
@@ -20027,7 +20368,8 @@
    "nights": 9,
    "padi_id": 23320,
    "padi_slug": "brothersdaedaluselphinstone-port-ghalib-hurghada-9",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20106,7 +20448,8 @@
    "nights": 9,
    "padi_id": 23319,
    "padi_slug": "brothersdaedaluselphinstone-port-ghalib-port-gha-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20180,7 +20523,8 @@
    "nights": 7,
    "padi_id": 16500,
    "padi_slug": "brothersdaedaluselphinstone-port-ghalib-port-ghali",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20259,7 +20603,8 @@
    "nights": 7,
    "padi_id": 16965,
    "padi_slug": "deep-south-egypt-port-ghalib-port-ghalib-7-night-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20339,7 +20684,8 @@
    "nights": 9,
    "padi_id": 23321,
    "padi_slug": "st-johns-daedalus-port-ghalib-port-ghalib-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20419,7 +20765,8 @@
    "nights": 7,
    "padi_id": 16501,
    "padi_slug": "st-john-daedalus-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20473,7 +20820,8 @@
    "nights": 9,
    "padi_id": 22870,
    "padi_slug": "deep-south-elba-reef-hamata-hamata-7-nights",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20527,7 +20875,8 @@
    "nights": 9,
    "padi_id": 22871,
    "padi_slug": "deep-south-rocky-zabargad-islands-hamata-hamata-7",
-   "ports": "Hamata - Hamata",
+   "port_from": "Hamata",
+   "port_to": "Hamata",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 10
@@ -20588,7 +20937,8 @@
    "nights": 8,
    "padi_id": 15407,
    "padi_slug": "north-sharm-el-sheikh-sharm-el-sheikh-7-nights-2",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water"
    },
@@ -20647,7 +20997,8 @@
    "nights": 7,
    "padi_id": 15406,
    "padi_slug": "north-sharm-el-sheikh-sharm-el-sheikh-7-nights",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water"
    },
@@ -20698,7 +21049,8 @@
    "nights": 3,
    "padi_id": 22867,
    "padi_slug": "sharm-ras-mohamed-brothers-islands-sharm-el-sheikh",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -20754,7 +21106,8 @@
    "nights": 7,
    "padi_id": 22726,
    "padi_slug": "north-route-sharm-el-sheikh-sharm-el-sheikh-7n",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -20812,7 +21165,8 @@
    "nights": 7,
    "padi_id": 22866,
    "padi_slug": "north-route-sharm-el-sheikh-sharm-el-sheikh-7-nigh",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -20867,7 +21221,8 @@
    "nights": 10,
    "padi_id": 21933,
    "padi_slug": "brothers-deadalus-rock-zabarged-elba-reef-port-gha",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -20917,7 +21272,8 @@
    "nights": 7,
    "padi_id": 21934,
    "padi_slug": "borthers-deadalus-rocky-stjohn-elba-itinerary-port",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -20970,7 +21326,8 @@
    "nights": 7,
    "padi_id": 17383,
    "padi_slug": "deadalus-sudan-border-elba-reef-port-ghalib-port-g",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21020,7 +21377,8 @@
    "nights": 14,
    "padi_id": 17709,
    "padi_slug": "deadalus-sudan-border-elba-reef-port-ghalib-port-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21070,7 +21428,8 @@
    "nights": 10,
    "padi_id": 23356,
    "padi_slug": "egypt-elba-reef-elba-borders-port-ghalib-port-ghal",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21123,7 +21482,8 @@
    "nights": 7,
    "padi_id": 16784,
    "padi_slug": "brothers-deadalus-rocky-st-john-port-ghalib-port-g",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21168,7 +21528,8 @@
    "nights": 7,
    "padi_id": 16927,
    "padi_slug": "special-wreck-hurghada-hurghada-6-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21213,7 +21574,8 @@
    "nights": 7,
    "padi_id": 18402,
    "padi_slug": "special-wreck-hurghada-hurghada-6-nights-2",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21273,7 +21635,8 @@
    "nights": 7,
    "padi_id": 21630,
    "padi_slug": "north-brothers-elphinstone-hurghada-hurghada-7-nig",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21332,7 +21695,8 @@
    "nights": 7,
    "padi_id": 14715,
    "padi_slug": "daedalus-brothers-elphinstone-abu-nuhas-rosalie-mo",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21391,7 +21755,8 @@
    "nights": 7,
    "padi_id": 12097,
    "padi_slug": "sudan-north-7-nights-2",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21452,7 +21817,8 @@
    "nights": 7,
    "padi_id": 19726,
    "padi_slug": "brothers-daedalus-elphinstone-port-ghalib-port-g-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21513,7 +21879,8 @@
    "nights": 7,
    "padi_id": 22862,
    "padi_slug": "red-sea-classic-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21575,7 +21942,8 @@
    "nights": 7,
    "padi_id": 12101,
    "padi_slug": "mp-north-brothers-daedalus-elphinstone-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21638,7 +22006,8 @@
    "nights": 7,
    "padi_id": 12100,
    "padi_slug": "deep-southst-johns-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -21703,7 +22072,8 @@
    "nights": 7,
    "padi_id": 21913,
    "padi_slug": "brother-islands-elphinstone-hurghada-hurghada-7-ni",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21765,7 +22135,8 @@
    "nights": 7,
    "padi_id": 15146,
    "padi_slug": "north-wrecks-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -21829,7 +22200,8 @@
    "nights": 7,
    "padi_id": 22861,
    "padi_slug": "daedalus-fury-shoals-elphinstone-hurghada-hurghada",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21894,7 +22266,8 @@
    "nights": 7,
    "padi_id": 12102,
    "padi_slug": "north-wrecks-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -21959,7 +22332,8 @@
    "nights": 7,
    "padi_id": 14811,
    "padi_slug": "marine-park-north-brothers-daedalus-elphinstone-3",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22023,7 +22397,8 @@
    "nights": 7,
    "padi_id": 19727,
    "padi_slug": "daedalusst-johnselphinstone-port-ghalib-port-ghali",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22068,7 +22443,8 @@
    "nights": 7,
    "padi_id": 23377,
    "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22113,7 +22489,8 @@
    "nights": 7,
    "padi_id": 23383,
    "padi_slug": "mp-south-classic-zabargadrockyst-johns-prg-prg-7-n",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22156,7 +22533,8 @@
    "nights": 7,
    "padi_id": 23375,
    "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water"
    },
@@ -22197,7 +22575,8 @@
    "nights": 7,
    "padi_id": 23384,
    "padi_slug": "deep-southst-johns-prg-prg-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22242,7 +22621,8 @@
    "nights": 7,
    "padi_id": 23376,
    "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22287,7 +22667,8 @@
    "nights": 7,
    "padi_id": 23390,
    "padi_slug": "mp-north-brothersdaedaluselphinstone-hrg-hrg-7-nig",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22332,7 +22713,8 @@
    "nights": 7,
    "padi_id": 23391,
    "padi_slug": "mp-north-brothers-daedalus-elphinstone-hrg-prg-7-n",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22380,7 +22762,8 @@
    "nights": 7,
    "padi_id": 23380,
    "padi_slug": "red-sea-classic-hrg-prg-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22428,7 +22811,8 @@
    "nights": 7,
    "padi_id": 23381,
    "padi_slug": "mp-south-classic-zabargadrockyst-johns-hrg-prg-7-n",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22475,7 +22859,8 @@
    "nights": 7,
    "padi_id": 23371,
    "padi_slug": "north-wrecks-hrg-hrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22523,7 +22908,8 @@
    "nights": 7,
    "padi_id": 23373,
    "padi_slug": "northstrait-of-tiran-hrg-hrg-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22571,7 +22957,8 @@
    "nights": 7,
    "padi_id": 23387,
    "padi_slug": "northbrotherselphinstone-prg-hrg-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22619,7 +23006,8 @@
    "nights": 7,
    "padi_id": 23386,
    "padi_slug": "strait-of-tirandahab-hrg-hrg-7-nights-5",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22665,7 +23053,8 @@
    "nights": 7,
    "padi_id": 23372,
    "padi_slug": "north-wrecks-hrg-hrg-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22713,7 +23102,8 @@
    "nights": 7,
    "padi_id": 23379,
    "padi_slug": "north-wrecks-safaga-hrg-prg-7-nights",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22761,7 +23151,8 @@
    "nights": 7,
    "padi_id": 23389,
    "padi_slug": "red-sea-classic-hrg-prg-7-nights-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22809,7 +23200,8 @@
    "nights": 10,
    "padi_id": 23388,
    "padi_slug": "northbrotherselphinstone-prg-hrg-7-nights-2",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22848,7 +23240,8 @@
    "nights": 7,
    "padi_id": 23385,
    "padi_slug": "fury-shoals-prg-prg-7-nights",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -22893,7 +23286,8 @@
    "nights": 7,
    "padi_id": 23374,
    "padi_slug": "northstrait-of-tiran-hrg-hrg-7-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 20,
@@ -22954,7 +23348,8 @@
    "nights": 7,
    "padi_id": 18436,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-10",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -23014,7 +23409,8 @@
    "nights": 3,
    "padi_id": 20713,
    "padi_slug": "reefs-wrecks-gouna-gouna-3-nights-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23074,7 +23470,8 @@
    "nights": 3,
    "padi_id": 21554,
    "padi_slug": "reefs-wrecks-hurghada-hurghada-3-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23134,7 +23531,8 @@
    "nights": 7,
    "padi_id": 21611,
    "padi_slug": "ras-mohamed-wrecks-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23195,7 +23593,8 @@
    "nights": 7,
    "padi_id": 17072,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-9",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23256,7 +23655,8 @@
    "nights": 7,
    "padi_id": 22950,
    "padi_slug": "north-tiran-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23316,7 +23716,8 @@
    "nights": 7,
    "padi_id": 17075,
    "padi_slug": "north-ras-mohamed-tiran-hurghada-hurghada-7-nigh-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23372,7 +23773,8 @@
    "nights": 7,
    "padi_id": 20712,
    "padi_slug": "reefs-wrecks-gouna-gouna-3-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23428,7 +23830,8 @@
    "nights": 7,
    "padi_id": 22951,
    "padi_slug": "padi-training-safari-red-sea",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "title": "\ud83d\udc49 PADI COURSES  Training Safari \ud83d\udca5 \"Dive, Learn,Live On board\"\u2013  The Ultimate Zero to Advanced  Dive Week\" (Hurghada - Hurghada) 7 Nights"
   },
   "snefro-love::Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh)": {
@@ -23485,7 +23888,8 @@
    "nights": 4,
    "padi_id": 23266,
    "padi_slug": "sinai-classic-sharm-el-sheikh-sharm-el-sheikh-7-7",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23547,7 +23951,8 @@
    "nights": 7,
    "padi_id": 9213,
    "padi_slug": "sinai-classic-5",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 15
@@ -23606,7 +24011,8 @@
    "nights": 3,
    "padi_id": 15669,
    "padi_slug": "ras-mohamed-thistlegorm-sharm-el-sheikh-sharm-el-s",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23667,7 +24073,8 @@
    "nights": 4,
    "padi_id": 14231,
    "padi_slug": "mini-ras-mohamed-thistlegorm-sharm-el-sheikh-sharm",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23728,7 +24135,8 @@
    "nights": 7,
    "padi_id": 9193,
    "padi_slug": "deep-north",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23790,7 +24198,8 @@
    "nights": 7,
    "padi_id": 9209,
    "padi_slug": "sinai-classic-4",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 15
@@ -23853,7 +24262,8 @@
    "nights": 7,
    "padi_id": 15818,
    "padi_slug": "sinai-wrecks-reefs-sharm-el-sheikh-sharm-el-sheikh",
-   "ports": "New Marina Sharm El Sheikh (El Wataneya) - New Marina Sharm El Sheikh (El Wataneya)",
+   "port_from": "New Marina Sharm El Sheikh (El Wataneya)",
+   "port_to": "New Marina Sharm El Sheikh (El Wataneya)",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -23908,7 +24318,8 @@
    "nights": 7,
    "padi_id": 22032,
    "padi_slug": "best-of-sinai-sharm-el-sheikh-sharm-el-sheikh-7-ni",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -23947,7 +24358,8 @@
    "nights": 7,
    "padi_id": 7037,
    "padi_slug": "deep-south-and-st-johns",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -23986,7 +24398,8 @@
    "nights": 7,
    "padi_id": 7042,
    "padi_slug": "north-featuring-dahab",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24025,7 +24438,8 @@
    "nights": 7,
    "padi_id": 13778,
    "padi_slug": "far-south-expedition-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24069,7 +24483,8 @@
    "nights": 7,
    "padi_id": 21518,
    "padi_slug": "north-hurghada-hurghada-7-nights-10",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -24115,7 +24530,8 @@
    "nights": 7,
    "padi_id": 16031,
    "padi_slug": "deadalus-rocky-zabargad-hurghada-hurghada-7-nigh-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24161,7 +24577,8 @@
    "nights": 7,
    "padi_id": 7038,
    "padi_slug": "north-and-brothers-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 50,
@@ -24206,7 +24623,8 @@
    "nights": 7,
    "padi_id": 16033,
    "padi_slug": "north-brothers-port-ghalib-port-ghalib-7-nights",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 50,
@@ -24253,7 +24671,8 @@
    "nights": 7,
    "padi_id": 14549,
    "padi_slug": "classic-sudan-port-sudan-port-sudan-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -24299,7 +24718,8 @@
    "nights": 7,
    "padi_id": 7039,
    "padi_slug": "north-3",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 30,
@@ -24343,7 +24763,8 @@
    "nights": 7,
    "padi_id": 7041,
    "padi_slug": "brothers-featuring-daedalus-and-elphinstone",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24396,7 +24817,8 @@
    "nights": 7,
    "padi_id": 23418,
    "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24448,7 +24870,8 @@
    "nights": 7,
    "padi_id": 23410,
    "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24499,7 +24922,8 @@
    "nights": 7,
    "padi_id": 23420,
    "padi_slug": "treasures-of-the-north-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24551,7 +24975,8 @@
    "nights": 7,
    "padi_id": 23421,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-21",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24602,7 +25027,8 @@
    "nights": 7,
    "padi_id": 23422,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-22",
-   "ports": "Port Ghalib - Hurghada",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 50,
@@ -24654,7 +25080,8 @@
    "nights": 7,
    "padi_id": 23416,
    "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-4",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24705,7 +25132,8 @@
    "nights": 7,
    "padi_id": 23415,
    "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-3",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24759,7 +25187,8 @@
    "nights": 7,
    "padi_id": 23417,
    "padi_slug": "best-of-tiran-hurghada-hurghada-7-nights-4",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24813,7 +25242,8 @@
    "nights": 7,
    "padi_id": 23424,
    "padi_slug": "the-golden-loop-northbrothersafaga-hurghada-hurgha",
-   "ports": "Hurghada - Port Ghalib",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24868,7 +25298,8 @@
    "nights": 7,
    "padi_id": 23419,
    "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-5",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24921,7 +25352,8 @@
    "nights": 7,
    "padi_id": 23409,
    "padi_slug": "zabargad-rocky-st-johns-elphinstone-port-ghalib-po",
-   "ports": "Port Ghalib - Port Ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -24969,7 +25401,8 @@
    "nights": 7,
    "padi_id": 23063,
    "padi_slug": "north-and-brothers-hurghada-hurghada-7-nights-7",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -25017,7 +25450,8 @@
    "nights": 7,
    "padi_id": 23062,
    "padi_slug": "northern-reach-hurghada-hurghada-7-nights",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -25067,7 +25501,8 @@
    "nights": 7,
    "padi_id": 23061,
    "padi_slug": "northern-wrecks-and-reefs-hurghada-hurghada-7-ni-2",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -25116,7 +25551,8 @@
    "nights": 7,
    "padi_id": 23060,
    "padi_slug": "northern-wrecks-and-reefs-hurghada-hurghada-7-nigh",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 20,
@@ -25167,7 +25603,8 @@
    "nights": 7,
    "padi_id": 23064,
    "padi_slug": "brothers-daedalus-elphinstone-hurghada-hurghada-18",
-   "ports": "Hurghada - Hurghada",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
    "requirements": {
     "min_level": "advanced",
     "min_logged_dives": 30,
@@ -25215,7 +25652,8 @@
    "nights": 7,
    "padi_id": 15232,
    "padi_slug": "north-red-sea-route-sharm-el-sheikh-sharm-el-she-3",
-   "ports": "Sharm El Sheikh - Sharm El Sheikh",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
    "requirements": {
     "min_level": "open_water",
     "min_logged_dives": 15
