@@ -1687,3 +1687,68 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
     def test_the_toolbar_prints_the_build(self) -> None:
         app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
         self.assertIn('" · built " + (D.meta.built || D.meta.generated)', app)
+
+
+class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
+    """Rules that live in `app.js` and have no Python to test, so the guard is
+    that the built page still contains them.
+
+    Two of them, and they are the same rule twice. **One date over two sellers
+    dates half of them wrong**: `berths_read` and `padi_berths_read` are two
+    crawls two days apart, and the sale marks stamped the first over both --
+    on 124 rows resting partly on the second and 2 resting entirely on it.
+    And **the two sellers' offers belong on one row**: they were drawn as two
+    tables sharing no column, ten boats in each with no way to read across, and
+    a merge that keys on either seller's list alone drops the other's.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def source(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def test_a_sale_mark_dates_each_seller_separately(self):
+        app = self.source()
+        self.assertIn("function namedReadings(", app)
+        self.assertIn("namedReadings(d.sale.sellers)", app)
+        self.assertNotIn(
+            'var read = D.meta.berths_read ? ", read "', app,
+            "the sale mark is stamping one crawl's date over both sellers again",
+        )
+
+    def test_the_page_draws_one_table_for_both_sellers(self):
+        app = self.source()
+        self.assertIn("function offersTable(", app)
+        for gone in ("function fleetTable(", "function dealsTable("):
+            self.assertNotIn(
+                gone, app,
+                f"{gone} is back; the two sellers' offers are two tables again",
+            )
+
+    def test_the_merge_keeps_a_boat_only_one_seller_names(self):
+        """The union, not the intersection.
+
+        Ten boats fill both halves today, so keying on the fleet rows alone
+        passes every test and silently drops a PADI offer for a boat no ladder
+        has caught -- out of the panel headed "what is discounted", which is
+        this site's own reported failure in somebody else.
+        """
+        app = self.source()
+        block = re.search(r"function offerRows\((.*?)\n  \}", app, re.S)
+        assert block, "offerRows() not found in app.js"
+        self.assertIn("if (!byBoat[o.boat])", block.group(1))
+
+    def test_the_panel_states_what_it_could_not_read(self):
+        app = self.source()
+        self.assertIn("function coverageNote(", app)
+        for field in ("dropped", "unread", "banner_unsupported"):
+            with self.subTest(field=field):
+                self.assertIn("coverage." + field, app)
+
+    def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
+        """One figure in that column means three different things -- both
+        sellers quote it, PADI quotes it and cannot be totalled, or nobody
+        else was asked -- and they printed identically."""
+        app = self.source()
+        self.assertIn("function whoAdvertised(", app)
+        self.assertIn("whoAdvertised(d, row)", app)

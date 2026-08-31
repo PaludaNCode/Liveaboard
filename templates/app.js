@@ -268,8 +268,10 @@
      fare nobody marked down. */
   function saleTag(d) {
     if (!d.sale) return "";
-    var who = (d.sale.sellers || []).map(function (s) { return SELLER_NAMES[s] || "a seller"; });
-    var read = D.meta.berths_read ? ", read " + D.meta.berths_read : "";
+    /* Each seller under its own reading date, rather than one date appended to
+       a list of them: the two books are read by two jobs two days apart, and a
+       sale is exactly the kind of claim that expires between them. */
+    var who = namedReadings(d.sale.sellers);
     /* No percentage has two causes — the discounting seller is not the one
        whose fare this row prints, or the markdown rounds to nothing — and the
        row does not carry which. So the tooltip states what is true of both
@@ -277,15 +279,54 @@
     if (!d.sale.pct) {
       return '<span class="sale-mark" title="' +
         esc("On sale through " + who.join(" and ") +
-            ", with no percentage stated against the fare on this row" + read) +
+            ", with no percentage stated against the fare on this row") +
         '">on sale</span>';
     }
     /* "Down from" only where there is a figure to be down from. `was` is
        withheld when the seller stated no currency, and a converted amount
        built from a missing one printed "€NaN" into the tooltip. */
     var title = (d.sale.was ? "Down from " + eur(d.sale.was) + ", per " : "Marked down by ") +
-      who.join(" and ") + read;
+      who.join(" and ");
     return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
+  }
+
+  /* Why the Advertised column is one figure rather than two.
+
+     A single number there means three different things, and until this mark
+     they printed identically: both sellers quote it (155 rows), only one of
+     them has been asked (513 rows), or PADI quotes the sailing too but does not
+     disclose enough of its own bill for the row to price it, so its berth price
+     exists and no column shows it (454 rows). "€2,371" agreed by two sellers
+     and "€2,371" from the only one anybody asked are not the same claim, and a
+     reader had to reach column seventeen to tell them apart.
+
+     Marked, not columned, and only on the two cases a reader can act on: the
+     Total already carries `2 sellers` for a span, and this says the same word
+     about the berth. The third case is the plain unmarked number, which is what
+     the rest of the page means by one seller.
+
+     Nothing here is recomputed: `d.padi` and `row.p` are the same two keys the
+     Total and the Seller column branch on. A second derivation would be a
+     second answer to "who priced this". */
+  function whoAdvertised(d, row) {
+    if (d.padi == null) return "";
+    if (row && row.p) {
+      /* Both bills add up, so the pair beside this is genuinely two sellers'
+         and the Total's own marker already says so. Saying it twice on one row
+         is noise. */
+      return "";
+    }
+    var same = Math.round(d.padi) === Math.round(d.base);
+    return '<span class="varies" title="' + esc(
+      same
+        ? "PADI Travel advertises this berth at the same price. It does not " +
+          "publish a complete set of required extras for this trip, so there " +
+          "is a second price and no second total — open the row for both."
+        : "PADI Travel advertises this berth at " + eur(d.padi) + ". It does " +
+          "not publish a complete set of required extras for this trip, so " +
+          "the two berth prices are not a comparison of two bills — open the " +
+          "row for what each seller does state."
+    ) + '">2 sellers</span>';
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -383,10 +424,26 @@
     return null;
   }
 
-  /* The day a seller's counts were read. Two crawls, two days, and the date is
-     the whole of what makes a count a claim rather than a fact. */
-  function readOn(block) {
-    return block[BLOCK_SELLER] === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
+  /* The day a seller's book was read. Two crawls, two days, and the date is
+     the whole of what makes a count or a markdown a claim rather than a fact. */
+  function sellerRead(seller) {
+    return seller === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
+  }
+  function readOn(block) { return sellerRead(block[BLOCK_SELLER]); }
+
+  /* "liveaboard.com (28 Aug) and padi.com (30 Aug)" — every seller in a list,
+     each under its own reading date.
+
+     One date over two sellers dates half of them wrong. The berth counts have
+     obeyed that since they were published; the sale marks did not, and stamped
+     the cabin crawl's day on 124 rows whose evidence is partly PADI's book from
+     two days later and on 2 that are entirely it. Same fact, same rule, and now
+     the same function. */
+  function namedReadings(sellers) {
+    return (sellers || []).map(function (s) {
+      var day = sellerRead(s);
+      return (SELLER_NAMES[s] || "a seller") + (day ? " (" + shortDate(day) + ")" : "");
+    });
   }
 
   /* The cheapest rung anyone can still book. A minimum over prices Python
@@ -655,8 +712,8 @@
       },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return eur(d.base) + saleTag(d);
-        return sellerPair(b.baseLo, b.baseHi) + saleTag(d);
+        if (!b) return eur(d.base) + whoAdvertised(d, row) + saleTag(d);
+        return sellerPair(b.baseLo, b.baseHi) + whoAdvertised(d, row) + saleTag(d);
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -1695,90 +1752,240 @@
     if (deals.first_reading) line += " · PADI's listing, first reading";
     else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
     else if (deals.previous) line += " · nothing moved on PADI since " + shortDate(deals.previous);
-    return "On sale · " + line + " · read " + shortDate(deals.read);
+    /* The oldest day anything under this heading was read, not PADI's listing
+       date. Three books feed the line — two crawls and a listing — and the
+       freshest of them was standing for all of it, which dated the whole panel
+       two days newer than half its evidence. A summary is as fresh as its
+       stalest half; the table below states each seller's day on its own row. */
+    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read]
+      .filter(Boolean).sort();
+    return "On sale · " + line +
+      (days.length ? " · read " + shortDate(days[0]) : "");
   }
 
-  /* "20% off" where PADI states a percentage, and the money either way.
+  /* One row per boat, both sellers on it.
 
-     Its own word, not a percentage worked out from the two prices: a "Free
-     night(s)" offer takes nothing off the nightly rate and dividing one price
-     by the other would print it as a discount PADI never claimed. Where the
-     kind is a percentage the value is that percentage and is printed; where it
-     is not, the saving is the whole of what can be said. */
-  function offerOff(row) {
+     This was two tables. The left half — every discounted sailing, per boat —
+     came from the booking-page ladders; the right half was PADI's deals
+     listing. They answered complementary halves of one question and were drawn
+     as though they answered different questions: 22 boats with a window and no
+     money, sorted by name; 10 boats with money and no window, sorted by sail
+     date; ten boats in both and no way to read across. Discovery I was row 6 of
+     one without a price and row 8 of the other without a week.
+
+     The halves stay distinct because the claims are — a ladder says which weeks
+     are cut, a listing says one exemplar sailing and what it costs — and the
+     column group above them names whose is whose. What changes is that they
+     share a row, so the reader compares them by looking rather than by
+     remembering.
+
+     The union, not the intersection. Ten boats fill both halves today and it
+     would be easy to key the table on the fleet rows alone; a PADI offer for a
+     boat no ladder has caught would then vanish out of a panel headed "what is
+     discounted", which is this site's own reported failure in somebody else. */
+  var OFFER_GROUP = ["Sails", "Now", "Was", "Saving", "Offer"];
+
+  /* What comes off, in money. The percentage is not repeated here: it is in
+     the `Off` column of the same row, from the ladder that carries the whole
+     season rather than from one exemplar. The old table printed it three times
+     on a line — "20% off · €295" beside "Monthly Special 20% Off + Free
+     Nitrox" — and the third of those is PADI's own words and stays verbatim.
+
+     Where PADI's kind is not a percentage the money is the whole of what can
+     be said: a "Free night(s)" offer takes nothing off a nightly rate, and
+     dividing one price by the other would print a discount PADI never claimed. */
+  function offerSaving(row) {
     var saved = row.was - row.price;
-    if (row.kind === "Discount %" && row.value) {
-      return row.value + "% off · " + eur(saved);
-    }
-    return saved > 0 ? eur(saved) + " off" : (row.kind || "offer");
+    if (saved > 0) return eur(saved);
+    return row.kind || "offer";
   }
 
-  function dealRow(row) {
-    var tr = el("tr", null);
-    tr.appendChild(el("td", "d-when", shortDate(row.start) +
-      (row.nights ? " · " + row.nights + "n" : "")));
-
-    var boat = el("td", "d-boat");
-    if (row.url) {
-      var a = document.createElement("a");
-      a.href = row.url;
-      a.rel = "noopener";
-      a.target = "_blank";
-      a.textContent = row.boat_name;
-      /* The page the offer was read from, per row. A price whose source
-         cannot be opened is a price this site is asking to be taken on
-         trust, which is the thing it exists to object to. */
-      a.title = "The PADI Travel page this offer was read from";
-      boat.appendChild(a);
-    } else {
-      boat.textContent = row.boat_name;
+  /* PADI's half of a row, or five empty cells where PADI advertises nothing
+     for that boat. An empty cell is the honest statement — PADI publishes no
+     listing for it — where an absent row would say the boat is not discounted,
+     which the left half of the same line contradicts. */
+  function offerCells(tr, offer) {
+    if (!offer) {
+      OFFER_GROUP.forEach(function (_, n) {
+        tr.appendChild(el("td", n === 0 ? "d-none g-first" : "d-none", "—"));
+      });
+      return;
     }
-    tr.appendChild(boat);
+    tr.appendChild(el("td", "d-when g-first", shortDate(offer.start) +
+      (offer.nights ? " · " + offer.nights + "n" : "")));
 
-    /* Money before the offer's name, because the name is the longest column
-       and a phone reads this table left to right through a 390px window: with
-       the name third, every price on it sat off the right-hand edge behind a
-       horizontal scroll. What it costs is the column somebody came for. */
-    tr.appendChild(el("td", "d-now", eur(row.price)));
+    /* The money PADI quotes, with the figure it quoted it in behind it. That
+       had a column of its own and was a dash on eight of ten rows, because
+       most of this fleet is priced in euro already; as a title it costs no
+       width and is still one hover from anybody checking the conversion. */
+    var now = el("td", "d-now", eur(offer.price));
+    now.title = offer.currency === D.meta.currency
+      ? "As PADI quotes it: " + eur(offer.price)
+      : "As PADI quotes it, before conversion: " + offer.currency + " " +
+        Math.round(offer.quoted).toLocaleString("en-IE") +
+        (offer.was > offer.price
+          ? ", against " + offer.currency + " " +
+            Math.round(offer.quoted_was).toLocaleString("en-IE")
+          : "");
+    tr.appendChild(now);
+
     /* Struck through only where it is genuinely a different number. A "was"
        equal to the price is PADI stating an offer that takes nothing off this
        figure, and printing it crossed out would invent a saving. */
-    tr.appendChild(el("td", "d-was", row.was > row.price ? eur(row.was) : "—"));
-    tr.appendChild(el("td", "d-off", offerOff(row)));
-    tr.appendChild(el("td", "d-offer", row.title || "—"));
+    tr.appendChild(el("td", "d-was", offer.was > offer.price ? eur(offer.was) : "—"));
+    tr.appendChild(el("td", "d-off", offerSaving(offer)));
 
-    /* What PADI actually published, beside what this page converted it to.
-       Every other price here is converted the same way and says so once in the
-       footer; a deal is a number somebody is being asked to act on today, so it
-       says so on its own row. A dash where the two currencies already agree:
-       repeating "EUR 720" beside "€720" is a column of noise on eight of
-       thirteen rows. */
-    function quoted(amount) {
-      return row.currency + " " + Math.round(amount).toLocaleString("en-IE");
+    /* PADI's own name for the offer, verbatim — including the percentage it
+       repeats and the shouting, for the reason this project keeps a fleet
+       label verbatim: tidying somebody's words is a short step from deciding
+       what they said. Linked to the page it was read from, because a price
+       whose source cannot be opened is a price this site is asking to be taken
+       on trust. */
+    var name = el("td", "d-offer");
+    if (offer.url) {
+      var a = document.createElement("a");
+      a.href = offer.url;
+      a.rel = "noopener";
+      a.target = "_blank";
+      a.textContent = offer.title || "offer";
+      a.title = "The PADI Travel page this offer was read from";
+      name.appendChild(a);
+    } else {
+      name.textContent = offer.title || "—";
     }
-    var native = el("td", "d-native",
-      row.currency === D.meta.currency ? "—" : quoted(row.quoted));
-    native.title = row.was > row.price
-      ? "As PADI quotes it, before conversion: " + quoted(row.quoted) +
-        ", against " + quoted(row.quoted_was)
-      : "As PADI quotes it, before conversion";
-    tr.appendChild(native);
-    return tr;
+    tr.appendChild(name);
   }
 
-  function dealsTable(rows) {
+  /* Who marked it down and when they were read, one seller per line.
+
+     The date is per seller and not per panel. These two books are read by two
+     jobs two days apart, and stamping the cabin crawl's day across the whole
+     table dated ten of these twenty-two rows wrong — the same rule the berth
+     counts have followed since they were published. */
+  function markedDownBy(row) {
+    var td = el("td", "d-native");
+    (row.sellers || []).forEach(function (seller, n) {
+      var day = (row.read || [])[n];
+      td.appendChild(el("span", "reading",
+        (SELLER_NAMES[seller] || "?") + (day ? " · " + shortDate(day) : "")));
+    });
+    return td;
+  }
+
+  function offersTable(rows) {
     var table = el("table", "deals-table");
     var head = document.createElement("thead");
+
+    /* Two header rows, because the columns come from two sellers and a reader
+       who cannot see the join will read the money as belonging to the window
+       beside it. The left group is unlabelled: it is the table's subject, and
+       naming it would put a heading over the boat's own name. */
+    var group = el("tr", "d-group");
+    var pad = el("th", null, "");
+    pad.colSpan = 6;
+    group.appendChild(pad);
+    var padi = el("th", "g-first", "Advertised on padi.com");
+    padi.colSpan = OFFER_GROUP.length;
+    group.appendChild(padi);
+    head.appendChild(group);
+
     var hr = el("tr", null);
-    ["Sails", "Boat", "Now", "Was", "Saving", "Offer", "As quoted"].forEach(function (h) {
+    ["Boat", "On sale", "Off", "From", "To", "Marked down by"].forEach(function (h) {
       hr.appendChild(el("th", null, h));
+    });
+    OFFER_GROUP.forEach(function (h, n) {
+      hr.appendChild(el("th", n === 0 ? "g-first" : null, h));
     });
     head.appendChild(hr);
     table.appendChild(head);
+
     var body = document.createElement("tbody");
-    rows.forEach(function (row) { body.appendChild(dealRow(row)); });
+    rows.forEach(function (r) {
+      var tr = el("tr", null);
+      tr.appendChild(el("td", "d-boat", r.boat_name));
+      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
+         situations and the bare number cannot tell them apart. A boat here on
+         PADI's listing alone has no such count and says so with a dash rather
+         than a nought. */
+      tr.appendChild(el("td", "d-when", r.sailings
+        ? r.sailings + " of " + r.of : "—"));
+      tr.appendChild(el("td", "d-off", r.pct
+        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
+        : "—"));
+      tr.appendChild(el("td", "d-when", r.first ? shortDate(r.first) : "—"));
+      tr.appendChild(el("td", "d-when", r.last ? shortDate(r.last) : "—"));
+      tr.appendChild(markedDownBy(r));
+      offerCells(tr, r.offer);
+      body.appendChild(tr);
+    });
     table.appendChild(body);
     return table;
+  }
+
+  /* The fleet rows and PADI's offers, joined on the boat they are both about.
+     Sorted once, by the name printed in the first column, so the whole table
+     has one order instead of one per half. */
+  function offerRows(fleet, offers) {
+    var byBoat = {};
+    var order = [];
+    fleet.forEach(function (r) {
+      byBoat[r.boat] = { boat: r.boat, boat_name: r.boat_name, sailings: r.sailings,
+        of: r.of, pct: r.pct, pct_max: r.pct_max, first: r.first, last: r.last,
+        sellers: r.sellers, read: r.read, offer: null };
+      order.push(r.boat);
+    });
+    offers.forEach(function (o) {
+      if (!byBoat[o.boat]) {
+        /* PADI advertises this boat and no ladder caught it. Kept, with an
+           empty left half, rather than dropped out of the panel. */
+        byBoat[o.boat] = { boat: o.boat, boat_name: o.boat_name, sellers: [], read: [] };
+        order.push(o.boat);
+      }
+      byBoat[o.boat].offer = o;
+    });
+    return order.map(function (id) { return byBoat[id]; }).sort(function (a, b) {
+      var x = (a.boat_name || "").toLowerCase(), y = (b.boat_name || "").toLowerCase();
+      return x < y ? -1 : x > y ? 1 : a.boat < b.boat ? -1 : 1;
+    });
+  }
+
+  /* How far this panel's answer reaches, which is the half of it a count of
+     discounts cannot state. Every sentence here is about an absence, and on the
+     page all three are indistinguishable from "not on sale" unless it says so
+     — the same rule as the change log's `not_compared` note, applied to the
+     summary above it.
+
+     Drawn only from what promote counted. Nothing here is re-derived from the
+     rows, because the rows are precisely where these facts have gone missing. */
+  function coverageNote(coverage) {
+    var said = [];
+    var dropped = coverage.dropped;
+    if (dropped) {
+      said.push(dropped.sailings + (dropped.sailings === 1 ? " sailing" : " sailings") +
+        " on " + dropped.boats.join(", ") + " had a booking page whose cheapest " +
+        "cabin sat too far from the price beside it to still be that sailing’s " +
+        "— last week’s prices on this week’s shelf. Those readings were thrown " +
+        "away, so " + (dropped.sailings === 1 ? "it is" : "they are") +
+        " absent here rather than reported as full price: a ladder that " +
+        "contradicts its own row has not said no, it has gone stale.");
+    }
+    if (coverage.unread) {
+      said.push("A further " + coverage.unread +
+        (coverage.unread === 1 ? " sailing has" : " sailings have") +
+        " no list price read from either seller, so whether " +
+        (coverage.unread === 1 ? "it is" : "they are") +
+        " discounted is unknown rather than no.");
+    }
+    if (coverage.banner_unsupported) {
+      said.push(coverage.banner_unsupported +
+        (coverage.banner_unsupported === 1
+          ? " sailing carries a discount in its own trip name that the seller "
+          : " sailings carry a discount in their own trip names that the seller ") +
+        "read for " + (coverage.banner_unsupported === 1 ? "it" : "them") +
+        " does not support. The banner is a claim about a number; the struck-" +
+        "through list price is the number, and it wins.");
+    }
+    return said.length ? el("p", "deals-note", said.join(" ")) : null;
   }
 
   function dealsChanges(deals) {
@@ -1831,52 +2038,6 @@
       box.appendChild(list);
     }
     return box;
-  }
-
-  /* What the first seller is discounting, per boat and across the season.
-
-     A different shape from PADI's list because it is a different claim. PADI
-     publishes a deals *listing*: one exemplar sailing per vessel, which says a
-     boat is on sale and nothing about when. liveaboard.com publishes no such
-     listing at all — its /liveaboard-deals is prose — but strikes out the list
-     price on every discounted cabin of every booking page, so the answer here
-     is per sailing, and what it supports is a **window**: Red Sea Aggressor II
-     is 33% off every week from 1 May to 24 July and full price from 31 July.
-     That is the difference between knowing a boat is on sale and knowing which
-     week to book, and it is worth a table of its own rather than 263 rows
-     spliced into a list of 13. */
-  function fleetTable(rows) {
-    var table = el("table", "deals-table");
-    var head = document.createElement("thead");
-    var hr = el("tr", null);
-    ["Boat", "On sale", "Off", "From", "To", "Per"].forEach(function (h) {
-      hr.appendChild(el("th", null, h));
-    });
-    head.appendChild(hr);
-    table.appendChild(head);
-    var body = document.createElement("tbody");
-    rows.forEach(function (r) {
-      var tr = el("tr", null);
-      tr.appendChild(el("td", "d-boat", r.boat_name));
-      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
-         situations and the bare number cannot tell them apart. */
-      tr.appendChild(el("td", "d-when", r.sailings + " of " + r.of));
-      tr.appendChild(el("td", "d-off", r.pct
-        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
-        : "—"));
-      tr.appendChild(el("td", "d-when", shortDate(r.first)));
-      tr.appendChild(el("td", "d-when", shortDate(r.last)));
-      /* Who publishes the markdown, named rather than assumed. Most of this
-         table is liveaboard.com's booking pages, but not all of it — and a
-         section headed with one seller's name over a count that includes the
-         other's would be exactly the splice this page refuses everywhere
-         else. */
-      tr.appendChild(el("td", "d-native",
-        (r.sellers || []).map(function (s) { return SELLER_NAMES[s] || "?"; }).join(", ")));
-      body.appendChild(tr);
-    });
-    table.appendChild(body);
-    return table;
   }
 
   /* What moved on the booking pages between the last two readings of them.
@@ -1964,34 +2125,34 @@
     var body = document.getElementById("dealsBody");
     body.textContent = "";
 
-    if (fleet.length) {
-      var read = deals.on_sale.read;
-      body.appendChild(el("h4", null, "Every discounted sailing, by boat"));
+    var rows = offerRows(fleet, offers);
+    if (rows.length) {
+      body.appendChild(el("h4", null, "What is discounted, by boat"));
+      /* One paragraph for one table, and it has to name both sources without
+         claiming either says the other's half. The counts and the window are
+         the sailings' own; the money on the right is one exemplar PADI names. */
+      var lead = deals.on_sale
+        ? deals.on_sale.sailings + " sailings on " +
+          (deals.on_sale.boats || []).length + " boats are marked down. "
+        : "";
       body.appendChild(el("p", "deals-note",
-        deals.on_sale.sailings + " sailings on " + fleet.length +
-        " boats are marked down, read " + shortDate(read) + ". Taken from the " +
-        "list price each seller prints beside its own — struck through against " +
-        "every cabin on a booking page, and stated outright by PADI — never " +
-        "from the “20% Off” an operator writes into a trip name. The banner " +
-        "and the list price agree on every sailing carrying one, and the list " +
-        "price finds 22 more that carry none. The On sale filter below shows " +
-        "these same sailings. A sale is what a seller claimed when it was " +
-        "read, and can end overnight."));
-      body.appendChild(fleetTable(fleet));
+        lead + "Taken " +
+        "from the list price each seller prints beside its own — struck " +
+        "through against every cabin on a booking page, and stated outright " +
+        "by PADI — never from the “20% Off” an operator writes into a trip " +
+        "name. The left of each row is every discounted sailing that boat " +
+        "sells and the weeks they fall in; the right is the single sailing " +
+        "PADI advertises for it, which is a berth price and not a total — the " +
+        "fees in the table below still land on the bill. The On sale filter " +
+        "shows these same sailings. A sale is what a seller claimed on the " +
+        "day beside its name, and can end overnight."));
+      var note = deals.coverage ? coverageNote(deals.coverage) : null;
+      if (note) body.appendChild(note);
+      body.appendChild(offersTable(rows));
     }
     if (moved) body.appendChild(salesChanges(shifted));
 
     if (!offers.length) { host.hidden = false; return; }
-
-    body.appendChild(el("h4", null, "Advertised on padi.com"));
-    body.appendChild(el("p", "deals-note",
-      "What PADI Travel advertised as discounted on " + shortDate(deals.read) +
-      ", for sailings in this season. One offer per boat: PADI names an " +
-      "exemplar sailing rather than every discounted one, which is why the " +
-      "table above is the longer answer. It is a berth price and an offer on " +
-      "one, not a total: the fees in the table below still land on the bill. " +
-      "Every boat here links to the page its offer was read from."));
-    body.appendChild(dealsTable(offers));
 
     if (deals.previous) body.appendChild(dealsChanges(deals));
 
