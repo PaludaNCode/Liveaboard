@@ -184,12 +184,39 @@ def main() -> int:
     return 0
 
 
+def drop_stamp_only_rebuild() -> None:
+    """Undo the gate's own rebuild when it changed nothing but the clock.
+
+    `cli build` stamps the page with the minute it ran, so the gate leaves
+    `site/index.html` modified on every run whether or not any data did -- and
+    `--merge` then refused its own tree as dirty. The publish action already
+    settles this the same way and for the same reason: a rebuild is not news.
+
+    Compared with the stamp normalised on both sides, never by reading the
+    shape of the diff -- the payload is one enormous line, so a real change and
+    the stamp land on it together and no line-wise filter can tell them apart.
+    """
+    import re
+
+    page = ROOT / "site" / "index.html"
+    if git("status", "--porcelain", "--", str(page)) == "":
+        return
+    committed = subprocess.run(["git", "show", f"HEAD:site/index.html"], cwd=ROOT,
+                               capture_output=True, text=True)
+    if committed.returncode != 0:
+        return
+    stamp = re.compile(r'"built":"[^"]*"')
+    if stamp.sub("", committed.stdout) == stamp.sub("", page.read_text("utf-8")):
+        run_git("checkout", "--", "site/index.html")
+
+
 def merge() -> int:
     """Bring the current branch back to the trunk, behind the gate."""
     branch = git("rev-parse", "--abbrev-ref", "HEAD")
     if branch == TRUNK:
         print(f"already on {TRUNK}; nothing to merge")
         return 1
+    drop_stamp_only_rebuild()
     if git("status", "--porcelain"):
         print("the working tree is dirty; commit before merging")
         return 1
