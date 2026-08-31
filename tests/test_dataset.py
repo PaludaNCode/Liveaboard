@@ -2574,6 +2574,31 @@ class TestOneGate(unittest.TestCase):
         self.assertIn('(ROOT / "tests").glob("test_*.py")', ship,
                       "the gate names its modules instead of discovering them")
 
+    def test_work_does_not_land_on_the_trunk_without_a_branch(self) -> None:
+        """Eleven changes went straight onto `main` before the flow had this:
+        no branch, nothing to look at before it shipped, and "merge to prod"
+        reporting that the work was already there rather than doing anything.
+
+        Not a warning and not a flag to override -- `--push` branches on its
+        own, because a default that has to be remembered is not a default.
+        """
+        ship = self.SHIP.read_text(encoding="utf-8")
+        push = ship.split("if not git(\"status\", \"--porcelain\")", 1)[1]
+        self.assertIn("if branch == TRUNK:", push,
+                      "--push commits wherever it happens to be standing")
+        self.assertIn("checkout", push, "--push does not create the branch")
+        self.assertIn("def merge(", ship, "there is no way back to the trunk")
+        self.assertIn('"--no-ff"', ship,
+                      "a fast-forward merge hides that the work was a branch")
+
+    def test_the_merge_gates_against_the_trunk_it_is_merging_into(self) -> None:
+        """A branch that was green alone can be red against a trunk that moved
+        under it -- and the scheduled data jobs move it several times a day."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        merge = ship.split("def merge(", 1)[1]
+        self.assertIn('git("rev-list", "--count", f"HEAD..origin/{TRUNK}")', merge)
+        self.assertIn("not merging: the gate is red against the merged trunk", merge)
+
     def test_the_fast_loop_says_it_is_not_the_gate(self) -> None:
         """`--fast` drops the two slowest modules, so it can pass over a real
         failure. A shortcut that does not admit it is one people ship on."""
