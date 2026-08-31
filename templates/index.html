@@ -37,12 +37,13 @@
       tell which is which once you have scrolled sideways.
     </p>
     <p class="sub" id="saleLead" hidden>
-      Only the sailings a seller has marked down. The markdown is the list price a
-      seller prints beside the one it charges &mdash; struck through on the booking
-      page, or stated outright by PADI Travel &mdash; never the &ldquo;20%
-      Off&rdquo; an operator writes into a trip name; and a row shows a percentage
-      only from the seller whose fare it prints. It is what a seller claimed the
-      day its pages were read, and it can end overnight.
+      Every markdown either seller is advertising, by boat. The markdown is the
+      list price a seller prints beside the one it charges &mdash; struck through
+      on the booking page, or stated outright by PADI Travel &mdash; never the
+      &ldquo;20% Off&rdquo; an operator writes into a trip name. It is what a
+      seller claimed on the day beside its name, and it can end overnight. To
+      read the discounted <em>departures</em> priced whole, use the
+      <b>On sale</b> filter over the trips table.
     </p>
   </div>
   <!-- Counts of what the table is showing, so they belong to the two views
@@ -115,40 +116,31 @@
   </div>
 </section>
 
-<!-- The table, and the filters over it. Shown by both the trips view and the
-     sale view: the sale view is these same rows with the markdown filter held
-     on, which is why it is one pane and not a copy of one.
+<!-- The On sale view: what each seller is discounting today, and what moved
+     since the last day the deals book holds.
+     This is an overview and not a filtered table. Which *departures* are
+     marked down is a question the On sale chip on the trips view answers, over
+     the same table as every other filter; asking it twice, once as a filter
+     and once as a destination, gave the rail an entry that duplicated a chip
+     and left this breakdown where it had always been -- folded into a
+     `details` above a table, which is where nobody looking for it would go.
+     A document, like the history view: it is read rather than operated, so it
+     scrolls as one and opens with what it is. -->
+<section class="pane sale-pane" id="salePane" tabindex="-1" hidden>
+  <div class="sale-body">
+    <h2>What is on sale</h2>
+    <p class="sale-lead" id="dealsLine"></p>
+    <div class="deals-body" id="dealsBody"></div>
+  </div>
+</section>
 
-     `tablePane`, not `tripsPane`, because it is not the trips view's: two of
-     the three views draw here, and the deals panel inside it belongs to the
-     other one. The first name read as "the pane for the trips view" and would
-     have been believed by whoever adds a fourth. -->
+<!-- The table, and the filters over it: the trips view.
+     `tablePane` rather than `tripsPane` because what identifies it is that it
+     holds the table -- the On sale chip in the toolbar below filters these
+     same rows, and a filter is not a view. -->
 <div class="pane" id="tablePane" tabindex="-1">
-  <h2 class="view-heading" id="tableHeading">Every departure</h2>
+  <h2 class="view-heading">Every departure, priced whole</h2>
 
-<!-- What the other seller is discounting today, and what moved since the last
-     day the deals book holds. Inside the pane rather than above it, so the
-     toolbar, the filter banks and the table are one flex column: sized as a
-     sibling of the pane it took its 34vh out of the pane's *box*, and the
-     toolbar and banks inside that box then painted straight over the footer on
-     a short window. One column, and the table gives way first, as it always
-     has.
-
-     A `details` rather than an open panel, and the summary carries the whole
-     overview -- how many sailings are discounted, how many changed, and the day
-     it was read. That is the front-page statement; the list under it is for
-     somebody who wants the boats. An open block of thirteen rows would push the
-     table -- which is what this site is -- below the fold on every visit, to
-     say something a line says.
-
-     Empty in the markup and hidden until app.js finds a deals block. A fresh
-     checkout has never run the daily read, and a panel that renders its own
-     absence as "no deals today" would be the site claiming a fact about PADI
-     from a file that does not exist. -->
-<details class="deals" id="deals" hidden>
-  <summary id="dealsLine">Deals</summary>
-  <div class="deals-body" id="dealsBody"></div>
-</details>
 
 <div class="toolbar">
   <div class="tgroup">

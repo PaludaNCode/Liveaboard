@@ -323,12 +323,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Fury Shoals* was changed in both when the two drifted apart. Do not lengthen this
   table without counting the spellings first, and count in the *names* rather
   than the titles: counting folded titles hid *Ras Muhammad* entirely.
-- **One file, three views.** Trips, on sale and history are panes `showView`
-  swaps in `app.js`, addressed by the URL hash — never three documents. The
-  sale view is the trips table with the markdown filter held down
-  (`saleOnly()`, read by `passes`), so splitting it out would ship the inlined
-  payload a second time to say what the first copy already knows, and reading
-  the filter in two places is two answers to one question. A new section is a
+- **One file, three views, three questions.** Trips, on sale and history are
+  panes `showView` swaps in `app.js`, addressed by the URL hash — never three
+  documents, because the payload is inlined and a second file would ship those
+  megabytes again. **A filter is not a view.** The sale view was built as the
+  trips table with the markdown filter held down, and that was wrong twice
+  over: it made the rail's middle entry a second way to press the On sale
+  chip, and it left what the view is actually for — the discount overview, by
+  boat, with what moved since yesterday — folded into a `details` above the
+  table, which is exactly where nobody looking for it would go. `saleOnly()`
+  reads the chip and nothing else. Which departures are discounted is a table
+  question; which boats are marked down and by how much is a page. A new
+  section is a
   pane and a rail item — and `tablePane` is not the trips pane: two views draw
   there and the deals panel inside it belongs to the other one. Which pane is
   on screen is the `hidden` attribute, and `[hidden] { display:none !important }`

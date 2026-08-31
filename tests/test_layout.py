@@ -108,7 +108,10 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         is 2.4MB -- so it is for the tests that are *about* loading."""
         page = self._browser.new_page(viewport={"width": width, "height": height})
         page.goto(self._url + hash_)
-        page.wait_for_selector("#body tr")
+        # The rail item the boot lit, not a table row: the table is drawn by
+        # the trips view and only by it, so waiting on a row hangs for thirty
+        # seconds on the two views that correctly do not have one.
+        page.wait_for_selector('.rail-item[aria-current="page"]')
         return page
 
     def sweep(self, page, width: int, height: int, view: str):
@@ -156,70 +159,75 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                         self.assertFalse(m["docScrolls"], "the window itself scrolls")
                         self.assertLessEqual(m["footerBottom"], m["viewport"] + 1,
                                              "the footer is off the bottom edge")
-                        if view != "#history":
+                        if view == "#trips":
                             self.assertGreaterEqual(m["shell"]["h"], TABLE_FLOOR,
                                                     "the table is below its floor")
         finally:
             page.close()
 
-    def test_the_table_survives_the_deals_panel(self) -> None:
-        """#130. The panel is an index and the table is what it indexes, so a
-        shortfall comes out of the panel, which scrolls inside itself and loses
-        nothing by being shorter. Measured before this rule: 159px of table at
-        1440x900 and **0px** at 768x600."""
+    def test_the_sale_view_is_an_overview_and_not_the_table(self) -> None:
+        """The sale view was the trips table under a held-down filter, with the
+        discount overview folded into a `details` above it -- capped at 34vh,
+        and at 768x600 leaving the table itself at zero height (#130).
+
+        It is a document of its own now, so the two never compete for a window
+        again: there is no table on that view to squeeze, and the overview has
+        the room. What has to hold at every size is that it renders as a
+        readable document rather than a strip.
+        """
         page = self.open(1440, 900, "#sale")
         try:
             for width, height in SIZES:
                 with self.subTest(size=(width, height)):
-                    before = self.sweep(page, width, height, "#sale")
-                    page.evaluate("document.getElementById('deals').open = true")
-                    page.wait_for_timeout(150)
-                    after = self.measure(page)
-                    page.evaluate("document.getElementById('deals').open = false")
-                    page.wait_for_timeout(100)
-                    self.assertGreater(after["deals"]["h"], before["deals"]["h"],
-                                       "the panel did not visibly open")
-                    # An even split, stated as "the index never outgrows what
-                    # it indexes". Scale-free on purpose: a pixel floor here
-                    # would be a floor the smallest window cannot meet, and
-                    # what went wrong was a priority rather than a number.
-                    # `- 2` is the panel's own bottom rule and rounding.
-                    self.assertGreaterEqual(
-                        after["shell"]["h"], after["deals"]["h"] - 2,
-                        "the deals panel is given more room than the table")
-                    self.assertGreater(
-                        after["shell"]["h"], 0,
-                        "opening the deals panel left no table at all")
+                    self.sweep(page, width, height, "#sale")
+                    m = page.evaluate("""() => {
+                      const p = document.getElementById('salePane');
+                      const r = p.getBoundingClientRect();
+                      return { h: Math.round(r.height),
+                               content: Math.round(p.scrollHeight),
+                               table: !!document.querySelector('#salePane .deals-table'),
+                               tripsTable: document.getElementById('tablePane').hidden,
+                               wide: p.scrollWidth > p.clientWidth + 1 };
+                    }""")
+                    self.assertTrue(m["tripsTable"],
+                                    "the trips table is on screen under the sale view")
+                    self.assertTrue(m["table"], "the overview drew no boat table")
+                    self.assertGreater(m["h"], TABLE_FLOOR,
+                                       "the overview is a strip rather than a view")
+                    self.assertGreater(m["content"], m["h"],
+                                       "the overview fits its pane, so nothing was cut "
+                                       "-- but it should be a document that scrolls")
+                    self.assertFalse(m["wide"],
+                                     "the overview scrolls sideways; its tables must "
+                                     "scroll inside themselves instead")
         finally:
             page.close()
 
     # -- the router ----------------------------------------------------------
 
-    def test_a_view_change_starts_a_different_list_at_the_top(self) -> None:
-        """#131. Crossing between trips and sale is a different list and starts
-        at the top; the history round trip filtered nothing and keeps both the
-        page and the place."""
+    def test_leaving_the_trips_view_and_returning_keeps_your_place(self) -> None:
+        """The table is drawn once and nothing else disturbs it: the other two
+        views filter nothing, so both what was drawn and where it was scrolled
+        to survive the round trip. It used to be redrawn on every crossing,
+        because the sale view was the same table under a filter -- and the
+        scroller was never reset with it, so arriving there put you 5,368px
+        down a freshly drawn 120-row page."""
         page = self.open(1440, 900)
         self.addCleanup(page.close)
         page.evaluate("document.querySelector('.shell').scrollTop = 5000")
         page.wait_for_timeout(300)
-        moved = self.measure(page)["scrollTop"]
-        self.assertGreater(moved, 1000, "the table did not scroll")
-
-        page.click("#navSale")
-        page.wait_for_timeout(300)
-        self.assertEqual(self.measure(page)["scrollTop"], 0,
-                         "the sale view opened part-way down the trips view's scroll")
-
-        page.evaluate("document.querySelector('.shell').scrollTop = 900")
-        page.wait_for_timeout(300)
         held = self.measure(page)["scrollTop"]
-        page.click("#navHistory")
-        page.wait_for_timeout(200)
-        page.click("#navSale")
-        page.wait_for_timeout(300)
-        self.assertEqual(self.measure(page)["scrollTop"], held,
-                         "the history round trip lost the sale view's place")
+        self.assertGreater(held, 1000, "the table did not scroll")
+        drawn = page.evaluate("()=>document.querySelectorAll('#body tr:not(.detail)').length")
+
+        for item in ("#navSale", "#navHistory", "#navTrips"):
+            page.click(item)
+            page.wait_for_timeout(250)
+        m = self.measure(page)
+        self.assertEqual(m["scrollTop"], held, "the round trip lost your place")
+        self.assertEqual(
+            page.evaluate("()=>document.querySelectorAll('#body tr:not(.detail)').length"),
+            drawn, "the round trip threw away the rows you had scrolled to load")
 
     def test_the_address_bar_agrees_with_the_view_on_screen(self) -> None:
         """#132. A name the page will not honour is corrected in the address
@@ -262,25 +270,30 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertEqual(self.measure(page)["focus"], "tablePane")
         page.close()
 
-    def test_the_rail_counts_track_the_filters_beside_them(self) -> None:
-        """#134 [sic #135]. The rail said "Trips 1,122" beside a stat block
-        saying "12 rows shown" -- two numbers about one table, one frozen at
-        boot. The On sale *chip* keeps its fixed count for its own stated
-        reason; a rail item is a destination and its number is a promise about
-        what opening it gives you."""
+    def test_the_rail_counts_what_each_view_actually_answers(self) -> None:
+        """Two views, counted two ways, because they answer differently.
+
+        **Trips** is the filtered table, so its number is filter-relative and
+        agrees with `rows shown` -- it read "Trips 1,122" beside "12 rows
+        shown" before. **On sale** is an overview of the whole deals book that
+        no filter touches, so its number must *not* move with the filters: a
+        rail item's number is a promise about what opening it gives you, and a
+        narrowing the view does not perform is a promise broken by the click.
+        """
         page = self.open(1440, 900)
+        self.addCleanup(page.close)
         before = self.measure(page)
         self.assertEqual(before["railTrips"], before["shown"])
 
         page.click("#months .chip")  # any one month
         page.wait_for_timeout(400)
         after = self.measure(page)
-        page.close()
         self.assertNotEqual(after["shown"], before["shown"], "the filter did nothing")
         self.assertEqual(after["railTrips"], after["shown"],
                          "the rail is still counting the unfiltered season")
-        self.assertNotEqual(after["railSale"], before["railSale"],
-                            "the sale count did not move with the filter")
+        self.assertEqual(after["railSale"], before["railSale"],
+                         "the overview's count moved with a filter that does not "
+                         "reach it")
 
 
 if __name__ == "__main__":  # pragma: no cover

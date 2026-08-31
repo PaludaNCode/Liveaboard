@@ -1797,34 +1797,51 @@ class TestTheThreeViews(unittest.TestCase):
         self.assertIn('VIEWS = ["trips", "sale", "history"]', app)
         self.assertIn("hashchange", app, "a view cannot be linked to or reloaded into")
 
-    def test_the_sale_view_is_the_filter_and_not_a_copy_of_the_table(self) -> None:
-        """One answer to "is the markdown filter on", not two.
+    def test_the_sale_view_is_the_overview_and_not_the_filter(self) -> None:
+        """Three questions, three panes.
 
-        The chip and the view are the same filter reached two ways. Read
-        separately they drift, and the drift is silent: a table showing every
-        sailing under a heading that says only the discounted ones.
-
-        Matched loosely on purpose. The predecessor of this test pinned the
-        whitespace of a one-line function, so wrapping the line failed the
-        suite while the page behaved identically -- and a test that fails for
-        the wrong reason is edited to match the code, which is where it stops
-        testing anything.
+        The sale view was built as the trips table with the markdown filter
+        held down, which was the wrong reading of what it is for. *Which
+        departures are discounted* is a table question and the table has a
+        control for it -- the On sale chip, filtering those rows like any other
+        filter. Asking it a second time as a destination gave the rail an entry
+        that duplicated a chip, and left the thing the view should have been
+        carrying -- the discount overview: which boats are marked down, by how
+        much, what moved since yesterday -- folded into a `details` above the
+        table, which is where it already was and where nobody looking for it
+        would go.
         """
-        app = self.app()
-        self.assertIn('state.onSaleOnly || state.view === "sale"', app,
-                      "the sale view and the On sale chip are two filters now")
+        page, app = self.page(), self.app()
+        self.assertIn('id="salePane"', page, "the sale view has no pane of its own")
+        self.assertIn("function saleOnly() { return state.onSaleOnly; }", app,
+                      "the sale view is holding the markdown filter down again")
         self.assertIn("saleOnly() && !dep.sale", app,
-                      "the row filter no longer reads the view")
-        self.assertIn('onSale.hidden = !onSaleCount || name === "sale"', app,
-                      "the chip is still offered on the view that already holds it down")
+                      "the row filter no longer reads the chip")
+        sale = page.split('id="salePane"', 1)[1].split("</section>", 1)[0]
+        self.assertIn('id="dealsBody"', sale, "the overview is not in the sale view")
+        table = page.split('id="tablePane"', 1)[1].split("</div><!-- /#tablePane -->", 1)[0]
+        self.assertNotIn('id="dealsBody"', table,
+                         "the overview is still folded above the trips table")
+
+    def test_the_overview_is_a_document_rather_than_a_fold(self) -> None:
+        """It was a `details` capped at a third of the window because the table
+        under it was the page. On a view of its own none of that applies, and
+        the cap and the fold's flex arithmetic go with it."""
+        page, css = self.page(), self.css()
+        self.assertNotIn("<details class=\"deals\"", page,
+                         "the overview still opens and closes")
+        self.assertNotIn("#deals[open]", css,
+                         "the fold's sizing rules outlived the fold")
+        self.assertIn(".sale-pane { overflow:auto; }", css,
+                      "the overview does not scroll as a document")
 
     def test_a_view_with_nothing_behind_it_is_not_offered(self) -> None:
-        """The On sale chip's own rule, applied to the section it grew into: a
-        control that can do nothing must not be dressed as one that can. A
-        checkout with no markdown read and no deals book has no sale view, and
-        typing its name into the address bar must not conjure one."""
+        """The On sale chip's own rule, applied to a whole section: a control
+        that can do nothing must not be dressed as one that can. A checkout
+        whose deals book is empty has no overview to show, so it has no sale
+        view, and typing its name into the address bar must not conjure one."""
         app = self.app()
-        self.assertIn("saleView = onSaleCount > 0 || dealsShown", app)
+        self.assertIn("saleView = drawDeals();", app)
         self.assertIn('if (name === "sale" && !saleView) name = "trips";', app)
 
     def test_the_address_bar_never_names_a_view_that_was_declined(self) -> None:
@@ -1862,38 +1879,6 @@ class TestTheThreeViews(unittest.TestCase):
         """
         self.assertIn("[hidden] { display:none !important; }", self.css())
 
-    def test_a_hidden_panel_does_not_size_a_visible_table(self) -> None:
-        """`details` keeps `open` while hidden, so a sibling selector on
-        `[open]` alone went on sizing the trips view's table from the sale
-        view's panel long after that panel had left the screen."""
-        css = self.css()
-        self.assertIn("#deals[open]:not([hidden]) ~ .shell", css)
-        self.assertNotIn("#deals[open] ~ .shell", css)
-
-    def test_the_deals_panel_and_the_table_share_the_view(self) -> None:
-        """Opening the index must neither hide what it indexes nor fail to
-        open.
-
-        Sized from content, the panel opened to an 87px slot, because the table
-        beside it was asking for its whole 6,600px of rows. Sized from zero the
-        table could claim nothing at all and was handed whatever the panel's
-        viewport-relative cap left over, which at 768x600 was nothing (#130).
-        A basis is a claim in the division rather than a limit on it, so both
-        boxes shrink in proportion and the panel -- which scrolls inside itself
-        and loses nothing by being shorter -- gives up the larger share.
-
-        That the arithmetic comes out right is not something this file can see.
-        ``tests/test_layout.py`` measures it.
-        """
-        css, page = self.css(), self.page()
-        self.assertIn("#deals[open]:not([hidden]) { flex:1 1 0;", css,
-                      "the panel takes its cap first and the table gets the remainder")
-        self.assertIn(".shell { flex:1 1 auto; min-height:0;", css,
-                      "the table's own scroller lost the minimum the footer depends on")
-        pane = page.split('id="tablePane"', 1)[1]
-        self.assertLess(pane.index('id="deals"'), pane.index('class="toolbar"'),
-                        "the deals panel is not inside the pane, above the toolbar")
-
     def test_every_view_names_itself(self) -> None:
         """Three things read a view's name and none of them is the screen: the
         document outline, the browser tab and whatever announces that the main
@@ -1901,7 +1886,9 @@ class TestTheThreeViews(unittest.TestCase):
         bookmark of the history view said trips; two of the three had no
         heading, so the outline went from the site's h1 straight to a table."""
         page, app = self.page(), self.app()
-        self.assertIn('class="view-heading"', page, "the table pane names neither view")
+        self.assertIn('class="view-heading"', page, "the trips pane has no heading")
+        for heading in ("<h2>What is on sale</h2>", "<h2>What changed on the last refresh</h2>"):
+            self.assertIn(heading, page)
         self.assertIn("document.title =", app, "every view shares one title")
         self.assertIn("tabindex=\"-1\"", page,
                       "no pane can be focused, so a view change is announced by nothing")
