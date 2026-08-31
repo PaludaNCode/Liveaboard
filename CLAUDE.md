@@ -370,6 +370,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **Each markdown is dated to the day its own seller was read**, like the berth
+  counts and for the same reason: `berths_read` and `padi_berths_read` are two
+  crawls two days apart, and the sale marks stamped the first over both — on
+  124 rows whose evidence is partly PADI's and 2 where it is all of it. The
+  summary carries a date per seller and its heading takes the oldest of them,
+  because a panel is only as fresh as its stalest half.
+  **And the panel states what it could not read.** Three absences print
+  identically to "not on sale" — a ladder rejected as stale, a sailing neither
+  seller published a list price for (9), and a trip-name banner the seller read
+  for it contradicts (2) — so `promote` counts each into `deals.coverage` and
+  the panel says so. `promotion` stays unrendered and is now worth keeping for
+  that count: a corroborating field nobody hears from when it stops
+  corroborating is a field to delete.
 - **A deal is placed by its vessel, never by the country beside it.** PADI's
   deals listing has to be asked for the USA as well as Egypt, because all three
   Red Sea Aggressors are filed under the USA and asking Egypt alone drops them.
@@ -466,6 +479,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   contradict. **CI never saw this**, because the scheduled data commits push
   with `GITHUB_TOKEN` and GitHub does not run workflows on those — so a refresh
   can turn `main` red and the next human PR is what finds out.
+  **And a reading thrown away stays thrown away, in every field it touches.**
+  The drop landed and the sale beside it did not: `_sale_for` was handed the
+  same rejected book eight lines later, so all 36 dropped rows kept its
+  discount — *“−33%, down from €2,371”* on a berth advertised at €2,371, the
+  dataset quoting a source it had just ruled out, on the largest markdowns on
+  the page. `_drop_stale_ladder` returns **which seller** it dropped rather
+  than a count, `_list_prices` ignores that seller for the sailing, and
+  `TestAStaleLadderCannotSpeak` asserts at both ends: the ladder never reaches
+  the sale, and no shipped row states a list price equal to its own fare. Then
+  the loss is stated — `deals.coverage.dropped` names the boats, because after
+  the fix those rows read *not on sale*, which is one seller's discarded
+  reading wearing its answer.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

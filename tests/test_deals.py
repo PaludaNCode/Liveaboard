@@ -235,19 +235,29 @@ PADI = {
 }
 
 
-FLEET = candidate(
-    [departure(), departure(boat="serenity", name="Northern Wrecks")],
-    itineraries=[
-        {"id": "alia-soul", "name": "Alia Soul", "boat": "Alia Soul"},
-        {"id": "serenity", "name": "Serenity", "boat": "Serenity"},
-    ],
-)
-"""Two boats, because a deal can only be placed on a boat this site carries.
+def fleet(alia=1450.0, serenity=1450.0):
+    """Two boats, because a deal can only be placed on a boat this site carries.
 
-A one-boat fleet would let every "withdrawn" test pass for the wrong reason:
-the vessel would be absent from the panel because nothing here sells it, not
-because its offer went away.
-"""
+    A one-boat fleet would let every "withdrawn" test pass for the wrong
+    reason: the vessel would be absent from the panel because nothing here
+    sells it, not because its offer went away.
+
+    The two prices are arguments for the reason ``with_books`` takes one: a
+    ladder is only this sailing's while its bottom rung is the price above it,
+    so a test that hands these boats a discounted ladder has to hand them the
+    row that ladder explains.
+    """
+    return candidate(
+        [departure(price=alia),
+         departure(boat="serenity", name="Northern Wrecks", price=serenity)],
+        itineraries=[
+            {"id": "alia-soul", "name": "Alia Soul", "boat": "Alia Soul"},
+            {"id": "serenity", "name": "Serenity", "boat": "Serenity"},
+        ],
+    )
+
+
+FLEET = fleet()
 
 
 def promoted(days: dict) -> dict:
@@ -422,8 +432,18 @@ def sailing(boat="alia-soul", start="2027-05-01", price=1450.0, was=None,
     return row
 
 
-def with_books(cabins=None, padi_departures=None):
-    return promote(candidate([departure()]), season=SEASON,
+def with_books(cabins=None, padi_departures=None, price=1450.0, currency="USD"):
+    """One departure and whichever books this test is about.
+
+    ``price`` exists because **the advertised price is the ladder's bottom
+    rung** -- on 864 of 864 -- and a fixture that ignores that is testing a
+    sailing whose two halves describe different weeks. `promote` now throws
+    such a ladder away rather than reading a discount off it, so a test that
+    wants a sale has to state a row price its ladder actually explains. Every
+    fixture below that was silently in that state has been made to agree; see
+    ``TestAStaleLadderCannotSpeak`` for the case that must not.
+    """
+    return promote(candidate([departure(price=price, currency=currency)]), season=SEASON,
                    cabins=cabins, padi_departures=padi_departures)
 
 
@@ -441,7 +461,7 @@ class TestFlaggingASale(unittest.TestCase):
         read, every cabin is marked down by the same percentage.
         """
         payload = with_books(cabin_book(ladder(
-            ("Twin", 900.0, 1000.0), ("Suite", 1350.0, 1500.0))))
+            ("Twin", 900.0, 1000.0), ("Suite", 1350.0, 1500.0))), price=900.0)
         self.assertEqual(only_row(payload)["sale"]["pct"], 10)
 
     def test_the_cheapest_price_is_never_set_against_a_dearer_room_s_list_price(self):
@@ -452,11 +472,11 @@ class TestFlaggingASale(unittest.TestCase):
         """
         payload = with_books(cabin_book(ladder(
             ("Deluxe", 1849.0, 2760.0), ("Master", 1983.0, 2960.0),
-            ("Suite", 2050.0, 3060.0))))
+            ("Suite", 2050.0, 3060.0))), price=1849.0)
         self.assertEqual(only_row(payload)["sale"]["pct"], 33)
 
     def test_a_ladder_at_list_price_is_not_a_sale(self):
-        payload = with_books(cabin_book(ladder(("Twin", 1000.0, 1000.0))))
+        payload = with_books(cabin_book(ladder(("Twin", 1000.0, 1000.0))), price=1000.0)
         self.assertNotIn("sale", only_row(payload))
 
     def test_padi_s_compare_at_price_is_read_too(self):
@@ -502,7 +522,8 @@ class TestFlaggingASale(unittest.TestCase):
 
     def test_both_sellers_are_named_when_both_discount(self):
         payload = with_books(cabin_book(ladder(("Twin", 800.0, 1000.0))),
-                             padi_book(sailing(price=800.0, was=1000.0)))
+                             padi_book(sailing(price=800.0, was=1000.0)),
+                             price=800.0)
         self.assertEqual(only_row(payload)["sale"]["sellers"], [0, 1])
 
     def test_one_seller_never_marks_down_the_other_s_price(self):
@@ -513,7 +534,8 @@ class TestFlaggingASale(unittest.TestCase):
         33% against an undiscounted fare would invent a saving.
         """
         payload = with_books(cabin_book(ladder(("Twin", 1000.0, 1000.0))),
-                             padi_book(sailing(price=900.0, was=1200.0)))
+                             padi_book(sailing(price=900.0, was=1200.0)),
+                             price=1000.0)
         sale = only_row(payload)["sale"]
         self.assertEqual(sale["sellers"], [1])
         self.assertNotIn("pct", sale)
@@ -521,14 +543,15 @@ class TestFlaggingASale(unittest.TestCase):
 
     def test_the_was_price_is_converted_like_every_other_figure(self):
         """Normalisation happens in Python only; the browser converts nothing."""
-        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1200.0), currency="USD")))
+        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1200.0), currency="USD")),
+                             price=900.0)
         self.assertLess(only_row(payload)["sale"]["was"], 1200)
 
 
 class TestTheOnSaleSummary(unittest.TestCase):
     def _summary(self):
         payload = promote(
-            FLEET, season=SEASON, padi=PADI,
+            fleet(alia=900.0, serenity=800.0), season=SEASON, padi=PADI,
             cabins=cabin_book(
                 ladder(("Twin", 900.0, 1000.0)),
                 ladder(("Twin", 800.0, 1000.0), boat="serenity"),
@@ -554,13 +577,20 @@ class TestTheOnSaleSummary(unittest.TestCase):
         self.assertEqual((row["sailings"], row["of"]), (1, 1))
         self.assertEqual(row["pct"], 10)
 
-    def test_it_carries_the_day_the_ladders_were_read(self):
-        """A sale is what a seller claimed when it was looked at."""
+    def test_it_carries_the_day_each_seller_was_read(self):
+        """A sale is what a seller claimed when it was looked at.
+
+        Per seller, not per panel. The two books are read by two jobs on two
+        days -- 28 and 30 August in the published data -- and one date over
+        both dated ten of the twenty-two boats wrong.
+        """
         summary, _ = self._summary()
-        self.assertEqual(summary["read"], "2026-08-28")
+        self.assertEqual(summary["read"]["0"], "2026-08-28")
+        row = next(b for b in summary["boats"] if b["boat"] == "alia-soul")
+        self.assertEqual(row["read"], ["2026-08-28"])
 
     def test_a_fleet_with_nothing_discounted_produces_no_summary(self):
-        payload = promote(FLEET, season=SEASON, padi=PADI,
+        payload = promote(fleet(alia=1000.0), season=SEASON, padi=PADI,
                           cabins=cabin_book(ladder(("Twin", 1000.0, 1000.0))))
         self.assertNotIn("deals", payload)
 
@@ -578,7 +608,7 @@ class TestTheEdgesOfASale(unittest.TestCase):
         The row stays on sale on the strength of `sellers`, which is the fact
         that does not round away.
         """
-        payload = with_books(cabin_book(ladder(("Twin", 997.0, 1000.0))))
+        payload = with_books(cabin_book(ladder(("Twin", 997.0, 1000.0))), price=997.0)
         sale = only_row(payload)["sale"]
         self.assertEqual(sale["sellers"], [0])
         self.assertNotIn("pct", sale)
@@ -592,7 +622,7 @@ class TestTheEdgesOfASale(unittest.TestCase):
         """
         record = ladder(("Twin", 900.0, 1000.0))
         record.pop("currency")
-        payload = with_books(cabin_book(record))
+        payload = with_books(cabin_book(record), price=900.0)
         sale = only_row(payload)["sale"]
         self.assertEqual(sale["pct"], 10)
         self.assertNotIn("was", sale)
@@ -603,7 +633,7 @@ class TestTheSummaryReadsInOrder(unittest.TestCase):
         """Sorted on the boat id this read "Ocean Lovers, Oceanix, MY Odyssey
         Liveaboard" — alphabetical in a column nobody can see."""
         payload = promote(
-            FLEET, season=SEASON, padi=PADI,
+            fleet(alia=900.0, serenity=800.0), season=SEASON, padi=PADI,
             cabins=cabin_book(
                 ladder(("Twin", 900.0, 1000.0)),
                 ladder(("Twin", 800.0, 1000.0), boat="serenity"),
@@ -619,7 +649,8 @@ class TestTheTakeawayCarriesIt(unittest.TestCase):
         to be able to as well."""
         from liveaboard.export import to_csv
 
-        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1000.0), currency="EUR")))
+        payload = with_books(cabin_book(ladder(("Twin", 900.0, 1000.0), currency="EUR")),
+                             price=900.0, currency="EUR")
         payload["fx"] = {"base": "EUR", "as_of": "2026-08-28", "source": "test",
                          "rates": {"USD": 1.17}}
         rows = list(csv.DictReader(io.StringIO(to_csv(Dataset.from_dict(payload)))))
@@ -635,3 +666,89 @@ class TestTheTakeawayCarriesIt(unittest.TestCase):
                          "rates": {"USD": 1.17}}
         rows = list(csv.DictReader(io.StringIO(to_csv(Dataset.from_dict(payload)))))
         self.assertEqual((rows[0]["list_price"], rows[0]["discount_pct"]), ("", ""))
+
+
+class TestThePanelSaysWhatItCouldNotRead(unittest.TestCase):
+    """Every absence under this heading looks like "not on sale" unless it is
+    stated, and three of them are not that at all.
+
+    A ladder thrown away for contradicting its row, a sailing no seller
+    published a list price for, and a trip-name banner the seller read for it
+    does not support. `promote` counts each, because none can be recovered from
+    the rows the panel is drawn from -- that is what makes them absences.
+    """
+
+    def promoted(self, **books):
+        return promote(candidate([departure(price=books.pop("price", 1450.0))]),
+                       season=SEASON, **books)
+
+    def coverage(self, payload):
+        return (payload.get("deals") or {}).get("coverage") or {}
+
+    def banner_fleet(self, alia):
+        """One boat whose trip name claims a discount, and a second that really
+        is on sale — because coverage is attached only to a panel that exists,
+        and a fleet with nothing discounted anywhere opens none."""
+        return candidate(
+            [departure(name="10% Off: Brothers, Daedalus & Elphinstone", price=alia),
+             departure(boat="serenity", name="Northern Wrecks", price=800.0)],
+            itineraries=[
+                {"id": "alia-soul", "name": "Alia Soul", "boat": "Alia Soul"},
+                {"id": "serenity", "name": "Serenity", "boat": "Serenity"},
+            ],
+        )
+
+    def test_a_rejected_ladder_is_counted_and_its_boat_named(self):
+        """Named rather than counted, like the deals listing's strangers: only
+        a name tells the boat somebody was about to book from one they were
+        not."""
+        payload = promote(
+            fleet(alia=2760.0, serenity=800.0), season=SEASON,
+            cabins=cabin_book(
+                ladder(("Deluxe", 1849.0, 2760.0)),
+                ladder(("Twin", 800.0, 1000.0), boat="serenity"),
+            ),
+        )
+        self.assertEqual(
+            self.coverage(payload)["dropped"],
+            {"sailings": 1, "boats": ["Alia Soul"]},
+        )
+
+    def test_a_sailing_no_seller_priced_is_counted_as_unread(self):
+        """Not as undiscounted. Nobody looked."""
+        payload = promote(
+            fleet(serenity=800.0), season=SEASON,
+            cabins=cabin_book(ladder(("Twin", 800.0, 1000.0), boat="serenity")),
+        )
+        self.assertEqual(self.coverage(payload)["unread"], 1)
+
+    def test_a_banner_no_read_seller_supports_is_counted(self):
+        """The operator's own "10% Off" against a seller stating list price.
+
+        The banner stays out of the dataset's answer -- the struck-through
+        price is the number and it wins -- but a corroborating field that has
+        stopped corroborating is worth a sentence, or it is worth deleting.
+        """
+        payload = promote(self.banner_fleet(alia=1000.0), season=SEASON,
+                          cabins=cabin_book(
+                              ladder(("Twin", 1000.0, 1000.0)),
+                              ladder(("Twin", 800.0, 1000.0), boat="serenity")))
+        row = next(d for d in payload["departures"] if d["id"].startswith("alia"))
+        self.assertEqual(row["promotion"], "10% Off")
+        self.assertNotIn("sale", row)
+        self.assertEqual(self.coverage(payload)["banner_unsupported"], 1)
+
+    def test_a_banner_the_ladder_agrees_with_is_not_counted(self):
+        """The other 205 of 209. Corroboration is not a disagreement."""
+        payload = promote(self.banner_fleet(alia=900.0), season=SEASON,
+                          cabins=cabin_book(
+                              ladder(("Twin", 900.0, 1000.0)),
+                              ladder(("Twin", 800.0, 1000.0), boat="serenity")))
+        self.assertNotIn("banner_unsupported", self.coverage(payload))
+
+    def test_coverage_never_ships_without_a_panel_to_qualify(self):
+        """It qualifies an answer. With nothing discounted, nothing advertised
+        and nothing moved there is no answer, and a panel headed "on sale"
+        opening to say only how many rows went unread is noise."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.assertNotIn("deals", payload)

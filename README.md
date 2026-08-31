@@ -37,7 +37,17 @@ sailings — 53 of which it is the only seller of — a berth count on 833, the
 entry bar and stated dive count on 441 trips, and the only fee book the 22
 vessels liveaboard.com sells no berths on have. Neither seller is ever allowed
 to speak for the other: a row states a discount only from the seller whose fare
-it prints, and a row PADI alone lists carries no second price at all.
+it prints, a row PADI alone lists carries no second price at all, and each
+markdown is dated to the day *that* seller's book was read — two crawls, two
+days, and one date over both dated half of them wrong.
+
+**Nor is a seller allowed to speak about a reading this pipeline threw away.**
+A cabin ladder more than 3% from the price above it is not that sailing's, and
+`promote` drops it — but the sale beside it was still read off the same book,
+so 36 Aggressor rows printed "−33%, down from €2,371" on a berth advertised at
+exactly €2,371. The rejected reading is now ignored everywhere, and the panel
+says how many sailings it could not read rather than reporting them as full
+price.
 
 Prices and availability come from a nightly crawl, and PADI's from a second one
 half an hour later (`padi.yml`). Fees, rental-gear prices and the vessel

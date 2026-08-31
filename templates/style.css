@@ -524,6 +524,21 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 }
 .deals-table .d-off { color:var(--ok); white-space:nowrap; }
 .deals-table .d-native { font-family:var(--font-mono); color:var(--ink-faint); white-space:nowrap; }
+/* One seller per line, each with the day it was read. Two lines at most, and
+   on twelve of the twenty-two rows one. */
+.deals-table .d-native .reading { display:block; }
+/* The second seller's columns, set off by a rule rather than by a colour: the
+   header above them names the seller, and the group only has to be visibly a
+   group. `border-left` on the first cell of the run does it in one declaration
+   and keeps working when the row is a boat PADI advertises and no ladder
+   caught, whose left half is dashes. */
+.deals-table .g-first { border-left:1px solid var(--rule); padding-left:12px; }
+.deals-table .d-group th {
+  border-bottom:none; padding-bottom:0; color:var(--ink-dim);
+}
+/* A boat PADI publishes no offer for. Quieter than a dash in a money column,
+   because it is not a missing number -- there is no offer to have one. */
+.deals-table .d-none { color:var(--ink-faint); }
 
 /* The markdown, beside the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows
