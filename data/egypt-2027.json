@@ -143587,6 +143587,11 @@
         }
       ]
     },
+    "on_sale_changes": {
+      "read": "2026-08-28",
+      "sailings": 864,
+      "first_reading": true
+    },
     "coverage": {
       "unread": 9,
       "banner_unsupported": 2,
@@ -143598,11 +143603,6 @@
           "Red Sea Aggressor V"
         ]
       }
-    },
-    "on_sale_changes": {
-      "read": "2026-08-28",
-      "sailings": 864,
-      "first_reading": true
     }
   },
   "stale_ladders": [
