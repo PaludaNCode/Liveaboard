@@ -55,6 +55,24 @@ from urllib.parse import urlencode
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
+from .fees import CUSTOMARY_CODES, TOGGLED_CODES, _tier_for, classify_label
+
+# `.fees` used to be imported lazily, inside the three functions below that need
+# it, and that cost a 530-request crawl 2026-08-30. `taxonomy` is imported above
+# at module load; `fees.py` was not, so it compiled *fresh* at the book-building
+# step -- forty minutes into the run -- against the `taxonomy` already sitting in
+# `sys.modules`. A `FeeCode` member added to the source meanwhile existed in the
+# new `fees.py` and not in the loaded enum, and the run died on `AttributeError`
+# with every page fetched and nothing written.
+#
+# So: a module a long fetch depends on is imported before the fetch starts, not
+# after it. Then the process holds one consistent snapshot of the code from its
+# first line and an edit to a source file cannot reach into a run in flight.
+# `fees` imports only `taxonomy`, `re` and `dataclasses`, so there is no cycle to
+# be avoided here and never was -- the laziness bought nothing.
+#
+# `--rebuild` exists because of that run and is the other half: re-parsing the
+# cached raw store must never mean re-crawling somebody else's 530 pages.
 
 HOST = "travel.padi.com"
 """PADI Travel is its own host. `www.padi.com/travel` redirects here, and the
@@ -298,8 +316,6 @@ def _tier_for_inclusion(code: FeeCode) -> FeeTier:
     the check that matters: of the 243 included lines in the dataset today,
     nitrox is conditional and harbour fees are mandatory.
     """
-    from .fees import CUSTOMARY_CODES, TOGGLED_CODES, _tier_for
-
     return _tier_for(code, required=code not in TOGGLED_CODES | CUSTOMARY_CODES)
 
 
@@ -914,7 +930,6 @@ class PadiComAdapter(SourceAdapter):
         number. A vessel whose page states no currency gets no fees rather than
         fees assumed to be euro.
         """
-        from .fees import classify_label
 
         lines: list[dict[str, object]] = []
         unreadable: list[str] = []
@@ -1020,7 +1035,6 @@ class PadiComAdapter(SourceAdapter):
         through. A second vocabulary drifts, and the day it drifts is the day
         one seller's "Harbour fees" and the other's mean different things.
         """
-        from .fees import classify_label
 
         entries = detail.get(INCLUDED_FIELD)
         if not isinstance(entries, list):
