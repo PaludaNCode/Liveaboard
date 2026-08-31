@@ -2561,12 +2561,17 @@
      could never guide the way back.
 
      Zero keeps the chip rather than hiding it, which is where this departs
-     from `chips()`. A bank drops an unreachable option because the reader can
-     see the others and infer the rule; a lone toggle that vanishes reads as a
-     feature that is gone. It stays, dimmed and unclickable, saying 0 against
-     a title that spells out what the 0 is about. Still clickable while it is
-     switched *on*, for the same reason a picked chip survives at zero: the way
-     out must not disappear. */
+     from `chips()` — and the reason is stronger than the symmetry it breaks.
+     **"Nothing here is on sale" is an answer.** A reader deciding between two
+     weeks wants to know that one of them has no discount to wait for, and a
+     control that disappears tells them nothing at all; a bank can drop an
+     unreachable option because the neighbouring chips still carry the rule,
+     but a lone toggle has no neighbours to carry it.
+
+     So it stays, dimmed and unclickable, saying 0 against a title that spells
+     out what the 0 is about. Still clickable while it is switched *on*, for
+     the same reason a picked chip survives at zero: the way out must not
+     disappear. */
   var onSale = document.getElementById("onSale");
   if (D.departures.some(function (d) { return !!d.sale; })) {
     onSale.hidden = false;
