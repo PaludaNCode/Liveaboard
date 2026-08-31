@@ -3043,8 +3043,20 @@
 
     /* Rows shown, boats, itineraries count what the table is showing, so they
        belong to the one view that has a table. Left up elsewhere they would be
-       three numbers about a table that is not on screen. */
-    statsHost.hidden = name !== "trips";
+       three numbers about a table that is not on screen.
+
+       Blanked rather than removed, which is the whole of what keeps the header
+       still. `hidden` took the block out of the flow and the masthead is the
+       taller of the title and these numbers, so switching view resized it --
+       72px to 57 on a laptop, 87 to 44 on a phone -- and the rail, the toolbar
+       and the first row of prices all jumped with it. `visibility` keeps the
+       box and its height while taking the numbers off the screen and out of
+       the accessibility tree, so the two rules do not have to be traded
+       against each other. Reserving the space here rather than as a
+       `min-height` on the masthead means the reserve is always exactly what
+       the numbers need, instead of a constant that drifts the day the font
+       or the wording changes. */
+    statsHost.classList.toggle("off", name !== "trips");
 
     /* The tab, the history entry and the bookmark. Prefixed rather than
        appended, because every one of those three truncates from the end and

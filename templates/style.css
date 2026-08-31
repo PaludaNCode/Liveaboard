@@ -127,6 +127,11 @@ h1 {
 }
 
 .stats { display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+/* Off on the views with no table, without leaving the flow -- see showView().
+   `visibility` rather than the `hidden` attribute: the numbers must go, the
+   height must stay, or the whole page under the masthead jumps on every view
+   change. */
+.stats.off { visibility:hidden; }
 .stat { display:flex; flex-direction:column; gap:1px; }
 .stat b {
   font-family:var(--font-mono); font-size:15px;

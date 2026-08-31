@@ -203,6 +203,46 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_the_header_is_the_same_height_on_every_view(self) -> None:
+        """Switching view must not move the page under the rail.
+
+        The masthead is the taller of the title and the three counts, and the
+        counts belong to the one view with a table -- so hiding them resized
+        the header on every view change: 72px to 57 on a laptop, 87 to 44 on a
+        phone, with the rail, the toolbar and the first row of prices jumping
+        with it. They are blanked rather than removed now, which keeps both
+        rules: the numbers are off the screen and out of the accessibility
+        tree on the views they do not describe, and the box they sit in still
+        holds its height.
+        """
+        page = self.open(1440, 900)
+        try:
+            for width, height in SIZES:
+                with self.subTest(size=(width, height)):
+                    seen = []
+                    for view in ("#trips", "#sale", "#history"):
+                        self.sweep(page, width, height, view)
+                        seen.append(page.evaluate("""() => {
+                          const m = document.querySelector('.masthead');
+                          const r = document.querySelector('.rail');
+                          const s = document.getElementById('stats');
+                          return { head: Math.round(m.getBoundingClientRect().height),
+                                   rail: Math.round(r.getBoundingClientRect().y),
+                                   shown: getComputedStyle(s).visibility === 'visible' };
+                        }"""))
+
+                    heights = {m["head"] for m in seen}
+                    self.assertEqual(len(heights), 1,
+                                     f"the masthead changes height across views: {heights}")
+                    tops = {m["rail"] for m in seen}
+                    self.assertEqual(len(tops), 1,
+                                     f"the rail moves when the view changes: {tops}")
+                    # And the counts are still only on the view they count.
+                    self.assertEqual([m["shown"] for m in seen], [True, False, False],
+                                     "the row counts are showing on a view with no table")
+        finally:
+            page.close()
+
     # -- the router ----------------------------------------------------------
 
     def test_leaving_the_trips_view_and_returning_keeps_your_place(self) -> None:
