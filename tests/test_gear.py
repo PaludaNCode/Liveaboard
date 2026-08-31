@@ -185,5 +185,78 @@ class TestACappedRunCannotEmptyTheFeeBook(unittest.TestCase):
         self.assertIn("fresh fee book", noise.getvalue())
 
 
+class TestAFigureWithNoUnitIsNotAPerTripFigure(unittest.TestCase):
+    """Five vessels quote a bundle price with nothing after the number.
+
+    Bella 2's is ``<span>€40</span>``. Read as per trip -- the cheapest of the
+    three units the page uses elsewhere -- that is a third of what a three-night
+    trip charges for the same kit and a seventh of a week's, and both the boat's
+    own singles (€11/day for a BCD) and PADI's book for the same set (40 EUR per
+    diving day) say a day.
+
+    70 vessels quote a priced bundle and 65 state a unit -- 25 per trip, 25 per
+    week, 15 per day -- so the unit is the norm and its absence is the page
+    failing to state one. The five that leave it out span every answer on the
+    evidence beside them: Emperor Superior's unitless €206 is what its two
+    sisters state per week, Bella 2's €40 is a day, and Blue Pearl's €135 sits
+    between a sister quoting €135/week and one quoting €135/trip. So there is no
+    fallback that is right, and the figure is stated in the note instead of
+    being added up under a unit nobody wrote.
+    """
+
+    DIALOG = """
+      <h4>Rental Gear Prices</h4>
+      <h5>Single gear rent</h5>
+      <ul><li> <strong>BCD</strong> <span>&#8364;11 / day</span>
+              <li> <strong>Fins</strong> <span>&#8364;5</span></ul>
+      <h5>Full equipment rent</h5>
+      <ul><li> <strong>BCD, Fins, Mask, Regulator, Wetsuit</strong>
+              <span>&#8364;40</span></ul>
+    """
+
+    def setUp(self):
+        from html import unescape
+
+        self.reading = parse_gear(unescape(self.DIALOG))
+        self.fee = to_fee_dict(self.reading, PROVENANCE)
+
+    def test_the_bundle_states_no_basis(self):
+        self.assertIsNone(self.reading.bundle.basis)
+        self.assertEqual(self.reading.bundle.low, 40.0)
+
+    def test_a_single_item_states_no_basis_either(self):
+        """45 priced singles across the fleet are written this way."""
+        fins = next(i for i in self.reading.items if i.label == "Fins")
+        self.assertIsNone(fins.basis)
+        self.assertIs(next(i for i in self.reading.items if i.label == "BCD").basis,
+                      FeeBasis.PER_DAY)
+
+    def test_the_note_prints_the_figure_without_inventing_a_unit(self):
+        self.assertEqual(
+            next(i for i in self.reading.items if i.label == "Fins").as_text(),
+            "Fins \u20ac5")
+
+    def test_no_total_claims_the_bundle(self):
+        self.assertIsNone(self.fee["amount"])
+
+    def test_the_figure_survives_where_a_reader_can_see_it(self):
+        self.assertIn("\u20ac40", self.fee["note"])
+        self.assertIn("no unit stated", self.fee["note"])
+
+    def test_it_still_loads_as_a_fee_item(self):
+        """An unpriced line is a fee this dataset already models: the operator
+        rents the kit and the page cannot say what a trip's hire comes to."""
+        item = FeeItem.from_dict(self.fee, "EUR")
+        self.assertIs(item.code, FeeCode.GEAR_RENTAL)
+        self.assertIs(item.tier, FeeTier.OPTIONAL)
+        self.assertIsNone(item.amount)
+
+    def test_a_stated_unit_is_untouched(self):
+        """The regression this must not cause: 65 vessels do state one."""
+        fee = to_fee_dict(parse_gear(markup()), PROVENANCE)
+        self.assertEqual(fee["amount"], {"amount": 206.0, "currency": "EUR"})
+        self.assertEqual(fee["basis"], FeeBasis.PER_WEEK.value)
+
+
 if __name__ == "__main__":
     unittest.main()

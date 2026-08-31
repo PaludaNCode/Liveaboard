@@ -766,3 +766,218 @@ class TestWhatTheFareAlreadyCovers(unittest.TestCase):
                                    "validFrom": "2025-01-01", "validTo": "2026-01-01"}]},
             "USD")
         self.assertEqual(book["lines"], [])
+
+
+class TestAPriceStatedAsAString(unittest.TestCase):
+    """`price` is null on 236 mandatory entries and `extraValue` says 133 of them.
+
+    Bella 2 states ``price: null, extraValue: "5 EUR"`` for its Coast Guard Fee
+    and ``"10 EUR"`` for its Service fees -- two of the three mandatory charges
+    on every trip that boat sells, and the only fee book the site has for it,
+    since liveaboard.com sells no berth on the vessel. `fees_from_payload` read
+    ``price`` alone and called them unpriced.
+
+    Reading the second field takes the store from **259 trips whose mandatory
+    bill adds up to 332**.
+    """
+
+    def entry(self, **extra):
+        return {"title": "Coast Guard Fee", "payedPer": 30, "isMandatory": True, **extra}
+
+    def book(self, *entries, currency="EUR"):
+        return PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": list(entries)}, currency)
+
+    def line(self, **extra):
+        return self.book(self.entry(**extra))["lines"][0]
+
+    def test_the_string_is_read_where_the_number_is_null(self):
+        self.assertEqual(self.line(price=None, extraValue="5 EUR")["amount"],
+                         {"amount": 5.0, "currency": "EUR"})
+
+    def test_a_bare_number_takes_the_vessels_currency(self):
+        """Which is the assumption `price` already carries: nothing in the
+        payload states a currency, so the vessel's is passed in."""
+        self.assertEqual(self.line(price=None, extraValue="40")["amount"],
+                         {"amount": 40.0, "currency": "EUR"})
+
+    def test_the_number_wins_wherever_it_is_one(self):
+        """Where the two disagree, `extraValue` is the stale one. Blue Horizon
+        states 56 against "8" -- 8 a night over its seven-night trips, kept
+        beside the total that replaced it, and still 56 on its ten-night
+        sailings."""
+        self.assertEqual(self.line(price=56.0, extraValue="8")["amount"],
+                         {"amount": 56.0, "currency": "EUR"})
+
+    def test_a_string_with_no_number_in_it_is_not_a_price(self):
+        """Blue Melody's fuel surcharge carries ``extraValue: "USD"``."""
+        self.assertNotIn("amount", self.line(price=None, extraValue="USD"))
+
+    def test_a_percentage_of_something_else_is_not_a_price(self):
+        """"14% GST (on onboard purchases)" carries the 14 as its figure.
+        Anchored at both ends so prose cannot become money."""
+        line = self.book(self.entry(title="Local fees", price=None,
+                                    extraValue="14% GST (on onboard purchases)"))["lines"][0]
+        self.assertNotIn("amount", line)
+
+    def test_a_stated_currency_beats_the_vessels(self):
+        """Andromeda writes "5 USD" on a vessel PADI prices in EUR. The
+        vessel's currency is an assumption; this is the source speaking."""
+        self.assertEqual(self.line(price=None, extraValue="5 USD")["amount"],
+                         {"amount": 5.0, "currency": "USD"})
+
+    def test_a_currency_this_parser_cannot_name_is_not_assumed_into_one(self):
+        """One vessel writes "8 EU". It plainly means euro and is plainly not a
+        currency code, and a rule loose enough to take it is loose enough to
+        take the next thing that only looks like one."""
+        self.assertNotIn("amount", self.line(price=None, extraValue="8 EU"))
+
+    def test_a_range_keeps_both_ends(self):
+        """As liveaboard.com's ranges do: a spread reported as its low end
+        understates the bill."""
+        line = self.line(price=None, extraValue="35-50 EUR")
+        self.assertEqual(line["amount"], {"amount": 35.0, "currency": "EUR"})
+        self.assertEqual(line["amount_max"], {"amount": 50.0, "currency": "EUR"})
+
+    def test_a_priced_string_completes_a_bill(self):
+        self.assertTrue(self.book(self.entry(price=None, extraValue="5 EUR"))["complete"])
+
+    def test_an_unreadable_string_leaves_the_bill_incomplete(self):
+        self.assertFalse(self.book(self.entry(price=None, extraValue="ask on board"))["complete"])
+
+
+class TestTheOptionalHalfOfPadisDisclosure(unittest.TestCase):
+    """`optionalOnBoard` and its two siblings, read by nothing until now.
+
+    The module had the mandatory lists and the inclusions and not the Optional
+    ones -- the lists holding nitrox and gear hire, the two extras this site
+    puts a toggle on. liveaboard.com's parser has read the Required and Optional
+    blocks together since the beginning, so one seller's book was being read at
+    a shallower depth than the other's.
+
+    Bella 2 is what it cost: PADI states 50 EUR for nitrox and 40 EUR per diving
+    day for the full scuba set, and the page showed neither, on a vessel where
+    PADI's book is the only fee book there is.
+    """
+
+    def entry(self, title, **extra):
+        return {"title": title, "payedPer": 30, "isMandatory": False, **extra}
+
+    def book(self, *entries, field="optionalBookableAdvancePaidOnBoard", **kw):
+        return PadiComAdapter.fees_from_payload({field: list(entries), **kw}, "EUR")
+
+    def lines(self, *entries, **kw):
+        return [(l["code"], l["tier"], l.get("basis"), (l.get("amount") or {}).get("amount"))
+                for l in self.book(*entries, **kw)["lines"]]
+
+    def test_nitrox_is_read_and_the_toggle_governs_it(self):
+        self.assertEqual(self.lines(self.entry("Nitrox", extraValue="50 EUR")),
+                         [("nitrox", "conditional", "per_trip", 50.0)])
+
+    def test_the_gear_set_is_priced_in_the_unit_padi_states(self):
+        """``payedPer: 40`` is "Diving day". Bella 2's set is 40 EUR a day, and
+        the other seller's page states the same €40 with no unit at all."""
+        self.assertEqual(
+            self.lines(self.entry("Full scuba set", payedPer=40, extraValue="40 EUR")),
+            [("gear_rental", "conditional", "per_day", 40.0)])
+
+    def test_the_set_names_its_own_contents(self):
+        """``fullSetDescription`` is on all 401 of these entries, exactly as the
+        other seller's bundle row names what is in it."""
+        line = self.book(self.entry(
+            "Full scuba set", payedPer=40, extraValue="40 EUR",
+            fullSetDescription="Wetsuit, BCD, Regulator"))["lines"][0]
+        self.assertEqual(line["note"], "Full scuba set: Wetsuit, BCD, Regulator")
+
+    def test_a_qualification_is_not_the_gas(self):
+        """"PADI Enriched Air Diver (Nitrox)" is on 313 of these entries and
+        matched the nitrox pattern, which would have priced a certification as
+        the gas a diver breathes -- on the toggle this site counts."""
+        self.assertEqual(
+            self.lines(self.entry("PADI Enriched Air Diver (Nitrox)", extraValue="100 EUR")),
+            [("nitrox_course", "optional", "per_trip", 100.0)])
+
+    def test_an_unpriced_optional_extra_survives_as_a_line(self):
+        """A third state, distinct from zero and from absent, and it has to
+        reach the page: "Alcohol" is listed with no figure on 269 trips."""
+        self.assertEqual(self.lines(self.entry("Alcohol")),
+                         [("alcohol", "optional", "per_trip", None)])
+
+    def test_a_charging_unit_that_will_not_normalise_is_dropped(self):
+        """PADI prices its courses per course and its transfers "return, per
+        person"; `PAYED_PER` maps neither, and a price in a unit this dataset
+        cannot add to a trip's bill is not one it may add."""
+        self.assertEqual(self.lines(self.entry("Private dive guide", payedPer=80,
+                                              extraValue="500 EUR")), [])
+
+    def test_an_optional_extra_nobody_can_classify_never_blocks_a_bill(self):
+        """72 of the 111 distinct titles here are courses, amenities and single
+        gear items -- "PADI Deep Diver", "Espresso coffee", "Wetsuit". An
+        unrecognised extra costs a line of data; a misrecognised one puts an
+        invented charge on the page."""
+        book = self.book(self.entry("Espresso coffee", extraValue="3 EUR"),
+                         self.entry("Underwater scooter", extraValue="50 EUR"))
+        self.assertEqual(book["lines"], [])
+        self.assertEqual(book["unreadable"], [])
+        self.assertTrue(book["complete"])
+
+    def test_a_parenthetical_is_a_qualifier_here_too(self):
+        """The same rule the inclusions keep. "Airport Meet & Greet (VISA
+        assistance, eligible countries only)" is help with the paperwork and
+        not the €25 a diver still pays at the airport."""
+        self.assertEqual(
+            self.lines(self.entry("Airport Meet & Greet (VISA assistance, "
+                                  "eligible countries only)", extraValue="20 EUR")),
+            [])
+
+    def test_one_line_per_code(self):
+        """As `parse_extras` keeps on the other seller's Optional block: two
+        lines under one code are one charge printed twice, and where the site
+        toggles that code they are also that charge counted twice."""
+        self.assertEqual(
+            self.lines(self.entry("Nitrox", extraValue="50 EUR"),
+                       self.entry("Nitrox 15 liter tanks", extraValue="65 EUR")),
+            [("nitrox", "conditional", "per_trip", 50.0)])
+
+    def test_a_mandatory_charge_of_the_same_code_wins_outright(self):
+        """The mandatory list is a stronger claim about the same charge, and it
+        is the one that has to add up."""
+        book = PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": [{"title": "Nitrox", "payedPer": 30, "price": 60.0}],
+             "optionalOnBoard": [self.entry("Nitrox", extraValue="50 EUR")]}, "EUR")
+        self.assertEqual([(l["code"], l["tier"], l["amount"]["amount"]) for l in book["lines"]],
+                         [("nitrox", "mandatory", 60.0)])
+
+    def test_an_optional_charge_cannot_make_a_bill_incomplete(self):
+        """`complete` is a verdict on what a diver must pay. An unpriced
+        cocktail says nothing about it."""
+        book = PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": [{"title": "Harbour fees", "payedPer": 30, "price": 40.0}],
+             "optionalOnBoard": [self.entry("Alcohol")]}, "EUR")
+        self.assertTrue(book["complete"])
+
+    def test_a_priced_charge_still_beats_an_inclusion(self):
+        """PADI prices nitrox on 30 trips whose inclusions also say "Free
+        nitrox", and 17 spell out why: "15 LITER tank nitrox (only 12 liter is
+        free of chanrge)". Both claims are true; the one with money on it is the
+        one a reader must not miss."""
+        book = self.book(self.entry("Nitrox", extraValue="50 EUR"),
+                         whatsIncludedNew=[{"title": "Free nitrox"}])
+        self.assertEqual([(l["code"], bool(l.get("included"))) for l in book["lines"]],
+                         [("nitrox", False)])
+
+    def test_but_a_charge_naming_no_figure_loses_to_one(self):
+        """15 trips list a transfer with no price *and* state the transfer as
+        included, so first-past-the-post published "airport transfer, price
+        unknown" where the seller had said it was covered. An unpriced line is
+        not a stated amount, and included fees stay in the breakdown at zero."""
+        book = self.book(self.entry("Transfer from/to local hotels (round-trip)"),
+                         whatsIncludedNew=[{"title": "Transfer to/from the airport"}])
+        self.assertEqual([(l["code"], bool(l.get("included"))) for l in book["lines"]],
+                         [("airport_transfer", True)])
+
+    def test_an_optional_entry_dated_out_of_the_season_is_dropped(self):
+        self.assertEqual(
+            self.lines(self.entry("Nitrox", extraValue="50 EUR",
+                                  validFrom="2025-01-01", validTo="2026-01-01")),
+            [])

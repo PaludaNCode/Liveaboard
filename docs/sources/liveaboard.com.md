@@ -302,8 +302,9 @@ Serenity's is conditional on the marine parks. Anything rendering it says so.
 ## Facts, and where each one is
 
 Everything in the "no" column comes from JSON-LD in the served HTML
-(`scrape/jsonld.py`); everything in the "yes" column is rendered client-side
-and needs Playwright.
+(`scrape/jsonld.py`). The "yes" column is what `tools/scrape_fees.py` drives a
+browser for — **which is not the same as client-rendered**, and three of the
+four are not. See *What the browser is actually for* below.
 
 | Fact | Location | Browser |
 |---|---|---|
@@ -312,7 +313,7 @@ and needs Playwright.
 | **Operator** | `Event.organizer.name` — **878/878 events**, 42 companies. Also `Product.brand.name`, which agrees on all 878. Parsed and discarded ([#35](https://github.com/PaludaNCode/Liveaboard/issues/35)) | no |
 | Trip title (ports, and usually the reefs) | `Event.name`, e.g. `Simply The Best (Hurghada - Marsa Ghalib)` | no |
 | Vessel id / tour id | `Product.sku` = `LA-1538-6565`; `Event.@id` = that plus `-{tourid}`, on all 878 | no |
-| Required / Optional Extras | rendered; read from `document.body.innerText` (`scrape/fees.py`) | **yes** |
+| Included / Required / Optional Extras | rendered; read from `document.body.innerText` (`scrape/fees.py`). **Three blocks, and only the last two were read** — see below | **yes** |
 | Rental gear prices | `#modal-gear` → `<h5>` per section, then `<li><strong>ITEM</strong><span>PRICE / week</span></li>` (`scrape/gear.py`) | **yes** (already in the DOM; the URL hash alone opens it) |
 | Guests, cabins, length, year built | `#help-content-boat-amenities-specifications` → `<dl><dt>Max guests</dt><dd>20</dd></dl>` (`scrape/vessel.py`) | **yes** |
 | Nitrox inclusion | `#help-content-boat-amenities-diving` → `<li>Free Nitrox</li>` | **yes** |
@@ -330,6 +331,92 @@ to read.
 The three browser-only panels and the gear dialog are **all in the document at
 page load**. `tools/scrape_fees.py` therefore reads fees, gear and
 specifications from one page load per vessel, not four.
+
+### The disclosure is three blocks, and one of them was never opened
+
+Every vessel page prints, in one paragraph:
+
+```
+Included: VAT, Drinking Water, Soft drinks, Tea & Coffee, Welcome Cocktails,
+Full-Board Meal Plan (All meals), Snacks, Diving Package, Night Dives, Nitrox,
+Snorkeling Guide, Beach Towels, Cabin Towels, Complimentary Toiletries, Deck
+Towels, WiFi internet.
+Required Extras: Mandatory Service Charge (€10 / day), National Park Fees
+(€10 / day), Port Fees (€5 / trip).
+Optional Extras: Airport Transfer, Hotel Transfer, Alcoholic Beverages,
+Nitrox Course (€100-200 / activity), Rental Gear, Laundry / Pressing Services.
+```
+
+That is Bella 2's, 2026-08-31 (`tools/probe_disclosure.py`). `fees.BLOCK`
+matched `(Required|Optional) Extras:` and **the `Included:` block was read by
+nothing**, on all 79 pages — 63
+state all three, 6 state Included and Optional and no Required block at all.
+**Included fees stay in the breakdown at zero** is an invariant of this project
+and it was being kept on PADI's `whatsIncludedNew` alone.
+
+Measured over all 79 pages: 273 lines, of which VAT on 79, a transfer on 59,
+**nitrox on 49**, a fuel surcharge on 16, port fees on 10, environmental tax on
+9, park fees on 8. Nitrox is the one that found this — the other seller charges
+50 EUR for it on Bella 2 and this one lists it as included, and the page showed
+neither.
+
+**It answers the ambiguity `pricing.mandatory_known` was written for.** Seven
+vessels publish no Required block, and that silence read as "either bundled or
+collected at the dock, and it does not say which". Six of the seven name
+National Park Fees, Port Fees and the Fuel Surcharge in the Included block —
+Emperor Asmaa, the boat that docstring calls out by name for disclosing least,
+states all three as covered. The seventh, Odyssey, states VAT and the
+Environment Tax. The ambiguity was in what this code read, not in what the
+operators published.
+
+Where a code appears in two blocks, a **priced charge wins and an unpriced one
+loses**. It decides four vessels and every one is one of our codes covering two
+services: Topaz includes the airport transfer and charges €25 for the hotel one;
+Oceanix includes a naturalist guide and charges €300 for a snorkelling one; Dune
+Longara lists a transfer with no price *and* states the transfer as included.
+
+### What the browser is actually for
+
+Probed 2026-08-31 by `tools/probe_disclosure.py`, all 79 vessel pages over
+plain `urllib` with no browser. The
+`?m=` vessel page **serves all four "browser-only" panels in its HTML**, and the
+distinction is not rendering, it is markup:
+
+| Panel | In the served bytes | Today's parser on those bytes |
+|---|---|---|
+| Included / Required / Optional Extras | yes | **works** — 11 to 13 fees per vessel, on all 79 |
+| `#modal-gear` gear prices | yes | **works** — bundle and singles, on all 79 |
+| Boat Specifications | yes, under `<h3>Boat Specifications</h3>` rather than inside the modal id the scraper queries | **no** |
+| Diving amenities (`Nitrox available`, `Free Nitrox`) | yes, in `#boat-highlights-bundle` | **no** |
+
+The last two fail for one reason and it is worth writing down: the page ships
+**unclosed tags** — `<dl><dt class=!font-semibold>Year built <dd>2017</dl>` and
+`<li ...> <span>Nitrox available</span> <li ...>`. `SPEC_ROW` and `TICK` both
+require a closing tag, and get one only because Playwright's `inner_html()`
+returns the *normalised DOM*. So what those two parsers need is an HTML parser,
+not a browser.
+
+Not acted on, and deliberately: `scrape_fees.py` reading these over plain HTTP
+would drop the weekly Playwright run entirely, and that is a change to make on
+purpose with its own probe of the two selectors, not as a side effect of a fee
+fix. Recorded here so the next reader does not re-derive "these need a browser"
+from the table above.
+
+### A gear bundle sometimes states no unit
+
+`<span>€40</span>`, with nothing after the number (`tools/probe_disclosure.py`
+prints the unit or says there is none). 70 vessels quote a priced
+bundle and 65 state a unit — 25 per trip, 25 per week, 15 per day — so the unit
+is the norm and its absence is the page failing to state one. The five that do
+not are Bella 2 (€40), Blue Diamond (€220), Blue Pearl (€135), Emperor Superior
+(€206) and Ghazala Adventure (€200), and they span every answer on the evidence
+beside them: Emperor Superior's is what its two sisters state per week, Bella
+2's is a day (its own singles are €11/day for a BCD, and PADI prices the same
+set at 40 EUR per diving day), Blue Pearl's sits between a sister quoting
+€135/week and one quoting €135/trip. Read as per trip — the cheapest of the
+three — Bella 2's hire was a third of a three-night trip's and a seventh of a
+week's. `scrape/gear.py` states the figure in the note and adds it to no total.
+45 priced *single* items are written the same way.
 
 ## Traps
 
