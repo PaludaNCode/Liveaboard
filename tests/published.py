@@ -120,6 +120,24 @@ def committed(name: str = LIVE) -> Path:
     return path
 
 
+def site_page() -> Path:
+    """The committed `site/index.html`, or a skip explaining which reason.
+
+    Published output like the dataset, and gated for the same reason: an
+    assertion about what shipped must gate a commit and never a fetch. It lives
+    here rather than being opened directly so the gate stays the one door.
+    """
+    if CODE_ONLY:
+        raise unittest.SkipTest(
+            f"{GATE}=code: this run gates a fetch, and an assertion about "
+            f"what was published must never stop one"
+        )
+    path = ROOT / "site" / "index.html"
+    if not path.exists():
+        raise unittest.SkipTest(f"{path} has not been built on this checkout")
+    return path
+
+
 def raw(name: str = LIVE) -> Any:
     """One committed file, parsed."""
     return json.loads(committed(name).read_text(encoding="utf-8"))

@@ -130,6 +130,41 @@ runs:
           echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
           git fetch origin "$branch"
           git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
+
+          # A rebase moves the inputs under the derived files, so the derived
+          # files have to be made again.
+          #
+          # `-X theirs` favours the commit being replayed -- ours -- which is
+          # right for `data/cabins.json`, the reading this job actually took,
+          # and wrong for `data/egypt-2027.json` and `site/index.html`, which
+          # are nobody's reading: they are output, built at checkout time from
+          # inputs that have since changed underneath. So our copies overwrote
+          # a *fresher* dataset and page.
+          #
+          # It happened on 2026-08-31, on the second and third commits of the
+          # day. A capped `cabins.yml` landed a cabin book collected 08-31; the
+          # `deals.yml` run already in flight had built its page before that,
+          # and its rebase put back a page saying `berths_read: 2026-08-28`
+          # while `data/cabins.json` beside it said 08-31. The site published a
+          # berth-count date three days stale about its own committed data,
+          # which is exactly the kind of quiet wrongness this project exists to
+          # catch. `promote --check` was green throughout -- it compares the
+          # dataset with its inputs and says nothing about the page -- and the
+          # next run healed it, so the window was real, deployed and invisible.
+          #
+          # `checks` cannot catch this: it runs before the push, and the rebase
+          # only happens after the push is rejected. So it is re-derived here,
+          # and hard-coded rather than passed in as an input, because nine
+          # callers each spelling out their own re-derivation is nine chances
+          # for one of them to omit it.
+          echo "re-deriving the dataset and page on top of the rebased inputs"
+          PYTHONPATH=src python3 -m liveaboard.cli promote
+          PYTHONPATH=src python3 -m liveaboard.cli build
+          # shellcheck disable=SC2086
+          git add -A $PUBLISH_PATHS
+          if ! git diff --cached --quiet; then
+            git commit --amend --no-edit
+          fi
         done
         echo "::error::could not push after 3 attempts"
         exit 1

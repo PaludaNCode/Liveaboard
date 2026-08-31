@@ -1752,3 +1752,54 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
         app = self.source()
         self.assertIn("function whoAdvertised(", app)
         self.assertIn("whoAdvertised(d, row)", app)
+
+
+class TestThePageIsWhatItsDataBuilds(unittest.TestCase):
+    """The committed page must be what the committed data renders to.
+
+    `promote --check` proves `data/egypt-2027.json` is what the parser makes of
+    the committed inputs. Nothing made the same claim about `site/index.html`,
+    and the gap is not theoretical: on 2026-08-31 the published page said
+    ``berths_read: 2026-08-28`` while `data/cabins.json` committed beside it
+    said ``2026-08-31``. The site told visitors the berth counts were three
+    days older than the data it shipped them with.
+
+    It arrived through the publish action's rebase. Two data jobs overlapped;
+    `-X theirs` favours the commit being replayed, which is right for the
+    reading that job took and wrong for the *derived* files, which are nobody's
+    reading -- they were built at checkout, before the other job's inputs
+    landed. So a stale page overwrote a fresh one. `promote --check` stayed
+    green the whole time, because the dataset really did match its inputs; only
+    the page was behind. The next run rebuilt and healed it, which is what
+    makes this worth a test rather than a fix alone: the window was real,
+    deployed, and closed itself before anyone could see it.
+
+    The action now re-derives after a rebase. This is the net under that, and
+    the reason it is a test rather than another step in `.github/actions/
+    checks`: `checks` runs before the push, and the rebase only happens after
+    the push is rejected, so by the time this can go wrong `checks` is over.
+    """
+
+    STAMP = re.compile(r'"built":"[^"]*"')
+
+    def test_the_committed_page_matches_a_fresh_render_of_the_committed_data(self):
+        committed = published.site_page()
+        import tempfile
+
+        from liveaboard.render import render
+
+        with tempfile.TemporaryDirectory() as tmp:
+            fresh = render(published.dataset(), tmp, data_dir=published.DATA)
+            a = self.STAMP.sub("", committed.read_text(encoding="utf-8"))
+            b = self.STAMP.sub("", fresh.read_text(encoding="utf-8"))
+
+        # The payload is one enormous line, so a diff would print the whole
+        # page. Report where they part instead, which is what names the field.
+        if a != b:
+            i = next((k for k in range(min(len(a), len(b))) if a[k] != b[k]),
+                     min(len(a), len(b)))
+            self.fail(
+                "site/index.html is not what data/ builds — the page is behind "
+                f"its own data.\n  committed: ...{a[max(0, i - 90):i + 90]}\n"
+                f"  rebuilt  : ...{b[max(0, i - 90):i + 90]}"
+            )
