@@ -413,6 +413,11 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     WORKFLOWS = ROOT / ".github" / "workflows"
     CHECKS = "uses: ./.github/actions/checks"
     PUBLISH = "uses: ./.github/actions/publish"
+    #: The serialised publish job every data workflow now delegates its tail
+    #: to. A caller reaches the push through this rather than containing it,
+    #: which is the third spelling this guard has had to learn -- first inline
+    #: `git push origin`, then the shared action, now the shared workflow.
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
 
     def test_the_shared_actions_exist(self):
         for name in ("checks", "publish"):
@@ -441,8 +446,10 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     @staticmethod
     def _pushes(body: str) -> bool:
         """Whether a workflow commits to the repository, however it does it."""
+        cls = TestEveryPushingWorkflowChecksItself
         return ("git push origin" in body
-                or TestEveryPushingWorkflowChecksItself.PUBLISH in body)
+                or cls.PUBLISH in body
+                or cls.DELEGATE in body)
 
     def test_only_the_shared_action_carries_the_push(self):
         """One definition of the rebase-and-retry. It is subtle — `-X theirs`
@@ -452,12 +459,26 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
                  if "push rejected (attempt" in p.read_text(encoding="utf-8")]
         self.assertEqual(loose, [], f"these re-implement the push loop: {loose}")
 
+    def test_the_shared_publish_workflow_runs_the_checks(self):
+        """The delegation below is only sound because this holds.
+
+        Seven callers stopped containing the checks step when their tail moved
+        into `publish.yml`; if that workflow ever stops running the list, all
+        seven go unchecked at once and every one of them still looks fine.
+        """
+        body = (self.WORKFLOWS / "publish.yml").read_text(encoding="utf-8")
+        self.assertIn(self.CHECKS, body)
+        self.assertIn(self.PUBLISH, body)
+
     def test_every_workflow_that_pushes_runs_them_first(self):
         unchecked = [
             path.name
             for path in sorted(self.WORKFLOWS.glob("*.yml"))
             if self._pushes(body := path.read_text(encoding="utf-8"))
+            # Either it runs the list itself, or it hands the whole tail to
+            # the one workflow that does -- asserted directly above.
             and self.CHECKS not in body
+            and self.DELEGATE not in body
         ]
         self.assertEqual(
             unchecked, [],
@@ -1442,6 +1463,24 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
     WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
     PUBLISHED = ("data", "site")
     PUBLISH = "uses: ./.github/actions/publish"
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
+
+    @staticmethod
+    def is_reusable(text: str) -> bool:
+        """Whether this is a called tail rather than a workflow of its own.
+
+        `workflow_call` workflows fire no `workflow_run` event -- the *caller's*
+        run is what completes -- so `publish.yml` must never be required in
+        pages.yml's watch list, and adding it would watch nothing.
+
+        Stated rather than left to luck. This guard already passed on it for
+        the wrong reason: `commits_published_files` looks for the first
+        `paths:` line, and in publish.yml that is the *input declaration*,
+        which has no value, so the check fell through and returned False. The
+        answer was right and the reasoning was an accident, which is one
+        refactor away from being wrong and still green.
+        """
+        return "workflow_call:" in text
 
     def commits_published_files(self, text: str) -> bool:
         """Whether the workflow commits anything the page is built from.
@@ -1452,10 +1491,20 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
         every workflow was skipped, and this test passed by having nothing left
         to look at. Same failure as the push guard above, from the same commit.
         """
-        if self.PUBLISH in text:
-            staged = re.search(r"^\s*paths:\s*[\"']?(.*?)[\"']?\s*$", text, re.M)
-            # No `paths` means the action's default, which is `data site`.
-            names = re.findall(r"[\w./-]+", staged.group(1)) if staged else ["data"]
+        marker = max(text.find(self.PUBLISH), text.find(self.DELEGATE))
+        if marker >= 0:
+            # Only `paths:` *after* the publish step, because `on: push:` has a
+            # `paths:` of its own and `re.search` over the whole file finds that
+            # one first. fees.yml and promote.yml both have such a trigger, and
+            # reading it as a staging list made this guard stop requiring the
+            # two of them -- silently, and in the direction where a data commit
+            # lands and the page keeps serving an older build.
+            staged = re.search(r"^\s*paths:\s*[\"']?([^\n]*?)[\"']?\s*$",
+                               text[marker:], re.M)
+            value = staged.group(1).strip() if staged else ""
+            # An empty or interpolated value is the default, `data site`.
+            names = (["data"] if not value or value.startswith("${{")
+                     else re.findall(r"[\w./-]+", value))
             if any(n.split("/")[0] in self.PUBLISHED for n in names):
                 return True
         for line in re.findall(r"^\s*git add\s+(.*)$", text, re.M):
@@ -1472,7 +1521,8 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
         """
         seen = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
                 if p.name != "pages.yml"
-                and self.commits_published_files(p.read_text(encoding="utf-8"))]
+                and self.commits_published_files(body := p.read_text(encoding="utf-8"))
+                and not self.is_reusable(body)]
         self.assertGreaterEqual(
             len(seen), 5,
             f"only {seen} appear to commit data; has the mechanism moved again?")
@@ -1488,7 +1538,7 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
             if path.name == "pages.yml":
                 continue
             text = path.read_text(encoding="utf-8")
-            if not self.commits_published_files(text):
+            if not self.commits_published_files(text) or self.is_reusable(text):
                 continue
             name = re.search(r"^name:\s*(.+)$", text, re.M)
             self.assertIsNotNone(name, f"{path.name} has no name:")

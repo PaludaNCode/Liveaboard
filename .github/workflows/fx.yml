@@ -50,19 +50,22 @@ jobs:
       - name: Read today's rates
         run: python3 tools/fetch_fx.py --out data/fx.json
 
-      # `data/fx.json` is a promote input, so one commit carries the new rates
-      # *and* the dataset built from them. Committing the rates alone would
-      # leave `promote --check` red until something unrelated healed it.
-      - name: Rebuild the dataset and the page
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote
-          PYTHONPATH=src python3 -m liveaboard.cli build
-
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip so a derived file cannot arrive
+      # stale — see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
         with:
-          subject: "data: exchange rates {today}"
-          nothing: "rates unchanged since the last reading"
+          name: fx-inputs-${{ github.run_id }}
+          path: data/fx.json
+          retention-days: 1
+
+  # `data/fx.json` is a promote input, so one commit carries the new rates
+  # *and* the dataset built from them. Committing the rates alone would leave
+  # `promote --check` red until something unrelated healed it.
+  publish:
+    needs: fx
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: fx-inputs-${{ github.run_id }}
+      subject: "data: exchange rates {today}"
+      nothing: "rates unchanged since the last reading"

@@ -24,9 +24,12 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. All seven source workflows promote on them, as do
-`promote.yml` and the CI check, so one canonical set of inputs lives in
-`cli.py` and cannot drift apart across nine callers.
+Take the defaults. There is now exactly **one** place a job promotes —
+`.github/workflows/publish.yml`, the serialised tail every pushing workflow
+delegates to — plus the rebase path in `.github/actions/publish` and
+`promote --check` in `.github/actions/checks`. Nine callers spelling out their
+own promote became three, so "one canonical set of inputs, in `cli.py`" is
+structural rather than a convention nine files have to keep.
 
 **A test over committed data gates the commit, never the fetch.** The suite
 holds both kinds and the default command runs both. Seven workflows run the
@@ -61,7 +64,28 @@ itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` �
 are outside it: no crawl touches them, so nothing asserted about them can ever
 be cleared by fetching.
 
-**One source per workflow, and two shared actions.** `refresh.yml` bundled the
+**One source per workflow; parallel fetches, one serialised push.** Each source
+fetches on its own, independently — that is what the split bought. Everything
+from `promote` onwards is a second job, `.github/workflows/publish.yml`, and its
+`concurrency` group admits **one publish at a time across every caller**.
+
+The reason is a bug this shape makes unreachable rather than repairable. Two
+jobs in flight both derive `data/egypt-2027.json` and `site/index.html` from a
+checkout, and `-X theirs` on the rebase then favours the *stale* copy: on
+2026-08-31 a `deals.yml` run put back a page saying `berths_read: 2026-08-28`
+beside a `data/cabins.json` a capped `cabins.yml` had just collected on 08-31.
+The site dated its own berth counts three days wrong, `promote --check` was
+green throughout because the dataset really did match its inputs, and the next
+run healed it before anybody could look.
+
+So **a fetching job hands over its inputs and never its output.** What it read
+goes up as an artifact; the dataset and the page are rebuilt in the publish job
+from the branch tip plus those inputs. A derived file never travels, so it
+cannot arrive stale. `TestThePageIsWhatItsDataBuilds` is the net under that,
+and the re-derivation in `.github/actions/publish` is the belt: the rebase path
+still exists for a collision that beats the queue.
+
+**Two shared actions, and one shared workflow.** `refresh.yml` bundled the
 ECB rates, the liveaboard.com crawl, the itinerary fragments and PADI's deals,
 so proving a two-request change to `fetch_deals.py` meant a run that first
 fetched 320 vessel pages from a site with nothing to do with it. Each source is

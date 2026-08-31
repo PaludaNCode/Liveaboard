@@ -1,0 +1,152 @@
+name: Publish what a data job produced
+
+# The serialised half of every data workflow, and the only place that pushes.
+#
+# **Why this is its own job and not the tail of the fetching one.** The seven
+# source workflows each derive `data/egypt-2027.json` and `site/index.html`
+# from a checkout and then push. Two of them in flight at once means both
+# derived from a tree that has since moved, and `-X theirs` on the rebase then
+# favours the *stale* copy: on 2026-08-31 a `deals.yml` run put back a page
+# saying `berths_read: 2026-08-28` beside a `data/cabins.json` a capped
+# `cabins.yml` had just collected on 08-31. The site dated its own berth counts
+# three days wrong ([#128]).
+#
+# The publish action repairs that after the fact by re-deriving on a rebase.
+# This removes the collision instead: `concurrency` below admits one publish at
+# a time across *every* caller, and each one re-checks out the branch tip
+# before it derives. So the derivation always sees the newest inputs, and
+# "stale derived file" stops being a state the pipeline can reach.
+#
+# **Only the push is serialised, deliberately.** The fetches stay parallel and
+# independent, which is what splitting the refresh bought (#123): a one-request
+# ECB read must not queue behind a 320-page crawl or behind the browser-driven
+# fee run. Those live in the caller's own job; everything from `promote`
+# onwards lives here.
+#
+# **So the fetching job hands over its *inputs*, never its output.** Whatever
+# it read goes up as an artifact; the dataset and the page are rebuilt here
+# from the branch tip plus those inputs. That is the whole mechanism — a
+# derived file never travels, so it can never arrive stale.
+
+on:
+  workflow_call:
+    inputs:
+      carry:
+        description: >
+          Artifact holding the input files the fetching job wrote. Unpacked
+          over the fresh checkout before anything is derived. Inputs only:
+          send `data/cabins.json`, never `data/egypt-2027.json`.
+
+          Empty for a caller that fetched nothing — `promote.yml` re-derives
+          from inputs already committed, and still belongs here because it
+          pushes, and anything that pushes has to take its turn.
+        required: false
+        default: ""
+        type: string
+      paths:
+        description: "What to stage, space separated."
+        required: false
+        default: "data site"
+        type: string
+      subject:
+        description: "Commit subject. `{today}` and `{sha}` are substituted."
+        required: true
+        type: string
+      nothing:
+        description: "What to print when there is nothing to commit."
+        required: false
+        default: "nothing changed"
+        type: string
+      changes:
+        description: >
+          Report what moved: append to `data/CHANGES.md`, write the run
+          summary, and put one line in the commit subject.
+
+          Runs after the promote and before the build, and both orderings are
+          load-bearing. Before the *commit*, because the comparison is against
+          `HEAD` and afterwards that would be this run's own output. Before the
+          *build*, because the page embeds the newest `CHANGES.md` entry, and
+          building first shipped a panel that had not yet seen the entry the
+          same run was about to write.
+        required: false
+        default: false
+        type: boolean
+      force:
+        description: "Pass `--force` to promote."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    # One publish at a time, across every workflow that calls this. The group
+    # is deliberately **not** parameterised by the caller: two different
+    # sources colliding is the whole case this exists for, so a per-workflow
+    # group would serialise nothing that was ever in contention.
+    #
+    # `cancel-in-progress: false` because a data commit is not superseded by a
+    # later one — each carries a reading nobody else took, and dropping one
+    # loses that day's figures for its source.
+    concurrency:
+      group: publish-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+      # The branch tip, not `github.sha`. The default checkout takes the commit
+      # the workflow *started* from, which by now may be several data commits
+      # behind -- and deriving from that is exactly the staleness this job
+      # exists to prevent. Naming the branch resolves at checkout time.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Take the inputs the fetch produced
+        if: inputs.carry != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.carry }}
+
+      - name: Rebuild the dataset from the branch tip plus those inputs
+        run: >
+          PYTHONPATH=src python3 -m liveaboard.cli promote
+          ${{ inputs.force && '--force' || '' }}
+
+      - name: Dataset validates
+        run: PYTHONPATH=src python3 -m liveaboard.cli check
+
+      - name: Report what changed
+        if: inputs.changes
+        id: changed
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD \
+            --append data/CHANGES.md \
+            >> "$GITHUB_STEP_SUMMARY"
+          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD --headline)
+          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+
+      - name: Build the site
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
+
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          paths: ${{ inputs.paths }}
+          subject: ${{ inputs.subject }}
+          headline: ${{ steps.changed.outputs.headline }}
+          nothing: ${{ inputs.nothing }}

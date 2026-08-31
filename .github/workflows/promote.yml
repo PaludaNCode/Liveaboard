@@ -54,49 +54,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  promote:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      # Only the tests that answer to `src/`. This job exists to heal a
-      # dataset that has fallen behind its parser, and the tests that assert
-      # against the committed dataset are asserting against exactly the state
-      # it is here to fix — in front of the step that fixes it. The same
-      # deadlock the fetching jobs had, arriving through a different door.
-      - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
-
-      # On the defaults, like refresh.yml, fees.yml and CI's drift check. One
-      # canonical set of inputs, defined in cli.py, that cannot drift apart
-      # across four workflows.
-      - name: Re-promote from the committed candidate
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote \
-            ${{ inputs.force && '--force' || '' }}
-
-      - name: Validate the dataset
-        run: PYTHONPATH=src python3 -m liveaboard.cli check --data data/egypt-2027.json
-
-      - name: Build the site
-        run: PYTHONPATH=src python3 -m liveaboard.cli build --data data/egypt-2027.json
-
-      # This job pushes with the default `GITHUB_TOKEN` like the four data
-      # workflows, so GitHub triggers no CI on what it writes. Its own list,
-      # run against what is about to be pushed, is the only check these
-      # commits get.
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
-        with:
-          paths: "data site"
-          subject: "data: re-promote after {sha}"
-          nothing: "dataset already matches the parser; nothing to commit"
+  # Nothing to fetch: this job re-derives from inputs already committed, after
+  # a change to `src/` or to a hand-maintained file no crawl touches. It still
+  # goes through `publish.yml` because it *pushes*, and anything that pushes
+  # takes its turn -- a re-promote racing a data job is the same collision as
+  # two data jobs racing each other.
+  publish:
+    uses: ./.github/workflows/publish.yml
+    with:
+      force: ${{ inputs.force || false }}
+      subject: "data: re-promote after {sha}"
+      nothing: "dataset already matches the parser; nothing to commit"

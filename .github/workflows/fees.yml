@@ -48,6 +48,8 @@ concurrency:
 jobs:
   fees:
     runs-on: ubuntu-latest
+    outputs:
+      collected: ${{ steps.collect.outcome == 'success' }}
     timeout-minutes: 60
 
     steps:
@@ -69,69 +71,31 @@ jobs:
             --out data/fees.json \
             --limit "${{ inputs.limit || 0 }}"
 
-      - name: Re-promote with the new fees
+      # Hand over the fee book, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      #
+      # The seed fallback the build step used to carry is gone with the split
+      # rather than moved: the publish job checks out the tip, which already
+      # holds the last good dataset, so the fallback could only ever commit
+      # something identical to what was already there.
+      - uses: actions/upload-artifact@v4
         if: steps.collect.outcome == 'success'
-        run: |
-          if [ -f data/candidate.json ]; then
-            PYTHONPATH=src python3 -m liveaboard.cli promote \
-              --candidate data/candidate.json \
-              --fees data/fees.json \
-              --out data/egypt-2027.json
-          fi
-
-      # Between the promote and the build, and before the commit.
-      #
-      # Before the *commit* because HEAD must still be last week's dataset:
-      # afterwards the comparison would be against this run's own output.
-      #
-      # Before the *build* because the page embeds the newest entry in
-      # data/CHANGES.md. Building first shipped a panel that had not yet seen
-      # the entry this run was about to write, so the commit announcing the
-      # news carried a page still showing the previous week's. Never wrong —
-      # it self-corrected on the next rebuild — and exactly one refresh behind
-      # on the commit that mattered.
-      #
-      # The same three destinations as the daily refresh: the run summary for
-      # whoever opens the run, data/CHANGES.md for the durable history, and one
-      # line for the commit subject. This run re-promotes from the *existing*
-      # candidate, so departures and fares cannot move -- a fee change is the
-      # only thing it can report, which is exactly what it is for.
-      - name: Report what changed
-        id: changed
-        if: hashFiles('data/egypt-2027.json') != ''
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --revision HEAD \
-            --append data/CHANGES.md \
-            >> "$GITHUB_STEP_SUMMARY"
-          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --revision HEAD --headline)
-          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
-
-      - name: Build the site
-        if: steps.collect.outcome == 'success'
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli build \
-            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
-
-      # This job ran no tests at all, and it writes prices. Its commits are
-      # pushed with the default `GITHUB_TOKEN`, which GitHub deliberately does
-      # not trigger workflows on, so nothing has ever checked one of them —
-      # not before the push and not after it, until whoever opens the next
-      # pull request finds out.
-      #
-      # Here rather than in front of the browser run, on the same rule as the
-      # other three: a fee book two days stale is a thing a *fetch* corrects,
-      # and an assertion about it must never stop the fetch. The cost of a
-      # failure is one week's collection; the cost of the alternative is a job
-      # that can never run.
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
         with:
-          subject: "data: weekly fee refresh {today}"
-          headline: ${{ steps.changed.outputs.headline }}
-          nothing: "fees unchanged this week"
+          name: fees-inputs-${{ github.run_id }}
+          path: data/fees.json
+          retention-days: 1
+
+  # This job runs no tests before its browser crawl, on the rule that an
+  # assertion about a stale fee book must never stop the fetch that refreshes
+  # it. `publish.yml` runs CI's whole list before it commits, which is the
+  # other half of that rule and the only CI these pushes ever get.
+  publish:
+    needs: fees
+    if: needs.fees.outputs.collected == 'true'
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: fees-inputs-${{ github.run_id }}
+      changes: true
+      subject: "data: weekly fee refresh {today}"
+      nothing: "fees unchanged this week"

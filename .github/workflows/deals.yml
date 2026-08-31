@@ -74,19 +74,22 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
-      # `data/deals.json` is a promote input, so one commit carries the new
-      # reading *and* the dataset built from it. Committing the book alone
-      # would leave `promote --check` red until something unrelated healed it.
-      - name: Rebuild the dataset and the page
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote
-          PYTHONPATH=src python3 -m liveaboard.cli build
-
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale — see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
         with:
-          subject: "data: read {today} PADI deals"
-          nothing: "today's deals were already in the book"
+          name: deals-inputs-${{ github.run_id }}
+          path: data/deals.json
+          retention-days: 1
+
+  # `data/deals.json` is a promote input, so one commit carries the new reading
+  # *and* the dataset built from it. Committing the book alone would leave
+  # `promote --check` red until something unrelated healed it.
+  publish:
+    needs: deals
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: deals-inputs-${{ github.run_id }}
+      subject: "data: read {today} PADI deals"
+      nothing: "today's deals were already in the book"
