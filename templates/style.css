@@ -163,7 +163,13 @@ button.chip[aria-pressed="true"] {
   background:var(--accent-soft); border-color:var(--accent);
   color:var(--accent); font-weight:500;
 }
-/* A bank drops an option the filters have made unreachable; a lone toggle
+/* This rule and the comment above it were landed mid-publish on purpose, to
+   force the push collision #127 needed and could not get from a scheduled run.
+   The first attempt collided with nothing: the data job re-read the same three
+   departures, found them unchanged, and the "a rebuild is not news" guard
+   exited before the push -- a reminder that the two mechanisms interact, and
+   that you cannot force a race with a job that has nothing to say.
+   The rule itself: a bank drops an option the filters have made unreachable; a lone toggle
    cannot, because vanishing reads as a feature that is gone rather than as a
    choice that is empty. So On sale stays at 0 and says so, faded to the weight
    of the "more" handle -- present, and plainly not a thing to click. */

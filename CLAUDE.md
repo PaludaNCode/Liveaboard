@@ -118,6 +118,12 @@ ends the same way, because the shape is identical and six copies of it drifted:
   with the stamp normalised on both sides, never by reading the shape of a
   diff: the payload is one enormous line, so a real change and the stamp land
   on it together and no line-wise filter can tell them apart.
+  **It also means a quiet job never reaches the push at all**, which is not
+  obvious until you want a collision. Two attempts to force one for #127 hit
+  this instead: a full `cabins.yml` had already covered every departure that
+  morning, so a capped re-read produced a byte-identical book and the publish
+  exited before it could be rejected. A job with nothing to say cannot lose a
+  race, so the rebase path is reachable only on a day something moved.
 
 Every one of those files is a **promote input**, so a job commits its data
 *and* the dataset built from it. Committing an input alone leaves
