@@ -167653,6 +167653,12 @@
       "first_reading": true
     }
   },
+  "entry_bar": {
+    "both": 127,
+    "disagree": 60,
+    "padi_stricter": 30,
+    "ours_stricter": 30
+  },
   "stale_ladders": [
     "red-sea-aggressor-ii 2027-05-01: row 2371, ladder starts at 1588",
     "red-sea-aggressor-ii 2027-05-08: row 2371, ladder starts at 1588",

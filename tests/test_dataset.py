@@ -756,55 +756,101 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
 
     That is the failure this project exists to correct in other people, in our
     own words: a page confidently stating a figure that stopped being true. So
-    the prose is now asserted rather than proof-read, the way `promote --check`
+    the prose was asserted rather than proof-read, the way `promote --check`
     asserts the dataset and `ALLOWED_EXTERNAL` asserts the page fetches nothing.
+
+    **Asserting it was not enough, and the reason is a timing one.** The counts
+    move only when a *fetch* runs, so on any machine the committed books are the
+    old ones and the prose still matches -- the mismatch cannot appear locally.
+    It appears on a runner, in a data job, *after* the crawl: on 2026-08-31 it
+    refused `padi.yml` after eight minutes of PADI's API and `fees.yml` after a
+    browser pass over 79 vessel pages, discarding both correct datasets over a
+    sentence, twice. Meanwhile the entry-bar figures two sections down, which
+    nothing asserted, had gone stale unnoticed: the page claimed PADI asks for
+    more on 19 trips and for less on 41, and the data said 30 and 30.
+
+    So the numbers are **substituted at build time** now, from
+    `render._stated_figures`, and what these tests check is that the template
+    states them that way and that the rendering fills them in. A derived number
+    cannot drift, and there is nothing left to remember to edit.
     """
 
     TEMPLATE = ROOT / "templates" / "index.html"
 
+    #: Every figure the footer states about the dataset, and the token it is
+    #: written as. A count added to the prose without a token here is a count
+    #: that will be wrong one refresh later.
+    TOKENS = (
+        "__BOATS__",
+        "__NITROX_INCLUDED__", "__NITROX_PRICED__", "__NITROX_ABSENT__",
+        "__NITROX_LOW__", "__NITROX_HIGH__", "__NITROX_MEDIAN__",
+        "__NITROX_PER_TRIP__",
+        "__BAR_BOTH__", "__BAR_DISAGREE__",
+        "__BAR_PADI_STRICTER__", "__BAR_OURS_STRICTER__",
+    )
+
     def nitrox_by_vessel(self) -> dict[str, int]:
         """How many *boats* fall in each state. Nitrox is a vessel's policy."""
-        payload = published.page()
-        state: dict[str, str] = {}
-        for departure in payload["departures"]:
-            itinerary = payload["itineraries"][departure["itinerary_id"]]
-            lines = [departure["base_line"]] + (
-                departure.get("lines") or itinerary["lines"]
-            )
-            line = next((x for x in lines if x.get("code") == "nitrox"), None)
-            state[itinerary["boat"]] = (
-                "absent" if line is None
-                else "included" if line.get("included")
-                else "priced" if line.get("has_price")
-                else "listed_unpriced"
-            )
+        from liveaboard.render import nitrox_by_vessel
+
         counts: dict[str, int] = {}
-        for value in state.values():
+        for value in nitrox_by_vessel(published.page()).values():
             counts[value] = counts.get(value, 0) + 1
         return counts
 
-    def test_the_stated_vessel_counts_are_the_real_ones(self):
-        counts = self.nitrox_by_vessel()
+    def test_the_prose_states_its_figures_as_tokens(self):
+        """The fix for the timing problem, asserted so it cannot be undone by
+        somebody typing a number back in during an edit."""
         html = self.TEMPLATE.read_text(encoding="utf-8")
-        for number, state in (
-            (counts.get("included", 0), "included"),
-            (counts.get("priced", 0), "publish a price"),
-            (counts.get("absent", 0), "never mention it"),
-        ):
-            # assertTrue rather than assertIn: the failure message for a
-            # missing substring prints the whole haystack, and the haystack
-            # here is the entire page.
-            self.assertTrue(
-                f"<b>{number}</b>" in html,
-                f"the footer does not say <b>{number}</b> vessels for "
-                f"{state!r}; the committed dataset says it should",
-            )
+        for token in self.TOKENS:
+            self.assertIn(token, html, f"the footer no longer substitutes {token}")
+
+    def test_every_token_the_template_uses_is_filled_in(self):
+        """A token the renderer does not know stays on the page as its own name,
+        which is worse than a stale number: it is visibly broken and it is also
+        a figure nobody can read."""
+        from liveaboard.render import _stated_figures, build_payload
+
+        html = self.TEMPLATE.read_text(encoding="utf-8")
+        dataset = published.dataset()
+        known = _stated_figures(dataset, build_payload(dataset))
+        for token in re.findall(r"__[A-Z_]+__", html):
+            if token in ("__DATA__", "__ICON__", "__GENERATED__",
+                         "__DOWNLOADS__", "__CHANGES__"):
+                continue
+            self.assertIn(token, known, f"{token} is in the template and has no figure")
+
+    def test_the_rendered_page_carries_the_real_counts(self):
+        """What the visitor actually reads, against the committed dataset."""
+        from liveaboard.render import _stated_figures, build_payload
+
+        dataset = published.dataset()
+        figures = _stated_figures(dataset, build_payload(dataset))
+        counts = self.nitrox_by_vessel()
+        self.assertEqual(figures["__NITROX_INCLUDED__"], str(counts.get("included", 0)))
+        self.assertEqual(figures["__NITROX_PRICED__"], str(counts.get("priced", 0)))
+        self.assertEqual(figures["__NITROX_ABSENT__"], str(counts.get("absent", 0)))
+
+    def test_a_figure_nobody_measured_is_a_dash_not_a_zero(self):
+        """"0 vessels publish a price" is a claim; a dataset promoted before
+        `entry_bar` existed has not made it. The same rule the rest of this
+        project keeps about an unread page."""
+        from liveaboard.render import _stated_figures, build_payload
+
+        dataset = published.dataset()
+        dataset.entry_bar = {}
+        figures = _stated_figures(dataset, build_payload(dataset))
+        self.assertEqual(figures["__BAR_BOTH__"], "&mdash;")
 
     def test_the_footer_names_only_states_the_column_can_reach(self):
         """It advertised "extra, no price", which no vessel has ever produced.
 
         Naming a state nobody will see is a smaller sin than the reverse and
         still a claim about the data that the data does not support.
+
+        This is the half of this class a token cannot replace: it is about a
+        *word* on the page rather than a figure, and no substitution can tell
+        you that a state named in prose is one the column never renders.
         """
         counts = self.nitrox_by_vessel()
         html = self.TEMPLATE.read_text(encoding="utf-8")

@@ -32,7 +32,7 @@ from .pricing import (
     padi_lines,
     resolve_fees,
 )
-from .taxonomy import DIVER_LEVEL_BARS, FEE_LABELS
+from .taxonomy import DIVER_LEVEL_BARS, FEE_LABELS, FeeCode
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -340,6 +340,107 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
     }
 
 
+NITROX_STATES = ("included", "priced", "listed_unpriced", "absent")
+"""The four things this page can say about nitrox, in the order it says them."""
+
+
+def nitrox_by_vessel(payload: dict[str, Any]) -> dict[str, str]:
+    """Each boat's nitrox state, from the payload the browser gets.
+
+    Nitrox is a vessel's policy rather than a trip's, so this is keyed on the
+    boat and the last departure read wins -- which is safe because every
+    itinerary of a boat carries the same vessel fee book.
+
+    Lives here rather than in the test that used to own it. The footer states
+    these counts in prose and the test asserted the prose against numbers it
+    computed itself; two copies of one definition, and the page's copy was a
+    literal somebody had to remember to edit. Now the page is *rendered* from
+    this and the test checks the rendering, so the definition exists once.
+    """
+    state: dict[str, str] = {}
+    for departure in payload["departures"]:
+        itinerary = payload["itineraries"][departure["itinerary_id"]]
+        lines = [departure["base_line"]] + (
+            departure.get("lines") or itinerary["lines"]
+        )
+        line = next((x for x in lines if x.get("code") == "nitrox"), None)
+        state[itinerary["boat"]] = (
+            "absent" if line is None
+            else "included" if line.get("included")
+            else "priced" if line.get("has_price")
+            else "listed_unpriced"
+        )
+    return state
+
+
+def nitrox_prices(dataset: Dataset) -> dict[str, Any]:
+    """The spread of what the fleet charges for nitrox, where it charges.
+
+    The floor of each quote, because a ranged fee reported at its ceiling
+    flatters nothing here but reads as the price -- and because the fleet's
+    ranges are wide: 40-80, 70-125, 100-150. Median rather than mode: the mode
+    moved from 70 to 100 the moment a second seller's book was read, on a
+    distribution that barely changed, which is the kind of figure prose should
+    not rest on.
+    """
+    seen: dict[str, tuple[float, str, str | None]] = {}
+    for itinerary in dataset.itineraries.values():
+        for fee in itinerary.fees:
+            if fee.code is not FeeCode.NITROX or fee.included or fee.amount is None:
+                continue
+            seen[itinerary.boat_id] = (
+                float(fee.amount.amount), fee.amount.currency, fee.basis.value
+                if fee.basis else None,
+            )
+    if not seen:
+        return {}
+    lows = sorted(v[0] for v in seen.values())
+    middle = len(lows) // 2
+    return {
+        "vessels": len(seen),
+        "low": lows[0],
+        "high": lows[-1],
+        "median": lows[middle] if len(lows) % 2 else (lows[middle - 1] + lows[middle]) / 2,
+        "per_trip": sum(1 for v in seen.values() if v[2] == "per_trip"),
+    }
+
+
+def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]:
+    """Every number the footer's prose states about the dataset.
+
+    One dict, so `render` substitutes and the test asserts against the same
+    source. A token with no figure behind it -- an entry bar nobody has
+    measured, a fleet that charges for nitrox nowhere -- resolves to an em
+    dash rather than to a plausible zero: "0 vessels publish a price" is a
+    claim, and the honest output where the pass never ran is not a number.
+    """
+    counts: dict[str, int] = {}
+    for value in nitrox_by_vessel(payload).values():
+        counts[value] = counts.get(value, 0) + 1
+    prices = nitrox_prices(dataset)
+    bar = dataset.entry_bar
+
+    def figure(value: object) -> str:
+        return "&mdash;" if value is None else f"{value:g}" if isinstance(
+            value, float) else str(value)
+
+    return {
+        "__NITROX_INCLUDED__": figure(counts.get("included", 0)),
+        "__NITROX_PRICED__": figure(counts.get("priced", 0)),
+        "__NITROX_UNPRICED__": figure(counts.get("listed_unpriced", 0)),
+        "__NITROX_ABSENT__": figure(counts.get("absent", 0)),
+        "__NITROX_LOW__": figure(prices.get("low")),
+        "__NITROX_HIGH__": figure(prices.get("high")),
+        "__NITROX_MEDIAN__": figure(prices.get("median")),
+        "__NITROX_PER_TRIP__": figure(prices.get("per_trip")),
+        "__BOATS__": figure(payload["meta"]["counts"]["boats"]),
+        "__BAR_BOTH__": figure(bar.get("both")),
+        "__BAR_DISAGREE__": figure(bar.get("disagree")),
+        "__BAR_PADI_STRICTER__": figure(bar.get("padi_stricter")),
+        "__BAR_OURS_STRICTER__": figure(bar.get("ours_stricter")),
+    }
+
+
 def _escape(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -496,6 +597,15 @@ def render(
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
     html = html.replace("__DOWNLOADS__", _downloads_html(available))
     html = html.replace("__CHANGES__", _changes_html(entry, "CHANGES.md" in available))
+    # Figures the footer states in prose, substituted rather than typed. Two
+    # data jobs were refused by `TestTheFooterCountsMatchTheData` on
+    # 2026-08-31 -- each after a full crawl, because the counts only move when
+    # a fetch runs and so the mismatch cannot appear on anybody's machine --
+    # and the entry-bar sentence two sections down had gone stale unwatched,
+    # claiming 19 and 41 where the data said 30 and 30. A number the page
+    # derives cannot do either.
+    for token, value in _stated_figures(dataset, payload).items():
+        html = html.replace(token, value)
 
     target = out / "index.html"
     target.write_text(html, encoding="utf-8")

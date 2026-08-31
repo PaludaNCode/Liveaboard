@@ -304,15 +304,24 @@
     <div>
       <h3>Nitrox and tips</h3>
       <p>
-        Seven in ten of this fleet bundles nitrox and three in ten bill for it:
-        <b>53</b> vessels say <b>included</b>, <b>23</b> publish a price
-        &mdash; &euro;30 to &euro;100 at the bottom of the quote, half of them
-        at &euro;70 or less, and priced per trip on 21 of the 23
-        &mdash; and <b>1</b> never mentions it at all. New Sambo reads
-        <b>not listed</b>, which is the one thing on this page nitrox can say
-        that is neither yes nor a number: nobody has said whether you will be
-        charged. Its three disclosure blocks name park fees, transfers, guides
-        and courses, and no gas.
+        <!-- Every figure here is substituted by `render._stated_figures`, so
+             it cannot be one refresh out of date. Two consequences for whoever
+             edits this sentence next. Keep the counts as **noun phrases** --
+             "23 publishing a price", not "23 publish a price" -- because a
+             derived number is 1 sooner or later and a verb beside it will not
+             agree; that is how "1 say nothing about it" reached the page once.
+             And any new figure needs a token: a typed number here is a claim
+             that goes stale silently, which is the failure this whole page
+             exists to report in other people. -->
+        Of <b>__BOATS__</b> vessels: <b>__NITROX_INCLUDED__</b> with nitrox
+        <b>included</b>, <b>__NITROX_PRICED__</b> publishing a price
+        &mdash; &euro;__NITROX_LOW__ to &euro;__NITROX_HIGH__ at the bottom of
+        the quote, half at &euro;__NITROX_MEDIAN__ or less, and priced per trip
+        on __NITROX_PER_TRIP__ of the __NITROX_PRICED__ &mdash; and
+        <b>__NITROX_ABSENT__</b> with no statement at all, which the column
+        reads as <b>not listed</b>: the one thing on this page nitrox can say
+        that is neither yes nor a number, because nobody has said whether you
+        will be charged.
       </p>
       <p>
         That column read <b>not listed</b> eleven times once, and each cut came
@@ -469,9 +478,10 @@
       </p>
       <p>
         Two sources describe it &mdash; the operator&rsquo;s own itinerary
-        panel and PADI Travel &mdash; and both speak about <b>127</b> of these
-        trips. They disagree on <b>60</b> of those, in both directions: PADI
-        asks for more on 19 and for less on 41. Neither is the authority; both
+        panel and PADI Travel &mdash; and both speak about
+        <b>__BAR_BOTH__</b> of these trips. They disagree on
+        <b>__BAR_DISAGREE__</b> of those, in both directions: PADI asks for
+        more on __BAR_PADI_STRICTER__ and for less on __BAR_OURS_STRICTER__. Neither is the authority; both
         are quoting the same operator. The <b>stricter</b> of the two is shown,
         marked <span class="varies">2 sellers</span> in the column and named in
         full when you expand the row, because a diver turned away at the dock

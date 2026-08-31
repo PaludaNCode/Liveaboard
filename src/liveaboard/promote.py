@@ -2088,6 +2088,10 @@ def promote(
     # silent: each one is a booking page this pipeline read and then declined
     # to publish, and the fix is a fresh `cabins.yml` rather than anything here.
     stale_ladders: list[str] = []
+    # Where the two sellers' stated entry bars agree, and which way they do not.
+    # Assembled here and published, so the footer's sentence about it is a
+    # substitution rather than a number somebody typed once.
+    entry_bar = {"both": 0, "disagree": 0, "padi_stricter": 0, "ours_stricter": 0}
 
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
@@ -2309,9 +2313,24 @@ def promote(
         # claims about a safety gate, and where they disagree, showing the lower
         # one publishes a bar softer than somebody stated -- the one direction
         # this project does not go. See _strictest.
-        bar = _strictest(_requirements(trip), _padi_requirements(padi_trip))
+        ours, theirs = _requirements(trip), _padi_requirements(padi_trip)
+        bar = _strictest(ours, theirs)
         if bar:
             itineraries[-1]["requirements"] = bar
+        # Counted where both sellers speak, because the page states these
+        # figures in prose and had been stating them from memory: it said PADI
+        # asks for more on 19 trips and for less on 41, and by the time anyone
+        # measured it was 30 and 30. A sentence about the data belongs to the
+        # pass that has the data, and only this one has both bars in hand --
+        # the dataset keeps the stricter, so nothing downstream can re-derive
+        # which source it came from.
+        if ours and theirs:
+            entry_bar["both"] += 1
+            mine = int(ours.get("min_logged_dives") or 0)
+            other = int(theirs.get("min_logged_dives") or 0)
+            if other != mine:
+                entry_bar["disagree"] += 1
+                entry_bar["padi_stricter" if other > mine else "ours_stricter"] += 1
 
         if padi_fees is not None:
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
@@ -2556,6 +2575,8 @@ def promote(
     if deals_block:
         payload["deals"] = deals_block
 
+    if entry_bar["both"]:
+        payload["entry_bar"] = entry_bar
     if stale_ladders:
         payload["stale_ladders"] = sorted(stale_ladders)
     if skipped:
