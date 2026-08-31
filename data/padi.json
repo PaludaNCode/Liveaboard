@@ -24558,7 +24558,7 @@
      },
      {
       "amount": {
-       "amount": 470.0,
+       "amount": 275.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -24874,6 +24874,74 @@
     "recommended_logged_dives": 50
    },
    "title": "Fury Shoals - Daedalus - Elphinstone (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "independence-ii::Rocky Island - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)": {
+   "boat": "independence-ii",
+   "boat_name": "MY Independence II",
+   "dive_sites": [
+    "rocky island",
+    "elba reef",
+    "st johns",
+    "elphinstone"
+   ],
+   "dives": 30,
+   "fees": {
+    "complete": false,
+    "lines": [
+     {
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 275.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Port, permit fees and fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 240.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Rocky Island - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib)",
+   "nights": 11,
+   "padi_id": 12041,
+   "padi_slug": "brothers-daedalus-rockyzabargad-groe-marineparkt-2",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Rocky Island - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib) 11 nights"
   },
   "independence-ii::Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)": {
    "boat": "independence-ii",
@@ -34780,12 +34848,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 62,
-    "first": "2026-08-31",
+    "dated": 61,
+    "first": "2026-09-07",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 62,
+    "read": 61,
     "unpriced": 0
    },
    "slug": "all-star-ghani"
@@ -34796,12 +34864,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 61,
-    "first": "2026-08-31",
+    "dated": 60,
+    "first": "2026-09-07",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 61,
+    "read": 60,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene"
@@ -34956,12 +35024,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 80,
-    "first": "2026-08-31",
+    "dated": 79,
+    "first": "2026-09-05",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 20,
-    "read": 80,
+    "read": 79,
     "unpriced": 26
    },
    "slug": "bella-3"
@@ -35308,12 +35376,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 65,
-    "first": "2026-08-31",
+    "dated": 64,
+    "first": "2026-09-07",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 65,
+    "read": 64,
     "unpriced": 0
    },
    "slug": "ghazala-adventure"
@@ -35324,12 +35392,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 65,
-    "first": "2026-08-31",
+    "dated": 64,
+    "first": "2026-09-07",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 65,
+    "read": 64,
     "unpriced": 0
    },
    "slug": "ghazala-explorer"
@@ -35420,13 +35488,13 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 27,
+    "dated": 28,
     "first": "2026-09-07",
-    "in_season": 8,
+    "in_season": 9,
     "last": "2027-10-14",
     "priced": 6,
-    "read": 27,
-    "unpriced": 6
+    "read": 28,
+    "unpriced": 7
    },
    "slug": "my-independence-ii"
   },
