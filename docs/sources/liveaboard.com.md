@@ -117,7 +117,7 @@ the page.
 
 **It is what settled MY Blue Pearl** ([#115](https://github.com/PaludaNCode/Liveaboard/issues/115)).
 PADI shelves it and MY Blue under one "BLUE PLANET Fleet", and folding the two
-on that alone asserts a company for a hull our own source connects to nobody.
+on that alone asserts a company for a hull this source connects to nobody.
 This is that source connecting it.
 
 ### What is on sale, and where it is not

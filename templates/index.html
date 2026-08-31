@@ -18,20 +18,11 @@
 <div class="masthead">
   <div>
     <h1>Egypt liveaboards &middot; May&ndash;August 2027</h1>
-    <p class="sub">
-      The advertised price is not the price. Every departure below is shown at
-      the <strong>total</strong> &mdash; the advertised berth plus marine park
-      fees, port dues, fuel and everything else that lands on the bill later.
-      Two sites sell many of these berths and they do not agree, so the money
-      columns print both &mdash; the total runs from one seller&rsquo;s whole
-      bill to the other&rsquo;s, and the parts above it follow in that same
-      order (<code>&rarr;</code>), never spliced together. Sort any
-      column; expand a row for both bills, the entry bar the trip sets and
-      where each number came from; click a row to mark it, so you can still
-      tell which is which once you have scrolled sideways.
-    </p>
   </div>
-  <div class="stats">
+  <!-- Counts of what the table is showing, so they belong to the two views
+       that have a table. app.js hides them on the history view rather than
+       leaving "0 rows shown" over a page with no rows in it. -->
+  <div class="stats" id="stats">
     <div class="stat"><b id="shown">0</b><span>rows shown</span></div>
     <div class="stat"><b id="nboats">0</b><span>boats</span></div>
     <div class="stat"><b id="nitin">0</b><span>itineraries</span></div>
@@ -40,25 +31,108 @@
 
 <div id="dataNotice"></div>
 
-<!-- What the other seller is discounting today, and what moved since the last
-     day the deals book holds.
+<!-- Three views of one dataset, in one document.
+     Separate HTML files were the other option and were rejected on weight: the
+     payload is inlined and the sale view is the same rows filtered, so a second
+     document would ship those megabytes again to say something the first one
+     already knows. The rail switches which panes are shown; app.js keeps the
+     hash (#trips, #sale, #history) in step, so a view is linkable. -->
+<div class="workspace">
 
-     A `details` rather than an open panel, and the summary carries the whole
-     overview -- how many sailings are discounted, how many changed, and the day
-     it was read. That is the front-page statement; the list under it is for
-     somebody who wants the boats. An open block of thirteen rows would push the
-     table -- which is what this site is -- below the fold on every visit, to
-     say something a line says.
+<nav class="rail" aria-label="Sections">
+  <a class="rail-item" id="navTrips" href="#trips">
+    <span class="rail-name">Trips</span>
+    <span class="rail-count" id="navTripsCount"></span>
+    <span class="rail-note">every departure, priced whole</span>
+  </a>
+  <!-- Hidden until app.js finds a markdown or PADI's deals book, for the same
+       reason the On sale chip is: a section that opens on nothing is a promise
+       the data cannot keep. -->
+  <a class="rail-item" id="navSale" href="#sale" hidden>
+    <span class="rail-name">On sale</span>
+    <span class="rail-count" id="navSaleCount"></span>
+    <span class="rail-note">what a seller has marked down</span>
+  </a>
+  <a class="rail-item" id="navHistory" href="#history">
+    <span class="rail-name">History</span>
+    <span class="rail-note">what moved on the last refresh</span>
+  </a>
+</nav>
 
-     Empty in the markup and hidden until app.js finds a deals block. A fresh
-     checkout has never run the daily read, and a panel that renders its own
-     absence as "no deals today" would be the site claiming a fact about PADI
-     from a file that does not exist. -->
-<details class="deals" id="deals" hidden>
-  <summary id="dealsLine">Deals</summary>
-  <div class="deals-body" id="dealsBody"></div>
-</details>
+<div class="views">
 
+<!-- The history view. Everything here used to be one wide cell at the bottom
+     of the method footer, where a change report -- fixed-width text that wants
+     the whole width and a screen of height -- was folded inside a panel about
+     something else. -->
+<section class="pane history-pane" id="historyPane" tabindex="-1" hidden>
+  <div class="history-body">
+    <h2>What changed, refresh by refresh</h2>
+    <p class="history-lead">
+      One entry per refresh &mdash; departures added, fares moved, berths sold
+      out &mdash; for the last week of them. Each is a diff between two
+      committed days rather than a claim about today, and none drops a row
+      without saying so: where a block is capped or a sub-euro move suppressed
+      as source rounding, the report prints the count it left out. A vessel
+      losing <em>every</em> departure is a failed fetch rather than a cancelled
+      season, and is reported as one.
+    </p>
+    __CHANGES__
+    <h3>The data itself</h3>
+    <p>
+      Everything on this page, in files you can keep. A trip whose operator
+      never stated its required extras has no total here either &mdash; the
+      column is empty and says why, because turning &ldquo;not disclosed&rdquo;
+      into a number the moment it reaches a spreadsheet would make the least
+      forthcoming operators look like the cheapest.
+    </p>
+    __DOWNLOADS__
+  </div>
+</section>
+
+<!-- The On sale view: what each seller is discounting today, and what moved
+     since the last day the deals book holds.
+     This is an overview and not a filtered table. Which *departures* are
+     marked down is a question the On sale chip on the trips view answers, over
+     the same table as every other filter; asking it twice, once as a filter
+     and once as a destination, gave the rail an entry that duplicated a chip
+     and left this breakdown where it had always been -- folded into a
+     `details` above a table, which is where nobody looking for it would go.
+     A document, like the history view: it is read rather than operated, so it
+     scrolls as one and opens with what it is. -->
+<section class="pane sale-pane" id="salePane" tabindex="-1" hidden>
+  <div class="sale-body">
+    <h2>What is on sale</h2>
+    <p class="sale-lead" id="dealsLine"></p>
+    <div class="deals-body" id="dealsBody"></div>
+  </div>
+</section>
+
+<!-- The table, and the filters over it: the trips view.
+     `tablePane` rather than `tripsPane` because what identifies it is that it
+     holds the table -- the On sale chip in the toolbar below filters these
+     same rows, and a filter is not a view. -->
+<div class="pane" id="tablePane" tabindex="-1">
+  <h2 class="view-heading">Every departure, priced whole</h2>
+
+
+<!-- Narrow screens only, and it folds away *everything* that filters.
+     The banks alone were a screen and a half of buttons on a phone; the
+     toolbar above them was another 216px at 390 and 237 at 360, against a
+     table of 403 and 156. Folding half the controls left the other half
+     holding the same ground, so the page still opened on more filter than
+     evidence. One panel, one control to open it, and the table gets the room.
+
+     `order:-1` in the stylesheet, because this sits after the toolbar in the
+     markup and has to sit above it on screen: the control that opens a panel
+     belongs at the panel's top edge, and moving it in the DOM would put it
+     ahead of the toolbar on a laptop, where there is no panel and no fold.
+
+     Untouched above 1000px, where all of it fits. -->
+<button type="button" class="filters-toggle" id="filtersToggle"
+        aria-expanded="false" aria-controls="filterPanel">Filters</button>
+
+<div class="filterpanel" id="filterPanel">
 <div class="toolbar">
   <div class="tgroup">
     <span class="tlabel">Include</span><span id="toggles"></span>
@@ -73,7 +147,10 @@
     <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
   </div>
   <div class="tgroup">
-    <button type="button" class="chip" id="hideSold" aria-pressed="false">Hide sold out</button>
+    <!-- Hidden until app.js finds a stated sold-out, and carrying the count
+         of what it removes once it does -- the same rule the On sale chip
+         beside it follows, and the one this chip was the last to break. -->
+    <button type="button" class="chip" id="hideSold" aria-pressed="false" hidden>Hide sold out</button>
     <!-- Sailings a seller has marked down, read from the list price it prints
          beside its own — the struck-through figure on each cabin of the
          booking page, and PADI's compareAtPrice. Its label carries the count
@@ -83,6 +160,20 @@
          a control that does nothing dressed as one that does. -->
     <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
+  <!-- A line of its own, always. Every other group here is one control; this
+       is a bank of chips whose width depends on how many sellers there are and
+       what they are called, so where it landed was decided by whatever sat
+       beside it: row two at 1440 and 1280, row two *sharing* with Hide sold
+       out at 900, row three at 768, its own line again on a phone. On a page
+       where the toolbar's height comes straight out of the table's, a group
+       that lands somewhere new at every width is a table that is a different
+       size at every width for no reason a reader can see.
+
+       A break rather than `flex-basis:100%` on the group itself, because that
+       would push Reset and the build line onto a row of their own too, and
+       they are not a filter -- they belong at the end of whatever row has
+       space. This only says where the bank starts. -->
+  <span class="trow-break" aria-hidden="true"></span>
   <!-- Who sells the sailing. Chips rather than a select, like every other
        filter here, and three states because there are three: both sites list
        it, only liveaboard.com does, or only PADI Travel does. Both are named,
@@ -103,13 +194,6 @@
   </div>
 </div>
 
-<!-- Narrow screens only. The three filter banks below are a screen and a half
-     of buttons on a phone, and the layout gives the table whatever height is
-     left over — so they pushed every price off the bottom and the page opened
-     on nothing but filters. Folded away by default there; untouched on a
-     laptop, where they fit. -->
-<button type="button" class="filters-toggle" id="filtersToggle"
-        aria-expanded="false" aria-controls="ports sites boats entry">Filter by port, site, boat or entry bar</button>
 
 <!-- One scroll box, not three. Folded open on a phone the three banks came
      to more than a screen between them -- and each carried its own cap and its
@@ -167,15 +251,7 @@
     <span id="entry"></span>
   </div>
 </div>
-
-<p class="hint">
-  Every fee a diver cannot avoid is already in the total &mdash; marine park,
-  port, fuel, service charges and crew tips where an operator states an amount.
-  The two switches above are the only optional extras, and both start
-  <strong>on</strong>: if you own a set and breathe air, turn them off and watch
-  the total fall. A comparison is only easy when the headline number means the
-  same thing on every row.
-</p>
+</div><!-- /#filterPanel -->
 
 <main class="shell">
   <table>
@@ -183,6 +259,10 @@
     <tbody id="body"></tbody>
   </table>
 </main>
+
+</div><!-- /#tablePane -->
+</div><!-- /.views -->
+</div><!-- /.workspace -->
 
 <!-- The cabin ladder behind a Places figure, opened on hover or click.
      Outside <main> deliberately: the table scrolls sideways inside a clipping
@@ -195,7 +275,18 @@
 <details class="site-footer">
   <summary>
     How the numbers are built
-    <span class="colophon">Generated __GENERATED__.</span>
+    <!-- Two dates, and they are different facts. `__GENERATED__` is the day
+         the prices were read off the sources; the build stamp beside it is the
+         minute this page was made, which is a different day whenever a parser
+         or template change ships without a fresh crawl.
+
+         The build stamp arrives from the payload rather than being written in
+         here, and deliberately: the only literal copy of it in the file is the
+         one inside `"built":"..."`, which is what
+         `TestThePageIsWhatItsDataBuilds` normalises before comparing the
+         committed page against a fresh render. A second copy in the markup
+         would make that comparison fail on every rebuild. -->
+    <span class="colophon">Prices read __GENERATED__<span id="builtStamp"></span></span>
   </summary>
   <div class="footer-grid">
     <div>
@@ -412,12 +503,21 @@
       </p>
     </div>
     <div>
-      <h3>Disclosure</h3>
+      <h3>Mandatory fees</h3>
       <p>
-        Whether the operator published its required extras at all. A listing
-        naming only optional ones gets no total: every Egyptian liveaboard
-        pays park and port fees, so silence means either bundled or collected
-        at the dock, and it does not say which.
+        What the operator charges on top of the berth, and &mdash; where there
+        is no figure &mdash; why not, in the same cell. <b>Not looked at</b>
+        means nobody has read that vessel&rsquo;s fee panel yet.
+        <b>Optional only</b> means the panel was read and names optional
+        extras alone, so the required ones are unstated.
+      </p>
+      <p>
+        Neither is a trip without fees. Every Egyptian liveaboard pays park and
+        port dues, so silence means bundled into the berth or collected at the
+        dock, and the listing does not say which &mdash; which is why such a
+        row gets no <b>Total</b> either. This used to be a column of its own
+        two places to the right, which left a bare dash in the fee column
+        reading as &ldquo;no fees&rdquo;: the opposite of what it means.
       </p>
     </div>
     <div>
@@ -508,19 +608,6 @@
         you would look for them: the Giannis&nbsp;D is Abu Nuhas, Numidia is the
         Brothers, Shaab Claudio is Fury Shoal.
       </p>
-    </div>
-    <div class="footer-wide">
-      <h3>The data itself</h3>
-      <p>
-        Everything on this page, in files you can keep. A trip whose operator
-        never stated its required extras has no total here either &mdash; the
-        column is empty and says why, because turning &ldquo;not disclosed&rdquo;
-        into a number the moment it reaches a spreadsheet would make the least
-        forthcoming operators look like the cheapest.
-      </p>
-      __DOWNLOADS__
-      <h3>What changed on the last refresh</h3>
-      __CHANGES__
     </div>
     <div>
       <h3>Currency</h3>

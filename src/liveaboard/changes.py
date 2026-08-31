@@ -440,6 +440,88 @@ def headline(report: Report) -> str:
     return ", ".join(bits[:3]) + (f", and {len(bits) - 3} more" if len(bits) > 3 else "")
 
 
+# How many rows of one kind the structured report carries.
+#
+# `render`'s own limit is 12, because a hundred lines of monospace is not read.
+# A browser can expand, so this is ten times that -- deep enough that "show the
+# other 24" is a real control rather than a promise the data cannot keep -- and
+# still a cap, because it is paid for by every visitor: one refresh landed 644
+# fare moves in a single report, 136 KB of the 200 the whole week came to.
+#
+# What is dropped is counted and said out loud, exactly as the text renderer
+# says it. A silent truncation reads as "that was everything", which is the
+# failure this project exists to correct in other people.
+BOOK_LIMIT = 120
+
+
+def as_dict(report: Report, *, before: str = "", after: str = "",
+            limit: int = BOOK_LIMIT) -> dict:
+    """The report as data, for a renderer that is not a terminal.
+
+    Everything a page needs is built by :func:`compare` and was thrown away one
+    step before it: ``render`` flattened the dataclasses to column-aligned
+    text, the CLI wrote that text into a Markdown file, and the site read the
+    text back out and escaped it into a ``<pre>``. The visitor got
+    ``MY Odyssey Liveaboar`` -- a boat name cut mid-word to fit eighty columns
+    -- on a page that has a table renderer, and not one of those lines could
+    be clicked through to the sailing it was about (#143).
+
+    So the same report comes out twice, in two shapes, from one comparison. The
+    text stays: it is what a workflow log and `data/CHANGES.md` want, and it is
+    the durable record. This is what the page reads.
+
+    Capped far higher than the text form and never silently: a browser can
+    expand, so the honest shape of a truncation there is showing the other
+    twenty-four behind a control rather than confessing they exist -- but the
+    page is one file with nothing fetched lazily, so a report is paid for by
+    every visitor and cannot be unbounded. What is cut is counted in ``more``.
+
+    ``price_rounding`` is not that: those fares were never listed at all,
+    having been excluded as source rounding, which is a different thing from
+    being dropped for length.
+    """
+    def departed(d: Departed) -> dict:
+        return {"id": d.departure_id, "boat": d.boat, "title": d.title,
+                "start": d.start, "price": d.price, "currency": d.currency}
+
+    def moved(m: PriceMove) -> dict:
+        return {"id": m.departure_id, "boat": m.boat, "title": m.title,
+                "start": m.start, "was": m.was, "now": m.now,
+                "currency": m.currency, "delta": m.delta, "pct": m.pct}
+
+    more: dict[str, int] = {}
+
+    def capped(name: str, rows: list) -> list:
+        if len(rows) > limit:
+            more[name] = len(rows) - limit
+        return rows[:limit]
+
+    out = {
+        "before": before,
+        "after": after,
+        "added": capped("added", [departed(d) for d in report.added]),
+        "sold_out": capped("sold_out", [departed(d) for d in report.sold_out]),
+        "returned": capped("returned", [departed(d) for d in report.returned]),
+        "withdrawn": capped("withdrawn", [departed(d) for d in report.withdrawn]),
+        "price_up": capped("price_up", [moved(m) for m in report.price_up]),
+        "price_down": capped("price_down", [moved(m) for m in report.price_down]),
+        "fees": capped("fees", [
+            {"boat": f.boat, "code": f.code, "was": f.was, "now": f.now}
+            for f in report.fees]),
+        "vessels_gone": capped("vessels_gone", list(report.vessels_gone)),
+        "months_gone": capped("months_gone", list(report.months_gone)),
+        "vessels_new": capped("vessels_new", list(report.vessels_new)),
+        "fx": [{"currency": x.currency, "was": x.was, "now": x.now, "pct": x.pct}
+               for x in report.fx],
+        "price_rounding": report.price_rounding,
+        "availability_newly_read": report.availability_newly_read,
+        "quiet": report.is_quiet and not report.fx_moved,
+    }
+    if more:
+        out["more"] = more
+    return out
+
+
 def render(report: Report, *, before: str = "", after: str = "", limit: int = 12) -> str:
     """The report as plain text, longest-first and capped.
 

@@ -37,7 +37,17 @@ sailings — 53 of which it is the only seller of — a berth count on 833, the
 entry bar and stated dive count on 441 trips, and the only fee book the 22
 vessels liveaboard.com sells no berths on have. Neither seller is ever allowed
 to speak for the other: a row states a discount only from the seller whose fare
-it prints, and a row PADI alone lists carries no second price at all.
+it prints, a row PADI alone lists carries no second price at all, and each
+markdown is dated to the day *that* seller's book was read — two crawls, two
+days, and one date over both dated half of them wrong.
+
+**Nor is a seller allowed to speak about a reading this pipeline threw away.**
+A cabin ladder more than 3% from the price above it is not that sailing's, and
+`promote` drops it — but the sale beside it was still read off the same book,
+so 36 Aggressor rows printed "−33%, down from €2,371" on a berth advertised at
+exactly €2,371. The rejected reading is now ignored everywhere, and the panel
+says how many sailings it could not read rather than reporting them as full
+price.
 
 Prices and availability come from a nightly crawl, and PADI's from a second one
 half an hour later (`padi.yml`). Fees, rental-gear prices and the vessel
@@ -101,6 +111,13 @@ behind, so a visitor on a phone in a dive shop downloads all of it before seeing
 a row. Fees are written once per itinerary rather than once per departure, which
 is what they are a property of.
 
+That file holds three views, switched by the rail on the left and addressed by
+the URL hash: the trips table (`#trips`), the sailings a seller has marked down
+(`#sale`), and the change history (`#history`). Views rather than three files,
+for the reason above — the sale view is the trips view's own rows with the
+markdown filter held on, so a second document would ship the whole payload
+again to answer a question the first one already holds the data for.
+
 ## Design
 
 **Fee tiers** decide what counts toward the total:
@@ -134,7 +151,8 @@ week is one naming Brothers, Daedalus and Elphinstone — because a name for a
 set of sites is a layer that can be wrong and answers nothing the sites do not.
 Sites come from the operator's own description of the trip, then its region
 list, then the trip title, then — last, and only where all three are silent —
-the second seller's account of the same week. **399 of 402** itineraries name
+PADI Travel's account of the same week. Last because it is the least
+structured, not because it is the second source to have been read. **399 of 402** itineraries name
 reefs, one names only a direction and says so, and two name neither and stay
 blank rather than being guessed at (#52, #113). The ordering is the point: a
 source is never merged into one above it, because PADI's blurb says Elphinstone
@@ -195,7 +213,7 @@ Re-reading the listing recovers today's offers and never yesterday's, so a log
 computed from a build artifact would go quietly silent the moment the artifact
 aged out — reporting "no changes" rather than "nothing to compare against".
 
-`sales.json` is that rule applied to the other seller. liveaboard.com publishes
+`sales.json` is that rule applied to liveaboard.com. It publishes
 no deals listing at all — it strikes the list price through beside every
 discounted cabin — and `cabins.json` is rewritten whole each run, so the larger
 of the two signals could say what was on sale and not what had moved. It is a

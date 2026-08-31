@@ -8,7 +8,7 @@
     "as_of": "2026-08-28",
     "source": "European Central Bank euro foreign exchange reference rates",
     "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
-    "retrieved": "2026-08-30",
+    "retrieved": "2026-08-31",
     "rates": {
       "GBP": 1.166589,
       "USD": 0.858885
@@ -144984,14 +144984,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-08-07-0",
@@ -145083,19 +145076,37 @@
       },
       "berths": [
         [
+          0,
+          16,
+          [
+            [
+              100,
+              2371,
+              16,
+              100
+            ],
+            [
+              101,
+              2542,
+              4,
+              100
+            ],
+            [
+              41,
+              2628,
+              2,
+              100
+            ]
+          ],
+          22
+        ],
+        [
           1,
           null,
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-05-08-1",
@@ -145131,14 +145142,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-05-22-3",
@@ -145174,14 +145178,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-05-29-4",
@@ -145217,14 +145214,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-06-05-0",
@@ -145260,14 +145250,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-06-12-1",
@@ -145303,14 +145286,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-06-19-2",
@@ -145346,14 +145322,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-06-26-3",
@@ -145389,14 +145358,7 @@
           null,
           22
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-07-10-0",
@@ -145432,14 +145394,7 @@
           null,
           18
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-07-17-1",
@@ -145475,14 +145430,7 @@
           null,
           21
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-07-24-2",
@@ -145518,14 +145466,7 @@
           null,
           1
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2371
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-ii-2027-07-31-3",
@@ -145832,14 +145773,7 @@
           null,
           24
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-06-05-0",
@@ -145875,14 +145809,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-06-19-2",
@@ -145918,14 +145845,7 @@
           null,
           21
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-07-03-0",
@@ -145961,14 +145881,7 @@
           null,
           20
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-07-17-2",
@@ -146191,19 +146104,31 @@
       },
       "berths": [
         [
+          0,
+          18,
+          [
+            [
+              102,
+              2318,
+              18,
+              100
+            ],
+            [
+              101,
+              2404,
+              8,
+              100
+            ]
+          ],
+          26
+        ],
+        [
           1,
           null,
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-05-08-1",
@@ -146239,14 +146164,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-05-15-2",
@@ -146282,14 +146200,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-05-29-4",
@@ -146325,14 +146236,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-06-12-1",
@@ -146368,14 +146272,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-06-26-3",
@@ -146411,14 +146308,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-07-10-1",
@@ -146454,14 +146344,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2318
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-iv-2027-07-24-3",
@@ -146634,14 +146517,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-05-22-3",
@@ -146677,14 +146553,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-06-05-0",
@@ -146720,14 +146589,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-06-19-2",
@@ -146763,14 +146625,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-07-03-0",
@@ -146806,14 +146661,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-07-31-padi",
@@ -146876,14 +146724,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-05-15-2",
@@ -146919,14 +146760,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-05-29-4",
@@ -146962,14 +146796,7 @@
           null,
           24
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-06-12-1",
@@ -147005,14 +146832,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-06-26-3",
@@ -147048,14 +146868,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-07-10-1",
@@ -147091,14 +146904,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-07-17-2",
@@ -147134,14 +146940,7 @@
           null,
           26
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-07-24-3",
@@ -147177,14 +146976,7 @@
           null,
           8
         ]
-      ],
-      "sale": {
-        "sellers": [
-          0
-        ],
-        "pct": 33,
-        "was": 2404
-      }
+      ]
     },
     {
       "id": "red-sea-aggressor-v-2027-08-07-0",
@@ -166974,46 +166766,14 @@
     "liveaboard.com",
     "padi.com"
   ],
-  "berths_read": "2026-08-28",
+  "berths_read": "2026-08-31",
   "padi_berths_read": "2026-08-31",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
-    "read": "2026-08-30",
+    "read": "2026-08-31",
     "source": "padi.com",
     "url": "https://travel.padi.com/api/v2/travel/promotions/?country=110&country=120&date=2027-05-01&date=2027-06-01&date=2027-07-01&date=2027-08-01",
     "offers": [
-      {
-        "boat": "blue-melody",
-        "boat_name": "Blue Melody",
-        "title": "Monthly Special 20% Off + Free Nitrox",
-        "kind": "Discount %",
-        "value": 20.0,
-        "price": 1178,
-        "was": 1473,
-        "quoted": 1372.0,
-        "quoted_was": 1715.0,
-        "currency": "USD",
-        "start": "2027-05-08",
-        "end": "2027-05-15",
-        "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/",
-        "nights": 7
-      },
-      {
-        "boat": "blue-horizon",
-        "boat_name": "Blue Horizon",
-        "title": "Monthly Special 20% Off + Free Nitrox",
-        "kind": "Discount %",
-        "value": 20.0,
-        "price": 1034,
-        "was": 1293,
-        "quoted": 1204.0,
-        "quoted_was": 1505.0,
-        "currency": "USD",
-        "start": "2027-05-15",
-        "end": "2027-05-22",
-        "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/",
-        "nights": 7
-      },
       {
         "boat": "hammerhead-ii",
         "boat_name": "Hammerhead II",
@@ -167041,8 +166801,8 @@
         "quoted": 720.0,
         "quoted_was": 900.0,
         "currency": "EUR",
-        "start": "2027-05-18",
-        "end": "2027-05-21",
+        "start": "2027-05-15",
+        "end": "2027-05-18",
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
         "nights": 3
       },
@@ -167079,22 +166839,6 @@
         "nights": 7
       },
       {
-        "boat": "alsuraya",
-        "boat_name": "ALSURAYA",
-        "title": "Save 10%",
-        "kind": "Discount %",
-        "value": 10.0,
-        "price": 1125,
-        "was": 1250,
-        "quoted": 1125.0,
-        "quoted_was": 1250.0,
-        "currency": "EUR",
-        "start": "2027-06-12",
-        "end": "2027-06-19",
-        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
-        "nights": 7
-      },
-      {
         "boat": "discovery-i",
         "boat_name": "Discovery I",
         "title": "15% Early Bird",
@@ -167111,6 +166855,22 @@
         "nights": 7
       },
       {
+        "boat": "alsuraya",
+        "boat_name": "ALSURAYA",
+        "title": "Save 10%",
+        "kind": "Discount %",
+        "value": 10.0,
+        "price": 1125,
+        "was": 1250,
+        "quoted": 1125.0,
+        "quoted_was": 1250.0,
+        "currency": "EUR",
+        "start": "2027-07-10",
+        "end": "2027-07-17",
+        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
+        "nights": 7
+      },
+      {
         "boat": "discovery-ii",
         "boat_name": "Discovery II",
         "title": "15% Early Bird",
@@ -167121,8 +166881,8 @@
         "quoted": 892.5,
         "quoted_was": 1050.0,
         "currency": "EUR",
-        "start": "2027-07-17",
-        "end": "2027-07-24",
+        "start": "2027-07-24",
+        "end": "2027-07-31",
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
         "nights": 7
       },
@@ -167137,8 +166897,8 @@
         "quoted": 1304.1,
         "quoted_was": 1449.0,
         "currency": "EUR",
-        "start": "2027-08-12",
-        "end": "2027-08-19",
+        "start": "2027-08-19",
+        "end": "2027-08-26",
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
         "nights": 7
       }
@@ -167157,13 +166917,12 @@
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/cayman-aggressor-iv/"
       }
     ],
-    "previous": "2026-08-29",
+    "previous": "2026-08-30",
     "changes": {
       "new": [],
       "withdrawn": [
-        "red-sea-aggressor-ii",
-        "red-sea-aggressor-iv",
-        "red-sea-aggressor-v"
+        "blue-horizon",
+        "blue-melody"
       ],
       "changed": [
         {
@@ -167171,35 +166930,35 @@
             "sailing"
           ],
           "before": {
-            "boat": "discovery-i",
-            "boat_name": "Discovery I",
-            "title": "15% Early Bird",
+            "boat": "alsuraya",
+            "boat_name": "ALSURAYA",
+            "title": "Save 10%",
             "kind": "Discount %",
-            "value": 15.0,
-            "price": 765,
-            "was": 900,
-            "quoted": 765.0,
-            "quoted_was": 900.0,
+            "value": 10.0,
+            "price": 1125,
+            "was": 1250,
+            "quoted": 1125.0,
+            "quoted_was": 1250.0,
             "currency": "EUR",
             "start": "2027-06-12",
             "end": "2027-06-19",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+            "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
             "nights": 7
           },
           "after": {
-            "boat": "discovery-i",
-            "boat_name": "Discovery I",
-            "title": "15% Early Bird",
+            "boat": "alsuraya",
+            "boat_name": "ALSURAYA",
+            "title": "Save 10%",
             "kind": "Discount %",
-            "value": 15.0,
-            "price": 765,
-            "was": 900,
-            "quoted": 765.0,
-            "quoted_was": 900.0,
+            "value": 10.0,
+            "price": 1125,
+            "was": 1250,
+            "quoted": 1125.0,
+            "quoted_was": 1250.0,
             "currency": "EUR",
-            "start": "2027-06-19",
-            "end": "2027-06-26",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+            "start": "2027-07-10",
+            "end": "2027-07-17",
+            "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
             "nights": 7
           }
         },
@@ -167208,22 +166967,6 @@
             "sailing"
           ],
           "before": {
-            "boat": "discovery-ii",
-            "boat_name": "Discovery II",
-            "title": "15% Early Bird",
-            "kind": "Discount %",
-            "value": 15.0,
-            "price": 892,
-            "was": 1050,
-            "quoted": 892.5,
-            "quoted_was": 1050.0,
-            "currency": "EUR",
-            "start": "2027-07-24",
-            "end": "2027-07-31",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
-            "nights": 7
-          },
-          "after": {
             "boat": "discovery-ii",
             "boat_name": "Discovery II",
             "title": "15% Early Bird",
@@ -167238,42 +166981,21 @@
             "end": "2027-07-24",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
             "nights": 7
-          }
-        },
-        {
-          "moved": [
-            "sailing"
-          ],
-          "before": {
-            "boat": "grand-discovery",
-            "boat_name": "Grand Discovery",
-            "title": "15% Early Bird",
-            "kind": "Discount %",
-            "value": 15.0,
-            "price": 1041,
-            "was": 1225,
-            "quoted": 1041.25,
-            "quoted_was": 1225.0,
-            "currency": "EUR",
-            "start": "2027-06-26",
-            "end": "2027-07-03",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
-            "nights": 7
           },
           "after": {
-            "boat": "grand-discovery",
-            "boat_name": "Grand Discovery",
+            "boat": "discovery-ii",
+            "boat_name": "Discovery II",
             "title": "15% Early Bird",
             "kind": "Discount %",
             "value": 15.0,
-            "price": 1041,
-            "was": 1225,
-            "quoted": 1041.25,
-            "quoted_was": 1225.0,
+            "price": 892,
+            "was": 1050,
+            "quoted": 892.5,
+            "quoted_was": 1050.0,
             "currency": "EUR",
-            "start": "2027-06-05",
-            "end": "2027-06-12",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
+            "start": "2027-07-24",
+            "end": "2027-07-31",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
             "nights": 7
           }
         },
@@ -167282,22 +167004,6 @@
             "sailing"
           ],
           "before": {
-            "boat": "royal-evolution",
-            "boat_name": "Royal Evolution",
-            "title": "-10% early bird",
-            "kind": "Discount %",
-            "value": 10.0,
-            "price": 1304,
-            "was": 1449,
-            "quoted": 1304.1,
-            "quoted_was": 1449.0,
-            "currency": "EUR",
-            "start": "2027-08-26",
-            "end": "2027-09-02",
-            "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
-            "nights": 7
-          },
-          "after": {
             "boat": "royal-evolution",
             "boat_name": "Royal Evolution",
             "title": "-10% early bird",
@@ -167312,6 +167018,22 @@
             "end": "2027-08-19",
             "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
             "nights": 7
+          },
+          "after": {
+            "boat": "royal-evolution",
+            "boat_name": "Royal Evolution",
+            "title": "-10% early bird",
+            "kind": "Discount %",
+            "value": 10.0,
+            "price": 1304,
+            "was": 1449,
+            "quoted": 1304.1,
+            "quoted_was": 1449.0,
+            "currency": "EUR",
+            "start": "2027-08-19",
+            "end": "2027-08-26",
+            "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
+            "nights": 7
           }
         },
         {
@@ -167329,8 +167051,8 @@
             "quoted": 720.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-05-15",
-            "end": "2027-05-18",
+            "start": "2027-05-18",
+            "end": "2027-05-21",
             "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
             "nights": 3
           },
@@ -167345,8 +167067,8 @@
             "quoted": 720.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-05-18",
-            "end": "2027-05-21",
+            "start": "2027-05-15",
+            "end": "2027-05-18",
             "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
             "nights": 3
           }
@@ -167361,16 +167083,16 @@
         "discovery-ii": "Discovery II",
         "grand-discovery": "Grand Discovery",
         "hammerhead-ii": "Hammerhead II",
-        "red-sea-aggressor-ii": "Red Sea Aggressor II",
-        "red-sea-aggressor-iv": "Red Sea Aggressor IV",
-        "red-sea-aggressor-v": "Red Sea Aggressor V",
         "royal-evolution": "Royal Evolution",
         "serenity": "Serenity"
       }
     },
     "on_sale": {
-      "read": "2026-08-28",
-      "sailings": 265,
+      "read": {
+        "0": "2026-08-31",
+        "1": "2026-08-31"
+      },
+      "sailings": 229,
       "boats": [
         {
           "boat": "all-star-red-sea",
@@ -167382,6 +167104,10 @@
           "sellers": [
             0,
             1
+          ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
           ],
           "pct": 20
         },
@@ -167396,6 +167122,10 @@
             0,
             1
           ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
           "pct": 10
         },
         {
@@ -167408,6 +167138,9 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 20
         },
         {
@@ -167419,6 +167152,9 @@
           "last": "2027-05-22",
           "sellers": [
             0
+          ],
+          "read": [
+            "2026-08-31"
           ],
           "pct": 20
         },
@@ -167433,6 +167169,10 @@
             0,
             1
           ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
           "pct": 15
         },
         {
@@ -167445,6 +167185,10 @@
           "sellers": [
             0,
             1
+          ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
           ],
           "pct": 15
         },
@@ -167459,6 +167203,10 @@
             0,
             1
           ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
           "pct": 15
         },
         {
@@ -167472,6 +167220,10 @@
             0,
             1
           ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
           "pct": 15
         },
         {
@@ -167483,6 +167235,9 @@
           "last": "2027-08-29",
           "sellers": [
             0
+          ],
+          "read": [
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -167496,6 +167251,9 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 10
         },
         {
@@ -167507,6 +167265,9 @@
           "last": "2027-08-28",
           "sellers": [
             0
+          ],
+          "read": [
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -167520,6 +167281,9 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 10
         },
         {
@@ -167532,43 +167296,10 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 10
-        },
-        {
-          "boat": "red-sea-aggressor-ii",
-          "boat_name": "Red Sea Aggressor II",
-          "sailings": 12,
-          "of": 18,
-          "first": "2027-05-01",
-          "last": "2027-07-24",
-          "sellers": [
-            0
-          ],
-          "pct": 33
-        },
-        {
-          "boat": "red-sea-aggressor-iv",
-          "boat_name": "Red Sea Aggressor IV",
-          "sailings": 11,
-          "of": 18,
-          "first": "2027-05-01",
-          "last": "2027-07-10",
-          "sellers": [
-            0
-          ],
-          "pct": 33
-        },
-        {
-          "boat": "red-sea-aggressor-v",
-          "boat_name": "Red Sea Aggressor V",
-          "sailings": 13,
-          "of": 18,
-          "first": "2027-05-01",
-          "last": "2027-07-24",
-          "sellers": [
-            0
-          ],
-          "pct": 33
         },
         {
           "boat": "royal-evolution",
@@ -167580,6 +167311,10 @@
           "sellers": [
             0,
             1
+          ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -167594,6 +167329,10 @@
             0,
             1
           ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
           "pct": 20
         },
         {
@@ -167605,6 +167344,9 @@
           "last": "2027-06-26",
           "sellers": [
             0
+          ],
+          "read": [
+            "2026-08-31"
           ],
           "pct": 30
         },
@@ -167618,6 +167360,9 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 20
         },
         {
@@ -167629,6 +167374,9 @@
           "last": "2027-08-28",
           "sellers": [
             0
+          ],
+          "read": [
+            "2026-08-31"
           ],
           "pct": 10,
           "pct_max": 20
@@ -167643,14 +167391,51 @@
           "sellers": [
             0
           ],
+          "read": [
+            "2026-08-31"
+          ],
           "pct": 10
         }
       ]
     },
     "on_sale_changes": {
-      "read": "2026-08-28",
-      "sailings": 864,
-      "first_reading": true
+      "read": "2026-08-31",
+      "sailings": 3,
+      "previous": "2026-08-28",
+      "compared": 3,
+      "not_compared": 861,
+      "moves": [
+        {
+          "boat": "red-sea-aggressor-ii",
+          "boat_name": "Red Sea Aggressor II",
+          "kind": "ended",
+          "sailings": 1,
+          "first": "2027-05-01",
+          "last": "2027-05-01",
+          "pct": 33
+        },
+        {
+          "boat": "red-sea-aggressor-iv",
+          "boat_name": "Red Sea Aggressor IV",
+          "kind": "ended",
+          "sailings": 1,
+          "first": "2027-05-01",
+          "last": "2027-05-01",
+          "pct": 33
+        }
+      ]
+    },
+    "coverage": {
+      "unread": 9,
+      "banner_unsupported": 2,
+      "dropped": {
+        "sailings": 34,
+        "boats": [
+          "Red Sea Aggressor II",
+          "Red Sea Aggressor IV",
+          "Red Sea Aggressor V"
+        ]
+      }
     }
   },
   "entry_bar": {
@@ -167660,42 +167445,40 @@
     "ours_stricter": 30
   },
   "stale_ladders": [
-    "red-sea-aggressor-ii 2027-05-01: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-05-08: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-05-15: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-05-22: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-05-29: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-06-05: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-06-12: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-06-19: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-06-26: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-07-10: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-07-17: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-ii 2027-07-24: row 2371, ladder starts at 1588",
-    "red-sea-aggressor-iv 2027-05-01: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-05-08: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-05-15: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-05-22: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-05-29: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-06-05: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-06-12: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-06-19: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-06-26: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-07-03: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-iv 2027-07-10: row 2318, ladder starts at 1553",
-    "red-sea-aggressor-v 2027-05-01: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-05-08: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-05-15: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-05-22: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-05-29: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-06-05: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-06-12: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-06-19: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-06-26: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-07-03: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-07-10: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-07-17: row 2404, ladder starts at 1610",
-    "red-sea-aggressor-v 2027-07-24: row 2404, ladder starts at 1610"
+    "red-sea-aggressor-ii 2027-05-08: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-05-15: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-05-22: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-05-29: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-06-05: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-06-12: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-06-19: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-06-26: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-07-10: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-07-17: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-ii 2027-07-24: row 2371, liveaboard.com ladder starts at 1588",
+    "red-sea-aggressor-iv 2027-05-08: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-05-15: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-05-22: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-05-29: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-06-05: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-06-12: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-06-19: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-06-26: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-07-03: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-iv 2027-07-10: row 2318, liveaboard.com ladder starts at 1553",
+    "red-sea-aggressor-v 2027-05-01: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-05-08: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-05-15: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-05-22: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-05-29: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-06-05: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-06-12: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-06-19: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-06-26: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-07-03: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-07-10: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-07-17: row 2404, liveaboard.com ladder starts at 1610",
+    "red-sea-aggressor-v 2027-07-24: row 2404, liveaboard.com ladder starts at 1610"
   ],
   "facts_superseded": [
     "alsuraya/gear_rental",

@@ -12,10 +12,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
+from liveaboard.export import latest_entry, recent_entries
 from liveaboard.render import (
+    HISTORY_DAYS,
+    _recent_reports,
     build_payload,
     icon_data_uri,
-    latest_entry,
     render,
 )
 from liveaboard.scrape import jsonld, liveaboard_com
@@ -336,18 +338,46 @@ class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
     to break it.
     """
 
-    def test_the_committed_page_shows_the_committed_latest_entry(self):
-        history = latest_entry(published.committed("CHANGES.md")
-                               .read_text(encoding="utf-8"))
-        if not history.strip():
-            self.skipTest("no entry in data/CHANGES.md yet")
-        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
-        panel = re.search(r'<pre class="changelog">(.*?)</pre>', page, re.S)
-        self.assertIsNotNone(panel, "the built page has no changelog panel")
+    def test_the_committed_page_leads_with_the_committed_latest_report(self):
+        book = published.committed("changes.json")
+        if not book.exists():
+            self.skipTest("no data/changes.json yet")
+        reports = json.loads(book.read_text(encoding="utf-8"))
+        if not reports:
+            self.skipTest("no report in data/changes.json yet")
+        shipped = published.shipped_payload().get("changes") or []
+        self.assertTrue(shipped, "the built page carries no change reports")
         self.assertEqual(
-            unescape(panel.group(1)).strip(), history.strip(),
-            "the published page's changelog is not the newest entry in "
-            "data/CHANGES.md -- something built the page before appending to it")
+            shipped[0]["day"], reports[0]["day"],
+            "the published page does not lead with the newest report in "
+            "data/changes.json -- something built the page before appending to it")
+
+    def test_the_committed_page_carries_the_whole_window(self):
+        """Not just the newest: a week of refreshes is the view's default, and
+        a page carrying one of them is the bug this replaced."""
+        book = published.committed("changes.json")
+        if not book.exists():
+            self.skipTest("no data/changes.json yet")
+        reports = json.loads(book.read_text(encoding="utf-8"))
+        if not reports:
+            self.skipTest("no report in data/changes.json yet")
+        window = _recent_reports(reports, HISTORY_DAYS)
+        shipped = published.shipped_payload().get("changes") or []
+        self.assertEqual([r["day"] for r in shipped], [r["day"] for r in window])
+
+    def test_the_report_reaches_the_page_as_data_and_not_as_prose(self):
+        """`changes.compare` builds the report, `changes.render` flattened it to
+        text, the CLI wrote the text to Markdown and `render` read it back out
+        and escaped it into a `<pre>` -- a terminal transcript served to a
+        browser, with boat names cut mid-word to fit eighty columns (#143)."""
+        html = published.site_page().read_text(encoding="utf-8")
+        if not (published.committed("changes.json").exists()
+                and json.loads(published.committed("changes.json")
+                               .read_text(encoding="utf-8"))):
+            self.skipTest("no structured book yet, so the prose fallback is right")
+        self.assertNotIn('<pre class="changelog">', html,
+                         "the page is serving the change report as a transcript")
+        self.assertIn('id="changeLog"', html)
 
 
 class TestARebuildIsNotNews(unittest.TestCase):
@@ -369,7 +399,20 @@ class TestARebuildIsNotNews(unittest.TestCase):
     pinned for the same reason.
     """
 
+    #: The shell moved out of `action.yml` into a file of its own so the
+    #: rebase branch could be tested (#127). This guard followed it, and reads
+    #: both: the script for the logic, the action for the wiring that reaches
+    #: it. Keying on only one of the two is how a check ends up looking at a
+    #: file the behaviour no longer lives in.
     ACTION = ROOT / ".github" / "actions" / "publish" / "action.yml"
+    SCRIPT = ROOT / ".github" / "actions" / "publish" / "push.sh"
+
+    def test_the_action_actually_runs_the_script(self):
+        """Otherwise everything below inspects a file nothing executes."""
+        self.assertTrue(self.SCRIPT.exists(), "push.sh is gone")
+        self.assertIn("push.sh", self.ACTION.read_text(encoding="utf-8"),
+                      "the action no longer runs push.sh, so the checks below "
+                      "are reading a script that never runs")
 
     def test_the_page_carries_a_build_stamp_under_the_key_the_action_strips(self):
         key = re.search(r'"(\w+)": datetime\.now', (ROOT / "src" / "liveaboard"
@@ -378,12 +421,12 @@ class TestARebuildIsNotNews(unittest.TestCase):
         # assertTrue rather than assertIn: a missing substring prints the
         # whole haystack, and the haystack is the entire action.
         self.assertTrue(
-            f'"{key.group(1)}":' in self.ACTION.read_text(encoding="utf-8"),
+            f'"{key.group(1)}":' in self.SCRIPT.read_text(encoding="utf-8"),
             f"render stamps {key.group(1)!r} and the publish action does not "
             f"normalise it; every rebuild would commit again, silently")
 
     def test_the_action_still_has_the_check(self):
-        body = self.ACTION.read_text(encoding="utf-8")
+        body = self.SCRIPT.read_text(encoding="utf-8")
         self.assertTrue("site/index.html" in body, "the stamp check is gone")
         self.assertTrue("exclude" in body,
                         "the check must ignore the page when deciding whether "
@@ -413,6 +456,11 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     WORKFLOWS = ROOT / ".github" / "workflows"
     CHECKS = "uses: ./.github/actions/checks"
     PUBLISH = "uses: ./.github/actions/publish"
+    #: The serialised publish job every data workflow now delegates its tail
+    #: to. A caller reaches the push through this rather than containing it,
+    #: which is the third spelling this guard has had to learn -- first inline
+    #: `git push origin`, then the shared action, now the shared workflow.
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
 
     def test_the_shared_actions_exist(self):
         for name in ("checks", "publish"):
@@ -441,8 +489,10 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     @staticmethod
     def _pushes(body: str) -> bool:
         """Whether a workflow commits to the repository, however it does it."""
+        cls = TestEveryPushingWorkflowChecksItself
         return ("git push origin" in body
-                or TestEveryPushingWorkflowChecksItself.PUBLISH in body)
+                or cls.PUBLISH in body
+                or cls.DELEGATE in body)
 
     def test_only_the_shared_action_carries_the_push(self):
         """One definition of the rebase-and-retry. It is subtle — `-X theirs`
@@ -452,12 +502,26 @@ class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
                  if "push rejected (attempt" in p.read_text(encoding="utf-8")]
         self.assertEqual(loose, [], f"these re-implement the push loop: {loose}")
 
+    def test_the_shared_publish_workflow_runs_the_checks(self):
+        """The delegation below is only sound because this holds.
+
+        Seven callers stopped containing the checks step when their tail moved
+        into `publish.yml`; if that workflow ever stops running the list, all
+        seven go unchecked at once and every one of them still looks fine.
+        """
+        body = (self.WORKFLOWS / "publish.yml").read_text(encoding="utf-8")
+        self.assertIn(self.CHECKS, body)
+        self.assertIn(self.PUBLISH, body)
+
     def test_every_workflow_that_pushes_runs_them_first(self):
         unchecked = [
             path.name
             for path in sorted(self.WORKFLOWS.glob("*.yml"))
             if self._pushes(body := path.read_text(encoding="utf-8"))
+            # Either it runs the list itself, or it hands the whole tail to
+            # the one workflow that does -- asserted directly above.
             and self.CHECKS not in body
+            and self.DELEGATE not in body
         ]
         self.assertEqual(
             unchecked, [],
@@ -1310,7 +1374,7 @@ class TestPayloadIsRead(unittest.TestCase):
         headings = set(re.findall(r"<h3>([^<]+)</h3>", footer))
         source = self.app()
         titles = set(re.findall(r'\bt: "([^"]+)"', source))
-        for heading in ("Places", "Disclosure", "Per dive"):
+        for heading in ("Places", "Mandatory fees", "Per dive"):
             self.assertIn(heading, headings, f"the footer dropped {heading}")
             self.assertIn(heading, titles, f"{heading} is documented but gone")
 
@@ -1488,6 +1552,24 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
     WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
     PUBLISHED = ("data", "site")
     PUBLISH = "uses: ./.github/actions/publish"
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
+
+    @staticmethod
+    def is_reusable(text: str) -> bool:
+        """Whether this is a called tail rather than a workflow of its own.
+
+        `workflow_call` workflows fire no `workflow_run` event -- the *caller's*
+        run is what completes -- so `publish.yml` must never be required in
+        pages.yml's watch list, and adding it would watch nothing.
+
+        Stated rather than left to luck. This guard already passed on it for
+        the wrong reason: `commits_published_files` looks for the first
+        `paths:` line, and in publish.yml that is the *input declaration*,
+        which has no value, so the check fell through and returned False. The
+        answer was right and the reasoning was an accident, which is one
+        refactor away from being wrong and still green.
+        """
+        return "workflow_call:" in text
 
     def commits_published_files(self, text: str) -> bool:
         """Whether the workflow commits anything the page is built from.
@@ -1498,10 +1580,20 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
         every workflow was skipped, and this test passed by having nothing left
         to look at. Same failure as the push guard above, from the same commit.
         """
-        if self.PUBLISH in text:
-            staged = re.search(r"^\s*paths:\s*[\"']?(.*?)[\"']?\s*$", text, re.M)
-            # No `paths` means the action's default, which is `data site`.
-            names = re.findall(r"[\w./-]+", staged.group(1)) if staged else ["data"]
+        marker = max(text.find(self.PUBLISH), text.find(self.DELEGATE))
+        if marker >= 0:
+            # Only `paths:` *after* the publish step, because `on: push:` has a
+            # `paths:` of its own and `re.search` over the whole file finds that
+            # one first. fees.yml and promote.yml both have such a trigger, and
+            # reading it as a staging list made this guard stop requiring the
+            # two of them -- silently, and in the direction where a data commit
+            # lands and the page keeps serving an older build.
+            staged = re.search(r"^\s*paths:\s*[\"']?([^\n]*?)[\"']?\s*$",
+                               text[marker:], re.M)
+            value = staged.group(1).strip() if staged else ""
+            # An empty or interpolated value is the default, `data site`.
+            names = (["data"] if not value or value.startswith("${{")
+                     else re.findall(r"[\w./-]+", value))
             if any(n.split("/")[0] in self.PUBLISHED for n in names):
                 return True
         for line in re.findall(r"^\s*git add\s+(.*)$", text, re.M):
@@ -1518,7 +1610,8 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
         """
         seen = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
                 if p.name != "pages.yml"
-                and self.commits_published_files(p.read_text(encoding="utf-8"))]
+                and self.commits_published_files(body := p.read_text(encoding="utf-8"))
+                and not self.is_reusable(body)]
         self.assertGreaterEqual(
             len(seen), 5,
             f"only {seen} appear to commit data; has the mechanism moved again?")
@@ -1534,7 +1627,7 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
             if path.name == "pages.yml":
                 continue
             text = path.read_text(encoding="utf-8")
-            if not self.commits_published_files(text):
+            if not self.commits_published_files(text) or self.is_reusable(text):
                 continue
             name = re.search(r"^name:\s*(.+)$", text, re.M)
             self.assertIsNotNone(name, f"{path.name} has no name:")
@@ -1708,7 +1801,7 @@ class TestTheSellerFilter(unittest.TestCase):
 
 
 class TestTheBuiltStampIsTheBuild(unittest.TestCase):
-    """The toolbar's "built" is the build, to the minute.
+    """The colophon's "page built" is the build, to the minute.
 
     It printed `meta.generated` -- the day the *data* was scraped -- under the
     word "built". Two different facts under one label, and the one it showed
@@ -1730,6 +1823,838 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
         self.assertRegex(meta["generated"], r"^\d{4}-\d{2}-\d{2}$",
                          "the crawl date must stay a date: it is a day, not a moment")
 
-    def test_the_toolbar_prints_the_build(self) -> None:
+    def test_the_colophon_prints_the_build_beside_the_crawl(self) -> None:
+        """The two dates answer one question -- how current is this -- so they
+        sit together. The build stamp was a fourth clause on the toolbar line
+        about the fleet, where nobody reading it had asked."""
         app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
-        self.assertIn('" · built " + (D.meta.built || D.meta.generated)', app)
+        page = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('" · page built " +\n      (D.meta.built || D.meta.generated)', app)
+        self.assertIn('id="builtStamp"', page)
+        self.assertIn("Prices read __GENERATED__", page)
+        self.assertNotIn("boats bookable by the berth · all prices in \" +\n"
+                         "    D.meta.currency +", app,
+                         "the toolbar is still appending the build stamp")
+
+
+class TestTheThreeViews(unittest.TestCase):
+    """Trips, on sale and history are three views of one document.
+
+    Separate HTML files were the alternative and were rejected on weight: the
+    payload is inlined, and the sale view is the trips view's own rows with the
+    markdown filter held on, so a second document would ship those megabytes
+    again to answer a question the first one already holds the data for. That
+    makes the split a set of panes and a rail rather than a set of files, and
+    every rule below is a way for that to fail quietly rather than loudly.
+
+    What is asserted here is wiring -- a control that addresses a view, a
+    placeholder that lands in one pane and not two. Anything about the *size*
+    of what those panes render is in ``tests/test_layout.py``, which drives a
+    browser, because this file's way of checking a layout claim was to assert
+    that the source text of the rule was present. Eight such assertions passed
+    over a table rendered at zero height (#130), including the one named for
+    the panel that caused it.
+    """
+
+    PAGE = ROOT / "templates" / "index.html"
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+
+    def page(self) -> str:
+        return self.PAGE.read_text(encoding="utf-8")
+
+    def app(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def css(self) -> str:
+        return self.CSS.read_text(encoding="utf-8")
+
+    def test_each_view_has_a_pane_and_a_way_to_reach_it(self) -> None:
+        """Half a view is worse than none: a rail item pointing at nothing, or
+        a pane nothing can open, is a section that exists only in the markup."""
+        page, app = self.page(), self.app()
+        for pane in ('id="tablePane"', 'id="historyPane"'):
+            self.assertIn(pane, page)
+        for item in ('id="navTrips"', 'id="navSale"', 'id="navHistory"'):
+            self.assertIn(item, page)
+        for target in ('href="#trips"', 'href="#sale"', 'href="#history"'):
+            self.assertIn(target, page, "a rail item addresses no view")
+        self.assertIn('VIEWS = ["trips", "sale", "history"]', app)
+        self.assertIn("hashchange", app, "a view cannot be linked to or reloaded into")
+
+    def test_the_sale_view_is_the_overview_and_not_the_filter(self) -> None:
+        """Three questions, three panes.
+
+        The sale view was built as the trips table with the markdown filter
+        held down, which was the wrong reading of what it is for. *Which
+        departures are discounted* is a table question and the table has a
+        control for it -- the On sale chip, filtering those rows like any other
+        filter. Asking it a second time as a destination gave the rail an entry
+        that duplicated a chip, and left the thing the view should have been
+        carrying -- the discount overview: which boats are marked down, by how
+        much, what moved since yesterday -- folded into a `details` above the
+        table, which is where it already was and where nobody looking for it
+        would go.
+        """
+        page, app = self.page(), self.app()
+        self.assertIn('id="salePane"', page, "the sale view has no pane of its own")
+        self.assertIn("function saleOnly() { return state.onSaleOnly; }", app,
+                      "the sale view is holding the markdown filter down again")
+        self.assertIn("saleOnly() && !dep.sale", app,
+                      "the row filter no longer reads the chip")
+        sale = page.split('id="salePane"', 1)[1].split("</section>", 1)[0]
+        self.assertIn('id="dealsBody"', sale, "the overview is not in the sale view")
+        table = page.split('id="tablePane"', 1)[1].split("</div><!-- /#tablePane -->", 1)[0]
+        self.assertNotIn('id="dealsBody"', table,
+                         "the overview is still folded above the trips table")
+
+    def test_the_overview_is_a_document_rather_than_a_fold(self) -> None:
+        """It was a `details` capped at a third of the window because the table
+        under it was the page. On a view of its own none of that applies, and
+        the cap and the fold's flex arithmetic go with it."""
+        page, css = self.page(), self.css()
+        self.assertNotIn("<details class=\"deals\"", page,
+                         "the overview still opens and closes")
+        self.assertNotIn("#deals[open]", css,
+                         "the fold's sizing rules outlived the fold")
+        self.assertIn(".sale-pane { overflow:auto; }", css,
+                      "the overview does not scroll as a document")
+
+    def test_a_view_with_nothing_behind_it_is_not_offered(self) -> None:
+        """The On sale chip's own rule, applied to a whole section: a control
+        that can do nothing must not be dressed as one that can. A checkout
+        whose deals book is empty has no overview to show, so it has no sale
+        view, and typing its name into the address bar must not conjure one."""
+        app = self.app()
+        self.assertIn("saleView = drawDeals();", app)
+        self.assertIn('if (name === "sale" && !saleView) name = "trips";', app)
+
+    def test_the_address_bar_never_names_a_view_that_was_declined(self) -> None:
+        """`showView` rewrites a name it will not honour -- an unknown one, or
+        the sale view where there is no sale data -- and the hash has to be
+        rewritten with it. Left alone, what the visitor bookmarks or shares is
+        a link to a view the page decided not to give them, saying nothing
+        about it. `replace`, because a corrected address is not a place to go
+        back to."""
+        app = self.app()
+        settle = app.split("function settleHash(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("window.location.replace", settle,
+                      "a declined view stays in the address bar")
+        # Scoped to `settleHash`: elsewhere on the page assigning the hash is
+        # right, because a boat name in a change report *navigating* to that
+        # boat's sailings is a place a reader should be able to come back from.
+        self.assertNotIn("window.location.hash =", settle,
+                         "correcting the address leaves a history entry to go back to")
+
+    def test_the_history_view_carries_the_report_and_the_files(self) -> None:
+        """Both placeholders moved out of the method footer together. Leaving
+        one behind would put the downloads under a heading about fee arithmetic
+        and the report on a page of its own."""
+        page = self.page()
+        history = page.split('id="historyPane"', 1)[1].split("</section>", 1)[0]
+        self.assertIn("__CHANGES__", history, "the change report is not in the history view")
+        self.assertIn("__DOWNLOADS__", history, "the downloads are not in the history view")
+        self.assertEqual(page.count("__CHANGES__"), 1, "the report is rendered twice")
+        self.assertEqual(page.count("__DOWNLOADS__"), 1, "the downloads are listed twice")
+
+    def test_hidden_beats_display_on_every_pane(self) -> None:
+        """Which view is on screen is the `hidden` attribute, and `.pane` sets
+        `display:flex`.
+
+        An author `display` beats the user agent's `[hidden] { display:none }`
+        whatever its specificity, so without this rule the history view drew on
+        top of the table and every pane was visible at once. It failed exactly
+        this way once; the rule is one line and the bug is silent.
+        """
+        self.assertIn("[hidden] { display:none !important; }", self.css())
+
+    def test_every_view_names_itself(self) -> None:
+        """Three things read a view's name and none of them is the screen: the
+        document outline, the browser tab and whatever announces that the main
+        region has been replaced. All three views printed one title, so a
+        bookmark of the history view said trips; two of the three had no
+        heading, so the outline went from the site's h1 straight to a table."""
+        page, app = self.page(), self.app()
+        self.assertIn('class="view-heading"', page, "the trips pane has no heading")
+        for heading in ("<h2>What is on sale</h2>", "<h2>What changed, refresh by refresh</h2>"):
+            self.assertIn(heading, page)
+        self.assertIn("document.title =", app, "every view shares one title")
+        self.assertIn("tabindex=\"-1\"", page,
+                      "no pane can be focused, so a view change is announced by nothing")
+        self.assertIn(".focus()", app, "nothing moves focus into the view that appeared")
+
+class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
+    """Rules that live in `app.js` and have no Python to test, so the guard is
+    that the built page still contains them.
+
+    Two of them, and they are the same rule twice. **One date over two sellers
+    dates half of them wrong**: `berths_read` and `padi_berths_read` are two
+    crawls two days apart, and the sale marks stamped the first over both --
+    on 124 rows resting partly on the second and 2 resting entirely on it.
+    And **the two sellers' offers belong on one row**: they were drawn as two
+    tables sharing no column, ten boats in each with no way to read across, and
+    a merge that keys on either seller's list alone drops the other's.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def source(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def test_a_sale_mark_dates_each_seller_separately(self):
+        app = self.source()
+        self.assertIn("function namedReadings(", app)
+        self.assertIn("namedReadings(d.sale.sellers)", app)
+        self.assertNotIn(
+            'var read = D.meta.berths_read ? ", read "', app,
+            "the sale mark is stamping one crawl's date over both sellers again",
+        )
+
+    def test_the_page_draws_one_table_for_both_sellers(self):
+        app = self.source()
+        self.assertIn("function offersTable(", app)
+        for gone in ("function fleetTable(", "function dealsTable("):
+            self.assertNotIn(
+                gone, app,
+                f"{gone} is back; the two sellers' offers are two tables again",
+            )
+
+    def test_the_merge_keeps_a_boat_only_one_seller_names(self):
+        """The union, not the intersection.
+
+        Ten boats fill both halves today, so keying on the fleet rows alone
+        passes every test and silently drops a PADI offer for a boat no ladder
+        has caught -- out of the panel headed "what is discounted", which is
+        this site's own reported failure in somebody else.
+        """
+        app = self.source()
+        block = re.search(r"function offerRows\((.*?)\n  \}", app, re.S)
+        assert block, "offerRows() not found in app.js"
+        self.assertIn("if (!byBoat[o.boat])", block.group(1))
+
+    def test_the_panel_states_what_it_could_not_read(self):
+        app = self.source()
+        self.assertIn("function coverageNote(", app)
+        for field in ("dropped", "unread", "banner_unsupported"):
+            with self.subTest(field=field):
+                self.assertIn("coverage." + field, app)
+
+    def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
+        """One figure in that column means three different things -- both
+        sellers quote it, PADI quotes it and cannot be totalled, or nobody
+        else was asked -- and they printed identically."""
+        app = self.source()
+        self.assertIn("function whoAdvertised(", app)
+        self.assertIn("whoAdvertised(d, row)", app)
+
+
+class TestThePageIsWhatItsDataBuilds(unittest.TestCase):
+    """The committed page must be what the committed data renders to.
+
+    `promote --check` proves `data/egypt-2027.json` is what the parser makes of
+    the committed inputs. Nothing made the same claim about `site/index.html`,
+    and the gap is not theoretical: on 2026-08-31 the published page said
+    ``berths_read: 2026-08-28`` while `data/cabins.json` committed beside it
+    said ``2026-08-31``. The site told visitors the berth counts were three
+    days older than the data it shipped them with.
+
+    It arrived through the publish action's rebase. Two data jobs overlapped;
+    `-X theirs` favours the commit being replayed, which is right for the
+    reading that job took and wrong for the *derived* files, which are nobody's
+    reading -- they were built at checkout, before the other job's inputs
+    landed. So a stale page overwrote a fresh one. `promote --check` stayed
+    green the whole time, because the dataset really did match its inputs; only
+    the page was behind. The next run rebuilt and healed it, which is what
+    makes this worth a test rather than a fix alone: the window was real,
+    deployed, and closed itself before anyone could see it.
+
+    The action now re-derives after a rebase. This is the net under that, and
+    the reason it is a test rather than another step in `.github/actions/
+    checks`: `checks` runs before the push, and the rebase only happens after
+    the push is rejected, so by the time this can go wrong `checks` is over.
+    """
+
+    STAMP = re.compile(r'"built":"[^"]*"')
+
+    def test_the_committed_page_matches_a_fresh_render_of_the_committed_data(self):
+        committed = published.site_page()
+        import tempfile
+
+        from liveaboard.render import render
+
+        with tempfile.TemporaryDirectory() as tmp:
+            fresh = render(published.dataset(), tmp, data_dir=published.DATA)
+            a = self.STAMP.sub("", committed.read_text(encoding="utf-8"))
+            b = self.STAMP.sub("", fresh.read_text(encoding="utf-8"))
+
+        # The payload is one enormous line, so a diff would print the whole
+        # page. Report where they part instead, which is what names the field.
+        if a != b:
+            i = next((k for k in range(min(len(a), len(b))) if a[k] != b[k]),
+                     min(len(a), len(b)))
+            self.fail(
+                "site/index.html is not what data/ builds — the page is behind "
+                f"its own data.\n  committed: ...{a[max(0, i - 90):i + 90]}\n"
+                f"  rebuilt  : ...{b[max(0, i - 90):i + 90]}"
+            )
+
+
+class TestThePublishTailDoesNotQueueOnConcurrency(unittest.TestCase):
+    """`publish.yml` must not carry a `concurrency` group.
+
+    #128 asked for the push to be serialised so two data sources could not
+    collide. It was implemented that way -- one group shared across every
+    caller, `cancel-in-progress: false` -- and it lost data on the first test.
+
+    GitHub's concurrency is not a queue. A group holds one running job and
+    **one** pending; a third arrival cancels the pending one. On three
+    simultaneous dispatches, `deals.yml` read PADI's deals, uploaded them, and
+    had its publish job cancelled four seconds later without running a step:
+    a day's figures for that source fetched and thrown away, the run reading
+    *cancelled* rather than failed, which nothing alerts on.
+
+    Strictly worse than the race. The race published a wrong freshness date
+    that healed within the hour; this silently drops a reading.
+
+    The race is closed by the split instead -- the publish job derives from the
+    branch tip it just checked out -- so the group bought nothing it did not
+    also cost. A test, because "we tried the obvious thing and it ate a commit"
+    is exactly the knowledge a comment loses to the next refactor.
+    """
+
+    WORKFLOW = ROOT / ".github" / "workflows" / "publish.yml"
+
+    def test_the_reusable_tail_has_no_concurrency_group(self):
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        live = [line for line in body.splitlines()
+                if line.strip().startswith("concurrency:")]
+        self.assertEqual(
+            live, [],
+            "publish.yml has a concurrency group again; GitHub's is not a "
+            "queue and will cancel a pending publish, discarding a reading "
+            "that was already fetched. See this test's docstring.")
+
+    def test_the_reason_is_written_down_where_somebody_would_add_one(self):
+        """The comment is the fix here; a bare absence invites the re-add."""
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("not a queue", body)
+        self.assertIn("cancels the pending", body)
+
+
+class TestTheOnSaleChipCountsWhatIsOnScreen(unittest.TestCase):
+    """Every filter count on the page answers "what if I picked this too?".
+
+    The On sale chip did not. It was counted once at load, over the whole
+    dataset, and never moved -- so it read "On sale 229" beside a table
+    filtered to a boat with no sale on it, and the click then produced an empty
+    result. **58 of the 77 boats have sailings and no sale at all**, so that
+    was the common case rather than a corner ([#129]).
+
+    The old comment argued the stale number said "how much there is to find"
+    rather than how much the filters had left, and that a 0 would read as "no
+    sales" rather than "none in June". It does not survive the rest of the
+    panel: every other number here is filter-relative, so one that is not
+    teaches only that this one lies, and the reader still learns "none in
+    June" -- by ending up with an empty table instead of by reading a 0. The
+    confusion was deferred past a click, not avoided.
+
+    Two things make the fix work and both are asserted, because either alone
+    is wrong:
+
+    * `passes` has to let the sale filter **exclude itself**, the way `months`,
+      `ports` and `boats` already do. Without that, switching the chip on makes
+      its own count equal the visible rows and it can never guide the way back.
+    * the chip has to be a **bank**, so it re-counts on every draw through the
+      same `recount()` hook as the rest. Counting it anywhere else is a second
+      mechanism to keep in step.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_sale_filter_can_exclude_itself(self):
+        # `saleOnly()` rather than `state.onSaleOnly`: the sale view holds the
+        # same filter down as a destination, and the skip has to sit outside
+        # both readings or the rail cannot count the view it is not on.
+        self.assertIn('if (skip !== "sale" && saleOnly()', self.app,
+                      "passes() must accept a `sale` skip, or the chip's own "
+                      "count collapses onto the visible rows once it is on")
+
+    def test_the_chip_recounts_with_every_other_bank(self):
+        """It must go through `BANKS`, not a count taken once at load."""
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("BANKS.push(", after)
+        self.assertIn('passes(dep, D.itineraries[dep.itinerary_id], "sale")', after)
+
+    def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self):
+        """`chips()` drops an unreachable option; a lone toggle must not.
+
+        A bank can drop one because the reader sees the others and infers the
+        rule. A single control that vanishes reads as a feature that is gone.
+        It stays, disabled, saying 0 -- and stays clickable while it is *on*,
+        for the same reason a picked chip survives at zero: the way out must
+        not disappear.
+        """
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("n === 0 && !state.onSaleOnly", after)
+        self.assertIn("onSale.disabled = dead", after)
+        self.assertNotIn("onSale.hidden = true", after)
+
+    def test_the_disabled_chip_is_styled(self):
+        """Otherwise "0" and a live count look identical and it invites a
+        click that does nothing."""
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn("button.chip:disabled", css)
+
+
+class TestTheEntryBankFoldsAtItsCertificationBoundary(unittest.TestCase):
+    """The entry bank has a "show more" now, and it must not cut at a count.
+
+    Every other bank caps at eight, because the eight commonest ports or boats
+    are a fair sample of a set with no order of its own. The entry bar is a
+    *ladder*, least demanding to most, and a count-based cut there is arbitrary
+    and brutal: at eight it folds away 738 of 1122 rows, every Advanced rung,
+    and the single biggest bar on the page -- Advanced + 50 dives, on 289 rows
+    -- which sorts last precisely because it is the strictest.
+
+    So it cuts where the certification changes instead. That puts every Open
+    Water rung on screen and every Advanced rung behind the disclosure, which
+    is a fold a reader can predict, and the label says which way it opens.
+
+    Pinned because the obvious tidy-up -- "why does this one bank pass a limit
+    function, let us just use chipLimit()" -- silently restores exactly the
+    behaviour the fold was designed to avoid, and nothing on the page would
+    look wrong afterwards.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.entry = self.app[self.app.index('chips("entry"'):]
+        self.entry = self.entry[:self.entry.index('chips("sellers"')]
+
+    def test_the_entry_bank_passes_a_boundary_limit_rather_than_the_count(self):
+        self.assertIn("limit: function (live)", self.entry,
+                      "the entry bank no longer computes its own cut; a plain "
+                      "chipLimit() hides every Advanced rung, 738 of 1122 rows")
+        self.assertIn('split(" + ")[0]', self.entry,
+                      "the cut must key on the certification, which is the "
+                      "part of the label before the dive count")
+
+    def test_the_disclosure_says_which_way_it_opens(self):
+        """"+ 9 more" is uninformative on a ladder; the direction is the point."""
+        self.assertIn('moreWord: "stricter"', self.entry)
+        self.assertIn('opts.moreWord || "more"', self.app,
+                      "chips() must still default to 'more' for the banks that "
+                      "are lists rather than ladders")
+
+    def test_a_single_certification_falls_back_to_the_ordinary_cap(self):
+        """A fold that hides nothing meaningful should just be the normal one."""
+        self.assertIn("chipLimit()", self.entry,
+                      "no fallback: if the ladder ever holds one certification "
+                      "the boundary rule would show every rung uncapped")
+
+
+class TestNeitherSellerIsTheHouse(unittest.TestCase):
+    """`padi.com` and `liveaboard.com` are both sources this site reads.
+
+    liveaboard.com was read first and PADI Travel second. That is a fact about
+    this project's history rather than about either seller, and it had hardened
+    into a hierarchy the code stated out loud: one seller was *ours* and the
+    other *the other seller* (#139).
+
+    The half a visitor could be misled by was the link. Where both sellers sold
+    a sailing the column named them; where only liveaboard.com did, the label
+    was the generic **"listing"** -- and no row anywhere read "listing" and
+    meant PADI. A visitor following it was handed to a site the page had never
+    named.
+
+    What is *not* asserted here is the asymmetries that are real, because every
+    one of them is a statement about what a source publishes rather than about
+    which came first: the fee panel is the vessel's own and beats a seller's
+    account of it, a row states `pct` only from the seller whose fare it
+    prints, the two read-dates are two crawls on two days, and PADI's
+    `availability` fills the whole-sailing slot because that was measured.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_a_seller_link_names_the_seller_it_opens(self) -> None:
+        self.assertIn('(d.padi_only ? "PADI" : "liveaboard") + " ↗</a>"', self.app,
+                      "a link label is generic again, so one seller is the "
+                      "unmarked default and a visitor cannot tell where it goes")
+        column = self.app.split('{ k: "source", t: "Seller",', 1)[1].split("} }", 1)[0]
+        self.assertNotIn('"listing"', column,
+                         '"listing" is liveaboard.com under a name that does '
+                         "not say so")
+
+    def test_the_cheaper_seller_is_named_rather_than_owned(self) -> None:
+        """`cheapest: "ours" | "padi"` -- an enum with one value naming a
+        company and one naming us -- made a reader decode the project's reading
+        order before they could check any arithmetic that used it."""
+        self.assertIn('cheaper: same ? "same" : gap < 0 ? "liveaboard" : "padi"', self.app)
+        self.assertNotIn('"ours"', self.app.split("function best(", 1)[1])
+
+    def test_both_bills_are_keyed_by_their_seller(self) -> None:
+        """`.m` was named for what it is and `.p` for whose it is, and `best()`
+        overloaded `.m` again for whichever bill is cheaper -- three meanings
+        across two letters."""
+        self.assertIn("{ d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) }",
+                      self.app)
+        # Anchored: a bare "row.m" is a substring of "narrow.matches".
+        self.assertIsNone(re.search(r"\brow\.m\b", self.app),
+                          "the row's liveaboard.com bill is `.lav`")
+        self.assertIsNone(re.search(r"\brow\.p\b", self.app),
+                          "the row's PADI bill is `.padi`")
+
+
+class TestAnEmptyFeeCellSaysWhy(unittest.TestCase):
+    """A blank in a money column reads as zero unless something stops it.
+
+    Whether the operator stated its required extras had a column of its own --
+    *Disclosure*, two places right of the fees it was about -- carrying "not
+    looked at" or "optional only" as a pill. Two cells for one fact, and the
+    one a reader lands on while reading the bill was the mute one: the fee cell
+    printed a dash, which in a column of money reads as "no fees". Every
+    Egyptian liveaboard pays park and port dues, so that is the opposite of
+    what it means.
+
+    The reason is printed in the fee column now. Both states survive because
+    they are different failures -- a panel nobody has read, and a panel that
+    was read and names only optional extras -- and neither may be rendered as
+    a figure or as a category the row belongs to.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_disclosure_column_is_gone(self) -> None:
+        self.assertNotIn('"disclosure"', self.app,
+                         "the reason is a column of its own again, away from "
+                         "the fees it is about")
+        titles = set(re.findall(r'\bt: "([^"]+)"', self.app))
+        self.assertNotIn("Disclosure", titles)
+        self.assertIn("Mandatory fees", titles)
+
+    def test_the_fee_cell_prints_the_reason_rather_than_a_dash(self) -> None:
+        fees = self.app.split('t: "Mandatory fees"', 1)[1].split("} },", 1)[0]
+        self.assertIn("disclosure(d)", fees, "the fee cell does not say why it is empty")
+        self.assertIn("FEE_WHY", fees, "the fee cell offers no explanation on hover")
+        self.assertNotIn('<span class="dim">—</span>', fees,
+                         "the fee cell is a mute dash again")
+
+    def test_both_reasons_are_kept_apart_and_neither_reads_as_no_fees(self) -> None:
+        """"Nobody looked" and "the operator did not say" are different
+        failures. Each carries a sentence, and each sentence has to rule out
+        the reading a blank invites."""
+        self.assertIn('none: "Nobody has read', self.app)
+        self.assertIn('partial: "The operator publishes only optional', self.app)
+        block = self.app.split("var FEE_WHY = {", 1)[1].split("\n  };", 1)[0]
+        for state in ("none", "partial"):
+            sentence = block.split(f"{state}:", 1)[1].split("\n    partial:", 1)[0]
+            self.assertRegex(
+                sentence, r"park and port|still charged",
+                f"the {state} sentence does not rule out the reading that a "
+                f"blank fee cell invites, which is that there are no fees")
+
+    def test_an_unstated_fee_sorts_last_rather_than_cheapest(self) -> None:
+        """A trip nobody read the fees for is not a cheap trip, and must not
+        collide with a genuine zero at the top of a cheapest-first sort."""
+        fees = self.app.split('t: "Mandatory fees"', 1)[1].split("show:", 1)[0]
+        self.assertIn("Infinity", fees)
+
+    def test_the_reason_is_not_dressed_as_a_value(self) -> None:
+        """`.pill` is a state badge and reads as a value the row *has*. These
+        two are the absence of one."""
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn(".unstated {", css)
+        self.assertNotIn(".pill.full", css, "the disclosure pill outlived its column")
+        self.assertNotIn(".pill.partial", css)
+
+
+class TestTheHideSoldOutChipCarriesItsCount(unittest.TestCase):
+    """The last filter chip with no number on it, and the one whose effect was
+    hardest to guess: 162 of 1,122 published departures are sold out, so
+    pressing it removes about one row in seven and nothing said so until you
+    pressed it and counted what moved (#141).
+
+    Counted the way the On sale chip is -- live, against what the *other*
+    filters leave. The issue asked for a season total and for the chip to
+    vanish at zero, quoting rules that were true of the On sale chip before
+    #129 replaced both: every other number on this page answers "what if I
+    picked this too?", and "nothing here is sold out" is an answer a
+    disappearing control cannot give. The issue's own headline -- the way every
+    other filter carries one -- is what settled it.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.chip = self.app.split('document.getElementById("hideSold")', 1)[1]
+
+    def test_sold_out_is_a_stated_sold_out_and_nothing_else(self) -> None:
+        """`bookable` is "anything but a stated sold-out -- unknown is not a
+        refusal", so `!bookable` keeps that distinction. Counting "not
+        available" would fold the limited sailings into a figure they are not
+        part of."""
+        self.assertIn(
+            'var soldOutCount = D.departures.filter(function (d) { return !d.bookable; })',
+            self.app)
+        self.assertNotIn('availability === "sold_out"', self.chip.split("addEventListener")[0])
+
+    def test_the_filter_can_exclude_itself(self) -> None:
+        """Without the skip, switching the chip on takes its own count to zero
+        and the way back disappears."""
+        self.assertIn('if (skip !== "soldout" && state.hideSoldOut && !dep.bookable)',
+                      self.app)
+        self.assertIn('passes(dep, D.itineraries[dep.itinerary_id], "soldout")', self.chip)
+
+    def test_it_recounts_with_every_other_bank(self) -> None:
+        """Through `BANKS`, not a count taken once at load: any other mechanism
+        is a second one to keep in step."""
+        self.assertIn("BANKS.push(", self.chip)
+        self.assertIn('soldOut.textContent = "Hide sold out " + n;', self.chip)
+
+    def test_the_number_is_what_pressing_it_leaves(self) -> None:
+        """What every other chip on this page means by a number: On sale says
+        how many rows you get, a month chip says how many rows you get.
+
+        This shipped once counting what it *removes* -- the sold-out sailings
+        themselves -- on the reading that a control labelled "hide" should be
+        sized by what it hides. That makes it the one chip whose number has to
+        be subtracted from something before it means anything, and it puts the
+        largest number on the emptiest result.
+        """
+        self.assertIn("if (!dep.bookable) return;", self.chip,
+                      "the chip is counting what it hides rather than what "
+                      "pressing it leaves")
+
+    def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self) -> None:
+        """Dimmed and unclickable, saying 0 -- still clickable while it is
+        switched *on*, so the way out never disappears.
+
+        Zero means something different here than on the other chips now that
+        the number is what pressing it leaves: every trip these filters leave
+        is sold out, and pressing would empty the table. The title says that
+        rather than the other chips' "nothing here matches".
+        """
+        self.assertIn("var dead = n === 0 && !state.hideSoldOut;", self.chip)
+        self.assertIn("soldOut.disabled = dead;", self.chip)
+        self.assertIn("would empty ", self.chip,
+                      "zero here is 'everything left is sold out', which is "
+                      "not what the other chips' zero means")
+
+    def test_a_checkout_with_nothing_sold_out_is_not_offered_the_chip(self) -> None:
+        """Unlike On sale it was rendered unconditionally, so it needed the
+        gate rather than inheriting one."""
+        page = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="hideSold" aria-pressed="false" hidden', page)
+        self.assertIn("if (soldOutCount) {", self.app)
+
+
+class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
+    """The sale content was moved out of a `details` and not laid out (#142).
+
+    It read as the old panel in a new place -- one run-on sentence, one
+    alphabetical fleet table, one list of moves -- and used about half of the
+    richest data on the site. Three bands now, because they answer three
+    different questions: what the sale *is*, how deep the cuts go, and which
+    boats and weeks carry them.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_view_opens_on_figures_rather_than_a_sentence(self) -> None:
+        """A reader skims a strip and reads a sentence, and these are numbers
+        to be skimmed. The reading date is one of the figures because a
+        discount is a claim with a date and this one can end overnight."""
+        self.assertIn("function saleStrip(", self.app)
+        strip = self.app.split("function saleStrip(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn('"sailings cut"', strip)
+        self.assertIn('"off"', strip)
+        self.assertIn('"read"', strip)
+
+    def test_the_counts_and_the_movement_are_not_one_sentence(self) -> None:
+        """They were, because the line had to be the whole of a collapsed
+        `<summary>`. Split, each can be the shape it wants."""
+        self.assertIn("function movedLine(", self.app)
+        self.assertNotIn("function dealsSummary(", self.app,
+                         "the summary sentence outlived the fold it was for")
+
+    def test_the_discounts_are_grouped_by_depth_deepest_first(self) -> None:
+        """The per-boat table is alphabetical, which answers "is this boat on
+        sale" and cannot answer "where are the real discounts"."""
+        self.assertIn("function discountSpread(", self.app)
+        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("return b.pct - a.pct;", spread, "the bands are not deepest first")
+
+    def test_a_sailing_with_no_stated_rate_is_a_band_and_not_a_dash(self) -> None:
+        """Two sailings are marked down by a seller that stated no percentage
+        against the fare this page prints. That is the honest edge of the data
+        -- it is not a dash, and it is certainly not 0%."""
+        self.assertIn('el("td", "d-none", "rate not stated")', self.app)
+
+    def test_the_saving_is_never_was_minus_the_quoted_price(self) -> None:
+        """`sale.was` is already converted to the display currency and the
+        payload's `price` is the sailing's own, so subtracting them is nonsense
+        on every row quoted in dollars. `base` is the converted one."""
+        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("dep.sale.was && dep.base", spread)
+        self.assertNotIn("price.amount", spread)
+        self.assertNotIn("dep.price", spread)
+
+
+class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):
+    """`changes.compare` builds a report out of dataclasses. `changes.render`
+    flattened it to column-aligned text, the CLI wrote that text into a
+    Markdown file, and the page read the text back out and escaped it into a
+    `<pre>` — so everything a real interface needs was built and discarded one
+    step before the page, and the visitor got a terminal transcript with boat
+    names cut mid-word to fit eighty columns (#143).
+
+    The text stays: it is what a workflow log wants and it is the durable human
+    record. What changed is that the same comparison now also comes out as
+    data, and neither shape is derived from the other.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def test_the_report_comes_out_twice_from_one_comparison(self) -> None:
+        from liveaboard.changes import as_dict, compare
+
+        before = json.loads(published.committed().read_text(encoding="utf-8"))
+        report = compare(before, before)
+        record = as_dict(report, before="a", after="b")
+        self.assertTrue(record["quiet"], "a dataset against itself moved something")
+        for key in ("added", "withdrawn", "price_up", "price_down", "fees"):
+            self.assertIn(key, record)
+
+    def test_what_the_book_drops_for_weight_is_counted(self) -> None:
+        """A browser can expand, so a truncation's honest form there is showing
+        the rest behind a control -- but the page is one file with nothing
+        fetched lazily, so a report is paid for by every visitor and cannot be
+        unbounded. One refresh landed 644 fare moves, 136 KB of the 200 the
+        whole week came to. What is cut is counted, never silent."""
+        from liveaboard.changes import BOOK_LIMIT, as_dict, compare
+        from liveaboard.changes import Departed, Report
+
+        report = Report(added=[
+            Departed(f"d{n}", "Boat", "Trip", "2027-05-01", 100.0, "EUR")
+            for n in range(BOOK_LIMIT + 7)])
+        record = as_dict(report)
+        self.assertEqual(len(record["added"]), BOOK_LIMIT)
+        self.assertEqual(record["more"]["added"], 7)
+
+    def test_the_page_does_not_read_its_own_prose_back(self) -> None:
+        """The step this deletes. `render` reading `CHANGES.md` and escaping it
+        is the fallback for a checkout whose refresh predates the book, and
+        must not be how a page with the book renders."""
+        render_py = (ROOT / "src" / "liveaboard" / "render.py").read_text(encoding="utf-8")
+        self.assertIn('if structured:', render_py)
+        self.assertIn('return \'<div id="changeLog"></div>\'', render_py)
+
+    def test_every_row_can_reach_the_sailing_it_is_about(self) -> None:
+        """Each line names a boat that is a row in the trips table, and none of
+        them could be clicked: the panel answering "did this get cheaper" could
+        not get you to the thing that did."""
+        app = self.APP.read_text(encoding="utf-8")
+        self.assertIn("function boatLink(", app)
+        link = app.split("function boatLink(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("state.boats.add(name)", link)
+        self.assertIn('window.location.hash = "#trips"', link)
+        # The bank has to be rebuilt, or a boat in its hidden tail is filtering
+        # with no visible chip to take the filter off again.
+        self.assertIn("bank.repaint()", link)
+
+
+class TestOneGate(unittest.TestCase):
+    """The bar a person clears before pushing is the bar the workflows run.
+
+    It was not. `.github/actions/checks` listed the steps itself, so the only
+    way to run the real list was to push and wait — and anything run locally
+    was a second list that could drift from it without either side noticing.
+    That is the same failure the action's own comment describes about the five
+    workflows, one level up: a copy drifts, and a check that drifts is one
+    nobody is really running.
+
+    So there is one definition, `tools/ship.py`, and both call it.
+    """
+
+    ACTION = ROOT / ".github" / "actions" / "checks" / "action.yml"
+    SHIP = ROOT / "tools" / "ship.py"
+
+    def test_the_shared_action_runs_the_same_command_a_person_does(self) -> None:
+        action = self.ACTION.read_text(encoding="utf-8")
+        self.assertIn("python3 tools/ship.py", action,
+                      "the workflows are running their own list again")
+        # And nothing else, or the list has started growing back in two places.
+        steps = [line for line in action.splitlines()
+                 if line.strip().startswith("run:")]
+        self.assertEqual(len(steps), 1, f"the action has grown extra steps: {steps}")
+
+    def test_the_gate_still_holds_everything_it_replaced(self) -> None:
+        """Delegating is only safe if nothing was dropped on the way."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        for command in ('"liveaboard.cli", "build"',
+                        '"liveaboard.cli", "check"',
+                        '"liveaboard.cli", "promote", "--check"',
+                        '"tools" / "check_seed.py"'):
+            self.assertIn(command, ship, f"the gate no longer runs {command}")
+
+    def test_every_test_module_is_in_the_gate(self) -> None:
+        """Sharded by module for the parallelism, which is a way to lose one:
+        `unittest discover` finds them and a hand-written list would not."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        self.assertIn('(ROOT / "tests").glob("test_*.py")', ship,
+                      "the gate names its modules instead of discovering them")
+
+    def test_work_does_not_land_on_the_trunk_without_a_branch(self) -> None:
+        """Eleven changes went straight onto `main` before the flow had this:
+        no branch, nothing to look at before it shipped, and "merge to prod"
+        reporting that the work was already there rather than doing anything.
+
+        Not a warning and not a flag to override -- `--push` branches on its
+        own, because a default that has to be remembered is not a default.
+        """
+        ship = self.SHIP.read_text(encoding="utf-8")
+        push = ship.split("if not git(\"status\", \"--porcelain\")", 1)[1]
+        self.assertIn("if branch == TRUNK:", push,
+                      "--push commits wherever it happens to be standing")
+        self.assertIn("checkout", push, "--push does not create the branch")
+        self.assertIn("def merge(", ship, "there is no way back to the trunk")
+        self.assertIn('"--no-ff"', ship,
+                      "a fast-forward merge hides that the work was a branch")
+
+    def test_the_merge_gates_against_the_trunk_it_is_merging_into(self) -> None:
+        """A branch that was green alone can be red against a trunk that moved
+        under it -- and the scheduled data jobs move it several times a day."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        merge = ship.split("def merge(", 1)[1]
+        self.assertIn('git("rev-list", "--count", f"HEAD..origin/{TRUNK}")', merge)
+        self.assertIn("not merging: the gate is red against the merged trunk", merge)
+
+    def test_the_merge_does_not_claim_a_cleanup_it_did_not_do(self) -> None:
+        """Deleting the merged branch is allowed to fail -- this environment's
+        token returns 403 on it -- and the first version reported success
+        anyway, because the call was fire-and-forget."""
+        merge = self.SHIP.read_text(encoding="utf-8").split("def merge(", 1)[1]
+        self.assertIn('if run_git("push", "-q", "origin", "--delete", branch) != 0:',
+                      merge, "the branch delete is fire-and-forget again")
+
+    def test_the_fast_loop_says_it_is_not_the_gate(self) -> None:
+        """`--fast` drops the two slowest modules, so it can pass over a real
+        failure. A shortcut that does not admit it is one people ship on."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        self.assertIn("this is not the full gate", ship)

@@ -1,0 +1,168 @@
+name: Publish what a data job produced
+
+# The serialised half of every data workflow, and the only place that pushes.
+#
+# **Why this is its own job and not the tail of the fetching one.** The seven
+# source workflows each derive `data/egypt-2027.json` and `site/index.html`
+# from a checkout and then push. Two of them in flight at once means both
+# derived from a tree that has since moved, and `-X theirs` on the rebase then
+# favours the *stale* copy: on 2026-08-31 a `deals.yml` run put back a page
+# saying `berths_read: 2026-08-28` beside a `data/cabins.json` a capped
+# `cabins.yml` had just collected on 08-31. The site dated its own berth counts
+# three days wrong ([#128]).
+#
+# The publish action repairs that after the fact by re-deriving on a rebase.
+# This job makes the state unreachable instead, by re-checking out the branch
+# tip and re-deriving there. So the derivation always sees the newest inputs,
+# and "stale derived file" stops being something the pipeline can produce.
+#
+# **The fetches stay parallel**, which is what splitting the refresh bought
+# (#123): a one-request ECB read must not wait behind a 320-page crawl or
+# behind the browser-driven fee run. Those live in the caller's own job;
+# everything from `promote` onwards lives here.
+#
+# **A shared `concurrency` group was tried here and removed** -- see the note
+# on the job below. It is not a queue, and it threw a fetched reading away.
+#
+# **So the fetching job hands over its *inputs*, never its output.** Whatever
+# it read goes up as an artifact; the dataset and the page are rebuilt here
+# from the branch tip plus those inputs. That is the whole mechanism — a
+# derived file never travels, so it can never arrive stale.
+
+on:
+  workflow_call:
+    inputs:
+      carry:
+        description: >
+          Artifact holding the input files the fetching job wrote. Unpacked
+          over the fresh checkout before anything is derived. Inputs only:
+          send `data/cabins.json`, never `data/egypt-2027.json`.
+
+          Empty for a caller that fetched nothing — `promote.yml` re-derives
+          from inputs already committed, and still belongs here because it
+          pushes, and anything that pushes has to take its turn.
+        required: false
+        default: ""
+        type: string
+      paths:
+        description: "What to stage, space separated."
+        required: false
+        default: "data site"
+        type: string
+      subject:
+        description: "Commit subject. `{today}` and `{sha}` are substituted."
+        required: true
+        type: string
+      nothing:
+        description: "What to print when there is nothing to commit."
+        required: false
+        default: "nothing changed"
+        type: string
+      changes:
+        description: >
+          Report what moved: append to `data/CHANGES.md`, write the run
+          summary, and put one line in the commit subject.
+
+          Runs after the promote and before the build, and both orderings are
+          load-bearing. Before the *commit*, because the comparison is against
+          `HEAD` and afterwards that would be this run's own output. Before the
+          *build*, because the page embeds the newest `CHANGES.md` entry, and
+          building first shipped a panel that had not yet seen the entry the
+          same run was about to write.
+        required: false
+        default: false
+        type: boolean
+      force:
+        description: "Pass `--force` to promote."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    # **No concurrency group here, and that is a finding rather than an
+    # omission.** #128 asked for the push to be serialised so two sources could
+    # not collide, and it was implemented exactly that way: one shared group,
+    # `cancel-in-progress: false`. Measured on three simultaneous dispatches,
+    # 2026-08-31, it lost data.
+    #
+    # GitHub's concurrency is not a queue. The group holds one running job and
+    # **one** pending; a third arrival cancels the pending one. So `deals.yml`
+    # read PADI's deals, uploaded them, and had its publish job cancelled four
+    # seconds later without running a step -- a day's reading for that source
+    # fetched and silently discarded, the run showing *cancelled* rather than
+    # failed, which nothing alerts on. `cancel-in-progress: false` can say "do
+    # not kill the job that is running". It cannot say "wait your turn".
+    #
+    # That is strictly worse than the race it was meant to prevent: the race
+    # published a wrong freshness date that healed within the hour; this loses
+    # a source's figures for the day and says nothing.
+    #
+    # The race is closed regardless, and by the split rather than by any lock:
+    # this job derives from the branch tip it just checked out, so two
+    # publishes racing produce two correct pages instead of one stale one, and
+    # the rebase path in `.github/actions/publish` re-derives again for the
+    # case where both check out the tip before either pushes.
+    #
+    # Do not add a `concurrency` block back unless there is a real queue behind
+    # it. `TestThePublishTailDoesNotQueueOnConcurrency` fails if one returns.
+
+    steps:
+      # The branch tip, not `github.sha`. The default checkout takes the commit
+      # the workflow *started* from, which by now may be several data commits
+      # behind -- and deriving from that is exactly the staleness this job
+      # exists to prevent. Naming the branch resolves at checkout time.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Take the inputs the fetch produced
+        if: inputs.carry != ''
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.carry }}
+
+      - name: Rebuild the dataset from the branch tip plus those inputs
+        run: >
+          PYTHONPATH=src python3 -m liveaboard.cli promote
+          ${{ inputs.force && '--force' || '' }}
+
+      - name: Dataset validates
+        run: PYTHONPATH=src python3 -m liveaboard.cli check
+
+      - name: Report what changed
+        if: inputs.changes
+        id: changed
+        run: |
+          PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD \
+            --append data/CHANGES.md \
+            >> "$GITHUB_STEP_SUMMARY"
+          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
+            --revision HEAD --headline)
+          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+
+      - name: Build the site
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Check what is about to be published
+        uses: ./.github/actions/checks
+
+      - name: Commit and push
+        uses: ./.github/actions/publish
+        with:
+          paths: ${{ inputs.paths }}
+          subject: ${{ inputs.subject }}
+          headline: ${{ steps.changed.outputs.headline }}
+          nothing: ${{ inputs.nothing }}

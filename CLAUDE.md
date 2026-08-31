@@ -6,6 +6,26 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
+python3 tools/ship.py                    # the whole gate, in parallel — 24s
+python3 tools/ship.py --fast             # the inner loop, no browser — 4s
+python3 tools/ship.py --push -m "..."    # gate, then commit and push
+```
+
+**`tools/ship.py` is the gate, and `.github/actions/checks` runs that same
+command** — so the bar a person clears before pushing is the bar the five
+workflows run, rather than a second list that drifts from it. It builds the
+page, then runs the suite sharded by module alongside `check`, `promote
+--check` and the seed check: 24 seconds against about 60 serially, and 4 with
+`--fast`, which drops `test_promote_check` and `test_layout` and says so.
+`TestOneGate` refuses an `action.yml` that grows its own steps back.
+
+CI runs the same gate, so a green run here is a green run there. **Do not sit
+and poll it** — the only thing worth waiting for is a red one, and the way to
+find out is to be told.
+
+The pieces, when one of them is what you want on its own:
+
+```bash
 PYTHONPATH=src python3 -m unittest discover -s tests   # everything, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
@@ -24,9 +44,12 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. All seven source workflows promote on them, as do
-`promote.yml` and the CI check, so one canonical set of inputs lives in
-`cli.py` and cannot drift apart across nine callers.
+Take the defaults. There is now exactly **one** place a job promotes —
+`.github/workflows/publish.yml`, the serialised tail every pushing workflow
+delegates to — plus the rebase path in `.github/actions/publish` and
+`promote --check` in `.github/actions/checks`. Nine callers spelling out their
+own promote became three, so "one canonical set of inputs, in `cli.py`" is
+structural rather than a convention nine files have to keep.
 
 **A test over committed data gates the commit, never the fetch.** The suite
 holds both kinds and the default command runs both. Seven workflows run the
@@ -61,7 +84,38 @@ itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` �
 are outside it: no crawl touches them, so nothing asserted about them can ever
 be cleared by fetching.
 
-**One source per workflow, and two shared actions.** `refresh.yml` bundled the
+**One source per workflow, and the derive-and-push tail is a second job.** Each
+source fetches independently — that is what the split bought — and everything
+from `promote` onwards lives in `.github/workflows/publish.yml`, which
+re-checks out the **branch tip** and derives there.
+
+**Serialising that tail was tried and it lost data.** A shared `concurrency`
+group is the obvious way to stop two sources colliding, and GitHub's
+concurrency is not a queue: a group holds one running job and *one* pending,
+and a third arrival cancels the pending one. On three simultaneous dispatches
+`deals.yml` read PADI's deals, uploaded them, and had its publish cancelled
+four seconds later without running — a day's figures fetched and discarded, the
+run reading *cancelled* rather than failed, which nothing alerts on. Worse than
+the race it was meant to prevent. `TestThePublishTailDoesNotQueueOnConcurrency`
+fails if a group comes back.
+
+The reason is a bug this shape makes unreachable rather than repairable. Two
+jobs in flight both derive `data/egypt-2027.json` and `site/index.html` from a
+checkout, and `-X theirs` on the rebase then favours the *stale* copy: on
+2026-08-31 a `deals.yml` run put back a page saying `berths_read: 2026-08-28`
+beside a `data/cabins.json` a capped `cabins.yml` had just collected on 08-31.
+The site dated its own berth counts three days wrong, `promote --check` was
+green throughout because the dataset really did match its inputs, and the next
+run healed it before anybody could look.
+
+So **a fetching job hands over its inputs and never its output.** What it read
+goes up as an artifact; the dataset and the page are rebuilt in the publish job
+from the branch tip plus those inputs. A derived file never travels, so it
+cannot arrive stale. `TestThePageIsWhatItsDataBuilds` is the net under that,
+and the re-derivation in `.github/actions/publish` is the belt: the rebase path
+still exists for a collision that beats the queue.
+
+**Two shared actions, and one shared workflow.** `refresh.yml` bundled the
 ECB rates, the liveaboard.com crawl, the itinerary fragments and PADI's deals,
 so proving a two-request change to `fetch_deals.py` meant a run that first
 fetched 320 vessel pages from a site with nothing to do with it. Each source is
@@ -84,6 +138,12 @@ ends the same way, because the shape is identical and six copies of it drifted:
   with the stamp normalised on both sides, never by reading the shape of a
   diff: the payload is one enormous line, so a real change and the stamp land
   on it together and no line-wise filter can tell them apart.
+  **It also means a quiet job never reaches the push at all**, which is not
+  obvious until you want a collision. Two attempts to force one for #127 hit
+  this instead: a full `cabins.yml` had already covered every departure that
+  morning, so a capped re-read produced a byte-identical book and the publish
+  exited before it could be rejected. A job with nothing to say cannot lose a
+  race, so the rebase path is reachable only on a day something moved.
 
 Every one of those files is a **promote input**, so a job commits its data
 *and* the dataset built from it. Committing an input alone leaves
@@ -109,6 +169,30 @@ Resetting the working branch onto `main` to look at it works and then leaves
 the branch one merge commit "ahead" of its own remote, which reads as unpushed
 work every time. `git show` answers the same question and disturbs nothing.
 
+## Workflow
+
+Every ask gets a branch, and comes back through a merge. No exceptions, and no
+asking whether this one counts.
+
+```bash
+python3 tools/ship.py --fast             # while working
+python3 tools/ship.py --push -m "..."    # gate, branch, push
+python3 tools/ship.py --merge            # gate, merge to main, push
+```
+
+`--push` refuses to commit on `main` and branches from the commit subject, so
+this holds whether or not anybody remembered it. **"Merge to prod" means run
+`--merge`** — if it ever comes back "nothing to merge", the work was put on the
+trunk directly and that was the mistake, not the request.
+
+Eleven changes went onto `main` with no branch before this was written down.
+The concern was raised three times in that session and the pushing continued
+anyway, which is worse than never raising it: a flagged worry followed by the
+original behaviour reads as permission that was never given.
+
+Deleting the merged branch 403s here — the token pushes branches and cannot
+remove them. The merge lands; the branch is left stale. Say so, do not retry.
+
 ## Answering
 
 Short. The finding, not the derivation. This is a codebase whose owner knows it
@@ -119,10 +203,34 @@ glance is noise, not rigour.
 - One decision per message when a decision is wanted.
 - Skip restating what was just said, and skip the recap section.
 - Findings that matter go in `docs/` or a commit message, not into chat twice.
+- **The commit message is the record; chat is not a second copy of it.** Do not
+  narrate what was done, what was measured, what was decided and why, in a
+  reply, when all of it is in the commit that just landed. Two or three lines
+  and a link to look at.
+- **No status tables, no per-size measurement grids, no bullet list of every
+  judgement call**, unless they were asked for. A reader who wants the numbers
+  will ask; one who does not has to scroll past them to find the answer.
+- A reply that needs a heading is too long.
 
 ## Invariants
 
 Break these and the site starts lying quietly rather than failing loudly.
+
+- **Two sellers, neither of them the house.** `padi.com` and `liveaboard.com`
+  are both sources this site reads. liveaboard.com was read first and PADI
+  second, and that is a fact about this project rather than about either
+  seller, so it may not appear as *ours* and *theirs*, as a named seller beside
+  an unnamed default, or as a reason in a comment that explains a price. The
+  metric keys are `.lav` and `.padi`; `best().cheaper` says `"liveaboard"` or
+  `"padi"`; a link in the Seller column always names the seller it opens —
+  "listing" was liveaboard.com's, printed on no PADI row ever, and handed a
+  visitor to a site the page never named (#139). The asymmetries that *are*
+  real are all statements about what a source publishes and each says so where
+  it is written: the fee panel is the vessel's own and beats a seller's account
+  of it; a row states `pct` only from the seller whose fare it prints;
+  `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
+  `availability` fills the whole-sailing slot and not the at-price one, because
+  that was measured.
 
 - **Never invent a price.** Every price and fee needs a `Provenance`. A parser
   that cannot find a number returns `None`; it does not guess. `seed_estimate`
@@ -236,7 +344,8 @@ Break these and the site starts lying quietly rather than failing loudly.
   what the *second* seller says about the same week (`padi.json`'s
   `dive_sites`, folded by `fetch_padi._padi_sites` from the day plan and then
   the blurb). PADI is last because it is the least structured: against the 180
-  trips both sellers describe, its words add 173 reef mentions ours does not,
+  trips both sellers describe, its words add 173 reef mentions liveaboard.com
+  does not,
   among them Elphinstone on a Brothers and Safaga week off a sentence saying
   the two "are quite distant from one another". Merged in, that is the
   BDE-badging failure removed once already; used only where the three above are
@@ -310,6 +419,45 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Fury Shoals* was changed in both when the two drifted apart. Do not lengthen this
   table without counting the spellings first, and count in the *names* rather
   than the titles: counting folded titles hid *Ras Muhammad* entirely.
+- **One file, three views, three questions.** Trips, on sale and history are
+  panes `showView` swaps in `app.js`, addressed by the URL hash — never three
+  documents, because the payload is inlined and a second file would ship those
+  megabytes again. **A filter is not a view.** The sale view was built as the
+  trips table with the markdown filter held down, and that was wrong twice
+  over: it made the rail's middle entry a second way to press the On sale
+  chip, and it left what the view is actually for — the discount overview, by
+  boat, with what moved since yesterday — folded into a `details` above the
+  table, which is exactly where nobody looking for it would go. `saleOnly()`
+  reads the chip and nothing else. Which departures are discounted is a table
+  question; which boats are marked down and by how much is a page. A new
+  section is a
+  pane and a rail item — and `tablePane` is not the trips pane: two views draw
+  there and the deals panel inside it belongs to the other one. Which pane is
+  on screen is the `hidden` attribute, and `[hidden] { display:none !important }`
+  is what makes that beat the panes' own `display:flex` — without it every view
+  draws at once. **The hash is the address, so it may not name a view that is
+  not on screen**: `showView` rewrites a name it will not honour — an unknown
+  one, or `#sale` where no markdown was read — and `location.replace` corrects
+  the address with it, or what a visitor bookmarks is a view they were never
+  shown. Each view sets `document.title` and focuses its pane, because a
+  bookmark, a history entry and a screen reader each have only a name to go on
+  and all three views once had the same one.
+- **The index never outgrows what it indexes.** The deals panel and the table
+  divide the room evenly (`flex:1 1 0` on both), and 34vh is what the panel may
+  not exceed when there is plenty rather than what it claims when there is not.
+  A cap alone does the opposite of what it looks like: `max-height` does not
+  make a flex item shrink, it *freezes* it — an item whose content exceeds its
+  clamp contributes nothing to absorbing a shortfall — so the table was handed
+  the remainder after the panel had taken its cap, and at 768×600 the remainder
+  was **0px**. A `min-height` floor under the table fixes neither half: a floor
+  that can exceed the room left is a pane painting over the footer.
+- **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
+  Chromium over the three views at six windows; everything else about the split
+  is asserted as template text, which is right for wiring and worthless for
+  geometry. Eight source-string assertions passed over that 0px table,
+  including the one named for the panel that caused it. The file skips without
+  Playwright so `unittest discover` still needs nothing — the `layout` job in
+  `ci.yml` is what makes it run.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per
@@ -366,8 +514,8 @@ Break these and the site starts lying quietly rather than failing loudly.
   date-dependent and promotion is pure — and the row says *not asked* instead.
   Same rule as `fees_known`: no fee lines means nobody looked, not that there
   are none.
-- **A boat only the second seller lists is still a boat.** 22 Egyptian
-  liveaboards on PADI mapped to nothing of ours; ids for them are minted in
+- **A boat only one of the two sellers lists is still a boat.** 22 Egyptian
+  liveaboards on PADI mapped to nothing on liveaboard.com; ids for them are minted in
   `data/padi_aliases.json` under `padi_only` and 10 carry season sailings, so
   the fleet is 77 rather than 67. `padi_only` means PADI is the only source of
   *sailings*: ten of the 22 have a liveaboard.com fee panel and simply no
@@ -385,15 +533,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   tidy-up of PADI's `BELLA LIVEABOARDS`), and it settles Blue Pearl. **A fleet
   is not an operator**:
   PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET Fleet", and
-  folding that onto our Blue's stated "Blue Planet Liveaboards" removed a
-  duplicate row by asserting a company for a hull our own source connects to
-  nobody. Two operator rows that may be one company is cosmetic; the assertion
+  folding that onto Blue's liveaboard.com-stated "Blue Planet Liveaboards"
+  removed a duplicate row by asserting a company for a hull the other source
+  connects to nobody. Two operator rows that may be one company is cosmetic; the assertion
   is not. **The two are one row now, and the rule is why that is allowed** —
   not folded on the fleet label, which still folds nothing, but on Blue Pearl's
   own page saying `"brand": {"name": "Blue Planet Liveaboards"}`. The fold is a
-  fact rather than a tidy-up, which is the whole difference. Where our fee book is absent
-  PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
-  where ours exists it wins outright. Never a merge of the two: one figure per
+  fact rather than a tidy-up, which is the whole difference. Where the vessel's
+  own fee panel is absent PADI's per-itinerary book becomes the itinerary's own
+  (`padi_sourced_fees`); where the panel exists it wins outright — because a
+  panel the boat publishes about itself outranks a seller's account of it, which
+  is a statement about the two disclosures and not about the two sellers. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
   line from each is a bill neither seller quotes.
 - **A sale is the list price a seller prints beside its own, never a banner.**
@@ -414,13 +564,26 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **Each markdown is dated to the day its own seller was read**, like the berth
+  counts and for the same reason: `berths_read` and `padi_berths_read` are two
+  crawls two days apart, and the sale marks stamped the first over both — on
+  124 rows whose evidence is partly PADI's and 2 where it is all of it. The
+  summary carries a date per seller and its heading takes the oldest of them,
+  because a panel is only as fresh as its stalest half.
+  **And the panel states what it could not read.** Three absences print
+  identically to "not on sale" — a ladder rejected as stale, a sailing neither
+  seller published a list price for (9), and a trip-name banner the seller read
+  for it contradicts (2) — so `promote` counts each into `deals.coverage` and
+  the panel says so. `promotion` stays unrendered and is now worth keeping for
+  that count: a corroborating field nobody hears from when it stops
+  corroborating is a field to delete.
 - **A deal is placed by its vessel, never by the country beside it.** PADI's
   deals listing has to be asked for the USA as well as Egypt, because all three
   Red Sea Aggressors are filed under the USA and asking Egypt alone drops them.
   The same breadth returns Bahamas, Belize, Cayman and Roatan: 5 of 18 offers in
   the published season sail another ocean, so the field is wrong about where a
   boat is more than a quarter of the time and cannot place anything. `promote`
-  joins the deal's vessel to a boat of ours and lets that decide. A vessel that
+  joins the deal's vessel to a boat in the fleet and lets that decide. A vessel that
   joins to nothing is **named** — in the build log and on the page — rather than
   dropped: an Egyptian boat under a USA label that nothing has paired is exactly
   what the breadth is for, and only a name a person reads tells it apart from a
@@ -433,9 +596,9 @@ Break these and the site starts lying quietly rather than failing loudly.
   is confidently wrong. Ids are truncated to 96 characters and the ports sit at
   the end, so two long names can collide without anybody typing a wrong
   character — which would break "two sailings differing only by port are two
-  trips" silently. `promote` raises instead. A foreign trip name is folded onto
-  ours through `padi_key` and only where that key names exactly one of our
-  trips; where two of a boat's own itineraries share it the fold is refused,
+  trips" silently. `promote` raises instead. A PADI trip name is folded onto a
+  liveaboard.com one through `padi_key` and only where that key names exactly
+  one of them; where two of a boat's own itineraries share it the fold is refused,
   because nothing can say which harbour the other source meant.
 - **A joined string is not a record, and no parser makes it one again.** PADI
   states a trip's two harbours in two fields; `itinerary_from_payload` stored
@@ -510,6 +673,42 @@ Break these and the site starts lying quietly rather than failing loudly.
   contradict. **CI never saw this**, because the scheduled data commits push
   with `GITHUB_TOKEN` and GitHub does not run workflows on those — so a refresh
   can turn `main` red and the next human PR is what finds out.
+  **And a reading thrown away stays thrown away, in every field it touches.**
+  The drop landed and the sale beside it did not: `_sale_for` was handed the
+  same rejected book eight lines later, so all 36 dropped rows kept its
+  discount — *“−33%, down from €2,371”* on a berth advertised at €2,371, the
+  dataset quoting a source it had just ruled out, on the largest markdowns on
+  the page. `_drop_stale_ladder` returns **which seller** it dropped rather
+  than a count, `_list_prices` ignores that seller for the sailing, and
+  `TestAStaleLadderCannotSpeak` asserts at both ends: the ladder never reaches
+  the sale, and no shipped row states a list price equal to its own fare. Then
+  the loss is stated — `deals.coverage.dropped` names the boats, because after
+  the fix those rows read *not on sale*, which is one seller's discarded
+  reading wearing its answer.
+- **The history view is a week of refreshes, anchored to the log.** Not one
+  entry: the refresh runs several times a day, and a single one is the noisiest
+  possible window — a run that read nothing rendered a view saying nothing
+  moved with days of real movement one link away. `recent_entries` measures the
+  window from the **newest entry in the log, never from today**, because
+  `render` is pure: a clock in it would make the same committed inputs render a
+  different page tomorrow and turn `main` red with nobody having changed
+  anything (`TestThePageIsWhatItsDataBuilds` normalises only the build stamp).
+  A stale log shows as the dates the view prints, which a reader can check. A
+  day with no entry is a day the refresh did not run, and the lead says so —
+  never that nothing moved. A repeated date is two refreshes, printed
+  separately under one heading for the day.
+- **A change report is rendered, never transcribed.** `changes.compare` builds
+  a report of dataclasses; `changes.render` flattens it to text for the log and
+  `CHANGES.md`, and `changes.as_dict` emits the same comparison as data into
+  `data/changes.json`, which is committed and which the page renders as rows.
+  Neither shape is derived from the other. The page used to read that Markdown
+  back and escape it into a `<pre>` — a terminal transcript served to a
+  browser, boat names cut mid-word to fit eighty columns, and not one line
+  clickable through to the sailing it was about. `BOOK_LIMIT` caps the book at
+  120 rows per kind because one refresh landed 644 fare moves — 136 KB of the
+  200 the week came to — and what is cut is **counted**, never silent. A
+  checkout whose last refresh predates the book still gets the prose, and
+  converges within a week.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

@@ -14,13 +14,13 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
 from .dataset import Dataset
-from .export import latest_entry, to_csv
+from .export import recent_entries, to_csv
 from .money import DISPLAY_CURRENCY
 from .pricing import (
     DEFAULT_TOGGLES,
@@ -497,13 +497,112 @@ def _downloads_html(available: list[str]) -> str:
     return "<ul class=\"downloads\">" + "".join(items) + "</ul>"
 
 
-def _changes_html(entry: str, linked: bool) -> str:
-    """The last refresh's report, verbatim, in a block that scrolls."""
-    if not entry:
-        return ""
-    more = ('<p><a href="data/CHANGES.md">Every refresh before this one</a>.</p>'
+HISTORY_DAYS = 7
+
+
+def _pretty_day(iso: str) -> str:
+    """``2026-08-30`` as ``30 August 2026``, or unchanged if it is not a date.
+
+    Built rather than formatted: ``%-d`` is a glibc extension and would print a
+    leading zero on one platform and not another, which is a diff in the built
+    page depending on where it was built.
+    """
+    try:
+        day = date.fromisoformat(iso)
+    except ValueError:
+        return iso
+    return f"{day.day} {day.strftime('%B')} {day.year}"
+
+
+def _recent_reports(book: list[dict], days: int) -> list[dict]:
+    """The reports within ``days`` of the newest one recorded.
+
+    Measured against the book, never against today, for the reason
+    `export.recent_entries` is: a clock inside `render` makes the same
+    committed inputs render a different page tomorrow, and the test that
+    compares the committed page against a fresh render would turn `main` red
+    with nobody having changed anything.
+    """
+    def when(entry: dict) -> date | None:
+        try:
+            return date.fromisoformat(str(entry.get("day", "")))
+        except ValueError:
+            return None
+
+    newest = next((d for d in map(when, book) if d), None)
+    if newest is None:
+        return list(book)
+    floor = newest - timedelta(days=days - 1)
+    return [e for e in book if (when(e) or newest) >= floor]
+
+
+def _changes_html(entries: list[tuple[str, str]], linked: bool,
+                  structured: bool) -> str:
+    """The last week of refreshes, newest first.
+
+    Three states, and the middle one is why this still exists.
+
+    With the **structured book** present the page renders the reports itself,
+    from `payload.changes`, as rows that can be clicked through to the sailing
+    they are about. This returns the container it draws into and nothing else:
+    a second copy of the same reports as prose would be the same facts twice,
+    at several kilobytes a day.
+
+    With **only the Markdown** -- a checkout whose last refresh predates the
+    book -- the prose is what there is, and it is served as it always was
+    rather than showing an empty history. It converges: the next refresh writes
+    a structured entry, and within a week the fallback is unused.
+
+    With **neither**, the view says so. That is a fact about this build, not
+    about the fleet: no refresh has been *recorded* here, which is not the
+    claim that nothing moved.
+
+    Three things the view must not imply, all one rule. A **day with no entry**
+    is a day the refresh did not run, so the lead counts the refreshes it has
+    and names the span they cover, and says nothing about the days between. An
+    **empty log** is about this checkout. And a **repeated date is two
+    refreshes**, printed separately under one heading for the day.
+    """
+    if structured:
+        # Filled by app.js. Empty in the markup on purpose: a fresh checkout
+        # has never run the refresh, and a container that rendered its own
+        # absence as "nothing has changed" would be the site claiming a fact
+        # about the fleet from a file that does not exist.
+        return '<div id="changeLog"></div>'
+
+    if not entries:
+        return ('<p class="history-lead">No refresh is recorded in this build, '
+                "so there is nothing to compare against. The log is written by "
+                "<code>liveaboard.cli changes</code> on each refresh.</p>")
+
+    days: list[tuple[str, list[str]]] = []
+    for day, body in entries:
+        if days and days[-1][0] == day:
+            days[-1][1].append(body)
+        else:
+            days.append((day, [body]))
+
+    n = len(entries)
+    when = (f"from {_pretty_day(entries[-1][0])} to {_pretty_day(entries[0][0])}"
+            if days[0][0] != days[-1][0] else f"on {_pretty_day(entries[0][0])}")
+    lead = (
+        f'<p class="history-lead">'
+        f'{n} refresh{"" if n == 1 else "es"} recorded {when}. '
+        f"A day with no entry is a day the refresh did not run, which is not "
+        f"the same as a day nothing moved.</p>"
+    )
+
+    blocks = []
+    for day, bodies in days:
+        label = _pretty_day(day)
+        if len(bodies) > 1:
+            label += f" &middot; {len(bodies)} refreshes"
+        blocks.append(f'<h3 class="history-day">{label}</h3>')
+        blocks.extend(f'<pre class="changelog">{_escape(b)}</pre>' for b in bodies)
+
+    more = ('<p><a href="data/CHANGES.md">Every refresh before these</a>.</p>'
             if linked else "")
-    return (f'<pre class="changelog">{_escape(entry)}</pre>{more}')
+    return lead + "".join(blocks) + more
 
 
 def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[str]:
@@ -570,6 +669,27 @@ def render(
     out.mkdir(parents=True, exist_ok=True)
 
     payload = build_payload(dataset)
+
+    # The structured change reports, for the page to render as rows.
+    #
+    # `data/CHANGES.md` is the durable human record and stays exactly what it
+    # is; this is the same reports as data, written beside it by the same
+    # command. The page used to read that Markdown back, escape it into a
+    # `<pre>`, and serve the visitor a terminal transcript -- boat names cut
+    # mid-word to fit eighty columns, on a page that has a table renderer, and
+    # not one line of it clickable through to the sailing it was about (#143).
+    #
+    # Trimmed to the same window the prose view shows, and only the days the
+    # book actually covers: a checkout whose last refresh predates the book
+    # falls back to the Markdown rather than showing an empty history.
+    book = (data_dir / "changes.json") if data_dir else None
+    if book and book.exists():
+        try:
+            reports = json.loads(book.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            reports = []
+        if isinstance(reports, list) and reports:
+            payload["changes"] = _recent_reports(reports, HISTORY_DAYS)
     html = (templates / "index.html").read_text(encoding="utf-8")
     css = (templates / "style.css").read_text(encoding="utf-8")
     js = (templates / "app.js").read_text(encoding="utf-8")
@@ -581,14 +701,17 @@ def render(
 
     available = write_downloads(dataset, out, data_dir)
 
-    # What moved on the last refresh, inline. The whole history is a file the
-    # page links to: it grows by an entry a day, and this site ships as one
-    # download with nothing fetched lazily, so an unbounded log inside it would
-    # be paid for by every visitor forever.
+    # The last week of refreshes, inline; the whole history stays a file the
+    # page links to. The log grows by several entries a day and this site ships
+    # as one download with nothing fetched lazily, so an unbounded history
+    # inside it would be paid for by every visitor forever. A week is the
+    # window the ordinary question needs -- and it is measured against the
+    # newest entry in the log rather than against today, so the same committed
+    # inputs render the same page tomorrow.
     history = (data_dir / "CHANGES.md") if data_dir else None
-    entry = ""
+    entries: list[tuple[str, str]] = []
     if history and history.exists():
-        entry = latest_entry(history.read_text(encoding="utf-8"))
+        entries = recent_entries(history.read_text(encoding="utf-8"), HISTORY_DAYS)
 
     html = html.replace("/*STYLE*/", css)
     html = html.replace("/*APP*/", js)
@@ -596,7 +719,9 @@ def render(
     html = html.replace('"__DATA__"', data)
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
     html = html.replace("__DOWNLOADS__", _downloads_html(available))
-    html = html.replace("__CHANGES__", _changes_html(entry, "CHANGES.md" in available))
+    html = html.replace("__CHANGES__",
+                        _changes_html(entries, "CHANGES.md" in available,
+                                      bool(payload.get("changes"))))
     # Figures the footer states in prose, substituted rather than typed. Two
     # data jobs were refused by `TestTheFooterCountsMatchTheData` on
     # 2026-08-31 -- each after a full crawl, because the counts only move when

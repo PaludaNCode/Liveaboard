@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import csv
 import io
+from datetime import date, timedelta
 
 from .dataset import Dataset
 from .money import DISPLAY_CURRENCY, Money
@@ -114,22 +115,72 @@ def to_csv(dataset: Dataset) -> str:
     return buffer.getvalue()
 
 
-def latest_entry(history: str) -> str:
-    """The newest entry out of ``data/CHANGES.md``, without its heading.
-
-    The file grows by one entry a day and the page ships as a single file, so
-    inlining the whole history would put every refresh since launch inside
-    every visitor's download. The page carries the last one and links to the
-    rest.
-    """
-    body = history.split("\n## ", 1)
-    if len(body) < 2:
-        return ""
-    entry = body[1].split("\n## ", 1)[0]
-    # Drop the date heading line and the code fence the CLI wraps entries in.
-    lines = entry.split("\n")[1:]
+def _strip_entry(entry: str) -> tuple[str, str]:
+    """One ``## `` block of ``data/CHANGES.md`` as ``(date, body)``."""
+    lines = entry.split("\n")
+    date = lines[0].strip()
+    lines = lines[1:]
+    # Drop the code fence the CLI wraps entries in.
     while lines and lines[0].strip() in ("", "```"):
         lines.pop(0)
     while lines and lines[-1].strip() in ("", "```"):
         lines.pop()
-    return "\n".join(lines)
+    return date, "\n".join(lines)
+
+
+def parse_entries(history: str) -> list[tuple[str, str]]:
+    """Every entry in ``data/CHANGES.md``, newest first, as ``(date, body)``.
+
+    A date can repeat: the refresh runs more than once a day, and each run
+    writes its own entry. They are separate readings and stay separate.
+    """
+    blocks = history.split("\n## ")[1:]
+    return [_strip_entry(block.split("\n## ", 1)[0]) for block in blocks]
+
+
+def latest_entry(history: str) -> str:
+    """The newest entry out of ``data/CHANGES.md``, without its heading."""
+    entries = parse_entries(history)
+    return entries[0][1] if entries else ""
+
+
+def recent_entries(history: str, days: int = 7) -> list[tuple[str, str]]:
+    """Every refresh within ``days`` calendar days of the newest one recorded.
+
+    The page carried one entry and linked to the file for the rest, which made
+    the ordinary question hard to ask: the refresh runs daily and a lot moves,
+    so "has this boat been repricing all week" needed a raw markdown file. It
+    also made the noisiest possible window the default -- a run that read
+    nothing showed a view saying nothing moved, with six days of real movement
+    one link away.
+
+    **Anchored to the log, never to the clock.** "The last seven days" read
+    against today would make the rendered page a function of when it was built:
+    the same committed inputs would produce a different page tomorrow, an
+    entry would silently drop out of the window, and
+    `TestThePageIsWhatItsDataBuilds` -- which compares the committed page
+    against a fresh render and normalises only the build stamp -- would turn
+    `main` red with nobody having changed anything. `render` is pure and stays
+    pure. A log that has gone stale is visible in the dates the view prints
+    beside each entry, which is a fact a reader can check rather than a warning
+    that appears and disappears with the calendar.
+
+    Dates that do not parse are kept rather than dropped: an entry nobody can
+    place in time is still a refresh that happened, and silently discarding it
+    would be this file deciding a reading never occurred.
+    """
+    entries = parse_entries(history)
+    if not entries:
+        return []
+
+    def when(entry: tuple[str, str]) -> date | None:
+        try:
+            return date.fromisoformat(entry[0])
+        except ValueError:
+            return None
+
+    newest = next((d for d in map(when, entries) if d), None)
+    if newest is None:
+        return entries
+    floor = newest - timedelta(days=days - 1)
+    return [e for e in entries if (when(e) or newest) >= floor]

@@ -1050,9 +1050,60 @@ def _berth_blocks(
     )
 
 
-def _sale_for(
+def _list_prices(
     cabins: dict[str, Any] | None,
     sailing: dict[str, Any] | None,
+    ignore: frozenset[int] = frozenset(),
+) -> dict[str, tuple[float, float | None, str | None]]:
+    """What each seller charges for this berth and what it says that is down from.
+
+    One entry per seller **whose list price was actually read**, which is the
+    distinction the caller above it needs and the reason this is not folded
+    into ``_sale_for``: a seller that was read and states no markdown said no,
+    and a seller nobody read said nothing. The two look identical in a payload
+    that only records discounts, and the panel has to tell them apart -- the
+    same rule as ``fees_known`` and ``not_asked``.
+
+    The list price is ``None`` where the seller states none. The currency may
+    be missing and that is survivable *here* and nowhere else in this file: a
+    percentage is a ratio of two figures in the same unit, whatever that unit
+    is, so it needs no currency at all. Only the cash "was" does, and it is
+    withheld rather than converted at an assumed rate -- the rule the sailing
+    book already applies to PADI's prices, where guessing euro would have put
+    every Aggressor out by the EUR/USD rate.
+
+    ``ignore`` names sellers whose reading this run threw away. A ladder more
+    than ``STALE_LADDER`` from the price above it is not this sailing's, and a
+    reading that has been rejected for contradicting its own row cannot then be
+    quoted about that row -- which is exactly what happened on 36 sailings; see
+    ``_drop_stale_ladder``.
+    """
+    figures: dict[str, tuple[float, float | None, str | None]] = {}
+
+    priced = [c for c in ((cabins or {}).get("cabins") or []) if c.get("price") is not None]
+    if priced and SELLERS.index("liveaboard.com") not in ignore:
+        cheapest = min(priced, key=lambda c: c["price"])
+        listed = cheapest.get("list_price")
+        price = float(cheapest["price"])
+        figures["liveaboard.com"] = (
+            price,
+            float(listed) if listed and listed > price > 0 else None,
+            (cabins or {}).get("currency"),
+        )
+
+    if sailing and SELLERS.index("padi.com") not in ignore:
+        price, was = sailing.get("price"), sailing.get("was")
+        if isinstance(price, (int, float)) and price > 0:
+            figures["padi.com"] = (
+                float(price),
+                float(was) if isinstance(was, (int, float)) and was > price else None,
+                sailing.get("currency"),
+            )
+    return figures
+
+
+def _sale_for(
+    figures: Mapping[str, tuple[float, float | None, str | None]],
     own: str,
     fx_table: Any,
 ) -> dict[str, Any] | None:
@@ -1078,37 +1129,18 @@ def _sale_for(
     Silence and absence are different, as everywhere else here. A booking page
     that could not be read contributes no opinion rather than a "no"; three of
     the five sailings where only PADI reports a discount have no ladder at all.
+    That distinction is drawn one function up, in ``_list_prices``, which is
+    handed every seller that was read and states here only the ones that
+    published a list price above what they charge.
     """
-    # (price, list price, the currency both are in). The currency may be
-    # missing and that is survivable *here* and nowhere else in this file: a
-    # percentage is a ratio of two figures in the same unit, whatever that unit
-    # is, so it needs no currency at all. Only the cash "was" does, and it is
-    # withheld rather than converted at an assumed rate -- the rule the sailing
-    # book already applies to PADI's prices, where guessing euro would have put
-    # every Aggressor out by the EUR/USD rate.
-    figures: dict[str, tuple[float, float, str | None]] = {}
-
-    priced = [c for c in ((cabins or {}).get("cabins") or []) if c.get("price") is not None]
-    if priced:
-        cheapest = min(priced, key=lambda c: c["price"])
-        listed = cheapest.get("list_price")
-        if listed and listed > cheapest["price"] > 0:
-            figures["liveaboard.com"] = (
-                float(cheapest["price"]), float(listed), (cabins or {}).get("currency"),
-            )
-
-    if sailing:
-        price, was = sailing.get("price"), sailing.get("was")
-        if isinstance(price, (int, float)) and isinstance(was, (int, float)) and was > price > 0:
-            figures["padi.com"] = (float(price), float(was), sailing.get("currency"))
-
-    if not figures:
+    marked = {name: figure for name, figure in figures.items() if figure[1] is not None}
+    if not marked:
         return None
 
     sale: dict[str, Any] = {
-        "sellers": sorted(SELLERS.index(name) for name in figures),
+        "sellers": sorted(SELLERS.index(name) for name in marked),
     }
-    mine = figures.get(own)
+    mine = marked.get(own)
     if mine:
         price, was, currency = mine
         # A markdown too small to state is not a stated markdown. Under half a
@@ -1127,7 +1159,7 @@ def _on_sale_summary(
     departures: list[dict[str, Any]],
     boat_of: Mapping[str, str],
     boats: Mapping[str, Mapping[str, Any]],
-    read: str,
+    read: Mapping[int, str],
 ) -> dict[str, Any] | None:
     """What is discounted right now, per boat, over the whole season.
 
@@ -1140,6 +1172,12 @@ def _on_sale_summary(
     Sea Aggressor II is 33% off every week from 1 May to 24 July and full price
     from 31 July, which is the difference between knowing a boat is on sale and
     knowing which week to book.
+
+    ``read`` is a date **per seller**, not one for the block. The two books are
+    read by different jobs on different days -- 28 and 30 August as this is
+    written -- and 10 of the 22 boats here rest partly on PADI's, so a single
+    date stamped across the panel dated nearly half of it wrong. It is the rule
+    the berth counts already follow, for the same reason and one field along.
     """
     on_sale = [d for d in departures if d.get("sale")]
     if not on_sale:
@@ -1168,6 +1206,10 @@ def _on_sale_summary(
             "last": starts[-1],
             "sellers": sorted({s for d in group for s in d["sale"]["sellers"]}),
         }
+        # The day each of those sellers was read, in the order they are named,
+        # so the panel can print who said it and when without the page having
+        # to know which book came from which job.
+        row["read"] = [read[s] for s in row["sellers"] if read.get(s)]
         # A range only where the boat really runs more than one, which is rare:
         # an operator discounts a season, not a sailing. Printing "10–10%"
         # everywhere to accommodate the exception is noise on every other row.
@@ -1178,10 +1220,12 @@ def _on_sale_summary(
         rows.append(row)
 
     return {
-        # The day the ladders were read. The most perishable thing on the page
-        # after a berth count, and stated for the same reason: a sale is what a
-        # seller claimed when it was looked at, and it can end overnight.
-        "read": read,
+        # The day each seller's book was read. The most perishable thing on the
+        # page after a berth count, and stated for the same reason: a sale is
+        # what a seller claimed when it was looked at, and it can end
+        # overnight. Keyed by seller, and the panel's own heading takes the
+        # oldest of them -- a summary is only as fresh as its stalest half.
+        "read": {str(seller): day for seller, day in sorted(read.items()) if day},
         "sailings": len(on_sale),
         "boats": rows,
     }
@@ -1328,7 +1372,7 @@ this sailing's, since the rungs across this fleet run from €500 to €2,900.
 
 def _drop_stale_ladder(
     blocks: list[list[Any]], advertised: int | None
-) -> tuple[list[list[Any]], int | None]:
+) -> tuple[list[list[Any]], dict[int, int]]:
     """Refuse a ladder that contradicts the price it is supposed to explain.
 
     The advertised price *is* the bottom rung -- checked on 864 of 864 -- so a
@@ -1344,19 +1388,24 @@ def _drop_stale_ladder(
     with no ladder falls back to what its sellers say is left, and the panel
     that would have opened is not worth a figure that is wrong.
 
-    Returns the surviving blocks and, when one went, the rung that disagreed --
-    so the caller can name it rather than drop it in silence.
+    Returns the surviving blocks and, per seller whose ladder went, the rung
+    that disagreed. **Keyed by seller rather than counted**, because a rejected
+    reading has to stay rejected everywhere downstream and not only in the
+    cabin popover: the same ladder was still being read for the sale mark
+    above it, which put "-33%, down from €2,371" on a berth advertised at
+    €2,371 on all 36 rows. Naming who was dropped is what lets
+    ``_list_prices`` ignore them and the panel say how many it could not read.
     """
     if not advertised:
-        return blocks, None
+        return blocks, {}
     kept: list[list[Any]] = []
-    dropped: int | None = None
+    dropped: dict[int, int] = {}
     for block in blocks:
         rungs = block[2] if len(block) > 2 else None
         if rungs:
             cheapest = min(rung[1] for rung in rungs)
             if abs(cheapest - advertised) / advertised > STALE_LADDER:
-                dropped = cheapest
+                dropped[block[0]] = cheapest
                 continue
         kept.append(block)
     return kept, dropped
@@ -2092,6 +2141,14 @@ def promote(
     # Assembled here and published, so the footer's sentence about it is a
     # substitution rather than a number somebody typed once.
     entry_bar = {"both": 0, "disagree": 0, "padi_stricter": 0, "ours_stricter": 0}
+    # Three tallies the sales panel needs and cannot recover from the rows it
+    # is drawn from, because each of them is an *absence*: a ladder rejected
+    # for contradicting its row, a sailing no seller published a list price
+    # for, and a trip-name banner no read seller supports. All three look
+    # exactly like "not on sale" once they reach the page.
+    dropped_ladders: Counter = Counter()
+    unread_for_sale = 0
+    banner_unsupported = 0
 
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
@@ -2434,10 +2491,12 @@ def promote(
                 float(item["price"]["amount"]), item["price"]["currency"], fx_table
             )
             berths, outdated = _drop_stale_ladder(berths, advertised)
-            if outdated is not None:
+            for seller, rung in sorted(outdated.items()):
                 stale_ladders.append(
-                    f"{slug} {item['start']}: row {advertised}, ladder starts at {outdated}"
+                    f"{slug} {item['start']}: row {advertised}, "
+                    f"{SELLERS[seller]} ladder starts at {rung}"
                 )
+                dropped_ladders[slug] += 1
             if berths:
                 entry["berths"] = berths
 
@@ -2453,14 +2512,36 @@ def promote(
             # `sailing_book` rather than `sailing`, deliberately. That variable
             # is blanked on a PADI-only row to keep PADI's price out of the
             # second seller's field, and here PADI *is* the row's own seller.
-            sale = _sale_for(
+            #
+            # `outdated` is passed because a reading this run threw away must
+            # stay thrown away. It did not: `_drop_stale_ladder` rejected the
+            # Aggressors' ladders for sitting 33% below their own rows and this
+            # call was then handed the same book, so 36 rows printed "-33%,
+            # down from €2,371" against a berth advertised at €2,371 -- the
+            # dataset quoting a source it had just ruled out, on the largest
+            # discounts on the page.
+            figures = _list_prices(
                 ladder,
                 sailing_book.get(f"{slug}::{item['start']}"),
+                frozenset(outdated),
+            )
+            sale = _sale_for(
+                figures,
                 "padi.com" if item.get("padi_only") else "liveaboard.com",
                 fx_table,
             )
             if sale:
                 entry["sale"] = sale
+            # What the panel needs to say how far its own answer reaches. A row
+            # no seller published a list price for is not a row nobody
+            # discounted, and the operator's own "20% Off" banner is worth
+            # keeping only while somebody says something when it stops
+            # agreeing -- so both are counted here rather than inferred from
+            # the absence of a `sale` key, which cannot tell them apart.
+            if not figures:
+                unread_for_sale += 1
+            elif item.get("promotion") and not sale:
+                banner_unsupported += 1
             departures.append(entry)
 
     _settle_title_case(itineraries)
@@ -2562,7 +2643,8 @@ def promote(
         departures,
         {i["id"]: i["boat_id"] for i in itineraries},
         boats,
-        cabin_read,
+        {SELLERS.index("liveaboard.com"): cabin_read,
+         SELLERS.index("padi.com"): padi_read},
     )
     if on_sale:
         deals_block["on_sale"] = on_sale
@@ -2572,6 +2654,35 @@ def promote(
     moved = _sales_block(sales, boats)
     if moved:
         deals_block["on_sale_changes"] = moved
+    # How far that answer reaches, which is the half of it a count of discounts
+    # cannot state. Every field here is an absence, and on the page they are
+    # all indistinguishable from "not on sale" unless the panel says otherwise
+    # -- the same rule as `fees_known`, `not_asked` and the change log's
+    # `not_compared`, applied to the one panel that did not have it.
+    coverage = {
+        key: value
+        for key, value in (
+            ("unread", unread_for_sale),
+            ("banner_unsupported", banner_unsupported),
+        )
+        if value
+    }
+    if dropped_ladders:
+        coverage["dropped"] = {
+            "sailings": sum(dropped_ladders.values()),
+            # Named rather than counted, like the deals listing's strangers: a
+            # reader can only tell a boat they were about to book from one they
+            # were not by reading which boat it is.
+            "boats": sorted(
+                str(boats[slug]["name"]) for slug in dropped_ladders if slug in boats
+            ),
+        }
+    # Attached last and only to a panel that exists. Coverage qualifies an
+    # answer, so with nothing discounted, nothing advertised and nothing moved
+    # there is nothing for it to qualify -- and shipping it alone would open a
+    # panel headed "on sale" to say only how many sailings were not read.
+    if coverage and deals_block:
+        deals_block["coverage"] = coverage
     if deals_block:
         payload["deals"] = deals_block
 

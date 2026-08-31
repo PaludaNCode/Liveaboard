@@ -154,31 +154,27 @@ jobs:
       # writes cabins.json and stops leaves the two disagreeing — a red build,
       # and before that a page one pass behind its own data.
       #
-      # Promotion is offline and takes seconds; the fetch above took thirty
-      # minutes. There is no argument for skipping it.
-      - name: Rebuild the dataset and the page
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote
-          PYTHONPATH=src python3 -m liveaboard.cli build
-
-      # The publication gate, and it is CI's own list rather than a subset of
-      # it. These commits are pushed with the default `GITHUB_TOKEN`, which
-      # GitHub deliberately does not trigger workflows on, so this step is the
-      # only CI a scheduled data commit will ever get — and without it a
-      # refresh can turn main red for however long it takes somebody to open
-      # an unrelated pull request. It happened, for about seven hours.
-      #
-      # After the fetch and before the commit, which is the distinction #118
-      # exists for. A failure here stops the commit and the push: this run
-      # publishes nothing, and the next run still reaches its fetch step
-      # whatever this one said. The loop is broken, at the cost of one run's
-      # fetch.
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
         with:
-          paths: "data/cabins.json data/sales.json data/egypt-2027.json site/index.html"
-          subject: "data: read {today} cabin prices and berths"
-          nothing: "nothing read; nothing to commit"
+          name: cabins-inputs-${{ github.run_id }}
+          path: |
+            data/cabins.json
+            data/sales.json
+          retention-days: 1
+
+  # Promotion is offline and takes seconds; the fetch above took minutes. A run
+  # that writes its book and stops leaves the committed dataset disagreeing
+  # with its own inputs -- a red build, and before that a page one pass behind
+  # its own data. Serialised, so two sources cannot each derive from a tree the
+  # other has already moved: see .github/workflows/publish.yml.
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: cabins-inputs-${{ github.run_id }}
+      paths: "data/cabins.json data/sales.json data/egypt-2027.json site/index.html"
+      subject: "data: read {today} cabin prices and berths"
+      nothing: "nothing read; nothing to commit"

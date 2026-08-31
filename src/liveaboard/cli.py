@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import json
 import sys
 from collections import Counter
@@ -810,9 +811,59 @@ HISTORY_HEADER = (
 )
 
 
+# How many days of structured reports `data/changes.json` keeps.
+#
+# The page shows a week (`render.HISTORY_DAYS`) and this is the book behind it,
+# so it holds the same window with a little slack: a day with three refreshes
+# writes three entries, and a cap counted in entries would silently shorten the
+# window on a busy day. Counted in *days* for that reason.
+#
+# It is committed, like `CHANGES.md` and for the same reason: a change log
+# computed from a build artifact goes quietly silent the moment the artifact
+# ages out.
+CHANGES_BOOK_DAYS = 10
+
+
+def append_changes_book(path: Path, record: dict) -> None:
+    """Add one structured report to `data/changes.json`, newest first.
+
+    Trimmed by the date each entry carries rather than by how many there are,
+    because the refresh runs several times a day and the page's window is a
+    week of *days*.
+    """
+    from datetime import date, timedelta
+
+    book: list[dict] = []
+    if path.exists():
+        try:
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            book = loaded if isinstance(loaded, list) else []
+        except json.JSONDecodeError:
+            # A corrupt book is not a reason to lose today's reading. Say so
+            # and start a fresh one rather than failing the refresh.
+            print(f"warning: {path} is not readable JSON; starting a new book")
+            book = []
+
+    book.insert(0, record)
+
+    def when(entry: dict) -> date | None:
+        try:
+            return date.fromisoformat(str(entry.get("day", "")))
+        except ValueError:
+            return None
+
+    newest = next((d for d in map(when, book) if d), None)
+    if newest is not None:
+        floor = newest - timedelta(days=CHANGES_BOOK_DAYS - 1)
+        book = [e for e in book if (when(e) or newest) >= floor]
+
+    path.write_text(json.dumps(book, ensure_ascii=False, indent=1) + "\n",
+                    encoding="utf-8")
+
+
 def cmd_changes(args: argparse.Namespace) -> int:
     """Report what moved between two datasets."""
-    from .changes import compare, headline, render as render_changes
+    from .changes import as_dict, compare, headline, render as render_changes
 
     after = json.loads(Path(args.data).read_text(encoding="utf-8"))
 
@@ -854,9 +905,26 @@ def cmd_changes(args: argparse.Namespace) -> int:
         path.parent.mkdir(parents=True, exist_ok=True)
         previous = path.read_text(encoding="utf-8") if path.exists() else ""
         body = previous.split(HISTORY_HEADER, 1)[-1].lstrip("\n")
-        entry = f"## {after.get('generated') or before_label}\n\n```\n{text}\n```\n"
+        day = after.get("generated") or before_label
+        entry = f"## {day}\n\n```\n{text}\n```\n"
         path.write_text(f"{HISTORY_HEADER}\n{entry}\n{body}", encoding="utf-8")
         print(f"\nappended to {args.append}")
+
+        # And the same report as data, beside it. The page reads this one:
+        # rendering a report means rendering the report, not reading the prose
+        # this command printed and escaping it into a `<pre>` (#143). Two
+        # shapes, one comparison -- the Markdown stays the durable human
+        # record, and neither is derived from the other.
+        book = path.with_name("changes.json")
+        record = as_dict(report, before=before_label, after=day)
+        # Keyed by the day the refresh ran, which is the question the history
+        # view asks -- not by the dataset's `generated`, which is the day the
+        # *sources* were read. The two are days apart whenever a parser change
+        # ships without a fresh crawl, and `CHANGES.md` keying on the crawl
+        # date is why it carries three entries under one heading.
+        record["day"] = _dt.date.today().isoformat()
+        append_changes_book(book, record)
+        print(f"appended to {book}")
 
     # A vessel losing every departure at once is the one finding worth a
     # non-zero exit: it usually means a fetch failed rather than a season

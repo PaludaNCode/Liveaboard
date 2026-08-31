@@ -144,23 +144,27 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
-      # Promotion is offline and takes seconds; the fetch above took minutes.
-      # A run that writes these books and stops leaves the committed dataset
-      # disagreeing with its own inputs — a red build, and before that a page
-      # one pass behind its own data.
-      - name: Rebuild the dataset and the page
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote
-          PYTHONPATH=src python3 -m liveaboard.cli build
-
-      # These commits are pushed with the default `GITHUB_TOKEN`, which GitHub
-      # does not trigger workflows on, so this is the only CI they will get.
-      - name: Check what is about to be published
-        uses: ./.github/actions/checks
-
-      - name: Commit and push
-        uses: ./.github/actions/publish
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
         with:
-          paths: "data/padi.json data/padi_departures.json data/egypt-2027.json site/index.html"
-          subject: "data: read {today} PADI itineraries and sailings"
-          nothing: "nothing PADI states has moved"
+          name: padi-inputs-${{ github.run_id }}
+          path: |
+            data/padi.json
+            data/padi_departures.json
+          retention-days: 1
+
+  # Promotion is offline and takes seconds; the fetch above took minutes. A run
+  # that writes its book and stops leaves the committed dataset disagreeing
+  # with its own inputs -- a red build, and before that a page one pass behind
+  # its own data. Serialised, so two sources cannot each derive from a tree the
+  # other has already moved: see .github/workflows/publish.yml.
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: padi-inputs-${{ github.run_id }}
+      paths: "data/padi.json data/padi_departures.json data/egypt-2027.json site/index.html"
+      subject: "data: read {today} PADI itineraries and sailings"
+      nothing: "nothing PADI states has moved"

@@ -25,8 +25,69 @@ jobs:
         with:
           python-version: "3.11"
 
+      # Names every module and what it cost, which is what somebody reading
+      # the run to find out what their change broke actually wants -- and it
+      # is the same output they get locally from `python3 tools/ship.py`.
       - uses: ./.github/actions/checks
+
+  # The layout claims, measured rather than grepped.
+  #
+  # Not in `.github/actions/checks` with the rest of the bar, and that is the
+  # point of it being here: the four data workflows run that action too, and
+  # none of them should have to install a browser to commit a price. This job
+  # is the one place a browser is worth the minute it costs.
+  #
+  # tests/test_layout.py skips when Playwright is absent, so
+  # `unittest discover` still needs nothing on a bare checkout -- and a test
+  # that only ever skips protects nothing, which is what this job is for.
+  #
+  # It exists because the alternative was tried and failed silently. The three
+  # views shipped with eight tests asserting that the *source text* of their
+  # layout rules was present, and every one of them passed over a sale view
+  # whose table rendered at zero height at 768x600 (#130) -- including the one
+  # named for the panel that caused it.
+  layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
-          # Named tests are worth their line count here, where somebody is
-          # reading the run to find out what their change broke.
-          verbose: "true"
+          python-version: "3.11"
+
+      # Pinned so the cache key means something: an unpinned install resolves
+      # to whatever is current and would restore a browser build the installed
+      # Playwright does not speak to.
+      - name: Install Playwright
+        run: pip install --quiet playwright==1.55.0
+
+      # The browser, cached. Downloading Chromium took 27-52 seconds of every
+      # push -- more than the entire rest of this job, for a file that changes
+      # when the pin above does and not otherwise.
+      - name: Cache Chromium
+        id: browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.55.0-${{ runner.os }}
+
+      - name: Fetch Chromium
+        if: steps.browser.outputs.cache-hit != 'true'
+        run: playwright install --with-deps chromium
+
+      # The system libraries are not in the cached directory, so they are
+      # installed whether or not the browser was: a cache hit that skipped
+      # them would restore a Chromium that cannot start.
+      - name: Chromium's system libraries
+        if: steps.browser.outputs.cache-hit == 'true'
+        run: playwright install-deps chromium
+
+      # Against the built page rather than the committed one, so a template
+      # change is measured in the same run that makes it. `promote --check` in
+      # the checks action is what keeps the committed page honest.
+      - name: Site builds
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Views measure up
+        run: PYTHONPATH=src:tests python3 -m unittest tests.test_layout -v
+

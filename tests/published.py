@@ -90,6 +90,9 @@ PUBLISHED = (
     "padi_departures.json",
     "barren.json",
     "CHANGES.md",
+    # The structured reports the history view renders. Written by the same
+    # command that appends to CHANGES.md, so it is behind the same gate.
+    "changes.json",
 )
 """The committed files a fetch rewrites, and therefore the ones behind the gate.
 
@@ -120,6 +123,24 @@ def committed(name: str = LIVE) -> Path:
     return path
 
 
+def site_page() -> Path:
+    """The committed `site/index.html`, or a skip explaining which reason.
+
+    Published output like the dataset, and gated for the same reason: an
+    assertion about what shipped must gate a commit and never a fetch. It lives
+    here rather than being opened directly so the gate stays the one door.
+    """
+    if CODE_ONLY:
+        raise unittest.SkipTest(
+            f"{GATE}=code: this run gates a fetch, and an assertion about "
+            f"what was published must never stop one"
+        )
+    path = ROOT / "site" / "index.html"
+    if not path.exists():
+        raise unittest.SkipTest(f"{path} has not been built on this checkout")
+    return path
+
+
 def raw(name: str = LIVE) -> Any:
     """One committed file, parsed."""
     return json.loads(committed(name).read_text(encoding="utf-8"))
@@ -137,3 +158,22 @@ def page(name: str = LIVE) -> dict[str, Any]:
     from liveaboard.render import build_payload
 
     return build_payload(dataset(name))
+
+
+def shipped_payload() -> dict[str, Any]:
+    """The payload inside the committed `site/index.html`.
+
+    Not `page()`: that rebuilds one from the dataset alone, and some of what
+    the page carries is attached by `render` from files beside it -- the
+    structured change reports among them. An assertion about what a visitor
+    actually received has to read what was actually sent.
+    """
+    import json
+    import re
+
+    html = site_page().read_text(encoding="utf-8")
+    found = re.search(
+        r'<script id="payload" type="application/json">(.*?)</script>', html, re.S)
+    if not found:
+        raise AssertionError("the committed page carries no payload")
+    return json.loads(found.group(1).replace("<\\/", "</"))
