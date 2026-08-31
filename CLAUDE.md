@@ -64,10 +64,20 @@ itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` �
 are outside it: no crawl touches them, so nothing asserted about them can ever
 be cleared by fetching.
 
-**One source per workflow; parallel fetches, one serialised push.** Each source
-fetches on its own, independently — that is what the split bought. Everything
-from `promote` onwards is a second job, `.github/workflows/publish.yml`, and its
-`concurrency` group admits **one publish at a time across every caller**.
+**One source per workflow, and the derive-and-push tail is a second job.** Each
+source fetches independently — that is what the split bought — and everything
+from `promote` onwards lives in `.github/workflows/publish.yml`, which
+re-checks out the **branch tip** and derives there.
+
+**Serialising that tail was tried and it lost data.** A shared `concurrency`
+group is the obvious way to stop two sources colliding, and GitHub's
+concurrency is not a queue: a group holds one running job and *one* pending,
+and a third arrival cancels the pending one. On three simultaneous dispatches
+`deals.yml` read PADI's deals, uploaded them, and had its publish cancelled
+four seconds later without running — a day's figures fetched and discarded, the
+run reading *cancelled* rather than failed, which nothing alerts on. Worse than
+the race it was meant to prevent. `TestThePublishTailDoesNotQueueOnConcurrency`
+fails if a group comes back.
 
 The reason is a bug this shape makes unreachable rather than repairable. Two
 jobs in flight both derive `data/egypt-2027.json` and `site/index.html` from a

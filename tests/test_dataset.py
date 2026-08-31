@@ -1853,3 +1853,45 @@ class TestThePageIsWhatItsDataBuilds(unittest.TestCase):
                 f"its own data.\n  committed: ...{a[max(0, i - 90):i + 90]}\n"
                 f"  rebuilt  : ...{b[max(0, i - 90):i + 90]}"
             )
+
+
+class TestThePublishTailDoesNotQueueOnConcurrency(unittest.TestCase):
+    """`publish.yml` must not carry a `concurrency` group.
+
+    #128 asked for the push to be serialised so two data sources could not
+    collide. It was implemented that way -- one group shared across every
+    caller, `cancel-in-progress: false` -- and it lost data on the first test.
+
+    GitHub's concurrency is not a queue. A group holds one running job and
+    **one** pending; a third arrival cancels the pending one. On three
+    simultaneous dispatches, `deals.yml` read PADI's deals, uploaded them, and
+    had its publish job cancelled four seconds later without running a step:
+    a day's figures for that source fetched and thrown away, the run reading
+    *cancelled* rather than failed, which nothing alerts on.
+
+    Strictly worse than the race. The race published a wrong freshness date
+    that healed within the hour; this silently drops a reading.
+
+    The race is closed by the split instead -- the publish job derives from the
+    branch tip it just checked out -- so the group bought nothing it did not
+    also cost. A test, because "we tried the obvious thing and it ate a commit"
+    is exactly the knowledge a comment loses to the next refactor.
+    """
+
+    WORKFLOW = ROOT / ".github" / "workflows" / "publish.yml"
+
+    def test_the_reusable_tail_has_no_concurrency_group(self):
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        live = [line for line in body.splitlines()
+                if line.strip().startswith("concurrency:")]
+        self.assertEqual(
+            live, [],
+            "publish.yml has a concurrency group again; GitHub's is not a "
+            "queue and will cancel a pending publish, discarding a reading "
+            "that was already fetched. See this test's docstring.")
+
+    def test_the_reason_is_written_down_where_somebody_would_add_one(self):
+        """The comment is the fix here; a bare absence invites the re-add."""
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("not a queue", body)
+        self.assertIn("cancels the pending", body)

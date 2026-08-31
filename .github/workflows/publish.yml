@@ -12,16 +12,17 @@ name: Publish what a data job produced
 # three days wrong ([#128]).
 #
 # The publish action repairs that after the fact by re-deriving on a rebase.
-# This removes the collision instead: `concurrency` below admits one publish at
-# a time across *every* caller, and each one re-checks out the branch tip
-# before it derives. So the derivation always sees the newest inputs, and
-# "stale derived file" stops being a state the pipeline can reach.
+# This job makes the state unreachable instead, by re-checking out the branch
+# tip and re-deriving there. So the derivation always sees the newest inputs,
+# and "stale derived file" stops being something the pipeline can produce.
 #
-# **Only the push is serialised, deliberately.** The fetches stay parallel and
-# independent, which is what splitting the refresh bought (#123): a one-request
-# ECB read must not queue behind a 320-page crawl or behind the browser-driven
-# fee run. Those live in the caller's own job; everything from `promote`
-# onwards lives here.
+# **The fetches stay parallel**, which is what splitting the refresh bought
+# (#123): a one-request ECB read must not wait behind a 320-page crawl or
+# behind the browser-driven fee run. Those live in the caller's own job;
+# everything from `promote` onwards lives here.
+#
+# **A shared `concurrency` group was tried here and removed** -- see the note
+# on the job below. It is not a queue, and it threw a fetched reading away.
 #
 # **So the fetching job hands over its *inputs*, never its output.** Whatever
 # it read goes up as an artifact; the dataset and the page are rebuilt here
@@ -85,17 +86,32 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
-    # One publish at a time, across every workflow that calls this. The group
-    # is deliberately **not** parameterised by the caller: two different
-    # sources colliding is the whole case this exists for, so a per-workflow
-    # group would serialise nothing that was ever in contention.
+    # **No concurrency group here, and that is a finding rather than an
+    # omission.** #128 asked for the push to be serialised so two sources could
+    # not collide, and it was implemented exactly that way: one shared group,
+    # `cancel-in-progress: false`. Measured on three simultaneous dispatches,
+    # 2026-08-31, it lost data.
     #
-    # `cancel-in-progress: false` because a data commit is not superseded by a
-    # later one — each carries a reading nobody else took, and dropping one
-    # loses that day's figures for its source.
-    concurrency:
-      group: publish-${{ github.ref }}
-      cancel-in-progress: false
+    # GitHub's concurrency is not a queue. The group holds one running job and
+    # **one** pending; a third arrival cancels the pending one. So `deals.yml`
+    # read PADI's deals, uploaded them, and had its publish job cancelled four
+    # seconds later without running a step -- a day's reading for that source
+    # fetched and silently discarded, the run showing *cancelled* rather than
+    # failed, which nothing alerts on. `cancel-in-progress: false` can say "do
+    # not kill the job that is running". It cannot say "wait your turn".
+    #
+    # That is strictly worse than the race it was meant to prevent: the race
+    # published a wrong freshness date that healed within the hour; this loses
+    # a source's figures for the day and says nothing.
+    #
+    # The race is closed regardless, and by the split rather than by any lock:
+    # this job derives from the branch tip it just checked out, so two
+    # publishes racing produce two correct pages instead of one stale one, and
+    # the rebase path in `.github/actions/publish` re-derives again for the
+    # case where both check out the tip before either pushes.
+    #
+    # Do not add a `concurrency` block back unless there is a real queue behind
+    # it. `TestThePublishTailDoesNotQueueOnConcurrency` fails if one returns.
 
     steps:
       # The branch tip, not `github.sha`. The default checkout takes the commit
