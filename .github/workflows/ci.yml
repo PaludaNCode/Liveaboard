@@ -1,5 +1,12 @@
 name: CI
 
+# What a commit has to satisfy. The list itself lives in
+# `.github/actions/checks`, because the four data workflows run it too: they
+# push with the default `GITHUB_TOKEN` and GitHub does not trigger workflows on
+# those pushes, so a scheduled commit that never runs this is a commit nothing
+# checks. One definition, used in five places, is what makes "the same bar"
+# true rather than intended.
+
 on:
   push:
     branches: ["**"]
@@ -18,62 +25,22 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Tests
-        run: PYTHONPATH=src python3 -m unittest discover -s tests -v
-
-      - name: Dataset validates
-        run: PYTHONPATH=src python3 -m liveaboard.cli check
-
-      - name: Site builds
-        run: PYTHONPATH=src python3 -m liveaboard.cli build
-
-      # The same rule as the seed check below, extended to the real dataset.
-      #
-      # promote is pure -- candidate, fees, facts and FX in, dataset out, no
-      # network -- so the committed dataset must be what the committed code
-      # produces from the committed inputs. When it is not, somebody changed a
-      # parser and data/egypt-2027.json is still the previous parser's output.
-      #
-      # That state used to be invisible. PORT_ALIASES was merged with passing
-      # tests, folding three spellings of Port Ghalib into one, and the
-      # published page went on offering ten harbour filters for six real
-      # harbours: CI tests fixtures, not data/, so nothing failed. The site
-      # quietly continuing to be slightly wrong is the exact failure this
-      # project exists to correct in other people.
-      #
-      # Re-promoting is offline and takes seconds, so this is cheap to satisfy:
-      # run the command the failure message prints, and commit the result.
-      # No path arguments on purpose. refresh.yml and fees.yml both promote on
-      # argparse's defaults, so taking the defaults here means this check and
-      # the jobs that write the dataset cannot be looking at different inputs.
-      # Spelling the paths out would be one more thing to keep in step, and a
-      # mismatch would turn every scheduled run into a red build.
-      - name: Dataset matches the parser
-        run: PYTHONPATH=src python3 -m liveaboard.cli promote --check
-
-      - name: Seed generator is reproducible
-        # The committed seed must match what the generator produces, so nobody
-        # can hand-edit a price into the dataset without it showing up here.
-        run: |
-          python3 tools/make_seed.py --out /tmp/regenerated.json
-          python3 - <<'PY'
-          import json, sys
-          a = json.load(open("data/seed/egypt-2027.json"))
-          b = json.load(open("/tmp/regenerated.json"))
-          for payload in (a, b):
-              payload.pop("generated", None)
-          if a != b:
-              sys.exit("data/seed/egypt-2027.json is out of sync with tools/make_seed.py")
-          print("seed matches generator")
-          PY
+      - uses: ./.github/actions/checks
+        with:
+          # Named tests are worth their line count here, where somebody is
+          # reading the run to find out what their change broke.
+          verbose: "true"
 
   # The layout claims, measured rather than grepped.
   #
-  # A job of its own because it needs a browser and the suite above must not:
-  # `python3 -m unittest discover -s tests` has to keep working on a checkout
-  # with nothing installed, which is what every other job here runs. So
-  # tests/test_layout.py skips when Playwright is absent -- and a test that
-  # only ever skips protects nothing, which is what this job is for.
+  # Not in `.github/actions/checks` with the rest of the bar, and that is the
+  # point of it being here: the four data workflows run that action too, and
+  # none of them should have to install a browser to commit a price. This job
+  # is the one place a browser is worth the minute it costs.
+  #
+  # tests/test_layout.py skips when Playwright is absent, so
+  # `unittest discover` still needs nothing on a bare checkout -- and a test
+  # that only ever skips protects nothing, which is what this job is for.
   #
   # It exists because the alternative was tried and failed silently. The three
   # views shipped with eight tests asserting that the *source text* of their
@@ -95,10 +62,11 @@ jobs:
           playwright install --with-deps chromium
 
       # Against the built page rather than the committed one, so a template
-      # change is measured in the same run that makes it. `promote --check`
-      # above is what keeps the committed page honest.
+      # change is measured in the same run that makes it. `promote --check` in
+      # the checks action is what keeps the committed page honest.
       - name: Site builds
         run: PYTHONPATH=src python3 -m liveaboard.cli build
 
       - name: Views measure up
         run: PYTHONPATH=src python3 -m unittest tests.test_layout -v
+

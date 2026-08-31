@@ -55,6 +55,24 @@ from urllib.parse import urlencode
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
+from .fees import CUSTOMARY_CODES, TOGGLED_CODES, _tier_for, classify_label
+
+# `.fees` used to be imported lazily, inside the three functions below that need
+# it, and that cost a 530-request crawl 2026-08-30. `taxonomy` is imported above
+# at module load; `fees.py` was not, so it compiled *fresh* at the book-building
+# step -- forty minutes into the run -- against the `taxonomy` already sitting in
+# `sys.modules`. A `FeeCode` member added to the source meanwhile existed in the
+# new `fees.py` and not in the loaded enum, and the run died on `AttributeError`
+# with every page fetched and nothing written.
+#
+# So: a module a long fetch depends on is imported before the fetch starts, not
+# after it. Then the process holds one consistent snapshot of the code from its
+# first line and an edit to a source file cannot reach into a run in flight.
+# `fees` imports only `taxonomy`, `re` and `dataclasses`, so there is no cycle to
+# be avoided here and never was -- the laziness bought nothing.
+#
+# `--rebuild` exists because of that run and is the other half: re-parsing the
+# cached raw store must never mean re-crawling somebody else's 530 pages.
 
 HOST = "travel.padi.com"
 """PADI Travel is its own host. `www.padi.com/travel` redirects here, and the
@@ -242,6 +260,101 @@ reading either would have made a €200 park fee into a meal. 333 of the 623
 entries are ``kind: 600`` ("Other fees"), which says nothing at all. The title
 is the only field that describes the charge, and it is classified with the same
 table liveaboard.com's wording goes through.
+"""
+
+
+SEASON: tuple[str, str] = ("2027-05-01", "2027-08-31")
+"""The window the site publishes, as the fee book has to be read against it.
+
+Only a default. `fetch_padi.py` takes `--season-start` / `--season-end` like
+`fetch_deals.py`, so a season that moves moves here too.
+"""
+
+
+def _in_season(entry: dict[str, object], season: tuple[str, str]) -> bool:
+    """Whether a fee entry's stated validity window reaches the season.
+
+    **A charge PADI priced for last year is not this year's charge, and the
+    payload keeps both.** Grand Sea Explorer lists "Route supplement" twice on
+    every trip -- 300 valid to 2026-12-31, 400 valid from 2027-01-01 -- and
+    DUNE Longara lists "Environmental taxes" at 100 and 200, the second taking
+    over on 2026-06-14. Nothing read `validFrom`/`validTo`, so the bill got
+    whichever the parser happened to keep.
+
+    A comment here used to reason the opposite way: that two entries under one
+    title are two charges the operator bills, "no pair in the book is an exact
+    duplicate". The dates were in the same payload and refute it. Across the
+    whole store there are **69 such pairs, and every one resolves to exactly a
+    single entry valid in the published season** -- not one has two. They are
+    one charge repriced, and they sit on the largest mandatory lines there are:
+    the combined park/port/fuel charge, conservation fees, the environmental
+    tax.
+
+    **Silence is not expiry**, as everywhere else here: 750 of the 896 entries
+    state no window at all and every one of them is kept. Only an entry that
+    states a window the season cannot reach is dropped, which is the source
+    saying this price stopped applying before the trip sails.
+    """
+    start, end = season
+    valid_from = str(entry.get("validFrom") or "")[:10]
+    valid_to = str(entry.get("validTo") or "")[:10]
+    if valid_to and valid_to < start:
+        return False
+    return not (valid_from and valid_from > end)
+
+
+def _tier_for_inclusion(code: FeeCode) -> FeeTier:
+    """Which column an included charge belongs in.
+
+    A charge is worth stating as covered exactly because you would otherwise
+    have to pay it, so an inclusion is **mandatory unless this site already
+    treats that charge as something you choose** -- nitrox and gear follow a
+    toggle, tips are customary. No new table: the two sets already exist and
+    are the ones `_tier_for` consults for a charge that is billed.
+
+    It agrees with what the other seller's parser already produces, which is
+    the check that matters: of the 243 included lines in the dataset today,
+    nitrox is conditional and harbour fees are mandatory.
+    """
+    return _tier_for(code, required=code not in TOGGLED_CODES | CUSTOMARY_CODES)
+
+
+INCLUDED_FIELD = "whatsIncludedNew"
+"""What PADI says the fare already covers, on 447 of 447 itineraries.
+
+The other half of a disclosure, and the site was reading only one of them: what
+PADI charges *on top* (`MANDATORY_FIELDS`) and not what it says is already in.
+Those are different claims, and **included fees stay in the breakdown at zero**
+by invariant -- removing them hides the difference between a bundled operator
+and one that bills at the dock. That rule was being kept on liveaboard.com's
+side only, so two bills in one expanded row were disclosing at different
+depths with nothing saying which was the shallower.
+
+Membership is the claim, as with `MANDATORY_FIELDS`: nothing in an entry says
+"included", the field it sits in does. `section` and `kind` are the same
+fossils they are next door -- a marine park charge is filed under "Full board,
+including" -- so the title is again the only field that describes the thing.
+"""
+
+PARENTHETICAL = re.compile(r"\s*\([^)]*\)")
+"""A qualifier, never the name of the charge.
+
+The inclusions list is prose where the mandatory list is labels: *"Transfer
+from/to the airport (round-trip, only on boat arrival & departure days)"*. The
+bracket qualifies what is included; it does not say what it is.
+
+It matters exactly once, and expensively. **"Airport Meet & Greet (VISA
+assistance, eligible countries only)"** classified as `visa`, which would have
+published *"Egypt visa on arrival -- included"* on eight itineraries. Help with
+the paperwork is not the €25 the diver still pays at the airport, and this
+project telling somebody a government charge is bundled when it is not is the
+whole failure it exists to report in other people.
+
+Measured across all 63 distinct titles the field uses: stripping the
+parenthetical changes the answer on that one and on nothing else. A rule rather
+than an entry in a table of exceptions, because it says something true about
+the shape of the field -- and the table would only have caught the wording
+already seen.
 """
 
 
@@ -565,10 +678,25 @@ class PadiComAdapter(SourceAdapter):
             record["name"] = split[0]
         if isinstance(detail.get("length"), int):
             record["nights"] = detail["length"]
+        # Two fields, kept as two. They were joined into one `ports` string
+        # that nothing read, and could not have been read: two of the eight
+        # harbour names PADI uses contain the separator, so
+        # "Hurghada - Marriott Marina - Hurghada - Marriott Marina" is either
+        # ("Hurghada", "Marriott Marina - Hurghada - Marriott Marina") or
+        # ("Hurghada - Marriott Marina", "Hurghada - Marriott Marina") and the
+        # string does not say which. 436 of the 447 split cleanly; the other 11
+        # cannot be split without guessing, and a closed-vocabulary parse over
+        # today's eight names is exactly the rule that breaks silently the
+        # first time PADI names a ninth marina.
+        #
+        # So the fix was the record, not a parser. `ports` is dropped: nothing
+        # read it, and leaving a lossy field beside the lossless one is an
+        # invitation to read the wrong one.
         departure = detail.get("harbourDepartureTitle")
         arrival = detail.get("harbourArrivalTitle")
         if departure and arrival:
-            record["ports"] = f"{departure} - {arrival}"
+            record["port_from"] = " ".join(str(departure).split())
+            record["port_to"] = " ".join(str(arrival).split())
         low = detail.get("totalNumberOfDives")
         if isinstance(low, int) and low > 0:
             record["dives"] = low
@@ -766,7 +894,10 @@ class PadiComAdapter(SourceAdapter):
 
     @classmethod
     def fees_from_payload(
-        cls, detail: dict[str, object], currency: str
+        cls,
+        detail: dict[str, object],
+        currency: str,
+        season: tuple[str, str] = SEASON,
     ) -> dict[str, object]:
         """The charges PADI says a diver cannot decline, and whether they add up.
 
@@ -799,7 +930,6 @@ class PadiComAdapter(SourceAdapter):
         number. A vessel whose page states no currency gets no fees rather than
         fees assumed to be euro.
         """
-        from .fees import classify_label
 
         lines: list[dict[str, object]] = []
         unreadable: list[str] = []
@@ -809,6 +939,12 @@ class PadiComAdapter(SourceAdapter):
                 continue
             for entry in entries:
                 if not isinstance(entry, dict):
+                    continue
+                # Before the title is even read: an entry the source has
+                # already dated out of the season is not this trip's charge,
+                # and letting it reach `unreadable` would block a bill on a
+                # price nobody will be asked to pay.
+                if not _in_season(entry, season):
                     continue
                 title = str(entry.get("title") or "").strip()
                 # `prose=False`: this is a field, not a line cut out of a page.
@@ -836,22 +972,85 @@ class PadiComAdapter(SourceAdapter):
                     line["amount"] = {"amount": amount, "currency": currency}
                 lines.append(line)
 
-        # Two entries with one title are kept as two. DUNE Longara lists
-        # "Environmental taxes" twice on six of its trips -- €100 and €200,
-        # under separate `extraId`s -- and they are two charges the operator
-        # bills, not one charge listed twice: no pair in the book is an exact
-        # duplicate. Folding them on the title would halve a real bill, which
-        # is the direction this project never rounds.
+        # Two entries with one title are still kept as two, and the reason has
+        # changed. It used to be that they are two charges the operator bills,
+        # on the evidence that no pair in the book is an exact duplicate --
+        # DUNE Longara's "Environmental taxes" at €100 and €200 being the case
+        # in point. The dates were in the same payload and refute it: those two
+        # are one charge that changed price on 2026-06-14, and across the whole
+        # store all 69 such pairs resolve to exactly one entry valid in the
+        # published season. `_in_season` above drops the other, so what reaches
+        # here is already one line per charge and the title no longer has to
+        # carry that weight.
+        #
+        # Kept as two anyway, for the case the dates do not cover: an operator
+        # that genuinely bills one title twice inside one season states no
+        # window on either, and folding those on the title would halve a real
+        # bill -- the direction this project never rounds.
         priced = all("amount" in line for line in lines)
+
+        # What the fare already covers, appended at zero. A charge cannot be
+        # billed and bundled on one trip, so anything already on the list wins
+        # -- a stated amount is the stronger claim, and the two do not in fact
+        # collide anywhere in the book today.
+        charged = {line["code"] for line in lines}
+        for code, title in cls._inclusions(detail, season):
+            if code.value in charged:
+                continue
+            charged.add(code.value)
+            lines.append({
+                "code": code.value,
+                # The tier the fee would have had if it were charged. An
+                # included line is drawn at zero rather than counted, so the
+                # tier is what tells the page which column it belongs in.
+                "tier": _tier_for_inclusion(code).value,
+                "basis": FeeBasis.PER_TRIP.value,
+                "included": True,
+                "note": title,
+            })
+
         return {
             "lines": lines,
             # Complete means "every charge PADI states is on this list, named
             # and priced". An itinerary with no mandatory entries at all is
             # complete and empty -- 50 of the 307 are, and that is PADI saying
             # the fare covers everything, which is a disclosure and not a gap.
+            #
+            # Inclusions cannot make it false. 4,493 of the 5,662 entries in
+            # that list are amenities -- Water, Coffee, Free WiFi, a shisha
+            # lounge -- and an amenity nobody can classify is not a hole in a
+            # fee book. Letting them reach `unreadable` would have taken the
+            # book from 259 complete trips to none.
             "complete": not unreadable and priced,
             "unreadable": sorted(set(unreadable)),
         }
+
+    @classmethod
+    def _inclusions(
+        cls, detail: dict[str, object], season: tuple[str, str]
+    ) -> list[tuple[FeeCode, str]]:
+        """The charges PADI says the fare already covers, in list order.
+
+        Through the same `LABEL_PATTERNS` both sources' wording already goes
+        through. A second vocabulary drifts, and the day it drifts is the day
+        one seller's "Harbour fees" and the other's mean different things.
+        """
+
+        entries = detail.get(INCLUDED_FIELD)
+        if not isinstance(entries, list):
+            return []
+        out: list[tuple[FeeCode, str]] = []
+        seen: set[FeeCode] = set()
+        for entry in entries:
+            if not isinstance(entry, dict) or not _in_season(entry, season):
+                continue
+            title = str(entry.get("title") or "").strip()
+            code = classify_label(PARENTHETICAL.sub("", title).strip(), prose=False)
+            if code is None or code in seen:
+                continue
+            seen.add(code)
+            out.append((code, title))
+        return out
 
     @staticmethod
     def requirements_from_choices(

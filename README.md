@@ -28,18 +28,46 @@ Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Live on real data: **878 departures, 314 itineraries, 67 boats, 42 operators**,
-every price `scraped`. padi.com is not wired up; liveaboard.com is the only
-source in use.
+Live on real data: **1,122 departures, 402 itineraries, 77 boats, 47
+operators**, every price `scraped`.
 
-Prices and availability come from a nightly crawl. Fees, rental-gear prices and
-the vessel specification table need a browser — the site renders them
-client-side — so they come from a weekly Playwright run and are keyed by vessel,
-because they do not change with the month.
+**Both sources are in use.** This said "padi.com is not wired up" until
+2026-08-30, by which point PADI Travel was supplying a berth price on 654
+sailings — 53 of which it is the only seller of — a berth count on 833, the
+entry bar and stated dive count on 441 trips, and the only fee book the 22
+vessels liveaboard.com sells no berths on have. Neither seller is ever allowed
+to speak for the other: a row states a discount only from the seller whose fare
+it prints, a row PADI alone lists carries no second price at all, and each
+markdown is dated to the day *that* seller's book was read — two crawls, two
+days, and one date over both dated half of them wrong.
 
-A sandbox cannot reach liveaboard.com (network policy, see #1); GitHub's runners
-can. So anything about what the source actually returns is settled by running a
-`tools/probe_*.py` on a runner, never by guessing at markup.
+**Nor is a seller allowed to speak about a reading this pipeline threw away.**
+A cabin ladder more than 3% from the price above it is not that sailing's, and
+`promote` drops it — but the sale beside it was still read off the same book,
+so 36 Aggressor rows printed "−33%, down from €2,371" on a berth advertised at
+exactly €2,371. The rejected reading is now ignored everywhere, and the panel
+says how many sailings it could not read rather than reporting them as full
+price.
+
+Prices and availability come from a nightly crawl, and PADI's from a second one
+half an hour later (`padi.yml`). Fees, rental-gear prices and the vessel
+specification table need a browser — the site renders them client-side — so
+they come from a weekly Playwright run and are keyed by vessel, because they do
+not change with the month.
+
+Both sources are reachable locally since the allowlist landed (#1), and from
+GitHub's runners. Either way, anything about what a source actually returns is
+settled by running a `tools/probe_*.py` against it and reading the answer, never
+by guessing at markup.
+
+Two paths this crawl uses are **disallowed by liveaboard.com's robots.txt**, and
+only a formatting bug in that file lets `can_fetch()` say otherwise. Carrying on
+is a call the owner took on 2026-08-30 rather than an oversight, and it is
+conditional on the crawl staying small — 2 seconds a request, once a day, from
+one runner. The reasoning, what reversing it would cost, and the two options
+weighed and not taken are in
+[`docs/sources/liveaboard.com.md`](docs/sources/liveaboard.com.md)
+under *robots.txt, and the blank line* (#121).
 
 **Where each fact comes from is written down**, per source, in
 [`docs/sources/`](docs/sources/) — the URL, the JSON-LD path or selector, and
@@ -57,6 +85,22 @@ PYTHONPATH=src python3 -m liveaboard.cli build    # write site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli scrape   # refresh from the sources
 PYTHONPATH=src python3 -m unittest discover -s tests
 ```
+
+The suite holds two kinds of test and the command above runs both. Some assert
+against **committed data** — that the advertised price really is the bottom of
+every shipped cabin ladder, that the footer's vessel counts are the dataset's.
+Those are a *publication* gate: they are reached through `tests/published.py`,
+and the jobs that fetch skip them on their pre-flight run
+(`LIVEABOARD_TESTS=code`) and run them again before committing. Put in front of
+a fetch they deadlock it — a stale cabin book failed the suite in front of the
+only job able to refresh that book — and a run that fetches and then refuses to
+publish is recoverable where one that refuses to fetch is not.
+
+CI's list lives in `.github/actions/checks` rather than in `ci.yml`, because
+every job that commits data runs it too, and the commit-and-push tail lives in
+`.github/actions/publish` for the same reason. They push with the default
+`GITHUB_TOKEN`, and GitHub does not trigger workflows on those pushes, so that
+step is the only CI a scheduled commit will ever get.
 
 `build` emits one self-contained HTML file — CSS, JS and data all inlined, no
 CDN, nothing fetched at runtime. Type is the visitor's own system font: a
@@ -105,9 +149,14 @@ which.
 **Dive sites, not route labels.** Filtering is on the sites themselves — a BDE
 week is one naming Brothers, Daedalus and Elphinstone — because a name for a
 set of sites is a layer that can be wrong and answers nothing the sites do not.
-Sites are read from the trip title, which is all the source publishes: 251 of
-314 name reefs, 40 name only a direction and say so, and 23 name neither and
-stay blank rather than being guessed at (#52).
+Sites come from the operator's own description of the trip, then its region
+list, then the trip title, then — last, and only where all three are silent —
+the second seller's account of the same week. **399 of 402** itineraries name
+reefs, one names only a direction and says so, and two name neither and stay
+blank rather than being guessed at (#52, #113). The ordering is the point: a
+source is never merged into one above it, because PADI's blurb says Elphinstone
+and Brothers "are quite distant from one another" on a week that visits neither
+together, and unioning that in is how a St John's week once got badged BDE.
 
 **Provenance**: every price and fee records where it came from and when
 (`scraped`, `operator_stated`, `seed_estimate`, `derived`).
@@ -126,6 +175,7 @@ src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   itinerary, fees, gear, vessel   (the last three need a browser)
 templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, fetch_deals,
+                  fetch_cabins, derive_sales, fetch_padi,
                   scrape_fees, reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
@@ -140,7 +190,11 @@ tests/            stdlib unittest, no dependencies
 | `data/fees.json` | fee book **and** the disclosure text each parse was made from | yes |
 | `data/archive.json` | every JSON-LD node each page published, parsed or not | yes |
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
+| `data/padi.json` | what PADI states per trip: the entry bar, the dive count, its own fee book | yes |
+| `data/padi_departures.json` | the same sailings as PADI sells them: one price and berth count per boat and day | yes |
+| `data/padi_raw.json` | every field each PADI response published, parsed or not | no — gitignored, cached on the runner, CI artifact for 14 days |
 | `data/deals.json` | what PADI Travel is discounting, one entry per day it was read | yes |
+| `data/sales.json` | what liveaboard.com's booking pages were advertising, one entry per day they were read | yes |
 | `data/CHANGES.md` | what moved on each refresh, newest first | yes |
 | `data/snapshots/` | raw pages | no — gitignored, CI artifact for 14 days |
 
@@ -157,6 +211,16 @@ carries a **change log**, and a change log is a diff between two committed days.
 Re-reading the listing recovers today's offers and never yesterday's, so a log
 computed from a build artifact would go quietly silent the moment the artifact
 aged out — reporting "no changes" rather than "nothing to compare against".
+
+`sales.json` is that rule applied to the other seller. liveaboard.com publishes
+no deals listing at all — it strikes the list price through beside every
+discounted cabin — and `cabins.json` is rewritten whole each run, so the larger
+of the two signals could say what was on sale and not what had moved. It is a
+projection of the cabin book onto the three fields a diff needs (advertised
+price, the list price beside it, the currency), written by
+`tools/derive_sales.py` and filed under the day each booking page was read. The
+day the Red Sea Aggressors' 33% sale ended, PADI's half reported three offers
+withdrawn; this one reports the 36 sailings that actually moved.
 
 `archive.json` exists because current prices can always be re-scraped and past
 ones cannot. It carries ratings, cabin counts, occupancy, amenities and
@@ -215,6 +279,14 @@ disappears when the run ages out: the run summary, `data/CHANGES.md`
 (committed, newest first), and the subject of the data commit itself — so
 `git log --oneline data/` reads as the changelog rather than 23 identical
 lines saying `data: daily refresh`.
+
+And a run that moved nothing writes no line at all. The page carries the minute
+it was built, so `site/index.html` differs on every run whether or not any data
+did; seven scheduled jobs a day therefore committed seven times a day
+regardless, each one a log entry that moved no price. The publish action now
+compares the page with that stamp normalised and commits nothing when the stamp
+is the only difference, which is what lets the log be read as a price history
+rather than skimmed for the entries that mean something.
 
 Four distinctions decide whether it is worth reading, and all four are
 false positives it used to report: a euro figure moving because the ECB moved

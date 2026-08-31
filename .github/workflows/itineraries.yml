@@ -15,6 +15,13 @@ name: Read trip itineraries
 # did not visit — exactly as `scrape_fees.py --limit` does.
 
 on:
+  # Daily, inherited from the refresh that used to carry it (#123). It stays
+  # cheap: the book is incremental, so a trip already in it is never re-read
+  # and an ordinary run is a handful of requests. It ran as a step gated on the
+  # crawl succeeding, which was the wrong coupling — a trip's own description
+  # does not depend on whether the vessel-page crawl finished.
+  schedule:
+    - cron: "0 5 * * *"
   workflow_dispatch:
     inputs:
       limit:
@@ -47,8 +54,17 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run tests
-        run: PYTHONPATH=src python3 -m unittest discover -s tests
+      # Only the tests that answer to `src/`. The ones that assert against
+      # committed data are a **publication** gate and are deliberately not run
+      # here — see tests/published.py. Running them in front of a fetch is how
+      # cabins.yml deadlocked on 2026-08-30: a stale cabin book contradicted
+      # the rows the refresh had just written, the suite failed on that, and
+      # the only job able to refresh the book exited before its fetch step.
+      #
+      # A run that fetches and then refuses to publish is recoverable. One
+      # that refuses to fetch is not.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
       # The run summary is where a capped run is actually read: it prints the
       # reefs and dive count found per trip, and any region the site
@@ -79,40 +95,25 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
-      # On the defaults, like refresh.yml, promote.yml, fees.yml and CI's drift
-      # check. One canonical set of inputs, defined in cli.py, that cannot
-      # drift apart across five workflows.
-      - name: Promote, so the book reaches the page
-        run: PYTHONPATH=src python3 -m liveaboard.cli promote
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: itineraries-inputs-${{ github.run_id }}
+          path: |
+            data/itineraries.json
+          retention-days: 1
 
-      - name: Validate the dataset
-        run: PYTHONPATH=src python3 -m liveaboard.cli check --data data/egypt-2027.json
-
-      - name: Build the site
-        run: PYTHONPATH=src python3 -m liveaboard.cli build --data data/egypt-2027.json
-
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data site
-          if git diff --cached --quiet; then
-            echo "no new trips read; nothing to commit"
-            exit 0
-          fi
-          git commit -m "data: read $(date -u +%Y-%m-%d) trip itineraries"
-
-          # Same recovery as the other data-writing workflows, onto the branch
-          # this run is actually on. -X theirs favours the commit being
-          # replayed, which is ours: these files are regenerated output.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+  # Promotion is offline and takes seconds; the fetch above took minutes. A run
+  # that writes its book and stops leaves the committed dataset disagreeing
+  # with its own inputs -- a red build, and before that a page one pass behind
+  # its own data. Serialised, so two sources cannot each derive from a tree the
+  # other has already moved: see .github/workflows/publish.yml.
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: itineraries-inputs-${{ github.run_id }}
+      subject: "data: read {today} trip itineraries"
+      nothing: "no new trips read; nothing to commit"

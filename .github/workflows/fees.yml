@@ -48,6 +48,8 @@ concurrency:
 jobs:
   fees:
     runs-on: ubuntu-latest
+    outputs:
+      collected: ${{ steps.collect.outcome == 'success' }}
     timeout-minutes: 60
 
     steps:
@@ -69,84 +71,31 @@ jobs:
             --out data/fees.json \
             --limit "${{ inputs.limit || 0 }}"
 
-      - name: Rebuild with the new fees
-        if: steps.collect.outcome == 'success'
-        run: |
-          if [ -f data/candidate.json ]; then
-            PYTHONPATH=src python3 -m liveaboard.cli promote \
-              --candidate data/candidate.json \
-              --fees data/fees.json \
-              --out data/egypt-2027.json
-          fi
-          PYTHONPATH=src python3 -m liveaboard.cli build \
-            --data "$([ -f data/egypt-2027.json ] && echo data/egypt-2027.json || echo data/seed/egypt-2027.json)"
-
-      # Before the commit, while HEAD is still last week's dataset. Afterwards
-      # the comparison would be against this run's own output.
+      # Hand over the fee book, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
       #
-      # The same three destinations as the daily refresh: the run summary for
-      # whoever opens the run, data/CHANGES.md for the durable history, and one
-      # line for the commit subject. This run re-promotes from the *existing*
-      # candidate, so departures and fares cannot move -- a fee change is the
-      # only thing it can report, which is exactly what it is for.
-      - name: Report what changed
-        id: changed
-        if: hashFiles('data/egypt-2027.json') != ''
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --revision HEAD \
-            --append data/CHANGES.md \
-            >> "$GITHUB_STEP_SUMMARY"
-          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --revision HEAD --headline)
-          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+      # The seed fallback the build step used to carry is gone with the split
+      # rather than moved: the publish job checks out the tip, which already
+      # holds the last good dataset, so the fallback could only ever commit
+      # something identical to what was already there.
+      - uses: actions/upload-artifact@v4
+        if: steps.collect.outcome == 'success'
+        with:
+          name: fees-inputs-${{ github.run_id }}
+          path: data/fees.json
+          retention-days: 1
 
-      - name: Commit
-        # Through the environment, not `${{ }}`: the headline carries boat
-        # names that came off somebody else's web page, and interpolating
-        # those straight into a shell line is how a scraped string becomes a
-        # command.
-        env:
-          HEADLINE: ${{ steps.changed.outputs.headline }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data site
-          if git diff --cached --quiet; then
-            echo "fees unchanged this week"
-            exit 0
-          fi
-          # Every run is a commit, so the git history doubles as price history:
-          # `git log -p data/` shows exactly which fee moved, and when — and
-          # the subject says which, so finding it does not mean opening 2 MB.
-          # An `&&` guard here would be the last statement of the step under
-          # `set -e`, so an empty headline (the report step skipped, because
-          # there is no dataset yet) would fail the run rather than fall back.
-          subject="data: weekly fee refresh $(date -u +%Y-%m-%d)"
-          if [ -n "${HEADLINE}" ]; then
-            subject="${subject} — ${HEADLINE}"
-          fi
-          git commit -m "${subject}"
-
-          # A scrape takes minutes, and anything can land meanwhile -- the
-          # other scheduled job, or a merge. A plain push is rejected and the
-          # whole run's data is thrown away. Rebase and retry instead.
-          # -X theirs favours the commit being replayed, which is ours: these
-          # files are regenerated output, so the fresh copy always wins.
-          #
-          # Rebase onto the branch this run is actually on. It used to rebase
-          # onto origin/main unconditionally, which is a no-op on any other
-          # branch -- so a run dispatched against a feature branch retried
-          # three times against the wrong ref, reported "up to date" each time
-          # and threw away eight minutes of scraping.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+  # This job runs no tests before its browser crawl, on the rule that an
+  # assertion about a stale fee book must never stop the fetch that refreshes
+  # it. `publish.yml` runs CI's whole list before it commits, which is the
+  # other half of that rule and the only CI these pushes ever get.
+  publish:
+    needs: fees
+    if: needs.fees.outputs.collected == 'true'
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: fees-inputs-${{ github.run_id }}
+      changes: true
+      subject: "data: weekly fee refresh {today}"
+      nothing: "fees unchanged this week"

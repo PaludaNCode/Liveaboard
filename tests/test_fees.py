@@ -584,3 +584,90 @@ class TestFeeBookDrift(unittest.TestCase):
         from liveaboard.scrape.fees import drift
 
         self.assertEqual(drift({"vessels": {"x": {"fees": [], "disclosure": {}}}}), {})
+
+
+class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
+    """Six wordings PADI's fee book uses and liveaboard.com's does not.
+
+    They were the *only* thing keeping 41 trips from claiming a total: every
+    other charge on those trips was named, priced and in a unit that
+    normalises, so the page showed a berth price with no bill beside it —
+    which is the state this site exists to correct in other people.
+
+    Each is `isMandatory` on the source's own say-so and each is a port or
+    government charge with no judgement in it, which is what separates these
+    from the entries below that must keep failing.
+    """
+
+    UNREAD = (
+        ("Local fees", FeeCode.LOCAL_FEES),
+        ("Local Fees", FeeCode.LOCAL_FEES),
+        ("Hospitality Fee", FeeCode.HOSPITALITY_FEE),
+        ("Route supplement", FeeCode.ROUTE_SUPPLEMENT),
+        ("Coast Guard Fee", FeeCode.COAST_GUARD),
+        ("Navy fee", FeeCode.NAVY_FEE),
+        ("Environmental/Government Fee", FeeCode.ENVIRONMENT_TAX),
+    )
+
+    def test_each_wording_now_resolves(self):
+        for label, code in self.UNREAD:
+            self.assertEqual(classify_label(label, prose=False), code, label)
+
+    def test_the_operators_misspelling_is_in_the_table_like_the_others(self):
+        """`Cost Gard Fee` is wrong on the operator's side, and is listed the
+        way TITLE_FIXES lists the two misspellings of Daedalus: the trip's own
+        sibling entries name the charge correctly, so the correction is
+        confirmed by the data rather than guessed at."""
+        self.assertEqual(classify_label("Cost Gard Fee", prose=False), FeeCode.COAST_GUARD)
+
+    def test_the_authorities_are_not_folded_into_one_code(self):
+        """The parser keeps one entry per code, so a shared code drops the
+        second charge and shows the boat cheaper by exactly what it left out.
+        Andromeda bills a Navy fee *and* an Environmental/Government Fee on the
+        same trip, which is the case that settles it."""
+        codes = {classify_label(label, prose=False)
+                 for label in ("Navy fee", "Environmental/Government Fee",
+                               "Coast Guard Fee", "Local fees")}
+        self.assertEqual(len(codes), 4)
+
+    def test_they_are_not_folded_into_the_charges_they_sit_beside(self):
+        """Cassiopeia Glory bills a Navy fee beside a port fee, and Bella 2 a
+        Coast Guard Fee beside a marine park fee. Filing either under its
+        neighbour would have dropped one of the two."""
+        self.assertNotEqual(classify_label("Navy fee", prose=False), FeeCode.PORT_FEES)
+        self.assertNotEqual(classify_label("Coast Guard Fee", prose=False),
+                            FeeCode.MARINE_PARK)
+
+    STILL_DECLINED = (
+        # A percentage in a price field is not an amount. Adding 14 to a bill
+        # would be a number nobody quoted.
+        "14% GST (on onboard purchases)",
+        "15% Local GST (on onboard purchases)",
+        # Conditional on who is diving, not a charge everyone pays.
+        "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+        # Gear, and gear is a toggle.
+        "Fins, mask, snorkel (ABC)",
+        # Two charges in one label. Filing it under half of itself would name
+        # a charge the operator did not.
+        "Environmental and Route Fees",
+    )
+
+    def test_what_must_keep_failing_still_does(self):
+        """Each of these keeps its trip incomplete, which is the safe
+        direction: a bill built from part of a fee book shows the seller
+        cheaper by exactly what it left out."""
+        for label in self.STILL_DECLINED:
+            self.assertIsNone(classify_label(label, prose=False), label)
+
+    def test_none_of_them_reaches_past_its_own_wording(self):
+        """The reason they are listed rather than generalised into "any
+        authority charge": a near-miss rule that catches these also catches
+        something that only looks like them."""
+        for label in ("Local tax", "Local dive guide", "Coastal excursion",
+                      "Supplement for a single cabin", "Government of Egypt"):
+            with self.subTest(label=label):
+                self.assertNotIn(
+                    classify_label(label, prose=False),
+                    {FeeCode.LOCAL_FEES, FeeCode.COAST_GUARD, FeeCode.NAVY_FEE,
+                     FeeCode.ROUTE_SUPPLEMENT, FeeCode.HOSPITALITY_FEE},
+                )

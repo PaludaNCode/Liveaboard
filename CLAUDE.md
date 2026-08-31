@@ -6,7 +6,7 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-PYTHONPATH=src python3 -m unittest discover -s tests   # 510 tests, no deps
+PYTHONPATH=src python3 -m unittest discover -s tests   # everything, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
 PYTHONPATH=src python3 -m liveaboard.cli changes       # what moved since HEAD~1
@@ -24,9 +24,119 @@ PYTHONPATH=src python3 -m liveaboard.cli promote           # rebuild the dataset
 PYTHONPATH=src python3 -m liveaboard.cli build             # and the page
 ```
 
-Take the defaults. `refresh.yml`, `fees.yml`, `promote.yml`, `itineraries.yml`
-and the CI check all promote on them, so one canonical set of inputs lives in
-`cli.py` and cannot drift apart across five workflows.
+Take the defaults. There is now exactly **one** place a job promotes —
+`.github/workflows/publish.yml`, the serialised tail every pushing workflow
+delegates to — plus the rebase path in `.github/actions/publish` and
+`promote --check` in `.github/actions/checks`. Nine callers spelling out their
+own promote became three, so "one canonical set of inputs, in `cli.py`" is
+structural rather than a convention nine files have to keep.
+
+**A test over committed data gates the commit, never the fetch.** The suite
+holds both kinds and the default command runs both. Seven workflows run the
+code-only suite up front — six of them before fetching — and every one of them
+runs the whole suite afterwards through `.github/actions/checks`, so an
+assertion about committed data is reached only once there is a commit to gate.
+`fees.yml` drives a browser and runs no up-front suite at all, which is the
+same rule taken to its end rather than an exception to it:
+
+```bash
+LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+```
+
+**And a job that pushes runs CI's own list before it does.** GitHub does not
+trigger workflows on pushes made with the default `GITHUB_TOKEN`, so not one
+scheduled data commit has ever had a CI run against it — which is how a refresh
+published 36 sailings advertising a berth nobody could buy and left `main` red
+for seven hours, found by a person opening an unrelated PR. `.github/actions/
+checks` holds the list once and `ci.yml` uses it too, so the two cannot drift;
+`TestEveryPushingWorkflowChecksItself` refuses a workflow that pushes without
+it. Add a check there rather than to `ci.yml`.
+
+This is not a convenience. `cabins.yml`, `refresh.yml` and `itineraries.yml`
+ran the whole suite as their *first* step, so on 2026-08-30 a stale cabin book
+contradicting the rows the refresh had just written failed the suite in front
+of the only job that could refresh that book — the guard gating the fetch that
+would clear the condition the guard was testing for. A run that fetches and
+then refuses to publish is recoverable; one that refuses to fetch is not.
+Committed data is reached through `tests/published.py`, which is the gate, and
+`TestThePublicationGateIsComplete` refuses a test that opens `data/` for
+itself. Hand-maintained inputs — `padi_aliases.json`, `operator_facts.json` —
+are outside it: no crawl touches them, so nothing asserted about them can ever
+be cleared by fetching.
+
+**One source per workflow, and the derive-and-push tail is a second job.** Each
+source fetches independently — that is what the split bought — and everything
+from `promote` onwards lives in `.github/workflows/publish.yml`, which
+re-checks out the **branch tip** and derives there.
+
+**Serialising that tail was tried and it lost data.** A shared `concurrency`
+group is the obvious way to stop two sources colliding, and GitHub's
+concurrency is not a queue: a group holds one running job and *one* pending,
+and a third arrival cancels the pending one. On three simultaneous dispatches
+`deals.yml` read PADI's deals, uploaded them, and had its publish cancelled
+four seconds later without running — a day's figures fetched and discarded, the
+run reading *cancelled* rather than failed, which nothing alerts on. Worse than
+the race it was meant to prevent. `TestThePublishTailDoesNotQueueOnConcurrency`
+fails if a group comes back.
+
+The reason is a bug this shape makes unreachable rather than repairable. Two
+jobs in flight both derive `data/egypt-2027.json` and `site/index.html` from a
+checkout, and `-X theirs` on the rebase then favours the *stale* copy: on
+2026-08-31 a `deals.yml` run put back a page saying `berths_read: 2026-08-28`
+beside a `data/cabins.json` a capped `cabins.yml` had just collected on 08-31.
+The site dated its own berth counts three days wrong, `promote --check` was
+green throughout because the dataset really did match its inputs, and the next
+run healed it before anybody could look.
+
+So **a fetching job hands over its inputs and never its output.** What it read
+goes up as an artifact; the dataset and the page are rebuilt in the publish job
+from the branch tip plus those inputs. A derived file never travels, so it
+cannot arrive stale. `TestThePageIsWhatItsDataBuilds` is the net under that,
+and the re-derivation in `.github/actions/publish` is the belt: the rebase path
+still exists for a collision that beats the queue.
+
+**Two shared actions, and one shared workflow.** `refresh.yml` bundled the
+ECB rates, the liveaboard.com crawl, the itinerary fragments and PADI's deals,
+so proving a two-request change to `fetch_deals.py` meant a run that first
+fetched 320 vessel pages from a site with nothing to do with it. Each source is
+its own dispatchable job now — `fx.yml`, `refresh.yml` (the crawl alone),
+`deals.yml`, `itineraries.yml`, `padi.yml`, `cabins.yml`, `fees.yml` — and each
+ends the same way, because the shape is identical and six copies of it drifted:
+
+- `.github/actions/checks` — everything CI asserts. `ci.yml` uses it too, which
+  is what makes "the same bar" true rather than intended.
+- `.github/actions/publish` — stage, commit, push with rebase-and-retry. Its
+  `subject` takes `{today}` and `{sha}`; a `headline` carrying scraped text is
+  its own input and never reaches a shell as code.
+  **A rebuild is not news.** `cli build` stamps the page with the minute it
+  ran, so `site/index.html` differs on every run whether or not any data did
+  and the "nothing to commit" exit could never fire: seven jobs a day committed
+  seven times a day regardless. Each was a line in `git log --oneline data/` —
+  which this file calls the price history — that moved no price, and a deploy
+  that published nothing. So when nothing but the page is staged and the page
+  differs only by that stamp, the action says so and commits nothing. Compared
+  with the stamp normalised on both sides, never by reading the shape of a
+  diff: the payload is one enormous line, so a real change and the stamp land
+  on it together and no line-wise filter can tell them apart.
+  **It also means a quiet job never reaches the push at all**, which is not
+  obvious until you want a collision. Two attempts to force one for #127 hit
+  this instead: a full `cabins.yml` had already covered every departure that
+  morning, so a capped re-read produced a byte-identical book and the publish
+  exited before it could be rejected. A job with nothing to say cannot lose a
+  race, so the rebase path is reachable only on a day something moved.
+
+Every one of those files is a **promote input**, so a job commits its data
+*and* the dataset built from it. Committing an input alone leaves
+`promote --check` red until something unrelated heals it.
+
+Five guards police this contract — `TestThePublicationGateIsComplete`,
+`TestEveryPushingWorkflowChecksItself`, `TestEveryDataCommitReachesThePage`,
+`TestThePageAnnouncesTheNewsInTheCommitThatMakesIt` and `TestARebuildIsNotNews`
+— and two of them have already been blinded once, by the refactor that moved
+`git add` and `git push` into the action: they now assert they can still see
+what they are checking, because a check that stops checking is green for the
+wrong reason. Add a guard here rather than trusting the next refactor to leave
+the shape alone.
 
 **Read the published page without checking anything out.** After a merge, to
 see what actually shipped:
@@ -68,13 +178,36 @@ Break these and the site starts lying quietly rather than failing loudly.
   same gear set per day, per trip *and* per week, so comparing raw amounts
   across vessels is meaningless — normalise first.
 - **Included fees stay in the breakdown at zero.** Removing them hides the
-  difference between a bundled operator and one that bills at the dock.
+  difference between a bundled operator and one that bills at the dock. Both
+  sellers are read for it now: PADI states it in `whatsIncludedNew`, on 447 of
+  447 itineraries, and reading only what it charges *on top* left two bills in
+  one expanded row disclosing at different depths. The list is prose rather
+  than labels, so a **parenthetical is a qualifier and never the name** —
+  *Airport Meet & Greet (VISA assistance)* classified as the visa fee and would
+  have told eight itineraries' readers that the €25 they still pay at the
+  airport was covered. And an amenity nobody can classify — Water, Coffee, Free
+  WiFi — is not a hole in a fee book: inclusions never reach `unreadable`,
+  which would have taken the book from 259 complete trips to none.
 - **No score grading operators.** The site compares what trips cost; it does
   not rank who sells them. A per-operator "honesty" percentage was removed:
   it read as a league table and contradicted the total beside it.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
   required extras. Neither is a clean bill.
+- **A charge priced for last year is not this year's charge, and silence is not
+  expiry.** PADI's payload states `validFrom`/`validTo` on a fee and keeps both
+  sides of a repricing: Grand Sea Explorer lists *Route supplement* twice on
+  every trip — 300 valid to 2026-12-31, 400 from 2027-01-01 — and DUNE Longara
+  lists *Environmental taxes* at 100 and 200. Nothing read the dates, so the
+  bill got whichever entry the parser happened to keep. A comment used to
+  reason the opposite way, that two entries under one title are two charges the
+  operator bills; the dates sat in the same payload and refute it. All **69
+  such pairs resolve to exactly one entry valid in the published season**, not
+  one has two, and they sit on the largest mandatory lines there are. The other
+  half of the rule is the usual one: 750 of 896 entries state no window at all
+  and every one is kept. Only an entry stating a window the season cannot reach
+  is dropped, which is the source saying this price stopped applying before the
+  trip sails.
 - **No route, theme or level labels.** They were inferred from the dive sites,
   read by nothing on the page, and removable without loss: if you want a BDE
   week you filter on Brothers, Daedalus and Elphinstone. A name for a set of
@@ -94,6 +227,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   withheld from every other trip length that boat sells; the itinerary fragment
   states one per *trip*, which needs no such guard and wins. Unknown stays 0 and
   the column says "not stated".
+- **Four sources for a trip's reefs, in order, never merged.** The operator's
+  own description, then its region list, then the trip title, then — last —
+  what the *second* seller says about the same week (`padi.json`'s
+  `dive_sites`, folded by `fetch_padi._padi_sites` from the day plan and then
+  the blurb). PADI is last because it is the least structured: against the 180
+  trips both sellers describe, its words add 173 reef mentions ours does not,
+  among them Elphinstone on a Brothers and Safaga week off a sentence saying
+  the two "are quite distant from one another". Merged in, that is the
+  BDE-badging failure removed once already; used only where the three above are
+  silent, it is the difference between a row the site filter can reach and one
+  it cannot — 47 rows on 19 itineraries, down to 4 on 3. The three that stay
+  blank name no reef in any field, and blank is right for them.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
@@ -215,6 +360,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   sale. `discover()` records what it skips via `not_looked_at`, so the skip and
   the failure travel down the same channel. `CARRY_MAX_DAYS` outlasts
   `BARREN_RECHECK_DAYS` by design.
+- **And a vessel that sells nothing is not one that prices nothing.**
+  `_departure_book` drops a sailing with no date, with no price, and outside
+  the window, all three the same way: silently. So twelve mapped PADI vessels
+  produced no row and the run could not say which of those it was.
+  `fetch_padi._sailing_counts` records the lot per vessel and `why_empty`
+  names it in the run log: *"22 dated sailing(s), none in the season
+  (2026-09-05 to 2027-01-30)"* is a calendar that has not reached us, where
+  *"17 … — and none of them priced"* is VIP One, which lists dated berths at no
+  stated price. **Unpriced is counted over every dated sailing, not only the
+  in-season ones** — VIP One's window stops in December, so counting inside it
+  would have hidden the fact entirely. Recorded, never acted on: `promote` does
+  not read it, and a boat with no price still gets no row.
 - **A seller nobody asked is the same blindness.** The two sources merge on
   `(boat, date)` — exact, because a date has no spelling — and for eleven
   refreshes that merge could only ever fill a field, on the rule that the row
@@ -228,6 +385,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   seller's figure repeated into the second seller's field prints as two sellers
   agreeing about a sailing one of them does not offer — and the page marks it
   `PADI only`, which is a fact about who was asked and not about the trip.
+  **And on a vessel the barren list held back, even that is too strong.** The
+  crawl keeps the distinction — `discover` records a skip through
+  `not_looked_at` — and `promote` lost it, publishing *"liveaboard.com does not
+  list this sailing"* on 87 sailings across Bella 2, Bella 3, Eriny and Blue
+  Pearl: a result for a page nobody opened. All four have a vessel page the fee
+  scraper read in full. `candidate.not_asked` names what the run declined to
+  visit, recorded by the crawl rather than re-derived — the skip rule is
+  date-dependent and promotion is pure — and the row says *not asked* instead.
+  Same rule as `fees_known`: no fee lines means nobody looked, not that there
+  are none.
 - **A boat only the second seller lists is still a boat.** 22 Egyptian
   liveaboards on PADI mapped to nothing of ours; ids for them are minted in
   `data/padi_aliases.json` under `padi_only` and 10 carry season sailings, so
@@ -237,12 +404,23 @@ Break these and the site starts lying quietly rather than failing loudly.
   source, so both come from `window.shop` — `title`, and `fleetTitle` minus
   PADI's trailing "Fleet" — kept **verbatim**, shouting included, because
   `OPERATOR_ALIASES` already rules that tidying a company's capitalisation is a
-  short step from deciding what it is called. **A fleet is not an operator**:
+  short step from deciding what it is called. **But the vessel page states the
+  company, and it beats the fleet label outright** — `Product.brand.name` in
+  the page's own JSON-LD, read by the fee run because that is the only pass
+  visiting a boat with no departures. It is the *same source* every other
+  operator here comes from, so preferring it is not a judgement call; 79 of 79
+  vessels state one. It ends the shouting without anybody deciding how a
+  company spells itself (`Bella Liveaboard` is that source's own words, not a
+  tidy-up of PADI's `BELLA LIVEABOARDS`), and it settles Blue Pearl. **A fleet
+  is not an operator**:
   PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET Fleet", and
   folding that onto our Blue's stated "Blue Planet Liveaboards" removed a
   duplicate row by asserting a company for a hull our own source connects to
   nobody. Two operator rows that may be one company is cosmetic; the assertion
-  is not. Where our fee book is absent
+  is not. **The two are one row now, and the rule is why that is allowed** —
+  not folded on the fleet label, which still folds nothing, but on Blue Pearl's
+  own page saying `"brand": {"name": "Blue Planet Liveaboards"}`. The fold is a
+  fact rather than a tidy-up, which is the whole difference. Where our fee book is absent
   PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
   where ours exists it wins outright. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
@@ -265,6 +443,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **Each markdown is dated to the day its own seller was read**, like the berth
+  counts and for the same reason: `berths_read` and `padi_berths_read` are two
+  crawls two days apart, and the sale marks stamped the first over both — on
+  124 rows whose evidence is partly PADI's and 2 where it is all of it. The
+  summary carries a date per seller and its heading takes the oldest of them,
+  because a panel is only as fresh as its stalest half.
+  **And the panel states what it could not read.** Three absences print
+  identically to "not on sale" — a ladder rejected as stale, a sailing neither
+  seller published a list price for (9), and a trip-name banner the seller read
+  for it contradicts (2) — so `promote` counts each into `deals.coverage` and
+  the panel says so. `promotion` stays unrendered and is now worth keeping for
+  that count: a corroborating field nobody hears from when it stops
+  corroborating is a field to delete.
 - **A deal is placed by its vessel, never by the country beside it.** PADI's
   deals listing has to be asked for the USA as well as Egypt, because all three
   Red Sea Aggressors are filed under the USA and asking Egypt alone drops them.
@@ -288,6 +479,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   ours through `padi_key` and only where that key names exactly one of our
   trips; where two of a boat's own itineraries share it the fold is refused,
   because nothing can say which harbour the other source meant.
+- **A joined string is not a record, and no parser makes it one again.** PADI
+  states a trip's two harbours in two fields; `itinerary_from_payload` stored
+  them joined into one `ports`, and nothing read it because nothing could:
+  **two of the eight harbour names contain the separator.** *Hurghada -
+  Marriott Marina - Hurghada - Marriott Marina* is either `("A", "B - C")` or
+  `("A - B", "C")` and the string does not say. 436 of 447 split cleanly and
+  the other 11 cannot be split without guessing — and a closed-vocabulary parse
+  over today's eight names is exactly the rule that breaks silently the first
+  time PADI names a ninth marina. The fix is the record: `port_from` and
+  `port_to`, with `ports` dropped rather than left beside them for something to
+  read by accident. Where a source hands you two facts, keep two fields;
+  re-deriving them later is a guess wearing a parser's clothes.
 - **An unreadable page is not an empty one.** A vessel page is fetched once per
   season month, so one response with no JSON-LD empties that boat's month while
   the other three come back fine — and it looks exactly like a boat that sells
@@ -349,6 +552,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   contradict. **CI never saw this**, because the scheduled data commits push
   with `GITHUB_TOKEN` and GitHub does not run workflows on those — so a refresh
   can turn `main` red and the next human PR is what finds out.
+  **And a reading thrown away stays thrown away, in every field it touches.**
+  The drop landed and the sale beside it did not: `_sale_for` was handed the
+  same rejected book eight lines later, so all 36 dropped rows kept its
+  discount — *“−33%, down from €2,371”* on a berth advertised at €2,371, the
+  dataset quoting a source it had just ruled out, on the largest markdowns on
+  the page. `_drop_stale_ladder` returns **which seller** it dropped rather
+  than a count, `_list_prices` ignores that seller for the sailing, and
+  `TestAStaleLadderCannotSpeak` asserts at both ends: the ladder never reaches
+  the sale, and no shipped row states a list price equal to its own fare. Then
+  the loss is stated — `deals.coverage.dropped` names the boats, because after
+  the fix those rows read *not on sale*, which is one seller's discarded
+  reading wearing its answer.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was
@@ -368,8 +583,17 @@ Break these and the site starts lying quietly rather than failing loudly.
 
 ## Sources
 
-`padi.com` and `liveaboard.com` are the only permitted sources. Both are blocked
-by the environment's network policy (see README); GitHub's runners are not.
+`padi.com` and `liveaboard.com` are the only permitted sources. Both are
+reachable locally since the allowlist landed (#1), and from GitHub's runners.
+
+**`/BookingStep1` and the `?m=` selector are disallowed by liveaboard.com's
+robots.txt, and we fetch them anyway** — a blank line after `User-agent: *`
+orphans all 31 rules, so `urllib.robotparser` discards them and `can_fetch()`
+says yes. That is a deliberate call taken 2026-08-30, not an oversight, and the
+reasoning and the price of reversing it are in
+`docs/sources/liveaboard.com.md` under *robots.txt, and the blank line*. Do not
+re-derive it as a fresh discovery; do read it before quoting `can_fetch()` as
+permission.
 **Do not write markup parsers for pages nobody has fetched** — run a probe on a
 runner, read what came back, then parse. `tools/probe_*.py` write nothing and
 exist for exactly this.
@@ -397,6 +621,21 @@ the parser gets proved against three real trips before it is pointed at three
 hundred of somebody else's pages. A capped run merges into the book, like
 `scrape_fees.py --limit`.
 
+**What PADI states has a cadence too, and it is `padi.yml`, daily.**
+`tools/fetch_padi.py` ran in no workflow at all until then, and by that point
+five published facts rested on it — the entry bar, the stated dive count, the
+only fee book the 22 PADI-only vessels have, PADI's berth price on 654 sailings
+and its berth count on 833. Everything else here reports its own failures; this
+one's failure mode was **"nobody ran it"**, which nothing reports. `data/
+padi_raw.json` stays gitignored and is *cached* on the runner instead, so an
+ordinary run re-fetches only the itinerary listings and the sailings — ~80
+requests against ~530 from cold — and every run uploads it as an artifact,
+because a re-parse that needs the raw store should download it rather than
+re-crawl 530 pages. **The book is rebuilt whole from that store**, so a cold
+runner would rebuild it with zero trips and write it: green job, valid file,
+five facts gone. `MIN_BOOK_RATIO` refuses that, the way `fetch_cabins.py`
+refuses to rewrite its file after reading nothing.
+
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`
 that page 99 answers with page 1 — but `/api/v2/travel/promotions/` takes that
@@ -408,6 +647,21 @@ changes" once the artifact ages out. A re-run on a day already in the book makes
 no request at all. Paging stops when a page adds no offer identity already seen
 — never on a page number, because the page beside it proves a page number here
 carries no information.
+
+**The other seller's sales are kept the same way, as a projection.**
+liveaboard.com publishes no listing, so its markdowns are read off the booking
+pages by `fetch_cabins.py` — and `data/cabins.json` is rewritten whole each run,
+which left the *bigger* signal (263 sailings on 22 boats against PADI's 13) able
+to say what was on sale and not what had moved. `tools/derive_sales.py` reads
+the committed cabin book and writes `data/sales.json`: one day per reading,
+three fields per sailing, no request of its own. Two things are load-bearing. It
+files each sailing under **that record's own `collected`**, never the book's
+header, because a capped run merges and leaves most of the file older than its
+header says. And a day is a **census, not a list of sales** — every sailing read
+that day is in it, discounted or not, because the keys are the only thing
+separating *not on sale* from *not looked at*; `promote` diffs over the sailings
+both readings covered and prints the count of those it could not. Thirty days of
+it would be 2 MB, so `KEEP_DAYS` is a week here and a month there.
 
 `data/snapshots/` is gitignored; CI keeps it as a build artifact for 14 days.
 `data/archive.json` is committed and holds every JSON-LD node each page

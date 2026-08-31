@@ -12,6 +12,7 @@ from __future__ import annotations
 import unittest
 from datetime import datetime, timezone
 
+import published
 from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.padi_com import PadiComAdapter
 from liveaboard.taxonomy import DiverLevel
@@ -336,7 +337,11 @@ class TestPayload(unittest.TestCase):
     def test_facts_are_stated_not_parsed(self) -> None:
         record = PadiComAdapter.itinerary_from_payload(DETAIL)
         self.assertEqual(record["nights"], 7)
-        self.assertEqual(record["ports"], "Marsa Alam - Marsa Alam")
+        # Two fields, not one joined string. Two of PADI's eight harbour names
+        # contain the " - " a joined string would have to be split on, so
+        # `ports` was unreadable on 11 trips and is gone.
+        self.assertEqual((record["port_from"], record["port_to"]),
+                         ("Marsa Alam", "Marsa Alam"))
         self.assertEqual(record["boat_name"], "Hammerhead II")
         self.assertEqual(record["padi_id"], 21681)
 
@@ -514,7 +519,7 @@ class TestAliasMap(unittest.TestCase):
         from pathlib import Path
 
         aliases = json.loads(Path("data/padi_aliases.json").read_text())
-        boats = {b["id"] for b in json.loads(Path("data/egypt-2027.json").read_text())["boats"]}
+        boats = {b["id"] for b in published.raw()["boats"]}
         minted = set(aliases.get("padi_only") or [])
         unknown = sorted(set(aliases["aliases"]) - boats - minted)
         self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
@@ -602,3 +607,162 @@ class TestStricterBar(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestACharePricedForLastYearIsNotThisYearsCharge(unittest.TestCase):
+    """`validFrom`/`validTo` sit on every fee entry and nothing read them.
+
+    PADI keeps a charge's old price beside its new one. Grand Sea Explorer
+    lists "Route supplement" twice on every trip -- 300 valid to 2026-12-31,
+    400 valid from 2027-01-01 -- and DUNE Longara lists "Environmental taxes"
+    at 100 and 200, the second taking over on 2026-06-14. Both reached the bill
+    and the parser kept whichever it happened to, on the largest mandatory
+    lines in the book.
+
+    A comment in `fees_from_payload` used to reason that two entries under one
+    title are two charges the operator bills. The dates were in the same
+    payload and refute it: across the store, all **69** such pairs resolve to
+    exactly one entry valid in the published season, and not one has two.
+    """
+
+    def entry(self, title="Route supplement", price=400.0, **extra):
+        return {"title": title, "price": price, "payedPer": 30,
+                "isMandatory": True, **extra}
+
+    def fees(self, *entries, season=("2027-05-01", "2027-08-31")):
+        return PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": list(entries)}, "USD", season)
+
+    def test_an_entry_dated_out_before_the_season_is_dropped(self):
+        book = self.fees(
+            self.entry(price=300.0, validFrom="2025-12-01", validTo="2026-12-31"),
+            self.entry(price=400.0, validFrom="2027-01-01", validTo="2030-01-01"),
+        )
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [400.0])
+
+    def test_an_entry_that_starts_after_the_season_is_dropped_too(self):
+        book = self.fees(
+            self.entry(price=400.0, validFrom="2027-01-01", validTo="2030-01-01"),
+            self.entry(price=500.0, validFrom="2028-01-01", validTo="2030-01-01"),
+        )
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [400.0])
+
+    def test_an_entry_stating_no_window_is_kept(self):
+        """Silence is not expiry -- 750 of the 896 entries state no window, and
+        dropping those would empty most of the book."""
+        self.assertEqual(len(self.fees(self.entry())["lines"]), 1)
+
+    def test_a_window_that_merely_overlaps_the_season_is_kept(self):
+        """The charge applies for part of the window we publish, which is the
+        operator saying it applies. Requiring containment would drop a price
+        that is live on the day the trip sails."""
+        book = self.fees(self.entry(validFrom="2027-06-01", validTo="2027-06-30"))
+        self.assertEqual(len(book["lines"]), 1)
+
+    def test_two_undated_entries_under_one_title_are_still_two_charges(self):
+        """What the dates cannot settle, the title must not settle either.
+        Folding these would halve a real bill, which is the direction this
+        project never rounds."""
+        book = self.fees(self.entry(price=100.0), self.entry(price=200.0))
+        self.assertEqual([line["amount"]["amount"] for line in book["lines"]], [100.0, 200.0])
+
+    def test_an_expired_entry_never_blocks_a_bill(self):
+        """Dropped before its title is read, so an unclassifiable charge that
+        stopped applying last year cannot hold a trip's total hostage."""
+        book = self.fees(
+            self.entry(title="Some charge nobody can classify",
+                       validFrom="2025-01-01", validTo="2026-01-01"),
+            self.entry(),
+        )
+        self.assertEqual(book["unreadable"], [])
+        self.assertTrue(book["complete"])
+
+
+class TestWhatTheFareAlreadyCovers(unittest.TestCase):
+    """`whatsIncludedNew`, present on 447 of 447 itineraries and read by nothing.
+
+    The other half of a disclosure. The site read what PADI charges on top and
+    not what it says is already in, and **included fees stay in the breakdown
+    at zero** by invariant -- removing them hides the difference between a
+    bundled operator and one that bills at the dock. That rule was being kept
+    on one seller's side only.
+    """
+
+    def payload(self, *included, mandatory=()):
+        return {
+            "mandatoryOnBoard": [
+                {"title": t, "price": p, "payedPer": 30} for t, p in mandatory
+            ],
+            "whatsIncludedNew": [{"title": t} for t in included],
+        }
+
+    def book(self, *included, mandatory=()):
+        return PadiComAdapter.fees_from_payload(
+            self.payload(*included, mandatory=mandatory), "USD")
+
+    def lines(self, *included, mandatory=()):
+        return [(l["code"], l["tier"], bool(l.get("included")))
+                for l in self.book(*included, mandatory=mandatory)["lines"]]
+
+    def test_an_inclusion_is_a_line_at_no_amount(self):
+        line = self.book("Free nitrox (for certified nitrox divers)")["lines"][0]
+        self.assertTrue(line["included"])
+        self.assertNotIn("amount", line)
+        self.assertEqual(line["note"], "Free nitrox (for certified nitrox divers)")
+
+    def test_the_tier_is_what_the_charge_would_have_been(self):
+        """Mandatory unless the site already treats it as something you choose.
+        It agrees with the other seller's parser, which is the check that
+        matters: nitrox conditional, harbour fees mandatory."""
+        self.assertEqual(
+            self.lines("Free nitrox (for certified nitrox divers)", "Harbour fees"),
+            [("nitrox", "conditional", True), ("port_fees", "mandatory", True)])
+
+    def test_a_visa_service_is_not_the_visa_being_included(self):
+        """The expensive one, and the reason `PARENTHETICAL` is a rule rather
+        than a table of exceptions. "Airport Meet & Greet (VISA assistance,
+        eligible countries only)" classified as `visa`, which would have told
+        eight itineraries' readers that the €25 they still pay at the airport
+        was covered. Help with the paperwork is not the charge."""
+        self.assertEqual(
+            self.lines("Airport Meet & Greet (VISA assistance, eligible countries only)"),
+            [])
+
+    def test_a_parenthetical_does_not_stop_a_real_inclusion_reading(self):
+        """The rule strips a qualifier, not the name. Measured over all 63
+        titles the field uses, it changes the answer on the visa one alone."""
+        self.assertEqual(
+            self.lines("Transfer from/to the airport (round-trip, only on boat "
+                       "arrival & departure days)"),
+            [("airport_transfer", "conditional", True)])
+
+    def test_an_amenity_is_not_a_fee_and_never_blocks_a_bill(self):
+        """4,493 of the 5,662 entries are Water, Coffee, Free WiFi, a shisha
+        lounge. Letting those reach `unreadable` would have taken the book from
+        259 complete trips to none."""
+        book = self.book("Water", "Coffee", "Free WiFi", "Shisha in the shisha lounge onboard")
+        self.assertEqual(book["lines"], [])
+        self.assertEqual(book["unreadable"], [])
+        self.assertTrue(book["complete"])
+
+    def test_a_charge_that_is_billed_is_never_also_reported_as_covered(self):
+        """A stated amount is the stronger claim. They do not collide anywhere
+        in the book today, and if they ever do the money wins."""
+        lines = self.lines("Harbour fees", mandatory=[("Harbour fees", 40.0)])
+        self.assertEqual(lines, [("port_fees", "mandatory", False)])
+
+    def test_one_line_per_code_however_many_wordings_state_it(self):
+        """Operators list four transfer entries -- airport, hotel, scheduled
+        times, night flights. They are one inclusion, and four lines reading
+        "Airport transfers - included" is a breakdown repeating itself."""
+        lines = self.lines("Transfer from/to the airport (round-trip)",
+                           "Transfer from/to local hotels (round-trip)",
+                           "Airport transfer to/from the boat")
+        self.assertEqual(lines, [("airport_transfer", "conditional", True)])
+
+    def test_an_inclusion_dated_out_of_the_season_is_dropped_like_a_charge(self):
+        book = PadiComAdapter.fees_from_payload(
+            {"whatsIncludedNew": [{"title": "Harbour fees",
+                                   "validFrom": "2025-01-01", "validTo": "2026-01-01"}]},
+            "USD")
+        self.assertEqual(book["lines"], [])

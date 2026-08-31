@@ -214,7 +214,7 @@
      on nothing but filters. Folded away by default there; untouched on a
      laptop, where they fit. -->
 <button type="button" class="filters-toggle" id="filtersToggle"
-        aria-expanded="false" aria-controls="ports sites boats">Filter by port, site or boat</button>
+        aria-expanded="false" aria-controls="ports sites boats entry">Filter by port, site, boat or entry bar</button>
 
 <!-- One scroll box, not three. Folded open on a phone the three banks came
      to more than a screen between them -- and each carried its own cap and its
@@ -242,12 +242,34 @@
        The operator was left reachable through the search box instead, and that
        box has since gone too — it was a second way to ask what the chips ask,
        costing a redraw on every keystroke, and the one question it answered
-       alone was the company. A diver picks the boat. Scoring operators against
-       each other was tried and removed: it read as a league table and
-       contradicted the total beside it. -->
+       alone was the company. Scoring operators against each other was tried and
+       removed before either: it read as a league table and contradicted the
+       total beside it.
+       A diver picks the boat, and the company is now off the page altogether —
+       its name stopped being serialised to every visitor once it was clear
+       nothing had printed it since the filter went, and the count under these
+       filters ("46 operators") went with it. Both are still in the dataset and
+       in the CSV download. -->
   <div class="filterbar">
     <span class="tlabel">Boat</span>
     <span id="boats"></span>
+  </div>
+
+  <!-- The certification and logged dives a trip demands, as one chip per bar.
+       Ordered least demanding to most, which is the one bank here that is not
+       ordered by how many rows carry it: a port has no order of its own and a
+       bar does, and the reader is going along this bank looking for the last
+       chip they still clear. Sorted by popularity it opened on "Advanced + 50
+       dives" with "Open Water" fourth, which reads as a list of common options
+       rather than as a ladder.
+
+       One value rather than two controls, because it is one question. Filtered
+       on the level alone, a diver who holds Advanced clears every "Advanced"
+       chip and is still turned away at the dock by the 50 logged dives half of
+       them also ask for. -->
+  <div class="filterbar">
+    <span class="tlabel">Entry bar</span>
+    <span id="entry"></span>
   </div>
 </div>
 
@@ -391,16 +413,17 @@
     <div>
       <h3>Nitrox and tips</h3>
       <p>
-        Two thirds of this fleet bundles nitrox and a third bills for it:
-        <b>45</b> vessels say <b>included</b>, <b>21</b> publish a price
+        Two thirds of this fleet bundles nitrox and a quarter bills for it:
+        <b>50</b> vessels say <b>included</b>, <b>21</b> publish a price
         &mdash; &euro;30 to &euro;100, most often around &euro;70 a week
-        &mdash; and <b>11</b> never mention it at all. Those eleven read
+        &mdash; and <b>6</b> never mention it at all. Those six read
         <b>not listed</b>, which is the one thing on this page nitrox can say
         that is neither yes nor a number: nobody has said whether you will be
-        charged. Nine of them are boats whose sailings only PADI Travel lists,
-        and PADI states what a trip charges rather than what the vessel offers
-        &mdash; so the silence there is about which question the source
-        answers, not about the boat.
+        charged. Four of them are boats whose sailings only PADI Travel lists.
+        That was eleven until this page learned to read the other half of
+        PADI&rsquo;s disclosure: it states what a fare covers as well as what
+        it charges on top, and the second half had gone unread, so five boats
+        that say <b>included</b> were being reported as silent.
       </p>
       <p>
         Crew tips are counted wherever an operator publishes a figure; where
@@ -525,17 +548,28 @@
     <div>
       <h3>Entry requirements</h3>
       <p>
-        Expand a row and it opens with the bar that trip sets: the
-        certification and the logged dives you need before anyone will take
-        your booking. It is a safety requirement stated by the operator, so it
-        is never softened here and never inferred where nothing was stated.
+        The <b>Entry bar</b> column is the certification and the logged dives
+        you need before anyone will take your booking, and the filter above the
+        table has one chip per bar, least demanding first. It is a safety
+        requirement stated by the operator, so it is never softened here and
+        never inferred where nothing was stated &mdash; every trip in this
+        season states one, so the column never has to guess.
+      </p>
+      <p>
+        The two halves are one fact and are filtered as one. Holding Advanced
+        Open Water clears the word <em>Advanced</em> on a trip that also asks
+        for 50 logged dives, and you would still be turned away at the dock; an
+        <em>Open Water</em> week asking for 30 dives is closed to a diver that
+        an <em>Advanced</em> week asking for none would take.
       </p>
       <p>
         Two sources describe it &mdash; the operator&rsquo;s own itinerary
-        panel and PADI Travel &mdash; and on <b>49</b> of these trips they
-        disagree, in both directions. Neither is the authority; both are
-        quoting the same operator. The <b>stricter</b> of the two is shown, and
-        the line underneath names both, because a diver turned away at the dock
+        panel and PADI Travel &mdash; and both speak about <b>127</b> of these
+        trips. They disagree on <b>60</b> of those, in both directions: PADI
+        asks for more on 19 and for less on 41. Neither is the authority; both
+        are quoting the same operator. The <b>stricter</b> of the two is shown,
+        marked <span class="varies">2 sellers</span> in the column and named in
+        full when you expand the row, because a diver turned away at the dock
         has been misled and a diver who over-prepared has not.
       </p>
     </div>

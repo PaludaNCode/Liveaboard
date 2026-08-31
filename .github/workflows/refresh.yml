@@ -1,16 +1,24 @@
 name: Daily refresh
 
-# Re-scrape the source sites, rebuild the site, and commit the result.
+# The liveaboard.com crawl, and nothing else.
 #
-# This runs on GitHub's runners, which have ordinary internet access — so the
-# scrape works here even when a development sandbox is behind a restrictive
-# egress allowlist and cannot reach the sources at all.
+# It used to be four sources in one job — the ECB rates, this crawl, the
+# per-trip itinerary fragments and PADI's deals listing — so proving a change
+# to any of them meant running all of them. `tools/fetch_deals.py` makes **two
+# requests**, and the only way to exercise it on a runner was a job that
+# fetched 320 vessel pages from a site with nothing to do with the change
+# (#123). Those three now have their own workflows: `fx.yml`, `deals.yml` and
+# `itineraries.yml`, each dispatchable, each capped where a cap makes sense.
 #
-# The scrape writes a *candidate* file. Promoting a candidate into the live
-# dataset is a separate, reviewable step, so a source site changing its markup
-# degrades into "yesterday's prices plus a warning" rather than a site full of
-# blanks.
-
+# What is left is the expensive one. Four month listings plus one page per
+# vessel per season month, at the polite delay — roughly 320 requests and a
+# quarter of an hour — which is why it keeps the schedule and why it is worth
+# not running to test something else.
+#
+# Each of the four commits its own data *and* the dataset built from it,
+# because every one of those files is a promote input: committing an input
+# without re-promoting leaves `promote --check` red until something unrelated
+# heals it.
 on:
   schedule:
     # 04:15 UTC daily — outside European browsing hours, and after operators
@@ -20,10 +28,6 @@ on:
     inputs:
       max_pages:
         description: "Cap vessels crawled (0 = the adapter default)"
-        type: string
-        default: "0"
-      itinerary_limit:
-        description: "Cap trip fragments fetched (0 = every trip not yet read)"
         type: string
         default: "0"
       force_promote:
@@ -41,6 +45,8 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    outputs:
+      scraped: ${{ steps.scrape.outcome == 'success' }}
     timeout-minutes: 90
 
     steps:
@@ -50,23 +56,25 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run tests
-        run: PYTHONPATH=src python3 -m unittest discover -s tests
-
-      # Every advertised price is quoted in dollars and the site shows euro,
-      # so this one number sits under every figure on the page. Runs before the
-      # scrape so a slow crawl cannot push it past the ECB's publication.
+      # Only the tests that answer to `src/`. The ones that assert against
+      # committed data are a **publication** gate and are deliberately not run
+      # here — see tests/published.py. Running them in front of a fetch is how
+      # cabins.yml deadlocked on 2026-08-30: a stale cabin book contradicted
+      # the rows the refresh had just written, the suite failed on that, and
+      # the only job able to refresh the book exited before its fetch step.
       #
-      # continue-on-error because a missed rate is not worth losing a whole
-      # refresh over: the tool keeps the previous file, which still records the
-      # day it was quoted, and the page says when a rate has stopped moving.
-      - name: Refresh exchange rates
-        continue-on-error: true
-        run: python3 tools/fetch_fx.py --out data/fx.json
+      # A run that fetches and then refuses to publish is recoverable. One
+      # that refuses to fetch is not.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
-      # padi.com is parked: both its entry paths 404 and it contributes
-      # requirements, not prices. Scraping only what works keeps a failing
-      # source from muddying a good run.
+      # One source here, and not because the other is parked — that comment
+      # stood until 2026-08-30 and both halves of it had stopped being true:
+      # padi.com's entry paths answer 200, and it contributes a berth price on
+      # 654 sailings, 53 of which it is the only seller of. It is read by
+      # `padi.yml`, on its own cadence, through the JSON API rather than this
+      # adapter. What is left of the original point still holds: one source per
+      # job, so a failing crawl cannot muddy a good one.
       - name: Scrape liveaboard.com
         id: scrape
         continue-on-error: true
@@ -96,50 +104,6 @@ jobs:
       # not visit — which is what makes it safe to prove a new parser against
       # three real trips before pointing it at three hundred of somebody
       # else's pages. The same rule as `scrape_fees.py --limit`.
-      - name: Read what each trip says about itself
-        if: steps.scrape.outcome == 'success'
-        continue-on-error: true
-        run: |
-          python3 tools/fetch_itineraries.py \
-            --archive data/archive.json \
-            --out data/itineraries.json \
-            --snapshots data/snapshots \
-            --limit "${{ inputs.itinerary_limit || 0 }}"
-
-      # What the other seller is discounting, for the season this site
-      # publishes.
-      #
-      # One or two requests. `/liveaboard-deals/` is an AngularJS shell whose
-      # bundle is CDN-hosted, but the XHR behind it takes that page's own
-      # `country` and `date` parameters over plain HTTP and pages properly, so
-      # this needs no browser and no runner-only step.
-      #
-      # Unconditional, because it is a different source from the scrape above
-      # and a failed crawl says nothing about it. Immediately before the
-      # promote, because `data/deals.json` is a promote input: one commit
-      # should carry the new reading *and* the dataset built from it, or
-      # `promote --check` goes red until promote.yml heals it on the next push.
-      #
-      # A committed file rather than an artifact, and that is the whole design:
-      # a change log is a diff between two committed days. Re-reading recovers
-      # today's deals and never yesterday's, so a log computed from something
-      # that ages out becomes "no changes" a fortnight later without saying so.
-      #
-      # A same-day re-run fetches nothing at all -- not one request whose answer
-      # would be discarded.
-      - name: Read what PADI is discounting
-        continue-on-error: true
-        run: python3 tools/fetch_deals.py --out data/deals.json
-
-      - name: Promote the candidate
-        id: promote
-        if: steps.scrape.outcome == 'success'
-        continue-on-error: true
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli promote \
-            --candidate data/candidate.json \
-            --out data/egypt-2027.json \
-            ${{ inputs.force_promote && '--force' || '' }}
 
       - name: Report a blocked or empty scrape
         if: steps.scrape.outcome == 'failure'
@@ -157,80 +121,33 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
-      - name: Pick the dataset to publish
-        id: dataset
-        run: |
-          # Prefer promoted, scraped data; fall back to the seed so a failed
-          # scrape publishes yesterday's site rather than nothing.
-          if [ -f data/egypt-2027.json ]; then
-            echo "path=data/egypt-2027.json" >> "$GITHUB_OUTPUT"
-          else
-            echo "path=data/seed/egypt-2027.json" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Validate the dataset
-        run: PYTHONPATH=src python3 -m liveaboard.cli check --data ${{ steps.dataset.outputs.path }}
-
-      - name: Build the site
-        run: PYTHONPATH=src python3 -m liveaboard.cli build --data ${{ steps.dataset.outputs.path }}
-
-      # Before the commit, while HEAD is still yesterday's dataset. Afterwards
-      # the comparison would be against the run's own output.
+      # Hand over what was read, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
       #
-      # Three destinations, because a run summary is gone once the run ages
-      # out: the summary for whoever opens the run, data/CHANGES.md for the
-      # durable history, and one line captured for the commit subject so
-      # `git log --oneline data/` reads as the changelog it always was.
-      - name: Report what changed
-        id: changed
-        run: |
-          PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --data ${{ steps.dataset.outputs.path }} \
-            --revision HEAD \
-            --append data/CHANGES.md \
-            >> "$GITHUB_STEP_SUMMARY"
-          headline=$(PYTHONPATH=src python3 -m liveaboard.cli changes \
-            --data ${{ steps.dataset.outputs.path }} --revision HEAD --headline)
-          echo "headline=${headline}" >> "$GITHUB_OUTPUT"
+      # The seed fallback that used to live here is gone with the split rather
+      # than moved. It existed so a failed scrape published yesterday's site
+      # instead of nothing; the publish job checks out the branch tip, which
+      # already *is* yesterday's site, so the fallback could only ever produce
+      # a commit that changed nothing -- and the publish action now suppresses
+      # exactly that. A failed scrape skips the publish outright.
+      - uses: actions/upload-artifact@v4
+        if: steps.scrape.outcome == 'success'
+        with:
+          name: refresh-inputs-${{ github.run_id }}
+          path: |
+            data/candidate.json
+            data/archive.json
+            data/barren.json
+          retention-days: 1
 
-      - name: Commit changes
-        # Through the environment, not `${{ }}`: the headline carries boat
-        # names that came off somebody else's web page, and interpolating
-        # those straight into a shell line is how a scraped string becomes a
-        # command.
-        env:
-          HEADLINE: ${{ steps.changed.outputs.headline }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data site
-          if git diff --cached --quiet; then
-            echo "nothing changed today"
-            exit 0
-          fi
-          # Every run is a commit, so the git history doubles as price history:
-          # `git log -p data/` shows exactly which fee moved, and when — and
-          # the subject says which, so finding it does not mean opening 2 MB.
-          git commit -m "data: daily refresh $(date -u +%Y-%m-%d) — ${HEADLINE}"
-
-          # A scrape takes minutes, and anything can land meanwhile -- the
-          # other scheduled job, or a merge. A plain push is rejected and the
-          # whole run's data is thrown away. Rebase and retry instead.
-          # -X theirs favours the commit being replayed, which is ours: these
-          # files are regenerated output, so the fresh copy always wins.
-          #
-          # Rebase onto the branch this run is actually on. It used to rebase
-          # onto origin/main unconditionally, which is a no-op on any other
-          # branch -- so a run dispatched against a feature branch retried
-          # three times against the wrong ref and threw the scrape away.
-          branch="${GITHUB_REF_NAME}"
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:${branch}"; then
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt); rebasing onto origin/${branch}"
-            git fetch origin "$branch"
-            git rebase -X theirs FETCH_HEAD || { git rebase --abort; exit 1; }
-          done
-          echo "::error::could not push after 3 attempts"
-          exit 1
+  publish:
+    needs: refresh
+    if: needs.refresh.outputs.scraped == 'true'
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: refresh-inputs-${{ github.run_id }}
+      changes: true
+      force: ${{ inputs.force_promote || false }}
+      subject: "data: daily refresh {today}"
+      nothing: "nothing changed today"

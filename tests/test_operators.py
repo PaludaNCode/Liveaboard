@@ -18,6 +18,7 @@ from datetime import date
 
 from liveaboard.dataset import Dataset
 from liveaboard.promote import OPERATOR_ALIASES, UNKNOWN_OPERATOR, operator_record, promote
+from liveaboard.scrape.vessel import operator_from_markup
 from liveaboard.scrape.liveaboard_com import organizer_name
 
 SEASON = (date(2027, 5, 1), date(2027, 8, 31))
@@ -213,3 +214,89 @@ class TestPromoteAssignsOperators(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTheOperatorAVesselPageNames(unittest.TestCase):
+    """`Product.brand.name`, and the reason it had to be looked for.
+
+    Every operator on this page comes from an `Event.organizer`. A vessel
+    **liveaboard.com sells no berths on** has no `Event`, so 22 hulls fell back
+    to PADI's `fleetTitle` — a shelf on a booking site rather than a company,
+    and shouted: `BELLA LIVEABOARDS` where this field says `Bella Liveaboard`.
+
+    Measured on the 10 PADI-only vessels that have a liveaboard.com page at
+    all: **10 of 10** state a brand, and every one is the operating company.
+    """
+
+    def brand(self, name):
+        return (
+            '<script type="application/ld+json">'
+            '{"@type": "Product", "name": "MY Blue Pearl", "brand": '
+            '{"@type": "Brand", "name": "%s"}}</script>' % name
+        )
+
+    def test_the_brand_is_the_operator(self):
+        self.assertEqual(operator_from_markup(self.brand("Blue Planet Liveaboards")),
+                         "Blue Planet Liveaboards")
+
+    def test_a_page_with_no_product_node_states_nothing(self):
+        """Not a guess from the slug. A boat published under a name this code
+        invented is worse than one published under none."""
+        self.assertIsNone(operator_from_markup("<html><body>Blue Pearl</body></html>"))
+
+    def test_a_brand_with_no_name_states_nothing(self):
+        self.assertIsNone(operator_from_markup(
+            '<script type="application/ld+json">'
+            '{"@type": "Product", "brand": {"@type": "Brand"}}</script>'))
+
+    def test_whitespace_is_collapsed_and_nothing_else_is_touched(self):
+        """Verbatim otherwise, on the standing rule: tidying a company's
+        capitalisation is a short step from deciding what it is called."""
+        # The escape stays an escape: a raw newline inside a JSON string is
+        # invalid JSON, and the reader would rightly return None for it.
+        self.assertEqual(operator_from_markup(self.brand(r"Sea  Queen\n Fleet")),
+                         "Sea Queen Fleet")
+
+    def test_it_settles_the_two_blues_with_evidence_rather_than_tidiness(self):
+        """PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET
+        Fleet", and folding them on that alone asserted a company for a hull
+        our own source connected to nobody — so the alias was written and then
+        removed, correctly. Blue Pearl's own page states the company outright,
+        which is what was missing."""
+        self.assertEqual(operator_from_markup(self.brand("Blue Planet Liveaboards")),
+                         "Blue Planet Liveaboards")
+
+    def test_the_page_stated_operator_beats_padi_s_fleet_label(self):
+        """Not a judgement call: it is the same source every other operator on
+        this page comes from, against a shelf on the other one."""
+        from test_promote import candidate, departure
+
+        payload = promote(
+            candidate([departure(boat="blue-pearl")],
+                      itineraries=[{"id": "blue-pearl", "name": "Blue Pearl",
+                                    "boat": "MY Blue Pearl"}]),
+            season=SEASON,
+            fees={"vessels": {"blue-pearl": {"operator": "Blue Planet Liveaboards"}}},
+            padi={"collected": "2026-08-29", "vessels": {
+                "blue-pearl": {"slug": "my-blue-pearl", "name": "MY Blue Pearl",
+                               "operator": "BLUE PLANET"}}},
+        )
+        names = {o["name"] for o in payload["operators"]}
+        self.assertIn("Blue Planet Liveaboards", names)
+        self.assertNotIn("BLUE PLANET", names)
+
+    def test_padi_s_label_still_answers_where_no_page_states_one(self):
+        """12 of the 22 have no liveaboard.com page at all. A fleet label is
+        weaker than a stated company and better than a title-cased slug."""
+        from test_promote import candidate, departure
+
+        payload = promote(
+            candidate([departure(boat="seawolf-steel")],
+                      itineraries=[{"id": "seawolf-steel", "name": "Seawolf Steel",
+                                    "boat": "Seawolf Steel"}]),
+            season=SEASON,
+            padi={"collected": "2026-08-29", "vessels": {
+                "seawolf-steel": {"slug": "seawolf-steel", "name": "Seawolf Steel",
+                                  "operator": "SEAWOLF DIVING SAFARI"}}},
+        )
+        self.assertIn("SEAWOLF DIVING SAFARI", {o["name"] for o in payload["operators"]})

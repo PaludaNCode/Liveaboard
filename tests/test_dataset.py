@@ -6,16 +6,24 @@ import json
 import re
 import tempfile
 import unittest
+from html import unescape
 from urllib.parse import unquote
 from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
-from liveaboard.render import build_payload, icon_data_uri, render
+from liveaboard.render import (
+    build_payload,
+    icon_data_uri,
+    latest_entry,
+    render,
+)
 from liveaboard.scrape import jsonld, liveaboard_com
 from liveaboard.scrape.base import FetchResult
 from liveaboard.scrape.diagnose import describe
 from liveaboard.scrape.padi_com import PadiComAdapter
+
+import published
 
 ROOT = Path(__file__).resolve().parent.parent
 SEED = ROOT / "data" / "seed" / "egypt-2027.json"
@@ -263,6 +271,235 @@ ALLOWED_EXTERNAL: frozenset[str] = frozenset()
 EXTERNAL_REF = re.compile(r"""(?:src|href)\s*=\s*["'](https?://[^"']+)["']|url\(\s*["']?(https?://[^"')]+)""")
 
 
+class TestThePublicationGateIsComplete(unittest.TestCase):
+    """No test may open a fetched file for itself; that is what locks a fetcher out.
+
+    `cabins.yml` runs the suite before it fetches, so an assertion about
+    committed data sitting outside the gate can stop the only job able to
+    refresh that data — which is exactly what happened on 2026-08-30 and left
+    the pipeline circling. `tests/published.py` is the one door in, and this is
+    what keeps it the only one.
+
+    A convention would not do. The failure it guards against is a *new* test
+    written next month, by somebody with no reason to know any of this, that
+    reads `data/egypt-2027.json` because that is the obvious thing to do.
+
+    Textual rather than a walk of the syntax tree, because the thing being
+    forbidden is a path spelled out in source, and the two spellings of one are
+    easy to state. Prose is not matched: a docstring naming `data/fees.json` in
+    backticks carries no quote before `data/`, which is what the patterns
+    require.
+    """
+
+    PATH_LITERAL = re.compile(r"""["']data/(?P<name>[\w.-]+)["']""")
+    PATH_JOINED = re.compile(r"""["']data["']\s*/\s*["'](?P<name>[\w.-]+)["']""")
+
+    def test_no_test_opens_a_fetched_file_for_itself(self):
+        found: list[str] = []
+        for path in sorted((ROOT / "tests").glob("test_*.py")):
+            body = path.read_text(encoding="utf-8")
+            for pattern in (self.PATH_LITERAL, self.PATH_JOINED):
+                for match in pattern.finditer(body):
+                    if match.group("name") not in published.PUBLISHED:
+                        continue
+                    line = body[: match.start()].count("\n") + 1
+                    found.append(f"{path.name}:{line} {match.group(0)}")
+        self.assertEqual(
+            found, [],
+            "these reach into data/ directly; go through tests/published.py so "
+            "the assertion gates the commit rather than the fetch:\n  "
+            + "\n  ".join(found),
+        )
+
+    def test_the_gate_is_opted_into_and_never_out_of(self):
+        """A flag that must be remembered to get the *full* suite is a
+        publication gate that quietly stops running. `LIVEABOARD_TESTS=code` is
+        opted into, by the four jobs that fetch, and by nothing else."""
+        self.assertFalse(published.code_only({}))
+        self.assertFalse(published.code_only({published.GATE: ""}))
+        self.assertFalse(published.code_only({published.GATE: "all"}))
+        self.assertTrue(published.code_only({published.GATE: "code"}))
+
+
+class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
+    """The changelog panel must be the newest entry in `data/CHANGES.md`.
+
+    The page embeds that entry, and both data workflows **built the page before
+    appending to the file** — so the commit that produced the news shipped a
+    panel still showing the previous refresh's. It self-corrected on the next
+    rebuild, so nothing published was ever wrong; it was, on exactly the commit
+    that mattered, one refresh behind in saying so. On a site whose argument is
+    that published figures should be current, that is the wrong way round.
+
+    Asserted on the committed pair rather than on the order of steps in a YAML
+    file, because the property is what matters and a step order is only one way
+    to break it.
+    """
+
+    def test_the_committed_page_shows_the_committed_latest_entry(self):
+        history = latest_entry(published.committed("CHANGES.md")
+                               .read_text(encoding="utf-8"))
+        if not history.strip():
+            self.skipTest("no entry in data/CHANGES.md yet")
+        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        panel = re.search(r'<pre class="changelog">(.*?)</pre>', page, re.S)
+        self.assertIsNotNone(panel, "the built page has no changelog panel")
+        self.assertEqual(
+            unescape(panel.group(1)).strip(), history.strip(),
+            "the published page's changelog is not the newest entry in "
+            "data/CHANGES.md -- something built the page before appending to it")
+
+
+class TestARebuildIsNotNews(unittest.TestCase):
+    """The publish action must normalise the same stamp `render` writes.
+
+    `cli build` stamps the page with the minute it ran — deliberately, so two
+    builds an hour apart can be told apart — which means `site/index.html`
+    differs on every run whether or not any data did. So the "nothing to
+    commit" exit could never fire, and seven data jobs a day committed seven
+    times a day regardless: a line in `git log --oneline data/` that moved no
+    price, and a deploy that published nothing new. Three of fourteen commits
+    on `main` were that.
+
+    `.github/actions/publish` now treats a page differing *only* by that stamp
+    as nothing to say. The two are coupled by the literal JSON key, and
+    silently: rename it in `render` and the action's normalisation stops
+    matching, the check stops firing, and the no-op commits come back with
+    nothing failing. Same shape as `pricing._is_counted` and `lineCounts`, and
+    pinned for the same reason.
+    """
+
+    #: The shell moved out of `action.yml` into a file of its own so the
+    #: rebase branch could be tested (#127). This guard followed it, and reads
+    #: both: the script for the logic, the action for the wiring that reaches
+    #: it. Keying on only one of the two is how a check ends up looking at a
+    #: file the behaviour no longer lives in.
+    ACTION = ROOT / ".github" / "actions" / "publish" / "action.yml"
+    SCRIPT = ROOT / ".github" / "actions" / "publish" / "push.sh"
+
+    def test_the_action_actually_runs_the_script(self):
+        """Otherwise everything below inspects a file nothing executes."""
+        self.assertTrue(self.SCRIPT.exists(), "push.sh is gone")
+        self.assertIn("push.sh", self.ACTION.read_text(encoding="utf-8"),
+                      "the action no longer runs push.sh, so the checks below "
+                      "are reading a script that never runs")
+
+    def test_the_page_carries_a_build_stamp_under_the_key_the_action_strips(self):
+        key = re.search(r'"(\w+)": datetime\.now', (ROOT / "src" / "liveaboard"
+                        / "render.py").read_text(encoding="utf-8"))
+        self.assertIsNotNone(key, "render.py no longer stamps the payload")
+        # assertTrue rather than assertIn: a missing substring prints the
+        # whole haystack, and the haystack is the entire action.
+        self.assertTrue(
+            f'"{key.group(1)}":' in self.SCRIPT.read_text(encoding="utf-8"),
+            f"render stamps {key.group(1)!r} and the publish action does not "
+            f"normalise it; every rebuild would commit again, silently")
+
+    def test_the_action_still_has_the_check(self):
+        body = self.SCRIPT.read_text(encoding="utf-8")
+        self.assertTrue("site/index.html" in body, "the stamp check is gone")
+        self.assertTrue("exclude" in body,
+                        "the check must ignore the page when deciding whether "
+                        "anything else was staged")
+
+
+class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
+    """A job that pushes is the only CI its own commit will ever get.
+
+    GitHub does not trigger workflows on pushes made with the default
+    `GITHUB_TOKEN` -- the standard guard against a job triggering itself -- and
+    every scheduled job here pushes with exactly that token. So no scheduled
+    data commit has ever had a CI run against it, and on 2026-08-30 that let
+    the daily refresh publish 36 sailings advertising a berth nobody could buy
+    and leave `main` red for about seven hours. The only thing that noticed was
+    a person opening an unrelated pull request.
+
+    So a workflow that pushes must run CI's own list before it does, and it
+    must be *the* list rather than a copy: `.github/actions/checks` is used by
+    `ci.yml` too, which is what makes "the same bar" a fact instead of an
+    intention.
+
+    Textual, because the alternative is a YAML parser and this project has no
+    runtime dependencies to spend one on.
+    """
+
+    WORKFLOWS = ROOT / ".github" / "workflows"
+    CHECKS = "uses: ./.github/actions/checks"
+    PUBLISH = "uses: ./.github/actions/publish"
+    #: The serialised publish job every data workflow now delegates its tail
+    #: to. A caller reaches the push through this rather than containing it,
+    #: which is the third spelling this guard has had to learn -- first inline
+    #: `git push origin`, then the shared action, now the shared workflow.
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
+
+    def test_the_shared_actions_exist(self):
+        for name in ("checks", "publish"):
+            self.assertTrue((ROOT / ".github" / "actions" / name / "action.yml").exists(), name)
+
+    def test_ci_runs_the_shared_list_rather_than_its_own(self):
+        """Otherwise the two drift, and the data jobs are running yesterday's
+        idea of what a commit has to satisfy."""
+        self.assertIn(self.CHECKS, (self.WORKFLOWS / "ci.yml").read_text(encoding="utf-8"))
+
+    def test_the_guard_can_still_see_a_push(self):
+        """This test nearly stopped working the day the push moved.
+
+        It keyed on the string `git push origin`, and #123 factored that into
+        `.github/actions/publish` — after which no workflow contained it, every
+        workflow trivially passed, and the guard was green because it had
+        nothing left to look at. A check that silently stops checking is worse
+        than no check, so the thing it looks for is asserted to exist.
+        """
+        pushing = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                   if self._pushes(p.read_text(encoding="utf-8"))]
+        self.assertGreaterEqual(
+            len(pushing), 5,
+            "no workflow appears to push; has the mechanism moved again?")
+
+    @staticmethod
+    def _pushes(body: str) -> bool:
+        """Whether a workflow commits to the repository, however it does it."""
+        cls = TestEveryPushingWorkflowChecksItself
+        return ("git push origin" in body
+                or cls.PUBLISH in body
+                or cls.DELEGATE in body)
+
+    def test_only_the_shared_action_carries_the_push(self):
+        """One definition of the rebase-and-retry. It is subtle — `-X theirs`
+        so the replayed commit wins, and the branch from `GITHUB_REF_NAME`
+        rather than main — and six copies of it were six chances to drift."""
+        loose = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                 if "push rejected (attempt" in p.read_text(encoding="utf-8")]
+        self.assertEqual(loose, [], f"these re-implement the push loop: {loose}")
+
+    def test_the_shared_publish_workflow_runs_the_checks(self):
+        """The delegation below is only sound because this holds.
+
+        Seven callers stopped containing the checks step when their tail moved
+        into `publish.yml`; if that workflow ever stops running the list, all
+        seven go unchecked at once and every one of them still looks fine.
+        """
+        body = (self.WORKFLOWS / "publish.yml").read_text(encoding="utf-8")
+        self.assertIn(self.CHECKS, body)
+        self.assertIn(self.PUBLISH, body)
+
+    def test_every_workflow_that_pushes_runs_them_first(self):
+        unchecked = [
+            path.name
+            for path in sorted(self.WORKFLOWS.glob("*.yml"))
+            if self._pushes(body := path.read_text(encoding="utf-8"))
+            # Either it runs the list itself, or it hands the whole tail to
+            # the one workflow that does -- asserted directly above.
+            and self.CHECKS not in body
+            and self.DELEGATE not in body
+        ]
+        self.assertEqual(
+            unchecked, [],
+            "these push commits that no CI run will ever see; add "
+            f"`{self.CHECKS}` before the commit step: {unchecked}",
+        )
+
+
 class TestNoUnexpectedExternalReferences(unittest.TestCase):
     """The page ships as one file; anything it fetches at runtime is a claim.
 
@@ -504,7 +741,6 @@ class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
     price landed on the August page and saw a different number.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
 
     def test_the_column_prefers_the_departure_over_the_vessel_page(self):
         """Asserted on the built page, because this is a choice app.js makes.
@@ -526,9 +762,7 @@ class TestTheSourceLinkFollowsTheDeparture(unittest.TestCase):
         page, `m=05/2027` from a departure -- so the comparison is on the
         number, not the text.
         """
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
-        payload = build_payload(Dataset.load(self.LIVE))
+        payload = published.page()
         checked = 0
         for departure in payload["departures"]:
             url = departure.get("booking_url") or ""
@@ -560,12 +794,11 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
     asserts the dataset and `ALLOWED_EXTERNAL` asserts the page fetches nothing.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
     TEMPLATE = ROOT / "templates" / "index.html"
 
     def nitrox_by_vessel(self) -> dict[str, int]:
         """How many *boats* fall in each state. Nitrox is a vessel's policy."""
-        payload = build_payload(Dataset.load(self.LIVE))
+        payload = published.page()
         state: dict[str, str] = {}
         for departure in payload["departures"]:
             itinerary = payload["itineraries"][departure["itinerary_id"]]
@@ -585,8 +818,6 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         return counts
 
     def test_the_stated_vessel_counts_are_the_real_ones(self):
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
         counts = self.nitrox_by_vessel()
         html = self.TEMPLATE.read_text(encoding="utf-8")
         for number, state in (
@@ -609,10 +840,9 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         Naming a state nobody will see is a smaller sin than the reverse and
         still a claim about the data that the data does not support.
         """
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
+        counts = self.nitrox_by_vessel()
         html = self.TEMPLATE.read_text(encoding="utf-8")
-        if not self.nitrox_by_vessel().get("listed_unpriced"):
+        if not counts.get("listed_unpriced"):
             self.assertTrue(
                 "extra, no price" not in html,
                 "the footer offers 'extra, no price' as a nitrox state, and no "
@@ -648,7 +878,6 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     actually reads goes missing.
     """
 
-    LIVE = ROOT / "data" / "egypt-2027.json"
     APP = ROOT / "templates" / "app.js"
 
     NEVER_SHIPPED = ("charged", "charged_max", "counted", "basis", "provenance")
@@ -656,8 +885,7 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     def lines(self, live=False):
         """The live dataset where asked for: the seed prices no fee as a range,
         so `display_max` legitimately appears on none of its lines."""
-        source = self.LIVE if live and self.LIVE.exists() else SEED
-        payload = build_payload(Dataset.load(source))
+        payload = published.page() if live else build_payload(Dataset.load(SEED))
         out = []
         for itinerary in payload["itineraries"].values():
             out.extend(itinerary.get("lines") or [])
@@ -684,8 +912,6 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
     def test_the_fields_the_page_does_read_are_all_present(self):
         """The other half of the guard. Trimming further has to fail here."""
         app = self.APP.read_text(encoding="utf-8")
-        if not self.LIVE.exists():
-            self.skipTest("no scraped dataset in this checkout")
         needed = [f for f in ("code", "label", "tier", "display", "display_max",
                               "has_price", "included", "toggle", "note", "fx")
                   if "line." + f in app or "." + f in app]
@@ -843,7 +1069,10 @@ class TestPayloadIsRead(unittest.TestCase):
     diver away for -- reachable only by downloading the JSON. The column that
     printed it was removed for good reasons and nothing replaced it, which is
     the exact shape of failure this class exists to catch: not a wrong number,
-    a fact silently withdrawn.
+    a fact silently withdrawn. The column is back, the vocabulary it reads is
+    `entry_bars`, and `level_labels` is gone from the payload rather than left
+    in it unread -- which is this class getting the outcome it was written for,
+    in both directions.
 
     Deliberately a check on the *keys*, not on the rendering. Whether the bar
     reads well is a matter of taste; whether anything reads it at all is not.
@@ -859,8 +1088,47 @@ class TestPayloadIsRead(unittest.TestCase):
                       "own label, which is built from this table in Python",
     }
 
+    #: The same, per itinerary and per departure. Also empty, and the emptiness
+    #: is worth more here: a top-level key ships once, an itinerary key ships
+    #: 402 times and a departure key 1,122, so this is the level where an
+    #: unread field is measured in tens of kilobytes rather than in bytes.
+    ITINERARY_UNREAD: dict[str, str] = {}
+    DEPARTURE_UNREAD: dict[str, str] = {}
+
     def app(self) -> str:
         return self.APP.read_text(encoding="utf-8")
+
+    def code(self) -> str:
+        """`app.js` with its comments removed.
+
+        Searching the raw source cannot tell a reader from a mention, and this
+        file is a third prose by weight -- 69 KB of the 190. Four fields were
+        unread while every one of them appeared in a comment, and `operator`
+        appeared five times in code as an ordinary English word inside a
+        sentence the page prints ("This operator publishes no required
+        extras"), never once as a property. A guard that accepted those would
+        be green for the wrong reason, which is the failure this class is
+        about.
+
+        Block comments only, because `app.js` has no line comments at all --
+        stripping `//` would cut the tail off any URL in a string literal.
+        `test_the_source_has_no_line_comments` holds that assumption up.
+        """
+        return re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+
+    def reads(self, key: str) -> bool:
+        """Whether the page reads `key` as a property, in code rather than prose.
+
+        Dot access or a quoted subscript. A key that appears only as a bare
+        word is not a reader.
+        """
+        pattern = r"\." + re.escape(key) + r"\b|[\[(,]\s*[\"']" + re.escape(key) + r"[\"']"
+        return re.search(pattern, self.code()) is not None
+
+    def rows(self, payload: dict, level: str) -> list[dict]:
+        source = (payload["itineraries"].values() if level == "itineraries"
+                  else payload["departures"])
+        return list(source)
 
     def payload(self) -> dict:
         return build_payload(Dataset.load(SEED))
@@ -877,20 +1145,123 @@ class TestPayloadIsRead(unittest.TestCase):
                     f"either print it or stop serialising it",
                 )
 
+    def test_the_source_has_no_line_comments(self) -> None:
+        """`code()` strips block comments only, and this is why that is enough.
+
+        If `//` comments ever appear, either they start hiding readers from
+        the guard or stripping them starts cutting URLs in half. Either way
+        somebody has to decide, rather than find out from a green build.
+        """
+        stripped = re.sub(r"/\*.*?\*/", "", self.app(), flags=re.S)
+        offenders = [n for n, line in enumerate(stripped.splitlines(), 1)
+                     if re.match(r"\s*//", line)]
+        self.assertEqual(offenders, [], "app.js has line comments now")
+
+    def test_every_itinerary_key_has_a_reader(self) -> None:
+        """The level where the bytes are.
+
+        `test_every_top_level_key_has_a_reader` walked the payload's top level
+        and nothing walked below it, so four fields shipped unread to every
+        visitor -- `summary` at 63 KB, `operator`, `one_way` and a
+        `spaces_left` that was null on all 1,122 rows. 75 KB of a page that
+        lazily fetches nothing, past a guard whose docstring says every fact
+        the page ships is a fact the page prints.
+        """
+        for key in {k for row in self.rows(self.payload(), "itineraries") for k in row}:
+            if key in self.ITINERARY_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"every itinerary ships {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_every_departure_key_has_a_reader(self) -> None:
+        """The same, one level down and 1,122 rows wide."""
+        for key in {k for row in self.rows(self.payload(), "departures") for k in row}:
+            if key in self.DEPARTURE_UNREAD:
+                continue
+            with self.subTest(key=key):
+                self.assertTrue(
+                    self.reads(key),
+                    f"departures ship {key!r} and app.js never reads it; "
+                    f"either print it or stop serialising it",
+                )
+
+    def test_the_committed_dataset_ships_no_unread_key_the_seed_lacks(self) -> None:
+        """The two tests above run on the seed, which is what keeps them ahead
+        of the fetch. The seed carries neither seller's second bill, no cabin
+        ladder and no sale, so five keys exist only once real data is loaded --
+        and a dead one among them would never be reached. This is the same
+        assertion over the committed payload, which makes it a publication gate
+        rather than a code test, and it goes through `published` for that.
+        """
+        payload = published.page()
+        for level, allowed in (("itineraries", self.ITINERARY_UNREAD),
+                               ("departures", self.DEPARTURE_UNREAD)):
+            for key in {k for row in self.rows(payload, level) for k in row}:
+                if key in allowed:
+                    continue
+                with self.subTest(level=level, key=key):
+                    self.assertTrue(
+                        self.reads(key),
+                        f"{level} ship {key!r} and app.js never reads it",
+                    )
+
     def test_the_entry_bar_reaches_the_page(self) -> None:
         """The specific fact this class was written for.
 
         A stated safety requirement is the one kind of number here that is not
         about money, and it is the whole of what the second source was added
-        for. It travels from the itinerary record through `level_labels` into
-        the expanded row, and every step of that has to be present.
+        for. It travels from the itinerary record through `entry_bars` into a
+        column and a filter bank, and every step of that has to be present.
+
+        `level_labels` used to be the vocabulary named here, and this assertion
+        outlived it: once the phrase was built from the certification and the
+        dive count instead, the only "level_labels" left in `app.js` was the
+        word inside a comment -- which this test would have accepted. A check
+        that passes on its own history is the failure this module exists to
+        catch, so it names the reader rather than the string.
         """
         source, payload = self.app(), self.payload()
         self.assertIn("requirements", source, "app.js reads no entry bar")
-        self.assertIn("level_labels", source, "app.js has no vocabulary for it")
+        self.assertIn("entry_bars", source, "app.js has no vocabulary for it")
         self.assertIn("min_level", source, "app.js reads no certification level")
+        self.assertIn("min_logged_dives", source, "app.js reads no dive count")
+        self.assertIn('k: "entry"', source, "the page has no Entry bar column")
         bars = [i for i in payload["itineraries"].values() if i.get("requirements")]
         self.assertTrue(bars, "the seed itself states no entry bar to print")
+
+    def test_the_entry_bar_column_is_in_every_column_order(self) -> None:
+        """A column missing from an order is appended, so it cannot vanish --
+        but it lands after the provenance columns, at the far right of a table
+        this wide, which for the one column that says whether a row is bookable
+        at all is barely different from being gone. Four orders, four layouts,
+        and the phone one is where it matters most."""
+        source = self.app()
+        for name in ("var ORDER", "var PHONE_ORDER", "var TINY_ORDER",
+                     "var COMPACT_ORDER"):
+            with self.subTest(order=name):
+                body = source[source.index(name):]
+                body = body[: body.index("]")]
+                self.assertIn('"entry"', body, f"{name} does not place the column")
+
+    def test_the_entry_bar_is_never_softened_by_the_page(self) -> None:
+        """The printed dive count is the greater of the two numbers.
+
+        `advanced_50` means fifty dives by definition, and a trip stating a
+        smaller `min_logged_dives` beside it must not print the smaller one:
+        that would publish a bar below the certification the same record also
+        demands. The rule is one `Math.max` in `entryDives`, which is exactly
+        the kind of line a later edit reverses without noticing.
+        """
+        source = self.app()
+        body = source[source.index("function entryDives"):]
+        body = body[: body.index("}")]
+        self.assertIn("Math.max", body,
+                      "entryDives must take the greater of the stated and the "
+                      "implied dive count, never the stated one alone")
 
     def test_the_second_seller_is_reachable_and_explained(self) -> None:
         """A second seller prices these rows, so a reader can get to it.
@@ -1104,14 +1475,70 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
 
     WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
     PUBLISHED = ("data", "site")
+    PUBLISH = "uses: ./.github/actions/publish"
+    DELEGATE = "uses: ./.github/workflows/publish.yml"
+
+    @staticmethod
+    def is_reusable(text: str) -> bool:
+        """Whether this is a called tail rather than a workflow of its own.
+
+        `workflow_call` workflows fire no `workflow_run` event -- the *caller's*
+        run is what completes -- so `publish.yml` must never be required in
+        pages.yml's watch list, and adding it would watch nothing.
+
+        Stated rather than left to luck. This guard already passed on it for
+        the wrong reason: `commits_published_files` looks for the first
+        `paths:` line, and in publish.yml that is the *input declaration*,
+        which has no value, so the check fell through and returned False. The
+        answer was right and the reasoning was an accident, which is one
+        refactor away from being wrong and still green.
+        """
+        return "workflow_call:" in text
 
     def commits_published_files(self, text: str) -> bool:
-        """Whether the workflow git-adds anything the page is built from."""
+        """Whether the workflow commits anything the page is built from.
+
+        Two spellings, and the second is why this reads the action rather than
+        the shell. It used to scan for `git add`, and #123 moved every one of
+        those into `.github/actions/publish` — after which no workflow matched,
+        every workflow was skipped, and this test passed by having nothing left
+        to look at. Same failure as the push guard above, from the same commit.
+        """
+        marker = max(text.find(self.PUBLISH), text.find(self.DELEGATE))
+        if marker >= 0:
+            # Only `paths:` *after* the publish step, because `on: push:` has a
+            # `paths:` of its own and `re.search` over the whole file finds that
+            # one first. fees.yml and promote.yml both have such a trigger, and
+            # reading it as a staging list made this guard stop requiring the
+            # two of them -- silently, and in the direction where a data commit
+            # lands and the page keeps serving an older build.
+            staged = re.search(r"^\s*paths:\s*[\"']?([^\n]*?)[\"']?\s*$",
+                               text[marker:], re.M)
+            value = staged.group(1).strip() if staged else ""
+            # An empty or interpolated value is the default, `data site`.
+            names = (["data"] if not value or value.startswith("${{")
+                     else re.findall(r"[\w./-]+", value))
+            if any(n.split("/")[0] in self.PUBLISHED for n in names):
+                return True
         for line in re.findall(r"^\s*git add\s+(.*)$", text, re.M):
             for path in re.findall(r"[\w./-]+", line):
                 if path.split("/")[0] in self.PUBLISHED:
                     return True
         return False
+
+    def test_the_guard_can_still_see_a_data_commit(self):
+        """Asserted, because this test has already been silently blinded once.
+
+        A check that stops checking is worse than no check: it is green for the
+        wrong reason, and green is what everybody reads.
+        """
+        seen = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                if p.name != "pages.yml"
+                and self.commits_published_files(body := p.read_text(encoding="utf-8"))
+                and not self.is_reusable(body)]
+        self.assertGreaterEqual(
+            len(seen), 5,
+            f"only {seen} appear to commit data; has the mechanism moved again?")
 
     def test_the_deploy_watches_every_workflow_that_writes_the_site(self):
         pages = (self.WORKFLOWS / "pages.yml").read_text(encoding="utf-8")
@@ -1124,7 +1551,7 @@ class TestEveryDataCommitReachesThePage(unittest.TestCase):
             if path.name == "pages.yml":
                 continue
             text = path.read_text(encoding="utf-8")
-            if not self.commits_published_files(text):
+            if not self.commits_published_files(text) or self.is_reusable(text):
                 continue
             name = re.search(r"^name:\s*(.+)$", text, re.M)
             self.assertIsNotNone(name, f"{path.name} has no name:")
@@ -1253,9 +1680,7 @@ class TestTheSellerFilter(unittest.TestCase):
         derivation of "who sells this" would be a second answer, and the chip
         counts would drift from the links beside them.
         """
-        if not (ROOT / "data" / "egypt-2027.json").exists():
-            self.skipTest("no dataset in this checkout")
-        payload = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))
+        payload = published.page()
         counts = {"both": 0, "liveaboard": 0, "padi": 0}
         for d in payload["departures"]:
             counts["padi" if d.get("padi_only")
@@ -1313,13 +1738,11 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
     """
 
     def test_the_payload_carries_a_build_stamp(self) -> None:
-        if not (ROOT / "data" / "egypt-2027.json").exists():
-            self.skipTest("no dataset in this checkout")
-        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        meta = published.page()["meta"]
         self.assertRegex(meta["built"], r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC$")
 
     def test_it_is_not_the_crawl_date_wearing_a_new_name(self) -> None:
-        meta = build_payload(Dataset.load(ROOT / "data" / "egypt-2027.json"))["meta"]
+        meta = published.page()["meta"]
         self.assertNotEqual(meta["built"], meta["generated"])
         self.assertRegex(meta["generated"], r"^\d{4}-\d{2}-\d{2}$",
                          "the crawl date must stay a date: it is a day, not a moment")
@@ -1483,3 +1906,277 @@ class TestTheThreeViews(unittest.TestCase):
         self.assertIn("tabindex=\"-1\"", page,
                       "no pane can be focused, so a view change is announced by nothing")
         self.assertIn(".focus()", app, "nothing moves focus into the view that appeared")
+
+class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
+    """Rules that live in `app.js` and have no Python to test, so the guard is
+    that the built page still contains them.
+
+    Two of them, and they are the same rule twice. **One date over two sellers
+    dates half of them wrong**: `berths_read` and `padi_berths_read` are two
+    crawls two days apart, and the sale marks stamped the first over both --
+    on 124 rows resting partly on the second and 2 resting entirely on it.
+    And **the two sellers' offers belong on one row**: they were drawn as two
+    tables sharing no column, ten boats in each with no way to read across, and
+    a merge that keys on either seller's list alone drops the other's.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def source(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def test_a_sale_mark_dates_each_seller_separately(self):
+        app = self.source()
+        self.assertIn("function namedReadings(", app)
+        self.assertIn("namedReadings(d.sale.sellers)", app)
+        self.assertNotIn(
+            'var read = D.meta.berths_read ? ", read "', app,
+            "the sale mark is stamping one crawl's date over both sellers again",
+        )
+
+    def test_the_page_draws_one_table_for_both_sellers(self):
+        app = self.source()
+        self.assertIn("function offersTable(", app)
+        for gone in ("function fleetTable(", "function dealsTable("):
+            self.assertNotIn(
+                gone, app,
+                f"{gone} is back; the two sellers' offers are two tables again",
+            )
+
+    def test_the_merge_keeps_a_boat_only_one_seller_names(self):
+        """The union, not the intersection.
+
+        Ten boats fill both halves today, so keying on the fleet rows alone
+        passes every test and silently drops a PADI offer for a boat no ladder
+        has caught -- out of the panel headed "what is discounted", which is
+        this site's own reported failure in somebody else.
+        """
+        app = self.source()
+        block = re.search(r"function offerRows\((.*?)\n  \}", app, re.S)
+        assert block, "offerRows() not found in app.js"
+        self.assertIn("if (!byBoat[o.boat])", block.group(1))
+
+    def test_the_panel_states_what_it_could_not_read(self):
+        app = self.source()
+        self.assertIn("function coverageNote(", app)
+        for field in ("dropped", "unread", "banner_unsupported"):
+            with self.subTest(field=field):
+                self.assertIn("coverage." + field, app)
+
+    def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
+        """One figure in that column means three different things -- both
+        sellers quote it, PADI quotes it and cannot be totalled, or nobody
+        else was asked -- and they printed identically."""
+        app = self.source()
+        self.assertIn("function whoAdvertised(", app)
+        self.assertIn("whoAdvertised(d, row)", app)
+
+
+class TestThePageIsWhatItsDataBuilds(unittest.TestCase):
+    """The committed page must be what the committed data renders to.
+
+    `promote --check` proves `data/egypt-2027.json` is what the parser makes of
+    the committed inputs. Nothing made the same claim about `site/index.html`,
+    and the gap is not theoretical: on 2026-08-31 the published page said
+    ``berths_read: 2026-08-28`` while `data/cabins.json` committed beside it
+    said ``2026-08-31``. The site told visitors the berth counts were three
+    days older than the data it shipped them with.
+
+    It arrived through the publish action's rebase. Two data jobs overlapped;
+    `-X theirs` favours the commit being replayed, which is right for the
+    reading that job took and wrong for the *derived* files, which are nobody's
+    reading -- they were built at checkout, before the other job's inputs
+    landed. So a stale page overwrote a fresh one. `promote --check` stayed
+    green the whole time, because the dataset really did match its inputs; only
+    the page was behind. The next run rebuilt and healed it, which is what
+    makes this worth a test rather than a fix alone: the window was real,
+    deployed, and closed itself before anyone could see it.
+
+    The action now re-derives after a rebase. This is the net under that, and
+    the reason it is a test rather than another step in `.github/actions/
+    checks`: `checks` runs before the push, and the rebase only happens after
+    the push is rejected, so by the time this can go wrong `checks` is over.
+    """
+
+    STAMP = re.compile(r'"built":"[^"]*"')
+
+    def test_the_committed_page_matches_a_fresh_render_of_the_committed_data(self):
+        committed = published.site_page()
+        import tempfile
+
+        from liveaboard.render import render
+
+        with tempfile.TemporaryDirectory() as tmp:
+            fresh = render(published.dataset(), tmp, data_dir=published.DATA)
+            a = self.STAMP.sub("", committed.read_text(encoding="utf-8"))
+            b = self.STAMP.sub("", fresh.read_text(encoding="utf-8"))
+
+        # The payload is one enormous line, so a diff would print the whole
+        # page. Report where they part instead, which is what names the field.
+        if a != b:
+            i = next((k for k in range(min(len(a), len(b))) if a[k] != b[k]),
+                     min(len(a), len(b)))
+            self.fail(
+                "site/index.html is not what data/ builds — the page is behind "
+                f"its own data.\n  committed: ...{a[max(0, i - 90):i + 90]}\n"
+                f"  rebuilt  : ...{b[max(0, i - 90):i + 90]}"
+            )
+
+
+class TestThePublishTailDoesNotQueueOnConcurrency(unittest.TestCase):
+    """`publish.yml` must not carry a `concurrency` group.
+
+    #128 asked for the push to be serialised so two data sources could not
+    collide. It was implemented that way -- one group shared across every
+    caller, `cancel-in-progress: false` -- and it lost data on the first test.
+
+    GitHub's concurrency is not a queue. A group holds one running job and
+    **one** pending; a third arrival cancels the pending one. On three
+    simultaneous dispatches, `deals.yml` read PADI's deals, uploaded them, and
+    had its publish job cancelled four seconds later without running a step:
+    a day's figures for that source fetched and thrown away, the run reading
+    *cancelled* rather than failed, which nothing alerts on.
+
+    Strictly worse than the race. The race published a wrong freshness date
+    that healed within the hour; this silently drops a reading.
+
+    The race is closed by the split instead -- the publish job derives from the
+    branch tip it just checked out -- so the group bought nothing it did not
+    also cost. A test, because "we tried the obvious thing and it ate a commit"
+    is exactly the knowledge a comment loses to the next refactor.
+    """
+
+    WORKFLOW = ROOT / ".github" / "workflows" / "publish.yml"
+
+    def test_the_reusable_tail_has_no_concurrency_group(self):
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        live = [line for line in body.splitlines()
+                if line.strip().startswith("concurrency:")]
+        self.assertEqual(
+            live, [],
+            "publish.yml has a concurrency group again; GitHub's is not a "
+            "queue and will cancel a pending publish, discarding a reading "
+            "that was already fetched. See this test's docstring.")
+
+    def test_the_reason_is_written_down_where_somebody_would_add_one(self):
+        """The comment is the fix here; a bare absence invites the re-add."""
+        body = self.WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("not a queue", body)
+        self.assertIn("cancels the pending", body)
+
+
+class TestTheOnSaleChipCountsWhatIsOnScreen(unittest.TestCase):
+    """Every filter count on the page answers "what if I picked this too?".
+
+    The On sale chip did not. It was counted once at load, over the whole
+    dataset, and never moved -- so it read "On sale 229" beside a table
+    filtered to a boat with no sale on it, and the click then produced an empty
+    result. **58 of the 77 boats have sailings and no sale at all**, so that
+    was the common case rather than a corner ([#129]).
+
+    The old comment argued the stale number said "how much there is to find"
+    rather than how much the filters had left, and that a 0 would read as "no
+    sales" rather than "none in June". It does not survive the rest of the
+    panel: every other number here is filter-relative, so one that is not
+    teaches only that this one lies, and the reader still learns "none in
+    June" -- by ending up with an empty table instead of by reading a 0. The
+    confusion was deferred past a click, not avoided.
+
+    Two things make the fix work and both are asserted, because either alone
+    is wrong:
+
+    * `passes` has to let the sale filter **exclude itself**, the way `months`,
+      `ports` and `boats` already do. Without that, switching the chip on makes
+      its own count equal the visible rows and it can never guide the way back.
+    * the chip has to be a **bank**, so it re-counts on every draw through the
+      same `recount()` hook as the rest. Counting it anywhere else is a second
+      mechanism to keep in step.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_sale_filter_can_exclude_itself(self):
+        # `saleOnly()` rather than `state.onSaleOnly`: the sale view holds the
+        # same filter down as a destination, and the skip has to sit outside
+        # both readings or the rail cannot count the view it is not on.
+        self.assertIn('if (skip !== "sale" && saleOnly()', self.app,
+                      "passes() must accept a `sale` skip, or the chip's own "
+                      "count collapses onto the visible rows once it is on")
+
+    def test_the_chip_recounts_with_every_other_bank(self):
+        """It must go through `BANKS`, not a count taken once at load."""
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("BANKS.push(", after)
+        self.assertIn('passes(dep, D.itineraries[dep.itinerary_id], "sale")', after)
+
+    def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self):
+        """`chips()` drops an unreachable option; a lone toggle must not.
+
+        A bank can drop one because the reader sees the others and infers the
+        rule. A single control that vanishes reads as a feature that is gone.
+        It stays, disabled, saying 0 -- and stays clickable while it is *on*,
+        for the same reason a picked chip survives at zero: the way out must
+        not disappear.
+        """
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("n === 0 && !state.onSaleOnly", after)
+        self.assertIn("onSale.disabled = dead", after)
+        self.assertNotIn("onSale.hidden = true", after)
+
+    def test_the_disabled_chip_is_styled(self):
+        """Otherwise "0" and a live count look identical and it invites a
+        click that does nothing."""
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn("button.chip:disabled", css)
+
+
+class TestTheEntryBankFoldsAtItsCertificationBoundary(unittest.TestCase):
+    """The entry bank has a "show more" now, and it must not cut at a count.
+
+    Every other bank caps at eight, because the eight commonest ports or boats
+    are a fair sample of a set with no order of its own. The entry bar is a
+    *ladder*, least demanding to most, and a count-based cut there is arbitrary
+    and brutal: at eight it folds away 738 of 1122 rows, every Advanced rung,
+    and the single biggest bar on the page -- Advanced + 50 dives, on 289 rows
+    -- which sorts last precisely because it is the strictest.
+
+    So it cuts where the certification changes instead. That puts every Open
+    Water rung on screen and every Advanced rung behind the disclosure, which
+    is a fold a reader can predict, and the label says which way it opens.
+
+    Pinned because the obvious tidy-up -- "why does this one bank pass a limit
+    function, let us just use chipLimit()" -- silently restores exactly the
+    behaviour the fold was designed to avoid, and nothing on the page would
+    look wrong afterwards.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.entry = self.app[self.app.index('chips("entry"'):]
+        self.entry = self.entry[:self.entry.index('chips("sellers"')]
+
+    def test_the_entry_bank_passes_a_boundary_limit_rather_than_the_count(self):
+        self.assertIn("limit: function (live)", self.entry,
+                      "the entry bank no longer computes its own cut; a plain "
+                      "chipLimit() hides every Advanced rung, 738 of 1122 rows")
+        self.assertIn('split(" + ")[0]', self.entry,
+                      "the cut must key on the certification, which is the "
+                      "part of the label before the dive count")
+
+    def test_the_disclosure_says_which_way_it_opens(self):
+        """"+ 9 more" is uninformative on a ladder; the direction is the point."""
+        self.assertIn('moreWord: "stricter"', self.entry)
+        self.assertIn('opts.moreWord || "more"', self.app,
+                      "chips() must still default to 'more' for the banks that "
+                      "are lists rather than ladders")
+
+    def test_a_single_certification_falls_back_to_the_ordinary_cap(self):
+        """A fold that hides nothing meaningful should just be the normal one."""
+        self.assertIn("chipLimit()", self.entry,
+                      "no fallback: if the ladder ever holds one certification "
+                      "the boundary rule would show every rung uncapped")

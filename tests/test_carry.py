@@ -218,3 +218,68 @@ class _FetcherReturning:
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestAVesselNobodyAskedIsNotOneWithNothingOnSale(unittest.TestCase):
+    """The same distinction, one layer further down: in what the page *says*.
+
+    The crawl keeps it — `discover` records a skip through `not_looked_at`, and
+    the departures are carried rather than deleted. `promote` lost it: a boat
+    with no candidate departures is indistinguishable from a boat nobody asked
+    about, so a sailing PADI sells on a skipped vessel was published as
+    **"liveaboard.com does not list this sailing"** — a result for a page this
+    site did not open.
+
+    It is not hypothetical. `data/barren.json` holds 13 vessels, and PADI sells
+    **87 season sailings on four of them** — Bella 2, Bella 3, Eriny and Blue
+    Pearl — every one of which carried that sentence. All four have a
+    liveaboard.com vessel page the fee scraper read in full, 7 to 13 extras
+    each, so the first source plainly knows the boat.
+
+    Same rule as `fees_known`: no fee lines means nobody looked, not that there
+    are none.
+    """
+
+    SEASON = (date(2027, 5, 1), date(2027, 8, 31))
+
+    def rows(self, not_asked=()):
+        from liveaboard.promote import promote
+
+        from test_promote import candidate, departure
+
+        sailings = {"eriny::2027-06-05": {
+            "boat": "eriny", "slug": "eriny", "start": "2027-06-05",
+            "end": "2027-06-12", "nights": 7, "price": 1200.0, "currency": "EUR",
+            "itinerary": "Sinai Classic (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
+        }}
+        payload = promote(
+            {**candidate([departure()]), "not_asked": list(not_asked)},
+            season=self.SEASON,
+            padi_departures={"collected": "2026-08-29", "departures": sailings},
+        )
+        return [d for d in payload["departures"] if d.get("padi_only")]
+
+    def test_a_sailing_on_a_visited_vessel_states_the_stronger_claim(self):
+        row, = self.rows()
+        self.assertTrue(row["padi_only"])
+        self.assertNotIn("not_asked", row)
+
+    def test_a_sailing_on_a_skipped_vessel_states_the_weaker_one(self):
+        row, = self.rows(not_asked=["eriny"])
+        self.assertTrue(row["padi_only"])
+        self.assertTrue(row["not_asked"])
+
+    def test_the_row_is_still_published(self):
+        """The berth is real and PADI is really selling it. What changes is the
+        sentence about the other seller, not whether the sailing appears."""
+        self.assertEqual(len(self.rows(not_asked=["eriny"])), 1)
+
+    def test_a_candidate_with_no_such_key_behaves_as_before(self):
+        """The field arrives with the next crawl. A dataset promoted from a
+        candidate written before it must not change."""
+        from liveaboard.promote import promote
+
+        from test_promote import candidate, departure
+
+        payload = promote(candidate([departure()]), season=self.SEASON)
+        self.assertFalse(any(d.get("not_asked") for d in payload["departures"]))

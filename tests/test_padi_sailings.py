@@ -27,9 +27,19 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
-from fetch_padi import _departure_book, _iso_day  # noqa: E402
+import published  # noqa: E402
+from fetch_padi import (  # noqa: E402
+    MIN_BOOK_RATIO,
+    _sailing_counts,
+    why_empty,
+    _padi_sites,
+    _departure_book,
+    _iso_day,
+    keeps_the_book,
+)
 from liveaboard.dataset import Dataset  # noqa: E402
-from liveaboard.promote import promote  # noqa: E402
+from liveaboard.promote import _port, promote  # noqa: E402
+from liveaboard.scrape.padi_com import PadiComAdapter  # noqa: E402
 from liveaboard.render import build_payload  # noqa: E402
 
 from test_promote import SEASON, candidate, departure  # noqa: E402
@@ -562,6 +572,16 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
     A fleet on a booking site is not established to be the operating company.
     Two operator rows that may be one company is a cosmetic cost; naming the
     wrong company is the claim this site exists to catch other people making.
+
+    **The two Blues are now one operator, and the rule above is why that is
+    allowed.** They were not folded on the fleet label; the fold was refused on
+    exactly this reasoning and stayed refused. What changed is the evidence:
+    Blue Pearl's own liveaboard.com page states
+    `"brand": {"name": "Blue Planet Liveaboards"}` -- the same source every
+    other operator here comes from, naming the company for that hull directly
+    (#115). So the assertions below pin the *rule* rather than the outcome it
+    happened to produce: the fleet label is still kept verbatim, still folds
+    nothing, and the merge rests on a statement instead.
     """
 
     def test_padi_s_fleet_is_kept_verbatim(self) -> None:
@@ -578,15 +598,40 @@ class TestAFleetIsNotAnOperator(unittest.TestCase):
         from liveaboard.promote import OPERATOR_ALIASES
         self.assertEqual(sorted(OPERATOR_ALIASES), ["aggressor fleet& dancer fleet"])
 
-    def test_the_two_blues_stay_apart_in_the_committed_dataset(self) -> None:
-        import json
-        from pathlib import Path
+    def test_a_fleet_label_alone_still_folds_nothing(self) -> None:
+        """The case that made the rule, with only the evidence it had.
 
-        data = json.loads(Path("data/egypt-2027.json").read_text())
+        PADI files both hulls under "BLUE PLANET Fleet" and our own source
+        connects Blue Pearl to nobody. That must stay two operators: the tidier
+        answer is an assertion the data does not support.
+        """
+        payload = promote(
+            candidate([departure(boat="blue", operator="Blue Planet Liveaboards"),
+                       # Blue Pearl sells too, and states no operator of its
+                       # own -- which is the whole reason PADI's label is
+                       # reached for at all.
+                       departure(boat="blue-pearl", name="Deep South")],
+                      itineraries=[{"id": "blue", "name": "Blue", "boat": "MY Blue"},
+                                   {"id": "blue-pearl", "name": "Blue Pearl",
+                                    "boat": "MY Blue Pearl"}]),
+            season=SEASON,
+            padi={"collected": "2026-08-29", "vessels": {
+                "blue-pearl": {"slug": "my-blue-pearl", "name": "MY Blue Pearl",
+                               "operator": "BLUE PLANET"}}},
+        )
+        names = {o["name"] for o in payload["operators"]}
+        self.assertIn("Blue Planet Liveaboards", names)
+        self.assertIn("BLUE PLANET", names)
+
+    def test_the_two_blues_are_one_company_on_a_stated_one(self) -> None:
+        """And the committed dataset shows the fold, because the statement
+        arrived. Still two hulls: the guest counts differ, and neither carries
+        the other's sailings."""
+        data = published.raw()
         boats = {b["id"]: b for b in data["boats"]}
         if "blue" not in boats or "blue-pearl" not in boats:
             self.skipTest("neither Blue is in this checkout's dataset")
-        self.assertNotEqual(boats["blue"]["operator_id"], boats["blue-pearl"]["operator_id"])
+        self.assertEqual(boats["blue"]["operator_id"], boats["blue-pearl"]["operator_id"])
         self.assertNotEqual(boats["blue"]["guests"], boats["blue-pearl"]["guests"])
 
         # And no sailing of one is filed under the other.
@@ -634,3 +679,253 @@ class TestTheSoleSellerIsNamedInSource(unittest.TestCase):
                         row["booking_url"])
         self.assertNotIn("padi", {k for k in row if k == "padi"},
                          "a sole-seller row must not also claim a second price")
+
+
+class TestTheBookIsNeverQuietlyEmptied(unittest.TestCase):
+    """`data/padi.json` is rebuilt whole from a raw store that is gitignored.
+
+    Fine on a machine that has one; a landmine on a fresh runner, which is
+    every scheduled run. An empty store rebuilds the book with zero trips and
+    writes it, deleting the entry bar, the stated dive count and the only fee
+    book the 22 PADI-only vessels have — with a green job, a valid file, and
+    five published facts quietly gone.
+
+    The same rule the other fetchers already keep: a run that read nothing must
+    not rewrite the file, and an empty read is not a read that found nothing.
+    """
+
+    def test_a_run_that_stored_nothing_never_replaces_the_book(self):
+        self.assertFalse(keeps_the_book(0, 441))
+
+    def test_a_first_run_has_nothing_to_lose(self):
+        self.assertTrue(keeps_the_book(441, 0))
+        self.assertTrue(keeps_the_book(0, 0))
+
+    def test_a_book_that_lost_a_third_is_an_unfinished_crawl(self):
+        self.assertFalse(keeps_the_book(300, 441))
+
+    def test_an_itinerary_or_two_moving_is_not(self):
+        """PADI's count moves by ones. A guard that fired on those would be a
+        guard somebody routes around with --force every week."""
+        self.assertTrue(keeps_the_book(439, 441))
+        self.assertTrue(keeps_the_book(int(441 * MIN_BOOK_RATIO) + 1, 441))
+
+    def test_force_is_the_way_past_it(self):
+        """As `promote --force` is the way past its own ratio guard: the
+        shrinkage may be real, and then a person says so."""
+        self.assertTrue(keeps_the_book(0, 441, force=True))
+
+
+class TestPadiIsTheLastWordOnReefs(unittest.TestCase):
+    """The dive-site filter is what the page is for, and 47 rows could not be
+    reached by it: a trip with no sites is invisible to the handle the route
+    labels were removed in favour of.
+
+    PADI-only trips went blank fourteen times more often than the rest, and for
+    a structural reason -- the operator's description and region list both come
+    from liveaboard.com's archive, which has no entry for a boat it sells no
+    berths on, so the title parser answered alone against titles like *Premium
+    Expedition* and *Family Safari (HRG - HRG)*.
+
+    PADI describes those trips. It is put **last** because it describes them
+    least precisely: against the 180 trips both sellers cover, its blurb adds
+    173 reef mentions ours does not, including Elphinstone on a Brothers and
+    Safaga week off a sentence saying the two "are quite distant from one
+    another". Merged in, that is the BDE-badging failure this project removed
+    once already.
+    """
+
+    def sites(self, detail):
+        return _padi_sites(detail)
+
+    def test_the_day_plan_is_read_before_the_blurb(self):
+        """A day says what you dive; a blurb is an essay that will mention
+        anywhere. The same distinction promote already draws between a day
+        section and a place section on the other source."""
+        self.assertEqual(
+            self.sites({
+                "days": [{"description": "<p>Diving at Ras Mohammed</p>"}],
+                "highlightsDescription": "<p>Unlike the Brothers, this week ...</p>",
+            }),
+            ["ras mohammed"])
+
+    def test_the_blurb_answers_only_where_the_day_plan_is_silent(self):
+        """Most day plans carry nothing, or "Up to three dives are offered
+        daily" -- so dropping the blurb entirely would leave the trips this
+        exists for still blank."""
+        self.assertEqual(
+            self.sites({
+                "days": [{"description": "Up to three dives are offered daily."}],
+                "highlightsDescription": "<p>The route includes the Straits of Tiran.</p>",
+            }),
+            ["tiran"])
+
+    def test_markup_is_stripped_before_the_reefs_are_read(self):
+        self.assertEqual(
+            self.sites({"days": [{"description":
+                                  "<p><span style='x'>Thistlegorm</span></p>"}]}),
+            ["thistlegorm"])
+
+    def test_a_reef_named_twice_is_one_site(self):
+        self.assertEqual(
+            self.sites({"days": [{"description": "Thistlegorm"},
+                                 {"description": "Thistlegorm again"}]}),
+            ["thistlegorm"])
+
+    def test_a_trip_that_names_no_reef_yields_nothing(self):
+        """"Best Of Hurghada", "Specialty Photography Safari" and "Solar
+        Eclipse South Tour" name no reef in any field, and stay blank. A trip
+        whose sites nobody states has none to show."""
+        self.assertEqual(
+            self.sites({"days": [{"description": "A relaxed week of photography."}],
+                        "highlightsDescription": "<p>Best of Hurghada.</p>"}),
+            [])
+
+
+class TestTheHarbourPadiStates(unittest.TestCase):
+    """Every port on this page is parsed out of a trip title. PADI states two.
+
+    `harbourDepartureTitle` and `harbourArrivalTitle` are on **447 of 447**
+    itineraries, name eight real places, and were being stored joined into one
+    `ports` string that nothing read -- and could not have read, because two of
+    those eight names contain the separator:
+
+        Hurghada - Marriott Marina - Hurghada - Marriott Marina
+
+    is either `("Hurghada", "Marriott Marina - Hurghada - Marriott Marina")` or
+    `("Hurghada - Marriott Marina", "Hurghada - Marriott Marina")`, and the
+    string does not say. 436 of 447 split cleanly and the other 11 cannot be
+    split without guessing. So the fix was the record, not a parser: a
+    closed-vocabulary split over today's eight names is the rule that breaks
+    silently the first time PADI names a ninth marina.
+    """
+
+    #: The itinerary name promote looks the book up under. `padi_key` is
+    #: computed from the record's own boat and name, never from the dict key --
+    #: and the name a PADI record carries keeps its port bracket, because
+    #: `itinerary_from_payload` stores the title's head and the head includes
+    #: it. Two sailings differing only by port are two trips.
+    TRIP = "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)"
+
+    def trip(self, name=TRIP, **extra):
+        return {"collected": "2026-08-28", "trips": {"t": {
+            "boat": "alia-soul", "name": name, **extra}}}
+
+    def itinerary(self, name=TRIP,
+                  padi=None, padi_only=False):
+        extra = {"padi_only": True} if padi_only else {}
+        payload = promote(candidate([departure(name=name, **extra)]),
+                          season=SEASON, padi=padi)
+        return payload["itineraries"][0]
+
+    def test_the_two_harbours_are_stored_as_two_fields(self):
+        record = PadiComAdapter.itinerary_from_payload({
+            "title": "Brothers (Hurghada - Hurghada) 7 Nights",
+            "harbourDepartureTitle": "Hurghada - Marriott Marina",
+            "harbourArrivalTitle": "Hurghada - Marriott Marina",
+        })
+        self.assertEqual(record["port_from"], "Hurghada - Marriott Marina")
+        self.assertEqual(record["port_to"], "Hurghada - Marriott Marina")
+        self.assertNotIn("ports", record)
+
+    def test_a_marina_folds_onto_the_town_the_filter_already_lists(self):
+        """The stated field is more granular than a title: it names berths
+        where a title names towns. Unfolded, each would open a second harbour
+        chip for a port the filter already has."""
+        for stated, expected in (("Hurghada Marina", "Hurghada"),
+                                 ("Hurghada - Marriott Marina", "Hurghada"),
+                                 ("New Marina Sharm El Sheikh (El Wataneya)",
+                                  "Sharm El Sheikh")):
+            with self.subTest(stated=stated):
+                self.assertEqual(_port(stated), expected)
+
+    def test_a_statement_fills_a_port_the_title_never_named(self):
+        """A statement beats nothing at all, whatever the trip's own source.
+        This is what stops the next abbreviation waiting to be noticed by hand
+        the way "(HRG - PRG)" was, after it had shipped."""
+        blind = self.itinerary(name="Premium Expedition")
+        self.assertEqual((blind["port_from"], blind["port_to"]), ("Unknown", "Unknown"))
+        filled = self.itinerary(
+            name="Premium Expedition",
+            padi=self.trip(name="Premium Expedition",
+                           port_from="Port Ghalib", port_to="Hurghada"))
+        self.assertEqual((filled["port_from"], filled["port_to"]),
+                         ("Port Ghalib", "Hurghada"))
+
+    def test_it_does_not_overrule_the_other_seller_s_own_title(self):
+        """liveaboard.com's title stays authoritative for a liveaboard.com
+        trip, the way our fee book beats PADI's where both exist. The second
+        source is a check here, not a replacement -- and two independent
+        readings agreeing is worth more than one reading nobody can check."""
+        row = self.itinerary(padi=self.trip(port_from="Port Ghalib", port_to="Hamata"))
+        self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))
+
+    def test_a_padi_titled_trip_takes_the_stated_harbour_over_its_own_parse(self):
+        """A statement beating a parse of the *same source's* title is not a
+        judgement call."""
+        row = self.itinerary(padi_only=True,
+                             padi=self.trip(port_from="Port Ghalib", port_to="Hamata"))
+        self.assertEqual((row["port_from"], row["port_to"]), ("Port Ghalib", "Hamata"))
+
+    def test_a_trip_padi_has_not_been_read_for_keeps_its_parsed_ports(self):
+        row = self.itinerary(padi=self.trip())
+        self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))
+
+
+class TestWhyAVesselHasNoRows(unittest.TestCase):
+    """Twelve mapped vessels publish nothing and the run could not say why.
+
+    `_departure_book` drops a sailing with no date, with no price, and outside
+    the window, and it drops all three the same way: silently. So a mapped
+    vessel with no rows was one of several quite different things, and that is
+    the shape of every failure this repo has already been bitten by -- the
+    barren skip list, `carry_unread`, `PARSE_ATTEMPTS` -- where *not looked at*
+    and *nothing there* travelled down one channel until somebody separated
+    them.
+
+    Recorded, not acted on. `promote` does not read it; a person reading the
+    run does.
+    """
+
+    SEASON = ("2027-05-01", "2027-08-31")
+
+    def counts(self, *sailings):
+        return _sailing_counts(
+            [{"startDate": d, "price": p} for d, p in sailings], self.SEASON)
+
+    def test_a_vessel_selling_in_the_window_is_not_reported(self):
+        self.assertEqual(why_empty(self.counts(("2027-06-05", 1200.0))), "")
+
+    def test_an_endpoint_that_answered_nothing_says_so(self):
+        self.assertEqual(why_empty(self.counts()),
+                         "the trips endpoint returned no sailing at all")
+
+    def test_a_calendar_that_stops_short_names_the_window_it_reaches(self):
+        """South Moon 1 sells 22 priced sailings, every one before May 2027.
+        The absence *is* the answer there, and a bare zero cannot say so."""
+        why = why_empty(self.counts(("2026-09-05", 900.0), ("2027-01-30", 950.0)))
+        self.assertIn("none in the season", why)
+        self.assertIn("2026-09-05 to 2027-01-30", why)
+
+    def test_a_vessel_that_prices_nothing_is_a_different_kind_of_empty(self):
+        """VIP One lists 17 sailings and prices none. Two facts hold at once --
+        the window is why there is no row, and the missing prices are what
+        would bite the day the calendar does reach us."""
+        why = why_empty(self.counts(("2026-09-05", 0.0), ("2026-12-27", None)))
+        self.assertIn("none in the season", why)
+        self.assertIn("none of them priced", why)
+
+    def test_unpriced_is_counted_over_every_dated_sailing(self):
+        """Not only the in-season ones. Counting inside the window alone would
+        have hidden VIP One entirely, whose calendar stops in December."""
+        self.assertEqual(self.counts(("2026-09-05", 0.0), ("2026-12-27", None))["unpriced"], 2)
+
+    def test_a_sailing_with_no_readable_date_is_neither_dated_nor_in_season(self):
+        counts = _sailing_counts([{"startDate": None, "price": 900.0}], self.SEASON)
+        self.assertEqual((counts["read"], counts["dated"]), (1, 0))
+        self.assertEqual(why_empty(counts),
+                         "1 sailing(s), none carrying a readable date")
+
+    def test_a_season_with_unpriced_sailings_in_it_says_that_and_not_the_window(self):
+        why = why_empty(self.counts(("2027-06-05", 0.0), ("2027-06-12", None)))
+        self.assertEqual(why, "2 sailing(s) in the season, none of them priced")

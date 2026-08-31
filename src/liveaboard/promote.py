@@ -162,6 +162,15 @@ PORT_ALIASES: dict[str, str] = {
     # A letter short of the 130 itineraries that spell it out, on a Fury Shoals
     # week whose stated harbour is "Port Ghalib".
     "port galib": "Port Ghalib",
+    # The stated harbour is more granular than the title: it names berths where
+    # a title names towns. Three of PADI's eight harbour names are a marina
+    # inside a town this page already lists, and left unfolded each would open
+    # a fourth and fifth harbour chip for a port the filter already has.
+    # "hurghada, marriott" above is the same berth reached from the other
+    # source's own spelling of it.
+    "hurghada marina": "Hurghada",
+    "hurghada - marriott marina": "Hurghada",
+    "new marina sharm el sheikh (el wataneya)": "Sharm El Sheikh",
     # One title prints the same harbour two wrong ways inside one bracket:
     # "(Sharm El sheikh - Sharm El Sheik)". The stated harbour is "Sharm El
     # Sheikh" both ends, so the case row settles the capital with the spelling.
@@ -680,11 +689,17 @@ def _strictest(
 ) -> dict[str, Any] | None:
     """The higher of two stated entry bars, with both claims kept.
 
-    liveaboard.com and PADI disagree about the bar on 49 of the 105 trips both
-    describe, and in both directions: PADI is stricter on twelve and softer on
-    thirteen. Neither source is the authority -- both are quoting the same
-    operator -- so preferring one wholesale would publish a bar softer than
-    somebody stated roughly half the time.
+    liveaboard.com and PADI disagree about the bar on 60 of the 127 trips both
+    describe, and in both directions: PADI is stricter on 19 and softer on 41.
+    Neither source is the authority -- both are quoting the same operator -- so
+    preferring one wholesale would publish a bar softer than somebody stated
+    roughly half the time.
+
+    Between them they cover the season completely: of the 402 itineraries, 190
+    are described by liveaboard.com alone, 85 by PADI alone, 127 by both, and
+    none by neither. That is why the Entry bar column never prints "not
+    stated" -- not because the page declines to, but because nothing here is
+    unread.
 
     Taking the higher level never softens either claim. It does state a bar
     stricter than one of them, which is the trade made deliberately: a diver
@@ -1035,9 +1050,60 @@ def _berth_blocks(
     )
 
 
-def _sale_for(
+def _list_prices(
     cabins: dict[str, Any] | None,
     sailing: dict[str, Any] | None,
+    ignore: frozenset[int] = frozenset(),
+) -> dict[str, tuple[float, float | None, str | None]]:
+    """What each seller charges for this berth and what it says that is down from.
+
+    One entry per seller **whose list price was actually read**, which is the
+    distinction the caller above it needs and the reason this is not folded
+    into ``_sale_for``: a seller that was read and states no markdown said no,
+    and a seller nobody read said nothing. The two look identical in a payload
+    that only records discounts, and the panel has to tell them apart -- the
+    same rule as ``fees_known`` and ``not_asked``.
+
+    The list price is ``None`` where the seller states none. The currency may
+    be missing and that is survivable *here* and nowhere else in this file: a
+    percentage is a ratio of two figures in the same unit, whatever that unit
+    is, so it needs no currency at all. Only the cash "was" does, and it is
+    withheld rather than converted at an assumed rate -- the rule the sailing
+    book already applies to PADI's prices, where guessing euro would have put
+    every Aggressor out by the EUR/USD rate.
+
+    ``ignore`` names sellers whose reading this run threw away. A ladder more
+    than ``STALE_LADDER`` from the price above it is not this sailing's, and a
+    reading that has been rejected for contradicting its own row cannot then be
+    quoted about that row -- which is exactly what happened on 36 sailings; see
+    ``_drop_stale_ladder``.
+    """
+    figures: dict[str, tuple[float, float | None, str | None]] = {}
+
+    priced = [c for c in ((cabins or {}).get("cabins") or []) if c.get("price") is not None]
+    if priced and SELLERS.index("liveaboard.com") not in ignore:
+        cheapest = min(priced, key=lambda c: c["price"])
+        listed = cheapest.get("list_price")
+        price = float(cheapest["price"])
+        figures["liveaboard.com"] = (
+            price,
+            float(listed) if listed and listed > price > 0 else None,
+            (cabins or {}).get("currency"),
+        )
+
+    if sailing and SELLERS.index("padi.com") not in ignore:
+        price, was = sailing.get("price"), sailing.get("was")
+        if isinstance(price, (int, float)) and price > 0:
+            figures["padi.com"] = (
+                float(price),
+                float(was) if isinstance(was, (int, float)) and was > price else None,
+                sailing.get("currency"),
+            )
+    return figures
+
+
+def _sale_for(
+    figures: Mapping[str, tuple[float, float | None, str | None]],
     own: str,
     fx_table: Any,
 ) -> dict[str, Any] | None:
@@ -1063,37 +1129,18 @@ def _sale_for(
     Silence and absence are different, as everywhere else here. A booking page
     that could not be read contributes no opinion rather than a "no"; three of
     the five sailings where only PADI reports a discount have no ladder at all.
+    That distinction is drawn one function up, in ``_list_prices``, which is
+    handed every seller that was read and states here only the ones that
+    published a list price above what they charge.
     """
-    # (price, list price, the currency both are in). The currency may be
-    # missing and that is survivable *here* and nowhere else in this file: a
-    # percentage is a ratio of two figures in the same unit, whatever that unit
-    # is, so it needs no currency at all. Only the cash "was" does, and it is
-    # withheld rather than converted at an assumed rate -- the rule the sailing
-    # book already applies to PADI's prices, where guessing euro would have put
-    # every Aggressor out by the EUR/USD rate.
-    figures: dict[str, tuple[float, float, str | None]] = {}
-
-    priced = [c for c in ((cabins or {}).get("cabins") or []) if c.get("price") is not None]
-    if priced:
-        cheapest = min(priced, key=lambda c: c["price"])
-        listed = cheapest.get("list_price")
-        if listed and listed > cheapest["price"] > 0:
-            figures["liveaboard.com"] = (
-                float(cheapest["price"]), float(listed), (cabins or {}).get("currency"),
-            )
-
-    if sailing:
-        price, was = sailing.get("price"), sailing.get("was")
-        if isinstance(price, (int, float)) and isinstance(was, (int, float)) and was > price > 0:
-            figures["padi.com"] = (float(price), float(was), sailing.get("currency"))
-
-    if not figures:
+    marked = {name: figure for name, figure in figures.items() if figure[1] is not None}
+    if not marked:
         return None
 
     sale: dict[str, Any] = {
-        "sellers": sorted(SELLERS.index(name) for name in figures),
+        "sellers": sorted(SELLERS.index(name) for name in marked),
     }
-    mine = figures.get(own)
+    mine = marked.get(own)
     if mine:
         price, was, currency = mine
         # A markdown too small to state is not a stated markdown. Under half a
@@ -1112,7 +1159,7 @@ def _on_sale_summary(
     departures: list[dict[str, Any]],
     boat_of: Mapping[str, str],
     boats: Mapping[str, Mapping[str, Any]],
-    read: str,
+    read: Mapping[int, str],
 ) -> dict[str, Any] | None:
     """What is discounted right now, per boat, over the whole season.
 
@@ -1125,6 +1172,12 @@ def _on_sale_summary(
     Sea Aggressor II is 33% off every week from 1 May to 24 July and full price
     from 31 July, which is the difference between knowing a boat is on sale and
     knowing which week to book.
+
+    ``read`` is a date **per seller**, not one for the block. The two books are
+    read by different jobs on different days -- 28 and 30 August as this is
+    written -- and 10 of the 22 boats here rest partly on PADI's, so a single
+    date stamped across the panel dated nearly half of it wrong. It is the rule
+    the berth counts already follow, for the same reason and one field along.
     """
     on_sale = [d for d in departures if d.get("sale")]
     if not on_sale:
@@ -1153,6 +1206,10 @@ def _on_sale_summary(
             "last": starts[-1],
             "sellers": sorted({s for d in group for s in d["sale"]["sellers"]}),
         }
+        # The day each of those sellers was read, in the order they are named,
+        # so the panel can print who said it and when without the page having
+        # to know which book came from which job.
+        row["read"] = [read[s] for s in row["sellers"] if read.get(s)]
         # A range only where the boat really runs more than one, which is rare:
         # an operator discounts a season, not a sailing. Printing "10–10%"
         # everywhere to accommodate the exception is noise on every other row.
@@ -1163,13 +1220,143 @@ def _on_sale_summary(
         rows.append(row)
 
     return {
-        # The day the ladders were read. The most perishable thing on the page
-        # after a berth count, and stated for the same reason: a sale is what a
-        # seller claimed when it was looked at, and it can end overnight.
-        "read": read,
+        # The day each seller's book was read. The most perishable thing on the
+        # page after a berth count, and stated for the same reason: a sale is
+        # what a seller claimed when it was looked at, and it can end
+        # overnight. Keyed by seller, and the panel's own heading takes the
+        # oldest of them -- a summary is only as fresh as its stalest half.
+        "read": {str(seller): day for seller, day in sorted(read.items()) if day},
         "sailings": len(on_sale),
         "boats": rows,
     }
+
+
+def _cut(price: float, was: float) -> int:
+    """A markdown as a percentage, the way ``_sale_for`` states one.
+
+    One function rather than two so the change log and the row it explains can
+    never round differently -- "36 sailings no longer 33% off" beside a table
+    that had said 32% is the panel disagreeing with itself.
+    """
+    return int(round(100 * (1 - price / was)))
+
+
+def _sales_block(
+    sales: dict[str, Any] | None,
+    boats: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """What moved on liveaboard.com's booking pages between the last two readings.
+
+    The half of the change log that could not previously speak. PADI publishes
+    a deals *listing* and `data/deals.json` keeps a day per reading of it, so
+    `_deals_block` can diff two committed days; liveaboard.com publishes no
+    listing at all and `data/cabins.json` keeps only the last reading, so there
+    was no second day here to diff against. `tools/derive_sales.py` writes one
+    -- three fields per sailing, filed under the day the booking page was read.
+
+    It is the bigger of the two signals: 263 discounted sailings on 22 boats
+    against PADI's 13, and nine of those boats appear in no deals listing
+    anywhere. The day the Red Sea Aggressors' 33% sale ended, PADI's half
+    reported *three offers withdrawn* -- one exemplar sailing per vessel -- for
+    an event that moved **36 sailings**.
+
+    **Only over the sailings both readings covered.** A key is in a day's
+    census exactly when that booking page was read, so a sailing missing from
+    either side has not come off sale: nobody looked at it. The count of those
+    is reported rather than dropped, which is the same rule `_deals_block`
+    applies through `partial` and the crawl applies through `not_looked_at`.
+
+    Grouped by boat because an operator discounts a season rather than a
+    sailing, and because the ungrouped list is the failure being fixed: 36
+    identical lines say less than one line saying 36. Bounded by the fleet --
+    at most three moves per boat -- so nothing is capped and nothing is
+    silently dropped.
+    """
+    days = (sales or {}).get("days") or {}
+    if not days:
+        return None
+    order = sorted(days)
+    today = order[-1]
+    now = (days[today] or {}).get("sailings") or {}
+    if not now:
+        return None
+
+    block: dict[str, Any] = {"read": today, "sailings": len(now)}
+    if len(order) < 2:
+        # A first reading has nothing to be a change from, and saying so is not
+        # the same as saying nothing changed.
+        block["first_reading"] = True
+        return block
+
+    previous = order[-2]
+    before = (days[previous] or {}).get("sailings") or {}
+    block["previous"] = previous
+
+    both = set(now) & set(before)
+    listed = {key for key in both if key.split("::")[0] in boats}
+    block["compared"] = len(listed)
+    # Stated every time, with a count, because a change report that quietly
+    # narrows its own scope reads as "that was everything" -- the failure this
+    # project exists to correct in other people.
+    block["not_compared"] = len(set(now) ^ set(before))
+    if len(both) != len(listed):
+        block["unlisted"] = len(both) - len(listed)
+
+    started: dict[str, list[tuple[str, int | None]]] = defaultdict(list)
+    ended: dict[str, list[tuple[str, int | None]]] = defaultdict(list)
+    changed: dict[str, list[tuple[str, int, int]]] = defaultdict(list)
+
+    for key in sorted(listed):
+        boat, _, start = key.partition("::")
+        (was_now, was_before) = (now[key][1], before[key][1])
+        if was_now and not was_before:
+            started[boat].append((start, _cut(now[key][0], was_now)))
+        elif was_before and not was_now:
+            ended[boat].append((start, _cut(before[key][0], was_before)))
+        elif was_now and was_before:
+            after, first = _cut(now[key][0], was_now), _cut(before[key][0], was_before)
+            if after != first:
+                changed[boat].append((start, first, after))
+
+    moves: list[dict[str, Any]] = []
+
+    def move(boat: str, kind: str, sailings: list[tuple[str, Any]]) -> dict[str, Any]:
+        cuts = sorted({c for _, c in sailings if c})
+        row: dict[str, Any] = {
+            "boat": boat,
+            "boat_name": str(boats[boat]["name"]),
+            "kind": kind,
+            "sailings": len(sailings),
+            "first": min(s for s, _ in sailings),
+            "last": max(s for s, _ in sailings),
+        }
+        # A range only where the boat really runs more than one, as the fleet
+        # table does: an operator discounts a season at one rate, and printing
+        # "33–33%" everywhere to accommodate the exception is noise on every
+        # other row.
+        if cuts:
+            row["pct"] = cuts[0]
+            if cuts[-1] != cuts[0]:
+                row["pct_max"] = cuts[-1]
+        return row
+
+    for boat, rows in started.items():
+        moves.append(move(boat, "started", rows))
+    for boat, rows in ended.items():
+        moves.append(move(boat, "ended", rows))
+    for boat, rows in changed.items():
+        row = move(boat, "changed", [(s, after) for s, _, after in rows])
+        was = sorted({first for _, first, _ in rows})
+        row["was_pct"] = was[0]
+        if was[-1] != was[0]:
+            row["was_pct_max"] = was[-1]
+        moves.append(row)
+
+    # By the name the panel prints, then by what happened, so the order does
+    # not depend on the order of a dict. Promotion is pure and CI compares its
+    # output byte for byte.
+    block["moves"] = sorted(moves, key=lambda m: (m["boat_name"].lower(), m["kind"], m["boat"]))
+    return block
 
 
 STALE_LADDER = 0.03
@@ -1185,7 +1372,7 @@ this sailing's, since the rungs across this fleet run from €500 to €2,900.
 
 def _drop_stale_ladder(
     blocks: list[list[Any]], advertised: int | None
-) -> tuple[list[list[Any]], int | None]:
+) -> tuple[list[list[Any]], dict[int, int]]:
     """Refuse a ladder that contradicts the price it is supposed to explain.
 
     The advertised price *is* the bottom rung -- checked on 864 of 864 -- so a
@@ -1201,19 +1388,24 @@ def _drop_stale_ladder(
     with no ladder falls back to what its sellers say is left, and the panel
     that would have opened is not worth a figure that is wrong.
 
-    Returns the surviving blocks and, when one went, the rung that disagreed --
-    so the caller can name it rather than drop it in silence.
+    Returns the surviving blocks and, per seller whose ladder went, the rung
+    that disagreed. **Keyed by seller rather than counted**, because a rejected
+    reading has to stay rejected everywhere downstream and not only in the
+    cabin popover: the same ladder was still being read for the sale mark
+    above it, which put "-33%, down from €2,371" on a berth advertised at
+    €2,371 on all 36 rows. Naming who was dropped is what lets
+    ``_list_prices`` ignore them and the panel say how many it could not read.
     """
     if not advertised:
-        return blocks, None
+        return blocks, {}
     kept: list[list[Any]] = []
-    dropped: int | None = None
+    dropped: dict[int, int] = {}
     for block in blocks:
         rungs = block[2] if len(block) > 2 else None
         if rungs:
             cheapest = min(rung[1] for rung in rungs)
             if abs(cheapest - advertised) / advertised > STALE_LADDER:
-                dropped = cheapest
+                dropped[block[0]] = cheapest
                 continue
         kept.append(block)
     return kept, dropped
@@ -1475,6 +1667,7 @@ def _padi_only_departures(
     *,
     season: tuple[date, date] | None,
     retrieved: str,
+    not_asked: frozenset[str] = frozenset(),
 ) -> tuple[list[dict[str, Any]], list[str]]:
     """The sailings PADI sells on dates the first source does not list.
 
@@ -1556,6 +1749,23 @@ def _padi_only_departures(
                              else "SoldOut" if sailing["availability"] == 0
                              else "InStock"),
             "padi_only": True,
+            # ...but "the other seller does not list this" is a claim about a
+            # page somebody read, and on a vessel the barren list held back
+            # nobody read one. `data/barren.json` skips a boat found selling
+            # nothing for a week at a time to save the requests, and PADI sells
+            # 87 season sailings on four of those -- Bella 2, Bella 3, Eriny
+            # and Blue Pearl -- every one of which the page was calling
+            # "liveaboard.com does not list this sailing" on the strength of a
+            # run that chose not to look.
+            #
+            # That is the precise distinction the barren list was built to
+            # preserve, arriving one layer further down: `discover` keeps it
+            # through `not_looked_at`, and `promote` lost it because a boat
+            # with no candidate departures is indistinguishable from a boat
+            # nobody asked about. It costs one key, and it is the same shape as
+            # `fees_known` -- no fee lines means nobody looked, not that there
+            # are none.
+            **({"not_asked": True} if slug in not_asked else {}),
             "provenance": {
                 "kind": SourceKind.SCRAPED.value,
                 "source_id": "padi.com",
@@ -1579,6 +1789,7 @@ def promote(
     padi_departures: dict[str, Any] | None = None,
     cabins: dict[str, Any] | None = None,
     deals: dict[str, Any] | None = None,
+    sales: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -1598,12 +1809,18 @@ def promote(
     # count was mined out of marketing prose and missed half the fleet, and
     # nitrox inclusion was not read at all.
     spec_book: dict[str, dict[str, Any]] = {}
+    # And the company the page names as the vessel's brand, which is the only
+    # statement of it for a boat with no departures of its own. See where it is
+    # consumed, below.
+    page_operator: dict[str, str] = {}
     if fees:
         for slug, entry in (fees.get("vessels") or {}).items():
             if entry.get("fees"):
                 fee_book[slug] = entry["fees"]
             if entry.get("specs"):
                 spec_book[slug] = entry["specs"]
+            if entry.get("operator"):
+                page_operator[slug] = entry["operator"]
 
     # What the operator says about *one trip*: the reefs it visits, how many
     # dives it fits in, how many people are aboard and who it will take. Read
@@ -1810,6 +2027,7 @@ def promote(
         {key: next(iter(names)) for key, names in by_key.items() if len(names) == 1},
         season=season,
         retrieved=(padi_departures or {}).get("collected") or "",
+        not_asked=frozenset(candidate.get("not_asked") or ()),
     )
     skipped.extend(unparsed)
     for departure in padi_only:
@@ -1861,6 +2079,32 @@ def promote(
     # hulls -- 24 guests at 43 m against 20 at 36 m. Two operator rows that may
     # be one company is a cosmetic cost; naming the wrong company is the kind of
     # claim this site exists to catch other people making.
+    # First, though: the vessel page's own `Product.brand.name`, which the fee
+    # run reads for every boat it visits. It beats PADI's fleet label outright
+    # and is not a judgement call -- it is the *same source* every other
+    # operator on this page comes from, naming the company for a hull whose
+    # lack of departures is the only reason it had no `Event.organizer`.
+    #
+    # It is what settles MY Blue Pearl. PADI shelves it and MY Blue under one
+    # "BLUE PLANET Fleet", and folding the two on that alone asserted a company
+    # for a hull our own source connected to nobody -- so an OPERATOR_ALIASES
+    # entry was written and then removed, correctly. Blue Pearl's own page
+    # says `"brand": {"name": "Blue Planet Liveaboards"}`, which is Blue's
+    # operator stated outright rather than inferred from a shelf. The two rows
+    # become one because the evidence arrived, not because the duplicate was
+    # untidy.
+    #
+    # It also ends the shouting without anybody deciding how a company spells
+    # itself: `BELLA LIVEABOARDS` is PADI's rendering, `Bella Liveaboard` is
+    # this field's, and preferring the second is taking a different source's
+    # own words rather than editing the first's.
+    for slug, stated in sorted(page_operator.items()):
+        if slug in boat_operator or not stated:
+            continue
+        record = operator_record(_collapsed(stated) or "")
+        operators.setdefault(record["id"], record)
+        boat_operator[slug] = record["id"]
+
     for slug, vessel in sorted(padi_vessels.items()):
         if slug in boat_operator or not vessel.get("operator"):
             continue
@@ -1885,6 +2129,14 @@ def promote(
     # silent: each one is a booking page this pipeline read and then declined
     # to publish, and the fix is a fresh `cabins.yml` rather than anything here.
     stale_ladders: list[str] = []
+    # Three tallies the sales panel needs and cannot recover from the rows it
+    # is drawn from, because each of them is an *absence*: a ladder rejected
+    # for contradicting its row, a sailing no seller published a list price
+    # for, and a trip-name banner no read seller supports. All three look
+    # exactly like "not on sale" once they reach the page.
+    dropped_ladders: Counter = Counter()
+    unread_for_sale = 0
+    banner_unsupported = 0
 
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
@@ -1947,9 +2199,25 @@ def promote(
         # ordering exists to stop trusting, but a trip whose description names
         # no reef at all -- "Famous Five", "Get Wrecked" -- would otherwise
         # publish an empty cell where the operator did say something.
+        # And, last of all, what the *second* seller says about the same trip.
+        # Last because it is the least structured thing here: PADI publishes a
+        # blurb and a day plan where liveaboard.com publishes headed sections,
+        # and against the 180 trips both describe, PADI's words add 173 reef
+        # mentions ours does not -- among them Elphinstone on a Brothers and
+        # Safaga week, off a sentence saying the two "are quite distant from
+        # one another". Merged in, that is the BDE-badging failure this project
+        # already removed once.
+        #
+        # It only ever answers where everything else is silent, and there it is
+        # the difference between a row the filter can reach and one it cannot:
+        # 19 itineraries and 47 rows have no site at all, and PADI describes 16
+        # of them. The other three name no reef in any field -- "Best Of
+        # Hurghada", "Specialty Photography Safari" -- and stay blank, which is
+        # right. A trip whose sites nobody states has none to show.
         sites = (_sites_from_description(trip)
                  or _sites_from_regions(trip.get("regions") or [])
-                 or _sites_from_name(name))
+                 or _sites_from_name(name)
+                 or list(padi_trip.get("dive_sites") or []))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
@@ -1958,6 +2226,31 @@ def promote(
             (located[0], located[0]) if located else ("Unknown", "Unknown")
         )
         port_from, port_to = _port(port_from), _port(port_to)
+
+        # And PADI states its harbours outright, in two fields, on 447 of 447
+        # itineraries -- where every port on this page is otherwise parsed out
+        # of a trip title. A statement beats a parse of the same source's own
+        # title, which is not a judgement call; and a statement beats nothing
+        # at all, wherever the title named no harbour this code could read.
+        #
+        # Nothing else. liveaboard.com's title stays authoritative for a
+        # liveaboard.com trip, the way our fee book beats PADI's where both
+        # exist -- the second source is a check here, not a replacement, and
+        # two independent readings agreeing is worth more than one reading
+        # nobody can check. They do agree: **207 of 207** trips where both
+        # speak, with no contradiction anywhere.
+        #
+        # So this changes no port today, deliberately. What it buys is that the
+        # next abbreviation answers itself instead of waiting for somebody to
+        # notice a filter chip that is not a place -- which is how "(HRG - PRG)"
+        # was found, by hand, after it had shipped.
+        stated_from = _port(padi_trip.get("port_from"))
+        stated_to = _port(padi_trip.get("port_to"))
+        if stated_from != "Unknown" and stated_to != "Unknown" and (
+            all(d.get("padi_only") for d in group)
+            or "Unknown" in (port_from, port_to)
+        ):
+            port_from, port_to = stated_from, stated_to
 
         # The second seller's own required extras, beside ours and never mixed
         # into them. Written only where PADI states at least one charge or
@@ -2090,6 +2383,11 @@ def promote(
             # one file.
             if item.get("padi_only"):
                 entry["padi_only"] = True
+                # A weaker claim than the one beside it, and the honest one:
+                # PADI is the only seller *this run asked*. See
+                # `_padi_only_departures`.
+                if item.get("not_asked"):
+                    entry["not_asked"] = True
             # Carried on the departure, not the itinerary: the operator
             # discounts specific dates, and the price scraped is already the
             # discounted one.
@@ -2154,10 +2452,12 @@ def promote(
                 float(item["price"]["amount"]), item["price"]["currency"], fx_table
             )
             berths, outdated = _drop_stale_ladder(berths, advertised)
-            if outdated is not None:
+            for seller, rung in sorted(outdated.items()):
                 stale_ladders.append(
-                    f"{slug} {item['start']}: row {advertised}, ladder starts at {outdated}"
+                    f"{slug} {item['start']}: row {advertised}, "
+                    f"{SELLERS[seller]} ladder starts at {rung}"
                 )
+                dropped_ladders[slug] += 1
             if berths:
                 entry["berths"] = berths
 
@@ -2173,14 +2473,36 @@ def promote(
             # `sailing_book` rather than `sailing`, deliberately. That variable
             # is blanked on a PADI-only row to keep PADI's price out of the
             # second seller's field, and here PADI *is* the row's own seller.
-            sale = _sale_for(
+            #
+            # `outdated` is passed because a reading this run threw away must
+            # stay thrown away. It did not: `_drop_stale_ladder` rejected the
+            # Aggressors' ladders for sitting 33% below their own rows and this
+            # call was then handed the same book, so 36 rows printed "-33%,
+            # down from €2,371" against a berth advertised at €2,371 -- the
+            # dataset quoting a source it had just ruled out, on the largest
+            # discounts on the page.
+            figures = _list_prices(
                 ladder,
                 sailing_book.get(f"{slug}::{item['start']}"),
+                frozenset(outdated),
+            )
+            sale = _sale_for(
+                figures,
                 "padi.com" if item.get("padi_only") else "liveaboard.com",
                 fx_table,
             )
             if sale:
                 entry["sale"] = sale
+            # What the panel needs to say how far its own answer reaches. A row
+            # no seller published a list price for is not a row nobody
+            # discounted, and the operator's own "20% Off" banner is worth
+            # keeping only while somebody says something when it stops
+            # agreeing -- so both are counted here rather than inferred from
+            # the absence of a `sale` key, which cannot tell them apart.
+            if not figures:
+                unread_for_sale += 1
+            elif item.get("promotion") and not sale:
+                banner_unsupported += 1
             departures.append(entry)
 
     _settle_title_case(itineraries)
@@ -2271,18 +2593,57 @@ def promote(
     # cabin pass already reads. That is 263 sailings on 22 boats, and 9 of
     # those boats appear in no deals listing anywhere.
     #
-    # No change log for this half, and the reason is the same rule that gives
-    # PADI's one: `data/deals.json` keeps a day per reading and
-    # `data/cabins.json` keeps only the last, so there is no second committed
-    # day here to diff against. Promotion is pure and cannot go to git for one.
+    # It has a change log of its own now, and by the same rule that gives PADI
+    # one: `data/sales.json` keeps a day per reading of the booking pages, so
+    # there is a second committed day to diff against. The cabin book itself
+    # still keeps only the last reading -- 70,000 lines of cabin names and
+    # amenities that never change -- so the sale book is a projection of it
+    # onto the three fields a diff needs. Promotion stays pure either way: it
+    # reads two committed days and never goes to git for one.
     on_sale = _on_sale_summary(
         departures,
         {i["id"]: i["boat_id"] for i in itineraries},
         boats,
-        cabin_read,
+        {SELLERS.index("liveaboard.com"): cabin_read,
+         SELLERS.index("padi.com"): padi_read},
     )
     if on_sale:
         deals_block["on_sale"] = on_sale
+    # Beside the summary rather than inside it, because the day every sale on
+    # the fleet ends is the day there is no summary to hang it off -- and it is
+    # also the day the change log is the only thing left worth printing.
+    moved = _sales_block(sales, boats)
+    if moved:
+        deals_block["on_sale_changes"] = moved
+    # How far that answer reaches, which is the half of it a count of discounts
+    # cannot state. Every field here is an absence, and on the page they are
+    # all indistinguishable from "not on sale" unless the panel says otherwise
+    # -- the same rule as `fees_known`, `not_asked` and the change log's
+    # `not_compared`, applied to the one panel that did not have it.
+    coverage = {
+        key: value
+        for key, value in (
+            ("unread", unread_for_sale),
+            ("banner_unsupported", banner_unsupported),
+        )
+        if value
+    }
+    if dropped_ladders:
+        coverage["dropped"] = {
+            "sailings": sum(dropped_ladders.values()),
+            # Named rather than counted, like the deals listing's strangers: a
+            # reader can only tell a boat they were about to book from one they
+            # were not by reading which boat it is.
+            "boats": sorted(
+                str(boats[slug]["name"]) for slug in dropped_ladders if slug in boats
+            ),
+        }
+    # Attached last and only to a panel that exists. Coverage qualifies an
+    # answer, so with nothing discounted, nothing advertised and nothing moved
+    # there is nothing for it to qualify -- and shipping it alone would open a
+    # panel headed "on sale" to say only how many sailings were not read.
+    if coverage and deals_block:
+        deals_block["coverage"] = coverage
     if deals_block:
         payload["deals"] = deals_block
 

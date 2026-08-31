@@ -37,9 +37,14 @@ SEASON_QUERIES: tuple[str, ...] = tuple(
 )
 """Month selectors for a vessel page: ``?m=5/2027`` through ``?m=8/2027``.
 
-Without one, a boat page returns whatever window it defaults to, starting from
-today: a full run scraped 746 departures spanning 2026-09 to 2027-10 and kept
-just 14.
+Without one, a boat page returns **the next ten sailings from today** — a count,
+not a date window. Measured on five vessels 2026-08-30 (`tools/
+probe_season_months.py`): every one returned exactly 10, and four of the five
+reached no further than 2026-11. A full run of bare fetches scraped 746
+departures spanning 2026-09 to 2027-10 and kept 14, which reads like a wide
+window and is not one: it is ten per vessel across ~75 vessels, and it reaches
+2027 only because a boat that sails twice a month spends ten sailings getting
+there.
 
 The first attempt asked only for the season's opening month, on the assumption
 that each page returns events running forward from it. It does not — a live run
@@ -47,7 +52,11 @@ came back with 250 departures, every single one in May. The selector means that
 month and no other, so covering the season means asking four times per vessel.
 
 That is four times the requests, which is why the crawl is capped on vessels
-rather than on pages and the job is given room to finish.
+rather than on pages and the job is given room to finish. **One fetch per
+vessel was probed and does not exist**: the season is nine months out and the
+bare page stops ten sailings in. Two multi-month selector forms were guessed at
+and both silently returned *less* than the bare page. See
+`docs/sources/liveaboard.com.md`.
 """
 
 SEASON_QUERY = SEASON_QUERIES[0]

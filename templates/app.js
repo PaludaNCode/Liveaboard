@@ -49,6 +49,11 @@
   var state = {
     sort: "start", dir: 1,
     months: new Set(), ports: new Set(), sites: new Set(), boats: new Set(),
+    /* The certification and logged dives a trip demands, as one value: the
+       two halves are a single question -- "can I book this" -- and filtering
+       them apart lets a reader clear the level and still be turned away at
+       the dock by the dive count. */
+    entry: new Set(),
     /* Who sells the sailing. Empty means every seller, like every other chip
        bank here -- a filter nobody has touched must never be a filter. */
     sellers: new Set(),
@@ -280,8 +285,10 @@
      fare nobody marked down. */
   function saleTag(d) {
     if (!d.sale) return "";
-    var who = (d.sale.sellers || []).map(function (s) { return SELLER_NAMES[s] || "a seller"; });
-    var read = D.meta.berths_read ? ", read " + D.meta.berths_read : "";
+    /* Each seller under its own reading date, rather than one date appended to
+       a list of them: the two books are read by two jobs two days apart, and a
+       sale is exactly the kind of claim that expires between them. */
+    var who = namedReadings(d.sale.sellers);
     /* No percentage has two causes — the discounting seller is not the one
        whose fare this row prints, or the markdown rounds to nothing — and the
        row does not carry which. So the tooltip states what is true of both
@@ -289,15 +296,54 @@
     if (!d.sale.pct) {
       return '<span class="sale-mark" title="' +
         esc("On sale through " + who.join(" and ") +
-            ", with no percentage stated against the fare on this row" + read) +
+            ", with no percentage stated against the fare on this row") +
         '">on sale</span>';
     }
     /* "Down from" only where there is a figure to be down from. `was` is
        withheld when the seller stated no currency, and a converted amount
        built from a missing one printed "€NaN" into the tooltip. */
     var title = (d.sale.was ? "Down from " + eur(d.sale.was) + ", per " : "Marked down by ") +
-      who.join(" and ") + read;
+      who.join(" and ");
     return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
+  }
+
+  /* Why the Advertised column is one figure rather than two.
+
+     A single number there means three different things, and until this mark
+     they printed identically: both sellers quote it (155 rows), only one of
+     them has been asked (513 rows), or PADI quotes the sailing too but does not
+     disclose enough of its own bill for the row to price it, so its berth price
+     exists and no column shows it (454 rows). "€2,371" agreed by two sellers
+     and "€2,371" from the only one anybody asked are not the same claim, and a
+     reader had to reach column seventeen to tell them apart.
+
+     Marked, not columned, and only on the two cases a reader can act on: the
+     Total already carries `2 sellers` for a span, and this says the same word
+     about the berth. The third case is the plain unmarked number, which is what
+     the rest of the page means by one seller.
+
+     Nothing here is recomputed: `d.padi` and `row.p` are the same two keys the
+     Total and the Seller column branch on. A second derivation would be a
+     second answer to "who priced this". */
+  function whoAdvertised(d, row) {
+    if (d.padi == null) return "";
+    if (row && row.p) {
+      /* Both bills add up, so the pair beside this is genuinely two sellers'
+         and the Total's own marker already says so. Saying it twice on one row
+         is noise. */
+      return "";
+    }
+    var same = Math.round(d.padi) === Math.round(d.base);
+    return '<span class="varies" title="' + esc(
+      same
+        ? "PADI Travel advertises this berth at the same price. It does not " +
+          "publish a complete set of required extras for this trip, so there " +
+          "is a second price and no second total — open the row for both."
+        : "PADI Travel advertises this berth at " + eur(d.padi) + ". It does " +
+          "not publish a complete set of required extras for this trip, so " +
+          "the two berth prices are not a comparison of two bills — open the " +
+          "row for what each seller does state."
+    ) + '">2 sellers</span>';
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -395,10 +441,26 @@
     return null;
   }
 
-  /* The day a seller's counts were read. Two crawls, two days, and the date is
-     the whole of what makes a count a claim rather than a fact. */
-  function readOn(block) {
-    return block[BLOCK_SELLER] === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
+  /* The day a seller's book was read. Two crawls, two days, and the date is
+     the whole of what makes a count or a markdown a claim rather than a fact. */
+  function sellerRead(seller) {
+    return seller === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
+  }
+  function readOn(block) { return sellerRead(block[BLOCK_SELLER]); }
+
+  /* "liveaboard.com (28 Aug) and padi.com (30 Aug)" — every seller in a list,
+     each under its own reading date.
+
+     One date over two sellers dates half of them wrong. The berth counts have
+     obeyed that since they were published; the sale marks did not, and stamped
+     the cabin crawl's day on 124 rows whose evidence is partly PADI's book from
+     two days later and on 2 that are entirely it. Same fact, same rule, and now
+     the same function. */
+  function namedReadings(sellers) {
+    return (sellers || []).map(function (s) {
+      var day = sellerRead(s);
+      return (SELLER_NAMES[s] || "a seller") + (day ? " (" + shortDate(day) + ")" : "");
+    });
   }
 
   /* The cheapest rung anyone can still book. A minimum over prices Python
@@ -418,6 +480,54 @@
      same and broke as soon as an alias folded them apart. */
   function tripName(itin) {
     return itin.title || itin.name;
+  }
+
+  /* The entry bar as one phrase, and as one number to sort it by.
+   *
+     The bar is two facts -- a certification and a count of logged dives -- and
+     the fleet spreads across both. Printed as a level alone it is three values
+     with 47% of the rows on one of them; printed as the pair it is seventeen
+     with 26% on the largest, and the difference is not decoration: an *Open
+     Water* week demanding 30 logged dives turns away a diver that an *Advanced*
+     week demanding none would take. Neither half answers "can I book this" on
+     its own.
+
+     `D.entry_bars` carries the vocabulary and the order together, so the
+     certification's short name and the dives a level implies are the dataset's
+     words rather than a second copy written here. See taxonomy.DIVER_LEVEL_BARS.
+
+     Two facts, one string, because the string is what the reader compares --
+     but the *rank* keeps them apart: level first, then dives, which is
+     `DIVER_LEVEL_ORDER`'s own claim about which bar is the harder one rather
+     than an arithmetic this file invented. */
+  var BAR_RANK = {}, BAR_CERT = {}, BAR_DIVES = {};
+  (D.entry_bars || []).forEach(function (bar, n) {
+    BAR_RANK[bar[0]] = n; BAR_CERT[bar[0]] = bar[1]; BAR_DIVES[bar[0]] = bar[2];
+  });
+
+  /* The greater of what the trip states and what its level already implies.
+     Never the smaller: a safety requirement is not softened here, and an
+     `advanced_50` trip that stated 20 would otherwise print a bar 30 dives
+     below the certification it also demands. */
+  function entryDives(req) {
+    return Math.max(req.min_logged_dives || 0, BAR_DIVES[req.min_level] || 0);
+  }
+
+  function entryText(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level || BAR_CERT[req.min_level] === undefined) return "";
+    var dives = entryDives(req);
+    return BAR_CERT[req.min_level] + (dives ? " + " + dives + " dives" : "");
+  }
+
+  /* -1 for a trip stating no bar, so it sorts to the same end as an unstated
+     guest count or dive count does. Every one of the 402 itineraries states
+     one today; the branch is here because "nobody said" must never sort as
+     though somebody had said "nothing required". */
+  function entryRank(itin) {
+    var req = itin.requirements;
+    if (!req || !req.min_level || BAR_RANK[req.min_level] === undefined) return -1;
+    return BAR_RANK[req.min_level] * 1000 + entryDives(req);
   }
 
   function tally(pick) {
@@ -447,14 +557,42 @@
      the operator bank could not answer, because a company with six boats
      returned six boats' worth of rows and no way to tell them apart.
 
-     The operator is not lost -- it stays on every itinerary in the dataset and
-     in the expanded row -- but it is no longer *filterable*. It was reachable
-     through the search box, and that box has gone: a second way to ask what
-     the chips ask, redrawing the table on every keystroke, and the only
-     question it answered alone was the company. 42 buttons above the prices
-     is the wrong weight for a question asked far less often than "which
-     boat", and so, it turns out, is a permanent input. */
+     The operator is off the page entirely now, and this comment used to say
+     otherwise: "it stays on every itinerary in the dataset and in the expanded
+     row". Only the first half was ever true. Nothing printed the company, and
+     the field went on shipping to every visitor 402 times a page -- so the
+     sentence described a fallback that did not exist, which is how a fact gets
+     withdrawn without anyone deciding to withdraw it.
+
+     It is a decision now: a diver picks the boat. The filter bank went because
+     a company with six boats returned six boats' worth of rows and no way to
+     tell them apart; the search box that reached it went too, being a second
+     way to ask what the chips ask, redrawing the table on every keystroke, for
+     a question asked far less often than "which boat"; and a per-operator
+     score went before either, for reading as a league table. The company is in
+     the dataset and in the CSV for anyone who wants to group by it. */
   var BOATS = tally(function (i) { return [i.boat]; });
+
+  /* The entry bar, and the one bank that is not ordered by how many rows carry
+     it. `tally` sorts by count because a port or a boat has no order of its
+     own; a bar does -- least demanding to most -- and it is an order the reader
+     is reading the bank *along*, looking for the last chip they still clear.
+     Sorted by count, "Advanced + 50 dives" opened the bank and "Open Water"
+     sat fourth, which reads as a list of popular options rather than as a
+     ladder. Ranked by `entryRank`, so the bank and the column's sort agree. */
+  var ENTRY = (function () {
+    var n = {}, rank = {};
+    D.departures.forEach(function (dep) {
+      var itin = D.itineraries[dep.itinerary_id];
+      var text = entryText(itin);
+      if (!text) return;
+      n[text] = (n[text] || 0) + 1;
+      rank[text] = entryRank(itin);
+    });
+    return Object.keys(n).sort(function (a, b) {
+      return rank[a] - rank[b] || a.localeCompare(b);
+    }).map(function (v) { return { id: v, n: n[v] }; });
+  })();
 
   /* Which sites sell this sailing. Three states and they are three different
      facts, so they are three chips rather than one "PADI" switch:
@@ -466,8 +604,15 @@
                          calendar runs to a different depth on every boat, so
                          this is a fact about who was asked and not about the
                          trip.
-       PADI only         liveaboard.com does not list the date -- and on 22
-                         boats does not sell berths at all.
+       PADI only         PADI is the only seller this site has a price from.
+                         On most of those rows liveaboard.com does not list
+                         the date, and on 22 boats does not sell berths at
+                         all -- but on 87 it was simply never asked, because
+                         the barren list held its vessel back for the week.
+                         The chip is a fact about who was asked, which is why
+                         it can hold all three; the *sentence* in the expanded
+                         row is the one that must not overstate, and it does
+                         not.
 
      Both sellers are named, and named the way the Seller column names them.
      The middle chip read "Here only", which asks the reader to know which of
@@ -536,6 +681,38 @@
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
         return '<span class="dim">—</span>';
       } },
+    /* The entry bar, which decides whether a row is a trip you can book at all.
+     *
+       It had a column of its own once and lost it, for three reasons recorded
+       where the expanded row prints the same fact. Two of them were answered by
+       printing the pair rather than the level: it is no longer "the same three
+       words on most rows" (seventeen values, the largest 26% of rows, against
+       three and 47%), and the disagreement marker is the `varies` footnote the
+       Total already uses for the same fact -- two sellers who do not agree --
+       rather than a second pill that looked like the Disclosure one beside it.
+
+       The third was width, and that is answered by where it sits: after Dive
+       sites, so on every layout below 1700px it falls behind the price block
+       and the Total's position is unchanged. See ORDER.
+
+       The fact itself is the operator's safety claim, so the cell states it
+       and never softens it; where the two sellers disagree the stricter is
+       shown and the mark says so. */
+    { k: "entry", t: "Entry bar", short: "Entry", cls: "entry-col",
+      v: function (d, i) { return entryRank(i); },
+      show: function (d, i) {
+        var text = entryText(i);
+        if (!text) return '<span class="dim">—</span>';
+        var req = i.requirements;
+        /* Named for what it is rather than for which way it went: the reader
+           who wants to know which seller said what has the note in the hover
+           and the whole sentence in the expanded row. */
+        var split = req.notes && req.notes.indexOf("Sources disagree") >= 0
+          ? '<span class="varies" title="' +
+            esc(req.notes).replace(/"/g, "&quot;") + '">2 sellers</span>'
+          : "";
+        return esc(text) + split;
+      } },
     /* The berth price of whichever seller's bill this row is printing. It read
        ours unconditionally, which on a row won by the second seller put two
        sellers' numbers in one arithmetic: Advertised plus Mandatory fees no
@@ -552,8 +729,8 @@
       },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return eur(d.base) + saleTag(d);
-        return sellerPair(b.baseLo, b.baseHi) + saleTag(d);
+        if (!b) return eur(d.base) + whoAdvertised(d, row) + saleTag(d);
+        return sellerPair(b.baseLo, b.baseHi) + whoAdvertised(d, row) + saleTag(d);
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -857,10 +1034,18 @@
 
      Anything missing here is appended rather than dropped, and says so, because
      a column that silently vanished would be a fact the page stopped
-     publishing. */
+     publishing.
+
+     Entry bar sits after Dive sites and before the money, which is the one
+     place a seventeenth column costs nothing: this order is only used above
+     1700px, and every narrower order already puts the price block first, so
+     the Total's position is identical with the column and without it. It goes
+     there rather than among the provenance columns at the end because it is
+     not provenance -- it decides whether the row is a trip you can book, which
+     is the same kind of question as where the trip goes. */
   var ORDER = [
     "start", "end", "boat", "guests",
-    "from", "to", "trip", "sites",
+    "from", "to", "trip", "sites", "entry",
     "base", "nitrox", "later", "total", "perdive",
     "availability", "disclosure", "source"
   ];
@@ -895,7 +1080,7 @@
        invented for this width. Scrolling right reads the bill; not scrolling
        still shows the answer. */
     "total", "base", "nitrox", "later", "perdive",
-    "end", "from", "to", "trip", "sites",
+    "end", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -914,7 +1099,7 @@
   var TINY_ORDER = [
     "start", "boat",
     "total", "base", "nitrox", "later", "perdive",
-    "guests", "end", "from", "to", "trip", "sites",
+    "guests", "end", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -932,7 +1117,7 @@
   var COMPACT_ORDER = [
     "start", "end", "boat",
     "base", "nitrox", "later", "total", "perdive",
-    "guests", "from", "to", "trip", "sites",
+    "guests", "from", "to", "trip", "sites", "entry",
     "availability", "disclosure", "source"
   ];
 
@@ -1018,9 +1203,9 @@
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
     if (state.hideSoldOut && !dep.bookable) return false;
-    /* Skippable like any other facet, and for the reason the mechanism exists:
-       the rail has to answer "how many would the *other* view show" without
-       switching to it, which is the same question a chip's count asks. */
+    /* `saleOnly()`, not `state.onSaleOnly`: the sale view is this filter held
+       down as a destination, so a view that did not reach here would be a
+       heading promising markdowns over a table showing everything. */
     if (skip !== "sale" && saleOnly() && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
@@ -1042,6 +1227,13 @@
     /* Any-of, like months and ports and unlike dive sites: a sailing has
        exactly one answer here, so requiring two would return nothing. */
     if (skip !== "sellers" && state.sellers.size && !state.sellers.has(sellerOf(dep))) {
+      return false;
+    }
+    /* Any-of for the same reason: one trip states one bar. Matched on the
+       printed phrase rather than on the level, so what the chip says and what
+       the column says cannot come apart -- the same rule the site chips follow
+       against the Dive sites column. */
+    if (skip !== "entry" && state.entry.size && !state.entry.has(entryText(itin))) {
       return false;
     }
     return true;
@@ -1076,22 +1268,28 @@
 
   /* The entry bar this trip states, in words rather than a code.
    *
-   * It had a column of its own and lost it: sixteen columns already competed
-   * for the width, the bar is the same three words on most rows, and its
-   * "sources disagree" marker was styled like the disclosure pill beside it,
-   * so two unrelated warnings looked identical in adjacent columns. All three
-   * were arguments against the column and none was an argument against the
-   * fact -- but removing the column removed the fact, because nothing else on
-   * the page printed it. `level_labels` and every itinerary's `requirements`
-   * went on shipping in the payload with no code reading either: 892
-   * departures carrying a stated safety requirement that a visitor could only
-   * reach by downloading the JSON.
+   * There is a column for it again -- see COLS -- and this is not the leftover
+   * of its absence. The two say different things about one fact. The column
+   * states the bar, which is what a reader scanning 1,122 rows for a trip they
+   * can book needs; this says who stated it, which nobody needs until they
+   * have found the row.
    *
-   * So it lives here instead, under the bill, where there is room for the part
-   * that actually needs saying: liveaboard.com and PADI Travel disagree about
-   * the bar on 49 of these trips, the stricter one is what is shown, and a
-   * diver deserves to know the two sources do not agree rather than to see one
-   * number presented as settled.
+   * That split is what the column's first removal got wrong rather than right.
+   * Three things were true of it -- sixteen columns already competed for the
+   * width, the bar was the same three words on most rows, and its "sources
+   * disagree" marker was styled like the disclosure pill beside it, so two
+   * unrelated warnings looked identical in adjacent columns -- and none of
+   * them was an argument against the fact. Removing the column removed the
+   * fact: `level_labels` and every itinerary's `requirements` went on shipping
+   * in the payload with no code reading either, and 892 departures carried a
+   * stated safety requirement a visitor could only reach by downloading the
+   * JSON. The answer was a better column, and the width, the repetition and
+   * the marker are each answered where the column is defined.
+   *
+   * What stays here is the part a column cannot hold: liveaboard.com and PADI
+   * Travel disagree about the bar on 60 of the 127 trips both describe, the
+   * stricter one is what is shown, and a diver deserves to know the two
+   * sources do not agree rather than to see one number presented as settled.
    *
    * The dim line under it is the sources' own wording, printed for the same
    * reason the fee rows print the operator's: a normalised label is this
@@ -1100,17 +1298,15 @@
   function entryBar(itin) {
     var req = itin.requirements;
     if (!req || !req.min_level) return "";
-    var level = (D.level_labels && D.level_labels[req.min_level]) || req.min_level;
-    /* The dive count beside the certification, unless the certification's own
-       label already states it: two of the four levels are written "Advanced +
-       50 dives", and appending the number again printed "Advanced + 50 dives,
-       50 logged dives" on the single commonest bar in the fleet. Matched on a
-       word boundary rather than as a substring, so a ten-dive bar is not
-       swallowed by a label that happens to read "+ 100 dives". */
-    var stated = req.min_logged_dives &&
-      new RegExp("\\b" + req.min_logged_dives + "\\b").test(level);
-    var dives = req.min_logged_dives && !stated
-      ? ", " + req.min_logged_dives + " logged dives" : "";
+    /* The same phrase the Entry bar column prints, from the same function.
+       This used to build its own -- the level's full label, then the dive
+       count appended unless a regex spotted the label already stating it --
+       and that was two renderings of one fact which could disagree about the
+       commonest bar in the fleet. The column made the duplication worse rather
+       than introducing it, so the phrase moved to `entryText` and both read it.
+       The full certification name is still what the note below says, because a
+       sentence naming a source wants the card's real name. */
+    var level = entryText(itin);
     /* The note, on the trips where it says more than the line above it.
      *
        Every trip has one and 222 of the 317 are the winning source restating
@@ -1122,7 +1318,7 @@
        sentence included, because there the restatement is no longer a
        repetition -- it is which of the two bars was taken. */
     var note = req.notes && /PADI|liveaboard\.com/.test(req.notes) ? req.notes : "";
-    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level + dives) +
+    return '<p class="entry"><b>Entry bar</b> <span>' + esc(level) +
       "</span>" +
       (note ? '<span class="dim">' + esc(note) + "</span>" : "") +
       "</p>";
@@ -1223,6 +1419,21 @@
           + "the only seller and everything above is PADI’s: the berth price "
           + "and the required extras its itinerary publishes. There is no "
           + "second bill to set against it."
+        : row.d.not_asked
+        /* The third case, and the reason it exists: `data/barren.json` holds
+           a vessel back for a week after a crawl found it selling nothing,
+           and while it does, nobody reads that boat's pages. Saying
+           "liveaboard.com does not list this sailing" about it states a
+           result for a page this site did not open — on 87 sailings across
+           four boats. Not asked is weaker and it is what the data supports.
+           Same rule as `fees_known`: no fee lines means nobody looked, not
+           that there are none. */
+        ? "liveaboard.com was not asked about this sailing — a recent crawl "
+          + "found this boat selling nothing and it is re-checked weekly, so "
+          + "its pages were not read this run. PADI Travel is the seller this "
+          + "site has a price from; whether the other one lists the date is "
+          + "not something this page knows. The fees under the berth price "
+          + "are the vessel’s own, which it charges on board whoever sold it."
         : "liveaboard.com does not list this sailing, so PADI Travel is the "
           + "only seller and there is one bill rather than two. The berth "
           + "price above is PADI’s; the fees under it are the vessel’s own, "
@@ -1390,15 +1601,17 @@
      month left the rail reading "Trips 1,122" beside a stat block reading "12
      rows shown" -- two numbers about one table, one of them frozen.
 
-     The On sale *chip* keeps its fixed count and is right to: it says how much
-     there is to find, so a number that fell to 0 under an unrelated month
-     filter would read as "no sales" rather than "none in June". That argument
-     is about a control you press to add a filter. A rail item is a destination,
-     and a destination's number is a promise about what opening it gives you.
+     Filter-relative for the same reason the On sale chip became so (#129):
+     every other number on this page answers "what if I picked this too?", and
+     one that does not teaches the reader nothing except that this one lies. On
+     a rail item it is worse than on a chip -- a chip's number is an offer and a
+     rail item's is a promise about what opening it gives you, so a stale one is
+     broken by the click rather than merely disagreeing with its neighbours.
 
      One pass with the sale facet skipped answers both: the survivors are the
      trips view, and the marked-down ones among them are the sale view. Which
-     view is on screen does not enter into it, so the two agree from either. */
+     view is on screen does not enter into it, so the two agree from either --
+     and the sale item agrees with the chip, which skips the same facet. */
   function countRail() {
     var trips = 0, sale = 0;
     D.departures.forEach(function (dep) {
@@ -1453,7 +1666,32 @@
 
   var BANKS = [];
 
-  function chips(host, items, picked, numeric, skip, pick) {
+  /* `opts.limit` overrides the default cap, and `opts.moreWord` the disclosure's
+     noun. Exactly one bank sets either, and the reason is that the cap means
+     something different to a *ladder* than to a list.
+
+     For ports or boats the eight commonest are a fair sample of a set with no
+     order of its own, and "+ 69 more" is an honest offer. The entry bar is
+     ordered least demanding to most, so a count-based cut is arbitrary and
+     brutal: at 8 it hides 738 of 1122 rows, every Advanced rung, and the
+     single biggest bar there is -- Advanced + 50 dives, on 289 rows -- which
+     sorts *last* precisely because it is the strictest. Sorting the bank by
+     popularity instead would fix the cap and break the reading.
+
+     So the entry bank cuts at its certification boundary rather than at a
+     number: Open Water rungs shown, Advanced rungs behind the disclosure. That
+     is a fold a reader can predict, and the label says which way it opens --
+     "+ 9 stricter" rather than "+ 9 more", because on a ladder the direction
+     is the information. It happens to be 8 chips today, which is what the
+     default cap would have given anyway; the difference is that it stays on
+     the boundary when the fleet changes or the screen narrows.
+
+     This bank was uncapped until then, on the reasoning that seventeen short
+     chips cost about what Ports already does and the panel scrolls. Capping it
+     is a deliberate reversal: the panel is long enough that the reversal is
+     worth the fold, given the fold is meaningful. */
+  function chips(host, items, picked, numeric, skip, pick, opts) {
+    opts = opts || {};
     var node = document.getElementById(host);
     var expanded = false;
     var counts = null;
@@ -1476,7 +1714,7 @@
         var v = numeric ? +it.id : it.id;
         return counts[it.id] || picked.has(v);
       });
-      var limit = chipLimit();
+      var limit = opts.limit ? opts.limit(live) : chipLimit();
       var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
         return n < limit || picked.has(v);
@@ -1491,7 +1729,8 @@
       }).join("") +
         (hidden > 0 || expanded
           ? '<button class="chip more" data-more="1" aria-expanded="' + expanded + '">' +
-            (expanded ? "− fewer" : "+ " + hidden + " more") + "</button>"
+            (expanded ? "− fewer"
+               : "+ " + hidden + " " + (opts.moreWord || "more")) + "</button>"
           : "");
     }
 
@@ -1561,109 +1800,281 @@
   /* The overview, in one line, and it leads with the number that answers the
      question. Both sellers are counted, and the sailing count wins over the
      offer count: 268 discounted sailings is what a reader can act on, where
-     PADI's 13 is thirteen boats' worth of "there is a sale on". The change
-     figure stays PADI's and says so — it is the only half with a day-by-day
-     committed book to diff, because the cabin file keeps one reading. */
+     PADI's 13 is thirteen boats' worth of "there is a sale on".
+
+     Both halves now say what moved, and each says it under its own seller's
+     name and its own reading date. They are different books read on different
+     days — `data/deals.json` from PADI's listing, `data/sales.json` derived
+     from the booking pages — and one date over two sellers dates half of them
+     wrong. The liveaboard half leads because it is the larger signal: the day
+     the Red Sea Aggressors' sale ended, PADI's listing moved three offers and
+     the booking pages moved 36 sailings. */
   function dealsSummary(deals, changed) {
     var sale = deals.on_sale, offers = deals.offers || [];
     var n = sale ? sale.sailings : offers.length;
-    var line = n + (n === 1 ? " discounted sailing" : " discounted sailings");
+    var line = sale || offers.length
+      ? n + (n === 1 ? " discounted sailing" : " discounted sailings")
+      : "nothing discounted";
     if (sale) line += " on " + sale.boats.length + " boats";
+
+    var shifted = deals.on_sale_changes;
+    if (shifted && !shifted.first_reading) {
+      var moved = 0;
+      (shifted.moves || []).forEach(function (m) { moved += m.sailings; });
+      line += " · " + (moved
+        ? moved + " moved on liveaboard.com"
+        : "nothing moved on liveaboard.com") + " since " + shortDate(shifted.previous);
+    }
+
     if (!offers.length) return "On sale · " + line;
     if (deals.first_reading) line += " · PADI's listing, first reading";
     else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
     else if (deals.previous) line += " · nothing moved on PADI since " + shortDate(deals.previous);
-    return "On sale · " + line + " · read " + shortDate(deals.read);
+    /* The oldest day anything under this heading was read, not PADI's listing
+       date. Three books feed the line — two crawls and a listing — and the
+       freshest of them was standing for all of it, which dated the whole panel
+       two days newer than half its evidence. A summary is as fresh as its
+       stalest half; the table below states each seller's day on its own row. */
+    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read]
+      .filter(Boolean).sort();
+    return "On sale · " + line +
+      (days.length ? " · read " + shortDate(days[0]) : "");
   }
 
-  /* "20% off" where PADI states a percentage, and the money either way.
+  /* One row per boat, both sellers on it.
 
-     Its own word, not a percentage worked out from the two prices: a "Free
-     night(s)" offer takes nothing off the nightly rate and dividing one price
-     by the other would print it as a discount PADI never claimed. Where the
-     kind is a percentage the value is that percentage and is printed; where it
-     is not, the saving is the whole of what can be said. */
-  function offerOff(row) {
+     This was two tables. The left half — every discounted sailing, per boat —
+     came from the booking-page ladders; the right half was PADI's deals
+     listing. They answered complementary halves of one question and were drawn
+     as though they answered different questions: 22 boats with a window and no
+     money, sorted by name; 10 boats with money and no window, sorted by sail
+     date; ten boats in both and no way to read across. Discovery I was row 6 of
+     one without a price and row 8 of the other without a week.
+
+     The halves stay distinct because the claims are — a ladder says which weeks
+     are cut, a listing says one exemplar sailing and what it costs — and the
+     column group above them names whose is whose. What changes is that they
+     share a row, so the reader compares them by looking rather than by
+     remembering.
+
+     The union, not the intersection. Ten boats fill both halves today and it
+     would be easy to key the table on the fleet rows alone; a PADI offer for a
+     boat no ladder has caught would then vanish out of a panel headed "what is
+     discounted", which is this site's own reported failure in somebody else. */
+  var OFFER_GROUP = ["Sails", "Now", "Was", "Saving", "Offer"];
+
+  /* What comes off, in money. The percentage is not repeated here: it is in
+     the `Off` column of the same row, from the ladder that carries the whole
+     season rather than from one exemplar. The old table printed it three times
+     on a line — "20% off · €295" beside "Monthly Special 20% Off + Free
+     Nitrox" — and the third of those is PADI's own words and stays verbatim.
+
+     Where PADI's kind is not a percentage the money is the whole of what can
+     be said: a "Free night(s)" offer takes nothing off a nightly rate, and
+     dividing one price by the other would print a discount PADI never claimed. */
+  function offerSaving(row) {
     var saved = row.was - row.price;
-    if (row.kind === "Discount %" && row.value) {
-      return row.value + "% off · " + eur(saved);
-    }
-    return saved > 0 ? eur(saved) + " off" : (row.kind || "offer");
+    if (saved > 0) return eur(saved);
+    return row.kind || "offer";
   }
 
-  function dealRow(row) {
-    var tr = el("tr", null);
-    tr.appendChild(el("td", "d-when", shortDate(row.start) +
-      (row.nights ? " · " + row.nights + "n" : "")));
-
-    var boat = el("td", "d-boat");
-    if (row.url) {
-      var a = document.createElement("a");
-      a.href = row.url;
-      a.rel = "noopener";
-      a.target = "_blank";
-      a.textContent = row.boat_name;
-      /* The page the offer was read from, per row. A price whose source
-         cannot be opened is a price this site is asking to be taken on
-         trust, which is the thing it exists to object to. */
-      a.title = "The PADI Travel page this offer was read from";
-      boat.appendChild(a);
-    } else {
-      boat.textContent = row.boat_name;
+  /* PADI's half of a row, or five empty cells where PADI advertises nothing
+     for that boat. An empty cell is the honest statement — PADI publishes no
+     listing for it — where an absent row would say the boat is not discounted,
+     which the left half of the same line contradicts. */
+  function offerCells(tr, offer) {
+    if (!offer) {
+      OFFER_GROUP.forEach(function (_, n) {
+        tr.appendChild(el("td", n === 0 ? "d-none g-first" : "d-none", "—"));
+      });
+      return;
     }
-    tr.appendChild(boat);
+    tr.appendChild(el("td", "d-when g-first", shortDate(offer.start) +
+      (offer.nights ? " · " + offer.nights + "n" : "")));
 
-    /* Money before the offer's name, because the name is the longest column
-       and a phone reads this table left to right through a 390px window: with
-       the name third, every price on it sat off the right-hand edge behind a
-       horizontal scroll. What it costs is the column somebody came for. */
-    tr.appendChild(el("td", "d-now", eur(row.price)));
+    /* The money PADI quotes, with the figure it quoted it in behind it. That
+       had a column of its own and was a dash on eight of ten rows, because
+       most of this fleet is priced in euro already; as a title it costs no
+       width and is still one hover from anybody checking the conversion. */
+    var now = el("td", "d-now", eur(offer.price));
+    now.title = offer.currency === D.meta.currency
+      ? "As PADI quotes it: " + eur(offer.price)
+      : "As PADI quotes it, before conversion: " + offer.currency + " " +
+        Math.round(offer.quoted).toLocaleString("en-IE") +
+        (offer.was > offer.price
+          ? ", against " + offer.currency + " " +
+            Math.round(offer.quoted_was).toLocaleString("en-IE")
+          : "");
+    tr.appendChild(now);
+
     /* Struck through only where it is genuinely a different number. A "was"
        equal to the price is PADI stating an offer that takes nothing off this
        figure, and printing it crossed out would invent a saving. */
-    tr.appendChild(el("td", "d-was", row.was > row.price ? eur(row.was) : "—"));
-    tr.appendChild(el("td", "d-off", offerOff(row)));
-    tr.appendChild(el("td", "d-offer", row.title || "—"));
+    tr.appendChild(el("td", "d-was", offer.was > offer.price ? eur(offer.was) : "—"));
+    tr.appendChild(el("td", "d-off", offerSaving(offer)));
 
-    /* What PADI actually published, beside what this page converted it to.
-       Every other price here is converted the same way and says so once in the
-       footer; a deal is a number somebody is being asked to act on today, so it
-       says so on its own row. A dash where the two currencies already agree:
-       repeating "EUR 720" beside "€720" is a column of noise on eight of
-       thirteen rows. */
-    function quoted(amount) {
-      return row.currency + " " + Math.round(amount).toLocaleString("en-IE");
+    /* PADI's own name for the offer, verbatim — including the percentage it
+       repeats and the shouting, for the reason this project keeps a fleet
+       label verbatim: tidying somebody's words is a short step from deciding
+       what they said. Linked to the page it was read from, because a price
+       whose source cannot be opened is a price this site is asking to be taken
+       on trust. */
+    var name = el("td", "d-offer");
+    if (offer.url) {
+      var a = document.createElement("a");
+      a.href = offer.url;
+      a.rel = "noopener";
+      a.target = "_blank";
+      a.textContent = offer.title || "offer";
+      a.title = "The PADI Travel page this offer was read from";
+      name.appendChild(a);
+    } else {
+      name.textContent = offer.title || "—";
     }
-    var native = el("td", "d-native",
-      row.currency === D.meta.currency ? "—" : quoted(row.quoted));
-    native.title = row.was > row.price
-      ? "As PADI quotes it, before conversion: " + quoted(row.quoted) +
-        ", against " + quoted(row.quoted_was)
-      : "As PADI quotes it, before conversion";
-    tr.appendChild(native);
-    return tr;
+    tr.appendChild(name);
   }
 
-  function dealsTable(rows) {
+  /* Who marked it down and when they were read, one seller per line.
+
+     The date is per seller and not per panel. These two books are read by two
+     jobs two days apart, and stamping the cabin crawl's day across the whole
+     table dated ten of these twenty-two rows wrong — the same rule the berth
+     counts have followed since they were published. */
+  function markedDownBy(row) {
+    var td = el("td", "d-native");
+    (row.sellers || []).forEach(function (seller, n) {
+      var day = (row.read || [])[n];
+      td.appendChild(el("span", "reading",
+        (SELLER_NAMES[seller] || "?") + (day ? " · " + shortDate(day) : "")));
+    });
+    return td;
+  }
+
+  function offersTable(rows) {
     var table = el("table", "deals-table");
     var head = document.createElement("thead");
+
+    /* Two header rows, because the columns come from two sellers and a reader
+       who cannot see the join will read the money as belonging to the window
+       beside it. The left group is unlabelled: it is the table's subject, and
+       naming it would put a heading over the boat's own name. */
+    var group = el("tr", "d-group");
+    var pad = el("th", null, "");
+    pad.colSpan = 6;
+    group.appendChild(pad);
+    var padi = el("th", "g-first", "Advertised on padi.com");
+    padi.colSpan = OFFER_GROUP.length;
+    group.appendChild(padi);
+    head.appendChild(group);
+
     var hr = el("tr", null);
-    ["Sails", "Boat", "Now", "Was", "Saving", "Offer", "As quoted"].forEach(function (h) {
+    ["Boat", "On sale", "Off", "From", "To", "Marked down by"].forEach(function (h) {
       hr.appendChild(el("th", null, h));
+    });
+    OFFER_GROUP.forEach(function (h, n) {
+      hr.appendChild(el("th", n === 0 ? "g-first" : null, h));
     });
     head.appendChild(hr);
     table.appendChild(head);
+
     var body = document.createElement("tbody");
-    rows.forEach(function (row) { body.appendChild(dealRow(row)); });
+    rows.forEach(function (r) {
+      var tr = el("tr", null);
+      tr.appendChild(el("td", "d-boat", r.boat_name));
+      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
+         situations and the bare number cannot tell them apart. A boat here on
+         PADI's listing alone has no such count and says so with a dash rather
+         than a nought. */
+      tr.appendChild(el("td", "d-when", r.sailings
+        ? r.sailings + " of " + r.of : "—"));
+      tr.appendChild(el("td", "d-off", r.pct
+        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
+        : "—"));
+      tr.appendChild(el("td", "d-when", r.first ? shortDate(r.first) : "—"));
+      tr.appendChild(el("td", "d-when", r.last ? shortDate(r.last) : "—"));
+      tr.appendChild(markedDownBy(r));
+      offerCells(tr, r.offer);
+      body.appendChild(tr);
+    });
     table.appendChild(body);
     return table;
+  }
+
+  /* The fleet rows and PADI's offers, joined on the boat they are both about.
+     Sorted once, by the name printed in the first column, so the whole table
+     has one order instead of one per half. */
+  function offerRows(fleet, offers) {
+    var byBoat = {};
+    var order = [];
+    fleet.forEach(function (r) {
+      byBoat[r.boat] = { boat: r.boat, boat_name: r.boat_name, sailings: r.sailings,
+        of: r.of, pct: r.pct, pct_max: r.pct_max, first: r.first, last: r.last,
+        sellers: r.sellers, read: r.read, offer: null };
+      order.push(r.boat);
+    });
+    offers.forEach(function (o) {
+      if (!byBoat[o.boat]) {
+        /* PADI advertises this boat and no ladder caught it. Kept, with an
+           empty left half, rather than dropped out of the panel. */
+        byBoat[o.boat] = { boat: o.boat, boat_name: o.boat_name, sellers: [], read: [] };
+        order.push(o.boat);
+      }
+      byBoat[o.boat].offer = o;
+    });
+    return order.map(function (id) { return byBoat[id]; }).sort(function (a, b) {
+      var x = (a.boat_name || "").toLowerCase(), y = (b.boat_name || "").toLowerCase();
+      return x < y ? -1 : x > y ? 1 : a.boat < b.boat ? -1 : 1;
+    });
+  }
+
+  /* How far this panel's answer reaches, which is the half of it a count of
+     discounts cannot state. Every sentence here is about an absence, and on the
+     page all three are indistinguishable from "not on sale" unless it says so
+     — the same rule as the change log's `not_compared` note, applied to the
+     summary above it.
+
+     Drawn only from what promote counted. Nothing here is re-derived from the
+     rows, because the rows are precisely where these facts have gone missing. */
+  function coverageNote(coverage) {
+    var said = [];
+    var dropped = coverage.dropped;
+    if (dropped) {
+      said.push(dropped.sailings + (dropped.sailings === 1 ? " sailing" : " sailings") +
+        " on " + dropped.boats.join(", ") + " had a booking page whose cheapest " +
+        "cabin sat too far from the price beside it to still be that sailing’s " +
+        "— last week’s prices on this week’s shelf. Those readings were thrown " +
+        "away, so " + (dropped.sailings === 1 ? "it is" : "they are") +
+        " absent here rather than reported as full price: a ladder that " +
+        "contradicts its own row has not said no, it has gone stale.");
+    }
+    if (coverage.unread) {
+      said.push("A further " + coverage.unread +
+        (coverage.unread === 1 ? " sailing has" : " sailings have") +
+        " no list price read from either seller, so whether " +
+        (coverage.unread === 1 ? "it is" : "they are") +
+        " discounted is unknown rather than no.");
+    }
+    if (coverage.banner_unsupported) {
+      said.push(coverage.banner_unsupported +
+        (coverage.banner_unsupported === 1
+          ? " sailing carries a discount in its own trip name that the seller "
+          : " sailings carry a discount in their own trip names that the seller ") +
+        "read for " + (coverage.banner_unsupported === 1 ? "it" : "them") +
+        " does not support. The banner is a claim about a number; the struck-" +
+        "through list price is the number, and it wins.");
+    }
+    return said.length ? el("p", "deals-note", said.join(" ")) : null;
   }
 
   function dealsChanges(deals) {
     var moved = deals.changes || {};
     var names = moved.names || {};
     var box = el("div", "deals-moved");
-    box.appendChild(el("h4", null, "What moved since " + shortDate(deals.previous)));
+    /* Named, now that both sellers have a change log. Two adjacent sections
+       headed "What moved since …" over two different books read on two
+       different days is exactly the splice this page refuses everywhere else. */
+    box.appendChild(el("h4", null, "What moved on padi.com since " +
+      shortDate(deals.previous)));
 
     if (moved.partial) {
       /* The distinction the whole pipeline turns on: a reading nobody could
@@ -1707,50 +2118,68 @@
     return box;
   }
 
-  /* What the first seller is discounting, per boat and across the season.
+  /* What moved on the booking pages between the last two readings of them.
 
-     A different shape from PADI's list because it is a different claim. PADI
-     publishes a deals *listing*: one exemplar sailing per vessel, which says a
-     boat is on sale and nothing about when. liveaboard.com publishes no such
-     listing at all — its /liveaboard-deals is prose — but strikes out the list
-     price on every discounted cabin of every booking page, so the answer here
-     is per sailing, and what it supports is a **window**: Red Sea Aggressor II
-     is 33% off every week from 1 May to 24 July and full price from 31 July.
-     That is the difference between knowing a boat is on sale and knowing which
-     week to book, and it is worth a table of its own rather than 263 rows
-     spliced into a list of 13. */
-  function fleetTable(rows) {
-    var table = el("table", "deals-table");
-    var head = document.createElement("thead");
-    var hr = el("tr", null);
-    ["Boat", "On sale", "Off", "From", "To", "Per"].forEach(function (h) {
-      hr.appendChild(el("th", null, h));
+     The other seller's half of "what changed", and the bigger one: 263
+     discounted sailings on 22 boats against PADI's 13, with nine of those
+     boats appearing in no deals listing anywhere. It could not be drawn until
+     there was a second committed day to diff — `data/cabins.json` is rewritten
+     whole each run — which is what `data/sales.json` is for.
+
+     Grouped by boat, per move, because that is the unit an operator discounts
+     in and because the ungrouped list is the failure being fixed: "36 sailings
+     no longer 33% off" is one line that says more than 36 identical ones. */
+  function salesChanges(shifted) {
+    var box = el("div", "deals-moved");
+    box.appendChild(el("h4", null, "What moved on liveaboard.com since " +
+      shortDate(shifted.previous)));
+
+    var list = el("ul", "deals-changes");
+    (shifted.moves || []).forEach(function (m) {
+      var n = m.sailings + (m.sailings === 1 ? " sailing" : " sailings");
+      var when = " (" + shortDate(m.first) +
+        (m.last !== m.first ? " – " + shortDate(m.last) : "") + ")";
+      var off = m.pct ? m.pct + (m.pct_max ? "–" + m.pct_max : "") + "% off" : "discounted";
+      var said, cls;
+      if (m.kind === "started") {
+        cls = "d-new";
+        said = n + " newly " + off;
+      } else if (m.kind === "ended") {
+        cls = "d-gone";
+        /* The rate it *was*, not a rate it is: a sale that ended is described
+           by what came off the price while it ran. */
+        said = n + " no longer " + off;
+      } else {
+        cls = "d-moved";
+        said = n + " " + (m.was_pct + (m.was_pct_max ? "–" + m.was_pct_max : "")) +
+          "% → " + off;
+      }
+      list.appendChild(el("li", cls, m.boat_name + " — " + said + when));
     });
-    head.appendChild(hr);
-    table.appendChild(head);
-    var body = document.createElement("tbody");
-    rows.forEach(function (r) {
-      var tr = el("tr", null);
-      tr.appendChild(el("td", "d-boat", r.boat_name));
-      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
-         situations and the bare number cannot tell them apart. */
-      tr.appendChild(el("td", "d-when", r.sailings + " of " + r.of));
-      tr.appendChild(el("td", "d-off", r.pct
-        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
-        : "—"));
-      tr.appendChild(el("td", "d-when", shortDate(r.first)));
-      tr.appendChild(el("td", "d-when", shortDate(r.last)));
-      /* Who publishes the markdown, named rather than assumed. Most of this
-         table is liveaboard.com's booking pages, but not all of it — and a
-         section headed with one seller's name over a count that includes the
-         other's would be exactly the splice this page refuses everywhere
-         else. */
-      tr.appendChild(el("td", "d-native",
-        (r.sellers || []).map(function (s) { return SELLER_NAMES[s] || "?"; }).join(", ")));
-      body.appendChild(tr);
-    });
-    table.appendChild(body);
-    return table;
+
+    if (!list.childNodes.length) {
+      box.appendChild(el("p", "deals-note",
+        "No sailing started, ended or changed its discount."));
+    } else {
+      box.appendChild(list);
+    }
+
+    /* Said out loud, with a count, every time. A sailing missing from either
+       reading has not come off sale — its booking page was not read — and a
+       change list that quietly narrows its own scope reads as "that was
+       everything", which is the thing this site exists to object to. */
+    var one = shifted.compared === 1;
+    var note = shifted.compared + (one ? " sailing was" : " sailings were") +
+      " read on both days and compared.";
+    if (shifted.not_compared) {
+      note += " " + shifted.not_compared + " more " +
+        (shifted.not_compared === 1 ? "was" : "were") + " read on only one of " +
+        "them and " + (shifted.not_compared === 1 ? "is" : "are") +
+        " not compared: a sailing missing from a reading has not come off sale, " +
+        "it has not been looked at.";
+    }
+    box.appendChild(el("p", "deals-note", note));
+    return box;
   }
 
   /* Returns whether there was anything to draw. The panel's own visibility is
@@ -1762,7 +2191,13 @@
     var host = document.getElementById("deals");
     if (!host || !deals) return false;
     var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
-    if (!offers.length && !fleet.length) return false;
+    /* The change log counts as content of its own. The day every sale on the
+       fleet ends there is no table to draw and "36 sailings are no longer 33%
+       off" is the whole of what the panel has to say — which is precisely the
+       thing it could not say before. */
+    var shifted = deals.on_sale_changes;
+    var moved = shifted && !shifted.first_reading;
+    if (!offers.length && !fleet.length && !moved) return false;
 
     var changed = ((deals.changes || {}).new || []).length +
       ((deals.changes || {}).withdrawn || []).length +
@@ -1772,33 +2207,34 @@
     var body = document.getElementById("dealsBody");
     body.textContent = "";
 
-    if (fleet.length) {
-      var read = deals.on_sale.read;
-      body.appendChild(el("h4", null, "Every discounted sailing, by boat"));
+    var rows = offerRows(fleet, offers);
+    if (rows.length) {
+      body.appendChild(el("h4", null, "What is discounted, by boat"));
+      /* One paragraph for one table, and it has to name both sources without
+         claiming either says the other's half. The counts and the window are
+         the sailings' own; the money on the right is one exemplar PADI names. */
+      var lead = deals.on_sale
+        ? deals.on_sale.sailings + " sailings on " +
+          (deals.on_sale.boats || []).length + " boats are marked down. "
+        : "";
       body.appendChild(el("p", "deals-note",
-        deals.on_sale.sailings + " sailings on " + fleet.length +
-        " boats are marked down, read " + shortDate(read) + ". Taken from the " +
-        "list price each seller prints beside its own — struck through against " +
-        "every cabin on a booking page, and stated outright by PADI — never " +
-        "from the “20% Off” an operator writes into a trip name. The banner " +
-        "and the list price agree on every sailing carrying one, and the list " +
-        "price finds 22 more that carry none. The On sale filter below shows " +
-        "these same sailings. A sale is what a seller claimed when it was " +
-        "read, and can end overnight."));
-      body.appendChild(fleetTable(fleet));
+        lead + "Taken " +
+        "from the list price each seller prints beside its own — struck " +
+        "through against every cabin on a booking page, and stated outright " +
+        "by PADI — never from the “20% Off” an operator writes into a trip " +
+        "name. The left of each row is every discounted sailing that boat " +
+        "sells and the weeks they fall in; the right is the single sailing " +
+        "PADI advertises for it, which is a berth price and not a total — the " +
+        "fees in the table below still land on the bill. The On sale filter " +
+        "shows these same sailings. A sale is what a seller claimed on the " +
+        "day beside its name, and can end overnight."));
+      var note = deals.coverage ? coverageNote(deals.coverage) : null;
+      if (note) body.appendChild(note);
+      body.appendChild(offersTable(rows));
     }
+    if (moved) body.appendChild(salesChanges(shifted));
 
     if (!offers.length) return true;
-
-    body.appendChild(el("h4", null, "Advertised on padi.com"));
-    body.appendChild(el("p", "deals-note",
-      "What PADI Travel advertised as discounted on " + shortDate(deals.read) +
-      ", for sailings in this season. One offer per boat: PADI names an " +
-      "exemplar sailing rather than every discounted one, which is why the " +
-      "table above is the longer answer. It is a berth price and an offer on " +
-      "one, not a total: the fees in the table below still land on the bill. " +
-      "Every boat here links to the page its offer was read from."));
-    body.appendChild(dealsTable(offers));
 
     if (deals.previous) body.appendChild(dealsChanges(deals));
 
@@ -2157,6 +2593,22 @@
         function (i) { return i.dive_sites || []; });
   chips("boats", BOATS, state.boats, false, "boats",
         function (i) { return [i.boat]; });
+  /* Cut where the certification changes, not after N chips: the rungs on
+     screen are then "every Open Water bar" and the fold is "the Advanced ones",
+     which a reader can predict before opening it. Falls back to the ordinary
+     cap if the ladder ever has only one certification in it, because a fold
+     that hides nothing meaningful should just be the normal one. */
+  chips("entry", ENTRY, state.entry, false, "entry",
+        function (i) { return [entryText(i)]; },
+        {
+          moreWord: "stricter",
+          limit: function (live) {
+            var first = live.length ? live[0].id.split(" + ")[0] : "";
+            var n = 0;
+            while (n < live.length && live[n].id.split(" + ")[0] === first) n += 1;
+            return n === live.length ? chipLimit() : n;
+          }
+        });
   chips("sellers", SELLERS, state.sellers, false, "sellers",
         function (i, dep) { return [sellerOf(dep)]; });
 
@@ -2183,18 +2635,60 @@
   nmin.addEventListener("input", readNights);
   nmax.addEventListener("input", readNights);
 
-  /* The On sale chip. Its count is of the whole dataset rather than of what
-     is on screen, deliberately: it says how much there is to find, not how
-     much the filters have already left, and a count that fell to 0 under an
-     unrelated month filter would read as "no sales" rather than "none in
-     June".
+  /* The On sale chip, counted like every other bank: against the rows that
+     pass all the *other* filters, so the number answers "what if I picked
+     this too?".
 
-     The chip belongs to the trips view. On the sale view the filter is the
-     view, so showView() hides a control that could only ever be pressed to no
-     effect. */
+     It used to hold a count of the whole dataset and never move, on the
+     reasoning that it should say how much there is to find rather than how
+     much the filters have left, and that a 0 under an unrelated month filter
+     would read as "no sales" rather than "none in June".
+
+     That reasoning does not survive the rest of the panel. Every other number
+     here is filter-relative, and one that is not teaches the reader nothing
+     except that this one lies: "On sale 268" beside a June table with no sale
+     in it is a promise the click then breaks, and the reader discovers "none
+     in June" by ending up with an empty table instead of by reading a 0. The
+     stale count did not avoid the confusion, it deferred it past a click.
+
+     So it counts live, and `passes` gained a `"sale"` skip so it can exclude
+     itself the way `months`, `ports` and `boats` already do -- without that,
+     switching it on would make its own count equal the visible rows and it
+     could never guide the way back.
+
+     Zero keeps the chip rather than hiding it, which is where this departs
+     from `chips()` — and the reason is stronger than the symmetry it breaks.
+     **"Nothing here is on sale" is an answer.** A reader deciding between two
+     weeks wants to know that one of them has no discount to wait for, and a
+     control that disappears tells them nothing at all; a bank can drop an
+     unreachable option because the neighbouring chips still carry the rule,
+     but a lone toggle has no neighbours to carry it.
+
+     So it stays, dimmed and unclickable, saying 0 against a title that spells
+     out what the 0 is about. Still clickable while it is switched *on*, for
+     the same reason a picked chip survives at zero: the way out must not
+     disappear. */
   var onSale = document.getElementById("onSale");
   if (onSaleCount) {
-    onSale.textContent = "On sale " + onSaleCount;
+    /* Shown from here on, and hidden again only by showView() on the sale
+       view, where the filter *is* the view and the chip could only ever be
+       pressed to no effect. Zero does not hide it -- see above. */
+    onSale.hidden = false;
+    BANKS.push({
+      recount: function () {
+        var n = 0;
+        D.departures.forEach(function (dep) {
+          if (!dep.sale) return;
+          if (passes(dep, D.itineraries[dep.itinerary_id], "sale")) n += 1;
+        });
+        onSale.textContent = "On sale " + n;
+        var dead = n === 0 && !state.onSaleOnly;
+        onSale.disabled = dead;
+        onSale.title = dead
+          ? "No sailing on sale among the trips these filters leave"
+          : n + (n === 1 ? " sailing is" : " sailings are") + " on sale here";
+      }
+    });
     onSale.addEventListener("click", function () {
       state.onSaleOnly = !state.onSaleOnly;
       onSale.setAttribute("aria-pressed", state.onSaleOnly);
@@ -2211,7 +2705,7 @@
 
   document.getElementById("reset").addEventListener("click", function () {
     state.months.clear(); state.ports.clear(); state.sites.clear();
-    state.boats.clear();
+    state.boats.clear(); state.entry.clear();
     /* Marks go with the filters. Reset puts the table back to how it opened,
        and a highlight left behind on a row the visitor can no longer find is
        worse than no highlight at all. */
@@ -2295,10 +2789,11 @@
      is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
   function labelFilters() {
-    var n = state.ports.size + state.sites.size + state.boats.size;
+    var n = state.ports.size + state.sites.size + state.boats.size +
+      state.entry.size;
     filtersToggle.textContent = n
-      ? n + (n === 1 ? " filter" : " filters") + " on — port, site or boat"
-      : "Filter by port, site or boat";
+      ? n + (n === 1 ? " filter" : " filters") + " on — port, site, boat or entry bar"
+      : "Filter by port, site, boat or entry bar";
     filtersToggle.classList.toggle("active", n > 0);
   }
   filtersToggle.addEventListener("click", function () {
@@ -2334,8 +2829,8 @@
     D.meta.counts.departures.toLocaleString("en-IE") + " departures · " +
     /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are
        never linked from the search pages, so the crawl cannot see them. */
-    D.meta.counts.boats + " boats bookable by the berth · " +
-    D.meta.counts.operators + " operators · all prices in " + D.meta.currency +
+    D.meta.counts.boats + " boats bookable by the berth · all prices in " +
+    D.meta.currency +
     /* The build, not the crawl. `generated` is the day the data was read and
        is what the colophon prints beside the sources; this line says when the
        page you are looking at was made, which is a different day whenever a

@@ -74,6 +74,19 @@ class FeeCode(str, Enum):
     ENVIRONMENT_TAX = "environment_tax"
     SERVICE_CHARGE = "service_charge"
     COMBINED_FEES = "combined_fees"
+    # Five charges PADI's fee book names and liveaboard.com's does not, each
+    # mandatory and each blocking a trip's total for want of a code to put it
+    # under. One per wording rather than one bucket, because the parser keeps
+    # one entry per code: Andromeda bills a Navy fee *and* an Environmental/
+    # Government Fee on the same trip, so a shared code would have silently
+    # dropped one of them and shown the boat cheaper by exactly what it left
+    # out. Coast guard and navy are two authorities and stay two codes on the
+    # same reasoning, even though no boat today bills both.
+    LOCAL_FEES = "local_fees"
+    HOSPITALITY_FEE = "hospitality_fee"
+    ROUTE_SUPPLEMENT = "route_supplement"
+    COAST_GUARD = "coast_guard"
+    NAVY_FEE = "navy_fee"
 
     NITROX = "nitrox"
     GEAR_RENTAL = "gear_rental"
@@ -123,6 +136,16 @@ FEE_LABELS: dict[FeeCode, str] = {
     FeeCode.ENVIRONMENT_TAX: "Environment tax",
     FeeCode.SERVICE_CHARGE: "Mandatory service charge",
     FeeCode.COMBINED_FEES: "Park, port & fuel fees (billed together)",
+    # The operators' own words, tidied for case and nothing else. "Local fees"
+    # says less than a reader would like and is exactly what the boat wrote;
+    # naming it "Port & harbour dues" would be this code deciding what the
+    # charge covers. Where the wording differs from these at all it survives
+    # as the line's note, so the page always carries what was actually said.
+    FeeCode.LOCAL_FEES: "Local fees",
+    FeeCode.HOSPITALITY_FEE: "Hospitality fee",
+    FeeCode.ROUTE_SUPPLEMENT: "Route supplement",
+    FeeCode.COAST_GUARD: "Coast guard fee",
+    FeeCode.NAVY_FEE: "Navy fee",
     FeeCode.NITROX: "Nitrox",
     FeeCode.GEAR_RENTAL: "Equipment rental",
     FeeCode.DIVE_INSURANCE: "Dive insurance",
@@ -169,6 +192,36 @@ DIVER_LEVEL_ORDER: list[DiverLevel] = [
     DiverLevel.ADVANCED_50,
     DiverLevel.EXPERIENCED_100,
 ]
+
+
+DIVER_LEVEL_BARS: list[tuple[DiverLevel, str, int]] = [
+    (DiverLevel.OPEN_WATER, "Open Water", 0),
+    (DiverLevel.ADVANCED, "Advanced", 0),
+    (DiverLevel.ADVANCED_50, "Advanced", 50),
+    (DiverLevel.EXPERIENCED_100, "Advanced", 100),
+]
+"""The entry bar as the table prints it: a certification and a dive count.
+
+`DIVER_LEVEL_LABELS` names each level on its own, which is what a sentence
+needs -- "PADI Travel states Advanced Open Water". A column cannot use those:
+two of the four fold the dive count into the label, so printing the level
+beside `min_logged_dives` gave "Advanced + 50 dives, 50 logged dives" on the
+commonest bar in the fleet, and the page carried a regex to spot it.
+
+So the two facts are separated here instead. The middle field is the
+certification alone -- *Advanced*, the shorthand every operator writes, not
+the card's full name -- and the last is the dive count the level itself
+implies, which is 50 for `ADVANCED_50` by definition and 0 where the level
+says nothing about dives. The printed count is the greater of that and the
+trip's own `min_logged_dives`, so a level's implied bar can never be softened
+by a trip that states a smaller number, and a trip stating a larger one is
+shown as it stated it.
+
+Ordered least to most demanding, like `DIVER_LEVEL_ORDER`, because the page
+sorts and ranks on the position: shipped as a list rather than a mapping so
+the order travels with the labels instead of being a second copy in the
+browser. `TestTheEntryBarVocabularyIsOrdered` holds the two in step.
+"""
 
 
 

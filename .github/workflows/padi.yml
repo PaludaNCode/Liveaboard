@@ -1,0 +1,170 @@
+name: Read PADI Travel
+
+# Fetch what the second seller states — every mapped vessel's itineraries and
+# every sailing it has on sale — and commit both books.
+#
+# `tools/fetch_padi.py` ran in **no workflow at all**. Every PADI file in
+# `data/` was written by a hand-run and refreshed when somebody remembered:
+#
+#   data/padi.json             the entry bar, the stated dive count, and the
+#                              only fee book the 22 PADI-only vessels have
+#   data/padi_departures.json  PADI's berth price on 601 sailings, the 53 rows
+#                              it is the only seller of, and its berth count on
+#                              833
+#
+# When this was one fallback field that did not much matter. It is now five
+# published facts, two of which are prices and one of which the page prints as
+# a number a diver would act on. Everything else in the pipeline has a cadence
+# and says so, so the failure mode here was not "the fetch broke" — which the
+# other jobs report — but "nobody ran it", which nothing reported at all. The
+# dataset will happily publish a `padi_berths_read` of last month for as long
+# as that stays true.
+#
+# **Its own file rather than a step in refresh.yml.** The argument for folding
+# it in was that one commit should carry both the data and the dataset built
+# from it, or `promote --check` goes red in between. That is settled now: this
+# job promotes, rebuilds and runs CI's own list before it commits, so its
+# commit is self-consistent like any other. What is left is the argument for
+# splitting, which is the same one that gave cabins.yml and itineraries.yml
+# their own files: a run that can be dispatched capped, read, and taken off the
+# cap is how a change to `scrape/padi_com.py` gets proved against three real
+# vessels before it is pointed at seventy-seven.
+#
+# Reading, not booking. Two plain unauthenticated GET endpoints, paced at
+# 1.2 s — `www.padi.com/robots.txt` names ClaudeBot with `Crawl-delay: 2` and
+# ties it to a Cloudflare limit of 30 requests a minute per IP.
+
+on:
+  # Half an hour after the daily refresh (04:15) and well before the cabin pass
+  # (05:20). PADI's berth price sits beside liveaboard.com's on the same row,
+  # so the two want reading on the same day; the ordering against the cabin
+  # ladders does not matter, because a ladder is checked against the row's own
+  # price and PADI's is a second opinion beside it.
+  schedule:
+    - cron: "45 4 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap boats fetched (0 = all 77)"
+        type: string
+        default: "3"
+      refresh:
+        description: "Re-fetch itinerary detail already in the raw store"
+        type: boolean
+        default: false
+      delay:
+        description: "Seconds between requests"
+        type: string
+        default: "1.2"
+
+permissions:
+  contents: write
+
+concurrency:
+  # Never beside itself: two jobs writing and pushing data/padi.json is a
+  # guaranteed conflict.
+  group: padi-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    # Resolved once, because `inputs` is null on a scheduled run and
+    # `inputs.limit || 3` would quietly become "fetch three boats" — a nightly
+    # job that reads 3 of 77 and looks exactly like a healthy run. The schedule
+    # means every boat.
+    env:
+      LIMIT: ${{ github.event_name == 'schedule' && '0' || (inputs.limit || '3') }}
+      DELAY: ${{ inputs.delay || '1.2' }}
+      REFRESH: ${{ github.event_name != 'schedule' && inputs.refresh && '--refresh' || '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Only the tests that answer to `src/`, like the other fetching jobs:
+      # an assertion about committed data gates the commit below and must
+      # never stop the fetch that would correct it. See tests/published.py.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+
+      # `data/padi_raw.json` is gitignored — 13 MB rewritten whole every run,
+      # against archive.json's 1.8 MB, holding an entry bar rather than a price
+      # that is gone tomorrow. But the fetcher's incrementality is built on it:
+      # an itinerary already in the store is not re-fetched, which is the
+      # difference between ~530 requests and ~80.
+      #
+      # So it is cached rather than committed. A miss costs one full crawl and
+      # heals itself; the daily schedule keeps the entry warm, since a cache
+      # is evicted only after a week untouched. Keyed on the alias map because
+      # that is what decides which vessels are wanted at all, and dated so an
+      # entry cannot be pinned open forever.
+      - name: Restore the raw store
+        uses: actions/cache@v4
+        with:
+          path: data/padi_raw.json
+          key: padi-raw-${{ hashFiles('data/padi_aliases.json') }}-${{ github.run_id }}
+          restore-keys: |
+            padi-raw-${{ hashFiles('data/padi_aliases.json') }}-
+            padi-raw-
+
+      # The run summary is where a capped run is read: it prints each vessel's
+      # itinerary count, its sailing count, how many of those carry a date, and
+      # the currency its prices are in — a vessel with no currency is one whose
+      # prices are unusable, and it says so rather than assuming euro.
+      - name: Read PADI's itineraries and sailings
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/fetch_padi.py \
+            --trips \
+            --limit "$LIMIT" \
+            --delay "$DELAY" \
+            $REFRESH \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Every field each response published, parsed or not. Kept because the
+      # re-parse it saves is 530 requests against somebody else's server, and
+      # because three open issues turn on reading a field already in it —
+      # `whatsIncludedNew`, the unclassified charge labels, PADI's own reef
+      # descriptions. Downloading this beats re-crawling for any of them.
+      - name: Keep the raw store as evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: padi-raw-${{ github.run_id }}
+          path: data/padi_raw.json
+          retention-days: 14
+          if-no-files-found: ignore
+
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: padi-inputs-${{ github.run_id }}
+          path: |
+            data/padi.json
+            data/padi_departures.json
+          retention-days: 1
+
+  # Promotion is offline and takes seconds; the fetch above took minutes. A run
+  # that writes its book and stops leaves the committed dataset disagreeing
+  # with its own inputs -- a red build, and before that a page one pass behind
+  # its own data. Serialised, so two sources cannot each derive from a tree the
+  # other has already moved: see .github/workflows/publish.yml.
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: padi-inputs-${{ github.run_id }}
+      paths: "data/padi.json data/padi_departures.json data/egypt-2027.json site/index.html"
+      subject: "data: read {today} PADI itineraries and sailings"
+      nothing: "nothing PADI states has moved"

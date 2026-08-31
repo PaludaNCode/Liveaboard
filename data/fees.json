@@ -4,6 +4,7 @@
   "vessels": {
     "alia-soul": {
       "source_url": "https://www.liveaboard.com/diving/egypt/alia-soul?m=5/2027",
+      "operator": "Orca Dive Clubs",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€24 / night), Port Fees (€80 / trip).,",
@@ -164,6 +165,7 @@
     },
     "all-star-ghani": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-ghani?m=5/2027",
+      "operator": "All Star Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Port Fees ($200).,",
@@ -331,6 +333,7 @@
     },
     "all-star-red-sea": {
       "source_url": "https://www.liveaboard.com/diving/egypt/all-star-red-sea?m=5/2027",
+      "operator": "All Star Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees ($250).,",
@@ -481,6 +484,7 @@
     },
     "alsuraya": {
       "source_url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027",
+      "operator": "Alsuraya",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€150-250 / trip).,",
@@ -651,6 +655,7 @@
     },
     "amelie": {
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie?m=5/2027",
+      "operator": "Amelie Safari",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge (€10 / day), National Park Fees (€15 / day), Port Fees (€25 / trip).,",
@@ -898,6 +903,7 @@
     },
     "amelie-adventures": {
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=5/2027",
+      "operator": "Amelie Safari",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€15 / day), Port Fees (€20 / trip).,",
@@ -1105,6 +1111,7 @@
     },
     "aphrodite": {
       "source_url": "https://www.liveaboard.com/diving/egypt/aphrodite?m=5/2027",
+      "operator": "Aphrodite Liveaboard Safaris",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€150-250 / trip).,",
@@ -1294,6 +1301,7 @@
     },
     "ashrafi": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ashrafi?m=5/2027",
+      "operator": "Crystal Reef Adventures",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€145 / trip).,",
@@ -1436,6 +1444,7 @@
     },
     "avo": {
       "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=5/2027",
+      "operator": "Seamad Cruises",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€80), Park, Port and Fuel Fees (€200-450 / trip).,",
@@ -1608,6 +1617,7 @@
     },
     "bella-2": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027",
+      "operator": "Bella Liveaboard",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€10 / day), National Park Fees (€10 / day), Port Fees (€5 / trip).,",
@@ -1769,6 +1779,7 @@
     },
     "bella-3": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bella-3?m=5/2027",
+      "operator": "Bella Liveaboard",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€10 / day), National Park Fees (€10 / day), Port Fees (€5 / trip).,",
@@ -1985,6 +1996,7 @@
     },
     "bismarck": {
       "source_url": "https://www.liveaboard.com/diving/egypt/bismarck?m=5/2027",
+      "operator": "Blue Shades Diving",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€120 / trip), Park and Port Fees (€130 / trip).,",
@@ -2158,6 +2170,7 @@
     },
     "blue": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027",
+      "operator": "Blue Planet Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€290-320 / trip).,",
@@ -2317,6 +2330,7 @@
     },
     "blue-diamond": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=5/2027",
+      "operator": "Horus Liveaboard",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€150-250 / trip).,",
@@ -2508,6 +2522,7 @@
     },
     "blue-horizon": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-horizon?m=5/2027",
+      "operator": "Scuba Tours Worldwide",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge ($8 / day), National Park Fees ($90-200 / trip).,",
@@ -2718,6 +2733,7 @@
     },
     "blue-melody": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-melody?m=5/2027",
+      "operator": "Scuba Tours Worldwide",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge ($8 / night), National Park Fees ($90-200 / trip).,",
@@ -2928,6 +2944,7 @@
     },
     "blue-pearl": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027",
+      "operator": "Blue Planet Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€230-320 / trip).,",
@@ -3088,6 +3105,7 @@
     },
     "blue-seas": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-seas?m=5/2027",
+      "operator": "Blue Planet Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€200-380 / trip).,",
@@ -3248,6 +3266,7 @@
     },
     "blue-storm": {
       "source_url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027",
+      "operator": "Blue Planet Liveaboards",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€200-380 / trip).,",
@@ -3405,6 +3424,7 @@
     },
     "carlton": {
       "source_url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027",
+      "operator": "Carlton Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€50-90), National Park Fees (€100-150 / trip).,",
@@ -3607,6 +3627,7 @@
     },
     "cu": {
       "source_url": "https://www.liveaboard.com/diving/egypt/cu?m=5/2027",
+      "operator": "Horus Star Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€80 / trip), National Park Fees (€150 / trip), Port Fees (€30 / trip).,",
@@ -3783,6 +3804,7 @@
     },
     "destiny": {
       "source_url": "https://www.liveaboard.com/diving/egypt/destiny?m=5/2027",
+      "operator": "Scarabaeus Safari",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park and Port Fees (€230-570).,",
@@ -3974,6 +3996,7 @@
     },
     "discovery-i": {
       "source_url": "https://www.liveaboard.com/diving/egypt/discovery-i?m=5/2027",
+      "operator": "Discovery Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€45 / trip), Fuel Surcharge (€60-70 / trip), National Park Fees (€35-100 / trip), Port Fees (€35).,",
@@ -4196,6 +4219,7 @@
     },
     "discovery-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/discovery-ii?m=5/2027",
+      "operator": "Discovery Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€45 / trip), Fuel Surcharge (€60-70 / trip), National Park Fees (€35-100 / trip), Port Fees (€35).,",
@@ -4414,6 +4438,7 @@
     },
     "dune-longara": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-longara?m=5/2027",
+      "operator": "Dune-World",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€150-300 / trip), Fuel Surcharge ($10-20 / day), Mandatory Service Charge (€60-120 / trip).,",
@@ -4600,6 +4625,7 @@
     },
     "dune-silky": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-silky?m=5/2027",
+      "operator": "Dune-World",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€150-300 / trip), Fuel Surcharge ($10-20 / day), Mandatory Service Charge (€60-120 / trip).,",
@@ -4795,6 +4821,7 @@
     },
     "dune-titan": {
       "source_url": "https://www.liveaboard.com/diving/egypt/dune-titan?m=5/2027",
+      "operator": "Dune-World",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€150-300 / trip), Fuel Surcharge ($10-20 / day), Mandatory Service Charge (€60-120 / trip).,",
@@ -4990,6 +5017,7 @@
     },
     "emperor-asmaa": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-asmaa?m=5/2027",
+      "operator": "Emperor Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities (€120-150), Alcoholic Beverages (€3.50), Nitrox Course (€160), Private Dive Guide (€599), Rental Gear, Scuba Diving Courses (€69-250)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Seaview Cabins, Charging stations, Indoor Saloon, Library, Audio & video entertainment, Daily housekeeping, Bar, Food & Drinks, Free Wine w/Dinner, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Fine Wines Selection, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox, Shaded Diving Area, DIN Adaptors, Rebreather Support, Rinse Hoses, Dive deck, Tenders for diving, Languages Spoken, The crew speaks English, German, French, Sp"
@@ -5127,6 +5155,7 @@
     },
     "emperor-elite": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-elite?m=5/2027",
+      "operator": "Emperor Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities (€120-150), Alcoholic Beverages (€3.50), Nitrox Course (€160), Private Dive Guide (€599), Rental Gear, Scuba Diving Courses (€69-250)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Warm Water Showers, Air Conditioned saloon, Sun Deck, Seaview Cabins, Custom built for diving, Charging stations, Indoor Saloon, Library, Audio & video entertainment, Available for Charter, Local & International Crew, Daily housekeeping, Bar, Food & Drinks, Beer available, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox, Shaded Diving Area, DIN Adaptors, Rebreather Support, Dive deck, Tenders for diving, Languages Spoken, The crew speaks English, German, French, Spanish, Russian, and Italian., Gear Rental, Equipment is available for rent on this boat. Please "
@@ -5264,6 +5293,7 @@
     },
     "emperor-superior": {
       "source_url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027",
+      "operator": "Emperor Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities (€120-150), Alcoholic Beverages (€3.50), Nitrox Course (€160), Private Dive Guide (€599), Rental Gear, Scuba Diving Courses (€69-250)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Warm Water Showers, Air Conditioned saloon, Sun Deck, Seaview Cabins, Custom built for diving, Charging stations, Indoor Saloon, Library, Audio & video entertainment, Daily housekeeping, Bar, Food & Drinks, Free Wine w/Dinner, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Fine Wines Selection, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox, DIN Adaptors, Tech diving, Rebreather Support, Rinse Hoses, Dive deck, Tenders for diving, Languages Spoken, The crew speaks English, German, French, Spanish, Russian, and Italian., Gear Rental, Equ"
@@ -5401,6 +5431,7 @@
     },
     "eriny": {
       "source_url": "https://www.liveaboard.com/diving/egypt/eriny?m=5/2027",
+      "operator": "Bella Liveaboard",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€10 / day), National Park Fees (€10 / day), Port Fees (€5 / trip), Airport Transfer (€30 / activity), Hotel Transfer (€30 / activity).,",
@@ -5636,6 +5667,7 @@
     },
     "freedom-iii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/freedom-iii?m=5/2027",
+      "operator": "Sharks Bay Umbi",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€55-90 / trip).,",
@@ -5831,6 +5863,7 @@
     },
     "freedom-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/freedom-iv?m=5/2027",
+      "operator": "Sharks Bay Umbi",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€10-12 / day).,",
@@ -6025,6 +6058,7 @@
     },
     "ghazala-adventure": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027",
+      "operator": "Ocean Tribe Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities, Alcoholic Beverages, Nitrox Course, Private Dive Guide, Rental Gear, Scuba Diving Courses., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Boutique / Souvenir Shop, Seaview Cabins, Non-Smoking Rooms, Camera room, Custom built for diving, Charging stations, Indoor Saloon, Library, Audio & video entertainment, Observation Deck, Available for Charter, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Dedicated Local Crew, Food & Drinks, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nit"
@@ -6140,6 +6174,7 @@
     },
     "ghazala-explorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ghazala-explorer?m=5/2027",
+      "operator": "Ocean Tribe Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Chamber Fees, Gratuities, Alcoholic Beverages, Soft drinks, Nitrox Course, Private Dive Guide, Rental Gear, Scuba Diving Courses, Land Excursions, Snorkel Gear., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Family Cabins, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, Available for Charter, Local & International Crew, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Vegan Options, Vegetarian Options, Beer available, Wine Available, Beach BBQ, Snacks All Day, Buffet style, Western Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox,"
@@ -6284,6 +6319,7 @@
     },
     "golden-dolphin": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin?m=5/2027",
+      "operator": "Golden Dolphin",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€350-490).,",
@@ -6446,6 +6482,7 @@
     },
     "golden-dolphin-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=5/2027",
+      "operator": "Golden Dolphin",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€350-490 / trip).,",
@@ -6607,6 +6644,7 @@
     },
     "golden-imperial": {
       "source_url": "https://www.liveaboard.com/diving/egypt/golden-imperial?m=5/2027",
+      "operator": "Golden Dolphin",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€350-490 / trip).,",
@@ -6769,6 +6807,7 @@
     },
     "grand-discovery": {
       "source_url": "https://www.liveaboard.com/diving/egypt/grand-discovery?m=5/2027",
+      "operator": "Discovery Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€45), Fuel Surcharge (€60-70 / trip), National Park Fees (€35-100 / trip), Port Fees (€35).,",
@@ -6995,6 +7034,7 @@
     },
     "hammerhead-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/hammerhead-ii?m=5/2027",
+      "operator": "Hammerhead Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge (€45 / trip), Mandatory Service Charge (€16.66 / day), Park and Port Fees (€80 / trip).,",
@@ -7213,6 +7253,7 @@
     },
     "iceberg": {
       "source_url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027",
+      "operator": "Deep Breath Diving Safari",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€140 / trip).,",
@@ -7394,6 +7435,7 @@
     },
     "jp-marine": {
       "source_url": "https://www.liveaboard.com/diving/egypt/jp-marine?m=5/2027",
+      "operator": "Dive Safari Master",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€70 / trip), Park, Port and Fuel Fees (€145-215 / week).,",
@@ -7567,6 +7609,7 @@
     },
     "lady-m": {
       "source_url": "https://www.liveaboard.com/diving/egypt/lady-m?m=5/2027",
+      "operator": "Blue Ocean Diving Centers & Resorts",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€40-120 / trip).,",
@@ -7766,6 +7809,7 @@
     },
     "marselia-star": {
       "source_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=5/2027",
+      "operator": "MV Legends II",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€144-168 / trip), Park, Port and Fuel Fees (€150-220 / trip).,",
@@ -7904,6 +7948,7 @@
     },
     "new-sambo": {
       "source_url": "https://www.liveaboard.com/diving/egypt/new-sambo?m=5/2027",
+      "operator": "Sambo Divers",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€30 / trip).,",
@@ -8060,6 +8105,7 @@
     },
     "ocean-lovers": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ocean-lovers?m=5/2027",
+      "operator": "Sea Breeze Liveaboard",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€180-400 / trip).,",
@@ -8219,6 +8265,7 @@
     },
     "oceanix": {
       "source_url": "https://www.liveaboard.com/diving/egypt/oceanix?m=5/2027",
+      "operator": "Tauch Safari Aegypten",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€60 / trip), Fuel Surcharge (€75 / trip), National Park Fees (€75 / trip), Port Fees (€40 / trip).,",
@@ -8430,6 +8477,7 @@
     },
     "odyssey": {
       "source_url": "https://www.liveaboard.com/diving/egypt/odyssey?m=5/2027",
+      "operator": "Seafari International",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities (€60-70 / week), Alcoholic Beverages, Nitrox Course (€130-250), Private Dive Guide (€470 / week), Rental Gear, Scuba Diving Courses (€55-340), Snorkel Gear., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, Jacuzzi / Hot Tub, En-Suite bathrooms, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Massage, Air Conditioned saloon, Sun Deck, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Library, Outdoor Dining, Audio & video entertainment, Observation Deck, Available for Charter, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Bar, Food & Drinks, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 of the booking form. We advise limiting these requests to religious beliefs or food allergies., Diving, Nitrox available, Free Nitrox, Shaded Diving Area, DIN Adaptors, Ri"
@@ -8584,6 +8632,7 @@
     },
     "queen-sherry": {
       "source_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=5/2027",
+      "operator": "Cruise Company Yachts",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€70 / trip), Park, Port and Fuel Fees (€145 / trip).,",
@@ -8759,6 +8808,7 @@
     },
     "red-sea-aggressor-ii": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-ii?m=5/2027",
+      "operator": "Aggressor Fleet& Dancer Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge ($50 / trip), National Park Fees ($100), Port Fees ($50 / trip).,",
@@ -8952,6 +9002,7 @@
     },
     "red-sea-aggressor-iv": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-iv?m=5/2027",
+      "operator": "Aggressor Fleet& Dancer Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge ($50 / week), National Park Fees ($105 / trip), Port Fees ($45 / trip).,",
@@ -9117,6 +9168,7 @@
     },
     "red-sea-aggressor-v": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-aggressor-v?m=5/2027",
+      "operator": "Aggressor Fleet& Dancer Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge ($50 / week), National Park Fees ($105-205 / trip), Port Fees ($45 / trip).,",
@@ -9309,6 +9361,7 @@
     },
     "red-sea-blue-force-2": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-blue-force-2?m=5/2027",
+      "operator": "BlueForce",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€110 / week), Park and Port Fees (€120).,",
@@ -9483,6 +9536,7 @@
     },
     "red-sea-explorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027",
+      "operator": "Extra Divers Worldwide",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€280-340 / trip).,",
@@ -9663,6 +9717,7 @@
     },
     "reef-voyager": {
       "source_url": "https://www.liveaboard.com/diving/egypt/reef-voyager?m=5/2027",
+      "operator": "Reef Oasis Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€60-90 / trip), Park and Port Fees (€70-100 / trip).,",
@@ -9857,6 +9912,7 @@
     },
     "royal-evolution": {
       "source_url": "https://www.liveaboard.com/diving/egypt/royal-evolution?m=5/2027",
+      "operator": "Royal Evolution",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge (€170-325 / trip), Park and Port Fees (€150-260 / trip).,",
@@ -10060,6 +10116,7 @@
     },
     "safy-mar": {
       "source_url": "https://www.liveaboard.com/diving/egypt/safy-mar?m=5/2027",
+      "operator": "Humpback Safari Yacht",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Fuel Surcharge (€50 / trip), Mandatory Service Charge (€100 / trip), National Park Fees (€80 / trip), Port Fees (€50 / trip).,",
@@ -10270,6 +10327,7 @@
     },
     "sea-friend": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-friend?m=5/2027",
+      "operator": "Hamata Mangroves",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€200-450).,",
@@ -10428,6 +10486,7 @@
     },
     "sea-serpent": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -10623,6 +10682,7 @@
     },
     "sea-serpent-contessa": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -10818,6 +10878,7 @@
     },
     "sea-serpent-excellence": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-excellence?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -11013,6 +11074,7 @@
     },
     "sea-serpent-grand": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sea-serpent-grand?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -11208,6 +11270,7 @@
     },
     "serenity": {
       "source_url": "https://www.liveaboard.com/diving/egypt/serenity?m=5/2027",
+      "operator": "Divers & Co",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€80 / trip), Park, Port and Fuel Fees (€190-220 / trip).,",
@@ -11376,6 +11439,7 @@
     },
     "sinaistar": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sinaistar?m=5/2027",
+      "operator": "Ambassador Liveaboards Company",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€190 / trip).,",
@@ -11541,6 +11605,7 @@
     },
     "sindalahs": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sindalahs?m=5/2027",
+      "operator": "Sindalahs Yacht",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€120-150 / trip), National Park Fees (€150-200 / trip).,",
@@ -11779,6 +11844,7 @@
     },
     "snefro-love": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-love?m=5/2027",
+      "operator": "King Snefro Group",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€65-130 / trip).,",
@@ -11917,6 +11983,7 @@
     },
     "snefro-pearl": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-pearl?m=5/2027",
+      "operator": "King Snefro Group",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park and Port Fees (€65-130 / trip).,",
@@ -12055,6 +12122,7 @@
     },
     "snefro-target": {
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-target?m=5/2027",
+      "operator": "King Snefro Group",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Park, Port and Fuel Fees (€65-130 / trip).,",
@@ -12193,6 +12261,7 @@
     },
     "south-moon-1": {
       "source_url": "https://www.liveaboard.com/diving/egypt/south-moon-1?m=5/2027",
+      "operator": "Sea Queen Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€70-140), Port Fees (€30-50).,",
@@ -12391,6 +12460,7 @@
     },
     "ss-glorious-miss-nouran": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -12566,6 +12636,7 @@
     },
     "ss-serena-dreams": {
       "source_url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=5/2027",
+      "operator": "Sea Serpent Fleet",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€200 / trip).,",
@@ -12761,6 +12832,7 @@
     },
     "star-jet": {
       "source_url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027",
+      "operator": "Blue Shades Diving",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€100 / trip), Park and Port Fees (€100 / trip).,",
@@ -12949,6 +13021,7 @@
     },
     "sunlight": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sunlight?m=5/2027",
+      "operator": "Sadko Travel",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€10 / day), National Park Fees (€100-200 / trip), Port Fees (€70).,",
@@ -13061,6 +13134,7 @@
     },
     "sunshine": {
       "source_url": "https://www.liveaboard.com/diving/egypt/sunshine?m=5/2027",
+      "operator": "Sadko Travel",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€10 / day), National Park Fees (€100-200 / trip), Port Fees (€70 / trip).,",
@@ -13176,6 +13250,7 @@
     },
     "tala": {
       "source_url": "https://www.liveaboard.com/diving/egypt/tala?m=5/2027",
+      "operator": "Red Sea Explorers",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€200-320 / week).,",
@@ -13385,6 +13460,7 @@
     },
     "topaz": {
       "source_url": "https://www.liveaboard.com/diving/egypt/topaz?m=5/2027",
+      "operator": "Sea Pirates",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Mandatory Service Charge (€100 / trip), National Park Fees (€150-230 / trip).,",
@@ -13631,6 +13707,7 @@
     },
     "unity": {
       "source_url": "https://www.liveaboard.com/diving/egypt/unity?m=5/2027",
+      "operator": "Red Sea Relax",
       "collected": "2026-08-30",
       "disclosure": {
         "optional": "Gratuities, Alcoholic Beverages, Nitrox Course (€225 / item), Private Dive Guide (€575 / trip), Rental Gear, Scuba Diving Courses (€225-345 / item)., Book now, pay later: You can easily place your booking online. We will then hold the spaces for you and you can confirm with a payment later., * Extra fees are shown per person., Pay by bank transfer or online with, Best Price Guaranteed, You're getting the lowest rate. We work closely with the boat operators on a daily basis to deliver you the best possible rates. In case you find our rate cheaper somewhere else we will either match it or beat it., Boat features, Free Internet, En-Suite bathrooms, Family Cabins, Aircon Cabins, Non-Diver (Snorkeler) Friendly, Warm Water Showers, Air Conditioned saloon, Sun Deck, Camera Station, Budget Friendly Cruise, Family Friendly Cruise, Seaview Cabins, Non-Smoking Rooms, Custom built for diving, Charging stations, Indoor Saloon, Outdoor Dining, Observation Deck, Safe Box in Cabin, Available for Charter, Local & International Crew, Snorkeling Equipment, Separate Rinse for u/w Camera, Outside Showers, Leisure Deck, Daily housekeeping, Bar, Food & Drinks, Free Wine w/Dinner, Al Fresco Dining, Vegan Options, Vegetarian Options, Free Soft Drinks, Beer available, Wine Available, Full-board Option, Welcome Cocktails, Snacks All Day, Buffet style, Western Food, Local Food, If you have any specific dietary requirements whilst on-board your cruise, you can add this to your special requests on step 2 "
@@ -13759,6 +13836,7 @@
     },
     "vita-xplorer": {
       "source_url": "https://www.liveaboard.com/diving/egypt/vita-xplorer?m=5/2027",
+      "operator": "XPLORER AQUARIUS Safari",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "Environment Tax (€150-300 / trip).,",
@@ -13906,6 +13984,7 @@
     },
     "yachtiano": {
       "source_url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027",
+      "operator": "Yachtiano",
       "collected": "2026-08-30",
       "disclosure": {
         "required": "National Park Fees (€275-300 / trip).,",

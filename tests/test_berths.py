@@ -15,10 +15,9 @@ what a berth costs stays here, where it is tested.
 
 from __future__ import annotations
 
-import json
 import unittest
-from pathlib import Path
 
+import published
 from liveaboard.promote import (
     SELLERS,
     STALE_LADDER,
@@ -29,8 +28,10 @@ from liveaboard.promote import (
     promote,
 )
 
-DATASET = Path(__file__).resolve().parents[1] / "data" / "egypt-2027.json"
-
+# The candidate fixtures, from the module that owns them: a second copy here
+# would be a second definition of what a departure looks like, and the two
+# would drift the first time one of them gained a field.
+from test_promote import SEASON, candidate, departure  # noqa: E402
 
 def cabin(name: str, price: float, berths: int | None, *, sold_out: bool = False,
           supp: int | None = None) -> dict[str, object]:
@@ -227,10 +228,7 @@ class TestTheJoin(unittest.TestCase):
 
     def test_a_sailing_with_no_cabin_record_keeps_its_row(self):
         """Merging a second source must never change the row count."""
-        candidate = json.loads(
-            (Path(__file__).resolve().parents[1] / "data" / "candidate.json")
-            .read_text(encoding="utf-8")
-        )
+        candidate = published.raw("candidate.json")
         with_book = promote(candidate, cabins={
             "collected": "2026-08-28",
             "departures": {"x": record(cabin("Twin", 1200, 4))},
@@ -244,7 +242,7 @@ class TestTheCommittedDataset(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.payload = json.loads(DATASET.read_text(encoding="utf-8"))
+        cls.payload = published.raw()
 
     def test_the_pools_are_published(self):
         self.assertTrue(self.payload["cabin_names"])
@@ -343,19 +341,21 @@ class TestAStaleLadderIsRefused(unittest.TestCase):
     def test_a_ladder_that_agrees_survives(self):
         kept, dropped = _drop_stale_ladder(self.ladder(1000), 1000)
         self.assertEqual(len(kept), 1)
-        self.assertIsNone(dropped)
+        self.assertEqual(dropped, {})
 
     def test_a_night_s_repricing_is_not_a_contradiction(self):
         """All 864 ladders sat within 0.6% of their row when read an hour
         apart; the threshold has to leave room for that."""
         kept, dropped = _drop_stale_ladder(self.ladder(1000), int(1000 * (1 + STALE_LADDER / 2)))
         self.assertEqual(len(kept), 1)
-        self.assertIsNone(dropped)
+        self.assertEqual(dropped, {})
 
     def test_a_ladder_from_before_a_sale_ended_is_dropped(self):
         kept, dropped = _drop_stale_ladder(self.ladder(1588), 2371)
         self.assertEqual(kept, [])
-        self.assertEqual(dropped, 1588)
+        # Keyed by the seller whose reading went, so `_list_prices` can refuse
+        # to quote that seller about this sailing. A bare count could not.
+        self.assertEqual(dropped, {0: 1588})
 
     def test_it_cuts_both_ways(self):
         """Whichever of the two is stale, they cannot both describe this
@@ -375,11 +375,78 @@ class TestAStaleLadderIsRefused(unittest.TestCase):
     def test_a_row_with_no_price_to_check_against_keeps_its_ladder(self):
         kept, dropped = _drop_stale_ladder(self.ladder(1000), None)
         self.assertEqual(len(kept), 1)
-        self.assertIsNone(dropped)
+        self.assertEqual(dropped, {})
 
     def test_promote_names_every_ladder_it_refused(self):
         """Never silent: each one is a booking page this pipeline read and then
         declined to publish, and only a fresh crawl can put it back."""
-        payload = json.loads(DATASET.read_text(encoding="utf-8"))
+        payload = published.raw()
         for line in payload.get("stale_ladders") or []:
             self.assertIn("ladder starts at", line)
+
+
+class TestAStaleLadderCannotSpeak(unittest.TestCase):
+    """A reading thrown away stays thrown away, in every field it touches.
+
+    The drop above landed and the sale beside it did not: `_drop_stale_ladder`
+    rejected the Aggressors' ladders for sitting 33% below their own rows, and
+    the very next call was handed the same book. So all 36 dropped rows kept
+    the discount that book claimed, and on all 36 the "down from" figure was
+    the price printed beside it — "−33%, down from €2,371" on a €2,371 berth,
+    published by the site that exists to catch that.
+
+    Two assertions, at both ends. The unit one says the ladder does not reach
+    `_list_prices`; the one over committed data says no shipped row states a
+    list price equal to its own fare, which is the observable shape of the bug
+    and cannot be satisfied by coincidence.
+    """
+
+    def sale(self, price, cheapest, listed):
+        payload = promote(
+            candidate([departure(price=price)]), season=SEASON,
+            cabins={"collected": "2026-08-28", "departures": {"alia-soul::2027-05-01": {
+                "boat": "alia-soul", "start": "2027-05-01", "currency": "USD",
+                "cabins": [{"name": "Twin", "price": cheapest, "list_price": listed}],
+            }}},
+        )
+        return payload["departures"][0]
+
+    def test_a_ladder_that_explains_its_row_still_reports_its_sale(self):
+        """The control: without it the test below passes on a broken parser."""
+        self.assertEqual(self.sale(900.0, 900.0, 1000.0)["sale"]["pct"], 10)
+
+    def test_a_rejected_ladder_reports_no_sale(self):
+        """The Aggressors' 36 rows, in miniature: a booking page read before
+        the sale ended, against a row re-priced to list after it."""
+        row = self.sale(2760.0, 1849.0, 2760.0)
+        self.assertNotIn("berths", row)
+        self.assertNotIn("sale", row)
+
+    def test_no_shipped_row_is_marked_down_from_its_own_price(self):
+        """"Down from €2,371" beside €2,371 is the bug's visible form.
+
+        Half a euro of slack, because the two sides round separately: `was` is
+        a whole euro out of `_to_display` and the fare converts from whatever
+        the seller quoted.
+        """
+        from liveaboard.money import FxTable, Money
+
+        payload = published.raw()
+        fx = FxTable.from_dict(payload["fx"])
+        checked = 0
+        for departure in payload["departures"]:
+            was = (departure.get("sale") or {}).get("was")
+            if was is None:
+                continue
+            quoted = Money.parse(departure["price"], "EUR")
+            advertised = float(fx.to_display(quoted)[0].amount)
+            self.assertGreater(
+                abs(was - advertised), 0.5,
+                f"{departure['id']}: on sale, down from {was}, and priced at "
+                f"{advertised:.0f} — a markdown off the price beside it",
+            )
+            checked += 1
+        # A guard on the guard: a dataset with no sales would pass in silence,
+        # which is how this one would come back.
+        self.assertGreater(checked, 100, "almost no row states a list price")
+

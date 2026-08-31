@@ -267,6 +267,19 @@ button.chip[aria-pressed="true"] {
   background:var(--accent-soft); border-color:var(--accent);
   color:var(--accent); font-weight:500;
 }
+/* This rule and the comment above it were landed mid-publish on purpose, to
+   force the push collision #127 needed and could not get from a scheduled run.
+   The first attempt collided with nothing: the data job re-read the same three
+   departures, found them unchanged, and the "a rebuild is not news" guard
+   exited before the push -- a reminder that the two mechanisms interact, and
+   that you cannot force a race with a job that has nothing to say.
+   The rule itself: a bank drops an option the filters have made unreachable; a lone toggle
+   cannot, because vanishing reads as a feature that is gone rather than as a
+   choice that is empty. So On sale stays at 0 and says so, faded to the weight
+   of the "more" handle -- present, and plainly not a thing to click. */
+button.chip:disabled {
+  color:var(--ink-faint); border-color:var(--rule); cursor:default;
+}
 .link-button {
   font:inherit; font-size:11px; background:none; border:0; cursor:pointer;
   color:var(--accent); text-decoration:underline; padding:0;
@@ -520,6 +533,16 @@ tr.detail td > * { position:sticky; left:0; }
   white-space:normal; width:180px; min-width:140px; max-width:180px;
   color:var(--ink-dim); font-size:11px;
 }
+/* The entry bar. Bounded for the same reason and in the same way as the two
+   above: the phrase is at most "Advanced + 50 dives", which is 105px at this
+   size, and the width is stated so auto table layout treats it as binding
+   rather than as a suggestion. Dim and small like Dive sites, because it
+   qualifies the trip rather than pricing it -- the money is what this column
+   must not compete with. */
+.entry-col {
+  white-space:normal; width:120px; min-width:100px; max-width:120px;
+  color:var(--ink-dim); font-size:11px;
+}
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -678,6 +701,21 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 }
 .deals-table .d-off { color:var(--ok); white-space:nowrap; }
 .deals-table .d-native { font-family:var(--font-mono); color:var(--ink-faint); white-space:nowrap; }
+/* One seller per line, each with the day it was read. Two lines at most, and
+   on twelve of the twenty-two rows one. */
+.deals-table .d-native .reading { display:block; }
+/* The second seller's columns, set off by a rule rather than by a colour: the
+   header above them names the seller, and the group only has to be visibly a
+   group. `border-left` on the first cell of the run does it in one declaration
+   and keeps working when the row is a boat PADI advertises and no ladder
+   caught, whose left half is dashes. */
+.deals-table .g-first { border-left:1px solid var(--rule); padding-left:12px; }
+.deals-table .d-group th {
+  border-bottom:none; padding-bottom:0; color:var(--ink-dim);
+}
+/* A boat PADI publishes no offer for. Quieter than a dash in a money column,
+   because it is not a missing number -- there is no offer to have one. */
+.deals-table .d-none { color:var(--ink-faint); }
 
 /* The markdown, beside the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows
@@ -899,7 +937,7 @@ a { color:var(--accent); }
      every row: rows ran 35 to 88px and the tallest of them pushed six rows of
      prices off a screen that had ten. The ellipsis is visible, so a truncated
      name reads as truncated rather than as the whole of it. */
-  .trip, .sites {
+  .trip, .sites, .entry-col {
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     min-width:0; max-width:170px;
   }

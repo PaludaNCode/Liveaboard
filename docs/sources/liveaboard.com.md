@@ -75,12 +75,50 @@ zero — where a page returning no cabin markup at all knows nothing, and writin
 that as zero would publish a sold-out sign for a page that merely failed.
 
 **Reading, not booking.** Step one of a booking flow is a page with a form on
-it; a GET renders it and submits nothing. `robots.txt` allows the path, and the
-polite fetcher asks it first.
+it; a GET renders it and submits nothing. The polite fetcher asks `robots.txt`
+first and it answers yes — but read *"robots.txt, and the blank line"* below
+before taking that at face value, because the yes is an accident.
 
 **The cost is one request per departure**, ~890 a night, because a berth count
 changes the moment somebody books. That is why `cabins.yml` is manual and
 capped by default rather than folded into the daily refresh.
+
+### The operator, on a vessel page with no departures
+
+`Product.brand.name`, in the page's own JSON-LD:
+
+```json
+"brand": {"@type": "Brand", "name": "Blue Planet Liveaboards"}
+```
+
+Every operator this site publishes otherwise comes from an `Event.organizer`.
+A vessel liveaboard.com sells **no berths** on has no `Event`, so 22 hulls fell
+back to PADI's `fleetTitle` — a shelf on a booking site rather than a company,
+and shouted. The brand is on the page either way, which is the point.
+
+Read 2026-08-30 over all 79 vessels in the fee book: **79 of 79 state one**,
+50 distinct companies, no nulls. On the 10 PADI-only vessels that have a page
+here at all, every one is the operating company rather than a fleet label:
+
+| vessel | `brand.name` | PADI's `fleetTitle` |
+|---|---|---|
+| blue-pearl | Blue Planet Liveaboards | `BLUE PLANET` |
+| bella-2, bella-3, eriny | Bella Liveaboard | `BELLA LIVEABOARDS` |
+| ashrafi | Crystal Reef Adventures | — |
+| freedom-iii, freedom-iv | Sharks Bay Umbi | — |
+| lady-m | Blue Ocean Diving Centers & Resorts | — |
+| reef-voyager | Reef Oasis Fleet | — |
+| south-moon-1 | Sea Queen Fleet | — |
+
+Read by `scrape_fees.py`, because the weekly fee run is the only pass that
+visits a vessel with no departures. Plain JSON-LD, so no browser is needed for
+the field itself — it is read there only because that pass is already open on
+the page.
+
+**It is what settled MY Blue Pearl** ([#115](https://github.com/PaludaNCode/Liveaboard/issues/115)).
+PADI shelves it and MY Blue under one "BLUE PLANET Fleet", and folding the two
+on that alone asserts a company for a hull our own source connects to nobody.
+This is that source connecting it.
 
 ### What is on sale, and where it is not
 
@@ -134,6 +172,45 @@ hull, every cabin is 33.0% off on both sites, at the same dollar figures. What
 differs is coverage. PADI publishes one exemplar sailing per vessel; this
 publishes the whole window, and the window has a cliff — Red Sea Aggressor II is
 33% off every week from 1 May to 24 July and full price from 31 July.
+
+### Saying what moved, without keeping the ladders
+
+`data/cabins.json` is rewritten whole every run and carries one `collected`
+date, so for eleven readings this source could say what was on sale today and
+nothing at all about what had changed. That is the same failure `data/deals.json`
+was shaped to avoid — *a change log is a diff between two committed days* — and
+the cabin book predates the rule.
+
+It showed on 2026-08-30, when the Red Sea Aggressors' 33% sale ended. The page
+reported it **from PADI**, which publishes one exemplar sailing per vessel, so
+it said *three offers withdrawn* for an event that moved **36 sailings**. The
+bigger of the two signals was the one that could not speak, and nine of the 22
+boats discounted here appear in no deals listing anywhere.
+
+Thirty days of `cabins.json` is not a file this repository should carry — 70,000
+lines, mostly cabin names and amenities that never change. So the book kept is a
+**projection**: `tools/derive_sales.py` reads the committed cabin book and
+writes `data/sales.json`, one entry per day, three fields per sailing.
+
+```
+"red-sea-aggressor-ii::2027-05-01": [1849.0, 2760.0, "USD"]
+                                     price   list     currency
+```
+
+Two things about its shape are load-bearing:
+
+* **Filed by each record's own `collected`, never the book's header.** A capped
+  `fetch_cabins.py --limit N` run merges, so most of the file is older than the
+  header says; taking the whole file would report a week-old price as this
+  morning's.
+* **A census, not a list of sales.** Every sailing read that day is in it,
+  discounted or not, because the keys are the only thing separating *not on
+  sale* from *not looked at*. `promote` compares the two days over the sailings
+  both readings covered and prints the count of those it could not.
+
+Measured: a day is 864 sailings and ~66 KB, so seven days is ~460 KB against
+`cabins.json`'s 1.9 MB beside it. Thirty days — the deals book's own figure —
+would be 2 MB, which is why `KEEP_DAYS` differs between the two books.
 
 ### The per-trip itinerary fragment
 
@@ -374,6 +451,9 @@ Each of these cost a cycle at least once.
 | Do the operators' own region lists ever name the wrong sea? | **Yes, and it is theirs, not ours.** Topaz sells "North Wrecks Reefs, Tiran and Dahab" with St Johns and Zabargad in its curated regions; Odyssey's "Golden Loop: North" carries St Johns. Both are live. Worth knowing before blaming a parser for a southern reef on a northern row. | same |
 | Is "What to expect" a day-by-day itinerary? | **Not reliably.** Only 12 of 67 vessels head every section with a day; 7 head none with one, and 48 mix days with places. Parse it as headings, not as days — and the days that do appear are a sketch, non-contiguous, and disclaimed outright by some operators. | `tools/probe_itinerary_prose.py`, all 67 vessels |
 | Does every vessel publish that prose? | **Yes, 67/67** — and every one of the four headings (`Overview`, `Route`, `What to expect`, `Key regions`) appears on all 67, so a fragment missing one is a parse failure rather than a quiet operator. | same run |
+| Does a vessel page carry all four season months at once, so one fetch could replace four? | **No, and it is not close.** A bare fetch returns **the next ten sailings from today** — a count cap, not a date window: five vessels, exactly 10 `Event` nodes each, and 0 in season on four of them. The season is nine months out. Marselia Star is the apparent exception and proves the rule — it reaches 2027-05 with 2 of its 7 season sailings only because it sails so rarely that ten sailings carry it that far. This also explains the "746 departures spanning 2026-09 to 2027-10" recorded against an early bare-fetch run: ten per vessel across ~75 vessels, a range produced by the sparse boats, never a wide window. **The 320-fetch saving does not exist.** | `tools/probe_season_months.py`, 5 vessels × 5 fetches |
+| Do multi-month selector forms work — `?m=5/2027&m=6/2027`, or `?m=5-8/2027`? | **No, and they fail dangerously.** Both are guesses (neither appears anywhere on the site) and both were *accepted* rather than rejected: each returned 4 `Event` nodes, all in 2026-09 — **fewer than the bare page's 10**, with no error and no empty response. A selector the server does not understand degrades to a silent subset, which is the one failure mode this crawl must never build on. Do not try these again, and do not invent a third form without probing it. | same run |
+| Is a vessel on the barren skip list actually empty, or is the crawl cementing a parse failure? | **Actually empty.** The four the second seller contradicts — Bella 2, Bella 3, Eriny, Blue Pearl, on which PADI sells 87 season sailings — answered all sixteen vessel-months with **1 `Product` node and 0 `Event` nodes**: the source stating this boat sells nothing that month, which is an answer, and never the no-structured-data state `carry_unread` exists for. So `barren.json` is holding back boats that really do sell nothing here, and the second seller is simply the only one selling them. This does **not** make `padi_only` the right label for those rows ([#110](https://github.com/PaludaNCode/Liveaboard/issues/110)): `promote` knows what the run recorded, and the run recorded a skip, so `not_asked` stays the honest output. Re-probe only if a boat's PADI season grows while its skip persists. | `tools/probe_barren.py`, 16 pages |
 
 ## Still open
 
@@ -385,17 +465,87 @@ Each of these cost a cycle at least once.
   ([#52](https://github.com/PaludaNCode/Liveaboard/issues/52),
   [#34](https://github.com/PaludaNCode/Liveaboard/issues/34),
   [#36](https://github.com/PaludaNCode/Liveaboard/issues/36)).
-- **Whether the vessel page carries all four season months at once.** If it
-  does, that is four fetches per vessel down to one. Unprobed — do not assume
-  either way.
+- **Whether a `?m=` month page can truncate.** The bare page caps at ten
+  sailings (below), and nothing says the month pages do not share that cap. It
+  has never been reached: the busiest vessel-month this site has read is
+  Snefro Pearl's May 2027 at **9**, and no vessel-month in the dataset reaches
+  10. So the cap is untestable from the season and unprovable either way —
+  what is written down instead is the trigger. **A vessel-month that reads
+  exactly 10 is a truncation suspect, not a busy boat**, and should be checked
+  against the vessel's own cadence before it is believed. Probed as far as it
+  goes: near-term months on the two busiest boats returned 4, 8, 9, 8 and 8,
+  every one consistent with a boat sailing every three days rather than with a
+  ceiling.
+
+## robots.txt, and the blank line
+
+**Read this before relying on `can_fetch()`.** `https://www.liveaboard.com/robots.txt`,
+read 2026-08-30, disallows 31 paths for `User-agent: *`. Two of them are ours:
+
+```
+Disallow: /BookingStep1     <- tools/fetch_cabins.py, ~890 pages nightly
+Disallow: /*?*m=*           <- the ?m={M}/{YYYY} selector the whole crawl uses
+```
+
+`PoliteFetcher` obeys `robots.txt`, and that part works. It is not refusing
+these because **the file is malformed**:
+
+```
+User-agent: *
+                              <- a blank line, which ends the record
+    Disallow: /BookingStep1
+    …
+```
+
+A blank line terminates a group, so all 31 rules belong to no user-agent and
+Python's `urllib.robotparser` discards them: `can_fetch()` returns `True` for
+every path in the file. Delete that one line locally and `/BookingStep1` flips
+to `False`. Both readings were checked. (The indentation is a red herring —
+stripping it changes nothing. It is the blank line.)
+
+**The decision — the owner's, taken 2026-08-30 with the alternatives and their
+prices in front of him: carry on, and write it down.** That is what this
+section is. The letter of the file permits it; the intent plainly does not, and
+leaning on somebody else's typo is a poor position for a project whose whole
+argument is the difference between what a site technically discloses and what
+it means to. So it is recorded here, as a call somebody made, rather than left
+for the next reader to rediscover as a curiosity — and it stays reversible: the
+three options below were all live and none was ruled out, only outweighed.
+
+Carrying on is conditional on the crawl staying the small thing it is. The
+pace is 2 seconds a request against a stated `Crawl-delay` of none, taken once
+a day, from one runner, identifying itself truthfully — slower than a person
+clicking the same pages. If any of that changes the decision needs taking
+again, because it was taken about *this* crawl.
+
+What honouring it would cost, stated so the choice can be revisited with the
+price in view: the cabin ladder on 828 sailings and the "advertised price is
+the bottom rung" check with it; berths left at the advertised price, which has
+no other source; the sale detection and the change log built on the same pages;
+and the `?m=` selector, without which a vessel-page fetch returns a rolling
+window from today and the season has to be filtered out of 746 departures to
+keep 14. There is no second route to any of it — `/liveaboard-deals` is prose
+and the JSON-LD carries no list price, both checked and recorded above.
+
+Asking them remains the better answer than any reading of the file, and is not
+foreclosed by this: they publish an affiliate programme and a partners page,
+and a reply would settle it in a way no parser can. Cutting the ~890 nightly
+`/BookingStep1` fetches to weekly was also on the table and was not taken —
+the ladder is what the `STALE_LADDER` guard reads to catch a row offering a
+price nobody can buy, and a week-old ladder is exactly the input that guard
+exists to reject. See
+[#121](https://github.com/PaludaNCode/Liveaboard/issues/121).
 
 ## Access
 
-Both source hosts are denied by this environment's egress policy:
+Both source hosts were denied by this environment's egress policy until
+2026-08-30, when the allowlist landed:
 
 ```
-connect_rejected — gateway answered 403 to CONNECT   www.liveaboard.com:443
+$ curl -o /dev/null -w "%{http_code}" https://www.liveaboard.com/robots.txt
+200
 ```
 
-GitHub Actions runners are not behind it, which is why every probe here runs on
-a runner. See [#1](https://github.com/PaludaNCode/Liveaboard/issues/1).
+Probes can now be run locally as well as on a runner. Everything scheduled
+still runs on GitHub Actions. See
+[#1](https://github.com/PaludaNCode/Liveaboard/issues/1), closed.
