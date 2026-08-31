@@ -654,6 +654,23 @@
     return ["full", "required stated"];
   }
 
+  /* Why a row has no fee figure, in the words the Mandatory fees cell hovers
+     and the Total's dash borrows. Two states and they are not the same
+     failure: one is a page nobody has read, the other is a page that was read
+     and named only optional extras. Neither is "no fees" -- every Egyptian
+     liveaboard pays park and port dues -- and the sentences say so, because a
+     blank in a money column reads as zero unless something stops it. */
+  var FEE_WHY = {
+    none: "Nobody has read this vessel's fee panel yet, so its required " +
+          "extras are unknown. Every Egyptian liveaboard pays park and port " +
+          "fees, so this is missing information rather than a trip without " +
+          "them.",
+    partial: "The operator publishes only optional extras, so its required " +
+             "ones are unstated. They are still charged — bundled into the " +
+             "berth or collected at the dock — and the listing does not say " +
+             "which, so no total is claimed here."
+  };
+
   var COLS = [
     /* Sorted on the ISO string and printed short. Every departure here is in
        one season, so the year is the same four characters on 882 rows and
@@ -752,7 +769,14 @@
       v: function (d, i, m, row) { var b = best(row); return b ? b.lo : Infinity; },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return '<span class="dim">—</span>';
+        /* No total, and the dash says why on hover. The Mandatory fees column
+           beside it prints the reason in words; a bare dash here used to send
+           a reader to a third column to find out, and now sends them one cell
+           left. */
+        if (!b) {
+          return '<span class="dim" title="' + esc(FEE_WHY[disclosure(d)[0]]) +
+            '">—</span>';
+        }
         m = b.bill;
         /* The two numbers already in this row, drawn to scale: how much of the
            bill was advertised, and how much of it was not. Scaled against the
@@ -867,14 +891,34 @@
        within €5 on 89% of matched sailings; the fee books differ on 43 of the
        74 trips where both add up, and by more than €150 on sixteen. Printing
        one figure here hid the whole finding. */
+    /* The required extras, and where there are none to print, why.
+     *
+       This cell was a dash and a column called Disclosure two places to its
+       right carried the reason -- "not looked at" or "optional only" -- as a
+       pill of its own. Two cells for one fact, and the one a reader lands on
+       while reading the bill was the mute one: a dash in a fee column reads as
+       "no fees", which is the opposite of what it means. Every Egyptian
+       liveaboard pays park and port fees, so an empty disclosure is missing
+       information rather than a free trip.
+
+       So the reason is printed here, in the column it is about, and the
+       Disclosure column is gone. The two states stay distinct because they are
+       different failures: nobody read the vessel's fee panel, or the operator
+       published a panel that names only optional extras. */
     { k: "later", t: "Mandatory fees", num: true,
+      /* Unstated sorts last, next to nothing: an unread trip is not a cheap
+         one, and it must not collide with a genuine zero. */
       v: function (d, i, m, row) {
         var b = best(row);
-        return b ? Math.min(b.laterLo, b.laterHi) : m.later;
+        return b ? Math.min(b.laterLo, b.laterHi) : Infinity;
       },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return '<span class="dim">—</span>';
+        if (!b) {
+          var why = disclosure(d);
+          return '<span class="unstated ' + why[0] + '" title="' +
+            esc(FEE_WHY[why[0]]) + '">' + why[1] + "</span>";
+        }
         return '<span class="later">+' +
           sellerPair(b.laterLo, b.laterHi) + "</span>";
       } },
@@ -973,11 +1017,6 @@
 
        Sorted by the size of the disagreement so the widest come to the top,
        which is the one thing this column is for. */
-    { k: "disclosure", t: "Disclosure", v: function (d) { return disclosure(d)[1]; },
-      show: function (d) {
-        var s = disclosure(d);
-        return '<span class="pill ' + s[0] + '">' + s[1] + "</span>";
-      } },
     /* The listing for *this departure*, not for its boat.
      *
      * The itinerary's `source_url` is the vessel page at whichever month the
@@ -1059,7 +1098,7 @@
     "start", "end", "boat", "guests",
     "from", "to", "trip", "sites", "entry",
     "base", "nitrox", "later", "total", "perdive",
-    "availability", "disclosure", "source"
+    "availability", "source"
   ];
   /* The same columns on a phone, and as much of the same order as 390px holds.
      Three of the four rules above survive here unchanged: no Operator or
@@ -1093,7 +1132,7 @@
        still shows the answer. */
     "total", "base", "nitrox", "later", "perdive",
     "end", "from", "to", "trip", "sites", "entry",
-    "availability", "disclosure", "source"
+    "availability", "source"
   ];
 
   /* The same again on a screen too small to afford Guests in front of the
@@ -1112,7 +1151,7 @@
     "start", "boat",
     "total", "base", "nitrox", "later", "perdive",
     "guests", "end", "from", "to", "trip", "sites", "entry",
-    "availability", "disclosure", "source"
+    "availability", "source"
   ];
 
   /* The same columns, and the same price order within them, wherever there is
@@ -1130,7 +1169,7 @@
     "start", "end", "boat",
     "base", "nitrox", "later", "total", "perdive",
     "guests", "from", "to", "trip", "sites", "entry",
-    "availability", "disclosure", "source"
+    "availability", "source"
   ];
 
   /* Two questions, two breakpoints. `compact` is about how much room there is

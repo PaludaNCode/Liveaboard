@@ -1313,7 +1313,7 @@ class TestPayloadIsRead(unittest.TestCase):
         headings = set(re.findall(r"<h3>([^<]+)</h3>", footer))
         source = self.app()
         titles = set(re.findall(r'\bt: "([^"]+)"', source))
-        for heading in ("Places", "Disclosure", "Per dive"):
+        for heading in ("Places", "Mandatory fees", "Per dive"):
             self.assertIn(heading, headings, f"the footer dropped {heading}")
             self.assertIn(heading, titles, f"{heading} is documented but gone")
 
@@ -2247,3 +2247,69 @@ class TestNeitherSellerIsTheHouse(unittest.TestCase):
                           "the row's liveaboard.com bill is `.lav`")
         self.assertIsNone(re.search(r"\brow\.p\b", self.app),
                           "the row's PADI bill is `.padi`")
+
+
+class TestAnEmptyFeeCellSaysWhy(unittest.TestCase):
+    """A blank in a money column reads as zero unless something stops it.
+
+    Whether the operator stated its required extras had a column of its own --
+    *Disclosure*, two places right of the fees it was about -- carrying "not
+    looked at" or "optional only" as a pill. Two cells for one fact, and the
+    one a reader lands on while reading the bill was the mute one: the fee cell
+    printed a dash, which in a column of money reads as "no fees". Every
+    Egyptian liveaboard pays park and port dues, so that is the opposite of
+    what it means.
+
+    The reason is printed in the fee column now. Both states survive because
+    they are different failures -- a panel nobody has read, and a panel that
+    was read and names only optional extras -- and neither may be rendered as
+    a figure or as a category the row belongs to.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_disclosure_column_is_gone(self) -> None:
+        self.assertNotIn('"disclosure"', self.app,
+                         "the reason is a column of its own again, away from "
+                         "the fees it is about")
+        titles = set(re.findall(r'\bt: "([^"]+)"', self.app))
+        self.assertNotIn("Disclosure", titles)
+        self.assertIn("Mandatory fees", titles)
+
+    def test_the_fee_cell_prints_the_reason_rather_than_a_dash(self) -> None:
+        fees = self.app.split('t: "Mandatory fees"', 1)[1].split("} },", 1)[0]
+        self.assertIn("disclosure(d)", fees, "the fee cell does not say why it is empty")
+        self.assertIn("FEE_WHY", fees, "the fee cell offers no explanation on hover")
+        self.assertNotIn('<span class="dim">—</span>', fees,
+                         "the fee cell is a mute dash again")
+
+    def test_both_reasons_are_kept_apart_and_neither_reads_as_no_fees(self) -> None:
+        """"Nobody looked" and "the operator did not say" are different
+        failures. Each carries a sentence, and each sentence has to rule out
+        the reading a blank invites."""
+        self.assertIn('none: "Nobody has read', self.app)
+        self.assertIn('partial: "The operator publishes only optional', self.app)
+        block = self.app.split("var FEE_WHY = {", 1)[1].split("\n  };", 1)[0]
+        for state in ("none", "partial"):
+            sentence = block.split(f"{state}:", 1)[1].split("\n    partial:", 1)[0]
+            self.assertRegex(
+                sentence, r"park and port|still charged",
+                f"the {state} sentence does not rule out the reading that a "
+                f"blank fee cell invites, which is that there are no fees")
+
+    def test_an_unstated_fee_sorts_last_rather_than_cheapest(self) -> None:
+        """A trip nobody read the fees for is not a cheap trip, and must not
+        collide with a genuine zero at the top of a cheapest-first sort."""
+        fees = self.app.split('t: "Mandatory fees"', 1)[1].split("show:", 1)[0]
+        self.assertIn("Infinity", fees)
+
+    def test_the_reason_is_not_dressed_as_a_value(self) -> None:
+        """`.pill` is a state badge and reads as a value the row *has*. These
+        two are the absence of one."""
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn(".unstated {", css)
+        self.assertNotIn(".pill.full", css, "the disclosure pill outlived its column")
+        self.assertNotIn(".pill.partial", css)
