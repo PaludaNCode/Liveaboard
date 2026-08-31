@@ -1181,7 +1181,7 @@
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
     if (state.hideSoldOut && !dep.bookable) return false;
-    if (state.onSaleOnly && !dep.sale) return false;
+    if (skip !== "sale" && state.onSaleOnly && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
@@ -2539,16 +2539,52 @@
   nmin.addEventListener("input", readNights);
   nmax.addEventListener("input", readNights);
 
-  /* The On sale chip. Its count is of the whole dataset rather than of what
-     is on screen, deliberately: it says how much there is to find, not how
-     much the filters have already left, and a count that fell to 0 under an
-     unrelated month filter would read as "no sales" rather than "none in
-     June". */
+  /* The On sale chip, counted like every other bank: against the rows that
+     pass all the *other* filters, so the number answers "what if I picked
+     this too?".
+
+     It used to hold a count of the whole dataset and never move, on the
+     reasoning that it should say how much there is to find rather than how
+     much the filters have left, and that a 0 under an unrelated month filter
+     would read as "no sales" rather than "none in June".
+
+     That reasoning does not survive the rest of the panel. Every other number
+     here is filter-relative, and one that is not teaches the reader nothing
+     except that this one lies: "On sale 268" beside a June table with no sale
+     in it is a promise the click then breaks, and the reader discovers "none
+     in June" by ending up with an empty table instead of by reading a 0. The
+     stale count did not avoid the confusion, it deferred it past a click.
+
+     So it counts live, and `passes` gained a `"sale"` skip so it can exclude
+     itself the way `months`, `ports` and `boats` already do -- without that,
+     switching it on would make its own count equal the visible rows and it
+     could never guide the way back.
+
+     Zero keeps the chip rather than hiding it, which is where this departs
+     from `chips()`. A bank drops an unreachable option because the reader can
+     see the others and infer the rule; a lone toggle that vanishes reads as a
+     feature that is gone. It stays, dimmed and unclickable, saying 0 against
+     a title that spells out what the 0 is about. Still clickable while it is
+     switched *on*, for the same reason a picked chip survives at zero: the way
+     out must not disappear. */
   var onSale = document.getElementById("onSale");
-  var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
-  if (onSaleCount) {
+  if (D.departures.some(function (d) { return !!d.sale; })) {
     onSale.hidden = false;
-    onSale.textContent = "On sale " + onSaleCount;
+    BANKS.push({
+      recount: function () {
+        var n = 0;
+        D.departures.forEach(function (dep) {
+          if (!dep.sale) return;
+          if (passes(dep, D.itineraries[dep.itinerary_id], "sale")) n += 1;
+        });
+        onSale.textContent = "On sale " + n;
+        var dead = n === 0 && !state.onSaleOnly;
+        onSale.disabled = dead;
+        onSale.title = dead
+          ? "No sailing on sale among the trips these filters leave"
+          : n + (n === 1 ? " sailing is" : " sailings are") + " on sale here";
+      }
+    });
     onSale.addEventListener("click", function () {
       state.onSaleOnly = !state.onSaleOnly;
       onSale.setAttribute("aria-pressed", state.onSaleOnly);

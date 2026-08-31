@@ -163,6 +163,13 @@ button.chip[aria-pressed="true"] {
   background:var(--accent-soft); border-color:var(--accent);
   color:var(--accent); font-weight:500;
 }
+/* A bank drops an option the filters have made unreachable; a lone toggle
+   cannot, because vanishing reads as a feature that is gone rather than as a
+   choice that is empty. So On sale stays at 0 and says so, faded to the weight
+   of the "more" handle -- present, and plainly not a thing to click. */
+button.chip:disabled {
+  color:var(--ink-faint); border-color:var(--rule); cursor:default;
+}
 .link-button {
   font:inherit; font-size:11px; background:none; border:0; cursor:pointer;
   color:var(--accent); text-decoration:underline; padding:0;

@@ -1895,3 +1895,68 @@ class TestThePublishTailDoesNotQueueOnConcurrency(unittest.TestCase):
         body = self.WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("not a queue", body)
         self.assertIn("cancels the pending", body)
+
+
+class TestTheOnSaleChipCountsWhatIsOnScreen(unittest.TestCase):
+    """Every filter count on the page answers "what if I picked this too?".
+
+    The On sale chip did not. It was counted once at load, over the whole
+    dataset, and never moved -- so it read "On sale 229" beside a table
+    filtered to a boat with no sale on it, and the click then produced an empty
+    result. **58 of the 77 boats have sailings and no sale at all**, so that
+    was the common case rather than a corner ([#129]).
+
+    The old comment argued the stale number said "how much there is to find"
+    rather than how much the filters had left, and that a 0 would read as "no
+    sales" rather than "none in June". It does not survive the rest of the
+    panel: every other number here is filter-relative, so one that is not
+    teaches only that this one lies, and the reader still learns "none in
+    June" -- by ending up with an empty table instead of by reading a 0. The
+    confusion was deferred past a click, not avoided.
+
+    Two things make the fix work and both are asserted, because either alone
+    is wrong:
+
+    * `passes` has to let the sale filter **exclude itself**, the way `months`,
+      `ports` and `boats` already do. Without that, switching the chip on makes
+      its own count equal the visible rows and it can never guide the way back.
+    * the chip has to be a **bank**, so it re-counts on every draw through the
+      same `recount()` hook as the rest. Counting it anywhere else is a second
+      mechanism to keep in step.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_sale_filter_can_exclude_itself(self):
+        self.assertIn('if (skip !== "sale" && state.onSaleOnly', self.app,
+                      "passes() must accept a `sale` skip, or the chip's own "
+                      "count collapses onto the visible rows once it is on")
+
+    def test_the_chip_recounts_with_every_other_bank(self):
+        """It must go through `BANKS`, not a count taken once at load."""
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("BANKS.push(", after)
+        self.assertIn('passes(dep, D.itineraries[dep.itinerary_id], "sale")', after)
+
+    def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self):
+        """`chips()` drops an unreachable option; a lone toggle must not.
+
+        A bank can drop one because the reader sees the others and infers the
+        rule. A single control that vanishes reads as a feature that is gone.
+        It stays, disabled, saying 0 -- and stays clickable while it is *on*,
+        for the same reason a picked chip survives at zero: the way out must
+        not disappear.
+        """
+        after = self.app[self.app.index("var onSale = document.getElementById"):]
+        self.assertIn("n === 0 && !state.onSaleOnly", after)
+        self.assertIn("onSale.disabled = dead", after)
+        self.assertNotIn("onSale.hidden = true", after)
+
+    def test_the_disabled_chip_is_styled(self):
+        """Otherwise "0" and a live count look identical and it invites a
+        click that does nothing."""
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn("button.chip:disabled", css)
