@@ -217,9 +217,17 @@ def merge() -> int:
         print("conflict; resolve on the trunk or reset and retry")
         return 1
     subprocess.run(["git", "push", "-q", "origin", TRUNK], cwd=ROOT, check=True)
-    run_git("branch", "-q", "-d", branch)
-    run_git("push", "-q", "origin", "--delete", branch)
     print(f"\nmerged {branch} into {TRUNK} -> {git('rev-parse', '--short', 'HEAD')}")
+
+    # Tidying up, and it is allowed to fail. Some tokens can push a branch and
+    # not delete one -- this environment's returns 403 on the delete -- and the
+    # merge has already landed by here, so a failure is untidiness rather than
+    # a problem. Reported either way: the first version of this swallowed the
+    # error and printed the same success line, which is a tool claiming work it
+    # had not done.
+    run_git("branch", "-q", "-d", branch)
+    if run_git("push", "-q", "origin", "--delete", branch) != 0:
+        print(f"could not delete origin/{branch} — it is merged, and stale")
     print("CI runs the same gate; it is not worth waiting on unless it goes red.")
     return 0
 

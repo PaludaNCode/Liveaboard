@@ -2599,6 +2599,14 @@ class TestOneGate(unittest.TestCase):
         self.assertIn('git("rev-list", "--count", f"HEAD..origin/{TRUNK}")', merge)
         self.assertIn("not merging: the gate is red against the merged trunk", merge)
 
+    def test_the_merge_does_not_claim_a_cleanup_it_did_not_do(self) -> None:
+        """Deleting the merged branch is allowed to fail -- this environment's
+        token returns 403 on it -- and the first version reported success
+        anyway, because the call was fire-and-forget."""
+        merge = self.SHIP.read_text(encoding="utf-8").split("def merge(", 1)[1]
+        self.assertIn('if run_git("push", "-q", "origin", "--delete", branch) != 0:',
+                      merge, "the branch delete is fire-and-forget again")
+
     def test_the_fast_loop_says_it_is_not_the_gate(self) -> None:
         """`--fast` drops the two slowest modules, so it can pass over a real
         failure. A shortcut that does not admit it is one people ship on."""
