@@ -369,7 +369,20 @@ class TestARebuildIsNotNews(unittest.TestCase):
     pinned for the same reason.
     """
 
+    #: The shell moved out of `action.yml` into a file of its own so the
+    #: rebase branch could be tested (#127). This guard followed it, and reads
+    #: both: the script for the logic, the action for the wiring that reaches
+    #: it. Keying on only one of the two is how a check ends up looking at a
+    #: file the behaviour no longer lives in.
     ACTION = ROOT / ".github" / "actions" / "publish" / "action.yml"
+    SCRIPT = ROOT / ".github" / "actions" / "publish" / "push.sh"
+
+    def test_the_action_actually_runs_the_script(self):
+        """Otherwise everything below inspects a file nothing executes."""
+        self.assertTrue(self.SCRIPT.exists(), "push.sh is gone")
+        self.assertIn("push.sh", self.ACTION.read_text(encoding="utf-8"),
+                      "the action no longer runs push.sh, so the checks below "
+                      "are reading a script that never runs")
 
     def test_the_page_carries_a_build_stamp_under_the_key_the_action_strips(self):
         key = re.search(r'"(\w+)": datetime\.now', (ROOT / "src" / "liveaboard"
@@ -378,12 +391,12 @@ class TestARebuildIsNotNews(unittest.TestCase):
         # assertTrue rather than assertIn: a missing substring prints the
         # whole haystack, and the haystack is the entire action.
         self.assertTrue(
-            f'"{key.group(1)}":' in self.ACTION.read_text(encoding="utf-8"),
+            f'"{key.group(1)}":' in self.SCRIPT.read_text(encoding="utf-8"),
             f"render stamps {key.group(1)!r} and the publish action does not "
             f"normalise it; every rebuild would commit again, silently")
 
     def test_the_action_still_has_the_check(self):
-        body = self.ACTION.read_text(encoding="utf-8")
+        body = self.SCRIPT.read_text(encoding="utf-8")
         self.assertTrue("site/index.html" in body, "the stamp check is gone")
         self.assertTrue("exclude" in body,
                         "the check must ignore the page when deciding whether "
