@@ -33,6 +33,26 @@ Three things that decided the shape of this module:
   rounds up: a diver keeps the kit for the whole trip, and two weeks' hire for
   nine nights is the reading that does not undercharge.
 
+* **And where the page states no unit at all, it has not said "per trip".**
+  A figure with no unit used to become :class:`FeeBasis.PER_TRIP`, silently and
+  at the cheapest reading there is. Bella 2's bundle is ``<span>€40</span>``
+  with nothing after it, and both the boat's own singles (€11/day for a BCD,
+  €5/day for fins) and PADI's book for the same set (40 EUR per *diving day*)
+  say a day. Published per trip, that hire line was a third of what a
+  three-night trip charges and a seventh of a week's.
+  Read across the whole fee book: 70 vessels quote a priced bundle and 65 of
+  them state a unit -- 25 per trip, 25 per week, 15 per day -- so the unit is
+  the norm and its absence is the page failing to state something, not the page
+  saying "once". The five that leave it out span every one of those answers on
+  the evidence beside them: Emperor Superior's unitless €206 is the figure its
+  two sisters state per week, Bella 2's unitless €40 is a day, and Blue Pearl's
+  unitless €135 sits between a sister quoting €135/week and one quoting
+  €135/trip. So there is no fallback that is right and no direction that is
+  safely wrong: `basis` is ``None`` and the amount does not reach the total. The
+  figure stays in the note where a reader can see it, which is what this module
+  already does for a vessel that prices gear per item and never as a set. It
+  covers 5 vessels, 22 itineraries and 82 published sailings.
+
 * **"Nitrox tank: Included" is not "nitrox is included".** It sits in a list of
   what gear costs to hire, so the plain reading is that hiring a nitrox tank
   costs nothing on top of the gear -- not that fills are free for everyone. It
@@ -109,7 +129,14 @@ class GearItem:
     low: float | None
     high: float | None
     currency: str
-    basis: FeeBasis
+    basis: FeeBasis | None
+    """The unit the page states, or ``None`` when it states none.
+
+    ``None`` rather than a default, because a figure whose unit is missing
+    cannot be normalised and must not be added up as though it could -- see the
+    module docstring. An included or unpriced item has no unit to state and
+    carries ``None`` too, which costs nothing: neither reaches a total.
+    """
     included: bool = False
 
     @property
@@ -121,14 +148,19 @@ class GearItem:
         return self.high is not None and self.high != self.low
 
     def as_text(self) -> str:
-        """How this item reads in a note, e.g. "BCD €83/week"."""
+        """How this item reads in a note, e.g. "BCD €83/week".
+
+        A figure the page states no unit for prints without one -- "BCD €11" --
+        rather than borrowing a unit from this module's own default. The note is
+        the record of what the page said.
+        """
         if self.included:
             return f"{self.label} included"
         if not self.has_price:
             return self.label
         symbol = next((s for s, c in CURRENCIES.items() if c == self.currency), "")
         span = f"{self.low:g}" + (f"-{self.high:g}" if self.is_range else "")
-        unit = self.basis.value.replace("per_", "/")
+        unit = self.basis.value.replace("per_", "/") if self.basis else ""
         return f"{self.label} {symbol}{span}{unit}"
 
 
@@ -170,21 +202,24 @@ def _item(label: str, value: str, default_currency: str) -> GearItem | None:
         return None
 
     if INCLUDED.match(value):
-        return GearItem(label, None, None, default_currency, FeeBasis.PER_TRIP, True)
+        return GearItem(label, None, None, default_currency, None, True)
 
     match = AMOUNT.search(value)
     low = _number(match.group("low")) if match else None
     if low is None:
         # Listed with no figure. Still worth carrying: it says the operator
         # rents the item, which is more than nothing.
-        return GearItem(label, None, None, default_currency, FeeBasis.PER_TRIP)
+        return GearItem(label, None, None, default_currency, None)
 
     return GearItem(
         label=label,
         low=low,
         high=_number(match.group("high")),
         currency=CURRENCIES.get(match.group("currency") or "", default_currency),
-        basis=BASES.get((match.group("basis") or "").lower(), FeeBasis.PER_TRIP),
+        # ``None`` where the page states no unit. Never `PER_TRIP` as a default:
+        # that is the cheapest of the three answers the page gives elsewhere,
+        # and picking it silently understated five vessels' hire.
+        basis=BASES.get((match.group("basis") or "").lower()),
     )
 
 
@@ -235,7 +270,7 @@ def to_fee_dict(reading: GearReading, provenance: dict) -> dict | None:
         "provenance": provenance,
     }
 
-    if reading.bundle is not None:
+    if reading.bundle is not None and reading.bundle.basis is not None:
         fee["amount"] = {"amount": reading.bundle.low, "currency": reading.bundle.currency}
         if reading.bundle.is_range:
             fee["amount_max"] = {
@@ -244,6 +279,26 @@ def to_fee_dict(reading: GearReading, provenance: dict) -> dict | None:
             }
         fee["basis"] = reading.bundle.basis.value
         fee["note"] = f"Full equipment hire: {reading.bundle.label}"
+        return fee
+
+    # A bundle price with no unit beside it. The figure is real and the unit is
+    # missing, and this project does not supply the missing half: quoted per
+    # trip -- the cheapest of the three units the page uses elsewhere -- Bella
+    # 2's €40 set was a third of a three-night trip's hire and a seventh of a
+    # week's. So the number is stated in the note, where a reader can see it,
+    # and no total claims it. Same shape as a vessel that never quotes a set.
+    if reading.bundle is not None:
+        symbol = next(
+            (s for s, c in CURRENCIES.items() if c == reading.bundle.currency), ""
+        )
+        fee["basis"] = FeeBasis.PER_TRIP.value
+        fee["amount"] = None
+        fee["note"] = (
+            f"Full equipment hire: {reading.bundle.label} "
+            f"{symbol}{reading.bundle.low:g}"
+            + (f"-{reading.bundle.high:g}" if reading.bundle.is_range else "")
+            + ", with no unit stated"
+        )
         return fee
 
     # No bundle quoted. Summing the singles would invent a set price the

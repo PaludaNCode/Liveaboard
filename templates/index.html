@@ -394,17 +394,40 @@
     <div>
       <h3>Nitrox and tips</h3>
       <p>
-        Two thirds of this fleet bundles nitrox and a quarter bills for it:
-        <b>50</b> vessels say <b>included</b>, <b>21</b> publish a price
-        &mdash; &euro;30 to &euro;100, most often around &euro;70 a week
-        &mdash; and <b>6</b> never mention it at all. Those six read
-        <b>not listed</b>, which is the one thing on this page nitrox can say
-        that is neither yes nor a number: nobody has said whether you will be
-        charged. Four of them are boats whose sailings only PADI Travel lists.
-        That was eleven until this page learned to read the other half of
-        PADI&rsquo;s disclosure: it states what a fare covers as well as what
-        it charges on top, and the second half had gone unread, so five boats
-        that say <b>included</b> were being reported as silent.
+        <!-- Every figure here is substituted by `render._stated_figures`, so
+             it cannot be one refresh out of date. Two consequences for whoever
+             edits this sentence next. Keep the counts as **noun phrases** --
+             "23 publishing a price", not "23 publish a price" -- because a
+             derived number is 1 sooner or later and a verb beside it will not
+             agree; that is how "1 say nothing about it" reached the page once.
+             And any new figure needs a token: a typed number here is a claim
+             that goes stale silently, which is the failure this whole page
+             exists to report in other people. -->
+        Of <b>__BOATS__</b> vessels: <b>__NITROX_INCLUDED__</b> with nitrox
+        <b>included</b>, <b>__NITROX_PRICED__</b> publishing a price
+        &mdash; &euro;__NITROX_LOW__ to &euro;__NITROX_HIGH__ at the bottom of
+        the quote, half at &euro;__NITROX_MEDIAN__ or less, and priced per trip
+        on __NITROX_PER_TRIP__ of the __NITROX_PRICED__ &mdash; and
+        <b>__NITROX_ABSENT__</b> with no statement at all, which the column
+        reads as <b>not listed</b>: the one thing on this page nitrox can say
+        that is neither yes nor a number, because nobody has said whether you
+        will be charged.
+      </p>
+      <p>
+        That column read <b>not listed</b> eleven times once, and each cut came
+        from opening a half of a disclosure that was already on the page.
+        PADI states what a fare covers as well as what it charges on top, and
+        the second half had gone unread: five boats saying <b>included</b> were
+        being reported as silent. Then PADI&rsquo;s <i>optional</i> list, which
+        moved two hulls it alone sells berths on off the silent column and onto
+        a price &mdash; Heaven Saphir at $80 a week, and Seawolf Dominator at
+        &euro;50 a week while its own inclusions call nitrox free, because where
+        one seller says both, the figure is the claim a reader must not miss.
+        And last, this fleet&rsquo;s other seller turned out to print an
+        <b>Included:</b> block above the two lists this page had been reading,
+        on all 79 of its vessel pages: Bella 2, Bella 3, Eriny and Sea Friend
+        say nitrox is in the fare there, and were being published as though
+        nobody had said.
       </p>
       <p>
         Crew tips are counted wherever an operator publishes a figure; where
@@ -554,9 +577,10 @@
       </p>
       <p>
         Two sources describe it &mdash; the operator&rsquo;s own itinerary
-        panel and PADI Travel &mdash; and both speak about <b>127</b> of these
-        trips. They disagree on <b>60</b> of those, in both directions: PADI
-        asks for more on 19 and for less on 41. Neither is the authority; both
+        panel and PADI Travel &mdash; and both speak about
+        <b>__BAR_BOTH__</b> of these trips. They disagree on
+        <b>__BAR_DISAGREE__</b> of those, in both directions: PADI asks for
+        more on __BAR_PADI_STRICTER__ and for less on __BAR_OURS_STRICTER__. Neither is the authority; both
         are quoting the same operator. The <b>stricter</b> of the two is shown,
         marked <span class="varies">2 sellers</span> in the column and named in
         full when you expand the row, because a diver turned away at the dock

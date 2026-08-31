@@ -236,13 +236,12 @@ def resolve_fees(itinerary: Itinerary, departure: Departure) -> list[FeeItem]:
 def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
     """Has the operator said anything about its unavoidable costs?
 
-    Seven of seventy-nine vessels publish an extras disclosure listing only
-    optional items — gratuities, gear, courses — and no required block at all.
-    Every Egyptian liveaboard pays marine park and port fees, so that silence
-    means one of two things and does not say which: the fees are bundled into
-    the fare, or they are collected at the dock and simply not advertised.
+    Seven of seventy-nine vessels publish no *Required Extras* block at all.
+    Every Egyptian liveaboard pays marine park and port fees, so that looked
+    like a silence meaning one of two things without saying which: bundled into
+    the fare, or collected at the dock and not advertised.
 
-    Counting the silence as zero made the site rank those operators as its most
+    Counting that silence as zero made the site rank those operators as its most
     honest: ``odyssey`` scored 96% and ``emperor-asmaa`` 93%, against 86% for a
     vessel that published its park and port fees in full. A page built to argue
     that advertised prices hide costs cannot reward the operators that disclose
@@ -250,6 +249,16 @@ def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
 
     An *included* mandatory line still counts as known — that is an operator
     stating the fee is in the fare, which is the honest case this rewards.
+
+    **And it turned out the seven were not silent.** They print an `Included:`
+    block that `fees.BLOCK` was not reading, and six of the seven name National
+    Park Fees, Port Fees and the Fuel Surcharge in it -- Emperor Asmaa, the boat
+    this note calls out by name, states all three as covered. The seventh,
+    ``odyssey``, states VAT and the Environment Tax, which is the Red Sea levy
+    under the name that operator gives it. So every one of them now answers this
+    with an inclusion rather than with nothing, and the honest case is the one
+    the site was declining to see: the ambiguity was never in the operators'
+    disclosure, it was in what this code read of it.
     """
     return any(fee.tier is FeeTier.MANDATORY for fee in resolve_fees(itinerary, departure))
 

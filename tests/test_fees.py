@@ -530,6 +530,130 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class TestTheBlockNobodyRead(unittest.TestCase):
+    """`Included:`, on all 79 vessel pages, above the two that were parsed.
+
+    The disclosure is written in three blocks and this parser knew two. The
+    third sits in the same paragraph and the same comma-separated prose, and
+    what it cost is a line per vessel that the whole site turns on: **included
+    fees stay in the breakdown at zero**, because removing them hides the
+    difference between a bundled operator and one that bills at the dock. The
+    rule was being enforced on PADI's `whatsIncludedNew` and on nothing here.
+
+    Bella 2 is the case that found it. The other seller charges 50 EUR for
+    nitrox on that boat; this one lists it under Included, and the page showed
+    neither. Across the fleet it is 273 lines on 79 vessels -- VAT on 79, a
+    transfer on 59, nitrox on 49, a fuel surcharge on 16, port fees on 10.
+    """
+
+    #: Bella 2's disclosure, verbatim, 2026-08-31.
+    TEXT = (
+        "Included: VAT, Drinking Water, Soft drinks, Tea & Coffee, Welcome "
+        "Cocktails, Full-Board Meal Plan (All meals), Snacks, Diving Package, "
+        "Night Dives, Nitrox, Snorkeling Guide, Beach Towels, Cabin Towels, "
+        "Complimentary Toiletries, Deck Towels, WiFi internet."
+        "Required Extras: Mandatory Service Charge (\u20ac10 / day), National "
+        "Park Fees (\u20ac10 / day), Port Fees (\u20ac5 / trip)."
+        "Optional Extras: Airport Transfer, Hotel Transfer, Alcoholic "
+        "Beverages, Nitrox Course (\u20ac100-200 / activity), Rental Gear, "
+        "Laundry / Pressing Services."
+    )
+
+    def fees(self, text=None):
+        return {f.code: f for f in parse_extras(text or self.TEXT)}
+
+    def test_the_inclusions_are_read(self):
+        nitrox = self.fees()[FeeCode.NITROX]
+        self.assertTrue(nitrox.included)
+        self.assertIsNone(nitrox.low)
+        self.assertEqual(nitrox.label, "Nitrox")
+
+    def test_an_inclusion_is_never_read_as_free_of_charge_wording(self):
+        """It is a price of zero the operator stated, not a blank."""
+        dicts = to_fee_dicts(list(self.fees().values()), {})
+        vat = next(f for f in dicts if f["code"] == "tax_vat")
+        self.assertTrue(vat["included"])
+        self.assertIsNone(vat["amount"])
+        self.assertEqual(vat["note"], "VAT: stated as included")
+
+    def test_the_charged_blocks_are_untouched(self):
+        """The regression this must not cause. Bella 2's three required
+        charges and its priced nitrox course read exactly as before."""
+        fees = self.fees()
+        self.assertEqual(
+            [(fees[c].low, fees[c].basis.value, fees[c].included) for c in
+             (FeeCode.SERVICE_CHARGE, FeeCode.MARINE_PARK, FeeCode.PORT_FEES)],
+            [(10.0, "per_day", False), (10.0, "per_day", False),
+             (5.0, "per_trip", False)])
+        self.assertEqual(fees[FeeCode.NITROX_COURSE].low, 100.0)
+
+    def test_the_nitrox_course_is_not_the_gas_being_included(self):
+        """Two codes, and this page states one of each: nitrox included, the
+        certification charged."""
+        fees = self.fees()
+        self.assertTrue(fees[FeeCode.NITROX].included)
+        self.assertFalse(fees[FeeCode.NITROX_COURSE].included)
+
+    def test_a_priced_charge_beats_an_inclusion_whatever_the_page_order(self):
+        """`Included:` is printed first and would win by arriving first. It
+        decides four vessels today and all four are one code covering two
+        services: Topaz includes the airport transfer and charges 25 for the
+        hotel one. Printing "included" there calls a published charge free."""
+        fees = self.fees(
+            "Included: Airport Transfer."
+            "Optional Extras: Hotel Transfer (\u20ac25 / trip)."
+        )
+        transfer = fees[FeeCode.AIRPORT_TRANSFER]
+        self.assertFalse(transfer.included)
+        self.assertEqual(transfer.low, 25.0)
+
+    def test_but_an_inclusion_beats_a_charge_with_no_figure(self):
+        """Dune Longara lists a transfer with no price and states the transfer
+        as included. "Listed with no price" there is this parser missing an
+        answer that was on the page."""
+        fees = self.fees(
+            "Included: Airport Transfer."
+            "Optional Extras: Hotel Transfer, Laundry / Pressing Services."
+        )
+        self.assertTrue(fees[FeeCode.AIRPORT_TRANSFER].included)
+
+    def test_an_inclusion_keeps_the_place_of_the_line_it_displaced(self):
+        """Order is the breakdown's order. A displaced line moving to the end
+        would reshuffle the table for no reason a reader could see."""
+        codes = [f.code for f in parse_extras(
+            "Included: Airport Transfer."
+            "Optional Extras: Hotel Transfer, Laundry / Pressing Services."
+        )]
+        self.assertEqual(codes, [FeeCode.AIRPORT_TRANSFER, FeeCode.LAUNDRY])
+
+    def test_an_amenity_nobody_can_classify_is_not_a_fee(self):
+        """Most of the block is towels and coffee. 40 distinct entries across
+        the fleet and 15 of them name a charge this project models."""
+        fees = self.fees("Included: Drinking Water, Cabin Towels, WiFi internet.")
+        self.assertEqual(fees, {})
+
+    def test_a_mandatory_charge_is_never_displaced(self):
+        """The block an entry sits in is the claim. A required charge saying a
+        diver pays outranks another block saying they do not, priced or not."""
+        fees = self.fees(
+            "Included: Port Fees."
+            "Required Extras: Port Fees."
+        )
+        self.assertFalse(fees[FeeCode.PORT_FEES].included)
+
+    def test_the_heading_survives_the_excerpt_round_trip(self):
+        """`drift` rebuilds this text from the stored excerpt, whose keys are
+        the bare heading words, so `BLOCK` has to accept "Included Extras:"
+        as well as "Included:"."""
+        from liveaboard.scrape.fees import extras_excerpt
+
+        excerpt = extras_excerpt(self.TEXT)
+        self.assertEqual(sorted(excerpt), ["included", "optional", "required"])
+        rebuilt = "\n".join(f"{h.title()} Extras: {b}" for h, b in excerpt.items())
+        self.assertEqual({f.code for f in parse_extras(rebuilt)},
+                         {f.code for f in parse_extras(self.TEXT)})
+
+
 class TestFeeBookDrift(unittest.TestCase):
     """Whether the committed book is what today's parser would produce.
 

@@ -54,6 +54,16 @@ class Dataset:
     a fresh checkout and renders as no panel rather than as no deals.
     """
 
+    entry_bar: dict[str, int] = field(default_factory=dict)
+    """How often the two sellers' stated entry bars agree, and which way not.
+
+    Counted by `promote`, which is the only pass holding both bars: the
+    itinerary keeps the stricter of them, so nothing downstream can say which
+    seller it came from. Carried here because the footer states these figures in
+    prose, and prose that restates a measurement is prose that goes quietly
+    stale -- it claimed 19 and 41 while the data said 30 and 30.
+    """
+
     padi_berths_read: str | None = None
     """The day the second seller's berth counts were read.
 
@@ -101,6 +111,7 @@ class Dataset:
             berths_read=payload.get("berths_read") or None,
             padi_berths_read=payload.get("padi_berths_read") or None,
             deals=dict(payload.get("deals") or {}),
+            entry_bar=dict(payload.get("entry_bar") or {}),
         )
         dataset.validate()
         return dataset

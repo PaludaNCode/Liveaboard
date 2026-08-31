@@ -872,6 +872,62 @@ class TestTheHarbourPadiStates(unittest.TestCase):
         self.assertEqual((row["port_from"], row["port_to"]), ("Hurghada", "Hurghada"))
 
 
+class TestTheSecondSellersDiveCountFillsAnEmptyColumn(unittest.TestCase):
+    """PADI states a per-trip dive count and promotion never consulted it.
+
+    It still cannot outrank ours, and the reason is unchanged: every All Star
+    Ghani itinerary says 16 where ours say 17, 19, 20 and 21, and of the 142
+    trips where both speak, 113 disagree with PADI the lower one on 90. A number
+    less differentiated than ours cannot improve a column ours already fills.
+
+    But on **69 published itineraries nothing of ours answers at all** and PADI
+    answers every one of them. 43 are on the vessels PADI alone sells berths on:
+    liveaboard.com lists no departure for those boats, so
+    `fetch_itineraries.py` has no tour id to ask about and never will. Bella 2's
+    mini-safari is the case -- PADI says 9 dives over its three nights and the
+    column said "not stated".
+    """
+
+    TRIP = "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)"
+
+    def padi(self, dives=9, name=TRIP):
+        return {"collected": "2026-08-28",
+                "trips": {"t": {"boat": "alia-soul", "name": name, "dives": dives}}}
+
+    def dives(self, padi=None, trips=None, itineraries=None, nights=3):
+        payload = promote(
+            candidate([departure(name=self.TRIP, start="2027-05-01",
+                                 end=f"2027-05-0{1 + nights}")],
+                      **({"itineraries": itineraries} if itineraries else {})),
+            season=SEASON, padi=padi, trips=trips)
+        return payload["itineraries"][0]["dives"]
+
+    def test_it_fills_a_column_nothing_else_answers(self):
+        self.assertEqual(self.dives(), 0)
+        self.assertEqual(self.dives(padi=self.padi()), 9)
+
+    def test_our_own_per_trip_count_still_wins(self):
+        from test_promote import trip_book
+
+        self.assertEqual(self.dives(padi=self.padi(dives=16),
+                                    trips=trip_book(name=self.TRIP, dives=20)), 20)
+
+    def test_the_vessel_level_count_still_wins_too(self):
+        """A figure about the hull is ours and is guarded by trip length; that
+        guard is what makes it the better answer where it applies."""
+        self.assertEqual(
+            self.dives(padi=self.padi(dives=16), nights=7,
+                       itineraries=[{"id": "alia-soul", "boat": "Alia Soul",
+                                     "dives": 20, "dives_for_nights": 7}]),
+            20)
+
+    def test_a_trip_padi_has_not_been_read_for_still_states_nothing(self):
+        self.assertEqual(self.dives(padi=self.padi(name="Another Trip")), 0)
+
+    def test_zero_is_not_a_count(self):
+        self.assertEqual(self.dives(padi=self.padi(dives=0)), 0)
+
+
 class TestWhyAVesselHasNoRows(unittest.TestCase):
     """Twelve mapped vessels publish nothing and the run could not say why.
 

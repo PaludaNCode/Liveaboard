@@ -247,15 +247,53 @@ Break these and the site starts lying quietly rather than failing loudly.
   across vessels is meaningless — normalise first.
 - **Included fees stay in the breakdown at zero.** Removing them hides the
   difference between a bundled operator and one that bills at the dock. Both
-  sellers are read for it now: PADI states it in `whatsIncludedNew`, on 447 of
-  447 itineraries, and reading only what it charges *on top* left two bills in
-  one expanded row disclosing at different depths. The list is prose rather
+  sellers are read for it now, and each of them had to be found separately:
+  PADI states it in `whatsIncludedNew`, on 447 of 447 itineraries, and
+  liveaboard.com prints an **`Included:` block** above the Required and Optional
+  ones `fees.BLOCK` was reading — on all 79 vessel pages, and read by nothing
+  until Bella 2's missing nitrox line found it. Reading only what a seller
+  charges *on top* left two bills in one expanded row disclosing at different
+  depths. The list is prose rather
   than labels, so a **parenthetical is a qualifier and never the name** —
   *Airport Meet & Greet (VISA assistance)* classified as the visa fee and would
   have told eight itineraries' readers that the €25 they still pay at the
   airport was covered. And an amenity nobody can classify — Water, Coffee, Free
   WiFi — is not a hole in a fee book: inclusions never reach `unreadable`,
   which would have taken the book from 259 complete trips to none.
+  **A stated amount beats an inclusion, and an inclusion beats a line with no
+  amount.** One code covers two services often enough to matter — Topaz includes
+  the airport transfer and charges €25 for the hotel one — so printing
+  "included" there would call a published charge free; and the other way round,
+  Dune Longara states a transfer as included *and* lists one with no price,
+  where "listed with no price" is the parser missing an answer on the page.
+  Neither seller's optional lines can make a bill `complete` or not: that
+  verdict is about the charges a diver cannot decline.
+- **Read both halves of the optional disclosure too.** PADI's
+  `optionalOnBoard`, `optionalInAdvance` and `optionalBookableAdvancePaidOnBoard`
+  hold nitrox and gear hire — the two extras this site puts a *toggle* on — and
+  were read by nothing: Bella 2's €50 nitrox and its €40-per-diving-day scuba
+  set were absent from a vessel whose PADI book is the only fee book there is.
+  Two traps in that list, both measured: *PADI Enriched Air Diver (Nitrox)* is a
+  313-entry **certification** that matched the nitrox pattern and would have
+  priced a course as the gas on the toggle that counts; and *Full scuba set* is
+  the bundle row, 417 entries carrying `fullSetDescription`, which is the only
+  honest gear price because adding up singles invents a basket nobody sold.
+- **A price PADI states as a string is still a price.** `price` is null on 236
+  of its 872 mandatory entries and `extraValue` carries the figure on 133 of
+  them — Bella 2's *Coast Guard Fee* is `"5 EUR"` and its *Service fees*
+  `"10 EUR"`, two of the three charges on every trip that boat sells. Reading it
+  takes the book from 259 trips whose bill adds up to 332. `price` still wins
+  wherever it is a number: the two disagree on 27 entries and every one is a
+  repricing `extraValue` did not follow — Blue Horizon's fuel surcharge is 56 a
+  trip against a stale `"8"` a night. Whole string or nothing, so *"14% GST (on
+  onboard purchases)"* never becomes 14 of anything.
+- **A figure with no unit is not a per-trip figure.** liveaboard.com's gear
+  dialog states one on 65 of the 70 vessels that quote a bundle — 25 per trip,
+  25 per week, 15 per day — and the five that leave it out span every one of
+  those answers, so there is no fallback that is right. Read as per trip, the
+  cheapest of the three, Bella 2's €40 set was a third of a three-night trip's
+  hire and a seventh of a week's. `FeeBasis` is `None` there, the figure goes in
+  the note, and no total claims it.
 - **No score grading operators.** The site compares what trips cost; it does
   not rank who sells them. A per-operator "honesty" percentage was removed:
   it read as a league table and contradicted the total beside it.
@@ -293,8 +331,14 @@ Break these and the site starts lying quietly rather than failing loudly.
   range and the dataset keeps the **low end**, so price per dive is a ceiling.
   A vessel-level count is for a standard week (`dives_for_nights`) and is
   withheld from every other trip length that boat sells; the itinerary fragment
-  states one per *trip*, which needs no such guard and wins. Unknown stays 0 and
-  the column says "not stated".
+  states one per *trip*, which needs no such guard and wins. **PADI's stated
+  count is the last resort and only where nothing of ours answers** — it cannot
+  outrank ours, because every All Star Ghani itinerary says 16 where ours say
+  17, 19, 20 and 21, and of the 142 trips where both speak, 113 disagree with
+  PADI the lower one on 90. But on 69 published itineraries we hold nothing at
+  all and PADI answers every one; 43 are on the vessels PADI alone sells berths
+  on, where `fetch_itineraries.py` has no tour id to ask about and never will.
+  Unknown stays 0 and the column says "not stated".
 - **Four sources for a trip's reefs, in order, never merged.** The operator's
   own description, then its region list, then the trip title, then — last —
   what the *second* seller says about the same week (`padi.json`'s
@@ -706,10 +750,21 @@ discovers something updates that file in the same commit**, negative results
 included: a lead ruled out and not written down gets followed again, and a
 stale map is worse than none.
 
-Fees, gear prices and the specification table are rendered client-side, so
-`tools/scrape_fees.py` drives a browser weekly and reads all three panels from
-one page load. A capped run (`--limit N`) merges into the existing fee book
-rather than replacing it: it knows nothing about the vessels it did not visit.
+`tools/scrape_fees.py` drives a browser weekly and reads the fee disclosure,
+the gear prices and the specification table from one page load. A capped run
+(`--limit N`) merges into the existing fee book rather than replacing it: it
+knows nothing about the vessels it did not visit.
+
+**Three of those four panels are not client-rendered, though** — probed
+2026-08-31 over plain `urllib` on all 79 vessel pages, and the extras and the
+gear dialog parse from the served bytes exactly as they do through Playwright.
+The specification table and the diving amenities are in those bytes too and fail
+for a different reason: the page ships `<dl><dt>Year built <dd>2017</dl>` with
+the tags unclosed, and `SPEC_ROW`/`TICK` are getting closing tags only from the
+browser's normalised DOM. So what those two want is an HTML parser, not a
+browser. Not acted on — dropping the weekly Playwright run is a change with its
+own probe, not a side effect of a fee fix — and written down in
+`docs/sources/liveaboard.com.md` so it is not re-derived as a negative.
 
 What one *trip* says about itself needs no browser and no crawl to find:
 `tools/fetch_itineraries.py` builds every URL from ids already in
