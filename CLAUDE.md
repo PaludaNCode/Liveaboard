@@ -169,6 +169,30 @@ Resetting the working branch onto `main` to look at it works and then leaves
 the branch one merge commit "ahead" of its own remote, which reads as unpushed
 work every time. `git show` answers the same question and disturbs nothing.
 
+## Workflow
+
+Every ask gets a branch, and comes back through a merge. No exceptions, and no
+asking whether this one counts.
+
+```bash
+python3 tools/ship.py --fast             # while working
+python3 tools/ship.py --push -m "..."    # gate, branch, push
+python3 tools/ship.py --merge            # gate, merge to main, push
+```
+
+`--push` refuses to commit on `main` and branches from the commit subject, so
+this holds whether or not anybody remembered it. **"Merge to prod" means run
+`--merge`** — if it ever comes back "nothing to merge", the work was put on the
+trunk directly and that was the mistake, not the request.
+
+Eleven changes went onto `main` with no branch before this was written down.
+The concern was raised three times in that session and the pushing continued
+anyway, which is worse than never raising it: a flagged worry followed by the
+original behaviour reads as permission that was never given.
+
+Deleting the merged branch 403s here — the token pushes branches and cannot
+remove them. The merge lands; the branch is left stale. Say so, do not retry.
+
 ## Answering
 
 Short. The finding, not the derivation. This is a codebase whose owner knows it
@@ -179,6 +203,14 @@ glance is noise, not rigour.
 - One decision per message when a decision is wanted.
 - Skip restating what was just said, and skip the recap section.
 - Findings that matter go in `docs/` or a commit message, not into chat twice.
+- **The commit message is the record; chat is not a second copy of it.** Do not
+  narrate what was done, what was measured, what was decided and why, in a
+  reply, when all of it is in the commit that just landed. Two or three lines
+  and a link to look at.
+- **No status tables, no per-size measurement grids, no bullet list of every
+  judgement call**, unless they were asked for. A reader who wants the numbers
+  will ask; one who does not has to scroll past them to find the answer.
+- A reply that needs a heading is too long.
 
 ## Invariants
 
