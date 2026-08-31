@@ -2180,3 +2180,59 @@ class TestTheEntryBankFoldsAtItsCertificationBoundary(unittest.TestCase):
         self.assertIn("chipLimit()", self.entry,
                       "no fallback: if the ladder ever holds one certification "
                       "the boundary rule would show every rung uncapped")
+
+
+class TestNeitherSellerIsTheHouse(unittest.TestCase):
+    """`padi.com` and `liveaboard.com` are both sources this site reads.
+
+    liveaboard.com was read first and PADI Travel second. That is a fact about
+    this project's history rather than about either seller, and it had hardened
+    into a hierarchy the code stated out loud: one seller was *ours* and the
+    other *the other seller* (#139).
+
+    The half a visitor could be misled by was the link. Where both sellers sold
+    a sailing the column named them; where only liveaboard.com did, the label
+    was the generic **"listing"** -- and no row anywhere read "listing" and
+    meant PADI. A visitor following it was handed to a site the page had never
+    named.
+
+    What is *not* asserted here is the asymmetries that are real, because every
+    one of them is a statement about what a source publishes rather than about
+    which came first: the fee panel is the vessel's own and beats a seller's
+    account of it, a row states `pct` only from the seller whose fare it
+    prints, the two read-dates are two crawls on two days, and PADI's
+    `availability` fills the whole-sailing slot because that was measured.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_a_seller_link_names_the_seller_it_opens(self) -> None:
+        self.assertIn('(d.padi_only ? "PADI" : "liveaboard") + " ↗</a>"', self.app,
+                      "a link label is generic again, so one seller is the "
+                      "unmarked default and a visitor cannot tell where it goes")
+        column = self.app.split('{ k: "source", t: "Seller",', 1)[1].split("} }", 1)[0]
+        self.assertNotIn('"listing"', column,
+                         '"listing" is liveaboard.com under a name that does '
+                         "not say so")
+
+    def test_the_cheaper_seller_is_named_rather_than_owned(self) -> None:
+        """`cheapest: "ours" | "padi"` -- an enum with one value naming a
+        company and one naming us -- made a reader decode the project's reading
+        order before they could check any arithmetic that used it."""
+        self.assertIn('cheaper: same ? "same" : gap < 0 ? "liveaboard" : "padi"', self.app)
+        self.assertNotIn('"ours"', self.app.split("function best(", 1)[1])
+
+    def test_both_bills_are_keyed_by_their_seller(self) -> None:
+        """`.m` was named for what it is and `.p` for whose it is, and `best()`
+        overloaded `.m` again for whichever bill is cheaper -- three meanings
+        across two letters."""
+        self.assertIn("{ d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) }",
+                      self.app)
+        # Anchored: a bare "row.m" is a substring of "narrow.matches".
+        self.assertIsNone(re.search(r"\brow\.m\b", self.app),
+                          "the row's liveaboard.com bill is `.lav`")
+        self.assertIsNone(re.search(r"\brow\.p\b", self.app),
+                          "the row's PADI bill is `.padi`")

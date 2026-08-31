@@ -16,7 +16,7 @@ PADI is a second seller here and not only a second opinion.
 **The claim "PADI publishes no fee book at all" was wrong, and it shaped the
 design for a while.** It is true of the endpoint that states the price and
 false of the one next to it. The cost of believing it was a column that set
-PADI's berth price against ours — which compares the half the two sellers agree
+PADI's berth price against liveaboard.com's — which compares the half the two sellers agree
 about (under €5 apart on 89% of matched sailings) and hides the half they do
 not: of the 74 trips where both books add up, **43 disagree and 16 by more than
 €150**, one of them by €300 on a single week. The lesson is the file's own rule
@@ -54,7 +54,7 @@ every run after the first offline, for the same reason
 | Requirement **values** | Not in the HTML | AngularJS XHR; see below |
 | Next few departures | JSON-LD `offers[]` | See traps: not a departure feed |
 
-## Matching a PADI vessel to one of ours
+## Matching a PADI vessel to a liveaboard.com one
 
 `data/padi_aliases.json` maps our `boat_id` to a PADI slug. **Hand-maintained**,
 because nothing automatic survives this data:
@@ -73,7 +73,7 @@ because nothing automatic survives this data:
 So a pairing needs evidence from the hull, and `tools/probe_padi_slugs.py`
 gathers it: slug candidates (PADI prefixes many hulls `my-`, `mv-`, `ms-`), then
 `window.shop.kind == 10`, then the ports its trips name, then trip lengths and
-cabin count printed against ours for a person to accept or reject.
+cabin count printed against liveaboard.com's for a person to accept or reject.
 
 **`SHOP_KIND` is the record type**, and it matters: `0` Dive center, `10`
 Liveaboard, `20` Dive resort. "Iceberg" exists twice — as
@@ -317,7 +317,7 @@ Of **18 deals** in the May–August 2027 window:
 
 Every one of the five sails the Caribbean. So the country field is wrong about
 where a boat is on **28% of what it returns here**, and it cannot place a deal.
-The join does: a vessel that maps to one of ours is Egyptian because our own
+The join does: a vessel that maps to a liveaboard.com one is Egyptian because that
 fleet is, and one that does not is **named rather than dropped** — in the build
 log and on the page — because an Egyptian boat filed under the USA and unmatched
 is precisely the case the breadth exists to catch. Only a name a person reads
@@ -450,7 +450,7 @@ bill incomplete, which is the same rule an unpriced line follows.
 
 **A total is claimed only where the bill is complete** — every charge named,
 classified and priced in a unit that normalises. 174 of 307 itineraries clear
-that, 74 of them join to a trip of ours, and 169 of our 892 departures end up
+that, 74 of them join to a liveaboard.com trip, and 169 of the 892 departures end up
 comparable total-to-total. The rest keep PADI's berth price and print *berth
 only*: a second price with no second total, and the two are not the same kind
 of number. That is the whole discipline here — a bill assembled from part of a
@@ -568,7 +568,7 @@ What the field settles is the spellings a title parser has to guess at:
 | `Port Galib` | `Port Ghalib` | 11 — MY Anemone and Blue Horizon |
 | `Sharm El sheikh`, `Sharm El Sheik` | `Sharm El Sheikh` | 1, Bella 2 |
 
-Most of Blue Horizon's reach the page under our own spelling, because its trips
+Most of Blue Horizon's reach the page under liveaboard.com's spelling, because its trips
 match liveaboard.com's and take the name from there; the rest of the column is
 PADI's spelling standing alone.
 
@@ -602,7 +602,7 @@ unread, and that is a deliberate state rather than an oversight.
 
 ## Two things that lost matches on correct pairings
 
-Both were found by reading a vessel's trips beside ours rather than by any test
+Both were found by reading a vessel's trips beside liveaboard.com's rather than by any test
 failing, and both made a correct boat pairing look like a wrong one.
 
 **PADI mixes dash characters.** It writes *"Name (Hurghada – Hurghada) – 7
@@ -627,13 +627,13 @@ wrong.
 
 ## The join, measured
 
-Against `data/egypt-2027.json` for Hammerhead II — 14 itineraries ours, 22
+Against `data/egypt-2027.json` for Hammerhead II — 14 itineraries from liveaboard.com, 22
 theirs, our May–Aug 2027 window:
 
 > **PADI's title minus its night suffix is our `Itinerary.name`.** Ports
 > included. That is the join, and it needs no new key on either side.
 
-10 of our 14 matched on it. The four that did not are not join failures:
+10 of the 14 matched on it. The four that did not are not join failures:
 
 - *Brothers Light (Hurghada - Marsa Alam)* vs their *(Marsa Alam - Marsa Alam)*,
   and *Brothers Light 3 (Marsa Alam - Hurghada)* vs their *(Marsa Alam - Marsa
@@ -647,8 +647,8 @@ theirs, our May–Aug 2027 window:
 
 The last two are the real residue: a name join gets ~70% and the rest need a
 human or a reef-set comparison. Loosening the key to close them would also merge
-the port variants, which is worse. Twelve of their 22 have no counterpart of
-ours, mostly 3- and 4-night short trips and extra port permutations.
+the port variants, which is worse. Twelve of their 22 have no liveaboard.com
+counterpart, mostly 3- and 4-night short trips and extra port permutations.
 
 ## Sailings PADI sells and liveaboard.com does not
 
@@ -658,8 +658,8 @@ Counted on 2026-08-29, over the published May–Aug 2027 season:
 |---|---|---|
 | PADI sailings fetched | 2,797 | 38 |
 | …inside the season window | 654 | 37 |
-| …landing on a row we already had | 601 | |
-| …on a date we do not list | **53** | 14 |
+| …landing on a row liveaboard.com also lists | 601 | |
+| …on a date liveaboard.com does not list | **53** | 14 |
 
 All 14 are boats the dataset already carries. Blue Storm (15) and Blue Seas
 (14) are near-complete weekly seasons PADI sells that liveaboard.com does not
@@ -674,8 +674,8 @@ repeating one seller's figure into the second seller's field would print as two
 sellers agreeing about a sailing one of them does not offer. The page marks
 them `PADI only`.
 
-The trip name is PADI's title minus its night count, folded onto ours where
-`padi_key` matches — 19 of the 53 join a trip we already carry, and the rest
+The trip name is PADI's title minus its night count, folded onto liveaboard.com's where
+`padi_key` matches — 19 of the 53 join a trip liveaboard.com also carries, and the rest
 found 24 new ones. Where two of a boat's own itineraries share that key the
 fold is refused rather than guessed: Blue Horizon sells *Rocky, Zabargad & St.
 Johns* from two harbours and nothing can say which one PADI means.
@@ -691,7 +691,7 @@ Two things this uncovered:
   agree up to the cut collide — and the ports are at the end. `Dataset.from_dict`
   keys by id and would silently keep one. `promote` now raises.
 
-## The 24 vessels that mapped to no boat of ours
+## The 24 vessels that mapped to no liveaboard.com boat
 
 Fetched 2026-08-29, all 24, no failures, 737 sailings. Two turned out not to be
 PADI's side at all: **`my-avo` is our AVO and `my-blue` is our Blue**, and both
@@ -712,7 +712,7 @@ Ten of the 22 have a liveaboard.com fee panel in `data/fees.json` — that site
 carries the boat and publishes no departures for it. `promote` needs no flag for
 the difference: a boat with our fee book uses it like any other, and one without
 falls back to PADI's per-itinerary book, which is what `Itinerary.padi_sourced_fees`
-records. Where both exist ours wins outright; the fallback is never a merge,
+records. Where both exist the vessel's own panel wins outright; the fallback is never a merge,
 because the two disclose at different resolutions and a line from each builds a
 bill neither seller quotes.
 
@@ -723,13 +723,13 @@ Two facts a PADI-only vessel has nowhere else to get:
 - **Operator** — `window.shop`'s `fleetTitle`, minus the trailing "Fleet" that
   is PADI's furniture. Kept **verbatim**, shouting included, per
   `OPERATOR_ALIASES`' standing rule, and deliberately never folded onto a
-  company we already hold.
+  company held from the other source.
 
   That fold was written and removed. PADI files MY Blue and MY Blue Pearl in one
   "BLUE PLANET Fleet"; MY Blue is our Blue, whose own departures say "Blue
   Planet Liveaboards", so a `BLUE PLANET` → `Blue Planet Liveaboards` alias
   tidied a duplicate off the operator list. It also asserted, on nothing but a
-  fleet label, that a boat our own source says nothing about is run by that
+  fleet label, that a boat the other source says nothing about is run by that
   company. **A fleet on a booking site is not established to be the operating
   company**, and these are two different hulls: shop ids 19679 and 16676, 24
   guests at 43 m built 2016 against 20 at 36 m built 2003. Two operator rows

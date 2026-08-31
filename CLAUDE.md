@@ -164,6 +164,22 @@ glance is noise, not rigour.
 
 Break these and the site starts lying quietly rather than failing loudly.
 
+- **Two sellers, neither of them the house.** `padi.com` and `liveaboard.com`
+  are both sources this site reads. liveaboard.com was read first and PADI
+  second, and that is a fact about this project rather than about either
+  seller, so it may not appear as *ours* and *theirs*, as a named seller beside
+  an unnamed default, or as a reason in a comment that explains a price. The
+  metric keys are `.lav` and `.padi`; `best().cheaper` says `"liveaboard"` or
+  `"padi"`; a link in the Seller column always names the seller it opens —
+  "listing" was liveaboard.com's, printed on no PADI row ever, and handed a
+  visitor to a site the page never named (#139). The asymmetries that *are*
+  real are all statements about what a source publishes and each says so where
+  it is written: the fee panel is the vessel's own and beats a seller's account
+  of it; a row states `pct` only from the seller whose fare it prints;
+  `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
+  `availability` fills the whole-sailing slot and not the at-price one, because
+  that was measured.
+
 - **Never invent a price.** Every price and fee needs a `Provenance`. A parser
   that cannot find a number returns `None`; it does not guess. `seed_estimate`
   triggers the "not real quotes" banner — do not suppress it.
@@ -232,7 +248,8 @@ Break these and the site starts lying quietly rather than failing loudly.
   what the *second* seller says about the same week (`padi.json`'s
   `dive_sites`, folded by `fetch_padi._padi_sites` from the day plan and then
   the blurb). PADI is last because it is the least structured: against the 180
-  trips both sellers describe, its words add 173 reef mentions ours does not,
+  trips both sellers describe, its words add 173 reef mentions liveaboard.com
+  does not,
   among them Elphinstone on a Brothers and Safaga week off a sentence saying
   the two "are quite distant from one another". Merged in, that is the
   BDE-badging failure removed once already; used only where the three above are
@@ -395,8 +412,8 @@ Break these and the site starts lying quietly rather than failing loudly.
   date-dependent and promotion is pure — and the row says *not asked* instead.
   Same rule as `fees_known`: no fee lines means nobody looked, not that there
   are none.
-- **A boat only the second seller lists is still a boat.** 22 Egyptian
-  liveaboards on PADI mapped to nothing of ours; ids for them are minted in
+- **A boat only one of the two sellers lists is still a boat.** 22 Egyptian
+  liveaboards on PADI mapped to nothing on liveaboard.com; ids for them are minted in
   `data/padi_aliases.json` under `padi_only` and 10 carry season sailings, so
   the fleet is 77 rather than 67. `padi_only` means PADI is the only source of
   *sailings*: ten of the 22 have a liveaboard.com fee panel and simply no
@@ -414,15 +431,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   tidy-up of PADI's `BELLA LIVEABOARDS`), and it settles Blue Pearl. **A fleet
   is not an operator**:
   PADI shelves MY Blue and MY Blue Pearl under one "BLUE PLANET Fleet", and
-  folding that onto our Blue's stated "Blue Planet Liveaboards" removed a
-  duplicate row by asserting a company for a hull our own source connects to
-  nobody. Two operator rows that may be one company is cosmetic; the assertion
+  folding that onto Blue's liveaboard.com-stated "Blue Planet Liveaboards"
+  removed a duplicate row by asserting a company for a hull the other source
+  connects to nobody. Two operator rows that may be one company is cosmetic; the assertion
   is not. **The two are one row now, and the rule is why that is allowed** —
   not folded on the fleet label, which still folds nothing, but on Blue Pearl's
   own page saying `"brand": {"name": "Blue Planet Liveaboards"}`. The fold is a
-  fact rather than a tidy-up, which is the whole difference. Where our fee book is absent
-  PADI's per-itinerary one becomes the itinerary's own (`padi_sourced_fees`);
-  where ours exists it wins outright. Never a merge of the two: one figure per
+  fact rather than a tidy-up, which is the whole difference. Where the vessel's
+  own fee panel is absent PADI's per-itinerary book becomes the itinerary's own
+  (`padi_sourced_fees`); where the panel exists it wins outright — because a
+  panel the boat publishes about itself outranks a seller's account of it, which
+  is a statement about the two disclosures and not about the two sellers. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
   line from each is a bill neither seller quotes.
 - **A sale is the list price a seller prints beside its own, never a banner.**
@@ -462,7 +481,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   The same breadth returns Bahamas, Belize, Cayman and Roatan: 5 of 18 offers in
   the published season sail another ocean, so the field is wrong about where a
   boat is more than a quarter of the time and cannot place anything. `promote`
-  joins the deal's vessel to a boat of ours and lets that decide. A vessel that
+  joins the deal's vessel to a boat in the fleet and lets that decide. A vessel that
   joins to nothing is **named** — in the build log and on the page — rather than
   dropped: an Egyptian boat under a USA label that nothing has paired is exactly
   what the breadth is for, and only a name a person reads tells it apart from a
@@ -475,9 +494,9 @@ Break these and the site starts lying quietly rather than failing loudly.
   is confidently wrong. Ids are truncated to 96 characters and the ports sit at
   the end, so two long names can collide without anybody typing a wrong
   character — which would break "two sailings differing only by port are two
-  trips" silently. `promote` raises instead. A foreign trip name is folded onto
-  ours through `padi_key` and only where that key names exactly one of our
-  trips; where two of a boat's own itineraries share it the fold is refused,
+  trips" silently. `promote` raises instead. A PADI trip name is folded onto a
+  liveaboard.com one through `padi_key` and only where that key names exactly
+  one of them; where two of a boat's own itineraries share it the fold is refused,
   because nothing can say which harbour the other source meant.
 - **A joined string is not a record, and no parser makes it one again.** PADI
   states a trip's two harbours in two fields; `itinerary_from_payload` stored
