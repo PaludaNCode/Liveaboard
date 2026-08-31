@@ -438,7 +438,8 @@ readers, which is the argument for one table rather than two.
 | Field | Note |
 |---|---|
 | `title` | The charge, and the only field that names it |
-| `price` / `priceGross` | 481 of 623 have one. The other 142 name a charge with no figure — the same state a third of the liveaboard.com book is in |
+| `price` / `priceGross` | 481 of 623 have one. Where it is null, look at `extraValue` before calling the charge unpriced — see below |
+| `extraValue` | A price typed as a string. **133 mandatory entries state their figure here and nowhere else** |
 | `payedPer` | `LIVEABOARD_EXTRA_PAYED_PER`, verbatim below. Trip on 506, then Night/Person, Week, Dive, Day/Person |
 | currency | **Not in the payload.** The vessel's own `window.shop.currency`, same trap as the prices |
 
@@ -460,18 +461,100 @@ Two entries with one title are kept as two. DUNE Longara lists "Environmental
 taxes" twice on six trips, €100 and €200 under separate `extraId`s; no pair in
 the book is an exact duplicate, so folding on the title would halve a real bill.
 
+### `extraValue`: a price where `price` is null, and never a second opinion
+
+Probed 2026-08-31 by `tools/probe_padi_extras.py` over all 438 itineraries in
+the store. Of the store's 872
+mandatory entries `price` is null on 236, and **133 of those state the figure in
+`extraValue`** as a string: Bella 2's Coast Guard Fee is `price: null, extraValue: "5 EUR"` and its
+Service fees `"10 EUR"` — two of the three mandatory charges on every trip that
+boat sells, read as unpriced, on a vessel whose PADI book is the only fee book
+this site has for it. Reading the field takes the store from **259 trips whose
+mandatory bill adds up to 332**.
+
+**`price` wins wherever it is one**, because where the two disagree
+`extraValue` is the stale half. Measured: they disagree on 27 entries and every
+one is a repricing the string did not follow.
+
+| Vessel | `price` | `extraValue` | What it is |
+|---|---|---|---|
+| Blue Horizon | 56.0 (per trip) | `"8"` | 8 a night over a seven-night trip. Still 56 on its ten-night sailings |
+| Blue Melody | 56.0 | `"USD"` | No number in it at all |
+| Andromeda | 50.0 (per week) | `"30 EUR"` | An older figure in an older unit |
+
+So the fallback is anchored at both ends and takes the whole string or nothing:
+`"14% GST (on onboard purchases)"` must not become 14 of anything, and 43
+mandatory fuel surcharges reading `"10 - 20 USD To be confirmed 30 days before
+the trip"` are an operator saying the figure is not settled — those bills stay
+incomplete, which is the answer rather than a gap. A currency
+the string names is the currency — Andromeda writes `"5 USD"` on a vessel PADI
+prices in EUR — and the vessel's currency is assumed only where the string names
+none. One vessel writes `"8 EU"`; that entry keeps no amount, because a currency
+this parser cannot name is money it cannot add up.
+
+### The optional half, and the gear set inside it
+
+`optionalOnBoard`, `optionalInAdvance` and `optionalBookableAdvancePaidOnBoard`
+(same probe) are the charges a diver *can* decline — `isMandatory: false` on every entry —
+and they hold the two extras this site puts a toggle on. Bella 2 states 50 EUR
+for nitrox and 40 EUR per diving day for the full scuba set; both were absent
+from the page.
+
+111 distinct titles across the store, of which 39 classify. The 72 that do not
+are courses, amenities and single gear items — "PADI Deep Diver", "Espresso
+coffee", "Wetsuit" — and they are dropped rather than recorded as unreadable: an
+optional extra nobody can name says nothing about whether what a diver *must*
+pay adds up, so it cannot make a bill incomplete. Neither can a real price in a
+unit `PAYED_PER` will not map, which is where every course lands (`payedPer: 80`,
+per course) and most transfers (`50`, "Return, per person").
+
+Three traps in that list, each measured:
+
+- **"PADI Enriched Air Diver (Nitrox)" is a certification, not a gas fill.** 144
+  entries, and it matched the nitrox pattern, which would have priced a 100 EUR
+  course as the nitrox on the trip — on the toggle this site counts.
+  `NITROX_COURSE` now claims "enriched air diver" ahead of it.
+- **"Full scuba set" is PADI's bundle row**, on 417 entries, 401 of them
+  carrying `fullSetDescription` with its contents, and priced per week (249),
+  per trip (76) or per diving day (76). It is the same thing liveaboard.com heads *Full
+  equipment rent*, and the bundle is the only honest gear price — adding up
+  singles invents a basket the operator never sold.
+- **A parenthetical is a qualifier, as in the inclusions.** "Airport Meet &
+  Greet (VISA assistance, eligible countries only)" is help with the paperwork,
+  not the €25 a diver still pays at the airport.
+
+Where a code appears twice, the first entry wins — the rule `parse_extras`
+keeps on the other seller's Optional block. Checked across the store: no code
+has an unpriced entry followed by a priced one, so the order costs no figure.
+
+### The two dive counts
+
+`totalNumberOfDives` and `totalNumberOfDivesMax` are a range and the low end is
+kept, as everywhere in this project: a range reported as its ceiling flatters
+the price per dive. `minimalNumberOfDives` is **not** a dive count at all — it
+is the logged-dive bar, and it is read as one.
+
+PADI's count cannot outrank ours: every All Star Ghani itinerary says 16 where
+ours say 17, 19, 20 and 21, and of the 142 trips where both speak, 113 disagree
+with PADI the lower on 90. It is the fallback where nothing of ours answers,
+which is **69 published itineraries** — 43 of them on the vessels PADI alone
+sells berths on, where `fetch_itineraries.py` has no tour id to ask about and
+never will.
+
 ### Not read yet
 
-- **`whatsIncludedNew`, `optionalInAdvance`, `optionalOnBoard`.** PADI's
-  inclusions and optional extras. Not needed for the comparison as it stands:
-  nitrox and rental gear are billed by the *vessel* on board, out of one price
-  list, to whoever walks up the gangway, so both totals carry the same rows for
-  them from the vessel's own disclosure. Reading PADI's would let the page show
-  what PADI says is bundled, which is a real gap but not a wrong number.
 - **63 entries the classifier still declines**, and it should: "14% GST (on
   onboard purchases)" carries `price: 14.0` and is a percentage of an unrelated
   purchase; "Supervision fees for Level 1 divers…" is conditional on the diver.
   Each of them makes its trip's bill incomplete, which is the safe direction.
+- **The single gear items beside "Full scuba set"** — BCD, Regulator, Wetsuit,
+  "15 liter tanks", "Flashlight (torch)", "Fins, mask, snorkel (ABC)". Priced,
+  and deliberately unread: the set is what a diver renting gear rents, and a
+  basket assembled from parts is a price nobody quoted.
+- **"Tips for the crew"**, 376 entries and never priced. It would classify as
+  `gratuities` with one more pattern, and gratuities are *customary* here, so an
+  unpriced line would land in every affected trip's counted total as an unknown.
+  Worth doing deliberately rather than as a side effect.
 
 ## The vocabulary
 

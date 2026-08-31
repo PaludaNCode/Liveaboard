@@ -34,9 +34,44 @@ from dataclasses import dataclass
 from ..taxonomy import FEE_LABELS, FeeBasis, FeeCode, FeeTier
 
 BLOCK = re.compile(
-    r"(Required|Optional)\s+Extras\s*:\s*(.+?)(?=(?:Required|Optional)\s+Extras\s*:|$)",
+    r"\b(Included|Required|Optional)(?:\s+Extras)?\s*:\s*(.+?)"
+    r"(?=\b(?:Included|Required|Optional)(?:\s+Extras)?\s*:|$)",
     re.I | re.S,
 )
+"""The three blocks the disclosure is written in, and it was read as two.
+
+**Every one of the 79 vessel pages carries an `Included:` block** and nothing
+opened it. 63 pages state all three; 6 state Included and Optional with no
+Required block at all. It sits immediately above the two that were read, in the
+same paragraph, in the same comma-separated prose:
+
+    Included: VAT, Drinking Water, Soft drinks, Tea & Coffee, Welcome
+    Cocktails, Full-Board Meal Plan (All meals), Snacks, Diving Package, Night
+    Dives, Nitrox, Snorkeling Guide, Beach Towels, Cabin Towels, Complimentary
+    Toiletries, Deck Towels, WiFi internet.
+    Required Extras: Mandatory Service Charge (€10 / day), National Park Fees
+    (€10 / day), Port Fees (€5 / trip).
+    Optional Extras: Airport Transfer, Hotel Transfer, ...
+
+That is Bella 2's, and the missing line it cost is **nitrox**: the other seller
+charges 50 EUR for it on that boat and this one says it is in the fare, and the
+page showed neither. **Included fees stay in the breakdown at zero** is an
+invariant here, and it was being kept on PADI's side alone -- `whatsIncludedNew`
+has been read since the same rule was noticed there. Two bills in one expanded
+row were disclosing at different depths, which is the exact wording of the
+finding that fixed the other seller.
+
+Read across the fleet it is 273 lines on 79 vessels: VAT on 79, a transfer on
+59, nitrox on 49, a fuel surcharge on 16, port fees on 10, environmental tax on
+9, park fees on 8.
+
+`Extras` is optional after the heading word so that `drift` can rebuild this
+text from a stored excerpt, where the key is the bare word. `Required` and
+`Optional` never appear followed by a colon anywhere else in a vessel page's
+text, and `Included` appears once -- checked, because this regex is handed
+`document.body.innerText` and every loosening of it is a chance to mine the
+page for a charge nobody made.
+"""
 
 ENTRY = re.compile(
     r"""
@@ -150,7 +185,16 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # Split from the general course line for the same reason as snorkel gear:
     # vessels list "Nitrox Course (€99)" and "Scuba Diving Courses (€79-110)"
     # as separate priced entries, and one entry per code drops the second.
-    (r"\bnitrox\s+course\b|\benriched\s+air\s+course\b", FeeCode.NITROX_COURSE),
+    #
+    # **A qualification is not a gas fill**, and PADI names the qualification
+    # the way its own courses are named rather than with the word "course":
+    # "PADI Enriched Air Diver (Nitrox)" appears on 313 of its optional-extra
+    # entries and matched `\benriched\s+air\b` below, which would have priced
+    # a 100 EUR certification as the nitrox a diver breathes on the trip -- and
+    # on the toggle this site counts. The two are separate lines on the same
+    # operator's list, which is exactly the case this code was split out for.
+    (r"\bnitrox\s+course\b|\benriched\s+air\s+course\b"
+     r"|\benriched\s+air\s+diver\b|\bnitrox\s+diver\b", FeeCode.NITROX_COURSE),
     (r"\bdiving\s+courses?\b|\bscuba\s+courses?\b|\bcourses?\b", FeeCode.COURSE),
     (r"\bnitrox\b|\benriched\s+air\b", FeeCode.NITROX),
     (r"\b(?:private\s+)?dive\s+guide\b|\bprivate\s+guide\b", FeeCode.PRIVATE_GUIDE),
@@ -158,7 +202,15 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # They are separate lines on the operator's own list, and one entry per
     # code means folding them together would drop whichever came second.
     (r"\bsnorkell?(?:ing)?\s+(?:gear|equipment|set)\b", FeeCode.SNORKEL_GEAR),
-    (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b",
+    # "Full scuba set" is PADI's name for the bundle, on 417 entries and with no
+    # second wording. It is the same thing liveaboard.com heads "Full equipment
+    # rent", and **the bundle is the only honest gear price** -- see
+    # `scrape/gear.py`: a diver renting gear rents a set of it, and adding up
+    # singles invents a basket the operator never sold. Every one of those
+    # entries carries `fullSetDescription` naming what is in it, so the note can
+    # say so in the seller's words.
+    (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b"
+     r"|\bfull\s+scuba\s+set\b",
      FeeCode.GEAR_RENTAL),
     (r"\bnaturalist\s+guide\b|\bsnorkell?(?:ing)?\s+guide\b", FeeCode.NATURALIST_GUIDE),
     (r"\bextra\s+dives?\b|\badditional\s+dives?\b", FeeCode.EXTRA_DIVES),
@@ -196,6 +248,23 @@ TOGGLED_CODES = frozenset(
     }
 )
 
+
+def tier_for_inclusion(code: FeeCode) -> FeeTier:
+    """Which column an included charge belongs in.
+
+    A charge is worth stating as covered exactly because you would otherwise
+    have to pay it, so an inclusion is **mandatory unless this site already
+    treats that charge as something you choose** -- nitrox and gear follow a
+    toggle, tips are customary. No new table: the two sets above are the ones
+    `_tier_for` consults for a charge that is billed.
+
+    Both sellers' inclusions come through here, which is the point of it living
+    beside them: one seller's "Harbour fees" and the other's must not mean
+    different things.
+    """
+    return _tier_for(code, required=code not in TOGGLED_CODES | CUSTOMARY_CODES)
+
+
 NOISE = re.compile(r"^\s*(and|or|etc|extras?|none|n/?a)\s*$", re.I)
 
 
@@ -210,6 +279,14 @@ class ParsedFee:
     high: float | None
     currency: str
     basis: FeeBasis
+    included: bool = False
+    """Stated as covered by the fare rather than charged on top.
+
+    A third answer beside a price and a blank, and the one the `Included:` block
+    gives: the charge exists, the operator bills nothing for it, and the line
+    stays in the breakdown at zero so a bundled boat can be told apart from one
+    that bills at the dock.
+    """
 
     @property
     def is_range(self) -> bool:
@@ -351,15 +428,32 @@ def normalise_disclosure(text: str) -> str:
 
 
 def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
-    """Extract every stated extra from a vessel page's disclosure text."""
-    found: list[ParsedFee] = []
-    seen: set[FeeCode] = set()
+    """Extract every stated extra from a vessel page's disclosure text.
+
+    Charges first and inclusions last, whatever order the page prints them in --
+    the `Included:` block comes above the other two there, and read in that
+    order it would have won every collision by arriving first. **A stated amount
+    is the stronger claim**, which is the rule PADI's side of this already
+    keeps. It decides four vessels today, and all four are one code covering two
+    services: Topaz includes the airport transfer and charges €25 for the hotel
+    one, Oceanix includes a naturalist guide and charges €300 for a snorkelling
+    one. Printing "included" for those would tell a reader a charge the operator
+    published is free.
+
+    The other half of the same rule: **an inclusion beats a charge that names no
+    figure.** Dune Longara lists a transfer with no price and states the
+    transfer as included, and "listed with no price" there is this parser
+    failing to notice the answer was on the page.
+    """
+    found: dict[FeeCode, ParsedFee] = {}
 
     if "\n" in text:
         text = normalise_disclosure(text)
 
-    for required_word, body in BLOCK.findall(text):
-        required = required_word.lower() == "required"
+    blocks = sorted(BLOCK.findall(text), key=lambda b: b[0].lower() == "included")
+    for heading, body in blocks:
+        required = heading.lower() == "required"
+        inclusion = heading.lower() == "included"
         for match in ENTRY.finditer(body):
             label = " ".join(match.group("label").split())
 
@@ -399,32 +493,51 @@ def parse_extras(text: str, default_currency: str = "EUR") -> list[ParsedFee]:
                 break
 
             code = classify_label(label)
-            if code is None or code in seen:
+            if code is None or not _is_new(found.get(code), inclusion):
                 if last:
                     break
                 continue
-            seen.add(code)
 
             low = _number(match.group("low"))
             high = _number(match.group("high"))
             symbol = match.group("currency")
             basis = BASES.get((match.group("basis") or "").lower(), FeeBasis.PER_TRIP)
 
-            found.append(
-                ParsedFee(
-                    code=code,
-                    label=label,
-                    tier=_tier_for(code, required),
-                    low=low,
-                    high=high if high is not None else low,
-                    currency=CURRENCIES.get(symbol or "", default_currency),
-                    basis=basis,
-                )
+            # An inclusion states no figure and must not be read as one: the
+            # `Included:` block is a list of names, so a number inside it
+            # belongs to a qualifier -- "Full-Board Meal Plan (All meals)".
+            found[code] = ParsedFee(
+                code=code,
+                label=label,
+                tier=tier_for_inclusion(code) if inclusion else _tier_for(code, required),
+                low=None if inclusion else low,
+                high=None if inclusion else (high if high is not None else low),
+                currency=CURRENCIES.get(symbol or "", default_currency),
+                basis=basis,
+                included=inclusion,
             )
 
             if last:
                 break
-    return found
+    # Insertion-ordered, so an inclusion that replaced an unpriced charge keeps
+    # that charge's place in the breakdown rather than moving to the end.
+    return list(found.values())
+
+
+def _is_new(existing: ParsedFee | None, inclusion: bool) -> bool:
+    """Whether this entry should be kept over one already read for its code.
+
+    One line per code, first past the post -- except that an inclusion may
+    displace a charge that names no figure. See :func:`parse_extras`.
+    """
+    if existing is None:
+        return True
+    return (
+        inclusion
+        and not existing.included
+        and not existing.has_price
+        and existing.tier is not FeeTier.MANDATORY
+    )
 
 
 EXCERPT_CHARS = 1500
@@ -438,6 +551,10 @@ turn the fee book into a page dump.
 
 def extras_excerpt(text: str, limit: int = EXCERPT_CHARS) -> dict[str, str]:
     """Return the disclosure text :func:`parse_extras` reads, for the record.
+
+    All three blocks, keyed by the bare heading word -- ``included``,
+    ``required``, ``optional``. `drift` rebuilds the text from these keys, which
+    is why `BLOCK` accepts a heading with the word "Extras" missing.
 
     The fee book is the one input this project cannot rebuild without a
     browser, and it stored only the parsed result. So when the parser was found
@@ -466,10 +583,15 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             "code": fee.code.value,
             "tier": fee.tier.value,
             "basis": fee.basis.value,
-            "included": False,
+            "included": fee.included,
             "provenance": provenance,
         }
-        if fee.has_price:
+        if fee.included:
+            # Drawn at zero rather than counted, and never "listed with no
+            # price": the operator did state the price, and it is nothing.
+            entry["amount"] = None
+            entry["note"] = f"{fee.label}: stated as included"
+        elif fee.has_price:
             entry["amount"] = {"amount": fee.low, "currency": fee.currency}
             if fee.is_range:
                 entry["amount_max"] = {"amount": fee.high, "currency": fee.currency}
@@ -529,6 +651,13 @@ def drift(book: dict) -> dict[str, tuple[list[str], list[str]]]:
 
     Returns ``{slug: (gained, lost)}`` describing what today's parser would add
     and drop. An empty result means the book is current.
+
+    What it cannot see is a block the stored text never held. Every excerpt in
+    the committed book predates `BLOCK` reading the `Included:` paragraph, so
+    re-parsing them produces no inclusion and reports no drift -- and the book
+    is a parser behind all the same. Same rule as everywhere else here: a run
+    that could not look at something knows nothing about it. The excerpt keeps
+    all three blocks now, so the next book can answer.
     """
     out: dict[str, tuple[list[str], list[str]]] = {}
     for slug, entry in (book.get("vessels") or {}).items():

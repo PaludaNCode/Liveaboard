@@ -1911,12 +1911,20 @@ def promote(
     # figure wins -- turning a stated cost into "free" is the one direction of
     # error this site must never make, and a marketing tick is weaker evidence
     # than a number the operator typed.
+    #
+    # It no longer overwrites the *disclosure* either. The `Included:` block now
+    # reaches the fee book and says the same thing in the same words the prices
+    # are quoted in, on 49 vessels, so re-labelling those lines "Vessel lists
+    # nitrox as free" would replace a price disclosure with an amenity tick --
+    # the weaker of the two claims, and the note a reader would then see.
     for slug, spec in spec_book.items():
         if not spec.get("nitrox_free"):
             continue
         existing = {f["code"]: f for f in fee_book.get(slug, [])}
         nitrox = existing.get(FeeCode.NITROX.value)
-        if nitrox is not None and nitrox.get("amount") is not None:
+        if nitrox is not None and (
+            nitrox.get("amount") is not None or nitrox.get("included")
+        ):
             continue
         existing[FeeCode.NITROX.value] = {
             "code": FeeCode.NITROX.value,
@@ -2233,16 +2241,28 @@ def promote(
                 # be withheld from every other trip length that boat sells to
                 # stay honest. A per-trip figure needs no such guard, so it is
                 # taken as stated and the vessel figure remains the fallback.
-                # PADI's count is deliberately not consulted. It reads as a
-                # per-trip figure and on some boats is not one: every All Star
-                # Ghani itinerary says 16 where ours say 17, 19, 20 and 21. A
-                # number less differentiated than what we hold cannot improve
-                # the column it would be filling.
+                # PADI's count comes last and only where nothing of ours
+                # answers. It cannot outrank what we hold: it reads as a
+                # per-trip figure and on some boats is not one -- every All Star
+                # Ghani itinerary says 16 where ours say 17, 19, 20 and 21 --
+                # and a number less differentiated than ours cannot improve a
+                # column ours already fills. Of the 142 trips where both speak,
+                # 113 disagree and PADI is the lower one on 90 of those.
+                #
+                # But the alternative to it is nothing. 69 published
+                # itineraries state no dive count from any source of ours and
+                # PADI states one for every one of them, and 43 are on the
+                # vessels PADI alone sells berths on -- boats liveaboard.com
+                # lists no departure for, so `fetch_itineraries.py` has no tour
+                # id to ask about and never will. Bella 2's mini-safari is the
+                # case: PADI says 9 dives over its three nights and the column
+                # said "not stated". Its low end, as everywhere here, so price
+                # per dive stays a ceiling.
                 "dives": trip.get("dives") or _dives(
                     hand.get(slug, {}).get("dives") or source.get("dives"),
                     nights=nights,
                     for_nights=hand.get(slug, {}).get("dives_for_nights"),
-                ),
+                ) or int(padi_trip.get("dives") or 0),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Where the trip goes: the operator's own "Key regions" list

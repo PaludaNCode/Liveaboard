@@ -245,6 +245,39 @@ table liveaboard.com's wording goes through.
 """
 
 
+OPTIONAL_FIELDS: tuple[str, ...] = (
+    "optionalOnBoard",
+    "optionalInAdvance",
+    "optionalBookableAdvancePaidOnBoard",
+)
+"""Where PADI keeps the charges a diver can decline -- and nothing read them.
+
+The third half of a disclosure this module was reading two-thirds of. It had
+`MANDATORY_FIELDS` for what PADI charges on top and `INCLUDED_FIELD` for what
+it says is already in, and the *Optional* lists -- the ones holding nitrox and
+gear hire, the two extras this site puts a toggle on -- were not opened at all.
+liveaboard.com's parser has read the same half of its own disclosure since the
+beginning (`parse_extras` reads the Required and Optional blocks together), so
+this is one seller's book being read at a shallower depth than the other's,
+which is the failure `INCLUDED_FIELD` was added to fix on the other side.
+
+Bella 2 is what it costs. PADI states 50 EUR for nitrox on the trip and 40 EUR
+per diving day for the full scuba set; both were absent from the page, on a
+vessel where PADI's book is the only fee book there is -- liveaboard.com sells
+no berth on it, so nothing else could fill them in.
+
+Membership is the claim here too: every entry in these lists carries
+``isMandatory: false``, and the tier a charge lands in is then this project's
+own -- `_tier_for` files nitrox and gear as conditional because the page's
+toggles govern them, gratuities as customary, and the rest as optional.
+
+**They cannot make a bill incomplete.** `complete` is a verdict on the
+mandatory charges: a course nobody can classify, or a transfer priced per
+vehicle, says nothing about whether what a diver *must* pay adds up. Same rule
+as the inclusions, and for the same reason -- letting an amenity block a total
+took the book from 259 complete trips to none.
+"""
+
 SEASON: tuple[str, str] = ("2027-05-01", "2027-08-31")
 """The window the site publishes, as the fee book has to be read against it.
 
@@ -285,22 +318,63 @@ def _in_season(entry: dict[str, object], season: tuple[str, str]) -> bool:
     return not (valid_from and valid_from > end)
 
 
-def _tier_for_inclusion(code: FeeCode) -> FeeTier:
-    """Which column an included charge belongs in.
+def _money(entry: dict[str, object], currency: str) -> dict[str, object] | None:
+    """What one fee entry costs, or ``None`` when it does not say.
 
-    A charge is worth stating as covered exactly because you would otherwise
-    have to pay it, so an inclusion is **mandatory unless this site already
-    treats that charge as something you choose** -- nitrox and gear follow a
-    toggle, tips are customary. No new table: the two sets already exist and
-    are the ones `_tier_for` consults for a charge that is billed.
+    Two fields, in one order that is not a preference but a measurement: see
+    `EXTRA_VALUE`. ``price`` is the maintained number and wins whenever it is
+    one; ``extraValue`` is read only where ``price`` is null, and only when the
+    whole string is a figure.
 
-    It agrees with what the other seller's parser already produces, which is
-    the check that matters: of the 243 included lines in the dataset today,
-    nitrox is conditional and harbour fees are mandatory.
+    Returns the ``amount``/``amount_max`` pair `FeeItem.from_dict` expects, so a
+    range PADI types into the string keeps both ends the way liveaboard.com's
+    ranges do -- collapsing one to its low end understates the bill, which is
+    the failure this project exists to correct.
     """
-    from .fees import CUSTOMARY_CODES, TOGGLED_CODES, _tier_for
+    price = entry.get("price")
+    if isinstance(price, (int, float)) and not isinstance(price, bool):
+        return {"amount": {"amount": float(price), "currency": currency}}
 
-    return _tier_for(code, required=code not in TOGGLED_CODES | CUSTOMARY_CODES)
+    raw = entry.get("extraValue")
+    match = EXTRA_VALUE.match(str(raw)) if isinstance(raw, str) else None
+    if not match:
+        return None
+    low = _number(match.group("low"))
+    if low is None:
+        return None
+    stated = (match.group("currency") or "").upper()
+    if stated and stated not in CURRENCY_TOKENS:
+        # A currency this parser cannot name is money it cannot add up. One
+        # vessel writes "8 EU"; the entry stays unpriced rather than being
+        # assumed into euro.
+        return None
+    money: dict[str, object] = {
+        "amount": {"amount": low, "currency": stated or currency}
+    }
+    # A range keeps both ends, as liveaboard.com's do. It fires on nothing
+    # today -- the only ranged strings in the store are two transfer entries
+    # reading "55-75", and `PAYED_PER` declines their unit before this is
+    # reached -- but a range collapsed to its low end understates a bill, which
+    # is not a thing to leave to whether the source happens to reorganise.
+    high = _number(match.group("high"))
+    if high is not None and high != low:
+        money["amount_max"] = dict(money["amount"], amount=high)
+    return money
+
+
+def _number(raw: str | None) -> float | None:
+    """A figure typed into a string, or ``None``. Thousands separators only.
+
+    Shared with `fees._number` in intent and kept local in fact: this reads a
+    field, that one reads a page, and the two must be free to differ about what
+    a stray character means.
+    """
+    if raw is None:
+        return None
+    try:
+        return float(raw.replace(",", "").rstrip("."))
+    except ValueError:
+        return None
 
 
 INCLUDED_FIELD = "whatsIncludedNew"
@@ -310,14 +384,69 @@ The other half of a disclosure, and the site was reading only one of them: what
 PADI charges *on top* (`MANDATORY_FIELDS`) and not what it says is already in.
 Those are different claims, and **included fees stay in the breakdown at zero**
 by invariant -- removing them hides the difference between a bundled operator
-and one that bills at the dock. That rule was being kept on liveaboard.com's
-side only, so two bills in one expanded row were disclosing at different
-depths with nothing saying which was the shallower.
+and one that bills at the dock. Two bills in one expanded row were disclosing
+at different depths with nothing saying which was the shallower.
+
+A note that used to sit here said the rule "was being kept on liveaboard.com's
+side only". It was not: that seller prints an `Included:` block above the two
+`fees.BLOCK` was reading and nothing opened it either, on all 79 vessel pages.
+Both sellers are read for it now, through `fees.tier_for_inclusion`, which is
+what makes the two comparable rather than merely both present.
 
 Membership is the claim, as with `MANDATORY_FIELDS`: nothing in an entry says
 "included", the field it sits in does. `section` and `kind` are the same
 fossils they are next door -- a marine park charge is filed under "Full board,
 including" -- so the title is again the only field that describes the thing.
+"""
+
+CURRENCY_TOKENS: frozenset[str] = frozenset({"EUR", "USD", "GBP"})
+"""Currency names this parser will read out of a free-text amount.
+
+Deliberately a closed list. `extraValue` is typed by hand and one vessel writes
+"8 EU", which plainly means euro and is plainly not a currency code -- and a
+rule loose enough to accept it is loose enough to accept the next thing that
+only looks like one. Those entries keep no amount, which is where they already
+were.
+
+Codes only, no symbols: not one `extraValue` in the store contains €, $ or £,
+so a symbol here would be a rule about a shape nobody has seen. The three codes
+are the three currencies the vessels quote in.
+"""
+
+EXTRA_VALUE = re.compile(
+    r"""^\s*
+    (?P<low>\d[\d.,]*)
+    (?:\s*[-\u2013]\s*(?P<high>\d[\d.,]*))?
+    \s*(?P<currency>[A-Za-z]{2,3})?
+    \s*$""",
+    re.X,
+)
+"""A price PADI states as a string rather than as a number.
+
+**`price` is null on 236 of the fee book's 872 mandatory entries, and
+`extraValue` states the figure on 133 of those.** Bella 2's Coast Guard Fee is ``price: null, extraValue: "5 EUR"`` and
+its Service fees ``price: null, extraValue: "10 EUR"``: two of the three
+mandatory charges on every one of that boat's trips, read as unpriced, on a
+vessel whose PADI book is the only fee book the site has. The docstring in
+`fees_from_payload` used to call these entries "unpriced, exactly as a third of
+the liveaboard.com book is". They are not; nobody had read the other field.
+
+**`price` still wins wherever it is set**, because where the two disagree
+`extraValue` is the stale one. Blue Horizon states ``price: 56`` against
+``extraValue: "8"`` -- 8 a night over a seven-night trip, kept beside the total
+that replaced it, and still 56 on the boat's ten-night sailings. Blue Melody's
+same charge has ``extraValue: "USD"`` with no number in it at all, and Andromeda
+prices its fuel surcharge at 50 per week against an ``extraValue`` of "30 EUR".
+So this is a fallback and never a second opinion.
+
+Anchored at both ends, because the whole risk in the field is that it is prose:
+"14% GST (on onboard purchases)" must not become 14 of anything, a bare "USD"
+must not become a price, and 43 mandatory fuel surcharges reading
+*"10 - 20 USD To be confirmed 30 days before the trip"* are an operator saying
+the figure is not settled yet -- those bills stay incomplete, which is the
+answer. A currency it states is the currency -- Andromeda
+writes "5 USD" on a vessel PADI prices in EUR, and the vessel's currency is only
+assumed where the string names none.
 """
 
 PARENTHETICAL = re.compile(r"\s*\([^)]*\)")
@@ -903,9 +1032,10 @@ class PadiComAdapter(SourceAdapter):
           "Local Fees". Naming them is guesswork and pricing them is worse --
           the GST line carries ``price: 14.0``, so counting it would put
           fourteen euro on the bill for a percentage of an unrelated purchase.
-        - **Unpriced.** 142 of the 623 entries name a charge and give no figure,
-          exactly as a third of the liveaboard.com book does. The line is kept,
-          with no amount, so the reader sees the charge exists.
+        - **Unpriced.** 103 of the 872 entries name a charge and give no figure
+          in either field -- see `EXTRA_VALUE` for the second one, which answers
+          133 of the 236 the first leaves null. The line is kept, with no
+          amount, so the reader sees the charge exists.
         - **A basis that will not normalise.** See `PAYED_PER`.
 
         The currency is the vessel's own, taken from `window.shop.currency` and
@@ -914,7 +1044,7 @@ class PadiComAdapter(SourceAdapter):
         number. A vessel whose page states no currency gets no fees rather than
         fees assumed to be euro.
         """
-        from .fees import classify_label
+        from .fees import classify_label, tier_for_inclusion
 
         lines: list[dict[str, object]] = []
         unreadable: list[str] = []
@@ -935,8 +1065,7 @@ class PadiComAdapter(SourceAdapter):
                 # `prose=False`: this is a field, not a line cut out of a page.
                 code = classify_label(title, prose=False) if title else None
                 basis = cls.basis_for(entry.get("payedPer"))
-                price = entry.get("price")
-                amount = float(price) if isinstance(price, (int, float)) else None
+                money = _money(entry, currency)
                 if code is None or basis is None:
                     unreadable.append(title or f"<untitled {entry.get('id')}>")
                     continue
@@ -953,8 +1082,8 @@ class PadiComAdapter(SourceAdapter):
                     "basis": basis.value,
                     "note": title,
                 }
-                if amount is not None:
-                    line["amount"] = {"amount": amount, "currency": currency}
+                if money is not None:
+                    line.update(money)
                 lines.append(line)
 
         # Two entries with one title are still kept as two, and the reason has
@@ -972,23 +1101,61 @@ class PadiComAdapter(SourceAdapter):
         # that genuinely bills one title twice inside one season states no
         # window on either, and folding those on the title would halve a real
         # bill -- the direction this project never rounds.
+        #
+        # Read here, before anything optional is appended, and that ordering is
+        # the whole of how `complete` stays a verdict about the mandatory bill.
         priced = all("amount" in line for line in lines)
 
-        # What the fare already covers, appended at zero. A charge cannot be
-        # billed and bundled on one trip, so anything already on the list wins
-        # -- a stated amount is the stronger claim, and the two do not in fact
-        # collide anywhere in the book today.
-        charged = {line["code"] for line in lines}
-        for code, title in cls._inclusions(detail, season):
-            if code.value in charged:
+        # The charges a diver *can* decline, on the source's own say-so. Read
+        # after the mandatory ones and never mixed into that verdict: see
+        # `OPTIONAL_FIELDS`. One line per code, which is the rule
+        # `parse_extras` already keeps on the other seller's Optional block --
+        # two lines under one code are one charge printed twice, and where the
+        # site puts a toggle on that code they are also that charge counted
+        # twice.
+        #
+        # First past the post, as it is there, and measured rather than assumed
+        # safe: across all 438 trips in the store there is no code where an
+        # unpriced entry in one of these lists is followed by a priced one, so
+        # the order costs no figure today. A later reading where it does should
+        # prefer the priced line -- an unpriced entry is not a cheaper charge,
+        # it is a charge nobody stated.
+        optional_codes: set[str] = {line["code"] for line in lines}
+        for line in cls._optional(detail, currency, season):
+            if line["code"] in optional_codes:
                 continue
-            charged.add(code.value)
+            optional_codes.add(str(line["code"]))
+            lines.append(line)
+
+        # What the fare already covers, appended at zero. A charge cannot be
+        # billed and bundled on one trip, so a stated amount wins: PADI prices
+        # nitrox on 30 trips whose inclusions also say "Free nitrox (for
+        # certified nitrox divers)", and 17 of those spell out why -- "15 LITER
+        # tank nitrox (only 12 liter is free of chanrge)". Both claims are true
+        # and only one line per code survives, so it is the one with money on
+        # it.
+        #
+        # **A charge that names no figure loses to an inclusion, though**, and
+        # that only became possible when the optional lists were read: 15 trips
+        # list a transfer with no price *and* state the transfer as included, so
+        # first-past-the-post published "airport transfer, price unknown" where
+        # the seller had said it was covered. An unpriced line is not a stated
+        # amount, and **included fees stay in the breakdown at zero** by
+        # invariant. Mandatory charges are exempt: the field an entry sits in is
+        # the claim there, and the mandatory list saying a diver pays it
+        # outranks another list saying they do not.
+        for code, title in cls._inclusions(detail, season):
+            clash = next((l for l in lines if l["code"] == code.value), None)
+            if clash is not None:
+                if "amount" in clash or clash["tier"] == FeeTier.MANDATORY.value:
+                    continue
+                lines.remove(clash)
             lines.append({
                 "code": code.value,
                 # The tier the fee would have had if it were charged. An
                 # included line is drawn at zero rather than counted, so the
                 # tier is what tells the page which column it belongs in.
-                "tier": _tier_for_inclusion(code).value,
+                "tier": tier_for_inclusion(code).value,
                 "basis": FeeBasis.PER_TRIP.value,
                 "included": True,
                 "note": title,
@@ -1001,14 +1168,84 @@ class PadiComAdapter(SourceAdapter):
             # complete and empty -- 50 of the 307 are, and that is PADI saying
             # the fare covers everything, which is a disclosure and not a gap.
             #
-            # Inclusions cannot make it false. 4,493 of the 5,662 entries in
-            # that list are amenities -- Water, Coffee, Free WiFi, a shisha
+            # Neither the optional charges nor the inclusions can make it
+            # false, and for the same reason: a course this parser cannot name
+            # and a transfer priced per vehicle say nothing about whether what
+            # a diver *must* pay adds up.
+            #
+            # 4,493 of the 5,662 entries in the inclusions list are amenities -- Water, Coffee, Free WiFi, a shisha
             # lounge -- and an amenity nobody can classify is not a hole in a
             # fee book. Letting them reach `unreadable` would have taken the
             # book from 259 complete trips to none.
             "complete": not unreadable and priced,
             "unreadable": sorted(set(unreadable)),
         }
+
+    @classmethod
+    def _optional(
+        cls, detail: dict[str, object], currency: str, season: tuple[str, str]
+    ) -> list[dict[str, object]]:
+        """The charges PADI says a diver may decline, in list order.
+
+        Through the same table and the same money reader the mandatory charges
+        go through, and returned as lines the caller dedupes by code.
+
+        Three things the mandatory path does differently, each for a reason:
+
+        - **The parenthetical is stripped before the title is classified**, as
+          it is for the inclusions. These entries are prose in the same way:
+          "Airport Meet & Greet (VISA assistance, eligible countries only)" is
+          not the visa charge, "Flashlight (torch)" is a torch, and
+          "Satellite phone call (per minute)" is not a charge this project can
+          normalise. The mandatory list is labels and keeps its brackets, where
+          "Safari Package (Marine Park fees, harbour fees and fuel)" is a
+          combined charge that needs them to be read at all.
+        - **An entry nobody can classify is dropped, not recorded as
+          unreadable.** 72 of the 111 distinct titles here are courses,
+          amenities and single gear items -- "PADI Deep Diver", "Espresso
+          coffee", "Wetsuit" -- and an unrecognised extra costs a line of data
+          where a
+          misrecognised one puts an invented charge on the page. It cannot touch
+          `complete`, which is a verdict on what a diver must pay.
+        - **A charging unit that will not normalise is dropped the same way.**
+          PADI prices its courses "per course" and its transfers "return, per
+          person" (`PAYED_PER` maps neither), so those entries state a real
+          price in a unit this dataset cannot add to a trip's bill.
+
+        The gear set is the one entry that carries its own contents:
+        ``fullSetDescription`` names what is in it, exactly as the other
+        seller's bundle row does, and the note keeps both halves in the
+        seller's words.
+        """
+        from .fees import _tier_for, classify_label
+
+        out: list[dict[str, object]] = []
+        for field in OPTIONAL_FIELDS:
+            entries = detail.get(field)
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if not isinstance(entry, dict) or not _in_season(entry, season):
+                    continue
+                title = str(entry.get("title") or "").strip()
+                if not title:
+                    continue
+                code = classify_label(PARENTHETICAL.sub("", title).strip(), prose=False)
+                basis = cls.basis_for(entry.get("payedPer"))
+                if code is None or basis is None:
+                    continue
+                contents = str(entry.get("fullSetDescription") or "").strip()
+                line: dict[str, object] = {
+                    "code": code.value,
+                    "tier": _tier_for(code, required=False).value,
+                    "basis": basis.value,
+                    "note": f"{title}: {contents}" if contents else title,
+                }
+                money = _money(entry, currency)
+                if money is not None:
+                    line.update(money)
+                out.append(line)
+        return out
 
     @classmethod
     def _inclusions(
@@ -1020,7 +1257,7 @@ class PadiComAdapter(SourceAdapter):
         through. A second vocabulary drifts, and the day it drifts is the day
         one seller's "Harbour fees" and the other's mean different things.
         """
-        from .fees import classify_label
+        from .fees import classify_label, tier_for_inclusion
 
         entries = detail.get(INCLUDED_FIELD)
         if not isinstance(entries, list):
