@@ -697,6 +697,15 @@ Break these and the site starts lying quietly rather than failing loudly.
   day with no entry is a day the refresh did not run, and the lead says so —
   never that nothing moved. A repeated date is two refreshes, printed
   separately under one heading for the day.
+- **The history view shows what happened, and does not interpret it.** Badges
+  were proposed and declined: *cheapest reading this week*, *raised twice this
+  week*, a sparkline per row. `sales.json` holds seven days and could support
+  them, and that is not the question — this site reports what the sellers did,
+  and a row that grades a price into a buying signal is the shape of the sales
+  page it exists to correct. So `KEEP_DAYS` stays at a week, nothing is
+  computed across readings, and the view lists refreshes. It is for visitors as
+  well as for us, which is why it is a view rather than a link, and why it is
+  the plain list rather than the clever one.
 - **A change report is rendered, never transcribed.** `changes.compare` builds
   a report of dataclasses; `changes.render` flattens it to text for the log and
   `CHANGES.md`, and `changes.as_dict` emits the same comparison as data into
