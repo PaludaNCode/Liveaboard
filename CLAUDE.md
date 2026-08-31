@@ -589,6 +589,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   the loss is stated — `deals.coverage.dropped` names the boats, because after
   the fix those rows read *not on sale*, which is one seller's discarded
   reading wearing its answer.
+- **The history view is a week of refreshes, anchored to the log.** Not one
+  entry: the refresh runs several times a day, and a single one is the noisiest
+  possible window — a run that read nothing rendered a view saying nothing
+  moved with days of real movement one link away. `recent_entries` measures the
+  window from the **newest entry in the log, never from today**, because
+  `render` is pure: a clock in it would make the same committed inputs render a
+  different page tomorrow and turn `main` red with nobody having changed
+  anything (`TestThePageIsWhatItsDataBuilds` normalises only the build stamp).
+  A stale log shows as the dates the view prints, which a reader can check. A
+  day with no entry is a day the refresh did not run, and the lead says so —
+  never that nothing moved. A repeated date is two refreshes, printed
+  separately under one heading for the day.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

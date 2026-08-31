@@ -16,35 +16,8 @@
 <body>
 
 <div class="masthead">
-  <!-- One lead paragraph, and which one depends on the view. They sit here
-       rather than over each pane for the room: this slot is beside the counts
-       rather than above the table, so the paragraph costs the rows nothing,
-       which is the argument that put the thesis here in the first place. The
-       history view shows neither -- it is a document with its own opening
-       line, inside the pane that scrolls. -->
   <div>
     <h1>Egypt liveaboards &middot; May&ndash;August 2027</h1>
-    <p class="sub" id="tripsLead">
-      The advertised price is not the price. Every departure below is shown at
-      the <strong>total</strong> &mdash; the advertised berth plus marine park
-      fees, port dues, fuel and everything else that lands on the bill later.
-      Two sites sell many of these berths and they do not agree, so the money
-      columns print both &mdash; the total runs from one seller&rsquo;s whole
-      bill to the other&rsquo;s, and the parts above it follow in that same
-      order (<code>&rarr;</code>), never spliced together. Sort any
-      column; expand a row for both bills, the entry bar the trip sets and
-      where each number came from; click a row to mark it, so you can still
-      tell which is which once you have scrolled sideways.
-    </p>
-    <p class="sub" id="saleLead" hidden>
-      Every markdown either seller is advertising, by boat. The markdown is the
-      list price a seller prints beside the one it charges &mdash; struck through
-      on the booking page, or stated outright by PADI Travel &mdash; never the
-      &ldquo;20% Off&rdquo; an operator writes into a trip name. It is what a
-      seller claimed on the day beside its name, and it can end overnight. To
-      read the discounted <em>departures</em> priced whole, use the
-      <b>On sale</b> filter over the trips table.
-    </p>
   </div>
   <!-- Counts of what the table is showing, so they belong to the two views
        that have a table. app.js hides them on the history view rather than
@@ -94,14 +67,15 @@
      something else. -->
 <section class="pane history-pane" id="historyPane" tabindex="-1" hidden>
   <div class="history-body">
-    <h2>What changed on the last refresh</h2>
+    <h2>What changed, refresh by refresh</h2>
     <p class="history-lead">
-      One entry per refresh: departures added, fares moved, berths sold out. It
-      is a diff between two committed days rather than a claim about today, and
-      it never drops a row without saying so &mdash; where a block is capped or
-      a sub-euro move suppressed as source rounding, the report prints the count
-      it left out. A vessel losing <em>every</em> departure is a failed fetch
-      rather than a cancelled season, and is reported as one.
+      One entry per refresh &mdash; departures added, fares moved, berths sold
+      out &mdash; for the last week of them. Each is a diff between two
+      committed days rather than a claim about today, and none drops a row
+      without saying so: where a block is capped or a sub-euro move suppressed
+      as source rounding, the report prints the count it left out. A vessel
+      losing <em>every</em> departure is a failed fetch rather than a cancelled
+      season, and is reported as one.
     </p>
     __CHANGES__
     <h3>The data itself</h3>
@@ -129,6 +103,15 @@
 <section class="pane sale-pane" id="salePane" tabindex="-1" hidden>
   <div class="sale-body">
     <h2>What is on sale</h2>
+    <p class="sale-prose">
+      Every markdown either seller is advertising, by boat. The markdown is the
+      list price a seller prints beside the one it charges &mdash; struck through
+      on the booking page, or stated outright by PADI Travel &mdash; never the
+      &ldquo;20% Off&rdquo; an operator writes into a trip name. It is what a
+      seller claimed on the day beside its name, and it can end overnight. To
+      read the discounted <em>departures</em> priced whole, use the
+      <b>On sale</b> filter over the trips table.
+    </p>
     <p class="sale-lead" id="dealsLine"></p>
     <div class="deals-body" id="dealsBody"></div>
   </div>
@@ -296,7 +279,18 @@
 <details class="site-footer">
   <summary>
     How the numbers are built
-    <span class="colophon">Generated __GENERATED__.</span>
+    <!-- Two dates, and they are different facts. `__GENERATED__` is the day
+         the prices were read off the sources; the build stamp beside it is the
+         minute this page was made, which is a different day whenever a parser
+         or template change ships without a fresh crawl.
+
+         The build stamp arrives from the payload rather than being written in
+         here, and deliberately: the only literal copy of it in the file is the
+         one inside `"built":"..."`, which is what
+         `TestThePageIsWhatItsDataBuilds` normalises before comparing the
+         committed page against a fresh render. A second copy in the markup
+         would make that comparison fail on every rebuild. -->
+    <span class="colophon">Prices read __GENERATED__<span id="builtStamp"></span></span>
   </summary>
   <div class="footer-grid">
     <div>

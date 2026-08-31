@@ -2861,14 +2861,23 @@
     /* "bookable by the berth", not "boats in Egypt" — charter-only vessels are
        never linked from the search pages, so the crawl cannot see them. */
     D.meta.counts.boats + " boats bookable by the berth · all prices in " +
-    D.meta.currency +
-    /* The build, not the crawl. `generated` is the day the data was read and
-       is what the colophon prints beside the sources; this line says when the
-       page you are looking at was made, which is a different day whenever a
-       template or parser change ships without a fresh crawl. To the minute,
-       because several builds an hour is normal and a date cannot tell them
-       apart. */
-    " · built " + (D.meta.built || D.meta.generated);
+    D.meta.currency;
+
+  /* The build, to the minute, in the colophon rather than in the toolbar.
+     It belongs beside the crawl date, which is the other half of "how current
+     is this" and was already down there; over the table it was a fourth clause
+     on a line about the fleet, answering a question nobody reading that line
+     had asked. Minutes because the page is rebuilt several times an hour on a
+     busy day and a date alone cannot tell two of those apart, which is the
+     whole point of showing it.
+
+     Written from the payload, so the only literal build stamp in the file
+     stays the one inside `"built":"..."` -- see the note in the markup. */
+  var builtStamp = document.getElementById("builtStamp");
+  if (builtStamp) {
+    builtStamp.textContent = " · page built " +
+      (D.meta.built || D.meta.generated);
+  }
 
   /* ---------- the three views ---------- */
 
@@ -2904,8 +2913,6 @@
     sale: document.getElementById("navSale"),
     history: document.getElementById("navHistory")
   };
-  var saleLead = document.getElementById("saleLead");
-  var tripsLead = document.getElementById("tripsLead");
   var statsHost = document.getElementById("stats");
   var shellEl = document.querySelector(".shell");
   /* Whether the deals book held anything, and therefore whether there is a
@@ -2950,13 +2957,6 @@
       else navItems[id].removeAttribute("aria-current");
     });
 
-    /* One lead, and only on the view it describes. The trips lead is 166px of
-       prose and the sale lead says something else about a different page; both
-       at once would cost the table 300px. The history and sale views carry
-       their own opening line inside the pane that scrolls, so the masthead
-       shows the sale lead only because that view's own heading is short. */
-    saleLead.hidden = name !== "sale";
-    tripsLead.hidden = name !== "trips";
     /* Rows shown, boats, itineraries count what the table is showing, so they
        belong to the one view that has a table. Left up elsewhere they would be
        three numbers about a table that is not on screen. */

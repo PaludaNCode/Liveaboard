@@ -12,10 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
+from liveaboard.export import latest_entry, recent_entries
 from liveaboard.render import (
+    HISTORY_DAYS,
     build_payload,
     icon_data_uri,
-    latest_entry,
     render,
 )
 from liveaboard.scrape import jsonld, liveaboard_com
@@ -336,18 +337,32 @@ class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
     to break it.
     """
 
-    def test_the_committed_page_shows_the_committed_latest_entry(self):
-        history = latest_entry(published.committed("CHANGES.md")
-                               .read_text(encoding="utf-8"))
-        if not history.strip():
+    def test_the_committed_page_leads_with_the_committed_latest_entry(self):
+        log = published.committed("CHANGES.md").read_text(encoding="utf-8")
+        newest = latest_entry(log)
+        if not newest.strip():
             self.skipTest("no entry in data/CHANGES.md yet")
         page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
-        panel = re.search(r'<pre class="changelog">(.*?)</pre>', page, re.S)
-        self.assertIsNotNone(panel, "the built page has no changelog panel")
+        panels = re.findall(r'<pre class="changelog">(.*?)</pre>', page, re.S)
+        self.assertTrue(panels, "the built page has no changelog panel")
+        # The view carries a week of refreshes (#140), newest first, so the
+        # property is about the *first* block rather than the only one.
         self.assertEqual(
-            unescape(panel.group(1)).strip(), history.strip(),
-            "the published page's changelog is not the newest entry in "
-            "data/CHANGES.md -- something built the page before appending to it")
+            unescape(panels[0]).strip(), newest.strip(),
+            "the published page's changelog does not lead with the newest entry "
+            "in data/CHANGES.md -- something built the page before appending to it")
+
+    def test_the_committed_page_carries_the_whole_window(self):
+        """Not just the newest: a week of refreshes is the view's default, and
+        a page carrying one of them is the bug this replaced."""
+        log = published.committed("CHANGES.md").read_text(encoding="utf-8")
+        window = recent_entries(log, HISTORY_DAYS)
+        if not window:
+            self.skipTest("no entry in data/CHANGES.md yet")
+        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        panels = [unescape(b).strip() for b in
+                  re.findall(r'<pre class="changelog">(.*?)</pre>', page, re.S)]
+        self.assertEqual(panels, [body.strip() for _, body in window])
 
 
 class TestARebuildIsNotNews(unittest.TestCase):
@@ -1725,7 +1740,7 @@ class TestTheSellerFilter(unittest.TestCase):
 
 
 class TestTheBuiltStampIsTheBuild(unittest.TestCase):
-    """The toolbar's "built" is the build, to the minute.
+    """The colophon's "page built" is the build, to the minute.
 
     It printed `meta.generated` -- the day the *data* was scraped -- under the
     word "built". Two different facts under one label, and the one it showed
@@ -1747,9 +1762,18 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
         self.assertRegex(meta["generated"], r"^\d{4}-\d{2}-\d{2}$",
                          "the crawl date must stay a date: it is a day, not a moment")
 
-    def test_the_toolbar_prints_the_build(self) -> None:
+    def test_the_colophon_prints_the_build_beside_the_crawl(self) -> None:
+        """The two dates answer one question -- how current is this -- so they
+        sit together. The build stamp was a fourth clause on the toolbar line
+        about the fleet, where nobody reading it had asked."""
         app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
-        self.assertIn('" · built " + (D.meta.built || D.meta.generated)', app)
+        page = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('" · page built " +\n      (D.meta.built || D.meta.generated)', app)
+        self.assertIn('id="builtStamp"', page)
+        self.assertIn("Prices read __GENERATED__", page)
+        self.assertNotIn("boats bookable by the berth · all prices in \" +\n"
+                         "    D.meta.currency +", app,
+                         "the toolbar is still appending the build stamp")
 
 
 class TestTheThreeViews(unittest.TestCase):
@@ -1887,7 +1911,7 @@ class TestTheThreeViews(unittest.TestCase):
         heading, so the outline went from the site's h1 straight to a table."""
         page, app = self.page(), self.app()
         self.assertIn('class="view-heading"', page, "the trips pane has no heading")
-        for heading in ("<h2>What is on sale</h2>", "<h2>What changed on the last refresh</h2>"):
+        for heading in ("<h2>What is on sale</h2>", "<h2>What changed, refresh by refresh</h2>"):
             self.assertIn(heading, page)
         self.assertIn("document.title =", app, "every view shares one title")
         self.assertIn("tabindex=\"-1\"", page,

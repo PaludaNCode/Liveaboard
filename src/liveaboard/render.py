@@ -20,7 +20,7 @@ from typing import Any
 from urllib.parse import quote
 
 from .dataset import Dataset
-from .export import latest_entry, to_csv
+from .export import recent_entries, to_csv
 from .money import DISPLAY_CURRENCY
 from .pricing import (
     DEFAULT_TOGGLES,
@@ -396,23 +396,82 @@ def _downloads_html(available: list[str]) -> str:
     return "<ul class=\"downloads\">" + "".join(items) + "</ul>"
 
 
-def _changes_html(entry: str, linked: bool) -> str:
-    """The last refresh's report, verbatim, in a block that scrolls.
+HISTORY_DAYS = 7
 
-    With no report to show the view says so. It was allowed to render nothing
-    when it was one item at the bottom of the method footer; it is a view of
-    its own now, and a heading over blank space reads as a page that failed
-    rather than as a checkout in which nothing has been refreshed yet. The
-    sentence is about this build, not about the fleet: no refresh has been
-    *recorded* here, which is not the claim that nothing moved.
+
+def _pretty_day(iso: str) -> str:
+    """``2026-08-30`` as ``30 August 2026``, or unchanged if it is not a date.
+
+    Built rather than formatted: ``%-d`` is a glibc extension and would print a
+    leading zero on one platform and not another, which is a diff in the built
+    page depending on where it was built.
     """
-    if not entry:
+    try:
+        day = date.fromisoformat(iso)
+    except ValueError:
+        return iso
+    return f"{day.day} {day.strftime('%B')} {day.year}"
+
+
+def _changes_html(entries: list[tuple[str, str]], linked: bool) -> str:
+    """Every refresh in the last week of the log, newest first.
+
+    It was one entry, with the rest behind a link to the raw markdown file.
+    That made the ordinary question hard to ask -- the refresh runs daily and a
+    lot moves, so "has this boat been repricing all week" meant opening
+    `CHANGES.md` -- and it made the noisiest possible window the default: a run
+    that happened to read nothing rendered a view saying nothing moved, with
+    days of real movement one link away.
+
+    Three things the view must not imply, all of them versions of one rule.
+
+    A **day with no entry is not a day when nothing moved** -- it is a day the
+    refresh did not run, or did not finish. So the lead counts the refreshes it
+    has and names the span they cover, and never says anything about the days
+    between them.
+
+    An **empty log is a fact about this checkout**, not about the fleet: no
+    refresh has been *recorded* here, which is not the claim that nothing
+    changed.
+
+    And a **date that repeats is two refreshes, not one** -- the job runs more
+    than once a day. They are separate readings and are printed separately,
+    under one heading for the day, because a heading repeated three times reads
+    as a rendering fault rather than as three runs.
+    """
+    if not entries:
         return ('<p class="history-lead">No refresh is recorded in this build, '
                 "so there is nothing to compare against. The log is written by "
                 "<code>liveaboard.cli changes</code> on each refresh.</p>")
-    more = ('<p><a href="data/CHANGES.md">Every refresh before this one</a>.</p>'
+
+    days: list[tuple[str, list[str]]] = []
+    for day, body in entries:
+        if days and days[-1][0] == day:
+            days[-1][1].append(body)
+        else:
+            days.append((day, [body]))
+
+    n = len(entries)
+    when = (f"from {_pretty_day(entries[-1][0])} to {_pretty_day(entries[0][0])}"
+            if days[0][0] != days[-1][0] else f"on {_pretty_day(entries[0][0])}")
+    lead = (
+        f'<p class="history-lead">'
+        f'{n} refresh{"" if n == 1 else "es"} recorded {when}. '
+        f"A day with no entry is a day the refresh did not run, which is not "
+        f"the same as a day nothing moved.</p>"
+    )
+
+    blocks = []
+    for day, bodies in days:
+        label = _pretty_day(day)
+        if len(bodies) > 1:
+            label += f" &middot; {len(bodies)} refreshes"
+        blocks.append(f'<h3 class="history-day">{label}</h3>')
+        blocks.extend(f'<pre class="changelog">{_escape(b)}</pre>' for b in bodies)
+
+    more = ('<p><a href="data/CHANGES.md">Every refresh before these</a>.</p>'
             if linked else "")
-    return (f'<pre class="changelog">{_escape(entry)}</pre>{more}')
+    return lead + "".join(blocks) + more
 
 
 def write_downloads(dataset: Dataset, out: Path, data_dir: Path | None) -> list[str]:
@@ -490,14 +549,17 @@ def render(
 
     available = write_downloads(dataset, out, data_dir)
 
-    # What moved on the last refresh, inline. The whole history is a file the
-    # page links to: it grows by an entry a day, and this site ships as one
-    # download with nothing fetched lazily, so an unbounded log inside it would
-    # be paid for by every visitor forever.
+    # The last week of refreshes, inline; the whole history stays a file the
+    # page links to. The log grows by several entries a day and this site ships
+    # as one download with nothing fetched lazily, so an unbounded history
+    # inside it would be paid for by every visitor forever. A week is the
+    # window the ordinary question needs -- and it is measured against the
+    # newest entry in the log rather than against today, so the same committed
+    # inputs render the same page tomorrow.
     history = (data_dir / "CHANGES.md") if data_dir else None
-    entry = ""
+    entries: list[tuple[str, str]] = []
     if history and history.exists():
-        entry = latest_entry(history.read_text(encoding="utf-8"))
+        entries = recent_entries(history.read_text(encoding="utf-8"), HISTORY_DAYS)
 
     html = html.replace("/*STYLE*/", css)
     html = html.replace("/*APP*/", js)
@@ -505,7 +567,8 @@ def render(
     html = html.replace('"__DATA__"', data)
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
     html = html.replace("__DOWNLOADS__", _downloads_html(available))
-    html = html.replace("__CHANGES__", _changes_html(entry, "CHANGES.md" in available))
+    html = html.replace("__CHANGES__",
+                        _changes_html(entries, "CHANGES.md" in available))
 
     target = out / "index.html"
     target.write_text(html, encoding="utf-8")
