@@ -81,9 +81,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # six boats returned six boats' worth of rows and no way to tell
             # them apart, the search box that reached it went too, and a
             # per-operator score was removed before both for reading as a
-            # league table. A diver picks the boat. It stays in the dataset
-            # and in the CSV, where a reader who wants to group by company
-            # can, and it is off the page rather than on it unread.
+            # league table. A diver picks the boat.
             "boat": boat.name,
             "nights": itinerary.nights,
             # Zero where the operator publishes no count. The page prints
@@ -278,8 +276,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # filters -- "46 operators". It was the last of the operating
             # company on the page, and it said nothing a reader could act on:
             # a diver picks the boat, and the number of companies behind 77
-            # hulls is not a fact about any trip. The dataset still models
-            # them, and the CSV still names one per row.
+            # hulls is not a fact about any trip.
             "counts": {
                 "departures": len(departures),
                 "itineraries": len(itineraries),

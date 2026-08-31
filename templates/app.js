@@ -596,8 +596,7 @@
      tell them apart; the search box that reached it went too, being a second
      way to ask what the chips ask, redrawing the table on every keystroke, for
      a question asked far less often than "which boat"; and a per-operator
-     score went before either, for reading as a league table. The company is in
-     the dataset and in the CSV for anyone who wants to group by it. */
+     score went before either, for reading as a league table. */
   var BOATS = tally(function (i) { return [i.boat]; });
 
   /* The entry bar, and the one bank that is not ordered by how many rows carry
