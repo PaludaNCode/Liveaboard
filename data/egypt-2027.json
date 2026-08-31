@@ -121232,6 +121232,31 @@
       },
       "berths": [
         [
+          0,
+          16,
+          [
+            [
+              100,
+              2371,
+              16,
+              100
+            ],
+            [
+              101,
+              2542,
+              4,
+              100
+            ],
+            [
+              41,
+              2628,
+              2,
+              100
+            ]
+          ],
+          22
+        ],
+        [
           1,
           null,
           null,
@@ -122234,6 +122259,25 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-aggressor-iv/"
       },
       "berths": [
+        [
+          0,
+          18,
+          [
+            [
+              102,
+              2318,
+              18,
+              100
+            ],
+            [
+              101,
+              2404,
+              8,
+              100
+            ]
+          ],
+          26
+        ],
         [
           1,
           null,
@@ -142878,7 +142922,7 @@
     "liveaboard.com",
     "padi.com"
   ],
-  "berths_read": "2026-08-28",
+  "berths_read": "2026-08-31",
   "padi_berths_read": "2026-08-30",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
@@ -143274,7 +143318,7 @@
     },
     "on_sale": {
       "read": {
-        "0": "2026-08-28",
+        "0": "2026-08-31",
         "1": "2026-08-30"
       },
       "sailings": 229,
@@ -143291,7 +143335,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 20
@@ -143308,7 +143352,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 10
@@ -143325,7 +143369,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 20
@@ -143342,7 +143386,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 20
@@ -143359,7 +143403,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 15
@@ -143376,7 +143420,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 15
@@ -143393,7 +143437,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 15
@@ -143410,7 +143454,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 15
@@ -143426,7 +143470,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -143441,7 +143485,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -143456,7 +143500,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -143471,7 +143515,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -143486,7 +143530,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         },
@@ -143502,7 +143546,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 10
@@ -143519,7 +143563,7 @@
             1
           ],
           "read": [
-            "2026-08-28",
+            "2026-08-31",
             "2026-08-30"
           ],
           "pct": 20
@@ -143535,7 +143579,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 30
         },
@@ -143550,7 +143594,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 20
         },
@@ -143565,7 +143609,7 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10,
           "pct_max": 20
@@ -143581,22 +143625,44 @@
             0
           ],
           "read": [
-            "2026-08-28"
+            "2026-08-31"
           ],
           "pct": 10
         }
       ]
     },
     "on_sale_changes": {
-      "read": "2026-08-28",
-      "sailings": 864,
-      "first_reading": true
+      "read": "2026-08-31",
+      "sailings": 3,
+      "previous": "2026-08-28",
+      "compared": 3,
+      "not_compared": 861,
+      "moves": [
+        {
+          "boat": "red-sea-aggressor-ii",
+          "boat_name": "Red Sea Aggressor II",
+          "kind": "ended",
+          "sailings": 1,
+          "first": "2027-05-01",
+          "last": "2027-05-01",
+          "pct": 33
+        },
+        {
+          "boat": "red-sea-aggressor-iv",
+          "boat_name": "Red Sea Aggressor IV",
+          "kind": "ended",
+          "sailings": 1,
+          "first": "2027-05-01",
+          "last": "2027-05-01",
+          "pct": 33
+        }
+      ]
     },
     "coverage": {
       "unread": 9,
       "banner_unsupported": 2,
       "dropped": {
-        "sailings": 36,
+        "sailings": 34,
         "boats": [
           "Red Sea Aggressor II",
           "Red Sea Aggressor IV",
@@ -143606,7 +143672,6 @@
     }
   },
   "stale_ladders": [
-    "red-sea-aggressor-ii 2027-05-01: row 2371, liveaboard.com ladder starts at 1588",
     "red-sea-aggressor-ii 2027-05-08: row 2371, liveaboard.com ladder starts at 1588",
     "red-sea-aggressor-ii 2027-05-15: row 2371, liveaboard.com ladder starts at 1588",
     "red-sea-aggressor-ii 2027-05-22: row 2371, liveaboard.com ladder starts at 1588",
@@ -143618,7 +143683,6 @@
     "red-sea-aggressor-ii 2027-07-10: row 2371, liveaboard.com ladder starts at 1588",
     "red-sea-aggressor-ii 2027-07-17: row 2371, liveaboard.com ladder starts at 1588",
     "red-sea-aggressor-ii 2027-07-24: row 2371, liveaboard.com ladder starts at 1588",
-    "red-sea-aggressor-iv 2027-05-01: row 2318, liveaboard.com ladder starts at 1553",
     "red-sea-aggressor-iv 2027-05-08: row 2318, liveaboard.com ladder starts at 1553",
     "red-sea-aggressor-iv 2027-05-15: row 2318, liveaboard.com ladder starts at 1553",
     "red-sea-aggressor-iv 2027-05-22: row 2318, liveaboard.com ladder starts at 1553",

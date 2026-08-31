@@ -1,5 +1,5 @@
 {
- "collected": "2026-08-28",
+ "collected": "2026-08-31",
  "days": {
   "2026-08-28": {
    "on_sale": 263,
@@ -4322,6 +4322,27 @@
     ],
     "yachtiano::2027-08-28": [
      1748.0,
+     null,
+     "USD"
+    ]
+   }
+  },
+  "2026-08-31": {
+   "on_sale": 0,
+   "read": 3,
+   "sailings": {
+    "blue-horizon::2027-05-01": [
+     1715.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-ii::2027-05-01": [
+     2760.0,
+     null,
+     "USD"
+    ],
+    "red-sea-aggressor-iv::2027-05-01": [
+     2699.0,
      null,
      "USD"
     ]
