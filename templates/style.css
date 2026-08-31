@@ -759,6 +759,12 @@ a { color:var(--accent); }
    edge as well. Every rule here is spent buying that space back.
    =========================================================================== */
 .filters-toggle { display:none; }
+/* A column holding the toolbar and the banks, so the fold below 1000px has one
+   box to open rather than a rule per control. Above it the wrapper does
+   nothing: a flex column inside a flex column, laying its two children out
+   exactly where they were as direct children of the pane. `flex:none` because
+   that is what `body > *` used to say for them before either moved. */
+.filterpanel { display:flex; flex-direction:column; flex:none; min-width:0; }
 
 /* Two breakpoints, because the page has two different problems.
  *
@@ -785,25 +791,39 @@ a { color:var(--accent); }
   .filters-toggle::after { content:" ▸"; color:var(--accent); }
   .filters-toggle.active { color:var(--accent); }
   body.filters-open .filters-toggle::after { content:" ▾"; }
-  .filterbar { display:none; }
-  body.filters-open .filterbar { display:flex; }
-  /* Bounded, and scrolls as one box: unfolded, the three banks are taller
-     than a phone screen between them, and the page itself does not scroll --
-     so whatever did not fit was simply unreachable, the Boat bank first.
-     40vh is the whole panel now rather than each bank's share of it, so
+  /* The control that opens the panel, above the panel. It follows the toolbar
+     in the markup because on a laptop there is no panel and the toolbar comes
+     first; here the toolbar is *inside* what this opens, so it has to lead. */
+  .filters-toggle { order:-1; }
+
+  /* Everything that filters, folded away together. The banks alone used to
+     fold and the toolbar stayed up -- 216px of it at 390 and 237 at 360, over
+     a table of 403 and 156 -- so the fold saved a screen of buttons and left a
+     screen of buttons behind it. */
+  .filterpanel { display:none; }
+
+  /* Bounded, and scrolls as one box: opened, the toolbar and the four banks
+     are well over a phone screen between them, and the page itself does not
+     scroll -- so whatever did not fit was simply unreachable, the Boat bank
+     first. The cap is the whole panel rather than each part's share of it, so
      unfolding the dive sites lengthens what scrolls inside the box instead of
-     pushing the bank below it off the bottom edge. The toggle that closes it
-     stays outside, above. */
-  body.filters-open .filterbanks {
-    max-height:40vh; overflow-y:auto; overscroll-behavior:contain;
-    /* 40vh is the most it may take, not what it takes: `flex:0 1` lets it
-       give way when the chrome above it has already used the screen. A
-       768x600 window has 175px under the toolbar and the fold, and a panel
-       that insisted on its 240 pushed its own last 65px past the bottom edge
-       -- where scrolling the box cannot bring them back, because it is the
-       box that is off-screen. */
+     pushing the bank below it off the bottom edge.
+
+     52vh rather than the 40 the banks had alone: the box holds the toolbar as
+     well now, and a cap that fit four banks leaves the reader scrolling past
+     the month chips to reach the first one. Still short of the screen, so the
+     table is never entirely displaced by the controls over it. */
+  body.filters-open .filterpanel {
+    display:flex;
+    max-height:52vh; overflow-y:auto; overscroll-behavior:contain;
+    /* The most it may take, not what it takes: `flex:0 1` lets it give way
+       when the chrome above it has already used the screen. A 768x600 window
+       has little under the masthead, the rail and the fold, and a panel that
+       insisted on its share pushed its own last rows past the bottom edge --
+       where scrolling the box cannot bring them back, because it is the box
+       that is off-screen. */
     flex:0 1 auto; min-height:0;
-    /* The banks' own rules scroll with them, so the last one is no longer the
+    /* Its contents' own rules scroll with it, so the last one is no longer the
        edge of anything: the box needs a line of its own where it stops. */
     border-bottom:1px solid var(--rule);
   }

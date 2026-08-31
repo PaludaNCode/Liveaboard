@@ -1655,6 +1655,12 @@
     document.getElementById("nboats").textContent = Object.keys(boats).length;
     document.getElementById("nitin").textContent = Object.keys(itins).length;
     countRail();
+    /* Here rather than in each control's own handler. The fold now hides nine
+       kinds of filter, and a label that goes stale is a fold concealing an
+       active one -- so it is refreshed by the thing every one of them already
+       does, which is redraw the table. One call, and no way to add a tenth
+       control and forget it. */
+    labelFilters();
   }
 
   /* What each rail item opens, counted the way that view actually answers.
@@ -1803,7 +1809,6 @@
       var v = numeric ? +button.dataset.v : button.dataset.v;
       if (picked.has(v)) picked.delete(v); else picked.add(v);
       button.setAttribute("aria-pressed", picked.has(v));
-      labelFilters();
       draw();
     });
 
@@ -2915,12 +2920,36 @@
      label carries the count so the fold never hides the fact that something
      is filtering. */
   var filtersToggle = document.getElementById("filtersToggle");
+  /* Everything the fold is hiding, counted. The label used to name the four
+     banks -- "Filter by port, site, boat or entry bar" -- which was both a
+     mouthful and, once the toolbar folded in with them, wrong: the month
+     chips, the nights range, the two seller filters and the Include switches
+     are all behind this control now, and a label listing four of nine reads
+     as a promise about what is in there.
+
+     So it says "Filters", and the count does the work the list was doing. It
+     has to: a fold that hides an active filter without saying so is a table
+     silently answering a narrower question than the one on screen. Counted
+     against each control's *default* rather than its emptiness, because that
+     is the question -- what is not as it was when the page opened -- and it is
+     how the Include switches get in: both start on, and turning one off
+     changes every total without touching a row. */
+  function activeFilters() {
+    var n = state.months.size + state.ports.size + state.sites.size +
+      state.boats.size + state.entry.size + state.sellers.size;
+    if (state.hideSoldOut) n += 1;
+    if (state.onSaleOnly) n += 1;
+    if (state.nightsMin !== null) n += 1;
+    if (state.nightsMax !== null) n += 1;
+    D.facets.toggles.forEach(function (t) {
+      if (!!state.toggles[t.id] !== !!t.default) n += 1;
+    });
+    return n;
+  }
+
   function labelFilters() {
-    var n = state.ports.size + state.sites.size + state.boats.size +
-      state.entry.size;
-    filtersToggle.textContent = n
-      ? n + (n === 1 ? " filter" : " filters") + " on — port, site, boat or entry bar"
-      : "Filter by port, site, boat or entry bar";
+    var n = activeFilters();
+    filtersToggle.textContent = n ? "Filters · " + n + " on" : "Filters";
     filtersToggle.classList.toggle("active", n > 0);
   }
   filtersToggle.addEventListener("click", function () {

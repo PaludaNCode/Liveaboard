@@ -243,6 +243,69 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_the_phone_fold_hides_every_control_and_says_what_is_on(self) -> None:
+        """One panel, one control to open it.
+
+        The four banks folded and the toolbar did not -- 216px of it at 390 and
+        237 at 360, over a table of 403 and 156 -- so the fold saved a screen
+        of buttons and left a screen of buttons behind it. Both are inside it
+        now, which makes the label load-bearing: a fold hiding an active filter
+        without saying so is a table quietly answering a narrower question than
+        the one on screen.
+        """
+        page = self.open(390, 844)
+        try:
+            for width, height in [(390, 844), (360, 640), (768, 600)]:
+                with self.subTest(size=(width, height)):
+                    page.set_viewport_size({"width": width, "height": height})
+                    page.wait_for_timeout(150)
+                    shut = self.measure(page)
+                    toolbar = page.evaluate(
+                        "()=>Math.round(document.querySelector('.toolbar')"
+                        ".getBoundingClientRect().height)")
+                    self.assertEqual(toolbar, 0,
+                                     "the toolbar is on screen with the fold shut")
+                    page.click("#filtersToggle")
+                    page.wait_for_timeout(250)
+                    opened = self.measure(page)
+                    self.assertGreater(shut["shell"]["h"], opened["shell"]["h"],
+                                       "opening the panel did not cost the table room, "
+                                       "so the panel did not open")
+                    # The control that opens it stays above what it opens.
+                    self.assertTrue(page.evaluate("""() => {
+                      const t = document.getElementById('filtersToggle');
+                      const p = document.getElementById('filterPanel');
+                      return t.getBoundingClientRect().y < p.getBoundingClientRect().y;
+                    }"""), "the toggle sits below the panel it opens")
+                    self.assertFalse(self.measure(page)["docScrolls"],
+                                     "the open panel made the window scroll")
+                    page.click("#filtersToggle")
+                    page.wait_for_timeout(200)
+        finally:
+            page.close()
+
+    def test_the_fold_never_hides_an_active_filter_in_silence(self) -> None:
+        """The label counts against each control's default, so the Include
+        switches -- which start on and change every total without touching a
+        row -- are in it too."""
+        page = self.open(390, 844)
+        self.addCleanup(page.close)
+        label = lambda: page.evaluate(
+            "()=>document.getElementById('filtersToggle').textContent")
+        self.assertEqual(label(), "Filters")
+
+        page.click("#filtersToggle")
+        page.wait_for_timeout(250)
+        for n, selector in enumerate(("#months .chip", "#hideSold"), start=1):
+            page.click(selector)
+            page.wait_for_timeout(300)
+            self.assertEqual(label(), f"Filters · {n} on")
+
+        # And it survives the fold closing, which is the whole point of it.
+        page.click("#filtersToggle")
+        page.wait_for_timeout(250)
+        self.assertEqual(label(), "Filters · 2 on")
+
     # -- the router ----------------------------------------------------------
 
     def test_leaving_the_trips_view_and_returning_keeps_your_place(self) -> None:

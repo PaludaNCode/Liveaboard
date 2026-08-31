@@ -116,6 +116,23 @@
   <h2 class="view-heading">Every departure, priced whole</h2>
 
 
+<!-- Narrow screens only, and it folds away *everything* that filters.
+     The banks alone were a screen and a half of buttons on a phone; the
+     toolbar above them was another 216px at 390 and 237 at 360, against a
+     table of 403 and 156. Folding half the controls left the other half
+     holding the same ground, so the page still opened on more filter than
+     evidence. One panel, one control to open it, and the table gets the room.
+
+     `order:-1` in the stylesheet, because this sits after the toolbar in the
+     markup and has to sit above it on screen: the control that opens a panel
+     belongs at the panel's top edge, and moving it in the DOM would put it
+     ahead of the toolbar on a laptop, where there is no panel and no fold.
+
+     Untouched above 1000px, where all of it fits. -->
+<button type="button" class="filters-toggle" id="filtersToggle"
+        aria-expanded="false" aria-controls="filterPanel">Filters</button>
+
+<div class="filterpanel" id="filterPanel">
 <div class="toolbar">
   <div class="tgroup">
     <span class="tlabel">Include</span><span id="toggles"></span>
@@ -177,13 +194,6 @@
   </div>
 </div>
 
-<!-- Narrow screens only. The three filter banks below are a screen and a half
-     of buttons on a phone, and the layout gives the table whatever height is
-     left over — so they pushed every price off the bottom and the page opened
-     on nothing but filters. Folded away by default there; untouched on a
-     laptop, where they fit. -->
-<button type="button" class="filters-toggle" id="filtersToggle"
-        aria-expanded="false" aria-controls="ports sites boats entry">Filter by port, site, boat or entry bar</button>
 
 <!-- One scroll box, not three. Folded open on a phone the three banks came
      to more than a screen between them -- and each carried its own cap and its
@@ -241,6 +251,7 @@
     <span id="entry"></span>
   </div>
 </div>
+</div><!-- /#filterPanel -->
 
 <main class="shell">
   <table>
