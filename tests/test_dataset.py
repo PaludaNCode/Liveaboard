@@ -2313,3 +2313,67 @@ class TestAnEmptyFeeCellSaysWhy(unittest.TestCase):
         self.assertIn(".unstated {", css)
         self.assertNotIn(".pill.full", css, "the disclosure pill outlived its column")
         self.assertNotIn(".pill.partial", css)
+
+
+class TestTheHideSoldOutChipCarriesItsCount(unittest.TestCase):
+    """The last filter chip with no number on it, and the one whose effect was
+    hardest to guess: 162 of 1,122 published departures are sold out, so
+    pressing it removes about one row in seven and nothing said so until you
+    pressed it and counted what moved (#141).
+
+    Counted the way the On sale chip is -- live, against what the *other*
+    filters leave. The issue asked for a season total and for the chip to
+    vanish at zero, quoting rules that were true of the On sale chip before
+    #129 replaced both: every other number on this page answers "what if I
+    picked this too?", and "nothing here is sold out" is an answer a
+    disappearing control cannot give. The issue's own headline -- the way every
+    other filter carries one -- is what settled it.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.chip = self.app.split('document.getElementById("hideSold")', 1)[1]
+
+    def test_sold_out_is_a_stated_sold_out_and_nothing_else(self) -> None:
+        """`bookable` is "anything but a stated sold-out -- unknown is not a
+        refusal", so `!bookable` keeps that distinction. Counting "not
+        available" would fold the limited sailings into a figure they are not
+        part of."""
+        self.assertIn(
+            'var soldOutCount = D.departures.filter(function (d) { return !d.bookable; })',
+            self.app)
+        self.assertNotIn('availability === "sold_out"', self.chip.split("addEventListener")[0])
+
+    def test_the_filter_can_exclude_itself(self) -> None:
+        """Without the skip, switching the chip on takes its own count to zero
+        and the way back disappears."""
+        self.assertIn('if (skip !== "soldout" && state.hideSoldOut && !dep.bookable)',
+                      self.app)
+        self.assertIn('passes(dep, D.itineraries[dep.itinerary_id], "soldout")', self.chip)
+
+    def test_it_recounts_with_every_other_bank(self) -> None:
+        """Through `BANKS`, not a count taken once at load: any other mechanism
+        is a second one to keep in step."""
+        self.assertIn("BANKS.push(", self.chip)
+        self.assertIn('soldOut.textContent = "Hide sold out " + n;', self.chip)
+
+    def test_the_number_is_what_it_removes(self) -> None:
+        """Which is what the label already says it does -- and it is the figure
+        a reader can use without doing arithmetic against `rows shown`."""
+        self.assertIn("if (dep.bookable) return;", self.chip,
+                      "the chip is counting what it leaves rather than what it hides")
+
+    def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self) -> None:
+        """Dimmed and unclickable, saying 0 -- still clickable while it is
+        switched *on*, so the way out never disappears."""
+        self.assertIn("var dead = n === 0 && !state.hideSoldOut;", self.chip)
+        self.assertIn("soldOut.disabled = dead;", self.chip)
+
+    def test_a_checkout_with_nothing_sold_out_is_not_offered_the_chip(self) -> None:
+        """Unlike On sale it was rendered unconditionally, so it needed the
+        gate rather than inheriting one."""
+        page = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="hideSold" aria-pressed="false" hidden', page)
+        self.assertIn("if (soldOutCount) {", self.app)

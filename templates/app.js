@@ -34,6 +34,13 @@
      chip, the rail, the sale view's empty line and the decision to offer that
      view at all -- so it is counted once here rather than at each of them. */
   var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
+  /* Sold out is a *stated* sold-out and nothing else. `bookable` is "anything
+     but a stated sold-out -- unknown is not a refusal", so counting `!bookable`
+     keeps that distinction for free; counting "not available" would fold the
+     limited sailings into a figure they are not part of. Whether the chip is
+     offered at all turns on this: a checkout where everything is bookable has
+     nothing for it to hide. */
+  var soldOutCount = D.departures.filter(function (d) { return !d.bookable; }).length;
 
   /* Written on every draw by countRail(), which runs from afterDraw -- so they
      are looked up here rather than beside the rest of the view wiring, which
@@ -1259,7 +1266,7 @@
      than "what did I already pick". */
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
-    if (state.hideSoldOut && !dep.bookable) return false;
+    if (skip !== "soldout" && state.hideSoldOut && !dep.bookable) return false;
     if (skip !== "sale" && saleOnly() && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
@@ -2766,7 +2773,45 @@
     });
   }
 
+  /* The last chip with no number on it, and the one whose effect was hardest
+     to guess: it removes about one row in seven and nothing said so until you
+     pressed it and counted what moved (#141).
+
+     Counted the way the On sale chip is counted, which is what "the way every
+     other filter carries one" means -- live, against the rows the *other*
+     filters leave, so it answers "what if I pressed this too?" rather than
+     standing at a season total that disagrees with everything around it. That
+     needs `passes` to let this facet exclude itself, exactly as `months`,
+     `ports`, `boats` and `sale` already do: without it, switching the chip on
+     would take its own count to zero and the way back would disappear.
+
+     The number is what it **removes**, not what it leaves, because that is
+     what the label already says it does.
+
+     Zero keeps the chip, disabled, for the reason the On sale chip keeps its
+     own: "nothing here is sold out" is an answer, and a control that vanishes
+     tells the reader nothing at all. Still clickable while it is switched
+     *on*, so the way out never disappears. */
   var soldOut = document.getElementById("hideSold");
+  if (soldOutCount) {
+    soldOut.hidden = false;
+    BANKS.push({
+      recount: function () {
+        var n = 0;
+        D.departures.forEach(function (dep) {
+          if (dep.bookable) return;
+          if (passes(dep, D.itineraries[dep.itinerary_id], "soldout")) n += 1;
+        });
+        soldOut.textContent = "Hide sold out " + n;
+        var dead = n === 0 && !state.hideSoldOut;
+        soldOut.disabled = dead;
+        soldOut.title = dead
+          ? "Nothing is sold out among the trips these filters leave"
+          : n + (n === 1 ? " sailing is" : " sailings are") +
+            " sold out here" + (state.hideSoldOut ? " and hidden" : "");
+      }
+    });
+  }
   soldOut.addEventListener("click", function () {
     state.hideSoldOut = !state.hideSoldOut;
     soldOut.setAttribute("aria-pressed", state.hideSoldOut);

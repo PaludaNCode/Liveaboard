@@ -130,7 +130,10 @@
     <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
   </div>
   <div class="tgroup">
-    <button type="button" class="chip" id="hideSold" aria-pressed="false">Hide sold out</button>
+    <!-- Hidden until app.js finds a stated sold-out, and carrying the count
+         of what it removes once it does -- the same rule the On sale chip
+         beside it follows, and the one this chip was the last to break. -->
+    <button type="button" class="chip" id="hideSold" aria-pressed="false" hidden>Hide sold out</button>
     <!-- Sailings a seller has marked down, read from the list price it prints
          beside its own — the struck-through figure on each cabin of the
          booking page, and PADI's compareAtPrice. Its label carries the count
