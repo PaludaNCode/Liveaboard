@@ -1601,20 +1601,32 @@
 
   var BANKS = [];
 
-  /* `uncapped` shows the whole bank however long it is, and exactly one bank
-     asks for it. The cap is right for a list -- the eight commonest ports, or
-     boats, is a fair sample of a set with no order of its own, and the rest
-     are one click away. It is wrong for a *ladder*: the entry bar runs least
-     demanding to most, so cutting it at eight leaves every Open Water rung on
-     screen and folds all nine Advanced ones away, and the bar 46% of these
-     sailings actually set -- Advanced + 50 dives, on 289 rows -- is behind a
-     "+ 9 more" a reader has no reason to open. Sorting it by popularity
-     instead would fix the cap and break the reading: see the ENTRY bank.
+  /* `opts.limit` overrides the default cap, and `opts.moreWord` the disclosure's
+     noun. Exactly one bank sets either, and the reason is that the cap means
+     something different to a *ladder* than to a list.
 
-     Seventeen short chips is roughly what the Ports bank already costs, and
-     the panel they sit in scrolls, which is what the markup's own note says
-     the cap is for. */
-  function chips(host, items, picked, numeric, skip, pick, uncapped) {
+     For ports or boats the eight commonest are a fair sample of a set with no
+     order of its own, and "+ 69 more" is an honest offer. The entry bar is
+     ordered least demanding to most, so a count-based cut is arbitrary and
+     brutal: at 8 it hides 738 of 1122 rows, every Advanced rung, and the
+     single biggest bar there is -- Advanced + 50 dives, on 289 rows -- which
+     sorts *last* precisely because it is the strictest. Sorting the bank by
+     popularity instead would fix the cap and break the reading.
+
+     So the entry bank cuts at its certification boundary rather than at a
+     number: Open Water rungs shown, Advanced rungs behind the disclosure. That
+     is a fold a reader can predict, and the label says which way it opens --
+     "+ 9 stricter" rather than "+ 9 more", because on a ladder the direction
+     is the information. It happens to be 8 chips today, which is what the
+     default cap would have given anyway; the difference is that it stays on
+     the boundary when the fleet changes or the screen narrows.
+
+     This bank was uncapped until then, on the reasoning that seventeen short
+     chips cost about what Ports already does and the panel scrolls. Capping it
+     is a deliberate reversal: the panel is long enough that the reversal is
+     worth the fold, given the fold is meaningful. */
+  function chips(host, items, picked, numeric, skip, pick, opts) {
+    opts = opts || {};
     var node = document.getElementById(host);
     var expanded = false;
     var counts = null;
@@ -1637,7 +1649,7 @@
         var v = numeric ? +it.id : it.id;
         return counts[it.id] || picked.has(v);
       });
-      var limit = uncapped ? live.length : chipLimit();
+      var limit = opts.limit ? opts.limit(live) : chipLimit();
       var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
         return n < limit || picked.has(v);
@@ -1652,7 +1664,8 @@
       }).join("") +
         (hidden > 0 || expanded
           ? '<button class="chip more" data-more="1" aria-expanded="' + expanded + '">' +
-            (expanded ? "− fewer" : "+ " + hidden + " more") + "</button>"
+            (expanded ? "− fewer"
+               : "+ " + hidden + " " + (opts.moreWord || "more")) + "</button>"
           : "");
     }
 
@@ -2511,8 +2524,22 @@
         function (i) { return i.dive_sites || []; });
   chips("boats", BOATS, state.boats, false, "boats",
         function (i) { return [i.boat]; });
+  /* Cut where the certification changes, not after N chips: the rungs on
+     screen are then "every Open Water bar" and the fold is "the Advanced ones",
+     which a reader can predict before opening it. Falls back to the ordinary
+     cap if the ladder ever has only one certification in it, because a fold
+     that hides nothing meaningful should just be the normal one. */
   chips("entry", ENTRY, state.entry, false, "entry",
-        function (i) { return [entryText(i)]; }, true);
+        function (i) { return [entryText(i)]; },
+        {
+          moreWord: "stricter",
+          limit: function (live) {
+            var first = live.length ? live[0].id.split(" + ")[0] : "";
+            var n = 0;
+            while (n < live.length && live[n].id.split(" + ")[0] === first) n += 1;
+            return n === live.length ? chipLimit() : n;
+          }
+        });
   chips("sellers", SELLERS, state.sellers, false, "sellers",
         function (i, dep) { return [sellerOf(dep)]; });
 

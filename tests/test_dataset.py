@@ -1973,3 +1973,52 @@ class TestTheOnSaleChipCountsWhatIsOnScreen(unittest.TestCase):
         click that does nothing."""
         css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
         self.assertIn("button.chip:disabled", css)
+
+
+class TestTheEntryBankFoldsAtItsCertificationBoundary(unittest.TestCase):
+    """The entry bank has a "show more" now, and it must not cut at a count.
+
+    Every other bank caps at eight, because the eight commonest ports or boats
+    are a fair sample of a set with no order of its own. The entry bar is a
+    *ladder*, least demanding to most, and a count-based cut there is arbitrary
+    and brutal: at eight it folds away 738 of 1122 rows, every Advanced rung,
+    and the single biggest bar on the page -- Advanced + 50 dives, on 289 rows
+    -- which sorts last precisely because it is the strictest.
+
+    So it cuts where the certification changes instead. That puts every Open
+    Water rung on screen and every Advanced rung behind the disclosure, which
+    is a fold a reader can predict, and the label says which way it opens.
+
+    Pinned because the obvious tidy-up -- "why does this one bank pass a limit
+    function, let us just use chipLimit()" -- silently restores exactly the
+    behaviour the fold was designed to avoid, and nothing on the page would
+    look wrong afterwards.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self):
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.entry = self.app[self.app.index('chips("entry"'):]
+        self.entry = self.entry[:self.entry.index('chips("sellers"')]
+
+    def test_the_entry_bank_passes_a_boundary_limit_rather_than_the_count(self):
+        self.assertIn("limit: function (live)", self.entry,
+                      "the entry bank no longer computes its own cut; a plain "
+                      "chipLimit() hides every Advanced rung, 738 of 1122 rows")
+        self.assertIn('split(" + ")[0]', self.entry,
+                      "the cut must key on the certification, which is the "
+                      "part of the label before the dive count")
+
+    def test_the_disclosure_says_which_way_it_opens(self):
+        """"+ 9 more" is uninformative on a ladder; the direction is the point."""
+        self.assertIn('moreWord: "stricter"', self.entry)
+        self.assertIn('opts.moreWord || "more"', self.app,
+                      "chips() must still default to 'more' for the banks that "
+                      "are lists rather than ladders")
+
+    def test_a_single_certification_falls_back_to_the_ordinary_cap(self):
+        """A fold that hides nothing meaningful should just be the normal one."""
+        self.assertIn("chipLimit()", self.entry,
+                      "no fallback: if the ladder ever holds one certification "
+                      "the boundary rule would show every rung uncapped")
