@@ -1327,3 +1327,108 @@ class TestTheBuiltStampIsTheBuild(unittest.TestCase):
     def test_the_toolbar_prints_the_build(self) -> None:
         app = (ROOT / "templates" / "app.js").read_text(encoding="utf-8")
         self.assertIn('" · built " + (D.meta.built || D.meta.generated)', app)
+
+
+class TestTheThreeViews(unittest.TestCase):
+    """Trips, on sale and history are three views of one document.
+
+    Separate HTML files were the alternative and were rejected on weight: the
+    payload is inlined, and the sale view is the trips view's own rows with the
+    markdown filter held on, so a second document would ship those megabytes
+    again to answer a question the first one already holds the data for. That
+    makes the split a set of panes and a rail rather than a set of files, and
+    every rule below is a way for that to fail quietly rather than loudly.
+    """
+
+    PAGE = ROOT / "templates" / "index.html"
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+
+    def page(self) -> str:
+        return self.PAGE.read_text(encoding="utf-8")
+
+    def app(self) -> str:
+        return self.APP.read_text(encoding="utf-8")
+
+    def css(self) -> str:
+        return self.CSS.read_text(encoding="utf-8")
+
+    def test_each_view_has_a_pane_and_a_way_to_reach_it(self) -> None:
+        """Half a view is worse than none: a rail item pointing at nothing, or
+        a pane nothing can open, is a section that exists only in the markup."""
+        page, app = self.page(), self.app()
+        for pane in ('id="tripsPane"', 'id="historyPane"'):
+            self.assertIn(pane, page)
+        for item in ('id="navTrips"', 'id="navSale"', 'id="navHistory"'):
+            self.assertIn(item, page)
+        for target in ('href="#trips"', 'href="#sale"', 'href="#history"'):
+            self.assertIn(target, page, "a rail item addresses no view")
+        self.assertIn('VIEWS = ["trips", "sale", "history"]', app)
+        self.assertIn("hashchange", app, "a view cannot be linked to or reloaded into")
+
+    def test_the_sale_view_is_the_filter_and_not_a_copy_of_the_table(self) -> None:
+        """One answer to "is the markdown filter on", not two.
+
+        The chip and the view are the same filter reached two ways. Read
+        separately they drift, and the drift is silent: a table showing every
+        sailing under a heading that says only the discounted ones.
+        """
+        app = self.app()
+        self.assertIn('function saleOnly() { return state.onSaleOnly || state.view === "sale"; }',
+                      app, "the sale view and the On sale chip are two filters now")
+        self.assertIn("if (saleOnly() && !dep.sale) return false;", app,
+                      "the row filter no longer reads the view")
+        self.assertIn('onSale.hidden = !onSaleCount || name === "sale"', app,
+                      "the chip is still offered on the view that already holds it down")
+
+    def test_a_view_with_nothing_behind_it_is_not_offered(self) -> None:
+        """The On sale chip's own rule, applied to the section it grew into: a
+        control that can do nothing must not be dressed as one that can. A
+        checkout with no markdown read and no deals book has no sale view, and
+        typing its name into the address bar must not conjure one."""
+        app = self.app()
+        self.assertIn("saleView = onSaleCount > 0 || dealsShown", app)
+        self.assertIn('if (name === "sale" && !saleView) name = "trips";', app)
+
+    def test_the_history_view_carries_the_report_and_the_files(self) -> None:
+        """Both placeholders moved out of the method footer together. Leaving
+        one behind would put the downloads under a heading about fee arithmetic
+        and the report on a page of its own."""
+        page = self.page()
+        history = page.split('id="historyPane"', 1)[1].split("</section>", 1)[0]
+        self.assertIn("__CHANGES__", history, "the change report is not in the history view")
+        self.assertIn("__DOWNLOADS__", history, "the downloads are not in the history view")
+        self.assertEqual(page.count("__CHANGES__"), 1, "the report is rendered twice")
+        self.assertEqual(page.count("__DOWNLOADS__"), 1, "the downloads are listed twice")
+
+    def test_hidden_beats_display_on_every_pane(self) -> None:
+        """Which view is on screen is the `hidden` attribute, and `.pane` sets
+        `display:flex`.
+
+        An author `display` beats the user agent's `[hidden] { display:none }`
+        whatever its specificity, so without this rule the history view drew on
+        top of the table and every pane was visible at once. It failed exactly
+        this way once; the rule is one line and the bug is silent.
+        """
+        self.assertIn("[hidden] { display:none !important; }", self.css())
+
+    def test_the_deals_panel_and_the_table_share_the_view(self) -> None:
+        """Opening the index must neither hide what it indexes nor fail to
+        open.
+
+        Two measured failures, and the rules that answer them. Sized against a
+        table asking for its whole 6,600px of rows, the panel opened to an 87px
+        slot -- so the table is measured from zero while it is open, which is
+        the fix the filter banks already use. Sized as a sibling of the pane, it
+        took its 34vh out of the pane's box and the toolbar inside that box
+        painted over the footer -- so it sits inside the pane, and the one
+        scrolling region gives way first, as it did before there were views.
+        """
+        css, page = self.css(), self.page()
+        self.assertIn("#deals[open] ~ .shell { flex-basis:0; }", css,
+                      "the table crowds the panel it is opened beside")
+        self.assertIn(".shell { flex:1 1 auto; min-height:0;", css,
+                      "the table's own scroller lost the minimum the footer depends on")
+        pane = page.split('id="tripsPane"', 1)[1]
+        self.assertLess(pane.index('id="deals"'), pane.index('class="toolbar"'),
+                        "the deals panel is not inside the pane, above the toolbar")

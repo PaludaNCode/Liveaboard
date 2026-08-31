@@ -161,6 +161,15 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Fury Shoals* was changed in both when the two drifted apart. Do not lengthen this
   table without counting the spellings first, and count in the *names* rather
   than the titles: counting folded titles hid *Ras Muhammad* entirely.
+- **One file, three views.** Trips, on sale and history are panes `showView`
+  swaps in `app.js`, addressed by the URL hash — never three documents. The
+  sale view is the trips table with the markdown filter held down
+  (`saleOnly()`, read by `passes`), so splitting it out would ship the inlined
+  payload a second time to say what the first copy already knows, and reading
+  the filter in two places is two answers to one question. A new section is a
+  pane and a rail item. Which pane is on screen is the `hidden` attribute, and
+  `[hidden] { display:none !important }` is what makes that beat the panes' own
+  `display:flex` — without it every view draws at once.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per

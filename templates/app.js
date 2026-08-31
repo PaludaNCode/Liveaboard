@@ -30,6 +30,11 @@
      can drift -- the column and the sentence in the expanded row read it. */
   var PADI_SAME = 5;
 
+  /* How many sailings a seller has marked down. Read by four things -- the
+     chip, the rail, the sale view's empty line and the decision to offer that
+     view at all -- so it is counted once here rather than at each of them. */
+  var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
+
   var euro = new Intl.NumberFormat("en-IE", {
     style: "currency", currency: D.meta.currency,
     minimumFractionDigits: 0, maximumFractionDigits: 0
@@ -46,6 +51,12 @@
        other filter here: a page that opened showing 268 of 1,122 rows would
        be answering a question nobody asked. */
     onSaleOnly: false,
+    /* Which of the three views is on screen -- "trips", "sale" or "history".
+       Set by showView() before the first draw, and read by passes(): the sale
+       view is not a copy of the table, it is this table with the markdown
+       filter held on, and holding it here rather than by pressing the chip
+       means one answer to "is the sale filter on" instead of two. */
+    view: null,
     toggles: {}, open: null,
     /* Rows the visitor has marked to keep their place while scrolling
        sideways. Keyed on the departure id rather than the row index, so a
@@ -989,6 +1000,11 @@
 
   /* ---------- filtering and sorting ---------- */
 
+  /* Only sailings a seller has marked down: the chip on the trips view, and
+     the sale view itself, which is that filter as a destination. Two ways to
+     ask for one thing, so there is one place that answers. */
+  function saleOnly() { return state.onSaleOnly || state.view === "sale"; }
+
   /* One predicate, so the table and the filter counts can never disagree
      about what a filter means. `skip` names a facet to ignore, which is what
      makes a chip's number the answer to "what if I picked this too?" rather
@@ -996,7 +1012,7 @@
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
     if (state.hideSoldOut && !dep.bookable) return false;
-    if (state.onSaleOnly && !dep.sale) return false;
+    if (saleOnly() && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
@@ -1302,10 +1318,19 @@
         '" data-k="' + c.k + '"' + full + ">" + label + " " + dir + "</th>";
     }).join("") + "</tr>";
 
+    /* An empty table under the sale view is not an empty result: the filter
+       there is the view, so "nothing matches those filters" would name a
+       control the visitor never touched. Say what the data does not carry
+       instead -- and say it about the reading, never about the sellers, who
+       have not been asked anything here. */
+    var nothing = saleOnly() && !onSaleCount
+      ? "No sailing in this build carries a list price beside the one it is " +
+        "sold at, so there is no markdown to show."
+      : "Nothing matches those filters.";
     document.getElementById("body").innerHTML = rows.length
       ? renderRows(rows, 0, target)
-      : '<tr><td class="empty" colspan="' + (COLS.length + 1) +
-        '">Nothing matches those filters.</td></tr>';
+      : '<tr><td class="empty" colspan="' + (COLS.length + 1) + '">' +
+        nothing + "</td></tr>";
     drawn = Math.min(rows.length, target);
     afterDraw(rows);
   }
@@ -1690,12 +1715,16 @@
     return table;
   }
 
+  /* Returns whether there was anything to draw. The panel's own visibility is
+     showView()'s to decide -- it belongs to the sale view -- but whether it
+     has content at all is a fact about the data, and the rail needs it too:
+     with no markdown and no deals book there is no sale view to offer. */
   function drawDeals() {
     var deals = D.deals;
     var host = document.getElementById("deals");
-    if (!host || !deals) return;
+    if (!host || !deals) return false;
     var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
-    if (!offers.length && !fleet.length) return;
+    if (!offers.length && !fleet.length) return false;
 
     var changed = ((deals.changes || {}).new || []).length +
       ((deals.changes || {}).withdrawn || []).length +
@@ -1721,7 +1750,7 @@
       body.appendChild(fleetTable(fleet));
     }
 
-    if (!offers.length) { host.hidden = false; return; }
+    if (!offers.length) return true;
 
     body.appendChild(el("h4", null, "Advertised on padi.com"));
     body.appendChild(el("p", "deals-note",
@@ -1752,7 +1781,7 @@
         "USA, reach us at all."));
     }
 
-    host.hidden = false;
+    return true;
   }
 
   /* ---------- wiring ---------- */
@@ -2120,11 +2149,13 @@
      is on screen, deliberately: it says how much there is to find, not how
      much the filters have already left, and a count that fell to 0 under an
      unrelated month filter would read as "no sales" rather than "none in
-     June". */
+     June".
+
+     The chip belongs to the trips view. On the sale view the filter is the
+     view, so showView() hides a control that could only ever be pressed to no
+     effect. */
   var onSale = document.getElementById("onSale");
-  var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
   if (onSaleCount) {
-    onSale.hidden = false;
     onSale.textContent = "On sale " + onSaleCount;
     onSale.addEventListener("click", function () {
       state.onSaleOnly = !state.onSaleOnly;
@@ -2275,7 +2306,106 @@
        apart. */
     " · built " + (D.meta.built || D.meta.generated);
 
+  /* ---------- the three views ---------- */
+
+  /* Trips, on sale, and the change history, switched in one document rather
+     than served as three. The payload is inlined and the sale view is the
+     trips view's own rows with the markdown filter held on, so a second
+     document would ship those megabytes again to answer a question the first
+     one already holds the data for.
+
+     The hash is the address -- #trips, #sale, #history -- which is the whole
+     reason a view can be linked to or reloaded into. Nothing else on this page
+     writes to the URL, so there is nothing to collide with. */
+  var VIEWS = ["trips", "sale", "history"];
+  var panes = {
+    trips: document.getElementById("tripsPane"),
+    history: document.getElementById("historyPane")
+  };
+  var navItems = {
+    trips: document.getElementById("navTrips"),
+    sale: document.getElementById("navSale"),
+    history: document.getElementById("navHistory")
+  };
+  var saleLead = document.getElementById("saleLead");
+  var tripsLead = document.getElementById("tripsLead");
+  var dealsHost = document.getElementById("deals");
+  var statsHost = document.getElementById("stats");
+  /* Whether the deals panel found anything, and therefore whether there is a
+     sale view to offer at all. Both settled at boot, below. */
+  var dealsShown = false, saleView = false;
+
+  function viewFromHash() {
+    var name = (window.location.hash || "").replace(/^#/, "");
+    return VIEWS.indexOf(name) < 0 ? "trips" : name;
+  }
+
+  function showView(name) {
+    if (VIEWS.indexOf(name) < 0) name = "trips";
+    /* A view with nothing behind it is not offered and cannot be reached by
+       typing its name into the address bar either. Same rule as the On sale
+       chip's: a control that does nothing must not be dressed as one that
+       does. */
+    if (name === "sale" && !saleView) name = "trips";
+    if (name === state.view) return;
+
+    var wasSale = state.view === "sale";
+    state.view = name;
+    var table = name !== "history";
+
+    panes.trips.hidden = !table;
+    panes.history.hidden = table;
+    /* One lead, never two stacked. The trips lead is 166px of prose and the
+       sale lead says the same thing about a narrower set of rows; both at once
+       cost the table 300px on the view that has the fewest rows to show. */
+    saleLead.hidden = name !== "sale";
+    tripsLead.hidden = name !== "trips";
+    /* The panel appears on the view it belongs to, and stays closed until it
+       is asked for -- as it did on the single page. Opening it by default was
+       tried and measured: its cap over a toolbar, three filter banks and a
+       lead left 31px of table at 1440x900, an index to a list with the list
+       pushed off the screen. The summary line carries the overview, which is
+       the part that answers at a glance. */
+    if (dealsHost) dealsHost.hidden = !(name === "sale" && dealsShown);
+    /* Rows shown, boats, itineraries: they count what the table is showing, so
+       they belong to the views that have one. Left up on the history view they
+       would be three numbers about a table that is not on screen. */
+    statsHost.hidden = !table;
+    /* The chip is the filter; the sale view *is* the filter. Both at once
+       would be a switch that cannot be switched off. */
+    onSale.hidden = !onSaleCount || name === "sale";
+
+    VIEWS.forEach(function (id) {
+      var item = navItems[id];
+      if (!item) return;
+      if (id === name) item.setAttribute("aria-current", "page");
+      else item.removeAttribute("aria-current");
+    });
+
+    /* Trips and sale are two different lists, so crossing between them starts
+       at the top of one, exactly as changing any other filter does. Returning
+       from the history view filtered nothing, so what was drawn is kept. */
+    if (table) draw(!wasSale && name !== "sale");
+  }
+
+  window.addEventListener("hashchange", function () { showView(viewFromHash()); });
+
   drawNotice();
-  drawDeals();
-  draw();
+  dealsShown = drawDeals();
+  saleView = onSaleCount > 0 || dealsShown;
+
+  document.getElementById("navTripsCount").textContent =
+    D.meta.counts.departures.toLocaleString("en-IE");
+  if (saleView) {
+    navItems.sale.hidden = false;
+    /* A count only where there are rows to count. PADI can be advertising a
+       sale on boats whose sailings carry no marked-down fare here, and a "0"
+       beside the name would read as "no sale on" over a panel listing one. */
+    document.getElementById("navSaleCount").textContent =
+      onSaleCount ? onSaleCount.toLocaleString("en-IE") : "";
+  }
+
+  /* Draws the table as part of settling the view, so there is no first paint
+     of a view the address bar did not ask for. */
+  showView(viewFromHash());
 })();

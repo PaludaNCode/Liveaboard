@@ -67,6 +67,13 @@ behind, so a visitor on a phone in a dive shop downloads all of it before seeing
 a row. Fees are written once per itinerary rather than once per departure, which
 is what they are a property of.
 
+That file holds three views, switched by the rail on the left and addressed by
+the URL hash: the trips table (`#trips`), the sailings a seller has marked down
+(`#sale`), and the change history (`#history`). Views rather than three files,
+for the reason above — the sale view is the trips view's own rows with the
+markdown filter held on, so a second document would ship the whole payload
+again to answer a question the first one already holds the data for.
+
 ## Design
 
 **Fee tiers** decide what counts toward the total:

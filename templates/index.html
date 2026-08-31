@@ -16,9 +16,15 @@
 <body>
 
 <div class="masthead">
+  <!-- One lead paragraph, and which one depends on the view. They sit here
+       rather than over each pane for the room: this slot is beside the counts
+       rather than above the table, so the paragraph costs the rows nothing,
+       which is the argument that put the thesis here in the first place. The
+       history view shows neither -- it is a document with its own opening
+       line, inside the pane that scrolls. -->
   <div>
     <h1>Egypt liveaboards &middot; May&ndash;August 2027</h1>
-    <p class="sub">
+    <p class="sub" id="tripsLead">
       The advertised price is not the price. Every departure below is shown at
       the <strong>total</strong> &mdash; the advertised berth plus marine park
       fees, port dues, fuel and everything else that lands on the bill later.
@@ -30,8 +36,19 @@
       where each number came from; click a row to mark it, so you can still
       tell which is which once you have scrolled sideways.
     </p>
+    <p class="sub" id="saleLead" hidden>
+      Only the sailings a seller has marked down. The markdown is the list price a
+      seller prints beside the one it charges &mdash; struck through on the booking
+      page, or stated outright by PADI Travel &mdash; never the &ldquo;20%
+      Off&rdquo; an operator writes into a trip name; and a row shows a percentage
+      only from the seller whose fare it prints. It is what a seller claimed the
+      day its pages were read, and it can end overnight.
+    </p>
   </div>
-  <div class="stats">
+  <!-- Counts of what the table is showing, so they belong to the two views
+       that have a table. app.js hides them on the history view rather than
+       leaving "0 rows shown" over a page with no rows in it. -->
+  <div class="stats" id="stats">
     <div class="stat"><b id="shown">0</b><span>rows shown</span></div>
     <div class="stat"><b id="nboats">0</b><span>boats</span></div>
     <div class="stat"><b id="nitin">0</b><span>itineraries</span></div>
@@ -40,8 +57,76 @@
 
 <div id="dataNotice"></div>
 
+<!-- Three views of one dataset, in one document.
+     Separate HTML files were the other option and were rejected on weight: the
+     payload is inlined and the sale view is the same rows filtered, so a second
+     document would ship those megabytes again to say something the first one
+     already knows. The rail switches which panes are shown; app.js keeps the
+     hash (#trips, #sale, #history) in step, so a view is linkable. -->
+<div class="workspace">
+
+<nav class="rail" aria-label="Sections">
+  <a class="rail-item" id="navTrips" href="#trips">
+    <span class="rail-name">Trips</span>
+    <span class="rail-count" id="navTripsCount"></span>
+    <span class="rail-note">every departure, priced whole</span>
+  </a>
+  <!-- Hidden until app.js finds a markdown or PADI's deals book, for the same
+       reason the On sale chip is: a section that opens on nothing is a promise
+       the data cannot keep. -->
+  <a class="rail-item" id="navSale" href="#sale" hidden>
+    <span class="rail-name">On sale</span>
+    <span class="rail-count" id="navSaleCount"></span>
+    <span class="rail-note">what a seller has marked down</span>
+  </a>
+  <a class="rail-item" id="navHistory" href="#history">
+    <span class="rail-name">History</span>
+    <span class="rail-note">what moved on the last refresh</span>
+  </a>
+</nav>
+
+<div class="views">
+
+<!-- The history view. Everything here used to be one wide cell at the bottom
+     of the method footer, where a change report -- fixed-width text that wants
+     the whole width and a screen of height -- was folded inside a panel about
+     something else. -->
+<section class="pane history-pane" id="historyPane" hidden>
+  <div class="history-body">
+    <h2>What changed on the last refresh</h2>
+    <p class="history-lead">
+      One entry per refresh: departures added, fares moved, berths sold out. It
+      is a diff between two committed days rather than a claim about today, and
+      it never drops a row without saying so &mdash; where a block is capped or
+      a sub-euro move suppressed as source rounding, the report prints the count
+      it left out. A vessel losing <em>every</em> departure is a failed fetch
+      rather than a cancelled season, and is reported as one.
+    </p>
+    __CHANGES__
+    <h3>The data itself</h3>
+    <p>
+      Everything on this page, in files you can keep. A trip whose operator
+      never stated its required extras has no total here either &mdash; the
+      column is empty and says why, because turning &ldquo;not disclosed&rdquo;
+      into a number the moment it reaches a spreadsheet would make the least
+      forthcoming operators look like the cheapest.
+    </p>
+    __DOWNLOADS__
+  </div>
+</section>
+
+<!-- The table, and the filters over it. Shown by both the trips view and the
+     sale view: the sale view is these same rows with the markdown filter held
+     on, which is why it is one pane and not a copy of one. -->
+<div class="pane" id="tripsPane">
+
 <!-- What the other seller is discounting today, and what moved since the last
-     day the deals book holds.
+     day the deals book holds. Inside the pane rather than above it, so the
+     toolbar, the filter banks and the table are one flex column: sized as a
+     sibling of the pane it took its 34vh out of the pane's *box*, and the
+     toolbar and banks inside that box then painted straight over the footer on
+     a short window. One column, and the table gives way first, as it always
+     has.
 
      A `details` rather than an open panel, and the summary carries the whole
      overview -- how many sailings are discounted, how many changed, and the day
@@ -161,6 +246,10 @@
     <tbody id="body"></tbody>
   </table>
 </main>
+
+</div><!-- /#tripsPane -->
+</div><!-- /.views -->
+</div><!-- /.workspace -->
 
 <!-- The cabin ladder behind a Places figure, opened on hover or click.
      Outside <main> deliberately: the table scrolls sideways inside a clipping
@@ -450,19 +539,6 @@
         you would look for them: the Giannis&nbsp;D is Abu Nuhas, Numidia is the
         Brothers, Shaab Claudio is Fury Shoal.
       </p>
-    </div>
-    <div class="footer-wide">
-      <h3>The data itself</h3>
-      <p>
-        Everything on this page, in files you can keep. A trip whose operator
-        never stated its required extras has no total here either &mdash; the
-        column is empty and says why, because turning &ldquo;not disclosed&rdquo;
-        into a number the moment it reaches a spreadsheet would make the least
-        forthcoming operators look like the cheapest.
-      </p>
-      __DOWNLOADS__
-      <h3>What changed on the last refresh</h3>
-      __CHANGES__
     </div>
     <div>
       <h3>Currency</h3>

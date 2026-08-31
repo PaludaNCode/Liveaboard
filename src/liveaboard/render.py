@@ -365,9 +365,19 @@ def _downloads_html(available: list[str]) -> str:
 
 
 def _changes_html(entry: str, linked: bool) -> str:
-    """The last refresh's report, verbatim, in a block that scrolls."""
+    """The last refresh's report, verbatim, in a block that scrolls.
+
+    With no report to show the view says so. It was allowed to render nothing
+    when it was one item at the bottom of the method footer; it is a view of
+    its own now, and a heading over blank space reads as a page that failed
+    rather than as a checkout in which nothing has been refreshed yet. The
+    sentence is about this build, not about the fleet: no refresh has been
+    *recorded* here, which is not the claim that nothing moved.
+    """
     if not entry:
-        return ""
+        return ('<p class="history-lead">No refresh is recorded in this build, '
+                "so there is nothing to compare against. The log is written by "
+                "<code>liveaboard.cli changes</code> on each refresh.</p>")
     more = ('<p><a href="data/CHANGES.md">Every refresh before this one</a>.</p>'
             if linked else "")
     return (f'<pre class="changelog">{_escape(entry)}</pre>{more}')
