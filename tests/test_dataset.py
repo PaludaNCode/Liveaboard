@@ -2359,17 +2359,34 @@ class TestTheHideSoldOutChipCarriesItsCount(unittest.TestCase):
         self.assertIn("BANKS.push(", self.chip)
         self.assertIn('soldOut.textContent = "Hide sold out " + n;', self.chip)
 
-    def test_the_number_is_what_it_removes(self) -> None:
-        """Which is what the label already says it does -- and it is the figure
-        a reader can use without doing arithmetic against `rows shown`."""
-        self.assertIn("if (dep.bookable) return;", self.chip,
-                      "the chip is counting what it leaves rather than what it hides")
+    def test_the_number_is_what_pressing_it_leaves(self) -> None:
+        """What every other chip on this page means by a number: On sale says
+        how many rows you get, a month chip says how many rows you get.
+
+        This shipped once counting what it *removes* -- the sold-out sailings
+        themselves -- on the reading that a control labelled "hide" should be
+        sized by what it hides. That makes it the one chip whose number has to
+        be subtracted from something before it means anything, and it puts the
+        largest number on the emptiest result.
+        """
+        self.assertIn("if (!dep.bookable) return;", self.chip,
+                      "the chip is counting what it hides rather than what "
+                      "pressing it leaves")
 
     def test_a_count_of_zero_keeps_the_chip_rather_than_hiding_it(self) -> None:
         """Dimmed and unclickable, saying 0 -- still clickable while it is
-        switched *on*, so the way out never disappears."""
+        switched *on*, so the way out never disappears.
+
+        Zero means something different here than on the other chips now that
+        the number is what pressing it leaves: every trip these filters leave
+        is sold out, and pressing would empty the table. The title says that
+        rather than the other chips' "nothing here matches".
+        """
         self.assertIn("var dead = n === 0 && !state.hideSoldOut;", self.chip)
         self.assertIn("soldOut.disabled = dead;", self.chip)
+        self.assertIn("would empty ", self.chip,
+                      "zero here is 'everything left is sold out', which is "
+                      "not what the other chips' zero means")
 
     def test_a_checkout_with_nothing_sold_out_is_not_offered_the_chip(self) -> None:
         """Unlike On sale it was rendered unconditionally, so it needed the

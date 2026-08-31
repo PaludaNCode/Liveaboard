@@ -2785,8 +2785,14 @@
      `ports`, `boats` and `sale` already do: without it, switching the chip on
      would take its own count to zero and the way back would disappear.
 
-     The number is what it **removes**, not what it leaves, because that is
-     what the label already says it does.
+     The number is what pressing it **leaves**, which is what every other chip
+     on this page means by a number: On sale says how many rows you get, a
+     month chip says how many rows you get. This one shipped once counting what
+     it removes -- the sold-out sailings themselves -- on the reading that the
+     label says "hide" so the figure should be the size of what is hidden. That
+     makes it the one chip whose number has to be subtracted from something
+     before it means anything, and it puts the largest number on the emptiest
+     result.
 
      Zero keeps the chip, disabled, for the reason the On sale chip keeps its
      own: "nothing here is sold out" is an answer, and a control that vanishes
@@ -2799,16 +2805,22 @@
       recount: function () {
         var n = 0;
         D.departures.forEach(function (dep) {
-          if (dep.bookable) return;
+          if (!dep.bookable) return;
           if (passes(dep, D.itineraries[dep.itinerary_id], "soldout")) n += 1;
         });
         soldOut.textContent = "Hide sold out " + n;
+        /* Zero here is "every trip these filters leave is sold out", which is
+           a different sentence from the other chips' zero and worth saying in
+           full: the rows are there, they are all unbookable, and pressing this
+           would empty the table. */
         var dead = n === 0 && !state.hideSoldOut;
         soldOut.disabled = dead;
         soldOut.title = dead
-          ? "Nothing is sold out among the trips these filters leave"
+          ? "Every trip these filters leave is sold out, so this would empty "
+            + "the table"
           : n + (n === 1 ? " sailing is" : " sailings are") +
-            " sold out here" + (state.hideSoldOut ? " and hidden" : "");
+            " still bookable here" +
+            (state.hideSoldOut ? " — the rest are hidden" : "");
       }
     });
   }

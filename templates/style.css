@@ -262,7 +262,6 @@ h1 {
   font-size:10px; text-transform:uppercase; letter-spacing:.09em;
   color:var(--ink-faint); margin-right:2px;
 }
-.hint { margin:0; padding:7px 18px; color:var(--ink-faint); font-size:11px; }
 
 button.chip {
   font:inherit; font-size:12px; cursor:pointer; padding:3px 10px;
@@ -776,7 +775,6 @@ a { color:var(--accent); }
  * reorder and the narrow sticky widths wait for an actually narrow screen.
  */
 @media (max-width: 1000px) {
-  .hint { display:none; }
 
   .filters-toggle {
     display:block; width:100%; text-align:left; font:inherit; font-size:11px;
