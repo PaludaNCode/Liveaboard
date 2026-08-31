@@ -12,12 +12,19 @@ to sit and watch afterwards.
 
     python3 tools/ship.py                     # the full gate, nothing else
     python3 tools/ship.py --fast              # the inner loop, no browser
-    python3 tools/ship.py --push -m "..."     # gate, then commit and push
+    python3 tools/ship.py --push -m "..."     # gate, then commit on a branch
+    python3 tools/ship.py --merge             # gate, then merge that branch
 
 `--fast` is for the edit-run-edit loop and skips the two slowest things, which
 are also the two least likely to be what you just broke: `test_promote_check`
 re-promotes the whole dataset five times (20s) and `test_layout` drives
 Chromium (13s). It is not a substitute for the gate and says so on the way out.
+
+**`--push` will not commit on `main`.** It branches first, from the message,
+and `--merge` brings that branch back with a merge commit. Eleven changes went
+straight onto `main` before this existed -- no branch, nothing to review, and
+"merge to prod" meaning nothing because the work was already there. A default
+that has to be remembered is not a default.
 """
 
 from __future__ import annotations
@@ -97,9 +104,30 @@ def gate(fast: bool, workers: int) -> bool:
     return not failed
 
 
+TRUNK = "main"
+
+
 def git(*argv: str) -> str:
     return subprocess.run(["git", *argv], cwd=ROOT, capture_output=True,
                           text=True, check=True).stdout.strip()
+
+
+def run_git(*argv: str) -> int:
+    return subprocess.run(["git", *argv], cwd=ROOT).returncode
+
+
+def branch_name(message: str) -> str:
+    """A branch named after the change, from its own commit subject.
+
+    Slugged rather than numbered: a list of `claude/143-2` tells nobody what is
+    on them, and the subject is already a sentence somebody wrote about this
+    change.
+    """
+    import re
+
+    subject = message.strip().splitlines()[0].lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", subject).strip("-")[:52].rstrip("-")
+    return f"claude/{slug or 'change'}"
 
 
 def main() -> int:
@@ -107,13 +135,18 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--fast", action="store_true",
                     help="skip promote_check and the browser suite (inner loop)")
-    ap.add_argument("--push", action="store_true", help="commit and push if the gate passes")
+    ap.add_argument("--push", action="store_true",
+                    help="commit and push if the gate passes, on a branch")
+    ap.add_argument("--merge", action="store_true",
+                    help="merge the current branch into the trunk, behind the gate")
     ap.add_argument("-m", "--message", help="commit message (required with --push)")
     ap.add_argument("--workers", type=int, default=6)
     args = ap.parse_args()
 
     if args.push and not args.message:
         ap.error("--push needs -m")
+    if args.merge and args.push:
+        ap.error("--merge and --push are two steps, not one")
 
     print(f"gate{' (fast)' if args.fast else ''}:")
     if not gate(args.fast, args.workers):
@@ -123,6 +156,8 @@ def main() -> int:
     if args.fast:
         print("\nfast gate passed — this is not the full gate. Run it before pushing.")
         return 0
+    if args.merge:
+        return merge()
     if not args.push:
         print("\ngate passed")
         return 0
@@ -132,10 +167,59 @@ def main() -> int:
         return 0
 
     branch = git("rev-parse", "--abbrev-ref", "HEAD")
+    if branch == TRUNK:
+        # Not a warning, and not a flag to override. Work lands on a branch and
+        # comes back through `--merge`, so there is something to look at before
+        # it is on the trunk and "merge to prod" is an action rather than a
+        # report that it already happened.
+        branch = branch_name(args.message)
+        print(f"\nbranching: {branch}")
+        run_git("checkout", "-q", "-B", branch)
+
     subprocess.run(["git", "add", "-A"], cwd=ROOT, check=True)
     subprocess.run(["git", "commit", "-q", "-m", args.message], cwd=ROOT, check=True)
-    subprocess.run(["git", "push", "-u", "origin", branch], cwd=ROOT, check=True)
-    print(f"\npushed {git('rev-parse', '--short', 'HEAD')} to {branch}")
+    subprocess.run(["git", "push", "-q", "-u", "origin", branch], cwd=ROOT, check=True)
+    print(f"pushed {git('rev-parse', '--short', 'HEAD')} to {branch}")
+    print(f"merge it with: python3 tools/ship.py --merge")
+    return 0
+
+
+def merge() -> int:
+    """Bring the current branch back to the trunk, behind the gate."""
+    branch = git("rev-parse", "--abbrev-ref", "HEAD")
+    if branch == TRUNK:
+        print(f"already on {TRUNK}; nothing to merge")
+        return 1
+    if git("status", "--porcelain"):
+        print("the working tree is dirty; commit before merging")
+        return 1
+
+    # The trunk may have moved -- a scheduled data job commits several times a
+    # day. Bring it into the branch first, so a conflict is resolved where the
+    # work is rather than on the trunk.
+    run_git("fetch", "-q", "origin", TRUNK)
+    behind = git("rev-list", "--count", f"HEAD..origin/{TRUNK}")
+    if behind != "0":
+        print(f"{TRUNK} moved {behind} commit(s) ahead; merging it in first")
+        if run_git("merge", "--no-edit", f"origin/{TRUNK}") != 0:
+            print("conflict merging the trunk into this branch; resolve it here")
+            return 1
+        print("gate, against the merged tree:")
+        if not gate(False, 6):
+            print("\nnot merging: the gate is red against the merged trunk")
+            return 1
+
+    run_git("checkout", "-q", TRUNK)
+    run_git("merge", "-q", "--ff-only", f"origin/{TRUNK}")
+    # `--no-ff` so the branch is visible in the history as a unit of work,
+    # rather than eleven commits that look like they were typed onto the trunk.
+    if run_git("merge", "--no-ff", "--no-edit", branch) != 0:
+        print("conflict; resolve on the trunk or reset and retry")
+        return 1
+    subprocess.run(["git", "push", "-q", "origin", TRUNK], cwd=ROOT, check=True)
+    run_git("branch", "-q", "-d", branch)
+    run_git("push", "-q", "origin", "--delete", branch)
+    print(f"\nmerged {branch} into {TRUNK} -> {git('rev-parse', '--short', 'HEAD')}")
     print("CI runs the same gate; it is not worth waiting on unless it goes red.")
     return 0
 
