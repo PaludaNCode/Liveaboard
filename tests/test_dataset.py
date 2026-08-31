@@ -15,6 +15,7 @@ from liveaboard.dataset import Dataset, DatasetError
 from liveaboard.export import latest_entry, recent_entries
 from liveaboard.render import (
     HISTORY_DAYS,
+    _recent_reports,
     build_payload,
     icon_data_uri,
     render,
@@ -337,32 +338,46 @@ class TestThePageAnnouncesTheNewsInTheCommitThatMakesIt(unittest.TestCase):
     to break it.
     """
 
-    def test_the_committed_page_leads_with_the_committed_latest_entry(self):
-        log = published.committed("CHANGES.md").read_text(encoding="utf-8")
-        newest = latest_entry(log)
-        if not newest.strip():
-            self.skipTest("no entry in data/CHANGES.md yet")
-        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
-        panels = re.findall(r'<pre class="changelog">(.*?)</pre>', page, re.S)
-        self.assertTrue(panels, "the built page has no changelog panel")
-        # The view carries a week of refreshes (#140), newest first, so the
-        # property is about the *first* block rather than the only one.
+    def test_the_committed_page_leads_with_the_committed_latest_report(self):
+        book = published.committed("changes.json")
+        if not book.exists():
+            self.skipTest("no data/changes.json yet")
+        reports = json.loads(book.read_text(encoding="utf-8"))
+        if not reports:
+            self.skipTest("no report in data/changes.json yet")
+        shipped = published.shipped_payload().get("changes") or []
+        self.assertTrue(shipped, "the built page carries no change reports")
         self.assertEqual(
-            unescape(panels[0]).strip(), newest.strip(),
-            "the published page's changelog does not lead with the newest entry "
-            "in data/CHANGES.md -- something built the page before appending to it")
+            shipped[0]["day"], reports[0]["day"],
+            "the published page does not lead with the newest report in "
+            "data/changes.json -- something built the page before appending to it")
 
     def test_the_committed_page_carries_the_whole_window(self):
         """Not just the newest: a week of refreshes is the view's default, and
         a page carrying one of them is the bug this replaced."""
-        log = published.committed("CHANGES.md").read_text(encoding="utf-8")
-        window = recent_entries(log, HISTORY_DAYS)
-        if not window:
-            self.skipTest("no entry in data/CHANGES.md yet")
-        page = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
-        panels = [unescape(b).strip() for b in
-                  re.findall(r'<pre class="changelog">(.*?)</pre>', page, re.S)]
-        self.assertEqual(panels, [body.strip() for _, body in window])
+        book = published.committed("changes.json")
+        if not book.exists():
+            self.skipTest("no data/changes.json yet")
+        reports = json.loads(book.read_text(encoding="utf-8"))
+        if not reports:
+            self.skipTest("no report in data/changes.json yet")
+        window = _recent_reports(reports, HISTORY_DAYS)
+        shipped = published.shipped_payload().get("changes") or []
+        self.assertEqual([r["day"] for r in shipped], [r["day"] for r in window])
+
+    def test_the_report_reaches_the_page_as_data_and_not_as_prose(self):
+        """`changes.compare` builds the report, `changes.render` flattened it to
+        text, the CLI wrote the text to Markdown and `render` read it back out
+        and escaped it into a `<pre>` -- a terminal transcript served to a
+        browser, with boat names cut mid-word to fit eighty columns (#143)."""
+        html = published.site_page().read_text(encoding="utf-8")
+        if not (published.committed("changes.json").exists()
+                and json.loads(published.committed("changes.json")
+                               .read_text(encoding="utf-8"))):
+            self.skipTest("no structured book yet, so the prose fallback is right")
+        self.assertNotIn('<pre class="changelog">', html,
+                         "the page is serving the change report as a transcript")
+        self.assertIn('id="changeLog"', html)
 
 
 class TestARebuildIsNotNews(unittest.TestCase):
@@ -1876,9 +1891,13 @@ class TestTheThreeViews(unittest.TestCase):
         about it. `replace`, because a corrected address is not a place to go
         back to."""
         app = self.app()
-        self.assertIn("window.location.replace", app,
+        settle = app.split("function settleHash(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("window.location.replace", settle,
                       "a declined view stays in the address bar")
-        self.assertNotIn("window.location.hash =", app,
+        # Scoped to `settleHash`: elsewhere on the page assigning the hash is
+        # right, because a boat name in a change report *navigating* to that
+        # boat's sailings is a place a reader should be able to come back from.
+        self.assertNotIn("window.location.hash =", settle,
                          "correcting the address leaves a history entry to go back to")
 
     def test_the_history_view_carries_the_report_and_the_files(self) -> None:
@@ -2449,3 +2468,66 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
         self.assertIn("dep.sale.was && dep.base", spread)
         self.assertNotIn("price.amount", spread)
         self.assertNotIn("dep.price", spread)
+
+
+class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):
+    """`changes.compare` builds a report out of dataclasses. `changes.render`
+    flattened it to column-aligned text, the CLI wrote that text into a
+    Markdown file, and the page read the text back out and escaped it into a
+    `<pre>` — so everything a real interface needs was built and discarded one
+    step before the page, and the visitor got a terminal transcript with boat
+    names cut mid-word to fit eighty columns (#143).
+
+    The text stays: it is what a workflow log wants and it is the durable human
+    record. What changed is that the same comparison now also comes out as
+    data, and neither shape is derived from the other.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def test_the_report_comes_out_twice_from_one_comparison(self) -> None:
+        from liveaboard.changes import as_dict, compare
+
+        before = json.loads(published.committed().read_text(encoding="utf-8"))
+        report = compare(before, before)
+        record = as_dict(report, before="a", after="b")
+        self.assertTrue(record["quiet"], "a dataset against itself moved something")
+        for key in ("added", "withdrawn", "price_up", "price_down", "fees"):
+            self.assertIn(key, record)
+
+    def test_what_the_book_drops_for_weight_is_counted(self) -> None:
+        """A browser can expand, so a truncation's honest form there is showing
+        the rest behind a control -- but the page is one file with nothing
+        fetched lazily, so a report is paid for by every visitor and cannot be
+        unbounded. One refresh landed 644 fare moves, 136 KB of the 200 the
+        whole week came to. What is cut is counted, never silent."""
+        from liveaboard.changes import BOOK_LIMIT, as_dict, compare
+        from liveaboard.changes import Departed, Report
+
+        report = Report(added=[
+            Departed(f"d{n}", "Boat", "Trip", "2027-05-01", 100.0, "EUR")
+            for n in range(BOOK_LIMIT + 7)])
+        record = as_dict(report)
+        self.assertEqual(len(record["added"]), BOOK_LIMIT)
+        self.assertEqual(record["more"]["added"], 7)
+
+    def test_the_page_does_not_read_its_own_prose_back(self) -> None:
+        """The step this deletes. `render` reading `CHANGES.md` and escaping it
+        is the fallback for a checkout whose refresh predates the book, and
+        must not be how a page with the book renders."""
+        render_py = (ROOT / "src" / "liveaboard" / "render.py").read_text(encoding="utf-8")
+        self.assertIn('if structured:', render_py)
+        self.assertIn('return \'<div id="changeLog"></div>\'', render_py)
+
+    def test_every_row_can_reach_the_sailing_it_is_about(self) -> None:
+        """Each line names a boat that is a row in the trips table, and none of
+        them could be clicked: the panel answering "did this get cheaper" could
+        not get you to the thing that did."""
+        app = self.APP.read_text(encoding="utf-8")
+        self.assertIn("function boatLink(", app)
+        link = app.split("function boatLink(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("state.boats.add(name)", link)
+        self.assertIn('window.location.hash = "#trips"', link)
+        # The bank has to be rebuilt, or a boat in its hidden tail is filtering
+        # with no visible chip to take the filter off again.
+        self.assertIn("bank.repaint()", link)

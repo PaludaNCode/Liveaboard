@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -413,32 +413,62 @@ def _pretty_day(iso: str) -> str:
     return f"{day.day} {day.strftime('%B')} {day.year}"
 
 
-def _changes_html(entries: list[tuple[str, str]], linked: bool) -> str:
-    """Every refresh in the last week of the log, newest first.
+def _recent_reports(book: list[dict], days: int) -> list[dict]:
+    """The reports within ``days`` of the newest one recorded.
 
-    It was one entry, with the rest behind a link to the raw markdown file.
-    That made the ordinary question hard to ask -- the refresh runs daily and a
-    lot moves, so "has this boat been repricing all week" meant opening
-    `CHANGES.md` -- and it made the noisiest possible window the default: a run
-    that happened to read nothing rendered a view saying nothing moved, with
-    days of real movement one link away.
-
-    Three things the view must not imply, all of them versions of one rule.
-
-    A **day with no entry is not a day when nothing moved** -- it is a day the
-    refresh did not run, or did not finish. So the lead counts the refreshes it
-    has and names the span they cover, and never says anything about the days
-    between them.
-
-    An **empty log is a fact about this checkout**, not about the fleet: no
-    refresh has been *recorded* here, which is not the claim that nothing
-    changed.
-
-    And a **date that repeats is two refreshes, not one** -- the job runs more
-    than once a day. They are separate readings and are printed separately,
-    under one heading for the day, because a heading repeated three times reads
-    as a rendering fault rather than as three runs.
+    Measured against the book, never against today, for the reason
+    `export.recent_entries` is: a clock inside `render` makes the same
+    committed inputs render a different page tomorrow, and the test that
+    compares the committed page against a fresh render would turn `main` red
+    with nobody having changed anything.
     """
+    def when(entry: dict) -> date | None:
+        try:
+            return date.fromisoformat(str(entry.get("day", "")))
+        except ValueError:
+            return None
+
+    newest = next((d for d in map(when, book) if d), None)
+    if newest is None:
+        return list(book)
+    floor = newest - timedelta(days=days - 1)
+    return [e for e in book if (when(e) or newest) >= floor]
+
+
+def _changes_html(entries: list[tuple[str, str]], linked: bool,
+                  structured: bool) -> str:
+    """The last week of refreshes, newest first.
+
+    Three states, and the middle one is why this still exists.
+
+    With the **structured book** present the page renders the reports itself,
+    from `payload.changes`, as rows that can be clicked through to the sailing
+    they are about. This returns the container it draws into and nothing else:
+    a second copy of the same reports as prose would be the same facts twice,
+    at several kilobytes a day.
+
+    With **only the Markdown** -- a checkout whose last refresh predates the
+    book -- the prose is what there is, and it is served as it always was
+    rather than showing an empty history. It converges: the next refresh writes
+    a structured entry, and within a week the fallback is unused.
+
+    With **neither**, the view says so. That is a fact about this build, not
+    about the fleet: no refresh has been *recorded* here, which is not the
+    claim that nothing moved.
+
+    Three things the view must not imply, all one rule. A **day with no entry**
+    is a day the refresh did not run, so the lead counts the refreshes it has
+    and names the span they cover, and says nothing about the days between. An
+    **empty log** is about this checkout. And a **repeated date is two
+    refreshes**, printed separately under one heading for the day.
+    """
+    if structured:
+        # Filled by app.js. Empty in the markup on purpose: a fresh checkout
+        # has never run the refresh, and a container that rendered its own
+        # absence as "nothing has changed" would be the site claiming a fact
+        # about the fleet from a file that does not exist.
+        return '<div id="changeLog"></div>'
+
     if not entries:
         return ('<p class="history-lead">No refresh is recorded in this build, '
                 "so there is nothing to compare against. The log is written by "
@@ -538,6 +568,27 @@ def render(
     out.mkdir(parents=True, exist_ok=True)
 
     payload = build_payload(dataset)
+
+    # The structured change reports, for the page to render as rows.
+    #
+    # `data/CHANGES.md` is the durable human record and stays exactly what it
+    # is; this is the same reports as data, written beside it by the same
+    # command. The page used to read that Markdown back, escape it into a
+    # `<pre>`, and serve the visitor a terminal transcript -- boat names cut
+    # mid-word to fit eighty columns, on a page that has a table renderer, and
+    # not one line of it clickable through to the sailing it was about (#143).
+    #
+    # Trimmed to the same window the prose view shows, and only the days the
+    # book actually covers: a checkout whose last refresh predates the book
+    # falls back to the Markdown rather than showing an empty history.
+    book = (data_dir / "changes.json") if data_dir else None
+    if book and book.exists():
+        try:
+            reports = json.loads(book.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            reports = []
+        if isinstance(reports, list) and reports:
+            payload["changes"] = _recent_reports(reports, HISTORY_DAYS)
     html = (templates / "index.html").read_text(encoding="utf-8")
     css = (templates / "style.css").read_text(encoding="utf-8")
     js = (templates / "app.js").read_text(encoding="utf-8")
@@ -568,7 +619,8 @@ def render(
     html = html.replace("__GENERATED__", payload["meta"]["generated"])
     html = html.replace("__DOWNLOADS__", _downloads_html(available))
     html = html.replace("__CHANGES__",
-                        _changes_html(entries, "CHANGES.md" in available))
+                        _changes_html(entries, "CHANGES.md" in available,
+                                      bool(payload.get("changes"))))
 
     target = out / "index.html"
     target.write_text(html, encoding="utf-8")

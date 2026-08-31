@@ -601,6 +601,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   day with no entry is a day the refresh did not run, and the lead says so —
   never that nothing moved. A repeated date is two refreshes, printed
   separately under one heading for the day.
+- **A change report is rendered, never transcribed.** `changes.compare` builds
+  a report of dataclasses; `changes.render` flattens it to text for the log and
+  `CHANGES.md`, and `changes.as_dict` emits the same comparison as data into
+  `data/changes.json`, which is committed and which the page renders as rows.
+  Neither shape is derived from the other. The page used to read that Markdown
+  back and escape it into a `<pre>` — a terminal transcript served to a
+  browser, boat names cut mid-word to fit eighty columns, and not one line
+  clickable through to the sailing it was about. `BOOK_LIMIT` caps the book at
+  120 rows per kind because one refresh landed 644 fare moves — 136 KB of the
+  200 the week came to — and what is cut is **counted**, never silent. A
+  checkout whose last refresh predates the book still gets the prose, and
+  converges within a week.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

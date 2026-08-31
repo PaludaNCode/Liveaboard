@@ -370,6 +370,11 @@
 
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  /* Spelt out, for the history view's day headings: those are days the refresh
+     ran rather than days a boat sails, and a log wants a date a reader can
+     place in a year. */
+  var MONTH_NAMES = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
 
   /* "2027-05-01" printed as "01 May". Formatted from the string rather than
      through Date, which would read the ISO date as UTC midnight and print the
@@ -378,6 +383,15 @@
     var p = String(iso).split("-");
     if (p.length !== 3) return esc(iso);
     return p[2] + " " + MONTHS[+p[1] - 1];
+  }
+
+  /* With the year, for the history view: those dates are days the refresh ran
+     rather than days a boat sails, and a season's worth of departures all fall
+     in one year where a log does not. */
+  function longDate(iso) {
+    var p = String(iso).split("-");
+    if (p.length !== 3) return esc(iso);
+    return (+p[2]) + " " + MONTH_NAMES[+p[1] - 1] + " " + p[0];
   }
 
   /* The dearest true cost among the rows on screen, which is what the anchor
@@ -2013,6 +2027,216 @@
     return td;
   }
 
+  /* ---------- the history view ---------- */
+
+  /* The change reports, rendered rather than transcribed.
+   *
+     What this replaces was `liveaboard.cli changes`' stdout, escaped into a
+     `<pre>`: column-aligned monospace truncated to a width no browser has, so
+     the visitor got `MY Odyssey Liveaboar` and `Deep South - Rocky & Zabargad
+     Isla` on a page that has a table renderer. Every line named a boat, a date
+     and a trip that exist as a row a few hundred pixels above, and not one of
+     them could be clicked (#143).
+
+     The structured report was always there -- `changes.compare` builds
+     dataclasses, `changes.render` flattened them to text, the CLI wrote the
+     text to Markdown and `render` read it back out. It now travels as data as
+     well, and this draws it. */
+
+  var CHANGE_ROWS = 8;
+
+  /* One kind of change: what to call it, and how to lay a row of it out.
+     Ordered as the text report orders them, which is the order the reader of
+     a refresh wants -- what appeared, what went, what moved. */
+  var CHANGE_BLOCKS = [
+    { k: "added", t: "New departures", kind: "trip" },
+    { k: "returned", t: "Bookable again", kind: "trip" },
+    { k: "sold_out", t: "Now sold out", kind: "trip" },
+    { k: "withdrawn", t: "Withdrawn", kind: "trip" },
+    { k: "price_up", t: "Fares up", kind: "move" },
+    { k: "price_down", t: "Fares down", kind: "move" },
+    { k: "fees", t: "Fee lines changed", kind: "fee" },
+    { k: "vessels_new", t: "Vessels new to the page", kind: "name" },
+    { k: "vessels_gone", t: "Vessels that lost every departure", kind: "name",
+      warn: "Most likely a failed fetch rather than a cancelled season." },
+    { k: "months_gone", t: "Vessel-months that emptied", kind: "name",
+      warn: "A page that came back unreadable, not a withdrawn month — those " +
+            "sailings are missing from the site until the next crawl reads them." },
+    { k: "fx", t: "Exchange rates", kind: "fx" }
+  ];
+
+  /* A boat name that takes you to its sailings. Every row of every report
+     names a boat that is a row in the trips table, and none of them could be
+     reached from here -- the panel that answers "did this get cheaper" could
+     not get you to the thing that did. */
+  function boatLink(name) {
+    var a = el("button", "change-boat", name);
+    a.type = "button";
+    a.title = "Show " + name + "’s sailings";
+    a.addEventListener("click", function () {
+      state.boats.clear();
+      state.boats.add(name);
+      /* The bank has to be rebuilt, not just re-pressed: this boat may be in
+         its hidden tail, and a chip that is holding a filter must be visible
+         or the reader cannot take it off again. Same call the Reset button
+         makes, and for the same reason. */
+      var bank = document.getElementById("boats");
+      if (bank && bank.repaint) bank.repaint();
+      window.location.hash = "#trips";
+      draw(false);
+      if (shellEl) shellEl.scrollTop = 0;
+    });
+    return a;
+  }
+
+  function changeRow(row, kind) {
+    var tr = el("tr", null);
+    if (kind === "name") {
+      tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row));
+      return tr;
+    }
+    if (kind === "fx") {
+      tr.appendChild(el("td", "c-boat", row.currency));
+      tr.appendChild(el("td", "c-move",
+        row.was.toFixed(4) + " → " + row.now.toFixed(4)));
+      tr.appendChild(el("td", row.pct < 0 ? "c-down" : "c-up",
+        (row.pct > 0 ? "+" : "") + row.pct.toFixed(1) + "%"));
+      return tr;
+    }
+    if (kind === "fee") {
+      tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row.boat));
+      tr.appendChild(el("td", "c-trip", row.code));
+      tr.appendChild(el("td", "c-move", row.was + " → " + row.now));
+      return tr;
+    }
+    tr.appendChild(el("td", "c-when", shortDate(row.start)));
+    tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row.boat));
+    tr.appendChild(el("td", "c-trip", row.title));
+    if (kind === "move") {
+      /* Both ends and the difference, in the currency the seller quoted --
+         never converted here. The percentage carries a decimal because a €20
+         move on a €2,400 berth is 0.8%, and "+1%" reads as the rounding this
+         report is at pains to exclude. */
+      tr.appendChild(el("td", "c-move",
+        Math.round(row.was).toLocaleString("en-IE") + " → " +
+        Math.round(row.now).toLocaleString("en-IE") + " " + row.currency));
+      tr.appendChild(el("td", row.delta < 0 ? "c-down" : "c-up",
+        (row.delta > 0 ? "+" : "") +
+        Math.round(row.delta).toLocaleString("en-IE") +
+        " (" + (row.pct > 0 ? "+" : "") + row.pct.toFixed(1) + "%)"));
+    } else {
+      tr.appendChild(el("td", "c-move", row.price === null || row.price === undefined
+        ? "no price"
+        : Math.round(row.price).toLocaleString("en-IE") + " " + row.currency));
+    }
+    return tr;
+  }
+
+  /* One block, with the rest of it behind a control rather than behind a
+     sentence saying it exists. The text report has to confess a truncation --
+     "... and 24 more not shown" -- because a terminal cannot expand. This can,
+     so the honest form here is showing them. What the *book* dropped for
+     weight is still a confession, because those rows are not in the page at
+     all. */
+  function changeBlock(report, spec) {
+    var rows = report[spec.k] || [];
+    if (!rows.length) return null;
+    var wrap = el("div", "change-block");
+    wrap.appendChild(el("h4", spec.warn ? "change-warn" : null,
+      spec.t + " (" + rows.length +
+      ((report.more || {})[spec.k] ? " of " + (rows.length + report.more[spec.k]) : "") +
+      ")"));
+    if (spec.warn) wrap.appendChild(el("p", "deals-note", spec.warn));
+
+    var table = el("table", "change-table");
+    var body = document.createElement("tbody");
+    rows.forEach(function (row, n) {
+      var tr = changeRow(row, spec.kind);
+      if (n >= CHANGE_ROWS) tr.hidden = true;
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    wrap.appendChild(table);
+
+    if (rows.length > CHANGE_ROWS) {
+      var more = el("button", "link-button change-more",
+        "Show " + (rows.length - CHANGE_ROWS) + " more");
+      more.type = "button";
+      more.addEventListener("click", function () {
+        var hidden = body.querySelectorAll("tr[hidden]").length > 0;
+        [].forEach.call(body.rows, function (tr, n) {
+          if (n >= CHANGE_ROWS) tr.hidden = !hidden;
+        });
+        more.textContent = hidden
+          ? "Show fewer" : "Show " + (rows.length - CHANGE_ROWS) + " more";
+      });
+      wrap.appendChild(more);
+    }
+    /* And what the book itself did not carry, which no control can reveal. */
+    if ((report.more || {})[spec.k]) {
+      wrap.appendChild(el("p", "deals-note",
+        report.more[spec.k] + " further " + spec.t.toLowerCase() +
+        " are not in this page: a report is paid for by every visitor, so the " +
+        "book keeps the first " + rows.length + " of each kind. The full " +
+        "report is in data/CHANGES.md."));
+    }
+    return wrap;
+  }
+
+  function drawChanges() {
+    var host = document.getElementById("changeLog");
+    var book = D.changes || [];
+    if (!host || !book.length) return;
+
+    var days = [];
+    book.forEach(function (r) {
+      if (days.length && days[days.length - 1].day === r.day) {
+        days[days.length - 1].reports.push(r);
+      } else {
+        days.push({ day: r.day, reports: [r] });
+      }
+    });
+
+    var n = book.length;
+    var span = days.length > 1
+      ? "from " + longDate(book[n - 1].day) + " to " + longDate(book[0].day)
+      : "on " + longDate(book[0].day);
+    host.appendChild(el("p", "history-lead",
+      n + " refresh" + (n === 1 ? "" : "es") + " recorded " + span +
+      ". A day with no entry is a day the refresh did not run, which is not " +
+      "the same as a day nothing moved."));
+
+    days.forEach(function (d) {
+      var label = longDate(d.day);
+      if (d.reports.length > 1) label += " · " + d.reports.length + " refreshes";
+      host.appendChild(el("h3", "history-day", label));
+      d.reports.forEach(function (report) {
+        if (report.quiet) {
+          host.appendChild(el("p", "change-quiet", report.price_rounding
+            ? "Nothing moved, beyond " + report.price_rounding +
+              " fare(s) shifting by under €5."
+            : "Nothing moved."));
+          return;
+        }
+        if (report.availability_newly_read) {
+          host.appendChild(el("p", "deals-note",
+            "The earlier dataset stated availability nowhere, so sold-out and " +
+            "bookable-again are not compared here. Nobody had looked before."));
+        }
+        CHANGE_BLOCKS.forEach(function (spec) {
+          var block = changeBlock(report, spec);
+          if (block) host.appendChild(block);
+        });
+        if (report.price_rounding) {
+          host.appendChild(el("p", "deals-note",
+            report.price_rounding + " further fare(s) moved by under €5 and " +
+            "are not listed: at that size a move is the rounding on a " +
+            "converted price rather than a reprice."));
+        }
+      });
+    });
+  }
+
   /* ---------- the sale view's own bands ---------- */
 
   /* Four figures, not a sentence. The line this replaces carried the same
@@ -3253,6 +3477,7 @@
   window.addEventListener("hashchange", function () { showView(viewFromHash(), true); });
 
   drawNotice();
+  drawChanges();
   /* The overview is built once, whether or not it is the view being opened:
      it is what decides whether there is a sale view at all, and it is a few
      dozen rows against a table of 1,122. */

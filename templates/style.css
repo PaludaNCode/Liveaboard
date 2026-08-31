@@ -242,6 +242,47 @@ h1 {
 }
 .history-day:first-of-type { margin-top:6px; }
 
+/* A rendered report, not a transcript of one. What this replaces was
+   `liveaboard.cli changes`' stdout in a `<pre>` -- monospace padded to eighty
+   columns, so boat names were cut mid-word on a page that has a table
+   renderer, and nothing in it could be clicked. */
+.change-block { margin:0 0 14px; }
+.change-block h4 {
+  font-family:var(--font-narrow); font-size:11px; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--ink-faint); font-weight:600; margin:12px 0 5px;
+}
+.change-block h4.change-warn { color:var(--warn); }
+.change-table {
+  display:block; overflow-x:auto; border-collapse:collapse;
+  font-size:12px; max-width:100%;
+}
+.change-table td {
+  padding:3px 12px 3px 0; border-bottom:1px solid var(--rule);
+  vertical-align:top; white-space:nowrap;
+}
+.change-table .c-when { font-family:var(--font-mono); color:var(--ink-dim); }
+.change-table .c-trip { color:var(--ink-dim); white-space:normal; }
+.change-table .c-move {
+  font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink);
+}
+.change-table .c-up { font-family:var(--font-mono); color:var(--warn); }
+.change-table .c-down { font-family:var(--font-mono); color:var(--ok); }
+
+/* Every row names a boat that is a row in the trips table, and none of them
+   could be reached from here: the panel answering "did this get cheaper" could
+   not get you to the thing that did. A button rather than a link because it
+   sets a filter rather than going to an address. */
+.change-boat {
+  font:inherit; font-weight:600; color:var(--accent); background:none;
+  border:0; padding:0; cursor:pointer; text-align:left;
+}
+.change-boat:hover { text-decoration:underline; }
+
+.change-more { font-size:11px; margin-top:2px; }
+.change-quiet {
+  font-size:11.5px; color:var(--ink-faint); font-style:italic; margin:0 0 12px;
+}
+
 .toolbar {
   background:var(--panel); border-bottom:1px solid var(--rule);
   padding:10px 18px; display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center;

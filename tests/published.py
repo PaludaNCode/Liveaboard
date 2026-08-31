@@ -90,6 +90,9 @@ PUBLISHED = (
     "padi_departures.json",
     "barren.json",
     "CHANGES.md",
+    # The structured reports the history view renders. Written by the same
+    # command that appends to CHANGES.md, so it is behind the same gate.
+    "changes.json",
 )
 """The committed files a fetch rewrites, and therefore the ones behind the gate.
 
@@ -155,3 +158,22 @@ def page(name: str = LIVE) -> dict[str, Any]:
     from liveaboard.render import build_payload
 
     return build_payload(dataset(name))
+
+
+def shipped_payload() -> dict[str, Any]:
+    """The payload inside the committed `site/index.html`.
+
+    Not `page()`: that rebuilds one from the dataset alone, and some of what
+    the page carries is attached by `render` from files beside it -- the
+    structured change reports among them. An assertion about what a visitor
+    actually received has to read what was actually sent.
+    """
+    import json
+    import re
+
+    html = site_page().read_text(encoding="utf-8")
+    found = re.search(
+        r'<script id="payload" type="application/json">(.*?)</script>', html, re.S)
+    if not found:
+        raise AssertionError("the committed page carries no payload")
+    return json.loads(found.group(1).replace("<\\/", "</"))
