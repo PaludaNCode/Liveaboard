@@ -32,69 +32,29 @@ description: >
 #
 # The caller must have run `actions/checkout` and `actions/setup-python`.
 
-inputs:
-  verbose:
-    description: "Name every test as it runs. Worth it on a pull request, noise in a data job's log."
-    required: false
-    default: "false"
-
 runs:
   using: composite
   steps:
-    # The whole suite, publication gate included. In a data job this step sits
-    # after the fetch and before the commit, which is the distinction #118
-    # exists for: an assertion about committed data must gate what is
-    # published and must never stop the fetch that would correct it.
-    - name: Tests
-      shell: bash
-      run: PYTHONPATH=src python3 -m unittest discover -s tests ${{ inputs.verbose == 'true' && '-v' || '' }}
-
-    - name: Dataset validates
-      shell: bash
-      run: PYTHONPATH=src python3 -m liveaboard.cli check
-
-    - name: Site builds
-      shell: bash
-      run: PYTHONPATH=src python3 -m liveaboard.cli build
-
-    # promote is pure -- candidate, fees, facts and FX in, dataset out, no
-    # network -- so the committed dataset must be what the committed code
-    # produces from the committed inputs. When it is not, somebody changed a
-    # parser and data/egypt-2027.json is still the previous parser's output.
+    # One command, and the same one a person runs before pushing:
+    # `python3 tools/ship.py`. It builds the page, then runs the suite, the
+    # dataset validation, `promote --check` and the seed check in parallel
+    # across the test modules -- 24 seconds against about 60 serially, on all
+    # five callers of this action.
     #
-    # That state used to be invisible. PORT_ALIASES was merged with passing
-    # tests, folding three spellings of Port Ghalib into one, and the published
-    # page went on offering ten harbour filters for six real harbours: CI
-    # tested fixtures, not data/, so nothing failed. The site quietly
-    # continuing to be slightly wrong is the exact failure this project exists
-    # to correct in other people.
+    # Delegating rather than listing the steps here is what makes "the same
+    # bar" true of a *developer* as well as of the five workflows. The list
+    # used to live in this file, so the only way to run it was to push and
+    # wait; anything a person ran locally was a different list that could
+    # drift from it silently.
     #
-    # In a data job it is also the guard against half a commit: a run that
-    # writes a fresh candidate and whose promote refused it would otherwise
-    # push the one without the other, and leave main red for whoever opens the
-    # next pull request.
+    # In a data job this step sits after the fetch and before the commit,
+    # which is the distinction #118 exists for: an assertion about committed
+    # data must gate what is published and must never stop the fetch that
+    # would correct it.
     #
-    # No path arguments on purpose. Every job that writes the dataset promotes
-    # on argparse's defaults, so taking the defaults here means this check and
-    # those jobs cannot be looking at different inputs. Spelling the paths out
-    # would be one more thing to keep in step.
-    - name: Dataset matches the parser
+    # `test_layout` needs a browser and skips without one, so a data job runs
+    # everything else and `ci.yml`'s `layout` job -- which installs Chromium --
+    # is where that half is really asserted.
+    - name: The gate
       shell: bash
-      run: PYTHONPATH=src python3 -m liveaboard.cli promote --check
-
-    - name: Seed generator is reproducible
-      # The committed seed must match what the generator produces, so nobody
-      # can hand-edit a price into the dataset without it showing up here.
-      shell: bash
-      run: |
-        python3 tools/make_seed.py --out /tmp/regenerated.json
-        python3 - <<'PY'
-        import json, sys
-        a = json.load(open("data/seed/egypt-2027.json"))
-        b = json.load(open("/tmp/regenerated.json"))
-        for payload in (a, b):
-            payload.pop("generated", None)
-        if a != b:
-            sys.exit("data/seed/egypt-2027.json is out of sync with tools/make_seed.py")
-        print("seed matches generator")
-        PY
+      run: python3 tools/ship.py

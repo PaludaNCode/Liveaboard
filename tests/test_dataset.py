@@ -2531,3 +2531,51 @@ class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):
         # The bank has to be rebuilt, or a boat in its hidden tail is filtering
         # with no visible chip to take the filter off again.
         self.assertIn("bank.repaint()", link)
+
+
+class TestOneGate(unittest.TestCase):
+    """The bar a person clears before pushing is the bar the workflows run.
+
+    It was not. `.github/actions/checks` listed the steps itself, so the only
+    way to run the real list was to push and wait — and anything run locally
+    was a second list that could drift from it without either side noticing.
+    That is the same failure the action's own comment describes about the five
+    workflows, one level up: a copy drifts, and a check that drifts is one
+    nobody is really running.
+
+    So there is one definition, `tools/ship.py`, and both call it.
+    """
+
+    ACTION = ROOT / ".github" / "actions" / "checks" / "action.yml"
+    SHIP = ROOT / "tools" / "ship.py"
+
+    def test_the_shared_action_runs_the_same_command_a_person_does(self) -> None:
+        action = self.ACTION.read_text(encoding="utf-8")
+        self.assertIn("python3 tools/ship.py", action,
+                      "the workflows are running their own list again")
+        # And nothing else, or the list has started growing back in two places.
+        steps = [line for line in action.splitlines()
+                 if line.strip().startswith("run:")]
+        self.assertEqual(len(steps), 1, f"the action has grown extra steps: {steps}")
+
+    def test_the_gate_still_holds_everything_it_replaced(self) -> None:
+        """Delegating is only safe if nothing was dropped on the way."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        for command in ('"liveaboard.cli", "build"',
+                        '"liveaboard.cli", "check"',
+                        '"liveaboard.cli", "promote", "--check"',
+                        '"tools" / "check_seed.py"'):
+            self.assertIn(command, ship, f"the gate no longer runs {command}")
+
+    def test_every_test_module_is_in_the_gate(self) -> None:
+        """Sharded by module for the parallelism, which is a way to lose one:
+        `unittest discover` finds them and a hand-written list would not."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        self.assertIn('(ROOT / "tests").glob("test_*.py")', ship,
+                      "the gate names its modules instead of discovering them")
+
+    def test_the_fast_loop_says_it_is_not_the_gate(self) -> None:
+        """`--fast` drops the two slowest modules, so it can pass over a real
+        failure. A shortcut that does not admit it is one people ship on."""
+        ship = self.SHIP.read_text(encoding="utf-8")
+        self.assertIn("this is not the full gate", ship)

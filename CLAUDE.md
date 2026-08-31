@@ -6,6 +6,26 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
+python3 tools/ship.py                    # the whole gate, in parallel — 24s
+python3 tools/ship.py --fast             # the inner loop, no browser — 4s
+python3 tools/ship.py --push -m "..."    # gate, then commit and push
+```
+
+**`tools/ship.py` is the gate, and `.github/actions/checks` runs that same
+command** — so the bar a person clears before pushing is the bar the five
+workflows run, rather than a second list that drifts from it. It builds the
+page, then runs the suite sharded by module alongside `check`, `promote
+--check` and the seed check: 24 seconds against about 60 serially, and 4 with
+`--fast`, which drops `test_promote_check` and `test_layout` and says so.
+`TestOneGate` refuses an `action.yml` that grows its own steps back.
+
+CI runs the same gate, so a green run here is a green run there. **Do not sit
+and poll it** — the only thing worth waiting for is a red one, and the way to
+find out is to be told.
+
+The pieces, when one of them is what you want on its own:
+
+```bash
 PYTHONPATH=src python3 -m unittest discover -s tests   # everything, no deps
 PYTHONPATH=src python3 -m liveaboard.cli check         # validate + summarise
 PYTHONPATH=src python3 -m liveaboard.cli build         # -> site/index.html
