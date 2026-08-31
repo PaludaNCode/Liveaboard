@@ -2394,3 +2394,58 @@ class TestTheHideSoldOutChipCarriesItsCount(unittest.TestCase):
         page = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
         self.assertIn('id="hideSold" aria-pressed="false" hidden', page)
         self.assertIn("if (soldOutCount) {", self.app)
+
+
+class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
+    """The sale content was moved out of a `details` and not laid out (#142).
+
+    It read as the old panel in a new place -- one run-on sentence, one
+    alphabetical fleet table, one list of moves -- and used about half of the
+    richest data on the site. Three bands now, because they answer three
+    different questions: what the sale *is*, how deep the cuts go, and which
+    boats and weeks carry them.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_view_opens_on_figures_rather_than_a_sentence(self) -> None:
+        """A reader skims a strip and reads a sentence, and these are numbers
+        to be skimmed. The reading date is one of the figures because a
+        discount is a claim with a date and this one can end overnight."""
+        self.assertIn("function saleStrip(", self.app)
+        strip = self.app.split("function saleStrip(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn('"sailings cut"', strip)
+        self.assertIn('"off"', strip)
+        self.assertIn('"read"', strip)
+
+    def test_the_counts_and_the_movement_are_not_one_sentence(self) -> None:
+        """They were, because the line had to be the whole of a collapsed
+        `<summary>`. Split, each can be the shape it wants."""
+        self.assertIn("function movedLine(", self.app)
+        self.assertNotIn("function dealsSummary(", self.app,
+                         "the summary sentence outlived the fold it was for")
+
+    def test_the_discounts_are_grouped_by_depth_deepest_first(self) -> None:
+        """The per-boat table is alphabetical, which answers "is this boat on
+        sale" and cannot answer "where are the real discounts"."""
+        self.assertIn("function discountSpread(", self.app)
+        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("return b.pct - a.pct;", spread, "the bands are not deepest first")
+
+    def test_a_sailing_with_no_stated_rate_is_a_band_and_not_a_dash(self) -> None:
+        """Two sailings are marked down by a seller that stated no percentage
+        against the fare this page prints. That is the honest edge of the data
+        -- it is not a dash, and it is certainly not 0%."""
+        self.assertIn('el("td", "d-none", "rate not stated")', self.app)
+
+    def test_the_saving_is_never_was_minus_the_quoted_price(self) -> None:
+        """`sale.was` is already converted to the display currency and the
+        payload's `price` is the sailing's own, so subtracting them is nonsense
+        on every row quoted in dollars. `base` is the converted one."""
+        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("dep.sale.was && dep.base", spread)
+        self.assertNotIn("price.amount", spread)
+        self.assertNotIn("dep.price", spread)

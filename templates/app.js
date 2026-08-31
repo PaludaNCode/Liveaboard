@@ -1877,44 +1877,32 @@
      wrong. The liveaboard half leads because it is the larger signal: the day
      the Red Sea Aggressors' sale ended, PADI's listing moved three offers and
      the booking pages moved 36 sailings. */
-  function dealsSummary(deals, changed) {
-    var sale = deals.on_sale, offers = deals.offers || [];
-    var n = sale ? sale.sailings : offers.length;
-    var line = sale || offers.length
-      ? n + (n === 1 ? " discounted sailing" : " discounted sailings")
-      : "nothing discounted";
-    if (sale) line += " on " + sale.boats.length + " boats";
-
+  /* What has moved since the previous reading of each book, and nothing else.
+     `dealsSummary` said this too, behind the sailing and boat counts that the
+     summary strip now carries -- it was one sentence because it had to be the
+     whole of a collapsed `<summary>`. Splitting them lets each be the shape it
+     wants: figures skimmed, movement read. */
+  function movedLine(deals, changed) {
+    var said = [];
     var shifted = deals.on_sale_changes;
     if (shifted && !shifted.first_reading) {
       var moved = 0;
       (shifted.moves || []).forEach(function (m) { moved += m.sailings; });
-      line += " · " + (moved
-        ? moved + " moved on liveaboard.com"
-        : "nothing moved on liveaboard.com") + " since " + shortDate(shifted.previous);
+      said.push((moved ? moved + " moved" : "Nothing moved") +
+        " on liveaboard.com since " + shortDate(shifted.previous));
     }
-
-    if (!offers.length) return capitalise(line) + ".";
-    if (deals.first_reading) line += " · PADI's listing, first reading";
-    else if (changed) line += " · " + changed + " moved on PADI since " + shortDate(deals.previous);
-    else if (deals.previous) line += " · nothing moved on PADI since " + shortDate(deals.previous);
-    /* The oldest day anything under this heading was read, not PADI's listing
-       date. Three books feed the line — two crawls and a listing — and the
-       freshest of them was standing for all of it, which dated the whole panel
-       two days newer than half its evidence. A summary is as fresh as its
-       stalest half; the table below states each seller's day on its own row. */
-    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read]
-      .filter(Boolean).sort();
-    return capitalise(line) +
-      (days.length ? " · read " + shortDate(days[0]) : "") + ".";
+    if ((deals.offers || []).length) {
+      if (deals.first_reading) said.push("PADI’s listing, first reading");
+      else if (changed) said.push(changed + " moved on padi.com since " +
+        shortDate(deals.previous));
+      else if (deals.previous) said.push("nothing moved on padi.com since " +
+        shortDate(deals.previous));
+    }
+    if (!said.length) return "";
+    return said.join(" · ").replace(/^./, function (c) { return c.toUpperCase(); }) + ".";
   }
 
-  /* The line opened with "On sale · " while it was a `<summary>`, because a
-     collapsed strip has to say what it is before it says anything else. Under
-     a heading that already says it, that prefix is the heading twice. */
-  function capitalise(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  }
+
 
   /* One row per boat, both sellers on it.
 
@@ -2023,6 +2011,125 @@
         (SELLER_NAMES[seller] || "?") + (day ? " · " + shortDate(day) : "")));
     });
     return td;
+  }
+
+  /* ---------- the sale view's own bands ---------- */
+
+  /* Four figures, not a sentence. The line this replaces carried the same
+     facts -- how many sailings, how many boats, what moved, when it was read --
+     run together in prose, which is the shape a `<summary>` needs and the
+     wrong one for the top of a page: a reader skims a strip and reads a
+     sentence, and these are numbers to be skimmed.
+
+     The reading date is one of the four rather than a footnote, because a
+     discount is a claim with a date on it and this one can end overnight. */
+  function saleStrip(deals, spread) {
+    var strip = el("div", "sale-strip");
+    function fig(value, label, title) {
+      var box = el("div", "sale-fig");
+      var b = el("b", null, value);
+      box.appendChild(b);
+      box.appendChild(el("span", null, label));
+      if (title) box.title = title;
+      strip.appendChild(box);
+    }
+    var sale = deals.on_sale || {};
+    var boats = (sale.boats || []).length;
+    if (sale.sailings) fig(sale.sailings.toLocaleString("en-IE"), "sailings cut");
+    if (boats) fig(boats, boats === 1 ? "boat" : "boats");
+
+    /* The depth as a range, which is the fact the fleet table cannot show:
+       the discounts are not one number, and "10-30% off" says at a glance
+       what a column of per-boat rates makes you scan for. */
+    var rates = spread.filter(function (b) { return b.pct; });
+    if (rates.length) {
+      var lo = rates[rates.length - 1].pct, hi = rates[0].pct;
+      fig(lo === hi ? lo + "%" : lo + "–" + hi + "%", "off");
+    }
+    /* The oldest day anything here was read, not the freshest: three books
+       feed this view and a summary is as fresh as its stalest half. */
+    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read]
+      .filter(Boolean).sort();
+    if (days.length) {
+      fig(shortDate(days[0]), "read",
+          "The oldest of the readings behind this page. A discount is what a " +
+          "seller claimed on the day beside its name, and it can end overnight.");
+    }
+    return strip;
+  }
+
+  /* Every discounted sailing, grouped by how deep the cut is.
+   *
+     The per-boat table below is alphabetical, which answers "is this boat on
+     sale" and cannot answer "where are the real discounts" -- and the fleet
+     does not cluster evenly: measured on the committed dataset, 90 sailings at
+     10%, 80 at 15%, 48 at 20%, 9 at 30%. A shopper wants the deepest first.
+
+     The band with no rate at all is a row here rather than an omission. Two
+     sailings are marked down by a seller that did not state a percentage
+     against the fare this page prints, and "on sale, rate not stated" is the
+     honest form of that -- it is not a dash, and it is certainly not 0%. */
+  function discountSpread() {
+    var bands = {};
+    D.departures.forEach(function (dep) {
+      if (!dep.sale) return;
+      var key = dep.sale.pct || 0;
+      var band = bands[key] || (bands[key] = {
+        pct: dep.sale.pct || 0, n: 0, boats: {}, first: null, last: null,
+        sellers: {}, wasLo: null, wasHi: null, nowLo: null, nowHi: null
+      });
+      band.n += 1;
+      band.boats[dep.boat_id] = 1;
+      if (!band.first || dep.start < band.first) band.first = dep.start;
+      if (!band.last || dep.start > band.last) band.last = dep.start;
+      (dep.sale.sellers || []).forEach(function (i) { band.sellers[i] = 1; });
+      /* `was` against the row's own Advertised figure, and never against the
+         payload's `price`: `was` is already converted to the display currency
+         and `price` is the sailing's own, so subtracting them is nonsense on
+         the 126 rows quoted in dollars. `base` is the converted one. */
+      if (dep.sale.was && dep.base) {
+        if (band.wasLo === null || dep.sale.was < band.wasLo) band.wasLo = dep.sale.was;
+        if (band.wasHi === null || dep.sale.was > band.wasHi) band.wasHi = dep.sale.was;
+        if (band.nowLo === null || dep.base < band.nowLo) band.nowLo = dep.base;
+        if (band.nowHi === null || dep.base > band.nowHi) band.nowHi = dep.base;
+      }
+    });
+    return Object.keys(bands).map(function (k) { return bands[k]; })
+      .sort(function (a, b) { return b.pct - a.pct; });
+  }
+
+  function spreadTable(spread) {
+    var table = el("table", "deals-table");
+    var head = document.createElement("thead");
+    var hr = el("tr", null);
+    ["Off", "Sailings", "Boats", "First", "Last", "From", "Cut by"]
+      .forEach(function (h) { hr.appendChild(el("th", null, h)); });
+    head.appendChild(hr);
+    table.appendChild(head);
+
+    var body = document.createElement("tbody");
+    spread.forEach(function (b) {
+      var tr = el("tr", null);
+      tr.appendChild(b.pct
+        ? el("td", "d-off", b.pct + "% off")
+        : el("td", "d-none", "rate not stated"));
+      tr.appendChild(el("td", "d-when", b.n.toLocaleString("en-IE")));
+      tr.appendChild(el("td", "d-when", String(Object.keys(b.boats).length)));
+      tr.appendChild(el("td", "d-when", b.first ? shortDate(b.first) : "—"));
+      tr.appendChild(el("td", "d-when", b.last ? shortDate(b.last) : "—"));
+      /* What these berths were, before. A range because a band holds many
+         sailings and one figure would be a price nobody quoted; the row in the
+         trips table carries each sailing's own pair. */
+      tr.appendChild(el("td", "d-was", b.wasLo === null ? "—"
+        : b.wasLo === b.wasHi ? eur(b.wasLo)
+        : eur(b.wasLo) + "–" + eur(b.wasHi)));
+      tr.appendChild(el("td", "d-offer", Object.keys(b.sellers)
+        .map(function (i) { return SELLER_NAMES[+i] || "a seller"; })
+        .join(" · ") || "—"));
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    return table;
   }
 
   function offersTable(rows) {
@@ -2277,34 +2384,52 @@
     var changed = ((deals.changes || {}).new || []).length +
       ((deals.changes || {}).withdrawn || []).length +
       ((deals.changes || {}).changed || []).length;
-    /* This was a `<summary>`, and it carried the whole overview because
-       everything under it was folded away. It is the opening line of a view
-       now, so it says what the page is rather than standing in for it. */
-    document.getElementById("dealsLine").textContent = dealsSummary(deals, changed);
-
     var body = host;
     body.textContent = "";
 
+    /* Band one: the figures, skimmable. This was a run-on sentence, which is
+       the shape a collapsed `<summary>` needs and the wrong one for the top of
+       a page. */
+    var spread = discountSpread();
+    var line = document.getElementById("dealsLine");
+    line.textContent = "";
+    line.appendChild(saleStrip(deals, spread));
+    /* What moved since the last reading, still in words: it is a sentence
+       about two days rather than a figure, and the strip is figures. The
+       counts it used to open with are the strip's now, so it says only the
+       part the strip cannot -- a movement needs two dates and a direction. */
+    var moves = movedLine(deals, changed);
+    if (moves) line.appendChild(el("p", "sale-moved", moves));
+
+    /* Band two: the discounts by depth, deepest first. */
+    if (spread.length) {
+      body.appendChild(el("h4", null, "How deep the cuts go"));
+      body.appendChild(el("p", "deals-note",
+        "Every discounted sailing, grouped by how much comes off. Taken from " +
+        "the list price each seller prints beside its own — struck through " +
+        "against every cabin on a booking page, and stated outright by PADI — " +
+        "never from the “20% Off” an operator writes into a trip name. " +
+        "“From” is what those berths were before the cut; what they are now is " +
+        "the Advertised column of each sailing’s own row, which the On sale " +
+        "filter over the trips table brings together."));
+      body.appendChild(spreadTable(spread));
+    }
+
+    /* Band three: the same discounts by boat, which is the detail view -- its
+       "n of m" and its week window are what tell a reader which sailing to
+       book, and neither is a fact about depth. */
     var rows = offerRows(fleet, offers);
     if (rows.length) {
-      body.appendChild(el("h4", null, "What is discounted, by boat"));
+      body.appendChild(el("h4", null, "Which boats, and which weeks"));
       /* One paragraph for one table, and it has to name both sources without
-         claiming either says the other's half. The counts and the window are
-         the sailings' own; the money on the right is one exemplar PADI names.
-         It opened by restating the sailing and boat counts, which the view's
-         own first line now carries three lines above it. */
+         claiming either says the other's half. Where the markdown is read
+         from is stated once, above, by the band this table is the detail of;
+         what is left to say here is how to read the two halves. */
       body.appendChild(el("p", "deals-note",
-        "Taken " +
-        "from the list price each seller prints beside its own — struck " +
-        "through against every cabin on a booking page, and stated outright " +
-        "by PADI — never from the “20% Off” an operator writes into a trip " +
-        "name. The left of each row is every discounted sailing that boat " +
-        "sells and the weeks they fall in; the right is the single sailing " +
-        "PADI advertises for it, which is a berth price and not a total — the " +
-        "fees on the trips table still land on the bill. To read these " +
-        "sailings as departures, priced whole, the On sale filter over that " +
-        "table shows the same ones. A sale is what a seller claimed on the " +
-        "day beside its name, and can end overnight."));
+        "The left of each row is every discounted sailing that boat sells and " +
+        "the weeks they fall in; the right is the single sailing PADI " +
+        "advertises for it, which is a berth price and not a total — the fees " +
+        "on the trips table still land on the bill."));
       var note = deals.coverage ? coverageNote(deals.coverage) : null;
       if (note) body.appendChild(note);
       body.appendChild(offersTable(rows));
