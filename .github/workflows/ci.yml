@@ -66,3 +66,39 @@ jobs:
               sys.exit("data/seed/egypt-2027.json is out of sync with tools/make_seed.py")
           print("seed matches generator")
           PY
+
+  # The layout claims, measured rather than grepped.
+  #
+  # A job of its own because it needs a browser and the suite above must not:
+  # `python3 -m unittest discover -s tests` has to keep working on a checkout
+  # with nothing installed, which is what every other job here runs. So
+  # tests/test_layout.py skips when Playwright is absent -- and a test that
+  # only ever skips protects nothing, which is what this job is for.
+  #
+  # It exists because the alternative was tried and failed silently. The three
+  # views shipped with eight tests asserting that the *source text* of their
+  # layout rules was present, and every one of them passed over a sale view
+  # whose table rendered at zero height at 768x600 (#130) -- including the one
+  # named for the panel that caused it.
+  layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Playwright
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      # Against the built page rather than the committed one, so a template
+      # change is measured in the same run that makes it. `promote --check`
+      # above is what keeps the committed page honest.
+      - name: Site builds
+        run: PYTHONPATH=src python3 -m liveaboard.cli build
+
+      - name: Views measure up
+        run: PYTHONPATH=src python3 -m unittest tests.test_layout -v

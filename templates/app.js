@@ -35,6 +35,12 @@
      view at all -- so it is counted once here rather than at each of them. */
   var onSaleCount = D.departures.filter(function (d) { return !!d.sale; }).length;
 
+  /* Written on every draw by countRail(), which runs from afterDraw -- so they
+     are looked up here rather than beside the rest of the view wiring, which
+     is declared after the first draw has already happened. */
+  var railTripsCount = document.getElementById("navTripsCount");
+  var railSaleCount = document.getElementById("navSaleCount");
+
   var euro = new Intl.NumberFormat("en-IE", {
     style: "currency", currency: D.meta.currency,
     minimumFractionDigits: 0, maximumFractionDigits: 0
@@ -1012,7 +1018,10 @@
   function passes(dep, itin, skip) {
     if (skip !== "months" && state.months.size && !state.months.has(dep.month)) return false;
     if (state.hideSoldOut && !dep.bookable) return false;
-    if (saleOnly() && !dep.sale) return false;
+    /* Skippable like any other facet, and for the reason the mechanism exists:
+       the rail has to answer "how many would the *other* view show" without
+       switching to it, which is the same question a chip's count asks. */
+    if (skip !== "sale" && saleOnly() && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
@@ -1373,6 +1382,35 @@
     rows.forEach(function (r) { boats[r.i.boat_id] = 1; itins[r.i.id] = 1; });
     document.getElementById("nboats").textContent = Object.keys(boats).length;
     document.getElementById("nitin").textContent = Object.keys(itins).length;
+    countRail();
+  }
+
+  /* What each view would show under the filters in force now.
+     Both counts were written once at boot and never again, so filtering to one
+     month left the rail reading "Trips 1,122" beside a stat block reading "12
+     rows shown" -- two numbers about one table, one of them frozen.
+
+     The On sale *chip* keeps its fixed count and is right to: it says how much
+     there is to find, so a number that fell to 0 under an unrelated month
+     filter would read as "no sales" rather than "none in June". That argument
+     is about a control you press to add a filter. A rail item is a destination,
+     and a destination's number is a promise about what opening it gives you.
+
+     One pass with the sale facet skipped answers both: the survivors are the
+     trips view, and the marked-down ones among them are the sale view. Which
+     view is on screen does not enter into it, so the two agree from either. */
+  function countRail() {
+    var trips = 0, sale = 0;
+    D.departures.forEach(function (dep) {
+      if (!passes(dep, D.itineraries[dep.itinerary_id], "sale")) return;
+      trips++;
+      if (dep.sale) sale++;
+    });
+    railTripsCount.textContent = trips.toLocaleString("en-IE");
+    /* A count only where there are rows to count. PADI can be advertising a
+       sale on boats whose sailings carry no marked-down fare here, and a "0"
+       beside the name would read as "no sale on" over a panel listing one. */
+    railSaleCount.textContent = sale ? sale.toLocaleString("en-IE") : "";
   }
 
   /* How many chips a bank shows before the rest go behind "more".
@@ -2318,8 +2356,23 @@
      reason a view can be linked to or reloaded into. Nothing else on this page
      writes to the URL, so there is nothing to collide with. */
   var VIEWS = ["trips", "sale", "history"];
+  /* What each view is called where a view has to be named: the rail item it
+     lights, the heading the table pane carries while it is on, and the browser
+     tab. All three views printed one title before, so a bookmark of #history
+     said "trips" and three history entries shared one name -- the title being
+     the only thing a bookmark, a tab strip or a history list has to read. */
+  var VIEW_TITLES = { trips: "Trips", sale: "On sale", history: "History" };
+  var VIEW_HEADINGS = {
+    trips: "Every departure, priced whole",
+    sale: "Sailings a seller has marked down"
+  };
+  var BASE_TITLE = document.title;
+
   var panes = {
-    trips: document.getElementById("tripsPane"),
+    /* The pane that has a table in it, which two of the three views draw into.
+       Not `trips`: naming it for one of its two occupants is what the markup
+       stopped doing (#136). */
+    table: document.getElementById("tablePane"),
     history: document.getElementById("historyPane")
   };
   var navItems = {
@@ -2331,29 +2384,51 @@
   var tripsLead = document.getElementById("tripsLead");
   var dealsHost = document.getElementById("deals");
   var statsHost = document.getElementById("stats");
+  var tableHeading = document.getElementById("tableHeading");
+  var shellEl = document.querySelector(".shell");
   /* Whether the deals panel found anything, and therefore whether there is a
      sale view to offer at all. Both settled at boot, below. */
   var dealsShown = false, saleView = false;
+  /* The last view that drew the table, which is what decides whether arriving
+     at one is arriving at a different list. `state.view` cannot answer it: the
+     history view sits between the two often enough that reading the view we
+     came *from* called the trips-history-trips round trip a change of list. */
+  var lastTable = null;
 
   function viewFromHash() {
     var name = (window.location.hash || "").replace(/^#/, "");
     return VIEWS.indexOf(name) < 0 ? "trips" : name;
   }
 
-  function showView(name) {
+  /* A view the page declined to give is not one the address bar may go on
+     claiming. `showView` silently rewrote `#nonsense`, and `#sale` where there
+     is no sale data, to trips -- and left the hash alone, so what a visitor
+     bookmarked or shared was a link to a view they had not been shown, with
+     nothing saying so. `replace` rather than assignment: correcting a wrong
+     address is not a place to go back to.
+
+     An empty hash is left empty. It claims nothing, so it is not lying, and
+     rewriting a bare URL the moment the page loads is a change the visitor did
+     not ask for. */
+  function settleHash(name) {
+    var raw = window.location.hash;
+    if (raw && raw !== "#" + name) window.location.replace("#" + name);
+  }
+
+  function showView(name, focus) {
     if (VIEWS.indexOf(name) < 0) name = "trips";
     /* A view with nothing behind it is not offered and cannot be reached by
        typing its name into the address bar either. Same rule as the On sale
        chip's: a control that does nothing must not be dressed as one that
        does. */
     if (name === "sale" && !saleView) name = "trips";
+    settleHash(name);
     if (name === state.view) return;
 
-    var wasSale = state.view === "sale";
     state.view = name;
     var table = name !== "history";
 
-    panes.trips.hidden = !table;
+    panes.table.hidden = !table;
     panes.history.hidden = table;
     /* One lead, never two stacked. The trips lead is 166px of prose and the
        sale lead says the same thing about a narrower set of rows; both at once
@@ -2366,7 +2441,7 @@
        lead left 31px of table at 1440x900, an index to a list with the list
        pushed off the screen. The summary line carries the overview, which is
        the part that answers at a glance. */
-    if (dealsHost) dealsHost.hidden = !(name === "sale" && dealsShown);
+    dealsHost.hidden = !(name === "sale" && dealsShown);
     /* Rows shown, boats, itineraries: they count what the table is showing, so
        they belong to the views that have one. Left up on the history view they
        would be three numbers about a table that is not on screen. */
@@ -2374,38 +2449,61 @@
     /* The chip is the filter; the sale view *is* the filter. Both at once
        would be a switch that cannot be switched off. */
     onSale.hidden = !onSaleCount || name === "sale";
+    if (table) tableHeading.textContent = VIEW_HEADINGS[name];
+
+    /* The tab, the history entry and the bookmark. Prefixed rather than
+       appended, because every one of those three truncates from the end and
+       the part that differs is the part worth keeping. Trips is the default
+       view and keeps the plain title. */
+    document.title = name === "trips"
+      ? BASE_TITLE : VIEW_TITLES[name] + " \u00b7 " + BASE_TITLE;
 
     VIEWS.forEach(function (id) {
-      var item = navItems[id];
-      if (!item) return;
-      if (id === name) item.setAttribute("aria-current", "page");
-      else item.removeAttribute("aria-current");
+      if (id === name) navItems[id].setAttribute("aria-current", "page");
+      else navItems[id].removeAttribute("aria-current");
     });
 
     /* Trips and sale are two different lists, so crossing between them starts
-       at the top of one, exactly as changing any other filter does. Returning
-       from the history view filtered nothing, so what was drawn is kept. */
-    if (table) draw(!wasSale && name !== "sale");
+       at the top of one, exactly as changing any other filter does -- and the
+       scroller has to be told, which it was not: the table was redrawn as a
+       fresh 120-row page while `.shell` stayed 5,368px down, landing the
+       visitor at the bottom of a list they had not seen the top of and near
+       enough the end to trip the infinite loader on arrival.
+
+       Returning from the history view filtered nothing, so what was drawn and
+       where it was scrolled to are both kept. That was the intent before and
+       held on one of the two routes: the condition asked "did we come from the
+       sale view", which is a different question from "is this a different
+       list", and answered it wrongly for history -> sale. */
+    if (table) {
+      var same = name === lastTable;
+      lastTable = name;
+      draw(same);
+      if (!same && shellEl) shellEl.scrollTop = 0;
+    }
+
+    /* Focus the pane that just appeared. The rail items are links to `#trips`,
+       `#sale` and `#history`, which match no element id -- they are addresses
+       for this page's own router, not fragments -- so the browser has nothing
+       to move focus to and does not try: focus stayed on the link while the
+       whole content area was replaced behind it, and back and forward, which
+       have no link to leave it on at all, changed the view with focus stranded
+       wherever it happened to be.
+
+       Not at boot: nothing has been activated yet, and taking focus off the
+       document on load is a change the visitor did not ask for. */
+    if (focus) panes[table ? "table" : "history"].focus();
   }
 
-  window.addEventListener("hashchange", function () { showView(viewFromHash()); });
+  window.addEventListener("hashchange", function () { showView(viewFromHash(), true); });
 
   drawNotice();
   dealsShown = drawDeals();
   saleView = onSaleCount > 0 || dealsShown;
-
-  document.getElementById("navTripsCount").textContent =
-    D.meta.counts.departures.toLocaleString("en-IE");
-  if (saleView) {
-    navItems.sale.hidden = false;
-    /* A count only where there are rows to count. PADI can be advertising a
-       sale on boats whose sailings carry no marked-down fare here, and a "0"
-       beside the name would read as "no sale on" over a panel listing one. */
-    document.getElementById("navSaleCount").textContent =
-      onSaleCount ? onSaleCount.toLocaleString("en-IE") : "";
-  }
+  if (saleView) navItems.sale.hidden = false;
 
   /* Draws the table as part of settling the view, so there is no first paint
-     of a view the address bar did not ask for. */
-  showView(viewFromHash());
+     of a view the address bar did not ask for. The rail's counts are written
+     by the draw it performs, so there is none to set here. */
+  showView(viewFromHash(), false);
 })();

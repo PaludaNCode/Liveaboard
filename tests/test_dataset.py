@@ -1338,6 +1338,14 @@ class TestTheThreeViews(unittest.TestCase):
     again to answer a question the first one already holds the data for. That
     makes the split a set of panes and a rail rather than a set of files, and
     every rule below is a way for that to fail quietly rather than loudly.
+
+    What is asserted here is wiring -- a control that addresses a view, a
+    placeholder that lands in one pane and not two. Anything about the *size*
+    of what those panes render is in ``tests/test_layout.py``, which drives a
+    browser, because this file's way of checking a layout claim was to assert
+    that the source text of the rule was present. Eight such assertions passed
+    over a table rendered at zero height (#130), including the one named for
+    the panel that caused it.
     """
 
     PAGE = ROOT / "templates" / "index.html"
@@ -1357,7 +1365,7 @@ class TestTheThreeViews(unittest.TestCase):
         """Half a view is worse than none: a rail item pointing at nothing, or
         a pane nothing can open, is a section that exists only in the markup."""
         page, app = self.page(), self.app()
-        for pane in ('id="tripsPane"', 'id="historyPane"'):
+        for pane in ('id="tablePane"', 'id="historyPane"'):
             self.assertIn(pane, page)
         for item in ('id="navTrips"', 'id="navSale"', 'id="navHistory"'):
             self.assertIn(item, page)
@@ -1372,11 +1380,17 @@ class TestTheThreeViews(unittest.TestCase):
         The chip and the view are the same filter reached two ways. Read
         separately they drift, and the drift is silent: a table showing every
         sailing under a heading that says only the discounted ones.
+
+        Matched loosely on purpose. The predecessor of this test pinned the
+        whitespace of a one-line function, so wrapping the line failed the
+        suite while the page behaved identically -- and a test that fails for
+        the wrong reason is edited to match the code, which is where it stops
+        testing anything.
         """
         app = self.app()
-        self.assertIn('function saleOnly() { return state.onSaleOnly || state.view === "sale"; }',
-                      app, "the sale view and the On sale chip are two filters now")
-        self.assertIn("if (saleOnly() && !dep.sale) return false;", app,
+        self.assertIn('state.onSaleOnly || state.view === "sale"', app,
+                      "the sale view and the On sale chip are two filters now")
+        self.assertIn("saleOnly() && !dep.sale", app,
                       "the row filter no longer reads the view")
         self.assertIn('onSale.hidden = !onSaleCount || name === "sale"', app,
                       "the chip is still offered on the view that already holds it down")
@@ -1389,6 +1403,19 @@ class TestTheThreeViews(unittest.TestCase):
         app = self.app()
         self.assertIn("saleView = onSaleCount > 0 || dealsShown", app)
         self.assertIn('if (name === "sale" && !saleView) name = "trips";', app)
+
+    def test_the_address_bar_never_names_a_view_that_was_declined(self) -> None:
+        """`showView` rewrites a name it will not honour -- an unknown one, or
+        the sale view where there is no sale data -- and the hash has to be
+        rewritten with it. Left alone, what the visitor bookmarks or shares is
+        a link to a view the page decided not to give them, saying nothing
+        about it. `replace`, because a corrected address is not a place to go
+        back to."""
+        app = self.app()
+        self.assertIn("window.location.replace", app,
+                      "a declined view stays in the address bar")
+        self.assertNotIn("window.location.hash =", app,
+                         "correcting the address leaves a history entry to go back to")
 
     def test_the_history_view_carries_the_report_and_the_files(self) -> None:
         """Both placeholders moved out of the method footer together. Leaving
@@ -1412,23 +1439,47 @@ class TestTheThreeViews(unittest.TestCase):
         """
         self.assertIn("[hidden] { display:none !important; }", self.css())
 
+    def test_a_hidden_panel_does_not_size_a_visible_table(self) -> None:
+        """`details` keeps `open` while hidden, so a sibling selector on
+        `[open]` alone went on sizing the trips view's table from the sale
+        view's panel long after that panel had left the screen."""
+        css = self.css()
+        self.assertIn("#deals[open]:not([hidden]) ~ .shell", css)
+        self.assertNotIn("#deals[open] ~ .shell", css)
+
     def test_the_deals_panel_and_the_table_share_the_view(self) -> None:
         """Opening the index must neither hide what it indexes nor fail to
         open.
 
-        Two measured failures, and the rules that answer them. Sized against a
-        table asking for its whole 6,600px of rows, the panel opened to an 87px
-        slot -- so the table is measured from zero while it is open, which is
-        the fix the filter banks already use. Sized as a sibling of the pane, it
-        took its 34vh out of the pane's box and the toolbar inside that box
-        painted over the footer -- so it sits inside the pane, and the one
-        scrolling region gives way first, as it did before there were views.
+        Sized from content, the panel opened to an 87px slot, because the table
+        beside it was asking for its whole 6,600px of rows. Sized from zero the
+        table could claim nothing at all and was handed whatever the panel's
+        viewport-relative cap left over, which at 768x600 was nothing (#130).
+        A basis is a claim in the division rather than a limit on it, so both
+        boxes shrink in proportion and the panel -- which scrolls inside itself
+        and loses nothing by being shorter -- gives up the larger share.
+
+        That the arithmetic comes out right is not something this file can see.
+        ``tests/test_layout.py`` measures it.
         """
         css, page = self.css(), self.page()
-        self.assertIn("#deals[open] ~ .shell { flex-basis:0; }", css,
-                      "the table crowds the panel it is opened beside")
+        self.assertIn("#deals[open]:not([hidden]) { flex:1 1 0;", css,
+                      "the panel takes its cap first and the table gets the remainder")
         self.assertIn(".shell { flex:1 1 auto; min-height:0;", css,
                       "the table's own scroller lost the minimum the footer depends on")
-        pane = page.split('id="tripsPane"', 1)[1]
+        pane = page.split('id="tablePane"', 1)[1]
         self.assertLess(pane.index('id="deals"'), pane.index('class="toolbar"'),
                         "the deals panel is not inside the pane, above the toolbar")
+
+    def test_every_view_names_itself(self) -> None:
+        """Three things read a view's name and none of them is the screen: the
+        document outline, the browser tab and whatever announces that the main
+        region has been replaced. All three views printed one title, so a
+        bookmark of the history view said trips; two of the three had no
+        heading, so the outline went from the site's h1 straight to a table."""
+        page, app = self.page(), self.app()
+        self.assertIn('class="view-heading"', page, "the table pane names neither view")
+        self.assertIn("document.title =", app, "every view shares one title")
+        self.assertIn("tabindex=\"-1\"", page,
+                      "no pane can be focused, so a view change is announced by nothing")
+        self.assertIn(".focus()", app, "nothing moves focus into the view that appeared")

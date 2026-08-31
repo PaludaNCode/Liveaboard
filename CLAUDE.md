@@ -167,9 +167,33 @@ Break these and the site starts lying quietly rather than failing loudly.
   (`saleOnly()`, read by `passes`), so splitting it out would ship the inlined
   payload a second time to say what the first copy already knows, and reading
   the filter in two places is two answers to one question. A new section is a
-  pane and a rail item. Which pane is on screen is the `hidden` attribute, and
-  `[hidden] { display:none !important }` is what makes that beat the panes' own
-  `display:flex` — without it every view draws at once.
+  pane and a rail item — and `tablePane` is not the trips pane: two views draw
+  there and the deals panel inside it belongs to the other one. Which pane is
+  on screen is the `hidden` attribute, and `[hidden] { display:none !important }`
+  is what makes that beat the panes' own `display:flex` — without it every view
+  draws at once. **The hash is the address, so it may not name a view that is
+  not on screen**: `showView` rewrites a name it will not honour — an unknown
+  one, or `#sale` where no markdown was read — and `location.replace` corrects
+  the address with it, or what a visitor bookmarks is a view they were never
+  shown. Each view sets `document.title` and focuses its pane, because a
+  bookmark, a history entry and a screen reader each have only a name to go on
+  and all three views once had the same one.
+- **The index never outgrows what it indexes.** The deals panel and the table
+  divide the room evenly (`flex:1 1 0` on both), and 34vh is what the panel may
+  not exceed when there is plenty rather than what it claims when there is not.
+  A cap alone does the opposite of what it looks like: `max-height` does not
+  make a flex item shrink, it *freezes* it — an item whose content exceeds its
+  clamp contributes nothing to absorbing a shortfall — so the table was handed
+  the remainder after the panel had taken its cap, and at 768×600 the remainder
+  was **0px**. A `min-height` floor under the table fixes neither half: a floor
+  that can exceed the room left is a pane painting over the footer.
+- **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
+  Chromium over the three views at six windows; everything else about the split
+  is asserted as template text, which is right for wiring and worthless for
+  geometry. Eight source-string assertions passed over that 0px table,
+  including the one named for the panel that caused it. The file skips without
+  Playwright so `unittest discover` still needs nothing — the `layout` job in
+  `ci.yml` is what makes it run.
 - **Zero runtime dependencies**, stdlib only, and the site stays one
   self-contained HTML file. Tests use `unittest`, not pytest. One file makes
   page weight load-bearing: nothing is lazily fetched, so anything written per

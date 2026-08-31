@@ -91,7 +91,7 @@
      of the method footer, where a change report -- fixed-width text that wants
      the whole width and a screen of height -- was folded inside a panel about
      something else. -->
-<section class="pane history-pane" id="historyPane" hidden>
+<section class="pane history-pane" id="historyPane" tabindex="-1" hidden>
   <div class="history-body">
     <h2>What changed on the last refresh</h2>
     <p class="history-lead">
@@ -117,8 +117,14 @@
 
 <!-- The table, and the filters over it. Shown by both the trips view and the
      sale view: the sale view is these same rows with the markdown filter held
-     on, which is why it is one pane and not a copy of one. -->
-<div class="pane" id="tripsPane">
+     on, which is why it is one pane and not a copy of one.
+
+     `tablePane`, not `tripsPane`, because it is not the trips view's: two of
+     the three views draw here, and the deals panel inside it belongs to the
+     other one. The first name read as "the pane for the trips view" and would
+     have been believed by whoever adds a fourth. -->
+<div class="pane" id="tablePane" tabindex="-1">
+  <h2 class="view-heading" id="tableHeading">Every departure</h2>
 
 <!-- What the other seller is discounting today, and what moved since the last
      day the deals book holds. Inside the pane rather than above it, so the
@@ -168,6 +174,20 @@
          a control that does nothing dressed as one that does. -->
     <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
+  <!-- A line of its own, always. Every other group here is one control; this
+       is a bank of chips whose width depends on how many sellers there are and
+       what they are called, so where it landed was decided by whatever sat
+       beside it: row two at 1440 and 1280, row two *sharing* with Hide sold
+       out at 900, row three at 768, its own line again on a phone. On a page
+       where the toolbar's height comes straight out of the table's, a group
+       that lands somewhere new at every width is a table that is a different
+       size at every width for no reason a reader can see.
+
+       A break rather than `flex-basis:100%` on the group itself, because that
+       would push Reset and the build line onto a row of their own too, and
+       they are not a filter -- they belong at the end of whatever row has
+       space. This only says where the bank starts. -->
+  <span class="trow-break" aria-hidden="true"></span>
   <!-- Who sells the sailing. Chips rather than a select, like every other
        filter here, and three states because there are three: both sites list
        it, only liveaboard.com does, or only PADI Travel does. Both are named,
@@ -247,7 +267,7 @@
   </table>
 </main>
 
-</div><!-- /#tripsPane -->
+</div><!-- /#tablePane -->
 </div><!-- /.views -->
 </div><!-- /.workspace -->
 
