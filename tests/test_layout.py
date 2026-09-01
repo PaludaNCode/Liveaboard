@@ -524,9 +524,12 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         """Two things say so and both are asserted: the count on the control
         that hides them, and a pill per filter naming it and dropping it.
 
-        The count is against each control's *default* rather than its
-        emptiness, which is how the Include switches get in -- both start on,
-        and turning one off changes every total without touching a row.
+        And the count measures exactly what is behind that control. The Include
+        switches used to be in it, on the reasoning that the number should
+        cover every control not as it opened -- but they are never hidden:
+        they sit on the toolbar at every width, lit, an inch from the badge. A
+        badge reading "2" over a drawer holding nothing that put it there is a
+        worse lie than the one it guards against.
         """
         page = self.open(390, 844)
         self.addCleanup(page.close)
@@ -547,24 +550,47 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              "the count moved and the pills did not, so what is "
                              "filtering is a number and not a name")
 
-        # A switch is not a filter and is counted anyway: it changes what every
-        # total on the page means rather than which rows are on it.
+        # A switch is not a filter and is not counted as one. It filters no
+        # rows -- it changes what every total means -- and it is on screen
+        # saying so, which is the whole reason it is on the toolbar.
+        before = count()
         page.click("#toggles .chip")
         page.wait_for_timeout(320)
-        self.assertEqual(count(), "3")
+        self.assertEqual(count(), before,
+                         "turning a total switch off moved the filter count")
+        self.assertEqual(len(pills()), 2,
+                         "a total switch put a pill in the bar that names filters")
+        self.assertFalse(
+            page.evaluate("()=>document.getElementById('toggles')"
+                          ".querySelector('.chip').getAttribute('aria-pressed') === 'true'"),
+            "the switch did not actually turn off")
 
         # And all of it survives the drawer closing, which is the whole point.
         page.click("#filtersToggle")
         page.wait_for_timeout(280)
-        self.assertEqual(count(), "3")
-        self.assertEqual(len(pills()), 3)
+        self.assertEqual(count(), "2")
+        self.assertEqual(len(pills()), 2)
 
         # A pill drops its own filter, so undoing one does not mean opening the
         # drawer to hunt for the chip that set it.
         page.click("#activePills .pill-drop")
         page.wait_for_timeout(320)
-        self.assertEqual(count(), "2")
-        self.assertEqual(len(pills()), 2)
+        self.assertEqual(count(), "1")
+        self.assertEqual(len(pills()), 1)
+
+        # Clear all clears what the bar lists, and stops there: the switch the
+        # visitor turned off is not on that bar, so putting it back would be an
+        # unnamed side effect moving every total on the page.
+        off = page.evaluate("()=>document.getElementById('toggles')"
+                            ".querySelector('.chip').getAttribute('aria-pressed')")
+        page.click("#reset")
+        page.wait_for_timeout(320)
+        self.assertEqual(count(), "")
+        self.assertEqual(pills(), [])
+        self.assertEqual(
+            page.evaluate("()=>document.getElementById('toggles')"
+                          ".querySelector('.chip').getAttribute('aria-pressed')"), off,
+            "Clear all silently switched a total back on")
 
     # -- the router ----------------------------------------------------------
 

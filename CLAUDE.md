@@ -605,7 +605,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   Two things stop a closed drawer hiding an active filter: the button carries
   the count, and `#activePills` names each one and drops it on a press — so
   undoing one no longer means opening the drawer to hunt for the chip that set
-  it. Inside, **one bank at a time**, picked from a rail that carries a count
+  it. **Both are about the controls the drawer hides, and that is what bounds
+  them.** The two Include switches were in the count and in the bar, on the
+  reasoning that the number should cover every control not as the page opened —
+  which gave a badge reading "2" over a drawer holding nothing that put it
+  there, and an *EXCLUDING nitrox* pill under a heading reading *Filtering on*
+  about a switch that filters no rows. They are never hidden: they sit on the
+  toolbar at every width, lit, an inch from the badge, which is the whole
+  reason they are out there. So `Clear all` leaves them where the visitor put
+  them too — it clears what the bar lists, and resetting a control the bar does
+  not name is an unnamed side effect that moves every total on the page.
+  Inside, **one bank at a time**, picked from a rail that carries a count
   per bank: stacked, the panel was as tall as the sum of the longest of each,
   which is the wall of filters the fold exists to prevent. The toolbar does not
   wrap above 900px and the meta line shrinks instead — a wrapping flex
