@@ -45,6 +45,15 @@ nothing moved.
 changes: HEAD -> 2026-08-30
 ===========================
 
+nothing moved.
+```
+
+## 2026-08-30
+
+```
+changes: HEAD -> 2026-08-30
+===========================
+
 new departures (7)
   2027-06-07  Ghazala Adventure      North: Wrecks & Reefs                  1,813 USD
   2027-06-14  Ghazala Adventure      North: Wrecks & Reefs                  1,697 USD
