@@ -199,6 +199,16 @@ class Boat:
     cabins: int | None = None
     guests: int | None = None
     length_m: float | None = None
+    year_built: int | None = None
+    """Both read from the vessel's specification table, and both were sitting
+    in ``data/fees.json`` unpublished for as long as that table has been
+    scraped: ``promote`` read the ``specs`` block for ``nitrox_free`` and let
+    the rest fall on the floor -- 71 lengths and 67 build years already in the
+    repository, ``length_m`` null on all 77 boats while the field existed here
+    the whole time. Nothing noticed, because a key that goes nowhere looks
+    exactly like a key the source does not publish. See
+    ``TestEverySpecTheFeeBookHoldsIsPublished``.
+    """
 
     @classmethod
     def from_dict(cls, payload: dict[str, Any]) -> Boat:
@@ -209,6 +219,7 @@ class Boat:
             cabins=payload.get("cabins"),
             guests=payload.get("guests"),
             length_m=payload.get("length_m"),
+            year_built=payload.get("year_built"),
         )
 
 

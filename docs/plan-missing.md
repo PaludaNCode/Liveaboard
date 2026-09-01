@@ -1,5 +1,9 @@
 # Closing the gaps in `docs/missing.md`
 
+**§1, §2 and §3 are done** — see *What it actually bought*, at the foot, which
+records the measurements rather than the intentions. §0's display split, §5 and
+§6 are still open and the reasoning below stands for them.
+
 Ordered by what each item costs against what it fills. Every source claim below
 was probed live on 2026-09-01 rather than reasoned about; the probe results are
 written into `docs/sources/` in the same commit, negatives included.
@@ -243,3 +247,60 @@ nothing.
 4. **§0's split** — once §2 has shrunk *not stated* to the rows that earn it.
 5. **§5** — deliberate, and the display state ships with the pattern.
 6. **§6** — a deletion, whenever.
+
+
+## What it actually bought
+
+Written after doing it, because two of the estimates above were wrong and the
+wrong ones are the useful part.
+
+**§1 — as expected.** `length_m` 0 → 63 of 77 boats, `year_built` 0 → 60,
+no requests. `TestEverySpecTheFeeBookHoldsIsPublished` now fails on a `specs`
+key that reaches nothing, which is the thing that let this sit unnoticed.
+
+**§3 — landed, and empty until tomorrow.** `PadiComAdapter.specs_from_page`
+reads the strip and `fetch_padi.py` writes it, but `data/padi.json` carries no
+`specs` yet: the book is rebuilt whole from a raw store that a local run cannot
+refresh (`MIN_BOOK_RATIO` refuses a cold rebuild, correctly). The daily
+`padi.yml` fills it, and the 14 boats still without a length become 9.
+
+**§2 — the mechanism works and the ceiling is lower than the count suggested.**
+The discovery pass found **162 tour ids on 15 vessel pages** and the book went
+from 317 trips to 352. Published itineraries with no fragment: **85 → 74**, and
+the dive count now comes from the operator's own per-trip figure on 327 rather
+than 316, with PADI's last-resort count down from 69 to 61.
+
+Not the 85 the plan implied, and the residue divides cleanly:
+
+| Still unfragmented | Itineraries | Why |
+|---|---|---|
+| boats liveaboard.com does not list at all | **41** on 6 | no vessel page exists to harvest — PADI is the only source these trips will ever have |
+| trips the two sellers name differently | **33** on 13 | Eriny's *Sinai Classic* against *Sinai Classic One Week*; Blue Seas' PADI routes that site lists nowhere |
+
+The 41 are not a gap this or any fetch can close, and the pass now says so
+rather than spending six requests learning it each run: the fee book is the
+record of which hulls liveaboard.com carries, and boats outside it are named
+and skipped.
+
+**Two joins were needed, not one, and a third was refused.**
+
+1. *The port pair's spacing*, as predicted. `itinerary_key` re-renders it, and
+   MY Blue Pearl went 9 short to 6 on the strength of it.
+2. *The trip's wording*, which the plan missed. A vessel liveaboard.com sells
+   no berth on takes its **names** from PADI, so the fragment spells the same
+   week differently — *St. Johns* against *St. John's*. `padi_key` already
+   exists for looking a foreign record up and is now the fallback, worth 5
+   more itineraries. Emperor Asmaa's two trips that fold onto one key are
+   refused rather than guessed between, which is the standing rule.
+3. *The harbour names.* Folding them through `PORT_ALIASES` looked obvious —
+   *Marsa Ghalib* and *Port Ghalib* are the same harbour and the table says so.
+   Measured: **one extra match, and two collisions**, one of them Blue
+   Horizon's own two itineraries onto a single key. A key that merges two of
+   our own trips serves one's dive count and reefs for the other, which is
+   worse than the miss. Not done, and `test_two_harbours_stay_two_trips` holds
+   it that way.
+
+**And the pass now reports what it did not reach**, every run, fetch or none.
+Every field this book fills has a fallback in `promote`, so a key that matches
+nothing fails silently — which is how 85 itineraries stayed unread without
+anything going red.

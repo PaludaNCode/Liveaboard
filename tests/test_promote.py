@@ -1919,3 +1919,212 @@ class TestProseIsNotRepunctuated(unittest.TestCase):
         from liveaboard.promote import SITE_HINTS, _is_place_list
 
         self.assertTrue(_is_place_list(f"{SITE_HINTS[0]} - {SITE_HINTS[1]}"))
+
+
+class TestEverySpecTheFeeBookHoldsIsPublished(unittest.TestCase):
+    """A `specs` key that goes nowhere looks exactly like one the source
+    does not publish, and that is how `length_m` stayed null on all 77 boats
+    while 71 lengths sat in `data/fees.json`. The fee scrape had read them
+    since the specification table was first parsed; `promote` took `guests`,
+    `cabins` and `nitrox_free` out of that block and dropped the rest.
+
+    So the contract is stated here rather than trusted: every field
+    `VesselFacts` can produce is either published on the boat record or named
+    below with the reason it is not. Adding a row to the scraper's table now
+    fails this test until somebody decides which of the two it is.
+    """
+
+    CONSUMED_ELSEWHERE = {
+        # Folded into the vessel's fee book as an included nitrox line, which
+        # is a stronger place for it than a boat attribute: the page prices
+        # nitrox, it does not describe boats.
+        "nitrox_free",
+        # Read by nothing. Kept in the fee book deliberately -- "Free Nitrox"
+        # and "Nitrox available" are different claims and the second is the
+        # only evidence that a boat fills nitrox at all -- but it is not a
+        # fact about the hull and has no column.
+        "nitrox_available",
+    }
+
+    def boat_fields(self) -> set[str]:
+        from dataclasses import fields
+
+        from liveaboard.models import Boat
+
+        return {f.name for f in fields(Boat)}
+
+    def test_every_vessel_fact_is_published_or_accounted_for(self):
+        from dataclasses import fields
+
+        from liveaboard.scrape.vessel import VesselFacts
+
+        emitted = {f.name for f in fields(VesselFacts) if f.name != "amenities"}
+        emitted |= {"nitrox_free", "nitrox_available"}  # the derived properties
+        unaccounted = emitted - self.boat_fields() - self.CONSUMED_ELSEWHERE
+        self.assertEqual(
+            unaccounted, set(),
+            f"the fee scrape reads {sorted(unaccounted)} and nothing publishes "
+            f"it; put it on Boat or name it in CONSUMED_ELSEWHERE",
+        )
+
+    def test_promote_writes_the_whole_table_onto_the_boat(self):
+        payload = promote(
+            candidate([departure()]),
+            season=SEASON,
+            fees=fee_book(specs={"guests": 20, "cabins": 9,
+                                 "length_m": 36, "year_built": 2014}),
+        )
+        boat = payload["boats"][0]
+        self.assertEqual(boat["length_m"], 36)
+        self.assertEqual(boat["year_built"], 2014)
+
+    def test_a_boat_the_fee_run_has_not_covered_states_neither(self):
+        """Absent, never zero: a hull nobody measured has no length."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        boat = payload["boats"][0]
+        self.assertIsNone(boat["length_m"])
+        self.assertIsNone(boat["year_built"])
+
+
+class TestTheSecondSellerFillsASpecThePanelLeavesBlank(unittest.TestCase):
+    """PADI's vessel page states cabins, length and build year, and is the
+    only source of them for the boats liveaboard.com does not sell -- those
+    have no specification panel for the fee run to read, which is why 6 hulls
+    published no length at all.
+
+    A fallback, never a merge, and never an override: two sellers describing
+    one hull, and the one publishing a table about the boat outranks the one
+    publishing a strip beside a price.
+    """
+
+    def payload(self, *, ours=None, theirs=None):
+        return promote(
+            candidate([departure()]),
+            season=SEASON,
+            fees=fee_book(specs=ours) if ours is not None else None,
+            padi={"vessels": {"alia-soul": {"slug": "alia-soul",
+                                            "specs": theirs or {}}}},
+        )
+
+    def test_padi_answers_where_our_panel_is_silent(self):
+        boat = self.payload(ours={"guests": 20},
+                            theirs={"length_m": 45, "year_built": 2022})["boats"][0]
+        self.assertEqual(boat["length_m"], 45)
+        self.assertEqual(boat["year_built"], 2022)
+
+    def test_padi_answers_where_there_is_no_panel_at_all(self):
+        """The case it exists for: a vessel the fee run can never visit."""
+        boat = self.payload(theirs={"cabins": 16, "length_m": 45})["boats"][0]
+        self.assertEqual(boat["cabins"], 16)
+        self.assertEqual(boat["length_m"], 45)
+
+    def test_our_panel_wins_outright_where_both_speak(self):
+        boat = self.payload(ours={"length_m": 36, "year_built": 2014},
+                            theirs={"length_m": 45, "year_built": 2022})["boats"][0]
+        self.assertEqual(boat["length_m"], 36)
+        self.assertEqual(boat["year_built"], 2014)
+
+    def test_neither_speaking_states_nothing(self):
+        boat = self.payload(ours={"guests": 20})["boats"][0]
+        self.assertIsNone(boat["length_m"])
+
+    def test_padi_is_not_a_source_for_the_guest_count(self):
+        """Its page states none anywhere, so a key here would be invented.
+        Asserted so a future `specs` gaining one is a decision, not a drift."""
+        boat = self.payload(theirs={"guests": 99})["boats"][0]
+        self.assertIsNone(boat["guests"])
+
+
+class TestThePortPairDoesNotSplitOneTripInTwo(unittest.TestCase):
+    """`itinerary_key` used to carry the port pair exactly as typed, and the
+    two sellers do not type it the same way. Our name for a sailing PADI sells
+    is PADI's spelling; the itinerary fragment's is liveaboard.com's. Two of MY
+    Blue Pearl's first three trips differed by one space and were one trip
+    under two keys, so the fragment answered nothing.
+    """
+
+    def key(self, name, slug="blue-pearl"):
+        from liveaboard.promote import itinerary_key
+
+        return itinerary_key(slug, name)
+
+    def test_the_spacing_around_the_dash_stops_mattering(self):
+        canonical = self.key("North & Tiran (Hurghada - Hurghada)")
+        for written in ("North & Tiran (Hurghada-Hurghada)",
+                        "North & Tiran (Hurghada- Hurghada)",
+                        "North & Tiran (Hurghada -Hurghada)",
+                        "North & Tiran (Hurghada – Hurghada)"):
+            with self.subTest(written):
+                self.assertEqual(self.key(written), canonical)
+
+    def test_two_harbours_stay_two_trips(self):
+        """The spacing is punctuation; the harbour is not. Folding names
+        through PORT_ALIASES was measured and refused -- it bought one match
+        and collided two of Blue Horizon's own itineraries onto one key, which
+        would serve one trip's dive count and reefs for the other."""
+        self.assertNotEqual(
+            self.key("Brothers (Hurghada - Port Ghalib)"),
+            self.key("Brothers (Port Ghalib - Hurghada)"),
+        )
+        self.assertNotEqual(
+            self.key("South & St Johns (Marsa Ghalib - Marsa Ghalib)"),
+            self.key("South & St Johns (Port Ghalib - Port Ghalib)"),
+        )
+
+    def test_a_parenthetical_that_is_not_a_port_pair_is_left_alone(self):
+        """"(Brothers - Daedalus)" is a route. Rewriting it would be this
+        function editing a trip name rather than keying one."""
+        self.assertEqual(self.key("Marine Park (Brothers - Daedalus)"),
+                         "blue-pearl::Marine Park (Brothers - Daedalus)")
+
+    def test_a_name_with_no_ports_is_untouched(self):
+        self.assertEqual(self.key("St. John's & Daedalus"),
+                         "blue-pearl::St. John's & Daedalus")
+
+
+class TestAFragmentReachesATripNamedByTheOtherSeller(unittest.TestCase):
+    """A vessel liveaboard.com sells no berth on takes its trip *names* from
+    PADI, and its itinerary fragments -- now that they are reachable at all --
+    are liveaboard.com's, spelling the same week differently: "St. Johns"
+    against "St. John's". The exact key cannot join those and must not learn
+    to; `padi_key` exists for looking a foreign record up and is used here.
+    """
+
+    def trips(self, *names, boat="blue-seas"):
+        return {"trips": {
+            f"{boat}::{n}": {"boat": boat, "name": n, "dives": 21,
+                             "regions": [], "guests": 18}
+            for n in names
+        }}
+
+    def payload(self, ours, book):
+        return promote(
+            candidate([departure(boat="blue-seas", name=ours)]),
+            season=SEASON, trips=book,
+        )["itineraries"][0]
+
+    def test_a_spelling_apart_still_joins(self):
+        got = self.payload("St John's (Port Ghalib- Port Ghalib)",
+                           self.trips("St. Johns (Port Ghalib - Port Ghalib)"))
+        self.assertEqual(got["dives"], 21)
+
+    def test_two_trips_folding_together_are_both_refused(self):
+        """Emperor Asmaa really does sell "South & St Johns" and "South and
+        St. Johns" as two trips. Nothing here can say which one a PADI row
+        meant, and answering with either would put one week's dive count on
+        the other."""
+        got = self.payload(
+            "South & St Johns (Port Ghalib - Port Ghalib)",
+            self.trips("South & St Johns (Marsa Ghalib - Marsa Ghalib)",
+                       "South and St. Johns (Marsa Ghalib - Marsa Ghalib)"),
+        )
+        self.assertEqual(got["dives"], 0)
+
+    def test_the_exact_key_still_wins(self):
+        """The loose key is a fallback, never a replacement: it is reached
+        only where the strict one found nothing."""
+        book = self.trips("St. Johns (Port Ghalib - Port Ghalib)")
+        book["trips"]["exact"] = {"boat": "blue-seas", "dives": 7, "regions": [],
+                                  "name": "St. Johns (Port Ghalib - Port Ghalib)"}
+        got = self.payload("St. Johns (Port Ghalib - Port Ghalib)", book)
+        self.assertEqual(got["dives"], 7)

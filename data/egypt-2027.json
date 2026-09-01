@@ -206,539 +206,693 @@
       "name": "ALSURAYA",
       "operator_id": "alsuraya",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 37,
+      "year_built": 2024
     },
     {
       "id": "avo",
       "name": "AVO",
       "operator_id": "seamad-cruises",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 44,
+      "year_built": 2024
     },
     {
       "id": "alia-soul",
       "name": "Alia Soul",
       "operator_id": "orca-dive-clubs",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 36,
+      "year_built": 2014
     },
     {
       "id": "all-star-ghani",
       "name": "All Star Ghani",
       "operator_id": "all-star-liveaboards",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 138,
+      "year_built": 2003
     },
     {
       "id": "all-star-red-sea",
       "name": "All Star Scuba Scene",
       "operator_id": "all-star-liveaboards",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 48,
+      "year_built": 2023
     },
     {
       "id": "amelie",
       "name": "Amelie",
       "operator_id": "amelie-safari",
       "guests": 12,
-      "cabins": 6
+      "cabins": 6,
+      "length_m": 23,
+      "year_built": 1995
     },
     {
       "id": "amelie-adventures",
       "name": "Amelie Adventures",
       "operator_id": "amelie-safari",
       "guests": 16,
-      "cabins": 8
+      "cabins": 8,
+      "length_m": 27,
+      "year_built": 1999
     },
     {
       "id": "aphrodite",
       "name": "Aphrodite",
       "operator_id": "aphrodite-liveaboard-safaris",
       "guests": 23,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 35,
+      "year_built": 2008
     },
     {
       "id": "bella-2",
       "name": "Bella 2",
       "operator_id": "bella-liveaboard",
       "guests": 22,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 26,
+      "year_built": 2017
     },
     {
       "id": "bella-3",
       "name": "Bella 3",
       "operator_id": "bella-liveaboard",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 29,
+      "year_built": 2020
     },
     {
       "id": "bismarck",
       "name": "Bismarck",
       "operator_id": "blue-shades-diving",
       "guests": 34,
-      "cabins": 17
+      "cabins": 17,
+      "length_m": 46,
+      "year_built": 2023
     },
     {
       "id": "blue",
       "name": "Blue",
       "operator_id": "blue-planet-liveaboards",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": null,
+      "year_built": 2016
     },
     {
       "id": "blue-horizon",
       "name": "Blue Horizon",
       "operator_id": "scuba-tours-worldwide",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 41,
+      "year_built": 2006
     },
     {
       "id": "blue-melody",
       "name": "Blue Melody",
       "operator_id": "scuba-tours-worldwide",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 38,
+      "year_built": 2007
     },
     {
       "id": "blue-seas",
       "name": "Blue Seas",
       "operator_id": "blue-planet-liveaboards",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 37,
+      "year_built": 2004
     },
     {
       "id": "blue-storm",
       "name": "Blue Storm",
       "operator_id": "blue-planet-liveaboards",
       "guests": 24,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 40,
+      "year_built": null
     },
     {
       "id": "carlton",
       "name": "Carlton",
       "operator_id": "carlton-fleet",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 33,
+      "year_built": 2005
     },
     {
       "id": "dune-longara",
       "name": "DUNE Longara",
       "operator_id": "dune-world",
       "guests": 30,
-      "cabins": 15
+      "cabins": 15,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "dune-silky",
       "name": "DUNE Silky",
       "operator_id": "dune-world",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 44,
+      "year_built": 2021
     },
     {
       "id": "dune-titan",
       "name": "DUNE Titan",
       "operator_id": "dune-world",
       "guests": 30,
-      "cabins": 15
+      "cabins": 15,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "destiny",
       "name": "Destiny",
       "operator_id": "scarabaeus-safari",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 37,
+      "year_built": 2023
     },
     {
       "id": "discovery-i",
       "name": "Discovery I",
       "operator_id": "discovery-divers",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 32,
+      "year_built": 2005
     },
     {
       "id": "discovery-ii",
       "name": "Discovery II",
       "operator_id": "discovery-divers",
       "guests": 22,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 35,
+      "year_built": null
     },
     {
       "id": "emperor-asmaa",
       "name": "Emperor Asmaa",
       "operator_id": "emperor-divers",
       "guests": 20,
-      "cabins": 9
+      "cabins": 9,
+      "length_m": 30,
+      "year_built": 2003
     },
     {
       "id": "emperor-elite",
       "name": "Emperor Elite",
       "operator_id": "emperor-divers",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 38,
+      "year_built": 2006
     },
     {
       "id": "emperor-superior",
       "name": "Emperor Superior",
       "operator_id": "emperor-divers",
       "guests": 25,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 37,
+      "year_built": 2004
     },
     {
       "id": "eriny",
       "name": "Eriny",
       "operator_id": "bella-liveaboard",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 38,
+      "year_built": 2023
     },
     {
       "id": "explorer-ventures-grand-sea-explorer",
       "name": "Explorer Ventures - Grand Sea Explorer",
       "operator_id": "explorer-ventures",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "ghazala-adventure",
       "name": "Ghazala Adventure",
       "operator_id": "ocean-tribe-fleet",
       "guests": 26,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 43,
+      "year_built": 2024
     },
     {
       "id": "ghazala-explorer",
       "name": "Ghazala Explorer",
       "operator_id": "ocean-tribe-fleet",
       "guests": 24,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 37,
+      "year_built": 2021
     },
     {
       "id": "golden-dolphin",
       "name": "Golden Dolphin",
       "operator_id": "golden-dolphin",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": null,
+      "year_built": 2003
     },
     {
       "id": "golden-dolphin-iv",
       "name": "Golden Dolphin IV",
       "operator_id": "golden-dolphin",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 46,
+      "year_built": 2021
     },
     {
       "id": "golden-imperial",
       "name": "Golden Imperial",
       "operator_id": "golden-dolphin",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 43,
+      "year_built": 2021
     },
     {
       "id": "grand-discovery",
       "name": "Grand Discovery",
       "operator_id": "discovery-divers",
       "guests": 36,
-      "cabins": 18
+      "cabins": 18,
+      "length_m": 45,
+      "year_built": 2025
     },
     {
       "id": "hammerhead-ii",
       "name": "Hammerhead II",
       "operator_id": "hammerhead-fleet",
       "guests": 32,
-      "cabins": 16
+      "cabins": 16,
+      "length_m": 43,
+      "year_built": 2019
     },
     {
       "id": "iceberg",
       "name": "Iceberg",
       "operator_id": "deep-breath-diving-safari",
       "guests": 8,
-      "cabins": 4
+      "cabins": 4,
+      "length_m": 22,
+      "year_built": 2012
     },
     {
       "id": "jp-marine",
       "name": "JP Marine",
       "operator_id": "dive-safari-master",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 37,
+      "year_built": 2014
     },
     {
       "id": "anemone",
       "name": "MY Anemone",
       "operator_id": "unknown-operator",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "blue-pearl",
       "name": "MY Blue Pearl",
       "operator_id": "blue-planet-liveaboards",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 36,
+      "year_built": 2003
     },
     {
       "id": "heaven-saphir",
       "name": "MY Heaven Saphir",
       "operator_id": "unknown-operator",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "independence-ii",
       "name": "MY Independence II",
       "operator_id": "unknown-operator",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "odyssey",
       "name": "MY Odyssey Liveaboard",
       "operator_id": "seafari-international",
       "guests": 26,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 40,
+      "year_built": 2012
     },
     {
       "id": "seawolf-dominator",
       "name": "MY Seawolf Dominator",
       "operator_id": "seawolf-diving-safari",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "marselia-star",
       "name": "Marselia Star",
       "operator_id": "mv-legends-ii",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 40,
+      "year_built": 2015
     },
     {
       "id": "new-sambo",
       "name": "New Sambo",
       "operator_id": "sambo-divers",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 30,
+      "year_built": 2020
     },
     {
       "id": "ocean-lovers",
       "name": "Ocean Lovers",
       "operator_id": "sea-breeze-liveaboard",
       "guests": 32,
-      "cabins": 16
+      "cabins": 16,
+      "length_m": 45,
+      "year_built": 2023
     },
     {
       "id": "oceanix",
       "name": "Oceanix",
       "operator_id": "tauch-safari-aegypten",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 36,
+      "year_built": 2002
     },
     {
       "id": "queen-sherry",
       "name": "Queen Sherry",
       "operator_id": "cruise-company-yachts",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 32,
+      "year_built": 2021
     },
     {
       "id": "red-sea-aggressor-ii",
       "name": "Red Sea Aggressor II",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "guests": 22,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 138,
+      "year_built": null
     },
     {
       "id": "red-sea-aggressor-iv",
       "name": "Red Sea Aggressor IV",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 115,
+      "year_built": null
     },
     {
       "id": "red-sea-aggressor-v",
       "name": "Red Sea Aggressor V",
       "operator_id": "aggressor-fleet-dancer-fleet",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 131,
+      "year_built": null
     },
     {
       "id": "red-sea-blue-force-2",
       "name": "Red Sea Blue Force 2",
       "operator_id": "blueforce",
       "guests": 18,
-      "cabins": 9
+      "cabins": 9,
+      "length_m": 28,
+      "year_built": null
     },
     {
       "id": "red-sea-explorer",
       "name": "Red Sea Explorer",
       "operator_id": "extra-divers-worldwide",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 43,
+      "year_built": 2019
     },
     {
       "id": "royal-evolution",
       "name": "Royal Evolution",
       "operator_id": "royal-evolution",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 39,
+      "year_built": null
     },
     {
       "id": "ss-glorious-miss-nouran",
       "name": "SS Glorious Miss Nouran",
       "operator_id": "sea-serpent-fleet",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 40,
+      "year_built": 2020
     },
     {
       "id": "ss-serena-dreams",
       "name": "SS Serena Dreams",
       "operator_id": "sea-serpent-fleet",
       "guests": 18,
-      "cabins": 9
+      "cabins": 9,
+      "length_m": 33,
+      "year_built": 2007
     },
     {
       "id": "safy-mar",
       "name": "Safy Mar",
       "operator_id": "humpback-safari-yacht",
       "guests": 34,
-      "cabins": 17
+      "cabins": 17,
+      "length_m": 44,
+      "year_built": 2025
     },
     {
       "id": "sea-friend",
       "name": "Sea Friend",
       "operator_id": "hamata-mangroves",
       "guests": 20,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 40,
+      "year_built": 2015
     },
     {
       "id": "sea-serpent",
       "name": "Sea Serpent",
       "operator_id": "sea-serpent-fleet",
       "guests": 22,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 34,
+      "year_built": 2003
     },
     {
       "id": "sea-serpent-contessa",
       "name": "Sea Serpent Contessa",
       "operator_id": "sea-serpent-fleet",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": null,
+      "year_built": 2008
     },
     {
       "id": "sea-serpent-excellence",
       "name": "Sea Serpent Excellence",
       "operator_id": "sea-serpent-fleet",
       "guests": 24,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 36,
+      "year_built": 2008
     },
     {
       "id": "sea-serpent-grand",
       "name": "Sea Serpent Grand",
       "operator_id": "sea-serpent-fleet",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 44,
+      "year_built": 2005
     },
     {
       "id": "seawolf-steel",
       "name": "Seawolf Steel",
       "operator_id": "seawolf-diving-safari",
       "guests": null,
-      "cabins": null
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "serenity",
       "name": "Serenity",
       "operator_id": "divers-co",
       "guests": 22,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 33,
+      "year_built": 2000
     },
     {
       "id": "sinaistar",
       "name": "Sinaistar",
       "operator_id": "ambassador-liveaboards-company",
       "guests": 26,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 40,
+      "year_built": 2023
     },
     {
       "id": "sindalahs",
       "name": "Sindalahs",
       "operator_id": "sindalahs-yacht",
       "guests": 26,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 38,
+      "year_built": 2024
     },
     {
       "id": "snefro-love",
       "name": "Snefro Love",
       "operator_id": "king-snefro-group",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": null,
+      "year_built": 2010
     },
     {
       "id": "snefro-pearl",
       "name": "Snefro Pearl",
       "operator_id": "king-snefro-group",
       "guests": 12,
-      "cabins": 6
+      "cabins": 6,
+      "length_m": null,
+      "year_built": 2012
     },
     {
       "id": "snefro-target",
       "name": "Snefro Target",
       "operator_id": "king-snefro-group",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": null,
+      "year_built": 2010
     },
     {
       "id": "star-jet",
       "name": "Star Jet",
       "operator_id": "blue-shades-diving",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 35,
+      "year_built": 2004
     },
     {
       "id": "sunlight",
       "name": "Sunlight",
       "operator_id": "sadko-travel",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 34,
+      "year_built": 1999
     },
     {
       "id": "sunshine",
       "name": "Sunshine",
       "operator_id": "sadko-travel",
       "guests": 20,
-      "cabins": 10
+      "cabins": 10,
+      "length_m": 31,
+      "year_built": 2005
     },
     {
       "id": "tala",
       "name": "Tala",
       "operator_id": "red-sea-explorers",
       "guests": 22,
-      "cabins": 11
+      "cabins": 11,
+      "length_m": 120,
+      "year_built": null
     },
     {
       "id": "topaz",
       "name": "Topaz",
       "operator_id": "sea-pirates",
       "guests": 28,
-      "cabins": 14
+      "cabins": 14,
+      "length_m": 41,
+      "year_built": 2024
     },
     {
       "id": "unity",
       "name": "Unity",
       "operator_id": "red-sea-relax",
       "guests": 24,
-      "cabins": 13
+      "cabins": 13,
+      "length_m": 32,
+      "year_built": 1998
     },
     {
       "id": "vita-xplorer",
       "name": "Vita Xplorer",
       "operator_id": "xplorer-aquarius-safari",
       "guests": null,
-      "cabins": 12
+      "cabins": 12,
+      "length_m": 38,
+      "year_built": null
     },
     {
       "id": "yachtiano",
       "name": "Yachtiano",
       "operator_id": "yachtiano",
       "guests": 34,
-      "cabins": 17
+      "cabins": 17,
+      "length_m": 45,
+      "year_built": 2024
     }
   ],
   "itineraries": [
@@ -11462,7 +11616,7 @@
       "operator_id": "bella-liveaboard",
       "boat_id": "bella-2",
       "nights": 3,
-      "dives": 9,
+      "dives": 10,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
@@ -11649,7 +11803,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 20+ logged dives recommended."
+        "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -11768,13 +11922,13 @@
       "operator_id": "bella-liveaboard",
       "boat_id": "bella-3",
       "nights": 4,
-      "dives": 13,
+      "dives": 9,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
-        "thistlegorm",
+        "tiran",
         "ras mohammed",
-        "tiran"
+        "thistlegorm"
       ],
       "region": null,
       "summary": null,
@@ -12015,7 +12169,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 20+ logged dives recommended."
+        "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -13113,12 +13267,14 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
-        "fury shoals"
+        "fury shoals",
+        "sataya",
+        "elphinstone",
+        "daedalus"
       ],
       "region": null,
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
@@ -13311,12 +13467,12 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -14276,11 +14432,12 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns"
+        "st johns",
+        "fury shoals"
       ],
       "region": null,
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
@@ -14478,7 +14635,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -21350,11 +21507,14 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-pearl",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "abu nuhas",
+        "brothers",
+        "thistlegorm",
+        "gubal"
       ],
       "region": null,
       "summary": null,
@@ -21544,12 +21704,12 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -21922,11 +22082,15 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-pearl",
       "nights": 7,
-      "dives": 19,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "tiran",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "abu nuhas"
       ],
       "region": null,
       "summary": null,
@@ -22121,7 +22285,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -22208,13 +22372,14 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-pearl",
       "nights": 7,
-      "dives": 19,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "thistlegorm",
-        "abu nuhas",
-        "ras mohammed"
+        "ras mohammed",
+        "gubal",
+        "abu nuhas"
       ],
       "region": null,
       "summary": null,
@@ -22409,7 +22574,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -23649,13 +23814,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -23851,12 +24016,12 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -25675,11 +25840,12 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns"
+        "st johns",
+        "fury shoals"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -25880,7 +26046,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -27658,11 +27824,12 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-storm",
       "nights": 7,
-      "dives": 19,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "st johns"
+        "st johns",
+        "fury shoals"
       ],
       "region": null,
       "summary": "The Blue Storm is a modern liveaboard operating in the Red Sea, Egypt. With 24 guests maximum, 11 Double cabins all with en-suite facilities, Blue Storm visits the most popular dive sites in the Red Sea.",
@@ -27849,7 +28016,7 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -52651,13 +52818,13 @@
       "operator_id": "ocean-tribe-fleet",
       "boat_id": "ghazala-explorer",
       "nights": 7,
-      "dives": 21,
+      "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
         "st johns",
-        "rocky island"
+        "rocky island",
+        "daedalus"
       ],
       "region": null,
       "summary": "Ghazala Explorer liveaboard in the Egyptian Red Sea is a modern motor yacht with 12 ensuite cabins, taking up to 24 guests to top sites in the Red Sea. Visit Daedalus, St. Johns, Elphinstone, Ras Mohammed, or the Thistlegorm wreck.",
@@ -52864,12 +53031,12 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
-        "min_logged_dives": 25,
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 20+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
       "padi_fees": [
         {
@@ -167439,10 +167606,10 @@
     }
   },
   "entry_bar": {
-    "both": 127,
-    "disagree": 60,
-    "padi_stricter": 30,
-    "ours_stricter": 30
+    "both": 138,
+    "disagree": 66,
+    "padi_stricter": 35,
+    "ours_stricter": 31
   },
   "stale_ladders": [
     "red-sea-aggressor-ii 2027-05-08: row 2371, liveaboard.com ladder starts at 1588",

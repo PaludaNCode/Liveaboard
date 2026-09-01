@@ -3,6 +3,10 @@
 Every hole in the published dataset, counted against `data/egypt-2027.json` as
 built on 2026-08-30 (77 boats, 46 operators, 402 itineraries, 1,122 sailings).
 
+**Three of these are closed** — see `docs/plan-missing.md` for what each one
+actually bought, including the two joins §2 needed and the one it refused. The
+counts below are as first measured; where a section is done it says so.
+
 Grouped by **why** it is empty, because that is what decides whether there is
 anything to do about it:
 
@@ -23,7 +27,7 @@ they have survived.
 
 | Field | Filled on | Note |
 |---|---|---|
-| `Boat.length_m` | 0 / 77 | `data/fees.json` already holds it for **71** vessels. See §2. |
+| `Boat.length_m` | 63 / 77 | `data/fees.json` already holds it for **71** vessels. See §2. |
 | `Operator.website` | 0 / 46 | Parsed from neither source. `Event.organizer` carries a name and no url. |
 | `Departure.spaces_left` | 0 / 1,122 | **Dead.** Superseded by `berths`, which answers the same question per seller. `render.py:162` says so already. It still ships as a column in `export.py`, empty on every row. |
 | `Requirements.max_depth_m` | 0 / 402 | Both sources state the entry bar as a level and a logged-dive count; neither states a depth. |
@@ -88,24 +92,23 @@ because there are no dives. The column reads *not stated*, which claims nobody
 answered when the seller did — see `docs/plan-missing.md` §0. Where the number
 does exist, it is worth knowing which source answered:
 
-| Source | Itineraries |
+| Source | Itineraries (was, before the discovery pass) |
 |---|---|
-| the trip's own fragment (`data/itineraries.json`) | 316 |
-| PADI, last resort | 69 |
-| a vessel-level count read by hand, for that trip length only | 16 |
-| nothing | **1** |
+| the trip's own fragment (`data/itineraries.json`) | **327** (316) |
+| PADI, last resort | **61** (69) |
+| a vessel-level count read by hand, for that trip length only | **13** (16) |
+| nothing | **1** (1) |
 
-**85 itineraries have no per-trip fragment** — 210 sailings, a fifth of the
-season. `fetch_itineraries.py` builds its URLs from tour ids in
-`data/archive.json`, so a boat liveaboard.com sells no berth on has no id to
-ask about. Everything the fragment carries — dive count, group size, the stated
-entry bar, and the operator's own reef list — falls back to the trip title or
-to PADI for these:
+**74 itineraries have no per-trip fragment** — 144 sailings; it was 85 and 210
+until the discovery pass landed. Everything the fragment carries — dive count,
+group size, the stated entry bar, and the operator's own reef list — falls back
+to the trip title or to PADI on those rows. What is left splits in two, and
+only one half is a gap:
 
-    Seawolf Steel 13 · Blue Seas 10 · MY Heaven Saphir 10 · MY Blue Pearl 9 ·
-    Blue 6 · MY Seawolf Dominator 6 · MY Independence II 5 · MY Anemone 4 ·
-    Blue Storm 4 · Grand Sea Explorer 3 · Bella 2, Emperor Asmaa, Eriny,
-    Red Sea Aggressor IV 2 each · 7 more with 1
+| | Itineraries | |
+|---|---|---|
+| boats liveaboard.com does not list at all | **41** on 6 | Seawolf Steel 13, MY Heaven Saphir 10, MY Seawolf Dominator 6, MY Independence II 5, MY Anemone 4, Grand Sea Explorer 3. No vessel page exists, so no fetch reaches them: PADI is the only source these trips will ever have. |
+| trips the two sellers name differently | **33** on 13 | Blue Seas 10, MY Blue Pearl 6, Blue 5, Blue Storm 4, and nine more with one or two. Eriny's *Sinai Classic* against liveaboard.com's *Sinai Classic One Week*; PADI routes that site lists nowhere. |
 
 **3 itineraries name no reef at all** — no `dive_sites` from any of the four
 ordered sources. Amelie Adventures, Marselia Star, Seawolf Steel (one trip
