@@ -562,13 +562,25 @@ Break these and the site starts lying quietly rather than failing loudly.
   learn. **`color-scheme` is declared for this control's sake** — the popup is
   the platform's and the platform paints it from that property, so without it
   the one thing on the page that is not ours is a white list over a dark page.
-  On a phone the label is what gives: Filters, the word, the dropdown and the
-  triangle come to 299px of the 300 a 320px screen has, and this container
-  wraps, so no shrink rule can save it. A typed width on the `select` was the
-  other option and is the #150 mistake again — a number derived from the
-  longest column name, in a file that cannot see the column names. The
-  dropdown carries `aria-label`, so nothing is lost that a reader could hear.
-  And the toolbar's nowrap breakpoint moved from 901px to 761px: 901 was the
+  **On a phone the labels give way, never a control and never a row.** Four
+  controls plus their words are 477px against the 340 a 360px screen has, and
+  this container wraps, so no shrink rule can save it — a wrapping flex
+  container breaks the line before it shrinks anything. So SORT and INCLUDE
+  go, *Rental gear* becomes the switch's own `short`, and the sort menu takes
+  each column's own `short` where it has one: `Mandatory fees` is 30px of the
+  difference and the header already resorted to that abbreviation for the same
+  column. Both spellings are written and the stylesheet shows one, like the
+  table and the cards. Nothing invents a new word and nothing types a width —
+  a `select` sized to the longest column name, in a file that cannot see the
+  column names, is the #150 mistake again. What replaces the missing labels is
+  the accessible name: the switches read *Include nitrox in every total*,
+  because a lit chip saying "Nitrox" beside a row of filter chips is a chip
+  that looks like one. 360px up is one 42px row, exactly what the toolbar was
+  before the sort existed; 344 and below wrap, which is the graceful half.
+  **And `.tgroup.meta-right` is hidden whole, not emptied** — a zero-width
+  flex item still carries `margin-left:auto` and still takes a line, which is
+  how 360px reported one row of controls in a toolbar 48px tall.
+  The toolbar's nowrap breakpoint also moved from 901px to 761px: 901 was the
   width the *meta line* stopped fitting at when the toolbar held two fewer
   controls, and a wrapping flex container breaks the line before it shrinks
   anything, so the sort put 761–900 on two rows until the rule was tied to

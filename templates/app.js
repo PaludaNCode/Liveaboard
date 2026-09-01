@@ -1446,9 +1446,15 @@
         html += '<optgroup label="' + esc(ZONE_LABELS[col.zone] || "") + '">';
         zone = col.zone;
       }
-      /* The full name, never `short`: the picker has the room the column
-         header does not, and an abbreviation is what a heading resorts to. */
-      html += '<option value="' + esc(col.k) + '">' + esc(col.t) + "</option>";
+      /* The full name wherever there is a table, because the picker has room
+         the column header does not. On a phone the picker *is* the toolbar's
+         widest item -- a `select` is as wide as its longest option whichever
+         one is showing -- and 30px of "Mandatory fees" is the difference
+         between one row of chrome and two. The column's own `short`, never a
+         new abbreviation: the header already resorted to one and this is the
+         same column. */
+      html += '<option value="' + esc(col.k) + '">' +
+        esc(narrow.matches && col.short ? col.short : col.t) + "</option>";
     });
     document.getElementById("sortBy").innerHTML =
       html + (zone === null ? "" : "</optgroup>");
@@ -3282,9 +3288,18 @@
   }, { hoverOpens: false });
 
 
+  /* Both names written and the stylesheet shows one, like the table and the
+     cards: a rotation crosses the breakpoint with nothing to redraw.
+     The accessible name says what the switch *does* rather than repeating
+     what it is called, because on a phone the word INCLUDE is not on screen
+     and a lit chip reading "Nitrox" beside a row of filters is a chip that
+     looks like one. Visible text inside the accessible name, so the two
+     cannot be read as different controls. */
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {
-    return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default + '">' +
-      esc(t.label) + "</button>";
+    return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default +
+      '" aria-label="Include ' + esc(t.label.toLowerCase()) + ' in every total">' +
+      '<span class="tog-long">' + esc(t.label) + "</span>" +
+      '<span class="tog-short">' + esc(t.short || t.label) + "</span></button>";
   }).join("");
   document.getElementById("toggles").addEventListener("click", function (event) {
     var button = event.target.closest("button");
@@ -3548,7 +3563,9 @@
 
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
-  var onWidthChange = function () { orderColumns(); draw(true); };
+  /* The menu too: its labels shorten below the card breakpoint, and `draw`
+     puts the selected value back through `paintSort`. */
+  var onWidthChange = function () { orderColumns(); buildSortMenu(); draw(true); };
   [compact, narrow].forEach(function (mq) {
     if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
     else if (mq.addListener) mq.addListener(onWidthChange);

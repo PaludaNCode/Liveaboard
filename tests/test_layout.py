@@ -687,6 +687,8 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                        by: r('#sortBy'), dir: r('#sortDir'),
                        bar: r('.toolbar'),
                        name: document.getElementById('sortBy').getAttribute('aria-label'),
+                       switches: [].slice.call(document.querySelectorAll('#toggles button'))
+                                   .map(e => e.getAttribute('aria-label')),
                        dirName: document.getElementById('sortDir').getAttribute('aria-label') };
             }""")
             where = "at %dpx" % width
@@ -701,13 +703,21 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             # The visible label is hidden here, so the accessible one is all
             # there is -- and a triangle with no name is not a control.
             self.assertTrue(shape["name"], "the dropdown has no accessible name " + where)
+            # The switches lose the word INCLUDE here, so their names have to
+            # say what they do rather than what they are called.
+            for name in shape["switches"]:
+                self.assertIn("Include", name,
+                              "a total switch reads as a filter " + where)
             self.assertIn("press for", shape["dirName"] or "",
                           "the direction button does not say what pressing does " + where)
-            # Two rows of chrome is what the sort costs a phone. A third is
-            # the label or the dropdown having outgrown the row, which is a
-            # thing to fix rather than to ship.
-            self.assertLessEqual(shape["bar"]["h"], 80,
-                                 "the toolbar has grown a third row " + where)
+            # And it costs no row at all on a phone anybody still owns. The
+            # labels give way instead -- INCLUDE, SORT, "Rental", "Mandatory
+            # fees" -- so Filters, the column, the direction and the two
+            # switches sit on one line from 360px up. Below that they wrap,
+            # which is the graceful half; a third row is not.
+            limit = 48 if width >= 360 else 80
+            self.assertLessEqual(shape["bar"]["h"], limit,
+                                 "the toolbar wrapped " + where)
 
         # And picking from it reorders the cards, which is the whole point.
         page.set_viewport_size({"width": 390, "height": 720})

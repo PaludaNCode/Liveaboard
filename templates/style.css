@@ -445,6 +445,8 @@ h1 {
    words are, and switched here rather than in script, so a rotation crosses
    the breakpoint with nothing to redraw. */
 .dirbtn .dirmark { display:none; font-size:8px; }
+/* The switch names the same way: both written, one shown. */
+.chip .tog-short { display:none; }
 
 /* Each live filter, named and droppable. */
 .activebar {
@@ -1283,10 +1285,23 @@ a { color:var(--accent); }
   .stats { gap:14px; margin-left:0; }
   .stat b { font-size:13px; }
 
-  .toolbar { padding:7px 10px; gap:6px 10px; }
+  /* Tighter here than anywhere else on the page, and only here. Four
+     controls plus their gaps come to 355px of the 340 a 360px screen has,
+     and 15px is exactly what the horizontal padding is holding: the row
+     stays one row on every phone from 344px up, which is every phone still
+     being sold. Vertical padding is untouched -- the press target is the
+     part of a control that must not shrink. */
+  .toolbar { padding:7px 10px; gap:6px 8px; }
+  .toolbar .filters-btn, .toolbar .dirbtn { padding:4px 7px; }
+  .toolbar button.chip { padding:3px 8px; }
+  .toolbar .selwrap select { padding:4px 19px 4px 7px; }
+  .toolbar .scaret { right:7px; }
   /* The build line is a laptop convenience; on a phone it is a second row of
-     chrome above the prices. */
-  .tgroup.meta-right #metaLine { display:none; }
+     chrome above the prices. The *group* goes, not just the line inside it:
+     emptied but present it is still a flex item carrying `margin-left:auto`,
+     and at 360px it wrapped to a second line all by itself -- nothing to see,
+     6px of row gap, and a toolbar 48px tall reporting one row of controls. */
+  .tgroup.meta-right { display:none; }
   .tsep { display:none; }
   /* And the direction collapses to the triangle the header would have shown.
      Filters, the column and the direction then fit one row down to 320px;
@@ -1309,6 +1324,14 @@ a { color:var(--accent); }
      and a column name beside a triangle is what a sort control looks like on
      every phone anybody owns. */
   label.tlabel[for="sortBy"] { display:none; }
+  /* And so does INCLUDE, and "Rental" with it. Four controls on one phone
+     line is 477px against the 340 a 360px screen has, and every one of them
+     is a control rather than a label -- so what goes is the words about them,
+     in this order: the two group names, then the longer of the two switch
+     labels. Both switches keep their full `aria-label`. */
+  .toolbar .tgroup .tlabel { display:none; }
+  .chip .tog-long { display:none; }
+  .chip .tog-short { display:inline; }
   .activebar { padding:5px 10px; }
   .filterpanel { max-height:52vh; }
   .bankpick { width:120px; }
