@@ -2658,6 +2658,71 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
             self.assertNotIn(wrong, self.app,
                              "a saving is being taken against the unconverted price")
 
+class TestTheTotalStatesWhatItIsTheSumOf(unittest.TestCase):
+    """The bar under the Total came off, and the figures it encoded went in its
+    place (#148) -- not a deletion leaving the cell with the total alone.
+
+    The bar said two things. Its *length* was this total against the dearest
+    total on screen, which is a comparison down the column that the table's own
+    sort already answers; nothing replaces it. Its two *segments* were the
+    advertised fare's share and the required extras on top of it, which is the
+    whole argument of this site expressed as a proportion, and the part a reader
+    loses if the graphic simply goes.
+
+    So the split is printed as money rather than as a percentage: a percentage
+    re-introduces the proportion being removed.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.css = self.CSS.read_text(encoding="utf-8")
+
+    def test_the_bar_is_gone_from_the_row_and_the_stylesheet(self) -> None:
+        for token in ("barMax", "BAR_TRACK", "BAR_TITLE", '"anchor"'):
+            self.assertNotIn(token, self.app, f"{token} outlived the bar")
+        self.assertNotIn(".anchor", self.css, "the bar's rules are still here")
+
+    def test_the_split_is_the_two_figures_and_not_a_proportion(self) -> None:
+        """`d.base` and the extras on top, both already in hand. A percentage is
+        more compact and is the thing being removed."""
+        self.assertIn('class="split"', self.app)
+        cell = self.app.split('{ k: "total"', 1)[1].split("} },", 1)[0]
+        self.assertIn("sellerSpan(b.baseLo, b.baseHi)", cell)
+        self.assertIn("sellerSpan(b.laterLo, b.laterHi)", cell)
+        self.assertNotIn("advertised.toFixed", cell,
+                         "the split is back to being a proportion")
+
+    def test_the_split_is_a_span_wherever_the_total_is_one(self) -> None:
+        """Each end of `best` is a whole bill, so the split spans exactly where
+        the total spans. One split under a ranged total would claim a precision
+        the row does not have."""
+        cell = self.app.split('{ k: "total"', 1)[1].split("} },", 1)[0]
+        for one_ended in ("b.bill.base", "m.total - d.base", "m.total - m.base"):
+            self.assertNotIn(one_ended, cell,
+                             "the split is being taken from one end of a span")
+
+    def test_it_stays_out_of_flow_so_no_row_grows(self) -> None:
+        """Measured once already and written into the stylesheet: a block-level
+        second line under the total added nine pixels to every row -- 675 of 882
+        went from 30px to 39 -- and cost three of the twelve rows visible on a
+        laptop. The figures are text where the bar was a graphic, and the
+        constraint is the same."""
+        rule = self.css.split(".split {", 1)[1].split("}", 1)[0]
+        self.assertIn("position:absolute", rule)
+        self.assertIn("tbody td.cost { position:relative; }", self.css,
+                      "the split's containing block is gone")
+
+    def test_the_marker_beside_the_total_is_not_the_split(self) -> None:
+        """`+ tips` stays. It is a different claim -- the operator states tips
+        are payable and gives no figure -- and it is text rather than a
+        graphic, so it was never what came off."""
+        self.assertIn("+ tips</span>", self.app)
+        self.assertIn('class="plus"', self.app)
+
+
 class TestRefreshNewsIsReportedInOnePlace(unittest.TestCase):
     """The discount moves belong to the history, not to the sale panel (#146).
 
