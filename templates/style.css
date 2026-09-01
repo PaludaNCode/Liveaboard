@@ -36,7 +36,6 @@
      Which columns these are is decided in app.js by position, not by name, so
      they are always adjacent. Two pinned columns with a third between them is
      the same overlap by a different route. */
-  --st0:26px;   /* the expander */
   --st1:82px;   /* Depart */
   --st2:78px;   /* Return */
   --st3:132px;  /* Boat   */
@@ -434,9 +433,9 @@ tbody tr.row:hover { background:var(--row-hover); }
  * Last of the three row rules, so a marked row stays marked while hovered: a
  * decision the visitor made outranks where the mouse happens to be. The pinned
  * cells repeat it below -- they paint their own background or the columns
- * sliding beneath would show through -- and the edge bar on the expander is
- * what carries at a glance, including when the row is dimmed for being sold
- * out. */
+ * sliding beneath would show through -- and the edge bar on the first pinned
+ * cell is what carries at a glance, including when the row is dimmed for being
+ * sold out. */
 tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
   background:var(--row-marked);
 }
@@ -454,18 +453,18 @@ tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
   overflow:hidden; text-overflow:ellipsis;
 }
 .stick1 {
-  left:var(--st0); width:var(--st1); min-width:var(--st1); max-width:var(--st1);
+  left:0; width:var(--st1); min-width:var(--st1); max-width:var(--st1);
 }
 .stick2 {
-  left:calc(var(--st0) + var(--st1));
+  left:var(--st1);
   width:var(--st2); min-width:var(--st2); max-width:var(--st2);
 }
 .stick3 {
-  left:calc(var(--st0) + var(--st1) + var(--st2));
+  left:calc(var(--st1) + var(--st2));
   width:var(--st3); min-width:var(--st3); max-width:var(--st3);
 }
 .stick4 {
-  left:calc(var(--st0) + var(--st1) + var(--st2) + var(--st3));
+  left:calc(var(--st1) + var(--st2) + var(--st3));
   width:var(--st4); min-width:var(--st4); max-width:var(--st4);
 }
 /* The rule that closes the pinned group sits on whichever column ends it --
@@ -505,28 +504,19 @@ thead th.stick1, thead th.stick2, thead th.stick3, thead th.stick4 { z-index:25;
  * covered the last 30px of True cost, which is right-aligned, in the default
  * unscrolled view. A row's controls belong at its start, where nothing is
  * right-aligned into them. */
-td.expander, th.expander {
-  position:sticky; left:0; z-index:10; background:var(--panel);
-  width:var(--st0); min-width:var(--st0); max-width:var(--st0);
-  padding:4px 4px;
-}
-thead th.expander { z-index:25; }
-tbody tr.row.alt .expander { background:var(--row-alt); }
-tbody tr.row:hover .expander { background:var(--row-hover); }
 /* The mark itself: a bar down the pinned first cell, which is the one column
    that is on screen at every scroll position and every width. Drawn with an
    inset shadow rather than a border so it costs the row no height and shifts
-   no column by a pixel -- the same reason the anchor bar is positioned rather
-   than laid out. */
-tbody tr.row.marked .expander, tbody tr.row.marked:hover .expander {
+   no column by a pixel.
+
+   It used to sit on the expander, which was that first cell and was also the
+   26px this table reclaimed when the fee dropdown became a popover (#149). So
+   the bar moved onto whichever cell is pinned first now -- `.stick1`, Depart --
+   rather than the column going and the mark going quietly with it. */
+tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
   background:var(--row-marked);
   box-shadow:inset 3px 0 0 0 var(--row-marked-edge);
 }
-
-/* And the bill itself stays put while the table scrolls under it. The detail
-   cell spans the full 2446px, so its contents would otherwise sit wherever the
-   horizontal scroll left them. */
-tr.detail td > * { position:sticky; left:0; }
 
 
 
@@ -590,8 +580,8 @@ tbody tr.row.gone .pill.gone { color:var(--sold); }
  * wrong instrument twice over. It paints an element's *background*
  * translucently too, so the sticky columns let every column sliding underneath
  * print straight through them -- three overlapping texts in one cell on 127 of
- * 882 rows, once `.stick2` and the pinned expander joined `.stick` and were
- * not added to the exclusion. And it applies to a subtree as a group, so a
+ * 882 rows, once `.stick2` joined `.stick` and was not added to the
+ * exclusion. And it applies to a subtree as a group, so a
  * child cannot opt out: "SOLD OUT" arrived at 1.9:1 against its own background
  * and stayed at 3.8:1 even after its colour was fixed, because the cell around
  * it was still at .72.
@@ -608,18 +598,43 @@ tbody tr.row.gone .region,
 tbody tr.row.gone .plus,
 tbody tr.row.gone .dim { color:var(--ink-dim); }
 
-.expand {
-  background:none; border:0; color:var(--ink-faint); cursor:pointer;
-  font:inherit; padding:0 4px;
-}
-.expand:hover { color:var(--accent); }
 
-tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; }
 .fees { border-collapse:collapse; font-size:11px; width:auto; min-width:460px; }
 .fees td { padding:3px 14px 3px 0; border:0; white-space:nowrap; vertical-align:top; }
 .fees tr.off { color:var(--ink-faint); }
 .fees .prov { white-space:normal; max-width:52ch; color:var(--ink-faint); font-size:10px; }
 .caveat { margin:8px 0 0; max-width:80ch; color:var(--ink-dim); font-size:11px; }
+
+/* The bill, as a panel rather than as a row of its own (#149).
+ *
+ * Wider than the ladder and capped, because it holds more than the ladder
+ * does: the fee table, the caveat that applies, and on a trip both sellers
+ * price, the second seller's whole bill and the paragraph that says how to
+ * read it. All of it travels -- a summary would be a total claimed on part of
+ * a disclosure, which is the thing this site reports in other people -- so
+ * what gives is the height, and the panel scrolls inside itself.
+ *
+ * `70vh` and not a pixel figure: the constraint is the viewport, and the panel
+ * is already clamped into it by `place()`. On a phone that is most of the
+ * screen, which is the right answer for a document a reader opened
+ * deliberately and can dismiss with Escape or a tap outside. */
+/* `.panel-pop.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
+   21-25em width and is written further down this file, so at equal specificity
+   it won and capped the bill at 400px however wide the screen was. */
+.panel-pop.bill-pop {
+  min-width:min(30em, calc(100vw - 16px));
+  max-width:min(46em, calc(100vw - 16px));
+  max-height:70vh; overflow:auto; overscroll-behavior:contain;
+  padding:0 .7em .6em;
+}
+.bill-pop .pwho { margin:0 -.7em .5em; }
+/* The fee table's own min-width is what makes its columns line up, and it is
+   wider than a phone. So each table sits in a scroller of its own: `overflow`
+   on the table itself does not work, because `min-width` wins over the panel's
+   width and the table simply overflows -- taking the panel's header sideways
+   with it. Same rule as the deals tables, and the wrapper is what enforces it. */
+.fee-scroll { overflow-x:auto; max-width:100%; }
+.bill-pop .whose:first-of-type { margin-top:4px; }
 
 /* The entry bar, at the head of the expanded panel and ahead of the bill.
    A label with a value beside it, because the bar is a fact the trip states
@@ -942,7 +957,7 @@ a { color:var(--accent); }
      and Guests pinned held 231px of a 390px screen still while the sixteen
      columns this page exists to compare were dragged through the 159 that
      were left. See `pinned()` for why the date is the one that stays. */
-  :root { --st0:24px; --st1:66px; }
+  :root { --st1:66px; }
 
   /* Boat and Guests scroll here, but they keep the widths they had while they
      were pinned. The widths were never about being sticky: they are what puts
@@ -957,7 +972,6 @@ a { color:var(--accent); }
   .boat { width:96px; min-width:96px; max-width:96px; }
   .guests { width:45px; min-width:45px; max-width:45px; }
 
-  td.expander, th.expander { padding:4px 6px; }
   /* 6px, not 7. Guests moved in front of the money here to sit with the boat,
      and its 49px put the Total's right edge 4px past a 390px screen -- which
      clipped the "+ tips" that says the total is not the whole bill. Two pixels
@@ -974,7 +988,6 @@ a { color:var(--accent); }
     min-width:0; max-width:170px;
   }
   /* Comfortably tappable without making the row taller than it has to be. */
-  .expand { min-width:22px; min-height:24px; }
   /* "DEPART ▲" needs 74px of the 66 the pinned date column has here, and a
      header that reads "DEPAR…" is worse than a slightly smaller one. */
   thead th { font-size:9px; letter-spacing:.04em; }
@@ -1019,13 +1032,19 @@ a { color:var(--accent); }
 .dearer  { color:var(--sold); }
 .caveat.padi { border-left:2px solid var(--unknown); padding-left:.6em; }
 
-/* ---------- the cabin ladder, on hover ---------- */
+/* ---------- the three cells that open a panel, on hover ---------- */
 
-/* The Places cell became a control when it stopped printing an adjective and
-   started printing a count: behind the number is the ladder that number is the
-   bottom of. It has to look operable without shouting -- a dashed underline
-   that only resolves on hover, in a column read a hundred rows at a time. */
-.berths {
+/* One appearance for all three (#149). The Places cell became a control when
+   it stopped printing an adjective and started printing a count; Mandatory
+   fees and Entry bar became controls when the per-row dropdown behind them
+   became a popover. Behind each is the thing its figure is a summary of. It has
+   to look operable without shouting -- a dashed underline that only resolves on
+   hover, in columns read a hundred rows at a time.
+
+   Written as one selector list rather than three rules, because three copies of
+   an appearance drift and the drift shows up as one of the three columns not
+   looking clickable. */
+.berths, .fees-open, .entry-open {
   font: inherit;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
@@ -1042,11 +1061,22 @@ a { color:var(--accent); }
   width: 100%;
   text-align: left;
 }
-.berths:hover, .berths[aria-expanded="true"] {
+.berths:hover, .berths[aria-expanded="true"],
+.fees-open:hover, .fees-open[aria-expanded="true"],
+.entry-open:hover, .entry-open[aria-expanded="true"] {
   border-bottom-color: var(--accent);
   color: var(--accent);
 }
-.berths:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.berths:focus-visible, .fees-open:focus-visible, .entry-open:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+/* The figure keeps its own colour until the cell is being used, the way the
+   berth count does: the ochre on a fee total and the level on an entry bar are
+   what the column is read for. */
+.fees-open:hover .later, .fees-open[aria-expanded="true"] .later { color: inherit; }
+/* Not a money column, so it is not set in the mono face and it wraps: the
+   longest bar in the fleet is "Advanced + 50 dives". */
+.entry-open { font-family: var(--font-sans); white-space: normal; }
 .berths .n { font-weight: 600; }
 /* Zero is the only one worth alarming about, and it is the one this site
    exists to catch: a price on the row that nothing is selling at. */
@@ -1055,14 +1085,18 @@ a { color:var(--accent); }
 .berths .n.many { color: var(--ok); }
 .berths:hover .n, .berths[aria-expanded="true"] .n { color: inherit; }
 .berths .lbl { font-family: var(--font-sans); font-size: .82em; color: var(--ink-faint); }
-.berths .caret { margin-left: auto; font-size: .7em; opacity: 0; }
-.berths:hover .caret, .berths[aria-expanded="true"] .caret { opacity: 1; }
+.berths .caret, .fees-open .caret, .entry-open .caret {
+  margin-left: auto; font-size: .7em; opacity: 0;
+}
+.berths:hover .caret, .berths[aria-expanded="true"] .caret,
+.fees-open:hover .caret, .fees-open[aria-expanded="true"] .caret,
+.entry-open:hover .caret, .entry-open[aria-expanded="true"] .caret { opacity: 1; }
 
 /* Positioned from JS against the button that opened it, and fixed rather than
    absolute: the table scrolls sideways inside a clipping container and the
    Places column sits at its right edge, so a panel nested inside would be cut
    off exactly where it has to appear. */
-#berths {
+.panel-pop {
   position: fixed;
   z-index: 60;
   background: var(--panel);
@@ -1074,18 +1108,18 @@ a { color:var(--accent); }
   line-height: 1.45;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) #berths { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+  :root:not([data-theme="light"]) .panel-pop { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
 }
-:root[data-theme="dark"] #berths { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+:root[data-theme="dark"] .panel-pop { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
 
-#berths .pwho {
+.panel-pop .pwho {
   margin: 0;
   padding: .45em .7em .4em;
   border-bottom: 1px solid var(--rule);
   font-family: var(--font-narrow);
   font-weight: 600;
 }
-#berths .pseller {
+.panel-pop .pseller {
   margin: 0;
   padding: .35em .7em .2em;
   font-family: var(--font-narrow);
@@ -1094,7 +1128,7 @@ a { color:var(--accent); }
   font-size: .72em;
   color: var(--ink-dim);
 }
-#berths .verdict {
+.panel-pop .verdict {
   margin: 0;
   padding: .45em .7em;
   border-bottom: 1px solid var(--rule);
@@ -1103,13 +1137,13 @@ a { color:var(--accent); }
 /* The ten sailings advertising a berth nobody can buy, and the ones with
    nothing left at all. Loud on purpose: it is the finding the ladder exists to
    surface, and it is one hover deep already. */
-#berths .verdict.bad { background: var(--sold); color: var(--panel); }
-#berths .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
+.panel-pop .verdict.bad { background: var(--sold); color: var(--panel); }
+.panel-pop .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
 /* The read date, set against the sailing it qualifies rather than under the
    ladder as a paragraph. A count without its date is presented as a fact when
    it is a claim with a shelf life; a count with three sentences of method
    under it is a panel nobody finishes reading. */
-#berths .pread {
+.panel-pop .pread {
   float: right;
   font-family: var(--font-narrow);
   font-weight: 400;
@@ -1117,8 +1151,8 @@ a { color:var(--accent); }
   color: var(--ink-faint);
 }
 
-#berths table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
-#berths table.cabins th {
+.panel-pop table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
+.panel-pop table.cabins th {
   font-family: var(--font-narrow);
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -1128,19 +1162,19 @@ a { color:var(--accent); }
   font-weight: 600;
   padding: .35em .7em .2em;
 }
-#berths table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
-#berths table.cabins .num {
+.panel-pop table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+.panel-pop table.cabins .num {
   text-align: right;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-#berths table.cabins th.num { font-family: var(--font-narrow); }
+.panel-pop table.cabins th.num { font-family: var(--font-narrow); }
 /* The rung the row's own price came from, so the ladder always says which one
    you were looking at -- including when that is the one that has sold out. */
-#berths table.cabins tr.here td { background: var(--accent-soft); }
-#berths table.cabins tr.out td { color: var(--ink-faint); }
-#berths .full { color: var(--sold); font-weight: 600; }
+.panel-pop table.cabins tr.here td { background: var(--accent-soft); }
+.panel-pop table.cabins tr.out td { color: var(--ink-faint); }
+.panel-pop .full { color: var(--sold); font-weight: 600; }
 /* Whose bill the table under it is. Only printed when there are two, because
    with one there is nothing to tell apart and a heading over every panel would
    be a label nobody needs. */

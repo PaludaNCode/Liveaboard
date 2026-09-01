@@ -2658,6 +2658,126 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
             self.assertNotIn(wrong, self.app,
                              "a saving is being taken against the unconverted price")
 
+class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
+    """The per-row dropdown became a panel on the Mandatory fees cell (#149).
+
+    Every row carried a `+` that opened a full-width detail row. It pushed every
+    row below it down to answer a question about one row, and it cost 26px of
+    pinned width on all 1,122 rows including the ones nobody ever opened.
+
+    **The whole breakdown travels, not a summary.** The fee table with its
+    included lines at zero, the caveat that applies, and the second seller's
+    bill with the three-state wording that keeps it from reading as a
+    comparison between two figures that are not the same kind of number. A
+    tooltip holding only the line items would be a total claimed on part of a
+    disclosure, which is the failure this site exists to report in other
+    people. What gives instead is height: the panel caps and scrolls inside
+    itself.
+
+    **The entry bar is not a fee and does not go in it.** It was the head of
+    that dropdown -- deliberately, because whether a diver may board at all is
+    prior to what boarding costs -- and it now opens from the Entry bar column,
+    which is the column it is about.
+
+    **One mechanism, three panels.** The cabin ladder already did
+    hover-to-peek, click-to-pin, focus-to-open and Escape-to-close, with the
+    click half kept because hover does not exist on a phone and this page is
+    built to work on one in a dive shop. Writing a second copy of that would
+    have been three implementations of one interaction drifting apart on the
+    parts that are easy to get wrong.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+    PAGE = ROOT / "templates" / "index.html"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.css = self.CSS.read_text(encoding="utf-8")
+        self.page = self.PAGE.read_text(encoding="utf-8")
+
+    def test_the_dropdown_and_its_column_are_gone(self) -> None:
+        for token in ("state.open", 'class="expand"', "tr.detail",
+                      'class="expander"'):
+            self.assertNotIn(token, self.app, f"{token} outlived the dropdown")
+        self.assertNotIn("--st0", self.css,
+                         "the pinned group still reserves the expander's width")
+        self.assertNotIn("tr.detail", self.css)
+
+    def test_the_row_mark_moved_to_the_cell_that_is_pinned_now(self) -> None:
+        """The mark is a bar down the pinned *first* cell, which is the one
+        column on screen at every scroll position and every width. That cell
+        was the expander, and the expander was the 26px being reclaimed -- so
+        without this the column went and the mark went quietly with it."""
+        self.assertIn("tbody tr.row.marked .stick1", self.css)
+        self.assertIn("var(--row-marked-edge)", self.css)
+
+    def test_the_whole_breakdown_is_in_the_panel(self) -> None:
+        panel = self.app.split("function billPanel(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("feeRows(linesFor(row.d))", panel)
+        self.assertIn("caveat", panel)
+        self.assertIn("row.i.padi_lines", panel)
+        self.assertNotIn("entryBar(", panel,
+                         "the entry bar is back inside the fee panel")
+
+    def test_the_entry_bar_opens_from_its_own_column(self) -> None:
+        self.assertIn('<div id="entryPanel"', self.page)
+        self.assertIn('class="entry-open"', self.app)
+        self.assertIn("entryBar(itin)", self.app)
+
+    def test_both_gestures_and_the_keyboard_on_one_mechanism(self) -> None:
+        """Hover does not exist on a touch screen, and a panel is a column's
+        content rather than a reward for owning a mouse."""
+        self.assertEqual(
+            self.app.count("function hoverPanel("), 1,
+            "there is more than one implementation of the panel interaction",
+        )
+        wiring = self.app.split("function hoverPanel(", 1)[1].split(
+            "\n  hoverPanel(", 1)[0]
+        for gesture in ("pointerover", "pointerout", "click", "focusin",
+                        "focusout", "Escape"):
+            with self.subTest(gesture=gesture):
+                self.assertIn(gesture, wiring)
+        self.assertEqual(self.app.count("hoverPanel(document.getElementById("), 3)
+
+    def test_each_trigger_is_a_button_and_says_it_opens_a_dialog(self) -> None:
+        """The dropdown's `+` was a `<button>` and accessible by default. A cell
+        that opens a panel may not be a step back from it."""
+        for cls in ("fees-open", "entry-open"):
+            with self.subTest(cls=cls):
+                markup = self.app.split('class="' + cls + '"', 1)[1][:200]
+                self.assertIn('type="button"', markup)
+                self.assertIn('aria-haspopup="dialog"', markup)
+                self.assertIn('aria-expanded="false"', markup)
+
+    def test_the_panel_is_built_on_demand_and_not_per_departure(self) -> None:
+        """Nothing on this page is lazily fetched, so anything written per row
+        ships 1,122 times. One host in the markup, filled from the payload when
+        a cell is used -- and the row rebuilt rather than cached, because the
+        bill depends on the toggles."""
+        self.assertEqual(self.page.count('id="feePanel"'), 1)
+        self.assertIn("function rowFor(", self.app)
+        rebuilt = self.app.split("function rowFor(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("metricsFor(dep)", rebuilt)
+
+    def test_opening_one_panel_closes_the_others(self) -> None:
+        """Two panels anchored to two cells of the same row would overlap, and
+        the second would read as belonging to whichever cell it landed on."""
+        wiring = self.app.split("function hoverPanel(", 1)[1].split(
+            "\n  hoverPanel(", 1)[0]
+        self.assertIn("function others()", wiring)
+        self.assertIn("panel.shut()", wiring)
+
+    def test_a_wide_table_scrolls_inside_the_panel_and_not_the_panel(self) -> None:
+        """The fee table needs 460px for its columns and the panel is narrower
+        than that on a phone. `overflow` on the table itself does not do it --
+        `min-width` wins and the table overflows, taking the panel's own header
+        sideways with it."""
+        self.assertIn('class="fee-scroll"', self.app)
+        self.assertIn(".fee-scroll { overflow-x:auto", self.css)
+        self.assertIn("max-height:70vh; overflow:auto", self.css)
+
+
 class TestTheTotalStatesWhatItIsTheSumOf(unittest.TestCase):
     """The bar under the Total came off, and the figures it encoded went in its
     place (#148) -- not a deletion leaving the cell with the total alone.
