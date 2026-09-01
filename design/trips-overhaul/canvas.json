@@ -1,0 +1,21 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 900,
+      "title": "Trips — the table", "is_interactive": true },
+    { "file": "Filters.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 900,
+      "title": "Trips — filters open", "is_interactive": true },
+    { "file": "Phone.dc.html", "x": 3120, "y": 0, "w": 390, "h": 844,
+      "title": "Phone", "is_interactive": true }
+  ],
+  "annotations": [
+    { "id": "note-toolbar", "x": 0, "y": -190, "w": 620,
+      "text": "THE ONE MOVE\n\nToday the five chip banks are always open: 270px of controls before the first row, on a page whose job is showing rows. They fold into the Filters drawer, and what stays out is the two switches that change every number in the table, the season, and the two chips a reader actually reaches for. The table starts 200px higher and shows 17 rows instead of 12." },
+    { "id": "note-bill", "x": 660, "y": -190, "w": 620,
+      "text": "THE BILL, BANDED\n\nSixteen identical columns gave the eye nothing to land on. Now three groups — the trip, the bill, availability — and the five money columns sit on a tint that runs from the header down. Total is the largest thing on the row; the split under it (advertised + fees) is a real second line rather than a 9.5px overlay.\n\nFour columns are gone, not hidden: Return folds into Dates, Guests into Boat, From and To into the Trip cell as the route. Nothing was dropped." },
+    { "id": "note-phone", "x": 3120, "y": -190, "w": 400,
+      "text": "PHONE: A CARD, NOT A FOLD\n\nMONEY_FOLD keeps the Total on screen by hiding columns off the front of the row, chosen by a number typed into a file that cannot see the data — which is how #150 happened. A card has no columns to fold: the money sits in its own corner at every width and nothing has to be measured." },
+    { "id": "note-data", "x": 1560, "y": -190, "w": 620,
+      "text": "REAL DATA\n\n240 real departures read off the built page, spanning all four months, 67 boats and every state that matters: markdowns, sold out, 0 at this price, PADI-only sailings, ranged totals, + tips, two sellers disagreeing. Each row carries all four Include-switch readings as they were read, so the Nitrox and Rental gear switches move the same numbers the live page moves — nothing here computes a price.\n\nChip counts are over the 240 rows shipped, so a chip's number always matches what pressing it leaves on screen." }
+  ],
+  "launch": { "view": "canvas" }
+}

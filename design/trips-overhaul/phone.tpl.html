@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    .lb {
+      --ground:#f7f8fa; --panel:#ffffff; --rule:#dde3ec; --rule-strong:#c3ccd9;
+      --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#66707c;
+      --accent:#0d5c8c; --accent-soft:#e4eef6;
+      --later:#a44d0e; --later-soft:#fbeee2;
+      --ok:#1f6b45; --warn:#855f0f; --unknown:#5c6570; --sold:#9c3535;
+      --bill:#f2f7fb; --bill-edge:#cfdeeb;
+      --font-sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, sans-serif;
+      --font-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+                  Consolas, "Liberation Mono", monospace;
+      --font-narrow:"IBM Plex Sans Condensed", "Avenir Next Condensed",
+                    "Roboto Condensed", "Liberation Sans Narrow", "Arial Narrow",
+                    var(--font-sans);
+    }
+    .lb.dark {
+      --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
+      --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
+      --accent:#63b3e3; --accent-soft:#152a3a;
+      --later:#e8a86a; --later-soft:#2e2015;
+      --ok:#6cc394; --warn:#d6ad55; --unknown:#939db0; --sold:#e08379;
+      --bill:#161f2a; --bill-edge:#2b3949;
+    }
+    body { margin:0; font-family:var(--font-sans); }
+    a { color:#0d5c8c; text-decoration:none; }
+    a:hover { color:#0a4a70; }
+    * { box-sizing:border-box; }
+  </style>
+</helmet>
+
+<!-- The phone view. Not the desktop table with columns folded away: at 390
+     the sixteen-column row could only ever keep the Total on screen by
+     hiding the boat behind it, and which columns went was a typed
+     breakpoint that went stale the moment the Total column got wider (#150).
+     A card has no columns to fold — the money sits in its own corner at every
+     width, and nothing has to be measured to keep it there. -->
+<div class="lb {{themeCls}}" style="display:flex; flex-direction:column; width:{{W}}px; height:{{H}}px; background:var(--ground); color:var(--ink); font-size:13px; line-height:1.45; overflow:hidden; -webkit-font-smoothing:antialiased">
+
+  <div style="flex:none; padding:10px 14px 9px; background:var(--panel); border-bottom:1px solid var(--rule)">
+    <div style="display:flex; align-items:baseline; gap:8px">
+      <div style="font-family:var(--font-narrow); font-size:16px; font-weight:600">Egypt liveaboards</div>
+      <div style="font-size:11px; color:var(--ink-faint)">May–Aug 2027</div>
+      <div style="margin-left:auto; font-family:var(--font-mono); font-size:12px; font-variant-numeric:tabular-nums; color:var(--ink-dim)">{{shown}}</div>
+    </div>
+  </div>
+
+  <!-- Two controls, both 44px tall. Everything else is behind Filters. -->
+  <div style="flex:none; display:flex; gap:8px; padding:8px 14px; background:var(--panel); border-bottom:1px solid var(--rule)">
+    <button type="button" onClick="{{toggleDrawer}}" style="{{drawerBtnStyle}}">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4h12M4.5 8h7M6.5 12h3"/></svg>
+      Filters
+      <sc-if value="{{anyFilter}}" hint-placeholder-val="{{true}}">
+        <span style="font-family:var(--font-mono); font-size:10px; background:var(--accent); color:#fff; border-radius:8px; padding:0 5px; line-height:15px">{{nFilters}}</span>
+      </sc-if>
+    </button>
+    <button type="button" onClick="{{cycleSort}}" style="{{sortBtnStyle}}">
+      <span style="font-size:9.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint)">Sort</span>
+      {{sortLabel}}
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l4 4 4-4"/></svg>
+    </button>
+  </div>
+
+  <!-- The filter sheet. One panel, scrolled inside itself, so a bank never
+       pushes another off the bottom edge the page cannot scroll to. -->
+  <sc-if value="{{drawer}}" hint-placeholder-val="{{true}}">
+    <div style="flex:1 1 auto; min-height:0; display:flex; flex-direction:column; background:var(--panel); border-bottom:1px solid var(--rule-strong)">
+      <div style="flex:1 1 auto; overflow-y:auto; padding:12px 14px 16px">
+        <sc-for list="{{sheet}}" as="b" hint-placeholder-count="4">
+          <div style="margin-bottom:15px">
+            <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:7px">
+              <span style="font-family:var(--font-narrow); font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--ink-dim)">{{b.title}}</span>
+              <span style="{{b.badgeStyle}}">{{b.badge}}</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px">
+              <sc-for list="{{b.chips}}" as="c" hint-placeholder-count="6">
+                <button type="button" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}} <span style="{{c.countStyle}}">{{c.count}}</span></button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="flex:none; display:flex; gap:8px; padding:10px 14px; border-top:1px solid var(--rule)">
+        <button type="button" onClick="{{clearAll}}" style="flex:none; font:inherit; font-size:13px; min-height:44px; padding:0 16px; border:1px solid var(--rule-strong); background:transparent; color:var(--ink-dim); border-radius:2px; cursor:pointer">Clear all</button>
+        <button type="button" onClick="{{toggleDrawer}}" style="flex:1 1 auto; font:inherit; font-size:13px; font-weight:500; min-height:44px; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:2px; cursor:pointer">Show {{shown}} trips</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- The cards -->
+  <sc-if value="{{listing}}" hint-placeholder-val="{{true}}">
+    <div style="flex:1 1 auto; overflow-y:auto; min-height:0; padding:8px 10px 16px; display:flex; flex-direction:column; gap:7px">
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+        <div style="background:var(--panel); border:1px solid var(--rule); border-radius:3px; padding:9px 11px 8px; display:flex; flex-direction:column; gap:4px">
+
+          <div style="display:flex; align-items:flex-start; gap:10px">
+            <div style="flex:1 1 auto; min-width:0">
+              <div style="font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{r.boat}}</div>
+              <div style="font-family:var(--font-mono); font-size:11.5px; color:var(--ink-dim); font-variant-numeric:tabular-nums">{{r.dates}} <span style="font-family:var(--font-sans); color:var(--ink-faint)">· {{r.nights}}</span></div>
+            </div>
+            <!-- The money, in its own corner. Nothing folds it away. -->
+            <div style="flex:none; text-align:right; background:var(--bill); border:1px solid var(--bill-edge); border-radius:2px; padding:3px 7px 4px; margin:-2px -3px 0 0">
+              <div style="font-family:var(--font-mono); font-size:15px; font-weight:600; letter-spacing:-.01em; color:var(--accent); font-variant-numeric:tabular-nums; white-space:nowrap">{{r.total}}</div>
+              <div style="font-family:var(--font-mono); font-size:9.5px; color:var(--ink-faint); font-variant-numeric:tabular-nums; white-space:nowrap">{{r.split}}<sc-if value="{{r.tips}}" hint-placeholder-val="{{true}}"><span style="font-family:var(--font-sans)"> + tips</span></sc-if></div>
+            </div>
+          </div>
+
+          <div style="font-size:12.5px; color:var(--ink); line-height:1.35">{{r.trip}}</div>
+          <div style="font-size:11px; color:var(--ink-faint); line-height:1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{r.route}} &nbsp;·&nbsp; {{r.sites}}</div>
+
+          <div style="display:flex; align-items:center; flex-wrap:wrap; gap:5px 8px; margin-top:2px; padding-top:6px; border-top:1px solid var(--rule)">
+            <sc-if value="{{r.hasSale}}" hint-placeholder-val="{{true}}">
+              <span style="font-family:var(--font-mono); font-size:10.5px; font-weight:600; color:var(--later); background:var(--later-soft); border-radius:2px; padding:1px 5px">{{r.sale}}</span>
+            </sc-if>
+            <span style="{{r.placeNumStyle}}">{{r.placeNum}}</span>
+            <span style="font-size:10.5px; color:var(--ink-faint)">{{r.placeWord}}</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--ink-dim)">{{r.entry}}</span>
+            <span style="font-size:10.5px; color:var(--ink-faint)">nitrox {{r.nitrox}}</span>
+            <span style="margin-left:auto; display:flex; gap:8px">
+              <sc-if value="{{r.lav}}" hint-placeholder-val="{{true}}">
+                <a href="#" style="font-size:11px; color:var(--accent); white-space:nowrap">liveaboard ↗</a>
+              </sc-if>
+              <sc-if value="{{r.padi}}" hint-placeholder-val="{{true}}">
+                <a href="#" style="font-size:11px; color:var(--accent); white-space:nowrap">PADI ↗</a>
+              </sc-if>
+            </span>
+          </div>
+        </div>
+      </sc-for>
+      <div style="padding:10px 4px 4px; text-align:center; font-size:11px; color:var(--ink-faint)">{{tailNote}}</div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light","section":"Display"},"$preview":{"width":__W__,"height":__H__}}'>
+__SHARED__
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = initialState(__DRAWER__, "__BANK__");
+  }
+
+__LOGIC__
+}
+</script>
+</body>
+</html>
