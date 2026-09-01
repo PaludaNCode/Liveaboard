@@ -2555,12 +2555,21 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
         self.assertIn('"off"', strip)
         self.assertIn('"read"', strip)
 
-    def test_the_counts_and_the_movement_are_not_one_sentence(self) -> None:
-        """They were, because the line had to be the whole of a collapsed
-        `<summary>`. Split, each can be the shape it wants."""
-        self.assertIn("function movedLine(", self.app)
+    def test_the_panel_states_what_is_on_sale_and_not_what_moved(self) -> None:
+        """The one-line "2 moved on liveaboard.com since 28 Aug · 6 moved on
+        padi.com since 30 Aug" went with the two blocks it counted (#146).
+
+        Not in the issue's cut list, and neither is it in #145's -- so it would
+        have survived both by omission, which is why it is asserted here. It
+        restated the two headings verbatim, dates included, from a strip whose
+        job is what is on sale today; a reader who wants the movement has a
+        view for it, and a signpost that repeats the thing it points at is the
+        split this move was made to close.
+        """
+        self.assertNotIn("function movedLine(", self.app)
         self.assertNotIn("function dealsSummary(", self.app,
                          "the summary sentence outlived the fold it was for")
+        self.assertNotIn("sale-moved", self.app)
 
     def test_the_depth_is_a_range_and_not_a_table_of_brackets(self) -> None:
         """The rates survive as one figure; the bracket rows do not.
@@ -2607,6 +2616,69 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
                       "d.price - d.sale.was", "dep.price - dep.sale.was"):
             self.assertNotIn(wrong, self.app,
                              "a saving is being taken against the unconverted price")
+
+class TestRefreshNewsIsReportedInOnePlace(unittest.TestCase):
+    """The discount moves belong to the history, not to the sale panel (#146).
+
+    They were drawn inside the sale panel, so one page reported refresh news
+    twice: the panel said what is on sale *and* what moved, and the history
+    section said what moved about everything else. The panel keeps the first
+    half.
+
+    What the move may not do is fold them into `changes.py`'s report, and the
+    reason is the clocks. That report is a diff between two committed datasets
+    (`HEAD~1`). Each of these is a diff between the last two readings of *one
+    seller*, and the two sellers are crawled days apart -- 28 Aug and 30 Aug on
+    the dataset this was written against. Neither is the commit boundary and
+    neither is the other's, so each keeps its own seller's name and its own
+    "since" date. Merging them under one date would date at least one of them
+    wrong, which is the mistake the berth counts and the sale marks have each
+    already made once.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    PAGE = ROOT / "templates" / "index.html"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+
+    def test_the_moves_are_drawn_under_the_history_and_not_the_panel(self) -> None:
+        self.assertIn('<div id="saleMoves"></div>', self.PAGE.read_text(encoding="utf-8"))
+        self.assertIn("drawSaleMoves();", self.app)
+        moves = self.app.split("function drawSaleMoves(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("salesChanges(shifted)", moves)
+        self.assertIn("dealsChanges(deals)", moves)
+        panel = self.app.split("function drawDeals(", 1)[1].split("\n  }", 1)[0]
+        self.assertNotIn("salesChanges(", panel,
+                         "the sale panel is reporting movement again")
+        self.assertNotIn("dealsChanges(", panel,
+                         "the sale panel is reporting movement again")
+
+    def test_each_block_carries_its_own_seller_and_its_own_date(self) -> None:
+        """One date over two books read days apart dates half of them wrong."""
+        for name, seller in (("salesChanges", "liveaboard.com"), ("dealsChanges", "padi.com")):
+            block = self.app.split("function " + name + "(", 1)[1].split("\n  }", 1)[0]
+            self.assertIn("What moved on " + seller + " since ", block)
+            self.assertIn("shortDate(", block)
+
+    def test_neither_block_drops_a_row_without_saying_so(self) -> None:
+        """The two notes that travelled with them: a sailing read on only one of
+        the two days is not a sailing that came off sale, and a listing the
+        fetcher could not finish knows nothing about the offers it did not
+        reach."""
+        sales = self.app.split("function salesChanges(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("not compared", sales)
+        self.assertIn("shifted.compared", sales)
+        deals = self.app.split("function dealsChanges(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("moved.partial", deals)
+
+    def test_a_day_with_no_discount_anywhere_has_no_sale_view(self) -> None:
+        """The moves used to make the view exist on their own. They report
+        elsewhere now, so "what is on sale" with nothing on sale is not a
+        page -- and `showView` may not leave the address naming it."""
+        panel = self.app.split("function drawDeals(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("if (!offers.length && !fleet.length) return false;", panel)
+
 
 class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):
     """`changes.compare` builds a report out of dataclasses. `changes.render`

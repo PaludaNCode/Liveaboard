@@ -686,12 +686,6 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
   font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
   letter-spacing:.09em; color:var(--ink-faint);
 }
-/* What moved since the last reading. Prose, under the figures, because a
-   movement needs two dates and a direction and none of those is a figure. */
-.sale-moved {
-  font-size:11.5px; color:var(--ink-dim); max-width:74ch; margin:10px 0 0;
-}
-
 .deals-body { padding:0; }
 .deals-note { margin:0 0 10px; font-size:12px; max-width:74ch; line-height:1.5; }
 

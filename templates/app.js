@@ -1918,33 +1918,6 @@
      wrong. The liveaboard half leads because it is the larger signal: the day
      the Red Sea Aggressors' sale ended, PADI's listing moved three offers and
      the booking pages moved 36 sailings. */
-  /* What has moved since the previous reading of each book, and nothing else.
-     `dealsSummary` said this too, behind the sailing and boat counts that the
-     summary strip now carries -- it was one sentence because it had to be the
-     whole of a collapsed `<summary>`. Splitting them lets each be the shape it
-     wants: figures skimmed, movement read. */
-  function movedLine(deals, changed) {
-    var said = [];
-    var shifted = deals.on_sale_changes;
-    if (shifted && !shifted.first_reading) {
-      var moved = 0;
-      (shifted.moves || []).forEach(function (m) { moved += m.sailings; });
-      said.push((moved ? moved + " moved" : "Nothing moved") +
-        " on liveaboard.com since " + shortDate(shifted.previous));
-    }
-    if ((deals.offers || []).length) {
-      if (deals.first_reading) said.push("PADI’s listing, first reading");
-      else if (changed) said.push(changed + " moved on padi.com since " +
-        shortDate(deals.previous));
-      else if (deals.previous) said.push("nothing moved on padi.com since " +
-        shortDate(deals.previous));
-    }
-    if (!said.length) return "";
-    return said.join(" · ").replace(/^./, function (c) { return c.toUpperCase(); }) + ".";
-  }
-
-
-
   /* One row per boat, both sellers on it.
 
      This was two tables. The left half — every discounted sailing, per boat —
@@ -2264,6 +2237,34 @@
     });
   }
 
+  /* The discount moves, under the heading that already says "what changed".
+   *
+     They were drawn inside the sale panel, which left one page reporting
+     refresh news in two places: the sale panel said what is on sale *and* what
+     moved, and this section said what moved about everything else (#146). The
+     panel keeps the first half and this takes the second.
+
+     What they may not do is fold into the report above them, and the reason is
+     that the three run on different clocks. The changelog is a diff between
+     two committed datasets -- `HEAD~1` -- computed in Python. These two are
+     each a diff between the last two readings of *one seller*: 28 Aug for
+     liveaboard.com, 30 Aug for padi.com, precomputed by `promote` from
+     `data/sales.json` and `data/deals.json`. Neither is the commit boundary
+     and they are not each other's. So each keeps its own seller's name and its
+     own "since" date in its own heading, which is the rule the sale panel's
+     own heading follows: a summary is only as fresh as its stalest half. */
+  function drawSaleMoves() {
+    var host = document.getElementById("saleMoves");
+    var deals = D.deals;
+    if (!host || !deals) return;
+    host.textContent = "";
+    var shifted = deals.on_sale_changes;
+    if (shifted && !shifted.first_reading) host.appendChild(salesChanges(shifted));
+    if ((deals.offers || []).length && deals.previous) {
+      host.appendChild(dealsChanges(deals));
+    }
+  }
+
   /* ---------- the sale view's own bands ---------- */
 
   /* Four figures, not a sentence. The line this replaces carried the same
@@ -2571,17 +2572,14 @@
     var host = document.getElementById("dealsBody");
     if (!host || !deals) return false;
     var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
-    /* The change log counts as content of its own. The day every sale on the
-       fleet ends there is no table to draw and "36 sailings are no longer 33%
-       off" is the whole of what the panel has to say — which is precisely the
-       thing it could not say before. */
-    var shifted = deals.on_sale_changes;
-    var moved = shifted && !shifted.first_reading;
-    if (!offers.length && !fleet.length && !moved) return false;
+    /* What is on sale, and nothing about what moved. The moves used to make
+       this view exist on their own -- the day every sale on the fleet ended,
+       "36 sailings are no longer 33% off" was the whole of what the panel had
+       to say -- and they are reported in the refresh history now (#146). So a
+       day with no discount anywhere has no sale view, which is the honest
+       answer to "what is on sale" rather than an empty page. */
+    if (!offers.length && !fleet.length) return false;
 
-    var changed = ((deals.changes || {}).new || []).length +
-      ((deals.changes || {}).withdrawn || []).length +
-      ((deals.changes || {}).changed || []).length;
     var body = host;
     body.textContent = "";
 
@@ -2591,12 +2589,6 @@
     var line = document.getElementById("dealsLine");
     line.textContent = "";
     line.appendChild(saleStrip(deals, rates));
-    /* What moved since the last reading, still in words: it is a sentence
-       about two days rather than a figure, and the strip is figures. The
-       counts it used to open with are the strip's now, so it says only the
-       part the strip cannot -- a movement needs two dates and a direction. */
-    var moves = movedLine(deals, changed);
-    if (moves) line.appendChild(el("p", "sale-moved", moves));
 
     /* The discounts by boat: its "n of m" and its week window are what tell a
        reader which sailing to book. */
@@ -2616,11 +2608,6 @@
       if (note) body.appendChild(note);
       body.appendChild(offersTable(rows));
     }
-    if (moved) body.appendChild(salesChanges(shifted));
-
-    if (!offers.length) return true;
-
-    if (deals.previous) body.appendChild(dealsChanges(deals));
 
     var strangers = deals.unmatched || [];
     if (strangers.length) {
@@ -3436,6 +3423,7 @@
 
   drawNotice();
   drawChanges();
+  drawSaleMoves();
   /* The overview is built once, whether or not it is the view being opened:
      it is what decides whether there is a sale view at all, and it is a few
      dozen rows against a table of 1,122. */

@@ -697,6 +697,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   day with no entry is a day the refresh did not run, and the lead says so —
   never that nothing moved. A repeated date is two refreshes, printed
   separately under one heading for the day.
+- **The refresh news is in the history, and the sale panel says what is on
+  sale.** The two discount-move blocks were drawn inside the sale panel, so one
+  page reported refresh news twice (#146). They sit under *What changed on the
+  last refresh* now, as **their own blocks under their own headings**, never
+  folded into `changes.compare`'s report: that is a diff between two committed
+  datasets and each of these is a diff between the last two readings of *one
+  seller*, crawled days apart. Neither is the commit boundary and neither is
+  the other's, so each carries its own seller and its own *since* date — the
+  same rule `berths_read` and the sale marks each learned once. The one-line
+  count of those moves went with them: a signpost that restates both headings
+  verbatim, dates included, is the split rather than a cure for it. So a day
+  with **no discount anywhere has no sale view** — the moves used to keep it
+  alive on their own, and "what is on sale" with nothing on sale is not a page.
 - **The history view shows what happened, and does not interpret it.** Badges
   were proposed and declined: *cheapest reading this week*, *raised twice this
   week*, a sparkline per row. `sales.json` holds seven days and could support
