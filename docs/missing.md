@@ -80,9 +80,13 @@ records that closing them costs no request.
 
 **The dive count.** One itinerary in the season states none from any of the
 four sources — **Aphrodite, *North Dolphins*** (7 nights, Hurghada return, 2
-sailings). Its column reads *not stated*, which is correct and is the only
-such row. Where the number does exist, it is worth knowing which source
-answered:
+sailings) — and **it is not a hole.** Probed 2026-09-01: liveaboard.com prints
+`Dives  -` for that trip, the only dash in 317, and its day plan is snorkelling
+only ("2–3 guided snorkeling sessions daily", *No Certificate needed*). PADI
+sells eleven Aphrodite itineraries and not this one. There is no dive count
+because there are no dives. The column reads *not stated*, which claims nobody
+answered when the seller did — see `docs/plan-missing.md` §0. Where the number
+does exist, it is worth knowing which source answered:
 
 | Source | Itineraries |
 |---|---|
@@ -177,6 +181,12 @@ coverage count does not read as a to-do.
 
 - **A berth count on a vessel page.** Does not exist; the booking flow's
   `data-allocation` is the only source and is already read.
+- **A dive count in the vessel page's Highlights block.** Free marketing prose:
+  present on 8 of 12 vessels probed, a count on 2, and both are upper bounds
+  ("Up to 20 dives + night dives"). The dataset keeps the low end so price per
+  dive stays a ceiling, so an upper bound is the one figure it cannot use.
+- **A guest count on PADI's vessel page.** Searched the whole body for every
+  numeric form: none. So Vita Xplorer's missing count has no second source.
 - **`Requirements` depth, current and nitrox advice.** No candidate field in
   either source.
 - **The single gear items beside "Full scuba set".** Priced, deliberately

@@ -820,7 +820,40 @@ Two facts a PADI-only vessel has nowhere else to get:
   claim this site exists to catch other people making.
 
 Not every boat states a fleet; three of the ten land under "Operator not
-captured", which is true rather than tidy.
+captured", which is true rather than tidy. **Confirmed at the source rather
+than inferred from a null**, 2026-09-01: `window.shop` on `my-anemone`,
+`my-heaven-saphir` and `my-independence-ii` states `fleetTitle: ""` — an empty
+string PADI publishes, not a fetch that failed or a regex that missed. Those
+three carry 44 in-season sailings, have no liveaboard.com vessel page and so no
+`Product.brand.name`, and their description prose names no company. There is
+nothing left to read, and inventing one from marketing copy is the assertion
+this file already refuses to make for Blue Pearl on better evidence.
+
+### The vessel page also states cabins, length and year built
+
+Server-rendered in the same response `window.shop` comes from — plain
+`urllib`, no browser, no CDN bundle. `/liveaboard/egypt/my-anemone/`, read
+2026-09-01:
+
+    Cabins 16 · Length / Width 45 m / 8 m · Year built / renovated 2022 / 2025 ·
+    Rental equip. YES ($) · Internet FREE · Nitrox FREE
+
+`fetch_padi.py` already fetches this page per vessel for the country, currency,
+name and fleet, so the strip costs no extra request. It answers `cabins` for
+the 6 boats that have none, `length_m` and `year_built` for the 5 length-less
+vessels PADI carries (DUNE Longara, DUNE Titan, Snefro Love, Snefro Pearl,
+Snefro Target), and gives a second reading of nitrox inclusion to check the fee
+panel's against. Precedence is the standing rule: the vessel's own panel wins
+where it exists, PADI fills where it does not, never a merge.
+
+**Negative, and the reason `guests` stays open: the page states no guest count
+anywhere.** The whole rendered body searched for every numeric form of guests,
+divers, passengers, people, pax — zero hits, and the strip has no such row.
+Vita Xplorer is the boat this leaves stranded: it is the one vessel with a
+liveaboard.com panel whose specification table leaves the field blank, so its
+answer is a parser fix on that `<dl>` or nothing. The other six missing a guest
+count are reachable through the itinerary fragment's *Group Size*, which
+`promote`'s guest chain already reads.
 
 ## One property to preserve
 
