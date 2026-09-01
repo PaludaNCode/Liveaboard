@@ -1040,6 +1040,55 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertIn("pane", seen["focused"],
                           "preventScroll cost the pane its focus, on " + name)
 
+    def test_a_count_ordered_bank_re_ranks_when_its_counts_move(self) -> None:
+        """A bank ordered by popularity is ordered by the *live* popularity.
+
+        Dive sites is where it bites, because that bank is ANDed: pick
+        Brothers and every other reef's number becomes "trips that visit
+        both", which reshuffles the list completely. The chips stayed in the
+        order they booted in, so the reefs that actually combine with Brothers
+        sat behind "+34 more" while ones that barely do led the bank.
+
+        And only where the order was a count. Months are chronological and the
+        entry bar is ranked by how strict it is; re-ranking either by
+        popularity would replace a meaning with a ranking, so the other half
+        of this asserts they hold still while their numbers move.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        read = lambda bank: page.eval_on_selector_all(
+            "#%s .chip:not(.more)" % bank,
+            "es => es.map(e => ({ v: e.dataset.v, n: +e.querySelector('.dim').textContent,"
+            " on: e.getAttribute('aria-pressed') === 'true' }))")
+
+        self.pick_filter(page, "sites", "#sites .chip")  # the most popular reef
+        after = read("sites")
+        self.assertTrue(after[0]["on"], "the chosen reef does not lead its bank")
+        rest = [c["n"] for c in after if not c["on"]]
+        self.assertEqual(rest, sorted(rest, reverse=True),
+                         "the reefs left are not in the order of what is left")
+        self.assertTrue(any(c["n"] for c in after[1:]),
+                        "the bank came back empty, so this measured nothing")
+
+        # The two banks whose order means something hold it, while the same
+        # filter moves their numbers.
+        page.click('.bank-tab[data-bank="months"]')
+        page.wait_for_timeout(200)
+        months = [c["v"] for c in read("months")]
+        page.click('.bank-tab[data-bank="entry"]')
+        page.wait_for_timeout(200)
+        entry = [c["v"] for c in read("entry")]
+
+        self.pick_filter(page, "sites", "#sites .chip:nth-of-type(2)")
+        page.click('.bank-tab[data-bank="months"]')
+        page.wait_for_timeout(200)
+        self.assertEqual([c["v"] for c in read("months")], months,
+                         "the months re-sorted themselves out of the calendar")
+        page.click('.bank-tab[data-bank="entry"]')
+        page.wait_for_timeout(200)
+        self.assertEqual([c["v"] for c in read("entry")], entry,
+                         "the entry bar re-sorted itself out of its ladder")
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))

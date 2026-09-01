@@ -615,6 +615,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   reason they are out there. So `Clear all` leaves them where the visitor put
   them too — it clears what the bar lists, and resetting a control the bar does
   not name is an unnamed side effect that moves every total on the page.
+  **A bank ordered by a count is ordered by the count it is showing.** The
+  `tally` banks — Departs from, Dive sites, Boat — re-rank on every recount,
+  chosen chips leading. Dive sites is where it bites, because that bank is
+  ANDed: pick Brothers and every other reef's number becomes *trips that visit
+  both*, which reshuffles the list — and the chips held their boot order, so
+  the reefs that combine with Brothers sat behind *+34 more* while ones that
+  barely do led the bank. Only where the order *was* a count: months are
+  chronological, the entry bar is ranked by how strict it is, and the two
+  sellers are listed in neither's favour, so sorting any of those by
+  popularity would replace a meaning with a ranking. Nothing moves under a
+  finger — picking inside an OR bank does not change that bank's own counts.
   Inside, **one bank at a time**, picked from a rail that carries a count
   per bank: stacked, the panel was as tall as the sum of the longest of each,
   which is the wall of filters the fold exists to prevent. The toolbar does not

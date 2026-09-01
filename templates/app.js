@@ -2133,6 +2133,37 @@
         var v = numeric ? +it.id : it.id;
         return counts[it.id] || picked.has(v);
       });
+      /* Re-ordered by the count it is now showing, not the one it opened
+         with.
+       *
+         A bank built by `tally` is a list in popularity order, and after any
+         filter that order is a fact about a table nobody is looking at. Dive
+         sites is where it bites, because that bank is ANDed: pick Brothers and
+         every other reef's number becomes "trips that visit both", which
+         reshuffles the whole list -- and the chips stayed in the order they
+         booted in, so the reefs that actually combine with Brothers sat behind
+         "+34 more" while ones that barely do led the bank. Ports and boats
+         re-order for the same reason a beat later, when a month or a reef
+         moves their numbers; neither can move under a finger, because picking
+         inside an OR bank does not change that bank's own counts.
+
+         Only where the order *was* a count. Months are chronological, the
+         entry bar is ranked by how strict it is, and the two sellers are
+         listed in neither's favour -- sorting any of those by popularity would
+         replace a meaning with a ranking.
+
+         Chosen chips lead, in the same order among themselves. They are shown
+         regardless of the cap already; leading it is what makes that coherent
+         rather than a pressed chip appearing at position 40 for no stated
+         reason. */
+      if (opts.byCount && counts) {
+        var rank = function (it) { return picked.has(numeric ? +it.id : it.id) ? 0 : 1; };
+        live = live.slice().sort(function (a, b) {
+          return rank(a) - rank(b) ||
+            (counts[b.id] || 0) - (counts[a.id] || 0) ||
+            String(a.id).localeCompare(String(b.id));
+        });
+      }
       var limit = opts.limit ? opts.limit(live) : chipLimit();
       var shown = expanded ? live : live.filter(function (it, n) {
         var v = numeric ? +it.id : it.id;
@@ -3406,12 +3437,12 @@
              n: D.departures.filter(function (d) { return d.month === m.id; }).length };
   }), state.months, true, "months", function (i, dep) { return [dep.month]; });
   chips("ports", PORTS, state.ports, false, "ports",
-        function (i) { return [i.port_from]; });
+        function (i) { return [i.port_from]; }, { byCount: true });
   /* Not skipped: these chips are ANDed, so the number is what you narrow to. */
   chips("sites", SITES, state.sites, false, null,
-        function (i) { return i.dive_sites || []; });
+        function (i) { return i.dive_sites || []; }, { byCount: true });
   chips("boats", BOATS, state.boats, false, "boats",
-        function (i) { return [i.boat]; });
+        function (i) { return [i.boat]; }, { byCount: true });
   /* Cut where the certification changes, not after N chips: the rungs on
      screen are then "every Open Water bar" and the fold is "the Advanced ones",
      which a reader can predict before opening it. Falls back to the ordinary
