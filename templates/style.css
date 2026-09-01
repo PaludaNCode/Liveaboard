@@ -407,14 +407,19 @@ tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-s
    bar is a second reading of the figure above it, so it belongs in that
    figure's space, not in a line of its own. */
 tbody td.cost { position:relative; }
-.anchor {
-  position:absolute; right:9px; top:22px;
-  height:3px; min-width:3px;
-  border-radius:2px; overflow:hidden;
+/* The two figures the total is the sum of, in the slot the bar had (#148).
+   Out of flow for the reason above: measured, a block-level second line under
+   the total added nine pixels to every row and cost three of the twelve rows
+   visible on a laptop. Tabular numerals so the two columns of money line up
+   down the table the way the totals above them do, and the `+` in the fees'
+   own colour, which is the one thing the bar's two segments said that the
+   figures do not say by themselves. */
+.split {
+  position:absolute; right:9px; top:19px;
+  font-family:var(--font-mono); font-size:9.5px; line-height:1;
+  color:var(--ink-faint); white-space:nowrap; cursor:help;
 }
-.anchor i { display:block; height:100%; float:left; }
-.anchor .was { background:var(--accent); opacity:.65; }
-.anchor .add { background:var(--later); }
+.split i { color:var(--later); font-style:normal; }
 tbody tr.row.alt { background:var(--row-alt); }
 tbody tr.row:hover { background:var(--row-hover); }
 
@@ -602,8 +607,6 @@ tbody tr.row.gone .inc,
 tbody tr.row.gone .region,
 tbody tr.row.gone .plus,
 tbody tr.row.gone .dim { color:var(--ink-dim); }
-tbody tr.row.gone .anchor .was { background:var(--ink-faint); }
-tbody tr.row.gone .anchor .add { background:var(--ink-faint); opacity:.5; }
 
 .expand {
   background:none; border:0; color:var(--ink-faint); cursor:pointer;
@@ -977,7 +980,7 @@ a { color:var(--accent); }
   thead th { font-size:9px; letter-spacing:.04em; }
   /* Cell padding is 5px here, not 9, and the bar has to end where the number
      above it ends. */
-  .anchor { right:5px; }
+  .split { right:5px; }
   .site-footer { max-height:60vh; }
 }
 

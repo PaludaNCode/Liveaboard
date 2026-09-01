@@ -404,22 +404,22 @@
     return (+p[2]) + " " + MONTH_NAMES[+p[1] - 1] + " " + p[0];
   }
 
-  /* The dearest true cost among the rows on screen, which is what the anchor
-     bars are drawn against. Recomputed on every draw so the bars always
-     compare the trips being looked at, not a fleet maximum that filtering has
-     already excluded. */
-  var barMax = 0;
+  /* What the bar under the total said in words, which is the half of it worth
+     keeping (#148).
 
-  /* The bar's full length, in pixels, for the dearest trip on screen. Fixed so
-     the bar is measured against the column it is printed in. */
-  var BAR_TRACK = 68;
+     The bar encoded two different things. Its *length* was this total against
+     the dearest total on screen -- a comparison down the column, which the
+     table's own sort already answers, and nothing to replace. Its two
+     *segments* were the advertised fare's share and the required extras on top
+     of it, which is the whole argument of this site expressed as a proportion
+     and the part a reader loses if the graphic simply goes. So the split comes
+     back as the two figures it was drawn from.
 
-  /* Where the total is a range, the bar is drawn from its low end -- the same
-     figure Mandatory fees is worked out from. Said out loud, because a graphic
-     that answers a narrower question than the number above it should not do so
-     silently. */
-  var BAR_TITLE = "Advertised, then the fees on top of it. Scaled against the " +
-    "dearest trip shown; drawn from the low end where the total is a range.";
+     Money rather than a percentage: "+42%" is more compact and re-introduces
+     the proportion that is being removed. */
+  var SPLIT_TITLE = "The advertised berth price, then the required extras " +
+    "added to it — the two figures this total is the sum of. A range sits on " +
+    "the extras and never on the berth, so both ends are a whole bill.";
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
@@ -788,8 +788,8 @@
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
        Two sites sell the same berth on the same boat on the same day and they
-       do not agree -- 43 of the 74 trips where both fee books can be added up
-       differ, and 16 of those by more than €150. Printing one seller's number
+       do not agree -- 84 of the 179 trips where both fee books can be added up
+       differ, the widest by €140. Printing one seller's number
        as "Total" was answering "what does liveaboard.com charge" on a page
        whose question is "what does this trip cost". Where the second seller's
        disclosure is complete and cheaper, its bill is the one printed, marked
@@ -808,30 +808,23 @@
             '">—</span>';
         }
         m = b.bill;
-        /* The two numbers already in this row, drawn to scale: how much of the
-           bill was advertised, and how much of it was not. Scaled against the
-           dearest trip currently in view, so bar length compares down the
-           column and the split compares within one row.
+        /* The two figures the total is the sum of, under it.
+         *
+           Each end is a whole bill, so the split is a span exactly where the
+           total is one -- `best` carries `baseLo/baseHi` and `laterLo/laterHi`
+           for that reason, and the ranges sit on the fee lines rather than on
+           the berth. Printing one split under a ranged total would be claiming
+           a precision the row does not have; printing two spans claims only
+           what the two bills say.
 
-           Only where the required extras are stated. A bar is a claim about
-           proportion, and a trip nobody has read the fees for has no
-           proportion to claim -- it gets no bar rather than a full one. */
-        var bar = "";
-        if (barMax > 0 && m.total > 0) {
-          var advertised = Math.max(0, Math.min(100, (d.base / m.total) * 100));
-          /* Sized in pixels against a fixed track rather than as a percentage
-             of the cell. A percentage width on an absolutely positioned box
-             resolves against the containing block's padding box, but this box
-             is inset from it by `right`, so a full-length bar came out wider
-             than the space it sits in and hung across the one vertical rule in
-             the table -- 14 of 50 rows once a filter brought more totals near
-             the maximum. A track in px cannot do that, and it also means every
-             bar is drawn on the axis it is read against. */
-          bar = '<span class="anchor" title="' + BAR_TITLE + '" style="width:' +
-            ((m.total / barMax) * BAR_TRACK).toFixed(1) + 'px">' +
-            '<i class="was" style="width:' + advertised.toFixed(1) + '%"></i>' +
-            '<i class="add" style="width:' + (100 - advertised).toFixed(1) + '%"></i></span>';
-        }
+           Drawn wherever there is a total at all, which is the rule the bar
+           had: `best` is null unless one seller's required extras are stated,
+           and that case has already returned the dash above. So a zero here is
+           an operator that adds nothing rather than a trip nobody read -- the
+           same reason an included fee stays in the breakdown at zero. */
+        var split = '<span class="split" title="' + SPLIT_TITLE + '">' +
+          sellerSpan(b.baseLo, b.baseHi) + ' <i>+</i> ' +
+          sellerSpan(b.laterLo, b.laterHi) + '</span>';
         /* The span is the answer, so the marker only has to name its cause.
            It sits on the number rather than in a column of its own because it
            qualifies this number: €1,757–2,057 is not an operator quoting a
@@ -851,7 +844,7 @@
               'its own Optional extras, so they are not in this total.">' +
               ' + tips</span>'
             : "") +
-          varies + bar;
+          varies + split;
       } },
     /* What divers actually compare on, and the reason price per night is not
        here: two denominators over the same total, and only one of them is the
@@ -1600,18 +1593,6 @@
     var target = keep ? Math.max(PAGE_ROWS, drawn) : PAGE_ROWS;
     drawn = 0;
     lastRows = rows;
-
-    /* Before any cell is rendered: the anchor bars scale against the dearest
-       trip on screen, so filtering to three boats redraws the bars against
-       those three rather than against a fleet maximum that is no longer
-       visible. Only priced rows count -- an unpriced one has no total. */
-    barMax = rows.reduce(function (top, r) {
-      /* Against the total the column prints, which is now the cheaper of the
-         two sellers'. Measured against liveaboard.com's alone, a row whose PADI
-         bill undercut it drew a bar longer than the number beside it. */
-      var b = best(r);
-      return b && b.bill.total > top ? b.bill.total : top;
-    }, 0);
 
     /* `stick1`..`stickN` on the leading columns, so the CSS offsets line up
        with the order actually being rendered. */
