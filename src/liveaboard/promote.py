@@ -1233,7 +1233,14 @@ def _on_sale_summary(
         # The day each of those sellers was read, in the order they are named,
         # so the panel can print who said it and when without the page having
         # to know which book came from which job.
-        row["read"] = [read[s] for s in row["sellers"] if read.get(s)]
+        #
+        # One entry per seller, `None` included. Filtering the undated ones out
+        # left a shorter list beside a full `sellers`, and the two are read in
+        # lockstep -- so a seller with no reading date would have shifted every
+        # date after it onto the wrong seller's name. That is the one thing this
+        # pair exists to prevent, and it cannot happen to a list that keeps its
+        # own holes.
+        row["read"] = [read.get(s) for s in row["sellers"]]
         # A range only where the boat really runs more than one, which is rare:
         # an operator discounts a season, not a sailing. Printing "10–10%"
         # everywhere to accommodate the exception is noise on every other row.

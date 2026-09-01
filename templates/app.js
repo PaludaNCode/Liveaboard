@@ -1918,113 +1918,199 @@
      wrong. The liveaboard half leads because it is the larger signal: the day
      the Red Sea Aggressors' sale ended, PADI's listing moved three offers and
      the booking pages moved 36 sailings. */
-  /* One row per boat, both sellers on it.
+  /* ---------- the sales, and the trips on sale ---------- */
 
-     This was two tables. The left half — every discounted sailing, per boat —
-     came from the booking-page ladders; the right half was PADI's deals
-     listing. They answered complementary halves of one question and were drawn
-     as though they answered different questions: 22 boats with a window and no
-     money, sorted by name; 10 boats with money and no window, sorted by sail
-     date; ten boats in both and no way to read across. Discovery I was row 6 of
-     one without a price and row 8 of the other without a week.
+  /* One row per sale, and a sale is one seller's claim about one boat.
+   *
+     This was a single boat-keyed table joining the two sellers side by side,
+     with PADI's five columns in a group to the right and dashes on twelve of
+     the twenty-two rows (#145). The join was the problem: what the two sellers
+     publish are not two halves of one record. liveaboard.com strikes a list
+     price through on a booking page, so its evidence is a *run* of that boat's
+     discounted sailings; PADI publishes a named offer against one sailing. A
+     row per offer states each as what it is, and a boat both sellers discount
+     gets two rows rather than one row asserting a join nobody made.
 
-     The halves stay distinct because the claims are — a ladder says which weeks
-     are cut, a listing says one exemplar sailing and what it costs — and the
-     column group above them names whose is whose. What changes is that they
-     share a row, so the reader compares them by looking rather than by
-     remembering.
-
-     The union, not the intersection. Ten boats fill both halves today and it
-     would be easy to key the table on the fleet rows alone; a PADI offer for a
-     boat no ladder has caught would then vanish out of a panel headed "what is
-     discounted", which is this site's own reported failure in somebody else. */
-  var OFFER_GROUP = ["Sails", "Now", "Was", "Saving", "Offer"];
-
-  /* What comes off, in money. The percentage is not repeated here: it is in
-     the `Off` column of the same row, from the ladder that carries the whole
-     season rather than from one exemplar. The old table printed it three times
-     on a line — "20% off · €295" beside "Monthly Special 20% Off + Free
-     Nitrox" — and the third of those is PADI's own words and stays verbatim.
-
-     Where PADI's kind is not a percentage the money is the whole of what can
-     be said: a "Free night(s)" offer takes nothing off a nightly rate, and
-     dividing one price by the other would print a discount PADI never claimed. */
-  function offerSaving(row) {
-    var saved = row.was - row.price;
+     Sorted by boat so those two rows sit together, which is what the join was
+     reaching for and all it was reaching for. */
+  /* What comes off, in money, where a rate is not what PADI stated. Its "Free
+     night(s)" and "Free upgrade" kinds take nothing off a nightly rate, so the
+     money is the whole of what can be said -- and the kind is the whole of it
+     where there is no money either. */
+  function offerSaving(offer) {
+    var saved = offer.was - offer.price;
     if (saved > 0) return eur(saved);
-    return row.kind || "offer";
+    return offer.kind || "offer";
   }
 
-  /* PADI's half of a row, or five empty cells where PADI advertises nothing
-     for that boat. An empty cell is the honest statement — PADI publishes no
-     listing for it — where an absent row would say the boat is not discounted,
-     which the left half of the same line contradicts. */
-  function offerCells(tr, offer) {
-    if (!offer) {
-      OFFER_GROUP.forEach(function (_, n) {
-        tr.appendChild(el("td", n === 0 ? "d-none g-first" : "d-none", "—"));
+  function salesRows() {
+    var deals = D.deals || {};
+    var rows = [];
+    ((deals.on_sale || {}).boats || []).forEach(function (r) {
+      rows.push({
+        boat: r.boat_name, from: r.first, to: r.last,
+        off: r.pct ? r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off" : null,
+        /* No name, because the seller publishes none: this is a struck-through
+           price on a booking page and not an advertised campaign. A dash here
+           is a fact about the disclosure rather than a hole in the row. */
+        title: null, url: null,
+        sellers: r.sellers, read: r.read,
+        of: r.sailings && r.of ? r.sailings + " of " + r.of : null
       });
-      return;
-    }
-    tr.appendChild(el("td", "d-when g-first", shortDate(offer.start) +
-      (offer.nights ? " · " + offer.nights + "n" : "")));
-
-    /* The money PADI quotes, with the figure it quoted it in behind it. That
-       had a column of its own and was a dash on eight of ten rows, because
-       most of this fleet is priced in euro already; as a title it costs no
-       width and is still one hover from anybody checking the conversion. */
-    var now = el("td", "d-now", eur(offer.price));
-    now.title = offer.currency === D.meta.currency
-      ? "As PADI quotes it: " + eur(offer.price)
-      : "As PADI quotes it, before conversion: " + offer.currency + " " +
-        Math.round(offer.quoted).toLocaleString("en-IE") +
-        (offer.was > offer.price
-          ? ", against " + offer.currency + " " +
-            Math.round(offer.quoted_was).toLocaleString("en-IE")
-          : "");
-    tr.appendChild(now);
-
-    /* Struck through only where it is genuinely a different number. A "was"
-       equal to the price is PADI stating an offer that takes nothing off this
-       figure, and printing it crossed out would invent a saving. */
-    tr.appendChild(el("td", "d-was", offer.was > offer.price ? eur(offer.was) : "—"));
-    tr.appendChild(el("td", "d-off", offerSaving(offer)));
-
-    /* PADI's own name for the offer, verbatim — including the percentage it
-       repeats and the shouting, for the reason this project keeps a fleet
-       label verbatim: tidying somebody's words is a short step from deciding
-       what they said. Linked to the page it was read from, because a price
-       whose source cannot be opened is a price this site is asking to be taken
-       on trust. */
-    var name = el("td", "d-offer");
-    if (offer.url) {
-      var a = document.createElement("a");
-      a.href = offer.url;
-      a.rel = "noopener";
-      a.target = "_blank";
-      a.textContent = offer.title || "offer";
-      a.title = "The PADI Travel page this offer was read from";
-      name.appendChild(a);
-    } else {
-      name.textContent = offer.title || "—";
-    }
-    tr.appendChild(name);
+    });
+    (deals.offers || []).forEach(function (o) {
+      rows.push({
+        boat: o.boat_name, from: o.start, to: o.end,
+        /* The rate where PADI states one, the money where it does not. A "Free
+           night(s)" offer takes nothing off a nightly rate, and dividing one
+           of its prices by the other would print a discount PADI never
+           claimed. */
+        off: o.kind === "Discount %" && o.value ? o.value + "% off" : offerSaving(o),
+        title: o.title || null, url: o.url || null,
+        sellers: [1], read: [deals.read], of: null,
+        /* One sailing, and it must not read as a window. PADI publishes no
+           validity dates with an offer -- only the sailing it advertises it
+           against -- so the cell says which it is. */
+        exemplar: true
+      });
+    });
+    return rows.sort(function (a, b) {
+      var x = (a.boat || "").toLowerCase(), y = (b.boat || "").toLowerCase();
+      if (x !== y) return x < y ? -1 : 1;
+      return (a.sellers[0] || 0) - (b.sellers[0] || 0);
+    });
   }
 
   /* Who marked it down and when they were read, one seller per line.
 
      The date is per seller and not per panel. These two books are read by two
-     jobs two days apart, and stamping the cabin crawl's day across the whole
-     table dated ten of these twenty-two rows wrong — the same rule the berth
-     counts have followed since they were published. */
+     jobs days apart, and stamping the cabin crawl's day across the whole table
+     dated ten of these rows wrong — the same rule the berth counts have
+     followed since they were published. */
   function markedDownBy(row) {
     var td = el("td", "d-native");
+    /* `read` is parallel to `sellers` and is not indexed by seller id: promote
+       emits the day of each seller *in the order it names them*. Reading it by
+       id drops the date off every row a single seller marked down. */
     (row.sellers || []).forEach(function (seller, n) {
       var day = (row.read || [])[n];
       td.appendChild(el("span", "reading",
         (SELLER_NAMES[seller] || "?") + (day ? " · " + shortDate(day) : "")));
     });
     return td;
+  }
+
+  function salesTable(rows) {
+    var table = el("table", "deals-table");
+    var head = document.createElement("thead");
+    var hr = el("tr", null);
+    ["Boat", "From", "To", "Off", "Offer", "Seller"].forEach(function (h) {
+      hr.appendChild(el("th", null, h));
+    });
+    head.appendChild(hr);
+    table.appendChild(head);
+
+    var body = document.createElement("tbody");
+    rows.forEach(function (r) {
+      var tr = el("tr", null);
+      tr.appendChild(el("td", "d-boat", "")).appendChild(boatLink(r.boat));
+      var from = el("td", "d-when", r.from ? shortDate(r.from) : "—");
+      var to = el("td", "d-when", r.to ? shortDate(r.to) : "—");
+      if (r.exemplar) {
+        from.title = to.title = "The sailing PADI advertises this offer " +
+          "against. It publishes no dates for the offer itself, so this is one " +
+          "sailing rather than the window the discount covers.";
+      } else if (r.of) {
+        from.title = to.title = r.of + " of this boat’s sailings are " +
+          "discounted, and these are the first and last of them.";
+      }
+      tr.appendChild(from);
+      tr.appendChild(to);
+      tr.appendChild(r.off
+        ? el("td", "d-off", r.off)
+        : el("td", "d-none", "rate not stated"));
+
+      var offer = el("td", r.title ? "d-offer" : "d-none", "");
+      if (r.title && r.url) {
+        var a = document.createElement("a");
+        a.href = r.url;
+        a.rel = "noopener";
+        a.target = "_blank";
+        a.textContent = r.title;
+        a.title = "The PADI Travel page this offer was read from";
+        offer.appendChild(a);
+      } else if (r.title) {
+        offer.textContent = r.title;
+      } else {
+        /* Verbatim where there is one, and nothing invented where there is
+           not: naming this "sale" would be the page writing the seller's copy
+           for it. */
+        offer.textContent = "—";
+        offer.title = "liveaboard.com publishes no name for it. The discount " +
+          "is a list price struck through beside the one it charges, read off " +
+          "the booking page.";
+      }
+      tr.appendChild(offer);
+      tr.appendChild(markedDownBy(r));
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    return table;
+  }
+
+  /* Every discounted sailing, deepest first.
+   *
+     Reachable before only by switching the On sale chip on over the trips
+     table, which is a filter and not this view's answer (#145): "which
+     departures are cut" is a table question and "what are the sales" is a
+     page, and the page was missing the half a reader came for.
+
+     Deepest first, because that is the order somebody shopping a sale reads
+     in, and the trips table is already sorted every other way. A sailing whose
+     seller stated no percentage sorts last and says so: it is on sale, and it
+     is not 0% off. */
+  function tripsOnSale() {
+    var rows = [];
+    D.departures.forEach(function (dep) {
+      if (!dep.sale) return;
+      var itin = D.itineraries[dep.itinerary_id];
+      rows.push({ d: dep, itin: itin, pct: dep.sale.pct || 0 });
+    });
+    return rows.sort(function (a, b) {
+      if (a.pct !== b.pct) return b.pct - a.pct;
+      return a.d.start < b.d.start ? -1 : a.d.start > b.d.start ? 1 : 0;
+    });
+  }
+
+  function tripsOnSaleTable(rows) {
+    var table = el("table", "deals-table");
+    var head = document.createElement("thead");
+    var hr = el("tr", null);
+    ["Boat", "Trip", "Sails", "Now", "Was", "Off"].forEach(function (h) {
+      hr.appendChild(el("th", null, h));
+    });
+    head.appendChild(hr);
+    table.appendChild(head);
+
+    var body = document.createElement("tbody");
+    rows.forEach(function (r) {
+      var tr = el("tr", null);
+      tr.appendChild(el("td", "d-boat", "")).appendChild(boatLink(r.itin.boat));
+      tr.appendChild(el("td", "d-offer", r.itin.title));
+      tr.appendChild(el("td", "d-when", shortDate(r.d.start)));
+      /* The converted figure on both sides. `sale.was` is already in the
+         display currency and the payload's own price is the sailing's, so the
+         two may only ever be read beside `base`. */
+      tr.appendChild(el("td", "d-now", eur(r.d.base)));
+      tr.appendChild(el("td", r.d.sale.was ? "d-was" : "d-none",
+        r.d.sale.was ? eur(r.d.sale.was) : "not stated"));
+      tr.appendChild(r.pct
+        ? el("td", "d-off", "−" + r.pct + "%")
+        : el("td", "d-none", "rate not stated"));
+      body.appendChild(tr);
+    });
+    table.appendChild(body);
+    return table;
   }
 
   /* ---------- the history view ---------- */
@@ -2331,120 +2417,78 @@
     return Object.keys(seen).map(Number).sort(function (a, b) { return b - a; });
   }
 
-  function offersTable(rows) {
-    var table = el("table", "deals-table");
-    var head = document.createElement("thead");
-
-    /* Two header rows, because the columns come from two sellers and a reader
-       who cannot see the join will read the money as belonging to the window
-       beside it. The left group is unlabelled: it is the table's subject, and
-       naming it would put a heading over the boat's own name. */
-    var group = el("tr", "d-group");
-    var pad = el("th", null, "");
-    pad.colSpan = 6;
-    group.appendChild(pad);
-    var padi = el("th", "g-first", "Advertised on padi.com");
-    padi.colSpan = OFFER_GROUP.length;
-    group.appendChild(padi);
-    head.appendChild(group);
-
-    var hr = el("tr", null);
-    ["Boat", "On sale", "Off", "From", "To", "Marked down by"].forEach(function (h) {
-      hr.appendChild(el("th", null, h));
-    });
-    OFFER_GROUP.forEach(function (h, n) {
-      hr.appendChild(el("th", n === 0 ? "g-first" : null, h));
-    });
-    head.appendChild(hr);
-    table.appendChild(head);
-
-    var body = document.createElement("tbody");
-    rows.forEach(function (r) {
-      var tr = el("tr", null);
-      tr.appendChild(el("td", "d-boat", r.boat_name));
-      /* "of" as well as the count, because 18 of 18 and 3 of 16 are different
-         situations and the bare number cannot tell them apart. A boat here on
-         PADI's listing alone has no such count and says so with a dash rather
-         than a nought. */
-      tr.appendChild(el("td", "d-when", r.sailings
-        ? r.sailings + " of " + r.of : "—"));
-      tr.appendChild(el("td", "d-off", r.pct
-        ? (r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off")
-        : "—"));
-      tr.appendChild(el("td", "d-when", r.first ? shortDate(r.first) : "—"));
-      tr.appendChild(el("td", "d-when", r.last ? shortDate(r.last) : "—"));
-      tr.appendChild(markedDownBy(r));
-      offerCells(tr, r.offer);
-      body.appendChild(tr);
-    });
-    table.appendChild(body);
-    return table;
-  }
-
-  /* The fleet rows and PADI's offers, joined on the boat they are both about.
-     Sorted once, by the name printed in the first column, so the whole table
-     has one order instead of one per half. */
-  function offerRows(fleet, offers) {
-    var byBoat = {};
-    var order = [];
-    fleet.forEach(function (r) {
-      byBoat[r.boat] = { boat: r.boat, boat_name: r.boat_name, sailings: r.sailings,
-        of: r.of, pct: r.pct, pct_max: r.pct_max, first: r.first, last: r.last,
-        sellers: r.sellers, read: r.read, offer: null };
-      order.push(r.boat);
-    });
-    offers.forEach(function (o) {
-      if (!byBoat[o.boat]) {
-        /* PADI advertises this boat and no ladder caught it. Kept, with an
-           empty left half, rather than dropped out of the panel. */
-        byBoat[o.boat] = { boat: o.boat, boat_name: o.boat_name, sellers: [], read: [] };
-        order.push(o.boat);
-      }
-      byBoat[o.boat].offer = o;
-    });
-    return order.map(function (id) { return byBoat[id]; }).sort(function (a, b) {
-      var x = (a.boat_name || "").toLowerCase(), y = (b.boat_name || "").toLowerCase();
-      return x < y ? -1 : x > y ? 1 : a.boat < b.boat ? -1 : 1;
-    });
-  }
-
   /* How far this panel's answer reaches, which is the half of it a count of
-     discounts cannot state. Every sentence here is about an absence, and on the
-     page all three are indistinguishable from "not on sale" unless it says so
-     — the same rule as the change log's `not_compared` note, applied to the
-     summary above it.
+     discounts cannot state. Three absences print identically to "not on sale"
+     unless it says so -- a ladder thrown away as stale, a sailing neither
+     seller published a list price for, and a trip-name banner the seller read
+     for it contradicts.
+
+     A muted line of counts now rather than three paragraphs of reasoning
+     (#145). The counts are the load-bearing part and they stay on the page:
+     the invariant is that the panel states what it could not read, not that it
+     explains it in body copy above a table. The reasoning is one hover away
+     per count, and unabridged in `CLAUDE.md`.
 
      Drawn only from what promote counted. Nothing here is re-derived from the
      rows, because the rows are precisely where these facts have gone missing. */
   function coverageNote(coverage) {
+    var line = el("p", "deals-coverage");
     var said = [];
+    function part(text, title) {
+      var span = el("span", "cov", text);
+      span.title = title;
+      said.push(span);
+    }
     var dropped = coverage.dropped;
     if (dropped) {
-      said.push(dropped.sailings + (dropped.sailings === 1 ? " sailing" : " sailings") +
-        " on " + dropped.boats.join(", ") + " had a booking page whose cheapest " +
-        "cabin sat too far from the price beside it to still be that sailing’s " +
-        "— last week’s prices on this week’s shelf. Those readings were thrown " +
-        "away, so " + (dropped.sailings === 1 ? "it is" : "they are") +
-        " absent here rather than reported as full price: a ladder that " +
-        "contradicts its own row has not said no, it has gone stale.");
+      part(dropped.sailings + " reading" + (dropped.sailings === 1 ? "" : "s") +
+        " dropped as stale",
+        "On " + dropped.boats.join(", ") + ", the booking page’s cheapest " +
+        "cabin sat too far from the price beside it to still be that " +
+        "sailing’s — last week’s prices on this week’s shelf. Those readings " +
+        "were thrown away, so those sailings are absent here rather than " +
+        "reported as full price.");
     }
     if (coverage.unread) {
-      said.push("A further " + coverage.unread +
-        (coverage.unread === 1 ? " sailing has" : " sailings have") +
-        " no list price read from either seller, so whether " +
+      part(coverage.unread + " sailing" + (coverage.unread === 1 ? "" : "s") +
+        " with no list price",
+        "Neither seller published a list price for " +
+        (coverage.unread === 1 ? "it" : "them") + ", so whether " +
         (coverage.unread === 1 ? "it is" : "they are") +
         " discounted is unknown rather than no.");
     }
     if (coverage.banner_unsupported) {
-      said.push(coverage.banner_unsupported +
-        (coverage.banner_unsupported === 1
-          ? " sailing carries a discount in its own trip name that the seller "
-          : " sailings carry a discount in their own trip names that the seller ") +
-        "read for " + (coverage.banner_unsupported === 1 ? "it" : "them") +
-        " does not support. The banner is a claim about a number; the struck-" +
-        "through list price is the number, and it wins.");
+      part(coverage.banner_unsupported + " trip-name banner" +
+        (coverage.banner_unsupported === 1 ? "" : "s") + " unsupported",
+        "The trip name claims a discount the seller read for it does not " +
+        "support. A banner is a claim about a number; the struck-through list " +
+        "price is the number, and it wins.");
     }
-    return said.length ? el("p", "deals-note", said.join(" ")) : null;
+    if (!said.length) return null;
+    said.forEach(function (span, n) {
+      if (n) line.appendChild(el("span", "cov-sep", " · "));
+      line.appendChild(span);
+    });
+    return line;
+  }
+
+  /* The vessels PADI advertises that no boat here joins to, named.
+   *
+     A line of names and not a paragraph (#145) -- but named on the page, which
+     is the invariant and not a preference: the query asks PADI for the USA as
+     well as Egypt because three Egyptian boats are filed there, and the same
+     breadth returns Caribbean ones. So an unmatched vessel is usually a boat
+     from another sea and occasionally an Egyptian one nothing here has paired
+     yet, and only a name somebody reads tells those apart. A count would not,
+     and a hover is not read. The *why* is the hover. */
+  function unmatchedLine(strangers) {
+    var line = el("p", "deals-coverage",
+      "Not carried here: " + strangers.map(function (v) { return v.name; }).join(", "));
+    line.title = "PADI advertises deals on these and no boat on this page " +
+      "joins to them. The query asks PADI for the USA as well as Egypt — which " +
+      "is how the three Red Sea Aggressors, filed under the USA, reach us at " +
+      "all — so the same breadth returns vessels from other oceans.";
+    return line;
   }
 
   function dealsChanges(deals) {
@@ -2585,50 +2629,29 @@
 
     /* The figures, skimmable. This was a run-on sentence, which is the shape a
        collapsed `<summary>` needs and the wrong one for the top of a page. */
-    var rates = discountRates();
     var line = document.getElementById("dealsLine");
     line.textContent = "";
-    line.appendChild(saleStrip(deals, rates));
+    line.appendChild(saleStrip(deals, discountRates()));
 
-    /* The discounts by boat: its "n of m" and its week window are what tell a
-       reader which sailing to book. */
-    var rows = offerRows(fleet, offers);
-    if (rows.length) {
-      body.appendChild(el("h4", null, "Which boats, and which weeks"));
-      /* One paragraph for one table, and it has to name both sources without
-         claiming either says the other's half. Where the markdown is read
-         from is stated once, above, by the band this table is the detail of;
-         what is left to say here is how to read the two halves. */
-      body.appendChild(el("p", "deals-note",
-        "The left of each row is every discounted sailing that boat sells and " +
-        "the weeks they fall in; the right is the single sailing PADI " +
-        "advertises for it, which is a berth price and not a total — the fees " +
-        "on the trips table still land on the bill."));
+    /* Two sections, and the order is the two questions in the order they are
+       asked (#145): what the sales are, then which trips carry them. Three
+       paragraphs of reasoning used to sit between the reader and both, and the
+       data was arranged by boat rather than by either question. */
+    var sales = salesRows();
+    if (sales.length) {
+      body.appendChild(el("h4", null, "The sales"));
       var note = deals.coverage ? coverageNote(deals.coverage) : null;
       if (note) body.appendChild(note);
-      body.appendChild(offersTable(rows));
+      body.appendChild(salesTable(sales));
+      var strangers = deals.unmatched || [];
+      if (strangers.length) body.appendChild(unmatchedLine(strangers));
     }
 
-    var strangers = deals.unmatched || [];
-    if (strangers.length) {
-      /* Its own heading. Appended last, it used to read as the tail of
-         whichever section happened to precede it -- "What moved on padi.com",
-         which these vessels have nothing to do with. Folded away in a panel
-         that was one sentence tall, nobody noticed. */
-      body.appendChild(el("h4", null, "Deals on vessels this site does not carry"));
-      /* Named rather than counted, and on the page rather than only in a build
-         log. The query asks PADI for the USA as well as Egypt because three
-         Egyptian boats are filed there; the same breadth returns Caribbean
-         ones. So an unmatched vessel is usually a boat from another sea and
-         occasionally an Egyptian one nothing here has paired yet — and only a
-         name somebody reads tells those apart. */
-      body.appendChild(el("p", "deals-note",
-        "PADI advertises deals on " + strangers.length + " vessel" +
-        (strangers.length === 1 ? "" : "s") + " with no boat here to join: " +
-        strangers.map(function (v) { return v.name; }).join(", ") +
-        ". They are here because the query asks PADI for the USA as well as " +
-        "Egypt — which is how the three Red Sea Aggressors, filed under the " +
-        "USA, reach us at all."));
+    var trips = tripsOnSale();
+    if (trips.length) {
+      body.appendChild(el("h4", null, trips.length === 1
+        ? "The trip on sale" : "The " + trips.length + " trips on sale"));
+      body.appendChild(tripsOnSaleTable(trips));
     }
 
     return true;

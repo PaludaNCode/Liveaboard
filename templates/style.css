@@ -723,18 +723,23 @@ tr.detail td { background:var(--ground); padding:12px 18px; white-space:normal; 
 /* One seller per line, each with the day it was read. Two lines at most, and
    on twelve of the twenty-two rows one. */
 .deals-table .d-native .reading { display:block; }
-/* The second seller's columns, set off by a rule rather than by a colour: the
-   header above them names the seller, and the group only has to be visibly a
-   group. `border-left` on the first cell of the run does it in one declaration
-   and keeps working when the row is a boat PADI advertises and no ladder
-   caught, whose left half is dashes. */
-.deals-table .g-first { border-left:1px solid var(--rule); padding-left:12px; }
-.deals-table .d-group th {
-  border-bottom:none; padding-bottom:0; color:var(--ink-dim);
-}
-/* A boat PADI publishes no offer for. Quieter than a dash in a money column,
-   because it is not a missing number -- there is no offer to have one. */
+/* A cell whose absence is not a missing number: a seller that publishes no
+   name for its own discount, or no rate against the fare this page prints.
+   Quieter than a dash in a money column, because there is nothing to have. */
 .deals-table .d-none { color:var(--ink-faint); }
+
+/* What the panel could not read, as counts rather than as three paragraphs of
+   reasoning above a table (#145). Muted and one line: it is the boundary of
+   the answer above it and not a competing claim, and each count carries its
+   own explanation in a hover. Same treatment for the vessels PADI advertises
+   that no boat here joins to, which are named for the same reason -- a count
+   cannot tell a Caribbean boat from an unpaired Egyptian one. */
+.deals-coverage {
+  margin:0 0 10px; font-size:11.5px; color:var(--ink-faint); max-width:74ch;
+  line-height:1.6;
+}
+.deals-coverage .cov { border-bottom:1px dotted var(--rule); cursor:help; }
+.deals-coverage .cov-sep { border:0; }
 
 /* The markdown, beside the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows

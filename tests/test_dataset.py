@@ -2052,9 +2052,16 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
     dates half of them wrong**: `berths_read` and `padi_berths_read` are two
     crawls two days apart, and the sale marks stamped the first over both --
     on 124 rows resting partly on the second and 2 resting entirely on it.
-    And **the two sellers' offers belong on one row**: they were drawn as two
-    tables sharing no column, ten boats in each with no way to read across, and
-    a merge that keys on either seller's list alone drops the other's.
+    And **neither seller's sales may go missing**: they were drawn as two
+    tables sharing no column, ten boats in each with no way to read across.
+
+    That was fixed by joining them onto one boat-keyed row, and the join was
+    itself wrong (#145): what the two publish are not two halves of one record.
+    liveaboard.com strikes a list price through on a booking page, so its
+    evidence is a *run* of that boat's discounted sailings; PADI publishes a
+    named offer against one sailing. So it is one table with a row per sale,
+    sorted by boat -- both sellers in it, a boat both of them discount getting
+    two rows, and no row asserting a join nobody made.
     """
 
     APP = ROOT / "templates" / "app.js"
@@ -2073,32 +2080,66 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
 
     def test_the_page_draws_one_table_for_both_sellers(self):
         app = self.source()
-        self.assertIn("function offersTable(", app)
-        for gone in ("function fleetTable(", "function dealsTable("):
+        self.assertIn("function salesTable(", app)
+        for gone in ("function fleetTable(", "function dealsTable(",
+                     "function offersTable("):
             self.assertNotIn(
                 gone, app,
                 f"{gone} is back; the two sellers' offers are two tables again",
             )
 
-    def test_the_merge_keeps_a_boat_only_one_seller_names(self):
+    def test_neither_seller_s_sales_can_go_missing(self):
         """The union, not the intersection.
 
-        Ten boats fill both halves today, so keying on the fleet rows alone
-        passes every test and silently drops a PADI offer for a boat no ladder
-        has caught -- out of the panel headed "what is discounted", which is
-        this site's own reported failure in somebody else.
+        Ten boats appear in both books today, so a table keyed on either
+        seller's list passes every test and silently drops the other's -- a
+        PADI offer for a boat no ladder caught, out of the panel headed "what
+        is on sale", which is this site's own reported failure in somebody
+        else.
+
+        Structural now rather than a branch that has to remember: the rows are
+        appended from each book in turn and neither pass can skip an entry.
         """
         app = self.source()
-        block = re.search(r"function offerRows\((.*?)\n  \}", app, re.S)
-        assert block, "offerRows() not found in app.js"
-        self.assertIn("if (!byBoat[o.boat])", block.group(1))
+        block = re.search(r"function salesRows\((.*?)\n  \}", app, re.S)
+        assert block, "salesRows() not found in app.js"
+        body = block.group(1)
+        self.assertIn("(deals.on_sale || {}).boats || []", body)
+        self.assertIn("(deals.offers || []).forEach", body)
+
+    def test_a_padi_offer_states_the_sailing_and_not_a_window(self):
+        """PADI publishes no validity dates with an offer -- only the sailing it
+        advertises it against -- so From and To on such a row are one sailing.
+        Printed under the same headings as a real discount run, that has to say
+        which it is or the row claims a window the source never stated."""
+        app = self.source()
+        table = app.split("function salesTable(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("if (r.exemplar)", table)
+        self.assertIn("It publishes no dates for the offer itself", table)
 
     def test_the_panel_states_what_it_could_not_read(self):
+        """The counts stay on the page; the three paragraphs explaining them do
+        not (#145). The invariant is that the panel states what it could not
+        read -- a ladder dropped as stale, a sailing with no list price, a
+        banner the seller contradicts -- and a muted line of counts states it.
+        The reasoning is a hover per count."""
         app = self.source()
         self.assertIn("function coverageNote(", app)
         for field in ("dropped", "unread", "banner_unsupported"):
             with self.subTest(field=field):
                 self.assertIn("coverage." + field, app)
+
+    def test_an_unmatched_vessel_is_named_on_the_page(self):
+        """Named, not counted, and not only in a build log. The query asks PADI
+        for the USA as well as Egypt because three Egyptian boats are filed
+        there, and the same breadth returns Caribbean ones -- so an unmatched
+        vessel is usually a boat from another sea and occasionally an Egyptian
+        one nothing here has paired yet. Only a name tells those apart."""
+        app = self.source()
+        self.assertIn("function unmatchedLine(", app)
+        block = app.split("function unmatchedLine(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("return v.name;", block)
+        self.assertIn("unmatchedLine(strangers)", app)
 
     def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
         """One figure in that column means three different things -- both
