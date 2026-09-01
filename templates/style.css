@@ -118,8 +118,24 @@
 
 /* An app shell, not a document: the window never scrolls, the table scrolls
    inside it, and the footer sits on the bottom edge where it can always be
-   reached without hunting for it. */
-html, body { height:100%; }
+   reached without hunting for it.
+ *
+   `dvh` is what makes that true on a phone. `height:100%` resolves against the
+   initial containing block, and on iOS that block is the viewport with the
+   URL bar *hidden* -- so with the bar showing, the shell is about 120px taller
+   than the area it is being looked at through, and those 120px are slack the
+   page can be panned through. Panned, it took the masthead and the rail off
+   the top and left the footer floating over bare canvas at the bottom: the
+   two things this shell exists to keep pinned, both unpinned, on the one
+   device where the window is the whole screen. `100dvh` is the *visible*
+   viewport and follows the bar as it comes and goes, so there is no slack to
+   pan; `100%` stays underneath it for anything that does not know the unit.
+
+   `overscroll-behavior` is the other half. Without it a flick that reaches the
+   end of `.shell` chains into the document and pans it anyway -- the inner
+   scroller handing the gesture to a page that should not have one. */
+html, body { height:100%; overscroll-behavior:none; }
+body { height:100dvh; }
 
 body {
   margin:0; background:var(--ground); color:var(--ink);
@@ -475,6 +491,7 @@ h1 {
   display:flex; flex:none; min-width:0;
   background:var(--panel); border-bottom:1px solid var(--rule-strong);
   max-height:min(340px, 42vh);
+  max-height:min(340px, 42dvh);
 }
 .bankpick {
   flex:none; width:150px; padding:7px 0; background:var(--ground);
@@ -574,7 +591,12 @@ input[type="number"] {
    what the page gives up first when there is not enough height to go round --
    see `.deals` for the one thing that had to be bounded so that it rarely
    comes to that. */
-.shell { flex:1 1 auto; min-height:0; overflow:auto; background:var(--panel); }
+.shell {
+  flex:1 1 auto; min-height:0; overflow:auto; background:var(--panel);
+  /* The scroll stops here. Chained to the document it panned the whole shell,
+     which is the bug the `dvh` note above describes from the other end. */
+  overscroll-behavior:contain;
+}
 
 
 table { border-collapse:separate; border-spacing:0; width:max-content; min-width:100%; }
@@ -941,7 +963,7 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .panel-pop.bill-pop {
   min-width:min(30em, calc(100vw - 16px));
   max-width:min(46em, calc(100vw - 16px));
-  max-height:70vh; overflow:auto; overscroll-behavior:contain;
+  max-height:70vh; max-height:70dvh; overflow:auto; overscroll-behavior:contain;
   padding:0 .7em .6em;
 }
 .bill-pop .pwho { margin:0 -.7em .5em; }
@@ -1134,7 +1156,7 @@ td.money .marks .varies { margin-left:0; vertical-align:baseline; }
    of the table's room as it needs, and gives it straight back. */
 .site-footer {
   border-top:1px solid var(--rule); background:var(--panel); color:var(--ink-dim);
-  max-height:52vh; overflow:auto;
+  max-height:52vh; max-height:52dvh; overflow:auto;
 }
 /* Pinned to the top of the panel's own scroll box, which is what the box
    already is: 52vh with overflow:auto. Without this the only control that
@@ -1344,10 +1366,10 @@ a { color:var(--accent); }
   .chip .tog-long { display:none; }
   .chip .tog-short { display:inline; }
   .activebar { padding:5px 10px; }
-  .filterpanel { max-height:52vh; }
+  .filterpanel { max-height:52vh; max-height:52dvh; }
   .bankpick { width:120px; }
   .bankbody { padding:9px 10px 12px; }
-  .site-footer { max-height:60vh; }
+  .site-footer { max-height:60vh; max-height:60dvh; }
 }
 
 /* The rail lies down before the cards arrive.

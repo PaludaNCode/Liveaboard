@@ -886,6 +886,68 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             r"\u20ac|stated",
             "the table lost the Per dive column the card no longer duplicates")
 
+    def test_the_shell_is_the_window_and_nothing_pans_it(self) -> None:
+        """The masthead, the rail and the footer stay where they are put.
+
+        On iOS they did not. `html, body { height:100% }` resolves against the
+        initial containing block, which there is the viewport with the URL bar
+        *hidden* -- so with the bar showing, the shell was about 120px taller
+        than the area it was being looked at through, and those 120px were
+        slack the page could be panned through. Panned, the masthead and the
+        rail went off the top and the footer floated over bare canvas at the
+        bottom: the two things an app shell exists to pin, both unpinned.
+
+        Headless Chromium has no collapsing browser chrome, so it cannot
+        reproduce the pan. What it can hold is the invariant underneath it --
+        the shell is exactly the window, the document has no scroll of its own,
+        and the footer's bottom edge is the window's -- plus the two
+        `overscroll-behavior` declarations that stop `.shell` handing a flick
+        to a document that should not have one. Asserted as used values off the
+        live layout, not as source text.
+        """
+        page = self.open(PHONE_WIDTHS[0], 720)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS + [1440]:
+            page.set_viewport_size({"width": width, "height": 760})
+            page.wait_for_timeout(140)
+            seen = page.evaluate("""() => {
+              const root = document.documentElement;
+              const shell = document.querySelector('.shell');
+              const box = s => Math.round(
+                document.querySelector(s).getBoundingClientRect().height);
+              return {
+                innerH: window.innerHeight,
+                bodyH: Math.round(document.body.getBoundingClientRect().height),
+                slack: root.scrollHeight - root.clientHeight,
+                footerBottom: Math.round(
+                  document.querySelector('.site-footer').getBoundingClientRect().bottom),
+                masthead: box('.masthead'),
+                rail: box('.rail'),
+                bodyChain: getComputedStyle(document.body).overscrollBehaviorY,
+                shellChain: getComputedStyle(shell).overscrollBehaviorY,
+              };
+            }""")
+            where = "at %dpx" % width
+            self.assertEqual(seen["bodyH"], seen["innerH"],
+                             "the shell is not the window " + where)
+            self.assertEqual(seen["slack"], 0,
+                             "the document has room to be panned " + where)
+            self.assertEqual(seen["footerBottom"], seen["innerH"],
+                             "the footer is not on the bottom edge " + where)
+            self.assertGreater(seen["masthead"], 0, "no masthead " + where)
+            self.assertGreater(seen["rail"], 0, "no rail " + where)
+            self.assertEqual(seen["bodyChain"], "none",
+                             "the document accepts a chained scroll " + where)
+            self.assertEqual(seen["shellChain"], "contain",
+                             "the table's scroll chains out of it " + where)
+
+        # And the shell asks for the visible viewport, not the tallest one it
+        # could ever be. Chromium reports the two as equal, so the declaration
+        # is what says a phone was thought about -- with `100%` kept under it.
+        css = SITE.read_text(encoding="utf-8")
+        self.assertIn("height:100dvh", css,
+                      "the shell no longer sizes to the visible viewport")
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))

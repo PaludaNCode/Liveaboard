@@ -2889,7 +2889,11 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
         sideways with it."""
         self.assertIn('class="fee-scroll"', self.app)
         self.assertIn(".fee-scroll { overflow-x:auto", self.css)
-        self.assertIn("max-height:70vh; overflow:auto", self.css)
+        # Capped and scrolling. The cap is written twice -- `vh` then `dvh` --
+        # because on a phone `vh` is a height the reader cannot see all of, so
+        # the assertion is that the panel is bounded at all rather than that it
+        # is bounded in one unit.
+        self.assertRegex(self.css, r"max-height:70(?:vh|dvh);.*?overflow:auto")
 
 
 class TestTheTotalStatesWhatItIsTheSumOf(unittest.TestCase):

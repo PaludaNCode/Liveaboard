@@ -622,6 +622,24 @@ Break these and the site starts lying quietly rather than failing loudly.
   container breaks the line *before* it shrinks anything, so one item 7px too
   wide put the whole toolbar on two rows and cost the rows 25px on every
   screen.
+- **The shell is the *visible* viewport, not the tallest one.** `html, body
+  { height:100% }` resolves against the initial containing block, and on iOS
+  that block is the viewport with the URL bar **hidden** — so with the bar
+  showing, the shell stood about 120px taller than the area it was being
+  looked at through, and those 120px were slack the page could be panned
+  through. Panned, the masthead and the rail went off the top and the footer
+  floated over bare canvas at the bottom: the two things an app shell exists
+  to pin, both unpinned, on the one device where the window is the whole
+  screen. `100dvh` follows the bar as it comes and goes and leaves nothing to
+  pan; `100%` stays under it for anything that does not know the unit, and
+  every `vh` cap on a panel is doubled the same way for the same reason.
+  `overscroll-behavior` is the other half — `none` on the document and
+  `contain` on `.shell`, or a flick that reaches the end of the table hands
+  itself to a page that should not have a scroll. It went unnoticed until
+  `color-scheme` landed: before that the panned-into strip was the UA's white,
+  and after it is black, which is what made a long-standing gap look like a
+  new one.
+
 - **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
   Chromium over the three views at six windows, and over eleven phone widths; everything else about the split
   is asserted as template text, which is right for wiring and worthless for
