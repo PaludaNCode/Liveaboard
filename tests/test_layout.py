@@ -952,6 +952,38 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertIn('history.scrollRestoration = "manual"', css,
                       "the browser may restore a scroll into a shell that has none")
 
+    def test_the_shell_re_measures_when_the_window_changes(self) -> None:
+        """A stale shell is the bug; a reflow is the fix, so reflow on cue.
+
+        Backgrounding the app and returning fixed it, which says the layout was
+        not wrong but *stale* -- one forced reflow and it snapped right. So the
+        height is measured off `window.innerHeight` and re-measured on resize,
+        rotation and `pageshow`, rather than declared once and trusted. `dvh`
+        does this in CSS from Safari 15.4; this is what covers everything
+        older, where the fallback is `100%` and `100%` is the wrong viewport.
+
+        Resizing here drives the same path a rotating phone does.
+        """
+        page = self.open(390, 800)
+        self.addCleanup(page.close)
+        for w, h in ((390, 800), (390, 640), (844, 390), (390, 844), (1440, 900)):
+            page.set_viewport_size({"width": w, "height": h})
+            page.wait_for_timeout(420)  # past the second, settled measurement
+            seen = page.evaluate("""() => ({
+              innerH: window.innerHeight,
+              bodyH: Math.round(document.body.getBoundingClientRect().height),
+              footer: Math.round(
+                document.querySelector('.site-footer').getBoundingClientRect().bottom),
+              masthead: Math.round(
+                document.querySelector('.masthead').getBoundingClientRect().top),
+            })""")
+            where = "at %dx%d" % (w, h)
+            self.assertEqual(seen["bodyH"], seen["innerH"],
+                             "the shell did not re-measure " + where)
+            self.assertEqual(seen["footer"], seen["innerH"],
+                             "the footer is off the bottom edge " + where)
+            self.assertEqual(seen["masthead"], 0, "the masthead moved " + where)
+
     def test_opening_a_view_by_its_address_keeps_the_masthead(self) -> None:
         """Every entry point lands on the same page, chrome included.
 

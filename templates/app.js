@@ -42,6 +42,45 @@
      nothing for it to hide. */
   var soldOutCount = D.departures.filter(function (d) { return !d.bookable; }).length;
 
+  /* THE SHELL IS WHAT THE WINDOW MEASURES, AND IT IS MEASURED RATHER THAN
+     DECLARED.
+   *
+     `height:100dvh` in the stylesheet is the right rule and it is not enough
+     on its own. `dvh` landed in Safari 15.4, and where it is missing the
+     fallback is `height:100%` -- which resolves against the initial containing
+     block, the viewport with the URL bar *hidden*, so the shell stands about
+     120px taller than the area being looked through and those 120px are slack
+     the whole page can be panned into: masthead and rail off the top, footer
+     over bare canvas at the bottom.
+
+     What gave it away is that backgrounding the app and coming back fixed it.
+     That is not a layout being wrong, it is a layout being *stale* -- one
+     forced reflow and it snapped right -- so the answer is to reflow it on
+     every event that can change the visible height, off a number the browser
+     has actually measured.
+
+     `window.innerHeight` rather than `visualViewport.height`, deliberately:
+     on iOS the two agree about the URL bar and disagree about the keyboard,
+     and a shell that resized itself every time somebody tapped the nights
+     field would be a worse bug than this one. `pageshow` is the case that
+     found it, since coming back from the background restores from bfcache
+     without a `resize`. And each event measures twice, because iOS reports
+     the *old* height during `orientationchange` and animates the bar away for
+     a moment after a `resize`. */
+  var refitAgain = null;
+  function fitShell() {
+    document.body.style.height = window.innerHeight + "px";
+  }
+  function refitShell() {
+    fitShell();
+    if (refitAgain) clearTimeout(refitAgain);
+    refitAgain = setTimeout(fitShell, 260);
+  }
+  fitShell();
+  ["resize", "orientationchange", "pageshow"].forEach(function (name) {
+    window.addEventListener(name, refitShell);
+  });
+
   /* Written on every draw by countRail(), which runs from afterDraw -- so they
      are looked up here rather than beside the rest of the view wiring, which
      is declared after the first draw has already happened. */
