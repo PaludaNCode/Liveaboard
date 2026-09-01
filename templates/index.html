@@ -114,7 +114,10 @@
 <section class="pane sale-pane" id="salePane" tabindex="-1" hidden>
   <div class="sale-body">
     <h2>What is on sale</h2>
-    <p class="sale-lead" id="dealsLine"></p>
+    <!-- A div and not a `p`: the strip drawn into it is a flex row of figures,
+         and a div inside a paragraph is markup the parser would have closed
+         early if this were not built by script. -->
+    <div class="sale-lead" id="dealsLine"></div>
     <div class="deals-body" id="dealsBody"></div>
   </div>
 </section>

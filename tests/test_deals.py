@@ -589,6 +589,19 @@ class TestTheOnSaleSummary(unittest.TestCase):
         row = next(b for b in summary["boats"] if b["boat"] == "alia-soul")
         self.assertEqual(row["read"], ["2026-08-28"])
 
+    def test_the_dates_stay_in_lockstep_with_the_sellers(self):
+        """One entry per seller, `None` included.
+
+        The page reads the two lists in parallel, so a seller with no reading
+        date must leave a hole rather than shorten the list: dropping it shifts
+        every date after it onto the wrong seller's name, which is the one
+        thing this pair exists to prevent.
+        """
+        summary, _ = self._summary()
+        for row in summary["boats"]:
+            with self.subTest(boat=row["boat"]):
+                self.assertEqual(len(row["read"]), len(row["sellers"]))
+
     def test_a_fleet_with_nothing_discounted_produces_no_summary(self):
         payload = promote(fleet(alia=1000.0), season=SEASON, padi=PADI,
                           cabins=cabin_book(ladder(("Twin", 1000.0, 1000.0))))

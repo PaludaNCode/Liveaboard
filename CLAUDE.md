@@ -425,11 +425,32 @@ Break these and the site starts lying quietly rather than failing loudly.
   megabytes again. **A filter is not a view.** The sale view was built as the
   trips table with the markdown filter held down, and that was wrong twice
   over: it made the rail's middle entry a second way to press the On sale
-  chip, and it left what the view is actually for — the discount overview, by
-  boat, with what moved since yesterday — folded into a `details` above the
-  table, which is exactly where nobody looking for it would go. `saleOnly()`
+  chip, and it left what the view is actually for — the discount overview —
+  folded into a `details` above the table, which is exactly where nobody
+  looking for it would go. `saleOnly()`
   reads the chip and nothing else. Which departures are discounted is a table
-  question; which boats are marked down and by how much is a page. A new
+  question; what the sales *are* is a page.
+  **And that page is two sections: the sales, then the trips on sale (#145).**
+  It was one boat-keyed table joining the two sellers side by side, and the
+  join was the mistake — what they publish are not two halves of one record.
+  liveaboard.com strikes a list price through on a booking page, so its
+  evidence is a *run* of that boat's discounted sailings; PADI publishes a
+  named offer against one sailing, and states no validity window for it, so
+  that row's dates are one sailing and the cell says so. A row per sale states
+  each as what it is, sorted by boat so a boat both sellers discount shows two
+  rows rather than one asserting a join nobody made — and the union is
+  structural, because a table keyed on either book drops the other's. The
+  second section is the 229 discounted sailings themselves, deepest first,
+  which were reachable only by holding the On sale chip down over the trips
+  table. **Three paragraphs of reasoning came off the top of it**, and the
+  facts inside them did not: the coverage counts are a muted line with a hover
+  per count, and the vessels PADI advertises that no boat here joins to are
+  still *named* — a count cannot tell a Caribbean boat from an unpaired
+  Egyptian one, which is the whole reason the query asks for the USA.
+  A `read` list is **parallel to its `sellers` list and keeps its holes**:
+  `None` for a seller with no reading date rather than a shorter list, because
+  the two are read in lockstep and dropping an entry shifts every date after it
+  onto the wrong seller's name. A new
   section is a
   pane and a rail item — and `tablePane` is not the trips pane: two views draw
   there and the deals panel inside it belongs to the other one. Which pane is
