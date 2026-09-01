@@ -528,8 +528,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   hosts are always filled**, so a rotation crosses the breakpoint with no redraw
   and `Ctrl+F` finds either — and `appendPage` appends to both, or a scrolled
   table would meet a card list holding the first 120 rows. Every card cell
-  reads the same column's `show` the table cell reads, so the two cannot drift
-  and the three panel triggers come across working. This replaced a typed
+  reads the same column's renderer, so the two cannot drift and the three panel
+  triggers come across working — `cardCell` falls through to `show` unless the
+  column declares a `card`, and **exactly one does**. Price per dive was a bare
+  `€95` on the meta line, one gap from `+€400 → 500` and in the same weight:
+  two euro figures, neither named, told apart only by a column heading a phone
+  does not draw — and its `↓ 17+` carried its meaning in a `title`, on the one
+  device that cannot open one. It sits under the total now, inside the same
+  tinted box, and says *a dive* in words. The different words go on the column
+  rather than into `renderCards`, so a second reading of the data has nowhere
+  to appear; and both silences survive the move with a subject in front of
+  them, because *not stated* under a total reads as a fact about the money. This replaced a typed
   breakpoint at 385px that was wrong on most phones (#150): 385 was measured
   against a Total column 155px wide and the column was 211px, sized by its
   worst-case row. **A typed breakpoint here is a number derived from the data,

@@ -807,6 +807,59 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertFalse(bar["over"], "the toolbar overflows sideways " + where)
             self.assertGreater(bar["sort"], 0, "the sort dropdown is not drawn " + where)
 
+    def test_the_phone_says_what_the_per_dive_figure_is(self) -> None:
+        """The card's second euro figure, named by where it sits.
+
+        On the card this was a bare number on the meta line, one gap from the
+        mandatory-fee figure and in the same weight -- two euro amounts, and
+        the only thing telling them apart was a column heading a phone does
+        not draw. It sits under the total now, inside the same tinted box, and
+        says "a dive" in words.
+
+        Asserted on the card layout and on the table together: the table keeps
+        its Per dive column, so a change that moved the figure on both would
+        pass a test that only looked at one.
+        """
+        page = self.open(PHONE_WIDTHS[0], 720)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 720})
+            page.wait_for_timeout(120)
+            seen = page.evaluate("""() => {
+              const card = document.querySelector('.cards .card');
+              const money = card.querySelector('.card-money');
+              const per = money.querySelector('.perline');
+              return { cards: getComputedStyle(
+                         document.querySelector('.shell > table')).display === 'none',
+                       per: per ? per.textContent.trim() : null,
+                       perRight: per ? Math.round(per.getBoundingClientRect().right) : 0,
+                       vw: window.innerWidth,
+                       strayInMeta: !!card.querySelector('.card-meta .perdive'),
+                       metaEuros: (card.querySelector('.card-meta').textContent
+                                   .match(/\u20ac/g) || []).length };
+            }""")
+            where = "at %dpx" % width
+            self.assertTrue(seen["cards"], "not the card layout " + where)
+            self.assertIsNotNone(seen["per"], "no per-dive line in the money box " + where)
+            self.assertRegex(seen["per"], r"a dive|dives:",
+                             "the per-dive line does not say what it is " + where)
+            self.assertFalse(seen["strayInMeta"],
+                             "per dive is still on the meta line too " + where)
+            # One unnamed euro figure left on that line, and it is the fee --
+            # which is why the second one had to go somewhere it is named.
+            self.assertLessEqual(seen["metaEuros"], 1,
+                                 "the meta line carries two euro figures again " + where)
+            self.assertLessEqual(seen["perRight"], seen["vw"],
+                                 "the per-dive line runs off the edge " + where)
+
+        # The table is untouched: its own Per dive column still prints it.
+        page.set_viewport_size({"width": 1440, "height": 900})
+        page.wait_for_timeout(160)
+        self.assertRegex(
+            page.eval_on_selector("tbody tr.row td.perdive", "e => e.textContent"),
+            r"\u20ac|stated",
+            "the table lost the Per dive column the card no longer duplicates")
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
