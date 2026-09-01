@@ -388,6 +388,20 @@ tbody td {
   padding:5px 9px; border-bottom:1px solid var(--rule);
   white-space:nowrap; vertical-align:top;
 }
+/* The money block and the Seller column, tighter. A table sized to its
+   content gives every column the width its single widest row needs -- for
+   Nitrox, Mandatory fees, Total and Per dive that row is a two-seller one
+   carrying a badge or a range the rest do not, so most of the six columns
+   between Advertised and Seller sat wider than most of their own rows ever
+   use. 9px of padding either side was generous for that: these are numbers
+   and two short links, not the prose columns either side of them, and 6px
+   gives every row back what the widest row's padding was not using. */
+thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
+thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
+tbody td.perdive, tbody td.source {
+  padding-left:6px; padding-right:6px;
+}
 tbody tr.row td { transition:background-color .08s linear; }
 
 /* The number this site exists to show, and the only place the accent is spent
@@ -1187,7 +1201,7 @@ a { color:var(--accent); }
    a price, and a price the reader can act on, so it must not compete with the
    figure it annotates. */
 .varies {
-  display:inline-block; margin-left:.45em; font-size:9px; letter-spacing:.06em;
+  display:inline-block; margin-left:.32em; font-size:9px; letter-spacing:.03em;
   text-transform:uppercase; color:var(--ink-faint); vertical-align:.12em;
   border-bottom:1px dotted var(--rule); cursor:help;
 }
