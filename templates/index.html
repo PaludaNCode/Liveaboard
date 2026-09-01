@@ -142,10 +142,12 @@
      argument was never about small screens. A laptop spent the same quarter
      of its window on filters nobody had chosen yet.
 
-     What stays out is what changes the table's numbers rather than its rows
-     (the two Include switches), the season, and the two chips a reader
-     reaches for constantly. Everything else is one press away and says how
-     many of it are on. -->
+     What stays out is what changes the table's numbers rather than its rows:
+     the two Include switches, which are not filters at all -- they decide what
+     every total on the page means, and a reader comparing boats wants to see
+     that they are on. Everything that picks *rows* is in the drawer, the
+     season and the two sale chips included, and the bar below says which of
+     them are on. -->
 <div class="toolbar">
   <button type="button" class="filters-btn" id="filtersToggle"
           aria-expanded="false" aria-controls="filterPanel">
@@ -160,27 +162,6 @@
 
   <div class="tgroup">
     <span class="tlabel">Include</span><span id="toggles"></span>
-  </div>
-
-  <span class="tsep" aria-hidden="true"></span>
-
-  <div class="tgroup"><span id="months"></span></div>
-
-  <span class="tsep" aria-hidden="true"></span>
-
-  <div class="tgroup">
-    <!-- Hidden until app.js finds a stated sold-out, and carrying the count
-         of what it removes once it does -- the same rule the On sale chip
-         beside it follows, and the one this chip was the last to break. -->
-    <button type="button" class="chip" id="hideSold" aria-pressed="false" hidden>Hide sold out</button>
-    <!-- Sailings a seller has marked down, read from the list price it prints
-         beside its own — the struck-through figure on each cabin of the
-         booking page, and PADI's compareAtPrice. Its label carries the count
-         for the same reason the Sold by chips do: a filter whose result you
-         cannot size before pressing it is a filter you press twice. Hidden
-         until app.js finds at least one, because a chip reading "On sale 0" is
-         a control that does nothing dressed as one that does. -->
-    <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
 
   <div class="tgroup meta-right">
@@ -214,6 +195,35 @@
       <span class="bank-note" id="bankNote"></span>
     </p>
     <div class="bankwrap">
+      <!-- The season. It stood on the toolbar because four chips fit there,
+           which is a fact about how much room it takes rather than about what
+           it is: it picks rows, so it is a filter, so it is in here with the
+           rest of them. First in the picker because it is the one most
+           readers reach for, and the drawer opens on it. -->
+      <div class="bank" data-bank="months"><span id="months"></span></div>
+      <!-- The two chips that were beside it. Neither is a bank of its own --
+           one chip under one tab is a tab that wastes a press -- and they
+           belong together: both answer "is this sailing worth looking at",
+           one about the price and one about whether anybody can still book
+           it. -->
+      <div class="bank" data-bank="flags">
+        <span class="flag-row">
+          <!-- Hidden until app.js finds a stated sold-out, and carrying the
+               count of what pressing it leaves once it does -- the same rule
+               the On sale chip beside it follows, and the one this chip was
+               the last to break. -->
+          <button type="button" class="chip" id="hideSold" aria-pressed="false" hidden>Hide sold out</button>
+          <!-- Sailings a seller has marked down, read from the list price it
+               prints beside its own — the struck-through figure on each cabin
+               of the booking page, and PADI's compareAtPrice. Its label
+               carries the count for the same reason the Sold by chips do: a
+               filter whose result you cannot size before pressing it is a
+               filter you press twice. Hidden until app.js finds at least one,
+               because a chip reading "On sale 0" is a control that does
+               nothing dressed as one that does. -->
+          <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
+        </span>
+      </div>
       <div class="bank" data-bank="ports"><span id="ports"></span></div>
       <div class="bank" data-bank="sites"><span id="sites"></span></div>
       <div class="bank" data-bank="boats"><span id="boats"></span></div>

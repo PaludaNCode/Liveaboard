@@ -466,7 +466,7 @@ h1 {
 /* The chips scroll inside the panel rather than lengthening it: the Boat bank
    is 77 chips and the panel's cap is what keeps the table on screen. */
 .bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
-.bank > span[id], .bank .nights-row {
+.bank > span[id], .bank .nights-row, .bank .flag-row {
   display:flex; gap:5px; flex-wrap:wrap; align-items:center;
 }
 .nights-row .dim { font-size:11.5px; }

@@ -3605,6 +3605,17 @@
      carries one: a filter set in a bank you are not looking at is exactly the
      thing a one-at-a-time panel could hide. */
   var BANK_META = [
+    /* Month leads, and the drawer opens on it: it is the filter most readers
+       reach for, and it stood on the toolbar until the toolbar stopped
+       carrying row filters at all. The two sale chips follow it, because a
+       reader who used to press them out here will look at the top of the
+       drawer first. */
+    { k: "months", label: "Month",
+      note: "the month the trip departs in — a week crossing into the next " +
+            "one is filed under the month it sails" },
+    { k: "flags", label: "Sale & sold out",
+      note: "what a seller has marked down, and whether trips nobody can " +
+            "still book stay on the table" },
     { k: "ports", label: "Departs from",
       note: "the harbour the trip leaves from — a one-way run returning " +
             "elsewhere still leaves from the port you pick" },
@@ -3624,11 +3635,17 @@
   var bankPick = document.getElementById("bankPick");
   var bankTitle = document.getElementById("bankTitle");
   var bankNote = document.getElementById("bankNote");
-  var openBank = "ports";
+  var openBank = "months";
 
   function bankCount(k) {
     if (k === "nights") {
       return (state.nightsMin !== null ? 1 : 0) + (state.nightsMax !== null ? 1 : 0);
+    }
+    /* Two switches rather than a set of chips, so there is nothing to take a
+       `size` of -- and both count, because the picker's number answers "is
+       anything on in a bank I am not looking at". */
+    if (k === "flags") {
+      return (state.onSaleOnly ? 1 : 0) + (state.hideSoldOut ? 1 : 0);
     }
     return state[k] ? state[k].size : 0;
   }
