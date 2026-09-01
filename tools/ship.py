@@ -237,7 +237,23 @@ def merge() -> int:
             return 1
 
     run_git("checkout", "-q", TRUNK)
-    run_git("merge", "-q", "--ff-only", f"origin/{TRUNK}")
+    # Checked, because the whole merge is built on this succeeding. It was not,
+    # and a checkout whose local trunk had drifted -- this container's `main`
+    # was 149 commits of an *unrelated* history, sharing no ancestor with
+    # `origin/main` and four days behind it -- fast-forwarded nowhere, said
+    # nothing, and left the `--no-ff` below to merge the branch into whatever
+    # that was. Here it failed loudly on the second step, which was luck: the
+    # histories were unrelated. A local trunk merely stale shares an ancestor,
+    # so the `--no-ff` would have succeeded and this would have pushed a merge
+    # built on a trunk days out of date, with a green gate behind it.
+    if run_git("merge", "-q", "--ff-only", f"origin/{TRUNK}") != 0:
+        print(
+            f"local {TRUNK} is not a fast-forward of origin/{TRUNK}; nothing has\n"
+            f"been merged. Point it at the remote and retry:\n"
+            f"    git update-ref refs/heads/{TRUNK} refs/remotes/origin/{TRUNK}"
+        )
+        run_git("checkout", "-q", branch)
+        return 1
     # `--no-ff` so the branch is visible in the history as a unit of work,
     # rather than eleven commits that look like they were typed onto the trunk.
     if run_git("merge", "--no-ff", "--no-edit", branch) != 0:
