@@ -1224,6 +1224,18 @@ a { color:var(--accent); }
   }
   .card-money b { color:var(--accent); font-size:15px; font-weight:600; }
   .card-money .split { font-size:9.5px; }
+  /* Price per dive, under the total it divides and inside the same tinted
+     box, ruled off from it. Its figure is deliberately *not* the accent: the
+     total is the number this page exists to publish and there is one of those
+     per card. */
+  .card-money .perline {
+    display:block; margin-top:2px; padding-top:2px;
+    border-top:1px solid var(--bill-edge);
+    font-size:11px; line-height:1.3; color:var(--ink-dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .card-money .perline b { color:var(--ink); font-size:11.5px; }
+  .card-money .perline.dim { color:var(--ink-faint); }
   /* The cells keep their table classes so the colours and the panel triggers
      come across -- and those classes carry the table's widths, which are the
      one thing that must not. A 116px reef cell in a 370px card set the sites
@@ -1257,7 +1269,6 @@ a { color:var(--accent); }
   /* Stacked in the table because a column is narrow; side by side here
      because a card's meta line is not. */
   .card .berths { flex-direction:row; gap:.3em; align-items:baseline; }
-  .card .perdive b, .card .perdive .dim { display:inline; }
   .card .marks { display:inline-flex; margin:0; }
   /* Each fact keeps the class its table cell had, so the panel triggers, the
      colours and the sold-out treatment all arrive without a second set of

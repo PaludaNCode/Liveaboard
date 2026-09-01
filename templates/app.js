@@ -984,6 +984,45 @@
                'this operator states for the week. Boats that cross further, ' +
                'or spend longer in the parks where night dives are not ' +
                'allowed, fit fewer in.">↓ ' + i.dives + "+</span>";
+      },
+      /* The same figure where a phone puts it: inside the money block, under
+         the total it is derived from.
+       *
+         On the card this was a bare `€95` on the meta line, one gap away from
+         `+€400 → 500` and in the same weight -- two euro figures, neither
+         named, and the only thing telling them apart was a column heading that
+         a phone does not draw. And `↓ 17+` carried its meaning in a `title`,
+         on the one device that cannot open one.
+
+         So it moves to the money block and says what it is in words. It is
+         the only column that draws differently on a card, and it declares that
+         here rather than in `renderCards`, so the two renderings stay one
+         column's business: the value is `v` either way and there is nowhere
+         for a second reading of the data to appear.
+
+         The two silences survive the move, because they are the point of the
+         cell -- but they need a subject in here. Under a total, "not stated"
+         alone reads as a fact about the money. */
+      card: function (d, i, m, row) {
+        var b = best(row);
+        if (!i.dives) {
+          return '<span class="perline dim" title="' + (i.dives_read
+            ? "The seller published this trip&#39;s own itinerary and stated " +
+              "no dive count in it."
+            : "No source read for this trip publishes a dive count. Assuming " +
+              "one would divide the bill by a number nobody stated.") +
+            '">dives: ' + (i.dives_read ? "none stated" : "not stated") +
+            "</span>";
+        }
+        if (!b) return "";
+        /* The count is the fewest the operator states, so the figure is a
+           ceiling -- said as "17+" rather than as an arrow, for the same
+           reason the words are here at all. */
+        return '<span class="perline" title="' + i.dives + '+ dives — the ' +
+          'fewest this operator states for the week. Boats that cross ' +
+          'further, or spend longer in the parks where night dives are not ' +
+          'allowed, fit fewer in."><b>' + eur(b.bill.total / i.dives) +
+          "</b> a dive <span class=\"dim\">\u00b7 " + i.dives + "+</span></span>";
       } },
     /* Included or extra, said plainly. Two thirds of this fleet bundles nitrox
        and a third bills for it -- 44 vessels against 21 -- and on a page for
@@ -1836,6 +1875,17 @@
                   : esc(c.v(row.d, row.i, row.lav, row));
   }
 
+  /* The card's rendering of a column, which is the column's own `show` unless
+     that column has said otherwise. A card cell reading anything a column did
+     not write is how the two layouts start disagreeing about a departure --
+     so a card that needs different words asks for them here, on the column,
+     rather than composing them in `renderCards`. Exactly one column does. */
+  function cardCell(key, row) {
+    var c = COLS.filter(function (x) { return x.k === key; })[0];
+    if (!c) return "";
+    return c.card ? c.card(row.d, row.i, row.lav, row) : cell(key, row);
+  }
+
   /* The rows as cards, which is what a phone gets instead of the table.
    *
      What this replaces was the table with columns folded off the front of the
@@ -1864,14 +1914,14 @@
         '" data-id="' + esc(row.d.id) + '">' +
         '<div class="card-head">' +
           '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
-          '<div class="card-money cost">' + cell("total", row) + "</div>" +
+          '<div class="card-money cost">' + cell("total", row) +
+            cardCell("perdive", row) + "</div>" +
         "</div>" +
         '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
         '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
         '<div class="card-meta">' +
           '<span class="cm mfees">' + cell("later", row) + "</span>" +
           '<span class="cm nitrox"><i>nitrox</i>' + cell("nitrox", row) + "</span>" +
-          '<span class="cm perdive">' + cell("perdive", row) + "</span>" +
           '<span class="cm entry-col">' + cell("entry", row) + "</span>" +
           '<span class="cm places">' + cell("availability", row) + "</span>" +
           '<span class="cm source">' + cell("source", row) + "</span>" +
