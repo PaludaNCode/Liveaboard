@@ -302,6 +302,20 @@ class Itinerary:
     """
     padi_fees_complete: bool = False
 
+    dives_read: bool = False
+    """Whether anybody has read this trip's own itinerary fragment.
+
+    The difference between a source that answered and a source nobody asked,
+    which ``dives = 0`` cannot express on its own. liveaboard.com prints the
+    Dives row as a dash for exactly one trip of 352 -- Aphrodite's *North
+    Dolphins*, a snorkelling week -- and that is the seller stating no count.
+    The 74 itineraries with no fragment at all were never asked, and 41 of
+    those are on boats liveaboard.com publishes no vessel page for.
+
+    Both print as unknown and neither may produce a price per dive; the page
+    says which it is, on the same rule ``fees_known`` and ``not_asked`` follow.
+    """
+
     padi_sourced_fees: bool = False
     """True where this trip's own fee rows came from PADI Travel.
 
@@ -349,6 +363,7 @@ class Itinerary:
                 for f in payload.get("padi_fees", [])
             ],
             padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
+            dives_read=bool(payload.get("dives_read", False)),
             padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )
 
@@ -363,7 +378,7 @@ class Departure:
     end: date
     price: Money
     price_provenance: Provenance
-    spaces_left: int | None = None
+
     availability: str | None = None
     """Whether this sailing can still be booked.
 
@@ -404,6 +419,25 @@ class Departure:
     than recorded as having none.
     """
 
+    BLOCK_SELLER, BLOCK_SPOTS, BLOCK_CABINS, BLOCK_ABOARD = 0, 1, 2, 3
+    """Positions inside one seller's block, named once.
+
+    Mirrors the identical line in ``templates/app.js`` and the shape stated in
+    the dataset's own ``berths_note``. The block is a list rather than an
+    object because it ships 878 times and the keys would too.
+    """
+
+    def _stated(self, index: int) -> int | None:
+        """The first seller to state the count at ``index``, or ``None``.
+
+        ``0`` is an answer -- nothing left -- and only an absent figure is
+        unknown, so this tests against ``None`` rather than truthiness.
+        """
+        for block in self.berths:
+            if len(block) > index and block[index] is not None:
+                return int(block[index])
+        return None
+
     @property
     def spots_at_advertised(self) -> int | None:
         """Berths left at the price on the row, as the seller states it.
@@ -411,11 +445,26 @@ class Departure:
         Across every room selling at that price — a boat can split them, and
         233 of 864 sailings do. ``None`` where no seller stated a count;
         ``0`` is an answer and means nothing is on sale at that price.
+
+        This read ``block.get("spots")`` until the CSV asked it for a number.
+        The blocks have been lists since they gained a second seller, so the
+        property could only ever have raised -- which nothing noticed, because
+        nothing called it. A dead accessor written against a shape the data
+        left behind is worse than none: it reads as the answer to a question
+        that has one.
         """
-        for block in self.berths:
-            if block.get("spots") is not None:
-                return int(block["spots"])
-        return None
+        return self._stated(self.BLOCK_SPOTS)
+
+    @property
+    def berths_aboard(self) -> int | None:
+        """Berths left on the sailing at any price, as a seller states it.
+
+        The other of the two counts, and deliberately a separate word from
+        :attr:`spots_at_advertised`: PADI publishes only this one, and putting
+        it in the at-price slot would have relabelled *22 aboard* as *22 at
+        this price* on the 249 rows with no ladder to contradict it.
+        """
+        return self._stated(self.BLOCK_ABOARD)
 
     sale: dict[str, Any] = field(default_factory=dict)
     """Whether this berth is marked down, and which sellers say so.
@@ -478,7 +527,6 @@ class Departure:
             end=date.fromisoformat(payload["end"]),
             price=Money.parse(payload["price"], default_currency),
             price_provenance=Provenance.from_dict(payload["provenance"]),
-            spaces_left=payload.get("spaces_left"),
             availability=payload.get("availability"),
             fees=[FeeItem.from_dict(f, default_currency) for f in payload.get("fees", [])],
             booking_url=payload.get("booking_url"),

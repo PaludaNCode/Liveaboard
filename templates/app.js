@@ -859,10 +859,24 @@
       show: function (d, i, m, row) {
         var b = best(row);
         if (b) m = b.bill;
+        /* Two silences, and the cell says which. `dives_read` means somebody
+           opened this trip's own itinerary and the seller left the count
+           blank — one trip of 352, Aphrodite's North Dolphins, a snorkelling
+           week whose entry bar is "No Certificate needed". Everywhere else the
+           zero means no fragment has been read at all: 74 itineraries, 41 of
+           them on boats liveaboard.com publishes no vessel page for.
+
+           Same rule as `fees_known` two columns over — no fee lines means
+           nobody looked, not that there are none — and it matters for the
+           same reason: neither can produce a price per dive, but only one of
+           them is a fact about the trip. */
         if (!i.dives) {
-          return '<span class="dim" title="This operator does not publish a ' +
-                 'dive count. Assuming one would divide the bill by a number ' +
-                 'nobody stated.">not stated</span>';
+          return i.dives_read
+            ? '<span class="dim" title="The seller published this trip&#39;s ' +
+              'own itinerary and stated no dive count in it.">none stated</span>'
+            : '<span class="dim" title="No source read for this trip publishes ' +
+              'a dive count. Assuming one would divide the bill by a number ' +
+              'nobody stated.">not stated</span>';
         }
         if (!b) return '<span class="dim">—</span>';
         /* The operator quotes a range and this is the fewest, so the figure is

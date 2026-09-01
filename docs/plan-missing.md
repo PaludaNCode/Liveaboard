@@ -1,8 +1,9 @@
 # Closing the gaps in `docs/missing.md`
 
-**§1, §2 and §3 are done** — see *What it actually bought*, at the foot, which
-records the measurements rather than the intentions. §0's display split, §5 and
-§6 are still open and the reasoning below stands for them.
+**§0, §1, §2, §3 and half of §6 are done** — see *What it actually bought*, at
+the foot, which records the measurements rather than the intentions. §5 is
+still open and deliberately so; the rest of §6 turned out to be wrong and the
+correction is down there too.
 
 Ordered by what each item costs against what it fills. Every source claim below
 was probed live on 2026-09-01 rather than reasoned about; the probe results are
@@ -304,3 +305,39 @@ and skipped.
 Every field this book fills has a fallback in `promote`, so a key that matches
 nothing fails silently — which is how 85 itineraries stayed unread without
 anything going red.
+
+
+## §0 and §6, after doing them
+
+**§0 — the two silences are now different cells.** `dives_read` is written on
+an itinerary whose own fragment was read, and the page prints **none stated**
+where the seller answered and left it blank against **not stated** where no
+source was read at all. One row is in the first state, which is the point:
+Aphrodite's *North Dolphins* is not a hole in the data, and the cell no longer
+says nobody published a count when liveaboard.com did.
+
+**§6 was half wrong, and the wrong half is the interesting one.**
+
+`Departure.spaces_left` was as dead as claimed — but *deleting* its always-empty
+CSV column was the wrong move. `spots_at_advertised` already answers the
+question, so the column is now **two** columns under the page's own two names,
+`places_at_price` and `berths_aboard`, filled on 830 and 1,113 of 1,122 rows
+where one empty column stood before. A published spreadsheet gaining two real
+numbers beats it losing one blank.
+
+Doing that found a third thing nobody was looking for: **`spots_at_advertised`
+read `block.get("spots")`**, against blocks that have been lists since they
+gained a second seller. It could only ever have raised. Nothing noticed because
+nothing called it — a dead accessor written against a shape the data left
+behind, which is worse than no accessor, because it reads as the answer to a
+question that has one. Both counts now share one `_stated` helper and the
+positions are named once, mirroring `app.js`.
+
+**The `Requirements` fields stay.** The plan called `max_depth_m`,
+`nitrox_recommended` and `strong_current` modelled ahead of the data and said
+to delete them. They are null across the season, but that is not the same as
+dead: `PadiComAdapter.extract_requirements` writes `strong_current` from page
+text on a live path, and `tools/make_seed.py` sets two of the three. Deleting
+them would remove a working parser's output because this season's boats happen
+not to trigger it. Left alone, and the reason recorded so the next reader does
+not have to re-derive it.

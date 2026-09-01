@@ -2459,6 +2459,24 @@ def promote(
                 entry_bar["disagree"] += 1
                 entry_bar["padi_stricter" if other > mine else "ours_stricter"] += 1
 
+        # Whether anybody actually asked about this trip's dive count.
+        #
+        # `dives: 0` is two different answers wearing one face, and this file
+        # keeps making the same distinction everywhere else: no fee lines means
+        # nobody looked, `not_asked` means the crawl declined to visit, an
+        # unreadable page is not an empty one. Here it is the itinerary
+        # fragment -- liveaboard.com published Aphrodite's *North Dolphins*
+        # with the Dives row printed as a dash, the only one of 352 trips it
+        # does that for, on a week whose day plan is snorkelling and whose
+        # entry bar is "No Certificate needed". The seller answered. The other
+        # 74 unfragmented itineraries were never asked, and 41 of those are on
+        # boats liveaboard.com has no page for at all.
+        #
+        # Written only where true, like `padi_sourced_fees`, so it marks the
+        # trips somebody read rather than shipping a false on the rest.
+        if trip:
+            itineraries[-1]["dives_read"] = True
+
         if padi_fees is not None:
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
             itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]

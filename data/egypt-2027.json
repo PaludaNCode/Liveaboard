@@ -1111,7 +1111,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alia-soul--marine-park-north-brothers-daedalus-elphinstone-safaga-soma-bay-safaga-soma-bay",
@@ -1329,7 +1330,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alia-soul--marine-park-south-daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
@@ -1547,7 +1549,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alia-soul--south-port-ghalib-port-ghalib",
@@ -1766,7 +1769,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "all-star-ghani--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -2022,6 +2026,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -2354,6 +2359,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -2684,6 +2690,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -3015,6 +3022,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -3329,6 +3337,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -3667,7 +3676,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "all-star-red-sea--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -3904,7 +3914,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "all-star-red-sea--daedalus-st-john-s-port-ghalib-port-ghalib",
@@ -4145,6 +4156,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -4485,6 +4497,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - No minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -4824,6 +4837,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -5163,6 +5177,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -5504,6 +5519,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 15 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -5816,7 +5832,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alsuraya--brothers-daedalus-and-elphinstone-hurghada-port-ghalib",
@@ -6028,7 +6045,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alsuraya--brothers-daedalus-and-elphinstone-port-ghalib-hurghada",
@@ -6240,7 +6258,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alsuraya--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
@@ -6453,7 +6472,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alsuraya--deadalus-st-john-s-elphinstone-port-ghalib-port-ghalib",
@@ -6666,7 +6686,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "alsuraya--north-and-brothers-hurghada-hurghada",
@@ -6881,6 +6902,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -7236,7 +7258,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "amelie-adventures--best-of-hurghada-hurghada-hurghada",
@@ -7825,7 +7848,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "anemone--brothers-daedalus-elphistone-hurghada-hurghada",
@@ -8974,7 +8998,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "aphrodite--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -9191,6 +9216,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -9464,6 +9490,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -9735,6 +9762,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -10010,7 +10038,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "aphrodite--north-straits-of-tiran-hurghada-hurghada",
@@ -10232,6 +10261,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -10505,6 +10535,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -10775,7 +10806,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "No Certificate needed - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "aphrodite--north-wrecks-hurghada-hurghada",
@@ -10991,7 +11023,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "avo--daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -11213,6 +11246,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -11805,6 +11839,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -12171,6 +12206,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -12463,7 +12499,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "blue--brother-daedalus-and-elphinstone-port-ghalib-port-ghalib",
@@ -13258,7 +13295,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "blue--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -13474,6 +13512,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -14347,6 +14386,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -14637,6 +14677,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -14950,6 +14991,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -15279,6 +15321,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -15608,6 +15651,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -15937,6 +15981,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -16267,6 +16312,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -16595,6 +16641,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -16924,6 +16971,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -17252,6 +17300,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -17581,6 +17630,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -17910,6 +17960,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -18251,6 +18302,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -18592,6 +18644,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -18933,6 +18986,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -19275,6 +19329,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -19615,6 +19670,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -19954,7 +20010,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "blue-melody--northern-red-sea-wrecks-reefs-hurghada-hurghada",
@@ -20190,6 +20247,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -20530,6 +20588,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -21711,6 +21770,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -22287,6 +22347,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -22576,6 +22637,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -24023,6 +24085,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -24314,6 +24377,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -25469,6 +25533,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -26048,6 +26113,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -26900,6 +26966,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -28018,6 +28085,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -28311,6 +28379,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -28622,7 +28691,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -28855,7 +28925,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--daedalus-fury-shoals-st-john-s-port-ghalib-port-ghalib",
@@ -29087,7 +29158,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--fury-shoals-elphinstone-safaga-port-ghalib-hurghada",
@@ -29320,7 +29392,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--north-brothers-hurghada-hurghada",
@@ -29550,7 +29623,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--north-tiran-hurghada-hurghada",
@@ -29783,7 +29857,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--north-wrecks-hurghada-hurghada",
@@ -30018,7 +30093,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--north-safaga-brothers-hurghada-port-ghalib",
@@ -30250,7 +30326,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--north-tiran-dahab-hurghada-hurghada",
@@ -30482,7 +30559,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "destiny--st-john-s-fury-shoals-elphinstone-port-ghalib-port-ghalib",
@@ -30714,7 +30792,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "discovery-i--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -30976,6 +31055,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -31313,6 +31393,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -31650,6 +31731,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -31987,6 +32069,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -32327,6 +32410,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -32667,6 +32751,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -33006,6 +33091,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -33339,6 +33425,7 @@
         "strong_current": false,
         "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -33660,6 +33747,7 @@
         "strong_current": false,
         "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -33981,6 +34069,7 @@
         "strong_current": false,
         "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -34303,6 +34392,7 @@
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -34626,7 +34716,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "discovery-ii--rocky-zabargad-st-john-s-elphinstone-port-ghalib-port-ghalib",
@@ -34885,6 +34976,7 @@
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -35208,6 +35300,7 @@
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -35515,6 +35608,7 @@
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_night",
@@ -35861,6 +35955,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_night",
@@ -36206,7 +36301,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--golden-triangle-safaga-safaga",
@@ -36451,7 +36547,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--mixed-south-daedalus-rocky-zabargad-islands-and-st-john-s-port-ghalib-port-ghalib",
@@ -36699,7 +36796,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--north-brothers-hurghada-port-ghalib",
@@ -37289,7 +37387,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--north-ras-mohammed-safaga-safaga",
@@ -37533,7 +37632,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--saint-john-s-reef-port-ghalib-port-ghalib",
@@ -37778,7 +37878,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--best-of-egypt-safaga-port-ghalib",
@@ -38056,7 +38157,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--fury-shoals-dolphins-trip-marsa-ghalib-marsa-ghalib",
@@ -38322,7 +38424,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "No Certificate needed - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--golden-triangle-safaga-safaga",
@@ -38590,7 +38693,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--north-tiran-safaga-safaga",
@@ -38860,7 +38964,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--north-brothers-marsa-ghalib-safaga",
@@ -39129,7 +39234,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--north-brothers-safaga-safaga",
@@ -39400,7 +39506,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--north-dahab-tiran-safaga-safaga",
@@ -39667,7 +39774,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--north-ras-mohammed-safaga-safaga",
@@ -39936,7 +40044,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-silky--st-john-s-reef-marsa-ghalib-marsa-ghalib",
@@ -40208,7 +40317,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--north-tiran-safaga-safaga",
@@ -40450,7 +40560,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--north-brothers-safaga-marsa-ghalib",
@@ -40690,7 +40801,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--north-brothers-safaga-safaga",
@@ -40933,7 +41045,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--north-ras-mohammed-safaga-safaga",
@@ -41174,7 +41287,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--safaga-routes-safaga-safaga",
@@ -41416,7 +41530,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "dune-titan--st-john-s-reef-marsa-ghalib-marsa-ghalib",
@@ -41660,7 +41775,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "emperor-asmaa--daedalus-fury-and-elphinstone-marsa-ghalib-marsa-ghalib",
@@ -41897,6 +42013,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -42244,6 +42361,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -42936,6 +43054,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -43280,6 +43399,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -43623,7 +43743,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "emperor-asmaa--south-st-johns-marsa-ghalib-marsa-ghalib",
@@ -43862,6 +43983,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -44553,6 +44675,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -44900,6 +45023,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -45245,6 +45369,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -45589,6 +45714,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -45936,6 +46062,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -46627,6 +46754,7 @@
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -46974,6 +47102,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -47638,7 +47767,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "emperor-superior--north-easy-hurghada-hurghada",
@@ -47858,6 +47988,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -48184,6 +48315,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "basis": "per_trip",
@@ -48513,7 +48645,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "eriny--sinai-classic-sharm-el-sheikh-sharm-el-sheikh",
@@ -50129,6 +50262,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -50424,6 +50558,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -50718,6 +50853,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -51010,6 +51146,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -51304,6 +51441,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -51599,6 +51737,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -51911,6 +52050,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -52211,6 +52351,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -52510,6 +52651,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -52809,7 +52951,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ghazala-explorer--daedalus-rocky-st-johns-port-ghalib-port-ghalib",
@@ -53038,6 +53181,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -53337,6 +53481,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -53635,6 +53780,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -53935,6 +54081,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -54235,6 +54382,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -54534,6 +54682,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -54832,6 +54981,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -55104,7 +55254,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin--north-brother-islands-hurghada-port-ghalib",
@@ -55307,7 +55458,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin--north-straits-of-tiran-hurghada-hurghada",
@@ -55510,7 +55662,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin-iv--10-days-north-ss-turkia-ras-mohamed-dahab-hurghada-hurghada",
@@ -55714,7 +55867,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin-iv--brother-islands-daedalus-elphinstone-hurghada-hurghada",
@@ -55916,7 +56070,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin-iv--clean-up-safari-north-safaga-brother-islands-elphinstone-hurghada-port-ghalib",
@@ -56120,7 +56275,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin-iv--daedalus-rocky-island-zabargad-st-johns-elphinstone-port-ghalib-port-ghalib",
@@ -56325,7 +56481,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
@@ -56527,7 +56684,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
@@ -56737,7 +56895,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-dahab-hurghada-hurghada",
@@ -56941,7 +57100,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "grand-discovery--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -57198,6 +57358,7 @@
         "strong_current": false,
         "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -57522,6 +57683,7 @@
         "strong_current": false,
         "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -57814,7 +57976,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "hammerhead-ii--brothers-light-3-marsa-alam-hurghada",
@@ -58043,7 +58206,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "hammerhead-ii--deepest-south-abu-fandira-sataya-fury-shoals-st-john-s-marsa-alam-marsa-alam",
@@ -58275,6 +58439,7 @@
         "strong_current": false,
         "notes": "No Certificate needed - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -58616,7 +58781,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "hammerhead-ii--red-sea-charm-abu-nuhas-ss-thistlegorm-the-brothers-islands-safaga-hurghada-hurgh",
@@ -58847,6 +59013,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -59188,6 +59355,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -59527,6 +59695,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -59866,6 +60035,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -60207,6 +60377,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 40 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -60548,6 +60719,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -60890,6 +61062,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -61232,6 +61405,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -61572,7 +61746,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "hammerhead-ii--wrecks-reefs-abu-nuhas-ss-thistlegorm-ras-mohamed-hurghada-hurghada",
@@ -61803,6 +61978,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -64563,6 +64739,7 @@
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -64860,7 +65037,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "independence-ii--best-of-north-wrecks-hurghada-hurghada",
@@ -65914,7 +66092,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "jp-marine--deep-south-expedition-secrets-of-zabargad-marsa-alam-marsa-alam",
@@ -66115,7 +66294,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "jp-marine--golden-mix-daedalus-sataya-st-johns-rocky-zabargad-marsa-alam-marsa-alam",
@@ -66317,7 +66497,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "jp-marine--pelagic-trail-big-fish-hammerheads-and-dolphins-marsa-alam-marsa-alam",
@@ -66517,7 +66698,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -66697,7 +66879,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -66875,7 +67058,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--northern-wrecks-and-brothers-hurghada-hurghada",
@@ -67057,7 +67241,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--safari-trip-hurghada-and-safaga-hurghada-hurghada",
@@ -67233,7 +67418,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--specialty-photography-safari-hurghada-hurghada",
@@ -67407,7 +67593,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--tec-only-safari-trip-northern-wrecks-and-reefs-hurghada-hurghada",
@@ -67585,7 +67772,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "new-sambo--brother-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -67784,7 +67972,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "new-sambo--deep-south-hamata-hamata",
@@ -67981,7 +68170,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -68185,7 +68375,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -68389,7 +68580,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -68593,7 +68785,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -68797,7 +68990,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--daedalus-rocky-zabargad-st-johns-fury-shoal-elphinstone-port-ghalib-port-ghalib",
@@ -69000,7 +69194,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
@@ -69205,7 +69400,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 15 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ocean-lovers--north-reefs-wrecks-ras-mohamed-tiran-dahab-hurghada-hurghada",
@@ -69409,7 +69605,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 15 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "oceanix--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -69674,7 +69871,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "oceanix--north-wrecks-tour-hurghada-hurghada",
@@ -69940,7 +70138,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "oceanix--south-safaga-hurghada-marsa-alam",
@@ -70208,7 +70407,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "odyssey--best-of-dahab-and-tiran-hurghada-hurghada",
@@ -70499,6 +70699,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -70908,6 +71109,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 40 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -71315,7 +71517,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "odyssey--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -71605,7 +71808,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "odyssey--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
@@ -71897,6 +72101,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 40 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -72303,6 +72508,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -72714,6 +72920,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -73533,7 +73740,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "odyssey--the-golden-loop-north-brother-safaga-port-ghalib-hurghada",
@@ -73826,7 +74034,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "odyssey--treasures-of-the-north-hurghada-hurghada",
@@ -74117,6 +74326,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 10 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -74464,7 +74674,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "queen-sherry--brothers-daedalus-elphinstone-marsa-alam-marsa-alam",
@@ -74694,7 +74905,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "queen-sherry--deep-south-expedition-secrets-of-zabargad-marsa-alam-marsa-alam",
@@ -74926,7 +75138,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "queen-sherry--golden-mix-deadalus-sataya-st-john-s-rocky-zabargad-marsa-alam-marsa-alam",
@@ -75159,7 +75372,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "queen-sherry--pelagic-trail-big-fish-hammerheads-and-dolphins-marsa-alam-marsa-alam",
@@ -75390,7 +75604,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-aggressor-ii--northern-red-sea-best-wreck-diving-hurghada-hurghada",
@@ -75611,7 +75826,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-aggressor-ii--northern-red-sea-ras-mohamed-straits-of-tiran-hurghada-hurghada",
@@ -75834,6 +76050,7 @@
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -76119,7 +76336,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-aggressor-iv--deep-south-egypt-port-ghalib-port-ghalib",
@@ -76641,7 +76859,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-aggressor-iv--st-johns-daedalus-port-ghalib-port-ghalib",
@@ -77194,6 +77413,7 @@
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -77514,6 +77734,7 @@
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -77825,7 +78046,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-blue-force-2--extended-north-sharm-el-sheikh-sharm-el-sheikh",
@@ -78042,7 +78264,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--brother-islands-daedalus-elphinstone-hurghada-port-ghalib",
@@ -78252,7 +78475,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--brother-islands-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -78462,7 +78686,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-hurghada",
@@ -78672,7 +78897,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -78882,7 +79108,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--daedalus-zabargad-rocky-island-port-ghalib-port-ghalib",
@@ -79093,7 +79320,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--north-brothers-hurghada-hurghada",
@@ -79303,7 +79531,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--north-tiran-hurghada-hurghada",
@@ -79514,7 +79743,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--st-john-s-port-ghalib-port-ghalib",
@@ -79723,7 +79953,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "red-sea-explorer--st-johns-zabargad-rocky-port-ghalib-port-ghalib",
@@ -79933,7 +80164,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "royal-evolution--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -80150,7 +80382,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "royal-evolution--brothers-daedalus-rocky-st-john-elba-port-ghalib-port-ghalib",
@@ -80372,7 +80605,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "royal-evolution--deadalus-elba-reef-port-ghalib-port-ghalib",
@@ -80592,7 +80826,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "royal-evolution--elba-reef-elba-borders-port-ghalib-port-ghalib",
@@ -80809,7 +81044,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "royal-evolution--special-wrecks-hurghada-hurghada",
@@ -81026,7 +81262,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--best-of-the-north-port-ghalib-hurghada",
@@ -81275,7 +81512,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--best-of-the-south-port-ghalib-port-ghalib",
@@ -81524,7 +81762,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--big-five-hurghada-port-ghalib",
@@ -81772,7 +82011,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--central-red-sea-route-hurghada-port-ghalib",
@@ -82021,7 +82261,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--central-red-sea-route-port-ghalib-hurghada",
@@ -82270,7 +82511,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--fury-shoals-and-daedalus-port-ghalib-port-ghalib",
@@ -82517,7 +82759,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--northern-wrecks-and-reefs-hurghada-hurghada",
@@ -82765,7 +83008,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "safy-mar--northern-wrecks-and-tiran-hurghada-hurghada",
@@ -83011,7 +83255,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-friend--sataya-where-dolphins-touch-your-soul-retreat-hamata-hamata",
@@ -83240,7 +83485,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--daedalus-fury-shoals-port-ghalib-port-ghalib",
@@ -83475,7 +83721,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--fury-shoals-port-ghalib-port-ghalib",
@@ -83709,7 +83956,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent--north-brothers-hurghada-hurghada",
@@ -83945,7 +84193,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-contessa--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -84180,7 +84429,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-contessa--north-tour-northern-reefs-wrecks-hurghada-hurghada",
@@ -84417,7 +84667,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-excellence--daedalus-fury-shoals-port-ghalib-port-ghalib",
@@ -84652,7 +84903,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-grand--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -84887,7 +85139,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-grand--north-tiran-hurghada-hurghada",
@@ -85124,7 +85377,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "seawolf-dominator--deep-south-st-john-s-port-ghalib-port-ghalib",
@@ -88918,6 +89172,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -89217,6 +89472,7 @@
         "strong_current": false,
         "notes": "PADI Travel: 20+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -89515,6 +89771,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -89814,6 +90071,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -90113,6 +90371,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -90413,6 +90672,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -90713,6 +90973,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -91016,6 +91277,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -91327,7 +91589,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sinaistar--north-wrecks-ras-mohamed-tiran-brothers-islands-hurghada-hurghada",
@@ -91537,7 +91800,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -91848,7 +92112,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -92159,7 +92424,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -92470,7 +92736,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--daedalus-st-johns-fury-shoal-port-ghalib-port-ghalib",
@@ -92780,7 +93047,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-hurghada",
@@ -93088,7 +93356,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--daedulus-fury-shoal-elphinstone-port-ghalib-port-ghalib",
@@ -93396,7 +93665,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--north-reef-ras-mohamed-tiran-brothers-island-hurghada-hurghada",
@@ -93707,7 +93977,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "snefro-love--mini-plus-thistlegorm-tiran-ras-mohamed-sharm-el-sheikh-sharm-el-sheikh",
@@ -93900,6 +94171,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -94163,7 +94435,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "snefro-target--sinai-classic-sharm-el-sheikh-sharm-el-sheikh",
@@ -94357,6 +94630,7 @@
         "strong_current": false,
         "notes": "Open Water - 15 minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -94671,7 +94945,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ss-glorious-miss-nouran--st-john-s-port-ghalib-port-ghalib",
@@ -94900,7 +95175,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 10 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "ss-serena-dreams--north-tour-northern-reefs-wrecks-hurghada-hurghada",
@@ -95137,7 +95413,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--abu-nuhas-ras-mohammed-tiran-dahab-hurghada-hurghada",
@@ -95335,7 +95612,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--abu-nuhas-ras-muhammad-tiran-hurghada-hurghada",
@@ -95532,7 +95810,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--brothers-daedalus-elphinstone-hurghada-marsa-alam",
@@ -95731,7 +96010,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--brothers-daedalus-elphinstone-marsa-alam-hurghada",
@@ -95930,7 +96210,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--daedalus-elphinstone-sataya-fury-shoals-marsa-alam-marsa-alam",
@@ -96128,7 +96409,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--elphinstone-st-john-s-sataya-fury-shoals-marsa-alam-marsa-alam",
@@ -96327,7 +96609,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--rocky-zabargad-st-john-s-elphinstone-marsa-alam-marsa-alam",
@@ -96527,7 +96810,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--rocky-zabargad-st-john-s-sataya-marsa-alam-marsa-alam",
@@ -96726,7 +97010,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-hurghada-hurghada",
@@ -96925,7 +97210,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--safaga-brothers-abu-nuhas-ss-thistlegorm-hurghada-hurghada",
@@ -97124,7 +97410,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--safaga-daedalus-brothers-marsa-alam-hurghada",
@@ -97323,7 +97610,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--sataya-fury-shoals-st-john-s-marsa-alam-marsa-alam",
@@ -97521,7 +97809,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "star-jet--tiran-ras-muhammad-ss-thistlegorm-hurghada-hurghada",
@@ -97719,7 +98008,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -97872,7 +98162,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -98025,7 +98316,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--south-route-brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -98178,7 +98470,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--south-route-daedalus-rocky-zabargad-port-ghalib-port-ghalib",
@@ -98334,7 +98627,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunlight--south-route-elba-reef-expedition-port-ghalib-port-ghalib",
@@ -98490,7 +98784,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--brothers-safaga-hurghada-hurghada",
@@ -98659,7 +98954,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--north-safaga-hurghada-hurghada",
@@ -98832,7 +99128,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--north-dahab-hurghada-hurghada",
@@ -99003,7 +99300,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--north-tiran-hurghada-hurghada",
@@ -99173,7 +99471,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "tala--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -99409,6 +99708,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -99720,6 +100020,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -100031,6 +100332,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -100343,6 +100645,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -100656,6 +100959,7 @@
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -100966,6 +101270,7 @@
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -101277,6 +101582,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -101670,7 +101976,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--brother-islands-daedalus-elphinstone-port-ghalib-hurghada",
@@ -101988,7 +102295,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--daedalus-rocky-zabargad-elphinstone-port-ghalib-port-ghalib",
@@ -102304,6 +102612,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 35 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -102704,7 +103013,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - No minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--fury-shoal-port-ghalib-port-ghalib",
@@ -103017,6 +103327,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -103421,7 +103732,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--hidden-gems-of-the-north-hurghada-hurghada",
@@ -103740,7 +104052,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 35 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--north-reef-safaga-brother-islands-hurghada-hurghada",
@@ -104052,7 +104365,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 40 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--north-reef-safaga-brother-islands-port-ghalib-hurghada",
@@ -104371,7 +104685,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 40 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--north-reef-wrecks-and-tiran-hurghada-hurghada",
@@ -104687,7 +105002,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--north-wrecks-reefs-tiran-and-dahab-hurghada-hurghada",
@@ -105004,7 +105320,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--sataya-dolphin-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -105319,7 +105636,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 40 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "unity--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -105560,6 +105878,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -105859,6 +106178,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -106160,6 +106480,7 @@
         "strong_current": false,
         "notes": "Advanced Open Water - 30 minimum logged dives required. PADI Travel: 20+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -106418,7 +106739,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "vita-xplorer--ras-mohamed-brothers-islands-hurghada-marriott-hurghada-marriott",
@@ -106625,7 +106947,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "vita-xplorer--st-john-s-reef-port-ghalib-port-ghalib",
@@ -106826,7 +107149,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 20 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "vita-xplorer--tiran-north-ras-mohamed-hurghada-marriott-hurghada-marriott",
@@ -107026,7 +107350,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 50 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "yachtiano--north-tiran-hurghada-hurghada",
@@ -107279,7 +107604,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "yachtiano--north-hurghada-hurghada",
@@ -107533,7 +107859,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Advanced Open Water - 25 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     },
     {
       "id": "yachtiano--yachtiano-deluxe-hurghada-hurghada",
@@ -107785,7 +108112,8 @@
         "nitrox_recommended": false,
         "strong_current": false,
         "notes": "Open Water - 5 minimum logged dives required."
-      }
+      },
+      "dives_read": true
     }
   ],
   "departures": [

@@ -29,15 +29,16 @@ they have survived.
 |---|---|---|
 | `Boat.length_m` | 63 / 77 | `data/fees.json` already holds it for **71** vessels. See §2. |
 | `Operator.website` | 0 / 46 | Parsed from neither source. `Event.organizer` carries a name and no url. |
-| `Departure.spaces_left` | 0 / 1,122 | **Dead.** Superseded by `berths`, which answers the same question per seller. `render.py:162` says so already. It still ships as a column in `export.py`, empty on every row. |
-| `Requirements.max_depth_m` | 0 / 402 | Both sources state the entry bar as a level and a logged-dive count; neither states a depth. |
-| `Requirements.nitrox_recommended` | 0 / 402 | |
-| `Requirements.strong_current` | 0 / 402 | |
+| ~~`Departure.spaces_left`~~ | — | **Gone.** Superseded by `berths`. Its always-empty CSV column became two filled ones, `places_at_price` and `berths_aboard`, on 830 and 1,113 rows. |
+| `Requirements.max_depth_m` | 0 / 402 | Both sources state the entry bar as a level and a logged-dive count; neither states a depth. Kept: `make_seed.py` sets it. |
+| `Requirements.nitrox_recommended` | 0 / 402 | Kept, same reason. |
+| `Requirements.strong_current` | 0 / 402 | **Kept.** Not dead: `PadiComAdapter.extract_requirements` writes it from page text on a live path; this season's boats simply do not trigger it. |
 
-`spaces_left` is the one to decide about rather than fill: it is a field whose
-job was taken. The other five are unfilled because nobody has read them, and
-three of those (`max_depth_m`, `nitrox_recommended`, `strong_current`) have no
-candidate source behind them — they were modelled ahead of the data.
+`spaces_left` was the one to decide about rather than fill, and it is gone. The
+other three were called modelled-ahead-of-the-data and that was wrong: two are
+set by the seed generator and `strong_current` has a live writer that this
+season's pages do not trigger. Deleting a working parser's output because the
+current fleet does not exercise it is not a cleanup.
 
 ## 2. Read and not published
 

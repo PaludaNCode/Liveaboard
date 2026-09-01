@@ -2128,3 +2128,54 @@ class TestAFragmentReachesATripNamedByTheOtherSeller(unittest.TestCase):
                                   "name": "St. Johns (Port Ghalib - Port Ghalib)"}
         got = self.payload("St. Johns (Port Ghalib - Port Ghalib)", book)
         self.assertEqual(got["dives"], 7)
+
+
+class TestAskedAndAnsweredIsNotTheSameAsNeverAsked(unittest.TestCase):
+    """`dives: 0` was two answers wearing one face. liveaboard.com prints the
+    Dives row as a dash for exactly one trip of 352 -- Aphrodite's *North
+    Dolphins*, a snorkelling week whose entry bar is "No Certificate needed" --
+    and that is the seller stating no count. The 74 itineraries with no
+    fragment at all were never asked, and 41 of those are on boats it
+    publishes no vessel page for.
+
+    Same distinction as `fees_known` and `not_asked`: neither can produce a
+    price per dive, and only one of them is a fact about the trip.
+    """
+
+    def itinerary(self, book=None):
+        return promote(
+            candidate([departure()]), season=SEASON, trips=book,
+        )["itineraries"][0]
+
+    def book(self, **fields):
+        return {"trips": {"k": {
+            "boat": "alia-soul", "regions": [],
+            "name": "Brothers, Daedalus & Elphinstone", **fields}}}
+
+    def test_a_fragment_that_states_no_count_is_marked_read(self):
+        got = self.itinerary(self.book(dives=None))
+        self.assertEqual(got["dives"], 0)
+        self.assertTrue(got["dives_read"])
+
+    def test_no_fragment_at_all_is_not(self):
+        got = self.itinerary()
+        self.assertEqual(got["dives"], 0)
+        self.assertNotIn("dives_read", got)
+
+    def test_it_is_written_only_where_true(self):
+        """A false on 74 itineraries is 74 keys saying nothing, which is what
+        `summary` was deleted from the payload for."""
+        payload = promote(candidate([departure()]), season=SEASON)
+        self.assertNotIn("dives_read", payload["itineraries"][0])
+
+    def test_the_page_is_told_only_where_it_changes_the_cell(self):
+        """A trip with a count needs no explanation of why it has none."""
+        from liveaboard.render import build_payload
+        from liveaboard.dataset import Dataset
+
+        payload = promote(candidate([departure()]), season=SEASON,
+                          trips=self.book(dives=18))
+        rows = build_payload(Dataset.from_dict(payload))["itineraries"]
+        row = next(iter(rows.values())) if isinstance(rows, dict) else rows[0]
+        self.assertEqual(row["dives"], 18)
+        self.assertNotIn("dives_read", row)
