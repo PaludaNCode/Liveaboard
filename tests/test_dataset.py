@@ -1091,19 +1091,21 @@ class TestColumnOrders(unittest.TestCase):
     That is exactly what happened when the "vs PADI" column was added, and it
     reached production. A warning in a console is not a check; this is.
 
-    It was four lists. The fourth said only "PHONE_ORDER, minus Guests in front
-    of the money" and came with a typed breakpoint that was wrong on most
-    phones (#150), so the narrower phone orders are permutations `phoneOrder`
-    builds from `MONEY_FOLD` -- which means a column placed in PHONE_ORDER is
-    placed at every phone width, and what needs checking instead is that
-    `MONEY_FOLD` names real columns and never names the money. Where those
-    permutations actually put the Total is a measurement and lives in
+    It was four lists, then three, and it is two. The phone orders and the
+    measured fold that built them are gone with the phone table itself: below
+    760px the rows are cards, which have no columns to order and nothing to
+    fold. What is left is the two orders a table is drawn in, and the rule
+    that every column is in both -- a column missing from one is a fact the
+    page stops publishing at that width only, which is the hardest kind of gap
+    to notice, because the laptop it was written on looks right.
+
+    Where the Total actually lands is a measurement and lives in
     `test_layout.py`; nothing here can see a pixel.
     """
 
     APP = ROOT / "templates" / "app.js"
 
-    ORDERS = ("ORDER", "COMPACT_ORDER", "PHONE_ORDER")
+    ORDERS = ("ORDER", "COMPACT_ORDER")
 
     def source(self) -> str:
         return self.APP.read_text(encoding="utf-8")
@@ -1146,49 +1148,68 @@ class TestColumnOrders(unittest.TestCase):
             unknown = sorted(set(self.order(name)) - keys)
             self.assertEqual(unknown, [], f"{name} names columns that are gone: {unknown}")
 
-    def test_the_money_is_never_last(self) -> None:
-        """The Total off the right-hand edge is the failure the phone orders
-        exist to prevent, and it would be silent: the row still renders."""
-        order = self.order("PHONE_ORDER")
-        self.assertLess(order.index("total"), order.index("trip"))
+    def test_the_money_leads_the_descriptive_columns_when_room_is_short(self) -> None:
+        """The compact order is what a window narrower than the table gets, and
+        the whole of what it changes is that the price block moves in front of
+        Trip, Dive sites and Entry bar. The Total off the right-hand edge is
+        the failure it exists to prevent, and it would be silent: the row still
+        renders."""
+        order = self.order("COMPACT_ORDER")
+        for behind in ("trip", "sites", "entry"):
+            with self.subTest(column=behind):
+                self.assertLess(order.index("total"), order.index(behind))
 
-    def test_the_fold_only_moves_columns_that_exist(self) -> None:
-        """`MONEY_FOLD` is read by name against the rendered header, so a stale
-        entry folds nothing and the Total stays off the edge -- with every
-        source-string assertion here still green."""
-        keys = set(self.column_keys())
-        fold = self.order("MONEY_FOLD")
-        self.assertTrue(fold, "nothing can make room for the money")
-        self.assertEqual(sorted(set(fold) - keys), [], f"MONEY_FOLD names {fold}")
+    def test_the_two_orders_hold_the_same_columns(self) -> None:
+        """Not merely each complete against COLS -- the same set. A column in
+        one and not the other is a fact that appears and disappears with the
+        window width, which is worse than one that is always absent."""
+        self.assertEqual(sorted(self.order("ORDER")), sorted(self.order("COMPACT_ORDER")))
 
-    def test_the_fold_never_moves_the_money_or_the_date(self) -> None:
-        """The money is what the fold is *for*. The date is what a row is looked
-        up by and the sort the table opens on, so it is the one identifier that
-        stays in front of the price at every width."""
-        fold = self.order("MONEY_FOLD")
-        for kept in ("total", "start"):
-            self.assertNotIn(kept, fold)
+    def test_the_date_leads_both_orders(self) -> None:
+        """It is what a row is looked up by and the sort the table opens on, so
+        it is the one identifier that stays in front of everything at every
+        width -- and it is the first of the two pinned columns."""
+        for name in self.ORDERS:
+            with self.subTest(order=name):
+                self.assertEqual(self.order(name)[0], "start")
 
-    def test_the_fold_can_only_move_columns_that_lead_the_money(self) -> None:
-        """A fold entry that sits behind the Total already would measure as
-        making room and free none."""
-        order = self.order("PHONE_ORDER")
-        for name in self.order("MONEY_FOLD"):
-            with self.subTest(column=name):
-                self.assertLess(order.index(name), order.index("total"))
+    def test_every_zone_is_contiguous_in_both_orders(self) -> None:
+        """The band over the header is built from runs of `zone`, so a zone
+        broken into two runs prints its label twice -- "The trip" over the
+        dates and again over the reefs, with the bill between them. Nothing
+        throws; the header just starts lying about what it is naming."""
+        source = self.source()
+        start = source.index("var COLS = [")
+        end = source.index("\n  ];", start)
+        block = source[start:end]
+        zones = dict(
+            re.findall(r'\{\s*k:\s*"([^"]+)".*?zone:\s*"([^"]+)"', block, re.S | re.M)
+        )
+        self.assertGreaterEqual(len(zones), 10, f"zones did not parse: {zones}")
+        for name in self.ORDERS:
+            runs: list[str] = []
+            for key in self.order(name):
+                zone = zones.get(key)
+                self.assertIsNotNone(zone, f"{key} has no zone, so the band cannot name it")
+                if not runs or runs[-1] != zone:
+                    runs.append(zone)
+            with self.subTest(order=name):
+                self.assertEqual(len(runs), len(set(runs)), f"{name} splits a zone: {runs}")
 
 
 class TestPinnedColumns(unittest.TestCase):
     """A pinned group is only as good as the rule that closes it.
 
     `pinned()` says how many leading columns are frozen, and the count changes
-    with the breakpoint -- four on a wide screen, three on a laptop, one on a
-    phone, where freezing Depart, Boat and Guests held 231px of a 390px screen
-    still. Each count paints a `pins-N` class on the body, and the CSS draws
-    the strong edge on `.pins-N .stickN`. Miss one and nothing throws: the
-    columns still freeze, they just stop saying where the identity ends, which
-    is the difference between a group and three columns that happen to be
-    adjacent.
+    with the breakpoint -- two where there is a table, and none below 760px,
+    where the rows are cards and there is nothing to pin. Each count above
+    zero paints a `pins-N` class on the body, and the CSS draws the strong
+    edge on `.pins-N .stickN`. Miss one and nothing throws: the columns still
+    freeze, they just stop saying where the identity ends, which is the
+    difference between a group and two columns that happen to be adjacent.
+
+    Zero is a real answer and is checked as one: it must paint no class and
+    close no group, or a card list would carry the table's edges.
     """
 
     APP = ROOT / "templates" / "app.js"
@@ -1202,16 +1223,30 @@ class TestPinnedColumns(unittest.TestCase):
     def test_the_counts_were_found(self):
         counts = self.counts()
         self.assertTrue(counts, "pinned() parsed to no counts at all")
-        self.assertTrue(all(1 <= n <= 4 for n in counts), counts)
+        self.assertTrue(all(0 <= n <= 4 for n in counts), counts)
 
     def test_every_count_paints_its_body_class(self):
         source = self.APP.read_text(encoding="utf-8")
         for n in self.counts():
+            if n == 0:
+                continue
             self.assertIn(f'classList.toggle("pins-{n}"', source)
+
+    def test_no_class_is_painted_for_a_count_pinned_cannot_return(self):
+        """The other direction, and it is the one a refactor breaks: dropping a
+        count from `pinned()` leaves the class it painted behind, so the body
+        can carry `pins-4` with four columns' worth of edges and two columns
+        pinned."""
+        source = self.APP.read_text(encoding="utf-8")
+        painted = {int(n) for n in re.findall(r'classList\.toggle\("pins-(\d+)"', source)}
+        self.assertEqual(painted, {n for n in self.counts() if n},
+                         "a pins-N class is painted for a count pinned() cannot return")
 
     def test_every_count_closes_its_group(self):
         css = self.CSS.read_text(encoding="utf-8")
         for n in self.counts():
+            if n == 0:
+                continue
             self.assertIn(
                 f".pins-{n} .stick{n}", css,
                 f"pinned() can return {n}, but no rule closes a group of {n}",
@@ -1220,7 +1255,17 @@ class TestPinnedColumns(unittest.TestCase):
     def test_every_pinned_column_has_an_offset(self):
         css = self.CSS.read_text(encoding="utf-8")
         for n in range(1, max(self.counts()) + 1):
-            self.assertIn(f".stick{n} {{", css)
+            self.assertIn(f".stick{n}", css)
+
+    def test_no_offset_survives_a_column_that_is_no_longer_pinned(self):
+        """`--st3` and `--st4` were the widths of Return and Guests, which are
+        second lines inside their neighbours now. A stale offset variable is a
+        left edge computed from a column that is not there."""
+        css = self.CSS.read_text(encoding="utf-8")
+        highest = max(self.counts())
+        for n in range(highest + 1, 6):
+            with self.subTest(column=n):
+                self.assertNotIn(f"--st{n}:", css)
 
 
 class TestPayloadIsRead(unittest.TestCase):
@@ -1407,12 +1452,11 @@ class TestPayloadIsRead(unittest.TestCase):
         """A column missing from an order is appended, so it cannot vanish --
         but it lands after the provenance columns, at the far right of a table
         this wide, which for the one column that says whether a row is bookable
-        at all is barely different from being gone. Three orders, and the phone
-        one is where it matters most -- the narrower phone layouts are
-        permutations of it (`MONEY_FOLD`), so placing it there places it at
-        every phone width."""
+        at all is barely different from being gone. Two orders now: below 760px
+        there is no table to order, and the card carries the bar in its own
+        meta line."""
         source = self.app()
-        for name in ("var ORDER", "var PHONE_ORDER", "var COMPACT_ORDER"):
+        for name in ("var ORDER", "var COMPACT_ORDER"):
             with self.subTest(order=name):
                 body = source[source.index(name):]
                 body = body[: body.index("]")]
@@ -1841,7 +1885,7 @@ class TestTheSellerFilter(unittest.TestCase):
         without reloading."""
         app = self.app()
         self.assertIn("state.sellers.clear()", app)
-        self.assertRegex(app, r'"boats",\s*"sellers"\]',
+        self.assertRegex(app, r'"entry",\s*"sellers"\]',
                          "the seller bank is never repainted on reset")
 
     def test_the_three_states_partition_every_row(self) -> None:
@@ -2894,16 +2938,25 @@ class TestTheTotalStatesWhatItIsTheSumOf(unittest.TestCase):
             self.assertNotIn(one_ended, cell,
                              "the split is being taken from one end of a span")
 
-    def test_it_stays_out_of_flow_so_no_row_grows(self) -> None:
-        """Measured once already and written into the stylesheet: a block-level
-        second line under the total added nine pixels to every row -- 675 of 882
-        went from 30px to 39 -- and cost three of the twelve rows visible on a
-        laptop. The figures are text where the bar was a graphic, and the
-        constraint is the same."""
+    def test_it_is_a_line_of_its_own_and_costs_the_row_nothing(self) -> None:
+        """It was absolutely positioned over the cell, and the reason was that
+        it was the only second line in the table: nine pixels on every row,
+        three of the twelve a laptop held. It is not the only one any more --
+        the dates, the boat and the trip each carry one, so the row is two
+        lines tall whatever this does -- and out of flow it overlapped the
+        total on a ranged row at any narrow width.
+
+        What replaces the old constraint is the reason it existed: the split
+        may not make the row taller than the cells beside it, so it is one line
+        and it does not wrap."""
         rule = self.css.split(".split {", 1)[1].split("}", 1)[0]
-        self.assertIn("position:absolute", rule)
-        self.assertIn("tbody td.cost { position:relative; }", self.css,
-                      "the split's containing block is gone")
+        self.assertNotIn("position:absolute", rule)
+        self.assertIn("display:block", rule)
+        self.assertIn("white-space:nowrap", rule,
+                      "a split that wraps is a third line on the rows that have one")
+        self.assertIn(".sub {", self.css,
+                      "the second line the other cells carry is gone, so the "
+                      "split is back to being the only one")
 
     def test_the_marker_beside_the_total_is_not_the_split(self) -> None:
         """`+ tips` stays. It is a different claim -- the operator states tips

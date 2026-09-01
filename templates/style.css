@@ -27,6 +27,14 @@
      4.5 against the tint as well as against the panel. */
   --row-marked:#dbe9f5; --row-marked-edge:var(--accent);
 
+  /* The bill's band. Twelve columns of one weight gave the eye nothing to
+     land on, so the money -- the thing this site exists to publish -- was
+     exactly as findable as the return port. These five columns sit on a tint
+     that starts in the group header and runs down every cell under it.
+     Deliberately shallow: it has to separate a block of columns without
+     becoming a second row colour competing with the marked row. */
+  --bill:#f2f7fb; --bill-head:#e7f0f7; --bill-edge:#cfdeeb;
+
   /* The pinned columns, left to right, and therefore each one's offset from
      the one before. Fixed widths rather than floors: content wider than a
      minimum stretches the cell, and a pinned column whose neighbour is offset
@@ -36,10 +44,8 @@
      Which columns these are is decided in app.js by position, not by name, so
      they are always adjacent. Two pinned columns with a third between them is
      the same overlap by a different route. */
-  --st1:82px;   /* Depart */
-  --st2:78px;   /* Return */
-  --st3:132px;  /* Boat   */
-  --st4:62px;   /* Guests */
+  --st1:106px;  /* Dates -- departure, return and the nights between */
+  --st2:126px;  /* Boat  -- and the guests it sleeps */
 
   /* Fonts the visitor already has.
    *
@@ -78,6 +84,7 @@
     --ok:#6cc394; --warn:#d6ad55; --unknown:#939db0; --sold:#e08379;
     --row-alt:#111820; --row-hover:#1b2531;
     --row-marked:#203446; --row-marked-edge:var(--accent);
+    --bill:#161f2a; --bill-head:#1a2735; --bill-edge:#2b3949;
   }
 }
 :root[data-theme="dark"] {
@@ -88,6 +95,7 @@
   --ok:#6cc394; --warn:#d6ad55; --unknown:#939db0; --sold:#e08379;
   --row-alt:#111820; --row-hover:#1b2531;
   --row-marked:#203446; --row-marked-edge:var(--accent);
+    --bill:#161f2a; --bill-head:#1a2735; --bill-edge:#2b3949;
 }
 
 * { box-sizing: border-box; }
@@ -157,7 +165,7 @@ h1 {
 .workspace { flex:1 1 auto; min-height:0; display:flex; }
 
 .rail {
-  flex:none; width:172px; background:var(--panel);
+  flex:none; width:148px; background:var(--panel);
   border-right:1px solid var(--rule); overflow:auto;
   display:flex; flex-direction:column; padding:8px 0;
 }
@@ -195,7 +203,7 @@ h1 {
   flex:1 1 auto; min-width:0; min-height:0; display:flex; flex-direction:column;
 }
 /* Measured from zero rather than from content, for the same reason and by the
-   same means as `body.filters-open .shell` below: a pane's content is a table
+   same means as the drawer's own cap: a pane's content is a table
    asking for its whole 6,600px of rows, and an `auto` basis is that number
    entering the arithmetic of a box 800px tall. */
 .pane { flex:1 1 0; min-height:0; display:flex; flex-direction:column; }
@@ -215,17 +223,41 @@ h1 {
   overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
 }
 
-/* The history view is the one thing here that is read rather than operated, so
-   it scrolls as a document. */
-.history-pane { overflow:auto; }
-.history-body { padding:14px 18px 24px; }
-.history-body h2 {
-  font-family:var(--font-narrow); font-size:15px; font-weight:600; margin:0 0 5px;
+/* THE TWO DOCUMENT VIEWS.
+   Both are read rather than operated, so both scroll as a document -- and
+   both are now set in the trips view's vocabulary rather than in one of their
+   own. The heading scale, the micro-caps section rules, the banded money
+   columns and the hairline row rules are the table's; a reader who has
+   learned one should not have to learn two more. */
+.history-pane, .sale-pane { overflow:auto; }
+.history-body, .sale-body { padding:0 0 28px; }
+/* A masthead for the view, the way the table has a toolbar: the title and
+   what it is, on the panel colour, with a rule under it. Full-bleed, because
+   the prose below is measured and a heading indented to the prose's measure
+   reads as a paragraph. */
+.view-top {
+  background:var(--panel); border-bottom:1px solid var(--rule);
+  padding:12px 18px 11px; margin-bottom:16px;
 }
-.history-body h3 { font-size:12px; margin:20px 0 5px; color:var(--ink); font-weight:600; }
+.history-body h2, .sale-body h2 {
+  font-family:var(--font-narrow); font-size:16px; font-weight:600;
+  margin:0 0 4px; letter-spacing:.01em;
+}
+.history-body h3 {
+  font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
+  letter-spacing:.11em; color:var(--ink-faint); font-weight:600;
+  margin:26px 18px 8px; padding-bottom:5px; border-bottom:1px solid var(--rule);
+}
 .history-body p, .history-lead {
   font-size:11.5px; color:var(--ink-dim); max-width:74ch; margin:0 0 12px;
 }
+.view-top p, .view-top .history-lead, .view-top .sale-lead { margin-bottom:0; }
+/* Everything below the view's own masthead keeps the prose inset. The day
+   bands are the exception and are deliberate: a band that names what is under
+   it runs the width of what it names, which is the same rule the table's
+   group header follows. */
+.history-body > p, .history-body > .downloads,
+#saleMoves, #changeLog > .history-lead { margin-left:18px; margin-right:18px; }
 /* The report is the content of this view, so it takes the room the view has
    and lets the view scroll -- rather than the 20em window it had as one item
    in a footer about fifteen other things. */
@@ -234,12 +266,25 @@ h1 {
    blocks that look alike, so each needs its date above it -- and the date is
    also the only thing that shows a log has gone stale, which is why the view
    prints it rather than warning about it against a clock. */
+/* The day a run belongs to, as a band rather than a line of text: a week of
+   reports is a stack of blocks that look alike, and the date is also the only
+   thing that shows a log has gone stale. Same treatment as the table's group
+   band, for the same reason -- it names what is under it. */
 .history-day {
-  font-family:var(--font-mono); font-size:11px; color:var(--ink-dim);
-  font-weight:600; margin:18px 0 6px; padding-bottom:4px;
-  border-bottom:1px solid var(--rule);
+  font-family:var(--font-narrow); font-size:10px; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--ink-dim); background:var(--bill-head);
+  font-weight:600; margin:22px 0 0; padding:5px 18px;
+  border-top:1px solid var(--bill-edge); border-bottom:1px solid var(--bill-edge);
 }
-.history-day:first-of-type { margin-top:6px; }
+.history-day:first-of-type { margin-top:0; }
+/* One refresh, as its own block under the day that holds it. Two runs on one
+   day were two lists with nothing between them; the rule down the left is
+   what says where one ends. */
+.change-report { margin:0; padding:12px 18px; }
+/* Two runs on one day were two lists of the same shape with nothing between
+   them saying where the first ended -- and on a quiet day, two identical
+   "Nothing moved." lines reading as a stutter rather than as two runs. */
+.change-report + .change-report { border-top:1px dashed var(--rule); }
 
 /* A rendered report, not a transcript of one. What this replaces was
    `liveaboard.cli changes`' stdout in a `<pre>` -- monospace padded to eighty
@@ -247,17 +292,24 @@ h1 {
    renderer, and nothing in it could be clicked. */
 .change-block { margin:0 0 14px; }
 .change-block h4 {
-  font-family:var(--font-narrow); font-size:11px; text-transform:uppercase;
-  letter-spacing:.08em; color:var(--ink-faint); font-weight:600; margin:12px 0 5px;
+  font-family:var(--font-narrow); font-size:9.5px; text-transform:uppercase;
+  letter-spacing:.1em; color:var(--ink-faint); font-weight:600; margin:14px 0 5px;
 }
+.change-block:first-child h4 { margin-top:0; }
 .change-block h4.change-warn { color:var(--warn); }
 .change-table {
   display:block; overflow-x:auto; border-collapse:collapse;
   font-size:12px; max-width:100%;
 }
 .change-table td {
-  padding:3px 12px 3px 0; border-bottom:1px solid var(--rule);
+  padding:4px 14px 4px 0; border-bottom:1px solid var(--rule);
   vertical-align:top; white-space:nowrap;
+}
+/* The money in a change row sits on the bill's band, exactly as it does in
+   the table: this is the same fact -- what a trip costs -- reported a day
+   later, and it is found the same way. */
+.change-table .c-move, .change-table .c-up, .change-table .c-down {
+  background:var(--bill); padding-left:8px; padding-right:8px;
 }
 .change-table .c-when { font-family:var(--font-mono); color:var(--ink-dim); }
 .change-table .c-trip { color:var(--ink-dim); white-space:normal; }
@@ -279,29 +331,145 @@ h1 {
 
 .change-more { font-size:11px; margin-top:2px; }
 .change-quiet {
-  font-size:11.5px; color:var(--ink-faint); font-style:italic; margin:0 0 12px;
+  font-size:11.5px; color:var(--ink-faint); font-style:italic; margin:0;
 }
+
+/* ===========================================================================
+   THE TOOLBAR, AND THE DRAWER UNDER IT
+   ---------------------------------------------------------------------------
+   One line, and a panel behind a button. What was here was the toolbar plus
+   four chip banks, always open: 270px above the first row on a 1440x900
+   window, a quarter of it spent on filters nobody had chosen yet. The fold
+   used to start at 1000px on the reasoning that a laptop had the room; it
+   had the room and was still spending it.
+   =========================================================================== */
 
 .toolbar {
   background:var(--panel); border-bottom:1px solid var(--rule);
-  padding:10px 18px; display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center;
-  position:sticky; top:0; z-index:30;
+  padding:7px 12px; display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center;
 }
-.filterbar {
-  background:var(--panel); border-bottom:1px solid var(--rule);
-  padding:8px 18px; display:flex; gap:6px; align-items:baseline; flex-wrap:wrap;
+/* `flex:none` on every group but the meta line. A wrapping flex container
+   breaks the line *before* it shrinks anything, so one item 7px too wide put
+   the whole toolbar on two rows and cost the rows 25px on every screen. Above
+   900px the line does not wrap at all and the meta -- the only prose on it,
+   and so the only thing whose width moves when the fleet does -- gives way
+   instead. */
+.tgroup { display:flex; gap:5px; align-items:center; flex-wrap:wrap; flex:none; }
+/* Shrinks rather than wrapping the line. It is the one thing on the toolbar
+   that is prose, so it is also the one thing whose width moves when the fleet
+   does -- and at 1440 it was 7px over, which put the whole line on two and
+   cost the rows 25px on every screen. Truncating a sentence is visible;
+   a toolbar that is quietly twice as tall is not. */
+.tgroup.meta-right {
+  margin-left:auto; color:var(--ink-faint); font-size:10.5px;
+  flex:0 1 auto; min-width:0; overflow:hidden; white-space:nowrap;
+  text-overflow:ellipsis; display:block;
 }
-.filterbar > span[id] { display:flex; gap:5px; flex-wrap:wrap; }
-.tgroup { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
-/* Ends the toolbar's current line. Zero-sized, and the negative margin eats
-   the row gap the empty line would otherwise cost, so pinning a group to a row
-   of its own is free wherever it was going to start one anyway. */
-.trow-break { flex-basis:100%; height:0; margin:-4px 0; }
-.tgroup.meta-right { margin-left:auto; color:var(--ink-faint); font-size:11px; }
 .tlabel {
-  font-size:10px; text-transform:uppercase; letter-spacing:.09em;
-  color:var(--ink-faint); margin-right:2px;
+  font-family:var(--font-narrow);
+  font-size:9.5px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--ink-faint); margin-right:1px;
 }
+/* A hairline between groups of unlike controls. The toolbar is one line of
+   four different kinds of thing now -- a panel handle, two switches, the
+   season, two chips -- and without a mark between them they read as one bank
+   of six buttons. */
+.tsep { width:1px; height:17px; background:var(--rule); flex:none; }
+.filters-btn { flex:none; }
+@media (min-width: 901px) { .toolbar { flex-wrap:nowrap; } }
+
+.filters-btn {
+  font:inherit; font-size:12px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:6px; padding:4px 9px; border-radius:2px;
+  border:1px solid var(--rule-strong); background:transparent; color:var(--ink-dim);
+}
+.filters-btn:hover { color:var(--accent); border-color:var(--accent); }
+.filters-btn.active, .filters-btn[aria-expanded="true"] {
+  border-color:var(--accent); background:var(--accent-soft);
+  color:var(--accent); font-weight:500;
+}
+/* How many filters are on, on the control that hides them. A drawer that
+   conceals an active filter is a table quietly answering a narrower question
+   than the one on screen, and the bar below names which -- this says there is
+   something to look at without the reader opening it to find out. */
+.filters-btn .fcount {
+  font-family:var(--font-mono); font-size:10px; line-height:15px;
+  min-width:16px; text-align:center; padding:0 5px; border-radius:8px;
+  background:var(--accent); color:var(--panel); font-weight:600;
+}
+.filters-btn .fcaret { font-size:8px; }
+.filters-btn[aria-expanded="true"] .fcaret { transform:rotate(180deg); }
+
+/* Each live filter, named and droppable. */
+.activebar {
+  background:var(--bill); border-bottom:1px solid var(--rule);
+  padding:5px 14px; display:flex; align-items:center; flex-wrap:wrap; gap:5px 8px;
+}
+.activebar #activePills { display:flex; flex-wrap:wrap; gap:5px; }
+.pill-drop {
+  font:inherit; font-size:11.5px; cursor:pointer; display:inline-flex;
+  align-items:center; gap:5px; padding:2px 6px 2px 8px; border-radius:2px;
+  border:1px solid var(--accent); background:var(--panel); color:var(--accent);
+}
+.pill-drop .pb {
+  font-family:var(--font-narrow); font-size:9px; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--ink-faint);
+}
+.pill-drop .px { font-size:12px; line-height:1; opacity:.75; }
+.pill-drop:hover { background:var(--accent-soft); }
+.pill-drop:hover .px { opacity:1; }
+
+/* THE DRAWER. A bank picker down the side rather than five banks stacked: the
+   banks are not the same size -- six ports fit a line and 77 boats do not --
+   so stacking made the panel as tall as the sum of the longest of each, which
+   is the wall of filters the fold was opened to prevent. */
+.filterpanel {
+  display:flex; flex:none; min-width:0;
+  background:var(--panel); border-bottom:1px solid var(--rule-strong);
+  max-height:min(340px, 42vh);
+}
+.bankpick {
+  flex:none; width:150px; padding:7px 0; background:var(--ground);
+  border-right:1px solid var(--rule); overflow-y:auto;
+  display:flex; flex-direction:column;
+}
+.bank-tab {
+  font:inherit; font-size:12px; text-align:left; cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between; gap:6px;
+  padding:6px 12px; border:0; border-left:2px solid transparent;
+  background:transparent; color:var(--ink-dim);
+}
+.bank-tab:hover { color:var(--accent); }
+.bank-tab[aria-selected="true"] {
+  border-left-color:var(--accent); background:var(--panel);
+  color:var(--accent); font-weight:600;
+}
+/* A filter set in a bank the reader is not looking at is exactly what a
+   one-at-a-time panel could hide, so each tab carries its own count. */
+.bank-tab .bcount {
+  font-family:var(--font-mono); font-size:9.5px; line-height:15px;
+  padding:0 5px; border-radius:8px; background:var(--accent);
+  color:var(--panel); font-weight:600;
+}
+.bankbody {
+  flex:1 1 auto; min-width:0; display:flex; flex-direction:column;
+  padding:9px 14px 12px;
+}
+.bankhead {
+  margin:0 0 8px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+}
+.bank-title {
+  font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
+  letter-spacing:.09em; color:var(--ink-dim); font-weight:600;
+}
+.bank-note { font-size:10.5px; color:var(--ink-faint); max-width:72ch; }
+/* The chips scroll inside the panel rather than lengthening it: the Boat bank
+   is 77 chips and the panel's cap is what keeps the table on screen. */
+.bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+.bank > span[id], .bank .nights-row {
+  display:flex; gap:5px; flex-wrap:wrap; align-items:center;
+}
+.nights-row .dim { font-size:11.5px; }
 
 button.chip {
   font:inherit; font-size:12px; cursor:pointer; padding:3px 10px;
@@ -363,31 +531,88 @@ input[type="number"] {
 
 table { border-collapse:separate; border-spacing:0; width:max-content; min-width:100%; }
 
+/* TWO TIERS.
+   The band names what the columns under it are about; the row under it is the
+   sort control. Only the second is focusable and only the second is read out
+   -- a band cell is a label, and a tab stop on a label is a stop that does
+   nothing. */
 thead th {
-  position:sticky; top:0; z-index:20; background:var(--panel);
+  position:sticky; z-index:20; background:var(--panel);
   font-family:var(--font-narrow);
-  font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.07em;
+  font-size:9.5px; font-weight:600; text-transform:uppercase; letter-spacing:.05em;
   color:var(--ink-dim); text-align:left; white-space:nowrap;
-  padding:7px 9px; border-bottom:1px solid var(--rule-strong); cursor:pointer;
+  padding:6px 8px 5px; border-bottom:1px solid var(--rule-strong); cursor:pointer;
   user-select:none;
 }
+/* The band sits at the top of the scroll box and the sort row directly under
+   it, so both stay put while the rows move. 21px is the band's own height; a
+   guessed offset here is a sort row that slides under the band it belongs to. */
+thead tr.band th { top:0; z-index:22; }
+thead tr:not(.band) th { top:21px; }
+
+thead tr.band th {
+  font-size:9px; letter-spacing:.16em; color:var(--ink-faint);
+  font-weight:600; padding:4px 8px 3px; cursor:default;
+  border-bottom:1px solid var(--rule); text-align:left;
+}
+thead tr.band th:hover { color:var(--ink-faint); }
 thead th:hover { color:var(--accent); }
-thead th .dir { color:var(--accent); font-weight:700; }
+thead th .dir { color:var(--accent); font-weight:700; font-size:8px; }
 /* The column being sorted on, named in the header rather than only arrowed. */
 thead th[data-k]:has(.dir) { color:var(--accent); }
 th.num, .num { text-align:right; }
 
-/* Where the money starts -- now Advertised, since the price columns read as a
-   bill: what was advertised, what nitrox costs, what you cannot avoid, what it
-   comes to. The one vertical rule in the table apart from the pinned group,
-   because it is the one place a reader needs telling that the columns have
-   changed subject. */
-thead th[data-k="base"], tbody td.money { border-left:1px solid var(--rule-strong); }
+/* THE BILL'S BAND, from the header down through every cell under it. The one
+   place in the table the accent is spent on anything but a number, because it
+   is the one place a reader needs telling that the columns have changed
+   subject -- and the vertical rule alone was doing that for twelve columns
+   that all looked alike. */
+thead tr.band th.band-bill {
+  background:var(--bill-head); color:var(--accent); text-align:right;
+  letter-spacing:.14em;
+}
+thead th.zone-bill { background:var(--bill); }
+tbody td.money, tbody td.nitrox, tbody td.mfees,
+tbody td.cost, tbody td.perdive { background:var(--bill); }
+thead th[data-k="base"], tbody td.money,
+thead tr.band th.band-bill { border-left:1px solid var(--bill-edge); }
+thead th[data-k="perdive"], tbody td.perdive { border-right:1px solid var(--bill-edge); }
+/* Hover, the mark and the sold-out treatment all outrank the band: it groups
+   columns, and a row the visitor is pointing at or has marked is a statement
+   about the row. Without these the five money cells keep the tint and the row
+   highlight stops halfway across. */
+tbody tr.row:hover td.money, tbody tr.row:hover td.nitrox,
+tbody tr.row:hover td.mfees, tbody tr.row:hover td.cost,
+tbody tr.row:hover td.perdive { background:var(--row-hover); }
+tbody tr.row.marked td.money, tbody tr.row.marked td.nitrox,
+tbody tr.row.marked td.mfees, tbody tr.row.marked td.cost,
+tbody tr.row.marked td.perdive,
+tbody tr.row.marked:hover td.money, tbody tr.row.marked:hover td.nitrox,
+tbody tr.row.marked:hover td.mfees, tbody tr.row.marked:hover td.cost,
+tbody tr.row.marked:hover td.perdive { background:var(--row-marked); }
 
 tbody td {
-  padding:5px 9px; border-bottom:1px solid var(--rule);
+  padding:5px 8px; border-bottom:1px solid var(--rule);
   white-space:nowrap; vertical-align:top;
 }
+
+/* The second fact in a cell that used to be a column of its own: the nights
+   under the dates, the guest count under the boat, the two harbours under the
+   trip. Quiet enough that the line above it is still what the eye reads down
+   the column, and present on every row of the three so a missing one is a
+   gap rather than a shorter cell. */
+.sub {
+  display:block; font-size:10px; line-height:1.3; color:var(--ink-faint);
+  font-family:var(--font-sans); font-weight:400; letter-spacing:0;
+  overflow:hidden; text-overflow:ellipsis;
+}
+td.when { font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+td.when .d-span { font-size:12px; }
+td.boat { font-weight:500; }
+td.boat .b-name {
+  display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+td.trip .t-name { font-weight:400; }
 /* The money block and the Seller column, tighter. A table sized to its
    content gives every column the width its single widest row needs -- for
    Nitrox, Mandatory fees, Total and Per dive that row is a two-seller one
@@ -400,14 +625,20 @@ thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
 thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
 tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
 tbody td.perdive, tbody td.source {
-  padding-left:6px; padding-right:6px;
+  padding-left:7px; padding-right:7px;
 }
 tbody tr.row td { transition:background-color .08s linear; }
 
 /* The number this site exists to show, and the only place the accent is spent
    inside the table. Everything else is ink, dim ink, or the one warm colour
    reserved for what lands later. */
-tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-spacing:-.01em; }
+tbody td.cost b { color:var(--accent); font-size:13.5px; font-weight:600; letter-spacing:-.01em; }
+/* The per-dive figure over the count it was divided by, for the same reason
+   Places stacks: the count is a label on the number rather than a second
+   value, and side by side the two set a column 93px wide for a figure that
+   needs 40. */
+td.perdive b { display:block; }
+td.perdive .dim { display:block; font-size:9.5px; line-height:1.3; }
 
 /* The advertised price and what was added, drawn to scale under the total:
    bar length compares down the column, the split compares within one row.
@@ -419,7 +650,12 @@ tbody td.cost b { color:var(--accent); font-size:14px; font-weight:600; letter-s
    a 3px graphic, and cost three rows of the twelve visible on a laptop. The
    bar is a second reading of the figure above it, so it belongs in that
    figure's space, not in a line of its own. */
-tbody td.cost { position:relative; }
+/* The split was absolutely positioned over the cell because it was the only
+   second line in the table and nine pixels a row was three rows of twelve. It
+   is not the only one any more -- the dates, the boat and the trip each carry
+   one -- so the row is two lines tall whatever this does, and out of flow it
+   was overlapping the total on a ranged row at any narrow width. In flow it
+   costs nothing and can wrap where it has to. */
 /* The two figures the total is the sum of, in the slot the bar had (#148).
    Out of flow for the reason above: measured, a block-level second line under
    the total added nine pixels to every row and cost three of the twelve rows
@@ -428,12 +664,16 @@ tbody td.cost { position:relative; }
    own colour, which is the one thing the bar's two segments said that the
    figures do not say by themselves. */
 .split {
-  position:absolute; right:9px; top:19px;
-  font-family:var(--font-mono); font-size:9.5px; line-height:1;
+  display:block;
+  font-family:var(--font-mono); font-size:9px; line-height:1.3;
+  letter-spacing:-.01em;
   color:var(--ink-faint); white-space:nowrap; cursor:help;
 }
 .split i { color:var(--later); font-style:normal; }
-tbody tr.row.alt { background:var(--row-alt); }
+/* No zebra. It was the only thing separating sixteen columns of one weight;
+   with the bill banded and every row two lines tall it is a third background
+   system arguing with the band and the mark, and the hairline under each row
+   does the tracking it was there for. */
 tbody tr.row:hover { background:var(--row-hover); }
 
 /* A row the visitor has marked, to keep their place.
@@ -450,7 +690,7 @@ tbody tr.row:hover { background:var(--row-hover); }
  * sliding beneath would show through -- and the edge bar on the first pinned
  * cell is what carries at a glance, including when the row is dimmed for being
  * sold out. */
-tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
+tbody tr.row.marked, tbody tr.row.marked:hover {
   background:var(--row-marked);
 }
 
@@ -462,7 +702,7 @@ tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
 /* The pinned columns: at twenty columns, when and on what is what identifies a
    row, and a row that scrolls away from its own dates and boat cannot be
    compared with anything. */
-.stick1, .stick2, .stick3, .stick4 {
+.stick1, .stick2 {
   position:sticky; z-index:10; background:var(--panel);
   overflow:hidden; text-overflow:ellipsis;
 }
@@ -473,39 +713,25 @@ tbody tr.row.marked, tbody tr.row.marked.alt, tbody tr.row.marked:hover {
   left:var(--st1);
   width:var(--st2); min-width:var(--st2); max-width:var(--st2);
 }
-.stick3 {
-  left:calc(var(--st1) + var(--st2));
-  width:var(--st3); min-width:var(--st3); max-width:var(--st3);
-}
-.stick4 {
-  left:calc(var(--st1) + var(--st2) + var(--st3));
-  width:var(--st4); min-width:var(--st4); max-width:var(--st4);
-}
-/* The rule that closes the pinned group sits on whichever column ends it --
-   including where the group is one column, which is what a phone pins. */
-.pins-4 .stick4, .pins-3 .stick3, .pins-2 .stick2, .pins-1 .stick1 {
+/* The rule that closes the pinned group sits on whichever column ends it. Two
+   now rather than four: Return and Guests are second lines inside these two,
+   so the group that has to hold still is 232px rather than 354. There is one
+   count and one rule -- `pinned()` returns 2 or, where the rows are cards, 0,
+   and a rule for a count it cannot return is edges drawn from a column that
+   is not pinned. */
+.pins-2 .stick2 {
   border-right:1px solid var(--rule-strong);
 }
-/* And a lighter one inside it, between when the trip runs and what it runs on.
-   Guests is a fact about the vessel -- how many people you are sharing a dive
-   deck with -- so it belongs on the boat's side of that line, not at the head
-   of the route columns where the pinned edge used to leave it. */
-.stick3 { border-left:1px solid var(--rule); }
-tbody tr.row.alt .stick1, tbody tr.row.alt .stick2,
-tbody tr.row.alt .stick3, tbody tr.row.alt .stick4 { background:var(--row-alt); }
-tbody tr.row:hover .stick1, tbody tr.row:hover .stick2,
-tbody tr.row:hover .stick3, tbody tr.row:hover .stick4 { background:var(--row-hover); }
+tbody tr.row:hover .stick1, tbody tr.row:hover .stick2 { background:var(--row-hover); }
 /* Where a mark is actually drawn. The pinned cells already paint their own
    background -- they have to, or the columns sliding beneath would show
    through -- so this is both the safe place to tint and the one that stays
    on screen however far right the table is scrolled. */
 tbody tr.row.marked .stick1, tbody tr.row.marked .stick2,
-tbody tr.row.marked .stick3, tbody tr.row.marked .stick4,
-tbody tr.row.marked:hover .stick1, tbody tr.row.marked:hover .stick2,
-tbody tr.row.marked:hover .stick3, tbody tr.row.marked:hover .stick4 {
+tbody tr.row.marked:hover .stick1, tbody tr.row.marked:hover .stick2 {
   background:var(--row-marked);
 }
-thead th.stick1, thead th.stick2, thead th.stick3, thead th.stick4 { z-index:25; }
+thead th.stick1, thead th.stick2 { z-index:25; }
 
 /* The control that opens the bill, at the start of the row and pinned with the
    columns that identify it.
@@ -539,7 +765,7 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
 /* A direction, not a site list. Reads as the weaker statement it is. */
 .region { color:var(--ink-faint); font-style:italic; }
 /* Not part of the number beside it, and must not read as though it were. */
-.plus { color:var(--later); font-weight:500; font-size:11px; }
+.plus { color:var(--later); font-weight:500; font-size:10px; }
 .dim { color:var(--ink-faint); }
 /* Deliberately not line-clamped. `-webkit-line-clamp` needs
    `display:-webkit-box`, which on a `<td>` replaces `display:table-cell` and
@@ -551,10 +777,30 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
    a suggestion the algorithm may ignore, and these two took 397px and 261px of
    a wide window between them -- enough on their own to push the Total off the
    right-hand edge. A preferred width the text can wrap inside binds. */
-.trip { white-space:normal; width:240px; min-width:190px; max-width:240px; }
+.trip { white-space:normal; width:158px; min-width:140px; max-width:164px; }
 .sites {
-  white-space:normal; width:180px; min-width:140px; max-width:180px;
-  color:var(--ink-dim); font-size:11px;
+  white-space:normal; width:112px; min-width:100px; max-width:116px;
+  color:var(--ink-dim); font-size:11px; line-height:1.3;
+}
+/* Two lines, and the rest on hover. The reefs are the one cell whose length
+   is the operator's rather than the format's -- DUNE Silky names eight -- so
+   unclamped it set the height of every row in the table from one of them.
+   Clamped on the span inside the cell and never on the cell: `-webkit-box`
+   on a `<td>` replaces `display:table-cell` and takes it out of the table
+   layout entirely, which is what rows of 96px looked like. The full list is
+   the span's own `title`. */
+td.sites > span {
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+/* One line, ellipsised, with the whole name on hover. A trip name is the
+   operator's own sentence -- "North Wrecks, Ras Mohammed, Tiran, Brothers &
+   Safaga" -- and wrapped it set the height of every row in the table from the
+   longest one in the fleet: 62px against 44, which is four rows of the
+   fourteen a laptop holds. Truncation is visible, so a cut name reads as cut;
+   a row 40% taller does not read as anything. */
+td.trip .t-name {
+  display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 /* The entry bar. Bounded for the same reason and in the same way as the two
    above: the phrase is at most "Advanced + 50 dives", which is 105px at this
@@ -563,9 +809,12 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
    qualifies the trip rather than pricing it -- the money is what this column
    must not compete with. */
 .entry-col {
-  white-space:normal; width:120px; min-width:100px; max-width:120px;
+  white-space:nowrap; width:78px; min-width:70px; max-width:78px;
   color:var(--ink-dim); font-size:11px;
 }
+/* The disagreement marker under the bar rather than beside it, so seventeen
+   short values are not sized by the two words that qualify some of them. */
+td.entry-col .varies { display:block; margin:1px 0 0; vertical-align:baseline; }
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -580,6 +829,12 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
   cursor:help; border-bottom:1px dotted currentColor;
 }
 .unstated.partial { color:var(--warn); }
+
+/* One seller per line. Two links side by side were 146px of a column whose
+   longest single link is 78 -- and they are two destinations rather than one
+   sentence, so a line each is what they are. */
+td.source, .cm.source { line-height:1.35; }
+td.source a { display:block; white-space:nowrap; font-size:11px; }
 
 .pill.open { color:var(--ok); }
 .pill.few { color:var(--warn); }
@@ -708,7 +963,7 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 /* The four figures the view opens on. Built like the masthead's `.stats`,
    because they are the same kind of thing -- a number and what it counts -- and
    a reader who has learned to read one should not have to learn the other. */
-.sale-strip { display:flex; gap:22px; flex-wrap:wrap; }
+.sale-strip { display:flex; gap:26px; flex-wrap:wrap; margin-top:8px; }
 .sale-fig { display:flex; flex-direction:column; gap:1px; }
 .sale-fig b {
   font-family:var(--font-mono); font-variant-numeric:tabular-nums;
@@ -718,8 +973,16 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
   letter-spacing:.09em; color:var(--ink-faint);
 }
-.deals-body { padding:0; }
-.deals-note { margin:0 0 10px; font-size:12px; max-width:74ch; line-height:1.5; }
+.deals-body { padding:0 18px; }
+.deals-note { margin:0 0 10px; font-size:11.5px; max-width:74ch; line-height:1.55; }
+/* The section rules, the same ones the history view uses. The sale view is
+   two sections -- the sales, then the trips on sale -- and they were two
+   micro-caps labels of the same weight as the column headings under them. */
+.deals-body h4 {
+  font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
+  letter-spacing:.11em; color:var(--ink-faint); font-weight:600;
+  margin:0 0 8px; padding-bottom:5px; border-bottom:1px solid var(--rule);
+}
 
 /* Scrolls inside itself rather than widening the page: seven columns on a
    phone is wider than the screen, and the body must never scroll sideways.
@@ -729,7 +992,7 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    the panel and the two tables came out different widths (#147). A table that
    is a table takes the `width:100%` below, spreads its columns across the
    room, and matches the other one by construction. */
-.deals-scroll { overflow-x:auto; margin-bottom:14px; max-width:100%; }
+.deals-scroll { overflow-x:auto; margin-bottom:20px; max-width:100%; }
 .deals-table {
   width:100%; border-collapse:collapse; font-size:12px;
 }
@@ -741,14 +1004,26 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    the moment anybody scrolled — and it offered a sort that does not exist. */
 .deals-table th {
   position:static; z-index:auto; cursor:default;
-  text-align:left; padding:4px 12px 4px 0; white-space:nowrap;
-  font-family:var(--font-narrow); font-size:10px; text-transform:uppercase;
-  letter-spacing:.07em; color:var(--ink-faint); border-bottom:1px solid var(--rule);
+  text-align:left; padding:5px 10px 5px 0; white-space:nowrap;
+  font-family:var(--font-narrow); font-size:9.5px; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--ink-dim);
+  border-bottom:1px solid var(--rule-strong);
 }
-.deals-table th:hover { color:var(--ink-faint); }
+.deals-table th:hover { color:var(--ink-dim); }
 .deals-table td {
-  padding:4px 12px 4px 0; border-bottom:1px solid var(--rule); vertical-align:top;
+  padding:5px 10px 5px 0; border-bottom:1px solid var(--rule); vertical-align:top;
 }
+.deals-table tbody tr:hover td { background:var(--row-hover); }
+/* What a sale is worth, on the bill's own band. The trips table spends that
+   tint on the five columns that add up to what you pay; here it is the two
+   that say how much came off, and it is the same claim about the same money
+   -- so it is found the same way rather than by reading the header. */
+.deals-table .d-now, .deals-table .d-was, .deals-table .d-off {
+  background:var(--bill); padding-left:8px;
+}
+.deals-table .d-off { font-weight:600; }
+.deals-table tbody tr:hover .d-now, .deals-table tbody tr:hover .d-was,
+.deals-table tbody tr:hover .d-off { background:var(--row-hover); }
 .deals-table .d-when { white-space:nowrap; font-family:var(--font-mono); }
 .deals-table .d-boat { color:var(--ink); font-weight:600; }
 .deals-table .d-offer { color:var(--ink-dim); }
@@ -773,27 +1048,35 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    that no boat here joins to, which are named for the same reason -- a count
    cannot tell a Caribbean boat from an unpaired Egyptian one. */
 .deals-coverage {
-  margin:0 0 10px; font-size:11.5px; color:var(--ink-faint); max-width:74ch;
+  margin:0 0 12px; font-size:11px; color:var(--ink-faint); max-width:80ch;
   line-height:1.6;
 }
 .deals-coverage .cov { border-bottom:1px dotted var(--rule); cursor:help; }
 .deals-coverage .cov-sep { border:0; }
 
-/* The markdown, beside the price it comes off. Deliberately quiet: it is a
+/* The markdown, under the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows
    carry one — a loud treatment at that density is a page of shouting. */
 .sale-mark {
-  margin-left:6px; font-size:10px; font-weight:600; color:var(--ok);
+  font-size:10px; font-weight:600; color:var(--ok);
   font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
 }
+/* Where those markers live: a line of their own under the advertised figure.
+   Beside it they were the width of the column on every row -- see the note
+   where they are built. */
+td.money .marks {
+  display:block; line-height:1.3; margin-top:1px;
+  display:flex; gap:6px; justify-content:flex-end; align-items:baseline;
+}
+td.money .marks .varies { margin-left:0; vertical-align:baseline; }
 
 .deals-body h4 {
   margin:0 0 6px; font-family:var(--font-narrow); font-size:10px;
   text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
 }
 /* The second and third headings inside the panel need air above them; the
-   first sits under the summary's own rule and would be pushed off it. */
-.deals-body h4 ~ h4, .deals-moved h4 { margin-top:16px; }
+   first sits under the view's own masthead and would be pushed off it. */
+.deals-body h4 ~ h4, .deals-moved h4 { margin-top:26px; }
 .deals-changes { margin:0 0 10px; padding-left:18px; font-size:12px; line-height:1.6; }
 .deals-changes .d-new { color:var(--ok); }
 .deals-changes .d-gone { color:var(--sold); }
@@ -847,101 +1130,131 @@ a { color:var(--accent); }
    NARROW SCREENS
    ---------------------------------------------------------------------------
    The page is an app shell: body does not scroll, and the table gets whatever
-   vertical space the chrome above it leaves. On a laptop that was 900 − 403px
-   of masthead, toolbar and filters. On a 390×844 phone the chrome alone came
-   to 1069px, so what was left over was nothing: the first row of prices sat
-   below the fold with zero rows visible, and True cost was off the right-hand
-   edge as well. Every rule here is spent buying that space back.
+   vertical space the chrome above it leaves. Folding the filters into a
+   drawer at every width bought most of what used to be spent here -- the
+   chrome above the table is 96px on a laptop against 373. What is left is the
+   rail lying down, and the point below which a row cannot be a row of columns
+   at all.
    =========================================================================== */
-.filters-toggle { display:none; }
-/* A column holding the toolbar and the banks, so the fold below 1000px has one
-   box to open rather than a rule per control. Above it the wrapper does
-   nothing: a flex column inside a flex column, laying its two children out
-   exactly where they were as direct children of the pane. `flex:none` because
-   that is what `body > *` used to say for them before either moved. */
-.filterpanel { display:flex; flex-direction:column; flex:none; min-width:0; }
 
-/* Two breakpoints, because the page has two different problems.
+/* The cards, and which of the two hosts is drawn.
  *
- * Measured chrome height above the table, at 900px tall:
- *
- *     390px  222px      1024px  454px
- *     760px  222px      1200px  424px
- *     768px  596px      1440px  373px
- *
- * The cliff at 768 is not the columns -- True cost is on screen from 390px up.
- * It is the three filter banks wrapping to three lines each, which costs 8 of
- * the rows a 900px-tall window could hold. So folding the banks away starts at
- * 1000px, where they first stop fitting on one line each, while the column
- * reorder and the narrow sticky widths wait for an actually narrow screen.
- */
-@media (max-width: 1000px) {
+   Above 760 the table; below it, the same rows as cards. What this replaced
+   was the table with columns folded off the front of the row until the Total
+   fit, and the fold was answering the wrong question: the money only stayed
+   on screen by hiding the boat behind it, and the widths that decided which
+   columns went are set by whichever rows are on screen -- so the fold moved
+   when a filter changed and the reader lost a column for reasons they could
+   not see (#150).
 
-  .filters-toggle {
-    display:block; width:100%; text-align:left; font:inherit; font-size:11px;
-    text-transform:uppercase; letter-spacing:.09em; color:var(--ink-faint);
-    background:var(--panel); border:0; border-bottom:1px solid var(--rule);
-    padding:9px 12px; cursor:pointer;
+   A card has no columns to fold. Both hosts are always filled, so a rotation
+   crosses the breakpoint with no redraw and Ctrl+F finds either. */
+.cards { display:none; }
+
+@media (max-width: 760px) {
+  .shell > table { display:none; }
+  .cards { display:flex; flex-direction:column; gap:7px; padding:8px 10px 18px; }
+
+  .card {
+    background:var(--panel); border:1px solid var(--rule); border-radius:3px;
+    padding:7px 10px 6px; display:flex; flex-direction:column; gap:3px;
   }
-  .filters-toggle::after { content:" ▸"; color:var(--accent); }
-  .filters-toggle.active { color:var(--accent); }
-  body.filters-open .filters-toggle::after { content:" ▾"; }
-  /* The control that opens the panel, above the panel. It follows the toolbar
-     in the markup because on a laptop there is no panel and the toolbar comes
-     first; here the toolbar is *inside* what this opens, so it has to lead. */
-  .filters-toggle { order:-1; }
-
-  /* Everything that filters, folded away together. The banks alone used to
-     fold and the toolbar stayed up -- 216px of it at 390 and 237 at 360, over
-     a table of 403 and 156 -- so the fold saved a screen of buttons and left a
-     screen of buttons behind it. */
-  .filterpanel { display:none; }
-
-  /* Bounded, and scrolls as one box: opened, the toolbar and the four banks
-     are well over a phone screen between them, and the page itself does not
-     scroll -- so whatever did not fit was simply unreachable, the Boat bank
-     first. The cap is the whole panel rather than each part's share of it, so
-     unfolding the dive sites lengthens what scrolls inside the box instead of
-     pushing the bank below it off the bottom edge.
-
-     52vh rather than the 40 the banks had alone: the box holds the toolbar as
-     well now, and a cap that fit four banks leaves the reader scrolling past
-     the month chips to reach the first one. Still short of the screen, so the
-     table is never entirely displaced by the controls over it. */
-  body.filters-open .filterpanel {
-    display:flex;
-    max-height:52vh; overflow-y:auto; overscroll-behavior:contain;
-    /* The most it may take, not what it takes: `flex:0 1` lets it give way
-       when the chrome above it has already used the screen. A 768x600 window
-       has little under the masthead, the rail and the fold, and a panel that
-       insisted on its share pushed its own last rows past the bottom edge --
-       where scrolling the box cannot bring them back, because it is the box
-       that is off-screen. */
-    flex:0 1 auto; min-height:0;
-    /* Its contents' own rules scroll with it, so the last one is no longer the
-       edge of anything: the box needs a line of its own where it stops. */
-    border-bottom:1px solid var(--rule);
+  .card-head { display:flex; align-items:flex-start; gap:10px; }
+  .card-id { flex:1 1 auto; min-width:0; }
+  .card-id .b-name { font-size:14px; font-weight:600; }
+  .card-id .d-span {
+    font-family:var(--font-mono); font-variant-numeric:tabular-nums;
+    font-size:11.5px; color:var(--ink-dim);
   }
-  /* And the table gives way first. Both are shrinkable, and flex shares a
-     shortfall in proportion to what each asked for -- the table asks for its
-     whole 4,000px of rows, so it would have taken 96% of the panel with it
-     and left an 11px slot. Measured from zero it asks for nothing, and the
-     panel is bounded by the room actually left instead. */
-  body.filters-open .shell { flex-basis:0; }
+  /* The money, in its own corner, at every width. Nothing folds it away and
+     nothing has to be measured to keep it there -- which is the whole reason
+     the rows are cards here. */
+  .card-money {
+    flex:none; text-align:right; background:var(--bill);
+    border:1px solid var(--bill-edge); border-radius:2px; padding:3px 7px 4px;
+    max-width:58%;
+  }
+  .card-money b { color:var(--accent); font-size:15px; font-weight:600; }
+  .card-money .split { font-size:9.5px; }
+  /* The cells keep their table classes so the colours and the panel triggers
+     come across -- and those classes carry the table's widths, which are the
+     one thing that must not. A 116px reef cell in a 370px card set the sites
+     three lines deep and the trip two. */
+  .card-trip, .card-sites {
+    width:auto; min-width:0; max-width:none; white-space:normal;
+  }
+  .card-trip { font-size:12.5px; line-height:1.35; }
+  .card-trip .t-name {
+    display:block; font-weight:500; white-space:normal; overflow:visible;
+  }
+  .card-trip .sub { display:inline; }
+  .card-sites { font-size:11px; color:var(--ink-dim); line-height:1.35; }
+  .card-sites > span {
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  /* The boat, then everything that identifies the sailing on one line under
+     it: four stacked sub-lines is a card that shows two departures a screen. */
+  .card-id .b-name { display:block; }
+  .card-id .sub, .card-id .d-span { display:inline; }
+  .card-id .sub::before, .card-id .d-span::before {
+    content:" · "; color:var(--rule-strong);
+  }
+  .card-id .b-name + .sub::before { content:""; }
+  .card-meta {
+    display:flex; flex-wrap:wrap; align-items:center; gap:3px 11px;
+    margin-top:2px; padding-top:5px; border-top:1px solid var(--rule);
+    font-size:11px; line-height:1.3;
+  }
+  /* Stacked in the table because a column is narrow; side by side here
+     because a card's meta line is not. */
+  .card .berths { flex-direction:row; gap:.3em; align-items:baseline; }
+  .card .perdive b, .card .perdive .dim { display:inline; }
+  .card .marks { display:inline-flex; margin:0; }
+  /* Each fact keeps the class its table cell had, so the panel triggers, the
+     colours and the sold-out treatment all arrive without a second set of
+     rules. What is added is the label, because a card has no column heading
+     over it to say which number this is. */
+  .cm { display:inline-flex; align-items:baseline; gap:5px; }
+  .cm i {
+    font-style:normal; font-family:var(--font-narrow); font-size:9px;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
+  }
+  .cm.source { margin-left:auto; display:flex; gap:10px; }
+  /* Comfortably tappable: hover does not exist here, and this page is built
+     to be read on a phone in a dive shop. */
+  .cm.source a { padding:4px 0; }
+  .card .berths, .card .fees-open, .card .entry-open {
+    width:auto; display:inline-flex; padding:3px 0;
+  }
+  .card .berths .caret, .card .fees-open .caret, .card .entry-open .caret {
+    display:none;
+  }
+  .card.gone { border-color:var(--sold); }
+
+  h1 { font-size:16px; }
+  .masthead { padding:10px 12px; gap:8px 16px; }
+  .stats { gap:14px; margin-left:0; }
+  .stat b { font-size:13px; }
+
+  .toolbar { padding:7px 10px; gap:6px 10px; }
+  /* The build line is a laptop convenience; on a phone it is a second row of
+     chrome above the prices. */
+  .tgroup.meta-right #metaLine { display:none; }
+  .tsep { display:none; }
+  .activebar { padding:5px 10px; }
+  .filterpanel { max-height:52vh; }
+  .bankpick { width:120px; }
+  .bankbody { padding:9px 10px 12px; }
+  .site-footer { max-height:60vh; }
 }
 
-/* The rail lies down, and it does so here rather than with the rest of the
-   phone layout.
+/* The rail lies down before the cards arrive.
  *
- * Standing up it takes 172px out of the width of everything beside it, and at
- * 768px that is what the toolbar was using to keep its chips on two lines: the
- * bank rewrapped onto a third and cost 49px of table -- more than the strip
- * costs, and a row of prices with it. Measured at 900 the toolbar has the room
- * either way, so this is where the trade turns over.
- *
- * The notes go with it: three phrases of guidance in a strip with room for
- * three words each.
- */
+ * Standing up it takes 172px out of the width of everything beside it, which
+ * at 900px is what the toolbar is using to keep its controls on one line. The
+ * notes go with it: three phrases of guidance in a strip with room for three
+ * words each. */
 @media (max-width: 900px) {
   .workspace { flex-direction:column; }
   .rail {
@@ -959,62 +1272,20 @@ a { color:var(--accent); }
   .rail-note { display:none; }
 }
 
-@media (max-width: 760px) {
-  h1 { font-size:16px; }
-  .masthead { padding:10px 12px; gap:8px 16px; }
-  .stats { gap:14px; margin-left:0; }
-  .stat b { font-size:13px; }
-
-  .toolbar, .filterbar { padding:8px 12px; }
-  .toolbar { gap:6px 12px; }
-  /* Reset and the build line are a laptop convenience; on a phone they are a
-     second row of chrome above the prices. Reset still reachable at the end
-     of the toolbar. */
-  .tgroup.meta-right #metaLine { display:none; }
-  .filters-toggle { padding:9px 12px; }
-
-  /* One pinned column here -- the depart date, and nothing else. Depart, Boat
-     and Guests pinned held 231px of a 390px screen still while the sixteen
-     columns this page exists to compare were dragged through the 159 that
-     were left. See `pinned()` for why the date is the one that stays. */
-  :root { --st1:66px; }
-
-  /* Boat and Guests scroll here, but they keep the widths they had while they
-     were pinned. The widths were never about being sticky: they are what puts
-     the Total whole inside 390px in the default unscrolled view -- 24 + 66 +
-     96 + 45 in front of a 155px price column lands its right edge at 386. A
-     boat name is 140px unconstrained, which pushes the number this page
-     exists to publish off the edge of the screen it is most often read on,
-     and does it silently: the row still renders. */
-  .boat, .guests {
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+/* The drawer stacks below 620: a 150px picker beside a chip field leaves the
+   field narrower than the longest boat name in the fleet. */
+@media (max-width: 620px) {
+  .filterpanel { flex-direction:column; }
+  .bankpick {
+    width:auto; flex-direction:row; overflow-x:auto; padding:0;
+    border-right:0; border-bottom:1px solid var(--rule);
   }
-  .boat { width:96px; min-width:96px; max-width:96px; }
-  .guests { width:45px; min-width:45px; max-width:45px; }
-
-  /* 6px, not 7. Guests moved in front of the money here to sit with the boat,
-     and its 49px put the Total's right edge 4px past a 390px screen -- which
-     clipped the "+ tips" that says the total is not the whole bill. Two pixels
-     a side on the one unpinned column ahead of the price, and two off the
-     price column's own padding, is the whole difference. */
-  tbody td, thead th { padding:6px 5px; }
-  /* One line each, ellipsised, on this screen only. Both columns sit behind
-     the horizontal scroll here, yet their wrapping still set the height of
-     every row: rows ran 35 to 88px and the tallest of them pushed six rows of
-     prices off a screen that had ten. The ellipsis is visible, so a truncated
-     name reads as truncated rather than as the whole of it. */
-  .trip, .sites, .entry-col {
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    min-width:0; max-width:170px;
+  .bank-tab {
+    border-left:0; border-bottom:2px solid transparent; white-space:nowrap;
   }
-  /* Comfortably tappable without making the row taller than it has to be. */
-  /* "DEPART ▲" needs 74px of the 66 the pinned date column has here, and a
-     header that reads "DEPAR…" is worse than a slightly smaller one. */
-  thead th { font-size:9px; letter-spacing:.04em; }
-  /* Cell padding is 5px here, not 9, and the bar has to end where the number
-     above it ends. */
-  .split { right:5px; }
-  .site-footer { max-height:60vh; }
+  .bank-tab[aria-selected="true"] {
+    border-left-color:transparent; border-bottom-color:var(--accent);
+  }
 }
 
 /* The history view: the last refresh's report and the files behind it.
@@ -1104,10 +1375,23 @@ a { color:var(--accent); }
 .berths .n.low  { color: var(--warn); }
 .berths .n.many { color: var(--ok); }
 .berths:hover .n, .berths[aria-expanded="true"] .n { color: inherit; }
-.berths .lbl { font-family: var(--font-sans); font-size: .82em; color: var(--ink-faint); }
+/* The count over its word rather than beside it. Side by side, "20 aboard"
+   and "0 at this price" sized the column at 101px for a figure that needs 30
+   -- and the word is a label on the number rather than a second value, which
+   is what stacking says. */
+.berths { flex-direction: column; gap: 0; align-items: flex-end; }
+.berths .lbl {
+  font-family: var(--font-sans); font-size: .78em; color: var(--ink-faint);
+  line-height: 1.25;
+}
 .berths .caret, .fees-open .caret, .entry-open .caret {
   margin-left: auto; font-size: .7em; opacity: 0;
 }
+/* Gone, not moved. Stacked there is no row for `margin-left:auto` to push it
+   along, so it took a third line of its own on all 1,122 rows -- 13px of row
+   height for a glyph at `opacity:0`. The dashed underline that resolves on
+   hover is the affordance here, and it is the same one the other two use. */
+.berths .caret { display: none; }
 .berths:hover .caret, .berths[aria-expanded="true"] .caret,
 .fees-open:hover .caret, .fees-open[aria-expanded="true"] .caret,
 .entry-open:hover .caret, .entry-open[aria-expanded="true"] .caret { opacity: 1; }

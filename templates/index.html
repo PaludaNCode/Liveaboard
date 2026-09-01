@@ -67,6 +67,7 @@
      something else. -->
 <section class="pane history-pane" id="historyPane" tabindex="-1" hidden>
   <div class="history-body">
+    <div class="view-top">
     <h2>What changed, refresh by refresh</h2>
     <p class="history-lead">
       One entry per refresh &mdash; departures added, fares moved, berths sold
@@ -79,6 +80,7 @@
       per seller: those are diffed between that seller&rsquo;s last two
       readings rather than between two commits, so each carries its own date.
     </p>
+    </div>
     __CHANGES__
     <!-- The discount moves, and the reason they sit here as their own blocks
          rather than inside the report above. That report is a diff between two
@@ -89,6 +91,7 @@
          were drawn in the sale panel, which left one page reporting refresh
          news in two places (#146). -->
     <div id="saleMoves"></div>
+
     <h3>The data itself</h3>
     <p>
       Everything on this page, in files you can keep. A trip whose operator
@@ -113,11 +116,13 @@
      scrolls as one and opens with what it is. -->
 <section class="pane sale-pane" id="salePane" tabindex="-1" hidden>
   <div class="sale-body">
+    <div class="view-top">
     <h2>What is on sale</h2>
     <!-- A div and not a `p`: the strip drawn into it is a flex row of figures,
          and a div inside a paragraph is markup the parser would have closed
          early if this were not built by script. -->
     <div class="sale-lead" id="dealsLine"></div>
+    </div>
     <div class="deals-body" id="dealsBody"></div>
   </div>
 </section>
@@ -130,36 +135,39 @@
   <h2 class="view-heading">Every departure, priced whole</h2>
 
 
-<!-- Narrow screens only, and it folds away *everything* that filters.
-     The banks alone were a screen and a half of buttons on a phone; the
-     toolbar above them was another 216px at 390 and 237 at 360, against a
-     table of 403 and 156. Folding half the controls left the other half
-     holding the same ground, so the page still opened on more filter than
-     evidence. One panel, one control to open it, and the table gets the room.
+<!-- ONE LINE, AND A DRAWER.
+     What was here was five chip banks, always open: 270px of controls above
+     the first row on a page whose job is showing rows. They fold into
+     #filterPanel now -- at every width, not only under 1000px, because the
+     argument was never about small screens. A laptop spent the same quarter
+     of its window on filters nobody had chosen yet.
 
-     `order:-1` in the stylesheet, because this sits after the toolbar in the
-     markup and has to sit above it on screen: the control that opens a panel
-     belongs at the panel's top edge, and moving it in the DOM would put it
-     ahead of the toolbar on a laptop, where there is no panel and no fold.
-
-     Untouched above 1000px, where all of it fits. -->
-<button type="button" class="filters-toggle" id="filtersToggle"
-        aria-expanded="false" aria-controls="filterPanel">Filters</button>
-
-<div class="filterpanel" id="filterPanel">
+     What stays out is what changes the table's numbers rather than its rows
+     (the two Include switches), the season, and the two chips a reader
+     reaches for constantly. Everything else is one press away and says how
+     many of it are on. -->
 <div class="toolbar">
+  <button type="button" class="filters-btn" id="filtersToggle"
+          aria-expanded="false" aria-controls="filterPanel">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+         stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 4h12M4.5 8h7M6.5 12h3"/></svg>
+    <span id="filtersLabel">Filters</span>
+    <span class="fcount" id="filtersCount" hidden></span>
+    <span class="fcaret" aria-hidden="true">▾</span>
+  </button>
+
+  <span class="tsep" aria-hidden="true"></span>
+
   <div class="tgroup">
     <span class="tlabel">Include</span><span id="toggles"></span>
   </div>
-  <div class="tgroup">
-    <span class="tlabel">Month</span><span id="months"></span>
-  </div>
-  <div class="tgroup">
-    <span class="tlabel">Nights</span>
-    <input id="nmin" type="number" inputmode="numeric" aria-label="Fewest nights">
-    <span class="dim">to</span>
-    <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
-  </div>
+
+  <span class="tsep" aria-hidden="true"></span>
+
+  <div class="tgroup"><span id="months"></span></div>
+
+  <span class="tsep" aria-hidden="true"></span>
+
   <div class="tgroup">
     <!-- Hidden until app.js finds a stated sold-out, and carrying the count
          of what it removes once it does -- the same rule the On sale chip
@@ -174,103 +182,75 @@
          a control that does nothing dressed as one that does. -->
     <button type="button" class="chip" id="onSale" aria-pressed="false" hidden>On sale</button>
   </div>
-  <!-- A line of its own, always. Every other group here is one control; this
-       is a bank of chips whose width depends on how many sellers there are and
-       what they are called, so where it landed was decided by whatever sat
-       beside it: row two at 1440 and 1280, row two *sharing* with Hide sold
-       out at 900, row three at 768, its own line again on a phone. On a page
-       where the toolbar's height comes straight out of the table's, a group
-       that lands somewhere new at every width is a table that is a different
-       size at every width for no reason a reader can see.
 
-       A break rather than `flex-basis:100%` on the group itself, because that
-       would push Reset and the build line onto a row of their own too, and
-       they are not a filter -- they belong at the end of whatever row has
-       space. This only says where the bank starts. -->
-  <span class="trow-break" aria-hidden="true"></span>
-  <!-- Who sells the sailing. Chips rather than a select, like every other
-       filter here, and three states because there are three: both sites list
-       it, only liveaboard.com does, or only PADI Travel does. Both are named,
-       and named as the Seller column names them: "here" asked the reader to
-       work out which of the two sites this page is, and it is neither. The
-       PADI-only case is __PADI_ONLY__ rows and had no way to be found before -- the
-       column that named it was dropped when Seller took over the job of
-       linking both sellers. -->
-  <div class="tgroup">
-    <span class="tlabel">Sold by</span>
-    <span id="sellers"></span>
-  </div>
-  <div class="tgroup">
-    <button type="button" class="link-button" id="reset">Reset</button>
-  </div>
   <div class="tgroup meta-right">
     <span id="metaLine"></span>
   </div>
 </div>
 
+<!-- What is switched on, said once and on screen.
+     A drawer that hides an active filter is a table quietly answering a
+     narrower question than the one it is showing, and the count on the button
+     alone says how many rather than which. Each pill drops its own filter, so
+     undoing one no longer means opening the drawer to hunt for the chip that
+     did it. Drawn only when something is on. -->
+<div class="activebar" id="activeBar" hidden>
+  <span class="tlabel">Filtering on</span>
+  <span id="activePills"></span>
+  <button type="button" class="link-button" id="reset">Clear all</button>
+</div>
 
-<!-- One scroll box, not three. Folded open on a phone the three banks came
-     to more than a screen between them -- and each carried its own cap and its
-     own scrollbar, so the overflow went to the *page*, which does not scroll:
-     with the dive sites unfolded the Boat bank's last chips sat below the
-     bottom edge with no way to reach them. Capped and scrolled here instead,
-     the cap is the panel's whole height however tall its banks are, and every
-     chip is reachable by scrolling the panel the reader is already looking at. -->
-<div class="filterbanks">
-  <div class="filterbar">
-    <span class="tlabel">Departs from</span>
-    <span id="ports"></span>
-  </div>
-
-  <div class="filterbar">
-    <span class="tlabel">Dive sites</span>
-    <span id="sites"></span>
-  </div>
-
-  <!-- The vessel. A filter, deliberately not a ranking: it shows everything one
-       boat runs across the season, which is the question a diver who has settled
-       on a boat actually asks. This replaced a filter on the operating company —
-       that answered a question asked far less often, and a company with six
-       boats returned six boats' worth of rows with no way to tell them apart.
-       The operator was left reachable through the search box instead, and that
-       box has since gone too — it was a second way to ask what the chips ask,
-       costing a redraw on every keystroke, and the one question it answered
-       alone was the company. Scoring operators against each other was tried and
-       removed before either: it read as a league table and contradicted the
-       total beside it.
-       A diver picks the boat, and the company is off the page altogether: its
-       name stopped being serialised to every visitor once it was clear nothing
-       had printed it since the filter went, and the count under these filters
-       ("46 operators") went with it. -->
-  <div class="filterbar">
-    <span class="tlabel">Boat</span>
-    <span id="boats"></span>
-  </div>
-
-  <!-- The certification and logged dives a trip demands, as one chip per bar.
-       Ordered least demanding to most, which is the one bank here that is not
-       ordered by how many rows carry it: a port has no order of its own and a
-       bar does, and the reader is going along this bank looking for the last
-       chip they still clear. Sorted by popularity it opened on "Advanced + 50
-       dives" with "Open Water" fourth, which reads as a list of common options
-       rather than as a ladder.
-
-       One value rather than two controls, because it is one question. Filtered
-       on the level alone, a diver who holds Advanced clears every "Advanced"
-       chip and is still turned away at the dock by the 50 logged dives half of
-       them also ask for. -->
-  <div class="filterbar">
-    <span class="tlabel">Entry bar</span>
-    <span id="entry"></span>
+<!-- The drawer. A bank picker down the side rather than five banks stacked,
+     because the banks are not the same size: six ports fit a line and 77 boats
+     do not, and stacking them made the panel's height the sum of the longest
+     of each. One at a time, the panel is the height of the bank you asked for,
+     and the picker carries a count per bank so a filter set in one you are not
+     looking at is still visible. -->
+<div class="filterpanel" id="filterPanel" hidden>
+  <nav class="bankpick" id="bankPick" aria-label="Filter banks"></nav>
+  <div class="bankbody">
+    <p class="bankhead">
+      <span class="bank-title" id="bankTitle"></span>
+      <span class="bank-note" id="bankNote"></span>
+    </p>
+    <div class="bankwrap">
+      <div class="bank" data-bank="ports"><span id="ports"></span></div>
+      <div class="bank" data-bank="sites"><span id="sites"></span></div>
+      <div class="bank" data-bank="boats"><span id="boats"></span></div>
+      <div class="bank" data-bank="entry"><span id="entry"></span></div>
+      <!-- Who sells the sailing. Chips rather than a select, like every other
+           filter here, and three states because there are three: both sites
+           list it, only liveaboard.com does, or only PADI Travel does. Both
+           are named, and named as the Seller column names them: "here" asked
+           the reader to work out which of the two sites this page is, and it
+           is neither. The PADI-only case is __PADI_ONLY__ rows and had no way
+           to be found before -- the column that named it was dropped when
+           Seller took over the job of linking both sellers. -->
+      <div class="bank" data-bank="sellers"><span id="sellers"></span></div>
+      <div class="bank" data-bank="nights">
+        <span class="nights-row">
+          <span class="dim">from</span>
+          <input id="nmin" type="number" inputmode="numeric" aria-label="Fewest nights">
+          <span class="dim">to</span>
+          <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
+          <span class="dim">nights</span>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
-</div><!-- /#filterPanel -->
 
+<!-- Two hosts, one drawn at a time by the stylesheet: the table, and the
+     same rows as cards for a screen with no room for columns. Both are always
+     filled -- see draw() -- so a phone rotated to landscape crosses the
+     breakpoint with no redraw, and Ctrl+F on a laptop still finds a boat the
+     other layout would have held. -->
 <main class="shell">
   <table>
     <thead id="head"></thead>
     <tbody id="body"></tbody>
   </table>
+  <div class="cards" id="cards"></div>
 </main>
 
 </div><!-- /#tablePane -->
@@ -325,7 +305,7 @@
         PADI Travel. It is not read from the &ldquo;20% Off&rdquo; some
         operators write into a trip name; that agrees with it everywhere it
         appears, and misses the sailings discounted without one. Hover it for
-        what the fare is down from and who says so. The <b>On sale</b> filter
+        what the fare is down from and who says so. The <b>On sale</b> chip
         shows only these. A markdown is what a seller claimed on the day the
         booking pages were read, and can end overnight.
       </p>
@@ -360,7 +340,7 @@
         why it is in the total rather than beside it.
       </p>
       <p>
-        The two switches above are the exception, and both start <strong>on</strong>:
+        The two switches on the toolbar are the exception, and both start <strong>on</strong>:
         rental gear and nitrox are in this column until you say otherwise,
         because that is what most visitors will actually be charged. Turn either
         off &mdash; you own a set, you breathe air &mdash; and it leaves the
@@ -554,8 +534,8 @@
         discloses less as the cheaper one. Where both sell a sailing, the
         <b>Seller</b> column links each of them, so either price can be checked
         at the place that published it. On the __PADI_ONLY__ sailings only PADI lists it
-        links PADI alone and says so, and the <b>Sold by</b> filter above the
-        table is how you narrow to any of the three cases.
+        links PADI alone and says so, and the <b>Sold by</b> bank in the Filters
+        drawer is how you narrow to any of the three cases.
       </p>
       <p>
         They differ more than you would expect for one cabin on one boat on one
@@ -587,8 +567,8 @@
       <h3>Entry requirements</h3>
       <p>
         The <b>Entry bar</b> column is the certification and the logged dives
-        you need before anyone will take your booking, and the filter above the
-        table has one chip per bar, least demanding first. It is a safety
+        you need before anyone will take your booking, and the Entry bar
+        bank in the Filters drawer has one chip per bar, least demanding first. It is a safety
         requirement stated by the operator, so it is never softened here and
         never inferred where nothing was stated &mdash; every trip in this
         season states one, so the column never has to guess.

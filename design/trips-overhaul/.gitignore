@@ -1,0 +1,4 @@
+# The seeded canvas: a 2 MB editor payload that seed-canvas.mjs rebuilds from
+# the artboards beside it. Committing it would put the editor's own code in
+# the price history.
+liveaboard-trips-overview.html
