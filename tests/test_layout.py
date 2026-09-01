@@ -44,6 +44,12 @@ SIZES = [(1440, 900), (1280, 800), (900, 800), (768, 600), (390, 844), (360, 640
 # stopped being the answer on a page whose whole subject is the rows.
 TABLE_FLOOR = 150
 
+# Every window a phone might be, and not only the two in SIZES: the fold that
+# keeps the Total on screen is a boundary, and a boundary is exactly what a
+# sample of two misses. 386 and 419 sat either side of the one that shipped
+# broken (#150).
+PHONE_WIDTHS = [320, 360, 375, 385, 386, 390, 393, 402, 414, 419, 430]
+
 MEASURE = """() => {
   const box = s => {
     const e = document.querySelector(s);
@@ -127,6 +133,109 @@ class TestTheViewsAtEverySize(unittest.TestCase):
 
     def measure(self, page) -> dict:
         return page.evaluate(MEASURE)
+
+    # -- the money is on screen ----------------------------------------------
+
+    def test_the_total_is_on_screen_without_scrolling(self) -> None:
+        """The one number this page exists to publish, at rest, on a phone.
+
+        The whole phone column order exists for this and it did not hold: the
+        Total's right edge landed at 420 on a 390px screen and 375 on a 360px
+        one, so 360, 390, 393, 402 and 414 all lost it -- most phones in use
+        (#150). It failed exactly as the ordering's own comment says it would:
+        the row still renders, it just does not answer the question.
+
+        Nothing caught it because nothing asked. This file was already driving
+        Chromium at 390x844 and 360x640 -- both of the failing widths -- and
+        everything about the ordering was asserted as template text, which is
+        right for wiring and worthless for geometry. Same gap as the 0px table
+        at 768x600 (#130).
+
+        Measured across the boundary rather than at two sample widths, because
+        the thing that broke *is* a boundary: `tiny` was set from a Total column
+        155px wide and the column is content-sized -- today by a two-seller
+        ranged total with both markers on it -- so the width it needs moves when
+        the fleet's dearest sailing moves. A typed breakpoint cannot stay right
+        and this is what tells us when it stops.
+        """
+        page = self.open(PHONE_WIDTHS[0], 720)
+        try:
+            for width in PHONE_WIDTHS:
+                with self.subTest(width=width):
+                    page.set_viewport_size({"width": width, "height": 720})
+                    page.evaluate("() => { location.hash = '#trips'; }")
+                    page.wait_for_timeout(160)
+                    seen = page.evaluate("""() => {
+                      const head = [...document.querySelectorAll('#head th')];
+                      const n = head.findIndex(h => h.dataset.k === 'total');
+                      const row = document.querySelector('tbody tr.row');
+                      if (n < 0 || !row) return null;
+                      const cell = row.children[n];
+                      const r = cell.getBoundingClientRect();
+                      const shell = document.querySelector('.shell');
+                      return {right: Math.round(r.right), left: Math.round(r.left),
+                              vw: window.innerWidth,
+                              scrolled: Math.round(shell.scrollLeft),
+                              text: (cell.querySelector('b') || cell).textContent};
+                    }""")
+                    self.assertIsNotNone(seen, "no Total column on screen")
+                    self.assertEqual(seen["scrolled"], 0,
+                                     "the table is not at rest")
+                    self.assertLessEqual(
+                        seen["right"], seen["vw"],
+                        f"at {width}px the Total ({seen['text']}) ends at "
+                        f"{seen['right']} and the screen is {seen['vw']} wide: "
+                        f"{seen['right'] - seen['vw']}px of the number this page "
+                        "exists to publish is off the right-hand edge",
+                    )
+                    self.assertGreaterEqual(
+                        seen["left"], 0,
+                        f"at {width}px the Total starts at {seen['left']}",
+                    )
+        finally:
+            page.close()
+
+    def test_the_fold_gives_the_columns_back_when_there_is_room(self) -> None:
+        """Being over-folded is safe and is still wrong, so it is asserted.
+
+        The first version of the guard above passed on a build where the fold
+        never moved after first paint: it settled at the narrowest width and
+        stayed, which keeps the Total on screen at every width and hides the
+        boat and the guest count behind the money on a phone with room for
+        both. Most widths that change the fold cross no breakpoint -- the whole
+        phone range is inside one media query -- so nothing re-measured.
+
+        Swept downwards and back up on one page, because a stuck fold is only
+        visible in the second half of that journey.
+        """
+        wide, mid, narrow_ = 430, 390, 360
+        page = self.open(wide, 760)
+        try:
+            def ahead() -> list:
+                page.wait_for_timeout(320)
+                return page.evaluate("""() => {
+                  const head = [...document.querySelectorAll('#head th')];
+                  const n = head.findIndex(h => h.dataset.k === 'total');
+                  return head.slice(0, n).map(h => h.dataset.k);
+                }""")
+
+            # Down: each step drops one more column from in front of the money.
+            self.assertEqual(ahead(), ["start", "boat", "guests"])
+            page.set_viewport_size({"width": mid, "height": 760})
+            self.assertEqual(ahead(), ["start", "boat"],
+                             "the guest count did not come out of the way")
+            page.set_viewport_size({"width": narrow_, "height": 760})
+            self.assertEqual(ahead(), ["start"],
+                             "the boat did not come out of the way")
+            # And back up, which is the half that catches a fold that stuck.
+            page.set_viewport_size({"width": mid, "height": 760})
+            self.assertEqual(ahead(), ["start", "boat"],
+                             "the boat was not given back when the room was")
+            page.set_viewport_size({"width": wide, "height": 760})
+            self.assertEqual(ahead(), ["start", "boat", "guests"],
+                             "the guest count was not given back")
+        finally:
+            page.close()
 
     # -- the shell holds, on every view and every size -----------------------
 

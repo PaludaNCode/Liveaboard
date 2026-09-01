@@ -496,6 +496,26 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
   the pinned *first* cell, which was the expander and is now `.stick1`, so
   reclaiming the width did not quietly delete the mark.
+- **The money is on screen at rest, and which columns make room for it is
+  measured.** The phone order is one array, and `MONEY_FOLD` names what leaves
+  the front of the row when the Total does not fit — least important first, the
+  date never. `moneyFoldWanted` reads the header cells' own widths after a draw
+  and returns the *smallest* fold that fits, so it gives the columns back as
+  well as taking them; `settleMoneyFold` runs inside `draw`, because the Total
+  column is sized by the rows on screen and a filter widens it as surely as a
+  rotation narrows the screen. **It listens on `resize` and not only on the
+  media queries**: the whole phone range sits inside one query, so 760→390
+  crosses nothing, and a fold left where first paint put it is over-folded
+  rather than wrong — which keeps the Total on screen and hides the boat behind
+  it with room to spare. That is why the guard asserts the sweep *back up* too.
+  This replaced a second order array and a third breakpoint at 385px, and both
+  were wrong on most phones (#150): 385 was measured against a Total column
+  155px wide and the column is 213px, sized by its worst-case row — a
+  two-seller ranged total carrying `+ tips` and `2 sellers`. **A typed
+  breakpoint here is a number derived from the data, in a file that cannot see
+  the data**, so it went stale exactly as the footer prose did in #144, and the
+  page lost the number it exists to publish on 360, 390, 393, 402 and 414 —
+  silently, because the row still renders.
 - **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
   Chromium over the three views at six windows; everything else about the split
   is asserted as template text, which is right for wiring and worthless for

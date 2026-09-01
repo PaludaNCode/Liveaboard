@@ -1082,7 +1082,7 @@ class TestThePayloadShipsOnlyWhatThePageReads(unittest.TestCase):
 class TestColumnOrders(unittest.TestCase):
     """Every column has a place at every width.
 
-    app.js orders its columns from four lists -- one per breakpoint -- and
+    app.js orders its columns from three lists -- one per breakpoint -- and
     appends anything missing from one, with a console.warn nobody sees unless
     they have devtools open. A column added to COLS and to the widest list only
     looks correct on the laptop it was written on and falls off the right-hand
@@ -1090,11 +1090,20 @@ class TestColumnOrders(unittest.TestCase):
 
     That is exactly what happened when the "vs PADI" column was added, and it
     reached production. A warning in a console is not a check; this is.
+
+    It was four lists. The fourth said only "PHONE_ORDER, minus Guests in front
+    of the money" and came with a typed breakpoint that was wrong on most
+    phones (#150), so the narrower phone orders are permutations `phoneOrder`
+    builds from `MONEY_FOLD` -- which means a column placed in PHONE_ORDER is
+    placed at every phone width, and what needs checking instead is that
+    `MONEY_FOLD` names real columns and never names the money. Where those
+    permutations actually put the Total is a measurement and lives in
+    `test_layout.py`; nothing here can see a pixel.
     """
 
     APP = ROOT / "templates" / "app.js"
 
-    ORDERS = ("ORDER", "COMPACT_ORDER", "PHONE_ORDER", "TINY_ORDER")
+    ORDERS = ("ORDER", "COMPACT_ORDER", "PHONE_ORDER")
 
     def source(self) -> str:
         return self.APP.read_text(encoding="utf-8")
@@ -1140,9 +1149,33 @@ class TestColumnOrders(unittest.TestCase):
     def test_the_money_is_never_last(self) -> None:
         """The Total off the right-hand edge is the failure the phone orders
         exist to prevent, and it would be silent: the row still renders."""
-        for name in ("PHONE_ORDER", "TINY_ORDER"):
-            order = self.order(name)
-            self.assertLess(order.index("total"), order.index("trip"), name)
+        order = self.order("PHONE_ORDER")
+        self.assertLess(order.index("total"), order.index("trip"))
+
+    def test_the_fold_only_moves_columns_that_exist(self) -> None:
+        """`MONEY_FOLD` is read by name against the rendered header, so a stale
+        entry folds nothing and the Total stays off the edge -- with every
+        source-string assertion here still green."""
+        keys = set(self.column_keys())
+        fold = self.order("MONEY_FOLD")
+        self.assertTrue(fold, "nothing can make room for the money")
+        self.assertEqual(sorted(set(fold) - keys), [], f"MONEY_FOLD names {fold}")
+
+    def test_the_fold_never_moves_the_money_or_the_date(self) -> None:
+        """The money is what the fold is *for*. The date is what a row is looked
+        up by and the sort the table opens on, so it is the one identifier that
+        stays in front of the price at every width."""
+        fold = self.order("MONEY_FOLD")
+        for kept in ("total", "start"):
+            self.assertNotIn(kept, fold)
+
+    def test_the_fold_can_only_move_columns_that_lead_the_money(self) -> None:
+        """A fold entry that sits behind the Total already would measure as
+        making room and free none."""
+        order = self.order("PHONE_ORDER")
+        for name in self.order("MONEY_FOLD"):
+            with self.subTest(column=name):
+                self.assertLess(order.index(name), order.index("total"))
 
 
 class TestPinnedColumns(unittest.TestCase):
@@ -1374,11 +1407,12 @@ class TestPayloadIsRead(unittest.TestCase):
         """A column missing from an order is appended, so it cannot vanish --
         but it lands after the provenance columns, at the far right of a table
         this wide, which for the one column that says whether a row is bookable
-        at all is barely different from being gone. Four orders, four layouts,
-        and the phone one is where it matters most."""
+        at all is barely different from being gone. Three orders, and the phone
+        one is where it matters most -- the narrower phone layouts are
+        permutations of it (`MONEY_FOLD`), so placing it there places it at
+        every phone width."""
         source = self.app()
-        for name in ("var ORDER", "var PHONE_ORDER", "var TINY_ORDER",
-                     "var COMPACT_ORDER"):
+        for name in ("var ORDER", "var PHONE_ORDER", "var COMPACT_ORDER"):
             with self.subTest(order=name):
                 body = source[source.index(name):]
                 body = body[: body.index("]")]
