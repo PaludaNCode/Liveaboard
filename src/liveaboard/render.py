@@ -87,6 +87,11 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
             # Zero where the operator publishes no count. The page prints
             # nothing rather than dividing by an assumption.
             "dives": itinerary.dives,
+            # ...and whether that zero is an answer. Shipped only on the rows
+            # where it changes what the cell says -- a trip with a count needs
+            # no explanation of why it has none.
+            **({"dives_read": True} if itinerary.dives_read and not itinerary.dives
+               else {}),
             "port_from": itinerary.port_from,
             "port_to": itinerary.port_to,
             # `one_way` was here, and it was `port_from != port_to` computed

@@ -981,3 +981,55 @@ class TestTheOptionalHalfOfPadisDisclosure(unittest.TestCase):
             self.lines(self.entry("Nitrox", extraValue="50 EUR",
                                   validFrom="2025-01-01", validTo="2026-01-01")),
             [])
+
+
+class TestTheVesselSpecificationStrip(unittest.TestCase):
+    """PADI's own account of the hull, in the response `window.shop` is in.
+
+    The fixture is `travel.padi.com/liveaboard/egypt/my-anemone/` as served on
+    2026-09-01, markup untouched -- including the `&nbsp;` and the line break
+    inside the year value, which is what makes the two-fact labels awkward.
+    """
+
+    from pathlib import Path as _Path
+
+    FIXTURE = _Path(__file__).resolve().parent / "fixtures" / "padi_vessel_specs.html"
+
+    def specs(self, markup: str | None = None) -> dict:
+        return PadiComAdapter.specs_from_page(
+            self.FIXTURE.read_text(encoding="utf-8") if markup is None else markup
+        )
+
+    def test_it_reads_the_strip(self):
+        self.assertEqual(self.specs()["cabins"], 16)
+
+    def test_length_is_the_length_and_not_the_beam(self):
+        """The label is "Length / Width" and the value is "45 m / 8 m". Taking
+        the last number would publish an 8-metre liveaboard."""
+        self.assertEqual(self.specs()["length_m"], 45)
+
+    def test_the_year_is_the_build_and_not_the_refit(self):
+        """"Year built / renovated" reads "2022 / 2025". A renovation is not a
+        build date, and the wrong half makes a three-year-old hull new."""
+        self.assertEqual(self.specs()["year_built"], 2022)
+
+    def test_free_nitrox_is_read_and_anything_else_is_not_a_claim(self):
+        self.assertIs(self.specs()["nitrox_free"], True)
+        row = ("<p class='o-title'>Nitrox</p><p class=\"o-value\">YES ($)</p>")
+        self.assertIs(self.specs(row)["nitrox_free"], False)
+
+    def test_no_strip_states_nothing_rather_than_zeroes(self):
+        """A page without the strip is a page nobody could read the hull from.
+        Empty, so `promote` falls through to the other seller."""
+        self.assertEqual(self.specs("<div>no strip here</div>"), {})
+
+    def test_a_row_the_strip_does_not_carry_is_absent(self):
+        """Guests: PADI states none anywhere on the page, so there is no key
+        to read and none is invented. See docs/sources/padi.com.md."""
+        self.assertNotIn("guests", self.specs())
+
+    def test_an_implausible_figure_is_refused(self):
+        """A stray number in a value the label did not describe is not a boat."""
+        row = ("<p class='o-title'>Length / Width</p>"
+               "<p class=\"o-value\">4500 m / 8 m</p>")
+        self.assertNotIn("length_m", self.specs(row))

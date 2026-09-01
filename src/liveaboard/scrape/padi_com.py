@@ -56,6 +56,14 @@ from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
 from .fees import _tier_for, classify_label, tier_for_inclusion
+from .vessel import MAX_GUESTS
+
+MAX_LENGTH_M = 200
+"""A hull longer than this is a parse, not a boat.
+
+The Egyptian fleet's longest is 48 m. The bound exists so a stray figure in a
+value the label did not describe cannot land in the dataset as a length.
+"""
 
 # `.fees` used to be imported lazily, inside the three functions below that need
 # it, and that cost a 530-request crawl 2026-08-30. `taxonomy` is imported above
@@ -1345,6 +1353,87 @@ class PadiComAdapter(SourceAdapter):
             "min_logged_dives": min_dives,
             "strong_current": bool(re.search(r"strong current|drift div", text, re.I)),
         }
+
+    @staticmethod
+    def specs_from_page(html: str) -> dict[str, object]:
+        """The vessel page's specification strip: cabins, length, year built.
+
+        Server-rendered, in the same response ``window.shop`` comes from, so
+        it costs no request beyond the one `fetch_padi.py` already makes per
+        vessel. That matters because it is the only source for the boats
+        liveaboard.com does not sell -- their specification table does not
+        exist, and 14 hulls publish no length as a result.
+
+        The markup is a flat run of label/value pairs::
+
+            <p class='o-title'>Cabins</p><p class="o-value">16</p>
+            <p class='o-title'>Length / Width</p><p class="o-value">45 m / 8 m</p>
+            <p class='o-title'>Year built / renovated</p><p class="o-value">2022&nbsp; / 2025</p>
+
+        **Two of the three labels name two facts and the value holds both**,
+        which is the trap: the second number is the beam and the *refit* year,
+        neither of which is the field being read. A renovation is not a build
+        date and printing 2025 for a hull laid down in 2022 would age the fleet
+        wrong in the one direction an operator would like. Both take the figure
+        before the slash and drop what follows.
+
+        Deliberately not read here: **guests**. The strip has no such row and
+        neither does the rest of the page -- searched in full, every numeric
+        form of guests, divers, passengers, people and pax, zero hits. So a
+        boat with no guest count from liveaboard.com has none from PADI either,
+        and the honest output is the absence. See docs/sources/padi.com.md.
+        """
+        pairs = re.findall(
+            r"""<p[^>]*class=['"]o-title['"][^>]*>(.*?)</p>\s*"""
+            r"""<p[^>]*class=['"]o-value['"][^>]*>(.*?)</p>""",
+            html,
+            re.S | re.I,
+        )
+
+        def clean(raw: str) -> str:
+            text = re.sub(r"<[^>]+>", " ", unescape(raw))
+            return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip()
+
+        rows = {clean(label).lower(): clean(value) for label, value in pairs}
+
+        def first_int(label: str, low: int, high: int) -> int | None:
+            """The figure before the slash, which is the one the label leads with.
+
+            Bounded rather than trusted, and bounded against fixed numbers
+            rather than a clock: a parser whose output depends on the day it
+            ran cannot be compared byte for byte, which is how `promote --check`
+            establishes that the published page is this code's output.
+            """
+            value = rows.get(label)
+            if not value:
+                return None
+            match = re.match(r"\s*(\d{1,4})", value.split("/")[0])
+            if not match:
+                return None
+            number = int(match.group(1))
+            return number if low <= number <= high else None
+
+        specs: dict[str, object] = {
+            "cabins": first_int("cabins", 1, MAX_GUESTS),
+            "length_m": first_int("length / width", 1, MAX_LENGTH_M),
+            "year_built": first_int("year built / renovated", 1900, 2100),
+        }
+        # "FREE" is PADI saying the boat does not charge for fills, which is
+        # the same claim liveaboard.com's "Free Nitrox" amenity makes. Anything
+        # else it prints -- a price, "YES", "NO" -- is not that claim, so only
+        # the one word sets it and everything else leaves the field unstated
+        # rather than false.
+        #
+        # Recorded and deliberately not acted on, like `_sailing_counts`:
+        # `promote` folds only the vessel panel's nitrox tick into a fee book,
+        # and doing the same with PADI's would put an *included* line on the 12
+        # boats that have no panel -- a fee claim sourced from a strip beside a
+        # price rather than from either seller's fee disclosure. Worth having
+        # to check the panel against; not worth pricing a trip from.
+        nitrox = rows.get("nitrox")
+        if nitrox:
+            specs["nitrox_free"] = nitrox.upper() == "FREE"
+        return {k: v for k, v in specs.items() if v is not None}
 
     def _name(self, result: FetchResult) -> str | None:
         for node in jsonld.of_type(result.body, "Product", "TouristTrip", "Trip"):

@@ -344,7 +344,6 @@ def build_departures() -> list[dict[str, Any]]:
 
             factor = MONTH_FACTOR.get(saturday.month, 1.0)
             price = round(base * factor / 5) * 5
-            spaces = (index * 7 + nights) % 9
 
             departures.append(
                 {
@@ -353,7 +352,6 @@ def build_departures() -> list[dict[str, Any]]:
                     "start": saturday.isoformat(),
                     "end": end.isoformat(),
                     "price": {"amount": price, "currency": currency},
-                    "spaces_left": spaces if spaces else None,
                     "provenance": prov(),
                     "fees": [],
                 }

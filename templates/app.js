@@ -143,11 +143,21 @@
                : line.has_price ? { price: line.display.amount }
                : { listed: true };
       }
-      /* Tips are customary rather than optional, so a stated amount is in the
-         total. An operator who lists them without a figure leaves a real cost
-         outside the arithmetic, and the total has to say so. */
+      /* Tips sit outside the total, because both sellers file them under
+         Optional and this page reads the seller's own block rather than
+         overruling it -- a mandatory $50 tip and one you choose the size of
+         are different charges, and only the operator can say which it bills.
+         One listed as Required would arrive as `mandatory` and be counted like
+         any other, with no special case here.
+
+         So the marker is on whether tips exist and are outside the arithmetic,
+         priced or not: a stated EUR 120 the total does not carry is exactly as
+         missing from it as an unstated one. `included` is the operator saying
+         it is already covered, which needs no marker. */
       if (line.code === "gratuities") {
-        tips = line.included ? "included" : line.has_price ? "counted" : "unpriced";
+        tips = line.included ? "included"
+             : line.tier === "mandatory" ? "counted"
+             : line.has_price ? "extra" : "unpriced";
       }
       if (lineCounts(line)) {
         if (line.has_price) {
@@ -836,7 +846,11 @@
             'neither end is the price.">2 sellers</span>'
           : "";
         return "<b>" + sellerSpan(b.lo, b.hi) + "</b>" +
-          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "") +
+          (m.tips === "unpriced" || m.tips === "extra"
+            ? '<span class="plus" title="The operator lists crew tips under ' +
+              'its own Optional extras, so they are not in this total.">' +
+              ' + tips</span>'
+            : "") +
           varies + bar;
       } },
     /* What divers actually compare on, and the reason price per night is not
@@ -859,10 +873,24 @@
       show: function (d, i, m, row) {
         var b = best(row);
         if (b) m = b.bill;
+        /* Two silences, and the cell says which. `dives_read` means somebody
+           opened this trip's own itinerary and the seller left the count
+           blank — one trip of 352, Aphrodite's North Dolphins, a snorkelling
+           week whose entry bar is "No Certificate needed". Everywhere else the
+           zero means no fragment has been read at all: 74 itineraries, 41 of
+           them on boats liveaboard.com publishes no vessel page for.
+
+           Same rule as `fees_known` two columns over — no fee lines means
+           nobody looked, not that there are none — and it matters for the
+           same reason: neither can produce a price per dive, but only one of
+           them is a fact about the trip. */
         if (!i.dives) {
-          return '<span class="dim" title="This operator does not publish a ' +
-                 'dive count. Assuming one would divide the bill by a number ' +
-                 'nobody stated.">not stated</span>';
+          return i.dives_read
+            ? '<span class="dim" title="The seller published this trip&#39;s ' +
+              'own itinerary and stated no dive count in it.">none stated</span>'
+            : '<span class="dim" title="No source read for this trip publishes ' +
+              'a dive count. Assuming one would divide the bill by a number ' +
+              'nobody stated.">not stated</span>';
         }
         if (!b) return '<span class="dim">—</span>';
         /* The operator quotes a range and this is the fewest, so the figure is

@@ -21,9 +21,11 @@ Three details drive the whole design here:
   blank. That is a third state, distinct from zero and from absent, and it has
   to survive to the page.
 
-* **The site's own Required/Optional split is authoritative** for whether a
-  cost is escapable, but not for how it should be counted. Gratuities are filed
-  under Optional here and are nevertheless paid by nearly everyone.
+* **The site's own Required/Optional split is authoritative**, for whether a
+  cost is escapable *and* for whether it is counted. It used to decide only the
+  first: gratuities were promoted into the counted total from the Optional
+  block because tips are paid by nearly everyone. See `_tier_for` for why that
+  was overruling the seller rather than reading it.
 """
 
 from __future__ import annotations
@@ -182,6 +184,10 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     (r"\broute\s+supplements?\b", FeeCode.ROUTE_SUPPLEMENT),
     (r"\bcoast\s*guard\b|\bcost\s+gard\b", FeeCode.COAST_GUARD),
     (r"\bnavy\s+(?:fees?|charges?)\b", FeeCode.NAVY_FEE),
+    # A contribution to the recompression chamber, billed per diver on two of
+    # PADI's trips and declined until now. Narrow on the same rule as the five
+    # above: the word "chamber" alone would catch a cabin description.
+    (r"\bhyperbaric\b|\brecompression\s+chamber\b", FeeCode.HYPERBARIC_LEVY),
     # Split from the general course line for the same reason as snorkel gear:
     # vessels list "Nitrox Course (€99)" and "Scuba Diving Courses (€79-110)"
     # as separate priced entries, and one entry per code drops the second.
@@ -221,7 +227,12 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # Narrow on purpose: the boat-features list that follows the disclosure
     # carries "Beer available" and "Wine Available" as amenities, not charges.
     (r"\balcoholic\s+(?:beverages?|drinks?)\b|\balcohol\b", FeeCode.ALCOHOL),
-    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btipping\b", FeeCode.GRATUITIES),
+    # Both word orders. PADI writes "Tips for the crew" -- 23 of 23 sampled
+    # itineraries carry it -- and `crew\s+tips?` only matched the other way
+    # round, so the one charge every operator on that seller states was the one
+    # charge nothing read.
+    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btips?\s+for\s+the\s+crew\b|\btipping\b",
+     FeeCode.GRATUITIES),
     (r"\blaundry\b|\bpressing\s+services?\b", FeeCode.LAUNDRY),
     (r"\bvisas?\s*(?:fees?|on\s+arrival)?\b(?!\w)", FeeCode.VISA),
     (r"\b(?:dive|diving|travel)\s+insurance\b|\binsurance\b", FeeCode.DIVE_INSURANCE),
@@ -235,9 +246,13 @@ COMPILED_LABELS: tuple[tuple[re.Pattern[str], FeeCode], ...] = tuple(
     (re.compile(pattern, re.I), code) for pattern, code in LABEL_PATTERNS
 )
 
-# Optional-block codes that are nevertheless paid by nearly everyone, or that
-# the site's own toggles govern. The block a fee appears in decides whether it
-# is escapable; this decides how it is counted.
+# Codes this site treats as chosen rather than owed. Read by
+# `tier_for_inclusion` only: an operator stating tips as covered has covered a
+# cost its guests choose the size of, so the line belongs beside the other
+# optional ones at zero rather than among the charges nobody can decline.
+#
+# It no longer reaches `_tier_for`, which now lets the seller's own block
+# decide a billed charge's tier outright. See there.
 CUSTOMARY_CODES = frozenset({FeeCode.GRATUITIES})
 TOGGLED_CODES = frozenset(
     {
@@ -313,6 +328,13 @@ COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
         r"\bports?\b|\bharbou?rs?\b",
         r"\bfuel\b",
         r"\benvironment(?:al)?\b|\beco\b",
+        # The fifth part, and the reason it is here: PADI bills "Environmental
+        # and Route Fees", which names two charges and matched exactly one of
+        # the four above, so it declined and blocked its trip's bill. A route
+        # supplement on its own still reaches `ROUTE_SUPPLEMENT` -- `route`
+        # alone is one part, and `COMBINED_TAIL` does not match "Route
+        # supplement" either way.
+        r"\broutes?\b",
     )
 )
 COMBINED_TAIL = re.compile(r"\b(?:fees?|charges?|taxes?|dues)\b", re.I)
@@ -372,10 +394,30 @@ def classify_label(label: str, *, prose: bool = True) -> FeeCode | None:
 
 
 def _tier_for(code: FeeCode, required: bool) -> FeeTier:
+    """Which tier a billed charge lands in. **The seller's block decides.**
+
+    Gratuities used to be promoted to :attr:`FeeTier.CUSTOMARY` from here
+    whatever block they were listed in, on the reasoning that tips are paid by
+    nearly everyone. That reasoning is sound about divers and wrong about this
+    dataset: a mandatory $50 tip and a tip you choose the size of are different
+    charges, and the only party that can say which one an operator bills is the
+    operator. Both sellers do say. All 55 vessels that state gratuities file
+    them under **Optional**, and PADI puts "Tips for the crew" in
+    `optionalOnBoard` on every trip that names it -- so the promotion was this
+    project overruling both sellers at once, on 255 fee lines, and adding a
+    mean of EUR 74 to 278 sailings' counted totals on its own authority.
+
+    A tip an operator does list as required still counts, through `required`
+    and without a special case: a charge in the Required block is mandatory
+    whatever it is for.
+
+    Nothing emits `FeeTier.CUSTOMARY` now. The tier stays in the vocabulary and
+    in `DEFAULT_ON_TIERS` -- it is mirrored by `lineCounts` in `templates/app.js`
+    and the two must move together -- but no parser writes it, and a seller that
+    files a tip as owed writes `MANDATORY` instead.
+    """
     if required:
         return FeeTier.MANDATORY
-    if code in CUSTOMARY_CODES:
-        return FeeTier.CUSTOMARY
     if code in TOGGLED_CODES:
         return FeeTier.CONDITIONAL
     return FeeTier.OPTIONAL

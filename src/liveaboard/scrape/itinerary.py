@@ -52,6 +52,17 @@ Tailwind class strings on this page carry brackets, ampersands and colons and
 change with the layout; the heading text does not.
 """
 
+TRIP_NAME = re.compile(r"<h2[^>]*>(?P<value>[^<]{3,160})</h2>", re.I)
+"""The trip's own name, as the fragment heads itself.
+
+Unused while every tour id came out of an archived ``Event`` node, which
+carried the name beside it. It matters now that ids are also harvested off the
+vessel page, where there is no name to harvest with them: a fragment fetched
+that way has to say what trip it is, or the book cannot key it and the whole
+point -- reaching the trips liveaboard.com sells no in-season berth on -- is
+lost. The heading is the only place the fragment states it.
+"""
+
 REGION_ITEM = re.compile(r"<li[^>]*\stitle=(\"[^\"]*\"|'[^']*'|[^\s>]+)", re.I)
 """One region. Read from the ``title`` attribute, which is the bare name.
 
@@ -161,6 +172,9 @@ class TripSection:
 class TripDetail:
     """What one itinerary fragment states about the trip."""
 
+    name: str | None = None
+    """What the fragment calls this trip, from its own heading."""
+
     regions: tuple[str, ...] = ()
     dives: int | None = None
     guests: int | None = None
@@ -170,7 +184,7 @@ class TripDetail:
 
     def __bool__(self) -> bool:
         return bool(self.regions or self.dives or self.guests or self.experience
-                    or self.intro or self.sections)
+                    or self.intro or self.sections or self.name)
 
 
 def _text(value: str) -> str:
@@ -263,7 +277,9 @@ def parse_trip(markup: str) -> TripDetail:
         experience = _field(markup, "Experience")
 
     intro, sections = parse_prose(markup)
+    heading = TRIP_NAME.search(markup)
     return TripDetail(
+        name=_text(heading.group("value")) if heading else None,
         intro=intro,
         sections=sections,
         regions=parse_regions(markup),

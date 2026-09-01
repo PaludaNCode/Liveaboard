@@ -38,10 +38,26 @@ COLUMNS = [
     "advertised", "list_price", "discount_pct",
     "mandatory_fees_min", "mandatory_fees_max",
     "total_min", "total_max", "currency",
-    "disclosure", "availability", "spaces_left", "booking_url",
+    "disclosure", "availability", "places_at_price", "berths_aboard",
+    "booking_url",
 ]
+"""The columns of the published CSV.
+
+``spaces_left`` was here and was empty on all 1,122 rows: a `Departure` field
+whose job the per-seller `berths` block took, still exporting the word itself
+and never a number. It is replaced by the two counts the page actually prints,
+under the two names the page prints them by -- *places* at the advertised price
+and *berths aboard* the sailing. They answer different questions and only a
+cabin ladder answers the first, so one column called `spaces_left` could not
+have carried both honestly even once it was filled.
+"""
 
 NO_DISCLOSURE = "required extras not stated"
+
+
+def _count(value: int | None) -> str:
+    """A stated berth count, or blank. Never zero for "nobody said"."""
+    return "" if value is None else str(value)
 
 
 def to_csv(dataset: Dataset) -> str:
@@ -109,7 +125,10 @@ def to_csv(dataset: Dataset) -> str:
             DISPLAY_CURRENCY,
             "" if known else NO_DISCLOSURE,
             departure.availability or "",
-            departure.spaces_left if departure.spaces_left is not None else "",
+            # Both, because they are different claims. Empty where no seller
+            # stated one; `0` is an answer and means nothing is left.
+            _count(departure.spots_at_advertised),
+            _count(departure.berths_aboard),
             departure.booking_url or "",
         ])
     return buffer.getvalue()

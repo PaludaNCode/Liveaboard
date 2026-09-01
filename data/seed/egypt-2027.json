@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-08-27",
+  "generated": "2026-09-01",
   "default_currency": "EUR",
   "season": {
     "start": "2027-05-01",
@@ -1184,7 +1184,6 @@
         "amount": 1060,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1202,7 +1201,6 @@
         "amount": 1060,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1220,7 +1218,6 @@
         "amount": 1060,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1238,7 +1235,6 @@
         "amount": 1150,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1256,7 +1252,6 @@
         "amount": 1150,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1274,7 +1269,6 @@
         "amount": 1290,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1292,7 +1286,6 @@
         "amount": 1290,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1310,7 +1303,6 @@
         "amount": 1320,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1328,7 +1320,6 @@
         "amount": 1320,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1346,7 +1337,6 @@
         "amount": 1335,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1364,7 +1354,6 @@
         "amount": 1335,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1382,7 +1371,6 @@
         "amount": 1335,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1400,7 +1388,6 @@
         "amount": 1450,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1418,7 +1405,6 @@
         "amount": 1450,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1436,7 +1422,6 @@
         "amount": 1625,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1454,7 +1439,6 @@
         "amount": 1625,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1472,7 +1456,6 @@
         "amount": 1665,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1490,7 +1473,6 @@
         "amount": 1665,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1508,7 +1490,6 @@
         "amount": 1280,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1526,7 +1507,6 @@
         "amount": 1280,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1544,7 +1524,6 @@
         "amount": 1390,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1562,7 +1541,6 @@
         "amount": 1390,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1580,7 +1558,6 @@
         "amount": 1555,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1598,7 +1575,6 @@
         "amount": 1555,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1616,7 +1592,6 @@
         "amount": 1555,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1634,7 +1609,6 @@
         "amount": 1600,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1652,7 +1626,6 @@
         "amount": 1600,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1670,7 +1643,6 @@
         "amount": 965,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1688,7 +1660,6 @@
         "amount": 965,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1706,7 +1677,6 @@
         "amount": 965,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1724,7 +1694,6 @@
         "amount": 965,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1742,7 +1711,6 @@
         "amount": 965,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1760,7 +1728,6 @@
         "amount": 1050,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1778,7 +1745,6 @@
         "amount": 1050,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1796,7 +1762,6 @@
         "amount": 1050,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1814,7 +1779,6 @@
         "amount": 1050,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1832,7 +1796,6 @@
         "amount": 1175,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1850,7 +1813,6 @@
         "amount": 1175,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1868,7 +1830,6 @@
         "amount": 1175,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1886,7 +1847,6 @@
         "amount": 1175,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1904,7 +1864,6 @@
         "amount": 1175,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1922,7 +1881,6 @@
         "amount": 1210,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1940,7 +1898,6 @@
         "amount": 1210,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1958,7 +1915,6 @@
         "amount": 1210,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1976,7 +1932,6 @@
         "amount": 1210,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -1994,7 +1949,6 @@
         "amount": 1740,
         "currency": "EUR"
       },
-      "spaces_left": 5,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2012,7 +1966,6 @@
         "amount": 1740,
         "currency": "EUR"
       },
-      "spaces_left": 1,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2030,7 +1983,6 @@
         "amount": 1890,
         "currency": "EUR"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2048,7 +2000,6 @@
         "amount": 1890,
         "currency": "EUR"
       },
-      "spaces_left": 2,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2066,7 +2017,6 @@
         "amount": 2115,
         "currency": "EUR"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2084,7 +2034,6 @@
         "amount": 2115,
         "currency": "EUR"
       },
-      "spaces_left": 3,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2102,7 +2051,6 @@
         "amount": 2115,
         "currency": "EUR"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2120,7 +2068,6 @@
         "amount": 2175,
         "currency": "EUR"
       },
-      "spaces_left": 4,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2138,7 +2085,6 @@
         "amount": 2175,
         "currency": "EUR"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2156,7 +2102,6 @@
         "amount": 2070,
         "currency": "USD"
       },
-      "spaces_left": 6,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2174,7 +2119,6 @@
         "amount": 2250,
         "currency": "USD"
       },
-      "spaces_left": 7,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2192,7 +2136,6 @@
         "amount": 2520,
         "currency": "USD"
       },
-      "spaces_left": 8,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",
@@ -2210,7 +2153,6 @@
         "amount": 2590,
         "currency": "USD"
       },
-      "spaces_left": null,
       "provenance": {
         "kind": "seed_estimate",
         "source_id": "seed:research-2026-08",

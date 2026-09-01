@@ -291,9 +291,33 @@ def itinerary_key(slug: str, name: str) -> str:
     Exported so the fetcher imports it rather than reimplementing it. Two
     copies of this rule drifting apart is a book that silently matches nothing,
     and every field it fills has a fallback, so nothing would fail loudly.
+
+    **The port pair is re-rendered rather than compared as typed.** It used to
+    go into the key exactly as the source wrote it, and the two sources do not
+    write it the same way: our name for a PADI-sold sailing is PADI's spelling,
+    the fragment's is liveaboard.com's, and *North & Tiran (Hurghada-Hurghada)*
+    against *North & Tiran (Hurghada - Hurghada)* is one trip under two keys.
+    Two of MY Blue Pearl's first three fail on that space alone. ``TIDY`` evens
+    out an en dash and the spacing around ``&`` and never touched a hyphen,
+    which is the same gap ``PORTS_TIGHT`` exists for one function up.
+
+    The harbour *names* are left alone -- collapsed whitespace and nothing
+    more, never folded through ``PORT_ALIASES``. Two sailings differing only by
+    port are two trips, so a key that folded Hurghada onto Hurghada Marriott
+    would hand one trip's dive count and reefs to another, which is the failure
+    this whole book is meant to fix rather than a new way to cause it.
+
+    Nothing needs migrating in ``data/itineraries.json`` when this changes:
+    ``promote`` re-keys every record from its own ``boat`` and ``name`` and
+    ignores the file's keys. ``fetch_itineraries.py`` does the same on load,
+    for the same reason.
     """
-    trip, _, _ = _split_title(name)
-    return f"{slug}::{trip}"
+    trip, _, ports = _split_title(name)
+    if not ports:
+        return f"{slug}::{trip}"
+    match = _ports_match(trip)
+    head = trip[: match.start()].strip(" -,:") if match else trip
+    return f"{slug}::{head} ({ports[0]} - {ports[1]})"
 
 
 BDE = re.compile(
@@ -1830,9 +1854,25 @@ def promote(
     #
     # Keyed on vessel plus trip name, which is what an itinerary is here.
     trip_book: dict[str, dict[str, Any]] = {}
+    # And the same book under the tolerant key, for one case: an itinerary
+    # whose *name* is the second seller's, which is every row on a vessel
+    # liveaboard.com sells no berth on. The fragment is liveaboard.com's and
+    # spells the trip its own way -- "St. Johns" against "St. John's",
+    # "Brothers, Daedalus, Elphinstone" against "Brothers, Daedalus &
+    # Elphinstone" -- so the exact key misses a trip both sellers describe.
+    #
+    # `padi_key` is the function for exactly this and says so: it identifies a
+    # *foreign* record and is deliberately not `itinerary_key`, which must stay
+    # strict or it starts merging two of our own sailings. Used only where the
+    # exact key found nothing, and only where the loose one names exactly one
+    # trip on that boat -- Emperor Asmaa lists "South & St Johns" and "South
+    # and St. Johns" as two trips, and nothing here can say which of them a
+    # PADI row meant, so both are refused rather than guessed between.
+    trip_book_loose: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for trip in ((trips or {}).get("trips") or {}).values():
         if trip.get("boat") and trip.get("name"):
             trip_book[itinerary_key(trip["boat"], trip["name"])] = trip
+            trip_book_loose[padi_key(trip["boat"], trip["name"])].append(trip)
 
     # What PADI states about the same trip: a coded certification requirement
     # and a dive count the operator wrote down. Merged the way the fee book and
@@ -2150,6 +2190,24 @@ def promote(
     unread_for_sale = 0
     banner_unsupported = 0
 
+    def _spec(slug: str, key: str) -> Any:
+        """One row of a vessel's specification, from whichever seller states it.
+
+        The boat's own liveaboard.com panel first, PADI's page strip second.
+        A fallback where ours is silent and never a merge -- the same
+        precedence the fee book keeps, and for the same reason: these are two
+        sellers' accounts of one hull, and the one that publishes a table about
+        the boat outranks the one that publishes a strip beside a price.
+
+        It is not a tie-break nobody reaches. 14 hulls state no length from the
+        panel -- 6 of them have no panel at all, being boats liveaboard.com
+        does not sell -- and PADI answers for 5 of the 8 that do have one.
+        """
+        ours = spec_book.get(slug, {}).get(key)
+        if ours is not None:
+            return ours
+        return ((padi_vessels.get(slug) or {}).get("specs") or {}).get(key)
+
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
         # PADI's name only where the first source has none, which is the 22
@@ -2177,13 +2235,25 @@ def promote(
                            or hand.get(slug, {}).get("guests")
                            or trip_guests.get(slug)
                            or _guests(source.get("summary"))),
-                "cabins": spec_book.get(slug, {}).get("cabins"),
+                "cabins": _spec(slug, "cabins"),
+                # The same table's other two rows. They were read, written to
+                # `data/fees.json` and then dropped here, so `Boat.length_m`
+                # was null on all 77 boats with 71 lengths sitting in the
+                # repository. Published to the dataset rather than to the
+                # render payload: the page draws neither today, and `render`
+                # deliberately carries only what it draws.
+                "length_m": _spec(slug, "length_m"),
+                "year_built": _spec(slug, "year_built"),
             },
         )
 
         itinerary_id = f"{slug}--{slugify(name)}"[:96]
         nights = _most_common(d["nights"] for d in group)
-        trip = trip_book.get(itinerary_key(slug, name), {})
+        trip = trip_book.get(itinerary_key(slug, name))
+        if trip is None:
+            # See `trip_book_loose`: exactly one match or none at all.
+            loose = trip_book_loose.get(padi_key(slug, name)) or []
+            trip = loose[0] if len(loose) == 1 else {}
         padi_trip = padi_book.get(padi_key(slug, name), {})
 
         # The operator's own list of reefs for this trip, when it has been
@@ -2388,6 +2458,24 @@ def promote(
             if other != mine:
                 entry_bar["disagree"] += 1
                 entry_bar["padi_stricter" if other > mine else "ours_stricter"] += 1
+
+        # Whether anybody actually asked about this trip's dive count.
+        #
+        # `dives: 0` is two different answers wearing one face, and this file
+        # keeps making the same distinction everywhere else: no fee lines means
+        # nobody looked, `not_asked` means the crawl declined to visit, an
+        # unreadable page is not an empty one. Here it is the itinerary
+        # fragment -- liveaboard.com published Aphrodite's *North Dolphins*
+        # with the Dives row printed as a dash, the only one of 352 trips it
+        # does that for, on a week whose day plan is snorkelling and whose
+        # entry bar is "No Certificate needed". The seller answered. The other
+        # 74 unfragmented itineraries were never asked, and 41 of those are on
+        # boats liveaboard.com has no page for at all.
+        #
+        # Written only where true, like `padi_sourced_fees`, so it marks the
+        # trips somebody read rather than shipping a false on the rest.
+        if trip:
+            itineraries[-1]["dives_read"] = True
 
         if padi_fees is not None:
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
