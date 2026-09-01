@@ -146,9 +146,11 @@ least one:
     naturalist_guide 6 · laundry 6 · land_excursion 5 · airport_transfer 3 ·
     visa 1
 
-`gratuities` is the one that costs something: it is *customary*, so it is
-counted by default, and an unpriced line means 30 vessels' counted totals carry
-a known cost of unknown size. The rest are *optional* and sit below the line.
+`gratuities` was the one that cost something — *customary*, counted by default,
+so an unpriced line put a known cost of unknown size inside 30 vessels' totals.
+It no longer is: all 55 vessels that state gratuities file them under Optional
+and the tier follows the seller's block now, so the line is visible, labelled
+optional, and outside the arithmetic. See `docs/plan-missing.md` §5.
 
 **New Sambo is the one vessel neither seller names nitrox for** — not free,
 not priced, unknown. The nitrox column has a branch for it.

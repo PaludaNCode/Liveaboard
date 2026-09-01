@@ -1,9 +1,9 @@
 # Closing the gaps in `docs/missing.md`
 
-**§0, §1, §2, §3 and half of §6 are done** — see *What it actually bought*, at
-the foot, which records the measurements rather than the intentions. §5 is
-still open and deliberately so; the rest of §6 turned out to be wrong and the
-correction is down there too.
+**All of it is done** except the two PADI books that need a fetch to catch up —
+see *What it actually bought* and *§5, and the rule that came out of it*, at the
+foot. Those record the measurements rather than the intentions; two of the
+estimates below were wrong and the wrong ones are the useful part.
 
 Ordered by what each item costs against what it fills. Every source claim below
 was probed live on 2026-09-01 rather than reasoned about; the probe results are
@@ -341,3 +341,56 @@ text on a live path, and `tools/make_seed.py` sets two of the three. Deleting
 them would remove a working parser's output because this season's boats happen
 not to trigger it. Left alone, and the reason recorded so the next reader does
 not have to re-derive it.
+
+
+## §5, and the rule that came out of it
+
+Asked, because the measurement changed the question. PADI states *Tips for the
+crew* on **23 of 23** sampled itineraries — near-universal, not the scattered
+handful `docs/sources/padi.com.md` implied — so classifying it would have put a
+counted-but-unpriced line on essentially every PADI-sourced row.
+
+The answer was a rule rather than a yes or no, and it is a better rule than the
+one this code had: **a mandatory tip and a tip you choose the size of are
+different charges, and the seller's own block says which is which.** If PADI
+files it under optional it is optional; a tip listed as required outranks that.
+
+That turned out to overturn something. `_tier_for` promoted `gratuities` to
+`CUSTOMARY` from *whatever block it was listed in*, on the reasoning that tips
+are paid by nearly everyone — sound about divers, and a claim about a charge
+that neither seller makes. Measured:
+
+- **all 55 vessels** that state gratuities file them under **Optional**;
+- PADI puts *Tips for the crew* in `optionalOnBoard` on every trip that names it.
+
+So the promotion was this project overruling both sellers at once, on 255 fee
+lines, and adding a mean of **€74** (up to €120, ~5% of the bill) to **278 of
+1,122** sailings' counted totals on its own authority. Those totals now fall by
+exactly that, the tip stays visible in the breakdown as the optional line the
+operator says it is, and the row still prints **+ tips** — priced or not, since
+a stated €120 the total does not carry is as missing from it as an unstated one.
+
+`FeeTier.CUSTOMARY` is now emitted by nothing. It stays in the vocabulary and in
+`DEFAULT_ON_TIERS`, which `lineCounts` in `app.js` mirrors and which must move
+with it, but a seller that files a tip as owed writes `MANDATORY` instead.
+
+**Two declined charges are now read**, as asked. *Environmental and Route Fees*
+becomes `combined_fees` — one line covering two charges, amount undivided,
+which is what that code is for and why declining it was the wrong fix for a
+right worry. *Hyperbaric chamber contribution* gets its own code: a charge to a
+named third party, on trips that bill park fees and a service charge
+separately. The other four stay declined for the reasons already written down.
+
+**And the fix reached the data without a crawl.** `tools/reparse_fees.py` is
+new and is the fee book's version of `reparse_candidate.py`: `scrape_fees.py`
+already stores the disclosure text it parsed, so a classification change is
+re-derived from the repository instead of from 79 browser page loads. It
+re-parsed 55 vessels and reported **one** kind of change on each — the
+gratuities tier — which is also the evidence it dropped nothing else. The gear
+line is carried rather than re-derived: it comes from the `#modal-gear` dialog,
+whose markup the book does not store.
+
+**Two things still need their own run**, and neither is a code gap: PADI's book
+carries no `Tips for the crew`, no `hyperbaric_levy` and no vessel `specs` until
+`padi.yml` next fetches, because `data/padi.json` is rebuilt whole from a raw
+store `MIN_BOOK_RATIO` correctly refuses to let a capped local run replace.

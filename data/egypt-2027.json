@@ -1813,7 +1813,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -2146,7 +2146,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -2477,7 +2477,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -2809,7 +2809,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -3141,7 +3141,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -3481,7 +3481,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -3719,7 +3719,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -3960,7 +3960,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -4301,7 +4301,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -4641,7 +4641,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -4981,7 +4981,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -5323,7 +5323,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -5664,7 +5664,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -5877,7 +5877,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -6090,7 +6090,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -6304,7 +6304,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -6518,7 +6518,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -6733,7 +6733,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -7046,7 +7046,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -7312,7 +7312,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -7660,7 +7660,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -8826,7 +8826,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -9043,7 +9043,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -9317,7 +9317,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -9589,7 +9589,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -9866,7 +9866,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -10088,7 +10088,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -10362,7 +10362,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -10634,7 +10634,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -10851,7 +10851,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -12543,7 +12543,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -12834,7 +12834,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -13125,7 +13125,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -13341,7 +13341,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -13633,7 +13633,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -13922,7 +13922,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -14215,7 +14215,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -14506,7 +14506,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -14814,7 +14814,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -15144,7 +15144,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -15474,7 +15474,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -15804,7 +15804,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -16135,7 +16135,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -16464,7 +16464,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -16794,7 +16794,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -17123,7 +17123,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -17453,7 +17453,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -17783,7 +17783,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -18125,7 +18125,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -18467,7 +18467,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -18809,7 +18809,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -19152,7 +19152,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -19493,7 +19493,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -19834,7 +19834,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -20070,7 +20070,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -20411,7 +20411,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -20737,7 +20737,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -21025,7 +21025,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -21313,7 +21313,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -21602,7 +21602,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -21889,7 +21889,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -22179,7 +22179,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -22469,7 +22469,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -22757,7 +22757,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -23044,7 +23044,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -23331,7 +23331,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -23621,7 +23621,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -23911,7 +23911,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -24203,7 +24203,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -24492,7 +24492,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -24780,7 +24780,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -25069,7 +25069,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -25359,7 +25359,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -25650,7 +25650,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -25939,7 +25939,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -26228,7 +26228,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -26516,7 +26516,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -26806,7 +26806,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -27086,7 +27086,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -27366,7 +27366,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -27646,7 +27646,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -27925,7 +27925,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -28503,7 +28503,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -28737,7 +28737,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -28970,7 +28970,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -29204,7 +29204,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -29435,7 +29435,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -29669,7 +29669,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -29905,7 +29905,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -30138,7 +30138,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -30371,7 +30371,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -30604,7 +30604,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -30891,7 +30891,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -31229,7 +31229,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -31567,7 +31567,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -31905,7 +31905,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -32246,7 +32246,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -32587,7 +32587,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -32927,7 +32927,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -33265,7 +33265,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -33587,7 +33587,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -33909,7 +33909,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -34232,7 +34232,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -34557,7 +34557,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -34816,7 +34816,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -35140,7 +35140,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -41800,7 +41800,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -42148,7 +42148,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -42494,7 +42494,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -42841,7 +42841,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -43186,7 +43186,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -43531,7 +43531,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -43770,7 +43770,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -44113,7 +44113,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -44462,7 +44462,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -44810,7 +44810,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -45156,7 +45156,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -45501,7 +45501,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -45849,7 +45849,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -46192,7 +46192,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -46541,7 +46541,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -46889,7 +46889,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -47239,7 +47239,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -47572,7 +47572,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -47792,7 +47792,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -48119,7 +48119,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -48450,7 +48450,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -50074,7 +50074,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -50370,7 +50370,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -50665,7 +50665,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -50958,7 +50958,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -51253,7 +51253,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -51549,7 +51549,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -51844,7 +51844,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -52145,7 +52145,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -52445,7 +52445,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -52746,7 +52746,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -52975,7 +52975,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -53275,7 +53275,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -53574,7 +53574,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -53875,7 +53875,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -54176,7 +54176,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -54476,7 +54476,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -54775,7 +54775,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -55096,7 +55096,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -55300,7 +55300,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -55504,7 +55504,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -55709,7 +55709,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -55912,7 +55912,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -56117,7 +56117,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -56323,7 +56323,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -56526,7 +56526,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -56737,7 +56737,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -56942,7 +56942,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -57203,7 +57203,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -57528,7 +57528,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -64556,7 +64556,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -64855,7 +64855,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -68219,7 +68219,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -68424,7 +68424,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -68629,7 +68629,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -68834,7 +68834,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -69038,7 +69038,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -69244,7 +69244,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -69449,7 +69449,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -69695,7 +69695,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -69962,7 +69962,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -70231,7 +70231,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -70431,7 +70431,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -70841,7 +70841,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -71250,7 +71250,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -71541,7 +71541,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -71833,7 +71833,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -72240,7 +72240,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -72652,7 +72652,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -73062,7 +73062,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -73473,7 +73473,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -73767,7 +73767,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -74058,7 +74058,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -74654,7 +74654,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -74885,7 +74885,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -75118,7 +75118,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -75352,7 +75352,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -75584,7 +75584,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -75680,7 +75680,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -75903,7 +75903,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -76218,7 +76218,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -76410,7 +76410,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -76741,7 +76741,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -76932,7 +76932,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -77266,7 +77266,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -77587,7 +77587,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -78309,7 +78309,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -78520,7 +78520,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -78731,7 +78731,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -78942,7 +78942,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -79154,7 +79154,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -79365,7 +79365,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -79577,7 +79577,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -79787,7 +79787,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -79998,7 +79998,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -80230,7 +80230,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -80453,7 +80453,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -80674,7 +80674,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -80892,7 +80892,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -81110,7 +81110,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -83301,7 +83301,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -83527,7 +83527,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -83762,7 +83762,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -83999,7 +83999,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -84235,7 +84235,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -84473,7 +84473,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -84709,7 +84709,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -84945,7 +84945,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -85183,7 +85183,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -91424,7 +91424,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -91635,7 +91635,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -91870,7 +91870,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -92182,7 +92182,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -92494,7 +92494,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -92805,7 +92805,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -93114,7 +93114,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -93423,7 +93423,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -93735,7 +93735,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -94022,7 +94022,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -94301,7 +94301,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -94481,7 +94481,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -94757,7 +94757,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -94987,7 +94987,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -95219,7 +95219,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -99532,7 +99532,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -99844,7 +99844,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -100156,7 +100156,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -100469,7 +100469,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -100783,7 +100783,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -101094,7 +101094,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -101406,7 +101406,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -101722,7 +101722,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -102041,7 +102041,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -102357,7 +102357,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -102759,7 +102759,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -103072,7 +103072,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -103478,7 +103478,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -103798,7 +103798,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -104111,7 +104111,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -104431,7 +104431,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -104748,7 +104748,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -105066,7 +105066,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -105382,7 +105382,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -105661,7 +105661,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -105961,7 +105961,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -106263,7 +106263,7 @@
       "fees": [
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -107397,7 +107397,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -107652,7 +107652,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {
@@ -107905,7 +107905,7 @@
         },
         {
           "code": "gratuities",
-          "tier": "customary",
+          "tier": "optional",
           "basis": "per_trip",
           "included": false,
           "provenance": {

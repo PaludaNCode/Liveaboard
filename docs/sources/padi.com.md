@@ -543,7 +543,7 @@ never will.
 
 ### Not read yet
 
-- **63 entries the classifier still declines**, and it should: "14% GST (on
+- **61 entries the classifier still declines**, and it should: "14% GST (on
   onboard purchases)" carries `price: 14.0` and is a percentage of an unrelated
   purchase; "Supervision fees for Level 1 divers…" is conditional on the diver.
   Each of them makes its trip's bill incomplete, which is the safe direction.
@@ -551,10 +551,19 @@ never will.
   "15 liter tanks", "Flashlight (torch)", "Fins, mask, snorkel (ABC)". Priced,
   and deliberately unread: the set is what a diver renting gear rents, and a
   basket assembled from parts is a price nobody quoted.
-- **"Tips for the crew"**, 376 entries and never priced. It would classify as
-  `gratuities` with one more pattern, and gratuities are *customary* here, so an
-  unpriced line would land in every affected trip's counted total as an unknown.
-  Worth doing deliberately rather than as a side effect.
+- ~~**"Tips for the crew"**~~ — **read now**, and the reason it was worth doing
+  deliberately turned out to be a different reason than this said. It is not 376
+  scattered entries: **23 of 23** sampled itineraries carry it, `payedPer: 30`
+  (per trip), and one states `extraValue: "15% suggested"` — a percentage of an
+  unstated base, which the money reader declines like any other. `crew\s+tips?`
+  only matched the other word order, so the one charge nearly every operator on
+  this seller states was the one nothing read.
+
+  It does **not** land in a counted total, and that is the change this prompted:
+  `gratuities` used to be promoted to *customary* from whatever block it was
+  listed in, and PADI files this under `optionalOnBoard` on every trip that
+  names it — as do all 55 liveaboard.com vessels that state gratuities. The
+  seller's block decides now. See `_tier_for` and `docs/plan-missing.md`.
 
 ## The vocabulary
 

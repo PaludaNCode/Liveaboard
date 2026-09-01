@@ -143,11 +143,21 @@
                : line.has_price ? { price: line.display.amount }
                : { listed: true };
       }
-      /* Tips are customary rather than optional, so a stated amount is in the
-         total. An operator who lists them without a figure leaves a real cost
-         outside the arithmetic, and the total has to say so. */
+      /* Tips sit outside the total, because both sellers file them under
+         Optional and this page reads the seller's own block rather than
+         overruling it -- a mandatory $50 tip and one you choose the size of
+         are different charges, and only the operator can say which it bills.
+         One listed as Required would arrive as `mandatory` and be counted like
+         any other, with no special case here.
+
+         So the marker is on whether tips exist and are outside the arithmetic,
+         priced or not: a stated EUR 120 the total does not carry is exactly as
+         missing from it as an unstated one. `included` is the operator saying
+         it is already covered, which needs no marker. */
       if (line.code === "gratuities") {
-        tips = line.included ? "included" : line.has_price ? "counted" : "unpriced";
+        tips = line.included ? "included"
+             : line.tier === "mandatory" ? "counted"
+             : line.has_price ? "extra" : "unpriced";
       }
       if (lineCounts(line)) {
         if (line.has_price) {
@@ -836,7 +846,11 @@
             'neither end is the price.">2 sellers</span>'
           : "";
         return "<b>" + sellerSpan(b.lo, b.hi) + "</b>" +
-          (m.tips === "unpriced" ? '<span class="plus"> + tips</span>' : "") +
+          (m.tips === "unpriced" || m.tips === "extra"
+            ? '<span class="plus" title="The operator lists crew tips under ' +
+              'its own Optional extras, so they are not in this total.">' +
+              ' + tips</span>'
+            : "") +
           varies + bar;
       } },
     /* What divers actually compare on, and the reason price per night is not

@@ -87,6 +87,14 @@ class FeeCode(str, Enum):
     ROUTE_SUPPLEMENT = "route_supplement"
     COAST_GUARD = "coast_guard"
     NAVY_FEE = "navy_fee"
+    HYPERBARIC_LEVY = "hyperbaric_levy"
+    """A per-diver contribution to the recompression chamber.
+
+    Its own code rather than a share of the park or service fee: it is a
+    charge to a named third party -- the chamber -- and the two trips that bill
+    it also bill park fees and a service charge separately. Filing it under
+    either would have been this parser deciding two lines are one.
+    """
 
     NITROX = "nitrox"
     GEAR_RENTAL = "gear_rental"
@@ -143,6 +151,7 @@ FEE_LABELS: dict[FeeCode, str] = {
     # as the line's note, so the page always carries what was actually said.
     FeeCode.LOCAL_FEES: "Local fees",
     FeeCode.HOSPITALITY_FEE: "Hospitality fee",
+    FeeCode.HYPERBARIC_LEVY: "Hyperbaric chamber levy",
     FeeCode.ROUTE_SUPPLEMENT: "Route supplement",
     FeeCode.COAST_GUARD: "Coast guard fee",
     FeeCode.NAVY_FEE: "Navy fee",
