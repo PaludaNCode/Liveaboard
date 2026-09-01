@@ -2132,6 +2132,23 @@
     return td;
   }
 
+  /* A table that fills the panel and scrolls inside itself.
+   *
+     `display:block` on the table did the scrolling and cost the width: a
+     table told to be a block box hands its own rows to an anonymous
+     inline-table, which shrink-wraps to its content -- so six columns sat
+     crammed against the left margin of a 1,200px panel with a third of it
+     blank, and the two tables came out different widths from each other
+     because each was as wide as its own longest boat name (#147). The
+     scrolling belongs to a wrapper; the table stays a table, at `width:100%`,
+     which spreads the columns and makes both tables the same width by
+     construction rather than by coincidence. */
+  function scroller(table) {
+    var box = el("div", "deals-scroll");
+    box.appendChild(table);
+    return box;
+  }
+
   function salesTable(rows) {
     var table = el("table", "deals-table");
     var head = document.createElement("thead");
@@ -2187,20 +2204,23 @@
       body.appendChild(tr);
     });
     table.appendChild(body);
-    return table;
+    return scroller(table);
   }
 
-  /* Every discounted sailing, deepest first.
+  /* Every discounted sailing, in the order it sails.
    *
      Reachable before only by switching the On sale chip on over the trips
      table, which is a filter and not this view's answer (#145): "which
      departures are cut" is a table question and "what are the sales" is a
      page, and the page was missing the half a reader came for.
 
-     Deepest first, because that is the order somebody shopping a sale reads
-     in, and the trips table is already sorted every other way. A sailing whose
-     seller stated no percentage sorts last and says so: it is on sale, and it
-     is not 0% off. */
+     By date rather than by depth. A discount nobody can take the week off for
+     is not a cheaper trip, so the date is the first thing a reader has to
+     check and this is a list they read down — and it is the first column for
+     the same reason, which keeps the order of the rows and the order of the
+     eye the same. Depth breaks a tie inside one day, and a sailing whose
+     seller stated no percentage sorts last of its day and says so: it is on
+     sale, and it is not 0% off. */
   function tripsOnSale() {
     var rows = [];
     D.departures.forEach(function (dep) {
@@ -2209,8 +2229,8 @@
       rows.push({ d: dep, itin: itin, pct: dep.sale.pct || 0 });
     });
     return rows.sort(function (a, b) {
-      if (a.pct !== b.pct) return b.pct - a.pct;
-      return a.d.start < b.d.start ? -1 : a.d.start > b.d.start ? 1 : 0;
+      if (a.d.start !== b.d.start) return a.d.start < b.d.start ? -1 : 1;
+      return b.pct - a.pct;
     });
   }
 
@@ -2218,7 +2238,7 @@
     var table = el("table", "deals-table");
     var head = document.createElement("thead");
     var hr = el("tr", null);
-    ["Boat", "Trip", "Sails", "Now", "Was", "Off"].forEach(function (h) {
+    ["Sails", "Boat", "Trip", "Off", "Was", "Now"].forEach(function (h) {
       hr.appendChild(el("th", null, h));
     });
     head.appendChild(hr);
@@ -2227,22 +2247,24 @@
     var body = document.createElement("tbody");
     rows.forEach(function (r) {
       var tr = el("tr", null);
+      tr.appendChild(el("td", "d-when", shortDate(r.d.start)));
       tr.appendChild(el("td", "d-boat", "")).appendChild(boatLink(r.itin.boat));
       tr.appendChild(el("td", "d-offer", r.itin.title));
-      tr.appendChild(el("td", "d-when", shortDate(r.d.start)));
-      /* The converted figure on both sides. `sale.was` is already in the
-         display currency and the payload's own price is the sailing's, so the
-         two may only ever be read beside `base`. */
-      tr.appendChild(el("td", "d-now", eur(r.d.base)));
-      tr.appendChild(el("td", r.d.sale.was ? "d-was" : "d-none",
-        r.d.sale.was ? eur(r.d.sale.was) : "not stated"));
+      /* What comes off, then the two prices in the order the cut happened:
+         the rate, the fare before it, the fare now. */
       tr.appendChild(r.pct
         ? el("td", "d-off", "−" + r.pct + "%")
         : el("td", "d-none", "rate not stated"));
+      /* The converted figure on both sides. `sale.was` is already in the
+         display currency and the payload's own price is the sailing's, so the
+         two may only ever be read beside `base`. */
+      tr.appendChild(el("td", r.d.sale.was ? "d-was" : "d-none",
+        r.d.sale.was ? eur(r.d.sale.was) : "not stated"));
+      tr.appendChild(el("td", "d-now", eur(r.d.base)));
       body.appendChild(tr);
     });
     table.appendChild(body);
-    return table;
+    return scroller(table);
   }
 
   /* ---------- the history view ---------- */
@@ -2604,24 +2626,22 @@
     return line;
   }
 
-  /* The vessels PADI advertises that no boat here joins to, named.
+  /* The vessels PADI advertises that no boat here joins to are *not* drawn.
    *
-     A line of names and not a paragraph (#145) -- but named on the page, which
-     is the invariant and not a preference: the query asks PADI for the USA as
-     well as Egypt because three Egyptian boats are filed there, and the same
-     breadth returns Caribbean ones. So an unmatched vessel is usually a boat
-     from another sea and occasionally an Egyptian one nothing here has paired
-     yet, and only a name somebody reads tells those apart. A count would not,
-     and a hover is not read. The *why* is the hover. */
-  function unmatchedLine(strangers) {
-    var line = el("p", "deals-coverage",
-      "Not carried here: " + strangers.map(function (v) { return v.name; }).join(", "));
-    line.title = "PADI advertises deals on these and no boat on this page " +
-      "joins to them. The query asks PADI for the USA as well as Egypt — which " +
-      "is how the three Red Sea Aggressors, filed under the USA, reach us at " +
-      "all — so the same breadth returns vessels from other oceans.";
-    return line;
-  }
+     They are still named, and naming them is still the point: the query asks
+     PADI for the USA as well as Egypt because three Egyptian boats are filed
+     there, the same breadth returns Caribbean ones, and only a name tells an
+     unpaired Egyptian boat from one sailing another ocean. But the reader of
+     this view is shopping the sales, and a list of boats the page does not
+     carry is the pipeline talking to its maintainer over the visitor's
+     shoulder. So the name goes where the maintainer is: `promote` keeps
+     `deals.unmatched` and `cli` prints a `::warning::` per vessel, which is
+     the build log rather than the page. Do not re-add it here without moving
+     the audience it is for.
+
+     What that leaves the panel is `coverageNote`, which is the reader's own
+     boundary -- what could not be read about the boats this page *does*
+     carry. */
 
   function dealsChanges(deals) {
     var moved = deals.changes || {};
@@ -2775,8 +2795,6 @@
       var note = deals.coverage ? coverageNote(deals.coverage) : null;
       if (note) body.appendChild(note);
       body.appendChild(salesTable(sales));
-      var strangers = deals.unmatched || [];
-      if (strangers.length) body.appendChild(unmatchedLine(strangers));
     }
 
     var trips = tripsOnSale();

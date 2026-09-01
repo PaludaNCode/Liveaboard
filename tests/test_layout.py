@@ -312,6 +312,56 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_the_sale_view_s_two_tables_fill_the_panel_and_match(self) -> None:
+        """Measured, because a width is a layout claim (#147).
+
+        `display:block` on the table made the scrolling work and the width
+        wrong: a table told to be a block box hands its rows to an anonymous
+        inline-table, which shrink-wraps to its own content. So both tables sat
+        crammed against the left of the panel with a third of it blank, and
+        they were different widths from each other -- each as wide as its own
+        longest cell. The stylesheet said `max-width:100%` throughout, which is
+        exactly the kind of source-text assertion this file exists to distrust.
+
+        Two claims, and the second only where there is room for it: each table
+        fills its scroller, and where neither scroller has to scroll the two
+        are the same width.
+        """
+        page = self.open(1440, 900, "#sale")
+        try:
+            for width, height in SIZES:
+                with self.subTest(size=(width, height)):
+                    self.sweep(page, width, height, "#sale")
+                    # The header *row*, not the table element. A table with
+                    # `display:block` is a block box and fills its parent like
+                    # any other -- it is the anonymous inline-table holding its
+                    # rows that shrink-wraps, so measuring the table measures
+                    # the wrapper and passes over the exact bug (checked, on
+                    # the old rule).
+                    m = page.evaluate("""() => {
+                      return [...document.querySelectorAll('#salePane .deals-scroll')]
+                        .map(box => {
+                          const tr = box.querySelector('tr');
+                          return { row: Math.round(tr.getBoundingClientRect().width),
+                                   room: box.clientWidth,
+                                   scrolls: box.scrollWidth > box.clientWidth + 1 };
+                        });
+                    }""")
+                    self.assertEqual(len(m), 2,
+                                     "the sale view no longer draws its two tables "
+                                     "inside scrollers")
+                    for n, box in enumerate(m):
+                        self.assertGreaterEqual(
+                            box["row"], box["room"] - 1,
+                            f"table {n} leaves {box['room'] - box['row']}px of the "
+                            "panel blank beside its columns")
+                    if not any(box["scrolls"] for box in m):
+                        self.assertEqual(
+                            m[0]["row"], m[1]["row"],
+                            "the two overviews are different widths where both fit")
+        finally:
+            page.close()
+
     def test_the_header_is_the_same_height_on_every_view(self) -> None:
         """Switching view must not move the page under the rail.
 
