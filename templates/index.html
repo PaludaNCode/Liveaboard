@@ -179,7 +179,7 @@
        it, only liveaboard.com does, or only PADI Travel does. Both are named,
        and named as the Seller column names them: "here" asked the reader to
        work out which of the two sites this page is, and it is neither. The
-       PADI-only case is 230 rows and had no way to be found before -- the
+       PADI-only case is __PADI_ONLY__ rows and had no way to be found before -- the
        column that named it was dropped when Seller took over the job of
        linking both sellers. -->
   <div class="tgroup">
@@ -368,15 +368,16 @@
       <h3>Rental gear</h3>
       <p>
         Counted by default, and switching it off changes the order of the
-        table. A full set costs about <b>&euro;200</b> a week almost regardless
-        of the boat &mdash; across 54 vessels the gear price barely tracks the
-        berth price at all.
+        table. A full set costs about <b>&euro;__GEAR_WEEK__</b> a week almost
+        regardless of the boat &mdash; across __GEAR_VESSELS__ vessels the gear
+        price barely tracks the berth price at all.
       </p>
       <p>
-        So it lands hardest on the cheapest trips: <b>18%</b> on top of a berth
-        in the bottom third, <b>13%</b> in the top. At the extremes it is 32% of
-        a Hammerhead II week and 9% of a Blue Seas one, which is enough to close
-        most of the gap between them.
+        So it lands hardest on the cheapest trips: <b>__GEAR_LOW_THIRD__%</b> on
+        top of a berth in the bottom third, <b>__GEAR_TOP_THIRD__%</b> in the top.
+        At the extremes it is __GEAR_DEAREST__% of a __GEAR_DEAREST_BOAT__ week
+        and __GEAR_CHEAPEST__% of a __GEAR_CHEAPEST_BOAT__ one, which is enough
+        to close most of the gap between them.
       </p>
     </div>
     <div>
@@ -452,11 +453,11 @@
       </p>
       <p>
         Everywhere else it says <em>not stated</em>. It used to assume three
-        dives for every full day at sea, and the ten vessels that do publish a
-        figure show why that had to go: for the same seven-night week they
-        state anything from <b>15 to 21</b>. At sixty to a hundred euro a dive,
-        six dives is the difference between two boats &mdash; which is the
-        entire thing this column is for.
+        dives for every full day at sea, and the __DIVES_VESSELS__ vessels that
+        do publish a figure show why that had to go: for the same seven-night
+        week they state anything from <b>__DIVES_LOW__ to __DIVES_HIGH__</b>. At
+        sixty to a hundred euro a dive, __DIVES_SPREAD__ dives is the difference
+        between two boats &mdash; which is the entire thing this column is for.
       </p>
     </div>
     <div>
@@ -479,16 +480,18 @@
         publishes instead of a ladder. It answers &ldquo;is there room&rdquo;
         and not &ldquo;is there room at this fare&rdquo;, and the two are never
         added together or swapped for one another. Where both sellers count, the
-        panel shows both &mdash; including the 24 sailings where they disagree
-        about whether the boat is full. Where nobody counted, the column falls
+        panel shows both &mdash; including the __FULL_DISAGREE__ sailings where
+        they disagree about whether the boat is full. Where nobody counted, the column falls
         back to the operator&rsquo;s word &mdash; available, a few left, sold
         out &mdash; which is the weakest statement of the three and is printed
         as one.
       </p>
       <p>
         A <b>0</b> means nothing is on sale at the price on the row. Usually the
-        sailing is full; on ten of them it is not, and the cheapest berth you
-        can actually book is 4&ndash;25% dearer than the number advertised.
+        sailing is full; on __ZERO_BOOKABLE__ of them it is not, and the cheapest
+        berth you can actually book is
+        __ZERO_DEARER_LOW__&ndash;__ZERO_DEARER_HIGH__% dearer than the number
+        advertised.
       </p>
     </div>
     <div>
@@ -528,18 +531,18 @@
         never a berth price against a bill, which would show whichever seller
         discloses less as the cheaper one. Where both sell a sailing, the
         <b>Seller</b> column links each of them, so either price can be checked
-        at the place that published it. On the 230 sailings only PADI lists it
+        at the place that published it. On the __PADI_ONLY__ sailings only PADI lists it
         links PADI alone and says so, and the <b>Sold by</b> filter above the
         table is how you narrow to any of the three cases.
       </p>
       <p>
         They differ more than you would expect for one cabin on one boat on one
-        day: of the trips where both fee books can be added up, <b>43 of 74</b>
-        disagree and sixteen by more than &euro;150. One boat&rsquo;s week is
-        &euro;120 of required extras through one seller and &euro;420 through
-        the other. The berth prices, by contrast, are within &euro;5 nine times
-        in ten &mdash; so a comparison of advertised prices alone would have
-        found almost nothing and missed all of this.
+        day: of the trips where both fee books can be added up,
+        <b>__FEE_DISAGREE__ of __FEE_BOTH__</b> disagree, the widest by
+        &euro;__FEE_WIDEST__ of required extras on one week. The berth prices, by
+        contrast, are a median of &euro;__FARE_GAP__ apart &mdash; so a comparison
+        of advertised prices alone would have found almost nothing and missed all
+        of this.
       </p>
       <p>
         <b>Both totals carry the same nitrox and rental gear</b>, from the

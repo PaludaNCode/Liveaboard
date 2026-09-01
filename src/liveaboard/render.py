@@ -32,7 +32,7 @@ from .pricing import (
     padi_lines,
     resolve_fees,
 )
-from .taxonomy import DIVER_LEVEL_BARS, FEE_LABELS, FeeCode
+from .taxonomy import DIVER_LEVEL_BARS, FEE_LABELS, FeeCode, FeeTier
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent.parent / "templates"
 
@@ -407,6 +407,189 @@ def nitrox_prices(dataset: Dataset) -> dict[str, Any]:
     }
 
 
+def _median(values: list[float]) -> float:
+    """The middle of a sorted list, for the same reason `nitrox_prices` uses one:
+    a mean here is one 400-euro outlier away from being a figure nothing in the
+    fleet resembles."""
+    middle = len(values) // 2
+    if len(values) % 2:
+        return values[middle]
+    return (values[middle - 1] + values[middle]) / 2
+
+
+def gear_prices(dataset: Dataset) -> dict[str, Any]:
+    """What a full set costs, and what it costs *as a share of the berth*.
+
+    Normalised to a seven-night week through `itinerary_lines`, never from the
+    raw amount: operators quote the same set per day, per trip and per week, so
+    a figure compared across vessels has to go through the basis resolution
+    first -- which is this project's oldest rule and the reason the number is
+    computed here rather than typed.
+
+    The terciles are the argument, not decoration. A flat charge on a fare that
+    spans four figures lands hardest on the cheapest trips, and stating it as
+    one average would hide exactly that.
+    """
+    quoted: dict[str, float] = {}
+    for itinerary in dataset.itineraries.values():
+        if itinerary.nights != 7:
+            continue
+        for line in itinerary_lines(itinerary, dataset.fx):
+            if line.code is FeeCode.GEAR_RENTAL and line.display is not None:
+                quoted[itinerary.boat_id] = float(line.display.amount)
+    if not quoted:
+        return {}
+
+    # One row per sailing, so a boat selling twenty weeks weighs twenty times
+    # in the terciles -- these are shares of what a visitor is choosing between,
+    # not an average over hulls.
+    rows: list[tuple[float, float, str]] = []
+    for departure in dataset.departures:
+        itinerary = dataset.itineraries.get(departure.itinerary_id)
+        if itinerary is None or itinerary.boat_id not in quoted:
+            continue
+        if itinerary.nights != 7:
+            continue
+        fare, _ = dataset.fx.to_display(departure.price)
+        rows.append((float(fare.amount), quoted[itinerary.boat_id], itinerary.boat_id))
+    if not rows:
+        return {"vessels": len(quoted), "week": round(_median(sorted(quoted.values())))}
+    rows.sort()
+
+    def share(chunk: list[tuple[float, float, str]]) -> float:
+        return 100 * sum(g for _, g, _ in chunk) / sum(f for f, _, _ in chunk)
+
+    third = max(1, len(rows) // 3)
+    extremes = sorted((gear / fare * 100, boat) for fare, gear, boat in rows)
+
+    def named(entry: tuple[float, str]) -> str:
+        boat = dataset.boats.get(entry[1])
+        return boat.name if boat else entry[1]
+
+    return {
+        "vessels": len(quoted),
+        # To the nearest ten, because "about" is what the sentence says and a
+        # euro of precision on a median invites a reader to check arithmetic
+        # the claim is not making.
+        "week": int(round(_median(sorted(quoted.values())) / 10) * 10),
+        "low_third": round(share(rows[:third])),
+        "top_third": round(share(rows[-third:])),
+        "dearest": round(extremes[-1][0]),
+        "dearest_boat": named(extremes[-1]),
+        "cheapest": round(extremes[0][0]),
+        "cheapest_boat": named(extremes[0]),
+    }
+
+
+def week_dive_counts(dataset: Dataset) -> dict[str, Any]:
+    """The spread of stated dive counts over one trip length, per vessel.
+
+    Seven nights only, which is the whole point: the figure exists to refute
+    "three dives a day", and comparing counts across trip lengths would refute
+    nothing. Per vessel rather than per trip, because a boat stating 17 on four
+    of its weeks is one data point about that boat.
+    """
+    week: dict[str, set[int]] = {}
+    for itinerary in dataset.itineraries.values():
+        if itinerary.nights == 7 and itinerary.dives:
+            week.setdefault(itinerary.boat_id, set()).add(itinerary.dives)
+    stated = sorted(n for counts in week.values() for n in counts)
+    if not stated:
+        return {}
+    return {
+        "vessels": len(week),
+        "low": stated[0],
+        "high": stated[-1],
+        "spread": stated[-1] - stated[0],
+    }
+
+
+def seller_gap(dataset: Dataset) -> dict[str, Any]:
+    """How far apart the two sellers are, on the fare and on the fee book.
+
+    The section's whole argument, in numbers, and both halves of it move
+    whenever either parser learns to read something: the comparable set is
+    `padi_fees_complete`, which grew from 74 trips to 179 when PADI's string
+    prices were read, and the fare gap moves on every refresh.
+
+    Mandatory lines only. Nitrox and rental gear are the vessel's own charge on
+    both sides -- the same rows, from the same price list -- so including them
+    would add a constant to both totals and dilute the difference the sentence
+    is about.
+
+    The fare gap is a **median**, not a share within a threshold. A threshold
+    is a second number in the claim and the wrong one moves invisibly: the page
+    said "within 5 euro nine times in ten", which was true at 5 and became true
+    at 10 instead, with nothing to notice that the sentence had drifted from
+    the data to somewhere near it.
+    """
+    def mandatory(lines: list[Any]) -> float:
+        return sum(
+            float(line.display.amount) for line in lines
+            if line.tier is FeeTier.MANDATORY and line.display is not None
+        )
+
+    comparable = disagree = 0
+    widest = 0.0
+    for itinerary in dataset.itineraries.values():
+        theirs = padi_lines(itinerary, dataset.fx)
+        if theirs is None:
+            continue
+        comparable += 1
+        gap = abs(mandatory(itinerary_lines(itinerary, dataset.fx)) - mandatory(theirs))
+        if round(gap) > 0:
+            disagree += 1
+        widest = max(widest, gap)
+
+    fares = sorted(
+        abs(float(dataset.fx.to_display(departure.price)[0].amount)
+            - float(dataset.fx.to_display(departure.padi_price)[0].amount))
+        for departure in dataset.departures if departure.padi_price is not None
+    )
+    figures: dict[str, Any] = {}
+    if comparable:
+        figures.update(fee_both=comparable, fee_disagree=disagree,
+                       fee_widest=round(widest))
+    if fares:
+        figures.update(fare_pairs=len(fares), fare_gap=round(_median(fares)))
+    return figures
+
+
+def berth_count_gaps(payload: dict[str, Any]) -> dict[str, Any]:
+    """The two places the Places column contradicts itself, counted.
+
+    Both are statements about disagreement rather than about a boat, so both are
+    read off the shipped payload -- the same blocks `app.js` reads, in the same
+    slots, so the page and the sentence about the page cannot part company.
+
+    `at_price` and `aboard` are different questions, so they are only ever
+    compared on the one thing they must agree about: whether anything is left
+    at all. A boat one seller calls full while the other still sells berths is
+    the disagreement worth naming; two counts differing by three is not.
+    """
+    SELLER, SPOTS, CABINS, ABOARD = 0, 1, 2, 3
+    disagree = 0
+    dearer: list[int] = []
+    for departure in payload["departures"]:
+        blocks = departure.get("berths") or []
+        spots = next((b[SPOTS] for b in blocks if b[SPOTS] is not None), None)
+        aboard = next((b[ABOARD] for b in blocks if b[ABOARD] is not None), None)
+        if spots is not None and aboard is not None and (spots == 0) != (aboard == 0):
+            disagree += 1
+        if spots != 0 or not departure.get("base"):
+            continue
+        rungs = next((b[CABINS] for b in blocks if b[CABINS]), [])
+        left = [rung for rung in rungs if rung[2]]
+        if left:
+            cheapest = min(rung[1] for rung in left)
+            dearer.append(round((cheapest / departure["base"] - 1) * 100))
+    figures: dict[str, Any] = {"full_disagree": disagree}
+    if dearer:
+        figures.update(zero_bookable=len(dearer),
+                       dearer_low=min(dearer), dearer_high=max(dearer))
+    return figures
+
+
 def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]:
     """Every number the footer's prose states about the dataset.
 
@@ -421,6 +604,11 @@ def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]
         counts[value] = counts.get(value, 0) + 1
     prices = nitrox_prices(dataset)
     bar = dataset.entry_bar
+    gear = gear_prices(dataset)
+    dives = week_dive_counts(dataset)
+    gap = seller_gap(dataset)
+    berths = berth_count_gaps(payload)
+    padi_only = sum(1 for d in payload["departures"] if d.get("padi_only"))
 
     def figure(value: object) -> str:
         return "&mdash;" if value is None else f"{value:g}" if isinstance(
@@ -440,6 +628,42 @@ def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]
         "__BAR_DISAGREE__": figure(bar.get("disagree")),
         "__BAR_PADI_STRICTER__": figure(bar.get("padi_stricter")),
         "__BAR_OURS_STRICTER__": figure(bar.get("ours_stricter")),
+
+        # The sellers section. Every one of these had drifted: 230 PADI-only
+        # sailings against 225, "43 of 74" fee books against 84 of 179, and a
+        # "sixteen trips by more than 150 euro" whose widest gap is now 140 --
+        # a sentence naming a bracket the data has left entirely.
+        "__PADI_ONLY__": figure(padi_only),
+        "__FEE_BOTH__": figure(gap.get("fee_both")),
+        "__FEE_DISAGREE__": figure(gap.get("fee_disagree")),
+        "__FEE_WIDEST__": figure(gap.get("fee_widest")),
+        "__FARE_GAP__": figure(gap.get("fare_gap")),
+
+        # The Places section: "the 24 sailings where they disagree" was 10.
+        "__FULL_DISAGREE__": figure(berths.get("full_disagree")),
+        "__ZERO_BOOKABLE__": figure(berths.get("zero_bookable")),
+        "__ZERO_DEARER_LOW__": figure(berths.get("dearer_low")),
+        "__ZERO_DEARER_HIGH__": figure(berths.get("dearer_high")),
+
+        # Per dive: "the ten vessels that do publish a figure ... 15 to 21" is
+        # 69 vessels and 6 to 24 since PADI's counts became the last resort.
+        "__DIVES_VESSELS__": figure(dives.get("vessels")),
+        "__DIVES_LOW__": figure(dives.get("low")),
+        "__DIVES_HIGH__": figure(dives.get("high")),
+        "__DIVES_SPREAD__": figure(dives.get("spread")),
+
+        # Rental gear: 54 vessels against 65, and the extremes had changed boat.
+        "__GEAR_VESSELS__": figure(gear.get("vessels")),
+        "__GEAR_WEEK__": figure(gear.get("week")),
+        "__GEAR_LOW_THIRD__": figure(gear.get("low_third")),
+        "__GEAR_TOP_THIRD__": figure(gear.get("top_third")),
+        "__GEAR_DEAREST__": figure(gear.get("dearest")),
+        # A vessel name is the one figure here that is text, so it is escaped:
+        # the fleet holds ampersands, and a name is the operator's own spelling
+        # rather than something this file gets to tidy.
+        "__GEAR_DEAREST_BOAT__": _escape(figure(gear.get("dearest_boat"))),
+        "__GEAR_CHEAPEST__": figure(gear.get("cheapest")),
+        "__GEAR_CHEAPEST_BOAT__": _escape(figure(gear.get("cheapest_boat"))),
     }
 
 

@@ -851,6 +851,15 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         "__NITROX_PER_TRIP__",
         "__BAR_BOTH__", "__BAR_DISAGREE__",
         "__BAR_PADI_STRICTER__", "__BAR_OURS_STRICTER__",
+        "__PADI_ONLY__",
+        "__FEE_BOTH__", "__FEE_DISAGREE__", "__FEE_WIDEST__", "__FARE_GAP__",
+        "__FULL_DISAGREE__", "__ZERO_BOOKABLE__",
+        "__ZERO_DEARER_LOW__", "__ZERO_DEARER_HIGH__",
+        "__DIVES_VESSELS__", "__DIVES_LOW__", "__DIVES_HIGH__", "__DIVES_SPREAD__",
+        "__GEAR_VESSELS__", "__GEAR_WEEK__",
+        "__GEAR_LOW_THIRD__", "__GEAR_TOP_THIRD__",
+        "__GEAR_DEAREST__", "__GEAR_DEAREST_BOAT__",
+        "__GEAR_CHEAPEST__", "__GEAR_CHEAPEST_BOAT__",
     )
 
     def nitrox_by_vessel(self) -> dict[str, int]:
@@ -894,6 +903,58 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         self.assertEqual(figures["__NITROX_INCLUDED__"], str(counts.get("included", 0)))
         self.assertEqual(figures["__NITROX_PRICED__"], str(counts.get("priced", 0)))
         self.assertEqual(figures["__NITROX_ABSENT__"], str(counts.get("absent", 0)))
+
+    def test_no_figure_is_left_typed_into_the_prose(self):
+        """The half of this that was still open after the tokens landed.
+
+        The nitrox and entry-bar counts were substituted; every other number in
+        the footer was still a literal, and by 2026-09-01 five of them were
+        wrong -- 230 PADI-only sailings against 225, "43 of 74" fee books
+        against 84 of 179, "the ten vessels that do publish a figure" against
+        69, and a "sixteen trips by more than 150 euro" whose widest gap had
+        fallen to 140. The page was making its own argument with numbers that
+        had stopped being true, which is the failure it exists to report in
+        other people.
+
+        So this asserts the *shape*: a sentence in the footer that states a
+        count about the dataset states it as a token. Written as the sentences
+        the mismatches were found in, because a bare "no digits in the footer"
+        rule cannot hold -- a threshold, a currency and a date are all numbers
+        that belong in prose.
+        """
+        html = self.TEMPLATE.read_text(encoding="utf-8")
+        for phrase in (
+            "43 of 74", "230 sailings", "24 sailings where they disagree",
+            "15 to 21", "across 54 vessels", "4&ndash;25%",
+            "within &euro;5 nine times", "more than &euro;150",
+        ):
+            self.assertNotIn(
+                phrase, html,
+                f"the footer states {phrase!r} as a literal; it is a function "
+                "of the committed data and belongs in _stated_figures",
+            )
+
+    def test_the_figures_a_fetch_moves_are_all_derived(self):
+        """Every helper behind a token answers, on the committed dataset.
+
+        A helper that returns an empty dict renders every figure it feeds as an
+        em dash -- honest, and on a full dataset also a sign that its definition
+        stopped matching the data it reads. `padi_fees_complete` moving would
+        empty `seller_gap` silently, and the page would quietly go from stating
+        a comparison to stating nothing.
+        """
+        from liveaboard.render import (
+            berth_count_gaps, build_payload, gear_prices, seller_gap,
+            week_dive_counts,
+        )
+
+        dataset = published.dataset()
+        payload = build_payload(dataset)
+        self.assertTrue(gear_prices(dataset).get("vessels"))
+        self.assertTrue(week_dive_counts(dataset).get("vessels"))
+        self.assertTrue(seller_gap(dataset).get("fee_both"))
+        self.assertTrue(seller_gap(dataset).get("fare_pairs"))
+        self.assertIsNotNone(berth_count_gaps(payload).get("full_disagree"))
 
     def test_a_figure_nobody_measured_is_a_dash_not_a_zero(self):
         """"0 vessels publish a price" is a claim; a dataset promoted before
