@@ -283,7 +283,15 @@
      inside it would be cut off exactly where this one has to appear. One
      element at document level, positioned against the button that opened
      it. -->
-<div id="berths" role="dialog" aria-label="Cabin prices and places left" hidden></div>
+<div id="berths" class="panel-pop" role="dialog" aria-label="Cabin prices and places left" hidden></div>
+<!-- The bill, out of the per-row dropdown it used to expand into (#149). One
+     host filled on demand rather than markup per departure: the page is a
+     single file and nothing is lazily fetched, so anything written per row
+     ships 1,122 times. -->
+<div id="feePanel" class="panel-pop bill-pop" role="dialog" aria-label="What this trip costs, line by line" hidden></div>
+<!-- And the stated entry requirement, which was the head of that dropdown and
+     is not a fee. Its own panel on the column that prints its short form. -->
+<div id="entryPanel" class="panel-pop" role="dialog" aria-label="Stated entry requirement" hidden></div>
 
 <details class="site-footer">
   <summary>

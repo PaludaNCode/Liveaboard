@@ -472,6 +472,30 @@ Break these and the site starts lying quietly rather than failing loudly.
   the remainder after the panel had taken its cap, and at 768×600 the remainder
   was **0px**. A `min-height` floor under the table fixes neither half: a floor
   that can exceed the room left is a pane painting over the footer.
+- **One panel mechanism, not one per column.** Three cells open a panel on
+  **hover or click** — Places for the cabin ladder, Mandatory fees for the bill,
+  Entry bar for the stated requirement — and all three go through `hoverPanel`.
+  Keep the click half: hover does not exist on a touch screen and this page is
+  built to work on a phone in a dive shop. Each trigger is a `<button>` with
+  `aria-haspopup="dialog"`, opening one closes the others, and each host is
+  **one div filled on demand** — nothing is lazily fetched here, so anything
+  written per row ships 1,122 times. `rowFor` rebuilds the row rather than
+  caching it against the trigger, because the bill depends on the toggles.
+  The fee bill was a per-row `+` column and a full-width detail row (#149): it
+  pushed every row below it down to answer a question about one row and spent
+  26px of pinned width on all 1,122. **The whole breakdown moved, not a
+  summary** — the fee table with its included lines at zero, the caveat that
+  applies, and the second seller's bill with its three-state wording — because
+  a panel holding only the line items would claim a total on part of a
+  disclosure. What gives is height: it caps at 70vh and scrolls inside itself,
+  and each fee table sits in its own `.fee-scroll` because the table's 460px
+  `min-width` beats the panel's width and would otherwise drag the panel's
+  header sideways. **The entry bar is not a fee** and opens from the Entry bar
+  column instead; it led that dropdown because whether a diver may board is
+  prior to what boarding costs, and that reason does not put it under
+  *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
+  the pinned *first* cell, which was the expander and is now `.stick1`, so
+  reclaiming the width did not quietly delete the mark.
 - **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
   Chromium over the three views at six windows; everything else about the split
   is asserted as template text, which is right for wiring and worthless for

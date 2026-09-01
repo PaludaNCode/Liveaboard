@@ -75,7 +75,7 @@
        filter held on, and holding it here rather than by pressing the chip
        means one answer to "is the sale filter on" instead of two. */
     view: null,
-    toggles: {}, open: null,
+    toggles: {},
     /* Rows the visitor has marked to keep their place while scrolling
        sideways. Keyed on the departure id rather than the row index, so a
        mark survives sorting, filtering and the table being redrawn under it --
@@ -764,7 +764,12 @@
           ? '<span class="varies" title="' +
             esc(req.notes).replace(/"/g, "&quot;") + '">2 sellers</span>'
           : "";
-        return esc(text) + split;
+        /* The stated requirement in full, on hover or click. It was the head
+           of the fee dropdown, which is the wrong home for it twice over: it
+           is not a fee, and it was reachable only by opening a bill (#149). */
+        return '<button class="entry-open" type="button" data-entry="' + esc(i.id) +
+          '" aria-expanded="false" aria-haspopup="dialog">' + esc(text) +
+          '<span class="caret" aria-hidden="true">▾</span></button>' + split;
       } },
     /* The berth price of whichever seller's bill this row is printing. It read
        liveaboard.com's unconditionally, which on a row won by PADI put two
@@ -960,8 +965,19 @@
           return '<span class="unstated ' + why[0] + '" title="' +
             esc(FEE_WHY[why[0]]) + '">' + why[1] + "</span>";
         }
-        return '<span class="later">+' +
-          sellerPair(b.laterLo, b.laterHi) + "</span>";
+        /* The figure opens the bill it is the sum of, on hover or click, which
+           is where a `+` column and a full-width dropdown used to be (#149).
+           The dropdown pushed every row below it down to answer a question
+           about one row, and it cost 26px of pinned width on every row that
+           was never opened.
+
+           A button rather than a cell with a handler, so it is reachable by
+           keyboard without anything being added for that: the dropdown's `+`
+           was a button and this may not be a step back from it. */
+        return '<button class="fees-open" type="button" data-fees="' + esc(d.id) +
+          '" aria-expanded="false" aria-haspopup="dialog">' +
+          '<span class="later">+' + sellerPair(b.laterLo, b.laterHi) + "</span>" +
+          '<span class="caret" aria-hidden="true">▾</span></button>';
       } },
     /* 127 of 886 departures are sold out. Priced alongside bookable ones with
        no way to tell them apart, a cheapest-first sort could put a trip nobody
@@ -1148,9 +1164,10 @@
      fees, Total -- cannot, and the note on the block below says what it costs.
 
      What does not fit in front of the money, measured at 390px: Return is
-     62px, From and To are 120px each, and the pinned pair plus the expander
-     already spend 186. Return therefore follows the money rather than leading
-     it, as it does nowhere else. Of the two identifiers, the boat's name is
+     62px, From and To are 120px each, and the pinned column spends 66 -- 90
+     before the fee dropdown's `+` column was reclaimed (#149). Return
+     therefore follows the money rather than leading it, as it does nowhere
+     else. Of the two identifiers, the boat's name is
      what a row is compared by; the return date you read once you have found
      the row. Nothing is dropped -- the order is what changes. */
   var PHONE_ORDER = [
@@ -1177,11 +1194,18 @@
   ];
 
   /* The same again on a screen too small to afford Guests in front of the
-     money. Guests is 45px and the Total is 155 behind 186px of expander and
-     pinned columns, so the Total's right edge lands at 386: fine on a 390px
-     phone and 26px past the edge of a 360px one, which is a Galaxy S-series
-     and most older Androids. Measured, not assumed -- putting Guests ahead of
-     the price took the Total from 186..345 to 231..386.
+     money. Guests is 45px, so dropping it is what moves the Total left.
+
+     **These figures are re-measured and they no longer say what they said.**
+     Removing the `+` column took 24px off everything in front of the money
+     (#149), so the Total now sits at 207..420 on a 390px phone against
+     231..444 before it -- but 420 is still 30px past the edge, and 444 was 54.
+     The comment used to read "the Total's right edge lands at 386: fine on a
+     390px phone", and that stopped being true at some point between then and
+     now without anybody measuring again. The order below is still the right
+     order and the 24px is a real improvement; what is not true is that the
+     Total fits. Fixing that means re-deriving these widths, which is its own
+     change and not a side effect of moving a fee panel.
 
      So below that width Guests goes back behind the price block, at the head
      of the descriptive columns rather than buried among them. The money is
@@ -1334,6 +1358,9 @@
     return true;
   }
 
+  var byId = {};
+  D.departures.forEach(function (d) { byId[d.id] = d; });
+
   function visible() {
     var out = [];
     D.departures.forEach(function (dep) {
@@ -1350,6 +1377,21 @@
       return String(x).localeCompare(String(y)) * state.dir;
     });
     return out;
+  }
+
+  /* One row, rebuilt from a departure id.
+   *
+     What `visible()` builds per row, on demand for a panel that is opened
+     rather than drawn. Rebuilt rather than cached against the trigger, because
+     `metricsFor` reads the toggles: a panel holding a row from the last draw
+     would show a bill with rental gear in it after the visitor switched gear
+     off. */
+  function rowFor(id) {
+    var dep = byId[id];
+    if (!dep) return null;
+    var itin = D.itineraries[dep.itinerary_id];
+    if (!itin) return null;
+    return { d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) };
   }
 
   /* ---------- rendering ---------- */
@@ -1450,7 +1492,7 @@
     }).join("");
   }
 
-  function feeTable(row) {
+  function billPanel(row) {
     var body = feeRows(linesFor(row.d));
 
     var caveat = "";
@@ -1546,15 +1588,22 @@
        operators of. Ours first because its fee book is the one every row on
        the page is built from; PADI's beneath it, only where its own disclosure
        is complete enough to add up. */
+    /* Each table in a scroller of its own. The fee table's columns need 460px
+       to line up and the panel is narrower than that on a phone, so without
+       this the table overflowed the panel and took the panel's own header
+       sideways with it -- the same rule the deals tables follow: wide content
+       scrolls inside its own box and never widens what holds it. */
     var second = row.padi
       ? '<p class="whose">PADI Travel\u2019s bill for the same trip</p>' +
-        '<table class="fees"><tbody>' +
+        '<div class="fee-scroll"><table class="fees"><tbody>' +
         feeRows([row.d.padi_base_line].concat(row.i.padi_lines)) +
-        "</tbody></table>"
+        "</tbody></table></div>"
       : "";
-    return entryBar(row.i) +
+    return '<p class="pwho">' + esc(row.i.boat) + " &middot; " +
+      shortDate(row.d.start) + " &middot; " + row.i.nights + " nights</p>" +
       (second ? '<p class="whose">This site\u2019s source, liveaboard.com</p>' : "") +
-      '<table class="fees"><tbody>' + body + "</tbody></table>" +
+      '<div class="fee-scroll"><table class="fees"><tbody>' + body +
+        "</tbody></table></div>" +
       second +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
       (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
@@ -1598,7 +1647,7 @@
        with the order actually being rendered. */
     pins = pinned();
 
-    document.getElementById("head").innerHTML = '<tr><th class="expander"></th>' +
+    document.getElementById("head").innerHTML = "<tr>" +
       COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
@@ -1649,20 +1698,18 @@
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
               " " + pin(col) + '">' + v + "</td>";
           }).join("");
-          var open = state.open === row.d.id;
           /* Banding is written here from the row's own position, not left to
-             `:nth-of-type(even)`. That selector counts every `tr` in the
-             tbody, and an expanded row injects one -- so opening any row
-             inverted the stripes of every row below it. */
+             `:nth-of-type(even)`. That selector counts every `tr` in the tbody,
+             and the expanded row this used to inject was one -- so opening any
+             row inverted the stripes of every row below it. The panel is a
+             popover now and injects nothing, but the banding stays computed:
+             it is correct either way and it is one fewer thing that a later
+             row-level `tr` could quietly break. */
           var marked = state.marked.has(row.d.id);
           return '<tr class="row' + (n % 2 ? " alt" : "") +
             (row.d.bookable ? "" : " gone") + (marked ? " marked" : "") +
             '" aria-selected="' + marked + '" data-id="' + esc(row.d.id) + '">' +
-            '<td class="expander"><button class="expand" data-n="' + n +
-            '" aria-expanded="' + open + '">' + (open ? "−" : "+") + "</button></td>" +
-            tds + "</tr>" +
-            (open ? '<tr class="detail"><td colspan="' + (COLS.length + 1) + '">' +
-              feeTable(row) + "</td></tr>" : "");
+            tds + "</tr>";
         }).join("");
   }
 
@@ -2656,28 +2703,22 @@
   });
 
   document.getElementById("body").addEventListener("click", function (event) {
-    var button = event.target.closest(".expand");
-    if (button) {
-      var row = visible()[+button.dataset.n];
-      state.open = state.open === row.d.id ? null : row.d.id;
-      draw(true);
-      return;
-    }
-
-    /* Anywhere else on a row marks it, so the visitor can keep their place
-       while scrolling sixteen columns sideways.
+    /* Anywhere on a row marks it, so the visitor can keep their place while
+       scrolling sixteen columns sideways.
      *
        Three things it must not do. It must not steal a click meant for a
        link -- the Source column opens the operator's own listing, and a
-       marked row is no consolation for not going there. It must not fire
-       inside an expanded bill, which is a panel the visitor opened and not
-       part of the row's own surface. And it must not fire at the end of a
-       drag: selecting a price to copy it ends in a mouseup over the row, and
-       toggling a highlight underneath the text being selected reads as the
-       page fighting back. `isCollapsed` is false exactly when text was
-       dragged, which is the distinction wanted -- not whether a selection
-       exists, since an old one elsewhere on the page would then block every
-       mark. */
+       marked row is no consolation for not going there. It must not fire on a
+       panel's own trigger, which is a button the visitor pressed to read
+       something and not part of the row's own surface -- and the `button` test
+       covers all three of them, which is why the fee panel needed no new
+       branch here when it stopped being a row of its own. And it must not fire
+       at the end of a drag: selecting a price to copy it ends in a mouseup
+       over the row, and toggling a highlight underneath the text being
+       selected reads as the page fighting back. `isCollapsed` is false exactly
+       when text was dragged, which is the distinction wanted -- not whether a
+       selection exists, since an old one elsewhere on the page would then
+       block every mark. */
     if (event.target.closest("a, button")) return;
     var tr = event.target.closest("tr.row");
     if (!tr) return;
@@ -2698,10 +2739,6 @@
 
      Both gestures, not either. Hover alone does not exist on a phone; click
      alone makes a reader hold still for something they wanted to glance at. */
-  var pop = document.getElementById("berths");
-  var byId = {};
-  D.departures.forEach(function (d) { byId[d.id] = d; });
-  var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
 
   function ladderRows(block) {
     var cheapest = Math.min.apply(null, block[BLOCK_CABINS].map(function (c) {
@@ -2788,7 +2825,7 @@
       "read and no way to say how many are left at the fare on the row.</p>";
   }
 
-  function fill(d) {
+  function fillLadder(host, d) {
     /* Every block, not only the ones with a ladder. Filtering on cabins was
        right while liveaboard.com was the only seller that counted; it now
        throws away the answer on the 249 sailings where PADI is the only one
@@ -2812,12 +2849,12 @@
     var head = '<p class="pwho">' + esc(boatOf(d)) + " &middot; " +
       shortDate(d.start) + " &middot; " + d.nights + " nights" +
       (lone ? '<span class="pread">read ' + shortDate(lone) + "</span>" : "") + "</p>";
-    if (!blocks.length) { pop.innerHTML = head; return; }
+    if (!blocks.length) { host.innerHTML = head; return; }
     /* One section per seller, and both fill one now (#92). The seller is named
        whenever two are speaking, and also whenever the only one speaking has
        no ladder — a bare count with nobody's name on it is a number the page
        is asking to be taken on trust. */
-    pop.innerHTML = head + blocks.map(function (block) {
+    host.innerHTML = head + blocks.map(function (block) {
       var ladder = (block[BLOCK_CABINS] || []).length;
       var read = readOn(block);
       var name = (blocks.length > 1 || !ladder)
@@ -2836,119 +2873,178 @@
   /* Positioned against the button rather than nested under it, so the table's
      own horizontal scroll cannot clip the panel. Flips above where there is no
      room below, and is clamped to the viewport on both axes. */
-  function place(trigger) {
+  function place(host, trigger) {
     var box = trigger.getBoundingClientRect();
-    pop.hidden = false;
-    pop.style.visibility = "hidden";
-    var w = pop.offsetWidth, h = pop.offsetHeight, pad = 8;
+    host.hidden = false;
+    host.style.visibility = "hidden";
+    var w = host.offsetWidth, h = host.offsetHeight, pad = 8;
     var left = Math.min(Math.max(pad, box.left), window.innerWidth - w - pad);
     var below = window.innerHeight - box.bottom;
     var top = below > h + pad || below > box.top ? box.bottom + 4 : box.top - h - 4;
-    pop.style.left = Math.round(left) + "px";
-    pop.style.top = Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
-    pop.style.visibility = "";
+    host.style.left = Math.round(left) + "px";
+    host.style.top = Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
+    host.style.visibility = "";
   }
 
-  function openBerths(trigger) {
+  /* One mechanism, three panels (#149).
+   *
+     The ladder's wiring was written for the ladder and is what the fee panel
+     and the entry note now use: the fee breakdown moved out of a per-row
+     dropdown, and writing a second copy of hover-peek/click-pin/Escape-close
+     would have been three implementations of one interaction, drifting apart
+     on exactly the parts that are easy to get wrong.
+
+     Both gestures, and focus as well as the pointer. Hover does not exist on a
+     phone and this page is built to work on one in a dive shop; and a panel is
+     the column's content rather than a reward for owning a mouse, so tabbing
+     to the cell opens it too.
+
+     Opening one closes the others. Two panels anchored to two cells of the
+     same row would overlap, and the second would be read as belonging to
+     whichever cell it happened to land on. */
+  var panels = [];
+
+  function hoverPanel(host, selector, fill) {
+    var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
+    var body = document.getElementById("body");
+
+    function shut() {
+      host.hidden = true;
+      var open = document.querySelector(selector + '[aria-expanded="true"]');
+      if (open) open.setAttribute("aria-expanded", "false");
+      held = null;
+      peeked = null;
+    }
+
+    function show(trigger) {
+      if (fill(host, trigger) === false) return;
+      place(host, trigger);
+      trigger.setAttribute("aria-expanded", "true");
+    }
+
+    function others() {
+      panels.forEach(function (panel) { if (panel.host !== host) panel.shut(); });
+    }
+
+    body.addEventListener("pointerover", function (event) {
+      var trigger = event.target.closest(selector);
+      if (!trigger || held || trigger === peeked) return;
+      clearTimeout(shutTimer);
+      clearTimeout(openTimer);
+      /* A beat before opening, so running the pointer down the column does not
+         flash a panel open on every row it crosses. */
+      openTimer = setTimeout(function () {
+        others();
+        peeked = trigger;
+        show(trigger);
+      }, 120);
+    });
+
+    body.addEventListener("pointerout", function (event) {
+      if (held || !event.target.closest(selector)) return;
+      clearTimeout(openTimer);
+      shutTimer = setTimeout(shut, 160);
+    });
+
+    /* Staying open while the pointer is inside it means a six-rung ladder --
+       or a two-seller bill -- can be read without pinning it first. */
+    host.addEventListener("pointerenter", function () { clearTimeout(shutTimer); });
+    host.addEventListener("pointerleave", function () {
+      if (!held) shutTimer = setTimeout(shut, 160);
+    });
+
+    body.addEventListener("click", function (event) {
+      var trigger = event.target.closest(selector);
+      if (!trigger) return;
+      clearTimeout(openTimer);
+      clearTimeout(shutTimer);
+      var again = held === trigger;
+      shut();
+      if (again) return;
+      others();
+      held = trigger;
+      show(trigger);
+    });
+
+    body.addEventListener("focusin", function (event) {
+      var trigger = event.target.closest(selector);
+      if (!trigger || held) return;
+      /* Escape returns focus to the button it dismissed, which lands right
+         back here -- so without this the panel reopened the instant it closed
+         and Escape did nothing at all. Cleared as soon as focus reaches any
+         other trigger, so dismissing one cell does not mute the next. */
+      if (trigger === dismissed) return;
+      dismissed = null;
+      others();
+      peeked = trigger;
+      show(trigger);
+    });
+
+    /* Leaving the cell forgets that it was dismissed, so tabbing away and back
+       opens it again. Without this, one Escape muted that cell for good. */
+    body.addEventListener("focusout", function (event) {
+      if (dismissed && event.target === dismissed) dismissed = null;
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || host.hidden) return;
+      var trigger = held || peeked;
+      shut();
+      if (trigger && document.contains(trigger)) {
+        dismissed = trigger;
+        trigger.focus();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (held && !event.target.closest(selector) && !host.contains(event.target)) {
+        shut();
+      }
+    });
+
+    /* Fixed positioning is relative to the viewport, so the panel has to be
+       moved with whatever scrolled -- the page or the table. Closing on resize
+       rather than chasing it: a reflow can move the button out from under it. */
+    window.addEventListener("scroll", function () {
+      var trigger = held || peeked;
+      if (host.hidden || !trigger) return;
+      if (!document.contains(trigger)) { shut(); return; }
+      place(host, trigger);
+    }, true);
+    window.addEventListener("resize", shut);
+
+    var api = { host: host, shut: shut };
+    panels.push(api);
+    return api;
+  }
+
+  hoverPanel(document.getElementById("berths"), ".berths", function (host, trigger) {
     var d = byId[trigger.dataset.berths];
-    if (!d) return;
-    fill(d);
-    place(trigger);
-    trigger.setAttribute("aria-expanded", "true");
-  }
-
-  function shutBerths() {
-    pop.hidden = true;
-    var open = document.querySelector('.berths[aria-expanded="true"]');
-    if (open) open.setAttribute("aria-expanded", "false");
-    held = null;
-    peeked = null;
-  }
-
-  var body = document.getElementById("body");
-
-  body.addEventListener("pointerover", function (event) {
-    var trigger = event.target.closest(".berths");
-    if (!trigger || held || trigger === peeked) return;
-    clearTimeout(shutTimer);
-    clearTimeout(openTimer);
-    /* A beat before opening, so running the pointer down the column does not
-       flash a panel open on every row it crosses. */
-    openTimer = setTimeout(function () { peeked = trigger; openBerths(trigger); }, 120);
+    if (!d) return false;
+    fillLadder(host, d);
   });
 
-  body.addEventListener("pointerout", function (event) {
-    if (held || !event.target.closest(".berths")) return;
-    clearTimeout(openTimer);
-    shutTimer = setTimeout(shutBerths, 160);
+  /* The bill, out of the dropdown it used to expand into (#149). Everything
+     that dropdown held except the entry bar, which is not a fee and has a
+     panel of its own on the column it belongs to. */
+  hoverPanel(document.getElementById("feePanel"), ".fees-open", function (host, trigger) {
+    var row = rowFor(trigger.dataset.fees);
+    if (!row) return false;
+    host.innerHTML = billPanel(row);
   });
 
-  /* Staying open while the pointer is inside it means a six-rung ladder can be
-     read without pinning it first. */
-  pop.addEventListener("pointerenter", function () { clearTimeout(shutTimer); });
-  pop.addEventListener("pointerleave", function () {
-    if (!held) shutTimer = setTimeout(shutBerths, 160);
+  /* The stated requirement, in full, from the column that prints its short
+     form. Its own panel and not a line in the fee one: whether a diver may
+     board at all is prior to what boarding costs, and filing a safety
+     requirement under "Mandatory fees" would be the wrong name for it. */
+  hoverPanel(document.getElementById("entryPanel"), ".entry-open", function (host, trigger) {
+    var itin = D.itineraries[trigger.dataset.entry];
+    if (!itin) return false;
+    var note = entryBar(itin);
+    if (!note) return false;
+    host.innerHTML = note;
   });
 
-  body.addEventListener("click", function (event) {
-    var trigger = event.target.closest(".berths");
-    if (!trigger) return;
-    clearTimeout(openTimer);
-    clearTimeout(shutTimer);
-    var again = held === trigger;
-    shutBerths();
-    if (again) return;
-    held = trigger;
-    openBerths(trigger);
-  });
-
-  /* Tabbing to the cell opens it too: the panel is the column's content, not
-     a reward for owning a mouse. */
-  body.addEventListener("focusin", function (event) {
-    var trigger = event.target.closest(".berths");
-    if (!trigger || held) return;
-    /* Escape returns focus to the button it dismissed, which lands right back
-       here -- so without this the panel reopened the instant it closed and
-       Escape did nothing at all. Cleared as soon as focus reaches any other
-       trigger, so dismissing one cell does not mute the next. */
-    if (trigger === dismissed) return;
-    dismissed = null;
-    peeked = trigger;
-    openBerths(trigger);
-  });
-
-  /* Leaving the cell forgets that it was dismissed, so tabbing away and back
-     opens it again. Without this, one Escape muted that cell for good. */
-  body.addEventListener("focusout", function (event) {
-    if (dismissed && event.target === dismissed) dismissed = null;
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key !== "Escape" || pop.hidden) return;
-    var trigger = held || peeked;
-    shutBerths();
-    if (trigger && document.contains(trigger)) {
-      dismissed = trigger;
-      trigger.focus();
-    }
-  });
-
-  document.addEventListener("click", function (event) {
-    if (held && !event.target.closest(".berths") && !event.target.closest("#berths")) {
-      shutBerths();
-    }
-  });
-
-  /* Fixed positioning is relative to the viewport, so the panel has to be
-     moved with whatever scrolled -- the page or the table. Closing on resize
-     rather than chasing it: a reflow can move the button out from under it. */
-  window.addEventListener("scroll", function () {
-    var trigger = held || peeked;
-    if (pop.hidden || !trigger) return;
-    if (!document.contains(trigger)) { shutBerths(); return; }
-    place(trigger);
-  }, true);
-  window.addEventListener("resize", shutBerths);
 
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {
     return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default + '">' +
@@ -3167,9 +3263,7 @@
     draw();
   });
 
-  /* Append the next page of rows as the table is scrolled. Guarded on
-     `state.open` being unchanged is unnecessary -- an expanded row is drawn
-     inside its own page and appending after it does not disturb it. */
+  /* Append the next page of rows as the table is scrolled. */
   document.querySelector(".shell").addEventListener("scroll", function () {
     if (drawn >= lastRows.length) return;
     var shell = this;
