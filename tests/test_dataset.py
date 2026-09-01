@@ -2527,9 +2527,17 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
 
     It read as the old panel in a new place -- one run-on sentence, one
     alphabetical fleet table, one list of moves -- and used about half of the
-    richest data on the site. Three bands now, because they answer three
-    different questions: what the sale *is*, how deep the cuts go, and which
-    boats and weeks carry them.
+    richest data on the site. Figures first, then the discounts by boat --
+    two things, because they answer two questions: what the sale *is*, and
+    which boats and weeks carry it.
+
+    It was three, and the middle one was wrong: a table of discount brackets,
+    one row per percentage. Nobody books by bracket, and a row grouping
+    sailings that share only a rate made every column on it an aggregate over
+    an arbitrary set -- a date span that was the whole season, a price range
+    across five boats, a seller list saying only that at least one sailing
+    somewhere in the bucket came from each (#147). The range across the
+    brackets was the one fact in it and is a figure in the strip.
     """
 
     APP = ROOT / "templates" / "app.js"
@@ -2554,28 +2562,51 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
         self.assertNotIn("function dealsSummary(", self.app,
                          "the summary sentence outlived the fold it was for")
 
-    def test_the_discounts_are_grouped_by_depth_deepest_first(self) -> None:
-        """The per-boat table is alphabetical, which answers "is this boat on
-        sale" and cannot answer "where are the real discounts"."""
-        self.assertIn("function discountSpread(", self.app)
-        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
-        self.assertIn("return b.pct - a.pct;", spread, "the bands are not deepest first")
+    def test_the_depth_is_a_range_and_not_a_table_of_brackets(self) -> None:
+        """The rates survive as one figure; the bracket rows do not.
 
-    def test_a_sailing_with_no_stated_rate_is_a_band_and_not_a_dash(self) -> None:
+        Asserted as an absence as well as a presence, because this is the
+        deletion and a deletion is what a later rebuild of the panel is most
+        likely to undo by accident (#145 rebuilds around it).
+        """
+        self.assertIn("function discountRates(", self.app)
+        rates = self.app.split("function discountRates(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("return b - a;", rates, "the rates are not deepest first")
+        self.assertNotIn("function spreadTable(", self.app)
+        self.assertNotIn("How deep the cuts go", self.app)
+        for column in ('"Sailings", "Boats"', '"Cut by"'):
+            self.assertNotIn(column, self.app, "the bracket table is back")
+
+    def test_a_sailing_with_no_stated_rate_is_not_a_dash_and_not_a_nought(self) -> None:
         """Two sailings are marked down by a seller that stated no percentage
         against the fare this page prints. That is the honest edge of the data
-        -- it is not a dash, and it is certainly not 0%."""
-        self.assertIn('el("td", "d-none", "rate not stated")', self.app)
+        -- it is not a dash, and it is certainly not 0%.
+
+        The bracket table carried this as a row of its own and the row went with
+        the table. `saleTag` is the surviving carrier and the better one: the
+        claim is about one sailing, so it belongs on that sailing's row.
+        """
+        tag = self.app.split("function saleTag(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("if (!d.sale.pct)", tag)
+        self.assertIn(">on sale<", tag)
+        rates = self.app.split("function discountRates(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("dep.sale.pct", rates,
+                      "a sale with no stated rate is being counted as a rate")
 
     def test_the_saving_is_never_was_minus_the_quoted_price(self) -> None:
         """`sale.was` is already converted to the display currency and the
         payload's `price` is the sailing's own, so subtracting them is nonsense
-        on every row quoted in dollars. `base` is the converted one."""
-        spread = self.app.split("function discountSpread(", 1)[1].split("\n  }", 1)[0]
-        self.assertIn("dep.sale.was && dep.base", spread)
-        self.assertNotIn("price.amount", spread)
-        self.assertNotIn("dep.price", spread)
+        on every row quoted in dollars. `base` is the converted one.
 
+        Asserted over the whole file rather than over the one function that did
+        the arithmetic. The rule is about the two fields and not about a
+        carrier: the function it was written against has gone, and the next
+        place a saving is computed is as able to get it wrong.
+        """
+        for wrong in ("sale.was - d.price", "sale.was - dep.price",
+                      "d.price - d.sale.was", "dep.price - dep.sale.was"):
+            self.assertNotIn(wrong, self.app,
+                             "a saving is being taken against the unconverted price")
 
 class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):
     """`changes.compare` builds a report out of dataclasses. `changes.render`

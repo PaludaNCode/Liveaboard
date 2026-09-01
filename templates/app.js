@@ -2274,7 +2274,7 @@
 
      The reading date is one of the four rather than a footnote, because a
      discount is a claim with a date on it and this one can end overnight. */
-  function saleStrip(deals, spread) {
+  function saleStrip(deals, rates) {
     var strip = el("div", "sale-strip");
     function fig(value, label, title) {
       var box = el("div", "sale-fig");
@@ -2289,13 +2289,13 @@
     if (sale.sailings) fig(sale.sailings.toLocaleString("en-IE"), "sailings cut");
     if (boats) fig(boats, boats === 1 ? "boat" : "boats");
 
-    /* The depth as a range, which is the fact the fleet table cannot show:
-       the discounts are not one number, and "10-30% off" says at a glance
-       what a column of per-boat rates makes you scan for. */
-    var rates = spread.filter(function (b) { return b.pct; });
+    /* The depth as a range: the discounts are not one number, and "10-30%
+       off" says at a glance what a column of per-boat rates makes you scan
+       for. This is the whole of what the bracket table below it was for, and
+       the only part of it that was a fact about anything (#147). */
     if (rates.length) {
-      var lo = rates[rates.length - 1].pct, hi = rates[0].pct;
-      fig(lo === hi ? lo + "%" : lo + "–" + hi + "%", "off");
+      fig(rates.length === 1 ? rates[0] + "%"
+        : rates[rates.length - 1] + "–" + rates[0] + "%", "off");
     }
     /* The oldest day anything here was read, not the freshest: three books
        feed this view and a summary is as fresh as its stalest half. */
@@ -2309,78 +2309,25 @@
     return strip;
   }
 
-  /* Every discounted sailing, grouped by how deep the cut is.
+  /* Which rates the fleet is discounting at, deepest first.
    *
-     The per-boat table below is alphabetical, which answers "is this boat on
-     sale" and cannot answer "where are the real discounts" -- and the fleet
-     does not cluster evenly: measured on the committed dataset, 90 sailings at
-     10%, 80 at 15%, 48 at 20%, 9 at 30%. A shopper wants the deepest first.
+     All that is left of a table this used to feed, and the reason it went: a
+     bracket row grouped sailings that shared only a percentage, so every
+     column on it -- 01 May to 28 Aug, EUR664 to EUR1,427, "liveaboard.com ·
+     padi.com" -- was an aggregate over an arbitrary set and a fact about
+     nothing anybody can book (#147). Nobody books by discount bracket. The
+     range across the brackets *is* a fact about the sale, so it survives as
+     one figure in the strip.
 
-     The band with no rate at all is a row here rather than an omission. Two
-     sailings are marked down by a seller that did not state a percentage
-     against the fare this page prints, and "on sale, rate not stated" is the
-     honest form of that -- it is not a dash, and it is certainly not 0%. */
-  function discountSpread() {
-    var bands = {};
+     A sailing marked down with no stated rate is not a nought and is not a
+     rate: it drops out of this list and says so on its own row, through
+     `saleTag`, which is where a claim about one sailing belongs. */
+  function discountRates() {
+    var seen = {};
     D.departures.forEach(function (dep) {
-      if (!dep.sale) return;
-      var key = dep.sale.pct || 0;
-      var band = bands[key] || (bands[key] = {
-        pct: dep.sale.pct || 0, n: 0, boats: {}, first: null, last: null,
-        sellers: {}, wasLo: null, wasHi: null, nowLo: null, nowHi: null
-      });
-      band.n += 1;
-      band.boats[dep.boat_id] = 1;
-      if (!band.first || dep.start < band.first) band.first = dep.start;
-      if (!band.last || dep.start > band.last) band.last = dep.start;
-      (dep.sale.sellers || []).forEach(function (i) { band.sellers[i] = 1; });
-      /* `was` against the row's own Advertised figure, and never against the
-         payload's `price`: `was` is already converted to the display currency
-         and `price` is the sailing's own, so subtracting them is nonsense on
-         the 126 rows quoted in dollars. `base` is the converted one. */
-      if (dep.sale.was && dep.base) {
-        if (band.wasLo === null || dep.sale.was < band.wasLo) band.wasLo = dep.sale.was;
-        if (band.wasHi === null || dep.sale.was > band.wasHi) band.wasHi = dep.sale.was;
-        if (band.nowLo === null || dep.base < band.nowLo) band.nowLo = dep.base;
-        if (band.nowHi === null || dep.base > band.nowHi) band.nowHi = dep.base;
-      }
+      if (dep.sale && dep.sale.pct) seen[dep.sale.pct] = 1;
     });
-    return Object.keys(bands).map(function (k) { return bands[k]; })
-      .sort(function (a, b) { return b.pct - a.pct; });
-  }
-
-  function spreadTable(spread) {
-    var table = el("table", "deals-table");
-    var head = document.createElement("thead");
-    var hr = el("tr", null);
-    ["Off", "Sailings", "Boats", "First", "Last", "From", "Cut by"]
-      .forEach(function (h) { hr.appendChild(el("th", null, h)); });
-    head.appendChild(hr);
-    table.appendChild(head);
-
-    var body = document.createElement("tbody");
-    spread.forEach(function (b) {
-      var tr = el("tr", null);
-      tr.appendChild(b.pct
-        ? el("td", "d-off", b.pct + "% off")
-        : el("td", "d-none", "rate not stated"));
-      tr.appendChild(el("td", "d-when", b.n.toLocaleString("en-IE")));
-      tr.appendChild(el("td", "d-when", String(Object.keys(b.boats).length)));
-      tr.appendChild(el("td", "d-when", b.first ? shortDate(b.first) : "—"));
-      tr.appendChild(el("td", "d-when", b.last ? shortDate(b.last) : "—"));
-      /* What these berths were, before. A range because a band holds many
-         sailings and one figure would be a price nobody quoted; the row in the
-         trips table carries each sailing's own pair. */
-      tr.appendChild(el("td", "d-was", b.wasLo === null ? "—"
-        : b.wasLo === b.wasHi ? eur(b.wasLo)
-        : eur(b.wasLo) + "–" + eur(b.wasHi)));
-      tr.appendChild(el("td", "d-offer", Object.keys(b.sellers)
-        .map(function (i) { return SELLER_NAMES[+i] || "a seller"; })
-        .join(" · ") || "—"));
-      body.appendChild(tr);
-    });
-    table.appendChild(body);
-    return table;
+    return Object.keys(seen).map(Number).sort(function (a, b) { return b - a; });
   }
 
   function offersTable(rows) {
@@ -2638,13 +2585,12 @@
     var body = host;
     body.textContent = "";
 
-    /* Band one: the figures, skimmable. This was a run-on sentence, which is
-       the shape a collapsed `<summary>` needs and the wrong one for the top of
-       a page. */
-    var spread = discountSpread();
+    /* The figures, skimmable. This was a run-on sentence, which is the shape a
+       collapsed `<summary>` needs and the wrong one for the top of a page. */
+    var rates = discountRates();
     var line = document.getElementById("dealsLine");
     line.textContent = "";
-    line.appendChild(saleStrip(deals, spread));
+    line.appendChild(saleStrip(deals, rates));
     /* What moved since the last reading, still in words: it is a sentence
        about two days rather than a figure, and the strip is figures. The
        counts it used to open with are the strip's now, so it says only the
@@ -2652,23 +2598,8 @@
     var moves = movedLine(deals, changed);
     if (moves) line.appendChild(el("p", "sale-moved", moves));
 
-    /* Band two: the discounts by depth, deepest first. */
-    if (spread.length) {
-      body.appendChild(el("h4", null, "How deep the cuts go"));
-      body.appendChild(el("p", "deals-note",
-        "Every discounted sailing, grouped by how much comes off. Taken from " +
-        "the list price each seller prints beside its own — struck through " +
-        "against every cabin on a booking page, and stated outright by PADI — " +
-        "never from the “20% Off” an operator writes into a trip name. " +
-        "“From” is what those berths were before the cut; what they are now is " +
-        "the Advertised column of each sailing’s own row, which the On sale " +
-        "filter over the trips table brings together."));
-      body.appendChild(spreadTable(spread));
-    }
-
-    /* Band three: the same discounts by boat, which is the detail view -- its
-       "n of m" and its week window are what tell a reader which sailing to
-       book, and neither is a fact about depth. */
+    /* The discounts by boat: its "n of m" and its week window are what tell a
+       reader which sailing to book. */
     var rows = offerRows(fleet, offers);
     if (rows.length) {
       body.appendChild(el("h4", null, "Which boats, and which weeks"));
