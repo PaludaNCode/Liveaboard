@@ -708,10 +708,16 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .deals-note { margin:0 0 10px; font-size:12px; max-width:74ch; line-height:1.5; }
 
 /* Scrolls inside itself rather than widening the page: seven columns on a
-   phone is wider than the screen, and the body must never scroll sideways. */
+   phone is wider than the screen, and the body must never scroll sideways.
+   The scrolling is the wrapper's, not the table's, and that is load-bearing:
+   `display:block` on the table made its rows an anonymous inline-table that
+   shrink-wrapped to its own content, so the columns crammed into the left of
+   the panel and the two tables came out different widths (#147). A table that
+   is a table takes the `width:100%` below, spreads its columns across the
+   room, and matches the other one by construction. */
+.deals-scroll { overflow-x:auto; margin-bottom:14px; max-width:100%; }
 .deals-table {
-  display:block; overflow-x:auto; border-collapse:collapse;
-  font-size:12px; margin-bottom:14px; max-width:100%;
+  width:100%; border-collapse:collapse; font-size:12px;
 }
 /* Undone deliberately, all three of them. The page's own `thead th` rule is
    global and describes the departures table: `position:sticky; z-index:20`,

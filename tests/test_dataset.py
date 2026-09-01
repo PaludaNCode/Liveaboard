@@ -2163,17 +2163,53 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
             with self.subTest(field=field):
                 self.assertIn("coverage." + field, app)
 
-    def test_an_unmatched_vessel_is_named_on_the_page(self):
-        """Named, not counted, and not only in a build log. The query asks PADI
-        for the USA as well as Egypt because three Egyptian boats are filed
-        there, and the same breadth returns Caribbean ones -- so an unmatched
-        vessel is usually a boat from another sea and occasionally an Egyptian
-        one nothing here has paired yet. Only a name tells those apart."""
+    def test_an_unmatched_vessel_is_named_where_its_reader_is(self):
+        """Named, not counted -- and to the maintainer rather than the visitor.
+
+        The query asks PADI for the USA as well as Egypt because three Egyptian
+        boats are filed there, and the same breadth returns Caribbean ones, so
+        an unmatched vessel is ordinarily a boat from another sea and
+        occasionally an Egyptian one nothing here has paired yet. Only a name
+        tells those apart, which is why the name may not be dropped. But the
+        reader of the sale view is shopping the sales: a list of boats the page
+        does not carry is the pipeline talking past them. So `promote` keeps
+        the names and `cli` prints one `::warning::` each, and the panel draws
+        none of it.
+        """
         app = self.source()
-        self.assertIn("function unmatchedLine(", app)
-        block = app.split("function unmatchedLine(", 1)[1].split("\n  }", 1)[0]
-        self.assertIn("return v.name;", block)
-        self.assertIn("unmatchedLine(strangers)", app)
+        self.assertNotIn(
+            "Not carried here", app,
+            "the unmatched vessels are being drawn on the sale view again",
+        )
+        cli = (ROOT / "src" / "liveaboard" / "cli.py").read_text(encoding="utf-8")
+        self.assertIn(
+            "::warning::PADI deal on a vessel this site does not carry:", cli,
+            "nothing names an unmatched vessel any more, on the page or off it",
+        )
+        self.assertIn("row['name']", cli, "the warning counts rather than names")
+
+    def test_the_trips_on_sale_read_down_in_sailing_order(self):
+        """By date, and the date first.
+
+        Deepest-first was the wrong order for a list somebody reads down: a
+        discount on a week they cannot take is not a cheaper trip, so the date
+        is the first thing checked and the sort and the first column have to
+        agree about it. Depth is the tie-break inside a day, which keeps the
+        old order where the dates cannot separate two rows.
+        """
+        app = self.source()
+        block = app.split("function tripsOnSale(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("a.d.start < b.d.start ? -1 : 1", block)
+        self.assertNotIn(
+            "if (a.pct !== b.pct) return b.pct - a.pct;", block,
+            "the discount is the primary sort again, not the sailing date",
+        )
+        table = app.split("function tripsOnSaleTable(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn(
+            '["Sails", "Boat", "Trip", "Off", "Was", "Now"]', table,
+            "the columns are not date-first, then what came off and the two "
+            "prices in the order the cut happened",
+        )
 
     def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
         """One figure in that column means three different things -- both

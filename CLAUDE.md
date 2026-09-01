@@ -649,10 +649,14 @@ Break these and the site starts lying quietly rather than failing loudly.
   the published season sail another ocean, so the field is wrong about where a
   boat is more than a quarter of the time and cannot place anything. `promote`
   joins the deal's vessel to a boat in the fleet and lets that decide. A vessel that
-  joins to nothing is **named** — in the build log and on the page — rather than
-  dropped: an Egyptian boat under a USA label that nothing has paired is exactly
-  what the breadth is for, and only a name a person reads tells it apart from a
-  Caribbean one. The change log obeys the unread-page rule too: absences in a
+  joins to nothing is **named rather than dropped**: an Egyptian boat under a USA
+  label that nothing has paired is exactly what the breadth is for, and only a
+  name a person reads tells it apart from a Caribbean one. **Named in the build
+  log, and to nobody else** — `promote` keeps `deals.unmatched` and `cli` prints
+  a `::warning::` per vessel. It was on the sale view as well and came off:
+  the reader there is shopping the sales, and a list of boats the page does not
+  carry is the pipeline talking to its maintainer over the visitor's shoulder.
+  The name is what may not be lost; the page was the wrong place to keep it. The change log obeys the unread-page rule too: absences in a
   reading the fetcher could not finish are not withdrawals, and it says so
   instead of reporting them.
 - **Two itineraries must never share an id.** `Dataset.from_dict` keys them by
