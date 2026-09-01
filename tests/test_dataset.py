@@ -2120,7 +2120,12 @@ class TestTheThreeViews(unittest.TestCase):
         self.assertIn("document.title =", app, "every view shares one title")
         self.assertIn("tabindex=\"-1\"", page,
                       "no pane can be focused, so a view change is announced by nothing")
-        self.assertIn(".focus()", app, "nothing moves focus into the view that appeared")
+        # With `preventScroll`, because focusing asks the browser to bring the
+        # element into view and the only box it can move is the shell -- which
+        # is the window, does not scroll, and on iOS went with it. The focus is
+        # what a screen reader needs and stays; the scroll never had a reason.
+        self.assertRegex(app, r"\.focus\(\{ preventScroll: true \}\)",
+                         "nothing moves focus into the view that appeared")
 
 class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
     """Rules that live in `app.js` and have no Python to test, so the guard is

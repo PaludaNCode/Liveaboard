@@ -42,6 +42,45 @@
      nothing for it to hide. */
   var soldOutCount = D.departures.filter(function (d) { return !d.bookable; }).length;
 
+  /* THE SHELL IS WHAT THE WINDOW MEASURES, AND IT IS MEASURED RATHER THAN
+     DECLARED.
+   *
+     `height:100dvh` in the stylesheet is the right rule and it is not enough
+     on its own. `dvh` landed in Safari 15.4, and where it is missing the
+     fallback is `height:100%` -- which resolves against the initial containing
+     block, the viewport with the URL bar *hidden*, so the shell stands about
+     120px taller than the area being looked through and those 120px are slack
+     the whole page can be panned into: masthead and rail off the top, footer
+     over bare canvas at the bottom.
+
+     What gave it away is that backgrounding the app and coming back fixed it.
+     That is not a layout being wrong, it is a layout being *stale* -- one
+     forced reflow and it snapped right -- so the answer is to reflow it on
+     every event that can change the visible height, off a number the browser
+     has actually measured.
+
+     `window.innerHeight` rather than `visualViewport.height`, deliberately:
+     on iOS the two agree about the URL bar and disagree about the keyboard,
+     and a shell that resized itself every time somebody tapped the nights
+     field would be a worse bug than this one. `pageshow` is the case that
+     found it, since coming back from the background restores from bfcache
+     without a `resize`. And each event measures twice, because iOS reports
+     the *old* height during `orientationchange` and animates the bar away for
+     a moment after a `resize`. */
+  var refitAgain = null;
+  function fitShell() {
+    document.body.style.height = window.innerHeight + "px";
+  }
+  function refitShell() {
+    fitShell();
+    if (refitAgain) clearTimeout(refitAgain);
+    refitAgain = setTimeout(fitShell, 260);
+  }
+  fitShell();
+  ["resize", "orientationchange", "pageshow"].forEach(function (name) {
+    window.addEventListener(name, refitShell);
+  });
+
   /* Written on every draw by countRail(), which runs from afterDraw -- so they
      are looked up here rather than beside the rest of the view wiring, which
      is declared after the first draw has already happened. */
@@ -3284,7 +3323,10 @@
       shut();
       if (trigger && document.contains(trigger)) {
         dismissed = trigger;
-        trigger.focus();
+        /* Same reason as the pane: the trigger is inside `.shell`, which does
+           scroll, and returning focus to it must put the keyboard back where
+           it was rather than move the rows under the reader. */
+        trigger.focus({ preventScroll: true });
       }
     });
 
@@ -4000,8 +4042,28 @@
 
        Not at boot: nothing has been activated yet, and taking focus off the
        document on load is a change the visitor did not ask for. */
-    if (focus) panes[name].focus();
+    /* `preventScroll`, because this shell has no scroll to give. Focusing an
+       element asks the browser to bring it into view, and the nearest thing it
+       can scroll here is the document -- which is `overflow:hidden` and
+       exactly the window tall, so there is nothing to bring into view and
+       nothing should move. iOS obliges anyway when the layout has any slack at
+       all, and what moves is the whole shell: the masthead and the rail go off
+       the top and the footer floats over bare canvas. The pane still takes
+       focus, which is the part a screen reader and a keyboard need. */
+    if (focus) panes[name].focus({ preventScroll: true });
   }
+
+  /* Nothing here has a scroll position worth restoring, and restoring one is
+     how the shell ends up panned.
+   *
+     The window does not scroll -- `body` is `overflow:hidden` and exactly the
+     viewport tall -- so the only offset a browser could put back is slack it
+     found in the layout, which is the iOS bug the `dvh` rule in the stylesheet
+     exists to remove. `dvh` removes the slack on iOS 15.4 and up; this removes
+     the thing that goes looking for it, on every browser and every version.
+     The table's own scroll position is inside `.shell` and is not what this
+     governs. */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
   window.addEventListener("hashchange", function () { showView(viewFromHash(), true); });
 

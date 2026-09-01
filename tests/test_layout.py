@@ -947,6 +947,98 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         css = SITE.read_text(encoding="utf-8")
         self.assertIn("height:100dvh", css,
                       "the shell no longer sizes to the visible viewport")
+        # Nothing goes looking for slack either. `dvh` removes it on iOS 15.4
+        # and up; this covers every browser and every version below that.
+        self.assertIn('history.scrollRestoration = "manual"', css,
+                      "the browser may restore a scroll into a shell that has none")
+
+    def test_the_shell_re_measures_when_the_window_changes(self) -> None:
+        """A stale shell is the bug; a reflow is the fix, so reflow on cue.
+
+        Backgrounding the app and returning fixed it, which says the layout was
+        not wrong but *stale* -- one forced reflow and it snapped right. So the
+        height is measured off `window.innerHeight` and re-measured on resize,
+        rotation and `pageshow`, rather than declared once and trusted. `dvh`
+        does this in CSS from Safari 15.4; this is what covers everything
+        older, where the fallback is `100%` and `100%` is the wrong viewport.
+
+        Resizing here drives the same path a rotating phone does.
+        """
+        page = self.open(390, 800)
+        self.addCleanup(page.close)
+        for w, h in ((390, 800), (390, 640), (844, 390), (390, 844), (1440, 900)):
+            page.set_viewport_size({"width": w, "height": h})
+            page.wait_for_timeout(420)  # past the second, settled measurement
+            seen = page.evaluate("""() => ({
+              innerH: window.innerHeight,
+              bodyH: Math.round(document.body.getBoundingClientRect().height),
+              footer: Math.round(
+                document.querySelector('.site-footer').getBoundingClientRect().bottom),
+              masthead: Math.round(
+                document.querySelector('.masthead').getBoundingClientRect().top),
+            })""")
+            where = "at %dx%d" % (w, h)
+            self.assertEqual(seen["bodyH"], seen["innerH"],
+                             "the shell did not re-measure " + where)
+            self.assertEqual(seen["footer"], seen["innerH"],
+                             "the footer is off the bottom edge " + where)
+            self.assertEqual(seen["masthead"], 0, "the masthead moved " + where)
+
+    def test_opening_a_view_by_its_address_keeps_the_masthead(self) -> None:
+        """Every entry point lands on the same page, chrome included.
+
+        `#trips`, `#sale` and `#history` are addresses for this page's own
+        router and match no element id, so the browser has nothing to scroll
+        to -- and the two things that *can* move an `overflow:hidden` shell go
+        through here: a fragment on load, and `showView` focusing the pane it
+        just revealed. On iOS the second one took the masthead and the rail off
+        the top, because focusing an element asks the browser to bring it into
+        view and it obliged with the only box it could move.
+
+        Driven both ways round: loaded cold at each address, and tapped through
+        the rail, because only the second path focuses.
+        """
+        for hash_ in ("", "#trips", "#sale", "#history"):
+            page = self.open(390, 800, hash_)
+            try:
+                seen = page.evaluate("""() => ({
+                  masthead: Math.round(
+                    document.querySelector('.masthead').getBoundingClientRect().top),
+                  rail: Math.round(
+                    document.querySelector('.rail').getBoundingClientRect().top),
+                  footer: Math.round(
+                    document.querySelector('.site-footer').getBoundingClientRect().bottom),
+                  innerH: window.innerHeight,
+                  scrolled: Math.round(window.scrollY
+                    + document.body.scrollTop + document.documentElement.scrollTop),
+                })""")
+                where = "loading %s" % (hash_ or "with no hash")
+                self.assertEqual(seen["masthead"], 0, "the masthead moved " + where)
+                self.assertGreater(seen["rail"], 0, "the rail moved " + where)
+                self.assertEqual(seen["footer"], seen["innerH"],
+                                 "the footer left the bottom edge " + where)
+                self.assertEqual(seen["scrolled"], 0, "something scrolled " + where)
+            finally:
+                page.close()
+
+        # And through the rail, which is the path that focuses a pane.
+        page = self.open(390, 800)
+        self.addCleanup(page.close)
+        for name in ("sale", "history", "trips"):
+            page.click('.rail-item[href="#%s"]' % name)
+            page.wait_for_timeout(220)
+            seen = page.evaluate("""() => ({
+              masthead: Math.round(
+                document.querySelector('.masthead').getBoundingClientRect().top),
+              scrolled: Math.round(window.scrollY
+                + document.body.scrollTop + document.documentElement.scrollTop),
+              focused: document.activeElement.className,
+            })""")
+            self.assertEqual(seen["masthead"], 0,
+                             "the masthead moved on tapping " + name)
+            self.assertEqual(seen["scrolled"], 0, "focus scrolled the shell " + name)
+            self.assertIn("pane", seen["focused"],
+                          "preventScroll cost the pane its focus, on " + name)
 
 
 if __name__ == "__main__":  # pragma: no cover

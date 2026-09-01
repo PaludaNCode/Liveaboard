@@ -635,7 +635,21 @@ Break these and the site starts lying quietly rather than failing loudly.
   every `vh` cap on a panel is doubled the same way for the same reason.
   `overscroll-behavior` is the other half — `none` on the document and
   `contain` on `.shell`, or a flick that reaches the end of the table hands
-  itself to a page that should not have a scroll. It went unnoticed until
+  itself to a page that should not have a scroll. **And nothing may go looking
+  for slack either**, because `dvh` only covers iOS 15.4 up: `focus()` on a
+  pane or a panel trigger takes `{ preventScroll: true }` — focusing asks the
+  browser to bring an element into view and the only box it can move here is
+  the shell — and `history.scrollRestoration` is `"manual"`, so a reload at
+  `#trips`, `#sale` or `#history` cannot have a position put back into a
+  window that does not scroll. **And the height is measured, not only
+  declared.** Backgrounding the app and coming back fixed it, which says the
+  layout was not wrong but *stale* — one forced reflow and it snapped right —
+  so `fitShell` sets `body` from `window.innerHeight` on load and again on
+  `resize`, `orientationchange` and `pageshow`, twice each because iOS reports
+  the old height during a rotation and animates the bar away after a resize.
+  `innerHeight` and not `visualViewport.height`: the two agree about the URL
+  bar and disagree about the keyboard, and a shell that resized itself
+  whenever somebody tapped the nights field is a worse bug than this one. It went unnoticed until
   `color-scheme` landed: before that the panned-into strip was the UA's white,
   and after it is black, which is what made a long-standing gap look like a
   new one.
