@@ -550,11 +550,24 @@
     return Math.max(req.min_logged_dives || 0, BAR_DIVES[req.min_level] || 0);
   }
 
+  /* The certification's short form. "Open Water" and "Advanced" are what
+     BAR_CERT holds -- the shorthand every operator's own listing writes,
+     already shorter than the card's full name -- and the column, the filter
+     chips and the expanded row all read this one function, so there is one
+     spelling rather than three that could drift apart.
+
+     Abbreviated further still, to "OW" and "ADV": the Entry bar column sits
+     among the money columns, where every character is width the Total does
+     not get, and the full word is one hover away in the expanded panel. The
+     word "dives" goes with it -- "ADV + 50" says the same thing "Advanced + 50
+     dives" did, in a fifth of the space. */
+  var CERT_SHORT = { "Open Water": "OW", "Advanced": "ADV" };
   function entryText(itin) {
     var req = itin.requirements;
     if (!req || !req.min_level || BAR_CERT[req.min_level] === undefined) return "";
     var dives = entryDives(req);
-    return BAR_CERT[req.min_level] + (dives ? " + " + dives + " dives" : "");
+    var cert = BAR_CERT[req.min_level];
+    return (CERT_SHORT[cert] || cert) + (dives ? " + " + dives : "");
   }
 
   /* -1 for a trip stating no bar, so it sorts to the same end as an unstated
@@ -861,7 +874,7 @@
        week. A third of the figure, and the whole of what this column exists to
        tell apart. An empty cell is what this page already says for a dive site
        nobody named. */
-    { k: "perdive", t: "Per dive", num: true,
+    { k: "perdive", t: "Per dive", num: true, cls: "perdive",
       /* Divides the total the row prints -- the cheaper seller's -- so the two
          money columns cannot disagree about what a dive costs on one row. */
       v: function (d, i, m, row) {
@@ -914,7 +927,7 @@
        gear case proves an operator can list an extra and leave the number
        blank. A branch nothing reaches yet is cheaper than a cell reading
        "undefined" on the day one does. */
-    { k: "nitrox", t: "Nitrox", num: true,
+    { k: "nitrox", t: "Nitrox", num: true, cls: "nitrox",
       v: function (d, i, m, row) {
         var b = best(row); if (b) m = b.bill;
         return !m.nitrox ? 9e9 : m.nitrox.included ? -1
@@ -951,7 +964,7 @@
        Disclosure column is gone. The two states stay distinct because they are
        different failures: nobody read the vessel's fee panel, or the operator
        published a panel that names only optional extras. */
-    { k: "later", t: "Mandatory fees", num: true,
+    { k: "later", t: "Mandatory fees", num: true, cls: "mfees",
       /* Unstated sorts last, next to nothing: an unread trip is not a cheap
          one, and it must not collide with a genuine zero. */
       v: function (d, i, m, row) {
@@ -1106,7 +1119,7 @@
      * A vessel having a PADI page says nothing about whether a given sailing
      * is on its calendar, and a link landing on a calendar without the trip on
      * it is worse than no link. */
-    { k: "source", t: "Seller",
+    { k: "source", t: "Seller", cls: "source",
       v: function (d, i) { return d.booking_url || i.source_url || ""; },
       show: function (d, i) {
         var links = [];
@@ -3013,7 +3026,15 @@
      whichever cell it happened to land on. */
   var panels = [];
 
-  function hoverPanel(host, selector, fill) {
+  /* `opts.hoverOpens` (default true) governs the pointer half only -- click
+     and keyboard focus still open every panel this drives, on every trigger.
+     The Entry bar panel turns it off (#151): opening a dialog every time the
+     pointer crosses that cell, while it is one of three the row rebuilds on
+     demand, made scrolling the mouse down the column a slideshow. Berths and
+     the fee bill keep hovering, because a diver comparing cabin ladders or fee
+     books wants them without a click each time. */
+  function hoverPanel(host, selector, fill, opts) {
+    var hoverOpens = !opts || opts.hoverOpens !== false;
     var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
     var body = document.getElementById("body");
 
@@ -3036,6 +3057,7 @@
     }
 
     body.addEventListener("pointerover", function (event) {
+      if (!hoverOpens) return;
       var trigger = event.target.closest(selector);
       if (!trigger || held || trigger === peeked) return;
       clearTimeout(shutTimer);
@@ -3050,7 +3072,7 @@
     });
 
     body.addEventListener("pointerout", function (event) {
-      if (held || !event.target.closest(selector)) return;
+      if (!hoverOpens || held || !event.target.closest(selector)) return;
       clearTimeout(openTimer);
       shutTimer = setTimeout(shut, 160);
     });
@@ -3152,7 +3174,7 @@
     var note = entryBar(itin);
     if (!note) return false;
     host.innerHTML = note;
-  });
+  }, { hoverOpens: false });
 
 
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {

@@ -472,11 +472,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   the remainder after the panel had taken its cap, and at 768×600 the remainder
   was **0px**. A `min-height` floor under the table fixes neither half: a floor
   that can exceed the room left is a pane painting over the footer.
-- **One panel mechanism, not one per column.** Three cells open a panel on
-  **hover or click** — Places for the cabin ladder, Mandatory fees for the bill,
-  Entry bar for the stated requirement — and all three go through `hoverPanel`.
-  Keep the click half: hover does not exist on a touch screen and this page is
-  built to work on a phone in a dive shop. Each trigger is a `<button>` with
+- **One panel mechanism, not one per column.** Three cells open a panel —
+  Places for the cabin ladder, Mandatory fees for the bill, Entry bar for the
+  stated requirement — and all three go through `hoverPanel`, which takes an
+  `opts.hoverOpens` (default true) governing the pointer half only; click and
+  keyboard focus always open every panel it drives. Places and Mandatory fees
+  keep hovering, because a diver comparing cabin ladders or fee books wants
+  them without a click each time. **Entry bar turned it off (#151)**: sitting
+  in the money block, running the pointer down that column to compare prices
+  opened a dialog on every row it crossed. Keep the click half regardless of
+  `hoverOpens`: hover does not exist on a touch screen and this page is built
+  to work on a phone in a dive shop. Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
   **one div filled on demand** — nothing is lazily fetched here, so anything
   written per row ships 1,122 times. `rowFor` rebuilds the row rather than
@@ -510,7 +516,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   it with room to spare. That is why the guard asserts the sweep *back up* too.
   This replaced a second order array and a third breakpoint at 385px, and both
   were wrong on most phones (#150): 385 was measured against a Total column
-  155px wide and the column is 213px, sized by its worst-case row — a
+  155px wide and the column is 211px, sized by its worst-case row — a
   two-seller ranged total carrying `+ tips` and `2 sellers`. **A typed
   breakpoint here is a number derived from the data, in a file that cannot see
   the data**, so it went stale exactly as the footer prose did in #144, and the
