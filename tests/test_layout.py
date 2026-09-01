@@ -657,6 +657,156 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                          "the overview's count moved with a filter that does not "
                          "reach it")
 
+    def test_a_phone_can_sort_the_table_it_cannot_see_the_header_of(self) -> None:
+        """The sort control survives the width that deletes the table.
+
+        Below 760px `.shell > table` is `display:none` and the rows are cards,
+        so the header row -- which is the sort control -- is not on screen at
+        all. The page could not be sorted on a phone, which is the same shape
+        of failure as the money fold: a control that exists only in the layout
+        it was developed in.
+
+        Measured at every phone width rather than at one, and the layout it
+        measured is asserted: a hidden element's rect is all zeros, so a test
+        that forgot to check *which* layout it was in would pass over a
+        toolbar that had disappeared.
+        """
+        page = self.open(PHONE_WIDTHS[0], 720)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 720})
+            page.wait_for_timeout(120)
+            shape = page.evaluate("""() => {
+              const r = s => { const e = document.querySelector(s);
+                if (!e) return null; const b = e.getBoundingClientRect();
+                return { w: Math.round(b.width), h: Math.round(b.height),
+                         top: Math.round(b.top) }; };
+              const head = document.querySelector('.shell > table thead');
+              return { cards: !!document.querySelector('.cards .card'),
+                       header: head ? Math.round(head.getBoundingClientRect().height) : 0,
+                       by: r('#sortBy'), dir: r('#sortDir'),
+                       bar: r('.toolbar'),
+                       name: document.getElementById('sortBy').getAttribute('aria-label'),
+                       switches: [].slice.call(document.querySelectorAll('#toggles button'))
+                                   .map(e => e.getAttribute('aria-label')),
+                       dirName: document.getElementById('sortDir').getAttribute('aria-label') };
+            }""")
+            where = "at %dpx" % width
+            self.assertTrue(shape["cards"], "not the card layout " + where)
+            self.assertEqual(shape["header"], 0,
+                             "there is a table header after all " + where)
+            for key in ("by", "dir"):
+                self.assertIsNotNone(shape[key], "no sort control " + where)
+                self.assertGreater(shape[key]["w"], 0, "sort control collapsed " + where)
+                self.assertGreater(shape[key]["h"], 20,
+                                   "sort control too small to press " + where)
+            # The visible label is hidden here, so the accessible one is all
+            # there is -- and a triangle with no name is not a control.
+            self.assertTrue(shape["name"], "the dropdown has no accessible name " + where)
+            # The switches lose the word INCLUDE here, so their names have to
+            # say what they do rather than what they are called.
+            for name in shape["switches"]:
+                self.assertIn("Include", name,
+                              "a total switch reads as a filter " + where)
+            self.assertIn("press for", shape["dirName"] or "",
+                          "the direction button does not say what pressing does " + where)
+            # And it costs no row at all on a phone anybody still owns. The
+            # labels give way instead -- INCLUDE, SORT, "Rental", "Mandatory
+            # fees" -- so Filters, the column, the direction and the two
+            # switches sit on one line from 360px up. Below that they wrap,
+            # which is the graceful half; a third row is not.
+            limit = 48 if width >= 360 else 80
+            self.assertLessEqual(shape["bar"]["h"], limit,
+                                 "the toolbar wrapped " + where)
+
+        # And picking from it reorders the cards, which is the whole point.
+        page.set_viewport_size({"width": 390, "height": 720})
+        page.wait_for_timeout(120)
+        first = lambda: page.eval_on_selector_all(
+            ".cards .card", "es => es.slice(0, 4).map(e => e.textContent)")
+        before = first()
+        page.select_option("#sortBy", "total")
+        page.wait_for_timeout(250)
+        self.assertNotEqual(first(), before, "the dropdown did not reorder the cards")
+        cheapest = first()
+        page.click("#sortDir")
+        page.wait_for_timeout(250)
+        self.assertNotEqual(first(), cheapest, "the direction button did nothing")
+
+    def test_the_sort_dropdown_and_the_header_are_one_control(self) -> None:
+        """Two renderings of `state.sort`, never two sorts.
+
+        The table header is still clickable on a laptop, so there are two ways
+        to sort and one place the answer lives. A dropdown that did not follow
+        a heading click would be a control stating an order the table is not
+        in -- and the reader would have no way to know which of the two to
+        believe.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        read = lambda: page.evaluate("""() => ({
+          value: document.getElementById('sortBy').value,
+          dir: document.getElementById('sortDir').textContent.trim(),
+          arrow: (document.querySelector('#head th[aria-sort]') || {}).dataset
+                   ? document.querySelector('#head th[aria-sort]').dataset.k : null,
+          order: document.querySelector('#head th[aria-sort]').getAttribute('aria-sort')
+        })""")
+
+        boot = read()
+        self.assertEqual(boot["value"], boot["arrow"],
+                         "the dropdown and the header disagree at boot")
+
+        page.click('#head th[data-k="total"]')
+        page.wait_for_timeout(200)
+        clicked = read()
+        self.assertEqual(clicked["value"], "total",
+                         "clicking a heading did not move the dropdown")
+        self.assertEqual(clicked["order"], "ascending")
+        self.assertIn("Cheapest", clicked["dir"],
+                      "the direction button does not say what cheap means here")
+
+        page.click('#head th[data-k="total"]')
+        page.wait_for_timeout(200)
+        self.assertEqual(read()["order"], "descending")
+        self.assertIn("Dearest", read()["dir"])
+
+        # And the other way: the dropdown moves the header's own mark.
+        page.select_option("#sortBy", "start")
+        page.wait_for_timeout(200)
+        back = read()
+        self.assertEqual(back["arrow"], "start",
+                         "picking a column did not move the header's mark")
+        self.assertEqual(back["order"], "ascending",
+                         "a new column did not start ascending, as a click does")
+        self.assertIn("Earliest", back["dir"],
+                      "a date is being described as cheap or dear")
+
+    def test_the_toolbar_is_one_line_wherever_there_is_a_table(self) -> None:
+        """Adding the sort may not cost the rows a line of chrome.
+
+        Above the card breakpoint the toolbar does not wrap and the meta line
+        ellipsises instead -- that rule was written for a toolbar holding two
+        fewer controls, at a breakpoint (901px) that was the width the meta
+        happened to stop fitting at. The sort pushed 761..900 onto two rows
+        until the rule was tied to `narrow` instead, and this is what says so.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        for width in (761, 768, 800, 900, 901, 1024, 1280, 1440):
+            page.set_viewport_size({"width": width, "height": 800})
+            page.wait_for_timeout(120)
+            bar = page.evaluate("""() => {
+              const t = document.querySelector('.toolbar');
+              return { h: Math.round(t.getBoundingClientRect().height),
+                       over: t.scrollWidth > t.clientWidth,
+                       sort: Math.round(
+                         document.getElementById('sortBy').getBoundingClientRect().width) };
+            }""")
+            where = "at %dpx" % width
+            self.assertLessEqual(bar["h"], 48, "the toolbar wrapped " + where)
+            self.assertFalse(bar["over"], "the toolbar overflows sideways " + where)
+            self.assertGreater(bar["sort"], 0, "the sort dropdown is not drawn " + where)
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))

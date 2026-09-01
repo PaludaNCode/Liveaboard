@@ -1407,6 +1407,87 @@
     return out;
   }
 
+  /* ---------- the sort control ---------- */
+
+  /* Which way, in the column's own words rather than as an arrow.
+     "Cheapest first" is what a reader is asking for; the triangle is what the
+     table does about it, and the header still prints that. Keyed off the
+     column wherever the generic pair would be wrong -- a date is early rather
+     than cheap, a berth count is few rather than cheap, and an entry bar is a
+     bar. Everything numeric falls to the money pair, which is what the five
+     money columns are; everything else sorts as text and says so. */
+  var SORT_WORDS = {
+    start:        ["Earliest first", "Latest first"],
+    entry:        ["Easiest first", "Strictest first"],
+    availability: ["Fewest places", "Most places"]
+  };
+  function dirWords(k) {
+    if (SORT_WORDS[k]) return SORT_WORDS[k];
+    var col = COLS.filter(function (c) { return c.k === k; })[0];
+    return col && col.num
+      ? ["Cheapest first", "Dearest first"] : ["A\u2013Z", "Z\u2013A"];
+  }
+
+  /* Built once, from ORDER rather than from COLS.
+     COLS is re-sorted at the compact breakpoint, so a menu drawn from it
+     would rearrange itself when the window did -- and a menu whose entries
+     move is a menu nobody can learn. Grouped by `zone` under the same words
+     the header band uses, so the dropdown and the table agree about what a
+     column is about; the runs come out of ORDER for the same reason `groups`
+     takes them off COLS, which is that a zone written out by hand drifts from
+     the zone the columns actually carry. */
+  function buildSortMenu() {
+    var html = "", zone = null;
+    ORDER.forEach(function (k) {
+      var col = COLS.filter(function (c) { return c.k === k; })[0];
+      if (!col) return;
+      if (col.zone !== zone) {
+        if (zone !== null) html += "</optgroup>";
+        html += '<optgroup label="' + esc(ZONE_LABELS[col.zone] || "") + '">';
+        zone = col.zone;
+      }
+      /* The full name wherever there is a table, because the picker has room
+         the column header does not. On a phone the picker *is* the toolbar's
+         widest item -- a `select` is as wide as its longest option whichever
+         one is showing -- and 30px of "Mandatory fees" is the difference
+         between one row of chrome and two. The column's own `short`, never a
+         new abbreviation: the header already resorted to one and this is the
+         same column. */
+      html += '<option value="' + esc(col.k) + '">' +
+        esc(narrow.matches && col.short ? col.short : col.t) + "</option>";
+    });
+    document.getElementById("sortBy").innerHTML =
+      html + (zone === null ? "" : "</optgroup>");
+  }
+
+  /* One function writes both renderings of the sort, so they cannot come
+     apart: clicking a column heading moves the dropdown, and picking from the
+     dropdown moves the header's arrow. Called from `draw`, which is what
+     every path that changes the sort ends in -- a fourth path added later
+     gets this without knowing it has to. */
+  function paintSort() {
+    var by = document.getElementById("sortBy");
+    if (by.value !== state.sort) by.value = state.sort;
+    var words = dirWords(state.sort), now = state.dir > 0 ? 0 : 1;
+    var btn = document.getElementById("sortDir");
+    /* Both renderings written, and the stylesheet shows one -- the same rule
+       the table and the cards follow. A phone gets the header's own triangle,
+       because a phone has no header and this control is standing in for it;
+       "Cheapest first" beside a select naming the column would put the
+       toolbar on a third row at 360px, which is where the words stop being
+       worth what they cost. Everything wider gets the words. */
+    btn.innerHTML = '<span class="swap" aria-hidden="true">\u21c5</span>' +
+      '<span class="dirword">' + esc(words[now]) + "</span>" +
+      '<span class="dirmark" aria-hidden="true">' +
+      (now ? "\u25bc" : "\u25b2") + "</span>";
+    /* One accessible name at both widths, and it has to state where the table
+       is *and* what pressing does: a button reading "Cheapest first" is a
+       control whose effect is a coin toss, and a bare triangle is not a name
+       at all. */
+    btn.setAttribute("aria-label", words[now] + " \u2014 press for " +
+      words[1 - now].toLowerCase());
+  }
+
   /* One row, rebuilt from a departure id.
    *
      What `visible()` builds per row, on demand for a panel that is opened
@@ -1684,6 +1765,7 @@
        band's word from the header cell's own tooltip instead: read aloud, a
        row of four cells with colspans between a heading and the sortable
        header is furniture. */
+    paintSort();
     document.getElementById("head").innerHTML =
       '<tr class="band" aria-hidden="true">' +
       groups().map(function (g) {
@@ -2824,6 +2906,20 @@
 
   /* ---------- wiring ---------- */
 
+  buildSortMenu();
+  /* A new column starts ascending, exactly as clicking its heading does. Two
+     controls onto one pair of state fields, so a divergence here would be the
+     dropdown and the header disagreeing about what picking a column means. */
+  document.getElementById("sortBy").addEventListener("change", function () {
+    state.sort = this.value;
+    state.dir = 1;
+    draw(true);
+  });
+  document.getElementById("sortDir").addEventListener("click", function () {
+    state.dir = -state.dir;
+    draw(true);
+  });
+
   document.getElementById("head").addEventListener("click", function (event) {
     var th = event.target.closest("th[data-k]");
     if (!th) return;
@@ -3192,9 +3288,18 @@
   }, { hoverOpens: false });
 
 
+  /* Both names written and the stylesheet shows one, like the table and the
+     cards: a rotation crosses the breakpoint with nothing to redraw.
+     The accessible name says what the switch *does* rather than repeating
+     what it is called, because on a phone the word INCLUDE is not on screen
+     and a lit chip reading "Nitrox" beside a row of filters is a chip that
+     looks like one. Visible text inside the accessible name, so the two
+     cannot be read as different controls. */
   document.getElementById("toggles").innerHTML = D.facets.toggles.map(function (t) {
-    return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default + '">' +
-      esc(t.label) + "</button>";
+    return '<button class="chip" data-t="' + t.id + '" aria-pressed="' + t.default +
+      '" aria-label="Include ' + esc(t.label.toLowerCase()) + ' in every total">' +
+      '<span class="tog-long">' + esc(t.label) + "</span>" +
+      '<span class="tog-short">' + esc(t.short || t.label) + "</span></button>";
   }).join("");
   document.getElementById("toggles").addEventListener("click", function (event) {
     var button = event.target.closest("button");
@@ -3458,7 +3563,9 @@
 
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
-  var onWidthChange = function () { orderColumns(); draw(true); };
+  /* The menu too: its labels shorten below the card breakpoint, and `draw`
+     puts the selected value back through `paintSort`. */
+  var onWidthChange = function () { orderColumns(); buildSortMenu(); draw(true); };
   [compact, narrow].forEach(function (mq) {
     if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
     else if (mq.addListener) mq.addListener(onWidthChange);

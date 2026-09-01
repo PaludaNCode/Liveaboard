@@ -47,6 +47,13 @@ TOGGLE_LABELS: dict[str, str] = {
     "gear": "Rental gear",
 }
 
+# What the same switch is called where the toolbar is one phone wide. Only the
+# two-word one needs it; a switch with no entry here prints its full name at
+# every width, rather than an abbreviation invented to fill the table.
+TOGGLE_SHORT: dict[str, str] = {
+    "gear": "Gear",
+}
+
 
 def build_payload(dataset: Dataset) -> dict[str, Any]:
     """Flatten the dataset into the JSON the page consumes."""
@@ -299,7 +306,9 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         "facets": {
             "months": [{"id": m, "label": MONTH_NAMES[m]} for m in months],
             "toggles": [
-                {"id": key, "label": TOGGLE_LABELS[key], "default": DEFAULT_TOGGLES[key]}
+                {"id": key, "label": TOGGLE_LABELS[key],
+                 "short": TOGGLE_SHORT.get(key, TOGGLE_LABELS[key]),
+                 "default": DEFAULT_TOGGLES[key]}
                 for key in TOGGLE_LABELS
             ],
         },

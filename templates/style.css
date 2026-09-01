@@ -8,6 +8,11 @@
  */
 
 :root {
+  /* The sort dropdown opens the platform's own menu, and the platform paints
+     it from `color-scheme` rather than from anything here -- so without this
+     the one control on the page that is not ours is a white list over a dark
+     page. Declared on both sides, and it takes the scrollbars with it. */
+  color-scheme: light;
   --ground:#f7f8fa; --panel:#ffffff; --rule:#dde3ec; --rule-strong:#c3ccd9;
   --ink:#141a22; --ink-dim:#5b6675; --ink-faint:#66707c;
   --accent:#0d5c8c; --accent-soft:#e4eef6;
@@ -77,6 +82,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
     --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
     --accent:#63b3e3; --accent-soft:#152a3a;
@@ -88,6 +94,7 @@
   }
 }
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --ground:#0d1219; --panel:#131a23; --rule:#232d3a; --rule-strong:#334154;
   --ink:#e6ecf3; --ink-dim:#9aa7b7; --ink-faint:#8d99a8;
   --accent:#63b3e3; --accent-soft:#152a3a;
@@ -376,14 +383,24 @@ h1 {
    of six buttons. */
 .tsep { width:1px; height:17px; background:var(--rule); flex:none; }
 .filters-btn { flex:none; }
-@media (min-width: 901px) { .toolbar { flex-wrap:nowrap; } }
+/* Above the card breakpoint the line does not wrap, and the meta gives way
+   instead. It used to be 901px, which was the width the meta happened to stop
+   fitting at when the toolbar held two fewer controls -- so adding the sort
+   put 761..900 back on two rows for the documented reason above: a wrapping
+   container breaks the line before it shrinks anything, and the meta was the
+   only thing that could shrink. Tied to `narrow` now rather than to a number
+   somebody measured once: above it there is a table, and a table's toolbar
+   fits on one line because the prose on it is allowed to ellipsise. Below it
+   the rows are cards, the meta is not drawn at all, and three controls do not
+   fit 320px however they are laid out -- so there the line must wrap. */
+@media (min-width: 761px) { .toolbar { flex-wrap:nowrap; } }
 
-.filters-btn {
+.filters-btn, .dirbtn {
   font:inherit; font-size:12px; cursor:pointer; display:inline-flex;
   align-items:center; gap:6px; padding:4px 9px; border-radius:2px;
   border:1px solid var(--rule-strong); background:transparent; color:var(--ink-dim);
 }
-.filters-btn:hover { color:var(--accent); border-color:var(--accent); }
+.filters-btn:hover, .dirbtn:hover { color:var(--accent); border-color:var(--accent); }
 .filters-btn.active, .filters-btn[aria-expanded="true"] {
   border-color:var(--accent); background:var(--accent-soft);
   color:var(--accent); font-weight:500;
@@ -399,6 +416,37 @@ h1 {
 }
 .filters-btn .fcaret { font-size:8px; }
 .filters-btn[aria-expanded="true"] .fcaret { transform:rotate(180deg); }
+
+/* SORT. The platform's control, dressed to match the line it sits on.
+   `appearance:none` takes the platform's own arrow off and `.scaret` puts
+   ours back in the page's size and colour, so the closed state matches the
+   Filters button beside it while the *open* state stays the operating
+   system's -- which is the whole reason this is a `select` and not a listbox
+   built out of divs. Nothing here touches the popup; it cannot. */
+.selwrap { position:relative; display:inline-flex; align-items:center; min-width:0; }
+.selwrap select {
+  font:inherit; font-size:12px; cursor:pointer; max-width:100%;
+  appearance:none; -webkit-appearance:none;
+  padding:4px 21px 4px 9px; border-radius:2px;
+  border:1px solid var(--rule-strong); background:transparent; color:var(--ink-dim);
+  text-overflow:ellipsis;
+}
+.selwrap select:hover { color:var(--accent); border-color:var(--accent); }
+.scaret {
+  position:absolute; right:8px; font-size:8px; color:var(--ink-faint);
+  pointer-events:none;
+}
+/* The glyph says the button flips something; the words say which way it is
+   flipped to. An arrow alone would repeat the header's triangle without
+   saying what cheap means on this column. */
+.dirbtn .swap { font-size:10px; color:var(--ink-faint); }
+.dirbtn:hover .swap { color:var(--accent); }
+/* The phone's rendering of the same button. Written on every paint like the
+   words are, and switched here rather than in script, so a rotation crosses
+   the breakpoint with nothing to redraw. */
+.dirbtn .dirmark { display:none; font-size:8px; }
+/* The switch names the same way: both written, one shown. */
+.chip .tog-short { display:none; }
 
 /* Each live filter, named and droppable. */
 .activebar {
@@ -1237,11 +1285,53 @@ a { color:var(--accent); }
   .stats { gap:14px; margin-left:0; }
   .stat b { font-size:13px; }
 
-  .toolbar { padding:7px 10px; gap:6px 10px; }
+  /* Tighter here than anywhere else on the page, and only here. Four
+     controls plus their gaps come to 355px of the 340 a 360px screen has,
+     and 15px is exactly what the horizontal padding is holding: the row
+     stays one row on every phone from 344px up, which is every phone still
+     being sold. Vertical padding is untouched -- the press target is the
+     part of a control that must not shrink. */
+  .toolbar { padding:7px 10px; gap:6px 8px; }
+  .toolbar .filters-btn, .toolbar .dirbtn { padding:4px 7px; }
+  .toolbar button.chip { padding:3px 8px; }
+  .toolbar .selwrap select { padding:4px 19px 4px 7px; }
+  .toolbar .scaret { right:7px; }
   /* The build line is a laptop convenience; on a phone it is a second row of
-     chrome above the prices. */
-  .tgroup.meta-right #metaLine { display:none; }
+     chrome above the prices. The *group* goes, not just the line inside it:
+     emptied but present it is still a flex item carrying `margin-left:auto`,
+     and at 360px it wrapped to a second line all by itself -- nothing to see,
+     6px of row gap, and a toolbar 48px tall reporting one row of controls. */
+  .tgroup.meta-right { display:none; }
   .tsep { display:none; }
+  /* And the direction collapses to the triangle the header would have shown.
+     Filters, the column and the direction then fit one row down to 320px;
+     with the words they took a third row at 360, which is a phone-sized
+     screen paying for a laptop-sized label. The button keeps its
+     `aria-label`, so nothing is lost to a reader who cannot see the glyph. */
+  .dirbtn .swap, .dirbtn .dirword { display:none; }
+  .dirbtn .dirmark { display:inline; }
+  .dirbtn { padding:4px 8px; }
+  /* And the word SORT comes off, because something on this row has to.
+     Filters, the label, the dropdown and the triangle come to 299px of the
+     300 a 320px phone has, and this container wraps -- a wrapping flex
+     container breaks the line *before* it shrinks anything, so there is no
+     shrink rule that would save it and `flex:0 1 auto` here would be dead CSS
+     with a comment claiming otherwise. The alternatives were a third row of
+     chrome, or a typed width on the `select` -- and a typed width is a number
+     derived from the longest column name, in a file that cannot see the
+     column names, which is the mistake #150 was. So the label goes: the
+     dropdown carries `aria-label="Sort by"` for a reader who cannot see it,
+     and a column name beside a triangle is what a sort control looks like on
+     every phone anybody owns. */
+  label.tlabel[for="sortBy"] { display:none; }
+  /* And so does INCLUDE, and "Rental" with it. Four controls on one phone
+     line is 477px against the 340 a 360px screen has, and every one of them
+     is a control rather than a label -- so what goes is the words about them,
+     in this order: the two group names, then the longer of the two switch
+     labels. Both switches keep their full `aria-label`. */
+  .toolbar .tgroup .tlabel { display:none; }
+  .chip .tog-long { display:none; }
+  .chip .tog-short { display:inline; }
   .activebar { padding:5px 10px; }
   .filterpanel { max-height:52vh; }
   .bankpick { width:120px; }
