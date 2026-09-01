@@ -3544,7 +3544,11 @@
     state.onSaleOnly = false;
     onSale.setAttribute("aria-pressed", "false");
     nmin.value = ""; nmax.value = "";
-    D.facets.toggles.forEach(function (t) { state.toggles[t.id] = t.default; });
+    /* The Include switches are left where the visitor put them. "Clear all"
+       sits inside the bar that names the live filters and clears what that bar
+       lists, and the switches are no longer on it -- so resetting them here
+       would be an unnamed side effect that silently moves every total on the
+       page. Turning one back on is the switch itself, which is on screen. */
     Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (chip) {
       /* The "more" control is a disclosure, not a filter -- writing
          aria-pressed onto it would give it toggle semantics it does not have. */
@@ -3628,19 +3632,32 @@
      rule that used to apply to phones applies to everything: a chosen filter
      can be behind a closed panel, and a table quietly answering a narrower
      question than the one on screen is the failure this page exists to report
-     in other people. Two things stop it. The button carries a count -- what is
-     not as it was when the page opened -- and the bar under it names each one
-     and drops it on a press.
+     in other people. Two things stop it. The button carries a count -- of the
+     filters behind it -- and the bar under it names each one and drops it on
+     a press.
 
-     Counted against each control's *default* rather than its emptiness,
-     because that is the question, and it is how the Include switches get in:
-     both start on, and turning one off changes every total without touching a
-     row. */
+     Both are about *hidden* controls, which is what fixes their scope. A chip
+     in a closed bank has nothing on screen saying it is on; the two Include
+     switches are on the toolbar at every width, lit, an inch from the button,
+     and so belong to neither. They were in both once, on the reasoning that
+     the count should cover every control not as it opened, and that gave a
+     badge reading "2" over a drawer holding nothing that put it there. */
   var filtersToggle = document.getElementById("filtersToggle");
   var filtersCount = document.getElementById("filtersCount");
   var activeBar = document.getElementById("activeBar");
   var activePills = document.getElementById("activePills");
 
+  /* What the button is counting is what is behind it.
+   *
+     The two Include switches used to be counted here, on the reasoning that
+     the number should measure every control that is not as it was when the
+     page opened. That was the wrong question. This number exists because a
+     closed drawer can hide an active filter -- and the switches are never
+     behind it: they sit on the toolbar at every width, lit, an inch from the
+     button, saying their own state. Counting them made the badge read "2"
+     over a drawer holding nothing that put it there, and a badge that
+     promises something the drawer does not hold is a worse lie than the one
+     it was guarding against. */
   function activeFilters() {
     var n = state.months.size + state.ports.size + state.sites.size +
       state.boats.size + state.entry.size + state.sellers.size;
@@ -3648,9 +3665,6 @@
     if (state.onSaleOnly) n += 1;
     if (state.nightsMin !== null) n += 1;
     if (state.nightsMax !== null) n += 1;
-    D.facets.toggles.forEach(function (t) {
-      if (!!state.toggles[t.id] !== !!t.default) n += 1;
-    });
     return n;
   }
 
@@ -3689,15 +3703,12 @@
     if (state.nightsMax !== null) {
       out.push({ bank: "nights", text: "to " + state.nightsMax, set: "nightsMax" });
     }
-    /* The two switches, which are not filters and say so: they change what
-       every total on the page means rather than which rows are on it, so the
-       pill states the consequence rather than naming a chip. */
-    D.facets.toggles.forEach(function (t) {
-      if (!!state.toggles[t.id] !== !!t.default) {
-        out.push({ bank: "excluding", text: t.label.toLowerCase(),
-                   set: "toggle", value: t.id });
-      }
-    });
+    /* No pill for the Include switches. This bar names what is filtering the
+       table and offers to drop it; a switch filters nothing -- it changes what
+       every total means -- and an "EXCLUDING nitrox" pill under a heading
+       reading "Filtering on" said otherwise. Nothing is lost by leaving it
+       out: unlike a chip in a closed bank, the switch is on screen with its
+       own state showing, which is why it is on the toolbar at all. */
 
     activeBar.hidden = out.length === 0;
     activePills.innerHTML = out.map(function (p) {
@@ -3724,10 +3735,6 @@
       state.nightsMin = null; nmin.value = "";
     } else if (set === "nightsMax") {
       state.nightsMax = null; nmax.value = "";
-    } else if (set === "toggle") {
-      state.toggles[v] = true;
-      var sw = document.querySelector('#toggles [data-t="' + v + '"]');
-      if (sw) sw.setAttribute("aria-pressed", "true");
     } else {
       /* The months bank holds numbers and every other one holds strings; the
          chip that set it knows which, and so does the set it went into. */

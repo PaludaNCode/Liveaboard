@@ -524,9 +524,12 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         """Two things say so and both are asserted: the count on the control
         that hides them, and a pill per filter naming it and dropping it.
 
-        The count is against each control's *default* rather than its
-        emptiness, which is how the Include switches get in -- both start on,
-        and turning one off changes every total without touching a row.
+        And the count measures exactly what is behind that control. The Include
+        switches used to be in it, on the reasoning that the number should
+        cover every control not as it opened -- but they are never hidden:
+        they sit on the toolbar at every width, lit, an inch from the badge. A
+        badge reading "2" over a drawer holding nothing that put it there is a
+        worse lie than the one it guards against.
         """
         page = self.open(390, 844)
         self.addCleanup(page.close)
@@ -547,24 +550,47 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              "the count moved and the pills did not, so what is "
                              "filtering is a number and not a name")
 
-        # A switch is not a filter and is counted anyway: it changes what every
-        # total on the page means rather than which rows are on it.
+        # A switch is not a filter and is not counted as one. It filters no
+        # rows -- it changes what every total means -- and it is on screen
+        # saying so, which is the whole reason it is on the toolbar.
+        before = count()
         page.click("#toggles .chip")
         page.wait_for_timeout(320)
-        self.assertEqual(count(), "3")
+        self.assertEqual(count(), before,
+                         "turning a total switch off moved the filter count")
+        self.assertEqual(len(pills()), 2,
+                         "a total switch put a pill in the bar that names filters")
+        self.assertFalse(
+            page.evaluate("()=>document.getElementById('toggles')"
+                          ".querySelector('.chip').getAttribute('aria-pressed') === 'true'"),
+            "the switch did not actually turn off")
 
         # And all of it survives the drawer closing, which is the whole point.
         page.click("#filtersToggle")
         page.wait_for_timeout(280)
-        self.assertEqual(count(), "3")
-        self.assertEqual(len(pills()), 3)
+        self.assertEqual(count(), "2")
+        self.assertEqual(len(pills()), 2)
 
         # A pill drops its own filter, so undoing one does not mean opening the
         # drawer to hunt for the chip that set it.
         page.click("#activePills .pill-drop")
         page.wait_for_timeout(320)
-        self.assertEqual(count(), "2")
-        self.assertEqual(len(pills()), 2)
+        self.assertEqual(count(), "1")
+        self.assertEqual(len(pills()), 1)
+
+        # Clear all clears what the bar lists, and stops there: the switch the
+        # visitor turned off is not on that bar, so putting it back would be an
+        # unnamed side effect moving every total on the page.
+        off = page.evaluate("()=>document.getElementById('toggles')"
+                            ".querySelector('.chip').getAttribute('aria-pressed')")
+        page.click("#reset")
+        page.wait_for_timeout(320)
+        self.assertEqual(count(), "")
+        self.assertEqual(pills(), [])
+        self.assertEqual(
+            page.evaluate("()=>document.getElementById('toggles')"
+                          ".querySelector('.chip').getAttribute('aria-pressed')"), off,
+            "Clear all silently switched a total back on")
 
     # -- the router ----------------------------------------------------------
 
@@ -859,6 +885,68 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             page.eval_on_selector("tbody tr.row td.perdive", "e => e.textContent"),
             r"\u20ac|stated",
             "the table lost the Per dive column the card no longer duplicates")
+
+    def test_the_shell_is_the_window_and_nothing_pans_it(self) -> None:
+        """The masthead, the rail and the footer stay where they are put.
+
+        On iOS they did not. `html, body { height:100% }` resolves against the
+        initial containing block, which there is the viewport with the URL bar
+        *hidden* -- so with the bar showing, the shell was about 120px taller
+        than the area it was being looked at through, and those 120px were
+        slack the page could be panned through. Panned, the masthead and the
+        rail went off the top and the footer floated over bare canvas at the
+        bottom: the two things an app shell exists to pin, both unpinned.
+
+        Headless Chromium has no collapsing browser chrome, so it cannot
+        reproduce the pan. What it can hold is the invariant underneath it --
+        the shell is exactly the window, the document has no scroll of its own,
+        and the footer's bottom edge is the window's -- plus the two
+        `overscroll-behavior` declarations that stop `.shell` handing a flick
+        to a document that should not have one. Asserted as used values off the
+        live layout, not as source text.
+        """
+        page = self.open(PHONE_WIDTHS[0], 720)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS + [1440]:
+            page.set_viewport_size({"width": width, "height": 760})
+            page.wait_for_timeout(140)
+            seen = page.evaluate("""() => {
+              const root = document.documentElement;
+              const shell = document.querySelector('.shell');
+              const box = s => Math.round(
+                document.querySelector(s).getBoundingClientRect().height);
+              return {
+                innerH: window.innerHeight,
+                bodyH: Math.round(document.body.getBoundingClientRect().height),
+                slack: root.scrollHeight - root.clientHeight,
+                footerBottom: Math.round(
+                  document.querySelector('.site-footer').getBoundingClientRect().bottom),
+                masthead: box('.masthead'),
+                rail: box('.rail'),
+                bodyChain: getComputedStyle(document.body).overscrollBehaviorY,
+                shellChain: getComputedStyle(shell).overscrollBehaviorY,
+              };
+            }""")
+            where = "at %dpx" % width
+            self.assertEqual(seen["bodyH"], seen["innerH"],
+                             "the shell is not the window " + where)
+            self.assertEqual(seen["slack"], 0,
+                             "the document has room to be panned " + where)
+            self.assertEqual(seen["footerBottom"], seen["innerH"],
+                             "the footer is not on the bottom edge " + where)
+            self.assertGreater(seen["masthead"], 0, "no masthead " + where)
+            self.assertGreater(seen["rail"], 0, "no rail " + where)
+            self.assertEqual(seen["bodyChain"], "none",
+                             "the document accepts a chained scroll " + where)
+            self.assertEqual(seen["shellChain"], "contain",
+                             "the table's scroll chains out of it " + where)
+
+        # And the shell asks for the visible viewport, not the tallest one it
+        # could ever be. Chromium reports the two as equal, so the declaration
+        # is what says a phone was thought about -- with `100%` kept under it.
+        css = SITE.read_text(encoding="utf-8")
+        self.assertIn("height:100dvh", css,
+                      "the shell no longer sizes to the visible viewport")
 
 
 if __name__ == "__main__":  # pragma: no cover
