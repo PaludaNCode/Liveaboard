@@ -75,9 +75,20 @@
       without saying so: where a block is capped or a sub-euro move suppressed
       as source rounding, the report prints the count it left out. A vessel
       losing <em>every</em> departure is a failed fetch rather than a cancelled
-      season, and is reported as one.
+      season, and is reported as one. The discount moves are below, one block
+      per seller: those are diffed between that seller&rsquo;s last two
+      readings rather than between two commits, so each carries its own date.
     </p>
     __CHANGES__
+    <!-- The discount moves, and the reason they sit here as their own blocks
+         rather than inside the report above. That report is a diff between two
+         committed datasets; each of these is a diff between the last two
+         readings of one seller, and the two sellers are crawled days apart. So
+         neither is the commit boundary and neither is the other's, and each
+         keeps its own seller and its own "since" date in its own heading. They
+         were drawn in the sale panel, which left one page reporting refresh
+         news in two places (#146). -->
+    <div id="saleMoves"></div>
     <h3>The data itself</h3>
     <p>
       Everything on this page, in files you can keep. A trip whose operator
