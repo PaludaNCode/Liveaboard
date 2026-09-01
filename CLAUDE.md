@@ -539,6 +539,41 @@ Break these and the site starts lying quietly rather than failing loudly.
   measures the card's own money block and **asserts which layout it measured**,
   because a hidden table's rect is all zeros and clears every bound without the
   number being anywhere.
+- **The sort is a control of its own, because on a phone the header is not
+  one.** The table header *is* the sort control, and below 760px there is no
+  table: `.shell > table` is `display:none` and the rows are cards, so 1,122
+  departures came in departure order and stayed there. Same shape as the money
+  fold (#150) — a control that exists only in the layout it was written in. A
+  native `<select>` and a direction button on the toolbar, not in the drawer:
+  the drawer holds what picks rows and this picks none. Native because on a
+  phone it opens the platform's own picker, which is thumb-sized and
+  full-height and arrives with keyboard support and a screen-reader contract
+  already written — this page has three popovers in `hoverPanel` without
+  needing a fourth. **`paintSort` writes both renderings**, called from `draw`,
+  so a heading click moves the dropdown and a pick moves the heading's arrow;
+  two controls stating two orders is a reader with no way to tell which to
+  believe. The direction is said in the column's own words — *Cheapest first*,
+  *Earliest first*, *Fewest places*, *A–Z* — because "▲" says what the table
+  did and not what the reader asked for; `SORT_WORDS` keys the columns a
+  generic pair would be wrong about and everything `num` falls to the money
+  pair. The options come off `ORDER`, once, grouped by `zone` under the
+  header band's own words: `COLS` is re-sorted at the compact breakpoint, and
+  a menu that rearranges itself when the window does is a menu nobody can
+  learn. **`color-scheme` is declared for this control's sake** — the popup is
+  the platform's and the platform paints it from that property, so without it
+  the one thing on the page that is not ours is a white list over a dark page.
+  On a phone the label is what gives: Filters, the word, the dropdown and the
+  triangle come to 299px of the 300 a 320px screen has, and this container
+  wraps, so no shrink rule can save it. A typed width on the `select` was the
+  other option and is the #150 mistake again — a number derived from the
+  longest column name, in a file that cannot see the column names. The
+  dropdown carries `aria-label`, so nothing is lost that a reader could hear.
+  And the toolbar's nowrap breakpoint moved from 901px to 761px: 901 was the
+  width the *meta line* stopped fitting at when the toolbar held two fewer
+  controls, and a wrapping flex container breaks the line before it shrinks
+  anything, so the sort put 761–900 on two rows until the rule was tied to
+  `narrow` instead of to a number somebody measured once.
+
 - **Every filter is in the drawer, and what is on is on screen.** Five chip
   banks stood permanently open above the table: 270px before the first row on a
   1440×900 window, a quarter of it spent on filters nobody had chosen. They

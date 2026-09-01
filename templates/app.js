@@ -1407,6 +1407,81 @@
     return out;
   }
 
+  /* ---------- the sort control ---------- */
+
+  /* Which way, in the column's own words rather than as an arrow.
+     "Cheapest first" is what a reader is asking for; the triangle is what the
+     table does about it, and the header still prints that. Keyed off the
+     column wherever the generic pair would be wrong -- a date is early rather
+     than cheap, a berth count is few rather than cheap, and an entry bar is a
+     bar. Everything numeric falls to the money pair, which is what the five
+     money columns are; everything else sorts as text and says so. */
+  var SORT_WORDS = {
+    start:        ["Earliest first", "Latest first"],
+    entry:        ["Easiest first", "Strictest first"],
+    availability: ["Fewest places", "Most places"]
+  };
+  function dirWords(k) {
+    if (SORT_WORDS[k]) return SORT_WORDS[k];
+    var col = COLS.filter(function (c) { return c.k === k; })[0];
+    return col && col.num
+      ? ["Cheapest first", "Dearest first"] : ["A\u2013Z", "Z\u2013A"];
+  }
+
+  /* Built once, from ORDER rather than from COLS.
+     COLS is re-sorted at the compact breakpoint, so a menu drawn from it
+     would rearrange itself when the window did -- and a menu whose entries
+     move is a menu nobody can learn. Grouped by `zone` under the same words
+     the header band uses, so the dropdown and the table agree about what a
+     column is about; the runs come out of ORDER for the same reason `groups`
+     takes them off COLS, which is that a zone written out by hand drifts from
+     the zone the columns actually carry. */
+  function buildSortMenu() {
+    var html = "", zone = null;
+    ORDER.forEach(function (k) {
+      var col = COLS.filter(function (c) { return c.k === k; })[0];
+      if (!col) return;
+      if (col.zone !== zone) {
+        if (zone !== null) html += "</optgroup>";
+        html += '<optgroup label="' + esc(ZONE_LABELS[col.zone] || "") + '">';
+        zone = col.zone;
+      }
+      /* The full name, never `short`: the picker has the room the column
+         header does not, and an abbreviation is what a heading resorts to. */
+      html += '<option value="' + esc(col.k) + '">' + esc(col.t) + "</option>";
+    });
+    document.getElementById("sortBy").innerHTML =
+      html + (zone === null ? "" : "</optgroup>");
+  }
+
+  /* One function writes both renderings of the sort, so they cannot come
+     apart: clicking a column heading moves the dropdown, and picking from the
+     dropdown moves the header's arrow. Called from `draw`, which is what
+     every path that changes the sort ends in -- a fourth path added later
+     gets this without knowing it has to. */
+  function paintSort() {
+    var by = document.getElementById("sortBy");
+    if (by.value !== state.sort) by.value = state.sort;
+    var words = dirWords(state.sort), now = state.dir > 0 ? 0 : 1;
+    var btn = document.getElementById("sortDir");
+    /* Both renderings written, and the stylesheet shows one -- the same rule
+       the table and the cards follow. A phone gets the header's own triangle,
+       because a phone has no header and this control is standing in for it;
+       "Cheapest first" beside a select naming the column would put the
+       toolbar on a third row at 360px, which is where the words stop being
+       worth what they cost. Everything wider gets the words. */
+    btn.innerHTML = '<span class="swap" aria-hidden="true">\u21c5</span>' +
+      '<span class="dirword">' + esc(words[now]) + "</span>" +
+      '<span class="dirmark" aria-hidden="true">' +
+      (now ? "\u25bc" : "\u25b2") + "</span>";
+    /* One accessible name at both widths, and it has to state where the table
+       is *and* what pressing does: a button reading "Cheapest first" is a
+       control whose effect is a coin toss, and a bare triangle is not a name
+       at all. */
+    btn.setAttribute("aria-label", words[now] + " \u2014 press for " +
+      words[1 - now].toLowerCase());
+  }
+
   /* One row, rebuilt from a departure id.
    *
      What `visible()` builds per row, on demand for a panel that is opened
@@ -1684,6 +1759,7 @@
        band's word from the header cell's own tooltip instead: read aloud, a
        row of four cells with colspans between a heading and the sortable
        header is furniture. */
+    paintSort();
     document.getElementById("head").innerHTML =
       '<tr class="band" aria-hidden="true">' +
       groups().map(function (g) {
@@ -2823,6 +2899,20 @@
   }
 
   /* ---------- wiring ---------- */
+
+  buildSortMenu();
+  /* A new column starts ascending, exactly as clicking its heading does. Two
+     controls onto one pair of state fields, so a divergence here would be the
+     dropdown and the header disagreeing about what picking a column means. */
+  document.getElementById("sortBy").addEventListener("change", function () {
+    state.sort = this.value;
+    state.dir = 1;
+    draw(true);
+  });
+  document.getElementById("sortDir").addEventListener("click", function () {
+    state.dir = -state.dir;
+    draw(true);
+  });
 
   document.getElementById("head").addEventListener("click", function (event) {
     var th = event.target.closest("th[data-k]");

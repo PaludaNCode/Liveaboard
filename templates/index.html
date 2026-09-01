@@ -142,12 +142,13 @@
      argument was never about small screens. A laptop spent the same quarter
      of its window on filters nobody had chosen yet.
 
-     What stays out is what changes the table's numbers rather than its rows:
-     the two Include switches, which are not filters at all -- they decide what
-     every total on the page means, and a reader comparing boats wants to see
-     that they are on. Everything that picks *rows* is in the drawer, the
-     season and the two sale chips included, and the bar below says which of
-     them are on. -->
+     What stays out is what does not pick rows. The two Include switches are
+     not filters at all -- they decide what every total on the page means, and
+     a reader comparing boats wants to see that they are on. The sort picks no
+     rows either; it orders the ones that got through, and on a phone it is
+     the only sort control there is, because a phone has no table header.
+     Everything that picks *rows* is in the drawer, the season and the two
+     sale chips included, and the bar below says which of them are on. -->
 <div class="toolbar">
   <button type="button" class="filters-btn" id="filtersToggle"
           aria-expanded="false" aria-controls="filterPanel">
@@ -157,6 +158,42 @@
     <span class="fcount" id="filtersCount" hidden></span>
     <span class="fcaret" aria-hidden="true">▾</span>
   </button>
+
+  <span class="tsep" aria-hidden="true"></span>
+
+  <!-- SORT, AND WHY IT IS OUT HERE.
+       The header row is the sort control, and below 760px there is no header:
+       the rows are cards and the table is `display:none`. So the page could
+       not be sorted at all on a phone -- 1,122 departures in whatever order
+       the departure date puts them, on the screen most likely to be held in a
+       dive shop. Same shape as the money fold (#150): a control that exists
+       only in the layout it was developed on.
+
+       On the toolbar rather than in the drawer, because the drawer holds what
+       picks rows and this picks none: it orders the ones already there. It
+       leads the switches for the same reason it follows the Filters button --
+       a reader narrows the list, then asks which end of it to look at.
+
+       A native `select`, not a listbox built out of divs. On a phone it opens
+       the platform's own picker, which is thumb-sized and full-height and
+       which no amount of CSS here would match; it arrives with keyboard
+       support, type-ahead and a screen-reader contract already written; and
+       the page has three popovers of its own in `hoverPanel` without needing
+       a fourth. -->
+  <div class="tgroup sortgroup">
+    <label class="tlabel" for="sortBy">Sort</label>
+    <span class="selwrap">
+      <!-- Named on the control as well as beside it. The visible label is the
+           accessible one on a laptop, but this is the toolbar that has to
+           survive 320px, and a label removed to save room is a control a
+           screen reader can only call "combo box". -->
+      <select id="sortBy" aria-label="Sort by"></select>
+      <span class="scaret" aria-hidden="true">&#9662;</span>
+    </span>
+    <!-- Which end, in the column's own words. Filled by `paintSort`, which
+         also writes the header's arrow, so the two cannot come apart. -->
+    <button type="button" class="dirbtn" id="sortDir"></button>
+  </div>
 
   <span class="tsep" aria-hidden="true"></span>
 
