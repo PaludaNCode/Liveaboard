@@ -635,7 +635,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   every `vh` cap on a panel is doubled the same way for the same reason.
   `overscroll-behavior` is the other half — `none` on the document and
   `contain` on `.shell`, or a flick that reaches the end of the table hands
-  itself to a page that should not have a scroll. It went unnoticed until
+  itself to a page that should not have a scroll. **And nothing may go looking
+  for slack either**, because `dvh` only covers iOS 15.4 up: `focus()` on a
+  pane or a panel trigger takes `{ preventScroll: true }` — focusing asks the
+  browser to bring an element into view and the only box it can move here is
+  the shell — and `history.scrollRestoration` is `"manual"`, so a reload at
+  `#trips`, `#sale` or `#history` cannot have a position put back into a
+  window that does not scroll. It went unnoticed until
   `color-scheme` landed: before that the panned-into strip was the UA's white,
   and after it is black, which is what made a long-standing gap look like a
   new one.

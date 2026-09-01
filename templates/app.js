@@ -3284,7 +3284,10 @@
       shut();
       if (trigger && document.contains(trigger)) {
         dismissed = trigger;
-        trigger.focus();
+        /* Same reason as the pane: the trigger is inside `.shell`, which does
+           scroll, and returning focus to it must put the keyboard back where
+           it was rather than move the rows under the reader. */
+        trigger.focus({ preventScroll: true });
       }
     });
 
@@ -4000,8 +4003,28 @@
 
        Not at boot: nothing has been activated yet, and taking focus off the
        document on load is a change the visitor did not ask for. */
-    if (focus) panes[name].focus();
+    /* `preventScroll`, because this shell has no scroll to give. Focusing an
+       element asks the browser to bring it into view, and the nearest thing it
+       can scroll here is the document -- which is `overflow:hidden` and
+       exactly the window tall, so there is nothing to bring into view and
+       nothing should move. iOS obliges anyway when the layout has any slack at
+       all, and what moves is the whole shell: the masthead and the rail go off
+       the top and the footer floats over bare canvas. The pane still takes
+       focus, which is the part a screen reader and a keyboard need. */
+    if (focus) panes[name].focus({ preventScroll: true });
   }
+
+  /* Nothing here has a scroll position worth restoring, and restoring one is
+     how the shell ends up panned.
+   *
+     The window does not scroll -- `body` is `overflow:hidden` and exactly the
+     viewport tall -- so the only offset a browser could put back is slack it
+     found in the layout, which is the iOS bug the `dvh` rule in the stylesheet
+     exists to remove. `dvh` removes the slack on iOS 15.4 and up; this removes
+     the thing that goes looking for it, on every browser and every version.
+     The table's own scroll position is inside `.shell` and is not what this
+     governs. */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
   window.addEventListener("hashchange", function () { showView(viewFromHash(), true); });
 
