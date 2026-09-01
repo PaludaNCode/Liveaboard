@@ -1157,17 +1157,18 @@
     "base", "nitrox", "later", "total", "perdive",
     "availability", "source"
   ];
-  /* The same columns on a phone, and as much of the same order as 390px holds.
-     Three of the four rules above survive here unchanged: no Operator or
-     Nights column, Guests grouped with the Boat, and Dive sites straight after
-     Trip. The fourth -- the price block reading Advertised, Nitrox, Mandatory
-     fees, Total -- cannot, and the note on the block below says what it costs.
+  /* The same columns on a phone, and as much of the same order as a phone
+     holds. Three of the four rules above survive here unchanged: no Operator
+     or Nights column, Guests grouped with the Boat, and Dive sites straight
+     after Trip. The fourth -- the price block reading Advertised, Nitrox,
+     Mandatory fees, Total -- cannot, and the note on the block below says what
+     it costs.
 
-     What does not fit in front of the money, measured at 390px: Return is
-     62px, From and To are 120px each, and the pinned column spends 66 -- 90
-     before the fee dropdown's `+` column was reclaimed (#149). Return
-     therefore follows the money rather than leading it, as it does nowhere
-     else. Of the two identifiers, the boat's name is
+     This is the *widest* phone order, and how much of it survives is measured
+     rather than declared: see MONEY_FOLD. What does not fit in front of the
+     money at all, measured at 390px: Return is 62px and From and To are 120px
+     each, against 66 for the date and 96 for the boat. Return therefore
+     follows the money rather than leading it, as it does nowhere else. Of the two identifiers, the boat's name is
      what a row is compared by; the return date you read once you have found
      the row. Nothing is dropped -- the order is what changes. */
   var PHONE_ORDER = [
@@ -1193,31 +1194,93 @@
     "availability", "source"
   ];
 
-  /* The same again on a screen too small to afford Guests in front of the
-     money. Guests is 45px, so dropping it is what moves the Total left.
+  /* What comes out of the front of the row when the money does not fit, and
+     the order it comes out in.
+   *
+     This was a second array, TINY_ORDER, and a third breakpoint at 385px --
+     and both were wrong on most phones (#150). The array said only
+     "PHONE_ORDER, minus Guests in front of the money", fixing 360px needed a
+     third saying "minus Boat as well", and the breakpoint was a **typed
+     number derived from the data**: 385 was measured against a Total column
+     155px wide, and the column is sized by its worst-case row -- today a
+     two-seller ranged total with `+ tips` and `2 sellers` on it, at 213px. So
+     the width the money needs moves when the fleet's dearest sailing moves,
+     and the file that decides the fold cannot see the fleet. The Total's right
+     edge landed at 420 on a 390px screen: 360, 390, 393, 402 and 414 all lost
+     the number the page exists to publish, silently, because the row still
+     renders.
 
-     **These figures are re-measured and they no longer say what they said.**
-     Removing the `+` column took 24px off everything in front of the money
-     (#149), so the Total now sits at 207..420 on a 390px phone against
-     231..444 before it -- but 420 is still 30px past the edge, and 444 was 54.
-     The comment used to read "the Total's right edge lands at 386: fine on a
-     390px phone", and that stopped being true at some point between then and
-     now without anybody measuring again. The order below is still the right
-     order and the 24px is a real improvement; what is not true is that the
-     Total fits. Fixing that means re-deriving these widths, which is its own
-     change and not a side effect of moving a fee panel.
+     So the fold is measured instead, off the columns' own widths, and there is
+     one list rather than three. Least important first, which is the order they
+     leave in: how many share the dive deck, then which boat it is. The date
+     never leaves -- it is what a row is looked up by and it is the sort the
+     table opens on.
 
-     So below that width Guests goes back behind the price block, at the head
-     of the descriptive columns rather than buried among them. The money is
-     the one thing that cannot move: a Total off the right-hand edge is the
-     exact failure this whole ordering exists to prevent, and it would be
-     silent -- the row still renders, it just does not answer the question. */
-  var TINY_ORDER = [
-    "start", "boat",
-    "total", "base", "nitrox", "later", "perdive",
-    "guests", "end", "from", "to", "trip", "sites", "entry",
-    "availability", "source"
-  ];
+     The money itself is not on this list and cannot be. A Total off the
+     right-hand edge is the exact failure this whole ordering exists to
+     prevent. */
+  var MONEY_FOLD = ["guests", "boat"];
+  var moneyFold = 0;
+
+  /* PHONE_ORDER with the folded columns moved out from in front of the price
+     block and put back at the head of the descriptive ones -- rather than
+     buried among them, which is where a filter would be looking for them.
+
+     Reversed on the way back in, so the most important of them comes first:
+     they leave least-important-first and a reader scanning what is left wants
+     the boat before the guest count. */
+  function phoneOrder() {
+    if (!moneyFold) return PHONE_ORDER;
+    var folded = MONEY_FOLD.slice(0, moneyFold);
+    var out = PHONE_ORDER.filter(function (k) { return folded.indexOf(k) < 0; });
+    var at = out.indexOf("perdive") + 1;
+    return out.slice(0, at).concat(folded.slice().reverse(), out.slice(at));
+  }
+
+  /* How many have to go, measured. Nought on anything that is not a phone.
+   *
+     Read off the header cells, which carry each column's real width whatever
+     order they are in -- the widths are content-driven and do not change when
+     the order does, which is what makes one measurement answer for every fold.
+     The room is the shell's, not the window's: the shell is the box that
+     scrolls, and on a page with a scrollbar those are different numbers.
+
+     Returns the *smallest* fold that fits, so this unfolds as well as folds --
+     a phone turned landscape, or a filter that leaves only cheap boats and
+     narrows the column, gets Guests and Boat back in front of the money
+     without anything having to remember that it took them away.
+
+     Which means the fold can move when nothing about the window did:
+     re-sorting on the Total brings different rows into the first page, the
+     widest of them sizes the column, and Guests comes back. Measured on the
+     committed data, sorting dearest-first takes the column from 213px to 167
+     and does exactly that. Not a wobble worth designing out -- the alternative
+     is to fold for the worst case at every width and hide a column that fits,
+     which is the failure the second layout guard was written to catch. */
+  function moneyFoldWanted() {
+    if (!narrow.matches) return 0;
+    var head = document.getElementById("head");
+    var shell = document.querySelector(".shell");
+    if (!head || !shell) return moneyFold;
+    var width = {};
+    [].forEach.call(head.querySelectorAll("th[data-k]"), function (th) {
+      width[th.dataset.k] = th.getBoundingClientRect().width;
+    });
+    /* Before the first draw there is no header to measure, and a fold guessed
+       from nothing is worse than the one already in force. */
+    if (!width.total) return moneyFold;
+    var ahead = PHONE_ORDER.slice(0, PHONE_ORDER.indexOf("total"));
+    var room = shell.clientWidth;
+    for (var n = 0; n <= MONEY_FOLD.length; n++) {
+      var folded = MONEY_FOLD.slice(0, n);
+      var lead = 0;
+      ahead.forEach(function (k) {
+        if (folded.indexOf(k) < 0) lead += width[k] || 0;
+      });
+      if (lead + width.total <= room) return n;
+    }
+    return MONEY_FOLD.length;
+  }
 
   /* The same columns, and the same price order within them, wherever there is
      not room for the reading order above. Identity, then the money, then
@@ -1242,11 +1305,6 @@
      and drives the pinned-column widths and the folded filter banks. */
   var compact = window.matchMedia("(max-width: 1700px)");
   var narrow = window.matchMedia("(max-width: 760px)");
-  /* A third question, and the narrowest one: is there room for a descriptive
-     column in front of the price at all? 385 is where the measurement falls,
-     not a round number chosen first -- Guests ahead of the money puts the
-     Total's right edge at 386. */
-  var tiny = window.matchMedia("(max-width: 385px)");
 
   /* How many of the leading columns are pinned. By position, never by name:
      two pinned columns with a third between them overlap exactly as badly as
@@ -1282,8 +1340,7 @@
     document.body.classList.toggle("pins-2", n === 2);
     document.body.classList.toggle("pins-3", n === 3);
     document.body.classList.toggle("pins-4", n === 4);
-    var order = tiny.matches ? TINY_ORDER
-              : narrow.matches ? PHONE_ORDER
+    var order = narrow.matches ? phoneOrder()
               : compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
       var x = order.indexOf(a.k), y = order.indexOf(b.k);
@@ -1296,7 +1353,10 @@
      on would look right. So every list is checked, not just the widest. */
   COLS.forEach(function (c) {
     [["ORDER", ORDER], ["COMPACT_ORDER", COMPACT_ORDER],
-     ["PHONE_ORDER", PHONE_ORDER], ["TINY_ORDER", TINY_ORDER]
+     /* PHONE_ORDER only: every narrower order is a permutation of it that
+        `phoneOrder` builds, so a column present here is present in all of
+        them -- which is one of the things collapsing TINY_ORDER bought. */
+     ["PHONE_ORDER", PHONE_ORDER]
     ].forEach(function (pair) {
       if (pair[1].indexOf(c.k) < 0 && window.console) {
         console.warn("column " + c.k + " is not in " + pair[0] + "; printed last");
@@ -1685,6 +1745,37 @@
         nothing + "</td></tr>";
     drawn = Math.min(rows.length, target);
     afterDraw(rows);
+    settleMoneyFold(keep);
+  }
+
+  /* Re-measure the fold now that there is something to measure, and draw once
+     more if it moved.
+   *
+     After the draw and not before it, because the widths this reads are the
+     rendered ones -- and inside `draw` rather than at the two or three places
+     that change the width, because the Total column is sized by whichever rows
+     are on screen: a filter down to one expensive boat widens it as surely as
+     rotating the phone narrows the screen.
+
+     `settling` is what stops this recurring. `moneyFoldWanted` returns the
+     smallest fold that fits, so the second pass is measured against the order
+     it asked for and agrees with itself -- but a guard is cheaper than trusting
+     that, and a redraw loop on a phone is not a bug worth risking to save a
+     variable. One extra pass at most, and none at all on anything wider than a
+     phone or already folded correctly. */
+  var settling = false;
+  function settleMoneyFold(keep) {
+    if (settling) return;
+    var want = moneyFoldWanted();
+    if (want === moneyFold) return;
+    moneyFold = want;
+    settling = true;
+    try {
+      orderColumns();
+      draw(keep);
+    } finally {
+      settling = false;
+    }
   }
 
   /* Kept as a separate function so appending on scroll and drawing from
@@ -3319,9 +3410,26 @@
   /* Rotating the device changes which order the columns should be in, and a
      table left in the other one is the bug this exists to prevent. */
   var onWidthChange = function () { orderColumns(); draw(true); };
-  [compact, narrow, tiny].forEach(function (mq) {
+  [compact, narrow].forEach(function (mq) {
     if (mq.addEventListener) mq.addEventListener("change", onWidthChange);
     else if (mq.addListener) mq.addListener(onWidthChange);
+  });
+
+  /* And a plain resize, because the fold in front of the money is measured
+     rather than declared and **most of the widths that change it cross no
+     breakpoint at all**: 760 to 390 is one media query away from nothing, and
+     the whole phone range sits inside `narrow`. Left on the media queries, the
+     fold was whatever the width at first paint asked for and stayed there --
+     which passes a test that only checks the Total is on screen, because being
+     over-folded is safe. It is not right: a phone turned landscape kept the
+     boat and the guest count behind the money with room to spare for both.
+
+     Debounced, since a resize fires continuously through a drag and a settle
+     can cost a redraw. */
+  var resizeSettle = 0;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeSettle);
+    resizeSettle = setTimeout(function () { settleMoneyFold(true); }, 90);
   });
 
   /* The banks fold away from 1000px down, and a chosen filter folds away with
