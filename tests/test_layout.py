@@ -134,6 +134,26 @@ class TestTheViewsAtEverySize(unittest.TestCase):
     def measure(self, page) -> dict:
         return page.evaluate(MEASURE)
 
+    def pick_filter(self, page, bank: str, selector: str) -> None:
+        """Press a row filter, wherever the drawer is keeping it.
+
+        Every filter that picks rows is in `#filterPanel` now -- the season and
+        the two sale chips included -- and the panel shows one bank at a time,
+        so reaching a chip means opening the drawer and selecting its bank.
+        Tests that clicked straight at `#months .chip` were clicking a control
+        that is no longer on the toolbar.
+        """
+        if page.evaluate(
+            "()=>document.getElementById('filtersToggle')"
+            ".getAttribute('aria-expanded') !== 'true'"
+        ):
+            page.click("#filtersToggle")
+            page.wait_for_timeout(280)
+        page.click('.bank-tab[data-bank="%s"]' % bank)
+        page.wait_for_timeout(200)
+        page.click(selector)
+        page.wait_for_timeout(320)
+
     # -- the money is on screen ----------------------------------------------
 
     def test_the_total_is_on_screen_without_scrolling(self) -> None:
@@ -518,11 +538,10 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertEqual(count(), "")
         self.assertEqual(pills(), [])
 
-        page.click("#filtersToggle")
-        page.wait_for_timeout(280)
-        for n, selector in enumerate(("#months .chip", "#hideSold"), start=1):
-            page.click(selector)
-            page.wait_for_timeout(320)
+        for n, (bank, selector) in enumerate(
+            (("months", "#months .chip"), ("flags", "#hideSold")), start=1
+        ):
+            self.pick_filter(page, bank, selector)
             self.assertEqual(count(), str(n))
             self.assertEqual(len(pills()), n,
                              "the count moved and the pills did not, so what is "
@@ -629,8 +648,7 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         before = self.measure(page)
         self.assertEqual(before["railTrips"], before["shown"])
 
-        page.click("#months .chip")  # any one month
-        page.wait_for_timeout(400)
+        self.pick_filter(page, "months", "#months .chip")  # any one month
         after = self.measure(page)
         self.assertNotEqual(after["shown"], before["shown"], "the filter did nothing")
         self.assertEqual(after["railTrips"], after["shown"],
