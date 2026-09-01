@@ -32,6 +32,10 @@ on:
         description: "Re-fetch trips already in the book, rather than only new ones"
         type: boolean
         default: false
+      boat:
+        description: "Restrict discovery to one vessel slug (for proving a change)"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -67,8 +71,16 @@ jobs:
         run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
 
       # The run summary is where a capped run is actually read: it prints the
-      # reefs and dive count found per trip, and any region the site
-      # recogniser does not know.
+      # reefs and dive count found per trip, any region the site recogniser
+      # does not know, and — every run, fetch or not — how many published
+      # itineraries still have no fragment at all.
+      #
+      # `--discover` is on because the archive cannot reach every trip. Its
+      # tour ids come from `Event` nodes, so a vessel liveaboard.com sells no
+      # in-season berth on contributes none however often this runs, and 85
+      # published itineraries were unreachable by construction. The ids are on
+      # the vessel page; this opens one page per boat still short of a
+      # fragment, which is fifteen requests rather than one per hull.
       - name: Read what each trip says about itself
         run: |
           echo '```' >> "$GITHUB_STEP_SUMMARY"
@@ -76,7 +88,11 @@ jobs:
             --archive data/archive.json \
             --out data/itineraries.json \
             --snapshots data/snapshots \
+            --dataset data/egypt-2027.json \
+            --fees data/fees.json \
             --limit "${{ inputs.limit || 3 }}" \
+            --discover \
+            ${{ inputs.boat && format('--boat {0}', inputs.boat) || '' }} \
             ${{ inputs.refresh && '--refresh' || '' }} \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}

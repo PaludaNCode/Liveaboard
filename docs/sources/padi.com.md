@@ -543,7 +543,7 @@ never will.
 
 ### Not read yet
 
-- **63 entries the classifier still declines**, and it should: "14% GST (on
+- **61 entries the classifier still declines**, and it should: "14% GST (on
   onboard purchases)" carries `price: 14.0` and is a percentage of an unrelated
   purchase; "Supervision fees for Level 1 divers…" is conditional on the diver.
   Each of them makes its trip's bill incomplete, which is the safe direction.
@@ -551,10 +551,19 @@ never will.
   "15 liter tanks", "Flashlight (torch)", "Fins, mask, snorkel (ABC)". Priced,
   and deliberately unread: the set is what a diver renting gear rents, and a
   basket assembled from parts is a price nobody quoted.
-- **"Tips for the crew"**, 376 entries and never priced. It would classify as
-  `gratuities` with one more pattern, and gratuities are *customary* here, so an
-  unpriced line would land in every affected trip's counted total as an unknown.
-  Worth doing deliberately rather than as a side effect.
+- ~~**"Tips for the crew"**~~ — **read now**, and the reason it was worth doing
+  deliberately turned out to be a different reason than this said. It is not 376
+  scattered entries: **23 of 23** sampled itineraries carry it, `payedPer: 30`
+  (per trip), and one states `extraValue: "15% suggested"` — a percentage of an
+  unstated base, which the money reader declines like any other. `crew\s+tips?`
+  only matched the other word order, so the one charge nearly every operator on
+  this seller states was the one nothing read.
+
+  It does **not** land in a counted total, and that is the change this prompted:
+  `gratuities` used to be promoted to *customary* from whatever block it was
+  listed in, and PADI files this under `optionalOnBoard` on every trip that
+  names it — as do all 55 liveaboard.com vessels that state gratuities. The
+  seller's block decides now. See `_tier_for` and `docs/plan-missing.md`.
 
 ## The vocabulary
 
@@ -820,7 +829,40 @@ Two facts a PADI-only vessel has nowhere else to get:
   claim this site exists to catch other people making.
 
 Not every boat states a fleet; three of the ten land under "Operator not
-captured", which is true rather than tidy.
+captured", which is true rather than tidy. **Confirmed at the source rather
+than inferred from a null**, 2026-09-01: `window.shop` on `my-anemone`,
+`my-heaven-saphir` and `my-independence-ii` states `fleetTitle: ""` — an empty
+string PADI publishes, not a fetch that failed or a regex that missed. Those
+three carry 44 in-season sailings, have no liveaboard.com vessel page and so no
+`Product.brand.name`, and their description prose names no company. There is
+nothing left to read, and inventing one from marketing copy is the assertion
+this file already refuses to make for Blue Pearl on better evidence.
+
+### The vessel page also states cabins, length and year built
+
+Server-rendered in the same response `window.shop` comes from — plain
+`urllib`, no browser, no CDN bundle. `/liveaboard/egypt/my-anemone/`, read
+2026-09-01:
+
+    Cabins 16 · Length / Width 45 m / 8 m · Year built / renovated 2022 / 2025 ·
+    Rental equip. YES ($) · Internet FREE · Nitrox FREE
+
+`fetch_padi.py` already fetches this page per vessel for the country, currency,
+name and fleet, so the strip costs no extra request. It answers `cabins` for
+the 6 boats that have none, `length_m` and `year_built` for the 5 length-less
+vessels PADI carries (DUNE Longara, DUNE Titan, Snefro Love, Snefro Pearl,
+Snefro Target), and gives a second reading of nitrox inclusion to check the fee
+panel's against. Precedence is the standing rule: the vessel's own panel wins
+where it exists, PADI fills where it does not, never a merge.
+
+**Negative, and the reason `guests` stays open: the page states no guest count
+anywhere.** The whole rendered body searched for every numeric form of guests,
+divers, passengers, people, pax — zero hits, and the strip has no such row.
+Vita Xplorer is the boat this leaves stranded: it is the one vessel with a
+liveaboard.com panel whose specification table leaves the field blank, so its
+answer is a parser fix on that `<dl>` or nothing. The other six missing a guest
+count are reachable through the itinerary fragment's *Group Size*, which
+`promote`'s guest chain already reads.
 
 ## One property to preserve
 

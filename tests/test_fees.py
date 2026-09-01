@@ -80,9 +80,24 @@ class TestRealDisclosure(unittest.TestCase):
         self.assertEqual(self.byc[FeeCode.NITROX_COURSE].low, 250.0)
         self.assertEqual(self.byc[FeeCode.COURSE].low, 300.0)
 
-    def test_gratuities_are_customary_despite_being_listed_optional(self):
-        """The site's split says escapable; it does not say who actually escapes."""
-        self.assertEqual(self.byc[FeeCode.GRATUITIES].tier, FeeTier.CUSTOMARY)
+    def test_gratuities_take_the_tier_their_own_block_gives_them(self):
+        """This asserted CUSTOMARY, on the reasoning that the site's split says
+        what is escapable and not who actually escapes. That reasoning is about
+        divers and this is a statement about a charge: a mandatory $50 tip and
+        one you choose the size of are different things, and the operator is
+        the only party who can say which it bills. Every vessel that states
+        gratuities files them under Optional, so the promotion was overruling
+        all 55 of them at once -- and adding a mean of EUR 74 to 278 sailings'
+        counted totals on nobody's authority."""
+        self.assertEqual(self.byc[FeeCode.GRATUITIES].tier, FeeTier.OPTIONAL)
+
+    def test_a_tip_an_operator_bills_as_required_is_still_counted(self):
+        """The other half of the same rule, and why it needs no special case:
+        a charge in the Required block is mandatory whatever it is for."""
+        from liveaboard.scrape.fees import _tier_for
+
+        self.assertEqual(_tier_for(FeeCode.GRATUITIES, required=True),
+                         FeeTier.MANDATORY)
 
     def test_nitrox_is_conditional_so_a_toggle_governs_it(self):
         self.assertEqual(self.byc[FeeCode.NITROX].tier, FeeTier.CONDITIONAL)
@@ -771,9 +786,6 @@ class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
         "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
         # Gear, and gear is a toggle.
         "Fins, mask, snorkel (ABC)",
-        # Two charges in one label. Filing it under half of itself would name
-        # a charge the operator did not.
-        "Environmental and Route Fees",
     )
 
     def test_what_must_keep_failing_still_does(self):
@@ -782,6 +794,31 @@ class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
         cheaper by exactly what it left out."""
         for label in self.STILL_DECLINED:
             self.assertIsNone(classify_label(label, prose=False), label)
+
+    def test_a_label_naming_two_charges_is_combined_rather_than_declined(self):
+        """"Environmental and Route Fees" was in the list above, declined
+        because filing it under half of itself would name a charge the
+        operator did not. That is right about `environment_tax` and wrong
+        about the outcome: `combined_fees` is the code for one line covering
+        several, it keeps the whole amount undivided, and declining blocked
+        the trip's bill instead. `route` joins the four parts `_combined_fee`
+        already counts."""
+        self.assertEqual(classify_label("Environmental and Route Fees", prose=False),
+                         FeeCode.COMBINED_FEES)
+
+    def test_a_route_supplement_on_its_own_is_still_its_own_charge(self):
+        """One part is not a combination, and "Route supplement" carries none
+        of the words `COMBINED_TAIL` looks for either."""
+        self.assertEqual(classify_label("Route supplement", prose=False),
+                         FeeCode.ROUTE_SUPPLEMENT)
+
+    def test_the_chamber_levy_is_read_and_is_narrow(self):
+        """A per-diver contribution to the recompression chamber: a charge to
+        a named third party, on trips that bill park fees and a service charge
+        separately, so it is its own code rather than a share of either."""
+        self.assertEqual(classify_label("Hyperbaric chamber contribution", prose=False),
+                         FeeCode.HYPERBARIC_LEVY)
+        self.assertIsNone(classify_label("Chamber cabin", prose=False))
 
     def test_none_of_them_reaches_past_its_own_wording(self):
         """The reason they are listed rather than generalised into "any
@@ -795,3 +832,54 @@ class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
                     {FeeCode.LOCAL_FEES, FeeCode.COAST_GUARD, FeeCode.NAVY_FEE,
                      FeeCode.ROUTE_SUPPLEMENT, FeeCode.HOSPITALITY_FEE},
                 )
+
+
+class TestTheSellerDecidesWhatIsCounted(unittest.TestCase):
+    """One rule, stated where a reader will look for it: a billed charge lands
+    in the tier its own seller's block gives it. Nothing here promotes a code
+    past that block, and the case that made it matter was tips.
+    """
+
+    PROV = {"kind": "scraped", "source_id": "liveaboard.com", "retrieved": "2026-08-27"}
+
+    def tiers(self, text):
+        from liveaboard.scrape.fees import parse_extras
+
+        return {f.code: f.tier for f in parse_extras(text)}
+
+    def test_a_tip_under_optional_is_optional(self):
+        got = self.tiers("Optional Extras: Gratuities (€80 / trip).")
+        self.assertEqual(got[FeeCode.GRATUITIES], FeeTier.OPTIONAL)
+
+    def test_a_tip_under_required_is_mandatory(self):
+        """No seller does this today. If one starts, the charge is counted and
+        no table here needs editing for that to happen."""
+        got = self.tiers("Required Extras: Gratuities (€80 / trip).")
+        self.assertEqual(got[FeeCode.GRATUITIES], FeeTier.MANDATORY)
+
+    def test_the_toggled_codes_still_outrank_the_optional_block(self):
+        """Deliberately not the same case. Nitrox and gear are conditional
+        because the *page* puts a switch on them, which is a fact about this
+        site rather than a claim about the operator's charge."""
+        got = self.tiers("Optional Extras: Nitrox (€30 / trip), Rental Gear (€25).")
+        self.assertEqual(got[FeeCode.NITROX], FeeTier.CONDITIONAL)
+        self.assertEqual(got[FeeCode.GEAR_RENTAL], FeeTier.CONDITIONAL)
+
+    def test_nothing_emits_the_customary_tier_any_more(self):
+        """It stays in the vocabulary and in DEFAULT_ON_TIERS, which app.js
+        mirrors, so the two can keep moving together. But no parser writes it,
+        and a seller that files a tip as owed writes MANDATORY instead."""
+        from liveaboard.scrape.fees import _tier_for
+
+        for code in FeeCode:
+            for required in (True, False):
+                self.assertNotEqual(_tier_for(code, required), FeeTier.CUSTOMARY)
+
+    def test_an_included_tip_is_optional_at_zero(self):
+        """An operator stating tips as covered has covered a cost its guests
+        choose the size of, so the line belongs beside the other optional ones
+        rather than among the charges nobody can decline."""
+        from liveaboard.scrape.fees import tier_for_inclusion
+
+        self.assertEqual(tier_for_inclusion(FeeCode.GRATUITIES), FeeTier.OPTIONAL)
+        self.assertEqual(tier_for_inclusion(FeeCode.MARINE_PARK), FeeTier.MANDATORY)

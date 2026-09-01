@@ -2719,3 +2719,59 @@ class TestOneGate(unittest.TestCase):
         failure. A shortcut that does not admit it is one people ship on."""
         ship = self.SHIP.read_text(encoding="utf-8")
         self.assertIn("this is not the full gate", ship)
+
+
+class TestTheTwoBerthCountsAreDifferentColumns(unittest.TestCase):
+    """The CSV carried `spaces_left`, empty on all 1,122 rows, and the model
+    property behind it read `block.get("spots")` -- against blocks that have
+    been lists since they gained a second seller. It could only ever have
+    raised, and nothing noticed because nothing called it.
+
+    Replaced by the two counts under the two names the page prints: only a
+    cabin ladder answers *places at this price*, PADI publishes only *berths
+    aboard*, and one column could not have carried both honestly.
+    """
+
+    def departure(self, berths):
+        from datetime import date
+
+        from liveaboard.models import Departure, Money, Provenance
+        from liveaboard.taxonomy import SourceKind
+
+        return Departure(
+            id="d", itinerary_id="i",
+            start=date(2027, 5, 1), end=date(2027, 5, 8),
+            price=Money(1000, "EUR"),
+            price_provenance=Provenance(SourceKind.SCRAPED, "liveaboard.com"),
+            berths=berths,
+        )
+
+    def test_it_reads_the_list_shape_the_dataset_actually_ships(self):
+        dep = self.departure([[0, 12, [], 20]])
+        self.assertEqual(dep.spots_at_advertised, 12)
+        self.assertEqual(dep.berths_aboard, 20)
+
+    def test_zero_is_an_answer_and_absent_is_not(self):
+        """Nothing left at that price is a fact; nobody stating one is not."""
+        dep = self.departure([[0, 0, [], None]])
+        self.assertEqual(dep.spots_at_advertised, 0)
+        self.assertIsNone(dep.berths_aboard)
+
+    def test_a_seller_with_no_ladder_still_fills_the_second_count(self):
+        """PADI states berths aboard and publishes no ladder, which is the
+        whole reason these are two columns."""
+        dep = self.departure([[1, None, [], 22]])
+        self.assertIsNone(dep.spots_at_advertised)
+        self.assertEqual(dep.berths_aboard, 22)
+
+    def test_no_block_states_neither(self):
+        dep = self.departure([])
+        self.assertIsNone(dep.spots_at_advertised)
+        self.assertIsNone(dep.berths_aboard)
+
+    def test_the_csv_carries_both_and_not_the_dead_one(self):
+        from liveaboard.export import COLUMNS
+
+        self.assertIn("places_at_price", COLUMNS)
+        self.assertIn("berths_aboard", COLUMNS)
+        self.assertNotIn("spaces_left", COLUMNS)

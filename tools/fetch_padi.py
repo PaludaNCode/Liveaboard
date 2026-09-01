@@ -180,6 +180,12 @@ def shop_facts(slug: str, fallback: str) -> dict[str, str | None]:
         "currency": field("currency"),
         "name": field("title"),
         "operator": re.sub(r"\s+Fleet$", "", fleet) if fleet else None,
+        # The specification strip on the same page, in the same response.
+        # Free, and the only source of a length or a build year for the boats
+        # liveaboard.com does not sell -- they have no vessel panel, so the
+        # scrape that reads every other hull's table can never reach them.
+        # Empty rather than absent where the strip says nothing.
+        "specs": PadiComAdapter.specs_from_page(html) or None,
     }
 
 
@@ -592,6 +598,11 @@ def main() -> int:
             "operator": shop.get("operator"),
             "country": shop.get("country"),
             "currency": shop.get("currency"),
+            # Cabins, length and build year off the page's own spec strip.
+            # A fallback under liveaboard.com's specification table, never a
+            # merge with it: where both speak the vessel's own panel wins, the
+            # same precedence every other fact here follows.
+            "specs": shop.get("specs"),
             # Why this vessel has the rows it has, or none. See
             # `_sailing_counts`: three quite different silences reached
             # `promote` identically before this.
