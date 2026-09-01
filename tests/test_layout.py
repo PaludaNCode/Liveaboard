@@ -166,21 +166,36 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                     page.evaluate("() => { location.hash = '#trips'; }")
                     page.wait_for_timeout(160)
                     seen = page.evaluate("""() => {
-                      const head = [...document.querySelectorAll('#head th')];
-                      const n = head.findIndex(h => h.dataset.k === 'total');
-                      const row = document.querySelector('tbody tr.row');
-                      if (n < 0 || !row) return null;
-                      const cell = row.children[n];
+                      const table = document.querySelector('.shell table');
+                      const drawn = getComputedStyle(table).display !== 'none';
+                      /* Measured on whichever layout is actually on screen, and
+                         the layout is reported so the assertion cannot pass by
+                         measuring a box that is not being drawn: a hidden
+                         element's rect is all zeros, which clears every bound
+                         below without the number being anywhere. */
+                      let cell = null;
+                      if (drawn) {
+                        const head = [...document.querySelectorAll('#head th')];
+                        const n = head.findIndex(h => h.dataset.k === 'total');
+                        const row = document.querySelector('tbody tr.row');
+                        if (n >= 0 && row) cell = row.children[n];
+                      } else {
+                        cell = document.querySelector('.card .card-money');
+                      }
+                      if (!cell) return null;
                       const r = cell.getBoundingClientRect();
-                      const shell = document.querySelector('.shell');
-                      return {right: Math.round(r.right), left: Math.round(r.left),
-                              vw: window.innerWidth,
-                              scrolled: Math.round(shell.scrollLeft),
+                      return {layout: drawn ? 'table' : 'cards',
+                              right: Math.round(r.right), left: Math.round(r.left),
+                              width: Math.round(r.width), vw: window.innerWidth,
+                              scrolled: Math.round(document.querySelector('.shell').scrollLeft),
                               text: (cell.querySelector('b') || cell).textContent};
                     }""")
-                    self.assertIsNotNone(seen, "no Total column on screen")
-                    self.assertEqual(seen["scrolled"], 0,
-                                     "the table is not at rest")
+                    self.assertIsNotNone(seen, "no Total on screen in either layout")
+                    self.assertEqual(seen["layout"], "cards",
+                                     f"at {width}px the rows are still a table, so "
+                                     "this measured the layout a phone does not get")
+                    self.assertGreater(seen["width"], 0, "the Total box is not drawn")
+                    self.assertEqual(seen["scrolled"], 0, "the rows are not at rest")
                     self.assertLessEqual(
                         seen["right"], seen["vw"],
                         f"at {width}px the Total ({seen['text']}) ends at "
@@ -195,45 +210,62 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
-    def test_the_fold_gives_the_columns_back_when_there_is_room(self) -> None:
-        """Being over-folded is safe and is still wrong, so it is asserted.
+    def test_the_rows_change_shape_with_the_room_and_change_back(self) -> None:
+        """What replaced the measured fold, and the failure it replaced.
 
-        The first version of the guard above passed on a build where the fold
-        never moved after first paint: it settled at the narrowest width and
-        stayed, which keeps the Total on screen at every width and hides the
-        boat and the guest count behind the money on a phone with room for
-        both. Most widths that change the fold cross no breakpoint -- the whole
-        phone range is inside one media query -- so nothing re-measured.
+        The fold took columns off the front of the row until the Total fit, and
+        two things were wrong with it. The money only stayed on screen by
+        hiding the boat behind it; and the widths that decided which columns
+        went are set by whichever rows are on screen, so it moved when a filter
+        changed and the reader lost a column for reasons they could not see
+        (#150). Below 760 the rows are cards, which have no columns to fold.
 
-        Swept downwards and back up on one page, because a stuck fold is only
-        visible in the second half of that journey.
+        Swept down and back up on one page, because the half that catches a
+        layout that stuck is the second one -- the first version of the guard
+        this replaces passed on a build that settled at the narrowest width and
+        never moved again.
         """
-        wide, mid, narrow_ = 430, 390, 360
-        page = self.open(wide, 760)
+        page = self.open(1100, 760)
         try:
-            def ahead() -> list:
-                page.wait_for_timeout(320)
+            def shape() -> dict:
+                page.wait_for_timeout(280)
                 return page.evaluate("""() => {
-                  const head = [...document.querySelectorAll('#head th')];
-                  const n = head.findIndex(h => h.dataset.k === 'total');
-                  return head.slice(0, n).map(h => h.dataset.k);
+                  const table = document.querySelector('.shell table');
+                  const cards = document.querySelector('.cards');
+                  const seen = (el) => getComputedStyle(el).display !== 'none';
+                  const money = document.querySelector(
+                    seen(cards) ? '.card .card-money' : 'tbody td.cost');
+                  const r = money ? money.getBoundingClientRect() : null;
+                  return {table: seen(table), cards: seen(cards),
+                          rows: (seen(cards) ? cards.children : document.getElementById('body').children).length,
+                          moneyRight: r ? Math.round(r.right) : null,
+                          vw: window.innerWidth,
+                          sideways: document.body.scrollWidth > document.body.clientWidth};
                 }""")
 
-            # Down: each step drops one more column from in front of the money.
-            self.assertEqual(ahead(), ["start", "boat", "guests"])
-            page.set_viewport_size({"width": mid, "height": 760})
-            self.assertEqual(ahead(), ["start", "boat"],
-                             "the guest count did not come out of the way")
-            page.set_viewport_size({"width": narrow_, "height": 760})
-            self.assertEqual(ahead(), ["start"],
-                             "the boat did not come out of the way")
-            # And back up, which is the half that catches a fold that stuck.
-            page.set_viewport_size({"width": mid, "height": 760})
-            self.assertEqual(ahead(), ["start", "boat"],
-                             "the boat was not given back when the room was")
-            page.set_viewport_size({"width": wide, "height": 760})
-            self.assertEqual(ahead(), ["start", "boat", "guests"],
-                             "the guest count was not given back")
+            wide = shape()
+            self.assertTrue(wide["table"] and not wide["cards"],
+                            "a 1100px window is not being given the table")
+            for width in (740, 390, 360):
+                page.set_viewport_size({"width": width, "height": 760})
+                seen = shape()
+                with self.subTest(width=width):
+                    self.assertTrue(seen["cards"] and not seen["table"],
+                                    f"at {width}px the rows are still a table")
+                    self.assertGreater(seen["rows"], 0, "the card list is empty")
+                    self.assertLessEqual(seen["moneyRight"], seen["vw"],
+                                         "the money is off the right-hand edge")
+                    self.assertFalse(seen["sideways"],
+                                     "the window scrolls sideways, which is what "
+                                     "having no columns to fold was supposed to end")
+            # And back up, which is the half that catches a layout that stuck.
+            page.set_viewport_size({"width": 1100, "height": 760})
+            back = shape()
+            self.assertTrue(back["table"] and not back["cards"],
+                            "the table was not given back when the room was")
+            self.assertGreater(back["rows"], 0,
+                               "the table came back empty: the two hosts are no "
+                               "longer drawn together")
         finally:
             page.close()
 
@@ -402,33 +434,53 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
-    def test_the_phone_fold_hides_every_control_and_says_what_is_on(self) -> None:
-        """One panel, one control to open it.
+    def test_the_drawer_hides_every_bank_at_every_width_and_says_what_is_on(self) -> None:
+        """One panel, one control to open it -- at every width, not only on a
+        phone.
 
-        The four banks folded and the toolbar did not -- 216px of it at 390 and
-        237 at 360, over a table of 403 and 156 -- so the fold saved a screen
-        of buttons and left a screen of buttons behind it. Both are inside it
-        now, which makes the label load-bearing: a fold hiding an active filter
-        without saying so is a table quietly answering a narrower question than
-        the one on screen.
+        The four banks folded under 1000px and the toolbar did not, so the fold
+        saved a screen of buttons and left a screen of buttons behind it. Both
+        went inside it; then the fold itself stopped being about small screens,
+        because a 1440x900 window was spending the same quarter of itself on
+        filters nobody had chosen. What stays out is one line: the two Include
+        switches, the season, and two chips. What must not is a bank -- and
+        a filter set in a hidden bank is a table quietly answering a narrower
+        question than the one on screen, which is why the count and the pills
+        below are load-bearing.
         """
-        page = self.open(390, 844)
+        page = self.open(1440, 900)
         try:
-            for width, height in [(390, 844), (360, 640), (768, 600)]:
+            for width, height in [(1440, 900), (1280, 800), (768, 600),
+                                  (390, 844), (360, 640)]:
                 with self.subTest(size=(width, height)):
                     page.set_viewport_size({"width": width, "height": height})
-                    page.wait_for_timeout(150)
+                    page.wait_for_timeout(180)
                     shut = self.measure(page)
+                    banks = page.evaluate("""()=>[...document.querySelectorAll('.bank')]
+                      .reduce((n, b) => n + Math.round(b.getBoundingClientRect().height), 0)""")
+                    self.assertEqual(banks, 0,
+                                     "a filter bank is on screen with the drawer shut")
                     toolbar = page.evaluate(
                         "()=>Math.round(document.querySelector('.toolbar')"
                         ".getBoundingClientRect().height)")
-                    self.assertEqual(toolbar, 0,
-                                     "the toolbar is on screen with the fold shut")
+                    self.assertGreater(toolbar, 0,
+                                       "the one line that stays out is not on screen")
+                    # One line where there is room for one. A phone wraps it
+                    # to three -- the switches, the season, the two chips --
+                    # which is 105px against the 216px the toolbar alone cost
+                    # there before the banks went in, and against 380px of
+                    # banks under it. The cap is what catches a bank leaking
+                    # back out: the smallest of them is 60px and Boat is 380.
+                    cap = 48 if width >= 900 else 120
+                    self.assertLess(toolbar, cap,
+                                    f"the toolbar is {toolbar}px at {width}px wide, "
+                                    f"over its {cap}px budget: something that belongs "
+                                    "in the drawer is out of it")
                     page.click("#filtersToggle")
-                    page.wait_for_timeout(250)
+                    page.wait_for_timeout(280)
                     opened = self.measure(page)
                     self.assertGreater(shut["shell"]["h"], opened["shell"]["h"],
-                                       "opening the panel did not cost the table room, "
+                                       "opening the panel did not cost the rows room, "
                                        "so the panel did not open")
                     # The control that opens it stays above what it opens.
                     self.assertTrue(page.evaluate("""() => {
@@ -436,34 +488,64 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                       const p = document.getElementById('filterPanel');
                       return t.getBoundingClientRect().y < p.getBoundingClientRect().y;
                     }"""), "the toggle sits below the panel it opens")
+                    # Exactly one bank is drawn: five stacked is the wall of
+                    # filters the drawer was opened to end.
+                    drawn = page.evaluate("""()=>[...document.querySelectorAll('.bank')]
+                      .filter(b => b.getBoundingClientRect().height > 0).length""")
+                    self.assertEqual(drawn, 1, f"{drawn} banks are drawn at once")
                     self.assertFalse(self.measure(page)["docScrolls"],
                                      "the open panel made the window scroll")
                     page.click("#filtersToggle")
-                    page.wait_for_timeout(200)
+                    page.wait_for_timeout(220)
         finally:
             page.close()
 
-    def test_the_fold_never_hides_an_active_filter_in_silence(self) -> None:
-        """The label counts against each control's default, so the Include
-        switches -- which start on and change every total without touching a
-        row -- are in it too."""
+    def test_the_drawer_never_hides_an_active_filter_in_silence(self) -> None:
+        """Two things say so and both are asserted: the count on the control
+        that hides them, and a pill per filter naming it and dropping it.
+
+        The count is against each control's *default* rather than its
+        emptiness, which is how the Include switches get in -- both start on,
+        and turning one off changes every total without touching a row.
+        """
         page = self.open(390, 844)
         self.addCleanup(page.close)
-        label = lambda: page.evaluate(
-            "()=>document.getElementById('filtersToggle').textContent")
-        self.assertEqual(label(), "Filters")
+        count = lambda: page.evaluate(
+            "()=>document.getElementById('filtersCount').textContent")
+        pills = lambda: page.evaluate(
+            "()=>[...document.querySelectorAll('#activePills .pill-drop')]"
+            ".map(b => b.textContent.replace(/\s+/g, ' ').trim())")
+        self.assertEqual(count(), "")
+        self.assertEqual(pills(), [])
 
         page.click("#filtersToggle")
-        page.wait_for_timeout(250)
+        page.wait_for_timeout(280)
         for n, selector in enumerate(("#months .chip", "#hideSold"), start=1):
             page.click(selector)
-            page.wait_for_timeout(300)
-            self.assertEqual(label(), f"Filters · {n} on")
+            page.wait_for_timeout(320)
+            self.assertEqual(count(), str(n))
+            self.assertEqual(len(pills()), n,
+                             "the count moved and the pills did not, so what is "
+                             "filtering is a number and not a name")
 
-        # And it survives the fold closing, which is the whole point of it.
+        # A switch is not a filter and is counted anyway: it changes what every
+        # total on the page means rather than which rows are on it.
+        page.click("#toggles .chip")
+        page.wait_for_timeout(320)
+        self.assertEqual(count(), "3")
+
+        # And all of it survives the drawer closing, which is the whole point.
         page.click("#filtersToggle")
-        page.wait_for_timeout(250)
-        self.assertEqual(label(), "Filters · 2 on")
+        page.wait_for_timeout(280)
+        self.assertEqual(count(), "3")
+        self.assertEqual(len(pills()), 3)
+
+        # A pill drops its own filter, so undoing one does not mean opening the
+        # drawer to hunt for the chip that set it.
+        page.click("#activePills .pill-drop")
+        page.wait_for_timeout(320)
+        self.assertEqual(count(), "2")
+        self.assertEqual(len(pills()), 2)
 
     # -- the router ----------------------------------------------------------
 

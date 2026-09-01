@@ -502,28 +502,62 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
   the pinned *first* cell, which was the expander and is now `.stick1`, so
   reclaiming the width did not quietly delete the mark.
-- **The money is on screen at rest, and which columns make room for it is
-  measured.** The phone order is one array, and `MONEY_FOLD` names what leaves
-  the front of the row when the Total does not fit — least important first, the
-  date never. `moneyFoldWanted` reads the header cells' own widths after a draw
-  and returns the *smallest* fold that fits, so it gives the columns back as
-  well as taking them; `settleMoneyFold` runs inside `draw`, because the Total
-  column is sized by the rows on screen and a filter widens it as surely as a
-  rotation narrows the screen. **It listens on `resize` and not only on the
-  media queries**: the whole phone range sits inside one query, so 760→390
-  crosses nothing, and a fold left where first paint put it is over-folded
-  rather than wrong — which keeps the Total on screen and hides the boat behind
-  it with room to spare. That is why the guard asserts the sweep *back up* too.
-  This replaced a second order array and a third breakpoint at 385px, and both
-  were wrong on most phones (#150): 385 was measured against a Total column
-  155px wide and the column is 211px, sized by its worst-case row — a
-  two-seller ranged total carrying `+ tips` and `2 sellers`. **A typed
-  breakpoint here is a number derived from the data, in a file that cannot see
-  the data**, so it went stale exactly as the footer prose did in #144, and the
-  page lost the number it exists to publish on 360, 390, 393, 402 and 414 —
-  silently, because the row still renders.
+- **Twelve columns, in four named bands, and the bill is tinted.** Sixteen
+  columns of one weight gave the eye nothing to land on, so the money — the
+  thing this site exists to publish — was exactly as findable as the return
+  port. The header is two tiers: a band naming what the columns under it are
+  about (`groups()`), then the sortable row. The band is built from
+  **contiguous runs of each column's `zone`**, never written out per order, so
+  `COMPACT_ORDER` moving the price block in front of the descriptive columns
+  relabels the bands instead of mislabelling them — and a zone split into two
+  runs would print its label twice, which is what
+  `test_every_zone_is_contiguous_in_both_orders` refuses. Four of the sixteen
+  columns are gone and **not one fact with them**: Return, Guests, From and To
+  are each a second fact about a column that was already there, so each is a
+  second line inside it (`.sub`). What is lost is a sort on those four, which
+  is the price; the port is what the Departs from bank filters on, and that is
+  the question a reader actually asks of it.
+- **The money is on screen at rest, and on a phone the rows are cards.**
+  `MONEY_FOLD` took columns off the front of the row until the Total fit, and
+  it was answering the wrong question: the money only stayed on screen by
+  hiding the boat behind it, and the widths deciding which columns went are set
+  by whichever rows are on screen — so the fold moved when a filter changed and
+  the reader lost a column for reasons they could not see. Below 760px the rows
+  are `renderCards`, which have no columns to fold: the Total sits in its own
+  corner at every width and nothing has to be measured to keep it there. **Both
+  hosts are always filled**, so a rotation crosses the breakpoint with no redraw
+  and `Ctrl+F` finds either — and `appendPage` appends to both, or a scrolled
+  table would meet a card list holding the first 120 rows. Every card cell
+  reads the same column's `show` the table cell reads, so the two cannot drift
+  and the three panel triggers come across working. This replaced a typed
+  breakpoint at 385px that was wrong on most phones (#150): 385 was measured
+  against a Total column 155px wide and the column was 211px, sized by its
+  worst-case row. **A typed breakpoint here is a number derived from the data,
+  in a file that cannot see the data**, so it went stale exactly as the footer
+  prose did in #144, and the page lost the number it exists to publish on 360,
+  390, 393, 402 and 414 — silently, because the row still renders. The guard
+  measures the card's own money block and **asserts which layout it measured**,
+  because a hidden table's rect is all zeros and clears every bound without the
+  number being anywhere.
+- **Every filter is in the drawer, and what is on is on screen.** Five chip
+  banks stood permanently open above the table: 270px before the first row on a
+  1440×900 window, a quarter of it spent on filters nobody had chosen. They
+  fold at *every* width now rather than under 1000px — the argument was never
+  about small screens. What stays on the toolbar is what changes the table's
+  numbers rather than its rows (the two Include switches), the season, and the
+  two chips a reader reaches for. Chrome above the rows went from 373px to 96.
+  Two things stop a closed drawer hiding an active filter: the button carries
+  the count, and `#activePills` names each one and drops it on a press — so
+  undoing one no longer means opening the drawer to hunt for the chip that set
+  it. Inside, **one bank at a time**, picked from a rail that carries a count
+  per bank: stacked, the panel was as tall as the sum of the longest of each,
+  which is the wall of filters the fold exists to prevent. The toolbar does not
+  wrap above 900px and the meta line shrinks instead — a wrapping flex
+  container breaks the line *before* it shrinks anything, so one item 7px too
+  wide put the whole toolbar on two rows and cost the rows 25px on every
+  screen.
 - **A layout claim is measured, never grepped.** `tests/test_layout.py` drives
-  Chromium over the three views at six windows; everything else about the split
+  Chromium over the three views at six windows, and over eleven phone widths; everything else about the split
   is asserted as template text, which is right for wiring and worthless for
   geometry. Eight source-string assertions passed over that 0px table,
   including the one named for the panel that caused it. The file skips without

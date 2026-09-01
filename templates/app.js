@@ -404,6 +404,18 @@
     return (+p[2]) + " " + MONTH_NAMES[+p[1] - 1] + " " + p[0];
   }
 
+  /* Depart and Return in one cell. The month is printed once where the trip
+     does not cross one — 1,067 of 1,122 — and twice where it does, because
+     "29–05 Jul" is a range running backwards and a reader has to stop and
+     work out that it is not. */
+  function dateSpan(start, end) {
+    var a = String(start).split("-"), b = String(end).split("-");
+    if (a.length !== 3 || b.length !== 3) return esc(start);
+    return a[1] === b[1]
+      ? a[2] + "–" + b[2] + " " + MONTHS[+a[1] - 1]
+      : a[2] + " " + MONTHS[+a[1] - 1] + " – " + b[2] + " " + MONTHS[+b[1] - 1];
+  }
+
   /* What the bar under the total said in words, which is the half of it worth
      keeping (#148).
 
@@ -714,34 +726,83 @@
              "which, so no total is claimed here."
   };
 
+  /* Sixteen columns became twelve, and not one fact went with the four.
+   *
+     Depart and Return were two columns printing "01 May" and "08 May" over
+     one another's heads; Guests was 45px of digits filed among the route;
+     From and To were two columns of city names repeated down 1,122 rows. Each
+     of them is a second fact about a column that was already there, so each
+     is a second line inside it -- the dates with the nights between them, the
+     boat with the deck it sleeps, the trip with the harbours it runs between.
+     Twelve columns fit a 1440px window whole, which is what the four bought:
+     the Total is on screen at rest on a laptop with nothing folded away.
+
+     What is lost is a sort on each of the four, and that is the price. Return
+     sorts with Depart on every trip of one length; the port is what the
+     Departs from bank filters on, which is the question a reader actually
+     asks of it; and a guest count nobody can sort on is still a guest count
+     printed on every row.
+
+     `zone` is what the group header above these reads -- see `groups()`. It
+     is a property of the column rather than of its position, so an order that
+     moves the price block in front of the descriptive columns relabels the
+     bands rather than mislabelling them. */
   var COLS = [
     /* Sorted on the ISO string and printed short. Every departure here is in
-       one season, so the year is the same four characters on 882 rows and
+       one season, so the year is the same four characters on 1,122 rows and
        repeating it crowds out the day and month, which is the part being
-       compared. The heading still names the season. */
-    { k: "start", t: "Depart", v: function (d) { return d.start; },
-      show: function (d) { return shortDate(d.start); } },
-    { k: "end", t: "Return", v: function (d) { return d.end; },
-      show: function (d) { return shortDate(d.end); } },
-    { k: "boat", t: "Boat", cls: "boat", v: function (d, i) { return i.boat; } },
-    /* Berth price is per person, so this says whether you are buying into a
-       boat of twelve or of thirty-four. Null where the description does not
-       state it — about half the fleet, which is a gap in the scrape rather
-       than an operator declining to say. */
-    { k: "guests", t: "Guests", short: "Pax", cls: "guests", num: true,
-      v: function (d, i) { return i.guests == null ? -1 : i.guests; },
-      show: function (d, i) {
-        return i.guests == null ? '<span class="dim">—</span>' : i.guests;
+       compared. The heading still names the season.
+
+       "01–08 May" collapses to one span where the trip does not cross a
+       month, which is 1,067 of them; the other 55 print both months, because
+       "29–05 Jul" would be a date range running backwards. */
+    { k: "start", t: "Dates", cls: "when", zone: "when",
+      hint: "Departure and return, and the nights between",
+      v: function (d) { return d.start; },
+      show: function (d) {
+        return '<span class="d-span">' + dateSpan(d.start, d.end) + "</span>" +
+          '<span class="sub">' + d.nights + (d.nights === 1 ? " night" : " nights") +
+          "</span>";
       } },
-    { k: "trip", t: "Trip", cls: "trip", v: function (d, i) { return tripName(i); } },
-    { k: "from", t: "From", v: function (d, i) { return i.port_from; } },
-    { k: "to", t: "To", v: function (d, i) { return i.port_to; } },
-    { k: "sites", t: "Dive sites", cls: "sites",
+    /* Berth price is per person, so the second line says whether you are
+       buying into a boat of twelve or of thirty-four. Null where the
+       description does not state it — about half the fleet, which is a gap in
+       the scrape rather than an operator declining to say, and the line says
+       which. */
+    { k: "boat", t: "Boat", cls: "boat", zone: "when",
+      v: function (d, i) { return i.boat; },
+      show: function (d, i) {
+        return '<span class="b-name" title="' + esc(i.boat) + '">' + esc(i.boat) +
+          "</span>" + '<span class="sub">' +
+          (i.guests == null ? "guests not stated" : i.guests + " guests") +
+          "</span>";
+      } },
+    /* The trip, and under it the two harbours. They were From and To, and
+       what a reader wants from them is the route rather than two cells to
+       compare across: "Hurghada → Port Ghalib" is a one-way run and
+       "Hurghada · return" is the other 900 of them, said in the width one of
+       the two columns used. */
+    { k: "trip", t: "Trip", cls: "trip", zone: "trip",
+      v: function (d, i) { return tripName(i); },
+      show: function (d, i) {
+        var name = tripName(i);
+        return '<span class="t-name" title="' + esc(name) + '">' + esc(name) +
+          "</span>" + '<span class="sub">' + esc(i.port_from) +
+          (i.port_to && i.port_to !== i.port_from
+            ? " → " + esc(i.port_to) : " · return") + "</span>";
+      } },
+    { k: "sites", t: "Dive sites", cls: "sites", zone: "trip",
       v: function (d, i) {
         return (i.dive_sites || []).join(", ") || i.region || "—";
       },
       show: function (d, i) {
-        if (i.dive_sites && i.dive_sites.length) return esc(i.dive_sites.join(", "));
+        if (i.dive_sites && i.dive_sites.length) {
+          /* Separated by a middle dot rather than commas. The reefs are a set
+             and not a sentence, and at 11px a comma between two place names
+             reads as part of the second one. */
+          return '<span title="' + esc(i.dive_sites.join(", ")) + '">' +
+            esc(i.dive_sites.join(" · ")) + "</span>";
+        }
         /* The operator named no reef. Their own word for the region, marked as
            the weaker statement it is. */
         if (i.region) return '<span class="region">' + esc(i.region) + ", sites not named</span>";
@@ -764,7 +825,7 @@
        The fact itself is the operator's safety claim, so the cell states it
        and never softens it; where the two sellers disagree the stricter is
        shown and the mark says so. */
-    { k: "entry", t: "Entry bar", short: "Entry", cls: "entry-col",
+    { k: "entry", t: "Entry bar", short: "Entry", cls: "entry-col", zone: "trip",
       v: function (d, i) { return entryRank(i); },
       show: function (d, i) {
         var text = entryText(i);
@@ -789,7 +850,7 @@
        sellers' numbers in one arithmetic: Advertised plus Mandatory fees no
        longer made the Total, and a reader checking the sum would find the page
        wrong rather than find two sellers. One row, one bill. */
-    { k: "base", t: "Advertised", num: true, cls: "money",
+    { k: "base", t: "Advertised", num: true, cls: "money", zone: "bill",
       /* Sorted on the cheaper of the two, which is the smaller of the pair
          rather than its first member: the pair runs in the Total's seller
          order and that order is not the price order on 27 rows. A sort key is
@@ -800,8 +861,13 @@
       },
       show: function (d, i, m, row) {
         var b = best(row);
-        if (!b) return eur(d.base) + whoAdvertised(d, row) + saleTag(d);
-        return sellerPair(b.baseLo, b.baseHi) + whoAdvertised(d, row) + saleTag(d);
+        var figure = b ? sellerPair(b.baseLo, b.baseHi) : eur(d.base);
+        /* Both markers under the figure rather than beside it. Inline, the two
+           of them set this column's width on every row in the table -- 164px
+           for a figure that needs 96 -- and neither is read down the column
+           the way the price is. */
+        var marks = whoAdvertised(d, row) + saleTag(d);
+        return figure + (marks ? '<span class="marks">' + marks + "</span>" : "");
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -812,7 +878,7 @@
        whose question is "what does this trip cost". Where the second seller's
        disclosure is complete and cheaper, its bill is the one printed, marked
        so nobody mistakes which. */
-    { k: "total", t: "Total", num: true, cls: "cost",
+    { k: "total", t: "Total", num: true, cls: "cost", zone: "bill",
       /* Sorted on the low end, so "cheapest first" still means what it says. */
       v: function (d, i, m, row) { var b = best(row); return b ? b.lo : Infinity; },
       show: function (d, i, m, row) {
@@ -856,13 +922,18 @@
             'one fee figure per boat, PADI Travel one per itinerary -- so ' +
             'neither end is the price.">2 sellers</span>'
           : "";
+        /* The marker goes on the split line rather than beside the figure.
+           Inline it set the column's width on every row -- the widest row in
+           the table is a two-seller ranged total carrying `+ tips` and this,
+           and a column is as wide as its widest row. Under the figure it
+           qualifies the same number and costs the column nothing. */
         return "<b>" + sellerSpan(b.lo, b.hi) + "</b>" +
           (m.tips === "unpriced" || m.tips === "extra"
             ? '<span class="plus" title="The operator lists crew tips under ' +
               'its own Optional extras, so they are not in this total.">' +
               ' + tips</span>'
             : "") +
-          varies + split;
+          split.replace("</span>", varies + "</span>");
       } },
     /* What divers actually compare on, and the reason price per night is not
        here: two denominators over the same total, and only one of them is the
@@ -874,7 +945,7 @@
        week. A third of the figure, and the whole of what this column exists to
        tell apart. An empty cell is what this page already says for a dive site
        nobody named. */
-    { k: "perdive", t: "Per dive", num: true, cls: "perdive",
+    { k: "perdive", t: "Per dive", num: true, cls: "perdive", zone: "bill",
       /* Divides the total the row prints -- the cheaper seller's -- so the two
          money columns cannot disagree about what a dive costs on one row. */
       v: function (d, i, m, row) {
@@ -927,7 +998,7 @@
        gear case proves an operator can list an extra and leave the number
        blank. A branch nothing reaches yet is cheaper than a cell reading
        "undefined" on the day one does. */
-    { k: "nitrox", t: "Nitrox", num: true, cls: "nitrox",
+    { k: "nitrox", t: "Nitrox", num: true, cls: "nitrox", zone: "bill",
       v: function (d, i, m, row) {
         var b = best(row); if (b) m = b.bill;
         return !m.nitrox ? 9e9 : m.nitrox.included ? -1
@@ -964,7 +1035,7 @@
        Disclosure column is gone. The two states stay distinct because they are
        different failures: nobody read the vessel's fee panel, or the operator
        published a panel that names only optional extras. */
-    { k: "later", t: "Mandatory fees", num: true, cls: "mfees",
+    { k: "later", t: "Mandatory fees", short: "Mandatory", num: true, cls: "mfees", zone: "bill",
       /* Unstated sorts last, next to nothing: an unread trip is not a cheap
          one, and it must not collide with a genuine zero. */
       v: function (d, i, m, row) {
@@ -1007,7 +1078,7 @@
        would be a trap laid for the first person to click it. Unknown sorts
        last: nobody looked is not the same as none left, and it must not
        collide with zero. */
-    { k: "availability", t: "Places", cls: "places",
+    { k: "availability", t: "Places", cls: "places", zone: "seats",
       v: function (d) {
         var spots = spotsLeft(d);
         if (spots != null) return spots;
@@ -1119,7 +1190,7 @@
      * A vessel having a PADI page says nothing about whether a given sailing
      * is on its calendar, and a link landing on a calendar without the trip on
      * it is worse than no link. */
-    { k: "source", t: "Seller", cls: "source",
+    { k: "source", t: "Seller", cls: "source", zone: "seats",
       v: function (d, i) { return d.booking_url || i.source_url || ""; },
       show: function (d, i) {
         var links = [];
@@ -1150,211 +1221,73 @@
      It exists because True cost sat in column twelve of a table 2522px wide
      inside a 1440px window -- the one number this site is for was off the
      right-hand edge at every screen size anyone actually has, and on a phone
-     the whole table was. Identity first, then the money, then everything the
-     money is for, then the provenance a visitor only wants once they care.
+     the whole table was. Identity first, then everything the money is for,
+     then the money, then the provenance a visitor only wants once they care.
 
      Anything missing here is appended rather than dropped, and says so, because
      a column that silently vanished would be a fact the page stopped
      publishing.
 
-     Entry bar sits after Dive sites and before the money, which is the one
-     place a seventeenth column costs nothing: this order is only used above
-     1700px, and every narrower order already puts the price block first, so
-     the Total's position is identical with the column and without it. It goes
-     there rather than among the provenance columns at the end because it is
-     not provenance -- it decides whether the row is a trip you can book, which
-     is the same kind of question as where the trip goes. */
+     Twelve columns come to 1,290px, so this order fits a 1440px window whole
+     -- which is what merging Return, Guests, From and To into their
+     neighbours' second lines bought. See COLS. */
   var ORDER = [
-    "start", "end", "boat", "guests",
-    "from", "to", "trip", "sites", "entry",
+    "start", "boat", "trip", "sites", "entry",
     "base", "nitrox", "later", "total", "perdive",
     "availability", "source"
   ];
-  /* The same columns on a phone, and as much of the same order as a phone
-     holds. Three of the four rules above survive here unchanged: no Operator
-     or Nights column, Guests grouped with the Boat, and Dive sites straight
-     after Trip. The fourth -- the price block reading Advertised, Nitrox,
-     Mandatory fees, Total -- cannot, and the note on the block below says what
-     it costs.
 
-     This is the *widest* phone order, and how much of it survives is measured
-     rather than declared: see MONEY_FOLD. What does not fit in front of the
-     money at all, measured at 390px: Return is 62px and From and To are 120px
-     each, against 66 for the date and 96 for the boat. Return therefore
-     follows the money rather than leading it, as it does nowhere else. Of the two identifiers, the boat's name is
-     what a row is compared by; the return date you read once you have found
-     the row. Nothing is dropped -- the order is what changes. */
-  var PHONE_ORDER = [
-    /* Guests sits with the boat here, as it does at every other width: how
-       many people share the dive deck is a fact about the vessel, not about
-       the route. It is the one descriptive column that fits in front of the
-       money -- 45px, against 62 for Return and 120 for From. */
-    "start", "boat", "guests",
-    /* The one place the bill order gives way, and only in its first term.
-       Everywhere else the prices read Advertised, Nitrox, Mandatory fees,
-       Total, which is the order a bill is read in and the order the footer
-       explains. A phone cannot have it: measured at 390px, the three parts
-       ahead of the Total put the Total's left edge at x=1247 on the wide
-       order and x=477 even with nothing but the pinned columns before them.
-       The number this page exists to publish would be off the edge on the
-       device most people open it on.
-       So the Total leads and its parts follow it, in the bill's own order --
-       Advertised, Nitrox, Mandatory fees -- rather than in a third order
-       invented for this width. Scrolling right reads the bill; not scrolling
-       still shows the answer. */
-    "total", "base", "nitrox", "later", "perdive",
-    "end", "from", "to", "trip", "sites", "entry",
-    "availability", "source"
-  ];
-
-  /* What comes out of the front of the row when the money does not fit, and
-     the order it comes out in.
-   *
-     This was a second array, TINY_ORDER, and a third breakpoint at 385px --
-     and both were wrong on most phones (#150). The array said only
-     "PHONE_ORDER, minus Guests in front of the money", fixing 360px needed a
-     third saying "minus Boat as well", and the breakpoint was a **typed
-     number derived from the data**: 385 was measured against a Total column
-     155px wide, and the column is sized by its worst-case row -- today a
-     two-seller ranged total with `+ tips` and `2 sellers` on it, at 213px. So
-     the width the money needs moves when the fleet's dearest sailing moves,
-     and the file that decides the fold cannot see the fleet. The Total's right
-     edge landed at 420 on a 390px screen: 360, 390, 393, 402 and 414 all lost
-     the number the page exists to publish, silently, because the row still
-     renders.
-
-     So the fold is measured instead, off the columns' own widths, and there is
-     one list rather than three. Least important first, which is the order they
-     leave in: how many share the dive deck, then which boat it is. The date
-     never leaves -- it is what a row is looked up by and it is the sort the
-     table opens on.
-
-     The money itself is not on this list and cannot be. A Total off the
-     right-hand edge is the exact failure this whole ordering exists to
-     prevent. */
-  var MONEY_FOLD = ["guests", "boat"];
-  var moneyFold = 0;
-
-  /* PHONE_ORDER with the folded columns moved out from in front of the price
-     block and put back at the head of the descriptive ones -- rather than
-     buried among them, which is where a filter would be looking for them.
-
-     Reversed on the way back in, so the most important of them comes first:
-     they leave least-important-first and a reader scanning what is left wants
-     the boat before the guest count. */
-  function phoneOrder() {
-    if (!moneyFold) return PHONE_ORDER;
-    var folded = MONEY_FOLD.slice(0, moneyFold);
-    var out = PHONE_ORDER.filter(function (k) { return folded.indexOf(k) < 0; });
-    var at = out.indexOf("perdive") + 1;
-    return out.slice(0, at).concat(folded.slice().reverse(), out.slice(at));
-  }
-
-  /* How many have to go, measured. Nought on anything that is not a phone.
-   *
-     Read off the header cells, which carry each column's real width whatever
-     order they are in -- the widths are content-driven and do not change when
-     the order does, which is what makes one measurement answer for every fold.
-     The room is the shell's, not the window's: the shell is the box that
-     scrolls, and on a page with a scrollbar those are different numbers.
-
-     Returns the *smallest* fold that fits, so this unfolds as well as folds --
-     a phone turned landscape, or a filter that leaves only cheap boats and
-     narrows the column, gets Guests and Boat back in front of the money
-     without anything having to remember that it took them away.
-
-     Which means the fold can move when nothing about the window did:
-     re-sorting on the Total brings different rows into the first page, the
-     widest of them sizes the column, and Guests comes back. Measured on the
-     committed data, sorting dearest-first takes the column from 213px to 167
-     and does exactly that. Not a wobble worth designing out -- the alternative
-     is to fold for the worst case at every width and hide a column that fits,
-     which is the failure the second layout guard was written to catch. */
-  function moneyFoldWanted() {
-    if (!narrow.matches) return 0;
-    var head = document.getElementById("head");
-    var shell = document.querySelector(".shell");
-    if (!head || !shell) return moneyFold;
-    var width = {};
-    [].forEach.call(head.querySelectorAll("th[data-k]"), function (th) {
-      width[th.dataset.k] = th.getBoundingClientRect().width;
-    });
-    /* Before the first draw there is no header to measure, and a fold guessed
-       from nothing is worse than the one already in force. */
-    if (!width.total) return moneyFold;
-    var ahead = PHONE_ORDER.slice(0, PHONE_ORDER.indexOf("total"));
-    var room = shell.clientWidth;
-    for (var n = 0; n <= MONEY_FOLD.length; n++) {
-      var folded = MONEY_FOLD.slice(0, n);
-      var lead = 0;
-      ahead.forEach(function (k) {
-        if (folded.indexOf(k) < 0) lead += width[k] || 0;
-      });
-      if (lead + width.total <= room) return n;
-    }
-    return MONEY_FOLD.length;
-  }
-
-  /* The same columns, and the same price order within them, wherever there is
-     not room for the reading order above. Identity, then the money, then
-     everything the money is for.
+  /* The same columns wherever there is not room for the reading order above.
+     Identity, then the money, then everything the money is for.
 
      The wide order reads as a bill and puts the Total last, which is right on
-     paper and expensive on screen: with Guests, From, To, Trip and Dive sites
-     ahead of the price block, and the Total at the end of it, the Total needs
-     about 1500px of window to be visible at all. It fell off a 1200px and a
-     1440px laptop, which is most of them. Below that the price block moves in
-     front of the descriptive columns -- Advertised, Nitrox, Mandatory fees,
-     Total, in that order still. */
+     paper and expensive on screen: with Trip, Dive sites and Entry bar ahead
+     of the price block, the Total's right edge lands at 1,054px inside the
+     table, so it wants about 1,190px of table to be visible at all. Below
+     that the price block moves in front of the descriptive columns --
+     Advertised, Nitrox, Mandatory fees, Total, in that order still.
+
+     The group band above the header follows it rather than being written out
+     twice: `groups()` reads each column's `zone` off whichever order is in
+     force, so this order prints THE BILL between DEPARTURE and THE TRIP
+     instead of mislabelling anything. */
   var COMPACT_ORDER = [
-    "start", "end", "boat",
+    "start", "boat",
     "base", "nitrox", "later", "total", "perdive",
-    "guests", "from", "to", "trip", "sites", "entry",
+    "trip", "sites", "entry",
     "availability", "source"
   ];
 
-  /* Two questions, two breakpoints. `compact` is about how much room there is
-     before the money column; `narrow` is about how much room there is at all,
-     and drives the pinned-column widths and the folded filter banks. */
-  var compact = window.matchMedia("(max-width: 1700px)");
+  /* Two breakpoints, because the page has two different problems. `compact`
+     is about how much room there is before the money column; `narrow` is
+     about whether there is room for a table at all -- below it the rows are
+     drawn as cards and there are no columns to order. */
+  var compact = window.matchMedia("(max-width: 1180px)");
   var narrow = window.matchMedia("(max-width: 760px)");
 
   /* How many of the leading columns are pinned. By position, never by name:
      two pinned columns with a third between them overlap exactly as badly as
      two with a wrong offset, and naming them let that happen the moment the
-     order changed. Three fit a laptop; Return scrolls there.
+     order changed.
 
-     Four on a wide screen, because Guests is a fact about the vessel -- how
-     many people you share a dive deck with -- and the pinned group's closing
-     rule is what says where the identity columns end. Left at three, that rule
-     fell between Boat and Guests and filed the guest count as the first of the
-     route columns. It is on the boat's side of it now.
+     Two, and they are the two that identify a row: when it sails and what it
+     sails on. It was four, because Return and Guests were columns of their
+     own and the pinned group had to close after the vessel rather than in the
+     middle of it; they are second lines inside these two now, so the group
+     that has to hold still is half the width it was -- 300px rather than 354
+     -- and the money is read next to both facts instead of one.
 
-     One on a phone, and the date is the one. Pinning Depart, Boat and Guests
-     froze 231px of a 390px screen: three fifths of the display held still
-     while the visitor dragged the sixteen columns the page exists to compare
-     through the 159px that were left. Every column pinned is a column the
-     money has to be read next to, and on a phone there is only room to read
-     the money next to one thing. The date is that thing -- it is what a row
-     is looked up by, it is the sort the table opens on, and at 66px it is the
-     cheapest of the three to hold. The boat and the guest count keep their
-     widths and their place in front of the money (see PHONE_ORDER); they
-     simply scroll away with everything else once you go looking down the
-     bill, and scrolling back is one gesture. */
+     None on a phone, where the rows are not a table. */
   function pinned() {
-    return narrow.matches ? 1 : compact.matches ? 3 : 4;
+    return narrow.matches ? 0 : 2;
   }
 
   function orderColumns() {
     /* The rule that closes the pinned group goes on whichever column is last
        in it, and that changes with the breakpoint. */
     var n = pinned();
-    document.body.classList.toggle("pins-1", n === 1);
     document.body.classList.toggle("pins-2", n === 2);
-    document.body.classList.toggle("pins-3", n === 3);
-    document.body.classList.toggle("pins-4", n === 4);
-    var order = narrow.matches ? phoneOrder()
-              : compact.matches ? COMPACT_ORDER : ORDER;
+    var order = compact.matches ? COMPACT_ORDER : ORDER;
     COLS.sort(function (a, b) {
       var x = order.indexOf(a.k), y = order.indexOf(b.k);
       return (x < 0 ? order.length : x) - (y < 0 ? order.length : y);
@@ -1365,18 +1298,40 @@
      which is the hardest kind of gap to notice -- the laptop everyone develops
      on would look right. So every list is checked, not just the widest. */
   COLS.forEach(function (c) {
-    [["ORDER", ORDER], ["COMPACT_ORDER", COMPACT_ORDER],
-     /* PHONE_ORDER only: every narrower order is a permutation of it that
-        `phoneOrder` builds, so a column present here is present in all of
-        them -- which is one of the things collapsing TINY_ORDER bought. */
-     ["PHONE_ORDER", PHONE_ORDER]
-    ].forEach(function (pair) {
+    [["ORDER", ORDER], ["COMPACT_ORDER", COMPACT_ORDER]].forEach(function (pair) {
       if (pair[1].indexOf(c.k) < 0 && window.console) {
         console.warn("column " + c.k + " is not in " + pair[0] + "; printed last");
       }
     });
   });
   orderColumns();
+
+  /* The band over the header: what the columns under it are about.
+   *
+     Twelve columns of one weight gave the eye nothing to land on, so the
+     money -- the thing this site exists to publish -- was exactly as findable
+     as the return port. Four bands now, and the bill's is tinted from the
+     band down through every cell under it.
+
+     Computed from contiguous runs of `zone` in whatever order is in force,
+     never written out per order: the compact order moves the price block in
+     front of the descriptive columns, and a hand-written band list would have
+     to be kept in step with it or start lying. A run is a band; a zone that
+     appears twice would print twice, which is why the zones are cut where the
+     orders cut them. */
+  var ZONE_LABELS = {
+    when: "Departure", trip: "The trip", bill: "The bill", seats: "Availability"
+  };
+  function groups() {
+    var out = [];
+    COLS.forEach(function (c) {
+      var last = out[out.length - 1];
+      if (last && last.zone === c.zone) last.span++;
+      else out.push({ zone: c.zone, span: 1 });
+    });
+    return out;
+  }
+
 
   /* ---------- filtering and sorting ---------- */
 
@@ -1720,17 +1675,32 @@
        with the order actually being rendered. */
     pins = pinned();
 
-    document.getElementById("head").innerHTML = "<tr>" +
+    /* Two tiers. The band names what the columns under it are about and the
+       row under that is the sort control, which is why only the second one is
+       focusable: the band is a label, not a thing to press, and a tab stop on
+       it would be a stop that does nothing.
+
+       `aria-hidden` on the band for the same reason a screen reader gets the
+       band's word from the header cell's own tooltip instead: read aloud, a
+       row of four cells with colspans between a heading and the sortable
+       header is furniture. */
+    document.getElementById("head").innerHTML =
+      '<tr class="band" aria-hidden="true">' +
+      groups().map(function (g) {
+        return '<th colspan="' + g.span + '" class="band-' + g.zone + '">' +
+          esc(ZONE_LABELS[g.zone] || "") + "</th>";
+      }).join("") + "</tr><tr>" +
       COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
-      /* The short label where one is set and the screen is narrow. A pinned
-         column is a fixed width, and "GUESTS" wants 65px of the 45 it has
-         there -- so the choice is a header reading "GUES…" or a shorter word
-         that is whole. The same call the date column already made when it
-         took a smaller font rather than print "DEPAR…": a truncated value can
-         be read as truncated, a truncated column name cannot. */
-      var label = (narrow.matches && c.short) ? c.short : c.t;
+      /* The short label where one is set and the screen is compact. A column
+         is as wide as its widest row and no wider, so "MANDATORY FEES" wants
+         100px of the 104 that column's figures need -- the header would be
+         setting the width of a column of money. The same call the date column
+         already made when it took a smaller font rather than print "DEPAR…":
+         a truncated value can be read as truncated, a truncated column name
+         cannot. */
+      var label = c.short && (narrow.matches || compact.matches) ? c.short : c.t;
       /* The tooltip only where the word was shortened, so it names the column
          rather than repeating it -- or, on a column that needs a sentence
          rather than a name, whatever `hint` says. A heading a visitor cannot
@@ -1739,8 +1709,13 @@
          not sell that date. */
       var full = label !== c.t ? ' title="' + esc(c.t) + '"'
                : c.hint ? ' title="' + esc(c.hint) + '"' : "";
-      return '<th tabindex="0" class="' + (c.num ? "num " : "") + pin(n) +
-        '" data-k="' + c.k + '"' + full + ">" + label + " " + dir + "</th>";
+      /* `aria-sort` on the column being sorted, because the arrow is the only
+         thing that says so and an arrow is not read out. */
+      var sorted = c.k === state.sort
+        ? ' aria-sort="' + (state.dir > 0 ? "ascending" : "descending") + '"' : "";
+      return '<th tabindex="0" class="' + (c.num ? "num " : "") + "zone-" + c.zone +
+        " " + pin(n) + '" data-k="' + c.k + '"' + full + sorted + ">" +
+        label + " " + dir + "</th>";
     }).join("") + "</tr>";
 
     /* The chip is a filter the visitor pressed, so an empty result under it is
@@ -1754,41 +1729,73 @@
       : "Nothing matches those filters.";
     document.getElementById("body").innerHTML = rows.length
       ? renderRows(rows, 0, target)
-      : '<tr><td class="empty" colspan="' + (COLS.length + 1) + '">' +
+      : '<tr><td class="empty" colspan="' + COLS.length + '">' +
         nothing + "</td></tr>";
+    /* The same rows again as cards, for a screen with no room for columns.
+       Both hosts are always filled and the stylesheet shows one: a phone that
+       is rotated crosses the breakpoint with no redraw, and a `Ctrl+F` on a
+       laptop still finds text the phone layout would have held. */
+    document.getElementById("cards").innerHTML = rows.length
+      ? renderCards(rows, 0, target)
+      : '<p class="empty">' + nothing + "</p>";
     drawn = Math.min(rows.length, target);
     afterDraw(rows);
-    settleMoneyFold(keep);
   }
 
-  /* Re-measure the fold now that there is something to measure, and draw once
-     more if it moved.
-   *
-     After the draw and not before it, because the widths this reads are the
-     rendered ones -- and inside `draw` rather than at the two or three places
-     that change the width, because the Total column is sized by whichever rows
-     are on screen: a filter down to one expensive boat widens it as surely as
-     rotating the phone narrows the screen.
+  /* Which cells a card is built from, by column key. Not a second set of
+     renderers: every one of these reads the same `show` the table cell reads,
+     so the card cannot drift from the row it is the same departure as -- and
+     the three panel triggers inside them (the bill, the ladder, the entry
+     bar) come across working, because they are the same buttons. */
+  function cell(key, row) {
+    var c = COLS.filter(function (x) { return x.k === key; })[0];
+    if (!c) return "";
+    return c.show ? c.show(row.d, row.i, row.lav, row)
+                  : esc(c.v(row.d, row.i, row.lav, row));
+  }
 
-     `settling` is what stops this recurring. `moneyFoldWanted` returns the
-     smallest fold that fits, so the second pass is measured against the order
-     it asked for and agrees with itself -- but a guard is cheaper than trusting
-     that, and a redraw loop on a phone is not a bug worth risking to save a
-     variable. One extra pass at most, and none at all on anything wider than a
-     phone or already folded correctly. */
-  var settling = false;
-  function settleMoneyFold(keep) {
-    if (settling) return;
-    var want = moneyFoldWanted();
-    if (want === moneyFold) return;
-    moneyFold = want;
-    settling = true;
-    try {
-      orderColumns();
-      draw(keep);
-    } finally {
-      settling = false;
-    }
+  /* The rows as cards, which is what a phone gets instead of the table.
+   *
+     What this replaces was the table with columns folded off the front of the
+     row until the Total fit -- `MONEY_FOLD`, `PHONE_ORDER` and a measuring
+     pass after every draw. It worked, and it was answering the wrong
+     question: the money only stayed on screen by hiding the boat behind it,
+     and the widths that decided which columns went are set by whichever rows
+     are on screen, so the fold moved when a filter changed and the reader
+     lost a column for reasons they could not see.
+
+     A card has no columns to fold. The Total sits in its own corner at every
+     width, the boat and the dates are beside it rather than instead of it,
+     and nothing has to be measured to keep either there. It costs rows --
+     five on a 844px screen against ten -- and buys every row being readable
+     without scrolling sideways at all, which is what the fold was spending
+     those rows to approximate.
+
+     `data-id` and the row classes are the table's, so marking, the sold-out
+     treatment and the panels all work here without knowing which layout drew
+     them. */
+  function renderCards(rows, from, count) {
+    return rows.slice(from, from + count).map(function (row) {
+      var marked = state.marked.has(row.d.id);
+      return '<article class="card row' + (row.d.bookable ? "" : " gone") +
+        (marked ? " marked" : "") + '" aria-selected="' + marked +
+        '" data-id="' + esc(row.d.id) + '">' +
+        '<div class="card-head">' +
+          '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
+          '<div class="card-money cost">' + cell("total", row) + "</div>" +
+        "</div>" +
+        '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
+        '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
+        '<div class="card-meta">' +
+          '<span class="cm mfees">' + cell("later", row) + "</span>" +
+          '<span class="cm nitrox"><i>nitrox</i>' + cell("nitrox", row) + "</span>" +
+          '<span class="cm perdive">' + cell("perdive", row) + "</span>" +
+          '<span class="cm entry-col">' + cell("entry", row) + "</span>" +
+          '<span class="cm places">' + cell("availability", row) + "</span>" +
+          '<span class="cm source">' + cell("source", row) + "</span>" +
+        "</div>" +
+        "</article>";
+    }).join("");
   }
 
   /* Kept as a separate function so appending on scroll and drawing from
@@ -2450,25 +2457,33 @@
       var label = longDate(d.day);
       if (d.reports.length > 1) label += " · " + d.reports.length + " refreshes";
       host.appendChild(el("h3", "history-day", label));
+      /* One refresh, one block. They used to be appended straight under the
+         day heading, so two runs on one day were two lists of the same shape
+         with nothing between them saying where the first ended -- and on a
+         quiet day, two identical "Nothing moved." lines reading as a stutter
+         rather than as two runs. The block is what the rule down the left
+         edge is drawn on. */
       d.reports.forEach(function (report) {
+        var run = el("div", "change-report");
+        host.appendChild(run);
         if (report.quiet) {
-          host.appendChild(el("p", "change-quiet", report.price_rounding
+          run.appendChild(el("p", "change-quiet", report.price_rounding
             ? "Nothing moved, beyond " + report.price_rounding +
               " fare(s) shifting by under €5."
             : "Nothing moved."));
           return;
         }
         if (report.availability_newly_read) {
-          host.appendChild(el("p", "deals-note",
+          run.appendChild(el("p", "deals-note",
             "The earlier dataset stated availability nowhere, so sold-out and " +
             "bookable-again are not compared here. Nobody had looked before."));
         }
         CHANGE_BLOCKS.forEach(function (spec) {
           var block = changeBlock(report, spec);
-          if (block) host.appendChild(block);
+          if (block) run.appendChild(block);
         });
         if (report.price_rounding) {
-          host.appendChild(el("p", "deals-note",
+          run.appendChild(el("p", "deals-note",
             report.price_rounding + " further fare(s) moved by under €5 and " +
             "are not listed: at that size a move is the rounding on a " +
             "converted price rather than a reprice."));
@@ -3382,27 +3397,43 @@
       chip.setAttribute("aria-pressed",
         chip.dataset.t ? String(!!state.toggles[chip.dataset.t]) : "false");
     });
-    /* A bank that was expanded to reach a chip, or that is holding a chosen
-       chip out of its hidden tail, has to be rebuilt from the cleared set --
-       repainting is the only thing that puts those chips back where they
-       belong. */
-    ["months", "ports", "sites", "boats", "sellers"].forEach(function (id) {
-      var node = document.getElementById(id);
-      if (node && node.repaint) node.repaint();
-    });
+    repaintBanks();
     labelFilters();
     draw();
   });
+
+  /* A bank that was expanded to reach a chip, or that is holding a chosen chip
+     out of its hidden tail, has to be rebuilt from the set that changed --
+     repainting is the only thing that puts those chips back where they belong.
+     Every bank, listed once: it was five of the six, and Entry bar was the one
+     left out, so clearing a bar chip left its chip pressed. */
+  function repaintBanks() {
+    ["months", "ports", "sites", "boats", "entry", "sellers"].forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node && node.repaint) node.repaint();
+    });
+  }
+
+  /* One more page into both hosts. They are drawn together and appended
+     together: a phone rotated to landscape crosses the breakpoint with no
+     redraw, and a table that had been scrolled would otherwise meet a card
+     list holding the first 120 rows. */
+  function appendPage(count) {
+    var n = Math.min(count, lastRows.length - drawn);
+    if (n <= 0) return;
+    document.getElementById("body").insertAdjacentHTML(
+      "beforeend", renderRows(lastRows, drawn, n));
+    document.getElementById("cards").insertAdjacentHTML(
+      "beforeend", renderCards(lastRows, drawn, n));
+    drawn += n;
+  }
 
   /* Append the next page of rows as the table is scrolled. */
   document.querySelector(".shell").addEventListener("scroll", function () {
     if (drawn >= lastRows.length) return;
     var shell = this;
     if (shell.scrollTop + shell.clientHeight < shell.scrollHeight - 600) return;
-    document.getElementById("body").insertAdjacentHTML(
-      "beforeend", renderRows(lastRows, drawn, PAGE_ROWS)
-    );
-    drawn = Math.min(lastRows.length, drawn + PAGE_ROWS);
+    appendPage(PAGE_ROWS);
   }, { passive: true });
 
   /* Draw the rest of the rows the moment the browser's own find is opened.
@@ -3411,11 +3442,7 @@
      bar does, so the remaining rows can be in place by the time it is typed
      into. Cmd+F on a Mac, F3 on Windows, and "/" in Firefox's quick find. */
   function drawEverything() {
-    if (drawn >= lastRows.length) return;
-    document.getElementById("body").insertAdjacentHTML(
-      "beforeend", renderRows(lastRows, drawn, lastRows.length - drawn)
-    );
-    drawn = lastRows.length;
+    appendPage(lastRows.length - drawn);
   }
   window.addEventListener("keydown", function (event) {
     var find = (event.key === "f" || event.key === "F") && (event.ctrlKey || event.metaKey);
@@ -3437,43 +3464,26 @@
     else if (mq.addListener) mq.addListener(onWidthChange);
   });
 
-  /* And a plain resize, because the fold in front of the money is measured
-     rather than declared and **most of the widths that change it cross no
-     breakpoint at all**: 760 to 390 is one media query away from nothing, and
-     the whole phone range sits inside `narrow`. Left on the media queries, the
-     fold was whatever the width at first paint asked for and stayed there --
-     which passes a test that only checks the Total is on screen, because being
-     over-folded is safe. It is not right: a phone turned landscape kept the
-     boat and the guest count behind the money with room to spare for both.
 
-     Debounced, since a resize fires continuously through a drag and a settle
-     can cost a redraw. */
-  var resizeSettle = 0;
-  window.addEventListener("resize", function () {
-    clearTimeout(resizeSettle);
-    resizeSettle = setTimeout(function () { settleMoneyFold(true); }, 90);
-  });
+  /* THE DRAWER, AND WHAT IT MAY NOT HIDE.
+   *
+     The banks fold away at every width now rather than under 1000px, so the
+     rule that used to apply to phones applies to everything: a chosen filter
+     can be behind a closed panel, and a table quietly answering a narrower
+     question than the one on screen is the failure this page exists to report
+     in other people. Two things stop it. The button carries a count -- what is
+     not as it was when the page opened -- and the bar under it names each one
+     and drops it on a press.
 
-  /* The banks fold away from 1000px down, and a chosen filter folds away with
-     them: at 900px you could pick one operator, collapse the panel, and the
-     page would show 40 of 882 rows with nothing on screen saying why. The
-     label carries the count so the fold never hides the fact that something
-     is filtering. */
+     Counted against each control's *default* rather than its emptiness,
+     because that is the question, and it is how the Include switches get in:
+     both start on, and turning one off changes every total without touching a
+     row. */
   var filtersToggle = document.getElementById("filtersToggle");
-  /* Everything the fold is hiding, counted. The label used to name the four
-     banks -- "Filter by port, site, boat or entry bar" -- which was both a
-     mouthful and, once the toolbar folded in with them, wrong: the month
-     chips, the nights range, the two seller filters and the Include switches
-     are all behind this control now, and a label listing four of nine reads
-     as a promise about what is in there.
+  var filtersCount = document.getElementById("filtersCount");
+  var activeBar = document.getElementById("activeBar");
+  var activePills = document.getElementById("activePills");
 
-     So it says "Filters", and the count does the work the list was doing. It
-     has to: a fold that hides an active filter without saying so is a table
-     silently answering a narrower question than the one on screen. Counted
-     against each control's *default* rather than its emptiness, because that
-     is the question -- what is not as it was when the page opened -- and it is
-     how the Include switches get in: both start on, and turning one off
-     changes every total without touching a row. */
   function activeFilters() {
     var n = state.months.size + state.ports.size + state.sites.size +
       state.boats.size + state.entry.size + state.sellers.size;
@@ -3487,14 +3497,161 @@
     return n;
   }
 
+  /* Every live filter as one pill, each naming the bank it came from.
+     The bank's name is on the pill because the value alone is ambiguous
+     across banks -- "Hurghada" is a port and could as easily have been a reef
+     -- and because the reader is being told what to reopen if they want more
+     of the same. */
+  var PILL_BANKS = [
+    { set: "months", label: "month", name: function (v) {
+        var m = D.facets.months.filter(function (x) { return x.id === v; })[0];
+        return m ? m.label : String(v);
+      } },
+    { set: "ports", label: "from" },
+    { set: "sites", label: "reef" },
+    { set: "boats", label: "boat" },
+    { set: "entry", label: "entry" },
+    { set: "sellers", label: "sold by", name: function (v) {
+        return SELLER_LABELS[v] || v;
+      } }
+  ];
+
+  function paintActive() {
+    var out = [];
+    PILL_BANKS.forEach(function (bank) {
+      state[bank.set].forEach(function (v) {
+        out.push({ bank: bank.label, text: bank.name ? bank.name(v) : String(v),
+                   set: bank.set, value: v });
+      });
+    });
+    if (state.onSaleOnly) out.push({ bank: "", text: "on sale", set: "onSaleOnly" });
+    if (state.hideSoldOut) out.push({ bank: "", text: "sold out hidden", set: "hideSoldOut" });
+    if (state.nightsMin !== null) {
+      out.push({ bank: "nights", text: "from " + state.nightsMin, set: "nightsMin" });
+    }
+    if (state.nightsMax !== null) {
+      out.push({ bank: "nights", text: "to " + state.nightsMax, set: "nightsMax" });
+    }
+    /* The two switches, which are not filters and say so: they change what
+       every total on the page means rather than which rows are on it, so the
+       pill states the consequence rather than naming a chip. */
+    D.facets.toggles.forEach(function (t) {
+      if (!!state.toggles[t.id] !== !!t.default) {
+        out.push({ bank: "excluding", text: t.label.toLowerCase(),
+                   set: "toggle", value: t.id });
+      }
+    });
+
+    activeBar.hidden = out.length === 0;
+    activePills.innerHTML = out.map(function (p) {
+      return '<button type="button" class="pill-drop" data-set="' + esc(p.set) +
+        '" data-v="' + esc(p.value === undefined ? "" : p.value).replace(/"/g, "&quot;") +
+        '" title="Remove this filter">' +
+        (p.bank ? '<span class="pb">' + esc(p.bank) + "</span>" : "") +
+        "<span>" + esc(p.text) + "</span><span class=\"px\" aria-hidden=\"true\">×</span>" +
+        "</button>";
+    }).join("");
+  }
+
+  activePills.addEventListener("click", function (event) {
+    var button = event.target.closest("button.pill-drop");
+    if (!button) return;
+    var set = button.dataset.set, v = button.dataset.v;
+    if (set === "onSaleOnly") {
+      state.onSaleOnly = false;
+      onSale.setAttribute("aria-pressed", "false");
+    } else if (set === "hideSoldOut") {
+      state.hideSoldOut = false;
+      soldOut.setAttribute("aria-pressed", "false");
+    } else if (set === "nightsMin") {
+      state.nightsMin = null; nmin.value = "";
+    } else if (set === "nightsMax") {
+      state.nightsMax = null; nmax.value = "";
+    } else if (set === "toggle") {
+      state.toggles[v] = true;
+      var sw = document.querySelector('#toggles [data-t="' + v + '"]');
+      if (sw) sw.setAttribute("aria-pressed", "true");
+    } else {
+      /* The months bank holds numbers and every other one holds strings; the
+         chip that set it knows which, and so does the set it went into. */
+      state[set].delete(state[set].has(+v) ? +v : v);
+      repaintBanks();
+    }
+    draw();
+  });
+
   function labelFilters() {
     var n = activeFilters();
-    filtersToggle.textContent = n ? "Filters · " + n + " on" : "Filters";
+    filtersCount.textContent = n ? String(n) : "";
+    filtersCount.hidden = n === 0;
     filtersToggle.classList.toggle("active", n > 0);
+    paintActive();
+    paintBankPick();
   }
   filtersToggle.addEventListener("click", function () {
-    var open = document.body.classList.toggle("filters-open");
+    var open = filtersToggle.getAttribute("aria-expanded") !== "true";
     filtersToggle.setAttribute("aria-expanded", String(open));
+    document.getElementById("filterPanel").hidden = !open;
+  });
+
+  /* WHICH BANK IS SHOWING.
+   *
+     Five banks stacked made the panel as tall as the sum of the longest of
+     each -- 77 boat chips under 35 reefs under six ports -- so the fold saved
+     a screen of buttons and put a screen of buttons behind it. One at a time,
+     the panel is the height of the bank that was asked for.
+
+     The picker carries a count per bank for the same reason the button
+     carries one: a filter set in a bank you are not looking at is exactly the
+     thing a one-at-a-time panel could hide. */
+  var BANK_META = [
+    { k: "ports", label: "Departs from",
+      note: "the harbour the trip leaves from — a one-way run returning " +
+            "elsewhere still leaves from the port you pick" },
+    { k: "sites", label: "Dive sites",
+      note: "read from the operator’s own description of the trip, never " +
+            "from the key-regions list beside it" },
+    { k: "boats", label: "Boat",
+      note: "everything one vessel runs across the season" },
+    { k: "entry", label: "Entry bar",
+      note: "certification and logged dives together, least demanding first — " +
+            "holding the level alone still turns you away at the dock" },
+    { k: "sellers", label: "Sold by",
+      note: "both sites list the sailing, or only one of them does" },
+    { k: "nights", label: "Nights",
+      note: "blank on either side means unbounded there" }
+  ];
+  var bankPick = document.getElementById("bankPick");
+  var bankTitle = document.getElementById("bankTitle");
+  var bankNote = document.getElementById("bankNote");
+  var openBank = "ports";
+
+  function bankCount(k) {
+    if (k === "nights") {
+      return (state.nightsMin !== null ? 1 : 0) + (state.nightsMax !== null ? 1 : 0);
+    }
+    return state[k] ? state[k].size : 0;
+  }
+
+  function paintBankPick() {
+    bankPick.innerHTML = BANK_META.map(function (b) {
+      var n = bankCount(b.k);
+      return '<button type="button" class="bank-tab" role="tab" data-bank="' + b.k +
+        '" aria-selected="' + (b.k === openBank) + '">' + esc(b.label) +
+        (n ? '<span class="bcount">' + n + "</span>" : "") + "</button>";
+    }).join("");
+    var meta = BANK_META.filter(function (b) { return b.k === openBank; })[0] || BANK_META[0];
+    bankTitle.textContent = meta.label;
+    bankNote.textContent = meta.note;
+    Array.prototype.forEach.call(document.querySelectorAll(".bank"), function (node) {
+      node.hidden = node.dataset.bank !== openBank;
+    });
+  }
+  bankPick.addEventListener("click", function (event) {
+    var button = event.target.closest("button[data-bank]");
+    if (!button) return;
+    openBank = button.dataset.bank;
+    paintBankPick();
   });
 
   labelFilters();
