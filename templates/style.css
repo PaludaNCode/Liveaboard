@@ -691,6 +691,15 @@ td.trip .t-name { font-weight:400; }
    use. 9px of padding either side was generous for that: these are numbers
    and two short links, not the prose columns either side of them, and 6px
    gives every row back what the widest row's padding was not using. */
+/* The spacer. Asks for the whole width and is therefore the only column with
+   any give, so a window wider than the table stretches this instead of the
+   money. Inherits the header's own background and bottom rule, which is what
+   carries them out to the right-hand edge; no `data-k`, so it is not sortable
+   and none of the per-column rules reach it -- but it *is* a column, in the
+   body too, so the row rule and the marked-row band carry across it instead
+   of stopping 700px short of a header that does not. */
+th.sp, td.sp { width:100%; padding:0; }
+
 thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
 thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
 tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
@@ -849,7 +858,13 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
    right-hand edge. A preferred width the text can wrap inside binds. */
 .trip { white-space:normal; width:158px; min-width:140px; max-width:164px; }
 .sites {
-  white-space:normal; width:112px; min-width:100px; max-width:116px;
+  /* The floor is the preferred width now, not 12px under it. The spacer
+     column below has a 28px floor of its own, and where there is no surplus
+     to take that floor comes out of whichever real column is most
+     compressible -- which was this one. The table already scrolls at those
+     widths, so 16px more of scroll costs nothing and 12px of reef names
+     costs a line. */
+  white-space:normal; width:112px; min-width:112px; max-width:116px;
   color:var(--ink-dim); font-size:11px; line-height:1.3;
 }
 /* Two lines, and the rest on hover. The reefs are the one cell whose length
@@ -998,6 +1013,52 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .notice strong { display:block; font-weight:600; }
 
 .empty { padding:26px 18px; color:var(--ink-dim); }
+
+/* ROOM, WHERE THERE IS ROOM FOR IT.
+ *
+   This table is dense on purpose -- it is scanned, not read -- but the density
+   was set by the narrowest window it has to work in and then applied to every
+   window. On a 2560px screen twelve columns huddled into 1,329px of it at
+   5px padding and 47px rows, with a thousand pixels of nothing beside them.
+   Crammed, and for no reason: the room was there.
+
+   So above the width at which the roomier table still fits, it takes it: 13px
+   of horizontal padding instead of 8, 9px of vertical instead of 5, and the
+   two columns that are truncated at every width -- the trip name and the
+   reefs -- get 76px and 38px more to be truncated less. Rows go from 47px to
+   55. What is left over still goes to the spacer, so the money block keeps
+   the alignment the column above bought it.
+
+   **1700px is a number derived from the table's own content width**, which is
+   the mistake #150 was, so it is guarded rather than trusted: the roomier
+   table measures about 1,499px and the rail takes 148, so the breakpoint has
+   about 50px of margin, and `test_layout` asserts at 1700 and up that the
+   table still fits its shell. If the fleet's names grow enough to eat that
+   margin the suite goes red rather than the Total going off the edge.
+
+   And it sits at the *end* of the table's rules rather than beside them: a
+   media query adds no specificity, so a `.trip` width written after this
+   block would quietly win at every size and this would look like it had not
+   been written at all. It did, for one run. */
+@media (min-width: 1700px) {
+  thead tr:not(.band) th, tbody td {
+    padding-top:9px; padding-bottom:9px; padding-left:13px; padding-right:13px;
+  }
+  /* The money and the two links stay tighter than the prose either side of
+     them, as they already do at every other width -- these are figures, and
+     the gap between a figure and its neighbour is what the eye reads them
+     against. */
+  thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
+  thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+  tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
+  tbody td.perdive, tbody td.source {
+    padding-left:11px; padding-right:11px;
+  }
+  thead tr.band th { padding-top:6px; padding-bottom:5px; }
+  .trip  { width:230px; min-width:200px; max-width:240px; }
+  .sites { width:170px; min-width:150px; max-width:176px; }
+  .sub { line-height:1.4; }
+}
 
 /* ===========================================================================
    THE ON SALE VIEW

@@ -517,6 +517,36 @@ Break these and the site starts lying quietly rather than failing loudly.
   second line inside it (`.sub`). What is lost is a sort on those four, which
   is the price; the port is what the Departs from bank filters on, and that is
   the question a reader actually asks of it.
+- **A wide window stretches the spacer, never the money.** `table
+  { width:max-content; min-width:100% }` means anything wider than the table
+  stretches it, and auto layout hands the surplus to whatever is not pinned to
+  a width. The five descriptive columns are pinned — deliberately, so they
+  cannot crowd the money out — which left the money as the only thing that
+  could grow: at 2560px the **Total was 478px wide for a 60px figure**,
+  Advertised 312, and every row's numbers drifted apart from the fees they are
+  the sum of. The one thing this table exists to line up, unlined-up, on the
+  biggest screens. One empty column at the end asks for `width:100%` and takes
+  the lot, so every real column holds its content width at every size and the
+  Total's right edge stops moving. **It is a body column too**, at about 22KB
+  of payload: leaving the rows one cell short is legal HTML and hover paints
+  across the gap because it is on the `tr`, but the *row rule* is on the
+  cells — so the header's rule ran to the right-hand edge and every row's
+  stopped 700px short of it, and the table appeared to end in one place and be
+  underlined in another. `max-width` on a prose column is not the alternative:
+  in auto layout it becomes the column's *preferred* width, so `.trip` took
+  440px at every size and made the table wider at 1300 than it was before.
+  **And above 1700px the table takes some of that room rather than leaving all
+  of it beside itself** — 13px of horizontal padding against 8, 9px vertical
+  against 5, rows at 55px against 47, and the two columns truncated at every
+  width (the trip name and the reefs) 76px and 38px wider. The density was set
+  by the narrowest window this has to work in and then applied to the widest.
+  1700 is a number derived from the table's own content width, which is the
+  #150 mistake, so it is guarded rather than trusted: the roomier table is
+  about 1,499px against a 1,552px shell, and the suite asserts at 1700 and up
+  that it still fits. The block sits at the *end* of the table's rules,
+  because a media query adds no specificity and a `.trip` width written after
+  it wins at every size — which is how it shipped doing nothing, once.
+
 - **The money is on screen at rest, and on a phone the rows are cards.**
   `MONEY_FOLD` took columns off the front of the row until the Total fit, and
   it was answering the wrong question: the money only stayed on screen by

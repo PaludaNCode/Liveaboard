@@ -1089,6 +1089,126 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertEqual([c["v"] for c in read("entry")], entry,
                          "the entry bar re-sorted itself out of its ladder")
 
+    def test_a_wide_window_stretches_the_spacer_and_not_the_money(self) -> None:
+        """The columns hold their width, however much room there is.
+
+        `min-width:100%` on the table means a window wider than the table
+        stretches it, and auto layout hands the surplus to whatever is not
+        pinned to a width. The five descriptive columns are pinned -- so the
+        money was the only thing that could grow, and at 2560px the Total was
+        478px wide for a 60px figure while Advertised took 312. Every row's
+        figures drifted apart from the fees they are the sum of, on the widest
+        screens, which is the one thing this table exists to line up.
+
+        Measured across four widths against the narrowest: every real column
+        identical to the pixel, the Total's right edge unmoved, and the spacer
+        holding the whole difference. The row rule has to reach the edge too,
+        which is why the spacer is a body column rather than a short row.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        read = lambda: page.evaluate("""() => {
+          const row = document.querySelector('tbody tr.row');
+          const cols = {};
+          [...document.querySelectorAll('#head tr:last-child th[data-k]')].forEach(
+            th => { cols[th.dataset.k] = Math.round(th.getBoundingClientRect().width); });
+          const sp = document.querySelector('#head tr:last-child th.sp');
+          const last = row.querySelector('td.sp');
+          return {
+            cols: cols,
+            spacer: Math.round(sp.getBoundingClientRect().width),
+            totalRight: Math.round(row.querySelector('td.cost').getBoundingClientRect().right),
+            rowRight: Math.round(row.getBoundingClientRect().right),
+            ruleRight: last ? Math.round(last.getBoundingClientRect().right) : null,
+            tableW: Math.round(
+              document.querySelector('.shell > table').getBoundingClientRect().width),
+          };
+        }""")
+
+        base = read()
+        self.assertGreater(base["spacer"], 0, "no spacer column, so nothing absorbs a wide window")
+        # From the roomier regime up, because the columns are deliberately
+        # wider above 1700 -- what must not move is anything *within* a regime.
+        page.set_viewport_size({"width": 1700, "height": 900})
+        page.wait_for_timeout(200)
+        base = read()
+        for width in (1800, 2000, 2560, 3200):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            seen = read()
+            where = "at %dpx" % width
+            self.assertEqual(seen["cols"], base["cols"],
+                             "a real column changed width " + where)
+            self.assertEqual(seen["totalRight"], base["totalRight"],
+                             "the Total slid sideways " + where)
+            self.assertGreater(seen["spacer"], base["spacer"],
+                               "the spacer did not take the extra room " + where)
+            # The row's own rule reaches the edge of the row, or the table is
+            # underlined in one place and appears to end in another.
+            self.assertIsNotNone(seen["ruleRight"], "the rows are a cell short " + where)
+            self.assertEqual(seen["ruleRight"], seen["rowRight"],
+                             "the row rule stops short of the row " + where)
+            self.assertEqual(seen["tableW"], width - 148,  # less the rail
+                             "the table is not filling the window " + where)
+
+    def test_a_roomy_window_is_used_rather_than_left_beside_the_table(self) -> None:
+        """Density set by the narrowest window, applied to the widest one.
+
+        Twelve columns huddled into 1,329px of a 2560px screen at 5px padding
+        and 47px rows, with a thousand pixels of nothing beside them. Above
+        1700px the table takes some of that: more padding, taller rows, and
+        the two columns truncated at every width get room to be truncated
+        less.
+
+        1700 is a number derived from the table's own content width, which is
+        the mistake #150 was -- so what is asserted is not the number but the
+        thing it is chosen to protect: at and above it, the roomier table
+        still fits its shell. If the fleet's names grow enough to eat the
+        margin, this goes red rather than the Total going off the edge.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        read = lambda: page.evaluate("""() => {
+          const shell = document.querySelector('.shell');
+          const row = document.querySelector('tbody tr.row');
+          const w = s => Math.round(
+            document.querySelector(s).getBoundingClientRect().width);
+          return { rowH: Math.round(row.getBoundingClientRect().height),
+                   trip: w('#head th[data-k="trip"]'),
+                   sites: w('#head th[data-k="sites"]'),
+                   later: w('#head th[data-k="later"]'),
+                   tableW: w('.shell > table'),
+                   shellW: shell.clientWidth,
+                   sideways: shell.scrollWidth > shell.clientWidth };
+        }""")
+
+        tight = read()
+        for width in (1500, 1699):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            self.assertEqual(read()["rowH"], tight["rowH"],
+                             "the rows changed height below the breakpoint, at %dpx" % width)
+
+        for width in (1700, 1800, 2000, 2560, 3200):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            seen = read()
+            where = "at %dpx" % width
+            self.assertGreater(seen["rowH"], tight["rowH"],
+                               "the rows are as tight as on a laptop " + where)
+            self.assertGreater(seen["trip"], tight["trip"],
+                               "the trip name got none of the room " + where)
+            self.assertGreater(seen["sites"], tight["sites"],
+                               "the reefs got none of the room " + where)
+            # The whole point of the breakpoint: the roomier table still fits.
+            self.assertFalse(seen["sideways"],
+                             "the roomier table overflows its shell " + where +
+                             " (%dpx of table in %dpx)" % (seen["tableW"], seen["shellW"]))
+            # And the money did not become the roomy part. Mandatory fees is a
+            # column of figures; it has no business taking a quarter of a row.
+            self.assertLess(seen["later"], seen["tableW"] // 8,
+                            "Mandatory fees is soaking up the width again " + where)
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
