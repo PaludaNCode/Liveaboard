@@ -691,6 +691,15 @@ td.trip .t-name { font-weight:400; }
    use. 9px of padding either side was generous for that: these are numbers
    and two short links, not the prose columns either side of them, and 6px
    gives every row back what the widest row's padding was not using. */
+/* The spacer. Asks for the whole width and is therefore the only column with
+   any give, so a window wider than the table stretches this instead of the
+   money. Inherits the header's own background and bottom rule, which is what
+   carries them out to the right-hand edge; no `data-k`, so it is not sortable
+   and none of the per-column rules reach it -- but it *is* a column, in the
+   body too, so the row rule and the marked-row band carry across it instead
+   of stopping 700px short of a header that does not. */
+th.sp, td.sp { width:100%; padding:0; }
+
 thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
 thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
 tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
@@ -849,7 +858,13 @@ tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
    right-hand edge. A preferred width the text can wrap inside binds. */
 .trip { white-space:normal; width:158px; min-width:140px; max-width:164px; }
 .sites {
-  white-space:normal; width:112px; min-width:100px; max-width:116px;
+  /* The floor is the preferred width now, not 12px under it. The spacer
+     column below has a 28px floor of its own, and where there is no surplus
+     to take that floor comes out of whichever real column is most
+     compressible -- which was this one. The table already scrolls at those
+     widths, so 16px more of scroll costs nothing and 12px of reef names
+     costs a line. */
+  white-space:normal; width:112px; min-width:112px; max-width:116px;
   color:var(--ink-dim); font-size:11px; line-height:1.3;
 }
 /* Two lines, and the rest on hover. The reefs are the one cell whose length

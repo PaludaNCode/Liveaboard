@@ -1384,6 +1384,34 @@
   });
   orderColumns();
 
+  /* THE COLUMN THAT SOAKS UP A WIDE WINDOW.
+   *
+     `table { width:max-content; min-width:100% }` means a window wider than
+     the table stretches it, and auto table layout hands the surplus to
+     whichever columns are not pinned to a width. The five descriptive ones
+     are pinned -- deliberately, so they cannot crowd the money out -- which
+     left the money as the only thing that could grow: at 2560px the Total was
+     **478px wide for a 60px figure**, Advertised 312, and every row's numbers
+     drifted apart from the fees they are the sum of. The one thing this table
+     exists to line up, unlined-up, on the widest screens.
+
+     So one empty header cell at the end asks for `width:100%` and takes the
+     lot. Every real column then holds the width its content needs at every
+     window size, and the Total's right edge stops moving: 1226px at 1300 and
+     at 2560 alike.
+
+     It is a real column, in the body as well as the header, and that costs
+     about 22KB of the payload -- 20 bytes on each of 1,122 rows. Leaving the
+     body rows one cell short was tried first and is what page weight would
+     prefer: HTML allows it, hover paints across the gap because it is on the
+     `tr`, and it looks wrong, because the *row rule* is on the cells. The
+     header's rule ran to the right-hand edge and every row's stopped 700px
+     short of it, so the table appeared to end in one place and be underlined
+     in another. An empty cell per row is what carries the rule out there, and
+     is the price of the column being a column. The empty-state row spans it
+     too, or its sentence would stop where the figures do. */
+  var SPACER = '<th class="sp" aria-hidden="true"></th>';
+
   /* The band over the header: what the columns under it are about.
    *
      Twelve columns of one weight gave the eye nothing to land on, so the
@@ -1849,7 +1877,7 @@
       groups().map(function (g) {
         return '<th colspan="' + g.span + '" class="band-' + g.zone + '">' +
           esc(ZONE_LABELS[g.zone] || "") + "</th>";
-      }).join("") + "</tr><tr>" +
+      }).join("") + SPACER + "</tr><tr>" +
       COLS.map(function (c, n) {
       var dir = c.k === state.sort
         ? '<span class="dir">' + (state.dir > 0 ? "▲" : "▼") + "</span>" : "";
@@ -1876,7 +1904,7 @@
       return '<th tabindex="0" class="' + (c.num ? "num " : "") + "zone-" + c.zone +
         " " + pin(n) + '" data-k="' + c.k + '"' + full + sorted + ">" +
         label + " " + dir + "</th>";
-    }).join("") + "</tr>";
+    }).join("") + SPACER + "</tr>";
 
     /* The chip is a filter the visitor pressed, so an empty result under it is
        "nothing matches those filters" like any other -- what it is not is a
@@ -1889,7 +1917,7 @@
       : "Nothing matches those filters.";
     document.getElementById("body").innerHTML = rows.length
       ? renderRows(rows, 0, target)
-      : '<tr><td class="empty" colspan="' + COLS.length + '">' +
+      : '<tr><td class="empty" colspan="' + (COLS.length + 1) + '">' +
         nothing + "</td></tr>";
     /* The same rows again as cards, for a screen with no room for columns.
        Both hosts are always filled and the stylesheet shows one: a phone that
@@ -1979,7 +2007,7 @@
                            : esc(c.v(row.d, row.i, row.lav, row));
             return '<td class="' + (c.num ? "num " : "") + (c.cls || "") +
               " " + pin(col) + '">' + v + "</td>";
-          }).join("");
+          }).join("") + '<td class="sp"></td>';
           /* Banding is written here from the row's own position, not left to
              `:nth-of-type(even)`. That selector counts every `tr` in the tbody,
              and the expanded row this used to inject was one -- so opening any
