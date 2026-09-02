@@ -274,7 +274,6 @@ class TestComparison(unittest.TestCase):
         self.assertEqual(quoted["nitrox"], 40.0,
                          "PADI's own nitrox figure won a charge the vessel bills")
 
-    @unittest.skipIf(published.code_only(), "reads the committed dataset")
     def test_no_shipped_bill_charges_one_code_twice(self) -> None:
         """The same rule over the fleet that actually ships.
 
@@ -282,6 +281,10 @@ class TestComparison(unittest.TestCase):
         gets past it. A bill that names one charge twice is money invented,
         which is the failure this site exists to report in other people -- and
         it shipped on 526 of 1,122 departures before anyone opened Serenity.
+
+        No skip decorator: `published.dataset()` raises the one this file
+        already uses, and it also covers the case a decorator cannot see --
+        a checkout where the dataset has not been built.
         """
         from liveaboard.pricing import padi_lines
 
