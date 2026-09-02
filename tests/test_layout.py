@@ -1089,6 +1089,64 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertEqual([c["v"] for c in read("entry")], entry,
                          "the entry bar re-sorted itself out of its ladder")
 
+    def test_three_cells_that_read_as_one_value_stay_on_one_line(self) -> None:
+        """Places, Seller and the entry bar, each on a line of its own.
+
+        All three were stacked to keep a column narrow, and all three bought
+        that narrowness with a second line on most of the rows in the table --
+        row height is paid 1,122 times and column width once, out of the
+        spacer. Worse, each pair reads as two values when it is one: "0" over
+        "at this price" is a count and its unit, "liveaboard" over "PADI" is
+        the two sellers named, and "ADV + 20" over "2 sellers" is one claim
+        about one fact with its own footnote under it.
+
+        Measured rather than grepped, and measured on the cells rather than on
+        the stylesheet: the entry bar's mark is a *sibling* of the button, so
+        `white-space` on the cell never governed it -- what put it on its own
+        line was `display:flex` making the button a block box, which no source
+        string about wrapping would have shown.
+
+        Counted over every rendered row at three desktop widths, one in each
+        of the table's three regimes.
+        """
+        page = self.open(1900, 1000)
+        self.addCleanup(page.close)
+        lines = """(sel) => {
+          const rows = [...document.querySelectorAll('.shell tbody tr.row')];
+          let worst = 0, where = '';
+          for (const tr of rows) {
+            const td = tr.querySelector(sel);
+            if (!td) continue;
+            const tops = [];
+            const walk = document.createTreeWalker(td, NodeFilter.SHOW_TEXT);
+            let n;
+            while ((n = walk.nextNode())) {
+              if (!n.textContent.trim()) continue;
+              const r = document.createRange();
+              r.selectNodeContents(n);
+              for (const q of r.getClientRects()) {
+                if (q.height < 2 || q.width < 1) continue;
+                const mid = q.top + q.height / 2;
+                if (!tops.some(t => Math.abs(t - mid) < 5)) tops.push(mid);
+              }
+            }
+            if (tops.length > worst) { worst = tops.length; where = td.textContent.trim(); }
+          }
+          return { rows: rows.length, worst: worst, where: where };
+        }"""
+        for width in (1440, 1700, 1900):
+            page.set_viewport_size({"width": width, "height": 1000})
+            page.wait_for_timeout(250)
+            for sel, name in (("td.places", "Places"),
+                              ("td.source", "Seller"),
+                              ("td.entry-col", "the entry bar")):
+                seen = page.evaluate(lines, sel)
+                self.assertTrue(seen["rows"], "no rows drawn, so this measured nothing")
+                self.assertLessEqual(
+                    seen["worst"], 1,
+                    "%s wrapped onto %d lines at %dpx: %r"
+                    % (name, seen["worst"], width, seen["where"]))
+
     def test_a_wide_window_stretches_the_spacer_and_not_the_money(self) -> None:
         """The columns hold their width, however much room there is.
 
@@ -1127,12 +1185,13 @@ class TestTheViewsAtEverySize(unittest.TestCase):
 
         base = read()
         self.assertGreater(base["spacer"], 0, "no spacer column, so nothing absorbs a wide window")
-        # From the roomier regime up, because the columns are deliberately
-        # wider above 1700 -- what must not move is anything *within* a regime.
-        page.set_viewport_size({"width": 1700, "height": 900})
+        # From the widest regime up, because the columns are deliberately wider
+        # above each of the two room steps -- what must not move is anything
+        # *within* a regime, and 1900 is where the last of them lands.
+        page.set_viewport_size({"width": 1900, "height": 900})
         page.wait_for_timeout(200)
         base = read()
-        for width in (1800, 2000, 2560, 3200):
+        for width in (2000, 2560, 3200):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
@@ -1155,14 +1214,20 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         """Density set by the narrowest window, applied to the widest one.
 
         Twelve columns huddled into 1,329px of a 2560px screen at 5px padding
-        and 47px rows, with a thousand pixels of nothing beside them. Above
-        1700px the table takes some of that: more padding, taller rows, and
-        the two columns truncated at every width get room to be truncated
-        less.
+        and 47px rows, with a thousand pixels of nothing beside them. The table
+        takes some of that back in two steps: at 1700 the two columns truncated
+        at every width -- the trip name and the reefs -- get room to be
+        truncated less, and at 1900 the padding and the row height go up too
+        and those columns get the rest of theirs.
 
-        1700 is a number derived from the table's own content width, which is
-        the mistake #150 was -- so what is asserted is not the number but the
-        thing it is chosen to protect: at and above it, the roomier table
+        Two steps because one no longer fits. Places, Seller and the entry bar
+        stopped stacking their second line, which is 141px the table needs that
+        1700px of window does not hold; splitting the step is what keeps those
+        windows from falling back to the laptop table entirely.
+
+        Both are numbers derived from the table's own content width, which is
+        the mistake #150 was -- so what is asserted is not the numbers but the
+        thing they are chosen to protect: at and above each, that step's table
         still fits its shell. If the fleet's names grow enough to eat the
         margin, this goes red rather than the Total going off the edge.
         """
@@ -1187,19 +1252,37 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             self.assertEqual(read()["rowH"], tight["rowH"],
-                             "the rows changed height below the breakpoint, at %dpx" % width)
+                             "the rows changed height below the first step, at %dpx" % width)
 
-        for width in (1700, 1800, 2000, 2560, 3200):
+        # The first step buys the two truncated columns room and nothing else,
+        # which is what makes it affordable at 1700: it costs the table no rows.
+        for width in (1700, 1800, 1899):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            seen = read()
+            where = "at %dpx" % width
+            self.assertEqual(seen["rowH"], tight["rowH"],
+                             "the first step cost the table rows " + where)
+            self.assertGreater(seen["trip"], tight["trip"],
+                               "the trip name got none of the first step " + where)
+            self.assertGreater(seen["sites"], tight["sites"],
+                               "the reefs got none of the first step " + where)
+            self.assertFalse(seen["sideways"],
+                             "the first step overflows its shell " + where +
+                             " (%dpx of table in %dpx)" % (seen["tableW"], seen["shellW"]))
+
+        first = read()
+        for width in (1900, 2000, 2560, 3200):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
             where = "at %dpx" % width
             self.assertGreater(seen["rowH"], tight["rowH"],
                                "the rows are as tight as on a laptop " + where)
-            self.assertGreater(seen["trip"], tight["trip"],
-                               "the trip name got none of the room " + where)
-            self.assertGreater(seen["sites"], tight["sites"],
-                               "the reefs got none of the room " + where)
+            self.assertGreater(seen["trip"], first["trip"],
+                               "the trip name got none of the second step " + where)
+            self.assertGreater(seen["sites"], first["sites"],
+                               "the reefs got none of the second step " + where)
             # The whole point of the breakpoint: the roomier table still fits.
             self.assertFalse(seen["sideways"],
                              "the roomier table overflows its shell " + where +
