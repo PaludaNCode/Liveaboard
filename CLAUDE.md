@@ -299,7 +299,26 @@ Break these and the site starts lying quietly rather than failing loudly.
   it read as a league table and contradicted the total beside it.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
-  required extras. Neither is a clean bill.
+  required extras. Neither is a clean bill. **And nor is one that bills a
+  charge twice.** PADI publishes two required entries on Seawolf Dominator —
+  *Visa fees* 250, and *Visa, dive permit, taxes, marine park fees, harbour fee
+  and fuel surcharges* 180–255 — and the second names the first, so the total
+  charged the visa twice on 17 departures. Both are read faithfully:
+  `tools/probe_padi_mandatory.py` established before anything changed that they
+  are distinct catalogue items with different `extraId`, `kind` and `section`,
+  that neither states a validity window, and that the enums do **not** mark one
+  a package (Galaxy files a package under the `section` a bare component sits
+  under elsewhere). What separates them is the figure — every other vessel
+  pricing a visa alone prices it at 25–30, and Seawolf's is 250, inside the
+  range of its own package — and an inference is not a warrant to delete a
+  published charge. So **nothing is dropped and the sum is withheld**:
+  `overlapping_charges` is a third `disclosure` state beside `fees_known` and
+  `mandatory_known`, with its own sentence, and the berth price and every fee
+  line stay. Deliberately narrow and under-firing: only charges a diver cannot
+  decline, only titles naming two or more, and `classify_label` does the naming
+  because a second copy of that vocabulary would drift. It is withheld in
+  `best()`, never in `metricsFor` — `row.lav` is an object the Nitrox and
+  Places columns read fields off, and nulling it there empties the table.
 - **A charge priced for last year is not this year's charge, and silence is not
   expiry.** PADI's payload states `validFrom`/`validTo` on a fee and keeps both
   sides of a repricing: Grand Sea Explorer lists *Route supplement* twice on

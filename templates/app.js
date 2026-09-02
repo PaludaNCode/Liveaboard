@@ -169,7 +169,7 @@
      difference that is an artefact of how the two were summed. */
   function padiMetricsFor(dep) {
     var itin = D.itineraries[dep.itinerary_id];
-    if (!dep.padi_base_line || !itin.padi_lines) return null;
+    if (!dep.padi_base_line || !itin.padi_lines || itin.padi_overlap) return null;
     return metricsOf([dep.padi_base_line].concat(itin.padi_lines), dep.padi);
   }
 
@@ -261,7 +261,12 @@
      project's reading order asserted as a relationship. Under `PADI_SAME` they
      are one price and the span collapses. */
   function best(row) {
-    var lav = row.d.mandatory_known ? row.lav : null;
+    /* No total where the disclosure names one charge twice -- `fee_overlap`
+       joins `mandatory_known` rather than replacing it, because they are two
+       ways for a bill not to add up and the sentences differ. Withheld here
+       and not in `metricsFor`: `row.lav` is an object the Nitrox and Places
+       columns read fields off, so nulling it there empties the table. */
+    var lav = row.d.mandatory_known && !row.d.fee_overlap ? row.lav : null;
     var padi = row.padi;
     if (!lav && !padi) return null;
     if (!lav || !padi) {
@@ -745,6 +750,10 @@
   function disclosure(dep) {
     if (!dep.fees_known) return ["none", "not looked at"];
     if (!dep.mandatory_known) return ["partial", "optional only"];
+    /* Read, and self-contradictory. Third rather than folded into `partial`:
+       that sentence says the operator stated no required extras, and this one
+       stated them twice. */
+    if (dep.fee_overlap) return ["overlap", "counted twice"];
     return ["full", "required stated"];
   }
 
@@ -762,7 +771,12 @@
     partial: "The operator publishes only optional extras, so its required " +
              "ones are unstated. They are still charged — bundled into the " +
              "berth or collected at the dock — and the listing does not say " +
-             "which, so no total is claimed here."
+             "which, so no total is claimed here.",
+    overlap: "The seller bills one of these charges twice — once on its own " +
+             "line and once inside a bundle that names it. Both are published " +
+             "as required, and nothing in the listing says which is the real " +
+             "one, so adding them up would state a price nobody quotes. The " +
+             "fee lines are all here; the total is not."
   };
 
   /* Sixteen columns became twelve, and not one fact went with the four.
