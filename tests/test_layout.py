@@ -1096,9 +1096,11 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         that narrowness with a second line on most of the rows in the table --
         row height is paid 1,122 times and column width once, out of the
         spacer. Worse, each pair reads as two values when it is one: "0" over
-        "at this price" is a count and its unit, "liveaboard" over "PADI" is
-        the two sellers named, and "ADV + 20" over "2 sellers" is one claim
-        about one fact with its own footnote under it.
+        "at this price" is a count and its unit, and "liveaboard" over "PADI"
+        is the two sellers named. The entry bar was a third: a bar over a
+        "2 sellers" footnote, one claim on two lines. That footnote has since
+        gone -- the sentence is in the panel the bar opens -- so the cell is
+        one line by having one thing in it, and this still measures it.
 
         Measured rather than grepped, and measured on the cells rather than on
         the stylesheet: the entry bar's mark is a *sibling* of the button, so
