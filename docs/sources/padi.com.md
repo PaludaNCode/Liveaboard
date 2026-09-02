@@ -492,6 +492,45 @@ prices in EUR — and the vessel's currency is assumed only where the string nam
 none. One vessel writes `"8 EU"`; that entry keeps no amount, because a currency
 this parser cannot name is money it cannot add up.
 
+### Two mandatory entries can be the same money twice
+
+Probed 2026-09-02 by `tools/probe_padi_mandatory.py`, from Seawolf Dominator.
+PADI publishes both of these in `mandatoryOnBoard` on all six of that vessel's
+itineraries, and we read both:
+
+| `extraId` | `kind` | `section` | Title | Price |
+|---|---|---|---|---|
+| 36579 | 580 | 30 | Visa fees | 250 |
+| 94745 | 600 | 10 | Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges | 180–255 |
+
+The second names the first. Seventeen departures, and the vessel has no
+liveaboard.com fee panel, so PADI's book is the only fee book those rows have.
+
+**They are distinct catalogue items, not one disclosure read twice** — different
+`extraId`, `kind` and `section` — and **neither states `validFrom` or
+`validTo`**, so the rule that resolves PADI's repricing pairs (one entry valid
+in the published season, one not) has nothing to work with here.
+
+**`kind` and `section` do not encode "package" against "component".** That is
+the obvious hypothesis and it is wrong, so it is written down rather than left
+to be followed again: Galaxy publishes a package at `section` 30 — *Port fees,
+fuel surcharges and VAT*, 200 — and Amelie publishes three bare components
+there (harbour, fuel, park, all unpriced). Across 30 vessels, `section` 30
+carries whatever a shop happens to file there.
+
+What is left is the figure, and it is the only evidence that separates the two:
+**every other vessel that prices a visa on its own prices it at 25–30** — Blue
+30, Freedom III 25 — which is what an Egyptian visa costs. Seawolf's is 250,
+ten times that and inside the range of its own package. The likeliest reading is
+a shop entering a package total against a visa-titled catalogue item, and this
+probe cannot prove it.
+
+So **no line is dropped on the strength of this.** A published mandatory charge
+is not ours to delete on an inference, and *never invent a price* cuts both
+ways. What the finding supports is refusing to call such a bill **complete**:
+a disclosure naming one charge twice does not add up, which is the verdict this
+site already reaches for a mandatory line with no figure on it.
+
 ### The optional half, and the gear set inside it
 
 `optionalOnBoard`, `optionalInAdvance` and `optionalBookableAdvancePaidOnBoard`
