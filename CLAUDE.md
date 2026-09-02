@@ -790,6 +790,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   is a statement about the two disclosures and not about the two sellers. Never a merge of the two: one figure per
   vessel against one per itinerary is not a difference you can add up, and a
   line from each is a bill neither seller quotes.
+  **Nitrox and gear are the vessel's charge and appear once, from the vessel's
+  book.** They are billed on board, out of one price list, to whoever walked up
+  the gangway, so PADI's side takes them from *our* disclosure rather than
+  leaving its total short by whatever the visitor switched on. PADI states them
+  too, though — in `optionalOnBoard` and its siblings — so `padi_lines` takes
+  **only PADI's mandatory rows** and adds the vessel's non-mandatory ones. It
+  used to take PADI's whole book, which put both copies in: Serenity's PADI
+  bill carried €35 of nitrox twice and €210 of gear twice, on all 179 trips
+  with a PADI bill and 526 of 1,122 departures, with rental gear on by default.
+  The page then printed that fabricated €245 as a *disagreement between the
+  sellers*. The fixture that was supposed to cover this put gear on the vessel
+  alone, so it passed throughout; the test now puts it on both books, and a
+  second one asserts no shipped bill names any code twice.
 - **A sale is the list price a seller prints beside its own, never a banner.**
   liveaboard.com publishes no deals listing at all — `/liveaboard-deals` is SEO
   prose and the seasonal campaign pages carry only *"Up to 30% OFF"* over a

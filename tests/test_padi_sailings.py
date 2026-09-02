@@ -216,6 +216,93 @@ class TestComparison(unittest.TestCase):
         # And exactly once -- a shared line duplicated is a fee charged twice.
         self.assertEqual(codes.count("gear_rental"), 1)
 
+    def test_a_gangway_charge_both_sellers_state_is_billed_once(self) -> None:
+        """The case the test above could not reach, and the bug it hid.
+
+        Nitrox and gear are the vessel's charge, so PADI's side takes them from
+        the vessel's disclosure -- and PADI states them too, in its own
+        optional block. Taking PADI's whole book and adding the vessel's
+        non-mandatory rows put both copies in: Serenity's PADI bill carried
+        EUR 35 of nitrox twice and EUR 210 of gear twice. Every one of the 179
+        trips with a PADI bill was doing it, 526 of 1,122 departures, and
+        rental gear is on by default -- so half the page quoted a second hire
+        nobody would pay, and called the difference a disagreement between the
+        sellers.
+
+        The other test puts gear on the vessel alone, which is why it passed
+        throughout. This puts it on both, which is what the fleet looks like.
+        """
+        onboard = [
+            {"code": "gear_rental", "label": "Equipment rental",
+             "tier": "conditional", "basis": "per_trip", "included": False,
+             "amount": {"amount": 200.0, "currency": "USD"},
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+            {"code": "nitrox", "label": "Nitrox", "tier": "conditional",
+             "basis": "per_trip", "included": False,
+             "amount": {"amount": 40.0, "currency": "USD"},
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+        ]
+        fees = {"vessels": {"alia-soul": {"fees": [
+            *self.FEES["vessels"]["alia-soul"]["fees"], *onboard]}}}
+        # And PADI names the same two, at its own figures, as it does on 172
+        # and 169 of the fleet's trips respectively.
+        book = self.padi_book(lines=[
+            {"code": "marine_park", "tier": "mandatory", "basis": "per_trip",
+             "amount": {"amount": 60.0, "currency": "USD"}},
+            {"code": "gear_rental", "tier": "conditional", "basis": "per_trip",
+             "amount": {"amount": 999.0, "currency": "USD"}},
+            {"code": "nitrox", "tier": "conditional", "basis": "per_trip",
+             "amount": {"amount": 888.0, "currency": "USD"}},
+        ])
+        payload = promote(candidate([departure()]), season=SEASON, fees=fees,
+                          padi_departures=BOOK, padi=book)
+        itinerary = next(iter(
+            build_payload(Dataset.from_dict(payload))["itineraries"].values()))
+        codes = [line["code"] for line in itinerary["padi_lines"]]
+
+        for code in ("gear_rental", "nitrox"):
+            self.assertEqual(codes.count(code), 1,
+                             "%s is on PADI's bill %d times" % (code, codes.count(code)))
+        # And it is the *vessel's* figure that survives, not PADI's: the boat
+        # bills this at the dock, out of one price list, to whoever booked.
+        quoted = {line["code"]: line["quoted"]["amount"]
+                  for line in itinerary["padi_lines"] if line.get("quoted")}
+        self.assertEqual(quoted["gear_rental"], 200.0,
+                         "PADI's own gear figure won a charge the vessel bills")
+        self.assertEqual(quoted["nitrox"], 40.0,
+                         "PADI's own nitrox figure won a charge the vessel bills")
+
+    @unittest.skipIf(published.code_only(), "reads the committed dataset")
+    def test_no_shipped_bill_charges_one_code_twice(self) -> None:
+        """The same rule over the fleet that actually ships.
+
+        The fixture above proves the merge; this proves nobody's real book
+        gets past it. A bill that names one charge twice is money invented,
+        which is the failure this site exists to report in other people -- and
+        it shipped on 526 of 1,122 departures before anyone opened Serenity.
+        """
+        from liveaboard.pricing import padi_lines
+
+        dataset = published.dataset()
+        offenders = []
+        for itinerary in dataset.itineraries.values():
+            lines = padi_lines(itinerary, dataset.fx)
+            if not lines:
+                continue
+            seen: dict[str, int] = {}
+            for line in lines:
+                code = line.code.value
+                seen[code] = seen.get(code, 0) + 1
+            twice = sorted(code for code, n in seen.items() if n > 1)
+            if twice:
+                offenders.append("%s: %s" % (itinerary.id, ", ".join(twice)))
+        self.assertEqual(
+            offenders, [],
+            "%d shipped PADI bills charge a code more than once:\n  %s"
+            % (len(offenders), "\n  ".join(offenders[:10])))
+
     def test_an_incomplete_padi_book_yields_no_second_total(self) -> None:
         """The invariant, in the one place it can be broken silently.
 
