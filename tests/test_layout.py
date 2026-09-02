@@ -1127,7 +1127,12 @@ class TestTheViewsAtEverySize(unittest.TestCase):
 
         base = read()
         self.assertGreater(base["spacer"], 0, "no spacer column, so nothing absorbs a wide window")
-        for width in (1700, 2000, 2560, 3200):
+        # From the roomier regime up, because the columns are deliberately
+        # wider above 1700 -- what must not move is anything *within* a regime.
+        page.set_viewport_size({"width": 1700, "height": 900})
+        page.wait_for_timeout(200)
+        base = read()
+        for width in (1800, 2000, 2560, 3200):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
@@ -1145,6 +1150,64 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              "the row rule stops short of the row " + where)
             self.assertEqual(seen["tableW"], width - 148,  # less the rail
                              "the table is not filling the window " + where)
+
+    def test_a_roomy_window_is_used_rather_than_left_beside_the_table(self) -> None:
+        """Density set by the narrowest window, applied to the widest one.
+
+        Twelve columns huddled into 1,329px of a 2560px screen at 5px padding
+        and 47px rows, with a thousand pixels of nothing beside them. Above
+        1700px the table takes some of that: more padding, taller rows, and
+        the two columns truncated at every width get room to be truncated
+        less.
+
+        1700 is a number derived from the table's own content width, which is
+        the mistake #150 was -- so what is asserted is not the number but the
+        thing it is chosen to protect: at and above it, the roomier table
+        still fits its shell. If the fleet's names grow enough to eat the
+        margin, this goes red rather than the Total going off the edge.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        read = lambda: page.evaluate("""() => {
+          const shell = document.querySelector('.shell');
+          const row = document.querySelector('tbody tr.row');
+          const w = s => Math.round(
+            document.querySelector(s).getBoundingClientRect().width);
+          return { rowH: Math.round(row.getBoundingClientRect().height),
+                   trip: w('#head th[data-k="trip"]'),
+                   sites: w('#head th[data-k="sites"]'),
+                   later: w('#head th[data-k="later"]'),
+                   tableW: w('.shell > table'),
+                   shellW: shell.clientWidth,
+                   sideways: shell.scrollWidth > shell.clientWidth };
+        }""")
+
+        tight = read()
+        for width in (1500, 1699):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            self.assertEqual(read()["rowH"], tight["rowH"],
+                             "the rows changed height below the breakpoint, at %dpx" % width)
+
+        for width in (1700, 1800, 2000, 2560, 3200):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.wait_for_timeout(200)
+            seen = read()
+            where = "at %dpx" % width
+            self.assertGreater(seen["rowH"], tight["rowH"],
+                               "the rows are as tight as on a laptop " + where)
+            self.assertGreater(seen["trip"], tight["trip"],
+                               "the trip name got none of the room " + where)
+            self.assertGreater(seen["sites"], tight["sites"],
+                               "the reefs got none of the room " + where)
+            # The whole point of the breakpoint: the roomier table still fits.
+            self.assertFalse(seen["sideways"],
+                             "the roomier table overflows its shell " + where +
+                             " (%dpx of table in %dpx)" % (seen["tableW"], seen["shellW"]))
+            # And the money did not become the roomy part. Mandatory fees is a
+            # column of figures; it has no business taking a quarter of a row.
+            self.assertLess(seen["later"], seen["tableW"] // 8,
+                            "Mandatory fees is soaking up the width again " + where)
 
 
 if __name__ == "__main__":  # pragma: no cover
