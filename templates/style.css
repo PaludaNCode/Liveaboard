@@ -890,12 +890,11 @@ td.trip .t-name {
 /* The entry bar, on one line -- bar and disagreement marker together -- and
    sized by its own content rather than by a number typed here.
  *
-   It was 78px with the marker stacked underneath, which kept the column
-   narrow at the price of a second line on the 25 rows in 120 that carry one:
-   the bar and "2 sellers" are one statement about one fact, and split across
-   two lines the second reads as a value of its own. Together they are 111px
-   in the roomy regime, and the 33px is bought back where the room is -- the
-   spacer beside the table, not another column.
+   It was 78px with a disagreement marker stacked underneath, which kept the
+   column narrow at the price of a second line on the 25 rows in 120 that
+   carried one. That marker is gone -- the sentence it abbreviated is in the
+   panel the bar opens -- so the cell is the bar alone and the width is the
+   phrase.
 
    No stated width, because the phrase is the column: `nowrap` plus
    `width:auto` lets auto table layout size it to the longest bar the fleet
@@ -910,7 +909,6 @@ td.trip .t-name {
   white-space:nowrap; width:auto;
   color:var(--ink-dim); font-size:11px;
 }
-td.entry-col .varies { margin-left:.45em; }
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -1242,14 +1240,14 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   font-size:10px; font-weight:600; color:var(--ok);
   font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
 }
-/* Where those markers live: a line of their own under the advertised figure.
-   Beside it they were the width of the column on every row -- see the note
-   where they are built. */
+/* Where the sale tag lives: a line of its own under the advertised figure.
+   Beside it, it was the width of the column on every row -- see the note where
+   it is built. It shared this line with a `2 sellers` mark until that mark
+   became a hover on the figure itself. */
 td.money .marks {
   display:block; line-height:1.3; margin-top:1px;
   display:flex; gap:6px; justify-content:flex-end; align-items:baseline;
 }
-td.money .marks .varies { margin-left:0; vertical-align:baseline; }
 
 .deals-body h4 {
   margin:0 0 6px; font-family:var(--font-narrow); font-size:10px;
@@ -1602,11 +1600,11 @@ a { color:var(--accent); }
    what the column is read for. */
 .fees-open:hover .later, .fees-open[aria-expanded="true"] .later { color: inherit; }
 /* Not a money column, so it is not set in the mono face. And not a block: at
-   `display:flex` the button is a block box whatever else it is, so the
-   "2 sellers" mark after it -- a sibling of the button, not a child -- had
-   nowhere to go but a line of its own, whatever the cell's `white-space` said.
-   Content-sized and inline, the pair sits on one line and the column measures
-   itself around it. */
+   `display:flex` the button is a block box whatever else it is, which is what
+   put the old disagreement marker -- a sibling of the button, not a child --
+   on a line of its own whatever the cell's `white-space` said. The marker has
+   gone, and this stays inline and content-sized: a block box here would
+   stretch the cell to the column rather than the column to the phrase. */
 .entry-open {
   font-family: var(--font-sans); white-space: nowrap;
   display: inline-flex; width: auto; vertical-align: baseline;
@@ -1733,12 +1731,3 @@ a { color:var(--accent); }
          text-transform:uppercase; color:var(--ink-dim); }
 .entry + .whose { margin-top:0; }
 
-/* On the total, not beside it: the mark qualifies that number rather than
-   standing on its own. Small, uppercase and unobtrusive -- it is a footnote to
-   a price, and a price the reader can act on, so it must not compete with the
-   figure it annotates. */
-.varies {
-  display:inline-block; margin-left:.32em; font-size:9px; letter-spacing:.03em;
-  text-transform:uppercase; color:var(--ink-faint); vertical-align:.12em;
-  border-bottom:1px dotted var(--rule); cursor:help;
-}
