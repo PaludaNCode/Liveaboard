@@ -3104,7 +3104,7 @@
     th.click();
   });
 
-  document.getElementById("body").addEventListener("click", function (event) {
+  document.querySelector(".shell").addEventListener("click", function (event) {
     /* Anywhere on a row marks it, so the visitor can keep their place while
        scrolling sixteen columns sideways.
      *
@@ -3122,7 +3122,12 @@
        selection exists, since an old one elsewhere on the page would then
        block every mark. */
     if (event.target.closest("a, button")) return;
-    var tr = event.target.closest("tr.row");
+    /* `.row` rather than `tr.row`, and on the shell rather than the `tbody`,
+       for the same reason the panels moved: a card is `article.card.row` and
+       carries the same `data-id`, so a phone could not mark a row either. Both
+       layouts write that class and that attribute, which is what makes one
+       selector right for both. */
+    var tr = event.target.closest(".row[data-id]");
     if (!tr) return;
     var selection = window.getSelection && window.getSelection();
     if (selection && !selection.isCollapsed) return;
@@ -3316,7 +3321,21 @@
   function hoverPanel(host, selector, fill, opts) {
     var hoverOpens = !opts || opts.hoverOpens !== false;
     var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
-    var body = document.getElementById("body");
+    /* `.shell`, not the `tbody`, because the rows are not always a table.
+     *
+       Every listener here hung off `#body`, and below 760px that element is
+       `display:none` and the rows are `#cards` -- so on a phone not one of the
+       three panels was wired to anything. The triggers rendered, because a
+       card cell is the same column's renderer and the markup came across
+       exactly as intended; only the events did not. "The three panel triggers
+       come across working" was true of everything except the part that makes
+       them work.
+
+       The shell is the one box holding both hosts, so this is wired once and
+       stays wired if a third layout ever draws rows. The three panel hosts sit
+       outside it, and the header inside it carries no trigger, so a wider net
+       catches nothing new. */
+    var body = document.querySelector(".shell");
 
     function shut() {
       host.hidden = true;

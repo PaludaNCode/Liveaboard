@@ -1294,6 +1294,66 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertLess(seen["later"], seen["tableW"] // 8,
                             "Mandatory fees is soaking up the width again " + where)
 
+    def test_a_phone_can_open_all_three_panels_and_mark_a_row(self) -> None:
+        """The triggers came across; the events did not.
+
+        Every listener in `hoverPanel` hung off `#body`, and below 760px that
+        element is `display:none` and the rows are `#cards` — so on a phone not
+        one of the three panels was wired to anything, and the fee bill, the
+        cabin ladder and the entry bar were all dead. The row mark went the
+        same way twice over: bound to the same `tbody`, and matching `tr.row`
+        where a card is `article.card.row`.
+
+        Nothing looked wrong, which is why this needs measuring rather than
+        reading: a card cell is the same column's renderer, so the buttons
+        rendered exactly right and only the clicks went nowhere.
+
+        Asserted on the layout that has no table, and each panel has to *fit*
+        as well as open — a dialog opening off the bottom of a 640px phone is
+        not an opened dialog.
+        """
+        panels = ((".fees-open", "feePanel"), (".berths", "berths"),
+                  (".entry-open", "entryPanel"))
+        for width, height in ((360, 640), (390, 844), (430, 932)):
+            page = self.open(width, height)
+            try:
+                self.assertTrue(
+                    page.evaluate("()=>getComputedStyle("
+                                  "document.querySelector('.shell > table'))"
+                                  ".display === 'none'"),
+                    "not the card layout at %dpx" % width)
+
+                for selector, host in panels:
+                    trigger = page.query_selector(".cards .card " + selector)
+                    self.assertIsNotNone(
+                        trigger, "no %s on a card at %dpx" % (selector, width))
+                    trigger.click()
+                    page.wait_for_timeout(320)
+                    seen = page.evaluate("""(id) => {
+                      const el = document.getElementById(id);
+                      const box = el.getBoundingClientRect();
+                      return { open: !el.hidden,
+                               fits: box.left >= 0 && box.right <= innerWidth
+                                     && box.top >= 0 && box.bottom <= innerHeight,
+                               w: Math.round(box.width) };
+                    }""", host)
+                    where = "%s at %dx%d" % (selector, width, height)
+                    self.assertTrue(seen["open"], "the panel did not open, " + where)
+                    self.assertGreater(seen["w"], 0, "the panel is empty, " + where)
+                    self.assertTrue(seen["fits"], "the panel is off screen, " + where)
+                    page.keyboard.press("Escape")
+                    page.wait_for_timeout(180)
+
+                # And the row mark, on the surface a card actually has.
+                page.click(".cards .card .card-trip")
+                page.wait_for_timeout(280)
+                self.assertTrue(
+                    page.eval_on_selector(
+                        ".cards .card", "e => e.classList.contains('marked')"),
+                    "tapping a card does not mark it at %dpx" % width)
+            finally:
+                page.close()
+
 
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))

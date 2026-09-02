@@ -501,7 +501,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   in the money block, running the pointer down that column to compare prices
   opened a dialog on every row it crossed. Keep the click half regardless of
   `hoverOpens`: hover does not exist on a touch screen and this page is built
-  to work on a phone in a dive shop. Each trigger is a `<button>` with
+  to work on a phone in a dive shop. **And they are wired on `.shell`, not on
+  the `tbody`** — every listener in `hoverPanel` hung off `#body`, which below
+  760px is `display:none`, so on a phone not one of the three panels was
+  connected to anything and the fee bill, the cabin ladder and the entry bar
+  were all dead. Nothing looked wrong: a card cell is the same column's
+  renderer, so the buttons rendered exactly right and only the clicks went
+  nowhere, which is how *the three panel triggers come across working* stayed
+  true of everything except the part that makes them work. The shell is the
+  one box holding both row hosts. The row mark had the same bug twice — the
+  same `tbody`, and `closest("tr.row")` where a card is `article.card.row` —
+  so it matches `.row[data-id]`, the class and the attribute both layouts
+  write. Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
   **one div filled on demand** — nothing is lazily fetched here, so anything
   written per row ships 1,122 times. `rowFor` rebuilds the row rather than
