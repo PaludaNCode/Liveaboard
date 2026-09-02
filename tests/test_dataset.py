@@ -2263,10 +2263,23 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
     def test_a_lone_advertised_price_says_whether_two_sellers_quote_it(self):
         """One figure in that column means three different things -- both
         sellers quote it, PADI quotes it and cannot be totalled, or nobody
-        else was asked -- and they printed identically."""
+        else was asked -- and they printed identically.
+
+        It said so in a `2 sellers` mark beside the figure and now says so on
+        the figure, because three columns had each grown that same phrase for
+        three different facts. The mechanism is what moved; the distinction is
+        what may not be lost, so this names the branch rather than the mark.
+        """
         app = self.source()
-        self.assertIn("function whoAdvertised(", app)
-        self.assertIn("whoAdvertised(d, row)", app)
+        self.assertIn("function advertisedNote(", app)
+        self.assertIn("advertisedNote(d, row)", app)
+        # The two cases it tells apart, still told apart: PADI quoting the same
+        # figure, and PADI quoting a different one.
+        self.assertIn("PADI Travel advertises this berth at the same price", app)
+        self.assertIn("PADI Travel advertises this berth at \" + eur(d.padi)", app)
+        # And it reaches the reader: a title on the figure, not a dropped string.
+        self.assertIn("var why = advertisedNote(d, row);", app)
+        self.assertIn('figure = \'<span title="\'', app)
 
 
 class TestThePageIsWhatItsDataBuilds(unittest.TestCase):

@@ -384,33 +384,31 @@
      and "€2,371" from the only one anybody asked are not the same claim, and a
      reader had to reach column seventeen to tell them apart.
 
-     Marked, not columned, and only on the two cases a reader can act on: the
-     Total already carries `2 sellers` for a span, and this says the same word
-     about the berth. The third case is the plain unmarked number, which is what
-     the rest of the page means by one seller.
+     Said on hover, not in a column and no longer in a word beside the figure:
+     three columns had each grown a `2 sellers` mark for three different facts,
+     so one row could state the phrase twice and mean something else each time.
+     The third case has nothing on it, which is what the rest of the page means
+     by one seller.
 
      Nothing here is recomputed: `d.padi` and `row.padi` are the same two keys the
      Total and the Seller column branch on. A second derivation would be a
      second answer to "who priced this". */
-  function whoAdvertised(d, row) {
+  function advertisedNote(d, row) {
     if (d.padi == null) return "";
     if (row && row.padi) {
       /* Both bills add up, so the pair beside this is genuinely two sellers'
-         and the Total's own marker already says so. Saying it twice on one row
-         is noise. */
+         and the fee panel shows each of them. Nothing to add here. */
       return "";
     }
     var same = Math.round(d.padi) === Math.round(d.base);
-    return '<span class="varies" title="' + esc(
-      same
-        ? "PADI Travel advertises this berth at the same price. It does not " +
-          "publish a complete set of required extras for this trip, so there " +
-          "is a second price and no second total — open the row for both."
-        : "PADI Travel advertises this berth at " + eur(d.padi) + ". It does " +
-          "not publish a complete set of required extras for this trip, so " +
-          "the two berth prices are not a comparison of two bills — open the " +
-          "row for what each seller does state."
-    ) + '">2 sellers</span>';
+    return same
+      ? "PADI Travel advertises this berth at the same price. It does not " +
+        "publish a complete set of required extras for this trip, so there " +
+        "is a second price and no second total — open the row for both."
+      : "PADI Travel advertises this berth at " + eur(d.padi) + ". It does " +
+        "not publish a complete set of required extras for this trip, so " +
+        "the two berth prices are not a comparison of two bills — open the " +
+        "row for what each seller does state.";
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -864,12 +862,12 @@
     /* The entry bar, which decides whether a row is a trip you can book at all.
      *
        It had a column of its own once and lost it, for three reasons recorded
-       where the expanded row prints the same fact. Two of them were answered by
+       where the expanded row prints the same fact. The first is answered by
        printing the pair rather than the level: it is no longer "the same three
        words on most rows" (seventeen values, the largest 26% of rows, against
-       three and 47%), and the disagreement marker is the `varies` footnote the
-       Total already uses for the same fact -- two sellers who do not agree --
-       rather than a second pill that looked like the Disclosure one beside it.
+       three and 47%). The second was that its disagreement marker looked like
+       the Disclosure pill beside it; there is no marker at all now, and the
+       sentence it stood for is in the panel the bar opens.
 
        The third was width, and that is answered by where it sits: after Dive
        sites, so on every layout below 1700px it falls behind the price block
@@ -883,20 +881,19 @@
       show: function (d, i) {
         var text = entryText(i);
         if (!text) return '<span class="dim">—</span>';
-        var req = i.requirements;
-        /* Named for what it is rather than for which way it went: the reader
-           who wants to know which seller said what has the note in the hover
-           and the whole sentence in the expanded row. */
-        var split = req.notes && req.notes.indexOf("Sources disagree") >= 0
-          ? '<span class="varies" title="' +
-            esc(req.notes).replace(/"/g, "&quot;") + '">2 sellers</span>'
-          : "";
-        /* The stated requirement in full, on hover or click. It was the head
+        /* No disagreement marker beside the bar. It said `2 sellers` on 25
+           rows in 120 -- the same two words the two money columns were using
+           for two other facts -- and the sentence it abbreviated is already
+           printed in full, under its own heading, in the panel this button
+           opens. A word on the row that only points at the panel is a word the
+           panel does not need.
+
+           The stated requirement in full, on hover or click. It was the head
            of the fee dropdown, which is the wrong home for it twice over: it
            is not a fee, and it was reachable only by opening a bill (#149). */
         return '<button class="entry-open" type="button" data-entry="' + esc(i.id) +
           '" aria-expanded="false" aria-haspopup="dialog">' + esc(text) +
-          '<span class="caret" aria-hidden="true">▾</span></button>' + split;
+          '<span class="caret" aria-hidden="true">▾</span></button>';
       } },
     /* The berth price of whichever seller's bill this row is printing. It read
        liveaboard.com's unconditionally, which on a row won by PADI put two
@@ -915,11 +912,22 @@
       show: function (d, i, m, row) {
         var b = best(row);
         var figure = b ? sellerPair(b.baseLo, b.baseHi) : eur(d.base);
-        /* Both markers under the figure rather than beside it. Inline, the two
-           of them set this column's width on every row in the table -- 164px
-           for a figure that needs 96 -- and neither is read down the column
-           the way the price is. */
-        var marks = whoAdvertised(d, row) + saleTag(d);
+        /* The second seller's berth price, on the figure it qualifies rather
+           than in a word beside it. It read `2 sellers` on 454 rows, which is
+           two words of chrome on two fifths of the table to say something the
+           expanded row says in a sentence -- and said it in the same words as
+           the Total's own marker, so one row could carry the phrase twice
+           about two different facts. */
+        var why = advertisedNote(d, row);
+        if (why) {
+          figure = '<span title="' + esc(why).replace(/"/g, "&quot;") + '">' +
+            figure + "</span>";
+        }
+        /* The sale tag stays under the figure rather than beside it: inline it
+           set this column's width on every row in the table -- 164px for a
+           figure that needs 96 -- and it is not read down the column the way
+           the price is. */
+        var marks = saleTag(d);
         return figure + (marks ? '<span class="marks">' + marks + "</span>" : "");
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
@@ -962,31 +970,30 @@
         var split = '<span class="split" title="' + SPLIT_TITLE + '">' +
           sellerSpan(b.baseLo, b.baseHi) + ' <i>+</i> ' +
           sellerSpan(b.laterLo, b.laterHi) + '</span>';
-        /* The span is the answer, so the marker only has to name its cause.
-           It sits on the number rather than in a column of its own because it
-           qualifies this number: €1,757–2,057 is not an operator quoting a
-           range, it is two sellers who do not agree, and those are different
-           facts that would otherwise print identically. */
-        var varies = b.both && b.cheaper !== "same"
-          ? '<span class="varies" title="Two sellers price this sailing and ' +
-            'they differ by €' + Math.round(b.varies).toLocaleString("en-IE") +
-            '. Both are shown; the Sellers column says which end is whose. ' +
-            'They disclose at different resolutions -- liveaboard.com states ' +
-            'one fee figure per boat, PADI Travel one per itinerary -- so ' +
-            'neither end is the price.">2 sellers</span>'
+        /* The span *is* the answer, and it no longer says so in words.
+           €1,757–2,057 is not an operator quoting a range, it is two sellers
+           who do not agree -- but the two words that used to say that sat on
+           the row and read as a value of their own, in the same phrase the
+           Advertised column used for a different fact. What names the cause
+           now is the row itself: the Seller column says which end is whose and
+           the fee panel prints both bills. This is the sentence, on the figure
+           it qualifies. */
+        var why = b.both && b.cheaper !== "same"
+          ? "Two sellers price this sailing and they differ by €" +
+            Math.round(b.varies).toLocaleString("en-IE") +
+            ". Both are shown; the Seller column says which end is whose. " +
+            "They disclose at different resolutions — liveaboard.com states " +
+            "one fee figure per boat, PADI Travel one per itinerary — so " +
+            "neither end is the price."
           : "";
-        /* The marker goes on the split line rather than beside the figure.
-           Inline it set the column's width on every row -- the widest row in
-           the table is a two-seller ranged total carrying `+ tips` and this,
-           and a column is as wide as its widest row. Under the figure it
-           qualifies the same number and costs the column nothing. */
-        return "<b>" + sellerSpan(b.lo, b.hi) + "</b>" +
+        return "<b" + (why ? ' title="' + esc(why).replace(/"/g, "&quot;") + '"'
+                            : "") + ">" + sellerSpan(b.lo, b.hi) + "</b>" +
           (m.tips === "unpriced" || m.tips === "extra"
             ? '<span class="plus" title="The operator lists crew tips under ' +
               'its own Optional extras, so they are not in this total.">' +
               ' + tips</span>'
             : "") +
-          split.replace("</span>", varies + "</span>");
+          split;
       } },
     /* What divers actually compare on, and the reason price per night is not
        here: two denominators over the same total, and only one of them is the
