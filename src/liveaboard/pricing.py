@@ -412,14 +412,25 @@ def padi_lines(
     default -- so PADI wins every row for a reason that has nothing to do with
     PADI. Leave them out of both and the column stops comparing the number the
     page is about.
+
+    **PADI's own mandatory lines, and only those.** This used to take PADI's
+    whole book and add the vessel's non-mandatory rows to it, which put the
+    gangway charges in twice: PADI states nitrox and gear hire in its optional
+    disclosure as well, so Serenity's PADI bill carried 35 of nitrox twice and
+    210 of gear twice. It was every one of the 179 trips with a PADI bill --
+    526 of 1,122 departures -- and rental gear is on by default, so half the
+    page was quoting a second hire nobody would pay. Exactly the thing the
+    paragraph above says this does not do; it just never filtered the side it
+    was keeping.
     """
     if not itinerary.padi_fees_complete:
         return None
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    theirs = [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
     shared = [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
     return [
         _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
-        for fee in _sorted_fees(list(itinerary.padi_fees) + shared)
+        for fee in _sorted_fees(theirs + shared)
     ]
 
 
