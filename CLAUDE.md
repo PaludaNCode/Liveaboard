@@ -536,16 +536,36 @@ Break these and the site starts lying quietly rather than failing loudly.
   in auto layout it becomes the column's *preferred* width, so `.trip` took
   440px at every size and made the table wider at 1300 than it was before.
   **And above 1700px the table takes some of that room rather than leaving all
-  of it beside itself** — 13px of horizontal padding against 8, 9px vertical
-  against 5, rows at 55px against 47, and the two columns truncated at every
-  width (the trip name and the reefs) 76px and 38px wider. The density was set
-  by the narrowest window this has to work in and then applied to the widest.
-  1700 is a number derived from the table's own content width, which is the
-  #150 mistake, so it is guarded rather than trusted: the roomier table is
-  about 1,499px against a 1,552px shell, and the suite asserts at 1700 and up
-  that it still fits. The block sits at the *end* of the table's rules,
+  of it beside itself**, in two steps, because there are two things worth
+  buying and one window that only affords the first. At **1700** the two
+  columns truncated at every width — the trip name and the reefs — get room to
+  be truncated less, and nothing else moves, so that step costs the table no
+  rows. At **1900** the density follows: 13px of horizontal padding against 8,
+  9px vertical against 5, rows at 55px against 47, and both columns get the
+  rest of theirs — the reefs at 240px against the 112 a laptop gives them. The
+  density was set by the narrowest window this has to work in and then applied
+  to the widest. Both are numbers derived from the table's own content width,
+  which is the #150 mistake, so they are guarded rather than trusted: about
+  1,510px and 1,718px against shells of 1,552 and 1,752, and the suite asserts
+  at each step and above that that step still fits. It was **one** step at
+  1700 while the roomier table measured 1,499; three columns then stopped
+  stacking their second line and that is 141px 1700px of window no longer
+  holds. Splitting the step is what keeps 1700–1900 from falling all the way
+  back to the laptop table. The blocks sit at the *end* of the table's rules,
   because a media query adds no specificity and a `.trip` width written after
-  it wins at every size — which is how it shipped doing nothing, once.
+  them wins at every size — which is how it shipped doing nothing, once.
+- **Three cells read as one value each, so none of them stacks.** Places,
+  Seller and the entry bar were each stacked to keep a narrow column narrow,
+  and each bought that with a second line on most of the rows in the table:
+  row height is paid on 1,122 rows and column width once, out of the spacer.
+  Each pair is also one claim rather than two — "0" over "at this price" is a
+  count and its unit, "liveaboard" over "PADI" is the two sellers named, and a
+  bar over "2 sellers" is one fact with its own footnote. The entry bar is the
+  one to read the rule off: its mark is a **sibling of the button**, so
+  `white-space` on the cell never governed it and `display:flex` making the
+  button a block box is what put the mark on its own line. `test_layout`
+  counts the line boxes in those three cells at a width in each of the table's
+  three regimes; no source string about wrapping would have caught it.
 
 - **The money is on screen at rest, and on a phone the rows are cards.**
   `MONEY_FOLD` took columns off the front of the row until the Total fit, and

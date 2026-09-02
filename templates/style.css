@@ -887,19 +887,30 @@ td.sites > span {
 td.trip .t-name {
   display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-/* The entry bar. Bounded for the same reason and in the same way as the two
-   above: the phrase is at most "Advanced + 50 dives", which is 105px at this
-   size, and the width is stated so auto table layout treats it as binding
-   rather than as a suggestion. Dim and small like Dive sites, because it
-   qualifies the trip rather than pricing it -- the money is what this column
-   must not compete with. */
+/* The entry bar, on one line -- bar and disagreement marker together -- and
+   sized by its own content rather than by a number typed here.
+ *
+   It was 78px with the marker stacked underneath, which kept the column
+   narrow at the price of a second line on the 25 rows in 120 that carry one:
+   the bar and "2 sellers" are one statement about one fact, and split across
+   two lines the second reads as a value of its own. Together they are 111px
+   in the roomy regime, and the 33px is bought back where the room is -- the
+   spacer beside the table, not another column.
+
+   No stated width, because the phrase is the column: `nowrap` plus
+   `width:auto` lets auto table layout size it to the longest bar the fleet
+   publishes and re-size when that changes. A typed number here would be the
+   mistake #150 was -- a figure derived from data this file cannot see. That
+   is safe on this column and not on Dive sites, whose list is unbounded;
+   this one has seventeen values and they are short.
+
+   Dim and small like Dive sites, because it qualifies the trip rather than
+   pricing it -- the money is what this column must not compete with. */
 .entry-col {
-  white-space:nowrap; width:78px; min-width:70px; max-width:78px;
+  white-space:nowrap; width:auto;
   color:var(--ink-dim); font-size:11px;
 }
-/* The disagreement marker under the bar rather than beside it, so seventeen
-   short values are not sized by the two words that qualify some of them. */
-td.entry-col .varies { display:block; margin:1px 0 0; vertical-align:baseline; }
+td.entry-col .varies { margin-left:.45em; }
 
 .pill {
   font-size:10px; text-transform:uppercase; letter-spacing:.05em;
@@ -915,11 +926,14 @@ td.entry-col .varies { display:block; margin:1px 0 0; vertical-align:baseline; }
 }
 .unstated.partial { color:var(--warn); }
 
-/* One seller per line. Two links side by side were 146px of a column whose
-   longest single link is 78 -- and they are two destinations rather than one
-   sentence, so a line each is what they are. */
+/* Both sellers on one line. A line each was 93px against the 135 the pair
+   takes side by side, and it bought that width with a second line on the 68
+   rows in 120 that both sellers list -- the majority of the table. They are
+   two destinations rather than one sentence, which is what the gap between
+   them says; it does not need a line break to say it. */
 td.source, .cm.source { line-height:1.35; }
-td.source a { display:block; white-space:nowrap; font-size:11px; }
+td.source a { display:inline-block; white-space:nowrap; font-size:11px; }
+td.source a + a { margin-left:8px; }
 
 .pill.open { color:var(--ok); }
 .pill.few { color:var(--warn); }
@@ -1022,25 +1036,55 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    5px padding and 47px rows, with a thousand pixels of nothing beside them.
    Crammed, and for no reason: the room was there.
 
-   So above the width at which the roomier table still fits, it takes it: 13px
-   of horizontal padding instead of 8, 9px of vertical instead of 5, and the
-   two columns that are truncated at every width -- the trip name and the
-   reefs -- get 76px and 38px more to be truncated less. Rows go from 47px to
-   55. What is left over still goes to the spacer, so the money block keeps
-   the alignment the column above bought it.
+   So above the width at which the roomier table still fits, it takes it --
+   and it does so in two steps rather than one, because there are two things
+   worth buying and one window that only affords the first.
 
-   **1700px is a number derived from the table's own content width**, which is
-   the mistake #150 was, so it is guarded rather than trusted: the roomier
-   table measures about 1,499px and the rail takes 148, so the breakpoint has
-   about 50px of margin, and `test_layout` asserts at 1700 and up that the
-   table still fits its shell. If the fleet's names grow enough to eat that
-   margin the suite goes red rather than the Total going off the edge.
+   **The reefs come first, at 1700.** The trip name and the dive-site list are
+   the two columns truncated at every width, and a window with a hundred pixels
+   of nothing beside the table can pay for some of that. Nothing else changes
+   here: the padding and the row height stay at their laptop values, which
+   means this step costs the table no rows.
+
+   **The density follows, at 1900**, along with the rest of both columns: 13px
+   of horizontal padding instead of 8, 9px of vertical instead of 5, and the
+   reefs at 240px against the 112 a laptop gives them. Rows go from 47px to 55.
+   What is left over still goes to the spacer, so the money block keeps the
+   alignment the column above bought it.
+
+   **Both numbers are derived from the table's own content width**, which is
+   the mistake #150 was, so they are guarded rather than trusted: the first
+   table measures about 1,510px and the second about 1,718, the rail takes 148,
+   and `test_layout` asserts at each step and above that the table still fits
+   its shell. If the fleet's names grow enough to eat the 40-odd pixels of
+   margin either has, the suite goes red rather than the Total going off the
+   edge.
+
+   It was one step at 1700, giving both the density and the wide columns, while
+   the roomier table measured 1,499. Three columns then stopped stacking their
+   second line -- Places, Seller and the entry bar, each of which was buying a
+   narrow column with a second line on most of the rows in the table -- and
+   that is 141px the table now needs and 1700px of window no longer holds.
+   Splitting the step is what keeps 1700 to 1900 from falling all the way back
+   to the laptop table: it gets the reefs, which is what those windows can
+   afford, rather than nothing at all.
 
    And it sits at the *end* of the table's rules rather than beside them: a
    media query adds no specificity, so a `.trip` width written after this
    block would quietly win at every size and this would look like it had not
    been written at all. It did, for one run. */
 @media (min-width: 1700px) {
+  /* What 40px of margin buys at this width, spent on the two columns that are
+     cut at every width. The reefs get the larger share and end up wider here
+     than the single step used to make them; the trip name pays for it, and is
+     the right one to pay because it is a name with the whole of it in the
+     cell's own tooltip, where the reef list is the data the site filter
+     works on. */
+  .trip  { width:180px; min-width:178px; max-width:186px; }
+  .sites { width:190px; min-width:186px; max-width:196px; }
+}
+
+@media (min-width: 1900px) {
   thead tr:not(.band) th, tbody td {
     padding-top:9px; padding-bottom:9px; padding-left:13px; padding-right:13px;
   }
@@ -1056,7 +1100,13 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   }
   thead tr.band th { padding-top:6px; padding-bottom:5px; }
   .trip  { width:230px; min-width:200px; max-width:240px; }
-  .sites { width:170px; min-width:150px; max-width:176px; }
+  /* The reefs take the largest single share of the room this block hands
+     out. At 170px the clamp was cutting 60 of the first 120 rows -- half the
+     table reading "thistlegorm · abu nuhas · ras..." on a screen with 273px
+     of nothing beside it. At 240 it cuts 25. The list is the one cell whose
+     length is the operator's rather than the format's, so it is the one that
+     can actually spend width; the money columns cannot. */
+  .sites { width:240px; min-width:220px; max-width:246px; }
   .sub { line-height:1.4; }
 }
 
@@ -1349,9 +1399,11 @@ a { color:var(--accent); }
     margin-top:2px; padding-top:5px; border-top:1px solid var(--rule);
     font-size:11px; line-height:1.3;
   }
-  /* Stacked in the table because a column is narrow; side by side here
-     because a card's meta line is not. */
-  .card .berths { flex-direction:row; gap:.3em; align-items:baseline; }
+  /* The same row the table draws now. Kept rather than dropped: the table's
+     rule is a table decision and a card is not a narrow column, so the two
+     agreeing here is a coincidence rather than a dependency. */
+  .card .berths { flex-direction:row; gap:.3em; align-items:baseline;
+                  justify-content:flex-start; }
   .card .marks { display:inline-flex; margin:0; }
   /* Each fact keeps the class its table cell had, so the panel triggers, the
      colours and the sold-out treatment all arrive without a second set of
@@ -1549,9 +1601,16 @@ a { color:var(--accent); }
    berth count does: the ochre on a fee total and the level on an entry bar are
    what the column is read for. */
 .fees-open:hover .later, .fees-open[aria-expanded="true"] .later { color: inherit; }
-/* Not a money column, so it is not set in the mono face and it wraps: the
-   longest bar in the fleet is "Advanced + 50 dives". */
-.entry-open { font-family: var(--font-sans); white-space: normal; }
+/* Not a money column, so it is not set in the mono face. And not a block: at
+   `display:flex` the button is a block box whatever else it is, so the
+   "2 sellers" mark after it -- a sibling of the button, not a child -- had
+   nowhere to go but a line of its own, whatever the cell's `white-space` said.
+   Content-sized and inline, the pair sits on one line and the column measures
+   itself around it. */
+.entry-open {
+  font-family: var(--font-sans); white-space: nowrap;
+  display: inline-flex; width: auto; vertical-align: baseline;
+}
 .berths .n { font-weight: 600; }
 /* Zero is the only one worth alarming about, and it is the one this site
    exists to catch: a price on the row that nothing is selling at. */
@@ -1559,11 +1618,15 @@ a { color:var(--accent); }
 .berths .n.low  { color: var(--warn); }
 .berths .n.many { color: var(--ok); }
 .berths:hover .n, .berths[aria-expanded="true"] .n { color: inherit; }
-/* The count over its word rather than beside it. Side by side, "20 aboard"
-   and "0 at this price" sized the column at 101px for a figure that needs 30
-   -- and the word is a label on the number rather than a second value, which
-   is what stacking says. */
-.berths { flex-direction: column; gap: 0; align-items: flex-end; }
+/* The count beside its word, on one line. Stacked, this was 96px against the
+   101 the pair needs side by side -- five pixels of column for a second line
+   on every row of the table, which is the wrong side of that trade: the row
+   height is paid on all 1,122 rows and the width is paid once, out of the
+   spacer. "0 at this price" and "20 aboard" are each one claim and read as
+   one. Right-justified, because the figure is what the column is scanned
+   down and the words after it are of two different lengths. */
+.berths { flex-direction: row; gap: .3em; align-items: baseline;
+          justify-content: flex-end; }
 .berths .lbl {
   font-family: var(--font-sans); font-size: .78em; color: var(--ink-faint);
   line-height: 1.25;
