@@ -1355,6 +1355,124 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                 page.close()
 
 
+    def test_a_phone_bill_needs_no_sideways_drag(self) -> None:
+        """The fee table's five columns want 460px and a phone panel has 353.
+
+        So the bill opened with its tier and its provenance past the right
+        edge, and reading them meant dragging the table inside its own
+        `.fee-scroll`: 107px of travel in a box narrow enough that a flick
+        reaching the end handed itself to the panel behind. Below 760px a fee
+        line is stacked instead — the money beside what it is for, the tier
+        and the note under it — so nothing in the panel scrolls sideways at
+        all.
+
+        Measured on the panel's own boxes rather than read off the
+        stylesheet: the claim is geometry, and the row that would break it is
+        one long operator name pushing the amount past the edge.
+
+        The second seller's bill is a second `table.fees` in the same panel,
+        so a bill with two of them is what this opens: a rule that reaches
+        only the first table is a rule that fixes half the panel.
+        """
+        for width, height in ((320, 640), (360, 640), (390, 844), (430, 932)):
+            page = self.open(width, height)
+            try:
+                found = page.evaluate("""() => {
+                  const opens = [...document.querySelectorAll('.cards .card .fees-open')];
+                  for (const open of opens) {
+                    open.click();
+                    if (document.querySelectorAll('#feePanel table.fees').length > 1)
+                      return true;
+                  }
+                  return false;
+                }""")
+                self.assertTrue(found, "no two-seller bill to open at %dpx" % width)
+                page.wait_for_timeout(320)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('feePanel');
+                  const wide = [...panel.querySelectorAll('*')]
+                    .filter(el => el.scrollWidth > el.clientWidth + 1)
+                    .map(el => String(el.className) + ' ' + el.clientWidth +
+                               '->' + el.scrollWidth);
+                  const right = Math.round(panel.getBoundingClientRect().right);
+                  const amounts = [...panel.querySelectorAll('.famt')]
+                    .map(el => Math.round(el.getBoundingClientRect().right));
+                  return { open: !panel.hidden, wide: wide,
+                           tables: panel.querySelectorAll('table.fees').length,
+                           right: right, past: amounts.filter(x => x > right).length,
+                           amounts: amounts.length };
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertTrue(seen["open"], "the bill did not open " + where)
+                self.assertGreater(seen["tables"], 1, "one bill only " + where)
+                self.assertGreater(seen["amounts"], 0, "no amounts " + where)
+                self.assertEqual([], seen["wide"],
+                                 "the bill scrolls sideways " + where)
+                self.assertEqual(0, seen["past"],
+                                 "%d amount(s) past the panel's edge %s"
+                                 % (seen["past"], where))
+            finally:
+                page.close()
+
+
+    def test_the_scroll_pays_for_one_host_and_the_other_catches_up(self) -> None:
+        """A page appended on scroll was parsed twice, once for nothing.
+
+        Both hosts are always filled — that is the contract that lets a
+        rotation cross the breakpoint with no redraw and `Ctrl+F` find
+        either — but below 760px `#body` is `display:none` and above it
+        `#cards` is, so half of every append was built inside the frame the
+        reader was waiting on, for a layout nobody was looking at.
+
+        So: the host on screen grows in the scroll, the other one a task
+        later, and `Ctrl+F` flushes both synchronously because a host a page
+        behind is the silent truncation the append exists to avoid. All three
+        halves need asserting — the split is invisible once it has settled,
+        which is exactly how it would come back.
+        """
+        for width, host, other in ((390, "cards", "body"), (1440, "body", "cards")):
+            page = self.open(width, 844)
+            try:
+                count = ("(id) => document.getElementById(id).children.length")
+                before = (page.evaluate(count, host), page.evaluate(count, other))
+                # Scroll to the trigger and read both hosts before the flush.
+                grew = page.evaluate("""(hosts) => {
+                  const [host, other] = hosts;
+                  const shell = document.querySelector('.shell');
+                  const n = id => document.getElementById(id).children.length;
+                  const was = [n(host), n(other)];
+                  shell.scrollTop = shell.scrollHeight;
+                  shell.dispatchEvent(new Event('scroll'));
+                  return { host: n(host) - was[0], other: n(other) - was[1] };
+                }""", [host, other])
+                where = "at %dpx" % width
+                self.assertGreater(grew["host"], 0,
+                                   "the host on screen did not grow " + where)
+                self.assertEqual(0, grew["other"],
+                                 "the off-screen host was filled in the "
+                                 "scroll " + where)
+                page.wait_for_timeout(200)
+                after = (page.evaluate(count, host), page.evaluate(count, other))
+                self.assertEqual(after[0], after[1],
+                                 "the hosts disagree after the flush " + where)
+                self.assertGreater(after[0], before[0],
+                                   "nothing was appended " + where)
+
+                # And find-in-page leaves neither host short.
+                page.keyboard.press("Control+f")
+                page.wait_for_timeout(60)
+                whole = page.evaluate("""() => {
+                  const n = id => document.getElementById(id).children.length;
+                  return [n('body'), n('cards')];
+                }""")
+                self.assertEqual(whole[0], whole[1],
+                                 "Ctrl+F left the hosts disagreeing " + where)
+                self.assertGreater(whole[0], after[0],
+                                   "Ctrl+F drew no more rows " + where)
+            finally:
+                page.close()
+
+
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
     unittest.main()

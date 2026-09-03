@@ -1721,9 +1721,14 @@
                     : " (" + line.fx.as_of + ")"));
       }
       if (line.note) prov.push(line.note);
-      return '<tr class="' + (on ? "" : "off") + '"><td>' + (on ? "▪" : "▫") +
-        "</td><td>" + esc(line.label) + '</td><td class="num">' + amount +
-        "</td><td>" + esc(line.tier) + '</td><td class="prov">' +
+      /* Each cell names itself. Below 760px a fee line is not a row of
+         columns and the stylesheet restacks these five -- addressed by name,
+         because a positional rule is a rule that silently moves the day a
+         sixth column is added. */
+      return '<tr class="' + (on ? "" : "off") + '"><td class="fmark">' +
+        (on ? "▪" : "▫") +
+        '</td><td class="flabel">' + esc(line.label) + '</td><td class="famt num">' +
+        amount + '</td><td class="ftier">' + esc(line.tier) + '</td><td class="prov">' +
         esc(prov.join(" · ")) + "</td></tr>";
     }).join("");
   }
@@ -1855,7 +1860,30 @@
      count changes -- "838 rows shown" still says 838. Only the moment of
      construction moves. */
   var PAGE_ROWS = 120;
+  /* And a much smaller step once it is being scrolled, because the two
+     answer different questions. The first page is paid before anything is on
+     screen, where 120 rows is what fills a desktop table. Every page after
+     it is paid *inside* a scroll, where what is felt is one frame's stall:
+     laying out a card costs about 1.4ms on a mid-range phone, so a page of
+     120 was a 190ms lurch every time the reader reached the bottom of one --
+     twelve frames, once per page, which is the stutter. 20 is one or two.
+     Total work is unchanged; the same rows arrive in smaller pieces, which
+     is the whole point, because a hitch is felt per page and not per row.
+     Twenty and not fewer: the append fires 600px from the end, so a step has
+     to add more than 600px of rows or the threshold is still met after it
+     and the next scroll event appends again. A table row is 47px and the
+     shortest card 143, so 13 rows clears it on the table and 5 on the
+     cards -- 20 is the smallest round step that clears both with room, which
+     is a number this file can derive rather than one measured off a screen
+     it cannot see (#150). */
+  var STEP_ROWS = 20;
   var drawn = 0;
+  /* How far each host is actually filled. `drawn` is what the page has
+     committed to showing; these two are the bookkeeping for filling the host
+     nobody is looking at afterwards -- see `appendPage`. `draw` writes both
+     hosts whole, so it sets both to `drawn` and any flush queued before it
+     becomes a no-op. */
+  var filled = { body: 0, cards: 0 };
   var lastRows = [];
   /* Module scope, not inside draw(): appending on scroll builds rows through
      the same renderRows() and has to give them the same pinned classes, or
@@ -1948,6 +1976,7 @@
       ? renderCards(rows, 0, target)
       : '<p class="empty">' + nothing + "</p>";
     drawn = Math.min(rows.length, target);
+    filled.body = filled.cards = drawn;
     afterDraw(rows);
   }
 
@@ -3714,18 +3743,46 @@
     });
   }
 
-  /* One more page into both hosts. They are drawn together and appended
-     together: a phone rotated to landscape crosses the breakpoint with no
-     redraw, and a table that had been scrolled would otherwise meet a card
-     list holding the first 120 rows. */
+  /* One more page into both hosts -- but the one on screen first, and the
+     other after the frame that shows it.
+     Both are still always filled, which is the contract: a phone rotated to
+     landscape crosses the breakpoint with no redraw, and a table that had
+     been scrolled would otherwise meet a card list holding the first page.
+     What changed is when the second one is paid. Below 760px `#body` is
+     `display:none` and above it `#cards` is, so half of every append was
+     parsed inside the scroll for a layout nobody was looking at: 30ms of the
+     190 a page of 120 cost on a mid-range phone, in the frame the reader was
+     waiting on. It is a `setTimeout` and not `requestAnimationFrame` --
+     rendering happens at the end of a frame, so a rAF callback stalls the
+     paint it was meant to get out of the way of.
+     `filled` rather than a queue of pending slices: each host records how far
+     it is filled and `fillRest` appends whatever it is behind by, so a flush
+     that runs late, twice, or after a `draw` that rebuilt both hosts is
+     harmless. Nothing here can leave a host short -- `drawEverything` flushes
+     synchronously, because `Ctrl+F` searching a host a task behind is the
+     silent truncation the whole append exists to avoid. */
+  var flushing = 0;
+  function fillRest(host) {
+    var n = drawn - filled[host];
+    if (n <= 0) return;
+    var render = host === "body" ? renderRows : renderCards;
+    document.getElementById(host).insertAdjacentHTML(
+      "beforeend", render(lastRows, filled[host], n));
+    filled[host] = drawn;
+  }
+
   function appendPage(count) {
     var n = Math.min(count, lastRows.length - drawn);
     if (n <= 0) return;
-    document.getElementById("body").insertAdjacentHTML(
-      "beforeend", renderRows(lastRows, drawn, n));
-    document.getElementById("cards").insertAdjacentHTML(
-      "beforeend", renderCards(lastRows, drawn, n));
     drawn += n;
+    fillRest(narrow.matches ? "cards" : "body");
+    if (!flushing) {
+      flushing = setTimeout(function () {
+        flushing = 0;
+        fillRest("body");
+        fillRest("cards");
+      }, 0);
+    }
   }
 
   /* Append the next page of rows as the table is scrolled. */
@@ -3733,7 +3790,7 @@
     if (drawn >= lastRows.length) return;
     var shell = this;
     if (shell.scrollTop + shell.clientHeight < shell.scrollHeight - 600) return;
-    appendPage(PAGE_ROWS);
+    appendPage(STEP_ROWS);
   }, { passive: true });
 
   /* Draw the rest of the rows the moment the browser's own find is opened.
@@ -3743,6 +3800,13 @@
      into. Cmd+F on a Mac, F3 on Windows, and "/" in Firefox's quick find. */
   function drawEverything() {
     appendPage(lastRows.length - drawn);
+    /* Both hosts now, not a task from now: the find bar is about to be typed
+       into and a host a page behind is a search of 120 rows out of 1,122
+       reported as a search of all of them. */
+    clearTimeout(flushing);
+    flushing = 0;
+    fillRest("body");
+    fillRest("cards");
   }
   window.addEventListener("keydown", function (event) {
     var find = (event.key === "f" || event.key === "F") && (event.ctrlKey || event.metaKey);
