@@ -146,14 +146,26 @@ permanent: a cache that stops expiring is a fleet that quietly shrinks.
 """
 
 
-def _barren(path: Path) -> tuple[set[str], dict[str, str]]:
-    """Vessels to skip this run, and the full record they came from."""
+def _barren(path: Path, recheck: bool = False) -> tuple[set[str], dict[str, str]]:
+    """Vessels to skip this run, and the full record they came from.
+
+    ``recheck`` skips nothing and keeps the record, which is the difference
+    between forcing a re-crawl and forgetting what the last one found. The
+    file's own note used to say *delete this file to force a full crawl*, and
+    deleting it does work -- but it throws away the dates the seven-day clock
+    runs on, so every vessel in it reads as never-checked rather than as
+    checked and re-checked today. The record is still maintained on the way
+    out: a vessel this run finds selling is dropped from it, one that is still
+    empty is re-stamped, and both of those need the record to exist.
+    """
     if not path.exists():
         return set(), {}
     try:
         record = json.loads(path.read_text(encoding="utf-8")).get("vessels") or {}
     except (OSError, ValueError):
         return set(), {}
+    if recheck:
+        return set(), record
     today = date.today()
     fresh = set()
     for slug, checked in record.items():
@@ -268,7 +280,12 @@ def cmd_scrape(args: argparse.Namespace) -> int:
     blocked = 0
 
     barren_path = Path(args.barren)
-    skip_vessels, barren_record = _barren(barren_path)
+    skip_vessels, barren_record = _barren(barren_path, recheck=args.recheck_all)
+    if args.recheck_all and barren_record:
+        print(
+            f"-- re-checking all {len(barren_record)} vessel(s) held back as selling "
+            f"nothing; the skip list is ignored this run, not discarded"
+        )
     if skip_vessels:
         print(
             f"-- skipping {len(skip_vessels)} vessel(s) that sold nothing this season "
@@ -386,7 +403,9 @@ def cmd_scrape(args: argparse.Namespace) -> int:
                     "note": (
                         "Vessels that published no departure when last fetched. "
                         "Skipped for a week to save the requests, then re-checked. "
-                        "Delete this file to force a full crawl."
+                        "Run `scrape --recheck-all` to visit them before then; "
+                        "deleting this file also works and loses the dates the "
+                        "week is counted from."
                     ),
                     "vessels": dict(sorted(barren_record.items())),
                 },
@@ -958,7 +977,12 @@ def main(argv: list[str] | None = None) -> int:
     scrape.add_argument("--archive", default=Path("data/archive.json"), type=Path)
     scrape.add_argument(
         "--barren", default=Path("data/barren.json"), type=Path,
-        help="cache of vessels selling nothing this season; delete to force a full crawl",
+        help="cache of vessels selling nothing this season",
+    )
+    scrape.add_argument(
+        "--recheck-all", action="store_true",
+        help="visit every vessel, including ones the skip list holds back, "
+             "without discarding the list",
     )
     scrape.add_argument(
         "--warnings", type=int, default=10, help="how many warnings to print"
