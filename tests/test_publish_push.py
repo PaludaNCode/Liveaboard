@@ -31,6 +31,7 @@ untouched by the seam.
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -56,6 +57,107 @@ def git(*args: str, cwd: Path, **kw) -> str:
 
 @unittest.skipUnless(shutil.which("git") and shutil.which("bash"),
                      "needs git and bash")
+class TestTheCarriedInputsLandWhereThePipelineReadsThem(unittest.TestCase):
+    """The handover has to arrive in `data/`, or the fetch is thrown away.
+
+    Every fetching job uploads paths under `data/`, so `upload-artifact@v4`
+    takes `data` as the least common ancestor and makes it the root of the
+    archive: an artifact of `data/candidate.json` contains `candidate.json`.
+    Downloaded without a `path:`, that unpacks at the workspace root, and
+    `promote` goes on reading the committed `data/candidate.json` beside it.
+
+    Which is not a hypothetical. Between 2026-08-31, when the shared tail was
+    introduced, and 2026-09-03, **not one carried input changed**: the crawl's
+    candidate stood at 08-30 while four daily refreshes, the PADI read, the
+    deals read and the cabin read all reported success. `git add data site`
+    found the tracked inputs untouched and the stray copies outside its two
+    paths, so each run committed a rebuild of the same dataset under
+    "no change to trips, prices or availability".
+
+    Nothing caught it and nothing could: from the outside a discarded reading
+    and a quiet day are the same commit. The three guards that police this
+    contract all ask whether a data commit *reaches the page*, and this one
+    did -- with stale data in it.
+
+    Both halves are asserted, because the fix is only correct while the
+    assumption under it holds: the download must name `data`, and every upload
+    feeding it must stay inside `data/`. An upload that adds a path outside it
+    would move the archive's root to the repository root and make `path: data`
+    wrong in the same silent direction.
+    """
+
+    WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
+
+    #: An `upload-artifact` step and the paths it lists. The artifact name
+    #: runs to the end of the line rather than to the first space: every
+    #: one of them ends in `${{ github.run_id }}`, and a `\S+` name stopped
+    #: at the first brace and matched no step at all -- this guard passed
+    #: on zero blocks before that was noticed, which is the same shape of
+    #: green-for-nothing it exists to prevent.
+    UPLOAD_BLOCK = re.compile(
+        r"name:[ \t]*([^\n]+?)[ \t]*\n"
+        r"[ \t]*path:[ \t]*\|[ \t]*\n"
+        r"((?:[ \t]+[^\s#][^\n]*\n)+)"
+    )
+
+    def publish(self) -> str:
+        return (self.WORKFLOWS / "publish.yml").read_text(encoding="utf-8")
+
+    def test_the_download_unpacks_into_data(self) -> None:
+        body = self.publish()
+        step = body[body.index("actions/download-artifact"):]
+        step = step[: step.index("- name:", 1)] if "- name:" in step[1:] else step
+        self.assertRegex(
+            step, r"(?m)^[ \t]*path:[ \t]*data[ \t]*$",
+            "publish.yml downloads the carried inputs without `path: data`, so "
+            "they unpack at the workspace root and promote reads the committed "
+            "copies instead",
+        )
+
+    def test_every_carried_upload_stays_inside_data(self) -> None:
+        """What `path: data` depends on. The artifact's root is the least
+        common ancestor of what was uploaded, so one path outside `data/`
+        silently moves it and the download lands a directory too high.
+
+        Counts what it inspected and asserts the count, because the first
+        version of this matched nothing: every artifact name ends in
+        `${{ github.run_id }}` and the pattern stopped at the first space.
+        A guard over an empty set is greener than one over a broken pipeline.
+        """
+        checked = 0
+        for workflow in sorted(self.WORKFLOWS.glob("*.yml")):
+            text = workflow.read_text(encoding="utf-8")
+            if "carry:" not in text or workflow.name == "publish.yml":
+                continue
+            carried = re.findall(r"carry:[ \t]*([^\n]+)", text)
+            for block in self.UPLOAD_BLOCK.finditer(text):
+                # The upload feeding the tail is the one whose artifact name is
+                # the `carry:` value; the snapshots upload is evidence, not
+                # input, and its paths may sit anywhere.
+                if not any(block.group(1) == c.strip() for c in carried):
+                    continue
+                for line in block.group(2).strip().splitlines():
+                    # The block runs on into the step's next key, which is
+                    # indented the same as a path entry. A path is a bare
+                    # value; `retention-days: 1` is not.
+                    if re.match(r"[\w-]+:", line.strip()):
+                        continue
+                    checked += 1
+                    with self.subTest(workflow=workflow.name, path=line.strip()):
+                        self.assertTrue(
+                            line.strip().startswith("data/"),
+                            "an upload feeding publish.yml reaches outside "
+                            "data/, which moves the artifact root and makes "
+                            "`path: data` land the inputs in the wrong place",
+                        )
+            self.assertTrue(
+                checked, f"{workflow.name} carries inputs and this guard found "
+                f"none of them; the pattern has stopped matching"
+            )
+        self.assertGreaterEqual(checked, 3, "far fewer carried paths than the "
+                                            "pipeline has; the pattern is stale")
+
+
 class TestTheRebaseReDerivesRatherThanKeepingItsStaleCopy(unittest.TestCase):
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())

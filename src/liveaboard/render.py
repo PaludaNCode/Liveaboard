@@ -28,7 +28,6 @@ from .pricing import (
     compute,
     itinerary_lines,
     mandatory_known,
-    overlapping_charges,
     padi_base_line,
     padi_lines,
     resolve_fees,
@@ -130,14 +129,6 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         second = padi_lines(itinerary, dataset.fx)
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
-            # And whether that bill can be added up at all. Written only where
-            # it cannot, like every other per-itinerary key: this is one boat.
-            clash = overlapping_charges(
-                [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
-                + [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
-            )
-            if clash:
-                itineraries[key]["padi_overlap"] = [code.value for code in clash]
 
         # Where the rows above came from, on the trips whose answer is not the
         # usual one. Written only where true: a key written per itinerary is a
@@ -169,17 +160,17 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # ones, and scoring it as such put the least forthcoming operators at
         # the top of the honesty ranking. See pricing.mandatory_known.
         mandatory = mandatory_known(itinerary, departure)
-        # Said something, and said it twice. A bundle naming a charge that is
-        # also its own line means the disclosure does not add up, which is the
-        # same verdict as a mandatory line with no figure -- so the page shows
-        # the berth price and no total. Written only where it fires.
-        clash = overlapping_charges(resolve_fees(itinerary, departure))
+        # A bundle naming a charge that is also its own line used to withhold
+        # the total here, as a third disclosure state beside these two. It is
+        # resolved on the line instead now -- `subsumed_by`, written by
+        # `pricing.subsumed_charges` where the bundle covers it -- because the
+        # question is which line carries the money and the source answers it.
+        # A per-departure key for one vessel's 17 rows went with it.
 
         entry: dict[str, Any] = {
             "id": departure.id,
             "fees_known": fees_known,
             "mandatory_known": mandatory,
-            **({"fee_overlap": [code.value for code in clash]} if clash else {}),
             "itinerary_id": itinerary.id,
             "boat_id": itinerary.boat_id,
             "start": departure.start.isoformat(),
@@ -548,9 +539,14 @@ def seller_gap(dataset: Dataset) -> dict[str, Any]:
     the data to somewhere near it.
     """
     def mandatory(lines: list[Any]) -> float:
+        # `subsumed_by` is excluded for the same reason the total excludes it:
+        # a charge a bundle on the same bill already covers is money this bill
+        # states once, so counting it here would make the two sellers differ
+        # by a figure neither of them charges.
         return sum(
             float(line.display.amount) for line in lines
             if line.tier is FeeTier.MANDATORY and line.display is not None
+            and line.subsumed_by is None
         )
 
     comparable = disagree = 0

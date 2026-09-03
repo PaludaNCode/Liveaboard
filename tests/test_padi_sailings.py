@@ -306,40 +306,50 @@ class TestComparison(unittest.TestCase):
             "%d shipped PADI bills charge a code more than once:\n  %s"
             % (len(offenders), "\n  ".join(offenders[:10])))
 
-    def test_no_shipped_bill_states_a_total_it_bills_twice(self) -> None:
+    def test_no_shipped_bill_counts_a_charge_a_bundle_beside_it_covers(self) -> None:
         """And the fleet-wide half of the bundle rule.
 
         The test above catches one code appearing twice. This catches the
         other shape: a bundle naming a charge that is *also* its own line, so
         the codes differ and the money does not. Seawolf Dominator is the one
-        boat doing it, on 17 departures, and the page withholds those totals
-        rather than adding the visa in twice.
+        boat doing it, on 17 departures, and its 250 of *Visa fees* sits inside
+        a 180-255 bundle whose title names it.
 
-        What is asserted is the consequence, not the count: every shipped bill
-        that still claims a total adds up without billing anything twice.
+        Asserted as the consequence on the shipped page rather than as a count
+        of boats: wherever `subsumed_charges` resolves a code, the line is
+        still there at its published figure, it carries the bundle that covers
+        it, and it is out of the arithmetic. `compute` is the authority both
+        halves come from, so the sum it produces has to match adding the lines
+        the page will count -- which is the drift this catches.
         """
-        from liveaboard.pricing import overlapping_charges, resolve_fees
+        from liveaboard.pricing import compute, resolve_fees, subsumed_charges
 
         dataset = published.dataset()
-        by_itinerary = {}
+        seen = 0
         for departure in dataset.departures:
             itinerary = dataset.itineraries[departure.itinerary_id]
-            clash = overlapping_charges(resolve_fees(itinerary, departure))
-            if clash:
-                by_itinerary.setdefault(
-                    itinerary.id, sorted(code.value for code in clash))
-
-        page = published.page()
-        for entry in page["departures"]:
-            stated = by_itinerary.get(entry["itinerary_id"])
-            if stated:
-                # Read, and read as saying something: the missing total has to
-                # carry this reason rather than one of the other two.
-                self.assertEqual(entry.get("fee_overlap"), stated, entry["id"])
-                self.assertTrue(entry["fees_known"], entry["id"])
-                self.assertTrue(entry["mandatory_known"], entry["id"])
-            else:
-                self.assertNotIn("fee_overlap", entry, entry["id"])
+            covered = subsumed_charges(resolve_fees(itinerary, departure))
+            breakdown = compute(itinerary, departure, dataset.fx)
+            lines = {line.code: line for line in breakdown.lines}
+            for code, bundle in covered.items():
+                seen += 1
+                self.assertIn(code, lines, departure.id)
+                self.assertEqual(lines[code].subsumed_by, bundle, departure.id)
+                self.assertFalse(lines[code].counted, departure.id)
+                self.assertTrue(lines[code].has_price, departure.id)
+                # The bundle that covers it is counted, or nothing is.
+                self.assertTrue(lines[bundle].counted, departure.id)
+            # A resolved bill is still a bill, which is the half a withheld
+            # total used to fail: every line the page counts, added up.
+            self.assertEqual(
+                round(float(breakdown.total.amount), 2),
+                round(sum(float(line.display.amount) for line in breakdown.lines
+                          if line.counted and line.display is not None
+                          and not line.included), 2),
+                departure.id)
+        self.assertTrue(
+            seen, "no shipped bill resolves an overlap any more -- if the "
+                  "source stopped publishing one, delete this guard on purpose")
 
     def test_an_incomplete_padi_book_yields_no_second_total(self) -> None:
         """The invariant, in the one place it can be broken silently.

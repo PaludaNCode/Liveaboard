@@ -66,6 +66,14 @@ class BreakdownLine:
     fx_rate: FxRate | None
     display_max: Money | None = None
     """High end of a quoted range, in display currency. ``None`` when fixed."""
+    subsumed_by: FeeCode | None = None
+    """The bundled charge on this same bill whose title names this one.
+
+    Set means the line is shown and not added: see :func:`subsumed_charges`.
+    ``counted`` is already ``False`` on such a line, so the arithmetic needs
+    nothing from this -- what it carries is *which* line covers it, because a
+    row saying a published charge is not counted has to name what covers it.
+    """
 
     @property
     def has_price(self) -> bool:
@@ -130,6 +138,8 @@ class BreakdownLine:
             out["included"] = True
         if self.toggle:
             out["toggle"] = self.toggle
+        if self.subsumed_by is not None:
+            out["subsumed_by"] = self.subsumed_by.value
         if self.note:
             out["note"] = self.note
         if self.fx_rate is not None:
@@ -271,32 +281,55 @@ def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
 _LIST_SEPARATOR = re.compile(r",| and |&", re.IGNORECASE)
 
 
-def overlapping_charges(fees: Iterable[FeeItem]) -> list[FeeCode]:
-    """Charges a bundle names that are also billed on their own line.
+def subsumed_charges(fees: Iterable[FeeItem]) -> dict[FeeCode, FeeCode]:
+    """Charges a bundle on the same bill already covers, and which bundle.
 
-    Seawolf Dominator, on all six of its itineraries. PADI publishes two
+    Seawolf Dominator, on all six of its published itineraries. PADI puts two
     entries in `mandatoryOnBoard` and we read both, faithfully:
 
         Visa fees                                                     250
         Visa, dive permit, taxes, marine park fees, harbour fee
         and fuel surcharges                                       180-255
 
-    The second names the first, so the total charged the visa twice. Probed
-    before anything was changed (`tools/probe_padi_mandatory.py`): they are
-    distinct catalogue items with different `extraId`, `kind` and `section`,
-    neither states a validity window, and the enums do not mark one a package
-    -- Galaxy files a package under the same `section` a bare component sits
-    under elsewhere. What separates them is the figure: every other vessel
-    pricing a visa alone prices it at 25-30, which is what an Egyptian visa
-    costs, and Seawolf's is 250, inside the range of its own package.
+    The second names the first, so a total that added both charged the visa
+    twice -- on 17 departures, on a vessel liveaboard.com does not list, so
+    PADI's book is the only fee book those rows have.
 
-    **So nothing is dropped.** Deleting a published mandatory charge on that
-    inference is the same failure as inventing one, and the site would be
-    quoting a total no disclosure states. What the finding supports is the
-    verdict this code already reaches for a mandatory line with no figure on
-    it: the bill does not add up, so no total is claimed. `mandatory_known`
-    asks whether the operator said anything; this asks whether what it said
-    can be added.
+    **The bundle is the charge and the component is a copy of it**, and that
+    is the source's own account rather than an inference about what a visa
+    ought to cost. Three readings, of the same seller's page:
+
+    1. The operator itemises the money in its own `whatsNotIncluded` prose, on
+       10 of the boat's 13 itineraries: *"Visa, dive permission and taxes 43
+       Euro ... Fee for marine parks: South: 80 Euro ... Fuel surcharge: 30
+       Euro per person ... Fee for marina Marsa Ghaleb 25 Euro"*. That is the
+       bundle, itemised, and its parts sum to the bundle's own 180-255. **No
+       Dominator itinerary states anything at 250 anywhere in that text.**
+    2. The visa is priced *inside* the 43: *"By prior stay in a hotel we will
+       cut from this amount 25 $ for the visa"*. So the standalone 250 is not
+       this operator's visa charge under any reading of its own words.
+    3. Seawolf Diving Safari's other hull settles what its visa is worth.
+       Seawolf Steel, same operator, publishes one mandatory entry -- *Dive
+       permission, taxes, Marine Park fee and harbor fee*, 185-255, the same
+       figures moving the same way by route -- and prices *Visa fees* at **30,
+       as an optional extra**. Same company, same seller, same season.
+
+    An earlier reading of this pair had only the figure to go on (every other
+    vessel pricing a visa alone prices it at 25-30) and stopped there, quite
+    rightly: `tools/probe_padi_mandatory.py` had established that both are
+    genuine catalogue items with different `extraId`, `kind` and `section`,
+    that neither states a validity window, and that the enums do not mark one
+    a package -- Galaxy files a package under the same `section` a bare
+    component sits under elsewhere. So the sum was withheld and both lines
+    kept. The prose and the sister ship are what that reading was missing, and
+    they answer the question it could not: which of the two is the money.
+
+    **So still nothing is dropped.** The line stays in the breakdown, priced,
+    with the bundle that covers it named beside it -- the same shape as an
+    included fee, which stays at zero rather than disappearing, and for the
+    same reason: deleting it would hide that the seller published it. What
+    changes is only that it is not added a second time, so the row states a
+    total again.
 
     Deliberately narrow, and conservative in the same direction throughout:
 
@@ -309,6 +342,10 @@ def overlapping_charges(fees: Iterable[FeeItem]) -> list[FeeCode]:
       project already reads fee labels with and a second copy of it would
       drift. A part it cannot place -- *dive permit*, *taxes* -- contributes
       nothing, so the rule under-fires rather than over-fires.
+
+    Across the fleet it resolves one code on one vessel and touches nothing
+    else: Hammerhead's *Park and Port Fees* beside a separate fuel surcharge
+    keeps both, as do the 40 bills pairing port fees with a fuel surcharge.
     """
     from .scrape.fees import classify_label
 
@@ -319,7 +356,7 @@ def overlapping_charges(fees: Iterable[FeeItem]) -> list[FeeCode]:
     ]
     alone = {fee.code for fee in priced}
 
-    found: dict[FeeCode, None] = {}
+    found: dict[FeeCode, FeeCode] = {}
     for fee in priced:
         named = {
             code
@@ -330,8 +367,8 @@ def overlapping_charges(fees: Iterable[FeeItem]) -> list[FeeCode]:
             continue
         for code in named & alone:
             if code != fee.code:
-                found[code] = None
-    return sorted(found, key=lambda code: code.value)
+                found.setdefault(code, fee.code)
+    return {code: found[code] for code in sorted(found, key=lambda c: c.value)}
 
 
 def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:
@@ -379,8 +416,22 @@ def base_line(departure: Departure, fx: FxTable) -> BreakdownLine:
     )
 
 
-def _fee_line(fee: FeeItem, nights: int, dives: int, fx: FxTable, active: Toggles) -> BreakdownLine:
-    """Resolve one fee into a display row: basis normalised, currency converted."""
+def _fee_line(
+    fee: FeeItem,
+    nights: int,
+    dives: int,
+    fx: FxTable,
+    active: Toggles,
+    subsumed_by: FeeCode | None = None,
+) -> BreakdownLine:
+    """Resolve one fee into a display row: basis normalised, currency converted.
+
+    ``subsumed_by`` is the one thing here that is not the fee's own property
+    but the bill's: a charge another line on the same bill already covers is
+    shown and not counted. Every caller that sums a set of fees resolves it
+    over **that** set -- see :func:`subsumed_charges` -- because the overlap
+    is a fact about one bill and the two sellers publish two.
+    """
     low, high = fee.span_for_trip(nights, dives)
 
     display = display_max = rate = None
@@ -397,11 +448,12 @@ def _fee_line(fee: FeeItem, nights: int, dives: int, fx: FxTable, active: Toggle
         display=display,
         display_max=display_max,
         included=fee.included,
-        counted=_is_counted(fee, active),
+        counted=_is_counted(fee, active) and subsumed_by is None,
         toggle=fee.toggle,
         provenance=fee.provenance,
         note=fee.note,
         fx_rate=rate,
+        subsumed_by=subsumed_by,
     )
 
 
@@ -424,8 +476,10 @@ def itinerary_lines(
     sailing that ever does price a fee differently keeps its own rows.
     """
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    covered = subsumed_charges(itinerary.fees)
     return [
-        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active,
+                  covered.get(fee.code))
         for fee in _sorted_fees(itinerary.fees)
     ]
 
@@ -499,8 +553,10 @@ def padi_lines(
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
     theirs = [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
     shared = [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
+    covered = subsumed_charges(theirs + shared)
     return [
-        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active,
+                  covered.get(fee.code))
         for fee in _sorted_fees(theirs + shared)
     ]
 
@@ -523,9 +579,12 @@ def compute(
         base=first.display,
     )
     breakdown.lines.append(first)
+    merged = resolve_fees(itinerary, departure)
+    covered = subsumed_charges(merged)
     breakdown.lines.extend(
-        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active)
-        for fee in _sorted_fees(resolve_fees(itinerary, departure))
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active,
+                  covered.get(fee.code))
+        for fee in _sorted_fees(merged)
     )
     return breakdown
 
