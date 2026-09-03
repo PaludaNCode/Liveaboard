@@ -1624,6 +1624,28 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                 self.assertTrue(
                     page.evaluate("(id) => document.getElementById(id).hidden", host),
                     "pressing close did not close the panel, " + where)
+
+                # And the other way out. A panel opened by *focus* is `peeked`
+                # rather than `held`, and the press-away handler used to ignore
+                # those: dismissed only by the pointer leaving the trigger,
+                # which on a touch screen never happens. Focus with no press
+                # after it is what a tap that does not resolve to a click
+                # leaves behind, and it left a dialog with no exit at all.
+                # A different row's trigger: closing sets `dismissed` on the
+                # one it closed, so that button deliberately does not reopen
+                # under the focus it is handed back.
+                page.eval_on_selector(
+                    ".cards .card:nth-of-type(2) " + selector, "el => el.focus()")
+                page.wait_for_timeout(280)
+                self.assertFalse(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "focus did not open the panel, " + where)
+                page.touchscreen.tap(200, 60)   # the masthead, well outside
+                page.wait_for_timeout(280)
+                self.assertTrue(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "pressing away did not close a panel opened by focus, "
+                    + where)
         finally:
             page.close()
 

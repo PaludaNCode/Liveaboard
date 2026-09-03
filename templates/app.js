@@ -3594,10 +3594,21 @@
       }
     });
 
+    /* Pressing away closes it, pinned or not.
+     *
+       The `held &&` on this was the other half of the stuck dialog. A panel
+       opened by *focus* is `peeked` rather than `held`, and a peeked one was
+       dismissed only by the pointer leaving the trigger -- which on a touch
+       screen never happens. So on a phone: tap a trigger, get a panel over
+       the list, and if the tap resolved to a focus without a click there was
+       no way out at all. Escape needs a keyboard, tapping the trigger again
+       is under the panel, and this handler ignored it.
+       Nothing wants a peeked panel to survive a press somewhere else, so the
+       state it is in was never the question. */
     document.addEventListener("click", function (event) {
-      if (held && !event.target.closest(selector) && !host.contains(event.target)) {
-        shut();
-      }
+      if (host.hidden) return;
+      if (event.target.closest(selector) || host.contains(event.target)) return;
+      shut();
     });
 
     /* Fixed positioning is relative to the viewport, so the panel has to be
