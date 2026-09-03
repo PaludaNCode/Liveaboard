@@ -2203,6 +2203,51 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
         self.assertIn("if (r.exemplar)", table)
         self.assertIn("It publishes no dates for the offer itself", table)
 
+    def test_padi_speaking_twice_about_one_sale_is_one_row(self):
+        """A run row's `sellers` comes from the departures, and both books feed
+        those -- so a boat PADI both marks down and advertises had its sale
+        stated twice, the second time as one sailing nested inside the first's
+        window at the same rate. All eight offers on the published fleet did
+        it. `promote` decides which offers are restatements (`in_run`) and puts
+        the campaign name on the run itself; the page's job is to skip the
+        second row and draw the name where it landed."""
+        app = self.source()
+        block = re.search(r"function salesRows\((.*?)\n  \}", app, re.S)
+        assert block, "salesRows() not found in app.js"
+        body = block.group(1)
+        self.assertIn(
+            "if (o.in_run) return;", body,
+            "a folded offer is drawing its own row again, nested inside the "
+            "run that already states it",
+        )
+        self.assertIn("names: r.offers || []", body)
+
+    def test_a_run_s_two_dates_are_a_window_and_say_so(self):
+        """`promote` splits a run where the discount stops, so From and To
+        bound a span in which every sailing is cut. They used to be the first
+        and last of everything discounted -- "03 May to 05 Jul" over a boat
+        whose four June weeks were at full price -- and the hover was the only
+        thing that admitted it."""
+        app = self.source()
+        table = app.split("function salesTable(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("Every sailing this boat runs between these", table)
+        self.assertNotIn(
+            "these are the first and last of them", table,
+            "the two dates are the ends of a list again rather than a window",
+        )
+
+    def test_the_strip_counts_boats_rather_than_rows(self):
+        """`on_sale.boats` is one row per run, so a boat whose discount stops
+        and starts again is two of them: counting rows said 22 boats over a
+        fleet of 19 on sale."""
+        app = self.source()
+        strip = app.split("function saleStrip(", 1)[1].split("\n  }", 1)[0]
+        self.assertNotIn(
+            "var boats = (sale.boats || []).length", strip,
+            "the boat count is a row count again",
+        )
+        self.assertIn("seen[row.boat] = 1", strip)
+
     def test_the_panel_states_what_it_could_not_read(self):
         """The counts stay on the page; the three paragraphs explaining them do
         not (#145). The invariant is that the panel states what it could not

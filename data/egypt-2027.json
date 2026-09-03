@@ -167283,7 +167283,8 @@
         "start": "2027-05-15",
         "end": "2027-05-18",
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/",
-        "nights": 3
+        "nights": 3,
+        "in_run": true
       },
       {
         "boat": "serenity",
@@ -167299,7 +167300,8 @@
         "start": "2027-05-15",
         "end": "2027-05-18",
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
-        "nights": 3
+        "nights": 3,
+        "in_run": true
       },
       {
         "boat": "all-star-red-sea",
@@ -167315,7 +167317,8 @@
         "start": "2027-05-24",
         "end": "2027-05-31",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       },
       {
         "boat": "grand-discovery",
@@ -167331,7 +167334,8 @@
         "start": "2027-06-05",
         "end": "2027-06-12",
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       },
       {
         "boat": "discovery-i",
@@ -167347,7 +167351,8 @@
         "start": "2027-06-19",
         "end": "2027-06-26",
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       },
       {
         "boat": "alsuraya",
@@ -167363,7 +167368,8 @@
         "start": "2027-07-10",
         "end": "2027-07-17",
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       },
       {
         "boat": "discovery-ii",
@@ -167379,7 +167385,8 @@
         "start": "2027-07-24",
         "end": "2027-07-31",
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       },
       {
         "boat": "royal-evolution",
@@ -167395,7 +167402,8 @@
         "start": "2027-08-19",
         "end": "2027-08-26",
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
-        "nights": 7
+        "nights": 7,
+        "in_run": true
       }
     ],
     "unmatched": [
@@ -167592,9 +167600,32 @@
         {
           "boat": "all-star-red-sea",
           "boat_name": "All Star Scuba Scene",
-          "sailings": 6,
+          "sailings": 5,
           "of": 17,
           "first": "2027-05-03",
+          "last": "2027-05-31",
+          "sellers": [
+            0,
+            1
+          ],
+          "read": [
+            "2026-08-31",
+            "2026-08-31"
+          ],
+          "pct": 20,
+          "offers": [
+            {
+              "title": "Save: 20%",
+              "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+            }
+          ]
+        },
+        {
+          "boat": "all-star-red-sea",
+          "boat_name": "All Star Scuba Scene",
+          "sailings": 1,
+          "of": 17,
+          "first": "2027-07-05",
           "last": "2027-07-05",
           "sellers": [
             0,
@@ -167609,16 +167640,37 @@
         {
           "boat": "alsuraya",
           "boat_name": "ALSURAYA",
-          "sailings": 15,
+          "sailings": 13,
           "of": 17,
           "first": "2027-05-01",
-          "last": "2027-08-21",
+          "last": "2027-07-24",
           "sellers": [
             0,
             1
           ],
           "read": [
             "2026-08-31",
+            "2026-08-31"
+          ],
+          "pct": 10,
+          "offers": [
+            {
+              "title": "Save 10%",
+              "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
+            }
+          ]
+        },
+        {
+          "boat": "alsuraya",
+          "boat_name": "ALSURAYA",
+          "sailings": 2,
+          "of": 17,
+          "first": "2027-08-14",
+          "last": "2027-08-21",
+          "sellers": [
+            0
+          ],
+          "read": [
             "2026-08-31"
           ],
           "pct": 10
@@ -167668,7 +167720,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 15
+          "pct": 15,
+          "offers": [
+            {
+              "title": "15% Early Bird",
+              "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+            }
+          ]
         },
         {
           "boat": "discovery-ii",
@@ -167685,7 +167743,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 15
+          "pct": 15,
+          "offers": [
+            {
+              "title": "15% Early Bird",
+              "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+            }
+          ]
         },
         {
           "boat": "grand-discovery",
@@ -167702,7 +167766,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 15
+          "pct": 15,
+          "offers": [
+            {
+              "title": "15% Early Bird",
+              "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
+            }
+          ]
         },
         {
           "boat": "hammerhead-ii",
@@ -167719,7 +167789,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 15
+          "pct": 15,
+          "offers": [
+            {
+              "title": "Save 15%",
+              "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
+            }
+          ]
         },
         {
           "boat": "iceberg",
@@ -167769,9 +167845,24 @@
         {
           "boat": "ocean-lovers",
           "boat_name": "Ocean Lovers",
-          "sailings": 17,
+          "sailings": 14,
           "of": 18,
           "first": "2027-05-01",
+          "last": "2027-07-31",
+          "sellers": [
+            0
+          ],
+          "read": [
+            "2026-08-31"
+          ],
+          "pct": 10
+        },
+        {
+          "boat": "ocean-lovers",
+          "boat_name": "Ocean Lovers",
+          "sailings": 3,
+          "of": 18,
+          "first": "2027-08-14",
           "last": "2027-08-28",
           "sellers": [
             0
@@ -167811,7 +167902,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 10
+          "pct": 10,
+          "offers": [
+            {
+              "title": "-10% early bird",
+              "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
+            }
+          ]
         },
         {
           "boat": "serenity",
@@ -167828,7 +167925,13 @@
             "2026-08-31",
             "2026-08-31"
           ],
-          "pct": 20
+          "pct": 20,
+          "offers": [
+            {
+              "title": "20% Early Bird",
+              "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+            }
+          ]
         },
         {
           "boat": "sinaistar",
