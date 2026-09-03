@@ -171183,7 +171183,7 @@
   "padi_berths_read": "2026-08-31",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
-    "read": "2026-08-31",
+    "read": "2026-09-03",
     "source": "padi.com",
     "url": "https://travel.padi.com/api/v2/travel/promotions/?country=110&country=120&date=2027-05-01&date=2027-06-01&date=2027-07-01&date=2027-08-01",
     "offers": [
@@ -171215,26 +171215,26 @@
         "quoted": 720.0,
         "quoted_was": 900.0,
         "currency": "EUR",
-        "start": "2027-05-15",
-        "end": "2027-05-18",
+        "start": "2027-05-18",
+        "end": "2027-05-21",
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
         "nights": 3,
         "in_run": true
       },
       {
-        "boat": "all-star-red-sea",
-        "boat_name": "All Star Scuba Scene",
-        "title": "Save: 20%",
+        "boat": "discovery-i",
+        "boat_name": "Discovery I",
+        "title": "15% Early Bird",
         "kind": "Discount %",
-        "value": 20.0,
-        "price": 1422,
-        "was": 1778,
-        "quoted": 1652.0,
-        "quoted_was": 2065.0,
-        "currency": "USD",
-        "start": "2027-05-24",
-        "end": "2027-05-31",
-        "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/",
+        "value": 15.0,
+        "price": 765,
+        "was": 900,
+        "quoted": 765.0,
+        "quoted_was": 900.0,
+        "currency": "EUR",
+        "start": "2027-06-05",
+        "end": "2027-06-12",
+        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
         "nights": 7,
         "in_run": true
       },
@@ -171249,44 +171249,11 @@
         "quoted": 1041.25,
         "quoted_was": 1225.0,
         "currency": "EUR",
-        "start": "2027-06-05",
-        "end": "2027-06-12",
+        "start": "2027-07-17",
+        "end": "2027-07-24",
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
         "nights": 7,
         "in_run": true
-      },
-      {
-        "boat": "discovery-i",
-        "boat_name": "Discovery I",
-        "title": "15% Early Bird",
-        "kind": "Discount %",
-        "value": 15.0,
-        "price": 765,
-        "was": 900,
-        "quoted": 765.0,
-        "quoted_was": 900.0,
-        "currency": "EUR",
-        "start": "2027-06-19",
-        "end": "2027-06-26",
-        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
-        "nights": 7,
-        "in_run": true
-      },
-      {
-        "boat": "alsuraya",
-        "boat_name": "ALSURAYA",
-        "title": "Save 10%",
-        "kind": "Discount %",
-        "value": 10.0,
-        "price": 1125,
-        "was": 1250,
-        "quoted": 1125.0,
-        "quoted_was": 1250.0,
-        "currency": "EUR",
-        "start": "2027-07-10",
-        "end": "2027-07-17",
-        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
-        "nights": 7
       },
       {
         "boat": "discovery-ii",
@@ -171299,26 +171266,9 @@
         "quoted": 892.5,
         "quoted_was": 1050.0,
         "currency": "EUR",
-        "start": "2027-07-24",
-        "end": "2027-07-31",
+        "start": "2027-07-31",
+        "end": "2027-08-07",
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
-        "nights": 7,
-        "in_run": true
-      },
-      {
-        "boat": "royal-evolution",
-        "boat_name": "Royal Evolution",
-        "title": "-10% early bird",
-        "kind": "Discount %",
-        "value": 10.0,
-        "price": 1304,
-        "was": 1449,
-        "quoted": 1304.1,
-        "quoted_was": 1449.0,
-        "currency": "EUR",
-        "start": "2027-08-19",
-        "end": "2027-08-26",
-        "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
         "nights": 7,
         "in_run": true
       }
@@ -171329,20 +171279,17 @@
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/belize-aggressor-iii/"
       },
       {
-        "name": "Belize Aggressor IV",
-        "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/belize-aggressor-iv/"
-      },
-      {
         "name": "Cayman Aggressor IV",
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/cayman-aggressor-iv/"
       }
     ],
-    "previous": "2026-08-30",
+    "previous": "2026-08-31",
     "changes": {
       "new": [],
       "withdrawn": [
-        "blue-horizon",
-        "blue-melody"
+        "all-star-red-sea",
+        "alsuraya",
+        "royal-evolution"
       ],
       "changed": [
         {
@@ -171350,35 +171297,35 @@
             "sailing"
           ],
           "before": {
-            "boat": "alsuraya",
-            "boat_name": "ALSURAYA",
-            "title": "Save 10%",
+            "boat": "discovery-i",
+            "boat_name": "Discovery I",
+            "title": "15% Early Bird",
             "kind": "Discount %",
-            "value": 10.0,
-            "price": 1125,
-            "was": 1250,
-            "quoted": 1125.0,
-            "quoted_was": 1250.0,
+            "value": 15.0,
+            "price": 765,
+            "was": 900,
+            "quoted": 765.0,
+            "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-06-12",
-            "end": "2027-06-19",
-            "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
+            "start": "2027-06-19",
+            "end": "2027-06-26",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7
           },
           "after": {
-            "boat": "alsuraya",
-            "boat_name": "ALSURAYA",
-            "title": "Save 10%",
+            "boat": "discovery-i",
+            "boat_name": "Discovery I",
+            "title": "15% Early Bird",
             "kind": "Discount %",
-            "value": 10.0,
-            "price": 1125,
-            "was": 1250,
-            "quoted": 1125.0,
-            "quoted_was": 1250.0,
+            "value": 15.0,
+            "price": 765,
+            "was": 900,
+            "quoted": 765.0,
+            "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-07-10",
-            "end": "2027-07-17",
-            "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
+            "start": "2027-06-05",
+            "end": "2027-06-12",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7
           }
         },
@@ -171387,22 +171334,6 @@
             "sailing"
           ],
           "before": {
-            "boat": "discovery-ii",
-            "boat_name": "Discovery II",
-            "title": "15% Early Bird",
-            "kind": "Discount %",
-            "value": 15.0,
-            "price": 892,
-            "was": 1050,
-            "quoted": 892.5,
-            "quoted_was": 1050.0,
-            "currency": "EUR",
-            "start": "2027-07-17",
-            "end": "2027-07-24",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
-            "nights": 7
-          },
-          "after": {
             "boat": "discovery-ii",
             "boat_name": "Discovery II",
             "title": "15% Early Bird",
@@ -171417,42 +171348,21 @@
             "end": "2027-07-31",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
             "nights": 7
-          }
-        },
-        {
-          "moved": [
-            "sailing"
-          ],
-          "before": {
-            "boat": "royal-evolution",
-            "boat_name": "Royal Evolution",
-            "title": "-10% early bird",
-            "kind": "Discount %",
-            "value": 10.0,
-            "price": 1304,
-            "was": 1449,
-            "quoted": 1304.1,
-            "quoted_was": 1449.0,
-            "currency": "EUR",
-            "start": "2027-08-12",
-            "end": "2027-08-19",
-            "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
-            "nights": 7
           },
           "after": {
-            "boat": "royal-evolution",
-            "boat_name": "Royal Evolution",
-            "title": "-10% early bird",
+            "boat": "discovery-ii",
+            "boat_name": "Discovery II",
+            "title": "15% Early Bird",
             "kind": "Discount %",
-            "value": 10.0,
-            "price": 1304,
-            "was": 1449,
-            "quoted": 1304.1,
-            "quoted_was": 1449.0,
+            "value": 15.0,
+            "price": 892,
+            "was": 1050,
+            "quoted": 892.5,
+            "quoted_was": 1050.0,
             "currency": "EUR",
-            "start": "2027-08-19",
-            "end": "2027-08-26",
-            "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/",
+            "start": "2027-07-31",
+            "end": "2027-08-07",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
             "nights": 7
           }
         },
@@ -171461,22 +171371,43 @@
             "sailing"
           ],
           "before": {
-            "boat": "serenity",
-            "boat_name": "Serenity",
-            "title": "20% Early Bird",
+            "boat": "grand-discovery",
+            "boat_name": "Grand Discovery",
+            "title": "15% Early Bird",
             "kind": "Discount %",
-            "value": 20.0,
-            "price": 720,
-            "was": 900,
-            "quoted": 720.0,
-            "quoted_was": 900.0,
+            "value": 15.0,
+            "price": 1041,
+            "was": 1225,
+            "quoted": 1041.25,
+            "quoted_was": 1225.0,
             "currency": "EUR",
-            "start": "2027-05-18",
-            "end": "2027-05-21",
-            "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
-            "nights": 3
+            "start": "2027-06-05",
+            "end": "2027-06-12",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
+            "nights": 7
           },
           "after": {
+            "boat": "grand-discovery",
+            "boat_name": "Grand Discovery",
+            "title": "15% Early Bird",
+            "kind": "Discount %",
+            "value": 15.0,
+            "price": 1041,
+            "was": 1225,
+            "quoted": 1041.25,
+            "quoted_was": 1225.0,
+            "currency": "EUR",
+            "start": "2027-07-17",
+            "end": "2027-07-24",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
+            "nights": 7
+          }
+        },
+        {
+          "moved": [
+            "sailing"
+          ],
+          "before": {
             "boat": "serenity",
             "boat_name": "Serenity",
             "title": "20% Early Bird",
@@ -171491,14 +171422,28 @@
             "end": "2027-05-18",
             "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
             "nights": 3
+          },
+          "after": {
+            "boat": "serenity",
+            "boat_name": "Serenity",
+            "title": "20% Early Bird",
+            "kind": "Discount %",
+            "value": 20.0,
+            "price": 720,
+            "was": 900,
+            "quoted": 720.0,
+            "quoted_was": 900.0,
+            "currency": "EUR",
+            "start": "2027-05-18",
+            "end": "2027-05-21",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/",
+            "nights": 3
           }
         }
       ],
       "names": {
         "all-star-red-sea": "All Star Scuba Scene",
         "alsuraya": "ALSURAYA",
-        "blue-horizon": "Blue Horizon",
-        "blue-melody": "Blue Melody",
         "discovery-i": "Discovery I",
         "discovery-ii": "Discovery II",
         "grand-discovery": "Grand Discovery",
@@ -171529,13 +171474,7 @@
             "2026-09-03",
             "2026-08-31"
           ],
-          "pct": 20,
-          "offers": [
-            {
-              "title": "Save: 20%",
-              "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
-            }
-          ]
+          "pct": 20
         },
         {
           "boat": "all-star-red-sea",
@@ -171978,13 +171917,7 @@
             "2026-09-03",
             "2026-08-31"
           ],
-          "pct": 10,
-          "offers": [
-            {
-              "title": "-10% early bird",
-              "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
-            }
-          ]
+          "pct": 10
         },
         {
           "boat": "serenity",
