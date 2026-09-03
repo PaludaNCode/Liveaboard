@@ -501,7 +501,21 @@ Break these and the site starts lying quietly rather than failing loudly.
   in the money block, running the pointer down that column to compare prices
   opened a dialog on every row it crossed. Keep the click half regardless of
   `hoverOpens`: hover does not exist on a touch screen and this page is built
-  to work on a phone in a dive shop. **And they are wired on `.shell`, not on
+  to work on a phone in a dive shop. **And the hover half is a mouse, checked
+  per event.** `pointerover` fires for a finger too, on touchstart, before the
+  drag after it is known to be a drag — so a swipe beginning on one of these
+  buttons opened its panel 120ms later, over the list, and the scroll died
+  under it. A card's meta row is three of those buttons, so most swipes on a
+  phone started on one: five to ten cards a gesture, which is what a scroll
+  that keeps being interrupted looks like. It only became reachable when the
+  listeners moved onto `.shell` — before that nothing on a phone was wired at
+  all, so nothing could interrupt — and it is the half of `hoverOpens` that
+  should never have applied there. `event.pointerType === "mouse"` and not a
+  media query, because a laptop with a touch screen has both and the answer is
+  per gesture; `pen` groups with touch, because a pen that is drawing is
+  dragging. `test_a_swipe_off_a_panel_trigger_does_not_open_it` asserts both
+  halves, since the cure for the swipe is exactly what would break the tap and
+  touch has no other way in. **And they are wired on `.shell`, not on
   the `tbody`** — every listener in `hoverPanel` hung off `#body`, which below
   760px is `display:none`, so on a phone not one of the three panels was
   connected to anything and the fee bill, the cabin ladder and the entry bar
