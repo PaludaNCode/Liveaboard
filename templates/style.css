@@ -1476,6 +1476,43 @@ a { color:var(--accent); }
   .toolbar .tgroup .tlabel { display:none; }
   .chip .tog-long { display:none; }
   .chip .tog-short { display:inline; }
+  /* THE BILL, STACKED. The fee table's five columns need 460px to line up
+     and the panel has 353 on a 390px phone, so reading a line's tier or the
+     note under it meant dragging the table sideways inside its own scroller:
+     107px of travel in a box narrow enough that the flick kept reaching the
+     end and handing itself to the panel behind. Same answer as the rows
+     themselves -- below this width a fee line is not a row of columns -- and
+     the same discipline: one renderer, restyled here rather than re-emitted,
+     so the phone bill and the desktop bill cannot drift. `feeRows` names its
+     five cells for this, because a positional rule moves the day a sixth
+     column is added.
+
+     The money stays on the first line beside what it is for, which is the
+     one pairing that must not break. The tier and the source note go under
+     it as one caption at the size the provenance already used. An empty note
+     is removed rather than left as a blank line -- most lines carry none --
+     and the label column is `minmax(0, 1fr)` so an unbreakable operator
+     name cannot push the amount off the edge and put the scrollbar back.
+     `.fee-scroll` stays: with the table's `min-width` gone there is nothing
+     to scroll, and it is the net if anything inside is ever wider again. */
+  .fees { min-width:0; width:100%; }
+  .fees tbody, .fees tr, .fees td { display:block; }
+  .fees tr {
+    display:grid; grid-template-columns:1.1em minmax(0, 1fr) auto;
+    column-gap:6px; padding:5px 0; border-bottom:1px solid var(--rule);
+  }
+  .fees tr:last-child { border-bottom:0; }
+  .fees td { padding:0; }
+  .fees td:empty { display:none; }
+  .fees .fmark { grid-area:1 / 1; }
+  .fees .flabel { grid-area:1 / 2; white-space:normal; }
+  .fees .famt { grid-area:1 / 3; text-align:right; }
+  .fees .ftier, .fees .prov {
+    grid-column:2 / -1; white-space:normal; max-width:none;
+    color:var(--ink-faint); font-size:10px; line-height:1.35;
+  }
+  .fees .ftier { grid-row:2; }
+  .fees .prov { grid-row:3; }
   .activebar { padding:5px 10px; }
   .filterpanel { max-height:52vh; max-height:52dvh; }
   .bankpick { width:120px; }

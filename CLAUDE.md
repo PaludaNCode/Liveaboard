@@ -526,7 +526,22 @@ Break these and the site starts lying quietly rather than failing loudly.
   disclosure. What gives is height: it caps at 70vh and scrolls inside itself,
   and each fee table sits in its own `.fee-scroll` because the table's 460px
   `min-width` beats the panel's width and would otherwise drag the panel's
-  header sideways. **The entry bar is not a fee** and opens from the Entry bar
+  header sideways. **On a phone that scroller was the reading experience, and
+  height is what may give — not width.** 460px of columns in a 353px panel put
+  every line's tier and its provenance past the right edge, so the bill was
+  read by dragging it sideways 107px inside a box narrow enough that the flick
+  kept reaching the end and handing itself to the panel behind. Below 760px a
+  fee line is stacked instead — the amount beside what it is for, the tier and
+  the source note under it — which is the rows' own answer applied to the
+  panel: a fee line is not a row of columns at that width either. **One
+  renderer, restyled rather than re-emitted**, so the phone bill and the
+  desktop bill cannot drift, and `feeRows` names its five cells for it because
+  a positional rule moves the day a sixth column is added. The label column is
+  `minmax(0, 1fr)` so a long operator name cannot push the amount back off the
+  edge, `.fee-scroll` stays as the net, and
+  `test_a_phone_bill_needs_no_sideways_drag` measures the panel's own boxes at
+  four phone widths on a bill with *both* sellers' tables — a rule reaching
+  only the first table fixes half the panel. **The entry bar is not a fee** and opens from the Entry bar
   column instead; it led that dropdown because whether a diver may board is
   prior to what boarding costs, and that reason does not put it under
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on

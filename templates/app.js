@@ -1721,9 +1721,14 @@
                     : " (" + line.fx.as_of + ")"));
       }
       if (line.note) prov.push(line.note);
-      return '<tr class="' + (on ? "" : "off") + '"><td>' + (on ? "▪" : "▫") +
-        "</td><td>" + esc(line.label) + '</td><td class="num">' + amount +
-        "</td><td>" + esc(line.tier) + '</td><td class="prov">' +
+      /* Each cell names itself. Below 760px a fee line is not a row of
+         columns and the stylesheet restacks these five -- addressed by name,
+         because a positional rule is a rule that silently moves the day a
+         sixth column is added. */
+      return '<tr class="' + (on ? "" : "off") + '"><td class="fmark">' +
+        (on ? "▪" : "▫") +
+        '</td><td class="flabel">' + esc(line.label) + '</td><td class="famt num">' +
+        amount + '</td><td class="ftier">' + esc(line.tier) + '</td><td class="prov">' +
         esc(prov.join(" · ")) + "</td></tr>";
     }).join("");
   }
