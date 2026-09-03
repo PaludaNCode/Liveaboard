@@ -2954,24 +2954,66 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
                          "the entry bar is back inside the fee panel")
 
     def test_the_entry_bar_opens_from_its_own_column(self) -> None:
-        self.assertIn('<div id="entryPanel"', self.page)
+        self.assertIn('<dialog id="entryPanel"', self.page)
         self.assertIn('class="entry-open"', self.app)
         self.assertIn("entryBar(itin)", self.app)
 
-    def test_both_gestures_and_the_keyboard_on_one_mechanism(self) -> None:
-        """Hover does not exist on a touch screen, and a panel is a column's
-        content rather than a reward for owning a mouse."""
+    def test_the_panels_are_dialogs_and_the_browser_owns_them(self) -> None:
+        """One mechanism, three panels, and most of it is the platform's (#78).
+
+        What was here was a fixed-position div placed by hand, raised by a
+        z-index, dismissed by four listeners, over a list that stayed live
+        underneath it — the modal contract written out longhand, missing the
+        one clause that matters. `showModal()` supplies all of it: the top
+        layer, the inert page behind, Escape, the backdrop, the focus trap.
+
+        So what is asserted here is that the page really does delegate. A
+        hand-rolled overlay coming back would show up as these tokens, and it
+        would pass every behavioural test on a desktop.
+        """
         self.assertEqual(
-            self.app.count("function hoverPanel("), 1,
-            "there is more than one implementation of the panel interaction",
-        )
-        wiring = self.app.split("function hoverPanel(", 1)[1].split(
-            "\n  hoverPanel(", 1)[0]
-        for gesture in ("pointerover", "pointerout", "click", "focusin",
-                        "focusout", "Escape"):
-            with self.subTest(gesture=gesture):
-                self.assertIn(gesture, wiring)
-        self.assertEqual(self.app.count("hoverPanel(document.getElementById("), 3)
+            self.app.count("function panelDialog("), 1,
+            "there is more than one implementation of the panel interaction")
+        self.assertEqual(self.app.count("panelDialog(document.getElementById("), 3)
+        self.assertEqual(self.page.count("<dialog id="), 3,
+                         "a panel host is not a <dialog>")
+        wiring = self.app.split("function panelDialog(", 1)[1].split(
+            "\n  panelDialog(", 1)[0]
+        self.assertIn("dialog.showModal()", wiring,
+                      "the pinned panel is not modal, so the rows behind it "
+                      "are still live")
+        for gone in ("position: fixed", 'setAttribute("hidden"',
+                     "host.hidden", "z-index"):
+            with self.subTest(gone=gone):
+                self.assertNotIn(gone, wiring,
+                                 gone + " — the hand-built overlay is back")
+
+    def test_the_peek_is_the_same_dialog_shown_the_other_way(self) -> None:
+        """Hover stays, because a diver comparing cabin ladders or fee books
+        wants them without a click each time — but as `show()` on the same
+        element, told apart in the stylesheet by `:modal`. Two implementations
+        of one panel is what the last mechanism spent itself on."""
+        wiring = self.app.split("function panelDialog(", 1)[1].split(
+            "\n  panelDialog(", 1)[0]
+        self.assertIn("dialog.show()", wiring)
+        self.assertIn(":modal", self.css, "nothing separates the two states")
+        # Hover is asked twice: the device, then the gesture. `pointerover`
+        # fires for a finger on touchstart, before the drag after it is known
+        # to be a drag, and a card's meta row is three of these buttons.
+        self.assertIn("(hover: hover) and (pointer: fine)", self.app)
+        self.assertIn('event.pointerType !== "mouse"', wiring)
+
+    def test_focus_no_longer_opens_a_panel(self) -> None:
+        """Every trigger is a `<button>`, so Enter and Space are already a
+        click: the keyboard was reachable through the press path the whole
+        time. Opening on `focusin` bought nothing and cost a third piece of
+        state — and a *modal* opened by focus would trap a keyboard user the
+        moment they tabbed across a row."""
+        wiring = self.app.split("function panelDialog(", 1)[1].split(
+            "\n  panelDialog(", 1)[0]
+        for gone in ("focusin", "focusout"):
+            with self.subTest(gone=gone):
+                self.assertNotIn(gone, wiring)
 
     def test_each_trigger_is_a_button_and_says_it_opens_a_dialog(self) -> None:
         """The dropdown's `+` was a `<button>` and accessible by default. A cell
@@ -2996,8 +3038,8 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
     def test_opening_one_panel_closes_the_others(self) -> None:
         """Two panels anchored to two cells of the same row would overlap, and
         the second would read as belonging to whichever cell it landed on."""
-        wiring = self.app.split("function hoverPanel(", 1)[1].split(
-            "\n  hoverPanel(", 1)[0]
+        wiring = self.app.split("function panelDialog(", 1)[1].split(
+            "\n  panelDialog(", 1)[0]
         self.assertIn("function others()", wiring)
         self.assertIn("panel.shut()", wiring)
 
@@ -3011,8 +3053,10 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
         # Capped and scrolling. The cap is written twice -- `vh` then `dvh` --
         # because on a phone `vh` is a height the reader cannot see all of, so
         # the assertion is that the panel is bounded at all rather than that it
-        # is bounded in one unit.
-        self.assertRegex(self.css, r"max-height:70(?:vh|dvh);.*?overflow:auto")
+        # is bounded in one unit. The scroll box is `.pbody`, which is why the
+        # close control above it cannot scroll away with the bill.
+        self.assertRegex(self.css, r"max-height: 85vh; max-height: 85dvh")
+        self.assertRegex(self.css, r"\.pbody \{[^}]*overflow: auto")
 
 
 class TestTheTotalStatesWhatItIsTheSumOf(unittest.TestCase):

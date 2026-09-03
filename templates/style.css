@@ -842,7 +842,7 @@ thead th.stick1, thead th.stick2 { z-index:25; }
    no column by a pixel.
 
    It used to sit on the expander, which was that first cell and was also the
-   26px this table reclaimed when the fee dropdown became a popover (#149). So
+   26px this table reclaimed when the fee dropdown became a panel (#149). So
    the bar moved onto whichever cell is pinned first now -- `.stick1`, Depart --
    rather than the column going and the mark going quietly with it. */
 tbody tr.row.marked .stick1, tbody tr.row.marked:hover .stick1 {
@@ -997,21 +997,17 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
  * is already clamped into it by `place()`. On a phone that is most of the
  * screen, which is the right answer for a document a reader opened
  * deliberately and can dismiss with Escape or a tap outside. */
-/* `.panel-pop.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
+/* `.panel.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
    21-25em width and is written further down this file, so at equal specificity
    it won and capped the bill at 400px however wide the screen was. */
-.panel-pop.bill-pop {
-  min-width:min(30em, calc(100vw - 16px));
-  max-width:min(46em, calc(100vw - 16px));
-  max-height:70vh; max-height:70dvh; overflow:auto;
-  padding:0 .7em .6em;
-}
+.panel.bill-pop { min-width:min(30em, calc(100vw - 16px)); max-width:min(46em, calc(100vw - 16px)); }
 .bill-pop .pwho { margin:0 -.7em .5em; }
 /* The fee table's own min-width is what makes its columns line up, and it is
    wider than a phone. So each table sits in a scroller of its own: `overflow`
    on the table itself does not work, because `min-width` wins over the panel's
-   width and the table simply overflows -- taking the panel's header sideways
-   with it. Same rule as the deals tables, and the wrapper is what enforces it. */
+   width and the table simply overflows -- taking the panel's own header
+   sideways with it. Same rule as the deals tables, and the wrapper is what
+   enforces it. */
 .fee-scroll { overflow-x:auto; max-width:100%; }
 .bill-pop .whose:first-of-type { margin-top:4px; }
 
@@ -1607,12 +1603,12 @@ a { color:var(--accent); }
 .dearer  { color:var(--sold); }
 .caveat.padi { border-left:2px solid var(--unknown); padding-left:.6em; }
 
-/* ---------- the three cells that open a panel, on hover ---------- */
+/* ---------- the three cells that open a panel ---------- */
 
 /* One appearance for all three (#149). The Places cell became a control when
    it stopped printing an adjective and started printing a count; Mandatory
    fees and Entry bar became controls when the per-row dropdown behind them
-   became a popover. Behind each is the thing its figure is a summary of. It has
+   became a panel. Behind each is the thing its figure is a summary of. It has
    to look operable without shouting -- a dashed underline that only resolves on
    hover, in columns read a hundred rows at a time.
 
@@ -1704,8 +1700,17 @@ a { color:var(--accent); }
    at, and this page is built to be used on a phone in a dive shop. The 44px
    comes out of the panel's height, which is the right thing to spend it on:
    a dialog nobody can close is worth less than one row fewer of bill. */
+/* THE WAY OUT, AND IT IS NOT SCROLLABLE.
+   The bar is a flex *sibling* of the scroll box rather than a sticky child of
+   it, so there is nothing for it to scroll away with -- a close control that
+   scrolls off with the bill is the same bug one layer down as a panel that
+   covers the list. The tap target is 44px square rather than the glyph inside
+   it: a multiplication sign is not something a thumb can aim at, and this page
+   is built to be used on a phone in a dive shop. Those 44px come out of the
+   panel's height, which is the right thing to spend them on -- a dialog nobody
+   can close is worth less than one row fewer of bill. */
 .pbar {
-  position: sticky; top: 0; z-index: 5;
+  flex: 0 0 auto;
   display: flex; justify-content: flex-end;
   background: var(--panel);
   margin: 0 0 -2px; padding: 0;
@@ -1718,31 +1723,85 @@ a { color:var(--accent); }
   cursor: pointer; font-family: var(--font-sans);
 }
 .pshut:hover { color: var(--accent); }
+/* The body is the one thing that scrolls. All of the disclosure travels into
+   this panel -- the fee table with its included lines at zero, the caveat that
+   applies, the second seller's whole bill -- because a summary would be a
+   total claimed on part of a disclosure, which is the thing this site reports
+   in other people. So what gives is height, and it gives here. */
+.pbody { flex: 1 1 auto; overflow: auto; min-height: 0; }
 
-.panel-pop {
-  position: fixed;
-  z-index: 60;
-  background: var(--panel);
+/* ONE DIALOG, TWO NATIVE STATES.
+   `:modal` is what tells the pinned panel from the hover peek, so the two are
+   one element the browser is showing two ways rather than two implementations
+   drifting apart. Everything common to both is here. */
+.panel {
+  padding: 0;
   border: 1px solid var(--rule-strong);
+  background: var(--panel);
+  color: var(--ink);
   box-shadow: 0 6px 22px rgba(20, 26, 34, .22);
-  min-width: 21em;
-  max-width: 25em;
   font-size: .84rem;
   line-height: 1.45;
+  flex-direction: column;
 }
+.panel[open] { display: flex; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .panel-pop { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+  :root:not([data-theme="light"]) .panel { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
 }
-:root[data-theme="dark"] .panel-pop { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
+:root[data-theme="dark"] .panel { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
 
-.panel-pop .pwho {
+/* THE PEEK: anchored to the trigger by `place()`, which is the only
+   arithmetic left in the mechanism and runs on a desktop only. Not in the top
+   layer -- `show()` does not promote -- but the element sits at document level
+   outside the table's clipping container, so there is nothing to be clipped
+   by. */
+.panel:not(:modal) {
+  position: fixed;
+  margin: 0;
+  z-index: 60;
+  min-width: 21em;
+  max-width: 25em;
+  max-height: 70vh; max-height: 70dvh;
+}
+
+/* THE PINNED PANEL: a sheet on a phone, a centred card on a laptop, and in
+   the top layer either way. The height is capped in `dvh` as well as `vh`
+   because on iOS `vh` is a height the reader cannot see all of, and this is
+   the box a phone reads the bill in. */
+.panel:modal {
+  max-height: 85vh; max-height: 85dvh;
+  max-width: min(46em, calc(100vw - 2rem));
+  min-width: 0;
+}
+.panel::backdrop { background: rgba(20, 26, 34, .45); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .panel::backdrop { background: rgba(0, 0, 0, .6); }
+}
+:root[data-theme="dark"] .panel::backdrop { background: rgba(0, 0, 0, .6); }
+
+/* A BOTTOM SHEET, ON THE WIDTH WHERE THE ROWS ARE CARDS.
+   Anchored to the bottom edge, because that is the half of the screen a thumb
+   reaches, and full width because there is no width to spare -- the bill's
+   own columns want more than a phone has. Same breakpoint as the cards, so
+   the layout that has no table is the layout that has no floating panel. */
+@media (max-width: 759px) {
+  .panel:modal {
+    margin: auto auto 0;
+    width: 100%;
+    max-width: 100%;
+    border-width: 1px 0 0;
+    border-radius: 14px 14px 0 0;
+  }
+}
+
+.panel .pwho {
   margin: 0;
   padding: .45em .7em .4em;
   border-bottom: 1px solid var(--rule);
   font-family: var(--font-narrow);
   font-weight: 600;
 }
-.panel-pop .pseller {
+.panel .pseller {
   margin: 0;
   padding: .35em .7em .2em;
   font-family: var(--font-narrow);
@@ -1751,7 +1810,7 @@ a { color:var(--accent); }
   font-size: .72em;
   color: var(--ink-dim);
 }
-.panel-pop .verdict {
+.panel .verdict {
   margin: 0;
   padding: .45em .7em;
   border-bottom: 1px solid var(--rule);
@@ -1760,13 +1819,13 @@ a { color:var(--accent); }
 /* The ten sailings advertising a berth nobody can buy, and the ones with
    nothing left at all. Loud on purpose: it is the finding the ladder exists to
    surface, and it is one hover deep already. */
-.panel-pop .verdict.bad { background: var(--sold); color: var(--panel); }
-.panel-pop .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
+.panel .verdict.bad { background: var(--sold); color: var(--panel); }
+.panel .single { margin: 0; padding: .45em .7em; border-top: 1px solid var(--rule); }
 /* The read date, set against the sailing it qualifies rather than under the
    ladder as a paragraph. A count without its date is presented as a fact when
    it is a claim with a shelf life; a count with three sentences of method
    under it is a panel nobody finishes reading. */
-.panel-pop .pread {
+.panel .pread {
   float: right;
   font-family: var(--font-narrow);
   font-weight: 400;
@@ -1774,8 +1833,8 @@ a { color:var(--accent); }
   color: var(--ink-faint);
 }
 
-.panel-pop table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
-.panel-pop table.cabins th {
+.panel table.cabins { border-collapse: collapse; width: 100%; font-size: .95em; }
+.panel table.cabins th {
   font-family: var(--font-narrow);
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -1785,19 +1844,19 @@ a { color:var(--accent); }
   font-weight: 600;
   padding: .35em .7em .2em;
 }
-.panel-pop table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
-.panel-pop table.cabins .num {
+.panel table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+.panel table.cabins .num {
   text-align: right;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.panel-pop table.cabins th.num { font-family: var(--font-narrow); }
+.panel table.cabins th.num { font-family: var(--font-narrow); }
 /* The rung the row's own price came from, so the ladder always says which one
    you were looking at -- including when that is the one that has sold out. */
-.panel-pop table.cabins tr.here td { background: var(--accent-soft); }
-.panel-pop table.cabins tr.out td { color: var(--ink-faint); }
-.panel-pop .full { color: var(--sold); font-weight: 600; }
+.panel table.cabins tr.here td { background: var(--accent-soft); }
+.panel table.cabins tr.out td { color: var(--ink-faint); }
+.panel .full { color: var(--sold); font-weight: 600; }
 /* Whose bill the table under it is. Only printed when there are two, because
    with one there is nothing to tell apart and a heading over every panel would
    be a label nobody needs. */
