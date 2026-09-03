@@ -131,17 +131,26 @@
    viewport and follows the bar as it comes and goes, so there is no slack to
    pan; `100%` stays underneath it for anything that does not know the unit.
 
-   `overscroll-behavior` is the other half. Without it a flick that reaches the
-   end of `.shell` chains into the document and pans it anyway -- the inner
-   scroller handing the gesture to a page that should not have one.
+   `overflow:hidden` on `body` is what stops the document scrolling, and it
+   does so for `html` too: overflow on the body element propagates to the
+   viewport wherever `html`'s own is `visible`, which it is. Measured before an
+   `html` rule was added on the theory that it did not -- a gesture over the
+   masthead cannot pan the page even with `html` standing 90px taller than the
+   window. Do not add one.
 
-   `overflow:hidden` on `body` is what actually stops the document scrolling,
-   and it does so for `html` too: overflow on the body element propagates to
-   the viewport wherever `html`'s own is `visible`, which it is. Measured
-   before an `html` rule was added on the theory that it did not -- a gesture
-   over the masthead cannot pan the page even with `html` standing 90px taller
-   than the window. Do not add one. */
-html, body { height:100%; overscroll-behavior:none; }
+   AND THAT IS ALSO WHY NO SCROLLER HERE CONTAINS ITS OVERSCROLL. It was
+   declared on `html`, `body`, `.shell`, `.bankwrap` and the bill panel, as the
+   other half of the pinning: without it a flick reaching the end of a scroller
+   was supposed to chain into the document and pan it. It cannot -- measured,
+   with the property forced off on all five, a flick past the end of the table
+   leaves the page at 0, because the document has no scroll to chain into. So
+   it was protecting nothing, and on WebKit it was the one thing every dead
+   scroller had in common: an iPhone reported `.shell` and the dive sites bank
+   both moving a few pixels a gesture, two unrelated scrollers whose only
+   shared declaration this was. A guard that buys nothing does not get to cost
+   the scroll. Do not declare it again without a measurement showing the page
+   can be panned without it. */
+html, body { height:100%; }
 body { height:100dvh; }
 
 body {
@@ -537,7 +546,7 @@ h1 {
 .bank-note { font-size:10.5px; color:var(--ink-faint); max-width:72ch; }
 /* The chips scroll inside the panel rather than lengthening it: the Boat bank
    is 77 chips and the panel's cap is what keeps the table on screen. */
-.bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+.bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; }
 .bank > span[id], .bank .nights-row, .bank .flag-row {
   display:flex; gap:5px; flex-wrap:wrap; align-items:center;
 }
@@ -600,9 +609,6 @@ input[type="number"] {
    comes to that. */
 .shell {
   flex:1 1 auto; min-height:0; overflow:auto; background:var(--panel);
-  /* The scroll stops here. Chained to the document it panned the whole shell,
-     which is the bug the `dvh` note above describes from the other end. */
-  overscroll-behavior:contain;
 }
 
 
@@ -997,7 +1003,7 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .panel-pop.bill-pop {
   min-width:min(30em, calc(100vw - 16px));
   max-width:min(46em, calc(100vw - 16px));
-  max-height:70vh; max-height:70dvh; overflow:auto; overscroll-behavior:contain;
+  max-height:70vh; max-height:70dvh; overflow:auto;
   padding:0 .7em .6em;
 }
 .bill-pop .pwho { margin:0 -.7em .5em; }

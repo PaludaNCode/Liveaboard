@@ -900,10 +900,13 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         Headless Chromium has no collapsing browser chrome, so it cannot
         reproduce the pan. What it can hold is the invariant underneath it --
         the shell is exactly the window, the document has no scroll of its own,
-        and the footer's bottom edge is the window's -- plus the two
-        `overscroll-behavior` declarations that stop `.shell` handing a flick
-        to a document that should not have one. Asserted as used values off the
-        live layout, not as source text.
+        and the footer's bottom edge is the window's. Asserted as used values
+        off the live layout, not as source text.
+
+        It used to assert the `overscroll-behavior` declarations too, and those
+        are gone: what they were for is asserted directly below instead, by
+        flicking past the end of the table and checking the page did not move.
+        A property is not the invariant -- the page staying put is.
         """
         page = self.open(PHONE_WIDTHS[0], 720)
         self.addCleanup(page.close)
@@ -923,8 +926,7 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                   document.querySelector('.site-footer').getBoundingClientRect().bottom),
                 masthead: box('.masthead'),
                 rail: box('.rail'),
-                bodyChain: getComputedStyle(document.body).overscrollBehaviorY,
-                shellChain: getComputedStyle(shell).overscrollBehaviorY,
+                shellScrolls: shell.scrollHeight > shell.clientHeight,
               };
             }""")
             where = "at %dpx" % width
@@ -936,10 +938,25 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              "the footer is not on the bottom edge " + where)
             self.assertGreater(seen["masthead"], 0, "no masthead " + where)
             self.assertGreater(seen["rail"], 0, "no rail " + where)
-            self.assertEqual(seen["bodyChain"], "none",
-                             "the document accepts a chained scroll " + where)
-            self.assertEqual(seen["shellChain"], "contain",
-                             "the table's scroll chains out of it " + where)
+
+            # What `overscroll-behavior` was declared for, asserted as the
+            # outcome: drive the shell to its end and keep flicking, and the
+            # page must not move. It cannot, because `overflow:hidden` on
+            # `body` propagates to the viewport -- so the property was buying
+            # nothing, and on WebKit it was what every dead scroller had in
+            # common.
+            self.assertTrue(seen["shellScrolls"],
+                            "nothing to flick past " + where)
+            page.evaluate("() => { const s = document.querySelector('.shell');"
+                          " s.scrollTop = s.scrollHeight; }")
+            page.mouse.move(width // 2, 400)
+            page.mouse.wheel(0, 4000)
+            page.wait_for_timeout(120)
+            self.assertEqual(
+                0, page.evaluate("Math.round(scrollY) + "
+                                 "document.documentElement.scrollTop + "
+                                 "document.body.scrollTop"),
+                "a flick past the end of the table panned the page " + where)
 
         # And the shell asks for the visible viewport, not the tallest one it
         # could ever be. Chromium reports the two as equal, so the declaration
