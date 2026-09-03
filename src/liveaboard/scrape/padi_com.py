@@ -1154,11 +1154,31 @@ class PadiComAdapter(SourceAdapter):
 
         # What the fare already covers, appended at zero. A charge cannot be
         # billed and bundled on one trip, so a stated amount wins: PADI prices
-        # nitrox on 30 trips whose inclusions also say "Free nitrox (for
-        # certified nitrox divers)", and 17 of those spell out why -- "15 LITER
-        # tank nitrox (only 12 liter is free of chanrge)". Both claims are true
-        # and only one line per code survives, so it is the one with money on
-        # it.
+        # nitrox on 31 trips whose inclusions also say "Free nitrox (for
+        # certified nitrox divers)". Both claims are true and only one line per
+        # code survives, so it is the one with money on it.
+        #
+        # **17 of those 31 are not the gas, and this rule is wrong about them.**
+        # Probed 2026-09-03 (`tools/probe_nitrox.py`, all 29 vessels whose book
+        # prices nitrox): every clash carries that identical inclusion, so the
+        # explanation is never there -- it is in the *billed* title. Seven read
+        # "15 LITER tank nitrox (only 12 liter is free of chanrge)", eight
+        # "Nitrox 15 liter tanks", two "15 liters Nitrox". The operator gives
+        # 12-litre fills free and charges 65 for 15-litre ones, and
+        # `classify_label` files all three as `nitrox` because the word is in
+        # them -- so the toggle that counts prices a tank upgrade as the gas,
+        # on 15 itineraries and 48 sailings, against a vessel panel stating
+        # nitrox included. liveaboard.com files the same charge under *gear*
+        # ("15L tanks 35-65/week", on 79 of 79 vessels) and never touches its
+        # nitrox line, which is what settles that these are one charge and not
+        # two sellers disagreeing. `FeeCode.TANK_15L` exists for it and has no
+        # pattern behind it yet. See docs/sources/padi.com.md.
+        #
+        # The remaining 14 are one vessel -- MY Seawolf Dominator, a bare
+        # "Nitrox" at 50 beside the same free-nitrox line, no tank size and an
+        # empty `generalInformation` -- and there the amount winning is right,
+        # because turning a stated cost into free is the error this must never
+        # make.
         #
         # **A charge that names no figure loses to an inclusion, though**, and
         # that only became possible when the optional lists were read: 15 trips

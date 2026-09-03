@@ -603,6 +603,61 @@ which is **69 published itineraries** — 43 of them on the vessels PADI alone
 sells berths on, where `fetch_itineraries.py` has no tour id to ask about and
 never will.
 
+### Nitrox, and the two claims
+
+**Probed 2026-09-03, `tools/probe_nitrox.py`, all 29 vessels whose PADI book
+prices nitrox.** 31 trips state that nitrox is free *and* price it, and the
+resolution rule beside `fees_from_payload` — a stated amount wins — cites them.
+The citation was right about the count and wrong about where the explanation
+lives, which matters because the two halves resolve differently.
+
+**Every one of the 31 carries the identical inclusion**: *"Free nitrox (for
+certified nitrox divers)"*. Nothing there tells the cases apart, so a rule
+reading the inclusion sees 31 identical contradictions. What separates them is
+the *billed* title:
+
+| Billed entry | Trips | What it is |
+|---|---|---|
+| `15 LITER tank nitrox (only 12 liter is free of chanrge)` | 7 | a tank upgrade |
+| `Nitrox 15 liter tanks` | 8 | a tank upgrade |
+| `15 liters Nitrox` | 2 | a tank upgrade |
+| `Nitrox` | 14 | the gas, unexplained |
+
+So **17 of the 31 are not contradictions at all** — the operator gives 12-litre
+fills free and charges €65 for 15-litre ones, and says so in the title. The
+other 14 are all one vessel, **MY Seawolf Dominator**: *Free nitrox* against a
+bare *Nitrox* at €50, no tank size, no `generalInformation`, nothing else in
+the payload. There the amount winning is right and the invariant is the reason.
+
+`generalInformation` is empty on all 62 billed entries, so it is not a second
+place to look.
+
+**The 17 are read as the gas today, and the other seller proves they are not.**
+`classify_label` sends every one of those titles to `nitrox` because the word
+is in them, so PADI's fee book prices nitrox at €65 on trips whose own vessel
+panel states it included. liveaboard.com files the same charge under **gear** —
+`15L tanks €35-65/week` for Discovery I, in the gear dialog, on 79 of 79
+vessels — and never touches its nitrox line. One charge, filed as gear by one
+seller and read as gas from the other.
+
+The published effect is a seller disagreement that is not one, on **15
+itineraries and 48 sailings**, every one of them contradicting our own line:
+
+| Vessel | Itineraries | liveaboard.com | PADI, as published |
+|---|---|---|---|
+| Discovery I | 7 | nitrox included | €65 |
+| Discovery II | 6 | nitrox included | €65 |
+| Grand Discovery | 2 | nitrox €30 | €65 |
+
+`FeeCode.TANK_15L` exists, is labelled *15 L tank*, and has no pattern behind
+it — this is the charge it was minted for. Routing a title that names a tank
+size there would leave the gas line to say what the gas costs, which is what
+the toggle counts.
+
+**The course exclusion holds.** `PADI Enriched Air Diver (Nitrox)` appears at
+€150–250 on 31 of these trips and `classify_label` sends all of it to
+`NITROX_COURSE`, so a certification is still never priced as a fill.
+
 ### Not read yet
 
 - **61 entries the classifier still declines**, and it should: "14% GST (on
