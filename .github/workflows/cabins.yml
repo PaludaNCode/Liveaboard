@@ -31,6 +31,24 @@ on:
   # overnight. Read a day apart, all 864 ladders sat 0.0–0.6% above their own
   # row — small, but it is the panel disagreeing with the number that opened
   # it, on a site about prices being what they say they are.
+  #
+  # **The hour is what the cron says, not when the runs happen.** Measured on
+  # 2026-09-02 and 09-03: every scheduled job here started between 255 and 287
+  # minutes after its cron, so the six daily crons spread over 75 minutes
+  # arrived spread over 61 and 63. GitHub queues scheduled runs and the wait is
+  # its own, not ours.
+  #
+  # This gap survives that — 60.5 minutes of the 65 on 09-03 — because it is
+  # the largest one and the jitter is a fraction of it. The gaps *between the
+  # other sources* do not: 10 minutes of designed stagger came out as 2, and
+  # `padi.yml` began about 90 seconds before this refresh's publish job
+  # finished on both days. Nothing is wrong with that and nothing needs
+  # moving. Those staggers only ever stopped two pushes colliding, which the
+  # publish tail already handles by re-deriving from the branch tip, and a
+  # `concurrency` group is the fix that was tried and lost a reading (see
+  # publish.yml). What would be wrong is reading a stagger as a guarantee: if
+  # the *pairing* of a ladder to its row ever has to be certain rather than
+  # likely, it wants a trigger or a check, not a bigger number here.
   schedule:
     - cron: "20 5 * * *"
   workflow_dispatch:
@@ -175,6 +193,14 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: cabins-inputs-${{ github.run_id }}
+      # The book this job read, not the projection derived from it: naming
+      # `data/sales.json` too would assert the same fact twice and add a way
+      # for the pair to disagree. `fetch_cabins.py` refuses to rewrite the
+      # file after reading nothing, so an undated-today book here is either
+      # that refusal or a hand-off that lost it, and both are worth stopping
+      # for -- a 30-minute read of 890 booking pages is not something to
+      # discard quietly.
+      fresh: data/cabins.json
       paths: "data/cabins.json data/sales.json data/egypt-2027.json site/index.html"
       subject: "data: read {today} cabin prices and berths"
       nothing: "nothing read; nothing to commit"

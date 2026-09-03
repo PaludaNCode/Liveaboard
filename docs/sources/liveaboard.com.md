@@ -80,8 +80,11 @@ first and it answers yes — but read *"robots.txt, and the blank line"* below
 before taking that at face value, because the yes is an accident.
 
 **The cost is one request per departure**, ~890 a night, because a berth count
-changes the moment somebody books. That is why `cabins.yml` is manual and
-capped by default rather than folded into the daily refresh.
+changes the moment somebody books. That is why `cabins.yml` is its own
+workflow rather than folded into the daily refresh, and why a *dispatch* of it
+is capped at three departures by default while the schedule reads every one —
+proving a parser change must not cost the source 890 pages. It was manual
+altogether until the nightly cron landed; the cap is what is left of that.
 
 ### The operator, on a vessel page with no departures
 

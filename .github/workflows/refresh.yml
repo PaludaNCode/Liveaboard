@@ -96,26 +96,6 @@ jobs:
             --out data/candidate.json \
             --snapshots data/snapshots
 
-      # What each trip says about itself: the reefs it visits, its dive count,
-      # its group size and its entry bar. A separate endpoint from the vessel
-      # page, and the only per-*trip* source there is — everything else here
-      # describes the boat's year, which is why "Simply the Best" had no reefs
-      # and a St John's week once carried a badge for a reef 600 km away.
-      #
-      # After the scrape because it reads the tour ids out of the archive that
-      # scrape just wrote, and before the promote that consumes its output.
-      #
-      # Incremental by design: a trip's reefs do not change from night to
-      # night, so only genuinely new trips are fetched. The first run is about
-      # 314 requests at the fetcher's usual delay; every run after it is a
-      # handful, which is what makes this affordable to do daily at all.
-      #
-      # `itinerary_limit` caps a dispatched run. A capped run *merges* into the
-      # book rather than replacing it — it knows nothing about the trips it did
-      # not visit — which is what makes it safe to prove a new parser against
-      # three real trips before pointing it at three hundred of somebody
-      # else's pages. The same rule as `scrape_fees.py --limit`.
-
       - name: Report a blocked or empty scrape
         if: steps.scrape.outcome == 'failure'
         run: |
@@ -158,6 +138,11 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: refresh-inputs-${{ github.run_id }}
+      # The crawl stamps `scraped_at` as it writes, so a candidate not dated
+      # today is a reading that did not reach the publish job. That is not
+      # hypothetical here: this file's candidate stood at 08-30 through four
+      # green refreshes.
+      fresh: data/candidate.json
       changes: true
       force: ${{ inputs.force_promote || false }}
       subject: "data: daily refresh {today}"

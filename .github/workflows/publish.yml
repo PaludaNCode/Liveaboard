@@ -44,6 +44,22 @@ on:
         required: false
         default: ""
         type: string
+      fresh:
+        description: >
+          The carried books whose own date must be today, space separated.
+
+          A fetching caller names the file it rewrites whole — the crawl's
+          `data/candidate.json`, the cabin book, the rates. If that file is
+          not dated today then the fetch ran and its reading did not arrive,
+          which is the failure the `path: data` note below describes and the
+          one nothing reported for four days.
+
+          Empty only for a caller that fetched nothing (`promote.yml`), and
+          `TestACarriedReadingIsDatedToday` refuses a caller that carries an
+          artifact without naming a book in it.
+        required: false
+        default: ""
+        type: string
       paths:
         description: "What to stage, space separated."
         required: false
@@ -151,6 +167,23 @@ jobs:
         with:
           name: ${{ inputs.carry }}
           path: data
+
+      # And then look at what landed, which is the half the guards above this
+      # cannot do. They assert the workflow file -- that the download says
+      # `path: data`, that an upload stays under it -- and what failed for
+      # four days was the file on disk. `promote` reads whatever is at
+      # `data/candidate.json`; whether that is this run's reading or the one
+      # committed last week is a question only the file can answer, and every
+      # book a fetch rewrites whole stamps the day it was read.
+      #
+      # Before the promote, so a stale input is caught by the step named for
+      # it rather than three steps later as a diff nobody can read. Failing
+      # here loses nothing: the fetch has happened, the branch tip is still
+      # the last good dataset, and the alternative is a commit that publishes
+      # a rebuild of last week under today's subject.
+      - name: The carried reading is today's
+        if: inputs.fresh != ''
+        run: python3 tools/check_fresh.py ${{ inputs.fresh }}
 
       - name: Rebuild the dataset from the branch tip plus those inputs
         run: >

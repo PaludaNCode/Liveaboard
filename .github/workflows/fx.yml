@@ -67,5 +67,10 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: fx-inputs-${{ github.run_id }}
+      # `retrieved` is stamped whether or not the ECB moved, so this asks
+      # only whether the reading arrived. It did not on 2026-09-03: the run
+      # committed "exchange rates 2026-09-03" over rates retrieved on 08-31,
+      # because the subject takes `{today}` and the file did not.
+      fresh: data/fx.json
       subject: "data: exchange rates {today}"
       nothing: "rates unchanged since the last reading"
