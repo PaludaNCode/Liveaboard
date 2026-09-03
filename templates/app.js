@@ -208,8 +208,16 @@
      The toggle is asked before the tier. Nitrox and gear are filed under the
      site's Optional Extras, so testing the tier first returned false before
      the toggle was ever read and both switches on the page added nothing to
-     any total. Mirrors pricing._is_counted — keep the two in step. */
+     any total. Mirrors pricing._is_counted — keep the two in step.
+
+     `subsumed_by` is asked before anything, and is the one answer here that is
+     not the visitor's to change: a charge another line on the same bill
+     already covers is money this bill states once, whatever the toggles say.
+     Python decides it — pricing.subsumed_charges, over the same set of fees
+     this line was summed with — and the browser only obeys, which is the same
+     division as every other pricing question. */
   function lineCounts(line) {
+    if (line.subsumed_by) return false;
     if (line.included) return false;
     if (line.toggle) return !!state.toggles[line.toggle];
     if (line.tier === "optional") return false;
@@ -246,7 +254,7 @@
      difference that is an artefact of how the two were summed. */
   function padiMetricsFor(dep) {
     var itin = D.itineraries[dep.itinerary_id];
-    if (!dep.padi_base_line || !itin.padi_lines || itin.padi_overlap) return null;
+    if (!dep.padi_base_line || !itin.padi_lines) return null;
     return metricsOf([dep.padi_base_line].concat(itin.padi_lines), dep.padi);
   }
 
@@ -284,7 +292,11 @@
           unpriced.push(line.label);
         }
       }
-      if (line.tier === "mandatory" && line.has_price && line.display) {
+      /* Required, and not already covered by a bundle beside it: a subsumed
+         line is a charge this bill states twice and collects once, so adding
+         it here would make the split under the Total disagree with the Total. */
+      if (line.tier === "mandatory" && line.has_price && line.display &&
+          !line.subsumed_by) {
         required += line.display.amount;
       }
     });
@@ -338,12 +350,12 @@
      project's reading order asserted as a relationship. Under `PADI_SAME` they
      are one price and the span collapses. */
   function best(row) {
-    /* No total where the disclosure names one charge twice -- `fee_overlap`
-       joins `mandatory_known` rather than replacing it, because they are two
-       ways for a bill not to add up and the sentences differ. Withheld here
-       and not in `metricsFor`: `row.lav` is an object the Nitrox and Places
-       columns read fields off, so nulling it there empties the table. */
-    var lav = row.d.mandatory_known && !row.d.fee_overlap ? row.lav : null;
+    /* A bundle naming a charge that is also its own line withheld the total
+       here for a while, as `fee_overlap`. It is settled on the line now --
+       `subsumed_by`, so `lineCounts` leaves it out and the bill adds up -- and
+       nothing about it belongs in this function: a bill with one charge stated
+       twice and counted once is a bill, and the panel names what covers it. */
+    var lav = row.d.mandatory_known ? row.lav : null;
     var padi = row.padi;
     if (!lav && !padi) return null;
     if (!lav || !padi) {
@@ -825,10 +837,6 @@
   function disclosure(dep) {
     if (!dep.fees_known) return ["none", "not looked at"];
     if (!dep.mandatory_known) return ["partial", "optional only"];
-    /* Read, and self-contradictory. Third rather than folded into `partial`:
-       that sentence says the operator stated no required extras, and this one
-       stated them twice. */
-    if (dep.fee_overlap) return ["overlap", "counted twice"];
     return ["full", "required stated"];
   }
 
@@ -846,12 +854,7 @@
     partial: "The operator publishes only optional extras, so its required " +
              "ones are unstated. They are still charged — bundled into the " +
              "berth or collected at the dock — and the listing does not say " +
-             "which, so no total is claimed here.",
-    overlap: "The seller bills one of these charges twice — once on its own " +
-             "line and once inside a bundle that names it. Both are published " +
-             "as required, and nothing in the listing says which is the real " +
-             "one, so adding them up would state a price nobody quotes. The " +
-             "fee lines are all here; the total is not."
+             "which, so no total is claimed here."
   };
 
   /* Sixteen columns became twelve, and not one fact went with the four.
@@ -1796,6 +1799,18 @@
                   (D.meta.fx && D.meta.fx.sourced === false
                     ? " (approximate rate, not a sourced one)"
                     : " (" + line.fx.as_of + ")"));
+      }
+      /* A charge the seller states twice, before the seller's own words for
+         it: the line is printed at its published figure and left out of the
+         total, so the row has to say what covers it or it reads as a fee the
+         page forgot. Named from `fee_labels`, which is where every label on
+         this panel comes from, so the sentence cannot name it differently
+         from the row it points at. */
+      if (line.subsumed_by) {
+        prov.push("already covered by " +
+                  (D.fee_labels[line.subsumed_by] || line.subsumed_by) +
+                  " above, which names it — the seller publishes this charge " +
+                  "twice, so it is counted once");
       }
       if (line.note) prov.push(line.note);
       /* Each cell names itself. Below 760px a fee line is not a row of

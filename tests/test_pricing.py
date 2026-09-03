@@ -17,7 +17,7 @@ from liveaboard.pricing import (
     _is_counted,
     compute,
     mandatory_known,
-    overlapping_charges,
+    subsumed_charges,
     resolve_fees,
 )
 from liveaboard.render import TEMPLATE_DIR, build_payload
@@ -376,7 +376,7 @@ if __name__ == "__main__":
 
 
 class TestABundleThatNamesItsOwnLine(unittest.TestCase):
-    """A disclosure that bills one charge twice does not add up.
+    """A charge the seller states twice is counted once, and says so.
 
     Seawolf Dominator. PADI publishes both of these as required, and we read
     both faithfully -- they are distinct catalogue items, and
@@ -386,10 +386,14 @@ class TestABundleThatNamesItsOwnLine(unittest.TestCase):
         Visa, dive permit, taxes, marine park fees, harbour fee
         and fuel surcharges                                       180-255
 
-    Neither is dropped. Deleting a published mandatory charge on an inference
-    is the same failure as inventing one, so what the page withholds is the
-    *sum* -- the verdict `mandatory_known` already gives a listing that stated
-    no required extras.
+    Neither is dropped, and the total is not withheld either. The operator
+    itemises the bundle in its own `whatsNotIncluded` prose on 10 of the boat's
+    13 itineraries -- *"Visa, dive permission and taxes 43 Euro ... marine
+    parks: South: 80 Euro ... Fuel surcharge: 30 Euro"* -- states nothing at
+    250 on any of them, and prices the visa at 30 on its other hull. So the
+    bundle is the money, the standalone line is a copy of part of it, and the
+    copy is shown at its published figure and left out of the sum. See
+    `pricing.subsumed_charges` for the readings and what they replace.
     """
 
     def fee(self, code: FeeCode, amount: str, note: str,
@@ -406,9 +410,9 @@ class TestABundleThatNamesItsOwnLine(unittest.TestCase):
                 "provenance": {"kind": "scraped", "source_id": "test",
                                "retrieved": "2026-08-27"}}
 
-    def payload(self, fees: list[dict]):
-        """The page, built from a one-departure dataset with these fees."""
-        dataset = Dataset.from_dict({
+    def dataset(self, fees: list[dict]) -> Dataset:
+        """A one-departure dataset carrying these fees."""
+        return Dataset.from_dict({
             "schema_version": 1, "generated": "2026-08-27",
             "default_currency": "EUR", "notes": "t",
             "fx": {"display_currency": "EUR", "as_of": "2026-08-27",
@@ -429,64 +433,96 @@ class TestABundleThatNamesItsOwnLine(unittest.TestCase):
                                "retrieved": "2026-08-27"},
             }],
         })
-        return build_payload(dataset)["departures"][0]
+
+    #: The pair, as Seawolf Dominator publishes it.
+    PAIR = [
+        {"code": "visa", "amount": 250.0, "note": "Visa fees"},
+        {"code": "marine_park", "amount": 255.0,
+         "note": "Visa, dive permit, taxes, marine park fees, "
+                 "harbour fee and fuel surcharges"},
+    ]
+
+    def pair_raw(self) -> list[dict]:
+        return [self.raw(f["code"], f["amount"], f["note"]) for f in self.PAIR]
 
     def test_a_bundle_naming_a_line_that_is_also_billed_alone(self) -> None:
-        found = overlapping_charges([
+        """The component, and which bundle covers it -- the second half matters
+        because the panel names it, and a row that says a published charge is
+        not counted has to say what accounts for it."""
+        found = subsumed_charges([
             self.fee(FeeCode.VISA, "250 EUR", "Visa fees"),
             self.fee(FeeCode.MARINE_PARK, "255 EUR",
                      "Visa, dive permit, taxes, marine park fees, "
                      "harbour fee and fuel surcharges"),
         ])
-        self.assertEqual(found, [FeeCode.VISA])
+        self.assertEqual(found, {FeeCode.VISA: FeeCode.MARINE_PARK})
 
     def test_a_bundle_naming_nothing_else_on_the_bill_is_fine(self) -> None:
         """Hammerhead II: *Park and Port Fees* beside a separate fuel
         surcharge. The bundle does not name fuel, so nothing is billed twice
-        and 29 bills like it keep their total."""
-        self.assertEqual(overlapping_charges([
+        and 29 bills like it count both lines."""
+        self.assertEqual(subsumed_charges([
             self.fee(FeeCode.MARINE_PARK, "80 EUR", "Park and Port Fees"),
             self.fee(FeeCode.FUEL_SURCHARGE, "45 EUR", "Fuel surcharge"),
-        ]), [])
+        ]), {})
 
     def test_two_plain_lines_are_two_charges(self) -> None:
         """Port fees beside a fuel surcharge, on 40 bills. Neither title names
         the other, and a single name is a line however long it is written."""
-        self.assertEqual(overlapping_charges([
+        self.assertEqual(subsumed_charges([
             self.fee(FeeCode.PORT_FEES, "25 EUR", "Port Fees"),
             self.fee(FeeCode.FUEL_SURCHARGE, "40 EUR", "Fuel surcharges"),
-        ]), [])
+        ]), {})
 
     def test_an_optional_overlap_changes_no_total(self) -> None:
-        """The verdict is about charges a diver cannot decline, so an optional
+        """The rule is about charges a diver cannot decline, so an optional
         extra overlapping another is not this. Nothing counts it either way."""
-        self.assertEqual(overlapping_charges([
+        self.assertEqual(subsumed_charges([
             self.fee(FeeCode.VISA, "250 EUR", "Visa fees", tier=FeeTier.OPTIONAL),
             self.fee(FeeCode.MARINE_PARK, "255 EUR",
                      "Visa, marine park fees and harbour fee",
                      tier=FeeTier.OPTIONAL),
-        ]), [])
+        ]), {})
 
-    def test_the_page_keeps_the_berth_price_and_withholds_the_sum(self) -> None:
-        """What the reader gets: the fare, every fee line, and no total."""
-        entry = self.payload([
-            self.raw("visa", 250.0, "Visa fees"),
-            self.raw("marine_park", 255.0,
-                     "Visa, dive permit, taxes, marine park fees, "
-                     "harbour fee and fuel surcharges"),
-        ])
+    def test_the_bundle_is_the_charge_and_the_copy_adds_nothing(self) -> None:
+        """The arithmetic, which is the whole point: 1,500 + 255, not + 505.
 
-        self.assertEqual(entry["fee_overlap"], ["visa"])
-        # Read, and read as saying something -- the two verdicts that mean a
-        # different sentence must both stay true, or the page prints the wrong
-        # reason for the missing total.
+        And the copy is still a line on the bill at its published figure --
+        `compute` is the authority the page's adder mirrors, so both facts are
+        asserted here rather than only in the payload.
+        """
+        dataset = self.dataset(self.pair_raw())
+        breakdown = compute(dataset.itineraries["i"], dataset.departures[0],
+                            dataset.fx)
+
+        self.assertEqual(float(breakdown.total.amount), 1755.0)
+        lines = {line.code: line for line in breakdown.lines}
+        self.assertEqual(lines[FeeCode.VISA].subsumed_by, FeeCode.MARINE_PARK)
+        self.assertFalse(lines[FeeCode.VISA].counted)
+        self.assertEqual(float(lines[FeeCode.VISA].display.amount), 250.0)
+        self.assertIsNone(lines[FeeCode.MARINE_PARK].subsumed_by)
+        self.assertTrue(lines[FeeCode.MARINE_PARK].counted)
+
+    def test_the_page_ships_the_line_and_what_covers_it(self) -> None:
+        """What the reader gets: the fare, every fee line, a total, and the
+        name of the bundle that accounts for the line not in it."""
+        payload = build_payload(self.dataset(self.pair_raw()))
+        lines = {line["code"]: line
+                 for line in payload["itineraries"]["i"]["lines"]}
+
+        self.assertEqual(lines["visa"]["subsumed_by"], "marine_park")
+        self.assertEqual(lines["visa"]["display"]["amount"], 250.0)
+        self.assertIn("marine_park", payload["fee_labels"])
+        entry = payload["departures"][0]
         self.assertTrue(entry["fees_known"])
         self.assertTrue(entry["mandatory_known"])
         self.assertIn("base", entry)
 
     def test_a_clean_bill_carries_no_such_key(self) -> None:
-        """One boat in the fleet. A key written per departure is written 1,122
-        times, so it is absent wherever it does not fire."""
-        self.assertNotIn("fee_overlap", self.payload([
+        """One code on one boat in the fleet. A key written per fee line is
+        written on 2,400 of them, so it is absent wherever it does not fire."""
+        payload = build_payload(self.dataset([
             self.raw("marine_park", 80.0, "Park and Port Fees"),
         ]))
+        for line in payload["itineraries"]["i"]["lines"]:
+            self.assertNotIn("subsumed_by", line)

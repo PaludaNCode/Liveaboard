@@ -518,18 +518,41 @@ fuel surcharges and VAT*, 200 — and Amelie publishes three bare components
 there (harbour, fuel, park, all unpriced). Across 30 vessels, `section` 30
 carries whatever a shop happens to file there.
 
-What is left is the figure, and it is the only evidence that separates the two:
-**every other vessel that prices a visa on its own prices it at 25–30** — Blue
-30, Freedom III 25 — which is what an Egyptian visa costs. Seawolf's is 250,
-ten times that and inside the range of its own package. The likeliest reading is
-a shop entering a package total against a visa-titled catalogue item, and this
-probe cannot prove it.
+What that leaves is the figure: **every other vessel that prices a visa on its
+own prices it at 25–30** — Blue 30, Freedom III 25 — which is what an Egyptian
+visa costs. Seawolf's is 250, ten times that and inside the range of its own
+package. On that alone the likeliest reading is a shop entering a package total
+against a visa-titled catalogue item, and it is only a reading, so the first
+answer here was to withhold the sum and keep both lines.
 
-So **no line is dropped on the strength of this.** A published mandatory charge
-is not ours to delete on an inference, and *never invent a price* cuts both
-ways. What the finding supports is refusing to call such a bill **complete**:
-a disclosure naming one charge twice does not add up, which is the verdict this
-site already reaches for a mandatory line with no figure on it.
+**Three further readings of the same page settle it** (probed 2026-09-03, same
+tool, `--prose` and `--fleet`):
+
+1. **The operator itemises the bundle in its own words.** `whatsNotIncluded`,
+   on 10 of the vessel's 13 itineraries: *"On bill: Fee for marina Marsa Ghaleb
+   25 Euro … Fuel surcharge: 30 Euro per person (subject to change), Payable on
+   board. Visa, dive permission and taxes 43 Euro … Fee for marine parks:
+   South: 80 Euro"*. Those parts sum to the bundle's own 180–255, and the split
+   moves the way the bundle's figure moves by route.
+2. **The visa is priced inside that 43** — *"By prior stay in a hotel we will
+   cut from this amount 25 \$ for the visa (in Euro, dependent on the daily
+   exchange rate)"*. And **no Dominator itinerary states anything at 250**
+   anywhere in that text; the other three name no Egyptian visa at all, only a
+   *Sudan entry visa 155US\$* left over from a Sudan trip's boilerplate.
+3. **The operator's other hull prices its visa at 30.** Seawolf Steel, same
+   company, a different shop id (112674 against Dominator's 18217), publishes
+   one mandatory entry — *Dive permission, taxes, Marine Park fee and harbor
+   fee*, `kind` 600 `section` 10, 185–255, the same figures moving the same way
+   by route — and files *Visa fees* at **30 under `optionalOnBoard`**. Same
+   seller, same season, same fleet.
+
+So the bundle is the money and the standalone entry is a copy of part of it.
+**Still no line is dropped**: `pricing.subsumed_charges` marks the component
+`subsumed_by` the bundle, the breakdown prints it at its published 250 with
+*already covered by … above* beside it, and only the arithmetic changes. A
+published mandatory charge is not ours to delete — but which of two entries
+carries the money is a question the source answered, and 17 rows get a total
+back.
 
 ### The optional half, and the gear set inside it
 
@@ -893,6 +916,18 @@ vessels PADI carries (DUNE Longara, DUNE Titan, Snefro Love, Snefro Pearl,
 Snefro Target), and gives a second reading of nitrox inclusion to check the fee
 panel's against. Precedence is the standing rule: the vessel's own panel wins
 where it exists, PADI fills where it does not, never a merge.
+
+Confirmed again 2026-09-03 on `/liveaboard/egypt/my-seawolf-dominator/`, a
+`padi_only` vessel with no liveaboard.com page at all and therefore no `cabins`,
+`length_m` or `year_built` from anywhere: *Cabins 12 · Length / Width 36 m / 8 m
+· Year built / renovated 2007 / 2017*. **And the second nitrox reading this
+section was written to enable now disagrees with the first**, on this boat: the
+strip says *Nitrox FREE* and `paymentInformation.paymentNitrox` says *"Nitrox:
+For free"*, while the itinerary's own `optionalBookableAdvancePaidOnBoard`
+prices *Nitrox* at 50 with `isIncluded: false` — which is what the page counts.
+Not acted on: three claims from one seller and no measurement of which holds
+across the fleet, so the specific entry with a figure on it still wins. Worth a
+probe of its own before either is believed.
 
 **Negative, and the reason `guests` stays open: the page states no guest count
 anywhere.** The whole rendered body searched for every numeric form of guests,
