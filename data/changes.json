@@ -1,6 +1,2038 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-03",
+  "added": [
+   {
+    "id": "blue-storm-2027-05-06-0",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-05-06",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-07-1",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-05-07",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-09-2",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-09",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-05-13-1",
+    "boat": "Blue Seas",
+    "title": "Rocky - Elba - St. John's - Elphinstone",
+    "start": "2027-05-13",
+    "price": 2074.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-05-13-1",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-05-13",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-14-3",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-05-14",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-16-4",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-16",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-05-20-2",
+    "boat": "Blue Storm",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-05-20",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-21-5",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-05-21",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-23-6",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-23",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-05-27-3",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-27",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-28-7",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-05-28",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-05-30-8",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-30",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-06-03-0",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-06-03",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-03-0",
+    "boat": "Blue Storm",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-06-03",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-04-0",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-06-04",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-06-1",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-06",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-10-1",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-06-10",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-11-2",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-06-11",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-13-3",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-13",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-17-2",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-06-17",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-18-4",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-06-18",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-20-5",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-20",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-06-24-1",
+    "boat": "Blue Seas",
+    "title": "Northern Reefs & Tiran",
+    "start": "2027-06-24",
+    "price": 1379.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-24-3",
+    "boat": "Blue Storm",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-06-24",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-25-6",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-06-25",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-06-27-7",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-27",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-01-0",
+    "boat": "Blue Seas",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-07-01",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-07-01-0",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-01",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-02-0",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-07-02",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "ss-glorious-miss-nouran-2027-07-03-0",
+    "boat": "SS Glorious Miss Nouran",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-07-03",
+    "price": 1772.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-04-1",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-07-04",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-08-1",
+    "boat": "Blue Seas",
+    "title": "North & Safaga",
+    "start": "2027-07-08",
+    "price": 1379.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-07-08-1",
+    "boat": "Blue Storm",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-08",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-09-2",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-07-09",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-11-3",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-07-11",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-15-2",
+    "boat": "Blue Seas",
+    "title": "North & Tiran",
+    "start": "2027-07-15",
+    "price": 1379.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-07-15-2",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-07-15",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-16-4",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-07-16",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-18-5",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-07-18",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-22-3",
+    "boat": "Blue Seas",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-07-22-3",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-07-22",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "sea-serpent-contessa-2027-07-22-0",
+    "boat": "Sea Serpent Contessa",
+    "title": "North & Brothers",
+    "start": "2027-07-22",
+    "price": 1598.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-23-6",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-07-23",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-25-7",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-07-25",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-29-4",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-29",
+    "price": 1825.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-30-8",
+    "boat": "Iceberg",
+    "title": "Overnight Diving & Snorkelling",
+    "start": "2027-07-30",
+    "price": 209.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-08-05-0",
+    "boat": "Blue Seas",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-08-05-0",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "oceanix-2027-08-07-0",
+    "boat": "Oceanix",
+    "title": "North & Brothers Liveaboard",
+    "start": "2027-08-07",
+    "price": 1168.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-08-12-1",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-08-12",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-08-12-1",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-08-12",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-08-19-2",
+    "boat": "Blue Seas",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-08-19",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-08-19-2",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-19",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "oceanix-2027-08-21-1",
+    "boat": "Oceanix",
+    "title": "Sataya & Daedalus",
+    "start": "2027-08-21",
+    "price": 1285.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-08-26-3",
+    "boat": "Blue Seas",
+    "title": "St. John's",
+    "start": "2027-08-26",
+    "price": 1448.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-08-26-3",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-08-26",
+    "price": 1564.0,
+    "currency": "USD"
+   }
+  ],
+  "sold_out": [
+   {
+    "id": "hammerhead-ii-2027-06-12-1",
+    "boat": "Hammerhead II",
+    "title": "Southern Charm: Daedalus - Zabargad - Rocky Island - Sataya (Fury Shoals)",
+    "start": "2027-06-12",
+    "price": 1162.0,
+    "currency": "USD"
+   },
+   {
+    "id": "hammerhead-ii-2027-06-19-2",
+    "boat": "Hammerhead II",
+    "title": "Red Sea Charm: Abu Nuhas - SS Thistlegorm - The Brothers - Safaga",
+    "start": "2027-06-19",
+    "price": 1103.0,
+    "currency": "USD"
+   },
+   {
+    "id": "oceanix-2027-07-24-0",
+    "boat": "Oceanix",
+    "title": "North & Brothers Liveaboard",
+    "start": "2027-07-24",
+    "price": 1168.0,
+    "currency": "USD"
+   },
+   {
+    "id": "hammerhead-ii-2027-07-31-4",
+    "boat": "Hammerhead II",
+    "title": "Super Diversity: Daedalus - St. John's - Sataya (Fury Shoals)",
+    "start": "2027-07-31",
+    "price": 1221.0,
+    "currency": "USD"
+   },
+   {
+    "id": "hammerhead-ii-2027-08-21-2",
+    "boat": "Hammerhead II",
+    "title": "Northernmost: Abu Nuhas - SS Thistlegorm - Ras Mohammed - Tiran Island - Dahab",
+    "start": "2027-08-21",
+    "price": 1221.0,
+    "currency": "USD"
+   },
+   {
+    "id": "odyssey-2027-08-21-2",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Treasures of the North",
+    "start": "2027-08-21",
+    "price": 1645.0,
+    "currency": "USD"
+   }
+  ],
+  "returned": [
+   {
+    "id": "golden-dolphin-2027-05-13-1",
+    "boat": "Golden Dolphin",
+    "title": "Brothers",
+    "start": "2027-05-13",
+    "price": 1377.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-2027-05-27-3",
+    "boat": "Golden Dolphin",
+    "title": "North & Brothers",
+    "start": "2027-05-27",
+    "price": 1377.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-2027-06-17-1",
+    "boat": "Golden Dolphin",
+    "title": "North & Brothers",
+    "start": "2027-06-17",
+    "price": 1377.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-iv-2027-07-01-0",
+    "boat": "Golden Dolphin IV",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-01",
+    "price": 1737.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-2027-07-22-2",
+    "boat": "Golden Dolphin",
+    "title": "North & Brothers",
+    "start": "2027-07-22",
+    "price": 1232.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-2027-08-05-0",
+    "boat": "Golden Dolphin",
+    "title": "Brothers",
+    "start": "2027-08-05",
+    "price": 1232.0,
+    "currency": "USD"
+   },
+   {
+    "id": "aphrodite-2027-08-07-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-08-07",
+    "price": 2317.0,
+    "currency": "USD"
+   },
+   {
+    "id": "aphrodite-2027-08-21-2",
+    "boat": "Aphrodite",
+    "title": "North Wrecks",
+    "start": "2027-08-21",
+    "price": 2375.0,
+    "currency": "USD"
+   },
+   {
+    "id": "golden-dolphin-iv-2027-08-21-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North, Safaga & Brothers",
+    "start": "2027-08-21",
+    "price": 2548.0,
+    "currency": "USD"
+   }
+  ],
+  "withdrawn": [
+   {
+    "id": "blue-storm-2027-05-06-padi",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-05-06",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-05-09-1",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-09",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-05-13-padi",
+    "boat": "Blue Seas",
+    "title": "Rocky - Elba - St. John's - Elphinstone",
+    "start": "2027-05-13",
+    "price": 1790.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-05-13-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-05-13",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-05-16-2",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-05-16",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-05-20-padi",
+    "boat": "Blue Storm",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-05-20",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-05-23-3",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-05-23",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-05-27-padi",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-27",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-05-30-4",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-05-30",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-06-03-padi",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-06-03",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-06-03-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-06-03",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-06-06-0",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-06",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-10-padi",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-06-10",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-06-13-1",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-06-13",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-storm-2027-06-17-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-06-17",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-06-20-2",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-06-20",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-06-24-padi",
+    "boat": "Blue Seas",
+    "title": "North & Tiran",
+    "start": "2027-06-24",
+    "price": 1190.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-06-24-padi",
+    "boat": "Blue Storm",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-06-24",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-06-27-3",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-06-27",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-01-padi",
+    "boat": "Blue Seas",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-07-01",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-07-01-padi",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-01",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-07-04-0",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-07-04",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-08-padi",
+    "boat": "Blue Seas",
+    "title": "North & Safaga",
+    "start": "2027-07-08",
+    "price": 1190.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-07-08-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-08",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-07-11-1",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-07-11",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-15-padi",
+    "boat": "Blue Seas",
+    "title": "North & Tiran",
+    "start": "2027-07-15",
+    "price": 1190.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-07-15-padi",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-07-15",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "iceberg-2027-07-18-2",
+    "boat": "Iceberg",
+    "title": "Hurghada North",
+    "start": "2027-07-18",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-22-padi",
+    "boat": "Blue Seas",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-07-22-0",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1564.0,
+    "currency": "USD"
+   },
+   {
+    "id": "iceberg-2027-07-25-3",
+    "boat": "Iceberg",
+    "title": "Special Wreck Trip - Thistlegorm-Abu Nuhas-Small Gubal",
+    "start": "2027-07-25",
+    "price": 615.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-07-29-0",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-07-29",
+    "price": 1824.0,
+    "currency": "USD"
+   },
+   {
+    "id": "blue-seas-2027-08-05-padi",
+    "boat": "Blue Seas",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-08-05-padi",
+    "boat": "Blue Storm",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-seas-2027-08-12-padi",
+    "boat": "Blue Seas",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-08-12",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-08-12-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus & Fury Shoals",
+    "start": "2027-08-12",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-seas-2027-08-19-padi",
+    "boat": "Blue Seas",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-08-19",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-08-19-padi",
+    "boat": "Blue Storm",
+    "title": "St. John's",
+    "start": "2027-08-19",
+    "price": 1350.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-seas-2027-08-26-padi",
+    "boat": "Blue Seas",
+    "title": "St. John's",
+    "start": "2027-08-26",
+    "price": 1250.0,
+    "currency": "EUR"
+   },
+   {
+    "id": "blue-storm-2027-08-26-padi",
+    "boat": "Blue Storm",
+    "title": "Daedalus, Rocky & Zabargad",
+    "start": "2027-08-26",
+    "price": 1350.0,
+    "currency": "EUR"
+   }
+  ],
+  "price_up": [
+   {
+    "id": "avo-2027-07-24-0",
+    "boat": "AVO",
+    "title": "The Best of the South",
+    "start": "2027-07-24",
+    "was": 934.0,
+    "now": 1870.0,
+    "currency": "USD",
+    "delta": 936.0,
+    "pct": 100.21413276231263
+   },
+   {
+    "id": "blue-melody-2027-05-08-1",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-08",
+    "was": 1372.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 371.0,
+    "pct": 27.040816326530614
+   },
+   {
+    "id": "blue-melody-2027-05-15-2",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-15",
+    "was": 1372.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 371.0,
+    "pct": 27.040816326530614
+   },
+   {
+    "id": "odyssey-2027-08-28-3",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-28",
+    "was": 1678.0,
+    "now": 1866.0,
+    "currency": "USD",
+    "delta": 188.0,
+    "pct": 11.203814064362335
+   },
+   {
+    "id": "sindalahs-2027-07-31-4",
+    "boat": "Sindalahs",
+    "title": "Total Solar Eclipse Expedition: Elphinstone, Fury Shoals & St. John's",
+    "start": "2027-07-31",
+    "was": 1586.0,
+    "now": 1763.0,
+    "currency": "USD",
+    "delta": 177.0,
+    "pct": 11.16015132408575
+   },
+   {
+    "id": "yachtiano-2027-07-31-4",
+    "boat": "Yachtiano",
+    "title": "North & Tiran",
+    "start": "2027-07-31",
+    "was": 1564.0,
+    "now": 1738.0,
+    "currency": "USD",
+    "delta": 174.0,
+    "pct": 11.12531969309463
+   },
+   {
+    "id": "blue-melody-2027-05-22-3",
+    "boat": "Blue Melody",
+    "title": "Daedalus & St. John's",
+    "start": "2027-05-22",
+    "was": 1372.0,
+    "now": 1526.0,
+    "currency": "USD",
+    "delta": 154.0,
+    "pct": 11.224489795918368
+   },
+   {
+    "id": "alsuraya-2027-05-29-4",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-05-29",
+    "was": 1303.0,
+    "now": 1448.0,
+    "currency": "USD",
+    "delta": 145.0,
+    "pct": 11.128165771297006
+   },
+   {
+    "id": "unity-2027-05-01-0",
+    "boat": "Unity",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-01",
+    "was": 1181.0,
+    "now": 1251.0,
+    "currency": "USD",
+    "delta": 70.0,
+    "pct": 5.927180355630822
+   },
+   {
+    "id": "unity-2027-05-08-1",
+    "boat": "Unity",
+    "title": "North & Brothers",
+    "start": "2027-05-08",
+    "was": 1181.0,
+    "now": 1251.0,
+    "currency": "USD",
+    "delta": 70.0,
+    "pct": 5.927180355630822
+   },
+   {
+    "id": "aphrodite-2027-08-07-0",
+    "boat": "Aphrodite",
+    "title": "North Classic",
+    "start": "2027-08-07",
+    "was": 2252.0,
+    "now": 2317.0,
+    "currency": "USD",
+    "delta": 65.0,
+    "pct": 2.886323268206039
+   },
+   {
+    "id": "unity-2027-06-12-1",
+    "boat": "Unity",
+    "title": "The Grand Tour",
+    "start": "2027-06-12",
+    "was": 1320.0,
+    "now": 1356.0,
+    "currency": "USD",
+    "delta": 36.0,
+    "pct": 2.727272727272727
+   },
+   {
+    "id": "blue-horizon-2027-07-17-1",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-17",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-07-24-2",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-24",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-06-19-2",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-08-21-2",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-21",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-06-12-1",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-12",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-08-07-0",
+    "boat": "Blue Horizon",
+    "title": "Daedalus & St. John's",
+    "start": "2027-08-07",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-06-05-0",
+    "boat": "Blue Horizon",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-06-05",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-08-14-1",
+    "boat": "Blue Horizon",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-08-14",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-08-28-3",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-28",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-06-19-2",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-08-21-2",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-21",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-06-12-1",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-12",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-05-29-4",
+    "boat": "Blue Melody",
+    "title": "Daedalus & St. John's",
+    "start": "2027-05-29",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-08-07-0",
+    "boat": "Blue Melody",
+    "title": "Daedalus & St. John's",
+    "start": "2027-08-07",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-06-05-0",
+    "boat": "Blue Melody",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-06-05",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-melody-2027-08-14-1",
+    "boat": "Blue Melody",
+    "title": "Rocky, Zabargad & St. John's",
+    "start": "2027-08-14",
+    "was": 1715.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 28.0,
+    "pct": 1.6326530612244898
+   },
+   {
+    "id": "blue-horizon-2027-05-08-1",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-08",
+    "was": 1372.0,
+    "now": 1394.0,
+    "currency": "USD",
+    "delta": 22.0,
+    "pct": 1.6034985422740524
+   },
+   {
+    "id": "blue-horizon-2027-05-22-3",
+    "boat": "Blue Horizon",
+    "title": "Daedalus & St. John's",
+    "start": "2027-05-22",
+    "was": 1372.0,
+    "now": 1394.0,
+    "currency": "USD",
+    "delta": 22.0,
+    "pct": 1.6034985422740524
+   },
+   {
+    "id": "blue-horizon-2027-08-28-3",
+    "boat": "Blue Horizon",
+    "title": "Northern Red Sea Wrecks & Reefs",
+    "start": "2027-08-28",
+    "was": 1505.0,
+    "now": 1526.0,
+    "currency": "USD",
+    "delta": 21.0,
+    "pct": 1.3953488372093024
+   },
+   {
+    "id": "blue-melody-2027-06-26-3",
+    "boat": "Blue Melody",
+    "title": "Northern Red Sea & Brothers",
+    "start": "2027-06-26",
+    "was": 1505.0,
+    "now": 1526.0,
+    "currency": "USD",
+    "delta": 21.0,
+    "pct": 1.3953488372093024
+   },
+   {
+    "id": "blue-melody-2027-07-17-0",
+    "boat": "Blue Melody",
+    "title": "Northern Red Sea Wrecks & Reefs",
+    "start": "2027-07-17",
+    "was": 1505.0,
+    "now": 1526.0,
+    "currency": "USD",
+    "delta": 21.0,
+    "pct": 1.3953488372093024
+   },
+   {
+    "id": "oceanix-2027-07-24-0",
+    "boat": "Oceanix",
+    "title": "North & Brothers Liveaboard",
+    "start": "2027-07-24",
+    "was": 1147.0,
+    "now": 1168.0,
+    "currency": "USD",
+    "delta": 21.0,
+    "pct": 1.8308631211857016
+   },
+   {
+    "id": "blue-horizon-2027-05-15-2",
+    "boat": "Blue Horizon",
+    "title": "Northern Red Sea & Brothers",
+    "start": "2027-05-15",
+    "was": 1204.0,
+    "now": 1221.0,
+    "currency": "USD",
+    "delta": 17.0,
+    "pct": 1.4119601328903655
+   }
+  ],
+  "price_down": [
+   {
+    "id": "yachtiano-2027-06-12-1",
+    "boat": "Yachtiano",
+    "title": "North & Tiran",
+    "start": "2027-06-12",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-06-05-0",
+    "boat": "Yachtiano",
+    "title": "North",
+    "start": "2027-06-05",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-05-01-0",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-05-01",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-05-08-1",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-05-08",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-05-15-2",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-05-15",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-05-22-3",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-05-22",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-05-29-4",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-05-29",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-06-19-2",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-06-19",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-06-26-3",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-06-26",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-07-03-0",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-07-03",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-07-10-1",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-07-10",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-07-17-2",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-07-17",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-07-24-3",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-07-24",
+    "was": 1737.0,
+    "now": 1408.0,
+    "currency": "USD",
+    "delta": -329.0,
+    "pct": -18.94070236039148
+   },
+   {
+    "id": "yachtiano-2027-08-07-0",
+    "boat": "Yachtiano",
+    "title": "North & Tiran",
+    "start": "2027-08-07",
+    "was": 1737.0,
+    "now": 1564.0,
+    "currency": "USD",
+    "delta": -173.0,
+    "pct": -9.959700633275762
+   },
+   {
+    "id": "yachtiano-2027-08-28-3",
+    "boat": "Yachtiano",
+    "title": "North",
+    "start": "2027-08-28",
+    "was": 1737.0,
+    "now": 1564.0,
+    "currency": "USD",
+    "delta": -173.0,
+    "pct": -9.959700633275762
+   },
+   {
+    "id": "yachtiano-2027-08-14-1",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-08-14",
+    "was": 1737.0,
+    "now": 1564.0,
+    "currency": "USD",
+    "delta": -173.0,
+    "pct": -9.959700633275762
+   },
+   {
+    "id": "yachtiano-2027-08-21-2",
+    "boat": "Yachtiano",
+    "title": "Yachtiano Deluxe",
+    "start": "2027-08-21",
+    "was": 1737.0,
+    "now": 1564.0,
+    "currency": "USD",
+    "delta": -173.0,
+    "pct": -9.959700633275762
+   },
+   {
+    "id": "alsuraya-2027-05-08-1",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, Rocky, Zabargad & Elphinstone",
+    "start": "2027-05-08",
+    "was": 1459.0,
+    "now": 1379.0,
+    "currency": "USD",
+    "delta": -80.0,
+    "pct": -5.483207676490747
+   },
+   {
+    "id": "alsuraya-2027-07-24-3",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, Rocky, Zabargad & Elphinstone",
+    "start": "2027-07-24",
+    "was": 1459.0,
+    "now": 1379.0,
+    "currency": "USD",
+    "delta": -80.0,
+    "pct": -5.483207676490747
+   },
+   {
+    "id": "alsuraya-2027-06-05-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-05",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-08-21-2",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-21",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-05-01-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-01",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-06-19-2",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-07-17-2",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-17",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-05-22-3",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-22",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-07-03-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-03",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-05-15-2",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, St. John's & Elphinstone",
+    "start": "2027-05-15",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "alsuraya-2027-06-26-3",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, St. John's & Elphinstone",
+    "start": "2027-06-26",
+    "was": 1407.0,
+    "now": 1330.0,
+    "currency": "USD",
+    "delta": -77.0,
+    "pct": -5.472636815920398
+   },
+   {
+    "id": "snefro-target-2027-05-01-0",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-05-01",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-05-08-1",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-05-08",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-05-15-2",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-05-15",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-05-22-3",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-05-22",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-05-29-4",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-05-29",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-06-05-0",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-06-05",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-06-12-1",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-06-12",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-06-19-2",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-06-19",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-06-26-3",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-06-26",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-07-10-1",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-07-10",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-07-17-2",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-07-17",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-07-24-3",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-07-24",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-07-31-4",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-07-31",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-08-07-0",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-08-07",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-08-14-1",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-08-14",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-08-21-2",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-08-21",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "snefro-target-2027-08-28-3",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-08-28",
+    "was": 1462.0,
+    "now": 1389.0,
+    "currency": "USD",
+    "delta": -73.0,
+    "pct": -4.993160054719562
+   },
+   {
+    "id": "alsuraya-2027-06-12-1",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-06-12",
+    "was": 1303.0,
+    "now": 1231.0,
+    "currency": "USD",
+    "delta": -72.0,
+    "pct": -5.525709900230238
+   },
+   {
+    "id": "alsuraya-2027-07-10-1",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-07-10",
+    "was": 1303.0,
+    "now": 1231.0,
+    "currency": "USD",
+    "delta": -72.0,
+    "pct": -5.525709900230238
+   },
+   {
+    "id": "alsuraya-2027-08-14-1",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-08-14",
+    "was": 1303.0,
+    "now": 1231.0,
+    "currency": "USD",
+    "delta": -72.0,
+    "pct": -5.525709900230238
+   },
+   {
+    "id": "alsuraya-2027-08-28-3",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-08-28",
+    "was": 1303.0,
+    "now": 1231.0,
+    "currency": "USD",
+    "delta": -72.0,
+    "pct": -5.525709900230238
+   },
+   {
+    "id": "snefro-love-2027-05-06-0",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-05-06",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-05-13-1",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-05-13",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-05-20-2",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-05-20",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-05-27-3",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-05-27",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-06-03-0",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-06-03",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-06-10-1",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-06-10",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-06-17-2",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-06-17",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-06-24-3",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-06-24",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-07-01-0",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-07-01",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-07-08-1",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-07-08",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-07-15-2",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-07-15",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-07-22-3",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-07-22",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-07-29-4",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-07-29",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-08-05-0",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-08-05",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-08-12-1",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-08-12",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-08-19-2",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-08-19",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   },
+   {
+    "id": "snefro-love-2027-08-26-3",
+    "boat": "Snefro Love",
+    "title": "Mini Plus: Thistlegorm - Tiran - Ras Mohammed",
+    "start": "2027-08-26",
+    "was": 849.0,
+    "now": 810.0,
+    "currency": "USD",
+    "delta": -39.0,
+    "pct": -4.593639575971731
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 260,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-03"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-08-30",
   "added": [],
   "sold_out": [],
