@@ -3427,251 +3427,241 @@
     return itin ? itin.boat : "";
   }
 
-  /* Positioned against the button rather than nested under it, so the table's
-     own horizontal scroll cannot clip the panel. Flips above where there is no
-     room below, and is clamped to the viewport on both axes. */
-  function place(host, trigger) {
-    var box = trigger.getBoundingClientRect();
-    host.hidden = false;
-    host.style.visibility = "hidden";
-    var w = host.offsetWidth, h = host.offsetHeight, pad = 8;
-    var left = Math.min(Math.max(pad, box.left), window.innerWidth - w - pad);
-    var below = window.innerHeight - box.bottom;
-    var top = below > h + pad || below > box.top ? box.bottom + 4 : box.top - h - 4;
-    host.style.left = Math.round(left) + "px";
-    host.style.top = Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
-    host.style.visibility = "";
-  }
-
-  /* One mechanism, three panels (#149).
+  /* THE PANEL IS A `<dialog>`, AND THE BROWSER OWNS IT (#78).
    *
-     The ladder's wiring was written for the ladder and is what the fee panel
-     and the entry note now use: the fee breakdown moved out of a per-row
-     dropdown, and writing a second copy of hover-peek/click-pin/Escape-close
-     would have been three implementations of one interaction, drifting apart
-     on exactly the parts that are easy to get wrong.
+     Three cells open a panel -- Places for the cabin ladder, Mandatory fees
+     for the bill, Entry bar for the stated requirement -- and this is the one
+     mechanism behind all three. It replaces a hand-built overlay outright
+     rather than repairing it, because what was wrong with that overlay was
+     not any one of its parts.
 
-     Both gestures, and focus as well as the pointer. Hover does not exist on a
-     phone and this page is built to work on one in a dive shop; and a panel is
-     the column's content rather than a reward for owning a mouse, so tabbing
-     to the cell opens it too.
+     What it was: a fixed-position div at document level, placed by a
+     measuring function, raised by a z-index, dismissed by four listeners, and
+     laid over a list that stayed fully live underneath it. That is the modal
+     contract written out longhand -- top layer, placement, Escape, focus,
+     press-away, and *making the page behind stop responding* -- and the last
+     of those was never written at all, because there is no reasonable way to
+     write it.
 
-     Opening one closes the others. Two panels anchored to two cells of the
-     same row would overlap, and the second would be read as belonging to
-     whichever cell it happened to land on. */
+     Which is the whole of the phone bug. At 402x684 the bill is 479px over a
+     452px list: it covers the rows completely. A swipe there landed on the
+     panel and scrolled the panel -- a few hundred pixels of bill, then
+     nothing -- and from the outside that is a page whose scrolling has died.
+     Four fixes went out against that report aimed at hover timers, listener
+     hosts and `overscroll-behavior`, all of them true findings about real
+     bugs, none of them this one. A dialog that is not modal over content that
+     is not inert cannot be fixed by tuning either half.
+
+     `showModal()` is the answer the platform already has:
+
+       - The dialog is in the **top layer**. No z-index to win, nothing to
+         clip it, and `place()` -- 14 lines of viewport arithmetic and a
+         capturing scroll listener chasing the trigger -- is gone.
+       - The page behind is **inert**. The dead scroll underneath is not a bug
+         that can happen, rather than one that has been fixed.
+       - **Escape**, the **backdrop**, the **focus trap** and **focus restore**
+         are the browser's. Four listeners and three pieces of state
+         (`held`, `peeked`, `dismissed`) go with them.
+       - `::backdrop` says a dialog is open. The old panel gave no sign, which
+         is why a reader whose list had stopped moving had nothing to look at.
+
+     The hover peek stays, because a diver comparing cabin ladders or fee
+     books wants them without a click each time -- and it is the same element,
+     opened with `show()` instead. `:modal` in the stylesheet is what tells
+     the two apart, so there is one dialog with two native states rather than
+     two implementations.
+
+     What is deliberately *not* here any more:
+
+       - **Focus no longer opens anything.** The old mechanism opened on
+         `focusin` to be reachable by keyboard, and then needed `dismissed` to
+         stop Escape's focus-restore reopening what it had just closed. Every
+         trigger is a `<button>`, so Enter and Space are already a `click`:
+         the keyboard was reachable through the click path the whole time.
+         And a modal that opened on focus would trap a keyboard user the
+         moment they tabbed across a row.
+       - **Nothing chases the trigger on scroll.** A peek closes when the rows
+         move under it, which is what the pointer leaving it means anyway. */
   var panels = [];
 
-  /* `opts.hoverOpens` (default true) governs the pointer half only -- click
-     and keyboard focus still open every panel this drives, on every trigger.
-     The Entry bar panel turns it off (#151): opening a dialog every time the
-     pointer crosses that cell, while it is one of three the row rebuilds on
-     demand, made scrolling the mouse down the column a slideshow. Berths and
-     the fee bill keep hovering, because a diver comparing cabin ladders or fee
-     books wants them without a click each time. */
-  function hoverPanel(host, selector, fill, opts) {
+  /* Hover is a mouse, and it is asked twice. The media query is the device --
+     a phone has no pointer to hover with, and below the card breakpoint there
+     is no room for an anchored panel either -- and `pointerType` is the
+     gesture, because a laptop with a touch screen has both and the answer is
+     per swipe. `pointerover` fires for a finger on touchstart, before the drag
+     after it is known to be a drag, so a swipe beginning on one of these
+     buttons opened its panel 120ms later, over the list. A card's meta row is
+     three of them, so most swipes on a phone started on one. `pen` groups with
+     touch: a pen that is drawing is dragging. */
+  var mouse = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+  /* `opts.hoverOpens` (default true) governs the peek only. Click and tap open
+     every panel, always. The Entry bar turns it off (#151): it sits in the
+     money block, so running the pointer down that column to compare prices
+     opened a dialog on every row it crossed. */
+  function panelDialog(dialog, selector, fill, opts) {
     var hoverOpens = !opts || opts.hoverOpens !== false;
-    var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
-    /* `.shell`, not the `tbody`, because the rows are not always a table.
-     *
-       Every listener here hung off `#body`, and below 760px that element is
-       `display:none` and the rows are `#cards` -- so on a phone not one of the
-       three panels was wired to anything. The triggers rendered, because a
-       card cell is the same column's renderer and the markup came across
-       exactly as intended; only the events did not. "The three panel triggers
-       come across working" was true of everything except the part that makes
-       them work.
+    /* `showing` is the trigger the dialog is open for, `peeked` says it was
+       hovered rather than pressed, and `muted` is the one just closed. Three
+       flags where the old mechanism had three *states* to keep consistent
+       across six listeners, because the browser now holds the open/closed
+       half. */
+    var showing = null, peeked = false, muted = null, openTimer = 0, shutTimer = 0;
 
-       The shell is the one box holding both hosts, so this is wired once and
-       stays wired if a third layout ever draws rows. The three panel hosts sit
-       outside it, and the header inside it carries no trigger, so a wider net
-       catches nothing new. */
-    var body = document.querySelector(".shell");
-
-    function shut() {
-      host.hidden = true;
-      var open = document.querySelector(selector + '[aria-expanded="true"]');
-      if (open) open.setAttribute("aria-expanded", "false");
-      held = null;
-      peeked = null;
-    }
-
-    /* A WAY OUT, BECAUSE A PHONE HAS NO ESCAPE KEY.
-     *
-     * These are dialogs -- every trigger says `aria-haspopup="dialog"` -- and
-     * they were dismissed by Escape, by tapping the trigger again, or by
-     * tapping outside. On a phone the first does not exist and the other two
-     * are under the panel: the bill is 479px tall over a 452px list on a
-     * 402x684 iPhone, so it covers the rows whole and overhangs them. A swipe
-     * in the list then lands on the panel and scrolls *it* -- 270px of bill,
-     * a few rows' worth, and then nothing. That is the whole "the UI flicks
-     * and lets me scroll a few pixels": not a scroller that stopped working,
-     * a dialog with no exit sitting on top of one.
-     *
-     * Built here rather than in each `fill`, for the reason the panels share
-     * `hoverPanel` at all -- three copies of a close button is three that can
-     * differ. `fill` writes `innerHTML`, so this goes in after it and before
-     * `place`, which measures. Sticky rather than absolute: the panel is its
-     * own scroll box and an absolutely placed button scrolls away with the
-     * bill, which is the same bug one layer down. */
+    /* Built once, here, rather than in each `fill` or three times in the
+       markup: three copies of a close button is three that can differ. The
+       bar is a flex sibling of the scroll box rather than a sticky child of
+       it, so there is nothing for the way out to scroll away with -- that was
+       the same bug one layer down. 44px square, because a multiplication sign
+       is not something a thumb can aim at. */
     var bar = document.createElement("div");
     bar.className = "pbar";
-    var shutButton = document.createElement("button");
-    shutButton.type = "button";
-    shutButton.className = "pshut";
-    shutButton.setAttribute("aria-label", "Close");
-    shutButton.innerHTML = "&times;";
-    bar.appendChild(shutButton);
-    shutButton.addEventListener("click", function (event) {
-      event.stopPropagation();
-      var trigger = held || peeked;
-      shut();
-      if (trigger && document.contains(trigger)) {
-        dismissed = trigger;
-        /* Same reason Escape does it: the trigger is inside `.shell`, which
-           scrolls, and putting focus back may not move the rows. */
-        trigger.focus({ preventScroll: true });
+    bar.innerHTML = '<button type="button" class="pshut" aria-label="Close">' +
+      "&times;</button>";
+    var body = document.createElement("div");
+    body.className = "pbody";
+    dialog.appendChild(bar);
+    dialog.appendChild(body);
+
+    /* `.shell`, not the `tbody`. Below 760px `#body` is `display:none` and the
+       rows are `#cards`, so listeners on the table wired nothing at all on a
+       phone -- the triggers rendered, because a card cell is the same column's
+       renderer, and only the events went nowhere. The shell is the one box
+       holding both row hosts. */
+    var rows = document.querySelector(".shell");
+
+    /* The peek: anchored to the trigger, non-modal, and the only part of this
+       that still does arithmetic. Flips above where there is no room below and
+       is clamped to the viewport, which is a desktop-only concern now -- a
+       phone opens nothing but the sheet. */
+    function place(trigger) {
+      var box = trigger.getBoundingClientRect();
+      var w = dialog.offsetWidth, h = dialog.offsetHeight, pad = 8;
+      var below = window.innerHeight - box.bottom;
+      var top = below > h + pad || below > box.top ? box.bottom + 4 : box.top - h - 4;
+      dialog.style.left =
+        Math.round(Math.min(Math.max(pad, box.left), window.innerWidth - w - pad)) + "px";
+      dialog.style.top =
+        Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
+    }
+
+    /* Un-light the trigger, synchronously. Every route out calls this before
+       the dialog is closed rather than after -- `close` is delivered as a
+       *task*, so a handler doing the bookkeeping there runs after a re-open
+       that followed it in the same tick and un-lights the panel that is on
+       screen. Pressing a trigger while its own peek was up did exactly that. */
+    function lower() {
+      if (showing) {
+        showing.setAttribute("aria-expanded", "false");
+        /* The pointer is still on it, and a modal hands focus back to it as
+           well, so without this Escape closed the panel and the hover opened
+           it again in the same breath -- which from the outside is Escape
+           doing nothing. Forgotten as soon as the pointer leaves. */
+        muted = showing;
       }
+      showing = null;
+      peeked = false;
+    }
+
+    function shut() {
+      clearTimeout(openTimer);
+      clearTimeout(shutTimer);
+      lower();
+      if (dialog.open) dialog.close();
+    }
+
+    /* Escape is the browser's, and `cancel` is where it can still be answered
+       synchronously. The safety net under it is the `close` handler, which
+       tidies only if nothing has reopened the dialog by the time it lands. */
+    dialog.addEventListener("cancel", lower);
+    dialog.addEventListener("close", function () {
+      if (!dialog.open) lower();
+      dialog.style.left = dialog.style.top = "";
+    });
+    dialog.querySelector(".pshut").addEventListener("click", shut);
+
+    /* Pressing the backdrop closes it. The backdrop is painted by the dialog
+       itself, so a press on it targets the dialog element; the padding is zero
+       and the content is in `.pbody`, so nothing else can report itself as the
+       dialog. */
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) shut();
     });
 
-    function show(trigger) {
-      if (fill(host, trigger) === false) return;
-      host.insertBefore(bar, host.firstChild);
-      place(host, trigger);
+    function others() {
+      panels.forEach(function (panel) { if (panel.dialog !== dialog) panel.shut(); });
+    }
+
+    /* `fill` returns false where the row has nothing to say, and then nothing
+       opens: an empty dialog is worse than an unresponsive cell, because the
+       reader has to dismiss it to get back to the list. */
+    function open(trigger, modal) {
+      if (fill(body, trigger) === false) return;
+      shut();
+      others();
+      body.scrollTop = 0;
+      showing = trigger;
+      peeked = !modal;
+      muted = null;
+      if (modal) {
+        dialog.showModal();
+      } else {
+        dialog.show();
+        place(trigger);
+      }
       trigger.setAttribute("aria-expanded", "true");
     }
 
-    function others() {
-      panels.forEach(function (panel) { if (panel.host !== host) panel.shut(); });
-    }
-
-    /* HOVER IS A MOUSE. A finger has no hover state, and `pointerover` fires
-       for one anyway -- on touchstart, before the drag that follows is known
-       to be a drag. So a swipe that began on one of these buttons opened its
-       panel 120ms later, and a card's meta row is three of them: on a phone
-       most swipes started on a trigger, the panel appeared over the list and
-       the scroll died under it. Five to ten cards a gesture, which is what a
-       scroll that keeps being interrupted looks like.
-       It only became reachable when the listeners moved off the `tbody` onto
-       `.shell` -- before that nothing on a phone was wired to anything, so
-       nothing could interrupt. The panels were the thing fixed; this is the
-       half of `hoverOpens` that should never have applied there.
-       `pointerType` and not a media query: a laptop with a touch screen has
-       both, and the answer is per gesture rather than per device. Touch opens
-       these panels by tapping, which is the `click` handler below and is
-       untouched -- and `pen` is grouped with touch because a pen that is
-       drawing is dragging, not hovering. */
-    function hovering(event) {
-      return hoverOpens && event.pointerType === "mouse";
-    }
-
-    body.addEventListener("pointerover", function (event) {
-      if (!hovering(event)) return;
+    rows.addEventListener("pointerover", function (event) {
+      if (!hoverOpens || !mouse.matches || event.pointerType !== "mouse") return;
       var trigger = event.target.closest(selector);
-      if (!trigger || held || trigger === peeked) return;
+      if (!trigger || trigger === showing || trigger === muted) return;
+      if (dialog.open && !peeked) return;      /* a pinned panel is not a peek */
       clearTimeout(shutTimer);
       clearTimeout(openTimer);
       /* A beat before opening, so running the pointer down the column does not
          flash a panel open on every row it crosses. */
-      openTimer = setTimeout(function () {
-        others();
-        peeked = trigger;
-        show(trigger);
-      }, 120);
+      openTimer = setTimeout(function () { open(trigger, false); }, 120);
     });
 
-    body.addEventListener("pointerout", function (event) {
-      if (!hovering(event) || held || !event.target.closest(selector)) return;
+    rows.addEventListener("pointerout", function (event) {
+      if (event.pointerType !== "mouse") return;
+      var trigger = event.target.closest(selector);
+      if (!trigger) return;
+      if (trigger === muted) muted = null;     /* leaving it forgets it */
+      if (!peeked) return;
       clearTimeout(openTimer);
       shutTimer = setTimeout(shut, 160);
     });
 
     /* Staying open while the pointer is inside it means a six-rung ladder --
        or a two-seller bill -- can be read without pinning it first. */
-    host.addEventListener("pointerenter", function () { clearTimeout(shutTimer); });
-    host.addEventListener("pointerleave", function () {
-      if (!held) shutTimer = setTimeout(shut, 160);
+    dialog.addEventListener("pointerenter", function () { clearTimeout(shutTimer); });
+    dialog.addEventListener("pointerleave", function () {
+      if (peeked) shutTimer = setTimeout(shut, 160);
     });
 
-    body.addEventListener("click", function (event) {
+    /* Every press pins, peeked or not. A second press on the same trigger
+       closes it, which is what a reader expects of a control that is lit. */
+    rows.addEventListener("click", function (event) {
       var trigger = event.target.closest(selector);
       if (!trigger) return;
-      clearTimeout(openTimer);
-      clearTimeout(shutTimer);
-      var again = held === trigger;
+      var again = showing === trigger && !peeked;
       shut();
-      if (again) return;
-      others();
-      held = trigger;
-      show(trigger);
+      if (!again) open(trigger, true);
     });
 
-    body.addEventListener("focusin", function (event) {
-      var trigger = event.target.closest(selector);
-      if (!trigger || held) return;
-      /* Escape returns focus to the button it dismissed, which lands right
-         back here -- so without this the panel reopened the instant it closed
-         and Escape did nothing at all. Cleared as soon as focus reaches any
-         other trigger, so dismissing one cell does not mute the next. */
-      if (trigger === dismissed) return;
-      dismissed = null;
-      others();
-      peeked = trigger;
-      show(trigger);
-    });
+    /* A peek has no business surviving the rows moving out from under it, and
+       a modal is not listening: its page is inert and cannot scroll. */
+    rows.addEventListener("scroll", function () { if (peeked) shut(); });
+    window.addEventListener("resize", function () { if (peeked) shut(); });
 
-    /* Leaving the cell forgets that it was dismissed, so tabbing away and back
-       opens it again. Without this, one Escape muted that cell for good. */
-    body.addEventListener("focusout", function (event) {
-      if (dismissed && event.target === dismissed) dismissed = null;
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key !== "Escape" || host.hidden) return;
-      var trigger = held || peeked;
-      shut();
-      if (trigger && document.contains(trigger)) {
-        dismissed = trigger;
-        /* Same reason as the pane: the trigger is inside `.shell`, which does
-           scroll, and returning focus to it must put the keyboard back where
-           it was rather than move the rows under the reader. */
-        trigger.focus({ preventScroll: true });
-      }
-    });
-
-    /* Pressing away closes it, pinned or not.
-     *
-       The `held &&` on this was the other half of the stuck dialog. A panel
-       opened by *focus* is `peeked` rather than `held`, and a peeked one was
-       dismissed only by the pointer leaving the trigger -- which on a touch
-       screen never happens. So on a phone: tap a trigger, get a panel over
-       the list, and if the tap resolved to a focus without a click there was
-       no way out at all. Escape needs a keyboard, tapping the trigger again
-       is under the panel, and this handler ignored it.
-       Nothing wants a peeked panel to survive a press somewhere else, so the
-       state it is in was never the question. */
-    document.addEventListener("click", function (event) {
-      if (host.hidden) return;
-      if (event.target.closest(selector) || host.contains(event.target)) return;
-      shut();
-    });
-
-    /* Fixed positioning is relative to the viewport, so the panel has to be
-       moved with whatever scrolled -- the page or the table. Closing on resize
-       rather than chasing it: a reflow can move the button out from under it. */
-    window.addEventListener("scroll", function () {
-      var trigger = held || peeked;
-      if (host.hidden || !trigger) return;
-      if (!document.contains(trigger)) { shut(); return; }
-      place(host, trigger);
-    }, true);
-    window.addEventListener("resize", shut);
-
-    var api = { host: host, shut: shut };
+    var api = { dialog: dialog, shut: shut };
     panels.push(api);
     return api;
   }
 
-  hoverPanel(document.getElementById("berths"), ".berths", function (host, trigger) {
+  panelDialog(document.getElementById("berths"), ".berths", function (host, trigger) {
     var d = byId[trigger.dataset.berths];
     if (!d) return false;
     fillLadder(host, d);
@@ -3680,7 +3670,7 @@
   /* The bill, out of the dropdown it used to expand into (#149). Everything
      that dropdown held except the entry bar, which is not a fee and has a
      panel of its own on the column it belongs to. */
-  hoverPanel(document.getElementById("feePanel"), ".fees-open", function (host, trigger) {
+  panelDialog(document.getElementById("feePanel"), ".fees-open", function (host, trigger) {
     var row = rowFor(trigger.dataset.fees);
     if (!row) return false;
     host.innerHTML = billPanel(row);
@@ -3690,7 +3680,7 @@
      form. Its own panel and not a line in the fee one: whether a diver may
      board at all is prior to what boarding costs, and filing a safety
      requirement under "Mandatory fees" would be the wrong name for it. */
-  hoverPanel(document.getElementById("entryPanel"), ".entry-open", function (host, trigger) {
+  panelDialog(document.getElementById("entryPanel"), ".entry-open", function (host, trigger) {
     var itin = D.itineraries[trigger.dataset.entry];
     if (!itin) return false;
     var note = entryBar(itin);

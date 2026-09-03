@@ -178,8 +178,7 @@
        the platform's own picker, which is thumb-sized and full-height and
        which no amount of CSS here would match; it arrives with keyboard
        support, type-ahead and a screen-reader contract already written; and
-       the page has three popovers of its own in `hoverPanel` without needing
-       a fourth. -->
+       the page has three dialogs of its own without needing a fourth. -->
   <div class="tgroup sortgroup">
     <label class="tlabel" for="sortBy">Sort</label>
     <span class="selwrap">
@@ -304,21 +303,26 @@
 </div><!-- /.views -->
 </div><!-- /.workspace -->
 
-<!-- The cabin ladder behind a Places figure, opened on hover or click.
-     Outside <main> deliberately: the table scrolls sideways inside a clipping
-     container, and the Places column sits at its right edge, so a panel drawn
-     inside it would be cut off exactly where this one has to appear. One
-     element at document level, positioned against the button that opened
-     it. -->
-<div id="berths" class="panel-pop" role="dialog" aria-label="Cabin prices and places left" hidden></div>
-<!-- The bill, out of the per-row dropdown it used to expand into (#149). One
-     host filled on demand rather than markup per departure: the page is a
-     single file and nothing is lazily fetched, so anything written per row
-     ships 1,122 times. -->
-<div id="feePanel" class="panel-pop bill-pop" role="dialog" aria-label="What this trip costs, line by line" hidden></div>
-<!-- And the stated entry requirement, which was the head of that dropdown and
-     is not a fee. Its own panel on the column that prints its short form. -->
-<div id="entryPanel" class="panel-pop" role="dialog" aria-label="Stated entry requirement" hidden></div>
+<!-- THE THREE PANELS ARE `<dialog>` ELEMENTS, AND THE BROWSER OWNS THEM.
+     What was here before was a hand-built overlay: a fixed-position div, placed
+     by hand, dismissed by hand, over a list that stayed live underneath it. Six
+     parts of the modal contract written out longhand -- top layer, placement,
+     Escape, focus, press-away, and making the page behind stop responding --
+     and the last of those was never written at all. That is the whole mobile
+     bug: a panel covering the rows, with the rows still taking the gesture, so
+     a swipe scrolled a few pixels of bill and then nothing. Four fixes went at
+     the symptoms.
+     `showModal()` is the mechanism instead. The dialog goes in the top layer,
+     so nothing can clip it and no z-index has to win; the page behind is inert,
+     so the dead scroll underneath is not a bug that can happen; Escape, the
+     backdrop, focus trap and focus restore are the platform's. Empty here and
+     filled on demand -- the page is one file and nothing is lazily fetched, so
+     anything written per departure ships 1,122 times. -->
+<dialog id="berths" class="panel" aria-label="Cabin prices and places left"></dialog>
+<dialog id="feePanel" class="panel bill-pop" aria-label="What this trip costs, line by line"></dialog>
+<!-- The stated entry requirement, which is not a fee and does not open from
+     the Mandatory fees column. -->
+<dialog id="entryPanel" class="panel" aria-label="Stated entry requirement"></dialog>
 
 <details class="site-footer">
   <summary>

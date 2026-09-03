@@ -534,72 +534,101 @@ Break these and the site starts lying quietly rather than failing loudly.
   the remainder after the panel had taken its cap, and at 768×600 the remainder
   was **0px**. A `min-height` floor under the table fixes neither half: a floor
   that can exceed the room left is a pane painting over the footer.
-- **One panel mechanism, not one per column.** Three cells open a panel —
-  Places for the cabin ladder, Mandatory fees for the bill, Entry bar for the
-  stated requirement — and all three go through `hoverPanel`, which takes an
-  `opts.hoverOpens` (default true) governing the pointer half only; click and
-  keyboard focus always open every panel it drives. Places and Mandatory fees
-  keep hovering, because a diver comparing cabin ladders or fee books wants
-  them without a click each time. **Entry bar turned it off (#151)**: sitting
-  in the money block, running the pointer down that column to compare prices
-  opened a dialog on every row it crossed. Keep the click half regardless of
-  `hoverOpens`: hover does not exist on a touch screen and this page is built
-  to work on a phone in a dive shop. **And the hover half is a mouse, checked
-  per event.** `pointerover` fires for a finger too, on touchstart, before the
-  drag after it is known to be a drag — so a swipe beginning on one of these
-  buttons opened its panel 120ms later, over the list, and the scroll died
-  under it. A card's meta row is three of those buttons, so most swipes on a
-  phone started on one: five to ten cards a gesture, which is what a scroll
-  that keeps being interrupted looks like. It only became reachable when the
-  listeners moved onto `.shell` — before that nothing on a phone was wired at
-  all, so nothing could interrupt — and it is the half of `hoverOpens` that
-  should never have applied there. `event.pointerType === "mouse"` and not a
-  media query, because a laptop with a touch screen has both and the answer is
-  per gesture; `pen` groups with touch, because a pen that is drawing is
+- **The panel is a `<dialog>`, and the browser owns it (#78).** Three cells
+  open one — Places for the cabin ladder, Mandatory fees for the bill, Entry
+  bar for the stated requirement — and all three go through `panelDialog`.
+  What it replaced, outright rather than by repair, was a hand-built overlay:
+  a fixed-position div at document level, placed by a measuring function,
+  raised by a z-index, dismissed by four listeners, over a list that stayed
+  fully live underneath it. That is the modal contract written out longhand —
+  top layer, placement, Escape, focus, press-away, and *making the page behind
+  stop responding* — and the last clause was never written at all, because
+  there is no reasonable way to write it.
+  **Which is the whole of the phone bug.** At 402×684 the bill is 479px over a
+  452px list: it covers the rows completely, nothing on screen says a dialog is
+  open, and a swipe there scrolls the panel to its end and then stops. From the
+  outside that is a page whose scrolling has died. Four fixes went out against
+  that report — hover timers, the listener host, `overscroll-behavior`, a close
+  button — every one a true finding about a real bug, none of them this one. A
+  panel that is not modal over content that is not inert cannot be fixed by
+  tuning either half, which is why the fifth attempt threw the mechanism away
+  instead. **Do not reintroduce a hand-placed overlay for a fourth panel**;
+  `test_the_panels_are_dialogs_and_the_browser_owns_them` refuses `position:
+  fixed`, a z-index and a `hidden` toggle inside the wiring, because such an
+  overlay passes every behavioural test on a desktop.
+  `showModal()` supplies the rest for nothing: the top layer, so nothing clips
+  it and no z-index has to win; the inert page behind, so the dead scroll is
+  unreachable rather than fixed; Escape, the backdrop, the focus trap and focus
+  restore. `test_the_list_behind_a_panel_is_inert_and_survives_it` asserts the
+  *outcome* over three rounds — the list must not move at all under an open
+  panel and must scroll exactly as before once it closes — rather than the
+  property that delivers it.
+  **The hover peek stays, as the same element shown the other way.** A diver
+  comparing cabin ladders or fee books wants them without a click each time, so
+  a mouse on Places or Mandatory fees gets `show()` anchored to the trigger,
+  and `:modal` in the stylesheet is what tells the two apart: one dialog with
+  two native states, never two implementations. `opts.hoverOpens` (default
+  true) governs the peek only — **Entry bar turns it off (#151)**, because it
+  sits in the money block and running the pointer down that column to compare
+  prices opened a dialog on every row it crossed. Press and tap open every
+  panel regardless: hover does not exist on a touch screen and this page is
+  built to work on a phone in a dive shop.
+  **Hover is asked twice, and both answers are needed.** The media query
+  (`(hover: hover) and (pointer: fine)`) is the device; `event.pointerType ===
+  "mouse"` is the gesture, because a laptop with a touch screen has both.
+  `pointerover` fires for a finger on touchstart, before the drag after it is
+  known to be a drag, so a swipe beginning on one of these buttons opened its
+  panel 120ms later — and a card's meta row is three of them, so most swipes on
+  a phone started on one. `pen` groups with touch: a pen that is drawing is
   dragging. `test_a_swipe_off_a_panel_trigger_does_not_open_it` asserts both
-  halves, since the cure for the swipe is exactly what would break the tap and
-  touch has no other way in. **And they are wired on `.shell`, not on
-  the `tbody`** — every listener in `hoverPanel` hung off `#body`, which below
-  760px is `display:none`, so on a phone not one of the three panels was
-  connected to anything and the fee bill, the cabin ladder and the entry bar
-  were all dead. Nothing looked wrong: a card cell is the same column's
-  renderer, so the buttons rendered exactly right and only the clicks went
-  nowhere, which is how *the three panel triggers come across working* stayed
-  true of everything except the part that makes them work. The shell is the
-  one box holding both row hosts. The row mark had the same bug twice — the
-  same `tbody`, and `closest("tr.row")` where a card is `article.card.row` —
-  so it matches `.row[data-id]`, the class and the attribute both layouts
-  write. **And a dialog needs a way out that does not
-  assume a keyboard.** They were dismissed by Escape, by pressing the trigger
-  again, or by pressing outside — and on a phone the first does not exist and
-  the other two are *underneath* the panel: at 402×684, the size the device
-  reported, the bill is 479px tall over a 452px list, so it covers the rows
-  whole. A swipe there lands on the panel and scrolls it — a few hundred
-  pixels of bill and then nothing, which from the outside is a scroller that
-  has stopped working, and is what three fixes were aimed at before a
-  screenshot showed the panel sitting on top of the list. So `hoverPanel`
-  builds a close control into every panel it drives, for the reason the panels
-  share it at all: three copies of a close button is three that can differ.
-  **Sticky and not absolute** — the panel is its own scroll box, so an
-  absolutely placed button scrolls away with the bill, which is the same bug
-  one layer down. 44px square, because a multiplication sign is not something
-  a thumb can aim at, and that height comes out of the panel: a dialog nobody
-  can close is worth less than one row fewer of bill.
-  **And pressing away closes it whether or not it was pinned**, which was the
-  other half of the same stuck dialog: a panel opened by *focus* is `peeked`
-  rather than `held`, the press-away handler was guarded on `held`, and a
-  peeked panel was otherwise dismissed only by the pointer leaving the trigger
-  — which on a touch screen never happens. Focus with no press after it is
-  what a tap that does not resolve to a click leaves behind, so on a phone
-  that panel had no exit at all: Escape wants a keyboard, the trigger is
-  underneath it, and this ignored it. Nothing wants a peeked panel to survive
-  a press somewhere else, so which of the two states it was in was never the
-  question.
+  halves, since the cure for the swipe is exactly what would break the tap.
+  **Focus opens nothing, and that is a deletion.** Every trigger is a
+  `<button>`, so Enter and Space are already a `click`: the keyboard was
+  reachable through the press path the whole time, and `focusin` bought only a
+  third piece of state — `dismissed`, which existed to stop Escape's own
+  focus-restore reopening what it had just closed. A modal opened by focus
+  would also trap a keyboard user the moment they tabbed across a row.
+  **`close` is delivered as a task, so no bookkeeping may live in it.** A
+  handler tidying `aria-expanded` there runs *after* a re-open that followed in
+  the same tick, and un-lights the panel that is on screen — pressing a trigger
+  while its own peek was up did exactly that. `lower()` runs synchronously on
+  every route out, and the `close` listener is a net that acts only if nothing
+  reopened the dialog. It sets `muted` as it goes: the pointer is still on the
+  trigger, and a modal hands focus back to it, so without that Escape closed
+  the panel and the hover reopened it in the same breath — which reads as
+  Escape doing nothing. Leaving the trigger forgets it.
+  **They are wired on `.shell`, not on the `tbody`** — every listener used to
+  hang off `#body`, which below 760px is `display:none`, so on a phone not one
+  of the three panels was connected to anything and the fee bill, the cabin
+  ladder and the entry bar were all dead. Nothing looked wrong: a card cell is
+  the same column's renderer, so the buttons rendered exactly right and only
+  the clicks went nowhere, which is how *the three panel triggers come across
+  working* stayed true of everything except the part that makes them work. The
+  shell is the one box holding both row hosts. The row mark had the same bug
+  twice — the same `tbody`, and `closest("tr.row")` where a card is
+  `article.card.row` — so it matches `.row[data-id]`, the class and the
+  attribute both layouts write.
+  **The way out is built once and cannot scroll away.** Three copies of a close
+  button is three that can differ, so `panelDialog` builds the bar and the
+  scroll box for every panel it drives. The bar is a flex **sibling** of
+  `.pbody` rather than a sticky child of it: the body is what scrolls, so there
+  is nothing for the button to scroll away with — that was the same bug one
+  layer down. 44px square, because a multiplication sign is not something a
+  thumb can aim at, and that height comes out of the panel: a dialog nobody can
+  close is worth less than one row fewer of bill. The backdrop closes it too,
+  which is the platform's light-dismiss and the gesture a sheet invites; a
+  press on it targets the dialog element itself, so `padding:0` with the
+  content in `.pbody` is what keeps the sheet from reporting itself as outside.
   `test_every_panel_can_be_closed_without_a_keyboard` asserts the tap target,
-  the pinning, the closing and the press-away, on all three.
+  that it does not drift, and both exits, on all three.
+  **Below 760px it is a bottom sheet** — the width where the rows are cards is
+  the width where there is no room for an anchored panel either, so the two
+  breakpoints are one. Full width, anchored to the edge a thumb reaches,
+  capped in `dvh` as well as `vh` because on iOS `vh` is a height the reader
+  cannot see all of.
   Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
-  **one div filled on demand** — nothing is lazily fetched here, so anything
+  **one dialog filled on demand** — nothing is lazily fetched here, so anything
   written per row ships 1,122 times. `rowFor` rebuilds the row rather than
   caching it against the trigger, because the bill depends on the toggles.
   The fee bill was a per-row `+` column and a full-width detail row (#149): it
@@ -608,7 +637,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   summary** — the fee table with its included lines at zero, the caveat that
   applies, and the second seller's bill with its three-state wording — because
   a panel holding only the line items would claim a total on part of a
-  disclosure. What gives is height: it caps at 70vh and scrolls inside itself,
+  disclosure. What gives is height: it caps at 85dvh and scrolls inside itself,
   and each fee table sits in its own `.fee-scroll` because the table's 460px
   `min-width` beats the panel's width and would otherwise drag the panel's
   header sideways. **On a phone that scroller was the reading experience, and
@@ -764,7 +793,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   the drawer holds what picks rows and this picks none. Native because on a
   phone it opens the platform's own picker, which is thumb-sized and
   full-height and arrives with keyboard support and a screen-reader contract
-  already written — this page has three popovers in `hoverPanel` without
+  already written — this page has three dialogs of its own without
   needing a fourth. **`paintSort` writes both renderings**, called from `draw`,
   so a heading click moves the dropdown and a pick moves the heading's arrow;
   two controls stating two orders is a reader with no way to tell which to
