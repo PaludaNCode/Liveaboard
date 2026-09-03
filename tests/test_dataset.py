@@ -433,6 +433,59 @@ class TestARebuildIsNotNews(unittest.TestCase):
                         "anything else was staged")
 
 
+class TestAScheduledRunReadsEverything(unittest.TestCase):
+    """A cap meant for a dispatch must not be what the schedule inherits.
+
+    `inputs.limit` is null on a scheduled run, so `${{ inputs.limit || 3 }}`
+    resolves to **3** there -- the dispatch default, silently applied to the
+    nightly job. `cabins.yml` writes the trap out in its `env:` block, having
+    been built to avoid it, and `padi.yml` resolves it the same way; it reached
+    `itineraries.yml` anyway, where the nightly incremental read took three
+    trips a night against a book 58 fragments short of the fleet.
+
+    It cannot be seen from outside the run. The job succeeds, the capped read
+    merges into the book rather than replacing it -- correctly -- and a run
+    that read 3 of what it was short of is indistinguishable from one that had
+    almost nothing to do.
+
+    So a scheduled workflow either resolves the cap against `github.event_name`
+    or falls back to the uncapped value. Only the inputs that decide *how much
+    of a source is read* are checked: `delay` has a politeness default that is
+    right on both paths, and this guard would be wrong to call that a cap.
+    """
+
+    WORKFLOWS = ROOT / ".github" / "workflows"
+    CAPS = ("limit", "max_pages")
+
+    def test_no_schedule_inherits_a_dispatch_cap(self):
+        checked = 0
+        for workflow in sorted(self.WORKFLOWS.glob("*.yml")):
+            text = workflow.read_text(encoding="utf-8")
+            if "schedule:" not in text:
+                continue
+            for cap in self.CAPS:
+                for use in re.finditer(
+                    r"\$\{\{[^}]*\binputs\." + cap + r"\b[^}]*\}\}", text
+                ):
+                    expression = use.group(0)
+                    checked += 1
+                    with self.subTest(workflow=workflow.name, cap=cap):
+                        self.assertTrue(
+                            "event_name" in expression
+                            or re.search(r"\|\|\s*'?0'?\s*\)?\s*\}\}",
+                                         expression),
+                            f"{workflow.name} reads `{cap}` as "
+                            f"{expression} — on a scheduled run `inputs."
+                            f"{cap}` is null, so this is the dispatch cap "
+                            f"applied to the nightly job. Resolve it against "
+                            f"github.event_name, as cabins.yml and padi.yml "
+                            f"do, or fall back to 0",
+                        )
+        self.assertGreaterEqual(
+            checked, 3, "this guard found fewer capped inputs than the "
+                        "pipeline has scheduled sources; the pattern is stale")
+
+
 class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     """A job that pushes is the only CI its own commit will ever get.
 
