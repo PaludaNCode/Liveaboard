@@ -3,6 +3,94 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-03
+
+```
+changes: HEAD -> 2026-09-03
+===========================
+
+new departures (57)
+  2027-05-06  Blue Storm             St. John's                             1,564 USD
+  2027-05-07  Iceberg                Overnight Diving & Snorkelling         209 USD
+  2027-05-09  Iceberg                Hurghada North                         615 USD
+  2027-05-13  Blue Seas              Rocky - Elba - St. John's - Elphinston 2,074 USD
+  2027-05-13  Blue Storm             Daedalus, Rocky & Zabargad             1,564 USD
+  2027-05-14  Iceberg                Overnight Diving & Snorkelling         209 USD
+  2027-05-16  Iceberg                Hurghada North                         615 USD
+  2027-05-20  Blue Storm             Rocky, Zabargad & St. John's           1,564 USD
+  2027-05-21  Iceberg                Overnight Diving & Snorkelling         209 USD
+  2027-05-23  Iceberg                Hurghada North                         615 USD
+  2027-05-27  Blue Storm             Brothers, Daedalus & Elphinstone       1,564 USD
+  2027-05-28  Iceberg                Overnight Diving & Snorkelling         209 USD
+  ... and 45 more not shown
+
+now sold out (6)
+  2027-06-12  Hammerhead II          Southern Charm: Daedalus - Zabargad - 
+  2027-06-19  Hammerhead II          Red Sea Charm: Abu Nuhas - SS Thistleg
+  2027-07-24  Oceanix                North & Brothers Liveaboard           
+  2027-07-31  Hammerhead II          Super Diversity: Daedalus - St. John's
+  2027-08-21  Hammerhead II          Northernmost: Abu Nuhas - SS Thistlego
+  2027-08-21  MY Odyssey Liveaboard  Treasures of the North                
+
+bookable again (9)
+  2027-05-13  Golden Dolphin         Brothers                              
+  2027-05-27  Golden Dolphin         North & Brothers                      
+  2027-06-17  Golden Dolphin         North & Brothers                      
+  2027-07-01  Golden Dolphin IV      Daedalus & Fury Shoals                
+  2027-07-22  Golden Dolphin         North & Brothers                      
+  2027-08-05  Golden Dolphin         Brothers                              
+  2027-08-07  Aphrodite              North Classic                         
+  2027-08-21  Aphrodite              North Wrecks                          
+  2027-08-21  Golden Dolphin IV      North, Safaga & Brothers              
+
+withdrawn (40)
+  2027-05-06  Blue Storm             St. John's                            
+  2027-05-09  Iceberg                Hurghada North                        
+  2027-05-13  Blue Seas              Rocky - Elba - St. John's - Elphinston
+  2027-05-13  Blue Storm             Daedalus, Rocky & Zabargad            
+  2027-05-16  Iceberg                Special Wreck Trip - Thistlegorm-Abu N
+  2027-05-20  Blue Storm             Rocky, Zabargad & St. John's          
+  2027-05-23  Iceberg                Hurghada North                        
+  2027-05-27  Blue Storm             Brothers, Daedalus & Elphinstone      
+  2027-05-30  Iceberg                Special Wreck Trip - Thistlegorm-Abu N
+  2027-06-03  Blue Seas              Daedalus & Fury Shoals                
+  2027-06-03  Blue Storm             Daedalus & Fury Shoals                
+  2027-06-06  Iceberg                Hurghada North                        
+  ... and 28 more not shown
+
+price up (35)
+  2027-07-24  AVO                      934 ->   1,870 USD  +936 (+100.2%)  The Best of the South
+  2027-05-08  Blue Melody            1,372 ->   1,743 USD  +371 (+27.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-15  Blue Melody            1,372 ->   1,743 USD  +371 (+27.0%)  Brothers, Daedalus & Elphinstone
+  2027-08-28  MY Odyssey Liveaboar   1,678 ->   1,866 USD  +188 (+11.2%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Sindalahs              1,586 ->   1,763 USD  +177 (+11.2%)  Total Solar Eclipse Expedition: El
+  2027-07-31  Yachtiano              1,564 ->   1,738 USD  +174 (+11.1%)  North & Tiran
+  2027-05-22  Blue Melody            1,372 ->   1,526 USD  +154 (+11.2%)  Daedalus & St. John's
+  2027-05-29  ALSURAYA               1,303 ->   1,448 USD  +145 (+11.1%)  North & Brothers
+  2027-05-01  Unity                  1,181 ->   1,251 USD  +70 (+5.9%)  Brothers, Daedalus & Elphinstone
+  2027-05-08  Unity                  1,181 ->   1,251 USD  +70 (+5.9%)  North & Brothers
+  2027-08-07  Aphrodite              2,252 ->   2,317 USD  +65 (+2.9%)  North Classic
+  2027-06-12  Unity                  1,320 ->   1,356 USD  +36 (+2.7%)  The Grand Tour
+  ... and 23 more not shown
+
+price down (66)
+  2027-06-12  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  North & Tiran
+  2027-06-05  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  North
+  2027-05-01  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-05-08  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-05-15  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-05-22  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-05-29  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-06-19  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-06-26  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-07-03  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-07-10  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  2027-07-17  Yachtiano              1,737 ->   1,408 USD  -329 (-18.9%)  Yachtiano Deluxe
+  ... and 54 more not shown
+
+260 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-08-30
 
 ```
