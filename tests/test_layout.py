@@ -1473,6 +1473,79 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                 page.close()
 
 
+    def test_a_swipe_off_a_panel_trigger_does_not_open_it(self) -> None:
+        """A finger has no hover state, and `pointerover` fires for one anyway.
+
+        It arrives on touchstart, before the drag that follows is known to be
+        a drag — so a swipe beginning on one of the three panel buttons opened
+        that panel 120ms later, over the list, and the scroll died under it. A
+        card's meta row is three of those buttons, so most swipes on a phone
+        started on one: five to ten cards a gesture.
+
+        Only reachable since the listeners moved off the `tbody` onto
+        `.shell`; before that nothing on a phone was wired at all. Both halves
+        are asserted, because the cure for the swipe is exactly what would
+        break the tap: touch has no other way in.
+        """
+        page = self._browser.new_page(
+            viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+        cdp = page.context.new_cdp_session(page)
+        try:
+            page.goto(self._url)
+            page.wait_for_selector(".cards .card .berths")
+            page.evaluate("""() => {
+              window.__opened = [];
+              ["berths", "feePanel", "entryPanel"].forEach(id => {
+                const el = document.getElementById(id);
+                new MutationObserver(() => {
+                  if (!el.hidden) window.__opened.push(id);
+                }).observe(el, { attributes: true, attributeFilter: ["hidden"] });
+              });
+            }""")
+            spot = page.evaluate("""() => {
+              const r = document.querySelector('.cards .card .berths')
+                .getBoundingClientRect();
+              return { x: Math.round(r.x + r.width / 2),
+                       y: Math.round(r.y + r.height / 2) };
+            }""")
+
+            def finger(kind, y=None):
+                points = [] if kind == "touchEnd" else [{"x": spot["x"], "y": y}]
+                cdp.send("Input.dispatchTouchEvent",
+                         {"type": kind, "touchPoints": points})
+
+            # A swipe: down on the trigger, then away, over more than the
+            # 120ms the hover timer waits.
+            finger("touchStart", spot["y"])
+            page.wait_for_timeout(200)
+            for dy in (40, 120, 240, 400):
+                finger("touchMove", spot["y"] - dy)
+                page.wait_for_timeout(40)
+            finger("touchEnd")
+            page.wait_for_timeout(400)
+            self.assertEqual([], page.evaluate("window.__opened"),
+                             "a swipe off the Places button opened its panel")
+            self.assertGreater(page.evaluate("document.querySelector('.shell').scrollTop"),
+                               0, "the swipe did not scroll at all")
+
+            # And a tap on the same button still opens it, which is the only
+            # way in on a touch screen.
+            page.evaluate("() => { document.querySelector('.shell').scrollTop = 0; }")
+            page.wait_for_timeout(200)
+            spot = page.evaluate("""() => {
+              const r = document.querySelector('.cards .card .berths')
+                .getBoundingClientRect();
+              return { x: Math.round(r.x + r.width / 2),
+                       y: Math.round(r.y + r.height / 2) };
+            }""")
+            page.touchscreen.tap(spot["x"], spot["y"])
+            page.wait_for_timeout(300)
+            self.assertFalse(page.evaluate("document.getElementById('berths').hidden"),
+                             "a tap on the Places button no longer opens it")
+        finally:
+            page.close()
+
+
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
     unittest.main()

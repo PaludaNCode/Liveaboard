@@ -3384,8 +3384,28 @@
       panels.forEach(function (panel) { if (panel.host !== host) panel.shut(); });
     }
 
+    /* HOVER IS A MOUSE. A finger has no hover state, and `pointerover` fires
+       for one anyway -- on touchstart, before the drag that follows is known
+       to be a drag. So a swipe that began on one of these buttons opened its
+       panel 120ms later, and a card's meta row is three of them: on a phone
+       most swipes started on a trigger, the panel appeared over the list and
+       the scroll died under it. Five to ten cards a gesture, which is what a
+       scroll that keeps being interrupted looks like.
+       It only became reachable when the listeners moved off the `tbody` onto
+       `.shell` -- before that nothing on a phone was wired to anything, so
+       nothing could interrupt. The panels were the thing fixed; this is the
+       half of `hoverOpens` that should never have applied there.
+       `pointerType` and not a media query: a laptop with a touch screen has
+       both, and the answer is per gesture rather than per device. Touch opens
+       these panels by tapping, which is the `click` handler below and is
+       untouched -- and `pen` is grouped with touch because a pen that is
+       drawing is dragging, not hovering. */
+    function hovering(event) {
+      return hoverOpens && event.pointerType === "mouse";
+    }
+
     body.addEventListener("pointerover", function (event) {
-      if (!hoverOpens) return;
+      if (!hovering(event)) return;
       var trigger = event.target.closest(selector);
       if (!trigger || held || trigger === peeked) return;
       clearTimeout(shutTimer);
@@ -3400,7 +3420,7 @@
     });
 
     body.addEventListener("pointerout", function (event) {
-      if (!hoverOpens || held || !event.target.closest(selector)) return;
+      if (!hovering(event) || held || !event.target.closest(selector)) return;
       clearTimeout(openTimer);
       shutTimer = setTimeout(shut, 160);
     });
