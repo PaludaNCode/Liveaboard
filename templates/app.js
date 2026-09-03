@@ -3516,12 +3516,29 @@
        is not something a thumb can aim at. */
     var bar = document.createElement("div");
     bar.className = "pbar";
-    bar.innerHTML = '<button type="button" class="pshut" aria-label="Close">' +
-      "&times;</button>";
+    /* The title goes in the bar, beside the way out, rather than under it.
+       Every `fill` writes its own heading as the body's first child -- the
+       boat, the date and the length -- and leaving it there put a blank band
+       above it: two headers, one of them empty, at the top of every sheet.
+       Hoisted rather than re-rendered, so the panels keep writing one heading
+       each and this is where it lands. The entry panel writes none, and falls
+       back to the dialog's own label, which is the string a screen reader is
+       already given for it. */
+    var head = document.createElement("div");
+    head.className = "phead";
+    bar.appendChild(head);
+    bar.insertAdjacentHTML("beforeend",
+      '<button type="button" class="pshut" aria-label="Close">&times;</button>');
     var body = document.createElement("div");
     body.className = "pbody";
     dialog.appendChild(bar);
     dialog.appendChild(body);
+    /* Focus the sheet, not the close button. `showModal()` otherwise lands on
+       the first focusable thing it finds and draws a focus ring around the
+       one control nobody was reaching for; focusing the dialog announces its
+       label instead, which is what a reader opening it wants said. */
+    dialog.setAttribute("tabindex", "-1");
+    dialog.setAttribute("autofocus", "");
 
     /* `.shell`, not the `tbody`. Below 760px `#body` is `display:none` and the
        rows are `#cards`, so listeners on the table wired nothing at all on a
@@ -3597,6 +3614,10 @@
        reader has to dismiss it to get back to the list. */
     function open(trigger, modal) {
       if (fill(body, trigger) === false) return;
+      head.textContent = "";
+      var who = body.querySelector(".pwho");
+      if (who) head.appendChild(who);
+      else head.textContent = dialog.getAttribute("aria-label") || "";
       shut();
       others();
       body.scrollTop = 0;
@@ -3606,7 +3627,15 @@
       if (modal) {
         dialog.showModal();
       } else {
+        /* A peek is a hover preview, and `show()` moves focus into it like any
+           other dialog -- which yanks the keyboard out of whatever the reader
+           was doing and draws a focus ring on a close button nobody reached
+           for. Put it back where it was: the pointer opened this, so nothing
+           asked for focus to move. */
+        var was = document.activeElement;
         dialog.show();
+        if (was && was !== document.body) was.focus({ preventScroll: true });
+        else if (document.activeElement !== document.body) document.activeElement.blur();
         place(trigger);
       }
       trigger.setAttribute("aria-expanded", "true");

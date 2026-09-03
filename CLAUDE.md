@@ -608,6 +608,33 @@ Break these and the site starts lying quietly rather than failing loudly.
   twice — the same `tbody`, and `closest("tr.row")` where a card is
   `article.card.row` — so it matches `.row[data-id]`, the class and the
   attribute both layouts write.
+  **The bar is the sheet's header, and the heading is hoisted into it.** Every
+  `fill` writes its own `.pwho` — the boat, the date, the length — as the
+  body's first child, and leaving it there put a blank band above it: two
+  headers, one of them empty, on every panel. `panelDialog` moves that node up
+  beside the close button rather than re-rendering it, so the panels go on
+  writing one heading each; the entry panel writes none and falls back to the
+  dialog's own `aria-label`, which is the string a screen reader is already
+  given for it. Below 760px the bar also carries a grab handle, because that is
+  what says *sheet* before anything is read — and only there, since on a laptop
+  the same dialog is a centred card and a handle would promise a drag that
+  means nothing.
+  **Padding goes on `.pbody`, never on the dialog.** A press on the dialog's
+  own box is how the backdrop is told apart from the sheet, so the dialog is
+  `padding: 0` and the inset lives one layer in — with the bottom one adding
+  `env(safe-area-inset-bottom)`, because a sheet is anchored to the edge the
+  home indicator sits on. The rewrite dropped the bill's horizontal padding and
+  every amount sat flush against the right edge of the screen; a phone
+  screenshot found it and no assertion did, because
+  `test_a_phone_bill_needs_no_sideways_drag` compared the amounts with the
+  *panel's* edge and the panel ended exactly there. It asserts **clearance**
+  now, on both sides.
+  **A peek does not take focus.** `show()` moves focus into the dialog like any
+  other, which pulls the keyboard out of whatever the reader was doing and
+  draws a focus ring on a control nobody reached for — so the peek puts it
+  back. The pinned sheet focuses the *dialog* rather than the close button, via
+  `autofocus` on the element itself: a screen reader then announces the label,
+  and the way out is not wearing a box.
   **The way out is built once and cannot scroll away.** Three copies of a close
   button is three that can differ, so `panelDialog` builds the bar and the
   scroll box for every panel it drives. The bar is a flex **sibling** of

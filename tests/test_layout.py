@@ -1354,7 +1354,8 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                                fits: box.left >= -1 && box.right <= innerWidth + 1
                                      && box.top >= -1 && box.bottom <= innerHeight + 1,
                                w: Math.round(box.width),
-                               text: el.querySelector('.pbody').textContent.trim().length };
+                               text: el.querySelector('.pbody').textContent.trim().length,
+                               head: el.querySelector('.phead').textContent.trim().length };
                     }""", host)
                     where = "%s at %dx%d" % (selector, width, height)
                     self.assertTrue(seen["open"], "the panel did not open, " + where)
@@ -1364,6 +1365,11 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                     self.assertGreater(seen["w"], 0, "the panel is empty, " + where)
                     self.assertGreater(seen["text"], 0, "nothing was filled in, " + where)
                     self.assertTrue(seen["fits"], "the panel is off screen, " + where)
+                    # The heading sits in the bar beside the way out. Left in
+                    # the body it put a blank band above itself — two headers,
+                    # one of them empty, at the top of every sheet.
+                    self.assertGreater(seen["head"], 0,
+                                       "the panel's header is empty, " + where)
                     page.keyboard.press("Escape")
                     page.wait_for_timeout(180)
                     self.assertFalse(
@@ -1420,13 +1426,18 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                     .filter(el => el.scrollWidth > el.clientWidth + 1)
                     .map(el => String(el.className) + ' ' + el.clientWidth +
                                '->' + el.scrollWidth);
-                  const right = Math.round(panel.getBoundingClientRect().right);
+                  const box = panel.getBoundingClientRect();
+                  const right = Math.round(box.right), left = Math.round(box.left);
                   const amounts = [...panel.querySelectorAll('.famt')]
                     .map(el => Math.round(el.getBoundingClientRect().right));
+                  const labels = [...panel.querySelectorAll('.flabel')]
+                    .map(el => Math.round(el.getBoundingClientRect().left));
                   return { open: panel.open, wide: wide,
                            tables: panel.querySelectorAll('table.fees').length,
                            right: right, past: amounts.filter(x => x > right).length,
-                           amounts: amounts.length };
+                           amounts: amounts.length,
+                           gapRight: amounts.length ? Math.min(...amounts.map(x => right - x)) : -1,
+                           gapLeft: labels.length ? Math.min(...labels.map(x => x - left)) : -1 };
                 }""")
                 where = "at %dx%d" % (width, height)
                 self.assertTrue(seen["open"], "the bill did not open " + where)
@@ -1437,6 +1448,21 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                 self.assertEqual(0, seen["past"],
                                  "%d amount(s) past the panel's edge %s"
                                  % (seen["past"], where))
+                # And not flush against it either. The rewrite that made these
+                # dialogs dropped the bill's horizontal padding, and every
+                # amount sat hard against the right edge of the screen — which
+                # the assertion above could not see, because it compared the
+                # amounts with the panel's edge and the panel ended exactly
+                # there. A phone screenshot is what found it. So the claim is
+                # clearance, on both sides, in the panel's own boxes.
+                self.assertGreaterEqual(seen["gapRight"], 6,
+                                        "the amounts are flush against the "
+                                        "panel's right edge (%dpx) %s"
+                                        % (seen["gapRight"], where))
+                self.assertGreaterEqual(seen["gapLeft"], 6,
+                                        "the fee labels are flush against the "
+                                        "panel's left edge (%dpx) %s"
+                                        % (seen["gapLeft"], where))
             finally:
                 page.close()
 

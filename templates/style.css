@@ -1001,7 +1001,14 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    21-25em width and is written further down this file, so at equal specificity
    it won and capped the bill at 400px however wide the screen was. */
 .panel.bill-pop { min-width:min(30em, calc(100vw - 16px)); max-width:min(46em, calc(100vw - 16px)); }
-.bill-pop .pwho { margin:0 -.7em .5em; }
+/* On `.pbody` and not on the dialog: the dialog's own box has to stay padding
+   free, because a press landing on it is how the backdrop is told apart from
+   the sheet. Dropped in the rewrite that made these dialogs, and every amount
+   in the bill sat flush against the right edge of the screen until it came
+   back -- which is the one thing a phone screenshot showed and no assertion
+   did, because the test compared the amounts with the *panel's* edge and the
+   panel ended exactly there. */
+.bill-pop .pbody { padding:.4em .8em .6em; }
 /* The fee table's own min-width is what makes its columns line up, and it is
    wider than a phone. So each table sits in a scroller of its own: `overflow`
    on the table itself does not work, because `min-width` wins over the panel's
@@ -1022,7 +1029,9 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    phone a sentence sharing that line ran off the right-hand edge of the
    screen with the two words naming it. Under the bar it wraps where every
    other sentence in this panel wraps. */
-.entry { margin:0 0 10px; font-size:11px; }
+/* The whole of the entry panel's body, and the only one of the three with
+   no padded table inside it -- so the inset is on the note itself. */
+.entry { margin:0; padding:.55em .8em .7em; font-size:11px; }
 .entry b { font-weight:600; color:var(--ink-dim); margin-right:14px; }
 .entry .dim { display:block; margin-top:3px; max-width:80ch; font-size:10px;
               white-space:normal; }
@@ -1711,13 +1720,24 @@ a { color:var(--accent); }
    can close is worth less than one row fewer of bill. */
 .pbar {
   flex: 0 0 auto;
-  display: flex; justify-content: flex-end;
+  display: flex; align-items: center; gap: .4em;
   background: var(--panel);
-  margin: 0 0 -2px; padding: 0;
+  border-bottom: 1px solid var(--rule);
 }
+/* The heading `fill` wrote, moved up beside the button. `min-width:0` because
+   a boat's name and two dates is longer than a phone is wide and a flex item
+   defaults to refusing to shrink below its content -- which would push the
+   way out off the edge of the screen. */
+.phead {
+  flex: 1 1 auto; min-width: 0;
+  font-family: var(--font-narrow); font-weight: 600;
+  padding: .45em 0 .45em .8em;
+}
+.phead .pwho { border-bottom: 0; padding: 0; }
 .pshut {
   border: 0; background: none; color: var(--ink-dim);
   font-size: 19px; line-height: 1; padding: 0;
+  flex: 0 0 auto;
   min-width: 44px; min-height: 44px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-family: var(--font-sans);
@@ -1745,6 +1765,7 @@ a { color:var(--accent); }
   flex-direction: column;
 }
 .panel[open] { display: flex; }
+.panel:focus { outline: none; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .panel { box-shadow: 0 6px 22px rgba(0, 0, 0, .6); }
 }
@@ -1790,8 +1811,25 @@ a { color:var(--accent); }
     width: 100%;
     max-width: 100%;
     border-width: 1px 0 0;
-    border-radius: 14px 14px 0 0;
+    border-radius: 16px 16px 0 0;
   }
+  /* A grab handle, which is what says "sheet" before anything is read -- and
+     it is the affordance the gesture already has, since a press anywhere off
+     the sheet closes it. Only where the sheet is anchored to an edge: on a
+     laptop the same dialog is a centred card and a handle there would promise
+     a drag that means nothing. */
+  .panel:modal .pbar::before {
+    content: ""; position: absolute; top: 7px; left: 50%;
+    width: 36px; height: 4px; margin-left: -18px; border-radius: 2px;
+    background: var(--rule-strong);
+  }
+  .panel:modal .pbar { position: relative; padding-top: 8px; }
+  /* A sheet is anchored to the bottom edge, which on a phone is where the home
+     indicator lives. The inset goes on the scroll box rather than on the
+     dialog: a press on the dialog's own box is what tells the backdrop from
+     the sheet, so padding there would make the strip under the last line
+     close it. */
+  .panel:modal .pbody { padding-bottom: calc(.7em + env(safe-area-inset-bottom, 0px)); }
 }
 
 .panel .pwho {

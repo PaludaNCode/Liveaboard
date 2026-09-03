@@ -2958,7 +2958,10 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
         moment they tabbed across a row."""
         wiring = self.app.split("function panelDialog(", 1)[1].split(
             "\n  panelDialog(", 1)[0]
-        for gone in ("focusin", "focusout"):
+        # The listener, not the word: a prose "focusing the dialog" is not a
+        # focus handler, and a guard that cannot tell them apart goes red on
+        # a comment.
+        for gone in ('addEventListener("focusin"', 'addEventListener("focusout"'):
             with self.subTest(gone=gone):
                 self.assertNotIn(gone, wiring)
 
