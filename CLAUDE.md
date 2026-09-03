@@ -526,7 +526,25 @@ Break these and the site starts lying quietly rather than failing loudly.
   one box holding both row hosts. The row mark had the same bug twice — the
   same `tbody`, and `closest("tr.row")` where a card is `article.card.row` —
   so it matches `.row[data-id]`, the class and the attribute both layouts
-  write. Each trigger is a `<button>` with
+  write. **And a dialog needs a way out that does not
+  assume a keyboard.** They were dismissed by Escape, by pressing the trigger
+  again, or by pressing outside — and on a phone the first does not exist and
+  the other two are *underneath* the panel: at 402×684, the size the device
+  reported, the bill is 479px tall over a 452px list, so it covers the rows
+  whole. A swipe there lands on the panel and scrolls it — a few hundred
+  pixels of bill and then nothing, which from the outside is a scroller that
+  has stopped working, and is what three fixes were aimed at before a
+  screenshot showed the panel sitting on top of the list. So `hoverPanel`
+  builds a close control into every panel it drives, for the reason the panels
+  share it at all: three copies of a close button is three that can differ.
+  **Sticky and not absolute** — the panel is its own scroll box, so an
+  absolutely placed button scrolls away with the bill, which is the same bug
+  one layer down. 44px square, because a multiplication sign is not something
+  a thumb can aim at, and that height comes out of the panel: a dialog nobody
+  can close is worth less than one row fewer of bill.
+  `test_every_panel_can_be_closed_without_a_keyboard` asserts the tap target,
+  the pinning and the closing, on all three.
+  Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
   **one div filled on demand** — nothing is lazily fetched here, so anything
   written per row ships 1,122 times. `rowFor` rebuilds the row rather than

@@ -1695,6 +1695,30 @@ a { color:var(--accent); }
    absolute: the table scrolls sideways inside a clipping container and the
    Places column sits at its right edge, so a panel nested inside would be cut
    off exactly where it has to appear. */
+/* The way out of a panel, on a device with no Escape key. Sticky and not
+   absolute, because the panel is its own scroll box: an absolutely placed
+   button scrolls away with the bill, which is the bug it is here to fix one
+   layer down. It carries the panel's background so the lines it pins over do
+   not read through it, and the tap target is 44px square rather than the
+   glyph inside it -- a multiplication sign is not something a thumb can aim
+   at, and this page is built to be used on a phone in a dive shop. The 44px
+   comes out of the panel's height, which is the right thing to spend it on:
+   a dialog nobody can close is worth less than one row fewer of bill. */
+.pbar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; justify-content: flex-end;
+  background: var(--panel);
+  margin: 0 0 -2px; padding: 0;
+}
+.pshut {
+  border: 0; background: none; color: var(--ink-dim);
+  font-size: 19px; line-height: 1; padding: 0;
+  min-width: 44px; min-height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-family: var(--font-sans);
+}
+.pshut:hover { color: var(--accent); }
+
 .panel-pop {
   position: fixed;
   z-index: 60;
