@@ -11402,7 +11402,7 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -11412,7 +11412,6 @@
         "zabargad",
         "st johns",
         "sataya",
-        "sataya reef",
         "fury shoals",
         "elphinstone"
       ],
@@ -11613,13 +11612,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -24532,13 +24532,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -24734,13 +24734,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -25441,10 +25442,11 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 20,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
         "safaga"
       ],
       "region": null,
@@ -25641,13 +25643,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -25741,11 +25744,15 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "tiran",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "abu nuhas"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -25946,8 +25953,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -26041,7 +26049,7 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -26243,12 +26251,13 @@
       ],
       "requirements": {
         "min_level": "advanced",
-        "min_logged_dives": 50,
+        "min_logged_dives": 20,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 20 minimum logged dives required. PADI Travel: 50+ logged dives recommended."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -26342,11 +26351,12 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "tiran"
+        "tiran",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Join the Blue Seas liveaboard for a 7-night itinerary at some of the the Red Sea's most iconic dive sites. Double and twin cabins with en-suite bathrooms.",
@@ -26540,7 +26550,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: Request upon booking"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue-seas--rocky-elba-st-john-s-elphinstone-port-ghalib-port-ghalib",
@@ -26852,12 +26871,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-seas",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
         "st johns",
+        "elphinstone",
+        "zabargad",
         "rocky island"
       ],
       "region": null,
@@ -27054,13 +27074,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -28349,207 +28370,14 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-storm",
       "nights": 7,
-      "dives": 19,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "daedalus",
-        "fury shoals"
-      ],
-      "region": null,
-      "summary": "The Blue Storm is a modern liveaboard operating in the Red Sea, Egypt. With 24 guests maximum, 11 Double cabins all with en-suite facilities, Blue Storm visits the most popular dive sites in the Red Sea.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=8/2027",
-      "fees": [
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": {
-            "amount": 200.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 380.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "operator_stated",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
-          },
-          "amount": null,
-          "note": "listed without an amount"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": {
-            "amount": 3.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 190.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": {
-            "amount": 165.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": null,
-          "note": "VAT: stated as included"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": null,
-          "note": "Airport Transfer: stated as included"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "amount": {
-            "amount": 0.0,
-            "currency": "EUR"
-          },
-          "note": "included in the fare",
-          "provenance": {
-            "kind": "operator_stated",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-27",
-            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
-          }
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-08-31",
-            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
-          },
-          "amount": {
-            "amount": 135.0,
-            "currency": "EUR"
-          },
-          "basis": "per_trip",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
-        }
-      ]
-    },
-    {
-      "id": "blue-storm--daedalus-rocky-zabargad-port-ghalib-port-ghalib",
-      "name": "Daedalus, Rocky, Zabargad (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky & Zabargad",
-      "operator_id": "blue-planet-liveaboards",
-      "boat_id": "blue-storm",
-      "nights": 7,
-      "dives": 19,
-      "port_from": "Port Ghalib",
-      "port_to": "Port Ghalib",
-      "dive_sites": [
-        "daedalus",
-        "zabargad",
-        "rocky island"
+        "fury shoals",
+        "sataya",
+        "elphinstone",
+        "daedalus"
       ],
       "region": null,
       "summary": "The Blue Storm is a modern liveaboard operating in the Red Sea, Egypt. With 24 guests maximum, 11 Double cabins all with en-suite facilities, Blue Storm visits the most popular dive sites in the Red Sea.",
@@ -28731,13 +28559,219 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
       },
+      "dives_read": true
+    },
+    {
+      "id": "blue-storm--daedalus-rocky-zabargad-port-ghalib-port-ghalib",
+      "name": "Daedalus, Rocky, Zabargad (Port Ghalib - Port Ghalib)",
+      "title": "Daedalus, Rocky & Zabargad",
+      "operator_id": "blue-planet-liveaboards",
+      "boat_id": "blue-storm",
+      "nights": 7,
+      "dives": 18,
+      "port_from": "Port Ghalib",
+      "port_to": "Port Ghalib",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "rocky island",
+        "zabargad"
+      ],
+      "region": null,
+      "summary": "The Blue Storm is a modern liveaboard operating in the Red Sea, Egypt. With 24 guests maximum, 11 Double cabins all with en-suite facilities, Blue Storm visits the most popular dive sites in the Red Sea.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 380.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          },
+          "amount": null,
+          "note": "listed without an amount"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": {
+            "amount": 3.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": {
+            "amount": 165.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "amount": {
+            "amount": 0.0,
+            "currency": "EUR"
+          },
+          "note": "included in the fare",
+          "provenance": {
+            "kind": "operator_stated",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-27",
+            "note": "read from the vessel's liveaboard.com page by hand; the extras block the scrape reads does not carry these figures"
+          }
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-08-31",
+            "url": "https://www.liveaboard.com/diving/egypt/blue-storm?m=5/2027"
+          },
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
+      },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -28835,12 +28869,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue-storm",
       "nights": 7,
-      "dives": 19,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
         "st johns",
+        "elphinstone",
+        "zabargad",
         "rocky island"
       ],
       "region": null,
@@ -29023,13 +29058,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -57006,11 +57042,13 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "gota abu ramada",
+        "brothers",
+        "small giftun"
       ],
       "region": null,
       "summary": "The MY Golden Dolphin liveaboard offers year-round diving to the best Red Sea dive sites, from the north to far south. 10 en-suite, air-conditioned cabins cater to 20 guests. Nitrox is available onboard.",
@@ -57189,7 +57227,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin--north-hurghada-hurghada",
@@ -57401,11 +57448,14 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The MY Golden Dolphin liveaboard offers year-round diving to the best Red Sea dive sites, from the north to far south. 10 en-suite, air-conditioned cabins cater to 20 guests. Nitrox is available onboard.",
@@ -57584,7 +57634,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin--north-straits-of-tiran-hurghada-hurghada",
@@ -58002,12 +58061,14 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "abu dabab",
         "daedalus",
-        "fury shoals"
+        "fury shoals",
+        "elphinstone"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -58186,7 +58247,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin-iv--daedalus-rocky-island-zabargad-st-johns-elphinstone-port-ghalib-port-ghalib",
@@ -58401,12 +58471,19 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 10,
-      "dives": 0,
+      "dives": 27,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "sha'ab el erg",
+        "gubal",
+        "thistlegorm",
+        "ras mohammed",
+        "abu nuhas",
         "safaga",
-        "brothers"
+        "panorama reef",
+        "brothers",
+        "small giftun"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -58585,7 +58662,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
@@ -62678,13 +62764,13 @@
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
-      "dives": 17,
+      "dives": 16,
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
+        "elphinstone",
         "brothers",
-        "daedalus",
-        "elphinstone"
+        "daedalus"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -62893,13 +62979,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -67664,10 +67751,12 @@
       "operator_id": "deep-breath-diving-safari",
       "boat_id": "iceberg",
       "nights": 1,
-      "dives": 0,
+      "dives": 7,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "abu nuhas"
+      ],
       "region": null,
       "summary": "The Iceberg is a liveaboard taking 8 guests on diving safaris in Egypt&rsquo;s Red Sea. Itineraries range from a single-day trip to week-long trips exploring the northern Red Sea&rsquo;s best dive sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/iceberg?m=8/2027",
@@ -67865,7 +67954,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 5,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 5 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "iceberg--special-wreck-trip-thistlegorm-abu-nuhas-small-gobal-hurghada-hurghada",
@@ -73289,11 +73387,16 @@
       "operator_id": "tauch-safari-aegypten",
       "boat_id": "oceanix",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
+        "sha'ab el erg",
+        "gubal"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
@@ -73535,7 +73638,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40/trip; BCD €35/trip; Dive Computer €35/trip; Dive Light €35/trip; Fins €15/trip; Mask €15/trip; Nitrox Refills included; Regulator €35/trip; SMB €15/trip; Snorkel Gear €25/trip; Wetsuit €35/trip"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "oceanix--north-wrecks-tour-hurghada-hurghada",
@@ -73811,12 +73923,16 @@
       "operator_id": "tauch-safari-aegypten",
       "boat_id": "oceanix",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "fury shoals",
+        "elphinstone",
         "daedalus",
-        "sataya"
+        "sataya",
+        "sataya reef",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Explore Egypt&rsquo;s Red Sea aboard Oceanix, a modern 24-guest liveaboard offering en-suite cabins, spacious sun decks, Nitrox, and thrilling dive safaris.",
@@ -74058,7 +74174,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40/trip; BCD €35/trip; Dive Computer €35/trip; Dive Light €35/trip; Fins €15/trip; Mask €15/trip; Nitrox Refills included; Regulator €35/trip; SMB €15/trip; Snorkel Gear €25/trip; Wetsuit €35/trip"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "oceanix--south-safaga-hurghada-marsa-alam",
@@ -88621,11 +88746,15 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "sea-serpent-contessa",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "abu nuhas",
+        "sha'ab el erg",
+        "thistlegorm",
+        "safaga"
       ],
       "region": null,
       "summary": "Offering year-round trips to the Red Sea, the 34m&nbsp;Sea Serpent Contessa accommodates up to 24 divers in 12 spacious cabins, each fitted with air conditioning and en-suite bathrooms.",
@@ -88836,7 +88965,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sea-serpent-contessa--north-tour-northern-reefs-wrecks-hurghada-hurghada",
@@ -98537,13 +98675,18 @@
       "operator_id": "sindalahs-yacht",
       "boat_id": "sindalahs",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "elphinstone",
         "st johns",
-        "fury shoals"
+        "fury shoals",
+        "abu dabab",
+        "habili ali",
+        "dangerous reef",
+        "sataya",
+        "marsa shouna"
       ],
       "region": null,
       "summary": "Explore the Red Sea aboard Sindalahs, a liveaboard offering 7-day dive trips to iconic sites like Brothers, Daedalus, Elphinstone, and Saint John. Gourmet cuisine and top-tier amenities for 26 guests.",
@@ -98827,7 +98970,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 20,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 20 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "snefro-love--mini-plus-thistlegorm-tiran-ras-mohamed-sharm-el-sheikh-sharm-el-sheikh",
@@ -99820,13 +99972,14 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-glorious-miss-nouran",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
+        "elphinstone",
         "zabargad",
-        "st johns",
-        "rocky island"
+        "rocky island",
+        "st johns"
       ],
       "region": null,
       "summary": "The Sea Serpent Glorious Miss Nouran liveaboard operates in the Egyptian Red Sea and has 13 ensuite cabins for up to 26 guests. Itineraries visit favorite sites such as Daedalus, Brothers, Elphinstone, and the SS Thistlegorm.",
@@ -100031,7 +100184,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-glorious-miss-nouran--st-john-s-port-ghalib-port-ghalib",
@@ -175492,10 +175654,10 @@
     }
   },
   "entry_bar": {
-    "both": 139,
-    "disagree": 67,
-    "padi_stricter": 35,
-    "ours_stricter": 32
+    "both": 148,
+    "disagree": 69,
+    "padi_stricter": 36,
+    "ours_stricter": 33
   },
   "stale_ladders": [
     "alsuraya 2027-08-21: row 1145, liveaboard.com ladder starts at 1219",
