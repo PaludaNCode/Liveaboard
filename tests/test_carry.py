@@ -16,8 +16,11 @@ never asked. A probe found all three still on sale.
 
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
 from datetime import date, timedelta
+from pathlib import Path
 
 from liveaboard.cli import CARRY_MAX_DAYS, carry_unread
 
@@ -218,6 +221,69 @@ class _FetcherReturning:
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestForcingARecheckKeepsTheRecord(unittest.TestCase):
+    """`--recheck-all` ignores the skip list for one run without losing it.
+
+    The file's own note used to say *delete this file to force a full crawl*,
+    and that is a destructive instruction for something that should be a flag:
+    the dates in it are what the seven-day clock counts from, so deleting the
+    file makes every vessel in it read as never-checked rather than as checked
+    and then re-checked. It also cannot be done from a dispatched run, which
+    is where somebody actually wants it -- 13 boats were held off the page and
+    the only lever was a commit deleting committed data.
+
+    The record has to survive because the write path needs it: a vessel this
+    run finds selling is popped from it, and one still empty is re-stamped.
+    Return an empty record and the first of those silently stops happening.
+    """
+
+    def barren(self, tmp, vessels):
+        path = Path(tmp) / "barren.json"
+        path.write_text(json.dumps({"vessels": vessels}), encoding="utf-8")
+        return path
+
+    def test_a_fresh_verdict_is_skipped_normally_and_visited_when_forced(self):
+        from liveaboard.cli import _barren
+
+        today = date.today().isoformat()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.barren(tmp, {"ashrafi": today, "lady-m": today})
+            skip, record = _barren(path)
+            self.assertEqual(skip, {"ashrafi", "lady-m"})
+            forced, forced_record = _barren(path, recheck=True)
+            self.assertEqual(forced, set(), "--recheck-all still skipped a vessel")
+            self.assertEqual(forced_record, record,
+                             "the record must survive, or the write path "
+                             "cannot drop a vessel that is now selling")
+
+    def test_an_expired_verdict_is_visited_either_way(self):
+        """The flag is about hurrying the clock, not about overriding it."""
+        from liveaboard.cli import BARREN_RECHECK_DAYS, _barren
+
+        stale = (date.today() - timedelta(days=BARREN_RECHECK_DAYS + 1)).isoformat()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self.barren(tmp, {"ashrafi": stale})
+            self.assertEqual(_barren(path)[0], set())
+            self.assertEqual(_barren(path, recheck=True)[0], set())
+
+    def test_the_workflow_can_ask_for_it(self):
+        """A flag no dispatched run can set is a flag nobody can use here: the
+        crawl is 320 requests and does not run on anybody's laptop."""
+        yml = (Path(__file__).resolve().parents[1]
+               / ".github" / "workflows" / "refresh.yml").read_text(encoding="utf-8")
+        self.assertIn("recheck_skipped:", yml)
+        self.assertIn("--recheck-all", yml)
+
+    def test_the_note_no_longer_tells_anyone_to_delete_the_file(self):
+        """The note is written into the file every run, so it is the one place
+        a person looks. It pointed at the destructive option only."""
+        source = (Path(__file__).resolve().parents[1]
+                  / "src" / "liveaboard" / "cli.py").read_text(encoding="utf-8")
+        note = source[source.index("Vessels that published no departure"):]
+        note = note[: note.index('"vessels"')]
+        self.assertIn("--recheck-all", note)
 
 
 class TestAVesselNobodyAskedIsNotOneWithNothingOnSale(unittest.TestCase):

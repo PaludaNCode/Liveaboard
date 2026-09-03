@@ -34,6 +34,16 @@ on:
         description: "Publish even if the dataset shrinks sharply"
         type: boolean
         default: false
+      # The skip list holds a vessel back for `BARREN_RECHECK_DAYS` after a run
+      # found it selling nothing, which is what keeps 13 boats off the page for
+      # up to a week at a time. This visits them today without waiting, and
+      # without deleting the list: the dates in it are what the week is counted
+      # from, so throwing them away makes every held-back vessel read as though
+      # it had never been checked.
+      recheck_skipped:
+        description: "Visit vessels the skip list holds back, ignoring their week"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -82,6 +92,7 @@ jobs:
           PYTHONPATH=src python3 -m liveaboard.cli scrape \
             --source liveaboard.com \
             --max-pages "${{ inputs.max_pages || 0 }}" \
+            ${{ inputs.recheck_skipped && '--recheck-all' || '' }} \
             --out data/candidate.json \
             --snapshots data/snapshots
 
