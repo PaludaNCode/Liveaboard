@@ -20,13 +20,13 @@ from __future__ import annotations
 
 import re
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from decimal import Decimal
 from typing import Any, Iterable, Mapping
 
 from .models import Departure, FeeItem, Itinerary, Provenance
 from .money import DISPLAY_CURRENCY, FxRate, FxTable, Money, zero
-from .taxonomy import DEFAULT_ON_TIERS, FeeCode, FeeTier
+from .taxonomy import DEFAULT_ON_TIERS, FeeBasis, FeeCode, FeeTier, SourceKind
 
 Toggles = Mapping[str, bool]
 
@@ -49,6 +49,80 @@ These two remain the only optional extras, so the headline number goes on
 meaning the same thing on every row -- it is now the same fuller thing.
 """
 
+
+GEAR_ESTIMATE = Money(Decimal("180"), DISPLAY_CURRENCY)
+"""What a full set is priced at where the operator prices no set at all.
+
+**A deliberate exception to "never invent a price", and the only one.** Every
+other unpriced line stays unpriced: a fee this project cannot read is a known
+cost of unknown size, and putting a figure on it is the failure the site exists
+to report in other people. Rental gear is the one place where that answer was
+costing the reader more than it protected them.
+
+Three readings of the gear dialog produce no set price -- an operator that
+prices items and never a bundle, a bundle figure with no unit beside it (see
+`scrape/gear.py`), and a bare "Rental Gear" with no figure at all -- and
+between them they cover 14 vessels, 52 itineraries and 228 sailings. On all of
+those the line sat at nothing with the toggle **on by default**, so the Total
+that the whole page is built to be trusted about was short by a full week's
+hire on a fifth of the table, and the row said so only to a reader who opened
+the bill and read the caveat under it.
+
+So the figure is stated, and stated as ours: `BreakdownLine.estimated` travels
+with it, the amount prints with a `~` and a warning of its own on the bill, and
+`render.gear_prices` excludes these lines from the footer's "about EUR X a
+week" -- that sentence is about what operators charge and this is not one of
+their numbers. A visitor who owns a set switches Rental gear off and it goes,
+which is the same escape every other gear line has.
+
+180 per trip, and per *trip* rather than per week because this project is
+choosing the unit as well as the figure and a trip is the thing every row on
+the page is one of. It sits under the 200-a-week the fleet's own quoted bundles
+median at, which is the direction to be wrong in: an estimate that outran what
+the boats actually charge would make the site's totals the dearest claim on the
+page and it would be ours rather than an operator's.
+"""
+
+GEAR_ESTIMATE_PROVENANCE = Provenance(
+    kind=SourceKind.DERIVED,
+    source_id="site:gear-estimate",
+    note="this site's own figure, not a price either seller published",
+)
+"""Attributed like everything else, and `DERIVED` rather than `SEED_ESTIMATE`.
+
+`SEED_ESTIMATE` means *this whole row is placeholder research* and lights the
+page's "not real quotes" banner; a real sailing at a real fare with one
+estimated extra is not that, and firing the banner on a fifth of the table
+would teach a reader to ignore it.
+"""
+
+
+def _gear_estimate_note(fee: FeeItem) -> str:
+    """Say the figure is ours, and keep what the operator did say.
+
+    The old note is the evidence -- the per-item prices, or the bundle figure
+    whose unit was missing -- and it is the only thing on the line a reader can
+    check the estimate against, so it survives in front of nothing and behind
+    the sentence that admits the number is not the operator's.
+    """
+    ours = "estimated by this site: the operator rents gear and states no set price"
+    return f"{ours} — {fee.note}" if fee.note else ours
+
+
+def _needs_gear_estimate(fee: FeeItem) -> bool:
+    """A gear line the operator offers and does not price.
+
+    Not an *absent* line: a vessel whose panel nobody has read has no gear row
+    at all, and inventing one would claim a service nobody stated. What this
+    fills is a row the operator wrote itself, with the figure left out.
+    """
+    return (
+        fee.code is FeeCode.GEAR_RENTAL
+        and not fee.included
+        and fee.amount is None
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class BreakdownLine:
     """One row of the cost table shown to the visitor."""
@@ -66,6 +140,16 @@ class BreakdownLine:
     fx_rate: FxRate | None
     display_max: Money | None = None
     """High end of a quoted range, in display currency. ``None`` when fixed."""
+    estimated: bool = False
+    """Whether the amount is this project's own figure rather than a seller's.
+
+    True on exactly one thing: a gear line the operator offers and does not
+    price, filled from :data:`GEAR_ESTIMATE`. It ships to the browser because
+    the page has to mark the figure and warn about it where it prints the bill;
+    a number the site made up and did not label is the whole failure mode this
+    file otherwise exists to avoid.
+    """
+
     subsumed_by: FeeCode | None = None
     """The bundled charge on this same bill whose title names this one.
 
@@ -136,6 +220,8 @@ class BreakdownLine:
             out["is_range"] = True
         if self.included:
             out["included"] = True
+        if self.estimated:
+            out["estimated"] = True
         if self.toggle:
             out["toggle"] = self.toggle
         if self.subsumed_by is not None:
@@ -431,7 +517,24 @@ def _fee_line(
     shown and not counted. Every caller that sums a set of fees resolves it
     over **that** set -- see :func:`subsumed_charges` -- because the overlap
     is a fact about one bill and the two sellers publish two.
+
+    The gear estimate is applied *here* rather than in any of the three
+    callers, for the reason the toggles are read here: it is one rule, and a
+    copy of it in `compute` and another in `padi_lines` would be two rules
+    that agree until one of them is edited. Both sellers' bills carry the
+    vessel's gear line, so both get the same estimate from one place.
     """
+    estimated = _needs_gear_estimate(fee)
+    if estimated:
+        fee = replace(
+            fee,
+            amount=GEAR_ESTIMATE,
+            amount_max=None,
+            basis=FeeBasis.PER_TRIP,
+            provenance=GEAR_ESTIMATE_PROVENANCE,
+            note=_gear_estimate_note(fee),
+        )
+
     low, high = fee.span_for_trip(nights, dives)
 
     display = display_max = rate = None
@@ -453,6 +556,7 @@ def _fee_line(
         provenance=fee.provenance,
         note=fee.note,
         fx_rate=rate,
+        estimated=estimated,
         subsumed_by=subsumed_by,
     )
 

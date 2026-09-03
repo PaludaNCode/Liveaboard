@@ -913,6 +913,8 @@ class TestTheFooterCountsMatchTheData(unittest.TestCase):
         "__GEAR_LOW_THIRD__", "__GEAR_TOP_THIRD__",
         "__GEAR_DEAREST__", "__GEAR_DEAREST_BOAT__",
         "__GEAR_CHEAPEST__", "__GEAR_CHEAPEST_BOAT__",
+        "__GEAR_ESTIMATE__", "__GEAR_ESTIMATED_VESSELS__",
+        "__GEAR_ESTIMATED_TRIPS__",
     )
 
     def nitrox_by_vessel(self) -> dict[str, int]:
@@ -2946,8 +2948,18 @@ class TestTheBillOpensFromItsOwnColumn(unittest.TestCase):
         self.assertIn("var(--row-marked-edge)", self.css)
 
     def test_the_whole_breakdown_is_in_the_panel(self) -> None:
+        """Every line, not a summary of them.
+
+        Asserted as two fragments rather than one call, because the panel now
+        holds the lines in a local: the estimate warning is built from the
+        same list the table is, so that the figure in the sentence and the
+        figure in the cell cannot come from two readings. What this guards is
+        that the rows come from the departure's own `linesFor` and go through
+        `feeRows` — a summary passed here would fail both halves.
+        """
         panel = self.app.split("function billPanel(", 1)[1].split("\n  }", 1)[0]
-        self.assertIn("feeRows(linesFor(row.d))", panel)
+        self.assertIn("linesFor(row.d)", panel)
+        self.assertIn("feeRows(", panel)
         self.assertIn("caveat", panel)
         self.assertIn("row.i.padi_lines", panel)
         self.assertNotIn("entryBar(", panel,
@@ -3397,3 +3409,109 @@ class TestTheTwoBerthCountsAreDifferentColumns(unittest.TestCase):
         self.assertIn("places_at_price", COLUMNS)
         self.assertIn("berths_aboard", COLUMNS)
         self.assertNotIn("spaces_left", COLUMNS)
+
+
+class TestTheEstimatedGearFigureIsMarkedWhereverItAppears(unittest.TestCase):
+    """The one number on this page neither seller published (see
+    `pricing.GEAR_ESTIMATE`), asserted against what actually shipped.
+
+    The rule itself is tested over fixtures in `test_pricing.py`. What is
+    checked here is the part that makes it publishable rather than merely
+    correct: the flag reaches the payload, the exception stays confined to
+    gear, the note admits whose figure it is, and the fleet-wide gear
+    paragraph in the footer is still computed from the operators' own quotes.
+    An estimate the page does not distinguish from a quote is the failure this
+    site reports in other people.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+    CSS = ROOT / "templates" / "style.css"
+
+    def lines(self):
+        """Every fee line on every bill the page ships, both sellers'."""
+        payload = published.page()
+        out = []
+        for itinerary in payload["itineraries"].values():
+            out.extend(itinerary.get("lines") or [])
+            out.extend(itinerary.get("padi_lines") or [])
+        return out
+
+    def test_the_rule_fires_on_what_shipped(self):
+        """Otherwise every assertion below is vacuously true."""
+        estimated = [x for x in self.lines() if x.get("estimated")]
+        self.assertTrue(estimated, "no shipped line exercises the gear estimate")
+
+    def test_nothing_but_gear_is_ever_this_projects_own_figure(self):
+        for line in self.lines():
+            if line.get("estimated"):
+                self.assertEqual(
+                    line["code"], "gear_rental",
+                    "the one exception to 'never invent a price' has spread",
+                )
+
+    def test_every_estimated_line_carries_a_figure_and_admits_it_is_ours(self):
+        for line in self.lines():
+            if not line.get("estimated"):
+                continue
+            with self.subTest(label=line["label"]):
+                self.assertTrue(line.get("has_price"))
+                self.assertIn("estimated by this site", line.get("note", ""))
+
+    def test_the_fleet_wide_gear_figure_is_the_operators_and_not_ours(self):
+        """"A full set costs about EUR X a week" is a claim about what the
+        boats charge. Folding this project's own figure into that average
+        would put our number inside it on a sixth of the fleet, invisibly."""
+        from liveaboard.pricing import itinerary_lines
+        from liveaboard.render import gear_estimates, gear_prices
+        from liveaboard.taxonomy import FeeCode
+
+        dataset = published.dataset()
+        self.assertTrue(gear_estimates(dataset).get("vessels"))
+
+        quoted, ours = set(), set()
+        for itinerary in dataset.itineraries.values():
+            if itinerary.nights != 7:
+                continue
+            for line in itinerary_lines(itinerary, dataset.fx):
+                if line.code is not FeeCode.GEAR_RENTAL or line.display is None:
+                    continue
+                (ours if line.estimated else quoted).add(itinerary.boat_id)
+        self.assertTrue(ours, "no seven-night trip exercises the rule")
+        self.assertEqual(
+            gear_prices(dataset)["vessels"], len(quoted - ours),
+            "the footer's fleet gear figure counts vessels this site priced",
+        )
+
+    def test_the_bill_says_so_in_words_as_well_as_in_a_marker(self):
+        """A `~` on a figure is a marker a reader has to already understand.
+        The paragraph under the table is what explains it, and it is built
+        from the same lines the table is so the two figures cannot differ."""
+        app = self.APP.read_text(encoding="utf-8")
+        panel = app.split("function billPanel(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("estimateWarning(lines)", panel)
+        self.assertIn("this site's own estimate", app)
+        self.assertIn(".caveat.est", self.CSS.read_text(encoding="utf-8"))
+
+    def test_an_included_fee_reads_as_included_and_never_as_unstated(self):
+        """The other half of what #152 reported. An included fee stays in the
+        breakdown at zero -- the oldest rule in `pricing.py` -- but the amount
+        cell asked `has_price`, which an included line does not have, so
+        Sunshine's nitrox read **unstated** beside a note saying *Nitrox:
+        stated as included*. The panel contradicted itself on the line where
+        the operator had been most forthcoming, and filed generosity under the
+        same word as silence."""
+        app = self.APP.read_text(encoding="utf-8")
+        rows = app.split("function feeRows(", 1)[1].split("\n  }", 1)[0]
+        self.assertLess(
+            rows.index("line.included"), rows.index("line.has_price"),
+            "feeRows must ask `included` before `has_price`, or a bundled fee "
+            "prints as unstated",
+        )
+        # And both shapes of it reach that branch, which is why asking
+        # `included` first is the fix rather than one of two fixes: an
+        # inclusion arrives from liveaboard.com with no amount at all and from
+        # PADI as a stated zero, so the cell used to print "unstated" for one
+        # and "€0" for the other about the same fact.
+        included = [x for x in self.lines() if x.get("included")]
+        self.assertTrue(any("has_price" not in x for x in included))
+        self.assertTrue(any(x.get("has_price") for x in included))
