@@ -30,10 +30,12 @@ untouched by the seam.
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -266,6 +268,115 @@ class TestTheRebaseReDerivesRatherThanKeepingItsStaleCopy(unittest.TestCase):
         self.assertNotIn("push rejected", log)
         self.assertEqual(git("rev-parse", "HEAD", cwd=quiet).strip(), before,
                          "a run with nothing to say made a commit")
+
+
+class TestACarriedReadingIsDatedToday(unittest.TestCase):
+    """The other half of the handover, and the half a text guard cannot see.
+
+    `TestTheCarriedInputsLandWhereThePipelineReadsThem` asserts the workflow
+    file — that the download names `path: data`, that no upload feeding it
+    reaches outside `data/`. Those are the right assertions about the mistake
+    that was made, and they would pass again on the next one: what failed for
+    four days was the *file on disk*, and the pipeline never looked at it.
+
+    So `publish.yml` runs `tools/check_fresh.py` over the books a fetch
+    rewrites whole, and this pins both ends — that the step is there, in front
+    of the promote that reads those files, and that the check itself still
+    fails on a stale date. It is the one clock-reading assertion in the
+    repository, and it has to live in a workflow rather than in the suite:
+    `promote` and `render` are pure, so a test comparing committed data against
+    today would turn `main` red overnight with nobody having changed anything.
+    """
+
+    WORKFLOWS = Path(__file__).resolve().parents[1] / ".github" / "workflows"
+    CHECK = ROOT / "tools" / "check_fresh.py"
+
+    def check(self, *args: str) -> subprocess.CompletedProcess:
+        return subprocess.run([sys.executable, str(self.CHECK), *args],
+                              capture_output=True, text=True)
+
+    def book(self, tmp: str, name: str, payload: object) -> str:
+        path = Path(tmp) / name
+        path.write_text(json.dumps(payload), encoding="utf-8")
+        return str(path)
+
+    def test_the_publish_job_checks_before_it_promotes(self) -> None:
+        body = (self.WORKFLOWS / "publish.yml").read_text(encoding="utf-8")
+        # `assertTrue` rather than `assertIn`/`assertRegex` throughout this
+        # class: the haystack is 200 lines of YAML and printing it buries the
+        # sentence that says what to do about the failure.
+        self.assertTrue(
+            "tools/check_fresh.py" in body,
+            "publish.yml no longer checks that a carried reading is today's, "
+            "so a lost hand-off is a green commit again",
+        )
+        self.assertLess(
+            body.index("tools/check_fresh.py"), body.index("cli promote"),
+            "the freshness check runs after the promote that reads those "
+            "files, so a stale input is published before it is noticed",
+        )
+
+    def test_every_carrying_caller_names_a_book(self) -> None:
+        """A new source workflow must decide, rather than inherit silence.
+
+        `itineraries.yml` is the one legitimate `fresh: ""` — it refuses to
+        rewrite its book when it added nothing, so most days leave the date
+        alone — and it says so where the decision is. What this refuses is a
+        caller that carries an artifact and never mentions freshness at all,
+        because that reads identically to forgetting.
+        """
+        callers = 0
+        for workflow in sorted(self.WORKFLOWS.glob("*.yml")):
+            text = workflow.read_text(encoding="utf-8")
+            if "carry:" not in text or workflow.name == "publish.yml":
+                continue
+            callers += 1
+            with self.subTest(workflow=workflow.name):
+                self.assertTrue(
+                    re.search(r"(?m)^[ \t]*fresh:[ \t]*\S", text),
+                    f"{workflow.name} hands over an artifact without naming "
+                    f"the book whose date proves it arrived — name it, or "
+                    f'write `fresh: ""` with the reason it cannot',
+                )
+        self.assertGreaterEqual(callers, 6, "far fewer carrying callers than "
+                                            "the pipeline has; pattern stale")
+
+    def test_a_book_dated_today_passes_and_a_stale_one_does_not(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            fresh = self.book(tmp, "cabins.json", {"collected": "2026-09-03"})
+            stale = self.book(tmp, "fx.json", {"retrieved": "2026-08-31"})
+
+            ok = self.check("--today", "2026-09-03", fresh)
+            self.assertEqual(ok.returncode, 0, ok.stdout + ok.stderr)
+
+            bad = self.check("--today", "2026-09-03", stale)
+            self.assertEqual(bad.returncode, 1)
+            self.assertIn("2026-08-31", bad.stdout)
+
+            # And one of each: a run carries several books and the complaint
+            # must name the one that is wrong rather than the first it read.
+            both = self.check("--today", "2026-09-03", fresh, stale)
+            self.assertEqual(both.returncode, 1)
+            self.assertIn("fx.json", both.stdout)
+            self.assertNotIn("cabins.json", both.stdout)
+
+    def test_a_book_with_no_date_and_a_book_that_never_arrived_both_fail(self):
+        """Neither absence may read as a pass.
+
+        A file that states no date cannot be checked, and "cannot be checked"
+        is precisely how four days of readings went missing. A file that is not
+        there at all is the failure this whole mechanism was written for — the
+        artifact unpacking a directory too high left exactly that.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            undated = self.book(tmp, "deals.json", {"days": {}})
+            self.assertEqual(self.check("--today", "2026-09-03", undated)
+                             .returncode, 1)
+
+            missing = str(Path(tmp) / "candidate.json")
+            gone = self.check("--today", "2026-09-03", missing)
+            self.assertEqual(gone.returncode, 1)
+            self.assertIn("did not unpack", gone.stdout)
 
 
 if __name__ == "__main__":

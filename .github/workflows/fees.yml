@@ -96,6 +96,11 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: fees-inputs-${{ github.run_id }}
+      # The book's own `scraped_at`, not the `retrieved` inside each vessel's
+      # entry: a capped run merges, so most vessels in the file are older than
+      # the run that wrote it and only the book-level date says the book
+      # arrived.
+      fresh: data/fees.json
       changes: true
       subject: "data: weekly fee refresh {today}"
       nothing: "fees unchanged this week"

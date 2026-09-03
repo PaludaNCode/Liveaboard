@@ -40,6 +40,11 @@ on:
   # so the two want reading on the same day; the ordering against the cabin
   # ladders does not matter, because a ladder is checked against the row's own
   # price and PADI's is a second opinion beside it.
+  #
+  # In practice that half hour is a few minutes and this job has twice started
+  # while the refresh was still publishing — GitHub's queue eats a stagger this
+  # small. Harmless, and measured rather than assumed: the note in cabins.yml
+  # has the figures and why only the gap before *that* job matters.
   schedule:
     - cron: "45 4 * * *"
   workflow_dispatch:
@@ -165,6 +170,13 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: padi-inputs-${{ github.run_id }}
+      # `collected` here is the raw store's `fetched`, which moves only when
+      # something was actually fetched. An ordinary run re-reads the listings
+      # and the sailings — about 80 requests even with a warm cache — so this
+      # is today on every run that did its job, and red on a run that read
+      # nothing off a cache and would otherwise have republished the same
+      # book under a new date.
+      fresh: data/padi.json
       paths: "data/padi.json data/padi_departures.json data/egypt-2027.json site/index.html"
       subject: "data: read {today} PADI itineraries and sailings"
       nothing: "nothing PADI states has moved"

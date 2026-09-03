@@ -91,5 +91,10 @@ jobs:
     uses: ./.github/workflows/publish.yml
     with:
       carry: deals-inputs-${{ github.run_id }}
+      # Safe on the no-op path as well as the reading one: a re-run on a day
+      # already in the book makes no request and writes nothing, but the run
+      # that put the day there stamped `collected` today and committed it, so
+      # the file the re-run loads is already dated today.
+      fresh: data/deals.json
       subject: "data: read {today} PADI deals"
       nothing: "today's deals were already in the book"
