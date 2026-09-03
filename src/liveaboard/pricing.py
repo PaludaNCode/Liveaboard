@@ -18,6 +18,8 @@ costs them, so that is all this returns.
 
 from __future__ import annotations
 
+import re
+
 from dataclasses import dataclass, field
 from decimal import Decimal
 from typing import Any, Iterable, Mapping
@@ -261,6 +263,75 @@ def mandatory_known(itinerary: Itinerary, departure: Departure) -> bool:
     disclosure, it was in what this code read of it.
     """
     return any(fee.tier is FeeTier.MANDATORY for fee in resolve_fees(itinerary, departure))
+
+
+#: What separates one charge from the next inside a bundle's own title.
+#: Commas, "and", and the ampersand -- the three an operator writes a list
+#: with. Nothing is inferred from a part this cannot classify.
+_LIST_SEPARATOR = re.compile(r",| and |&", re.IGNORECASE)
+
+
+def overlapping_charges(fees: Iterable[FeeItem]) -> list[FeeCode]:
+    """Charges a bundle names that are also billed on their own line.
+
+    Seawolf Dominator, on all six of its itineraries. PADI publishes two
+    entries in `mandatoryOnBoard` and we read both, faithfully:
+
+        Visa fees                                                     250
+        Visa, dive permit, taxes, marine park fees, harbour fee
+        and fuel surcharges                                       180-255
+
+    The second names the first, so the total charged the visa twice. Probed
+    before anything was changed (`tools/probe_padi_mandatory.py`): they are
+    distinct catalogue items with different `extraId`, `kind` and `section`,
+    neither states a validity window, and the enums do not mark one a package
+    -- Galaxy files a package under the same `section` a bare component sits
+    under elsewhere. What separates them is the figure: every other vessel
+    pricing a visa alone prices it at 25-30, which is what an Egyptian visa
+    costs, and Seawolf's is 250, inside the range of its own package.
+
+    **So nothing is dropped.** Deleting a published mandatory charge on that
+    inference is the same failure as inventing one, and the site would be
+    quoting a total no disclosure states. What the finding supports is the
+    verdict this code already reaches for a mandatory line with no figure on
+    it: the bill does not add up, so no total is claimed. `mandatory_known`
+    asks whether the operator said anything; this asks whether what it said
+    can be added.
+
+    Deliberately narrow, and conservative in the same direction throughout:
+
+    * Only charges a diver cannot decline -- priced, not included, no toggle,
+      and a tier that counts without being asked for. An optional extra
+      overlapping another changes no total.
+    * Only a title naming **two or more** charges is a bundle. One name is a
+      line, however long it is written.
+    * `classify_label` does the naming, because it is the vocabulary this
+      project already reads fee labels with and a second copy of it would
+      drift. A part it cannot place -- *dive permit*, *taxes* -- contributes
+      nothing, so the rule under-fires rather than over-fires.
+    """
+    from .scrape.fees import classify_label
+
+    priced = [
+        fee for fee in fees
+        if fee.has_price and not fee.included
+        and fee.toggle is None and fee.tier in DEFAULT_ON_TIERS
+    ]
+    alone = {fee.code for fee in priced}
+
+    found: dict[FeeCode, None] = {}
+    for fee in priced:
+        named = {
+            code
+            for part in _LIST_SEPARATOR.split(fee.note or "")
+            if (code := classify_label(part.strip())) is not None
+        }
+        if len(named) < 2:  # one name is a line, not a bundle
+            continue
+        for code in named & alone:
+            if code != fee.code:
+                found[code] = None
+    return sorted(found, key=lambda code: code.value)
 
 
 def _is_counted(fee: FeeItem, toggles: Toggles) -> bool:

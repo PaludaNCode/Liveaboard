@@ -299,7 +299,26 @@ Break these and the site starts lying quietly rather than failing loudly.
   it read as a league table and contradicted the total beside it.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
-  required extras. Neither is a clean bill.
+  required extras. Neither is a clean bill. **And nor is one that bills a
+  charge twice.** PADI publishes two required entries on Seawolf Dominator —
+  *Visa fees* 250, and *Visa, dive permit, taxes, marine park fees, harbour fee
+  and fuel surcharges* 180–255 — and the second names the first, so the total
+  charged the visa twice on 17 departures. Both are read faithfully:
+  `tools/probe_padi_mandatory.py` established before anything changed that they
+  are distinct catalogue items with different `extraId`, `kind` and `section`,
+  that neither states a validity window, and that the enums do **not** mark one
+  a package (Galaxy files a package under the `section` a bare component sits
+  under elsewhere). What separates them is the figure — every other vessel
+  pricing a visa alone prices it at 25–30, and Seawolf's is 250, inside the
+  range of its own package — and an inference is not a warrant to delete a
+  published charge. So **nothing is dropped and the sum is withheld**:
+  `overlapping_charges` is a third `disclosure` state beside `fees_known` and
+  `mandatory_known`, with its own sentence, and the berth price and every fee
+  line stay. Deliberately narrow and under-firing: only charges a diver cannot
+  decline, only titles naming two or more, and `classify_label` does the naming
+  because a second copy of that vocabulary would drift. It is withheld in
+  `best()`, never in `metricsFor` — `row.lav` is an object the Nitrox and
+  Places columns read fields off, and nulling it there empties the table.
 - **A charge priced for last year is not this year's charge, and silence is not
   expiry.** PADI's payload states `validFrom`/`validTo` on a fee and keeps both
   sides of a repricing: Grand Sea Explorer lists *Route supplement* twice on
@@ -482,7 +501,60 @@ Break these and the site starts lying quietly rather than failing loudly.
   in the money block, running the pointer down that column to compare prices
   opened a dialog on every row it crossed. Keep the click half regardless of
   `hoverOpens`: hover does not exist on a touch screen and this page is built
-  to work on a phone in a dive shop. Each trigger is a `<button>` with
+  to work on a phone in a dive shop. **And the hover half is a mouse, checked
+  per event.** `pointerover` fires for a finger too, on touchstart, before the
+  drag after it is known to be a drag — so a swipe beginning on one of these
+  buttons opened its panel 120ms later, over the list, and the scroll died
+  under it. A card's meta row is three of those buttons, so most swipes on a
+  phone started on one: five to ten cards a gesture, which is what a scroll
+  that keeps being interrupted looks like. It only became reachable when the
+  listeners moved onto `.shell` — before that nothing on a phone was wired at
+  all, so nothing could interrupt — and it is the half of `hoverOpens` that
+  should never have applied there. `event.pointerType === "mouse"` and not a
+  media query, because a laptop with a touch screen has both and the answer is
+  per gesture; `pen` groups with touch, because a pen that is drawing is
+  dragging. `test_a_swipe_off_a_panel_trigger_does_not_open_it` asserts both
+  halves, since the cure for the swipe is exactly what would break the tap and
+  touch has no other way in. **And they are wired on `.shell`, not on
+  the `tbody`** — every listener in `hoverPanel` hung off `#body`, which below
+  760px is `display:none`, so on a phone not one of the three panels was
+  connected to anything and the fee bill, the cabin ladder and the entry bar
+  were all dead. Nothing looked wrong: a card cell is the same column's
+  renderer, so the buttons rendered exactly right and only the clicks went
+  nowhere, which is how *the three panel triggers come across working* stayed
+  true of everything except the part that makes them work. The shell is the
+  one box holding both row hosts. The row mark had the same bug twice — the
+  same `tbody`, and `closest("tr.row")` where a card is `article.card.row` —
+  so it matches `.row[data-id]`, the class and the attribute both layouts
+  write. **And a dialog needs a way out that does not
+  assume a keyboard.** They were dismissed by Escape, by pressing the trigger
+  again, or by pressing outside — and on a phone the first does not exist and
+  the other two are *underneath* the panel: at 402×684, the size the device
+  reported, the bill is 479px tall over a 452px list, so it covers the rows
+  whole. A swipe there lands on the panel and scrolls it — a few hundred
+  pixels of bill and then nothing, which from the outside is a scroller that
+  has stopped working, and is what three fixes were aimed at before a
+  screenshot showed the panel sitting on top of the list. So `hoverPanel`
+  builds a close control into every panel it drives, for the reason the panels
+  share it at all: three copies of a close button is three that can differ.
+  **Sticky and not absolute** — the panel is its own scroll box, so an
+  absolutely placed button scrolls away with the bill, which is the same bug
+  one layer down. 44px square, because a multiplication sign is not something
+  a thumb can aim at, and that height comes out of the panel: a dialog nobody
+  can close is worth less than one row fewer of bill.
+  **And pressing away closes it whether or not it was pinned**, which was the
+  other half of the same stuck dialog: a panel opened by *focus* is `peeked`
+  rather than `held`, the press-away handler was guarded on `held`, and a
+  peeked panel was otherwise dismissed only by the pointer leaving the trigger
+  — which on a touch screen never happens. Focus with no press after it is
+  what a tap that does not resolve to a click leaves behind, so on a phone
+  that panel had no exit at all: Escape wants a keyboard, the trigger is
+  underneath it, and this ignored it. Nothing wants a peeked panel to survive
+  a press somewhere else, so which of the two states it was in was never the
+  question.
+  `test_every_panel_can_be_closed_without_a_keyboard` asserts the tap target,
+  the pinning, the closing and the press-away, on all three.
+  Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
   **one div filled on demand** — nothing is lazily fetched here, so anything
   written per row ships 1,122 times. `rowFor` rebuilds the row rather than
@@ -496,7 +568,22 @@ Break these and the site starts lying quietly rather than failing loudly.
   disclosure. What gives is height: it caps at 70vh and scrolls inside itself,
   and each fee table sits in its own `.fee-scroll` because the table's 460px
   `min-width` beats the panel's width and would otherwise drag the panel's
-  header sideways. **The entry bar is not a fee** and opens from the Entry bar
+  header sideways. **On a phone that scroller was the reading experience, and
+  height is what may give — not width.** 460px of columns in a 353px panel put
+  every line's tier and its provenance past the right edge, so the bill was
+  read by dragging it sideways 107px inside a box narrow enough that the flick
+  kept reaching the end and handing itself to the panel behind. Below 760px a
+  fee line is stacked instead — the amount beside what it is for, the tier and
+  the source note under it — which is the rows' own answer applied to the
+  panel: a fee line is not a row of columns at that width either. **One
+  renderer, restyled rather than re-emitted**, so the phone bill and the
+  desktop bill cannot drift, and `feeRows` names its five cells for it because
+  a positional rule moves the day a sixth column is added. The label column is
+  `minmax(0, 1fr)` so a long operator name cannot push the amount back off the
+  edge, `.fee-scroll` stays as the net, and
+  `test_a_phone_bill_needs_no_sideways_drag` measures the panel's own boxes at
+  four phone widths on a bill with *both* sellers' tables — a rule reaching
+  only the first table fixes half the panel. **The entry bar is not a fee** and opens from the Entry bar
   column instead; it led that dropdown because whether a diver may board is
   prior to what boarding costs, and that reason does not put it under
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
@@ -577,7 +664,34 @@ Break these and the site starts lying quietly rather than failing loudly.
   corner at every width and nothing has to be measured to keep it there. **Both
   hosts are always filled**, so a rotation crosses the breakpoint with no redraw
   and `Ctrl+F` finds either — and `appendPage` appends to both, or a scrolled
-  table would meet a card list holding the first 120 rows. Every card cell
+  table would meet a card list holding the first page.
+  **But the one on screen is filled inside the scroll and the other a task
+  later**, because only one of them is ever being looked at: `#body` is
+  `display:none` below 760px and `#cards` above it, so half of every append
+  was parsed in the frame the reader was waiting on for a layout nobody could
+  see. `filled` records how far each host is, and `fillRest` appends whatever
+  a host is behind by — idempotent rather than a queue of pending slices, so a
+  flush that runs late, twice, or after a `draw` that rebuilt both hosts is
+  harmless. `drawEverything` flushes **synchronously**: `Ctrl+F` over a host a
+  page behind is the silent truncation the whole append exists to avoid.
+  **And a page is 20 rows on scroll against 120 on first paint**, because the
+  two answer different questions. The first page is paid before anything is on
+  screen; every page after it is paid inside a scroll, where what is felt is
+  one frame's stall — a card costs about 1.4ms of layout on a mid-range phone,
+  so 120 of them was a 190ms lurch each time the reader reached the end of a
+  page. Twenty is one frame, the same rows arrive, and a hitch is felt per page
+  rather than per row. Not fewer than twenty: the append fires 600px from the
+  end, so a step must add more than 600px of rows or the threshold is still met
+  after it — 13 rows of table at 47px, 5 cards at 143 — which makes 20 a number
+  derived here rather than measured off a screen this file cannot see (#150).
+  `content-visibility:auto` on the card was the other candidate and was
+  **measured and rejected**: it takes the append's layout from 147ms to 7ms and
+  then charges it back during the scroll as each card comes into view, which
+  turned 44 late frames into 131 over the same flick. The lurch is worth
+  removing; buying it with a permanent stutter is not.
+  `test_the_scroll_pays_for_one_host_and_the_other_catches_up` asserts all
+  three halves — the split is invisible once it has settled, which is exactly
+  how it would come back. Every card cell
   reads the same column's renderer, so the two cannot drift and the three panel
   triggers come across working — `cardCell` falls through to `show` unless the
   column declares a `card`, and **exactly one does**. Price per dive was a bare
@@ -694,9 +808,28 @@ Break these and the site starts lying quietly rather than failing loudly.
   screen. `100dvh` follows the bar as it comes and goes and leaves nothing to
   pan; `100%` stays under it for anything that does not know the unit, and
   every `vh` cap on a panel is doubled the same way for the same reason.
-  `overscroll-behavior` is the other half — `none` on the document and
-  `contain` on `.shell`, or a flick that reaches the end of the table hands
-  itself to a page that should not have a scroll. **And nothing may go looking
+  **`overflow:hidden` on `body` is the other half, and it is the whole of
+  it.** It stops the document scrolling and it covers `html` too — overflow on
+  the body element propagates to the viewport wherever `html`'s own is
+  `visible`, which it is — so a gesture over the masthead cannot pan the page
+  even with `html` standing 90px taller than the window. An `html` rule was
+  written on the theory that it did not propagate, and measured out again.
+  **`overscroll-behavior` is gone for the same reason, and that is what fixed
+  the scrolling.** It was declared on `html`, `body`, `.shell`, `.bankwrap`
+  and the bill panel, to stop a flick reaching the end of a scroller chaining
+  into the document and panning it. It cannot chain: with the property forced
+  off on all five, a flick past the end of the table leaves the page at 0,
+  because there is no document scroll to chain into. So it protected nothing —
+  and on WebKit it was the one declaration every dead scroller had in common.
+  An iPhone reported `.shell` and the dive sites bank both moving a few pixels
+  a gesture, two unrelated scrollers sharing nothing else; three fixes had
+  already gone out against that report on reasoning about frame times, which
+  is what happens when a symptom is theorised instead of narrowed. The second
+  scroller is what named it. A guard that buys nothing does not get to cost
+  the scroll, so the suite asserts the *outcome* rather than the property —
+  drive the shell to its end, keep flicking, and the page must not move — and
+  the declaration does not come back without a measurement showing the page
+  can be panned without it. **And nothing may go looking
   for slack either**, because `dvh` only covers iOS 15.4 up: `focus()` on a
   pane or a panel trigger takes `{ preventScroll: true }` — focusing asks the
   browser to bring an element into view and the only box it can move here is
@@ -708,9 +841,35 @@ Break these and the site starts lying quietly rather than failing loudly.
   so `fitShell` sets `body` from `window.innerHeight` on load and again on
   `resize`, `orientationchange` and `pageshow`, twice each because iOS reports
   the old height during a rotation and animates the bar away after a resize.
-  `innerHeight` and not `visualViewport.height`: the two agree about the URL
-  bar and disagree about the keyboard, and a shell that resized itself
-  whenever somebody tapped the nights field is a worse bug than this one. It went unnoticed until
+  **But it may not write a height, because `dvh` already wrote one.** The
+  finding was that the layout was *stale* rather than wrong — one forced
+  reflow and it snapped right — and `document.body.style.height =
+  window.innerHeight + "px"` answers that by overriding the unit: on iOS
+  `innerHeight` is the *layout* viewport, the tall one, so what went back on
+  every `resize` was the slack `dvh` had just removed. `fitShell` invalidates
+  instead of asserting — `min-height` toggled off and back with a forced read
+  between, which dirties layout without this file claiming a number — and
+  keeps the pixel write only where `CSS.supports("height", "100dvh")` is
+  false, which is the one case with no unit to fight.
+  `innerHeight` there and not `visualViewport.height`: the two agree about the
+  URL bar and disagree about the keyboard, and a shell that resized itself
+  whenever somebody tapped the nights field is a worse bug than this one.
+  **`overflow:hidden` on `body` is what stops the document scrolling, and it
+  covers `html` too** — overflow on the body element propagates to the
+  viewport wherever `html`'s own is `visible`, which it is. Measured before an
+  `html` rule was added on the theory that it did not: a gesture over the
+  masthead cannot pan the page even with `html` standing 90px taller than the
+  window. Do not add one.
+  **And what this file cannot settle, a phone reports.** `?diag` draws a fixed
+  readout — build stamp, `innerHeight`, `visualViewport`, the body box, any
+  inline height, the shell's own extent and position, the row counts, and live
+  `resize`/`orientationchange`/`scroll` counters. Chromium is the right tool
+  for every geometry claim a desktop engine can settle and it cannot settle an
+  iOS one; three fixes went out against a scrolling report on reasoning rather
+  than on a number before this existed. It is the probe rule applied to a
+  device instead of a page, and the build stamp leads because a phone hides
+  the build line and a stale cache explains a "still broken" for free. Off
+  unless the URL asks for it, and one tap dismisses it. It went unnoticed until
   `color-scheme` landed: before that the panned-into strip was the UA's white,
   and after it is black, which is what made a long-standing gap look like a
   new one.

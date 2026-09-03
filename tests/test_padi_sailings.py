@@ -306,6 +306,41 @@ class TestComparison(unittest.TestCase):
             "%d shipped PADI bills charge a code more than once:\n  %s"
             % (len(offenders), "\n  ".join(offenders[:10])))
 
+    def test_no_shipped_bill_states_a_total_it_bills_twice(self) -> None:
+        """And the fleet-wide half of the bundle rule.
+
+        The test above catches one code appearing twice. This catches the
+        other shape: a bundle naming a charge that is *also* its own line, so
+        the codes differ and the money does not. Seawolf Dominator is the one
+        boat doing it, on 17 departures, and the page withholds those totals
+        rather than adding the visa in twice.
+
+        What is asserted is the consequence, not the count: every shipped bill
+        that still claims a total adds up without billing anything twice.
+        """
+        from liveaboard.pricing import overlapping_charges, resolve_fees
+
+        dataset = published.dataset()
+        by_itinerary = {}
+        for departure in dataset.departures:
+            itinerary = dataset.itineraries[departure.itinerary_id]
+            clash = overlapping_charges(resolve_fees(itinerary, departure))
+            if clash:
+                by_itinerary.setdefault(
+                    itinerary.id, sorted(code.value for code in clash))
+
+        page = published.page()
+        for entry in page["departures"]:
+            stated = by_itinerary.get(entry["itinerary_id"])
+            if stated:
+                # Read, and read as saying something: the missing total has to
+                # carry this reason rather than one of the other two.
+                self.assertEqual(entry.get("fee_overlap"), stated, entry["id"])
+                self.assertTrue(entry["fees_known"], entry["id"])
+                self.assertTrue(entry["mandatory_known"], entry["id"])
+            else:
+                self.assertNotIn("fee_overlap", entry, entry["id"])
+
     def test_an_incomplete_padi_book_yields_no_second_total(self) -> None:
         """The invariant, in the one place it can be broken silently.
 

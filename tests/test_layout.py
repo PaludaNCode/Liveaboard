@@ -900,10 +900,13 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         Headless Chromium has no collapsing browser chrome, so it cannot
         reproduce the pan. What it can hold is the invariant underneath it --
         the shell is exactly the window, the document has no scroll of its own,
-        and the footer's bottom edge is the window's -- plus the two
-        `overscroll-behavior` declarations that stop `.shell` handing a flick
-        to a document that should not have one. Asserted as used values off the
-        live layout, not as source text.
+        and the footer's bottom edge is the window's. Asserted as used values
+        off the live layout, not as source text.
+
+        It used to assert the `overscroll-behavior` declarations too, and those
+        are gone: what they were for is asserted directly below instead, by
+        flicking past the end of the table and checking the page did not move.
+        A property is not the invariant -- the page staying put is.
         """
         page = self.open(PHONE_WIDTHS[0], 720)
         self.addCleanup(page.close)
@@ -923,8 +926,7 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                   document.querySelector('.site-footer').getBoundingClientRect().bottom),
                 masthead: box('.masthead'),
                 rail: box('.rail'),
-                bodyChain: getComputedStyle(document.body).overscrollBehaviorY,
-                shellChain: getComputedStyle(shell).overscrollBehaviorY,
+                shellScrolls: shell.scrollHeight > shell.clientHeight,
               };
             }""")
             where = "at %dpx" % width
@@ -936,10 +938,25 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              "the footer is not on the bottom edge " + where)
             self.assertGreater(seen["masthead"], 0, "no masthead " + where)
             self.assertGreater(seen["rail"], 0, "no rail " + where)
-            self.assertEqual(seen["bodyChain"], "none",
-                             "the document accepts a chained scroll " + where)
-            self.assertEqual(seen["shellChain"], "contain",
-                             "the table's scroll chains out of it " + where)
+
+            # What `overscroll-behavior` was declared for, asserted as the
+            # outcome: drive the shell to its end and keep flicking, and the
+            # page must not move. It cannot, because `overflow:hidden` on
+            # `body` propagates to the viewport -- so the property was buying
+            # nothing, and on WebKit it was what every dead scroller had in
+            # common.
+            self.assertTrue(seen["shellScrolls"],
+                            "nothing to flick past " + where)
+            page.evaluate("() => { const s = document.querySelector('.shell');"
+                          " s.scrollTop = s.scrollHeight; }")
+            page.mouse.move(width // 2, 400)
+            page.mouse.wheel(0, 4000)
+            page.wait_for_timeout(120)
+            self.assertEqual(
+                0, page.evaluate("Math.round(scrollY) + "
+                                 "document.documentElement.scrollTop + "
+                                 "document.body.scrollTop"),
+                "a flick past the end of the table panned the page " + where)
 
         # And the shell asks for the visible viewport, not the tallest one it
         # could ever be. Chromium reports the two as equal, so the declaration
@@ -1293,6 +1310,344 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             # column of figures; it has no business taking a quarter of a row.
             self.assertLess(seen["later"], seen["tableW"] // 8,
                             "Mandatory fees is soaking up the width again " + where)
+
+    def test_a_phone_can_open_all_three_panels_and_mark_a_row(self) -> None:
+        """The triggers came across; the events did not.
+
+        Every listener in `hoverPanel` hung off `#body`, and below 760px that
+        element is `display:none` and the rows are `#cards` — so on a phone not
+        one of the three panels was wired to anything, and the fee bill, the
+        cabin ladder and the entry bar were all dead. The row mark went the
+        same way twice over: bound to the same `tbody`, and matching `tr.row`
+        where a card is `article.card.row`.
+
+        Nothing looked wrong, which is why this needs measuring rather than
+        reading: a card cell is the same column's renderer, so the buttons
+        rendered exactly right and only the clicks went nowhere.
+
+        Asserted on the layout that has no table, and each panel has to *fit*
+        as well as open — a dialog opening off the bottom of a 640px phone is
+        not an opened dialog.
+        """
+        panels = ((".fees-open", "feePanel"), (".berths", "berths"),
+                  (".entry-open", "entryPanel"))
+        for width, height in ((360, 640), (390, 844), (430, 932)):
+            page = self.open(width, height)
+            try:
+                self.assertTrue(
+                    page.evaluate("()=>getComputedStyle("
+                                  "document.querySelector('.shell > table'))"
+                                  ".display === 'none'"),
+                    "not the card layout at %dpx" % width)
+
+                for selector, host in panels:
+                    trigger = page.query_selector(".cards .card " + selector)
+                    self.assertIsNotNone(
+                        trigger, "no %s on a card at %dpx" % (selector, width))
+                    trigger.click()
+                    page.wait_for_timeout(320)
+                    seen = page.evaluate("""(id) => {
+                      const el = document.getElementById(id);
+                      const box = el.getBoundingClientRect();
+                      return { open: !el.hidden,
+                               fits: box.left >= 0 && box.right <= innerWidth
+                                     && box.top >= 0 && box.bottom <= innerHeight,
+                               w: Math.round(box.width) };
+                    }""", host)
+                    where = "%s at %dx%d" % (selector, width, height)
+                    self.assertTrue(seen["open"], "the panel did not open, " + where)
+                    self.assertGreater(seen["w"], 0, "the panel is empty, " + where)
+                    self.assertTrue(seen["fits"], "the panel is off screen, " + where)
+                    page.keyboard.press("Escape")
+                    page.wait_for_timeout(180)
+
+                # And the row mark, on the surface a card actually has.
+                page.click(".cards .card .card-trip")
+                page.wait_for_timeout(280)
+                self.assertTrue(
+                    page.eval_on_selector(
+                        ".cards .card", "e => e.classList.contains('marked')"),
+                    "tapping a card does not mark it at %dpx" % width)
+            finally:
+                page.close()
+
+
+    def test_a_phone_bill_needs_no_sideways_drag(self) -> None:
+        """The fee table's five columns want 460px and a phone panel has 353.
+
+        So the bill opened with its tier and its provenance past the right
+        edge, and reading them meant dragging the table inside its own
+        `.fee-scroll`: 107px of travel in a box narrow enough that a flick
+        reaching the end handed itself to the panel behind. Below 760px a fee
+        line is stacked instead — the money beside what it is for, the tier
+        and the note under it — so nothing in the panel scrolls sideways at
+        all.
+
+        Measured on the panel's own boxes rather than read off the
+        stylesheet: the claim is geometry, and the row that would break it is
+        one long operator name pushing the amount past the edge.
+
+        The second seller's bill is a second `table.fees` in the same panel,
+        so a bill with two of them is what this opens: a rule that reaches
+        only the first table is a rule that fixes half the panel.
+        """
+        for width, height in ((320, 640), (360, 640), (390, 844), (430, 932)):
+            page = self.open(width, height)
+            try:
+                found = page.evaluate("""() => {
+                  const opens = [...document.querySelectorAll('.cards .card .fees-open')];
+                  for (const open of opens) {
+                    open.click();
+                    if (document.querySelectorAll('#feePanel table.fees').length > 1)
+                      return true;
+                  }
+                  return false;
+                }""")
+                self.assertTrue(found, "no two-seller bill to open at %dpx" % width)
+                page.wait_for_timeout(320)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('feePanel');
+                  const wide = [...panel.querySelectorAll('*')]
+                    .filter(el => el.scrollWidth > el.clientWidth + 1)
+                    .map(el => String(el.className) + ' ' + el.clientWidth +
+                               '->' + el.scrollWidth);
+                  const right = Math.round(panel.getBoundingClientRect().right);
+                  const amounts = [...panel.querySelectorAll('.famt')]
+                    .map(el => Math.round(el.getBoundingClientRect().right));
+                  return { open: !panel.hidden, wide: wide,
+                           tables: panel.querySelectorAll('table.fees').length,
+                           right: right, past: amounts.filter(x => x > right).length,
+                           amounts: amounts.length };
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertTrue(seen["open"], "the bill did not open " + where)
+                self.assertGreater(seen["tables"], 1, "one bill only " + where)
+                self.assertGreater(seen["amounts"], 0, "no amounts " + where)
+                self.assertEqual([], seen["wide"],
+                                 "the bill scrolls sideways " + where)
+                self.assertEqual(0, seen["past"],
+                                 "%d amount(s) past the panel's edge %s"
+                                 % (seen["past"], where))
+            finally:
+                page.close()
+
+
+    def test_the_scroll_pays_for_one_host_and_the_other_catches_up(self) -> None:
+        """A page appended on scroll was parsed twice, once for nothing.
+
+        Both hosts are always filled — that is the contract that lets a
+        rotation cross the breakpoint with no redraw and `Ctrl+F` find
+        either — but below 760px `#body` is `display:none` and above it
+        `#cards` is, so half of every append was built inside the frame the
+        reader was waiting on, for a layout nobody was looking at.
+
+        So: the host on screen grows in the scroll, the other one a task
+        later, and `Ctrl+F` flushes both synchronously because a host a page
+        behind is the silent truncation the append exists to avoid. All three
+        halves need asserting — the split is invisible once it has settled,
+        which is exactly how it would come back.
+        """
+        for width, host, other in ((390, "cards", "body"), (1440, "body", "cards")):
+            page = self.open(width, 844)
+            try:
+                count = ("(id) => document.getElementById(id).children.length")
+                before = (page.evaluate(count, host), page.evaluate(count, other))
+                # Scroll to the trigger and read both hosts before the flush.
+                grew = page.evaluate("""(hosts) => {
+                  const [host, other] = hosts;
+                  const shell = document.querySelector('.shell');
+                  const n = id => document.getElementById(id).children.length;
+                  const was = [n(host), n(other)];
+                  shell.scrollTop = shell.scrollHeight;
+                  shell.dispatchEvent(new Event('scroll'));
+                  return { host: n(host) - was[0], other: n(other) - was[1] };
+                }""", [host, other])
+                where = "at %dpx" % width
+                self.assertGreater(grew["host"], 0,
+                                   "the host on screen did not grow " + where)
+                self.assertEqual(0, grew["other"],
+                                 "the off-screen host was filled in the "
+                                 "scroll " + where)
+                page.wait_for_timeout(200)
+                after = (page.evaluate(count, host), page.evaluate(count, other))
+                self.assertEqual(after[0], after[1],
+                                 "the hosts disagree after the flush " + where)
+                self.assertGreater(after[0], before[0],
+                                   "nothing was appended " + where)
+
+                # And find-in-page leaves neither host short.
+                page.keyboard.press("Control+f")
+                page.wait_for_timeout(60)
+                whole = page.evaluate("""() => {
+                  const n = id => document.getElementById(id).children.length;
+                  return [n('body'), n('cards')];
+                }""")
+                self.assertEqual(whole[0], whole[1],
+                                 "Ctrl+F left the hosts disagreeing " + where)
+                self.assertGreater(whole[0], after[0],
+                                   "Ctrl+F drew no more rows " + where)
+            finally:
+                page.close()
+
+
+    def test_a_swipe_off_a_panel_trigger_does_not_open_it(self) -> None:
+        """A finger has no hover state, and `pointerover` fires for one anyway.
+
+        It arrives on touchstart, before the drag that follows is known to be
+        a drag — so a swipe beginning on one of the three panel buttons opened
+        that panel 120ms later, over the list, and the scroll died under it. A
+        card's meta row is three of those buttons, so most swipes on a phone
+        started on one: five to ten cards a gesture.
+
+        Only reachable since the listeners moved off the `tbody` onto
+        `.shell`; before that nothing on a phone was wired at all. Both halves
+        are asserted, because the cure for the swipe is exactly what would
+        break the tap: touch has no other way in.
+        """
+        page = self._browser.new_page(
+            viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+        cdp = page.context.new_cdp_session(page)
+        try:
+            page.goto(self._url)
+            page.wait_for_selector(".cards .card .berths")
+            page.evaluate("""() => {
+              window.__opened = [];
+              ["berths", "feePanel", "entryPanel"].forEach(id => {
+                const el = document.getElementById(id);
+                new MutationObserver(() => {
+                  if (!el.hidden) window.__opened.push(id);
+                }).observe(el, { attributes: true, attributeFilter: ["hidden"] });
+              });
+            }""")
+            spot = page.evaluate("""() => {
+              const r = document.querySelector('.cards .card .berths')
+                .getBoundingClientRect();
+              return { x: Math.round(r.x + r.width / 2),
+                       y: Math.round(r.y + r.height / 2) };
+            }""")
+
+            def finger(kind, y=None):
+                points = [] if kind == "touchEnd" else [{"x": spot["x"], "y": y}]
+                cdp.send("Input.dispatchTouchEvent",
+                         {"type": kind, "touchPoints": points})
+
+            # A swipe: down on the trigger, then away, over more than the
+            # 120ms the hover timer waits.
+            finger("touchStart", spot["y"])
+            page.wait_for_timeout(200)
+            for dy in (40, 120, 240, 400):
+                finger("touchMove", spot["y"] - dy)
+                page.wait_for_timeout(40)
+            finger("touchEnd")
+            page.wait_for_timeout(400)
+            self.assertEqual([], page.evaluate("window.__opened"),
+                             "a swipe off the Places button opened its panel")
+            self.assertGreater(page.evaluate("document.querySelector('.shell').scrollTop"),
+                               0, "the swipe did not scroll at all")
+
+            # And a tap on the same button still opens it, which is the only
+            # way in on a touch screen.
+            page.evaluate("() => { document.querySelector('.shell').scrollTop = 0; }")
+            page.wait_for_timeout(200)
+            spot = page.evaluate("""() => {
+              const r = document.querySelector('.cards .card .berths')
+                .getBoundingClientRect();
+              return { x: Math.round(r.x + r.width / 2),
+                       y: Math.round(r.y + r.height / 2) };
+            }""")
+            page.touchscreen.tap(spot["x"], spot["y"])
+            page.wait_for_timeout(300)
+            self.assertFalse(page.evaluate("document.getElementById('berths').hidden"),
+                             "a tap on the Places button no longer opens it")
+        finally:
+            page.close()
+
+
+    def test_every_panel_can_be_closed_without_a_keyboard(self) -> None:
+        """These are dialogs, and a phone has no Escape key.
+
+        They were dismissed by Escape, by tapping the trigger again, or by
+        tapping outside — and on a phone the first does not exist and the
+        other two are underneath the panel. Measured at 402x684, the size the
+        device reported: the bill is 479px tall over a 452px list, so it
+        covers the rows whole. A swipe there lands on the panel and scrolls
+        *it*, a few hundred pixels of bill and then nothing, which is what a
+        scroller that has stopped working looks like from the outside.
+
+        So each panel carries a close control, and three things about it are
+        asserted rather than assumed: it is a real tap target (44px, because
+        a multiplication sign is not something a thumb can aim at), it stays
+        put when the panel is scrolled to its end (sticky, not absolute —
+        otherwise the way out scrolls away, which is the same bug one layer
+        down), and it actually closes the panel.
+        """
+        page = self._browser.new_page(
+            viewport={"width": 402, "height": 684}, has_touch=True, is_mobile=True)
+        try:
+            page.goto(self._url)
+            page.wait_for_selector("article.card")
+            panels = ((".fees-open", "feePanel"), (".berths", "berths"),
+                      (".entry-open", "entryPanel"))
+            for selector, host in panels:
+                page.locator(".cards .card " + selector).first.click()
+                page.wait_for_timeout(280)
+                seen = page.evaluate("""(id) => {
+                  const panel = document.getElementById(id);
+                  const shut = panel.querySelector('.pshut');
+                  if (!shut) return { open: !panel.hidden, missing: true };
+                  const before = shut.getBoundingClientRect();
+                  panel.scrollTop = panel.scrollHeight;
+                  const after = shut.getBoundingClientRect();
+                  return {
+                    open: !panel.hidden, missing: false,
+                    w: Math.round(before.width), h: Math.round(before.height),
+                    drifted: Math.round(Math.abs(after.top - before.top)),
+                    inside: after.top >= panel.getBoundingClientRect().top - 1,
+                  };
+                }""", host)
+                where = "%s at 402x684" % selector
+                self.assertTrue(seen["open"], "the panel did not open, " + where)
+                self.assertFalse(seen["missing"],
+                                 "no way to close the panel, " + where)
+                self.assertGreaterEqual(min(seen["w"], seen["h"]), 44,
+                                        "the close control is %dx%d, too small "
+                                        "for a thumb, %s"
+                                        % (seen["w"], seen["h"], where))
+                self.assertEqual(0, seen["drifted"],
+                                 "the way out scrolled away with the panel, "
+                                 + where)
+                self.assertTrue(seen["inside"],
+                                "the close control left the panel, " + where)
+
+                page.locator("#" + host + " .pshut").click()
+                page.wait_for_timeout(240)
+                self.assertTrue(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "pressing close did not close the panel, " + where)
+
+                # And the other way out. A panel opened by *focus* is `peeked`
+                # rather than `held`, and the press-away handler used to ignore
+                # those: dismissed only by the pointer leaving the trigger,
+                # which on a touch screen never happens. Focus with no press
+                # after it is what a tap that does not resolve to a click
+                # leaves behind, and it left a dialog with no exit at all.
+                # A different row's trigger: closing sets `dismissed` on the
+                # one it closed, so that button deliberately does not reopen
+                # under the focus it is handed back.
+                page.eval_on_selector(
+                    ".cards .card:nth-of-type(2) " + selector, "el => el.focus()")
+                page.wait_for_timeout(280)
+                self.assertFalse(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "focus did not open the panel, " + where)
+                page.touchscreen.tap(200, 60)   # the masthead, well outside
+                page.wait_for_timeout(280)
+                self.assertTrue(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "pressing away did not close a panel opened by focus, "
+                    + where)
+        finally:
+            page.close()
 
 
 if __name__ == "__main__":  # pragma: no cover

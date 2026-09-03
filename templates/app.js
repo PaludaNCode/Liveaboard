@@ -68,8 +68,30 @@
      the *old* height during `orientationchange` and animates the bar away for
      a moment after a `resize`. */
   var refitAgain = null;
+  /* Where `dvh` exists the stylesheet already knows the height, and all this
+     has to do is make the browser recompute it -- which was the whole finding:
+     the layout was stale rather than wrong.
+     Writing a pixel height instead *overrides* the unit, and on iOS
+     `window.innerHeight` is the layout viewport, which is the tall one. So the
+     number written back was the very slack `dvh` had just removed, on every
+     `resize` -- and on an iPhone that is the shell relaid out from under a
+     gesture: the UI jumps and the scroll it was tracking is clamped to
+     nothing. Invalidate rather than assert. Toggling `min-height` dirties
+     layout without this file claiming a height of its own, and the forced
+     read is the reflow the stale layout wanted; `height` in pixels stays as
+     the fallback for a browser that does not know the unit, where there is no
+     unit to fight. */
+  var HAS_DVH = !!(window.CSS && window.CSS.supports &&
+                   window.CSS.supports("height", "100dvh"));
   function fitShell() {
-    document.body.style.height = window.innerHeight + "px";
+    if (!HAS_DVH) {
+      document.body.style.height = window.innerHeight + "px";
+      return;
+    }
+    document.body.style.minHeight = "0px";
+    void document.body.offsetHeight;
+    document.body.style.minHeight = "";
+    void document.body.offsetHeight;
   }
   function refitShell() {
     fitShell();
@@ -80,6 +102,61 @@
   ["resize", "orientationchange", "pageshow"].forEach(function (name) {
     window.addEventListener(name, refitShell);
   });
+
+  /* A READOUT FOR A PHONE THIS REPO CANNOT DRIVE.
+   *
+   * `tests/test_layout.py` drives Chromium, which is the right tool for every
+   * claim about geometry that a desktop engine can settle. It cannot settle
+   * one about iOS: `dvh`, `innerHeight` and the browser's own toolbar
+   * disagree there in ways nothing here reproduces, and three fixes were shipped
+   * against it on reasoning rather than on a number. This is the probe rule
+   * applied to a device instead of a page -- read what came back, then fix.
+   *
+   * Off unless the URL asks (`?diag`), so it ships as nothing on a page
+   * nobody has asked it of. It states what it reads and never what it thinks:
+   * the build stamp first, because a phone hides the build line and a stale
+   * cache explains every "still broken" for free. */
+  if (/(^|[?&])diag(&|=|$)/.test(location.search)) {
+    var diag = document.createElement("div");
+    diag.id = "diag";
+    diag.setAttribute("aria-hidden", "true");
+    diag.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:9999;" +
+      "background:#000;color:#0f0;font:11px/1.35 ui-monospace,monospace;" +
+      "padding:6px 8px;white-space:pre;pointer-events:auto";
+    diag.addEventListener("click", function () { diag.remove(); });
+    document.body.appendChild(diag);
+    var events = { resize: 0, orient: 0, scroll: 0 };
+    ["resize", "orientationchange"].forEach(function (name) {
+      window.addEventListener(name, function () {
+        events[name === "resize" ? "resize" : "orient"] += 1;
+      });
+    });
+    var shellFor = function () { return document.querySelector(".shell"); };
+    shellFor().addEventListener("scroll", function () { events.scroll += 1; },
+                                { passive: true });
+    var vv = window.visualViewport;
+    var paint = function () {
+      var shell = shellFor();
+      var body = document.body.getBoundingClientRect();
+      diag.textContent =
+        "built " + (D.meta.built || "?") + "  (tap to dismiss)\n" +
+        "inner " + window.innerWidth + "x" + window.innerHeight +
+        "  visual " + (vv ? Math.round(vv.width) + "x" + Math.round(vv.height) +
+                            " off" + Math.round(vv.offsetTop) : "none") +
+        "  dvh " + (HAS_DVH ? "yes" : "no") + "\n" +
+        "body " + Math.round(body.width) + "x" + Math.round(body.height) +
+        "  style.h '" + document.body.style.height + "'" +
+        "  page " + Math.round(window.scrollY) + "\n" +
+        "shell " + Math.round(shell.clientHeight) + " of " +
+        Math.round(shell.scrollHeight) + "  at " + Math.round(shell.scrollTop) +
+        "  rows " + document.getElementById("cards").children.length + "/" +
+        document.getElementById("body").children.length + "\n" +
+        "events resize " + events.resize + "  orient " + events.orient +
+        "  scroll " + events.scroll;
+      requestAnimationFrame(paint);
+    };
+    requestAnimationFrame(paint);
+  }
 
   /* Written on every draw by countRail(), which runs from afterDraw -- so they
      are looked up here rather than beside the rest of the view wiring, which
@@ -169,7 +246,7 @@
      difference that is an artefact of how the two were summed. */
   function padiMetricsFor(dep) {
     var itin = D.itineraries[dep.itinerary_id];
-    if (!dep.padi_base_line || !itin.padi_lines) return null;
+    if (!dep.padi_base_line || !itin.padi_lines || itin.padi_overlap) return null;
     return metricsOf([dep.padi_base_line].concat(itin.padi_lines), dep.padi);
   }
 
@@ -261,7 +338,12 @@
      project's reading order asserted as a relationship. Under `PADI_SAME` they
      are one price and the span collapses. */
   function best(row) {
-    var lav = row.d.mandatory_known ? row.lav : null;
+    /* No total where the disclosure names one charge twice -- `fee_overlap`
+       joins `mandatory_known` rather than replacing it, because they are two
+       ways for a bill not to add up and the sentences differ. Withheld here
+       and not in `metricsFor`: `row.lav` is an object the Nitrox and Places
+       columns read fields off, so nulling it there empties the table. */
+    var lav = row.d.mandatory_known && !row.d.fee_overlap ? row.lav : null;
     var padi = row.padi;
     if (!lav && !padi) return null;
     if (!lav || !padi) {
@@ -743,6 +825,10 @@
   function disclosure(dep) {
     if (!dep.fees_known) return ["none", "not looked at"];
     if (!dep.mandatory_known) return ["partial", "optional only"];
+    /* Read, and self-contradictory. Third rather than folded into `partial`:
+       that sentence says the operator stated no required extras, and this one
+       stated them twice. */
+    if (dep.fee_overlap) return ["overlap", "counted twice"];
     return ["full", "required stated"];
   }
 
@@ -760,7 +846,12 @@
     partial: "The operator publishes only optional extras, so its required " +
              "ones are unstated. They are still charged — bundled into the " +
              "berth or collected at the dock — and the listing does not say " +
-             "which, so no total is claimed here."
+             "which, so no total is claimed here.",
+    overlap: "The seller bills one of these charges twice — once on its own " +
+             "line and once inside a bundle that names it. Both are published " +
+             "as required, and nothing in the listing says which is the real " +
+             "one, so adding them up would state a price nobody quotes. The " +
+             "fee lines are all here; the total is not."
   };
 
   /* Sixteen columns became twelve, and not one fact went with the four.
@@ -1707,9 +1798,14 @@
                     : " (" + line.fx.as_of + ")"));
       }
       if (line.note) prov.push(line.note);
-      return '<tr class="' + (on ? "" : "off") + '"><td>' + (on ? "▪" : "▫") +
-        "</td><td>" + esc(line.label) + '</td><td class="num">' + amount +
-        "</td><td>" + esc(line.tier) + '</td><td class="prov">' +
+      /* Each cell names itself. Below 760px a fee line is not a row of
+         columns and the stylesheet restacks these five -- addressed by name,
+         because a positional rule is a rule that silently moves the day a
+         sixth column is added. */
+      return '<tr class="' + (on ? "" : "off") + '"><td class="fmark">' +
+        (on ? "▪" : "▫") +
+        '</td><td class="flabel">' + esc(line.label) + '</td><td class="famt num">' +
+        amount + '</td><td class="ftier">' + esc(line.tier) + '</td><td class="prov">' +
         esc(prov.join(" · ")) + "</td></tr>";
     }).join("");
   }
@@ -1841,7 +1937,30 @@
      count changes -- "838 rows shown" still says 838. Only the moment of
      construction moves. */
   var PAGE_ROWS = 120;
+  /* And a much smaller step once it is being scrolled, because the two
+     answer different questions. The first page is paid before anything is on
+     screen, where 120 rows is what fills a desktop table. Every page after
+     it is paid *inside* a scroll, where what is felt is one frame's stall:
+     laying out a card costs about 1.4ms on a mid-range phone, so a page of
+     120 was a 190ms lurch every time the reader reached the bottom of one --
+     twelve frames, once per page, which is the stutter. 20 is one or two.
+     Total work is unchanged; the same rows arrive in smaller pieces, which
+     is the whole point, because a hitch is felt per page and not per row.
+     Twenty and not fewer: the append fires 600px from the end, so a step has
+     to add more than 600px of rows or the threshold is still met after it
+     and the next scroll event appends again. A table row is 47px and the
+     shortest card 143, so 13 rows clears it on the table and 5 on the
+     cards -- 20 is the smallest round step that clears both with room, which
+     is a number this file can derive rather than one measured off a screen
+     it cannot see (#150). */
+  var STEP_ROWS = 20;
   var drawn = 0;
+  /* How far each host is actually filled. `drawn` is what the page has
+     committed to showing; these two are the bookkeeping for filling the host
+     nobody is looking at afterwards -- see `appendPage`. `draw` writes both
+     hosts whole, so it sets both to `drawn` and any flush queued before it
+     becomes a no-op. */
+  var filled = { body: 0, cards: 0 };
   var lastRows = [];
   /* Module scope, not inside draw(): appending on scroll builds rows through
      the same renderRows() and has to give them the same pinned classes, or
@@ -1934,6 +2053,7 @@
       ? renderCards(rows, 0, target)
       : '<p class="empty">' + nothing + "</p>";
     drawn = Math.min(rows.length, target);
+    filled.body = filled.cards = drawn;
     afterDraw(rows);
   }
 
@@ -3090,7 +3210,7 @@
     th.click();
   });
 
-  document.getElementById("body").addEventListener("click", function (event) {
+  document.querySelector(".shell").addEventListener("click", function (event) {
     /* Anywhere on a row marks it, so the visitor can keep their place while
        scrolling sixteen columns sideways.
      *
@@ -3108,7 +3228,12 @@
        selection exists, since an old one elsewhere on the page would then
        block every mark. */
     if (event.target.closest("a, button")) return;
-    var tr = event.target.closest("tr.row");
+    /* `.row` rather than `tr.row`, and on the shell rather than the `tbody`,
+       for the same reason the panels moved: a card is `article.card.row` and
+       carries the same `data-id`, so a phone could not mark a row either. Both
+       layouts write that class and that attribute, which is what makes one
+       selector right for both. */
+    var tr = event.target.closest(".row[data-id]");
     if (!tr) return;
     var selection = window.getSelection && window.getSelection();
     if (selection && !selection.isCollapsed) return;
@@ -3302,7 +3427,21 @@
   function hoverPanel(host, selector, fill, opts) {
     var hoverOpens = !opts || opts.hoverOpens !== false;
     var held = null, peeked = null, dismissed = null, openTimer = 0, shutTimer = 0;
-    var body = document.getElementById("body");
+    /* `.shell`, not the `tbody`, because the rows are not always a table.
+     *
+       Every listener here hung off `#body`, and below 760px that element is
+       `display:none` and the rows are `#cards` -- so on a phone not one of the
+       three panels was wired to anything. The triggers rendered, because a
+       card cell is the same column's renderer and the markup came across
+       exactly as intended; only the events did not. "The three panel triggers
+       come across working" was true of everything except the part that makes
+       them work.
+
+       The shell is the one box holding both hosts, so this is wired once and
+       stays wired if a third layout ever draws rows. The three panel hosts sit
+       outside it, and the header inside it carries no trigger, so a wider net
+       catches nothing new. */
+    var body = document.querySelector(".shell");
 
     function shut() {
       host.hidden = true;
@@ -3312,8 +3451,47 @@
       peeked = null;
     }
 
+    /* A WAY OUT, BECAUSE A PHONE HAS NO ESCAPE KEY.
+     *
+     * These are dialogs -- every trigger says `aria-haspopup="dialog"` -- and
+     * they were dismissed by Escape, by tapping the trigger again, or by
+     * tapping outside. On a phone the first does not exist and the other two
+     * are under the panel: the bill is 479px tall over a 452px list on a
+     * 402x684 iPhone, so it covers the rows whole and overhangs them. A swipe
+     * in the list then lands on the panel and scrolls *it* -- 270px of bill,
+     * a few rows' worth, and then nothing. That is the whole "the UI flicks
+     * and lets me scroll a few pixels": not a scroller that stopped working,
+     * a dialog with no exit sitting on top of one.
+     *
+     * Built here rather than in each `fill`, for the reason the panels share
+     * `hoverPanel` at all -- three copies of a close button is three that can
+     * differ. `fill` writes `innerHTML`, so this goes in after it and before
+     * `place`, which measures. Sticky rather than absolute: the panel is its
+     * own scroll box and an absolutely placed button scrolls away with the
+     * bill, which is the same bug one layer down. */
+    var bar = document.createElement("div");
+    bar.className = "pbar";
+    var shutButton = document.createElement("button");
+    shutButton.type = "button";
+    shutButton.className = "pshut";
+    shutButton.setAttribute("aria-label", "Close");
+    shutButton.innerHTML = "&times;";
+    bar.appendChild(shutButton);
+    shutButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var trigger = held || peeked;
+      shut();
+      if (trigger && document.contains(trigger)) {
+        dismissed = trigger;
+        /* Same reason Escape does it: the trigger is inside `.shell`, which
+           scrolls, and putting focus back may not move the rows. */
+        trigger.focus({ preventScroll: true });
+      }
+    });
+
     function show(trigger) {
       if (fill(host, trigger) === false) return;
+      host.insertBefore(bar, host.firstChild);
       place(host, trigger);
       trigger.setAttribute("aria-expanded", "true");
     }
@@ -3322,8 +3500,28 @@
       panels.forEach(function (panel) { if (panel.host !== host) panel.shut(); });
     }
 
+    /* HOVER IS A MOUSE. A finger has no hover state, and `pointerover` fires
+       for one anyway -- on touchstart, before the drag that follows is known
+       to be a drag. So a swipe that began on one of these buttons opened its
+       panel 120ms later, and a card's meta row is three of them: on a phone
+       most swipes started on a trigger, the panel appeared over the list and
+       the scroll died under it. Five to ten cards a gesture, which is what a
+       scroll that keeps being interrupted looks like.
+       It only became reachable when the listeners moved off the `tbody` onto
+       `.shell` -- before that nothing on a phone was wired to anything, so
+       nothing could interrupt. The panels were the thing fixed; this is the
+       half of `hoverOpens` that should never have applied there.
+       `pointerType` and not a media query: a laptop with a touch screen has
+       both, and the answer is per gesture rather than per device. Touch opens
+       these panels by tapping, which is the `click` handler below and is
+       untouched -- and `pen` is grouped with touch because a pen that is
+       drawing is dragging, not hovering. */
+    function hovering(event) {
+      return hoverOpens && event.pointerType === "mouse";
+    }
+
     body.addEventListener("pointerover", function (event) {
-      if (!hoverOpens) return;
+      if (!hovering(event)) return;
       var trigger = event.target.closest(selector);
       if (!trigger || held || trigger === peeked) return;
       clearTimeout(shutTimer);
@@ -3338,7 +3536,7 @@
     });
 
     body.addEventListener("pointerout", function (event) {
-      if (!hoverOpens || held || !event.target.closest(selector)) return;
+      if (!hovering(event) || held || !event.target.closest(selector)) return;
       clearTimeout(openTimer);
       shutTimer = setTimeout(shut, 160);
     });
@@ -3396,10 +3594,21 @@
       }
     });
 
+    /* Pressing away closes it, pinned or not.
+     *
+       The `held &&` on this was the other half of the stuck dialog. A panel
+       opened by *focus* is `peeked` rather than `held`, and a peeked one was
+       dismissed only by the pointer leaving the trigger -- which on a touch
+       screen never happens. So on a phone: tap a trigger, get a panel over
+       the list, and if the tap resolved to a focus without a click there was
+       no way out at all. Escape needs a keyboard, tapping the trigger again
+       is under the panel, and this handler ignored it.
+       Nothing wants a peeked panel to survive a press somewhere else, so the
+       state it is in was never the question. */
     document.addEventListener("click", function (event) {
-      if (held && !event.target.closest(selector) && !host.contains(event.target)) {
-        shut();
-      }
+      if (host.hidden) return;
+      if (event.target.closest(selector) || host.contains(event.target)) return;
+      shut();
     });
 
     /* Fixed positioning is relative to the viewport, so the panel has to be
@@ -3681,18 +3890,46 @@
     });
   }
 
-  /* One more page into both hosts. They are drawn together and appended
-     together: a phone rotated to landscape crosses the breakpoint with no
-     redraw, and a table that had been scrolled would otherwise meet a card
-     list holding the first 120 rows. */
+  /* One more page into both hosts -- but the one on screen first, and the
+     other after the frame that shows it.
+     Both are still always filled, which is the contract: a phone rotated to
+     landscape crosses the breakpoint with no redraw, and a table that had
+     been scrolled would otherwise meet a card list holding the first page.
+     What changed is when the second one is paid. Below 760px `#body` is
+     `display:none` and above it `#cards` is, so half of every append was
+     parsed inside the scroll for a layout nobody was looking at: 30ms of the
+     190 a page of 120 cost on a mid-range phone, in the frame the reader was
+     waiting on. It is a `setTimeout` and not `requestAnimationFrame` --
+     rendering happens at the end of a frame, so a rAF callback stalls the
+     paint it was meant to get out of the way of.
+     `filled` rather than a queue of pending slices: each host records how far
+     it is filled and `fillRest` appends whatever it is behind by, so a flush
+     that runs late, twice, or after a `draw` that rebuilt both hosts is
+     harmless. Nothing here can leave a host short -- `drawEverything` flushes
+     synchronously, because `Ctrl+F` searching a host a task behind is the
+     silent truncation the whole append exists to avoid. */
+  var flushing = 0;
+  function fillRest(host) {
+    var n = drawn - filled[host];
+    if (n <= 0) return;
+    var render = host === "body" ? renderRows : renderCards;
+    document.getElementById(host).insertAdjacentHTML(
+      "beforeend", render(lastRows, filled[host], n));
+    filled[host] = drawn;
+  }
+
   function appendPage(count) {
     var n = Math.min(count, lastRows.length - drawn);
     if (n <= 0) return;
-    document.getElementById("body").insertAdjacentHTML(
-      "beforeend", renderRows(lastRows, drawn, n));
-    document.getElementById("cards").insertAdjacentHTML(
-      "beforeend", renderCards(lastRows, drawn, n));
     drawn += n;
+    fillRest(narrow.matches ? "cards" : "body");
+    if (!flushing) {
+      flushing = setTimeout(function () {
+        flushing = 0;
+        fillRest("body");
+        fillRest("cards");
+      }, 0);
+    }
   }
 
   /* Append the next page of rows as the table is scrolled. */
@@ -3700,7 +3937,7 @@
     if (drawn >= lastRows.length) return;
     var shell = this;
     if (shell.scrollTop + shell.clientHeight < shell.scrollHeight - 600) return;
-    appendPage(PAGE_ROWS);
+    appendPage(STEP_ROWS);
   }, { passive: true });
 
   /* Draw the rest of the rows the moment the browser's own find is opened.
@@ -3710,6 +3947,13 @@
      into. Cmd+F on a Mac, F3 on Windows, and "/" in Firefox's quick find. */
   function drawEverything() {
     appendPage(lastRows.length - drawn);
+    /* Both hosts now, not a task from now: the find bar is about to be typed
+       into and a host a page behind is a search of 120 rows out of 1,122
+       reported as a search of all of them. */
+    clearTimeout(flushing);
+    flushing = 0;
+    fillRest("body");
+    fillRest("cards");
   }
   window.addEventListener("keydown", function (event) {
     var find = (event.key === "f" || event.key === "F") && (event.ctrlKey || event.metaKey);

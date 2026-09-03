@@ -13,7 +13,13 @@ from decimal import Decimal
 from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
 from liveaboard.dataset import Dataset
-from liveaboard.pricing import _is_counted, compute, mandatory_known, resolve_fees
+from liveaboard.pricing import (
+    _is_counted,
+    compute,
+    mandatory_known,
+    overlapping_charges,
+    resolve_fees,
+)
 from liveaboard.render import TEMPLATE_DIR, build_payload
 from liveaboard.taxonomy import DEFAULT_ON_TIERS, FeeBasis, FeeCode, FeeTier, SourceKind
 
@@ -367,3 +373,120 @@ class TestOnlyOptionalExtrasIsNotACleanBill(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestABundleThatNamesItsOwnLine(unittest.TestCase):
+    """A disclosure that bills one charge twice does not add up.
+
+    Seawolf Dominator. PADI publishes both of these as required, and we read
+    both faithfully -- they are distinct catalogue items, and
+    `tools/probe_padi_mandatory.py` established that before anything changed:
+
+        Visa fees                                                     250
+        Visa, dive permit, taxes, marine park fees, harbour fee
+        and fuel surcharges                                       180-255
+
+    Neither is dropped. Deleting a published mandatory charge on an inference
+    is the same failure as inventing one, so what the page withholds is the
+    *sum* -- the verdict `mandatory_known` already gives a listing that stated
+    no required extras.
+    """
+
+    def fee(self, code: FeeCode, amount: str, note: str,
+            tier: FeeTier = FeeTier.MANDATORY) -> FeeItem:
+        return FeeItem(code=code, tier=tier, basis=FeeBasis.PER_TRIP,
+                       amount=Money.parse(amount), note=note, provenance=PROV)
+
+    def raw(self, code: str, amount: float, note: str,
+            tier: str = "mandatory") -> dict:
+        """The same fee as the dataset spells it, for the payload path."""
+        return {"code": code, "tier": tier, "basis": "per_trip",
+                "included": False, "note": note,
+                "amount": {"amount": amount, "currency": "EUR"},
+                "provenance": {"kind": "scraped", "source_id": "test",
+                               "retrieved": "2026-08-27"}}
+
+    def payload(self, fees: list[dict]):
+        """The page, built from a one-departure dataset with these fees."""
+        dataset = Dataset.from_dict({
+            "schema_version": 1, "generated": "2026-08-27",
+            "default_currency": "EUR", "notes": "t",
+            "fx": {"display_currency": "EUR", "as_of": "2026-08-27",
+                   "source": "test", "rates": {"USD": 0.92}},
+            "operators": [{"id": "o", "name": "O"}],
+            "boats": [{"id": "b", "name": "B", "operator_id": "o"}],
+            "itineraries": [{
+                "id": "i", "name": "I", "operator_id": "o", "boat_id": "b",
+                "nights": 7, "dives": 20, "port_from": "Hurghada",
+                "port_to": "Hurghada",
+                "fees": fees,
+            }],
+            "departures": [{
+                "id": "d", "itinerary_id": "i", "start": "2027-05-01",
+                "end": "2027-05-08",
+                "price": {"amount": 1500.0, "currency": "EUR"},
+                "provenance": {"kind": "scraped", "source_id": "test",
+                               "retrieved": "2026-08-27"},
+            }],
+        })
+        return build_payload(dataset)["departures"][0]
+
+    def test_a_bundle_naming_a_line_that_is_also_billed_alone(self) -> None:
+        found = overlapping_charges([
+            self.fee(FeeCode.VISA, "250 EUR", "Visa fees"),
+            self.fee(FeeCode.MARINE_PARK, "255 EUR",
+                     "Visa, dive permit, taxes, marine park fees, "
+                     "harbour fee and fuel surcharges"),
+        ])
+        self.assertEqual(found, [FeeCode.VISA])
+
+    def test_a_bundle_naming_nothing_else_on_the_bill_is_fine(self) -> None:
+        """Hammerhead II: *Park and Port Fees* beside a separate fuel
+        surcharge. The bundle does not name fuel, so nothing is billed twice
+        and 29 bills like it keep their total."""
+        self.assertEqual(overlapping_charges([
+            self.fee(FeeCode.MARINE_PARK, "80 EUR", "Park and Port Fees"),
+            self.fee(FeeCode.FUEL_SURCHARGE, "45 EUR", "Fuel surcharge"),
+        ]), [])
+
+    def test_two_plain_lines_are_two_charges(self) -> None:
+        """Port fees beside a fuel surcharge, on 40 bills. Neither title names
+        the other, and a single name is a line however long it is written."""
+        self.assertEqual(overlapping_charges([
+            self.fee(FeeCode.PORT_FEES, "25 EUR", "Port Fees"),
+            self.fee(FeeCode.FUEL_SURCHARGE, "40 EUR", "Fuel surcharges"),
+        ]), [])
+
+    def test_an_optional_overlap_changes_no_total(self) -> None:
+        """The verdict is about charges a diver cannot decline, so an optional
+        extra overlapping another is not this. Nothing counts it either way."""
+        self.assertEqual(overlapping_charges([
+            self.fee(FeeCode.VISA, "250 EUR", "Visa fees", tier=FeeTier.OPTIONAL),
+            self.fee(FeeCode.MARINE_PARK, "255 EUR",
+                     "Visa, marine park fees and harbour fee",
+                     tier=FeeTier.OPTIONAL),
+        ]), [])
+
+    def test_the_page_keeps_the_berth_price_and_withholds_the_sum(self) -> None:
+        """What the reader gets: the fare, every fee line, and no total."""
+        entry = self.payload([
+            self.raw("visa", 250.0, "Visa fees"),
+            self.raw("marine_park", 255.0,
+                     "Visa, dive permit, taxes, marine park fees, "
+                     "harbour fee and fuel surcharges"),
+        ])
+
+        self.assertEqual(entry["fee_overlap"], ["visa"])
+        # Read, and read as saying something -- the two verdicts that mean a
+        # different sentence must both stay true, or the page prints the wrong
+        # reason for the missing total.
+        self.assertTrue(entry["fees_known"])
+        self.assertTrue(entry["mandatory_known"])
+        self.assertIn("base", entry)
+
+    def test_a_clean_bill_carries_no_such_key(self) -> None:
+        """One boat in the fleet. A key written per departure is written 1,122
+        times, so it is absent wherever it does not fire."""
+        self.assertNotIn("fee_overlap", self.payload([
+            self.raw("marine_park", 80.0, "Park and Port Fees"),
+        ]))

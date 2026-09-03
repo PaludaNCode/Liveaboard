@@ -28,6 +28,7 @@ from .pricing import (
     compute,
     itinerary_lines,
     mandatory_known,
+    overlapping_charges,
     padi_base_line,
     padi_lines,
     resolve_fees,
@@ -129,6 +130,14 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         second = padi_lines(itinerary, dataset.fx)
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
+            # And whether that bill can be added up at all. Written only where
+            # it cannot, like every other per-itinerary key: this is one boat.
+            clash = overlapping_charges(
+                [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
+                + [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
+            )
+            if clash:
+                itineraries[key]["padi_overlap"] = [code.value for code in clash]
 
         # Where the rows above came from, on the trips whose answer is not the
         # usual one. Written only where true: a key written per itinerary is a
@@ -160,11 +169,17 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # ones, and scoring it as such put the least forthcoming operators at
         # the top of the honesty ranking. See pricing.mandatory_known.
         mandatory = mandatory_known(itinerary, departure)
+        # Said something, and said it twice. A bundle naming a charge that is
+        # also its own line means the disclosure does not add up, which is the
+        # same verdict as a mandatory line with no figure -- so the page shows
+        # the berth price and no total. Written only where it fires.
+        clash = overlapping_charges(resolve_fees(itinerary, departure))
 
         entry: dict[str, Any] = {
             "id": departure.id,
             "fees_known": fees_known,
             "mandatory_known": mandatory,
+            **({"fee_overlap": [code.value for code in clash]} if clash else {}),
             "itinerary_id": itinerary.id,
             "boat_id": itinerary.boat_id,
             "start": departure.start.isoformat(),
