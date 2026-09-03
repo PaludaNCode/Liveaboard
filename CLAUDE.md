@@ -542,8 +542,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   one layer down. 44px square, because a multiplication sign is not something
   a thumb can aim at, and that height comes out of the panel: a dialog nobody
   can close is worth less than one row fewer of bill.
+  **And pressing away closes it whether or not it was pinned**, which was the
+  other half of the same stuck dialog: a panel opened by *focus* is `peeked`
+  rather than `held`, the press-away handler was guarded on `held`, and a
+  peeked panel was otherwise dismissed only by the pointer leaving the trigger
+  — which on a touch screen never happens. Focus with no press after it is
+  what a tap that does not resolve to a click leaves behind, so on a phone
+  that panel had no exit at all: Escape wants a keyboard, the trigger is
+  underneath it, and this ignored it. Nothing wants a peeked panel to survive
+  a press somewhere else, so which of the two states it was in was never the
+  question.
   `test_every_panel_can_be_closed_without_a_keyboard` asserts the tap target,
-  the pinning and the closing, on all three.
+  the pinning, the closing and the press-away, on all three.
   Each trigger is a `<button>` with
   `aria-haspopup="dialog"`, opening one closes the others, and each host is
   **one div filled on demand** — nothing is lazily fetched here, so anything
