@@ -780,9 +780,28 @@ Break these and the site starts lying quietly rather than failing loudly.
   screen. `100dvh` follows the bar as it comes and goes and leaves nothing to
   pan; `100%` stays under it for anything that does not know the unit, and
   every `vh` cap on a panel is doubled the same way for the same reason.
-  `overscroll-behavior` is the other half — `none` on the document and
-  `contain` on `.shell`, or a flick that reaches the end of the table hands
-  itself to a page that should not have a scroll. **And nothing may go looking
+  **`overflow:hidden` on `body` is the other half, and it is the whole of
+  it.** It stops the document scrolling and it covers `html` too — overflow on
+  the body element propagates to the viewport wherever `html`'s own is
+  `visible`, which it is — so a gesture over the masthead cannot pan the page
+  even with `html` standing 90px taller than the window. An `html` rule was
+  written on the theory that it did not propagate, and measured out again.
+  **`overscroll-behavior` is gone for the same reason, and that is what fixed
+  the scrolling.** It was declared on `html`, `body`, `.shell`, `.bankwrap`
+  and the bill panel, to stop a flick reaching the end of a scroller chaining
+  into the document and panning it. It cannot chain: with the property forced
+  off on all five, a flick past the end of the table leaves the page at 0,
+  because there is no document scroll to chain into. So it protected nothing —
+  and on WebKit it was the one declaration every dead scroller had in common.
+  An iPhone reported `.shell` and the dive sites bank both moving a few pixels
+  a gesture, two unrelated scrollers sharing nothing else; three fixes had
+  already gone out against that report on reasoning about frame times, which
+  is what happens when a symptom is theorised instead of narrowed. The second
+  scroller is what named it. A guard that buys nothing does not get to cost
+  the scroll, so the suite asserts the *outcome* rather than the property —
+  drive the shell to its end, keep flicking, and the page must not move — and
+  the declaration does not come back without a measurement showing the page
+  can be panned without it. **And nothing may go looking
   for slack either**, because `dvh` only covers iOS 15.4 up: `focus()` on a
   pane or a panel trigger takes `{ preventScroll: true }` — focusing asks the
   browser to bring an element into view and the only box it can move here is
