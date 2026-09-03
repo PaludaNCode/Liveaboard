@@ -622,7 +622,34 @@ Break these and the site starts lying quietly rather than failing loudly.
   corner at every width and nothing has to be measured to keep it there. **Both
   hosts are always filled**, so a rotation crosses the breakpoint with no redraw
   and `Ctrl+F` finds either — and `appendPage` appends to both, or a scrolled
-  table would meet a card list holding the first 120 rows. Every card cell
+  table would meet a card list holding the first page.
+  **But the one on screen is filled inside the scroll and the other a task
+  later**, because only one of them is ever being looked at: `#body` is
+  `display:none` below 760px and `#cards` above it, so half of every append
+  was parsed in the frame the reader was waiting on for a layout nobody could
+  see. `filled` records how far each host is, and `fillRest` appends whatever
+  a host is behind by — idempotent rather than a queue of pending slices, so a
+  flush that runs late, twice, or after a `draw` that rebuilt both hosts is
+  harmless. `drawEverything` flushes **synchronously**: `Ctrl+F` over a host a
+  page behind is the silent truncation the whole append exists to avoid.
+  **And a page is 20 rows on scroll against 120 on first paint**, because the
+  two answer different questions. The first page is paid before anything is on
+  screen; every page after it is paid inside a scroll, where what is felt is
+  one frame's stall — a card costs about 1.4ms of layout on a mid-range phone,
+  so 120 of them was a 190ms lurch each time the reader reached the end of a
+  page. Twenty is one frame, the same rows arrive, and a hitch is felt per page
+  rather than per row. Not fewer than twenty: the append fires 600px from the
+  end, so a step must add more than 600px of rows or the threshold is still met
+  after it — 13 rows of table at 47px, 5 cards at 143 — which makes 20 a number
+  derived here rather than measured off a screen this file cannot see (#150).
+  `content-visibility:auto` on the card was the other candidate and was
+  **measured and rejected**: it takes the append's layout from 147ms to 7ms and
+  then charges it back during the scroll as each card comes into view, which
+  turned 44 late frames into 131 over the same flick. The lurch is worth
+  removing; buying it with a permanent stutter is not.
+  `test_the_scroll_pays_for_one_host_and_the_other_catches_up` asserts all
+  three halves — the split is invisible once it has settled, which is exactly
+  how it would come back. Every card cell
   reads the same column's renderer, so the two cannot drift and the three panel
   triggers come across working — `cardCell` falls through to `show` unless the
   column declares a `card`, and **exactly one does**. Price per dive was a bare
