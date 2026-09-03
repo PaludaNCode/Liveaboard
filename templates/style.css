@@ -133,7 +133,14 @@
 
    `overscroll-behavior` is the other half. Without it a flick that reaches the
    end of `.shell` chains into the document and pans it anyway -- the inner
-   scroller handing the gesture to a page that should not have one. */
+   scroller handing the gesture to a page that should not have one.
+
+   `overflow:hidden` on `body` is what actually stops the document scrolling,
+   and it does so for `html` too: overflow on the body element propagates to
+   the viewport wherever `html`'s own is `visible`, which it is. Measured
+   before an `html` rule was added on the theory that it did not -- a gesture
+   over the masthead cannot pan the page even with `html` standing 90px taller
+   than the window. Do not add one. */
 html, body { height:100%; overscroll-behavior:none; }
 body { height:100dvh; }
 

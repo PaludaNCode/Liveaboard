@@ -794,9 +794,35 @@ Break these and the site starts lying quietly rather than failing loudly.
   so `fitShell` sets `body` from `window.innerHeight` on load and again on
   `resize`, `orientationchange` and `pageshow`, twice each because iOS reports
   the old height during a rotation and animates the bar away after a resize.
-  `innerHeight` and not `visualViewport.height`: the two agree about the URL
-  bar and disagree about the keyboard, and a shell that resized itself
-  whenever somebody tapped the nights field is a worse bug than this one. It went unnoticed until
+  **But it may not write a height, because `dvh` already wrote one.** The
+  finding was that the layout was *stale* rather than wrong — one forced
+  reflow and it snapped right — and `document.body.style.height =
+  window.innerHeight + "px"` answers that by overriding the unit: on iOS
+  `innerHeight` is the *layout* viewport, the tall one, so what went back on
+  every `resize` was the slack `dvh` had just removed. `fitShell` invalidates
+  instead of asserting — `min-height` toggled off and back with a forced read
+  between, which dirties layout without this file claiming a number — and
+  keeps the pixel write only where `CSS.supports("height", "100dvh")` is
+  false, which is the one case with no unit to fight.
+  `innerHeight` there and not `visualViewport.height`: the two agree about the
+  URL bar and disagree about the keyboard, and a shell that resized itself
+  whenever somebody tapped the nights field is a worse bug than this one.
+  **`overflow:hidden` on `body` is what stops the document scrolling, and it
+  covers `html` too** — overflow on the body element propagates to the
+  viewport wherever `html`'s own is `visible`, which it is. Measured before an
+  `html` rule was added on the theory that it did not: a gesture over the
+  masthead cannot pan the page even with `html` standing 90px taller than the
+  window. Do not add one.
+  **And what this file cannot settle, a phone reports.** `?diag` draws a fixed
+  readout — build stamp, `innerHeight`, `visualViewport`, the body box, any
+  inline height, the shell's own extent and position, the row counts, and live
+  `resize`/`orientationchange`/`scroll` counters. Chromium is the right tool
+  for every geometry claim a desktop engine can settle and it cannot settle an
+  iOS one; three fixes went out against a scrolling report on reasoning rather
+  than on a number before this existed. It is the probe rule applied to a
+  device instead of a page, and the build stamp leads because a phone hides
+  the build line and a stale cache explains a "still broken" for free. Off
+  unless the URL asks for it, and one tap dismisses it. It went unnoticed until
   `color-scheme` landed: before that the panned-into strip was the UA's white,
   and after it is black, which is what made a long-standing gap look like a
   new one.
