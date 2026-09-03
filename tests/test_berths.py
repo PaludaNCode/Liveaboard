@@ -305,8 +305,33 @@ class TestTheCommittedDataset(unittest.TestCase):
                     f"night's repricing, so check the join",
                 )
                 checked += 1
+
         # A guard on the guard: an empty dataset would pass the loop silently.
-        self.assertGreater(checked, 800, "the ladder reached almost no rows")
+        #
+        # Counted against the cabin book rather than against a constant. It was
+        # `> 800`, and on 2026-09-03 a dataset built from a three-day-old book
+        # reached 760 and failed here -- correctly, but for a reason this
+        # sentence could not tell anybody, and the fix a reader reaches for
+        # when a number in a test is too small is a bigger number. The book
+        # itself says how many ladders there are to reach, so the floor moves
+        # with the fleet and the failure means what it says: ladders were read
+        # and the dataset did not keep them.
+        #
+        # Not equality. `_drop_stale_ladder` is entitled to throw a ladder
+        # away, and does -- two of the 896 read on 09-03 -- so the floor allows
+        # a tenth of the book to go that way before it complains.
+        # Read after the loop deliberately: an absent cabin book skips from
+        # here, and everything above has already run, so the ladder assertion
+        # is never the thing a missing file switches off.
+        book = published.raw("cabins.json").get("departures") or []
+        self.assertTrue(book, "the cabin book states no departures, so there "
+                              "is nothing for this floor to be a floor under")
+        self.assertGreaterEqual(
+            checked, 0.9 * len(book),
+            f"{len(book)} sailings carry a cabin ladder and only {checked} "
+            f"reached a published row; the join or the reading is broken, and "
+            f"a fresh cabins.yml is what fixes it rather than a lower floor",
+        )
 
     def test_places_left_never_exceeds_what_the_rooms_state(self):
         for departure in self.payload["departures"]:
