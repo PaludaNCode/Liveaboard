@@ -81,6 +81,19 @@ jobs:
       # published itineraries were unreachable by construction. The ids are on
       # the vessel page; this opens one page per boat still short of a
       # fragment, which is fifteen requests rather than one per hull.
+      # The cap is resolved against the *event*, not just against `inputs`.
+      # `inputs.limit` is null on a scheduled run, so `inputs.limit || 3` read
+      # **three trips a night** -- the exact trap `cabins.yml` writes out in
+      # its own `env:` block, in the one file the warning never reached. It is
+      # invisible from the outside: the job succeeds, the book merges, and a
+      # run that read 3 of the 58 trips it was short of looks like a run that
+      # had almost nothing to do. The book stood at 352 fragments against 410
+      # itineraries on 2026-09-03, and at three a night it could not catch a
+      # day the crawl found 57 new departures.
+      #
+      # The schedule means every trip not yet read. A dispatch still caps at
+      # three, which is what a dispatch is for: proving a parser change against
+      # real pages without spending three hundred of somebody else's.
       - name: Read what each trip says about itself
         run: |
           echo '```' >> "$GITHUB_STEP_SUMMARY"
@@ -90,7 +103,7 @@ jobs:
             --snapshots data/snapshots \
             --dataset data/egypt-2027.json \
             --fees data/fees.json \
-            --limit "${{ inputs.limit || 3 }}" \
+            --limit "${{ github.event_name == 'schedule' && '0' || (inputs.limit || 3) }}" \
             --discover \
             ${{ inputs.boat && format('--boat {0}', inputs.boat) || '' }} \
             ${{ inputs.refresh && '--refresh' || '' }} \

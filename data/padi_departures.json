@@ -1,5 +1,5 @@
 {
- "collected": "2026-08-31",
+ "collected": "2026-09-03",
  "departures": {
   "all-star-ghani::2026-09-07": {
    "availability": 4,
@@ -15,7 +15,7 @@
    "was": 450.0
   },
   "all-star-ghani::2026-09-14": {
-   "availability": 6,
+   "availability": 5,
    "boat": "all-star-ghani",
    "currency": "USD",
    "end": "2026-09-18",
@@ -106,7 +106,7 @@
    "was": 1104.0
   },
   "all-star-ghani::2026-11-02": {
-   "availability": 24,
+   "availability": 22,
    "boat": "all-star-ghani",
    "currency": "USD",
    "end": "2026-11-09",
@@ -191,7 +191,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1556288,
-   "price": 864.0,
+   "price": 960.0,
    "slug": "all-star-ghani",
    "start": "2026-12-14",
    "was": 960.0
@@ -217,7 +217,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1556289,
-   "price": 864.0,
+   "price": 960.0,
    "slug": "all-star-ghani",
    "start": "2026-12-28",
    "was": 960.0
@@ -971,7 +971,7 @@
    "itinerary": "Brothers - Daedalus - Elphinstone: SHARK WEEK (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1547611,
-   "price": 1836.0,
+   "price": 2295.0,
    "slug": "all-star-scuba-scene",
    "start": "2026-12-07",
    "was": 2295.0
@@ -984,7 +984,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1547612,
-   "price": 1676.0,
+   "price": 2095.0,
    "slug": "all-star-scuba-scene",
    "start": "2026-12-14",
    "was": 2095.0
@@ -997,7 +997,7 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1547614,
-   "price": 1756.0,
+   "price": 2195.0,
    "slug": "all-star-scuba-scene",
    "start": "2026-12-21",
    "was": 2195.0
@@ -1010,7 +1010,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1547613,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2026-12-28",
    "was": 2025.0
@@ -1036,7 +1036,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550349,
-   "price": 1676.0,
+   "price": 2095.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-03-08",
    "was": 2095.0
@@ -1049,7 +1049,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550350,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-03-15",
    "was": 2025.0
@@ -1062,7 +1062,7 @@
    "itinerary": "North & Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550352,
-   "price": 1652.0,
+   "price": 2065.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-03-22",
    "was": 2065.0
@@ -1075,7 +1075,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550342,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-03-29",
    "was": 2025.0
@@ -1088,7 +1088,7 @@
    "itinerary": "North & Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550343,
-   "price": 1652.0,
+   "price": 2065.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-04-05",
    "was": 2065.0
@@ -1101,7 +1101,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550344,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-04-12",
    "was": 2025.0
@@ -1114,7 +1114,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550345,
-   "price": 1676.0,
+   "price": 2095.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-04-19",
    "was": 2095.0
@@ -1127,7 +1127,7 @@
    "itinerary": "North & Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550351,
-   "price": 1652.0,
+   "price": 2065.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-04-26",
    "was": 2065.0
@@ -1140,7 +1140,7 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1550353,
-   "price": 1756.0,
+   "price": 2195.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-05-03",
    "was": 2195.0
@@ -1153,7 +1153,7 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1550354,
-   "price": 1756.0,
+   "price": 2195.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-05-10",
    "was": 2195.0
@@ -1166,20 +1166,20 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1550356,
-   "price": 1756.0,
+   "price": 2195.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-05-17",
    "was": 2195.0
   },
   "all-star-red-sea::2027-05-24": {
-   "availability": 8,
+   "availability": 6,
    "boat": "all-star-red-sea",
    "currency": "USD",
    "end": "2027-05-31",
    "itinerary": "North & Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550355,
-   "price": 1652.0,
+   "price": 2065.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-05-24",
    "was": 2065.0
@@ -1192,7 +1192,7 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1550340,
-   "price": 1916.0,
+   "price": 2395.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-05-31",
    "was": 2395.0
@@ -1257,7 +1257,7 @@
    "itinerary": "Ultimate Red Sea(Port ghalib - Hurghada) 14 Nights",
    "nights": 14,
    "padi_id": 1550364,
-   "price": 3780.0,
+   "price": 4725.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-07-05",
    "was": 4725.0
@@ -1530,7 +1530,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550336,
-   "price": 1676.0,
+   "price": 2095.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-12-06",
    "was": 2095.0
@@ -1543,7 +1543,7 @@
    "itinerary": "Brothers Daedalus Elphinstone (Hurghada-Hurghada) 7 NIghts",
    "nights": 7,
    "padi_id": 1550337,
-   "price": 1676.0,
+   "price": 2095.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-12-13",
    "was": 2095.0
@@ -1556,7 +1556,7 @@
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550333,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-12-20",
    "was": 2025.0
@@ -1569,7 +1569,7 @@
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1550332,
-   "price": 1620.0,
+   "price": 2025.0,
    "slug": "all-star-scuba-scene",
    "start": "2027-12-27",
    "was": 2025.0
@@ -1582,7 +1582,7 @@
    "itinerary": "Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1541424,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2026-09-05",
    "was": 1350.0
@@ -1595,20 +1595,20 @@
    "itinerary": "Brother - Deadalus and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1541419,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2026-09-12",
    "was": 1350.0
   },
   "alsuraya::2026-09-19": {
-   "availability": 2,
+   "availability": 1,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-09-26",
    "itinerary": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541420,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2026-09-19",
    "was": 1350.0
@@ -1666,7 +1666,7 @@
    "was": 1350.0
   },
   "alsuraya::2026-10-24": {
-   "availability": 6,
+   "availability": 5,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -1705,7 +1705,7 @@
    "was": 1350.0
   },
   "alsuraya::2026-11-14": {
-   "availability": 0,
+   "availability": 2,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -1725,7 +1725,7 @@
    "itinerary": "Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1541430,
-   "price": 1350.0,
+   "price": 1500.0,
    "slug": "alsuraya",
    "start": "2026-11-21",
    "was": 1500.0
@@ -1738,7 +1738,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541431,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2026-11-28",
    "was": 1350.0
@@ -1764,7 +1764,7 @@
    "itinerary": "North - Wrecks And Reefs (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541433,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2026-12-12",
    "was": 1150.0
@@ -1777,7 +1777,7 @@
    "itinerary": "North and Straits of Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541432,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2026-12-19",
    "was": 1150.0
@@ -1790,7 +1790,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541435,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2026-12-26",
    "was": 1250.0
@@ -1803,7 +1803,7 @@
    "itinerary": "North and Straits of Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555601,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2027-02-06",
    "was": 1150.0
@@ -1816,7 +1816,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555606,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-02-13",
    "was": 1250.0
@@ -1829,7 +1829,7 @@
    "itinerary": "North - Wrecks And Reefs (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555605,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2027-02-20",
    "was": 1150.0
@@ -1842,7 +1842,7 @@
    "itinerary": "North and Straits of Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555604,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2027-02-27",
    "was": 1150.0
@@ -1855,7 +1855,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555602,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-03-06",
    "was": 1350.0
@@ -1868,7 +1868,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555603,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-03-13",
    "was": 1250.0
@@ -1881,7 +1881,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555609,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-03-20",
    "was": 1350.0
@@ -1894,7 +1894,7 @@
    "itinerary": "North - Wrecks And Reefs (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555621,
-   "price": 1035.0,
+   "price": 1150.0,
    "slug": "alsuraya",
    "start": "2027-03-27",
    "was": 1150.0
@@ -1907,7 +1907,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555607,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-04-03",
    "was": 1350.0
@@ -1920,20 +1920,20 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555618,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-04-10",
    "was": 1250.0
   },
   "alsuraya::2027-04-17": {
-   "availability": 22,
+   "availability": 20,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-04-24",
    "itinerary": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555615,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-04-17",
    "was": 1350.0
@@ -1946,7 +1946,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555610,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-04-24",
    "was": 1250.0
@@ -1959,7 +1959,7 @@
    "itinerary": "Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555611,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-05-01",
    "was": 1350.0
@@ -1972,7 +1972,7 @@
    "itinerary": "Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555612,
-   "price": 1260.0,
+   "price": 1400.0,
    "slug": "alsuraya",
    "start": "2027-05-08",
    "was": 1400.0
@@ -1985,7 +1985,7 @@
    "itinerary": "Daedalus - St. John\u2019s \u2013 Elphinstone.(Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555617,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-05-15",
    "was": 1350.0
@@ -1998,7 +1998,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555620,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-05-22",
    "was": 1350.0
@@ -2011,7 +2011,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555619,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-05-29",
    "was": 1250.0
@@ -2024,7 +2024,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555614,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-06-05",
    "was": 1350.0
@@ -2037,7 +2037,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555608,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-06-12",
    "was": 1250.0
@@ -2050,7 +2050,7 @@
    "itinerary": "Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555616,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-06-19",
    "was": 1350.0
@@ -2063,7 +2063,7 @@
    "itinerary": "Daedalus - St. John\u2019s \u2013 Elphinstone.(Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555613,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-06-26",
    "was": 1350.0
@@ -2076,7 +2076,7 @@
    "itinerary": "Brother, Deadalus and Elphinstone (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555629,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-07-03",
    "was": 1350.0
@@ -2089,7 +2089,7 @@
    "itinerary": "North and Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1555622,
-   "price": 1125.0,
+   "price": 1250.0,
    "slug": "alsuraya",
    "start": "2027-07-10",
    "was": 1250.0
@@ -2102,20 +2102,20 @@
    "itinerary": "Brother - Deadalus and Elphinstone (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555631,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "alsuraya",
    "start": "2027-07-17",
    "was": 1350.0
   },
   "alsuraya::2027-07-24": {
-   "availability": 24,
+   "availability": 22,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-07-31",
    "itinerary": "Deadalus, Rocky, Zabrgad and Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555624,
-   "price": 1260.0,
+   "price": 1400.0,
    "slug": "alsuraya",
    "start": "2027-07-24",
    "was": 1400.0
@@ -2225,7 +2225,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-10-02": {
-   "availability": 22,
+   "availability": 15,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-10-09",
@@ -2251,7 +2251,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-10-16": {
-   "availability": 24,
+   "availability": 22,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -2392,19 +2392,6 @@
    "slug": "alsuraya",
    "start": "2027-12-25",
    "was": 1150.0
-  },
-  "amelie-adventures::2026-09-03": {
-   "availability": 13,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2026-09-06",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1532774,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2026-09-03",
-   "was": 485.0
   },
   "amelie-adventures::2026-09-07": {
    "availability": 16,
@@ -3510,19 +3497,6 @@
    "slug": "amelie-adventures",
    "start": "2027-09-03",
    "was": 485.0
-  },
-  "amelie::2026-09-03": {
-   "availability": 10,
-   "boat": "amelie",
-   "currency": "EUR",
-   "end": "2026-09-06",
-   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
-   "nights": 3,
-   "padi_id": 1529888,
-   "price": 435.0,
-   "slug": "amelie-safari",
-   "start": "2026-09-03",
-   "was": 435.0
   },
   "amelie::2026-09-07": {
    "availability": 12,
@@ -4811,6 +4785,19 @@
    "start": "2027-10-17",
    "was": 435.0
   },
+  "amelie::2027-10-21": {
+   "availability": 12,
+   "boat": "amelie",
+   "currency": "EUR",
+   "end": "2027-10-24",
+   "itinerary": "Best of Hurghada - Mini Safari (Hurghada - Hurghada) 3 nights",
+   "nights": 3,
+   "padi_id": 1546344,
+   "price": 435.0,
+   "slug": "amelie-safari",
+   "start": "2027-10-21",
+   "was": 435.0
+  },
   "andromeda::2026-09-19": {
    "availability": 10,
    "boat": "andromeda",
@@ -5189,7 +5176,7 @@
    "was": 2090.0
   },
   "aphrodite::2026-09-19": {
-   "availability": 7,
+   "availability": 8,
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -5375,7 +5362,7 @@
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-01-02",
-   "itinerary": "North Classic (Hurghada - Hurghada) 7 nights",
+   "itinerary": "North Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1534404,
    "price": 1640.0,
@@ -5505,7 +5492,7 @@
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-04-24",
-   "itinerary": "North Classic (Hurghada - Hurghada) 7 nights",
+   "itinerary": "North Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1548698,
    "price": 1980.0,
@@ -5544,7 +5531,7 @@
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-05-15",
-   "itinerary": "North Classic (Hurghada - Hurghada) 7 nights",
+   "itinerary": "North Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1548701,
    "price": 2130.0,
@@ -5566,17 +5553,17 @@
    "was": 2050.0
   },
   "aphrodite::2027-05-22": {
-   "availability": 2,
+   "availability": 18,
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-05-29",
    "itinerary": "Deep South,St Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548702,
-   "price": 2130.0,
+   "price": 1980.0,
    "slug": "my-aphrodite",
    "start": "2027-05-22",
-   "was": 2130.0
+   "was": 1980.0
   },
   "aphrodite::2027-05-29": {
    "availability": 18,
@@ -5735,11 +5722,11 @@
    "was": 2000.0
   },
   "aphrodite::2027-08-21": {
-   "availability": 0,
+   "availability": 18,
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-08-28",
-   "itinerary": "Brothers \u2013 Daedalus \u2013 Elphinstone (Port Ghalib - Hurghada) 7 nights",
+   "itinerary": "North Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1548710,
    "price": 2050.0,
@@ -5878,7 +5865,7 @@
    "was": 2090.0
   },
   "aphrodite::2027-11-06": {
-   "availability": 0,
+   "availability": 18,
    "boat": "aphrodite",
    "currency": "EUR",
    "end": "2027-11-13",
@@ -6320,7 +6307,7 @@
    "was": 1699.0
   },
   "avo::2027-07-24": {
-   "availability": 22,
+   "availability": 18,
    "boat": "avo",
    "currency": "EUR",
    "end": "2027-07-29",
@@ -7230,14 +7217,14 @@
    "was": 590.0
   },
   "bella-3::2026-09-05": {
-   "availability": 14,
+   "availability": 12,
    "boat": "bella-3",
    "currency": "EUR",
    "end": "2026-09-09",
    "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1542515,
-   "price": 630.8,
+   "price": 760.0,
    "slug": "bella-3",
    "start": "2026-09-05",
    "was": 760.0
@@ -7250,7 +7237,7 @@
    "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1542516,
-   "price": 630.8,
+   "price": 760.0,
    "slug": "bella-3",
    "start": "2026-09-10",
    "was": 760.0
@@ -7263,7 +7250,7 @@
    "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1542517,
-   "price": 630.8,
+   "price": 760.0,
    "slug": "bella-3",
    "start": "2026-09-15",
    "was": 760.0
@@ -7958,7 +7945,7 @@
    "was": 2550.0
   },
   "blue-horizon::2026-10-03": {
-   "availability": 5,
+   "availability": 3,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2026-10-10",
@@ -8082,23 +8069,23 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526462,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-01-23",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-01-30": {
-   "availability": 18,
+   "availability": 21,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-06",
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526461,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-01-30",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-02-06": {
    "availability": 11,
@@ -8108,10 +8095,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526463,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-02-06",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-02-13": {
    "availability": 16,
@@ -8121,23 +8108,23 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526460,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-02-13",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-02-20": {
    "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-27",
-   "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
+   "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526464,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "mv-blue-horizon",
    "start": "2027-02-20",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-02-27": {
    "availability": 14,
@@ -8147,23 +8134,23 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526465,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-02-27",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-03-06": {
-   "availability": 16,
+   "availability": 14,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-03-13",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526466,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-03-06",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-03-13": {
    "availability": 26,
@@ -8173,10 +8160,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526468,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-03-13",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-03-20": {
    "availability": 21,
@@ -8186,23 +8173,23 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526467,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "mv-blue-horizon",
    "start": "2027-03-20",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-horizon::2027-03-27": {
-   "availability": 6,
+   "availability": 9,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-04-03",
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526469,
-   "price": 1365.0,
+   "price": 1281.0,
    "slug": "mv-blue-horizon",
    "start": "2027-03-27",
-   "was": 1365.0
+   "was": 1281.0
   },
   "blue-horizon::2027-04-03": {
    "availability": 26,
@@ -8212,10 +8199,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526470,
-   "price": 1715.0,
+   "price": 1220.1,
    "slug": "mv-blue-horizon",
    "start": "2027-04-03",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-04-10": {
    "availability": 0,
@@ -8225,10 +8212,10 @@
    "itinerary": "Ultimate Red Sea (Hurghada - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1526472,
-   "price": 2450.0,
+   "price": 2490.0,
    "slug": "mv-blue-horizon",
    "start": "2027-04-10",
-   "was": 2450.0
+   "was": 2490.0
   },
   "blue-horizon::2027-04-21": {
    "availability": 0,
@@ -8238,10 +8225,10 @@
    "itinerary": "Ultimate Red Sea (Hurghada - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1526473,
-   "price": 2450.0,
+   "price": 2490.0,
    "slug": "mv-blue-horizon",
    "start": "2027-04-21",
-   "was": 2450.0
+   "was": 2490.0
   },
   "blue-horizon::2027-05-01": {
    "availability": 0,
@@ -8251,10 +8238,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527349,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-05-01",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-05-08": {
    "availability": 20,
@@ -8264,10 +8251,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527350,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-05-08",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-05-15": {
    "availability": 26,
@@ -8277,10 +8264,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527351,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-05-15",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-05-22": {
    "availability": 25,
@@ -8290,10 +8277,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1557144,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-05-22",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-05-29": {
    "availability": 0,
@@ -8303,10 +8290,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1527353,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-05-29",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-06-05": {
    "availability": 26,
@@ -8316,10 +8303,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1527354,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-06-05",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-06-12": {
    "availability": 26,
@@ -8329,10 +8316,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527355,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-06-12",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-06-19": {
    "availability": 26,
@@ -8342,10 +8329,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527356,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-06-19",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-07-10": {
    "availability": 0,
@@ -8355,10 +8342,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527358,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-07-10",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-07-17": {
    "availability": 26,
@@ -8368,10 +8355,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527361,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-07-17",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-07-24": {
    "availability": 17,
@@ -8381,10 +8368,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1527362,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-07-24",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-07-31": {
    "availability": 0,
@@ -8394,10 +8381,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1527357,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-07-31",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-08-07": {
    "availability": 26,
@@ -8407,10 +8394,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1527363,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-08-07",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-08-14": {
    "availability": 26,
@@ -8420,10 +8407,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1527359,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-08-14",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-08-21": {
    "availability": 26,
@@ -8433,10 +8420,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527360,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "mv-blue-horizon",
    "start": "2027-08-21",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-horizon::2027-08-28": {
    "availability": 26,
@@ -8446,10 +8433,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527364,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-08-28",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-09-04": {
    "availability": 26,
@@ -8459,10 +8446,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527368,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-09-04",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-09-11": {
    "availability": 26,
@@ -8472,10 +8459,10 @@
    "itinerary": "Ultimate Red Sea (Hurghada - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1527365,
-   "price": 2700.0,
+   "price": 2740.0,
    "slug": "mv-blue-horizon",
    "start": "2027-09-11",
-   "was": 2700.0
+   "was": 2740.0
   },
   "blue-horizon::2027-09-22": {
    "availability": 0,
@@ -8485,10 +8472,10 @@
    "itinerary": "Ultimate Red Sea (Port Galib - Hurghada) 10 nights",
    "nights": 10,
    "padi_id": 1527367,
-   "price": 2700.0,
+   "price": 2740.0,
    "slug": "mv-blue-horizon",
    "start": "2027-09-22",
-   "was": 2700.0
+   "was": 2740.0
   },
   "blue-horizon::2027-10-02": {
    "availability": 24,
@@ -8498,10 +8485,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527518,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-10-02",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-10-09": {
    "availability": 24,
@@ -8511,10 +8498,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527522,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-10-09",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-10-16": {
    "availability": 0,
@@ -8524,10 +8511,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527517,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-10-16",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-10-23": {
    "availability": 22,
@@ -8537,10 +8524,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527515,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-10-23",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-10-30": {
    "availability": 20,
@@ -8550,23 +8537,23 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527516,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "mv-blue-horizon",
    "start": "2027-10-30",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-horizon::2027-11-06": {
    "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-11-13",
-   "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
+   "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527520,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-11-06",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-11-13": {
    "availability": 0,
@@ -8576,10 +8563,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527523,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-11-13",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-11-20": {
    "availability": 0,
@@ -8589,10 +8576,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527521,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-11-20",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2027-11-27": {
    "availability": 26,
@@ -8602,10 +8589,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527519,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "mv-blue-horizon",
    "start": "2027-11-27",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-horizon::2028-01-15": {
    "availability": 26,
@@ -8615,10 +8602,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533465,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-01-15",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-01-22": {
    "availability": 26,
@@ -8628,10 +8615,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533466,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-01-22",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-01-29": {
    "availability": 26,
@@ -8641,10 +8628,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533468,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-01-29",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-02-05": {
    "availability": 26,
@@ -8654,10 +8641,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533467,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-02-05",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-02-12": {
    "availability": 26,
@@ -8667,10 +8654,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533469,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-02-12",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-02-19": {
    "availability": 26,
@@ -8680,10 +8667,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533470,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-02-19",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-02-26": {
    "availability": 26,
@@ -8693,10 +8680,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533473,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-02-26",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-03-04": {
    "availability": 26,
@@ -8706,10 +8693,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533471,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-03-04",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-03-11": {
    "availability": 26,
@@ -8719,10 +8706,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533472,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-03-11",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-03-18": {
    "availability": 26,
@@ -8732,10 +8719,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533476,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-03-18",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-03-25": {
    "availability": 26,
@@ -8745,10 +8732,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533474,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-03-25",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-04-01": {
    "availability": 26,
@@ -8758,10 +8745,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533475,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-04-01",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-04-08": {
    "availability": 24,
@@ -8771,23 +8758,23 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533477,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-04-08",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-04-15": {
    "availability": 26,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-04-22",
-   "itinerary": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights",
+   "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533482,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-04-15",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-04-22": {
    "availability": 26,
@@ -8797,10 +8784,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533480,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-04-22",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-04-29": {
    "availability": 26,
@@ -8810,10 +8797,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533479,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-04-29",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-05-06": {
    "availability": 26,
@@ -8823,10 +8810,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533478,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-05-06",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-05-13": {
    "availability": 26,
@@ -8836,10 +8823,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533481,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-05-13",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-05-20": {
    "availability": 26,
@@ -8849,10 +8836,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533483,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-05-20",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-05-27": {
    "availability": 26,
@@ -8862,36 +8849,36 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1533484,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-05-27",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-06-03": {
    "availability": 26,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-06-10",
-   "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 nights",
+   "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533485,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-06-03",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-06-10": {
    "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-06-17",
-   "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
+   "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533487,
-   "price": 1715.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-06-10",
-   "was": 1715.0
+   "was": 1547.0
   },
   "blue-horizon::2028-07-01": {
    "availability": 26,
@@ -8901,10 +8888,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533486,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-07-01",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-07-08": {
    "availability": 26,
@@ -8914,10 +8901,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533489,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-07-08",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-07-15": {
    "availability": 26,
@@ -8927,10 +8914,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533488,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-07-15",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-07-22": {
    "availability": 26,
@@ -8940,10 +8927,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1533490,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-07-22",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-07-29": {
    "availability": 26,
@@ -8953,10 +8940,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533491,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-07-29",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-08-05": {
    "availability": 6,
@@ -8966,10 +8953,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1533492,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-08-05",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-08-12": {
    "availability": 26,
@@ -8979,10 +8966,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533493,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-08-12",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-08-19": {
    "availability": 26,
@@ -8992,10 +8979,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533494,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-08-19",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-08-26": {
    "availability": 26,
@@ -9005,10 +8992,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533495,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-08-26",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-09-02": {
    "availability": 26,
@@ -9018,10 +9005,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533496,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-09-02",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-09-09": {
    "availability": 26,
@@ -9031,10 +9018,10 @@
    "itinerary": "Daedalus & St Johns  (Port Galib - Port Galib) 7 nights",
    "nights": 7,
    "padi_id": 1533497,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-09-09",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-09-16": {
    "availability": 26,
@@ -9044,10 +9031,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib) - 7 Nights",
    "nights": 7,
    "padi_id": 1533498,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-09-16",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-09-23": {
    "availability": 26,
@@ -9057,10 +9044,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533499,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-09-23",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-09-30": {
    "availability": 26,
@@ -9070,10 +9057,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533500,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-09-30",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-10-07": {
    "availability": 26,
@@ -9083,10 +9070,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533501,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-10-07",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-10-14": {
    "availability": 26,
@@ -9096,10 +9083,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533502,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-10-14",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-10-21": {
    "availability": 26,
@@ -9109,10 +9096,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533503,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "mv-blue-horizon",
    "start": "2028-10-21",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-horizon::2028-10-28": {
    "availability": 26,
@@ -9122,10 +9109,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533504,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "mv-blue-horizon",
    "start": "2028-10-28",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-horizon::2028-11-04": {
    "availability": 26,
@@ -9135,10 +9122,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533505,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-11-04",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-11-11": {
    "availability": 26,
@@ -9148,10 +9135,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533506,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-11-11",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-11-18": {
    "availability": 26,
@@ -9161,10 +9148,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533507,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-11-18",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-11-25": {
    "availability": 26,
@@ -9174,10 +9161,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1546640,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "mv-blue-horizon",
    "start": "2028-11-25",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-horizon::2028-12-02": {
    "availability": 26,
@@ -9187,10 +9174,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1546641,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-12-02",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2028-12-09": {
    "availability": 26,
@@ -9200,10 +9187,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1546642,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "mv-blue-horizon",
    "start": "2028-12-09",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-horizon::2029-01-27": {
    "availability": 26,
@@ -9213,10 +9200,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1548054,
-   "price": 1260.0,
+   "price": 1316.0,
    "slug": "mv-blue-horizon",
    "start": "2029-01-27",
-   "was": 1260.0
+   "was": 1316.0
   },
   "blue-melody::2026-09-05": {
    "availability": 8,
@@ -9232,14 +9219,14 @@
    "was": 1610.0
   },
   "blue-melody::2026-09-12": {
-   "availability": 8,
+   "availability": 7,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-09-19",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1521839,
-   "price": 1610.0,
+   "price": 1127.0,
    "slug": "my-blue-melody",
    "start": "2026-09-12",
    "was": 1610.0
@@ -9258,14 +9245,14 @@
    "was": 1785.0
   },
   "blue-melody::2026-09-26": {
-   "availability": 4,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-10-03",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1521842,
-   "price": 1610.0,
+   "price": 1127.0,
    "slug": "my-blue-melody",
    "start": "2026-09-26",
    "was": 1610.0
@@ -9336,7 +9323,7 @@
    "was": 1610.0
   },
   "blue-melody::2026-11-07": {
-   "availability": 0,
+   "availability": 6,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-11-14",
@@ -9356,7 +9343,7 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1510680,
-   "price": 1400.0,
+   "price": 1120.0,
    "slug": "my-blue-melody",
    "start": "2026-11-14",
    "was": 1400.0
@@ -9388,27 +9375,27 @@
    "was": 1400.0
   },
   "blue-melody::2026-12-05": {
-   "availability": 2,
+   "availability": 1,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-12-12",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1510683,
-   "price": 1260.0,
+   "price": 1155.0,
    "slug": "my-blue-melody",
    "start": "2026-12-05",
-   "was": 1260.0
+   "was": 1155.0
   },
   "blue-melody::2026-12-12": {
-   "availability": 18,
+   "availability": 12,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-12-19",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1510682,
-   "price": 1155.0,
+   "price": 808.5,
    "slug": "my-blue-melody",
    "start": "2026-12-12",
    "was": 1155.0
@@ -9421,7 +9408,7 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1510684,
-   "price": 1155.0,
+   "price": 808.5,
    "slug": "my-blue-melody",
    "start": "2026-12-19",
    "was": 1155.0
@@ -9440,17 +9427,17 @@
    "was": 1155.0
   },
   "blue-melody::2027-01-02": {
-   "availability": 11,
+   "availability": 9,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-01-09",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526476,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-01-02",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-01-09": {
    "availability": 20,
@@ -9460,10 +9447,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1550277,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-01-09",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-02-20": {
    "availability": 0,
@@ -9473,23 +9460,23 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526474,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-02-20",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-02-27": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-03-06",
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526475,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-02-27",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-03-06": {
    "availability": 0,
@@ -9499,10 +9486,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526477,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-03-06",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-03-13": {
    "availability": 7,
@@ -9512,23 +9499,23 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526478,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-03-13",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-03-20": {
-   "availability": 13,
+   "availability": 12,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-03-27",
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526479,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-03-20",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-03-27": {
    "availability": 24,
@@ -9538,10 +9525,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526480,
-   "price": 1260.0,
+   "price": 896.7,
    "slug": "my-blue-melody",
    "start": "2027-03-27",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-04-03": {
    "availability": 26,
@@ -9551,10 +9538,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526482,
-   "price": 1505.0,
+   "price": 1068.2,
    "slug": "my-blue-melody",
    "start": "2027-04-03",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-04-10": {
    "availability": 14,
@@ -9564,10 +9551,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526483,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-04-10",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-04-17": {
    "availability": 0,
@@ -9577,10 +9564,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526481,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-04-17",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-04-24": {
    "availability": 10,
@@ -9590,10 +9577,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526484,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-04-24",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-05-01": {
    "availability": 0,
@@ -9603,10 +9590,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526485,
-   "price": 1715.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-05-01",
-   "was": 1715.0
+   "was": 1526.0
   },
   "blue-melody::2027-05-08": {
    "availability": 26,
@@ -9616,36 +9603,36 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1526486,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-05-08",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-05-15": {
    "availability": 26,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-05-22",
-   "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights",
+   "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1526504,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-05-15",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-05-22": {
-   "availability": 26,
+   "availability": 10,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-05-29",
-   "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
+   "itinerary": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1526505,
-   "price": 1715.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-05-22",
-   "was": 1715.0
+   "was": 1526.0
   },
   "blue-melody::2027-05-29": {
    "availability": 0,
@@ -9655,10 +9642,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1526506,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-05-29",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-06-05": {
    "availability": 26,
@@ -9668,10 +9655,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1526507,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-06-05",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-06-12": {
    "availability": 26,
@@ -9681,10 +9668,10 @@
    "itinerary": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1526508,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-06-12",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-06-19": {
    "availability": 26,
@@ -9694,10 +9681,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526509,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-06-19",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-06-26": {
    "availability": 26,
@@ -9707,10 +9694,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526510,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-06-26",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-07-17": {
    "availability": 24,
@@ -9720,23 +9707,23 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1526511,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-07-17",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-07-24": {
    "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-07-31",
-   "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
+   "itinerary": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1526512,
-   "price": 1715.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-07-24",
-   "was": 1715.0
+   "was": 1526.0
   },
   "blue-melody::2027-07-31": {
    "availability": 0,
@@ -9746,10 +9733,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527369,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-07-31",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-08-07": {
    "availability": 26,
@@ -9759,10 +9746,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527371,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-08-07",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-08-14": {
    "availability": 26,
@@ -9772,10 +9759,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527370,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-08-14",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-08-21": {
    "availability": 26,
@@ -9785,10 +9772,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527372,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-08-21",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-08-28": {
    "availability": 26,
@@ -9798,10 +9785,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1527377,
-   "price": 1715.0,
+   "price": 1743.0,
    "slug": "my-blue-melody",
    "start": "2027-08-28",
-   "was": 1715.0
+   "was": 1743.0
   },
   "blue-melody::2027-09-04": {
    "availability": 26,
@@ -9811,10 +9798,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527376,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-09-04",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-09-11": {
    "availability": 26,
@@ -9824,10 +9811,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527375,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-09-11",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-09-18": {
    "availability": 0,
@@ -9837,10 +9824,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527373,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-09-18",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-09-25": {
    "availability": 24,
@@ -9850,10 +9837,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1527374,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-09-25",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-10-02": {
    "availability": 26,
@@ -9863,10 +9850,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527527,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-10-02",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-10-09": {
    "availability": 0,
@@ -9876,10 +9863,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1527525,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-10-09",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-10-16": {
    "availability": 0,
@@ -9889,10 +9876,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1527524,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-10-16",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-10-23": {
    "availability": 0,
@@ -9902,10 +9889,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1527528,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-10-23",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-10-30": {
    "availability": 26,
@@ -9915,10 +9902,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1527526,
-   "price": 1890.0,
+   "price": 1918.0,
    "slug": "my-blue-melody",
    "start": "2027-10-30",
-   "was": 1890.0
+   "was": 1918.0
   },
   "blue-melody::2027-11-06": {
    "availability": 0,
@@ -9928,10 +9915,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527529,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-11-06",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-11-13": {
    "availability": 17,
@@ -9941,10 +9928,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527530,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-11-13",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-11-20": {
    "availability": 24,
@@ -9954,10 +9941,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527531,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-11-20",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-11-27": {
    "availability": 26,
@@ -9967,10 +9954,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527534,
-   "price": 1505.0,
+   "price": 1526.0,
    "slug": "my-blue-melody",
    "start": "2027-11-27",
-   "was": 1505.0
+   "was": 1526.0
   },
   "blue-melody::2027-12-04": {
    "availability": 26,
@@ -9980,10 +9967,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527532,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-12-04",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-12-11": {
    "availability": 26,
@@ -9993,10 +9980,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527533,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-12-11",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-12-18": {
    "availability": 26,
@@ -10006,10 +9993,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527535,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-12-18",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2027-12-25": {
    "availability": 26,
@@ -10019,10 +10006,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1527536,
-   "price": 1260.0,
+   "price": 1281.0,
    "slug": "my-blue-melody",
    "start": "2027-12-25",
-   "was": 1260.0
+   "was": 1281.0
   },
   "blue-melody::2028-01-01": {
    "availability": 26,
@@ -10032,10 +10019,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533418,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-01-01",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-02-19": {
    "availability": 26,
@@ -10045,10 +10032,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533420,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-02-19",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-02-26": {
    "availability": 26,
@@ -10058,10 +10045,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533417,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-02-26",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-03-04": {
    "availability": 26,
@@ -10071,10 +10058,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533419,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-03-04",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-03-11": {
    "availability": 26,
@@ -10084,10 +10071,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533422,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-03-11",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-03-18": {
    "availability": 26,
@@ -10097,10 +10084,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533421,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-03-18",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-03-25": {
    "availability": 26,
@@ -10110,10 +10097,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533423,
-   "price": 1260.0,
+   "price": 1295.0,
    "slug": "my-blue-melody",
    "start": "2028-03-25",
-   "was": 1260.0
+   "was": 1295.0
   },
   "blue-melody::2028-04-01": {
    "availability": 26,
@@ -10123,10 +10110,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533424,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-04-01",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-04-08": {
    "availability": 26,
@@ -10136,10 +10123,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533425,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-04-08",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-04-15": {
    "availability": 0,
@@ -10149,10 +10136,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533426,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-04-15",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-04-22": {
    "availability": 26,
@@ -10162,10 +10149,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533427,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-04-22",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-04-29": {
    "availability": 26,
@@ -10175,10 +10162,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533428,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-04-29",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-05-06": {
    "availability": 26,
@@ -10188,10 +10175,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533429,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-05-06",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-05-13": {
    "availability": 26,
@@ -10201,10 +10188,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533431,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-05-13",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-05-20": {
    "availability": 26,
@@ -10214,10 +10201,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533432,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-05-20",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-05-27": {
    "availability": 26,
@@ -10227,10 +10214,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533430,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-05-27",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-06-03": {
    "availability": 26,
@@ -10240,10 +10227,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533433,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-06-03",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-06-10": {
    "availability": 26,
@@ -10253,10 +10240,10 @@
    "itinerary": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1533434,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-06-10",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-06-17": {
    "availability": 26,
@@ -10266,10 +10253,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533435,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-06-17",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-06-24": {
    "availability": 26,
@@ -10279,10 +10266,10 @@
    "itinerary": "Northern Red Sea & Brothers (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533436,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-06-24",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-07-15": {
    "availability": 26,
@@ -10292,10 +10279,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533437,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-07-15",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-07-22": {
    "availability": 26,
@@ -10305,10 +10292,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533438,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-07-22",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-07-29": {
    "availability": 26,
@@ -10318,10 +10305,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533439,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-07-29",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-08-05": {
    "availability": 26,
@@ -10331,10 +10318,10 @@
    "itinerary": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1533440,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-08-05",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-08-12": {
    "availability": 26,
@@ -10344,10 +10331,10 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533441,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-08-12",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-08-19": {
    "availability": 26,
@@ -10357,10 +10344,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533444,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-08-19",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-08-26": {
    "availability": 26,
@@ -10370,10 +10357,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533443,
-   "price": 1715.0,
+   "price": 1764.0,
    "slug": "my-blue-melody",
    "start": "2028-08-26",
-   "was": 1715.0
+   "was": 1764.0
   },
   "blue-melody::2028-09-02": {
    "availability": 0,
@@ -10383,10 +10370,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533442,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-09-02",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-09-09": {
    "availability": 26,
@@ -10396,10 +10383,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533445,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-09-09",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-09-16": {
    "availability": 26,
@@ -10409,10 +10396,10 @@
    "itinerary": "Daedalus and St Johns (Port Ghalib- Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533446,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-09-16",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-09-23": {
    "availability": 26,
@@ -10422,23 +10409,23 @@
    "itinerary": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1533447,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-09-23",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-09-30": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2028-10-07",
    "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533448,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-09-30",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-10-07": {
    "availability": 26,
@@ -10448,10 +10435,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533449,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-10-07",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-10-14": {
    "availability": 26,
@@ -10461,10 +10448,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533451,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-10-14",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-10-21": {
    "availability": 26,
@@ -10474,10 +10461,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533450,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-10-21",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-10-28": {
    "availability": 26,
@@ -10487,10 +10474,10 @@
    "itinerary": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1533452,
-   "price": 1890.0,
+   "price": 1946.0,
    "slug": "my-blue-melody",
    "start": "2028-10-28",
-   "was": 1890.0
+   "was": 1946.0
   },
   "blue-melody::2028-11-04": {
    "availability": 26,
@@ -10500,10 +10487,10 @@
    "itinerary": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533454,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-11-04",
-   "was": 1505.0
+   "was": 1547.0
   },
   "blue-melody::2028-11-11": {
    "availability": 26,
@@ -10513,23 +10500,10 @@
    "itinerary": "Red Sea Wrecks (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1533456,
-   "price": 1505.0,
+   "price": 1547.0,
    "slug": "my-blue-melody",
    "start": "2028-11-11",
-   "was": 1505.0
-  },
-  "blue-pearl::2026-09-03": {
-   "availability": 0,
-   "boat": "blue-pearl",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "North & Wrecks (Hurghada- Hurghada) 7 nights",
-   "nights": 7,
-   "padi_id": 1544485,
-   "price": 975.0,
-   "slug": "my-blue-pearl",
-   "start": "2026-09-03",
-   "was": 975.0
+   "was": 1547.0
   },
   "blue-pearl::2026-09-10": {
    "availability": 9,
@@ -10558,7 +10532,7 @@
    "was": 1240.0
   },
   "blue-pearl::2026-09-24": {
-   "availability": 8,
+   "availability": 11,
    "boat": "blue-pearl",
    "currency": "EUR",
    "end": "2026-10-01",
@@ -11324,19 +11298,6 @@
    "start": "2027-12-30",
    "was": 1025.0
   },
-  "blue-seas::2026-09-03": {
-   "availability": 4,
-   "boat": "blue-seas",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "Brothers, Daedalus & Elphinstone (Port Ghalib- Port Ghalib) 7 nights",
-   "nights": 7,
-   "padi_id": 1542071,
-   "price": 1190.0,
-   "slug": "my-blue-seas",
-   "start": "2026-09-03",
-   "was": 1190.0
-  },
   "blue-seas::2026-09-10": {
    "availability": 7,
    "boat": "blue-seas",
@@ -11351,7 +11312,7 @@
    "was": 1190.0
   },
   "blue-seas::2026-09-17": {
-   "availability": 8,
+   "availability": 7,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-09-24",
@@ -11364,7 +11325,7 @@
    "was": 1370.0
   },
   "blue-seas::2026-09-24": {
-   "availability": 12,
+   "availability": 14,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-10-01",
@@ -11416,7 +11377,7 @@
    "was": 1370.0
   },
   "blue-seas::2026-10-22": {
-   "availability": 6,
+   "availability": 2,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-10-29",
@@ -11481,7 +11442,7 @@
    "was": 1070.0
   },
   "blue-seas::2026-11-26": {
-   "availability": 0,
+   "availability": 6,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-12-03",
@@ -11520,7 +11481,7 @@
    "was": 1070.0
   },
   "blue-seas::2026-12-19": {
-   "availability": 24,
+   "availability": 23,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-12-26",
@@ -11537,7 +11498,7 @@
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2027-01-05",
-   "itinerary": "Rocky - Elba - St.Johns - Elphinstone (Port Ghalib - Port Ghalib) 10 Nights",
+   "itinerary": "Rocky - Zabargad - St.Johns - Elba (Port Ghalib - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1550464,
    "price": 1655.0,
@@ -12091,19 +12052,6 @@
    "start": "2027-12-30",
    "was": 1125.0
   },
-  "blue-storm::2026-09-03": {
-   "availability": 9,
-   "boat": "blue-storm",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "Daedalus-Rocky-Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
-   "nights": 7,
-   "padi_id": 1541748,
-   "price": 1350.0,
-   "slug": "my-blue-storm",
-   "start": "2026-09-03",
-   "was": 1350.0
-  },
   "blue-storm::2026-09-10": {
    "availability": 5,
    "boat": "blue-storm",
@@ -12144,14 +12092,14 @@
    "was": 1560.0
   },
   "blue-storm::2026-10-01": {
-   "availability": 3,
+   "availability": 5,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-10-08",
    "itinerary": "North & Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1541753,
-   "price": 1560.0,
+   "price": 1450.0,
    "slug": "my-blue-storm",
    "start": "2026-10-01",
    "was": 1560.0
@@ -12170,17 +12118,17 @@
    "was": 1560.0
   },
   "blue-storm::2026-10-15": {
-   "availability": 7,
+   "availability": 1,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-10-22",
    "itinerary": "Brothers-Daedalus-Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1541752,
-   "price": 1560.0,
+   "price": 1680.0,
    "slug": "my-blue-storm",
    "start": "2026-10-15",
-   "was": 1560.0
+   "was": 1680.0
   },
   "blue-storm::2026-10-22": {
    "availability": 22,
@@ -12248,7 +12196,7 @@
    "was": 1215.0
   },
   "blue-storm::2026-11-26": {
-   "availability": 6,
+   "availability": 4,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-12-03",
@@ -12612,7 +12560,7 @@
    "was": 1350.0
   },
   "blue-storm::2027-08-12": {
-   "availability": 22,
+   "availability": 20,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2027-08-19",
@@ -12625,7 +12573,7 @@
    "was": 1350.0
   },
   "blue-storm::2027-08-19": {
-   "availability": 22,
+   "availability": 20,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2027-08-26",
@@ -12884,19 +12832,6 @@
    "start": "2027-12-30",
    "was": 1215.0
   },
-  "blue::2026-09-03": {
-   "availability": 22,
-   "boat": "blue",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "Daedalus, Rocky Island and Zabargad (Port Ghalib- Port Ghalib) 7 nights",
-   "nights": 7,
-   "padi_id": 1541770,
-   "price": 1420.0,
-   "slug": "my-blue",
-   "start": "2026-09-03",
-   "was": 1420.0
-  },
   "blue::2026-09-10": {
    "availability": 14,
    "boat": "blue",
@@ -12905,7 +12840,7 @@
    "itinerary": "St. John's (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1541771,
-   "price": 1515.0,
+   "price": 1385.0,
    "slug": "my-blue",
    "start": "2026-09-10",
    "was": 1515.0
@@ -12963,17 +12898,17 @@
    "was": 1495.0
   },
   "blue::2026-11-05": {
-   "availability": 0,
+   "availability": 1,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-11-12",
    "itinerary": "Brother, Daedalus and Elphinstone (Port Ghalib -Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1541779,
-   "price": 1495.0,
+   "price": 1710.0,
    "slug": "my-blue",
    "start": "2026-11-05",
-   "was": 1495.0
+   "was": 1710.0
   },
   "blue::2026-11-12": {
    "availability": 13,
@@ -12989,7 +12924,7 @@
    "was": 1495.0
   },
   "blue::2026-11-19": {
-   "availability": 4,
+   "availability": 8,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-11-26",
@@ -13542,7 +13477,7 @@
    "itinerary": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558637,
-   "price": 535.5,
+   "price": 595.0,
    "slug": "my-carlton",
    "start": "2026-09-08",
    "was": 595.0
@@ -13594,7 +13529,7 @@
    "itinerary": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
    "nights": 7,
    "padi_id": 1547193,
-   "price": 837.0,
+   "price": 930.0,
    "slug": "my-carlton",
    "start": "2026-10-17",
    "was": 930.0
@@ -13659,7 +13594,7 @@
    "itinerary": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1547200,
-   "price": 535.5,
+   "price": 595.0,
    "slug": "my-carlton",
    "start": "2026-11-24",
    "was": 595.0
@@ -14185,7 +14120,7 @@
    "was": 1248.0
   },
   "cassiopeia-glory::2026-09-26": {
-   "availability": 8,
+   "availability": 10,
    "boat": "cassiopeia-glory",
    "currency": "EUR",
    "end": "2026-10-03",
@@ -14198,7 +14133,7 @@
    "was": 966.0
   },
   "cassiopeia-glory::2026-10-10": {
-   "availability": 16,
+   "availability": 14,
    "boat": "cassiopeia-glory",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -14237,7 +14172,7 @@
    "was": 1125.0
   },
   "discovery-i::2026-09-12": {
-   "availability": 7,
+   "availability": 0,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-09-19",
@@ -14263,17 +14198,17 @@
    "was": 1152.0
   },
   "discovery-i::2026-09-26": {
-   "availability": 0,
+   "availability": 2,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-03",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1532037,
-   "price": 900.0,
+   "price": 1080.0,
    "slug": "my-discovery-i",
    "start": "2026-09-26",
-   "was": 1125.0
+   "was": 1350.0
   },
   "discovery-i::2026-10-03": {
    "availability": 9,
@@ -14289,7 +14224,7 @@
    "was": 1125.0
   },
   "discovery-i::2026-10-10": {
-   "availability": 10,
+   "availability": 8,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -14302,7 +14237,7 @@
    "was": 960.0
   },
   "discovery-i::2026-10-17": {
-   "availability": 5,
+   "availability": 1,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -14341,7 +14276,7 @@
    "was": 960.0
   },
   "discovery-i::2026-11-07": {
-   "availability": 9,
+   "availability": 8,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -14419,7 +14354,7 @@
    "was": 1230.0
   },
   "discovery-i::2026-12-19": {
-   "availability": 19,
+   "availability": 17,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-12-26",
@@ -14432,7 +14367,7 @@
    "was": 900.0
   },
   "discovery-i::2026-12-26": {
-   "availability": 19,
+   "availability": 17,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -14783,7 +14718,7 @@
    "was": 900.0
   },
   "discovery-i::2027-07-03": {
-   "availability": 16,
+   "availability": 0,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-07-10",
@@ -14835,7 +14770,7 @@
    "was": 1000.0
   },
   "discovery-i::2027-07-31": {
-   "availability": 0,
+   "availability": 3,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-08-07",
@@ -14848,7 +14783,7 @@
    "was": 1025.0
   },
   "discovery-i::2027-08-07": {
-   "availability": 19,
+   "availability": 20,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-08-14",
@@ -15134,7 +15069,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-09-12": {
-   "availability": 12,
+   "availability": 0,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-09-19",
@@ -15147,7 +15082,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-09-19": {
-   "availability": 14,
+   "availability": 11,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -15173,7 +15108,7 @@
    "was": 1380.0
   },
   "discovery-ii::2026-10-03": {
-   "availability": 0,
+   "availability": 3,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -15251,7 +15186,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-14": {
-   "availability": 20,
+   "availability": 19,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -15394,7 +15329,7 @@
    "was": 1050.0
   },
   "discovery-ii::2027-04-03": {
-   "availability": 17,
+   "availability": 19,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-04-10",
@@ -15446,7 +15381,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-05-01": {
-   "availability": 18,
+   "availability": 16,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-05-08",
@@ -15459,7 +15394,7 @@
    "was": 1100.0
   },
   "discovery-ii::2027-05-08": {
-   "availability": 20,
+   "availability": 18,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -15602,7 +15537,7 @@
    "was": 1050.0
   },
   "discovery-ii::2027-07-24": {
-   "availability": 14,
+   "availability": 16,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-07-31",
@@ -15875,7 +15810,7 @@
    "was": 1450.0
   },
   "dune-longara::2026-09-19": {
-   "availability": 4,
+   "availability": 5,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -15914,7 +15849,7 @@
    "was": 2300.0
   },
   "dune-longara::2026-10-17": {
-   "availability": 27,
+   "availability": 29,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -15927,30 +15862,30 @@
    "was": 1400.0
   },
   "dune-longara::2026-10-24": {
-   "availability": 1,
+   "availability": 3,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-10-31",
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554510,
-   "price": 1700.0,
+   "price": 1600.0,
    "slug": "dune-longara",
    "start": "2026-10-24",
-   "was": 1700.0
+   "was": 1600.0
   },
   "dune-longara::2026-10-31": {
-   "availability": 0,
+   "availability": 4,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "North Brothers (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554508,
-   "price": 1500.0,
+   "price": 1600.0,
    "slug": "dune-longara",
    "start": "2026-10-31",
-   "was": 1500.0
+   "was": 1600.0
   },
   "dune-longara::2026-11-07": {
    "availability": 2,
@@ -15979,7 +15914,7 @@
    "was": 2500.0
   },
   "dune-longara::2026-11-28": {
-   "availability": 12,
+   "availability": 9,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -16018,7 +15953,7 @@
    "was": 2250.0
   },
   "dune-longara::2026-12-26": {
-   "availability": 25,
+   "availability": 23,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -16135,7 +16070,7 @@
    "was": 1450.0
   },
   "dune-longara::2027-05-08": {
-   "availability": 4,
+   "availability": 2,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -16174,7 +16109,7 @@
    "was": 1600.0
   },
   "dune-longara::2027-05-29": {
-   "availability": 28,
+   "availability": 26,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-06-05",
@@ -17149,7 +17084,7 @@
    "was": 1550.0
   },
   "dune-silky::2026-10-10": {
-   "availability": 12,
+   "availability": 10,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -17162,7 +17097,7 @@
    "was": 1600.0
   },
   "dune-silky::2026-10-17": {
-   "availability": 0,
+   "availability": 2,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -17188,7 +17123,7 @@
    "was": 1500.0
   },
   "dune-silky::2026-10-31": {
-   "availability": 4,
+   "availability": 3,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -17201,7 +17136,7 @@
    "was": 1600.0
   },
   "dune-silky::2026-11-07": {
-   "availability": 2,
+   "availability": 3,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -17214,7 +17149,7 @@
    "was": 1600.0
   },
   "dune-silky::2026-11-14": {
-   "availability": 5,
+   "availability": 15,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -17240,7 +17175,7 @@
    "was": 1700.0
   },
   "dune-silky::2026-11-28": {
-   "availability": 3,
+   "availability": 2,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -17734,7 +17669,7 @@
    "was": 1600.0
   },
   "dune-silky::2027-10-23": {
-   "availability": 12,
+   "availability": 11,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -18254,7 +18189,7 @@
    "was": 1600.0
   },
   "dune-silky::2028-11-04": {
-   "availability": 26,
+   "availability": 0,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2028-11-11",
@@ -18397,7 +18332,7 @@
    "was": 1250.0
   },
   "dune-titan::2026-10-10": {
-   "availability": 8,
+   "availability": 7,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -18423,7 +18358,7 @@
    "was": 1200.0
   },
   "dune-titan::2026-10-24": {
-   "availability": 24,
+   "availability": 23,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -18982,17 +18917,17 @@
    "was": 1100.0
   },
   "dune-titan::2027-10-30": {
-   "availability": 0,
+   "availability": 15,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-11-06",
    "itinerary": "North Brothers (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1555291,
-   "price": 1200.0,
+   "price": 1240.0,
    "slug": "dune-titan",
    "start": "2027-10-30",
-   "was": 1200.0
+   "was": 1240.0
   },
   "dune-titan::2027-11-06": {
    "availability": 30,
@@ -19801,7 +19736,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-01-22": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-01-29",
@@ -20438,7 +20373,7 @@
    "was": 1150.0
   },
   "emperor-asmaa::2028-03-10": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-03-17",
@@ -20853,19 +20788,6 @@
    "start": "2028-11-18",
    "was": 1350.0
   },
-  "emperor-elite::2026-09-03": {
-   "availability": 0,
-   "boat": "emperor-elite",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "Simple The Best (Hurghada - Port Ghalib) 7 nights",
-   "nights": 7,
-   "padi_id": 1544902,
-   "price": 1600.0,
-   "slug": "mv-emperor-elite",
-   "start": "2026-09-03",
-   "was": 1600.0
-  },
   "emperor-elite::2026-09-10": {
    "availability": 13,
    "boat": "emperor-elite",
@@ -21049,7 +20971,7 @@
    "was": 1300.0
   },
   "emperor-elite::2026-12-17": {
-   "availability": 22,
+   "availability": 23,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-24",
@@ -21062,7 +20984,7 @@
    "was": 1300.0
   },
   "emperor-elite::2026-12-24": {
-   "availability": 19,
+   "availability": 18,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-31",
@@ -21088,7 +21010,7 @@
    "was": 1300.0
   },
   "emperor-elite::2027-01-07": {
-   "availability": 14,
+   "availability": 13,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-01-14",
@@ -21114,7 +21036,7 @@
    "was": 1400.0
   },
   "emperor-elite::2027-03-04": {
-   "availability": 22,
+   "availability": 21,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-03-11",
@@ -21413,7 +21335,7 @@
    "was": 1650.0
   },
   "emperor-elite::2027-09-23": {
-   "availability": 14,
+   "availability": 15,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-09-30",
@@ -21907,17 +21829,17 @@
    "was": 1310.0
   },
   "emperor-superior::2026-09-12": {
-   "availability": 9,
+   "availability": 2,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2026-09-19",
    "itinerary": "Famous Five (Hurghada- Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1524954,
-   "price": 1410.0,
+   "price": 1450.0,
    "slug": "mv-emperor-superior",
    "start": "2026-09-12",
-   "was": 1410.0
+   "was": 1450.0
   },
   "emperor-superior::2026-09-19": {
    "availability": 10,
@@ -22115,7 +22037,7 @@
    "was": 1160.0
   },
   "emperor-superior::2027-02-26": {
-   "availability": 10,
+   "availability": 14,
    "boat": "emperor-superior",
    "currency": "EUR",
    "end": "2027-03-05",
@@ -23882,21 +23804,8 @@
    "start": "2027-12-25",
    "was": 1410.0
   },
-  "explorer-ventures-grand-sea-explorer::2026-09-03": {
-   "availability": 16,
-   "boat": "explorer-ventures-grand-sea-explorer",
-   "currency": "USD",
-   "end": "2026-09-10",
-   "itinerary": "North and Tiran (Hurghada-Hurghada) 7 nights",
-   "nights": 7,
-   "padi_id": 1523805,
-   "price": 2545.0,
-   "slug": "explorer-ventures-grand-sea-explorer",
-   "start": "2026-09-03",
-   "was": 2545.0
-  },
   "explorer-ventures-grand-sea-explorer::2026-09-10": {
-   "availability": 16,
+   "availability": 12,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-09-17",
@@ -23922,7 +23831,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-09-24": {
-   "availability": 2,
+   "availability": 8,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-10-01",
@@ -23974,7 +23883,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-10-22": {
-   "availability": 0,
+   "availability": 8,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-10-29",
@@ -23987,7 +23896,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-05": {
-   "availability": 8,
+   "availability": 16,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-11-12",
@@ -24000,7 +23909,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-12": {
-   "availability": 8,
+   "availability": 10,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-11-19",
@@ -24013,7 +23922,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-19": {
-   "availability": 8,
+   "availability": 12,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-11-26",
@@ -24026,7 +23935,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-26": {
-   "availability": 28,
+   "availability": 21,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-12-03",
@@ -25182,6 +25091,19 @@
    "start": "2028-10-05",
    "was": 2845.0
   },
+  "explorer-ventures-grand-sea-explorer::2028-10-12": {
+   "availability": 28,
+   "boat": "explorer-ventures-grand-sea-explorer",
+   "currency": "USD",
+   "end": "2028-10-19",
+   "itinerary": "North and Brothers (Hurghada-Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1545451,
+   "price": 2845.0,
+   "slug": "explorer-ventures-grand-sea-explorer",
+   "start": "2028-10-12",
+   "was": 2845.0
+  },
   "freedom-iii::2026-09-06": {
    "availability": 0,
    "boat": "freedom-iii",
@@ -25235,7 +25157,7 @@
    "was": 570.0
   },
   "freedom-iii::2026-10-03": {
-   "availability": 13,
+   "availability": 16,
    "boat": "freedom-iii",
    "currency": "EUR",
    "end": "2026-10-07",
@@ -25403,19 +25325,6 @@
    "start": "2026-12-20",
    "was": 570.0
   },
-  "freedom-iv::2026-09-02": {
-   "availability": 0,
-   "boat": "freedom-iv",
-   "currency": "EUR",
-   "end": "2026-09-06",
-   "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi) 4 Nights",
-   "nights": 4,
-   "padi_id": 1529928,
-   "price": 760.0,
-   "slug": "freedom-iv",
-   "start": "2026-09-02",
-   "was": 760.0
-  },
   "freedom-iv::2026-09-09": {
    "availability": 13,
    "boat": "freedom-iv",
@@ -25430,17 +25339,17 @@
    "was": 760.0
   },
   "freedom-iv::2026-09-14": {
-   "availability": 13,
+   "availability": 11,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2026-09-18",
    "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Umbi - Umbi) 4 Nights",
    "nights": 4,
    "padi_id": 1529931,
-   "price": 760.0,
+   "price": 860.0,
    "slug": "freedom-iv",
    "start": "2026-09-14",
-   "was": 760.0
+   "was": 860.0
   },
   "freedom-iv::2026-09-22": {
    "availability": 3,
@@ -25495,7 +25404,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-10-17": {
-   "availability": 12,
+   "availability": 14,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2026-10-21",
@@ -25560,7 +25469,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-11-18": {
-   "availability": 14,
+   "availability": 12,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2026-11-22",
@@ -26288,7 +26197,7 @@
    "was": 1670.0
   },
   "ghazala-adventure::2027-09-13": {
-   "availability": 21,
+   "availability": 0,
    "boat": "ghazala-adventure",
    "currency": "EUR",
    "end": "2027-09-20",
@@ -26561,7 +26470,7 @@
    "was": 1330.0
   },
   "ghazala-explorer::2026-10-05": {
-   "availability": 0,
+   "availability": 1,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2026-10-12",
@@ -26652,7 +26561,7 @@
    "was": 1400.0
   },
   "ghazala-explorer::2026-11-23": {
-   "availability": 12,
+   "availability": 10,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2026-11-30",
@@ -26678,7 +26587,7 @@
    "was": 1300.0
   },
   "ghazala-explorer::2026-12-07": {
-   "availability": 18,
+   "availability": 19,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2026-12-14",
@@ -26821,7 +26730,7 @@
    "was": 1500.0
   },
   "ghazala-explorer::2027-04-05": {
-   "availability": 13,
+   "availability": 12,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-04-12",
@@ -27055,7 +26964,7 @@
    "was": 1465.0
   },
   "ghazala-explorer::2027-08-09": {
-   "availability": 11,
+   "availability": 13,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-08-16",
@@ -27081,7 +26990,7 @@
    "was": 1570.0
   },
   "ghazala-explorer::2027-08-23": {
-   "availability": 21,
+   "availability": 20,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-08-30",
@@ -27198,7 +27107,7 @@
    "was": 1465.0
   },
   "ghazala-explorer::2027-10-25": {
-   "availability": 7,
+   "availability": 9,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-11-01",
@@ -27211,7 +27120,7 @@
    "was": 1465.0
   },
   "ghazala-explorer::2027-11-01": {
-   "availability": 10,
+   "availability": 11,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-11-08",
@@ -27224,7 +27133,7 @@
    "was": 1465.0
   },
   "ghazala-explorer::2027-11-08": {
-   "availability": 9,
+   "availability": 8,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-11-15",
@@ -27354,30 +27263,30 @@
    "was": 1350.0
   },
   "grand-discovery::2026-09-12": {
-   "availability": 4,
+   "availability": 5,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-09-19",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1548958,
-   "price": 1181.6,
+   "price": 1134.0,
    "slug": "my-grand-discovery",
    "start": "2026-09-12",
-   "was": 1688.0
+   "was": 1620.0
   },
   "grand-discovery::2026-09-19": {
-   "availability": 9,
+   "availability": 6,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-09-26",
    "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548959,
-   "price": 1272.0,
+   "price": 1324.8,
    "slug": "my-grand-discovery",
    "start": "2026-09-19",
-   "was": 1590.0
+   "was": 1656.0
   },
   "grand-discovery::2026-09-26": {
    "availability": 0,
@@ -27406,7 +27315,7 @@
    "was": 1620.0
   },
   "grand-discovery::2026-10-10": {
-   "availability": 25,
+   "availability": 22,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -27419,7 +27328,7 @@
    "was": 1325.0
   },
   "grand-discovery::2026-10-17": {
-   "availability": 11,
+   "availability": 8,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -27432,7 +27341,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-10-24": {
-   "availability": 31,
+   "availability": 30,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -27458,7 +27367,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-11-07": {
-   "availability": 34,
+   "availability": 31,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -27471,7 +27380,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-11-14": {
-   "availability": 14,
+   "availability": 18,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -27510,7 +27419,7 @@
    "was": 1325.0
   },
   "grand-discovery::2026-12-05": {
-   "availability": 19,
+   "availability": 11,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -27549,7 +27458,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 9,
+   "availability": 5,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -27588,7 +27497,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-01-16": {
-   "availability": 36,
+   "availability": 34,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-23",
@@ -27653,7 +27562,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-02-20": {
-   "availability": 36,
+   "availability": 33,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-02-27",
@@ -27796,7 +27705,7 @@
    "was": 1300.0
   },
   "grand-discovery::2027-05-08": {
-   "availability": 34,
+   "availability": 36,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-05-15",
@@ -27952,7 +27861,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-07-31": {
-   "availability": 30,
+   "availability": 28,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-08-07",
@@ -28277,26 +28186,26 @@
    "was": 1473.0
   },
   "hammerhead-ii::2026-10-03": {
-   "availability": 2,
+   "availability": 1,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-10-10",
-   "itinerary": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Port Ghalib - Hurghada) 7 Nights",
+   "itinerary": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 Nights",
    "nights": 7,
-   "padi_id": 1544916,
-   "price": 1473.0,
+   "padi_id": 1544917,
+   "price": 1573.0,
    "slug": "hammerhead-ii",
    "start": "2026-10-03",
-   "was": 1473.0
+   "was": 1573.0
   },
   "hammerhead-ii::2026-10-10": {
    "availability": 1,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-10-17",
-   "itinerary": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib) 7 Nights",
+   "itinerary": "Sharks Obsession: Brothers - Daedalus - Elphinstone (Marsa Alam - Marsa Alam) 7 Nights",
    "nights": 7,
-   "padi_id": 1544917,
+   "padi_id": 1544916,
    "price": 1473.0,
    "slug": "hammerhead-ii",
    "start": "2026-10-10",
@@ -28329,7 +28238,7 @@
    "was": 1473.0
   },
   "hammerhead-ii::2026-10-31": {
-   "availability": 2,
+   "availability": 1,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -28342,7 +28251,7 @@
    "was": 1401.25
   },
   "hammerhead-ii::2026-11-07": {
-   "availability": 23,
+   "availability": 24,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -28353,6 +28262,19 @@
    "slug": "hammerhead-ii",
    "start": "2026-11-07",
    "was": 1473.0
+  },
+  "hammerhead-ii::2026-11-14": {
+   "availability": 32,
+   "boat": "hammerhead-ii",
+   "currency": "EUR",
+   "end": "2026-11-18",
+   "itinerary": "Mini Safari :Abu Nuhas - Ras Mohamed - Thistlegorm (Hurghada - Hurghada) 4 Nights",
+   "nights": 4,
+   "padi_id": 1557685,
+   "price": 887.0,
+   "slug": "hammerhead-ii",
+   "start": "2026-11-14",
+   "was": 887.0
   },
   "hammerhead-ii::2026-11-18": {
    "availability": 32,
@@ -28990,19 +28912,6 @@
    "slug": "hammerhead-ii",
    "start": "2027-12-25",
    "was": 1186.8
-  },
-  "heaven-saphir::2026-09-03": {
-   "availability": 18,
-   "boat": "heaven-saphir",
-   "currency": "USD",
-   "end": "2026-09-10",
-   "itinerary": "Elphinstone - Rocky Island \u2013 St. John\u2019s (Port Ghalib - Port Ghalib) 7 nights",
-   "nights": 7,
-   "padi_id": 1526396,
-   "price": 1620.0,
-   "slug": "my-heaven-saphir",
-   "start": "2026-09-03",
-   "was": 1620.0
   },
   "heaven-saphir::2026-09-10": {
    "availability": 18,
@@ -29889,17 +29798,17 @@
    "was": 1355.0
   },
   "high-wave::2026-11-15": {
-   "availability": 5,
+   "availability": 14,
    "boat": "high-wave",
    "currency": "EUR",
    "end": "2026-11-22",
    "itinerary": "North (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1547447,
-   "price": 1455.0,
+   "price": 1355.0,
    "slug": "high-wave",
    "start": "2026-11-15",
-   "was": 1455.0
+   "was": 1355.0
   },
   "high-wave::2026-11-29": {
    "availability": 20,
@@ -30382,6 +30291,19 @@
    "start": "2027-05-06",
    "was": 1299.0
   },
+  "independence-ii::2027-05-13": {
+   "availability": 21,
+   "boat": "independence-ii",
+   "currency": "EUR",
+   "end": "2027-05-20",
+   "itinerary": "Let's care for Dolphins with Angela Ziltener (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1557553,
+   "price": 1399.0,
+   "slug": "my-independence-ii",
+   "start": "2027-05-13",
+   "was": 1399.0
+  },
   "independence-ii::2027-05-20": {
    "availability": 0,
    "boat": "independence-ii",
@@ -30550,32 +30472,6 @@
    "slug": "my-lady-m",
    "start": "2026-11-16",
    "was": 625.0
-  },
-  "new-sambo::2026-09-01": {
-   "availability": 17,
-   "boat": "new-sambo",
-   "currency": "EUR",
-   "end": "2026-09-02",
-   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
-   "nights": 1,
-   "padi_id": 1550003,
-   "price": 250.0,
-   "slug": "new-sambo-safari-boat-2",
-   "start": "2026-09-01",
-   "was": 250.0
-  },
-  "new-sambo::2026-09-03": {
-   "availability": 20,
-   "boat": "new-sambo",
-   "currency": "EUR",
-   "end": "2026-09-04",
-   "itinerary": "Overnight Sataya (Hamata - Hamata) 1 night / 2 days",
-   "nights": 1,
-   "padi_id": 1550004,
-   "price": 250.0,
-   "slug": "new-sambo-safari-boat-2",
-   "start": "2026-09-03",
-   "was": 250.0
   },
   "new-sambo::2026-09-06": {
    "availability": 4,
@@ -31527,14 +31423,14 @@
    "was": 1050.0
   },
   "odyssey::2026-09-05": {
-   "availability": 11,
+   "availability": 13,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-09-12",
    "itinerary": "BDE  (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1539564,
-   "price": 1490.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-09-05",
    "was": 1660.0
@@ -31560,7 +31456,7 @@
    "itinerary": "BDE  (Hurghada - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1539566,
-   "price": 1490.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-09-19",
    "was": 1660.0
@@ -31573,7 +31469,7 @@
    "itinerary": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1539567,
-   "price": 1560.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-09-26",
    "was": 1660.0
@@ -31586,7 +31482,7 @@
    "itinerary": "BDE  (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1539568,
-   "price": 1560.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-10-03",
    "was": 1660.0
@@ -31605,53 +31501,40 @@
    "was": 1470.0
   },
   "odyssey::2026-10-17": {
-   "availability": 5,
+   "availability": 3,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-10-24",
    "itinerary": "Best of Dahab and Tiran (Hurghada - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1539570,
-   "price": 1470.0,
+   "price": 1570.0,
    "slug": "my-odyssey",
    "start": "2026-10-17",
    "was": 1570.0
   },
   "odyssey::2026-10-24": {
-   "availability": 8,
+   "availability": 9,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-10-31",
    "itinerary": "BDE (Hurghada- Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1539571,
-   "price": 1480.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-10-24",
    "was": 1660.0
   },
-  "odyssey::2026-10-31": {
-   "availability": 14,
-   "boat": "odyssey",
-   "currency": "EUR",
-   "end": "2026-11-07",
-   "itinerary": "BDE  (Hurghada - Port Ghalib) 7 nights",
-   "nights": 7,
-   "padi_id": 1539572,
-   "price": 1660.0,
-   "slug": "my-odyssey",
-   "start": "2026-10-31",
-   "was": 1660.0
-  },
   "odyssey::2026-11-07": {
-   "availability": 8,
+   "availability": 7,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-11-14",
    "itinerary": "Daedalus, Rocky, Zabargad, Elphinstone (Port Ghalib - Port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1539573,
-   "price": 1560.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-11-07",
    "was": 1660.0
@@ -31664,7 +31547,7 @@
    "itinerary": "BDE  (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1539574,
-   "price": 1490.0,
+   "price": 1660.0,
    "slug": "my-odyssey",
    "start": "2026-11-14",
    "was": 1660.0
@@ -31787,7 +31670,7 @@
    "was": 1610.0
   },
   "odyssey::2027-04-10": {
-   "availability": 14,
+   "availability": 12,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-04-17",
@@ -32021,7 +31904,7 @@
    "was": 1520.0
   },
   "odyssey::2027-08-21": {
-   "availability": 26,
+   "availability": 0,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-08-28",
@@ -32216,7 +32099,7 @@
    "was": 1520.0
   },
   "red-sea-aggressor-ii::2026-09-05": {
-   "availability": 5,
+   "availability": 7,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-09-12",
@@ -32229,7 +32112,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-09-12": {
-   "availability": 3,
+   "availability": 1,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-09-19",
@@ -32346,20 +32229,20 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-11-14": {
-   "availability": 2,
+   "availability": 3,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-11-21",
    "itinerary": "Northern Red Sea, Ras Mohamed and Straits of Tiran 7 Nights (Hurghada -Hurghada)",
    "nights": 7,
    "padi_id": 1508938,
-   "price": 1299.0,
+   "price": 999.0,
    "slug": "red-sea-aggressor-ii",
    "start": "2026-11-14",
-   "was": 3060.0
+   "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-11-21": {
-   "availability": 9,
+   "availability": 6,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-11-28",
@@ -32372,20 +32255,20 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-11-28": {
-   "availability": 3,
+   "availability": 2,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-12-05",
    "itinerary": "Northern Red Sea & Dahab (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1508937,
-   "price": 999.0,
+   "price": 1299.0,
    "slug": "red-sea-aggressor-ii",
    "start": "2026-11-28",
-   "was": 2760.0
+   "was": 3060.0
   },
   "red-sea-aggressor-ii::2026-12-05": {
-   "availability": 15,
+   "availability": 17,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-12-12",
@@ -32398,7 +32281,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-12-12": {
-   "availability": 19,
+   "availability": 17,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-12-19",
@@ -33620,7 +33503,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-10-31": {
-   "availability": 1,
+   "availability": 0,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-11-07",
@@ -33945,7 +33828,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-06-19": {
-   "availability": 21,
+   "availability": 22,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-06-26",
@@ -34049,7 +33932,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-08-14": {
-   "availability": 15,
+   "availability": 13,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-08-21",
@@ -34062,7 +33945,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-08-21": {
-   "availability": 26,
+   "availability": 24,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-08-28",
@@ -34868,7 +34751,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-10-03": {
-   "availability": 8,
+   "availability": 5,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-10-10",
@@ -34907,7 +34790,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-10-24": {
-   "availability": 2,
+   "availability": 0,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-10-31",
@@ -34959,7 +34842,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-11-21": {
-   "availability": 1,
+   "availability": 0,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-11-28",
@@ -35011,7 +34894,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-12-19": {
-   "availability": 26,
+   "availability": 25,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-12-26",
@@ -35024,7 +34907,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-12-26": {
-   "availability": 26,
+   "availability": 22,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-01-04",
@@ -35310,7 +35193,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-07-24": {
-   "availability": 8,
+   "availability": 7,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-07-31",
@@ -37103,19 +36986,6 @@
    "start": "2026-12-26",
    "was": 950.0
   },
-  "royal-evolution::2026-09-03": {
-   "availability": 15,
-   "boat": "royal-evolution",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
-   "nights": 7,
-   "padi_id": 1537243,
-   "price": 1319.0,
-   "slug": "ms-royal-evolution",
-   "start": "2026-09-03",
-   "was": 1319.0
-  },
   "royal-evolution::2026-09-10": {
    "availability": 24,
    "boat": "royal-evolution",
@@ -37130,7 +37000,7 @@
    "was": 1319.0
   },
   "royal-evolution::2026-09-17": {
-   "availability": 5,
+   "availability": 7,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-09-24",
@@ -37208,7 +37078,7 @@
    "was": 1499.0
   },
   "royal-evolution::2026-10-29": {
-   "availability": 8,
+   "availability": 4,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-11-05",
@@ -37293,7 +37163,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548497,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-02-25",
    "was": 1599.0
@@ -37306,7 +37176,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548506,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-03-04",
    "was": 1599.0
@@ -37319,7 +37189,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548498,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-03-11",
    "was": 1599.0
@@ -37332,7 +37202,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548495,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-03-18",
    "was": 1599.0
@@ -37345,7 +37215,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548496,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-03-25",
    "was": 1599.0
@@ -37358,7 +37228,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548505,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-04-01",
    "was": 1649.0
@@ -37371,7 +37241,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548499,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-04-08",
    "was": 1599.0
@@ -37384,7 +37254,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548504,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-04-15",
    "was": 1649.0
@@ -37397,7 +37267,7 @@
    "itinerary": "Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1548494,
-   "price": 2114.1,
+   "price": 2349.0,
    "slug": "ms-royal-evolution",
    "start": "2027-04-22",
    "was": 2349.0
@@ -37410,7 +37280,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 10 nights",
    "nights": 10,
    "padi_id": 1548500,
-   "price": 2114.1,
+   "price": 2349.0,
    "slug": "ms-royal-evolution",
    "start": "2027-05-03",
    "was": 2349.0
@@ -37423,7 +37293,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548502,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-05-13",
    "was": 1649.0
@@ -37436,7 +37306,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548501,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-05-20",
    "was": 1649.0
@@ -37449,7 +37319,7 @@
    "itinerary": "Borthers, Deadalus, Rocky, St.John & Elba Itinerary (Port Ghalib - Port Ghalib) 10 Nights",
    "nights": 10,
    "padi_id": 1548513,
-   "price": 2114.1,
+   "price": 2349.0,
    "slug": "ms-royal-evolution",
    "start": "2027-05-27",
    "was": 2349.0
@@ -37462,7 +37332,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548510,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-06-10",
    "was": 1499.0
@@ -37475,7 +37345,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548509,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-06-17",
    "was": 1499.0
@@ -37488,7 +37358,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548507,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-06-24",
    "was": 1499.0
@@ -37501,7 +37371,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548512,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-07-01",
    "was": 1499.0
@@ -37514,7 +37384,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548511,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-07-08",
    "was": 1499.0
@@ -37527,7 +37397,7 @@
    "itinerary": "Brother, Deadalus & Elphinstone (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548516,
-   "price": 1349.1,
+   "price": 1499.0,
    "slug": "ms-royal-evolution",
    "start": "2027-07-15",
    "was": 1499.0
@@ -37540,7 +37410,7 @@
    "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548508,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-08-12",
    "was": 1449.0
@@ -37553,7 +37423,7 @@
    "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548514,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-08-19",
    "was": 1449.0
@@ -37566,7 +37436,7 @@
    "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548515,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-08-26",
    "was": 1449.0
@@ -37579,7 +37449,7 @@
    "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548528,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-09-02",
    "was": 1449.0
@@ -37592,7 +37462,7 @@
    "itinerary": "Special wreck (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1548527,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-09-09",
    "was": 1449.0
@@ -37605,7 +37475,7 @@
    "itinerary": "Special wreck (Hurghada - port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548530,
-   "price": 1304.1,
+   "price": 1449.0,
    "slug": "ms-royal-evolution",
    "start": "2027-09-16",
    "was": 1449.0
@@ -37618,7 +37488,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548521,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-09-23",
    "was": 1649.0
@@ -37631,7 +37501,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548520,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-09-30",
    "was": 1649.0
@@ -37644,7 +37514,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548522,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-10-07",
    "was": 1599.0
@@ -37657,7 +37527,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548523,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-10-14",
    "was": 1649.0
@@ -37670,7 +37540,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548529,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-10-21",
    "was": 1599.0
@@ -37683,7 +37553,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548517,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-10-28",
    "was": 1649.0
@@ -37696,7 +37566,7 @@
    "itinerary": "Egypt / Elba reef - Elba borders (Port Ghaib - port Ghalib) 7 nights",
    "nights": 7,
    "padi_id": 1548519,
-   "price": 1439.1,
+   "price": 1599.0,
    "slug": "ms-royal-evolution",
    "start": "2027-11-04",
    "was": 1599.0
@@ -37709,7 +37579,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548518,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-11-11",
    "was": 1649.0
@@ -37722,7 +37592,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548524,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-11-18",
    "was": 1649.0
@@ -37735,7 +37605,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548531,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-11-25",
    "was": 1649.0
@@ -37748,7 +37618,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548525,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-12-02",
    "was": 1649.0
@@ -37761,7 +37631,7 @@
    "itinerary": "Deadalus & Elba Reef - borders (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1548526,
-   "price": 1484.1,
+   "price": 1649.0,
    "slug": "ms-royal-evolution",
    "start": "2027-12-26",
    "was": 1649.0
@@ -37819,7 +37689,7 @@
    "was": 1190.0
   },
   "seawolf-dominator::2026-09-19": {
-   "availability": 7,
+   "availability": 5,
    "boat": "seawolf-dominator",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -37936,7 +37806,7 @@
    "was": 1270.0
   },
   "seawolf-dominator::2026-11-21": {
-   "availability": 22,
+   "availability": 20,
    "boat": "seawolf-dominator",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -38014,11 +37884,11 @@
    "was": 1070.0
   },
   "seawolf-dominator::2027-03-20": {
-   "availability": 11,
+   "availability": 0,
    "boat": "seawolf-dominator",
    "currency": "EUR",
    "end": "2027-03-27",
-   "itinerary": "North/Strait of Tiran (Hurghada - Hurghada) 7 nights",
+   "itinerary": "MP South - Daedalus/Zabargad/Rocky Island (Port Ghalib - Hurghada) 7 nights",
    "nights": 7,
    "padi_id": 1555807,
    "price": 1170.0,
@@ -39158,7 +39028,7 @@
    "was": 2350.0
   },
   "serenity::2026-09-05": {
-   "availability": 11,
+   "availability": 15,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-09-12",
@@ -39178,39 +39048,39 @@
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1537388,
-   "price": 1147.5,
+   "price": 1215.0,
    "slug": "serenity",
    "start": "2026-09-12",
    "was": 1350.0
   },
   "serenity::2026-09-19": {
-   "availability": 5,
+   "availability": 3,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-09-26",
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1537389,
-   "price": 1215.0,
+   "price": 1350.0,
    "slug": "serenity",
    "start": "2026-09-19",
    "was": 1350.0
   },
   "serenity::2026-09-26": {
-   "availability": 10,
+   "availability": 7,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-03",
    "itinerary": "North & Brothers (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1537387,
-   "price": 1012.5,
+   "price": 1147.5,
    "slug": "serenity",
    "start": "2026-09-26",
    "was": 1350.0
   },
   "serenity::2026-10-03": {
-   "availability": 11,
+   "availability": 7,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -39223,7 +39093,7 @@
    "was": 1400.0
   },
   "serenity::2026-10-10": {
-   "availability": 7,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -39262,7 +39132,7 @@
    "was": 1400.0
   },
   "serenity::2026-10-31": {
-   "availability": 13,
+   "availability": 11,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -39912,7 +39782,7 @@
    "was": 1500.0
   },
   "serenity::2027-11-13": {
-   "availability": 14,
+   "availability": 16,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-11-20",
@@ -40002,19 +39872,6 @@
    "start": "2027-12-25",
    "was": 1300.0
   },
-  "snefro-love::2026-09-01": {
-   "availability": 0,
-   "boat": "snefro-love",
-   "currency": "EUR",
-   "end": "2026-09-05",
-   "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
-   "nights": 4,
-   "padi_id": 1555331,
-   "price": 679.0,
-   "slug": "snefro-love",
-   "start": "2026-09-01",
-   "was": 679.0
-  },
   "snefro-love::2026-09-08": {
    "availability": 0,
    "boat": "snefro-love",
@@ -40055,7 +39912,7 @@
    "was": 679.0
   },
   "snefro-love::2026-09-29": {
-   "availability": 8,
+   "availability": 6,
    "boat": "snefro-love",
    "currency": "EUR",
    "end": "2026-10-03",
@@ -40244,10 +40101,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1557336,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-03-18",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-03-25": {
    "availability": 20,
@@ -40257,10 +40114,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1557332,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-03-25",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-04-01": {
    "availability": 20,
@@ -40270,10 +40127,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1557330,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-04-01",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-04-08": {
    "availability": 20,
@@ -40283,10 +40140,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1557329,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-04-08",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-04-15": {
    "availability": 20,
@@ -40296,10 +40153,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1557327,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-04-15",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-04-22": {
    "availability": 20,
@@ -40309,10 +40166,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558993,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-04-22",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-04-29": {
    "availability": 20,
@@ -40322,10 +40179,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558992,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-04-29",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-05-06": {
    "availability": 20,
@@ -40335,10 +40192,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558985,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-05-06",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-05-13": {
    "availability": 20,
@@ -40348,10 +40205,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558984,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-05-13",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-05-20": {
    "availability": 20,
@@ -40361,10 +40218,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558975,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-05-20",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-05-27": {
    "availability": 20,
@@ -40374,10 +40231,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558987,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-05-27",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-06-03": {
    "availability": 20,
@@ -40387,10 +40244,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559009,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-06-03",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-06-10": {
    "availability": 20,
@@ -40400,10 +40257,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558976,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-06-10",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-06-17": {
    "availability": 20,
@@ -40413,10 +40270,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558986,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-06-17",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-06-24": {
    "availability": 20,
@@ -40426,10 +40283,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558977,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-06-24",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-07-01": {
    "availability": 20,
@@ -40439,10 +40296,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558979,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-07-01",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-07-08": {
    "availability": 20,
@@ -40452,10 +40309,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559005,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-07-08",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-07-15": {
    "availability": 20,
@@ -40465,10 +40322,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559004,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-07-15",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-07-22": {
    "availability": 20,
@@ -40478,10 +40335,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558989,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-07-22",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-07-29": {
    "availability": 20,
@@ -40491,10 +40348,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559007,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-07-29",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-08-05": {
    "availability": 20,
@@ -40504,10 +40361,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559006,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-08-05",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-08-12": {
    "availability": 20,
@@ -40517,10 +40374,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558991,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-08-12",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-08-19": {
    "availability": 20,
@@ -40530,10 +40387,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558999,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-08-19",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-08-26": {
    "availability": 20,
@@ -40543,10 +40400,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558981,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-08-26",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-09-02": {
    "availability": 20,
@@ -40556,10 +40413,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558980,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-09-02",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-09-09": {
    "availability": 20,
@@ -40569,10 +40426,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558983,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-09-09",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-09-16": {
    "availability": 20,
@@ -40582,10 +40439,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559010,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-09-16",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-09-23": {
    "availability": 20,
@@ -40595,10 +40452,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559000,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-09-23",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-09-30": {
    "availability": 20,
@@ -40608,10 +40465,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558978,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-09-30",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-10-07": {
    "availability": 20,
@@ -40621,10 +40478,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558996,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-10-07",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-10-14": {
    "availability": 20,
@@ -40634,10 +40491,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559003,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-10-14",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-10-21": {
    "availability": 20,
@@ -40647,10 +40504,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559008,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-10-21",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-10-28": {
    "availability": 20,
@@ -40660,10 +40517,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558997,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-10-28",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-11-04": {
    "availability": 20,
@@ -40673,10 +40530,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558995,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-11-04",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-11-11": {
    "availability": 20,
@@ -40686,10 +40543,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558982,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-11-11",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-11-18": {
    "availability": 20,
@@ -40699,10 +40556,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558988,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-11-18",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-11-25": {
    "availability": 20,
@@ -40712,10 +40569,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559001,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-11-25",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-12-02": {
    "availability": 20,
@@ -40725,10 +40582,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558990,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-12-02",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-12-09": {
    "availability": 20,
@@ -40738,10 +40595,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1559002,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-12-09",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-12-16": {
    "availability": 20,
@@ -40751,10 +40608,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558994,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-12-16",
-   "was": 733.0
+   "was": 699.0
   },
   "snefro-love::2027-12-23": {
    "availability": 20,
@@ -40764,23 +40621,10 @@
    "itinerary": "Mini Plus: Thistlegorm - Tiran - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1558998,
-   "price": 733.0,
+   "price": 699.0,
    "slug": "snefro-love",
    "start": "2027-12-23",
-   "was": 733.0
-  },
-  "snefro-pearl::2026-09-02": {
-   "availability": 0,
-   "boat": "snefro-pearl",
-   "currency": "EUR",
-   "end": "2026-09-05",
-   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1542381,
-   "price": 529.0,
-   "slug": "snefro-pearl",
-   "start": "2026-09-02",
-   "was": 529.0
+   "was": 699.0
   },
   "snefro-pearl::2026-09-06": {
    "availability": 0,
@@ -40874,7 +40718,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-09-30": {
-   "availability": 2,
+   "availability": 0,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-10-03",
@@ -41004,7 +40848,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-11-04": {
-   "availability": 4,
+   "availability": 0,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -41069,7 +40913,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-11-22": {
-   "availability": 6,
+   "availability": 4,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-11-25",
@@ -41121,7 +40965,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-12-06": {
-   "availability": 10,
+   "availability": 8,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-12-09",
@@ -41238,7 +41082,7 @@
    "was": 529.0
   },
   "snefro-pearl::2027-01-06": {
-   "availability": 8,
+   "availability": 6,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-01-09",
@@ -41505,10 +41349,10 @@
    "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
    "nights": 3,
    "padi_id": 1552383,
-   "price": 529.0,
+   "price": 582.0,
    "slug": "snefro-pearl",
    "start": "2027-03-17",
-   "was": 529.0
+   "was": 582.0
   },
   "snefro-pearl::2027-03-21": {
    "availability": 12,
@@ -41518,10 +41362,10 @@
    "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
    "nights": 3,
    "padi_id": 1552390,
-   "price": 529.0,
+   "price": 582.0,
    "slug": "snefro-pearl",
    "start": "2027-03-21",
-   "was": 529.0
+   "was": 582.0
   },
   "snefro-pearl::2027-03-24": {
    "availability": 12,
@@ -41531,10 +41375,10 @@
    "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
    "nights": 3,
    "padi_id": 1552379,
-   "price": 529.0,
+   "price": 582.0,
    "slug": "snefro-pearl",
    "start": "2027-03-24",
-   "was": 529.0
+   "was": 582.0
   },
   "snefro-pearl::2027-03-28": {
    "availability": 12,
@@ -41544,10 +41388,10 @@
    "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
    "nights": 3,
    "padi_id": 1552382,
-   "price": 529.0,
+   "price": 582.0,
    "slug": "snefro-pearl",
    "start": "2027-03-28",
-   "was": 529.0
+   "was": 582.0
   },
   "snefro-pearl::2027-03-31": {
    "availability": 12,
@@ -41862,7 +41706,7 @@
    "was": 582.0
   },
   "snefro-pearl::2027-06-23": {
-   "availability": 12,
+   "availability": 8,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2027-06-26",
@@ -42069,6 +41913,19 @@
    "start": "2027-08-15",
    "was": 582.0
   },
+  "snefro-pearl::2027-08-18": {
+   "availability": 12,
+   "boat": "snefro-pearl",
+   "currency": "EUR",
+   "end": "2027-08-21",
+   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
+   "nights": 3,
+   "padi_id": 1555964,
+   "price": 582.0,
+   "slug": "snefro-pearl",
+   "start": "2027-08-18",
+   "was": 582.0
+  },
   "snefro-spirit::2027-04-24": {
    "availability": 4,
    "boat": "snefro-spirit",
@@ -42103,10 +41960,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1548202,
-   "price": 1169.0,
+   "price": 999.0,
    "slug": "snefro-target",
    "start": "2026-09-12",
-   "was": 1169.0
+   "was": 999.0
   },
   "snefro-target::2026-09-19": {
    "availability": 0,
@@ -42148,7 +42005,7 @@
    "was": 1169.0
   },
   "snefro-target::2026-10-24": {
-   "availability": 18,
+   "availability": 12,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -42161,7 +42018,7 @@
    "was": 1169.0
   },
   "snefro-target::2026-10-31": {
-   "availability": 6,
+   "availability": 4,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -42415,10 +42272,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557346,
-   "price": 1262.0,
+   "price": 1169.0,
    "slug": "snefro-target",
    "start": "2027-03-13",
-   "was": 1262.0
+   "was": 1169.0
   },
   "snefro-target::2027-03-20": {
    "availability": 20,
@@ -42428,10 +42285,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557347,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-03-20",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-03-27": {
    "availability": 20,
@@ -42441,10 +42298,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557357,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-03-27",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-04-03": {
    "availability": 20,
@@ -42454,10 +42311,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557352,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-04-03",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-04-10": {
    "availability": 20,
@@ -42467,10 +42324,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557348,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-04-10",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-04-17": {
    "availability": 20,
@@ -42480,10 +42337,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557354,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-04-17",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-04-24": {
    "availability": 20,
@@ -42493,10 +42350,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557351,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-04-24",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-05-01": {
    "availability": 20,
@@ -42506,10 +42363,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557353,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-05-01",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-05-08": {
    "availability": 20,
@@ -42519,10 +42376,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557349,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-05-08",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-05-15": {
    "availability": 20,
@@ -42532,10 +42389,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557358,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-05-15",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-05-22": {
    "availability": 20,
@@ -42545,10 +42402,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557355,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-05-22",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-05-29": {
    "availability": 20,
@@ -42558,10 +42415,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557356,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-05-29",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-06-05": {
    "availability": 20,
@@ -42571,10 +42428,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557363,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-06-05",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-06-12": {
    "availability": 20,
@@ -42584,10 +42441,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557381,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-06-12",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-06-19": {
    "availability": 20,
@@ -42597,10 +42454,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557362,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-06-19",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-06-26": {
    "availability": 20,
@@ -42610,10 +42467,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557373,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-06-26",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-07-03": {
    "availability": 18,
@@ -42636,10 +42493,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557371,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-07-10",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-07-17": {
    "availability": 20,
@@ -42649,10 +42506,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557370,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-07-17",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-07-24": {
    "availability": 20,
@@ -42662,10 +42519,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557365,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-07-24",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-07-31": {
    "availability": 0,
@@ -42675,10 +42532,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557379,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-07-31",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-08-07": {
    "availability": 20,
@@ -42688,10 +42545,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557368,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-08-07",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-08-14": {
    "availability": 20,
@@ -42701,10 +42558,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557375,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-08-14",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-08-21": {
    "availability": 20,
@@ -42714,10 +42571,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557369,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-08-21",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-08-28": {
    "availability": 20,
@@ -42727,10 +42584,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557378,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-08-28",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-09-04": {
    "availability": 20,
@@ -42740,10 +42597,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557364,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-09-04",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-09-11": {
    "availability": 20,
@@ -42753,10 +42610,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557376,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-09-11",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-09-18": {
    "availability": 20,
@@ -42766,10 +42623,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557366,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-09-18",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-09-25": {
    "availability": 20,
@@ -42779,10 +42636,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557372,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-09-25",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-10-02": {
    "availability": 20,
@@ -42792,10 +42649,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557360,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-10-02",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-10-09": {
    "availability": 20,
@@ -42805,10 +42662,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557361,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-10-09",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-10-16": {
    "availability": 20,
@@ -42818,10 +42675,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557377,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-10-16",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-10-23": {
    "availability": 20,
@@ -42831,10 +42688,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557380,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-10-23",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-10-30": {
    "availability": 20,
@@ -42844,10 +42701,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557367,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-10-30",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-11-06": {
    "availability": 0,
@@ -42857,10 +42714,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557374,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-11-06",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-11-13": {
    "availability": 20,
@@ -42870,10 +42727,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557552,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-11-13",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-11-20": {
    "availability": 20,
@@ -42883,10 +42740,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557550,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-11-20",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-11-27": {
    "availability": 20,
@@ -42896,10 +42753,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557546,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-11-27",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-12-04": {
    "availability": 20,
@@ -42909,10 +42766,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557547,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-12-04",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-12-11": {
    "availability": 20,
@@ -42922,10 +42779,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557548,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-12-11",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-12-18": {
    "availability": 20,
@@ -42935,10 +42792,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557551,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-12-18",
-   "was": 1262.0
+   "was": 1199.0
   },
   "snefro-target::2027-12-25": {
    "availability": 20,
@@ -42948,10 +42805,10 @@
    "itinerary": "Sinai Classic (Sharm el Sheikh- Sharm el Sheikh) 7 nights",
    "nights": 7,
    "padi_id": 1557549,
-   "price": 1262.0,
+   "price": 1199.0,
    "slug": "snefro-target",
    "start": "2027-12-25",
-   "was": 1262.0
+   "was": 1199.0
   },
   "south-moon-1::2026-09-05": {
    "availability": 0,
@@ -43045,7 +42902,7 @@
    "was": 1125.0
   },
   "south-moon-1::2026-10-24": {
-   "availability": 0,
+   "availability": 10,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -43058,20 +42915,20 @@
    "was": 1125.0
   },
   "south-moon-1::2026-10-31": {
-   "availability": 10,
+   "availability": 4,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights",
    "nights": 7,
    "padi_id": 1542192,
-   "price": 1125.0,
+   "price": 1215.0,
    "slug": "south-moon-1",
    "start": "2026-10-31",
-   "was": 1125.0
+   "was": 1215.0
   },
   "south-moon-1::2026-11-07": {
-   "availability": 0,
+   "availability": 22,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -43097,7 +42954,7 @@
    "was": 1125.0
   },
   "south-moon-1::2026-11-21": {
-   "availability": 0,
+   "availability": 12,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -43169,7 +43026,7 @@
    "itinerary": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights",
    "nights": 7,
    "padi_id": 1542200,
-   "price": 956.25,
+   "price": 1125.0,
    "slug": "south-moon-1",
    "start": "2026-12-26",
    "was": 1125.0
@@ -43238,19 +43095,6 @@
    "slug": "south-moon-1",
    "start": "2027-01-30",
    "was": 1125.0
-  },
-  "tala::2026-09-03": {
-   "availability": 0,
-   "boat": "tala",
-   "currency": "EUR",
-   "end": "2026-09-10",
-   "itinerary": "North (Hurghada- Hurghada) 7 nights",
-   "nights": 7,
-   "padi_id": 1530994,
-   "price": 930.0,
-   "slug": "mv-tala",
-   "start": "2026-09-03",
-   "was": 930.0
   },
   "tala::2026-09-10": {
    "availability": 14,
@@ -43565,7 +43409,7 @@
    "was": 1250.0
   },
   "tala::2027-04-18": {
-   "availability": 12,
+   "availability": 10,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-04-25",
@@ -44539,6 +44383,19 @@
    "start": "2028-11-16",
    "was": 1315.0
   },
+  "tala::2028-11-23": {
+   "availability": 0,
+   "boat": "tala",
+   "currency": "EUR",
+   "end": "2028-11-30",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1553137,
+   "price": 1315.0,
+   "slug": "mv-tala",
+   "start": "2028-11-23",
+   "was": 1315.0
+  },
   "topaz::2027-03-06": {
    "availability": 26,
    "boat": "topaz",
@@ -44735,7 +44592,7 @@
    "was": 1280.0
   },
   "topaz::2027-06-26": {
-   "availability": 28,
+   "availability": 14,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-07-03",
@@ -45086,7 +44943,7 @@
    "was": 975.0
   },
   "unity::2026-10-10": {
-   "availability": 22,
+   "availability": 21,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -45106,13 +44963,13 @@
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553827,
-   "price": 1089.0,
+   "price": 1210.0,
    "slug": "unity",
    "start": "2026-10-24",
    "was": 1210.0
   },
   "unity::2026-10-31": {
-   "availability": 25,
+   "availability": 24,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -45151,14 +45008,14 @@
    "was": 875.0
   },
   "unity::2026-11-28": {
-   "availability": 23,
+   "availability": 17,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-12-05",
    "itinerary": "Northern Reach (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553818,
-   "price": 787.5,
+   "price": 875.0,
    "slug": "unity",
    "start": "2026-11-28",
    "was": 875.0
@@ -45171,7 +45028,7 @@
    "itinerary": "Northern Wrecks and Reefs (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553825,
-   "price": 787.5,
+   "price": 875.0,
    "slug": "unity",
    "start": "2026-12-05",
    "was": 875.0
@@ -45184,7 +45041,7 @@
    "itinerary": "Northern Reach (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553823,
-   "price": 787.5,
+   "price": 875.0,
    "slug": "unity",
    "start": "2026-12-12",
    "was": 875.0
@@ -45197,7 +45054,7 @@
    "itinerary": "Northern Wrecks and Reefs (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553822,
-   "price": 787.5,
+   "price": 875.0,
    "slug": "unity",
    "start": "2026-12-19",
    "was": 875.0
