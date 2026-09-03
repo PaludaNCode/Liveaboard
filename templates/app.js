@@ -68,8 +68,30 @@
      the *old* height during `orientationchange` and animates the bar away for
      a moment after a `resize`. */
   var refitAgain = null;
+  /* Where `dvh` exists the stylesheet already knows the height, and all this
+     has to do is make the browser recompute it -- which was the whole finding:
+     the layout was stale rather than wrong.
+     Writing a pixel height instead *overrides* the unit, and on iOS
+     `window.innerHeight` is the layout viewport, which is the tall one. So the
+     number written back was the very slack `dvh` had just removed, on every
+     `resize` -- and on an iPhone that is the shell relaid out from under a
+     gesture: the UI jumps and the scroll it was tracking is clamped to
+     nothing. Invalidate rather than assert. Toggling `min-height` dirties
+     layout without this file claiming a height of its own, and the forced
+     read is the reflow the stale layout wanted; `height` in pixels stays as
+     the fallback for a browser that does not know the unit, where there is no
+     unit to fight. */
+  var HAS_DVH = !!(window.CSS && window.CSS.supports &&
+                   window.CSS.supports("height", "100dvh"));
   function fitShell() {
-    document.body.style.height = window.innerHeight + "px";
+    if (!HAS_DVH) {
+      document.body.style.height = window.innerHeight + "px";
+      return;
+    }
+    document.body.style.minHeight = "0px";
+    void document.body.offsetHeight;
+    document.body.style.minHeight = "";
+    void document.body.offsetHeight;
   }
   function refitShell() {
     fitShell();
@@ -80,6 +102,61 @@
   ["resize", "orientationchange", "pageshow"].forEach(function (name) {
     window.addEventListener(name, refitShell);
   });
+
+  /* A READOUT FOR A PHONE THIS REPO CANNOT DRIVE.
+   *
+   * `tests/test_layout.py` drives Chromium, which is the right tool for every
+   * claim about geometry that a desktop engine can settle. It cannot settle
+   * one about iOS: `dvh`, `innerHeight` and the browser's own toolbar
+   * disagree there in ways nothing here reproduces, and three fixes were shipped
+   * against it on reasoning rather than on a number. This is the probe rule
+   * applied to a device instead of a page -- read what came back, then fix.
+   *
+   * Off unless the URL asks (`?diag`), so it ships as nothing on a page
+   * nobody has asked it of. It states what it reads and never what it thinks:
+   * the build stamp first, because a phone hides the build line and a stale
+   * cache explains every "still broken" for free. */
+  if (/(^|[?&])diag(&|=|$)/.test(location.search)) {
+    var diag = document.createElement("div");
+    diag.id = "diag";
+    diag.setAttribute("aria-hidden", "true");
+    diag.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:9999;" +
+      "background:#000;color:#0f0;font:11px/1.35 ui-monospace,monospace;" +
+      "padding:6px 8px;white-space:pre;pointer-events:auto";
+    diag.addEventListener("click", function () { diag.remove(); });
+    document.body.appendChild(diag);
+    var events = { resize: 0, orient: 0, scroll: 0 };
+    ["resize", "orientationchange"].forEach(function (name) {
+      window.addEventListener(name, function () {
+        events[name === "resize" ? "resize" : "orient"] += 1;
+      });
+    });
+    var shellFor = function () { return document.querySelector(".shell"); };
+    shellFor().addEventListener("scroll", function () { events.scroll += 1; },
+                                { passive: true });
+    var vv = window.visualViewport;
+    var paint = function () {
+      var shell = shellFor();
+      var body = document.body.getBoundingClientRect();
+      diag.textContent =
+        "built " + (D.meta.built || "?") + "  (tap to dismiss)\n" +
+        "inner " + window.innerWidth + "x" + window.innerHeight +
+        "  visual " + (vv ? Math.round(vv.width) + "x" + Math.round(vv.height) +
+                            " off" + Math.round(vv.offsetTop) : "none") +
+        "  dvh " + (HAS_DVH ? "yes" : "no") + "\n" +
+        "body " + Math.round(body.width) + "x" + Math.round(body.height) +
+        "  style.h '" + document.body.style.height + "'" +
+        "  page " + Math.round(window.scrollY) + "\n" +
+        "shell " + Math.round(shell.clientHeight) + " of " +
+        Math.round(shell.scrollHeight) + "  at " + Math.round(shell.scrollTop) +
+        "  rows " + document.getElementById("cards").children.length + "/" +
+        document.getElementById("body").children.length + "\n" +
+        "events resize " + events.resize + "  orient " + events.orient +
+        "  scroll " + events.scroll;
+      requestAnimationFrame(paint);
+    };
+    requestAnimationFrame(paint);
+  }
 
   /* Written on every draw by countRail(), which runs from afterDraw -- so they
      are looked up here rather than beside the rest of the view wiring, which
