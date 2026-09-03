@@ -1298,10 +1298,13 @@ class TestPayloadIsRead(unittest.TestCase):
     #: Payload keys with no reader, and the reason each is allowed to stay.
     #: Empty on purpose -- an entry here is a decision someone made out loud,
     #: and the point of the list is that it is short enough to argue with.
-    UNREAD: dict[str, str] = {
-        "fee_labels": "one vocabulary defined once; app.js prints each line's "
-                      "own label, which is built from this table in Python",
-    }
+    #:
+    #: `fee_labels` sat here for the reason the list exists to make arguable --
+    #: every label on the panel is built from it in Python, so nothing needed
+    #: the table itself. A subsumed line does: it names the bundle that covers
+    #: it, and that name has to be the one the covering row prints. So the
+    #: exception is gone rather than reworded, and the list is empty again.
+    UNREAD: dict[str, str] = {}
 
     #: The same, per itinerary and per departure. Also empty, and the emptiness
     #: is worth more here: a top-level key ships once, an itinerary key ships

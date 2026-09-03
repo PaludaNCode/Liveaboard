@@ -299,26 +299,41 @@ Break these and the site starts lying quietly rather than failing loudly.
   it read as a league table and contradicted the total beside it.
 - **Never claim a total the disclosure does not support.** No fee lines means
   nobody looked; only optional ones means the operator did not state its
-  required extras. Neither is a clean bill. **And nor is one that bills a
-  charge twice.** PADI publishes two required entries on Seawolf Dominator —
+  required extras. Neither is a clean bill.
+- **A charge the seller states twice is counted once, and the row says what
+  covers it.** PADI publishes two required entries on Seawolf Dominator —
   *Visa fees* 250, and *Visa, dive permit, taxes, marine park fees, harbour fee
-  and fuel surcharges* 180–255 — and the second names the first, so the total
-  charged the visa twice on 17 departures. Both are read faithfully:
-  `tools/probe_padi_mandatory.py` established before anything changed that they
-  are distinct catalogue items with different `extraId`, `kind` and `section`,
-  that neither states a validity window, and that the enums do **not** mark one
-  a package (Galaxy files a package under the `section` a bare component sits
-  under elsewhere). What separates them is the figure — every other vessel
-  pricing a visa alone prices it at 25–30, and Seawolf's is 250, inside the
-  range of its own package — and an inference is not a warrant to delete a
-  published charge. So **nothing is dropped and the sum is withheld**:
-  `overlapping_charges` is a third `disclosure` state beside `fees_known` and
-  `mandatory_known`, with its own sentence, and the berth price and every fee
-  line stay. Deliberately narrow and under-firing: only charges a diver cannot
-  decline, only titles naming two or more, and `classify_label` does the naming
-  because a second copy of that vocabulary would drift. It is withheld in
-  `best()`, never in `metricsFor` — `row.lav` is an object the Nitrox and
-  Places columns read fields off, and nulling it there empties the table.
+  and fuel surcharges* 180–255 — and the second names the first, so a total
+  adding both charged the visa twice on 17 departures, on a vessel
+  liveaboard.com does not list at all. Both are read faithfully:
+  `tools/probe_padi_mandatory.py` established that they are distinct catalogue
+  items with different `extraId`, `kind` and `section`, that neither states a
+  validity window, and that the enums do **not** mark one a package (Galaxy
+  files a package under the `section` a bare component sits under elsewhere).
+  On that alone the sum was withheld, because the only thing separating the two
+  was the figure and an inference is not a warrant to delete a published
+  charge. **The source answers it, though, in the same payload.** The operator
+  itemises the bundle in its own `whatsNotIncluded` prose on 10 of the boat's 13
+  itineraries — *"Visa, dive permission and taxes 43 Euro … Fee for marine
+  parks: South: 80 Euro … Fuel surcharge: 30 Euro per person … Fee for marina
+  Marsa Ghaleb 25 Euro"*, which sums to the bundle's own 180–255 — prices the
+  visa **inside** the 43 (*"we will cut from this amount 25 $ for the visa"*),
+  and states nothing at 250 anywhere on any of the 13. Its other hull settles
+  it: Seawolf Steel publishes the same bundle at the same figures and prices
+  *Visa fees* at **30, as an optional extra**. So the bundle is the money and
+  the standalone entry is a copy of part of it. `pricing.subsumed_charges`
+  resolves it and **still drops nothing**: the line stays in the breakdown at
+  its published figure with `subsumed_by` naming the bundle, exactly as an
+  included fee stays at zero, and the panel prints *already covered by … above*.
+  `lineCounts` asks `subsumed_by` before anything else, which is the mirror of
+  `_is_counted` taking it as an argument — the overlap is a fact about one bill,
+  so every caller that sums a set of fees resolves it over that same set.
+  Deliberately narrow and under-firing: only charges a diver cannot decline,
+  only titles naming two or more, and `classify_label` does the naming because a
+  second copy of that vocabulary would drift. It resolves one code on one vessel
+  and touches nothing else — Hammerhead's *Park and Port Fees* beside a separate
+  fuel surcharge counts both, as do the 40 bills pairing port fees with a fuel
+  surcharge.
 - **A charge priced for last year is not this year's charge, and silence is not
   expiry.** PADI's payload states `validFrom`/`validTo` on a fee and keeps both
   sides of a repricing: Grand Sea Explorer lists *Route supplement* twice on
