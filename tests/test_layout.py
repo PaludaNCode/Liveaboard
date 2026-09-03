@@ -1563,6 +1563,71 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             page.close()
 
 
+    def test_every_panel_can_be_closed_without_a_keyboard(self) -> None:
+        """These are dialogs, and a phone has no Escape key.
+
+        They were dismissed by Escape, by tapping the trigger again, or by
+        tapping outside — and on a phone the first does not exist and the
+        other two are underneath the panel. Measured at 402x684, the size the
+        device reported: the bill is 479px tall over a 452px list, so it
+        covers the rows whole. A swipe there lands on the panel and scrolls
+        *it*, a few hundred pixels of bill and then nothing, which is what a
+        scroller that has stopped working looks like from the outside.
+
+        So each panel carries a close control, and three things about it are
+        asserted rather than assumed: it is a real tap target (44px, because
+        a multiplication sign is not something a thumb can aim at), it stays
+        put when the panel is scrolled to its end (sticky, not absolute —
+        otherwise the way out scrolls away, which is the same bug one layer
+        down), and it actually closes the panel.
+        """
+        page = self._browser.new_page(
+            viewport={"width": 402, "height": 684}, has_touch=True, is_mobile=True)
+        try:
+            page.goto(self._url)
+            page.wait_for_selector("article.card")
+            panels = ((".fees-open", "feePanel"), (".berths", "berths"),
+                      (".entry-open", "entryPanel"))
+            for selector, host in panels:
+                page.locator(".cards .card " + selector).first.click()
+                page.wait_for_timeout(280)
+                seen = page.evaluate("""(id) => {
+                  const panel = document.getElementById(id);
+                  const shut = panel.querySelector('.pshut');
+                  if (!shut) return { open: !panel.hidden, missing: true };
+                  const before = shut.getBoundingClientRect();
+                  panel.scrollTop = panel.scrollHeight;
+                  const after = shut.getBoundingClientRect();
+                  return {
+                    open: !panel.hidden, missing: false,
+                    w: Math.round(before.width), h: Math.round(before.height),
+                    drifted: Math.round(Math.abs(after.top - before.top)),
+                    inside: after.top >= panel.getBoundingClientRect().top - 1,
+                  };
+                }""", host)
+                where = "%s at 402x684" % selector
+                self.assertTrue(seen["open"], "the panel did not open, " + where)
+                self.assertFalse(seen["missing"],
+                                 "no way to close the panel, " + where)
+                self.assertGreaterEqual(min(seen["w"], seen["h"]), 44,
+                                        "the close control is %dx%d, too small "
+                                        "for a thumb, %s"
+                                        % (seen["w"], seen["h"], where))
+                self.assertEqual(0, seen["drifted"],
+                                 "the way out scrolled away with the panel, "
+                                 + where)
+                self.assertTrue(seen["inside"],
+                                "the close control left the panel, " + where)
+
+                page.locator("#" + host + " .pshut").click()
+                page.wait_for_timeout(240)
+                self.assertTrue(
+                    page.evaluate("(id) => document.getElementById(id).hidden", host),
+                    "pressing close did not close the panel, " + where)
+        finally:
+            page.close()
+
+
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
     unittest.main()

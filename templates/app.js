@@ -3451,8 +3451,47 @@
       peeked = null;
     }
 
+    /* A WAY OUT, BECAUSE A PHONE HAS NO ESCAPE KEY.
+     *
+     * These are dialogs -- every trigger says `aria-haspopup="dialog"` -- and
+     * they were dismissed by Escape, by tapping the trigger again, or by
+     * tapping outside. On a phone the first does not exist and the other two
+     * are under the panel: the bill is 479px tall over a 452px list on a
+     * 402x684 iPhone, so it covers the rows whole and overhangs them. A swipe
+     * in the list then lands on the panel and scrolls *it* -- 270px of bill,
+     * a few rows' worth, and then nothing. That is the whole "the UI flicks
+     * and lets me scroll a few pixels": not a scroller that stopped working,
+     * a dialog with no exit sitting on top of one.
+     *
+     * Built here rather than in each `fill`, for the reason the panels share
+     * `hoverPanel` at all -- three copies of a close button is three that can
+     * differ. `fill` writes `innerHTML`, so this goes in after it and before
+     * `place`, which measures. Sticky rather than absolute: the panel is its
+     * own scroll box and an absolutely placed button scrolls away with the
+     * bill, which is the same bug one layer down. */
+    var bar = document.createElement("div");
+    bar.className = "pbar";
+    var shutButton = document.createElement("button");
+    shutButton.type = "button";
+    shutButton.className = "pshut";
+    shutButton.setAttribute("aria-label", "Close");
+    shutButton.innerHTML = "&times;";
+    bar.appendChild(shutButton);
+    shutButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      var trigger = held || peeked;
+      shut();
+      if (trigger && document.contains(trigger)) {
+        dismissed = trigger;
+        /* Same reason Escape does it: the trigger is inside `.shell`, which
+           scrolls, and putting focus back may not move the rows. */
+        trigger.focus({ preventScroll: true });
+      }
+    });
+
     function show(trigger) {
       if (fill(host, trigger) === false) return;
+      host.insertBefore(bar, host.firstChild);
       place(host, trigger);
       trigger.setAttribute("aria-expanded", "true");
     }
