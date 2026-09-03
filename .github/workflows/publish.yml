@@ -127,11 +127,30 @@ jobs:
         with:
           python-version: "3.11"
 
+      # `path: data` is load-bearing, and leaving it off cost three days of
+      # readings. Every fetching job uploads paths under `data/`, so
+      # upload-artifact@v4 takes `data` as the least common ancestor and makes
+      # it the *root of the archive* -- an artifact of `data/candidate.json`
+      # contains `candidate.json`. Downloaded with no `path:`, that unpacks at
+      # the workspace root, so the crawl's candidate landed at
+      # `./candidate.json` and `promote` went on reading the committed
+      # `data/candidate.json` beside it. Then `git add data site` found the
+      # tracked inputs untouched and the stray copies outside its two paths,
+      # so every run committed a rebuild of yesterday's dataset and reported
+      # "no change to trips, prices or availability" -- a green job, a real
+      # commit, and the fetch thrown away.
+      #
+      # Not one carried input changed between 2026-08-31, when this tail was
+      # introduced, and 2026-09-03: the candidate stood at 08-30 while four
+      # daily refreshes, the PADI read, the deals read and the cabin read all
+      # succeeded. Nothing reported it, because from the outside a discarded
+      # reading and a quiet day are the same commit.
       - name: Take the inputs the fetch produced
         if: inputs.carry != ''
         uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.carry }}
+          path: data
 
       - name: Rebuild the dataset from the branch tip plus those inputs
         run: >
