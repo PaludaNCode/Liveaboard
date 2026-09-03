@@ -2446,15 +2446,21 @@
       rows.push({
         boat: r.boat_name, from: r.first, to: r.last,
         off: r.pct ? r.pct + (r.pct_max ? "–" + r.pct_max : "") + "% off" : null,
-        /* No name, because the seller publishes none: this is a struck-through
-           price on a booking page and not an advertised campaign. A dash here
-           is a fact about the disclosure rather than a hole in the row. */
-        title: null, url: null,
+        /* Whatever PADI calls this run, where it advertises it and `promote`
+           found the two are the same sale. liveaboard.com publishes no name
+           for one at all -- a struck-through price on a booking page is not an
+           advertised campaign -- so an empty list here is a fact about the
+           disclosure rather than a hole in the row. */
+        names: r.offers || [],
         sellers: r.sellers, read: r.read,
         of: r.sailings && r.of ? r.sailings + " of " + r.of : null
       });
     });
     (deals.offers || []).forEach(function (o) {
+      /* Except the ones that only name a run above: `promote` put the campaign
+         name on the row it belongs to, and a second row at the same rate
+         inside the same window read as a second, narrower sale. */
+      if (o.in_run) return;
       rows.push({
         boat: o.boat_name, from: o.start, to: o.end,
         /* The rate where PADI states one, the money where it does not. A "Free
@@ -2462,7 +2468,7 @@
            of its prices by the other would print a discount PADI never
            claimed. */
         off: o.kind === "Discount %" && o.value ? o.value + "% off" : offerSaving(o),
-        title: o.title || null, url: o.url || null,
+        names: o.title ? [{ title: o.title, url: o.url || null }] : [],
         sellers: [1], read: [deals.read], of: null,
         /* One sailing, and it must not read as a window. PADI publishes no
            validity dates with an offer -- only the sailing it advertises it
@@ -2534,8 +2540,13 @@
           "against. It publishes no dates for the offer itself, so this is one " +
           "sailing rather than the window the discount covers.";
       } else if (r.of) {
-        from.title = to.title = r.of + " of this boat’s sailings are " +
-          "discounted, and these are the first and last of them.";
+        /* A window, and it says so because it is one: `promote` splits a run
+           where the discount stops, so every sailing this boat sells between
+           these two dates is cut. It used to be the first and last of
+           everything discounted, which said 03 May to 05 Jul over a boat
+           whose four June weeks were at full price. */
+        from.title = to.title = "Every sailing this boat runs between these " +
+          "two dates is discounted — " + r.of + " that it sells this season.";
       }
       tr.appendChild(from);
       tr.appendChild(to);
@@ -2543,25 +2554,37 @@
         ? el("td", "d-off", r.off)
         : el("td", "d-none", "rate not stated"));
 
-      var offer = el("td", r.title ? "d-offer" : "d-none", "");
-      if (r.title && r.url) {
-        var a = document.createElement("a");
-        a.href = r.url;
-        a.rel = "noopener";
-        a.target = "_blank";
-        a.textContent = r.title;
-        a.title = "The PADI Travel page this offer was read from";
-        offer.appendChild(a);
-      } else if (r.title) {
-        offer.textContent = r.title;
+      var offer = el("td", r.names.length ? "d-offer" : "d-none", "");
+      if (r.names.length) {
+        /* Verbatim, and one per name: a run can carry more than one, the
+           campaign is PADI's, and nothing here decides that two names for it
+           are really one. */
+        r.names.forEach(function (named, n) {
+          if (n) offer.appendChild(document.createTextNode(", "));
+          if (!named.url) {
+            offer.appendChild(document.createTextNode(named.title));
+            return;
+          }
+          var a = document.createElement("a");
+          a.href = named.url;
+          a.rel = "noopener";
+          a.target = "_blank";
+          a.textContent = named.title;
+          a.title = "The PADI Travel page this offer was read from";
+          offer.appendChild(a);
+        });
       } else {
-        /* Verbatim where there is one, and nothing invented where there is
-           not: naming this "sale" would be the page writing the seller's copy
-           for it. */
+        /* Nothing invented where there is no name: calling this "sale" would
+           be the page writing the seller's copy for it. And the reason is the
+           seller's own, so it is stated only where it is that seller -- an
+           unnamed PADI offer is a hole in PADI's listing, not a booking page
+           with nothing struck through. */
         offer.textContent = "—";
-        offer.title = "liveaboard.com publishes no name for it. The discount " +
-          "is a list price struck through beside the one it charges, read off " +
-          "the booking page.";
+        if (!r.exemplar) {
+          offer.title = "liveaboard.com publishes no name for it. The " +
+            "discount is a list price struck through beside the one it " +
+            "charges, read off the booking page.";
+        }
       }
       tr.appendChild(offer);
       tr.appendChild(markedDownBy(r));
@@ -2898,7 +2921,13 @@
       strip.appendChild(box);
     }
     var sale = deals.on_sale || {};
-    var boats = (sale.boats || []).length;
+    /* Boats, not rows. `on_sale.boats` is one row per unbroken run of
+       discounted sailings, so a boat whose discount stops and starts again is
+       two of them -- counting the rows would have said 22 boats over a fleet
+       of 19 that are on sale. */
+    var seen = {};
+    (sale.boats || []).forEach(function (row) { seen[row.boat] = 1; });
+    var boats = Object.keys(seen).length;
     if (sale.sailings) fig(sale.sailings.toLocaleString("en-IE"), "sailings cut");
     if (boats) fig(boats, boats === 1 ? "boat" : "boats");
 

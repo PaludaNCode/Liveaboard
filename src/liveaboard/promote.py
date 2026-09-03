@@ -1185,7 +1185,7 @@ def _on_sale_summary(
     boats: Mapping[str, Mapping[str, Any]],
     read: Mapping[int, str],
 ) -> dict[str, Any] | None:
-    """What is discounted right now, per boat, over the whole season.
+    """What is discounted right now, one row per unbroken run of sailings.
 
     Built from the very departures the page's filter selects, so the panel and
     the chip can never report different fleets -- the failure mode of any
@@ -1197,58 +1197,64 @@ def _on_sale_summary(
     from 31 July, which is the difference between knowing a boat is on sale and
     knowing which week to book.
 
+    Which is why it is a row **per run and not per boat**: a boat whose
+    discount stops and starts again has no single window, and printing the
+    first and last of everything cut claimed the gap was on sale too. See
+    ``_sale_runs``. A boat with a hole in its season is rare -- three of
+    nineteen -- and it is the case the whole field exists to answer.
+
     ``read`` is a date **per seller**, not one for the block. The two books are
     read by different jobs on different days -- 28 and 30 August as this is
     written -- and 10 of the 22 boats here rest partly on PADI's, so a single
     date stamped across the panel dated nearly half of it wrong. It is the rule
     the berth counts already follow, for the same reason and one field along.
     """
-    on_sale = [d for d in departures if d.get("sale")]
-    if not on_sale:
+    if not any(d.get("sale") for d in departures):
         return None
 
-    total: Counter = Counter(boat_of[d["itinerary_id"]] for d in departures)
-    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in on_sale:
-        grouped[boat_of[row["itinerary_id"]]].append(row)
+    fleet: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in departures:
+        fleet[boat_of[row["itinerary_id"]]].append(row)
 
     rows: list[dict[str, Any]] = []
     # By the name the panel prints, not by the id it does not. Sorted on the id
     # this read "Ocean Lovers, Oceanix, MY Odyssey Liveaboard" -- alphabetical
     # in a column nobody can see. The id breaks ties so promotion stays pure.
-    for boat_id, group in sorted(
-        grouped.items(), key=lambda kv: (str(boats[kv[0]]["name"]).lower(), kv[0])
+    for boat_id, sailings in sorted(
+        fleet.items(), key=lambda kv: (str(boats[kv[0]]["name"]).lower(), kv[0])
     ):
-        cuts = sorted({d["sale"]["pct"] for d in group if d["sale"].get("pct")})
-        starts = sorted(d["start"] for d in group)
-        row: dict[str, Any] = {
-            "boat": boat_id,
-            "boat_name": str(boats[boat_id]["name"]),
-            "sailings": len(group),
-            "of": total[boat_id],
-            "first": starts[0],
-            "last": starts[-1],
-            "sellers": sorted({s for d in group for s in d["sale"]["sellers"]}),
-        }
-        # The day each of those sellers was read, in the order they are named,
-        # so the panel can print who said it and when without the page having
-        # to know which book came from which job.
-        #
-        # One entry per seller, `None` included. Filtering the undated ones out
-        # left a shorter list beside a full `sellers`, and the two are read in
-        # lockstep -- so a seller with no reading date would have shifted every
-        # date after it onto the wrong seller's name. That is the one thing this
-        # pair exists to prevent, and it cannot happen to a list that keeps its
-        # own holes.
-        row["read"] = [read.get(s) for s in row["sellers"]]
-        # A range only where the boat really runs more than one, which is rare:
-        # an operator discounts a season, not a sailing. Printing "10–10%"
-        # everywhere to accommodate the exception is noise on every other row.
-        if cuts:
-            row["pct"] = cuts[0]
-            if cuts[-1] != cuts[0]:
-                row["pct_max"] = cuts[-1]
-        rows.append(row)
+        sailings.sort(key=lambda d: (d["start"], d["id"]))
+        for group in _sale_runs(sailings):
+            cuts = sorted({d["sale"]["pct"] for d in group if d["sale"].get("pct")})
+            row: dict[str, Any] = {
+                "boat": boat_id,
+                "boat_name": str(boats[boat_id]["name"]),
+                "sailings": len(group),
+                "of": len(sailings),
+                "first": group[0]["start"],
+                "last": group[-1]["start"],
+                "sellers": sorted({s for d in group for s in d["sale"]["sellers"]}),
+            }
+            # The day each of those sellers was read, in the order they are
+            # named, so the panel can print who said it and when without the
+            # page having to know which book came from which job.
+            #
+            # One entry per seller, `None` included. Filtering the undated ones
+            # out left a shorter list beside a full `sellers`, and the two are
+            # read in lockstep -- so a seller with no reading date would have
+            # shifted every date after it onto the wrong seller's name. That is
+            # the one thing this pair exists to prevent, and it cannot happen to
+            # a list that keeps its own holes.
+            row["read"] = [read.get(s) for s in row["sellers"]]
+            # A range only where the run really carries more than one, which is
+            # rare: an operator discounts a season, not a sailing. Printing
+            # "10-10%" everywhere to accommodate the exception is noise on every
+            # other row.
+            if cuts:
+                row["pct"] = cuts[0]
+                if cuts[-1] != cuts[0]:
+                    row["pct_max"] = cuts[-1]
+            rows.append(row)
 
     return {
         # The day each seller's book was read. The most perishable thing on the
@@ -1257,9 +1263,97 @@ def _on_sale_summary(
         # overnight. Keyed by seller, and the panel's own heading takes the
         # oldest of them -- a summary is only as fresh as its stalest half.
         "read": {str(seller): day for seller, day in sorted(read.items()) if day},
-        "sailings": len(on_sale),
+        "sailings": sum(1 for d in departures if d.get("sale")),
         "boats": rows,
     }
+
+
+def _name_the_runs(
+    offers: list[dict[str, Any]],
+    on_sale: Mapping[str, Any] | None,
+) -> None:
+    """Give a run the name PADI publishes for it, rather than a second row.
+
+    The sale table is the union of two books because they publish different
+    shapes -- liveaboard.com strikes a list price through beside every
+    discounted cabin, so its evidence is a *run* of sailings; PADI advertises a
+    named offer against one sailing and states no window for it (#145). What
+    that union did not account for is that a run row's ``sellers`` is drawn
+    from the departures, and **both** books feed those. So where PADI marks a
+    sailing down and advertises the same campaign, it spoke twice: "Hammerhead
+    II, 01 May to 28 Aug, 15% off, liveaboard.com and padi.com" sat above
+    "Hammerhead II, 15 to 18 May, 15% off, padi.com", the second nested inside
+    the first at the same rate, reading as a second and narrower sale. All
+    eight offers on this fleet did it.
+
+    So an offer is folded onto a run only where it is a **restatement** of that
+    run and not a fact of its own -- the run already names PADI, already states
+    a rate PADI's own falls within, and the sailing it advertises is inside the
+    window. Then the campaign name is the one thing PADI adds, and it goes in
+    the run's ``offers`` where the row it explains is.
+
+    Anything failing any of those keeps its own row: a rate the run does not
+    state is the two books disagreeing about a sailing, an offer PADI states
+    with no percentage at all ("Free night(s)") takes nothing off a nightly
+    rate and is not a markdown, and a sailing outside every run is a sale the
+    other seller's booking pages do not carry. Marked rather than removed, so
+    the deals book keeps every offer it read and the day-to-day diff above it
+    still has all of them to compare.
+    """
+    runs = list((on_sale or {}).get("boats") or [])
+    if not runs or not offers:
+        return
+    padi = SELLERS.index("padi.com")
+    for offer in offers:
+        # Only a percentage can restate a run. PADI's other kinds take nothing
+        # off a nightly rate, so there is no figure to match and nothing to
+        # call a duplicate.
+        if offer.get("kind") != "Discount %" or not offer.get("value"):
+            continue
+        rate = int(round(float(offer["value"])))
+        for run in runs:
+            if run["boat"] != offer["boat"] or padi not in run["sellers"]:
+                continue
+            if run.get("pct") is None:
+                continue
+            if not run["pct"] <= rate <= run.get("pct_max", run["pct"]):
+                continue
+            if not (offer["start"] and run["first"] <= offer["start"] <= run["last"]):
+                continue
+            run.setdefault("offers", []).append(
+                {"title": offer.get("title"), "url": offer.get("url")}
+            )
+            offer["in_run"] = True
+            break
+
+
+def _sale_runs(sailings: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    """One boat's discounted sailings, split where the discount stops.
+
+    **`first` and `last` are printed under From and To, so they have to be a
+    window.** They were the first and last of everything discounted, which is a
+    window only where the run has no holes in it -- and three boats have one.
+    All Star Scuba Scene's read "03 May to 05 Jul" over a season whose four
+    June sailings are at full price: a reader shopping that month was told a
+    fifth of the boat's year was cut when none of that month was. The tooltip
+    admitted it said first-and-last; the columns did not, and a heading beats a
+    hover.
+
+    Split on the boat's *own* departure list rather than on the calendar, so a
+    fortnight between two consecutive sailings is not a hole and a cancelled
+    week is not one either: what makes a window true is that every sailing this
+    boat sells inside it is discounted, which is exactly the claim a reader
+    reads off From and To.
+    """
+    runs: list[list[dict[str, Any]]] = []
+    for sailing in sailings:
+        if not sailing.get("sale"):
+            runs.append([])
+            continue
+        if not runs:
+            runs.append([])
+        runs[-1].append(sailing)
+    return [run for run in runs if run]
 
 
 def _cut(price: float, was: float) -> int:
@@ -2743,6 +2837,10 @@ def promote(
     )
     if on_sale:
         deals_block["on_sale"] = on_sale
+    # And where PADI's listing only names a run this already carries, the name
+    # goes on the run rather than into a row of its own: the two books publish
+    # different shapes, not two sales.
+    _name_the_runs(deals_block.get("offers") or [], on_sale)
     # Beside the summary rather than inside it, because the day every sale on
     # the fleet ends is the day there is no summary to hang it off -- and it is
     # also the day the change log is the only thing left worth printing.

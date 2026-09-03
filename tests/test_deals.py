@@ -33,6 +33,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
+import published  # noqa: E402
 from fetch_deals import prune, season_months  # noqa: E402
 from liveaboard.dataset import Dataset  # noqa: E402
 from liveaboard.promote import promote  # noqa: E402
@@ -639,6 +640,260 @@ class TestTheEdgesOfASale(unittest.TestCase):
         sale = only_row(payload)["sale"]
         self.assertEqual(sale["pct"], 10)
         self.assertNotIn("was", sale)
+
+
+def week(start: str, price: float, boat: str = "alia-soul") -> dict:
+    """One weekly sailing. The end date is derived, never pinned: a fixed one
+    behind a later start is a negative night count and `promote` drops the row
+    rather than publishing a trip that arrives before it leaves."""
+    finish = (date.fromisoformat(start) + timedelta(days=7)).isoformat()
+    return departure(boat=boat, start=start, end=finish, price=price)
+
+
+WEEKS = ("2027-05-01", "2027-05-08", "2027-05-15", "2027-05-22")
+
+
+def season_of(discounted, weeks=WEEKS, **kwargs) -> dict:
+    """One boat's season, discounted on the weeks named and not on the others.
+
+    A ladder only where there is a sale, and its bottom rung is the row's own
+    price -- the rule `_drop_stale_ladder` enforces, so a fixture that ignores
+    it is testing a ladder `promote` has thrown away.
+    """
+    return promote(
+        candidate([week(start, price=900.0 if start in discounted else 1000.0)
+                   for start in weeks]),
+        season=SEASON,
+        cabins=cabin_book(*[ladder(("Twin", 900.0, 1000.0), start=start)
+                            for start in discounted]),
+        **kwargs,
+    )
+
+
+class TestARunIsAWindow(unittest.TestCase):
+    """`first` and `last` are printed under From and To, so they are a window.
+
+    They were the first and last of everything a boat had discounted, which is
+    a window only where nothing in between is at full price. Three boats in the
+    published season have a hole: All Star Scuba Scene's row read "03 May to 05
+    Jul" over four June sailings nobody had marked down, so a reader shopping
+    June was told a fifth of that boat's year was cut when none of that month
+    was. The hover said first-and-last; the column headings said From and To,
+    and a heading beats a hover.
+    """
+
+    def _rows(self, discounted, **kwargs):
+        return season_of(discounted, **kwargs)["deals"]["on_sale"]["boats"]
+
+    def test_an_unbroken_run_is_one_row(self):
+        rows = self._rows(WEEKS)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual((rows[0]["first"], rows[0]["last"]), (WEEKS[0], WEEKS[-1]))
+        self.assertEqual((rows[0]["sailings"], rows[0]["of"]), (4, 4))
+
+    def test_a_discount_that_stops_and_starts_again_is_two_rows(self):
+        rows = self._rows((WEEKS[0], WEEKS[1], WEEKS[3]))
+        self.assertEqual(
+            [(r["first"], r["last"], r["sailings"]) for r in rows],
+            [(WEEKS[0], WEEKS[1], 2), (WEEKS[3], WEEKS[3], 1)],
+        )
+
+    def test_every_row_still_counts_against_the_whole_season(self):
+        """`of` is what the boat sells, not what this run covers: two rows
+        reading "2 of 4" and "1 of 4" is the denominator a reader asked for."""
+        rows = self._rows((WEEKS[0], WEEKS[1], WEEKS[3]))
+        self.assertEqual({r["of"] for r in rows}, {4})
+        self.assertEqual(sum(r["sailings"] for r in rows), 3)
+
+    def test_no_sailing_inside_a_window_is_at_full_price(self):
+        """The claim the two dates make, asserted as a claim.
+
+        Every row of every shape this fixture can produce: whatever falls
+        between `first` and `last` is discounted, which is what lets the page
+        print those two dates as a window at all.
+        """
+        for hole in ((), (WEEKS[1],), (WEEKS[1], WEEKS[2]), (WEEKS[2],)):
+            discounted = [w for w in WEEKS if w not in hole]
+            with self.subTest(full_price=hole):
+                payload = season_of(discounted)
+                inside = {
+                    d["start"]: bool(d.get("sale"))
+                    for row in payload["deals"]["on_sale"]["boats"]
+                    for d in payload["departures"]
+                    if row["first"] <= d["start"] <= row["last"]
+                }
+                self.assertTrue(inside)
+                self.assertTrue(all(inside.values()), inside)
+
+    def test_the_sailing_count_is_still_the_departures_the_filter_selects(self):
+        """One row per run, and the total is unchanged by the split: it counts
+        discounted sailings, not rows."""
+        payload = season_of((WEEKS[0], WEEKS[1], WEEKS[3]))
+        self.assertEqual(payload["deals"]["on_sale"]["sailings"], 3)
+
+
+class TestAnOfferThatOnlyNamesARun(unittest.TestCase):
+    """PADI speaking twice about one sale is not two sales.
+
+    The table is the union of two books because they publish different shapes
+    (#145) -- liveaboard.com strikes a list price through beside every
+    discounted cabin, so its evidence is a run of sailings; PADI advertises a
+    named offer against one sailing and states no window for it. But a run
+    row's `sellers` comes from the departures and **both** books feed those, so
+    where PADI marks a sailing down and advertises the same campaign it got a
+    row of its own as well: "Hammerhead II, 01 May to 28 Aug, 15% off,
+    liveaboard.com and padi.com" above "Hammerhead II, 15 to 18 May, 15% off,
+    padi.com". Nested, same rate, reading as a second and narrower sale -- all
+    eight offers on the published fleet did it.
+
+    So a restatement is folded and a fact of its own is not, and the three
+    conditions are what separate them.
+    """
+
+    def _promoted(self, *, offer_kwargs=None, padi_was=1000.0, discounted=WEEKS):
+        offer = dict(start=WEEKS[0], end=WEEKS[1], value=10.0, title="Save 10%")
+        offer.update(offer_kwargs or {})
+        return season_of(
+            discounted,
+            padi=PADI,
+            deals=book({"2026-08-29": day([deal(**offer)])}),
+            padi_departures=padi_book(*[
+                sailing(start=start, price=900.0, was=padi_was) for start in discounted
+            ]) if padi_was else None,
+        )
+
+    def _rows(self, payload):
+        return payload["deals"]["on_sale"]["boats"]
+
+    def test_the_run_takes_padi_s_name_for_it(self):
+        payload = self._promoted()
+        rows = self._rows(payload)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual([o["title"] for o in rows[0]["offers"]], ["Save 10%"])
+        self.assertTrue(rows[0]["offers"][0]["url"])
+
+    def test_the_offer_is_marked_rather_than_deleted(self):
+        """The deals book keeps everything it read: the day-to-day diff above
+        the table needs every offer, folded or not."""
+        payload = self._promoted()
+        offers = payload["deals"]["offers"]
+        self.assertEqual(len(offers), 1)
+        self.assertTrue(offers[0]["in_run"])
+
+    def test_a_rate_the_run_does_not_state_keeps_its_own_row(self):
+        """Two books disagreeing about a sailing is a fact, not a duplicate."""
+        payload = self._promoted(offer_kwargs={"value": 30.0, "price": 700.0})
+        self.assertNotIn("offers", self._rows(payload)[0])
+        self.assertNotIn("in_run", payload["deals"]["offers"][0])
+
+    def test_a_sailing_outside_every_window_keeps_its_own_row(self):
+        """A sale the other seller's booking pages do not carry."""
+        payload = self._promoted(discounted=WEEKS[:2],
+                                 offer_kwargs={"start": WEEKS[3], "end": WEEKS[3]})
+        self.assertFalse(any("offers" in r for r in self._rows(payload)))
+        self.assertNotIn("in_run", payload["deals"]["offers"][0])
+
+    def test_a_run_padi_did_not_mark_down_keeps_the_offer_separate(self):
+        """Folded only where the row already names PADI. Otherwise the fold
+        would be putting one seller's campaign on the other's evidence, which
+        is the join #145 refused."""
+        payload = self._promoted(padi_was=None)
+        row = self._rows(payload)[0]
+        self.assertEqual(row["sellers"], [0])
+        self.assertNotIn("offers", row)
+        self.assertNotIn("in_run", payload["deals"]["offers"][0])
+
+    def test_an_offer_with_no_rate_is_never_folded(self):
+        """"Free night(s)" takes nothing off a nightly rate, so there is no
+        figure to call a restatement of the run's own."""
+        payload = self._promoted(offer_kwargs={"kind": 30, "value": 0.0,
+                                               "title": "Free night(s)"})
+        self.assertNotIn("offers", self._rows(payload)[0])
+        self.assertNotIn("in_run", payload["deals"]["offers"][0])
+
+
+class TestTheShippedSaleRows(unittest.TestCase):
+    """The two claims the sale table makes, asserted against what shipped.
+
+    Through `published`, because both are facts about a committed dataset: read
+    directly they would sit in front of the fetches and could stop the only
+    jobs able to correct whatever they were complaining about.
+    """
+
+    def setUp(self):
+        self.page = published.raw()
+        self.deals = self.page.get("deals") or {}
+        if not (self.deals.get("on_sale") or {}).get("boats"):
+            self.skipTest("nothing is discounted in the committed dataset")
+        boat_of = {i["id"]: i["boat_id"] for i in self.page["itineraries"]}
+        self.by_boat: dict[str, list[dict]] = {}
+        for row in self.page["departures"]:
+            self.by_boat.setdefault(boat_of[row["itinerary_id"]], []).append(row)
+
+    def test_no_full_price_sailing_falls_inside_a_published_window(self):
+        """From and To are a window, so what is between them is on sale.
+
+        All Star Scuba Scene shipped "03 May to 05 Jul" over four June
+        sailings at €2,395 with nothing off them.
+        """
+        for run in self.deals["on_sale"]["boats"]:
+            inside = [d for d in self.by_boat[run["boat"]]
+                      if run["first"] <= d["start"] <= run["last"]]
+            with self.subTest(boat=run["boat_name"], window=(run["first"], run["last"])):
+                self.assertEqual(len(inside), run["sailings"])
+                self.assertEqual(
+                    [d["start"] for d in inside if not d.get("sale")], [],
+                    "a sailing at full price sits inside a window the page "
+                    "prints as discounted",
+                )
+
+    def test_no_two_windows_for_one_boat_overlap(self):
+        """Runs are maximal and disjoint, so two rows for a boat are two
+        separate spells and never one restated."""
+        seen: dict[str, list[tuple[str, str]]] = {}
+        for run in self.deals["on_sale"]["boats"]:
+            seen.setdefault(run["boat"], []).append((run["first"], run["last"]))
+        for boat, windows in seen.items():
+            windows.sort()
+            for (_, ends), (starts, _) in zip(windows, windows[1:]):
+                with self.subTest(boat=boat):
+                    self.assertLess(ends, starts)
+
+    def test_no_offer_is_both_folded_and_drawn_on_its_own(self):
+        """The duplicate this fold removes, asserted at the shipped end.
+
+        A folded offer names a run; an unfolded one is a row. Every offer is
+        exactly one of the two, and an offer marked folded has to have landed
+        on a run or the campaign name is nowhere at all.
+        """
+        named = [
+            offer["title"]
+            for run in self.deals["on_sale"]["boats"]
+            for offer in run.get("offers") or []
+        ]
+        folded = [o["title"] for o in self.deals.get("offers") or [] if o.get("in_run")]
+        self.assertEqual(sorted(named), sorted(folded))
+
+    def test_a_folded_offer_restates_the_run_it_names(self):
+        """The three conditions, at the shipped end: same boat, PADI already on
+        the row, PADI's own rate inside the row's, and the advertised sailing
+        inside the window."""
+        padi = 1
+        runs = {(r["boat"], r["first"]): r for r in self.deals["on_sale"]["boats"]}
+        for offer in self.deals.get("offers") or []:
+            if not offer.get("in_run"):
+                continue
+            hosts = [r for key, r in runs.items() if key[0] == offer["boat"]
+                     and any(o["title"] == offer["title"] for o in r.get("offers") or [])]
+            with self.subTest(boat=offer["boat_name"], offer=offer["title"]):
+                self.assertEqual(len(hosts), 1)
+                run = hosts[0]
+                self.assertIn(padi, run["sellers"])
+                self.assertLessEqual(run["pct"], round(offer["value"]))
+                self.assertLessEqual(round(offer["value"]),
+                                     run.get("pct_max", run["pct"]))
+                self.assertLessEqual(run["first"], offer["start"])
+                self.assertLessEqual(offer["start"], run["last"])
 
 
 class TestTheSummaryReadsInOrder(unittest.TestCase):

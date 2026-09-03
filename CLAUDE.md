@@ -458,7 +458,35 @@ Break these and the site starts lying quietly rather than failing loudly.
   that row's dates are one sailing and the cell says so. A row per sale states
   each as what it is, sorted by boat so a boat both sellers discount shows two
   rows rather than one asserting a join nobody made — and the union is
-  structural, because a table keyed on either book drops the other's. The
+  structural, because a table keyed on either book drops the other's.
+  **But a run row's `sellers` is drawn from the departures, and both books feed
+  those**, which is not what "two rows, one per book" assumed: where PADI marks
+  a sailing down *and* advertises the same campaign, it spoke twice — 15% off
+  01 May to 28 Aug from liveaboard.com and PADI, above 15% off 15 to 18 May
+  from PADI, nested at the same rate and reading as a second, narrower sale.
+  All eight offers on this fleet did it. So `_name_the_runs` folds an offer
+  onto a run only where it **restates** it — the row already names PADI, the
+  rate falls inside the one the row states, and the advertised sailing is
+  inside the window — and then the campaign name is all PADI adds and goes in
+  the run's `offers`. Anything failing one of those three keeps its own row,
+  because it is a fact and not a duplicate: a rate the run does not state is
+  the two books disagreeing about a sailing, an offer with no percentage
+  ("Free night(s)") takes nothing off a nightly rate, and a sailing outside
+  every window is a sale the booking pages do not carry. Marked (`in_run`)
+  rather than dropped, so the day-to-day diff above the table still has every
+  offer to compare.
+  **And `first`/`last` print under From and To, so they are a window rather
+  than the ends of a list.** They were the first and last of everything a boat
+  had discounted, which is a window only where nothing in between is at full
+  price — and three boats have a hole. All Star Scuba Scene read *03 May to 05
+  Jul* over four June sailings at €2,395 with nothing off, so a reader shopping
+  June was told a boat's whole early season was cut when none of that month
+  was; the hover admitted it said first-and-last and the headings did not. So
+  `_on_sale_summary` emits one row **per unbroken run** — split on the boat's
+  own departure list rather than on the calendar, because what makes the two
+  dates true is that every sailing this boat sells between them is discounted,
+  and a fortnight between two consecutive sailings is not a hole. 19 boats,
+  22 rows: `saleStrip` counts the boats and not the rows. The
   second section is the 229 discounted sailings themselves, deepest first,
   which were reachable only by holding the On sale chip down over the trips
   table. **Three paragraphs of reasoning came off the top of it**, and the
