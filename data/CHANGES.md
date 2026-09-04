@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-03
 ===========================
 
+nothing moved.
+```
+
+## 2026-09-03
+
+```
+changes: HEAD -> 2026-09-03
+===========================
+
 new departures (57)
   2027-05-06  Blue Storm             St. John's                             1,564 USD
   2027-05-07  Iceberg                Overnight Diving & Snorkelling         209 USD
