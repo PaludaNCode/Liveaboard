@@ -247,9 +247,26 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
 
     months = sorted({d["month"] for d in departures})
 
+    # THE DAY THE DATA WAS READ, AND THE ONLY DAY THIS FUNCTION KNOWS.
+    #
+    # `render` is pure -- the same committed inputs must build the same page
+    # tomorrow, because CI compares the shipped page against a fresh render of
+    # the data beside it. Two fields reached for `date.today()` instead and
+    # made that false: on 2026-09-04 the rate's `age_days` ticked 0 to 1 at
+    # midnight UTC and `main` went red with nobody having changed anything.
+    # The history view learned this rule already (`recent_entries` measures
+    # from the newest entry in the log, never from today); the rate's age had
+    # not.
+    #
+    # `generated` is the crawl's own `scraped_at`, so it is a fact in the data
+    # rather than a reading of the clock, and `None` where the dataset states
+    # no reading day at all -- in which case there is no anchor and nothing
+    # honest to say, so these fields say nothing.
+    read_on = dataset.generated
+
     return {
         "meta": {
-            "generated": (dataset.generated or date.today()).isoformat(),
+            "generated": read_on.isoformat() if read_on else None,
             # When this page was rendered, to the minute, in UTC.
             #
             # Distinct from `generated`, which is the day the *data* was
@@ -277,8 +294,18 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 # Sourced but no longer refreshed is a third state. The fetcher
                 # keeps the last good rate when a fetch fails, so a broken feed
                 # looks exactly like a quiet one unless the date is watched.
-                "age_days": dataset.fx.age_days(),
-                "stale": dataset.fx.is_stale(),
+                #
+                # Measured against the day the data was read and not against
+                # the build's clock. The page is static, so whichever day is
+                # used the number is frozen the moment it ships -- it was never
+                # current for the reader either way. What the anchor decides is
+                # whether the same inputs render the same page tomorrow, and
+                # whether the sentence beside the figure is true: the rate was
+                # this many days old *when this data was gathered*, which is a
+                # claim about the dataset the reader is looking at rather than
+                # about a runner's calendar they cannot see.
+                "age_days": dataset.fx.age_days(read_on) if read_on else None,
+                "stale": bool(read_on) and dataset.fx.is_stale(read_on),
             },
             # The day the berth counts were read. On the page beside every
             # count, because a count without its date is presented as a fact

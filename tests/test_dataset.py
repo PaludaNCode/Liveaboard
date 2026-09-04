@@ -2434,6 +2434,70 @@ class TestThePageIsWhatItsDataBuilds(unittest.TestCase):
             )
 
 
+class TestRenderHasNoClock(unittest.TestCase):
+    """The same committed inputs must build the same page tomorrow.
+
+    They did not. `render` read `date.today()` twice — once for `generated`'s
+    fallback and once for the rate's `age_days` — so at midnight UTC on
+    2026-09-04 the age ticked 0 to 1 and `TestThePageIsWhatItsDataBuilds`
+    failed with nobody having changed anything. Red every day between the
+    rollover and the next `fx.yml` commit, and invisible until a human opened
+    a PR, because scheduled data commits push with `GITHUB_TOKEN` and GitHub
+    does not run workflows on those.
+
+    The history view learned this rule once already — `recent_entries`
+    measures its window from the newest entry in the log, never from today —
+    and the note in `render` saying so sat forty lines above a call that did
+    the opposite.
+
+    So this drives the clock rather than trusting the fix: render the
+    committed dataset on two dates a year apart and require byte-identical
+    output but for the build stamp, which is the one field allowed to say when
+    it ran. Patching `date.today` in both modules is deliberate even though
+    neither should call it now — a reintroduced clock is exactly what has to
+    fail here, and a test that only checked today's two fields would pass over
+    the third one somebody adds.
+    """
+
+    STAMP = re.compile(r'"built":"[^"]*"')
+
+    def _render_on(self, day, tmp):
+        from datetime import date as _date
+        from unittest import mock
+
+        from liveaboard import money, render as render_mod
+
+        class Frozen(_date):
+            @classmethod
+            def today(cls):
+                return day
+
+        with mock.patch.object(money, "date", Frozen), \
+                mock.patch.object(render_mod, "date", Frozen):
+            page = render_mod.render(published.dataset(), tmp,
+                                     data_dir=published.DATA)
+            return self.STAMP.sub("", page.read_text(encoding="utf-8"))
+
+    def test_the_page_is_the_same_whatever_day_it_is_built_on(self):
+        import tempfile
+        from datetime import date as _date
+
+        with tempfile.TemporaryDirectory() as one, \
+                tempfile.TemporaryDirectory() as two:
+            early = self._render_on(_date(2026, 1, 2), one)
+            late = self._render_on(_date(2027, 1, 2), two)
+
+        if early != late:
+            i = next((k for k in range(min(len(early), len(late)))
+                      if early[k] != late[k]), min(len(early), len(late)))
+            self.fail(
+                "render read the clock: the same data builds two different "
+                "pages a year apart.\n"
+                f"  2026-01-02: ...{early[max(0, i - 90):i + 90]}\n"
+                f"  2027-01-02: ...{late[max(0, i - 90):i + 90]}"
+            )
+
+
 class TestThePublishTailDoesNotQueueOnConcurrency(unittest.TestCase):
     """`publish.yml` must not carry a `concurrency` group.
 

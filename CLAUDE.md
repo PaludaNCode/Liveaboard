@@ -1278,6 +1278,34 @@ Break these and the site starts lying quietly rather than failing loudly.
   FX move is not a reprice, a vessel losing *every* departure is a failed fetch
   and not a cancelled season, a newly parsed field has not changed, and a
   currency switch is not a price move.
+- **`render` has no clock, and the rule is enforced rather than noted.** The
+  same committed inputs must build the same page tomorrow, because CI compares
+  the shipped page against a fresh render of the data beside it
+  (`TestThePageIsWhatItsDataBuilds`, which normalises the build stamp and
+  nothing else). Two fields read `date.today()` anyway — `generated`'s
+  fallback, and the FX rate's `age_days`/`stale` — so at midnight UTC on
+  2026-09-04 the rate's age ticked 0 to 1 and **`main` went red with nobody
+  having changed anything**. Red every day between the rollover and the next
+  `fx.yml` commit, and invisible until a human opened a PR, because scheduled
+  data commits push with `GITHUB_TOKEN` and GitHub does not run workflows on
+  those. The history view had already learned this once — `recent_entries`
+  measures its window from the newest entry in the log, never from today — and
+  the comment saying so sat forty lines above a call doing the opposite.
+  The anchor is `dataset.generated`, the crawl's own `scraped_at`: a fact in
+  the data rather than a reading of a runner's calendar, and `None` where the
+  dataset states no reading day, in which case there is no anchor and the
+  fields say nothing. **Nothing is lost by it.** The page is static, so the
+  figure was frozen the moment it shipped whichever day was used — it was never
+  current for the reader either way. What the anchor decides is whether the
+  build is reproducible, and whether the sentence beside the number is true:
+  the page says *this many days before this data was read* now, because that is
+  what the figure measures. `FxTable.age_days` and `is_stale` **take the day as
+  a required argument** — the default was `date.today()` and exactly one caller
+  relied on it, so omitting it is a `TypeError` rather than a silent impurity.
+  `TestRenderHasNoClock` drives the clock rather than trusting the fix: it
+  renders the committed dataset on two dates a year apart with `date` patched
+  in both modules and requires byte-identical output but for the stamp, so a
+  clock reintroduced in a *third* field fails here too.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
 - **The committed dataset must match what `promote` produces from the committed

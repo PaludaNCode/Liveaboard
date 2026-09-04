@@ -2396,9 +2396,14 @@
       var old = el("div", "notice");
       old.appendChild(el("strong", null, "The exchange rate is out of date"));
       old.appendChild(document.createTextNode(
+        /* "days before this data was read" and not "days ago": the figure is
+           measured against the day the crawl ran, because a static page whose
+           age was measured against a build clock renders differently tomorrow
+           from the same inputs. Frozen either way the moment it ships -- what
+           changes is whether the sentence is true. */
         "Dollar prices are converted at the rate published on " + fx.as_of +
-        ", " + fx.age_days + " days ago. It is a real rate, but currencies have " +
-        "moved since, so euro totals may be off."));
+        ", " + fx.age_days + " days before this data was read. It is a real " +
+        "rate, but currencies have moved since, so euro totals may be off."));
       host.appendChild(old);
     }
   }

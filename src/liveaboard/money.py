@@ -142,13 +142,23 @@ class FxTable:
     A week means the fetch has been failing rather than resting.
     """
 
-    def age_days(self, today: date | None = None) -> int | None:
+    def age_days(self, today: date) -> int | None:
+        """How old this rate was on ``today``, which the caller must supply.
+
+        There is deliberately no default. It used to be ``date.today()`` and
+        exactly one caller relied on it -- `render`, which is required to be
+        pure: the same committed inputs must build the same page tomorrow, or
+        `main` goes red at midnight with nobody having changed anything, which
+        is what happened on 2026-09-04. Every other caller already passed a
+        date. A clock reachable by omission is a clock something will omit, so
+        the omission is now a `TypeError` rather than a silent impurity.
+        """
         as_of = self.as_of
         if as_of is None:
             return None
-        return ((today or date.today()) - as_of).days
+        return (today - as_of).days
 
-    def is_stale(self, today: date | None = None) -> bool:
+    def is_stale(self, today: date) -> bool:
         """A sourced rate that has stopped being refreshed.
 
         Distinct from unsourced: this one came from somewhere real, it is just
