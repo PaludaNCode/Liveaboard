@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-04",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 646 of 1145 sailings and the entry bar on 184 of 416 trips; where the two disagree about the bar the stricter is shown. On 190 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 646 of 1145 sailings and the entry bar on 185 of 416 trips; where the two disagree about the bar the stricter is shown. On 190 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-03",
@@ -13153,13 +13153,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
@@ -13352,13 +13352,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -13671,13 +13672,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "brothers"
       ],
       "region": null,
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
@@ -13868,7 +13869,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -14182,217 +14192,14 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "daedalus",
-        "zabargad",
-        "rocky island"
-      ],
-      "region": null,
-      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
-      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
-      "fees": [
-        {
-          "code": "combined_fees",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 290.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 320.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
-        },
-        {
-          "code": "gratuities",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Gratuities: listed with no price"
-        },
-        {
-          "code": "alcohol",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 3.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
-        },
-        {
-          "code": "nitrox_course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 150.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 190.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Nitrox Course\" as a range"
-        },
-        {
-          "code": "course",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 90.0,
-            "currency": "EUR"
-          },
-          "amount_max": {
-            "amount": 250.0,
-            "currency": "EUR"
-          },
-          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
-        },
-        {
-          "code": "snorkel_gear",
-          "tier": "optional",
-          "basis": "per_trip",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkel Gear: listed with no price"
-        },
-        {
-          "code": "tax_vat",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "VAT: stated as included"
-        },
-        {
-          "code": "airport_transfer",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Airport Transfer: stated as included"
-        },
-        {
-          "code": "nitrox",
-          "tier": "conditional",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Nitrox: stated as included"
-        },
-        {
-          "code": "naturalist_guide",
-          "tier": "mandatory",
-          "basis": "per_trip",
-          "included": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": null,
-          "note": "Snorkeling Guide: stated as included"
-        },
-        {
-          "code": "gear_rental",
-          "tier": "optional",
-          "included": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "liveaboard.com",
-            "retrieved": "2026-09-04",
-            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
-          },
-          "amount": {
-            "amount": 135.0,
-            "currency": "EUR"
-          },
-          "basis": "per_week",
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
-        }
-      ]
-    },
-    {
-      "id": "blue--north-brothers-hurghada-hurghada",
-      "name": "North & Brothers (Hurghada - Hurghada)",
-      "title": "North & Brothers",
-      "operator_id": "blue-planet-liveaboards",
-      "boat_id": "blue",
-      "nights": 7,
-      "dives": 17,
-      "port_from": "Hurghada",
-      "port_to": "Hurghada",
-      "dive_sites": [
-        "brothers"
+        "elphinstone",
+        "rocky island",
+        "zabargad"
       ],
       "region": null,
       "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
@@ -14585,13 +14392,230 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
       },
+      "dives_read": true
+    },
+    {
+      "id": "blue--north-brothers-hurghada-hurghada",
+      "name": "North & Brothers (Hurghada - Hurghada)",
+      "title": "North & Brothers",
+      "operator_id": "blue-planet-liveaboards",
+      "boat_id": "blue",
+      "nights": 7,
+      "dives": 18,
+      "port_from": "Hurghada",
+      "port_to": "Hurghada",
+      "dive_sites": [
+        "abu nuhas",
+        "brothers",
+        "thistlegorm",
+        "gubal"
+      ],
+      "region": null,
+      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 290.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 320.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 3.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkeling Guide: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-04",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
+      },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -14995,12 +15019,13 @@
       "operator_id": "blue-planet-liveaboards",
       "boat_id": "blue",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "zabargad",
         "st johns",
+        "elphinstone",
+        "zabargad",
         "rocky island"
       ],
       "region": null,
@@ -15192,7 +15217,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "blue--st-johns-port-ghalib-port-ghalib",
@@ -36182,12 +36216,16 @@
       "operator_id": "discovery-divers",
       "boat_id": "discovery-ii",
       "nights": 7,
-      "dives": 18,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "abu nuhas",
+        "gubal",
+        "sha'ab el erg",
+        "ras mohammed",
         "tiran",
-        "ras mohammed"
+        "thistlegorm"
       ],
       "region": null,
       "summary": "Red Sea adventure awaits! Discovery II explores Egypt's iconic dive sites and untouched treasures",
@@ -36428,8 +36466,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": null
+        "notes": "Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -97049,13 +97088,17 @@
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "salem express",
+        "ras disha",
+        "middle reef",
+        "panorama reef"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Sinaistar&mdash;13 cabins, spacious dive deck, sun deck, and weekly trips from Hurghada.",
@@ -97237,7 +97280,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sinaistar--north-reefs-wrecks-and-tiran-hurghada-hurghada",
@@ -97665,11 +97717,21 @@
       "operator_id": "ambassador-liveaboards-company",
       "boat_id": "sinaistar",
       "nights": 7,
-      "dives": 0,
+      "dives": 19,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "thistlegorm",
+        "abu nuhas",
+        "brothers",
+        "ras mohammed",
+        "gubal",
+        "ras disha",
+        "safaga",
+        "panorama reef",
+        "salem express",
+        "middle reef",
+        "tobia arbaa"
       ],
       "region": null,
       "summary": "Dive the Red Sea aboard the Sinaistar&mdash;13 cabins, spacious dive deck, sun deck, and weekly trips from Hurghada.",
@@ -97851,7 +97913,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sindalahs--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -176860,10 +176931,10 @@
     }
   },
   "entry_bar": {
-    "both": 148,
-    "disagree": 69,
+    "both": 151,
+    "disagree": 70,
     "padi_stricter": 36,
-    "ours_stricter": 33
+    "ours_stricter": 34
   },
   "stale_ladders": [
     "alsuraya 2027-08-21: row 1148, liveaboard.com ladder starts at 1219",
