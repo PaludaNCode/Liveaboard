@@ -547,10 +547,15 @@ h1 {
 /* The chips scroll inside the panel rather than lengthening it: the Boat bank
    is 77 chips and the panel's cap is what keeps the table on screen. */
 .bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; }
-.bank > span[id], .bank .nights-row, .bank .flag-row {
+.bank > span[id], .bank .range-row, .bank .flag-row {
   display:flex; gap:5px; flex-wrap:wrap; align-items:center;
 }
-.nights-row .dim { font-size:11.5px; }
+.range-row .dim { font-size:11.5px; }
+/* The one bank holding two rows: a range, and the switch for the boats the
+   range cannot ask. It is a second row rather than a fourth item on the first
+   because it is a different question -- the boxes bound a number and this one
+   is about rows that have none. */
+.range-row + .flag-row { margin-top:7px; }
 
 button.chip {
   font:inherit; font-size:12px; cursor:pointer; padding:3px 10px;
