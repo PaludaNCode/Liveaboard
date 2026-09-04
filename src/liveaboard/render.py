@@ -248,9 +248,20 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
 
     months = sorted({d["month"] for d in departures})
 
+    # The day the data was read, and the only date this function is allowed to
+    # reason from. `render` is pure -- the same committed inputs must render
+    # the same page tomorrow -- and the FX age below is the one figure that was
+    # asking the wall clock instead: `age_days()` defaults to `date.today()`,
+    # so from the first midnight after a build every rebuild differed in a real
+    # field. That is a data commit a day with no data behind it, `--merge`
+    # blocked until somebody commits the rebuild, and
+    # `TestThePageIsWhatItsDataBuilds` -- which normalises the build stamp and
+    # nothing else -- red on a tree nobody touched.
+    read_on = dataset.generated or date.today()
+
     return {
         "meta": {
-            "generated": (dataset.generated or date.today()).isoformat(),
+            "generated": read_on.isoformat(),
             # When this page was rendered, to the minute, in UTC.
             #
             # Distinct from `generated`, which is the day the *data* was
@@ -278,8 +289,13 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
                 # Sourced but no longer refreshed is a third state. The fetcher
                 # keeps the last good rate when a fetch fails, so a broken feed
                 # looks exactly like a quiet one unless the date is watched.
-                "age_days": dataset.fx.age_days(),
-                "stale": dataset.fx.is_stale(),
+                # Counted to the day the data was read, not to today: the rate
+                # and the prices it converts were assembled together, so the
+                # gap between them is a fact about this dataset rather than
+                # about when the page is being looked at. It is also what makes
+                # the number hold still -- see `read_on` above.
+                "age_days": dataset.fx.age_days(read_on),
+                "stale": dataset.fx.is_stale(read_on),
             },
             # The day the berth counts were read. On the page beside every
             # count, because a count without its date is presented as a fact
