@@ -7,6 +7,7 @@ Written against ``unittest`` so the suite runs with no installed dependencies:
 from __future__ import annotations
 
 import unittest
+from typing import Any
 from datetime import date
 from decimal import Decimal
 
@@ -14,9 +15,12 @@ from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
 from liveaboard.money import FxTable, Money
 from liveaboard.dataset import Dataset
 from liveaboard.pricing import (
+    GEAR_ESTIMATE,
     _is_counted,
     compute,
+    itinerary_lines,
     mandatory_known,
+    padi_lines,
     subsumed_charges,
     resolve_fees,
 )
@@ -526,3 +530,143 @@ class TestABundleThatNamesItsOwnLine(unittest.TestCase):
         ]))
         for line in payload["itineraries"]["i"]["lines"]:
             self.assertNotIn("subsumed_by", line)
+
+
+class TestGearWithNoStatedPriceIsEstimated(unittest.TestCase):
+    """The one invented figure on the page, and everything that keeps it honest.
+
+    "Never invent a price" is this project's oldest rule and rental gear is its
+    single exception, taken deliberately. Three readings of the gear dialog
+    produce no set price -- an operator pricing items and never a bundle, a
+    bundle figure with no unit beside it, and a bare "Rental Gear" -- and on
+    all of them the line sat at nothing with the toggle **on by default**, so
+    the Total was short by a week's hire on 228 sailings and said so only to a
+    reader who opened the bill and read the caveat.
+
+    So the figure is stated and stated as ours. What these assert is the
+    "as ours" half: the flag travels, the note admits it, the footer's
+    fleet-wide gear figure is computed without it, and nothing else on any bill
+    is ever filled in.
+    """
+
+    def gear(self, amount: str | None = None, included: bool = False,
+             note: str | None = None, basis: FeeBasis = FeeBasis.PER_WEEK) -> FeeItem:
+        return FeeItem(
+            code=FeeCode.GEAR_RENTAL,
+            tier=FeeTier.OPTIONAL,
+            amount=Money.parse(amount) if amount else None,
+            basis=basis,
+            included=included,
+            provenance=PROV,
+            note=note,
+        )
+
+    def line(self, fee: FeeItem, nights: int = 7, toggles=None) -> Any:
+        itinerary = make_itinerary([fee], nights=nights)
+        breakdown = compute(itinerary, make_departure(), FX, toggles)
+        return next(l for l in breakdown.lines if l.code is FeeCode.GEAR_RENTAL)
+
+    def test_an_unpriced_gear_line_is_filled_at_the_stated_figure(self):
+        line = self.line(self.gear())
+        self.assertEqual(line.display.amount, GEAR_ESTIMATE.amount)
+        self.assertTrue(line.has_price)
+        self.assertTrue(line.estimated)
+
+    def test_it_reaches_the_total_it_was_missing_from(self):
+        """The whole point. Gear is on by default, so a line at nothing was a
+        total short by a week's hire on a fifth of the table."""
+        itinerary = make_itinerary([self.gear()])
+        on = compute(itinerary, make_departure(), FX, {"gear": True})
+        off = compute(itinerary, make_departure(), FX, {"gear": False})
+        self.assertEqual(on.total.amount - off.total.amount, GEAR_ESTIMATE.amount)
+
+    def test_switching_gear_off_still_removes_it(self):
+        """An estimate is not a charge a reader cannot decline. It follows the
+        same switch every other gear figure does."""
+        line = self.line(self.gear(), toggles={"gear": False})
+        self.assertFalse(line.counted)
+        self.assertTrue(line.estimated)
+
+    def test_it_is_a_trip_figure_and_a_fortnight_does_not_double_it(self):
+        """Per trip, chosen along with the number: the unit the page reasons in
+        is the trip, and `PER_WEEK` on a fourteen-night sailing would charge
+        two of an estimate nobody quoted."""
+        short = self.line(self.gear(), nights=3)
+        long = self.line(self.gear(), nights=14)
+        self.assertEqual(short.display.amount, long.display.amount)
+        self.assertEqual(long.display.amount, GEAR_ESTIMATE.amount)
+
+    def test_the_operators_own_wording_survives_in_front_of_it(self):
+        """The per-item prices are the only thing a reader can check the
+        estimate against, so the note admits the figure is ours and then keeps
+        what the page actually said."""
+        line = self.line(self.gear(note="Operator prices gear per item: BCD €5/day"))
+        self.assertIn("estimated by this site", line.note)
+        self.assertIn("BCD €5/day", line.note)
+
+    def test_a_priced_set_is_left_exactly_as_the_operator_quoted_it(self):
+        line = self.line(self.gear("200 EUR", basis=FeeBasis.PER_WEEK))
+        self.assertEqual(line.display.amount, Decimal("200"))
+        self.assertFalse(line.estimated)
+
+    def test_gear_the_operator_includes_is_not_filled_in(self):
+        """An inclusion is an answer. Putting 180 on it would price a set the
+        operator says it does not charge for -- the opposite failure."""
+        line = self.line(self.gear(included=True))
+        self.assertTrue(line.included)
+        self.assertFalse(line.estimated)
+        self.assertFalse(line.has_price)
+
+    def test_no_other_unpriced_line_is_ever_filled(self):
+        """The exception is gear and it is only gear. Every other unstated fee
+        is a known cost of unknown size and stays one."""
+        itinerary = make_itinerary([
+            FeeItem(code=FeeCode.NITROX, tier=FeeTier.CONDITIONAL, amount=None,
+                    provenance=PROV),
+            FeeItem(code=FeeCode.MARINE_PARK, tier=FeeTier.MANDATORY, amount=None,
+                    provenance=PROV),
+        ])
+        for line in compute(itinerary, make_departure(), FX).lines:
+            if line.code is not FeeCode.BASE_FARE:
+                with self.subTest(code=line.code):
+                    self.assertFalse(line.has_price)
+                    self.assertFalse(line.estimated)
+
+    def test_the_estimate_is_attributed_and_does_not_light_the_seed_banner(self):
+        """`DERIVED`, not `SEED_ESTIMATE`. The banner means *this row is
+        placeholder research*; a real sailing at a real fare with one estimated
+        extra is not that, and firing it on a fifth of the table would teach a
+        reader to ignore it."""
+        breakdown = compute(make_itinerary([self.gear()]), make_departure(), FX)
+        line = next(l for l in breakdown.lines if l.code is FeeCode.GEAR_RENTAL)
+        self.assertIs(line.provenance.kind, SourceKind.DERIVED)
+        self.assertFalse(breakdown.has_unverified)
+
+    def test_the_page_is_told_which_figure_is_ours(self):
+        """It ships only where true, and app.js reads it -- both halves,
+        because a flag nothing renders is a number presented as a quote."""
+        itinerary = make_itinerary([self.gear()])
+        estimated = itinerary_lines(itinerary, FX)[0].as_dict()
+        priced = itinerary_lines(make_itinerary([self.gear("200 EUR")]), FX)[0].as_dict()
+        self.assertTrue(estimated["estimated"])
+        self.assertNotIn("estimated", priced)
+        js = (TEMPLATE_DIR / "app.js").read_text(encoding="utf-8")
+        self.assertIn("line.estimated", js)
+
+    def test_both_sellers_bills_carry_one_estimate_from_one_rule(self):
+        """Gear is the vessel's charge and appears once on each bill, so the
+        rule lives in `_fee_line` where both sides pass through it. A copy per
+        caller is two rules that agree until one is edited."""
+        itinerary = Itinerary(
+            id="itin", name="I", operator_id="op", boat_id="boat", nights=7,
+            dives=20, port_from="Hurghada", port_to="Hurghada",
+            fees=[self.gear()],
+            padi_fees=[fee(FeeCode.MARINE_PARK, FeeTier.MANDATORY, "90 EUR")],
+            padi_fees_complete=True,
+        )
+        theirs = [l for l in padi_lines(itinerary, FX) if l.code is FeeCode.GEAR_RENTAL]
+        ours = [l for l in itinerary_lines(itinerary, FX) if l.code is FeeCode.GEAR_RENTAL]
+        self.assertEqual(len(theirs), 1)
+        self.assertEqual(len(ours), 1)
+        self.assertTrue(theirs[0].estimated and ours[0].estimated)
+        self.assertEqual(theirs[0].display.amount, ours[0].display.amount)

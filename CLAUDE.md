@@ -232,9 +232,42 @@ Break these and the site starts lying quietly rather than failing loudly.
   `availability` fills the whole-sailing slot and not the at-price one, because
   that was measured.
 
-- **Never invent a price.** Every price and fee needs a `Provenance`. A parser
-  that cannot find a number returns `None`; it does not guess. `seed_estimate`
-  triggers the "not real quotes" banner — do not suppress it.
+- **Never invent a price, and rental gear is the one exception.** Every price
+  and fee needs a `Provenance`. A parser that cannot find a number returns
+  `None`; it does not guess. `seed_estimate` triggers the "not real quotes"
+  banner — do not suppress it.
+  **`pricing.GEAR_ESTIMATE` is €180 a trip, and it exists because the honest
+  answer was costing the reader more than it protected them.** Gear is on by
+  default, so a line at nothing left the Total — the number this page exists
+  to be trusted about — short by a week's hire on 12 vessels, 52 itineraries
+  and 228 sailings, and said so only to a reader who opened the bill and read
+  the caveat under it. The three unpriced readings are all in `scrape/gear.py`
+  (items and no bundle, a bundle with no unit, a bare *Rental Gear*), and the
+  fill is in `_fee_line` rather than in any of its three callers, so both
+  sellers' bills get one rule. What makes it publishable is that it is
+  **marked everywhere it appears**: `BreakdownLine.estimated` ships, the amount
+  prints `~€180` in `--warn`, the note leads with *estimated by this site*
+  ahead of the operator's own per-item prices, a paragraph under the bill says
+  it is ours and whether the toggle has it in the total, and the footer's
+  *Extras with no price* panel states the rule with the counts as tokens.
+  `render.gear_prices` **excludes** it — "a full set costs about €190 a week"
+  is a claim about what the operators charge, and folding our own figure into
+  that average would put it inside the number on a sixth of the fleet,
+  invisibly. `DERIVED` and not `SEED_ESTIMATE`: the banner means *this row is
+  placeholder research*, and firing it on a fifth of the table would teach a
+  reader to ignore it. An **included** gear line is never filled — an
+  inclusion is an answer — and no other code is ever filled at all.
+- **An included fee reads as *included*, not as *unstated*.** It stays in the
+  breakdown at zero, which is the oldest rule in `pricing.py` and the whole
+  reason a bundled operator looks different here from one that bills at the
+  dock — and for eleven refreshes the panel's amount cell asked `has_price`
+  first, so Sunshine's nitrox printed **unstated** beside its own note saying
+  *Nitrox: stated as included*. The panel contradicted itself on the line
+  where the operator had been most forthcoming, and filed generosity under the
+  same word as silence. `feeRows` asks `included` first, in the `.inc`
+  vocabulary the nitrox column already uses. Both shapes reach that branch:
+  liveaboard.com states an inclusion with no amount and PADI as a stated zero,
+  so the cell used to print two different things about one fact.
 - **`pricing._is_counted` is mirrored by `lineCounts` in `templates/app.js`** —
   both `DEFAULT_ON_TIERS` and the order of its checks. The toggle is asked
   before the tier: nitrox and gear are filed under the source's *Optional*
@@ -293,7 +326,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   those answers, so there is no fallback that is right. Read as per trip, the
   cheapest of the three, Bella 2's €40 set was a third of a three-night trip's
   hire and a seventh of a week's. `FeeBasis` is `None` there, the figure goes in
-  the note, and no total claims it.
+  the note, and no total claims it. **The line is not left at nothing, though**
+  — it is one of the three readings `pricing.GEAR_ESTIMATE` fills, at €180 a
+  trip and marked as ours. That is this project choosing a unit for its own
+  number, which it may do; it is still not a licence to read the operator's
+  figure as a per-trip one, because the note has to keep saying what the page
+  actually said.
 - **No score grading operators.** The site compares what trips cost; it does
   not rank who sells them. A per-operator "honesty" percentage was removed:
   it read as a league table and contradicted the total beside it.

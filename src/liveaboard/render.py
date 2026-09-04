@@ -24,6 +24,7 @@ from .export import recent_entries, to_csv
 from .money import DISPLAY_CURRENCY
 from .pricing import (
     DEFAULT_TOGGLES,
+    GEAR_ESTIMATE,
     base_line,
     compute,
     itinerary_lines,
@@ -450,7 +451,14 @@ def gear_prices(dataset: Dataset) -> dict[str, Any]:
         if itinerary.nights != 7:
             continue
         for line in itinerary_lines(itinerary, dataset.fx):
-            if line.code is FeeCode.GEAR_RENTAL and line.display is not None:
+            # `estimated` excluded, and that is what keeps this paragraph
+            # true: the sentence says what a set costs across the fleet, and
+            # `pricing.GEAR_ESTIMATE` is this project's figure for the 14
+            # vessels that price no set. Folding ours in would put our own
+            # number inside the average we quote the operators' by, on a
+            # sixth of them, and the reader could not tell.
+            if (line.code is FeeCode.GEAR_RENTAL and line.display is not None
+                    and not line.estimated):
                 quoted[itinerary.boat_id] = float(line.display.amount)
     if not quoted:
         return {}
@@ -494,6 +502,26 @@ def gear_prices(dataset: Dataset) -> dict[str, Any]:
         "cheapest": round(extremes[0][0]),
         "cheapest_boat": named(extremes[0]),
     }
+
+
+def gear_estimates(dataset: Dataset) -> dict[str, Any]:
+    """How far the gear estimate reaches, for the paragraph that admits it.
+
+    Counted off `itinerary_lines` rather than off `data/fees.json`, so it is
+    the rule's own reach and not a second reading of the inputs it fires on --
+    the same reason every other figure in the footer is derived. Vessels as
+    well as trips, because a reader asking "how much of this page is your
+    number" is asking about boats and the answer is one line of prose.
+    """
+    boats: set[str] = set()
+    trips = 0
+    for itinerary in dataset.itineraries.values():
+        if any(line.estimated for line in itinerary_lines(itinerary, dataset.fx)):
+            boats.add(itinerary.boat_id)
+            trips += 1
+    if not trips:
+        return {}
+    return {"vessels": len(boats), "trips": trips}
 
 
 def week_dive_counts(dataset: Dataset) -> dict[str, Any]:
@@ -625,6 +653,7 @@ def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]
     prices = nitrox_prices(dataset)
     bar = dataset.entry_bar
     gear = gear_prices(dataset)
+    estimated = gear_estimates(dataset)
     dives = week_dive_counts(dataset)
     gap = seller_gap(dataset)
     berths = berth_count_gaps(payload)
@@ -684,6 +713,14 @@ def _stated_figures(dataset: Dataset, payload: dict[str, Any]) -> dict[str, str]
         "__GEAR_DEAREST_BOAT__": _escape(figure(gear.get("dearest_boat"))),
         "__GEAR_CHEAPEST__": figure(gear.get("cheapest")),
         "__GEAR_CHEAPEST_BOAT__": _escape(figure(gear.get("cheapest_boat"))),
+
+        # The one figure on this page that is ours rather than a seller's, and
+        # the two counts saying how far it reaches. Tokens for the same reason
+        # as everything above: a typed 14 is wrong the first time a boat
+        # publishes a set price, and silently.
+        "__GEAR_ESTIMATE__": figure(int(GEAR_ESTIMATE.amount)),
+        "__GEAR_ESTIMATED_VESSELS__": figure(estimated.get("vessels")),
+        "__GEAR_ESTIMATED_TRIPS__": figure(estimated.get("trips")),
     }
 
 

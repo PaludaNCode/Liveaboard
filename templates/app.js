@@ -857,6 +857,20 @@
              "which, so no total is claimed here."
   };
 
+  /* The one figure on this page that neither seller published.
+   *
+     Rental gear is on by default and 14 vessels rent it without pricing a
+     set, so the line sat at nothing and the total was short by a week's hire
+     on 228 sailings — stated only to a reader who opened the bill and read
+     the caveat under it. `pricing.GEAR_ESTIMATE` fills it, and this is the
+     other half of that decision: an estimate the page does not admit to is
+     indistinguishable from a quote, which is the failure this site reports in
+     other people. The tooltip rides on the marked amount, the sentence under
+     the bill is built by `estimateWarning`, and the footer's "Extras with no
+     price" panel carries the rule itself. */
+  var EST_WHY = "This site's own estimate — the operator rents gear and " +
+    "publishes no set price, so no seller quoted this figure.";
+
   /* Sixteen columns became twelve, and not one fact went with the four.
    *
      Depart and Return were two columns printing "01 May" and "08 May" over
@@ -1785,10 +1799,30 @@
   function feeRows(lines) {
     return lines.map(function (line) {
       var on = lineCounts(line) || line.tier === "base";
-      var amount = line.has_price && line.display
-        ? "€" + Math.round(line.display.amount).toLocaleString("en-IE") +
+      /* Three states, and the first one used to print as the third.
+       *
+         An included fee stays in the breakdown at zero -- that is the oldest
+         rule in `pricing.py`, and the whole reason a bundled operator looks
+         different here from one that bills at the dock -- but this cell asked
+         `has_price` and an included line has no figure, so it read
+         **unstated** beside a note saying *Nitrox: stated as included*. The
+         panel contradicted itself on the one line where the operator had been
+         most forthcoming, and filed generosity under the same word as
+         silence. `included` is asked first now, in the vocabulary the nitrox
+         column already uses for it.
+
+         An estimated amount is marked where it is printed, not only in the
+         warning under the table: a reader who scans the figures and never
+         reaches the prose must still see that one of them is not a seller's.
+         `~` and the tooltip say it; the paragraph says why. */
+      var amount = line.included
+        ? '<span class="inc">included</span>'
+        : line.has_price && line.display
+        ? (line.estimated ? '<span class="est" title="' + esc(EST_WHY) + '">~' : "") +
+          "€" + Math.round(line.display.amount).toLocaleString("en-IE") +
           (line.is_range && line.display_max
-            ? "–" + Math.round(line.display_max.amount).toLocaleString("en-IE") : "")
+            ? "–" + Math.round(line.display_max.amount).toLocaleString("en-IE") : "") +
+          (line.estimated ? "</span>" : "")
         : "unstated";
       /* A converted number is a weaker claim than a quoted one, and the page
          says which is which rather than presenting both as the same fact. */
@@ -1825,8 +1859,32 @@
     }).join("");
   }
 
+  /* The warning that goes with a filled-in figure, or nothing.
+   *
+     Built from the lines rather than typed, so the amount in the sentence is
+     the amount in the cell above it and cannot drift from it — the same rule
+     the footer's tokens follow. It says whether the estimate is in the total
+     as well as what it is: with Rental gear switched off the line still shows
+     its `~€180` and adds nothing, and a warning claiming otherwise would be
+     the page misreporting its own arithmetic. */
+  function estimateWarning(lines) {
+    var est = lines.filter(function (line) { return line.estimated; });
+    if (!est.length) return "";
+    var names = est.map(function (line) { return line.label.toLowerCase(); });
+    var counted = est.some(lineCounts);
+    return names.join(" and ").replace(/^./, function (c) { return c.toUpperCase(); }) +
+      ": €" + Math.round(est[0].display.amount).toLocaleString("en-IE") +
+      " for the trip is this site's own estimate, not a price either seller " +
+      "published — the operator rents gear and quotes no set. " +
+      (counted
+        ? "It is in the total above; switch Rental gear off to take it out."
+        : "It is not in the total, because Rental gear is switched off.");
+  }
+
   function billPanel(row) {
-    var body = feeRows(linesFor(row.d));
+    var lines = linesFor(row.d);
+    var body = feeRows(lines);
+    var warning = estimateWarning(lines);
 
     var caveat = "";
     if (!row.d.fees_known) {
@@ -1938,6 +1996,10 @@
       '<div class="fee-scroll"><table class="fees"><tbody>' + body +
         "</tbody></table></div>" +
       second +
+      /* Before the disclosure caveats, because it is about a number on the
+         bill rather than about how complete the bill is, and a reader who
+         stops after one paragraph should have read this one. */
+      (warning ? '<p class="caveat est">' + esc(warning) + "</p>" : "") +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
       (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
   }

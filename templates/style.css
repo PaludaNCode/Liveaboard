@@ -983,6 +983,18 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .fees tr.off { color:var(--ink-faint); }
 .fees .prov { white-space:normal; max-width:52ch; color:var(--ink-faint); font-size:10px; }
 .caveat { margin:8px 0 0; max-width:80ch; color:var(--ink-dim); font-size:11px; }
+/* The estimate, on the amount and in the paragraph that admits it. `--warn`
+   rather than `--unknown`: an unread page is dim and unremarkable, and a
+   figure this project supplied itself is the opposite -- the one number on the
+   bill a reader should look twice at. The rule on the paragraph is the same
+   device `.caveat.padi` uses to mark a paragraph as being about a source other
+   than the table above it, which is exactly what this one is. */
+.fees .est { color:var(--warn); }
+.caveat.est { border-left:2px solid var(--warn); padding-left:.6em; }
+/* A dimmed row dims its own contents. Without this the marked amount keeps its
+   warning colour on a line the toggles have switched off, so the loudest thing
+   in the bill is a figure that is not in the total. */
+.fees tr.off .est { color:inherit; }
 
 /* The bill, as a panel rather than as a row of its own (#149).
  *
