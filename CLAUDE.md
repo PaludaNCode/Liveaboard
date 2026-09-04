@@ -1402,6 +1402,30 @@ Break these and the site starts lying quietly rather than failing loudly.
   FX move is not a reprice, a vessel losing *every* departure is a failed fetch
   and not a cancelled season, a newly parsed field has not changed, and a
   currency switch is not a price move.
+- **`render` has no clock.** The same committed inputs must build the same page
+  tomorrow, because `TestThePageIsWhatItsDataBuilds` compares the shipped page
+  against a fresh render of the data beside it and normalises the build stamp
+  and nothing else. The FX age asked the wall clock instead, so from the first
+  midnight after a build every rebuild differed in a real field: on 2026-09-04
+  `main` went red on a tree nobody had touched, and would have gone red again
+  every day between the rollover and the next `fx.yml` commit — invisible until
+  a human opened a PR, because scheduled data commits push with `GITHUB_TOKEN`
+  and GitHub does not run workflows on those. The history view had learned this
+  once already (`recent_entries` measures from the newest entry in the log,
+  never from today) and the FX age had not. `render` names its own day —
+  `read_on`, the crawl's own `scraped_at` — and the page says *N days before
+  this data was read*, which is what the figure measures: the page is static,
+  so the number was frozen the moment it shipped whichever day was used, and
+  what the anchor decides is whether the build reproduces and whether the
+  sentence beside it is true. **And the shape that allowed it is closed too**:
+  `FxTable.age_days` and `is_stale` take the day as a **required** argument,
+  because the default was `date.today()` and `render` reached for it by writing
+  nothing. Every other caller already passed a date, so the door shuts on
+  nothing that used it, and omitting it is a `TypeError` rather than a page
+  that quietly drifts. `TestTheRenderedPageHasNoClockInIt` renders the
+  committed dataset on two dates with `date` patched in both modules and
+  requires the same bytes, so a clock reintroduced in a third field fails there
+  rather than at somebody's midnight.
 - **The committed seed must match `tools/make_seed.py`** — CI enforces it, so
   edit the generator, not the JSON.
 - **The committed dataset must match what `promote` produces from the committed
