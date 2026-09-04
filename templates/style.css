@@ -1407,6 +1407,19 @@ a { color:var(--accent); }
   }
   .card-money .perline b { color:var(--ink); font-size:11.5px; }
   .card-money .perline.dim { color:var(--ink-faint); }
+  /* The markdown, under the split whose first figure it comes off. No rule
+     above it: the one in this box separates the total from what is derived
+     from it, and this is another reading of the berth rather than a third
+     section. The subject is a label in the meta line's own vocabulary,
+     because that is what a card uses where the table has a heading. */
+  .card-money .saleline {
+    display:flex; justify-content:flex-end; align-items:baseline; gap:5px;
+    margin-top:1px; line-height:1.3;
+  }
+  .card-money .saleline i {
+    font-style:normal; font-family:var(--font-narrow); font-size:9px;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
+  }
   /* The cells keep their table classes so the colours and the panel triggers
      come across -- and those classes carry the table's widths, which are the
      one thing that must not. A 116px reef cell in a 370px card set the sites
@@ -1442,7 +1455,10 @@ a { color:var(--accent); }
      agreeing here is a coincidence rather than a dependency. */
   .card .berths { flex-direction:row; gap:.3em; align-items:baseline;
                   justify-content:flex-start; }
-  .card .marks { display:inline-flex; margin:0; }
+  /* The gap is written here as well as on the table's own `.marks`, because
+     that rule is `td.money .marks` and a card has no cells: without it the
+     struck fare and the rate print as one word. */
+  .card .marks { display:inline-flex; margin:0; gap:5px; align-items:baseline; }
   /* Each fact keeps the class its table cell had, so the panel triggers, the
      colours and the sold-out treatment all arrive without a second set of
      rules. What is added is the label, because a card has no column heading

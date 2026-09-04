@@ -50,6 +50,23 @@ TABLE_FLOOR = 150
 # broken (#150).
 PHONE_WIDTHS = [320, 360, 375, 385, 386, 390, 393, 402, 414, 419, 430]
 
+
+def shipped_payload() -> dict:
+    """The page's own data, read back out of the page.
+
+    A filter test that counts rows in the browser and compares them with a
+    number the browser also produced proves only that the page agrees with
+    itself. For the four facets the payload settles on its own -- the month,
+    the boat, whether a seller marked the sailing down, whether it is still
+    bookable -- the expected figure is counted here instead, from the same
+    bytes the visitor is served.
+    """
+    import re
+
+    html = SITE.read_text(encoding="utf-8")
+    raw = re.search(r'id="payload"[^>]*>(.*?)</script>', html, re.S).group(1)
+    return json.loads(raw.replace("<\\/", "</"))
+
 MEASURE = """() => {
   const box = s => {
     const e = document.querySelector(s);
@@ -1961,6 +1978,183 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                                  "the struck fare overlaps the rate " + where)
         finally:
             page.close()
+
+        # And on a card, where there is no Advertised column at all: the berth
+        # price reaches the reader inside the total's split and the markdown
+        # reached them nowhere, so a discounted sailing looked exactly like a
+        # full-price one on the device this page is built for.
+        for width in (320, 390, 430):
+            page = self.open(width, 844)
+            try:
+                seen = page.evaluate("""() => {
+                  const card = [...document.querySelectorAll('#cards .card')]
+                    .find(c => c.querySelector('.sale-was'));
+                  if (!card) return null;
+                  const money = card.querySelector('.card-money');
+                  const line = card.querySelector('.saleline');
+                  const box = money.getBoundingClientRect();
+                  const r = line.getBoundingClientRect();
+                  const gap = card.querySelector('.sale-mark')
+                    .getBoundingClientRect().left
+                    - card.querySelector('.sale-was').getBoundingClientRect().right;
+                  return { inMoney: money.contains(line),
+                           text: line.textContent.replace(/\\s+/g, " ").trim(),
+                           out: r.left < box.left - 1 || r.right > box.right + 1,
+                           gap: Math.round(gap),
+                           wide: [...card.querySelectorAll('*')]
+                             .filter(e => e.scrollWidth > e.clientWidth + 1).length };
+                }""")
+                where = "at %dpx" % width
+                self.assertIsNotNone(seen, "no discounted card " + where)
+                self.assertTrue(seen["inMoney"],
+                                "the markdown is not in the money block " + where)
+                # No spaces expected between them: the separation is the
+                # flex gap asserted below, and the text is three elements.
+                self.assertRegex(seen["text"], r"^was\s*€[\d,]+\s*−\d+%$",
+                                 "the card's markdown reads %r %s"
+                                 % (seen["text"], where))
+                self.assertFalse(seen["out"],
+                                 "the markdown sits outside the money block "
+                                 + where)
+                # The table's gap is written on `td.money .marks`, which a card
+                # has no cells to match: without one of its own the struck fare
+                # and the rate print as one word.
+                self.assertGreaterEqual(seen["gap"], 3,
+                                        "the struck fare and the rate are "
+                                        "printed as one word " + where)
+                self.assertEqual(0, seen["wide"],
+                                 "the card scrolls sideways " + where)
+            finally:
+                page.close()
+
+    def test_every_filter_counts_what_it_leaves(self) -> None:
+        """Eight filters, and the On sale chip was the one that lied.
+
+        `countRail` counted the trips with the sale facet skipped — which is
+        the arithmetic a *chip's* own count needs, so that its number answers
+        "what if I picked this too?" rather than "what did I already pick".
+        The rail is not a chip: it is the table's own size printed beside the
+        item that opens the table, and with On sale down it read 1,145 over
+        237 rows, a few inches from a `rows shown` saying 237. Hide sold out
+        sits in the same bank and collapsed onto the rows correctly, which is
+        what makes this a slip rather than a policy.
+
+        So every bank is pressed here, and each one is asked three questions
+        rather than "did anything change":
+
+        1. The three numbers about one table agree — the chip's own count of
+           what pressing it leaves, `rows shown`, and the rail.
+        2. The rows left really are the rows asked for, checked against what
+           each row itself prints (or, for the month, against the ISO date in
+           its own `data-id`).
+        3. The result is neither the whole table nor nothing. A filter that
+           keeps everything and one that keeps nothing both pass any
+           assertion phrased as "the count changed", and both are bugs.
+
+        And for the four facets the payload settles by itself, the expected
+        figure is counted from the shipped bytes rather than taken from the
+        page: a browser agreeing with itself is not evidence.
+        """
+        payload = shipped_payload()
+        deps = payload["departures"]
+        total = len(deps)
+
+        # Counted here, from the data — not read off the page.
+        month = 5
+        boat_id = "snefro-pearl"
+        expected = {
+            "months": sum(1 for d in deps if d["month"] == month),
+            "boats": sum(1 for d in deps if d["boat_id"] == boat_id),
+            "flags-sale": sum(1 for d in deps if d.get("sale")),
+            "flags-sold": sum(1 for d in deps if d.get("bookable")),
+        }
+        for key, n in expected.items():
+            self.assertGreater(n, 0, "no departures behind the %s filter" % key)
+            self.assertLess(n, total,
+                            "the %s filter would keep the whole table" % key)
+
+        # Each bank: the chip to press, and what every row it leaves must show
+        # for itself. The predicate reads the row rather than the payload —
+        # what is being checked is that the rows on screen are the right ones.
+        banks = [
+            ("months", '#months .chip[data-v="%d"]' % month, "months",
+             """(row, v) => row.dataset.id.indexOf("-2027-0" + v + "-") > 0
+                          || row.dataset.id.indexOf("-2027-" + v + "-") > 0""",
+             str(month)),
+            ("ports", '#ports .chip[data-v="Port Ghalib"]', None,
+             """(row, v) => (row.querySelector('.trip .sub')||{}).textContent
+                            .trim().indexOf(v) === 0""", "Port Ghalib"),
+            ("sites", '#sites .chip[data-v="elphinstone"]', None,
+             """(row, v) => row.querySelector('td.sites').textContent
+                            .indexOf(v) >= 0""", "elphinstone"),
+            ("boats", '#boats .chip[data-v="Snefro Pearl"]', "boats",
+             """(row, v) => row.querySelector('.b-name').textContent.trim() === v""",
+             "Snefro Pearl"),
+            # The printed phrase, exactly: "OW + 10" is a different bar from
+            # "OW", and a prefix test would call one the other.
+            ("entry", '#entry .chip[data-v="OW + 10"]', None,
+             """(row, v) => row.querySelector('.entry-open')
+                            .firstChild.textContent.trim() === v""", "OW + 10"),
+            # Both sellers list it, so both name themselves in the Seller
+            # column — one link is the other two chips' answer.
+            ("sellers", '#sellers .chip[data-v="both"]', None,
+             """(row) => row.querySelectorAll('td.source a').length === 2""",
+             "both"),
+            ("flags", "#onSale", "flags-sale",
+             """(row) => !!row.querySelector('.sale-mark')""", None),
+            ("flags", "#hideSold", "flags-sold",
+             """(row) => !row.classList.contains('gone')""", None),
+        ]
+
+        for bank, selector, counted, predicate, value in banks:
+            page = self.open(1440, 900)
+            try:
+                self.pick_filter(page, bank, selector)
+                seen = page.evaluate(
+                    """([selector, source, value]) => {
+                      const chip = document.querySelector(selector);
+                      const label = chip.textContent.trim();
+                      const stated = (label.match(/([\\d,]+)\\s*$/) || [])[1];
+                      const test = eval(source);
+                      const rows = [...document.querySelectorAll('#body tr.row')];
+                      const v = value === null ? label.replace(/\\s*[\\d,]+$/, "") : value;
+                      return {
+                        label: label,
+                        stated: stated ? Number(stated.replace(/,/g, "")) : null,
+                        shown: Number(document.getElementById('shown')
+                                 .textContent.replace(/,/g, "")),
+                        rail: Number(document.getElementById('navTripsCount')
+                                 .textContent.replace(/,/g, "")),
+                        drawn: rows.length,
+                        wrong: rows.filter(r => !test(r, v)).length,
+                        first: rows.length ? rows[0].dataset.id : null,
+                        value: v,
+                      };
+                    }""", [selector, predicate, value])
+                where = "%s (%s)" % (selector, seen["label"])
+                self.assertIsNotNone(seen["stated"],
+                                     "the chip states no count: " + where)
+                self.assertEqual(seen["stated"], seen["shown"],
+                                 "the chip promised %s and the table shows %s: %s"
+                                 % (seen["stated"], seen["shown"], where))
+                self.assertEqual(seen["shown"], seen["rail"],
+                                 "the rail says %s over a table of %s: %s"
+                                 % (seen["rail"], seen["shown"], where))
+                self.assertGreater(seen["shown"], 0, "nothing left: " + where)
+                self.assertLess(seen["shown"], total,
+                                "the filter kept the whole table: " + where)
+                self.assertGreater(seen["drawn"], 0, "no rows drawn: " + where)
+                self.assertEqual(0, seen["wrong"],
+                                 "%d of the %d rows drawn do not match %r: %s"
+                                 % (seen["wrong"], seen["drawn"],
+                                    seen["value"], where))
+                if counted:
+                    self.assertEqual(expected[counted], seen["shown"],
+                                     "the page keeps %s rows where the data "
+                                     "has %s: %s"
+                                     % (seen["shown"], expected[counted], where))
+            finally:
+                page.close()
 
     def test_one_row_is_marked_at_a_time_unless_ctrl_is_held(self) -> None:
         """A mark is where you are, not everywhere you have been.

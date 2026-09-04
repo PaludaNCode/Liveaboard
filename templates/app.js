@@ -1039,6 +1039,28 @@
            the price is. */
         var marks = saleTag(d);
         return figure + (marks ? '<span class="marks">' + marks + "</span>" : "");
+      },
+      /* On a card there is no Advertised column, and the berth price reaches
+         the reader only as the first half of the total's split — so the
+         markdown reached them not at all. A discounted sailing looked exactly
+         like a full-price one on the device this page is built for.
+       *
+         What goes here is the sale tag and nothing else: the figure is
+         already on the line above, inside the split it is one half of, and
+         printing it twice in one box would be two prices for one berth. The
+         same `saleTag` the table calls, so the two renderings cannot drift —
+         what the card adds is the subject, because "€1,347" struck through
+         under a split is a fourth number in a tinted box and a phone has no
+         column heading to say which. `was` only where there is a figure to
+         have been: the tag says "on sale" on its own where a seller marked a
+         sailing down and stated no rate against this row's fare, and "was on
+         sale" is not English. */
+      card: function (d) {
+        var marks = saleTag(d);
+        if (!marks) return "";
+        return '<span class="saleline">' +
+          (d.sale && d.sale.was ? "<i>was</i>" : "") +
+          '<span class="marks">' + marks + "</span></span>";
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -2202,7 +2224,7 @@
         '<div class="card-head">' +
           '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
           '<div class="card-money cost">' + cell("total", row) +
-            cardCell("perdive", row) + "</div>" +
+            cardCell("base", row) + cardCell("perdive", row) + "</div>" +
         "</div>" +
         '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
         '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
@@ -2277,13 +2299,19 @@
      perform -- and a rail item's number is a promise about what opening it
      gives you, broken by the click rather than merely disagreeing.
 
-     The trips figure skips the sale facet for the same reason the chip does:
-     with the chip on, a count that included it would collapse onto the visible
-     rows and stop being the way back. */
+     **Every filter counts, the sale chip included.** This skipped the sale
+     facet, on the reasoning a chip's own count is built from -- a number that
+     answers "what if I picked this too?" has to ignore the thing you picked.
+     But that is the arithmetic for a *chip*, and this is not one: it is the
+     table's own size, printed beside the rail item that opens the table. With
+     the chip on it read 1,145 over 237 rows, disagreeing with `rows shown` a
+     few inches away, and it was the only one of the eight filters that did --
+     Hide sold out sits in the same bank and collapsed onto the rows exactly
+     as it should. */
   function countRail() {
     var trips = 0;
     D.departures.forEach(function (dep) {
-      if (passes(dep, D.itineraries[dep.itinerary_id], "sale")) trips++;
+      if (passes(dep, D.itineraries[dep.itinerary_id], null)) trips++;
     });
     railTripsCount.textContent = trips.toLocaleString("en-IE");
     /* A count only where there are sailings behind it. PADI can be advertising

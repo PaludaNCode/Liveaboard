@@ -883,7 +883,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   how it would come back. Every card cell
   reads the same column's renderer, so the two cannot drift and the three panel
   triggers come across working — `cardCell` falls through to `show` unless the
-  column declares a `card`, and **exactly one does**. Price per dive was a bare
+  column declares a `card`, and **two do**. Price per dive was a bare
   `€95` on the meta line, one gap from `+€400 → 500` and in the same weight:
   two euro figures, neither named, told apart only by a column heading a phone
   does not draw — and its `↓ 17+` carried its meaning in a `title`, on the one
@@ -891,7 +891,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   tinted box, and says *a dive* in words. The different words go on the column
   rather than into `renderCards`, so a second reading of the data has nowhere
   to appear; and both silences survive the move with a subject in front of
-  them, because *not stated* under a total reads as a fact about the money. This replaced a typed
+  them, because *not stated* under a total reads as a fact about the money.
+  **Advertised is the second, and it prints only its markdown there.** A card
+  has no Advertised column: the berth price reaches the reader as the first
+  half of the total's split, and the sale tag reached them not at all, so a
+  discounted sailing looked exactly like a full-price one on the device this
+  page is built for. What goes in the money box is `saleTag` and nothing else
+  — the figure is already on the line above, and printing it twice is two
+  prices for one berth — plus the subject the table gets from its column
+  heading: *was* €1,347 −15%, and *was* only where a seller stated a figure to
+  have been, since the tag says "on sale" on its own where none did. This replaced a typed
   breakpoint at 385px that was wrong on most phones (#150): 385 was measured
   against a Total column 155px wide and the column was 211px, sized by its
   worst-case row. **A typed breakpoint here is a number derived from the data,
@@ -968,6 +977,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   reason they are out there. So `Clear all` leaves them where the visitor put
   them too — it clears what the bar lists, and resetting a control the bar does
   not name is an unnamed side effect that moves every total on the page.
+  **A chip's count skips its own facet; the rail's does not.** A chip states
+  what pressing it would leave, so its arithmetic has to ignore the thing you
+  are about to pick — and `countRail` borrowed that reasoning for the trips
+  figure, which is not a chip but the table's own size printed beside the item
+  that opens the table. With On sale down it read 1,145 over 237 rows, a few
+  inches from a `rows shown` saying 237, and it was the only one of the eight
+  filters that did: Hide sold out sits in the same bank and collapsed onto the
+  rows exactly as it should. `test_every_filter_counts_what_it_leaves` presses
+  all eight and asks each three things — the chip, `rows shown` and the rail
+  agree; every row left really is one the filter asks for, checked against
+  what that row prints; and the result is neither the whole table nor nothing,
+  because both of those pass any assertion phrased as *the count changed*.
+  Four of the eight expect a figure counted from the shipped payload rather
+  than read off the page: a browser agreeing with itself is not evidence.
   **A bank ordered by a count is ordered by the count it is showing.** The
   `tally` banks — Departs from, Dive sites, Boat — re-rank on every recount,
   chosen chips leading. Dive sites is where it bites, because that bank is
