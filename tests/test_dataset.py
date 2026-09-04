@@ -6,9 +6,10 @@ import json
 import re
 import tempfile
 import unittest
+import unittest.mock
 from html import unescape
 from urllib.parse import unquote
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from liveaboard.dataset import Dataset, DatasetError
@@ -2383,6 +2384,78 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
         # And it reaches the reader: a title on the figure, not a dropped string.
         self.assertIn("var why = advertisedNote(d, row);", app)
         self.assertIn('figure = \'<span title="\'', app)
+
+
+class TestTheRenderedPageHasNoClockInIt(unittest.TestCase):
+    """`build_payload` may read no date but the one the data was read on.
+
+    `render` is documented as pure: the same committed inputs must produce the
+    same page tomorrow, which is what lets `TestThePageIsWhatItsDataBuilds`
+    normalise the build stamp and compare the rest byte for byte. One field
+    was not — `fx.age_days()` and `is_stale()` both default their reference
+    date to `date.today()`, so the payload counted the rate's age to *now*.
+
+    It cost a day. On the first midnight after a build, `site/index.html`
+    differed from the committed one in a real field 135 kB into a
+    single-line payload: a dirty tree with nothing behind it, a rebuild
+    committed as if it were data, `--merge` refusing until somebody did, and
+    this file's own byte-comparison red on a checkout nobody had touched.
+
+    The reference is `generated` — the day the crawl read the prices. The rate
+    and the fares it converts were assembled together, so the gap between them
+    is a fact about the dataset rather than about when the page is opened, and
+    it holds still because the dataset does.
+    """
+
+    def payload(self, as_of: str, generated: str) -> dict:
+        raw = json.loads(json.dumps(MINIMAL))
+        raw["generated"] = generated
+        raw["fx"] = {
+            "display_currency": "EUR",
+            "as_of": as_of,
+            "source": "European Central Bank euro foreign exchange reference rates",
+            "rates": {"USD": 0.92},
+        }
+        return build_payload(Dataset.from_dict(raw))
+
+    def test_the_rate_age_is_counted_to_the_day_the_data_was_read(self):
+        fx = self.payload("2026-08-20", "2026-08-27")["meta"]["fx"]
+        self.assertEqual(fx["age_days"], 7)
+
+    def test_nothing_in_the_payload_asks_what_day_it_is(self):
+        """The direct statement of the property, since one caller is enough.
+
+        Asserting the age instead would pass again the day some other field
+        starts reading the clock, and the failure mode is a page that differs
+        from itself overnight rather than an error anywhere.
+        """
+        import liveaboard.money as money_mod
+        import liveaboard.render as render_mod
+
+        class NoClock(date):
+            @classmethod
+            def today(cls):
+                raise AssertionError(
+                    "build_payload read the wall clock; the page it produces "
+                    "is now different tomorrow from what it is today"
+                )
+
+        # `money` as well as `render`, because that is where the clock was:
+        # `age_days()` defaults its own reference, so a guard watching only the
+        # caller's module is green on the very bug it is named for.
+        with unittest.mock.patch.object(render_mod, "date", NoClock), \
+                unittest.mock.patch.object(money_mod, "date", NoClock):
+            self.payload("2026-08-20", "2026-08-27")
+
+    def test_a_rate_that_stopped_moving_is_still_reported_stale(self):
+        """Freezing the reference must not freeze the signal.
+
+        `as_of` stands still when the fetch fails and `generated` goes on
+        moving with every crawl, so the gap opens exactly as it did against
+        today's date -- which is the whole reason this reference works.
+        """
+        self.assertFalse(self.payload("2026-08-24", "2026-08-27")["meta"]["fx"]["stale"])
+        self.assertTrue(self.payload("2026-08-01", "2026-09-04")["meta"]["fx"]["stale"])
 
 
 class TestThePageIsWhatItsDataBuilds(unittest.TestCase):

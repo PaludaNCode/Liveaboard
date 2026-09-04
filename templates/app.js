@@ -2459,8 +2459,9 @@
       old.appendChild(el("strong", null, "The exchange rate is out of date"));
       old.appendChild(document.createTextNode(
         "Dollar prices are converted at the rate published on " + fx.as_of +
-        ", " + fx.age_days + " days ago. It is a real rate, but currencies have " +
-        "moved since, so euro totals may be off."));
+        ", " + fx.age_days + " days before these prices were read. It is a " +
+        "real rate, but currencies have moved since, so euro totals may be " +
+        "off."));
       host.appendChild(old);
     }
   }
