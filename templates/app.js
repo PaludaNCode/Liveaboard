@@ -460,7 +460,23 @@
        built from a missing one printed "€NaN" into the tooltip. */
     var title = (d.sale.was ? "Down from " + eur(d.sale.was) + ", per " : "Marked down by ") +
       who.join(" and ");
-    return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
+    /* And the figure is printed rather than only described. A rate with no
+       fare beside it is the one thing this page exists to correct in a seller:
+       "−15%" off an amount the reader has to work out is a claim they cannot
+       check, and the number was sitting in the tooltip on 236 of the 237
+       discounted sailings. It is the seller's own struck-through list price,
+       so it is stated and not reconstructed from the rate -- which would
+       round a figure into existence and put this site's arithmetic where an
+       operator's price belongs. The one sailing without it is PADI's markdown
+       against a fare liveaboard.com set, and it states no percentage either.
+       Struck through, in the mono the other prices use, and to the *left* of
+       the rate, so the rate stays where the eye already reads it down the
+       column. */
+    var was = d.sale.was
+      ? '<span class="sale-was">' + eur(d.sale.was) + "</span>"
+      : "";
+    return was + '<span class="sale-mark" title="' + esc(title) + '">−' +
+      d.sale.pct + "%</span>";
   }
 
   /* Why the Advertised column is one figure rather than two.
@@ -1023,6 +1039,28 @@
            the price is. */
         var marks = saleTag(d);
         return figure + (marks ? '<span class="marks">' + marks + "</span>" : "");
+      },
+      /* On a card there is no Advertised column, and the berth price reaches
+         the reader only as the first half of the total's split — so the
+         markdown reached them not at all. A discounted sailing looked exactly
+         like a full-price one on the device this page is built for.
+       *
+         What goes here is the sale tag and nothing else: the figure is
+         already on the line above, inside the split it is one half of, and
+         printing it twice in one box would be two prices for one berth. The
+         same `saleTag` the table calls, so the two renderings cannot drift —
+         what the card adds is the subject, because "€1,347" struck through
+         under a split is a fourth number in a tinted box and a phone has no
+         column heading to say which. `was` only where there is a figure to
+         have been: the tag says "on sale" on its own where a seller marked a
+         sailing down and stated no rate against this row's fare, and "was on
+         sale" is not English. */
+      card: function (d) {
+        var marks = saleTag(d);
+        if (!marks) return "";
+        return '<span class="saleline">' +
+          (d.sale && d.sale.was ? "<i>was</i>" : "") +
+          '<span class="marks">' + marks + "</span></span>";
       } },
     /* The cheapest bill anyone quotes for this sailing, not this site's own.
      *
@@ -2186,7 +2224,7 @@
         '<div class="card-head">' +
           '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
           '<div class="card-money cost">' + cell("total", row) +
-            cardCell("perdive", row) + "</div>" +
+            cardCell("base", row) + cardCell("perdive", row) + "</div>" +
         "</div>" +
         '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
         '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
@@ -2261,13 +2299,19 @@
      perform -- and a rail item's number is a promise about what opening it
      gives you, broken by the click rather than merely disagreeing.
 
-     The trips figure skips the sale facet for the same reason the chip does:
-     with the chip on, a count that included it would collapse onto the visible
-     rows and stop being the way back. */
+     **Every filter counts, the sale chip included.** This skipped the sale
+     facet, on the reasoning a chip's own count is built from -- a number that
+     answers "what if I picked this too?" has to ignore the thing you picked.
+     But that is the arithmetic for a *chip*, and this is not one: it is the
+     table's own size, printed beside the rail item that opens the table. With
+     the chip on it read 1,145 over 237 rows, disagreeing with `rows shown` a
+     few inches away, and it was the only one of the eight filters that did --
+     Hide sold out sits in the same bank and collapsed onto the rows exactly
+     as it should. */
   function countRail() {
     var trips = 0;
     D.departures.forEach(function (dep) {
-      if (passes(dep, D.itineraries[dep.itinerary_id], "sale")) trips++;
+      if (passes(dep, D.itineraries[dep.itinerary_id], null)) trips++;
     });
     railTripsCount.textContent = trips.toLocaleString("en-IE");
     /* A count only where there are sailings behind it. PADI can be advertising
@@ -3345,9 +3389,27 @@
     var selection = window.getSelection && window.getSelection();
     if (selection && !selection.isCollapsed) return;
 
+    /* ONE ROW, UNLESS THE VISITOR ASKS FOR MORE.
+       Every press used to add another mark and nothing ever took one away
+       but a second press on that same row, so a reader who had kept their
+       place four times had four rows lit and no way to tell which was this
+       one. A mark is where you are; a list of everywhere you have been is a
+       different feature nobody asked for.
+
+       So a plain press collapses the set onto the row pressed, and Ctrl --
+       Cmd on a Mac -- toggles that row and leaves the rest, which is the
+       idiom every file list on both platforms already teaches. Pressing the
+       only marked row still clears it: that is the one way back to no marks
+       at all on a touch screen, where there is no modifier to hold. */
     var id = tr.dataset.id;
-    if (state.marked.has(id)) state.marked.delete(id);
-    else state.marked.add(id);
+    var alone = state.marked.size === 1 && state.marked.has(id);
+    if (event.ctrlKey || event.metaKey) {
+      if (state.marked.has(id)) state.marked.delete(id);
+      else state.marked.add(id);
+    } else {
+      state.marked.clear();
+      if (!alone) state.marked.add(id);
+    }
     draw(true);
   });
 
@@ -3559,9 +3621,14 @@
   var mouse = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   /* `opts.hoverOpens` (default true) governs the peek only. Click and tap open
-     every panel, always. The Entry bar turns it off (#151): it sits in the
-     money block, so running the pointer down that column to compare prices
-     opened a dialog on every row it crossed. */
+     every panel, always. Two of the three turn it off, and for the same
+     reason: the Entry bar sits in the money block, so running the pointer
+     down that column to compare prices opened a dialog on every row it
+     crossed (#151) -- and the bill is the widest thing this page draws, so a
+     peek of it is a 46em card landing over the rows a reader is comparing,
+     from a gesture they did not mean as a request. The cabin ladder keeps
+     its peek: it is 21em beside the cell it belongs to, and comparing
+     ladders down a column is what it is for. */
   function panelDialog(dialog, selector, fill, opts) {
     var hoverOpens = !opts || opts.hoverOpens !== false;
     /* `showing` is the trigger the dialog is open for, `peeked` says it was
@@ -3761,12 +3828,18 @@
 
   /* The bill, out of the dropdown it used to expand into (#149). Everything
      that dropdown held except the entry bar, which is not a fee and has a
-     panel of its own on the column it belongs to. */
+     panel of its own on the column it belongs to.
+
+     Pressed, never hovered. A bill is two sellers' tables and the caveats
+     under them -- the biggest panel here by a distance -- and a peek of it
+     covered the rows it was meant to explain, on a pointer that was on its
+     way somewhere else. It is a document a reader opens, so it opens on the
+     gesture that says so. */
   panelDialog(document.getElementById("feePanel"), ".fees-open", function (host, trigger) {
     var row = rowFor(trigger.dataset.fees);
     if (!row) return false;
     host.innerHTML = billPanel(row);
-  });
+  }, { hoverOpens: false });
 
   /* The stated requirement, in full, from the column that prints its short
      form. Its own panel and not a line in the fee one: whether a diver may

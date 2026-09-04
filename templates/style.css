@@ -1009,10 +1009,11 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
  * is already clamped into it by `place()`. On a phone that is most of the
  * screen, which is the right answer for a document a reader opened
  * deliberately and can dismiss with Escape or a tap outside. */
-/* `.panel.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
-   21-25em width and is written further down this file, so at equal specificity
-   it won and capped the bill at 400px however wide the screen was. */
-.panel.bill-pop { min-width:min(30em, calc(100vw - 16px)); max-width:min(46em, calc(100vw - 16px)); }
+/* The bill's own width is written with the two panel states further down this
+   file, where the order settles it -- see THE WIDE PANEL there. It was here,
+   as `.panel.bill-pop`, on the reasoning that the extra class beat the shared
+   rule; then the shared rule became `.panel:not(:modal)`, which is 0,2,0 as
+   well, and the later of two equals won. */
 /* On `.pbody` and not on the dialog: the dialog's own box has to stay padding
    free, because a press landing on it is how the backdrop is told apart from
    the sheet. Dropped in the rewrite that made these dialogs, and every amount
@@ -1270,6 +1271,15 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   font-size:10px; font-weight:600; color:var(--ok);
   font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
 }
+/* The fare the rate came off, struck through beside it. Same treatment as the
+   Was column on the sale view -- mono, struck, quiet -- because it is the same
+   fact and a reader crossing between the two views should not have to work
+   that out. Quieter than the rate: what the trip costs is the figure above it,
+   and this is the one it used to be. */
+.sale-was {
+  font-size:10px; color:var(--ink-faint); font-family:var(--font-mono);
+  text-decoration:line-through; white-space:nowrap;
+}
 /* Where the sale tag lives: a line of its own under the advertised figure.
    Beside it, it was the width of the column on every row -- see the note where
    it is built. It shared this line with a `2 sellers` mark until that mark
@@ -1397,6 +1407,19 @@ a { color:var(--accent); }
   }
   .card-money .perline b { color:var(--ink); font-size:11.5px; }
   .card-money .perline.dim { color:var(--ink-faint); }
+  /* The markdown, under the split whose first figure it comes off. No rule
+     above it: the one in this box separates the total from what is derived
+     from it, and this is another reading of the berth rather than a third
+     section. The subject is a label in the meta line's own vocabulary,
+     because that is what a card uses where the table has a heading. */
+  .card-money .saleline {
+    display:flex; justify-content:flex-end; align-items:baseline; gap:5px;
+    margin-top:1px; line-height:1.3;
+  }
+  .card-money .saleline i {
+    font-style:normal; font-family:var(--font-narrow); font-size:9px;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
+  }
   /* The cells keep their table classes so the colours and the panel triggers
      come across -- and those classes carry the table's widths, which are the
      one thing that must not. A 116px reef cell in a 370px card set the sites
@@ -1432,7 +1455,10 @@ a { color:var(--accent); }
      agreeing here is a coincidence rather than a dependency. */
   .card .berths { flex-direction:row; gap:.3em; align-items:baseline;
                   justify-content:flex-start; }
-  .card .marks { display:inline-flex; margin:0; }
+  /* The gap is written here as well as on the table's own `.marks`, because
+     that rule is `td.money .marks` and a card has no cells: without it the
+     struck fare and the rate print as one word. */
+  .card .marks { display:inline-flex; margin:0; gap:5px; align-items:baseline; }
   /* Each fact keeps the class its table cell had, so the panel triggers, the
      colours and the sold-out treatment all arrive without a second set of
      rules. What is added is the label, because a card has no column heading
@@ -1806,6 +1832,24 @@ a { color:var(--accent); }
   max-width: min(46em, calc(100vw - 2rem));
   min-width: 0;
 }
+/* THE WIDE PANEL, AND IT IS PLACED RATHER THAN WEIGHTED.
+   The fee table's five columns want 460px, so the 21-25em the other two
+   panels read well at is not a width the bill can be read at: the table
+   scrolls sideways inside its own `.fee-scroll` and the tier and the
+   provenance sit past the right edge. That is what shipped on a desktop --
+   336px of bill on a 1440px screen -- because this rule was written up beside
+   the fee table and answered `.panel-pop` on specificity, and `.panel-pop`
+   then became `.panel:not(:modal)`, which is a class's worth too. At 0,2,0
+   apiece the later one wins, and this one was 700 lines earlier.
+
+   So it sits after both states instead, where nothing has to be counted --
+   and *before* the sheet block below, which is the one place the bill must
+   not win: a sheet is the full width of the phone and takes its width from
+   there. */
+.panel.bill-pop {
+  min-width: min(30em, calc(100vw - 16px));
+  max-width: min(46em, calc(100vw - 16px));
+}
 .panel::backdrop { background: rgba(20, 26, 34, .45); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .panel::backdrop { background: rgba(0, 0, 0, .6); }
@@ -1894,7 +1938,18 @@ a { color:var(--accent); }
   font-weight: 600;
   padding: .35em .7em .2em;
 }
-.panel table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+/* A cabin's name wraps, and the two numbers beside it do not.
+   `tbody td` is the *table's* rule -- `white-space:nowrap`, so a departure's
+   cells stay one line down a column -- and the ladder is a `tbody` too, so it
+   inherited a rule about a different table. "Standard Sea View Cabin - Main
+   Deck" then set the table's own minimum at 403px inside a 334px peek, and
+   the panel grew a horizontal scrollbar under a three-rung ladder that had
+   room to spare. Nine of the first forty sailings did it. The money and the
+   count keep `nowrap` from `.num`, which is more specific than this. */
+.panel table.cabins td {
+  padding: .22em .7em; border-top: 1px solid var(--rule);
+  white-space: normal;
+}
 .panel table.cabins .num {
   text-align: right;
   font-family: var(--font-mono);

@@ -623,16 +623,37 @@ Break these and the site starts lying quietly rather than failing loudly.
   *outcome* over three rounds — the list must not move at all under an open
   panel and must scroll exactly as before once it closes — rather than the
   property that delivers it.
-  **The hover peek stays, as the same element shown the other way.** A diver
-  comparing cabin ladders or fee books wants them without a click each time, so
-  a mouse on Places or Mandatory fees gets `show()` anchored to the trigger,
-  and `:modal` in the stylesheet is what tells the two apart: one dialog with
-  two native states, never two implementations. `opts.hoverOpens` (default
-  true) governs the peek only — **Entry bar turns it off (#151)**, because it
+  **The hover peek stays on the cabin ladder, and on nothing else.** A diver
+  comparing ladders down the Places column wants them without a click each
+  time, so a mouse there gets `show()` anchored to the trigger, and `:modal`
+  in the stylesheet is what tells the two apart: one dialog with two native
+  states, never two implementations. `opts.hoverOpens` (default true) governs
+  the peek only, and **two of the three turn it off**. Entry bar, because it
   sits in the money block and running the pointer down that column to compare
-  prices opened a dialog on every row it crossed. Press and tap open every
-  panel regardless: hover does not exist on a touch screen and this page is
-  built to work on a phone in a dive shop.
+  prices opened a dialog on every row it crossed (#151). And **Mandatory
+  fees**, because the bill is the widest thing this page draws — two sellers'
+  tables and the caveats under them — so a peek of it lands over the rows it
+  is meant to explain, from a gesture the reader did not mean as a request. A
+  bill is a document somebody opens; it opens on the press that says so.
+  Press and tap open every panel regardless: hover does not exist on a touch
+  screen and this page is built to work on a phone in a dive shop.
+  **The bill is the wide panel, and its width is placed rather than
+  weighted.** Its columns want 460px, so the 21–25em the ladder reads well at
+  is not a size it can be read at — the table scrolls sideways inside its own
+  `.fee-scroll` and the tier and the provenance sit past the edge, which is
+  what shipped on a desktop at 336px. `.panel.bill-pop` was written beside the
+  fee table and beat `.panel-pop` on specificity; the dialog rewrite turned
+  that shared rule into `.panel:not(:modal)`, a class's worth as well, and at
+  0,2,0 apiece the later of the two won. So the rule sits **after both state
+  rules and before the sheet block**, which is the one place it must lose: a
+  sheet takes its width from the phone. Ordering, not specificity — the count
+  was what went stale.
+  **A cabin's name wraps, and the two numbers beside it do not.** `tbody td
+  { white-space: nowrap }` is the *table's* rule, and the ladder is a `tbody`
+  too, so it inherited a rule about a different table: "Standard Sea View
+  Cabin - Main Deck" set the ladder's own minimum at 403px inside a 334px
+  peek and grew a scrollbar under a three-rung ladder with room to spare, on
+  nine of the first forty sailings.
   **Hover is asked twice, and both answers are needed.** The media query
   (`(hover: hover) and (pointer: fine)`) is the device; `event.pointerType ===
   "mouse"` is the gesture, because a laptop with a touch screen has both.
@@ -748,6 +769,15 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
   the pinned *first* cell, which was the expander and is now `.stick1`, so
   reclaiming the width did not quietly delete the mark.
+  **One row is marked at a time, and Ctrl holds more.** A mark is where the
+  reader is while they scroll twelve columns sideways; every press used to add
+  another and only a second press on that same row took one away, so keeping
+  your place four times lit four rows and none of them said which was this
+  one. A plain press collapses the set onto the row pressed and Ctrl — Cmd on
+  a Mac — toggles one and leaves the rest, which is the idiom both platforms'
+  file lists already teach. Pressing the **only** marked row still clears it:
+  that is the one way back to no marks on a touch screen, where there is no
+  modifier to hold.
 - **Twelve columns, in four named bands, and the bill is tinted.** Sixteen
   columns of one weight gave the eye nothing to land on, so the money — the
   thing this site exists to publish — was exactly as findable as the return
@@ -853,7 +883,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   how it would come back. Every card cell
   reads the same column's renderer, so the two cannot drift and the three panel
   triggers come across working — `cardCell` falls through to `show` unless the
-  column declares a `card`, and **exactly one does**. Price per dive was a bare
+  column declares a `card`, and **two do**. Price per dive was a bare
   `€95` on the meta line, one gap from `+€400 → 500` and in the same weight:
   two euro figures, neither named, told apart only by a column heading a phone
   does not draw — and its `↓ 17+` carried its meaning in a `title`, on the one
@@ -861,7 +891,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   tinted box, and says *a dive* in words. The different words go on the column
   rather than into `renderCards`, so a second reading of the data has nowhere
   to appear; and both silences survive the move with a subject in front of
-  them, because *not stated* under a total reads as a fact about the money. This replaced a typed
+  them, because *not stated* under a total reads as a fact about the money.
+  **Advertised is the second, and it prints only its markdown there.** A card
+  has no Advertised column: the berth price reaches the reader as the first
+  half of the total's split, and the sale tag reached them not at all, so a
+  discounted sailing looked exactly like a full-price one on the device this
+  page is built for. What goes in the money box is `saleTag` and nothing else
+  — the figure is already on the line above, and printing it twice is two
+  prices for one berth — plus the subject the table gets from its column
+  heading: *was* €1,347 −15%, and *was* only where a seller stated a figure to
+  have been, since the tag says "on sale" on its own where none did. This replaced a typed
   breakpoint at 385px that was wrong on most phones (#150): 385 was measured
   against a Total column 155px wide and the column was 211px, sized by its
   worst-case row. **A typed breakpoint here is a number derived from the data,
@@ -938,6 +977,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   reason they are out there. So `Clear all` leaves them where the visitor put
   them too — it clears what the bar lists, and resetting a control the bar does
   not name is an unnamed side effect that moves every total on the page.
+  **A chip's count skips its own facet; the rail's does not.** A chip states
+  what pressing it would leave, so its arithmetic has to ignore the thing you
+  are about to pick — and `countRail` borrowed that reasoning for the trips
+  figure, which is not a chip but the table's own size printed beside the item
+  that opens the table. With On sale down it read 1,145 over 237 rows, a few
+  inches from a `rows shown` saying 237, and it was the only one of the eight
+  filters that did: Hide sold out sits in the same bank and collapsed onto the
+  rows exactly as it should. `test_every_filter_counts_what_it_leaves` presses
+  all eight and asks each three things — the chip, `rows shown` and the rail
+  agree; every row left really is one the filter asks for, checked against
+  what that row prints; and the result is neither the whole table nor nothing,
+  because both of those pass any assertion phrased as *the count changed*.
+  Four of the eight expect a figure counted from the shipped payload rather
+  than read off the page: a browser agreeing with itself is not evidence.
   **A bank ordered by a count is ordered by the count it is showing.** The
   `tally` banks — Departs from, Dive sites, Boat — re-rank on every recount,
   chosen chips leading. Dive sites is where it bites, because that bank is
@@ -1159,6 +1212,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **And the rate is printed with the fare it came off.** "−15%" against a
+  figure the reader has to work out is a claim they cannot check, which is
+  what this page reports in other people — and `sale.was` was sitting in the
+  row's `title` on 236 of the 237 discounted sailings, printed nowhere. It
+  goes on the marks line, struck through, to the left of the rate so the rate
+  keeps its place down the column; the Advertised column does not widen by a
+  pixel, because the fare above it already sets that width. **Stated, never
+  reconstructed**: it is the seller's own struck-through list price, so
+  dividing the fare by the rate is forbidden the way every other invented
+  price is — it would round a figure into existence, and it would answer for
+  the one sailing that has no `was` precisely because no seller stated one.
   **Each markdown is dated to the day its own seller was read**, like the berth
   counts and for the same reason: `berths_read` and `padi_berths_read` are two
   crawls two days apart, and the sale marks stamped the first over both — on
