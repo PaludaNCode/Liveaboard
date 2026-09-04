@@ -2951,6 +2951,30 @@ class TestTheSaleViewIsDesignedRatherThanRelocated(unittest.TestCase):
         self.assertIn("dep.sale.pct", rates,
                       "a sale with no stated rate is being counted as a rate")
 
+    def test_the_rate_is_printed_with_the_fare_it_came_off(self) -> None:
+        """"−15%" off a figure the reader has to work out is a claim they
+        cannot check, which is the thing this site reports in other people.
+        The fare was in the tooltip on 236 of the 237 discounted sailings and
+        nowhere on the row.
+
+        Printed, and **stated rather than reconstructed**: it is the seller's
+        own struck-through list price. Dividing the fare by the rate would
+        round a number into existence and put this site's arithmetic where an
+        operator's price belongs — and it would answer for the one sailing
+        that has no `was` precisely because no seller stated one.
+        """
+        tag = self.app.split("function saleTag(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn('class="sale-was"', tag,
+                      "the rate is printed with no fare beside it")
+        self.assertIn("d.sale.was", tag)
+        css = (ROOT / "templates" / "style.css").read_text(encoding="utf-8")
+        self.assertIn(".sale-was", css, "the struck fare has no styling")
+        for invented in ("1 - d.sale.pct", "(1 - ", "/ (1-", "pct / 100",
+                         "pct/100"):
+            with self.subTest(invented=invented):
+                self.assertNotIn(invented, self.app,
+                                 "a list price is being computed from the rate")
+
     def test_the_saving_is_never_was_minus_the_quoted_price(self) -> None:
         """`sale.was` is already converted to the display currency and the
         payload's `price` is the sailing's own, so subtracting them is nonsense

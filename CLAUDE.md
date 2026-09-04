@@ -1189,6 +1189,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **And the rate is printed with the fare it came off.** "−15%" against a
+  figure the reader has to work out is a claim they cannot check, which is
+  what this page reports in other people — and `sale.was` was sitting in the
+  row's `title` on 236 of the 237 discounted sailings, printed nowhere. It
+  goes on the marks line, struck through, to the left of the rate so the rate
+  keeps its place down the column; the Advertised column does not widen by a
+  pixel, because the fare above it already sets that width. **Stated, never
+  reconstructed**: it is the seller's own struck-through list price, so
+  dividing the fare by the rate is forbidden the way every other invented
+  price is — it would round a figure into existence, and it would answer for
+  the one sailing that has no `was` precisely because no seller stated one.
   **Each markdown is dated to the day its own seller was read**, like the berth
   counts and for the same reason: `berths_read` and `padi_berths_read` are two
   crawls two days apart, and the sale marks stamped the first over both — on

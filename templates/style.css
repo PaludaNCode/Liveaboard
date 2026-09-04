@@ -1271,6 +1271,15 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   font-size:10px; font-weight:600; color:var(--ok);
   font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
 }
+/* The fare the rate came off, struck through beside it. Same treatment as the
+   Was column on the sale view -- mono, struck, quiet -- because it is the same
+   fact and a reader crossing between the two views should not have to work
+   that out. Quieter than the rate: what the trip costs is the figure above it,
+   and this is the one it used to be. */
+.sale-was {
+  font-size:10px; color:var(--ink-faint); font-family:var(--font-mono);
+  text-decoration:line-through; white-space:nowrap;
+}
 /* Where the sale tag lives: a line of its own under the advertised figure.
    Beside it, it was the width of the column on every row -- see the note where
    it is built. It shared this line with a `2 sellers` mark until that mark

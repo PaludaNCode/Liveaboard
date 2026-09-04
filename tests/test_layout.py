@@ -1907,6 +1907,61 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_a_discounted_row_prints_the_fare_the_rate_came_off(self) -> None:
+        """And prints it inside the column, which is why this is measured.
+
+        The rate sat alone under the fare for want of 36px, and the fare it
+        came off was in a `title` — a claim the reader could not check on the
+        page that exists to make prices checkable. The struck figure goes on
+        the same line, to the left of the rate so the rate keeps its place
+        down the column, and it has to fit: `.marks` is right-aligned, so
+        anything too wide grows out of the left of the cell and over the
+        column beside it.
+
+        Measured at the three widths the table has regimes at, because the
+        money columns are content-sized and what fits at 1440 is not what fits
+        at 900.
+        """
+        page = self.open(1440, 900)
+        try:
+            for width, height in ((1440, 900), (1280, 800), (900, 800)):
+                page.set_viewport_size({"width": width, "height": height})
+                page.wait_for_timeout(180)
+                seen = page.evaluate("""() => {
+                  const rows = [...document.querySelectorAll('#body td.money')]
+                    .filter(td => td.querySelector('.sale-mark'));
+                  const withWas = rows.filter(td => td.querySelector('.sale-was'));
+                  const out = withWas.filter(td => {
+                    const cell = td.getBoundingClientRect();
+                    const was = td.querySelector('.sale-was').getBoundingClientRect();
+                    return was.left < cell.left + 1 || was.right > cell.right + 1;
+                  }).length;
+                  const order = withWas.filter(td => {
+                    const was = td.querySelector('.sale-was').getBoundingClientRect();
+                    const pct = td.querySelector('.sale-mark').getBoundingClientRect();
+                    return was.right > pct.left + 1;
+                  }).length;
+                  return { marked: rows.length, was: withWas.length,
+                           out: out, order: order,
+                           text: withWas.length
+                             ? withWas[0].querySelector('.sale-was').textContent : "" };
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertGreater(seen["marked"], 0,
+                                   "no discounted row on the first page " + where)
+                self.assertGreater(seen["was"], 0,
+                                   "a rate is printed with no fare beside it "
+                                   + where)
+                self.assertRegex(seen["text"], r"^€[\d,]+$",
+                                 "the struck figure is not a price " + where)
+                self.assertEqual(0, seen["out"],
+                                 "%d struck fare(s) sit outside the Advertised "
+                                 "column %s" % (seen["out"], where))
+                self.assertEqual(0, seen["order"],
+                                 "the struck fare overlaps the rate " + where)
+        finally:
+            page.close()
+
     def test_one_row_is_marked_at_a_time_unless_ctrl_is_held(self) -> None:
         """A mark is where you are, not everywhere you have been.
 

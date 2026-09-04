@@ -460,7 +460,23 @@
        built from a missing one printed "€NaN" into the tooltip. */
     var title = (d.sale.was ? "Down from " + eur(d.sale.was) + ", per " : "Marked down by ") +
       who.join(" and ");
-    return '<span class="sale-mark" title="' + esc(title) + '">−' + d.sale.pct + "%</span>";
+    /* And the figure is printed rather than only described. A rate with no
+       fare beside it is the one thing this page exists to correct in a seller:
+       "−15%" off an amount the reader has to work out is a claim they cannot
+       check, and the number was sitting in the tooltip on 236 of the 237
+       discounted sailings. It is the seller's own struck-through list price,
+       so it is stated and not reconstructed from the rate -- which would
+       round a figure into existence and put this site's arithmetic where an
+       operator's price belongs. The one sailing without it is PADI's markdown
+       against a fare liveaboard.com set, and it states no percentage either.
+       Struck through, in the mono the other prices use, and to the *left* of
+       the rate, so the rate stays where the eye already reads it down the
+       column. */
+    var was = d.sale.was
+      ? '<span class="sale-was">' + eur(d.sale.was) + "</span>"
+      : "";
+    return was + '<span class="sale-mark" title="' + esc(title) + '">−' +
+      d.sale.pct + "%</span>";
   }
 
   /* Why the Advertised column is one figure rather than two.
