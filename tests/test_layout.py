@@ -2156,6 +2156,132 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             finally:
                 page.close()
 
+    def test_a_guest_bound_keeps_the_boats_that_state_no_count(self) -> None:
+        """The one filter here whose subject some rows cannot answer about.
+
+        `dep.nights` is stated on every departure, so the nights range never
+        had to decide what a bound means for a row with no figure. A guest
+        count is stated on 70 of the 77 boats -- six of the rest are hulls
+        liveaboard.com does not list at all and PADI publishes no guest count
+        anywhere, so there is no second source coming for them.
+
+        A bound is a claim about a number and those rows have none, so they
+        can neither satisfy nor contradict it: they stay, and the chip beside
+        the boxes is the only thing that removes them. Dropping them silently
+        would delete 98 real, bookable sailings on the grounds of a gap in our
+        own reading -- the same mistake as reporting an unread page as an empty
+        one -- and it would be invisible, because a filtered table looks
+        exactly the same either way.
+
+        Four things, all of them counted from the shipped payload rather than
+        read off the page:
+
+        1. A bound keeps every row that states no count, and every row it
+           leaves either sits inside the bound or says it states none.
+        2. The chip states what pressing it leaves, and the table then shows
+           exactly that -- with no unstated row left in it.
+        3. The bank's note carries the number of rows that state none. It is
+           written by `app.js` from the payload for the reason the money fold
+           was: a figure typed into a template is a figure that goes stale the
+           day a boat's page starts stating its capacity (#150, #144).
+        4. Clear all puts all three back, boxes included.
+        """
+        payload = shipped_payload()
+        itineraries = payload["itineraries"]
+        counts = [itineraries[d["itinerary_id"]].get("guests")
+                  for d in payload["departures"]]
+        stated = [n for n in counts if n is not None]
+        unstated = len(counts) - len(stated)
+        self.assertTrue(stated, "no boat states a guest count")
+        self.assertTrue(unstated, "every boat states one — nothing to guard")
+
+        bound = 16
+        within = sum(1 for n in stated if n <= bound)
+        self.assertGreater(within, 0, "no sailing is on a boat of %d or fewer" % bound)
+        self.assertLess(within + unstated, len(counts),
+                        "a bound of %d would keep the whole table" % bound)
+
+        # What each row says about itself, which is what the reader compares.
+        read = """() => {
+          const rows = [...document.querySelectorAll('#body tr.row')];
+          const said = r => r.querySelector('td.boat .sub').textContent.trim();
+          return {
+            drawn: rows.length,
+            unstated: rows.filter(r => said(r) === 'guests not stated').length,
+            over: rows.filter(r => said(r) !== 'guests not stated'
+                                   && Number(said(r).split(' ')[0]) > %d).length,
+            shown: Number(document.getElementById('shown')
+                     .textContent.replace(/,/g, '')),
+            rail: Number(document.getElementById('navTripsCount')
+                     .textContent.replace(/,/g, '')),
+            chip: (document.getElementById('hideUnstated').textContent
+                     .match(/([\\d,]+)\\s*$/) || [])[1],
+            note: document.getElementById('bankNote').textContent,
+            badge: document.getElementById('filtersCount').textContent,
+          };
+        }""" % bound
+
+        page = self.open(1440, 900)
+        try:
+            page.click("#filtersToggle")
+            page.wait_for_timeout(280)
+            page.click('.bank-tab[data-bank="guests"]')
+            page.wait_for_timeout(200)
+
+            note = page.text_content("#bankNote")
+            self.assertIn(str(unstated), note,
+                          "the bank's note does not say how many sailings "
+                          "state no count: %r" % note)
+
+            page.fill("#gmax", str(bound))
+            page.wait_for_timeout(360)
+            seen = page.evaluate(read)
+            self.assertEqual(within + unstated, seen["shown"],
+                             "a bound of %d left %d rows where the payload has "
+                             "%d inside it and %d stating nothing"
+                             % (bound, seen["shown"], within, unstated))
+            self.assertEqual(seen["shown"], seen["rail"],
+                             "the rail says %s over a table of %s"
+                             % (seen["rail"], seen["shown"]))
+            self.assertEqual(0, seen["over"],
+                             "%d rows on screen are on a boat of more than %d"
+                             % (seen["over"], bound))
+            self.assertGreater(seen["unstated"], 0,
+                               "the bound dropped every row that states no "
+                               "count — 98 bookable sailings, silently")
+            self.assertEqual(str(within), (seen["chip"] or "").replace(",", ""),
+                             "the chip promises %r where pressing it leaves %d"
+                             % (seen["chip"], within))
+
+            page.click("#hideUnstated")
+            page.wait_for_timeout(360)
+            after = page.evaluate(read)
+            self.assertEqual(within, after["shown"],
+                             "hiding the unstated rows left %d where the "
+                             "payload has %d inside the bound"
+                             % (after["shown"], within))
+            self.assertEqual(0, after["unstated"],
+                             "%d rows stating no count survived the chip"
+                             % after["unstated"])
+            self.assertEqual("2", after["badge"],
+                             "the drawer's badge says %r over a bound and a "
+                             "switch" % after["badge"])
+
+            page.click("#reset")
+            page.wait_for_timeout(360)
+            back = page.evaluate(read)
+            self.assertEqual(len(counts), back["shown"],
+                             "Clear all left %d of %d rows"
+                             % (back["shown"], len(counts)))
+            self.assertEqual("", page.input_value("#gmax"),
+                             "Clear all dropped the bound and left the box "
+                             "holding the number that set it")
+            self.assertEqual(
+                "false", page.get_attribute("#hideUnstated", "aria-pressed"),
+                "Clear all left the unstated switch lit")
+        finally:
+            page.close()
+
     def test_one_row_is_marked_at_a_time_unless_ctrl_is_held(self) -> None:
         """A mark is where you are, not everywhere you have been.
 

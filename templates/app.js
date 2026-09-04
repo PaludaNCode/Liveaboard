@@ -42,6 +42,37 @@
      nothing for it to hide. */
   var soldOutCount = D.departures.filter(function (d) { return !d.bookable; }).length;
 
+  /* HOW MANY DIVERS THE BOAT CARRIES, AND HOW MANY ROWS DO NOT SAY.
+   *
+     Berth price is per person, so this is the difference between buying into a
+     boat of twelve and one of thirty-four, and it is the operator's own
+     `Max guests` row rather than anything derived: two independent readings of
+     it -- that specification table and the per-trip fragment's Group Size --
+     agree on every one of the 69 vessels where both speak.
+
+     Three things read this and all three are counts rather than typed
+     numbers: the range's own bounds, the chip that drops the rows stating
+     nothing, and whether the bank is offered at all. A bound typed into a
+     template is a number derived from the data in a file that cannot see the
+     data, which is how the money fold and the footer prose both shipped
+     wrong (#150, #144).
+
+     The rows with no count are the whole reason the chip exists. Seven boats
+     state none -- six that liveaboard.com does not list at all, plus one whose
+     table has no such row -- and PADI publishes no guest count anywhere, so
+     there is no second source coming for them. They are real, bookable
+     sailings and the gap is in our reading, so a bound **keeps** them and the
+     chip is how a reader who is actually shopping small boats drops them
+     deliberately. Silently deleting 98 sailings because we could not read
+     their hull is the same mistake as reporting an unread page as an empty
+     one. */
+  var guestCounts = [], unstatedGuests = 0;
+  D.departures.forEach(function (d) {
+    var stated = (D.itineraries[d.itinerary_id] || {}).guests;
+    if (stated == null) unstatedGuests += 1;
+    else guestCounts.push(stated);
+  });
+
   /* THE SHELL IS WHAT THE WINDOW MEASURES, AND IT IS MEASURED RATHER THAN
      DECLARED.
    *
@@ -181,6 +212,11 @@
        bank here -- a filter nobody has touched must never be a filter. */
     sellers: new Set(),
     nightsMin: null, nightsMax: null, hideSoldOut: false,
+    /* The same shape for how many people are aboard, plus the third state
+       nights never needs: `dep.nights` is always stated and a guest count is
+       not, so a bound has to say what it does about a boat that stated none.
+       It keeps them, and this is the switch that does not. */
+    guestsMin: null, guestsMax: null, hideUnstatedGuests: false,
     /* Only sailings a seller has marked down. Off by default, like every
        other filter here: a page that opened showing 268 of 1,122 rows would
        be answering a question nobody asked. */
@@ -926,10 +962,11 @@
           "</span>";
       } },
     /* Berth price is per person, so the second line says whether you are
-       buying into a boat of twelve or of thirty-four. Null where the
-       description does not state it — about half the fleet, which is a gap in
-       the scrape rather than an operator declining to say, and the line says
-       which. */
+       buying into a boat of twelve or of thirty-four. Null where no source
+       states it — seven of the 77 boats, which is a gap in what we can read
+       rather than an operator declining to say, and the line says which. It
+       was "about half the fleet" until the specification table was parsed,
+       and then it was a sentence describing a scrape that had moved on. */
     { k: "boat", t: "Boat", cls: "boat", zone: "when",
       v: function (d, i) { return i.boat; },
       show: function (d, i) {
@@ -1615,6 +1652,19 @@
     if (skip !== "sale" && saleOnly() && !dep.sale) return false;
     if (state.nightsMin !== null && dep.nights < state.nightsMin) return false;
     if (state.nightsMax !== null && dep.nights > state.nightsMax) return false;
+    /* How many divers the boat carries. A bound is a claim about a number, and
+       a boat that states none can neither satisfy nor contradict one -- so an
+       unstated count is not a small boat, not a large one, and not a row to
+       drop: the bounds are asked only where there is a figure to ask them of,
+       and the chip is the only thing here that removes such a row. Its own
+       facet is skipped for its count, exactly as `soldout` is, or switching it
+       on would take that count to zero and the way back with it. */
+    if (itin.guests == null) {
+      if (skip !== "unstated" && state.hideUnstatedGuests) return false;
+    } else {
+      if (state.guestsMin !== null && itin.guests < state.guestsMin) return false;
+      if (state.guestsMax !== null && itin.guests > state.guestsMax) return false;
+    }
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
     if (skip !== "boats" && state.boats.size && !state.boats.has(itin.boat)) return false;
     if (state.sites.size) {
@@ -3928,6 +3978,85 @@
   nmin.addEventListener("input", readNights);
   nmax.addEventListener("input", readNights);
 
+  /* A range for the same reason and from the opposite distribution. Nights is
+     a range because the fleet sits at seven, so a chip per length would be one
+     useful control among empty ones; guests spreads across fifteen values from
+     eight to thirty-six with no dominant one, so a chip per number would be
+     fifteen controls for a distinction nobody shops on -- and the cut points a
+     reader actually wants are cumulative rather than exact ("at most twenty",
+     a third of the table). Buckets -- small, medium, large -- would be an
+     invented layer of exactly the kind the route and theme labels were
+     removed for: a name for a set of numbers that can be wrong and answers
+     nothing the numbers do not.
+
+     The bounds come off the stated counts, so the boxes never offer a figure
+     no boat here carries. */
+  var gmin = document.getElementById("gmin"), gmax = document.getElementById("gmax");
+  if (guestCounts.length) {
+    gmin.min = gmax.min = Math.min.apply(null, guestCounts);
+    gmin.max = gmax.max = Math.max.apply(null, guestCounts);
+    gmin.placeholder = gmin.min;
+    gmax.placeholder = gmax.max;
+  }
+
+  function readGuests() {
+    var lo = gmin.value === "" ? null : +gmin.value;
+    var hi = gmax.value === "" ? null : +gmax.value;
+    /* 20 then 12 means a boat of twelve to twenty, not nothing at all --
+       the same courtesy the nights boxes extend. */
+    if (lo !== null && hi !== null && lo > hi) { var t = lo; lo = hi; hi = t; }
+    state.guestsMin = lo;
+    state.guestsMax = hi;
+    draw();
+  }
+  gmin.addEventListener("input", readGuests);
+  gmax.addEventListener("input", readGuests);
+
+  /* And the switch beside them, which is the only control on this page that
+     removes a row for something nobody stated.
+
+     Counted like every other chip here -- what pressing it **leaves**, live,
+     against the rows the other filters leave -- so it is directly comparable
+     with the table beside it. What it removes is in the title and in the
+     bank's own note, because the reader deciding whether to press it is
+     deciding about those rows.
+
+     Hidden where every boat states a count, like the sold-out chip: a switch
+     that removes nothing is a control dressed as one that does. Kept and
+     disabled at zero, for the reason that chip is -- "every trip these filters
+     leave has no stated count" is an answer, and a control that vanishes
+     under a filter tells the reader nothing at all. */
+  var unstated = document.getElementById("hideUnstated");
+  if (unstatedGuests) {
+    unstated.hidden = false;
+    BANKS.push({
+      recount: function () {
+        var n = 0;
+        D.departures.forEach(function (dep) {
+          var itin = D.itineraries[dep.itinerary_id];
+          if (itin.guests == null) return;
+          if (passes(dep, itin, "unstated")) n += 1;
+        });
+        unstated.textContent = "Hide unstated " + n;
+        var dead = n === 0 && !state.hideUnstatedGuests;
+        unstated.disabled = dead;
+        unstated.title = dead
+          ? "No trip these filters leave states a guest count, so this would "
+            + "empty the table"
+          : n + (n === 1 ? " sailing states" : " sailings state") +
+            " how many divers the boat carries" +
+            (state.hideUnstatedGuests
+              ? " — the rest are hidden"
+              : "; press to hide the ones that state none");
+      }
+    });
+  }
+  unstated.addEventListener("click", function () {
+    state.hideUnstatedGuests = !state.hideUnstatedGuests;
+    unstated.setAttribute("aria-pressed", state.hideUnstatedGuests);
+    draw();
+  });
+
   /* The On sale chip, counted like every other bank: against the rows that
      pass all the *other* filters, so the number answers "what if I picked
      this too?".
@@ -4060,6 +4189,10 @@
     state.onSaleOnly = false;
     onSale.setAttribute("aria-pressed", "false");
     nmin.value = ""; nmax.value = "";
+    state.guestsMin = state.guestsMax = null;
+    state.hideUnstatedGuests = false;
+    unstated.setAttribute("aria-pressed", "false");
+    gmin.value = ""; gmax.value = "";
     /* The Include switches are left where the visitor put them. "Clear all"
        sits inside the bar that names the live filters and clears what that bar
        lists, and the switches are no longer on it -- so resetting them here
@@ -4216,6 +4349,11 @@
     if (state.onSaleOnly) n += 1;
     if (state.nightsMin !== null) n += 1;
     if (state.nightsMax !== null) n += 1;
+    if (state.guestsMin !== null) n += 1;
+    if (state.guestsMax !== null) n += 1;
+    /* Counted, unlike the Include switches: this one is behind the drawer,
+       which is the whole thing this number is for. */
+    if (state.hideUnstatedGuests) n += 1;
     return n;
   }
 
@@ -4254,6 +4392,18 @@
     if (state.nightsMax !== null) {
       out.push({ bank: "nights", text: "to " + state.nightsMax, set: "nightsMax" });
     }
+    if (state.guestsMin !== null) {
+      out.push({ bank: "guests", text: "from " + state.guestsMin, set: "guestsMin" });
+    }
+    if (state.guestsMax !== null) {
+      out.push({ bank: "guests", text: "to " + state.guestsMax, set: "guestsMax" });
+    }
+    /* Named as what it removes, because that is what a reader needs to undo:
+       "unstated hidden" says which rows are missing, where "count stated"
+       would describe what is left and leave them to work the rest out. */
+    if (state.hideUnstatedGuests) {
+      out.push({ bank: "guests", text: "unstated hidden", set: "hideUnstatedGuests" });
+    }
     /* No pill for the Include switches. This bar names what is filtering the
        table and offers to drop it; a switch filters nothing -- it changes what
        every total means -- and an "EXCLUDING nitrox" pill under a heading
@@ -4286,6 +4436,13 @@
       state.nightsMin = null; nmin.value = "";
     } else if (set === "nightsMax") {
       state.nightsMax = null; nmax.value = "";
+    } else if (set === "guestsMin") {
+      state.guestsMin = null; gmin.value = "";
+    } else if (set === "guestsMax") {
+      state.guestsMax = null; gmax.value = "";
+    } else if (set === "hideUnstatedGuests") {
+      state.hideUnstatedGuests = false;
+      unstated.setAttribute("aria-pressed", "false");
     } else {
       /* The months bank holds numbers and every other one holds strings; the
          chip that set it knows which, and so does the set it went into. */
@@ -4345,8 +4502,34 @@
     { k: "sellers", label: "Sold by",
       note: "both sites list the sailing, or only one of them does" },
     { k: "nights", label: "Nights",
-      note: "blank on either side means unbounded there" }
+      note: "blank on either side means unbounded there" },
+    /* The one note that is written rather than typed, because the sentence a
+       reader needs here is about how many rows cannot answer -- and a typed
+       figure for that is the #144 footer again: true when written, wrong the
+       first time a boat's page starts stating its capacity. */
+    { k: "guests", label: "Guests",
+      note: function () {
+        var stated = guestCounts.length;
+        return "how many divers the boat carries at most, as the operator's " +
+          "own specification table states it — blank on either side means " +
+          "unbounded there. " +
+          (unstatedGuests
+            ? unstatedGuests + " of the " +
+              (stated + unstatedGuests).toLocaleString("en-IE") +
+              " sailings here are on a boat that states no count; a bound " +
+              "keeps them, because it cannot ask them anything, and Hide " +
+              "unstated is how to drop them"
+            : "Every boat here states one");
+      } }
   ];
+  /* No bank where nothing states a count: the boxes would have no bounds to
+     take and the tab would open on a control that could only ever empty the
+     table. The markup stays put -- `paintBankPick` draws whatever the picker
+     offers and hides the rest, so a bank no tab names is a bank nobody can
+     reach. */
+  if (!guestCounts.length) {
+    BANK_META = BANK_META.filter(function (b) { return b.k !== "guests"; });
+  }
   var bankPick = document.getElementById("bankPick");
   var bankTitle = document.getElementById("bankTitle");
   var bankNote = document.getElementById("bankNote");
@@ -4362,6 +4545,11 @@
     if (k === "flags") {
       return (state.onSaleOnly ? 1 : 0) + (state.hideSoldOut ? 1 : 0);
     }
+    /* Two bounds and a switch, all three of which pick rows. */
+    if (k === "guests") {
+      return (state.guestsMin !== null ? 1 : 0) + (state.guestsMax !== null ? 1 : 0) +
+        (state.hideUnstatedGuests ? 1 : 0);
+    }
     return state[k] ? state[k].size : 0;
   }
 
@@ -4374,7 +4562,7 @@
     }).join("");
     var meta = BANK_META.filter(function (b) { return b.k === openBank; })[0] || BANK_META[0];
     bankTitle.textContent = meta.label;
-    bankNote.textContent = meta.note;
+    bankNote.textContent = typeof meta.note === "function" ? meta.note() : meta.note;
     Array.prototype.forEach.call(document.querySelectorAll(".bank"), function (node) {
       node.hidden = node.dataset.bank !== openBank;
     });

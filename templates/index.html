@@ -274,12 +274,36 @@
            Seller took over the job of linking both sellers. -->
       <div class="bank" data-bank="sellers"><span id="sellers"></span></div>
       <div class="bank" data-bank="nights">
-        <span class="nights-row">
+        <span class="range-row">
           <span class="dim">from</span>
           <input id="nmin" type="number" inputmode="numeric" aria-label="Fewest nights">
           <span class="dim">to</span>
           <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
           <span class="dim">nights</span>
+        </span>
+      </div>
+      <!-- How many divers are aboard, in the same control as the nights and
+           for the opposite reason: nights sits overwhelmingly at seven, and
+           this spreads across fifteen values, so a chip per number would be
+           fifteen controls for a distinction nobody shops on. The bounds and
+           the placeholders are set by app.js off the counts the boats state,
+           because a figure typed here is a figure that goes stale.
+
+           The chip is not a second bound. Seven boats state no capacity at
+           all, and a bound cannot ask them anything -- so those sailings stay
+           in the table by default, and this is how a reader shopping small
+           boats drops them on purpose rather than the page deleting them
+           quietly. Hidden by app.js unless there are such rows. -->
+      <div class="bank" data-bank="guests">
+        <span class="range-row">
+          <span class="dim">from</span>
+          <input id="gmin" type="number" inputmode="numeric" aria-label="Fewest guests">
+          <span class="dim">to</span>
+          <input id="gmax" type="number" inputmode="numeric" aria-label="Most guests">
+          <span class="dim">guests</span>
+        </span>
+        <span class="flag-row">
+          <button type="button" class="chip" id="hideUnstated" aria-pressed="false" hidden>Hide unstated</button>
         </span>
       </div>
     </div>
