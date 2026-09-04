@@ -3,6 +3,52 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-04
+
+```
+changes: HEAD -> 2026-09-04
+===========================
+
+new departures (17)
+  2027-05-06  Blue                   Daedalus & Fury Shoals                 1,420 EUR
+  2027-05-13  Blue                   Rocky, Zabargad & St. John's           1,420 EUR
+  2027-05-20  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  2027-05-27  Blue                   Daedalus, Rocky & Zabargad             1,420 EUR
+  2027-06-03  Blue                   St. John's                             1,420 EUR
+  2027-06-10  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  2027-06-17  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  2027-06-24  Blue                   North & Tiran                          1,290 EUR
+  2027-07-08  Blue                   North & Brothers                       1,420 EUR
+  2027-07-22  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  2027-08-05  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  2027-08-12  Blue                   Brothers, Daedalus & Elphinstone       1,420 EUR
+  ... and 5 more not shown
+
+now sold out (4)
+  2027-07-03  Discovery I            North Wrecks, Ras Mohammed & Tiran    
+  2027-07-10  Discovery I            North Wrecks, Ras Mohammed & Tiran    
+  2027-07-17  Discovery I            Brothers, Daedalus & Elphinstone      
+  2027-07-24  Discovery I            St. John's, Fury Shoals & Elphinstone 
+
+bookable again (2)
+  2027-07-31  Discovery I            Brothers, Daedalus & Elphinstone      
+  2027-07-31  Hammerhead II          Super Diversity: Daedalus - St. John's
+
+withdrawn (12)
+  2027-05-06  Blue                   Daedalus & Fury Shoals                
+  2027-05-13  Blue                   Daedalus, Rocky Island & Zabargad     
+  2027-05-20  Blue                   Brothers, Daedalus & Elphinstone      
+  2027-05-27  Blue                   Daedalus, Rocky Island & Zabargad     
+  2027-06-03  Blue                   St. John's                            
+  2027-06-10  Blue                   Brothers, Daedalus & Elphinstone      
+  2027-06-24  Blue                   North & Tiran                         
+  2027-07-08  Blue                   North & Brothers                      
+  2027-07-22  Blue                   Daedalus & Fury Shoals                
+  2027-08-12  Blue                   Brothers, Daedalus & Elphinstone      
+  2027-08-19  Blue                   North & Tiran                         
+  2027-08-26  Blue                   Brothers, Daedalus & Elphinstone      
+```
+
 ## 2026-09-03
 
 ```
