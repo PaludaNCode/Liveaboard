@@ -1009,10 +1009,11 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
  * is already clamped into it by `place()`. On a phone that is most of the
  * screen, which is the right answer for a document a reader opened
  * deliberately and can dismiss with Escape or a tap outside. */
-/* `.panel.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
-   21-25em width and is written further down this file, so at equal specificity
-   it won and capped the bill at 400px however wide the screen was. */
-.panel.bill-pop { min-width:min(30em, calc(100vw - 16px)); max-width:min(46em, calc(100vw - 16px)); }
+/* The bill's own width is written with the two panel states further down this
+   file, where the order settles it -- see THE WIDE PANEL there. It was here,
+   as `.panel.bill-pop`, on the reasoning that the extra class beat the shared
+   rule; then the shared rule became `.panel:not(:modal)`, which is 0,2,0 as
+   well, and the later of two equals won. */
 /* On `.pbody` and not on the dialog: the dialog's own box has to stay padding
    free, because a press landing on it is how the backdrop is told apart from
    the sheet. Dropped in the rewrite that made these dialogs, and every amount
@@ -1806,6 +1807,24 @@ a { color:var(--accent); }
   max-width: min(46em, calc(100vw - 2rem));
   min-width: 0;
 }
+/* THE WIDE PANEL, AND IT IS PLACED RATHER THAN WEIGHTED.
+   The fee table's five columns want 460px, so the 21-25em the other two
+   panels read well at is not a width the bill can be read at: the table
+   scrolls sideways inside its own `.fee-scroll` and the tier and the
+   provenance sit past the right edge. That is what shipped on a desktop --
+   336px of bill on a 1440px screen -- because this rule was written up beside
+   the fee table and answered `.panel-pop` on specificity, and `.panel-pop`
+   then became `.panel:not(:modal)`, which is a class's worth too. At 0,2,0
+   apiece the later one wins, and this one was 700 lines earlier.
+
+   So it sits after both states instead, where nothing has to be counted --
+   and *before* the sheet block below, which is the one place the bill must
+   not win: a sheet is the full width of the phone and takes its width from
+   there. */
+.panel.bill-pop {
+  min-width: min(30em, calc(100vw - 16px));
+  max-width: min(46em, calc(100vw - 16px));
+}
 .panel::backdrop { background: rgba(20, 26, 34, .45); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .panel::backdrop { background: rgba(0, 0, 0, .6); }
@@ -1894,7 +1913,18 @@ a { color:var(--accent); }
   font-weight: 600;
   padding: .35em .7em .2em;
 }
-.panel table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+/* A cabin's name wraps, and the two numbers beside it do not.
+   `tbody td` is the *table's* rule -- `white-space:nowrap`, so a departure's
+   cells stay one line down a column -- and the ladder is a `tbody` too, so it
+   inherited a rule about a different table. "Standard Sea View Cabin - Main
+   Deck" then set the table's own minimum at 403px inside a 334px peek, and
+   the panel grew a horizontal scrollbar under a three-rung ladder that had
+   room to spare. Nine of the first forty sailings did it. The money and the
+   count keep `nowrap` from `.num`, which is more specific than this. */
+.panel table.cabins td {
+  padding: .22em .7em; border-top: 1px solid var(--rule);
+  white-space: normal;
+}
 .panel table.cabins .num {
   text-align: right;
   font-family: var(--font-mono);

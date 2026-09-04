@@ -1750,6 +1750,242 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             page.close()
 
 
+    def test_a_desktop_bill_is_read_at_its_own_width(self) -> None:
+        """The bill wants 460px of columns, and it shipped in 336.
+
+        `.panel.bill-pop` was written up beside the fee table and won its
+        30–46em on specificity against `.panel-pop`; the rewrite that made
+        these dialogs turned that shared rule into `.panel:not(:modal)`, which
+        is a class's worth as well. At 0,2,0 apiece the later of the two won,
+        so on a 1440px screen the whole bill — both sellers' tables, the tier,
+        the provenance — was read by dragging it sideways inside a 336px box.
+        A screenshot found it; every string assertion about the panel passed
+        over it, which is what this file is for.
+
+        Measured on the panel's own boxes at three desktop widths, on a bill
+        with *both* sellers' tables: a rule reaching only the first table
+        fixes half the panel.
+        """
+        page = self.open(1440, 900)
+        try:
+            for width, height in ((1440, 900), (1280, 800), (900, 800)):
+                page.set_viewport_size({"width": width, "height": height})
+                page.wait_for_timeout(150)
+                found = page.evaluate("""() => {
+                  document.querySelectorAll('dialog').forEach(d => d.close());
+                  for (const open of document.querySelectorAll('#body .fees-open')) {
+                    open.click();
+                    if (document.querySelectorAll('#feePanel table.fees').length > 1)
+                      return true;
+                  }
+                  return false;
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertTrue(found, "no two-seller bill to open " + where)
+                page.wait_for_timeout(280)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('feePanel');
+                  const wide = [...panel.querySelectorAll('*')]
+                    .filter(el => el.scrollWidth > el.clientWidth + 1)
+                    .map(el => String(el.className) + ' ' + el.clientWidth +
+                               '->' + el.scrollWidth);
+                  const tables = [...panel.querySelectorAll('table.fees')]
+                    .map(t => Math.round(t.getBoundingClientRect().right));
+                  const box = panel.getBoundingClientRect();
+                  return { open: panel.open, wide: wide,
+                           tables: tables.length,
+                           w: Math.round(box.width),
+                           past: tables.filter(x => x > Math.round(box.right)).length };
+                }""")
+                self.assertTrue(seen["open"], "the bill did not open " + where)
+                self.assertGreater(seen["tables"], 1, "one bill only " + where)
+                self.assertEqual([], seen["wide"],
+                                 "the desktop bill scrolls sideways " + where)
+                self.assertEqual(0, seen["past"],
+                                 "a fee table runs past the panel's edge " + where)
+                # The number the width has to clear is the fee table's own
+                # `min-width`, which is what makes the columns line up.
+                self.assertGreaterEqual(seen["w"], 460,
+                                        "the bill is %dpx wide, narrower than "
+                                        "the table inside it %s"
+                                        % (seen["w"], where))
+
+            # And in the state the bill is not shown in. Nothing opens it as a
+            # peek today — it is pressed, like the entry bar — so this is a
+            # claim about the rule rather than about a gesture: `.bill-pop` is
+            # the wide panel in either of the dialog's two states, and it is
+            # the peek that shipped at 336px. A peek coming back for a fourth
+            # panel, or for this one, finds the width already settled.
+            peeked = page.evaluate("""() => {
+              const panel = document.getElementById('feePanel');
+              panel.close();
+              panel.show();
+              const box = panel.getBoundingClientRect();
+              const wide = [...panel.querySelectorAll('*')]
+                .filter(el => el.scrollWidth > el.clientWidth + 1).length;
+              const modal = panel.matches(':modal');
+              panel.close();
+              return { w: Math.round(box.width), wide: wide, modal: modal };
+            }""")
+            self.assertFalse(peeked["modal"], "show() opened a modal")
+            self.assertGreaterEqual(peeked["w"], 460,
+                                    "shown as a peek the bill is %dpx, "
+                                    "narrower than the table inside it"
+                                    % peeked["w"])
+            self.assertEqual(0, peeked["wide"],
+                             "shown as a peek the bill scrolls sideways")
+        finally:
+            page.close()
+
+    def test_the_bill_opens_on_a_press_and_the_ladder_still_peeks(self) -> None:
+        """Both halves, because the cure for one would be wrong for the other.
+
+        The bill is the widest thing this page draws, and a peek of it lands
+        over the rows a reader is comparing from a pointer that was on its way
+        somewhere else — so it opens on a press, like the entry bar. The cabin
+        ladder is 21em beside the cell it belongs to and comparing ladders
+        down a column is what it is for, so its peek stays. A rule that turns
+        hover off for the panels would pass half of this test.
+        """
+        page = self.open(1440, 900)
+        try:
+            page.hover("#body .fees-open")
+            page.wait_for_timeout(600)
+            self.assertFalse(
+                page.evaluate("()=>document.getElementById('feePanel').open"),
+                "the bill opened on a hover")
+            page.click("#body .fees-open")
+            page.wait_for_timeout(300)
+            self.assertTrue(
+                page.evaluate("()=>document.getElementById('feePanel').open"),
+                "the bill did not open on a press")
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(200)
+
+            page.hover("#body .berths")
+            page.wait_for_timeout(600)
+            self.assertTrue(
+                page.evaluate("()=>document.getElementById('berths').open"),
+                "the cabin ladder no longer peeks on hover")
+            self.assertFalse(
+                page.evaluate("()=>document.getElementById('berths').matches(':modal')"),
+                "the hover opened the ladder pinned rather than as a peek")
+        finally:
+            page.close()
+
+    def test_a_cabin_ladder_fits_the_panel_it_opens_in(self) -> None:
+        """A ladder is three columns of its own and it grew a scrollbar.
+
+        `tbody td { white-space: nowrap }` is the *table's* rule — a
+        departure's cells stay one line down a column — and the ladder is a
+        `tbody` too, so "Standard Sea View Cabin - Main Deck" set the table's
+        minimum at 403px inside a 334px peek. Nine of the first forty
+        sailings did it, under ladders with room to spare.
+
+        The peek is the size that finds this: the pinned panel is 618px and
+        every ladder fits it.
+        """
+        page = self.open(1712, 864)
+        try:
+            bad = []
+            for n in range(24):
+                page.hover("#body .berths >> nth=%d" % n)
+                page.wait_for_timeout(200)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('berths');
+                  if (!panel.open) return null;
+                  const body = panel.querySelector('.pbody');
+                  return { c: body.clientWidth, s: body.scrollWidth,
+                           modal: panel.matches(':modal') };
+                }""")
+                if seen is None:
+                    continue
+                self.assertFalse(seen["modal"], "a hover pinned the ladder")
+                if seen["s"] > seen["c"] + 1:
+                    bad.append("row %d: %d->%d" % (n, seen["c"], seen["s"]))
+            self.assertEqual([], bad, "the ladder scrolls sideways in its panel")
+        finally:
+            page.close()
+
+    def test_one_row_is_marked_at_a_time_unless_ctrl_is_held(self) -> None:
+        """A mark is where you are, not everywhere you have been.
+
+        Every press added another and only a second press on that same row
+        took one away, so a reader who had kept their place four times had
+        four rows lit and no way to tell which was this one. A plain press
+        collapses the set onto the row pressed; Ctrl — Cmd on a Mac — toggles
+        one and leaves the rest.
+
+        Pressing the only marked row still clears it, which is the one way
+        back to no marks at all on a phone: there is no modifier to hold
+        there, and the tap is asserted at the end for that reason.
+        """
+        marked = ("()=>[...document.querySelectorAll('#body .row.marked')]"
+                  ".map(r => r.dataset.id)")
+        page = self.open(1440, 900)
+        try:
+            def cell(n: int) -> str:
+                return "#body .row[data-id] >> nth=%d >> td.trip" % n
+
+            page.click(cell(0))
+            first = page.evaluate(marked)
+            self.assertEqual(1, len(first), "a press did not mark one row")
+
+            page.click(cell(1))
+            second = page.evaluate(marked)
+            self.assertEqual(1, len(second),
+                             "a second press left two rows marked")
+            self.assertNotEqual(first, second, "the mark did not move")
+
+            page.click(cell(2), modifiers=["Control"])
+            page.click(cell(3), modifiers=["Meta"])
+            three = page.evaluate(marked)
+            self.assertEqual(3, len(three),
+                             "Ctrl and Cmd did not add to the marked set")
+            self.assertEqual(second[0], three[0],
+                             "adding a mark dropped the one already there")
+
+            page.click(cell(2), modifiers=["Control"])
+            self.assertEqual(2, len(page.evaluate(marked)),
+                             "Ctrl on a marked row did not take it off")
+
+            page.click(cell(3))
+            self.assertEqual(1, len(page.evaluate(marked)),
+                             "a plain press did not collapse the set")
+            page.click(cell(3))
+            self.assertEqual([], page.evaluate(marked),
+                             "pressing the only marked row did not clear it")
+
+            # And the press that is not the row's: a panel trigger is a
+            # button the reader used to read something.
+            page.click(cell(0))
+            held = page.evaluate(marked)
+            page.click("#body .row[data-id] >> nth=5 >> .fees-open")
+            page.wait_for_timeout(280)
+            self.assertEqual(held, page.evaluate(marked),
+                             "opening a bill moved the mark")
+        finally:
+            page.close()
+
+        phone = self._browser.new_page(
+            viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+        try:
+            phone.goto(self._url)
+            phone.wait_for_selector("article.card")
+            cards = ("()=>[...document.querySelectorAll('#cards .row.marked')]"
+                     ".map(r => r.dataset.id)")
+            phone.locator(".cards .card .t-name").first.click()
+            phone.wait_for_timeout(200)
+            self.assertEqual(1, len(phone.evaluate(cards)),
+                             "a tap does not mark a card")
+            phone.locator(".cards .card .t-name").nth(1).click()
+            phone.wait_for_timeout(200)
+            self.assertEqual(1, len(phone.evaluate(cards)),
+                             "a second tap left two cards marked")
+        finally:
+            phone.close()
+
+
 if __name__ == "__main__":  # pragma: no cover
     print(json.dumps({"sizes": SIZES, "floor": TABLE_FLOOR}))
     unittest.main()

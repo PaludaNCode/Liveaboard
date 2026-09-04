@@ -623,16 +623,37 @@ Break these and the site starts lying quietly rather than failing loudly.
   *outcome* over three rounds — the list must not move at all under an open
   panel and must scroll exactly as before once it closes — rather than the
   property that delivers it.
-  **The hover peek stays, as the same element shown the other way.** A diver
-  comparing cabin ladders or fee books wants them without a click each time, so
-  a mouse on Places or Mandatory fees gets `show()` anchored to the trigger,
-  and `:modal` in the stylesheet is what tells the two apart: one dialog with
-  two native states, never two implementations. `opts.hoverOpens` (default
-  true) governs the peek only — **Entry bar turns it off (#151)**, because it
+  **The hover peek stays on the cabin ladder, and on nothing else.** A diver
+  comparing ladders down the Places column wants them without a click each
+  time, so a mouse there gets `show()` anchored to the trigger, and `:modal`
+  in the stylesheet is what tells the two apart: one dialog with two native
+  states, never two implementations. `opts.hoverOpens` (default true) governs
+  the peek only, and **two of the three turn it off**. Entry bar, because it
   sits in the money block and running the pointer down that column to compare
-  prices opened a dialog on every row it crossed. Press and tap open every
-  panel regardless: hover does not exist on a touch screen and this page is
-  built to work on a phone in a dive shop.
+  prices opened a dialog on every row it crossed (#151). And **Mandatory
+  fees**, because the bill is the widest thing this page draws — two sellers'
+  tables and the caveats under them — so a peek of it lands over the rows it
+  is meant to explain, from a gesture the reader did not mean as a request. A
+  bill is a document somebody opens; it opens on the press that says so.
+  Press and tap open every panel regardless: hover does not exist on a touch
+  screen and this page is built to work on a phone in a dive shop.
+  **The bill is the wide panel, and its width is placed rather than
+  weighted.** Its columns want 460px, so the 21–25em the ladder reads well at
+  is not a size it can be read at — the table scrolls sideways inside its own
+  `.fee-scroll` and the tier and the provenance sit past the edge, which is
+  what shipped on a desktop at 336px. `.panel.bill-pop` was written beside the
+  fee table and beat `.panel-pop` on specificity; the dialog rewrite turned
+  that shared rule into `.panel:not(:modal)`, a class's worth as well, and at
+  0,2,0 apiece the later of the two won. So the rule sits **after both state
+  rules and before the sheet block**, which is the one place it must lose: a
+  sheet takes its width from the phone. Ordering, not specificity — the count
+  was what went stale.
+  **A cabin's name wraps, and the two numbers beside it do not.** `tbody td
+  { white-space: nowrap }` is the *table's* rule, and the ladder is a `tbody`
+  too, so it inherited a rule about a different table: "Standard Sea View
+  Cabin - Main Deck" set the ladder's own minimum at 403px inside a 334px
+  peek and grew a scrollbar under a three-rung ladder with room to spare, on
+  nine of the first forty sailings.
   **Hover is asked twice, and both answers are needed.** The media query
   (`(hover: hover) and (pointer: fine)`) is the device; `event.pointerType ===
   "mouse"` is the gesture, because a laptop with a touch screen has both.
@@ -748,6 +769,15 @@ Break these and the site starts lying quietly rather than failing loudly.
   *Mandatory fees*. And **the row mark moved with the column**: it is a bar on
   the pinned *first* cell, which was the expander and is now `.stick1`, so
   reclaiming the width did not quietly delete the mark.
+  **One row is marked at a time, and Ctrl holds more.** A mark is where the
+  reader is while they scroll twelve columns sideways; every press used to add
+  another and only a second press on that same row took one away, so keeping
+  your place four times lit four rows and none of them said which was this
+  one. A plain press collapses the set onto the row pressed and Ctrl — Cmd on
+  a Mac — toggles one and leaves the rest, which is the idiom both platforms'
+  file lists already teach. Pressing the **only** marked row still clears it:
+  that is the one way back to no marks on a touch screen, where there is no
+  modifier to hold.
 - **Twelve columns, in four named bands, and the bill is tinted.** Sixteen
   columns of one weight gave the eye nothing to land on, so the money — the
   thing this site exists to publish — was exactly as findable as the return

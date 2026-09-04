@@ -3345,9 +3345,27 @@
     var selection = window.getSelection && window.getSelection();
     if (selection && !selection.isCollapsed) return;
 
+    /* ONE ROW, UNLESS THE VISITOR ASKS FOR MORE.
+       Every press used to add another mark and nothing ever took one away
+       but a second press on that same row, so a reader who had kept their
+       place four times had four rows lit and no way to tell which was this
+       one. A mark is where you are; a list of everywhere you have been is a
+       different feature nobody asked for.
+
+       So a plain press collapses the set onto the row pressed, and Ctrl --
+       Cmd on a Mac -- toggles that row and leaves the rest, which is the
+       idiom every file list on both platforms already teaches. Pressing the
+       only marked row still clears it: that is the one way back to no marks
+       at all on a touch screen, where there is no modifier to hold. */
     var id = tr.dataset.id;
-    if (state.marked.has(id)) state.marked.delete(id);
-    else state.marked.add(id);
+    var alone = state.marked.size === 1 && state.marked.has(id);
+    if (event.ctrlKey || event.metaKey) {
+      if (state.marked.has(id)) state.marked.delete(id);
+      else state.marked.add(id);
+    } else {
+      state.marked.clear();
+      if (!alone) state.marked.add(id);
+    }
     draw(true);
   });
 
@@ -3559,9 +3577,14 @@
   var mouse = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   /* `opts.hoverOpens` (default true) governs the peek only. Click and tap open
-     every panel, always. The Entry bar turns it off (#151): it sits in the
-     money block, so running the pointer down that column to compare prices
-     opened a dialog on every row it crossed. */
+     every panel, always. Two of the three turn it off, and for the same
+     reason: the Entry bar sits in the money block, so running the pointer
+     down that column to compare prices opened a dialog on every row it
+     crossed (#151) -- and the bill is the widest thing this page draws, so a
+     peek of it is a 46em card landing over the rows a reader is comparing,
+     from a gesture they did not mean as a request. The cabin ladder keeps
+     its peek: it is 21em beside the cell it belongs to, and comparing
+     ladders down a column is what it is for. */
   function panelDialog(dialog, selector, fill, opts) {
     var hoverOpens = !opts || opts.hoverOpens !== false;
     /* `showing` is the trigger the dialog is open for, `peeked` says it was
@@ -3761,12 +3784,18 @@
 
   /* The bill, out of the dropdown it used to expand into (#149). Everything
      that dropdown held except the entry bar, which is not a fee and has a
-     panel of its own on the column it belongs to. */
+     panel of its own on the column it belongs to.
+
+     Pressed, never hovered. A bill is two sellers' tables and the caveats
+     under them -- the biggest panel here by a distance -- and a peek of it
+     covered the rows it was meant to explain, on a pointer that was on its
+     way somewhere else. It is a document a reader opens, so it opens on the
+     gesture that says so. */
   panelDialog(document.getElementById("feePanel"), ".fees-open", function (host, trigger) {
     var row = rowFor(trigger.dataset.fees);
     if (!row) return false;
     host.innerHTML = billPanel(row);
-  });
+  }, { hoverOpens: false });
 
   /* The stated requirement, in full, from the column that prints its short
      form. Its own panel and not a line in the fee one: whether a diver may
