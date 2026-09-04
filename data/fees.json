@@ -2298,7 +2298,8 @@
           },
           "basis": "per_trip",
           "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40, with no unit stated"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40, with no unit stated",
+          "unit_unstated": true
         }
       ]
     },
@@ -3182,7 +3183,8 @@
           },
           "basis": "per_trip",
           "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated",
+          "unit_unstated": true
         }
       ]
     },
@@ -3877,7 +3879,8 @@
           },
           "basis": "per_trip",
           "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated",
+          "unit_unstated": true
         }
       ]
     },
@@ -6955,7 +6958,8 @@
           },
           "basis": "per_trip",
           "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated",
+          "unit_unstated": true
         }
       ]
     },
@@ -7909,7 +7913,8 @@
           },
           "basis": "per_trip",
           "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated",
+          "unit_unstated": true
         }
       ]
     },

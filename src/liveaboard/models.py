@@ -99,6 +99,23 @@ class FeeItem:
     provenance: Provenance | None = None
     note: str | None = None
 
+    unit_unstated: bool = False
+    """The source stated a figure and not the unit it is charged in.
+
+    A third state, and it is not the same silence as :attr:`amount` being
+    ``None`` on its own. *Nothing stated* is a charge nobody put a number to;
+    this is a number the operator published whose unit the page left out, so
+    it cannot be normalised and does not reach a total -- the figure stays in
+    the note. See `scrape/gear.py`, which is the only writer today.
+
+    It exists because `pricing.GEAR_ESTIMATE` must tell the two apart. The
+    estimate is a fallback for a silence and **never an overwrite of a stated
+    figure**: on the four vessels that quote a set price with no unit beside
+    it, filling €180 replaced the operator's own €40, €135, €200 and €206 with
+    this site's number. A guess is defensible where a source said nothing; over
+    the top of what it did say it is not.
+    """
+
     @property
     def label(self) -> str:
         return FEE_LABELS.get(self.code, self.code.value.replace("_", " ").title())
@@ -171,6 +188,7 @@ class FeeItem:
             included=bool(payload.get("included", False)),
             provenance=Provenance.from_dict(prov) if prov else None,
             note=payload.get("note"),
+            unit_unstated=bool(payload.get("unit_unstated", False)),
         )
 
 

@@ -293,6 +293,12 @@ def to_fee_dict(reading: GearReading, provenance: dict) -> dict | None:
         )
         fee["basis"] = FeeBasis.PER_TRIP.value
         fee["amount"] = None
+        # Structural, because the difference matters downstream and a note is
+        # prose. `pricing.GEAR_ESTIMATE` fills a gear line the operator left
+        # blank and must not fill this one: the figure below is the operator's,
+        # and replacing it with this site's own would be an invention laid over
+        # a published price rather than into a silence.
+        fee["unit_unstated"] = True
         fee["note"] = (
             f"Full equipment hire: {reading.bundle.label} "
             f"{symbol}{reading.bundle.low:g}"

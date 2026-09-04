@@ -239,9 +239,17 @@ Break these and the site starts lying quietly rather than failing loudly.
   **`pricing.GEAR_ESTIMATE` is €180 a trip, and it exists because the honest
   answer was costing the reader more than it protected them.** Gear is on by
   default, so a line at nothing left the Total — the number this page exists
-  to be trusted about — short by a week's hire on 12 vessels, 52 itineraries
-  and 228 sailings, and said so only to a reader who opened the bill and read
-  the caveat under it. The three unpriced readings are all in `scrape/gear.py`
+  to be trusted about — short by a week's hire on 8 vessels, 30 itineraries
+  and 146 sailings, and said so only to a reader who opened the bill and read
+  the caveat under it.
+  **It fills a silence and never overwrites a stated figure.** Four vessels
+  quote a set price with no unit beside it — Bella 2 €40, Blue Pearl €135,
+  Ghazala Adventure €200, Emperor Superior €206 — and `amount` is `None` there
+  for a different reason: the unit is missing, not the number. The estimate
+  used to fill those too, putting this site's guess over the operator's own
+  price on 82 sailings. `FeeItem.unit_unstated` is the third state that tells
+  the two apart; those lines stay unpriced until their unit is resolved, and
+  `scrape/gear.py` has the per-vessel evidence for what each unit probably is. The three unpriced readings are all in `scrape/gear.py`
   (items and no bundle, a bundle with no unit, a bare *Rental Gear*), and the
   fill is in `_fee_line` rather than in any of its three callers, so both
   sellers' bills get one rule. What makes it publishable is that it is
