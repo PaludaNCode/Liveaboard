@@ -59,14 +59,21 @@ cost of unknown size, and putting a figure on it is the failure the site exists
 to report in other people. Rental gear is the one place where that answer was
 costing the reader more than it protected them.
 
-Three readings of the gear dialog produce no set price -- an operator that
-prices items and never a bundle, a bundle figure with no unit beside it (see
-`scrape/gear.py`), and a bare "Rental Gear" with no figure at all -- and
-between them they cover 14 vessels, 52 itineraries and 228 sailings. On all of
-those the line sat at nothing with the toggle **on by default**, so the Total
-that the whole page is built to be trusted about was short by a full week's
-hire on a fifth of the table, and the row said so only to a reader who opened
-the bill and read the caveat under it.
+**Two** readings of the gear dialog leave the set unpriced with nothing to
+read: an operator that prices items and never a bundle, and a bare "Rental
+Gear" with no figure at all. They cover 8 vessels, 30 itineraries and 146
+sailings, and on every one the line sat at nothing with the toggle **on by
+default** -- so the Total the whole page is built to be trusted about was short
+by a full week's hire, and the row said so only to a reader who opened the bill
+and read the caveat under it.
+
+**A third reading is not one of them, and this used to fill it too.** A bundle
+figure with no unit beside it (see `scrape/gear.py`) is a price the operator
+published; only its unit is missing. Filling €180 there put this site's number
+over Bella 2's own €40, Blue Pearl's €135, Ghazala Adventure's €200 and Emperor
+Superior's €206, on 82 sailings. An estimate answers a silence and does not
+correct a source, so `FeeItem.unit_unstated` keeps those out and they stay
+unpriced until somebody resolves the unit.
 
 So the figure is stated, and stated as ours: `BreakdownLine.estimated` travels
 with it, the amount prints with a `~` and a warning of its own on the bill, and
@@ -120,6 +127,16 @@ def _needs_gear_estimate(fee: FeeItem) -> bool:
         fee.code is FeeCode.GEAR_RENTAL
         and not fee.included
         and fee.amount is None
+        # And **never over the top of a figure the operator published.** Four
+        # vessels quote a set price with no unit beside it -- Bella 2 €40, Blue
+        # Pearl €135, Ghazala Adventure €200, Emperor Superior €206 -- and
+        # `amount` is `None` on those for a different reason: the unit is
+        # missing, not the number. Filling €180 there swapped this site's guess
+        # for the operator's own price on 82 sailings, which is not what an
+        # estimate is for. The fallback answers a silence; it does not correct
+        # a source. Those lines stay unpriced until their unit is resolved, and
+        # the figure goes on saying what the page said.
+        and not fee.unit_unstated
     )
 
 

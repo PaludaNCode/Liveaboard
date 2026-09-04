@@ -99,6 +99,23 @@ class FeeItem:
     provenance: Provenance | None = None
     note: str | None = None
 
+    unit_unstated: bool = False
+    """The source stated a figure and not the unit it is charged in.
+
+    A third state, and it is not the same silence as :attr:`amount` being
+    ``None`` on its own. *Nothing stated* is a charge nobody put a number to;
+    this is a number the operator published whose unit the page left out, so
+    it cannot be normalised and does not reach a total -- the figure stays in
+    the note. See `scrape/gear.py`, which is the only writer today.
+
+    It exists because `pricing.GEAR_ESTIMATE` must tell the two apart. The
+    estimate is a fallback for a silence and **never an overwrite of a stated
+    figure**: on the four vessels that quote a set price with no unit beside
+    it, filling €180 replaced the operator's own €40, €135, €200 and €206 with
+    this site's number. A guess is defensible where a source said nothing; over
+    the top of what it did say it is not.
+    """
+
     @property
     def label(self) -> str:
         return FEE_LABELS.get(self.code, self.code.value.replace("_", " ").title())
@@ -123,6 +140,11 @@ class FeeItem:
             return money * nights
         if self.basis in (FeeBasis.PER_DAY, FeeBasis.PER_PERSON_PER_DAY):
             return money * (nights + 1)
+        if self.basis is FeeBasis.PER_DIVING_DAY:
+            # Nights, not `nights + 1`: the day you board and the day you
+            # disembark are travel, and what is between them is what a seller
+            # charging by the diving day is charging for. See `FeeBasis`.
+            return money * nights
         if self.basis is FeeBasis.PER_DIVE:
             return money * dives
         if self.basis is FeeBasis.PER_WEEK:
@@ -138,6 +160,15 @@ class FeeItem:
     def span_for_trip(self, nights: int, dives: int) -> tuple[Money | None, Money | None]:
         """Normalise the quoted basis to a per-person trip low and high."""
         if self.amount is None:
+            return None, None
+        if self.unit_unstated:
+            # The figure is real and the unit is missing, so there is nothing
+            # to normalise *from*: `basis` on such a line is a placeholder and
+            # scaling by it would publish the cheapest of the three readings
+            # the page uses elsewhere. The amount is carried so the note can
+            # print it and so the other seller's stated unit can be matched
+            # against it (`promote._with_units_resolved`); no total claims it
+            # until that match lands.
             return None, None
         if self.basis is FeeBasis.PER_DIVE and dives <= 0:
             # A charge per dive on a trip whose dive count nobody publishes is
@@ -171,6 +202,7 @@ class FeeItem:
             included=bool(payload.get("included", False)),
             provenance=Provenance.from_dict(prov) if prov else None,
             note=payload.get("note"),
+            unit_unstated=bool(payload.get("unit_unstated", False)),
         )
 
 

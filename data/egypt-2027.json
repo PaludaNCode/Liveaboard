@@ -11905,9 +11905,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40, with no unit stated"
+          "basis": "per_diving_day",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 a diving day — this page states no unit for it and the other seller prices the same set at the same figure by the diving day",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -12000,7 +12004,7 @@
             "amount": 40.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Weight Belt/Weights/Tank(s), Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -12223,9 +12227,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40, with no unit stated"
+          "basis": "per_diving_day",
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 a diving day — this page states no unit for it and the other seller prices the same set at the same figure by the diving day",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -12319,7 +12327,7 @@
             "amount": 40.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Weight Belt/Weights/Tank(s), Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -12682,7 +12690,7 @@
             "amount": 40.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
@@ -21718,9 +21726,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -22018,9 +22030,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -22318,9 +22334,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -22619,9 +22639,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -22918,9 +22942,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -23220,9 +23248,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -23522,9 +23554,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -23822,9 +23858,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -24121,9 +24161,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -37148,7 +37192,7 @@
             "amount": 25.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -37495,7 +37539,7 @@
             "amount": 25.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -38579,7 +38623,7 @@
             "amount": 25.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -49080,8 +49124,12 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 a trip — this page states no unit for it and the other seller prices the same set at the same figure by the trip",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -49425,8 +49473,12 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated",
+          "unit_unstated": true
         }
       ],
       "requirements": {
@@ -49645,8 +49697,12 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated",
+          "unit_unstated": true
         }
       ],
       "requirements": {
@@ -49984,8 +50040,12 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 a trip — this page states no unit for it and the other seller prices the same set at the same figure by the trip",
+          "unit_unstated": false
         }
       ],
       "requirements": {
@@ -50327,8 +50387,12 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated"
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated",
+          "unit_unstated": true
         }
       ],
       "requirements": {
@@ -50681,7 +50745,7 @@
             "amount": 40.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
           "tier": "conditional",
@@ -51052,7 +51116,7 @@
             "amount": 40.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
           "tier": "conditional",
@@ -52025,9 +52089,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -52333,9 +52401,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -52640,9 +52712,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -52945,9 +53021,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -53252,9 +53332,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -53560,9 +53644,13 @@
             "retrieved": "2026-08-31",
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
-          "basis": "per_trip",
-          "amount": null,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated"
+          "basis": "per_week",
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week",
+          "unit_unstated": false
         },
         {
           "code": "nitrox",
@@ -67688,7 +67776,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
@@ -105002,7 +105090,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -105326,7 +105414,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -105650,7 +105738,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -105975,7 +106063,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -106301,7 +106389,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -106624,7 +106712,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
@@ -106948,7 +107036,7 @@
             "amount": 30.0,
             "currency": "EUR"
           },
-          "basis": "per_day",
+          "basis": "per_diving_day",
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",

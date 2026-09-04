@@ -238,7 +238,7 @@ PAYED_PER: dict[int, FeeBasis] = {
     10: FeeBasis.PER_NIGHT,          # "Night/Person"
     20: FeeBasis.PER_DIVE,           # "Dive"
     30: FeeBasis.PER_TRIP,           # "Trip"
-    40: FeeBasis.PER_DAY,            # "Diving day"
+    40: FeeBasis.PER_DIVING_DAY,     # "Diving day"
     70: FeeBasis.PER_WEEK,           # "Week"
 }
 """`LIVEABOARD_EXTRA_PAYED_PER`, read verbatim off a live vessel page, and

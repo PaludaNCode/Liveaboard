@@ -1901,6 +1901,65 @@ def _padi_only_departures(
     return made, unparsed
 
 
+def _with_units_resolved(
+    ours: list[dict[str, Any]], theirs: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """Fill a unit one seller left off, from the other seller stating it.
+
+    liveaboard.com's gear dialog prints a bundle as ``<span>EUR 200</span>``
+    with nothing after it on five vessels, so `scrape/gear.py` records the
+    figure and marks `unit_unstated`: a number whose unit is missing cannot be
+    normalised, and reading it as per trip -- the cheapest of the three units
+    that page uses elsewhere -- was Bella 2's set at a seventh of a week's hire.
+
+    PADI states the same charge with the unit as a **field**. On all four of
+    the vessels that reach the season it publishes a *Full scuba set* at the
+    identical figure: 40 a diving day, 135 a week, 200 a week, 206 a trip. So
+    the unit is read rather than guessed, and the amount is the one both
+    sellers already agree on.
+
+    **The figures must match exactly, or nothing happens.** That equality is
+    the whole warrant: it is what says the two lines are the same charge rather
+    than two hire options, and without it this would be taking one seller's
+    unit for another seller's price. `gear.py` had inferred three of these from
+    sister vessels instead and got two wrong -- Emperor Superior's 206 is a
+    trip and not the week its sisters quote, Blue Pearl's 135 is a week and was
+    called unresolvable -- which is the argument for reading a field over
+    reasoning about a fleet.
+
+    Only the unit moves. The amount, the code, the tier and the note stay this
+    seller's, so the line still says what its own page said.
+    """
+    if not theirs:
+        return ours
+    stated = {
+        (line["code"], _amount_key(line)): line.get("basis")
+        for line in theirs
+        if line.get("basis") and line.get("amount") is not None
+    }
+    out = []
+    for line in ours:
+        basis = stated.get((line["code"], _amount_key(line)))
+        if line.get("unit_unstated") and basis:
+            line = {**line, "basis": basis, "unit_unstated": False}
+            unit = basis.replace("per_", "").replace("_", " ")
+            line["note"] = (line.get("note") or "").replace(
+                ", with no unit stated",
+                f" a {unit} — this page states no unit for it and the other"
+                " seller prices the same set at the same figure by the " + unit,
+            )
+        out.append(line)
+    return out
+
+
+def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
+    """A fee's money, comparable across two books that store it as dicts."""
+    amount = line.get("amount")
+    if not isinstance(amount, dict):
+        return None
+    return (round(float(amount.get("amount", 0)), 2), amount.get("currency"))
+
+
 def promote(
     candidate: dict[str, Any],
     *,
@@ -2444,6 +2503,19 @@ def promote(
         # because for a vessel liveaboard.com does not sell this *is* the
         # itinerary's fee book -- see "fees" below.
         padi_fees = _padi_fees(padi_trip)
+
+        # Which book this trip's own fee rows come from, decided here rather
+        # than read back off the record afterwards. It used to be inferred by
+        # asking whether `fees` *was* `padi_fees["lines"]` -- an identity check
+        # on a list, which is true only while nothing between the two touches
+        # it, and stopped being true the moment a unit resolution rebuilt the
+        # list. The question is about provenance, so it is answered where the
+        # choice is made.
+        own_fees = fee_book.get(slug) or source.get("fees")
+        padi_lines = (padi_fees or {}).get("lines") or []
+        fees_from_padi = not own_fees and bool(padi_lines)
+        fee_lines = _with_units_resolved(own_fees or padi_lines, padi_lines)
+
         if padi_fees is not None:
             retrieved = (padi or {}).get("collected") or ""
             for line in padi_fees["lines"]:
@@ -2524,10 +2596,7 @@ def promote(
                 # Without this the ten PADI-only boats with sailings in the
                 # season would publish 166 berth prices and not one total, on a
                 # site whose whole subject is the difference between the two.
-                "fees": (fee_book.get(slug)
-                         or source.get("fees")
-                         or (padi_fees or {}).get("lines")
-                         or []),
+                "fees": fee_lines,
             }
         )
 
@@ -2588,9 +2657,7 @@ def promote(
         # shipping a false on 341 itineraries. The page needs it because the
         # sentence it prints under the table names a source, and naming the
         # wrong one is the failure this project reports in other people.
-        if (itineraries[-1]["fees"]
-                and padi_fees is not None
-                and itineraries[-1]["fees"] is padi_fees["lines"]):
+        if fees_from_padi:
             itineraries[-1]["padi_sourced_fees"] = True
 
         for item in group:

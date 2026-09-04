@@ -7,6 +7,7 @@ Written against ``unittest`` so the suite runs with no installed dependencies:
 from __future__ import annotations
 
 import unittest
+from dataclasses import replace
 from typing import Any
 from datetime import date
 from decimal import Decimal
@@ -608,6 +609,35 @@ class TestGearWithNoStatedPriceIsEstimated(unittest.TestCase):
         line = self.line(self.gear("200 EUR", basis=FeeBasis.PER_WEEK))
         self.assertEqual(line.display.amount, Decimal("200"))
         self.assertFalse(line.estimated)
+
+    def test_a_figure_with_no_unit_is_never_overwritten(self):
+        """The estimate answers a silence; it does not correct a source.
+
+        Four vessels quote a set price and no unit -- Bella 2 €40, Blue Pearl
+        €135, Ghazala Adventure €200, Emperor Superior €206 -- and `amount` is
+        `None` there because the *unit* is missing, not the number. Filling 180
+        put this site's guess over the operator's own price on 82 sailings."""
+        fee = replace(self.gear(note="Full equipment hire: BCD, Fins €40, "
+                                    "with no unit stated"), unit_unstated=True)
+        line = self.line(fee)
+        self.assertFalse(line.estimated)
+        self.assertFalse(line.has_price)
+        self.assertIsNone(line.display)
+
+    def test_and_the_operator_s_own_figure_survives_in_the_note(self):
+        """What the page said is the whole of what is left on that line, so it
+        may not be replaced by wording about an estimate that did not happen."""
+        fee = replace(self.gear(note="Full equipment hire: BCD, Fins €40, "
+                                    "with no unit stated"), unit_unstated=True)
+        note = self.line(fee).note
+        self.assertIn("€40", note)
+        self.assertNotIn("estimated by this site", note)
+
+    def test_a_silence_is_still_filled_beside_it(self):
+        """The two states are told apart by the flag and nothing else: same
+        code, same absent amount, opposite answers."""
+        self.assertTrue(self.line(self.gear()).estimated)
+        self.assertFalse(self.line(replace(self.gear(), unit_unstated=True)).estimated)
 
     def test_gear_the_operator_includes_is_not_filled_in(self):
         """An inclusion is an answer. Putting 180 on it would price a set the
