@@ -140,6 +140,11 @@ class FeeItem:
             return money * nights
         if self.basis in (FeeBasis.PER_DAY, FeeBasis.PER_PERSON_PER_DAY):
             return money * (nights + 1)
+        if self.basis is FeeBasis.PER_DIVING_DAY:
+            # Nights, not `nights + 1`: the day you board and the day you
+            # disembark are travel, and what is between them is what a seller
+            # charging by the diving day is charging for. See `FeeBasis`.
+            return money * nights
         if self.basis is FeeBasis.PER_DIVE:
             return money * dives
         if self.basis is FeeBasis.PER_WEEK:
@@ -155,6 +160,15 @@ class FeeItem:
     def span_for_trip(self, nights: int, dives: int) -> tuple[Money | None, Money | None]:
         """Normalise the quoted basis to a per-person trip low and high."""
         if self.amount is None:
+            return None, None
+        if self.unit_unstated:
+            # The figure is real and the unit is missing, so there is nothing
+            # to normalise *from*: `basis` on such a line is a placeholder and
+            # scaling by it would publish the cheapest of the three readings
+            # the page uses elsewhere. The amount is carried so the note can
+            # print it and so the other seller's stated unit can be matched
+            # against it (`promote._with_units_resolved`); no total claims it
+            # until that match lands.
             return None, None
         if self.basis is FeeBasis.PER_DIVE and dives <= 0:
             # A charge per dive on a trip whose dive count nobody publishes is

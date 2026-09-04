@@ -45,6 +45,21 @@ class FeeBasis(str, Enum):
     PER_NIGHT = "per_night"
     PER_DAY = "per_day"
     PER_DIVE = "per_dive"
+    PER_DIVING_DAY = "per_diving_day"
+    """A day the diver dives, which is not a day aboard.
+
+    PADI's own vocabulary is the reason this exists: `LIVEABOARD_EXTRA_PAYED_PER`
+    reads ``[40, "Diving day"]`` and `PAYED_PER` mapped it to
+    :attr:`PER_DAY` -- the comment beside that line even said *"Diving day"*, so
+    the label was read and the arithmetic quietly disagreed with it. `PER_DAY`
+    counts days aboard (``nights + 1``), so a seven-night week billed eight of
+    them where the seller means about seven, on 84 gear lines.
+
+    Counted as **nights**: a liveaboard's diving days are the full days between
+    boarding and disembarking, and a seven-night trip has seven of them. Not
+    derived from the trip's dive count -- that is a number this project refuses
+    to invent, and dividing it by an assumed dives-a-day would invent it twice.
+    """
     PER_PERSON_PER_DAY = "per_person_per_day"
     PER_WEEK = "per_week"
     """Hire priced by the week, which is how the gear dialog quotes everything.

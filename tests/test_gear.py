@@ -237,7 +237,16 @@ class TestAFigureWithNoUnitIsNotAPerTripFigure(unittest.TestCase):
             "Fins \u20ac5")
 
     def test_no_total_claims_the_bundle(self):
-        self.assertIsNone(self.fee["amount"])
+        """The outcome, not the mechanism that used to deliver it.
+
+        This asserted `amount is None` -- the figure was thrown away, so
+        nothing could total it. The figure is kept now, because the other
+        seller prices the same set with the unit as a field and matching that
+        needs a number to match on. What keeps it out of a total is
+        `unit_unstated`, which `FeeItem.span_for_trip` refuses outright."""
+        self.assertTrue(self.fee["unit_unstated"])
+        item = FeeItem.from_dict(self.fee, "EUR")
+        self.assertEqual(item.span_for_trip(nights=7, dives=18), (None, None))
 
     def test_the_figure_survives_where_a_reader_can_see_it(self):
         self.assertIn("\u20ac40", self.fee["note"])
@@ -249,7 +258,34 @@ class TestAFigureWithNoUnitIsNotAPerTripFigure(unittest.TestCase):
         item = FeeItem.from_dict(self.fee, "EUR")
         self.assertIs(item.code, FeeCode.GEAR_RENTAL)
         self.assertIs(item.tier, FeeTier.OPTIONAL)
-        self.assertIsNone(item.amount)
+        self.assertTrue(item.unit_unstated)
+        self.assertEqual(item.amount.amount, 40)
+
+    def test_the_figure_is_what_the_other_seller_s_unit_attaches_to(self):
+        """Why it is carried at all. PADI publishes the same set at the same
+        money with the unit as a field, and `promote._with_units_resolved`
+        joins the two on the figure -- so discarding it left the resolution
+        with nothing to match and the line permanently unpriced."""
+        from liveaboard.promote import _with_units_resolved
+
+        theirs = [{"code": "gear_rental", "basis": "per_diving_day",
+                   "amount": {"amount": 40.0, "currency": "EUR"}}]
+        resolved = _with_units_resolved([dict(self.fee)], theirs)[0]
+        self.assertEqual(resolved["basis"], "per_diving_day")
+        self.assertFalse(resolved["unit_unstated"])
+        self.assertIn("a diving day", resolved["note"])
+
+    def test_a_figure_the_other_seller_does_not_match_is_left_alone(self):
+        """The equality is the warrant. A different figure is a different
+        charge, and taking its unit would be one seller's unit on another
+        seller's price."""
+        from liveaboard.promote import _with_units_resolved
+
+        theirs = [{"code": "gear_rental", "basis": "per_week",
+                   "amount": {"amount": 999.0, "currency": "EUR"}}]
+        resolved = _with_units_resolved([dict(self.fee)], theirs)[0]
+        self.assertTrue(resolved["unit_unstated"])
+        self.assertIn("no unit stated", resolved["note"])
 
     def test_a_stated_unit_is_untouched(self):
         """The regression this must not cause: 65 vessels do state one."""

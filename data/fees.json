@@ -2297,7 +2297,10 @@
             "url": "https://www.liveaboard.com/diving/egypt/bella-2?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40, with no unit stated",
           "unit_unstated": true
         }
@@ -3182,7 +3185,10 @@
             "url": "https://www.liveaboard.com/diving/egypt/blue-diamond?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
+          "amount": {
+            "amount": 220.0,
+            "currency": "EUR"
+          },
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit €220, with no unit stated",
           "unit_unstated": true
         }
@@ -3878,7 +3884,10 @@
             "url": "https://www.liveaboard.com/diving/egypt/blue-pearl?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135, with no unit stated",
           "unit_unstated": true
         }
@@ -6957,7 +6966,10 @@
             "url": "https://www.liveaboard.com/diving/egypt/emperor-superior?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
+          "amount": {
+            "amount": 206.0,
+            "currency": "EUR"
+          },
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206, with no unit stated",
           "unit_unstated": true
         }
@@ -7912,7 +7924,10 @@
             "url": "https://www.liveaboard.com/diving/egypt/ghazala-adventure?m=5/2027"
           },
           "basis": "per_trip",
-          "amount": null,
+          "amount": {
+            "amount": 200.0,
+            "currency": "EUR"
+          },
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €200, with no unit stated",
           "unit_unstated": true
         }

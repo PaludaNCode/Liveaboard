@@ -43,15 +43,26 @@ Three things that decided the shape of this module:
   Read across the whole fee book: 70 vessels quote a priced bundle and 65 of
   them state a unit -- 25 per trip, 25 per week, 15 per day -- so the unit is
   the norm and its absence is the page failing to state something, not the page
-  saying "once". The five that leave it out span every one of those answers on
-  the evidence beside them: Emperor Superior's unitless €206 is the figure its
-  two sisters state per week, Bella 2's unitless €40 is a day, and Blue Pearl's
-  unitless €135 sits between a sister quoting €135/week and one quoting
-  €135/trip. So there is no fallback that is right and no direction that is
-  safely wrong: `basis` is ``None`` and the amount does not reach the total. The
-  figure stays in the note where a reader can see it, which is what this module
-  already does for a vessel that prices gear per item and never as a set. It
-  covers 5 vessels, 22 itineraries and 82 published sailings.
+  saying "once". So there is no fallback that is right and no direction that is
+  safely wrong: the figure is kept, `unit_unstated` marks it, and no total
+  claims it. It covers 5 vessels, 22 itineraries and 82 published sailings.
+
+  **The other seller states the unit as a field, and that is how these are
+  resolved.** This module used to reason about it from sister vessels --
+  Emperor Superior's €206 "is the figure its two sisters state per week", Blue
+  Pearl's €135 "sits between a sister quoting €135/week and one quoting
+  €135/trip" -- and reading PADI's book showed that guessing wrong is easy: it
+  publishes a *Full scuba set* at the identical figure on all four of these
+  hulls, and says Emperor Superior is a **trip** and Blue Pearl a **week**. One
+  of the two inferences was wrong and the other had been called unresolvable.
+  `promote._with_units_resolved` joins the two books on the figure and takes
+  the unit; the reasoning above is deleted rather than corrected, because a
+  field beats an inference and there is no reason to keep the inference around.
+
+  Reading the pages also says why three of them are silent: on Ghazala
+  Adventure, Emperor Superior and Blue Diamond **no row in the dialog states a
+  unit at all**, singles included. Bella 2 is the only one where the page
+  states a unit on 10 of its 12 rows and drops it on the bundle alone.
 
 * **"Nitrox tank: Included" is not "nitrox is included".** It sits in a list of
   what gear costs to hire, so the plain reading is that hiring a nitrox tank
@@ -291,8 +302,20 @@ def to_fee_dict(reading: GearReading, provenance: dict) -> dict | None:
         symbol = next(
             (s for s, c in CURRENCIES.items() if c == reading.bundle.currency), ""
         )
+        # Carried, not discarded. `unit_unstated` is what stops it reaching a
+        # total -- `FeeItem.span_for_trip` refuses the line outright -- and
+        # keeping the figure is what lets the other seller's stated unit be
+        # matched to it later: PADI publishes the same set at the same money
+        # with the unit as a field. Left in the note alone, the number was
+        # readable by a person and by nothing else.
         fee["basis"] = FeeBasis.PER_TRIP.value
-        fee["amount"] = None
+        fee["amount"] = {
+            "amount": reading.bundle.low, "currency": reading.bundle.currency,
+        }
+        if reading.bundle.is_range:
+            fee["amount_max"] = {
+                "amount": reading.bundle.high, "currency": reading.bundle.currency,
+            }
         # Structural, because the difference matters downstream and a note is
         # prose. `pricing.GEAR_ESTIMATE` fills a gear line the operator left
         # blank and must not fill this one: the figure below is the operator's,

@@ -875,11 +875,34 @@ class TestTheOptionalHalfOfPadisDisclosure(unittest.TestCase):
                          [("nitrox", "conditional", "per_trip", 50.0)])
 
     def test_the_gear_set_is_priced_in_the_unit_padi_states(self):
-        """``payedPer: 40`` is "Diving day". Bella 2's set is 40 EUR a day, and
-        the other seller's page states the same €40 with no unit at all."""
+        """``payedPer: 40`` is "Diving day", and this asserted `per_day`.
+
+        The label was right in the comment beside `PAYED_PER` and the mapping
+        under it was not: `PER_DAY` scales as ``nights + 1``, days aboard, so a
+        seven-night week billed eight of a unit the seller counts about seven
+        of -- on 84 gear lines. `PER_DIVING_DAY` counts nights, which is the
+        full days between boarding and disembarking.
+
+        Bella 2's set is 40 EUR a diving day, and the other seller's page
+        states the same €40 with no unit at all."""
         self.assertEqual(
             self.lines(self.entry("Full scuba set", payedPer=40, extraValue="40 EUR")),
-            [("gear_rental", "conditional", "per_day", 40.0)])
+            [("gear_rental", "conditional", "per_diving_day", 40.0)])
+
+    def test_a_diving_day_is_not_a_day_aboard(self):
+        """The arithmetic, since the enum's name is the only thing that made
+        the old mapping look right."""
+        from liveaboard.models import FeeItem
+        from liveaboard.money import Money
+        from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier
+
+        def week(basis):
+            fee = FeeItem(code=FeeCode.GEAR_RENTAL, tier=FeeTier.CONDITIONAL,
+                          amount=Money(40, "EUR"), basis=basis)
+            return fee.for_trip(nights=7, dives=18).amount
+
+        self.assertEqual(week(FeeBasis.PER_DIVING_DAY), 280)
+        self.assertEqual(week(FeeBasis.PER_DAY), 320)
 
     def test_the_set_names_its_own_contents(self):
         """``fullSetDescription`` is on all 401 of these entries, exactly as the

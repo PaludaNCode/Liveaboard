@@ -248,8 +248,22 @@ Break these and the site starts lying quietly rather than failing loudly.
   for a different reason: the unit is missing, not the number. The estimate
   used to fill those too, putting this site's guess over the operator's own
   price on 82 sailings. `FeeItem.unit_unstated` is the third state that tells
-  the two apart; those lines stay unpriced until their unit is resolved, and
-  `scrape/gear.py` has the per-vessel evidence for what each unit probably is. The three unpriced readings are all in `scrape/gear.py`
+  the two apart, and it keeps the figure rather than discarding it: the amount
+  is carried and `span_for_trip` refuses the line, so nothing totals it and
+  there is still a number to match on.
+  **And the other seller states the unit as a field**, which is what resolved
+  all four — PADI publishes a *Full scuba set* at the identical figure and says
+  Bella 2 is a diving day, Blue Pearl and Ghazala Adventure a week, Emperor
+  Superior a trip. `promote._with_units_resolved` joins the two books on the
+  money and takes only the unit; the figures must match exactly, because that
+  equality is the whole warrant that the two lines are one charge. It replaced
+  reasoning from sister vessels in `scrape/gear.py`, which had one of two wrong.
+  **`FeeBasis.PER_DIVING_DAY` came out of the same reading.** PADI's own
+  vocabulary is `[40, "Diving day"]` and `PAYED_PER` mapped it to `PER_DAY`,
+  which scales as `nights + 1` — days aboard, one more than the seller counts,
+  on 84 gear lines. A diving day is the full days between boarding and
+  disembarking, so it scales as `nights`, and it is never derived from the
+  trip's dive count: that is a number this project refuses to invent. The three unpriced readings are all in `scrape/gear.py`
   (items and no bundle, a bundle with no unit, a bare *Rental Gear*), and the
   fill is in `_fee_line` rather than in any of its three callers, so both
   sellers' bills get one rule. What makes it publishable is that it is
