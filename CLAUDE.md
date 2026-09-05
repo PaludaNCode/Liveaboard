@@ -204,6 +204,14 @@ original behaviour reads as permission that was never given.
 Deleting the merged branch 403s here — the token pushes branches and cannot
 remove them. The merge lands; the branch is left stale. Say so, do not retry.
 
+**`docs/implementing.md` is how a change gets made** — measure from the
+committed data before designing, point the new guard at the old code and watch
+it fail, migrate the data in the same commit through the same function, read
+what the change log says about the change, and record the gate either side of
+it. Every step of it is a scar this file names somewhere below;
+`docs/plan-missing.md` and `docs/plan-stable-ids.md` are the two worked
+examples.
+
 ## Answering
 
 Short. The finding, not the derivation. This is a codebase whose owner knows it
