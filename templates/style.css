@@ -661,23 +661,27 @@ thead tr.band th.band-bill {
 }
 thead th.zone-bill { background:var(--bill); }
 tbody td.money, tbody td.nitrox, tbody td.mfees,
-tbody td.cost, tbody td.perdive { background:var(--bill); }
+tbody td.cost, tbody td.perdive, tbody td.perday { background:var(--bill); }
 thead th[data-k="base"], tbody td.money,
 thead tr.band th.band-bill { border-left:1px solid var(--bill-edge); }
-thead th[data-k="perdive"], tbody td.perdive { border-right:1px solid var(--bill-edge); }
+/* The band's right edge is on the *last* column in it, so adding Per day
+   after Per dive moves the rule rather than leaving it mid-band. */
+thead th[data-k="perday"], tbody td.perday { border-right:1px solid var(--bill-edge); }
 /* Hover, the mark and the sold-out treatment all outrank the band: it groups
    columns, and a row the visitor is pointing at or has marked is a statement
    about the row. Without these the five money cells keep the tint and the row
    highlight stops halfway across. */
 tbody tr.row:hover td.money, tbody tr.row:hover td.nitrox,
 tbody tr.row:hover td.mfees, tbody tr.row:hover td.cost,
-tbody tr.row:hover td.perdive { background:var(--row-hover); }
+tbody tr.row:hover td.perdive,
+tbody tr.row:hover td.perday { background:var(--row-hover); }
 tbody tr.row.marked td.money, tbody tr.row.marked td.nitrox,
 tbody tr.row.marked td.mfees, tbody tr.row.marked td.cost,
-tbody tr.row.marked td.perdive,
+tbody tr.row.marked td.perdive, tbody tr.row.marked td.perday,
 tbody tr.row.marked:hover td.money, tbody tr.row.marked:hover td.nitrox,
 tbody tr.row.marked:hover td.mfees, tbody tr.row.marked:hover td.cost,
-tbody tr.row.marked:hover td.perdive { background:var(--row-marked); }
+tbody tr.row.marked:hover td.perdive,
+tbody tr.row.marked:hover td.perday { background:var(--row-marked); }
 
 tbody td {
   padding:5px 8px; border-bottom:1px solid var(--rule);
@@ -719,9 +723,10 @@ td.trip .t-name { font-weight:400; }
 th.sp, td.sp { width:100%; padding:0; }
 
 thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
-thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+thead th[data-k="total"], thead th[data-k="perdive"],
+thead th[data-k="perday"], thead th[data-k="source"],
 tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
-tbody td.perdive, tbody td.source {
+tbody td.perdive, tbody td.perday, tbody td.source {
   padding-left:7px; padding-right:7px;
 }
 tbody tr.row td { transition:background-color .08s linear; }
@@ -734,8 +739,10 @@ tbody td.cost b { color:var(--accent); font-size:13.5px; font-weight:600; letter
    Places stacks: the count is a label on the number rather than a second
    value, and side by side the two set a column 93px wide for a figure that
    needs 40. */
-td.perdive b { display:block; }
-td.perdive .dim { display:block; font-size:9.5px; line-height:1.3; }
+td.perdive b, td.perday b { display:block; }
+td.perdive .dim, td.perday .dim {
+  display:block; font-size:9.5px; line-height:1.3;
+}
 
 /* The advertised price and what was added, drawn to scale under the total:
    bar length compares down the column, the split compares within one row.
@@ -1127,9 +1134,10 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
      the gap between a figure and its neighbour is what the eye reads them
      against. */
   thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
-  thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+  thead th[data-k="total"], thead th[data-k="perdive"],
+  thead th[data-k="perday"], thead th[data-k="source"],
   tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
-  tbody td.perdive, tbody td.source {
+  tbody td.perdive, tbody td.perday, tbody td.source {
     padding-left:11px; padding-right:11px;
   }
   thead tr.band th { padding-top:6px; padding-bottom:5px; }
@@ -1400,15 +1408,20 @@ a { color:var(--accent); }
   }
   .card-money b { color:var(--accent); font-size:15px; font-weight:600; }
   .card-money .split { font-size:9.5px; }
-  /* Price per dive, under the total it divides and inside the same tinted
-     box, ruled off from it. Its figure is deliberately *not* the accent: the
-     total is the number this page exists to publish and there is one of those
-     per card. */
+  /* The figures derived from the total -- per dive, then per day -- under
+     the total they divide and inside the same tinted box, ruled off from it.
+     Neither takes the accent: the total is the number this page exists to
+     publish and there is one of those per card. Two lines now rather than
+     one, which is why the rule is on the first only: they are one block of
+     derived readings, not two sections. */
   .card-money .perline {
     display:block; margin-top:2px; padding-top:2px;
     border-top:1px solid var(--bill-edge);
     font-size:11px; line-height:1.3; color:var(--ink-dim);
     font-variant-numeric:tabular-nums;
+  }
+  .card-money .perline + .perline {
+    border-top:0; margin-top:1px; padding-top:0;
   }
   .card-money .perline b { color:var(--ink); font-size:11.5px; }
   .card-money .perline.dim { color:var(--ink-faint); }

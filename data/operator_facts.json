@@ -1,7 +1,7 @@
 {
   "source": "liveaboard.com",
   "collected": "2026-08-27",
-  "note": "Figures read from liveaboard.com vessel pages by hand, for the ten boats where the extras block the scrape reads carries no number. Covers only vessels already in the dataset; nothing here invents a boat, a trip or a price. Dive counts are the low end of the range the page states, to keep price per dive from flattering a trip. Gratuities carry the tier their own page's block gives them -- Optional on all 55 vessels that state them -- rather than a customary tier typed here: a hand-read figure is the page's figure and must not arrive under a tier the page does not support. Nitrox is marked included on the five vessels whose pages say so; the extras block the scrape reads simply omits nitrox on those boats, and absence there is not the same claim as inclusion. Dive counts are the figure the page states for a standard seven-night week, and dives_for_nights records that: the same boat's three-night mini-safari does not run seventeen dives, so the count is not applied to trips of another length.",
+  "note": "Figures read from vessel pages by hand, for the ten boats where the extras block the scrape reads carries no number -- and, since 2026-09-05, for six hulls whose guest count no parser can reach: five of them have no liveaboard.com panel and Vita Xplorer has one with the row blank. A guest count here is one line of the record and carries its own note; nothing else about those six is hand-typed. Covers only vessels already in the dataset; nothing here invents a boat, a trip or a price. Dive counts are the low end of the range the page states, to keep price per dive from flattering a trip. Gratuities carry the tier their own page's block gives them -- Optional on all 55 vessels that state them -- rather than a customary tier typed here: a hand-read figure is the page's figure and must not arrive under a tier the page does not support. Nitrox is marked included on the five vessels whose pages say so; the extras block the scrape reads simply omits nitrox on those boats, and absence there is not the same claim as inclusion. Dive counts are the figure the page states for a standard seven-night week, and dives_for_nights records that: the same boat's three-night mini-safari does not run seventeen dives, so the count is not applied to trips of another length.",
   "vessels": {
     "blue-seas": {
       "guests": 24,
@@ -870,6 +870,30 @@
         }
       ],
       "dives_for_nights": 7
+    },
+    "anemone": {
+      "guests": 32,
+      "note": "guest count read by hand 2026-09-05; PADI's description for this hull names no number and there is no liveaboard.com panel, so this is the only source the dataset has"
+    },
+    "seawolf-dominator": {
+      "guests": 24,
+      "note": "guest count read by hand 2026-09-05; as with Anemone, the PADI description states none"
+    },
+    "seawolf-steel": {
+      "guests": 33,
+      "note": "guest count read by hand 2026-09-05, and the odd number is the boat: one cabin sleeps three. PADI's description says 33 as well"
+    },
+    "vita-xplorer": {
+      "guests": 24,
+      "note": "guest count read by hand 2026-09-05. The one hull with no PADI mapping at all and a liveaboard.com specification table that leaves the row blank, so nothing automated can reach it"
+    },
+    "explorer-ventures-grand-sea-explorer": {
+      "guests": 28,
+      "note": "guest count read by hand 2026-09-05; PADI's description says 28 as well"
+    },
+    "heaven-saphir": {
+      "guests": 20,
+      "note": "guest count read by hand 2026-09-05; PADI's description says 20 as well"
     }
   }
 }

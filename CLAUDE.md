@@ -770,7 +770,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   the pinned *first* cell, which was the expander and is now `.stick1`, so
   reclaiming the width did not quietly delete the mark.
   **One row is marked at a time, and Ctrl holds more.** A mark is where the
-  reader is while they scroll twelve columns sideways; every press used to add
+  reader is while they scroll thirteen columns sideways; every press used to add
   another and only a second press on that same row took one away, so keeping
   your place four times lit four rows and none of them said which was this
   one. A plain press collapses the set onto the row pressed and Ctrl — Cmd on
@@ -778,7 +778,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   file lists already teach. Pressing the **only** marked row still clears it:
   that is the one way back to no marks on a touch screen, where there is no
   modifier to hold.
-- **Twelve columns, in four named bands, and the bill is tinted.** Sixteen
+- **Thirteen columns, in four named bands, and the bill is tinted.** Sixteen
   columns of one weight gave the eye nothing to land on, so the money — the
   thing this site exists to publish — was exactly as findable as the return
   port. The header is two tiers: a band naming what the columns under it are
@@ -883,7 +883,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   how it would come back. Every card cell
   reads the same column's renderer, so the two cannot drift and the three panel
   triggers come across working — `cardCell` falls through to `show` unless the
-  column declares a `card`, and **two do**. Price per dive was a bare
+  column declares a `card`, and **three do**. Price per dive was a bare
   `€95` on the meta line, one gap from `+€400 → 500` and in the same weight:
   two euro figures, neither named, told apart only by a column heading a phone
   does not draw — and its `↓ 17+` carried its meaning in a `title`, on the one
@@ -910,6 +910,29 @@ Break these and the site starts lying quietly rather than failing loudly.
   measures the card's own money block and **asserts which layout it measured**,
   because a hidden table's rect is all zeros and clears every bound without the
   number being anywhere.
+  **Per day is the third, and it is the denominator this file used to argue
+  against.** Per dive carried the case for being the only one — *two
+  denominators over the same total, and only one of them is the thing being
+  bought* — and that is reversed here, by the person who owns the question.
+  They do not ask the same thing: a dive count varies 15 to 21 over one
+  seven-night week and 74 trips state none at all, while a trip length varies
+  1 to 14 nights across this table and every row states one. Per dive compares
+  the diving; per day compares the holiday, which is what a reader choosing
+  between a three-night mini-safari and a fortnight is actually asking.
+  **The denominator is `nights`** — the length both sellers quote and the one
+  the page prints two columns over — and not days aboard (`nights + 1`, which
+  is what `FeeBasis.PER_DAY` means where a *fee* is billed by the day): that
+  divides by a bigger number and prints a smaller price on every row, and the
+  arrival evening is not a day of diving anybody sells. Erring the way Per
+  dive errs, which takes the fewest dives an operator states so the figure is
+  a ceiling — and the cell prints `÷ 7` so a reader can check it rather than
+  take it. It is **a filter too**, the first one here whose subject is derived
+  rather than stated: its bounds move when the Include switches do, because
+  those change what the trip costs. `perDayOf` is the one function behind both
+  the cell and the bound, for the reason `paintSort` writes both renderings of
+  the sort — a filter and a column disagreeing about one row is a reader with
+  no way to tell which to believe. A row with no complete bill has no figure,
+  and a bound keeps it: the guests rule, for the guests reason.
 - **The sort is a control of its own, because on a phone the header is not
   one.** The table header *is* the sort control, and below 760px there is no
   table: `.shell > table` is `display:none` and the rows are cards, so 1,122

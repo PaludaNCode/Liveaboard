@@ -1027,10 +1027,13 @@ mapped vessels):
 So it goes **last** in `promote`'s guest chain, behind the specification table,
 the hand-read figures, the per-trip *Group Size* and our own summary prose. Last
 is what makes those 5 disagreements keep our number: this fallback can fill a
-blank and can never move a figure a seller stated. Three hulls still state none
+blank and can never move a figure a seller stated. Three hulls state none
 anywhere — **Anemone**, **Seawolf Dominator** (both PADI descriptions name no
 count) and **Vita Xplorer**, which has no PADI mapping at all and a
-liveaboard.com specification table that leaves the row blank.
+liveaboard.com specification table that leaves the row blank. Those three were
+read by hand into `data/operator_facts.json` on the same day (32, 24, 24), so
+the fleet states 77 of 77 — a hand-read figure, and the file says so per
+vessel.
 
 A second negative worth keeping: the strip itself still has no guests row, so
 `specs.guests` remains a key nothing writes. A figure from marketing copy filed

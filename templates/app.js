@@ -57,15 +57,17 @@
      data, which is how the money fold and the footer prose both shipped
      wrong (#150, #144).
 
-     The rows with no count are the whole reason the chip exists. Seven boats
-     state none -- six that liveaboard.com does not list at all, plus one whose
-     table has no such row -- and PADI publishes no guest count anywhere, so
-     there is no second source coming for them. They are real, bookable
-     sailings and the gap is in our reading, so a bound **keeps** them and the
-     chip is how a reader who is actually shopping small boats drops them
-     deliberately. Silently deleting 98 sailings because we could not read
-     their hull is the same mistake as reporting an unread page as an empty
-     one. */
+     The rows with no count are the whole reason the chip exists, and this
+     fleet currently has none: seven boats stated nothing until 2026-09-05,
+     when PADI's vessel description answered four of them and the last three
+     were read by hand. The rule outlives the gap it was written for. A count
+     is unstated where nobody has read it, not where a boat carries nobody,
+     so a bound **keeps** such a row and the chip is how a reader actually
+     shopping small boats drops it deliberately -- silently deleting 98
+     bookable sailings because we could not read their hull is the same
+     mistake as reporting an unread page as an empty one. The chip is not
+     offered while there is nothing for it to remove, which is why all three
+     readers below are counts rather than typed numbers. */
   var guestCounts = [], unstatedGuests = 0;
   D.departures.forEach(function (d) {
     var stated = (D.itineraries[d.itinerary_id] || {}).guests;
@@ -217,6 +219,14 @@
        not, so a bound has to say what it does about a boat that stated none.
        It keeps them, and this is the switch that does not. */
     guestsMin: null, guestsMax: null, hideUnstatedGuests: false,
+    /* What the trip costs a night, bounded the same way. The one filter here
+       whose subject is **derived** rather than stated: nights and guests are
+       numbers a seller published, and this one is the bill over the length --
+       so it moves when the visitor switches nitrox or rental gear on, and the
+       rows a bound leaves move with it. That is the honest behaviour rather
+       than a wrinkle: the switches change what the trip costs, and a budget
+       is about what it costs. */
+    perDayMin: null, perDayMax: null,
     /* Only sailings a seller has marked down. Off by default, like every
        other filter here: a page that opened showing 268 of 1,122 rows would
        be answering a question nobody asked. */
@@ -1164,9 +1174,15 @@
             : "") +
           split;
       } },
-    /* What divers actually compare on, and the reason price per night is not
-       here: two denominators over the same total, and only one of them is the
-       thing being bought.
+    /* What divers actually compare on. This used to carry the argument for
+       being the *only* denominator -- "two denominators over the same total,
+       and only one of them is the thing being bought" -- and Per day beside it
+       is that decision reversed, by the person who owns the question. The two
+       do not ask the same thing: a dive count varies 15 to 21 over one
+       seven-night week, and a trip length varies 1 to 14 nights across this
+       table, so per dive compares the diving and per day compares the holiday.
+       A reader choosing between a three-night mini-safari and a fortnight has
+       no use for the first.
 
        Shown only where the operator publishes a count. The rest used to carry
        three dives per full day, and checking that against the ten vessels that
@@ -1252,6 +1268,50 @@
           'further, or spend longer in the parks where night dives are not ' +
           'allowed, fit fewer in."><b>' + eur(b.bill.total / i.dives) +
           "</b> a dive <span class=\"dim\">\u00b7 " + i.dives + "+</span></span>";
+      } },
+    /* The same total over the other denominator, and the one every row can
+       answer: a trip states its length, and 74 of them state no dive count.
+     *
+       **The denominator is the trip's nights**, which is the length both
+       sellers quote and the length this page prints two columns over. Days
+       aboard -- nights + 1, which is what `FeeBasis.PER_DAY` means where a fee
+       is billed by the day -- would divide by a bigger number and print a
+       smaller price on every row, and the arrival evening is not a day of
+       diving anybody sells. Erring the same direction as Per dive, which
+       takes the fewest dives the operator states so the figure is a ceiling.
+       The tooltip says which number it divided by, so a reader can check it
+       rather than take it.
+
+       Divides the total the row prints -- the cheaper seller's -- for the
+       reason Per dive does: two money columns disagreeing about one row is
+       worse than either of them being the wrong seller's. */
+    { k: "perday", t: "Per day", short: "Per day", num: true, cls: "perday",
+      zone: "bill",
+      v: function (d, i, m, row) {
+        var b = best(row);
+        return b && d.nights > 0 ? b.bill.total / d.nights : -1;
+      },
+      show: function (d, i, m, row) {
+        var b = best(row);
+        if (!b || !d.nights) return '<span class="dim">\u2014</span>';
+        return "<b>" + eur(b.bill.total / d.nights) + "</b> " +
+          '<span class="dim" title="The whole bill divided by the ' + d.nights +
+          " night" + (d.nights === 1 ? "" : "s") + " this trip sells. Nights " +
+          "rather than days aboard, because that is the length both sellers " +
+          'quote.">\u00f7 ' + d.nights + "</span>";
+      },
+      /* Under Per dive in the money block, which is where the reader asked
+         for it and where the card already keeps the figures derived from the
+         total. Same words as the column, in the same order: the phone says
+         "a day" for the same reason it says "a dive" -- a bare euro figure
+         under another euro figure is two prices and no question. */
+      card: function (d, i, m, row) {
+        var b = best(row);
+        if (!b || !d.nights) return "";
+        return '<span class="perline" title="The whole bill divided by the ' +
+          d.nights + " night" + (d.nights === 1 ? "" : "s") + " this trip " +
+          'sells."><b>' + eur(b.bill.total / d.nights) +
+          "</b> a day <span class=\"dim\">\u00b7 " + d.nights + "n</span></span>";
       } },
     /* Included or extra, said plainly. Two thirds of this fleet bundles nitrox
        and a third bills for it -- 44 vessels against 21 -- and on a page for
@@ -1501,7 +1561,7 @@
      neighbours' second lines bought. See COLS. */
   var ORDER = [
     "start", "boat", "trip", "sites", "entry",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "perday",
     "availability", "source"
   ];
 
@@ -1521,7 +1581,7 @@
      instead of mislabelling anything. */
   var COMPACT_ORDER = [
     "start", "boat",
-    "base", "nitrox", "later", "total", "perdive",
+    "base", "nitrox", "later", "total", "perdive", "perday",
     "trip", "sites", "entry",
     "availability", "source"
   ];
@@ -1665,6 +1725,20 @@
       if (state.guestsMin !== null && itin.guests < state.guestsMin) return false;
       if (state.guestsMax !== null && itin.guests > state.guestsMax) return false;
     }
+    /* The bill per night, and the bounds are asked only where there is one to
+       ask -- the guests rule, for the guests reason: a row whose sellers'
+       disclosure never adds up has no total, so it can neither satisfy nor
+       contradict a budget, and dropping it would delete a real sailing for a
+       gap in our reading. Computed here rather than carried on the row because
+       it depends on the Include switches; only computed at all when a bound is
+       set, so the common case pays nothing. */
+    if (state.perDayMin !== null || state.perDayMax !== null) {
+      var day = perDayOf(dep);
+      if (day !== null) {
+        if (state.perDayMin !== null && day < state.perDayMin) return false;
+        if (state.perDayMax !== null && day > state.perDayMax) return false;
+      }
+    }
     if (skip !== "ports" && state.ports.size && !state.ports.has(itin.port_from)) return false;
     if (skip !== "boats" && state.boats.size && !state.boats.has(itin.boat)) return false;
     if (state.sites.size) {
@@ -1804,6 +1878,19 @@
      `metricsFor` reads the toggles: a panel holding a row from the last draw
      would show a bill with rental gear in it after the visitor switched gear
      off. */
+  /* What one sailing costs a night, or null where nothing can say.
+   *
+     The Per day column's own figure, out of one function so the filter and
+     the cell cannot come apart -- the mistake `paintSort` exists to prevent
+     one layer up. Null on a row with no complete bill from either seller,
+     which is the same silence the column prints a dash for. */
+  function perDayOf(dep) {
+    if (!dep.nights) return null;
+    var row = rowFor(dep.id);
+    var b = row && best(row);
+    return b ? b.bill.total / dep.nights : null;
+  }
+
   function rowFor(id) {
     var dep = byId[id];
     if (!dep) return null;
@@ -2274,7 +2361,8 @@
         '<div class="card-head">' +
           '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
           '<div class="card-money cost">' + cell("total", row) +
-            cardCell("base", row) + cardCell("perdive", row) + "</div>" +
+            cardCell("base", row) + cardCell("perdive", row) +
+            cardCell("perday", row) + "</div>" +
         "</div>" +
         '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
         '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
@@ -4012,6 +4100,44 @@
   gmin.addEventListener("input", readGuests);
   gmax.addEventListener("input", readGuests);
 
+  /* And the same control over what a night costs.
+   *
+     A range rather than chips for the third time, and here the argument is
+     not about the distribution: buckets over money would be the invented
+     layer the route and theme labels were removed for, and the cut point a
+     reader wants is their own budget.
+
+     The bounds are read off the rows as the page opens, with the Include
+     switches where they start, so the boxes never offer a figure no sailing
+     here reaches. They are placeholders and not a clamp: switching rental
+     gear on moves every figure up, and a box that refused the new range would
+     be a control arguing with the table. Rounded outward -- floor and ceil --
+     so the cheapest and dearest rows are inside their own bounds rather than
+     a rounding away from being unreachable. */
+  var pdmin = document.getElementById("pdmin"), pdmax = document.getElementById("pdmax");
+  var perDayFigures = [];
+  D.departures.forEach(function (d) {
+    var day = perDayOf(d);
+    if (day !== null) perDayFigures.push(day);
+  });
+  if (perDayFigures.length) {
+    pdmin.min = pdmax.min = 0;
+    pdmin.placeholder = Math.floor(Math.min.apply(null, perDayFigures));
+    pdmax.placeholder = Math.ceil(Math.max.apply(null, perDayFigures));
+  }
+
+  function readPerDay() {
+    var lo = pdmin.value === "" ? null : +pdmin.value;
+    var hi = pdmax.value === "" ? null : +pdmax.value;
+    /* 300 then 150 means €150 to €300, the courtesy the other two extend. */
+    if (lo !== null && hi !== null && lo > hi) { var t = lo; lo = hi; hi = t; }
+    state.perDayMin = lo;
+    state.perDayMax = hi;
+    draw();
+  }
+  pdmin.addEventListener("input", readPerDay);
+  pdmax.addEventListener("input", readPerDay);
+
   /* And the switch beside them, which is the only control on this page that
      removes a row for something nobody stated.
 
@@ -4193,6 +4319,8 @@
     state.hideUnstatedGuests = false;
     unstated.setAttribute("aria-pressed", "false");
     gmin.value = ""; gmax.value = "";
+    state.perDayMin = state.perDayMax = null;
+    pdmin.value = ""; pdmax.value = "";
     /* The Include switches are left where the visitor put them. "Clear all"
        sits inside the bar that names the live filters and clears what that bar
        lists, and the switches are no longer on it -- so resetting them here
@@ -4351,6 +4479,8 @@
     if (state.nightsMax !== null) n += 1;
     if (state.guestsMin !== null) n += 1;
     if (state.guestsMax !== null) n += 1;
+    if (state.perDayMin !== null) n += 1;
+    if (state.perDayMax !== null) n += 1;
     /* Counted, unlike the Include switches: this one is behind the drawer,
        which is the whole thing this number is for. */
     if (state.hideUnstatedGuests) n += 1;
@@ -4398,6 +4528,17 @@
     if (state.guestsMax !== null) {
       out.push({ bank: "guests", text: "to " + state.guestsMax, set: "guestsMax" });
     }
+    /* Carrying the euro sign, because "from 150" under a heading reading
+       *Filtering on* is a number with no unit beside two banks that count
+       nights and people. */
+    if (state.perDayMin !== null) {
+      out.push({ bank: "per day", text: "from " + eur(state.perDayMin),
+                 set: "perDayMin" });
+    }
+    if (state.perDayMax !== null) {
+      out.push({ bank: "per day", text: "to " + eur(state.perDayMax),
+                 set: "perDayMax" });
+    }
     /* Named as what it removes, because that is what a reader needs to undo:
        "unstated hidden" says which rows are missing, where "count stated"
        would describe what is left and leave them to work the rest out. */
@@ -4440,6 +4581,10 @@
       state.guestsMin = null; gmin.value = "";
     } else if (set === "guestsMax") {
       state.guestsMax = null; gmax.value = "";
+    } else if (set === "perDayMin") {
+      state.perDayMin = null; pdmin.value = "";
+    } else if (set === "perDayMax") {
+      state.perDayMax = null; pdmax.value = "";
     } else if (set === "hideUnstatedGuests") {
       state.hideUnstatedGuests = false;
       unstated.setAttribute("aria-pressed", "false");
@@ -4520,6 +4665,21 @@
               "keeps them, because it cannot ask them anything, and Hide " +
               "unstated is how to drop them"
             : "Every boat here states one");
+      } },
+    /* Written rather than typed for the same reason the guests note is: the
+       count of rows a bound cannot ask is a fact about this build. */
+    { k: "perday", label: "Per day",
+      note: function () {
+        var silent = D.departures.length - perDayFigures.length;
+        return "the whole bill divided by the trip's nights, which is the " +
+          "figure the Per day column prints — blank on either side means " +
+          "unbounded there. It moves with the Include switches, because " +
+          "those change what the trip costs. " +
+          (silent
+            ? silent + " sailing" + (silent === 1 ? "" : "s") + " here have " +
+              "no complete bill from either seller; a bound keeps them, " +
+              "because it cannot ask them anything"
+            : "Every sailing here has a bill to divide");
       } }
   ];
   /* No bank where nothing states a count: the boxes would have no bounds to
@@ -4549,6 +4709,9 @@
     if (k === "guests") {
       return (state.guestsMin !== null ? 1 : 0) + (state.guestsMax !== null ? 1 : 0) +
         (state.hideUnstatedGuests ? 1 : 0);
+    }
+    if (k === "perday") {
+      return (state.perDayMin !== null ? 1 : 0) + (state.perDayMax !== null ? 1 : 0);
     }
     return state[k] ? state[k].size : 0;
   }

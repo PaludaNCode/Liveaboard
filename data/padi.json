@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-04",
+ "collected": "2026-09-05",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -5694,96 +5694,6 @@
    },
    "title": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights"
   },
-  "blue-horizon::Best of the Red Sea (Port Galib - Port Galib)": {
-   "boat": "blue-horizon",
-   "boat_name": "MV Blue Horizon",
-   "dive_sites": [
-    "daedalus",
-    "rocky island",
-    "zabargad"
-   ],
-   "dives": 15,
-   "fees": {
-    "complete": false,
-    "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Governamental Reef Tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 56.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "fuel_surcharge",
-      "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 210.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 90.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "service_charge",
-      "included": true,
-      "note": "Service fees",
-      "tier": "mandatory"
-     }
-    ],
-    "unreadable": [
-     "14% GST (on onboard purchases)"
-    ]
-   },
-   "name": "Best of the Red Sea  (Port Galib - Port Galib)",
-   "nights": 7,
-   "padi_id": 13682,
-   "padi_slug": "best-of-the-red-sea-7-nights-port-galib-port-galib",
-   "port_from": "Port Ghalib",
-   "port_to": "Port Ghalib",
-   "requirements": {
-    "min_level": "open_water",
-    "min_logged_dives": 30,
-    "recommended_logged_dives": 20
-   },
-   "title": "Best of the Red Sea  (Port Galib - Port Galib) 7 nights"
-  },
   "blue-horizon::Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
@@ -6415,95 +6325,6 @@
    },
    "title": "Northern Red Sea & Brothers (Hurghada - Port Ghalib) 7 nights"
   },
-  "blue-horizon::Northern Red Sea & Brothers (Port Galib - Hurghada)": {
-   "boat": "blue-horizon",
-   "boat_name": "MV Blue Horizon",
-   "dive_sites": [
-    "brothers",
-    "elphinstone"
-   ],
-   "dives": 17,
-   "fees": {
-    "complete": false,
-    "lines": [
-     {
-      "amount": {
-       "amount": 200.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "environment_tax",
-      "note": "Governamental Reef Tax",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 56.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "fuel_surcharge",
-      "note": "Fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 210.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 90.0,
-       "currency": "USD"
-      },
-      "basis": "per_trip",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "service_charge",
-      "included": true,
-      "note": "Service fees",
-      "tier": "mandatory"
-     }
-    ],
-    "unreadable": [
-     "14% GST (on onboard purchases)"
-    ]
-   },
-   "name": "Northern Red Sea & Brothers (Port Galib - Hurghada)",
-   "nights": 7,
-   "padi_id": 13685,
-   "padi_slug": "daedalus-fury-shoal-7-nights-port-galib-port-galib",
-   "port_from": "Port Ghalib",
-   "port_to": "Hurghada",
-   "requirements": {
-    "min_level": "open_water",
-    "min_logged_dives": 30,
-    "recommended_logged_dives": 20
-   },
-   "title": "Northern Red Sea & Brothers (Port Galib - Hurghada) 7 nights"
-  },
   "blue-horizon::Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)": {
    "boat": "blue-horizon",
    "boat_name": "MV Blue Horizon",
@@ -7133,8 +6954,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
@@ -7230,8 +7050,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
@@ -7327,8 +7146,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)",
@@ -7424,8 +7242,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)",
@@ -7520,8 +7337,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Daedalus and St Johns (Port Ghalib- Port Ghalib)",
@@ -7618,8 +7434,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Northern Red Sea & Brothers (Hurghada - Hurghada)",
@@ -7812,8 +7627,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)",
@@ -7910,8 +7724,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Red Sea Wrecks (Hurghada - Hurghada)",
@@ -8007,8 +7820,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)",
@@ -8104,8 +7916,7 @@
      }
     ],
     "unreadable": [
-     "14% GST (on onboard purchases)",
-     "Fins, mask, snorkel (ABC)"
+     "14% GST (on onboard purchases)"
     ]
    },
    "name": "Strait of Tiran and North (Hurghada- Hurghada)",
@@ -26888,7 +26699,7 @@
      },
      {
       "amount": {
-       "amount": 275.0,
+       "amount": 470.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -27402,82 +27213,6 @@
     "recommended_logged_dives": 50
    },
    "title": "Rocky Island - Elba - St. John's - Elphinstone (Port Ghalib - Port Ghalib) 11 nights"
-  },
-  "independence-ii::Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)": {
-   "boat": "independence-ii",
-   "boat_name": "MY Independence II",
-   "dive_sites": [
-    "rocky island",
-    "daedalus"
-   ],
-   "dives": 30,
-   "fees": {
-    "complete": false,
-    "lines": [
-     {
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 275.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Port, permit fees and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 75.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 240.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "nitrox",
-      "included": true,
-      "note": "Free nitrox (for certified nitrox divers)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib)",
-   "nights": 11,
-   "padi_id": 17257,
-   "padi_slug": "rocky-island-elba-riffe-st-johns-elphinstone-port",
-   "port_from": "Port Ghalib",
-   "port_to": "Port Ghalib",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Rocky Island - Special Tour South with Daedalus (Port Ghalib - Port Ghalib) 11 Nights"
   },
   "independence-ii::Safaga - Best of North (Wrecks) - Strait of Tiran (Port Ghalib - Hurghada)": {
    "boat": "independence-ii",
@@ -31973,95 +31708,6 @@
    },
    "title": "Special wreck (Hurghada - port Ghalib) 7 Nights"
   },
-  "seawolf-dominator::BDE - St. Johns - Elba Reef (Hurghada - Port Ghalib)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "brothers",
-    "daedalus",
-    "elphinstone",
-    "st johns",
-    "elba reef"
-   ],
-   "dives": 30,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 255.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "BDE - St. Johns - Elba Reef (Hurghada - Port Ghalib)",
-   "nights": 12,
-   "padi_id": 23334,
-   "padi_slug": "fury-shoals-hurghada-port-ghalib-7-nights",
-   "port_from": "Hurghada",
-   "port_to": "Port Ghalib",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "BDE - St. Johns - Elba Reef (Hurghada - Port Ghalib) 12 nights"
-  },
   "seawolf-dominator::Brother Islands - Elphinstone (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
    "boat_name": "MY Seawolf Dominator",
@@ -32147,267 +31793,6 @@
     "recommended_logged_dives": 50
    },
    "title": "Brother Islands - Elphinstone (Hurghada - Hurghada) 7 nights"
-  },
-  "seawolf-dominator::Brothers - Deep South/ St. Johns (Hurghada - Port Ghalib)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "brothers",
-    "st johns"
-   ],
-   "dives": 18,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 255.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Brothers - Deep South/ St. Johns (Hurghada - Port Ghalib)",
-   "nights": 7,
-   "padi_id": 23335,
-   "padi_slug": "fury-shoals-hurghada-port-ghalib-7-nights-2",
-   "port_from": "Hurghada",
-   "port_to": "Port Ghalib",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Brothers - Deep South/ St. Johns (Hurghada - Port Ghalib) 7 nights"
-  },
-  "seawolf-dominator::Brothers - Elphinstone - Fury Shoals (Hurghada - Hurghada)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "thistlegorm",
-    "tiran",
-    "dahab",
-    "ras mohammed"
-   ],
-   "dives": 18,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 225.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Brothers - Elphinstone - Fury Shoals (Hurghada - Hurghada)",
-   "nights": 7,
-   "padi_id": 15273,
-   "padi_slug": "red-sea-highlights-hurghada-hurghada-14-nights",
-   "port_from": "Hurghada",
-   "port_to": "Hurghada",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Brothers - Elphinstone - Fury Shoals (Hurghada - Hurghada) 7 nights"
-  },
-  "seawolf-dominator::Daedalus - Fury Shoals - Elphinstone (Hurghada - Hurghada)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "daedalus",
-    "elphinstone",
-    "fury shoals"
-   ],
-   "dives": 18,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 225.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "Daedalus - Fury Shoals - Elphinstone (Hurghada - Hurghada)",
-   "nights": 7,
-   "padi_id": 22860,
-   "padi_slug": "brother-islands-elphinstone-hurghada-hurghada-7-2",
-   "port_from": "Hurghada",
-   "port_to": "Hurghada",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "Daedalus - Fury Shoals - Elphinstone (Hurghada - Hurghada) 7 Nights"
   },
   "seawolf-dominator::Deep South-St.John's (Port Ghalib - Port Ghalib)": {
    "boat": "seawolf-dominator",
@@ -32927,180 +32312,6 @@
     "recommended_logged_dives": 50
    },
    "title": "Marine Park North: Brothers-Daedalus-Elphinstone (Port Ghalib- Hurghada) 7 Nights"
-  },
-  "seawolf-dominator::North - Brothers - Elphinstone (Hurghada - Port Ghalib)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "brothers",
-    "elphinstone",
-    "abu nuhas"
-   ],
-   "dives": 18,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 210.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "North - Brothers - Elphinstone (Hurghada - Port Ghalib)",
-   "nights": 7,
-   "padi_id": 21629,
-   "padi_slug": "north-wrecks-hurghada-hurghada-7-nights-5",
-   "port_from": "Hurghada",
-   "port_to": "Port Ghalib",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "North - Brothers - Elphinstone (Hurghada - Port Ghalib) 7 Nights"
-  },
-  "seawolf-dominator::North - Brothers - Elphinstone (Port Ghalib - Hurghada)": {
-   "boat": "seawolf-dominator",
-   "boat_name": "MY Seawolf Dominator",
-   "dive_sites": [
-    "daedalus",
-    "sataya",
-    "sataya reef"
-   ],
-   "dives": 18,
-   "fees": {
-    "complete": true,
-    "lines": [
-     {
-      "amount": {
-       "amount": 250.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "visa",
-      "note": "Visa fees",
-      "tier": "mandatory"
-     },
-     {
-      "amount": {
-       "amount": 210.0,
-       "currency": "EUR"
-      },
-      "basis": "per_trip",
-      "code": "combined_fees",
-      "note": "Visa, dive permit, taxes, marine park fees, harbour fee and fuel surcharges",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
-      "code": "alcohol",
-      "note": "Alcohol",
-      "tier": "optional"
-     },
-     {
-      "amount": {
-       "amount": 170.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "gear_rental",
-      "note": "Full scuba set: Fins, mask, snorkel (ABC)",
-      "tier": "conditional"
-     },
-     {
-      "amount": {
-       "amount": 50.0,
-       "currency": "EUR"
-      },
-      "basis": "per_week",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "gratuities",
-      "note": "Tips for the crew",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "airport_transfer",
-      "included": true,
-      "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
-      "tier": "conditional"
-     }
-    ],
-    "unreadable": []
-   },
-   "name": "North - Brothers - Elphinstone (Port Ghalib - Hurghada)",
-   "nights": 7,
-   "padi_id": 21911,
-   "padi_slug": "fury-shoals-port-ghalib-port-ghalib-7-nights-2",
-   "port_from": "Port Ghalib",
-   "port_to": "Hurghada",
-   "requirements": {
-    "min_level": "advanced",
-    "min_logged_dives": 50,
-    "recommended_logged_dives": 50
-   },
-   "title": "North - Brothers - Elphinstone (Port Ghalib - Hurghada) 7 nights"
   },
   "seawolf-dominator::North - Wrecks (Hurghada - Hurghada)": {
    "boat": "seawolf-dominator",
@@ -36017,7 +35228,7 @@
     "lines": [
      {
       "amount": {
-       "amount": 90.0,
+       "amount": 95.0,
        "currency": "EUR"
       },
       "basis": "per_trip",
@@ -38795,6 +38006,7 @@
   "all-star-ghani": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 24,
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
@@ -38817,6 +38029,7 @@
   "all-star-red-sea": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 28,
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
@@ -38838,6 +38051,7 @@
   "alsuraya": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "Alsuraya",
    "operator": null,
    "sailings": {
@@ -38859,6 +38073,7 @@
   "amelie": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 12,
    "name": "Amelie Safari",
    "operator": "AMELIE SAFARI",
    "sailings": {
@@ -38881,6 +38096,7 @@
   "amelie-adventures": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 16,
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
@@ -38903,6 +38119,7 @@
   "andromeda": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Andromeda",
    "operator": null,
    "sailings": {
@@ -38925,6 +38142,7 @@
   "anemone": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Anemone",
    "operator": null,
    "sailings": {
@@ -38947,6 +38165,7 @@
   "aphrodite": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
@@ -38969,6 +38188,7 @@
   "ashrafi": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY Ashrafi",
    "operator": null,
    "sailings": {
@@ -38990,6 +38210,7 @@
   "avo": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY AVO",
    "operator": null,
    "sailings": {
@@ -39011,6 +38232,7 @@
   "bella-2": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
@@ -39033,6 +38255,7 @@
   "bella-3": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
@@ -39054,6 +38277,7 @@
   "blue": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
@@ -39075,6 +38299,7 @@
   "blue-horizon": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 26,
    "name": "MV Blue Horizon",
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
@@ -39097,6 +38322,7 @@
   "blue-melody": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 26,
    "name": "MY Blue Melody",
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
@@ -39119,6 +38345,7 @@
   "blue-pearl": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
    "sailings": {
@@ -39141,6 +38368,7 @@
   "blue-seas": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
@@ -39163,6 +38391,7 @@
   "blue-storm": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
    "sailings": {
@@ -39184,6 +38413,7 @@
   "carlton": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
@@ -39206,6 +38436,7 @@
   "cassiopeia-glory": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 32,
    "name": "MY Cassiopeia Glory",
    "operator": null,
    "sailings": {
@@ -39227,6 +38458,7 @@
   "discovery-i": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "MY Discovery I",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
@@ -39249,6 +38481,7 @@
   "discovery-ii": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 22,
    "name": "MY Discovery II",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
@@ -39271,6 +38504,7 @@
   "dune-longara": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 30,
    "name": "Dune Longara",
    "operator": "DUNE",
    "sailings": {
@@ -39292,6 +38526,7 @@
   "dune-silky": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 26,
    "name": "DUNE Silky",
    "operator": "DUNE",
    "sailings": {
@@ -39314,6 +38549,7 @@
   "dune-titan": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 30,
    "name": "DUNE Titan",
    "operator": "DUNE",
    "sailings": {
@@ -39336,6 +38572,7 @@
   "emperor-asmaa": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 18,
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
    "sailings": {
@@ -39358,6 +38595,7 @@
   "emperor-elite": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 26,
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
@@ -39380,6 +38618,7 @@
   "emperor-superior": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
@@ -39402,6 +38641,7 @@
   "eriny": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
@@ -39423,6 +38663,7 @@
   "explorer-ventures-grand-sea-explorer": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 28,
    "name": "Explorer Ventures -  Grand Sea Explorer",
    "operator": "EXPLORER VENTURES",
    "sailings": {
@@ -39444,6 +38685,7 @@
   "freedom-iii": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
@@ -39465,6 +38707,7 @@
   "freedom-iv": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 10,
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
@@ -39487,6 +38730,7 @@
   "galaxy": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MY Galaxy",
    "operator": null,
    "sailings": {
@@ -39509,6 +38753,7 @@
   "ghazala-adventure": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 26,
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
@@ -39530,6 +38775,7 @@
   "ghazala-explorer": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
@@ -39551,6 +38797,7 @@
   "grand-discovery": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 36,
    "name": "MY Grand Discovery",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
@@ -39572,6 +38819,7 @@
   "hammerhead-ii": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 32,
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
@@ -39594,6 +38842,7 @@
   "heaven-saphir": {
    "country": "egypt",
    "currency": "USD",
+   "guests": 20,
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
@@ -39615,6 +38864,7 @@
   "high-wave": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
@@ -39636,6 +38886,7 @@
   "iceberg": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
@@ -39653,6 +38904,7 @@
   "independence-ii": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
@@ -39674,6 +38926,7 @@
   "lady-m": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
@@ -39696,6 +38949,7 @@
   "new-sambo": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "New Sambo Safari Boat",
    "operator": null,
    "sailings": {
@@ -39717,6 +38971,7 @@
   "odyssey": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Odyssey",
    "operator": "SEAFARI",
    "sailings": {
@@ -39739,6 +38994,7 @@
   "red-sea-aggressor-ii": {
    "country": "united-states-of-america-usa",
    "currency": "USD",
+   "guests": 22,
    "name": "Red Sea Aggressor II",
    "operator": "AGGRESSOR",
    "sailings": {
@@ -39760,6 +39016,7 @@
   "red-sea-aggressor-iv": {
    "country": "united-states-of-america-usa",
    "currency": "USD",
+   "guests": 26,
    "name": "Red Sea Aggressor IV",
    "operator": "AGGRESSOR",
    "sailings": {
@@ -39781,6 +39038,7 @@
   "red-sea-aggressor-v": {
    "country": "united-states-of-america-usa",
    "currency": "USD",
+   "guests": 26,
    "name": "Red Sea Aggressor V",
    "operator": "AGGRESSOR",
    "sailings": {
@@ -39802,6 +39060,7 @@
   "red-sea-blue-force-2": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 18,
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
    "sailings": {
@@ -39823,6 +39082,7 @@
   "reef-voyager": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
@@ -39844,6 +39104,7 @@
   "royal-evolution": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "MS Royal Evolution",
    "operator": null,
    "sailings": {
@@ -39866,6 +39127,7 @@
   "seawolf-dominator": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "MY Seawolf Dominator",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
@@ -39888,6 +39150,7 @@
   "seawolf-steel": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 33,
    "name": "Seawolf Steel",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
@@ -39910,6 +39173,7 @@
   "serenity": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "Serenity",
    "operator": null,
    "sailings": {
@@ -39931,6 +39195,7 @@
   "snefro-love": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
@@ -39953,6 +39218,7 @@
   "snefro-pearl": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 12,
    "name": "Snefro Pearl",
    "operator": "KING SNEFRO",
    "sailings": {
@@ -39975,6 +39241,7 @@
   "snefro-spirit": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 18,
    "name": "Snefro Spirit",
    "operator": "KING SNEFRO",
    "sailings": {
@@ -39997,6 +39264,7 @@
   "snefro-target": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 20,
    "name": "Snefro Target",
    "operator": "KING SNEFRO",
    "sailings": {
@@ -40019,6 +39287,7 @@
   "south-moon-1": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
@@ -40040,6 +39309,7 @@
   "tala": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 22,
    "name": "MV Tala",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
@@ -40061,6 +39331,7 @@
   "topaz": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 32,
    "name": "Topaz",
    "operator": "SEAFARI",
    "sailings": {
@@ -40083,6 +39354,7 @@
   "unity": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": 24,
    "name": "Unity",
    "operator": null,
    "sailings": {
@@ -40104,6 +39376,7 @@
   "vip-one": {
    "country": "egypt",
    "currency": "EUR",
+   "guests": null,
    "name": "VIP One",
    "operator": null,
    "sailings": {

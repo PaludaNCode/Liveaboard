@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-04",
+ "collected": "2026-09-05",
  "departures": {
   "all-star-ghani::2026-09-07": {
    "availability": 4,
@@ -1692,7 +1692,7 @@
    "was": 1350.0
   },
   "alsuraya::2026-11-07": {
-   "availability": 10,
+   "availability": 9,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -1887,7 +1887,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-03-27": {
-   "availability": 20,
+   "availability": 22,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-04-03",
@@ -6346,7 +6346,7 @@
    "was": 590.0
   },
   "bella-2::2026-09-20": {
-   "availability": 14,
+   "availability": 12,
    "boat": "bella-2",
    "currency": "EUR",
    "end": "2026-09-23",
@@ -7217,7 +7217,7 @@
    "was": 590.0
   },
   "bella-3::2026-09-05": {
-   "availability": 12,
+   "availability": 14,
    "boat": "bella-3",
    "currency": "EUR",
    "end": "2026-09-09",
@@ -8075,7 +8075,7 @@
    "was": 1281.0
   },
   "blue-horizon::2027-01-30": {
-   "availability": 21,
+   "availability": 19,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-02-06",
@@ -9245,7 +9245,7 @@
    "was": 1785.0
   },
   "blue-melody::2026-09-26": {
-   "availability": 1,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-10-03",
@@ -9323,7 +9323,7 @@
    "was": 1610.0
   },
   "blue-melody::2026-11-07": {
-   "availability": 6,
+   "availability": 4,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-11-14",
@@ -9388,7 +9388,7 @@
    "was": 1155.0
   },
   "blue-melody::2026-12-12": {
-   "availability": 13,
+   "availability": 11,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-12-19",
@@ -9427,7 +9427,7 @@
    "was": 1155.0
   },
   "blue-melody::2027-01-02": {
-   "availability": 9,
+   "availability": 7,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-01-09",
@@ -11377,7 +11377,7 @@
    "was": 1370.0
   },
   "blue-seas::2026-10-22": {
-   "availability": 2,
+   "availability": 3,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2026-10-29",
@@ -11624,7 +11624,7 @@
    "was": 1740.0
   },
   "blue-seas::2027-05-13": {
-   "availability": 21,
+   "availability": 20,
    "boat": "blue-seas",
    "currency": "EUR",
    "end": "2027-05-24",
@@ -12118,7 +12118,7 @@
    "was": 1560.0
   },
   "blue-storm::2026-10-15": {
-   "availability": 1,
+   "availability": 3,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-10-22",
@@ -12131,7 +12131,7 @@
    "was": 1680.0
   },
   "blue-storm::2026-10-22": {
-   "availability": 22,
+   "availability": 17,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-10-29",
@@ -12157,7 +12157,7 @@
    "was": 1560.0
   },
   "blue-storm::2026-11-05": {
-   "availability": 15,
+   "availability": 18,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-11-12",
@@ -12911,7 +12911,7 @@
    "was": 1710.0
   },
   "blue::2026-11-12": {
-   "availability": 13,
+   "availability": 5,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-11-19",
@@ -14198,17 +14198,17 @@
    "was": 1152.0
   },
   "discovery-i::2026-09-26": {
-   "availability": 2,
+   "availability": 0,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-03",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1532037,
-   "price": 1080.0,
+   "price": 900.0,
    "slug": "my-discovery-i",
    "start": "2026-09-26",
-   "was": 1350.0
+   "was": 1125.0
   },
   "discovery-i::2026-10-03": {
    "availability": 9,
@@ -14289,7 +14289,7 @@
    "was": 1125.0
   },
   "discovery-i::2026-11-14": {
-   "availability": 14,
+   "availability": 12,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -14510,7 +14510,7 @@
    "was": 900.0
   },
   "discovery-i::2027-03-13": {
-   "availability": 20,
+   "availability": 18,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-03-20",
@@ -14770,17 +14770,17 @@
    "was": 1000.0
   },
   "discovery-i::2027-07-31": {
-   "availability": 3,
+   "availability": 1,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-08-07",
    "itinerary": "Brothers, Daedalus, Elphinstone (Port Ghalib - Port Ghalib) - 7 Nights",
    "nights": 7,
    "padi_id": 1550698,
-   "price": 871.25,
+   "price": 1045.5,
    "slug": "my-discovery-i",
    "start": "2027-07-31",
-   "was": 1025.0
+   "was": 1230.0
   },
   "discovery-i::2027-08-07": {
    "availability": 20,
@@ -14900,7 +14900,7 @@
    "was": 960.0
   },
   "discovery-i::2027-10-09": {
-   "availability": 20,
+   "availability": 6,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -17175,7 +17175,7 @@
    "was": 1700.0
   },
   "dune-silky::2026-11-28": {
-   "availability": 2,
+   "availability": 1,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -17201,7 +17201,7 @@
    "was": 1350.0
   },
   "dune-silky::2026-12-12": {
-   "availability": 24,
+   "availability": 23,
    "boat": "dune-silky",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -19606,7 +19606,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2026-09-26": {
-   "availability": 8,
+   "availability": 9,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2026-10-03",
@@ -19736,7 +19736,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-01-22": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-01-29",
@@ -19762,7 +19762,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-02-05": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-02-12",
@@ -19788,7 +19788,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-02-19": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-02-26",
@@ -19801,7 +19801,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-02-26": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-03-05",
@@ -19814,7 +19814,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-03-05": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-03-12",
@@ -19827,7 +19827,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2027-03-12": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-03-19",
@@ -19866,7 +19866,7 @@
    "was": 1100.0
   },
   "emperor-asmaa::2027-04-02": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-04-09",
@@ -19879,7 +19879,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-04-09": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-04-16",
@@ -19892,7 +19892,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2027-04-16": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-04-23",
@@ -19944,7 +19944,7 @@
    "was": 1250.0
   },
   "emperor-asmaa::2027-05-15": {
-   "availability": 16,
+   "availability": 17,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-05-22",
@@ -19970,7 +19970,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-05-29": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-06-05",
@@ -20009,7 +20009,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2027-06-19": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-06-26",
@@ -20087,7 +20087,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-08-14": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-08-21",
@@ -20100,7 +20100,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-08-21": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-08-28",
@@ -20113,7 +20113,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-08-28": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-09-04",
@@ -20126,7 +20126,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-09-04": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-09-11",
@@ -20152,7 +20152,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-09-18": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-09-25",
@@ -20165,7 +20165,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2027-09-25": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-02",
@@ -20191,7 +20191,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2027-10-09": {
-   "availability": 14,
+   "availability": 16,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-16",
@@ -20204,7 +20204,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2027-10-16": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-23",
@@ -20217,7 +20217,7 @@
    "was": 1400.0
   },
   "emperor-asmaa::2027-10-23": {
-   "availability": 15,
+   "availability": 17,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -20256,7 +20256,7 @@
    "was": 1400.0
   },
   "emperor-asmaa::2027-11-13": {
-   "availability": 8,
+   "availability": 10,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2027-11-20",
@@ -20282,7 +20282,7 @@
    "was": 1250.0
   },
   "emperor-asmaa::2028-01-21": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-01-28",
@@ -20295,7 +20295,7 @@
    "was": 1100.0
   },
   "emperor-asmaa::2028-01-28": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-02-04",
@@ -20308,7 +20308,7 @@
    "was": 1100.0
   },
   "emperor-asmaa::2028-02-04": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-02-11",
@@ -20321,7 +20321,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2028-02-11": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-02-18",
@@ -20360,7 +20360,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-03-03": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-03-10",
@@ -20373,7 +20373,7 @@
    "was": 1150.0
   },
   "emperor-asmaa::2028-03-10": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-03-17",
@@ -20386,7 +20386,7 @@
    "was": 1100.0
   },
   "emperor-asmaa::2028-03-17": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-03-24",
@@ -20399,7 +20399,7 @@
    "was": 1100.0
   },
   "emperor-asmaa::2028-03-24": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-03-31",
@@ -20412,7 +20412,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-03-31": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-04-07",
@@ -20425,7 +20425,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-04-07": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-04-14",
@@ -20451,7 +20451,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-04-21": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-04-28",
@@ -20477,7 +20477,7 @@
    "was": 1250.0
   },
   "emperor-asmaa::2028-05-06": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-05-13",
@@ -20490,7 +20490,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2028-05-13": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-05-20",
@@ -20503,7 +20503,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-05-20": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-05-27",
@@ -20516,7 +20516,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-06-03": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-06-10",
@@ -20542,7 +20542,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-06-17": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-06-24",
@@ -20555,7 +20555,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-07-01": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-07-08",
@@ -20568,7 +20568,7 @@
    "was": 1200.0
   },
   "emperor-asmaa::2028-07-29": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-08-05",
@@ -20581,7 +20581,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-08-05": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-08-12",
@@ -20594,7 +20594,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-08-12": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-08-19",
@@ -20620,7 +20620,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-08-26": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-09-02",
@@ -20633,7 +20633,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-09-02": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-09-09",
@@ -20646,7 +20646,7 @@
    "was": 1300.0
   },
   "emperor-asmaa::2028-09-09": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-09-16",
@@ -20659,7 +20659,7 @@
    "was": 1350.0
   },
   "emperor-asmaa::2028-09-16": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-09-23",
@@ -20672,7 +20672,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-09-23": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-09-30",
@@ -20698,7 +20698,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-10-07": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-10-14",
@@ -20711,7 +20711,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-10-14": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-10-21",
@@ -20737,7 +20737,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-10-28": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-11-04",
@@ -20750,7 +20750,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-11-04": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-11-11",
@@ -20763,7 +20763,7 @@
    "was": 1400.0
   },
   "emperor-asmaa::2028-11-11": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-11-18",
@@ -20776,7 +20776,7 @@
    "was": 1450.0
   },
   "emperor-asmaa::2028-11-18": {
-   "availability": 16,
+   "availability": 18,
    "boat": "emperor-asmaa",
    "currency": "EUR",
    "end": "2028-11-25",
@@ -20971,7 +20971,7 @@
    "was": 1300.0
   },
   "emperor-elite::2026-12-17": {
-   "availability": 23,
+   "availability": 21,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-24",
@@ -20984,7 +20984,7 @@
    "was": 1300.0
   },
   "emperor-elite::2026-12-24": {
-   "availability": 18,
+   "availability": 16,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-31",
@@ -23844,7 +23844,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-10-01": {
-   "availability": 22,
+   "availability": 21,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-10-08",
@@ -23883,7 +23883,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-10-22": {
-   "availability": 8,
+   "availability": 0,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-10-29",
@@ -23935,7 +23935,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-26": {
-   "availability": 21,
+   "availability": 18,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-12-03",
@@ -24013,7 +24013,7 @@
    "was": 2695.0
   },
   "explorer-ventures-grand-sea-explorer::2027-03-11": {
-   "availability": 28,
+   "availability": 0,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2027-03-18",
@@ -25469,7 +25469,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-11-18": {
-   "availability": 12,
+   "availability": 13,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2026-11-22",
@@ -25547,7 +25547,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-12-28": {
-   "availability": 15,
+   "availability": 14,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2027-01-01",
@@ -26470,7 +26470,7 @@
    "was": 1330.0
   },
   "ghazala-explorer::2026-10-05": {
-   "availability": 1,
+   "availability": 0,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2026-10-12",
@@ -26990,7 +26990,7 @@
    "was": 1570.0
   },
   "ghazala-explorer::2027-08-23": {
-   "availability": 20,
+   "availability": 21,
    "boat": "ghazala-explorer",
    "currency": "EUR",
    "end": "2027-08-30",
@@ -27263,7 +27263,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-09-12": {
-   "availability": 3,
+   "availability": 1,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-09-19",
@@ -27328,7 +27328,7 @@
    "was": 1325.0
   },
   "grand-discovery::2026-10-17": {
-   "availability": 8,
+   "availability": 7,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -27341,7 +27341,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-10-24": {
-   "availability": 30,
+   "availability": 28,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -27380,17 +27380,17 @@
    "was": 1350.0
   },
   "grand-discovery::2026-11-14": {
-   "availability": 19,
+   "availability": 18,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-21",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1548960,
-   "price": 1350.0,
+   "price": 1620.0,
    "slug": "my-grand-discovery",
    "start": "2026-11-14",
-   "was": 1350.0
+   "was": 1620.0
   },
   "grand-discovery::2026-11-21": {
    "availability": 32,
@@ -27419,17 +27419,17 @@
    "was": 1325.0
   },
   "grand-discovery::2026-12-05": {
-   "availability": 11,
+   "availability": 10,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-12",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1548969,
-   "price": 1000.0,
+   "price": 1200.0,
    "slug": "my-grand-discovery",
    "start": "2026-12-05",
-   "was": 1250.0
+   "was": 1500.0
   },
   "grand-discovery::2026-12-12": {
    "availability": 23,
@@ -27458,7 +27458,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 5,
+   "availability": 3,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -27900,7 +27900,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-08-21": {
-   "availability": 34,
+   "availability": 36,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-08-28",
@@ -28251,7 +28251,7 @@
    "was": 1401.25
   },
   "hammerhead-ii::2026-11-07": {
-   "availability": 24,
+   "availability": 26,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -31462,7 +31462,7 @@
    "was": 1660.0
   },
   "odyssey::2026-09-26": {
-   "availability": 9,
+   "availability": 10,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-10-03",
@@ -31527,7 +31527,7 @@
    "was": 1660.0
   },
   "odyssey::2026-11-07": {
-   "availability": 7,
+   "availability": 5,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -31683,7 +31683,7 @@
    "was": 1610.0
   },
   "odyssey::2027-04-17": {
-   "availability": 26,
+   "availability": 24,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-04-24",
@@ -31735,7 +31735,7 @@
    "was": 1520.0
   },
   "odyssey::2027-05-15": {
-   "availability": 22,
+   "availability": 26,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-05-22",
@@ -32021,7 +32021,7 @@
    "was": 1420.0
   },
   "odyssey::2027-10-23": {
-   "availability": 20,
+   "availability": 26,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-10-30",
@@ -32268,7 +32268,7 @@
    "was": 3060.0
   },
   "red-sea-aggressor-ii::2026-12-05": {
-   "availability": 17,
+   "availability": 16,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-12-12",
@@ -32307,7 +32307,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-12-26": {
-   "availability": 15,
+   "availability": 14,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2027-01-02",
@@ -33542,7 +33542,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-11-21": {
-   "availability": 4,
+   "availability": 2,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-11-28",
@@ -33555,7 +33555,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-11-28": {
-   "availability": 4,
+   "availability": 10,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-12-05",
@@ -34751,7 +34751,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-10-03": {
-   "availability": 5,
+   "availability": 2,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-10-10",
@@ -34790,7 +34790,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-10-24": {
-   "availability": 0,
+   "availability": 2,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-10-31",
@@ -37052,7 +37052,7 @@
    "was": 1499.0
   },
   "royal-evolution::2026-10-15": {
-   "availability": 3,
+   "availability": 2,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2026-10-22",
@@ -37234,7 +37234,7 @@
    "was": 1649.0
   },
   "royal-evolution::2027-04-08": {
-   "availability": 17,
+   "availability": 16,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2027-04-15",
@@ -39080,7 +39080,7 @@
    "was": 1350.0
   },
   "serenity::2026-10-03": {
-   "availability": 7,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -39145,7 +39145,7 @@
    "was": 1450.0
   },
   "serenity::2026-11-07": {
-   "availability": 14,
+   "availability": 13,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -39158,7 +39158,7 @@
    "was": 1400.0
   },
   "serenity::2026-11-14": {
-   "availability": 14,
+   "availability": 12,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -39184,7 +39184,7 @@
    "was": 1350.0
   },
   "serenity::2026-11-28": {
-   "availability": 14,
+   "availability": 11,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-12-05",
@@ -40653,7 +40653,7 @@
    "was": 529.0
   },
   "snefro-pearl::2026-09-13": {
-   "availability": 2,
+   "availability": 0,
    "boat": "snefro-pearl",
    "currency": "EUR",
    "end": "2026-09-16",
@@ -42915,7 +42915,7 @@
    "was": 1125.0
   },
   "south-moon-1::2026-10-31": {
-   "availability": 4,
+   "availability": 2,
    "boat": "south-moon-1",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -43026,7 +43026,7 @@
    "itinerary": "Best of Sinai (Sharm El Sheikh - Sharm El Sheikh) - 7 Nights",
    "nights": 7,
    "padi_id": 1542200,
-   "price": 1125.0,
+   "price": 956.25,
    "slug": "south-moon-1",
    "start": "2026-12-26",
    "was": 1125.0
@@ -43292,7 +43292,7 @@
    "was": 1050.0
   },
   "tala::2027-02-14": {
-   "availability": 21,
+   "availability": 18,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-02-21",
@@ -43435,7 +43435,7 @@
    "was": 1150.0
   },
   "tala::2027-05-07": {
-   "availability": 4,
+   "availability": 6,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-05-14",
@@ -45008,7 +45008,7 @@
    "was": 875.0
   },
   "unity::2026-11-28": {
-   "availability": 17,
+   "availability": 24,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-12-05",

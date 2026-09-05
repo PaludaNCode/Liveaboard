@@ -71,14 +71,15 @@ records that closing them costs no request.
   All three are `padi_only` with no liveaboard.com vessel panel, and PADI
   states no `fleetTitle` for them either — so neither of the two routes to a
   company name (`Product.brand.name`, then `window.shop.fleetTitle`) answers.
-- **Guests missing on 3 boats, cabins on 6.** It was 7 for guests — Grand Sea
-  Explorer, MY Anemone, MY Heaven Saphir, MY Independence II, MY Seawolf
-  Dominator, Seawolf Steel and Vita Xplorer — and PADI's vessel description
-  answered four of them on 2026-09-05 (28, 20, 20 and 33). What is left is
-  **MY Anemone** and **MY Seawolf Dominator**, whose PADI descriptions name no
-  count, and **Vita Xplorer**, which has no PADI mapping and a liveaboard.com
-  specification table with the row blank. Six of the original seven are the
-  same panel-less PADI-only vessels.
+- **Guests: closed. Cabins missing on 6.** Seven boats stated no guest count —
+  Grand Sea Explorer, MY Anemone, MY Heaven Saphir, MY Independence II, MY
+  Seawolf Dominator, Seawolf Steel and Vita Xplorer. PADI's vessel description
+  answered four on 2026-09-05 (28, 20, 20 and 33); the other three name no
+  count in any source this pipeline reads and were read from the sellers'
+  pages by hand into `data/operator_facts.json` — Anemone 32, Seawolf
+  Dominator 24, Vita Xplorer 24 — with Seawolf Steel's 33 confirming itself
+  (one cabin sleeps three). All 77 hulls state a count now, which is what
+  retires the *Hide unstated* chip until a new hull arrives without one.
 - **Zabargad has no fee panel.** The only vessel in `fees.json`'s `missing`
   list, and on the barren skip list since 2026-08-28. It publishes no
   departures, so nothing of it is on the page — but it is the one hull the fee
