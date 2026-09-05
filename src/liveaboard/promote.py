@@ -2343,7 +2343,8 @@ def promote(
     departures: list[dict[str, Any]] = []
     # Ladders refused for contradicting the row above them. Reported, never
     # silent: each one is a booking page this pipeline read and then declined
-    # to publish, and the fix is a fresh `cabins.yml` rather than anything here.
+    # to publish, and each line says which of the two readings is the older
+    # one -- see the loop that fills it.
     stale_ladders: list[str] = []
     # Where the two sellers' stated entry bars agree, and which way they do not.
     # Assembled here and published, so the footer's sentence about it is a
@@ -2769,9 +2770,21 @@ def promote(
             )
             berths, outdated = _drop_stale_ladder(berths, advertised)
             for seller, rung in sorted(outdated.items()):
+                # Which side is behind, said in the line. The drop is
+                # symmetric -- a ladder that disagrees with its row is not
+                # this row's, whichever of the two moved -- but the remedy is
+                # not, and the message used to name one of them for both. A
+                # ladder *below* the row is last week's prices still on the
+                # shelf and a fresh `cabins.yml` clears it. A ladder *above*
+                # it is the booking page having repriced since the crawl read
+                # the row, and no number of booking pages fixes that: the
+                # refresh is what heals it. On 2026-09-05 all three were the
+                # second kind, and the advice would have sent somebody to
+                # fetch 890 pages that were already right.
                 stale_ladders.append(
                     f"{slug} {item['start']}: row {advertised}, "
-                    f"{SELLERS[seller]} ladder starts at {rung}"
+                    f"{SELLERS[seller]} ladder starts at {rung} "
+                    f"({'the ladder is behind' if rung < advertised else 'the row is behind'})"
                 )
                 dropped_ladders[slug] += 1
             if berths:
