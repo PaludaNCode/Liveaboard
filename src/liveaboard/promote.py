@@ -622,10 +622,13 @@ Berth price is per person, so the guest count is what tells a diver whether
 they are buying into a boat of twelve or of thirty-four -- a difference in
 group size, dive-deck crowding and how the same reef feels.
 
-Read from the vessel description, which is the only place the scrape currently
-has it. That covers about half the fleet: the number also sits in the page's
-specification table, which nothing parses yet, so a vessel without one here has
-not been asked rather than declined to say.
+Read from a vessel description -- **either seller's**. liveaboard.com's summary
+was the only one for eleven refreshes, and PADI states the same fact the same
+way in the description block on its own vessel page
+(`padi_com.description_from_page`), which is where the last four holes in the
+fleet's guest counts were filled from. One vocabulary for both, because a
+second copy of these patterns would drift from the first and the day it drifts
+is the day two sellers' prose is read by two different rules.
 """
 
 MAX_GUESTS = 60
@@ -636,8 +639,13 @@ in the same sentence is a length in feet, a year, or a price.
 """
 
 
-def _guests(summary: str | None) -> int | None:
-    """Pull a guest count out of a vessel description, or admit there is none."""
+def guests_in_prose(summary: str | None) -> int | None:
+    """Pull a guest count out of a vessel description, or admit there is none.
+
+    Public because `tools/fetch_padi.py` reads the second seller's description
+    with it at fetch time. Named for what it does rather than for whose page it
+    is pointed at: both sellers write the same sentence about the same hull.
+    """
     if not summary:
         return None
     for pattern in GUESTS:
@@ -2391,10 +2399,23 @@ def promote(
                 # hand-typed figure and a regex over the marketing copy. The
                 # prose match stays as the fallback for vessels whose table is
                 # missing the row.
+                #
+                # **And the second seller's prose is last of all**, which is
+                # where PADI sits on every fact of ours it also states -- the
+                # dive count learned this first. Measured over the 50 mapped
+                # vessels rather than assumed: the two agree on 34, disagree on
+                # 5 (Aphrodite 23/24, Bella 2 22/20, Emperor Asmaa 20/18,
+                # Serenity 22/24, Topaz 28/32), and answer 4 hulls that had no
+                # count from anywhere -- Grand Sea Explorer, Heaven Saphir,
+                # Independence II, Seawolf Steel. Last means those 5 keep our
+                # number and the change can only fill a blank; a fallback that
+                # could overwrite a stated figure would be a second opinion,
+                # and this page publishes one answer per question.
                 "guests": (spec_book.get(slug, {}).get("guests")
                            or hand.get(slug, {}).get("guests")
                            or trip_guests.get(slug)
-                           or _guests(source.get("summary"))),
+                           or guests_in_prose(source.get("summary"))
+                           or (padi_vessels.get(slug) or {}).get("guests")),
                 "cabins": _spec(slug, "cabins"),
                 # The same table's other two rows. They were read, written to
                 # `data/fees.json` and then dropped here, so `Boat.length_m`

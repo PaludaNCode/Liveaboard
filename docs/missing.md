@@ -71,11 +71,14 @@ records that closing them costs no request.
   All three are `padi_only` with no liveaboard.com vessel panel, and PADI
   states no `fleetTitle` for them either — so neither of the two routes to a
   company name (`Product.brand.name`, then `window.shop.fleetTitle`) answers.
-- **Guests missing on 7 boats, cabins on 6.** Grand Sea Explorer, MY Anemone,
-  MY Heaven Saphir, MY Independence II, MY Seawolf Dominator, Seawolf Steel,
-  and — for guests only — Vita Xplorer. Six of the seven are the same
-  panel-less PADI-only vessels; Vita Xplorer has a panel whose table states no
-  guest count.
+- **Guests missing on 3 boats, cabins on 6.** It was 7 for guests — Grand Sea
+  Explorer, MY Anemone, MY Heaven Saphir, MY Independence II, MY Seawolf
+  Dominator, Seawolf Steel and Vita Xplorer — and PADI's vessel description
+  answered four of them on 2026-09-05 (28, 20, 20 and 33). What is left is
+  **MY Anemone** and **MY Seawolf Dominator**, whose PADI descriptions name no
+  count, and **Vita Xplorer**, which has no PADI mapping and a liveaboard.com
+  specification table with the row blank. Six of the original seven are the
+  same panel-less PADI-only vessels.
 - **Zabargad has no fee panel.** The only vessel in `fees.json`'s `missing`
   list, and on the barren skip list since 2026-08-28. It publishes no
   departures, so nothing of it is on the page — but it is the one hull the fee
@@ -191,8 +194,16 @@ coverage count does not read as a to-do.
   present on 8 of 12 vessels probed, a count on 2, and both are upper bounds
   ("Up to 20 dives + night dives"). The dataset keeps the low end so price per
   dive stays a ceiling, so an upper bound is the one figure it cannot use.
-- **A guest count on PADI's vessel page.** Searched the whole body for every
-  numeric form: none. So Vita Xplorer's missing count has no second source.
+- ~~**A guest count on PADI's vessel page.** Searched the whole body for every
+  numeric form: none.~~ **Wrong, and struck rather than deleted.** The search
+  was of the specification strip; the page states the count in its description
+  prose, and a reader found it on MY Independence II — *"a 40-meter vessel
+  designed for just 20 guests"* — beside our own page reading *guests not
+  stated*. Read since 2026-09-05, last in the chain, and it fills four of the
+  seven hulls that had no count. Vita Xplorer really does have no second
+  source: it is the one boat with no PADI mapping at all. The lesson is the
+  one this section exists to serve: a negative recorded from the wrong part of
+  a page reads exactly like a negative recorded from the whole of it.
 - **`Requirements` depth, current and nitrox advice.** No candidate field in
   either source.
 - **The single gear items beside "Full scuba set".** Priced, deliberately

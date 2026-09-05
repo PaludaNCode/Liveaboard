@@ -1047,8 +1047,10 @@ class TestTheVesselSpecificationStrip(unittest.TestCase):
         self.assertEqual(self.specs("<div>no strip here</div>"), {})
 
     def test_a_row_the_strip_does_not_carry_is_absent(self):
-        """Guests: PADI states none anywhere on the page, so there is no key
-        to read and none is invented. See docs/sources/padi.com.md."""
+        """Guests: the strip has no such row, so there is no key to read and
+        none is invented. The page states the count in its description
+        instead -- a different claim from a different place, and the class
+        below is where that is read. See docs/sources/padi.com.md."""
         self.assertNotIn("guests", self.specs())
 
     def test_an_implausible_figure_is_refused(self):
@@ -1056,3 +1058,56 @@ class TestTheVesselSpecificationStrip(unittest.TestCase):
         row = ("<p class='o-title'>Length / Width</p>"
                "<p class=\"o-value\">4500 m / 8 m</p>")
         self.assertNotIn("length_m", self.specs(row))
+
+
+class TestTheVesselDescriptionStatesTheGuestCount(unittest.TestCase):
+    """The page does say how many people the boat carries -- in prose.
+
+    `specs_from_page` recorded the opposite as settled, and the search behind
+    it was of the specification strip. MY Independence II shipped as *guests
+    not stated* beside a PADI page reading *"a 40-meter vessel designed for
+    just 20 guests"*, and a reader found it rather than a test.
+
+    The fixture is that page's description section as served on 2026-09-05,
+    markup untouched. The other fixture -- my-anemone, the same day -- is the
+    honest silence: its description names no count, and the boat still has
+    none from anywhere.
+    """
+
+    from pathlib import Path as _Path
+
+    FIXTURES = _Path(__file__).resolve().parent / "fixtures"
+
+    def described(self, markup: str | None = None) -> str | None:
+        if markup is None:
+            markup = (self.FIXTURES / "padi_vessel_description.html").read_text("utf-8")
+        return PadiComAdapter.description_from_page(markup)
+
+    def test_the_count_this_was_reported_for(self):
+        from liveaboard.promote import guests_in_prose
+
+        self.assertEqual(guests_in_prose(self.described()), 20)
+
+    def test_it_is_read_as_prose_and_not_as_a_field(self):
+        """The sentence is the source, so the whole block comes back and one
+        reader parses it. Two copies of that vocabulary would drift."""
+        text = self.described()
+        self.assertIn("designed for just 20 guests", text)
+        self.assertNotIn("<p>", text)
+
+    def test_a_page_without_the_block_states_nothing(self):
+        self.assertIsNone(self.described("<div>no description here</div>"))
+
+    def test_a_description_that_names_no_count_stays_silent(self):
+        """MY Anemone, whose prose says *welcomes guests* and no number.
+
+        The word is there and the count is not, which is the shape that would
+        make a looser pattern invent one -- and Anemone is one of the three
+        hulls that still state no guest count anywhere after this change.
+        """
+        from liveaboard.promote import guests_in_prose
+
+        quiet = (self.FIXTURES / "padi_vessel_description_silent.html").read_text("utf-8")
+        text = self.described(quiet)
+        self.assertIn("welcomes guests", text)
+        self.assertIsNone(guests_in_prose(text))
