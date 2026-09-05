@@ -448,7 +448,7 @@
       "id": "explorer-ventures-grand-sea-explorer",
       "name": "Explorer Ventures - Grand Sea Explorer",
       "operator_id": "explorer-ventures",
-      "guests": null,
+      "guests": 28,
       "cabins": 14,
       "length_m": 43,
       "year_built": null
@@ -538,7 +538,7 @@
       "id": "anemone",
       "name": "MY Anemone",
       "operator_id": "unknown-operator",
-      "guests": null,
+      "guests": 32,
       "cabins": 16,
       "length_m": 45,
       "year_built": 2022
@@ -556,7 +556,7 @@
       "id": "heaven-saphir",
       "name": "MY Heaven Saphir",
       "operator_id": "unknown-operator",
-      "guests": null,
+      "guests": 20,
       "cabins": 9,
       "length_m": 36,
       "year_built": null
@@ -565,7 +565,7 @@
       "id": "independence-ii",
       "name": "MY Independence II",
       "operator_id": "unknown-operator",
-      "guests": null,
+      "guests": 20,
       "cabins": 10,
       "length_m": 40,
       "year_built": null
@@ -583,7 +583,7 @@
       "id": "seawolf-dominator",
       "name": "MY Seawolf Dominator",
       "operator_id": "seawolf-diving-safari",
-      "guests": null,
+      "guests": 24,
       "cabins": 12,
       "length_m": 36,
       "year_built": 2007
@@ -763,7 +763,7 @@
       "id": "seawolf-steel",
       "name": "Seawolf Steel",
       "operator_id": "seawolf-diving-safari",
-      "guests": null,
+      "guests": 33,
       "cabins": 14,
       "length_m": 48,
       "year_built": 2022
@@ -880,7 +880,7 @@
       "id": "vita-xplorer",
       "name": "Vita Xplorer",
       "operator_id": "xplorer-aquarius-safari",
-      "guests": null,
+      "guests": 24,
       "cabins": 12,
       "length_m": 38,
       "year_built": null
@@ -100297,7 +100297,7 @@
       "padi_fees": [
         {
           "amount": {
-            "amount": 90.0,
+            "amount": 95.0,
             "currency": "EUR"
           },
           "basis": "per_trip",
@@ -116861,7 +116861,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -116917,8 +116917,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -116980,7 +116979,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117036,8 +117035,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117062,7 +117060,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117118,8 +117116,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117144,7 +117141,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117200,8 +117197,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117226,7 +117222,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117282,8 +117278,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117308,7 +117303,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117364,8 +117359,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117390,7 +117384,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1190.0,
+        "amount": 1400.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117446,8 +117440,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1396
@@ -117472,7 +117465,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1190.0,
+        "amount": 1400.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117528,8 +117521,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1396
@@ -117554,7 +117546,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117610,8 +117602,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117636,7 +117627,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1147.5,
+        "amount": 1350.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117692,8 +117683,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1346
@@ -117790,7 +117780,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/alsuraya?m=5/2027"
       },
       "padi_price": {
-        "amount": 1062.5,
+        "amount": 1250.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117843,12 +117833,7 @@
           null,
           0
         ]
-      ],
-      "sale": {
-        "sellers": [
-          1
-        ]
-      }
+      ]
     },
     {
       "id": "alsuraya-2027-06-12-1",
@@ -117869,7 +117854,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1062.5,
+        "amount": 1250.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -117925,8 +117910,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1246
@@ -117951,7 +117935,7 @@
       },
       "promotion": "15% Off",
       "padi_price": {
-        "amount": 1062.5,
+        "amount": 1250.0,
         "currency": "EUR"
       },
       "padi_provenance": {
@@ -118007,8 +117991,7 @@
       ],
       "sale": {
         "sellers": [
-          0,
-          1
+          0
         ],
         "pct": 15,
         "was": 1246
@@ -176228,8 +176211,7 @@
         "start": "2027-06-12",
         "end": "2027-06-19",
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
-        "nights": 7,
-        "in_run": true
+        "nights": 7
       },
       {
         "boat": "discovery-ii",
@@ -176389,7 +176371,7 @@
         "0": "2026-09-03",
         "1": "2026-09-05"
       },
-      "sailings": 238,
+      "sailings": 237,
       "boats": [
         {
           "boat": "all-star-red-sea",
@@ -176424,25 +176406,32 @@
         {
           "boat": "alsuraya",
           "boat_name": "ALSURAYA",
-          "sailings": 13,
+          "sailings": 4,
           "of": 17,
           "first": "2027-05-01",
-          "last": "2027-07-24",
+          "last": "2027-05-22",
           "sellers": [
-            0,
-            1
+            0
           ],
           "read": [
-            "2026-09-03",
-            "2026-09-05"
+            "2026-09-03"
           ],
-          "pct": 15,
-          "offers": [
-            {
-              "title": "Save 15%",
-              "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
-            }
-          ]
+          "pct": 15
+        },
+        {
+          "boat": "alsuraya",
+          "boat_name": "ALSURAYA",
+          "sailings": 8,
+          "of": 17,
+          "first": "2027-06-05",
+          "last": "2027-07-24",
+          "sellers": [
+            0
+          ],
+          "read": [
+            "2026-09-03"
+          ],
+          "pct": 15
         },
         {
           "boat": "alsuraya",

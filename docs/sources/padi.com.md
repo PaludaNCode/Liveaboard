@@ -984,14 +984,61 @@ Not acted on: three claims from one seller and no measurement of which holds
 across the fleet, so the specific entry with a figure on it still wins. Worth a
 probe of its own before either is believed.
 
-**Negative, and the reason `guests` stays open: the page states no guest count
-anywhere.** The whole rendered body searched for every numeric form of guests,
-divers, passengers, people, pax — zero hits, and the strip has no such row.
-Vita Xplorer is the boat this leaves stranded: it is the one vessel with a
-liveaboard.com panel whose specification table leaves the field blank, so its
-answer is a parser fix on that `<dl>` or nothing. The other six missing a guest
-count are reachable through the itinerary fragment's *Group Size*, which
-`promote`'s guest chain already reads.
+### The description states the guest count, and this file said it did not
+
+**A negative here was wrong, and it was wrong in the way that costs most.**
+This section used to read: *"the page states no guest count anywhere — the
+whole rendered body searched for every numeric form of guests, divers,
+passengers, people, pax, zero hits"*. The search was of the specification
+strip's own label/value pairs. The page says it in **prose**, in the
+description block, and the wrong sentence is quoted here rather than deleted
+because it is the reason nobody looked again for two weeks.
+
+What found it was a reader opening `/liveaboard/egypt/my-independence-ii/` and
+seeing *"the crown jewel of the Blue Water fleet … a 40-meter vessel designed
+for just 20 guests"* beside our own page printing **guests not stated** for
+that hull.
+
+Where it lives (read 2026-09-05, plain `urllib`, same response as the strip):
+
+    <div itemprop="description" id='description-text' class="wysiwyg hidden-elem">
+      <p>… a 40-meter vessel designed for just 20 guests.</p>
+
+`PadiComAdapter.description_from_page` returns that block as text and
+`promote.guests_in_prose` — the reader that has always taken this figure out of
+liveaboard.com's vessel summary — parses it. One vocabulary for both sellers'
+prose, because a second copy drifts.
+
+**Bounded to the block, not the page.** Probed over all 50 mapped vessels: the
+bounded read and a whole-page read return the same number on every one, so the
+bound costs nothing today and is the version that survives the page growing a
+review section.
+
+**Measured before it was used** (`tools/probe_padi_guests.py`, 2026-09-05, 50
+mapped vessels):
+
+| | |
+|---|---|
+| agree with ours | 34 |
+| disagree | 5 — Aphrodite 23/24, Bella 2 22/20, Emperor Asmaa 20/18, Serenity 22/24, Topaz 28/32 |
+| fill a hull with no count anywhere | 4 — Grand Sea Explorer 28, Heaven Saphir 20, Independence II 20, Seawolf Steel 33 |
+| silent | 7 |
+
+So it goes **last** in `promote`'s guest chain, behind the specification table,
+the hand-read figures, the per-trip *Group Size* and our own summary prose. Last
+is what makes those 5 disagreements keep our number: this fallback can fill a
+blank and can never move a figure a seller stated. Three hulls state none
+anywhere — **Anemone**, **Seawolf Dominator** (both PADI descriptions name no
+count) and **Vita Xplorer**, which has no PADI mapping at all and a
+liveaboard.com specification table that leaves the row blank. Those three were
+read by hand into `data/operator_facts.json` on the same day (32, 24, 24), so
+the fleet states 77 of 77 — a hand-read figure, and the file says so per
+vessel.
+
+A second negative worth keeping: the strip itself still has no guests row, so
+`specs.guests` remains a key nothing writes. A figure from marketing copy filed
+beside a table's figures would read as the stronger claim it is not, which is
+why the count is a field of its own on the vessel record.
 
 ## One property to preserve
 

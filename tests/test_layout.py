@@ -2185,6 +2185,17 @@ class TestTheViewsAtEverySize(unittest.TestCase):
            was: a figure typed into a template is a figure that goes stale the
            day a boat's page starts stating its capacity (#150, #144).
         4. Clear all puts all three back, boxes included.
+
+        **And the fleet no longer has such a row.** All 77 boats state a
+        count since 2026-09-05 -- PADI's vessel description answered four and
+        six more were read by hand -- so 1, 2 and 3 are about a state this
+        build cannot reach. The test does not skip: where nothing is unstated
+        it asserts the *other* half of the same contract, which is the half
+        that is live -- the chip is not offered at all, and the note says so
+        rather than printing a zero. The unstated branch stays written and
+        stays asserted the day a new hull arrives without a count, which is
+        the only way this rule survives a fleet that currently agrees with
+        it.
         """
         payload = shipped_payload()
         itineraries = payload["itineraries"]
@@ -2193,7 +2204,6 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         stated = [n for n in counts if n is not None]
         unstated = len(counts) - len(stated)
         self.assertTrue(stated, "no boat states a guest count")
-        self.assertTrue(unstated, "every boat states one — nothing to guard")
 
         bound = 16
         within = sum(1 for n in stated if n <= bound)
@@ -2229,9 +2239,21 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             page.wait_for_timeout(200)
 
             note = page.text_content("#bankNote")
-            self.assertIn(str(unstated), note,
-                          "the bank's note does not say how many sailings "
-                          "state no count: %r" % note)
+            if unstated:
+                self.assertIn(str(unstated), note,
+                              "the bank's note does not say how many sailings "
+                              "state no count: %r" % note)
+            else:
+                self.assertIn("Every boat here states one", note,
+                              "no sailing states no count and the note does "
+                              "not say so: %r" % note)
+                self.assertTrue(
+                    page.get_attribute("#hideUnstated", "hidden") is not None
+                    or page.evaluate(
+                        "()=>document.getElementById('hideUnstated').hidden"),
+                    "the Hide unstated chip is offered over a fleet where "
+                    "every boat states a count, so it can only ever remove "
+                    "nothing")
 
             page.fill("#gmax", str(bound))
             page.wait_for_timeout(360)
@@ -2246,26 +2268,35 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertEqual(0, seen["over"],
                              "%d rows on screen are on a boat of more than %d"
                              % (seen["over"], bound))
-            self.assertGreater(seen["unstated"], 0,
-                               "the bound dropped every row that states no "
-                               "count — 98 bookable sailings, silently")
-            self.assertEqual(str(within), (seen["chip"] or "").replace(",", ""),
-                             "the chip promises %r where pressing it leaves %d"
-                             % (seen["chip"], within))
+            if unstated:
+                self.assertGreater(seen["unstated"], 0,
+                                   "the bound dropped every row that states "
+                                   "no count — bookable sailings, silently")
+                self.assertEqual(str(within),
+                                 (seen["chip"] or "").replace(",", ""),
+                                 "the chip promises %r where pressing it "
+                                 "leaves %d" % (seen["chip"], within))
 
-            page.click("#hideUnstated")
-            page.wait_for_timeout(360)
-            after = page.evaluate(read)
-            self.assertEqual(within, after["shown"],
-                             "hiding the unstated rows left %d where the "
-                             "payload has %d inside the bound"
-                             % (after["shown"], within))
-            self.assertEqual(0, after["unstated"],
-                             "%d rows stating no count survived the chip"
-                             % after["unstated"])
-            self.assertEqual("2", after["badge"],
-                             "the drawer's badge says %r over a bound and a "
-                             "switch" % after["badge"])
+                page.click("#hideUnstated")
+                page.wait_for_timeout(360)
+                after = page.evaluate(read)
+                self.assertEqual(within, after["shown"],
+                                 "hiding the unstated rows left %d where the "
+                                 "payload has %d inside the bound"
+                                 % (after["shown"], within))
+                self.assertEqual(0, after["unstated"],
+                                 "%d rows stating no count survived the chip"
+                                 % after["unstated"])
+                self.assertEqual("2", after["badge"],
+                                 "the drawer's badge says %r over a bound and "
+                                 "a switch" % after["badge"])
+            else:
+                self.assertEqual(0, seen["unstated"],
+                                 "%d rows print 'guests not stated' where the "
+                                 "payload has none" % seen["unstated"])
+                self.assertEqual("1", seen["badge"],
+                                 "the drawer's badge says %r over one bound"
+                                 % seen["badge"])
 
             page.click("#reset")
             page.wait_for_timeout(360)
@@ -2279,6 +2310,185 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertEqual(
                 "false", page.get_attribute("#hideUnstated", "aria-pressed"),
                 "Clear all left the unstated switch lit")
+        finally:
+            page.close()
+
+    def test_what_a_day_costs_prints_under_what_a_dive_costs(self) -> None:
+        """Per day, the second denominator, in both layouts.
+
+        The table gained a column and the card gained a line under the
+        per-dive one, inside the same tinted money box. Both are asserted
+        here together for the reason the per-dive test states: a change that
+        moved the figure would otherwise pass a test that looked at one.
+
+        The arithmetic is checked against the row's own two printed numbers --
+        the Total and the nights under the date -- rather than against a
+        second implementation of the bill in Python, which would only prove
+        that two adders agree.
+
+        And the column sits **beside** Per dive rather than anywhere in the
+        band: the two are one question asked twice, and a reader comparing
+        them should not have to cross the Places column to do it.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        seen = page.evaluate("""() => {
+          const heads = [...document.querySelectorAll('thead tr:not(.band) th')]
+            .map(h => h.dataset.k || "");
+          const row = document.querySelector('#body tr.row');
+          const money = t => Number((t.match(/€\\s*([\\d,]+)/) || [0, "0"])[1]
+                                    .replace(/,/g, ""));
+          const nights = Number((row.querySelector('td.when .sub').textContent
+                                  .match(/(\\d+)\\s*night/) || [0, "0"])[1]);
+          const cell = row.querySelector('td.perday');
+          return {
+            heads: heads,
+            zone: cell.closest('tr') && cell.className,
+            nights: nights,
+            total: money(row.querySelector('td.cost').textContent),
+            perDay: money(cell.textContent),
+            said: cell.textContent.replace(/\\s+/g, " ").trim(),
+            blank: [...document.querySelectorAll('#body tr.row td.perday')]
+                     .filter(c => !/€/.test(c.textContent)).length,
+          };
+        }""")
+        self.assertIn("perday", seen["heads"], "no Per day column in the header")
+        self.assertEqual(seen["heads"].index("perday"),
+                         seen["heads"].index("perdive") + 1,
+                         "Per day is not beside Per dive: %s" % seen["heads"])
+        self.assertGreater(seen["nights"], 0, "the row states no length")
+        # The printed euro figures are rounded, so the comparison is too.
+        self.assertAlmostEqual(seen["perDay"], seen["total"] / seen["nights"],
+                               delta=1.5,
+                               msg="the Per day figure is not the Total over "
+                                   "the trip's nights: %r" % seen["said"])
+        self.assertIn("÷ %d" % seen["nights"], seen["said"],
+                      "the cell does not say what it divided by: %r" % seen["said"])
+        self.assertEqual(0, seen["blank"],
+                         "%d rows print no per-day figure, and every row "
+                         "states its length" % seen["blank"])
+
+        # And the compact order, which is a second list a column can be
+        # missing from -- the width a laptop never opens.
+        page.set_viewport_size({"width": 1100, "height": 900})
+        page.wait_for_timeout(200)
+        compact = page.evaluate(
+            """() => [...document.querySelectorAll('thead tr:not(.band) th')]
+                     .map(h => h.dataset.k || "")""")
+        self.assertEqual(compact.index("perday"), compact.index("perdive") + 1,
+                         "Per day moves away from Per dive when the table is "
+                         "compact: %s" % compact)
+
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 720})
+            page.wait_for_timeout(120)
+            card = page.evaluate("""() => {
+              const money = document.querySelector('.cards .card .card-money');
+              const lines = [...money.querySelectorAll('.perline')];
+              const box = money.getBoundingClientRect();
+              return {
+                texts: lines.map(l => l.textContent.replace(/\\s+/g, " ").trim()),
+                out: lines.filter(l => {
+                  const r = l.getBoundingClientRect();
+                  return r.left < box.left - 1 || r.right > box.right + 1;
+                }).length,
+                order: lines.map(l => Math.round(l.getBoundingClientRect().top)),
+              };
+            }""")
+            where = "at %dpx" % width
+            day = [t for t in card["texts"] if " a day" in t]
+            dive = [t for t in card["texts"] if " a dive" in t or "dives:" in t]
+            self.assertTrue(day, "no per-day line in the money box " + where)
+            self.assertTrue(dive, "the per-dive line went with it " + where)
+            self.assertLess(card["order"][0], card["order"][-1] + 1,
+                            "the derived lines are not stacked " + where)
+            self.assertEqual(card["texts"].index(day[0]),
+                             len(card["texts"]) - 1,
+                             "per day is not the last line in the money box "
+                             + where)
+            self.assertEqual(0, card["out"],
+                             "a derived line sits outside the money box " + where)
+
+    def test_a_budget_leaves_only_the_trips_inside_it(self) -> None:
+        """The Per day bound, checked against what each row prints.
+
+        The first filter on this page whose subject is derived rather than
+        stated: nights and guests are numbers a seller published, and this is
+        the bill over the length, so it moves when the Include switches do.
+        That is why the rows are checked against their own printed figure --
+        the one the reader is comparing the bound with -- rather than against
+        a total recomputed here.
+
+        A row with no complete bill from either seller has no figure, and the
+        guests rule holds for the same reason it holds there: a bound cannot
+        ask such a row anything, so it keeps it. Every sailing in this build
+        has a bill, so what the assertion below can state is the other half --
+        nothing outside the bound survives it.
+        """
+        bound = 200
+        read = """() => {
+          const rows = [...document.querySelectorAll('#body tr.row')];
+          const day = r => {
+            const m = r.querySelector('td.perday').textContent
+                       .match(/€\\s*([\\d,]+)/);
+            return m ? Number(m[1].replace(/,/g, "")) : null;
+          };
+          return {
+            drawn: rows.length,
+            over: rows.filter(r => day(r) !== null && day(r) > %d).length,
+            blank: rows.filter(r => day(r) === null).length,
+            shown: Number(document.getElementById('shown')
+                     .textContent.replace(/,/g, '')),
+            rail: Number(document.getElementById('navTripsCount')
+                     .textContent.replace(/,/g, '')),
+            badge: document.getElementById('filtersCount').textContent,
+            pills: [...document.querySelectorAll('#activePills button')]
+                     .map(b => b.textContent.trim()),
+          };
+        }""" % bound
+
+        page = self.open(1440, 900)
+        try:
+            total = page.evaluate(
+                "()=>Number(document.getElementById('shown')"
+                ".textContent.replace(/,/g, ''))")
+            page.click("#filtersToggle")
+            page.wait_for_timeout(280)
+            page.click('.bank-tab[data-bank="perday"]')
+            page.wait_for_timeout(200)
+            self.assertTrue(page.get_attribute("#pdmax", "placeholder"),
+                            "the box offers no bound off the rows themselves")
+            page.fill("#pdmax", str(bound))
+            page.wait_for_timeout(360)
+            seen = page.evaluate(read)
+
+            self.assertGreater(seen["shown"], 0,
+                               "a bound of €%d left nothing" % bound)
+            self.assertLess(seen["shown"], total,
+                            "a bound of €%d kept the whole table" % bound)
+            self.assertEqual(seen["shown"], seen["rail"],
+                             "the rail says %s over a table of %s"
+                             % (seen["rail"], seen["shown"]))
+            self.assertEqual(0, seen["over"],
+                             "%d of the %d rows drawn cost more than €%d a day"
+                             % (seen["over"], seen["drawn"], bound))
+            self.assertEqual("1", seen["badge"],
+                             "the drawer's badge does not count the bound: %r"
+                             % seen["badge"])
+            self.assertTrue(any("€" in p for p in seen["pills"]),
+                            "the bar names the bound without its unit: %r"
+                            % seen["pills"])
+
+            # And out again, boxes included -- the guests test's fourth point.
+            page.click("#reset")
+            page.wait_for_timeout(360)
+            back = page.evaluate(read)
+            self.assertEqual(total, back["shown"],
+                             "Clear all left %d of %d rows"
+                             % (back["shown"], total))
+            self.assertEqual("", page.input_value("#pdmax"),
+                             "Clear all dropped the bound and left the box "
+                             "holding the number that set it")
         finally:
             page.close()
 
