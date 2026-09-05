@@ -294,10 +294,16 @@ class LiveaboardComAdapter(SourceAdapter):
             if not extras:
                 output.warnings.append(f"{result.url}: no Required/Optional Extras block found")
 
-        for index, event in enumerate(events):
-            departure = self._departure_from(event, result, slug, index)
-            if departure:
-                output.departures.append(departure)
+        # Numbered here rather than inside the parser, because this is the
+        # only place that can see the whole page -- see `_number` for why the
+        # position on it may not reach the id.
+        output.departures.extend(
+            _number(slug, [
+                row for row in (self._departure_from(event, result, slug)
+                                for event in events)
+                if row
+            ])
+        )
 
         if events and not output.departures:
             output.warnings.append(
@@ -308,7 +314,7 @@ class LiveaboardComAdapter(SourceAdapter):
         return output
 
     def _departure_from(
-        self, node: dict[str, Any], result: FetchResult, slug: str, index: int
+        self, node: dict[str, Any], result: FetchResult, slug: str
     ) -> dict[str, Any] | None:
         """Build one departure from an ``Event`` node.
 
@@ -335,7 +341,9 @@ class LiveaboardComAdapter(SourceAdapter):
             return None
 
         return {
-            "id": f"{slug}-{start}-{index}",
+            # The id is written by `_number` once the page is parsed. Nothing
+            # here can know it: it depends on the other sailings that share
+            # this date, and this function sees one node.
             "boat_slug": slug,
             "name": node.get("name"),
             "start": start,
@@ -347,6 +355,47 @@ class LiveaboardComAdapter(SourceAdapter):
             "operator": organizer_name(node),
             "provenance": self.provenance(result.url),
         }
+
+
+def _number(slug: str, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Give each departure on one page an id that no sibling can move.
+
+    The id was `f"{slug}-{start}-{index}"` with `index` counted over the page's
+    Event nodes, so **the id carried the sailing's position in a list somebody
+    else orders**. A week inserted or withdrawn earlier renumbered every later
+    one, and an id that moves is, to `changes.compare`, one sailing withdrawn
+    and another arrived: `blue-2027-08-12-0` became `blue-2027-08-12-1` with
+    the same boat, the same week, the same trip and the same seller, and was
+    published as both a new departure and a withdrawal.
+
+    The suffix is here to separate two sailings of one boat that start on the
+    same day. Measured against the committed candidate, it separates nothing:
+    955 departures fall into 955 distinct `(boat, start)` pairs, so every
+    suffix above zero was position and nothing else. Kept anyway, because a
+    collision is the failure this project raises on rather than the one it
+    tolerates -- a boat *can* sell two weeks starting the same morning.
+
+    So the count runs within the date, and a date carrying more than one
+    sailing orders them by the trip's own name. That leaves nothing about the
+    id derived from where the seller printed the row.
+    """
+    from collections import defaultdict
+
+    by_day: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        by_day[row["start"]].append(row)
+    for start, group in by_day.items():
+        # Sorted only where it can matter. One sailing a day is 955 of 955
+        # here, and a sort over a single row is a sort that cannot be wrong;
+        # the tie-break earns its keep on the day a second one arrives.
+        ordered = (group if len(group) == 1
+                   else sorted(group, key=lambda r: (r.get("name") or "",
+                                                     r.get("end") or "")))
+        for n, row in enumerate(ordered):
+            row["id"] = f"{slug}-{start}-{n}"
+    # Rebuilt so the id leads the record, which is where it was written before
+    # and where a person reading `data/candidate.json` looks for it.
+    return [{"id": row.pop("id"), **row} for row in rows]
 
 
 def organizer_name(node: dict[str, Any]) -> str | None:

@@ -3024,6 +3024,9 @@
                    Math.round(row.price).toLocaleString("en-IE") + " " +
                    row.currency);
       }
+      /* Something always moved on a row that reaches this block: one where
+         nothing did is counted by `changes` as `renumbered` and never listed,
+         so the fallback is a net rather than a case. */
       tr.appendChild(el("td", "c-move", moved.join(" · ") || "the row was rebuilt"));
       return tr;
     }

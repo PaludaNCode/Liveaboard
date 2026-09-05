@@ -202,6 +202,16 @@ class Report:
     """Sold out yesterday, bookable today -- a cancellation freeing a berth."""
     relisted: list[Relisted] = field(default_factory=list)
     """Sailings that only appear to have arrived and gone. See `Relisted`."""
+    renumbered: int = 0
+    """Re-listings where the id is the only thing that moved -- counted, not
+    listed, the way `price_rounding` is.
+
+    The seller is the same, the fare is the same in the same currency, the trip
+    is the same: nothing about the sailing changed and nothing about it is news.
+    Stating the count is still not optional -- a report that drops rows without
+    admitting it reads as "that was everything" -- and it is what makes the day
+    the numbering scheme itself changes legible: 717 sailings kept everything
+    but their id, in one line rather than 717."""
     price_up: list[PriceMove] = field(default_factory=list)
     price_down: list[PriceMove] = field(default_factory=list)
     fees: list[FeeMove] = field(default_factory=list)
@@ -229,6 +239,11 @@ class Report:
              self.relisted, self.price_up, self.price_down, self.fees,
              self.vessels_gone, self.months_gone, self.vessels_new)
         )
+
+    @property
+    def only_renumbered(self) -> bool:
+        """Quiet, and quiet for a reason worth printing rather than hiding."""
+        return self.is_quiet and bool(self.renumbered)
 
 
 def _index(dataset: Dataset) -> tuple[dict, dict, dict]:
@@ -426,13 +441,21 @@ def compare(before: Dataset, after: Dataset) -> Report:
         if not same_trip and now.sellers == was.sellers:
             continue
         moved_ids.update({now.departure_id, was.departure_id})
-        report.relisted.append(Relisted(
+        row = Relisted(
             boat=now.boat, start=now.start,
             title=now.title, was_title=was.title,
             sellers=now.sellers, was_sellers=was.sellers,
             price=now.price, was_price=was.price,
             currency=now.currency, was_currency=was.currency,
-        ))
+        )
+        # Nothing but the id moved. Counted rather than listed: see
+        # `Report.renumbered`.
+        if (not row.sellers_moved and row.title == row.was_title
+                and row.currency == row.was_currency
+                and row.price == row.was_price):
+            report.renumbered += 1
+        else:
+            report.relisted.append(row)
     if moved_ids:
         report.added = [d for d in report.added if d.departure_id not in moved_ids]
         report.withdrawn = [d for d in report.withdrawn
@@ -659,6 +682,7 @@ def as_dict(report: Report, *, before: str = "", after: str = "",
         "fx": [{"currency": x.currency, "was": x.was, "now": x.now, "pct": x.pct}
                for x in report.fx],
         "price_rounding": report.price_rounding,
+        "renumbered": report.renumbered,
         "availability_newly_read": report.availability_newly_read,
         "quiet": report.is_quiet and not report.fx_moved,
     }
@@ -682,9 +706,20 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     lines.append("=" * len(header))
 
     if report.is_quiet and not report.fx_moved and not report.availability_newly_read:
-        lines.append("\nnothing moved." if not report.price_rounding else
-                     f"\nnothing moved, beyond {report.price_rounding} fare(s) "
-                     f"shifting by under {MIN_MOVE:,.0f}.")
+        # "nothing moved" has to stay true of the things that did. Both of
+        # these are suppressed rather than absent -- fares that shifted by less
+        # than a unit, and sailings that kept everything but their id -- and a
+        # quiet run that hides them is the silent truncation this file exists
+        # to refuse.
+        aside = []
+        if report.price_rounding:
+            aside.append(f"{report.price_rounding} fare(s) shifting by under "
+                         f"{MIN_MOVE:,.0f}")
+        if report.renumbered:
+            aside.append(f"{report.renumbered} sailing(s) that kept everything "
+                         "but their id")
+        lines.append("\nnothing moved." if not aside else
+                     "\nnothing moved, beyond " + " and ".join(aside) + ".")
         return "\n".join(lines)
 
     if report.availability_newly_read:
@@ -743,14 +778,30 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     # Not an arrival and not a withdrawal: the same sailing, from the other
     # seller's book. Its two fares are printed under both names, because they
     # are two sellers' prices for one week rather than one price moving.
-    block("re-listed — same sailing, new row", [
-        f"{m.start}  {m.boat:22.22} {m.title:28.28} "
-        f"{who(m.was_sellers)} -> {who(m.sellers)}  "
-        + (f"{m.was_price:,.0f} {m.was_currency}" if m.was_price is not None
-           else "no price")
-        + " -> "
-        + (f"{m.price:,.0f} {m.currency}" if m.price is not None else "no price")
-        for m in report.relisted])
+    def relisted_row(m: Relisted) -> str:
+        """Only what moved. A row printing `X -> X` twice says nothing, and the
+        rows where nothing moved are counted below rather than listed."""
+        moved = []
+        if m.sellers_moved:
+            moved.append(f"{who(m.was_sellers)} -> {who(m.sellers)}")
+        if (m.price, m.currency) != (m.was_price, m.was_currency):
+            was = (f"{m.was_price:,.0f} {m.was_currency}"
+                   if m.was_price is not None else "no price")
+            now = (f"{m.price:,.0f} {m.currency}"
+                   if m.price is not None else "no price")
+            moved.append(f"{was} -> {now}")
+        if m.title != m.was_title:
+            moved.append(f"{m.was_title:.24} -> {m.title:.24}")
+        return f"{m.start}  {m.boat:22.22} {m.title:28.28} " + "  ".join(moved)
+
+    block("re-listed — same sailing, new row",
+          [relisted_row(m) for m in report.relisted])
+    if report.renumbered:
+        lines.append(
+            f"\n{report.renumbered} sailing(s) kept everything but their id — "
+            "same seller, same fare, same trip. An id that moved is not news, "
+            "and it is counted here rather than listed above"
+        )
     def moved(m: PriceMove) -> str:
         """Both ends, the difference, and the trip it is for.
 

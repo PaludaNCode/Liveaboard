@@ -259,17 +259,23 @@ class TestASailingThatOnlyLooksNew(unittest.TestCase):
         self.assertEqual(("liveaboard.com", "padi.com"), row.sellers)
         self.assertTrue(row.sellers_moved)
 
-    def test_a_renumbered_sibling_is_not_news_at_all(self):
-        """Same seller, same trip, a suffix that moved because a sailing
-        earlier on the page did. Nothing about this week changed."""
+    def test_a_renumbered_sibling_is_counted_and_not_listed(self):
+        """Same seller, same trip, same fare — a suffix that moved because a
+        sailing earlier on the page did. Nothing about this week changed, so
+        it is counted the way a rounding move is: not listed, never silent.
+
+        The day the numbering scheme itself changed, that count was 717."""
         report = compare(
             dataset([departure("blue-2027-08-12-0")]),
             dataset([departure("blue-2027-08-12-1")]),
         )
         self.assertEqual([], report.added)
         self.assertEqual([], report.withdrawn)
-        self.assertEqual(1, len(report.relisted))
-        self.assertFalse(report.relisted[0].sellers_moved)
+        self.assertEqual([], report.relisted)
+        self.assertEqual(1, report.renumbered)
+        self.assertTrue(report.only_renumbered)
+        self.assertIn("kept everything but their id", render(report))
+        self.assertEqual(1, as_dict(report)["renumbered"])
 
     def test_the_currency_the_seller_switched_to_is_not_a_price_move(self):
         """1,645 USD -> 1,420 EUR on one week of Blue's. The two figures are

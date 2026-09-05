@@ -1422,9 +1422,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   sailing nobody withdrew: the **seller** (liveaboard.com's rows are
   `blue-2027-05-06-0`, a sailing PADI alone lists is `blue-2027-05-06-padi`,
   so the day the first starts listing a week the second was carrying, one id
-  leaves and another arrives) and a **sibling** (the suffix is the Event
+  leaves and another arrives) and a **sibling** (the suffix *was* the Event
   node's position on the vessel-month page, so one sailing inserted earlier
-  renumbers every later one). Twelve of Blue's weeks did the first and two did
+  renumbered every later one — `liveaboard_com._number` counts within
+  `(slug, start)` now and orders a shared date by the trip's own name, so
+  nothing about an id is positional; 717 of 955 ids moved once when that
+  landed, and the suffix had never separated anything, 955 sailings falling
+  into 955 distinct `(boat, day)` pairs). Twelve of Blue's weeks did the first and two did
   the second in one refresh, published under *New departures* and *Withdrawn*
   at once — 24 lines of news for a fleet that did nothing, with 1,645 USD
   beside 1,420 EUR reading as a €225 cut rather than as a currency the seller
@@ -1436,7 +1440,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   different seller** — a boat that swapped one trip for another on a date
   really did withdraw one and add one, and this may not be what hides it.
   `repriced` keeps the currency rule the price blocks keep: a fare in a
-  different currency has not moved. And **the seller is on every row of every
+  different currency has not moved. **And a re-listing where nothing but the id
+  moved is counted rather than listed** (`Report.renumbered`), which is
+  `price_rounding`'s rule: 717 rows each saying `X -> X` about the seller and
+  the fare is a wall that hides the two rows where something did move. Counted
+  is not silent — the quiet-run line says *"nothing moved, beyond 717 sailing(s)
+  that kept everything but their id"*, because "nothing moved" over 717 moved
+  ids is the truncation this file refuses everywhere else. And **the seller is on every row of every
   block** (`Departed.sellers`, off the departure's own provenance rather than
   re-derived): an arrival because PADI started listing a sailing is a
   different fact from one liveaboard.com added, and the report used to print
