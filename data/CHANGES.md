@@ -3,6 +3,15 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-05
+
+```
+changes: HEAD -> 2026-09-05
+===========================
+
+nothing moved.
+```
+
 ## 2026-09-04
 
 ```
