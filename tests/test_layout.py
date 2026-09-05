@@ -2409,6 +2409,102 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertEqual(0, card["out"],
                              "a derived line sits outside the money box " + where)
 
+    def test_a_card_gives_the_dates_a_row_and_the_table_keeps_its_cell(self) -> None:
+        """When it sails, full width under the boat and the money box.
+
+        The dates shared the head's left column with the boat's name and its
+        guest count, and the money box takes up to 58% of the card — so what
+        was left was narrow enough to wrap "01–08 May · 7 nights" under a long
+        boat name. The dates are how a reader finds their own week.
+
+        Measured rather than grepped, on both sides of the breakpoint: this is
+        a card change, so the table's own Departs cell must still print the
+        date over its nights on one row. The boat cell keeps its guest count
+        and the money box keeps its lines, which is the half a refactor of the
+        head would quietly take with it.
+        """
+        page = self.open(PHONE_WIDTHS[0], 780)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 780})
+            page.wait_for_timeout(140)
+            seen = page.evaluate("""() => {
+              const card = document.querySelector('#cards article.card');
+              const box = e => e.getBoundingClientRect();
+              const when = card.querySelector('.card-when');
+              const id = card.querySelector('.card-id');
+              const money = card.querySelector('.card-money');
+              const sub = when.querySelector('.sub');
+              return {
+                cards: getComputedStyle(
+                  document.querySelector('.shell > table')).display === 'none',
+                whenTop: Math.round(box(when).top),
+                headBottom: Math.round(Math.max(box(id).bottom, box(money).bottom)),
+                whenLeft: Math.round(box(when).left),
+                idLeft: Math.round(box(id).left),
+                whenWidth: Math.round(box(when).width),
+                headWidth: Math.round(box(card.querySelector('.card-head')).width),
+                dates: (when.querySelector('.d-span') || {}).textContent,
+                nights: sub ? sub.textContent : null,
+                dot: getComputedStyle(sub, '::before').content,
+                sameLine: sub && Math.abs(box(sub).top -
+                            box(when.querySelector('.d-span')).top) < 2,
+                guests: (id.querySelector('.sub') || {}).textContent,
+                boat: !!id.querySelector('.b-name'),
+                whenInHead: !!card.querySelector('.card-head .card-when'),
+                moneyLines: money.querySelectorAll('.perline').length,
+                overflow: [...card.querySelectorAll('*')]
+                  .filter(e => e.scrollWidth > e.clientWidth + 1).length,
+              };
+            }""")
+            where = "at %dpx" % width
+            self.assertTrue(seen["cards"], "not the card layout " + where)
+            self.assertFalse(seen["whenInHead"],
+                             "the dates are still inside the head " + where)
+            self.assertGreaterEqual(seen["whenTop"], seen["headBottom"] - 1,
+                                    "the dates row is not below the boat and "
+                                    "the money box " + where)
+            self.assertEqual(seen["whenLeft"], seen["idLeft"],
+                             "the dates row does not start where the card's "
+                             "content does " + where)
+            # Full width: the row reaches across the card's content box --
+            # measured against the head above it, which is what full width
+            # means here, rather than against the card's own padded box.
+            self.assertGreaterEqual(seen["whenWidth"], seen["headWidth"] - 1,
+                                    "the dates row is %dpx under a head %dpx "
+                                    "wide %s" % (seen["whenWidth"],
+                                                 seen["headWidth"], where))
+            self.assertRegex(seen["dates"] or "", r"\d", "no date " + where)
+            self.assertRegex(seen["nights"] or "", r"night", "no nights " + where)
+            self.assertTrue(seen["sameLine"],
+                            "the nights dropped to a line of their own " + where)
+            self.assertIn("·", seen["dot"],
+                          "the nights lost the separator that makes them the "
+                          "second fact in the cell " + where)
+            # "Keep those two as is."
+            self.assertTrue(seen["boat"], "the card lost the boat name " + where)
+            self.assertRegex(seen["guests"] or "", r"guests",
+                             "the boat cell lost its guest count " + where)
+            self.assertEqual(2, seen["moneyLines"],
+                             "the money box no longer carries per dive and per "
+                             "day " + where)
+            self.assertEqual(0, seen["overflow"],
+                             "the card scrolls sideways " + where)
+
+        page.set_viewport_size({"width": 1440, "height": 900})
+        page.wait_for_timeout(180)
+        table = page.evaluate("""() => {
+          const cell = document.querySelector('#body tr.row td.when');
+          const span = cell.querySelector('.d-span');
+          const sub = cell.querySelector('.sub');
+          return { stacked: Math.round(sub.getBoundingClientRect().top) >
+                            Math.round(span.getBoundingClientRect().top),
+                   text: cell.textContent.replace(/\\s+/g, " ").trim() };
+        }""")
+        self.assertTrue(table["stacked"],
+                        "the table's Departs cell changed with the card: %r"
+                        % table["text"])
+
     def test_a_budget_leaves_only_the_trips_inside_it(self) -> None:
         """The Per day bound, checked against what each row prints.
 

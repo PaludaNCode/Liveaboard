@@ -2359,11 +2359,19 @@
         (marked ? " marked" : "") + '" aria-selected="' + marked +
         '" data-id="' + esc(row.d.id) + '">' +
         '<div class="card-head">' +
-          '<div class="card-id">' + cell("boat", row) + cell("start", row) + "</div>" +
+          '<div class="card-id">' + cell("boat", row) + "</div>" +
           '<div class="card-money cost">' + cell("total", row) +
             cardCell("base", row) + cardCell("perdive", row) +
             cardCell("perday", row) + "</div>" +
         "</div>" +
+        /* When it sails, full width under the boat and the money box rather
+           than inline behind the guest count. It shared a line with the boat's
+           name and capacity and lost to them: the money box takes up to 58% of
+           the card, so what was left was a column narrow enough that
+           "01–08 May · 7 nights" wrapped under a boat with a long name and a
+           three-figure guest count. The dates are how a reader finds their own
+           week, so they get the width. */
+        '<div class="card-when when">' + cell("start", row) + "</div>" +
         '<div class="card-trip trip">' + cell("trip", row) + "</div>" +
         '<div class="card-sites sites">' + cell("sites", row) + "</div>" +
         '<div class="card-meta">' +
@@ -2940,6 +2948,16 @@
     { k: "returned", t: "Bookable again", kind: "trip" },
     { k: "sold_out", t: "Now sold out", kind: "trip" },
     { k: "withdrawn", t: "Withdrawn", kind: "trip" },
+    /* Neither of the two above, and it used to be published as both at once.
+       A departure id carries the seller and the row's position on the page it
+       was read from, so a sailing nobody withdrew can leave under one id and
+       arrive under another -- twelve of Blue's weeks in one refresh, listed as
+       new and withdrawn together, with two sellers' fares beside each other
+       reading as a cut. What moved is in the row. */
+    { k: "relisted", t: "Same sailing, new listing", kind: "relist",
+      warn: "Not an arrival and not a withdrawal: the boat sails on these " +
+            "dates either way. What changed is the row — which seller the " +
+            "page reads it from, or the currency that seller quotes." },
     { k: "price_up", t: "Fares up", kind: "move" },
     { k: "price_down", t: "Fares down", kind: "move" },
     { k: "fees", t: "Fee lines changed", kind: "fee" },
@@ -2976,8 +2994,42 @@
     return a;
   }
 
+  /* Who published a sailing, by host, as the change book records it. Named
+     rather than abbreviated, because the whole point of the field is that a
+     reader can tell which seller's book an event came out of -- and neither
+     of the two is this page's default, so neither may go unnamed.
+
+     Absent on rows written before the field existed: the book holds a week of
+     refreshes and those entries are still rendered. */
+  function sellerNames(hosts) {
+    return (hosts || []).join(" + ");
+  }
+
   function changeRow(row, kind) {
     var tr = el("tr", null);
+    if (kind === "relist") {
+      tr.appendChild(el("td", "c-when", shortDate(row.start)));
+      tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row.boat));
+      tr.appendChild(el("td", "c-trip", row.title));
+      /* What actually moved, named: the sellers where they changed, and the
+         fare with its currency where that did. Both, on the rows where both
+         did. */
+      var moved = [];
+      if (row.sellers_moved) {
+        moved.push(sellerNames(row.was_sellers) + " → " + sellerNames(row.sellers));
+      }
+      if (row.was_currency !== row.currency || row.was_price !== row.price) {
+        moved.push(Math.round(row.was_price).toLocaleString("en-IE") + " " +
+                   row.was_currency + " → " +
+                   Math.round(row.price).toLocaleString("en-IE") + " " +
+                   row.currency);
+      }
+      /* Something always moved on a row that reaches this block: one where
+         nothing did is counted by `changes` as `renumbered` and never listed,
+         so the fallback is a net rather than a case. */
+      tr.appendChild(el("td", "c-move", moved.join(" · ") || "the row was rebuilt"));
+      return tr;
+    }
     if (kind === "name") {
       tr.appendChild(el("td", "c-boat", "")).appendChild(boatLink(row));
       return tr;
@@ -3016,6 +3068,11 @@
         ? "no price"
         : Math.round(row.price).toLocaleString("en-IE") + " " + row.currency));
     }
+    /* And who published it. A sailing that appears because PADI started
+       listing it is a different event from one liveaboard.com added, and a
+       report with two sellers in it and no seller on any row left the reader
+       to guess whose news this was. */
+    tr.appendChild(el("td", "c-sellers", sellerNames(row.sellers)));
     return tr;
   }
 
