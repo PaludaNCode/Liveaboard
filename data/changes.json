@@ -6,6 +6,52 @@
   "sold_out": [],
   "returned": [],
   "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [
+   {
+    "boat": "DUNE Longara",
+    "code": "course",
+    "was": "included",
+    "now": "210-450 EUR / per_trip"
+   },
+   {
+    "boat": "DUNE Longara",
+    "code": "nitrox_course",
+    "was": "185-210 EUR / per_trip",
+    "now": "210 EUR / per_trip"
+   },
+   {
+    "boat": "Serenity",
+    "code": "visa",
+    "was": "50 EUR / per_trip",
+    "now": "no longer listed"
+   },
+   {
+    "boat": "Tala",
+    "code": "dive_insurance",
+    "was": "6 EUR / per_day",
+    "now": "no longer listed"
+   }
+  ],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 0,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-05"
+ },
+ {
+  "before": "HEAD",
+  "after": "2026-09-05",
+  "added": [],
+  "sold_out": [],
+  "returned": [],
+  "withdrawn": [],
   "price_up": [],
   "price_down": [],
   "fees": [],
