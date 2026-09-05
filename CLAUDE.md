@@ -1417,6 +1417,32 @@ Break these and the site starts lying quietly rather than failing loudly.
   200 the week came to — and what is cut is **counted**, never silent. A
   checkout whose last refresh predates the book still gets the prose, and
   converges within a week.
+- **A sailing that only looks new is not two events, and every event names
+  its seller.** A departure id is identity, and two things move an id under a
+  sailing nobody withdrew: the **seller** (liveaboard.com's rows are
+  `blue-2027-05-06-0`, a sailing PADI alone lists is `blue-2027-05-06-padi`,
+  so the day the first starts listing a week the second was carrying, one id
+  leaves and another arrives) and a **sibling** (the suffix is the Event
+  node's position on the vessel-month page, so one sailing inserted earlier
+  renumbers every later one). Twelve of Blue's weeks did the first and two did
+  the second in one refresh, published under *New departures* and *Withdrawn*
+  at once — 24 lines of news for a fleet that did nothing, with 1,645 USD
+  beside 1,420 EUR reading as a €225 cut rather than as a currency the seller
+  re-quoted in. `changes.compare` pairs the leftovers on `(boat, day)` — the
+  exact key `promote` merges the two sources on, because a date has no
+  spelling — and reports one `Relisted` row saying what actually moved.
+  Deliberately narrow: **one on each side** (two rows starting the same day is
+  a pairing nothing can make, the `padi_key` rule), and **the same trip or a
+  different seller** — a boat that swapped one trip for another on a date
+  really did withdraw one and add one, and this may not be what hides it.
+  `repriced` keeps the currency rule the price blocks keep: a fare in a
+  different currency has not moved. And **the seller is on every row of every
+  block** (`Departed.sellers`, off the departure's own provenance rather than
+  re-derived): an arrival because PADI started listing a sailing is a
+  different fact from one liveaboard.com added, and the report used to print
+  them as the same line. The page renders it last in the row and tolerates its
+  absence, because the book holds a week of refreshes written before the field
+  existed.
 - **A change report never drops a row silently.** `changes` caps its blocks and
   suppresses sub-unit price moves as source rounding — and says so, with a
   count, every time. A truncated list that does not admit it reads as "that was

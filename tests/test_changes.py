@@ -10,7 +10,7 @@ from __future__ import annotations
 import unittest
 
 from liveaboard.changes import (
-    MISSING_VESSEL_MIN, MIN_MOVE, compare, headline, render,
+    MISSING_VESSEL_MIN, MIN_MOVE, as_dict, compare, headline, render,
 )
 
 
@@ -33,12 +33,17 @@ def park(amount):
 
 
 def departure(dep_id="d1", price=1000.0, currency="USD", availability="available",
-              itinerary="it1", start="2027-05-01"):
-    return {
+              itinerary="it1", start="2027-05-01", seller="liveaboard.com",
+              also_padi=False):
+    row = {
         "id": dep_id, "itinerary_id": itinerary, "start": start, "end": "2027-05-08",
         "price": {"amount": price, "currency": currency},
         "availability": availability,
+        "provenance": {"kind": "scraped", "source_id": seller},
     }
+    if also_padi:
+        row["padi_provenance"] = {"kind": "scraped", "source_id": "padi.com"}
+    return row
 
 
 class TestTheThingItIsFor(unittest.TestCase):
@@ -220,6 +225,139 @@ class TestChangesThatDidNotHappen(unittest.TestCase):
                        "amount": {"amount": 80.0, "currency": "EUR"}}]}])
         codes = {(f.code, f.now) for f in compare(before, after).fees}
         self.assertIn(("marine_park", "no longer listed"), codes)
+
+
+class TestASailingThatOnlyLooksNew(unittest.TestCase):
+    """The Blue report: twelve weeks listed as new and withdrawn at once.
+
+    A departure id is identity, and two things move it under a sailing nobody
+    withdrew. The seller: liveaboard.com's rows are `blue-2027-05-06-0` and a
+    sailing PADI alone lists is `blue-2027-05-06-padi`, so the day the first
+    seller starts listing a week the second was carrying, one id leaves and
+    another arrives. And a sibling: the suffix is the Event node's position on
+    the vessel-month page, so one sailing inserted earlier renumbers every
+    later one.
+
+    Published as two events that was 24 lines of news for a fleet that did
+    nothing — and with the fares side by side, 1,645 USD against 1,420 EUR
+    read as a €225 cut rather than as the other seller's currency.
+    """
+
+    def relist(self, before_id, after_id, **after):
+        old = departure(before_id, price=1420.0, currency="EUR",
+                        seller="padi.com")
+        new = departure(after_id, price=1420.0, currency="EUR", **after)
+        return compare(dataset([old]), dataset([new]))
+
+    def test_the_same_sailing_from_the_other_seller_is_not_news_twice(self):
+        report = self.relist("blue-2027-05-06-padi", "blue-2027-05-06-0",
+                             seller="liveaboard.com", also_padi=True)
+        self.assertEqual([], report.added)
+        self.assertEqual([], report.withdrawn)
+        row = report.relisted[0]
+        self.assertEqual(("padi.com",), row.was_sellers)
+        self.assertEqual(("liveaboard.com", "padi.com"), row.sellers)
+        self.assertTrue(row.sellers_moved)
+
+    def test_a_renumbered_sibling_is_not_news_at_all(self):
+        """Same seller, same trip, a suffix that moved because a sailing
+        earlier on the page did. Nothing about this week changed."""
+        report = compare(
+            dataset([departure("blue-2027-08-12-0")]),
+            dataset([departure("blue-2027-08-12-1")]),
+        )
+        self.assertEqual([], report.added)
+        self.assertEqual([], report.withdrawn)
+        self.assertEqual(1, len(report.relisted))
+        self.assertFalse(report.relisted[0].sellers_moved)
+
+    def test_the_currency_the_seller_switched_to_is_not_a_price_move(self):
+        """1,645 USD -> 1,420 EUR on one week of Blue's. The two figures are
+        printed, and `repriced` refuses to call the difference a fare move —
+        the same rule the price blocks keep."""
+        report = compare(
+            dataset([departure("blue-2027-08-12-0", price=1645.0, currency="USD")]),
+            dataset([departure("blue-2027-08-12-1", price=1420.0, currency="EUR")]),
+        )
+        row = report.relisted[0]
+        self.assertEqual((1645.0, "USD"), (row.was_price, row.was_currency))
+        self.assertEqual((1420.0, "EUR"), (row.price, row.currency))
+        self.assertFalse(row.repriced)
+        self.assertEqual([], report.price_up + report.price_down)
+
+    def test_a_boat_that_swapped_one_trip_for_another_still_reports_both(self):
+        """The thing this must never swallow: same boat, same date, a
+        different trip and the same seller. That is a withdrawal and an
+        arrival, and it stays two events."""
+        report = compare(
+            dataset([departure("blue-2027-05-06-0", itinerary="it1")]),
+            dataset([departure("blue-2027-05-06-1", itinerary="it2")],
+                    itineraries=[
+                        {"id": "it1", "boat_id": "alia-soul", "title": "Brothers",
+                         "name": "Brothers (Hurghada - Hurghada)", "fees": []},
+                        {"id": "it2", "boat_id": "alia-soul", "title": "St. John's",
+                         "name": "St. John's (Hurghada - Hurghada)", "fees": []}]),
+        )
+        self.assertEqual(1, len(report.added))
+        self.assertEqual(1, len(report.withdrawn))
+        self.assertEqual([], report.relisted)
+
+    def test_two_rows_on_one_day_are_left_alone(self):
+        """`padi_key`'s rule: fold only where the key names exactly one. A boat
+        with two sailings starting the same day is a pairing nothing here can
+        make."""
+        old = [departure("a-0", itinerary="it1"), departure("a-1", itinerary="it1")]
+        new = [departure("a-2", itinerary="it1"), departure("a-3", itinerary="it1")]
+        report = compare(dataset(old), dataset(new))
+        self.assertEqual([], report.relisted)
+        self.assertEqual(2, len(report.added))
+        self.assertEqual(2, len(report.withdrawn))
+
+    def test_it_reaches_both_shapes_of_the_report(self):
+        report = self.relist("blue-2027-05-06-padi", "blue-2027-05-06-0",
+                             seller="liveaboard.com", also_padi=True)
+        row = as_dict(report)["relisted"][0]
+        self.assertEqual(["padi.com"], row["was_sellers"])
+        self.assertEqual(["liveaboard.com", "padi.com"], row["sellers"])
+        text = render(report)
+        self.assertIn("re-listed", text)
+        self.assertIn("padi.com -> liveaboard.com+padi.com", text)
+        self.assertNotIn("new departures", text)
+        self.assertNotIn("withdrawn", text)
+
+
+class TestEveryEventNamesItsSeller(unittest.TestCase):
+    """Two sellers, and a report that named neither.
+
+    An arrival because PADI started listing a sailing is a different fact from
+    one liveaboard.com added, and it was published as the same line. The host
+    comes off the departure's own provenance — the pair the Seller column
+    prints — rather than being worked out a second time.
+    """
+
+    def test_a_new_departure_says_who_published_it(self):
+        report = compare(
+            dataset([departure("d1")]),
+            dataset([departure("d1"),
+                     departure("d2", start="2027-05-08", seller="padi.com")]),
+        )
+        self.assertEqual(("padi.com",), report.added[0].sellers)
+
+    def test_both_sellers_are_named_where_both_list_it(self):
+        report = compare(
+            dataset([departure("d1")]),
+            dataset([departure("d1"),
+                     departure("d2", start="2027-05-08", also_padi=True)]),
+        )
+        self.assertEqual(("liveaboard.com", "padi.com"), report.added[0].sellers)
+
+    def test_it_reaches_the_page_and_the_log(self):
+        report = compare(
+            dataset([departure("d1")]),
+            dataset([departure("d1"), departure("d2", start="2027-05-08")]),
+        )
+        self.assertEqual(["liveaboard.com"], as_dict(report)["added"][0]["sellers"])
+        self.assertIn("liveaboard.com", render(report))
 
 
 class TestRoundingIsNotARepricing(unittest.TestCase):

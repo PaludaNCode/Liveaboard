@@ -110,6 +110,75 @@ class Departed:
     start: str
     price: float | None
     currency: str
+    itinerary_id: str = ""
+    """The trip this sailing is one departure of. Carried for the pairing in
+    `compare` and deliberately not published: the page has the trip's title,
+    and an id nobody reads is payload on every row of every report."""
+    sellers: tuple[str, ...] = ()
+    """Which site published this sailing, by host, in the dataset it came from.
+
+    A change report with two sellers in it and no seller on any row leaves the
+    reader to guess whose event this is: a sailing that appears because PADI
+    started listing it is a different fact from one liveaboard.com added, and
+    one that goes from a book the other seller still carries is not a
+    withdrawal at all. Read off the departure's own provenance rather than
+    re-derived, so it says what the row said.
+    """
+
+
+@dataclass(frozen=True, slots=True)
+class Relisted:
+    """One sailing that only appears to have arrived and gone away.
+
+    A departure id is identity here, so the diff keys on it -- and two things
+    change an id under a sailing nobody withdrew:
+
+    * **The seller changed.** liveaboard.com's rows are `blue-2027-05-06-0`
+      and a sailing PADI alone lists is `blue-2027-05-06-padi`, so the day
+      liveaboard.com starts listing a week PADI had been carrying, one id
+      leaves and another arrives.
+    * **A sibling moved.** The suffix is the Event node's *position* on the
+      vessel-month page it was read from, so one sailing inserted earlier in
+      that list renumbers every later one.
+
+    Twelve of Blue's sailings did the first and two did the second in a single
+    refresh, published under *New departures* and *Withdrawn* at once -- 24
+    lines of news for a fleet that did nothing -- and with the two fares side
+    by side, where 1,645 USD against 1,420 EUR reads as a €225 cut rather than
+    as a currency the seller re-quoted in.
+
+    So it is one row here, and it says what actually moved. What it must never
+    swallow is a boat that really did swap one trip for another on a date:
+    that is a different itinerary, and it stays two events.
+    """
+
+    boat: str
+    start: str
+    title: str
+    was_title: str
+    sellers: tuple[str, ...]
+    was_sellers: tuple[str, ...]
+    price: float | None
+    was_price: float | None
+    currency: str
+    was_currency: str
+
+    @property
+    def sellers_moved(self) -> bool:
+        return self.sellers != self.was_sellers
+
+    @property
+    def repriced(self) -> bool:
+        """A fare that moved in the same currency. A currency switch is not one.
+
+        The same rule the price blocks keep: `changes` refuses to call
+        1,645 USD -> 1,420 EUR a price move, and a row that arrived from the
+        other seller's book is that case by construction -- the two sellers
+        quote in whatever each quotes in.
+        """
+        return (self.currency == self.was_currency
+                and self.price is not None and self.was_price is not None
+                and abs(self.price - self.was_price) >= MIN_MOVE)
 
 
 @dataclass(frozen=True, slots=True)
@@ -131,6 +200,8 @@ class Report:
     withdrawn: list[Departed] = field(default_factory=list)
     returned: list[Departed] = field(default_factory=list)
     """Sold out yesterday, bookable today -- a cancellation freeing a berth."""
+    relisted: list[Relisted] = field(default_factory=list)
+    """Sailings that only appear to have arrived and gone. See `Relisted`."""
     price_up: list[PriceMove] = field(default_factory=list)
     price_down: list[PriceMove] = field(default_factory=list)
     fees: list[FeeMove] = field(default_factory=list)
@@ -155,8 +226,8 @@ class Report:
         """Nothing a reader would want woken for."""
         return not any(
             (self.added, self.sold_out, self.withdrawn, self.returned,
-             self.price_up, self.price_down, self.fees, self.vessels_gone,
-             self.months_gone, self.vessels_new)
+             self.relisted, self.price_up, self.price_down, self.fees,
+             self.vessels_gone, self.months_gone, self.vessels_new)
         )
 
 
@@ -177,6 +248,21 @@ def _describe(dep: dict, itineraries: dict, boats: dict) -> tuple[str, str]:
     )
 
 
+def _sellers(dep: dict) -> tuple[str, ...]:
+    """Which sites published this sailing, by host.
+
+    The berth price names its own source, and a row built from liveaboard.com
+    carries PADI's provenance beside it wherever PADI sells the same date --
+    which is the same pair the Seller column prints. Taken from there rather
+    than worked out again: two answers to "who sells this" is exactly the
+    drift this project keeps closing elsewhere.
+    """
+    hosts = {(dep.get("provenance") or {}).get("source_id")}
+    if dep.get("padi_provenance"):
+        hosts.add((dep["padi_provenance"] or {}).get("source_id") or "padi.com")
+    return tuple(sorted(h for h in hosts if h))
+
+
 def _as_departed(dep: dict, itineraries: dict, boats: dict) -> Departed:
     boat, title = _describe(dep, itineraries, boats)
     price = dep.get("price") or {}
@@ -187,6 +273,8 @@ def _as_departed(dep: dict, itineraries: dict, boats: dict) -> Departed:
         start=dep.get("start", ""),
         price=price.get("amount"),
         currency=price.get("currency", ""),
+        itinerary_id=dep.get("itinerary_id", ""),
+        sellers=_sellers(dep),
     )
 
 
@@ -305,6 +393,51 @@ def compare(before: Dataset, after: Dataset) -> Report:
             continue  # a month that went unread, not sailings that went away
         report.withdrawn.append(_as_departed(dep, old_its, old_boats))
 
+    # THE SAME SAILING UNDER A NEW ID.
+    #
+    # See `Relisted`: an id carries the seller and the row's position on the
+    # page it was read from, so a sailing nobody withdrew can leave under one
+    # id and arrive under another. The diff keys on id and must -- that is what
+    # identity means here -- so the pairing happens after it.
+    #
+    # Paired on the boat and the day, the same exact key `promote` merges the
+    # two sources on: a date has no spelling. Three conditions, each narrow:
+    #
+    # * **One on each side.** A boat with two rows starting the same day is a
+    #   pairing nothing here can make, and the `padi_key` rule applies: fold
+    #   only where the key names exactly one.
+    # * **The same trip, or a different seller.** Same itinerary is the same
+    #   sailing re-identified; a different seller is the row changing books.
+    # * Anything else stays two events. A boat that swapped one trip for
+    #   another on a date really did withdraw one and add one, and this must
+    #   not be the thing that hides it.
+    def seated(rows: list[Departed]) -> dict[tuple[str, str], Departed]:
+        seen: dict[tuple[str, str], Departed | None] = {}
+        for row in rows:
+            key = (row.boat, row.start)
+            seen[key] = None if key in seen else row
+        return {k: v for k, v in seen.items() if v is not None}
+
+    arrived, left = seated(report.added), seated(report.withdrawn)
+    moved_ids: set[str] = set()
+    for key in sorted(set(arrived) & set(left)):
+        now, was = arrived[key], left[key]
+        same_trip = bool(now.itinerary_id) and now.itinerary_id == was.itinerary_id
+        if not same_trip and now.sellers == was.sellers:
+            continue
+        moved_ids.update({now.departure_id, was.departure_id})
+        report.relisted.append(Relisted(
+            boat=now.boat, start=now.start,
+            title=now.title, was_title=was.title,
+            sellers=now.sellers, was_sellers=was.sellers,
+            price=now.price, was_price=was.price,
+            currency=now.currency, was_currency=was.currency,
+        ))
+    if moved_ids:
+        report.added = [d for d in report.added if d.departure_id not in moved_ids]
+        report.withdrawn = [d for d in report.withdrawn
+                            if d.departure_id not in moved_ids]
+
     # A field the older dataset never carried cannot have changed. Before
     # availability was parsed, every departure held None; comparing that
     # against real values reported 126 sailings as having just sold out when
@@ -385,6 +518,7 @@ def compare(before: Dataset, after: Dataset) -> Report:
 
     for bucket in (report.added, report.sold_out, report.withdrawn, report.returned):
         bucket.sort(key=lambda d: (d.start, d.boat))
+    report.relisted.sort(key=lambda m: (m.start, m.boat))
     report.price_up.sort(key=lambda m: -abs(m.delta))
     report.price_down.sort(key=lambda m: -abs(m.delta))
     report.fees.sort(key=lambda f: (f.boat, f.code))
@@ -416,6 +550,8 @@ def headline(report: Report) -> str:
         bits.append(f"{len(report.added)} new departures")
     if report.withdrawn:
         bits.append(f"{len(report.withdrawn)} withdrawn")
+    if report.relisted:
+        bits.append(f"{len(report.relisted)} re-listed")
     moved = len(report.price_up) + len(report.price_down)
     if moved:
         biggest = max(report.price_up + report.price_down, key=lambda m: abs(m.delta))
@@ -482,7 +618,8 @@ def as_dict(report: Report, *, before: str = "", after: str = "",
     """
     def departed(d: Departed) -> dict:
         return {"id": d.departure_id, "boat": d.boat, "title": d.title,
-                "start": d.start, "price": d.price, "currency": d.currency}
+                "start": d.start, "price": d.price, "currency": d.currency,
+                "sellers": list(d.sellers)}
 
     def moved(m: PriceMove) -> dict:
         return {"id": m.departure_id, "boat": m.boat, "title": m.title,
@@ -503,6 +640,14 @@ def as_dict(report: Report, *, before: str = "", after: str = "",
         "sold_out": capped("sold_out", [departed(d) for d in report.sold_out]),
         "returned": capped("returned", [departed(d) for d in report.returned]),
         "withdrawn": capped("withdrawn", [departed(d) for d in report.withdrawn]),
+        "relisted": capped("relisted", [
+            {"boat": m.boat, "start": m.start, "title": m.title,
+             "was_title": m.was_title,
+             "sellers": list(m.sellers), "was_sellers": list(m.was_sellers),
+             "price": m.price, "was_price": m.was_price,
+             "currency": m.currency, "was_currency": m.was_currency,
+             "sellers_moved": m.sellers_moved, "repriced": m.repriced}
+            for m in report.relisted]),
         "price_up": capped("price_up", [moved(m) for m in report.price_up]),
         "price_down": capped("price_down", [moved(m) for m in report.price_down]),
         "fees": capped("fees", [
@@ -580,14 +725,32 @@ def render(report: Report, *, before: str = "", after: str = "", limit: int = 12
     def money(d: Departed) -> str:
         return f"{d.price:,.0f} {d.currency}" if d.price is not None else "no price"
 
+    def who(hosts: tuple[str, ...]) -> str:
+        return "+".join(hosts) or "unknown"
+
     block("new departures", [
-        f"{d.start}  {d.boat:22.22} {d.title:38.38} {money(d)}" for d in report.added])
+        f"{d.start}  {d.boat:22.22} {d.title:34.34} {money(d):>14.14} "
+        f"{who(d.sellers)}" for d in report.added])
     block("now sold out", [
-        f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.sold_out])
+        f"{d.start}  {d.boat:22.22} {d.title:34.34} {who(d.sellers)}"
+        for d in report.sold_out])
     block("bookable again", [
-        f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.returned])
+        f"{d.start}  {d.boat:22.22} {d.title:34.34} {who(d.sellers)}"
+        for d in report.returned])
     block("withdrawn", [
-        f"{d.start}  {d.boat:22.22} {d.title:38.38}" for d in report.withdrawn])
+        f"{d.start}  {d.boat:22.22} {d.title:34.34} {who(d.sellers)}"
+        for d in report.withdrawn])
+    # Not an arrival and not a withdrawal: the same sailing, from the other
+    # seller's book. Its two fares are printed under both names, because they
+    # are two sellers' prices for one week rather than one price moving.
+    block("re-listed — same sailing, new row", [
+        f"{m.start}  {m.boat:22.22} {m.title:28.28} "
+        f"{who(m.was_sellers)} -> {who(m.sellers)}  "
+        + (f"{m.was_price:,.0f} {m.was_currency}" if m.was_price is not None
+           else "no price")
+        + " -> "
+        + (f"{m.price:,.0f} {m.currency}" if m.price is not None else "no price")
+        for m in report.relisted])
     def moved(m: PriceMove) -> str:
         """Both ends, the difference, and the trip it is for.
 
