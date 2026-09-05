@@ -1040,6 +1040,62 @@ A second negative worth keeping: the strip itself still has no guests row, so
 beside a table's figures would read as the stronger claim it is not, which is
 why the count is a field of its own on the vessel record.
 
+### Three titles in the mandatory list that are not the trip's cost
+
+Measured over the whole raw store on 2026-09-05, and each is a fact about
+**who pays** rather than about what the charge is called. All three used to
+reach `unreadable`, which kept 105 of 443 books `complete: false`.
+
+| Title | Entries | `price` | What it is |
+|---|---|---|---|
+| `14% GST (on onboard purchases)` | 24 | null | a tax on the diver's bar bill |
+| `14% Value Added Tax (VAT) (onboard purchases)` | 6 | null | the same |
+| `15% Local GST (on onboard purchases)` | 4 | null | the same |
+| `Supervision fees for Level 1 divers and Level 2 divers beyond 20m:` | 16 | **9.0** | a guide for divers under a stated level |
+| `10% (of the trip cost) VAT Mandatory Fee` | 8 | null | **a real charge on the fare** |
+
+`fees.billed_on_purchases` recognises the first three by their stated **base**
+rather than by the word *tax*: there is no figure because there is no base, and
+a diver who buys nothing pays nothing. They are excluded from the bill and
+listed in the book's own `on_purchases`, because a count could not tell them
+from a title the parser has quietly stopped understanding.
+
+The supervision fee is `guided_diving` at the **optional** tier — the only
+entry in a mandatory field that gets one, and the reason is in the title: some
+divers are asked for it and others are not. Counting it in every total bills
+the whole boat; declining it blocked the bill.
+
+The last row is the one the rule may not reach, and it is why the rule is about
+the base. 10% of the trip cost is owed by every berth, and this project cannot
+carry a percentage of a fare, so those 8 entries keep their trips incomplete —
+which is the honest state and what the remaining 71 incomplete books are made
+of, alongside fuel surcharges and visa fees PADI names with no figure.
+
+### A tank size is the tank, not the gas
+
+`classify_label` filed **`15 liter tanks`** and its two variants under `nitrox`
+because the word was in them. 372 optional entries carry the plain title and
+were dropped as unclassifiable; 17 more read *"Nitrox 15 liter tanks"*, *"15
+LITER tank nitrox (only 12 liter is free of chanrge)"* and *"15 liters
+Nitrox"*, and those were priced **as the gas, on the toggle this site counts**,
+against a vessel panel stating nitrox included.
+
+`FeeCode.TANK_15L` had existed for this since the nitrox probe and had no
+pattern behind it. It has one now, ahead of the nitrox rule in the table, and
+Discovery I is the case to read it off: its book was *nitrox €65*, and it is
+now *nitrox — included, "Free nitrox (for certified nitrox divers)"* beside
+*15 litre tanks €35*, which is what the operator actually publishes.
+
+Deliberately narrow: 14 clashes remain on MY Seawolf Dominator, a bare
+"Nitrox" at 50 with no size in the title, and there the stated amount wins.
+Turning a stated cost into free is the error this must never make.
+
+Where a trip lists two tank entries at different figures (11 trips), the
+existing one-line-per-code rule keeps the first, exactly as it always has for
+nitrox and transfers. It is not widened into a range here: 43 trips carry two
+`airport_transfer` entries at 24 and 116, and those are two different
+transfers rather than one charge's span.
+
 ## One property to preserve
 
 A stated requirement is a safety gate, and PADI's two fields are not the same

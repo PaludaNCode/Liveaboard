@@ -3472,6 +3472,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "marine_park",
           "included": true,
@@ -4272,6 +4288,22 @@
         },
         {
           "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
+          "amount": {
             "amount": 100.0,
             "currency": "USD"
           },
@@ -4641,6 +4673,22 @@
         },
         {
           "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
+          "amount": {
             "amount": 100.0,
             "currency": "USD"
           },
@@ -4967,6 +5015,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -5329,6 +5393,22 @@
         },
         {
           "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
+          "amount": {
             "amount": 177.0,
             "currency": "USD"
           },
@@ -5673,6 +5753,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 57.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -7081,6 +7177,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -7715,6 +7827,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 3.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -9499,6 +9627,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -9785,6 +9929,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -10060,6 +10220,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -10580,6 +10756,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -10857,6 +11049,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -11367,6 +11575,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-aphrodite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -11686,6 +11910,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-avo/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -12016,6 +12256,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": true,
@@ -12331,6 +12587,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Weight Belt/Weights/Tank(s), Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/bella-2/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -12694,6 +12966,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/bella-3/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -13414,6 +13702,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -14157,6 +14461,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -14678,6 +14998,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -14976,6 +15312,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -15503,6 +15855,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -15830,6 +16198,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -15871,7 +16255,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -16172,6 +16556,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -16213,7 +16613,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -16514,6 +16914,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -16555,7 +16971,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -16856,6 +17272,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -16897,7 +17329,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
@@ -17199,6 +17631,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -17240,7 +17688,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--northern-red-sea-brothers-hurghada-port-ghalib",
@@ -17540,6 +17988,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -17581,7 +18045,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--northern-red-sea-wrecks-reefs-hurghada-hurghada",
@@ -17882,6 +18346,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -17923,7 +18403,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
@@ -18223,6 +18703,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -18264,7 +18760,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-horizon--rocky-zabargad-st-johns-port-ghalib-port-ghalib",
@@ -18565,6 +19061,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-blue-horizon/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -18606,7 +19118,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -18919,6 +19431,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -18960,7 +19488,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -19273,6 +19801,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -19314,7 +19858,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--brothers-daedalus-elphinstone-port-ghalib-hurghada",
@@ -19627,6 +20171,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -19668,7 +20228,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -19981,6 +20541,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -20022,7 +20598,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--daedalus-st-john-s-marsa-ghalib-marsa-ghalib",
@@ -20336,6 +20912,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -20377,7 +20969,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--northern-red-sea-brothers-hurghada-hurghada",
@@ -20689,6 +21281,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -20730,7 +21338,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--northern-red-sea-brothers-hurghada-port-ghalib",
@@ -21042,6 +21650,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -21083,7 +21707,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--northern-red-sea-wrecks-reefs-hurghada-hurghada",
@@ -21395,6 +22019,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -21436,7 +22076,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-melody--rocky-zabargad-st-johns-marsa-ghalib-marsa-ghalib",
@@ -21748,6 +22388,22 @@
         },
         {
           "amount": {
+            "amount": 60.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-melody/"
+          }
+        },
+        {
+          "amount": {
             "amount": 90.0,
             "currency": "USD"
           },
@@ -21789,7 +22445,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "blue-pearl--brothers-daedalus-elphinstone-hurghada-port-ghalib",
@@ -22059,6 +22715,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -22371,6 +23043,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -22667,6 +23355,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -22981,6 +23685,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -23275,6 +23995,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -23590,6 +24326,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -23888,6 +24640,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -24199,6 +24967,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -24502,6 +25286,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-pearl/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -24795,6 +25595,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -25106,6 +25922,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -25401,6 +26233,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -25713,6 +26561,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -26007,6 +26871,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -26320,6 +27200,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -26614,6 +27510,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -27142,6 +28054,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -27438,6 +28366,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -27748,6 +28692,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -28040,6 +29000,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -28348,6 +29324,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-seas/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -28633,6 +29625,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -29140,6 +30148,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -29434,6 +30458,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -29718,6 +30758,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -30024,6 +31080,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 55.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -32718,12 +33790,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -33068,12 +34153,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -33418,12 +34516,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -33768,12 +34879,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -34121,12 +35245,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -34474,12 +35611,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -34826,12 +35976,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
           "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/"
+          }
+        },
+        {
+          "basis": "per_trip",
           "code": "nitrox",
-          "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -35164,12 +36327,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -35502,12 +36678,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -35840,13 +37029,13 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
-          "basis": "per_trip",
-          "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
-          "tier": "conditional",
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -35859,6 +37048,19 @@
           "code": "airport_transfer",
           "included": true,
           "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -36179,12 +37381,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -36520,12 +37735,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -37120,12 +38348,25 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
-          "note": "Nitrox 15 liter tanks",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -37442,6 +38683,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -37789,6 +39046,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -38873,6 +40146,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -43840,6 +45129,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -44200,6 +45505,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -44549,6 +45870,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -44917,6 +46254,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -45266,6 +46619,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -45870,6 +47239,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -46216,6 +47601,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -46586,6 +47987,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -46938,6 +48355,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -47304,6 +48737,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -47653,6 +49102,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -48021,6 +49486,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -48367,6 +49848,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -48737,6 +50234,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -49097,6 +50610,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-elite/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -49425,6 +50954,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -50008,6 +51553,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "gratuities",
           "note": "Tips for the crew",
@@ -50341,6 +51902,18 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
+          }
+        },
+        {
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -50688,6 +52261,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -51371,6 +52960,22 @@
             "currency": "EUR"
           },
           "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
           "code": "nitrox",
           "note": "Nitrox",
           "tier": "conditional",
@@ -51712,6 +53317,22 @@
           "basis": "per_trip",
           "code": "gratuities",
           "note": "Tips for the crew",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/eriny/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 70.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -52744,6 +54365,22 @@
         },
         {
           "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
             "amount": 200.0,
             "currency": "EUR"
           },
@@ -53046,6 +54683,22 @@
           "basis": "per_trip",
           "code": "gratuities",
           "note": "Tips for the crew",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -53367,6 +55020,22 @@
         },
         {
           "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
             "amount": 200.0,
             "currency": "EUR"
           },
@@ -53666,6 +55335,22 @@
           "basis": "per_trip",
           "code": "gratuities",
           "note": "Tips for the crew",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -53987,6 +55672,22 @@
         },
         {
           "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
             "amount": 200.0,
             "currency": "EUR"
           },
@@ -54289,6 +55990,22 @@
           "basis": "per_trip",
           "code": "gratuities",
           "note": "Tips for the crew",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 45.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -54639,6 +56356,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -54952,6 +56685,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -55256,6 +57005,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -55806,6 +57571,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -56118,6 +57899,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -56421,6 +58218,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -56742,6 +58555,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -57047,6 +58876,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -57367,6 +59212,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -57670,6 +59531,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -60280,13 +62157,13 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
-          "basis": "per_trip",
-          "code": "nitrox",
-          "note": "15 liters Nitrox",
-          "tier": "conditional",
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -60299,6 +62176,19 @@
           "code": "airport_transfer",
           "included": true,
           "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
+          }
+        },
+        {
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -60605,13 +62495,13 @@
         },
         {
           "amount": {
-            "amount": 65.0,
+            "amount": 35.0,
             "currency": "EUR"
           },
-          "basis": "per_trip",
-          "code": "nitrox",
-          "note": "15 liters Nitrox",
-          "tier": "conditional",
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -60624,6 +62514,19 @@
           "code": "airport_transfer",
           "included": true,
           "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
+          }
+        },
+        {
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": true,
+          "note": "Free nitrox (for certified nitrox divers)",
           "tier": "conditional",
           "provenance": {
             "kind": "scraped",
@@ -65571,6 +67474,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -65689,6 +67608,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -65838,6 +67773,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -65956,6 +67907,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -66105,6 +68072,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -66223,6 +68206,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -66372,6 +68371,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -66490,6 +68505,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -66638,6 +68669,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -66756,6 +68803,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -66905,6 +68968,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -67023,6 +69102,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -67172,6 +69267,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -67290,6 +69401,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -67437,6 +69564,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -67555,6 +69698,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -67703,6 +69862,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -67821,6 +69996,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -67973,6 +70164,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
             "amount": 80.0,
             "currency": "USD"
           },
@@ -68091,6 +70298,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-heaven-saphir/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -68389,6 +70612,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-iceberg/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 6.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -68978,6 +71217,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -69065,6 +71320,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -69181,6 +71452,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -69268,6 +71555,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -69383,6 +71686,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -69470,6 +71789,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -69586,6 +71921,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -69673,6 +72024,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -69785,6 +72152,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -69872,6 +72255,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -69988,6 +72387,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -70075,6 +72490,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-independence-ii/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -75535,6 +77966,38 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -75966,6 +78429,38 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -76995,6 +79490,38 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -77423,6 +79950,38 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -77872,6 +80431,38 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -78302,6 +80893,38 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -79328,6 +81951,38 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (mandatory if diver under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -81086,6 +83741,22 @@
         },
         {
           "amount": {
+            "amount": 75.0,
+            "currency": "USD"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/red-sea-aggressor-ii/"
+          }
+        },
+        {
+          "amount": {
             "amount": 100.0,
             "currency": "USD"
           },
@@ -81551,10 +84222,14 @@
           }
         },
         {
+          "amount": {
+            "amount": 75.0,
+            "currency": "USD"
+          },
           "basis": "per_trip",
-          "code": "tax_vat",
-          "note": "14% Value Added Tax (VAT) (onboard purchases)",
-          "tier": "mandatory",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -81636,7 +84311,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "red-sea-aggressor-iv--st-johns-daedalus-marsa-alam-marsa-alam",
@@ -82086,9 +84761,9 @@
         },
         {
           "basis": "per_trip",
-          "code": "tax_vat",
-          "note": "14% Value Added Tax (VAT) (onboard purchases)",
-          "tier": "mandatory",
+          "code": "gratuities",
+          "note": "Tips for the crew",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -82097,9 +84772,13 @@
           }
         },
         {
+          "amount": {
+            "amount": 75.0,
+            "currency": "USD"
+          },
           "basis": "per_trip",
-          "code": "gratuities",
-          "note": "Tips for the crew",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -82170,7 +84849,7 @@
           }
         }
       ],
-      "padi_fees_complete": false
+      "padi_fees_complete": true
     },
     {
       "id": "red-sea-aggressor-v--deep-south-elba-reef-hamata-hamata",
@@ -82460,6 +85139,22 @@
           "code": "airport_transfer",
           "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/red-sea-aggressor-v/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -82809,6 +85504,22 @@
           "code": "nitrox",
           "note": "Nitrox",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/red-sea-aggressor-v/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "USD"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -90703,6 +93414,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -90802,6 +93529,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -90938,6 +93681,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -91037,6 +93796,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -91175,6 +93950,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -91274,6 +94065,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -91408,6 +94215,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -91507,6 +94330,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -91647,6 +94486,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -91746,6 +94601,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -91886,6 +94757,22 @@
             "amount": 50.0,
             "currency": "EUR"
           },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
           "basis": "per_week",
           "code": "nitrox",
           "note": "Nitrox",
@@ -91985,6 +94872,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-seawolf-dominator/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -92112,6 +95015,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -92197,6 +95116,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -92329,6 +95264,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -92416,6 +95367,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -92532,6 +95499,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -92619,6 +95602,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -92720,6 +95719,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -92805,6 +95820,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -92938,6 +95969,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -93025,6 +96072,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -93129,6 +96192,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -93214,6 +96293,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -93346,6 +96441,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -93433,6 +96544,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -93533,6 +96660,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -93618,6 +96761,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -93734,6 +96893,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -93819,6 +96994,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -93956,6 +97147,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -94043,6 +97250,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -94148,6 +97371,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -94233,6 +97472,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -94347,6 +97602,22 @@
         },
         {
           "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
             "amount": 170.0,
             "currency": "EUR"
           },
@@ -94432,6 +97703,22 @@
           "basis": "per_trip",
           "code": "alcohol",
           "note": "Alcohol",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
           "tier": "optional",
           "provenance": {
             "kind": "scraped",
@@ -94564,6 +97851,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "nitrox",
           "included": true,
@@ -94651,6 +97954,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/seawolf-steel/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -94940,6 +98259,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -95248,6 +98583,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "port_fees",
           "included": true,
@@ -95539,6 +98890,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -95847,6 +99214,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -96139,6 +99522,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -96448,6 +99847,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "airport_transfer",
           "included": true,
@@ -96725,6 +100140,22 @@
           "code": "nitrox",
           "note": "Nitrox",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -97045,6 +100476,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -106136,6 +109583,22 @@
         },
         {
           "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
             "amount": 10.0,
             "currency": "EUR"
           },
@@ -106451,6 +109914,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -106784,6 +110263,22 @@
         },
         {
           "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
             "amount": 10.0,
             "currency": "EUR"
           },
@@ -107100,6 +110595,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -107435,6 +110946,22 @@
         },
         {
           "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
             "amount": 10.0,
             "currency": "EUR"
           },
@@ -107749,6 +111276,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -108073,6 +111616,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 8.0,
+            "currency": "EUR"
+          },
+          "basis": "per_diving_day",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -109124,6 +112683,22 @@
         },
         {
           "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
+          }
+        },
+        {
+          "amount": {
             "amount": 140.0,
             "currency": "EUR"
           },
@@ -109131,6 +112706,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (If under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -109858,6 +113449,38 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          },
+          "basis": "per_dive",
+          "code": "guided_diving",
+          "note": "Guide supervision (If under required level)",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -112385,6 +116008,22 @@
           }
         },
         {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/unity/"
+          }
+        },
+        {
           "basis": "per_trip",
           "code": "port_fees",
           "included": true,
@@ -112689,6 +116328,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/unity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",
@@ -113003,6 +116658,22 @@
           "code": "gear_rental",
           "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
           "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "padi.com",
+            "retrieved": "2026-09-05",
+            "url": "https://travel.padi.com/liveaboard/egypt/unity/"
+          }
+        },
+        {
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "code": "tank_15l",
+          "note": "15 liter tanks",
+          "tier": "optional",
           "provenance": {
             "kind": "scraped",
             "source_id": "padi.com",

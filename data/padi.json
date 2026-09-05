@@ -354,6 +354,16 @@
      },
      {
       "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 177.0,
        "currency": "USD"
       },
@@ -462,6 +472,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "marine_park",
       "included": true,
@@ -528,6 +548,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -617,6 +647,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -723,6 +763,16 @@
      },
      {
       "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 100.0,
        "currency": "USD"
       },
@@ -800,6 +850,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -895,6 +955,16 @@
      },
      {
       "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 177.0,
        "currency": "USD"
       },
@@ -976,6 +1046,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 57.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1065,6 +1145,16 @@
      },
      {
       "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -1136,6 +1226,16 @@
       "basis": "per_trip",
       "code": "private_guide",
       "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1215,6 +1315,16 @@
      },
      {
       "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -1286,6 +1396,16 @@
       "basis": "per_trip",
       "code": "private_guide",
       "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1375,6 +1495,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -1436,6 +1566,16 @@
       "basis": "per_trip",
       "code": "private_guide",
       "note": "Private dive guide",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1515,6 +1655,16 @@
      },
      {
       "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -1588,6 +1738,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1677,6 +1837,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -1740,6 +1910,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -1840,6 +2020,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 3.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -1945,6 +2135,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 3.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -2056,6 +2256,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 3.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -2098,7 +2308,7 @@
    ],
    "dives": 20,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -2158,6 +2368,16 @@
      },
      {
       "amount": {
+       "amount": 55.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -2180,9 +2400,10 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "15% Local GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
    "nights": 7,
@@ -2206,7 +2427,7 @@
    ],
    "dives": 20,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -2266,6 +2487,16 @@
      },
      {
       "amount": {
+       "amount": 55.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -2288,9 +2519,10 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "15% Local GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "North (Hurghada - Hurghada)",
    "nights": 7,
@@ -2310,7 +2542,7 @@
    "boat_name": "MY Andromeda",
    "dives": 20,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -2370,6 +2602,16 @@
      },
      {
       "amount": {
+       "amount": 55.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -2392,9 +2634,10 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "15% Local GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "South (Hurghada - Marsa Alam)",
    "nights": 7,
@@ -2414,7 +2657,7 @@
    "boat_name": "MY Andromeda",
    "dives": 20,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -2474,6 +2717,16 @@
      },
      {
       "amount": {
+       "amount": 55.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -2496,9 +2749,10 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "15% Local GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "South (Marsa Alam - Hurghada)",
    "nights": 7,
@@ -3566,6 +3820,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -3628,6 +3892,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -3694,6 +3968,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -3754,6 +4038,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -3822,6 +4116,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -3884,6 +4188,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -3952,6 +4266,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -4016,6 +4340,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -4075,6 +4409,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -4141,6 +4485,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -4213,6 +4567,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -4277,6 +4641,16 @@
       "tier": "optional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -4332,6 +4706,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -4419,6 +4803,16 @@
      },
      {
       "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -4478,6 +4872,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -4575,6 +4979,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -4654,6 +5068,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -4743,6 +5167,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -4825,6 +5259,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -4913,6 +5357,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -5005,6 +5459,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -5093,6 +5557,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -5185,6 +5659,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -5273,6 +5757,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -5372,6 +5866,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "fuel_surcharge",
       "included": true,
@@ -5469,6 +5973,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -5555,6 +6069,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -5660,6 +6184,16 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
@@ -5704,7 +6238,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -5741,6 +6275,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -5767,9 +6311,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
    "nights": 7,
@@ -5794,7 +6339,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -5834,6 +6379,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -5857,9 +6412,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Galib)",
    "nights": 7,
@@ -5884,7 +6440,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -5924,6 +6480,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -5947,9 +6513,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Port Galib - Hurghada)",
    "nights": 7,
@@ -5974,7 +6541,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6014,6 +6581,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6037,9 +6614,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -6063,7 +6641,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6103,6 +6681,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6126,9 +6714,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Daedalus & St Johns  (Port Galib - Port Galib)",
    "nights": 7,
@@ -6154,7 +6743,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6194,6 +6783,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6217,9 +6816,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea & Brothers (Hurghada - Hurghada)",
    "nights": 7,
@@ -6245,7 +6845,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6282,6 +6882,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -6308,9 +6918,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea & Brothers (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -6335,7 +6946,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6375,6 +6986,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6398,9 +7019,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)",
    "nights": 7,
@@ -6426,7 +7048,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6466,6 +7088,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6489,9 +7121,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Red Sea Wrecks (Hurghada - Hurghada)",
    "nights": 7,
@@ -6518,7 +7151,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6555,6 +7188,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -6581,9 +7224,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Rocky, Zabargad & St. Johns (Port Galib -Port Galib)",
    "nights": 7,
@@ -6608,7 +7252,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6648,6 +7292,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6671,9 +7325,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Strait of Tiran & North (Hurghada - Hurghada)",
    "nights": 7,
@@ -6704,7 +7359,7 @@
    ],
    "dives": 26,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6741,6 +7396,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -6767,9 +7432,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Ultimate Red Sea (Hurghada - Port Ghalib)",
    "nights": 10,
@@ -6794,7 +7460,7 @@
    ],
    "dives": 26,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6831,6 +7497,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -6857,9 +7533,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Ultimate Red Sea (Port Galib - Hurghada)",
    "nights": 10,
@@ -6884,7 +7561,7 @@
    ],
    "dives": 17,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -6930,6 +7607,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -6953,9 +7640,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers - Daedalus & Elphinstone (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -6980,7 +7668,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7026,6 +7714,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7049,9 +7747,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Hurghada)",
    "nights": 7,
@@ -7076,7 +7775,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7122,6 +7821,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7145,9 +7854,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -7172,7 +7882,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7218,6 +7928,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7241,9 +7961,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Brothers, Daedalus & Elphinstone (Port Ghalib - Hurghada)",
    "nights": 7,
@@ -7267,7 +7988,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7313,6 +8034,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7336,9 +8067,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Daedalus and St Johns (Port Ghalib- Port Ghalib)",
    "nights": 7,
@@ -7364,7 +8096,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7410,6 +8142,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7433,9 +8175,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea & Brothers (Hurghada - Hurghada)",
    "nights": 7,
@@ -7461,7 +8204,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7507,6 +8250,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7530,9 +8283,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea & Brothers (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -7557,7 +8311,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7603,6 +8357,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7626,9 +8390,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Northern Red Sea Wrecks & Reefs (Hurghada - Hurghada)",
    "nights": 7,
@@ -7654,7 +8419,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7700,6 +8465,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7723,9 +8498,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Red Sea Wrecks (Hurghada - Hurghada)",
    "nights": 7,
@@ -7750,7 +8526,7 @@
    ],
    "dives": 15,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7796,6 +8572,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7819,9 +8605,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Rocky, Zabargad & St. Johns (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -7846,7 +8633,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -7892,6 +8679,16 @@
      },
      {
       "amount": {
+       "amount": 60.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 90.0,
        "currency": "USD"
       },
@@ -7915,9 +8712,10 @@
       "tier": "mandatory"
      }
     ],
-    "unreadable": [
+    "on_purchases": [
      "14% GST (on onboard purchases)"
-    ]
+    ],
+    "unreadable": []
    },
    "name": "Strait of Tiran and North (Hurghada- Hurghada)",
    "nights": 7,
@@ -7979,6 +8777,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8059,6 +8867,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8135,6 +8953,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8216,6 +9044,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8293,6 +9131,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8374,6 +9222,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8450,6 +9308,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8532,6 +9400,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8609,6 +9487,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8680,6 +9568,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8756,6 +9654,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8828,6 +9736,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -8904,6 +9822,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -8976,6 +9904,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9052,6 +9990,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9122,6 +10070,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9197,6 +10155,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9275,6 +10243,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9347,6 +10325,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9423,6 +10411,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9497,6 +10495,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9567,6 +10575,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9641,6 +10659,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9711,6 +10739,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9791,6 +10829,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -9867,6 +10915,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -9947,6 +11005,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10025,6 +11093,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10101,6 +11179,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -10182,6 +11270,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10258,6 +11356,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10332,6 +11440,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -10413,6 +11531,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10488,6 +11616,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -10568,6 +11706,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10642,6 +11790,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: BCD, SMB (Surface Marker Buoy), Regulator, Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -10722,6 +11880,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10798,6 +11966,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -10878,6 +12056,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -10956,6 +12144,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -11032,6 +12230,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -11113,6 +12321,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -11187,6 +12405,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -11268,6 +12496,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -11346,6 +12584,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -11420,6 +12668,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -11499,6 +12757,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 55.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -11582,6 +12850,16 @@
      },
      {
       "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -11659,6 +12937,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -12012,12 +13300,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12088,12 +13383,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12164,12 +13466,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12240,12 +13549,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12318,12 +13634,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12400,12 +13723,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12478,12 +13808,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
       "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
       "code": "nitrox",
-      "note": "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12552,12 +13889,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12625,19 +13969,26 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
-      "basis": "per_trip",
-      "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
-      "tier": "conditional"
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
       "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      }
     ],
@@ -12698,12 +14049,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12772,12 +14130,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12847,12 +14212,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12924,12 +14296,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -12998,12 +14377,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -13072,12 +14458,19 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
-      "note": "Nitrox 15 liter tanks",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      },
      {
@@ -13157,6 +14550,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -13249,6 +14652,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -13331,6 +14744,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -13409,6 +14832,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -13497,6 +14930,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -13577,6 +15020,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -13669,6 +15122,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -13751,6 +15214,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -13850,6 +15323,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -13924,6 +15407,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -14008,6 +15501,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -14099,6 +15602,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -14179,6 +15692,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -14273,6 +15796,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14309,9 +15842,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Best of Egypt (Hurghada - Port Ghalib)",
    "nights": 14,
@@ -14369,6 +15900,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14405,9 +15946,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Elba (Port Ghalib - Port Ghalib)",
    "nights": 11,
@@ -14459,6 +15998,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14495,9 +16044,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Fury Shoals Dolphin Trip (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -14549,6 +16096,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14585,9 +16142,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Golden Triangle (Hurghada - Hurghada)",
    "nights": 7,
@@ -14641,6 +16196,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14677,9 +16242,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Golden Triangle (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -14733,6 +16296,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14769,9 +16342,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Golden Triangle (Port Ghalib - Hurghada)",
    "nights": 7,
@@ -14825,6 +16396,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14861,9 +16442,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Golden Triangle (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -14921,6 +16500,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -14957,9 +16546,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -15015,6 +16602,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15051,9 +16648,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Brothers (Hurghada - Hurghada)",
    "nights": 7,
@@ -15109,6 +16704,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15145,9 +16750,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Brothers (Hurghada - Port Ghalib)",
    "nights": 7,
@@ -15203,6 +16806,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15239,9 +16852,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Brothers (Port Ghalib - Hurghada)",
    "nights": 7,
@@ -15298,6 +16909,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15334,9 +16955,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Dahab Tiran (Hurghada - Hurghada)",
    "nights": 7,
@@ -15390,6 +17009,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15426,9 +17055,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Ras Mohamed (Hurghada - Hurghada)",
    "nights": 7,
@@ -15485,6 +17112,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15521,9 +17158,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "North Tiran (Hurghada - Hurghada)",
    "nights": 7,
@@ -15577,6 +17212,16 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 9.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
+      "tier": "optional"
+     },
+     {
       "basis": "per_week",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -15613,9 +17258,7 @@
       "tier": "conditional"
      }
     ],
-    "unreadable": [
-     "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:"
-    ]
+    "unreadable": []
    },
    "name": "St John's Reefs (Port Ghalib - Port Ghalib)",
    "nights": 7,
@@ -15679,6 +17322,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -15777,6 +17430,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -15861,6 +17524,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -15955,6 +17628,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16045,6 +17728,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16131,6 +17824,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -16229,6 +17932,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16317,6 +18030,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -16413,6 +18136,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16501,6 +18234,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -16598,6 +18341,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16684,6 +18437,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -16781,6 +18544,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16874,6 +18647,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -16962,6 +18745,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 25.0,
        "currency": "EUR"
       },
@@ -17032,6 +18825,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -17131,6 +18934,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -17226,6 +19039,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -17325,6 +19148,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -17418,6 +19251,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -17508,6 +19351,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -17604,6 +19457,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -17696,6 +19559,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -17786,6 +19659,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -17882,6 +19765,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -17967,6 +19860,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18058,6 +19961,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18157,6 +20070,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -18249,6 +20172,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18345,6 +20278,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -18435,6 +20378,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18529,6 +20482,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -18618,6 +20581,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18712,6 +20685,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -18801,6 +20784,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -18897,6 +20890,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
@@ -18984,6 +20987,12 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -19076,6 +21085,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -19207,6 +21226,16 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
@@ -19292,6 +21321,16 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
@@ -19360,6 +21399,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -19457,6 +21506,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -20078,6 +22137,16 @@
      },
      {
       "amount": {
+       "amount": 6.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 5.0,
        "currency": "EUR"
       },
@@ -20166,6 +22235,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 6.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -20386,6 +22465,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -20462,6 +22551,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -20536,6 +22635,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -20619,6 +22728,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -20663,6 +22782,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -20747,6 +22876,16 @@
      },
      {
       "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 200.0,
        "currency": "EUR"
       },
@@ -20823,6 +22962,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -20906,6 +23055,16 @@
      },
      {
       "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 200.0,
        "currency": "EUR"
       },
@@ -20981,6 +23140,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -21076,6 +23245,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -21144,6 +23323,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -21231,6 +23420,16 @@
      },
      {
       "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 200.0,
        "currency": "EUR"
       },
@@ -21312,6 +23511,16 @@
      },
      {
       "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 200.0,
        "currency": "EUR"
       },
@@ -21389,6 +23598,16 @@
       "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 45.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -21482,6 +23701,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -21553,6 +23782,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -21628,6 +23867,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -21699,6 +23948,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -21776,6 +24035,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -21851,6 +24120,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -21920,6 +24199,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -21997,6 +24286,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -22069,6 +24368,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -22147,6 +24456,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -22221,6 +24540,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -22293,6 +24622,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -22375,19 +24714,26 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
-      "basis": "per_trip",
-      "code": "nitrox",
-      "note": "15 liters Nitrox",
-      "tier": "conditional"
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
       "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      }
     ],
@@ -22444,19 +24790,26 @@
      },
      {
       "amount": {
-       "amount": 65.0,
+       "amount": 35.0,
        "currency": "EUR"
       },
-      "basis": "per_trip",
-      "code": "nitrox",
-      "note": "15 liters Nitrox",
-      "tier": "conditional"
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
       "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
      }
     ],
@@ -24771,6 +27124,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -24863,6 +27226,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -24961,6 +27334,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -25053,6 +27436,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -25153,6 +27546,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -25247,6 +27650,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -25350,6 +27763,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -25440,6 +27863,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -25540,6 +27973,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -25630,6 +28073,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -25730,6 +28183,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -25821,6 +28284,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -25922,6 +28395,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -26019,6 +28502,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 80.0,
        "currency": "USD"
       },
@@ -26098,6 +28591,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -26174,6 +28677,16 @@
      },
      {
       "amount": {
+       "amount": 6.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 8.0,
        "currency": "EUR"
       },
@@ -26246,6 +28759,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 6.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -26340,6 +28863,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26422,6 +28955,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26501,6 +29044,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26578,6 +29131,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26653,6 +29216,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -26734,6 +29307,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26810,6 +29393,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -26889,6 +29482,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -26964,6 +29567,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -27044,6 +29657,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -27114,6 +29737,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -27192,6 +29825,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -27268,6 +29911,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -27342,6 +29995,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -27424,6 +30087,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -27499,6 +30172,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -27557,6 +30240,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -27651,6 +30344,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -27722,6 +30425,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Dive computer, BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      }
     ],
     "unreadable": []
@@ -27791,6 +30504,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Dive computer, BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      }
     ],
     "unreadable": []
@@ -27852,6 +30575,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Dive computer, BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      }
     ],
     "unreadable": []
@@ -27913,6 +30646,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Dive computer, BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      }
     ],
     "unreadable": []
@@ -27964,6 +30707,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Dive computer, BCD, Regulator, SMB (Surface Marker Buoy), Wetsuit",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      }
     ],
     "unreadable": []
@@ -28046,6 +30799,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -28160,6 +30933,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -28270,6 +31063,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -28383,6 +31196,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -28499,6 +31332,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -28612,6 +31465,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -28721,6 +31594,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -28836,6 +31729,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -28947,6 +31860,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -29061,6 +31994,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -29171,6 +32124,26 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -29287,6 +32260,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -29401,6 +32394,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (mandatory if diver under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -29511,6 +32524,16 @@
      },
      {
       "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 100.0,
        "currency": "USD"
       },
@@ -29598,6 +32621,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, Dive computer, Flashlight (torch)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -29692,6 +32725,16 @@
      },
      {
       "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 100.0,
        "currency": "USD"
       },
@@ -29725,7 +32768,7 @@
    ],
    "dives": 24,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -29769,14 +32812,18 @@
      },
      {
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 120.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -29816,6 +32863,9 @@
       "note": "Transfer from/to Marsa Alam airport Port Ghalib (round-trip, scheduled times only)",
       "tier": "conditional"
      }
+    ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
     ],
     "unreadable": []
    },
@@ -29841,7 +32891,7 @@
    ],
    "dives": 24,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -29885,14 +32935,18 @@
      },
      {
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 120.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -29933,6 +32987,9 @@
       "tier": "conditional"
      }
     ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
+    ],
     "unreadable": []
    },
    "name": "Brothers/Daedalus/Elphinstone (Port Ghalib - Hurghada)",
@@ -29952,7 +33009,7 @@
    "boat_name": "Red Sea Aggressor IV",
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -29995,10 +33052,14 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -30044,6 +33105,9 @@
       "tier": "conditional"
      }
     ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
+    ],
     "unreadable": []
    },
    "name": "Brothers/Daedalus/Elphinstone (Port Ghalib - Port Ghalib)",
@@ -30068,7 +33132,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -30111,10 +33175,14 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -30159,6 +33227,9 @@
       "note": "Transfer from/to Marsa Alam airport Port Ghalib (round-trip, scheduled times only)",
       "tier": "conditional"
      }
+    ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
     ],
     "unreadable": []
    },
@@ -30185,7 +33256,7 @@
    ],
    "dives": 24,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -30228,10 +33299,14 @@
       "tier": "mandatory"
      },
      {
+      "amount": {
+       "amount": 120.0,
+       "currency": "USD"
+      },
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -30277,6 +33352,9 @@
       "tier": "conditional"
      }
     ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
+    ],
     "unreadable": []
    },
    "name": "St. Johns & Daedalus (Hurghada - Port Ghalib)",
@@ -30302,7 +33380,7 @@
    ],
    "dives": 18,
    "fees": {
-    "complete": false,
+    "complete": true,
     "lines": [
      {
       "amount": {
@@ -30346,14 +33424,18 @@
      },
      {
       "basis": "per_trip",
-      "code": "tax_vat",
-      "note": "14% Value Added Tax (VAT) (onboard purchases)",
-      "tier": "mandatory"
-     },
-     {
-      "basis": "per_trip",
       "code": "gratuities",
       "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 75.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -30393,6 +33475,9 @@
       "note": "Transfer from/to Marsa Alam airport Port Ghalib (round-trip, scheduled times only)",
       "tier": "conditional"
      }
+    ],
+    "on_purchases": [
+     "14% Value Added Tax (VAT) (onboard purchases)"
     ],
     "unreadable": []
    },
@@ -30463,6 +33548,16 @@
       "code": "airport_transfer",
       "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -30567,6 +33662,16 @@
      },
      {
       "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 230.0,
        "currency": "USD"
       },
@@ -30645,6 +33750,16 @@
       "code": "gear_rental",
       "note": "Full scuba set",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -30734,6 +33849,16 @@
      },
      {
       "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 60.0,
        "currency": "EUR"
       },
@@ -30809,6 +33934,16 @@
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -30895,6 +34030,16 @@
      },
      {
       "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 130.0,
        "currency": "EUR"
       },
@@ -30977,6 +34122,16 @@
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -31071,6 +34226,12 @@
       "tier": "conditional"
      },
      {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "amount": {
        "amount": 100.0,
        "currency": "EUR"
@@ -31156,6 +34317,12 @@
       "code": "gear_rental",
       "note": "Full scuba set",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -31248,6 +34415,12 @@
       "tier": "conditional"
      },
      {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "amount": {
        "amount": 70.0,
        "currency": "EUR"
@@ -31335,6 +34508,12 @@
       "tier": "conditional"
      },
      {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "amount": {
        "amount": 100.0,
        "currency": "EUR"
@@ -31420,6 +34599,12 @@
       "code": "gear_rental",
       "note": "Full scuba set",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -31513,6 +34698,16 @@
      },
      {
       "amount": {
+       "amount": 4.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 70.0,
        "currency": "EUR"
       },
@@ -31592,6 +34787,12 @@
       "code": "gear_rental",
       "note": "Full scuba set",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -31676,6 +34877,12 @@
       "tier": "conditional"
      },
      {
+      "basis": "per_dive",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "amount": {
        "amount": 70.0,
        "currency": "EUR"
@@ -31754,6 +34961,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -31845,6 +35062,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -31924,6 +35151,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32017,6 +35254,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32104,6 +35351,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32185,6 +35442,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32279,6 +35546,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32362,6 +35639,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32459,6 +35746,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32541,6 +35838,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32631,6 +35938,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32728,6 +36045,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32813,6 +36140,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -32909,6 +36246,16 @@
        "amount": 50.0,
        "currency": "EUR"
       },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
       "basis": "per_week",
       "code": "nitrox",
       "note": "Nitrox",
@@ -32990,6 +36337,16 @@
      },
      {
       "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 170.0,
        "currency": "EUR"
       },
@@ -33064,6 +36421,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -33153,6 +36520,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -33214,6 +36591,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -33305,6 +36692,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -33370,6 +36767,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -33452,6 +36859,16 @@
      },
      {
       "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 170.0,
        "currency": "EUR"
       },
@@ -33529,6 +36946,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -33623,6 +37050,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -33690,6 +37127,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -33784,6 +37231,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -33865,6 +37322,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -33933,6 +37400,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -34012,6 +37489,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -34106,6 +37593,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -34174,6 +37671,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -34259,6 +37766,16 @@
      },
      {
       "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 170.0,
        "currency": "EUR"
       },
@@ -34327,6 +37844,16 @@
       "basis": "per_trip",
       "code": "alcohol",
       "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
       "tier": "optional"
      },
      {
@@ -34418,6 +37945,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "nitrox",
       "included": true,
@@ -34497,6 +38034,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -34586,6 +38133,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -34671,6 +38228,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), SMB (Surface Marker Buoy), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -34760,6 +38327,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -34836,6 +38413,16 @@
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -34936,6 +38523,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -35023,6 +38620,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -35106,6 +38713,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -35177,6 +38794,16 @@
       "code": "nitrox",
       "note": "Nitrox",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 50.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -35917,6 +39544,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -35989,6 +39626,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -36058,6 +39705,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -36135,6 +39792,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -36217,6 +39884,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -36296,6 +39973,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -36371,6 +40058,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -36454,6 +40151,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -36533,6 +40240,16 @@
      },
      {
       "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 10.0,
        "currency": "EUR"
       },
@@ -36607,6 +40324,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -36689,6 +40416,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -36696,6 +40433,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -36774,6 +40521,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -36781,6 +40538,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -36867,6 +40634,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -36943,6 +40730,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -36950,6 +40747,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37027,6 +40834,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -37034,6 +40851,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37112,6 +40939,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -37119,6 +40956,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37205,6 +41052,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -37283,6 +41150,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -37290,6 +41167,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37370,6 +41257,16 @@
      },
      {
       "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
        "amount": 140.0,
        "currency": "EUR"
       },
@@ -37377,6 +41274,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37467,6 +41374,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -37553,6 +41480,26 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "guided_diving",
+      "note": "Guide supervision (If under required level)",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "airport_transfer",
       "included": true,
@@ -37609,6 +41556,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37674,6 +41631,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37743,6 +41710,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -37807,6 +41784,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37875,6 +41862,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -37974,6 +41971,16 @@
        "amount": 10.0,
        "currency": "EUR"
       },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
       "basis": "per_dive",
       "code": "nitrox",
       "note": "Nitrox",
@@ -38055,12 +42062,12 @@
    "name": "Alsuraya",
    "operator": null,
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2028-09-02",
     "priced": 17,
-    "read": 64,
+    "read": 65,
     "unpriced": 2
    },
    "slug": "alsuraya",
@@ -38147,9 +42154,9 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-11-18",
     "priced": 4,
     "read": 100,
     "unpriced": 77
@@ -38169,12 +42176,12 @@
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-12",
+    "dated": 63,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 62,
+    "read": 63,
     "unpriced": 0
    },
    "slug": "my-aphrodite",
@@ -38214,12 +42221,12 @@
    "name": "MY AVO",
    "operator": null,
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-12",
+    "dated": 63,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 1,
-    "read": 62,
+    "read": 63,
     "unpriced": 53
    },
    "slug": "my-avo",
@@ -38259,12 +42266,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 78,
-    "first": "2026-09-10",
+    "dated": 79,
+    "first": "2026-09-05",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 20,
-    "read": 78,
+    "read": 79,
     "unpriced": 26
    },
    "slug": "bella-3",
@@ -38304,9 +42311,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 16,
-    "last": "2029-02-03",
+    "last": "2029-01-27",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -38327,9 +42334,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 16,
-    "last": "2028-11-18",
+    "last": "2028-11-11",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -38462,12 +42469,12 @@
    "name": "MY Discovery I",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 68,
-    "first": "2026-09-12",
+    "dated": 69,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 68,
+    "read": 69,
     "unpriced": 0
    },
    "slug": "my-discovery-i",
@@ -38485,12 +42492,12 @@
    "name": "MY Discovery II",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 55,
-    "first": "2026-09-12",
+    "dated": 56,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 55,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "my-discovery-ii",
@@ -38508,12 +42515,12 @@
    "name": "Dune Longara",
    "operator": "DUNE",
    "sailings": {
-    "dated": 98,
-    "first": "2026-09-12",
+    "dated": 99,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2028-12-30",
     "priced": 16,
-    "read": 98,
+    "read": 99,
     "unpriced": 3
    },
    "slug": "dune-longara",
@@ -38531,9 +42538,9 @@
    "operator": "DUNE",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 17,
-    "last": "2028-12-16",
+    "last": "2028-12-09",
     "priced": 17,
     "read": 100,
     "unpriced": 5
@@ -38554,9 +42561,9 @@
    "operator": "DUNE",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 14,
-    "last": "2028-11-18",
+    "last": "2028-11-11",
     "priced": 14,
     "read": 100,
     "unpriced": 0
@@ -38576,12 +42583,12 @@
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 93,
-    "first": "2026-09-12",
+    "dated": 94,
+    "first": "2026-09-05",
     "in_season": 16,
     "last": "2028-11-18",
     "priced": 16,
-    "read": 93,
+    "read": 94,
     "unpriced": 0
    },
    "slug": "mv-emperor-asmaa",
@@ -38622,12 +42629,12 @@
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 94,
-    "first": "2026-09-12",
+    "dated": 95,
+    "first": "2026-09-05",
     "in_season": 15,
     "last": "2028-12-01",
     "priced": 15,
-    "read": 94,
+    "read": 95,
     "unpriced": 0
    },
    "slug": "mv-emperor-superior",
@@ -38645,12 +42652,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-12",
+    "dated": 58,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 57,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "eriny",
@@ -38734,13 +42741,13 @@
    "name": "MY Galaxy",
    "operator": null,
    "sailings": {
-    "dated": 12,
-    "first": "2026-09-12",
+    "dated": 13,
+    "first": "2026-09-05",
     "in_season": 0,
     "last": "2026-11-28",
     "priced": 0,
-    "read": 12,
-    "unpriced": 10
+    "read": 13,
+    "unpriced": 11
    },
    "slug": "my-galaxy",
    "specs": {
@@ -38801,12 +42808,12 @@
    "name": "MY Grand Discovery",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 68,
-    "first": "2026-09-12",
+    "dated": 69,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 68,
+    "read": 69,
     "unpriced": 0
    },
    "slug": "my-grand-discovery",
@@ -38823,13 +42830,13 @@
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
-    "dated": 66,
-    "first": "2026-09-12",
+    "dated": 67,
+    "first": "2026-09-05",
     "in_season": 20,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 66,
-    "unpriced": 7
+    "read": 67,
+    "unpriced": 8
    },
    "slug": "hammerhead-ii",
    "specs": {
@@ -38975,12 +42982,12 @@
    "name": "MY Odyssey",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 51,
-    "first": "2026-09-12",
+    "dated": 52,
+    "first": "2026-09-05",
     "in_season": 17,
     "last": "2027-12-04",
     "priced": 17,
-    "read": 51,
+    "read": 52,
     "unpriced": 0
    },
    "slug": "my-odyssey",
@@ -38999,9 +43006,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-11-18",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -39021,9 +43028,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-11-18",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -39043,9 +43050,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-05",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-11-18",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -39064,12 +43071,12 @@
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-12",
+    "dated": 58,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 57,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "red-sea-blue-force-2",
@@ -39086,12 +43093,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 19,
-    "first": "2026-09-12",
+    "dated": 20,
+    "first": "2026-09-05",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 19,
+    "read": 20,
     "unpriced": 2
    },
    "slug": "reef-voyager",
@@ -39131,12 +43138,12 @@
    "name": "MY Seawolf Dominator",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 56,
-    "first": "2026-09-12",
+    "dated": 57,
+    "first": "2026-09-05",
     "in_season": 17,
     "last": "2027-12-25",
     "priced": 17,
-    "read": 56,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "my-seawolf-dominator",
@@ -39154,12 +43161,12 @@
    "name": "Seawolf Steel",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-12",
+    "dated": 58,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 57,
+    "read": 58,
     "unpriced": 10
    },
    "slug": "seawolf-steel",
@@ -39177,12 +43184,12 @@
    "name": "Serenity",
    "operator": null,
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-05",
     "in_season": 14,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 64,
+    "read": 65,
     "unpriced": 0
    },
    "slug": "serenity",
@@ -39268,12 +43275,12 @@
    "name": "Snefro Target",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 66,
-    "first": "2026-09-12",
+    "dated": 67,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 66,
+    "read": 67,
     "unpriced": 0
    },
    "slug": "snefro-target",
@@ -39291,12 +43298,12 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 21,
-    "first": "2026-09-12",
+    "dated": 22,
+    "first": "2026-09-05",
     "in_season": 0,
     "last": "2027-01-30",
     "priced": 0,
-    "read": 21,
+    "read": 22,
     "unpriced": 0
    },
    "slug": "south-moon-1",
@@ -39335,13 +43342,13 @@
    "name": "Topaz",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2028-01-01",
     "priced": 17,
-    "read": 64,
-    "unpriced": 26
+    "read": 65,
+    "unpriced": 27
    },
    "slug": "topaz",
    "specs": {
@@ -39358,12 +43365,12 @@
    "name": "Unity",
    "operator": null,
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-12",
+    "dated": 60,
+    "first": "2026-09-05",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 59,
+    "read": 60,
     "unpriced": 13
    },
    "slug": "unity",
@@ -39380,13 +43387,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 16,
-    "first": "2026-09-13",
+    "dated": 17,
+    "first": "2026-09-05",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 16,
-    "unpriced": 16
+    "read": 17,
+    "unpriced": 17
    },
    "slug": "vip-one",
    "specs": {
