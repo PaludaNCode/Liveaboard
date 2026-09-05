@@ -949,11 +949,30 @@ Not every boat states a fleet; three of the ten land under "Operator not
 captured", which is true rather than tidy. **Confirmed at the source rather
 than inferred from a null**, 2026-09-01: `window.shop` on `my-anemone`,
 `my-heaven-saphir` and `my-independence-ii` states `fleetTitle: ""` — an empty
-string PADI publishes, not a fetch that failed or a regex that missed. Those
-three carry 44 in-season sailings, have no liveaboard.com vessel page and so no
-`Product.brand.name`, and their description prose names no company. There is
-nothing left to read, and inventing one from marketing copy is the assertion
-this file already refuses to make for Blue Pearl on better evidence.
+string PADI publishes, not a fetch that failed or a regex that missed. Re-read
+2026-09-05: all three still state `""`, so this is the source's settled answer
+and not one crawl's. Those three carry 44 in-season sailings and have no
+liveaboard.com vessel page, so no `Product.brand.name` either.
+
+**One of the three names a fleet in its prose, and it is still not an
+operator.** This section used to say their descriptions name no company; MY
+Independence II's says *"the crown jewel of the **Blue Water** fleet"* — the
+same block the guest count comes out of, so the claim was refuted by the very
+read that landed two paragraphs down. Corrected here rather than deleted,
+because a negative stated more broadly than it was measured is what this file
+keeps getting wrong. Anemone's and Heaven Saphir's prose really does name
+nobody.
+
+It changes nothing, and the reason is the rule already written above: a fleet
+on a booking site is not established to be the operating company. Prose is a
+weaker warrant than the `fleetTitle` field that fold was refused on, not a
+stronger one, and "Blue Water" is a fleet name in a sentence selling a boat —
+no second source states it, nothing spells it as a company, and it would join
+this hull to nothing already in the dataset. Blue Pearl was folded on
+`Product.brand.name`, the vessel page's own structured statement of the
+company; there is no such field here. The three stay under "Operator not
+captured", which is true rather than tidy, and the honest close of the question
+rather than a hole left open.
 
 ### The vessel page also states cabins, length and year built
 

@@ -185,6 +185,17 @@ this holds whether or not anybody remembered it. **"Merge to prod" means run
 `--merge`** — if it ever comes back "nothing to merge", the work was put on the
 trunk directly and that was the mistake, not the request.
 
+**A refusal arrives before the gate, not after it.** Standing on the trunk, a
+dirty tree and a conflict pulling the trunk in are all git asking git, and they
+sat behind two minutes of tests: "nothing to merge" was known at `git
+rev-parse` and printed at the end. `merge_preflight` runs first, which also
+settles what the one gate covers — the trunk is merged in ahead of it, so every
+`--merge` is gated against the merged tree rather than only the ones that found
+the trunk had moved, and the second gate that used to buy that is gone. `--push`
+asks the same way, and that closed a second hole: the gate rebuilds the page, so
+asking afterwards let a clean tree answer *yes* on the build stamp alone and
+commit a rebuild that was not news.
+
 Eleven changes went onto `main` with no branch before this was written down.
 The concern was raised three times in that session and the pushing continued
 anyway, which is worse than never raising it: a flagged worry followed by the

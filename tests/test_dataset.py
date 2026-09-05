@@ -3419,9 +3419,18 @@ class TestOneGate(unittest.TestCase):
 
         Not a warning and not a flag to override -- `--push` branches on its
         own, because a default that has to be remembered is not a default.
+
+        Anchored on the `--push` path's own first line. It used to be anchored
+        on the empty-tree check that opened that path, and that check has since
+        moved ahead of the gate, where a refusal costs nothing: the split
+        matched nothing and the guard raised rather than passing, which is the
+        one way round this is survivable. Asserted before it is used, for the
+        next time.
         """
         ship = self.SHIP.read_text(encoding="utf-8")
-        push = ship.split("if not git(\"status\", \"--porcelain\")", 1)[1]
+        halves = ship.split("if not args.push:", 1)
+        self.assertEqual(len(halves), 2, "the --push path no longer starts here")
+        push = halves[1]
         self.assertIn("if branch == TRUNK:", push,
                       "--push commits wherever it happens to be standing")
         self.assertIn("checkout", push, "--push does not create the branch")
@@ -3429,13 +3438,64 @@ class TestOneGate(unittest.TestCase):
         self.assertIn('"--no-ff"', ship,
                       "a fast-forward merge hides that the work was a branch")
 
+    def test_a_merge_that_cannot_happen_is_refused_before_the_gate(self) -> None:
+        """Two minutes of tests, and then "nothing to merge".
+
+        `main` ran the gate first and handed the result to `merge()`, which
+        only then asked the three questions that can refuse outright: standing
+        on the trunk, a dirty tree, a conflict pulling the trunk in. So the
+        answer arrived two minutes after it was known, and where the trunk had
+        moved the gate ran *twice* — once against a tree that was never going
+        to be merged.
+
+        Behavioural rather than a source string, because what went wrong is an
+        order of operations and every ordering greps the same. A throwaway repo
+        holding nothing but the script is enough: `--merge` on the trunk has
+        its answer from `git rev-parse` alone, and the gate has no business
+        running before it.
+        """
+        import shutil
+        import subprocess
+        import sys
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "tools").mkdir()
+            shutil.copy(self.SHIP, root / "tools" / "ship.py")
+            for argv in (["init", "-q", "-b", "main"], ["add", "-A"],
+                         ["-c", "user.email=t@t", "-c", "user.name=t",
+                          "commit", "-q", "-m", "the script"]):
+                subprocess.run(["git", *argv], cwd=root, check=True)
+            done = subprocess.run([sys.executable, "tools/ship.py", "--merge"],
+                                  cwd=root, capture_output=True, text=True,
+                                  timeout=300)
+
+        self.assertIn("nothing to merge", done.stdout,
+                      "the refusal never arrived; the gate ran instead")
+        self.assertNotIn("gate", done.stdout,
+                         "the gate ran before the question that refuses the merge")
+
     def test_the_merge_gates_against_the_trunk_it_is_merging_into(self) -> None:
         """A branch that was green alone can be red against a trunk that moved
-        under it -- and the scheduled data jobs move it several times a day."""
+        under it -- and the scheduled data jobs move it several times a day.
+
+        The trunk merge used to sit inside `merge()`, behind the gate, and run
+        a *second* gate of its own on the days it had brought anything in. It
+        sits in `merge_preflight` now, ahead of the one gate, so every merge is
+        gated against the merged tree rather than only the ones that found the
+        trunk had moved -- and the second run is gone with it. The same
+        property, held by ordering rather than by gating twice, so the guard
+        asserts the order.
+        """
         ship = self.SHIP.read_text(encoding="utf-8")
-        merge = ship.split("def merge(", 1)[1]
-        self.assertIn('git("rev-list", "--count", f"HEAD..origin/{TRUNK}")', merge)
-        self.assertIn("not merging: the gate is red against the merged trunk", merge)
+        halves = ship.split("def merge_preflight(", 1)
+        self.assertEqual(len(halves), 2, "the preflight is gone")
+        self.assertIn('git("rev-list", "--count", f"HEAD..origin/{TRUNK}")',
+                      halves[1].split("\ndef ", 1)[0],
+                      "the trunk is no longer merged in before the gate")
+        main = ship.split("def main(", 1)[1]
+        self.assertLess(main.index("merge_preflight()"), main.index("gate(args.fast"),
+                        "the gate runs before the trunk is merged in")
 
     def test_the_merge_does_not_claim_a_cleanup_it_did_not_do(self) -> None:
         """Deleting the merged branch is allowed to fail -- this environment's

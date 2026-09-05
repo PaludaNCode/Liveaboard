@@ -65,12 +65,19 @@ records that closing them costs no request.
 
 ## 3. Vessel identity
 
-- **Operator unknown on 3 boats.** MY Anemone, MY Heaven Saphir and MY
-  Independence II sit under the placeholder operator `unknown-operator`
-  ("Operator not captured"), carrying **44 in-season sailings** between them.
-  All three are `padi_only` with no liveaboard.com vessel panel, and PADI
-  states no `fleetTitle` for them either — so neither of the two routes to a
-  company name (`Product.brand.name`, then `window.shop.fleetTitle`) answers.
+- **Operator unknown on 3 boats: closed, as unanswerable.** MY Anemone, MY
+  Heaven Saphir and MY Independence II sit under the placeholder operator
+  `unknown-operator` ("Operator not captured"), carrying **44 in-season
+  sailings** between them. All three are `padi_only` with no liveaboard.com
+  vessel panel, and PADI states `fleetTitle: ""` for them — re-read 2026-09-05,
+  so that is the source's answer rather than one crawl's — so neither of the two
+  routes to a company name (`Product.brand.name`, then `window.shop.fleetTitle`)
+  answers. The one loose end is closed too: Independence II's description prose
+  names a *"Blue Water fleet"*, and a fleet on a booking site is not established
+  to be the operating company — prose is a weaker warrant than the `fleetTitle`
+  field the Blue Pearl fold was already refused on, not a stronger one. There is
+  nothing further to read, so this is a hole to leave rather than a fetch to
+  write. See `docs/sources/padi.com.md`.
 - **Guests: closed. Cabins missing on 6.** Seven boats stated no guest count —
   Grand Sea Explorer, MY Anemone, MY Heaven Saphir, MY Independence II, MY
   Seawolf Dominator, Seawolf Steel and Vita Xplorer. PADI's vessel description
