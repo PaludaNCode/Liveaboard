@@ -176159,7 +176159,7 @@
   "padi_berths_read": "2026-09-04",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
-    "read": "2026-09-04",
+    "read": "2026-09-05",
     "source": "padi.com",
     "url": "https://travel.padi.com/api/v2/travel/promotions/?country=110&country=120&date=2027-05-01&date=2027-06-01&date=2027-07-01&date=2027-08-01",
     "offers": [
@@ -176198,6 +176198,22 @@
         "in_run": true
       },
       {
+        "boat": "alsuraya",
+        "boat_name": "ALSURAYA",
+        "title": "Save 15%",
+        "kind": "Discount %",
+        "value": 15.0,
+        "price": 1062,
+        "was": 1250,
+        "quoted": 1062.5,
+        "quoted_was": 1250.0,
+        "currency": "EUR",
+        "start": "2027-06-12",
+        "end": "2027-06-19",
+        "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/",
+        "nights": 7
+      },
+      {
         "boat": "discovery-ii",
         "boat_name": "Discovery II",
         "title": "15% Early Bird",
@@ -176225,8 +176241,8 @@
         "quoted": 1041.25,
         "quoted_was": 1225.0,
         "currency": "EUR",
-        "start": "2027-07-17",
-        "end": "2027-07-24",
+        "start": "2027-08-07",
+        "end": "2027-08-14",
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
         "nights": 7,
         "in_run": true
@@ -176242,8 +176258,8 @@
         "quoted": 765.0,
         "quoted_was": 900.0,
         "currency": "EUR",
-        "start": "2027-08-28",
-        "end": "2027-09-04",
+        "start": "2027-08-14",
+        "end": "2027-08-21",
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
         "nights": 7,
         "in_run": true
@@ -176259,9 +176275,11 @@
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/cayman-aggressor-iv/"
       }
     ],
-    "previous": "2026-09-03",
+    "previous": "2026-09-04",
     "changes": {
-      "new": [],
+      "new": [
+        "alsuraya"
+      ],
       "withdrawn": [],
       "changed": [
         {
@@ -176279,8 +176297,8 @@
             "quoted": 765.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-06-05",
-            "end": "2027-06-12",
+            "start": "2027-08-28",
+            "end": "2027-09-04",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7
           },
@@ -176295,53 +176313,52 @@
             "quoted": 765.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-08-28",
-            "end": "2027-09-04",
+            "start": "2027-08-14",
+            "end": "2027-08-21",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7
           }
         },
         {
           "moved": [
-            "price",
-            "undiscounted price",
             "sailing"
           ],
           "before": {
-            "boat": "discovery-ii",
-            "boat_name": "Discovery II",
+            "boat": "grand-discovery",
+            "boat_name": "Grand Discovery",
             "title": "15% Early Bird",
             "kind": "Discount %",
             "value": 15.0,
-            "price": 892,
-            "was": 1050,
-            "quoted": 892.5,
-            "quoted_was": 1050.0,
+            "price": 1041,
+            "was": 1225,
+            "quoted": 1041.25,
+            "quoted_was": 1225.0,
             "currency": "EUR",
-            "start": "2027-07-31",
-            "end": "2027-08-07",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
+            "start": "2027-07-17",
+            "end": "2027-07-24",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
             "nights": 7
           },
           "after": {
-            "boat": "discovery-ii",
-            "boat_name": "Discovery II",
+            "boat": "grand-discovery",
+            "boat_name": "Grand Discovery",
             "title": "15% Early Bird",
             "kind": "Discount %",
             "value": 15.0,
-            "price": 808,
-            "was": 950,
-            "quoted": 807.5,
-            "quoted_was": 950.0,
+            "price": 1041,
+            "was": 1225,
+            "quoted": 1041.25,
+            "quoted_was": 1225.0,
             "currency": "EUR",
-            "start": "2027-07-03",
-            "end": "2027-07-10",
-            "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/",
+            "start": "2027-08-07",
+            "end": "2027-08-14",
+            "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/",
             "nights": 7
           }
         }
       ],
       "names": {
+        "alsuraya": "ALSURAYA",
         "discovery-i": "Discovery I",
         "discovery-ii": "Discovery II",
         "grand-discovery": "Grand Discovery",
