@@ -5,7 +5,9 @@ built on 2026-08-30 (77 boats, 46 operators, 402 itineraries, 1,122 sailings).
 
 **Three of these are closed** — see `docs/plan-missing.md` for what each one
 actually bought, including the two joins §2 needed and the one it refused. The
-counts below are as first measured; where a section is done it says so.
+counts below are as first measured; where a section is done it says so. §2 and
+both of §3's identity holes closed on 2026-09-05 and say so in place, against a
+dataset that has since grown to 416 itineraries and 1,145 sailings.
 
 Grouped by **why** it is empty, because that is what decides whether there is
 anything to do about it:
@@ -27,7 +29,7 @@ they have survived.
 
 | Field | Filled on | Note |
 |---|---|---|
-| `Boat.length_m` | 63 / 77 | `data/fees.json` already holds it for **71** vessels. See §2. |
+| ~~`Boat.length_m`~~ | — | **Closed.** 75 / 77 now; see §2. |
 | `Operator.website` | 0 / 46 | Parsed from neither source. `Event.organizer` carries a name and no url. |
 | ~~`Departure.spaces_left`~~ | — | **Gone.** Superseded by `berths`. Its always-empty CSV column became two filled ones, `places_at_price` and `berths_aboard`, on 830 and 1,113 rows. |
 | `Requirements.max_depth_m` | 0 / 402 | Both sources state the entry bar as a level and a logged-dive count; neither states a depth. Kept: `make_seed.py` sets it. |
@@ -40,28 +42,32 @@ set by the seed generator and `strong_current` has a live writer that this
 season's pages do not trigger. Deleting a working parser's output because the
 current fleet does not exercise it is not a cleanup.
 
-## 2. Read and not published
+## 2. Read and not published — closed
 
 `tools/scrape_fees.py` reads the specification table on every vessel page and
-writes it to `data/fees.json` under `specs`. `promote` reads that book for
-exactly one key, `nitrox_free`, and drops the rest on the floor:
+writes it to `data/fees.json` under `specs`. `promote` read that book for
+exactly one key, `nitrox_free`, and dropped the rest on the floor:
 
 | `specs` key | Present | Reaches the dataset |
 |---|---|---|
 | `cabins` | 79 / 79 | yes |
 | `guests` | 78 / 79 | yes |
 | `nitrox_free`, `nitrox_available` | 79 / 79 | `nitrox_free` only |
-| **`length_m`** | 71 / 79 | **no** |
-| **`year_built`** | 67 / 79 | **no** — and there is no field on `Boat` to put it in |
+| `length_m` | 71 / 79 | **yes** — was no |
+| `year_built` | 67 / 79 | **yes** — was no, and there was no field to put it in |
 
-Missing `length_m` in the book: Blue, DUNE Longara, DUNE Titan, Golden Dolphin,
-Sea Serpent Contessa, Snefro Love, Snefro Pearl, Snefro Target. Missing
-`year_built`: those two DUNEs plus Blue Storm, Discovery II, Freedom III, the
-three Red Sea Aggressors, Red Sea Blue Force 2, Royal Evolution, Tala, Vita
-Xplorer.
+Both are promoted now, and PADI's own specification strip fills behind the
+panel for the hulls liveaboard.com does not sell. What is left is what neither
+source states: **`length_m` on 2** (Golden Dolphin, Sea Serpent Contessa) and
+**`year_built` on 11** (Blue Storm, DUNE Longara, Grand Sea Explorer, MY Heaven
+Saphir, MY Independence II, the three Red Sea Aggressors, Red Sea Blue Force 2,
+Tala, Vita Xplorer). Those are §3-shaped holes — read, and the source said
+nothing — not fields waiting on a fetch.
 
-Whether either belongs on the page is a separate question — this file only
-records that closing them costs no request.
+Whether either belongs on the *page* is still a separate question and still
+open: `render` carries only what it draws, so both sit in the dataset and in
+the CSV and neither is a column. This section recorded that closing them cost
+no request, and it did not.
 
 ## 3. Vessel identity
 
@@ -138,16 +144,34 @@ Asmaa, Emperor Elite, Grand Sea Explorer, Seawolf Steel.
 
 ## 5. Fees
 
-**33 itineraries carry PADI fee rows that do not add up** — PADI named a charge
-and stated no figure, so no total may be claimed on its behalf. These are the
-actionable ones, because the entries exist and are unread rather than absent:
+**71 of 443 PADI books do not add up** — PADI named a charge and stated no
+figure, so no total may be claimed on its behalf. It was **105**, and what
+closed the other 34 was the classifier rather than a fetch: three titles it
+declined were re-read (`docs/sources/padi.com.md`), the unreadable count went
+43 → 0 and complete books 179 → 199, with **no mandatory total moving**.
 
-    Blue Horizon 9 · Blue Melody 8 · All Star Scuba Scene 6 ·
-    MY Independence II 5 · DUNE Longara 3 · Red Sea Aggressor IV 2
+Re-measured 2026-09-05, and this is the whole of what is left. Five titles, on
+seven boats:
 
-A further **190 itineraries have no PADI fee rows at all**, which is a
+    Fuel surcharges 45 — DUNE Silky 15, DUNE Titan 15, Dune Longara 13,
+                          Amelie Safari 2
+    Visa fees       18 — MY Independence II 16, Red Sea Blue Force 2 2
+    National park fees 8 · 10% (of the trip cost) VAT 8 — All Star Scuba Scene
+    Service fees     2 — Amelie Safari
+
+Four of the five are the honest kind: the seller named the charge and published
+no number, and there is nothing to read. **The fifth looks actionable and is
+not.** "10% (of the trip cost) VAT" is a rule rather than a figure, and this
+project has no percentage `FeeBasis` — adding one is a change with its own
+plan, because a basis has to be mirrored in `pricing._is_counted` and
+`lineCounts` and it is the first one whose amount depends on the fare beside
+it. It would also buy **nothing**: all 8 of those trips carry *National park
+fees* unpriced in the same book, so pricing the VAT completes none of them.
+Measured before it was proposed, which is what stops it being written.
+
+A further **202 itineraries have no PADI fee rows at all**, which is a
 different thing: PADI has not been read for that trip, not PADI stating the
-fare covers everything. 179 itineraries have a complete PADI bill.
+fare covers everything.
 
 **Unpriced lines in our own book**, by code and by how many vessels carry at
 least one:
@@ -216,9 +240,16 @@ coverage count does not read as a to-do.
   either source.
 - **The single gear items beside "Full scuba set".** Priced, deliberately
   unread — a basket assembled from parts is a price nobody quoted.
-- **63 PADI fee entries the classifier declines** ("14% GST (on onboard
+- ~~**63 PADI fee entries the classifier declines** ("14% GST (on onboard
   purchases)", "Supervision fees for Level 1 divers…"). Each makes its trip's
-  bill incomplete, which is the safe direction.
+  bill incomplete, which is the safe direction.~~ **Read since 2026-09-05, and
+  neither is a fee on the trip.** A tax on onboard purchases is charged on what
+  a diver chooses to buy aboard, so it is not a charge on the sailing at all
+  (`billed_on_purchases`, 68 entries) and it is carried under `on_purchases`
+  rather than as a line; supervision of Level 1 and 2 divers is a service some
+  divers buy (`FeeCode.GUIDED_DIVING`, filed Optional). Neither is *declined*
+  now and neither makes a book incomplete — which is why the count fell without
+  any total moving. What is left is §5's five unpriced titles.
 - **"Tips for the crew", 376 PADI entries, never priced.** One pattern away from
   classifying as `gratuities` — and because gratuities are customary, that
   would move an unpriced line into every affected trip's counted total. Worth
