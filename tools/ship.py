@@ -148,6 +148,26 @@ def main() -> int:
     if args.merge and args.push:
         ap.error("--merge and --push are two steps, not one")
 
+    # Everything that can refuse outright, before two minutes are spent on a
+    # gate whose result will be thrown away. It was the other way round: the
+    # gate ran first and `merge()` only then asked whether there was a merge to
+    # make, so "already on main; nothing to merge" arrived two minutes after
+    # `git rev-parse` knew it -- and where the trunk had moved, the gate ran
+    # twice, the first time against a tree that was never going to be merged.
+    if args.merge and not args.fast:
+        stop = merge_preflight()
+        if stop:
+            print(stop)
+            return 1
+    if args.push and not git("status", "--porcelain"):
+        # Same reasoning, and it fixes a second thing: the gate rebuilds the
+        # page, so asking afterwards meant a clean tree answered *yes* on the
+        # build stamp alone and `--push` committed a rebuild that was not news.
+        # `--merge` had `drop_stamp_only_rebuild` for exactly that and the push
+        # path never did.
+        print("nothing to commit")
+        return 0
+
     print(f"gate{' (fast)' if args.fast else ''}:")
     if not gate(args.fast, args.workers):
         print("\nnot shipping: the gate is red")
@@ -160,10 +180,6 @@ def main() -> int:
         return merge()
     if not args.push:
         print("\ngate passed")
-        return 0
-
-    if not git("status", "--porcelain"):
-        print("\nnothing to commit")
         return 0
 
     branch = git("rev-parse", "--abbrev-ref", "HEAD")
@@ -210,16 +226,22 @@ def drop_stamp_only_rebuild() -> None:
         run_git("checkout", "--", "site/index.html")
 
 
-def merge() -> int:
-    """Bring the current branch back to the trunk, behind the gate."""
+def merge_preflight() -> str | None:
+    """Everything that can refuse a merge, before the gate is worth running.
+
+    Returns the refusal, or `None` to go ahead. All of it is git asking git,
+    so the answer is immediate -- which is the whole point of it running
+    first. It also settles what the gate will be run *against*: the trunk is
+    merged in here, so there is one gate and it covers the merged tree.
+    Previously the trunk merge sat behind the gate and ran a second one, and
+    the first was against a tree nobody would ever ship.
+    """
     branch = git("rev-parse", "--abbrev-ref", "HEAD")
     if branch == TRUNK:
-        print(f"already on {TRUNK}; nothing to merge")
-        return 1
+        return f"already on {TRUNK}; nothing to merge"
     drop_stamp_only_rebuild()
     if git("status", "--porcelain"):
-        print("the working tree is dirty; commit before merging")
-        return 1
+        return "the working tree is dirty; commit before merging"
 
     # The trunk may have moved -- a scheduled data job commits several times a
     # day. Bring it into the branch first, so a conflict is resolved where the
@@ -229,12 +251,19 @@ def merge() -> int:
     if behind != "0":
         print(f"{TRUNK} moved {behind} commit(s) ahead; merging it in first")
         if run_git("merge", "--no-edit", f"origin/{TRUNK}") != 0:
-            print("conflict merging the trunk into this branch; resolve it here")
-            return 1
-        print("gate, against the merged tree:")
-        if not gate(False, 6):
-            print("\nnot merging: the gate is red against the merged trunk")
-            return 1
+            return "conflict merging the trunk into this branch; resolve it here"
+    return None
+
+
+def merge() -> int:
+    """Bring the current branch back to the trunk, behind the gate.
+
+    `merge_preflight` has already run and passed; this is the half that is
+    only safe once the gate is green.
+    """
+    branch = git("rev-parse", "--abbrev-ref", "HEAD")
+    # The gate rebuilt the page on its way past, and a rebuild is not news.
+    drop_stamp_only_rebuild()
 
     run_git("checkout", "-q", TRUNK)
     # Checked, because the whole merge is built on this succeeding. It was not,

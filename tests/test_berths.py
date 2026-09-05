@@ -409,6 +409,36 @@ class TestAStaleLadderIsRefused(unittest.TestCase):
         for line in payload.get("stale_ladders") or []:
             self.assertIn("ladder starts at", line)
 
+    def test_the_line_says_which_of_the_two_readings_is_behind(self):
+        """The drop is symmetric and the remedy is not.
+
+        A ladder *below* its row is last week's prices still on the shelf, and
+        `cabins.yml` clears it. A ladder *above* its row is the booking page
+        having repriced since the crawl read the row, and no number of booking
+        pages fixes that — only a refresh does. The report named the first
+        remedy for both until three rows of the second kind turned up together
+        on 2026-09-05: the cabin book was that morning's, the rows were the
+        older reading, and the advice was 890 pages fetched to confirm what
+        they already said.
+        """
+        def line(rung, price):
+            payload = promote(
+                candidate([departure(price=price)]), season=SEASON,
+                cabins={"collected": "2026-08-28", "departures": {
+                    "alia-soul::2027-05-01": {
+                        "boat": "alia-soul", "start": "2027-05-01",
+                        "currency": "EUR",
+                        "cabins": [{"name": "Twin", "price": rung}],
+                    },
+                }},
+            )
+            stale = payload.get("stale_ladders") or []
+            self.assertEqual(1, len(stale), stale)
+            return stale[0]
+
+        self.assertIn("the ladder is behind", line(700.0, 1000.0))
+        self.assertIn("the row is behind", line(1300.0, 1000.0))
+
 
 class TestAStaleLadderCannotSpeak(unittest.TestCase):
     """A reading thrown away stays thrown away, in every field it touches.

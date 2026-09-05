@@ -949,11 +949,30 @@ Not every boat states a fleet; three of the ten land under "Operator not
 captured", which is true rather than tidy. **Confirmed at the source rather
 than inferred from a null**, 2026-09-01: `window.shop` on `my-anemone`,
 `my-heaven-saphir` and `my-independence-ii` states `fleetTitle: ""` — an empty
-string PADI publishes, not a fetch that failed or a regex that missed. Those
-three carry 44 in-season sailings, have no liveaboard.com vessel page and so no
-`Product.brand.name`, and their description prose names no company. There is
-nothing left to read, and inventing one from marketing copy is the assertion
-this file already refuses to make for Blue Pearl on better evidence.
+string PADI publishes, not a fetch that failed or a regex that missed. Re-read
+2026-09-05: all three still state `""`, so this is the source's settled answer
+and not one crawl's. Those three carry 44 in-season sailings and have no
+liveaboard.com vessel page, so no `Product.brand.name` either.
+
+**One of the three names a fleet in its prose, and it is still not an
+operator.** This section used to say their descriptions name no company; MY
+Independence II's says *"the crown jewel of the **Blue Water** fleet"* — the
+same block the guest count comes out of, so the claim was refuted by the very
+read that landed two paragraphs down. Corrected here rather than deleted,
+because a negative stated more broadly than it was measured is what this file
+keeps getting wrong. Anemone's and Heaven Saphir's prose really does name
+nobody.
+
+It changes nothing, and the reason is the rule already written above: a fleet
+on a booking site is not established to be the operating company. Prose is a
+weaker warrant than the `fleetTitle` field that fold was refused on, not a
+stronger one, and "Blue Water" is a fleet name in a sentence selling a boat —
+no second source states it, nothing spells it as a company, and it would join
+this hull to nothing already in the dataset. Blue Pearl was folded on
+`Product.brand.name`, the vessel page's own structured statement of the
+company; there is no such field here. The three stay under "Operator not
+captured", which is true rather than tidy, and the honest close of the question
+rather than a hole left open.
 
 ### The vessel page also states cabins, length and year built
 
@@ -1039,6 +1058,62 @@ A second negative worth keeping: the strip itself still has no guests row, so
 `specs.guests` remains a key nothing writes. A figure from marketing copy filed
 beside a table's figures would read as the stronger claim it is not, which is
 why the count is a field of its own on the vessel record.
+
+### Three titles in the mandatory list that are not the trip's cost
+
+Measured over the whole raw store on 2026-09-05, and each is a fact about
+**who pays** rather than about what the charge is called. All three used to
+reach `unreadable`, which kept 105 of 443 books `complete: false`.
+
+| Title | Entries | `price` | What it is |
+|---|---|---|---|
+| `14% GST (on onboard purchases)` | 24 | null | a tax on the diver's bar bill |
+| `14% Value Added Tax (VAT) (onboard purchases)` | 6 | null | the same |
+| `15% Local GST (on onboard purchases)` | 4 | null | the same |
+| `Supervision fees for Level 1 divers and Level 2 divers beyond 20m:` | 16 | **9.0** | a guide for divers under a stated level |
+| `10% (of the trip cost) VAT Mandatory Fee` | 8 | null | **a real charge on the fare** |
+
+`fees.billed_on_purchases` recognises the first three by their stated **base**
+rather than by the word *tax*: there is no figure because there is no base, and
+a diver who buys nothing pays nothing. They are excluded from the bill and
+listed in the book's own `on_purchases`, because a count could not tell them
+from a title the parser has quietly stopped understanding.
+
+The supervision fee is `guided_diving` at the **optional** tier — the only
+entry in a mandatory field that gets one, and the reason is in the title: some
+divers are asked for it and others are not. Counting it in every total bills
+the whole boat; declining it blocked the bill.
+
+The last row is the one the rule may not reach, and it is why the rule is about
+the base. 10% of the trip cost is owed by every berth, and this project cannot
+carry a percentage of a fare, so those 8 entries keep their trips incomplete —
+which is the honest state and what the remaining 71 incomplete books are made
+of, alongside fuel surcharges and visa fees PADI names with no figure.
+
+### A tank size is the tank, not the gas
+
+`classify_label` filed **`15 liter tanks`** and its two variants under `nitrox`
+because the word was in them. 372 optional entries carry the plain title and
+were dropped as unclassifiable; 17 more read *"Nitrox 15 liter tanks"*, *"15
+LITER tank nitrox (only 12 liter is free of chanrge)"* and *"15 liters
+Nitrox"*, and those were priced **as the gas, on the toggle this site counts**,
+against a vessel panel stating nitrox included.
+
+`FeeCode.TANK_15L` had existed for this since the nitrox probe and had no
+pattern behind it. It has one now, ahead of the nitrox rule in the table, and
+Discovery I is the case to read it off: its book was *nitrox €65*, and it is
+now *nitrox — included, "Free nitrox (for certified nitrox divers)"* beside
+*15 litre tanks €35*, which is what the operator actually publishes.
+
+Deliberately narrow: 14 clashes remain on MY Seawolf Dominator, a bare
+"Nitrox" at 50 with no size in the title, and there the stated amount wins.
+Turning a stated cost into free is the error this must never make.
+
+Where a trip lists two tank entries at different figures (11 trips), the
+existing one-line-per-code rule keeps the first, exactly as it always has for
+nitrox and transfers. It is not widened into a range here: 43 trips carry two
+`airport_transfer` entries at 24 and 116, and those are two different
+transfers rather than one charge's span.
 
 ## One property to preserve
 

@@ -55,7 +55,7 @@ from urllib.parse import urlencode
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
-from .fees import _tier_for, classify_label, tier_for_inclusion
+from .fees import _tier_for, billed_on_purchases, classify_label, tier_for_inclusion
 from .vessel import MAX_GUESTS
 
 MAX_LENGTH_M = 200
@@ -1073,6 +1073,7 @@ class PadiComAdapter(SourceAdapter):
 
         lines: list[dict[str, object]] = []
         unreadable: list[str] = []
+        on_purchases: list[str] = []
         for field in MANDATORY_FIELDS:
             entries = detail.get(field)
             if not isinstance(entries, list):
@@ -1087,6 +1088,20 @@ class PadiComAdapter(SourceAdapter):
                 if not _in_season(entry, season):
                     continue
                 title = str(entry.get("title") or "").strip()
+                # A charge on the diver's own onboard spend is not part of the
+                # bill this site reassembles, whatever it is called. PADI files
+                # 34 of them here -- three GST and VAT titles, `price` and
+                # `extraValue` null on every one, because a diver who buys
+                # nothing pays nothing and there is no base to take a
+                # percentage of. Letting them reach `unreadable` kept 30 trips'
+                # books incomplete over a charge those trips do not carry, and
+                # `complete` is a verdict about what a diver cannot decline.
+                #
+                # Recorded rather than dropped, like every other absence here:
+                # a book that stops mentioning them is a book to look at.
+                if billed_on_purchases(title):
+                    on_purchases.append(title)
+                    continue
                 # `prose=False`: this is a field, not a line cut out of a page.
                 code = classify_label(title, prose=False) if title else None
                 basis = cls.basis_for(entry.get("payedPer"))
@@ -1103,7 +1118,20 @@ class PadiComAdapter(SourceAdapter):
                 # either.
                 line: dict[str, object] = {
                     "code": code.value,
-                    "tier": FeeTier.MANDATORY.value,
+                    # Mandatory because the field says so -- with one exception,
+                    # and it is about who pays rather than about who filed it.
+                    # A supervision fee is owed by "Level 1 divers and Level 2
+                    # divers beyond 20m", at a stated 9 a dive, so it is a
+                    # charge on some of the people aboard: counting it in every
+                    # total would bill the whole boat for it, and blocking the
+                    # bill on it (which is what declining the title did) is
+                    # worse still. Optional says both things at once -- the
+                    # line keeps its published figure, no total claims it, and
+                    # `complete` stays a verdict about the charges nobody can
+                    # decline.
+                    "tier": (FeeTier.OPTIONAL.value
+                             if code is FeeCode.GUIDED_DIVING
+                             else FeeTier.MANDATORY.value),
                     "basis": basis.value,
                     "note": title,
                 }
@@ -1129,7 +1157,9 @@ class PadiComAdapter(SourceAdapter):
         #
         # Read here, before anything optional is appended, and that ordering is
         # the whole of how `complete` stays a verdict about the mandatory bill.
-        priced = all("amount" in line for line in lines)
+        priced = all("amount" in line
+                     for line in lines
+                     if line["tier"] == FeeTier.MANDATORY.value)
 
         # The charges a diver *can* decline, on the source's own say-so. Read
         # after the mandatory ones and never mixed into that verdict: see
@@ -1224,6 +1254,9 @@ class PadiComAdapter(SourceAdapter):
             # book from 259 complete trips to none.
             "complete": not unreadable and priced,
             "unreadable": sorted(set(unreadable)),
+            # Named, never a count: an Egyptian boat's GST line and a charge
+            # this parser has stopped understanding look identical as a number.
+            **({"on_purchases": sorted(set(on_purchases))} if on_purchases else {}),
         }
 
     @classmethod
