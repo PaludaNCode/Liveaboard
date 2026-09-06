@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-05
 ===========================
 
+nothing moved.
+```
+
+## 2026-09-05
+
+```
+changes: HEAD -> 2026-09-05
+===========================
+
 fees (4)
   DUNE Longara           course           included -> 210-450 EUR / per_trip
   DUNE Longara           nitrox_course    185-210 EUR / per_trip -> 210 EUR / per_trip
