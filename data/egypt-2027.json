@@ -7512,10 +7512,12 @@
       "operator_id": "amelie-safari",
       "boat_id": "amelie-adventures",
       "nights": 3,
-      "dives": 8,
+      "dives": 21,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
+      "dive_sites": [
+        "abu nuhas"
+      ],
       "region": null,
       "summary": "The Amelie Adventures is a 27-meter/88.6-foot-long liveaboard taking 16 guests on diving adventures in the Red Sea. Snorkeler friendly and available for charters.",
       "source_url": "https://www.liveaboard.com/diving/egypt/amelie-adventures?m=8/2027",
@@ -7743,8 +7745,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": null
+        "notes": "Open Water - No minimum logged dives required."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -62322,7 +62325,7 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-imperial",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
@@ -62507,7 +62510,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--north-straits-of-tiran-brother-islands-daedalus-rocky-island-zabargad-salem-exp",
@@ -183598,7 +183610,7 @@
     }
   },
   "entry_bar": {
-    "both": 150,
+    "both": 151,
     "disagree": 70,
     "padi_stricter": 36,
     "ours_stricter": 34
