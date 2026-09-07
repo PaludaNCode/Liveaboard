@@ -3962,14 +3962,14 @@
      * pointer down the Places column to compare ladders reached row two and
      * then stopped: the thing you opened is in the way of the next one, and
      * the only route on is around it. That is #151 again from the other side,
-     * and the peek exists precisely so that column can be read row by row
-     * without a click each time.
+     * and reading that column row by row without a click each time is the
+     * whole and only reason the peek still exists.
      *
      * So the panel goes to one side of the trigger and the column it sits in
-     * stays clear. Left first, because these two columns are in the money
-     * block on the right of the table; right where the left will not hold it.
-     * Vertically it lines up with the trigger's own row rather than below it,
-     * so the ladder and the row it belongs to read as one thing.
+     * stays clear. Left first, because Places sits in the money block on the
+     * right of the table; right where the left will not hold it. Vertically
+     * it lines up with the trigger's own row rather than below it, so the
+     * ladder and the row it belongs to read as one thing.
      *
      * `test_a_hovered_panel_does_not_cover_the_column_it_opened_from` measures
      * every row it can reach, because the failure was invisible to a source

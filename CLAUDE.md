@@ -666,6 +666,34 @@ Break these and the site starts lying quietly rather than failing loudly.
   *outcome* over three rounds — the list must not move at all under an open
   panel and must scroll exactly as before once it closes — rather than the
   property that delivers it.
+  **And it goes beside the trigger, never over its column.** `place()` opened
+  it at the trigger's own `left` and hung it downwards from the trigger's
+  bottom edge, so it covered every row below the one it came from — the next
+  row's trigger included, on all 24 rows measured at 1712×864. Entering the
+  panel deliberately keeps it open, so running the pointer down Places to
+  compare ladders reached row two and stopped: the thing you opened is in the
+  way of the next one, and the only route on is around it. **#151 from the
+  other side**, on the one column the peek still exists for. It goes to one
+  side now — left first, because Places sits in the money block on the right
+  of the table, and right where the left will not hold it — and lines up with
+  its own row rather than hanging below it.
+  **And `close` may not clear the placement either.** `close` is a task, so
+  moving the pointer from one trigger to the next — which closes the peek and
+  reopens it in one tick — landed `dialog.style.left = dialog.style.top = ""`
+  *after* the new `place()` and wiped the coordinates it had just written,
+  leaving every panel after the first at the top of the window. It sits behind
+  the same `if (dialog.open) return` guard as `lower()` now: the rule that no
+  bookkeeping may live in `close` had one field still ignoring it.
+  Neither had a test of its own, and that is how they ran for two days.
+  What showed was `test_a_cabin_ladder_fits_the_panel_it_opens_in` spending
+  thirty seconds in Playwright retries and then timing out on something it was
+  not testing — **`main` red, and read as a flake**, because a hover the
+  pointer cannot complete looks like one until somebody drives it. So
+  `test_a_hovered_panel_does_not_cover_the_column_it_opened_from` asserts the
+  placement itself: `elementFromPoint` over the *next* trigger's own centre,
+  and the panel's top against what `place()`'s own clamp says it should be —
+  never against a plain distance from the row, because a tall ladder low in
+  the window is meant to be pushed up and six of the 24 rows are.
   **The hover peek stays on the cabin ladder, and on nothing else.** A diver
   comparing ladders down the Places column wants them without a click each
   time, so a mouse there gets `show()` anchored to the trigger, and `:modal`
