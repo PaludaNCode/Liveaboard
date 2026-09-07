@@ -414,6 +414,69 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_the_small_print_costs_height_and_never_width(self) -> None:
+        """A seller's conditions may push the rows down. They may not push the
+        table sideways.
+
+        The offer cell carries what PADI states about its own offer -- the
+        booking deadline, "applicable to selected departures only" -- behind a
+        disclosure, and prose in a table cell is a width claim: in auto layout
+        what a cell holds is what asks for the column. `tbody td` is
+        `white-space:nowrap` for the departures table and reaches these cells
+        too, so the first cut left every condition on one unbroken line and
+        pushed 71px of the sales table off the right of the panel, on a page
+        that already scrolls sideways at phone widths and would have hidden it
+        there.
+
+        Measured on the shipped page, at every size, and asserting the guard
+        can still see what it is guarding: an offer with no conditions on it
+        makes this test green while checking nothing.
+        """
+        page = self.open(1440, 900, "#sale")
+        try:
+            for width, height in SIZES:
+                with self.subTest(size=(width, height)):
+                    self.sweep(page, width, height, "#sale")
+                    m = page.evaluate("""() => {
+                      const box = document.querySelector('#salePane .deals-scroll');
+                      const small = [...box.querySelectorAll('details.d-terms')];
+                      const wide = () => Math.round(box.scrollWidth);
+                      const shut = wide();
+                      small.forEach(d => { d.open = true; });
+                      const open = wide();
+                      // Against the table's own right edge, not the panel's:
+                      // this table already scrolls sideways at phone widths
+                      // and the offer column is off to the right of the box
+                      // there. What must not happen is a condition reaching
+                      // past the columns it sits in.
+                      const edge = box.querySelector('table')
+                        .getBoundingClientRect().right;
+                      const spill = [...box.querySelectorAll('.d-terms li')]
+                        .filter(li => li.getBoundingClientRect().right > edge + 1)
+                        .length;
+                      const tall = box.scrollHeight;
+                      small.forEach(d => { d.open = false; });
+                      return { n: small.length, shut: shut, open: open,
+                               spill: spill, tall: tall,
+                               shutTall: box.scrollHeight };
+                    }""")
+                    self.assertTrue(
+                        m["n"],
+                        "no offer on the shipped page states what the seller "
+                        "says about it, so this guard is checking nothing")
+                    self.assertLessEqual(
+                        m["open"], m["shut"],
+                        f"opening {m['n']} condition list(s) widened the sales "
+                        f"table by {m['open'] - m['shut']}px")
+                    self.assertEqual(
+                        m["spill"], 0,
+                        "a condition runs past the right edge of the panel")
+                    self.assertGreater(
+                        m["tall"], m["shutTall"],
+                        "opening the small print showed nothing")
+        finally:
+            page.close()
+
     def test_the_header_is_the_same_height_on_every_view(self) -> None:
         """Switching view must not move the page under the rail.
 

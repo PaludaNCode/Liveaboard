@@ -569,6 +569,30 @@ Break these and the site starts lying quietly rather than failing loudly.
   per count, and the vessels PADI advertises that no boat here joins to are
   still *named* — a count cannot tell a Caribbean boat from an unpaired
   Egyptian one, which is the whole reason the query asks for the USA.
+  **The offer carries what the seller says about it, and the section says
+  where it came from.** PADI's `promotion.description` is the only markup on
+  that listing and the only place an offer states its own conditions — a
+  booking deadline, *"applicable to selected departures only"* — on 9 of the 9
+  it publishes here; a rate printed without them is printed more confidently
+  than the seller printed it, which is this site's complaint about the pages it
+  reads. Verbatim, one entry per paragraph (`deal["terms"]`), behind a
+  disclosure in the Offer cell rather than a `title`, because a tooltip is the
+  one thing a phone cannot open (#150) — and **wrapped**, since `tbody td` is
+  `white-space:nowrap` for the departures table and reaches these cells too,
+  which put 71px of the sales table off the right of the panel until it was
+  measured. Nothing reads a date out of that prose: `dateFrom`/`dateTo` are one
+  exemplar sailing and the row says so, and filling the missing window from
+  *"before till the end of Sep, 2026"* would invent the field rather than
+  report it. A newly parsed condition is **not** a change either — the change
+  log compares terms only where both readings state some, or the morning this
+  shipped every offer in the book would have reported one.
+  The link out is `deals.listing`, a constant in
+  `scrape/padi_com.py` rather than a URL typed into `app.js` — where
+  `ALLOWED_EXTERNAL` would refuse it, and rightly: one place for it to be
+  right. It **names PADI**, because a link that does not name the seller it
+  opens is #139, and it names liveaboard.com in the same line for publishing no
+  listing at all, which is a fact about the two disclosures and not this page
+  preferring a seller.
   A `read` list is **parallel to its `sellers` list and keeps its holes**:
   `None` for a seller with no reading date rather than a shorter list, because
   the two are read in lockstep and dropping an entry shifts every date after it

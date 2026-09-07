@@ -1320,9 +1320,14 @@ def _name_the_runs(
                 continue
             if not (offer["start"] and run["first"] <= offer["start"] <= run["last"]):
                 continue
-            run.setdefault("offers", []).append(
-                {"title": offer.get("title"), "url": offer.get("url")}
-            )
+            # The conditions travel with the name, because they are conditions
+            # on it: a run row states a rate over a window and PADI's campaign
+            # says which bookings and which departures it is good for. Split
+            # from its name, either half misleads.
+            named: dict[str, Any] = {"title": offer.get("title"), "url": offer.get("url")}
+            if offer.get("terms"):
+                named["terms"] = offer["terms"]
+            run.setdefault("offers", []).append(named)
             offer["in_run"] = True
             break
 
@@ -1633,6 +1638,13 @@ def _deal_row(
     }
     if nights:
         row["nights"] = nights
+    # PADI's own conditions on the offer, verbatim, one entry per paragraph --
+    # the booking deadline and the "selected departures only" that no other
+    # field on this listing states. Carried rather than summarised, and absent
+    # rather than null: a reading taken before the parser could see them says
+    # nothing about them, and the page draws what is there.
+    if deal.get("terms"):
+        row["terms"] = list(deal["terms"])
     return row
 
 
@@ -1654,6 +1666,13 @@ def _deal_change(before: Mapping[str, Any], after: Mapping[str, Any]) -> list[st
         moved.append("discount")
     if (before.get("start"), before.get("end")) != (after.get("start"), after.get("end")):
         moved.append("sailing")
+    # Only where both readings state one. A field the parser learned to read
+    # yesterday has not changed -- it was not being looked at -- and reporting
+    # that as a move is the false positive `changes` already refuses four times
+    # over. A description that disappears is the same silence from the source.
+    if (before.get("terms") and after.get("terms")
+            and before["terms"] != after["terms"]):
+        moved.append("conditions")
     return moved
 
 
@@ -1723,10 +1742,18 @@ def _deals_block(
         }
     )
 
+    from .scrape.padi_com import DEALS_PAGE
+
     block: dict[str, Any] = {
         "read": today,
         "source": "padi.com",
         "url": entry.get("url"),
+        # Where a reader goes, as opposed to where the fetcher went. `url` is
+        # the query this book was read from and answers JSON to nobody who is
+        # not a program; the listing is the page PADI publishes it on. A
+        # constant rather than a field of the book, so a checkout whose deals
+        # are a fortnight stale still has a working door.
+        "listing": DEALS_PAGE,
         "offers": rows,
         # Named, not counted. A number would say five vessels did not match;
         # the names are what let a reader notice that one of them is Egyptian.
