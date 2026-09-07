@@ -33,7 +33,7 @@ Everything below answers 200 over plain HTTP, no browser.
 | `/liveaboard/egypt/{vessel-slug}/` | Server-rendered. Vessel, fleet, JSON-LD `Product`, every itinerary title, PADI courses taught, spec table |
 | `/liveaboard/egypt/{vessel}/{itinerary-slug}/` | `<title>` and `<meta description>` per trip, server-rendered — and **nothing else**: the body is filled by XHR |
 | `/liveaboard-diving/egypt/` | Country landing page. Four featured vessels; the sitemap is the real inventory |
-| `/liveaboard-deals/?country=…&date=…` | **Nothing.** An AngularJS shell; see *The deals listing* below |
+| `/liveaboard-deals/?country=…&date=…` | **Nothing to a fetcher, everything to a visitor.** An AngularJS shell; see *The deals listing* below. The sale view links it for that reason |
 
 `tools/probe_padi_vessel.py --slug hammerhead-ii --boat hammerhead-ii` reads one
 vessel page and holds it against `data/egypt-2027.json`. `--cache DIR` makes
@@ -292,13 +292,42 @@ listing whose HTML lies about paging has no standing to be trusted about it.
 | `price` / `compareAtPrice` | The offer and what it is against |
 | `currency` | **Stated here**, unlike on `trips/`, where a bare number is in the vessel's own unit and the `Currency-code` header does not convert |
 | `dateFrom` / `dateTo` | One exemplar sailing, not the offer's validity |
-| `promotion` | `title`, `kind` (`PROMOTION_KIND`), `value`, `description` |
+| `promotion` | `title`, `kind` (`PROMOTION_KIND`), `value`, `description` — all four read; see *What an offer says about itself* |
 | `countryTitle` | Not read. See below |
 
 **One row per vessel per query**, quoting that vessel's earliest promoted
 sailing in the window. So the unit is a boat's offer, not a sailing's — which
 is why `promote` keys the change log on the vessel and reports a moved exemplar
 as a change rather than as a withdrawal and a new offer.
+
+#### What an offer says about itself
+
+Read 2026-09-07, over all 9 offers the season window returns.
+`promotion.description` is the **only field on this endpoint that arrives as
+markup**, and it is 9 of 9 — never absent, never empty. `<p>` blocks with
+`\r\n` inside them, `&nbsp;` and `&amp;` entities, and nothing else: no lists,
+no links, no attributes worth keeping.
+
+What it holds is the offer's own conditions, and they are stated **nowhere else
+in the payload**:
+
+| | |
+|---|---|
+| Serenity, *20% Early Bird* | "Valid for bookings made before 30 Sep, 2026" · "Other money saving specials and discounts do not apply" · "Applicable to selected departures only" |
+| MY Grand Discovery, *15% Early Bird* | "…Valid for all 2027 trips, excluding high season (September, October, and November 2027)." · "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II." |
+| Belize Aggressor III, *SAVE 25%* | "Explore the World weeks are not available for group charters." · "Only applies to specific weeks in schedule, please contact our Scuba & Travel Experts" |
+
+The booking deadline is the part worth naming. `dateFrom`/`dateTo` are one
+exemplar sailing and **not** the offer's validity — that is why the sale table
+says so on the row — and this prose is where a deadline appears instead. It
+stays prose: a closed-vocabulary parse over "before till the end of Sep, 2026"
+(ALSURAYA's own words, verbatim) is a date invented rather than read, and the
+missing field is reported rather than filled.
+
+Kept as a **list of paragraphs**, split on the block tags, tags stripped and
+entities unescaped — `_paragraphs` in `scrape/padi_com.py`, landing on
+`deal["terms"]`. Not one joined string: two of these paragraphs end in a full
+stop and one does not, so nothing could split them apart again afterwards.
 
 #### `country` is not where the boat sails, and this is where it costs most
 

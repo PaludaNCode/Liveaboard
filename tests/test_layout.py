@@ -431,6 +431,69 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         finally:
             page.close()
 
+    def test_the_small_print_costs_height_and_never_width(self) -> None:
+        """A seller's conditions may push the rows down. They may not push the
+        table sideways.
+
+        The offer cell carries what PADI states about its own offer -- the
+        booking deadline, "applicable to selected departures only" -- behind a
+        disclosure, and prose in a table cell is a width claim: in auto layout
+        what a cell holds is what asks for the column. `tbody td` is
+        `white-space:nowrap` for the departures table and reaches these cells
+        too, so the first cut left every condition on one unbroken line and
+        pushed 71px of the sales table off the right of the panel, on a page
+        that already scrolls sideways at phone widths and would have hidden it
+        there.
+
+        Measured on the shipped page, at every size, and asserting the guard
+        can still see what it is guarding: an offer with no conditions on it
+        makes this test green while checking nothing.
+        """
+        page = self.open(1440, 900, "#sale")
+        try:
+            for width, height in SIZES:
+                with self.subTest(size=(width, height)):
+                    self.sweep(page, width, height, "#sale")
+                    m = page.evaluate("""() => {
+                      const box = document.querySelector('#salePane .deals-scroll');
+                      const small = [...box.querySelectorAll('details.d-terms')];
+                      const wide = () => Math.round(box.scrollWidth);
+                      const shut = wide();
+                      small.forEach(d => { d.open = true; });
+                      const open = wide();
+                      // Against the table's own right edge, not the panel's:
+                      // this table already scrolls sideways at phone widths
+                      // and the offer column is off to the right of the box
+                      // there. What must not happen is a condition reaching
+                      // past the columns it sits in.
+                      const edge = box.querySelector('table')
+                        .getBoundingClientRect().right;
+                      const spill = [...box.querySelectorAll('.d-terms li')]
+                        .filter(li => li.getBoundingClientRect().right > edge + 1)
+                        .length;
+                      const tall = box.scrollHeight;
+                      small.forEach(d => { d.open = false; });
+                      return { n: small.length, shut: shut, open: open,
+                               spill: spill, tall: tall,
+                               shutTall: box.scrollHeight };
+                    }""")
+                    self.assertTrue(
+                        m["n"],
+                        "no offer on the shipped page states what the seller "
+                        "says about it, so this guard is checking nothing")
+                    self.assertLessEqual(
+                        m["open"], m["shut"],
+                        f"opening {m['n']} condition list(s) widened the sales "
+                        f"table by {m['open'] - m['shut']}px")
+                    self.assertEqual(
+                        m["spill"], 0,
+                        "a condition runs past the right edge of the panel")
+                    self.assertGreater(
+                        m["tall"], m["shutTall"],
+                        "opening the small print showed nothing")
+        finally:
+            page.close()
+
     def test_the_header_is_the_same_height_on_every_view(self) -> None:
         """Switching view must not move the page under the rail.
 
@@ -1887,6 +1950,78 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             self.assertFalse(
                 page.evaluate("()=>document.getElementById('berths').matches(':modal')"),
                 "the hover opened the ladder pinned rather than as a peek")
+        finally:
+            page.close()
+
+    def test_a_hovered_panel_does_not_cover_the_column_it_opened_from(self) -> None:
+        """The peek exists so a column can be read row by row. It blocked it.
+
+        `place()` opened the panel at the trigger's own `left` and hung it
+        *downwards* from the trigger's bottom edge, so it covered every row
+        below the one it came from — the next row's own trigger included, on
+        all 24 rows measured at 1712x864. Entering the panel deliberately
+        keeps it open, so running the pointer down Places to compare ladders
+        reached row two and stopped: the thing you opened is in the way of the
+        next one. #151 from the other side, on the two columns the peek is
+        for.
+
+        It cost the guard beside it thirty seconds of Playwright retries and
+        then a timeout on something it was not testing, which is how it was
+        found — so this asserts the placement directly rather than leaving the
+        next test to trip over it.
+
+        `elementFromPoint` over the *next* trigger's own centre, because that
+        is the thing a pointer travelling down the column has to reach. The
+        panel is also required to sit where `place()` says, which is beside
+        the row it describes and clamped into the window: a second bug had
+        `close`'s style reset landing after the next `place()`, wiping the
+        coordinates it had just written and leaving every panel after the
+        first at the top of the window. Asserted against the rule's own
+        clamped answer, because a tall ladder low in the window is *meant* to
+        be pushed up and a plain distance from the row would fail those six.
+        """
+        page = self.open(1712, 864)
+        try:
+            triggers = page.locator("#body .berths")
+            blocked, adrift = [], []
+            for n in range(24):
+                page.hover("#body .berths >> nth=%d" % n, timeout=5000)
+                page.wait_for_timeout(180)
+                seen = page.evaluate("""(n) => {
+                  const panel = document.getElementById('berths');
+                  if (!panel.open) return null;
+                  const all = document.querySelectorAll('#body .berths');
+                  const here = all[n].getBoundingClientRect();
+                  const next = all[n + 1] ? all[n + 1].getBoundingClientRect() : null;
+                  const hit = next ? document.elementFromPoint(
+                      Math.round(next.x + next.width / 2),
+                      Math.round(next.y + next.height / 2)) : null;
+                  /* Where the rule says it should be, clamped into the
+                     window exactly as `place()` clamps it -- a tall ladder low
+                     in the window has to be pushed up to fit, and that is the
+                     clamp working rather than the panel drifting. Comparing
+                     against the plain row top would call those a failure and
+                     miss the one that matters. */
+                  const pad = 8, h = panel.offsetHeight;
+                  const want = Math.min(Math.max(pad, here.top - 4),
+                                        window.innerHeight - h - pad);
+                  return {
+                    covers_next: !!(hit && panel.contains(hit)),
+                    off_its_row:
+                      Math.abs(panel.getBoundingClientRect().top - want) > 2,
+                  };
+                }""", n)
+                if seen is None:
+                    continue
+                if seen["covers_next"]:
+                    blocked.append(n)
+                if seen["off_its_row"]:
+                    adrift.append(n)
+            self.assertEqual([], blocked,
+                             "the open peek covers the next row's trigger, so "
+                             "the column cannot be read down")
+            self.assertEqual([], adrift,
+                             "the peek is not beside the row it describes")
         finally:
             page.close()
 

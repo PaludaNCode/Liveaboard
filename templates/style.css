@@ -1284,6 +1284,48 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .deals-coverage .cov { border-bottom:1px dotted var(--rule); cursor:help; }
 .deals-coverage .cov-sep { border:0; }
 
+/* Where the offers came from, and the door back to it. One muted line above
+   the table, the same weight as the coverage counts beside it: it is
+   provenance and an exit, not a claim competing with the rows. */
+.deals-source {
+  margin:0 0 8px; font-size:11px; color:var(--ink-faint); max-width:80ch;
+  line-height:1.6;
+}
+
+/* One campaign per block, because each carries its own conditions under it. */
+.deals-table .d-named + .d-named { margin-top:7px; }
+
+/* The seller's small print, closed until asked for.
+
+   It pushes the rows below it down when it opens, which is exactly what got
+   the fee bill moved out of the departures table and into a dialog (#149) --
+   and the two are not the same case. That was a per-row `+` column spending
+   26px of pinned width on all 1,122 rows to answer a question about one. This
+   costs nothing closed, adds no column, and sits in a 22-row overview a
+   reader is already scrolling. A dialog for it would be the fourth panel
+   CLAUDE.md says not to build.
+
+   Capped in `ch`, and told to wrap, so opening one cannot hand the Offer
+   column half the table: in auto layout a cell's content is what asks for the
+   width. Both halves are needed and the second is the one that bites --
+   `tbody td` is `white-space:nowrap` for the departures table and reaches
+   these cells too, so the cap alone left every condition on one unbroken line
+   and 71px of the sales table off the right of the panel. Measured, because a
+   stylesheet inherited across two tables is not a thing to read and believe:
+   `test_the_small_print_costs_height_and_never_width` opens them all and
+   compares the table's own width with the panel's. */
+.deals-table .d-terms { margin-top:3px; font-size:11px; white-space:normal; }
+.deals-table .d-terms > summary {
+  cursor:pointer; color:var(--ink-faint);
+  font-family:var(--font-narrow); letter-spacing:.03em;
+}
+.deals-table .d-terms > summary:hover { color:var(--ink-dim); }
+.deals-table .d-terms ul {
+  margin:4px 0 0; padding-left:15px; max-width:34ch;
+  color:var(--ink-faint); line-height:1.5;
+}
+.deals-table .d-terms li { margin:0 0 3px; }
+
 /* The markdown, under the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows
    carry one — a loud treatment at that density is a page of shouting. */

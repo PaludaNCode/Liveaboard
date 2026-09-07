@@ -588,6 +588,30 @@ Break these and the site starts lying quietly rather than failing loudly.
   per count, and the vessels PADI advertises that no boat here joins to are
   still *named* — a count cannot tell a Caribbean boat from an unpaired
   Egyptian one, which is the whole reason the query asks for the USA.
+  **The offer carries what the seller says about it, and the section says
+  where it came from.** PADI's `promotion.description` is the only markup on
+  that listing and the only place an offer states its own conditions — a
+  booking deadline, *"applicable to selected departures only"* — on 9 of the 9
+  it publishes here; a rate printed without them is printed more confidently
+  than the seller printed it, which is this site's complaint about the pages it
+  reads. Verbatim, one entry per paragraph (`deal["terms"]`), behind a
+  disclosure in the Offer cell rather than a `title`, because a tooltip is the
+  one thing a phone cannot open (#150) — and **wrapped**, since `tbody td` is
+  `white-space:nowrap` for the departures table and reaches these cells too,
+  which put 71px of the sales table off the right of the panel until it was
+  measured. Nothing reads a date out of that prose: `dateFrom`/`dateTo` are one
+  exemplar sailing and the row says so, and filling the missing window from
+  *"before till the end of Sep, 2026"* would invent the field rather than
+  report it. A newly parsed condition is **not** a change either — the change
+  log compares terms only where both readings state some, or the morning this
+  shipped every offer in the book would have reported one.
+  The link out is `deals.listing`, a constant in
+  `scrape/padi_com.py` rather than a URL typed into `app.js` — where
+  `ALLOWED_EXTERNAL` would refuse it, and rightly: one place for it to be
+  right. It **names PADI**, because a link that does not name the seller it
+  opens is #139, and it names liveaboard.com in the same line for publishing no
+  listing at all, which is a fact about the two disclosures and not this page
+  preferring a seller.
   A `read` list is **parallel to its `sellers` list and keeps its holes**:
   `None` for a seller with no reading date rather than a shorter list, because
   the two are read in lockstep and dropping an entry shifts every date after it
@@ -642,6 +666,34 @@ Break these and the site starts lying quietly rather than failing loudly.
   *outcome* over three rounds — the list must not move at all under an open
   panel and must scroll exactly as before once it closes — rather than the
   property that delivers it.
+  **And it goes beside the trigger, never over its column.** `place()` opened
+  it at the trigger's own `left` and hung it downwards from the trigger's
+  bottom edge, so it covered every row below the one it came from — the next
+  row's trigger included, on all 24 rows measured at 1712×864. Entering the
+  panel deliberately keeps it open, so running the pointer down Places to
+  compare ladders reached row two and stopped: the thing you opened is in the
+  way of the next one, and the only route on is around it. **#151 from the
+  other side**, on the one column the peek still exists for. It goes to one
+  side now — left first, because Places sits in the money block on the right
+  of the table, and right where the left will not hold it — and lines up with
+  its own row rather than hanging below it.
+  **And `close` may not clear the placement either.** `close` is a task, so
+  moving the pointer from one trigger to the next — which closes the peek and
+  reopens it in one tick — landed `dialog.style.left = dialog.style.top = ""`
+  *after* the new `place()` and wiped the coordinates it had just written,
+  leaving every panel after the first at the top of the window. It sits behind
+  the same `if (dialog.open) return` guard as `lower()` now: the rule that no
+  bookkeeping may live in `close` had one field still ignoring it.
+  Neither had a test of its own, and that is how they ran for two days.
+  What showed was `test_a_cabin_ladder_fits_the_panel_it_opens_in` spending
+  thirty seconds in Playwright retries and then timing out on something it was
+  not testing — **`main` red, and read as a flake**, because a hover the
+  pointer cannot complete looks like one until somebody drives it. So
+  `test_a_hovered_panel_does_not_cover_the_column_it_opened_from` asserts the
+  placement itself: `elementFromPoint` over the *next* trigger's own centre,
+  and the panel's top against what `place()`'s own clamp says it should be —
+  never against a plain distance from the row, because a tall ladder low in
+  the window is meant to be pushed up and six of the 24 rows are.
   **The hover peek stays on the cabin ladder, and on nothing else.** A diver
   comparing ladders down the Places column wants them without a click each
   time, so a mouse there gets `show()` anchored to the trigger, and `:modal`

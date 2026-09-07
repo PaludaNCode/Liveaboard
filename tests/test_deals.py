@@ -38,7 +38,7 @@ from fetch_deals import prune, season_months  # noqa: E402
 from liveaboard.dataset import Dataset  # noqa: E402
 from liveaboard.promote import promote  # noqa: E402
 from liveaboard.render import build_payload  # noqa: E402
-from liveaboard.scrape.padi_com import DEAL_COUNTRIES, PadiComAdapter  # noqa: E402
+from liveaboard.scrape.padi_com import DEAL_COUNTRIES, DEALS_PAGE, PadiComAdapter  # noqa: E402
 
 from test_promote import SEASON, candidate, departure  # noqa: E402
 
@@ -55,6 +55,7 @@ def raw(
     kind: int = 20,
     value: float = 15.0,
     shop: str = "Hammerhead II",
+    description: str = "<p>x</p>",
     **extra,
 ) -> dict:
     """One row of the promotions listing, shaped as PADI publishes it."""
@@ -68,7 +69,8 @@ def raw(
         "currency": currency,
         "dateFrom": f"{start}T00:00:00Z",
         "dateTo": f"{end}T00:00:00Z",
-        "promotion": {"title": title, "kind": kind, "value": value, "description": "<p>x</p>"},
+        "promotion": {"title": title, "kind": kind, "value": value,
+                      "description": description},
     }
     payload.update(extra)
     return payload
@@ -314,6 +316,93 @@ class TestPlacingADeal(unittest.TestCase):
                                           padi=PADI, deals=book({})))
 
 
+TERMS_MARKUP = (
+    "<p>Valid for bookings made before 30 Sep, 2026\r\n</p>"
+    "<p>Other money saving specials &amp; discounts do not apply&nbsp;</p>"
+    "<p>Applicable to selected departures only</p>"
+)
+
+TERMS = [
+    "Valid for bookings made before 30 Sep, 2026",
+    "Other money saving specials & discounts do not apply",
+    "Applicable to selected departures only",
+]
+
+
+class TestTheConditionsOnAnOffer(unittest.TestCase):
+    """PADI states what its own offer is good for, and nothing else does.
+
+    `promotion.description` is the only field on this listing that arrives as
+    markup, and it carries the two things a rate on its own is quoted without:
+    a booking deadline -- *"before 30 Sep, 2026"* -- and *"applicable to
+    selected departures only"*. Read on 9 of the 9 offers in the published
+    season. A discount printed without them is printed more confidently than
+    the seller printed it, which is this project's complaint about the pages it
+    reads and not a licence to repeat it.
+
+    Verbatim, split at the source's own paragraph boundaries, and interpreted
+    nowhere. The deadline in particular stays a sentence: PADI publishes no
+    validity window on an offer -- `dateFrom` and `dateTo` are one exemplar
+    sailing, which the table says out loud -- and reading a date out of prose
+    to fill that hole would be inventing the missing field rather than
+    reporting it.
+    """
+
+    def _terms(self, markup):
+        return PadiComAdapter.deal_from_payload(raw(description=markup))["terms"]
+
+    def test_each_paragraph_is_kept_as_its_own_condition(self):
+        self.assertEqual(self._terms(TERMS_MARKUP), TERMS)
+
+    def test_a_line_break_ends_a_condition_the_way_a_paragraph_does(self):
+        """Three conditions welded into one sentence is one a reader skips."""
+        self.assertEqual(self._terms("<p>One<br>Two</p>"), ["One", "Two"])
+
+    def test_markup_that_says_nothing_states_nothing(self):
+        for empty in ("<p>\r\n</p><p>&nbsp;</p>", "", None):
+            with self.subTest(markup=empty):
+                self.assertIsNone(self._terms(empty))
+
+    def test_they_travel_with_the_offer_to_the_page(self):
+        payload = promoted({"2026-08-29": day([deal(description=TERMS_MARKUP)])})
+        self.assertEqual(payload["deals"]["offers"][0]["terms"], TERMS)
+
+    def test_an_offer_that_states_none_carries_no_field(self):
+        """Absent rather than null: a reading taken before the parser could see
+        these says nothing about them, which is not the same as an offer with
+        no conditions on it."""
+        payload = promoted({"2026-08-29": day([deal(description="")])})
+        self.assertNotIn("terms", payload["deals"]["offers"][0])
+
+
+class TestTheDoorBackToTheListing(unittest.TestCase):
+    """The page a person browses, beside the query this reads.
+
+    `/liveaboard-deals/` is an AngularJS shell: 272 KB of chrome and not one
+    price to a fetcher, every price to a visitor, because their browser runs
+    the bundle ours cannot. So the offers come off the endpoint behind it and
+    the link goes to the page. The two are the same listing and only one of
+    them is for a person.
+    """
+
+    def test_the_panel_names_the_page_a_visitor_can_open(self):
+        block = promoted({"2026-08-29": day([deal()])})["deals"]
+        self.assertEqual(block["listing"], DEALS_PAGE)
+
+    def test_it_is_not_the_query_the_fetcher_read(self):
+        """`url` answers JSON to nobody who is not a program."""
+        block = promoted({"2026-08-29": day([deal()])})["deals"]
+        self.assertNotEqual(block["listing"], block["url"])
+        self.assertNotIn("/api/", block["listing"])
+
+    def test_a_stale_book_still_has_a_working_door(self):
+        """It is a constant and not a field of the reading, so a checkout whose
+        deals are a fortnight old still links somewhere."""
+        entry = day([deal()])
+        entry.pop("url")
+        self.assertEqual(promoted({"2026-08-29": entry})["deals"]["listing"], DEALS_PAGE)
+
+
 class TestTheChangeLog(unittest.TestCase):
     def _changes(self, before, after, **kwargs):
         payload = promoted({
@@ -352,6 +441,21 @@ class TestTheChangeLog(unittest.TestCase):
         moved = self._changes([deal()], [deal()])
         self.assertEqual((moved["new"], moved["withdrawn"], moved["changed"]), ([], [], []))
 
+    def test_a_condition_the_seller_rewrote_is_a_change(self):
+        """A booking deadline that moves is news, and it moves in prose."""
+        moved = self._changes([deal(description="<p>Book before 30 Sep</p>")],
+                              [deal(description="<p>Book before 31 Oct</p>")])
+        self.assertEqual(moved["changed"][0]["moved"], ["conditions"])
+        self.assertEqual(moved["changed"][0]["after"]["terms"], ["Book before 31 Oct"])
+
+    def test_a_condition_read_for_the_first_time_has_not_changed(self):
+        """The false positive `changes` already refuses four times over: a
+        field the parser learned to read yesterday was not being looked at the
+        day before, so the offer did not move -- we did. Every offer in the
+        book would otherwise report one the morning this shipped."""
+        moved = self._changes([deal(description="")], [deal(description=TERMS_MARKUP)])
+        self.assertEqual(moved["changed"], [])
+
     def test_a_truncated_reading_yields_no_withdrawals(self):
         """A listing nobody finished knows nothing about what it did not reach.
 
@@ -382,6 +486,15 @@ class TestItReachesThePage(unittest.TestCase):
         page_payload = self._payload()
         self.assertEqual(len(page_payload["deals"]["offers"]), 1)
         self.assertEqual(page_payload["deals"]["read"], "2026-08-29")
+
+    def test_the_conditions_and_the_door_ship_with_it(self):
+        """Both are drawn in the browser and neither is fetched there. The
+        link in particular is the dataset's -- typing the URL into `app.js`
+        would be a second place for it to be right, and `ALLOWED_EXTERNAL`
+        would refuse the page for reaching a host it can see spelled out."""
+        page_payload = self._payload()
+        self.assertEqual(page_payload["deals"]["offers"][0]["terms"], ["x"])
+        self.assertEqual(page_payload["deals"]["listing"], DEALS_PAGE)
 
     def test_a_dataset_with_no_deals_ships_no_key(self):
         """Page weight is load-bearing, and an empty key is a claim."""
@@ -771,6 +884,13 @@ class TestAnOfferThatOnlyNamesARun(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual([o["title"] for o in rows[0]["offers"]], ["Save 10%"])
         self.assertTrue(rows[0]["offers"][0]["url"])
+
+    def test_the_conditions_are_folded_with_the_name_they_belong_to(self):
+        """A run row states a rate over a window; PADI's campaign says which
+        bookings and which departures it is good for. Fold the name and drop
+        the conditions and the row claims the wider offer."""
+        payload = self._promoted(offer_kwargs={"description": TERMS_MARKUP})
+        self.assertEqual(self._rows(payload)[0]["offers"][0]["terms"], TERMS)
 
     def test_the_offer_is_marked_rather_than_deleted(self):
         """The deals book keeps everything it read: the day-to-day diff above

@@ -139,6 +139,22 @@ One row per vessel per query, quoting the vessel's earliest promoted sailing in
 the window. So a boat's deal is the unit, not a sailing's.
 """
 
+DEALS_PAGE = f"https://{HOST}/liveaboard-deals/"
+"""The listing a person browses, as opposed to the one this reads.
+
+Unparseable and linked anyway, which is the whole of the distinction: the shell
+carries no prices for a fetcher and every price for a reader, because the
+browser runs the bundle this cannot. So the page states where these offers were
+read from and hands the visitor the door -- PADI's own listing, named as PADI's.
+
+There is no counterpart to put beside it. liveaboard.com's `/liveaboard-deals`
+is the same path and is SEO prose: zero offers, zero prices, and campaign pages
+whose only discount text is *"Up to 30% OFF"* over a region card. Its markdowns
+are on the booking pages instead, which is why this site reads them there --
+and why one seller having a listing here is a fact about the two disclosures
+rather than this page preferring a seller.
+"""
+
 DEAL_COUNTRIES: tuple[int, ...] = (110, 120)
 """The countries the deals query asks for: 110 is the USA, 120 is Egypt.
 
@@ -401,6 +417,46 @@ def _number(raw: str | None) -> float | None:
         return float(raw.replace(",", "").rstrip("."))
     except ValueError:
         return None
+
+
+TAG = re.compile(r"<[^>]+>")
+
+BLOCK_END = re.compile(r"</p\s*>|<br\s*/?>|</li\s*>|</div\s*>", re.IGNORECASE)
+"""Where one of PADI's paragraphs ends and the next begins.
+
+A promotion's `description` is the only field on this endpoint that arrives as
+markup, and it arrives as `<p>` blocks: *"Valid for bookings made before 30 Sep,
+2026"*, *"Other money saving specials and discounts do not apply"*, *"Applicable
+to selected departures only"*. Stripping the tags without splitting on them
+would run three separate conditions into one sentence, and a condition welded to
+the next one is a condition a reader skips.
+"""
+
+
+def _paragraphs(markup: object) -> list[str]:
+    """PADI's markup as the words in it, one entry per block.
+
+    A list rather than a joined string, for the reason this project keeps
+    saying: where a source hands you several facts, keep several fields. A
+    parser splitting them apart again later is a guess wearing a parser's
+    clothes, and these paragraphs contain the full stops it would have to guess
+    on.
+
+    Nothing is interpreted. *"Valid for bookings made before 30 Sep, 2026"* is a
+    booking deadline the offer states nowhere else, and it stays a sentence: an
+    offer's validity is a field this endpoint does not publish -- `dateFrom` and
+    `dateTo` are one exemplar sailing -- and reading a date out of prose to fill
+    that hole would be inventing the very field whose absence the sale table
+    says out loud.
+    """
+    if not isinstance(markup, str) or not markup.strip():
+        return []
+    said: list[str] = []
+    for block in BLOCK_END.split(markup):
+        words = " ".join(unescape(TAG.sub(" ", block)).split())
+        if words:
+            said.append(words)
+    return said
 
 
 INCLUDED_FIELD = "whatsIncludedNew"
@@ -903,6 +959,15 @@ class PadiComAdapter(SourceAdapter):
             "kind": kind if isinstance(kind, int) else None,
             "kind_label": PROMOTION_KIND.get(kind) if isinstance(kind, int) else None,
             "value": offer.get("value") if isinstance(offer.get("value"), (int, float)) else None,
+            # The conditions PADI prints under the offer on its own deals page,
+            # and the only place it says them: "valid for bookings made before
+            # 30 Sep, 2026", "applicable to selected departures only". A rate
+            # with those unsaid is a rate quoted more confidently than the
+            # seller quoted it. Verbatim, one entry per paragraph, and read on
+            # 9 of the 9 offers in the published season. Named for what they
+            # are, like `was` for `compareAtPrice` and `start` for `dateFrom`:
+            # nothing in this book wears the payload's spelling.
+            "terms": _paragraphs(offer.get("description")) or None,
             "price": float(price),
             "was": float(was),
             "currency": currency.strip(),

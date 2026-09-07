@@ -2736,7 +2736,8 @@
            of its prices by the other would print a discount PADI never
            claimed. */
         off: o.kind === "Discount %" && o.value ? o.value + "% off" : offerSaving(o),
-        names: o.title ? [{ title: o.title, url: o.url || null }] : [],
+        names: o.title
+          ? [{ title: o.title, url: o.url || null, terms: o.terms || null }] : [],
         sellers: [1], read: [deals.read], of: null,
         /* One sailing, and it must not read as a window. PADI publishes no
            validity dates with an offer -- only the sailing it advertises it
@@ -2787,6 +2788,35 @@
     return box;
   }
 
+  /* The conditions the seller puts on its own offer, in its own words.
+   *
+     PADI prints these under the deal on its listing and states them nowhere
+     else in the payload: *"Valid for bookings made before 30 Sep, 2026"*,
+     *"Applicable to selected departures only"*, *"Other money saving specials
+     and discounts do not apply"*. A rate printed without them is quoted more
+     confidently than the seller quoted it -- which is this site's own
+     complaint about the pages it reads, so it may not commit it here.
+
+     Behind a disclosure, and only that far. Three conditions on every named
+     row is twenty lines of small print in a six-column table, and the row a
+     reader came for is the rate; one tap opens it on a phone as on a laptop,
+     which a hover would not. Not a `title`: a tooltip is the one place a
+     phone cannot follow (#150), and these are the offer's terms rather than a
+     gloss on them.
+
+     Verbatim and unsummarised, because the summary is the part that could be
+     wrong. Nothing here reads a date out of "before 30 Sep, 2026" to fill the
+     validity window PADI does not publish -- that hole is stated on the row
+     itself, and filling it from prose would be inventing the field. */
+  function offerTerms(said) {
+    var box = el("details", "d-terms");
+    box.appendChild(el("summary", null, "What PADI says about it"));
+    var list = el("ul", null);
+    said.forEach(function (line) { list.appendChild(el("li", null, line)); });
+    box.appendChild(list);
+    return box;
+  }
+
   function salesTable(rows) {
     var table = el("table", "deals-table");
     var head = document.createElement("thead");
@@ -2826,20 +2856,29 @@
       if (r.names.length) {
         /* Verbatim, and one per name: a run can carry more than one, the
            campaign is PADI's, and nothing here decides that two names for it
-           are really one. */
-        r.names.forEach(function (named, n) {
-          if (n) offer.appendChild(document.createTextNode(", "));
-          if (!named.url) {
-            offer.appendChild(document.createTextNode(named.title));
-            return;
+           are really one.
+
+           A block each rather than a comma list, because a name now carries
+           the conditions PADI publishes under it and a condition belongs to
+           one campaign. With the single name almost every row has, the two
+           read the same. */
+        r.names.forEach(function (named) {
+          var block = el("div", "d-named");
+          if (named.url) {
+            var a = document.createElement("a");
+            a.href = named.url;
+            a.rel = "noopener";
+            a.target = "_blank";
+            a.textContent = named.title;
+            a.title = "The PADI Travel page this offer was read from";
+            block.appendChild(a);
+          } else {
+            block.appendChild(document.createTextNode(named.title));
           }
-          var a = document.createElement("a");
-          a.href = named.url;
-          a.rel = "noopener";
-          a.target = "_blank";
-          a.textContent = named.title;
-          a.title = "The PADI Travel page this offer was read from";
-          offer.appendChild(a);
+          if (named.terms && named.terms.length) {
+            block.appendChild(offerTerms(named.terms));
+          }
+          offer.appendChild(block);
         });
       } else {
         /* Nothing invented where there is no name: calling this "sale" would
@@ -3344,6 +3383,42 @@
     return line;
   }
 
+  /* Where these came from, and the door back to it.
+   *
+     A reader who wants to book one of these has to leave, and the page they
+     have to reach is the one this file cannot read: `/liveaboard-deals/` is an
+     AngularJS shell that serves a fetcher 272 KB of chrome and a visitor every
+     price on it, because their browser runs the bundle ours does not. So the
+     offers come off the endpoint behind it and the link goes to the page --
+     the two are the same listing, and only one of them is for a person.
+
+     The link is `deals.listing`, from the dataset, and typing the URL here
+     instead would be a second place for it to be right. Naming PADI is not
+     optional either: a bare "the deals listing" hands a visitor to a seller
+     the page never named, which is exactly what the Seller column's "listing"
+     did before #139.
+
+     The other seller is named in the same breath, because the absence is a
+     fact about what it publishes rather than about which seller this site
+     favours. liveaboard.com's `/liveaboard-deals` is the same path and is SEO
+     prose with no offer on it; its markdowns are struck through on the booking
+     pages, which is where this site reads them. */
+  function sourceLine(deals) {
+    if (!deals.listing) return null;
+    var line = el("p", "deals-source");
+    line.appendChild(document.createTextNode("PADI's offers are read from its "));
+    var a = document.createElement("a");
+    a.href = deals.listing;
+    a.rel = "noopener";
+    a.target = "_blank";
+    a.textContent = "deals listing";
+    line.appendChild(a);
+    line.appendChild(document.createTextNode(
+      ", daily. liveaboard.com publishes no listing, so its markdowns are read " +
+      "off the booking pages one at a time."));
+    return line;
+  }
+
   /* The vessels PADI advertises that no boat here joins to are *not* drawn.
    *
      They are still named, and naming them is still the point: the query asks
@@ -3510,6 +3585,8 @@
     var sales = salesRows();
     if (sales.length) {
       body.appendChild(el("h4", null, "The sales"));
+      var source = sourceLine(deals);
+      if (source) body.appendChild(source);
       var note = deals.coverage ? coverageNote(deals.coverage) : null;
       if (note) body.appendChild(note);
       body.appendChild(salesTable(sales));
@@ -3876,13 +3953,35 @@
        that still does arithmetic. Flips above where there is no room below and
        is clamped to the viewport, which is a desktop-only concern now -- a
        phone opens nothing but the sheet. */
+    /* BESIDE THE TRIGGER, NEVER OVER ITS COLUMN.
+     *
+     * The peek used to open at the trigger's own `left` and hang *downwards*
+     * from its bottom edge, which put it over every row below the one it was
+     * opened from -- including the next row's own trigger, on all 24 rows
+     * measured. Entering the panel deliberately keeps it open, so running the
+     * pointer down the Places column to compare ladders reached row two and
+     * then stopped: the thing you opened is in the way of the next one, and
+     * the only route on is around it. That is #151 again from the other side,
+     * and reading that column row by row without a click each time is the
+     * whole and only reason the peek still exists.
+     *
+     * So the panel goes to one side of the trigger and the column it sits in
+     * stays clear. Left first, because Places sits in the money block on the
+     * right of the table; right where the left will not hold it. Vertically
+     * it lines up with the trigger's own row rather than below it, so the
+     * ladder and the row it belongs to read as one thing.
+     *
+     * `test_a_hovered_panel_does_not_cover_the_column_it_opened_from` measures
+     * every row it can reach, because the failure was invisible to a source
+     * string and cost the guard beside it 30 seconds of Playwright retries
+     * before it timed out on something it was not testing. */
     function place(trigger) {
       var box = trigger.getBoundingClientRect();
       var w = dialog.offsetWidth, h = dialog.offsetHeight, pad = 8;
-      var below = window.innerHeight - box.bottom;
-      var top = below > h + pad || below > box.top ? box.bottom + 4 : box.top - h - 4;
+      var left = box.left - w - pad >= pad ? box.left - w - pad : box.right + pad;
+      var top = box.top - 4;
       dialog.style.left =
-        Math.round(Math.min(Math.max(pad, box.left), window.innerWidth - w - pad)) + "px";
+        Math.round(Math.min(Math.max(pad, left), window.innerWidth - w - pad)) + "px";
       dialog.style.top =
         Math.round(Math.min(Math.max(pad, top), window.innerHeight - h - pad)) + "px";
     }
@@ -3917,7 +4016,15 @@
        tidies only if nothing has reopened the dialog by the time it lands. */
     dialog.addEventListener("cancel", lower);
     dialog.addEventListener("close", function () {
-      if (!dialog.open) lower();
+      if (dialog.open) return;
+      lower();
+      /* Behind the same guard as `lower`, and for the same reason: `close` is
+         a task, so moving the pointer from one row's trigger to the next --
+         which closes the peek and opens it again in one tick -- landed this
+         reset *after* the new `place()` and wiped the coordinates it had just
+         written. The panel then fell back to the stylesheet and sat at the top
+         of the window instead of beside the row it describes, on every row
+         after the first. */
       dialog.style.left = dialog.style.top = "";
     });
     dialog.querySelector(".pshut").addEventListener("click", shut);
