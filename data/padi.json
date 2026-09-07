@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-06",
+ "collected": "2026-09-07",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -5398,6 +5398,102 @@
    },
    "title": "Dahab Sinai (Hurghada - Hurghada) 7 Nights"
   },
+  "avo::Dolphins Fury Shoals (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "marsa shouna",
+    "sataya",
+    "sataya reef",
+    "fury shoals"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 200.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Dolphins Fury Shoals (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 22928,
+   "padi_slug": "saint-john-s-port-ghalib-port-ghalib-7-nights",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "Dolphins Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
   "avo::North Tiran (Hurghada - Hurghada)": {
    "boat": "avo",
    "boat_name": "MY AVO",
@@ -5802,10 +5898,11 @@
    "boat": "bella-2",
    "boat_name": "Bella 2",
    "dive_sites": [
-    "ras mohammed",
-    "tiran"
+    "dahab",
+    "tiran",
+    "ras mohammed"
    ],
-   "dives": 9,
+   "dives": 12,
    "fees": {
     "complete": true,
     "lines": [
@@ -5851,9 +5948,9 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "nitrox",
-      "note": "Nitrox",
-      "tier": "conditional"
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
      },
      {
       "amount": {
@@ -5871,16 +5968,9 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "tank_15l",
-      "note": "15 liter tanks",
-      "tier": "optional"
-     },
-     {
-      "basis": "per_trip",
-      "code": "fuel_surcharge",
-      "included": true,
-      "note": "Fuel surcharges",
-      "tier": "mandatory"
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
      },
      {
       "basis": "per_trip",
@@ -5888,14 +5978,21 @@
       "included": true,
       "note": "Harbour fees",
       "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
    },
    "name": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)",
-   "nights": 3,
-   "padi_id": 16474,
-   "padi_slug": "dahab-tiran-sharm-el-sheikh-sharm-el-sheik-4-nig-2",
+   "nights": 4,
+   "padi_id": 16472,
+   "padi_slug": "dahab-tiran-sharm-el-sheikh-sharm-el-sheik-4-night",
    "port_from": "Sharm El Sheikh",
    "port_to": "Sharm El Sheikh",
    "requirements": {
@@ -5903,7 +6000,7 @@
     "min_logged_dives": 20,
     "recommended_logged_dives": 20
    },
-   "title": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik) 3 nights"
+   "title": "Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik) 4 nights"
   },
   "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "bella-2",
@@ -21476,6 +21573,99 @@
     "recommended_logged_dives": 20
    },
    "title": "Deep North Dahab (Sharm El Sheikh - Sharm El Sheikh) 7 Nights"
+  },
+  "eriny::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
+   "boat": "eriny",
+   "boat_name": "Eriny",
+   "dive_sites": [
+    "thistlegorm",
+    "ras mohammed"
+   ],
+   "dives": 9,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 10.0,
+       "currency": "EUR"
+      },
+      "basis": "per_person_per_day",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 5.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "coast_guard",
+      "note": "Cost Gard Fee",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 70.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+   "nights": 3,
+   "padi_id": 21612,
+   "padi_slug": "ras-mohammed-thistlegorm-sharm-el-sheikh-sharm-el",
+   "port_from": "Sharm El Sheikh",
+   "port_to": "Sharm El Sheikh",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 20,
+    "recommended_logged_dives": 20
+   },
+   "title": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 Nights"
   },
   "eriny::Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)": {
    "boat": "eriny",
@@ -42908,12 +43098,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 61,
-    "first": "2026-09-07",
+    "dated": 60,
+    "first": "2026-09-14",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 61,
+    "read": 60,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -42931,12 +43121,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 60,
-    "first": "2026-09-07",
+    "dated": 59,
+    "first": "2026-09-14",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 60,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -42976,9 +43166,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-07",
+    "first": "2026-09-12",
     "in_season": 31,
-    "last": "2027-10-21",
+    "last": "2027-10-25",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -42998,12 +43188,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 86,
-    "first": "2026-09-07",
+    "dated": 85,
+    "first": "2026-09-11",
     "in_season": 29,
     "last": "2027-09-03",
     "priced": 28,
-    "read": 86,
+    "read": 85,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -43090,12 +43280,12 @@
    "name": "MY Ashrafi",
    "operator": null,
    "sailings": {
-    "dated": 17,
-    "first": "2026-09-07",
+    "dated": 16,
+    "first": "2026-09-12",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 17,
+    "read": 16,
     "unpriced": 0
    },
    "slug": "my-ashrafi",
@@ -43116,9 +43306,9 @@
     "first": "2026-09-12",
     "in_season": 18,
     "last": "2027-12-25",
-    "priced": 1,
+    "priced": 5,
     "read": 62,
-    "unpriced": 53
+    "unpriced": 38
    },
    "slug": "my-avo",
    "specs": {
@@ -43134,12 +43324,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 96,
-    "first": "2026-09-13",
+    "dated": 95,
+    "first": "2026-09-14",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 96,
+    "read": 95,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -43157,12 +43347,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 78,
+    "dated": 75,
     "first": "2026-09-10",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 20,
-    "read": 78,
+    "read": 75,
     "unpriced": 26
    },
    "slug": "bella-3",
@@ -43543,12 +43733,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 57,
+    "dated": 59,
     "first": "2026-09-12",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 57,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "eriny",
@@ -43655,12 +43845,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-07",
+    "dated": 63,
+    "first": "2026-09-14",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 64,
+    "read": 63,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -43677,12 +43867,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-07",
+    "dated": 63,
+    "first": "2026-09-14",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 64,
+    "read": 63,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -43806,12 +43996,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 29,
-    "first": "2026-09-07",
+    "dated": 28,
+    "first": "2026-09-17",
     "in_season": 10,
     "last": "2027-10-14",
     "priced": 7,
-    "read": 29,
+    "read": 28,
     "unpriced": 7
    },
    "slug": "my-independence-ii",
@@ -44233,13 +44423,13 @@
    "name": "Topaz",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 64,
+    "dated": 66,
     "first": "2026-09-12",
     "in_season": 18,
-    "last": "2028-01-01",
+    "last": "2028-09-09",
     "priced": 17,
-    "read": 64,
-    "unpriced": 26
+    "read": 66,
+    "unpriced": 28
    },
    "slug": "topaz",
    "specs": {
