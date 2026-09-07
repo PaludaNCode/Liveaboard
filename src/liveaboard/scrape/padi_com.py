@@ -55,7 +55,7 @@ from urllib.parse import urlencode
 from .base import FetchResult, ScrapeError, ScrapeOutput, SourceAdapter
 from . import jsonld
 from ..taxonomy import DiverLevel, FeeBasis, FeeCode, FeeTier
-from .fees import _tier_for, classify_label, tier_for_inclusion
+from .fees import _tier_for, billed_on_purchases, classify_label, tier_for_inclusion
 from .vessel import MAX_GUESTS
 
 MAX_LENGTH_M = 200
@@ -1138,6 +1138,7 @@ class PadiComAdapter(SourceAdapter):
 
         lines: list[dict[str, object]] = []
         unreadable: list[str] = []
+        on_purchases: list[str] = []
         for field in MANDATORY_FIELDS:
             entries = detail.get(field)
             if not isinstance(entries, list):
@@ -1152,6 +1153,20 @@ class PadiComAdapter(SourceAdapter):
                 if not _in_season(entry, season):
                     continue
                 title = str(entry.get("title") or "").strip()
+                # A charge on the diver's own onboard spend is not part of the
+                # bill this site reassembles, whatever it is called. PADI files
+                # 34 of them here -- three GST and VAT titles, `price` and
+                # `extraValue` null on every one, because a diver who buys
+                # nothing pays nothing and there is no base to take a
+                # percentage of. Letting them reach `unreadable` kept 30 trips'
+                # books incomplete over a charge those trips do not carry, and
+                # `complete` is a verdict about what a diver cannot decline.
+                #
+                # Recorded rather than dropped, like every other absence here:
+                # a book that stops mentioning them is a book to look at.
+                if billed_on_purchases(title):
+                    on_purchases.append(title)
+                    continue
                 # `prose=False`: this is a field, not a line cut out of a page.
                 code = classify_label(title, prose=False) if title else None
                 basis = cls.basis_for(entry.get("payedPer"))
@@ -1168,7 +1183,20 @@ class PadiComAdapter(SourceAdapter):
                 # either.
                 line: dict[str, object] = {
                     "code": code.value,
-                    "tier": FeeTier.MANDATORY.value,
+                    # Mandatory because the field says so -- with one exception,
+                    # and it is about who pays rather than about who filed it.
+                    # A supervision fee is owed by "Level 1 divers and Level 2
+                    # divers beyond 20m", at a stated 9 a dive, so it is a
+                    # charge on some of the people aboard: counting it in every
+                    # total would bill the whole boat for it, and blocking the
+                    # bill on it (which is what declining the title did) is
+                    # worse still. Optional says both things at once -- the
+                    # line keeps its published figure, no total claims it, and
+                    # `complete` stays a verdict about the charges nobody can
+                    # decline.
+                    "tier": (FeeTier.OPTIONAL.value
+                             if code is FeeCode.GUIDED_DIVING
+                             else FeeTier.MANDATORY.value),
                     "basis": basis.value,
                     "note": title,
                 }
@@ -1194,7 +1222,9 @@ class PadiComAdapter(SourceAdapter):
         #
         # Read here, before anything optional is appended, and that ordering is
         # the whole of how `complete` stays a verdict about the mandatory bill.
-        priced = all("amount" in line for line in lines)
+        priced = all("amount" in line
+                     for line in lines
+                     if line["tier"] == FeeTier.MANDATORY.value)
 
         # The charges a diver *can* decline, on the source's own say-so. Read
         # after the mandatory ones and never mixed into that verdict: see
@@ -1289,6 +1319,9 @@ class PadiComAdapter(SourceAdapter):
             # book from 259 complete trips to none.
             "complete": not unreadable and priced,
             "unreadable": sorted(set(unreadable)),
+            # Named, never a count: an Egyptian boat's GST line and a charge
+            # this parser has stopped understanding look identical as a number.
+            **({"on_purchases": sorted(set(on_purchases))} if on_purchases else {}),
         }
 
     @classmethod
@@ -1462,11 +1495,9 @@ class PadiComAdapter(SourceAdapter):
         wrong in the one direction an operator would like. Both take the figure
         before the slash and drop what follows.
 
-        Deliberately not read here: **guests**. The strip has no such row and
-        neither does the rest of the page -- searched in full, every numeric
-        form of guests, divers, passengers, people and pax, zero hits. So a
-        boat with no guest count from liveaboard.com has none from PADI either,
-        and the honest output is the absence. See docs/sources/padi.com.md.
+        Not read here: **guests**. The strip has no such row -- but the page
+        does state it, in prose, and this docstring used to say otherwise. See
+        `description_from_page` below, which is where that correction lives.
         """
         pairs = re.findall(
             r"""<p[^>]*class=['"]o-title['"][^>]*>(.*?)</p>\s*"""
@@ -1519,6 +1550,45 @@ class PadiComAdapter(SourceAdapter):
         if nitrox:
             specs["nitrox_free"] = nitrox.upper() == "FREE"
         return {k: v for k, v in specs.items() if v is not None}
+
+    @staticmethod
+    def description_from_page(html: str) -> str | None:
+        """What the vessel page says about the boat, in its own words.
+
+        The operator's description, which is where PADI states a guest count.
+        `specs_from_page` above recorded the opposite as settled -- *"the strip
+        has no such row and neither does the rest of the page, searched in
+        full, zero hits"* -- and the search behind that sentence was of the
+        strip's own label/value pairs. The page was never read. MY Independence
+        II is the counter-example a reader found: the site printed *guests not
+        stated* for a boat whose PADI page says *"a 40-meter vessel designed
+        for just 20 guests"*.
+
+        A negative written down as settled is worse than one nobody wrote,
+        because it is the reason the next person does not look -- which is what
+        this method is here to undo, and why the wrong sentence is quoted
+        rather than deleted.
+
+        **Bounded to the description block, not the page.** The count reaches
+        `promote.guests_in_prose`, the same reader that has always taken this
+        figure out of liveaboard.com's vessel summary, and pointing a prose
+        pattern at a whole document lets a review, a nav label or another
+        boat's card answer a question about this hull. Probed over 50 mapped
+        vessels: the bounded read and a whole-page read return the same number
+        on every one of them, so the bound costs nothing and is the version
+        that stays true when the page grows a section.
+
+        Returned as text rather than a number so the vocabulary stays in one
+        place; a second copy of it would drift from the first.
+        """
+        match = re.search(
+            r"""<div[^>]+id=['"]description-text['"][^>]*>(.*?)</div>""",
+            html, re.S | re.I,
+        )
+        if not match:
+            return None
+        text = re.sub(r"<[^>]+>", " ", unescape(match.group(1)))
+        return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip() or None
 
     def _name(self, result: FetchResult) -> str | None:
         for node in jsonld.of_type(result.body, "Product", "TouristTrip", "Trip"):

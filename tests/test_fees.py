@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from liveaboard.models import FeeItem
 from liveaboard.scrape.base import FetchResult, PoliteFetcher
 from liveaboard.scrape.fees import (
+    billed_on_purchases,
     classify_label,
     extras_excerpt,
     normalise_disclosure,
@@ -104,6 +105,73 @@ class TestRealDisclosure(unittest.TestCase):
 
     def test_a_genuine_luxury_stays_optional(self):
         self.assertEqual(self.byc[FeeCode.PRIVATE_GUIDE].tier, FeeTier.OPTIONAL)
+
+
+class TestAChargeOnlySomeDiversPay(unittest.TestCase):
+    """Three titles PADI files as mandatory that are not the trip's cost.
+
+    Measured over the committed book on 2026-09-05, and each one is a fact
+    about *who* pays rather than about what the charge is called:
+
+    * **17 lines coded `nitrox` are a tank upgrade.** "Nitrox 15 liter tanks",
+      "15 LITER tank nitrox (only 12 liter is free of chanrge)", "15 liters
+      Nitrox" — the operator fills 12-litre tanks free and charges for
+      15-litre ones, so the nitrox toggle was pricing the tank as the gas on
+      15 itineraries and 48 sailings, against a vessel panel stating nitrox
+      included. liveaboard.com files the same charge under gear on 79 of 79
+      vessels, which is what settles that it is one charge and not two sellers
+      disagreeing.
+    * **34 are a tax on what the diver buys on board** — "14% GST (on onboard
+      purchases)", "15% Local GST", "14% Value Added Tax (VAT) (onboard
+      purchases)" — with `price` and `extraValue` both null on every one. A
+      diver who buys nothing pays nothing, and there is no base here to apply
+      a percentage to.
+    * **16 are a supervision fee for divers of a stated level**, at a stated
+      9 per dive. Real, priced, and owed by some divers and not others.
+
+    None of the three may sit at the mandatory tier: that tier is what the
+    Total counts and what `complete` is a verdict about, and it means *a
+    charge a diver cannot decline*.
+    """
+
+    def code(self, label):
+        return classify_label(label, prose=False)
+
+    def test_a_tank_size_is_the_tank_and_not_the_gas(self):
+        for label in ("Nitrox 15 liter tanks",
+                      "15 LITER tank nitrox (only 12 liter is free of chanrge)",
+                      "15 liters Nitrox",
+                      "15L tanks"):
+            self.assertEqual(FeeCode.TANK_15L, self.code(label), label)
+
+    def test_the_gas_itself_still_resolves_as_nitrox(self):
+        """The rule has to be narrow enough to leave the 14 bare ones alone —
+        MY Seawolf Dominator prices a plain "Nitrox" at 50 and that is the gas."""
+        self.assertEqual(FeeCode.NITROX, self.code("Nitrox"))
+        self.assertEqual(FeeCode.NITROX, self.code("Nitrox per dive"))
+        self.assertEqual(FeeCode.NITROX_COURSE,
+                         self.code("PADI Enriched Air Diver (Nitrox)"))
+
+    def test_supervision_is_guided_diving(self):
+        self.assertEqual(
+            FeeCode.GUIDED_DIVING,
+            self.code("Supervision fees for Level 1 divers and Level 2 divers "
+                      "beyond 20m:"))
+
+    def test_a_tax_on_what_you_buy_on_board_is_named_as_such(self):
+        for label in ("14% GST (on onboard purchases)",
+                      "15% Local GST (on onboard purchases)",
+                      "14% Value Added Tax (VAT) (onboard purchases)"):
+            self.assertTrue(billed_on_purchases(label), label)
+
+    def test_a_tax_on_the_trip_is_not(self):
+        """The one this must not catch. "10% (of the trip cost) VAT Mandatory
+        Fee" is a real charge on the fare, and it stays mandatory and unpriced
+        — which keeps its trip's bill incomplete, correctly, until this project
+        can carry a percentage of a fare."""
+        self.assertFalse(billed_on_purchases("10% (of the trip cost) VAT Mandatory Fee"))
+        self.assertFalse(billed_on_purchases("Marine Park fees"))
+        self.assertFalse(billed_on_purchases("Port fees and taxes"))
 
 
 class TestFeeDicts(unittest.TestCase):
@@ -779,11 +847,11 @@ class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
 
     STILL_DECLINED = (
         # A percentage in a price field is not an amount. Adding 14 to a bill
-        # would be a number nobody quoted.
+        # would be a number nobody quoted — and *what* this charge is was
+        # never the question about it. `billed_on_purchases` is, and it is
+        # what stops these two blocking a bill: see the class above.
         "14% GST (on onboard purchases)",
         "15% Local GST (on onboard purchases)",
-        # Conditional on who is diving, not a charge everyone pays.
-        "Supervision fees for Level 1 divers and Level 2 divers beyond 20m:",
         # Gear, and gear is a toggle.
         "Fins, mask, snorkel (ABC)",
     )
@@ -794,6 +862,18 @@ class TestTheChargesOnlyTheSecondSellerNames(unittest.TestCase):
         cheaper by exactly what it left out."""
         for label in self.STILL_DECLINED:
             self.assertIsNone(classify_label(label, prose=False), label)
+
+    def test_the_supervision_fee_left_this_list(self):
+        """It was here, with the note *"conditional on who is diving, not a
+        charge everyone pays"* — which is the right reading and the wrong
+        conclusion. Declining it did not keep it out of a total; it kept the
+        whole trip's bill incomplete, so 16 entries of a stated 9 per dive
+        blocked bills they should merely not have been counted in. Naming it
+        `guided_diving` and letting the tier say who pays it does both jobs."""
+        self.assertEqual(
+            FeeCode.GUIDED_DIVING,
+            classify_label("Supervision fees for Level 1 divers and Level 2 "
+                           "divers beyond 20m:", prose=False))
 
     def test_a_label_naming_two_charges_is_combined_rather_than_declined(self):
         """"Environmental and Route Fees" was in the list above, declined

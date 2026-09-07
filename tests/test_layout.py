@@ -50,6 +50,23 @@ TABLE_FLOOR = 150
 # broken (#150).
 PHONE_WIDTHS = [320, 360, 375, 385, 386, 390, 393, 402, 414, 419, 430]
 
+
+def shipped_payload() -> dict:
+    """The page's own data, read back out of the page.
+
+    A filter test that counts rows in the browser and compares them with a
+    number the browser also produced proves only that the page agrees with
+    itself. For the four facets the payload settles on its own -- the month,
+    the boat, whether a seller marked the sailing down, whether it is still
+    bookable -- the expected figure is counted here instead, from the same
+    bytes the visitor is served.
+    """
+    import re
+
+    html = SITE.read_text(encoding="utf-8")
+    raw = re.search(r'id="payload"[^>]*>(.*?)</script>', html, re.S).group(1)
+    return json.loads(raw.replace("<\\/", "</"))
+
 MEASURE = """() => {
   const box = s => {
     const e = document.querySelector(s);
@@ -1811,6 +1828,978 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                                "the list stopped scrolling after three panels")
         finally:
             page.close()
+
+
+    def test_a_desktop_bill_is_read_at_its_own_width(self) -> None:
+        """The bill wants 460px of columns, and it shipped in 336.
+
+        `.panel.bill-pop` was written up beside the fee table and won its
+        30–46em on specificity against `.panel-pop`; the rewrite that made
+        these dialogs turned that shared rule into `.panel:not(:modal)`, which
+        is a class's worth as well. At 0,2,0 apiece the later of the two won,
+        so on a 1440px screen the whole bill — both sellers' tables, the tier,
+        the provenance — was read by dragging it sideways inside a 336px box.
+        A screenshot found it; every string assertion about the panel passed
+        over it, which is what this file is for.
+
+        Measured on the panel's own boxes at three desktop widths, on a bill
+        with *both* sellers' tables: a rule reaching only the first table
+        fixes half the panel.
+        """
+        page = self.open(1440, 900)
+        try:
+            for width, height in ((1440, 900), (1280, 800), (900, 800)):
+                page.set_viewport_size({"width": width, "height": height})
+                page.wait_for_timeout(150)
+                found = page.evaluate("""() => {
+                  document.querySelectorAll('dialog').forEach(d => d.close());
+                  for (const open of document.querySelectorAll('#body .fees-open')) {
+                    open.click();
+                    if (document.querySelectorAll('#feePanel table.fees').length > 1)
+                      return true;
+                  }
+                  return false;
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertTrue(found, "no two-seller bill to open " + where)
+                page.wait_for_timeout(280)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('feePanel');
+                  const wide = [...panel.querySelectorAll('*')]
+                    .filter(el => el.scrollWidth > el.clientWidth + 1)
+                    .map(el => String(el.className) + ' ' + el.clientWidth +
+                               '->' + el.scrollWidth);
+                  const tables = [...panel.querySelectorAll('table.fees')]
+                    .map(t => Math.round(t.getBoundingClientRect().right));
+                  const box = panel.getBoundingClientRect();
+                  return { open: panel.open, wide: wide,
+                           tables: tables.length,
+                           w: Math.round(box.width),
+                           past: tables.filter(x => x > Math.round(box.right)).length };
+                }""")
+                self.assertTrue(seen["open"], "the bill did not open " + where)
+                self.assertGreater(seen["tables"], 1, "one bill only " + where)
+                self.assertEqual([], seen["wide"],
+                                 "the desktop bill scrolls sideways " + where)
+                self.assertEqual(0, seen["past"],
+                                 "a fee table runs past the panel's edge " + where)
+                # The number the width has to clear is the fee table's own
+                # `min-width`, which is what makes the columns line up.
+                self.assertGreaterEqual(seen["w"], 460,
+                                        "the bill is %dpx wide, narrower than "
+                                        "the table inside it %s"
+                                        % (seen["w"], where))
+
+            # And in the state the bill is not shown in. Nothing opens it as a
+            # peek today — it is pressed, like the entry bar — so this is a
+            # claim about the rule rather than about a gesture: `.bill-pop` is
+            # the wide panel in either of the dialog's two states, and it is
+            # the peek that shipped at 336px. A peek coming back for a fourth
+            # panel, or for this one, finds the width already settled.
+            peeked = page.evaluate("""() => {
+              const panel = document.getElementById('feePanel');
+              panel.close();
+              panel.show();
+              const box = panel.getBoundingClientRect();
+              const wide = [...panel.querySelectorAll('*')]
+                .filter(el => el.scrollWidth > el.clientWidth + 1).length;
+              const modal = panel.matches(':modal');
+              panel.close();
+              return { w: Math.round(box.width), wide: wide, modal: modal };
+            }""")
+            self.assertFalse(peeked["modal"], "show() opened a modal")
+            self.assertGreaterEqual(peeked["w"], 460,
+                                    "shown as a peek the bill is %dpx, "
+                                    "narrower than the table inside it"
+                                    % peeked["w"])
+            self.assertEqual(0, peeked["wide"],
+                             "shown as a peek the bill scrolls sideways")
+        finally:
+            page.close()
+
+    def test_the_bill_opens_on_a_press_and_the_ladder_still_peeks(self) -> None:
+        """Both halves, because the cure for one would be wrong for the other.
+
+        The bill is the widest thing this page draws, and a peek of it lands
+        over the rows a reader is comparing from a pointer that was on its way
+        somewhere else — so it opens on a press, like the entry bar. The cabin
+        ladder is 21em beside the cell it belongs to and comparing ladders
+        down a column is what it is for, so its peek stays. A rule that turns
+        hover off for the panels would pass half of this test.
+        """
+        page = self.open(1440, 900)
+        try:
+            page.hover("#body .fees-open")
+            page.wait_for_timeout(600)
+            self.assertFalse(
+                page.evaluate("()=>document.getElementById('feePanel').open"),
+                "the bill opened on a hover")
+            page.click("#body .fees-open")
+            page.wait_for_timeout(300)
+            self.assertTrue(
+                page.evaluate("()=>document.getElementById('feePanel').open"),
+                "the bill did not open on a press")
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(200)
+
+            page.hover("#body .berths")
+            page.wait_for_timeout(600)
+            self.assertTrue(
+                page.evaluate("()=>document.getElementById('berths').open"),
+                "the cabin ladder no longer peeks on hover")
+            self.assertFalse(
+                page.evaluate("()=>document.getElementById('berths').matches(':modal')"),
+                "the hover opened the ladder pinned rather than as a peek")
+        finally:
+            page.close()
+
+    def test_a_hovered_panel_does_not_cover_the_column_it_opened_from(self) -> None:
+        """The peek exists so a column can be read row by row. It blocked it.
+
+        `place()` opened the panel at the trigger's own `left` and hung it
+        *downwards* from the trigger's bottom edge, so it covered every row
+        below the one it came from — the next row's own trigger included, on
+        all 24 rows measured at 1712x864. Entering the panel deliberately
+        keeps it open, so running the pointer down Places to compare ladders
+        reached row two and stopped: the thing you opened is in the way of the
+        next one. #151 from the other side, on the two columns the peek is
+        for.
+
+        It cost the guard beside it thirty seconds of Playwright retries and
+        then a timeout on something it was not testing, which is how it was
+        found — so this asserts the placement directly rather than leaving the
+        next test to trip over it.
+
+        `elementFromPoint` over the *next* trigger's own centre, because that
+        is the thing a pointer travelling down the column has to reach. The
+        panel is also required to sit where `place()` says, which is beside
+        the row it describes and clamped into the window: a second bug had
+        `close`'s style reset landing after the next `place()`, wiping the
+        coordinates it had just written and leaving every panel after the
+        first at the top of the window. Asserted against the rule's own
+        clamped answer, because a tall ladder low in the window is *meant* to
+        be pushed up and a plain distance from the row would fail those six.
+        """
+        page = self.open(1712, 864)
+        try:
+            triggers = page.locator("#body .berths")
+            blocked, adrift = [], []
+            for n in range(24):
+                page.hover("#body .berths >> nth=%d" % n, timeout=5000)
+                page.wait_for_timeout(180)
+                seen = page.evaluate("""(n) => {
+                  const panel = document.getElementById('berths');
+                  if (!panel.open) return null;
+                  const all = document.querySelectorAll('#body .berths');
+                  const here = all[n].getBoundingClientRect();
+                  const next = all[n + 1] ? all[n + 1].getBoundingClientRect() : null;
+                  const hit = next ? document.elementFromPoint(
+                      Math.round(next.x + next.width / 2),
+                      Math.round(next.y + next.height / 2)) : null;
+                  /* Where the rule says it should be, clamped into the
+                     window exactly as `place()` clamps it -- a tall ladder low
+                     in the window has to be pushed up to fit, and that is the
+                     clamp working rather than the panel drifting. Comparing
+                     against the plain row top would call those a failure and
+                     miss the one that matters. */
+                  const pad = 8, h = panel.offsetHeight;
+                  const want = Math.min(Math.max(pad, here.top - 4),
+                                        window.innerHeight - h - pad);
+                  return {
+                    covers_next: !!(hit && panel.contains(hit)),
+                    off_its_row:
+                      Math.abs(panel.getBoundingClientRect().top - want) > 2,
+                  };
+                }""", n)
+                if seen is None:
+                    continue
+                if seen["covers_next"]:
+                    blocked.append(n)
+                if seen["off_its_row"]:
+                    adrift.append(n)
+            self.assertEqual([], blocked,
+                             "the open peek covers the next row's trigger, so "
+                             "the column cannot be read down")
+            self.assertEqual([], adrift,
+                             "the peek is not beside the row it describes")
+        finally:
+            page.close()
+
+    def test_a_cabin_ladder_fits_the_panel_it_opens_in(self) -> None:
+        """A ladder is three columns of its own and it grew a scrollbar.
+
+        `tbody td { white-space: nowrap }` is the *table's* rule — a
+        departure's cells stay one line down a column — and the ladder is a
+        `tbody` too, so "Standard Sea View Cabin - Main Deck" set the table's
+        minimum at 403px inside a 334px peek. Nine of the first forty
+        sailings did it, under ladders with room to spare.
+
+        The peek is the size that finds this: the pinned panel is 618px and
+        every ladder fits it.
+        """
+        page = self.open(1712, 864)
+        try:
+            bad = []
+            for n in range(24):
+                page.hover("#body .berths >> nth=%d" % n)
+                page.wait_for_timeout(200)
+                seen = page.evaluate("""() => {
+                  const panel = document.getElementById('berths');
+                  if (!panel.open) return null;
+                  const body = panel.querySelector('.pbody');
+                  return { c: body.clientWidth, s: body.scrollWidth,
+                           modal: panel.matches(':modal') };
+                }""")
+                if seen is None:
+                    continue
+                self.assertFalse(seen["modal"], "a hover pinned the ladder")
+                if seen["s"] > seen["c"] + 1:
+                    bad.append("row %d: %d->%d" % (n, seen["c"], seen["s"]))
+            self.assertEqual([], bad, "the ladder scrolls sideways in its panel")
+        finally:
+            page.close()
+
+    def test_a_discounted_row_prints_the_fare_the_rate_came_off(self) -> None:
+        """And prints it inside the column, which is why this is measured.
+
+        The rate sat alone under the fare for want of 36px, and the fare it
+        came off was in a `title` — a claim the reader could not check on the
+        page that exists to make prices checkable. The struck figure goes on
+        the same line, to the left of the rate so the rate keeps its place
+        down the column, and it has to fit: `.marks` is right-aligned, so
+        anything too wide grows out of the left of the cell and over the
+        column beside it.
+
+        Measured at the three widths the table has regimes at, because the
+        money columns are content-sized and what fits at 1440 is not what fits
+        at 900.
+        """
+        page = self.open(1440, 900)
+        try:
+            for width, height in ((1440, 900), (1280, 800), (900, 800)):
+                page.set_viewport_size({"width": width, "height": height})
+                page.wait_for_timeout(180)
+                seen = page.evaluate("""() => {
+                  const rows = [...document.querySelectorAll('#body td.money')]
+                    .filter(td => td.querySelector('.sale-mark'));
+                  const withWas = rows.filter(td => td.querySelector('.sale-was'));
+                  const out = withWas.filter(td => {
+                    const cell = td.getBoundingClientRect();
+                    const was = td.querySelector('.sale-was').getBoundingClientRect();
+                    return was.left < cell.left + 1 || was.right > cell.right + 1;
+                  }).length;
+                  const order = withWas.filter(td => {
+                    const was = td.querySelector('.sale-was').getBoundingClientRect();
+                    const pct = td.querySelector('.sale-mark').getBoundingClientRect();
+                    return was.right > pct.left + 1;
+                  }).length;
+                  return { marked: rows.length, was: withWas.length,
+                           out: out, order: order,
+                           text: withWas.length
+                             ? withWas[0].querySelector('.sale-was').textContent : "" };
+                }""")
+                where = "at %dx%d" % (width, height)
+                self.assertGreater(seen["marked"], 0,
+                                   "no discounted row on the first page " + where)
+                self.assertGreater(seen["was"], 0,
+                                   "a rate is printed with no fare beside it "
+                                   + where)
+                self.assertRegex(seen["text"], r"^€[\d,]+$",
+                                 "the struck figure is not a price " + where)
+                self.assertEqual(0, seen["out"],
+                                 "%d struck fare(s) sit outside the Advertised "
+                                 "column %s" % (seen["out"], where))
+                self.assertEqual(0, seen["order"],
+                                 "the struck fare overlaps the rate " + where)
+        finally:
+            page.close()
+
+        # And on a card, where there is no Advertised column at all: the berth
+        # price reaches the reader inside the total's split and the markdown
+        # reached them nowhere, so a discounted sailing looked exactly like a
+        # full-price one on the device this page is built for.
+        for width in (320, 390, 430):
+            page = self.open(width, 844)
+            try:
+                seen = page.evaluate("""() => {
+                  const card = [...document.querySelectorAll('#cards .card')]
+                    .find(c => c.querySelector('.sale-was'));
+                  if (!card) return null;
+                  const money = card.querySelector('.card-money');
+                  const line = card.querySelector('.saleline');
+                  const box = money.getBoundingClientRect();
+                  const r = line.getBoundingClientRect();
+                  const gap = card.querySelector('.sale-mark')
+                    .getBoundingClientRect().left
+                    - card.querySelector('.sale-was').getBoundingClientRect().right;
+                  return { inMoney: money.contains(line),
+                           text: line.textContent.replace(/\\s+/g, " ").trim(),
+                           out: r.left < box.left - 1 || r.right > box.right + 1,
+                           gap: Math.round(gap),
+                           wide: [...card.querySelectorAll('*')]
+                             .filter(e => e.scrollWidth > e.clientWidth + 1).length };
+                }""")
+                where = "at %dpx" % width
+                self.assertIsNotNone(seen, "no discounted card " + where)
+                self.assertTrue(seen["inMoney"],
+                                "the markdown is not in the money block " + where)
+                # No spaces expected between them: the separation is the
+                # flex gap asserted below, and the text is three elements.
+                self.assertRegex(seen["text"], r"^was\s*€[\d,]+\s*−\d+%$",
+                                 "the card's markdown reads %r %s"
+                                 % (seen["text"], where))
+                self.assertFalse(seen["out"],
+                                 "the markdown sits outside the money block "
+                                 + where)
+                # The table's gap is written on `td.money .marks`, which a card
+                # has no cells to match: without one of its own the struck fare
+                # and the rate print as one word.
+                self.assertGreaterEqual(seen["gap"], 3,
+                                        "the struck fare and the rate are "
+                                        "printed as one word " + where)
+                self.assertEqual(0, seen["wide"],
+                                 "the card scrolls sideways " + where)
+            finally:
+                page.close()
+
+    def test_every_filter_counts_what_it_leaves(self) -> None:
+        """Eight filters, and the On sale chip was the one that lied.
+
+        `countRail` counted the trips with the sale facet skipped — which is
+        the arithmetic a *chip's* own count needs, so that its number answers
+        "what if I picked this too?" rather than "what did I already pick".
+        The rail is not a chip: it is the table's own size printed beside the
+        item that opens the table, and with On sale down it read 1,145 over
+        237 rows, a few inches from a `rows shown` saying 237. Hide sold out
+        sits in the same bank and collapsed onto the rows correctly, which is
+        what makes this a slip rather than a policy.
+
+        So every bank is pressed here, and each one is asked three questions
+        rather than "did anything change":
+
+        1. The three numbers about one table agree — the chip's own count of
+           what pressing it leaves, `rows shown`, and the rail.
+        2. The rows left really are the rows asked for, checked against what
+           each row itself prints (or, for the month, against the ISO date in
+           its own `data-id`).
+        3. The result is neither the whole table nor nothing. A filter that
+           keeps everything and one that keeps nothing both pass any
+           assertion phrased as "the count changed", and both are bugs.
+
+        And for the four facets the payload settles by itself, the expected
+        figure is counted from the shipped bytes rather than taken from the
+        page: a browser agreeing with itself is not evidence.
+        """
+        payload = shipped_payload()
+        deps = payload["departures"]
+        total = len(deps)
+
+        # Counted here, from the data — not read off the page.
+        month = 5
+        boat_id = "snefro-pearl"
+        expected = {
+            "months": sum(1 for d in deps if d["month"] == month),
+            "boats": sum(1 for d in deps if d["boat_id"] == boat_id),
+            "flags-sale": sum(1 for d in deps if d.get("sale")),
+            "flags-sold": sum(1 for d in deps if d.get("bookable")),
+        }
+        for key, n in expected.items():
+            self.assertGreater(n, 0, "no departures behind the %s filter" % key)
+            self.assertLess(n, total,
+                            "the %s filter would keep the whole table" % key)
+
+        # Each bank: the chip to press, and what every row it leaves must show
+        # for itself. The predicate reads the row rather than the payload —
+        # what is being checked is that the rows on screen are the right ones.
+        banks = [
+            ("months", '#months .chip[data-v="%d"]' % month, "months",
+             """(row, v) => row.dataset.id.indexOf("-2027-0" + v + "-") > 0
+                          || row.dataset.id.indexOf("-2027-" + v + "-") > 0""",
+             str(month)),
+            ("ports", '#ports .chip[data-v="Port Ghalib"]', None,
+             """(row, v) => (row.querySelector('.trip .sub')||{}).textContent
+                            .trim().indexOf(v) === 0""", "Port Ghalib"),
+            ("sites", '#sites .chip[data-v="elphinstone"]', None,
+             """(row, v) => row.querySelector('td.sites').textContent
+                            .indexOf(v) >= 0""", "elphinstone"),
+            ("boats", '#boats .chip[data-v="Snefro Pearl"]', "boats",
+             """(row, v) => row.querySelector('.b-name').textContent.trim() === v""",
+             "Snefro Pearl"),
+            # The printed phrase, exactly: "OW + 10" is a different bar from
+            # "OW", and a prefix test would call one the other.
+            ("entry", '#entry .chip[data-v="OW + 10"]', None,
+             """(row, v) => row.querySelector('.entry-open')
+                            .firstChild.textContent.trim() === v""", "OW + 10"),
+            # Both sellers list it, so both name themselves in the Seller
+            # column — one link is the other two chips' answer.
+            ("sellers", '#sellers .chip[data-v="both"]', None,
+             """(row) => row.querySelectorAll('td.source a').length === 2""",
+             "both"),
+            ("flags", "#onSale", "flags-sale",
+             """(row) => !!row.querySelector('.sale-mark')""", None),
+            ("flags", "#hideSold", "flags-sold",
+             """(row) => !row.classList.contains('gone')""", None),
+        ]
+
+        for bank, selector, counted, predicate, value in banks:
+            page = self.open(1440, 900)
+            try:
+                self.pick_filter(page, bank, selector)
+                seen = page.evaluate(
+                    """([selector, source, value]) => {
+                      const chip = document.querySelector(selector);
+                      const label = chip.textContent.trim();
+                      const stated = (label.match(/([\\d,]+)\\s*$/) || [])[1];
+                      const test = eval(source);
+                      const rows = [...document.querySelectorAll('#body tr.row')];
+                      const v = value === null ? label.replace(/\\s*[\\d,]+$/, "") : value;
+                      return {
+                        label: label,
+                        stated: stated ? Number(stated.replace(/,/g, "")) : null,
+                        shown: Number(document.getElementById('shown')
+                                 .textContent.replace(/,/g, "")),
+                        rail: Number(document.getElementById('navTripsCount')
+                                 .textContent.replace(/,/g, "")),
+                        drawn: rows.length,
+                        wrong: rows.filter(r => !test(r, v)).length,
+                        first: rows.length ? rows[0].dataset.id : null,
+                        value: v,
+                      };
+                    }""", [selector, predicate, value])
+                where = "%s (%s)" % (selector, seen["label"])
+                self.assertIsNotNone(seen["stated"],
+                                     "the chip states no count: " + where)
+                self.assertEqual(seen["stated"], seen["shown"],
+                                 "the chip promised %s and the table shows %s: %s"
+                                 % (seen["stated"], seen["shown"], where))
+                self.assertEqual(seen["shown"], seen["rail"],
+                                 "the rail says %s over a table of %s: %s"
+                                 % (seen["rail"], seen["shown"], where))
+                self.assertGreater(seen["shown"], 0, "nothing left: " + where)
+                self.assertLess(seen["shown"], total,
+                                "the filter kept the whole table: " + where)
+                self.assertGreater(seen["drawn"], 0, "no rows drawn: " + where)
+                self.assertEqual(0, seen["wrong"],
+                                 "%d of the %d rows drawn do not match %r: %s"
+                                 % (seen["wrong"], seen["drawn"],
+                                    seen["value"], where))
+                if counted:
+                    self.assertEqual(expected[counted], seen["shown"],
+                                     "the page keeps %s rows where the data "
+                                     "has %s: %s"
+                                     % (seen["shown"], expected[counted], where))
+            finally:
+                page.close()
+
+    def test_a_guest_bound_keeps_the_boats_that_state_no_count(self) -> None:
+        """The one filter here whose subject some rows cannot answer about.
+
+        `dep.nights` is stated on every departure, so the nights range never
+        had to decide what a bound means for a row with no figure. A guest
+        count is stated on 70 of the 77 boats -- six of the rest are hulls
+        liveaboard.com does not list at all and PADI publishes no guest count
+        anywhere, so there is no second source coming for them.
+
+        A bound is a claim about a number and those rows have none, so they
+        can neither satisfy nor contradict it: they stay, and the chip beside
+        the boxes is the only thing that removes them. Dropping them silently
+        would delete 98 real, bookable sailings on the grounds of a gap in our
+        own reading -- the same mistake as reporting an unread page as an empty
+        one -- and it would be invisible, because a filtered table looks
+        exactly the same either way.
+
+        Four things, all of them counted from the shipped payload rather than
+        read off the page:
+
+        1. A bound keeps every row that states no count, and every row it
+           leaves either sits inside the bound or says it states none.
+        2. The chip states what pressing it leaves, and the table then shows
+           exactly that -- with no unstated row left in it.
+        3. The bank's note carries the number of rows that state none. It is
+           written by `app.js` from the payload for the reason the money fold
+           was: a figure typed into a template is a figure that goes stale the
+           day a boat's page starts stating its capacity (#150, #144).
+        4. Clear all puts all three back, boxes included.
+
+        **And the fleet no longer has such a row.** All 77 boats state a
+        count since 2026-09-05 -- PADI's vessel description answered four and
+        six more were read by hand -- so 1, 2 and 3 are about a state this
+        build cannot reach. The test does not skip: where nothing is unstated
+        it asserts the *other* half of the same contract, which is the half
+        that is live -- the chip is not offered at all, and the note says so
+        rather than printing a zero. The unstated branch stays written and
+        stays asserted the day a new hull arrives without a count, which is
+        the only way this rule survives a fleet that currently agrees with
+        it.
+        """
+        payload = shipped_payload()
+        itineraries = payload["itineraries"]
+        counts = [itineraries[d["itinerary_id"]].get("guests")
+                  for d in payload["departures"]]
+        stated = [n for n in counts if n is not None]
+        unstated = len(counts) - len(stated)
+        self.assertTrue(stated, "no boat states a guest count")
+
+        bound = 16
+        within = sum(1 for n in stated if n <= bound)
+        self.assertGreater(within, 0, "no sailing is on a boat of %d or fewer" % bound)
+        self.assertLess(within + unstated, len(counts),
+                        "a bound of %d would keep the whole table" % bound)
+
+        # What each row says about itself, which is what the reader compares.
+        read = """() => {
+          const rows = [...document.querySelectorAll('#body tr.row')];
+          const said = r => r.querySelector('td.boat .sub').textContent.trim();
+          return {
+            drawn: rows.length,
+            unstated: rows.filter(r => said(r) === 'guests not stated').length,
+            over: rows.filter(r => said(r) !== 'guests not stated'
+                                   && Number(said(r).split(' ')[0]) > %d).length,
+            shown: Number(document.getElementById('shown')
+                     .textContent.replace(/,/g, '')),
+            rail: Number(document.getElementById('navTripsCount')
+                     .textContent.replace(/,/g, '')),
+            chip: (document.getElementById('hideUnstated').textContent
+                     .match(/([\\d,]+)\\s*$/) || [])[1],
+            note: document.getElementById('bankNote').textContent,
+            badge: document.getElementById('filtersCount').textContent,
+          };
+        }""" % bound
+
+        page = self.open(1440, 900)
+        try:
+            page.click("#filtersToggle")
+            page.wait_for_timeout(280)
+            page.click('.bank-tab[data-bank="guests"]')
+            page.wait_for_timeout(200)
+
+            note = page.text_content("#bankNote")
+            if unstated:
+                self.assertIn(str(unstated), note,
+                              "the bank's note does not say how many sailings "
+                              "state no count: %r" % note)
+            else:
+                self.assertIn("Every boat here states one", note,
+                              "no sailing states no count and the note does "
+                              "not say so: %r" % note)
+                self.assertTrue(
+                    page.get_attribute("#hideUnstated", "hidden") is not None
+                    or page.evaluate(
+                        "()=>document.getElementById('hideUnstated').hidden"),
+                    "the Hide unstated chip is offered over a fleet where "
+                    "every boat states a count, so it can only ever remove "
+                    "nothing")
+
+            page.fill("#gmax", str(bound))
+            page.wait_for_timeout(360)
+            seen = page.evaluate(read)
+            self.assertEqual(within + unstated, seen["shown"],
+                             "a bound of %d left %d rows where the payload has "
+                             "%d inside it and %d stating nothing"
+                             % (bound, seen["shown"], within, unstated))
+            self.assertEqual(seen["shown"], seen["rail"],
+                             "the rail says %s over a table of %s"
+                             % (seen["rail"], seen["shown"]))
+            self.assertEqual(0, seen["over"],
+                             "%d rows on screen are on a boat of more than %d"
+                             % (seen["over"], bound))
+            if unstated:
+                self.assertGreater(seen["unstated"], 0,
+                                   "the bound dropped every row that states "
+                                   "no count — bookable sailings, silently")
+                self.assertEqual(str(within),
+                                 (seen["chip"] or "").replace(",", ""),
+                                 "the chip promises %r where pressing it "
+                                 "leaves %d" % (seen["chip"], within))
+
+                page.click("#hideUnstated")
+                page.wait_for_timeout(360)
+                after = page.evaluate(read)
+                self.assertEqual(within, after["shown"],
+                                 "hiding the unstated rows left %d where the "
+                                 "payload has %d inside the bound"
+                                 % (after["shown"], within))
+                self.assertEqual(0, after["unstated"],
+                                 "%d rows stating no count survived the chip"
+                                 % after["unstated"])
+                self.assertEqual("2", after["badge"],
+                                 "the drawer's badge says %r over a bound and "
+                                 "a switch" % after["badge"])
+            else:
+                self.assertEqual(0, seen["unstated"],
+                                 "%d rows print 'guests not stated' where the "
+                                 "payload has none" % seen["unstated"])
+                self.assertEqual("1", seen["badge"],
+                                 "the drawer's badge says %r over one bound"
+                                 % seen["badge"])
+
+            page.click("#reset")
+            page.wait_for_timeout(360)
+            back = page.evaluate(read)
+            self.assertEqual(len(counts), back["shown"],
+                             "Clear all left %d of %d rows"
+                             % (back["shown"], len(counts)))
+            self.assertEqual("", page.input_value("#gmax"),
+                             "Clear all dropped the bound and left the box "
+                             "holding the number that set it")
+            self.assertEqual(
+                "false", page.get_attribute("#hideUnstated", "aria-pressed"),
+                "Clear all left the unstated switch lit")
+        finally:
+            page.close()
+
+    def test_what_a_day_costs_prints_under_what_a_dive_costs(self) -> None:
+        """Per day, the second denominator, in both layouts.
+
+        The table gained a column and the card gained a line under the
+        per-dive one, inside the same tinted money box. Both are asserted
+        here together for the reason the per-dive test states: a change that
+        moved the figure would otherwise pass a test that looked at one.
+
+        The arithmetic is checked against the row's own two printed numbers --
+        the Total and the nights under the date -- rather than against a
+        second implementation of the bill in Python, which would only prove
+        that two adders agree.
+
+        And the column sits **beside** Per dive rather than anywhere in the
+        band: the two are one question asked twice, and a reader comparing
+        them should not have to cross the Places column to do it.
+        """
+        page = self.open(1440, 900)
+        self.addCleanup(page.close)
+        seen = page.evaluate("""() => {
+          const heads = [...document.querySelectorAll('thead tr:not(.band) th')]
+            .map(h => h.dataset.k || "");
+          const row = document.querySelector('#body tr.row');
+          const money = t => Number((t.match(/€\\s*([\\d,]+)/) || [0, "0"])[1]
+                                    .replace(/,/g, ""));
+          const nights = Number((row.querySelector('td.when .sub').textContent
+                                  .match(/(\\d+)\\s*night/) || [0, "0"])[1]);
+          const cell = row.querySelector('td.perday');
+          return {
+            heads: heads,
+            zone: cell.closest('tr') && cell.className,
+            nights: nights,
+            total: money(row.querySelector('td.cost').textContent),
+            perDay: money(cell.textContent),
+            said: cell.textContent.replace(/\\s+/g, " ").trim(),
+            blank: [...document.querySelectorAll('#body tr.row td.perday')]
+                     .filter(c => !/€/.test(c.textContent)).length,
+          };
+        }""")
+        self.assertIn("perday", seen["heads"], "no Per day column in the header")
+        self.assertEqual(seen["heads"].index("perday"),
+                         seen["heads"].index("perdive") + 1,
+                         "Per day is not beside Per dive: %s" % seen["heads"])
+        self.assertGreater(seen["nights"], 0, "the row states no length")
+        # The printed euro figures are rounded, so the comparison is too.
+        self.assertAlmostEqual(seen["perDay"], seen["total"] / seen["nights"],
+                               delta=1.5,
+                               msg="the Per day figure is not the Total over "
+                                   "the trip's nights: %r" % seen["said"])
+        self.assertIn("÷ %d" % seen["nights"], seen["said"],
+                      "the cell does not say what it divided by: %r" % seen["said"])
+        self.assertEqual(0, seen["blank"],
+                         "%d rows print no per-day figure, and every row "
+                         "states its length" % seen["blank"])
+
+        # And the compact order, which is a second list a column can be
+        # missing from -- the width a laptop never opens.
+        page.set_viewport_size({"width": 1100, "height": 900})
+        page.wait_for_timeout(200)
+        compact = page.evaluate(
+            """() => [...document.querySelectorAll('thead tr:not(.band) th')]
+                     .map(h => h.dataset.k || "")""")
+        self.assertEqual(compact.index("perday"), compact.index("perdive") + 1,
+                         "Per day moves away from Per dive when the table is "
+                         "compact: %s" % compact)
+
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 720})
+            page.wait_for_timeout(120)
+            card = page.evaluate("""() => {
+              const money = document.querySelector('.cards .card .card-money');
+              const lines = [...money.querySelectorAll('.perline')];
+              const box = money.getBoundingClientRect();
+              return {
+                texts: lines.map(l => l.textContent.replace(/\\s+/g, " ").trim()),
+                out: lines.filter(l => {
+                  const r = l.getBoundingClientRect();
+                  return r.left < box.left - 1 || r.right > box.right + 1;
+                }).length,
+                order: lines.map(l => Math.round(l.getBoundingClientRect().top)),
+              };
+            }""")
+            where = "at %dpx" % width
+            day = [t for t in card["texts"] if " a day" in t]
+            dive = [t for t in card["texts"] if " a dive" in t or "dives:" in t]
+            self.assertTrue(day, "no per-day line in the money box " + where)
+            self.assertTrue(dive, "the per-dive line went with it " + where)
+            self.assertLess(card["order"][0], card["order"][-1] + 1,
+                            "the derived lines are not stacked " + where)
+            self.assertEqual(card["texts"].index(day[0]),
+                             len(card["texts"]) - 1,
+                             "per day is not the last line in the money box "
+                             + where)
+            self.assertEqual(0, card["out"],
+                             "a derived line sits outside the money box " + where)
+
+    def test_a_card_gives_the_dates_a_row_and_the_table_keeps_its_cell(self) -> None:
+        """When it sails, full width under the boat and the money box.
+
+        The dates shared the head's left column with the boat's name and its
+        guest count, and the money box takes up to 58% of the card — so what
+        was left was narrow enough to wrap "01–08 May · 7 nights" under a long
+        boat name. The dates are how a reader finds their own week.
+
+        Measured rather than grepped, on both sides of the breakpoint: this is
+        a card change, so the table's own Departs cell must still print the
+        date over its nights on one row. The boat cell keeps its guest count
+        and the money box keeps its lines, which is the half a refactor of the
+        head would quietly take with it.
+        """
+        page = self.open(PHONE_WIDTHS[0], 780)
+        self.addCleanup(page.close)
+        for width in PHONE_WIDTHS:
+            page.set_viewport_size({"width": width, "height": 780})
+            page.wait_for_timeout(140)
+            seen = page.evaluate("""() => {
+              const card = document.querySelector('#cards article.card');
+              const box = e => e.getBoundingClientRect();
+              const when = card.querySelector('.card-when');
+              const id = card.querySelector('.card-id');
+              const money = card.querySelector('.card-money');
+              const sub = when.querySelector('.sub');
+              return {
+                cards: getComputedStyle(
+                  document.querySelector('.shell > table')).display === 'none',
+                whenTop: Math.round(box(when).top),
+                headBottom: Math.round(Math.max(box(id).bottom, box(money).bottom)),
+                whenLeft: Math.round(box(when).left),
+                idLeft: Math.round(box(id).left),
+                whenWidth: Math.round(box(when).width),
+                headWidth: Math.round(box(card.querySelector('.card-head')).width),
+                dates: (when.querySelector('.d-span') || {}).textContent,
+                nights: sub ? sub.textContent : null,
+                dot: getComputedStyle(sub, '::before').content,
+                sameLine: sub && Math.abs(box(sub).top -
+                            box(when.querySelector('.d-span')).top) < 2,
+                guests: (id.querySelector('.sub') || {}).textContent,
+                boat: !!id.querySelector('.b-name'),
+                whenInHead: !!card.querySelector('.card-head .card-when'),
+                moneyLines: money.querySelectorAll('.perline').length,
+                overflow: [...card.querySelectorAll('*')]
+                  .filter(e => e.scrollWidth > e.clientWidth + 1).length,
+              };
+            }""")
+            where = "at %dpx" % width
+            self.assertTrue(seen["cards"], "not the card layout " + where)
+            self.assertFalse(seen["whenInHead"],
+                             "the dates are still inside the head " + where)
+            self.assertGreaterEqual(seen["whenTop"], seen["headBottom"] - 1,
+                                    "the dates row is not below the boat and "
+                                    "the money box " + where)
+            self.assertEqual(seen["whenLeft"], seen["idLeft"],
+                             "the dates row does not start where the card's "
+                             "content does " + where)
+            # Full width: the row reaches across the card's content box --
+            # measured against the head above it, which is what full width
+            # means here, rather than against the card's own padded box.
+            self.assertGreaterEqual(seen["whenWidth"], seen["headWidth"] - 1,
+                                    "the dates row is %dpx under a head %dpx "
+                                    "wide %s" % (seen["whenWidth"],
+                                                 seen["headWidth"], where))
+            self.assertRegex(seen["dates"] or "", r"\d", "no date " + where)
+            self.assertRegex(seen["nights"] or "", r"night", "no nights " + where)
+            self.assertTrue(seen["sameLine"],
+                            "the nights dropped to a line of their own " + where)
+            self.assertIn("·", seen["dot"],
+                          "the nights lost the separator that makes them the "
+                          "second fact in the cell " + where)
+            # "Keep those two as is."
+            self.assertTrue(seen["boat"], "the card lost the boat name " + where)
+            self.assertRegex(seen["guests"] or "", r"guests",
+                             "the boat cell lost its guest count " + where)
+            self.assertEqual(2, seen["moneyLines"],
+                             "the money box no longer carries per dive and per "
+                             "day " + where)
+            self.assertEqual(0, seen["overflow"],
+                             "the card scrolls sideways " + where)
+
+        page.set_viewport_size({"width": 1440, "height": 900})
+        page.wait_for_timeout(180)
+        table = page.evaluate("""() => {
+          const cell = document.querySelector('#body tr.row td.when');
+          const span = cell.querySelector('.d-span');
+          const sub = cell.querySelector('.sub');
+          return { stacked: Math.round(sub.getBoundingClientRect().top) >
+                            Math.round(span.getBoundingClientRect().top),
+                   text: cell.textContent.replace(/\\s+/g, " ").trim() };
+        }""")
+        self.assertTrue(table["stacked"],
+                        "the table's Departs cell changed with the card: %r"
+                        % table["text"])
+
+    def test_a_budget_leaves_only_the_trips_inside_it(self) -> None:
+        """The Per day bound, checked against what each row prints.
+
+        The first filter on this page whose subject is derived rather than
+        stated: nights and guests are numbers a seller published, and this is
+        the bill over the length, so it moves when the Include switches do.
+        That is why the rows are checked against their own printed figure --
+        the one the reader is comparing the bound with -- rather than against
+        a total recomputed here.
+
+        A row with no complete bill from either seller has no figure, and the
+        guests rule holds for the same reason it holds there: a bound cannot
+        ask such a row anything, so it keeps it. Every sailing in this build
+        has a bill, so what the assertion below can state is the other half --
+        nothing outside the bound survives it.
+        """
+        bound = 200
+        read = """() => {
+          const rows = [...document.querySelectorAll('#body tr.row')];
+          const day = r => {
+            const m = r.querySelector('td.perday').textContent
+                       .match(/€\\s*([\\d,]+)/);
+            return m ? Number(m[1].replace(/,/g, "")) : null;
+          };
+          return {
+            drawn: rows.length,
+            over: rows.filter(r => day(r) !== null && day(r) > %d).length,
+            blank: rows.filter(r => day(r) === null).length,
+            shown: Number(document.getElementById('shown')
+                     .textContent.replace(/,/g, '')),
+            rail: Number(document.getElementById('navTripsCount')
+                     .textContent.replace(/,/g, '')),
+            badge: document.getElementById('filtersCount').textContent,
+            pills: [...document.querySelectorAll('#activePills button')]
+                     .map(b => b.textContent.trim()),
+          };
+        }""" % bound
+
+        page = self.open(1440, 900)
+        try:
+            total = page.evaluate(
+                "()=>Number(document.getElementById('shown')"
+                ".textContent.replace(/,/g, ''))")
+            page.click("#filtersToggle")
+            page.wait_for_timeout(280)
+            page.click('.bank-tab[data-bank="perday"]')
+            page.wait_for_timeout(200)
+            self.assertTrue(page.get_attribute("#pdmax", "placeholder"),
+                            "the box offers no bound off the rows themselves")
+            page.fill("#pdmax", str(bound))
+            page.wait_for_timeout(360)
+            seen = page.evaluate(read)
+
+            self.assertGreater(seen["shown"], 0,
+                               "a bound of €%d left nothing" % bound)
+            self.assertLess(seen["shown"], total,
+                            "a bound of €%d kept the whole table" % bound)
+            self.assertEqual(seen["shown"], seen["rail"],
+                             "the rail says %s over a table of %s"
+                             % (seen["rail"], seen["shown"]))
+            self.assertEqual(0, seen["over"],
+                             "%d of the %d rows drawn cost more than €%d a day"
+                             % (seen["over"], seen["drawn"], bound))
+            self.assertEqual("1", seen["badge"],
+                             "the drawer's badge does not count the bound: %r"
+                             % seen["badge"])
+            self.assertTrue(any("€" in p for p in seen["pills"]),
+                            "the bar names the bound without its unit: %r"
+                            % seen["pills"])
+
+            # And out again, boxes included -- the guests test's fourth point.
+            page.click("#reset")
+            page.wait_for_timeout(360)
+            back = page.evaluate(read)
+            self.assertEqual(total, back["shown"],
+                             "Clear all left %d of %d rows"
+                             % (back["shown"], total))
+            self.assertEqual("", page.input_value("#pdmax"),
+                             "Clear all dropped the bound and left the box "
+                             "holding the number that set it")
+        finally:
+            page.close()
+
+    def test_one_row_is_marked_at_a_time_unless_ctrl_is_held(self) -> None:
+        """A mark is where you are, not everywhere you have been.
+
+        Every press added another and only a second press on that same row
+        took one away, so a reader who had kept their place four times had
+        four rows lit and no way to tell which was this one. A plain press
+        collapses the set onto the row pressed; Ctrl — Cmd on a Mac — toggles
+        one and leaves the rest.
+
+        Pressing the only marked row still clears it, which is the one way
+        back to no marks at all on a phone: there is no modifier to hold
+        there, and the tap is asserted at the end for that reason.
+        """
+        marked = ("()=>[...document.querySelectorAll('#body .row.marked')]"
+                  ".map(r => r.dataset.id)")
+        page = self.open(1440, 900)
+        try:
+            def cell(n: int) -> str:
+                return "#body .row[data-id] >> nth=%d >> td.trip" % n
+
+            page.click(cell(0))
+            first = page.evaluate(marked)
+            self.assertEqual(1, len(first), "a press did not mark one row")
+
+            page.click(cell(1))
+            second = page.evaluate(marked)
+            self.assertEqual(1, len(second),
+                             "a second press left two rows marked")
+            self.assertNotEqual(first, second, "the mark did not move")
+
+            page.click(cell(2), modifiers=["Control"])
+            page.click(cell(3), modifiers=["Meta"])
+            three = page.evaluate(marked)
+            self.assertEqual(3, len(three),
+                             "Ctrl and Cmd did not add to the marked set")
+            self.assertEqual(second[0], three[0],
+                             "adding a mark dropped the one already there")
+
+            page.click(cell(2), modifiers=["Control"])
+            self.assertEqual(2, len(page.evaluate(marked)),
+                             "Ctrl on a marked row did not take it off")
+
+            page.click(cell(3))
+            self.assertEqual(1, len(page.evaluate(marked)),
+                             "a plain press did not collapse the set")
+            page.click(cell(3))
+            self.assertEqual([], page.evaluate(marked),
+                             "pressing the only marked row did not clear it")
+
+            # And the press that is not the row's: a panel trigger is a
+            # button the reader used to read something.
+            page.click(cell(0))
+            held = page.evaluate(marked)
+            page.click("#body .row[data-id] >> nth=5 >> .fees-open")
+            page.wait_for_timeout(280)
+            self.assertEqual(held, page.evaluate(marked),
+                             "opening a bill moved the mark")
+        finally:
+            page.close()
+
+        phone = self._browser.new_page(
+            viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+        try:
+            phone.goto(self._url)
+            phone.wait_for_selector("article.card")
+            cards = ("()=>[...document.querySelectorAll('#cards .row.marked')]"
+                     ".map(r => r.dataset.id)")
+            phone.locator(".cards .card .t-name").first.click()
+            phone.wait_for_timeout(200)
+            self.assertEqual(1, len(phone.evaluate(cards)),
+                             "a tap does not mark a card")
+            phone.locator(".cards .card .t-name").nth(1).click()
+            phone.wait_for_timeout(200)
+            self.assertEqual(1, len(phone.evaluate(cards)),
+                             "a second tap left two cards marked")
+        finally:
+            phone.close()
 
 
 if __name__ == "__main__":  # pragma: no cover

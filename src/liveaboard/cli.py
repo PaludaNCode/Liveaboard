@@ -785,11 +785,26 @@ def cmd_promote(args: argparse.Namespace) -> int:
     stale = payload.get("stale_ladders") or []
     if stale:
         # A warning rather than a note: every one is a sailing whose cabin
-        # panel the page has lost, and the fix is a fresh `cabins.yml` run --
-        # nothing in the dataset or the parser can put it back.
+        # panel the page has lost, and nothing in the dataset or the parser
+        # can put it back.
+        #
+        # **Which job heals it depends on which reading is behind**, and this
+        # named `cabins.yml` for both until three rows of the second kind
+        # turned up together: the cabin book was that morning's and the rows
+        # were the ones that had aged, so the advice was 890 booking pages
+        # fetched to confirm what they already said.
+        behind = sum(1 for line in stale if "the ladder is behind" in line)
+        rows = len(stale) - behind
+        fix = " and ".join(
+            part for part in (
+                f"{behind} where a fresh cabins.yml is the fix" if behind else "",
+                f"{rows} where the row is the older reading, which only a "
+                "refresh heals" if rows else "",
+            ) if part
+        )
         print(
             f"::warning::{len(stale)} cabin ladder(s) contradicted the price above them "
-            f"and were dropped; re-run cabins.yml to read those booking pages again"
+            f"and were dropped: {fix}"
         )
         for line in stale[:10]:
             print(f"    {line}")

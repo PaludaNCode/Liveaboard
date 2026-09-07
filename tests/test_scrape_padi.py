@@ -846,6 +846,62 @@ class TestAPriceStatedAsAString(unittest.TestCase):
         self.assertFalse(self.book(self.entry(price=None, extraValue="ask on board"))["complete"])
 
 
+class TestAMandatoryFieldIsNotAlwaysAMandatoryCharge(unittest.TestCase):
+    """Two titles PADI files as mandatory that no diver has to pay in full.
+
+    Both used to reach `unreadable`, and an unreadable mandatory entry keeps
+    its trip's book `complete: false` — which is the safe direction for a
+    charge nobody could read, and the wrong one for a charge that is not the
+    trip's. 105 of 443 books were incomplete; 34 of those were held there by a
+    tax on the bar bill and 15 by a supervision fee, and both are recognised
+    now: 71 remain, every one of them a fuel surcharge, a visa fee or a VAT on
+    the fare that PADI names with no figure.
+    """
+
+    def book(self, title, **extra):
+        return PadiComAdapter.fees_from_payload(
+            {"mandatoryOnBoard": [{"title": title, "payedPer": 30,
+                                   "isMandatory": True, **extra}]}, "EUR")
+
+    def test_a_tax_on_the_bar_bill_does_not_block_the_trips_bill(self):
+        book = self.book("14% GST (on onboard purchases)")
+        self.assertEqual([], book["lines"])
+        self.assertEqual([], book["unreadable"])
+        self.assertTrue(book["complete"])
+
+    def test_it_is_named_rather_than_dropped(self):
+        """A count could not tell an Egyptian boat's GST line from a title
+        this parser has quietly stopped understanding."""
+        self.assertEqual(["14% GST (on onboard purchases)"],
+                         self.book("14% GST (on onboard purchases)")["on_purchases"])
+
+    def test_a_tax_on_the_fare_still_blocks_it(self):
+        """The one the rule must not reach. 10% of the trip cost is a real
+        charge on the berth, it has no figure in the payload, and this project
+        cannot yet carry a percentage of a fare — so the book stays incomplete
+        and says so."""
+        book = self.book("10% (of the trip cost) VAT Mandatory Fee")
+        self.assertFalse(book["complete"])
+        self.assertNotIn("on_purchases", book)
+
+    def test_supervision_is_a_line_but_not_a_mandatory_one(self):
+        """9 a dive, owed by "Level 1 divers and Level 2 divers beyond 20m".
+        Counting it in every total bills the whole boat for it; declining the
+        title blocked the bill instead. It keeps its figure at a tier no total
+        claims."""
+        book = self.book("Supervision fees for Level 1 divers and Level 2 "
+                         "divers beyond 20m:", price=9.0)
+        line = book["lines"][0]
+        self.assertEqual(("guided_diving", "optional"), (line["code"], line["tier"]))
+        self.assertEqual(9.0, line["amount"]["amount"])
+        self.assertTrue(book["complete"])
+
+    def test_a_real_mandatory_charge_is_untouched(self):
+        book = self.book("Marine park fees", price=80.0)
+        self.assertEqual(("marine_park", "mandatory"),
+                         (book["lines"][0]["code"], book["lines"][0]["tier"]))
+
+
 class TestTheOptionalHalfOfPadisDisclosure(unittest.TestCase):
     """`optionalOnBoard` and its two siblings, read by nothing until now.
 
@@ -959,8 +1015,21 @@ class TestTheOptionalHalfOfPadisDisclosure(unittest.TestCase):
         toggles that code they are also that charge counted twice."""
         self.assertEqual(
             self.lines(self.entry("Nitrox", extraValue="50 EUR"),
-                       self.entry("Nitrox 15 liter tanks", extraValue="65 EUR")),
+                       self.entry("Nitrox per dive", extraValue="65 EUR")),
             [("nitrox", "conditional", "per_trip", 50.0)])
+
+    def test_the_tank_upgrade_is_not_the_gas_printed_twice(self):
+        """This test used to make its point with "Nitrox" beside "Nitrox 15
+        liter tanks", and that pair was the wrong example: they are not one
+        charge under one code, they are the gas and a tank upgrade. Reading
+        them as one dropped the 65 and left the toggle pricing the upgrade as
+        nitrox on 15 itineraries. Both survive now, under their own codes, and
+        only the gas sits on the toggle."""
+        self.assertEqual(
+            self.lines(self.entry("Nitrox", extraValue="50 EUR"),
+                       self.entry("Nitrox 15 liter tanks", extraValue="65 EUR")),
+            [("nitrox", "conditional", "per_trip", 50.0),
+             ("tank_15l", "optional", "per_trip", 65.0)])
 
     def test_a_mandatory_charge_of_the_same_code_wins_outright(self):
         """The mandatory list is a stronger claim about the same charge, and it
@@ -1047,8 +1116,10 @@ class TestTheVesselSpecificationStrip(unittest.TestCase):
         self.assertEqual(self.specs("<div>no strip here</div>"), {})
 
     def test_a_row_the_strip_does_not_carry_is_absent(self):
-        """Guests: PADI states none anywhere on the page, so there is no key
-        to read and none is invented. See docs/sources/padi.com.md."""
+        """Guests: the strip has no such row, so there is no key to read and
+        none is invented. The page states the count in its description
+        instead -- a different claim from a different place, and the class
+        below is where that is read. See docs/sources/padi.com.md."""
         self.assertNotIn("guests", self.specs())
 
     def test_an_implausible_figure_is_refused(self):
@@ -1056,3 +1127,56 @@ class TestTheVesselSpecificationStrip(unittest.TestCase):
         row = ("<p class='o-title'>Length / Width</p>"
                "<p class=\"o-value\">4500 m / 8 m</p>")
         self.assertNotIn("length_m", self.specs(row))
+
+
+class TestTheVesselDescriptionStatesTheGuestCount(unittest.TestCase):
+    """The page does say how many people the boat carries -- in prose.
+
+    `specs_from_page` recorded the opposite as settled, and the search behind
+    it was of the specification strip. MY Independence II shipped as *guests
+    not stated* beside a PADI page reading *"a 40-meter vessel designed for
+    just 20 guests"*, and a reader found it rather than a test.
+
+    The fixture is that page's description section as served on 2026-09-05,
+    markup untouched. The other fixture -- my-anemone, the same day -- is the
+    honest silence: its description names no count, and the boat still has
+    none from anywhere.
+    """
+
+    from pathlib import Path as _Path
+
+    FIXTURES = _Path(__file__).resolve().parent / "fixtures"
+
+    def described(self, markup: str | None = None) -> str | None:
+        if markup is None:
+            markup = (self.FIXTURES / "padi_vessel_description.html").read_text("utf-8")
+        return PadiComAdapter.description_from_page(markup)
+
+    def test_the_count_this_was_reported_for(self):
+        from liveaboard.promote import guests_in_prose
+
+        self.assertEqual(guests_in_prose(self.described()), 20)
+
+    def test_it_is_read_as_prose_and_not_as_a_field(self):
+        """The sentence is the source, so the whole block comes back and one
+        reader parses it. Two copies of that vocabulary would drift."""
+        text = self.described()
+        self.assertIn("designed for just 20 guests", text)
+        self.assertNotIn("<p>", text)
+
+    def test_a_page_without_the_block_states_nothing(self):
+        self.assertIsNone(self.described("<div>no description here</div>"))
+
+    def test_a_description_that_names_no_count_stays_silent(self):
+        """MY Anemone, whose prose says *welcomes guests* and no number.
+
+        The word is there and the count is not, which is the shape that would
+        make a looser pattern invent one -- and Anemone is one of the three
+        hulls that still state no guest count anywhere after this change.
+        """
+        from liveaboard.promote import guests_in_prose
+
+        quiet = (self.FIXTURES / "padi_vessel_description_silent.html").read_text("utf-8")
+        text = self.described(quiet)
+        self.assertIn("welcomes guests", text)
+        self.assertIsNone(guests_in_prose(text))

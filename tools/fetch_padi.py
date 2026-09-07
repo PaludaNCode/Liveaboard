@@ -70,7 +70,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from liveaboard.promote import _sites_from_name, itinerary_key, normalise  # noqa: E402
+from liveaboard.promote import (  # noqa: E402
+    _sites_from_name,
+    guests_in_prose,
+    itinerary_key,
+    normalise,
+)
 from liveaboard.scrape.padi_com import (  # noqa: E402
     HOST,
     ITINERARY_DETAIL,
@@ -186,6 +191,14 @@ def shop_facts(slug: str, fallback: str) -> dict[str, str | None]:
         # scrape that reads every other hull's table can never reach them.
         # Empty rather than absent where the strip says nothing.
         "specs": PadiComAdapter.specs_from_page(html) or None,
+        # How many people the boat carries, out of the description on that same
+        # page -- prose, not a strip row, which is why the strip parser used to
+        # record it as a fact PADI does not publish. Read with `promote`'s own
+        # reader so both sellers' descriptions go through one vocabulary, and
+        # kept out of `specs` because that key means the strip: a number from
+        # the marketing copy filed beside a table's figure would read as the
+        # stronger claim it is not.
+        "guests": guests_in_prose(PadiComAdapter.description_from_page(html)),
     }
 
 
@@ -603,6 +616,10 @@ def main() -> int:
             # merge with it: where both speak the vessel's own panel wins, the
             # same precedence every other fact here follows.
             "specs": shop.get("specs"),
+            # And the guest count out of the same page's description, which is
+            # the last fallback of all -- behind the specification table, the
+            # hand-read figures, the per-trip book and our own summary prose.
+            "guests": shop.get("guests"),
             # Why this vessel has the rows it has, or none. See
             # `_sailing_counts`: three quite different silences reached
             # `promote` identically before this.

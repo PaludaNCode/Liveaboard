@@ -453,9 +453,9 @@ class TestGuestCount(unittest.TestCase):
     """Berth price is per person, so how many share the boat is part of it."""
 
     def guests(self, summary):
-        from liveaboard.promote import _guests
+        from liveaboard.promote import guests_in_prose
 
-        return _guests(summary)
+        return guests_in_prose(summary)
 
     def test_the_phrasing_the_fleet_actually_uses(self):
         for text, expected in (
@@ -2028,11 +2028,59 @@ class TestTheSecondSellerFillsASpecThePanelLeavesBlank(unittest.TestCase):
         boat = self.payload(ours={"guests": 20})["boats"][0]
         self.assertIsNone(boat["length_m"])
 
-    def test_padi_is_not_a_source_for_the_guest_count(self):
-        """Its page states none anywhere, so a key here would be invented.
-        Asserted so a future `specs` gaining one is a decision, not a drift."""
+    def test_the_strip_is_not_a_source_for_the_guest_count(self):
+        """The strip has no such row -- the *description* does, and that is a
+        different claim read from a different place (see the class below). A
+        `specs.guests` would be a table figure PADI never printed, so it stays
+        ignored and a future one is a decision rather than a drift."""
         boat = self.payload(theirs={"guests": 99})["boats"][0]
         self.assertIsNone(boat["guests"])
+
+
+class TestTheSecondSellerFillsAGuestCountAndNeverMovesOne(unittest.TestCase):
+    """PADI's vessel page states the guest count in prose, and it is last.
+
+    `specs_from_page` recorded the opposite as settled -- searched in full,
+    zero hits -- and the search was of the specification strip. The page says
+    it in the description: MY Independence II shipped as *guests not stated*
+    beside a PADI page reading *"a 40-meter vessel designed for just 20
+    guests"*, and a reader found it.
+
+    Last in the chain, behind the specification table, the hand-read figures,
+    the per-trip book and our own summary. Measured over the 50 mapped vessels:
+    34 agree, 5 disagree, 4 hulls had no count from anywhere. Last is what
+    makes those 5 keep our number -- the fallback can fill a blank and can
+    never move a figure a seller stated.
+    """
+
+    def payload(self, *, ours=None, summary=None, theirs=None):
+        # The vessel description travels on the candidate's itinerary record,
+        # which is where the crawl puts what a boat says about itself.
+        trip = {"id": "alia-soul", "name": "Alia Soul", "boat": "Alia Soul"}
+        if summary:
+            trip["summary"] = summary
+        return promote(
+            candidate([departure()], itineraries=[trip]),
+            season=SEASON,
+            fees=fee_book(specs=ours) if ours is not None else None,
+            padi={"vessels": {"alia-soul": {"slug": "alia-soul", "guests": theirs}}},
+        )
+
+    def test_it_fills_a_hull_nothing_else_answers(self):
+        self.assertEqual(self.payload(theirs=20)["boats"][0]["guests"], 20)
+
+    def test_the_specification_table_still_wins(self):
+        boat = self.payload(ours={"guests": 22}, theirs=20)["boats"][0]
+        self.assertEqual(boat["guests"], 22)
+
+    def test_our_own_prose_still_wins(self):
+        """Bella 2's case: two descriptions, two numbers, and ours is read
+        from the seller whose panel the rest of that boat's bill comes from."""
+        boat = self.payload(summary="12 cabins for 22 guests", theirs=20)["boats"][0]
+        self.assertEqual(boat["guests"], 22)
+
+    def test_silence_on_both_sides_stays_unknown(self):
+        self.assertIsNone(self.payload(theirs=None)["boats"][0]["guests"])
 
 
 class TestThePortPairDoesNotSplitOneTripInTwo(unittest.TestCase):

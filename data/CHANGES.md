@@ -3,6 +3,66 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-07
+
+```
+changes: HEAD -> 2026-09-07
+===========================
+
+now sold out (3)
+  2027-07-22  Emperor Elite          Simply the Best                    liveaboard.com+padi.com
+  2027-07-31  Discovery I            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-08-05  Golden Dolphin         Brothers                           liveaboard.com
+
+bookable again (1)
+  2027-07-31  Snefro Target          Sinai Classic                      liveaboard.com+padi.com
+
+price up (1)
+  2027-07-31  JP Marine                981 ->   1,089 USD  +108 (+11.0%)  Deep South Expedition: Secrets of 
+
+170 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
+## 2026-09-06
+
+```
+changes: HEAD -> 2026-09-06
+===========================
+
+nothing moved, beyond 689 fare(s) shifting by under 5.
+```
+
+## 2026-09-05
+
+```
+changes: HEAD -> 2026-09-05
+===========================
+
+nothing moved.
+```
+
+## 2026-09-05
+
+```
+changes: HEAD -> 2026-09-05
+===========================
+
+fees (4)
+  DUNE Longara           course           included -> 210-450 EUR / per_trip
+  DUNE Longara           nitrox_course    185-210 EUR / per_trip -> 210 EUR / per_trip
+  Serenity               visa             50 EUR / per_trip -> no longer listed
+  Tala                   dive_insurance   6 EUR / per_day -> no longer listed
+```
+
+## 2026-09-05
+
+```
+changes: HEAD -> 2026-09-05
+===========================
+
+nothing moved.
+```
+
 ## 2026-09-04
 
 ```

@@ -357,6 +357,13 @@ h1 {
 }
 .change-table .c-up { font-family:var(--font-mono); color:var(--warn); }
 .change-table .c-down { font-family:var(--font-mono); color:var(--ok); }
+/* Who published the sailing this row is about. Quiet and last: it is the
+   answer to "whose news is this", which a reader wants after the date, the
+   boat and the money rather than before them — and it is empty on the entries
+   the book held before the field existed. */
+.change-table .c-sellers {
+  color:var(--ink-faint); font-size:11px; padding-left:10px;
+}
 
 /* Every row names a boat that is a row in the trips table, and none of them
    could be reached from here: the panel answering "did this get cheaper" could
@@ -547,10 +554,15 @@ h1 {
 /* The chips scroll inside the panel rather than lengthening it: the Boat bank
    is 77 chips and the panel's cap is what keeps the table on screen. */
 .bankwrap { flex:1 1 auto; min-height:0; overflow-y:auto; }
-.bank > span[id], .bank .nights-row, .bank .flag-row {
+.bank > span[id], .bank .range-row, .bank .flag-row {
   display:flex; gap:5px; flex-wrap:wrap; align-items:center;
 }
-.nights-row .dim { font-size:11.5px; }
+.range-row .dim { font-size:11.5px; }
+/* The one bank holding two rows: a range, and the switch for the boats the
+   range cannot ask. It is a second row rather than a fourth item on the first
+   because it is a different question -- the boxes bound a number and this one
+   is about rows that have none. */
+.range-row + .flag-row { margin-top:7px; }
 
 button.chip {
   font:inherit; font-size:12px; cursor:pointer; padding:3px 10px;
@@ -656,23 +668,27 @@ thead tr.band th.band-bill {
 }
 thead th.zone-bill { background:var(--bill); }
 tbody td.money, tbody td.nitrox, tbody td.mfees,
-tbody td.cost, tbody td.perdive { background:var(--bill); }
+tbody td.cost, tbody td.perdive, tbody td.perday { background:var(--bill); }
 thead th[data-k="base"], tbody td.money,
 thead tr.band th.band-bill { border-left:1px solid var(--bill-edge); }
-thead th[data-k="perdive"], tbody td.perdive { border-right:1px solid var(--bill-edge); }
+/* The band's right edge is on the *last* column in it, so adding Per day
+   after Per dive moves the rule rather than leaving it mid-band. */
+thead th[data-k="perday"], tbody td.perday { border-right:1px solid var(--bill-edge); }
 /* Hover, the mark and the sold-out treatment all outrank the band: it groups
    columns, and a row the visitor is pointing at or has marked is a statement
    about the row. Without these the five money cells keep the tint and the row
    highlight stops halfway across. */
 tbody tr.row:hover td.money, tbody tr.row:hover td.nitrox,
 tbody tr.row:hover td.mfees, tbody tr.row:hover td.cost,
-tbody tr.row:hover td.perdive { background:var(--row-hover); }
+tbody tr.row:hover td.perdive,
+tbody tr.row:hover td.perday { background:var(--row-hover); }
 tbody tr.row.marked td.money, tbody tr.row.marked td.nitrox,
 tbody tr.row.marked td.mfees, tbody tr.row.marked td.cost,
-tbody tr.row.marked td.perdive,
+tbody tr.row.marked td.perdive, tbody tr.row.marked td.perday,
 tbody tr.row.marked:hover td.money, tbody tr.row.marked:hover td.nitrox,
 tbody tr.row.marked:hover td.mfees, tbody tr.row.marked:hover td.cost,
-tbody tr.row.marked:hover td.perdive { background:var(--row-marked); }
+tbody tr.row.marked:hover td.perdive,
+tbody tr.row.marked:hover td.perday { background:var(--row-marked); }
 
 tbody td {
   padding:5px 8px; border-bottom:1px solid var(--rule);
@@ -714,9 +730,10 @@ td.trip .t-name { font-weight:400; }
 th.sp, td.sp { width:100%; padding:0; }
 
 thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
-thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+thead th[data-k="total"], thead th[data-k="perdive"],
+thead th[data-k="perday"], thead th[data-k="source"],
 tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
-tbody td.perdive, tbody td.source {
+tbody td.perdive, tbody td.perday, tbody td.source {
   padding-left:7px; padding-right:7px;
 }
 tbody tr.row td { transition:background-color .08s linear; }
@@ -729,8 +746,10 @@ tbody td.cost b { color:var(--accent); font-size:13.5px; font-weight:600; letter
    Places stacks: the count is a label on the number rather than a second
    value, and side by side the two set a column 93px wide for a figure that
    needs 40. */
-td.perdive b { display:block; }
-td.perdive .dim { display:block; font-size:9.5px; line-height:1.3; }
+td.perdive b, td.perday b { display:block; }
+td.perdive .dim, td.perday .dim {
+  display:block; font-size:9.5px; line-height:1.3;
+}
 
 /* The advertised price and what was added, drawn to scale under the total:
    bar length compares down the column, the split compares within one row.
@@ -1009,10 +1028,11 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
  * is already clamped into it by `place()`. On a phone that is most of the
  * screen, which is the right answer for a document a reader opened
  * deliberately and can dismiss with Escape or a tap outside. */
-/* `.panel.bill-pop` rather than `.bill-pop`: the shared panel rule sets a
-   21-25em width and is written further down this file, so at equal specificity
-   it won and capped the bill at 400px however wide the screen was. */
-.panel.bill-pop { min-width:min(30em, calc(100vw - 16px)); max-width:min(46em, calc(100vw - 16px)); }
+/* The bill's own width is written with the two panel states further down this
+   file, where the order settles it -- see THE WIDE PANEL there. It was here,
+   as `.panel.bill-pop`, on the reasoning that the extra class beat the shared
+   rule; then the shared rule became `.panel:not(:modal)`, which is 0,2,0 as
+   well, and the later of two equals won. */
 /* On `.pbody` and not on the dialog: the dialog's own box has to stay padding
    free, because a press landing on it is how the backdrop is told apart from
    the sheet. Dropped in the rewrite that made these dialogs, and every amount
@@ -1121,9 +1141,10 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
      the gap between a figure and its neighbour is what the eye reads them
      against. */
   thead th[data-k="base"], thead th[data-k="nitrox"], thead th[data-k="later"],
-  thead th[data-k="total"], thead th[data-k="perdive"], thead th[data-k="source"],
+  thead th[data-k="total"], thead th[data-k="perdive"],
+  thead th[data-k="perday"], thead th[data-k="source"],
   tbody td.money, tbody td.nitrox, tbody td.mfees, tbody td.cost,
-  tbody td.perdive, tbody td.source {
+  tbody td.perdive, tbody td.perday, tbody td.source {
     padding-left:11px; padding-right:11px;
   }
   thead tr.band th { padding-top:6px; padding-bottom:5px; }
@@ -1312,6 +1333,15 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   font-size:10px; font-weight:600; color:var(--ok);
   font-family:var(--font-narrow); letter-spacing:.03em; white-space:nowrap;
 }
+/* The fare the rate came off, struck through beside it. Same treatment as the
+   Was column on the sale view -- mono, struck, quiet -- because it is the same
+   fact and a reader crossing between the two views should not have to work
+   that out. Quieter than the rate: what the trip costs is the figure above it,
+   and this is the one it used to be. */
+.sale-was {
+  font-size:10px; color:var(--ink-faint); font-family:var(--font-mono);
+  text-decoration:line-through; white-space:nowrap;
+}
 /* Where the sale tag lives: a line of its own under the advertised figure.
    Beside it, it was the width of the column on every row -- see the note where
    it is built. It shared this line with a `2 sellers` mark until that mark
@@ -1413,9 +1443,13 @@ a { color:var(--accent); }
   .card-head { display:flex; align-items:flex-start; gap:10px; }
   .card-id { flex:1 1 auto; min-width:0; }
   .card-id .b-name { font-size:14px; font-weight:600; }
-  .card-id .d-span {
+  /* The dates, on their own row under the head. Full width, because the money
+     box may take 58% of the card and the fragment left beside it was where
+     this used to sit. Mono and tabular, so a column of cards lines its dates
+     up the way the table's own Departs column does. */
+  .card-when {
     font-family:var(--font-mono); font-variant-numeric:tabular-nums;
-    font-size:11.5px; color:var(--ink-dim);
+    font-size:11.5px; color:var(--ink-dim); line-height:1.3;
   }
   /* The money, in its own corner, at every width. Nothing folds it away and
      nothing has to be measured to keep it there -- which is the whole reason
@@ -1427,18 +1461,36 @@ a { color:var(--accent); }
   }
   .card-money b { color:var(--accent); font-size:15px; font-weight:600; }
   .card-money .split { font-size:9.5px; }
-  /* Price per dive, under the total it divides and inside the same tinted
-     box, ruled off from it. Its figure is deliberately *not* the accent: the
-     total is the number this page exists to publish and there is one of those
-     per card. */
+  /* The figures derived from the total -- per dive, then per day -- under
+     the total they divide and inside the same tinted box, ruled off from it.
+     Neither takes the accent: the total is the number this page exists to
+     publish and there is one of those per card. Two lines now rather than
+     one, which is why the rule is on the first only: they are one block of
+     derived readings, not two sections. */
   .card-money .perline {
     display:block; margin-top:2px; padding-top:2px;
     border-top:1px solid var(--bill-edge);
     font-size:11px; line-height:1.3; color:var(--ink-dim);
     font-variant-numeric:tabular-nums;
   }
+  .card-money .perline + .perline {
+    border-top:0; margin-top:1px; padding-top:0;
+  }
   .card-money .perline b { color:var(--ink); font-size:11.5px; }
   .card-money .perline.dim { color:var(--ink-faint); }
+  /* The markdown, under the split whose first figure it comes off. No rule
+     above it: the one in this box separates the total from what is derived
+     from it, and this is another reading of the berth rather than a third
+     section. The subject is a label in the meta line's own vocabulary,
+     because that is what a card uses where the table has a heading. */
+  .card-money .saleline {
+    display:flex; justify-content:flex-end; align-items:baseline; gap:5px;
+    margin-top:1px; line-height:1.3;
+  }
+  .card-money .saleline i {
+    font-style:normal; font-family:var(--font-narrow); font-size:9px;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
+  }
   /* The cells keep their table classes so the colours and the panel triggers
      come across -- and those classes carry the table's widths, which are the
      one thing that must not. A 116px reef cell in a 370px card set the sites
@@ -1456,11 +1508,16 @@ a { color:var(--accent); }
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
     overflow:hidden;
   }
-  /* The boat, then everything that identifies the sailing on one line under
-     it: four stacked sub-lines is a card that shows two departures a screen. */
+  /* The boat, then what it carries, on one line under it: four stacked
+     sub-lines is a card that shows two departures a screen. The dates left
+     this stack for a row of their own and the rule stays, because the guest
+     count still sits inline after the name.
+
+     `.card-when` keeps the same separator for the same reason -- the nights
+     are the second fact inside that cell, not a line under it. */
   .card-id .b-name { display:block; }
-  .card-id .sub, .card-id .d-span { display:inline; }
-  .card-id .sub::before, .card-id .d-span::before {
+  .card-id .sub, .card-when .d-span, .card-when .sub { display:inline; }
+  .card-id .sub::before, .card-when .sub::before {
     content:" · "; color:var(--rule-strong);
   }
   .card-id .b-name + .sub::before { content:""; }
@@ -1474,7 +1531,10 @@ a { color:var(--accent); }
      agreeing here is a coincidence rather than a dependency. */
   .card .berths { flex-direction:row; gap:.3em; align-items:baseline;
                   justify-content:flex-start; }
-  .card .marks { display:inline-flex; margin:0; }
+  /* The gap is written here as well as on the table's own `.marks`, because
+     that rule is `td.money .marks` and a card has no cells: without it the
+     struck fare and the rate print as one word. */
+  .card .marks { display:inline-flex; margin:0; gap:5px; align-items:baseline; }
   /* Each fact keeps the class its table cell had, so the panel triggers, the
      colours and the sold-out treatment all arrive without a second set of
      rules. What is added is the label, because a card has no column heading
@@ -1848,6 +1908,24 @@ a { color:var(--accent); }
   max-width: min(46em, calc(100vw - 2rem));
   min-width: 0;
 }
+/* THE WIDE PANEL, AND IT IS PLACED RATHER THAN WEIGHTED.
+   The fee table's five columns want 460px, so the 21-25em the other two
+   panels read well at is not a width the bill can be read at: the table
+   scrolls sideways inside its own `.fee-scroll` and the tier and the
+   provenance sit past the right edge. That is what shipped on a desktop --
+   336px of bill on a 1440px screen -- because this rule was written up beside
+   the fee table and answered `.panel-pop` on specificity, and `.panel-pop`
+   then became `.panel:not(:modal)`, which is a class's worth too. At 0,2,0
+   apiece the later one wins, and this one was 700 lines earlier.
+
+   So it sits after both states instead, where nothing has to be counted --
+   and *before* the sheet block below, which is the one place the bill must
+   not win: a sheet is the full width of the phone and takes its width from
+   there. */
+.panel.bill-pop {
+  min-width: min(30em, calc(100vw - 16px));
+  max-width: min(46em, calc(100vw - 16px));
+}
 .panel::backdrop { background: rgba(20, 26, 34, .45); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .panel::backdrop { background: rgba(0, 0, 0, .6); }
@@ -1936,7 +2014,18 @@ a { color:var(--accent); }
   font-weight: 600;
   padding: .35em .7em .2em;
 }
-.panel table.cabins td { padding: .22em .7em; border-top: 1px solid var(--rule); }
+/* A cabin's name wraps, and the two numbers beside it do not.
+   `tbody td` is the *table's* rule -- `white-space:nowrap`, so a departure's
+   cells stay one line down a column -- and the ladder is a `tbody` too, so it
+   inherited a rule about a different table. "Standard Sea View Cabin - Main
+   Deck" then set the table's own minimum at 403px inside a 334px peek, and
+   the panel grew a horizontal scrollbar under a three-rung ladder that had
+   room to spare. Nine of the first forty sailings did it. The money and the
+   count keep `nowrap` from `.num`, which is more specific than this. */
+.panel table.cabins td {
+  padding: .22em .7em; border-top: 1px solid var(--rule);
+  white-space: normal;
+}
 .panel table.cabins .num {
   text-align: right;
   font-family: var(--font-mono);

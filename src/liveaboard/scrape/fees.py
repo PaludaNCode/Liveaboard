@@ -201,6 +201,27 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # operator's list, which is exactly the case this code was split out for.
     (r"\bnitrox\s+course\b|\benriched\s+air\s+course\b"
      r"|\benriched\s+air\s+diver\b|\bnitrox\s+diver\b", FeeCode.NITROX_COURSE),
+    # A tank size is the tank, not the gas, and it has to be read before the
+    # word beside it. The operator fills 12-litre tanks free and charges for
+    # 15-litre ones, so "Nitrox 15 liter tanks", "15 LITER tank nitrox (only 12
+    # liter is free of chanrge)" and "15 liters Nitrox" are one charge with
+    # three spellings -- and `\bnitrox\b` claimed all 17 of them, pricing an
+    # upgrade as the gas on the toggle this site counts, on 15 itineraries and
+    # 48 sailings, against a vessel panel stating nitrox included.
+    #
+    # liveaboard.com settles that they are one charge rather than two sellers
+    # disagreeing: it files the same thing under *gear* ("15L tanks 35-65/week")
+    # on 79 of 79 vessels and never touches its own nitrox line.
+    #
+    # Narrow on purpose. The 14 remaining clashes are one vessel's bare
+    # "Nitrox" at 50 with no size in the title, and there the stated amount
+    # wins: turning a stated cost into free is the error this must never make.
+    (r"\b1[0-9]\s*(?:l\b|lt\b|ltrs?\b|liters?\b|litres?\b)", FeeCode.TANK_15L),
+    # Supervision, at 9 a dive, for divers of a stated certification level.
+    # Priced and real, and owed by some divers and not others -- so it is a
+    # charge like a guide's rather than one every berth carries, which is what
+    # `_tier_for` and the mandatory loop in `padi_com` do with it.
+    (r"\bsupervision\b", FeeCode.GUIDED_DIVING),
     (r"\bdiving\s+courses?\b|\bscuba\s+courses?\b|\bcourses?\b", FeeCode.COURSE),
     (r"\bnitrox\b|\benriched\s+air\b", FeeCode.NITROX),
     (r"\b(?:private\s+)?dive\s+guide\b|\bprivate\s+guide\b", FeeCode.PRIVATE_GUIDE),
@@ -357,6 +378,33 @@ def _combined_fee(label: str) -> bool:
     if not COMBINED_TAIL.search(label):
         return False
     return sum(1 for part in COMBINED_PARTS if part.search(label)) >= 2
+
+
+ON_PURCHASES = re.compile(r"\bon\s*-?\s*board\s+purchases\b|\bonboard\s+purchases\b",
+                          re.I)
+"""A charge whose base is what the diver buys on board, not what they booked.
+
+Three titles, 34 entries, and `price` and `extraValue` are null on every one:
+*14% GST (on onboard purchases)*, *15% Local GST (on onboard purchases)*,
+*14% Value Added Tax (VAT) (onboard purchases)*. There is no figure because
+there is no base -- a diver who buys nothing at the bar pays nothing -- so this
+is not a percentage this project could apply even if it were willing to.
+
+PADI files them under its **mandatory** extras, which is what made them block
+a bill: a charge in that list with no readable answer keeps the trip's book
+`complete: false`, and `complete` is a verdict about the charges a diver cannot
+decline. This one they can, by not buying anything.
+
+Deliberately about the stated **base** rather than the word *tax*: *"10% (of
+the trip cost) VAT Mandatory Fee"* is the same shape, is charged on the fare,
+and stays mandatory and unpriced -- its trips keep an incomplete book until
+this project can carry a percentage of a fare, which is the honest state.
+"""
+
+
+def billed_on_purchases(label: str) -> bool:
+    """Whether this charge falls on the diver's own onboard spend."""
+    return bool(ON_PURCHASES.search(label))
 
 
 def classify_label(label: str, *, prose: bool = True) -> FeeCode | None:

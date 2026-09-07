@@ -274,12 +274,53 @@
            Seller took over the job of linking both sellers. -->
       <div class="bank" data-bank="sellers"><span id="sellers"></span></div>
       <div class="bank" data-bank="nights">
-        <span class="nights-row">
+        <span class="range-row">
           <span class="dim">from</span>
           <input id="nmin" type="number" inputmode="numeric" aria-label="Fewest nights">
           <span class="dim">to</span>
           <input id="nmax" type="number" inputmode="numeric" aria-label="Most nights">
           <span class="dim">nights</span>
+        </span>
+      </div>
+      <!-- How many divers are aboard, in the same control as the nights and
+           for the opposite reason: nights sits overwhelmingly at seven, and
+           this spreads across fifteen values, so a chip per number would be
+           fifteen controls for a distinction nobody shops on. The bounds and
+           the placeholders are set by app.js off the counts the boats state,
+           because a figure typed here is a figure that goes stale.
+
+           The chip is not a second bound. A boat that states no capacity
+           cannot be asked anything by one -- so those sailings stay in the
+           table by default, and this is how a reader shopping small boats
+           drops them on purpose rather than the page deleting them quietly.
+           Hidden by app.js unless there are such rows, and since 2026-09-05
+           there are none: every hull in the fleet states a count. -->
+      <div class="bank" data-bank="guests">
+        <span class="range-row">
+          <span class="dim">from</span>
+          <input id="gmin" type="number" inputmode="numeric" aria-label="Fewest guests">
+          <span class="dim">to</span>
+          <input id="gmax" type="number" inputmode="numeric" aria-label="Most guests">
+          <span class="dim">guests</span>
+        </span>
+        <span class="flag-row">
+          <button type="button" class="chip" id="hideUnstated" aria-pressed="false" hidden>Hide unstated</button>
+        </span>
+      </div>
+      <!-- What the trip costs a night: the same two boxes again, over the one
+           number on this page that is derived rather than stated. The bill
+           divided by the trip's nights, so it moves when the Include switches
+           do — which is the point, since those switches change what the trip
+           costs. The bounds and placeholders are set by app.js off the rows
+           themselves, as the page opens, for the reason the guests boxes are:
+           a figure typed here is a figure that goes stale. -->
+      <div class="bank" data-bank="perday">
+        <span class="range-row">
+          <span class="dim">from</span>
+          <input id="pdmin" type="number" inputmode="numeric" aria-label="Cheapest per day, in euro">
+          <span class="dim">to</span>
+          <input id="pdmax" type="number" inputmode="numeric" aria-label="Dearest per day, in euro">
+          <span class="dim">€ a day</span>
         </span>
       </div>
     </div>

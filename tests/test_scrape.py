@@ -149,6 +149,75 @@ class TestDepartureExtraction(unittest.TestCase):
         self.assertNotIn(900.0, prices)
 
 
+class TestAnIdNoSiblingCanMove(unittest.TestCase):
+    """A departure id is identity, so nothing about it may be positional.
+
+    It was `f"{slug}-{start}-{index}"` with `index` counted over the page's
+    Event nodes, so a week inserted or withdrawn earlier renumbered every later
+    one — and an id that moves reads to `changes.compare` as one sailing
+    withdrawn and another arrived. `blue-2027-08-12-0` became
+    `blue-2027-08-12-1` on 2026-09-04 with the same boat, week, trip and
+    seller, and was published as both.
+
+    The suffix is for two sailings of one boat starting the same day. Against
+    the committed candidate it separated nothing — 955 departures, 955 distinct
+    `(boat, start)` pairs — so every suffix above zero was position. It stays
+    because a collision is worse than a wasted digit, and it counts within the
+    date now.
+    """
+
+    HEAD = "<html><head>"
+    TAIL = "</head><body></body></html>"
+
+    def event(self, name, start, end, price="1400"):
+        return ('<script type="application/ld+json">'
+                '{"@type":"Event","name":"%s","startDate":"%s","endDate":"%s",'
+                '"offers":{"@type":"Offer","price":"%s","priceCurrency":"EUR",'
+                '"availability":"InStock"}}</script>' % (name, start, end, price))
+
+    def ids(self, *events):
+        adapter = LiveaboardComAdapter(PoliteFetcher(snapshot_dir="/tmp/unused"))
+        page = self.HEAD + "".join(events) + self.TAIL
+        return [d["id"] for d in adapter.parse(result(page)).departures]
+
+    def test_a_sailing_inserted_earlier_does_not_renumber_the_rest(self):
+        may = self.event("Brothers", "2027-05-06", "2027-05-13")
+        june = self.event("St John's", "2027-06-03", "2027-06-10")
+        before = self.ids(may, june)
+        after = self.ids(self.event("New week", "2027-04-29", "2027-05-06"), may, june)
+        self.assertEqual(before, ["a-boat-2027-05-06-0", "a-boat-2027-06-03-0"])
+        self.assertEqual(before, after[1:],
+                         "a week added at the top of the page moved the ids "
+                         "under the two below it: %s" % after)
+
+    def test_a_sailing_withdrawn_earlier_does_not_either(self):
+        first = self.event("Gone next week", "2027-04-29", "2027-05-06")
+        rest = [self.event("Brothers", "2027-05-06", "2027-05-13"),
+                self.event("St John's", "2027-06-03", "2027-06-10")]
+        self.assertEqual(self.ids(first, *rest)[1:], self.ids(*rest))
+
+    def test_two_sailings_on_one_day_still_get_two_ids(self):
+        """What the suffix is actually for. Ordered by the trip's own name, so
+        even this case does not depend on the page's order."""
+        north = self.event("North & Tiran", "2027-05-06", "2027-05-13")
+        south = self.event("Brothers", "2027-05-06", "2027-05-13")
+        ids = self.ids(north, south)
+        self.assertEqual(sorted(ids), ["a-boat-2027-05-06-0", "a-boat-2027-05-06-1"])
+        self.assertEqual(ids, self.ids(south, north)[::-1],
+                         "the two ids swap when the seller prints them the "
+                         "other way round")
+
+    def test_a_row_that_cannot_be_priced_takes_no_number_with_it(self):
+        """The unpriced node is dropped before the numbering, so it cannot
+        leave a hole in it."""
+        unpriced = ('<script type="application/ld+json">{"@type":"Event",'
+                    '"name":"No price","startDate":"2027-04-29",'
+                    '"endDate":"2027-05-06"}</script>')
+        self.assertEqual(
+            self.ids(unpriced, self.event("Brothers", "2027-05-06", "2027-05-13")),
+            ["a-boat-2027-05-06-0"])
+
+
 class TestFetchCache(unittest.TestCase):
     def test_second_get_is_served_from_cache(self):
         """Listing pages are read twice by design; paying twice is slow and rude."""
