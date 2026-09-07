@@ -1,6 +1,88 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-07",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "emperor-elite-2027-07-22-0",
+    "boat": "Emperor Elite",
+    "title": "Simply the Best",
+    "start": "2027-07-22",
+    "price": 1858.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "discovery-i-2027-07-31-0",
+    "boat": "Discovery I",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-31",
+    "price": 1012.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "golden-dolphin-2027-08-05-0",
+    "boat": "Golden Dolphin",
+    "title": "Brothers",
+    "start": "2027-08-05",
+    "price": 1234.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "returned": [
+   {
+    "id": "snefro-target-2027-07-31-0",
+    "boat": "Snefro Target",
+    "title": "Sinai Classic",
+    "start": "2027-07-31",
+    "price": 1392.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [
+   {
+    "id": "jp-marine-2027-07-31-0",
+    "boat": "JP Marine",
+    "title": "Deep South Expedition: Secrets of Zabargad",
+    "start": "2027-07-31",
+    "was": 981.0,
+    "now": 1089.0,
+    "currency": "USD",
+    "delta": 108.0,
+    "pct": 11.009174311926607
+   }
+  ],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 170,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-07"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-06",
   "added": [],
   "sold_out": [],
@@ -5857,544 +5939,5 @@
    "price_down": 524
   },
   "day": "2026-08-29"
- },
- {
-  "before": "dba796c2",
-  "after": "2026-08-28",
-  "added": [
-   {
-    "id": "blue-horizon-2027-05-01-0",
-    "boat": "Blue Horizon",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-01",
-    "price": 1715.0,
-    "currency": "USD"
-   },
-   {
-    "id": "dune-longara-2027-05-01-0",
-    "boat": "DUNE Longara",
-    "title": "North Dahab Tiran",
-    "start": "2027-05-01",
-    "price": 1690.0,
-    "currency": "USD"
-   },
-   {
-    "id": "emperor-asmaa-2027-05-01-0",
-    "boat": "Emperor Asmaa",
-    "title": "Simply The Best",
-    "start": "2027-05-01",
-    "price": 1515.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-05-01-0",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-05-01",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-horizon-2027-05-08-1",
-    "boat": "Blue Horizon",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-08",
-    "price": 1372.0,
-    "currency": "USD"
-   },
-   {
-    "id": "dune-longara-2027-05-08-1",
-    "boat": "DUNE Longara",
-    "title": "Golden Triangle",
-    "start": "2027-05-08",
-    "price": 1864.0,
-    "currency": "USD"
-   },
-   {
-    "id": "emperor-asmaa-2027-05-08-1",
-    "boat": "Emperor Asmaa",
-    "title": "Daedalus, Fury and Elphinstone",
-    "start": "2027-05-08",
-    "price": 1457.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-05-08-1",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-05-08",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-horizon-2027-05-15-2",
-    "boat": "Blue Horizon",
-    "title": "Northern Red Sea & Brothers",
-    "start": "2027-05-15",
-    "price": 1204.0,
-    "currency": "USD"
-   },
-   {
-    "id": "dune-longara-2027-05-15-2",
-    "boat": "DUNE Longara",
-    "title": "Golden Triangle",
-    "start": "2027-05-15",
-    "price": 1864.0,
-    "currency": "USD"
-   },
-   {
-    "id": "emperor-asmaa-2027-05-15-2",
-    "boat": "Emperor Asmaa",
-    "title": "Simply the Best",
-    "start": "2027-05-15",
-    "price": 1573.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-05-15-2",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-05-15",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-horizon-2027-05-22-3",
-    "boat": "Blue Horizon",
-    "title": "Daedalus & St. John's",
-    "start": "2027-05-22",
-    "price": 1372.0,
-    "currency": "USD"
-   },
-   {
-    "id": "dune-longara-2027-05-22-3",
-    "boat": "DUNE Longara",
-    "title": "Golden Triangle",
-    "start": "2027-05-22",
-    "price": 1864.0,
-    "currency": "USD"
-   },
-   {
-    "id": "emperor-asmaa-2027-05-22-3",
-    "boat": "Emperor Asmaa",
-    "title": "Southern Solitude",
-    "start": "2027-05-22",
-    "price": 1573.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-05-22-3",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-05-22",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-horizon-2027-05-29-4",
-    "boat": "Blue Horizon",
-    "title": "Daedalus & St. John's",
-    "start": "2027-05-29",
-    "price": 1715.0,
-    "currency": "USD"
-   },
-   {
-    "id": "dune-longara-2027-05-29-4",
-    "boat": "DUNE Longara",
-    "title": "Mixed South - Daedalus, Rocky & Zabargad Islands and St John’s",
-    "start": "2027-05-29",
-    "price": 1573.0,
-    "currency": "USD"
-   },
-   {
-    "id": "emperor-asmaa-2027-05-29-4",
-    "boat": "Emperor Asmaa",
-    "title": "South and St. Johns",
-    "start": "2027-05-29",
-    "price": 1515.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-05-29-4",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-05-29",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-06-05-0",
-    "boat": "Discovery II",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-06-05",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-06-05-0",
-    "boat": "Yachtiano",
-    "title": "North",
-    "start": "2027-06-05",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-06-12-1",
-    "boat": "Discovery II",
-    "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
-    "start": "2027-06-12",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-06-12-1",
-    "boat": "Yachtiano",
-    "title": "North & Tiran",
-    "start": "2027-06-12",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-06-19-2",
-    "boat": "Discovery II",
-    "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
-    "start": "2027-06-19",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-06-19-2",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-06-19",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-06-26-3",
-    "boat": "Discovery II",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-06-26",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-06-26-3",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-06-26",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ocean-lovers-2027-07-03-0",
-    "boat": "Ocean Lovers",
-    "title": "North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab",
-    "start": "2027-07-03",
-    "price": 1458.0,
-    "currency": "USD"
-   },
-   {
-    "id": "vita-xplorer-2027-07-03-0",
-    "boat": "Vita Xplorer",
-    "title": "Ras Mohamed & Brothers Islands",
-    "start": "2027-07-03",
-    "price": 1253.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-07-03-0",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-07-03",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ocean-lovers-2027-07-10-1",
-    "boat": "Ocean Lovers",
-    "title": "Brothers - Daedalus - Elphinstone",
-    "start": "2027-07-10",
-    "price": 1489.0,
-    "currency": "USD"
-   },
-   {
-    "id": "vita-xplorer-2027-07-10-1",
-    "boat": "Vita Xplorer",
-    "title": "Ras Mohamed & Brothers Islands",
-    "start": "2027-07-10",
-    "price": 1253.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-07-10-1",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-07-10",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ocean-lovers-2027-07-17-2",
-    "boat": "Ocean Lovers",
-    "title": "North Reefs - Wrecks - Ras Mohamed - Tiran - Brothers Islands",
-    "start": "2027-07-17",
-    "price": 1458.0,
-    "currency": "USD"
-   },
-   {
-    "id": "vita-xplorer-2027-07-17-2",
-    "boat": "Vita Xplorer",
-    "title": "Ras Mohamed & Brothers Islands",
-    "start": "2027-07-17",
-    "price": 1253.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-07-17-2",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-07-17",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ocean-lovers-2027-07-24-3",
-    "boat": "Ocean Lovers",
-    "title": "Brothers - Daedalus - Elphinstone",
-    "start": "2027-07-24",
-    "price": 1489.0,
-    "currency": "USD"
-   },
-   {
-    "id": "vita-xplorer-2027-07-24-3",
-    "boat": "Vita Xplorer",
-    "title": "Ras Mohamed & Brothers Islands",
-    "start": "2027-07-24",
-    "price": 1253.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-07-24-3",
-    "boat": "Yachtiano",
-    "title": "Yachtiano Deluxe",
-    "start": "2027-07-24",
-    "price": 1748.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ocean-lovers-2027-07-31-4",
-    "boat": "Ocean Lovers",
-    "title": "North Reefs, Wrecks, Ras Mohamed, Tiran, & Dahab",
-    "start": "2027-07-31",
-    "price": 1458.0,
-    "currency": "USD"
-   },
-   {
-    "id": "vita-xplorer-2027-07-31-4",
-    "boat": "Vita Xplorer",
-    "title": "St John's Reef",
-    "start": "2027-07-31",
-    "price": 1253.0,
-    "currency": "USD"
-   },
-   {
-    "id": "yachtiano-2027-07-31-4",
-    "boat": "Yachtiano",
-    "title": "North & Tiran",
-    "start": "2027-07-31",
-    "price": 1573.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-08-07-0",
-    "boat": "Discovery II",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-08-07",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "red-sea-aggressor-v-2027-08-07-0",
-    "boat": "Red Sea Aggressor V",
-    "title": "Deep South - Rocky & Zabargad Islands",
-    "start": "2027-08-07",
-    "price": 2799.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-08-14-1",
-    "boat": "Discovery II",
-    "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
-    "start": "2027-08-14",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "red-sea-aggressor-v-2027-08-14-1",
-    "boat": "Red Sea Aggressor V",
-    "title": "Deep South - Rocky & Zabargad Islands",
-    "start": "2027-08-14",
-    "price": 2799.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-08-21-2",
-    "boat": "Discovery II",
-    "title": "North Wrecks, Ras Mohamed, Tiran, Brothers, Safaga",
-    "start": "2027-08-21",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "red-sea-aggressor-v-2027-08-21-2",
-    "boat": "Red Sea Aggressor V",
-    "title": "Deep South - Rocky & Zabargad Islands",
-    "start": "2027-08-21",
-    "price": 2799.0,
-    "currency": "USD"
-   },
-   {
-    "id": "discovery-ii-2027-08-28-3",
-    "boat": "Discovery II",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-08-28",
-    "price": 1040.0,
-    "currency": "USD"
-   },
-   {
-    "id": "red-sea-aggressor-v-2027-08-28-3",
-    "boat": "Red Sea Aggressor V",
-    "title": "Deep South - Rocky & Zabargad Islands",
-    "start": "2027-08-28",
-    "price": 2799.0,
-    "currency": "USD"
-   }
-  ],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-08-28"
- },
- {
-  "before": "21203b4a",
-  "after": "2026-08-28",
-  "added": [
-   {
-    "id": "oceanix-2027-07-24-0",
-    "boat": "Oceanix",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-07-24",
-    "price": 1154.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ghazala-adventure-2027-08-02-0",
-    "boat": "Ghazala Adventure",
-    "title": "North, Tiran & Dahab",
-    "start": "2027-08-02",
-    "price": 1608.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ghazala-adventure-2027-08-09-1",
-    "boat": "Ghazala Adventure",
-    "title": "North: Wrecks & Reefs",
-    "start": "2027-08-09",
-    "price": 1571.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ghazala-adventure-2027-08-16-2",
-    "boat": "Ghazala Adventure",
-    "title": "North: Wrecks & Reefs",
-    "start": "2027-08-16",
-    "price": 1571.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ghazala-adventure-2027-08-23-3",
-    "boat": "Ghazala Adventure",
-    "title": "Brothers, Daedalus, Elphinstone",
-    "start": "2027-08-23",
-    "price": 1684.0,
-    "currency": "USD"
-   },
-   {
-    "id": "ghazala-adventure-2027-08-30-4",
-    "boat": "Ghazala Adventure",
-    "title": "North & Brothers",
-    "start": "2027-08-30",
-    "price": 1748.0,
-    "currency": "USD"
-   }
-  ],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [
-   {
-    "id": "avo-2027-07-24-0",
-    "boat": "AVO",
-    "title": "Daedalus & Elphinstone",
-    "start": "2027-07-24",
-    "price": 940.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-2027-08-12-0",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus and Elphinstone",
-    "start": "2027-08-12",
-    "price": 1655.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-2027-08-19-1",
-    "boat": "Blue",
-    "title": "North & Tiran",
-    "start": "2027-08-19",
-    "price": 1503.0,
-    "currency": "USD"
-   }
-  ],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [
-   "Blue Horizon 2027-05",
-   "DUNE Longara 2027-05",
-   "Discovery II 2027-06",
-   "Discovery II 2027-08",
-   "Emperor Asmaa 2027-05",
-   "Ocean Lovers 2027-07",
-   "Red Sea Aggressor V 2027-08",
-   "Yachtiano 2027-05",
-   "Yachtiano 2027-06",
-   "Yachtiano 2027-07"
-  ],
-  "vessels_new": [],
-  "fx": [
-   {
-    "currency": "USD",
-    "was": 0.858738,
-    "now": 0.858885,
-    "pct": 0.01711814313562556
-   }
-  ],
-  "price_rounding": 174,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-08-28"
  }
 ]
