@@ -1288,6 +1288,22 @@ Break these and the site starts lying quietly rather than failing loudly.
   sellers*. The fixture that was supposed to cover this put gear on the vessel
   alone, so it passed throughout; the test now puts it on both books, and a
   second one asserts no shipped bill names any code twice.
+  **And the two sets can name one charge through the tier rather than the
+  seller.** That split assumes PADI's mandatory rows and the vessel's
+  non-mandatory ones are different charges, and on New Sambo they are not:
+  PADI publishes *National park fees* at €45 as mandatory, the vessel's own
+  panel lists *National Park Fees (€25-60 / trip)* under Optional, and both
+  classify as `marine_park`. One boat, five trips, one code over the whole
+  book — and it shipped nothing until PADI opened four in-season *Mini-Safari
+  Sataya* sailings liveaboard.com does not sell, which arrive as PADI-only
+  rows carrying PADI's own bill. A code PADI states as mandatory is **PADI's
+  line here** and the vessel's non-mandatory copy is dropped from that column:
+  this is the second seller's account of what a diver booking through it
+  cannot decline, so taking the other seller's optional entry instead would
+  leave PADI's total short of a charge PADI publishes as required — the
+  gangway arithmetic in the other direction. Nothing is lost, because the
+  vessel's own line is in our bill beside it at the vessel's figure and tier,
+  and the two columns disagreeing about a charge is what the page is for.
 - **A sale is the list price a seller prints beside its own, never a banner.**
   liveaboard.com publishes no deals listing at all — `/liveaboard-deals` is SEO
   prose and the seasonal campaign pages carry only *"Up to 30% OFF"* over a

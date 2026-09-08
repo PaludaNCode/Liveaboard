@@ -668,12 +668,32 @@ def padi_lines(
     page was quoting a second hire nobody would pay. Exactly the thing the
     paragraph above says this does not do; it just never filtered the side it
     was keeping.
+
+    **And the two sets can name one charge through the tier, not the seller.**
+    That split assumes PADI's mandatory rows and the vessel's non-mandatory
+    ones are different charges, and on New Sambo they are not: PADI publishes
+    *National park fees* at EUR 45 as mandatory, the vessel's own panel lists
+    *National Park Fees (EUR 25-60 / trip)* under Optional, and both classify
+    as `marine_park`. One boat, five trips, one code -- and the bill named it
+    twice, which is the Serenity failure arriving down the other side.
+
+    A code PADI states as mandatory is **PADI's line here**, and the vessel's
+    non-mandatory copy of it is dropped from this column. This is the second
+    seller's own account of what a diver booking through it cannot decline, so
+    replacing it with the other seller's optional entry would leave PADI's
+    total short of a charge PADI publishes as required -- the same arithmetic
+    the gangway rule exists to prevent, in the other direction. Nothing is lost
+    from the page: the vessel's own line is in our bill beside it, at the
+    figure the vessel published and under the tier the vessel gave it, and the
+    two columns disagreeing about a charge is what this page is for.
     """
     if not itinerary.padi_fees_complete:
         return None
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
     theirs = [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
-    shared = [fee for fee in itinerary.fees if fee.tier is not FeeTier.MANDATORY]
+    stated = {fee.code for fee in theirs}
+    shared = [fee for fee in itinerary.fees
+              if fee.tier is not FeeTier.MANDATORY and fee.code not in stated]
     covered = subsumed_charges(theirs + shared)
     return [
         _fee_line(fee, itinerary.nights, itinerary.dives, fx, active,
