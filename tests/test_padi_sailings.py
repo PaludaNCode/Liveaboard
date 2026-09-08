@@ -274,6 +274,56 @@ class TestComparison(unittest.TestCase):
         self.assertEqual(quoted["nitrox"], 40.0,
                          "PADI's own nitrox figure won a charge the vessel bills")
 
+    def test_a_charge_the_two_sellers_file_under_different_tiers(self) -> None:
+        """The third shape, and the one the gangway rule opened.
+
+        PADI's side is its own mandatory rows plus the vessel's non-mandatory
+        ones, and that split assumed the two sets name different charges. They
+        do not always: New Sambo's *National park fees* are EUR 45 and
+        mandatory on PADI, and the vessel's own panel files *National Park
+        Fees (EUR 25-60 / trip)* under Optional. Both classify as
+        `marine_park`, so PADI's bill named one charge twice -- the shape the
+        two tests above refuse, arriving through the tier rather than through
+        the seller.
+
+        One boat, five trips, one code, measured over the whole book. What
+        survives is **PADI's** line: this is PADI's column, the entry is the
+        seller's own account of a charge a diver on that booking cannot
+        decline, and dropping it for the other seller's optional copy would
+        leave PADI's total short of a fee PADI publishes as required. The
+        vessel's own line is untouched in our own bill beside it.
+        """
+        fees = {"vessels": {"alia-soul": {"fees": [
+            {"code": "service_charge", "label": "Service charge",
+             "tier": "mandatory", "basis": "per_trip", "included": False,
+             "amount": {"amount": 30.0, "currency": "USD"},
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+            {"code": "marine_park", "label": "National Park Fees",
+             "tier": "optional", "basis": "per_trip", "included": False,
+             "amount": {"amount": 25.0, "currency": "USD"},
+             "provenance": {"kind": "scraped", "source_id": "liveaboard.com",
+                            "retrieved": "2026-08-27"}},
+        ]}}}
+        payload = promote(candidate([departure()]), season=SEASON, fees=fees,
+                          padi_departures=BOOK, padi=self.padi_book())
+        itinerary = next(iter(
+            build_payload(Dataset.from_dict(payload))["itineraries"].values()))
+        lines = itinerary["padi_lines"]
+        codes = [line["code"] for line in lines]
+        self.assertEqual(codes.count("marine_park"), 1,
+                         "marine_park is on PADI's bill %d times"
+                         % codes.count("marine_park"))
+        kept = next(line for line in lines if line["code"] == "marine_park")
+        self.assertEqual(kept["quoted"]["amount"], 60.0,
+                         "the other seller's optional copy won PADI's own "
+                         "mandatory charge")
+        self.assertEqual(kept["tier"], "mandatory")
+        # And our own bill still states what the vessel published.
+        ours = [line for line in itinerary["lines"]
+                if line["code"] == "marine_park"]
+        self.assertEqual([line["quoted"]["amount"] for line in ours], [25.0])
+
     def test_no_shipped_bill_charges_one_code_twice(self) -> None:
         """The same rule over the fleet that actually ships.
 
