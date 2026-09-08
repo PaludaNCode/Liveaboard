@@ -3,6 +3,28 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-08
+
+```
+changes: HEAD -> 2026-09-08
+===========================
+
+now sold out (4)
+  2027-05-29  Emperor Superior       Reefs & Wrecks                     liveaboard.com+padi.com
+  2027-06-05  Blue Horizon           Rocky, Zabargad & St. John's       liveaboard.com+padi.com
+  2027-06-26  Sunlight               South Route: Elba Reef Expedition! liveaboard.com
+  2027-07-31  Red Sea Blue Force 2   Extended North                     liveaboard.com+padi.com
+
+bookable again (2)
+  2027-07-24  Oceanix                North & Brothers Liveaboard        liveaboard.com
+  2027-08-07  Oceanix                North & Brothers Liveaboard        liveaboard.com
+
+price up (1)
+  2027-07-17  DUNE Silky             2,671 ->   2,848 USD  +177 (+6.6%)  Best of Egypt
+
+750 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-07
 
 ```
