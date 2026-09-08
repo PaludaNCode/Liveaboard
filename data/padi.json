@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-07",
+ "collected": "2026-09-08",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43188,12 +43188,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 85,
+    "dated": 97,
     "first": "2026-09-11",
     "in_season": 29,
-    "last": "2027-09-03",
+    "last": "2027-10-30",
     "priced": 28,
-    "read": 85,
+    "read": 97,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -43505,12 +43505,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 50,
-    "first": "2026-09-08",
+    "dated": 49,
+    "first": "2026-09-15",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 50,
+    "read": 49,
     "unpriced": 1
    },
    "slug": "my-carlton",
@@ -43528,13 +43528,13 @@
    "name": "MY Cassiopeia Glory",
    "operator": null,
    "sailings": {
-    "dated": 4,
+    "dated": 5,
     "first": "2026-09-19",
     "in_season": 0,
-    "last": "2026-10-17",
+    "last": "2026-11-07",
     "priced": 0,
-    "read": 4,
-    "unpriced": 0
+    "read": 5,
+    "unpriced": 1
    },
    "slug": "my-cassiopeia-glory",
    "specs": {
@@ -44018,12 +44018,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 11,
-    "first": "2026-09-07",
+    "dated": 10,
+    "first": "2026-09-14",
     "in_season": 0,
     "last": "2026-12-19",
     "priced": 0,
-    "read": 11,
+    "read": 10,
     "unpriced": 3
    },
    "slug": "my-lady-m",
@@ -44043,11 +44043,11 @@
    "sailings": {
     "dated": 100,
     "first": "2026-09-10",
-    "in_season": 19,
-    "last": "2028-05-20",
-    "priced": 16,
+    "in_season": 20,
+    "last": "2028-05-13",
+    "priced": 17,
     "read": 100,
-    "unpriced": 28
+    "unpriced": 27
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44287,12 +44287,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 58,
-    "first": "2026-09-08",
+    "dated": 57,
+    "first": "2026-09-15",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 58,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "snefro-love",
@@ -44458,7 +44458,8 @@
    "specs": {
     "cabins": 14,
     "length_m": 32,
-    "nitrox_free": true
+    "nitrox_free": true,
+    "year_built": 1998
    }
   },
   "vip-one": {
@@ -44480,7 +44481,8 @@
    "specs": {
     "cabins": 8,
     "length_m": 30,
-    "nitrox_free": false
+    "nitrox_free": false,
+    "year_built": 1996
    }
   }
  }
