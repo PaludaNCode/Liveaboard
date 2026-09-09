@@ -3,6 +3,64 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-09
+
+```
+changes: HEAD -> 2026-09-09
+===========================
+
+new departures (1)
+  2027-08-29  Tala                   North & Brothers                        1,407 USD liveaboard.com
+
+now sold out (3)
+  2027-05-08  Emperor Asmaa          Daedalus, Fury and Elphinstone     liveaboard.com+padi.com
+  2027-06-05  Emperor Asmaa          Simply the Best                    liveaboard.com+padi.com
+  2027-08-28  Blue Horizon           Northern Red Sea Wrecks & Reefs    liveaboard.com+padi.com
+
+bookable again (3)
+  2027-07-22  Emperor Elite          Simply the Best                    liveaboard.com+padi.com
+  2027-07-31  Discovery I            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-08-05  Golden Dolphin         Brothers                           liveaboard.com
+
+re-listed — same sailing, new row (4)
+  2027-07-10  Discovery I            North Wrecks, Ras Mohammed & liveaboard.com+padi.com -> padi.com  889 USD -> 765 EUR
+  2027-07-17  Discovery I            Brothers/ Daedalus and Elphi liveaboard.com+padi.com -> padi.com  1,013 USD -> 871 EUR  Brothers, Daedalus & Elp -> Brothers/ Daedalus and E
+  2027-07-24  DUNE Longara           North Brothers               padi.com -> liveaboard.com+padi.com  1,450 EUR -> 1,686 USD
+  2027-07-24  Discovery I            St. John's, Fury Shoals & El liveaboard.com+padi.com -> padi.com  988 USD -> 850 EUR
+
+price up (18)
+  2027-06-12  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  North & Tiran
+  2027-06-05  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  North
+  2027-05-01  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-05-08  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-05-15  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-05-22  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-05-29  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-06-19  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-06-26  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-07-03  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-07-10  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  2027-07-17  Yachtiano              1,413 ->   1,744 USD  +331 (+23.4%)  Yachtiano Deluxe
+  ... and 6 more not shown
+
+price down (22)
+  2027-06-26  Serenity               1,395 ->   1,221 USD  -174 (-12.5%)  North, Ras Mohammed, Tiran & Dahab
+  2027-05-22  Serenity               1,349 ->   1,180 USD  -169 (-12.5%)  Brothers, Daedalus & Elphinstone
+  2027-08-21  Serenity               1,349 ->   1,180 USD  -169 (-12.5%)  Brothers, Daedalus & Elphinstone
+  2027-06-12  Serenity               1,302 ->   1,139 USD  -163 (-12.5%)  Brothers, Daedalus & Elphinstone
+  2027-05-01  Serenity               1,302 ->   1,139 USD  -163 (-12.5%)  North & Brothers
+  2027-06-05  Serenity               1,302 ->   1,139 USD  -163 (-12.5%)  North & Tiran
+  2027-05-08  Serenity               1,256 ->   1,099 USD  -157 (-12.5%)  North & Wrecks
+  2027-05-29  Serenity               1,256 ->   1,099 USD  -157 (-12.5%)  North & Wrecks
+  2027-07-03  Serenity               1,256 ->   1,099 USD  -157 (-12.5%)  North & Wrecks
+  2027-08-28  Serenity               1,256 ->   1,099 USD  -157 (-12.5%)  North & Wrecks
+  2027-06-19  Serenity               1,209 ->   1,058 USD  -151 (-12.5%)  Safaga and Hurghada
+  2027-08-14  Serenity               1,209 ->   1,058 USD  -151 (-12.5%)  Safaga and Hurghada
+  ... and 10 more not shown
+
+56 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-08
 
 ```
