@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-07",
+  "collected": "2026-09-09",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -8256,6 +8256,133 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6597&tourID=417452&languageID=1&curr=USD&showPrices=false"
     },
+    "dune-longara::North Brothers (Marsa Ghalib - Safaga)": {
+      "boat": "dune-longara",
+      "name": "North Brothers (Marsa Ghalib - Safaga)",
+      "tour_id": "438713",
+      "collected": "2026-09-09",
+      "regions": [
+        "The Brothers",
+        "Ras Mohammed",
+        "Thistlegorm",
+        "Safaga",
+        "Salem Express"
+      ],
+      "dive_sites": [
+        "brothers",
+        "ras mohammed",
+        "thistlegorm",
+        "safaga",
+        "salem express"
+      ],
+      "dives": 17,
+      "guests": 30,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Our friendly staff welcomes you at the airport. Bus transfer from the airport to the marina. You will, then, be attributed a cabin and discover the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "After breakfast, your guide will tell you everything you need to know about your program of the week, safety recommendations, and, more generally, your life on the boat. Your diving certifications, logbook, and insurance will be checked before leaving the marina. The boat will then sail to the first dive site, 30 minutes away from the marina. Your guide will give you a detailed briefing about your first dive. After lunch, you will do your second dive. You will then keep sailing north to reach the El Gouna area where you will spend a quiet and peaceful night moored behind a big reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Arrived the day before on-site, you will do your first-two wreck dives in the morning. After lunch, you will sail north for two hours before reaching the site where you will do the third dive of the day. Upon request, a night dive may be added. For a quiet and peaceful night, you will spend the night away from the waves, moored behind a big reef. This program may be subject to change according to weather conditions.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "On this day, you will do two to three dives on the mythical wreck of the Thistlegorm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "At sunrise, the captain and his crew will sail towards the tip of Sinai where you will make at least two dives in the magnificent Ras Mohamed reserve. The third dive will potentially be on the site of Shaab Mahmoudat. After dinner, you will sail at night to reach the Brothers Islands in the early morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Arrived in the early morning, you will make three dives during the day on the magnificent drop-offs of the Brothers. A tour of the lighthouse can be organized by your guide according to agreements with the guards on site. The captain and his crew will then sail for around five hours to arrive at night in the Safaga area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "For the last day at sea, your guide will suggest two dives in the Safaga area. Depending on your desires or demand, you can dive into the wreck of the Salem Express or one of the three drop-offs in the area. The return of the boat is planned for the afternoon. You can then take advantage of the aft platform of the boat to rinse your equipment or go for a walk in Safaga. Other activities will be offered depending on your flight schedule.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Departure from the boat will be after breakfast or according to your flight and transfer schedules to the airport or hotel. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24hours before flying after the last dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Important notice",
+          "text": "This program may be subject to changes according to the conditions.",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "The",
+          "is_day": false
+        },
+        {
+          "heading": "Dune Touch Event",
+          "text": "is an exclusive onboard evening event included in the Dune Liveaboard program, which offers guests a unique cultural experience on board. Guests are invited to bring a small snack or culinary specialty from their home country to be shared with other passengers. Drinks are provided, and the event is designed to encourage cultural exchange, creating a gourmet gathering in a relaxed and festive setting. Gala attire is recommended. Guests are advised to check the regulations of their country regarding any food items that may not be permitted in their luggage.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6597&tourID=438713&languageID=1&curr=USD&showPrices=false"
+    },
+    "dune-longara::North Brothers (Safaga - Port Ghalib)": {
+      "boat": "dune-longara",
+      "name": "North Brothers (Safaga - Port Ghalib)",
+      "tour_id": "438714",
+      "collected": "2026-09-09",
+      "regions": [
+        "The Brothers",
+        "Abu Nuhas",
+        "Ras Mohammed"
+      ],
+      "dive_sites": [
+        "brothers",
+        "abu nuhas",
+        "ras mohammed"
+      ],
+      "dives": 18,
+      "guests": 30,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "A classic one-way Red Sea route from Safaga south to Port Ghalib, built around the legendary Brother Islands. Highlights include the wrecks of Abu Nuhas, still carrying their nineteenth and twentieth-century cargo; the sheer drop-offs and reef fish of Ras Mohamed National Park; and North Brothers itself, with its dramatic walls, resident sharks and historic lighthouse.",
+      "sections": [
+        {
+          "heading": "Day 1 – Safaga Embarkation",
+          "text": "Arrive in Safaga and board Dune Longara. Check-in, safety briefing and certification checks before the boat leaves the marina the next morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2-6 – Diving North to the Brothers",
+          "text": "Five days of diving, 3-4 dives per day depending on routing, weather and sea conditions, taking in this route's highlights: the wreck dives of Abu Nuhas, the drop-offs and reef fish of Ras Mohamed National Park, and the walls of North Brothers, where a lighthouse tour may also be possible, before the boat turns south.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7 – Final Day of Diving",
+          "text": "The last day before departure, maximum two dives, as the boat continues south towards Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Port Ghalib Disembarkation",
+          "text": "Disembarkation after breakfast, with transfer to the airport. Divers on this route can expect hammerhead, thresher and oceanic whitetip sharks at North Brothers, colourful reef fish and drop-offs at Ras Mohamed, and the historic wrecks of Abu Nuhas, now thriving artificial reefs. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6597&tourID=438714&languageID=1&curr=USD&showPrices=false"
+    },
     "dune-longara::North Dahab Tiran (Safaga - Safaga)": {
       "boat": "dune-longara",
       "name": "North Dahab Tiran (Safaga - Safaga)",
@@ -13796,6 +13923,46 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5416&tourID=434795&languageID=1&curr=USD&showPrices=false"
     },
+    "golden-dolphin::Brother Islands (Port Ghalib - Hurghada)": {
+      "boat": "golden-dolphin",
+      "name": "Brother Islands (Port Ghalib - Hurghada)",
+      "tour_id": "434802",
+      "collected": "2026-09-09",
+      "regions": [
+        "The Brothers"
+      ],
+      "dive_sites": [
+        "brothers"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "A dedicated safari to the legendary Brother Islands, among the top dive sites in the world. Big Brother thrills with spectacular drop-offs, huge gorgonian fans and soft corals, alongside the wrecks of the Numidia and the Aida, both now heavily encrusted with hard and soft corals. Little Brother offers immense overhangs, fields of soft and hard corals, turtles, tuna and schools of mackerel. Big fish such as thresher sharks, hammerheads, grey reef sharks, whitetips and blacktips are known to congregate here, especially early morning and at dusk. Strong currents and occasional high waves make this a safari for experienced divers only.",
+      "sections": [
+        {
+          "heading": "Day 1 – All Aboard in Port Ghalib",
+          "text": "Check-in onboard from 18:00 in Port Ghalib. Settle into your cabin, meet the crew, and enjoy a welcome briefing and dinner before the boat leaves the marina before noon the next day, sailing towards the Brother Islands.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2-6 – Diving the Brother Islands",
+          "text": "Five days of diving, 3-4 dives per day depending on routing, weather and sea conditions, at Big Brother and Little Brother, including the coral-encrusted wrecks of the Numidia and the Aida.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7 – Final Diving at the Brothers",
+          "text": "The last day before departure, maximum two dives, before the boat begins its return towards Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Hurghada Disembarkation",
+          "text": "Check-out by 10:00 at the latest. Transfer back to the airport. Divers on this route can expect hammerhead, grey reef, thresher, whitetip and blacktip sharks, huge gorgonian fans and soft coral walls, turtles, tuna and schools of mackerel at Little Brother, and the coral-encrusted wrecks of the Numidia and Aida. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5416&tourID=434802&languageID=1&curr=USD&showPrices=false"
+    },
     "golden-dolphin::Brothers - Daedalus - Rocky - Zabargad - St. Johns - Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "golden-dolphin",
       "name": "Brothers - Daedalus - Rocky - Zabargad - St. Johns - Elphinstone (Hurghada - Port Ghalib)",
@@ -14235,6 +14402,55 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5416&tourID=385656&languageID=1&curr=USD&showPrices=false"
+    },
+    "golden-dolphin::North - Tiran - Brother Islands (Port Ghalib - Hurghada)": {
+      "boat": "golden-dolphin",
+      "name": "North - Tiran - Brother Islands (Port Ghalib - Hurghada)",
+      "tour_id": "406482",
+      "collected": "2026-09-09",
+      "regions": [
+        "The Brothers",
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Straits Of Tiran",
+        "Jackson Reef",
+        "Woodhouse Reef",
+        "Gordon Reef"
+      ],
+      "dive_sites": [
+        "brothers",
+        "abu nuhas",
+        "thistlegorm",
+        "tiran"
+      ],
+      "dives": 17,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "The SS Thistlegorm is probably the most famous wreck in the Red Sea. The British cargo ship was on its way to bring military equipment of all kinds for the British troops in North Africa. But then, on the 6th of October 1941, a German bomber attacked the Thistlegorm. The wreck is lying upright on the sea bottom at 32 m depth. Especially interesting is the cargo: tanks, trucks, motorcycles, weapons, a railway carriage, and two railway engines. The reef at Abu Nuhas is famous for wrecks. There are four wrecks, which are today an attraction point for divers from all around the world. For example, the Greek cargo ship Giannis D ran aground on the reef on 19th April 1984 and sank a short time afterward. It is now lying at a maximum depth of 27 m and is overgrown with hard and soft corals. The Dunraven, a steam- and sail-powered vessel used to transport spices and timber, ran aground on the reef Sha'ab Mahmoud in April 1876 during a voyage from Bombay to Newcastle and sank quickly. The ship broke in two, and her two halves came to rest on the sea floor. The marine park Ras Mohamed offers dreamlike diving spots, for example, Shark Reef and Yolanda Reef. Both reefs are standing on a plateau, which is between 10 m and 20 m deep. The edges of the plateau fall to more than 200 m. At the reef, you will find nice, hard, and soft corals and plenty of fish of all kinds and sizes. With luck, you can see sharks during your early morning dive. At Yolanda Reef, you can see the cargo of the Cypriot freighter Yolanda, which ran aground in 1980: a large quantity of household pottery such as toilets, bathtubs, shower tubs, bidets, and more. Starting from the north on the eastern side of the Sinai Peninsula are the Straits of Tiran, also one of the most famous diving areas in the Red Sea. Situated in the middle of the straits are four coral reefs: Gordon, Thomas, Woodhouse, and Jackson Reef. Gordon Reef is marked by the wreck of a large commercial freighter. The reef composition is quite varied, with patchy sections, sand beds, and full-fledged coral gardens. In the center of the reef slope, a shark amphitheater or bowl dips to 24 m; with luck, a variety of shark species can be seen sleeping on the sandy bottom. The site boasts a very good range of corals, with lots of branching varieties. All of the corals are well preserved, in densely grown patches that often show a remarkable mix of different species. Fish life is not the most profuse in the Straits of Tiran, but there are some notable surprises, including a huge moray eel with a body as thick as a small diver’s waist. Triggerfish abound, while surgeons and jacks swim in moderately large schools, and angelfish, parrotfish, and small wrasse are all present in good numbers. Large Napoleon wrasse can often be seen along the reef. Thomas Reef includes some plateau sections and a very deep canyon running along the reef’s southern section. It is the smallest of the four Tiran reefs. The reef’s upper section is a riot of color, encompassing some of the finest soft coral growth in the Sinai region. Huge, densely packed fields of Dendronephthya of every imaginable hue are spread across the reef, along with antler corals, fine Stylophora, some Acropora, and many other stony coral forms. Fish life is also rich, with the greatest concentration in the shallows. Lyretail cod and other groupers grow to great size, and wide varieties of rabbitfish and wrasse congregate along the reef face, accompanied by boxfish and pufferfish. The only reason to go deeper than 20 m at Thomas Reef is to explore the canyon. Woodhouse Reef is a long, narrow reef running at an angle from northeast to southwest. Woodhouse is generally divided into a drift along the reef’s eastern side. Coral cover is excellent throughout the reef, with dense growth all over; there are a few sandy patches at depths of around 20 m. Many species are present, but because of the sheltered position of the reef, away from the main current, a certain amount of sedimentation has affected the corals here. Pelagic fish, including big tuna and schools of jacks, fusiliers, snapper, surgeons, and unicornfish, also school here, along with thousands of other reef fish. On the northern edge of Jackson Reef, the wreck of a grounded freighter stands as a warning to shipping in the busy straits; most of its hull has been salvaged for scrap, leaving only a skeletal hulk. The steep-sided walls of Jackson Reef are among the finest in the Sinai region; the current-swept reef is densely grown with a real profusion of hard and soft corals, with special accents provided by luxuriant gorgonian fans, sea whips, black corals, and vivid growths of soft coral. Fish life, not surprisingly, is excellent. The strong current brings plenty of nutrients for the reef and schooling fish; current and profile combine to tempt pelagic fish in from the open water, and large schools of barracuda and jacks are common here, as are larger predators, including several species of shark. The smaller reef species on which these pelagic visitors feed are profuse. The Brother Islands are one of the best diving spots in the world. The Islands – the Big Brother and the Little Brother – are two small exposed promontories that just come out of the water in the middle of the sea at around 60km from the Egyptian coastline. The Little Brother has a very high concentration of life in a much-reduced area. The walls are covered literally with sponges, anemones, and all sorts of hard and soft corals in an astonishing variety of colors and shapes. Of course, you will find here plenty of fish. It is not unusual to see sharks: hammerheads, thresher sharks, grey reef sharks, silvertip, and whitetip reef sharks. About one km north of the Little Brother lays the Big Brother. Situated, in the middle of the island, is a lighthouse. When it is not too windy, you can proceed to dive the wreck NUMIDIA which lies upon the reef on the northern side of the island between 5m and 80m. This 150m long ship sunk in 1901 and is now completely covered with both hard and soft corals and gorgonias. On the NW side of the island, you will find the other wreck: the AIDA. This 82m long steamship sunk in 1957. The remaining pieces of the wreck are scattered all over the reef and just the back side of the hull can be found between 34m and 60m. It is nicely overgrown and worth visiting. Because of the strong current and maybe high waves, it is not easy to dive at the Brothers. This safari is only for experienced divers.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Check-in onboard on the arrival day at 6 pm. Leaving the marina the next day before noon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "3–4 dives per day, depending on the routing. The realization of a diving cruise depends on weather, sea conditions, local regulations, and the skill of the divers taking part. A guarantee for visiting certain reefs cannot be given for these reasons.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Last day (a day before departure), maximum two dives, afterward back to the marina.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check-out at the latest on departure day at 10 am. Transfer back to the airport. Expect vibrant coral reefs teeming with reef fish, including snappers, barracuda, and large schools of trevally. Divers may also encounter reef sharks, turtles, and occasional pelagic species cruising along the nutrient-rich currents. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5416&tourID=406482&languageID=1&curr=USD&showPrices=false"
     },
     "golden-dolphin::North/Wreck (Hurghada - Hurghada)": {
       "boat": "golden-dolphin",
@@ -16939,6 +17155,144 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6318&tourID=436941&languageID=1&curr=USD&showPrices=false"
     },
+    "new-sambo::Fury Shoals Safari (Hamata - Hamata)": {
+      "boat": "new-sambo",
+      "name": "Fury Shoals Safari (Hamata - Hamata)",
+      "tour_id": "403125",
+      "collected": "2026-09-09",
+      "regions": [
+        "Fury Shoal",
+        "Hamata"
+      ],
+      "dive_sites": [
+        "fury shoals"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": "Set sail on an immersive Red Sea dive safari from Hamata Marina, where pristine reefs, legendary dive sites, and refined onboard comfort come together. This carefully curated journey through the Fury Shoals offers extraordinary underwater exploration, personalized diving, and relaxed luxury—both below and above the surface.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Your journey begins with a seamless transfer from your hotel or the airport, heading directly to Hamata Marina, the southern gateway to the Red Sea. Boarding starts from 1:00 p.m., allowing time to settle into your cabin, meet the crew, and discover your elegant floating home for the week. Once on board, our team will conduct a full safety and boat briefing to ensure comfort and peace of mind throughout the safari, followed by a refined welcome aperitif. The evening continues with a relaxed dinner served as an open international buffet, setting the tone for a week of exploration and indulgence as the Red Sea night unfolds.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 - 6:",
+          "text": "Over the following days, the safari takes you deep into the heart of the Fury Shoals, where a carefully curated selection of iconic dive sites reveals the full diversity and beauty of the southern Red Sea.",
+          "is_day": true
+        },
+        {
+          "heading": "SATAYA (Dolphin's Reef)",
+          "text": ": Offers a rare and magical atmosphere, with shallow lagoons frequented by pods of wild dolphins. Calm waters, vibrant reef walls, and exceptional visibility create ideal conditions for intimate marine encounters with dolphins, turtles, rays, and colorful reef fish.",
+          "is_day": false
+        },
+        {
+          "heading": "SHAAB MAKSOUR:",
+          "text": "Delivers a more adventurous profile, defined by dramatic drop-offs, deep plateaus, and currents that attract pelagic life. Tuna, trevallies, and reef sharks patrol the walls, making this site a highlight for experienced divers seeking dynamic conditions and powerful underwater scenery.",
+          "is_day": false
+        },
+        {
+          "heading": "MALAHI:",
+          "text": "The famous coral labyrinth invites playful and immersive exploration. Coral towers, narrow canyons, and swim-throughs form a natural underwater playground, rich in reef life and perfect for divers who enjoy navigation and discovery.",
+          "is_day": false
+        },
+        {
+          "heading": "SHAAB CLAUDIA:",
+          "text": "Renowned for its tunnels, caverns, and open canyons, where natural light creates striking visual effects. The combination of accessible exploration and abundant marine life, including rays, moray eels, and large schools of fish, makes every dive both elegant and visually spectacular.",
+          "is_day": false
+        },
+        {
+          "heading": "ABU GALAWA SORAYA:",
+          "text": "Features a small sailboat resting at 16-18 meters, gently embraced by the reef. This site offers a relaxed and intimate wreck dive, where the structure blends seamlessly with surrounding marine life such as reef fish, turtles, and rays.",
+          "is_day": false
+        },
+        {
+          "heading": "ABU GALAWA KEBIR:",
+          "text": "By contrast, is home to the impressive Chinese tugboat Tien Hsing. Larger, deeper, and more imposing, this wreck provides a striking dive experience, enriched by encounters with moray eels, rays, turtles, and reef sharks, combining maritime history with vibrant biodiversity.",
+          "is_day": false
+        },
+        {
+          "heading": "HAMAHM SAID:",
+          "text": "Stands out for its natural arch and sculpted canyons, where light and shadow enhance the dramatic underwater landscape. Schools of fish, moray eels, and reef sharks add to the site’s strong sense of exploration and depth.",
+          "is_day": false
+        },
+        {
+          "heading": "HAMATA:",
+          "text": "The region itself completes the safari with pristine reefs, excellent visibility, and a wide variety of marine life. Remote and unspoiled, it offers serene yet rewarding dives and serves as a gateway to some of the most beautiful sites in the southern Red Sea. Life on board is offered in full board, with three meals per day served as an open international buffet, including vegetarian options. Throughout the week, our experienced dive guides conduct daily briefings and tailor the diving program to conditions and group preferences, ensuring a smooth and personalized experience. Approximately 18 dives are planned during the safari, with the possibility of additional dives and night dives upon request. Unlimited snorkeling is included. Beyond diving, the safari is enriched with carefully curated moments: sunrise watching on deck, traditional coffee, fresh fruit juice tastings, presentations on the marine life of the Fury Shoals, movie nights, and other refined surprises designed to enhance your journey.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "The boat returns to Hamata Marina in the evening, followed by a final night on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check-out takes place calmly between 8:00 and 9:00 a.m., allowing guests to enjoy a final breakfast and a relaxed disembarkation after an unforgettable week at sea. Guests are then transferred back to their hotel (included in the price) or, upon request, directly to the airport of their choice (not included). An exceptionally biodiverse marine environment defined by pristine reefs, pelagic energy, and crystal-clear visibility. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6318&tourID=403125&languageID=1&curr=USD&showPrices=false"
+    },
+    "new-sambo::Sataya Mini-Safari (Hamata - Hamata)": {
+      "boat": "new-sambo",
+      "name": "Sataya Mini-Safari (Hamata - Hamata)",
+      "tour_id": "413859",
+      "collected": "2026-09-09",
+      "regions": [
+        "Hamata"
+      ],
+      "dive_sites": [],
+      "dives": 7,
+      "guests": 20,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": "Make the big jump with Sambo Divers – Mini-Safari, Maxi-Adventure guaranteed! You've always dreamed of a liveaboard safari, but the idea of spending a full week on a boat feels a bit too long? You only have one week in the Red Sea, with so many things you want to experience, but you don't want to miss diving in one of the most beautiful destinations in the world? Or maybe you're a family or a group with different levels, all sharing the same love for the sea? Then Sataya Mini-Safari is made for you. Two nights and three full days on some of the most emblematic dive sites in the south of Marsa Alam. This mini-safari is suitable for everyone, from snorkelers to experienced divers, with one main goal: colorful coral reefs and unforgettable encounters with spinner dolphins. Curious to know what your next adventure will look like? Let us take you there.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "The journey begins. This is where it all starts. We will pick you up directly from your hotel or from the airport and head south towards Hamata Marina, about two hours from Marsa Alam. Excitement builds as we arrive… are you ready? Once on board and as the boat starts sailing, it's time to gather for a welcome drink. A relaxed moment to introduce the crew, go through the safety briefing, discover the boat, and talk about the days ahead. As the New Sambo leaves the shore behind and takes us towards the open sea, you can settle into your cabin and enjoy some rest before lunch. After mooring near Hamata Island, we'll enjoy a generous and varied lunch freshly prepared by our chef on board. Then, it's finally time to jump into the water. Whether you choose snorkeling or diving, your instructor will give a detailed briefing before you explore the crystal-clear waters of Hamata. After this first immersion, we slowly make our way toward our main destination:",
+          "is_day": true
+        },
+        {
+          "heading": "Sataya Reef",
+          "text": ". Once we arrive, gear up again for a second dive or snorkel. Sataya offers a wide area with multiple profiles, perfect for exploration and discovery. At the end of this long and beautiful day, the choice is yours: relax on the boat and enjoy the sunset, or join us for a night dive (optional, extra cost). We end the day together with dinner on board, sharing impressions from our first day and looking ahead to what’s coming next.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Sataya, the heart of the adventure. Wake up gently… you're not dreaming. You're in Sataya, a true piece of paradise in the middle of the Red Sea. We start the day watching the sunrise with a traditional Turkish coffee, followed by an early morning dive. This is a magical moment, when marine life slowly comes to life, and encounters are often unforgettable. After the first dive, a hearty breakfast awaits to recharge your energy. Then it's time to head back into the water for a second dive. After lunch, we enjoy the third dive of the day. Sataya never gets boring; every immersion reveals something new, different colors, new species, and changing light. Later in the afternoon, you can choose to relax on board or join a sunset dive (optional). We end the day with a debriefing, followed by a delicious dinner shared with the whole team in a warm and friendly atmosphere.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "The way back, full of memories. On our last morning, the boat starts sailing back while we enjoy one final international breakfast together. A last look at Sataya, a last goodbye to the dolphins. On the way back, two stops are planned: First stop at Shaab Claudia or Malahi, depending on weather conditions. Second stop at Abu Galawa, famous for its beautiful wreck. After these final dives or snorkels, we gather one last time for lunch, sharing stories, laughter, and memories from these three unforgettable days. We return to the marina around 5:00 p.m., where our driver will take you back to your hotel, carrying home far more than photos: moments you won't forget. The southern Red Sea is shaped by healthy reef systems and open-water dynamics, creating a constantly evolving underwater environment. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6318&tourID=413859&languageID=1&curr=USD&showPrices=false"
+    },
+    "new-sambo::Sataya Overnight (Hamata - Hamata)": {
+      "boat": "new-sambo",
+      "name": "Sataya Overnight (Hamata - Hamata)",
+      "tour_id": "428124",
+      "collected": "2026-09-09",
+      "regions": [
+        "Fury Shoal"
+      ],
+      "dive_sites": [
+        "fury shoals"
+      ],
+      "dives": 4,
+      "guests": 20,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": "This tour is slightly more challenging, featuring dramatic drop-offs covered in massive gorgonians and vibrant soft corals. During this overnight adventure, you’ll have the chance to explore a variety of truly unique dive sites that are home to fascinating marine life. Fury Shoal – An extensive chain of reefs stretching from Abu Galawa in the north to Sataya Reef in the south, Fury Shoal offers some of the most outstanding dive experiences in the Red Sea. Here, you can explore caves, tunnels, coral gardens, plateaus, and sheer drop-offs. Abu Galawa – Located within Fury Shoal, Abu Galawa is a must-visit for wreck enthusiasts. Dive the wreck of the Tug Boat or enjoy excellent coral dives along the reef’s west side. Sataya Reef (Dolphin Reef) – Situated at the southeastern end of Fury Shoal near Marsa Alam, Sha’ab Sataya is famous for its friendly dolphins and diverse marine life, making it a highlight for any diver. Abu Galawa Soraya – The sailing yacht Abu Galawa Soraya, which sank in 1980, has since become encrusted with soft and hard corals. At just 17 meters in depth over a 15-meter length, the wreck offers incredible exploration. Expect to encounter needlefish, blue-spotted stingrays, Red Sea fusiliers, and even giant moray eels. Abu Galawa Soraya is also perfect for night dives—illuminating the wreck reveals glassfish that have made it their home, while the sandy bottom hides surprises among coral towers and blocks. Even daytime dives allow for stunning views into the wreck and its colorful residents. This itinerary combines challenging topography with vibrant marine life, ensuring an unforgettable diving experience for those ready to explore Fury Shoal’s hidden treasures. Divers in Fury Shoal can expect a spectacular mix of marine life, from vibrant soft and hard corals to schools of Red Sea fusiliers, needlefish, and stingrays. Giant moray eels and glassfish inhabit wrecks like Abu Galawa Soraya, while dolphins often visit Sataya Reef. Night dives reveal hidden creatures on sandy bottoms and inside coral towers, creating a truly dynamic underwater experience. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+      "sections": [],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6318&tourID=428124&languageID=1&curr=USD&showPrices=false"
+    },
     "ocean-lovers::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
       "boat": "ocean-lovers",
       "name": "10% Off: Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
@@ -18811,6 +19165,62 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6579&tourID=413484&languageID=1&curr=USD&showPrices=false"
     },
+    "queen-sherry::Eclipse & Big Fish: Pelagic Trail Eclipse Totality (Marsa Alam - Marsa Alam)": {
+      "boat": "queen-sherry",
+      "name": "Eclipse & Big Fish: Pelagic Trail Eclipse Totality (Marsa Alam - Marsa Alam)",
+      "tour_id": "413487",
+      "collected": "2026-09-09",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 16,
+      "guests": 24,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "A special one-off Red Sea liveaboard aboard M/Y Queen Sherry, round trip from Marsa Alam, built around the total solar eclipse of 2027 – guests observe the eclipse from the sea within the path of totality off Berenice, alongside diving at Daedalus Reef and the Sataya-Fury Shoal dolphin reef.",
+      "sections": [
+        {
+          "heading": "Day 1 – Marsa Alam (Embarkation)",
+          "text": "Transfer to the vessel, early check-in, safety briefing, and departure before sunset.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Marsa Alam",
+          "text": "2-3 dives in the Marsa Alam area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Berenice (Total Solar Eclipse)",
+          "text": "Eclipse observation from the sea at Berenice, within the path of totality; 3 dives (early morning dive plus afternoon dives).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Daedalus Reef",
+          "text": "3-4 dives: hammerheads, the northern point, the Red Trail deep wall (40m) and the Blue Trail plateau (20m).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Sataya-Fury Shoal",
+          "text": "4 dives (3 day dives plus 1 night dive): dolphin snorkelling, caves and coral gardens.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – Sataya-Fury Shoal",
+          "text": "4 dives (3 day dives plus 1 night dive): dolphins, caves, and a gala dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Marsa Alam Area",
+          "text": "2 dives in the Marsa Alam area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Marsa Alam (Disembarkation)",
+          "text": "Check out at 8:00. Divers on this route can expect hammerhead sharks and northern-point drift diving at Daedalus Reef, dolphins at the Sataya-Fury Shoal dolphin house, plus caves and coral gardens throughout. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6579&tourID=413487&languageID=1&curr=USD&showPrices=false"
+    },
     "queen-sherry::Golden Mix: Deadalus, Sataya, St. John's, Rocky, Zabargad (Marsa Alam - Marsa Alam)": {
       "boat": "queen-sherry",
       "name": "Golden Mix: Deadalus, Sataya, St. John's, Rocky, Zabargad (Marsa Alam - Marsa Alam)",
@@ -18950,6 +19360,70 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6579&tourID=414009&languageID=1&curr=USD&showPrices=false"
+    },
+    "queen-sherry::Pelagic trail Deluxe: Big fish and Dugong (Marsa Alam - Marsa Alam)": {
+      "boat": "queen-sherry",
+      "name": "Pelagic trail Deluxe: Big fish and Dugong (Marsa Alam - Marsa Alam)",
+      "tour_id": "413480",
+      "collected": "2026-09-09",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "Fury Shoal"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "fury shoals"
+      ],
+      "dives": 21,
+      "guests": 24,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Explore all the BIG STUFF of the sea during one week! At Daedalus, be amazed by the rich marine life, the paradise for hammerhead sharks, oceanic white tips, shoals of fish, barracudas, and tunas. We offer up to 4 day-dives in the summer time and up to 3 day-dives in the winter time, each day the boat stays on Daedalus. Minimum 2 days on Daedalus guaranteed. Night dives on Daedalus are not available for safety reasons. Elfinstone, a star dive site north of Marsa Alam, is a must-visit. The reef offers an abundance of attractions with unpredictable currents. From the north to the south, you’ll encounter big marine life in the blue waters at various depths. The north features two plateaus, perfect for spotting sharks and even hammerheads in the early morning. The southern plateau descends slowly to 40 meters before a dramatic drop-off. Fury Shoal – Sataya, located in the “middle” south of the Red Sea, offers renowned dive sites like Maksur, Claudia, Malahy, and Abu Galawa. Don’t miss the chance to visit Dolphin House, a big lagoon with a sandy bottom where dolphins are spotted in the mornings. Please note that scuba diving is forbidden in Dolphin House, but snorkeling is allowed. The visibility is excellent, allowing you to observe dolphins as they surface. This rich and diverse itinerary is recommended for experienced divers.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Transfer to the boat, accommodation, and briefing",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "2-3 dives in the Marsa Alam area",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "3-4 dives Daedalus (shark dives)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "3-4 dives Daedalus (shark dives)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "4 dives Sataya-Fury Shoal (dolphins, caves, coral gardens)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "4 dives Sataya-Fury Shoal (dolphins, caves, coral gardens)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives Marsa Alam at Elfinstone (possible to add Dugong option)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check-out 08:00 and transfer to the airport, the group bus reaches Hurghada around 13:00 This itinerary is all about big pelagic action and diverse reef ecosystems. Expect frequent encounters with hammerhead sharks, oceanic whitetips, and other large predators at Daedalus and Elphinstone, often cruising in the blue alongside tunas, barracudas, and dense schools of fish. Fury Shoal offers a contrast with vibrant coral gardens, caves, and reef life, plus the highlight of playful dolphins at Sataya’s lagoon. Overall, it’s a rich mix of shark encounters, schooling fish, and colorful reef biodiversity, best suited for experienced divers. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6579&tourID=413480&languageID=1&curr=USD&showPrices=false"
     },
     "red-sea-aggressor-ii::Northern Red Sea - Best Wreck Diving (Hurghada - Hurghada)": {
       "boat": "red-sea-aggressor-ii",

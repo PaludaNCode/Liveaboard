@@ -40519,12 +40519,14 @@
       "operator_id": "dune-world",
       "boat_id": "dune-longara",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Safaga",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
-        "safaga"
+        "abu nuhas",
+        "safaga",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "Discover the DUNE Longara liveaboard in Egypt, a luxury Red Sea vessel for 30 guests offering stylish cabins, a Jacuzzi, fine dining, and unforgettable dive itineraries.",
@@ -40747,7 +40749,16 @@
           "basis": "per_day",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "dune-longara--north-dahab-tiran-safaga-safaga",
@@ -60359,7 +60370,7 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
@@ -60542,7 +60553,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-dolphin--north-hurghada-hurghada",
@@ -84160,10 +84180,14 @@
       "operator_id": "cruise-company-yachts",
       "boat_id": "queen-sherry",
       "nights": 7,
-      "dives": 21,
+      "dives": 16,
       "port_from": "Marsa Alam",
       "port_to": "Marsa Alam",
-      "dive_sites": [],
+      "dive_sites": [
+        "daedalus",
+        "sataya",
+        "fury shoals"
+      ],
       "region": null,
       "summary": "Explore the Red Sea aboard the Queen Sherry liveaboard, accommodating 24 guests in 12 cabins. Dive iconic sites and enjoy unique dolphin encounters with an onboard specialist.",
       "source_url": "https://www.liveaboard.com/diving/egypt/queen-sherry?m=8/2027",
@@ -84369,7 +84393,16 @@
           "amount": null,
           "note": "listed without an amount"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 10,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 10 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "queen-sherry--golden-mix-deadalus-sataya-st-john-s-rocky-zabargad-marsa-alam-marsa-alam",
