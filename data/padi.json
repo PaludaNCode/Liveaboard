@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-08",
+ "collected": "2026-09-09",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43168,7 +43168,7 @@
     "dated": 100,
     "first": "2026-09-12",
     "in_season": 31,
-    "last": "2027-10-25",
+    "last": "2027-10-29",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -43799,12 +43799,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 19,
-    "first": "2026-09-09",
+    "dated": 18,
+    "first": "2026-09-14",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 19,
+    "read": 18,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -44311,10 +44311,10 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-09",
-    "in_season": 33,
-    "last": "2027-08-22",
-    "priced": 33,
+    "first": "2026-09-13",
+    "in_season": 34,
+    "last": "2027-08-25",
+    "priced": 34,
     "read": 100,
     "unpriced": 0
    },
@@ -44403,9 +44403,9 @@
    "sailings": {
     "dated": 100,
     "first": "2026-09-10",
-    "in_season": 16,
-    "last": "2028-11-23",
-    "priced": 16,
+    "in_season": 17,
+    "last": "2028-11-16",
+    "priced": 17,
     "read": 100,
     "unpriced": 0
    },
