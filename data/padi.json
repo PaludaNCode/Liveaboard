@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-09",
+ "collected": "2026-09-10",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -5109,6 +5109,113 @@
    },
    "title": "BDE - Golden Triangle (Hurghada - Hurghada) 7 Nights"
   },
+  "avo::BDE - Golden Triangle (Hurghada - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "gota abu ramada",
+    "panorama reef",
+    "brothers",
+    "daedalus",
+    "elphinstone",
+    "marsa shouna"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "BDE - Golden Triangle (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23461,
+   "padi_slug": "bde-golden-triangle-port-ghalib-port-ghalib-7-ni-2",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "BDE - Golden Triangle (Hurghada - Port Ghalib) 7 Nights"
+  },
   "avo::BDE - Golden Triangle (Port Ghalib - Port Ghalib)": {
    "boat": "avo",
    "boat_name": "MY AVO",
@@ -5493,6 +5600,216 @@
     "recommended_logged_dives": 50
    },
    "title": "Dolphins Fury Shoals (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::ELBA (Port Ghalib - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "elba reef"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 300.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "ELBA (Port Ghalib - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23463,
+   "padi_slug": "the-best-of-the-south-port-ghalib-port-ghalib-7-4",
+   "port_from": "Port Ghalib",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "ELBA (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::North Ras Mohamed (Hurghada - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "gubal",
+    "ras mohammed"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North Ras Mohamed (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 23460,
+   "padi_slug": "north-tiran-hurghada-hurghada-7-nights-13",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North Ras Mohamed (Hurghada - Hurghada) 7 Nights"
   },
   "avo::North Tiran (Hurghada - Hurghada)": {
    "boat": "avo",
@@ -5893,6 +6210,226 @@
     "recommended_logged_dives": 50
    },
    "title": "The Best of the South (Port Ghalib - Port Ghalib) 7 Nights"
+  },
+  "avo::The Best of the South Classic (Hurghada - Port Ghalib)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "sataya reef",
+    "fury shoals",
+    "elphinstone"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "The Best of the South Classic (Hurghada - Port Ghalib)",
+   "nights": 7,
+   "padi_id": 23458,
+   "padi_slug": "the-best-of-the-south-port-ghalib-port-ghalib-7-3",
+   "port_from": "Hurghada",
+   "port_to": "Port Ghalib",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "The Best of the South Classic (Hurghada - Port Ghalib) 7 Nights"
+  },
+  "avo::The Best of the South Classic (Port Ghalib - Hurghada)": {
+   "boat": "avo",
+   "boat_name": "MY AVO",
+   "dive_sites": [
+    "abu dabab",
+    "daedalus",
+    "rocky island",
+    "zabargad",
+    "st johns",
+    "sataya",
+    "sataya reef",
+    "fury shoals",
+    "elphinstone"
+   ],
+   "dives": 17,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 80.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "service_charge",
+      "note": "Service fees",
+      "tier": "mandatory"
+     },
+     {
+      "amount": {
+       "amount": 250.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "marine_park",
+      "note": "National park fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_week",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "alcohol",
+      "note": "Alcohol",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 35.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "visa",
+      "note": "Visa & assistance",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 90.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Wetsuit, BCD, Regulator, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 40.0,
+       "currency": "EUR"
+      },
+      "basis": "per_week",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "nitrox",
+      "included": true,
+      "note": "Free nitrox (for certified nitrox divers)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "The Best of the South Classic (Port Ghalib - Hurghada)",
+   "nights": 7,
+   "padi_id": 23459,
+   "padi_slug": "the-best-of-the-south-classic-hurghada-port-ghalib",
+   "port_from": "Port Ghalib",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "The Best of the South Classic (Port Ghalib - Hurghada) 7 Nights"
   },
   "bella-2::Dunraven, Ras Mohammed & Tiran (Sharm El sheikh - Sharm El Sheik)": {
    "boat": "bella-2",
@@ -43306,9 +43843,9 @@
     "first": "2026-09-12",
     "in_season": 18,
     "last": "2027-12-25",
-    "priced": 5,
+    "priced": 15,
     "read": 62,
-    "unpriced": 38
+    "unpriced": 11
    },
    "slug": "my-avo",
    "specs": {
@@ -43347,12 +43884,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 75,
-    "first": "2026-09-10",
+    "dated": 74,
+    "first": "2026-09-15",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 20,
-    "read": 75,
+    "read": 74,
     "unpriced": 26
    },
    "slug": "bella-3",
@@ -43369,12 +43906,12 @@
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-10",
+    "dated": 56,
+    "first": "2026-09-17",
     "in_season": 14,
     "last": "2027-12-30",
     "priced": 12,
-    "read": 57,
+    "read": 56,
     "unpriced": 8
    },
    "slug": "my-blue",
@@ -43437,12 +43974,12 @@
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 61,
-    "first": "2026-09-10",
+    "dated": 60,
+    "first": "2026-09-17",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 61,
+    "read": 60,
     "unpriced": 0
    },
    "slug": "my-blue-pearl",
@@ -43460,12 +43997,12 @@
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 58,
-    "first": "2026-09-10",
+    "dated": 57,
+    "first": "2026-09-17",
     "in_season": 16,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 58,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "my-blue-seas",
@@ -43483,12 +44020,12 @@
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 61,
-    "first": "2026-09-10",
+    "dated": 60,
+    "first": "2026-09-17",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 61,
+    "read": 60,
     "unpriced": 1
    },
    "slug": "my-blue-storm",
@@ -43664,12 +44201,12 @@
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 93,
+    "dated": 95,
     "first": "2026-09-12",
     "in_season": 16,
     "last": "2028-11-18",
     "priced": 16,
-    "read": 93,
+    "read": 95,
     "unpriced": 0
    },
    "slug": "mv-emperor-asmaa",
@@ -43687,12 +44224,12 @@
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 79,
-    "first": "2026-09-10",
+    "dated": 78,
+    "first": "2026-09-17",
     "in_season": 13,
     "last": "2028-07-20",
     "priced": 13,
-    "read": 79,
+    "read": 78,
     "unpriced": 0
    },
    "slug": "mv-emperor-elite",
@@ -43756,9 +44293,9 @@
    "operator": "EXPLORER VENTURES",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-10",
+    "first": "2026-09-17",
     "in_season": 17,
-    "last": "2028-10-12",
+    "last": "2028-10-19",
     "priced": 17,
     "read": 100,
     "unpriced": 0
@@ -43934,12 +44471,12 @@
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
-    "dated": 65,
-    "first": "2026-09-10",
+    "dated": 64,
+    "first": "2026-09-17",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 65,
+    "read": 64,
     "unpriced": 1
    },
    "slug": "my-heaven-saphir",
@@ -44042,12 +44579,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-10",
+    "first": "2026-09-13",
     "in_season": 20,
-    "last": "2028-05-13",
+    "last": "2028-05-20",
     "priced": 17,
     "read": 100,
-    "unpriced": 27
+    "unpriced": 28
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44196,12 +44733,12 @@
    "name": "MS Royal Evolution",
    "operator": null,
    "sailings": {
-    "dated": 52,
-    "first": "2026-09-10",
+    "dated": 51,
+    "first": "2026-09-17",
     "in_season": 13,
     "last": "2028-04-27",
     "priced": 13,
-    "read": 52,
+    "read": 51,
     "unpriced": 0
    },
    "slug": "ms-royal-evolution",
@@ -44402,9 +44939,9 @@
    "operator": "RED SEA EXPLORERS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-10",
+    "first": "2026-09-17",
     "in_season": 17,
-    "last": "2028-11-16",
+    "last": "2028-11-23",
     "priced": 17,
     "read": 100,
     "unpriced": 0
@@ -44469,13 +45006,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 16,
+    "dated": 17,
     "first": "2026-09-13",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 16,
-    "unpriced": 16
+    "read": 17,
+    "unpriced": 17
    },
    "slug": "vip-one",
    "specs": {
