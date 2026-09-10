@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-09",
+  "collected": "2026-09-10",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -4093,6 +4093,153 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=4408&tourID=361655&languageID=1&curr=USD&showPrices=false"
     },
+    "blue-pearl::Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)": {
+      "boat": "blue-pearl",
+      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Hurghada)",
+      "tour_id": "438176",
+      "collected": "2026-09-10",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore three of the finest dive sites in the Red Sea. A great all-round tour for divers with slightly more experience. There is so much to see that you’re spoilt for choice, but don’t forget to keep an eye out in the blue. This safari offers challenging dives, big drop offs, beautiful coral walls and plenty of large fish. Brother Islands, Daedalus & Elphinstone is a must for all die-hard Red Sea divers!",
+      "sections": [
+        {
+          "heading": "Big Brother:",
+          "text": "A 400 meter long island offering fabulous wreck diving and wall diving. The wreck of the Numidia lies on the northern tip between 10 and 80 meter. The north-west side of the island houses the wreck of the Aida. On every section of this reef the wall is covered with corals and life.",
+          "is_day": false
+        },
+        {
+          "heading": "Little Brother:",
+          "text": "Boasts a very high concentration of life within a very small area. Fan coral forests, overhangs, hard and soft corals in a variety of astonishing colors… and of course there are plenty of fish! With regular sightings of hammerheads, thresher sharks, grey sharks and white tip reef sharks, at the right time of year.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus:",
+          "text": "About 180 km south of the Brother Islands, this huge reef is surrounded by a sheer wall and strong currents allowing for fantastic drift diving. The hard corals grow to huge sizes but make sure you also keep an eye on the blue!",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone Reef:",
+          "text": "A Red Sea legend. One of the most beautiful reefs, with its north and south plateau’s covered in hard and soft corals and visiting pelagic, this truly is an awesome reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Wrecks, rays, Oceanic whitetip sharks, octopus, lionfish, nudibranchs, frogfish, huge schools of fish, bright colorful reefs. All dives sites are subject to weather conditions and the final route taken is at the absolute discretion of the captain and dive guides.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=438176&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-pearl::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)": {
+      "boat": "blue-pearl",
+      "name": "Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)",
+      "tour_id": "438186",
+      "collected": "2026-09-10",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore three of the finest dive sites in the Red Sea. A great all-around tour for divers with slightly more experience. There is so much to see that you’re spoilt for choice, but don’t forget to keep an eye out in the blue. This safari offers challenging dives, big drop-offs, beautiful coral walls, and plenty of large fish. Brother Islands, Daedalus & Elphinstone is a must for all die-hard Red Sea divers!",
+      "sections": [
+        {
+          "heading": "Big Brother:",
+          "text": "A 400 meter long island offering fabulous wreck diving and wall diving. The wreck of the Numidia lies on the northern tip between 10 and 80 meters. The northwest side of the island houses the wreck of the Aida. On every section of this reef, the wall is covered with corals and life.",
+          "is_day": false
+        },
+        {
+          "heading": "Little Brother:",
+          "text": "Boasts a very high concentration of life within a very small area. Fan coral forests, overhangs, hard and soft corals in a variety of astonishing colors… and of course there are plenty of fish! With regular sightings of hammerheads, thresher sharks, grey sharks, and white tip reef sharks, at the right time of year.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus:",
+          "text": "About 180 km south of the Brother Islands, this huge reef is surrounded by a sheer wall and strong currents allowing for fantastic drift diving. The hard corals grow to huge sizes but make sure you also keep an eye on the blue!",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone Reef:",
+          "text": "A Red Sea legend. One of the most beautiful reefs, with its north and south plateau’s covered in hard and soft corals and visiting pelagics, this truly is an awesome reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Wrecks, rays, sharks, octopus, lionfish, nudibranchs, frogfish, huge schools of fish, bright colorful reefs. All dive sites are subject to weather conditions and the final route taken is at the absolute discretion of the captain and dive guides. Start in Hurghada and end in Port Ghalib; this tour visits reefs between Port Ghalib and Brother Island, Daedalus and Elphinstone.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=438186&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-pearl::Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+      "boat": "blue-pearl",
+      "name": "Brothers, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+      "tour_id": "438188",
+      "collected": "2026-09-10",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore three of the finest dive sites in the Red Sea. A great all-round tour for divers with slightly more experience. There is so much to see that you’re spoilt for choice, but don’t forget to keep an eye out in the blue. This safari offers challenging dives, big drop offs, beautiful coral walls and plenty of large fish. Brother Islands, Daedalus & Elphinstone is a must for all die-hard Red Sea divers!",
+      "sections": [
+        {
+          "heading": "Big Brother:",
+          "text": "A 400 meter long island offering fabulous wreck diving and wall diving. The wreck of the Numidia lies on the northern tip between 10 and 80 meter. The north-west side of the island houses the wreck of the Aida. On every section of this reef the wall is covered with corals and life.",
+          "is_day": false
+        },
+        {
+          "heading": "Little Brother:",
+          "text": "Boasts a very high concentration of life within a very small area. Fan coral forests, overhangs, hard and soft corals in a variety of astonishing colors… and of course there are plenty of fish! With regular sightings of hammerheads, thresher sharks, grey sharks and white tip reef sharks, at the right time of year.",
+          "is_day": false
+        },
+        {
+          "heading": "Daedalus:",
+          "text": "About 180 km south of the Brother Islands, this huge reef is surrounded by a sheer wall and strong currents allowing for fantastic drift diving. The hard corals grow to huge sizes but make sure you also keep an eye on the blue!",
+          "is_day": false
+        },
+        {
+          "heading": "Elphinstone Reef:",
+          "text": "A Red Sea legend. One of the most beautiful reefs, with its north and south plateau’s covered in hard and soft corals and visiting pelagic, this truly is an awesome reef.",
+          "is_day": false
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Wrecks, rays, Oceanic whitetip sharks, octopus, lionfish, nudibranchs, frogfish, huge schools of fish, bright colorful reefs All dives sites are subject to weather conditions and the final route taken is at the absolute discretion of the captain and dive guides.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=438188&languageID=1&curr=USD&showPrices=false"
+    },
     "blue-pearl::North & Brothers (Hurghada - Hurghada)": {
       "boat": "blue-pearl",
       "name": "North & Brothers (Hurghada - Hurghada)",
@@ -4161,6 +4308,43 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=382612&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-pearl::North & Safaga (Hurghada - Hurghada)": {
+      "boat": "blue-pearl",
+      "name": "North & Safaga (Hurghada - Hurghada)",
+      "tour_id": "438177",
+      "collected": "2026-09-10",
+      "regions": [
+        "Thistlegorm",
+        "Safaga"
+      ],
+      "dive_sites": [
+        "thistlegorm",
+        "safaga"
+      ],
+      "dives": 20,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "The tour leader of Blue Planet Liveaboards will welcome you with a sign of Blue Planet Liveaboards. He will take care of your visa (stamp) that will be pasted in your passport. After the check of the entry authority, you will go to the luggage claim. Check-in time cannot be before 5 pm",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 - 7",
+          "text": "On the boat, you will choose your own dive requirement. If you are an early riser, you have the possibility for an Early Morning Dive. After common breakfast, you will start to the famous drop off reefs in the Red Sea and to reefs which are really secret. In the afternoon there are wrecks on the order of the day as well as glamorous labyrinths, mysterious caves, and magnificent underwater gardens. If this is not enough, you can end the day in a cozy night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Disembarkation. Check out time is 10 am. Please notes that the itineraries are examples only, We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. A fantastic dive vacation awaits you with a liveaboard Egypt.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=438177&languageID=1&curr=USD&showPrices=false"
     },
     "blue-pearl::North & Tiran (Hurghada - Hurghada)": {
       "boat": "blue-pearl",
@@ -4260,6 +4444,52 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=382614&languageID=1&curr=USD&showPrices=false"
+    },
+    "blue-pearl::North-Tiran-Dahab (Hurghada - Hurghada)": {
+      "boat": "blue-pearl",
+      "name": "North-Tiran-Dahab (Hurghada - Hurghada)",
+      "tour_id": "438180",
+      "collected": "2026-09-10",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 20 minimum logged dives required.",
+      "min_logged_dives": 20,
+      "intro": "Considered one of the 7 wonders of the underwater world, the Red Sea is home to more than 1,000 species of invertebrates and over 200 species of soft and hard corals. This forms the basis for a marine ecosystem with 1,100 species of fish, 10% of which are unique, making it proportionally the largest number of fish in any body of water in the world. The crystal clear waters offer unlimited opportunities to discover tropical marine life, from sharks and dolphins to gorgonians and feather stars. There is plenty of choice when diving and depending on where you want to dive, you can find shallow coral reefs, drift dives on steep walls, or a collection of the most interesting wrecks you can find anywhere. In other places, the vibrant reefs extend far into the ocean, forming complex labyrinths of plateaus, lagoons, caves, and gardens.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Arrive onboard.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "2 to 3 dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 to 6:",
+          "text": "Up to 4 dives",
+          "is_day": true
+        },
+        {
+          "heading": "(if no Marine Park)",
+          "text": "or up to 3 dives",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Depart in the morning. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=3326&tourID=438180&languageID=1&curr=USD&showPrices=false"
     },
     "blue-seas::Brothers, Daedalus and Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "blue-seas",
@@ -6262,6 +6492,384 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6081&tourID=427145&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "tour_id": "439135",
+      "collected": "2026-09-10",
+      "regions": [
+        "The Brothers",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 16,
+      "guests": 28,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Discover the “holy trinity” of Red Sea diving — Brothers, Daedalus, and Elphinstone. This safari takes you far off the beaten path to coastal national parks, revealing dive sites seldom visited by day-boats. Here, you may encounter hammerheads, oceanic whitetips, threshers, silky sharks, and reef sharks — and sometimes even tiger or whale sharks. Expect sheer walls draped in soft corals, dramatic drop-offs, rich fish life, and historic wrecks. Accessible only by liveaboard, BDE delivers an unforgettable, immersive diving journey.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Arrival in Hurghada, followed by transfer to New Marina dock, boarding the boat, briefing, check-in, and welcome dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "One check dive, one regular dive, and one night dive (at Gota Abu Ramada or Little Giftun) as the boat makes its way toward Brothers.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Three dives among the Brothers: Big Brother (twice) and Little Brother. At night, sail toward Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 - 5",
+          "text": "Three dives per day at Daedalus: exploring the northern plateau, southern plateau, and the lighthouse area. Overnight at Daedalus reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Two dives, and one night dive around Elphinstone Reef and Marsa Shouna reefs. Then sail toward the Salem Express wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Two dives: Salem Express wreck and Ras Disha reef. Return toward the dock, pack up, final night onboard.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Breakfast, disembark, transfer to Hurghada airport. Note: The final day’s diving schedule may be adjusted depending on your departure time. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=439135&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::Daedalus - Rocky - Zabargad (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "Daedalus - Rocky - Zabargad (Hurghada - Hurghada)",
+      "tour_id": "410699",
+      "collected": "2026-09-10",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "Rocky",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "rocky island",
+        "zabargad"
+      ],
+      "dives": 16,
+      "guests": 28,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Embark on an unforgettable 8-day liveaboard adventure in the northern and central Red Sea, departing from Hurghada. Explore the remote and pristine dive sites of Daedalus Reef, Rocky Island, and Zabargad Island, renowned for their dramatic walls, vibrant coral gardens, and abundant marine life. This safari is ideal for advanced divers seeking pelagic encounters, wrecks, and unique underwater landscapes.",
+      "sections": [
+        {
+          "heading": "Day 1: Embarkation – Hurghada",
+          "text": "Board the liveaboard at Hurghada Marina. Welcome briefing and boat orientation. Safety instructions and check equipment. Overnight sail toward Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Daedalus Reef",
+          "text": "3 dives on Daedalus Reef. Explore vertical walls, coral plateaus, and deep drop-offs. Possible sightings: hammerhead sharks, grey reef sharks, manta rays. Night sail to Rocky Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3: Rocky Island",
+          "text": "3 dives around Rocky Island. Steep walls with soft corals, rich marine biodiversity. Pelagic encounters: grey reef sharks, tuna, barracuda. Night sail to Zabargad Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4: Zabargad Island",
+          "text": "3 dives at Zabargad. Coral gardens, caves, and lagoons. Marine life: turtles, rays, tropical reef fish. Night sail to Shaab Sataya.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Shaab Sataya (Dolphin Reef)",
+          "text": "3 dives at Shaab Sataya, famous for dolphin sightings. Explore coral walls and underwater canyons. Night sail toward Elphinstone Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6: Elphinstone Reef",
+          "text": "3 dives at Elphinstone Reef. Steep walls with diverse marine life; chances to see hammerhead sharks. Night sail back toward Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7: Return toward Hurghada",
+          "text": "Optional morning dive near the marina area. Final dives for photos and relaxation. Afternoon: return to Hurghada, farewell dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Disembarkation",
+          "text": "Breakfast on board. Disembark in Hurghada Marina. Transfer to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "pristine hard and soft corals, pelagic fish action, hammerhead sharks, thresher sharks, oceanic whitetip sharks, grey reef sharks, manta rays (seasonal), tuna, barracuda, giant trevally, Napoleon wrasse, moray eels, and large schools of reef fish. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=410699&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::North (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "North (Hurghada - Hurghada)",
+      "tour_id": "439136",
+      "collected": "2026-09-10",
+      "regions": [
+        "Abu Nuhas",
+        "Ras Mohammed",
+        "Thistlegorm",
+        "Shark and Yolanda"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "ras mohammed",
+        "thistlegorm"
+      ],
+      "dives": 17,
+      "guests": 28,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Explore the northern Red Sea’s finest dive sites on this popular liveaboard safari. TOP North brings together iconic wrecks, vibrant reefs and walls, and a huge variety of marine life—from macro critters to large pelagics. Perfect for both intermediate and experienced divers who want to see the best of the Hurghada region without heading too far off the beaten path.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Arrival in Hurghada, followed by transfer to New Marina dock, boarding the boat, briefing, check-in, and welcome dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Check dive at Shaab El Erg Reef to test gear and get settled in. One dive later at Shaab El Erg. Night dive at Seven Pools as the boat sails toward Ras Mohamed.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "Three dives in Ras Mohamed National Park, including Shark Reef, Yolanda Reef, and Jackfish Alley.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "First dive on the Dunraven wreck. Other dives include Big Crack / Small Crack and a night dive at Shaab Mahmoudat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "Three dives at the famous SS Thistlegorm wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "Three dives among the wrecks of Abu Nuhas: Giannis D, Carnatic, Chrisoula K.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Two final dives at Umm Gamar Reef / Shabruhr Umm Gamar. Return to the dock, dinner, last evening onboard.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Breakfast, check-out, followed by transfer to Hurghada Airport. Note: last day dives may be adapted depending on departure time. The North Red Sea is renowned for its rich marine biodiversity, colorful coral reefs, and world-famous wrecks. Divers can expect to see schools of barracuda, batfish, and snappers, along with moray eels, lionfish, and blue-spotted stingrays. The reefs are teeming with vibrant soft and hard corals, attracting turtles and the occasional dolphin. While big pelagics are less common than in the south, reef sharks and eagle rays may still make an appearance. Perfect for all levels, this region offers stunning underwater scenery and unforgettable diving experiences. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=439136&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::North Dahab (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "North Dahab (Hurghada - Hurghada)",
+      "tour_id": "439149",
+      "collected": "2026-09-10",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 16,
+      "guests": 28,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Embark on an unforgettable 8-day diving adventure along the northern Red Sea coast, exploring the pristine dive sites of Dahab and the Sinai Peninsula. This liveaboard safari offers up to 4 dives daily, including iconic sites like the Blue Hole, Dahab Canyon, and Ras Mohamed National Park. Ideal for divers seeking a blend of renowned dive sites and off-the-beaten-path explorations.",
+      "sections": [
+        {
+          "heading": "Day 1: Arrival and Embarkation.",
+          "text": "Afternoon: Arrive at the marina and board the liveaboard. Evening: Welcome briefing, check-in, and dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Shaab El Erg & Ras Mohamed National Park",
+          "text": "Dive 1: Shaab El Erg – Explore vibrant coral gardens. Dive 2: Ras Mohamed National Park – Discover diverse marine life in a protected area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3: Ras Abou Gallum Exploration",
+          "text": "Dives 3–5: Explore the Ras Abou Gallum area, known for its rich biodiversity and unique underwater landscapes.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4: Blue Hole – Bells & Canyon",
+          "text": "Dive 6 & 7: Bells – Dive into the Blue Hole through a chimney-like entrance. Dive 8: Canyon – Navigate through a narrow, winding canyon filled with glassfish.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Dahab Exploration",
+          "text": "Dives 9–11: Explore various dive sites around Dahab, offering a mix of coral gardens and unique underwater features.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6: Nabq Exploration",
+          "text": "Dives 12–14: Discover the Nabq area, known for its diverse marine life and beautiful coral formations.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7: Ras Mohamed National Park & Um Gamar",
+          "text": "Dive 15: Return to Ras Mohamed National Park for another dive in this rich marine environment. Dive 16: Um Gamar – Explore drop-offs and plateaus teeming with marine life.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Return to Marina and Disembarkation",
+          "text": "Morning: Sail back to the marina. Late Morning: Breakfast and check-out.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "healthy fringing reefs with hard and soft corals, abundant reef fish, moray eels, octopus, nudibranchs, turtles, eagle rays, barracuda, and occasional reef sharks, with excellent macro life along the reef walls and coral gardens. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=439149&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::Rocky - Zabargad - St Johns (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "Rocky - Zabargad - St Johns (Hurghada - Hurghada)",
+      "tour_id": "410718",
+      "collected": "2026-09-10",
+      "regions": [
+        "St. Johns",
+        "Abu Dabab",
+        "Rocky",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "st johns",
+        "abu dabab",
+        "rocky island",
+        "zabargad"
+      ],
+      "dives": 16,
+      "guests": 28,
+      "experience": "Open Water - 10 minimum logged dives required.",
+      "min_logged_dives": 10,
+      "intro": "Journey to the far south of the Egyptian Red Sea — a remote paradise of pristine reefs, caverns, coral gardens, and blue lagoons. The St. John’s Reef system, near the Sudanese border, is a diver’s dream: dramatic underwater landscapes, vibrant marine life, and the feeling of being completely off the map. This route is ideal for photographers and adventure-seekers alike. Expect encounters with reef sharks, turtles, dolphins, and occasionally manta rays or hammerheads. Thanks to its southern location, visibility is excellent, coral is untouched, and the mood on board is relaxed.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Arrival in Marsa Alam, followed by transfer to Hurghada, embarkation, welcome briefing, and dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Check dive and two regular dives in the Shaab Abu Dabbab area, followed by an overnight cruise south toward St. John’s.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 3 – 6",
+          "text": "Four days of diving in the St. John’s region, including: St. John’s Caves – labyrinths and swim-throughs filled with light beams Habili Ali & Habili Gafaar – steep drop-offs and soft-coral gardens Dangerous Reef – pelagic encounters, schooling barracuda Shaab Claudia & Satayah (lagoon) – coral canyons and playful dolphins 3 dives per day + occasional night dives (weather permitting)",
+          "is_day": false
+        },
+        {
+          "heading": "Day 8: Disembarkation",
+          "text": "Breakfast on board. Disembark in Hurghada Marina. Transfer to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "oceanic whitetip, hammerhead, grey reef, and silvertip sharks, along with manta and eagle rays, turtles, large schools of pelagic fish, vibrant reef fish, rich macro life, and pristine coral walls. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=410718&languageID=1&curr=USD&showPrices=false"
+    },
+    "cu::St. Johns - Fury Shoals (Hurghada - Hurghada)": {
+      "boat": "cu",
+      "name": "St. Johns - Fury Shoals (Hurghada - Hurghada)",
+      "tour_id": "410721",
+      "collected": "2026-09-10",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "Rocky",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "rocky island",
+        "zabargad"
+      ],
+      "dives": 16,
+      "guests": 28,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Embark on an unforgettable 8-day liveaboard adventure in the northern and central Red Sea, departing from Hurghada. Explore the remote and pristine dive sites of Daedalus Reef, Rocky Island, and Zabargad Island, renowned for their dramatic walls, vibrant coral gardens, and abundant marine life. This safari is ideal for advanced divers seeking pelagic encounters, wrecks, and unique underwater landscapes.",
+      "sections": [
+        {
+          "heading": "Day 1: Embarkation – Hurghada",
+          "text": "Board the liveaboard at Hurghada Marina. Welcome briefing and boat orientation. Safety instructions and check equipment. Overnight sail toward Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Daedalus Reef",
+          "text": "3 dives on Daedalus Reef. Explore vertical walls, coral plateaus, and deep drop-offs. Possible sightings: hammerhead sharks, grey reef sharks, manta rays. Night sail to Rocky Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3: Rocky Island",
+          "text": "3 dives around Rocky Island. Steep walls with soft corals, rich marine biodiversity. Pelagic encounters: grey reef sharks, tuna, barracuda. Night sail to Zabargad Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4: Zabargad Island",
+          "text": "3 dives at Zabargad. Coral gardens, caves, and lagoons. Marine life: turtles, rays, tropical reef fish. Night sail to Shaab Sataya.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Shaab Sataya (Dolphin Reef)",
+          "text": "3 dives at Shaab Sataya, famous for dolphin sightings. Explore coral walls and underwater canyons. Night sail toward Elphinstone Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6: Elphinstone Reef",
+          "text": "3 dives at Elphinstone Reef. Steep walls with diverse marine life; chances to see hammerhead sharks. Night sail back toward Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7: Return toward Hurghada",
+          "text": "Optional morning dive near the marina area. Final dives for photos and relaxation. Afternoon: return to Hurghada, farewell dinner on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Disembarkation",
+          "text": "Breakfast on board. Disembark in Hurghada Marina. Transfer to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "oceanic whitetip, hammerhead, grey reef, and silvertip sharks, along with manta and eagle rays, turtles, large schools of pelagic fish, vibrant reef fish, rich macro life, and pristine coral walls. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6212&tourID=410721&languageID=1&curr=USD&showPrices=false"
     },
     "destiny::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
       "boat": "destiny",
