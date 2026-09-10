@@ -1,6 +1,661 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-10",
+  "added": [
+   {
+    "id": "cu-2027-05-01-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-01",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-06-0",
+    "boat": "Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-05-06",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-05-08-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-05-08",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-13-0",
+    "boat": "Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-13",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-05-15-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-05-15",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-20-0",
+    "boat": "Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-05-20",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-05-22-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-05-22",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-27-0",
+    "boat": "Blue Pearl",
+    "title": "North & Tiran",
+    "start": "2027-05-27",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-05-29-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-05-29",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-03-0",
+    "boat": "Blue Pearl",
+    "title": "North & Wrecks",
+    "start": "2027-06-03",
+    "price": 1193.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-06-05-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-06-05",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-10-0",
+    "boat": "Blue Pearl",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-06-10",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-06-12-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-12",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-17-0",
+    "boat": "Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-06-17",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-06-19-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-06-19",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-24-0",
+    "boat": "Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-24",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-06-26-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-06-26",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-01-0",
+    "boat": "Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-07-01",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-07-03-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-03",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-08-0",
+    "boat": "Blue Pearl",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-07-08",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-07-10-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-10",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-15-0",
+    "boat": "Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-07-15",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-07-17-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-17",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-22-0",
+    "boat": "Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-07-24-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-24",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "cu-2027-07-31-0",
+    "boat": "CU",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-31",
+    "price": 1513.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-05-0",
+    "boat": "Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1455.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-08-07-0",
+    "boat": "CU",
+    "title": "North Dahab",
+    "start": "2027-08-07",
+    "price": 1746.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-12-0",
+    "boat": "Blue Pearl",
+    "title": "North & Wrecks",
+    "start": "2027-08-12",
+    "price": 1193.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-08-14-0",
+    "boat": "CU",
+    "title": "North Dahab",
+    "start": "2027-08-14",
+    "price": 1746.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-19-0",
+    "boat": "Blue Pearl",
+    "title": "North & Tiran",
+    "start": "2027-08-19",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-08-21-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-08-21",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-26-0",
+    "boat": "Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-08-26",
+    "price": 1321.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   },
+   {
+    "id": "cu-2027-08-28-0",
+    "boat": "CU",
+    "title": "North",
+    "start": "2027-08-28",
+    "price": 1280.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "sold_out": [
+   {
+    "id": "blue-melody-2027-05-08-0",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-08",
+    "price": 1743.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [
+   {
+    "id": "ocean-lovers-2027-05-15-0",
+    "boat": "Ocean Lovers",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-15",
+    "price": 1487.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "withdrawn": [
+   {
+    "id": "blue-pearl-2027-05-06-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-05-06",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-13-padi",
+    "boat": "MY Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-13",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-20-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-05-20",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-05-27-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Tiran",
+    "start": "2027-05-27",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-03-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Wrecks",
+    "start": "2027-06-03",
+    "price": 1025.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-10-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-06-10",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-17-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-06-17",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-06-24-padi",
+    "boat": "MY Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-24",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-01-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-07-01",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-08-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North, Tiran & Dahab",
+    "start": "2027-07-08",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-15-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Brothers",
+    "start": "2027-07-15",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-07-22-padi",
+    "boat": "MY Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-05-padi",
+    "boat": "MY Blue Pearl",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-05",
+    "price": 1250.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-12-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Wrecks",
+    "start": "2027-08-12",
+    "price": 1025.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-19-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Tiran",
+    "start": "2027-08-19",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   },
+   {
+    "id": "blue-pearl-2027-08-26-padi",
+    "boat": "MY Blue Pearl",
+    "title": "North & Safaga",
+    "start": "2027-08-26",
+    "price": 1135.0,
+    "currency": "EUR",
+    "sellers": [
+     "padi.com"
+    ]
+   }
+  ],
+  "relisted": [
+   {
+    "boat": "Ghazala Explorer",
+    "start": "2027-06-21",
+    "title": "North: Wrecks & Reefs",
+    "was_title": "North: Wrecks & Reefs",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 1705.0,
+    "was_price": 1465.0,
+    "currency": "USD",
+    "was_currency": "EUR",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Red Sea Aggressor II",
+    "start": "2027-07-03",
+    "title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
+    "was_title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 2760.0,
+    "was_price": 2760.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   }
+  ],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [
+   "CU"
+  ],
+  "fx": [],
+  "price_rounding": 675,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-10"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-09",
   "added": [
    {
@@ -3365,110 +4020,5 @@
   "availability_newly_read": false,
   "quiet": true,
   "day": "2026-09-01"
- },
- {
-  "before": "HEAD",
-  "after": "2026-08-30",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": true,
-  "day": "2026-08-31"
- },
- {
-  "before": "ac414d1a",
-  "after": "2026-08-30",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "price_up": [
-   {
-    "id": "red-sea-aggressor-ii-2027-07-03-padi",
-    "boat": "Red Sea Aggressor II",
-    "title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
-    "start": "2027-07-03",
-    "was": 1849.2,
-    "now": 2760.0,
-    "currency": "USD",
-    "delta": 910.8,
-    "pct": 49.25373134328358
-   }
-  ],
-  "price_down": [],
-  "fees": [
-   {
-    "boat": "MY Anemone",
-    "code": "airport_transfer",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Anemone",
-    "code": "fuel_surcharge",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Anemone",
-    "code": "nitrox",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Anemone",
-    "code": "port_fees",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Heaven Saphir",
-    "code": "airport_transfer",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Independence II",
-    "code": "nitrox",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Seawolf Dominator",
-    "code": "airport_transfer",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "MY Seawolf Dominator",
-    "code": "nitrox",
-    "was": "not listed",
-    "now": "included"
-   },
-   {
-    "boat": "Seawolf Steel",
-    "code": "nitrox",
-    "was": "not listed",
-    "now": "included"
-   }
-  ],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-08-31"
  }
 ]

@@ -3,6 +3,58 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-10
+
+```
+changes: HEAD -> 2026-09-10
+===========================
+
+new departures (34)
+  2027-05-01  CU                     Brothers, Daedalus & Elphinstone        1,513 USD liveaboard.com
+  2027-05-06  Blue Pearl             North & Brothers                        1,321 USD liveaboard.com+padi.com
+  2027-05-08  CU                     North                                   1,280 USD liveaboard.com
+  2027-05-13  Blue Pearl             Brothers, Daedalus & Elphinstone        1,455 USD liveaboard.com+padi.com
+  2027-05-15  CU                     North                                   1,280 USD liveaboard.com
+  2027-05-20  Blue Pearl             North & Safaga                          1,321 USD liveaboard.com+padi.com
+  2027-05-22  CU                     North                                   1,280 USD liveaboard.com
+  2027-05-27  Blue Pearl             North & Tiran                           1,321 USD liveaboard.com+padi.com
+  2027-05-29  CU                     North                                   1,280 USD liveaboard.com
+  2027-06-03  Blue Pearl             North & Wrecks                          1,193 USD liveaboard.com+padi.com
+  2027-06-05  CU                     North                                   1,280 USD liveaboard.com
+  2027-06-10  Blue Pearl             North, Tiran & Dahab                    1,455 USD liveaboard.com+padi.com
+  ... and 22 more not shown
+
+now sold out (1)
+  2027-05-08  Blue Melody            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+
+bookable again (1)
+  2027-05-15  Ocean Lovers           Brothers, Daedalus & Elphinstone   liveaboard.com
+
+withdrawn (16)
+  2027-05-06  MY Blue Pearl          North & Brothers                   padi.com
+  2027-05-13  MY Blue Pearl          Brothers, Daedalus & Elphinstone   padi.com
+  2027-05-20  MY Blue Pearl          North & Safaga                     padi.com
+  2027-05-27  MY Blue Pearl          North & Tiran                      padi.com
+  2027-06-03  MY Blue Pearl          North & Wrecks                     padi.com
+  2027-06-10  MY Blue Pearl          North, Tiran & Dahab               padi.com
+  2027-06-17  MY Blue Pearl          North & Brothers                   padi.com
+  2027-06-24  MY Blue Pearl          Brothers, Daedalus & Elphinstone   padi.com
+  2027-07-01  MY Blue Pearl          North & Safaga                     padi.com
+  2027-07-08  MY Blue Pearl          North, Tiran & Dahab               padi.com
+  2027-07-15  MY Blue Pearl          North & Brothers                   padi.com
+  2027-07-22  MY Blue Pearl          Brothers, Daedalus & Elphinstone   padi.com
+  ... and 4 more not shown
+
+re-listed — same sailing, new row (2)
+  2027-06-21  Ghazala Explorer       North: Wrecks & Reefs        padi.com -> liveaboard.com+padi.com  1,465 EUR -> 1,705 USD
+  2027-07-03  Red Sea Aggressor II   Northern Red Sea, Ras Mohamm padi.com -> liveaboard.com+padi.com
+
+vessels seen for the first time (1)
+  CU
+
+675 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-09
 
 ```
