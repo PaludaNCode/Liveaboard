@@ -11998,13 +11998,17 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "gota abu ramada",
+        "panorama reef",
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "marsa shouna",
+        "small giftun"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -12201,7 +12205,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "avo--dahab-sinai-hurghada-hurghada",
@@ -12210,10 +12223,16 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "abu nuhas",
+        "sha'ab el erg",
+        "tiran",
+        "ras mohammed",
+        "thistlegorm",
+        "small giftun",
         "dahab"
       ],
       "region": null,
@@ -12413,13 +12432,14 @@
         }
       ],
       "requirements": {
-        "min_level": "open_water",
-        "min_logged_dives": 20,
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 20+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -12880,11 +12900,18 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "ras mohammed"
+        "abu nuhas",
+        "ras mohammed",
+        "thistlegorm",
+        "gubal",
+        "rosalie moller",
+        "sha'ab el erg",
+        "gota abu ramada",
+        "small giftun"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -13081,7 +13108,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "avo--north-tiran-hurghada-hurghada",
@@ -13434,11 +13470,19 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "abu nuhas",
+        "sha'ab el erg",
+        "ras mohammed",
+        "thistlegorm",
+        "brothers",
+        "salem express",
+        "panorama reef",
+        "gota abu ramada",
+        "small giftun"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -13637,13 +13681,14 @@
         }
       ],
       "requirements": {
-        "min_level": "open_water",
-        "min_logged_dives": 20,
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 20+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -187074,10 +187119,10 @@
     }
   },
   "entry_bar": {
-    "both": 153,
-    "disagree": 70,
+    "both": 155,
+    "disagree": 72,
     "padi_stricter": 37,
-    "ours_stricter": 33
+    "ours_stricter": 35
   },
   "facts_superseded": [
     "alsuraya/gear_rental",
