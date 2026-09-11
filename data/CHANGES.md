@@ -3,6 +3,51 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-11
+
+```
+changes: HEAD -> 2026-09-11
+===========================
+
+new departures (1)
+  2027-08-06  Iceberg                Overnight Diving & Snorkelling            209 USD liveaboard.com
+
+now sold out (1)
+  2027-05-08  Blue Horizon           Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+
+bookable again (2)
+  2027-05-22  Emperor Superior       North & Easy                       liveaboard.com+padi.com
+  2027-05-29  Emperor Superior       Reefs & Wrecks                     liveaboard.com+padi.com
+
+re-listed — same sailing, new row (9)
+  2027-05-08  AVO                    The Best of the South        padi.com -> liveaboard.com+padi.com  1,709 EUR -> 1,984 USD
+  2027-05-15  AVO                    St. John's                   padi.com -> liveaboard.com+padi.com  1,709 EUR -> 1,984 USD
+  2027-06-05  AVO                    North & Ras Mohammed         padi.com -> liveaboard.com+padi.com  1,519 EUR -> 1,764 USD  North Ras Mohammed -> North & Ras Mohammed
+  2027-06-12  AVO                    North & Tiran                padi.com -> liveaboard.com+padi.com  1,519 EUR -> 1,764 USD  North Tiran -> North & Tiran
+  2027-06-19  AVO                    North & Brothers             padi.com -> liveaboard.com+padi.com  1,519 EUR -> 1,764 USD
+  2027-06-26  AVO                    Dahab Sinai                  padi.com -> liveaboard.com+padi.com  1,614 EUR -> 1,874 USD
+  2027-07-17  AVO                    St. John's                   padi.com -> liveaboard.com+padi.com  1,614 EUR -> 1,874 USD
+  2027-08-21  AVO                    Brothers - Daedalus - Elphin padi.com -> liveaboard.com+padi.com  1,614 EUR -> 1,874 USD  BDE - Golden Triangle -> Brothers - Daedalus - El
+  2027-08-28  AVO                    North & Brothers             padi.com -> liveaboard.com+padi.com  1,519 EUR -> 1,764 USD
+
+price down (47)
+  2027-07-17  DUNE Silky             2,851 ->   2,844 USD  -7 (-0.2%)  Best of Egypt
+  2027-07-31  Emperor Superior       2,747 ->   2,740 USD  -7 (-0.3%)  South & St. John's
+  2027-07-29  Golden Dolphin IV      2,792 ->   2,785 USD  -7 (-0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,793 ->   2,786 USD  -7 (-0.3%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-10  Aphrodite              2,179 ->   2,173 USD  -6 (-0.3%)  Best of Red Sea 2 Weeks
+  2027-05-15  Aphrodite              2,386 ->   2,380 USD  -6 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,432 ->   2,426 USD  -6 (-0.2%)  Brothers, Daedalus & Elphinstone
+  2027-07-17  Aphrodite              2,179 ->   2,173 USD  -6 (-0.3%)  North Classic
+  2027-07-24  Aphrodite              2,386 ->   2,380 USD  -6 (-0.3%)  North Dolphins
+  2027-08-21  Golden Dolphin IV      2,559 ->   2,553 USD  -6 (-0.2%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,559 ->   2,553 USD  -6 (-0.2%)  North - Straits of Tiran - Brother
+  2027-07-17  MY Odyssey Liveaboar   2,502 ->   2,496 USD  -6 (-0.2%)  Premium Expedition
+  ... and 35 more not shown
+
+796 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-10
 
 ```
