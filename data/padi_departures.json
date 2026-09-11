@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-10",
+ "collected": "2026-09-11",
  "departures": {
   "all-star-ghani::2026-09-14": {
    "availability": 5,
@@ -821,7 +821,7 @@
    "was": 2295.0
   },
   "all-star-red-sea::2026-10-05": {
-   "availability": 4,
+   "availability": 0,
    "boat": "all-star-red-sea",
    "currency": "USD",
    "end": "2026-10-12",
@@ -1562,7 +1562,7 @@
    "was": 1350.0
   },
   "alsuraya::2026-09-19": {
-   "availability": 2,
+   "availability": 1,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -1627,7 +1627,7 @@
    "was": 1350.0
   },
   "alsuraya::2026-10-24": {
-   "availability": 4,
+   "availability": 3,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -1744,7 +1744,7 @@
    "was": 1150.0
   },
   "alsuraya::2026-12-26": {
-   "availability": 12,
+   "availability": 10,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -1848,7 +1848,7 @@
    "was": 1350.0
   },
   "alsuraya::2027-03-27": {
-   "availability": 22,
+   "availability": 20,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2027-04-03",
@@ -2353,19 +2353,6 @@
    "slug": "alsuraya",
    "start": "2027-12-25",
    "was": 1150.0
-  },
-  "amelie-adventures::2026-09-11": {
-   "availability": 9,
-   "boat": "amelie-adventures",
-   "currency": "EUR",
-   "end": "2026-09-14",
-   "itinerary": "Best Of Hurghada (Hurghada - Hurghada) 3 Nights",
-   "nights": 3,
-   "padi_id": 1532775,
-   "price": 485.0,
-   "slug": "amelie-adventures",
-   "start": "2026-09-11",
-   "was": 485.0
   },
   "amelie-adventures::2026-09-15": {
    "availability": 12,
@@ -6983,7 +6970,7 @@
    "was": 590.0
   },
   "bella-2::2026-10-04": {
-   "availability": 5,
+   "availability": 4,
    "boat": "bella-2",
    "currency": "EUR",
    "end": "2026-10-07",
@@ -7919,17 +7906,17 @@
    "was": 760.0
   },
   "bella-3::2026-11-30": {
-   "availability": 7,
+   "availability": 5,
    "boat": "bella-3",
    "currency": "EUR",
    "end": "2026-12-04",
    "itinerary": "Thistlegorm, Dunraven, Ras Mohammed & Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1542532,
-   "price": 760.0,
+   "price": 845.0,
    "slug": "bella-3",
    "start": "2026-11-30",
-   "was": 760.0
+   "was": 845.0
   },
   "bella-3::2026-12-05": {
    "availability": 20,
@@ -8751,7 +8738,7 @@
    "was": 1743.0
   },
   "blue-horizon::2027-05-08": {
-   "availability": 20,
+   "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-05-15",
@@ -9791,7 +9778,7 @@
    "was": 1785.0
   },
   "blue-melody::2026-10-17": {
-   "availability": 0,
+   "availability": 2,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-10-24",
@@ -9934,7 +9921,7 @@
    "was": 1155.0
   },
   "blue-melody::2027-01-02": {
-   "availability": 5,
+   "availability": 6,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-01-09",
@@ -10012,7 +9999,7 @@
    "was": 1281.0
   },
   "blue-melody::2027-03-20": {
-   "availability": 6,
+   "availability": 10,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-03-27",
@@ -10103,7 +10090,7 @@
    "was": 1526.0
   },
   "blue-melody::2027-05-08": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-05-15",
@@ -10129,7 +10116,7 @@
    "was": 1743.0
   },
   "blue-melody::2027-05-22": {
-   "availability": 6,
+   "availability": 8,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-05-29",
@@ -11065,7 +11052,7 @@
    "was": 1240.0
   },
   "blue-pearl::2026-10-08": {
-   "availability": 2,
+   "availability": 1,
    "boat": "blue-pearl",
    "currency": "EUR",
    "end": "2026-10-15",
@@ -12547,7 +12534,7 @@
    "was": 1125.0
   },
   "blue-storm::2026-09-17": {
-   "availability": 4,
+   "availability": 5,
    "boat": "blue-storm",
    "currency": "EUR",
    "end": "2026-09-24",
@@ -13314,7 +13301,7 @@
    "was": 1215.0
   },
   "blue::2026-09-17": {
-   "availability": 14,
+   "availability": 18,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-09-24",
@@ -13392,7 +13379,7 @@
    "was": 1495.0
   },
   "blue::2026-11-19": {
-   "availability": 8,
+   "availability": 6,
    "boat": "blue",
    "currency": "EUR",
    "end": "2026-11-26",
@@ -14614,17 +14601,17 @@
    "was": 995.0
   },
   "discovery-i::2026-09-12": {
-   "availability": 0,
+   "availability": 2,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-09-19",
    "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1532039,
-   "price": 672.0,
+   "price": 806.4,
    "slug": "my-discovery-i",
    "start": "2026-09-12",
-   "was": 960.0
+   "was": 1152.0
   },
   "discovery-i::2026-09-19": {
    "availability": 1,
@@ -15511,7 +15498,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-09-19": {
-   "availability": 6,
+   "availability": 5,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -15602,7 +15589,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-07": {
-   "availability": 17,
+   "availability": 15,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -15628,7 +15615,7 @@
    "was": 1150.0
   },
   "discovery-ii::2026-11-21": {
-   "availability": 14,
+   "availability": 16,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -15966,7 +15953,7 @@
    "was": 1050.0
   },
   "discovery-ii::2027-07-24": {
-   "availability": 16,
+   "availability": 14,
    "boat": "discovery-ii",
    "currency": "EUR",
    "end": "2027-07-31",
@@ -16278,30 +16265,30 @@
    "was": 1400.0
   },
   "dune-longara::2026-10-24": {
-   "availability": 3,
+   "availability": 1,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-10-31",
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554510,
-   "price": 1600.0,
+   "price": 1700.0,
    "slug": "dune-longara",
    "start": "2026-10-24",
-   "was": 1600.0
+   "was": 1700.0
   },
   "dune-longara::2026-10-31": {
-   "availability": 4,
+   "availability": 2,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "North Brothers (Port Ghalib - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1554508,
-   "price": 1600.0,
+   "price": 1700.0,
    "slug": "dune-longara",
    "start": "2026-10-31",
-   "was": 1600.0
+   "was": 1700.0
   },
   "dune-longara::2026-11-07": {
    "availability": 2,
@@ -16395,7 +16382,7 @@
    "was": 2300.0
   },
   "dune-longara::2027-03-20": {
-   "availability": 29,
+   "availability": 23,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2027-03-27",
@@ -18735,7 +18722,7 @@
    "was": 1250.0
   },
   "dune-titan::2026-10-10": {
-   "availability": 7,
+   "availability": 4,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -19242,7 +19229,7 @@
    "was": 1350.0
   },
   "dune-titan::2027-09-18": {
-   "availability": 30,
+   "availability": 0,
    "boat": "dune-titan",
    "currency": "EUR",
    "end": "2027-09-25",
@@ -21348,7 +21335,7 @@
    "was": 1700.0
   },
   "emperor-elite::2026-11-26": {
-   "availability": 17,
+   "availability": 19,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2026-12-03",
@@ -21426,7 +21413,7 @@
    "was": 1300.0
   },
   "emperor-elite::2027-01-07": {
-   "availability": 13,
+   "availability": 21,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2027-01-14",
@@ -22115,7 +22102,7 @@
    "was": 1600.0
   },
   "emperor-elite::2028-05-25": {
-   "availability": 22,
+   "availability": 24,
    "boat": "emperor-elite",
    "currency": "EUR",
    "end": "2028-06-01",
@@ -23493,7 +23480,7 @@
    "was": 1270.0
   },
   "eriny::2026-10-03": {
-   "availability": 14,
+   "availability": 12,
    "boat": "eriny",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -24325,7 +24312,7 @@
    "was": 2545.0
   },
   "explorer-ventures-grand-sea-explorer::2026-11-19": {
-   "availability": 10,
+   "availability": 2,
    "boat": "explorer-ventures-grand-sea-explorer",
    "currency": "USD",
    "end": "2026-11-26",
@@ -27614,7 +27601,7 @@
    "was": 1400.0
   },
   "grand-discovery::2026-09-12": {
-   "availability": 3,
+   "availability": 5,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-09-19",
@@ -27653,7 +27640,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-10-03": {
-   "availability": 10,
+   "availability": 6,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -27666,7 +27653,7 @@
    "was": 1620.0
   },
   "grand-discovery::2026-10-10": {
-   "availability": 22,
+   "availability": 24,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -27796,7 +27783,7 @@
    "was": 1250.0
   },
   "grand-discovery::2026-12-19": {
-   "availability": 32,
+   "availability": 30,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-26",
@@ -31774,7 +31761,7 @@
    "was": 1570.0
   },
   "odyssey::2026-10-24": {
-   "availability": 3,
+   "availability": 1,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -31930,7 +31917,7 @@
    "was": 1610.0
   },
   "odyssey::2027-04-10": {
-   "availability": 10,
+   "availability": 9,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-04-17",
@@ -32502,7 +32489,7 @@
    "was": 2760.0
   },
   "red-sea-aggressor-ii::2026-11-28": {
-   "availability": 3,
+   "availability": 1,
    "boat": "red-sea-aggressor-ii",
    "currency": "USD",
    "end": "2026-12-05",
@@ -34179,7 +34166,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-08-14": {
-   "availability": 13,
+   "availability": 12,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-08-21",
@@ -35011,7 +34998,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-10-10": {
-   "availability": 2,
+   "availability": 0,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-10-17",
@@ -35466,7 +35453,7 @@
    "was": 2799.0
   },
   "red-sea-aggressor-v::2027-08-07": {
-   "availability": 22,
+   "availability": 21,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2027-08-14",
@@ -36999,6 +36986,526 @@
    "start": "2027-12-25",
    "was": 1390.0
   },
+  "red-sea-blue-force-2::2028-04-01": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-04-08",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559964,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-04-01",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-04-08": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-04-15",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559996,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-04-08",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-04-15": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-04-22",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559976,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-04-15",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-04-22": {
+   "availability": 0,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-04-29",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559966,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-04-22",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-04-29": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-05-06",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559965,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-04-29",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-05-06": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-05-13",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559974,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-05-06",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-05-13": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-05-20",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560003,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-05-13",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-05-20": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-05-28",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559968,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-05-20",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-05-27": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-06-03",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559967,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-05-27",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-06-03": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-06-11",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559995,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-06-03",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-06-10": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-06-17",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559981,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-06-10",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-06-17": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-06-25",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559969,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-06-17",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-06-24": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-07-01",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559988,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-06-24",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-07-01": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-07-09",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559975,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-07-01",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-07-08": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-07-15",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559980,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-07-08",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-07-15": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-07-23",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559991,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-07-15",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-07-22": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-07-29",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560002,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-07-22",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-07-29": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-08-06",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1560001,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-07-29",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-08-05": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-08-12",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559993,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-08-05",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-08-12": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-08-20",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559987,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-08-12",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-08-19": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-08-26",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559998,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-08-19",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-08-26": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-09-02",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559970,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-08-26",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-09-02": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-09-10",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559977,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-09-02",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-09-09": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-09-16",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559994,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-09-09",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-09-16": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-09-24",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559979,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-09-16",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-09-23": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-09-30",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559982,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-09-23",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-09-30": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-10-08",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559971,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-09-30",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-10-07": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-10-14",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559972,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-10-07",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-10-14": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-10-22",
+   "itinerary": "Extended North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights liveabaord + 1 night stay in a 5* hotel",
+   "nights": 8,
+   "padi_id": 1559978,
+   "price": 1540.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-10-14",
+   "was": 1540.0
+  },
+  "red-sea-blue-force-2::2028-10-21": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-10-28",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559985,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-10-21",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-10-28": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-11-04",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559999,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-10-28",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-11-04": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-11-11",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559983,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-11-04",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-11-11": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-11-18",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559986,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-11-11",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-11-18": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-11-25",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559984,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-11-18",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-11-25": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-12-02",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559992,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-11-25",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-12-02": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-12-09",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559989,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-12-02",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-12-09": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-12-16",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559990,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-12-09",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-12-16": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-12-23",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1560000,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-12-16",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-12-23": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2028-12-30",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559973,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-12-23",
+   "was": 1440.0
+  },
+  "red-sea-blue-force-2::2028-12-30": {
+   "availability": 18,
+   "boat": "red-sea-blue-force-2",
+   "currency": "EUR",
+   "end": "2029-01-06",
+   "itinerary": "North Route (Sharm el Sheikh - Sharm el Sheikh) 7 nights",
+   "nights": 7,
+   "padi_id": 1559997,
+   "price": 1440.0,
+   "slug": "red-sea-blue-force-2",
+   "start": "2028-12-30",
+   "was": 1440.0
+  },
   "reef-voyager::2026-09-12": {
    "availability": 12,
    "boat": "reef-voyager",
@@ -37455,7 +37962,7 @@
    "was": 1649.0
   },
   "royal-evolution::2027-04-08": {
-   "availability": 16,
+   "availability": 17,
    "boat": "royal-evolution",
    "currency": "EUR",
    "end": "2027-04-15",
@@ -38625,7 +39132,7 @@
    "was": 1470.0
   },
   "seawolf-steel::2026-10-31": {
-   "availability": 15,
+   "availability": 17,
    "boat": "seawolf-steel",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -39236,7 +39743,7 @@
    "was": 1350.0
   },
   "serenity::2026-09-19": {
-   "availability": 5,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-09-26",
@@ -39262,7 +39769,7 @@
    "was": 1350.0
   },
   "serenity::2026-10-03": {
-   "availability": 2,
+   "availability": 4,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -39340,7 +39847,7 @@
    "was": 1400.0
   },
   "serenity::2026-11-14": {
-   "availability": 6,
+   "availability": 7,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-11-21",
@@ -44761,7 +45268,7 @@
    "was": 1460.0
   },
   "topaz::2027-07-10": {
-   "availability": 28,
+   "availability": 0,
    "boat": "topaz",
    "currency": "EUR",
    "end": "2027-07-17",
@@ -45086,17 +45593,17 @@
    "was": 1085.0
   },
   "unity::2026-10-24": {
-   "availability": 2,
+   "availability": 0,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-10-31",
    "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada \u2013 Hurghada) \u2013 7 nights",
    "nights": 7,
    "padi_id": 1553827,
-   "price": 1287.0,
+   "price": 877.5,
    "slug": "unity",
    "start": "2026-10-24",
-   "was": 1430.0
+   "was": 975.0
   },
   "unity::2026-10-31": {
    "availability": 23,

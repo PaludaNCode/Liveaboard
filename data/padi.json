@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-10",
+ "collected": "2026-09-11",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43725,12 +43725,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 97,
-    "first": "2026-09-11",
+    "dated": 96,
+    "first": "2026-09-15",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 97,
+    "read": 96,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -43873,7 +43873,7 @@
    "specs": {
     "cabins": 11,
     "length_m": 31,
-    "nitrox_free": false,
+    "nitrox_free": true,
     "year_built": 2019
    }
   },
@@ -43896,7 +43896,7 @@
    "specs": {
     "cabins": 10,
     "length_m": 28,
-    "nitrox_free": false
+    "nitrox_free": true
    }
   },
   "blue": {
@@ -44282,7 +44282,7 @@
    "specs": {
     "cabins": 10,
     "length_m": 38,
-    "nitrox_free": false
+    "nitrox_free": true
    }
   },
   "explorer-ventures-grand-sea-explorer": {
@@ -44689,12 +44689,12 @@
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
    "sailings": {
-    "dated": 57,
+    "dated": 97,
     "first": "2026-09-12",
     "in_season": 18,
-    "last": "2027-12-25",
+    "last": "2028-12-30",
     "priced": 18,
-    "read": 57,
+    "read": 97,
     "unpriced": 0
    },
    "slug": "red-sea-blue-force-2",
