@@ -3,6 +3,26 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-12
+
+```
+changes: HEAD -> 2026-09-12
+===========================
+
+now sold out (1)
+  2027-07-31  Hammerhead II          Super Diversity: Daedalus - St. Jo liveaboard.com+padi.com
+
+bookable again (1)
+  2027-07-31  Red Sea Aggressor II   Northern Red Sea, Ras Mohammed, St liveaboard.com+padi.com
+
+price down (3)
+  2027-07-01  Royal Evolution        1,570 ->   1,565 USD  -5 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-07-08  Royal Evolution        1,570 ->   1,565 USD  -5 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-07-15  Royal Evolution        1,570 ->   1,565 USD  -5 (-0.3%)  Brothers, Daedalus & Elphinstone
+
+460 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-11
 
 ```

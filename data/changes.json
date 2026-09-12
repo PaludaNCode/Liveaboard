@@ -1,6 +1,87 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-12",
+  "added": [],
+  "sold_out": [
+   {
+    "id": "hammerhead-ii-2027-07-31-0",
+    "boat": "Hammerhead II",
+    "title": "Super Diversity: Daedalus - St. John's - Sataya (Fury Shoals)",
+    "start": "2027-07-31",
+    "price": 1223.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [
+   {
+    "id": "red-sea-aggressor-ii-2027-07-31-0",
+    "boat": "Red Sea Aggressor II",
+    "title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
+    "start": "2027-07-31",
+    "price": 2760.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "royal-evolution-2027-07-01-0",
+    "boat": "Royal Evolution",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-01",
+    "was": 1570.0,
+    "now": 1565.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.3184713375796179
+   },
+   {
+    "id": "royal-evolution-2027-07-08-0",
+    "boat": "Royal Evolution",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-08",
+    "was": 1570.0,
+    "now": 1565.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.3184713375796179
+   },
+   {
+    "id": "royal-evolution-2027-07-15-0",
+    "boat": "Royal Evolution",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-15",
+    "was": 1570.0,
+    "now": 1565.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.3184713375796179
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 460,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-12"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-11",
   "added": [
    {
@@ -4724,24 +4805,5 @@
   "availability_newly_read": false,
   "quiet": true,
   "day": "2026-09-03"
- },
- {
-  "before": "HEAD",
-  "after": "2026-08-30",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": true,
-  "day": "2026-09-02"
  }
 ]
