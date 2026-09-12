@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-11",
+ "collected": "2026-09-12",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43680,12 +43680,12 @@
    "name": "Alsuraya",
    "operator": null,
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-12",
+    "dated": 63,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2028-09-02",
     "priced": 17,
-    "read": 64,
+    "read": 63,
     "unpriced": 2
    },
    "slug": "alsuraya",
@@ -43703,9 +43703,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-15",
     "in_season": 31,
-    "last": "2027-10-29",
+    "last": "2027-11-02",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -43772,12 +43772,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-12-02",
     "priced": 4,
     "read": 100,
-    "unpriced": 77
+    "unpriced": 78
    },
    "slug": "my-anemone",
    "specs": {
@@ -43794,12 +43794,12 @@
    "name": "M/Y Aphrodite",
    "operator": null,
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-12",
+    "dated": 61,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 62,
+    "read": 61,
     "unpriced": 0
    },
    "slug": "my-aphrodite",
@@ -43817,12 +43817,12 @@
    "name": "MY Ashrafi",
    "operator": null,
    "sailings": {
-    "dated": 16,
-    "first": "2026-09-12",
+    "dated": 15,
+    "first": "2026-09-19",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 16,
+    "read": 15,
     "unpriced": 0
    },
    "slug": "my-ashrafi",
@@ -43839,12 +43839,12 @@
    "name": "MY AVO",
    "operator": null,
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-12",
+    "dated": 61,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 15,
-    "read": 62,
+    "read": 61,
     "unpriced": 11
    },
    "slug": "my-avo",
@@ -43929,9 +43929,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-23",
     "in_season": 16,
-    "last": "2029-02-03",
+    "last": "2029-02-10",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -43952,9 +43952,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 16,
-    "last": "2028-11-18",
+    "last": "2028-11-25",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -44087,12 +44087,12 @@
    "name": "MY Discovery I",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 68,
-    "first": "2026-09-12",
+    "dated": 67,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 68,
+    "read": 67,
     "unpriced": 0
    },
    "slug": "my-discovery-i",
@@ -44110,12 +44110,12 @@
    "name": "MY Discovery II",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 55,
-    "first": "2026-09-12",
+    "dated": 54,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 55,
+    "read": 54,
     "unpriced": 0
    },
    "slug": "my-discovery-ii",
@@ -44133,12 +44133,12 @@
    "name": "Dune Longara",
    "operator": "DUNE",
    "sailings": {
-    "dated": 98,
-    "first": "2026-09-12",
+    "dated": 97,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2028-12-30",
     "priced": 16,
-    "read": 98,
+    "read": 97,
     "unpriced": 3
    },
    "slug": "dune-longara",
@@ -44156,9 +44156,9 @@
    "operator": "DUNE",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-26",
     "in_season": 17,
-    "last": "2028-12-16",
+    "last": "2028-12-23",
     "priced": 17,
     "read": 100,
     "unpriced": 5
@@ -44179,9 +44179,9 @@
    "operator": "DUNE",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 14,
-    "last": "2028-11-18",
+    "last": "2028-11-25",
     "priced": 14,
     "read": 100,
     "unpriced": 0
@@ -44201,12 +44201,12 @@
    "name": "MV Emperor Asmaa",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 95,
-    "first": "2026-09-12",
+    "dated": 94,
+    "first": "2026-09-19",
     "in_season": 16,
     "last": "2028-11-18",
     "priced": 16,
-    "read": 95,
+    "read": 94,
     "unpriced": 0
    },
    "slug": "mv-emperor-asmaa",
@@ -44247,12 +44247,12 @@
    "name": "MV Emperor Superior",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 94,
-    "first": "2026-09-12",
+    "dated": 93,
+    "first": "2026-09-19",
     "in_season": 15,
     "last": "2028-12-01",
     "priced": 15,
-    "read": 94,
+    "read": 93,
     "unpriced": 0
    },
    "slug": "mv-emperor-superior",
@@ -44270,12 +44270,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-12",
+    "dated": 58,
+    "first": "2026-09-17",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "eriny",
@@ -44359,13 +44359,13 @@
    "name": "MY Galaxy",
    "operator": null,
    "sailings": {
-    "dated": 12,
-    "first": "2026-09-12",
+    "dated": 11,
+    "first": "2026-09-19",
     "in_season": 0,
     "last": "2026-11-28",
     "priced": 0,
-    "read": 12,
-    "unpriced": 10
+    "read": 11,
+    "unpriced": 9
    },
    "slug": "my-galaxy",
    "specs": {
@@ -44426,12 +44426,12 @@
    "name": "MY Grand Discovery",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 68,
-    "first": "2026-09-12",
+    "dated": 67,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 68,
+    "read": 67,
     "unpriced": 0
    },
    "slug": "my-grand-discovery",
@@ -44448,12 +44448,12 @@
    "name": "Hammerhead II",
    "operator": null,
    "sailings": {
-    "dated": 66,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-19",
     "in_season": 20,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 66,
+    "read": 65,
     "unpriced": 7
    },
    "slug": "hammerhead-ii",
@@ -44600,12 +44600,12 @@
    "name": "MY Odyssey",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 51,
-    "first": "2026-09-12",
+    "dated": 50,
+    "first": "2026-09-19",
     "in_season": 17,
     "last": "2027-12-04",
     "priced": 17,
-    "read": 51,
+    "read": 50,
     "unpriced": 0
    },
    "slug": "my-odyssey",
@@ -44624,9 +44624,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-12-02",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -44646,9 +44646,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-12-02",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -44668,9 +44668,9 @@
    "operator": "AGGRESSOR",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-12",
+    "first": "2026-09-19",
     "in_season": 18,
-    "last": "2028-11-25",
+    "last": "2028-12-02",
     "priced": 18,
     "read": 100,
     "unpriced": 0
@@ -44689,12 +44689,12 @@
    "name": "Red Sea Blue Force 2",
    "operator": "BLUE FORCE",
    "sailings": {
-    "dated": 97,
-    "first": "2026-09-12",
+    "dated": 96,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2028-12-30",
     "priced": 18,
-    "read": 97,
+    "read": 96,
     "unpriced": 0
    },
    "slug": "red-sea-blue-force-2",
@@ -44711,12 +44711,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 19,
-    "first": "2026-09-12",
+    "dated": 18,
+    "first": "2026-09-16",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 19,
+    "read": 18,
     "unpriced": 2
    },
    "slug": "reef-voyager",
@@ -44756,12 +44756,12 @@
    "name": "MY Seawolf Dominator",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 56,
-    "first": "2026-09-12",
+    "dated": 55,
+    "first": "2026-09-19",
     "in_season": 17,
     "last": "2027-12-25",
     "priced": 17,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "my-seawolf-dominator",
@@ -44779,13 +44779,13 @@
    "name": "Seawolf Steel",
    "operator": "SEAWOLF DIVING SAFARI",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-12",
+    "dated": 56,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 57,
-    "unpriced": 10
+    "read": 56,
+    "unpriced": 9
    },
    "slug": "seawolf-steel",
    "specs": {
@@ -44802,12 +44802,12 @@
    "name": "Serenity",
    "operator": null,
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-12",
+    "dated": 63,
+    "first": "2026-09-19",
     "in_season": 14,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 64,
+    "read": 63,
     "unpriced": 0
    },
    "slug": "serenity",
@@ -44893,12 +44893,12 @@
    "name": "Snefro Target",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 66,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 66,
+    "read": 65,
     "unpriced": 0
    },
    "slug": "snefro-target",
@@ -44916,12 +44916,12 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 21,
-    "first": "2026-09-12",
+    "dated": 20,
+    "first": "2026-09-19",
     "in_season": 0,
     "last": "2027-01-30",
     "priced": 0,
-    "read": 21,
+    "read": 20,
     "unpriced": 0
    },
    "slug": "south-moon-1",
@@ -44960,13 +44960,13 @@
    "name": "Topaz",
    "operator": "SEAFARI",
    "sailings": {
-    "dated": 66,
-    "first": "2026-09-12",
+    "dated": 65,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2028-09-09",
     "priced": 17,
-    "read": 66,
-    "unpriced": 28
+    "read": 65,
+    "unpriced": 27
    },
    "slug": "topaz",
    "specs": {
@@ -44983,12 +44983,12 @@
    "name": "Unity",
    "operator": null,
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-12",
+    "dated": 58,
+    "first": "2026-09-19",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 14,
-    "read": 59,
+    "read": 58,
     "unpriced": 13
    },
    "slug": "unity",
