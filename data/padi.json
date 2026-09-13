@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-12",
+ "collected": "2026-09-13",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44314,12 +44314,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 17,
-    "first": "2026-09-13",
+    "dated": 16,
+    "first": "2026-09-20",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 17,
+    "read": 16,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -44515,12 +44515,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 20,
-    "first": "2026-09-13",
+    "dated": 19,
+    "first": "2026-09-20",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 20,
+    "read": 19,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -44579,12 +44579,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-13",
+    "first": "2026-09-15",
     "in_season": 20,
-    "last": "2028-05-20",
+    "last": "2028-05-27",
     "priced": 17,
     "read": 100,
-    "unpriced": 28
+    "unpriced": 29
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44848,10 +44848,10 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-13",
-    "in_season": 34,
-    "last": "2027-08-25",
-    "priced": 34,
+    "first": "2026-09-16",
+    "in_season": 35,
+    "last": "2027-08-29",
+    "priced": 35,
     "read": 100,
     "unpriced": 0
    },
@@ -45006,13 +45006,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 17,
-    "first": "2026-09-13",
+    "dated": 16,
+    "first": "2026-09-20",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 17,
-    "unpriced": 17
+    "read": 16,
+    "unpriced": 16
    },
    "slug": "vip-one",
    "specs": {
