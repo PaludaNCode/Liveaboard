@@ -9,6 +9,28 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-12
 ===========================
 
+fees (16)
+  Bella 2                private_guide    not listed -> 60 EUR / per_day
+  Bella 3                private_guide    listed, no price -> 60 EUR / per_day
+  Carlton                private_guide    listed, no price -> 50 EUR / per_day
+  Eriny                  private_guide    listed, no price -> 60 EUR / per_day
+  Ocean Lovers           nitrox_course    listed, no price -> 250 EUR / per_trip
+  Ocean Lovers           private_guide    listed, no price -> 500 EUR / per_trip
+  Red Sea Aggressor II   course           listed, no price -> 150-250 USD / per_trip
+  Red Sea Aggressor II   nitrox           100-150 USD / per_trip -> 80-150 USD / per_trip
+  Red Sea Aggressor II   nitrox_course    listed, no price -> 80-250 USD / per_trip
+  Red Sea Aggressor V    course           listed, no price -> 150-250 USD / per_trip
+  Red Sea Aggressor V    nitrox           100-150 USD / per_trip -> 80-150 USD / per_trip
+  Red Sea Aggressor V    nitrox_course    150-250 EUR / per_trip -> 80-250 EUR / per_trip
+  ... and 4 more not shown
+```
+
+## 2026-09-12
+
+```
+changes: HEAD -> 2026-09-12
+===========================
+
 now sold out (1)
   2027-07-31  Hammerhead II          Super Diversity: Daedalus - St. Jo liveaboard.com+padi.com
 
