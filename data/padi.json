@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-13",
+ "collected": "2026-09-14",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43635,12 +43635,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 60,
-    "first": "2026-09-14",
+    "dated": 59,
+    "first": "2026-09-21",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 60,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -43658,12 +43658,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-14",
+    "dated": 58,
+    "first": "2026-09-21",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -43861,12 +43861,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 95,
-    "first": "2026-09-14",
+    "dated": 94,
+    "first": "2026-09-20",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 95,
+    "read": 94,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -43888,9 +43888,9 @@
     "first": "2026-09-15",
     "in_season": 22,
     "last": "2027-12-25",
-    "priced": 20,
+    "priced": 22,
     "read": 74,
-    "unpriced": 26
+    "unpriced": 0
    },
    "slug": "bella-3",
    "specs": {
@@ -44336,12 +44336,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 18,
-    "first": "2026-09-14",
+    "dated": 17,
+    "first": "2026-09-22",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 18,
+    "read": 17,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -44382,12 +44382,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 63,
-    "first": "2026-09-14",
+    "dated": 62,
+    "first": "2026-09-21",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 63,
+    "read": 62,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -44404,12 +44404,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 63,
-    "first": "2026-09-14",
+    "dated": 62,
+    "first": "2026-09-21",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 63,
+    "read": 62,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -44555,12 +44555,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 10,
-    "first": "2026-09-14",
+    "dated": 9,
+    "first": "2026-09-21",
     "in_season": 0,
     "last": "2026-12-19",
     "priced": 0,
-    "read": 10,
+    "read": 9,
     "unpriced": 3
    },
    "slug": "my-lady-m",
