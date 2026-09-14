@@ -1,6 +1,201 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-14",
+  "added": [
+   {
+    "id": "golden-dolphin-iv-2027-06-10-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North - Straits of Tiran - Dahab",
+    "start": "2027-06-10",
+    "price": 1853.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "golden-dolphin-iv-2027-07-22-0",
+    "boat": "Golden Dolphin IV",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1737.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "golden-dolphin-iv-2027-08-16-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North, Safaga & Brothers",
+    "start": "2027-08-16",
+    "price": 2549.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "sold_out": [
+   {
+    "id": "destiny-2027-05-01-0",
+    "boat": "Destiny",
+    "title": "Daedalus, Fury Shoals & St. John's",
+    "start": "2027-05-01",
+    "price": 1623.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "golden-dolphin-2027-05-13-0",
+    "boat": "Golden Dolphin",
+    "title": "North & Brothers",
+    "start": "2027-05-13",
+    "price": 1377.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-pearl-2027-07-25-0",
+    "boat": "Snefro Pearl",
+    "title": "Mini Safari: Thistlegorm - Ras Mohammed",
+    "start": "2027-07-25",
+    "price": 675.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "returned": [
+   {
+    "id": "blue-melody-2027-05-08-0",
+    "boat": "Blue Melody",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-08",
+    "price": 1743.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [
+   {
+    "id": "golden-imperial-2027-06-10-0",
+    "boat": "Golden Imperial",
+    "title": "North - Straits of Tiran - Dahab",
+    "start": "2027-06-10",
+    "price": 1375.0,
+    "currency": "EUR",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "golden-imperial-2027-07-22-0",
+    "boat": "Golden Imperial",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-07-22",
+    "price": 1299.0,
+    "currency": "EUR",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "golden-dolphin-iv-2027-08-21-0",
+    "boat": "Golden Dolphin IV",
+    "title": "North, Safaga & Brothers",
+    "start": "2027-08-21",
+    "price": 2199.0,
+    "currency": "EUR",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "relisted": [
+   {
+    "boat": "AVO",
+    "start": "2027-05-22",
+    "title": "The Best of the South Classic",
+    "was_title": "The Best of the South Classic",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 1983.0,
+    "was_price": 1709.05,
+    "currency": "USD",
+    "was_currency": "EUR",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "AVO",
+    "start": "2027-07-03",
+    "title": "Brothers - Daedalus - Elphinstone (Golden Triangle)",
+    "was_title": "BDE - Golden Triangle",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 1871.0,
+    "was_price": 1614.05,
+    "currency": "USD",
+    "was_currency": "EUR",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "AVO",
+    "start": "2027-07-10",
+    "title": "Brothers - Daedalus - Elphinstone (Golden Triangle)",
+    "was_title": "The Best of the South",
+    "sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "was_sellers": [
+     "padi.com"
+    ],
+    "price": 1871.0,
+    "was_price": 1699.0,
+    "currency": "USD",
+    "was_currency": "EUR",
+    "sellers_moved": true,
+    "repriced": false
+   }
+  ],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 0,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-14"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-13",
   "added": [],
   "sold_out": [],
@@ -2552,327 +2747,5 @@
   "availability_newly_read": false,
   "quiet": true,
   "day": "2026-09-05"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-04",
-  "added": [
-   {
-    "id": "blue-2027-05-06-0",
-    "boat": "Blue",
-    "title": "Daedalus & Fury Shoals",
-    "start": "2027-05-06",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-13-1",
-    "boat": "Blue",
-    "title": "Rocky, Zabargad & St. John's",
-    "start": "2027-05-13",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-20-2",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-20",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-27-3",
-    "boat": "Blue",
-    "title": "Daedalus, Rocky & Zabargad",
-    "start": "2027-05-27",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-03-0",
-    "boat": "Blue",
-    "title": "St. John's",
-    "start": "2027-06-03",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-10-1",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-06-10",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-17-2",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-06-17",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-24-3",
-    "boat": "Blue",
-    "title": "North & Tiran",
-    "start": "2027-06-24",
-    "price": 1290.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-07-08-0",
-    "boat": "Blue",
-    "title": "North & Brothers",
-    "start": "2027-07-08",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-07-22-1",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-22",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-08-05-0",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-05",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-08-12-1",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-12",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "sinaistar-2027-08-14-0",
-    "boat": "Sinaistar",
-    "title": "North Wrecks, Ras Mohammed, Tiran & Brothers",
-    "start": "2027-08-14",
-    "price": 875.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-08-19-2",
-    "boat": "Blue",
-    "title": "North & Tiran",
-    "start": "2027-08-19",
-    "price": 1290.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "sinaistar-2027-08-21-1",
-    "boat": "Sinaistar",
-    "title": "North & Brothers",
-    "start": "2027-08-21",
-    "price": 840.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-08-26-3",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-26",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "sinaistar-2027-08-28-2",
-    "boat": "Sinaistar",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-28",
-    "price": 875.0,
-    "currency": "EUR"
-   }
-  ],
-  "sold_out": [
-   {
-    "id": "discovery-i-2027-07-03-0",
-    "boat": "Discovery I",
-    "title": "North Wrecks, Ras Mohammed & Tiran",
-    "start": "2027-07-03",
-    "price": 765.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "discovery-i-2027-07-10-1",
-    "boat": "Discovery I",
-    "title": "North Wrecks, Ras Mohammed & Tiran",
-    "start": "2027-07-10",
-    "price": 765.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "discovery-i-2027-07-17-2",
-    "boat": "Discovery I",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-17",
-    "price": 871.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "discovery-i-2027-07-24-3",
-    "boat": "Discovery I",
-    "title": "St. John's, Fury Shoals & Elphinstone",
-    "start": "2027-07-24",
-    "price": 850.0,
-    "currency": "EUR"
-   }
-  ],
-  "returned": [
-   {
-    "id": "discovery-i-2027-07-31-4",
-    "boat": "Discovery I",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-31",
-    "price": 871.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "hammerhead-ii-2027-07-31-4",
-    "boat": "Hammerhead II",
-    "title": "Super Diversity: Daedalus - St. John's - Sataya (Fury Shoals)",
-    "start": "2027-07-31",
-    "price": 1054.0,
-    "currency": "EUR"
-   }
-  ],
-  "withdrawn": [
-   {
-    "id": "blue-2027-05-06-padi",
-    "boat": "Blue",
-    "title": "Daedalus & Fury Shoals",
-    "start": "2027-05-06",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-13-padi",
-    "boat": "Blue",
-    "title": "Daedalus, Rocky Island & Zabargad",
-    "start": "2027-05-13",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-20-padi",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-20",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-05-27-padi",
-    "boat": "Blue",
-    "title": "Daedalus, Rocky Island & Zabargad",
-    "start": "2027-05-27",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-03-padi",
-    "boat": "Blue",
-    "title": "St. John's",
-    "start": "2027-06-03",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-10-padi",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-06-10",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-06-24-padi",
-    "boat": "Blue",
-    "title": "North & Tiran",
-    "start": "2027-06-24",
-    "price": 1290.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-07-08-padi",
-    "boat": "Blue",
-    "title": "North & Brothers",
-    "start": "2027-07-08",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-07-22-padi",
-    "boat": "Blue",
-    "title": "Daedalus & Fury Shoals",
-    "start": "2027-07-22",
-    "price": 1420.0,
-    "currency": "EUR"
-   },
-   {
-    "id": "blue-2027-08-12-0",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-12",
-    "price": 1645.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-2027-08-19-1",
-    "boat": "Blue",
-    "title": "North & Tiran",
-    "start": "2027-08-19",
-    "price": 1495.0,
-    "currency": "USD"
-   },
-   {
-    "id": "blue-2027-08-26-padi",
-    "boat": "Blue",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-08-26",
-    "price": 1420.0,
-    "currency": "EUR"
-   }
-  ],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-04"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-03",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "availability_newly_read": false,
-  "quiet": true,
-  "day": "2026-09-04"
  }
 ]

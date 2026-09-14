@@ -3,6 +3,36 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-14
+
+```
+changes: HEAD -> 2026-09-14
+===========================
+
+new departures (3)
+  2027-06-10  Golden Dolphin IV      North - Straits of Tiran - Dahab        1,853 USD liveaboard.com
+  2027-07-22  Golden Dolphin IV      Brothers, Daedalus & Elphinstone        1,737 USD liveaboard.com
+  2027-08-16  Golden Dolphin IV      North, Safaga & Brothers                2,549 USD liveaboard.com
+
+now sold out (3)
+  2027-05-01  Destiny                Daedalus, Fury Shoals & St. John's liveaboard.com
+  2027-05-13  Golden Dolphin         North & Brothers                   liveaboard.com
+  2027-07-25  Snefro Pearl           Mini Safari: Thistlegorm - Ras Moh liveaboard.com+padi.com
+
+bookable again (1)
+  2027-05-08  Blue Melody            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+
+withdrawn (3)
+  2027-06-10  Golden Imperial        North - Straits of Tiran - Dahab   liveaboard.com
+  2027-07-22  Golden Imperial        Brothers, Daedalus & Elphinstone   liveaboard.com
+  2027-08-21  Golden Dolphin IV      North, Safaga & Brothers           liveaboard.com
+
+re-listed — same sailing, new row (3)
+  2027-05-22  AVO                    The Best of the South Classi padi.com -> liveaboard.com+padi.com  1,709 EUR -> 1,983 USD
+  2027-07-03  AVO                    Brothers - Daedalus - Elphin padi.com -> liveaboard.com+padi.com  1,614 EUR -> 1,871 USD  BDE - Golden Triangle -> Brothers - Daedalus - El
+  2027-07-10  AVO                    Brothers - Daedalus - Elphin padi.com -> liveaboard.com+padi.com  1,699 EUR -> 1,871 USD  The Best of the South -> Brothers - Daedalus - El
+```
+
 ## 2026-09-13
 
 ```
