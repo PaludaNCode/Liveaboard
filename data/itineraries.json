@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-11",
+  "collected": "2026-09-14",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -2451,6 +2451,62 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439429&languageID=1&curr=USD&showPrices=false"
     },
+    "avo::Brothers - Daedalus - Elphinstone (Golden Triangle) (Hurghada - Port Ghalib)": {
+      "boat": "avo",
+      "name": "5% Off: Brothers - Daedalus - Elphinstone (Golden Triangle) (Hurghada - Port Ghalib)",
+      "tour_id": "439708",
+      "collected": "2026-09-14",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore the heart of the Red Sea's most iconic diving sites, known collectively as the Golden Triangle. These world-renowned locations — Brothers Islands, Daedalus, and Elphinstone — offer exhilarating drop-offs and thrilling encounters with oceanic whitetip sharks, hammerhead sharks, and many more species. This cruise is designed for experienced divers seeking an unforgettable adventure beneath the waves.",
+      "sections": [
+        {
+          "heading": "Day 1 – Welcome on Board",
+          "text": "Check-in from 5:00 PM. Guests board Avo and are welcomed by the crew ahead of departure.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Gota Abu Ramada & Panorama Reef",
+          "text": "Dive 1: Gota Abu Ramada. Dive 2: Panorama Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – The Brothers",
+          "text": "Dive 3: Big Brother. Dive 4 and Dive 5: Small Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Daedalus Reef",
+          "text": "Dive 6, Dive 7, and Dive 8: Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Daedalus Reef",
+          "text": "Dive 9, Dive 10, Dive 11, and Dive 12: Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – Elphinstone & Marsa Shouna",
+          "text": "Dive 13 and Dive 14: Elphinstone. Dive 15 and Dive 16: Marsa Shouna.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Small Giftun & El Minya Wreck",
+          "text": "Dive 17: Small Giftun. Dive 18: El Minya Wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Disembarkation",
+          "text": "Breakfast on board and farewell to the crew. From the legendary walls of the Brothers Islands to the pelagic-rich waters of Daedalus and Elphinstone, this cruise delivers the definitive Red Sea shark experience. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439708&languageID=1&curr=USD&showPrices=false"
+    },
     "avo::Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Port Ghalib)": {
       "boat": "avo",
       "name": "Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Port Ghalib)",
@@ -3019,6 +3075,62 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=415682&languageID=1&curr=USD&showPrices=false"
+    },
+    "avo::The Best of the South Classic (Port Ghalib - Hurghada)": {
+      "boat": "avo",
+      "name": "5% Off: The Best of the South Classic (Port Ghalib - Hurghada)",
+      "tour_id": "439707",
+      "collected": "2026-09-14",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Embark on a carefully crafted 7-day cruise through the magnificent southern Red Sea region. Dive into some of the most spectacular dive sites and encounter diverse marine life, from sharks to dolphins, along with breathtaking coral reefs and dramatic drop-offs. This program includes iconic locations such as Daedalus, Elphinstone, Rocky Island, Zabargad, and more, offering an unforgettable underwater adventure.",
+      "sections": [
+        {
+          "heading": "Day 1 – Welcome on Board",
+          "text": "Check-in from 5:00 PM. Guests board Avo in Port Ghalib and are welcomed by the crew ahead of departure.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Elphinstone",
+          "text": "Dive 1 and Dive 2: Elphinstone.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Sataya & Marsa Alam",
+          "text": "Dive 3: Sataya (Dolphins). Dive 4: Shaab Claudia. Dive 5 and Dive 6: Shaab Marsa Alam.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Saint John's Reef Area",
+          "text": "Dive 7 and Dive 8: Saint John's Reef area. Dive 9: Saint John's Reef Caves. Dive 10: Paradise Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Rocky Island & Zabargad Island",
+          "text": "Dive 11 and Dive 12: Rocky Island. Dive 13: Zabargad Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – Daedalus Reef",
+          "text": "Dive 14, Dive 15, and Dive 16: Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Abu Dabab",
+          "text": "Dive 17: Abu Dabab 2. Dive 18: Abu Dabab 3.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Disembarkation",
+          "text": "Breakfast on board and farewell to the crew in Hurghada. From the legendary walls of Elphinstone to the far southern reefs of Zabargad and Saint John's, this cruise showcases the very best of the southern Red Sea's sharks, dolphins, and dramatic drop-offs. This southern Red Sea route showcases remote reefs, dramatic drop-offs, and extraordinary marine biodiversity. At Daedalus Reef, divers often encounter schooling hammerheads, reef sharks, and graceful manta rays gliding along the walls covered in soft corals. Saint John's offers a maze of colorful coral gardens and swim-throughs teeming with anthias, butterflyfish, and turtles, while Zabargad enchants with its vibrant reefs and the chance to spot larger pelagic species. Sataya, also known as Dolphin Reef, adds a playful touch, with pods of spinner dolphins frequently seen in its calm, shallow lagoon. From pristine coral formations to thrilling big fish encounters, this route promises an unforgettable underwater adventure. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439707&languageID=1&curr=USD&showPrices=false"
     },
     "bella-2::Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
       "boat": "bella-2",
@@ -14649,6 +14761,57 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6118&tourID=382331&languageID=1&curr=USD&showPrices=false"
+    },
+    "golden-dolphin-iv::North - Straits of Tiran - Dahab (Hurghada - Hurghada)": {
+      "boat": "golden-dolphin-iv",
+      "name": "North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
+      "tour_id": "439713",
+      "collected": "2026-09-14",
+      "regions": [
+        "Abu Nuhas",
+        "Ras Mohammed",
+        "Thistlegorm",
+        "Abu Dabab",
+        "Straits Of Tiran",
+        "Jackson Reef",
+        "Woodhouse Reef",
+        "Gordon Reef"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "ras mohammed",
+        "thistlegorm",
+        "abu dabab",
+        "tiran"
+      ],
+      "dives": 17,
+      "guests": 28,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "The SS Thistlegorm is probably the most famous wreck in the Red Sea. The British cargo ship was on its way to bring military equipment of all kinds for the British troops in North Africa. But then, on the 6th of October 1941, a German bomber attacked the Thistlegorm. The wreck is lying upright on the sea bottom at 32 m depth. Especially interesting is the cargo: tanks, trucks, motorcycles, weapons, a railway carriage, and two railway engines. The reef at Abu Nuhas is famous for wrecks. There are four wrecks, which are today an attraction point for divers from all around the world. For example, the Greek cargo ship Giannis D ran aground on the reef on 19th April 1984 and sank a short time afterward. It is now lying at a maximum depth of 27 m and is overgrown with hard and soft corals. The Dunraven, a steam- and sail-powered vessel used to transport spices and timber, ran aground on the reef Sha'ab Mahmoud in April 1876 during a voyage from Bombay to Newcastle and sank quickly. The ship broke in two, and her two halves came to rest on the sea floor. The marine park Ras Mohamed offers dreamlike diving spots, for example, Shark Reef and Yolanda Reef. Both reefs are standing on a plateau, which is between 10 m and 20 m deep. The edges of the plateau fall to more than 200 m. At the reef, you will find nice, hard, and soft corals and plenty of fish of all kinds and sizes. With luck, you can see sharks during your early morning dive. At Yolanda Reef, you can see the cargo of the Cypriot freighter Yolanda, which ran aground in 1980: a large quantity of household pottery such as toilets, bathtubs, shower tubs, bidets, and more. Starting from the north on the eastern side of the Sinai Peninsula are the Straits of Tiran, also one of the most famous diving areas in the Red Sea. Situated in the middle of the straits are four coral reefs: Gordon, Thomas, Woodhouse, and Jackson Reef. Gordon Reef is marked by the wreck of a large commercial freighter. The reef composition is quite varied, with patchy sections, sand beds, and full-fledged coral gardens. In the center of the reef slope, a shark amphitheater or bowl dips to 24 m; with luck, a variety of shark species can be seen sleeping on the sandy bottom. The site boasts a very good range of corals, with lots of branching varieties. All of the corals are well preserved, in densely grown patches that often show a remarkable mix of different species. Fish life is not the most profuse in the Straits of Tiran, but there are some notable surprises, including a huge moray eel with a body as thick as a small diver’s waist. Triggerfish abound, while surgeons and jacks swim in moderately large schools, and angelfish, parrotfish, and small wrasse are all present in good numbers. Large Napoleon wrasse can often be seen along the reef. Thomas Reef includes some plateau sections and a very deep canyon running along the reef’s southern section. It is the smallest of the four Tiran reefs. The reef’s upper section is a riot of color, encompassing some of the finest soft coral growth in the Sinai region. Huge, densely packed fields of Dendronephthya of every imaginable hue are spread across the reef, along with antler corals, fine Stylophora, some Acropora, and many other stony coral forms. Fish life is also rich, with the greatest concentration in the shallows. Lyretail cod and other groupers grow to great size, and wide varieties of rabbitfish and wrasse congregate along the reef face, accompanied by boxfish and pufferfish. The only reason to go deeper than 20 m at Thomas Reef is to explore the canyon. Woodhouse Reef is a long, narrow reef running at an angle from northeast to southwest. Woodhouse is generally divided into a drift along the reef’s eastern side. Coral cover is excellent throughout the reef, with dense growth all over; there are a few sandy patches at depths of around 20 m. Many species are present, but because of the sheltered position of the reef, away from the main current, a certain amount of sedimentation has affected the corals here. Pelagic fish, including big tuna and schools of jacks, fusiliers, snapper, surgeons, and unicornfish, also school here, along with thousands of other reef fish. On the northern edge of Jackson Reef, the wreck of a grounded freighter stands as a warning to shipping in the busy straits; most of its hull has been salvaged for scrap, leaving only a skeletal hulk. The steep-sided walls of Jackson Reef are among the finest in the Sinai region; the current-swept reef is densely grown with a real profusion of hard and soft corals, with special accents provided by luxuriant gorgonian fans, sea whips, black corals, and vivid growths of soft coral. Fish life, not surprisingly, is excellent. The strong current brings plenty of nutrients for the reef and schooling fish; current and profile combine to tempt pelagic fish in from the open water, and large schools of barracuda and jacks are common here, as are larger predators, including several species of shark. The smaller reef species on which these pelagic visitors feed are profuse. Midway between Sharm El Sheikh and Aqaba is Dahab, on a narrow stretch of coast, but at the same time at the deepest and widest point in the Gulf. The reefs are mostly shallow down to about 20-30m, e.g., B. at Southern Oasis or at the northern canyon. The canyon is not for everyone, though, as it features a deep fissure that starts at around 15m and has the deepest exit at around 50m. In between, there are only a few exit possibilities, so the dive goes in the direction of cave diving and must be planned. Exceptional fish can already be found in shallow water, sand, and scree up to a depth of around 10m, e.g., the well camouflaged Red Sea Walkman. The devil fish is one of the poisonous stone fish, so beware, dangerous! The harmless pygmy winged fishes, which are up to 8 cm in size, live in the 55-meter range, and they too are extremely difficult to spot. You can even reach excellent coral gardens in Dahab: in the north, the national park is called Abu Galum, in the south, Gabr al Bint is known for its hard corals and its groupers. But one place has made Dahab world famous: the Blue Hole. It is about 10 km north of the city and is a dark blue hole about 50-70 m in diameter and 120 m deep. Outside of the Blue Hole, however, the steep face is beautifully overgrown, and occasionally even large fish can be found. This drop-off can be reached through a reef crevice at a depth of about 7 m. The next breakthrough is only at 56m again with the 26m long and a few meters wide arch, i.e., beyond our spot diver limit and only reserved for the Tekkies with their special gas mixtures.",
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Check in on board on the arrival day at 6:00 PM. Leaving the marina the next day before noon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "3–4 dives per day, depending on the routing. The realization of a diving cruise depends on weather, sea conditions, local regulations, and the skill of the divers taking part. A guarantee for visiting certain reefs cannot be given for these reasons.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Last day (a day before departure), maximum two dives, afterward back to the marina.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out at the latest on departure day at 10:00 AM. Transfer back to the airport. Expect vibrant coral reefs teeming with reef fish, including snappers, barracuda, and large schools of trevally. Divers may also encounter reef sharks, turtles, and occasional pelagic species cruising along the nutrient-rich currents. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6118&tourID=439713&languageID=1&curr=USD&showPrices=false"
     },
     "golden-dolphin-iv::North - Tiran - Brother Islands (Port Ghalib - Hurghada)": {
       "boat": "golden-dolphin-iv",

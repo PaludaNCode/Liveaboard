@@ -11867,13 +11867,17 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Port Ghalib",
       "dive_sites": [
         "brothers",
         "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "gota abu ramada",
+        "panorama reef",
+        "marsa shouna",
+        "small giftun"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -12070,7 +12074,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "avo--dahab-sinai-hurghada-hurghada",
@@ -14238,19 +14251,18 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
-        "abu dabab",
         "daedalus",
+        "elphinstone",
         "rocky island",
         "zabargad",
-        "st johns",
         "sataya",
-        "sataya reef",
         "fury shoals",
-        "elphinstone"
+        "st johns",
+        "abu dabab"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -14449,13 +14461,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -63158,12 +63171,15 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 7,
-      "dives": 0,
+      "dives": 17,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
         "tiran",
-        "dahab"
+        "dahab",
+        "ras mohammed"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -63342,7 +63358,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "golden-imperial--brother-islands-daedalus-elphinstone-hurghada-hurghada",
@@ -187726,7 +187751,7 @@
     }
   },
   "entry_bar": {
-    "both": 155,
+    "both": 156,
     "disagree": 72,
     "padi_stricter": 37,
     "ours_stricter": 35
