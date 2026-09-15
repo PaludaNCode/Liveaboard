@@ -65483,14 +65483,15 @@
       "operator_id": "hammerhead-fleet",
       "boat_id": "hammerhead-ii",
       "nights": 7,
-      "dives": 17,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "ras mohammed",
+        "tiran",
         "thistlegorm",
         "abu nuhas",
-        "tiran",
-        "ras mohammed"
+        "rosalie moller"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -65699,13 +65700,14 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
+        "min_level": "advanced_50",
         "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -111188,11 +111190,21 @@
       "operator_id": "sadko-travel",
       "boat_id": "sunlight",
       "nights": 11,
-      "dives": 0,
+      "dives": 30,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
-      "dive_sites": [],
-      "region": "southern route",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "zabargad",
+        "st johns",
+        "fury shoals",
+        "rocky island",
+        "brothers",
+        "abu dabab",
+        "marsa shouna"
+      ],
+      "region": null,
       "summary": "Having undergone a complete renovation in 2019, the MY Sunlight is ready to show off the best of the Red Sea. A choice of routes is available including North, South and Deep South. 10 air-conditioned cabins with ensuite bathrooms cater to 20 guests.",
       "source_url": "https://www.liveaboard.com/diving/egypt/sunlight?m=8/2027",
       "fees": [
@@ -111320,7 +111332,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €10/day; BCD €5/day; Dive Computer €10/day; Dive Light €5/day; Drysuit €30/day; Fins €2/day; Mask €2/day; Regulator €5/day; SMB €10/week; Wetsuit €5"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "sunshine--brothers-safaga-hurghada-hurghada",
@@ -187751,7 +187772,7 @@
     }
   },
   "entry_bar": {
-    "both": 155,
+    "both": 156,
     "disagree": 72,
     "padi_stricter": 37,
     "ours_stricter": 35

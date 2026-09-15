@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-14",
+  "collected": "2026-09-15",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -16271,6 +16271,109 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390010&languageID=1&curr=USD&showPrices=false"
     },
+    "hammerhead-ii::Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)": {
+      "boat": "hammerhead-ii",
+      "name": "15% Off: Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada)",
+      "tour_id": "390019",
+      "collected": "2026-09-15",
+      "regions": [
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Ras Mohammed"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
+        "ras mohammed"
+      ],
+      "dives": 18,
+      "guests": 32,
+      "experience": "Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in and General Briefing.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Shoab El Erg, Dunraven, and Night Dive Mahmoudat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "3 * Tiran Island and Night Dive in Sharm Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "2* Ras Mohammed, SS Thistlegorm & Night Dive SS Thistlegorm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "SS Thistlegorm, 2 * Gobal, and Night Dive in Gobal.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "Rosalie Moller, Abu Nuhas, and Night Dive in Abu Nuhas.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Abu Nuhas & Um Gamar.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Breakfast & Checkout. As you dive into the Red Sea, you'll be greeted by a dazzling display of marine life. Schools of colorful fish swim past you, and intricate coral formations stretch out in every direction. The Red Sea is home to over 1,200 species of fish, including the famous clownfish, which can be found in the anemones that thrive in these waters. Divers can also spot various species of sharks, including the elusive hammerhead and the majestic whale shark. If you're lucky, you may even spot a manta ray or a sea turtle gliding gracefully through the water. The last dive of the trip will be on the penultimate day. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390019&languageID=1&curr=USD&showPrices=false"
+    },
+    "hammerhead-ii::Mini North: Abu Nuhas, Thistlegorm, Ras Mohamed (Hurghada - Hurghada)": {
+      "boat": "hammerhead-ii",
+      "name": "Mini North: Abu Nuhas, Thistlegorm, Ras Mohamed (Hurghada - Hurghada)",
+      "tour_id": "430357",
+      "collected": "2026-09-15",
+      "regions": [
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Ras Mohammed"
+      ],
+      "dive_sites": [
+        "abu nuhas",
+        "thistlegorm",
+        "ras mohammed"
+      ],
+      "dives": 7,
+      "guests": 32,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "A short northern Red Sea safari from Hurghada, packing three of the region's most famous sites into a long weekend. Highlights include the wreck-strewn reef of Abu Nuhas, home to the Giannis D, Carnatic and Chrisoula K; the SS Thistlegorm, one of the most famous wreck dives in the world; and the dramatic drop-offs of Ras Mohamed National Park.",
+      "sections": [
+        {
+          "heading": "Day 1 – Hurghada Embarkation",
+          "text": "Board Hammerhead II in the evening. Check-in, cabin allocation and a welcome briefing before dinner, with the boat sailing north overnight.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2-3 – Diving the North",
+          "text": "Two days of diving, 2-3 dives per day depending on routing, weather and sea conditions, taking in this route's highlights: the wreck dives of Abu Nuhas, the SS Thistlegorm, and the walls and reef fish of Ras Mohamed National Park.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 4 – Final Dives & Hurghada Disembarkation",
+          "text": "A final dive or two in the morning before the boat returns to the marina, checkout, and transfer to the airport. Divers on this route can expect the atmospheric, coral-encrusted wrecks of Abu Nuhas and the Thistlegorm, still carrying its wartime cargo of trucks, motorcycles and railway wagons, alongside the reef sharks, barracuda and dramatic drop-offs of Ras Mohamed National Park. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=430357&languageID=1&curr=USD&showPrices=false"
+    },
     "hammerhead-ii::Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)": {
       "boat": "hammerhead-ii",
       "name": "Mini Safari: Abu Nuhas - Ras Mohammed - Thistlegorm (Hurghada - Hurghada)",
@@ -27091,6 +27194,104 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=430606&languageID=1&curr=USD&showPrices=false"
     },
+    "sunlight::Daedalus - Fury Shoals (Port Ghalib - Port Ghalib)": {
+      "boat": "sunlight",
+      "name": "Daedalus - Fury Shoals (Port Ghalib - Port Ghalib)",
+      "tour_id": "348005",
+      "collected": "2026-09-15",
+      "regions": [
+        "Daedalus",
+        "Fury Shoal"
+      ],
+      "dive_sites": [
+        "daedalus",
+        "fury shoals"
+      ],
+      "dives": 17,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Transfer to Port Ghalib in the evening.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2-6:",
+          "text": "We offer 3-4 dives daily in Daedalus + Fury Shoals. When crossing, only 2 dives a day can be scheduled.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "The final day of diving with 1-2 dives - sail back to harbor.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out in the morning. Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. To be paid onboard: Service fee - €60 Environmental fee - €60 The last dive of the trip will be on the penultimate day. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=348005&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunlight::North - Tiran (Hurghada - Hurghada)": {
+      "boat": "sunlight",
+      "name": "North - Tiran (Hurghada - Hurghada)",
+      "tour_id": "432978",
+      "collected": "2026-09-15",
+      "regions": [
+        "Thistlegorm",
+        "Jackson Reef",
+        "Shark and Yolanda",
+        "Ras Mohammed",
+        "Straits Of Tiran"
+      ],
+      "dive_sites": [
+        "thistlegorm",
+        "tiran",
+        "ras mohammed"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "The North of the Red Sea is the best route for wreck lovers. You will visit many wrecks, see the beauty of the underwater world of the famous Ras Mohammed National Park and Tiran Island, and encounter, depending on the time of year, frisky dolphins, notorious sharks, eagle rays, and magnificent mantas. Thistlegorm, Giannis D, Carnatic, Crisoula K, Dunraven, Rosalie Muller - these wrecks are familiar to all experienced divers and now it's time for you to see these world-famous wrecks personally!",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check in from 06:00 PM. Overnight on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "The boat departs for diving in the morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3-6:",
+          "text": "Up to 3 dives per day exploring the Northern Red Sea & Tiran.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Umm Gamar, SS Thistlegorm, Chrisoula K(Marcus), Shark & Yolanda Reef, RMS Carnatic, Jackson Reef, Giannis D, Dunraven, Tiran Tiran Island and Ras Mohammed National Park are excellent dive sites for divers. The age of the reefs of these depths is billions of years. The rich underwater world sites of Ras Mo are in the top ten spots for diving in the world. Butterflyfish, angelfish, Napoleon fish, seahorses, moray eels, barracudas, ... Imagine it? And so will be your usual day aboard!",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives in the morning, with the last one finishing at around 11 am. Gear washing and arrival back to port at 2 -3 pm. The last evening can be spent on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out from 09:00 AM. Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=432978&languageID=1&curr=USD&showPrices=false"
+    },
     "sunlight::South Route Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "sunlight",
       "name": "South Route Brothers - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
@@ -27153,6 +27354,132 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=430603&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunlight::South Route Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "sunlight",
+      "name": "South Route Brothers - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "348004",
+      "collected": "2026-09-15",
+      "regions": [
+        "Elphinstone",
+        "Salem Express",
+        "Zabargad",
+        "The Brothers",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "salem express",
+        "zabargad",
+        "brothers",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "The Southern Red Sea is a route for those who love the open sea and diving in the strong currents. Diving on the Brothers Islands with their famous wrecks - Aida and Numidia, diving on the Daedalus Reef, located in the middle of the Red Sea, and encountering sharks on the reef of Elphinstone, one of the most famous dive sites in the world.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in. Overnight on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "The boat departs for diving at 9-10 am.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3-6:",
+          "text": "Up to 3 dives per day exploring the Southern Red Sea.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Salem Express, Panorama Reef, Little Brother, Big Brother, Elphistone, Daedalus Reef The Brothers Island and Elphinstone Reef are great choices for any diver. Wrecks of AIDA and NUMIDIA on the Brothers Islands give a special factor of mystery to the breathtaking underwater landscape, and the Elphinstone Reef is famous for its sharks. If you are lucky, in one of your dives you will meet the Oceanic Whitetip Shark (Longimanus).",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives in the morning, with the last one finishing at around 11 am. Gear washing and arrival back to port at 2 -3 pm. The last evening can be spent on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Checkout. SOUTH AREAS OF THE RED SEA is a route for those who love the open sea and diving in the strong currents. Diving on the Brothers Islands with their famous wrecks - Aida and Numidia, diving on the Daedalus Reef, located in the middle of the Red Sea, and encountering sharks on the reef of Elphinstone, one of the most famous dive sites in the world.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Salem Express, Panorama Reef, Little Brother, Big Brother, Elphistone, Zabargad, Daedalus Reef, Middle Reef Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. The last dive of the trip will be on the final day at around 10 am. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=348004&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunlight::South Route Brothers - Daedalus-Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "sunlight",
+      "name": "South Route Brothers - Daedalus-Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "348008",
+      "collected": "2026-09-15",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "The Brothers",
+        "Salem Express",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "brothers",
+        "salem express",
+        "zabargad"
+      ],
+      "dives": 20,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "The Southern Red Sea is a route for those who love the open sea and diving in the strong currents. Diving on the Brothers Islands with their famous wrecks - Aida and Numidia, diving on the Daedalus Reef, located in the middle of the Red Sea, and encountering sharks on the reef of Elphinstone, one of the most famous dive sites in the world.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in is available from 19:00. Overnight on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "The boat departs for diving in the morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3-6:",
+          "text": "Up to 3 dives per day exploring the Southern Red Sea.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Salem Express, Panorama Reef, Little Brother, Big Brother, Elphistone, Daedalus Reef The Brothers Island and Elphinstone Reef are great choices for any diver. Wrecks of AIDA and NUMIDIA on the Brothers Islands give a special factor of mystery to the breathtaking underwater landscape, and the Elphinstone Reef is famous for its sharks. If you are lucky, in one of your dives you will meet the Oceanic Whitetip Shark (Longimanus).",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dives in the morning, with the last one finishing at around 11 am. Gear washing and arrival back to port at 2 -3 pm. The last evening can be spent on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out from 09:00 SOUTH AREAS OF THE RED SEA is a route for those who love the open sea and diving in the strong currents. Diving on the Brothers Islands with their famous wrecks - Aida and Numidia, diving on the Daedalus Reef, located in the middle of the Red Sea, and encountering sharks on the reef of Elphinstone, one of the most famous dive sites in the world.",
+          "is_day": true
+        },
+        {
+          "heading": "Target Route Points:",
+          "text": "Salem Express, Panorama Reef, Little Brother, Big Brother, Elphistone, Zabargad, Daedalus Reef, Middle Reef Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. The last dive of the trip will be on the final day at around 10 am. Divers are recommended to wait for 24hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=348008&languageID=1&curr=USD&showPrices=false"
     },
     "sunlight::South Route: Daedalus - Rocky - Zabargad (Port Ghalib - Port Ghalib)": {
       "boat": "sunlight",
@@ -27302,6 +27629,163 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=430604&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunlight::South: Rocky - Zabargad - St John's (Port Ghalib - Port Ghalib)": {
+      "boat": "sunlight",
+      "name": "South: Rocky - Zabargad - St John's (Port Ghalib - Port Ghalib)",
+      "tour_id": "348011",
+      "collected": "2026-09-15",
+      "regions": [
+        "Zabargad",
+        "Elphinstone",
+        "Fury Shoal",
+        "St. Johns",
+        "Rocky"
+      ],
+      "dive_sites": [
+        "zabargad",
+        "elphinstone",
+        "fury shoals",
+        "st johns",
+        "rocky island"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in at 9 am.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Abu Dahab",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3-4:",
+          "text": "Zabargad and Rocky islands (1 or 2 days depending on the weather)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "St John's Reef System",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "Fury Shoals Reef System",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "The Elphinstone Reef and Marsa Shoona",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out at 2 pm. Please note that the itineraries are examples only. We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen or unavoidable circumstances require us to do so. To be paid onboard: Service fee - €60 Environmental fee - €60 The last dive of the trip will be on a penultimate day at around 11 am. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=348011&languageID=1&curr=USD&showPrices=false"
+    },
+    "sunlight::The Ultimate South (Port Ghalib - Port Ghalib)": {
+      "boat": "sunlight",
+      "name": "The Ultimate South (Port Ghalib - Port Ghalib)",
+      "tour_id": "430605",
+      "collected": "2026-09-15",
+      "regions": [
+        "St. Johns",
+        "Elphinstone",
+        "Rocky",
+        "Abu Dabab",
+        "Fury Shoal",
+        "The Brothers",
+        "Daedalus",
+        "Zabargad"
+      ],
+      "dive_sites": [
+        "st johns",
+        "elphinstone",
+        "rocky island",
+        "abu dabab",
+        "fury shoals",
+        "brothers",
+        "daedalus",
+        "zabargad"
+      ],
+      "dives": 30,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This 11-night safari from Port Ghalib takes in the very best dive sites of southern Egypt: the legendary Brother Islands, Daedalus Reef, Rocky & Zabargad Islands, the St John's and Fury Shoals reef systems, and the mighty Elphinstone with its astonishing plateaus – as ultimate a deep-south route as they come.",
+      "sections": [
+        {
+          "heading": "Day 1 – Port Ghalib Embarkation",
+          "text": "Check-in to the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Departure",
+          "text": "Departure, with a check dive followed by one or two further dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Little Brother",
+          "text": "Three dives at Little Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Big Brother",
+          "text": "Three dives at Big Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Daedalus Reef",
+          "text": "Three dives at Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – Daedalus Reef",
+          "text": "A second day at Daedalus Reef, three further dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Rocky & Zabargad",
+          "text": "Three dives at Rocky & Zabargad.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – St John's",
+          "text": "Three to four dives at St John's.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 9 – Fury Shoals",
+          "text": "Three to four dives, plus the chance to snorkel with wild dolphins, at Fury Shoals.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 10 – Elphinstone & Abu Dabbab",
+          "text": "Two to three dives at Elphinstone, followed by a night dive at Abu Dabbab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 11 – Marsa Shouna & Return to Port Ghalib",
+          "text": "Two dives at Marsa Shouna before returning to Port Ghalib; a free group transfer to Hurghada is available in the afternoon for those flying from there.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 12 – Port Ghalib Disembarkation",
+          "text": "Check-out before 09:00. Divers on this route can expect hammerhead, thresher, grey reef, whitetip and oceanic whitetip sharks at the Brothers Islands and Daedalus Reef, wild spinner dolphins at Fury Shoals, the pristine, little-visited reefs of Rocky Island and Zabargad, the coral tunnels and pinnacles of St John's, big fish action at Elphinstone, and turtles and dugong at Abu Dabbab. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5840&tourID=430605&languageID=1&curr=USD&showPrices=false"
     },
     "sunshine::Brothers + Safaga (Hurghada - Hurghada)": {
       "boat": "sunshine",
