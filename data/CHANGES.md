@@ -3,6 +3,51 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-15
+
+```
+changes: HEAD -> 2026-09-15
+===========================
+
+now sold out (6)
+  2027-06-12  Blue Melody            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-07-03  Hammerhead II          Sharks Obsession: Brothers - Daeda liveaboard.com+padi.com
+  2027-07-03  Red Sea Blue Force 2   Extended North                     liveaboard.com+padi.com
+  2027-07-24  Oceanix                North & Brothers Liveaboard        liveaboard.com
+  2027-07-31  Yachtiano              North & Tiran                      liveaboard.com
+  2027-08-07  Oceanix                North & Brothers Liveaboard        liveaboard.com
+
+bookable again (3)
+  2027-06-12  Red Sea Blue Force 2   Egypt - North Route                liveaboard.com+padi.com
+  2027-06-26  Sunlight               The Ultimate South                 liveaboard.com
+  2027-07-31  Sunlight               South Route: Daedalus - Rocky - Za liveaboard.com
+
+price up (6)
+  2027-08-23  Ghazala Adventure      1,676 ->   1,814 USD  +138 (+8.2%)  Brothers, Daedalus & Elphinstone
+  2027-08-02  Ghazala Adventure      1,601 ->   1,733 USD  +132 (+8.2%)  North, Tiran & Dahab
+  2027-08-09  Ghazala Adventure      1,564 ->   1,692 USD  +128 (+8.2%)  North: Wrecks & Reefs
+  2027-08-16  Ghazala Adventure      1,564 ->   1,692 USD  +128 (+8.2%)  North: Wrecks & Reefs
+  2027-06-15  Sunlight               1,739 ->   1,791 USD  +52 (+3.0%)  South Route: Elba Reef Expedition!
+  2027-06-26  Sunlight               1,739 ->   1,791 USD  +52 (+3.0%)  The Ultimate South
+
+price down (379)
+  2027-07-31  Queen Sherry           2,784 ->   2,772 USD  -12 (-0.4%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-17  DUNE Silky             2,840 ->   2,830 USD  -10 (-0.4%)  Best of Egypt
+  2027-07-29  Golden Dolphin IV      2,781 ->   2,771 USD  -10 (-0.4%)  Daedalus, Rocky Island, Zabargad, 
+  2027-05-29  Aphrodite              2,423 ->   2,414 USD  -9 (-0.4%)  Brothers, Daedalus & Elphinstone
+  2027-06-05  Aphrodite              2,172 ->   2,163 USD  -9 (-0.4%)  Brothers, Daedalus & Elphinstone
+  2027-06-12  Aphrodite              2,255 ->   2,246 USD  -9 (-0.4%)  North - Straits of Tiran
+  2027-06-26  Aphrodite              2,255 ->   2,246 USD  -9 (-0.4%)  North - Straits of Tiran
+  2027-06-19  Aphrodite              2,255 ->   2,246 USD  -9 (-0.4%)  North Classic
+  2027-05-15  AVO                    1,983 ->   1,974 USD  -9 (-0.5%)  St. John's
+  2027-05-08  AVO                    1,983 ->   1,974 USD  -9 (-0.5%)  The Best of the South
+  2027-05-22  AVO                    1,983 ->   1,974 USD  -9 (-0.5%)  The Best of the South Classic
+  2027-08-16  Golden Dolphin IV      2,549 ->   2,540 USD  -9 (-0.4%)  North, Safaga & Brothers
+  ... and 367 more not shown
+
+300 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-14
 
 ```
