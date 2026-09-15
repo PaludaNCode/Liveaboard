@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-14",
+ "collected": "2026-09-15",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43703,9 +43703,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-15",
+    "first": "2026-09-19",
     "in_season": 31,
-    "last": "2027-11-02",
+    "last": "2027-11-06",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -43725,12 +43725,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 96,
-    "first": "2026-09-15",
+    "dated": 95,
+    "first": "2026-09-19",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 96,
+    "read": 95,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -43884,12 +43884,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 74,
-    "first": "2026-09-15",
+    "dated": 73,
+    "first": "2026-09-22",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 74,
+    "read": 73,
     "unpriced": 0
    },
    "slug": "bella-3",
@@ -44042,12 +44042,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 49,
-    "first": "2026-09-15",
+    "dated": 48,
+    "first": "2026-09-24",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 49,
+    "read": 48,
     "unpriced": 1
    },
    "slug": "my-carlton",
@@ -44579,12 +44579,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-15",
+    "first": "2026-09-17",
     "in_season": 20,
-    "last": "2028-05-27",
+    "last": "2028-06-03",
     "priced": 17,
     "read": 100,
-    "unpriced": 29
+    "unpriced": 30
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44824,12 +44824,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-15",
+    "dated": 56,
+    "first": "2026-09-22",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 57,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "snefro-love",
