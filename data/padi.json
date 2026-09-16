@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-15",
+ "collected": "2026-09-16",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44711,13 +44711,13 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 18,
-    "first": "2026-09-16",
+    "dated": 17,
+    "first": "2026-09-19",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 18,
-    "unpriced": 2
+    "read": 17,
+    "unpriced": 1
    },
    "slug": "reef-voyager",
    "specs": {
@@ -44848,9 +44848,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-16",
+    "first": "2026-09-20",
     "in_season": 35,
-    "last": "2027-08-29",
+    "last": "2027-09-01",
     "priced": 35,
     "read": 100,
     "unpriced": 0
