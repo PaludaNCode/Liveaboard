@@ -3,6 +3,51 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-16
+
+```
+changes: HEAD -> 2026-09-16
+===========================
+
+now sold out (7)
+  2027-05-01  Amelie Adventures      Best of Hurghada                   liveaboard.com+padi.com
+  2027-05-05  Amelie Adventures      Mini Safari: Best of Hurghada      liveaboard.com+padi.com
+  2027-05-08  Hammerhead II          Deepest South: Abu Fandira - Satay liveaboard.com+padi.com
+  2027-05-22  Sinaistar              North Reefs, Wrecks & Tiran        liveaboard.com
+  2027-06-19  Sinaistar              Brothers, Daedalus & Elphinstone   liveaboard.com
+  2027-06-26  Blue Melody            Northern Red Sea & Brothers        liveaboard.com+padi.com
+  2027-07-10  Topaz                  Sataya Dolphin, Daedalus, Elphinst liveaboard.com+padi.com
+
+bookable again (2)
+  2027-06-05  Topaz                  North Wrecks Reefs, Tiran and Daha liveaboard.com+padi.com
+  2027-07-22  Emperor Asmaa          Simply the Best                    liveaboard.com+padi.com
+
+withdrawn (1)
+  2027-07-31  Bismarck               Sataya (Fury Shoals) - St. John's  liveaboard.com
+
+price up (3)
+  2027-07-03  Aphrodite              2,253 ->   2,365 USD  +112 (+5.0%)  North & Brothers
+  2027-07-10  Topaz                  1,285 ->   1,363 USD  +78 (+6.1%)  Sataya Dolphin, Daedalus, Elphinst
+  2027-06-05  Topaz                  1,369 ->   1,445 USD  +76 (+5.6%)  North Wrecks Reefs, Tiran and Daha
+
+price down (159)
+  2027-07-31  Emperor Superior       2,735 ->   2,723 USD  -12 (-0.4%)  South & St. John's
+  2027-07-24  Aphrodite              2,376 ->   2,365 USD  -11 (-0.5%)  North Dolphins
+  2027-07-10  Aphrodite              2,170 ->   2,160 USD  -10 (-0.5%)  Best of Red Sea 2 Weeks
+  2027-07-31  Aphrodite              2,260 ->   2,250 USD  -10 (-0.4%)  Brothers, Safaga Reefs
+  2027-07-17  Aphrodite              2,170 ->   2,160 USD  -10 (-0.5%)  North Classic
+  2027-07-15  Emperor Elite          1,855 ->   1,846 USD  -9 (-0.5%)  Simply the Best
+  2027-07-22  Emperor Elite          1,855 ->   1,846 USD  -9 (-0.5%)  Simply the Best
+  2027-07-03  Destiny                1,622 ->   1,614 USD  -8 (-0.5%)  Brothers, Daedalus & Elphinstone
+  2027-07-10  Destiny                1,622 ->   1,614 USD  -8 (-0.5%)  North & Tiran
+  2027-07-17  Destiny                1,622 ->   1,614 USD  -8 (-0.5%)  North Safaga Brothers
+  2027-07-24  Destiny                1,622 ->   1,614 USD  -8 (-0.5%)  St. John's, Fury Shoals & Elphinst
+  2027-07-24  DUNE Longara           1,681 ->   1,673 USD  -8 (-0.5%)  North Brothers
+  ... and 147 more not shown
+
+553 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-15
 
 ```
