@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-15",
+  "collected": "2026-09-16",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -2389,6 +2389,47 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5707&tourID=393622&languageID=1&curr=USD&showPrices=false"
+    },
+    "aphrodite::North, Brother Islands (Hurghada - Hurghada)": {
+      "boat": "aphrodite",
+      "name": "North, Brother Islands (Hurghada - Hurghada)",
+      "tour_id": "395642",
+      "collected": "2026-09-16",
+      "regions": [
+        "The Brothers",
+        "Ras Mohammed",
+        "Abu Nuhas",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "brothers",
+        "ras mohammed",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 20,
+      "guests": 23,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This itinerary combines some of the Red Sea's most celebrated wrecks with the remote Brother Islands, known for their shark-patrolled walls and strong currents. From the iconic SS Thistlegorm to the wreck-strewn reef of Abu Nuhas and the plateaus of Ras Mohammed, this route is best suited to experienced divers (Advanced Open Water with 50+ logged dives is the operator's minimum requirement).",
+      "sections": [
+        {
+          "heading": "Day 1 – All Aboard in Hurghada",
+          "text": "Transfer from the airport to the boat and check in from 5:00 PM. After a welcome briefing from the cruise director, guests are allocated cabins and given an orientation of the boat to get settled and set up equipment. No diving today.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 2–7 – Northern Wrecks & Brother Islands",
+          "text": "SS Thistlegorm: the best-known wreck dive in the Red Sea, a 125 m British Army freighter. Abu Nuhas: a reef famous for four wrecks, including the Giannis D. Ras Mohammed (Shark Reef & Yolanda Reef): a 20 m plateau falling away to over 200 m. The Brother Islands (Big Brother & Little Brother): two isolated pinnacles 60 km offshore, with the wrecks of the Numidia and the Aida and shark-patrolled walls. Up to 4 dives are offered per day.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 8 – Hurghada Disembarkation",
+          "text": "A final 2–3 dives in the morning before checking out by 12:00 PM and transferring to the airport. The last dive takes place on the morning of the final day. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5707&tourID=395642&languageID=1&curr=USD&showPrices=false"
     },
     "avo::Brothers - Daedalus - Elphinstone (Golden Triangle) (Hurghada - Hurghada)": {
       "boat": "avo",
@@ -29078,6 +29119,57 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=411680&languageID=1&curr=USD&showPrices=false"
+    },
+    "topaz::Sataya Dolphin, Daedalus, Elphinstone (Port Ghalib - Hurghada)": {
+      "boat": "topaz",
+      "name": "Sataya Dolphin, Daedalus, Elphinstone (Port Ghalib - Hurghada)",
+      "tour_id": "408965",
+      "collected": "2026-09-16",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 28,
+      "experience": "Open Water - 40 minimum logged dives required.",
+      "min_logged_dives": 40,
+      "intro": "Experience some of Egypt's most iconic dive sites on this Red Sea itinerary. Dive with spinner dolphins at Sataya Reef, explore the remote offshore reefs of Daedalus, and discover the dramatic walls and abundant marine life of Elphinstone Reef before disembarking in Hurghada. This route offers a mix of vibrant coral reefs, pelagic encounters, and world-class diving suitable for experienced divers.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Check-in from 04:00 PM. Overnight on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "The boat leaves for diving in the morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Days 3-6:",
+          "text": "Up to 3 dives per day to explore the northern Red Sea and Tiran.",
+          "is_day": false
+        },
+        {
+          "heading": "Possible destination route points:",
+          "text": "Sha'ab Marsa Alam, Elphinstone Reef, Daedalus Reef, Sataya Reef (Dolphin House), Fury Shoals, Abu Galawa, Claudia Reef, Malahi, Sha'ab Maksour, Abu Dabbab, Marsa Shouna, Northern Reefs near Hurghada.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Last dives. You can spend your last evening on the boat.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Check out from 10:00 AM.",
+          "is_day": true
+        },
+        {
+          "heading": "Ocean Life:",
+          "text": "Spinner dolphins, oceanic whitetip sharks, hammerhead sharks, thresher sharks, turtles, dugongs (occasional), reef sharks, schooling reef fish, and vibrant hard and soft corals. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408965&languageID=1&curr=USD&showPrices=false"
     },
     "topaz::Sataya Dolphin, Daedalus, Elphinstone (Port Ghalib - Port Ghalib)": {
       "boat": "topaz",

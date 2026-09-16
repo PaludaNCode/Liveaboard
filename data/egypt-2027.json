@@ -11633,10 +11633,13 @@
       "operator_id": "aphrodite-liveaboard-safaris",
       "boat_id": "aphrodite",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
+        "thistlegorm",
+        "abu nuhas",
+        "ras mohammed",
         "brothers"
       ],
       "region": null,
@@ -11830,7 +11833,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40/week; BCD €40/week; Dive Computer €40/week; Dive Light €36/week; Fins €12/week; Mask €12/week; Regulator €40/week; SMB €10/week; Snorkel Gear €6/week; Wetsuit €40/week"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "avo--brothers-daedalus-elphinstone-golden-triangle-hurghada-hurghada",
@@ -117437,13 +117449,14 @@
       "operator_id": "sea-pirates",
       "boat_id": "topaz",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Port Ghalib",
       "port_to": "Hurghada",
       "dive_sites": [
         "daedalus",
         "elphinstone",
-        "sataya"
+        "sataya",
+        "sataya reef"
       ],
       "region": null,
       "summary": "Dive into the Red Sea aboard Scuba Liveaboard Egypt&mdash;an all-inclusive liveaboard offering ensuite cabins, daily dives, and expert instruction for all levels, from beginner to pro.",
@@ -117734,7 +117747,16 @@
           "basis": "per_trip",
           "note": "Full equipment hire: BCD, Dive Computer, Fins, Regulator, Snorkel Gear"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 40,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 40 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "topaz--sataya-dolphin-daedalus-elphinstone-port-ghalib-port-ghalib",
