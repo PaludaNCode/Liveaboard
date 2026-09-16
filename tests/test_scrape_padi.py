@@ -499,31 +499,52 @@ class TestAliasMap(unittest.TestCase):
         self.assertFalse(PadiComAdapter.is_reviewed("sea-serpent", self.MAP))
 
     def test_the_committed_map_keys_on_real_boat_ids(self) -> None:
-        """Every key must be a boat we hold, or one we minted for PADI.
+        """Every key must name a boat we carry, and a barren one still counts.
 
         A key that matches nothing fails silently -- vessel_for returns None,
         which is indistinguishable from unreviewed -- and that is exactly how
         the first version of this file went wrong, keying "MY Odyssey
         Liveaboard" as its folded name when its boat_id is "odyssey".
 
-        `padi_only` is the exemption and needs one: those ids are minted in this
-        file rather than by the first source, and a vessel with no sailing
-        inside the published season never becomes a boat in the dataset. Twelve
-        of the 22 are in that state today -- PADI's calendar for them stops
-        before May 2027, or in VIP One's case prices every sailing at zero. They
-        are still reviewed, still mapped, and still fetched every refresh, so
-        the day one of them opens a season it appears without anybody editing
-        this file.
+        So the question is "do we carry this hull", and the dataset alone
+        cannot answer it: **a boat is in `boats` only while it has a sailing
+        inside the published season.** Two things say we carry one anyway.
+
+        `padi_only` is the first, and it was here from the start: those ids are
+        minted in this file rather than by the first source, and twelve of the
+        22 have no season sailing today -- PADI's calendar for them stops
+        before May 2027, or in VIP One's case prices every sailing at zero.
+
+        `data/barren.json` is the second, and it was missing. It is the crawl's
+        own record of a vessel it visited that published no departure, which is
+        the same state arrived at from the other seller -- and on 2026-09-16 the
+        daily refresh read Bismarck's four season months, got a *Product* node
+        and no *Event* nodes on every one, and dropped the boat. The hull is
+        still on liveaboard.com, still in the fee book, still re-checked every
+        `BARREN_RECHECK_DAYS`; only its season had emptied. This test called
+        that a stale key, went red on the gate, and the refresh threw away a
+        run's fetching -- so the one entry in the file recording a *finished*
+        review of Bismarck would have been deleted to get green, and the tail
+        re-walked through seven slug shapes the day the boat sold a week again.
+
+        The typo this guards against still fails: a key nobody has ever fetched
+        is in neither list. What is no longer a failure is the source saying a
+        boat we hold has nothing on sale, which is an answer and not a hole --
+        `carry_unread` and the barren list exist because absence is only ever
+        the answer when somebody looked.
         """
         import json
         from pathlib import Path
 
         aliases = json.loads(Path("data/padi_aliases.json").read_text())
-        boats = {b["id"] for b in published.raw()["boats"]}
-        minted = set(aliases.get("padi_only") or [])
-        unknown = sorted(set(aliases["aliases"]) - boats - minted)
+        carried = (
+            {b["id"] for b in published.raw()["boats"]}
+            | set(aliases.get("padi_only") or [])
+            | set(published.raw("barren.json").get("vessels") or {})
+        )
+        unknown = sorted(set(aliases["aliases"]) - carried)
         self.assertEqual(unknown, [], f"alias keys matching no boat: {unknown}")
-        stale = sorted(set(aliases.get("absent") or []) - boats)
+        stale = sorted(set(aliases.get("absent") or []) - carried)
         self.assertEqual(stale, [], f"absent entries matching no boat: {stale}")
 
     def test_every_minted_id_is_mapped(self) -> None:
