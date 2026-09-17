@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-16",
+ "collected": "2026-09-17",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43906,12 +43906,12 @@
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 56,
-    "first": "2026-09-17",
+    "dated": 55,
+    "first": "2026-09-24",
     "in_season": 14,
     "last": "2027-12-30",
     "priced": 12,
-    "read": 56,
+    "read": 55,
     "unpriced": 8
    },
    "slug": "my-blue",
@@ -43974,12 +43974,12 @@
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 60,
-    "first": "2026-09-17",
+    "dated": 59,
+    "first": "2026-09-24",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 60,
+    "read": 59,
     "unpriced": 0
    },
    "slug": "my-blue-pearl",
@@ -43997,12 +43997,12 @@
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 57,
-    "first": "2026-09-17",
+    "dated": 56,
+    "first": "2026-09-24",
     "in_season": 16,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 57,
+    "read": 56,
     "unpriced": 0
    },
    "slug": "my-blue-seas",
@@ -44020,12 +44020,12 @@
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 60,
-    "first": "2026-09-17",
+    "dated": 59,
+    "first": "2026-09-24",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 60,
+    "read": 59,
     "unpriced": 1
    },
    "slug": "my-blue-storm",
@@ -44224,12 +44224,12 @@
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 78,
-    "first": "2026-09-17",
+    "dated": 77,
+    "first": "2026-09-24",
     "in_season": 13,
     "last": "2028-07-20",
     "priced": 13,
-    "read": 78,
+    "read": 77,
     "unpriced": 0
    },
    "slug": "mv-emperor-elite",
@@ -44270,12 +44270,12 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 58,
-    "first": "2026-09-17",
+    "dated": 57,
+    "first": "2026-09-20",
     "in_season": 18,
     "last": "2027-12-25",
     "priced": 18,
-    "read": 58,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "eriny",
@@ -44293,9 +44293,9 @@
    "operator": "EXPLORER VENTURES",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-17",
+    "first": "2026-09-24",
     "in_season": 17,
-    "last": "2028-10-19",
+    "last": "2028-10-26",
     "priced": 17,
     "read": 100,
     "unpriced": 0
@@ -44471,12 +44471,12 @@
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
-    "dated": 64,
-    "first": "2026-09-17",
+    "dated": 63,
+    "first": "2026-09-24",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 64,
+    "read": 63,
     "unpriced": 1
    },
    "slug": "my-heaven-saphir",
@@ -44533,12 +44533,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 28,
-    "first": "2026-09-17",
+    "dated": 27,
+    "first": "2026-09-24",
     "in_season": 10,
     "last": "2027-10-14",
     "priced": 7,
-    "read": 28,
+    "read": 27,
     "unpriced": 7
    },
    "slug": "my-independence-ii",
@@ -44579,12 +44579,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-17",
+    "first": "2026-09-20",
     "in_season": 20,
-    "last": "2028-06-03",
+    "last": "2028-06-10",
     "priced": 17,
     "read": 100,
-    "unpriced": 30
+    "unpriced": 31
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44733,12 +44733,12 @@
    "name": "MS Royal Evolution",
    "operator": null,
    "sailings": {
-    "dated": 51,
-    "first": "2026-09-17",
+    "dated": 50,
+    "first": "2026-09-24",
     "in_season": 13,
     "last": "2028-04-27",
     "priced": 13,
-    "read": 51,
+    "read": 50,
     "unpriced": 0
    },
    "slug": "ms-royal-evolution",
@@ -44939,9 +44939,9 @@
    "operator": "RED SEA EXPLORERS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-17",
+    "first": "2026-09-24",
     "in_season": 17,
-    "last": "2028-11-23",
+    "last": "2028-11-30",
     "priced": 17,
     "read": 100,
     "unpriced": 0
