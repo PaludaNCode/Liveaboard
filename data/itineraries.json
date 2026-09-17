@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-16",
+  "collected": "2026-09-17",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -26181,6 +26181,161 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6066&tourID=354366&languageID=1&curr=USD&showPrices=false"
+    },
+    "ss-serena-dreams::North & Brothers (Hurghada - Hurghada)": {
+      "boat": "ss-serena-dreams",
+      "name": "North & Brothers (Hurghada - Hurghada)",
+      "tour_id": "317315",
+      "collected": "2026-09-17",
+      "regions": [
+        "Safaga",
+        "Abu Nuhas",
+        "Thistlegorm",
+        "The Brothers"
+      ],
+      "dive_sites": [
+        "safaga",
+        "abu nuhas",
+        "thistlegorm",
+        "brothers"
+      ],
+      "dives": 16,
+      "guests": 18,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "This is a suggestion for the North & Brothers itinerary:",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "arrival and check in onboard after 5pm, dinner, night spent onboard in the New Marina Hurghada",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "check dive at Shaab El Erg, then 2nd and night dive at Abu Nuhas",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "2 or 3 dives at Thistlegorm then sailing to the Brothers",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "3 dives at the Brothers",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "3 dives at the Brothers then sailing to Safaga",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "2 dives in Safaga, 3rd dive & night dive in Hurghada",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "2 dive in Hurghada then return to Port and spending the last night onboard in the port HRG",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "check out after breakfast and transfer to the airport This diving safari combines the most",
+          "is_day": true
+        },
+        {
+          "heading": "famous wrecks",
+          "text": "in the northern Red Sea with the stunning wrecks of",
+          "is_day": false
+        },
+        {
+          "heading": "Aida II and Numidia in Big Brother’s Island",
+          "text": ". Having sunk in 1901, the Numidia has a spectacular growth of soft and hard corals, that makes it a pleasure for both reef and wreck lovers, not to mention the chance to spot a variety of sharks and pelagics in the blue! This Red Sea diving safari will be the right one for you! Dive the famous four wrecks of",
+          "is_day": false
+        },
+        {
+          "heading": "Abu Nuhas, the Ships’ Graveyard",
+          "text": ". This reef lies close to the ship-lane toward the Suez Canal and has claimed more ships than any other in the Red Sea. The wrecks are very scenic, covered in corals and they are fantastic for photography, especially the Carnatic, having sunk in 1869. The very famous",
+          "is_day": false
+        },
+        {
+          "heading": "SS Thistlegorm",
+          "text": "is one of the highlights of this Red Sea diving safari. The SS Thistlegorm sunk in 1941, having been bombed by the Germans while on a mission to deliver a cargo of ammunition and war materials to the British troops in North Africa. The above itinerary is only a plan and it is to provide an idea as to which sites may be most likely visited during the trip. There may be deviations from this plan due to weather conditions, the captain’s decisions, the dive guides’ suggestions, the guests’ requests and qualifications and other factors that may hinder the safety of the crew and the guests. Nightdives are prohibited at the Marine Parks This itinerary is based on 7 nights spent on board. Due to the schedule of the boat there is a possibility that we will offer 6 nights onboard and 1 night in a 4* hotel.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6015&tourID=317315&languageID=1&curr=USD&showPrices=false"
+    },
+    "ss-serena-dreams::North - Straits of Tiran - Dahab (Hurghada - Hurghada)": {
+      "boat": "ss-serena-dreams",
+      "name": "North - Straits of Tiran - Dahab (Hurghada - Hurghada)",
+      "tour_id": "317320",
+      "collected": "2026-09-17",
+      "regions": [
+        "Ras Mohammed",
+        "Straits Of Tiran",
+        "Abu Dabab",
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Gordon Reef"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "tiran",
+        "abu dabab",
+        "abu nuhas",
+        "thistlegorm"
+      ],
+      "dives": 21,
+      "guests": 18,
+      "experience": "Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Day 1",
+          "text": "Arrival and check-in. The first night will be spent on board in the New Marina Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Departure around 8 am, check dive near Hurghada, cross to Sinai, 2nd & night dive at Sha'ab Mahmoud (Dunraven).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3",
+          "text": "1st dive at Ras Mohamed, then sailing to Tiran, 2nd & 3rd dive at Tiran reefs. Night dive at Gabr el Bint (Dahab).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4",
+          "text": "1st dive at Blue Hole, 2nd Canyon, 3rd Gabr el Bint (Dahab). Night dive at Gordon (Tiran).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5",
+          "text": "1st dive at Thomas Reef (Tiran), 2nd Anemone city (Ras Mohamed), 3rd & night at Thistlegorm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6",
+          "text": "1st dive at the Thistlegorm, 2nd & 3rd dive at Abu Nuhas reef, night dive close to Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "The last 2 dives will be in the Hurghada area (Umm Gammar, Carless Reef). Last night will be spent on board in the New Marina Hurghada.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out after breakfast latest till noon. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6015&tourID=317320&languageID=1&curr=USD&showPrices=false"
     },
     "ss-serena-dreams::North Tour: Northern Reefs & Wrecks (Hurghada - Hurghada)": {
       "boat": "ss-serena-dreams",

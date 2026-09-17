@@ -107605,11 +107605,15 @@
       "operator_id": "sea-serpent-fleet",
       "boat_id": "ss-serena-dreams",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "abu nuhas",
+        "sha'ab el erg",
+        "thistlegorm",
+        "safaga"
       ],
       "region": null,
       "summary": "Join the fantastic Sea Serpent Serena Dreams for a Red Sea diving liveaboard to remember. Built by divers for divers to offer unforgettable diving in the Red Sea. 9 en-suite guest cabins accommodate 18 passengers.",
@@ -107820,7 +107824,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 30 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "ss-serena-dreams--north-tour-northern-reefs-wrecks-hurghada-hurghada",
