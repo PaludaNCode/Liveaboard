@@ -3,6 +3,48 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-17
+
+```
+changes: HEAD -> 2026-09-17
+===========================
+
+new departures (1)
+  2027-05-06  SS Serena Dreams       North & Brothers                        1,444 USD liveaboard.com
+
+now sold out (3)
+  2027-06-05  ALSURAYA               Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+  2027-06-14  All Star Scuba Scene   Daedalus & St. John's              liveaboard.com+padi.com
+  2027-08-30  All Star Scuba Scene   North                              liveaboard.com+padi.com
+
+bookable again (2)
+  2027-08-07  CU                     North Dahab                        liveaboard.com
+  2027-08-14  CU                     North Dahab                        liveaboard.com
+
+price up (4)
+  2027-08-16  Ghazala Explorer       1,667 ->   1,800 USD  +133 (+8.0%)  Brothers, Daedalus & Elphinstone
+  2027-08-23  Ghazala Explorer       1,592 ->   1,720 USD  +128 (+8.0%)  North & Brothers
+  2027-08-09  Ghazala Explorer       1,555 ->   1,680 USD  +125 (+8.0%)  Get Wrecked
+  2027-08-02  Ghazala Explorer       1,555 ->   1,680 USD  +125 (+8.0%)  North: Wrecks & Reefs
+
+price down (584)
+  2027-08-07  CU                     1,731 ->   1,385 USD  -346 (-20.0%)  North Dahab
+  2027-08-14  CU                     1,731 ->   1,385 USD  -346 (-20.0%)  North Dahab
+  2027-07-17  MY Odyssey Liveaboar   2,484 ->   2,465 USD  -19 (-0.8%)  Premium Expedition
+  2027-07-17  DUNE Silky             2,827 ->   2,809 USD  -18 (-0.6%)  Best of Egypt
+  2027-05-27  Royal Evolution        2,442 ->   2,424 USD  -18 (-0.7%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-05-03  Royal Evolution        2,442 ->   2,424 USD  -18 (-0.7%)  Elba Reef & Elba borders
+  2027-08-07  Aphrodite              2,310 ->   2,293 USD  -17 (-0.7%)  North Classic
+  2027-08-14  Aphrodite              2,310 ->   2,293 USD  -17 (-0.7%)  North Classic
+  2027-08-28  Aphrodite              2,218 ->   2,201 USD  -17 (-0.8%)  North Classic
+  2027-08-21  Aphrodite              2,368 ->   2,351 USD  -17 (-0.7%)  North Wrecks
+  2027-07-29  Golden Dolphin IV      2,768 ->   2,751 USD  -17 (-0.6%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,769 ->   2,752 USD  -17 (-0.6%)  Eclipse & Big Fish: Pelagic Trail 
+  ... and 572 more not shown
+
+150 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-16
 
 ```
