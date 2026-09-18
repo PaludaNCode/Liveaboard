@@ -3,6 +3,44 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-18
+
+```
+changes: HEAD -> 2026-09-18
+===========================
+
+new departures (1)
+  2027-05-01  Marselia Star          CCR Reefs, Wrecks and Canyons Trip      3,386 USD liveaboard.com
+
+now sold out (1)
+  2027-07-31  Discovery I            Brothers, Daedalus & Elphinstone   liveaboard.com+padi.com
+
+withdrawn (2)
+  2027-07-17  Vita Xplorer           Ras Mohammed & Brothers            liveaboard.com
+  2027-07-24  Vita Xplorer           Ras Mohammed & Brothers            liveaboard.com
+
+price up (2)
+  2027-06-19  Vita Xplorer           1,233 ->   1,577 USD  +344 (+27.9%)  Brothers, Daedalus & Elphinstone
+  2027-07-31  Vita Xplorer           1,240 ->   1,420 USD  +180 (+14.5%)  St. John's Reef
+
+price down (207)
+  2027-05-01  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-05-08  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-05-22  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-05-29  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-06-05  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-06-19  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-06-26  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-07-03  Red Sea Aggressor II   2,760 ->   1,349 USD  -1,411 (-51.1%)  Northern Red Sea, Ras Mohammed, St
+  2027-05-15  Red Sea Aggressor II   2,760 ->   1,399 USD  -1,361 (-49.3%)  Northern Red Sea - Best Wreck Divi
+  2027-07-31  Emperor Superior       2,723 ->   2,706 USD  -17 (-0.6%)  South & St. John's
+  2027-08-12  Golden Imperial        2,537 ->   2,524 USD  -13 (-0.5%)  North - Straits of Tiran - Brother
+  2027-06-02  Alia Soul              1,904 ->   1,892 USD  -12 (-0.6%)  Marine Park North: Brothers - Daed
+  ... and 195 more not shown
+
+443 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-17
 
 ```
