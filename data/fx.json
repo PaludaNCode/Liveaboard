@@ -1,11 +1,11 @@
 {
   "display_currency": "EUR",
-  "as_of": "2026-09-16",
+  "as_of": "2026-09-17",
   "source": "European Central Bank euro foreign exchange reference rates",
   "url": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
-  "retrieved": "2026-09-17",
+  "retrieved": "2026-09-18",
   "rates": {
-    "GBP": 1.166317,
-    "USD": 0.866776
+    "GBP": 1.165094,
+    "USD": 0.871004
   }
 }
