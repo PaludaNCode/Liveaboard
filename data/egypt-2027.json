@@ -14460,11 +14460,21 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 0,
+      "dives": 18,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "southern route",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "rocky island",
+        "zabargad",
+        "abu dabab",
+        "st johns",
+        "sataya",
+        "fury shoals",
+        "brothers"
+      ],
+      "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
       "source_url": "https://www.liveaboard.com/diving/egypt/avo?m=8/2027",
       "fees": [
@@ -14659,7 +14669,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "avo--the-best-of-the-south-classic-port-ghalib-hurghada",
@@ -76060,11 +76079,18 @@
       "operator_id": "mv-legends-ii",
       "boat_id": "marselia-star",
       "nights": 11,
-      "dives": 0,
+      "dives": 30,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
-      "dive_sites": [],
-      "region": "wreck route",
+      "dive_sites": [
+        "thistlegorm",
+        "ras mohammed",
+        "rosalie moller",
+        "brothers",
+        "tiran",
+        "dahab"
+      ],
+      "region": null,
       "summary": "Sail the Red Sea aboard Marselia Star, a modern 12-cabin liveaboard with diver lift, tech diving support, and itineraries to Egypt&rsquo;s top reefs, wrecks, and shark sites.",
       "source_url": "https://www.liveaboard.com/diving/egypt/marselia-star?m=8/2027",
       "fees": [
@@ -76217,7 +76243,16 @@
           "basis": "per_week",
           "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "experienced_100",
+        "min_logged_dives": 100,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 100 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "marselia-star--northern-wrecks-and-brothers-hurghada-hurghada",
@@ -119677,13 +119712,13 @@
       "operator_id": "xplorer-aquarius-safari",
       "boat_id": "vita-xplorer",
       "nights": 7,
-      "dives": 0,
+      "dives": 16,
       "port_from": "Hurghada",
       "port_to": "Hurghada",
       "dive_sites": [
         "brothers",
-        "daedalus",
-        "elphinstone"
+        "elphinstone",
+        "daedalus"
       ],
       "region": null,
       "summary": "Explore some of the best Red Sea dive sites aboard the Vita Xplorer. Dive the Ras Mohammed Marine Park, Thistlegorm, &amp; Abu Nuhas Wrecks, as well as Elphinstone, Brothers, &amp; Daedalus Reef.",
@@ -119861,7 +119896,16 @@
           "amount": null,
           "note": "Operator prices gear per item, not as a set: 15L tanks €40-50/week; BCD €35/week; Dive Computer €35/week; Dive Light €6; Fins €25/week; Mask €25/week; Nitrox tank included; Regulator €35/week; SMB €3/day; Snorkel Gear €25/week; Wetsuit €35/week"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "vita-xplorer--daedalus-zabargad-rocky-island-elphinstone-port-ghalib-port-ghalib",
