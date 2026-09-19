@@ -3,6 +3,23 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-19
+
+```
+changes: HEAD -> 2026-09-19
+===========================
+
+now sold out (1)
+  2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  liveaboard.com
+
+price up (3)
+  2027-05-13  Blue Seas              2,052 ->   2,057 USD  +5 (+0.2%)  Rocky - Elba - St. John's - Elphin
+  2027-05-27  Royal Evolution        2,424 ->   2,429 USD  +5 (+0.2%)  Brothers, Daedalus, Rocky, St. Joh
+  2027-05-03  Royal Evolution        2,424 ->   2,429 USD  +5 (+0.2%)  Elba Reef & Elba borders
+
+701 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-18
 
 ```
