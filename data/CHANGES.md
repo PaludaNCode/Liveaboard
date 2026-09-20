@@ -3,6 +3,18 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-20
+
+```
+changes: HEAD -> 2026-09-20
+===========================
+
+bookable again (1)
+  2027-05-08  Star Jet               Sataya (Fury Shoals) - St. John's  liveaboard.com
+
+521 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-19
 
 ```

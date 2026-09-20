@@ -1,6 +1,39 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-20",
+  "added": [],
+  "sold_out": [],
+  "returned": [
+   {
+    "id": "star-jet-2027-05-08-0",
+    "boat": "Star Jet",
+    "title": "Sataya (Fury Shoals) - St. John's",
+    "start": "2027-05-08",
+    "price": 1263.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 521,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-20"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-19",
   "added": [],
   "sold_out": [],
