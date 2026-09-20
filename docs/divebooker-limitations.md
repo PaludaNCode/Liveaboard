@@ -56,30 +56,46 @@ before deciding what the third seller is allowed to say on the page.
    booking page and establishes what the number counts, this source cannot be
    a third price.
 
-   **The other twelve were a currency mistake of ours, and one row is the
-   whole case.** Those figures were compared as digits, and the three books do
-   not agree on currency *per boat* rather than per seller: liveaboard.com
-   states Alsuraya in USD where PADI and divebooker state it in EUR. Read that
-   way, a 13% gap looked like a 1-unit gap and a 1-unit gap like a 15% one.
-   `tools/compare_divebooker_fares.py` converts all three through the
-   dataset's own committed ECB table first — offline, no request — and
-   measures each row against the **nearer** of the two sellers, because a
-   third seller is not wrong for undercutting one of them:
+   **This file said three sellers were pricing one berth apart, and that was
+   our own arithmetic.** It read: *"on Alsuraya, Discovery I and II and Grand
+   Discovery, divebooker sits 13% under liveaboard.com and about 15% over PADI
+   on every sailing, which is three sellers pricing one berth"*. It is not.
+   `money.FxTable` converts **into** euros by multiplying (USD 0.8726), and the
+   first version of `tools/compare_divebooker_fares.py` divided — which
+   inflates every dollar figure by 31% against itself and manufactures a spread
+   out of the conversion. The sentence is kept because a tidy story that came
+   out of a wrong division is exactly the kind this project has to be able to
+   recognise later.
 
-   | Distance from the nearer seller | Rows |
-   |---|---|
-   | exact (<0.2%) | 65 |
-   | within 3% | 3 |
-   | within 10% | 6 |
-   | within 20% | 73 |
-   | **over 20%** | **1** |
+   **Read correctly, the two comparisons disagree with each other, and that is
+   the finding.** Over the 777 joined rows:
 
-   The 73 are a real spread and not an artefact: on Alsuraya, Discovery I and
-   II and Grand Discovery, divebooker sits **13% under liveaboard.com and
-   about 15% over PADI** on every sailing, which is three sellers pricing one
-   berth and exactly what this site exists to show. So the case against
-   publishing is not thirteen ragged rows; it is **one row at exactly 2.000×**,
-   and what settles it is that sailing's own offer node.
+   | Distance from the nearer seller | as labelled | as digits |
+   |---|---|---|
+   | exact (<0.2%) | 106 | **645** |
+   | within 1% | 2 | 15 |
+   | within 3% | 4 | 2 |
+   | within 10% | 29 | 18 |
+   | within 20% | **595** | 76 |
+   | over 20% | 41 | 21 |
+
+   *As labelled* puts 595 rows in a 10–20% band, which is the euro-dollar gap
+   wearing a costume. *As digits* — both currency labels ignored — puts **645
+   of 777 on the same number to the cent**. Broken down by what each seller
+   says: where divebooker says EUR and liveaboard.com says USD, 554 of 618
+   carry the same number; where liveaboard.com itself says EUR, divebooker's
+   figure is **1.148× it, which is 1/0.8726**. So the number is the dollar
+   figure and `Offer.priceCurrency` is not describing it — or this seller
+   charges a 14.6% premium that lands exactly on another seller's dollar price
+   across a dozen operators. `tools/probe_divebooker_currency.py` asks the page
+   which, rather than taking the agreement as proof.
+
+   **And the residue has a shape too.** Reading the number as dollars leaves
+   ~50 rows that really differ, of which the loud ones are Unity (13 sailings
+   at 1.42×), Ghazala Explorer 2027-07-12 at 1.65×, Blue Pearl 2027-07-29 at
+   1.45× — and Red Sea Aggressor IV 2027-07-24 at exactly **2.000×**, still the
+   only one whose offer node is identical in shape to the sailings either side
+   of it.
 
 ## What it answers, but not the way the page would want
 

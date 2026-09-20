@@ -75,6 +75,10 @@ on:
         description: "Ask what divebooker's Offer.price counts (the withheld fares)"
         type: boolean
         default: false
+      divebooker_currency:
+        description: "Ask a vessel page what currency its prices are in"
+        type: boolean
+        default: false
       divebooker_flight:
         description: "Open the RSC payload a vessel page streams (prices, fees, cabins)"
         type: boolean
@@ -350,6 +354,12 @@ jobs:
             --vessels red-sea-aggressor-iv \
             --dates 2027-07-24,2027-07-17,2027-07-31 \
             --verbatim
+
+      # The digits say USD and the label often says EUR. This asks the page
+      # rather than inferring it from another seller's agreement.
+      - name: Ask what currency a divebooker price is in
+        if: inputs.divebooker_currency
+        run: python3 tools/probe_divebooker_currency.py
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
