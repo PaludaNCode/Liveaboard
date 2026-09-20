@@ -143,3 +143,100 @@ class TestTheFleetIsDiscoveredNotTyped(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestWhatTheDatasetRecordsAboutAThirdSeller(unittest.TestCase):
+    """Coverage is published; fares are not, and the reason is a measurement.
+
+    Red Sea Aggressor IV on 2027-07-24 reads 5,398 against our 2,699 for the
+    same seven nights — exactly twice. So `Offer.price` is a per-person berth
+    on most rows and something else on at least one, and a figure whose unit
+    this site cannot state is a figure it does not publish.
+    """
+
+    BOOK = {
+        "source": "divebooker.com",
+        "collected": "2026-09-20",
+        "vessels": {"bella-2": {"slug": "bella-2"}, "silky": {"slug": "silky"},
+                    "new-hull": {"slug": "new-hull"}},
+        "departures": {
+            "bella-2::2027-05-08": {"boat": "bella-2", "start": "2027-05-08",
+                                    "price": 576.0, "currency": "EUR"},
+            "silky::2027-05-15": {"boat": "silky", "start": "2027-05-15",
+                                  "price": 1200.0, "currency": "EUR"},
+            "bella-2::2030-01-01": {"boat": "bella-2", "start": "2030-01-01",
+                                    "price": 600.0, "currency": "EUR"},
+            "new-hull::2027-06-01": {"boat": "new-hull", "start": "2027-06-01",
+                                     "price": 900.0, "currency": "USD"},
+        },
+    }
+    ALIASES = {"aliases": {"bella-2": "bella-2", "silky": "dune-silky"}}
+    DEPARTURES = [
+        {"itinerary_id": "i1", "start": "2027-05-01"},
+        {"itinerary_id": "i1", "start": "2027-05-08"},
+        {"itinerary_id": "i2", "start": "2027-05-15"},
+        {"itinerary_id": "i1", "start": "2027-08-30"},
+    ]
+    BOAT_OF = {"i1": "bella-2", "i2": "dune-silky"}
+
+    def block(self):
+        from liveaboard.promote import divebooker_coverage
+        return divebooker_coverage(self.BOOK, self.ALIASES, self.DEPARTURES, self.BOAT_OF)
+
+    def test_it_counts_the_season_and_the_join(self):
+        block = self.block()
+        self.assertEqual(block["departures"], 4)
+        # 2030 is outside the season's own span, and the span comes from our
+        # departures rather than from a date anybody typed.
+        self.assertEqual(block["in_season"], 3)
+        self.assertEqual(block["matched"], 2)
+
+    def test_the_alias_is_what_joins_a_hull(self):
+        """`silky` is `dune-silky` here, and a slug that matched itself would
+        have joined nothing."""
+        self.assertEqual(self.block()["matched"], 2)
+
+    def test_a_hull_no_alias_maps_is_named(self):
+        """Counted would not do: only a name tells a new hull from a renamed
+        one, which is why `deals.unmatched` names its vessels too."""
+        self.assertEqual(self.block()["unmapped_vessels"], ["new-hull"])
+
+    def test_no_fare_reaches_the_block(self):
+        import json as _json
+        printed = _json.dumps(self.block())
+        for fare in ("576", "1200", "900", "600"):
+            self.assertNotIn(fare, printed, f"a fare reached the dataset: {fare}")
+        self.assertEqual(self.block()["fares"], "withheld")
+
+    def test_no_book_means_no_block(self):
+        from liveaboard.promote import divebooker_coverage
+        self.assertIsNone(divebooker_coverage(None, self.ALIASES, self.DEPARTURES, self.BOAT_OF))
+        self.assertIsNone(divebooker_coverage({"departures": {}}, self.ALIASES,
+                                              self.DEPARTURES, self.BOAT_OF))
+
+
+class TestTheShippedDatasetStatesNoDivebookerFare(unittest.TestCase):
+    """The publication gate for the rule above.
+
+    A guard over the code can be satisfied and the data still wrong, which is
+    the whole reason this project separates the two.
+    """
+
+    def setUp(self):
+        from published import raw
+        self.payload = raw()
+
+    def test_the_block_is_there_and_withholds(self):
+        block = self.payload.get("divebooker")
+        if block is None:
+            self.skipTest("no divebooker book is committed on this checkout")
+        self.assertEqual(block["fares"], "withheld")
+        self.assertEqual(block["matched"], block["in_season"],
+                         "a sailing this source lists in season that we do not "
+                         "carry is a row promote would have to create")
+
+    def test_no_departure_carries_a_divebooker_price(self):
+        for row in self.payload.get("departures", []):
+            for key in row:
+                self.assertNotIn("divebooker", key,
+                                 f"a divebooker figure reached a departure: {key}")

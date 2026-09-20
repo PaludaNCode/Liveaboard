@@ -1,0 +1,15 @@
+{
+ "_note": "divebooker.com hull slug -> this site's boat id. Hand-maintained, like data/padi_aliases.json and for the same reason: nothing automatic survives vessel names. Every pair below was confirmed by exact equality of the normalised vessel name the source states (Event.organizer) against ours, on 2026-09-20 — nine slugs match their boat id outright and `silky` is the one that does not, where the stated name is 'DUNE Silky'. A slug that stops matching must be re-checked by a person, never re-derived.",
+ "aliases": {
+  "alsuraya": "alsuraya",
+  "bella-2": "bella-2",
+  "blue-horizon": "blue-horizon",
+  "discovery-i": "discovery-i",
+  "discovery-ii": "discovery-ii",
+  "grand-discovery": "grand-discovery",
+  "red-sea-aggressor-ii": "red-sea-aggressor-ii",
+  "red-sea-aggressor-iv": "red-sea-aggressor-iv",
+  "red-sea-aggressor-v": "red-sea-aggressor-v",
+  "silky": "dune-silky"
+ }
+}

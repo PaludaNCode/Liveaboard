@@ -1995,6 +1995,81 @@ def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
     return (round(float(amount.get("amount", 0)), 2), amount.get("currency"))
 
 
+
+def divebooker_coverage(
+    book: dict[str, Any] | None,
+    aliases: dict[str, Any] | None,
+    departures: list[dict[str, Any]],
+    boat_of: dict[str, str],
+) -> dict[str, Any] | None:
+    """What a third seller's reading covers, and why its fares are not in it.
+
+    divebooker.com states a fare, a currency and both dates on every departure
+    it publishes — enough, on the face of it, to be a third price beside the
+    other two. **The face of it is wrong, and one row says so.** Red Sea
+    Aggressor IV on 2027-07-24 reads 5,398 USD against our 2,699: exactly
+    twice, on the same seven nights. Twelve more differ by smaller amounts on
+    the same two boats. So the unit of `Offer.price` is not established — a
+    per-person berth on most rows and something else on at least one — and a
+    figure whose unit this site cannot state is a figure it does not publish.
+    `A figure with no unit is not a per-trip figure` is the same rule, and it
+    cost Bella 2's gear line its total.
+
+    What *is* established is the join. Every one of the 148 sailings this
+    source lists inside the published season matches one of ours on
+    `(boat, date)` — the exact key, because a date has no spelling — and not
+    one is a sailing we do not already carry. So this block records coverage
+    and nothing else: no price reaches the dataset, no row gains a field, and
+    the page says nothing about a third seller.
+
+    Pure, like everything else here: same committed inputs, same block.
+    """
+    if not book or not (book.get("departures") or {}):
+        return None
+
+    alias = dict((aliases or {}).get("aliases") or {})
+    rows = (book.get("departures") or {}).values()
+    ours = {(boat_of.get(d["itinerary_id"]), d["start"]) for d in departures}
+    season = {start for _, start in ours}
+    first, last = (min(season), max(season)) if season else ("", "")
+
+    in_season = matched = 0
+    for row in rows:
+        boat = alias.get(row.get("boat"), row.get("boat"))
+        start = row.get("start") or ""
+        if not (first <= start <= last):
+            continue
+        in_season += 1
+        if (boat, start) in ours:
+            matched += 1
+
+    # Named rather than counted, the way `deals.unmatched` names a vessel:
+    # a hull this source lists and the alias map does not know is either a new
+    # boat or a renamed one, and only a person reading the name can tell.
+    unmapped = sorted(
+        slug for slug in (book.get("vessels") or {}) if slug not in alias
+    )
+    return {
+        "source": book.get("source") or "divebooker.com",
+        "read": book.get("collected") or "",
+        "vessels": len(book.get("vessels") or {}),
+        "departures": len(book.get("departures") or {}),
+        "in_season": in_season,
+        "matched": matched,
+        "unmapped_vessels": unmapped,
+        "fares": "withheld",
+        "note": (
+            "divebooker.com states a fare on every departure and this dataset "
+            "publishes none of them: the unit is not established. Red Sea "
+            "Aggressor IV on 2027-07-24 states exactly twice our fare for the "
+            "same seven nights, so `Offer.price` is a per-person berth on most "
+            "rows and something else on at least one. The join is what is "
+            "established: every in-season sailing this source lists is one "
+            "this dataset already carries. See docs/divebooker-limitations.md."
+        ),
+    }
+
+
 def promote(
     candidate: dict[str, Any],
     *,
@@ -2009,6 +2084,8 @@ def promote(
     cabins: dict[str, Any] | None = None,
     deals: dict[str, Any] | None = None,
     sales: dict[str, Any] | None = None,
+    divebooker: dict[str, Any] | None = None,
+    divebooker_aliases: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -2895,6 +2972,17 @@ def promote(
         "itineraries": itineraries,
         "departures": departures,
     }
+
+    # A third seller, recorded and not published. See `divebooker_coverage`:
+    # the join is exact and the fares are withheld because their unit is not
+    # established. `Dataset.from_dict` reads named keys only, so this reaches
+    # the file and never the page.
+    coverage = divebooker_coverage(
+        divebooker, divebooker_aliases, departures,
+        {i["id"]: i["boat_id"] for i in itineraries},
+    )
+    if coverage:
+        payload["divebooker"] = coverage
     # Any berth block at all, not just a ladder. PADI publishes a count and no
     # cabins, so a run with its book and no booking pages would otherwise ship
     # blocks whose seller index points into a `sellers` list that was never

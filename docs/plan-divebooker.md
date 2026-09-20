@@ -28,8 +28,14 @@ commit that closes a stage, never afterwards from memory.
 | 4 — what a page returns | **closed**: server-rendered JSON-LD, plain HTTP, no browser |
 | 5 — where the money is | **closed**: in the served bytes — `Event`+`Offer` per departure |
 | 6 — write the map | **closed**: `docs/sources/divebooker.com.md` |
-| 7 — fixtures | next: three Egyptian hulls are read and the bytes are worth keeping |
-| 8–14 | not started |
+| 7 — fixtures | **closed**: `tests/fixtures/divebooker-bella-2.jsonld.json`, real bytes |
+| 8 — the parser | **closed**: `scrape/divebooker_com.py`, `tools/fetch_divebooker.py` |
+| 9 — identity | **closed**: `data/divebooker_aliases.json`, ten hulls, all already in the fleet |
+| 10 — promote | **closed as far as it may go**: coverage recorded, every fare withheld |
+| 11 — the page | **not started, and blocked on stage 0** |
+| 12 — cadence | not started: no workflow fetches this on a schedule |
+| 13 — guards | **closed for what exists**: 17 tests, code and committed data |
+| 14 — ship | on the branch, not merged |
 
 Stage 0 now has its measurement. Divebooker states a fare, a currency and both
 dates on every departure, so it **can** be a third seller; it states no berth

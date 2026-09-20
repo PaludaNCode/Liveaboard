@@ -139,8 +139,12 @@ a price — the shape `jsonld.walk` flattens and a census is what makes visible.
 The working reading is that the `TouristTrip` chain is the **whole** departure
 list and the top-level Events are a capped ten with a booking URL attached;
 that ten appearing on two unrelated boats is what suggests a cap rather than a
-meaning. **Not settled** — it needs the dates of the ten held against the
-forty-nine, and that check belongs in the next probe, not in a parser.
+meaning. **Settled since, by reading the whole Egyptian fleet**: every boat selling
+more than ten sailings states exactly **ten** of the second kind — Alsuraya 10
+of 54, Blue Horizon 10 of 142, Red Sea Aggressor V 10 of 143 — and Bella 2,
+which sells three, states three. So the top-level Events are a capped ten with
+a booking url and the `TouristTrip` chain is the whole list. The fold takes the
+chain and lets the ten add a url.
 
 **Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
 Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
@@ -179,6 +183,48 @@ whether a slug is stable, is unasked.
   Whatever this source becomes, *places left* and *on sale* are not questions
   it can answer. `AggregateOffer` sits once per vessel page and is unread; it
   is the only remaining candidate for a low/high figure.
+
+## The fleet, read whole
+
+`tools/fetch_divebooker.py` read every hull the Egypt country page links, on
+2026-09-20: **10 vessels, 977 departures, no warnings**. All ten are boats this
+site already carries, matched by exact equality of the name the page states
+(`Event.organizer`) against ours — nine slugs equal their boat id and `silky`
+is `dune-silky`. `data/divebooker_aliases.json` holds the map, hand-maintained
+like PADI's.
+
+| | |
+|---|---|
+| Departures | 977, spanning 2026-09-23 to **2029-12-08** |
+| Priced | 977 of 977 |
+| Currencies | 570 USD, 407 EUR |
+| Lengths | 947 of seven nights; also 3, 9, 10, 11 and 14 |
+| Inside the published season | 148 |
+| Of those, joining one of ours on `(boat, date)` | **148** |
+
+Not one in-season sailing this source lists is a sailing this site does not
+already carry, so nothing here creates a row.
+
+## The fare, and why none of it is published
+
+The block `promote` writes states `fares: withheld`, and this is the
+measurement behind it. On the 70 in-season rows where both sellers quote the
+same currency, **57 agree to the cent**. Thirteen do not, on two boats:
+
+| Sailing | Ours | Theirs |
+|---|---|---|
+| Red Sea Aggressor IV, 2027-07-24 | 2,699 | **5,398** |
+| Red Sea Aggressor II, 2027-07-31 | 2,760 | 3,060 |
+| Blue Horizon, 2027-05-08 | 1,394 | 1,743 |
+| …ten more, 20–350 apart | | |
+
+**5,398 is exactly twice 2,699, on the same seven nights.** So `Offer.price` is
+a per-person berth on most rows and something else — a cabin, a couple, a
+package — on at least one, and the page never says which. That is the same
+shape as liveaboard.com's unitless gear figure, and it gets the same answer:
+the figure is kept in `data/divebooker.json` where a person can read it, and
+nothing totals it, compares it or prints it. The other 78 in-season rows quote
+EUR against our USD and cannot be compared without converting first.
 
 ## Not yet asked
 
