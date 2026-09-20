@@ -51,12 +51,22 @@ from probe_divebooker import repair_robots  # noqa: E402
 #: The two hulls every disagreement sits on, and one that agrees everywhere as
 #: the control. A probe pointed only at the anomaly cannot tell an anomaly
 #: from the site's normal shape.
-VESSELS = "red-sea-aggressor-iv-haz285,blue-horizon-haz133,bella-2-haz432"
+#:
+#: **Named, never spelled.** The first version of this probe typed
+#: `red-sea-aggressor-iv-haz285` and `blue-horizon-haz133` out of an earlier
+#: run's samples, and both are other boats: haz285 is Red Sea Aggressor *II*
+#: and haz133 is *Perjuangan Liveaboard, Indonesia*. The id is the site's and
+#: is not derivable from a name, so it comes out of the committed book — which
+#: got its own from the country page's links, which is the whole discipline.
+VESSELS = "red-sea-aggressor-iv,red-sea-aggressor-ii,bella-2"
+BOOK = Path("data/divebooker.json")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--vessels", default=VESSELS)
+    parser.add_argument("--vessels", default=VESSELS,
+                        help="boat slugs as the committed book names them")
+    parser.add_argument("--book", default=BOOK, type=Path)
     parser.add_argument("--dates", default="2027-07-24,2027-07-31,2027-05-08",
                         help="start dates to print every offer for")
     parser.add_argument("--delay", type=float, default=5.0)
@@ -68,8 +78,17 @@ def main() -> int:
         repair_robots(fetcher, host)
     wanted = {d.strip() for d in args.dates.split(",") if d.strip()}
 
-    for path in args.vessels.split(","):
-        path = "/" + path.strip().lstrip("/")
+    import json
+    vessels = json.loads(args.book.read_text(encoding="utf-8")).get("vessels") or {}
+
+    for slug in args.vessels.split(","):
+        slug = slug.strip()
+        record = vessels.get(slug)
+        if not record or not record.get("divebooker_id"):
+            print(f"\n== {slug}: not in {args.book}, so there is no id to ask "
+                  f"for — and typing one lands on another boat ==")
+            continue
+        path = f"/{slug}-{record['divebooker_id']}"
         try:
             result = fetcher.get(f"https://{db.HOST}{path}")
         except FetchBlocked as exc:
