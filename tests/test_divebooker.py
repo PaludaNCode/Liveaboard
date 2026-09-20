@@ -310,3 +310,51 @@ class TestTheSearchIsWalkedTheSiteSOwnWay(unittest.TestCase):
 
     def test_the_season_is_asked_in_this_sellers_own_vocabulary(self):
         self.assertEqual(db.SEASON_YM, ("202705", "202706", "202707", "202708"))
+
+
+class TestNoAliasContradictsTheNameBothSourcesState(unittest.TestCase):
+    """A hand-maintained pair may go beyond the rule; it may not go against it.
+
+    `tools/match_divebooker.py` states the rule the first ten pairs were made
+    by — the vessel name divebooker states, normalised, equals one of ours —
+    and it reproduces all ten, `silky` -> `dune-silky` included. What this
+    guards is the other direction: a pair in the file that the rule can make
+    *and disagrees with* is a typo, and a typo here serves one boat's
+    departures under another boat's name with the row count still right. A
+    slug the rule cannot pair is left alone, because a person reading two
+    names is allowed to know something a string comparison does not.
+    """
+
+    ROOT = Path(__file__).resolve().parents[1]
+
+    def setUp(self):
+        import sys
+        sys.path.insert(0, str(self.ROOT / "tools"))
+        from match_divebooker import compare  # noqa: PLC0415
+        self.compare = compare
+        from published import raw  # noqa: PLC0415
+        self.book = raw("divebooker.json")
+        self.aliases = json.loads(
+            (self.ROOT / "data" / "divebooker_aliases.json").read_text(
+                encoding="utf-8"))["aliases"]
+        self.boats = raw()["boats"]
+
+    def test_every_pair_the_rule_can_make_the_file_agrees_with(self):
+        ours: dict[str, set[str]] = {}
+        for boat in self.boats:
+            for key in (self.compare(boat["id"]), self.compare(boat["name"])):
+                ours.setdefault(key, set()).add(boat["id"])
+        for slug, vessel in (self.book.get("vessels") or {}).items():
+            if slug not in self.aliases:
+                continue
+            hits = ours.get(self.compare(vessel.get("name") or slug), set())
+            if len(hits) == 1:
+                self.assertEqual(
+                    self.aliases[slug], next(iter(hits)),
+                    f"{slug} states {vessel.get('name')!r}, which is one of "
+                    f"our boats by name, and the alias file says otherwise")
+
+    def test_every_alias_names_a_boat_this_site_carries(self):
+        ids = {boat["id"] for boat in self.boats}
+        for slug, boat_id in self.aliases.items():
+            self.assertIn(boat_id, ids, f"{slug} maps to a boat that is not here")
