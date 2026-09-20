@@ -99,6 +99,41 @@ def balanced(text: str, start: int) -> str | None:
     return None
 
 
+def enclosing(text: str, position: int) -> str | None:
+    """The smallest JSON object containing `position`.
+
+    A fee block is worth nothing without the trip it belongs to, and the
+    payload is one line, so the only way to ask *whose* block this is, is to
+    find what encloses it. Forward scan with a stack rather than a backwards
+    walk, because reading backwards cannot tell a brace inside prose from a
+    brace that opened something.
+    """
+    stack: list[int] = []
+    best: tuple[int, int] | None = None
+    index, in_string, escaped = 0, False, False
+    while index < len(text):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+        elif char == '"':
+            in_string = True
+        elif char == "{":
+            stack.append(index)
+        elif char == "}":
+            if stack:
+                start = stack.pop()
+                if start <= position <= index:
+                    if best is None or (index - start) < (best[1] - best[0]):
+                        best = (start, index)
+        index += 1
+    return text[best[0]:best[1] + 1] if best else None
+
+
 def show(label: str, text: str, needle: str, span: int = 260, most: int = 3) -> int:
     found = 0
     for match in re.finditer(re.escape(needle), text, re.I):
@@ -203,6 +238,36 @@ def main() -> int:
                 break
         if not found:
             print(f"  {name}: no object under that key")
+    print()
+
+    print("== what encloses a details block: whose fees are these? ==")
+    identity = ("title", "name", "id", "nights", "numberDives", "duration",
+                "departurePort", "arrivalPort", "programm", "divesiteTitle",
+                "inseanqCabinTypeId", "orderId", "url")
+    shown = 0
+    for match in re.finditer(r'"details"\s*:\s*(?=\{)', body):
+        parent = enclosing(body, match.start())
+        if parent is None:
+            continue
+        try:
+            node = json.loads(parent)
+        except json.JSONDecodeError:
+            print(f"  [#{shown + 1}] enclosing object does not parse "
+                  f"({len(parent)} chars): {parent[:160]!r}")
+            shown += 1
+            if shown >= args.each + 2:
+                break
+            continue
+        print(f"  [#{shown + 1}] keys: {sorted(node)}")
+        for field in identity:
+            if field in node:
+                value = json.dumps(node[field], ensure_ascii=False)
+                print(f"      {field:<18} {value[:120]}")
+        shown += 1
+        if shown >= args.each + 2:
+            break
+    if not shown:
+        print("  nothing encloses it, which would be a finding of its own")
     print()
 
     book = db.vessel(html, path)
