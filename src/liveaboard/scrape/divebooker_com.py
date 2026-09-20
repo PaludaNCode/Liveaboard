@@ -20,6 +20,14 @@ priced from the trip's side:
   ``duration``, ``organizer``, ``eventStatus``, ``description`` and ``image``.
   Ten on each of the two larger boats and three on Bella 2, which sells three.
 
+**`AggregateOffer` is not a fare and is deliberately unread.** Bella 2 states
+`lowPrice 143, highPrice 144, offerCount 3` in EUR beside three sailings at
+576, 576 and 579 — which is each fare over *four*, on a trip of three nights.
+So it is a per-day rate on days aboard rather than nights, the same
+denominator `FeeBasis.PER_DAY` means, and reading it as a trip price would
+quarter every fare on the page. A figure whose unit the source does not state
+is a figure this project does not total.
+
 A parser that collects ``@type == Event`` therefore gets every sailing twice,
 one copy unpriced. :func:`departures` reads both and folds them on the start
 date — the same key `promote` merges the other two sources on, because a date
@@ -153,14 +161,13 @@ class VesselBook:
     slug: str
     divebooker_id: str | None = None
     name: str | None = None
-    operator: str | None = None
     country: str | None = None
     departures: list[Departure] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {"slug": self.slug}
-        for key in ("divebooker_id", "name", "operator", "country"):
+        for key in ("divebooker_id", "name", "country"):
             if getattr(self, key):
                 out[key] = getattr(self, key)
         return out
@@ -269,21 +276,37 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
 def vessel(html: str, path: str) -> VesselBook:
     """Parse one vessel page into a book.
 
-    ``Product.brand`` is the operator, which is the same node PADI states it
-    in — so preferring it over anything printed in a title is not a judgement
-    call about which source is nicer, it is the vessel page's own statement
-    about the company. `A fleet is not an operator` still applies.
+    **This source states no operator, and the parser must not invent one.**
+    The obvious candidate is `Product.brand`, which is where PADI states the
+    company — here it reads `{"@type": "Brand", "name": "Divebooker.com"}`,
+    the seller. The next candidate is `Event.organizer`, and on Bella 2 that
+    is `{"@type": "Organization", "name": "Bella 2"}` — the hull. Neither
+    names a company, so nothing here does. The operator this site publishes
+    goes on coming from the vessel's own page on liveaboard.com.
+
+    Caught by a fixture rather than by reasoning: the first version of this
+    function read `Product.brand` and would have published *Divebooker.com*
+    as the operator of every Egyptian boat it read.
+
+    The name is the hull as the page's own `organizer` gives it — `Bella 2`
+    rather than `Product.name`'s *Bella 2 Liveaboard, Egypt*, which is a
+    page title with the country appended.
     """
     slug, hull_id = split_slug(path)
     book = VesselBook(slug=slug, divebooker_id=hull_id)
 
+    # Two passes rather than one, because the fallback must not win by
+    # arriving first: the Product node is early in the document and the
+    # Events carrying an organizer are late, so a single pass that took
+    # whichever came first took the page title every time.
+    organizer = product = None
     for node in jsonld.walk_documents(html):
-        if _is(node, "Product"):
-            book.name = book.name or _text(node.get("name"))
-            brand = _first(node.get("brand"))
-            book.operator = book.operator or _text(brand)
-        elif _is(node, "Event") and not book.country:
-            book.country = _text(node.get("location"))
+        if _is(node, "Event"):
+            book.country = book.country or _text(node.get("location"))
+            organizer = organizer or _text(_first(node.get("organizer")))
+        elif _is(node, "Product"):
+            product = product or _text(node.get("name"))
+    book.name = organizer or product
 
     book.departures, book.warnings = departures(html)
     if not book.departures:
