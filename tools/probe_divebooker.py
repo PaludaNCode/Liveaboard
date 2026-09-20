@@ -219,6 +219,8 @@ def main() -> int:
                         help="seconds between requests; the default is this "
                              "project's pace for a host nobody has checked")
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
+    parser.add_argument("--dump-robots", action="store_true",
+                        help="print robots.txt verbatim")
     parser.add_argument("--dump-shell", action="store_true",
                         help="print the first 2 KB of each entry page's markup")
     args = parser.parse_args()
@@ -304,6 +306,13 @@ def main() -> int:
     text = raw.body if raw else served
     disallowed = stated_disallows(text)
     orphans = orphaned_rules(rules, fetcher.user_agent, disallowed, base)
+    if args.dump_robots and text:
+        # Verbatim, because the decision about a refused path is taken by a
+        # person reading the file rather than by a parser's summary of it.
+        print("  ---- robots.txt as served ----")
+        for line in text.splitlines():
+            print(f"  | {line}")
+        print("  ------------------------------")
     print(f"  Disallow: paths in the file      : {len(disallowed)}")
     print(f"  of those, can_fetch() says yes   : {len(orphans)}")
     for line in disallowed[:8]:

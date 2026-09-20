@@ -83,6 +83,10 @@ on:
         description: "Vessel slug for the flight probe, as the book names it"
         type: string
         default: "red-sea-aggressor-ii"
+      divebooker_dump_robots:
+        description: "Print divebooker's robots.txt verbatim"
+        type: boolean
+        default: false
       divebooker_dump_shell:
         description: "Print the first 2 KB of each divebooker page's markup"
         type: boolean
@@ -287,6 +291,7 @@ jobs:
           python3 tools/probe_divebooker.py \
             --sample "${{ inputs.divebooker_sample || '3' }}" \
             --max-requests "${{ inputs.divebooker_requests || '25' }}" \
+            ${{ inputs.divebooker_dump_robots && '--dump-robots' || '' }} \
             ${{ inputs.divebooker_dump_shell && '--dump-shell' || '' }}
 
       # What a departure node actually states — which is what decides whether
