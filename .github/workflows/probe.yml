@@ -367,7 +367,13 @@ jobs:
       # counts what a join would do before anything is parsed.
       - name: Can a fee block be attached to a departure
         if: contains(inputs.divebooker_ask, 'feejoin')
-        run: python3 tools/probe_divebooker_fee_join.py
+        # `divebooker_vessels` is the hull count here as well, and 0 is the
+        # whole fleet: a join rate measured over an alphabetical handful
+        # excludes whichever boat raised the doubt, which is how this one
+        # nearly got believed.
+        run: |
+          python3 tools/probe_divebooker_fee_join.py \
+            --vessels "${{ inputs.divebooker_vessels || '8' }}"
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different

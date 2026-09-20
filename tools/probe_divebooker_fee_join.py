@@ -56,13 +56,19 @@ def loose(name: str) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--book", default=Path("data/divebooker.json"), type=Path)
-    parser.add_argument("--vessels", type=int, default=8)
+    parser.add_argument("--vessels", type=int, default=8,
+                        help="hulls to read, 0 for the whole fleet — and the "
+                             "fleet is what a join rate has to be measured "
+                             "over, since an alphabetical sample excludes "
+                             "whichever boat raised the doubt")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
 
     vessels = json.loads(args.book.read_text(encoding="utf-8")).get("vessels") or {}
-    chosen = [s for s in sorted(vessels) if vessels[s].get("divebooker_id")][: args.vessels]
+    chosen = [s for s in sorted(vessels) if vessels[s].get("divebooker_id")]
+    if args.vessels:
+        chosen = chosen[: args.vessels]
 
     fetcher = PoliteFetcher(snapshot_dir=args.snapshots, delay=args.delay)
     for host in (db.HOST, f"www.{db.HOST}"):
@@ -107,14 +113,12 @@ def main() -> int:
         totals["exact"] += len(exact)
         totals["loose"] += len(loose_hits)
 
-        print(f"\n== {path} ==")
-        print(f"  {len(named)} fee block(s), {len(shapes)} distinct; "
-              f"{len(trips)} trip name(s) in the JSON-LD")
-        print(f"  exact matches {len(exact)}, loose {len(loose_hits)}")
-        for name, _ in named[:4]:
-            print(f"    block: {SUFFIX.sub('', name)!r}")
-        for trip in sorted(trips)[:4]:
-            print(f"    trip : {trip!r}")
+        missed = [SUFFIX.sub("", name) for name, _ in named if name not in exact]
+        print(f"  {path:<40} {len(named):>3} block(s), {len(shapes)} distinct;"
+              f" {len(trips):>3} trip(s); exact {len(exact):>3}, "
+              f"loose {len(loose_hits):>3}"
+              f"{'  MISSED: ' + '; '.join(m[:48] for m in missed[:3]) if missed else ''}",
+              flush=True)
 
     print(f"\n== over {totals['hulls']} hull(s) ==")
     print(f"  fee blocks {totals['blocks']}, trips {totals['trips']}")
