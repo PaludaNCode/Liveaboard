@@ -47,7 +47,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Any, Iterator
+from typing import Any, Callable, Iterable, Iterator
 
 from . import jsonld
 
@@ -278,6 +278,60 @@ def hull_links(html: str) -> list[str]:
     hulls worldwide and does not say which sea any of them is in.
     """
     return list(dict.fromkeys(m.group(1) for m in HULL_HREF.finditer(html)))
+
+
+MAX_PAGES = 12
+"""How deep one month's search is walked before the walk says so and stops.
+
+Twenty a page against a stated 75 is four pages, so this is loose. It is not
+a belief about the fleet's size: a paginator that stops changing is caught by
+the repeat rule in :func:`walk_search`, and this bounds only a paginator that
+never repeats — which would be the site answering something other than the
+question asked.
+"""
+
+
+def walk_search(fetch: Callable[[str], str | None],
+                months: Iterable[str], entity: str = EGYPT,
+                max_pages: int = MAX_PAGES) -> tuple[list[str], list[str]]:
+    """Every hull the search links across those months, and what the walk saw.
+
+    `fetch(path)` returns the page's bytes or ``None`` for a page that could
+    not be read; the caller owns the transport, so this is testable without
+    one.
+
+    **Two ways a walk ends, and neither of them is a page number.** An empty
+    page is the site saying there is no more. A page repeating one this month
+    has already shown is the site ignoring `p=` — which is what nine other
+    spellings of it do, silently, so it is the shape to expect rather than a
+    surprise. A page that cannot be read ends that month and says so, because
+    a walk that carried on would report the rest of the month as absent.
+    """
+    found: list[str] = []
+    seen: set[str] = set()
+    notes: list[str] = []
+    for ym in months:
+        shown: list[frozenset[str]] = []
+        for page in range(1, max_pages + 1):
+            body = fetch(search_path(ym, page, entity=entity))
+            if body is None:
+                notes.append(f"{ym} p{page}: unread, so this run knows nothing "
+                             f"about the rest of that month")
+                break
+            linked = hull_links(body)
+            here = frozenset(linked)
+            fresh = [path for path in linked if path not in seen]
+            notes.append(f"{ym} p{page}: {len(linked)} linked, {len(fresh)} new")
+            found.extend(fresh)
+            seen.update(linked)
+            if not linked or here in shown:
+                break
+            shown.append(here)
+        else:
+            notes.append(f"{ym}: still finding hulls at page {max_pages} — "
+                         f"stopped there, and this run does not claim the "
+                         f"month is complete")
+    return found, notes
 
 
 def split_slug(path: str) -> tuple[str, str | None]:

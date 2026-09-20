@@ -358,3 +358,60 @@ class TestNoAliasContradictsTheNameBothSourcesState(unittest.TestCase):
         ids = {boat["id"] for boat in self.boats}
         for slug, boat_id in self.aliases.items():
             self.assertIn(boat_id, ids, f"{slug} maps to a boat that is not here")
+
+
+class TestTheWalkStopsOnWhatItSeesNotOnACount(unittest.TestCase):
+    """A month ends on an empty page or on a repeat, and never on a number.
+
+    The failure this guards is the one the measurement found: nine wrong
+    paging parameters each return the **first page again**, silently. A walk
+    that trusted `p=` without watching what came back would follow that
+    forever and report the same twenty boats as a whole fleet.
+    """
+
+    def walk(self, pages, months=("202705", "202706"), **kw):
+        return db.walk_search(lambda path: pages.get(path), months, **kw)
+
+    def link(self, *slugs):
+        return "".join(f'<a href="/{s}">x</a>' for s in slugs)
+
+    def test_a_repeat_of_this_months_first_page_ends_the_month(self):
+        pages = {db.search_path("202705", 1): self.link("a-haz1", "b-haz2"),
+                 db.search_path("202705", 2): self.link("c-haz3"),
+                 db.search_path("202705", 3): self.link("a-haz1", "b-haz2"),
+                 db.search_path("202705", 4): self.link("d-haz4")}
+        found, _ = self.walk(pages, months=("202705",))
+        self.assertEqual(found, ["/a-haz1", "/b-haz2", "/c-haz3"])
+
+    def test_an_empty_page_ends_the_month(self):
+        pages = {db.search_path("202705", 1): self.link("a-haz1"),
+                 db.search_path("202705", 2): "",
+                 db.search_path("202705", 3): self.link("z-haz9")}
+        found, _ = self.walk(pages, months=("202705",))
+        self.assertEqual(found, ["/a-haz1"])
+
+    def test_a_month_that_repeats_the_previous_months_page_still_walks(self):
+        """Seen-before is per month, or month two would stop at page one."""
+        pages = {db.search_path("202705", 1): self.link("a-haz1"),
+                 db.search_path("202705", 2): "",
+                 db.search_path("202706", 1): self.link("a-haz1"),
+                 db.search_path("202706", 2): self.link("b-haz2"),
+                 db.search_path("202706", 3): ""}
+        found, _ = self.walk(pages)
+        self.assertEqual(found, ["/a-haz1", "/b-haz2"])
+
+    def test_a_paginator_that_never_repeats_is_bounded_and_says_so(self):
+        class Endless(dict):
+            def get(self, path, default=None):  # noqa: D102
+                page = path.rsplit("=", 1)[-1]
+                return f'<a href="/boat-{page}-haz{page}">x</a>'
+        found, notes = db.walk_search(Endless().get, ["202705"], max_pages=4)
+        self.assertEqual(len(found), 4)
+        self.assertTrue(any("does not claim the month is complete" in n
+                            for n in notes), notes)
+
+    def test_a_page_that_cannot_be_read_ends_the_month_and_says_so(self):
+        pages = {db.search_path("202705", 1): self.link("a-haz1")}
+        found, notes = self.walk(pages, months=("202705",))
+        self.assertEqual(found, ["/a-haz1"])
+        self.assertTrue(any("unread" in n for n in notes), notes)

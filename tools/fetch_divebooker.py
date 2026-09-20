@@ -57,15 +57,6 @@ from probe_divebooker import repair_robots  # noqa: E402
 
 BOOK = Path("data/divebooker.json")
 
-MAX_PAGES = 12
-"""How deep one month's search is walked before the run says so and stops.
-
-Twenty a page against a stated 75 is four pages, so this is loose. It is not a
-belief about the fleet's size: a paginator that stops changing is caught by
-the repeat rule below, and this only bounds a paginator that never repeats —
-which would be the site answering something other than the question asked.
-"""
-
 MIN_BOOK_RATIO = 0.6
 """How much of the previous book a full run must reproduce before it may replace it.
 
@@ -148,34 +139,18 @@ def main() -> int:
             (args.save_html / name).write_text(result.body, encoding="utf-8")
 
     months = [m.strip() for m in args.months.split(",") if m.strip()]
-    hulls: list[str] = []
-    seen: set[str] = set()
-    for ym in months:
-        shown: list[frozenset[str]] = []
-        for page in range(1, MAX_PAGES + 1):
-            path = db.search_path(ym, page, entity=args.entity)
-            result = get(base + path)
-            if result is None:
-                break
-            keep(result, f"boatsearch-{ym}-{page}.html")
-            linked = db.hull_links(result.body)
-            here = frozenset(linked)
-            fresh = [h for h in linked if h not in seen]
-            print(f"  {ym} p{page}: {len(linked):>3} linked, {len(fresh):>3} new",
-                  flush=True)
-            hulls.extend(fresh)
-            seen.update(linked)
-            # Two ways a walk ends, and neither of them is a page number. An
-            # empty page is the site saying there is no more; a page repeating
-            # one this month already showed is the site ignoring `p=` — which
-            # is what nine other spellings of it did, so it is the shape to
-            # expect rather than a surprise.
-            if not linked or here in shown:
-                break
-            shown.append(here)
-        else:
-            print(f"  {ym}: still finding hulls at page {MAX_PAGES} — stopping "
-                  f"there, and this run does not claim the month is complete")
+
+    def search(path: str):
+        result = get(base + path)
+        if result is None:
+            return None
+        keep(result, f"{path.split('?', 1)[0].strip('/')}-"
+                     f"{path.split('?', 1)[1].replace('&', '-')}.html")
+        return result.body
+
+    hulls, notes = db.walk_search(search, months, entity=args.entity)
+    for line in notes:
+        print(f"  {line}", flush=True)
 
     print(f"the search links {len(hulls)} distinct hull(s) over "
           f"{len(months)} month(s)")
