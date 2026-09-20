@@ -37,6 +37,10 @@ before deciding what the third seller is allowed to say on the page.
    exactly twice — and twelve more rows differ by 20 to 350 on two boats,
    against 57 that agree to the cent. So the figure is a per-person berth on
    most rows and something else on at least one, and the page never labels it.
+   Not a parser artefact: a date can carry several offers — Red Sea Aggressor
+   IV states 161 over 143 sailings, and the book keeps the cheapest, which
+   moved 30 dates — but every one of the 13 disagreeing rows states exactly
+   one offer on its date, the 5,398 included.
    Every fare is kept in `data/divebooker.json` and **none reaches the
    dataset**: `promote` writes `divebooker.fares: "withheld"` and a guard
    asserts no departure carries a divebooker figure. Until somebody reads a

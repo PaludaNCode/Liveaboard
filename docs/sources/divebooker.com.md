@@ -218,13 +218,25 @@ same currency, **57 agree to the cent**. Thirteen do not, on two boats:
 | Blue Horizon, 2027-05-08 | 1,394 | 1,743 |
 | …ten more, 20–350 apart | | |
 
-**5,398 is exactly twice 2,699, on the same seven nights.** So `Offer.price` is
-a per-person berth on most rows and something else — a cabin, a couple, a
-package — on at least one, and the page never says which. That is the same
-shape as liveaboard.com's unitless gear figure, and it gets the same answer:
-the figure is kept in `data/divebooker.json` where a person can read it, and
-nothing totals it, compares it or prints it. The other 78 in-season rows quote
-EUR against our USD and cannot be compared without converting first.
+**5,398 is exactly twice 2,699, on the same seven nights** — and the obvious
+explanation is wrong. A date can carry more than one offer here: Red Sea
+Aggressor IV states **161 offers over 143 sailings**, and `departures()` now
+keeps the cheapest of them, which changed 30 dates across the fleet. It did
+not change this one. 2027-07-24 states **one** offer, at 5,398, while the
+weeks either side of it state one each at 2,799 and 2,899, and every one of
+the 13 disagreeing rows has a single offer on its date.
+
+So the doubling is not a parser artefact and not a second cabin class. It is
+the seller stating a number this site cannot account for, and `Offer.price` is
+therefore a per-person berth on most rows and something unestablished on at
+least one. That is the same shape as liveaboard.com's unitless gear figure and
+it gets the same answer: the figure is kept in `data/divebooker.json` where a
+person can read it, and nothing totals it, compares it or prints it. The other
+78 in-season rows quote EUR against our USD and cannot be compared without
+converting first.
+
+**The next probe is a booking page**, if one can be reached without a path
+robots.txt refuses — that is where a per-person figure would say so.
 
 ## Not yet asked
 
