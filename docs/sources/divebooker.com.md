@@ -265,13 +265,31 @@ What the payload adds over the JSON-LD:
 | **A boat's own minimum** | `minPrice` and `minPriceDay` on each boat card — 179 and 156 for one hull, beside `currencyId` |
 | **A currency table** | `currencies: {"current": "USD", …}` and `rates: {"1":"1.0000","2":"0.8708","4":"33.3167",…}`, keyed by the same numeric `currencyId` |
 
-**The currency table is the thing to be careful about.** The page states the
-currency it rendered *in*, and carries the rates to convert. So a `price` read
-from this source is denominated in whatever currency the response chose — and
-the book's 570 USD against 407 EUR may be a fact about the boats or a fact
-about the requests. Until that is settled, comparing a divebooker figure with
-ours is comparing against an unknown base, which is a second reason the fares
-stay withheld.
+**The currency table is the thing to be careful about, and it turned out to be
+the answer.** Read again 2026-09-20 over four hulls
+([run 35524478377](https://github.com/PaludaNCode/Liveaboard/actions/runs/35524478377),
+confirmed against the shipped parser in
+[35524672758](https://github.com/PaludaNCode/Liveaboard/actions/runs/35524672758)):
+
+| Hull | `Offer.priceCurrency` | `currencies.current` |
+|---|---|---|
+| Seawolf Steel | EUR | **USD** |
+| Unity | EUR | **USD** |
+| Iceberg | EUR | **USD** |
+| Red Sea Aggressor IV | USD | **USD** |
+
+USD is the only currency code anywhere in those bytes, and the rates beside it
+are keyed by currency id — `"1":"1.0000"`, `"2":"0.8708"` — so the page is
+priced in id 1 and knows what a euro costs. `?currency=EUR`, `?currency=USD`
+and `?cur=USD` change nothing: same numbers, same labels, same `current`.
+
+So **`Offer.priceCurrency` is a static per-vessel label that does not describe
+`Offer.price`**, and `divebooker_com.page_currency` reads the payload instead.
+The other two sellers agree, which is how it was noticed rather than how it is
+decided: 645 of 777 joined sailings carry the same number as a figure
+liveaboard.com or PADI states in **dollars**, and where liveaboard.com itself
+quotes euros the divebooker figure is 1.148x it — 1/0.8708, the rate this
+payload publishes.
 
 **And the fee book is not hiding client-side.** 253 distinct keys in the
 payload, and the money-shaped ones are the seventeen above: **not one**
