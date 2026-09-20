@@ -69,6 +69,9 @@ def main() -> int:
     parser.add_argument("--book", default=BOOK, type=Path)
     parser.add_argument("--dates", default="2027-07-24,2027-07-31,2027-05-08",
                         help="start dates to print every offer for")
+    parser.add_argument("--verbatim", action="store_true",
+                        help="print the whole node for every offer on those "
+                             "dates, rather than the fields this probe chose")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
@@ -126,6 +129,15 @@ def main() -> int:
             print(f"    {start}  {node.get('price')} {node.get('priceCurrency')}"
                   f"  valid {node.get('validFrom') or '-'}..{node.get('validThrough') or '-'}"
                   f"  name={node.get('name')!r}")
+            if args.verbatim:
+                # The 2.000x row is the whole case for withholding, and what
+                # would explain it is a field this probe did not think to
+                # print — an occupancy, a cabin class, a second traveller. So
+                # on request it prints the node and lets a person read it,
+                # rather than deciding in advance which keys matter.
+                for line in json.dumps(node, indent=2,
+                                       ensure_ascii=False).splitlines():
+                    print(f"      {line}")
 
         for event, offer in [(n, n.get("offers")) for n in jsonld.walk_documents(result.body)
                              if n.get("@type") == "Event" and n.get("offers")]:

@@ -345,7 +345,11 @@ jobs:
       # published: what `Offer.price` counts. See the tool's own docstring.
       - name: Ask what one divebooker fare counts
         if: inputs.divebooker_fare
-        run: python3 tools/probe_divebooker_fare.py
+        run: |
+          python3 tools/probe_divebooker_fare.py \
+            --vessels red-sea-aggressor-iv \
+            --dates 2027-07-24,2027-07-17,2027-07-31 \
+            --verbatim
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
