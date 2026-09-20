@@ -106,6 +106,52 @@ departures on Pearl of Papua. That is liveaboard.com's vessel-month page
 without the month selector, and it is the cheapest shape any of the three
 sources has offered.
 
+### What a departure states
+
+Read 2026-09-20 by `tools/probe_divebooker_departures.py` over three Egyptian
+hulls the Egypt country page links —
+[run 35479952153](https://github.com/PaludaNCode/Liveaboard/actions/runs/35479952153).
+**219 `Event` nodes.** Every one of them carries:
+
+| Key | Value |
+|---|---|
+| `name` | *North Wrecks, Ras Mohamed, Tiran, Brothers & Safaga, Egypt* |
+| `startDate` / `endDate` | `2026-10-10` / `2026-10-17`, plain ISO dates |
+| `location` | `Egypt` — the country, not the port |
+
+And every `Offer` carries `price`, `priceCurrency` and `availability`. So this
+source states a fare, a currency and a date to key on, which is the whole of
+what a third seller needs.
+
+**Two nestings state the same sailing, and only one of them is priced.** Of
+those 219 Events, **23 carry `offers`** — and that is not 23 sailings out of
+219. The page publishes each trip twice over:
+
+- `Offer` → `itemOffered` → `TouristTrip` → `subjectOf` → `Event`. Discovery II
+  has 49 of these, Bella 2 has 3. The `Offer` here carries `name`,
+  `itemOffered` and `validThrough`.
+- a top-level `Event` carrying `offers`, plus `url`, `id`, `duration`,
+  `organizer`, `eventStatus`, `description` and `image`. **Ten on each of the
+  two larger boats and three on Bella 2**, which has three sailings in total.
+
+A parser collecting `@type == Event` gets each sailing twice, one copy without
+a price — the shape `jsonld.walk` flattens and a census is what makes visible.
+The working reading is that the `TouristTrip` chain is the **whole** departure
+list and the top-level Events are a capped ten with a booking URL attached;
+that ten appearing on two unrelated boats is what suggests a cap rather than a
+meaning. **Not settled** — it needs the dates of the ten held against the
+forty-nine, and that check belongs in the next probe, not in a parser.
+
+**Both currencies, in one fleet.** 13 offers in EUR and 10 in USD across three
+Egyptian boats — Discovery II quotes EUR 1,254 and the boat above it USD 2,760.
+`changes.repriced`'s rule already covers what that means for a diff: a fare in
+a different currency has not moved.
+
+**Three of the three hulls read are already in this fleet** — `bella-2-haz432`
+and `discovery-ii-haz395` among them — so the Egypt country page is a working
+entry point and the boats join ours by name. What an id is keyed on, and
+whether a slug is stable, is unasked.
+
 ## What is ruled out
 
 - **No browser.** Seven pages read over plain `urllib`, every one of them
@@ -127,13 +173,22 @@ sources has offered.
   with `TouristDestination×1, ItemList×1` and no priced node — a listing with
   nothing in it, which is the source's own way of saying so, and not the same
   as a page that failed. The distinction `carry_unread` exists for.
+- **No berth count, and no list price.** `Offer.availability` is
+  `https://schema.org/InStock` — a state, not a number — on every offer read,
+  and nothing in 219 departures states a struck-through or previous price.
+  Whatever this source becomes, *places left* and *on sale* are not questions
+  it can answer. `AggregateOffer` sits once per vessel page and is unread; it
+  is the only remaining candidate for a low/high figure.
 
 ## Not yet asked
 
-- Which of the 516 hulls are Egyptian. `/egypt-daz3881` is the country page and
-  has not been read; `king-snefro-5-haz10` and `snefro-target-haz1` are Egyptian
-  hulls found in the sitemap, so the family is not region-scoped.
-- What one `Event`/`Offer` actually holds — field names, currency, whether a
-  berth count or a list price is in there. That is the next probe, and the one
-  that decides whether stage 0 is a third seller or a third opinion.
-- Whether any fee disclosure exists at all. Nothing read so far carries one.
+- **Which nesting is the departure list.** The working reading above, held
+  against the dates: do the ten top-level Events appear among the forty-nine?
+  Everything a parser does here depends on that answer.
+- **How many Egyptian hulls there are.** Three were read; the country page's
+  own link count is in the run log and the fleet has not been enumerated.
+- **What `AggregateOffer` holds.** One per vessel page, unread, and the last
+  place a low/high figure could be.
+- **Whether any fee disclosure exists at all.** Nothing read so far carries
+  one, and *no fee lines means nobody looked* — so this is a question, not a
+  finding that the source charges nothing.

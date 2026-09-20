@@ -28,12 +28,14 @@ commit that closes a stage, never afterwards from memory.
 | 4 — what a page returns | **closed**: server-rendered JSON-LD, plain HTTP, no browser |
 | 5 — where the money is | **closed**: in the served bytes — `Event`+`Offer` per departure |
 | 6 — write the map | **closed**: `docs/sources/divebooker.com.md` |
-| 7 — fixtures | next, and it needs one Egyptian hull read in full |
+| 7 — fixtures | next: three Egyptian hulls are read and the bytes are worth keeping |
 | 8–14 | not started |
 
-The open question the next probe answers is not *where* a price is but *what a
-departure node holds* — currency, berth count, list price, any fee at all —
-because that is what decides stage 0.
+Stage 0 now has its measurement. Divebooker states a fare, a currency and both
+dates on every departure, so it **can** be a third seller; it states no berth
+count and no list price, so it can never fill the *places left* or *on sale*
+columns. The remaining question is not what it could do but what it should,
+and that is the owner's.
 
 ## What is already done
 
