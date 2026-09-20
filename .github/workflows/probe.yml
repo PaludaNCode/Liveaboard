@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -340,6 +340,13 @@ jobs:
       - name: Ask what currency a divebooker price is in
         if: contains(inputs.divebooker_ask, 'currency')
         run: python3 tools/probe_divebooker_currency.py
+
+      # A keyword sweep said there is no fee book on the vessel page. The
+      # page has a *Trip & price details* panel, and a sweep answers only
+      # about the words it was given, so this enumerates the payload instead.
+      - name: Read a vessel page's trip and price details
+        if: contains(inputs.divebooker_ask, 'details')
+        run: python3 tools/probe_divebooker_details.py
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different

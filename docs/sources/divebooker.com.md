@@ -312,8 +312,10 @@ streamed.
 - **No price in the markup.** Price-shaped strings in the HTML: **0**, on every
   page including the ones carrying 54 priced JSON-LD nodes. A selector-based
   parser would find nothing at all here.
-- **`/boatsearch`, `/destinations/`, `/countries/`, `/aquatories/` are refused**
-  by the file. The parser permits the first; that is not permission.
+- **`/destinations/`, `/countries/` and `/aquatories/` are refused** by the
+  file, to `*`, and stay unavailable. `/boatsearch` is **not** among them —
+  that `Disallow` sits in the `turnitinbot` record, as the robots section
+  above sets out — and it is the entry point the fleet is discovered from.
 - **A port page can be empty.** `/philippines-dalaguete-eaz17470` answers 200
   with `TouristDestination×1, ItemList×1` and no priced node — a listing with
   nothing in it, which is the source's own way of saying so, and not the same
@@ -324,6 +326,13 @@ streamed.
   Whatever this source becomes, *places left* and *on sale* are not questions
   it can answer. `AggregateOffer` sits once per vessel page and is unread; it
   is the only remaining candidate for a low/high figure.
+- **"No fee book on the vessel page" is a keyword sweep, not a census.** The
+  claim below rests on 253 payload keys, none matching `fee`, `extra`,
+  `includ` or `exclud`. A panel headed *Trip & price details* is exactly what
+  such a sweep misses, since its fields may be called anything;
+  `tools/probe_divebooker_details.py` enumerates every key instead of matching
+  a list of words, and until it has run this bullet is a question rather than
+  a finding.
 
 ## The fleet, read whole
 
