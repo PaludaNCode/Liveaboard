@@ -216,6 +216,39 @@ HULL_ANYWHERE = re.compile(r"/?([a-z0-9][a-z0-9-]*?)-(haz\d+)\b")
 SEARCH_LINK = re.compile(r'href="(?:https://[^/"]+)?(/boatsearch\?[^"]+)"')
 
 
+#: The currency the page says it rendered in, in the payload it streams to
+#: itself. Tolerant of the escaping, because the RSC chunks arrive as JSON
+#: string literals inside `self.__next_f.push([1,"…"])` and the quotes are
+#: backslashed there; on a page that carries it plainly the same pattern
+#: matches.
+PAGE_CURRENCY = re.compile(
+    r'\\?"currencies\\?"\s*:\s*\{\\?"current\\?"\s*:\s*\\?"([A-Z]{3})\\?"')
+
+
+def page_currency(html: str) -> str | None:
+    """What the page states it is priced in, or ``None`` if it does not say.
+
+    **`Offer.priceCurrency` is not it.** Measured 2026-09-20 over four hulls:
+    Seawolf Steel, Unity and Iceberg label every offer `EUR` while their own
+    payload says `{"currencies":{"current":"USD"…}}`, and USD is the only
+    currency code anywhere in those bytes. Red Sea Aggressor IV labels them
+    `USD` and says the same. The label is static per vessel; the payload is
+    what the numbers follow.
+
+    The other two sellers agree, which is how this was noticed rather than how
+    it is decided: 645 of 777 joined sailings carry the same number as a
+    figure liveaboard.com or PADI states in **dollars**, and where
+    liveaboard.com itself quotes euros the divebooker figure is 1.148x it —
+    1/0.8708, which is the rate this very payload states for currency id 2.
+
+    Asking for another currency changes nothing: `?currency=EUR`,
+    `?currency=USD` and `?cur=USD` all came back with the same numbers, the
+    same labels and `current: USD`.
+    """
+    found = PAGE_CURRENCY.search(html)
+    return found.group(1) if found else None
+
+
 def hull_slugs(html: str) -> dict[str, str]:
     """Every `{slug: id}` the page mentions, linked or not.
 

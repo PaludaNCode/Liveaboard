@@ -83,6 +83,11 @@ def report(name: str, html: str) -> dict:
     labels = sorted({c for _, c in priced})
     current = CURRENT.findall(body)
     facts = {
+        # The parser's own function, against the bytes the server sent, so
+        # what ships is what was proved rather than a regex that looked right
+        # in a scratch file. The payload arrives backslash-escaped inside the
+        # RSC chunks and this reads the raw HTML, not the decoded body.
+        "page_currency() says": db.page_currency(html),
         "offers": len(priced),
         "cheapest offer": cheapest,
         "priceCurrency labels": labels,
