@@ -41,15 +41,33 @@ before deciding what the third seller is allowed to say on the page.
 
 ## The one that stops the fares being published
 
-0. **The unit of `Offer.price` is not established.** Red Sea Aggressor IV on
-   2027-07-24 states 5,398 USD against our 2,699 for the same seven nights —
-   exactly twice — and twelve more rows differ by 20 to 350 on two boats,
-   against 57 that agree to the cent. So the figure is a per-person berth on
-   most rows and something else on at least one, and the page never labels it.
-   Not a parser artefact: a date can carry several offers — Red Sea Aggressor
-   IV states 161 over 143 sailings, and the book keeps the cheapest, which
-   moved 30 dates — but every one of the 13 disagreeing rows states exactly
-   one offer on its date, the 5,398 included.
+0. **Two of the three reasons turned out to be ours, and the third is one
+   row.** This section led with *"the unit of `Offer.price` is not
+   established"*, on thirteen rows that disagreed with the other two sellers.
+   Twelve of them are now accounted for:
+
+   * **The currency label was wrong, and we believed it.** `Offer.priceCurrency`
+     is static per vessel and does not describe `Offer.price`: three of four
+     hulls probed label every offer EUR on a page whose own payload says it
+     rendered in USD. `page_currency` reads the payload now.
+   * **The comparison converted the wrong way.** `money.FxTable` multiplies
+     into euros and this project's own comparison tool divided, inflating
+     every dollar figure by 31% against itself.
+
+   With both fixed, 645 of 777 joined sailings carry the same number as a
+   figure liveaboard.com or PADI states, to the cent — which is what "prices
+   should generally be the same" looks like when the arithmetic is right.
+
+   **What is left is Red Sea Aggressor IV on 2027-07-24: 5,398 against 2,699
+   for the same seven nights, exactly twice, on a page that states USD and
+   means it.** Its offer node was printed verbatim and carries no occupancy, no
+   cabin class and no second traveller — it is the same shape as the 2,799 and
+   2,899 either side of it. Not a parser artefact either: a date can carry
+   several offers, Red Sea Aggressor IV states 161 over 143 sailings and the
+   book keeps the cheapest, but that date states exactly one. Around 50 more
+   rows differ by real amounts — Unity at 1.42x on thirteen sailings, Ghazala
+   Explorer at 1.65x, Blue Pearl at 1.45x — and those are two sellers pricing
+   one berth differently, which is what this site exists to show.
    Every fare is kept in `data/divebooker.json` and **none reaches the
    dataset**: `promote` writes `divebooker.fares: "withheld"` and a guard
    asserts no departure carries a divebooker figure. Until somebody reads a

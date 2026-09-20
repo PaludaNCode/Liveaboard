@@ -187659,7 +187659,7 @@
       "whirlwind"
     ],
     "fares": "withheld",
-    "note": "divebooker.com states a fare on every departure and this dataset publishes none of them: the unit is not established. Red Sea Aggressor IV on 2027-07-24 states exactly twice our fare for the same seven nights, so `Offer.price` is a per-person berth on most rows and something else on at least one. Of 888 in-season sailing(s), 793 match one this dataset already carries on (boat, date), and 85 sit on hull(s) the alias map does not know, so nothing can be said about them, and 10 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset publishes none of them. The figure itself now reconciles: its currency comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label, and 645 of 777 joined sailings carry the same number as a figure one of the other two sellers states. One row does not — Red Sea Aggressor IV on 2027-07-24, exactly twice our fare for the same seven nights, on an offer node shaped like the sailings either side of it. Of 888 in-season sailing(s), 793 match one this dataset already carries on (boat, date), and 85 sit on hull(s) the alias map does not know, so nothing can be said about them, and 10 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
   },
   "cabin_names": [
     "Lower Deck Twin Cabin",

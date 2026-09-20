@@ -2096,10 +2096,14 @@ def divebooker_coverage(
         "fares": "withheld",
         "note": (
             "divebooker.com states a fare on every departure and this dataset "
-            "publishes none of them: the unit is not established. Red Sea "
-            "Aggressor IV on 2027-07-24 states exactly twice our fare for the "
-            "same seven nights, so `Offer.price` is a per-person berth on most "
-            "rows and something else on at least one. "
+            "publishes none of them. The figure itself now reconciles: its "
+            "currency comes from the page's own payload rather than from "
+            "`Offer.priceCurrency`, which is a static per-vessel label, and "
+            "645 of 777 joined sailings carry the same number as a figure one "
+            "of the other two sellers states. One row does not — Red Sea "
+            "Aggressor IV on 2027-07-24, exactly twice our fare for the same "
+            "seven nights, on an offer node shaped like the sailings either "
+            "side of it. "
         ) + _divebooker_join_note(in_season, matched, unmapped_rows),
     }
 
