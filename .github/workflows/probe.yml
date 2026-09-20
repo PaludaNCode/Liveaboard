@@ -91,6 +91,10 @@ on:
         description: "Year-months for the search probe, e.g. 202705,202706"
         type: string
         default: "202705,202706,202707"
+      divebooker_params:
+        description: "Query fragments to try for search paging, e.g. page=2,offset=20"
+        type: string
+        default: ""
       divebooker_dump_robots:
         description: "Print divebooker's robots.txt verbatim"
         type: boolean
@@ -356,7 +360,8 @@ jobs:
         if: inputs.divebooker_search
         run: |
           python3 tools/probe_divebooker_search.py \
-            --months "${{ inputs.divebooker_months || '202705,202706,202707' }}"
+            --months "${{ inputs.divebooker_months || '202705,202706,202707' }}" \
+            --try-params "${{ inputs.divebooker_params }}"
 
       - name: Upload the book and the pages it was read from
         if: inputs.divebooker_fetch != '0'

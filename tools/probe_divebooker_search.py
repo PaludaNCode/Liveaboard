@@ -54,6 +54,8 @@ def main() -> int:
     parser.add_argument("--et", default="2", help="entity type the site's own URL uses")
     parser.add_argument("--entity", default="3881", help="Egypt, from egypt-daz3881")
     parser.add_argument("--months", default="202705,202706,202707")
+    parser.add_argument("--try-params", default="",
+                        help="comma-separated query fragments to try for paging")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--book", default=Path("data/divebooker.json"), type=Path)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
@@ -102,6 +104,47 @@ def main() -> int:
             print(f"    {slug}")
         if len(new) > 20:
             print(f"    … and {len(new) - 20} more")
+
+    if args.try_params:
+        print("\n== how the search pages ==")
+        # An experiment rather than an assumption: a wrong parameter here is
+        # harmless and obvious — the page returns the same twenty. That is the
+        # opposite of guessing a hull id, where a wrong guess silently reads
+        # another boat, and it is why this one is tried rather than waited for.
+        base = f"https://{db.HOST}" + SEARCH.format(
+            et=args.et, entity=args.entity, ym=args.months.split(",")[0].strip())
+        try:
+            first = fetcher.get(base)
+        except FetchBlocked as exc:
+            print(f"  BLOCKED {base}: {exc}")
+            return 1
+        page_one = {db.split_slug(h)[0] for h in db.hull_links(first.body)}
+        print(f"  page one: {len(page_one)} hull(s)")
+
+        literals = sorted(set(re.findall(
+            r"""["'](/(?:api|graphql|_next/data)/[A-Za-z0-9/_.\-{}$\[\]]*)["']""",
+            first.body)))
+        print(f"  endpoint literals on the search page: {literals or 'none'}")
+        action = re.findall(r'"\$ACTION_ID_([0-9a-f]{20,})"', first.body)
+        print(f"  server action ids: {len(set(action))}")
+
+        for candidate in args.try_params.split(","):
+            candidate = candidate.strip()
+            try:
+                other = fetcher.get(f"{base}&{candidate}")
+            except FetchBlocked as exc:
+                print(f"  {candidate:<16} BLOCKED: {exc}")
+                continue
+            except Exception as exc:  # noqa: BLE001 - a 404 is an answer
+                print(f"  {candidate:<16} {type(exc).__name__}: {exc}")
+                continue
+            slugs = {db.split_slug(h)[0] for h in db.hull_links(other.body)}
+            fresh = slugs - page_one
+            print(f"  {candidate:<16} {len(slugs):>3} hull(s), {len(fresh):>3} new"
+                  f"  {'<-- PAGES' if fresh else ''}")
+            if fresh:
+                for slug in sorted(fresh)[:6]:
+                    print(f"      {slug}")
 
     print(f"\nacross every month asked: {len(every)} distinct hull(s), "
           f"{len(every - known)} of them new to the book")
