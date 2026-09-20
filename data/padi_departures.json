@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-19",
+ "collected": "2026-09-20",
  "departures": {
   "all-star-ghani::2026-09-21": {
    "availability": 22,
@@ -1666,7 +1666,7 @@
    "was": 1250.0
   },
   "alsuraya::2026-12-12": {
-   "availability": 18,
+   "availability": 17,
    "boat": "alsuraya",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -6722,19 +6722,6 @@
    "start": "2027-12-25",
    "was": 1499.0
   },
-  "bella-2::2026-09-20": {
-   "availability": 12,
-   "boat": "bella-2",
-   "currency": "EUR",
-   "end": "2026-09-23",
-   "itinerary": "Ras Mohammed & Thistlegorm (Sharm El Sheikh - Sharm El Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1555523,
-   "price": 501.5,
-   "slug": "bella-2",
-   "start": "2026-09-20",
-   "was": 590.0
-  },
   "bella-2::2026-09-24": {
    "availability": 0,
    "boat": "bella-2",
@@ -8660,7 +8647,7 @@
    "was": 1400.0
   },
   "blue-horizon::2027-01-23": {
-   "availability": 11,
+   "availability": 15,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2027-01-30",
@@ -9635,7 +9622,7 @@
    "was": 1946.0
   },
   "blue-horizon::2028-09-23": {
-   "availability": 26,
+   "availability": 24,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-09-30",
@@ -9687,7 +9674,7 @@
    "was": 1946.0
   },
   "blue-horizon::2028-10-21": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-horizon",
    "currency": "USD",
    "end": "2028-10-28",
@@ -9908,7 +9895,7 @@
    "was": 1610.0
   },
   "blue-melody::2026-11-07": {
-   "availability": 7,
+   "availability": 6,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-11-14",
@@ -9973,7 +9960,7 @@
    "was": 1260.0
   },
   "blue-melody::2026-12-12": {
-   "availability": 9,
+   "availability": 5,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2026-12-19",
@@ -10428,7 +10415,7 @@
    "was": 1918.0
   },
   "blue-melody::2027-10-02": {
-   "availability": 26,
+   "availability": 0,
    "boat": "blue-melody",
    "currency": "USD",
    "end": "2027-10-09",
@@ -14002,21 +13989,21 @@
    "start": "2026-09-24",
    "was": 595.0
   },
-  "carlton::2026-10-13": {
+  "carlton::2026-10-12": {
    "availability": 8,
    "boat": "carlton",
    "currency": "EUR",
-   "end": "2026-10-17",
+   "end": "2026-10-16",
    "itinerary": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1547194,
-   "price": 595.0,
+   "price": 535.5,
    "slug": "my-carlton",
-   "start": "2026-10-13",
+   "start": "2026-10-12",
    "was": 595.0
   },
   "carlton::2026-10-17": {
-   "availability": 4,
+   "availability": 0,
    "boat": "carlton",
    "currency": "EUR",
    "end": "2026-10-24",
@@ -14029,7 +14016,7 @@
    "was": 930.0
   },
   "carlton::2026-10-27": {
-   "availability": 20,
+   "availability": 0,
    "boat": "carlton",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -14042,7 +14029,7 @@
    "was": 595.0
   },
   "carlton::2026-11-03": {
-   "availability": 0,
+   "availability": 8,
    "boat": "carlton",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -14062,23 +14049,23 @@
    "itinerary": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
    "nights": 7,
    "padi_id": 1547198,
-   "price": 930.0,
+   "price": 837.0,
    "slug": "my-carlton",
    "start": "2026-11-07",
    "was": 930.0
   },
-  "carlton::2026-11-14": {
+  "carlton::2026-11-17": {
    "availability": 20,
    "boat": "carlton",
    "currency": "EUR",
-   "end": "2026-11-21",
-   "itinerary": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
-   "nights": 7,
+   "end": "2026-11-19",
+   "itinerary": "Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh) 2 Nights",
+   "nights": 2,
    "padi_id": 1547197,
-   "price": 930.0,
+   "price": 340.0,
    "slug": "my-carlton",
-   "start": "2026-11-14",
-   "was": 930.0
+   "start": "2026-11-17",
+   "was": 340.0
   },
   "carlton::2026-11-24": {
    "availability": 20,
@@ -14088,23 +14075,23 @@
    "itinerary": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
    "nights": 4,
    "padi_id": 1547200,
-   "price": 595.0,
+   "price": 535.5,
    "slug": "my-carlton",
    "start": "2026-11-24",
    "was": 595.0
   },
-  "carlton::2026-11-28": {
+  "carlton::2026-12-01": {
    "availability": 20,
    "boat": "carlton",
    "currency": "EUR",
-   "end": "2026-12-05",
-   "itinerary": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
-   "nights": 7,
+   "end": "2026-12-03",
+   "itinerary": "Minisafari Thistlegorm - Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh) 2 Nights",
+   "nights": 2,
    "padi_id": 1554557,
-   "price": 930.0,
+   "price": 340.0,
    "slug": "my-carlton",
-   "start": "2026-11-28",
-   "was": 930.0
+   "start": "2026-12-01",
+   "was": 340.0
   },
   "carlton::2026-12-05": {
    "availability": 20,
@@ -14119,18 +14106,18 @@
    "start": "2026-12-05",
    "was": 930.0
   },
-  "carlton::2026-12-19": {
+  "carlton::2026-12-27": {
    "availability": 20,
    "boat": "carlton",
    "currency": "EUR",
-   "end": "2026-12-26",
-   "itinerary": "Classic North (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
-   "nights": 7,
+   "end": "2026-12-31",
+   "itinerary": "Ras Mohamed - Tiran (Sharm El Sheikh - Sharm El Sheikh) 4 Nights",
+   "nights": 4,
    "padi_id": 1557564,
-   "price": 930.0,
+   "price": 595.0,
    "slug": "my-carlton",
-   "start": "2026-12-19",
-   "was": 930.0
+   "start": "2026-12-27",
+   "was": 595.0
   },
   "carlton::2027-03-27": {
    "availability": 20,
@@ -14653,7 +14640,7 @@
    "was": 1125.0
   },
   "discovery-i::2026-10-03": {
-   "availability": 6,
+   "availability": 5,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -14926,7 +14913,7 @@
    "was": 900.0
   },
   "discovery-i::2027-02-27": {
-   "availability": 20,
+   "availability": 18,
    "boat": "discovery-i",
    "currency": "EUR",
    "end": "2027-03-06",
@@ -15496,6 +15483,448 @@
    "slug": "my-discovery-i",
    "start": "2027-12-25",
    "was": 900.0
+  },
+  "discovery-i::2028-01-01": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-01-08",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560326,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-01-01",
+   "was": 900.0
+  },
+  "discovery-i::2028-01-08": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-01-15",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560325,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-01-08",
+   "was": 1025.0
+  },
+  "discovery-i::2028-01-15": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-01-22",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560324,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-01-15",
+   "was": 900.0
+  },
+  "discovery-i::2028-01-22": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-01-29",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560327,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-01-22",
+   "was": 1025.0
+  },
+  "discovery-i::2028-01-29": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-02-05",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560322,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-01-29",
+   "was": 900.0
+  },
+  "discovery-i::2028-02-05": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-02-12",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560323,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-02-05",
+   "was": 900.0
+  },
+  "discovery-i::2028-02-12": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-02-19",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560331,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-02-12",
+   "was": 1025.0
+  },
+  "discovery-i::2028-02-19": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-02-26",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560328,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-02-19",
+   "was": 900.0
+  },
+  "discovery-i::2028-02-26": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-03-04",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560335,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-02-26",
+   "was": 1025.0
+  },
+  "discovery-i::2028-03-04": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-03-11",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560338,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-03-04",
+   "was": 900.0
+  },
+  "discovery-i::2028-03-11": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-03-18",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560341,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-03-11",
+   "was": 900.0
+  },
+  "discovery-i::2028-03-18": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-03-25",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560342,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-03-18",
+   "was": 1025.0
+  },
+  "discovery-i::2028-03-25": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-04-01",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560329,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-03-25",
+   "was": 900.0
+  },
+  "discovery-i::2028-04-01": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-04-08",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560337,
+   "price": 930.0,
+   "slug": "my-discovery-i",
+   "start": "2028-04-01",
+   "was": 930.0
+  },
+  "discovery-i::2028-04-08": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-04-15",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560340,
+   "price": 930.0,
+   "slug": "my-discovery-i",
+   "start": "2028-04-08",
+   "was": 930.0
+  },
+  "discovery-i::2028-04-15": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-04-22",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560332,
+   "price": 1075.0,
+   "slug": "my-discovery-i",
+   "start": "2028-04-15",
+   "was": 1075.0
+  },
+  "discovery-i::2028-04-22": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-04-29",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560333,
+   "price": 930.0,
+   "slug": "my-discovery-i",
+   "start": "2028-04-22",
+   "was": 930.0
+  },
+  "discovery-i::2028-04-29": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-05-06",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560346,
+   "price": 1075.0,
+   "slug": "my-discovery-i",
+   "start": "2028-04-29",
+   "was": 1075.0
+  },
+  "discovery-i::2028-05-06": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-05-13",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560334,
+   "price": 930.0,
+   "slug": "my-discovery-i",
+   "start": "2028-05-06",
+   "was": 930.0
+  },
+  "discovery-i::2028-05-13": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-05-20",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560353,
+   "price": 1075.0,
+   "slug": "my-discovery-i",
+   "start": "2028-05-13",
+   "was": 1075.0
+  },
+  "discovery-i::2028-05-20": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-05-27",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560344,
+   "price": 930.0,
+   "slug": "my-discovery-i",
+   "start": "2028-05-20",
+   "was": 930.0
+  },
+  "discovery-i::2028-05-27": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-06-03",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560330,
+   "price": 1075.0,
+   "slug": "my-discovery-i",
+   "start": "2028-05-27",
+   "was": 1075.0
+  },
+  "discovery-i::2028-06-03": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-06-10",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560339,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-06-03",
+   "was": 900.0
+  },
+  "discovery-i::2028-06-10": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-06-17",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560361,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-06-10",
+   "was": 900.0
+  },
+  "discovery-i::2028-06-17": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-06-24",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560336,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-06-17",
+   "was": 900.0
+  },
+  "discovery-i::2028-06-24": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-07-01",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560351,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-06-24",
+   "was": 900.0
+  },
+  "discovery-i::2028-07-01": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-07-08",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560350,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-07-01",
+   "was": 900.0
+  },
+  "discovery-i::2028-07-08": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-07-15",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560347,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-07-08",
+   "was": 1025.0
+  },
+  "discovery-i::2028-07-15": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-07-22",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560348,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-07-15",
+   "was": 900.0
+  },
+  "discovery-i::2028-07-22": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-07-29",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560352,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-07-22",
+   "was": 1025.0
+  },
+  "discovery-i::2028-07-29": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-08-05",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560343,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-07-29",
+   "was": 900.0
+  },
+  "discovery-i::2028-08-05": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-08-12",
+   "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560356,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-08-05",
+   "was": 1025.0
+  },
+  "discovery-i::2028-08-12": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-08-19",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) - 7 Nights",
+   "nights": 7,
+   "padi_id": 1560362,
+   "price": 900.0,
+   "slug": "my-discovery-i",
+   "start": "2028-08-12",
+   "was": 900.0
+  },
+  "discovery-i::2028-08-19": {
+   "availability": 20,
+   "boat": "discovery-i",
+   "currency": "EUR",
+   "end": "2028-08-26",
+   "itinerary": "North, wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560354,
+   "price": 1025.0,
+   "slug": "my-discovery-i",
+   "start": "2028-08-19",
+   "was": 1025.0
   },
   "discovery-ii::2026-09-26": {
    "availability": 0,
@@ -16186,6 +16615,565 @@
    "start": "2027-11-27",
    "was": 1150.0
   },
+  "discovery-ii::2028-02-05": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-02-12",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560375,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-02-05",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-02-12": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-02-19",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560402,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-02-12",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-02-19": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-02-26",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560378,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-02-19",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-02-26": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-03-04",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560411,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-02-26",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-03-04": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-03-11",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560392,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-03-04",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-03-11": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-03-18",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560404,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-03-11",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-03-18": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-03-25",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560381,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-03-18",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-03-25": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-04-01",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560395,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-03-25",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-04-01": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-04-08",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560408,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-04-01",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-04-08": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-04-15",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560377,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-04-08",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-04-15": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-04-22",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560394,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-04-15",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-04-22": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-04-29",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560403,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-04-22",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-04-29": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-05-06",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560389,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-04-29",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-05-06": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-05-13",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560412,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-05-06",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-05-13": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-05-20",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560409,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-05-13",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-05-20": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-05-27",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560376,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-05-20",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-05-27": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-06-03",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560388,
+   "price": 1100.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-05-27",
+   "was": 1100.0
+  },
+  "discovery-ii::2028-06-03": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-06-10",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560399,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-06-03",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-06-10": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-06-17",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560382,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-06-10",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-06-17": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-06-24",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560383,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-06-17",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-06-24": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-07-01",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560407,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-06-24",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-07-01": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-07-08",
+   "itinerary": "North, Wrecks, Ras Mohamed & Tiran (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560405,
+   "price": 950.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-07-01",
+   "was": 950.0
+  },
+  "discovery-ii::2028-07-08": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-07-15",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560396,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-07-08",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-07-15": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-07-22",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560406,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-07-15",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-07-22": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-07-29",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560379,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-07-22",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-07-29": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-08-05",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560401,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-07-29",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-08-05": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-08-12",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560413,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-08-05",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-08-12": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-08-19",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560391,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-08-12",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-08-19": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-08-26",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560390,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-08-19",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-08-26": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-09-02",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560400,
+   "price": 1050.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-08-26",
+   "was": 1050.0
+  },
+  "discovery-ii::2028-09-02": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-09-09",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560385,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-09-02",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-09-09": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-09-16",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560387,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-09-09",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-09-16": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-09-23",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560414,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-09-16",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-09-23": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-09-30",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560386,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-09-23",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-09-30": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-10-07",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560415,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-09-30",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-10-07": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-10-14",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560397,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-10-07",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-10-14": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-10-21",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560384,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-10-14",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-10-21": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-10-28",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560380,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-10-21",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-10-28": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-11-04",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560410,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-10-28",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-11-04": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-11-11",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560398,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-11-04",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-11-11": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-11-18",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560416,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-11-11",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-11-18": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-11-25",
+   "itinerary": "Northern Wrecks, Ras Mohamed, Tiran, Brothers & Safaga (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560393,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-11-18",
+   "was": 1150.0
+  },
+  "discovery-ii::2028-11-25": {
+   "availability": 20,
+   "boat": "discovery-ii",
+   "currency": "EUR",
+   "end": "2028-12-02",
+   "itinerary": "Brothers, Daedalus, Elphinstone (Hurghada - Hurghada) 7 nights",
+   "nights": 7,
+   "padi_id": 1560417,
+   "price": 1150.0,
+   "slug": "my-discovery-ii",
+   "start": "2028-11-25",
+   "was": 1150.0
+  },
   "dune-longara::2026-09-26": {
    "availability": 2,
    "boat": "dune-longara",
@@ -16278,17 +17266,17 @@
    "was": 2500.0
   },
   "dune-longara::2026-11-28": {
-   "availability": 13,
+   "availability": 11,
    "boat": "dune-longara",
    "currency": "EUR",
    "end": "2026-12-05",
    "itinerary": "St. John\u2019s Reefs (Port Ghalib - Port Ghalib) 7 Nights",
    "nights": 7,
    "padi_id": 1554507,
-   "price": 1500.0,
+   "price": 1600.0,
    "slug": "dune-longara",
    "start": "2026-11-28",
-   "was": 1500.0
+   "was": 1600.0
   },
   "dune-longara::2026-12-05": {
    "availability": 27,
@@ -16328,6 +17316,19 @@
    "slug": "dune-longara",
    "start": "2026-12-26",
    "was": 1650.0
+  },
+  "dune-longara::2027-02-06": {
+   "availability": 30,
+   "boat": "dune-longara",
+   "currency": "EUR",
+   "end": "2027-02-13",
+   "itinerary": "Mixed South Daedalus Rocky Zabargad (Port Ghalib - Port Ghalib) 7 Nights",
+   "nights": 7,
+   "padi_id": 1560420,
+   "price": 1600.0,
+   "slug": "dune-longara",
+   "start": "2027-02-06",
+   "was": 1600.0
   },
   "dune-longara::2027-03-06": {
    "availability": 30,
@@ -23336,19 +24337,6 @@
    "start": "2028-12-01",
    "was": 1160.0
   },
-  "eriny::2026-09-20": {
-   "availability": 0,
-   "boat": "eriny",
-   "currency": "EUR",
-   "end": "2026-09-27",
-   "itinerary": "Wrecks & Reefs (Sharm El Sheikh - Sharm El Sheikh) 7 Nights",
-   "nights": 7,
-   "padi_id": 1538342,
-   "price": 1270.0,
-   "slug": "eriny",
-   "start": "2026-09-20",
-   "was": 1270.0
-  },
   "eriny::2026-10-03": {
    "availability": 12,
    "boat": "eriny",
@@ -25377,19 +26365,6 @@
    "start": "2028-10-26",
    "was": 2845.0
   },
-  "freedom-iii::2026-09-20": {
-   "availability": 0,
-   "boat": "freedom-iii",
-   "currency": "EUR",
-   "end": "2026-09-23",
-   "itinerary": "Dunraven, Ras Mohammed and Strait of Tiran (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1529723,
-   "price": 570.0,
-   "slug": "freedom-iii",
-   "start": "2026-09-20",
-   "was": 570.0
-  },
   "freedom-iii::2026-09-27": {
    "availability": 0,
    "boat": "freedom-iii",
@@ -25768,7 +26743,7 @@
    "was": 760.0
   },
   "freedom-iv::2026-12-28": {
-   "availability": 8,
+   "availability": 10,
    "boat": "freedom-iv",
    "currency": "EUR",
    "end": "2027-01-01",
@@ -27419,7 +28394,7 @@
    "was": 1350.0
   },
   "grand-discovery::2026-10-03": {
-   "availability": 4,
+   "availability": 3,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-10-10",
@@ -27471,20 +28446,20 @@
    "was": 1350.0
   },
   "grand-discovery::2026-10-31": {
-   "availability": 13,
+   "availability": 9,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "Brothers- Daedalus and Elphinstone (Hurghada- Hurghada) - 7 Nights",
    "nights": 7,
    "padi_id": 1548966,
-   "price": 1282.5,
+   "price": 1539.0,
    "slug": "my-grand-discovery",
    "start": "2026-10-31",
-   "was": 1350.0
+   "was": 1620.0
   },
   "grand-discovery::2026-11-07": {
-   "availability": 26,
+   "availability": 24,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-11-14",
@@ -27536,7 +28511,7 @@
    "was": 1325.0
   },
   "grand-discovery::2026-12-05": {
-   "availability": 5,
+   "availability": 13,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-12",
@@ -27549,7 +28524,7 @@
    "was": 1250.0
   },
   "grand-discovery::2026-12-12": {
-   "availability": 23,
+   "availability": 21,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2026-12-19",
@@ -27575,7 +28550,7 @@
    "was": 1225.0
   },
   "grand-discovery::2026-12-26": {
-   "availability": 3,
+   "availability": 2,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-01-02",
@@ -27926,7 +28901,7 @@
    "was": 1225.0
   },
   "grand-discovery::2027-07-03": {
-   "availability": 35,
+   "availability": 36,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-07-10",
@@ -27978,7 +28953,7 @@
    "was": 1250.0
   },
   "grand-discovery::2027-07-31": {
-   "availability": 21,
+   "availability": 22,
    "boat": "grand-discovery",
    "currency": "EUR",
    "end": "2027-08-07",
@@ -28329,17 +29304,17 @@
    "was": 1473.0
   },
   "hammerhead-ii::2026-10-31": {
-   "availability": 0,
+   "availability": 1,
    "boat": "hammerhead-ii",
    "currency": "EUR",
    "end": "2026-11-07",
    "itinerary": "Exploring North: Abu Nuhas - SS Thistlegorm - Ras Mohamed - Tiran (Hurghada - Hurghada) 7 Nights",
    "nights": 7,
    "padi_id": 1544920,
-   "price": 1401.25,
+   "price": 1501.25,
    "slug": "hammerhead-ii",
    "start": "2026-10-31",
-   "was": 1401.25
+   "was": 1501.25
   },
   "hammerhead-ii::2026-11-07": {
    "availability": 16,
@@ -29875,19 +30850,6 @@
    "start": "2026-11-29",
    "was": 1355.0
   },
-  "iceberg::2026-09-20": {
-   "availability": 7,
-   "boat": "iceberg",
-   "currency": "EUR",
-   "end": "2026-09-24",
-   "itinerary": "Hurghada North (Hurghada - Hurghada) 4 nights/4 days diving",
-   "nights": 4,
-   "padi_id": 1548610,
-   "price": 590.0,
-   "slug": "my-iceberg",
-   "start": "2026-09-20",
-   "was": 590.0
-  },
   "iceberg::2026-09-27": {
    "availability": 6,
    "boat": "iceberg",
@@ -30446,19 +31408,6 @@
    "slug": "my-lady-m",
    "start": "2026-11-16",
    "was": 625.0
-  },
-  "new-sambo::2026-09-20": {
-   "availability": 0,
-   "boat": "new-sambo",
-   "currency": "EUR",
-   "end": "2026-09-22",
-   "itinerary": "Mini-Safari Sataya (Hamata - Hamata) 2 nights / 3 days",
-   "nights": 2,
-   "padi_id": 1550011,
-   "price": 250.0,
-   "slug": "new-sambo-safari-boat-2",
-   "start": "2026-09-20",
-   "was": 250.0
   },
   "new-sambo::2026-09-24": {
    "availability": 4,
@@ -31865,7 +32814,7 @@
    "was": 1520.0
   },
   "odyssey::2027-10-02": {
-   "availability": 20,
+   "availability": 26,
    "boat": "odyssey",
    "currency": "EUR",
    "end": "2027-10-09",
@@ -33386,7 +34335,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-11-21": {
-   "availability": 0,
+   "availability": 2,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-11-28",
@@ -33425,7 +34374,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2026-12-12": {
-   "availability": 14,
+   "availability": 9,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2026-12-19",
@@ -33529,7 +34478,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-iv::2027-04-03": {
-   "availability": 24,
+   "availability": 22,
    "boat": "red-sea-aggressor-iv",
    "currency": "USD",
    "end": "2027-04-10",
@@ -34712,7 +35661,7 @@
    "was": 2699.0
   },
   "red-sea-aggressor-v::2026-12-05": {
-   "availability": 9,
+   "availability": 7,
    "boat": "red-sea-aggressor-v",
    "currency": "USD",
    "end": "2026-12-12",
@@ -38677,7 +39626,7 @@
    "was": 1470.0
   },
   "seawolf-steel::2026-11-21": {
-   "availability": 13,
+   "availability": 11,
    "boat": "seawolf-steel",
    "currency": "EUR",
    "end": "2026-11-28",
@@ -39288,7 +40237,7 @@
    "was": 1450.0
   },
   "serenity::2026-10-10": {
-   "availability": 5,
+   "availability": 6,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2026-10-17",
@@ -39470,7 +40419,7 @@
    "was": 1250.0
   },
   "serenity::2027-01-16": {
-   "availability": 14,
+   "availability": 12,
    "boat": "serenity",
    "currency": "EUR",
    "end": "2027-01-23",
@@ -40795,19 +41744,6 @@
    "start": "2027-12-23",
    "was": 699.0
   },
-  "snefro-pearl::2026-09-20": {
-   "availability": 0,
-   "boat": "snefro-pearl",
-   "currency": "EUR",
-   "end": "2026-09-23",
-   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
-   "nights": 3,
-   "padi_id": 1542386,
-   "price": 529.0,
-   "slug": "snefro-pearl",
-   "start": "2026-09-20",
-   "was": 529.0
-  },
   "snefro-pearl::2026-09-23": {
    "availability": 0,
    "boat": "snefro-pearl",
@@ -42095,6 +43031,19 @@
    "start": "2027-09-01",
    "was": 582.0
   },
+  "snefro-pearl::2027-09-05": {
+   "availability": 12,
+   "boat": "snefro-pearl",
+   "currency": "EUR",
+   "end": "2027-09-08",
+   "itinerary": "Mini Safari Thistlegorm - Ras Mohamed (Sharm el Sheikh - Sharm el Sheikh) 3 nights",
+   "nights": 3,
+   "padi_id": 1556379,
+   "price": 582.0,
+   "slug": "snefro-pearl",
+   "start": "2027-09-05",
+   "was": 582.0
+  },
   "snefro-spirit::2027-04-24": {
    "availability": 4,
    "boat": "snefro-spirit",
@@ -42135,7 +43084,7 @@
    "was": 1169.0
   },
   "snefro-target::2026-10-24": {
-   "availability": 12,
+   "availability": 18,
    "boat": "snefro-target",
    "currency": "EUR",
    "end": "2026-10-31",
@@ -43292,7 +44241,7 @@
    "was": 1125.0
   },
   "tala::2026-11-22": {
-   "availability": 2,
+   "availability": 6,
    "boat": "tala",
    "currency": "EUR",
    "end": "2026-11-29",
@@ -43357,7 +44306,7 @@
    "was": 1050.0
   },
   "tala::2027-02-14": {
-   "availability": 18,
+   "availability": 21,
    "boat": "tala",
    "currency": "EUR",
    "end": "2027-02-21",
@@ -45034,7 +45983,7 @@
    "was": 1155.0
   },
   "unity::2026-10-31": {
-   "availability": 21,
+   "availability": 22,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-11-07",
@@ -45086,7 +46035,7 @@
    "was": 875.0
   },
   "unity::2026-12-05": {
-   "availability": 28,
+   "availability": 29,
    "boat": "unity",
    "currency": "EUR",
    "end": "2026-12-12",
