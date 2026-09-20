@@ -1996,6 +1996,32 @@ def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
 
 
 
+def _divebooker_join_note(in_season: int, matched: int, unmapped: int) -> str:
+    """What the join did, in the run's own numbers.
+
+    This sentence used to be a constant reading *every in-season sailing this
+    source lists is one this dataset already carries* — true of ten hulls, and
+    a claim the next read can falsify, which is exactly the shape of prose
+    this project has gone stale on before (#144). So it is derived: the
+    numbers say what happened and the sentence reports them.
+    """
+    unaccounted = in_season - matched - unmapped
+    if not in_season:
+        return ("No sailing this source lists falls inside the published "
+                "season. See docs/divebooker-limitations.md.")
+    parts = [f"Of {in_season} in-season sailing(s), {matched} match one this "
+             f"dataset already carries on (boat, date)"]
+    if unmapped:
+        parts.append(f"{unmapped} sit on hull(s) the alias map does not know, "
+                     f"so nothing can be said about them")
+    if unaccounted:
+        parts.append(f"{unaccounted} are on a boat this site carries and a "
+                     f"date it does not — a third seller listing a departure "
+                     f"the other two do not, which is recorded and not "
+                     f"published")
+    return ", and ".join(parts) + ". See docs/divebooker-limitations.md."
+
+
 def divebooker_coverage(
     book: dict[str, Any] | None,
     aliases: dict[str, Any] | None,
@@ -2033,14 +2059,22 @@ def divebooker_coverage(
     season = {start for _, start in ours}
     first, last = (min(season), max(season)) if season else ("", "")
 
-    in_season = matched = 0
+    in_season = matched = unmapped_rows = 0
     for row in rows:
-        boat = alias.get(row.get("boat"), row.get("boat"))
+        slug = row.get("boat")
+        boat = alias.get(slug, slug)
         start = row.get("start") or ""
         if not (first <= start <= last):
             continue
         in_season += 1
-        if (boat, start) in ours:
+        if slug not in alias:
+            # A row on a hull the alias map does not know cannot match, and
+            # that is a fact about our map rather than about the seller's
+            # sailing. Counting it as "a departure this dataset does not have"
+            # would report our own unfinished mapping as the third seller
+            # listing weeks the other two do not.
+            unmapped_rows += 1
+        elif (boat, start) in ours:
             matched += 1
 
     # Named rather than counted, the way `deals.unmatched` names a vessel:
@@ -2056,6 +2090,8 @@ def divebooker_coverage(
         "departures": len(book.get("departures") or {}),
         "in_season": in_season,
         "matched": matched,
+        "on_unmapped_vessels": unmapped_rows,
+        "unmatched": in_season - matched - unmapped_rows,
         "unmapped_vessels": unmapped,
         "fares": "withheld",
         "note": (
@@ -2063,10 +2099,8 @@ def divebooker_coverage(
             "publishes none of them: the unit is not established. Red Sea "
             "Aggressor IV on 2027-07-24 states exactly twice our fare for the "
             "same seven nights, so `Offer.price` is a per-person berth on most "
-            "rows and something else on at least one. The join is what is "
-            "established: every in-season sailing this source lists is one "
-            "this dataset already carries. See docs/divebooker-limitations.md."
-        ),
+            "rows and something else on at least one. "
+        ) + _divebooker_join_note(in_season, matched, unmapped_rows),
     }
 
 

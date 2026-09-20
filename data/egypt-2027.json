@@ -187395,9 +187395,11 @@
     "departures": 977,
     "in_season": 148,
     "matched": 148,
+    "on_unmapped_vessels": 0,
+    "unmatched": 0,
     "unmapped_vessels": [],
     "fares": "withheld",
-    "note": "divebooker.com states a fare on every departure and this dataset publishes none of them: the unit is not established. Red Sea Aggressor IV on 2027-07-24 states exactly twice our fare for the same seven nights, so `Offer.price` is a per-person berth on most rows and something else on at least one. The join is what is established: every in-season sailing this source lists is one this dataset already carries. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset publishes none of them: the unit is not established. Red Sea Aggressor IV on 2027-07-24 states exactly twice our fare for the same seven nights, so `Offer.price` is a per-person berth on most rows and something else on at least one. Of 148 in-season sailing(s), 148 match one this dataset already carries on (boat, date). See docs/divebooker-limitations.md."
   },
   "cabin_names": [
     "Lower Deck Twin Cabin",
