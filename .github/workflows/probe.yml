@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -276,9 +276,10 @@ jobs:
     if: inputs.only == 'all' || inputs.only == 'divebooker'
     runs-on: ubuntu-latest
     # A whole-fleet read is about 95 requests at the five-second pace: four
-    # months of search paging plus one page per hull. The cap is the pace
-    # times the fleet, not a guess -- and the pace is what may not be cut.
-    timeout-minutes: 45
+    # months of search paging plus one page per hull, and the fee census is
+    # one page per hull again. The cap is the pace times the fleet, not a
+    # guess -- and the pace is what may not be cut.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -347,6 +348,19 @@ jobs:
       - name: Read a vessel page's trip and price details
         if: contains(inputs.divebooker_ask, 'details')
         run: python3 tools/probe_divebooker_details.py
+
+      # One page's panel is an example, not a shape. This counts what the
+      # whole fleet states before anything is parsed: how many pages carry
+      # the block, how many lines state money, in what currency and unit, and
+      # whether this project's own fee vocabulary recognises the labels.
+      - name: Measure the fee panel across the fleet
+        if: contains(inputs.divebooker_ask, 'feeshape')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_fee_shape.py | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
