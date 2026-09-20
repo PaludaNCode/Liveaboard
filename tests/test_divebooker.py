@@ -240,3 +240,48 @@ class TestTheShippedDatasetStatesNoDivebookerFare(unittest.TestCase):
             for key in row:
                 self.assertNotIn("divebooker", key,
                                  f"a divebooker figure reached a departure: {key}")
+
+
+class TestADateWithTwoOffersKeepsTheCheapest(unittest.TestCase):
+    """161 offers over 143 sailings, and the first one is not the fare.
+
+    Red Sea Aggressor IV states 5,398 USD and 2,699 USD for 2027-07-24 — the
+    same trip, the same seven nights — and taking whichever came first put the
+    dearer one in the book, where it read as this source disagreeing with both
+    other sellers by a factor of two. The bottom of the ladder is the price a
+    reader can buy at.
+    """
+
+    def page(self, *prices, currency="USD"):
+        blocks = [{
+            "@type": "Offer", "price": p, "priceCurrency": currency,
+            "availability": "https://schema.org/InStock",
+            "itemOffered": {
+                "@type": "TouristTrip", "name": "St. Johns / Daedalus",
+                "subjectOf": {"@type": "Event", "name": "St. Johns / Daedalus",
+                              "startDate": "2027-07-24", "endDate": "2027-07-31"},
+            },
+        } for p in prices]
+        return "".join(
+            f'<script type="application/ld+json">{json.dumps(b)}</script>'
+            for b in blocks
+        )
+
+    def test_the_cheaper_offer_wins_whichever_came_first(self):
+        for order in ((5398, 2699), (2699, 5398)):
+            rows, _ = db.departures(self.page(*order))
+            self.assertEqual(len(rows), 1, order)
+            self.assertEqual(rows[0].price, 2699.0, order)
+            self.assertEqual(rows[0].offers, 2, order)
+
+    def test_a_single_offer_says_nothing_about_a_choice(self):
+        rows, _ = db.departures(self.page(2699))
+        self.assertEqual(rows[0].offers, 1)
+        self.assertNotIn("offers", rows[0].as_dict())
+
+    def test_two_currencies_on_one_date_do_not_race(self):
+        """The smaller number would pick the currency, not the price."""
+        page = self.page(2699) + self.page(2500, currency="EUR")
+        rows, _ = db.departures(page)
+        self.assertEqual(rows[0].price, 2699.0)
+        self.assertEqual(rows[0].currency, "USD")

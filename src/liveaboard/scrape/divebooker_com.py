@@ -16,6 +16,12 @@ priced from the trip's side:
 * ``Offer`` → ``itemOffered`` → ``TouristTrip`` → ``subjectOf`` → ``Event``.
   Discovery II has 49 of these, Bella 2 has 3 — which is every sailing each
   boat sells.
+and a date carries **more than one offer** often enough to matter: Red Sea
+Aggressor IV states 161 offers over 143 sailings. :func:`departures` keeps the
+cheapest of them, which is the rule the advertised price already follows on
+liveaboard.com — the bottom of the ladder is the price a reader can buy at —
+and records how many there were.
+
 * a top-level ``Event`` carrying ``offers``, and also ``url``, ``id``,
   ``duration``, ``organizer``, ``eventStatus``, ``description`` and ``image``.
   Ten on each of the two larger boats and three on Bella 2, which sells three.
@@ -131,6 +137,11 @@ class Departure:
     price: float | None = None
     currency: str | None = None
     availability: str | None = None
+    #: How many offers the page stated for this date. More than one is
+    #: ordinary — Red Sea Aggressor IV states 161 offers over 143 sailings —
+    #: and the book keeps the cheapest, so the count is what says a choice
+    #: was made.
+    offers: int = 1
     url: str | None = None
     event_id: str | None = None
     #: Which of the page's two statements of this sailing were read. Kept
@@ -161,6 +172,8 @@ class Departure:
                 out[key] = value
         if self.nights is not None:
             out["nights"] = self.nights
+        if self.offers > 1:
+            out["offers"] = self.offers
         return out
 
 
@@ -250,12 +263,31 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
         if not start or not ISO_DATE.match(start):
             continue
         amount, currency = _money(offer)
+        fresh = start not in found
         row = found.setdefault(start, Departure(start=start))
         row.end = row.end or _text(event.get("endDate"))
         row.trip = row.trip or _text(trip.get("name")) or _text(offer.get("name"))
-        row.price = row.price if row.price is not None else amount
         row.currency = row.currency or currency
         row.availability = row.availability or _availability(offer)
+        if not fresh:
+            row.offers += 1
+        # **The cheapest, not the first.** A date carries more than one offer
+        # often enough to matter — Red Sea Aggressor IV states 161 offers over
+        # 143 sailings — and taking whichever the page printed first put
+        # 5,398 USD on 2027-07-24 beside 2,699 for the same week on the same
+        # trip, which read as this source disagreeing with the other two by a
+        # factor of two. It is the same rule as `the advertised price is the
+        # bottom of a cabin ladder`: where a seller offers one sailing at
+        # several prices, the lowest is the one a reader can buy at.
+        #
+        # Only within one currency. Two currencies on one date is not a
+        # cheaper berth, it is the same berth quoted twice, and picking the
+        # smaller number would pick the currency rather than the price.
+        if amount is not None and (
+            row.price is None
+            or (currency == row.currency and amount < row.price)
+        ):
+            row.price, row.currency = amount, currency
         if "trip" not in row.stated_by:
             row.stated_by.append("trip")
 
