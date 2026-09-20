@@ -51,6 +51,10 @@ on:
         description: "Print only where PADI's API client gets its base URL"
         type: boolean
         default: false
+      divebooker_ask:
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,flight,search"
+        type: string
+        default: ""
       divebooker_sample:
         description: "Detail pages to sample per sitemap shape (divebooker)"
         type: string
@@ -71,26 +75,10 @@ on:
         description: "Saved pages whose JSON-LD to print (smallest first)"
         type: string
         default: "1"
-      divebooker_fare:
-        description: "Ask what divebooker's Offer.price counts (the withheld fares)"
-        type: boolean
-        default: false
-      divebooker_currency:
-        description: "Ask a vessel page what currency its prices are in"
-        type: boolean
-        default: false
-      divebooker_flight:
-        description: "Open the RSC payload a vessel page streams (prices, fees, cabins)"
-        type: boolean
-        default: false
       divebooker_vessel:
         description: "Vessel slug for the flight probe, as the book names it"
         type: string
         default: "red-sea-aggressor-ii"
-      divebooker_search:
-        description: "Read /boatsearch for the months given (the real fleet)"
-        type: boolean
-        default: false
       divebooker_months:
         description: "Year-months for the search probe, e.g. 202705,202706"
         type: string
@@ -99,14 +87,6 @@ on:
         description: "Query fragments to try for search paging, e.g. page=2,offset=20"
         type: string
         default: ""
-      divebooker_dump_robots:
-        description: "Print divebooker's robots.txt verbatim"
-        type: boolean
-        default: false
-      divebooker_dump_shell:
-        description: "Print the first 2 KB of each divebooker page's markup"
-        type: boolean
-        default: false
       unread_retries:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
@@ -310,8 +290,8 @@ jobs:
           python3 tools/probe_divebooker.py \
             --sample "${{ inputs.divebooker_sample || '3' }}" \
             --max-requests "${{ inputs.divebooker_requests || '25' }}" \
-            ${{ inputs.divebooker_dump_robots && '--dump-robots' || '' }} \
-            ${{ inputs.divebooker_dump_shell && '--dump-shell' || '' }}
+            ${{ contains(inputs.divebooker_ask, 'robots') && '--dump-robots' || '' }} \
+            ${{ contains(inputs.divebooker_ask, 'shell') && '--dump-shell' || '' }}
 
       # What a departure node actually states — which is what decides whether
       # this is a third seller or a third opinion (docs/plan-divebooker.md,
@@ -348,7 +328,7 @@ jobs:
       # The one question that decides whether a divebooker fare can ever be
       # published: what `Offer.price` counts. See the tool's own docstring.
       - name: Ask what one divebooker fare counts
-        if: inputs.divebooker_fare
+        if: contains(inputs.divebooker_ask, 'fare')
         run: |
           python3 tools/probe_divebooker_fare.py \
             --vessels red-sea-aggressor-iv \
@@ -358,14 +338,14 @@ jobs:
       # The digits say USD and the label often says EUR. This asks the page
       # rather than inferring it from another seller's agreement.
       - name: Ask what currency a divebooker price is in
-        if: inputs.divebooker_currency
+        if: contains(inputs.divebooker_ask, 'currency')
         run: python3 tools/probe_divebooker_currency.py
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
       # claims. This opens the streamed payload and says which is true.
       - name: Open the payload the page streams to itself
-        if: inputs.divebooker_flight
+        if: contains(inputs.divebooker_ask, 'flight')
         run: |
           python3 tools/probe_divebooker_flight.py \
             --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
@@ -374,7 +354,7 @@ jobs:
       # page shows ten of. Open to us: the Disallow sits in the turnitinbot
       # record, not the `*` one.
       - name: Read the seller's own search
-        if: inputs.divebooker_search
+        if: contains(inputs.divebooker_ask, 'search')
         run: |
           python3 tools/probe_divebooker_search.py \
             --months "${{ inputs.divebooker_months || '202705,202706,202707' }}" \
