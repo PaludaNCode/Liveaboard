@@ -21,14 +21,19 @@ commit that closes a stage, never afterwards from memory.
 
 | Stage | State |
 |---|---|
-| 0 — seller or opinion | **open**, and it is the owner's call rather than a measurement |
-| 1 — reach it | **closed**: unreachable from the sandbox, reachable from a runner; `probe.yml → only: divebooker` |
-| 2 — robots.txt | see *Findings*, below |
-| 3 — inventory | see *Findings* |
-| 4 — what a page returns | see *Findings* |
-| 5 — where the money is | see *Findings* |
-| 6 — write the map | `docs/sources/divebooker.com.md` |
-| 7–14 | not started; 7 onwards cannot begin until 5 is closed |
+| 0 — seller or opinion | **open**, and the owner's call rather than a measurement |
+| 1 — reach it | **closed**: no from the sandbox, yes from a runner (`probe.yml → only: divebooker`) |
+| 2 — robots.txt | **closed**: 200/480 bytes to us, 403 to an anonymous request; 10 rules, no crawl-delay |
+| 3 — inventory | **closed**: 5,715 URLs, flat namespace typed by an id suffix, 516 hulls |
+| 4 — what a page returns | **closed**: server-rendered JSON-LD, plain HTTP, no browser |
+| 5 — where the money is | **closed**: in the served bytes — `Event`+`Offer` per departure |
+| 6 — write the map | **closed**: `docs/sources/divebooker.com.md` |
+| 7 — fixtures | next, and it needs one Egyptian hull read in full |
+| 8–14 | not started |
+
+The open question the next probe answers is not *where* a price is but *what a
+departure node holds* — currency, berth count, list price, any fee at all —
+because that is what decides stage 0.
 
 ## What is already done
 
