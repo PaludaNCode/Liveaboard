@@ -74,6 +74,8 @@ ENTRY_PATHS = ("/",)
 #: fetching its own data from somewhere, which is question 4b.
 STATE_BLOBS = (
     "__NEXT_DATA__",
+    "__next_f",          # App Router's streamed payload; there is no __NEXT_DATA__
+    "_next/data",
     "__NUXT__",
     "__INITIAL_STATE__",
     "__APOLLO_STATE__",
@@ -114,6 +116,33 @@ def status_of(url: str, agent: str, timeout: float = 20.0) -> tuple[int | str, d
 
 
 TELLTALE_HEADERS = ("server", "cf-ray", "cf-mitigated", "content-type", "retry-after")
+
+
+def repair_robots(fetcher: PoliteFetcher, host: str) -> tuple[str, bool]:
+    """Give `fetcher` the robots.txt this host serves *us*, and say if it differed.
+
+    `RobotFileParser.read()` sends no User-Agent, and on a host that filters by
+    agent it comes back 403 and sets `disallow_all` -- a blanket refusal
+    nobody wrote, attributed to the site. Measured on divebooker.com, whose
+    file answers 200 in 480 bytes to this project's own agent.
+
+    Per host, because the fetcher keys its parsers on netloc and this site
+    declares its sitemaps on the apex while linking the www: repairing one and
+    not the other refuses every sitemap on the strength of the same artefact.
+    """
+    url = f"https://{host}/robots.txt"
+    rules = fetcher._robots_for(url)
+    blanket = getattr(rules, "disallow_all", False) or getattr(rules, "allow_all", False)
+    if not blanket:
+        return "", False
+    status, _, body = status_of(url, fetcher.user_agent)
+    if status != 200 or not body.strip():
+        return "", False
+    rules.disallow_all = False
+    rules.allow_all = False
+    rules.parse(body.splitlines())
+    fetcher._robots[host] = rules
+    return body, True
 
 
 def shape(url: str) -> str:
@@ -231,7 +260,6 @@ def main() -> int:
         print("  job -- or the site refused us, which is itself the answer.")
         return 1
 
-    # What the stdlib came away holding, which is not the same as what it read.
     blanket = ("disallow_all" if getattr(rules, "disallow_all", False) else
                "allow_all" if getattr(rules, "allow_all", False) else "")
     print(f"  RobotFileParser.read() came away : "
@@ -244,18 +272,18 @@ def main() -> int:
         print("      set by a 4xx that is not 401/403 — usually no robots.txt at")
         print("      all, so there is no stated position to obey or breach.")
 
-    if served and blanket:
-        # The file we were served, parsed into the object the fetcher consults.
-        # Reaching into `_robots` is a probe's licence and not a pattern: the
-        # right home for this is `PoliteFetcher` itself, which is its own
-        # change with its own guard, against two sources already in flight.
-        rules.disallow_all = False
-        rules.allow_all = False
-        rules.parse(served.splitlines())
-        fetcher._robots[urlparse(robots_url).netloc] = rules
-        print("  re-read as ourselves             : the 200 above, parsed")
-        print("      Everything below obeys THIS file. The stdlib's blanket")
+    # Both hosts: this site links the www and declares its sitemaps on the apex.
+    repaired_any = False
+    for host in dict.fromkeys((args.host, args.host.removeprefix("www."))):
+        body, repaired = repair_robots(fetcher, host)
+        if repaired:
+            repaired_any = True
+            served = served or body
+            print(f"  re-read as ourselves             : {host}, the 200 above, parsed")
+    if repaired_any:
+        print("      Everything below obeys THAT file. The stdlib's blanket")
         print("      refusal was an artefact of an anonymous request.")
+        rules = fetcher._robots_for(robots_url)
 
     print("\n== 1. robots.txt, read twice ==")
     raw = get(robots_url)
@@ -268,6 +296,7 @@ def main() -> int:
         print(f"    disallow {line}"
               f"{'   <- can_fetch() says yes anyway' if line in orphans else ''}")
     if orphans:
+        print(f"    permitted despite the file: {', '.join(orphans)}")
         print("  MISMATCH: the file refuses paths the parser permits. That is")
         print("  liveaboard.com's blank-line bug, and it means can_fetch() is not")
         print("  permission here. Decide deliberately and write the decision down,")
