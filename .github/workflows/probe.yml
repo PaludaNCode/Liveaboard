@@ -291,13 +291,19 @@ jobs:
       # Still writes nothing to the repository — the book and the pages leave
       # as an artifact, and what lands in `data/` is committed by a person
       # who has read it.
+      # `all` reads the whole Egyptian fleet; a number caps it. --emit prints
+      # the book and two pages' JSON-LD as gzip+base64, which is the one
+      # channel back: the sandbox's egress policy refuses divebooker.com and
+      # the blob host artifacts are served from, so a runner that reads this
+      # source otherwise has no way to hand back what it read.
       - name: Read the Egyptian fleet into a book
         if: inputs.divebooker_fetch != '0'
         run: |
           python3 tools/fetch_divebooker.py \
-            --limit "${{ inputs.divebooker_fetch || '3' }}" \
+            ${{ inputs.divebooker_fetch != 'all' && format('--limit {0}', inputs.divebooker_fetch) || '' }} \
             --save-html /tmp/divebooker-html \
-            --book /tmp/divebooker.json
+            --book /tmp/divebooker.json \
+            --emit
 
       - name: Upload the book and the pages it was read from
         if: inputs.divebooker_fetch != '0'

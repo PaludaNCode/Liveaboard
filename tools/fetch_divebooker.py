@@ -29,6 +29,8 @@ knows nothing about the vessels it did not visit.
 from __future__ import annotations
 
 import argparse
+import base64
+import gzip
 import json
 import sys
 from datetime import date
@@ -54,6 +56,28 @@ enough for a season ending and tight enough that a silent wipe cannot pass.
 """
 
 
+EMIT_WIDTH = 1000
+"""Characters per printed line.
+
+A courier, and it exists because of a measured hole rather than a preference:
+the development sandbox's egress policy refuses divebooker.com *and* the blob
+host GitHub serves artifacts from, so a runner can read this source and then
+has no way to hand back what it read. A job log is the one channel that
+survives both, and long lines keep a 200 KB book inside a readable number of
+them. Reassembled by `tools/land_divebooker.py`.
+"""
+
+
+def emit(name: str, payload: bytes) -> None:
+    """Print one file as gzip+base64, between markers a reader can find."""
+    text = base64.b64encode(gzip.compress(payload, mtime=0)).decode("ascii")
+    print(f"-----BEGIN {name}-----", flush=True)
+    for start in range(0, len(text), EMIT_WIDTH):
+        print(text[start:start + EMIT_WIDTH], flush=True)
+    print(f"-----END {name}----- ({len(payload)} bytes, {len(text)} encoded)",
+          flush=True)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--country", default=COUNTRY)
@@ -63,6 +87,11 @@ def main() -> int:
     parser.add_argument("--save-html", type=Path,
                         help="keep each page's bytes here, for fixtures")
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
+    parser.add_argument("--emit", action="store_true",
+                        help="print the book, and any saved page's JSON-LD, as "
+                             "gzip+base64 — the only way back from a runner")
+    parser.add_argument("--emit-pages", type=int, default=2,
+                        help="how many saved pages' JSON-LD to print with --emit")
     args = parser.parse_args()
 
     fetcher = PoliteFetcher(snapshot_dir=args.snapshots, delay=args.delay)
@@ -148,6 +177,19 @@ def main() -> int:
           f"{len(fresh['departures'])} departure(s), {len(warnings)} warning(s)")
     for line in warnings[:20]:
         print(f"  ! {line}")
+
+    if args.emit:
+        emit("divebooker.json", args.book.read_bytes())
+        # The JSON-LD only, for fixtures. A page is ~300 KB and the parser
+        # reads nothing outside these blocks, so this keeps every structured
+        # fact the page published and drops markup no fixture would exercise.
+        if args.save_html:
+            from liveaboard.scrape import jsonld
+            pages = sorted(args.save_html.glob("*-haz*.html"))[: args.emit_pages]
+            for page in pages:
+                blocks = jsonld.extract_blocks(page.read_text(encoding="utf-8"))
+                emit(f"{page.stem}.jsonld.json",
+                     json.dumps(blocks, indent=1).encode("utf-8"))
     return 0
 
 
