@@ -63,14 +63,34 @@ def main() -> int:
         for key in (compare(boat["id"]), compare(boat["name"])):
             ours.setdefault(key, []).append(boat["id"])
 
+    def keys_for(vessel: dict, slug: str) -> list[str]:
+        """The forms this vessel's stated name may be compared in.
+
+        A hull whose page states no departure has no `Event.organizer`, so
+        `vessel()` falls back to `Product.name` — which is a page title with
+        the country appended, *Bella 2 Liveaboard, Egypt*. The country is in
+        the same record, so dropping that suffix is reading the page rather
+        than guessing at it; a boat actually called *Egypt Explorer* keeps its
+        word, because only a trailing `, {country}` goes.
+        """
+        name = (vessel.get("name") or "").strip()
+        forms = [name or slug]
+        country = (vessel.get("country") or "").strip()
+        if country and name.lower().endswith(f", {country.lower()}"):
+            forms.append(name[: -len(country) - 2])
+        return [compare(form) for form in forms]
+
     proposed: dict[str, str] = {}
     unmatched: list[tuple[str, str]] = []
     for slug, vessel in sorted((book.get("vessels") or {}).items()):
         if slug in alias:
             continue
         name = (vessel.get("name") or "").strip()
-        key = compare(name or slug)
-        hits = sorted(set(ours.get(key, [])))
+        hits: list[str] = []
+        for key in keys_for(vessel, slug):
+            hits = sorted(set(ours.get(key, [])))
+            if hits:
+                break
         if len(hits) == 1:
             proposed[slug] = hits[0]
             print(f"  = {slug:<30} {name:<34} -> {hits[0]}")
