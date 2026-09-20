@@ -88,7 +88,7 @@ DISALLOW_LINE = re.compile(r"^\s*disallow:\s*(\S*)", re.I | re.M)
 MONEY = re.compile(r"(?:€|\$|£|EUR|USD|GBP)\s?\d[\d.,]{2,}", re.I)
 
 
-def status_of(url: str, agent: str, timeout: float = 20.0) -> tuple[int | str, dict[str, str], int]:
+def status_of(url: str, agent: str, timeout: float = 20.0) -> tuple[int | str, dict[str, str], str]:
     """The HTTP status of one URL, the headers worth naming, and the body size.
 
     `RobotFileParser.read()` swallows this. A 403 on robots.txt leaves it
@@ -104,13 +104,13 @@ def status_of(url: str, agent: str, timeout: float = 20.0) -> tuple[int | str, d
     request = urllib.request.Request(url, headers={"User-Agent": agent})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
-            body = response.read()
-            return response.status, dict(response.headers), len(body)
+            return (response.status, dict(response.headers),
+                    response.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as exc:
-        body = exc.read() or b""
-        return exc.code, dict(exc.headers or {}), len(body)
+        body = (exc.read() or b"").decode("utf-8", "replace")
+        return exc.code, dict(exc.headers or {}), body
     except Exception as exc:  # noqa: BLE001 - the failure mode is the answer
-        return f"{type(exc).__name__}: {exc}", {}, 0
+        return f"{type(exc).__name__}: {exc}", {}, ""
 
 
 TELLTALE_HEADERS = ("server", "cf-ray", "cf-mitigated", "content-type", "retry-after")
@@ -202,18 +202,24 @@ def main() -> int:
     print(f"== 0. reachability: {args.host} ==")
     robots_url = f"{base}/robots.txt"
 
-    # Asked directly, before the parser gets a chance to hide the answer.
+    # Asked directly, before the parser gets a chance to hide the answer, and
+    # asked as ourselves: `RobotFileParser.read()` sends no User-Agent at all,
+    # so what it gets back is what the site thinks of `Python-urllib/3.11`.
+    served = ""
     for candidate in (robots_url, f"https://{args.host.removeprefix('www.')}/robots.txt"):
-        status, headers, size = status_of(candidate, fetcher.user_agent)
+        status, headers, body = status_of(candidate, fetcher.user_agent)
         named = ", ".join(f"{key}={value}" for key, value in headers.items()
                           if key.lower() in TELLTALE_HEADERS)
-        print(f"  GET {candidate}")
-        print(f"      status {status} · {size} bytes{' · ' + named if named else ''}")
+        print(f"  GET {candidate}   (as {fetcher.user_agent.split()[0]})")
+        print(f"      status {status} · {len(body)} bytes"
+              f"{' · ' + named if named else ''}")
         if status == 403:
             print("      403 to this project's own user agent. That is the site")
             print("      declining to be read by a declared bot, and it is an")
             print("      answer rather than an obstacle: nothing here pretends")
             print("      to be a browser to get around it.")
+        if status == 200 and not served:
+            served = body
 
     try:
         rules = fetcher._robots_for(robots_url)
@@ -225,21 +231,36 @@ def main() -> int:
         print("  job -- or the site refused us, which is itself the answer.")
         return 1
 
-    # What the parser came away holding, which is not the same as what it read.
+    # What the stdlib came away holding, which is not the same as what it read.
     blanket = ("disallow_all" if getattr(rules, "disallow_all", False) else
                "allow_all" if getattr(rules, "allow_all", False) else "")
-    print(f"  parser state after read()        : "
+    print(f"  RobotFileParser.read() came away : "
           f"{blanket or 'rules read from the file'}")
     if blanket == "disallow_all":
-        print("      set by a 401/403 on robots.txt, so every can_fetch() below")
-        print("      is that refusal repeated and not a rule anybody wrote.")
+        print("      set by a 401/403, and `read()` sends no User-Agent — so on")
+        print("      a host that filters by agent this is the site's answer to")
+        print("      `Python-urllib`, not to us, and not a rule anybody wrote.")
     elif blanket == "allow_all":
         print("      set by a 4xx that is not 401/403 — usually no robots.txt at")
         print("      all, so there is no stated position to obey or breach.")
 
+    if served and blanket:
+        # The file we were served, parsed into the object the fetcher consults.
+        # Reaching into `_robots` is a probe's licence and not a pattern: the
+        # right home for this is `PoliteFetcher` itself, which is its own
+        # change with its own guard, against two sources already in flight.
+        rules.disallow_all = False
+        rules.allow_all = False
+        rules.parse(served.splitlines())
+        fetcher._robots[urlparse(robots_url).netloc] = rules
+        print("  re-read as ourselves             : the 200 above, parsed")
+        print("      Everything below obeys THIS file. The stdlib's blanket")
+        print("      refusal was an artefact of an anonymous request.")
+
     print("\n== 1. robots.txt, read twice ==")
     raw = get(robots_url)
-    disallowed = stated_disallows(raw.body if raw else "")
+    text = raw.body if raw else served
+    disallowed = stated_disallows(text)
     orphans = orphaned_rules(rules, fetcher.user_agent, disallowed, base)
     print(f"  Disallow: paths in the file      : {len(disallowed)}")
     print(f"  of those, can_fetch() says yes   : {len(orphans)}")
@@ -259,7 +280,7 @@ def main() -> int:
         print(f"  can_fetch {url:<48} {rules.can_fetch(fetcher.user_agent, url)}")
 
     print("\n== 2. what the site says it has ==")
-    declared = SITEMAP_LINE.findall(raw.body) if raw else []
+    declared = SITEMAP_LINE.findall(text)
     if not declared:
         declared = [f"{base}/sitemap.xml"]
         print("  robots.txt declares no sitemap; trying /sitemap.xml on spec")
