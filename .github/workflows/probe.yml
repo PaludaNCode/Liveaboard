@@ -291,7 +291,10 @@ jobs:
   divebooker:
     if: inputs.only == 'all' || inputs.only == 'divebooker'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # A whole-fleet read is about 95 requests at the five-second pace: four
+    # months of search paging plus one page per hull. The cap is the pace
+    # times the fleet, not a guess -- and the pace is what may not be cut.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
