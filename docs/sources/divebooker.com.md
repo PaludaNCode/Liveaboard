@@ -225,7 +225,58 @@ silently reads another boat.
 month has already shown — **the repeat is the stop, never a page number**,
 because the failure mode above is exactly a paginator that keeps answering.
 
-### The fleet, read whole
+### The fee book the sweep missed
+
+`details` in the streamed payload, titled **Price details**, three columns on
+every one of them. Counted 2026-09-20 by
+`tools/probe_divebooker_fee_shape.py` over all 92 hulls
+([run 35533600353](https://github.com/PaludaNCode/Liveaboard/actions/runs/35533600353)):
+
+| | |
+|---|---|
+| Hulls carrying the block | **75 of 92** — the 17 without are the 17 that state no departure either |
+| Blocks per hull | 1 to 23, **606 in all** — it is per *trip*, not per vessel |
+| On hulls with several | **42 state the same surcharges on every trip, 25 differ** |
+| Columns | `included` / `notincluded` ("Obligatory surcharges") / `extra` ("Extra cost"), on all 606 |
+
+And what the lines hold:
+
+| Column | Lines | Priced |
+|---|---|---|
+| `included` | 5,244 | **0** — an inclusion list, which is what it is for |
+| `notincluded` | 986 | **792 (80%)** |
+| `extra` | 4,276 | 303 |
+
+* **Currency is stated in the prose**: EUR on 796 priced lines, USD on 299 —
+  and 796 of them disagree with the currency the *page* rendered in, which is
+  the right way round. The fare takes its currency from the payload because
+  the offer's label is a static per-vessel thing; a fee line says its own.
+* **Unit is stated on 85%**: per person 507, per trip 366, per day 42, per
+  person per day 5, per tank 5 — and **170 state none**, which is the
+  `unit_unstated` case this project already has a rule for.
+* **Where it is paid is stated too**: on board 626, in advance 161, at the
+  airport 17, cash 51.
+* **The existing vocabulary already reads it.** `scrape.fees.classify_label`
+  resolves 4,311 label instances — dive insurance, visa, gratuities, gear
+  rental, airport transfer, 15l tanks, combined fees, fuel surcharge, marine
+  park, environment tax, nitrox — against 951 it does not, of which the
+  largest are things that are not this site's fees at all (*international
+  flights* 297+158, *hotel accommodation*, *massage service*) plus a short
+  list of real near-misses: *government fees*, *fuel charge*, *route
+  supplement*, *port & permission fees*, *crew gratitude*, *14% GST*.
+
+Three shapes the parser has to survive, all of them ones the other two
+sellers already forced:
+
+    Marine Park, Port Fees and Permissions - 125-250 EUR per person (to be paid on board)
+    Fuel Surcharge: 10EUR per day, to be paid on board
+    Marine Park fees, harbour fees and fuel surcharge - 165-240 EUR per person per trip (to be paid on board)
+
+a **range** rather than a figure, a **combined charge** naming three fees at
+once, and a separator that is a colon on one boat and a dash on the next with
+no space between the number and its currency.
+
+## The fleet, read whole
 
 Read 2026-09-20
 ([run 35522066901](https://github.com/PaludaNCode/Liveaboard/actions/runs/35522066901)),
@@ -326,13 +377,10 @@ streamed.
   Whatever this source becomes, *places left* and *on sale* are not questions
   it can answer. `AggregateOffer` sits once per vessel page and is unread; it
   is the only remaining candidate for a low/high figure.
-- **"No fee book on the vessel page" is a keyword sweep, not a census.** The
-  claim below rests on 253 payload keys, none matching `fee`, `extra`,
-  `includ` or `exclud`. A panel headed *Trip & price details* is exactly what
-  such a sweep misses, since its fields may be called anything;
-  `tools/probe_divebooker_details.py` enumerates every key instead of matching
-  a list of words, and until it has run this bullet is a question rather than
-  a finding.
+- **"No fee book on the vessel page" was wrong, and the sweep is why.** It
+  rested on 253 payload keys, none matching `fee`, `extra`, `includ` or
+  `exclud` — and the panel is under a key called `details`. See *The fee book
+  the sweep missed* below.
 
 ## The fleet, read whole
 
