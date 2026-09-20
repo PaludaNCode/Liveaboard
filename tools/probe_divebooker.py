@@ -170,16 +170,44 @@ def shape(url: str) -> str:
     return "/" + "/".join(parts[:2]) + ("/*" if len(parts) > 2 else "")
 
 
-def stated_disallows(raw: str) -> list[str]:
-    """Every path the file's own text refuses, in order, duplicates folded.
+AGENT_LINE = re.compile(r"^\s*user-agent:\s*(\S+)", re.I)
 
-    Read off the text rather than out of the parser, because the two can
-    disagree and the disagreement is the whole point of question 1.
+
+def stated_disallows(raw: str, agents: tuple[str, ...] = ("*",)) -> list[str]:
+    """Every path the file refuses **the agents named**, in order.
+
+    Grouped by `User-agent`, and that grouping is the whole correction. The
+    first version read every `Disallow:` line in the file regardless of whose
+    record it sat in, so divebooker's
+
+        User-agent: turnitinbot
+        Disallow: /boatsearch
+
+    was counted as a refusal of `/boatsearch` — and since `can_fetch()`
+    correctly permits it, the probe then announced a MISMATCH and said
+    `can_fetch()` is not permission here. Both were this tool's error, and
+    `/boatsearch` is the path that answers how many boats this seller lists.
+    A rule in another agent's record is not a rule about us.
     """
+    wanted = {a.lower() for a in agents}
     seen: list[str] = []
-    for path in DISALLOW_LINE.findall(raw):
-        if path and path not in seen:
-            seen.append(path)
+    current: set[str] = set()
+    ruled = False
+    for line in raw.splitlines():
+        agent = AGENT_LINE.match(line)
+        if agent:
+            # Consecutive `User-agent` lines share one record; the first one
+            # after a rule starts a new record.
+            if ruled:
+                current, ruled = set(), False
+            current.add(agent.group(1).lower())
+            continue
+        path = DISALLOW_LINE.match(line)
+        if not path:
+            continue
+        ruled = True
+        if path.group(1) and current & wanted and path.group(1) not in seen:
+            seen.append(path.group(1))
     return seen
 
 
@@ -313,11 +341,14 @@ def main() -> int:
         for line in text.splitlines():
             print(f"  | {line}")
         print("  ------------------------------")
-    print(f"  Disallow: paths in the file      : {len(disallowed)}")
+    print(f"  Disallow: paths for `*`          : {len(disallowed)}")
     print(f"  of those, can_fetch() says yes   : {len(orphans)}")
     for line in disallowed[:8]:
         print(f"    disallow {line}"
               f"{'   <- can_fetch() says yes anyway' if line in orphans else ''}")
+    others = [p for p in stated_disallows(text, ("*", "turnitinbot")) if p not in disallowed]
+    if others:
+        print(f"  refused only to other agents     : {', '.join(others)}")
     if orphans:
         print(f"    permitted despite the file: {', '.join(orphans)}")
         print("  MISMATCH: the file refuses paths the parser permits. That is")

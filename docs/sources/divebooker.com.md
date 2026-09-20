@@ -53,11 +53,29 @@ What the file states, once read as ourselves:
 The eight the probe prints: `/rc/`, `/destinations./`, `/destinations/`,
 `/aquatories/`, `/countries/`, `/owner/`, `/profile/`, `/admin/`.
 
-**`/boatsearch` is refused by the file and permitted by the parser** — the same
-shape as liveaboard.com's blank-line bug, and the same rule applies: that yes
-is a parser artefact and not permission. Nothing here fetches `/boatsearch`.
-Note what is refused: `/destinations/`, `/countries/` and `/aquatories/` are
-listing paths, and a crawl may not use them.
+**That sentence was wrong, and it is kept because it cost a week's worth of
+wrong conclusions.** It read: *"`/boatsearch` is refused by the file and
+permitted by the parser — the same shape as liveaboard.com's blank-line bug,
+and the same rule applies: that yes is a parser artefact and not permission.
+Nothing here fetches `/boatsearch`."* It is not. The file, read verbatim,
+ends its `*` record and then opens another:
+
+    Disallow: /profile
+
+    User-agent: turnitinbot
+    Disallow: /boatsearch
+
+`/boatsearch` is refused to **turnitinbot** and to nobody else. `can_fetch()`
+was right all along; the probe was reading every `Disallow:` line in the file
+without asking whose record it sat in, and then announcing a mismatch against
+its own miscount. `stated_disallows` groups by `User-agent` now. **A rule in
+another agent's record is not a rule about us** — and the path this cost us is
+the one that answers how many boats this seller lists.
+
+What the `*` record really refuses: `/rc/`, `/destinations./`,
+`/destinations/`, `/aquatories/`, `/countries/`, `/owner/`, `/profile/`,
+`/profile`, `/admin/`. Those are listing and account paths and a crawl may not
+use them. `/boatsearch` is not among them.
 
 No `Crawl-delay` means the pace is ours to choose. The host is **not** in
 `CHECKED_HOSTS`, so it gets the five-second default for a host nobody has read,

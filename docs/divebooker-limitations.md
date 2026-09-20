@@ -77,16 +77,18 @@ before deciding what the third seller is allowed to say on the page.
 
 ## What this reading did not cover
 
-9. **Ten hulls out of this site's 77.** The Egypt country page links ten
+9. **Ten hulls out of this site's 77 — and that was our mistake, not the
+   seller's.** The Egypt country page links ten
    `-haz` vessels and the fetch follows those links. The sitemap knows 516
-   hulls worldwide and does not say which sea any is in; `/boatsearch` would
-   answer and **robots.txt refuses it**, as it refuses `/destinations/`,
-   `/countries/` and `/aquatories/`. So the fleet here is *what the country
-   page links*, and whether that is the whole Egyptian fleet is unestablished.
-   Ten against this site's 77 is the number to be uneasy about — and all ten
-   are boats we already carry, so this reading adds no vessel and no sailing:
-   148 in-season departures, every one of them joining a row that was already
-   there.
+   hulls worldwide and does not say which sea any is in.
+   `/boatsearch?et=2&e=3881&ym=202705` answers — **75 boats for May 2027** —
+   and it is **not** refused to us: that `Disallow: /boatsearch` sits in the
+   file's `turnitinbot` record, and this project read it as a rule about
+   everybody. `/destinations/`, `/countries/` and `/aquatories/` really are
+   refused to `*` and stay unavailable. So the ten is a limit of how we
+   looked, not of what the seller lists, and it is liftable. All ten read so
+   far are boats we already carry, adding no vessel and no sailing — which
+   says nothing about the other 65.
 10. **One day's reading.** 977 departures collected 2026-09-20, in a single
     run, with no second run to compare against. Every rule this project has
     about staleness applies and none has been exercised here yet.

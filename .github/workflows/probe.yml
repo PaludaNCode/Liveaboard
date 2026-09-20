@@ -83,6 +83,14 @@ on:
         description: "Vessel slug for the flight probe, as the book names it"
         type: string
         default: "red-sea-aggressor-ii"
+      divebooker_search:
+        description: "Read /boatsearch for the months given (the real fleet)"
+        type: boolean
+        default: false
+      divebooker_months:
+        description: "Year-months for the search probe, e.g. 202705,202706"
+        type: string
+        default: "202705,202706,202707"
       divebooker_dump_robots:
         description: "Print divebooker's robots.txt verbatim"
         type: boolean
@@ -340,6 +348,15 @@ jobs:
         run: |
           python3 tools/probe_divebooker_flight.py \
             --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
+
+      # The seller's own search, which says 75 boats for a month the country
+      # page shows ten of. Open to us: the Disallow sits in the turnitinbot
+      # record, not the `*` one.
+      - name: Read the seller's own search
+        if: inputs.divebooker_search
+        run: |
+          python3 tools/probe_divebooker_search.py \
+            --months "${{ inputs.divebooker_months || '202705,202706,202707' }}"
 
       - name: Upload the book and the pages it was read from
         if: inputs.divebooker_fetch != '0'
