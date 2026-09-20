@@ -85,35 +85,31 @@ before deciding what the third seller is allowed to say on the page.
    out of a wrong division is exactly the kind this project has to be able to
    recognise later.
 
-   **Read correctly, the two comparisons disagree with each other, and that is
-   the finding.** Over the 777 joined rows:
+   **How the two comparisons disagreed was the finding, and the page settled
+   it.** Before the fix, reading each figure by its own label put 595 of 777
+   rows in a 10–20% band — the euro-dollar gap wearing a costume — while
+   ignoring both labels put 645 on the same number to the cent. The page's own
+   payload says which is right (`currencies.current: USD`), and with the
+   currency read from there:
 
-   | Distance from the nearer seller | as labelled | as digits |
+   | Distance from the nearer seller | before | after |
    |---|---|---|
-   | exact (<0.2%) | 106 | **645** |
-   | within 1% | 2 | 15 |
-   | within 3% | 4 | 2 |
-   | within 10% | 29 | 18 |
-   | within 20% | **595** | 76 |
-   | over 20% | 41 | 21 |
+   | exact (<0.2%) | 106 | **725** |
+   | within 3% | 6 | 2 |
+   | within 10% | 29 | 27 |
+   | within 20% | 595 | 3 |
+   | over 20% | 41 | **20** |
 
-   *As labelled* puts 595 rows in a 10–20% band, which is the euro-dollar gap
-   wearing a costume. *As digits* — both currency labels ignored — puts **645
-   of 777 on the same number to the cent**. Broken down by what each seller
-   says: where divebooker says EUR and liveaboard.com says USD, 554 of 618
-   carry the same number; where liveaboard.com itself says EUR, divebooker's
-   figure is **1.148× it, which is 1/0.8726**. So the number is the dollar
-   figure and `Offer.priceCurrency` is not describing it — or this seller
-   charges a 14.6% premium that lands exactly on another seller's dollar price
-   across a dozen operators. `tools/probe_divebooker_currency.py` asks the page
-   which, rather than taking the agreement as proof.
+   Three sellers, 725 sailings, one price each, to the cent.
 
-   **And the residue has a shape too.** Reading the number as dollars leaves
-   ~50 rows that really differ, of which the loud ones are Unity (13 sailings
-   at 1.42×), Ghazala Explorer 2027-07-12 at 1.65×, Blue Pearl 2027-07-29 at
-   1.45× — and Red Sea Aggressor IV 2027-07-24 at exactly **2.000×**, still the
-   only one whose offer node is identical in shape to the sailings either side
-   of it.
+   **And the residue has a shape too.** 52 rows really differ, of which the
+   loud ones are Unity (13 sailings at 1.39–1.42×), Ghazala Explorer
+   2027-07-12 at 1.65×, Blue Pearl 2027-07-29 at 1.26× — and Red Sea Aggressor
+   IV 2027-07-24 at exactly **2.000×**, still the only one whose offer node is
+   identical in shape to the sailings either side of it. A boat one seller
+   prices 40% above another is what a price-comparison site is for; a sailing
+   priced at exactly double is not that shape, which is why it is the one row
+   still unaccounted for.
 
 ## What it answers, but not the way the page would want
 
