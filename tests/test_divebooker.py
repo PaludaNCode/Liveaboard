@@ -119,7 +119,7 @@ class TestNothingIsInvented(unittest.TestCase):
 
 
 class TestTheFleetIsDiscoveredNotTyped(unittest.TestCase):
-    """Hulls come from the country page's own links.
+    """Hulls come from the seller's own links, on whichever page lists them.
 
     The flat namespace is typed by the two letters before the id, and only
     `haz` is a hull — `baz` is a dive site, `eaz` a port, `daz` a country.
@@ -285,3 +285,28 @@ class TestADateWithTwoOffersKeepsTheCheapest(unittest.TestCase):
         rows, _ = db.departures(page)
         self.assertEqual(rows[0].price, 2699.0)
         self.assertEqual(rows[0].currency, "USD")
+
+
+class TestTheSearchIsWalkedTheSiteSOwnWay(unittest.TestCase):
+    """`p=` is the paginator, and page one is the URL a visitor gets.
+
+    Nine other spellings — `page`, `pg`, `offset`, `start`, `skip`, `limit`,
+    `perPage`, `size`, `take` — each returned the first twenty hulls again,
+    with no error to say so. So the parameter is recorded with its
+    measurement beside it rather than typed, and these assert the shape that
+    measurement fixed: the season's four months, and a first page carrying no
+    page number at all.
+    """
+
+    def test_page_one_is_the_visitors_url(self):
+        self.assertEqual(db.search_path("202705"),
+                         "/boatsearch?et=2&e=3881&ym=202705")
+        self.assertEqual(db.search_path("202705", 1),
+                         db.search_path("202705"))
+
+    def test_later_pages_carry_the_measured_parameter(self):
+        self.assertEqual(db.search_path("202706", 3),
+                         "/boatsearch?et=2&e=3881&ym=202706&p=3")
+
+    def test_the_season_is_asked_in_this_sellers_own_vocabulary(self):
+        self.assertEqual(db.SEASON_YM, ("202705", "202706", "202707", "202708"))

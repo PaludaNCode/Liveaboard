@@ -6,10 +6,21 @@ fleet costs about as many requests as it has hulls, against liveaboard.com's
 four per vessel and PADI's per-itinerary calls. Nothing here needs a browser:
 every fact is in the JSON-LD the page serves (`docs/sources/divebooker.com.md`).
 
-The fleet is **discovered, never typed**: the Egypt country page links its own
-hulls, and `scrape.divebooker_com.hull_links` reads them. The sitemap knows all
-516 hulls worldwide and does not say which sea any of them is in, so it cannot
-be the entry point.
+The fleet is **discovered, never typed**, and it is discovered from the
+seller's own search rather than from its country page. `/egypt-daz3881` links
+**ten** hulls and `/boatsearch?et=2&e=3881&ym=202705` states **75** for one
+month: the country page is a landing page with a carousel on it, and reading a
+carousel as an inventory is the same error as reading liveaboard.com's
+featured strip as its fleet. The sitemap knows all 516 hulls worldwide and
+does not say which sea any of them is in, so it cannot be the entry point
+either.
+
+The search returns twenty a page and `p=` is what walks it — measured against
+nine other spellings that all returned the first twenty again, which is why
+`divebooker_com.PAGE_PARAM` carries the measurement beside it. A month is
+walked until a page adds no hull the month has not already shown, and every
+month of the season is walked: which boats a search lists is a question about
+that month.
 
 `--save-html DIR` keeps the raw pages. That is how the fixtures under
 `tests/fixtures/` were made, and it is the point: a parser proved against
@@ -44,8 +55,16 @@ from liveaboard.scrape import divebooker_com as db  # noqa: E402
 from liveaboard.scrape.base import FetchBlocked, PoliteFetcher  # noqa: E402
 from probe_divebooker import repair_robots  # noqa: E402
 
-COUNTRY = "egypt-daz3881"
 BOOK = Path("data/divebooker.json")
+
+MAX_PAGES = 12
+"""How deep one month's search is walked before the run says so and stops.
+
+Twenty a page against a stated 75 is four pages, so this is loose. It is not a
+belief about the fleet's size: a paginator that stops changing is caught by
+the repeat rule below, and this only bounds a paginator that never repeats —
+which would be the site answering something other than the question asked.
+"""
 
 MIN_BOOK_RATIO = 0.6
 """How much of the previous book a full run must reproduce before it may replace it.
@@ -89,7 +108,10 @@ def emit(name: str, payload: bytes) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--country", default=COUNTRY)
+    parser.add_argument("--months", default=",".join(db.SEASON_YM),
+                        help="year-months to search, the seller's own ym format")
+    parser.add_argument("--entity", default=db.EGYPT,
+                        help="the country id in egypt-daz3881")
     parser.add_argument("--limit", type=int, default=0, help="vessels to read, 0 for all")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--book", default=BOOK, type=Path)
@@ -125,14 +147,38 @@ def main() -> int:
             args.save_html.mkdir(parents=True, exist_ok=True)
             (args.save_html / name).write_text(result.body, encoding="utf-8")
 
-    country = get(f"{base}/{args.country}")
-    if country is None:
-        print("the country page could not be read, so this run knows no fleet")
-        return 1
-    keep(country, f"{args.country}.html")
+    months = [m.strip() for m in args.months.split(",") if m.strip()]
+    hulls: list[str] = []
+    seen: set[str] = set()
+    for ym in months:
+        shown: list[frozenset[str]] = []
+        for page in range(1, MAX_PAGES + 1):
+            path = db.search_path(ym, page, entity=args.entity)
+            result = get(base + path)
+            if result is None:
+                break
+            keep(result, f"boatsearch-{ym}-{page}.html")
+            linked = db.hull_links(result.body)
+            here = frozenset(linked)
+            fresh = [h for h in linked if h not in seen]
+            print(f"  {ym} p{page}: {len(linked):>3} linked, {len(fresh):>3} new",
+                  flush=True)
+            hulls.extend(fresh)
+            seen.update(linked)
+            # Two ways a walk ends, and neither of them is a page number. An
+            # empty page is the site saying there is no more; a page repeating
+            # one this month already showed is the site ignoring `p=` — which
+            # is what nine other spellings of it did, so it is the shape to
+            # expect rather than a surprise.
+            if not linked or here in shown:
+                break
+            shown.append(here)
+        else:
+            print(f"  {ym}: still finding hulls at page {MAX_PAGES} — stopping "
+                  f"there, and this run does not claim the month is complete")
 
-    hulls = db.hull_links(country.body)
-    print(f"{args.country}: {len(hulls)} hull(s) linked")
+    print(f"the search links {len(hulls)} distinct hull(s) over "
+          f"{len(months)} month(s)")
     if not hulls:
         print("  no hull linked — the entry point has moved, and writing an "
               "empty book over a good one is exactly what MIN_BOOK_RATIO is for")
@@ -160,7 +206,7 @@ def main() -> int:
     fresh = {
         "collected": date.today().isoformat(),
         "source": db.SOURCE_ID,
-        "country": args.country,
+        "scope": {"entity": args.entity, "months": months},
         "vessels": vessels,
         "departures": departures,
         "warnings": warnings,

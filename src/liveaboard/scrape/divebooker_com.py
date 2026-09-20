@@ -235,6 +235,41 @@ def search_pages(html: str) -> list[str]:
     return list(dict.fromkeys(SEARCH_LINK.findall(html)))
 
 
+#: The search URL is the site's own, copied out of a link it renders:
+#: an entity type, the Egypt id the country page already carries in its slug
+#: (`egypt-daz3881`), and a year-month.
+SEARCH_PATH = "/boatsearch?et={et}&e={entity}&ym={ym}"
+EGYPT = "3881"
+ENTITY_TYPE = "2"
+
+#: The months the published season covers, in this seller's vocabulary.
+#: `padi_com.SEASON` and `liveaboard_com.SEASON_MONTHS` say the same thing in
+#: theirs — each source is asked in the words it answers in, and a shared
+#: constant would have to be translated three times anyway.
+SEASON_YM: tuple[str, ...] = ("202705", "202706", "202707", "202708")
+
+#: The site's own pagination, **measured rather than typed** (2026-09-20).
+#: `/boatsearch?…&p=2` returns twenty hulls the first page does not, among them
+#: Aphrodite, Blue Pearl and Blue Seas. `page=2`, `pg=2`, `offset=20`,
+#: `start=20`, `skip=20`, `limit=100`, `perPage=100`, `size=100` and `take=100`
+#: each return the first twenty again — no error, no hint, just the same page,
+#: which is why this was tried against a known answer instead of assumed. The
+#: search renders no numbered links and the payload carries no endpoint
+#: literal and no server action id, so there was nothing to follow.
+PAGE_PARAM = "p"
+
+
+def search_path(ym: str, page: int = 1, entity: str = EGYPT,
+                et: str = ENTITY_TYPE) -> str:
+    """``/boatsearch?…`` for one month, one page.
+
+    Page one omits the parameter, so the first request of every month is the
+    URL a visitor gets.
+    """
+    path = SEARCH_PATH.format(et=et, entity=entity, ym=ym)
+    return path if page <= 1 else f"{path}&{PAGE_PARAM}={page}"
+
+
 def hull_links(html: str) -> list[str]:
     """Every ``/{slug}-haz{id}`` path the page links, in order, deduplicated.
 

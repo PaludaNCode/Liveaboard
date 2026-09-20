@@ -185,7 +185,7 @@ year-month.
 | | |
 |---|---|
 | Count the page states | **75** |
-| Hull links on the page | **20** — so it is paged, and the pagination parameter is unfound |
+| Hull links on the page | **20** — so it is paged |
 | Across 2027-05, -06 and -07 | 22 distinct hulls, **16 of them new to the book** |
 | Boats in the streamed payload | with `minPrice`, `minPriceDay`, `currencyId` |
 
@@ -194,9 +194,36 @@ Storm, DUNE Longara, Emperor Asmaa, Ghazala Adventure, Iceberg, Ocean Lovers,
 Odyssey, Sea Serpent, Serenity, Sinai Star, Titan, Topaz, Yachtiano. So the
 Egypt country page is a landing page with a carousel on it, and
 `fetch_divebooker.py` reading its links as an inventory is the same error as
-reading liveaboard.com's featured strip as a fleet. **Discovery has to move to
-this search**, and the next thing to find is how it pages: 20 links against a
-stated 75.
+reading liveaboard.com's featured strip as a fleet. **Discovery has moved to
+this search.**
+
+### It pages on `p=`, and nine other spellings do nothing
+
+Read 2026-09-20 by `tools/probe_divebooker_search.py --try-params`
+([run 35520903255](https://github.com/PaludaNCode/Liveaboard/actions/runs/35520903255)),
+against the answer page one already gives:
+
+| Parameter | Hulls | New |
+|---|---|---|
+| **`p=2`** | 20 | **20** — amelie-adventures, aml-hayaty, aphrodite, blue-pearl, blue-seas, destiny, … |
+| `page=2`, `pg=2` | 20 | 0 |
+| `offset=20`, `start=20`, `skip=20` | 20 | 0 |
+| `limit=100`, `perPage=100`, `size=100`, `take=100` | 20 | 0 |
+
+Nine wrong spellings return the first twenty again — no error, no hint, no
+empty page — so **a paging parameter here cannot be assumed, only measured**:
+a run that typed `page=` would have walked the same twenty boats four times
+and reported a complete fleet. The search renders no numbered links,
+`/api/`, `/graphql/` and `/_next/data` literals are absent from the page, and
+it carries **no server action id**, so there was nothing to follow and the
+experiment was the only route. It is safe in a way guessing a hull id is not:
+a wrong parameter here is visible in one request, where a wrong hull id
+silently reads another boat.
+
+`divebooker_com.PAGE_PARAM` carries that measurement beside it, and
+`fetch_divebooker.py` walks each season month until a page adds no hull the
+month has already shown — **the repeat is the stop, never a page number**,
+because the failure mode above is exactly a paginator that keeps answering.
 
 ## The payload the page streams to itself
 

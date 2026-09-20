@@ -77,22 +77,22 @@ before deciding what the third seller is allowed to say on the page.
 
 ## What this reading did not cover
 
-9. **Ten hulls out of this site's 77 — and that was our mistake, not the
-   seller's.** The Egypt country page links ten
-   `-haz` vessels and the fetch follows those links. The sitemap knows 516
-   hulls worldwide and does not say which sea any is in.
+9. **Ten hulls out of this site's 75 — and that was our mistake, not the
+   seller's. It is fixed, and the fix is a measurement.** The Egypt country
+   page links ten `-haz` vessels and the fetch followed those links; it is a
+   landing page with a carousel on it. The sitemap knows 516 hulls worldwide
+   and does not say which sea any is in.
    `/boatsearch?et=2&e=3881&ym=202705` answers — **75 boats for May 2027** —
    and it is **not** refused to us: that `Disallow: /boatsearch` sits in the
    file's `turnitinbot` record, and this project read it as a rule about
    everybody. `/destinations/`, `/countries/` and `/aquatories/` really are
-   refused to `*` and stay unavailable. So the ten is a limit of how we
-   looked, not of what the seller lists, and it is liftable — **measured**:
-   the search states 75, links 20 per page, and three months of it already
-   name 16 hulls the book does not have, every one a boat this site carries.
-   The book's 10 vessels and 977 departures are therefore a seventh of the
-   source, and the coverage numbers in `data/egypt-2027.json` are about what
-   we read rather than what divebooker sells. The pagination parameter is
-   still unfound.
+   refused to `*` and stay unavailable. The search links 20 a page and pages
+   on **`p=`**, which was found by trying it against a known answer: nine
+   other spellings (`page`, `pg`, `offset`, `start`, `skip`, `limit`,
+   `perPage`, `size`, `take`) each return the first twenty again, silently.
+   Discovery now walks every season month on `p=` until a page repeats.
+   Until a full read lands, the coverage numbers in `data/egypt-2027.json`
+   are still about what we read rather than what divebooker sells.
 10. **One day's reading.** 977 departures collected 2026-09-20, in a single
     run, with no second run to compare against. Every rule this project has
     about staleness applies and none has been exercised here yet.
