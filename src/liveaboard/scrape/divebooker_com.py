@@ -143,14 +143,24 @@ class Departure:
         return _nights(self.start, self.end) if self.end else None
 
     def as_dict(self) -> dict[str, Any]:
+        """What the book keeps, which is less than what the page states.
+
+        `url` is the vessel page on every row — the site links a sailing by a
+        fragment, not a path — so writing it per departure is one constant
+        repeated 977 times. It lives on the vessel instead. `event_id` is that
+        fragment and goes the same way: nothing downstream keys on it, and a
+        field kept in case is a field nobody maintains.
+
+        `stated_by` is evidence for the folding rule rather than a fact about
+        the sailing, so the vessel carries the counts and the row does not.
+        """
         out: dict[str, Any] = {"start": self.start}
-        for key in ("end", "trip", "price", "currency", "availability", "url", "event_id"):
+        for key in ("end", "trip", "price", "currency", "availability"):
             value = getattr(self, key)
             if value is not None:
                 out[key] = value
         if self.nights is not None:
             out["nights"] = self.nights
-        out["stated_by"] = sorted(self.stated_by)
         return out
 
 
@@ -170,6 +180,15 @@ class VesselBook:
         for key in ("divebooker_id", "name", "country"):
             if getattr(self, key):
                 out[key] = getattr(self, key)
+        # How the page stated this boat's sailings, counted. The fold is the
+        # one rule this parser exists for, so the evidence for it travels with
+        # the data rather than living only in a commit message.
+        stated: dict[str, int] = {}
+        for row in self.departures:
+            stated["+".join(sorted(row.stated_by)) or "neither"] = (
+                stated.get("+".join(sorted(row.stated_by)) or "neither", 0) + 1)
+        if stated:
+            out["stated_by"] = stated
         return out
 
 

@@ -174,8 +174,12 @@ def main() -> int:
         return 1
 
     args.book.parent.mkdir(parents=True, exist_ok=True)
-    args.book.write_text(json.dumps(fresh, indent=1, sort_keys=True) + "\n",
-                         encoding="utf-8")
+    # Compact, and sorted so a re-read of an unchanged fleet is a byte-for-byte
+    # no-op rather than a diff nobody can read. 977 departures indented is
+    # 290 KB of committed file for about 150 KB of facts.
+    args.book.write_text(
+        json.dumps(fresh, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8")
     print(f"\n{args.book}: {len(fresh['vessels'])} vessel(s), "
           f"{len(fresh['departures'])} departure(s), {len(warnings)} warning(s)")
     for line in warnings[:20]:
