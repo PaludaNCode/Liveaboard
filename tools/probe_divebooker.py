@@ -145,14 +145,28 @@ def repair_robots(fetcher: PoliteFetcher, host: str) -> tuple[str, bool]:
     return body, True
 
 
-def shape(url: str) -> str:
-    """A URL's first two path segments, which is what a pattern looks like.
+#: A flat-namespace slug carrying a typed id: `egypt-daz3881`, and whatever
+#: prefix this site uses for hulls and for trips. Found rather than assumed --
+#: the first sitemap read here returned 5,715 URLs and the two-segment grouping
+#: put each one in a bucket of its own, which is a census of nothing.
+FLAT_ID = re.compile(r"^(?P<slug>.+?)-(?P<prefix>[a-z]{1,6})(?P<num>\d+)$")
 
-    Same grouping `diagnose` uses on a page's links, applied to a sitemap:
-    `/liveaboard/egypt/*` occurring 60 times is the vessel pattern, and it is
-    the site that said so rather than us.
+
+def shape(url: str) -> str:
+    """The pattern a URL belongs to, for a site with paths in depth or in bulk.
+
+    `diagnose` groups a page's links by their first two segments, which is
+    right for `/liveaboard/egypt/*` and useless for a site whose vessels,
+    destinations and trips all sit at the root under their own slug. So a
+    single segment ending in a typed id folds onto that id's family, and
+    everything else keeps the depth grouping.
     """
     parts = [p for p in urlparse(url).path.split("/") if p]
+    if len(parts) == 1:
+        match = FLAT_ID.match(parts[0])
+        if match:
+            return f"/*-{match.group('prefix')}{'#' * len(match.group('num'))}"
+        return f"/{parts[0]}"
     return "/" + "/".join(parts[:2]) + ("/*" if len(parts) > 2 else "")
 
 
