@@ -19,6 +19,7 @@ import argparse
 import base64
 import gzip
 import re
+import zlib
 from pathlib import Path
 
 BEGIN = re.compile(r"-----BEGIN (?P<name>[\w.\-]+)-----")
@@ -35,17 +36,23 @@ def main() -> int:
 
     name: str | None = None
     chunks: list[str] = []
+    bad: list[int] = []
     written = 0
 
     for raw in args.log.read_text(encoding="utf-8", errors="replace").splitlines():
         line = STAMP.sub("", raw).strip()
         start = BEGIN.match(line)
         if start:
-            name, chunks = start.group("name"), []
+            name, chunks, bad = start.group("name"), [], []
             continue
         if name is None:
             continue
         if END.match(line):
+            if bad:
+                print(f"REFUSED: {name} — {len(bad)} line(s) did not match the "
+                      f"checksum printed beside them: {', '.join(map(str, bad))}")
+                print("  Re-copy those lines from the log; the rest are sound.")
+                return 1
             payload = gzip.decompress(base64.b64decode("".join(chunks)))
             target = args.out / name
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -54,7 +61,17 @@ def main() -> int:
             written += 1
             name = None
             continue
-        chunks.append(line)
+        # `<crc32> <chunk>`, so a line that arrived wrong is named rather than
+        # poisoning the whole payload. A line without one is taken as-is: the
+        # first version of this format had no checksums and its logs still
+        # decode.
+        stated, _, chunk = line.partition(" ")
+        if chunk and len(stated) == 8 and all(c in "0123456789abcdef" for c in stated):
+            if f"{zlib.crc32(chunk.encode('ascii')):08x}" != stated:
+                bad.append(len(chunks) + 1)
+            chunks.append(chunk)
+        else:
+            chunks.append(line)
 
     if name is not None:
         print(f"REFUSED: {name} has no END marker in this log — it was "

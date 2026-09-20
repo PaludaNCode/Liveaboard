@@ -33,6 +33,7 @@ import base64
 import gzip
 import json
 import sys
+import zlib
 from datetime import date
 from pathlib import Path
 
@@ -69,11 +70,19 @@ them. Reassembled by `tools/land_divebooker.py`.
 
 
 def emit(name: str, payload: bytes) -> None:
-    """Print one file as gzip+base64, between markers a reader can find."""
+    """Print one file as gzip+base64, a checksum per line.
+
+    The checksum is not belt-and-braces. Carrying 17,400 characters out of a
+    job log by hand failed once on a single wrong character, and gzip's own
+    CRC could only say *somewhere* — which makes the whole payload suspect and
+    the only remedy a full re-copy. A CRC per line names the line, so one is
+    re-read and the other seventeen stand.
+    """
     text = base64.b64encode(gzip.compress(payload, mtime=0)).decode("ascii")
     print(f"-----BEGIN {name}-----", flush=True)
     for start in range(0, len(text), EMIT_WIDTH):
-        print(text[start:start + EMIT_WIDTH], flush=True)
+        chunk = text[start:start + EMIT_WIDTH]
+        print(f"{zlib.crc32(chunk.encode('ascii')):08x} {chunk}", flush=True)
     print(f"-----END {name}----- ({len(payload)} bytes, {len(text)} encoded)",
           flush=True)
 
