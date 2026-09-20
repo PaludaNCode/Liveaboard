@@ -1321,10 +1321,10 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 }
 .deals-table .d-terms > summary:hover { color:var(--ink-dim); }
 .deals-table .d-terms ul {
-  margin:4px 0 0; padding-left:15px; max-width:34ch;
+  margin:4px 0 0; padding-left:15px; width:0; min-width:100%;
   color:var(--ink-faint); line-height:1.5;
 }
-.deals-table .d-terms li { margin:0 0 3px; }
+.deals-table .d-terms li { margin:0 0 3px; max-width:34ch; }
 
 /* The markdown, under the price it comes off. Deliberately quiet: it is a
    fact about the fare, not a badge competing with it, and 268 of 1,122 rows
