@@ -56,6 +56,31 @@ before deciding what the third seller is allowed to say on the page.
    booking page and establishes what the number counts, this source cannot be
    a third price.
 
+   **The other twelve were a currency mistake of ours, and one row is the
+   whole case.** Those figures were compared as digits, and the three books do
+   not agree on currency *per boat* rather than per seller: liveaboard.com
+   states Alsuraya in USD where PADI and divebooker state it in EUR. Read that
+   way, a 13% gap looked like a 1-unit gap and a 1-unit gap like a 15% one.
+   `tools/compare_divebooker_fares.py` converts all three through the
+   dataset's own committed ECB table first — offline, no request — and
+   measures each row against the **nearer** of the two sellers, because a
+   third seller is not wrong for undercutting one of them:
+
+   | Distance from the nearer seller | Rows |
+   |---|---|
+   | exact (<0.2%) | 65 |
+   | within 3% | 3 |
+   | within 10% | 6 |
+   | within 20% | 73 |
+   | **over 20%** | **1** |
+
+   The 73 are a real spread and not an artefact: on Alsuraya, Discovery I and
+   II and Grand Discovery, divebooker sits **13% under liveaboard.com and
+   about 15% over PADI** on every sailing, which is three sellers pricing one
+   berth and exactly what this site exists to show. So the case against
+   publishing is not thirteen ragged rows; it is **one row at exactly 2.000×**,
+   and what settles it is that sailing's own offer node.
+
 ## What it answers, but not the way the page would want
 
 6. **`AggregateOffer` is a rate with no stated unit.** Bella 2: `lowPrice 143,
