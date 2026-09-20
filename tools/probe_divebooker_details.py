@@ -66,6 +66,39 @@ def payload_of(html: str) -> str:
     return "".join(json.loads(chunk) for chunk in FLIGHT.findall(html))
 
 
+def balanced(text: str, start: int) -> str | None:
+    """The JSON value beginning at `start`, by counting brackets.
+
+    The payload is one enormous line, so a value cannot be read by looking for
+    the end of anything -- only by matching what opened it. Strings are walked
+    through so a brace inside prose does not end the object.
+    """
+    opener = text[start]
+    closer = {"{": "}", "[": "]"}.get(opener)
+    if closer is None:
+        return None
+    depth, index, in_string, escaped = 0, start, False, False
+    while index < len(text):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+        elif char == '"':
+            in_string = True
+        elif char == opener:
+            depth += 1
+        elif char == closer:
+            depth -= 1
+            if depth == 0:
+                return text[start:index + 1]
+        index += 1
+    return None
+
+
 def show(label: str, text: str, needle: str, span: int = 260, most: int = 3) -> int:
     found = 0
     for match in re.finditer(re.escape(needle), text, re.I):
@@ -84,6 +117,13 @@ def main() -> int:
     parser.add_argument("--book", default=Path("data/divebooker.json"), type=Path)
     parser.add_argument("--keys", type=int, default=400,
                         help="how many distinct payload keys to print")
+    parser.add_argument("--blocks", default="details,programm,requirements,"
+                                            "logistic,highlights,facilities,diving",
+                        help="payload keys to print whole, by bracket matching")
+    parser.add_argument("--each", type=int, default=1,
+                        help="how many occurrences of each block to print")
+    parser.add_argument("--chars", type=int, default=2500,
+                        help="cap per printed block")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
@@ -139,6 +179,30 @@ def main() -> int:
         match = re.search(rf'"{re.escape(name)}"\s*:\s*(.{{0,160}})', body, re.S)
         print(f"  {name:<28} {keys[name]:>4}x  {match.group(1)[:160]!r}"
               if match else f"  {name:<28} {keys[name]:>4}x")
+    print()
+
+    print("== the blocks themselves, whole ==")
+    for name in args.blocks.split(","):
+        name = name.strip()
+        found = 0
+        for match in re.finditer(rf'"{re.escape(name)}"\s*:\s*(?=[{{\[])', body):
+            chunk = balanced(body, match.end())
+            if chunk is None:
+                continue
+            found += 1
+            try:
+                pretty = json.dumps(json.loads(chunk), indent=1, ensure_ascii=False)
+            except json.JSONDecodeError:
+                pretty = chunk
+            if len(pretty) > args.chars:
+                pretty = pretty[: args.chars] + f"\n … [{len(pretty)} chars]"
+            print(f"\n  -- {name} #{found} --")
+            for line in pretty.splitlines():
+                print(f"   {line}")
+            if found >= args.each:
+                break
+        if not found:
+            print(f"  {name}: no object under that key")
     print()
 
     book = db.vessel(html, path)
