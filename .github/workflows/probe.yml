@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -361,6 +361,13 @@ jobs:
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
+
+      # A fee block names its trip in a different vocabulary from the one the
+      # departures use. A key that stops matching fails silently, so this
+      # counts what a join would do before anything is parsed.
+      - name: Can a fee block be attached to a departure
+        if: contains(inputs.divebooker_ask, 'feejoin')
+        run: python3 tools/probe_divebooker_fee_join.py
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
