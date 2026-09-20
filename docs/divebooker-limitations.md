@@ -111,6 +111,17 @@ before deciding what the third seller is allowed to say on the page.
    the interesting one and creating rows from it is the owner's call, the way
    PADI-only rows were.
 
+   **And four of those ten are not sailings on sale.** Read them by name and
+   the list says so itself: three are *Route on Request (Available for groups
+   and…)* with no price at all — Independence II 2027-07-08, Vita Xplorer
+   2027-07-17 and 07-24 — and Iceberg 2027-08-09 is a four-night *Full Charter
+   Request*. A charter enquiry with no fare is not a berth the other two
+   sellers failed to list. What is left is **six**: Blue on 2027-07-01 and
+   07-29, Heaven Saphir on 05-07, 07-10 and 07-12, and Independence II's
+   twelve-night 05-29 — each with a stated fare and a named route. Six is the
+   honest size of *what a third seller would add in rows*, against ten as
+   counted.
+
 9b. **33 hulls this site does not carry at all.** Aml Hayaty, Argo, Ashrafi,
    Bismarck, C Echo 2, Freedom III and IV, Galaxy 720, Golden Dolphin I,
    Hammerhead I, Icon, Independence III, Omneia Spirit, Sea Treasure, South
