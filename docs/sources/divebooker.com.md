@@ -174,6 +174,30 @@ and `discovery-ii-haz395` among them — so the Egypt country page is a working
 entry point and the boats join ours by name. What an id is keyed on, and
 whether a slug is stable, is unasked.
 
+## The fleet is about 75, and the country page shows a carousel
+
+Read 2026-09-20 by `tools/probe_divebooker_search.py`
+([run 35519334453](https://github.com/PaludaNCode/Liveaboard/actions/runs/35519334453)),
+over `/boatsearch?et=2&e=3881&ym=YYYYMM` — the site's own search URL: entity
+type 2, the Egypt id the country slug already carries (`egypt-daz3881`), and a
+year-month.
+
+| | |
+|---|---|
+| Count the page states | **75** |
+| Hull links on the page | **20** — so it is paged, and the pagination parameter is unfound |
+| Across 2027-05, -06 and -07 | 22 distinct hulls, **16 of them new to the book** |
+| Boats in the streamed payload | with `minPrice`, `minPriceDay`, `currencyId` |
+
+The sixteen are boats this site already carries — Blue, Blue Melody, Blue
+Storm, DUNE Longara, Emperor Asmaa, Ghazala Adventure, Iceberg, Ocean Lovers,
+Odyssey, Sea Serpent, Serenity, Sinai Star, Titan, Topaz, Yachtiano. So the
+Egypt country page is a landing page with a carousel on it, and
+`fetch_divebooker.py` reading its links as an inventory is the same error as
+reading liveaboard.com's featured strip as a fleet. **Discovery has to move to
+this search**, and the next thing to find is how it pages: 20 links against a
+stated 75.
+
 ## The payload the page streams to itself
 
 Read 2026-09-20 by `tools/probe_divebooker_flight.py` over

@@ -86,9 +86,13 @@ before deciding what the third seller is allowed to say on the page.
    file's `turnitinbot` record, and this project read it as a rule about
    everybody. `/destinations/`, `/countries/` and `/aquatories/` really are
    refused to `*` and stay unavailable. So the ten is a limit of how we
-   looked, not of what the seller lists, and it is liftable. All ten read so
-   far are boats we already carry, adding no vessel and no sailing — which
-   says nothing about the other 65.
+   looked, not of what the seller lists, and it is liftable — **measured**:
+   the search states 75, links 20 per page, and three months of it already
+   name 16 hulls the book does not have, every one a boat this site carries.
+   The book's 10 vessels and 977 departures are therefore a seventh of the
+   source, and the coverage numbers in `data/egypt-2027.json` are about what
+   we read rather than what divebooker sells. The pagination parameter is
+   still unfound.
 10. **One day's reading.** 977 departures collected 2026-09-20, in a single
     run, with no second run to compare against. Every rule this project has
     about staleness applies and none has been exercised here yet.
