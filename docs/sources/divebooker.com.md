@@ -156,6 +156,40 @@ and `discovery-ii-haz395` among them — so the Egypt country page is a working
 entry point and the boats join ours by name. What an id is keyed on, and
 whether a slug is stable, is unasked.
 
+## The payload the page streams to itself
+
+Read 2026-09-20 by `tools/probe_divebooker_flight.py` over
+`/red-sea-aggressor-ii-haz285`
+([run 35518848545](https://github.com/PaludaNCode/Liveaboard/actions/runs/35518848545)).
+
+**It is not fetched. It is in the HTML.** 51 `self.__next_f.push` chunks
+decode to **206 KB, a third of the 628 KB page**, and there are **zero**
+`/api/`, `/graphql/` or `/_next/data` literals in the HTML or in the first six
+script chunks the page loads. So a price a reader sees that this project does
+not hold is not behind an endpoint; it is in bytes we already fetch.
+
+What the payload adds over the JSON-LD:
+
+| | |
+|---|---|
+| **Cabins** | one node per cabin type — `occupancy` (*2 Guests*), `numberCabins` (*8 Cabins*), `bathroom`, `aircon`, bedding, images, `inseanqCabinTypeId`. **No per-cabin price in anything read** |
+| **A boat's own minimum** | `minPrice` and `minPriceDay` on each boat card — 179 and 156 for one hull, beside `currencyId` |
+| **A currency table** | `currencies: {"current": "USD", …}` and `rates: {"1":"1.0000","2":"0.8708","4":"33.3167",…}`, keyed by the same numeric `currencyId` |
+
+**The currency table is the thing to be careful about.** The page states the
+currency it rendered *in*, and carries the rates to convert. So a `price` read
+from this source is denominated in whatever currency the response chose — and
+the book's 570 USD against 407 EUR may be a fact about the boats or a fact
+about the requests. Until that is settled, comparing a divebooker figure with
+ours is comparing against an unknown base, which is a second reason the fares
+stay withheld.
+
+**And the fee book is not hiding client-side.** 253 distinct keys in the
+payload, and the money-shaped ones are the seventeen above: **not one**
+matches `fee`, `extra`, `includ` or `exclud`. Whatever this seller discloses
+about required extras, it is not on the vessel page in any form — rendered or
+streamed.
+
 ## What is ruled out
 
 - **No browser.** Seven pages read over plain `urllib`, every one of them

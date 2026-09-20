@@ -26,7 +26,16 @@ before deciding what the third seller is allowed to say on the page.
 4. **A fee book.** Nothing read carries a required-extras disclosure of any
    kind. By this project's own rule that is *nobody looked*, not *there are no
    fees* — so a bill built on divebooker alone would be a total the disclosure
-   does not support.
+   does not support. **Now looked at harder:** the page's streamed payload
+   holds 253 distinct keys and not one matches `fee`, `extra`, `includ` or
+   `exclud`, and the page calls no endpoint at all. So it is not rendered
+   client-side and not fetched — it is not on the vessel page. If it exists it
+   is in the booking flow.
+4b. **The currency a price is in may be the request's, not the boat's.** The
+   payload carries `currencies.current` and a `rates` table keyed by
+   `currencyId`. So the book's 570 USD against 407 EUR could be a fact about
+   the vessels or about where the crawl ran from, and a figure compared
+   against ours is compared against an unknown base until that is settled.
 5. **A dive count, an entry bar, a cabin ladder.** None of the three appears in
    any node read.
 
