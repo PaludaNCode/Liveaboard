@@ -75,6 +75,14 @@ on:
         description: "Ask what divebooker's Offer.price counts (the withheld fares)"
         type: boolean
         default: false
+      divebooker_flight:
+        description: "Open the RSC payload a vessel page streams (prices, fees, cabins)"
+        type: boolean
+        default: false
+      divebooker_vessel:
+        description: "Vessel slug for the flight probe, as the book names it"
+        type: string
+        default: "red-sea-aggressor-ii"
       divebooker_dump_shell:
         description: "Print the first 2 KB of each divebooker page's markup"
         type: boolean
@@ -318,6 +326,15 @@ jobs:
       - name: Ask what one divebooker fare counts
         if: inputs.divebooker_fare
         run: python3 tools/probe_divebooker_fare.py
+
+      # App Router ships its data in the HTML rather than fetching it, so
+      # "rendered by JavaScript" and "not in the served bytes" are different
+      # claims. This opens the streamed payload and says which is true.
+      - name: Open the payload the page streams to itself
+        if: inputs.divebooker_flight
+        run: |
+          python3 tools/probe_divebooker_flight.py \
+            --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
 
       - name: Upload the book and the pages it was read from
         if: inputs.divebooker_fetch != '0'
