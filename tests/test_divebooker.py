@@ -432,3 +432,52 @@ class TestTheWalkStopsOnWhatItSeesNotOnACount(unittest.TestCase):
         found, notes = self.walk(pages, months=("202705",))
         self.assertEqual(found, ["/a-haz1"])
         self.assertTrue(any("unread" in n for n in notes), notes)
+
+
+class TestThePageSaysWhatCurrencyItIsIn(unittest.TestCase):
+    """`Offer.priceCurrency` is a label; the payload is the money.
+
+    Measured over four hulls on 2026-09-20: Seawolf Steel, Unity and Iceberg
+    label every offer EUR on a page whose own payload states
+    `{"currencies":{"current":"USD"}}`, with USD the only currency code in
+    those bytes and a rates table keyed by currency id (`"2":"0.8708"`). Read
+    by the label, a dollar figure travels under a euro name — and a euro name
+    is what a total would convert, so every such row would be 15% wrong in the
+    direction nobody would notice.
+    """
+
+    OFFER = {
+        "@type": "Offer", "price": 1653, "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+            "@type": "TouristTrip", "name": "North",
+            "subjectOf": {"@type": "Event", "name": "North",
+                          "startDate": "2027-05-01", "endDate": "2027-05-08"}},
+    }
+    # The shape a runner really served: the RSC chunks are JSON string
+    # literals, so the payload's own quotes arrive backslashed.
+    PAYLOAD = ('<script>self.__next_f.push([1,"9:[\\"$\\",\\"div\\",'
+               '{\\"currencies\\":{\\"current\\":\\"USD\\",'
+               '\\"currentSymb\\":\\"USD\\"}}]"])</script>')
+
+    def page(self, payload: str = "") -> str:
+        return (f'<script type="application/ld+json">{json.dumps(self.OFFER)}'
+                f'</script>{payload}')
+
+    def test_the_payload_is_read_through_its_escaping(self):
+        self.assertEqual(db.page_currency(self.PAYLOAD), "USD")
+        self.assertEqual(db.page_currency('{"currencies":{"current":"EUR"}}'),
+                         "EUR")
+        self.assertIsNone(db.page_currency("<html></html>"))
+
+    def test_the_page_beats_the_label_and_says_it_did(self):
+        rows, warnings = db.departures(self.page(self.PAYLOAD))
+        self.assertEqual(rows[0].currency, "USD")
+        self.assertEqual(rows[0].price, 1653.0)
+        self.assertTrue(any("labelled EUR" in w for w in warnings), warnings)
+
+    def test_a_page_that_states_nothing_leaves_the_label_alone(self):
+        """Silence is not a currency. Then the label is all that was said."""
+        rows, warnings = db.departures(self.page())
+        self.assertEqual(rows[0].currency, "EUR")
+        self.assertEqual(warnings, [])

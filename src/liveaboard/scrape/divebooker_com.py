@@ -411,15 +411,32 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
     disagreement is reported rather than resolved: two statements of one
     sailing differing on the money is the page contradicting itself, and
     choosing quietly is how a site starts lying.
+
+    **The currency is the page's, not the offer's**, wherever the page states
+    one: see :func:`page_currency`. Three of four hulls read label every offer
+    `EUR` on a page whose own payload says it rendered in USD, so a book that
+    believed the label carried a dollar figure under a euro name — and a euro
+    name is what a total would convert. Where the page says nothing the label
+    stands, because then it is the only thing that was said.
     """
     found: dict[str, Departure] = {}
     warnings: list[str] = []
+    page = page_currency(html)
+    mislabelled: set[str] = set()
+
+    def money(offer: dict[str, Any]) -> tuple[float | None, str | None]:
+        amount, label = _money(offer)
+        if amount is None or page is None:
+            return amount, label
+        if label and label != page:
+            mislabelled.add(label)
+        return amount, page
 
     for offer, trip, event in _trip_offers(html):
         start = _text(event.get("startDate"))
         if not start or not ISO_DATE.match(start):
             continue
-        amount, currency = _money(offer)
+        amount, currency = money(offer)
         fresh = start not in found
         row = found.setdefault(start, Departure(start=start))
         row.end = row.end or _text(event.get("endDate"))
@@ -463,7 +480,7 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
         row.event_id = row.event_id or _text(event.get("id"))
         if offer is None:
             continue
-        amount, currency = _money(offer)
+        amount, currency = money(offer)
         if amount is None:
             continue
         if row.price is None:
@@ -477,6 +494,13 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
                 f"{start}: the trip offer states {row.price} {row.currency} "
                 f"and the event offer {amount} {currency}; kept the trip's"
             )
+
+    if mislabelled:
+        # Counted rather than silent, and stated the way round it matters: the
+        # figure is the page's, the label was somebody else's.
+        warnings.append(
+            f"the page states {page} and its offers are labelled "
+            f"{', '.join(sorted(mislabelled))}; read as {page}")
 
     return [found[key] for key in sorted(found)], warnings
 
