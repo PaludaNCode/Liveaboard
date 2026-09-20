@@ -34,14 +34,32 @@ commit that closes a stage, never afterwards from memory.
 | 10 — promote | **closed as far as it may go**: coverage recorded, every fare withheld |
 | 11 — the page | **not started, and blocked on stage 0** |
 | 12 — cadence | not started: no workflow fetches this on a schedule |
-| 13 — guards | **closed for what exists**: 17 tests, code and committed data |
+| 13 — guards | **closed for what exists**: 30 tests, code and committed data |
 | 14 — ship | on the branch, not merged |
 
-Stage 0 now has its measurement. Divebooker states a fare, a currency and both
-dates on every departure, so it **can** be a third seller; it states no berth
-count and no list price, so it can never fill the *places left* or *on sale*
-columns. The remaining question is not what it could do but what it should,
-and that is the owner's.
+Stage 0 now has its measurement, and the whole fleet has been read against it.
+Divebooker states a fare, a currency and both dates on every departure, so it
+**can** be a third seller; it states no berth count and no list price, so it
+can never fill the *places left* or *on sale* columns. What the fleet read
+added to that question:
+
+* **92 hulls and 888 season sailings**, against the two sellers' 77 boats.
+  59 hulls map to ours; **33 are Egyptian liveaboards neither of the other two
+  lists**, which is the largest thing this source would add and the one that
+  needs a decision about scope rather than about parsing.
+* **793 of the 888 sailings are ones this site already carries**, so the join
+  is not the problem; six more are sailings on boats we carry that the other
+  two do not list, and four are charter enquiries with no fare.
+* **The fares are still withheld, and the reason has shrunk to one row.** 777
+  rows compared in euros put 585 inside 20% of the nearer seller — three
+  sellers pricing one berth — and Red Sea Aggressor IV's 2027-07-24 at exactly
+  2.000×, with an offer node identical in shape to the sailings either side of
+  it. The source does not explain that row, and a rule that published around it
+  would be a statistical one.
+
+So the remaining question is still not what it could do but what it should, and
+that is the owner's: publish a third fare column (needs a ruling on the 2×
+row), create rows for the six, carry the 33 hulls, or none of those.
 
 ## What is already done
 
