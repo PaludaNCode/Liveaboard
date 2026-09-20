@@ -100,6 +100,32 @@ before deciding what the third seller is allowed to say on the page.
    merges on, and it is exact, but it means two sailings of one boat on one
    day cannot be told apart.
 
+## What the whole fleet turned out to be
+
+9a. **Three numbers, and they are different facts.** Of the 888 season
+   sailings, **793** match a sailing this site already carries on
+   `(boat, date)`; **85** sit on hulls the alias map does not know, which is a
+   fact about our map rather than about the seller; and **10** are on a boat
+   this site carries and a date it does not — a third seller listing a
+   departure the other two do not. None of the three is published: the last is
+   the interesting one and creating rows from it is the owner's call, the way
+   PADI-only rows were.
+
+9b. **33 hulls this site does not carry at all.** Aml Hayaty, Argo, Ashrafi,
+   Bismarck, C Echo 2, Freedom III and IV, Galaxy 720, Golden Dolphin I,
+   Hammerhead I, Icon, Independence III, Omneia Spirit, Sea Treasure, South
+   Moon 1, VipOne and eighteen others. They are named in the build log, one
+   `::warning::` each, and nowhere on the page — the `deals.unmatched` rule:
+   the name is what may not be lost, and the page is the wrong place to keep
+   it.
+
+9c. **The fare picture did not change shape, it got bigger.** 777 joined rows,
+   compared in euros through the committed ECB table: 106 exact, 8 within 3%,
+   59 within 10%, 585 within 20% and **19 over**, of which the largest by far
+   is still Red Sea Aggressor IV on 2027-07-24 at exactly 2.000×; the next is
+   44.6%. Three sellers pricing one berth looks like the 585; one row looks
+   like nothing else on the page.
+
 ## What this reading did not cover
 
 9. **Ten hulls out of this site's 75 — and that was our mistake, not the
@@ -115,9 +141,10 @@ before deciding what the third seller is allowed to say on the page.
    on **`p=`**, which was found by trying it against a known answer: nine
    other spellings (`page`, `pg`, `offset`, `start`, `skip`, `limit`,
    `perPage`, `size`, `take`) each return the first twenty again, silently.
-   Discovery now walks every season month on `p=` until a page repeats.
-   Until a full read lands, the coverage numbers in `data/egypt-2027.json`
-   are still about what we read rather than what divebooker sells.
+   Discovery now walks every season month on `p=` until a page repeats, and
+   **the full read has landed**: 92 hulls, 888 season sailings, against the
+   country page's 10 and 148. So the coverage numbers in `data/egypt-2027.json`
+   are about what divebooker sells rather than about how we looked.
 10. **One day's reading.** 977 departures collected 2026-09-20, in a single
     run, with no second run to compare against. Every rule this project has
     about staleness applies and none has been exercised here yet.

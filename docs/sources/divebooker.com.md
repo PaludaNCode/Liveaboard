@@ -225,6 +225,26 @@ silently reads another boat.
 month has already shown — **the repeat is the stop, never a page number**,
 because the failure mode above is exactly a paginator that keeps answering.
 
+### The fleet, read whole
+
+Read 2026-09-20
+([run 35522066901](https://github.com/PaludaNCode/Liveaboard/actions/runs/35522066901)),
+four months walked, 117 pages fetched at the five-second pace:
+
+| | |
+|---|---|
+| Hulls the search links | **92** — the stated 75 is one month; four months are more |
+| Season sailings read | **888** (2027-05-01 to 2027-08-31) |
+| Hulls stating no sailing at all | 17, every one of them carried as read rather than as empty |
+| Against the country page | 10 hulls, 148 season sailings |
+
+**59 of the 92 map to a boat this site carries**, and the 33 that do not are
+boats neither of the other two sellers lists — Aml Hayaty, Argo, Ashrafi,
+Bismarck, C Echo 2, Freedom III and IV, Galaxy 720, Golden Dolphin I,
+Hammerhead I, Icon, Independence III, Omneia Spirit, Sea Treasure, South
+Moon 1, VipOne and seventeen more. That is the answer to *what does a third
+seller add*: a sixth of the Egyptian fleet, by hull.
+
 ## The payload the page streams to itself
 
 Read 2026-09-20 by `tools/probe_divebooker_flight.py` over

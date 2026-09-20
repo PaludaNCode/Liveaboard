@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -37,6 +38,9 @@ ALIASES = Path("data/divebooker_aliases.json")
 #: Words that say what kind of boat it is rather than which boat it is. Only
 #: ever stripped when comparing, never when a name is printed or stored.
 NOISE = {"my", "mv", "ss", "m", "y", "liveaboard", "liveaboards", "boat"}
+
+#: The site's own page-title template, which is what `Product.name` holds.
+TITLE_SUFFIX = re.compile(r"^(?P<hull>.+?) Liveaboard, .+$")
 
 
 def compare(name: str) -> str:
@@ -78,6 +82,15 @@ def main() -> int:
         country = (vessel.get("country") or "").strip()
         if country and name.lower().endswith(f", {country.lower()}"):
             forms.append(name[: -len(country) - 2])
+        # And where the record states no country -- which is every hull with no
+        # departure, since the country is read off an Event -- the title's own
+        # template says where the name ends. `X Liveaboard, Egypt` on 20 of the
+        # 92 hulls read, `Andromeda Liveaboard, Saudi Arabia, Egypt` on one, so
+        # what is dropped is everything from ` Liveaboard,` rather than one
+        # country word.
+        title = TITLE_SUFFIX.match(name)
+        if title:
+            forms.append(title.group("hull"))
         return [compare(form) for form in forms]
 
     proposed: dict[str, str] = {}
@@ -112,7 +125,7 @@ def main() -> int:
               f"near: {', '.join(near) if near else 'nothing'}")
 
     if args.write and proposed:
-        alias_file["aliases"] = dict(sorted(alias | proposed).items())
+        alias_file["aliases"] = dict(sorted((alias | proposed).items()))
         args.aliases.write_text(json.dumps(alias_file, indent=1,
                                            ensure_ascii=False) + "\n",
                                 encoding="utf-8")

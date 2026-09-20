@@ -231,9 +231,26 @@ class TestTheShippedDatasetStatesNoDivebookerFare(unittest.TestCase):
         if block is None:
             self.skipTest("no divebooker book is committed on this checkout")
         self.assertEqual(block["fares"], "withheld")
-        self.assertEqual(block["matched"], block["in_season"],
-                         "a sailing this source lists in season that we do not "
-                         "carry is a row promote would have to create")
+
+    def test_every_in_season_row_is_accounted_for(self):
+        """Matched, on a hull we do not map, or a sailing we do not carry.
+
+        This asserted `matched == in_season` while the book was ten hulls the
+        country page happened to link. The whole fleet is 92 and the equality
+        is simply false now — 85 rows sit on hulls this site does not carry at
+        all and 10 are dates our two sellers do not list. Neither is a
+        publication, and an assertion that they cannot exist would have been an
+        assertion about how little we had read. What may not happen is a row
+        falling out of the accounting, because that is the count going quiet.
+        """
+        block = self.payload.get("divebooker")
+        if block is None:
+            self.skipTest("no divebooker book is committed on this checkout")
+        self.assertEqual(
+            block["matched"] + block["on_unmapped_vessels"] + block["unmatched"],
+            block["in_season"],
+            "an in-season sailing is in none of the three buckets")
+        self.assertIn(str(block["unmatched"]), block["note"])
 
     def test_no_departure_carries_a_divebooker_price(self):
         for row in self.payload.get("departures", []):

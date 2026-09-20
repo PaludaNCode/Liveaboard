@@ -30,7 +30,7 @@ commit that closes a stage, never afterwards from memory.
 | 6 — write the map | **closed**: `docs/sources/divebooker.com.md` |
 | 7 — fixtures | **closed**: `tests/fixtures/divebooker-bella-2.jsonld.json`, real bytes |
 | 8 — the parser | **closed**: `scrape/divebooker_com.py`, `tools/fetch_divebooker.py`; discovery is the seller's search, paged on `p=` |
-| 9 — identity | ten hulls mapped in `data/divebooker_aliases.json`; reopened by the fleet being 75, not ten |
+| 9 — identity | **closed**: 59 of the 92 hulls mapped — 57 by the stated name rule, 2 by a person on the operator; 33 are boats this site does not carry |
 | 10 — promote | **closed as far as it may go**: coverage recorded, every fare withheld |
 | 11 — the page | **not started, and blocked on stage 0** |
 | 12 — cadence | not started: no workflow fetches this on a schedule |
