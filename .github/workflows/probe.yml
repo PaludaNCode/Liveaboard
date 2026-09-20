@@ -42,6 +42,18 @@ on:
         description: "Print only where PADI's API client gets its base URL"
         type: boolean
         default: false
+      divebooker_sample:
+        description: "Detail pages to sample per sitemap shape (divebooker)"
+        type: string
+        default: "3"
+      divebooker_requests:
+        description: "Hard ceiling on divebooker requests for one run"
+        type: string
+        default: "25"
+      divebooker_dump_shell:
+        description: "Print the first 2 KB of each divebooker page's markup"
+        type: boolean
+        default: false
       unread_retries:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
@@ -213,3 +225,28 @@ jobs:
           python3 tools/probe_spaces.py \
             --targets "${{ inputs.spaces_targets || 'dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7' }}" \
             ${{ inputs.dump_html && '--dump-html' || '' }}
+
+  # A third seller nobody here has ever fetched. Its own job because it reads a
+  # host neither of the others does, and because the first question about a new
+  # source -- does it answer us at all, and on what terms -- has to be settled
+  # before there is anything to point a parser at.
+  #
+  # The sandbox's egress allowlist refuses divebooker.com outright (403 on the
+  # CONNECT), so this is the only place the question can be asked. Writes
+  # nothing, capped at divebooker_requests, paced by the polite fetcher at the
+  # five-second default this project uses for a host nobody has checked.
+  divebooker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Read what divebooker.com serves
+        run: |
+          python3 tools/probe_divebooker.py \
+            --sample "${{ inputs.divebooker_sample || '3' }}" \
+            --max-requests "${{ inputs.divebooker_requests || '25' }}" \
+            ${{ inputs.divebooker_dump_shell && '--dump-shell' || '' }}
