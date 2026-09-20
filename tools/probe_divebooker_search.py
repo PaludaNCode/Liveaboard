@@ -83,11 +83,19 @@ def main() -> int:
         payload = "".join(json.loads(c) for c in FLIGHT.findall(html))
         stated = STATED.findall(html) + STATED.findall(payload)
 
+        everywhere = db.hull_slugs(html)
+        paging = db.search_pages(html)
         print(f"== {ym.strip()} ==")
-        print(f"  {len(html) / 1024:.0f} KB · {len(hulls)} hull link(s)")
+        print(f"  {len(html) / 1024:.0f} KB · {len(hulls)} hull link(s)"
+              f" · {len(everywhere)} hull id(s) anywhere in the bytes")
         print(f"  counts the page states: {sorted(set(stated), key=int, reverse=True)[:5] or 'none'}")
+        print(f"  boat records in the payload: {payload.count('minPriceDay')}")
         print(f"  boat fields in the payload: "
               f"{sorted(set(BOAT_FIELD.findall(payload))) or 'none'}")
+        print(f"  /boatsearch links on the page: {len(paging)}")
+        for link in paging[:8]:
+            print(f"    {link}")
+        slugs = set(everywhere)
         new = sorted(slugs - known)
         print(f"  hulls the book does not have: {len(new)}")
         for slug in new[:20]:

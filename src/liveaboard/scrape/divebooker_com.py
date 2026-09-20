@@ -205,6 +205,36 @@ class VesselBook:
         return out
 
 
+#: A hull id wherever it appears — in an href, in the streamed payload, in a
+#: JSON string. The search page renders twenty links and states seventy-five,
+#: so what it *links* and what it *holds* are different questions.
+HULL_ANYWHERE = re.compile(r"/?([a-z0-9][a-z0-9-]*?)-(haz\d+)\b")
+
+#: The site's own pagination, whatever it is called. Followed rather than
+#: guessed: a page parameter somebody typed is the mistake this module has
+#: already made once with a hull id.
+SEARCH_LINK = re.compile(r'href="(?:https://[^/"]+)?(/boatsearch\?[^"]+)"')
+
+
+def hull_slugs(html: str) -> dict[str, str]:
+    """Every `{slug: id}` the page mentions, linked or not.
+
+    `hull_links` reads anchors, which is right for a country page and wrong
+    for a search: the search renders twenty anchors and its streamed payload
+    carries the rest of what it knows. Both are the same bytes to a plain GET,
+    so the ids are there to be read either way.
+    """
+    found: dict[str, str] = {}
+    for slug, hull in HULL_ANYWHERE.findall(html):
+        found.setdefault(slug, hull)
+    return found
+
+
+def search_pages(html: str) -> list[str]:
+    """Every `/boatsearch?…` the page links, deduplicated, in order."""
+    return list(dict.fromkeys(SEARCH_LINK.findall(html)))
+
+
 def hull_links(html: str) -> list[str]:
     """Every ``/{slug}-haz{id}`` path the page links, in order, deduplicated.
 
