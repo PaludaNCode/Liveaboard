@@ -59,6 +59,10 @@ on:
         description: "Hard ceiling on divebooker requests for one run"
         type: string
         default: "25"
+      divebooker_vessels:
+        description: "Vessel pages to read departure nodes from"
+        type: string
+        default: "3"
       divebooker_dump_shell:
         description: "Print the first 2 KB of each divebooker page's markup"
         type: boolean
@@ -264,3 +268,13 @@ jobs:
             --sample "${{ inputs.divebooker_sample || '3' }}" \
             --max-requests "${{ inputs.divebooker_requests || '25' }}" \
             ${{ inputs.divebooker_dump_shell && '--dump-shell' || '' }}
+
+      # What a departure node actually states — which is what decides whether
+      # this is a third seller or a third opinion (docs/plan-divebooker.md,
+      # stage 0). A census across every Event read rather than one example:
+      # a parser proved against a single node is proved against its
+      # coincidences.
+      - name: Read what one divebooker departure states
+        run: |
+          python3 tools/probe_divebooker_departures.py \
+            --vessels "${{ inputs.divebooker_vessels || '3' }}"
