@@ -63,6 +63,10 @@ on:
         description: "Vessel pages to read departure nodes from"
         type: string
         default: "3"
+      divebooker_fetch:
+        description: "Vessels to read into a book and upload (0 skips the fetch)"
+        type: string
+        default: "0"
       divebooker_dump_shell:
         description: "Print the first 2 KB of each divebooker page's markup"
         type: boolean
@@ -278,3 +282,29 @@ jobs:
         run: |
           python3 tools/probe_divebooker_departures.py \
             --vessels "${{ inputs.divebooker_vessels || '3' }}"
+
+      # The bytes themselves, so a parser can be written against what the site
+      # actually serves rather than against a description of it. The fee
+      # parser proved against one hand-trimmed fixture matched nothing on six
+      # real trips; this is that lesson spent up front.
+      #
+      # Still writes nothing to the repository — the book and the pages leave
+      # as an artifact, and what lands in `data/` is committed by a person
+      # who has read it.
+      - name: Read the Egyptian fleet into a book
+        if: inputs.divebooker_fetch != '0'
+        run: |
+          python3 tools/fetch_divebooker.py \
+            --limit "${{ inputs.divebooker_fetch || '3' }}" \
+            --save-html /tmp/divebooker-html \
+            --book /tmp/divebooker.json
+
+      - name: Upload the book and the pages it was read from
+        if: inputs.divebooker_fetch != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: divebooker
+          path: |
+            /tmp/divebooker.json
+            /tmp/divebooker-html
+          retention-days: 7

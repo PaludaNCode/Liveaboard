@@ -1,0 +1,294 @@
+"""divebooker.com — a third source, read from the JSON-LD its pages serve.
+
+Everything here rests on what `tools/probe_divebooker.py` and
+`tools/probe_divebooker_departures.py` read from a runner on 2026-09-20, and
+`docs/sources/divebooker.com.md` is the map. The two facts that shape the
+module:
+
+**A vessel page is one request for a boat's whole season.** No month selector,
+no browser, no endpoint to find — 219 `Event` nodes over three Egyptian hulls,
+every one of them stating `name`, `startDate`, `endDate` and `location`, with
+`price`, `priceCurrency` and `availability` on every `Offer`.
+
+**The page states each sailing twice**, and only one of the two copies is
+priced from the trip's side:
+
+* ``Offer`` → ``itemOffered`` → ``TouristTrip`` → ``subjectOf`` → ``Event``.
+  Discovery II has 49 of these, Bella 2 has 3 — which is every sailing each
+  boat sells.
+* a top-level ``Event`` carrying ``offers``, and also ``url``, ``id``,
+  ``duration``, ``organizer``, ``eventStatus``, ``description`` and ``image``.
+  Ten on each of the two larger boats and three on Bella 2, which sells three.
+
+A parser that collects ``@type == Event`` therefore gets every sailing twice,
+one copy unpriced. :func:`departures` reads both and folds them on the start
+date — the same key `promote` merges the other two sources on, because a date
+has no spelling — so the second copy adds the booking URL rather than a
+phantom sailing. Where the two state different money it keeps the trip
+offer's and **says so**: this project does not pick a number quietly.
+"""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+from datetime import date
+from typing import Any, Iterator
+
+from . import jsonld
+
+HOST = "divebooker.com"
+SOURCE_ID = "divebooker.com"
+
+#: Its flat namespace, typed by the two letters before the id. `haz` is a hull;
+#: `daz` a country, `baz` a dive site, `eaz` a port, `jaz` an operator. Counted
+#: over all 5,715 sitemap URLs rather than inferred from a handful.
+HULL_HREF = re.compile(r'href="(?:https://[^/"]+)?(/(?P<slug>[a-z0-9-]+)-(?P<id>haz\d+))"')
+
+ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def _types(node: Any) -> list[str]:
+    raw = node.get("@type") if isinstance(node, dict) else None
+    return [t for t in (raw if isinstance(raw, list) else [raw]) if isinstance(t, str)]
+
+
+def _is(node: Any, name: str) -> bool:
+    return isinstance(node, dict) and name in _types(node)
+
+
+def _first(value: Any) -> Any:
+    """The first of a field that may be a node, a list of them, or nothing."""
+    if isinstance(value, list):
+        return value[0] if value else None
+    return value
+
+
+def _text(value: Any) -> str | None:
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    if isinstance(value, dict):
+        return _text(value.get("name"))
+    return None
+
+
+def _money(offer: dict[str, Any]) -> tuple[float | None, str | None]:
+    """The price and currency an ``Offer`` states, or ``(None, None)``.
+
+    A price that will not parse is not a price. Nothing here guesses a
+    currency from a figure or a figure from a currency: a fare with one half
+    missing is a fare this source did not state.
+    """
+    raw, currency = offer.get("price"), offer.get("priceCurrency")
+    if not isinstance(currency, str) or not currency.strip():
+        return None, None
+    try:
+        amount = float(str(raw).replace(",", ""))
+    except (TypeError, ValueError):
+        return None, None
+    return (amount, currency.strip()) if amount > 0 else (None, None)
+
+
+def _availability(offer: dict[str, Any]) -> str | None:
+    """``InStock`` from ``https://schema.org/InStock``, and nothing invented.
+
+    It is a **state, not a count**: every offer read states `InStock`, and
+    nothing in 219 departures states how many berths are left. Kept as the
+    source's own word so that nothing downstream can mistake it for a number.
+    """
+    value = offer.get("availability")
+    return value.rsplit("/", 1)[-1] if isinstance(value, str) and value else None
+
+
+def _nights(start: str, end: str) -> int | None:
+    """Nights between two stated dates, or ``None`` if either will not parse.
+
+    Never derived from a trip's title or its name: the two dates are what the
+    source states, and a length inferred from prose is a length this project
+    would have to defend.
+    """
+    if not (ISO_DATE.match(start) and ISO_DATE.match(end)):
+        return None
+    span = (date.fromisoformat(end) - date.fromisoformat(start)).days
+    return span if span > 0 else None
+
+
+@dataclass(slots=True)
+class Departure:
+    """One sailing as this source states it."""
+
+    start: str
+    end: str | None = None
+    trip: str | None = None
+    price: float | None = None
+    currency: str | None = None
+    availability: str | None = None
+    url: str | None = None
+    event_id: str | None = None
+    #: Which of the page's two statements of this sailing were read. Kept
+    #: because the counts are the evidence for the folding rule above, and a
+    #: rule whose evidence is not in the data is a rule nobody can re-check.
+    stated_by: list[str] = field(default_factory=list)
+
+    @property
+    def nights(self) -> int | None:
+        return _nights(self.start, self.end) if self.end else None
+
+    def as_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {"start": self.start}
+        for key in ("end", "trip", "price", "currency", "availability", "url", "event_id"):
+            value = getattr(self, key)
+            if value is not None:
+                out[key] = value
+        if self.nights is not None:
+            out["nights"] = self.nights
+        out["stated_by"] = sorted(self.stated_by)
+        return out
+
+
+@dataclass(slots=True)
+class VesselBook:
+    """What one vessel page said about itself."""
+
+    slug: str
+    divebooker_id: str | None = None
+    name: str | None = None
+    operator: str | None = None
+    country: str | None = None
+    departures: list[Departure] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+
+    def as_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {"slug": self.slug}
+        for key in ("divebooker_id", "name", "operator", "country"):
+            if getattr(self, key):
+                out[key] = getattr(self, key)
+        return out
+
+
+def hull_links(html: str) -> list[str]:
+    """Every ``/{slug}-haz{id}`` path the page links, in order, deduplicated.
+
+    Discovery is the site's own links rather than a pattern anybody typed.
+    The country page is the entry point because the sitemap knows all 516
+    hulls worldwide and does not say which sea any of them is in.
+    """
+    return list(dict.fromkeys(m.group(1) for m in HULL_HREF.finditer(html)))
+
+
+def split_slug(path: str) -> tuple[str, str | None]:
+    """``/bella-2-haz432`` -> ``("bella-2", "haz432")``."""
+    match = HULL_HREF.search(f'href="{path}"')
+    return (match.group("slug"), match.group("id")) if match else (path.strip("/"), None)
+
+
+def _trip_offers(html: str) -> Iterator[tuple[dict[str, Any], dict[str, Any], dict[str, Any]]]:
+    """``(offer, trip, event)`` for every Offer stating what it is an offer for."""
+    for node in jsonld.walk_documents(html):
+        if not _is(node, "Offer"):
+            continue
+        trip = _first(node.get("itemOffered"))
+        if not _is(trip, "TouristTrip"):
+            continue
+        event = _first(trip.get("subjectOf"))
+        if _is(event, "Event"):
+            yield node, trip, event
+
+
+def _event_departures(html: str) -> Iterator[tuple[dict[str, Any], dict[str, Any] | None]]:
+    """``(event, offer)`` for every Event that carries its own offer.
+
+    These are the ten-odd a page states in full, with a booking URL. Ordinary
+    Events nested under a trip carry no ``offers`` and are excluded here so
+    they cannot arrive twice.
+    """
+    for node in jsonld.walk_documents(html):
+        if _is(node, "Event") and node.get("offers"):
+            offer = _first(node.get("offers"))
+            yield node, offer if isinstance(offer, dict) else None
+
+
+def departures(html: str) -> tuple[list[Departure], list[str]]:
+    """Every sailing the page states, folded on its start date.
+
+    Returns the departures and whatever the fold could not settle. A
+    disagreement is reported rather than resolved: two statements of one
+    sailing differing on the money is the page contradicting itself, and
+    choosing quietly is how a site starts lying.
+    """
+    found: dict[str, Departure] = {}
+    warnings: list[str] = []
+
+    for offer, trip, event in _trip_offers(html):
+        start = _text(event.get("startDate"))
+        if not start or not ISO_DATE.match(start):
+            continue
+        amount, currency = _money(offer)
+        row = found.setdefault(start, Departure(start=start))
+        row.end = row.end or _text(event.get("endDate"))
+        row.trip = row.trip or _text(trip.get("name")) or _text(offer.get("name"))
+        row.price = row.price if row.price is not None else amount
+        row.currency = row.currency or currency
+        row.availability = row.availability or _availability(offer)
+        if "trip" not in row.stated_by:
+            row.stated_by.append("trip")
+
+    for event, offer in _event_departures(html):
+        start = _text(event.get("startDate"))
+        if not start or not ISO_DATE.match(start):
+            continue
+        row = found.get(start)
+        if row is None:
+            row = found.setdefault(start, Departure(start=start))
+            row.end = _text(event.get("endDate"))
+            row.trip = _text(event.get("name"))
+        if "event" not in row.stated_by:
+            row.stated_by.append("event")
+        row.url = row.url or _text(event.get("url"))
+        row.event_id = row.event_id or _text(event.get("id"))
+        if offer is None:
+            continue
+        amount, currency = _money(offer)
+        if amount is None:
+            continue
+        if row.price is None:
+            row.price, row.currency = amount, currency
+            row.availability = row.availability or _availability(offer)
+        elif (amount, currency) != (row.price, row.currency):
+            # Deliberately not resolved. The trip offer is kept because it is
+            # the copy that exists for every sailing, and the disagreement is
+            # published as a warning so a run can be read rather than trusted.
+            warnings.append(
+                f"{start}: the trip offer states {row.price} {row.currency} "
+                f"and the event offer {amount} {currency}; kept the trip's"
+            )
+
+    return [found[key] for key in sorted(found)], warnings
+
+
+def vessel(html: str, path: str) -> VesselBook:
+    """Parse one vessel page into a book.
+
+    ``Product.brand`` is the operator, which is the same node PADI states it
+    in — so preferring it over anything printed in a title is not a judgement
+    call about which source is nicer, it is the vessel page's own statement
+    about the company. `A fleet is not an operator` still applies.
+    """
+    slug, hull_id = split_slug(path)
+    book = VesselBook(slug=slug, divebooker_id=hull_id)
+
+    for node in jsonld.walk_documents(html):
+        if _is(node, "Product"):
+            book.name = book.name or _text(node.get("name"))
+            brand = _first(node.get("brand"))
+            book.operator = book.operator or _text(brand)
+        elif _is(node, "Event") and not book.country:
+            book.country = _text(node.get("location"))
+
+    book.departures, book.warnings = departures(html)
+    if not book.departures:
+        # A vessel selling nothing and a page that failed are different
+        # answers, and only the caller knows which it asked for. Said here so
+        # the run reports it either way.
+        book.warnings.append(f"{path}: no departure stated")
+    return book
