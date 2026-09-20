@@ -6,10 +6,19 @@ name: Probe the crawl
 #
 # Deliberately separate from the scrape and manual only. It makes five requests
 # and writes nothing, so it can be run while wondering rather than scheduled.
+#
+# `only` runs one job. Without it, asking one question costs every source a
+# full sweep -- which is the same complaint that split refresh.yml: proving a
+# two-request change to fetch_deals.py meant first fetching 320 vessel pages
+# from a site with nothing to do with it.
 
 on:
   workflow_dispatch:
     inputs:
+      only:
+        description: "Run one job rather than all of them (all/probe/padi/unread/gear/divebooker)"
+        type: string
+        default: "all"
       gear_vessels:
         description: "Vessel slugs to open the gear modal on"
         type: string
@@ -76,6 +85,7 @@ permissions:
 
 jobs:
   probe:
+    if: inputs.only == 'all' || inputs.only == 'probe'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -108,6 +118,7 @@ jobs:
   # endpoint can be found is here. Its own job: it reads two hosts and neither
   # of them is liveaboard.com.
   padi:
+    if: inputs.only == 'all' || inputs.only == 'padi'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -129,6 +140,7 @@ jobs:
   # already close to its budget. It is also a different question from the rest
   # of them, and worth being able to read — or re-run — by itself.
   unread:
+    if: inputs.only == 'all' || inputs.only == 'unread'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -173,6 +185,7 @@ jobs:
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
   gear:
+    if: inputs.only == 'all' || inputs.only == 'gear'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -236,6 +249,7 @@ jobs:
   # nothing, capped at divebooker_requests, paced by the polite fetcher at the
   # five-second default this project uses for a host nobody has checked.
   divebooker:
+    if: inputs.only == 'all' || inputs.only == 'divebooker'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
