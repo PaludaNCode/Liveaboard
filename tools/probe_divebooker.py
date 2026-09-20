@@ -48,6 +48,8 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+import urllib.error
+import urllib.request
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlparse
@@ -84,6 +86,34 @@ SITEMAP_LINE = re.compile(r"^\s*sitemap:\s*(\S+)", re.I | re.M)
 LOC = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>", re.I)
 DISALLOW_LINE = re.compile(r"^\s*disallow:\s*(\S*)", re.I | re.M)
 MONEY = re.compile(r"(?:€|\$|£|EUR|USD|GBP)\s?\d[\d.,]{2,}", re.I)
+
+
+def status_of(url: str, agent: str, timeout: float = 20.0) -> tuple[int | str, dict[str, str], int]:
+    """The HTTP status of one URL, the headers worth naming, and the body size.
+
+    `RobotFileParser.read()` swallows this. A 403 on robots.txt leaves it
+    holding `disallow_all`, a 404 leaves it holding `allow_all`, and both of
+    those reach `can_fetch()` as a confident answer about a file nobody read.
+    The first run of this probe reported `robots.txt reachable` and then
+    refused every URL including robots.txt itself, which is that hole exactly.
+
+    Truthful identification, the same `USER_AGENT` the crawler uses. If the
+    site refuses that, the refusal is the finding -- not an obstacle to route
+    around by claiming to be a browser.
+    """
+    request = urllib.request.Request(url, headers={"User-Agent": agent})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            body = response.read()
+            return response.status, dict(response.headers), len(body)
+    except urllib.error.HTTPError as exc:
+        body = exc.read() or b""
+        return exc.code, dict(exc.headers or {}), len(body)
+    except Exception as exc:  # noqa: BLE001 - the failure mode is the answer
+        return f"{type(exc).__name__}: {exc}", {}, 0
+
+
+TELLTALE_HEADERS = ("server", "cf-ray", "cf-mitigated", "content-type", "retry-after")
 
 
 def shape(url: str) -> str:
@@ -171,16 +201,41 @@ def main() -> int:
 
     print(f"== 0. reachability: {args.host} ==")
     robots_url = f"{base}/robots.txt"
+
+    # Asked directly, before the parser gets a chance to hide the answer.
+    for candidate in (robots_url, f"https://{args.host.removeprefix('www.')}/robots.txt"):
+        status, headers, size = status_of(candidate, fetcher.user_agent)
+        named = ", ".join(f"{key}={value}" for key, value in headers.items()
+                          if key.lower() in TELLTALE_HEADERS)
+        print(f"  GET {candidate}")
+        print(f"      status {status} · {size} bytes{' · ' + named if named else ''}")
+        if status == 403:
+            print("      403 to this project's own user agent. That is the site")
+            print("      declining to be read by a declared bot, and it is an")
+            print("      answer rather than an obstacle: nothing here pretends")
+            print("      to be a browser to get around it.")
+
     try:
         rules = fetcher._robots_for(robots_url)
     except FetchBlocked as exc:
-        print(f"  cannot read robots.txt: {exc}")
+        print(f"\n  cannot read robots.txt: {exc}")
         print("\n  VERDICT: nothing below can be answered from here. Either the")
         print("  host is not on this environment's egress allowlist -- in which")
         print("  case run this from .github/workflows/probe.yml, where it is a")
         print("  job -- or the site refused us, which is itself the answer.")
         return 1
-    print("  robots.txt reachable")
+
+    # What the parser came away holding, which is not the same as what it read.
+    blanket = ("disallow_all" if getattr(rules, "disallow_all", False) else
+               "allow_all" if getattr(rules, "allow_all", False) else "")
+    print(f"  parser state after read()        : "
+          f"{blanket or 'rules read from the file'}")
+    if blanket == "disallow_all":
+        print("      set by a 401/403 on robots.txt, so every can_fetch() below")
+        print("      is that refusal repeated and not a rule anybody wrote.")
+    elif blanket == "allow_all":
+        print("      set by a 4xx that is not 401/403 — usually no robots.txt at")
+        print("      all, so there is no stated position to obey or breach.")
 
     print("\n== 1. robots.txt, read twice ==")
     raw = get(robots_url)

@@ -12,6 +12,24 @@ has the scars for that: a fee parser proved against one hand-trimmed fixture
 matched nothing on six real trips, and a crawler with an unscoped link pattern
 walked off into Indonesia and the Rhine.
 
+## Where this is
+
+A plan is a thing somebody executes, and the somebody is whoever is holding it
+— not the reader it is handed to. Each stage below is closed by a fact, and
+this section says which ones are closed and by what. It is updated in the
+commit that closes a stage, never afterwards from memory.
+
+| Stage | State |
+|---|---|
+| 0 — seller or opinion | **open**, and it is the owner's call rather than a measurement |
+| 1 — reach it | **closed**: unreachable from the sandbox, reachable from a runner; `probe.yml → only: divebooker` |
+| 2 — robots.txt | see *Findings*, below |
+| 3 — inventory | see *Findings* |
+| 4 — what a page returns | see *Findings* |
+| 5 — where the money is | see *Findings* |
+| 6 — write the map | `docs/sources/divebooker.com.md` |
+| 7–14 | not started; 7 onwards cannot begin until 5 is closed |
+
 ## What is already done
 
 - `tools/probe_divebooker.py` — the probe. Writes nothing, capped at
