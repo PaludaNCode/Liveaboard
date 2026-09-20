@@ -103,6 +103,10 @@ def main() -> int:
                         help="year-months to search, the seller's own ym format")
     parser.add_argument("--entity", default=db.EGYPT,
                         help="the country id in egypt-daz3881")
+    parser.add_argument("--from", dest="season_start", default=db.SEASON[0])
+    parser.add_argument("--to", dest="season_end", default=db.SEASON[1],
+                        help="the committed book is the published season; a "
+                             "run's whole reading goes up as an artifact")
     parser.add_argument("--limit", type=int, default=0, help="vessels to read, 0 for all")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--book", default=BOOK, type=Path)
@@ -172,16 +176,29 @@ def main() -> int:
         keep(result, f"{path.strip('/')}.html")
         book = db.vessel(result.body, path)
         vessels[book.slug] = book.as_dict() | {"url": base + path}
+        kept = 0
         for row in book.departures:
+            # **The committed book is the published season, and the run's whole
+            # reading is the artifact beside it.** divebooker sells years
+            # ahead — 392 sailings in 2027, 316 in 2028 and 163 in 2029 on ten
+            # hulls — and 15% of that is what the dataset's window can read.
+            # Scoped rather than trimmed later: a book holding 85% of rows
+            # nothing looks at is 838 KB of weight and, on this source, 82 KB
+            # of job log to carry it, since a runner's only channel back is
+            # what it prints. What is dropped is stated, never silent.
+            if not (args.season_start <= row.start <= args.season_end):
+                continue
             departures[f"{book.slug}::{row.start}"] = row.as_dict() | {"boat": book.slug}
+            kept += 1
         warnings.extend(book.warnings)
-        print(f"  {path:<40} {len(book.departures):>3} departure(s)"
+        print(f"  {path:<40} {kept:>3} in season of {len(book.departures):>3}"
               f"{'  ' + book.name if book.name else ''}", flush=True)
 
     fresh = {
         "collected": date.today().isoformat(),
         "source": db.SOURCE_ID,
-        "scope": {"entity": args.entity, "months": months},
+        "scope": {"entity": args.entity, "months": months,
+                  "from": args.season_start, "to": args.season_end},
         "vessels": vessels,
         "departures": departures,
         "warnings": warnings,

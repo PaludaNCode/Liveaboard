@@ -242,6 +242,11 @@ SEARCH_PATH = "/boatsearch?et={et}&e={entity}&ym={ym}"
 EGYPT = "3881"
 ENTITY_TYPE = "2"
 
+#: The published season, the dataset's window, in ISO dates. `padi_com.SEASON`
+#: is the same pair; the months below are the same window in the search's own
+#: vocabulary.
+SEASON: tuple[str, str] = ("2027-05-01", "2027-08-31")
+
 #: The months the published season covers, in this seller's vocabulary.
 #: `padi_com.SEASON` and `liveaboard_com.SEASON_MONTHS` say the same thing in
 #: theirs — each source is asked in the words it answers in, and a shared
