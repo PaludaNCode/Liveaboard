@@ -90,8 +90,11 @@ def main() -> int:
     parser.add_argument("--emit", action="store_true",
                         help="print the book, and any saved page's JSON-LD, as "
                              "gzip+base64 — the only way back from a runner")
-    parser.add_argument("--emit-pages", type=int, default=2,
-                        help="how many saved pages' JSON-LD to print with --emit")
+    parser.add_argument("--emit-pages", type=int, default=1,
+                        help="how many saved pages' JSON-LD to print with --emit; "
+                             "the smallest ones, which are real pages and cheap "
+                             "fixtures — a boat selling three weeks states the "
+                             "same shapes as one selling fifty")
     args = parser.parse_args()
 
     fetcher = PoliteFetcher(snapshot_dir=args.snapshots, delay=args.delay)
@@ -185,7 +188,8 @@ def main() -> int:
         # fact the page published and drops markup no fixture would exercise.
         if args.save_html:
             from liveaboard.scrape import jsonld
-            pages = sorted(args.save_html.glob("*-haz*.html"))[: args.emit_pages]
+            pages = sorted(args.save_html.glob("*-haz*.html"),
+                           key=lambda f: f.stat().st_size)[: args.emit_pages]
             for page in pages:
                 blocks = jsonld.extract_blocks(page.read_text(encoding="utf-8"))
                 emit(f"{page.stem}.jsonld.json",

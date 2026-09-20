@@ -67,6 +67,10 @@ on:
         description: "Vessels to read into a book and upload (0 skips the fetch)"
         type: string
         default: "0"
+      divebooker_emit_pages:
+        description: "Saved pages whose JSON-LD to print (smallest first)"
+        type: string
+        default: "1"
       divebooker_dump_shell:
         description: "Print the first 2 KB of each divebooker page's markup"
         type: boolean
@@ -303,7 +307,7 @@ jobs:
             ${{ inputs.divebooker_fetch != 'all' && format('--limit {0}', inputs.divebooker_fetch) || '' }} \
             --save-html /tmp/divebooker-html \
             --book /tmp/divebooker.json \
-            --emit
+            --emit --emit-pages "${{ inputs.divebooker_emit_pages || '1' }}"
 
       - name: Upload the book and the pages it was read from
         if: inputs.divebooker_fetch != '0'
