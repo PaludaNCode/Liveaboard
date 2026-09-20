@@ -9,6 +9,28 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-19
 ===========================
 
+fees (26)
+  All Star Ghani         private_guide    listed, no price -> 500 USD / per_trip
+  Aphrodite              private_guide    listed, no price -> 500 EUR / per_trip
+  Blue Horizon           private_guide    listed, no price -> no longer listed
+  Blue Melody            private_guide    listed, no price -> no longer listed
+  Ghazala Adventure      course           listed, no price -> 40-400 EUR / per_trip
+  Ghazala Adventure      gear_rental      200 EUR / per_week -> 190 EUR / per_trip
+  Ghazala Adventure      nitrox_course    listed, no price -> 135-150 EUR / per_trip
+  Ghazala Adventure      private_guide    listed, no price -> 400 EUR / per_trip
+  Ghazala Explorer       course           listed, no price -> 40-400 EUR / per_trip
+  Ghazala Explorer       gear_rental      190 EUR / per_week -> 190 EUR / per_trip
+  Ghazala Explorer       nitrox_course    listed, no price -> 135-150 EUR / per_trip
+  Ghazala Explorer       private_guide    listed, no price -> 400 EUR / per_trip
+  ... and 14 more not shown
+```
+
+## 2026-09-19
+
+```
+changes: HEAD -> 2026-09-19
+===========================
+
 now sold out (1)
   2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  liveaboard.com
 
