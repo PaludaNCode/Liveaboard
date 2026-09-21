@@ -1639,19 +1639,34 @@ class TestBothSellersSpan(unittest.TestCase):
     #: `total`/`base`/`later` for a floor, `totalMax`/`base`/`totalMax - base`
     #: for a ceiling. Both add up given `metricsOf`'s `later = total - base`,
     #: which `test_later_is_total_minus_base` pins.
+    #:
+    #: `.m` because a bill travels beside the name of the seller who published
+    #: it -- `{ m: row.padi, who: "padi" }` -- which is what lets `cheaper` be
+    #: a seller's name rather than a position in a pair.
     SOUND = {
-        ("S.total", "S.base", "S.later"),
-        ("S.totalMax", "S.base", "S.totalMax - S.base"),
+        ("S.m.total", "S.m.base", "S.m.later"),
+        ("S.m.totalMax", "S.m.base", "S.m.totalMax - S.m.base"),
     }
 
     def best_returns(self) -> list[str]:
+        """The one return `best()` has, since it stopped being a pair.
+
+        It had two: a special case for a sailing one seller lists and the
+        comparison for a sailing both do. A third seller cannot be admitted to
+        that shape without a third branch and then a fourth, so it reads a
+        list -- and the single-bill case falls out of it, because with one bill
+        the cheapest and the ceiling are the same bill. What this class asserts
+        is unchanged and is the reason the rewrite is safe: each end of the
+        span is still one seller's whole bill, never min(base) + min(fees),
+        which is a bill nobody quotes and was measured wrong on 74 of 108 rows.
+        """
         source = self.APP.read_text(encoding="utf-8")
         start = source.index("function best(row) {")
         end = source.index("\n  }", start)
         body = source[start:end]
         body = re.sub(r"/\*.*?\*/", "", body, flags=re.S)
         returns = re.findall(r"return \{(.*?)\};", body, re.S)
-        self.assertEqual(len(returns), 2, "best() no longer has two returns")
+        self.assertEqual(len(returns), 1, "best() no longer has one return")
         return returns
 
     @staticmethod
@@ -1947,55 +1962,80 @@ class TestTheSellerFilter(unittest.TestCase):
         self.assertRegex(app, r'"entry",\s*"sellers"\]',
                          "the seller bank is never repainted on reset")
 
-    def test_the_three_states_partition_every_row(self) -> None:
-        """Three chips, three facts, and no row in two of them or none.
+    def test_every_row_is_in_exactly_one_set(self) -> None:
+        """One chip per set of sellers, and no row in two of them or none.
 
-        Read off the same two keys the Seller column branches on -- a second
+        This counted three states -- both, liveaboard, PADI -- while there were
+        two sellers, and `both` stopped being an answer the day a third
+        arrived: a row divebooker and PADI list is not the same fact as one all
+        three list. So the chip's value is the *set*, and what may not happen is
+        a row falling outside every set or a chip rendering over no rows.
+
+        Read off the same keys the Seller column branches on -- a second
         derivation of "who sells this" would be a second answer, and the chip
         counts would drift from the links beside them.
         """
         payload = published.page()
-        counts = {"both": 0, "liveaboard": 0, "padi": 0}
+        counts: dict[str, int] = {}
         for d in payload["departures"]:
-            counts["padi" if d.get("padi_only")
-                   else "both" if d.get("padi") is not None
-                   else "liveaboard"] += 1
+            who = []
+            if not d.get("padi_only"):
+                who.append("liveaboard")
+            if d.get("padi") is not None or d.get("padi_only"):
+                who.append("padi")
+            if d.get("divebooker") is not None:
+                who.append("divebooker")
+            self.assertTrue(who, f"{d['id']} is sold by nobody")
+            counts["+".join(who)] = counts.get("+".join(who), 0) + 1
         self.assertEqual(sum(counts.values()), len(payload["departures"]))
         for state, n in counts.items():
             self.assertGreater(n, 0, f"the {state!r} chip would render with no rows")
+        self.assertGreater(len(counts), 1, "one chip is not a filter")
 
     def test_the_column_is_named_for_what_it_holds(self) -> None:
         """It stopped being one source the day it started linking two."""
         self.assertIn('{ k: "source", t: "Seller",', self.app())
 
-    def labels(self) -> str:
-        block = re.search(r"var SELLER_LABELS = \{(.*?)\};", self.app(), re.S)
-        assert block, "SELLER_LABELS not found in app.js"
-        return block.group(1)
+    def names(self) -> dict[str, str]:
+        block = re.search(r"var SELLER_NAMES = \{(.*?)\};", self.app(), re.S)
+        assert block, "SELLER_NAMES not found in app.js"
+        return dict(re.findall(r'(\w+):\s*"([^"]+)"', block.group(1)))
 
-    def test_every_chip_names_its_seller(self) -> None:
+    def test_every_seller_has_a_name_and_it_is_not_a_direction(self) -> None:
         """A filter that says who sells a berth has to say who.
 
         The middle chip read "Here only", which asks the reader to work out
-        which of the two sites "here" is -- and this page is neither of them:
-        it is a third thing that reads both and compares them.
+        which of the sites "here" is -- and this page is none of them: it is a
+        thing that reads them and compares them.
         """
-        labels = self.labels()
-        self.assertIn('"liveaboard only"', labels)
-        self.assertIn('"PADI only"', labels)
-        self.assertNotIn("Here", labels)
+        names = self.names()
+        self.assertEqual(set(names), {"liveaboard", "padi", "divebooker"})
+        for word in names.values():
+            self.assertNotIn("here", word.lower())
+            self.assertNotIn("our", word.lower())
+        self.assertIn("only", self.app(), "a set of one has to say it is one")
 
-    def test_the_chip_and_the_link_call_the_seller_one_thing(self) -> None:
+    def test_the_chip_and_the_link_call_each_seller_one_thing(self) -> None:
         """The chip filters to rows whose Seller column links that same site.
 
         Two names for one seller is the drift this whole column exists to
         avoid: a reader who narrows to "liveaboard only" and then reads
         something else in the link beside the row has to work out whether they
-        are the same place.
+        are the same place. Asserted for every seller now rather than for the
+        one the regex happened to name, because a third can arrive with a
+        second name and this guard would not have noticed.
         """
-        word = re.search(r'liveaboard: "(\w+)', self.labels()).group(1)
-        self.assertIn(f'? "{word}"', self.app(),
-                      "the Seller column names that seller something else")
+        app = self.app()
+        start = app.index('{ k: "source", t: "Seller"')
+        # To the end of COLS, which is the one `];` at this indent.
+        column = app[start:app.index("\n  ];", start)]
+        # The arrow is the column's, not a seller's: one link writes the name
+        # and the arrow together and another concatenates them, so the two
+        # spellings are one fact once the arrow is off.
+        named = column.replace(" \u2197</a>", "")
+        for word in self.names().values():
+            self.assertIn(f'"{word}"', named,
+                          f"the Seller column does not link {word!r} by name")
 
 
 class TestTheBuiltStampIsTheBuild(unittest.TestCase):
@@ -2373,14 +2413,25 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
         the figure, because three columns had each grown that same phrase for
         three different facts. The mechanism is what moved; the distinction is
         what may not be lost, so this names the branch rather than the mark.
+
+        Asserted per seller rather than on PADI's two sentences, which is what
+        it used to pin: the note is written for whichever sellers quoted this
+        berth and cannot be totalled, and naming only one of them would put the
+        other's silence under the page's unmarked default (#139).
         """
         app = self.source()
         self.assertIn("function advertisedNote(", app)
         self.assertIn("advertisedNote(d, row)", app)
-        # The two cases it tells apart, still told apart: PADI quoting the same
-        # figure, and PADI quoting a different one.
-        self.assertIn("PADI Travel advertises this berth at the same price", app)
-        self.assertIn("PADI Travel advertises this berth at \" + eur(d.padi)", app)
+        note = app.split("function advertisedNote(", 1)[1].split("\n  }", 1)[0]
+        # Every seller whose berth price can reach that column, named in it.
+        for who, key in (("PADI Travel", "d.padi"),
+                         ("divebooker.com", "d.divebooker")):
+            self.assertIn(f'"{who}"', note, f"{who} is not named in the note")
+            self.assertIn(key, note, f"{who}'s figure is not read for the note")
+        # The two cases it tells apart, still told apart: a seller quoting the
+        # same figure as the row, and one quoting a different one.
+        self.assertIn("advertises this berth at ", note)
+        self.assertIn('"the same price" : eur(s.price)', note)
         # And it reaches the reader: a title on the figure, not a dropped string.
         self.assertIn("var why = advertisedNote(d, row);", app)
         self.assertIn('figure = \'<span title="\'', app)
@@ -2696,7 +2747,16 @@ class TestNeitherSellerIsTheHouse(unittest.TestCase):
         self.app = self.APP.read_text(encoding="utf-8")
 
     def test_a_seller_link_names_the_seller_it_opens(self) -> None:
-        self.assertIn('(d.padi_only ? "PADI" : "liveaboard") + " ↗</a>"', self.app,
+        """The row's own booking url belongs to whoever founded the row.
+
+        Three sellers can found one now — liveaboard.com by default, PADI on a
+        `padi_only` row, divebooker on a `divebooker_only` one — and the link
+        has to name whichever it is. Asserted on the branch rather than on one
+        spelling of it: a fourth seller arriving without a name here would be
+        the generic label coming back by omission.
+        """
+        self.assertIn('d.padi_only ? "PADI" : d.divebooker_only ? "divebooker"',
+                      self.app,
                       "a link label is generic again, so one seller is the "
                       "unmarked default and a visitor cannot tell where it goes")
         column = self.app.split('{ k: "source", t: "Seller",', 1)[1].split("} }", 1)[0]
@@ -2708,14 +2768,22 @@ class TestNeitherSellerIsTheHouse(unittest.TestCase):
         """`cheapest: "ours" | "padi"` -- an enum with one value naming a
         company and one naming us -- made a reader decode the project's reading
         order before they could check any arithmetic that used it."""
-        self.assertIn('cheaper: same ? "same" : gap < 0 ? "liveaboard" : "padi"', self.app)
-        self.assertNotIn('"ours"', self.app.split("function best(", 1)[1])
+        best = self.app.split("function best(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn('cheaper: bills.length > 1 && gap < PADI_SAME '
+                      '? "same" : cheap.who', best)
+        # Every seller `best()` can name, named. A fourth arriving without a
+        # name here would come out as `undefined` in the hover text.
+        for who in ('"liveaboard"', '"padi"', '"divebooker"'):
+            self.assertIn("who: " + who, best,
+                          "a bill in best() is not keyed by its seller's name")
+        self.assertNotIn('"ours"', best)
 
     def test_both_bills_are_keyed_by_their_seller(self) -> None:
         """`.m` was named for what it is and `.p` for whose it is, and `best()`
         overloaded `.m` again for whichever bill is cheaper -- three meanings
         across two letters."""
-        self.assertIn("{ d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) }",
+        self.assertIn("{ d: dep, i: itin, lav: metricsFor(dep), "
+                      "padi: padiMetricsFor(dep), db: divebookerMetricsFor(dep) }",
                       self.app)
         # Anchored: a bare "row.m" is a substring of "narrow.matches".
         self.assertIsNone(re.search(r"\brow\.m\b", self.app),

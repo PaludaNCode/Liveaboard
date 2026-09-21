@@ -44,6 +44,7 @@ on:
       - "Read cabin prices and berths left"
       - "Read trip itineraries"
       - "Read PADI Travel"
+      - "Read divebooker.com"
       - "Re-promote"
     types: [completed]
   workflow_dispatch:

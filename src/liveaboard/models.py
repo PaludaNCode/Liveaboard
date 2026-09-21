@@ -348,6 +348,40 @@ class Itinerary:
     says which it is, on the same rule ``fees_known`` and ``not_asked`` follow.
     """
 
+    divebooker_sourced_fees: bool = False
+    """True where this trip's own fee rows came from divebooker.com.
+
+    The same fact as :attr:`padi_sourced_fees` about a third seller, and a
+    fallback into a silence rather than a ranking: it is written only where
+    neither the vessel's own panel nor PADI's book has anything to say, which
+    is the 33 Egyptian hulls neither of the other two sellers carries.
+
+    The page needs it because the sentence under the fee table names a source.
+    """
+
+    divebooker_fees: list[FeeItem] = field(default_factory=list)
+    """The charges divebooker.com says a diver cannot decline on this trip.
+
+    A third seller's own disclosure, kept apart from :attr:`fees` and
+    :attr:`padi_fees` and merged into neither, for the reason the second one
+    already is: the books genuinely differ, and unioning them builds a bill no
+    seller quotes.
+
+    Its shape is the *Price details* panel's middle column, *Obligatory
+    surcharges* — one panel per trip, joined to this itinerary through the
+    dates its departures share rather than by name, because the three sellers
+    spell one week three ways and a date has no spelling.
+    """
+    divebooker_fees_complete: bool = False
+    """Whether every charge divebooker states here is named, priced and scaled.
+
+    The third clause is this seller's own. It writes *"Port fees - 50 USD per
+    person (to be paid on board)"* — a payer and no period — and a line whose
+    unit is missing cannot be normalised, so a bill holding one cannot add up.
+    False means the page shows the berth price and says there is no total
+    behind it, which is what it already does for PADI.
+    """
+
     padi_sourced_fees: bool = False
     """True where this trip's own fee rows came from PADI Travel.
 
@@ -395,6 +429,14 @@ class Itinerary:
                 for f in payload.get("padi_fees", [])
             ],
             padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
+            divebooker_fees=[
+                FeeItem.from_dict(f, default_currency)
+                for f in payload.get("divebooker_fees", [])
+            ],
+            divebooker_fees_complete=bool(
+                payload.get("divebooker_fees_complete", False)),
+            divebooker_sourced_fees=bool(
+                payload.get("divebooker_sourced_fees", False)),
             dives_read=bool(payload.get("dives_read", False)),
             padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )
@@ -437,6 +479,27 @@ class Departure:
     zero, and not the operator's price copied across.
     """
     padi_provenance: Provenance | None = None
+    divebooker_price: Money | None = None
+    """What divebooker.com advertises for this same sailing, when it sells it.
+
+    A berth price like :attr:`price` and :attr:`padi_price`, and comparable to
+    them on the same terms. Its own field rather than an entry in a list of
+    sellers because the two beside it are fields too, and a third seller
+    arriving is not a reason to rewrite how the first two are stated.
+
+    **The currency is the page's, not the offer's.** `Offer.priceCurrency` on
+    that source is a static per-vessel label that does not describe
+    `Offer.price`: three of four hulls read label every offer EUR on a page
+    whose own payload says it rendered in USD. Read that way, 725 of 777
+    joined sailings carry a figure identical to one of the other two sellers'
+    -- which is what makes this a berth price and not a figure of unknown
+    unit. Read by the label, the same book was 15% wrong in the direction
+    nobody checks.
+
+    ``None`` where that seller does not list the sailing. Not zero, and never
+    another seller's figure copied across.
+    """
+    divebooker_provenance: Provenance | None = None
     berths: list[dict[str, Any]] = field(default_factory=list)
     """What is left on this sailing and at what price, one block per seller.
 
@@ -514,6 +577,18 @@ class Departure:
     nothing, and three of the five PADI-only discounts are exactly that.
     """
 
+    divebooker_only: bool = False
+    """True where divebooker.com is the only seller listing this sailing.
+
+    The same fact as :attr:`padi_only` about a different seller, and recorded
+    for the same reason: seven sailings on boats this site already carries,
+    which the other two do not list. Not a quality of the trip -- a fact about
+    who was asked.
+
+    Such a row's :attr:`price` and :attr:`price_provenance` are divebooker's,
+    and its :attr:`divebooker_price` is always ``None``.
+    """
+
     padi_only: bool = False
     """True where PADI Travel is the only seller listing this sailing.
 
@@ -566,7 +641,13 @@ class Departure:
                         if payload.get("padi_price") else None),
             padi_provenance=(Provenance.from_dict(payload["padi_provenance"])
                              if payload.get("padi_provenance") else None),
+            divebooker_price=(Money.parse(payload["divebooker_price"], default_currency)
+                              if payload.get("divebooker_price") else None),
+            divebooker_provenance=(
+                Provenance.from_dict(payload["divebooker_provenance"])
+                if payload.get("divebooker_provenance") else None),
             padi_only=bool(payload.get("padi_only")),
+            divebooker_only=bool(payload.get("divebooker_only")),
             berths=list(payload.get("berths") or []),
             sale=dict(payload.get("sale") or {}),
         )

@@ -1,0 +1,124 @@
+name: Read divebooker.com
+
+# Fetch what the third seller states — every Egyptian hull its own search
+# lists, and every sailing each one sells inside the published season — and
+# commit the book.
+#
+# `tools/fetch_divebooker.py` ran in no workflow at all: every reading of this
+# source was a hand-dispatched `probe.yml`, which is the failure mode
+# `padi.yml` was written for one source earlier. Nothing here reports "nobody
+# ran it", and `data/divebooker.json` is committed, so a stale book goes on
+# stating a fleet and a fare under a `collected` date that is simply old.
+#
+# **What it reads, and what it costs.** Discovery is the seller's own search,
+# `/boatsearch?et=2&e=3881&ym=YYYYMM`, walked on `p=` until a page repeats —
+# four months, about twenty pages — and then one request per hull. 117 requests
+# on the read of 2026-09-20, about ten minutes at the five-second pace this
+# project gives a host that states no `Crawl-delay`. That pace is the part that
+# may not be cut to make the job shorter.
+#
+# **The committed book is the season; the whole reading is the artifact.**
+# divebooker sells into 2029 and 85% of what it publishes is outside the window
+# this dataset reads. See `docs/sources/divebooker.com.md`.
+
+on:
+  # After the two sellers this source is compared against, because the
+  # comparison is only meaningful against the same day's prices: the refresh
+  # (04:15), PADI (04:45), the itineraries (05:00) and the cabin ladders
+  # (05:20) are all in before this starts. Nothing downstream waits on it —
+  # the dataset records coverage rather than a fare — so it takes the slot
+  # after the ones that do.
+  schedule:
+    - cron: "40 5 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap hulls read (0 = every hull the search lists)"
+        type: string
+        default: "3"
+      delay:
+        description: "Seconds between requests"
+        type: string
+        default: "5"
+      months:
+        description: "Year-months to search, the seller's own ym format"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  # Never beside itself: two jobs writing and pushing data/divebooker.json is
+  # a guaranteed conflict.
+  group: divebooker-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    # Resolved once, because `inputs` is null on a scheduled run and
+    # `inputs.limit || 3` would quietly become "read three hulls" on the
+    # nightly job — a capped run merges into the book rather than replacing
+    # it, so it looks exactly like a healthy one. The schedule means every
+    # hull. `TestAScheduledRunReadsEverything` refuses the other shape.
+    env:
+      LIMIT: ${{ github.event_name == 'schedule' && '0' || (inputs.limit || '3') }}
+      DELAY: ${{ inputs.delay || '5' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Only the tests that answer to `src/`, like the other fetching jobs:
+      # an assertion about committed data gates the commit below and must
+      # never stop the fetch that would correct it. See tests/published.py.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+
+      # The run summary is where a capped run is read: each hull prints what
+      # it kept against what it read, so a book that shrank because the season
+      # moved is told apart from one that shrank because the search did.
+      - name: Read the Egyptian fleet
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/fetch_divebooker.py \
+            ${{ env.LIMIT != '0' && format('--limit {0}', env.LIMIT) || '' }} \
+            --delay "$DELAY" \
+            ${{ inputs.months && format('--months {0}', inputs.months) || '' }} \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Hand over the reading, never the dataset built from it. `publish.yml`
+      # rebuilds both from the branch tip, so a derived file cannot arrive
+      # stale -- see the note at the top of that file.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: divebooker-inputs-${{ github.run_id }}
+          path: data/divebooker.json
+          retention-days: 1
+
+  # Promotion is offline and takes seconds; the fetch above took minutes. A run
+  # that writes its book and stops leaves the committed dataset disagreeing
+  # with its own inputs -- a red build, and before that a page one pass behind
+  # its own data. Serialised, so two sources cannot each derive from a tree the
+  # other has already moved: see .github/workflows/publish.yml.
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: divebooker-inputs-${{ github.run_id }}
+      # The book is rewritten whole on an uncapped run, so its own `collected`
+      # is today whenever the reading arrived. A capped dispatch merges and
+      # still stamps the file, which is why the cap is a dispatch-only thing.
+      fresh: data/divebooker.json
+      paths: "data/divebooker.json data/egypt-2027.json site/index.html"
+      subject: "data: read {today} divebooker fleet and sailings"
+      nothing: "nothing divebooker states has moved"

@@ -161,7 +161,14 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
      r"|\bconservation\s+(?:fees?|charges?)\b|\breef\s+tax(?:es)?\b"
      r"|\benvironmental\s*/\s*government\s+fees?\b",
      FeeCode.ENVIRONMENT_TAX),
-    (r"\bfuel\s+(?:surcharges?|fees?|supplements?)\b", FeeCode.FUEL_SURCHARGE),
+    # `charge` is the third seller's word for it -- 24 lines of *Fuel Charge:
+    # 45EUR per trip* on the fleet census of 2026-09-21, against nothing
+    # spelled that way on the other two. Same fix as the plurals above and for
+    # the same reason: the word belongs to the operators, and a table written
+    # against one seller's wording reads as complete until a second is pointed
+    # at it.
+    (r"\bfuel\s+(?:surcharges?|fees?|supplements?|charges?)\b",
+     FeeCode.FUEL_SURCHARGE),
     (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
     # Six wordings PADI's fee book uses and liveaboard.com's does not. Each is
     # `isMandatory` on the source's own say-so, each is priced, and between
@@ -181,7 +188,12 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # are -- the trip's own sibling entries name the charge correctly.
     (r"\blocal\s+fees?\b", FeeCode.LOCAL_FEES),
     (r"\bhospitality\s+(?:fees?|charges?)\b", FeeCode.HOSPITALITY_FEE),
-    (r"\broute\s+supplements?\b", FeeCode.ROUTE_SUPPLEMENT),
+    # One `p`, because the operator writes one: *Route suplement (from July,
+    # 2026) - 55 EUR per person*, 13 lines of it. In the table for the reason
+    # `Cost Gard Fee` is and the two misspellings of Daedalus are -- the same
+    # charge is spelled correctly elsewhere in this fleet, so the correction is
+    # confirmed by the data rather than guessed from the shape of the word.
+    (r"\broute\s+supp?lements?\b", FeeCode.ROUTE_SUPPLEMENT),
     (r"\bcoast\s*guard\b|\bcost\s+gard\b", FeeCode.COAST_GUARD),
     (r"\bnavy\s+(?:fees?|charges?)\b", FeeCode.NAVY_FEE),
     # A contribution to the recompression chamber, billed per diver on two of
@@ -216,7 +228,20 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # Narrow on purpose. The 14 remaining clashes are one vessel's bare
     # "Nitrox" at 50 with no size in the title, and there the stated amount
     # wins: turning a stated cost into free is the error this must never make.
-    (r"\b1[0-9]\s*(?:l\b|lt\b|ltrs?\b|liters?\b|litres?\b)", FeeCode.TANK_15L),
+    #
+    # **The size is 15, and it used to be any of 10 to 19.** `1[0-9]` was wide
+    # enough to catch a spelling nobody had written yet and it caught the
+    # opposite: divebooker.com's inclusion list says *"12l tanks and weights"*,
+    # the tanks the operator gives you, next to an *Extra cost* line reading
+    # *"15l tanks"* — so the free size classified as the charged upgrade and,
+    # ranking above an unpriced extra, published Red Sea Aggressor II's 15L
+    # tanks as **included**. Turning a charge into free is the error this
+    # table's own comment says it must never make.
+    #
+    # Measured before it was narrowed: across `data/fees.json`, `data/padi.json`
+    # and the shipped dataset, all 655 matches are 15 and not one is any other
+    # number. So the two sellers this was written for lose nothing.
+    (r"\b15\s*(?:l\b|lt\b|ltrs?\b|liters?\b|litres?\b)", FeeCode.TANK_15L),
     # Supervision, at 9 a dive, for divers of a stated certification level.
     # Priced and real, and owed by some divers and not others -- so it is a
     # charge like a guide's rather than one every berth carries, which is what
@@ -236,8 +261,16 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # singles invents a basket the operator never sold. Every one of those
     # entries carries `fullSetDescription` naming what is in it, so the note can
     # say so in the seller's words.
+    #
+    # `Full equipment set` is the third seller's spelling of the same bundle,
+    # and it is the line that matters most on a hull only that seller lists:
+    # Aml Hayaty publishes *Full Equipment set (Mask, Fins, Snorkel, BCD,
+    # Regulator, Wetsuit, Torch, SMB): 130.00EUR per trip* beside seven singles
+    # this table declines on purpose. Unnamed, that boat's 35 sailings showed
+    # no gear at all -- and `GEAR_ESTIMATE` could not fill it either, because
+    # it answers an operator's silence and never an absent row.
     (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b"
-     r"|\bfull\s+scuba\s+set\b",
+     r"|\bfull\s+scuba\s+set\b|\bfull\s+equipment\s+set\b",
      FeeCode.GEAR_RENTAL),
     (r"\bnaturalist\s+guide\b|\bsnorkell?(?:ing)?\s+guide\b", FeeCode.NATURALIST_GUIDE),
     (r"\bextra\s+dives?\b|\badditional\s+dives?\b", FeeCode.EXTRA_DIVES),
@@ -252,7 +285,14 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # itineraries carry it -- and `crew\s+tips?` only matched the other way
     # round, so the one charge every operator on that seller states was the one
     # charge nothing read.
-    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btips?\s+for\s+the\s+crew\b|\btipping\b",
+    #
+    # And `crew gratitude`, which is the operator's own word rather than a
+    # near-miss of ours -- 32 lines on the third seller's census, *Crew
+    # Gratitude: 120.00EUR per trip*. `gratuit\w*` cannot reach it: the stem
+    # is *grati*, not *gratuit*. Anchored on `crew` rather than added as a bare
+    # `gratitude`, so a boat thanking its guests in a description stays prose.
+    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btips?\s+for\s+the\s+crew\b|\btipping\b"
+     r"|\bcrew\s+gratitude\b",
      FeeCode.GRATUITIES),
     (r"\blaundry\b|\bpressing\s+services?\b", FeeCode.LAUNDRY),
     (r"\bvisas?\s*(?:fees?|on\s+arrival)?\b(?!\w)", FeeCode.VISA),
@@ -324,6 +364,16 @@ class ParsedFee:
     that bills at the dock.
     """
 
+    unit_unstated: bool = False
+    """The figure is the seller's and the unit it is charged in is not stated.
+
+    Carried through to :attr:`models.FeeItem.unit_unstated`, which is where the
+    reasoning lives. A third state beside a price and a blank, and the only one
+    that keeps a number no total may claim: `scrape/gear.py` writes it for a
+    bundle quoted with no unit, and `divebooker_com` for a line stating *125-250
+    EUR per person* — who pays, and not how often.
+    """
+
     @property
     def is_range(self) -> bool:
         return self.high is not None and self.high != self.low
@@ -348,7 +398,14 @@ COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
         r"\bparks?\b",
         r"\bports?\b|\bharbou?rs?\b",
         r"\bfuel\b",
-        r"\benvironment(?:al)?\b|\beco\b",
+        # One `n`, because one operator writes one: Tala bills *Route fees and
+        # enviromental taxes - 200-320 EUR per person*, and that line is the
+        # whole of its obligatory column on 12 panels. Spelled with the second
+        # `n` it matched nothing, so `route` was the only part found and the
+        # line declined -- taking the entire bill with it. In the table on the
+        # `Cost Gard Fee` rule: the fleet spells it correctly everywhere else,
+        # so the correction is confirmed by the data rather than guessed.
+        r"\benviro(?:n)?ment(?:al)?\b|\beco\b",
         # The fifth part, and the reason it is here: PADI bills "Environmental
         # and Route Fees", which names two charges and matched exactly one of
         # the four above, so it declined and blocked its trip's bill. A route
@@ -356,6 +413,15 @@ COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
         # alone is one part, and `COMBINED_TAIL` does not match "Route
         # supplement" either way.
         r"\broutes?\b",
+        # The sixth, and the same finding one seller later: Royal Evolution
+        # bills *Port & Permission fees: 150.00EUR per trip* on 9 panels, which
+        # names two charges, matched `port` alone and declined. A permission is
+        # what a boat buys to sail somewhere and PADI's own bundle names it in
+        # the same breath -- *"Visa, dive permission and taxes"*. One line
+        # carrying the whole amount, which is the whole point of this code:
+        # splitting 150 between a port and a permit invents two prices nobody
+        # quoted.
+        r"\bpermissions?\b|\bpermits?\b",
     )
 )
 COMBINED_TAIL = re.compile(r"\b(?:fees?|charges?|taxes?|dues)\b", re.I)
@@ -665,8 +731,14 @@ def extras_excerpt(text: str, limit: int = EXCERPT_CHARS) -> dict[str, str]:
     return blocks
 
 
-def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
-    """Render parsed extras into the dataset's fee shape."""
+def to_fee_dicts(fees: list[ParsedFee], provenance: dict | None = None) -> list[dict]:
+    """Render parsed extras into the dataset's fee shape.
+
+    ``provenance`` is omitted where it is ``None``, for a book that states its
+    own once at the head of the file rather than on every line -- the rule
+    `divebooker_com.Departure.as_dict` already keeps about the booking URL. A
+    fee that travels on its own still carries it, which is every caller here.
+    """
     out = []
     for fee in fees:
         entry: dict = {
@@ -674,8 +746,9 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             "tier": fee.tier.value,
             "basis": fee.basis.value,
             "included": fee.included,
-            "provenance": provenance,
         }
+        if provenance is not None:
+            entry["provenance"] = provenance
         if fee.included:
             # Drawn at zero rather than counted, and never "listed with no
             # price": the operator did state the price, and it is nothing.
@@ -683,7 +756,15 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             entry["note"] = f"{fee.label}: stated as included"
         elif fee.has_price:
             entry["amount"] = {"amount": fee.low, "currency": fee.currency}
-            if fee.is_range:
+            if fee.unit_unstated:
+                # The figure stays and nothing totals it: `span_for_trip`
+                # refuses the line outright. Kept rather than discarded so the
+                # note can print what the seller published and so a unit stated
+                # elsewhere can still be matched to it, which is how the four
+                # unitless gear prices were settled.
+                entry["unit_unstated"] = True
+                entry["note"] = f"{fee.label}: stated with no unit"
+            elif fee.is_range:
                 entry["amount_max"] = {"amount": fee.high, "currency": fee.currency}
                 entry["note"] = f'Operator quotes "{fee.label}" as a range'
             elif fee.label.lower() != FEE_LABELS.get(fee.code, "").lower():

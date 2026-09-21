@@ -267,14 +267,22 @@ def _sellers(dep: dict) -> tuple[str, ...]:
     """Which sites published this sailing, by host.
 
     The berth price names its own source, and a row built from liveaboard.com
-    carries PADI's provenance beside it wherever PADI sells the same date --
-    which is the same pair the Seller column prints. Taken from there rather
-    than worked out again: two answers to "who sells this" is exactly the
-    drift this project keeps closing elsewhere.
+    carries the other sellers' provenance beside it wherever they sell the same
+    date -- which is the same set the Seller column prints. Taken from there
+    rather than worked out again: two answers to "who sells this" is exactly
+    the drift this project keeps closing elsewhere.
+
+    Every seller with a provenance on the row, so a seller that starts or stops
+    listing a sailing shows up in the report as a change in who sells it. Left
+    at two, a third seller arriving would have been invisible in the change log
+    and the report would have said nothing moved.
     """
     hosts = {(dep.get("provenance") or {}).get("source_id")}
     if dep.get("padi_provenance"):
         hosts.add((dep["padi_provenance"] or {}).get("source_id") or "padi.com")
+    if dep.get("divebooker_provenance"):
+        hosts.add((dep["divebooker_provenance"] or {}).get("source_id")
+                  or "divebooker.com")
     return tuple(sorted(h for h in hosts if h))
 
 

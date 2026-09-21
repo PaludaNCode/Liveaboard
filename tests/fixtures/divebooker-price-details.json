@@ -1,0 +1,87 @@
+[
+ {
+  "name": "Northern Red Sea, Ras Mohamed, Straits of Tiran (7 nights) (Hurghada-Hurghada)",
+  "details": {
+   "columns": [
+    {
+     "text": "7 nights accommodation\r\n6 days of diving (3-4 dives per day, incl. night dive; 2 dives on the last day)\r\nFull board\r\nSoft drinks, water, tea, coffee, local beer and wine\r\n12l tanks and weights\r\nDive guide\r\nFree short-term DAN diving insurance (upon request)",
+     "title": "Included",
+     "type": "included"
+    },
+    {
+     "text": "Port fees - 50 USD per person (to be paid on board)\r\nMarine park fees - 100 USD per person (to be paid on board)\r\nFuel Surcharge - 50 USD per person (to be paid on board)",
+     "title": "Obligatory surcharges",
+     "type": "notincluded"
+    },
+    {
+     "text": "International flights\r\nVisa\r\nTransfers\r\n15l tanks\r\nEquipment rental\r\nNitrox\r\n14% VAT tax on all goods and services purchased on board\r\nCrew gratuities\r\nTravel insurance",
+     "title": "Extra cost",
+     "type": "extra"
+    }
+   ],
+   "title": "Price details"
+  }
+ },
+ {
+  "name": "Best of Hurghada (3 nights) (Hurghada-Hurghada)",
+  "details": {
+   "columns": [
+    {
+     "text": "4 days/ 3 nights accommodation on board\nApproximately 9 dives, including night dives\nVAT\nAirport Transfer\nHotel Transfer\nDrinking, Water\nSoft drinks\nTea & Coffee\nWelcome Cocktails\nFull-Board Meal Plan (All meals)\nSnacks\nDiving Package\nNitrox\nCabin Towels\nWiFi Internet \nFree short-term DAN diving insurance (upon request)",
+     "title": "Included",
+     "type": "included"
+    },
+    {
+     "text": "Diving insurance\nFuel Surcharge: 10EUR per day, to be paid on board\nNational Park Fee: 15EUR per day, to be paid on board\nPort Fee: 25EUR per trip, to be paid on board",
+     "title": "Obligatory surcharges",
+     "type": "notincluded"
+    },
+    {
+     "text": "$3f",
+     "title": "Extra cost",
+     "type": "extra"
+    }
+   ],
+   "title": "Price details"
+  }
+ },
+ {
+  "name": "Mini Safari: Wrecks & Reefs (3 nights) (Hurghada-Hurghada)",
+  "nights": "3 nights",
+  "numberDives": "9 dives",
+  "requirements": {
+   "expirience": {
+    "title": "Requirements",
+    "text": "Minimum 0 dives"
+   }
+  },
+  "departurePort": {
+   "name": "Hurghada",
+   "url": "https://divebooker.com/egypt-hurghada-eaz665"
+  },
+  "arrivalPort": {
+   "name": "Hurghada",
+   "url": "https://divebooker.com/egypt-hurghada-eaz665"
+  },
+  "details": {
+   "title": "Price details",
+   "columns": [
+    {
+     "type": "included",
+     "title": "Included",
+     "text": "VAT\nAirport Transfer or Hotel Transfer\nDrinking Water, Soft drinks, Tea & Coffee\nFull-Board Meal Plan\nSnacks\nDiving Package\n12L Tanks & Weights\nWifi\nNitrox\nCabin Towels\nDeck Towels\nComplimentary Toiletries \nFree short-term DAN diving insurance (upon request)"
+    },
+    {
+     "type": "notincluded",
+     "title": "Obligatory surcharges",
+     "text": "Diving insurance\nNational Park / Port Fees: 70EUR per trip, to be paid on board"
+    },
+    {
+     "type": "extra",
+     "title": "Extra cost",
+     "text": "Gratuities (€70)\nAlcoholic Beverages\nWetsuit (3mm): 20.00EUR per trip, to be paid on board\nMask, Fins, Snorkel: 15.00EUR per trip, to be paid on board\nFull Equipment set (Mask, Fins, Snorkel, BCD, Regulator, Wetsuit, Torch, SMB): 130.00EUR per trip, to be paid on board\nBCD: 25.00EUR per trip, to be paid on board\nDive Computer: 25.00EUR per trip, to be paid on board\nDive Torch: 25.00EUR per trip, to be paid on board\nSMB: 10.00EUR per trip, to be paid on board\nPADI Nitrox Course: 200EUR per trip, to be paid on board\nPADI Advanced Open Water Course: 370EUR per trip, to be paid on board\nPADI Open Water Course: 410EUR per item, to be paid on board\nPrivate Dive Guide: 250.00EUR per trip, to be paid on board"
+    }
+   ]
+  }
+ }
+]

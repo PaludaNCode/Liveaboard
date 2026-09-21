@@ -304,6 +304,21 @@
     return metricsOf([dep.padi_base_line].concat(itin.padi_lines), dep.padi);
   }
 
+  /* And the third seller's, on the same two conditions: it priced this date,
+     and its own disclosure for this trip is complete enough to add up. Either
+     one missing means a berth price and no total, which the row says rather
+     than comparing a bill against half of one.
+
+     Deliberately the same `metricsOf` again. Three adders would drift three
+     ways, and the one thing these columns must never do is show a difference
+     that is an artefact of how each was summed. */
+  function divebookerMetricsFor(dep) {
+    var itin = D.itineraries[dep.itinerary_id];
+    if (!dep.divebooker_base_line || !itin.divebooker_lines) return null;
+    return metricsOf(
+      [dep.divebooker_base_line].concat(itin.divebooker_lines), dep.divebooker);
+  }
+
   function metricsOf(lines, base) {
     var low = 0, high = 0, unpriced = [], required = 0;
     var nitrox = null, tips = null;
@@ -391,55 +406,62 @@
      `sellerPair` and not `sellerSpan`: they follow the Total's seller order
      rather than running low to high, and on 27 rows that order is backwards.
 
-     `cheaper` still says who is lower -- named `"liveaboard"` or `"padi"`,
-     because a value naming one seller and calling the other `"ours"` is the
-     project's reading order asserted as a relationship. Under `PADI_SAME` they
-     are one price and the span collapses. */
+     `cheaper` still says who is lower -- named `"liveaboard"`, `"padi"` or
+     `"divebooker"`, because a value naming one seller and calling the others
+     `"ours"` is the project's reading order asserted as a relationship. Under
+     `PADI_SAME` they are one price and the span collapses.
+
+     **Three of them now, and the function reads a list rather than a pair.**
+     It was written as `lav` against `padi` with the single-seller case as its
+     own early return, which is a shape that has to be rewritten to admit a
+     third — so it is a list, and admitting a fourth is adding a line to it.
+     Nothing about the rules changed: the low end is still one seller's whole
+     bill and the high end another's whole ceiling, because min(base) +
+     min(fees) is a bill nobody quotes, and that was measured. */
   function best(row) {
     /* A bundle naming a charge that is also its own line withheld the total
        here for a while, as `fee_overlap`. It is settled on the line now --
        `subsumed_by`, so `lineCounts` leaves it out and the bill adds up -- and
        nothing about it belongs in this function: a bill with one charge stated
        twice and counted once is a bill, and the panel names what covers it. */
-    var lav = row.d.mandatory_known ? row.lav : null;
-    var padi = row.padi;
-    if (!lav && !padi) return null;
-    if (!lav || !padi) {
-      var only = lav || padi;
-      return {
-        bill: only, cheaper: lav ? "liveaboard" : "padi", varies: 0, both: false,
-        lo: only.total, hi: only.totalMax,
-        baseLo: only.base, baseHi: only.base,
-        /* The berth is one figure and the ranges sit on the fees, so a ranged
-           total is a ranged fee bill. Printing the midpoint here beside a
-           ranged Total would put the difference nowhere. */
-        laterLo: only.later, laterHi: only.totalMax - only.base
-      };
-    }
-    var gap = row.lav.total - row.padi.total;
-    var same = Math.abs(gap) < PADI_SAME;
-    var cheap = gap <= 0 ? row.lav : row.padi;
-    var dear = gap <= 0 ? row.padi : row.lav;
-    var top = cheap.totalMax > dear.totalMax ? cheap : dear;
+    var bills = [];
+    if (row.d.mandatory_known && row.lav) bills.push({ m: row.lav, who: "liveaboard" });
+    if (row.padi) bills.push({ m: row.padi, who: "padi" });
+    if (row.db) bills.push({ m: row.db, who: "divebooker" });
+    if (!bills.length) return null;
+
+    var cheap = bills[0], dear = bills[0], top = bills[0];
+    bills.forEach(function (b) {
+      if (b.m.total < cheap.m.total) cheap = b;
+      if (b.m.total > dear.m.total) dear = b;
+      if (b.m.totalMax > top.m.totalMax) top = b;
+    });
+    var gap = dear.m.total - cheap.m.total;
     return {
       /* The bill the expanded row leads with, and the one the proportion bar
-         is drawn from: the cheaper, because a bar and a fee table have to come
-         from one coherent bill even when the headline is a span. */
-      bill: cheap,
-      cheaper: same ? "same" : gap < 0 ? "liveaboard" : "padi",
-      varies: Math.abs(gap),
-      both: true,
+         is drawn from: the cheapest, because a bar and a fee table have to
+         come from one coherent bill even when the headline is a span. */
+      bill: cheap.m,
+      /* One seller left alone is not "the same price" as anybody, so the
+         collapse is only asked about where there is something to collapse. */
+      cheaper: bills.length > 1 && gap < PADI_SAME ? "same" : cheap.who,
+      varies: gap,
+      both: bills.length > 1,
       /* One seller per end. The high end is `top`'s ceiling rather than the
-         dearer seller's midpoint, because an operator's own quoted range can
-         reach past the other seller entirely and hiding it behind a seller
+         dearest seller's midpoint, because an operator's own quoted range can
+         reach past another seller entirely and hiding it behind a seller
          comparison would be this site's own suppressed cost. `top` is a whole
          bill either way, so Advertised + Mandatory fees still equals Total at
          both ends -- the ranges sit on the fee lines, never on the berth, so
-         the ceiling is carried by Mandatory fees. */
-      lo: cheap.total,
-      hi: top.totalMax,
-      baseLo: cheap.base, baseHi: top.base,
-      laterLo: cheap.later, laterHi: top.totalMax - top.base
+         the ceiling is carried by Mandatory fees.
+
+         With one bill every end is that bill's, which is what the early
+         return used to spell out: the berth is one figure and the ranges sit
+         on the fees, so a ranged total is a ranged fee bill. */
+      lo: cheap.m.total,
+      hi: top.m.totalMax,
+      baseLo: cheap.m.base, baseHi: top.m.base,
+      laterLo: cheap.m.later, laterHi: top.m.totalMax - top.m.base
     };
   }
 
@@ -541,25 +563,36 @@
      The third case has nothing on it, which is what the rest of the page means
      by one seller.
 
-     Nothing here is recomputed: `d.padi` and `row.padi` are the same two keys the
-     Total and the Seller column branch on. A second derivation would be a
-     second answer to "who priced this". */
+     Nothing here is recomputed: `d.padi`, `d.divebooker` and their bills on
+     the row are the same keys the Total and the Seller column branch on. A
+     second derivation would be a second answer to "who priced this".
+
+     **Written for every seller rather than for PADI**, because the sentence is
+     about what a source published and not about which one this project read
+     second: a seller whose berth price is on the row and whose bill is not is
+     in exactly this state whoever it is, and naming only one of them would put
+     the other's silence under the page's unmarked default (#139). */
   function advertisedNote(d, row) {
-    if (d.padi == null) return "";
-    if (row && row.padi) {
-      /* Both bills add up, so the pair beside this is genuinely two sellers'
-         and the fee panel shows each of them. Nothing to add here. */
-      return "";
+    /* Each seller that quoted this berth and cannot be totalled. A seller
+       whose bill adds up is absent from this list, because the span beside the
+       figure is already showing it and the fee panel already holds it. */
+    var loose = [];
+    if (d.padi != null && !(row && row.padi)) {
+      loose.push({ name: "PADI Travel", price: d.padi });
     }
-    var same = Math.round(d.padi) === Math.round(d.base);
-    return same
-      ? "PADI Travel advertises this berth at the same price. It does not " +
-        "publish a complete set of required extras for this trip, so there " +
-        "is a second price and no second total — open the row for both."
-      : "PADI Travel advertises this berth at " + eur(d.padi) + ". It does " +
-        "not publish a complete set of required extras for this trip, so " +
-        "the two berth prices are not a comparison of two bills — open the " +
-        "row for what each seller does state.";
+    if (d.divebooker != null && !(row && row.db)) {
+      loose.push({ name: "divebooker.com", price: d.divebooker });
+    }
+    if (!loose.length) return "";
+    var said = loose.map(function (s) {
+      return s.name + " advertises this berth at "
+        + (Math.round(s.price) === Math.round(d.base)
+            ? "the same price" : eur(s.price));
+    });
+    var subject = loose.length > 1 ? "Neither publishes" : "It does not publish";
+    return said.join(". ") + ". " + subject + " a complete set of required "
+      + "extras for this trip, so those berth prices are not a comparison of "
+      + "bills — open the row for what each seller does state.";
   }
 
   /* "€1,757" when fixed, "€1,757–1,832" when the operator quoted a range.
@@ -848,19 +881,19 @@
     }).map(function (v) { return { id: v, n: n[v] }; });
   })();
 
-  /* Which sites sell this sailing. Three states and they are three different
-     facts, so they are three chips rather than one "PADI" switch:
+  /* Which sites sell this sailing. Each distinct set is its own chip, because
+     they are different facts rather than degrees of one:
 
-       both              both sites list the date. The money columns print a
-                         span across the two, and this is where a reader who
+       all three         every seller lists the date. The money columns print
+                         a span across them, and this is where a reader who
                          wants only the comparable rows finds them.
-       liveaboard only   liveaboard.com lists it and PADI does not. Its
-                         calendar runs to a different depth on every boat, so
-                         this is a fact about who was asked and not about the
-                         trip.
-       PADI only         PADI is the only seller this site has a price from.
-                         On most of those rows liveaboard.com does not list
-                         the date, and on 22 boats does not sell berths at
+       two of the three  which two is the fact, not that there are two: a
+                         calendar runs to a different depth on every boat and
+                         every seller, so a missing one says who was asked and
+                         nothing about the trip.
+       one only          that seller is the only one this site has a price
+                         from. On most PADI-only rows liveaboard.com does not
+                         list the date, and on 22 boats does not sell berths at
                          all -- but on 87 it was simply never asked, because
                          the barren list held its vessel back for the week.
                          The chip is a fact about who was asked, which is why
@@ -868,31 +901,88 @@
                          row is the one that must not overstate, and it does
                          not.
 
-     Both sellers are named, and named the way the Seller column names them.
+     Every seller is named, and named the way the Seller column names them.
      The middle chip read "Here only", which asks the reader to know which of
-     the two sites "here" is -- and this page is neither of them: it is a
-     third thing that reads both. A filter that says who sells a berth must
-     say who, and the row it filters to links "liveaboard ↗" in the Seller
-     column, so the chip says liveaboard too. One name per seller, in every
-     place the page prints one.
+     the sites "here" is -- and this page is none of them: it is a thing that
+     reads them. A filter that says who sells a berth must say who, and the
+     row it filters to links "liveaboard ↗" in the Seller column, so the chip
+     says liveaboard too. One name per seller, in every place the page prints
+     one.
 
-     Read off `padi_only` and `padi` rather than recomputed, because those are
-     the same two keys the Seller column branches on and the row's own bill is
-     built from. A second derivation here would be a second answer to "who
-     sells this", and the two would drift. */
-  function sellerOf(dep) {
-    return dep.padi_only ? "padi" : dep.padi != null ? "both" : "liveaboard";
+     **A third seller arrived and the chip is the set, not a pair.** `both`
+     was the whole vocabulary for "more than one", and with three sellers that
+     word stops being an answer: a row divebooker and PADI both list is not
+     the same fact as one all three list, and a reader filtering to compare
+     needs to know which. So the value is the sellers themselves, joined --
+     `liveaboard+padi`, `liveaboard+padi+divebooker`, `padi` -- and the label
+     names them in full, with **"only"** kept where there is exactly one,
+     because that word is what the chip was built to say.
+
+     Enumerated rather than ANDed into one chip per seller, which was the
+     other shape available. An AND bank can express "liveaboard lists it" and
+     cannot express *only* liveaboard, and "PADI is the only seller this site
+     has a price from" is a real state of 230 rows and the reason the bank
+     exists. Sets that no row is in never appear, so the bank is as long as
+     the data and not as long as the arithmetic.
+
+     Read off `padi_only`, `padi` and `divebooker` rather than recomputed,
+     because those are the same keys the Seller column branches on and the
+     row's own bill is built from. A second derivation here would be a second
+     answer to "who sells this", and the two would drift. */
+  var SELLER_NAMES = {
+    liveaboard: "liveaboard", padi: "PADI", divebooker: "divebooker"
+  };
+  /* The order sellers are printed in wherever more than one is named, and it
+     is the order this site read them in rather than any claim about them.
+     Fixed, because a bank that reorders itself by which seller happens to
+     list more of this season would be a ranking wearing a filter's clothes --
+     the rule that keeps the months chronological and the entry bar by
+     strictness. */
+  var SELLER_ORDER = ["liveaboard", "padi", "divebooker"];
+
+  function sellersOf(dep) {
+    var who = [];
+    /* `padi_only` and `divebooker_only` are the two cases where this site has
+       no liveaboard.com price at all: the row exists because that seller sold
+       the date. Everything else has one, because every other row was built
+       from a liveaboard.com sailing. And a row founded by a seller carries no
+       figure in that seller's own field -- its fare is the row's own price --
+       so the flag is what says it sells it. */
+    if (!dep.padi_only && !dep.divebooker_only) who.push("liveaboard");
+    if (dep.padi != null || dep.padi_only) who.push("padi");
+    if (dep.divebooker != null || dep.divebooker_only) who.push("divebooker");
+    return who;
   }
 
-  var SELLER_LABELS = {
-    both: "Both", liveaboard: "liveaboard only", padi: "PADI only"
-  };
-  var SELLERS = ["both", "liveaboard", "padi"].map(function (id) {
-    return {
-      id: id, label: SELLER_LABELS[id],
-      n: D.departures.filter(function (d) { return sellerOf(d) === id; }).length
-    };
-  }).filter(function (it) { return it.n; });
+  function sellerOf(dep) { return sellersOf(dep).join("+"); }
+
+  function sellerLabel(id) {
+    var who = id.split("+").map(function (k) { return SELLER_NAMES[k] || k; });
+    if (who.length === 1) return who[0] + " only";
+    return who.slice(0, -1).join(", ") + " and " + who[who.length - 1];
+  }
+
+  var SELLERS = (function () {
+    var seen = {};
+    D.departures.forEach(function (d) {
+      var id = sellerOf(d);
+      seen[id] = (seen[id] || 0) + 1;
+    });
+    return Object.keys(seen).sort(function (a, b) {
+      var an = a.split("+"), bn = b.split("+");
+      /* Most sellers first, then the fixed reading order, so the chip a
+         reader comparing prices wants is the one at the front. */
+      if (an.length !== bn.length) return bn.length - an.length;
+      for (var i = 0; i < an.length; i++) {
+        if (an[i] !== bn[i]) {
+          return SELLER_ORDER.indexOf(an[i]) - SELLER_ORDER.indexOf(bn[i]);
+        }
+      }
+      return 0;
+    }).map(function (id) {
+      return { id: id, label: sellerLabel(id), n: seen[id] };
+    });
+  })();
 
   /* ---------- columns ---------- */
 
@@ -1523,7 +1613,11 @@
       show: function (d, i) {
         var links = [];
         var url = d.booking_url || i.source_url;
+        /* Read off whether each seller priced *this date*, never off the boat
+           having a page there: a link landing on a calendar without the
+           sailing on it is worse than no link. */
         var padi = d.padi != null ? (D.padi_urls || {})[i.boat_id] : null;
+        var db = d.divebooker != null ? (D.divebooker_urls || {})[i.boat_id] : null;
         if (url) {
           /* Which seller this url belongs to, never a generic word for it.
              230 sailings are sold only by PADI -- liveaboard.com does not list
@@ -1532,11 +1626,16 @@
              points at liveaboard.com. Both cases are one seller reached from
              this column and both say which. */
           links.push('<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
-            (d.padi_only ? "PADI" : "liveaboard") + " ↗</a>");
+            (d.padi_only ? "PADI" : d.divebooker_only ? "divebooker"
+                                                      : "liveaboard") + " ↗</a>");
         }
         if (padi) {
           links.push('<a href="' + esc(padi) + '" target="_blank" rel="noopener">' +
             "PADI ↗</a>");
+        }
+        if (db) {
+          links.push('<a href="' + esc(db) + '" target="_blank" rel="noopener">' +
+            "divebooker ↗</a>");
         }
         return links.length ? links.join(" ") : '<span class="dim">—</span>';
       } }
@@ -1777,7 +1876,7 @@
     D.departures.forEach(function (dep) {
       var itin = D.itineraries[dep.itinerary_id];
       if (passes(dep, itin, null)) {
-        out.push({ d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) });
+        out.push({ d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep), db: divebookerMetricsFor(dep) });
       }
     });
 
@@ -1896,7 +1995,7 @@
     if (!dep) return null;
     var itin = D.itineraries[dep.itinerary_id];
     if (!itin) return null;
-    return { d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep) };
+    return { d: dep, i: itin, lav: metricsFor(dep), padi: padiMetricsFor(dep), db: divebookerMetricsFor(dep) };
   }
 
   /* ---------- rendering ---------- */
@@ -2143,6 +2242,52 @@
           + "which it charges on board whoever sold the berth.";
     }
 
+    /* Where every line above came from, on the rows whose answer is not the
+     * usual one. Ours is the vessel's own panel on liveaboard.com; on a boat
+     * it does not sell there is no panel, and the only book is whichever other
+     * seller published one. The sentence has to name it, because a fee table
+     * attributed to a site that does not list the boat is the failure this
+     * page reports in other people. */
+    var whose = row.i.divebooker_sourced_fees
+      ? "The fees above are divebooker.com\u2019s. Neither of the other two "
+        + "sellers lists this boat at all, so its own Price details panel is "
+        + "the only bill anybody publishes for this trip."
+      : "";
+
+    /* And the third seller, in the same three states and with the same care
+     * about the middle one. Its own paragraph rather than a clause in PADI's:
+     * the two are separate disclosures about one trip, and a sentence that
+     * folded them would be this page asserting a relationship between two
+     * sellers that neither of them stated.
+     *
+     * No fourth state about who was asked. `padi_only` exists because those
+     * rows are built from PADI's calendar and the sentence has to say whether
+     * liveaboard.com was asked; this seller creates no rows at all, so a
+     * sailing it does not list is simply one it does not list. */
+    var db = "";
+    if (row.db) {
+      var dbGap = row.lav.total - row.db.total;
+      db = "divebooker.com sells this same sailing and publishes its own "
+        + "required extras. Its bill comes to \u20ac"
+        + Math.round(row.db.total).toLocaleString("en-IE") + " against \u20ac"
+        + Math.round(row.lav.total).toLocaleString("en-IE") + " here"
+        + (Math.abs(dbGap) < PADI_SAME
+            ? " \u2014 the same price, give or take a few euro."
+            : ", a difference of \u20ac" +
+              Math.round(Math.abs(dbGap)).toLocaleString("en-IE") + ".")
+        + " The nitrox and rental gear are the same on both, because those are "
+        + "the vessel\u2019s charge on board whoever sold the berth; where the "
+        + "sellers differ is the berth price and the fees each one discloses.";
+    } else if (row.d.divebooker != null) {
+      db = "divebooker.com advertises this berth at \u20ac"
+        + Math.round(row.d.divebooker).toLocaleString("en-IE")
+        + ", and does not publish a complete set of required extras for this "
+        + "trip \u2014 on most of its trips the obligatory surcharges are "
+        + "stated per person with no period beside them, which is a figure "
+        + "that cannot be added up. So there is a third price here and no "
+        + "third total, and the two are not comparable.";
+    }
+
     /* The bar leads the panel rather than following the bill. Whether a diver
        may board this trip at all is prior to what boarding it costs, and a
        reader who opens a row to check a 50-dive requirement should not have to
@@ -2165,18 +2310,27 @@
         feeRows([row.d.padi_base_line].concat(row.i.padi_lines)) +
         "</tbody></table></div>"
       : "";
+    var third = row.db
+      ? '<p class="whose">divebooker.com\u2019s bill for the same trip</p>' +
+        '<div class="fee-scroll"><table class="fees"><tbody>' +
+        feeRows([row.d.divebooker_base_line].concat(row.i.divebooker_lines)) +
+        "</tbody></table></div>"
+      : "";
     return '<p class="pwho">' + esc(row.i.boat) + " &middot; " +
       shortDate(row.d.start) + " &middot; " + row.i.nights + " nights</p>" +
-      (second ? '<p class="whose">This site\u2019s source, liveaboard.com</p>' : "") +
+      (second || third
+        ? '<p class="whose">This site\u2019s source, liveaboard.com</p>' : "") +
       '<div class="fee-scroll"><table class="fees"><tbody>' + body +
         "</tbody></table></div>" +
-      second +
+      second + third +
       /* Before the disclosure caveats, because it is about a number on the
          bill rather than about how complete the bill is, and a reader who
          stops after one paragraph should have read this one. */
       (warning ? '<p class="caveat est">' + esc(warning) + "</p>" : "") +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
-      (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "");
+      (whose ? '<p class="caveat">' + esc(whose) + "</p>" : "") +
+      (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "") +
+      (db ? '<p class="caveat padi">' + esc(db) + "</p>" : "");
   }
 
   /* How many rows reach the DOM before the visitor scrolls.

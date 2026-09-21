@@ -88,6 +88,10 @@ PUBLISHED = (
     "itineraries.json",
     "padi.json",
     "padi_departures.json",
+    # A third seller's book, rewritten whole by its own fetch.
+    # `divebooker_aliases.json` is not here, for the reason `padi_aliases.json`
+    # is not: no crawl touches it.
+    "divebooker.json",
     "barren.json",
     "CHANGES.md",
     # The structured reports the history view renders. Written by the same

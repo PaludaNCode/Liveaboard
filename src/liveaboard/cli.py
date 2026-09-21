@@ -583,11 +583,51 @@ def cmd_promote(args: argparse.Namespace) -> int:
     if sales_path.exists():
         sales = json.loads(sales_path.read_text(encoding="utf-8"))
 
+    # A third seller, read but not published: the block it produces records
+    # coverage and withholds every fare, because the unit of the figure is not
+    # established. `promote.divebooker_coverage` carries the reasoning.
+    divebooker = divebooker_aliases = None
+    divebooker_path = Path(args.divebooker)
+    if divebooker_path.exists():
+        divebooker = json.loads(divebooker_path.read_text(encoding="utf-8"))
+    aliases_path = Path(args.divebooker_aliases)
+    if aliases_path.exists():
+        divebooker_aliases = json.loads(aliases_path.read_text(encoding="utf-8"))
+
     payload = promote(
         candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
         padi=padi, padi_departures=padi_departures, cabins=cabins, deals=deals,
-        sales=sales,
+        sales=sales, divebooker=divebooker, divebooker_aliases=divebooker_aliases,
     )
+
+    block = payload.get("divebooker")
+    if block:
+        # `matched` is the join and `founded` is this seller's own rows, and
+        # they are printed apart because together they read as agreement it
+        # did not earn -- the same reason `divebooker_coverage` counts them
+        # apart. `fares withheld` stood here for eleven runs after they were
+        # published, which is the shape of stale prose this project keeps
+        # finding in its own output.
+        billed = sum(1 for i in payload.get("itineraries") or []
+                     if i.get("divebooker_fees"))
+        totals = sum(1 for i in payload.get("itineraries") or []
+                     if i.get("divebooker_fees_complete"))
+        print(
+            f"  divebooker read {block['read']}: {block['vessels']} vessel(s), "
+            f"{block['departures']} departure(s), {block['in_season']} in "
+            f"season, {block['matched']} on a row another seller founded, "
+            f"{block['founded']} founded here, {block['unmatched']} on no row "
+            f"({block['unpriced']} of those stating no fare); fares published"
+        )
+        print(
+            f"    its fee panel reaches {billed} itinerar(ies), "
+            f"{totals} of them complete enough to total"
+        )
+        for slug in block["unmapped_vessels"]:
+            # Named every run, like an unmatched PADI deal: a hull the alias
+            # map does not know is a boat nobody has looked at, and a count
+            # cannot tell a new hull from a renamed one.
+            print(f"::warning::divebooker lists a vessel no alias maps: {slug}")
 
     block = payload.get("deals")
     if deals and not block:
@@ -1028,6 +1068,9 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--cabins", default=Path("data/cabins.json"), type=Path)
     promote_cmd.add_argument("--deals", default=Path("data/deals.json"), type=Path)
     promote_cmd.add_argument("--sales", default=Path("data/sales.json"), type=Path)
+    promote_cmd.add_argument("--divebooker", default=Path("data/divebooker.json"), type=Path)
+    promote_cmd.add_argument("--divebooker-aliases",
+                             default=Path("data/divebooker_aliases.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")
     promote_cmd.add_argument("--season-end", default="2027-08-31")
     promote_cmd.add_argument(

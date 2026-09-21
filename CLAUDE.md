@@ -235,21 +235,39 @@ glance is noise, not rigour.
 
 Break these and the site starts lying quietly rather than failing loudly.
 
-- **Two sellers, neither of them the house.** `padi.com` and `liveaboard.com`
-  are both sources this site reads. liveaboard.com was read first and PADI
-  second, and that is a fact about this project rather than about either
-  seller, so it may not appear as *ours* and *theirs*, as a named seller beside
-  an unnamed default, or as a reason in a comment that explains a price. The
-  metric keys are `.lav` and `.padi`; `best().cheaper` says `"liveaboard"` or
-  `"padi"`; a link in the Seller column always names the seller it opens —
-  "listing" was liveaboard.com's, printed on no PADI row ever, and handed a
-  visitor to a site the page never named (#139). The asymmetries that *are*
-  real are all statements about what a source publishes and each says so where
-  it is written: the fee panel is the vessel's own and beats a seller's account
-  of it; a row states `pct` only from the seller whose fare it prints;
+- **Three sellers, none of them the house.** `padi.com`, `liveaboard.com` and
+  `divebooker.com` are all sources this site reads. liveaboard.com was read
+  first, PADI second and divebooker third, and that is a fact about this
+  project rather than about any seller, so it may not appear as *ours* and
+  *theirs*, as a named seller beside an unnamed default, or as a reason in a
+  comment that explains a price. The metric keys are `.lav`, `.padi` and `.db`;
+  `best().cheaper` says `"liveaboard"`, `"padi"` or `"divebooker"`; a link in
+  the Seller column always names the seller it opens — "listing" was
+  liveaboard.com's, printed on no PADI row ever, and handed a visitor to a site
+  the page never named (#139). The asymmetries that *are* real are all
+  statements about what a source publishes and each says so where it is
+  written: the fee panel is the vessel's own and beats a seller's account of
+  it; a row states `pct` only from the seller whose fare it prints;
   `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
   `availability` fills the whole-sailing slot and not the at-price one, because
-  that was measured.
+  that was measured; divebooker states no berth count and no list price at all,
+  so it fills neither.
+  **A third arriving is what tested the rule.** `best()` was a pair with the
+  one-seller case as its own early return, the seller chip's vocabulary for
+  *more than one* was the word `both`, and `advertisedNote` named PADI by
+  hand — three shapes that each had to be rewritten rather than extended, and
+  every one of them was the reading order hardened into a structure. They read
+  a list, a set and a loop now. What did **not** change is what each is for:
+  every end of the Total's span is still one seller's whole bill, because
+  min(base) + min(fees) is a bill nobody quotes and that was measured wrong on
+  74 of 108 rows.
+  **And a seller enters the total only where its own bill adds up.** Setting a
+  bare fare beside two whole bills shows whichever seller discloses least as
+  the cheapest, which is this site's complaint about the pages it reads. So
+  `divebooker_lines` returns `None` unless its book names, prices and scales
+  every charge a diver cannot decline, exactly as `padi_lines` does — and the
+  row prints the berth price with a sentence saying there is no total behind
+  it.
 
 - **Never invent a price, and rental gear is the one exception.** Every price
   and fee needs a `Provenance`. A parser that cannot find a number returns

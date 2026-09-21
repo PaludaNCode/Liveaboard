@@ -6,10 +6,19 @@ name: Probe the crawl
 #
 # Deliberately separate from the scrape and manual only. It makes five requests
 # and writes nothing, so it can be run while wondering rather than scheduled.
+#
+# `only` runs one job. Without it, asking one question costs every source a
+# full sweep -- which is the same complaint that split refresh.yml: proving a
+# two-request change to fetch_deals.py meant first fetching 320 vessel pages
+# from a site with nothing to do with it.
 
 on:
   workflow_dispatch:
     inputs:
+      only:
+        description: "Run one job rather than all of them (all/probe/padi/unread/gear/divebooker)"
+        type: string
+        default: "all"
       gear_vessels:
         description: "Vessel slugs to open the gear modal on"
         type: string
@@ -42,6 +51,42 @@ on:
         description: "Print only where PADI's API client gets its base URL"
         type: boolean
         default: false
+      divebooker_ask:
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,fixture,flight,search"
+        type: string
+        default: ""
+      divebooker_sample:
+        description: "Detail pages to sample per sitemap shape (divebooker)"
+        type: string
+        default: "3"
+      divebooker_requests:
+        description: "Hard ceiling on divebooker requests for one run"
+        type: string
+        default: "25"
+      divebooker_vessels:
+        description: "Vessel pages to read departure nodes from"
+        type: string
+        default: "3"
+      divebooker_fetch:
+        description: "Vessels to read into a book and upload (0 skips the fetch)"
+        type: string
+        default: "0"
+      divebooker_emit_pages:
+        description: "Saved pages whose JSON-LD to print (smallest first)"
+        type: string
+        default: "1"
+      divebooker_vessel:
+        description: "Vessel slug for the flight probe, as the book names it"
+        type: string
+        default: "red-sea-aggressor-ii"
+      divebooker_months:
+        description: "Year-months for the search probe, e.g. 202705,202706"
+        type: string
+        default: "202705,202706,202707"
+      divebooker_params:
+        description: "Query fragments to try for search paging, e.g. page=2,offset=20"
+        type: string
+        default: ""
       unread_retries:
         description: "Fetches per unreadable page, to tell transient from persistent"
         type: string
@@ -64,6 +109,7 @@ permissions:
 
 jobs:
   probe:
+    if: inputs.only == 'all' || inputs.only == 'probe'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -96,6 +142,7 @@ jobs:
   # endpoint can be found is here. Its own job: it reads two hosts and neither
   # of them is liveaboard.com.
   padi:
+    if: inputs.only == 'all' || inputs.only == 'padi'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -117,6 +164,7 @@ jobs:
   # already close to its budget. It is also a different question from the rest
   # of them, and worth being able to read — or re-run — by itself.
   unread:
+    if: inputs.only == 'all' || inputs.only == 'unread'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -161,6 +209,7 @@ jobs:
   # Separate job: the gear modal is built client-side, so this one needs a
   # browser and the plain-HTTP probes above do not.
   gear:
+    if: inputs.only == 'all' || inputs.only == 'gear'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -213,3 +262,189 @@ jobs:
           python3 tools/probe_spaces.py \
             --targets "${{ inputs.spaces_targets || 'dune-longara:5,tala:5,emperor-superior:6,all-star-red-sea:7' }}" \
             ${{ inputs.dump_html && '--dump-html' || '' }}
+
+  # A third seller nobody here has ever fetched. Its own job because it reads a
+  # host neither of the others does, and because the first question about a new
+  # source -- does it answer us at all, and on what terms -- has to be settled
+  # before there is anything to point a parser at.
+  #
+  # The sandbox's egress allowlist refuses divebooker.com outright (403 on the
+  # CONNECT), so this is the only place the question can be asked. Writes
+  # nothing, capped at divebooker_requests, paced by the polite fetcher at the
+  # five-second default this project uses for a host nobody has checked.
+  divebooker:
+    if: inputs.only == 'all' || inputs.only == 'divebooker'
+    runs-on: ubuntu-latest
+    # A whole-fleet read is about 95 requests at the five-second pace: four
+    # months of search paging plus one page per hull, and the fee census is
+    # one page per hull again. The cap is the pace times the fleet, not a
+    # guess -- and the pace is what may not be cut.
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Read what divebooker.com serves
+        run: |
+          python3 tools/probe_divebooker.py \
+            --sample "${{ inputs.divebooker_sample || '3' }}" \
+            --max-requests "${{ inputs.divebooker_requests || '25' }}" \
+            ${{ contains(inputs.divebooker_ask, 'robots') && '--dump-robots' || '' }} \
+            ${{ contains(inputs.divebooker_ask, 'shell') && '--dump-shell' || '' }}
+
+      # What a departure node actually states — which is what decides whether
+      # this is a third seller or a third opinion (docs/plan-divebooker.md,
+      # stage 0). A census across every Event read rather than one example:
+      # a parser proved against a single node is proved against its
+      # coincidences.
+      - name: Read what one divebooker departure states
+        run: |
+          python3 tools/probe_divebooker_departures.py \
+            --vessels "${{ inputs.divebooker_vessels || '3' }}"
+
+      # The bytes themselves, so a parser can be written against what the site
+      # actually serves rather than against a description of it. The fee
+      # parser proved against one hand-trimmed fixture matched nothing on six
+      # real trips; this is that lesson spent up front.
+      #
+      # Still writes nothing to the repository — the book and the pages leave
+      # as an artifact, and what lands in `data/` is committed by a person
+      # who has read it.
+      # `all` reads the whole Egyptian fleet; a number caps it. --emit prints
+      # the book and two pages' JSON-LD as gzip+base64, which is the one
+      # channel back: the sandbox's egress policy refuses divebooker.com and
+      # the blob host artifacts are served from, so a runner that reads this
+      # source otherwise has no way to hand back what it read.
+      - name: Read the Egyptian fleet into a book
+        if: inputs.divebooker_fetch != '0'
+        run: |
+          python3 tools/fetch_divebooker.py \
+            ${{ inputs.divebooker_fetch != 'all' && format('--limit {0}', inputs.divebooker_fetch) || '' }} \
+            --save-html /tmp/divebooker-html \
+            --book /tmp/divebooker.json \
+            --emit --emit-pages "${{ inputs.divebooker_emit_pages || '1' }}"
+
+      # The one question that decides whether a divebooker fare can ever be
+      # published: what `Offer.price` counts. See the tool's own docstring.
+      - name: Ask what one divebooker fare counts
+        if: contains(inputs.divebooker_ask, 'fare')
+        run: |
+          python3 tools/probe_divebooker_fare.py \
+            --vessels red-sea-aggressor-iv \
+            --dates 2027-07-24,2027-07-17,2027-07-31 \
+            --verbatim
+
+      # The digits say USD and the label often says EUR. This asks the page
+      # rather than inferring it from another seller's agreement.
+      - name: Ask what currency a divebooker price is in
+        if: contains(inputs.divebooker_ask, 'currency')
+        run: python3 tools/probe_divebooker_currency.py
+
+      # A keyword sweep said there is no fee book on the vessel page. The
+      # page has a *Trip & price details* panel, and a sweep answers only
+      # about the words it was given, so this enumerates the payload instead.
+      - name: Read a vessel page's trip and price details
+        if: contains(inputs.divebooker_ask, 'details')
+        run: python3 tools/probe_divebooker_details.py
+
+      # One page's panel is an example, not a shape. This counts what the
+      # whole fleet states before anything is parsed: how many pages carry
+      # the block, how many lines state money, in what currency and unit, and
+      # whether this project's own fee vocabulary recognises the labels.
+      - name: Measure the fee panel across the fleet
+        if: contains(inputs.divebooker_ask, 'feeshape')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_fee_shape.py | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # A fee block names its trip in a different vocabulary from the one the
+      # departures use. A key that stops matching fails silently, so this
+      # counts what a join would do before anything is parsed.
+      - name: Can a fee block be attached to a departure
+        if: contains(inputs.divebooker_ask, 'feejoin')
+        # `divebooker_vessels` is the hull count here as well, and 0 is the
+        # whole fleet: a join rate measured over an alphabetical handful
+        # excludes whichever boat raised the doubt, which is how this one
+        # nearly got believed.
+        run: |
+          python3 tools/probe_divebooker_fee_join.py \
+            --vessels "${{ inputs.divebooker_vessels || '8' }}"
+
+      # A fee reader guarded by bytes somebody imagined is guarded by nothing,
+      # and this sandbox cannot reach the host — so the fixture travels back
+      # through the log, the way the JSON-LD one did.
+      - name: Carry a price panel back as a fixture
+        if: contains(inputs.divebooker_ask, 'fixture')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/emit_divebooker_fixture.py \
+            --vessels "${{ inputs.divebooker_vessel || 'alsuraya,amelie' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The shape census counted what the fleet states, with its own copy of
+      # the reading. This asks the shipped reader for its own verdict: how
+      # many bills add up, which is exactly how many trips reach the Total
+      # with a third column, and what the rest are missing.
+      - name: Ask the fee reader how many bills add up
+        if: contains(inputs.divebooker_ask, 'verdict')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_fee_verdict.py \
+            --limit "${{ inputs.divebooker_vessels || '0' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The panel is read once per trip name and attached to every sailing of
+      # that trip. The vessel page puts a *Trip & price details* link on each
+      # departure row, which is not the same claim — so this asks the payload
+      # whether one trip name can own two panels before anybody assumes it
+      # cannot.
+      - name: Is the price panel per trip or per sailing
+        if: contains(inputs.divebooker_ask, 'persailing')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_details_per_sailing.py \
+            --vessels "${{ inputs.divebooker_vessel || 'independence-iii' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # App Router ships its data in the HTML rather than fetching it, so
+      # "rendered by JavaScript" and "not in the served bytes" are different
+      # claims. This opens the streamed payload and says which is true.
+      - name: Open the payload the page streams to itself
+        if: contains(inputs.divebooker_ask, 'flight')
+        run: |
+          python3 tools/probe_divebooker_flight.py \
+            --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
+
+      # The seller's own search, which says 75 boats for a month the country
+      # page shows ten of. Open to us: the Disallow sits in the turnitinbot
+      # record, not the `*` one.
+      - name: Read the seller's own search
+        if: contains(inputs.divebooker_ask, 'search')
+        run: |
+          python3 tools/probe_divebooker_search.py \
+            --months "${{ inputs.divebooker_months || '202705,202706,202707' }}" \
+            --try-params "${{ inputs.divebooker_params }}"
+
+      - name: Upload the book and the pages it was read from
+        if: inputs.divebooker_fetch != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: divebooker
+          path: |
+            /tmp/divebooker.json
+            /tmp/divebooker-html
+          retention-days: 7

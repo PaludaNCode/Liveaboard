@@ -876,6 +876,19 @@ def _padi_fees(record: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+def _stated_dives(sentence: str | None) -> int:
+    """`"Minimum 0 dives"` as 0, and anything else as 0.
+
+    A number out of a sentence, which is what the other two sellers' bars
+    already are: liveaboard.com's arrives as a field this project read out of
+    prose, PADI's as `experienceRequiredDives`. Zero where nothing was stated,
+    because filling in a plausible figure would soften a stated requirement --
+    the rule `_requirements` keeps about its own `notes`.
+    """
+    found = re.search(r"(\d+)", sentence or "")
+    return int(found.group(1)) if found else 0
+
+
 def _requirements(trip: dict[str, Any]) -> dict[str, Any] | None:
     """The entry bar a trip states, or ``None`` when none was read.
 
@@ -1936,6 +1949,91 @@ def _padi_only_departures(
     return made, unparsed
 
 
+def _divebooker_only_departures(
+    book: dict[str, dict[str, Any]],
+    known: set[tuple[str, str]],
+    named: dict[str, str],
+    *,
+    season: tuple[date, date] | None,
+    retrieved: str,
+    pages: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """The sailings the third seller lists on dates the other two do not.
+
+    The same rule as `_padi_only_departures` and for the same reason it was
+    written: **"one row per sailing" must not quietly mean "one row per sailing
+    the sellers we happened to read first list"**. A trip nobody looked at is
+    not a trip that does not exist, and that applies to a third seller exactly
+    as it applies to a page that failed to load.
+
+    Shaped as candidate departures so they join `grouped` and go through the
+    rest of promotion unchanged -- same itinerary build, same vessel fee book,
+    same title tidying. A second code path assembling its own rows would be a
+    second set of rules for what a row means.
+
+    Four things make a sailing eligible, each able to fail on its own: the hull
+    maps to a boat this site carries, the date is inside the published season,
+    `(boat, start)` is not already a row, and the seller states a fare in a
+    currency. **The fare is the gate** -- the owner's call, taken when the
+    fares were still withheld: a row created from a sailing with no price is a
+    row with nothing in the column this site exists to fill.
+
+    Its own trip name is what the itinerary is named, so a sailing that states
+    none is reported rather than filled in: a row under "Unnamed itinerary"
+    would be a trip whose identity this code invented, and identity is what the
+    id is built from.
+
+    `named` folds a foreign trip name onto one this site already uses for that
+    boat, through `padi_key` -- which is named for the source it was written
+    for and is a general "look a foreign record up" key, deliberately kept
+    apart from `itinerary_key` so loosening it cannot merge two of our own. A
+    hit means the new sailing joins that itinerary rather than founding one;
+    two itineraries that are one trip would split its dates, its fees and its
+    dive count in two, and would do it silently.
+
+    These rows carry no `divebooker_price`: a seller's figure repeated into its
+    own field is not two sellers agreeing, and the Seller column would name it
+    twice on a sailing only it offers.
+    """
+    made: list[dict[str, Any]] = []
+    skipped: list[str] = []
+    for key, sailing in sorted(book.items()):
+        slug, _, start = key.partition("::")
+        if not slug or not start or not sailing.get("end"):
+            continue
+        if (slug, start) in known:
+            continue
+        if season and not (season[0] <= date.fromisoformat(start) <= season[1]):
+            continue
+        if not sailing.get("price") or not sailing.get("currency"):
+            continue
+        trip = (sailing.get("trip") or "").strip()
+        if not trip:
+            skipped.append(f"{key}: divebooker states no trip name")
+            continue
+        url = pages.get(slug, "")
+        made.append({
+            "id": f"{slug}-{start}-divebooker",
+            "boat_slug": slug,
+            "start": start,
+            "end": sailing["end"],
+            "name": named.get(padi_key(slug, trip), trip),
+            "price": {"amount": sailing["price"], "currency": sailing["currency"]},
+            "booking_url": url,
+            # Already a schema.org token on this source, kept as its own word
+            # so nothing downstream can mistake it for a count.
+            "availability": sailing.get("availability"),
+            "divebooker_only": True,
+            "provenance": {
+                "kind": SourceKind.SCRAPED.value,
+                "source_id": "divebooker.com",
+                "retrieved": retrieved,
+                "url": url,
+            },
+        })
+    return made, skipped
+
+
 def _with_units_resolved(
     ours: list[dict[str, Any]], theirs: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
@@ -1995,6 +2093,244 @@ def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
     return (round(float(amount.get("amount", 0)), 2), amount.get("currency"))
 
 
+
+DIVEBOOKER_FEE_PROVENANCE = {
+    "kind": "scraped",
+    "source_id": "divebooker.com",
+    "retrieved": "",
+    "url": "",
+}
+"""Filled in by the caller, which knows the reading date and the vessel page.
+
+Mirrors `PADI_FEE_PROVENANCE`, and for the same reason: a fee line carries who
+said it and when, and the book it comes from states both once at its head
+rather than on every line.
+"""
+
+
+def _divebooker_fees(
+    group: list[dict[str, Any]],
+    slug: str,
+    sailings: dict[str, dict[str, Any]],
+    books: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    """This trip's *Price details* panel, found through its own departures.
+
+    **Joined on dates, never on a name.** The seller titles its panel
+    *"Northern Red Sea - Best Wreck Diving (7 nights) (Hurghada-Hurghada)"* and
+    the same week's sailings *"Northern Red Sea, Ras Mohamed, Straits of
+    Tiran"*; ours is a third spelling again. So the route is: this itinerary's
+    departures, to the sailings this seller lists on those exact days, to the
+    trip each one names, to the panel filed under it. Every step is an equality
+    on something with no spelling.
+
+    ``None`` where the seller has not been read for this trip, which is not the
+    same as a trip it says has no required extras: the first writes no key and
+    claims nothing, the second writes an empty list and a complete bill.
+
+    ``None`` **also where the group's departures name more than one panel**,
+    and that silence is the point. Our itinerary and theirs are both meant to
+    be one week, but nothing guarantees it, and a bill assembled from two of
+    their trips is a bill neither of them quotes. Refused rather than merged or
+    picked from, which is the rule `promote.itinerary_key` already cost this
+    project once.
+    """
+    book = _divebooker_trip(group, slug, sailings, books)
+    if book is None or "lines" not in book:
+        return None
+    return {
+        "lines": [dict(line, provenance=dict(DIVEBOOKER_FEE_PROVENANCE))
+                  for line in book["lines"]],
+        "complete": bool(book.get("complete")),
+    }
+
+
+def _divebooker_trip(
+    group: list[dict[str, Any]],
+    slug: str,
+    sailings: dict[str, dict[str, Any]],
+    books: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    """The join itself: this itinerary's departures to one of that seller's trips.
+
+    Split out because two books hang off the same trip — the fee panel and what
+    the trip states about itself — and they must be found the same way. Two
+    routes to one trip is two answers to "which of their weeks is this",
+    which is the drift this file keeps closing.
+    """
+    # Local, like `padi_key`'s import of `PadiComAdapter`: promotion does not
+    # depend on the scrape layer, and one shared key function is the whole
+    # point -- a second copy of it here is the drift this file keeps closing.
+    from .scrape.divebooker_com import fee_key  # noqa: PLC0415
+
+    seen: dict[str, dict[str, Any]] = {}
+    for item in group:
+        sailing = sailings.get(f"{slug}::{item['start']}")
+        if not sailing or not sailing.get("trip") or not sailing.get("boat"):
+            continue
+        # **The name and the length**, because that seller sells one trip name
+        # at two lengths with two different bills -- see
+        # `divebooker_com.fee_key`. The sailing states its own length from its
+        # two dates, so this stays an equality on a number and a string.
+        key = fee_key(sailing["trip"], sailing.get("nights"))
+        book = (books.get(sailing["boat"]) or {}).get(key)
+        if isinstance(book, dict):
+            seen[f"{sailing['boat']}::{key}"] = book
+    return next(iter(seen.values())) if len(seen) == 1 else None
+
+
+def _divebooker_join_note(in_season: int, matched: int, unmapped: int,
+                          founded: int, unpriced: int) -> str:
+    """What the join did, in the run's own numbers.
+
+    This sentence used to be a constant reading *every in-season sailing this
+    source lists is one this dataset already carries* — true of ten hulls, and
+    a claim the next read can falsify, which is exactly the shape of prose
+    this project has gone stale on before (#144). So it is derived: the
+    numbers say what happened and the sentence reports them.
+
+    **`matched` went self-referential and this is what fixes it.** It counted
+    sailings landing on a row this dataset carries, which was a statement about
+    the other two sellers until this one started founding rows of its own —
+    after which 69 of its sailings matched *because it had put them there*, and
+    the figure read as agreement it had not earned. `founded` is counted apart,
+    so `matched` goes back to meaning what a reader takes it to mean.
+    """
+    left = in_season - matched - unmapped - founded
+    if not in_season:
+        return ("No sailing this source lists falls inside the published "
+                "season. See docs/divebooker-limitations.md.")
+    parts = [f"Of {in_season} in-season sailing(s), {matched} land on a row "
+             f"one of the other two sellers founded, keyed on (boat, date)"]
+    if founded:
+        parts.append(f"{founded} are rows this seller founded itself, on a "
+                     f"date or a hull the other two do not list")
+    if unmapped:
+        parts.append(f"{unmapped} sit on hull(s) the alias map does not know, "
+                     f"so nothing can be said about them")
+    if left:
+        why = ("every one of them because this seller states no fare for that "
+               "date" if unpriced == left else
+               f"{unpriced} of them because this seller states no fare for "
+               f"that date")
+        parts.append(f"{left} reach no row at all"
+                     + (f", {why} — a route on request is an enquiry and not "
+                        f"a berth anybody priced" if unpriced else ""))
+    return ", and ".join(parts) + ". See docs/divebooker-limitations.md."
+
+
+def divebooker_coverage(
+    book: dict[str, Any] | None,
+    aliases: dict[str, Any] | None,
+    departures: list[dict[str, Any]],
+    boat_of: dict[str, str],
+) -> dict[str, Any] | None:
+    """What a third seller's reading covers, and why its fares are not in it.
+
+    divebooker.com states a fare, a currency and both dates on every departure
+    it publishes — enough, on the face of it, to be a third price beside the
+    other two. **The face of it is wrong, and one row says so.** Red Sea
+    Aggressor IV on 2027-07-24 reads 5,398 USD against our 2,699: exactly
+    twice, on the same seven nights. Twelve more differ by smaller amounts on
+    the same two boats. So the unit of `Offer.price` is not established — a
+    per-person berth on most rows and something else on at least one — and a
+    figure whose unit this site cannot state is a figure it does not publish.
+    `A figure with no unit is not a per-trip figure` is the same rule, and it
+    cost Bella 2's gear line its total.
+
+    What *is* established is the join. Every one of the 148 sailings this
+    source lists inside the published season matches one of ours on
+    `(boat, date)` — the exact key, because a date has no spelling — and not
+    one is a sailing we do not already carry. So this block records coverage
+    and nothing else: no price reaches the dataset, no row gains a field, and
+    the page says nothing about a third seller.
+
+    Pure, like everything else here: same committed inputs, same block.
+    """
+    if not book or not (book.get("departures") or {}):
+        return None
+
+    alias = dict((aliases or {}).get("aliases") or {})
+    rows = (book.get("departures") or {}).values()
+    ours = {(boat_of.get(d["itinerary_id"]), d["start"]) for d in departures}
+    season = {start for _, start in ours}
+    first, last = (min(season), max(season)) if season else ("", "")
+
+    # Rows this seller founded, so they can be counted apart from the ones it
+    # merely agrees with. Read off the flag rather than re-derived: `promote`
+    # writes it where `_divebooker_only_departures` created the row, and a
+    # second answer to "who founded this" is the drift this file keeps closing.
+    founded_rows = {(boat_of.get(d["itinerary_id"]), d["start"])
+                    for d in departures if d.get("divebooker_only")}
+
+    in_season = matched = unmapped_rows = founded = unpriced = 0
+    for row in rows:
+        slug = row.get("boat")
+        boat = alias.get(slug, slug)
+        start = row.get("start") or ""
+        if not (first <= start <= last):
+            continue
+        in_season += 1
+        if (boat, start) in founded_rows:
+            founded += 1
+        elif slug not in alias:
+            # A row on a hull the alias map does not know cannot match, and
+            # that is a fact about our map rather than about the seller's
+            # sailing. Counting it as "a departure this dataset does not have"
+            # would report our own unfinished mapping as the third seller
+            # listing weeks the other two do not.
+            unmapped_rows += 1
+        elif (boat, start) in ours:
+            matched += 1
+        elif not row.get("price"):
+            # Counted **inside** the leftover bucket and nowhere else. It was
+            # counted over every in-season sailing, which put 42 unpriced
+            # against 26 unaccounted — a reason larger than the thing it was
+            # explaining, because most of those dates reach a row the other
+            # sellers founded and the fare is only missing from this one's
+            # listing of them.
+            unpriced += 1
+
+    # Named rather than counted, the way `deals.unmatched` names a vessel:
+    # a hull this source lists and the alias map does not know is either a new
+    # boat or a renamed one, and only a person reading the name can tell.
+    unmapped = sorted(
+        slug for slug in (book.get("vessels") or {}) if slug not in alias
+    )
+    return {
+        "source": book.get("source") or "divebooker.com",
+        "read": book.get("collected") or "",
+        "vessels": len(book.get("vessels") or {}),
+        "departures": len(book.get("departures") or {}),
+        "in_season": in_season,
+        "matched": matched,
+        "founded": founded,
+        "unpriced": unpriced,
+        "on_unmapped_vessels": unmapped_rows,
+        "unmatched": in_season - matched - unmapped_rows - founded,
+        "unmapped_vessels": unmapped,
+        "fares": "published",
+        "note": (
+            "divebooker.com states a fare on every departure and this dataset "
+            "now publishes them, on the sailings it lists and nowhere else. "
+            "What the withholding was waiting on was the currency: it comes "
+            "from the page's own payload rather than from "
+            "`Offer.priceCurrency`, which is a static per-vessel label that "
+            "does not describe `Offer.price`, and read that way 725 of 777 "
+            "joined sailings carry a figure identical to one of the other two "
+            "sellers'. The 52 that do not are three sellers disagreeing about "
+            "a berth, which is what this page draws — and they concentrate "
+            "rather than scatter: twelve are Unity's whole season at a steady "
+            "1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 "
+            "at exactly twice the other two for the same seven nights, and it "
+            "is printed as the seller states it rather than dropped, because "
+            "deleting a published price is the failure this site reports in "
+            "other people. "
+        ) + _divebooker_join_note(in_season, matched, unmapped_rows,
+                                  founded, unpriced),
+    }
+
+
 def promote(
     candidate: dict[str, Any],
     *,
@@ -2009,6 +2345,8 @@ def promote(
     cabins: dict[str, Any] | None = None,
     deals: dict[str, Any] | None = None,
     sales: dict[str, Any] | None = None,
+    divebooker: dict[str, Any] | None = None,
+    divebooker_aliases: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -2112,6 +2450,45 @@ def promote(
         key: record
         for key, record in ((padi_departures or {}).get("departures") or {}).items()
     }
+
+    # The third seller's fares, keyed the way the other two are joined --
+    # `(boat, date)`, the exact key, because a date has no spelling. The
+    # translation through `data/divebooker_aliases.json` is the one extra step:
+    # PADI's fetcher writes this site's slugs and divebooker's writes its own,
+    # so the hand-maintained map is what turns one into the other. A hull the
+    # map does not know contributes nothing and is named in the build log
+    # rather than guessed at.
+    divebooker_alias = dict((divebooker_aliases or {}).get("aliases") or {})
+    divebooker_book: dict[str, dict[str, Any]] = {}
+    for record in ((divebooker or {}).get("departures") or {}).values():
+        slug_read = record.get("boat")
+        if slug_read in divebooker_alias and record.get("start"):
+            divebooker_book[
+                f"{divebooker_alias[slug_read]}::{record['start']}"] = record
+    divebooker_read = (divebooker or {}).get("collected") or ""
+
+    # The *Price details* panels, and the vessel page each came off. Both
+    # keyed on that seller's own hull slug, because that is what its sailings
+    # name; `_divebooker_fees` goes sailing -> hull -> panel, so no alias
+    # translation happens here. The url is on the vessel rather than the line
+    # for the reason it is on the vessel rather than the departure: it is one
+    # constant per hull.
+    divebooker_fee_books: dict[str, dict[str, Any]] = {}
+    divebooker_trip_facts: dict[str, dict[str, Any]] = {}
+    divebooker_page: dict[str, str] = {}
+    divebooker_named: dict[str, str] = {}
+    for hull, record in ((divebooker or {}).get("vessels") or {}).items():
+        if record.get("fees"):
+            divebooker_fee_books[hull] = record["fees"]
+        if record.get("trips"):
+            divebooker_trip_facts[hull] = record["trips"]
+        ours = divebooker_alias.get(hull)
+        if not ours:
+            continue
+        if record.get("url"):
+            divebooker_page[ours] = record["url"]
+        if record.get("name"):
+            divebooker_named[ours] = record["name"]
 
     # What each sailing costs cabin by cabin, and how many berths are left at
     # each rung. Read from the booking page by ``tools/fetch_cabins.py``, which
@@ -2283,6 +2660,36 @@ def promote(
             {**departure, "nights": nights, "promotion": promotion}
         )
 
+    # And the third seller's, after the second's, on the same rule and with
+    # `known` rebuilt so a date PADI has already founded a row on is not
+    # founded again. Order is not a preference between sellers: the rows are
+    # added one source at a time and each may only stand where nothing does,
+    # so whichever runs second is the one that has to ask.
+    known = {
+        (d["boat_slug"], d["start"])
+        for group in grouped.values() for d in group if d.get("boat_slug")
+    }
+    by_key = defaultdict(set)
+    for slug, name in grouped:
+        by_key[padi_key(slug, name)].add(name)
+    divebooker_only, unnamed = _divebooker_only_departures(
+        divebooker_book, known,
+        {key: next(iter(names)) for key, names in by_key.items() if len(names) == 1},
+        season=season,
+        retrieved=divebooker_read,
+        pages=divebooker_page,
+    )
+    skipped.extend(unnamed)
+    for departure in divebooker_only:
+        nights = _nights(departure["start"], departure["end"])
+        if nights is None:
+            skipped.append(f"{departure['id']}: implausible dates")
+            continue
+        name, promotion, _ = _split_title(departure["name"])
+        grouped[(departure["boat_slug"], name or departure["name"])].append(
+            {**departure, "nights": nights, "promotion": promotion}
+        )
+
     # Who runs each boat, from the organizer its own departures name.
     #
     # Resolved per vessel rather than per departure because that is how the
@@ -2404,6 +2811,17 @@ def promote(
             return ours
         return ((padi_vessels.get(slug) or {}).get("specs") or {}).get(key)
 
+    # What the third seller calls each hull, for the one place a name can come
+    # from nowhere else: a boat only it lists. It sits after PADI's for the
+    # reason PADI's sits after ours -- the fallback order is what each source
+    # publishes about the vessel, and the last resort is still a title-cased
+    # slug, which is a name this code invented rather than one anybody wrote.
+    #
+    # `scrape/divebooker_com.vessel` takes it from the page's own `organizer`
+    # rather than from `Product.name`, which is a page title with the country
+    # appended, and it refuses to read an operator out of either: `brand` on
+    # that source is *Divebooker.com*, the seller.
+
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
         # PADI's name only where the first source has none, which is the 22
@@ -2413,6 +2831,7 @@ def promote(
         # rather than one anybody wrote.
         boat_name = (source.get("boat") or source.get("name")
                      or _collapsed((padi_vessels.get(slug) or {}).get("name"))
+                     or _collapsed(divebooker_named.get(slug))
                      or slug.replace("-", " ").title())
         # Guests belong to the vessel, not the sailing: the same boat carries
         # the same number of people whichever week you book.
@@ -2505,10 +2924,34 @@ def promote(
         # of them. The other three name no reef in any field -- "Best Of
         # Hurghada", "Specialty Photography Safari" -- and stay blank, which is
         # right. A trip whose sites nobody states has none to show.
+        # What that seller states about the trip itself -- dives, entry bar,
+        # reefs -- found by the same route and used only where nothing else
+        # answers. `{}` where it has not been read, which is not the same as a
+        # trip it says nothing about; both read as silence downstream and only
+        # the first is a gap.
+        divebooker_trip = _divebooker_trip(
+            group, slug, divebooker_book, divebooker_trip_facts) or {}
+
+        # And the *third* seller after that, on the same terms. It publishes a
+        # `divesites` list of named reefs rather than prose, which is more
+        # structured than PADI's blurb -- and it is still last, because being
+        # easier to read is not an argument about being right and this
+        # project has no measurement of the two against each other. What it
+        # answers is the 33 hulls neither of the others carries, where the
+        # four sources above are all silent and the alternative is a row the
+        # site filter cannot reach.
         sites = (_sites_from_description(trip)
                  or _sites_from_regions(trip.get("regions") or [])
                  or _sites_from_name(name)
-                 or list(padi_trip.get("dive_sites") or []))
+                 or list(padi_trip.get("dive_sites") or [])
+                 # Through `_sites_from_name`, one name at a time, exactly as
+                 # the operator's own region list goes. Raw, this source's
+                 # reef names would enter the site filter unfolded and mint
+                 # chips the rest of the fleet does not share -- the
+                 # trip-name column and the chip beside it must not disagree,
+                 # which is what `SITE_HINTS` and `REEF_ALIASES` are for. PADI's
+                 # arrive already folded, by `fetch_padi._padi_sites`.
+                 or _sites_from_regions(divebooker_trip.get("sites") or []))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
@@ -2543,6 +2986,24 @@ def promote(
         ):
             port_from, port_to = stated_from, stated_to
 
+        # And the third seller states them the same way, in two fields, which
+        # is the only statement of a harbour the 33 hulls it alone lists have:
+        # a row this seller founded has no liveaboard.com title to parse and
+        # no PADI trip to ask, so all 69 of them read *Unknown* until this.
+        #
+        # Asked last and under the same two conditions, which is where this
+        # source sits in every chain on this page -- it may fill a silence and
+        # it may not outrank either of the others. Where it does speak over a
+        # parsed title, the title named no harbour this code could read, which
+        # is a hole rather than a disagreement.
+        said_from = _port(divebooker_trip.get("port_from"))
+        said_to = _port(divebooker_trip.get("port_to"))
+        if said_from != "Unknown" and said_to != "Unknown" and (
+            all(d.get("divebooker_only") for d in group)
+            or "Unknown" in (port_from, port_to)
+        ):
+            port_from, port_to = said_from, said_to
+
         # The second seller's own required extras, beside ours and never mixed
         # into them. Written only where PADI states at least one charge or
         # states a complete bill of none, so a trip PADI has not been read for
@@ -2553,6 +3014,11 @@ def promote(
         # itinerary's fee book -- see "fees" below.
         padi_fees = _padi_fees(padi_trip)
 
+        # And the third seller's, found through the dates this trip's
+        # departures share with it rather than by name. See `_divebooker_fees`.
+        divebooker_fees = _divebooker_fees(
+            group, slug, divebooker_book, divebooker_fee_books)
+
         # Which book this trip's own fee rows come from, decided here rather
         # than read back off the record afterwards. It used to be inferred by
         # asking whether `fees` *was* `padi_fees["lines"]` -- an identity check
@@ -2562,8 +3028,25 @@ def promote(
         # choice is made.
         own_fees = fee_book.get(slug) or source.get("fees")
         padi_lines = (padi_fees or {}).get("lines") or []
+        # And the third seller's, which becomes this trip's own book **only
+        # where neither of the others has one**. A fallback into a silence
+        # rather than a ranking: saying this source outranks PADI, or the
+        # reverse, would be a claim about two disclosures that nothing here
+        # has measured. Where nobody else published a bill there is nothing to
+        # rank it against, and that is the case this covers -- the 33 Egyptian
+        # hulls neither of the other two sellers carries, whose only fee book
+        # is the *Price details* panel on their own divebooker page.
+        divebooker_own = (divebooker_fees or {}).get("lines") or []
         fees_from_padi = not own_fees and bool(padi_lines)
-        fee_lines = _with_units_resolved(own_fees or padi_lines, padi_lines)
+        fees_from_divebooker = (not own_fees and not padi_lines
+                                and bool(divebooker_own))
+        fee_lines = _with_units_resolved(
+            own_fees or padi_lines or divebooker_own, padi_lines)
+
+        if divebooker_fees is not None:
+            for line in divebooker_fees["lines"]:
+                line["provenance"]["retrieved"] = divebooker_read
+                line["provenance"]["url"] = divebooker_page.get(slug, "")
 
         if padi_fees is not None:
             retrieved = (padi or {}).get("collected") or ""
@@ -2611,11 +3094,18 @@ def promote(
                 # case: PADI says 9 dives over its three nights and the column
                 # said "not stated". Its low end, as everywhere here, so price
                 # per dive stays a ceiling.
+                # And the third seller behind PADI, for the same reason PADI
+                # sits behind ours: it is another seller's account of a number
+                # the operator publishes, and it may not outrank the operator's
+                # own. Where nothing else answers it is the only answer there
+                # is -- Aml Hayaty states 9 dives over three nights and neither
+                # of the other two lists the boat at all.
                 "dives": trip.get("dives") or _dives(
                     hand.get(slug, {}).get("dives") or source.get("dives"),
                     nights=nights,
                     for_nights=hand.get(slug, {}).get("dives_for_nights"),
-                ) or int(padi_trip.get("dives") or 0),
+                ) or int(padi_trip.get("dives") or 0)
+                or int(divebooker_trip.get("dives") or 0),
                 "port_from": port_from,
                 "port_to": port_to,
                 # Where the trip goes: the operator's own "Key regions" list
@@ -2660,7 +3150,24 @@ def promote(
         # one publishes a bar softer than somebody stated -- the one direction
         # this project does not go. See _strictest.
         ours, theirs = _requirements(trip), _padi_requirements(padi_trip)
-        bar = _strictest(ours, theirs)
+        # And the third seller's, through the same `_requirements` as ours,
+        # because what it publishes is the same shape: a certification sentence
+        # and a dive count, both as prose. `expirience` and `sertification` are
+        # that source's own spellings and `scrape/divebooker_com` keeps them;
+        # here they become the two fields every bar in this dataset has.
+        #
+        # It joins `_strictest` rather than sitting behind the other two. A
+        # safety bar is not a fact about a price, and the rule this project
+        # keeps about them is that **the stricter claim wins whoever made it**
+        # -- showing the softer one publishes a gate below what somebody
+        # stated, which is the one direction this does not go. Ranking sources
+        # here would be exactly that, on whichever trips the last source is the
+        # strict one.
+        bar = _strictest(_strictest(ours, theirs), _requirements({
+            "experience": divebooker_trip.get("certification") or "",
+            "min_logged_dives": _stated_dives(
+                divebooker_trip.get("requirements")),
+        }))
         if bar:
             itineraries[-1]["requirements"] = bar
         # Counted where both sellers speak, because the page states these
@@ -2700,6 +3207,10 @@ def promote(
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
             itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]
 
+        if divebooker_fees is not None:
+            itineraries[-1]["divebooker_fees"] = divebooker_fees["lines"]
+            itineraries[-1]["divebooker_fees_complete"] = divebooker_fees["complete"]
+
         # Whether this trip's own fee rows came from PADI rather than from the
         # vessel panel every other itinerary uses. Written only where true, so
         # it marks the 22 boats liveaboard.com does not sell rather than
@@ -2708,6 +3219,12 @@ def promote(
         # wrong one is the failure this project reports in other people.
         if fees_from_padi:
             itineraries[-1]["padi_sourced_fees"] = True
+
+        # Same flag for the third seller, and written only where true for the
+        # same reason: the page names a source under the fee table, and naming
+        # the wrong one is the failure this project reports in other people.
+        if fees_from_divebooker:
+            itineraries[-1]["divebooker_sourced_fees"] = True
 
         for item in group:
             entry = {
@@ -2778,6 +3295,45 @@ def promote(
                     "url": f"https://travel.padi.com/liveaboard/"
                            f"{sailing.get('country', 'egypt')}/"
                            f"{padi_slug_for.get(slug, slug)}/",
+                }
+
+            # And the third seller's, on the sailings it lists. Published from
+            # this run rather than withheld, which is a change: the figure used
+            # to be held back because its unit was not established, and what
+            # established it was the currency. Read in the currency the page
+            # states rather than the one `Offer.priceCurrency` labels it with,
+            # 725 of 777 joined sailings carry a figure identical to one of the
+            # other two sellers'. What is left is 52 rows where three sellers
+            # disagree about a berth, which is the thing this page is for --
+            # and they concentrate rather than scatter: twelve of them are
+            # Unity's whole season at a steady 1.43x, which is a price and not
+            # a parse.
+            #
+            # **Never on a row this seller is the only source of**, the rule
+            # `padi_price` already keeps: a figure repeated into a second
+            # seller's field prints as two sellers agreeing about a sailing one
+            # of them does not offer -- and on such a row this seller's fare is
+            # already the row's own price.
+            # Which sellers list this sailing at all, where the answer is
+            # "divebooker, and only divebooker". Written only where true, like
+            # `padi_only`: a key written per departure is a key written 1,189
+            # times and this is the answer for seven of them.
+            if item.get("divebooker_only"):
+                entry["divebooker_only"] = True
+
+            third = (None if item.get("divebooker_only")
+                     else divebooker_book.get(f"{slug}::{item['start']}"))
+            if third and third.get("price") and third.get("currency"):
+                entry["divebooker_price"] = {
+                    "amount": third["price"],
+                    "currency": third["currency"],
+                }
+                entry["divebooker_provenance"] = {
+                    "kind": "scraped",
+                    "source_id": "divebooker.com",
+                    "retrieved": divebooker_read,
+                    "url": ((divebooker or {}).get("vessels") or {})
+                           .get(third.get("boat"), {}).get("url") or "",
                 }
 
             # What is left on this sailing and at what price, per seller.
@@ -2895,6 +3451,17 @@ def promote(
         "itineraries": itineraries,
         "departures": departures,
     }
+
+    # A third seller, recorded and not published. See `divebooker_coverage`:
+    # the join is exact and the fares are withheld because their unit is not
+    # established. `Dataset.from_dict` reads named keys only, so this reaches
+    # the file and never the page.
+    coverage = divebooker_coverage(
+        divebooker, divebooker_aliases, departures,
+        {i["id"]: i["boat_id"] for i in itineraries},
+    )
+    if coverage:
+        payload["divebooker"] = coverage
     # Any berth block at all, not just a ladder. PADI publishes a count and no
     # cabins, so a run with its book and no booking pages would otherwise ship
     # blocks whose seller index points into a `sellers` list that was never
