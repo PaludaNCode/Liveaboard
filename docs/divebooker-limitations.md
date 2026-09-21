@@ -240,27 +240,37 @@ really is absent.
     from*, and the first `divebooker.yml` run is what answers all of it. A
     hand-edited input is not the fix — the dataset must be what `promote`
     builds from what a fetch wrote.
-15. **Three quarters of its bills do not add up, and the unit is why.**
-    Measured 2026-09-21 with the shipped reader over all 92 hulls
-    ([run 35585415354](https://github.com/PaludaNCode/Liveaboard/actions/runs/35585415354)):
-    **155 of 608 panels are complete**, 53 of those state no obligatory charge
-    at all, so 102 carry a priced bill this project can total. Of the 453 that
-    do not, **319 hold a figure with no unit** — *50 USD per person* states a
-    payer and no period, `FeeItem.span_for_trip` refuses the line, and one such
-    line silences the bill it sits in. 105 hold a charge with no figure, which
-    is nothing to do: this source did not state a price and this project does
-    not invent one.
-    A quarter of the fleet is therefore the ceiling on the third column, and
-    the one lever that could move it is the rule `_with_units_resolved` already
-    applies to gear — join the two books on the money and take only the unit.
-    Whether it reaches these 319 cannot be measured until the fee book is
-    committed, because it needs both books side by side.
-    132 more were blocked by a name rather than by a number. *Fuel Charge*,
-    *Crew Gratitude* and *Route suplement* are now read, at 69 lines between
-    them; every title naming two charges stays declined on the rule
-    *Environmental and Route Fees* already set, and *Government fees* — the
-    largest single spelling at 35 lines — is left for a census that prints the
-    boat beside it.
+15. **Two thirds of its bills do not add up, and the unit is why.**
+    Measured 2026-09-21 with the shipped reader over all 92 hulls, four times
+    ([35585415354](https://github.com/PaludaNCode/Liveaboard/actions/runs/35585415354)
+    → [35590899283](https://github.com/PaludaNCode/Liveaboard/actions/runs/35590899283)).
+    **205 of 608 panels are complete**, 53 of those state no obligatory charge
+    at all, so **152 carry a priced bill this project can total** — from 155
+    and 102 on the first read, which five words to `fees.LABEL_PATTERNS`
+    bought.
+    What is left is not a vocabulary problem. **319 panels hold a figure with
+    no unit** — *50 USD per person* states a payer and no period,
+    `FeeItem.span_for_trip` refuses the line, and one such line silences the
+    bill it sits in — and 105 hold a charge with no figure, which is nothing to
+    do: this source stated no price and this project does not invent one.
+    The words proved it rather than dented it. Royal Evolution's 9 panels
+    completed the moment *Port & Permission fees* was read, because it says
+    *per trip*; Tala's 12 did not, because *Route fees and enviromental taxes -
+    200-320 EUR per person* says who pays and not how often. Read, and still
+    silent.
+    So a third of the fleet is the ceiling, and the one lever that could raise
+    it is the rule `_with_units_resolved` already applies to gear — join the
+    two books on the money and take only the unit. Whether it reaches these 319
+    cannot be measured until the fee book is committed, because it needs both
+    books side by side.
+    40 obligatory lines in 9 spellings are still declined, and each is a
+    deliberate refusal rather than a gap. *Government fees* is 35 of them, all
+    on the Sea Serpent fleet, whose only other required line is a park fee with
+    no unit — so naming it would buy nothing, and choosing what the charge is
+    for with no total riding on the answer is a guess. Dive Runner's *Entrance
+    fee* states 10 EUR per person per day for the Strait of Tiran and 15 for
+    Ras Mohammed in one line, and reading the first as the charge would publish
+    10 to a diver who pays 15.
 16. **The operator is permanent, and it is item 3 seen from the other end.**
     The 33 hulls only this seller lists have no liveaboard.com vessel page,
     so nothing states a company for them and all 29 founded itineraries carry

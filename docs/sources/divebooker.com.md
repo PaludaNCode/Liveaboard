@@ -334,21 +334,27 @@ Asked of the shipped reader rather than of a copy of it, over all 92 hulls
 scales every charge a diver cannot decline, so `complete` is exactly how many
 trips can reach the Total with a third column.
 
-| | |
-|---|---|
-| Panels | 608 on 92 pages |
-| The bill adds up | **155 (25%)** — of which 53 state no obligatory charge at all |
-| It does not | 453 |
+| | | first read | after five words |
+|---|---|---|---|
+| Panels | 608 on 92 pages | | |
+| The bill adds up | | 155 (25%) | **205 (34%)** |
+| …with a priced bill | | 102 | **152** |
 
-So **102 panels carry a priced bill this project can total**, and a quarter of
-the fleet is the ceiling on the third column until something below moves. Why
-the other 453 do not, counting a panel once per reason:
+Five words added to `fees.LABEL_PATTERNS` took it from a quarter of the fleet
+to a third, and the panels carrying an actual priced bill by half again. Why
+the remaining 403 do not, counting a panel once per reason, on the first read:
 
 | | |
 |---|---|
 | a figure with no unit | 319 |
 | a label nothing could name | 132 |
 | a charge with no figure | 105 |
+
+**And the unit survived every one of those words**, which is the confirmation
+rather than the disappointment: Royal Evolution's 9 panels completed the moment
+*Port & Permission fees* was read, because it states *per trip*; Tala's 12 did
+not, because *Route fees and enviromental taxes - 200-320 EUR per person* says
+who pays and not how often. The line is read now and the bill is still silent.
 
 **The unit is the whole of it.** *Port fees - 50 USD per person* states a payer
 and no period, `FeeItem.span_for_trip` refuses the line, and one such line
