@@ -638,11 +638,22 @@ divebooker.** So the doubled figure is what the page prints once there is no
 single berth left to sell, and it is the last row on which `Offer.price` means
 what it means everywhere else. One row in 888.
 
-This source cannot say so itself. `Offer.availability` is `InStock` on **888
-of 888** departures, so it carries no information at all and cannot flag a
-sold-out sailing — the doubled figure was the only visible trace, and it is
-the only one in the book: exactly one row prices at 1.9× or more of its own
-trip's median.
+**And the reason we could not see it was ours.** `Offer.availability` came out
+`InStock` on 888 of 888 departures, which looked like a field the source does
+not fill. It fills it: two nodes state it, the trip's offer says `InStock` for
+every sailing that trip sells and the **Event** is one sailing. Bella 2's three
+Events say `LimitedAvailability`, `OnlineOnly` and `OnlineOnly`. The event pass
+only filled the field when it was still empty and the trip pass runs first, so
+the sailing's own word was read by nothing. Fixed, with the guard that asserted
+`InStock` on every row re-aimed — it had the bug written into it.
+
+Which probably also explains the doubled figure, and the vessel page says how:
+a sold-out row there reads **"For full charters and groups only"**. 5,398 is
+exactly twice 2,699. So the number is likely a whole-cabin or charter price
+standing where a berth price normally is, on a sailing whose own node says
+sold out — a prediction the next fetch checks rather than a finding. Once that
+node is read, `AVAILABILITY` folds `SoldOut` to `sold_out`, `bookable` goes
+false, and the row is marked gone instead of advertising a berth at 5,398.
 
 So the doubling is not a parser artefact and not a second cabin class: it is
 what the page prints for a week it can no longer sell a single berth on. The
