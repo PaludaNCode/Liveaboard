@@ -216,7 +216,20 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # Narrow on purpose. The 14 remaining clashes are one vessel's bare
     # "Nitrox" at 50 with no size in the title, and there the stated amount
     # wins: turning a stated cost into free is the error this must never make.
-    (r"\b1[0-9]\s*(?:l\b|lt\b|ltrs?\b|liters?\b|litres?\b)", FeeCode.TANK_15L),
+    #
+    # **The size is 15, and it used to be any of 10 to 19.** `1[0-9]` was wide
+    # enough to catch a spelling nobody had written yet and it caught the
+    # opposite: divebooker.com's inclusion list says *"12l tanks and weights"*,
+    # the tanks the operator gives you, next to an *Extra cost* line reading
+    # *"15l tanks"* — so the free size classified as the charged upgrade and,
+    # ranking above an unpriced extra, published Red Sea Aggressor II's 15L
+    # tanks as **included**. Turning a charge into free is the error this
+    # table's own comment says it must never make.
+    #
+    # Measured before it was narrowed: across `data/fees.json`, `data/padi.json`
+    # and the shipped dataset, all 655 matches are 15 and not one is any other
+    # number. So the two sellers this was written for lose nothing.
+    (r"\b15\s*(?:l\b|lt\b|ltrs?\b|liters?\b|litres?\b)", FeeCode.TANK_15L),
     # Supervision, at 9 a dive, for divers of a stated certification level.
     # Priced and real, and owed by some divers and not others -- so it is a
     # charge like a guide's rather than one every berth carries, which is what

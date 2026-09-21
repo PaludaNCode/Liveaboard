@@ -910,10 +910,19 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
         # for one with nothing on it.
         warnings.append(f"{dropped} streamed chunk(s) did not decode")
 
-    at = [match.end() for match in DETAILS_AT.finditer(text)]
-    owners = enclosing(text, at)
+    # Two positions per panel, and they are not interchangeable. `end()` is the
+    # `{` the panel itself opens at, which is what `balanced` reads; the
+    # smallest object containing *that* index is the panel, so asking for the
+    # owner there hands back `{"title": "Price details"}` — the panel's own
+    # heading, on every hull, wearing a trip name's clothes. `start()` sits on
+    # the key's opening quote, inside the parent and before the panel begins,
+    # so the smallest object containing it is the trip. Caught by a fixture
+    # from a real page: this shipped reading `Price details` as the trip and
+    # attaching nothing.
+    found_at = [(m.start(), m.end()) for m in DETAILS_AT.finditer(text)]
+    owners = enclosing(text, [start for start, _ in found_at])
     blocks: list[FeeBlock] = []
-    for position in at:
+    for owner_at, position in found_at:
         chunk = balanced(text, position)
         if chunk is None:
             warnings.append("a price panel was not closed in the payload")
@@ -925,7 +934,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
             continue
 
         block = FeeBlock()
-        bounds = owners.get(position)
+        bounds = owners.get(owner_at)
         if bounds:
             try:
                 owner = json.loads(text[bounds[0]:bounds[1] + 1])

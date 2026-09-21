@@ -39,7 +39,7 @@ before deciding what the third seller is allowed to say on the page.
 5. **A dive count, an entry bar, a cabin ladder.** None of the three appears in
    any node read.
 
-## The one that stops the fares being published
+## The one that stopped the fares being published, and no longer does
 
 0. **Two of the three reasons turned out to be ours, and the third is one
    row.** This section led with *"the unit of `Offer.price` is not
@@ -68,11 +68,21 @@ before deciding what the third seller is allowed to say on the page.
    rows differ by real amounts — Unity at 1.42x on thirteen sailings, Ghazala
    Explorer at 1.65x, Blue Pearl at 1.45x — and those are two sellers pricing
    one berth differently, which is what this site exists to show.
-   Every fare is kept in `data/divebooker.json` and **none reaches the
-   dataset**: `promote` writes `divebooker.fares: "withheld"` and a guard
-   asserts no departure carries a divebooker figure. Until somebody reads a
-   booking page and establishes what the number counts, this source cannot be
-   a third price.
+   **The fares are published now**, on the 777 departures this seller lists
+   and nowhere else — `divebooker_price` and its provenance, and
+   `promote` writes `divebooker.fares: "published"`. This paragraph used to
+   end: *"Every fare is kept in `data/divebooker.json` and **none reaches the
+   dataset** … Until somebody reads a booking page and establishes what the
+   number counts, this source cannot be a third price."* What established it
+   was not a booking page but the currency, one paragraph up: read the page's
+   own way, 725 of 777 joined sailings carry a figure identical to one of the
+   other two sellers'. A unit that reproduces another seller's number to the
+   cent on 93% of a fleet is an established unit.
+
+   The 2.000× row is published with the rest, as the seller states it.
+   Dropping a price because this site finds it surprising is the failure it
+   reports in other people, and the page's whole job is drawing sellers who
+   disagree. It is named here and in the build log instead.
 
    **This file said three sellers were pricing one berth apart, and that was
    our own arithmetic.** It read: *"on Alsuraya, Discovery I and II and Grand
