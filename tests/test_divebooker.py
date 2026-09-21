@@ -846,6 +846,29 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         # And the near-misses each one was kept narrow to avoid.
         self.assertIsNone(classify_label("Gratitude", prose=False))
 
+    def test_a_title_naming_two_charges_is_one_line_carrying_both(self):
+        """`COMBINED_FEES`, which is what this project does with such a title.
+
+        Not a refusal: splitting *Port & Permission fees: 150.00EUR* between a
+        port and a permit invents two prices nobody quoted, so it stays one
+        line at the whole figure. Both of these were declining, and each was
+        the *entire* obligatory column of the panel it sat in — Tala's on 12
+        panels, Royal Evolution's on 9 — so the line going unread took the
+        whole bill with it.
+        """
+        from liveaboard.scrape.fees import classify_label
+        for label in ("Route fees and enviromental taxes",
+                      "Port & Permission fees"):
+            with self.subTest(label=label):
+                found = classify_label(label, prose=False)
+                self.assertIsNotNone(found, f"{label!r} is still declined")
+                self.assertEqual(found.value, "combined_fees")
+        # A single component keeps its own code: one part is not a bundle.
+        self.assertEqual(classify_label("Port fees", prose=False).value,
+                         "port_fees")
+        self.assertEqual(classify_label("Route supplement", prose=False).value,
+                         "route_supplement")
+
     def test_a_figure_inside_a_bracket_keeps_its_label(self):
         """`Gratuities (€70)` came out labelled `Gratuities (`."""
         tips = [f for f in self.blocks[2].fees if f.code.value == "gratuities"]

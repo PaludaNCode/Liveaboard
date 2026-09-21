@@ -398,7 +398,14 @@ COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
         r"\bparks?\b",
         r"\bports?\b|\bharbou?rs?\b",
         r"\bfuel\b",
-        r"\benvironment(?:al)?\b|\beco\b",
+        # One `n`, because one operator writes one: Tala bills *Route fees and
+        # enviromental taxes - 200-320 EUR per person*, and that line is the
+        # whole of its obligatory column on 12 panels. Spelled with the second
+        # `n` it matched nothing, so `route` was the only part found and the
+        # line declined -- taking the entire bill with it. In the table on the
+        # `Cost Gard Fee` rule: the fleet spells it correctly everywhere else,
+        # so the correction is confirmed by the data rather than guessed.
+        r"\benviro(?:n)?ment(?:al)?\b|\beco\b",
         # The fifth part, and the reason it is here: PADI bills "Environmental
         # and Route Fees", which names two charges and matched exactly one of
         # the four above, so it declined and blocked its trip's bill. A route
@@ -406,6 +413,15 @@ COMBINED_PARTS: tuple[re.Pattern[str], ...] = tuple(
         # alone is one part, and `COMBINED_TAIL` does not match "Route
         # supplement" either way.
         r"\broutes?\b",
+        # The sixth, and the same finding one seller later: Royal Evolution
+        # bills *Port & Permission fees: 150.00EUR per trip* on 9 panels, which
+        # names two charges, matched `port` alone and declined. A permission is
+        # what a boat buys to sail somewhere and PADI's own bundle names it in
+        # the same breath -- *"Visa, dive permission and taxes"*. One line
+        # carrying the whole amount, which is the whole point of this code:
+        # splitting 150 between a port and a permit invents two prices nobody
+        # quoted.
+        r"\bpermissions?\b|\bpermits?\b",
     )
 )
 COMBINED_TAIL = re.compile(r"\b(?:fees?|charges?|taxes?|dues)\b", re.I)

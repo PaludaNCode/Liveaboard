@@ -369,15 +369,38 @@ two charges — *Port & Permission fees*, *Route fees and enviromental taxes*,
 already set: filing a line under half of itself is worse than leaving it read
 and unnamed.
 
-*Government fees* is the largest single spelling at 35 lines and is **not**
-folded. The nearest precedent cuts both ways — this file already folds
-*Environmental/Government Fee* onto the environment tax, on the grounds that
-one boat's *Governamental Reef Tax* is another's *Environmental tax* — but a
-bare *Government fees* beside an operator that also bills *Route fees and
-enviromental taxes* could as easily be the charge that is not that one, and
-the census printed no boat beside the label. It does now, with the column each
-label came from, so the next run decides it against a whole panel instead of a
-line.
+**Two more were a bundle rather than an unknown**, found by printing the whole
+obligatory column beside each declined line
+([run 35588197625](https://github.com/PaludaNCode/Liveaboard/actions/runs/35588197625)).
+Tala's *Route fees and enviromental taxes - 200-320 EUR per person* is its
+entire required bill on 12 panels and declined on a missing `n`; Royal
+Evolution's *Port & Permission fees: 150.00EUR per trip* is the same shape on
+9. Both are `COMBINED_FEES` — one line carrying the whole amount, because
+splitting 150 between a port and a permit invents two prices nobody quoted —
+so `enviro(?:n)?ment` and `permissions?|permits?` join `COMBINED_PARTS`.
+
+*Government fees* is the largest spelling left at 35 lines and stays declined,
+and the panel is why rather than the taste. All 35 are the **Sea Serpent
+fleet's six hulls**, whose obligatory column is exactly two lines:
+
+```
+sea-serpent
+  mandatory  marine_park  200.0-300.0 EUR (no unit)
+    DECLINED  Government fees - 100 EUR per person (for trips from January, 2027)
+```
+
+So it is not a duplicate of an environmental tax the boat bills separately —
+there is no such line. What settles it instead is that **naming it would buy
+nothing**: the park fee beside it states no unit, so the bill is silent either
+way, and the choice between the environment tax and `LOCAL_FEES` would be this
+project deciding what a charge is for with no total riding on the answer.
+Recorded, not guessed.
+
+Dive Runner's *Entrance fee - 10 EUR per person per day for the Strait of
+Tiran, and 15 EUR per person per day for dives in Ras Mohammed National Park*
+is the other deliberate refusal, and a sharper one: it states **two rates for
+two places** in one line, and reading the first as the charge would publish
+10 where a diver visiting Ras Mohammed pays 15.
 
 #### What else that object states, for nothing
 
