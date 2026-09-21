@@ -205,7 +205,11 @@ class VesselBook:
     departures: list[Departure] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     fees: dict[str, tuple[list[ParsedFee], bool]] = field(default_factory=dict)
-    """The *Price details* panel, **keyed on the trip and never on the boat**.
+    """The *Price details* panel, **keyed on the trip and its length**.
+
+    Never on the boat, and never on the name alone — see `fee_key`. Red Sea
+    Aggressor IV sells one trip name at two lengths with two different bills,
+    so a key of the name is a key that says two bills are one.
 
     Measured over all 92 hulls before it was written (run 35545965933): 603 of
     605 blocks carry a title that is one of the page's own trip names exactly,
@@ -221,11 +225,13 @@ class VesselBook:
     unnamed_fees: list[str] = field(default_factory=list)
     """Priced fee lines this project's vocabulary declined, verbatim."""
     trips: dict[str, dict[str, Any]] = field(default_factory=dict)
-    """What each trip states about itself: dives, entry bar, reefs.
+    """What each trip states about itself: dives, entry bar, reefs, harbours.
 
-    Keyed on the trip exactly as `fees` is, and kept only for trips this page
+    Keyed by `fee_key` exactly as `fees` is, and kept only for trips this page
     really sells -- a panel naming a week the page does not list is as
-    unattachable here as it is there.
+    unattachable here as it is there. It is dropped alongside the fee book
+    where two panels collide, because a dive count read off a panel this code
+    cannot attach is a claim about a trip it cannot identify.
     """
 
     def as_dict(self) -> dict[str, Any]:
@@ -636,6 +642,10 @@ def vessel(html: str, path: str) -> VesselBook:
     blocks, fee_warnings = fee_blocks(html)
     book.warnings.extend(f"{path}: {note}" for note in fee_warnings)
     sold = {row.trip for row in book.departures if row.trip}
+    # What each key has already been given, so a second panel under one key is
+    # noticed rather than silently preferred. See `fee_key`.
+    seen: dict[str, tuple[list[dict[str, Any]], bool]] = {}
+    refused: set[str] = set()
     for block in blocks:
         book.unnamed_fees.extend(block.unnamed)
         if not (block.trip and block.trip in sold):
@@ -658,10 +668,40 @@ def vessel(html: str, path: str) -> VesselBook:
             ("port_from", block.port_from),
             ("port_to", block.port_to),
         ) if v}
+        key = fee_key(block.trip, block.nights)
+
+        # **A second panel under one key refuses both.** The page really does
+        # repeat a panel — Red Sea Aggressor IV states *St. Johns / Daedalus
+        # (7 nights)* twice with byte-identical columns — so a repeat is not by
+        # itself a contradiction, and only differing *content* is. Where it
+        # differs, nothing here can say which bill belongs to the sailing, and
+        # the one thing that must not happen is the last one winning: that is
+        # `promote.itinerary_key`'s rule, which this project has already paid
+        # for once, and it is why the fee book is dropped rather than picked
+        # from.
+        #
+        # The trip facts go with it. A dive count and an entry bar read off a
+        # panel this code cannot attach are claims about a trip it cannot
+        # identify.
+        shape = (to_fee_dicts(block.fees), block.complete)
+        if key in seen and seen[key] != shape:
+            if key not in refused:
+                refused.add(key)
+                book.fees.pop(key, None)
+                book.trips.pop(key, None)
+                book.warnings.append(
+                    f"{path}: two different price panels are filed under "
+                    f"{block.trip!r} at {block.nights} night(s); nothing can "
+                    f"say which a sailing gets, so both are dropped")
+            continue
+        if key in refused:
+            continue
+        seen[key] = shape
+
         if facts:
-            book.trips[block.trip] = facts
+            book.trips[key] = facts
         if block.fees:
-            book.fees[block.trip] = (block.fees, block.complete)
+            book.fees[key] = (block.fees, block.complete)
 
     if not book.departures:
         # A vessel selling nothing and a page that failed are different
@@ -1087,6 +1127,29 @@ def _rank(fee: ParsedFee) -> int:
 
 
 DETAILS_AT = re.compile(r'"details"\s*:\s*(?=\{)')
+
+
+def fee_key(trip: str | None, nights: int | None) -> str:
+    """How a fee panel is filed, and how a sailing finds it again.
+
+    **The trip name is not identity here.** Red Sea Aggressor IV sells
+    *Brothers - Daedalus - Elphinstone* as a 7-night week and as a 9-night one,
+    and they are different trips with different bills — 7 nights carries one
+    panel, 9 nights another, on all 143 of that boat's sailings. The night
+    count is in the owner's own `nights` field and in the name's
+    `(9 nights)` suffix, and `TRIP_SUFFIX` strips that suffix before this
+    project keys on anything. So the two collapsed onto one key and the page's
+    second panel silently overwrote the first, on 142 sailings.
+
+    The same shape as `Itinerary.name` two layers up: *two sailings differing
+    only by port are two trips*. Here it is the length rather than the port,
+    and a key that drops it is a key that says two bills are one.
+
+    Both sides state the length — the panel's owner writes it and a sailing has
+    two dates — so this is an equality on a number, which is the only kind of
+    join this module makes.
+    """
+    return f"{trip}::{nights if nights is not None else ''}"
 
 
 def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:

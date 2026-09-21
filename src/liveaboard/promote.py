@@ -2158,14 +2158,24 @@ def _divebooker_trip(
     routes to one trip is two answers to "which of their weeks is this",
     which is the drift this file keeps closing.
     """
+    # Local, like `padi_key`'s import of `PadiComAdapter`: promotion does not
+    # depend on the scrape layer, and one shared key function is the whole
+    # point -- a second copy of it here is the drift this file keeps closing.
+    from .scrape.divebooker_com import fee_key  # noqa: PLC0415
+
     seen: dict[str, dict[str, Any]] = {}
     for item in group:
         sailing = sailings.get(f"{slug}::{item['start']}")
         if not sailing or not sailing.get("trip") or not sailing.get("boat"):
             continue
-        book = (books.get(sailing["boat"]) or {}).get(sailing["trip"])
+        # **The name and the length**, because that seller sells one trip name
+        # at two lengths with two different bills -- see
+        # `divebooker_com.fee_key`. The sailing states its own length from its
+        # two dates, so this stays an equality on a number and a string.
+        key = fee_key(sailing["trip"], sailing.get("nights"))
+        book = (books.get(sailing["boat"]) or {}).get(key)
         if isinstance(book, dict):
-            seen[f"{sailing['boat']}::{sailing['trip']}"] = book
+            seen[f"{sailing['boat']}::{key}"] = book
     return next(iter(seen.values())) if len(seen) == 1 else None
 
 

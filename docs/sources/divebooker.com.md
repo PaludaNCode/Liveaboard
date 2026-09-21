@@ -408,6 +408,48 @@ is the other deliberate refusal, and a sharper one: it states **two rates for
 two places** in one line, and reading the first as the charge would publish
 10 where a diver visiting Ras Mohammed pays 15.
 
+#### The panel is per trip, and the trip is not its name
+
+Probed 2026-09-21 over three hulls
+([run 35610372102](https://github.com/PaludaNCode/Liveaboard/actions/runs/35610372102)),
+because the vessel page puts a *Trip & price details* link on every departure
+row and that is not the claim this project was making.
+
+**It is not per sailing.** The object owning a panel states `name`, `nights`,
+`numberDives`, `divesites`, `requirements`, `programm`, the two harbours and
+the check-in times — and **no date**, on 0 of 28 owners across three hulls. The
+payload holds **no route** containing *price*, *detail*, *booking*, *checkout*
+or *cabin*, so there is nothing per-sailing to fetch either. The link opens the
+trip's panel.
+
+**But the trip is the name *and its length*.** Red Sea Aggressor IV sells one
+name at two lengths with two different bills:
+
+```
+44bd0204f8  7 nights  Brothers - Daedalus - Elphinstone (7 nights) (Marsa Alam-Marsa Alam)
+a9e94b1303  9 nights  Brothers - Daedalus - Elphinstone (9 nights) (Hurghada-Marsa Alam)
+44bd0204f8  7 nights  St. Johns / Daedalus (7 nights) (Marsa Alam-Marsa Alam)
+a9e94b1303  9 nights  St. Johns / Daedalus (9 nights) (Marsa Alam-Marsa Alam)
+```
+
+Every 7-night trip shares one panel and every 9-night the other. `TRIP_SUFFIX`
+strips `(9 nights)` off the name before the book is keyed, so the two collapsed
+onto one key and the page's later panel silently overwrote the earlier one — on
+142 of that boat's 143 sailings. `fee_key` carries the length now; both sides
+state it, so the join stays an equality on a number.
+
+**And a genuine clash refuses both.** That page also files *St. Johns /
+Daedalus (7 nights)* twice with byte-identical columns, so a repeated key is
+not by itself a contradiction and refusing on it would discard a bill the
+seller states plainly. Only differing content is a clash, and there nothing can
+say which bill a sailing gets: the fee book is dropped and the run says so,
+with the trip facts going too, because a dive count read off a panel this code
+cannot attach is a claim about a trip it cannot identify.
+
+Independence III is the other shape and needed no rule: 21 panels, 18 names,
+two distinct panels, and every name mapping to exactly one. Its repeats are one
+name at one length from two different harbours, which agree.
+
 #### What else that object states, for nothing
 
 The trip holding the panel also holds `nights`, `numberDives`,

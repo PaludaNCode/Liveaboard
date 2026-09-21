@@ -979,6 +979,68 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         self.assertNotIn("3", "".join(f.label for f in self.blocks[1].fees))
 
 
+class TestTwoPanelsUnderOneKeyRefuseBoth(unittest.TestCase):
+    """Red Sea Aggressor IV's real shape, and the one case that is not a clash.
+
+    Its page files *St. Johns / Daedalus (7 nights)* **twice**, with
+    byte-identical columns, so a repeated key is not by itself a contradiction
+    — refusing on the repeat alone would throw away a bill the seller states
+    perfectly clearly. Only differing content is a clash, and there nothing can
+    say which bill a sailing gets, so the fee book is dropped rather than
+    picked from. `promote.itinerary_key` cost this project that lesson once.
+
+    The trip facts go with it: a dive count read off a panel this code cannot
+    attach is a claim about a trip it cannot identify.
+    """
+
+    def panel(self, name, nights, port_fee, dives="9 dives"):
+        return {
+            "name": f"{name} ({nights} nights) (Marsa Alam-Marsa Alam)",
+            "numberDives": dives,
+            "details": {"title": "Price details", "columns": [{
+                "type": "notincluded", "title": "Obligatory surcharges",
+                "text": f"Port Fee: {port_fee}EUR per trip, to be paid on board",
+            }]},
+        }
+
+    def book(self, *panels):
+        html = payload_page(list(panels)) + (
+            '<script type="application/ld+json">'
+            + json.dumps({"@type": "Event", "name": "St. Johns / Daedalus",
+                          "startDate": "2027-05-01", "endDate": "2027-05-08",
+                          "offers": {"@type": "Offer", "price": "2000",
+                                     "priceCurrency": "EUR",
+                                     "availability": "https://schema.org/InStock"}})
+            + "</script>")
+        return db.vessel(html, "/red-sea-aggressor-iv-haz426")
+
+    def test_an_identical_repeat_is_not_a_clash(self):
+        book = self.book(self.panel("St. Johns / Daedalus", 7, 25),
+                         self.panel("St. Johns / Daedalus", 7, 25))
+        self.assertIn("St. Johns / Daedalus::7", book.fees)
+        self.assertEqual(
+            [w for w in book.warnings if "two different price panels" in w], [])
+
+    def test_two_different_panels_under_one_key_drop_both(self):
+        book = self.book(self.panel("St. Johns / Daedalus", 7, 25),
+                         self.panel("St. Johns / Daedalus", 7, 90))
+        self.assertNotIn("St. Johns / Daedalus::7", book.fees,
+                         "the second panel silently won")
+        self.assertNotIn("St. Johns / Daedalus::7", book.trips,
+                         "the trip facts outlived the bill they came with")
+        self.assertTrue(
+            any("two different price panels" in w for w in book.warnings),
+            book.warnings)
+
+    def test_the_same_name_at_two_lengths_is_not_a_clash(self):
+        """Which is the whole reason the length is in the key."""
+        book = self.book(self.panel("St. Johns / Daedalus", 7, 25),
+                         self.panel("St. Johns / Daedalus", 9, 90))
+        self.assertIn("St. Johns / Daedalus::7", book.fees)
+        self.assertEqual(
+            [w for w in book.warnings if "two different price panels" in w], [])
+
+
 class TestTheFeeBookReachesTheTripThroughItsDates(unittest.TestCase):
     """`promote._divebooker_fees`, over a book shaped like the real one.
 
@@ -997,23 +1059,54 @@ class TestTheFeeBookReachesTheTripThroughItsDates(unittest.TestCase):
 
     LINES = [{"code": "port_fees", "tier": "mandatory", "basis": "per_trip",
               "included": False, "amount": {"amount": 25.0, "currency": "EUR"}}]
+    LONGER = [{"code": "port_fees", "tier": "mandatory", "basis": "per_trip",
+               "included": False, "amount": {"amount": 60.0, "currency": "EUR"}}]
+    #: Keyed by `fee_key` -- the trip **and its length** -- because that seller
+    #: sells one name at two lengths with two different bills. *Best of
+    #: Hurghada* at 7 nights and at 3 is the shape Red Sea Aggressor IV really
+    #: has, and a fixture that carried only one length would pass whether or
+    #: not the length is in the key.
     BOOK = {
         "aml-hayaty": {
-            "Best of Hurghada": {"lines": LINES, "complete": True},
-            "Deep South": {"lines": [], "complete": False},
+            "Best of Hurghada::3": {"lines": LINES, "complete": True},
+            "Best of Hurghada::7": {"lines": LONGER, "complete": True},
+            "Deep South::7": {"lines": [], "complete": False},
         },
     }
     SAILINGS = {
-        "aml-hayaty::2027-05-01": {"boat": "aml-hayaty", "trip": "Best of Hurghada"},
-        "aml-hayaty::2027-05-08": {"boat": "aml-hayaty", "trip": "Best of Hurghada"},
-        "aml-hayaty::2027-06-01": {"boat": "aml-hayaty", "trip": "Deep South"},
-        "aml-hayaty::2027-07-01": {"boat": "aml-hayaty", "trip": "Unlisted week"},
+        "aml-hayaty::2027-05-01": {"boat": "aml-hayaty", "trip": "Best of Hurghada",
+                                   "nights": 3},
+        "aml-hayaty::2027-05-08": {"boat": "aml-hayaty", "trip": "Best of Hurghada",
+                                   "nights": 3},
+        "aml-hayaty::2027-05-15": {"boat": "aml-hayaty", "trip": "Best of Hurghada",
+                                   "nights": 7},
+        "aml-hayaty::2027-06-01": {"boat": "aml-hayaty", "trip": "Deep South",
+                                   "nights": 7},
+        "aml-hayaty::2027-07-01": {"boat": "aml-hayaty", "trip": "Unlisted week",
+                                   "nights": 7},
     }
 
     def fees(self, *starts):
         from liveaboard.promote import _divebooker_fees
         return _divebooker_fees([{"start": s} for s in starts],
                                 "aml-hayaty", self.SAILINGS, self.BOOK)
+
+    def test_one_trip_name_at_two_lengths_is_two_bills(self):
+        """The failure this key was rewritten for.
+
+        Red Sea Aggressor IV sells *Brothers - Daedalus - Elphinstone* as a
+        7-night week and a 9-night one, with a different panel on each, and a
+        key of the name alone handed every sailing whichever the page emitted
+        last -- 142 of that boat's 143.
+        """
+        self.assertEqual(self.fees("2027-05-01")["lines"][0]["amount"]["amount"],
+                         25.0)
+        self.assertEqual(self.fees("2027-05-15")["lines"][0]["amount"]["amount"],
+                         60.0)
+
+    def test_two_lengths_under_one_itinerary_attach_neither(self):
+        """Same rule as two panels: a bill neither of their weeks quotes."""
+        self.assertIsNone(self.fees("2027-05-01", "2027-05-15"))
 
     def test_a_trip_whose_departures_all_name_one_panel_gets_it(self):
         found = self.fees("2027-05-01", "2027-05-08")
@@ -1025,7 +1118,7 @@ class TestTheFeeBookReachesTheTripThroughItsDates(unittest.TestCase):
         line = self.fees("2027-05-01")["lines"][0]
         self.assertEqual(line["provenance"]["source_id"], "divebooker.com")
         self.assertIsNot(line["provenance"],
-                         self.BOOK["aml-hayaty"]["Best of Hurghada"]["lines"][0]
+                         self.BOOK["aml-hayaty"]["Best of Hurghada::3"]["lines"][0]
                          .get("provenance"),
                          "the book's own line was mutated in place")
 
@@ -1185,6 +1278,7 @@ class TestARowThisSellerFoundedStatesItsHarbours(unittest.TestCase):
                     "start": "2027-05-01",
                     "end": "2027-05-04",
                     "trip": "Mini Safari: Wrecks & Reefs",
+                    "nights": 3,
                     "price": 640.0,
                     "currency": "EUR",
                 },
@@ -1192,7 +1286,9 @@ class TestARowThisSellerFoundedStatesItsHarbours(unittest.TestCase):
             "vessels": {"aml-hayaty-haz901": {
                 "slug": "aml-hayaty-haz901",
                 "name": "Aml Hayaty",
-                "trips": {"Mini Safari: Wrecks & Reefs": facts},
+                # Keyed by `fee_key`, the trip and its length, exactly as the
+                # parser writes it.
+                "trips": {"Mini Safari: Wrecks & Reefs::3": facts},
             }},
         }
         return promote(
