@@ -84,6 +84,11 @@ def main() -> int:
     for host in (db.HOST, f"www.{db.HOST}"):
         repair_robots(fetcher, host)
 
+    #: The one question, answered at the bottom. A job log is read from its
+    #: end, and the verdict probe had to learn this once already: the finding
+    #: was printed first and buried under eleven screens of working material.
+    verdicts: list[tuple] = []
+
     # 1. May we ask at all. Printed first and on its own, because everything
     #    below is moot if the answer is no and the answer belongs to a person.
     print("== robots.txt ==")
@@ -157,6 +162,14 @@ def main() -> int:
                     except json.JSONDecodeError:
                         said = inner[bounds[0]:bounds[0] + 160]
             fares = re.findall(r'"current":"(\d+)"', inner)
+            starts = said.get("startDate") if isinstance(said, dict) else None
+            ends = said.get("endDate") if isinstance(said, dict) else None
+            verdicts.append((
+                want, frag, row.start, row.end, row.price,
+                starts, ends, sorted(set(fares))[:6],
+                said.get("sumFreeSpaces") if isinstance(said, dict) else None,
+                "MATCH" if (starts == row.start and ends == row.end)
+                else "MISMATCH"))
             print(f"    tripId={frag}: vessel page says {row.start}..{row.end} "
                   f"{row.price} — booking page says {said}")
             print(f"       fares on it: {sorted(set(fares))[:8]}")
@@ -183,6 +196,17 @@ def main() -> int:
             print(f"    {count:>5}  {key}")
         for key in OPEN:
             dump(text, key)
+
+    print(f"\n{'=' * 72}\n== the finding: is the Event id fragment the tripId? ==\n{'=' * 72}")
+    if not verdicts:
+        print("  nothing was asked — no departure carried an id fragment")
+    for (boat, frag, start, end, price, said_start, said_end,
+         fares, spaces, verdict) in verdicts:
+        print(f"  {verdict:<9} {boat:<16} tripId={frag:<8} "
+              f"vessel {start}..{end} price={price} | "
+              f"booking {said_start}..{said_end} spaces={spaces} fares={fares}")
+    agreed = sum(1 for v in verdicts if v[-1] == "MATCH")
+    print(f"\n  {agreed} of {len(verdicts)} agree on both dates")
     return 0
 
 
