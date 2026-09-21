@@ -44,12 +44,23 @@ offer's and **says so**: this project does not pick a number quietly.
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import date
 from typing import Any, Callable, Iterable, Iterator
 
 from . import jsonld
+from ..taxonomy import FeeBasis, FeeCode, FeeTier
+from .fees import (
+    CURRENCIES,
+    ParsedFee,
+    _number,
+    _tier_for,
+    classify_label,
+    tier_for_inclusion,
+    to_fee_dicts,
+)
 
 HOST = "divebooker.com"
 SOURCE_ID = "divebooker.com"
@@ -187,6 +198,22 @@ class VesselBook:
     country: str | None = None
     departures: list[Departure] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
+    fees: dict[str, list[ParsedFee]] = field(default_factory=dict)
+    """The *Price details* panel, **keyed on the trip and never on the boat**.
+
+    Measured over all 92 hulls before it was written (run 35545965933): 603 of
+    605 blocks carry a title that is one of the page's own trip names exactly,
+    once the panel's `(7 nights) (A-B)` suffix is off. The tempting fallback --
+    fold the lot onto the vessel where its blocks agree -- is wrong on 25 of
+    the 67 hulls that have blocks, whose trips state *different* surcharges, so
+    it would publish one week's bill on another's row.
+
+    The two that match nothing stay out. An unattached fee book is a fee book
+    nobody can put a price beside, and guessing which trip it belongs to is
+    the failure `promote.itinerary_key` already cost this project once.
+    """
+    unnamed_fees: list[str] = field(default_factory=list)
+    """Priced fee lines this project's vocabulary declined, verbatim."""
 
     def as_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {"slug": self.slug}
@@ -202,6 +229,17 @@ class VesselBook:
                 stated.get("+".join(sorted(row.stated_by)) or "neither", 0) + 1)
         if stated:
             out["stated_by"] = stated
+        if self.fees:
+            # No provenance per line: this whole file is one seller's reading
+            # on one day, and the header says so once. The same reasoning
+            # keeps the booking URL off every departure.
+            out["fees"] = {trip: to_fee_dicts(lines)
+                           for trip, lines in sorted(self.fees.items())}
+        if self.unnamed_fees:
+            # Named rather than counted, because what an unread charge needs
+            # is a word added to `fees.LABEL_PATTERNS` and a count cannot say
+            # which word.
+            out["unnamed_fees"] = sorted(set(self.unnamed_fees))
         return out
 
 
@@ -541,9 +579,382 @@ def vessel(html: str, path: str) -> VesselBook:
     book.name = organizer or product
 
     book.departures, book.warnings = departures(html)
+
+    # The fee panel, attached by the trip it sits in. A block naming a trip the
+    # page does not sell is kept out and said out loud: this source states the
+    # panel per programme and the departures per sailing, and a key that stops
+    # matching fails silently.
+    blocks, fee_warnings = fee_blocks(html)
+    book.warnings.extend(f"{path}: {note}" for note in fee_warnings)
+    sold = {row.trip for row in book.departures if row.trip}
+    for block in blocks:
+        book.unnamed_fees.extend(block.unnamed)
+        if not block.fees:
+            continue
+        if block.trip and block.trip in sold:
+            book.fees[block.trip] = block.fees
+        else:
+            book.warnings.append(
+                f"{path}: a price panel names {block.trip!r}, which is not a "
+                f"trip this page sells; its {len(block.fees)} fee line(s) "
+                f"are unattached")
+
     if not book.departures:
         # A vessel selling nothing and a page that failed are different
         # answers, and only the caller knows which it asked for. Said here so
         # the run reports it either way.
         book.warnings.append(f"{path}: no departure stated")
     return book
+
+
+# --------------------------------------------------------------------------
+# The fee panel
+#
+# `Trip & price details` on a vessel page, which "no fee book hiding
+# client-side" missed because that verdict came from a keyword sweep over the
+# payload's key *names* — `fee`, `extra`, `includ`, `exclud` — and this one is
+# called `details`. Counted over all 92 hulls before a word of it was parsed
+# (run 35533600353): 606 blocks on 75 pages, every one of them titled *Price
+# details* and carrying exactly three columns —
+#
+#     included      5,244 lines,     0 priced
+#     notincluded     986 lines,   792 priced   ("Obligatory surcharges")
+#     extra         4,276 lines,   303 priced   ("Extra cost")
+#
+# — with 4,311 of the billed labels already named by `fees.classify_label` and
+# 951 declined. That is a fee book, on the fleet's own terms: priced, tiered by
+# the seller itself, and in the vocabulary this project already has.
+# --------------------------------------------------------------------------
+
+#: The chunks the page streams to itself. Next.js App Router ships its data as
+#: JSON **string literals** inside these calls, so the payload's own quotes
+#: arrive backslashed and nothing in it can be read without decoding first. A
+#: regex written against a pretty-printed scratch file is the reason this
+#: module probes before it parses.
+FLIGHT = re.compile(r'self\.__next_f\.push\(\[\d+,\s*(".*?")\]\)', re.S)
+
+
+def payload_parts(html: str) -> tuple[str, int]:
+    """The streamed payload, decoded and joined, and how much would not decode.
+
+    The count travels with the text because a chunk that fails to decode is a
+    piece of the page nobody read, and this project's oldest rule about that
+    is that it must not look like a page with nothing on it.
+    """
+    parts: list[str] = []
+    dropped = 0
+    for chunk in FLIGHT.findall(html):
+        try:
+            parts.append(json.loads(chunk))
+        except json.JSONDecodeError:
+            dropped += 1
+    return "".join(parts), dropped
+
+
+def payload(html: str) -> str:
+    """The streamed payload alone, for a caller that only wants to look."""
+    return payload_parts(html)[0]
+
+
+def balanced(text: str, start: int) -> str | None:
+    """The JSON value beginning at `start`, by counting brackets.
+
+    The payload is one enormous line, so a value cannot be read by looking for
+    the end of anything — only by matching what opened it. Strings are walked
+    through so a brace inside prose does not end the object.
+    """
+    opener = text[start]
+    closer = {"{": "}", "[": "]"}.get(opener)
+    if closer is None:
+        return None
+    depth, index, in_string, escaped = 0, start, False, False
+    while index < len(text):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+        elif char == '"':
+            in_string = True
+        elif char == opener:
+            depth += 1
+        elif char == closer:
+            depth -= 1
+            if depth == 0:
+                return text[start:index + 1]
+        index += 1
+    return None
+
+
+def enclosing(text: str, positions: Iterable[int]) -> dict[int, tuple[int, int]]:
+    """For each position, the smallest JSON object containing it.
+
+    A fee block is worth nothing without the trip it belongs to, and the
+    payload is one line, so the only way to ask *whose* block this is, is to
+    find what encloses it. Forward scan with a stack rather than a backwards
+    walk, because reading backwards cannot tell a brace inside prose from a
+    brace that opened something — and one scan for every position rather than
+    one per block, since the payload runs to a megabyte.
+    """
+    wanted = sorted(positions)
+    if not wanted:
+        return {}
+    best: dict[int, tuple[int, int]] = {}
+    stack: list[int] = []
+    index, in_string, escaped = 0, False, False
+    while index < len(text):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+        elif char == '"':
+            in_string = True
+        elif char == "{":
+            stack.append(index)
+        elif char == "}" and stack:
+            start = stack.pop()
+            for position in wanted:
+                if start <= position <= index and (
+                    position not in best
+                    or (index - start) < (best[position][1] - best[position][0])
+                ):
+                    best[position] = (start, index)
+        index += 1
+    return best
+
+
+#: A figure with its currency beside it, either order, as this seller's prose
+#: writes them: *125-250 EUR per person*, *10EUR per day*, *50 USD*, *€45*.
+#:
+#: The currency token must **touch** the number, because the label is whatever
+#: sits in front of the first amount and a line naming a figure a sentence away
+#: from a currency is prose, not a price. `14% GST applicable to all onboard
+#: payments` states a number and no currency, and stays an unpriced line rather
+#: than becoming 14 of something — the same rule `padi_com` keeps about reading
+#: a whole string or none of it.
+FEE_MONEY = re.compile(
+    r"(?:(?P<sym>[€$£])\s*(?P<symlow>\d[\d.,]*)"
+    r"(?:\s*[-–—]\s*(?P<symhigh>\d[\d.,]*))?"
+    r"|(?P<low>\d[\d.,]*)(?:\s*[-–—]\s*(?P<high>\d[\d.,]*))?\s*(?P<code>EUR|USD|GBP)\b)",
+    re.I,
+)
+
+#: Who pays, which is not how often. Every figure this site publishes is per
+#: person, so the phrase says nothing a total needs — and stripping it is what
+#: lets the unit beside it be read. *165-240 EUR per person per trip* states
+#: both, and a reader that stops at the first `per` reads the payer and calls
+#: the period unstated. The fleet census counted 507 lines under "per person"
+#: for exactly that reason, which is a number about the probe rather than
+#: about the fleet.
+FEE_PAYER = re.compile(r"\bper\s+(?:persons?|pax|divers?|guests?)\b", re.I)
+
+#: The unit, in the seller's own words. Ordered, and the order is not a
+#: preference: no line in the census states two of these.
+FEE_BASES: tuple[tuple[re.Pattern[str], FeeBasis], ...] = tuple(
+    (re.compile(pattern, re.I), basis)
+    for pattern, basis in (
+        (r"\bper\s+nights?\b", FeeBasis.PER_NIGHT),
+        (r"\bper\s+days?\b", FeeBasis.PER_DAY),
+        (r"\bper\s+dives?\b", FeeBasis.PER_DIVE),
+        (r"\bper\s+weeks?\b", FeeBasis.PER_WEEK),
+        (r"\bper\s+(?:trips?|safaris?|cruises?|tours?|itinerar(?:y|ies))\b",
+         FeeBasis.PER_TRIP),
+    )
+)
+
+#: The separator between a label and its money, stripped off the label's tail.
+#: Two spellings across the fleet — *Port fees - 50 USD* and *Fuel Surcharge:
+#: 10EUR* — and the dash has to be **spaced**, or `Check-dive` loses its head.
+FEE_SEPARATOR = re.compile(r"(?:\s+[-–—]|[:.,;])\s*$")
+
+#: The panel's own trip suffix: *Northern Red Sea - Best Wreck Diving
+#: (7 nights) (Hurghada-Hurghada)*. The night count is a fact the panel states
+#: and is kept; the rest is the same trip name the JSON-LD gives.
+TRIP_SUFFIX = re.compile(
+    r"\s*\((?P<nights>\d+)\s*nights?\)\s*(?:\([^)]*\))?\s*$", re.I)
+
+#: The columns, and whether the seller says a diver can decline the charge.
+#: **The seller's own block decides the tier**, which is the rule `fees._tier_for`
+#: was rewritten around: a mandatory tip and a tip you choose the size of are
+#: different charges and only the operator can say which is billed.
+FEE_COLUMNS = {"included": None, "notincluded": True, "extra": False}
+
+
+@dataclass(slots=True)
+class FeeBlock:
+    """One *Price details* panel, and the trip it was found inside.
+
+    `trip` is the enclosing object's own title with the panel's `(7 nights)
+    (A-B)` suffix removed, which is **not** necessarily the name the JSON-LD
+    gives the same week: the page keeps two vocabularies for one boat's trips.
+    Kept as the seller wrote it and joined by the caller, because a key that
+    stops matching fails silently and this project has paid for that once
+    already in `promote.itinerary_key`.
+    """
+
+    trip: str | None = None
+    nights: int | None = None
+    fees: list[ParsedFee] = field(default_factory=list)
+    unnamed: list[str] = field(default_factory=list)
+    """Priced lines whose label this project's vocabulary declined, verbatim.
+
+    Named rather than counted. An unrecognised charge is a word missing from
+    `fees.LABEL_PATTERNS`, and a number cannot say which word — the census that
+    found this panel counted 951 of them and the names are what made *fuel
+    charge*, *route suplement* and *port & permission fees* visible as the
+    fleet's own spellings of charges the table already holds.
+    """
+
+
+def _fee_lines(text: str) -> Iterator[str]:
+    """The lines of one column, as the seller's prose breaks them."""
+    for line in re.split(r"[\r\n]+", text or ""):
+        line = line.strip(" \t-–—•* ")
+        if line:
+            yield line
+
+
+def _read_fee_line(line: str, required: bool | None) -> tuple[ParsedFee | None, str | None]:
+    """One prose line as a parsed charge, or as a name nothing could place.
+
+    Returns the charge and, where a **priced** line could not be named, the
+    line itself. An unpriced line nothing recognises is ordinary — the
+    inclusion column runs to 5,244 lines of *Water*, *Coffee*, *Free WiFi*, and
+    an amenity nobody can classify is not a hole in a fee book. A priced one
+    is a charge going unread, which is a different thing and is reported.
+    """
+    money = FEE_MONEY.search(line)
+    label = (line[: money.start()] if money else line).strip()
+    label = FEE_SEPARATOR.sub("", label).strip()
+    if not label:
+        # A bare amount with nothing in front of it — the census turned up
+        # `$44`, `$43`, `$46` as whole lines. A figure is not a charge.
+        return None, None
+    code = classify_label(label, prose=False)
+    if code is None:
+        return None, line if money else None
+
+    included = required is None
+    tier = tier_for_inclusion(code) if included else _tier_for(code, bool(required))
+    if included or money is None:
+        # An inclusion is an answer and carries no figure; a billed line with
+        # no figure is a charge of unknown size. `to_fee_dicts` tells the two
+        # apart and neither is ever drawn as free.
+        return ParsedFee(code=code, label=label, tier=tier, low=None, high=None,
+                         currency="EUR", basis=FeeBasis.PER_TRIP,
+                         included=included), None
+
+    symbol = money.group("sym")
+    low = _number(money.group("symlow") if symbol else money.group("low"))
+    high = _number(money.group("symhigh") if symbol else money.group("high"))
+    currency = (CURRENCIES[symbol] if symbol
+                else (money.group("code") or "EUR").upper())
+
+    tail = FEE_PAYER.sub(" ", line[money.end():])
+    basis = next((b for pattern, b in FEE_BASES if pattern.search(tail)), None)
+    return ParsedFee(
+        code=code, label=label, tier=tier, low=low,
+        high=high if high is not None else low, currency=currency,
+        basis=basis or FeeBasis.PER_TRIP,
+        # No unit stated is no unit read. `per person` alone says who pays and
+        # not how often, and `per tank` — five lines on this fleet — states a
+        # unit that is real and that this project cannot scale: one fill per
+        # dive is the diving world's ordinary assumption and it is still a
+        # derivation, and deriving a dive count is the arithmetic this dataset
+        # refuses outright, since ten vessels publish one and they state 15 to
+        # 21 for the same seven-night week. Either way the figure is kept and
+        # marked rather than scaled by a number nobody published or thrown
+        # away for want of one. `basis` below is a placeholder that
+        # `FeeItem.span_for_trip` never reaches.
+        unit_unstated=basis is None,
+    ), None
+
+
+def _rank(fee: ParsedFee) -> int:
+    """Which of two readings of one charge the block keeps.
+
+    **A stated amount beats an inclusion, and an inclusion beats a line with no
+    amount** — the rule the fee book already keeps where one code covers two
+    services. The columns are read in the page's own order, so a tie goes to
+    the obligatory line: where the seller states a charge as owed and again as
+    an optional extra, what a diver cannot decline is the truer half.
+    """
+    if fee.has_price:
+        return 2
+    return 1 if fee.included else 0
+
+
+DETAILS_AT = re.compile(r'"details"\s*:\s*(?=\{)')
+
+
+def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
+    """Every *Price details* panel the vessel page streams, and what it could not read.
+
+    The panel is in the payload rather than in the JSON-LD, so it is read by
+    bracket matching: the payload arrives as one enormous line and a value can
+    only be found by matching what opened it — a brace inside a sentence about
+    marine parks must not end an object.
+    """
+    text, dropped = payload_parts(html)
+    warnings: list[str] = []
+    if dropped:
+        # A chunk that would not decode is a piece of the page nobody read,
+        # and the oldest rule here is that such a page must not be mistaken
+        # for one with nothing on it.
+        warnings.append(f"{dropped} streamed chunk(s) did not decode")
+
+    at = [match.end() for match in DETAILS_AT.finditer(text)]
+    owners = enclosing(text, at)
+    blocks: list[FeeBlock] = []
+    for position in at:
+        chunk = balanced(text, position)
+        if chunk is None:
+            warnings.append("a price panel was not closed in the payload")
+            continue
+        try:
+            panel = json.loads(chunk)
+        except json.JSONDecodeError:
+            warnings.append("a price panel did not parse as JSON")
+            continue
+
+        block = FeeBlock()
+        bounds = owners.get(position)
+        if bounds:
+            try:
+                owner = json.loads(text[bounds[0]:bounds[1] + 1])
+            except json.JSONDecodeError:
+                owner = {}
+            title = owner.get("title") if isinstance(owner, dict) else None
+            if isinstance(title, str) and title.strip():
+                suffix = TRIP_SUFFIX.search(title)
+                block.nights = int(suffix.group("nights")) if suffix else None
+                block.trip = TRIP_SUFFIX.sub("", title).strip() or None
+
+        found: dict[FeeCode, ParsedFee] = {}
+        for column in panel.get("columns") or []:
+            if not isinstance(column, dict):
+                continue
+            required = FEE_COLUMNS.get(str(column.get("type")))
+            if required is None and str(column.get("type")) != "included":
+                # A fourth column would be a disclosure nobody is reading.
+                warnings.append(f"unknown price column {column.get('type')!r}")
+                continue
+            for line in _fee_lines(column.get("text", "")):
+                fee, unread = _read_fee_line(line, required)
+                if unread:
+                    block.unnamed.append(unread)
+                if fee is None:
+                    continue
+                kept = found.get(fee.code)
+                if kept is None or _rank(fee) > _rank(kept):
+                    found[fee.code] = fee
+        block.fees = list(found.values())
+        blocks.append(block)
+    return blocks, warnings

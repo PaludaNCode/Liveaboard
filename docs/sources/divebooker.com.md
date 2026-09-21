@@ -276,6 +276,70 @@ a **range** rather than a figure, a **combined charge** naming three fees at
 once, and a separator that is a colon on one boat and a dash on the next with
 no space between the number and its currency.
 
+#### Whose fees these are: the trip's, on 603 of 605
+
+A block sits inside a trip object whose `title` reads *Northern Red Sea - Best
+Wreck Diving (7 nights) (Hurghada-Hurghada)*, and the departures on the same
+page are named *Northern Red Sea, Ras Mohamed, Straits of Tiran* — two
+vocabularies for one boat's trips, and a key that stops matching fails
+silently. Counted over the whole fleet 2026-09-21 by
+`tools/probe_divebooker_fee_join.py`
+([run 35545965933](https://github.com/PaludaNCode/Liveaboard/actions/runs/35545965933)):
+
+| | |
+|---|---|
+| Fee blocks / trips | 605 / 472 |
+| Blocks whose title is a trip name **exactly**, suffix off | **603** |
+| Loosely (case and punctuation folded) | 603 — the fold buys nothing |
+| Hulls whose blocks all agree | 42; **25 differ** |
+
+So the book **keys on the trip**. The tempting fallback — fold the lot onto
+the vessel where its blocks agree — is wrong on 25 of the 67 hulls that have
+blocks, whose trips state different surcharges, so it would publish one week's
+bill on another's row. The two blocks matching nothing stay unattached and are
+named in the run log: guessing which trip they belong to is the failure
+`promote.itinerary_key` already cost this project once.
+
+Measured over the whole fleet rather than over the first eight names, because
+an alphabetical sample of eight came back 36 of 36 and excluded Red Sea
+Aggressor II, the boat whose two names raised the question. A sample that
+leaves out the case that prompted it is not evidence, and 100% is exactly the
+number that gets believed.
+
+#### What the reader does with a line
+
+`divebooker_com._read_fee_line` feeds `fees.ParsedFee` — the same dataclass,
+the same `classify_label`, the same range handling — because a second fee
+vocabulary drifts from the first. Only the *line* shape is this seller's.
+
+* The label is whatever sits in front of the **first amount**, with a trailing
+  separator off. The dash must be **spaced** or `Check-dive` loses its head;
+  the colon need not be.
+* The currency token must **touch** the figure, so *14% GST applicable to all
+  onboard payments* stays an unpriced line rather than becoming 14 of
+  something — `padi_com`'s whole-string rule, in this seller's grammar.
+* A line that is only an amount (`$44`, `$43`, `$46` are whole lines on this
+  fleet) is not a charge.
+* **`per person` is the payer, not the period**, and it comes out before the
+  unit is looked for. The census reported 507 lines under *per person* only
+  because its own pattern matched the payer first and never reached the
+  *per trip* beside it — a number about the probe rather than about the fleet.
+  What is left with no unit gets `unit_unstated`: the figure is kept, the note
+  prints it, and no total claims it.
+* **`per tank` is a unit this project cannot scale.** One fill per dive is the
+  diving world's ordinary assumption and it is still a derivation, and
+  deriving a dive count is the arithmetic this dataset refuses outright. Same
+  answer: keep the figure, claim nothing.
+* **The seller's own column decides the tier** — `notincluded` is mandatory,
+  `extra` is optional, `included` is an inclusion at zero — which is the rule
+  `fees._tier_for` was rewritten around.
+* Where one code appears twice, **a stated amount beats an inclusion and an
+  inclusion beats a line with no amount**, and the columns are read in the
+  page's own order so a tie goes to the obligatory line.
+* A **priced** line nothing can name is carried back verbatim in
+  `unnamed_fees`. Counted is not enough: what an unread charge needs is the
+  word, and a count cannot say which word.
+
 ## The fleet, read whole
 
 Read 2026-09-20

@@ -324,6 +324,16 @@ class ParsedFee:
     that bills at the dock.
     """
 
+    unit_unstated: bool = False
+    """The figure is the seller's and the unit it is charged in is not stated.
+
+    Carried through to :attr:`models.FeeItem.unit_unstated`, which is where the
+    reasoning lives. A third state beside a price and a blank, and the only one
+    that keeps a number no total may claim: `scrape/gear.py` writes it for a
+    bundle quoted with no unit, and `divebooker_com` for a line stating *125-250
+    EUR per person* — who pays, and not how often.
+    """
+
     @property
     def is_range(self) -> bool:
         return self.high is not None and self.high != self.low
@@ -665,8 +675,14 @@ def extras_excerpt(text: str, limit: int = EXCERPT_CHARS) -> dict[str, str]:
     return blocks
 
 
-def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
-    """Render parsed extras into the dataset's fee shape."""
+def to_fee_dicts(fees: list[ParsedFee], provenance: dict | None = None) -> list[dict]:
+    """Render parsed extras into the dataset's fee shape.
+
+    ``provenance`` is omitted where it is ``None``, for a book that states its
+    own once at the head of the file rather than on every line -- the rule
+    `divebooker_com.Departure.as_dict` already keeps about the booking URL. A
+    fee that travels on its own still carries it, which is every caller here.
+    """
     out = []
     for fee in fees:
         entry: dict = {
@@ -674,8 +690,9 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             "tier": fee.tier.value,
             "basis": fee.basis.value,
             "included": fee.included,
-            "provenance": provenance,
         }
+        if provenance is not None:
+            entry["provenance"] = provenance
         if fee.included:
             # Drawn at zero rather than counted, and never "listed with no
             # price": the operator did state the price, and it is nothing.
@@ -683,7 +700,15 @@ def to_fee_dicts(fees: list[ParsedFee], provenance: dict) -> list[dict]:
             entry["note"] = f"{fee.label}: stated as included"
         elif fee.has_price:
             entry["amount"] = {"amount": fee.low, "currency": fee.currency}
-            if fee.is_range:
+            if fee.unit_unstated:
+                # The figure stays and nothing totals it: `span_for_trip`
+                # refuses the line outright. Kept rather than discarded so the
+                # note can print what the seller published and so a unit stated
+                # elsewhere can still be matched to it, which is how the four
+                # unitless gear prices were settled.
+                entry["unit_unstated"] = True
+                entry["note"] = f"{fee.label}: stated with no unit"
+            elif fee.is_range:
                 entry["amount_max"] = {"amount": fee.high, "currency": fee.currency}
                 entry["note"] = f'Operator quotes "{fee.label}" as a range'
             elif fee.label.lower() != FEE_LABELS.get(fee.code, "").lower():

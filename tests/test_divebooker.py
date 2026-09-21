@@ -481,3 +481,111 @@ class TestThePageSaysWhatCurrencyItIsIn(unittest.TestCase):
         rows, warnings = db.departures(self.page())
         self.assertEqual(rows[0].currency, "EUR")
         self.assertEqual(warnings, [])
+
+
+class TestThePriceDetailsPanelIsAFeeBook(unittest.TestCase):
+    """Every line below is verbatim from the fleet census, run 35533600353.
+
+    Four wordings across 792 priced obligatory lines, and each of them is a
+    way this reader could be wrong:
+
+    * the separator is a spaced dash on some hulls and a colon on others;
+    * the currency comes after the figure (`10EUR`) or before it (`€45`);
+    * the amount is a range as often as not — collapsing `125-250` to its low
+      end understates the bill, which is the failure this project exists to
+      correct;
+    * and the unit is stated, or is *`per person`*, which says who pays and
+      not how often.
+    """
+
+    def read(self, line, required=True):
+        fee, unread = db._read_fee_line(line, required)
+        return fee
+
+    def test_the_two_separators_both_yield_a_label(self):
+        dash = self.read("Port fees - 50 USD per person (to be paid on board)")
+        colon = self.read("Fuel Surcharge: 10EUR per day, to be paid on board")
+        self.assertEqual(dash.label, "Port fees")
+        self.assertEqual(colon.label, "Fuel Surcharge")
+        self.assertEqual((dash.low, dash.currency), (50.0, "USD"))
+        self.assertEqual((colon.low, colon.currency), (10.0, "EUR"))
+
+    def test_a_hyphen_inside_a_label_is_not_a_separator(self):
+        """An unspaced dash belongs to the word, so only a spaced one separates.
+
+        Asserted on the rule rather than through a fee, because the fleet's own
+        hyphenated wording — *Check dive*, 14 entries — is one this project's
+        vocabulary declines, and inventing a label to test a separator would
+        make the guard about a charge nobody bills.
+        """
+        self.assertEqual(db.FEE_SEPARATOR.sub("", "Check-dive:"), "Check-dive")
+        self.assertEqual(db.FEE_SEPARATOR.sub("", "Port fees -"), "Port fees")
+        self.assertEqual(db.FEE_SEPARATOR.sub("", "Nitrox"), "Nitrox")
+
+    def test_a_range_keeps_both_ends(self):
+        fee = self.read("Marine Park, Port Fees and Permissions - 125-250 EUR "
+                        "per person (to be paid on board)")
+        self.assertEqual((fee.low, fee.high), (125.0, 250.0))
+        self.assertTrue(fee.is_range)
+
+    def test_per_person_is_a_payer_and_not_a_period(self):
+        """The reason the fleet census reported 507 lines as `per person`.
+
+        `165-240 EUR per person per trip` states both, and a reader that stops
+        at the first `per` reads the payer and calls the period unstated — so
+        the payer phrase comes out before the unit is looked for.
+        """
+        both = self.read("Marine Park fees, harbour fees and fuel surcharge - "
+                         "165-240 EUR per person per trip (to be paid on board)")
+        self.assertIs(both.basis, db.FeeBasis.PER_TRIP)
+        self.assertFalse(both.unit_unstated)
+
+        payer_only = self.read("Port fees - 50 USD per person (to be paid on board)")
+        self.assertTrue(payer_only.unit_unstated)
+        self.assertEqual(payer_only.low, 50.0, "the figure is the seller's and stays")
+
+    def test_a_unit_this_project_cannot_scale_is_not_invented(self):
+        """One fill per dive is ordinary and it is still a derivation."""
+        fee = self.read("Nitrox fill - 8 EUR per tank", required=False)
+        self.assertTrue(fee.unit_unstated)
+        self.assertEqual(fee.low, 8.0)
+
+    def test_the_seller_s_own_column_decides_the_tier(self):
+        obligatory = self.read("Port fees: 25 EUR per trip", required=True)
+        optional = self.read("Land excursions: 25 EUR per trip", required=False)
+        inclusion = self.read("Nitrox", required=None)
+        self.assertIs(obligatory.tier, db.FeeTier.MANDATORY)
+        self.assertIs(optional.tier, db.FeeTier.OPTIONAL)
+        self.assertTrue(inclusion.included)
+        self.assertIsNone(inclusion.low, "an inclusion is an answer, not a figure")
+
+    def test_a_figure_with_no_currency_never_becomes_a_price(self):
+        """`14% GST` must not become 14 of anything — `padi_com`'s rule."""
+        fee, unread = db._read_fee_line(
+            "14% GST applicable to all onboard payments", False)
+        self.assertIsNone(fee)
+        self.assertIsNone(unread, "no money was stated, so nothing went unread")
+
+    def test_a_bare_amount_is_not_a_charge(self):
+        """The census turned up `$44`, `$43` and `$46` as whole lines."""
+        self.assertIsNone(self.read("$44", required=False))
+
+    def test_a_priced_line_nothing_can_name_is_reported(self):
+        """Counted is not enough: what it needs is the word, not the number."""
+        fee, unread = db._read_fee_line("Bonex scooter rental - 90 EUR per trip",
+                                        False)
+        self.assertIsNone(fee)
+        self.assertEqual(unread, "Bonex scooter rental - 90 EUR per trip")
+
+    def test_an_unpriced_amenity_is_not_a_hole_in_the_book(self):
+        """5,244 inclusion lines, and Water and Free WiFi are among them."""
+        fee, unread = db._read_fee_line("Free WiFi", None)
+        self.assertIsNone(fee)
+        self.assertIsNone(unread)
+
+    def test_a_stated_amount_beats_an_inclusion_which_beats_a_blank(self):
+        priced = self.read("Nitrox: 50 EUR per trip", required=True)
+        included = self.read("Nitrox", required=None)
+        blank = self.read("Nitrox", required=False)
+        self.assertEqual(
+            [db._rank(f) for f in (blank, included, priced)], [0, 1, 2])

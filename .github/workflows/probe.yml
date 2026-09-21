@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,fixture,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -374,6 +374,20 @@ jobs:
         run: |
           python3 tools/probe_divebooker_fee_join.py \
             --vessels "${{ inputs.divebooker_vessels || '8' }}"
+
+      # A fee reader guarded by bytes somebody imagined is guarded by nothing,
+      # and this sandbox cannot reach the host — so the fixture travels back
+      # through the log, the way the JSON-LD one did.
+      - name: Carry a price panel back as a fixture
+        if: contains(inputs.divebooker_ask, 'fixture')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/emit_divebooker_fixture.py \
+            --vessels "${{ inputs.divebooker_vessel || 'alsuraya,amelie' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
