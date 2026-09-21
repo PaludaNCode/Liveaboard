@@ -325,6 +325,29 @@ The whole-fleet join probe read `name` at `start()` and got 603 of 605, which
 is why the keying looked settled while the parser was attaching nothing.
 `tests/fixtures/divebooker-price-details.json` is what stops a third.
 
+#### Read end to end against the other seller's own panel
+
+Dry-run 2026-09-21: the two verbatim panels from the fixture injected into the
+committed book, promoted, built, and the page read in a browser. Amelie's
+sailing of 2027-05-01 came out
+
+| | Advertised | Mandatory | Total |
+|---|---|---|---|
+| liveaboard.com | €435.43 | fuel 40, park 60, port 25 | €688 |
+| divebooker.com | €435.43 | fuel 40, park 60, port 25 | €688 |
+
+**Identical to the cent, through two parsers that share nothing.** Ours reads a
+`Required Extras:` sentence off a browser-rendered vessel page; this one reads
+`Fuel Surcharge: 10EUR per day, to be paid on board` out of a streamed JSON
+panel, resolves the period itself and scales it. They agree on all three
+charges and on the berth. `best()` collapses the span, the Seller column names
+all three sellers, and the fee panel shows both tables — which is what a row
+looks like when three sites are telling the truth about one boat.
+
+Red Sea Aggressor II, in the same run, ships its berth price and no third
+total: its three obligatory lines state a payer and no period, so the bill
+names every charge and scales none. Both outcomes are what they should be.
+
 #### What the reader does with a line
 
 `divebooker_com._read_fee_line` feeds `fees.ParsedFee` — the same dataclass,
