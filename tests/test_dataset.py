@@ -2747,7 +2747,16 @@ class TestNeitherSellerIsTheHouse(unittest.TestCase):
         self.app = self.APP.read_text(encoding="utf-8")
 
     def test_a_seller_link_names_the_seller_it_opens(self) -> None:
-        self.assertIn('(d.padi_only ? "PADI" : "liveaboard") + " ↗</a>"', self.app,
+        """The row's own booking url belongs to whoever founded the row.
+
+        Three sellers can found one now — liveaboard.com by default, PADI on a
+        `padi_only` row, divebooker on a `divebooker_only` one — and the link
+        has to name whichever it is. Asserted on the branch rather than on one
+        spelling of it: a fourth seller arriving without a name here would be
+        the generic label coming back by omission.
+        """
+        self.assertIn('d.padi_only ? "PADI" : d.divebooker_only ? "divebooker"',
+                      self.app,
                       "a link label is generic again, so one seller is the "
                       "unmarked default and a visitor cannot tell where it goes")
         column = self.app.split('{ k: "source", t: "Seller",', 1)[1].split("} }", 1)[0]

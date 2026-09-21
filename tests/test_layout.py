@@ -2497,8 +2497,14 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             total: money(row.querySelector('td.cost').textContent),
             perDay: money(cell.textContent),
             said: cell.textContent.replace(/\\s+/g, " ").trim(),
-            blank: [...document.querySelectorAll('#body tr.row td.perday')]
-                     .filter(c => !/€/.test(c.textContent)).length,
+            /* A per-day figure with no total behind it, or a total with no
+               per-day figure beside it. Either is the cell going quiet on its
+               own; a row that has neither is a row whose bill nobody
+               published, which is a state the page is built to print. */
+            blank: [...document.querySelectorAll('#body tr.row')]
+                     .filter(r => /€/.test(r.querySelector('td.cost').textContent)
+                               !== /€/.test(r.querySelector('td.perday').textContent))
+                     .length,
           };
         }""")
         self.assertIn("perday", seen["heads"], "no Per day column in the header")
@@ -2514,8 +2520,10 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertIn("÷ %d" % seen["nights"], seen["said"],
                       "the cell does not say what it divided by: %r" % seen["said"])
         self.assertEqual(0, seen["blank"],
-                         "%d rows print no per-day figure, and every row "
-                         "states its length" % seen["blank"])
+                         "%d rows disagree with themselves about whether this "
+                         "sailing has a total: a per-day figure is the Total "
+                         "over the nights, so the two are present together or "
+                         "not at all" % seen["blank"])
 
         # And the compact order, which is a second list a column can be
         # missing from -- the width a laptop never opens.

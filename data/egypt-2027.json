@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-20",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1182 sailings and the entry bar on 186 of 432 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices scraped from liveaboard.com. Fee disclosures captured for 435 of 439 itineraries; the rest show true cost as unknown rather than as the advertised price. PADI Travel is read as a second source for its own berth price on 677 of 1189 sailings and the entry bar on 186 of 439 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-18",
@@ -17997,6 +17997,210 @@
       "padi_fees_complete": true
     },
     {
+      "id": "blue--north-tiran",
+      "name": "North & Tiran",
+      "title": "North & Tiran",
+      "operator_id": "blue-planet-liveaboards",
+      "boat_id": "blue",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "tiran"
+      ],
+      "region": null,
+      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 290.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 320.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 3.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkeling Guide: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
+        }
+      ]
+    },
+    {
       "id": "blue--north-tiran-hurghada-hurghada",
       "name": "North & Tiran (Hurghada - Hurghada)",
       "title": "North & Tiran",
@@ -18533,6 +18737,211 @@
         "notes": "Advanced Open Water - 50 minimum logged dives required."
       },
       "dives_read": true
+    },
+    {
+      "id": "blue--st-johns-fury-shoal",
+      "name": "St. Johns & Fury Shoal",
+      "title": "St. John's & Fury Shoals",
+      "operator_id": "blue-planet-liveaboards",
+      "boat_id": "blue",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "st johns",
+        "fury shoals"
+      ],
+      "region": null,
+      "summary": "The MY Blue is a modern liveaboard offering luxury Red Sea dive trips. Catering for 24 guests, all cabins are en-suite, and sea-view rooms are available.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/blue?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 290.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 320.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Port and Fuel Fees\" as a range"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Gratuities: listed with no price"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 3.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 20.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Alcoholic Beverages\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 190.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox Course\" as a range"
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 250.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkeling Guide: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/blue?m=5/2027"
+          },
+          "amount": {
+            "amount": 135.0,
+            "currency": "EUR"
+          },
+          "basis": "per_week",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
+        }
+      ]
     },
     {
       "id": "blue--st-johns-port-ghalib-port-ghalib",
@@ -69891,6 +70300,26 @@
       "padi_fees_complete": true
     },
     {
+      "id": "heaven-saphir--brothers-daedalus-elphinstone",
+      "name": "Brothers - Daedalus - Elphinstone",
+      "title": "Brothers, Daedalus & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "heaven-saphir",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
       "id": "heaven-saphir--brothers-daedalus-elphinstone-hurghada-hurghada",
       "name": "Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)",
       "title": "Brothers, Daedalus & Elphinstone",
@@ -70788,9 +71217,45 @@
       "padi_sourced_fees": true
     },
     {
+      "id": "heaven-saphir--classical-north",
+      "name": "Classical North",
+      "title": "Classical North",
+      "operator_id": "unknown-operator",
+      "boat_id": "heaven-saphir",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [],
+      "region": "northern route",
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "heaven-saphir--daedalus-rocky-island-elphinstone",
+      "name": "Daedalus - Rocky Island - Elphinstone",
+      "title": "Daedalus, Rocky Island & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "heaven-saphir",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "rocky island"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
       "id": "heaven-saphir--daedalus-rocky-island-elphinstone-port-ghalib-port-ghalib",
       "name": "Daedalus - Rocky island - Elphinstone (Port Ghalib - Port Ghalib)",
-      "title": "Daedalus, Rocky island & Elphinstone",
+      "title": "Daedalus, Rocky Island & Elphinstone",
       "operator_id": "unknown-operator",
       "boat_id": "heaven-saphir",
       "nights": 7,
@@ -72880,6 +73345,216 @@
       "padi_sourced_fees": true
     },
     {
+      "id": "iceberg--full-charter-request",
+      "name": "Full Charter Request",
+      "title": "Full Charter Request",
+      "operator_id": "deep-breath-diving-safari",
+      "boat_id": "iceberg",
+      "nights": 4,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [],
+      "region": null,
+      "summary": "The Iceberg is a liveaboard taking 8 guests on diving safaris in Egypt&rsquo;s Red Sea. Itineraries range from a single-day trip to week-long trips exploring the northern Red Sea&rsquo;s best dive sites.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/iceberg?m=8/2027",
+      "fees": [
+        {
+          "code": "combined_fees",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 140.0,
+            "currency": "EUR"
+          },
+          "note": "Port and Fuel Fees"
+        },
+        {
+          "code": "gratuities",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "note": "Gratuities"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "extra_dives",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 20.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 55.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 145.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 260.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Scuba Diving Courses\" as a range"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 5.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "naturalist_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 35.0,
+            "currency": "EUR"
+          },
+          "note": "Snorkeling Guide"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": null,
+          "note": "Airport Transfer: stated as included"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": null,
+          "note": "Nitrox: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-20",
+            "url": "https://www.liveaboard.com/diving/egypt/iceberg?m=5/2027"
+          },
+          "amount": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, SMB, Wetsuit"
+        }
+      ]
+    },
+    {
       "id": "iceberg--hurghada-north-hurghada-hurghada",
       "name": "Hurghada North (Hurghada - Hurghada)",
       "title": "Hurghada North",
@@ -74819,6 +75494,27 @@
       ],
       "padi_fees_complete": false,
       "padi_sourced_fees": true
+    },
+    {
+      "id": "independence-ii--rocky-island-elba-reef-st-john-s-elphinstone",
+      "name": "Rocky Island - Elba Reef - St. John’s - Elphinstone",
+      "title": "Rocky Island, Elba Reef, St. John's & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-ii",
+      "nights": 12,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "elphinstone",
+        "rocky island",
+        "st johns",
+        "elba reef"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
     },
     {
       "id": "independence-ii--strait-of-tiran-brothers-safaga-hurghada-hurghada",
@@ -134360,6 +135056,25 @@
       ]
     },
     {
+      "id": "blue-2027-07-01-divebooker",
+      "itinerary_id": "blue--north-tiran",
+      "start": "2027-07-01",
+      "end": "2027-07-08",
+      "price": {
+        "amount": 1481.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/blue-haz234",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/blue-haz234"
+      },
+      "divebooker_only": true
+    },
+    {
       "id": "blue-2027-06-24-0",
       "itinerary_id": "blue--north-tiran-hurghada-hurghada",
       "start": "2027-06-24",
@@ -134607,6 +135322,25 @@
           22
         ]
       ]
+    },
+    {
+      "id": "blue-2027-07-29-divebooker",
+      "itinerary_id": "blue--st-johns-fury-shoal",
+      "start": "2027-07-29",
+      "end": "2027-08-05",
+      "price": {
+        "amount": 1900.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/blue-haz234",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/blue-haz234"
+      },
+      "divebooker_only": true
     },
     {
       "id": "blue-2027-06-03-0",
@@ -160610,6 +161344,25 @@
       }
     },
     {
+      "id": "heaven-saphir-2027-07-10-divebooker",
+      "itinerary_id": "heaven-saphir--brothers-daedalus-elphinstone",
+      "start": "2027-07-10",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 1620.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/heaven-saphir-haz260",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/heaven-saphir-haz260"
+      },
+      "divebooker_only": true
+    },
+    {
       "id": "heaven-saphir-2027-08-26-padi",
       "itinerary_id": "heaven-saphir--brothers-daedalus-elphinstone-hurghada-hurghada",
       "start": "2027-08-26",
@@ -160719,6 +161472,44 @@
           0
         ]
       ]
+    },
+    {
+      "id": "heaven-saphir-2027-07-12-divebooker",
+      "itinerary_id": "heaven-saphir--classical-north",
+      "start": "2027-07-12",
+      "end": "2027-07-19",
+      "price": {
+        "amount": 1500.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/heaven-saphir-haz260",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/heaven-saphir-haz260"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "heaven-saphir-2027-05-07-divebooker",
+      "itinerary_id": "heaven-saphir--daedalus-rocky-island-elphinstone",
+      "start": "2027-05-07",
+      "end": "2027-05-14",
+      "price": {
+        "amount": 1600.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/heaven-saphir-haz260",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/heaven-saphir-haz260"
+      },
+      "divebooker_only": true
     },
     {
       "id": "heaven-saphir-2027-06-03-padi",
@@ -161227,6 +162018,25 @@
           18
         ]
       ]
+    },
+    {
+      "id": "iceberg-2027-08-09-divebooker",
+      "itinerary_id": "iceberg--full-charter-request",
+      "start": "2027-08-09",
+      "end": "2027-08-13",
+      "price": {
+        "amount": 671.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/iceberg-haz481",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/iceberg-haz481"
+      },
+      "divebooker_only": true
     },
     {
       "id": "iceberg-2027-05-02-0",
@@ -163130,6 +163940,25 @@
           21
         ]
       ]
+    },
+    {
+      "id": "independence-ii-2027-05-29-divebooker",
+      "itinerary_id": "independence-ii--rocky-island-elba-reef-st-john-s-elphinstone",
+      "start": "2027-05-29",
+      "end": "2027-06-10",
+      "price": {
+        "amount": 2249.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-ii-haz210",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-ii-haz210"
+      },
+      "divebooker_only": true
     },
     {
       "id": "independence-ii-2027-07-25-padi",
@@ -195390,9 +196219,9 @@
     "vessels": 92,
     "departures": 888,
     "in_season": 888,
-    "matched": 793,
+    "matched": 800,
     "on_unmapped_vessels": 85,
-    "unmatched": 10,
+    "unmatched": 3,
     "unmapped_vessels": [
       "aldebaran",
       "aml-hayaty",
@@ -195429,7 +196258,7 @@
       "whirlwind"
     ],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 793 match one this dataset already carries on (boat, date), and 85 sit on hull(s) the alias map does not know, so nothing can be said about them, and 10 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 800 match one this dataset already carries on (boat, date), and 85 sit on hull(s) the alias map does not know, so nothing can be said about them, and 3 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
   },
   "cabin_names": [
     "Lower Deck Twin Cabin",
@@ -196180,7 +197009,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-05-02",
           "last": "2027-05-02",
           "sellers": [
@@ -196195,7 +197024,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-05-09",
           "last": "2027-05-09",
           "sellers": [
@@ -196210,7 +197039,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-05-16",
           "last": "2027-05-16",
           "sellers": [
@@ -196225,7 +197054,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-05-23",
           "last": "2027-05-23",
           "sellers": [
@@ -196240,7 +197069,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-05-30",
           "last": "2027-05-30",
           "sellers": [
@@ -196255,7 +197084,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-06-06",
           "last": "2027-06-06",
           "sellers": [
@@ -196270,7 +197099,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-06-13",
           "last": "2027-06-13",
           "sellers": [
@@ -196285,7 +197114,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-06-20",
           "last": "2027-06-20",
           "sellers": [
@@ -196300,7 +197129,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-06-27",
           "last": "2027-06-27",
           "sellers": [
@@ -196315,7 +197144,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-07-04",
           "last": "2027-07-04",
           "sellers": [
@@ -196330,7 +197159,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-07-11",
           "last": "2027-07-11",
           "sellers": [
@@ -196345,7 +197174,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-07-18",
           "last": "2027-07-18",
           "sellers": [
@@ -196360,7 +197189,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-07-25",
           "last": "2027-07-25",
           "sellers": [
@@ -196375,7 +197204,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 1,
-          "of": 31,
+          "of": 32,
           "first": "2027-08-01",
           "last": "2027-08-01",
           "sellers": [
@@ -196390,7 +197219,7 @@
           "boat": "iceberg",
           "boat_name": "Iceberg",
           "sailings": 3,
-          "of": 31,
+          "of": 32,
           "first": "2027-08-15",
           "last": "2027-08-29",
           "sellers": [
@@ -196572,6 +197401,9 @@
       "compared": 983,
       "not_compared": 19,
       "moves": []
+    },
+    "coverage": {
+      "unread": 7
     }
   },
   "entry_bar": {

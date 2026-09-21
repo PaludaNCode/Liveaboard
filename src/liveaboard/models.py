@@ -564,6 +564,18 @@ class Departure:
     nothing, and three of the five PADI-only discounts are exactly that.
     """
 
+    divebooker_only: bool = False
+    """True where divebooker.com is the only seller listing this sailing.
+
+    The same fact as :attr:`padi_only` about a different seller, and recorded
+    for the same reason: seven sailings on boats this site already carries,
+    which the other two do not list. Not a quality of the trip -- a fact about
+    who was asked.
+
+    Such a row's :attr:`price` and :attr:`price_provenance` are divebooker's,
+    and its :attr:`divebooker_price` is always ``None``.
+    """
+
     padi_only: bool = False
     """True where PADI Travel is the only seller listing this sailing.
 
@@ -622,6 +634,7 @@ class Departure:
                 Provenance.from_dict(payload["divebooker_provenance"])
                 if payload.get("divebooker_provenance") else None),
             padi_only=bool(payload.get("padi_only")),
+            divebooker_only=bool(payload.get("divebooker_only")),
             berths=list(payload.get("berths") or []),
             sale=dict(payload.get("sale") or {}),
         )

@@ -243,6 +243,12 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if departure.padi_only:
             entry["padi_only"] = True
 
+        # And the same fact about the third seller, on the seven sailings only
+        # it lists. Written only where true: a key written per departure is a
+        # key written 1,189 times.
+        if departure.divebooker_only:
+            entry["divebooker_only"] = True
+
         # The cabin ladder, one block per seller, exactly as promote wrote it.
         # Passed through rather than reshaped: it is already normalised and
         # converted, and a second shaping here would be a second place for the

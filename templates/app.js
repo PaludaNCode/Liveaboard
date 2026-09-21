@@ -942,12 +942,15 @@
 
   function sellersOf(dep) {
     var who = [];
-    /* `padi_only` is the one case where this site has no liveaboard.com price
-       at all: the row exists because PADI sold it. Everything else has one,
-       because every other row was built from a liveaboard.com sailing. */
-    if (!dep.padi_only) who.push("liveaboard");
+    /* `padi_only` and `divebooker_only` are the two cases where this site has
+       no liveaboard.com price at all: the row exists because that seller sold
+       the date. Everything else has one, because every other row was built
+       from a liveaboard.com sailing. And a row founded by a seller carries no
+       figure in that seller's own field -- its fare is the row's own price --
+       so the flag is what says it sells it. */
+    if (!dep.padi_only && !dep.divebooker_only) who.push("liveaboard");
     if (dep.padi != null || dep.padi_only) who.push("padi");
-    if (dep.divebooker != null) who.push("divebooker");
+    if (dep.divebooker != null || dep.divebooker_only) who.push("divebooker");
     return who;
   }
 
@@ -1623,7 +1626,8 @@
              points at liveaboard.com. Both cases are one seller reached from
              this column and both say which. */
           links.push('<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
-            (d.padi_only ? "PADI" : "liveaboard") + " ↗</a>");
+            (d.padi_only ? "PADI" : d.divebooker_only ? "divebooker"
+                                                      : "liveaboard") + " ↗</a>");
         }
         if (padi) {
           links.push('<a href="' + esc(padi) + '" target="_blank" rel="noopener">' +

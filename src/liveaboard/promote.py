@@ -1936,6 +1936,91 @@ def _padi_only_departures(
     return made, unparsed
 
 
+def _divebooker_only_departures(
+    book: dict[str, dict[str, Any]],
+    known: set[tuple[str, str]],
+    named: dict[str, str],
+    *,
+    season: tuple[date, date] | None,
+    retrieved: str,
+    pages: dict[str, str],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """The sailings the third seller lists on dates the other two do not.
+
+    The same rule as `_padi_only_departures` and for the same reason it was
+    written: **"one row per sailing" must not quietly mean "one row per sailing
+    the sellers we happened to read first list"**. A trip nobody looked at is
+    not a trip that does not exist, and that applies to a third seller exactly
+    as it applies to a page that failed to load.
+
+    Shaped as candidate departures so they join `grouped` and go through the
+    rest of promotion unchanged -- same itinerary build, same vessel fee book,
+    same title tidying. A second code path assembling its own rows would be a
+    second set of rules for what a row means.
+
+    Four things make a sailing eligible, each able to fail on its own: the hull
+    maps to a boat this site carries, the date is inside the published season,
+    `(boat, start)` is not already a row, and the seller states a fare in a
+    currency. **The fare is the gate** -- the owner's call, taken when the
+    fares were still withheld: a row created from a sailing with no price is a
+    row with nothing in the column this site exists to fill.
+
+    Its own trip name is what the itinerary is named, so a sailing that states
+    none is reported rather than filled in: a row under "Unnamed itinerary"
+    would be a trip whose identity this code invented, and identity is what the
+    id is built from.
+
+    `named` folds a foreign trip name onto one this site already uses for that
+    boat, through `padi_key` -- which is named for the source it was written
+    for and is a general "look a foreign record up" key, deliberately kept
+    apart from `itinerary_key` so loosening it cannot merge two of our own. A
+    hit means the new sailing joins that itinerary rather than founding one;
+    two itineraries that are one trip would split its dates, its fees and its
+    dive count in two, and would do it silently.
+
+    These rows carry no `divebooker_price`: a seller's figure repeated into its
+    own field is not two sellers agreeing, and the Seller column would name it
+    twice on a sailing only it offers.
+    """
+    made: list[dict[str, Any]] = []
+    skipped: list[str] = []
+    for key, sailing in sorted(book.items()):
+        slug, _, start = key.partition("::")
+        if not slug or not start or not sailing.get("end"):
+            continue
+        if (slug, start) in known:
+            continue
+        if season and not (season[0] <= date.fromisoformat(start) <= season[1]):
+            continue
+        if not sailing.get("price") or not sailing.get("currency"):
+            continue
+        trip = (sailing.get("trip") or "").strip()
+        if not trip:
+            skipped.append(f"{key}: divebooker states no trip name")
+            continue
+        url = pages.get(slug, "")
+        made.append({
+            "id": f"{slug}-{start}-divebooker",
+            "boat_slug": slug,
+            "start": start,
+            "end": sailing["end"],
+            "name": named.get(padi_key(slug, trip), trip),
+            "price": {"amount": sailing["price"], "currency": sailing["currency"]},
+            "booking_url": url,
+            # Already a schema.org token on this source, kept as its own word
+            # so nothing downstream can mistake it for a count.
+            "availability": sailing.get("availability"),
+            "divebooker_only": True,
+            "provenance": {
+                "kind": SourceKind.SCRAPED.value,
+                "source_id": "divebooker.com",
+                "retrieved": retrieved,
+                "url": url,
+            },
+        })
+    return made, skipped
+
+
 def _with_units_resolved(
     ours: list[dict[str, Any]], theirs: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
@@ -2494,6 +2579,36 @@ def promote(
             {**departure, "nights": nights, "promotion": promotion}
         )
 
+    # And the third seller's, after the second's, on the same rule and with
+    # `known` rebuilt so a date PADI has already founded a row on is not
+    # founded again. Order is not a preference between sellers: the rows are
+    # added one source at a time and each may only stand where nothing does,
+    # so whichever runs second is the one that has to ask.
+    known = {
+        (d["boat_slug"], d["start"])
+        for group in grouped.values() for d in group if d.get("boat_slug")
+    }
+    by_key = defaultdict(set)
+    for slug, name in grouped:
+        by_key[padi_key(slug, name)].add(name)
+    divebooker_only, unnamed = _divebooker_only_departures(
+        divebooker_book, known,
+        {key: next(iter(names)) for key, names in by_key.items() if len(names) == 1},
+        season=season,
+        retrieved=divebooker_read,
+        pages=divebooker_page,
+    )
+    skipped.extend(unnamed)
+    for departure in divebooker_only:
+        nights = _nights(departure["start"], departure["end"])
+        if nights is None:
+            skipped.append(f"{departure['id']}: implausible dates")
+            continue
+        name, promotion, _ = _split_title(departure["name"])
+        grouped[(departure["boat_slug"], name or departure["name"])].append(
+            {**departure, "nights": nights, "promotion": promotion}
+        )
+
     # Who runs each boat, from the organizer its own departures name.
     #
     # Resolved per vessel rather than per departure because that is how the
@@ -3020,8 +3135,17 @@ def promote(
             # **Never on a row this seller is the only source of**, the rule
             # `padi_price` already keeps: a figure repeated into a second
             # seller's field prints as two sellers agreeing about a sailing one
-            # of them does not offer. No such row exists yet.
-            third = divebooker_book.get(f"{slug}::{item['start']}")
+            # of them does not offer -- and on such a row this seller's fare is
+            # already the row's own price.
+            # Which sellers list this sailing at all, where the answer is
+            # "divebooker, and only divebooker". Written only where true, like
+            # `padi_only`: a key written per departure is a key written 1,189
+            # times and this is the answer for seven of them.
+            if item.get("divebooker_only"):
+                entry["divebooker_only"] = True
+
+            third = (None if item.get("divebooker_only")
+                     else divebooker_book.get(f"{slug}::{item['start']}"))
             if third and third.get("price") and third.get("currency"):
                 entry["divebooker_price"] = {
                     "amount": third["price"],
