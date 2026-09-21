@@ -325,6 +325,26 @@ The whole-fleet join probe read `name` at `start()` and got 603 of 605, which
 is why the keying looked settled while the parser was attaching nothing.
 `tests/fixtures/divebooker-price-details.json` is what stops a third.
 
+#### What else that object states, for nothing
+
+The trip holding the panel also holds `nights`, `numberDives`,
+`requirements.expirience` / `.sertification`, `divesites`, `departurePort` and
+`arrivalPort` — every fact this site takes from the other two sellers, in the
+object the fee panel is already found in. All of them are read, and every one
+is the **last** answer any chain takes: it is a seller's account of what the
+operator publishes, and it may not outrank the operator's own.
+
+`departurePort` and `arrivalPort` are `{"name": …, "url": …}` and are kept as
+**two fields**, never joined. PADI's `ports` was one joined string and could
+not be split back — two of that source's eight harbour names contain the
+separator — so nothing ever read it. The `url` beside each name is this site's
+own port page and is dropped: the built page ships nothing external.
+
+They matter most where nothing else speaks. A row founded by this seller has
+no liveaboard.com trip title to parse a harbour out of and no PADI trip to
+ask, so all 69 of them read *Unknown* at both ends until these were read —
+on a page whose *Departs from* bank is what a reader filters the fleet with.
+
 #### Read end to end against the other seller's own panel
 
 Dry-run 2026-09-21: the two verbatim panels from the fixture injected into the

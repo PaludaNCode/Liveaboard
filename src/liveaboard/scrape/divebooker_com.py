@@ -627,6 +627,8 @@ def vessel(html: str, path: str) -> VesselBook:
             ("requirements", block.requirements),
             ("certification", block.certification),
             ("sites", block.sites or None),
+            ("port_from", block.port_from),
+            ("port_to", block.port_to),
         ) if v}
         if facts:
             book.trips[block.trip] = facts
@@ -855,6 +857,20 @@ def _stated_count(value: Any) -> int | None:
     return int(found.group(1)) if found else None
 
 
+def _stated_name(node: Any) -> str | None:
+    """The harbour inside `{"name": …, "url": …}`, or nothing.
+
+    The `url` beside it is this site's own port page and is dropped: a link is
+    not a fact about the trip, and `ALLOWED_EXTERNAL` is empty for the reason
+    the page ships nothing external at all.
+    """
+    if isinstance(node, dict):
+        name = node.get("name")
+        if isinstance(name, str) and name.strip():
+            return name.strip()
+    return None
+
+
 def _stated_text(node: Any) -> str | None:
     """The sentence inside `{"title": …, "text": …}`, or nothing."""
     if isinstance(node, dict):
@@ -918,6 +934,22 @@ class FeeBlock:
     """
     sites: list[str] = field(default_factory=list)
     """The reefs this trip names, which is the site filter's raw material."""
+
+    port_from: str | None = None
+    port_to: str | None = None
+    """The two harbours, as two fields, because the source states them as two.
+
+    `departurePort.name` and `arrivalPort.name`. **A joined string is not a
+    record** — PADI's `ports` was one and could not be split back, because two
+    of its eight harbour names contain the separator — so nothing here ever
+    joins them, not even for a key.
+
+    It is the same claim PADI makes in `port_from`/`port_to` and the same one
+    liveaboard.com leaves to be parsed out of a trip title, and it is the only
+    statement of it there is for the 33 hulls neither of the others lists: a
+    row this seller founded has no title to parse and no second source to ask,
+    so without these every one of them reads *Unknown*.
+    """
 
     unnamed: list[str] = field(default_factory=list)
     """Priced lines whose label this project's vocabulary declined, verbatim.
@@ -1085,6 +1117,8 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 if isinstance(site, dict) and isinstance(site.get("name"), str)
                 and site["name"].strip()
             ]
+            block.port_from = _stated_name(owner.get("departurePort"))
+            block.port_to = _stated_name(owner.get("arrivalPort"))
 
         found: dict[FeeCode, ParsedFee] = {}
         unreadable = False

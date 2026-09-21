@@ -2976,6 +2976,24 @@ def promote(
         ):
             port_from, port_to = stated_from, stated_to
 
+        # And the third seller states them the same way, in two fields, which
+        # is the only statement of a harbour the 33 hulls it alone lists have:
+        # a row this seller founded has no liveaboard.com title to parse and
+        # no PADI trip to ask, so all 69 of them read *Unknown* until this.
+        #
+        # Asked last and under the same two conditions, which is where this
+        # source sits in every chain on this page -- it may fill a silence and
+        # it may not outrank either of the others. Where it does speak over a
+        # parsed title, the title named no harbour this code could read, which
+        # is a hole rather than a disagreement.
+        said_from = _port(divebooker_trip.get("port_from"))
+        said_to = _port(divebooker_trip.get("port_to"))
+        if said_from != "Unknown" and said_to != "Unknown" and (
+            all(d.get("divebooker_only") for d in group)
+            or "Unknown" in (port_from, port_to)
+        ):
+            port_from, port_to = said_from, said_to
+
         # The second seller's own required extras, beside ours and never mixed
         # into them. Written only where PADI states at least one charge or
         # states a complete bill of none, so a trip PADI has not been read for

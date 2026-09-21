@@ -18,8 +18,10 @@ from __future__ import annotations
 
 import json
 import unittest
+from datetime import date
 from pathlib import Path
 
+from liveaboard.promote import _port
 from liveaboard.scrape import divebooker_com as db
 
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "divebooker-bella-2.jsonld.json"
@@ -757,6 +759,20 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         self.assertIsNone(self.blocks[0].dives)
         self.assertIsNone(self.blocks[0].requirements)
 
+    def test_a_trip_states_its_two_harbours_as_two_fields(self):
+        """`departurePort` and `arrivalPort`, kept apart because they arrive apart.
+
+        **A joined string is not a record.** PADI states the same pair and this
+        project once stored it joined; two of that source's eight harbour
+        names contain the separator, so it could never be split back and
+        nothing read it. Two fields in, two fields out.
+        """
+        aml = self.blocks[2]
+        self.assertEqual((aml.port_from, aml.port_to), ("Hurghada", "Hurghada"))
+        # And nothing is invented for a trip that stated neither.
+        self.assertIsNone(self.blocks[0].port_from)
+        self.assertIsNone(self.blocks[0].port_to)
+
     def test_a_count_is_a_stated_figure_or_nothing(self):
         self.assertEqual(db._stated_count("9 dives"), 9)
         self.assertEqual(db._stated_count("21 dives"), 21)
@@ -1022,6 +1038,76 @@ class TestTheThirdBillAddsUpOrShowsNothing(unittest.TestCase):
         self.assertIsNone(
             divebooker_base_line(replace(departure, divebooker_price=None),
                                  self.fx()))
+
+
+class TestARowThisSellerFoundedStatesItsHarbours(unittest.TestCase):
+    """The 33 hulls only this seller lists, end to end through `promote`.
+
+    Such a row has no liveaboard.com title to parse a port pair out of and no
+    PADI trip to ask, so every one of the 69 it founded read **Unknown** at
+    both ends — on a page whose *Departs from* bank is what a reader filters
+    the fleet with. The source states them, in two fields, in the object its
+    fee panel sits in.
+
+    Driven through `promote` rather than asserted on the expression, because
+    what was wrong was not an ordering: the fields were being read by nothing
+    at all, and a chain test passes over a silence.
+    """
+
+    SEASON = (date(2027, 5, 1), date(2027, 8, 31))
+    ALIASES = {"aliases": {"aml-hayaty-haz901": "aml-hayaty"}}
+
+    def payload(self, facts):
+        from liveaboard.promote import promote
+        book = {
+            "collected": "2026-09-21",
+            "departures": {
+                "aml-hayaty-haz901::2027-05-01": {
+                    "boat": "aml-hayaty-haz901",
+                    "start": "2027-05-01",
+                    "end": "2027-05-04",
+                    "trip": "Mini Safari: Wrecks & Reefs",
+                    "price": 640.0,
+                    "currency": "EUR",
+                },
+            },
+            "vessels": {"aml-hayaty-haz901": {
+                "slug": "aml-hayaty-haz901",
+                "name": "Aml Hayaty",
+                "trips": {"Mini Safari: Wrecks & Reefs": facts},
+            }},
+        }
+        return promote(
+            {"scraped_at": "2026-09-21", "itineraries": [], "departures": []},
+            season=self.SEASON, divebooker=book,
+            divebooker_aliases=self.ALIASES)
+
+    def itinerary(self, facts):
+        payload = self.payload(facts)
+        self.assertEqual(len(payload["itineraries"]), 1,
+                         "the sailing this seller alone lists founded no row")
+        return payload["itineraries"][0]
+
+    def test_both_harbours_reach_the_row(self):
+        found = self.itinerary({"port_from": "Hurghada", "port_to": "Marsa Alam"})
+        self.assertEqual(found["port_from"], "Hurghada")
+        self.assertEqual(found["port_to"], "Marsa Alam")
+
+    def test_a_harbour_is_folded_the_way_every_other_harbour_is(self):
+        """Through `PORT_ALIASES`, or the bank grows a chip for one spelling."""
+        found = self.itinerary({"port_from": "Port Ghalib", "port_to": "Hurghada"})
+        self.assertEqual(found["port_from"], _port("Port Ghalib"))
+
+    def test_stating_one_end_states_neither(self):
+        """A pair is one claim: half of it is a harbour beside a guess."""
+        found = self.itinerary({"port_from": "Hurghada"})
+        self.assertEqual((found["port_from"], found["port_to"]),
+                         ("Unknown", "Unknown"))
+
+    def test_saying_nothing_leaves_the_row_saying_nothing(self):
+        found = self.itinerary({"dives": 9})
+        self.assertEqual((found["port_from"], found["port_to"]),
+                         ("Unknown", "Unknown"))
 
 
 class TestTheThirdSellerAnswersLastAndTheSafetyBarDoesNot(unittest.TestCase):
