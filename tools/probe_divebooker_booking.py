@@ -74,6 +74,8 @@ def main() -> int:
                         help="tripId values to open, comma separated")
     parser.add_argument("--vessels", default="argo-egypt,omneia-spirit",
                         help="vessel pages to search for the id, minus -haz")
+    parser.add_argument("--follow", type=int, default=3,
+                        help="id fragments per vessel to actually ask about")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
