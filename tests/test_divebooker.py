@@ -256,6 +256,12 @@ class TestTheShippedDatasetCarriesTheThirdFare(unittest.TestCase):
     def test_every_in_season_row_is_accounted_for(self):
         """Matched, on a hull we do not map, or a sailing we do not carry.
 
+        Four buckets, and the fourth is why: `matched` counted every sailing
+        landing on a row this dataset carries, which was a statement about the
+        other two sellers until this one started founding rows of its own —
+        after which 69 of its sailings matched *because it had put them there*
+        and the figure read as agreement it had not earned.
+
         This asserted `matched == in_season` while the book was ten hulls the
         country page happened to link. The whole fleet is 92 and the equality
         is simply false now — 85 rows sit on hulls this site does not carry at
@@ -268,9 +274,15 @@ class TestTheShippedDatasetCarriesTheThirdFare(unittest.TestCase):
         if block is None:
             self.skipTest("no divebooker book is committed on this checkout")
         self.assertEqual(
-            block["matched"] + block["on_unmapped_vessels"] + block["unmatched"],
+            block["matched"] + block["founded"] + block["on_unmapped_vessels"]
+            + block["unmatched"],
             block["in_season"],
-            "an in-season sailing is in none of the three buckets")
+            "an in-season sailing is in none of the four buckets")
+        self.assertLessEqual(
+            block["unpriced"], block["unmatched"],
+            "more sailings are explained away as unpriced than went "
+            "unaccounted for, which is a reason larger than the thing it "
+            "explains")
         self.assertIn(str(block["unmatched"]), block["note"])
 
     def test_every_published_fare_says_who_said_it_and_when(self):

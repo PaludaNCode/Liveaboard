@@ -197853,12 +197853,14 @@
     "vessels": 92,
     "departures": 888,
     "in_season": 888,
-    "matched": 862,
+    "matched": 793,
+    "founded": 69,
+    "unpriced": 26,
     "on_unmapped_vessels": 0,
     "unmatched": 26,
     "unmapped_vessels": [],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 862 match one this dataset already carries on (boat, date), and 26 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 793 land on a row one of the other two sellers founded, keyed on (boat, date), and 69 are rows this seller founded itself, on a date or a hull the other two do not list, and 26 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
   "cabin_names": [
     "Lower Deck Twin Cabin",

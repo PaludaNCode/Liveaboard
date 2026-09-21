@@ -2140,7 +2140,8 @@ def _divebooker_fees(
     }
 
 
-def _divebooker_join_note(in_season: int, matched: int, unmapped: int) -> str:
+def _divebooker_join_note(in_season: int, matched: int, unmapped: int,
+                          founded: int, unpriced: int) -> str:
     """What the join did, in the run's own numbers.
 
     This sentence used to be a constant reading *every in-season sailing this
@@ -2148,21 +2149,34 @@ def _divebooker_join_note(in_season: int, matched: int, unmapped: int) -> str:
     a claim the next read can falsify, which is exactly the shape of prose
     this project has gone stale on before (#144). So it is derived: the
     numbers say what happened and the sentence reports them.
+
+    **`matched` went self-referential and this is what fixes it.** It counted
+    sailings landing on a row this dataset carries, which was a statement about
+    the other two sellers until this one started founding rows of its own —
+    after which 69 of its sailings matched *because it had put them there*, and
+    the figure read as agreement it had not earned. `founded` is counted apart,
+    so `matched` goes back to meaning what a reader takes it to mean.
     """
-    unaccounted = in_season - matched - unmapped
+    left = in_season - matched - unmapped - founded
     if not in_season:
         return ("No sailing this source lists falls inside the published "
                 "season. See docs/divebooker-limitations.md.")
-    parts = [f"Of {in_season} in-season sailing(s), {matched} match one this "
-             f"dataset already carries on (boat, date)"]
+    parts = [f"Of {in_season} in-season sailing(s), {matched} land on a row "
+             f"one of the other two sellers founded, keyed on (boat, date)"]
+    if founded:
+        parts.append(f"{founded} are rows this seller founded itself, on a "
+                     f"date or a hull the other two do not list")
     if unmapped:
         parts.append(f"{unmapped} sit on hull(s) the alias map does not know, "
                      f"so nothing can be said about them")
-    if unaccounted:
-        parts.append(f"{unaccounted} are on a boat this site carries and a "
-                     f"date it does not — a third seller listing a departure "
-                     f"the other two do not, which is recorded and not "
-                     f"published")
+    if left:
+        why = ("every one of them because this seller states no fare for that "
+               "date" if unpriced == left else
+               f"{unpriced} of them because this seller states no fare for "
+               f"that date")
+        parts.append(f"{left} reach no row at all"
+                     + (f", {why} — a route on request is an enquiry and not "
+                        f"a berth anybody priced" if unpriced else ""))
     return ", and ".join(parts) + ". See docs/divebooker-limitations.md."
 
 
@@ -2203,7 +2217,14 @@ def divebooker_coverage(
     season = {start for _, start in ours}
     first, last = (min(season), max(season)) if season else ("", "")
 
-    in_season = matched = unmapped_rows = 0
+    # Rows this seller founded, so they can be counted apart from the ones it
+    # merely agrees with. Read off the flag rather than re-derived: `promote`
+    # writes it where `_divebooker_only_departures` created the row, and a
+    # second answer to "who founded this" is the drift this file keeps closing.
+    founded_rows = {(boat_of.get(d["itinerary_id"]), d["start"])
+                    for d in departures if d.get("divebooker_only")}
+
+    in_season = matched = unmapped_rows = founded = unpriced = 0
     for row in rows:
         slug = row.get("boat")
         boat = alias.get(slug, slug)
@@ -2211,7 +2232,9 @@ def divebooker_coverage(
         if not (first <= start <= last):
             continue
         in_season += 1
-        if slug not in alias:
+        if (boat, start) in founded_rows:
+            founded += 1
+        elif slug not in alias:
             # A row on a hull the alias map does not know cannot match, and
             # that is a fact about our map rather than about the seller's
             # sailing. Counting it as "a departure this dataset does not have"
@@ -2220,6 +2243,14 @@ def divebooker_coverage(
             unmapped_rows += 1
         elif (boat, start) in ours:
             matched += 1
+        elif not row.get("price"):
+            # Counted **inside** the leftover bucket and nowhere else. It was
+            # counted over every in-season sailing, which put 42 unpriced
+            # against 26 unaccounted — a reason larger than the thing it was
+            # explaining, because most of those dates reach a row the other
+            # sellers founded and the fare is only missing from this one's
+            # listing of them.
+            unpriced += 1
 
     # Named rather than counted, the way `deals.unmatched` names a vessel:
     # a hull this source lists and the alias map does not know is either a new
@@ -2234,8 +2265,10 @@ def divebooker_coverage(
         "departures": len(book.get("departures") or {}),
         "in_season": in_season,
         "matched": matched,
+        "founded": founded,
+        "unpriced": unpriced,
         "on_unmapped_vessels": unmapped_rows,
-        "unmatched": in_season - matched - unmapped_rows,
+        "unmatched": in_season - matched - unmapped_rows - founded,
         "unmapped_vessels": unmapped,
         "fares": "published",
         "note": (
@@ -2254,7 +2287,8 @@ def divebooker_coverage(
             "is printed as the seller states it rather than dropped, because "
             "deleting a published price is the failure this site reports in "
             "other people. "
-        ) + _divebooker_join_note(in_season, matched, unmapped_rows),
+        ) + _divebooker_join_note(in_season, matched, unmapped_rows,
+                                  founded, unpriced),
     }
 
 
