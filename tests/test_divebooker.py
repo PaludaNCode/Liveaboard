@@ -693,11 +693,16 @@ def payload_page(nodes) -> str:
 class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
     """Red Sea Aggressor II's and Amelie's *Price details*, verbatim.
 
-    Both panels are exactly what the runner printed on 2026-09-21; the trip
-    `name` beside each is this source's own wording for that boat's week, and
-    the pair is assembled the way `divebooker-bella-2.jsonld.json` assembles
-    its blocks into a page — the parts are the site's, the wrapper is how the
-    site serves them.
+    Both pairs are exactly what the runner printed on 2026-09-21 — the panel
+    and the `name` of the trip that holds it, together — wrapped the way
+    `divebooker-bella-2.jsonld.json` wraps its blocks into a page.
+
+    The names in the first version of this file were wrong, and the way they
+    were wrong is the finding: they came from a probe's earlier output and read
+    *Northern Red Sea - Best Wreck Diving*, so this project believed the panel
+    names a trip in a vocabulary of its own. It does not. `name` here is the
+    same wording the sailings use, which is why the whole-fleet join matched
+    603 of 605 exactly and why the fee book can key on it at all.
 
     Two hulls because they are the two line shapes the fleet census found, and
     a reader that handles one handles neither by accident: a spaced dash with
@@ -715,8 +720,8 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
     def test_each_panel_is_found_and_named_for_its_trip(self):
         self.assertEqual(len(self.blocks), 2, self.warnings)
         self.assertEqual([b.trip for b in self.blocks],
-                         ["Northern Red Sea - Best Wreck Diving",
-                          "Hurghada North"],
+                         ["Northern Red Sea, Ras Mohamed, Straits of Tiran",
+                          "Best of Hurghada"],
                          "the panel is named for its own heading rather than "
                          "for the trip that holds it")
         self.assertEqual([b.nights for b in self.blocks], [7, 3])
