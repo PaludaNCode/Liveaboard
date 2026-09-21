@@ -117,8 +117,47 @@ def main() -> int:
             print(f"  does the payload contain {trip!r}? "
                   f"{'yes' if trip in text else 'no'}")
         rows, _ = db.departures(page)
-        print(f"  {len(rows)} departure(s), "
-              f"{sum(1 for r in rows if r.price is None)} unpriced")
+        unpriced = [r for r in rows if r.price is None]
+        print(f"  {len(rows)} departure(s), {len(unpriced)} unpriced")
+
+        # **The Event's own id fragment is the candidate.** The payload holds
+        # no trip id at all — `orderId` is a display rank — but the JSON-LD
+        # states `…-haz441#254581`, a six-figure number of exactly the shape
+        # the owner's link carries. Whether it *is* that id is settled by
+        # asking for it and comparing the dates the booking page returns with
+        # the dates the vessel page stated: a number that looks right and
+        # answers about a different week is the silent join this project keeps
+        # closing.
+        fragments = [(r, r.event_id.rsplit("#", 1)[-1])
+                     for r in rows if r.event_id and "#" in r.event_id]
+        print(f"  {len(fragments)} departure(s) carry an id fragment"
+              f"{', e.g. ' + fragments[0][1] if fragments else ''}")
+        # Unpriced first: those are what the backup is for.
+        order = ([f for f in fragments if f[0].price is None]
+                 + [f for f in fragments if f[0].price is not None])
+        for row, frag in order[:args.follow]:
+            try:
+                got = fetcher.get(BOOKING.format(trip=frag))
+            except FetchBlocked as exc:
+                print(f"    BLOCKED tripId={frag}: {exc}")
+                continue
+            except Exception as exc:  # noqa: BLE001
+                print(f"    FAILED  tripId={frag}: {type(exc).__name__}: {exc}")
+                continue
+            inner, _ = db.payload_parts(got.body)
+            at = [m.start() for m in re.finditer(r'"startDate"\s*:', inner)]
+            said = "?"
+            if at:
+                bounds = db.enclosing(inner, at[:1]).get(at[0])
+                if bounds:
+                    try:
+                        said = json.loads(inner[bounds[0]:bounds[1] + 1])
+                    except json.JSONDecodeError:
+                        said = inner[bounds[0]:bounds[0] + 160]
+            fares = re.findall(r'"current":"(\d+)"', inner)
+            print(f"    tripId={frag}: vessel page says {row.start}..{row.end} "
+                  f"{row.price} — booking page says {said}")
+            print(f"       fares on it: {sorted(set(fares))[:8]}")
 
     # 3. What the page states.
     for trip in [t.strip() for t in args.trips.split(",") if t.strip()]:
