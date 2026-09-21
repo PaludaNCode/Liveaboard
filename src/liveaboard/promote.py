@@ -3741,11 +3741,33 @@ SITE_HINTS = (
     # Named on titles that previously yielded nothing at all.
     "dahab", "safaga", "elba reef", "turkia", "sataya reef",
     "marsa shouna", "gota abu ramada", "panorama reef", "middle reef",
-    "small giftun", "shaab sheer", "umm gamar", "ras disha", "tobia arbaa",
+    "shaab sheer", "umm gamar", "ras disha", "tobia arbaa",
     # Named in the operators' own prose. "Sha'ab el Erg" is where the resident
-    # pod is, and is asked for as Dolphin House -- which is an alias below,
-    # because the two are one reef.
+    # pod is, and divers ask for it as Dolphin House -- **which is deliberately
+    # not folded onto it**, because so is Sha'ab Samadai, 400 km south. A
+    # southern trip's own prose lists Dolphin House beside Sataya and Fury
+    # Shoal, so the name cannot place a trip and
+    # `test_dolphin_house_is_two_reefs_and_resolves_to_neither` refuses it.
+    #
+    # This comment used to say the opposite -- that the two are one reef and an
+    # alias below folds them -- and there was no such alias. Written out here
+    # because a fleet-wide count of the two reef *names* (113 against 2) looks
+    # like a warrant for the fold and is not: what it does not say is which
+    # reef the trips writing *Dolphin House* mean, and at least one means the
+    # southern one. That count was measured, believed, and caught by the guard.
     "sha'ab el erg",
+    # **The island, not the reef on it**, which is this list's oldest rule --
+    # a hint is a destination and a dive on one is an alias, the way Giannis D
+    # folds onto Abu Nuhas. `small giftun` was the hint and `giftun` was not,
+    # so the operators' 42 plain mentions -- *Giftun Island*, *Giftun Islands*,
+    # "2nd dive: Giftun Island" -- read as nothing while 28 of *Small Giftun*
+    # read as a chip of their own. The specific one is an alias below now.
+    "giftun",
+    # Two mentions in the fleet's prose, both beside Gubal and Sha'ab el Erg,
+    # plus Aml Hayaty's mini-safari, which dives it twice. Thin, and no thinner
+    # than `samadai` at one trip: what makes a hint is that an operator sells a
+    # dive there and no hint already contains it.
+    "siyoul kebir",
 )
 """Dive-site names operators actually write, in a title or in their own prose.
 
@@ -3809,6 +3831,14 @@ SITE_ALIASES: dict[str, str] = {
     "ras muhammad": "ras mohammed",
     "ras mohamad": "ras mohammed",
     "shaab abu nuhas": "abu nuhas",
+    # The reef is a dive on the island, so it folds onto it -- and the fold
+    # moves 28 mentions onto the 42 that were reading as nothing at all.
+    "small giftun": "giftun",
+    "big giftun": "giftun",
+    "giftun island": "giftun",
+    "giftun islands": "giftun",
+    "siyoul": "siyoul kebir",
+    "shaab siyoul": "siyoul kebir",
     "ss thistlegorm": "thistlegorm",
     "elba borders": "elba reef",
     # Same fold, forced by the operators' own prose rather than by titles. A
