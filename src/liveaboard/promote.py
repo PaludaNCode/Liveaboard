@@ -2934,7 +2934,14 @@ def promote(
                  or _sites_from_regions(trip.get("regions") or [])
                  or _sites_from_name(name)
                  or list(padi_trip.get("dive_sites") or [])
-                 or list(divebooker_trip.get("sites") or []))
+                 # Through `_sites_from_name`, one name at a time, exactly as
+                 # the operator's own region list goes. Raw, this source's
+                 # reef names would enter the site filter unfolded and mint
+                 # chips the rest of the fleet does not share -- the
+                 # trip-name column and the chip beside it must not disagree,
+                 # which is what `SITE_HINTS` and `REEF_ALIASES` are for. PADI's
+                 # arrive already folded, by `fetch_padi._padi_sites`.
+                 or _sites_from_regions(divebooker_trip.get("sites") or []))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
