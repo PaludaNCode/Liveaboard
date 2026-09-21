@@ -683,6 +683,7 @@ def vessel(html: str, path: str) -> VesselBook:
             ("requirements", block.requirements),
             ("certification", block.certification),
             ("sites", block.sites or None),
+            ("programme", block.programme),
             ("port_from", block.port_from),
             ("port_to", block.port_to),
         ) if v}
@@ -967,6 +968,38 @@ def _stated_count(value: Any) -> int | None:
 NO_PORT = frozenset({"port is not stated"})
 
 
+def _prose(node: Any) -> str | None:
+    """Every string under a node, joined — whatever shape the node is.
+
+    `programm` is the trip's day plan and it names reefs the `divesites` array
+    does not: Aml Hayaty's *Mini Safari: Wrecks & Reefs* lists none there and
+    dives Abu Nuhas and Thistlegorm on days 3 and 4. Same finding as PADI's,
+    where `_padi_sites` folds the day plan before the blurb.
+
+    **Shape-independent on purpose.** Whether the seller writes that plan as a
+    string, a list of days or a list of `{title, text}` has not been read, and
+    a parser written against the shape this project guessed would break on the
+    first page that used another. Collecting the strings is the same answer for
+    all three, and prose is what the reef reader wants either way.
+    """
+    out: list[str] = []
+
+    def walk(value: Any) -> None:
+        if isinstance(value, str):
+            text = value.strip()
+            if text:
+                out.append(text)
+        elif isinstance(value, dict):
+            for item in value.values():
+                walk(item)
+        elif isinstance(value, (list, tuple)):
+            for item in value:
+                walk(item)
+
+    walk(node)
+    return "\n".join(out) or None
+
+
 def _stated_name(node: Any) -> str | None:
     """The harbour inside `{"name": …, "url": …}`, or nothing.
 
@@ -1049,6 +1082,15 @@ class FeeBlock:
     """
     sites: list[str] = field(default_factory=list)
     """The reefs this trip names, which is the site filter's raw material."""
+    programme: str | None = None
+    """The day plan, as prose, for the reefs `divesites` leaves out.
+
+    Aml Hayaty states an empty `divesites` and dives Abu Nuhas and Thistlegorm
+    — 35 sailings, the largest block of blank reef cells on the page. Read
+    through the same `SITE_HINTS` vocabulary as everything else: a name this
+    project cannot already place is not added to that table from one boat's
+    itinerary, which is the rule the reef aliases keep.
+    """
 
     port_from: str | None = None
     port_to: str | None = None
@@ -1289,6 +1331,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 if isinstance(site, dict) and isinstance(site.get("name"), str)
                 and site["name"].strip()
             ]
+            block.programme = _prose(owner.get("programm"))
             block.port_from = _stated_name(owner.get("departurePort"))
             block.port_to = _stated_name(owner.get("arrivalPort"))
 
