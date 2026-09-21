@@ -633,10 +633,18 @@ not change this one. 2027-07-24 states **one** offer, at 5,398, while the
 weeks either side of it state one each at 2,799 and 2,899, and every one of
 the 13 disagreeing rows has a single offer on its date.
 
-So the doubling is not a parser artefact and not a second cabin class. It is
-the seller stating a number this site cannot account for, and `Offer.price` is
-therefore a per-person berth on most rows and something unestablished on at
-least one. That is the same shape as liveaboard.com's unitless gear figure and
+**And the owner has since answered it: that sailing is sold out on
+divebooker.** So the doubled figure is what the page prints once there is no
+single berth left to sell, and it is the last row on which `Offer.price` means
+what it means everywhere else. One row in 888.
+
+This source cannot say so itself. `Offer.availability` is `InStock` on **888
+of 888** departures, so it carries no information at all and cannot flag a
+sold-out sailing — the doubled figure was the only visible trace, and it is
+the only one in the book: exactly one row prices at 1.9× or more of its own
+trip's median.
+
+So the doubling is not a parser artefact and not a second cabin class. That is the same shape as liveaboard.com's unitless gear figure and
 it gets the same answer: the figure is kept in `data/divebooker.json` where a
 person can read it, and nothing totals it, compares it or prints it. The other
 78 in-season rows quote EUR against our USD and cannot be compared without

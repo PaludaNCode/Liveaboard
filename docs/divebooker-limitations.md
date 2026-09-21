@@ -91,6 +91,15 @@ really is absent.
    other two sellers'. A unit that reproduces another seller's number to the
    cent on 93% of a fleet is an established unit.
 
+   **Settled by the owner, 2026-09-21: that sailing is sold out on
+   divebooker.** The doubled figure is what the page prints when no single
+   berth is left, so `Offer.price` means the same thing on every row that is
+   actually for sale. Not a lead any more — but the second half of it is:
+   `Offer.availability` is `InStock` on **888 of 888** departures, so this
+   source cannot tell us a sailing is sold out, and the doubled fare was the
+   only visible trace. Exactly one row in the book prices at 1.9× or more of
+   its own trip's median, so there is no second case hiding.
+
    The 2.000× row is published with the rest, as the seller states it.
    Dropping a price because this site finds it surprising is the failure it
    reports in other people, and the page's whole job is drawing sellers who
