@@ -9,6 +9,15 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-21
 ===========================
 
+nothing moved.
+```
+
+## 2026-09-21
+
+```
+changes: HEAD -> 2026-09-21
+===========================
+
 fees (7)
   Ghazala Adventure      course           40-400 EUR / per_trip -> 40-450 EUR / per_trip
   Ghazala Adventure      gear_rental      190 EUR / per_trip -> 190-200 EUR / per_trip
