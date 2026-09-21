@@ -325,7 +325,7 @@ The whole-fleet join probe read `name` at `start()` and got 603 of 605, which
 is why the keying looked settled while the parser was attaching nothing.
 `tests/fixtures/divebooker-price-details.json` is what stops a third.
 
-#### How many of those bills add up: 155 of 608
+#### How many of those bills add up: 205 of 608 probed, 158 of 492 committed
 
 Asked of the shipped reader rather than of a copy of it, over all 92 hulls
 2026-09-21 by `tools/probe_divebooker_fee_verdict.py`
@@ -341,8 +341,17 @@ trips can reach the Total with a third column.
 | …with a priced bill | | 102 | **152** |
 
 Five words added to `fees.LABEL_PATTERNS` took it from a quarter of the fleet
-to a third, and the panels carrying an actual priced bill by half again. Why
-the remaining 403 do not, counting a panel once per reason, on the first read:
+to a third, and the panels carrying an actual priced bill by half again.
+
+**The committed book holds fewer, and that is the keying rather than a loss.**
+The first fetch (2026-09-21) wrote **492 panels on 75 hulls, 158 complete**:
+the probe counts every panel the payload holds, while `VesselBook` keeps only
+those whose trip the page actually sells and files them by trip *and length*.
+Downstream that is 327 itineraries with a third fee book, 127 of them complete
+enough to total.
+
+Why the remaining 403 do not, counting a panel once per reason, on the first
+read:
 
 | | |
 |---|---|
@@ -676,9 +685,10 @@ weeks either side of it state one each at 2,799 and 2,899, and every one of
 the 13 disagreeing rows has a single offer on its date.
 
 **And the owner has since answered it: that sailing is sold out on
-divebooker.** So the doubled figure is what the page prints once there is no
-single berth left to sell, and it is the last row on which `Offer.price` means
-what it means everywhere else. One row in 888.
+divebooker.** So the figure is not a berth price anybody can buy — but see
+below: the seller's own `availability` for that sailing still reads `InStock`,
+so what the page shows a person and what it states in its structured data
+disagree here. One row in 888.
 
 **And the reason we could not see it was ours.** `Offer.availability` came out
 `InStock` on 888 of 888 departures, which looked like a field the source does
@@ -689,13 +699,18 @@ only filled the field when it was still empty and the trip pass runs first, so
 the sailing's own word was read by nothing. Fixed, with the guard that asserted
 `InStock` on every row re-aimed — it had the bug written into it.
 
-Which probably also explains the doubled figure, and the vessel page says how:
-a sold-out row there reads **"For full charters and groups only"**. 5,398 is
-exactly twice 2,699. So the number is likely a whole-cabin or charter price
-standing where a berth price normally is, on a sailing whose own node says
-sold out — a prediction the next fetch checks rather than a finding. Once that
-node is read, `AVAILABILITY` folds `SoldOut` to `sold_out`, `bookable` goes
-false, and the row is marked gone instead of advertising a berth at 5,398.
+**That looked like it would also explain the doubled figure, and it does not.**
+The reasoning was good — a sold-out row on the vessel page reads *"For full
+charters and groups only"*, and 5,398 is exactly twice 2,699 — so this file
+predicted the sailing's own node would come back sold out once it was read.
+The fetch of 2026-09-21 read it: `red-sea-aggressor-iv::2027-07-24` states
+**`InStock`**, at 5,398 USD, on 7 nights. Prediction falsified, and recorded as
+such rather than quietly dropped.
+
+So the doubling is still unexplained by anything this source states. What the
+same read does show is that a genuinely sold-out sailing here carries **no
+price at all** — Galaxy 720's four May weeks are `SoldOut` with `price: null` —
+which is the shape the vessel page shows too, and is not the shape of this row.
 
 So the doubling is not a parser artefact and not a second cabin class: it is
 what the page prints for a week it can no longer sell a single berth on. The
