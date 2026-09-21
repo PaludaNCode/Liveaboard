@@ -245,24 +245,39 @@ class TestTheDayPlanNamesReefsTheSiteListDoesNot(unittest.TestCase):
             "at Abu Nuhas\n15:00: Dive 3 at Thistlegorm\n"
             "Day 4:\nThistlegorm, Giftun & Departure\n10:00: Dive at Giftun")
 
-    def test_the_reefs_this_project_can_place_are_read(self):
-        from liveaboard.promote import _sites_from_name
-        self.assertEqual(sorted(_sites_from_name(self.PLAN)),
-                         ["abu nuhas", "thistlegorm"])
+    def test_four_of_the_five_reefs_the_plan_names_are_placed(self):
+        """*Giftun* is the island and *Small Giftun* a dive on it, which is
+        this list's oldest rule read the way it had not been: the specific name
+        was the hint and the island was not, so 42 plain mentions read as
+        nothing while 28 read as a chip. *Siyoul Kebir* is thin — two mentions
+        plus this trip — and no thinner than `samadai` at one.
 
-    def test_an_ambiguous_name_is_left_unplaced(self):
-        """*Dolphin House* names two reefs this dataset carries separately.
-
-        Sha'ab Samadai at Marsa Alam and Sha'ab El Erg at Hurghada, 600 km
-        apart and both already in the vocabulary. This is a Hurghada
-        mini-safari so it is almost certainly El Erg — and *almost certainly*
-        is how a St John's week got badged BDE. *Giftun* is not *Small
-        Giftun*, and *Siyoul Kebir* appears nowhere in the fleet.
+        The fifth is *Dolphin House* and it stays unplaced: see
+        `test_the_southern_dolphin_house_keeps_its_own_name`.
         """
         from liveaboard.promote import _sites_from_name
-        for name in ("Dolphin House", "Giftun", "Siyoul Kebir"):
-            with self.subTest(name=name):
-                self.assertEqual(_sites_from_name(name), [], f"{name} was placed")
+        self.assertEqual(sorted(_sites_from_name(self.PLAN)),
+                         ["abu nuhas", "giftun", "siyoul kebir", "thistlegorm"])
+
+    def test_the_southern_dolphin_house_keeps_its_own_name(self):
+        """*Dolphin House* names two reefs 400 km apart and places neither.
+
+        It was folded onto Sha'ab el Erg here on a count of the two reefs'
+        names across the fleet — 113 against 2 — which is not the question.
+        What it does not say is which reef the trips writing *Dolphin House*
+        mean, and a southern trip's prose lists it beside Sataya and Fury
+        Shoal. `test_dolphin_house_is_two_reefs_and_resolves_to_neither` had
+        settled that already and is what caught the fold.
+        """
+        from liveaboard.promote import _sites_from_name
+        self.assertEqual(_sites_from_name("Dolphin House"), [])
+        self.assertEqual(_sites_from_name("Samadai"), ["samadai"])
+
+    def test_the_reef_folds_onto_the_island_and_not_the_other_way(self):
+        from liveaboard.promote import _sites_from_name
+        for written in ("Small Giftun", "Giftun Island", "Giftun Islands"):
+            with self.subTest(written=written):
+                self.assertEqual(_sites_from_name(written), ["giftun"])
 
     def test_the_plan_is_read_whatever_shape_the_seller_writes_it_in(self):
         """A string, a list of days, or a list of `{title, text}`.
