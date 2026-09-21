@@ -187187,35 +187187,11 @@
   "padi_berths_read": "2026-09-20",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
-    "read": "2026-09-20",
+    "read": "2026-09-21",
     "source": "padi.com",
     "url": "https://travel.padi.com/api/v2/travel/promotions/?country=110&country=120&date=2027-05-01&date=2027-06-01&date=2027-07-01&date=2027-08-01",
     "listing": "https://travel.padi.com/liveaboard-deals/",
     "offers": [
-      {
-        "boat": "red-sea-aggressor-ii",
-        "boat_name": "Red Sea Aggressor II",
-        "title": "Starting at $1349",
-        "kind": "Fixed amount",
-        "value": 1411.0,
-        "price": 1177,
-        "was": 2408,
-        "quoted": 1349.0,
-        "quoted_was": 2760.0,
-        "currency": "USD",
-        "start": "2027-05-08",
-        "end": "2027-05-15",
-        "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
-        "nights": 7,
-        "terms": [
-          "Specials are not retroactive. Specials are subject to change without notice.Money-saving discounts, other promotions, and the non-diver rate do not apply.",
-          "The below specials do not apply to group reservations, unless stated otherwise.",
-          "Booking Dates: Sep 16 - Oct 31, 2026",
-          "Travel Dates: Feb 27 - Mar 06 | Mar 06 - Mar 13 | Mar 13 - Mar 20 | Mar 20 - Mar 27 | Mar 27 - Apr 03 | Apr 03 - Apr 10 | Apr 10 - Apr 17 | Apr 17 - Apr 24, 2027",
-          "The 'starting at' price is based on deluxe accommodations",
-          "Single supplement (private stateroom) double the above price."
-        ]
-      },
       {
         "boat": "hammerhead-ii",
         "boat_name": "Hammerhead II",
@@ -187261,29 +187237,6 @@
         "in_run": true
       },
       {
-        "boat": "discovery-i",
-        "boat_name": "Discovery I",
-        "title": "15% Early Bird",
-        "kind": "Discount %",
-        "value": 15.0,
-        "price": 765,
-        "was": 900,
-        "quoted": 765.0,
-        "quoted_was": 900.0,
-        "currency": "EUR",
-        "start": "2027-06-05",
-        "end": "2027-06-12",
-        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
-        "nights": 7,
-        "terms": [
-          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
-          "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
-          "Valid until the end of October 2026.",
-          "Other money saving specials and discounts do not apply"
-        ],
-        "in_run": true
-      },
-      {
         "boat": "alsuraya",
         "boat_name": "ALSURAYA",
         "title": "Save 15%",
@@ -187302,6 +187255,29 @@
           "Valid for bookings made before till the end of Sep, 2026",
           "Other money saving specials and discounts do not apply",
           "Applicable to selected departures only"
+        ],
+        "in_run": true
+      },
+      {
+        "boat": "discovery-i",
+        "boat_name": "Discovery I",
+        "title": "15% Early Bird",
+        "kind": "Discount %",
+        "value": 15.0,
+        "price": 765,
+        "was": 900,
+        "quoted": 765.0,
+        "quoted_was": 900.0,
+        "currency": "EUR",
+        "start": "2027-06-12",
+        "end": "2027-06-19",
+        "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
+        "nights": 7,
+        "terms": [
+          "15% Early Bird Discount: Valid for all 2027 & 2028 trips, excluding high season (September, October, and November 2027).",
+          "Valid for all other 2027 trips on Grand Discovery, Discovery I, and Discovery II.",
+          "Valid until the end of October 2026.",
+          "Other money saving specials and discounts do not apply"
         ],
         "in_run": true
       },
@@ -187326,6 +187302,30 @@
           "Other money saving specials and discounts do not apply"
         ],
         "in_run": true
+      },
+      {
+        "boat": "red-sea-aggressor-ii",
+        "boat_name": "Red Sea Aggressor II",
+        "title": "Starting at $1349",
+        "kind": "Fixed amount",
+        "value": 1411.0,
+        "price": 1177,
+        "was": 2408,
+        "quoted": 1349.0,
+        "quoted_was": 2760.0,
+        "currency": "USD",
+        "start": "2027-07-03",
+        "end": "2027-07-10",
+        "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
+        "nights": 7,
+        "terms": [
+          "Specials are not retroactive. Specials are subject to change without notice.Money-saving discounts, other promotions, and the non-diver rate do not apply.",
+          "The below specials do not apply to group reservations, unless stated otherwise.",
+          "Booking Dates: Sep 16 - Oct 31, 2026",
+          "Travel Dates: Feb 27 - Mar 06 | Mar 06 - Mar 13 | Mar 13 - Mar 20 | Mar 20 - Mar 27 | Mar 27 - Apr 03 | Apr 03 - Apr 10 | Apr 10 - Apr 17 | Apr 17 - Apr 24, 2027",
+          "The 'starting at' price is based on deluxe accommodations",
+          "Single supplement (private stateroom) double the above price."
+        ]
       },
       {
         "boat": "avo",
@@ -187382,7 +187382,7 @@
         "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/cayman-aggressor-iv/"
       }
     ],
-    "previous": "2026-09-19",
+    "previous": "2026-09-20",
     "changes": {
       "new": [],
       "withdrawn": [],
@@ -187402,8 +187402,8 @@
             "quoted": 765.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-08-28",
-            "end": "2027-09-04",
+            "start": "2027-06-05",
+            "end": "2027-06-12",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7,
             "terms": [
@@ -187424,8 +187424,8 @@
             "quoted": 765.0,
             "quoted_was": 900.0,
             "currency": "EUR",
-            "start": "2027-06-05",
-            "end": "2027-06-12",
+            "start": "2027-06-12",
+            "end": "2027-06-19",
             "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-i/",
             "nights": 7,
             "terms": [
@@ -187451,8 +187451,8 @@
             "quoted": 1349.0,
             "quoted_was": 2760.0,
             "currency": "USD",
-            "start": "2027-06-19",
-            "end": "2027-06-26",
+            "start": "2027-05-08",
+            "end": "2027-05-15",
             "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
             "nights": 7,
             "terms": [
@@ -187475,8 +187475,8 @@
             "quoted": 1349.0,
             "quoted_was": 2760.0,
             "currency": "USD",
-            "start": "2027-05-08",
-            "end": "2027-05-15",
+            "start": "2027-07-03",
+            "end": "2027-07-10",
             "url": "https://travel.padi.com/liveaboard/united-states-of-america-usa/red-sea-aggressor-ii/",
             "nights": 7,
             "terms": [
