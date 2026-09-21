@@ -120,7 +120,8 @@ ECB rates, the liveaboard.com crawl, the itinerary fragments and PADI's deals,
 so proving a two-request change to `fetch_deals.py` meant a run that first
 fetched 320 vessel pages from a site with nothing to do with it. Each source is
 its own dispatchable job now — `fx.yml`, `refresh.yml` (the crawl alone),
-`deals.yml`, `itineraries.yml`, `padi.yml`, `cabins.yml`, `fees.yml` — and each
+`deals.yml`, `itineraries.yml`, `padi.yml`, `cabins.yml`, `fees.yml`,
+`divebooker.yml` — and each
 ends the same way, because the shape is identical and six copies of it drifted:
 
 - `.github/actions/checks` — everything CI asserts. `ci.yml` uses it too, which

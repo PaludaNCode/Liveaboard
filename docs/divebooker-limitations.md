@@ -94,11 +94,15 @@ really is absent.
    **Settled by the owner, 2026-09-21: that sailing is sold out on
    divebooker.** The doubled figure is what the page prints when no single
    berth is left, so `Offer.price` means the same thing on every row that is
-   actually for sale. Not a lead any more — but the second half of it is:
-   `Offer.availability` is `InStock` on **888 of 888** departures, so this
-   source cannot tell us a sailing is sold out, and the doubled fare was the
-   only visible trace. Exactly one row in the book prices at 1.9× or more of
-   its own trip's median, so there is no second case hiding.
+   actually for sale. Not a lead any more — and the second half of it turned out
+   to be **our bug, since fixed**. `Offer.availability` came out `InStock` on
+   888 of 888 departures, which read as a field the source does not fill. It
+   fills it: the trip's offer says `InStock` for every sailing that trip
+   sells, the **Event** is one sailing, and the event pass only wrote the
+   field when it was still empty. The read of 2026-09-21 — the first through
+   the sailing's own node — states **858 InStock, 23 OnlineOnly, 5 SoldOut,
+   1 LimitedAvailability**, so a sold-out sailing is now marked gone rather
+   than sold.
 
    The 2.000× row is published with the rest, as the seller states it.
    Dropping a price because this site finds it surprising is the failure it
@@ -234,21 +238,32 @@ really is absent.
     extended, and every one of them was the reading order hardened into a
     structure — which is the finding, and it is in CLAUDE.md under *Three
     sellers, none of them the house*.
-13. ~~**No workflow fetches it on a schedule.**~~ `divebooker.yml` exists, on
-    the one-source-per-workflow shape, daily. **It has never run**, and it
-    cannot: `workflow_dispatch` and `schedule` register only for workflows on
-    the default branch. So this is the one thing still blocking, and it
-    blocks the rest of the list below.
-14. **The committed book predates the fee reader.** `data/divebooker.json`
-    holds 92 hulls and 977 departures and no `fees` and no `trips` key at
-    all, because it was collected before the *Price details* panel was found.
-    Everything read out of that panel is therefore written and tested and
-    **dormant**: the fee book, the dive count, the entry bar, the reefs and
-    the two harbours. 26 itineraries carry no fee line, 30 no dive count, 8
-    no reef, and all 29 founded rows read *Unknown* at both ends of *Departs
-    from*, and the first `divebooker.yml` run is what answers all of it. A
-    hand-edited input is not the fix — the dataset must be what `promote`
-    builds from what a fetch wrote.
+13. ~~**No workflow fetches it on a schedule.**~~ `divebooker.yml` is merged
+    and runs daily at 05:40, on the one-source-per-workflow shape. Its first
+    run is
+    [35614685137](https://github.com/PaludaNCode/Liveaboard/actions/runs/35614685137),
+    2026-09-21.
+14. ~~**The committed book predates the fee reader.**~~ That run wrote it.
+    `data/divebooker.json` now holds 92 hulls, 887 departures, **492 panels
+    on 75 hulls, 158 of them complete**, and trip facts on the same 75. What
+    landed with it, in one pass:
+
+    | | before | after |
+    |---|---|---|
+    | Sailings with no Total | 66 of 1,251 | **0** |
+    | Itineraries with no fee line | 26 | **0** |
+    | …with no dive count | 30 | **0** |
+    | …naming no reef | 8 | 8 |
+    | Founded rows with no ports | 29 | **4** |
+
+    The third seller carries a fee book on 327 itineraries, 127 complete
+    enough to total, and 772 of 1,251 rows print its bill. **No collision
+    refused a panel**, because `fee_key` separates the trips that used to
+    collide rather than letting one overwrite the other.
+
+    The 492 panels here against the 608 a probe counts over the same fleet is
+    not a loss: the book keeps only panels whose trip the page actually
+    sells, and keys them by trip *and length*.
 15. **Two thirds of its bills do not add up, and the unit is why.**
     Measured 2026-09-21 with the shipped reader over all 92 hulls, four times
     ([35585415354](https://github.com/PaludaNCode/Liveaboard/actions/runs/35585415354)
@@ -267,11 +282,16 @@ really is absent.
     *per trip*; Tala's 12 did not, because *Route fees and enviromental taxes -
     200-320 EUR per person* says who pays and not how often. Read, and still
     silent.
-    So a third of the fleet is the ceiling, and the one lever that could raise
-    it is the rule `_with_units_resolved` already applies to gear — join the
-    two books on the money and take only the unit. Whether it reaches these 319
-    cannot be measured until the fee book is committed, because it needs both
-    books side by side.
+    So a third of the panels is the ceiling, and the one lever that could
+    raise it is the rule `_with_units_resolved` already applies to gear — join
+    the two books on the money and take only the unit. **That is measurable
+    now**: the fee book landed 2026-09-21, so both books sit in the repository
+    and the question can be answered offline.
+
+    It is not the ceiling on the *page*, and the two must not be confused.
+    Every sailing has a Total, because the vessel's own panel and PADI's book
+    answer where this source cannot. What the unit limits is how often the
+    third column carries a total of its own — 127 itineraries today.
     40 obligatory lines in 9 spellings are still declined, and each is a
     deliberate refusal rather than a gap. *Government fees* is 35 of them, all
     on the Sea Serpent fleet, whose only other required line is a park fee with
