@@ -389,6 +389,21 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # The shape census counted what the fleet states, with its own copy of
+      # the reading. This asks the shipped reader for its own verdict: how
+      # many bills add up, which is exactly how many trips reach the Total
+      # with a third column, and what the rest are missing.
+      - name: Ask the fee reader how many bills add up
+        if: contains(inputs.divebooker_ask, 'verdict')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_fee_verdict.py \
+            --limit "${{ inputs.divebooker_vessels || '0' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
       # App Router ships its data in the HTML rather than fetching it, so
       # "rendered by JavaScript" and "not in the served bytes" are different
       # claims. This opens the streamed payload and says which is true.
