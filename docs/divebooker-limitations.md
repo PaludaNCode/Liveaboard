@@ -104,6 +104,13 @@ really is absent.
    1 LimitedAvailability**, so a sold-out sailing is now marked gone rather
    than sold.
 
+   **Closed by the owner 2026-09-21: not relevant.** That week is sold out, and
+   a last remaining cabin priced as a whole room is explanation enough for a
+   figure nobody can book. The seller's own `availability` still says
+   `InStock`, so this source contradicts its own page there — recorded, not
+   chased. One row in 887, and no second case: exactly one row prices at 1.9×
+   or more of its own trip's median.
+
    The 2.000× row is published with the rest, as the seller states it.
    Dropping a price because this site finds it surprising is the failure it
    reports in other people, and the page's whole job is drawing sellers who
@@ -300,7 +307,13 @@ really is absent.
     fee* states 10 EUR per person per day for the Strait of Tiran and 15 for
     Ras Mohammed in one line, and reading the first as the charge would publish
     10 to a diver who pays 15.
-16. **The operator is permanent, and it is item 3 seen from the other end.**
+16. ~~**The operator.**~~ **Closed by the owner 2026-09-21: not relevant.** It
+    is a fleet or company label, and this page compares what trips cost rather
+    than who sells them — the same reason there is no operator score. The
+    reading below stands as a fact about the source and is no longer a gap to
+    close.
+
+    **The detail, kept because it is item 3 from the other end.**
     The 33 hulls only this seller lists have no liveaboard.com vessel page,
     so nothing states a company for them and all 29 founded itineraries carry
     `unknown-operator`. Correct rather than missing: `Product.brand` here
