@@ -132,6 +132,28 @@ def main() -> int:
                 at = inner.lower().find(hint.lower())
                 if at >= 0:
                     print(f"    …{hint}: {inner[max(0, at - 90):at + 170]!r}")
+
+        # **The whole object each key sits in, not a window around it.** A
+        # parser written against a 170-character excerpt is written against a
+        # substring, which is the mistake `docs/sources` exists to stop. These
+        # are the keys that would carry a fare the JSON-LD does not state, a
+        # room, or a struck-through list price, so each is opened with the
+        # same bracket matcher the fee panel is read by.
+        for key in ("minPrice", "minPriceDay", "inseanqCabinTypeId", "old",
+                    "oldPrice", "numberCabins", "occupancy", "places"):
+            at = [m.start() for m in re.finditer(f'"{key}"\\s*:', text)]
+            if not at:
+                continue
+            owners = db.enclosing(text, at[:4])
+            print(f"\n-- {key}: {len(at)} occurrence(s), first {min(4, len(at))} "
+                  f"owners in full --")
+            for pos in at[:4]:
+                bounds = owners.get(pos)
+                if not bounds:
+                    print("    (no enclosing object)")
+                    continue
+                chunk = text[bounds[0]:bounds[1] + 1]
+                print(f"    {chunk[:600]}")
     return 0
 
 
