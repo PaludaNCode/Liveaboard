@@ -149,6 +149,14 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if itinerary.padi_sourced_fees:
             itineraries[key]["padi_sourced_fees"] = True
 
+        # And where the third seller's panel is the only book there is, which
+        # is the 33 hulls neither of the other two carries. Written only where
+        # true, like the one above: the sentence under the fee table names a
+        # source, and naming the wrong one is the failure this project reports
+        # in other people.
+        if itinerary.divebooker_sourced_fees:
+            itineraries[key]["divebooker_sourced_fees"] = True
+
     # Where the other sellers list each boat. A listing url is a fact about the
     # vessel, not about the sailing -- PADI's is built from the boat's slug and
     # its country, divebooker's is the hull page its whole season is read from

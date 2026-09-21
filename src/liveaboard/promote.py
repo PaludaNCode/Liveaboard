@@ -2910,8 +2910,20 @@ def promote(
         # choice is made.
         own_fees = fee_book.get(slug) or source.get("fees")
         padi_lines = (padi_fees or {}).get("lines") or []
+        # And the third seller's, which becomes this trip's own book **only
+        # where neither of the others has one**. A fallback into a silence
+        # rather than a ranking: saying this source outranks PADI, or the
+        # reverse, would be a claim about two disclosures that nothing here
+        # has measured. Where nobody else published a bill there is nothing to
+        # rank it against, and that is the case this covers -- the 33 Egyptian
+        # hulls neither of the other two sellers carries, whose only fee book
+        # is the *Price details* panel on their own divebooker page.
+        divebooker_own = (divebooker_fees or {}).get("lines") or []
         fees_from_padi = not own_fees and bool(padi_lines)
-        fee_lines = _with_units_resolved(own_fees or padi_lines, padi_lines)
+        fees_from_divebooker = (not own_fees and not padi_lines
+                                and bool(divebooker_own))
+        fee_lines = _with_units_resolved(
+            own_fees or padi_lines or divebooker_own, padi_lines)
 
         if divebooker_fees is not None:
             for line in divebooker_fees["lines"]:
@@ -3065,6 +3077,12 @@ def promote(
         # wrong one is the failure this project reports in other people.
         if fees_from_padi:
             itineraries[-1]["padi_sourced_fees"] = True
+
+        # Same flag for the third seller, and written only where true for the
+        # same reason: the page names a source under the fee table, and naming
+        # the wrong one is the failure this project reports in other people.
+        if fees_from_divebooker:
+            itineraries[-1]["divebooker_sourced_fees"] = True
 
         for item in group:
             entry = {

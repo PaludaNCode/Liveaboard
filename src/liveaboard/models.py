@@ -348,6 +348,17 @@ class Itinerary:
     says which it is, on the same rule ``fees_known`` and ``not_asked`` follow.
     """
 
+    divebooker_sourced_fees: bool = False
+    """True where this trip's own fee rows came from divebooker.com.
+
+    The same fact as :attr:`padi_sourced_fees` about a third seller, and a
+    fallback into a silence rather than a ranking: it is written only where
+    neither the vessel's own panel nor PADI's book has anything to say, which
+    is the 33 Egyptian hulls neither of the other two sellers carries.
+
+    The page needs it because the sentence under the fee table names a source.
+    """
+
     divebooker_fees: list[FeeItem] = field(default_factory=list)
     """The charges divebooker.com says a diver cannot decline on this trip.
 
@@ -424,6 +435,8 @@ class Itinerary:
             ],
             divebooker_fees_complete=bool(
                 payload.get("divebooker_fees_complete", False)),
+            divebooker_sourced_fees=bool(
+                payload.get("divebooker_sourced_fees", False)),
             dives_read=bool(payload.get("dives_read", False)),
             padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )

@@ -2242,6 +2242,18 @@
           + "which it charges on board whoever sold the berth.";
     }
 
+    /* Where every line above came from, on the rows whose answer is not the
+     * usual one. Ours is the vessel's own panel on liveaboard.com; on a boat
+     * it does not sell there is no panel, and the only book is whichever other
+     * seller published one. The sentence has to name it, because a fee table
+     * attributed to a site that does not list the boat is the failure this
+     * page reports in other people. */
+    var whose = row.i.divebooker_sourced_fees
+      ? "The fees above are divebooker.com\u2019s. Neither of the other two "
+        + "sellers lists this boat at all, so its own Price details panel is "
+        + "the only bill anybody publishes for this trip."
+      : "";
+
     /* And the third seller, in the same three states and with the same care
      * about the middle one. Its own paragraph rather than a clause in PADI's:
      * the two are separate disclosures about one trip, and a sentence that
@@ -2316,6 +2328,7 @@
          stops after one paragraph should have read this one. */
       (warning ? '<p class="caveat est">' + esc(warning) + "</p>" : "") +
       (caveat ? '<p class="caveat">' + esc(caveat) + "</p>" : "") +
+      (whose ? '<p class="caveat">' + esc(whose) + "</p>" : "") +
       (padi ? '<p class="caveat padi">' + esc(padi) + "</p>" : "") +
       (db ? '<p class="caveat padi">' + esc(db) + "</p>" : "");
   }
