@@ -31,9 +31,9 @@ commit that closes a stage, never afterwards from memory.
 | 7 — fixtures | **closed**: `tests/fixtures/divebooker-bella-2.jsonld.json`, real bytes |
 | 8 — the parser | **closed**: `scrape/divebooker_com.py`, `tools/fetch_divebooker.py`; discovery is the seller's search, paged on `p=` |
 | 9 — identity | **closed**: 59 of the 92 hulls mapped — 57 by the stated name rule, 2 by a person on the operator; 33 are boats this site does not carry |
-| 10 — promote | **closed as far as it may go**: coverage recorded, every fare withheld |
-| 11 — the page | **not started, and blocked on stage 0** |
-| 12 — cadence | not started: no workflow fetches this on a schedule |
+| 10 — promote | **closed for the fare**: 777 departures carry `divebooker_price` and its provenance; the fee book is read and not yet promoted |
+| 11 — the page | **not started**, and now blocked on the fee book rather than on stage 0 |
+| 12 — cadence | **closed**: `.github/workflows/divebooker.yml`, daily at 05:40 after the two sellers it is compared against |
 | 13 — guards | **closed for what exists**: 30 tests, code and committed data |
 | 14 — ship | on the branch, not merged |
 
@@ -50,16 +50,26 @@ added to that question:
 * **793 of the 888 sailings are ones this site already carries**, so the join
   is not the problem; six more are sailings on boats we carry that the other
   two do not list, and four are charter enquiries with no fare.
-* **The fares are still withheld, and the reason has shrunk to one row.** 777
-  rows compared in euros put 585 inside 20% of the nearer seller — three
-  sellers pricing one berth — and Red Sea Aggressor IV's 2027-07-24 at exactly
-  2.000×, with an offer node identical in shape to the sailings either side of
-  it. The source does not explain that row, and a rule that published around it
-  would be a statistical one.
+* **The fares are published.** The paragraph here read *"the fares are still
+  withheld, and the reason has shrunk to one row"*; what it was waiting on was
+  the currency, not the row. Read from the page's own payload rather than from
+  `Offer.priceCurrency` — a static per-vessel label — 725 of 777 joined
+  sailings carry a figure identical to one of the other two sellers'. The 52
+  that differ concentrate rather than scatter (twelve are Unity's whole season
+  at a steady 1.43×), and Red Sea Aggressor IV's 2027-07-24 at exactly 2.000×
+  is printed as the seller states it: dropping a published price because this
+  site finds it surprising is the failure it reports in other people.
+* **And the vessel page carries a fee book.** *Price details*, three columns,
+  606 panels on 75 hulls, 792 priced obligatory lines — keyed on the trip,
+  because 603 of 605 panel titles are one of the page's own trip names exactly
+  and 25 of the 67 hulls with panels state *different* surcharges per trip.
+  Read by `fees.ParsedFee` and `classify_label`, the same vocabulary both other
+  sellers go through.
 
-So the remaining question is still not what it could do but what it should, and
-that is the owner's: publish a third fare column (needs a ruling on the 2×
-row), create rows for the six, carry the 33 hulls, or none of those.
+The owner has answered stage 0: read it as a third seller, aiming at rough
+comparable totals rather than at agreement to the cent. What is left is the
+order of work below — the fee book into the dataset, then the page, then the
+six extra sailings and the 33 hulls this site does not carry.
 
 ## What is already done
 

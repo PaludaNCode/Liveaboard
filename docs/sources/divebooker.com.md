@@ -306,6 +306,13 @@ Aggressor II, the boat whose two names raised the question. A sample that
 leaves out the case that prompted it is not evidence, and 100% is exactly the
 number that gets believed.
 
+**Ask for the owner at the key, not at the value.** `"details"` names an object
+whose own smallest enclosing object *is that object* — so a scan asked for the
+owner at the `{` hands back the panel, and every block on all 92 hulls came
+back titled *Price details*. The index that finds the trip is the one on the
+key's opening quote, which sits inside the parent and before the panel begins.
+One character of difference and the whole answer.
+
 #### What the reader does with a line
 
 `divebooker_com._read_fee_line` feeds `fees.ParsedFee` — the same dataclass,
