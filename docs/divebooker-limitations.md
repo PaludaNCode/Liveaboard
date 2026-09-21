@@ -22,22 +22,34 @@ before deciding what the third seller is allowed to say on the page.
 3. **The operator.** `Product.brand` is `{"name": "Divebooker.com"}` — the
    seller — and `Event.organizer` is the hull (`Bella 2`). No company is named
    anywhere on the page. The operator goes on coming from liveaboard.com's
-   vessel page, and a divebooker-only boat would have none.
-4. **A fee book.** Nothing read carries a required-extras disclosure of any
-   kind. By this project's own rule that is *nobody looked*, not *there are no
-   fees* — so a bill built on divebooker alone would be a total the disclosure
-   does not support. **Now looked at harder:** the page's streamed payload
-   holds 253 distinct keys and not one matches `fee`, `extra`, `includ` or
-   `exclud`, and the page calls no endpoint at all. So it is not rendered
-   client-side and not fetched — it is not on the vessel page. If it exists it
-   is in the booking flow.
-4b. **The currency a price is in may be the request's, not the boat's.** The
-   payload carries `currencies.current` and a `rates` table keyed by
-   `currencyId`. So the book's 570 USD against 407 EUR could be a fact about
-   the vessels or about where the crawl ran from, and a figure compared
-   against ours is compared against an unknown base until that is settled.
-5. **A dive count, an entry bar, a cabin ladder.** None of the three appears in
-   any node read.
+   vessel page, and the 33 hulls only this seller lists carry
+   `unknown-operator`, which is the honest answer rather than a gap.
+4. **A cabin ladder.** No node states what a room costs or how many are left
+   at a price, so the *Places* column can never carry a figure from here. This
+   entry used to read *"a fee book"* and *"a dive count, an entry bar, a cabin
+   ladder"*, and two thirds of that was wrong — see below.
+
+**Items 4 and 5 were a keyword sweep, and the sweep was the limitation.** They
+read: *"Nothing read carries a required-extras disclosure of any kind … the
+page's streamed payload holds 253 distinct keys and not one matches `fee`,
+`extra`, `includ` or `exclud` … it is not on the vessel page. If it exists it
+is in the booking flow"*, and *"a dive count, an entry bar, a cabin ladder —
+none of the three appears in any node read"*.
+
+The panel is called `details`, the count is `numberDives`, the bar is
+`requirements`, and all three sit in the same trip object. A sweep answers only
+about the words it was given, and *Trip & price details* is exactly the shape
+that survives one. What settled it was a person opening the page and asking
+what the panel held. **Two of the three are now read and used**; the ladder
+really is absent.
+
+4b. **The currency a price is in was the request's, and it is settled.** That
+   entry read *"could be a fact about the vessels or about where the crawl ran
+   from, and a figure compared against ours is compared against an unknown
+   base until that is settled"*. `currencies.current` says USD, the offer
+   labels often say EUR, and the payload's own `rates` table is what tells
+   them apart — `page_currency` reads it, and the fares reconcile with the
+   other two sellers on 725 of 777 joined sailings.
 
 ## The one that stopped the fares being published, and no longer does
 
