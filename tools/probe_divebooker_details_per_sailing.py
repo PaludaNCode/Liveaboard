@@ -49,9 +49,14 @@ from probe_divebooker import repair_robots  # noqa: E402
 LINKISH = re.compile(
     r'"((?:/|https?://)[^"\\]{0,120}?(?:price|detail|booking|checkout|cabin)'
     r'[^"\\]{0,80})"', re.I)
-#: A date sitting anywhere inside an owner object, which is what would make it
-#: a sailing rather than a trip.
-DATEISH = re.compile(r"\b(?:start|end|depart|arriv|date)", re.I)
+#: A date sitting inside an owner object, which is what would make it a sailing
+#: rather than a trip. **Anchored, and not on `depart`/`arriv`** — the first
+#: version matched `departurePort` and `arrivalPort` on every trip object and
+#: reported "21 of 21 owners carry a date", which is a harbour name and not a
+#: date. A probe that answers its own question wrongly is worse than one that
+#: does not answer it.
+DATEISH = re.compile(r"^(?:startDate|endDate|date|day|departureDate|arrivalDate)$",
+                     re.I)
 
 
 def digest(panel: dict) -> str:
@@ -114,15 +119,25 @@ def main() -> int:
             owner_keys["|".join(keys)] += 1
             if any(DATEISH.search(k) for k in keys):
                 dated_owners += 1
-            name = (owner.get("name") or owner.get("title") or "?") if owner else "?"
+            # **Through the parser's own suffix rule.** The owner writes
+            # *Brothers - Daedalus - Elphinstone (7 nights) (Hurghada-Hurghada)*
+            # and `fee_blocks` keys on the name with that suffix removed, so a
+            # probe comparing the raw name against a departure's trip name
+            # matches nothing and reports "no panel" for the whole fleet. The
+            # first run of this file did exactly that.
+            raw = (owner.get("name") or owner.get("title") or "?") if owner else "?"
+            name = db.TRIP_SUFFIX.sub("", str(raw)).strip() or str(raw)
             if panel is not None:
                 per_trip[str(name)].add(digest(panel))
                 per_panel[digest(panel)].add(str(name))
 
         print("\n-- what owns a panel (key sets, counted) --")
         for keys, count in owner_keys.most_common():
-            print(f"  {count:>3}  {keys[:150]}")
-        print(f"\n  owners carrying a date-ish key: {dated_owners} of {len(found)}")
+            # Whole, never truncated: the question is whether a date key is in
+            # there, and a list cut at 150 characters cannot answer it.
+            print(f"  {count:>3}  {keys}")
+        print(f"\n  owners carrying a date key: {dated_owners} of {len(found)}"
+              f"   <- a sailing would; a trip would not")
 
         print(f"\n-- {len(per_trip)} distinct owner name(s), "
               f"{len(per_panel)} distinct panel(s) --")
