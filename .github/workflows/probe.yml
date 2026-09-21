@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,fixture,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -79,6 +79,10 @@ on:
         description: "Vessel slug for the flight probe, as the book names it"
         type: string
         default: "red-sea-aggressor-ii"
+      divebooker_trips:
+        description: "tripId values for the booking probe, e.g. 254581"
+        type: string
+        default: "254581"
       divebooker_months:
         description: "Year-months for the search probe, e.g. 202705,202706"
         type: string
@@ -431,6 +435,23 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_cabins.py \
             --vessels "${{ inputs.divebooker_vessel || 'vita-xplorer,argo-egypt' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The owner's own link: *Select cabin* opens
+      # `/boatorder/booking?tripId=254581`. That is where a fare the vessel
+      # listing does not state would be, and where a cabin ladder would be.
+      # Robots is asked first and reported either way — this host's rules are
+      # honoured, and a disallowed path is a person's decision.
+      - name: What does the booking page state
+        if: contains(inputs.divebooker_ask, 'booking')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_booking.py \
+            --trips "${{ inputs.divebooker_trips || '254581' }}" \
+            --vessels "${{ inputs.divebooker_vessel || 'argo-egypt,omneia-spirit' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
