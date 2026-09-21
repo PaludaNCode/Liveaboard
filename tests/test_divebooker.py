@@ -730,14 +730,69 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         return {fee.code.value: fee for fee in block.fees}
 
     def test_each_panel_is_found_and_named_for_its_trip(self):
-        self.assertEqual(len(self.blocks), 2, self.warnings)
+        self.assertEqual(len(self.blocks), 3, self.warnings)
         self.assertEqual([b.trip for b in self.blocks],
                          ["Northern Red Sea, Ras Mohamed, Straits of Tiran",
-                          "Best of Hurghada"],
+                          "Best of Hurghada",
+                          "Mini Safari: Wrecks & Reefs"],
                          "the panel is named for its own heading rather than "
                          "for the trip that holds it")
-        self.assertEqual([b.nights for b in self.blocks], [7, 3])
+        self.assertEqual([b.nights for b in self.blocks], [7, 3, 3])
         self.assertEqual(self.warnings, [])
+
+    def test_a_trip_states_its_own_dives_and_entry_bar(self):
+        """Both read from the object the panel sits in, for nothing.
+
+        `numberDives` and `requirements.expirience.text` are that source's own
+        keys and its own spellings. The count is the figure it wrote and never
+        one derived from the length or the day plan — ten vessels publish one
+        and they state 15 to 21 for the same seven-night week.
+        """
+        aml = self.blocks[2]
+        self.assertEqual(aml.dives, 9)
+        self.assertEqual(aml.requirements, "Minimum 0 dives")
+        # The two hulls whose fixture carries no such fields say nothing
+        # rather than nothing-shaped: an unread trip must not carry a
+        # requirement nobody stated.
+        self.assertIsNone(self.blocks[0].dives)
+        self.assertIsNone(self.blocks[0].requirements)
+
+    def test_a_count_is_a_stated_figure_or_nothing(self):
+        self.assertEqual(db._stated_count("9 dives"), 9)
+        self.assertEqual(db._stated_count("21 dives"), 21)
+        self.assertIsNone(db._stated_count(""))
+        self.assertIsNone(db._stated_count(None))
+        self.assertIsNone(db._stated_count("a few dives"))
+
+    def test_the_gear_bundle_is_named_and_the_singles_are_not(self):
+        """Adding up singles invents a basket the operator never sold.
+
+        Aml Hayaty prices a wetsuit, a BCD, a computer, a torch, an SMB and a
+        mask-fins-snorkel set beside one *Full Equipment set* at €130. The
+        bundle is the honest gear price and the only one read; the singles are
+        declined and reported, so a reader of `unnamed_fees` sees what was
+        left rather than a silence.
+        """
+        aml = self.blocks[2]
+        gear = [f for f in aml.fees if f.code.value == "gear_rental"]
+        self.assertEqual(len(gear), 1)
+        self.assertEqual(gear[0].low, 130.0)
+        self.assertIs(gear[0].basis, db.FeeBasis.PER_TRIP)
+        self.assertTrue(any("BCD" in line for line in aml.unnamed))
+        self.assertFalse(any("Full Equipment set" in line for line in aml.unnamed))
+
+    def test_a_figure_inside_a_bracket_keeps_its_label(self):
+        """`Gratuities (€70)` came out labelled `Gratuities (`."""
+        tips = [f for f in self.blocks[2].fees if f.code.value == "gratuities"]
+        self.assertEqual([f.label for f in tips], ["Gratuities"])
+        self.assertEqual(tips[0].low, 70.0)
+
+    def test_one_obligatory_line_naming_two_charges_totals_once(self):
+        aml = self.codes(self.blocks[2])
+        self.assertIn("combined_fees", aml)
+        self.assertEqual(aml["combined_fees"].low, 70.0)
+        self.assertIs(aml["combined_fees"].basis, db.FeeBasis.PER_TRIP)
+        self.assertTrue(self.blocks[2].complete)
 
     def test_the_obligatory_column_is_mandatory_and_the_extras_are_not(self):
         fees = self.codes(self.blocks[0])

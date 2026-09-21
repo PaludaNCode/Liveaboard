@@ -44,5 +44,44 @@
    ],
    "title": "Price details"
   }
+ },
+ {
+  "name": "Mini Safari: Wrecks & Reefs (3 nights) (Hurghada-Hurghada)",
+  "nights": "3 nights",
+  "numberDives": "9 dives",
+  "requirements": {
+   "expirience": {
+    "title": "Requirements",
+    "text": "Minimum 0 dives"
+   }
+  },
+  "departurePort": {
+   "name": "Hurghada",
+   "url": "https://divebooker.com/egypt-hurghada-eaz665"
+  },
+  "arrivalPort": {
+   "name": "Hurghada",
+   "url": "https://divebooker.com/egypt-hurghada-eaz665"
+  },
+  "details": {
+   "title": "Price details",
+   "columns": [
+    {
+     "type": "included",
+     "title": "Included",
+     "text": "VAT\nAirport Transfer or Hotel Transfer\nDrinking Water, Soft drinks, Tea & Coffee\nFull-Board Meal Plan\nSnacks\nDiving Package\n12L Tanks & Weights\nWifi\nNitrox\nCabin Towels\nDeck Towels\nComplimentary Toiletries \nFree short-term DAN diving insurance (upon request)"
+    },
+    {
+     "type": "notincluded",
+     "title": "Obligatory surcharges",
+     "text": "Diving insurance\nNational Park / Port Fees: 70EUR per trip, to be paid on board"
+    },
+    {
+     "type": "extra",
+     "title": "Extra cost",
+     "text": "Gratuities (€70)\nAlcoholic Beverages\nWetsuit (3mm): 20.00EUR per trip, to be paid on board\nMask, Fins, Snorkel: 15.00EUR per trip, to be paid on board\nFull Equipment set (Mask, Fins, Snorkel, BCD, Regulator, Wetsuit, Torch, SMB): 130.00EUR per trip, to be paid on board\nBCD: 25.00EUR per trip, to be paid on board\nDive Computer: 25.00EUR per trip, to be paid on board\nDive Torch: 25.00EUR per trip, to be paid on board\nSMB: 10.00EUR per trip, to be paid on board\nPADI Nitrox Course: 200EUR per trip, to be paid on board\nPADI Advanced Open Water Course: 370EUR per trip, to be paid on board\nPADI Open Water Course: 410EUR per item, to be paid on board\nPrivate Dive Guide: 250.00EUR per trip, to be paid on board"
+    }
+   ]
+  }
  }
 ]
