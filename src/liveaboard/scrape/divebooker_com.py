@@ -214,6 +214,13 @@ class VesselBook:
     """
     unnamed_fees: list[str] = field(default_factory=list)
     """Priced fee lines this project's vocabulary declined, verbatim."""
+    trips: dict[str, dict[str, Any]] = field(default_factory=dict)
+    """What each trip states about itself: dives, entry bar, reefs.
+
+    Keyed on the trip exactly as `fees` is, and kept only for trips this page
+    really sells -- a panel naming a week the page does not list is as
+    unattachable here as it is there.
+    """
 
     def as_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {"slug": self.slug}
@@ -242,6 +249,13 @@ class VesselBook:
                 trip: {"lines": to_fee_dicts(lines), "complete": complete}
                 for trip, (lines, complete) in sorted(self.fees.items())
             }
+        if self.trips:
+            # What each trip states about itself beside its panel. Written
+            # under its own key rather than folded into `fees`, because a fee
+            # book and a dive count are different claims and a reader of this
+            # file should not have to open one to find the other.
+            out["trips"] = {trip: dict(facts)
+                            for trip, facts in sorted(self.trips.items())}
         if self.unnamed_fees:
             # Named rather than counted, because what an unread charge needs
             # is a word added to `fees.LABEL_PATTERNS` and a count cannot say
@@ -596,15 +610,28 @@ def vessel(html: str, path: str) -> VesselBook:
     sold = {row.trip for row in book.departures if row.trip}
     for block in blocks:
         book.unnamed_fees.extend(block.unnamed)
-        if not block.fees:
+        if not (block.trip and block.trip in sold):
+            if block.fees:
+                book.warnings.append(
+                    f"{path}: a price panel names {block.trip!r}, which is not "
+                    f"a trip this page sells; its {len(block.fees)} fee "
+                    f"line(s) are unattached")
             continue
-        if block.trip and block.trip in sold:
+
+        # The dive count and the entry bar are kept whether or not the panel
+        # priced anything. They are separate claims about the trip and a page
+        # that states no surcharge has not thereby stopped stating them --
+        # which is the same distinction `fees_known` draws one layer up.
+        facts = {k: v for k, v in (
+            ("dives", block.dives),
+            ("requirements", block.requirements),
+            ("certification", block.certification),
+            ("sites", block.sites or None),
+        ) if v}
+        if facts:
+            book.trips[block.trip] = facts
+        if block.fees:
             book.fees[block.trip] = (block.fees, block.complete)
-        else:
-            book.warnings.append(
-                f"{path}: a price panel names {block.trip!r}, which is not a "
-                f"trip this page sells; its {len(block.fees)} fee line(s) "
-                f"are unattached")
 
     if not book.departures:
         # A vessel selling nothing and a page that failed are different
@@ -784,7 +811,13 @@ FEE_BASES: tuple[tuple[re.Pattern[str], FeeBasis], ...] = tuple(
 #: The separator between a label and its money, stripped off the label's tail.
 #: Two spellings across the fleet — *Port fees - 50 USD* and *Fuel Surcharge:
 #: 10EUR* — and the dash has to be **spaced**, or `Check-dive` loses its head.
-FEE_SEPARATOR = re.compile(r"(?:\s+[-–—]|[:.,;])\s*$")
+#:
+#: An opening bracket too, because a third spelling puts the figure inside one:
+#: Aml Hayaty writes *Gratuities (€70)*, whose label came out as `Gratuities (`
+#: until this was measured. Only a *trailing* one, so the qualifier in *Full
+#: Equipment set (Mask, Fins, Snorkel, …): 130.00EUR* survives — that bracket
+#: closes before the money and is part of what the operator called the thing.
+FEE_SEPARATOR = re.compile(r"(?:\s+[-–—]|[:.,;(])\s*$")
 
 #: The panel's own trip suffix: *Northern Red Sea - Best Wreck Diving
 #: (7 nights) (Hurghada-Hurghada)*. The night count is a fact the panel states
@@ -797,6 +830,38 @@ TRIP_SUFFIX = re.compile(
 #: was rewritten around: a mandatory tip and a tip you choose the size of are
 #: different charges and only the operator can say which is billed.
 FEE_COLUMNS = {"included": None, "notincluded": True, "extra": False}
+
+
+#: What a trip states about itself, beside the panel. Measured 2026-09-21
+#: rather than assumed: the object holding `details` also holds `name`,
+#: `nights`, `numberDives`, `requirements`, `divesites`, `departurePort` and
+#: `arrivalPort`, which is every fact this site takes from the other two
+#: sellers. Reading them costs nothing — they arrive in the same object the
+#: fee panel is found in.
+TRIP_COUNT = re.compile(r"(\d+)")
+
+
+def _stated_count(value: Any) -> int | None:
+    """`"9 dives"` as 9, and anything else as nothing.
+
+    Never derived from a trip's length or its day plan: **a dive count is the
+    arithmetic this dataset refuses**, because ten vessels publish one and they
+    state 15 to 21 for the same seven-night week. This reads a figure the
+    seller wrote and returns `None` where it wrote none.
+    """
+    if not isinstance(value, str):
+        return None
+    found = TRIP_COUNT.search(value)
+    return int(found.group(1)) if found else None
+
+
+def _stated_text(node: Any) -> str | None:
+    """The sentence inside `{"title": …, "text": …}`, or nothing."""
+    if isinstance(node, dict):
+        text = node.get("text")
+        if isinstance(text, str) and text.strip():
+            return text.strip()
+    return None
 
 
 @dataclass(slots=True)
@@ -833,6 +898,27 @@ class FeeBlock:
     An empty column is complete and empty, which is the seller saying the fare
     covers everything: a disclosure, not a gap.
     """
+    dives: int | None = None
+    """The dive count this trip states, as a figure and never as a derivation.
+
+    `"9 dives"` on the trip object beside the panel. It is the **last** answer
+    this site would take — after the itinerary fragment and after PADI, both of
+    which it may not outrank — and for the 33 hulls neither of the other two
+    sellers lists it is the only one there is.
+    """
+    requirements: str | None = None
+    certification: str | None = None
+    """The entry bar, in the operator's own two sentences.
+
+    `requirements.expirience.text` reads *"Minimum 0 dives"* and
+    `requirements.sertification.text` names a certification — the source's own
+    spellings, kept because they are the keys it publishes. A stated safety
+    requirement is the operator's claim and is never softened, so both travel
+    as prose and nothing here hardens advice into a gate.
+    """
+    sites: list[str] = field(default_factory=list)
+    """The reefs this trip names, which is the site filter's raw material."""
+
     unnamed: list[str] = field(default_factory=list)
     """Priced lines whose label this project's vocabulary declined, verbatim.
 
@@ -982,6 +1068,23 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 suffix = TRIP_SUFFIX.search(named)
                 block.nights = int(suffix.group("nights")) if suffix else None
                 block.trip = TRIP_SUFFIX.sub("", named).strip() or None
+
+            # And everything else the trip states about itself, from the same
+            # object and for nothing. Each is read as the seller wrote it and
+            # used downstream only where no other source answers.
+            block.dives = _stated_count(owner.get("numberDives"))
+            bar = owner.get("requirements")
+            if isinstance(bar, dict):
+                # The source's own spellings, because they are the keys it
+                # publishes and a tidied copy would be a second vocabulary.
+                block.requirements = _stated_text(bar.get("expirience"))
+                block.certification = _stated_text(bar.get("sertification"))
+            block.sites = [
+                site["name"].strip()
+                for site in (owner.get("divesites") or [])
+                if isinstance(site, dict) and isinstance(site.get("name"), str)
+                and site["name"].strip()
+            ]
 
         found: dict[FeeCode, ParsedFee] = {}
         unreadable = False
