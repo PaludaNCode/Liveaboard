@@ -776,3 +776,182 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         """Amelie's whole *Extra cost* column is the string `$3f`."""
         self.assertEqual(self.blocks[1].unnamed, [])
         self.assertNotIn("3", "".join(f.label for f in self.blocks[1].fees))
+
+
+class TestTheFeeBookReachesTheTripThroughItsDates(unittest.TestCase):
+    """`promote._divebooker_fees`, over a book shaped like the real one.
+
+    The join is the part that cannot be read off the parser: three sellers
+    spell one week three ways, so this source's panel is found through the
+    *dates* its sailings share with our itinerary and never through a name.
+    Every step is an equality on something with no spelling.
+
+    Built rather than landed. The real book is 887 KB and the only channel
+    from a runner to this sandbox is a job log, so carrying it back to prove a
+    dict lookup would be 47 KB of base64 for an assertion a fixture makes
+    better. What is verbatim here is the *shape* — `{trip: {lines, complete}}`
+    per hull, keyed on that seller's own slug — which is what
+    `VesselBook.as_dict` writes and what the runner's own census printed.
+    """
+
+    LINES = [{"code": "port_fees", "tier": "mandatory", "basis": "per_trip",
+              "included": False, "amount": {"amount": 25.0, "currency": "EUR"}}]
+    BOOK = {
+        "aml-hayaty": {
+            "Best of Hurghada": {"lines": LINES, "complete": True},
+            "Deep South": {"lines": [], "complete": False},
+        },
+    }
+    SAILINGS = {
+        "aml-hayaty::2027-05-01": {"boat": "aml-hayaty", "trip": "Best of Hurghada"},
+        "aml-hayaty::2027-05-08": {"boat": "aml-hayaty", "trip": "Best of Hurghada"},
+        "aml-hayaty::2027-06-01": {"boat": "aml-hayaty", "trip": "Deep South"},
+        "aml-hayaty::2027-07-01": {"boat": "aml-hayaty", "trip": "Unlisted week"},
+    }
+
+    def fees(self, *starts):
+        from liveaboard.promote import _divebooker_fees
+        return _divebooker_fees([{"start": s} for s in starts],
+                                "aml-hayaty", self.SAILINGS, self.BOOK)
+
+    def test_a_trip_whose_departures_all_name_one_panel_gets_it(self):
+        found = self.fees("2027-05-01", "2027-05-08")
+        self.assertIsNotNone(found)
+        self.assertTrue(found["complete"])
+        self.assertEqual(found["lines"][0]["code"], "port_fees")
+
+    def test_every_line_says_who_published_it(self):
+        line = self.fees("2027-05-01")["lines"][0]
+        self.assertEqual(line["provenance"]["source_id"], "divebooker.com")
+        self.assertIsNot(line["provenance"],
+                         self.BOOK["aml-hayaty"]["Best of Hurghada"]["lines"][0]
+                         .get("provenance"),
+                         "the book's own line was mutated in place")
+
+    def test_two_panels_under_one_itinerary_attach_neither(self):
+        """A bill assembled from two of their trips is a bill neither quotes."""
+        self.assertIsNone(self.fees("2027-05-01", "2027-06-01"))
+
+    def test_a_trip_this_seller_has_no_panel_for_claims_nothing(self):
+        """`None` is "nobody looked", which is not "there are no fees"."""
+        self.assertIsNone(self.fees("2027-07-01"))
+        self.assertIsNone(self.fees("2027-09-09"))
+
+    def test_an_empty_panel_is_a_disclosure_and_not_a_gap(self):
+        """The seller saying the fare covers everything, which is an answer."""
+        found = self.fees("2027-06-01")
+        self.assertIsNotNone(found)
+        self.assertEqual(found["lines"], [])
+        self.assertFalse(found["complete"])
+
+
+class TestTheThirdBillAddsUpOrShowsNothing(unittest.TestCase):
+    """`pricing.divebooker_lines`, which is where a third total comes from.
+
+    The rule it enforces is the one every seller here is held to: **a total
+    built from part of a disclosure is the thing this site was built to catch
+    other people doing**. So a bill reaches the page whole or not at all, and
+    the row prints a berth price with a sentence instead.
+    """
+
+    def build(self, *, complete, fees=None):
+        from datetime import date as _date
+        from liveaboard.models import Departure, FeeItem, Itinerary, Provenance
+        from liveaboard.money import Money
+        from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
+
+        where = Provenance(kind=SourceKind.SCRAPED, source_id="divebooker.com")
+        theirs = fees if fees is not None else [
+            FeeItem(code=FeeCode.PORT_FEES, tier=FeeTier.MANDATORY,
+                    amount=Money(25, "EUR"), basis=FeeBasis.PER_TRIP,
+                    provenance=where),
+            FeeItem(code=FeeCode.MARINE_PARK, tier=FeeTier.MANDATORY,
+                    amount=Money(15, "EUR"), basis=FeeBasis.PER_DAY,
+                    provenance=where),
+        ]
+        itinerary = Itinerary(
+            id="t", name="Best of Hurghada", operator_id="o", boat_id="b",
+            nights=3, dives=0, port_from="Hurghada", port_to="Hurghada",
+            # The vessel's own optional lines, which this column takes rather
+            # than the seller's: nitrox and gear are billed on board out of one
+            # price list, to whoever walked up the gangway.
+            fees=[FeeItem(code=FeeCode.NITROX, tier=FeeTier.CONDITIONAL,
+                          amount=Money(50, "EUR"), basis=FeeBasis.PER_TRIP,
+                          provenance=where)],
+            divebooker_fees=theirs, divebooker_fees_complete=complete)
+        departure = Departure(
+            id="d", itinerary_id="t",
+            start=_date(2027, 5, 1), end=_date(2027, 5, 4),
+            price=Money(600, "EUR"), price_provenance=where,
+            divebooker_price=Money(640, "EUR"), divebooker_provenance=where)
+        return itinerary, departure
+
+    def fx(self):
+        """A one-currency table, built rather than loaded.
+
+        The committed dataset is behind `tests/published.py` and this needs no
+        rate from it: every figure here is already in euro, so what a real
+        table would add is a conversion of 1.0 and a dependency on the day it
+        was quoted.
+        """
+        from liveaboard.money import FxTable
+        return FxTable({})
+
+    def test_an_incomplete_book_produces_no_third_total(self):
+        from liveaboard.pricing import divebooker_lines
+        itinerary, _ = self.build(complete=False)
+        self.assertIsNone(divebooker_lines(itinerary, self.fx()))
+
+    def test_a_complete_book_bills_its_own_mandatory_rows(self):
+        from liveaboard.pricing import divebooker_lines
+        itinerary, _ = self.build(complete=True)
+        lines = divebooker_lines(itinerary, self.fx())
+        codes = [line.code.value for line in lines]
+        self.assertIn("port_fees", codes)
+        self.assertIn("marine_park", codes)
+
+    def test_the_vessels_own_optional_lines_come_with_it(self):
+        """Nitrox and gear are the boat's charge on board, whoever sold the
+        berth — so they are in every seller's column and from one book."""
+        from liveaboard.pricing import divebooker_lines
+        itinerary, _ = self.build(complete=True)
+        self.assertIn("nitrox",
+                      [line.code.value for line in divebooker_lines(itinerary, self.fx())])
+
+    def test_a_code_this_seller_calls_mandatory_beats_the_vessels_optional_one(self):
+        """The New Sambo case: one code, two books, two tiers.
+
+        Replacing this seller's required charge with the other's optional copy
+        would leave its total short of something it publishes as owed.
+        """
+        from liveaboard.models import FeeItem, Provenance
+        from liveaboard.money import Money
+        from liveaboard.pricing import divebooker_lines
+        from liveaboard.taxonomy import FeeBasis, FeeCode, FeeTier, SourceKind
+        where = Provenance(kind=SourceKind.SCRAPED, source_id="divebooker.com")
+        itinerary, _ = self.build(complete=True, fees=[
+            FeeItem(code=FeeCode.NITROX, tier=FeeTier.MANDATORY,
+                    amount=Money(35, "EUR"), basis=FeeBasis.PER_TRIP,
+                    provenance=where)])
+        nitrox = [line for line in divebooker_lines(itinerary, self.fx())
+                  if line.code.value == "nitrox"]
+        self.assertEqual(len(nitrox), 1, "the same charge reached the bill twice")
+        self.assertEqual(float(nitrox[0].quoted.amount), 35.0,
+                         "the vessel's optional copy replaced a required charge")
+
+    def test_the_berth_line_is_this_sellers_and_says_so(self):
+        from liveaboard.pricing import divebooker_base_line
+        _, departure = self.build(complete=True)
+        line = divebooker_base_line(departure, self.fx())
+        self.assertIn("divebooker", line.label)
+        self.assertEqual(line.provenance.source_id, "divebooker.com")
+        self.assertEqual(float(line.quoted.amount), 640.0)
+
+    def test_a_sailing_this_seller_does_not_list_has_no_berth_line(self):
+        """A berth nobody offered has no price, and a zero would read as free."""
+        from dataclasses import replace
+        from liveaboard.pricing import divebooker_base_line
+        _, departure = self.build(complete=True)
+        self.assertIsNone(
+            divebooker_base_line(replace(departure, divebooker_price=None),
+                                 self.fx()))
