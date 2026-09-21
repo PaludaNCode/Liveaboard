@@ -857,17 +857,35 @@ def _stated_count(value: Any) -> int | None:
     return int(found.group(1)) if found else None
 
 
+#: What this source writes in the harbour field when it has no harbour.
+#: Literally *"Port is not stated"*, on 4 of the 591 panels that fill the field
+#: at all — a sentence about the data sitting where a place name goes, which
+#: would have shipped as a *Departs from* chip nobody can sail from and as a
+#: row claiming a port it does not have. The fleet's other 1,170 readings are
+#: the six harbours this page already names — Hurghada, Port Ghalib, Marsa
+#: Alam, Safaga, Sharm El Sheikh, Hamata — so `PORT_ALIASES` needs nothing and
+#: this needs one line. Matched whole and case-folded, never as a substring:
+#: a rule broad enough to catch "not stated" anywhere would catch a marina
+#: whose name happens to contain it.
+NO_PORT = frozenset({"port is not stated"})
+
+
 def _stated_name(node: Any) -> str | None:
     """The harbour inside `{"name": …, "url": …}`, or nothing.
 
     The `url` beside it is this site's own port page and is dropped: a link is
     not a fact about the trip, and `ALLOWED_EXTERNAL` is empty for the reason
     the page ships nothing external at all.
+
+    A source saying *it does not know* is read as not knowing. `promote` fills
+    this field only where both ends are stated, so a placeholder arriving as a
+    name is not one bad chip — it is the pair passing the test that was meant
+    to stop exactly this.
     """
     if isinstance(node, dict):
         name = node.get("name")
         if isinstance(name, str) and name.strip():
-            return name.strip()
+            return None if name.strip().lower() in NO_PORT else name.strip()
     return None
 
 

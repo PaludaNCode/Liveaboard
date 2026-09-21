@@ -773,6 +773,22 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         self.assertIsNone(self.blocks[0].port_from)
         self.assertIsNone(self.blocks[0].port_to)
 
+    def test_a_sentence_about_the_data_is_not_a_harbour(self):
+        """This source writes *"Port is not stated"* into the port field.
+
+        Four panels of 591 on the fleet census of 2026-09-21. A sentence about
+        the data sitting where a place name goes would have shipped as a
+        *Departs from* chip nobody can sail from — and worse, as the pair that
+        passes the both-ends-stated test the row is otherwise protected by.
+        Matched whole, never as a substring: a rule broad enough to catch "not
+        stated" anywhere catches a marina whose name contains it.
+        """
+        said = {"name": "Port is not stated",
+                "url": "https://divebooker.com/egypt-eaz1"}
+        self.assertIsNone(db._stated_name(said))
+        self.assertIsNone(db._stated_name({"name": "  PORT IS NOT STATED "}))
+        self.assertEqual(db._stated_name({"name": "Hurghada"}), "Hurghada")
+
     def test_a_count_is_a_stated_figure_or_nothing(self):
         self.assertEqual(db._stated_count("9 dives"), 9)
         self.assertEqual(db._stated_count("21 dives"), 21)

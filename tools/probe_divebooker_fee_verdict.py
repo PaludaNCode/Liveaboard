@@ -79,6 +79,7 @@ def main() -> int:
     states: Counter[str] = Counter()
     harbours: Counter[str] = Counter()
     owed_per_block: Counter[int] = Counter()
+    panels: dict[str, list[str]] = {}
     warnings: list[str] = []
 
     for slug in slugs:
@@ -126,6 +127,27 @@ def main() -> int:
                 # "Government fees" off a census with no boat beside it is how
                 # a code gets guessed.
                 unnamed[f"{slug}  {line.strip()[:64]}"] += 1
+            if block.unnamed and any("[owed]" in line for line in block.unnamed):
+                # The whole obligatory column of one panel per hull that still
+                # cannot total. A label is sometimes a judgement about *which*
+                # charge it is, and that is decided by what else the same
+                # operator bills on the same panel: *Government fees* beside a
+                # separate environmental tax is a different finding from
+                # *Government fees* alone, and one line of a census cannot say
+                # which. One panel, not all of them -- the question is what the
+                # operator bills, and its panels agree about that or the book
+                # would key on the vessel.
+                panels.setdefault(slug, [
+                    f"{'-' if fee.included else fee.tier.value:>9}  "
+                    f"{fee.code.value:<18} {fee.low}"
+                    f"{'' if fee.high == fee.low else f'-{fee.high}'} "
+                    f"{fee.currency} "
+                    f"{'(no unit)' if fee.unit_unstated else fee.basis.value}"
+                    for fee in block.fees
+                    if fee.tier is FeeTier.MANDATORY and not fee.included
+                ] + [f"  DECLINED  {line}" for line in block.unnamed
+                     if "[owed]" in line])
+
             for harbour in (block.port_from, block.port_to):
                 if harbour:
                     # Verbatim, because the question is whether `_port` folds
@@ -179,6 +201,13 @@ def main() -> int:
           f"({sum(owed_only.values())} line(s), {len(owed_only)} spelling(s)) ==")
     for label, count in owed_only.most_common(args.sample):
         print(f"  {count:>4}  {label}")
+
+    print(f"\n== one failing panel per hull, in full, so a name is judged "
+          f"against a bill ==")
+    for slug, lines in sorted(panels.items()):
+        print(f"  {slug}")
+        for line in lines:
+            print(f"    {line}")
 
     if warnings:
         print(f"\n== {len(warnings)} warning(s) ==")
