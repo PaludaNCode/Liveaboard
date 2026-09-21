@@ -1022,3 +1022,58 @@ class TestTheThirdBillAddsUpOrShowsNothing(unittest.TestCase):
         self.assertIsNone(
             divebooker_base_line(replace(departure, divebooker_price=None),
                                  self.fx()))
+
+
+class TestTheThirdSellerAnswersLastAndTheSafetyBarDoesNot(unittest.TestCase):
+    """Where this source sits in each chain, and why the bar is the exception.
+
+    Asserted on the shape of the expression rather than through `promote`,
+    which is how this project pins the orderings in `app.js` for the same
+    reason: what may not change is the *order*, and the order is a line of
+    source an editor can reverse without any number moving on the page until
+    a boat somebody is not looking at gets the wrong count.
+    """
+
+    PROMOTE = Path(__file__).resolve().parents[1] / "src" / "liveaboard" / "promote.py"
+
+    def setUp(self):
+        self.src = self.PROMOTE.read_text(encoding="utf-8")
+
+    def chain(self, start: str, end: str) -> str:
+        return self.src.split(start, 1)[1].split(end, 1)[0]
+
+    def test_the_dive_count_is_the_last_resort_of_all(self):
+        """Behind ours and behind PADI's.
+
+        It is another seller's account of a number the operator publishes, and
+        it may not outrank the operator's own — which is exactly why PADI's is
+        behind ours. Ten vessels publish a count and they state 15 to 21 for
+        the same seven-night week, so whose answer this is matters.
+        """
+        chain = self.chain('"dives": trip.get("dives")', '"port_from"')
+        self.assertIn("padi_trip", chain)
+        self.assertIn("divebooker_trip", chain)
+        self.assertLess(chain.index("padi_trip"), chain.index("divebooker_trip"),
+                        "the third seller's dive count now outranks PADI's")
+
+    def test_the_reefs_are_last_and_folded(self):
+        chain = self.chain("sites = (_sites_from_description", "# The title's")
+        self.assertLess(chain.index("padi_trip"), chain.index("divebooker_trip"),
+                        "the third seller's reefs now outrank PADI's")
+        self.assertIn("_sites_from_regions(divebooker_trip", chain,
+                      "this source's reef names reach the site filter unfolded, "
+                      "so they mint chips the rest of the fleet does not share")
+
+    def test_the_entry_bar_takes_the_strictest_and_ranks_nobody(self):
+        """A safety bar is not a fact about a price.
+
+        The rule is that the stricter claim wins whoever made it, because
+        showing the softer one publishes a gate below what somebody stated.
+        Putting this source behind the other two would do exactly that on
+        whichever trips it is the strict one.
+        """
+        chain = self.chain("ours, theirs = _requirements(trip)", "if bar:")
+        self.assertIn("_strictest(_strictest(ours, theirs)", chain)
+        self.assertIn("divebooker_trip", chain)
+        self.assertNotIn(" or _requirements", chain,
+                         "the third seller's bar fell back into a fallback")
