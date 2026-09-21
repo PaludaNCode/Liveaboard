@@ -7,6 +7,70 @@
   "returned": [],
   "withdrawn": [],
   "relisted": [],
+  "price_up": [],
+  "price_down": [],
+  "fees": [
+   {
+    "boat": "Ghazala Adventure",
+    "code": "course",
+    "was": "40-400 EUR / per_trip",
+    "now": "40-450 EUR / per_trip"
+   },
+   {
+    "boat": "Ghazala Adventure",
+    "code": "gear_rental",
+    "was": "190 EUR / per_trip",
+    "now": "190-200 EUR / per_trip"
+   },
+   {
+    "boat": "Ghazala Adventure",
+    "code": "nitrox_course",
+    "was": "135-150 EUR / per_trip",
+    "now": "135-160 EUR / per_trip"
+   },
+   {
+    "boat": "Ghazala Explorer",
+    "code": "course",
+    "was": "40-400 EUR / per_trip",
+    "now": "40-450 EUR / per_trip"
+   },
+   {
+    "boat": "Ghazala Explorer",
+    "code": "gear_rental",
+    "was": "190 EUR / per_trip",
+    "now": "190-200 EUR / per_trip"
+   },
+   {
+    "boat": "Ghazala Explorer",
+    "code": "nitrox_course",
+    "was": "135-150 EUR / per_trip",
+    "now": "135-160 EUR / per_trip"
+   },
+   {
+    "boat": "Golden Dolphin IV",
+    "code": "private_guide",
+    "was": "listed, no price",
+    "now": "450-900 EUR / per_trip"
+   }
+  ],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 0,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-21"
+ },
+ {
+  "before": "HEAD",
+  "after": "2026-09-21",
+  "added": [],
+  "sold_out": [],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
   "price_up": [
    {
     "id": "blue-horizon-2027-05-22-0",

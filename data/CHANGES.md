@@ -9,6 +9,22 @@ Do not edit by hand — the next run rewrites the file around this header.
 changes: HEAD -> 2026-09-21
 ===========================
 
+fees (7)
+  Ghazala Adventure      course           40-400 EUR / per_trip -> 40-450 EUR / per_trip
+  Ghazala Adventure      gear_rental      190 EUR / per_trip -> 190-200 EUR / per_trip
+  Ghazala Adventure      nitrox_course    135-150 EUR / per_trip -> 135-160 EUR / per_trip
+  Ghazala Explorer       course           40-400 EUR / per_trip -> 40-450 EUR / per_trip
+  Ghazala Explorer       gear_rental      190 EUR / per_trip -> 190-200 EUR / per_trip
+  Ghazala Explorer       nitrox_course    135-150 EUR / per_trip -> 135-160 EUR / per_trip
+  Golden Dolphin IV      private_guide    listed, no price -> 450-900 EUR / per_trip
+```
+
+## 2026-09-21
+
+```
+changes: HEAD -> 2026-09-21
+===========================
+
 price up (3)
   2027-05-22  Blue Horizon           1,394 ->   1,743 USD  +349 (+25.0%)  Daedalus & St. John's
   2027-07-31  Sunlight               1,033 ->   1,378 USD  +345 (+33.4%)  South Route: Daedalus - Rocky - Za
