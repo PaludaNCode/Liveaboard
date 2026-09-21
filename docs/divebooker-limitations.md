@@ -215,19 +215,45 @@ really is absent.
     does not filter to the published season, and nothing downstream has yet
     decided which of the 977 fall inside it.
 
-## What is deliberately not built
+## What is built, and what the page is still waiting for
 
-12. **Nothing on the page names divebooker.** The dataset carries the book and
-    `promote` can read it, but no column, chip, filter or panel mentions a
-    third seller. That is stage 11 of the plan and it is the owner's call
-    (stage 0): *two sellers, neither of them the house* is written into
-    `best().cheaper`, the `.lav`/`.padi` metric keys, the Seller cell, the
-    sale-run folding and both `*_read` dates.
-13. **No workflow fetches it on a schedule.** The fetcher runs from
-    `probe.yml` by hand. A `divebooker.yml` on the one-source-per-workflow
-    shape is stage 12, and it cannot be dispatched until it is on the default
-    branch.
-14. **The book reaches this repository through a job log.** The sandbox's
+12. ~~**Nothing on the page names divebooker.**~~ Built. The third seller has
+    its own `.db` metric key, its own `best().cheaper` value, its own column
+    in the fee panel and its own chip in the Seller bank; `best()` reads a
+    list rather than a pair, and the seller chip's word for *more than one*
+    is no longer `both`. Three shapes each had to be rewritten rather than
+    extended, and every one of them was the reading order hardened into a
+    structure — which is the finding, and it is in CLAUDE.md under *Three
+    sellers, none of them the house*.
+13. ~~**No workflow fetches it on a schedule.**~~ `divebooker.yml` exists, on
+    the one-source-per-workflow shape, daily. **It has never run**, and it
+    cannot: `workflow_dispatch` and `schedule` register only for workflows on
+    the default branch. So this is the one thing still blocking, and it
+    blocks the rest of the list below.
+14. **The committed book predates the fee reader.** `data/divebooker.json`
+    holds 92 hulls and 977 departures and no `fees` and no `trips` key at
+    all, because it was collected before the *Price details* panel was found.
+    Everything read out of that panel is therefore written and tested and
+    **dormant**: the fee book, the dive count, the entry bar, the reefs and
+    the two harbours. 26 itineraries carry no fee line, 30 no dive count, 8
+    no reef, and all 29 founded rows read *Unknown* at both ends of *Departs
+    from*, and the first `divebooker.yml` run is what answers all of it. A
+    hand-edited input is not the fix — the dataset must be what `promote`
+    builds from what a fetch wrote.
+15. **How many of its bills add up is not measured.** A third total prints
+    only where the book names, prices *and* scales every obligatory charge,
+    and *50 USD per person* states a payer and no period — so
+    `FeeItem.span_for_trip` refuses it and the whole bill goes silent.
+    `tools/probe_divebooker_fee_verdict.py` asks the shipped reader for that
+    count fleet-wide; until it has run, how much of the third column is
+    reachable is an open question rather than a limitation.
+16. **The operator is permanent, and it is item 3 seen from the other end.**
+    The 33 hulls only this seller lists have no liveaboard.com vessel page,
+    so nothing states a company for them and all 29 founded itineraries carry
+    `unknown-operator`. Correct rather than missing: `Product.brand` here
+    names the seller, and publishing *Divebooker.com* as the operator of an
+    Egyptian boat is the mistake a fixture caught once already.
+17. **The book reaches this repository through a job log.** The sandbox's
     egress policy refuses divebooker.com *and* the blob host artifacts are
     served from, so the runner prints the book as gzip+base64 and
     `tools/land_divebooker.py` reassembles it. It is checksummed per line
