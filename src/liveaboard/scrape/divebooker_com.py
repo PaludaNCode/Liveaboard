@@ -224,6 +224,19 @@ class VesselBook:
     """
     unnamed_fees: list[str] = field(default_factory=list)
     """Priced fee lines this project's vocabulary declined, verbatim."""
+    unpriced: dict[str, int] = field(default_factory=dict)
+    """Sailings stating no fare, counted by the seller's own reason.
+
+    `_departure_book` drops an unpriced sailing silently, which is the right
+    thing to publish and the wrong thing to say nothing about: 46 of 887 in
+    one season, and until they were read by hand nobody could tell a charter
+    slot from a fare this parser had missed. 42 are *Route on Request
+    (Available for groups and charters)* and 4 are sold out.
+
+    The key that matters is `unexplained`. A sailing with no price, no charter
+    wording and no sold-out flag is the only one of these worth a person's
+    time, and a count that lumps all three together hides it.
+    """
     trips: dict[str, dict[str, Any]] = field(default_factory=dict)
     """What each trip states about itself: dives, entry bar, reefs, harbours.
 
@@ -268,6 +281,11 @@ class VesselBook:
             # file should not have to open one to find the other.
             out["trips"] = {trip: dict(facts)
                             for trip, facts in sorted(self.trips.items())}
+        if self.unpriced:
+            # In the book as well as the log: a reader of this file asking why
+            # a boat shows fewer sailings than its page lists gets the answer
+            # from the file rather than from a run that has scrolled away.
+            out["unpriced"] = dict(sorted(self.unpriced.items()))
         if self.unnamed_fees:
             # Named rather than counted, because what an unread charge needs
             # is a word added to `fees.LABEL_PATTERNS` and a count cannot say
@@ -703,6 +721,17 @@ def vessel(html: str, path: str) -> VesselBook:
         if block.fees:
             book.fees[key] = (block.fees, block.complete)
 
+    # Why each unpriced sailing states no fare, in the seller's own terms.
+    # Counted rather than dropped, and split by reason, because "no price"
+    # covers a boat offered for charter and a fare nobody read, and only the
+    # second is this project's problem.
+    for row in book.departures:
+        if row.price is not None:
+            continue
+        book.unpriced[why_unpriced(row.trip, row.availability) or "unexplained"] = (
+            book.unpriced.get(
+                why_unpriced(row.trip, row.availability) or "unexplained", 0) + 1)
+
     if not book.departures:
         # A vessel selling nothing and a page that failed are different
         # answers, and only the caller knows which it asked for. Said here so
@@ -1127,6 +1156,40 @@ def _rank(fee: ParsedFee) -> int:
 
 
 DETAILS_AT = re.compile(r'"details"\s*:\s*(?=\{)')
+
+
+#: A slot the seller offers to charter rather than a week it sells berths on.
+#: Its own words, on 42 of the 46 unpriced sailings in the season: *"Route on
+#: Request (Available for groups and charters; Please enquire…)"* — Argo Egypt
+#: 16, Vita Xplorer 18, Omneia Spirit 7, Independence II 1.
+#:
+#: **This is why those rows carry no fare, and it is not a gap.** The booking
+#: page confirms it from the other side: asked for one of them it returns the
+#: right week, 24 or 25 free spaces, and *no cabin option at all* — the boat is
+#: empty because nobody is selling seats on it. A sailing that prices nothing
+#: is not a fetch that failed, which is the rule `fetch_padi._sailing_counts`
+#: already keeps one source over.
+#:
+#: Matched on the seller's phrase rather than on the absence of a price,
+#: because the two are different claims and only one of them is an answer.
+ON_REQUEST = re.compile(r"\b(?:route\s+on\s+request|on\s+request)\b"
+                        r"|\bfor\s+(?:groups?\s+and\s+)?charters?\b"
+                        r"|\bfull\s+charter\b", re.I)
+
+
+def why_unpriced(trip: str | None, availability: str | None) -> str | None:
+    """Why this sailing states no fare, in the seller's terms, or ``None``.
+
+    ``None`` is the one that matters: a sailing with no price, no charter
+    wording and no sold-out flag is a fare this reading did not find, and that
+    is worth a person's attention. Everything else here is the seller
+    answering.
+    """
+    if trip and ON_REQUEST.search(trip):
+        return "on request"
+    if availability in ("SoldOut", "OutOfStock"):
+        return "sold out"
+    return None
 
 
 def fee_key(trip: str | None, nights: int | None) -> str:

@@ -216,9 +216,14 @@ def main() -> int:
                     unstated += 1
                 else:
                     bases[fee.basis.value] += 1
+        # A sailing that prices nothing is named rather than merely absent,
+        # which is `fetch_padi.why_empty`'s rule one source over: the run says
+        # what it declined to publish and why the seller gave it nothing.
+        why = "".join(
+            f"  {n} {reason}" for reason, n in sorted(book.unpriced.items()))
         print(f"  {path:<40} {kept:>3} in season of {len(book.departures):>3}"
               f"  {len(book.fees):>2} fee block(s)"
-              f"{'  ' + book.name if book.name else ''}", flush=True)
+              f"{'  ' + book.name if book.name else ''}{why}", flush=True)
 
     fresh = {
         "collected": date.today().isoformat(),
@@ -257,6 +262,21 @@ def main() -> int:
     # asked, because a book nobody counted is a book nobody can say is worth
     # publishing — and the two numbers that decide that are how many lines
     # carry a price and how many of those carry a unit a total can use.
+    unpriced: Counter[str] = Counter()
+    for record in vessels.values():
+        for reason, n in (record.get("unpriced") or {}).items():
+            unpriced[reason] += n
+    if unpriced:
+        print(f"\n== {sum(unpriced.values())} sailing(s) state no fare ==")
+        for reason, n in unpriced.most_common():
+            print(f"  {n:>4}  {reason}")
+        if unpriced.get("unexplained"):
+            # The only one worth anybody's attention. A charter slot and a
+            # sold-out week are the seller answering; this is a fare that was
+            # looked for and not found.
+            print(f"  ::warning::{unpriced['unexplained']} sailing(s) state no "
+                  f"fare and no reason — a price this reading did not find")
+
     print(f"\n== the fee panel, as this run read it ==")
     print(f"  {fee_lines} line(s) in {fee_books} trip book(s) on "
           f"{sum(1 for v in vessels.values() if v.get('fees'))} hull(s); "
