@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,fixture,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,fixture,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -415,6 +415,22 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_details_per_sailing.py \
             --vessels "${{ inputs.divebooker_vessel || 'independence-iii' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # Two claims this project has been making by assumption: that a sailing
+      # with no `Offer.price` cannot be priced at all (46 of 887), and that
+      # this source has no cabin ladder, no berth count and no list price.
+      # Both came from reading the vessel page. *Select cabin* is a button on
+      # every departure row that nobody has pressed.
+      - name: What is behind Select cabin
+        if: contains(inputs.divebooker_ask, 'cabins')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_cabins.py \
+            --vessels "${{ inputs.divebooker_vessel || 'vita-xplorer,argo-egypt' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"

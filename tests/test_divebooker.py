@@ -892,6 +892,40 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         # And the near-misses each one was kept narrow to avoid.
         self.assertIsNone(classify_label("Gratitude", prose=False))
 
+    def test_a_charge_the_seller_calls_mandatory_is_named_even_unscalable(self):
+        """*Government fees* — 35 lines, six Sea Serpent hulls, its own code.
+
+        Not the park fee's: every one of those trips bills a separate
+        `marine_park` line, so folding it either doubles a charge or deletes
+        one. Not `LOCAL_FEES` either — what it is for is not stated and this
+        project does not decide; who levies it is.
+
+        Naming it is what puts it in the bill at all. An unnamed priced line is
+        dropped outright, so the charge reached no reader; named, it is carried
+        and printed and marked, and `unit_unstated` keeps it out of every
+        total. A charge a seller calls mandatory belongs in the breakdown even
+        where this project cannot scale it.
+        """
+        from liveaboard.scrape.fees import classify_label
+        found = classify_label("Government fees", prose=False)
+        self.assertIsNotNone(found, "the charge is still dropped")
+        self.assertEqual(found.value, "government_fee")
+        # It must not become the park fee, which those trips bill separately.
+        self.assertEqual(classify_label("National park fees", prose=False).value,
+                         "marine_park")
+        # And the existing combined wording keeps the code it already had.
+        self.assertEqual(
+            classify_label("Environmental/Government Fee", prose=False).value,
+            "environment_tax")
+
+        fee, unread = db._read_fee_line(
+            "Government fees - 100 EUR per person (for trips from January, 2027)",
+            True)
+        self.assertIsNotNone(fee)
+        self.assertEqual(fee.low, 100.0)
+        self.assertTrue(fee.unit_unstated, "a payer is not a period")
+        self.assertIsNone(unread, "a named charge is not also reported unread")
+
     def test_a_title_naming_two_charges_is_one_line_carrying_both(self):
         """`COMBINED_FEES`, which is what this project does with such a title.
 

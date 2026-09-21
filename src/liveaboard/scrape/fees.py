@@ -187,6 +187,20 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # and is in the table for the same reason the two misspellings of Daedalus
     # are -- the trip's own sibling entries name the charge correctly.
     (r"\blocal\s+fees?\b", FeeCode.LOCAL_FEES),
+    # **Its own code, not the park fee's and not `LOCAL_FEES`.** The Sea
+    # Serpent fleet bills *Government fees - 100 EUR per person* as obligatory
+    # on 35 trips across six hulls, beside a separate *marine_park* line on
+    # every one of them — so folding it onto either would either double a
+    # charge or delete one. What it is for is not stated and this project does
+    # not decide; who levies it is, and that is what the code says.
+    #
+    # Naming it is what puts it in the bill at all: an unnamed priced line is
+    # dropped by `_read_fee_line`, so the charge was reaching no reader. It
+    # states a payer and no period, so it stays `unit_unstated` — carried,
+    # printed, marked, and totalled by nothing. A charge a seller calls
+    # mandatory belongs in the breakdown even when this project cannot scale
+    # it; leaving it out is the silence the panel exists to break.
+    (r"\bgovernment(?:al)?\s+(?:fees?|charges?|taxes?)\b", FeeCode.GOVERNMENT_FEE),
     (r"\bhospitality\s+(?:fees?|charges?)\b", FeeCode.HOSPITALITY_FEE),
     # One `p`, because the operator writes one: *Route suplement (from July,
     # 2026) - 55 EUR per person*, 13 lines of it. In the table for the reason
