@@ -773,6 +773,11 @@ FEE_BASES: tuple[tuple[re.Pattern[str], FeeBasis], ...] = tuple(
         (r"\bper\s+weeks?\b", FeeBasis.PER_WEEK),
         (r"\bper\s+(?:trips?|safaris?|cruises?|tours?|itinerar(?:y|ies))\b",
          FeeBasis.PER_TRIP),
+        # `per item` is one purchase on one trip, which is what `fees.BASES`
+        # has always said about the other seller's word for it. Aml Hayaty
+        # prices its Open Water course that way and everything else on the
+        # same panel per trip.
+        (r"\bper\s+items?\b", FeeBasis.PER_TRIP),
     )
 )
 

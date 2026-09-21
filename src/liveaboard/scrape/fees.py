@@ -249,8 +249,16 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # singles invents a basket the operator never sold. Every one of those
     # entries carries `fullSetDescription` naming what is in it, so the note can
     # say so in the seller's words.
+    #
+    # `Full equipment set` is the third seller's spelling of the same bundle,
+    # and it is the line that matters most on a hull only that seller lists:
+    # Aml Hayaty publishes *Full Equipment set (Mask, Fins, Snorkel, BCD,
+    # Regulator, Wetsuit, Torch, SMB): 130.00EUR per trip* beside seven singles
+    # this table declines on purpose. Unnamed, that boat's 35 sailings showed
+    # no gear at all -- and `GEAR_ESTIMATE` could not fill it either, because
+    # it answers an operator's silence and never an absent row.
     (r"\b(?:rental|hire)\s+(?:gear|equipment)\b|\b(?:gear|equipment)\s+(?:rental|hire)\b"
-     r"|\bfull\s+scuba\s+set\b",
+     r"|\bfull\s+scuba\s+set\b|\bfull\s+equipment\s+set\b",
      FeeCode.GEAR_RENTAL),
     (r"\bnaturalist\s+guide\b|\bsnorkell?(?:ing)?\s+guide\b", FeeCode.NATURALIST_GUIDE),
     (r"\bextra\s+dives?\b|\badditional\s+dives?\b", FeeCode.EXTRA_DIVES),
