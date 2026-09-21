@@ -228,6 +228,71 @@ class TestTheBookingPageIsTheCabinLadder(unittest.TestCase):
         self.assertEqual(empty.free_spaces, 25)
 
 
+class TestTheDayPlanNamesReefsTheSiteListDoesNot(unittest.TestCase):
+    """Aml Hayaty's own programme, as the page prints it.
+
+    Its `divesites` array is empty and its day plan dives Abu Nuhas and
+    Thistlegorm — 35 sailings, the largest block of blank reef cells on the
+    page. PADI's day plan is read for exactly this reason one source over.
+    """
+
+    #: Abridged from the page, keeping every reef it names and the shape of the
+    #: lines they sit on. Three of the five are deliberately unreadable here.
+    PLAN = ("Day 1:\nCheck-In & welcome onboard\n6:00pm: Check in onboard\n"
+            "Day 2:\nDolphin House & Siyoul Kebir\n11:00: Dive 1 at Dolphin "
+            "House\n15:00: Dive 2 at Siyoul Kebir\n18:30: Night dive at "
+            "Siyoul Kebir\nDay 3:\nAbu Nuhas & Thistlegorm\n6:30am: Dive 1 "
+            "at Abu Nuhas\n15:00: Dive 3 at Thistlegorm\n"
+            "Day 4:\nThistlegorm, Giftun & Departure\n10:00: Dive at Giftun")
+
+    def test_the_reefs_this_project_can_place_are_read(self):
+        from liveaboard.promote import _sites_from_name
+        self.assertEqual(sorted(_sites_from_name(self.PLAN)),
+                         ["abu nuhas", "thistlegorm"])
+
+    def test_an_ambiguous_name_is_left_unplaced(self):
+        """*Dolphin House* names two reefs this dataset carries separately.
+
+        Sha'ab Samadai at Marsa Alam and Sha'ab El Erg at Hurghada, 600 km
+        apart and both already in the vocabulary. This is a Hurghada
+        mini-safari so it is almost certainly El Erg — and *almost certainly*
+        is how a St John's week got badged BDE. *Giftun* is not *Small
+        Giftun*, and *Siyoul Kebir* appears nowhere in the fleet.
+        """
+        from liveaboard.promote import _sites_from_name
+        for name in ("Dolphin House", "Giftun", "Siyoul Kebir"):
+            with self.subTest(name=name):
+                self.assertEqual(_sites_from_name(name), [], f"{name} was placed")
+
+    def test_the_plan_is_read_whatever_shape_the_seller_writes_it_in(self):
+        """A string, a list of days, or a list of `{title, text}`.
+
+        Which of the three the seller uses has not been read, and a parser
+        written against the guess would break on the first page using another.
+        """
+        for shape in (self.PLAN,
+                      self.PLAN.split("\n"),
+                      [{"title": line} for line in self.PLAN.split("\n")],
+                      {"days": [{"text": self.PLAN}]}):
+            with self.subTest(shape=type(shape).__name__):
+                read = db._prose(shape)
+                self.assertIn("Thistlegorm", read)
+                self.assertIn("Abu Nuhas", read)
+        self.assertIsNone(db._prose(None))
+        self.assertIsNone(db._prose([]))
+
+    def test_it_is_the_last_answer_in_the_chain(self):
+        """Behind that seller's own structured list, which is behind everyone."""
+        from pathlib import Path as _P
+        src = (_P(__file__).resolve().parents[1] / "src" / "liveaboard"
+               / "promote.py").read_text(encoding="utf-8")
+        chain = src.split("sites = (_sites_from_description", 1)[1].split(
+            "# The title's", 1)[0]
+        self.assertLess(chain.index('divebooker_trip.get("sites")'),
+                        chain.index('divebooker_trip.get("programme")'),
+                        "the day plan now outranks that seller's own list")
+
+
 class TestNothingIsInvented(unittest.TestCase):
     """The two mistakes this fixture caught, kept as guards.
 

@@ -2951,7 +2951,24 @@ def promote(
                  # trip-name column and the chip beside it must not disagree,
                  # which is what `SITE_HINTS` and `REEF_ALIASES` are for. PADI's
                  # arrive already folded, by `fetch_padi._padi_sites`.
-                 or _sites_from_regions(divebooker_trip.get("sites") or []))
+                 or _sites_from_regions(divebooker_trip.get("sites") or [])
+                 # **And last of all, that seller's day plan.** Its `divesites`
+                 # array is empty on trips it names reefs in the programme for:
+                 # Aml Hayaty's *Mini Safari: Wrecks & Reefs* lists none and
+                 # dives Abu Nuhas and Thistlegorm on days 3 and 4, which is 35
+                 # sailings — the largest block of blank reef cells on the page.
+                 # PADI's day plan is read for the same reason one source over.
+                 #
+                 # Behind that seller's own structured list, because a plan is
+                 # prose and a list is a list, and through `_sites_from_name`
+                 # like everything else: what the vocabulary cannot already
+                 # place stays unplaced. Three of the five reefs in that plan
+                 # do — *Dolphin House* names two different reefs this dataset
+                 # carries separately, 600 km apart; *Giftun* is not *Small
+                 # Giftun*; *Siyoul Kebir* appears nowhere in the fleet — and
+                 # adding any of them from one boat's itinerary is the
+                 # BDE-badging mistake with a new name.
+                 or _sites_from_name(divebooker_trip.get("programme") or ""))
 
         # The title's port pair beats the Event location, which is the country.
         _, _, titled_ports = _split_title(name)
