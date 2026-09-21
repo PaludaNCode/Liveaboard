@@ -35,8 +35,20 @@ commit that closes a stage, never afterwards from memory.
 | 10 — promote | **closed**: 777 departures carry `divebooker_price`, 7 rows exist because this seller alone lists the date, the panel joins the itinerary through its departures' dates, and its book becomes a trip's own where neither other seller has one |
 | 11 — the page | **closed**: `best()` reads a list of bills, the seller chip is the set, the Seller column links three, `advertisedNote` names whichever seller quoted a berth it cannot total, and the fee panel carries a third table |
 | 12 — cadence | **closed**: `.github/workflows/divebooker.yml`, daily at 05:40 after the two sellers it is compared against |
-| 13 — guards | **closed for what exists**: 65 tests, code and committed data, two fixtures of real bytes |
-| 14 — ship | on the branch, not merged |
+| 13 — guards | **closed for what exists**: 82 tests, code and committed data, two fixtures of real bytes |
+| 14 — ship | on the branch, not merged — **and this is what blocks the rest** |
+
+**Stage 14 is not a formality here.** `workflow_dispatch` and `schedule`
+register only for workflows on the default branch, so `divebooker.yml` cannot
+run until it is merged — and the committed `data/divebooker.json` was collected
+before the *Price details* panel was found, so it holds no `fees` and no
+`trips` key at all. Everything read out of that panel is written, tested and
+**dormant**: the fee book, the dive count, the entry bar, the reefs and the two
+harbours. 26 itineraries carry no fee line, 30 no dive count, 8 no reef, and
+all 29 rows this seller founded read *Unknown* at both ends of *Departs from*.
+The first run of that workflow answers all of it at once. Hand-editing the
+input is not the shortcut: the dataset has to be what `promote` builds from
+what a fetch wrote, which is what `promote --check` is for.
 
 Stage 0 now has its measurement, and the whole fleet has been read against it.
 Divebooker states a fare, a currency and both dates on every departure, so it
