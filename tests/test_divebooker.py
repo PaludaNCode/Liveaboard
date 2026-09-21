@@ -201,12 +201,19 @@ class TestWhatTheDatasetRecordsAboutAThirdSeller(unittest.TestCase):
         one, which is why `deals.unmatched` names its vessels too."""
         self.assertEqual(self.block()["unmapped_vessels"], ["new-hull"])
 
-    def test_no_fare_reaches_the_block(self):
+    def test_no_fare_reaches_the_block_itself(self):
+        """The fares are published **on the rows**, and this block is a summary.
+
+        Still asserted after the withholding ended, and for a reason that did
+        not change with it: a coverage block that carried prices would be a
+        second place the same figures live, and two copies of a price are two
+        things that can disagree about one berth.
+        """
         import json as _json
         printed = _json.dumps(self.block())
         for fare in ("576", "1200", "900", "600"):
             self.assertNotIn(fare, printed, f"a fare reached the dataset: {fare}")
-        self.assertEqual(self.block()["fares"], "withheld")
+        self.assertEqual(self.block()["fares"], "published")
 
     def test_no_book_means_no_block(self):
         from liveaboard.promote import divebooker_coverage
@@ -215,22 +222,32 @@ class TestWhatTheDatasetRecordsAboutAThirdSeller(unittest.TestCase):
                                               self.DEPARTURES, self.BOAT_OF))
 
 
-class TestTheShippedDatasetStatesNoDivebookerFare(unittest.TestCase):
+class TestTheShippedDatasetCarriesTheThirdFare(unittest.TestCase):
     """The publication gate for the rule above.
 
     A guard over the code can be satisfied and the data still wrong, which is
     the whole reason this project separates the two.
+
+    This class asserted the **withholding** until the currency was settled —
+    `fares == "withheld"`, and that no departure carried any key with
+    `divebooker` in its name. Re-aimed rather than deleted: what made the
+    withholding right was that `Offer.priceCurrency` is a static per-vessel
+    label, and reading the page's own currency instead put 725 of 777 joined
+    sailings on a figure one of the other two sellers also states. The rule
+    each assertion below keeps is the same one — a figure reaches a row only
+    where the seller stated it for that sailing, and it never reaches a row
+    that seller does not sell.
     """
 
     def setUp(self):
         from published import raw
         self.payload = raw()
 
-    def test_the_block_is_there_and_withholds(self):
+    def test_the_block_says_the_fares_are_published(self):
         block = self.payload.get("divebooker")
         if block is None:
             self.skipTest("no divebooker book is committed on this checkout")
-        self.assertEqual(block["fares"], "withheld")
+        self.assertEqual(block["fares"], "published")
 
     def test_every_in_season_row_is_accounted_for(self):
         """Matched, on a hull we do not map, or a sailing we do not carry.
@@ -252,11 +269,51 @@ class TestTheShippedDatasetStatesNoDivebookerFare(unittest.TestCase):
             "an in-season sailing is in none of the three buckets")
         self.assertIn(str(block["unmatched"]), block["note"])
 
-    def test_no_departure_carries_a_divebooker_price(self):
+    def test_every_published_fare_says_who_said_it_and_when(self):
+        """No figure without a `Provenance`. The oldest rule here."""
+        priced = 0
         for row in self.payload.get("departures", []):
-            for key in row:
-                self.assertNotIn("divebooker", key,
-                                 f"a divebooker figure reached a departure: {key}")
+            money = row.get("divebooker_price")
+            if money is None:
+                self.assertNotIn("divebooker_provenance", row,
+                                 "a provenance with no price under it")
+                continue
+            priced += 1
+            self.assertIn(money.get("currency"), {"EUR", "USD", "GBP"})
+            self.assertGreater(money.get("amount") or 0, 0,
+                               "a berth nobody offered has no price, and zero "
+                               "would read as free")
+            where = row.get("divebooker_provenance")
+            self.assertIsNotNone(where, "a price with nobody's name on it")
+            self.assertEqual(where["source_id"], "divebooker.com")
+            self.assertTrue(where["retrieved"], "a claim with no date is not one")
+        self.assertGreater(priced, 0, "the third seller reached no row at all")
+
+    def test_the_block_s_own_count_is_the_number_of_rows_it_put_a_fare_on(self):
+        """The coverage figure and the departures have to be one claim.
+
+        `matched` is counted from the book and the rows are written from it in
+        a different loop, so the two agreeing is the statement that the join
+        the block reports is the join the dataset made. They were allowed to
+        drift while nothing was published; now one of them is what a reader
+        sees and the other is what this file says about it.
+        """
+        block = self.payload.get("divebooker")
+        if block is None:
+            self.skipTest("no divebooker book is committed on this checkout")
+        priced = sum(1 for row in self.payload.get("departures", [])
+                     if row.get("divebooker_price"))
+        self.assertLessEqual(
+            priced, block["matched"],
+            "more rows carry a fare than the block says joined")
+
+    def test_a_row_nobody_else_sells_never_carries_a_second_sellers_figure(self):
+        """One seller's number in another's field reads as two agreeing."""
+        for row in self.payload.get("departures", []):
+            if not row.get("padi_only"):
+                continue
+            self.assertIsNone(row.get("padi_price"),
+                              "PADI's own price repeated into PADI's field")
 
 
 class TestADateWithTwoOffersKeepsTheCheapest(unittest.TestCase):

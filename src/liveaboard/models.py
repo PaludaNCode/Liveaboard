@@ -437,6 +437,27 @@ class Departure:
     zero, and not the operator's price copied across.
     """
     padi_provenance: Provenance | None = None
+    divebooker_price: Money | None = None
+    """What divebooker.com advertises for this same sailing, when it sells it.
+
+    A berth price like :attr:`price` and :attr:`padi_price`, and comparable to
+    them on the same terms. Its own field rather than an entry in a list of
+    sellers because the two beside it are fields too, and a third seller
+    arriving is not a reason to rewrite how the first two are stated.
+
+    **The currency is the page's, not the offer's.** `Offer.priceCurrency` on
+    that source is a static per-vessel label that does not describe
+    `Offer.price`: three of four hulls read label every offer EUR on a page
+    whose own payload says it rendered in USD. Read that way, 725 of 777
+    joined sailings carry a figure identical to one of the other two sellers'
+    -- which is what makes this a berth price and not a figure of unknown
+    unit. Read by the label, the same book was 15% wrong in the direction
+    nobody checks.
+
+    ``None`` where that seller does not list the sailing. Not zero, and never
+    another seller's figure copied across.
+    """
+    divebooker_provenance: Provenance | None = None
     berths: list[dict[str, Any]] = field(default_factory=list)
     """What is left on this sailing and at what price, one block per seller.
 
@@ -566,6 +587,11 @@ class Departure:
                         if payload.get("padi_price") else None),
             padi_provenance=(Provenance.from_dict(payload["padi_provenance"])
                              if payload.get("padi_provenance") else None),
+            divebooker_price=(Money.parse(payload["divebooker_price"], default_currency)
+                              if payload.get("divebooker_price") else None),
+            divebooker_provenance=(
+                Provenance.from_dict(payload["divebooker_provenance"])
+                if payload.get("divebooker_provenance") else None),
             padi_only=bool(payload.get("padi_only")),
             berths=list(payload.get("berths") or []),
             sale=dict(payload.get("sale") or {}),

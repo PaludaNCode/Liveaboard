@@ -2093,17 +2093,23 @@ def divebooker_coverage(
         "on_unmapped_vessels": unmapped_rows,
         "unmatched": in_season - matched - unmapped_rows,
         "unmapped_vessels": unmapped,
-        "fares": "withheld",
+        "fares": "published",
         "note": (
             "divebooker.com states a fare on every departure and this dataset "
-            "publishes none of them. The figure itself now reconciles: its "
-            "currency comes from the page's own payload rather than from "
-            "`Offer.priceCurrency`, which is a static per-vessel label, and "
-            "645 of 777 joined sailings carry the same number as a figure one "
-            "of the other two sellers states. One row does not — Red Sea "
-            "Aggressor IV on 2027-07-24, exactly twice our fare for the same "
-            "seven nights, on an offer node shaped like the sailings either "
-            "side of it. "
+            "now publishes them, on the sailings it lists and nowhere else. "
+            "What the withholding was waiting on was the currency: it comes "
+            "from the page's own payload rather than from "
+            "`Offer.priceCurrency`, which is a static per-vessel label that "
+            "does not describe `Offer.price`, and read that way 725 of 777 "
+            "joined sailings carry a figure identical to one of the other two "
+            "sellers'. The 52 that do not are three sellers disagreeing about "
+            "a berth, which is what this page draws — and they concentrate "
+            "rather than scatter: twelve are Unity's whole season at a steady "
+            "1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 "
+            "at exactly twice the other two for the same seven nights, and it "
+            "is printed as the seller states it rather than dropped, because "
+            "deleting a published price is the failure this site reports in "
+            "other people. "
         ) + _divebooker_join_note(in_season, matched, unmapped_rows),
     }
 
@@ -2227,6 +2233,22 @@ def promote(
         key: record
         for key, record in ((padi_departures or {}).get("departures") or {}).items()
     }
+
+    # The third seller's fares, keyed the way the other two are joined --
+    # `(boat, date)`, the exact key, because a date has no spelling. The
+    # translation through `data/divebooker_aliases.json` is the one extra step:
+    # PADI's fetcher writes this site's slugs and divebooker's writes its own,
+    # so the hand-maintained map is what turns one into the other. A hull the
+    # map does not know contributes nothing and is named in the build log
+    # rather than guessed at.
+    divebooker_alias = dict((divebooker_aliases or {}).get("aliases") or {})
+    divebooker_book: dict[str, dict[str, Any]] = {}
+    for record in ((divebooker or {}).get("departures") or {}).values():
+        slug_read = record.get("boat")
+        if slug_read in divebooker_alias and record.get("start"):
+            divebooker_book[
+                f"{divebooker_alias[slug_read]}::{record['start']}"] = record
+    divebooker_read = (divebooker or {}).get("collected") or ""
 
     # What each sailing costs cabin by cabin, and how many berths are left at
     # each rung. Read from the booking page by ``tools/fetch_cabins.py``, which
@@ -2893,6 +2915,36 @@ def promote(
                     "url": f"https://travel.padi.com/liveaboard/"
                            f"{sailing.get('country', 'egypt')}/"
                            f"{padi_slug_for.get(slug, slug)}/",
+                }
+
+            # And the third seller's, on the sailings it lists. Published from
+            # this run rather than withheld, which is a change: the figure used
+            # to be held back because its unit was not established, and what
+            # established it was the currency. Read in the currency the page
+            # states rather than the one `Offer.priceCurrency` labels it with,
+            # 725 of 777 joined sailings carry a figure identical to one of the
+            # other two sellers'. What is left is 52 rows where three sellers
+            # disagree about a berth, which is the thing this page is for --
+            # and they concentrate rather than scatter: twelve of them are
+            # Unity's whole season at a steady 1.43x, which is a price and not
+            # a parse.
+            #
+            # **Never on a row this seller is the only source of**, the rule
+            # `padi_price` already keeps: a figure repeated into a second
+            # seller's field prints as two sellers agreeing about a sailing one
+            # of them does not offer. No such row exists yet.
+            third = divebooker_book.get(f"{slug}::{item['start']}")
+            if third and third.get("price") and third.get("currency"):
+                entry["divebooker_price"] = {
+                    "amount": third["price"],
+                    "currency": third["currency"],
+                }
+                entry["divebooker_provenance"] = {
+                    "kind": "scraped",
+                    "source_id": "divebooker.com",
+                    "retrieved": divebooker_read,
+                    "url": ((divebooker or {}).get("vessels") or {})
+                           .get(third.get("boat"), {}).get("url") or "",
                 }
 
             # What is left on this sailing and at what price, per seller.
