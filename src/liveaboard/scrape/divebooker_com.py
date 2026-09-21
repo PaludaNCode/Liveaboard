@@ -1133,7 +1133,14 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
             for line in _fee_lines(column.get("text", "")):
                 fee, unread = _read_fee_line(line, required)
                 if unread:
-                    block.unnamed.append(unread)
+                    # Marked with the column it came from, because the two are
+                    # different findings: a word missing from an obligatory
+                    # line is what keeps a bill from adding up, and one missing
+                    # from *Extra cost* is a course or a massage and costs the
+                    # total nothing. Reported together and told apart, rather
+                    # than filtered here -- both are charges going unread.
+                    block.unnamed.append(
+                        f"[{'owed' if required else 'extra'}] {unread}")
                     # Only in the obligatory column. A course nobody can name
                     # in the *Extra cost* list says nothing about whether what
                     # a diver must pay adds up.

@@ -240,13 +240,27 @@ really is absent.
     from*, and the first `divebooker.yml` run is what answers all of it. A
     hand-edited input is not the fix — the dataset must be what `promote`
     builds from what a fetch wrote.
-15. **How many of its bills add up is not measured.** A third total prints
-    only where the book names, prices *and* scales every obligatory charge,
-    and *50 USD per person* states a payer and no period — so
-    `FeeItem.span_for_trip` refuses it and the whole bill goes silent.
-    `tools/probe_divebooker_fee_verdict.py` asks the shipped reader for that
-    count fleet-wide; until it has run, how much of the third column is
-    reachable is an open question rather than a limitation.
+15. **Three quarters of its bills do not add up, and the unit is why.**
+    Measured 2026-09-21 with the shipped reader over all 92 hulls
+    ([run 35585415354](https://github.com/PaludaNCode/Liveaboard/actions/runs/35585415354)):
+    **155 of 608 panels are complete**, 53 of those state no obligatory charge
+    at all, so 102 carry a priced bill this project can total. Of the 453 that
+    do not, **319 hold a figure with no unit** — *50 USD per person* states a
+    payer and no period, `FeeItem.span_for_trip` refuses the line, and one such
+    line silences the bill it sits in. 105 hold a charge with no figure, which
+    is nothing to do: this source did not state a price and this project does
+    not invent one.
+    A quarter of the fleet is therefore the ceiling on the third column, and
+    the one lever that could move it is the rule `_with_units_resolved` already
+    applies to gear — join the two books on the money and take only the unit.
+    Whether it reaches these 319 cannot be measured until the fee book is
+    committed, because it needs both books side by side.
+    132 more were blocked by a name rather than by a number. *Fuel Charge*,
+    *Crew Gratitude* and *Route suplement* are now read, at 69 lines between
+    them; every title naming two charges stays declined on the rule
+    *Environmental and Route Fees* already set, and *Government fees* — the
+    largest single spelling at 35 lines — is left for a census that prints the
+    boat beside it.
 16. **The operator is permanent, and it is item 3 seen from the other end.**
     The 33 hulls only this seller lists have no liveaboard.com vessel page,
     so nothing states a company for them and all 29 founded itineraries carry

@@ -325,6 +325,60 @@ The whole-fleet join probe read `name` at `start()` and got 603 of 605, which
 is why the keying looked settled while the parser was attaching nothing.
 `tests/fixtures/divebooker-price-details.json` is what stops a third.
 
+#### How many of those bills add up: 155 of 608
+
+Asked of the shipped reader rather than of a copy of it, over all 92 hulls
+2026-09-21 by `tools/probe_divebooker_fee_verdict.py`
+([run 35585415354](https://github.com/PaludaNCode/Liveaboard/actions/runs/35585415354)).
+`pricing.divebooker_lines` returns `None` unless the book names, prices *and*
+scales every charge a diver cannot decline, so `complete` is exactly how many
+trips can reach the Total with a third column.
+
+| | |
+|---|---|
+| Panels | 608 on 92 pages |
+| The bill adds up | **155 (25%)** — of which 53 state no obligatory charge at all |
+| It does not | 453 |
+
+So **102 panels carry a priced bill this project can total**, and a quarter of
+the fleet is the ceiling on the third column until something below moves. Why
+the other 453 do not, counting a panel once per reason:
+
+| | |
+|---|---|
+| a figure with no unit | 319 |
+| a label nothing could name | 132 |
+| a charge with no figure | 105 |
+
+**The unit is the whole of it.** *Port fees - 50 USD per person* states a payer
+and no period, `FeeItem.span_for_trip` refuses the line, and one such line
+silences the bill it is in. There is a precedent for resolving it and it is
+not a guess: `promote._with_units_resolved` already joins liveaboard.com's
+unit-less gear figure to PADI's stated unit **on the money**, taking only the
+unit and only where the figures match exactly. Whether that reaches these 319
+is a measurement nobody can make until the fee book is committed, because it
+needs both books side by side.
+
+**A label is a word, and three of them were added on this census.** *Fuel
+Charge* (24 lines), *Crew Gratitude* (32) and *Route suplement* (13) are each
+the operator's own spelling of a charge `fees.LABEL_PATTERNS` already holds,
+and none reached it: `gratuit\w*` stems on *gratuit* and cannot see
+*gratitude* at all. What is **left declined on purpose** is every title naming
+two charges — *Port & Permission fees*, *Route fees and enviromental taxes*,
+*Permissions & jetty fees* — which is the rule `Environmental and Route Fees`
+already set: filing a line under half of itself is worse than leaving it read
+and unnamed.
+
+*Government fees* is the largest single spelling at 35 lines and is **not**
+folded. The nearest precedent cuts both ways — this file already folds
+*Environmental/Government Fee* onto the environment tax, on the grounds that
+one boat's *Governamental Reef Tax* is another's *Environmental tax* — but a
+bare *Government fees* beside an operator that also bills *Route fees and
+enviromental taxes* could as easily be the charge that is not that one, and
+the census printed no boat beside the label. It does now, with the column each
+label came from, so the next run decides it against a whole panel instead of a
+line.
+
 #### What else that object states, for nothing
 
 The trip holding the panel also holds `nights`, `numberDives`,

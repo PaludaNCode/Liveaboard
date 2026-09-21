@@ -120,7 +120,12 @@ def main() -> int:
                 if any(fee.unit_unstated for fee in owed):
                     why["a figure with no unit"] += 1
             for line in block.unnamed:
-                unnamed[line.strip()[:70]] += 1
+                # The hull too, because the fix for a name is sometimes a
+                # judgement about *which* charge it is, and that is decided by
+                # what else the same operator bills on the same panel. Reading
+                # "Government fees" off a census with no boat beside it is how
+                # a code gets guessed.
+                unnamed[f"{slug}  {line.strip()[:64]}"] += 1
             for harbour in (block.port_from, block.port_to):
                 if harbour:
                     # Verbatim, because the question is whether `_port` folds
@@ -164,6 +169,15 @@ def main() -> int:
     print(f"\n== priced labels this project's vocabulary declined "
           f"({sum(unnamed.values())} line(s), {len(unnamed)} spelling(s)) ==")
     for label, count in unnamed.most_common(args.sample):
+        print(f"  {count:>4}  {label}")
+
+    # And what each hull that still cannot total states in full, so the next
+    # word added to the vocabulary is decided against a whole panel rather
+    # than against one line of it.
+    owed_only = Counter({k: v for k, v in unnamed.items() if "[owed]" in k})
+    print(f"\n== of those, the obligatory ones "
+          f"({sum(owed_only.values())} line(s), {len(owed_only)} spelling(s)) ==")
+    for label, count in owed_only.most_common(args.sample):
         print(f"  {count:>4}  {label}")
 
     if warnings:

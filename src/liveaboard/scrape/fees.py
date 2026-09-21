@@ -161,7 +161,14 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
      r"|\bconservation\s+(?:fees?|charges?)\b|\breef\s+tax(?:es)?\b"
      r"|\benvironmental\s*/\s*government\s+fees?\b",
      FeeCode.ENVIRONMENT_TAX),
-    (r"\bfuel\s+(?:surcharges?|fees?|supplements?)\b", FeeCode.FUEL_SURCHARGE),
+    # `charge` is the third seller's word for it -- 24 lines of *Fuel Charge:
+    # 45EUR per trip* on the fleet census of 2026-09-21, against nothing
+    # spelled that way on the other two. Same fix as the plurals above and for
+    # the same reason: the word belongs to the operators, and a table written
+    # against one seller's wording reads as complete until a second is pointed
+    # at it.
+    (r"\bfuel\s+(?:surcharges?|fees?|supplements?|charges?)\b",
+     FeeCode.FUEL_SURCHARGE),
     (r"\bport\s+fees?\b|\bharbou?r\s+(?:fees?|dues)\b", FeeCode.PORT_FEES),
     # Six wordings PADI's fee book uses and liveaboard.com's does not. Each is
     # `isMandatory` on the source's own say-so, each is priced, and between
@@ -181,7 +188,12 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # are -- the trip's own sibling entries name the charge correctly.
     (r"\blocal\s+fees?\b", FeeCode.LOCAL_FEES),
     (r"\bhospitality\s+(?:fees?|charges?)\b", FeeCode.HOSPITALITY_FEE),
-    (r"\broute\s+supplements?\b", FeeCode.ROUTE_SUPPLEMENT),
+    # One `p`, because the operator writes one: *Route suplement (from July,
+    # 2026) - 55 EUR per person*, 13 lines of it. In the table for the reason
+    # `Cost Gard Fee` is and the two misspellings of Daedalus are -- the same
+    # charge is spelled correctly elsewhere in this fleet, so the correction is
+    # confirmed by the data rather than guessed from the shape of the word.
+    (r"\broute\s+supp?lements?\b", FeeCode.ROUTE_SUPPLEMENT),
     (r"\bcoast\s*guard\b|\bcost\s+gard\b", FeeCode.COAST_GUARD),
     (r"\bnavy\s+(?:fees?|charges?)\b", FeeCode.NAVY_FEE),
     # A contribution to the recompression chamber, billed per diver on two of
@@ -273,7 +285,14 @@ LABEL_PATTERNS: tuple[tuple[str, FeeCode], ...] = (
     # itineraries carry it -- and `crew\s+tips?` only matched the other way
     # round, so the one charge every operator on that seller states was the one
     # charge nothing read.
-    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btips?\s+for\s+the\s+crew\b|\btipping\b",
+    #
+    # And `crew gratitude`, which is the operator's own word rather than a
+    # near-miss of ours -- 32 lines on the third seller's census, *Crew
+    # Gratitude: 120.00EUR per trip*. `gratuit\w*` cannot reach it: the stem
+    # is *grati*, not *gratuit*. Anchored on `crew` rather than added as a bare
+    # `gratitude`, so a boat thanking its guests in a description stays prose.
+    (r"\bgratuit\w*\b|\bcrew\s+tips?\b|\btips?\s+for\s+the\s+crew\b|\btipping\b"
+     r"|\bcrew\s+gratitude\b",
      FeeCode.GRATUITIES),
     (r"\blaundry\b|\bpressing\s+services?\b", FeeCode.LAUNDRY),
     (r"\bvisas?\s*(?:fees?|on\s+arrival)?\b(?!\w)", FeeCode.VISA),

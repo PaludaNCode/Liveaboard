@@ -797,6 +797,39 @@ class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
         self.assertTrue(any("BCD" in line for line in aml.unnamed))
         self.assertFalse(any("Full Equipment set" in line for line in aml.unnamed))
 
+    def test_a_declined_label_says_which_column_it_came_from(self):
+        """Two findings, not one.
+
+        A word missing from an obligatory line is what keeps a bill from
+        adding up; one missing from *Extra cost* is a course or a massage and
+        costs the total nothing. Reported together and told apart — filtering
+        either out here would hide a charge going unread.
+        """
+        aml = self.blocks[2]
+        self.assertTrue(any(line.startswith("[extra] BCD") for line in aml.unnamed),
+                        aml.unnamed)
+        self.assertTrue(all(line.startswith(("[owed] ", "[extra] "))
+                            for line in aml.unnamed), aml.unnamed)
+
+    def test_three_spellings_the_fleet_census_found(self):
+        """Each is the operator's own word, each counted before it was added.
+
+        *Fuel Charge* 24 lines, *Crew Gratitude* 32, *Route suplement* 13, on
+        the whole-fleet read of 2026-09-21. None of them reaches the table by
+        the route its correctly-spelled sibling does: `gratuit\w*` stems on
+        *gratuit* and cannot see *gratitude* at all.
+        """
+        from liveaboard.scrape.fees import classify_label
+        for label, code in (("Fuel Charge", "fuel_surcharge"),
+                            ("Crew Gratitude", "gratuities"),
+                            ("Route suplement", "route_supplement")):
+            with self.subTest(label=label):
+                found = classify_label(label, prose=False)
+                self.assertIsNotNone(found, f"{label!r} is still declined")
+                self.assertEqual(found.value, code)
+        # And the near-misses each one was kept narrow to avoid.
+        self.assertIsNone(classify_label("Gratitude", prose=False))
+
     def test_a_figure_inside_a_bracket_keeps_its_label(self):
         """`Gratuities (€70)` came out labelled `Gratuities (`."""
         tips = [f for f in self.blocks[2].fees if f.code.value == "gratuities"]
