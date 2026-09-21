@@ -65,14 +65,22 @@ def main() -> int:
             print(f"BLOCKED {path}: {exc}")
             continue
         text, dropped = db.payload_parts(result.body)
-        at = [m.end() for m in db.DETAILS_AT.finditer(text)]
-        owners = db.enclosing(text, at)
-        print(f"== {path} — {len(at)} panel(s), {dropped} chunk(s) undecoded ==")
-        for position in at[: args.blocks]:
+        # Two indices per panel and they are not interchangeable: `end()` is
+        # the brace the panel opens at, whose smallest enclosing object is the
+        # panel itself, and `start()` is the key's opening quote, which sits
+        # inside the trip. Getting this wrong here printed a fixture whose
+        # every trip was called "Price details" — the same bug `fee_blocks`
+        # had, left in the tool that was supposed to catch it.
+        found = [(m.start(), m.end()) for m in db.DETAILS_AT.finditer(text)]
+        owners = db.enclosing(text, [start for start, _ in found])
+        print(f"== {path} — {len(found)} panel(s), {dropped} chunk(s) undecoded ==")
+        for owner_at, position in found[: args.blocks]:
             chunk = db.balanced(text, position)
-            bounds = owners.get(position)
+            bounds = owners.get(owner_at)
             owner = json.loads(text[bounds[0]:bounds[1] + 1]) if bounds else {}
-            carried.append({"title": owner.get("title"),
+            # The trip's own field, which is `name`; `title` is the panel's
+            # heading and reads *Price details* on every hull.
+            carried.append({"name": owner.get("name"),
                             "details": json.loads(chunk)})
 
         blocks, warnings = db.fee_blocks(result.body)

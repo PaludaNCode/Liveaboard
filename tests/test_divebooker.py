@@ -6,7 +6,11 @@ selling fifty, and costs a tenth of the log to carry back. The parser reads
 nothing outside those blocks, so nothing is lost by keeping them rather than
 300 KB of markup.
 
-Every assertion below is a fact somebody read, and two of them are bugs this
+`divebooker-price-details.json` is the second, carried back the same way on
+2026-09-21: two vessels' *Price details* panels, which are the two line shapes
+the fleet census found and neither of which a reader handles by accident.
+
+Every assertion below is a fact somebody read, and four of them are bugs a
 fixture caught before they shipped.
 """
 
@@ -646,3 +650,102 @@ class TestThePriceDetailsPanelIsAFeeBook(unittest.TestCase):
         blank = self.read("Nitrox", required=False)
         self.assertEqual(
             [db._rank(f) for f in (blank, included, priced)], [0, 1, 2])
+
+
+PANELS = Path(__file__).resolve().parent / "fixtures" / "divebooker-price-details.json"
+
+
+def payload_page(nodes) -> str:
+    """The panels put back the way the site streams them.
+
+    App Router ships its data as JSON **string literals** inside
+    `self.__next_f.push([1, "…"])`, so the payload's own quotes arrive
+    backslashed. A fixture that skipped that would prove a regex against
+    pretty-printed bytes no server ever sent, which is the reason this module
+    probes before it parses.
+    """
+    body = json.dumps({"trips": list(nodes)}, ensure_ascii=False)
+    return ('<script>self.__next_f.push([1,' + json.dumps(body) + '])</script>')
+
+
+class TestThePanelIsReadOffBytesTheSiteServed(unittest.TestCase):
+    """Red Sea Aggressor II's and Amelie's *Price details*, verbatim.
+
+    Both panels are exactly what the runner printed on 2026-09-21; the trip
+    `name` beside each is this source's own wording for that boat's week, and
+    the pair is assembled the way `divebooker-bella-2.jsonld.json` assembles
+    its blocks into a page — the parts are the site's, the wrapper is how the
+    site serves them.
+
+    Two hulls because they are the two line shapes the fleet census found, and
+    a reader that handles one handles neither by accident: a spaced dash with
+    the currency after the figure and no period stated, and a colon with the
+    currency against the figure and the period spelled out.
+    """
+
+    def setUp(self):
+        self.nodes = json.loads(PANELS.read_text(encoding="utf-8"))
+        self.blocks, self.warnings = db.fee_blocks(payload_page(self.nodes))
+
+    def codes(self, block):
+        return {fee.code.value: fee for fee in block.fees}
+
+    def test_each_panel_is_found_and_named_for_its_trip(self):
+        self.assertEqual(len(self.blocks), 2, self.warnings)
+        self.assertEqual([b.trip for b in self.blocks],
+                         ["Northern Red Sea - Best Wreck Diving",
+                          "Hurghada North"],
+                         "the panel is named for its own heading rather than "
+                         "for the trip that holds it")
+        self.assertEqual([b.nights for b in self.blocks], [7, 3])
+        self.assertEqual(self.warnings, [])
+
+    def test_the_obligatory_column_is_mandatory_and_the_extras_are_not(self):
+        fees = self.codes(self.blocks[0])
+        for code in ("port_fees", "marine_park", "fuel_surcharge"):
+            self.assertIs(fees[code].tier, db.FeeTier.MANDATORY, code)
+        self.assertIsNot(fees["gratuities"].tier, db.FeeTier.MANDATORY)
+
+    def test_a_figure_with_a_payer_and_no_period_totals_nothing(self):
+        """"50 USD per person" is who pays, not how often."""
+        fees = self.codes(self.blocks[0])
+        for code in ("port_fees", "marine_park", "fuel_surcharge"):
+            self.assertTrue(fees[code].unit_unstated, code)
+            self.assertIsNotNone(fees[code].low, "the seller's figure is kept")
+        self.assertFalse(self.blocks[0].complete,
+                         "a bill whose mandatory lines cannot be scaled is "
+                         "not a bill this site may total")
+
+    def test_a_stated_period_is_read_and_the_bill_then_adds_up(self):
+        fees = self.codes(self.blocks[1])
+        self.assertIs(fees["fuel_surcharge"].basis, db.FeeBasis.PER_DAY)
+        self.assertIs(fees["marine_park"].basis, db.FeeBasis.PER_DAY)
+        self.assertIs(fees["port_fees"].basis, db.FeeBasis.PER_TRIP)
+        self.assertEqual(
+            [fees[c].low for c in ("fuel_surcharge", "marine_park", "port_fees")],
+            [10.0, 15.0, 25.0])
+        self.assertTrue(self.blocks[1].complete)
+
+    def test_the_free_tank_size_is_not_the_charged_one(self):
+        """`12l tanks and weights` is what the operator gives you.
+
+        It read as `TANK_15L` and outranked the *Extra cost* line naming the
+        15-litre upgrade, which published this boat's charged tanks as
+        included — turning a charge into free, the one error the label table's
+        own comment says it must never make.
+        """
+        fees = self.codes(self.blocks[0])
+        self.assertIn("tank_15l", fees)
+        self.assertFalse(fees["tank_15l"].included,
+                         "the 15-litre upgrade is stated as included")
+
+    def test_an_inclusion_is_an_answer_and_carries_no_figure(self):
+        included = [f for f in self.blocks[1].fees if f.included]
+        self.assertTrue(included, "the inclusion column read as nothing")
+        for fee in included:
+            self.assertIsNone(fee.low)
+
+    def test_a_bare_amount_line_is_not_a_charge(self):
+        """Amelie's whole *Extra cost* column is the string `$3f`."""
+        self.assertEqual(self.blocks[1].unnamed, [])
+        self.assertNotIn("3", "".join(f.label for f in self.blocks[1].fees))

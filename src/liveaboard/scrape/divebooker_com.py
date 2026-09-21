@@ -966,11 +966,17 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 owner = json.loads(text[bounds[0]:bounds[1] + 1])
             except json.JSONDecodeError:
                 owner = {}
-            title = owner.get("title") if isinstance(owner, dict) else None
-            if isinstance(title, str) and title.strip():
-                suffix = TRIP_SUFFIX.search(title)
+            # **`name`, not `title`.** The panel's own heading is `title` and
+            # says *Price details* on every hull; the trip that holds it
+            # states `name`. Read the wrong one and every block comes back
+            # called Price details — or, once the index was right, called
+            # nothing at all, because the trip object has no `title` to read.
+            # `title` stays as a fallback and has never fired.
+            named = owner.get("name") or owner.get("title")
+            if isinstance(named, str) and named.strip():
+                suffix = TRIP_SUFFIX.search(named)
                 block.nights = int(suffix.group("nights")) if suffix else None
-                block.trip = TRIP_SUFFIX.sub("", title).strip() or None
+                block.trip = TRIP_SUFFIX.sub("", named).strip() or None
 
         found: dict[FeeCode, ParsedFee] = {}
         unreadable = False
