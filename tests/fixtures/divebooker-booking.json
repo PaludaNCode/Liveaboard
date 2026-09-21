@@ -1,0 +1,71 @@
+{
+  "_note": "Verbatim from https://divebooker.com/boatorder/booking?tripId=254581, read on a runner 2026-09-21 (run 35660695837, Argo Egypt). The page streams these as JSON string literals inside self.__next_f.push. Extracted to the nodes a parser reads -- the trip header and every cabin option -- with no field altered and none added. The containing keys are NOT known: the probe opened each node by bracket-matching from its own key, so the parser finds an option by its shape (cabinId beside a price) rather than by a wrapper this file would have to invent.",
+  "_no_markdown_here": "Every option on this page states price.old as an empty string, so a discounted cabin is UNPROVEN. The parser reads the field because the seller publishes it; no fixture asserts what a real markdown looks like, and no count of divebooker discounts may be quoted until one has been read.",
+  "trip": {
+    "id": "75551",
+    "title": "North Ras Mohamed",
+    "startDate": "2026-12-05",
+    "endDate": "2026-12-12",
+    "currencyId": "2",
+    "sumFreeSpaces": "8",
+    "isLockAvail": null,
+    "isLock": null
+  },
+  "options": [
+    {
+      "id": "1826971",
+      "cabinId": "1436",
+      "inseanqCabinTypeId": null,
+      "genderRestriction": null,
+      "title": "Twin Share",
+      "descr": "Shared accommodation with one other guest",
+      "freeSpaces": "8",
+      "sharing": "1",
+      "name": "Shared",
+      "price": {"current": "1272", "old": "", "text": "per person"},
+      "persons": {"max": "2", "active": "1"},
+      "availability": {"state": 1, "fullText": "Full"},
+      "types": [{"id": 1, "name": "1 guest"}, {"id": 2, "name": "2 guests (1 cabin)"}],
+      "props": []
+    },
+    {
+      "id": "1826969",
+      "cabinId": "1437",
+      "inseanqCabinTypeId": null,
+      "genderRestriction": null,
+      "title": "Twin Share",
+      "descr": "Shared accommodation with one other guest",
+      "freeSpaces": "8",
+      "sharing": "1",
+      "name": "Shared",
+      "price": {"current": "1272", "old": "", "text": "per person"},
+      "persons": {"max": "2", "active": "1"},
+      "availability": {"state": 1, "fullText": "Full"},
+      "types": [{"id": 1, "name": "1 guest"}, {"id": 2, "name": "2 guests (1 cabin)"}],
+      "props": []
+    },
+    {
+      "id": "1826970",
+      "cabinId": "1437",
+      "inseanqCabinTypeId": null,
+      "genderRestriction": null,
+      "title": "Double Occupancy",
+      "descr": "Private cabin for two guests",
+      "freeSpaces": "8",
+      "sharing": "0",
+      "name": "Private",
+      "price": {"current": "1272", "old": "", "text": "per person"},
+      "persons": {"max": "2", "active": "2"},
+      "availability": {"state": 1, "fullText": "Full"},
+      "types": [{"id": 2, "name": "2 guests (1 cabin)"}, {"id": 4, "name": "4 guests (2 cabins)"}],
+      "props": []
+    }
+  ],
+  "total": {
+    "text": "Total price:",
+    "textTotalSub": "Subtotal",
+    "textTotalGrand": "Grand total",
+    "price": {"oldPrice": 0, "old": "", "current": "0"},
+    "reward": 0
+  }
+}

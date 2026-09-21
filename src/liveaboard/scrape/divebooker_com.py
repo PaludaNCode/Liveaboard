@@ -1329,3 +1329,148 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
             fee.has_price and not fee.unit_unstated for fee in owed)
         blocks.append(block)
     return blocks, warnings
+
+
+# --------------------------------------------------------------------------
+# The booking page: `/boatorder/booking?tripId=…`, behind *Select cabin*
+#
+# The one page this seller states a cabin ladder on. Three claims live here and
+# nowhere else in what it publishes -- what each room costs, how many berths
+# are left in it, and the list price it was marked down from -- and this file
+# said for weeks that none of them existed, on the strength of having read only
+# the vessel page. That verdict was about the page that was looked at.
+#
+# **The URL is buildable.** `tripId` is the JSON-LD Event's own id fragment:
+# `…-haz441#254581` opens `/boatorder/booking?tripId=254581`. Verified on both
+# dates against the vessel listing, 6 of 6 (run 35660695837), and robots.txt
+# allows the path.
+#
+# **An unpriced sailing stays unpriced here.** Asked for a *Route on Request*
+# slot the page returns the right week, 24 or 25 free spaces and no cabin
+# option at all. So this is not a backup fare and must never be used as one --
+# see `why_unpriced`.
+
+#: A cabin option, found by its own shape. The key that contains the list is
+#: not known -- the probe opened each node by bracket-matching from its own key
+#: -- and a wrapper name this file invented would be a guess that breaks the
+#: day the seller renames it. `cabinId` beside a `price` is what an option is.
+OPTION_AT = re.compile(r'"cabinId"\s*:')
+#: The sailing this page is about, which is what the ladder is checked against.
+TRIP_AT = re.compile(r'"sumFreeSpaces"\s*:')
+
+
+@dataclass(slots=True)
+class CabinOption:
+    """One room, as the booking page offers it."""
+
+    cabin_id: str | None = None
+    title: str | None = None
+    sharing: bool | None = None
+    price: float | None = None
+    was: float | None = None
+    """The struck-through list price, or `None`.
+
+    **Unproven.** Every option read so far states it as an empty string, so
+    what a real markdown looks like here has never been seen. It is read
+    because the seller publishes the field; nothing may quote a divebooker
+    discount count until one has been.
+    """
+    unit: str | None = None
+    """`price.text`, verbatim -- *"per person"* on every option read.
+
+    Kept as the seller's words rather than mapped to a `FeeBasis`: a fare is
+    not a fee, and the one thing this project must not do is decide a unit the
+    source did not state.
+    """
+    free_spaces: int | None = None
+    max_persons: int | None = None
+
+
+@dataclass(slots=True)
+class BookingPage:
+    """What one sailing's *Select cabin* page states."""
+
+    trip_id: str | None = None
+    start: str | None = None
+    end: str | None = None
+    free_spaces: int | None = None
+    """`sumFreeSpaces`: berths left on the sailing, the seller's own total.
+
+    Not a sum of the options'. Three options on Argo Egypt each state 8 free
+    spaces beside a sailing total of 8, so they overlap -- the same berths
+    offered as shared or private. Adding them would triple the boat.
+    """
+    cabins: list[CabinOption] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+
+    @property
+    def cheapest(self) -> float | None:
+        """The bottom rung, which is what an advertised fare is elsewhere here."""
+        priced = [c.price for c in self.cabins if c.price is not None]
+        return min(priced) if priced else None
+
+
+def _int(value: Any) -> int | None:
+    try:
+        return int(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def _float(value: Any) -> float | None:
+    try:
+        number = float(str(value).replace(",", "").strip())
+    except (TypeError, ValueError):
+        return None
+    return number if number > 0 else None
+
+
+def booking_page(html: str) -> BookingPage:
+    """Read the cabin ladder and the berth count off one booking page."""
+    text, dropped = payload_parts(html)
+    page = BookingPage()
+    if dropped:
+        page.warnings.append(f"{dropped} streamed chunk(s) did not decode")
+
+    found = [m.start() for m in TRIP_AT.finditer(text)]
+    for start, (a, b) in enclosing(text, found).items():  # noqa: B007
+        try:
+            node = json.loads(text[a:b + 1])
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(node, dict) or "startDate" not in node:
+            continue
+        page.trip_id = str(node.get("id") or "") or None
+        page.start = node.get("startDate")
+        page.end = node.get("endDate")
+        page.free_spaces = _int(node.get("sumFreeSpaces"))
+        break
+
+    at = [m.start() for m in OPTION_AT.finditer(text)]
+    for start, (a, b) in sorted(enclosing(text, at).items()):  # noqa: B007
+        try:
+            node = json.loads(text[a:b + 1])
+        except json.JSONDecodeError:
+            page.warnings.append("a cabin option did not parse as JSON")
+            continue
+        if not isinstance(node, dict):
+            continue
+        money = node.get("price")
+        money = money if isinstance(money, dict) else {}
+        persons = node.get("persons")
+        persons = persons if isinstance(persons, dict) else {}
+        page.cabins.append(CabinOption(
+            cabin_id=str(node.get("cabinId") or "") or None,
+            title=(node.get("title") or "").strip() or None,
+            # `"1"` shared, `"0"` private -- the seller's own flag, and the
+            # difference between a berth and a room. Read as a state rather
+            # than inferred from the title, which is prose.
+            sharing=(None if node.get("sharing") in (None, "")
+                     else str(node.get("sharing")) == "1"),
+            price=_float(money.get("current")),
+            was=_float(money.get("old")),
+            unit=(money.get("text") or "").strip() or None,
+            free_spaces=_int(node.get("freeSpaces")),
+            max_persons=_int(persons.get("max")),
+        ))
+    return page

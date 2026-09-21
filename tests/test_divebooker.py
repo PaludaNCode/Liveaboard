@@ -156,6 +156,78 @@ class TestASailingThatPricesNothingSaysWhy(unittest.TestCase):
         self.assertEqual(book.as_dict()["unpriced"], {"on request": 1})
 
 
+BOOKING = Path(__file__).resolve().parent / "fixtures" / "divebooker-booking.json"
+
+
+class TestTheBookingPageIsTheCabinLadder(unittest.TestCase):
+    """`/boatorder/booking?tripId=…`, behind *Select cabin*, on real bytes.
+
+    The one page this seller states a ladder on. This file said for weeks that
+    it had no cabin ladder, no berth count and no list price — a verdict about
+    the vessel page, which is the only page that had been read. The same shape
+    of mistake as "no fee book hiding client-side".
+    """
+
+    def setUp(self):
+        node = json.loads(BOOKING.read_text(encoding="utf-8"))
+        self.page = db.booking_page(payload_page([node]))
+
+    def test_the_sailing_it_is_about(self):
+        self.assertEqual((self.page.start, self.page.end),
+                         ("2026-12-05", "2026-12-12"))
+        self.assertEqual(self.page.trip_id, "75551")
+
+    def test_every_room_carries_its_own_fare_and_what_is_left(self):
+        self.assertEqual(len(self.page.cabins), 3)
+        self.assertEqual([c.price for c in self.page.cabins],
+                         [1272.0, 1272.0, 1272.0])
+        self.assertEqual([c.free_spaces for c in self.page.cabins], [8, 8, 8])
+        self.assertEqual(self.page.cheapest, 1272.0)
+
+    def test_the_sailing_total_is_the_sellers_and_never_a_sum(self):
+        """Three rooms at 8 free spaces beside a sailing total of 8.
+
+        They overlap — the same berths offered shared or private — so adding
+        them would put 24 berths on an eight-berth boat. `places left` is the
+        seller's own figure or nothing.
+        """
+        self.assertEqual(self.page.free_spaces, 8)
+        self.assertNotEqual(
+            self.page.free_spaces,
+            sum(c.free_spaces for c in self.page.cabins),
+            "the sailing's count was derived by adding the rooms'")
+
+    def test_shared_and_private_are_the_sellers_flag(self):
+        self.assertEqual([c.sharing for c in self.page.cabins],
+                         [True, True, False])
+
+    def test_the_unit_is_kept_as_the_seller_wrote_it(self):
+        """A fare is not a fee: nothing here maps this onto a `FeeBasis`."""
+        self.assertEqual({c.unit for c in self.page.cabins}, {"per person"})
+
+    def test_a_markdown_is_read_but_has_never_been_seen(self):
+        """`price.old` is an empty string on every option read.
+
+        So it parses to nothing, and no divebooker discount may be counted
+        until a real one has been read. The field is carried because the seller
+        publishes it, not because this project has evidence of its shape.
+        """
+        self.assertEqual([c.was for c in self.page.cabins], [None, None, None])
+
+    def test_a_page_with_nothing_on_it_reads_as_nothing(self):
+        """A *Route on Request* slot returns spaces and no cabin option.
+
+        It is not a fare this reading missed, and it must never be used as a
+        backup price — see `why_unpriced`.
+        """
+        empty = db.booking_page(payload_page([{"trip": {
+            "id": "1", "startDate": "2027-05-01", "endDate": "2027-05-08",
+            "sumFreeSpaces": "25"}}]))
+        self.assertEqual(empty.cabins, [])
+        self.assertIsNone(empty.cheapest)
+        self.assertEqual(empty.free_spaces, 25)
+
+
 class TestNothingIsInvented(unittest.TestCase):
     """The two mistakes this fixture caught, kept as guards.
 
