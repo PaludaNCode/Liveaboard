@@ -644,14 +644,21 @@ sold-out sailing — the doubled figure was the only visible trace, and it is
 the only one in the book: exactly one row prices at 1.9× or more of its own
 trip's median.
 
-So the doubling is not a parser artefact and not a second cabin class. That is the same shape as liveaboard.com's unitless gear figure and
-it gets the same answer: the figure is kept in `data/divebooker.json` where a
-person can read it, and nothing totals it, compares it or prints it. The other
-78 in-season rows quote EUR against our USD and cannot be compared without
-converting first.
+So the doubling is not a parser artefact and not a second cabin class: it is
+what the page prints for a week it can no longer sell a single berth on. The
+other 78 in-season rows quote EUR against our USD and cannot be compared
+without converting first.
 
-**The next probe is a booking page**, if one can be reached without a path
-robots.txt refuses — that is where a per-person figure would say so.
+**The next probe is still a booking page**, and the reason has outlived the
+row that prompted it. Every fee this source gives us is read from the *Price
+details* panel on the **vessel** page — a panel filed under the trip, not
+under the sailing — and nothing has ever checked it against what a diver is
+shown at checkout. The corroboration it does have is one sailing deep: Amelie
+2027-05-01 read €435.43 plus fuel 40, park 60 and port 25 on this source and
+on liveaboard.com, identical to the cent through two parsers sharing only
+`classify_label`. That is real evidence and it is one row of 1,251. If the
+panel is the boat's standing terms and a sailing can carry its own, this
+reading would not know.
 
 ## Not yet asked
 
