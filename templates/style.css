@@ -1088,13 +1088,13 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    and it does so in two steps rather than one, because there are two things
    worth buying and one window that only affords the first.
 
-   **The reefs come first, at 1700.** The trip name and the dive-site list are
+   **The reefs come first, at 1800.** The trip name and the dive-site list are
    the two columns truncated at every width, and a window with a hundred pixels
    of nothing beside the table can pay for some of that. Nothing else changes
    here: the padding and the row height stay at their laptop values, which
    means this step costs the table no rows.
 
-   **The density follows, at 1900**, along with the rest of both columns: 13px
+   **The density follows, at 2000**, along with the rest of both columns: 13px
    of horizontal padding instead of 8, 9px of vertical instead of 5, and the
    reefs at 240px against the 112 a laptop gives them. Rows go from 47px to 55.
    What is left over still goes to the spacer, so the money block keeps the
@@ -1102,9 +1102,9 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 
    **Both numbers are derived from the table's own content width**, which is
    the mistake #150 was, so they are guarded rather than trusted: the first
-   table measures about 1,510px and the second about 1,718, the rail takes 148,
+   table measures about 1,590px and the second about 1,788, the rail takes 148,
    and `test_layout` asserts at each step and above that the table still fits
-   its shell. If the fleet's names grow enough to eat the 40-odd pixels of
+   its shell. If the fleet's names grow enough to eat the 60-odd pixels of
    margin either has, the suite goes red rather than the Total going off the
    edge.
 
@@ -1113,16 +1113,25 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
    second line -- Places, Seller and the entry bar, each of which was buying a
    narrow column with a second line on most of the rows in the table -- and
    that is 141px the table now needs and 1700px of window no longer holds.
-   Splitting the step is what keeps 1700 to 1900 from falling all the way back
-   to the laptop table: it gets the reefs, which is what those windows can
-   afford, rather than nothing at all.
+   Splitting the step is what keeps those windows from falling all the way back
+   to the laptop table: they get the reefs, which is what they can afford,
+   rather than nothing at all.
+
+   **And the steps moved from 1700 and 1900 to 1800 and 2000**, because a
+   third seller made the table 80px wider: the Seller column names every site
+   that sells the date and links it, and three of those is 221px where two
+   were 141. The guard above is what found it -- 1,590px of table in a 1,552px
+   shell, the Total going off the edge at exactly the width the step was meant
+   to be a kindness at. What moved is where the room becomes affordable, not
+   what it is spent on: shrinking the two truncated columns to fit instead
+   would have made the step buy them less than the window before it does.
 
    And it sits at the *end* of the table's rules rather than beside them: a
    media query adds no specificity, so a `.trip` width written after this
    block would quietly win at every size and this would look like it had not
    been written at all. It did, for one run. */
-@media (min-width: 1700px) {
-  /* What 40px of margin buys at this width, spent on the two columns that are
+@media (min-width: 1800px) {
+  /* What 60px of margin buys at this width, spent on the two columns that are
      cut at every width. The reefs get the larger share and end up wider here
      than the single step used to make them; the trip name pays for it, and is
      the right one to pay because it is a name with the whole of it in the
@@ -1132,7 +1141,7 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
   .sites { width:190px; min-width:186px; max-width:196px; }
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 2000px) {
   thead tr:not(.band) th, tbody td {
     padding-top:9px; padding-bottom:9px; padding-left:13px; padding-right:13px;
   }

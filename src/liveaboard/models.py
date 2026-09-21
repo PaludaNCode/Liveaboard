@@ -348,6 +348,29 @@ class Itinerary:
     says which it is, on the same rule ``fees_known`` and ``not_asked`` follow.
     """
 
+    divebooker_fees: list[FeeItem] = field(default_factory=list)
+    """The charges divebooker.com says a diver cannot decline on this trip.
+
+    A third seller's own disclosure, kept apart from :attr:`fees` and
+    :attr:`padi_fees` and merged into neither, for the reason the second one
+    already is: the books genuinely differ, and unioning them builds a bill no
+    seller quotes.
+
+    Its shape is the *Price details* panel's middle column, *Obligatory
+    surcharges* — one panel per trip, joined to this itinerary through the
+    dates its departures share rather than by name, because the three sellers
+    spell one week three ways and a date has no spelling.
+    """
+    divebooker_fees_complete: bool = False
+    """Whether every charge divebooker states here is named, priced and scaled.
+
+    The third clause is this seller's own. It writes *"Port fees - 50 USD per
+    person (to be paid on board)"* — a payer and no period — and a line whose
+    unit is missing cannot be normalised, so a bill holding one cannot add up.
+    False means the page shows the berth price and says there is no total
+    behind it, which is what it already does for PADI.
+    """
+
     padi_sourced_fees: bool = False
     """True where this trip's own fee rows came from PADI Travel.
 
@@ -395,6 +418,12 @@ class Itinerary:
                 for f in payload.get("padi_fees", [])
             ],
             padi_fees_complete=bool(payload.get("padi_fees_complete", False)),
+            divebooker_fees=[
+                FeeItem.from_dict(f, default_currency)
+                for f in payload.get("divebooker_fees", [])
+            ],
+            divebooker_fees_complete=bool(
+                payload.get("divebooker_fees_complete", False)),
             dives_read=bool(payload.get("dives_read", False)),
             padi_sourced_fees=bool(payload.get("padi_sourced_fees", False)),
         )

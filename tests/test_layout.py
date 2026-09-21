@@ -1286,11 +1286,11 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         self.assertGreater(base["spacer"], 0, "no spacer column, so nothing absorbs a wide window")
         # From the widest regime up, because the columns are deliberately wider
         # above each of the two room steps -- what must not move is anything
-        # *within* a regime, and 1900 is where the last of them lands.
-        page.set_viewport_size({"width": 1900, "height": 900})
+        # *within* a regime, and 2000 is where the last of them lands.
+        page.set_viewport_size({"width": 2000, "height": 900})
         page.wait_for_timeout(200)
         base = read()
-        for width in (2000, 2560, 3200):
+        for width in (2100, 2560, 3200):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
@@ -1318,6 +1318,15 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         at every width -- the trip name and the reefs -- get room to be
         truncated less, and at 1900 the padding and the row height go up too
         and those columns get the rest of theirs.
+
+        **The steps are at 1800 and 2000, and they were at 1700 and 1900.** A
+        third seller made the table 80px wider -- the Seller column names every
+        site that sells the date and links it, and three of those is 221px
+        where two were 141 -- so the first step put 1,590px of table in a
+        1,552px shell and the Total went off the edge at exactly the width the
+        step was meant to be a kindness at. This guard is what found it, which
+        is what it is for. What moved is where the room becomes affordable,
+        never what it is spent on.
 
         Two steps because one no longer fits. Places, Seller and the entry bar
         stopped stacking their second line, which is 141px the table needs that
@@ -1347,15 +1356,15 @@ class TestTheViewsAtEverySize(unittest.TestCase):
         }""")
 
         tight = read()
-        for width in (1500, 1699):
+        for width in (1500, 1799):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             self.assertEqual(read()["rowH"], tight["rowH"],
                              "the rows changed height below the first step, at %dpx" % width)
 
         # The first step buys the two truncated columns room and nothing else,
-        # which is what makes it affordable at 1700: it costs the table no rows.
-        for width in (1700, 1800, 1899):
+        # which is what makes it affordable at 1800: it costs the table no rows.
+        for width in (1800, 1900, 1999):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
@@ -1371,7 +1380,7 @@ class TestTheViewsAtEverySize(unittest.TestCase):
                              " (%dpx of table in %dpx)" % (seen["tableW"], seen["shellW"]))
 
         first = read()
-        for width in (1900, 2000, 2560, 3200):
+        for width in (2000, 2100, 2560, 3200):
             page.set_viewport_size({"width": width, "height": 900})
             page.wait_for_timeout(200)
             seen = read()
@@ -2230,11 +2239,16 @@ class TestTheViewsAtEverySize(unittest.TestCase):
             ("entry", '#entry .chip[data-v="OW + 10"]', None,
              """(row, v) => row.querySelector('.entry-open')
                             .firstChild.textContent.trim() === v""", "OW + 10"),
-            # Both sellers list it, so both name themselves in the Seller
-            # column — one link is the other two chips' answer.
-            ("sellers", '#sellers .chip[data-v="both"]', None,
-             """(row) => row.querySelectorAll('td.source a').length === 2""",
-             "both"),
+            # Every seller in the chip's own set names itself in the Seller
+            # column, and nobody else does: the chip's value *is* the set, so
+            # the link count is the set's size and the test reads it off the
+            # chip rather than off a number somebody typed. It was
+            # `data-v="both"` and `length === 2` while there were two sellers,
+            # which is the shape that cannot admit a third.
+            ("sellers", '#sellers .chip:first-of-type', None,
+             """(row) => row.querySelectorAll('td.source a').length ===
+                  document.querySelector('#sellers .chip[aria-pressed=\"true\"]')
+                          .dataset.v.split('+').length""", None),
             ("flags", "#onSale", "flags-sale",
              """(row) => !!row.querySelector('.sale-mark')""", None),
             ("flags", "#hideSold", "flags-sold",

@@ -630,6 +630,41 @@ def padi_base_line(departure: Departure, fx: FxTable) -> BreakdownLine | None:
     )
 
 
+def divebooker_base_line(departure: Departure, fx: FxTable) -> BreakdownLine | None:
+    """What the third seller advertises for this same berth.
+
+    ``None`` where divebooker.com does not list the sailing — 405 of 1,182 —
+    which is evidence of nothing about the berth and everything about who was
+    asked, the same rule :func:`padi_base_line` keeps. A berth nobody offered
+    has no price, and a zero would read as free.
+
+    **The currency is the page's, not the offer's.** `Offer.priceCurrency` on
+    that source is a static per-vessel label: three of four hulls probed label
+    every offer EUR on a page whose own payload says it rendered in USD. Read
+    the page's way, 725 of 777 joined sailings carry a figure identical to one
+    of the other two sellers'; read by the label, the same book was 15% wrong
+    in the direction nobody checks. `scrape/divebooker_com.page_currency` is
+    where that happens, so by the time a figure reaches here it is already in
+    the currency the seller rendered.
+    """
+    if departure.divebooker_price is None:
+        return None
+    display, rate = fx.to_display(departure.divebooker_price)
+    return BreakdownLine(
+        code=FeeCode.BASE_FARE,
+        label="Berth (divebooker.com)",
+        tier=FeeTier.BASE,
+        quoted=departure.divebooker_price,
+        display=display,
+        included=False,
+        counted=True,
+        toggle=None,
+        provenance=departure.divebooker_provenance,
+        note=None,
+        fx_rate=rate,
+    )
+
+
 def padi_lines(
     itinerary: Itinerary,
     fx: FxTable,
@@ -691,6 +726,54 @@ def padi_lines(
         return None
     active = {**DEFAULT_TOGGLES, **(toggles or {})}
     theirs = [fee for fee in itinerary.padi_fees if fee.tier is FeeTier.MANDATORY]
+    stated = {fee.code for fee in theirs}
+    shared = [fee for fee in itinerary.fees
+              if fee.tier is not FeeTier.MANDATORY and fee.code not in stated]
+    covered = subsumed_charges(theirs + shared)
+    return [
+        _fee_line(fee, itinerary.nights, itinerary.dives, fx, active,
+                  covered.get(fee.code))
+        for fee in _sorted_fees(theirs + shared)
+    ]
+
+
+def divebooker_lines(
+    itinerary: Itinerary,
+    fx: FxTable,
+    toggles: Toggles | None = None,
+) -> list[BreakdownLine] | None:
+    """The same trip's fee rows as the third seller discloses them.
+
+    Every rule :func:`padi_lines` keeps, kept here, because they are rules
+    about how a *second account of one bill* is read and not about which
+    seller is giving it:
+
+    * ``None`` unless this seller's bill is complete. A partial disclosure
+      cannot produce a total, and a total built from part of one is the precise
+      thing this site was built to catch other people doing.
+    * **Its own mandatory rows, and only those**, plus the **vessel's**
+      non-mandatory ones. Nitrox and gear are billed on board, out of one price
+      list, to whoever walked up the gangway — so they come from the vessel's
+      panel whichever seller sold the berth, and taking this seller's optional
+      copies as well would put both in. That was Serenity's PADI bill carrying
+      nitrox and gear twice, on 526 departures.
+    * A code **this** seller states as mandatory is this seller's line, and the
+      vessel's non-mandatory copy of it is dropped: replacing it would leave
+      the column short of a charge the seller publishes as required.
+    * Overlaps resolve over this column's own set, because the overlap is a
+      fact about one bill and every caller that sums a set of fees resolves it
+      over that same set.
+
+    One function each rather than one function taking a seller, deliberately.
+    The two books differ in what they are read *from* — PADI's is a JSON field
+    per itinerary, this one's is prose in a panel — and nothing about that
+    difference belongs in a signature the page calls twice.
+    """
+    if not itinerary.divebooker_fees_complete:
+        return None
+    active = {**DEFAULT_TOGGLES, **(toggles or {})}
+    theirs = [fee for fee in itinerary.divebooker_fees
+              if fee.tier is FeeTier.MANDATORY]
     stated = {fee.code for fee in theirs}
     shared = [fee for fee in itinerary.fees
               if fee.tier is not FeeTier.MANDATORY and fee.code not in stated]

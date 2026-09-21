@@ -1996,6 +1996,65 @@ def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
 
 
 
+DIVEBOOKER_FEE_PROVENANCE = {
+    "kind": "scraped",
+    "source_id": "divebooker.com",
+    "retrieved": "",
+    "url": "",
+}
+"""Filled in by the caller, which knows the reading date and the vessel page.
+
+Mirrors `PADI_FEE_PROVENANCE`, and for the same reason: a fee line carries who
+said it and when, and the book it comes from states both once at its head
+rather than on every line.
+"""
+
+
+def _divebooker_fees(
+    group: list[dict[str, Any]],
+    slug: str,
+    sailings: dict[str, dict[str, Any]],
+    books: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    """This trip's *Price details* panel, found through its own departures.
+
+    **Joined on dates, never on a name.** The seller titles its panel
+    *"Northern Red Sea - Best Wreck Diving (7 nights) (Hurghada-Hurghada)"* and
+    the same week's sailings *"Northern Red Sea, Ras Mohamed, Straits of
+    Tiran"*; ours is a third spelling again. So the route is: this itinerary's
+    departures, to the sailings this seller lists on those exact days, to the
+    trip each one names, to the panel filed under it. Every step is an equality
+    on something with no spelling.
+
+    ``None`` where the seller has not been read for this trip, which is not the
+    same as a trip it says has no required extras: the first writes no key and
+    claims nothing, the second writes an empty list and a complete bill.
+
+    ``None`` **also where the group's departures name more than one panel**,
+    and that silence is the point. Our itinerary and theirs are both meant to
+    be one week, but nothing guarantees it, and a bill assembled from two of
+    their trips is a bill neither of them quotes. Refused rather than merged or
+    picked from, which is the rule `promote.itinerary_key` already cost this
+    project once.
+    """
+    seen: dict[str, dict[str, Any]] = {}
+    for item in group:
+        sailing = sailings.get(f"{slug}::{item['start']}")
+        if not sailing or not sailing.get("trip") or not sailing.get("boat"):
+            continue
+        book = (books.get(sailing["boat"]) or {}).get(sailing["trip"])
+        if isinstance(book, dict) and "lines" in book:
+            seen[f"{sailing['boat']}::{sailing['trip']}"] = book
+    if len(seen) != 1:
+        return None
+    book = next(iter(seen.values()))
+    return {
+        "lines": [dict(line, provenance=dict(DIVEBOOKER_FEE_PROVENANCE))
+                  for line in book["lines"]],
+        "complete": bool(book.get("complete")),
+    }
+
+
 def _divebooker_join_note(in_season: int, matched: int, unmapped: int) -> str:
     """What the join did, in the run's own numbers.
 
@@ -2249,6 +2308,21 @@ def promote(
             divebooker_book[
                 f"{divebooker_alias[slug_read]}::{record['start']}"] = record
     divebooker_read = (divebooker or {}).get("collected") or ""
+
+    # The *Price details* panels, and the vessel page each came off. Both
+    # keyed on that seller's own hull slug, because that is what its sailings
+    # name; `_divebooker_fees` goes sailing -> hull -> panel, so no alias
+    # translation happens here. The url is on the vessel rather than the line
+    # for the reason it is on the vessel rather than the departure: it is one
+    # constant per hull.
+    divebooker_fee_books: dict[str, dict[str, Any]] = {}
+    divebooker_page: dict[str, str] = {}
+    for hull, record in ((divebooker or {}).get("vessels") or {}).items():
+        if record.get("fees"):
+            divebooker_fee_books[hull] = record["fees"]
+        ours = divebooker_alias.get(hull)
+        if ours and record.get("url"):
+            divebooker_page[ours] = record["url"]
 
     # What each sailing costs cabin by cabin, and how many berths are left at
     # each rung. Read from the booking page by ``tools/fetch_cabins.py``, which
@@ -2690,6 +2764,11 @@ def promote(
         # itinerary's fee book -- see "fees" below.
         padi_fees = _padi_fees(padi_trip)
 
+        # And the third seller's, found through the dates this trip's
+        # departures share with it rather than by name. See `_divebooker_fees`.
+        divebooker_fees = _divebooker_fees(
+            group, slug, divebooker_book, divebooker_fee_books)
+
         # Which book this trip's own fee rows come from, decided here rather
         # than read back off the record afterwards. It used to be inferred by
         # asking whether `fees` *was* `padi_fees["lines"]` -- an identity check
@@ -2701,6 +2780,11 @@ def promote(
         padi_lines = (padi_fees or {}).get("lines") or []
         fees_from_padi = not own_fees and bool(padi_lines)
         fee_lines = _with_units_resolved(own_fees or padi_lines, padi_lines)
+
+        if divebooker_fees is not None:
+            for line in divebooker_fees["lines"]:
+                line["provenance"]["retrieved"] = divebooker_read
+                line["provenance"]["url"] = divebooker_page.get(slug, "")
 
         if padi_fees is not None:
             retrieved = (padi or {}).get("collected") or ""
@@ -2836,6 +2920,10 @@ def promote(
         if padi_fees is not None:
             itineraries[-1]["padi_fees"] = padi_fees["lines"]
             itineraries[-1]["padi_fees_complete"] = padi_fees["complete"]
+
+        if divebooker_fees is not None:
+            itineraries[-1]["divebooker_fees"] = divebooker_fees["lines"]
+            itineraries[-1]["divebooker_fees_complete"] = divebooker_fees["complete"]
 
         # Whether this trip's own fee rows came from PADI rather than from the
         # vessel panel every other itinerary uses. Written only where true, so

@@ -27,6 +27,8 @@ from .pricing import (
     GEAR_ESTIMATE,
     base_line,
     compute,
+    divebooker_base_line,
+    divebooker_lines,
     itinerary_lines,
     mandatory_known,
     padi_base_line,
@@ -131,21 +133,36 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second is not None:
             itineraries[key]["padi_lines"] = [line.as_dict() for line in second]
 
+        # And the third seller's, on the same terms and by the same rule:
+        # written only where that seller's own bill is complete, so a trip it
+        # has named a charge on without a figure shows its berth price and no
+        # total. Three books, one shape, one adder in the browser -- two adders
+        # would drift, and the one thing these columns must never do is show a
+        # difference that is an artefact of how they were summed.
+        third = divebooker_lines(itinerary, dataset.fx)
+        if third is not None:
+            itineraries[key]["divebooker_lines"] = [line.as_dict() for line in third]
+
         # Where the rows above came from, on the trips whose answer is not the
         # usual one. Written only where true: a key written per itinerary is a
         # key written 402 times, and this is the answer for 22 boats.
         if itinerary.padi_sourced_fees:
             itineraries[key]["padi_sourced_fees"] = True
 
-    # Where the other seller lists each boat. A PADI listing url is a fact
-    # about the vessel, not about the sailing -- it is built from the boat's
-    # slug and its country -- so it ships once per boat rather than on each of
-    # the 601 departures PADI sells, which is 4 KB against 33 KB.
+    # Where the other sellers list each boat. A listing url is a fact about the
+    # vessel, not about the sailing -- PADI's is built from the boat's slug and
+    # its country, divebooker's is the hull page its whole season is read from
+    # -- so each ships once per boat rather than on each of the 601 and 777
+    # departures they sell, which is 4 KB against 33 KB on PADI's side alone.
     padi_urls: dict[str, str] = {}
+    divebooker_urls: dict[str, str] = {}
     for departure in dataset.departures:
+        itinerary = dataset.itinerary_for(departure)
         if departure.padi_provenance and departure.padi_provenance.url:
-            itinerary = dataset.itinerary_for(departure)
             padi_urls.setdefault(itinerary.boat_id, departure.padi_provenance.url)
+        if departure.divebooker_provenance and departure.divebooker_provenance.url:
+            divebooker_urls.setdefault(
+                itinerary.boat_id, departure.divebooker_provenance.url)
 
     departures: list[dict[str, Any]] = []
     for departure in sorted(dataset.departures, key=lambda d: (d.start, d.id)):
@@ -209,6 +226,15 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         if second_base is not None:
             entry["padi"] = float(second_base.display.rounded)
             entry["padi_base_line"] = second_base.as_dict()
+
+        # And the third seller's advertised berth, on the 777 sailings it
+        # lists. Same pair and for the same reason: the number is what the
+        # Seller column and the filter read, and the line is what the browser
+        # adds up beside the fee rows.
+        third_base = divebooker_base_line(departure, dataset.fx)
+        if third_base is not None:
+            entry["divebooker"] = float(third_base.display.rounded)
+            entry["divebooker_base_line"] = third_base.as_dict()
 
         # Who lists this sailing at all, where the answer is "PADI, and only
         # PADI". A row like this has one seller and one bill, so the Sellers
@@ -344,6 +370,7 @@ def build_payload(dataset: Dataset) -> dict[str, Any]:
         # a given date, and a link that lands on a calendar without the sailing
         # on it is worse than no link.
         "padi_urls": padi_urls,
+        "divebooker_urls": divebooker_urls,
         "fee_labels": {code.value: label for code, label in FEE_LABELS.items()},
         # The entry bar's vocabulary: each level split into the certification
         # and the dive count it implies, which is what the Entry bar column
