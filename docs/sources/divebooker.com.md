@@ -17,9 +17,12 @@ Same two rules as the other two source maps:
    appendix.
 2. **A probe that discovers something updates this file in the same commit.**
 
-**Status: read, not parsed.** Nothing in `src/` fetches this host. Whether it
-becomes a third seller at all is the open question in
-`docs/plan-divebooker.md`, stage 0.
+**Status: a third seller.** `src/liveaboard/scrape/divebooker_com.py` reads it,
+`tools/fetch_divebooker.py` fetches it and `.github/workflows/divebooker.yml`
+runs that daily. Its fares are on 777 departures, it founds seven of its own,
+and its *Price details* panel is the third fee book on the page. That sentence
+read *"read, not parsed. Nothing in `src/` fetches this host"* while stage 0 of
+`docs/plan-divebooker.md` was open; the owner has since answered it.
 
 ---
 
@@ -306,12 +309,21 @@ Aggressor II, the boat whose two names raised the question. A sample that
 leaves out the case that prompted it is not evidence, and 100% is exactly the
 number that gets believed.
 
-**Ask for the owner at the key, not at the value.** `"details"` names an object
-whose own smallest enclosing object *is that object* — so a scan asked for the
-owner at the `{` hands back the panel, and every block on all 92 hulls came
-back titled *Price details*. The index that finds the trip is the one on the
-key's opening quote, which sits inside the parent and before the panel begins.
-One character of difference and the whole answer.
+**Ask for the owner at the key, not at the value, and read `name`.** Two
+findings one line apart, and between them they cost two whole-fleet reads:
+
+* `"details"` names an object whose own smallest enclosing object *is that
+  object*, so a scan asked for the owner at the `{` hands back the panel. The
+  index that finds the trip is the one on the key's opening quote, which sits
+  inside the parent and before the panel begins.
+* the trip states **`name`**. `title` is the panel's own heading and reads
+  *Price details* on every hull, so reading it gave every block one name — and
+  once the index was right it gave nothing, because the trip object has no
+  `title` at all.
+
+The whole-fleet join probe read `name` at `start()` and got 603 of 605, which
+is why the keying looked settled while the parser was attaching nothing.
+`tests/fixtures/divebooker-price-details.json` is what stops a third.
 
 #### What the reader does with a line
 
