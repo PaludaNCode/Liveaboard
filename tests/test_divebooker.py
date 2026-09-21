@@ -412,9 +412,10 @@ class TestNoAliasContradictsTheNameBothSourcesState(unittest.TestCase):
         self.compare = compare
         from published import raw  # noqa: PLC0415
         self.book = raw("divebooker.json")
-        self.aliases = json.loads(
+        self.file = json.loads(
             (self.ROOT / "data" / "divebooker_aliases.json").read_text(
-                encoding="utf-8"))["aliases"]
+                encoding="utf-8"))
+        self.aliases = self.file["aliases"]
         self.boats = raw()["boats"]
 
     def test_every_pair_the_rule_can_make_the_file_agrees_with(self):
@@ -432,10 +433,31 @@ class TestNoAliasContradictsTheNameBothSourcesState(unittest.TestCase):
                     f"{slug} states {vessel.get('name')!r}, which is one of "
                     f"our boats by name, and the alias file says otherwise")
 
-    def test_every_alias_names_a_boat_this_site_carries(self):
+    def test_every_alias_names_a_boat_this_site_carries_or_mints_one(self):
+        """An alias points at a boat on the page, or at a hull only this
+        seller lists.
+
+        It asserted the first alone, which was true while every mapped hull
+        was one of the other two sellers' boats. The 33 under `divebooker_only`
+        are Egyptian liveaboards neither of them carries, and 27 of them
+        publish a page and no departure inside the published season — so they
+        have an id and no boat, which is the `padi_only` shape exactly: an id
+        is a commitment, and a hull that starts selling next week should
+        arrive under one a person chose rather than one a run invented.
+
+        What may not happen is an alias pointing at neither, because that is a
+        slug this file has silently stopped resolving.
+        """
         ids = {boat["id"] for boat in self.boats}
+        minted = set(self.file.get("divebooker_only") or ())
         for slug, boat_id in self.aliases.items():
-            self.assertIn(boat_id, ids, f"{slug} maps to a boat that is not here")
+            self.assertTrue(
+                boat_id in ids or boat_id in minted,
+                f"{slug} maps to {boat_id!r}, which is neither a boat on the "
+                f"page nor a hull listed under divebooker_only")
+        for slug in minted:
+            self.assertEqual(self.aliases.get(slug), slug,
+                             f"{slug} is minted and the alias does not agree")
 
 
 class TestTheWalkStopsOnWhatItSeesNotOnACount(unittest.TestCase):

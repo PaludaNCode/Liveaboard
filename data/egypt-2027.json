@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-20",
   "default_currency": "EUR",
-  "notes": "Prices scraped from liveaboard.com. Fee disclosures captured for 435 of 439 itineraries; the rest show true cost as unknown rather than as the advertised price. PADI Travel is read as a second source for its own berth price on 677 of 1189 sailings and the entry bar on 186 of 439 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices scraped from liveaboard.com. Fee disclosures captured for 435 of 461 itineraries; the rest show true cost as unknown rather than as the advertised price. PADI Travel is read as a second source for its own berth price on 677 of 1251 sailings and the entry bar on 186 of 461 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-18",
@@ -269,6 +269,15 @@
       "year_built": 1999
     },
     {
+      "id": "aml-hayaty",
+      "name": "Aml Hayaty",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
+    },
+    {
       "id": "aphrodite",
       "name": "Aphrodite",
       "operator_id": "aphrodite-liveaboard-safaris",
@@ -494,6 +503,15 @@
       "year_built": 2003
     },
     {
+      "id": "golden-dolphin-i",
+      "name": "Golden Dolphin I",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
+    },
+    {
       "id": "golden-dolphin-iv",
       "name": "Golden Dolphin IV",
       "operator_id": "golden-dolphin",
@@ -521,6 +539,15 @@
       "year_built": 2025
     },
     {
+      "id": "hammerhead-i",
+      "name": "Hammerhead I",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
+    },
+    {
       "id": "hammerhead-ii",
       "name": "Hammerhead II",
       "operator_id": "hammerhead-fleet",
@@ -537,6 +564,15 @@
       "cabins": 4,
       "length_m": 22,
       "year_built": 2012
+    },
+    {
+      "id": "independence-iii",
+      "name": "Independence III",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "jp-marine",
@@ -627,6 +663,15 @@
       "cabins": 12,
       "length_m": 36,
       "year_built": 2002
+    },
+    {
+      "id": "omneia-spirit",
+      "name": "Omneia Spirit",
+      "operator_id": "unknown-operator",
+      "guests": null,
+      "cabins": null,
+      "length_m": null,
+      "year_built": null
     },
     {
       "id": "queen-sherry",
@@ -8137,6 +8182,22 @@
         "notes": "Open Water - No minimum logged dives required."
       },
       "dives_read": true
+    },
+    {
+      "id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "name": "Mini Safari: Wrecks & Reefs",
+      "title": "Mini Safari: Wrecks & Reefs",
+      "operator_id": "unknown-operator",
+      "boat_id": "aml-hayaty",
+      "nights": 3,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [],
+      "region": "wreck route",
+      "summary": null,
+      "source_url": null,
+      "fees": []
     },
     {
       "id": "anemone--brothers-daedalus-elphistone-hurghada-hurghada",
@@ -62895,6 +62956,94 @@
       "dives_read": true
     },
     {
+      "id": "golden-dolphin-i--brother-islands",
+      "name": "Brother Islands",
+      "title": "Brothers",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-dolphin-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "golden-dolphin-i--north-brother-islands",
+      "name": "North - Brother Islands",
+      "title": "North & Brothers",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-dolphin-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "golden-dolphin-i--north-brothers",
+      "name": "North - Brothers",
+      "title": "North & Brothers",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-dolphin-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "golden-dolphin-i--north-classic",
+      "name": "North Classic",
+      "title": "North Classic",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-dolphin-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [],
+      "region": "northern route",
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "golden-dolphin-i--north-incl-strait-of-tiran",
+      "name": "North incl. Strait of Tiran",
+      "title": "North incl. Strait of Tiran",
+      "operator_id": "unknown-operator",
+      "boat_id": "golden-dolphin-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "tiran"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
       "id": "golden-dolphin-iv--brother-islands-daedalus-elphinstone-hurghada-port-ghalib",
       "name": "Brother Islands - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
       "title": "Brothers, Daedalus & Elphinstone",
@@ -65437,6 +65586,26 @@
         }
       ],
       "padi_fees_complete": true
+    },
+    {
+      "id": "hammerhead-i--super-diversity-daedalus-st-john-s-sataya",
+      "name": "Super Diversity: Daedalus - St. John's - Sataya",
+      "title": "Super Diversity: Daedalus - St. John's - Sataya",
+      "operator_id": "unknown-operator",
+      "boat_id": "hammerhead-i",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "daedalus",
+        "st johns",
+        "sataya"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
     },
     {
       "id": "hammerhead-ii--brothers-light-hurghada-marsa-alam",
@@ -75752,6 +75921,199 @@
       "padi_sourced_fees": true
     },
     {
+      "id": "independence-iii--best-of-north-wracks-strait-of-tiran-brothers",
+      "name": "Best of North (Wracks) - Strait of Tiran - Brothers",
+      "title": "Best of North (Wracks) - Strait of Tiran - Brothers",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 11,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers",
+        "tiran"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--brothers-daedalus-elphinstone",
+      "name": "Brothers - Daedalus - Elphinstone",
+      "title": "Brothers, Daedalus & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--brothers-daedalus-rocky-island-elphinstone",
+      "name": "Brothers - Daedalus - Rocky Island - Elphinstone",
+      "title": "Brothers, Daedalus, Rocky Island & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 10,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone",
+        "rocky island"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--brothers-strait-of-tiran-without-wrecks",
+      "name": "Brothers - Strait of Tiran (without wrecks)",
+      "title": "Brothers - Strait of Tiran (without wrecks)",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers",
+        "tiran"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--daedalus-rocky-island-elphinstone",
+      "name": "Daedalus - Rocky Island - Elphinstone",
+      "title": "Daedalus, Rocky Island & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "rocky island"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--dahab-strait-of-tiran-best-of-north",
+      "name": "Dahab - Strait of Tiran - Best of North",
+      "title": "Dahab - Strait of Tiran - Best of North",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 14,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "tiran",
+        "dahab"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--rocky-island-elba-reef-st-john-s-elphinstone",
+      "name": "Rocky Island - Elba Reef - St. John's - Elphinstone",
+      "title": "Rocky Island, Elba Reef, St. John's & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 11,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "elphinstone",
+        "rocky island",
+        "st johns",
+        "elba reef"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--rocky-island-st-john-s",
+      "name": "Rocky Island - St. John's",
+      "title": "Rocky Island & St. John's",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "rocky island",
+        "st johns"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--special-tour-dolphins",
+      "name": "Special Tour “Dolphins”",
+      "title": "Special Tour “Dolphins”",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "independence-iii--st-john-s-elphinstone",
+      "name": "St. John's - Elphinstone",
+      "title": "St. John's & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "independence-iii",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "elphinstone",
+        "st johns"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
       "id": "jp-marine--brothers-daedalus-elphinstone-marsa-alam-marsa-alam",
       "name": "Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)",
       "title": "Brothers, Daedalus & Elphinstone",
@@ -85749,6 +86111,100 @@
         }
       ],
       "padi_fees_complete": true
+    },
+    {
+      "id": "omneia-spirit--brother-islands-daedalus-elphinstone",
+      "name": "Brother Islands - Daedalus - Elphinstone",
+      "title": "Brothers, Daedalus & Elphinstone",
+      "operator_id": "unknown-operator",
+      "boat_id": "omneia-spirit",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "daedalus",
+        "elphinstone",
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "omneia-spirit--brother-islands-ras-mohammed-thistlegorm-2-newly-discovered-wrecks",
+      "name": "Brother Islands, Ras Mohammed, Thistlegorm & 2 Newly Discovered Wrecks",
+      "title": "Brothers, Ras Mohammed, Thistlegorm & 2 Newly Discovered Wrecks",
+      "operator_id": "unknown-operator",
+      "boat_id": "omneia-spirit",
+      "nights": 10,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "thistlegorm",
+        "ras mohammed",
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "omneia-spirit--north-brothers",
+      "name": "North - Brothers",
+      "title": "North & Brothers",
+      "operator_id": "unknown-operator",
+      "boat_id": "omneia-spirit",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "brothers"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "omneia-spirit--north-ras-mohammed",
+      "name": "North - Ras Mohammed",
+      "title": "North & Ras Mohammed",
+      "operator_id": "unknown-operator",
+      "boat_id": "omneia-spirit",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "ras mohammed"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
+    },
+    {
+      "id": "omneia-spirit--st-johns",
+      "name": "St. Johns",
+      "title": "St. John's",
+      "operator_id": "unknown-operator",
+      "boat_id": "omneia-spirit",
+      "nights": 7,
+      "dives": 0,
+      "port_from": "Unknown",
+      "port_to": "Unknown",
+      "dive_sites": [
+        "st johns"
+      ],
+      "region": null,
+      "summary": null,
+      "source_url": null,
+      "fees": []
     },
     {
       "id": "queen-sherry--brothers-daedalus-elphinstone-hurghada-marsa-alam",
@@ -129954,6 +130410,671 @@
       ]
     },
     {
+      "id": "aml-hayaty-2027-05-01-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-01",
+      "end": "2027-05-04",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-05-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-05",
+      "end": "2027-05-08",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-08-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-08",
+      "end": "2027-05-11",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-12-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-12",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-15-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-15",
+      "end": "2027-05-18",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-19-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-19",
+      "end": "2027-05-22",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-22-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-22",
+      "end": "2027-05-25",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-26-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-26",
+      "end": "2027-05-29",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-05-29-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-05-29",
+      "end": "2027-06-01",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-02-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-02",
+      "end": "2027-06-05",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-05-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-05",
+      "end": "2027-06-08",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-09-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-09",
+      "end": "2027-06-12",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-12-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-12",
+      "end": "2027-06-15",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-16-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-16",
+      "end": "2027-06-19",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-19-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-19",
+      "end": "2027-06-22",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-23-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-23",
+      "end": "2027-06-26",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-26-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-26",
+      "end": "2027-06-29",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-06-30-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-06-30",
+      "end": "2027-07-03",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-03-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-03",
+      "end": "2027-07-06",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-07-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-07",
+      "end": "2027-07-10",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-10-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-10",
+      "end": "2027-07-13",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-14-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-14",
+      "end": "2027-07-17",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-17-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-17",
+      "end": "2027-07-20",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-21-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-21",
+      "end": "2027-07-24",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-24-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-24",
+      "end": "2027-07-27",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-28-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-28",
+      "end": "2027-07-31",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-07-31-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-07-31",
+      "end": "2027-08-03",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-04-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-04",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-07-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-07",
+      "end": "2027-08-10",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-11-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-11",
+      "end": "2027-08-14",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-14-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-14",
+      "end": "2027-08-17",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-18-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-18",
+      "end": "2027-08-21",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-21-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-21",
+      "end": "2027-08-24",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-25-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-25",
+      "end": "2027-08-28",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "aml-hayaty-2027-08-28-divebooker",
+      "itinerary_id": "aml-hayaty--mini-safari-wrecks-reefs",
+      "start": "2027-08-28",
+      "end": "2027-08-31",
+      "price": {
+        "amount": 637.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/aml-hayaty-haz539",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/aml-hayaty-haz539"
+      },
+      "divebooker_only": true
+    },
+    {
       "id": "anemone-2027-06-26-padi",
       "itinerary_id": "anemone--brothers-daedalus-elphistone-hurghada-hurghada",
       "start": "2027-06-26",
@@ -157957,6 +159078,177 @@
       ]
     },
     {
+      "id": "golden-dolphin-i-2027-08-05-divebooker",
+      "itinerary_id": "golden-dolphin-i--brother-islands",
+      "start": "2027-08-05",
+      "end": "2027-08-12",
+      "price": {
+        "amount": 1220.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-07-22-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-brother-islands",
+      "start": "2027-07-22",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 1220.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-05-27-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-brothers",
+      "start": "2027-05-27",
+      "end": "2027-06-03",
+      "price": {
+        "amount": 1364.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-06-17-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-brothers",
+      "start": "2027-06-17",
+      "end": "2027-06-24",
+      "price": {
+        "amount": 1364.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-05-06-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-classic",
+      "start": "2027-05-06",
+      "end": "2027-05-13",
+      "price": {
+        "amount": 1291.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-05-20-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-classic",
+      "start": "2027-05-20",
+      "end": "2027-05-27",
+      "price": {
+        "amount": 1291.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-07-15-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-classic",
+      "start": "2027-07-15",
+      "end": "2027-07-22",
+      "price": {
+        "amount": 1148.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-06-03-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-incl-strait-of-tiran",
+      "start": "2027-06-03",
+      "end": "2027-06-10",
+      "price": {
+        "amount": 1291.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "golden-dolphin-i-2027-07-01-divebooker",
+      "itinerary_id": "golden-dolphin-i--north-incl-strait-of-tiran",
+      "start": "2027-07-01",
+      "end": "2027-07-08",
+      "price": {
+        "amount": 1148.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/golden-dolphin-i-haz38"
+      },
+      "divebooker_only": true
+    },
+    {
       "id": "golden-dolphin-iv-2027-07-22-0",
       "itinerary_id": "golden-dolphin-iv--brother-islands-daedalus-elphinstone-hurghada-port-ghalib",
       "start": "2027-07-22",
@@ -159911,6 +161203,25 @@
         "pct": 15,
         "was": 1227
       }
+    },
+    {
+      "id": "hammerhead-i-2027-07-31-divebooker",
+      "itinerary_id": "hammerhead-i--super-diversity-daedalus-st-john-s-sataya",
+      "start": "2027-07-31",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 1240.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/hammerhead-i-haz380",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/hammerhead-i-haz380"
+      },
+      "divebooker_only": true
     },
     {
       "id": "hammerhead-ii-2027-07-17-0",
@@ -163996,6 +165307,196 @@
           21
         ]
       ]
+    },
+    {
+      "id": "independence-iii-2027-06-03-divebooker",
+      "itinerary_id": "independence-iii--best-of-north-wracks-strait-of-tiran-brothers",
+      "start": "2027-06-03",
+      "end": "2027-06-14",
+      "price": {
+        "amount": 2146.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-05-09-divebooker",
+      "itinerary_id": "independence-iii--brothers-daedalus-elphinstone",
+      "start": "2027-05-09",
+      "end": "2027-05-16",
+      "price": {
+        "amount": 1491.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-06-14-divebooker",
+      "itinerary_id": "independence-iii--brothers-daedalus-rocky-island-elphinstone",
+      "start": "2027-06-14",
+      "end": "2027-06-24",
+      "price": {
+        "amount": 2031.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-07-08-divebooker",
+      "itinerary_id": "independence-iii--brothers-strait-of-tiran-without-wrecks",
+      "start": "2027-07-08",
+      "end": "2027-07-15",
+      "price": {
+        "amount": 1491.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-07-01-divebooker",
+      "itinerary_id": "independence-iii--daedalus-rocky-island-elphinstone",
+      "start": "2027-07-01",
+      "end": "2027-07-08",
+      "price": {
+        "amount": 1491.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-07-29-divebooker",
+      "itinerary_id": "independence-iii--dahab-strait-of-tiran-best-of-north",
+      "start": "2027-07-29",
+      "end": "2027-08-12",
+      "price": {
+        "amount": 2720.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-05-16-divebooker",
+      "itinerary_id": "independence-iii--rocky-island-elba-reef-st-john-s-elphinstone",
+      "start": "2027-05-16",
+      "end": "2027-05-27",
+      "price": {
+        "amount": 2146.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-06-24-divebooker",
+      "itinerary_id": "independence-iii--rocky-island-st-john-s",
+      "start": "2027-06-24",
+      "end": "2027-07-01",
+      "price": {
+        "amount": 1491.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-07-15-divebooker",
+      "itinerary_id": "independence-iii--special-tour-dolphins",
+      "start": "2027-07-15",
+      "end": "2027-07-22",
+      "price": {
+        "amount": 1606.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "independence-iii-2027-05-27-divebooker",
+      "itinerary_id": "independence-iii--st-john-s-elphinstone",
+      "start": "2027-05-27",
+      "end": "2027-06-03",
+      "price": {
+        "amount": 1491.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/independence-iii-haz474",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/independence-iii-haz474"
+      },
+      "divebooker_only": true
     },
     {
       "id": "jp-marine-2027-07-24-0",
@@ -169133,6 +170634,139 @@
           0
         ]
       ]
+    },
+    {
+      "id": "omneia-spirit-2027-07-22-divebooker",
+      "itinerary_id": "omneia-spirit--brother-islands-daedalus-elphinstone",
+      "start": "2027-07-22",
+      "end": "2027-07-29",
+      "price": {
+        "amount": 1663.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-06-17-divebooker",
+      "itinerary_id": "omneia-spirit--brother-islands-ras-mohammed-thistlegorm-2-newly-discovered-wrecks",
+      "start": "2027-06-17",
+      "end": "2027-06-27",
+      "price": {
+        "amount": 2582.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-08-05-divebooker",
+      "itinerary_id": "omneia-spirit--north-brothers",
+      "start": "2027-08-05",
+      "end": "2027-08-12",
+      "price": {
+        "amount": 1663.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-06-10-divebooker",
+      "itinerary_id": "omneia-spirit--north-ras-mohammed",
+      "start": "2027-06-10",
+      "end": "2027-06-17",
+      "price": {
+        "amount": 1549.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-07-15-divebooker",
+      "itinerary_id": "omneia-spirit--north-ras-mohammed",
+      "start": "2027-07-15",
+      "end": "2027-07-22",
+      "price": {
+        "amount": 1549.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-08-12-divebooker",
+      "itinerary_id": "omneia-spirit--north-ras-mohammed",
+      "start": "2027-08-12",
+      "end": "2027-08-19",
+      "price": {
+        "amount": 1549.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "omneia-spirit-2027-07-29-divebooker",
+      "itinerary_id": "omneia-spirit--st-johns",
+      "start": "2027-07-29",
+      "end": "2027-08-05",
+      "price": {
+        "amount": 2444.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/omneia-spirit-haz385",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-20",
+        "url": "https://divebooker.com/omneia-spirit-haz385"
+      },
+      "divebooker_only": true
     },
     {
       "id": "queen-sherry-2027-06-05-0",
@@ -196219,46 +197853,12 @@
     "vessels": 92,
     "departures": 888,
     "in_season": 888,
-    "matched": 800,
-    "on_unmapped_vessels": 85,
-    "unmatched": 3,
-    "unmapped_vessels": [
-      "aldebaran",
-      "aml-hayaty",
-      "andromeda",
-      "argo-egypt",
-      "ashrafi",
-      "betelgueser",
-      "bismarck",
-      "c-echo-ii",
-      "captain-sparrow",
-      "cyclone",
-      "dive-runner",
-      "dolce-vita",
-      "enigma",
-      "freedom-iii",
-      "freedom-iv",
-      "galaxy-720",
-      "golden-dolphin-i",
-      "hammerhead-i",
-      "icon",
-      "independence-iii",
-      "lady-m",
-      "lighthouse-miracle-1",
-      "longimanus",
-      "lyra",
-      "mistral",
-      "neo",
-      "omneia-spirit",
-      "sea-treasure",
-      "snefro-spirit",
-      "south-moon-2",
-      "tempest",
-      "vip-one",
-      "whirlwind"
-    ],
+    "matched": 862,
+    "on_unmapped_vessels": 0,
+    "unmatched": 26,
+    "unmapped_vessels": [],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 800 match one this dataset already carries on (boat, date), and 85 sit on hull(s) the alias map does not know, so nothing can be said about them, and 3 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 888 in-season sailing(s), 862 match one this dataset already carries on (boat, date), and 26 are on a boat this site carries and a date it does not — a third seller listing a departure the other two do not, which is recorded and not published. See docs/divebooker-limitations.md."
   },
   "cabin_names": [
     "Lower Deck Twin Cabin",
@@ -197403,7 +199003,7 @@
       "moves": []
     },
     "coverage": {
-      "unread": 7
+      "unread": 69
     }
   },
   "entry_bar": {
