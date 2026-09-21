@@ -2402,12 +2402,17 @@ def promote(
     # constant per hull.
     divebooker_fee_books: dict[str, dict[str, Any]] = {}
     divebooker_page: dict[str, str] = {}
+    divebooker_named: dict[str, str] = {}
     for hull, record in ((divebooker or {}).get("vessels") or {}).items():
         if record.get("fees"):
             divebooker_fee_books[hull] = record["fees"]
         ours = divebooker_alias.get(hull)
-        if ours and record.get("url"):
+        if not ours:
+            continue
+        if record.get("url"):
             divebooker_page[ours] = record["url"]
+        if record.get("name"):
+            divebooker_named[ours] = record["name"]
 
     # What each sailing costs cabin by cabin, and how many berths are left at
     # each rung. Read from the booking page by ``tools/fetch_cabins.py``, which
@@ -2730,6 +2735,17 @@ def promote(
             return ours
         return ((padi_vessels.get(slug) or {}).get("specs") or {}).get(key)
 
+    # What the third seller calls each hull, for the one place a name can come
+    # from nowhere else: a boat only it lists. It sits after PADI's for the
+    # reason PADI's sits after ours -- the fallback order is what each source
+    # publishes about the vessel, and the last resort is still a title-cased
+    # slug, which is a name this code invented rather than one anybody wrote.
+    #
+    # `scrape/divebooker_com.vessel` takes it from the page's own `organizer`
+    # rather than from `Product.name`, which is a page title with the country
+    # appended, and it refuses to read an operator out of either: `brand` on
+    # that source is *Divebooker.com*, the seller.
+
     for (slug, name), group in sorted(grouped.items()):
         source = scraped_boats.get(slug, {})
         # PADI's name only where the first source has none, which is the 22
@@ -2739,6 +2755,7 @@ def promote(
         # rather than one anybody wrote.
         boat_name = (source.get("boat") or source.get("name")
                      or _collapsed((padi_vessels.get(slug) or {}).get("name"))
+                     or _collapsed(divebooker_named.get(slug))
                      or slug.replace("-", " ").title())
         # Guests belong to the vessel, not the sailing: the same boat carries
         # the same number of people whichever week you book.
