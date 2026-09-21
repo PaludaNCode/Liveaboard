@@ -235,6 +235,41 @@ really is absent.
     does not filter to the published season, and nothing downstream has yet
     decided which of the 977 fall inside it.
 
+## The 46 sailings with no fare, and why none of them is a gap
+
+Asked 2026-09-21 after the owner suggested charter periods, which is what they
+are. Of 887 sailings in the season, **46 state no price**, and the seller says
+why on its own titles:
+
+| | |
+|---|---|
+| *Route on Request (Available for groups and charters; Please enquire…)* | **42** — Argo Egypt 16, Vita Xplorer 18, Omneia Spirit 7, Independence II 1 |
+| Sold out | **4** — Galaxy 720 |
+| A fare this reading did not find | **0** |
+
+**The booking page confirms it from the other side.** `/boatorder/booking?tripId=`
+— the *Select cabin* link — returns the right week for every one asked, and for
+an on-request slot returns **24 or 25 free spaces and no cabin option at all**:
+the boat is empty because nobody is selling seats on it. A priced sailing
+returns a real ladder (Argo Egypt 2026-09-26: 1536 / 1577 / 1620 against the
+listing's 1539, one space left).
+
+So **there is no backup price to fetch**. An earlier note here proposed one on
+the reasoning that 42 bookable weeks were going unpriced; they are not bookable
+as berths. The reading, the booking step and the seller all agree.
+
+What the run says about them now is the point: `why_unpriced` splits the count
+by the seller's own reason and `fetch_divebooker` prints it per vessel and per
+run, with a `::warning::` reserved for `unexplained` — the only one that is
+this project's problem. Same rule as `fetch_padi.why_empty`: a sailing that
+prices nothing is not a fetch that failed, and a total that lumps the three
+together hides the one worth reading.
+
+**The join is established and is worth keeping**, because it is what the cabin
+ladder hangs off: the JSON-LD Event's own id fragment (`…-haz441#254581`) *is*
+the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
+`/boatorder/booking`.
+
 ## What is built, and what the page is still waiting for
 
 12. ~~**Nothing on the page names divebooker.**~~ Built. The third seller has

@@ -110,6 +110,52 @@ class TestWhetherABerthCanBeBoughtComesFromTheSailing(unittest.TestCase):
             self.assertNotIn("/", row.availability)
 
 
+class TestASailingThatPricesNothingSaysWhy(unittest.TestCase):
+    """46 of 887 state no fare, and 42 of them are not a gap.
+
+    *"Route on Request (Available for groups and charters; Please enquire…)"*
+    is the seller's own title on Argo Egypt's 16, Vita Xplorer's 18, Omneia
+    Spirit's 7 and Independence II's 1. The booking page agrees from the other
+    side: asked for one it returns the right week, 24 or 25 free spaces, and no
+    cabin option at all — the boat is empty because nobody is selling seats on
+    it. The other 4 are Galaxy 720, sold out.
+
+    `_departure_book` drops all of them silently, which is right to publish and
+    wrong to say nothing about. Counted by reason, because `unexplained` is the
+    only one worth a person's time and a single total would bury it — the rule
+    `fetch_padi._sailing_counts` already keeps one source over.
+    """
+
+    def test_the_sellers_own_words_are_the_reason(self):
+        self.assertEqual(
+            db.why_unpriced("Route on Request (Available for groups and "
+                            "charters; Please enquire)", "InStock"),
+            "on request")
+        self.assertEqual(db.why_unpriced("Full Charter Request", "InStock"),
+                         "on request")
+
+    def test_a_withdrawn_week_is_told_apart_from_a_chartered_one(self):
+        self.assertEqual(db.why_unpriced("Brothers - Daedalus - Elphinstone",
+                                         "SoldOut"), "sold out")
+
+    def test_a_fare_nobody_found_is_the_one_that_stays_unexplained(self):
+        """The whole reason the count is split rather than totalled."""
+        self.assertIsNone(db.why_unpriced("Best of North (Wrecks)", "InStock"))
+        self.assertIsNone(db.why_unpriced(None, None))
+
+    def test_the_vessel_counts_them_by_reason(self):
+        node = {"@type": "Event", "name": "Route on Request (Available for "
+                "groups and charters)", "startDate": "2027-05-01",
+                "endDate": "2027-05-08",
+                "offers": {"@type": "Offer", "priceCurrency": "EUR",
+                           "availability": "https://schema.org/InStock"}}
+        html = ('<script type="application/ld+json">'
+                + json.dumps(node) + "</script>")
+        book = db.vessel(html, "/argo-egypt-haz441")
+        self.assertEqual(book.unpriced, {"on request": 1})
+        self.assertEqual(book.as_dict()["unpriced"], {"on request": 1})
+
+
 class TestNothingIsInvented(unittest.TestCase):
     """The two mistakes this fixture caught, kept as guards.
 
