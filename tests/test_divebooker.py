@@ -73,6 +73,43 @@ class TestOneSailingIsReadOnce(unittest.TestCase):
                          ["2026-10-04", "2026-10-11", "2026-10-18"])
 
 
+class TestWhetherABerthCanBeBoughtComesFromTheSailing(unittest.TestCase):
+    """`availability` is the sailing's own claim, not its trip's.
+
+    Two nodes state it and they do not agree. The trip's offer is one copy
+    covering every sailing that trip sells and says `InStock` throughout; the
+    **Event** is one sailing, and Bella 2's three say `LimitedAvailability`,
+    `OnlineOnly` and `OnlineOnly` in the very fixture this parser was written
+    against.
+
+    The event pass only filled the field when it was still empty, so the trip's
+    answer — read first — won every time, and the committed book stated
+    `InStock` on **888 of 888** departures. A field with one value on every row
+    is a field carrying no information, and this is the one that says whether a
+    diver can buy the berth at all: the vessel page marks sailings SOLD OUT and
+    none of that reached us.
+    """
+
+    def setUp(self):
+        self.rows, self.warnings = db.departures(page())
+
+    def test_the_event_states_it_and_the_event_wins(self):
+        self.assertEqual([r.availability for r in self.rows],
+                         ["LimitedAvailability", "OnlineOnly", "OnlineOnly"],
+                         "the trip's blanket InStock is overwriting the "
+                         "sailing's own state")
+
+    def test_the_trip_still_answers_where_the_sailing_does_not(self):
+        """A fallback, not a replacement: an unread sailing states nothing."""
+        self.assertTrue(all(r.availability for r in self.rows))
+
+    def test_it_stays_a_state_and_never_becomes_a_count(self):
+        """No node here says how many berths are left."""
+        for row in self.rows:
+            self.assertIsInstance(row.availability, str)
+            self.assertNotIn("/", row.availability)
+
+
 class TestNothingIsInvented(unittest.TestCase):
     """The two mistakes this fixture caught, kept as guards.
 
@@ -113,15 +150,24 @@ class TestNothingIsInvented(unittest.TestCase):
         self.assertEqual(db._money({"price": "576", "priceCurrency": "EUR"}), (576.0, "EUR"))
 
     def test_availability_is_kept_as_a_state_and_never_a_count(self):
-        """Every offer read states `InStock` and nothing states a number.
+        """The source's own word, and nothing states a number.
 
-        Kept as the source's own word so nothing downstream can read a berth
-        count out of it: *places left* is a question this source cannot
-        answer, and the page may not imply otherwise.
+        Kept verbatim so nothing downstream can read a berth count out of it:
+        *places left* is a question this source cannot answer, and the page may
+        not imply otherwise.
+
+        This used to assert `InStock` on every row, which is how the bug got
+        written into its own guard — the trip's blanket answer was the only one
+        being read, so a test asserting it passed while the sailing's own state
+        was thrown away. It asserts the property it is named for now. Which
+        value belongs on which row is
+        `TestWhetherABerthCanBeBoughtComesFromTheSailing`.
         """
         for row in self.book.departures:
-            self.assertEqual(row.availability, "InStock")
-            self.assertNotIsInstance(row.availability, int)
+            self.assertIsInstance(row.availability, str)
+            self.assertTrue(row.availability)
+            self.assertNotIn("/", row.availability,
+                             "the schema.org url reached the book whole")
 
 
 class TestTheFleetIsDiscoveredNotTyped(unittest.TestCase):

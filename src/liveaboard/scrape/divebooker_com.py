@@ -117,9 +117,15 @@ def _money(offer: dict[str, Any]) -> tuple[float | None, str | None]:
 def _availability(offer: dict[str, Any]) -> str | None:
     """``InStock`` from ``https://schema.org/InStock``, and nothing invented.
 
-    It is a **state, not a count**: every offer read states `InStock`, and
-    nothing in 219 departures states how many berths are left. Kept as the
-    source's own word so that nothing downstream can mistake it for a number.
+    It is a **state, not a count**: nothing here says how many berths are left.
+    Kept as the source's own word so nothing downstream can mistake it for a
+    number.
+
+    This used to say *every offer read states `InStock`*, which was true of the
+    offers being read and false of the page: the trip's offer says it for every
+    sailing that trip sells, and the sailing's own Event node says
+    `LimitedAvailability` and `OnlineOnly` in the same fixture. See the reading
+    order in `departures`.
     """
     value = offer.get("availability")
     return value.rsplit("/", 1)[-1] if isinstance(value, str) and value else None
@@ -539,12 +545,34 @@ def departures(html: str) -> tuple[list[Departure], list[str]]:
         row.event_id = row.event_id or _text(event.get("id"))
         if offer is None:
             continue
+
+        # **Whether a berth can be bought is the sailing's claim, not its
+        # trip's.** Both nodes state `availability` and they do not agree: the
+        # trip's offer is one copy covering every sailing that trip sells and
+        # says `InStock` throughout, while the Event is one sailing. Bella 2's
+        # three say `LimitedAvailability`, `OnlineOnly` and `OnlineOnly` in the
+        # fixture this parser was written against.
+        #
+        # This used to sit inside the `row.price is None` branch behind an
+        # `or`, so the trip pass -- which runs first -- answered every row and
+        # the sailing's own word was read by nothing. The committed book stated
+        # `InStock` on **888 of 888** departures: a field with one value on
+        # every row is a field carrying no information, and this is the field
+        # that says whether the trip is on sale at all. The vessel page marks
+        # sailings SOLD OUT and none of that reached us.
+        #
+        # Still a fallback rather than a replacement, in that direction only:
+        # an Event stating nothing leaves the trip's answer standing, because a
+        # silence is not a contradiction.
+        stated = _availability(offer)
+        if stated:
+            row.availability = stated
+
         amount, currency = money(offer)
         if amount is None:
             continue
         if row.price is None:
             row.price, row.currency = amount, currency
-            row.availability = row.availability or _availability(offer)
         elif (amount, currency) != (row.price, row.currency):
             # Deliberately not resolved. The trip offer is kept because it is
             # the copy that exists for every sailing, and the disagreement is
