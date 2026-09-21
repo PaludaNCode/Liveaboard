@@ -103,6 +103,7 @@ def main() -> int:
         per_trip: dict[str, set[str]] = collections.defaultdict(set)
         per_panel: dict[str, set[str]] = collections.defaultdict(set)
         owner_keys: collections.Counter[str] = collections.Counter()
+        rows_seen: list[tuple] = []
         dated_owners = 0
 
         for owner_at, position in found:
@@ -130,6 +131,14 @@ def main() -> int:
             if panel is not None:
                 per_trip[str(name)].add(digest(panel))
                 per_panel[digest(panel)].add(str(name))
+                # Raw, with whatever the owner states beside it. When one name
+                # owns two panels the question is immediately *what tells them
+                # apart*, and the answer has to come from the same object --
+                # `nights` is the candidate, because `TRIP_SUFFIX` strips a
+                # night count out of the name before this project keys on it.
+                rows_seen.append((digest(panel), owner.get("nights"),
+                                  owner.get("checkIn"), owner.get("checkOut"),
+                                  str(raw)[:78]))
 
         print("\n-- what owns a panel (key sets, counted) --")
         for keys, count in owner_keys.most_common():
@@ -151,6 +160,11 @@ def main() -> int:
             print("  every owner name maps to exactly one panel")
         shared = {d: n for d, n in per_panel.items() if len(n) > 1}
         print(f"  panels shared by several names: {len(shared)}")
+
+        print("\n-- every panel, with what its owner states beside it --")
+        print(f"  {'panel':<12} {'nights':<8} {'checkIn':<8} {'checkOut':<9} name")
+        for dig, nights, cin, cout, raw in sorted(rows_seen, key=lambda r: (r[4], r[0])):
+            print(f"  {dig:<12} {str(nights):<8} {str(cin):<8} {str(cout):<9} {raw}")
 
         rows, warnings = db.departures(html)
         print(f"\n-- {len(rows)} departure(s) read, "
