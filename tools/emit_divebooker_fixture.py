@@ -82,6 +82,18 @@ def main() -> int:
             # heading and reads *Price details* on every hull.
             carried.append({"name": owner.get("name"),
                             "details": json.loads(chunk)})
+            # What else the trip states about itself, if anything. The entry
+            # bar and the dive count are facts this site publishes from the
+            # other two sellers and has none of for the 33 hulls only this one
+            # lists -- and whether they sit on *this* object is the difference
+            # between reading them for nothing and writing a parser for a
+            # shape nobody has looked at.
+            print(f"  trip keys: {sorted(owner)}")
+            for key in ("requirements", "sertification", "certification",
+                        "numberDives", "nights", "departurePort",
+                        "arrivalPort", "level", "experience"):
+                if key in owner:
+                    print(f"    {key:<16} {json.dumps(owner[key], ensure_ascii=False)[:90]}")
 
         blocks, warnings = db.fee_blocks(result.body)
         for block in blocks[: args.blocks]:
