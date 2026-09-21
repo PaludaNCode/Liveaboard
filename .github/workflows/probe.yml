@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,fixture,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,fixture,flight,search"
         type: string
         default: ""
       divebooker_sample:
@@ -399,6 +399,22 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_fee_verdict.py \
             --limit "${{ inputs.divebooker_vessels || '0' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The panel is read once per trip name and attached to every sailing of
+      # that trip. The vessel page puts a *Trip & price details* link on each
+      # departure row, which is not the same claim — so this asks the payload
+      # whether one trip name can own two panels before anybody assumes it
+      # cannot.
+      - name: Is the price panel per trip or per sailing
+        if: contains(inputs.divebooker_ask, 'persailing')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_details_per_sailing.py \
+            --vessels "${{ inputs.divebooker_vessel || 'independence-iii' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
