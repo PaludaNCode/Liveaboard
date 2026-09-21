@@ -213,6 +213,16 @@ def main() -> int:
         print(f"\n== {len(warnings)} warning(s) ==")
         for note in warnings[:20]:
             print(f"  {note}")
+
+    # The headline again, last. A job log is read from its end -- that is what
+    # the API hands back and what a person scrolls to -- and the one number
+    # this census exists to produce was sitting above eleven screens of
+    # labels, unreachable without downloading the whole log. The lists are the
+    # working material; the count is the finding.
+    if blocks:
+        print(f"\n== the finding ==")
+        print(f"  {complete} of {blocks} panel(s) add up ({complete / blocks:.0%}), "
+              f"{complete - no_owed} of them with a priced bill")
     return 0
 
 
