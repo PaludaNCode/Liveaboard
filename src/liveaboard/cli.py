@@ -602,11 +602,26 @@ def cmd_promote(args: argparse.Namespace) -> int:
 
     block = payload.get("divebooker")
     if block:
+        # `matched` is the join and `founded` is this seller's own rows, and
+        # they are printed apart because together they read as agreement it
+        # did not earn -- the same reason `divebooker_coverage` counts them
+        # apart. `fares withheld` stood here for eleven runs after they were
+        # published, which is the shape of stale prose this project keeps
+        # finding in its own output.
+        billed = sum(1 for i in payload.get("itineraries") or []
+                     if i.get("divebooker_fees"))
+        totals = sum(1 for i in payload.get("itineraries") or []
+                     if i.get("divebooker_fees_complete"))
         print(
             f"  divebooker read {block['read']}: {block['vessels']} vessel(s), "
-            f"{block['departures']} departure(s), {block['in_season']} in season, "
-            f"{block['matched']} matched to a sailing this site carries; "
-            f"fares withheld"
+            f"{block['departures']} departure(s), {block['in_season']} in "
+            f"season, {block['matched']} on a row another seller founded, "
+            f"{block['founded']} founded here, {block['unmatched']} on no row "
+            f"({block['unpriced']} of those stating no fare); fares published"
+        )
+        print(
+            f"    its fee panel reaches {billed} itinerar(ies), "
+            f"{totals} of them complete enough to total"
         )
         for slug in block["unmapped_vessels"]:
             # Named every run, like an unmatched PADI deal: a hull the alias
