@@ -47,6 +47,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from liveaboard.scrape import divebooker_com as db  # noqa: E402
 from liveaboard.scrape.base import FetchBlocked, PoliteFetcher  # noqa: E402
+from liveaboard.promote import _port  # noqa: E402
 from liveaboard.taxonomy import FeeTier  # noqa: E402
 from probe_divebooker import repair_robots  # noqa: E402
 
@@ -76,6 +77,7 @@ def main() -> int:
     why: Counter[str] = Counter()
     unnamed: Counter[str] = Counter()
     states: Counter[str] = Counter()
+    harbours: Counter[str] = Counter()
     owed_per_block: Counter[int] = Counter()
     warnings: list[str] = []
 
@@ -119,6 +121,13 @@ def main() -> int:
                     why["a figure with no unit"] += 1
             for line in block.unnamed:
                 unnamed[line.strip()[:70]] += 1
+            for harbour in (block.port_from, block.port_to):
+                if harbour:
+                    # Verbatim, because the question is whether `_port` folds
+                    # them onto harbours the fleet already names. A count says
+                    # a port was stated; only the spelling says whether the
+                    # *Departs from* bank grows a chip for one seller's wording.
+                    harbours[harbour] += 1
             for name, value in (("trip named", block.trip), ("nights", block.nights),
                                 ("dives", block.dives), ("entry bar", block.requirements),
                                 ("certification", block.certification),
@@ -146,6 +155,12 @@ def main() -> int:
     # `FeeBlock.unnamed` spans every column, so this is wider than the set
     # that made a bill incomplete: a course nobody can name in *Extra cost*
     # says nothing about what a diver must pay. Both are worth a word.
+    print(f"\n== harbours stated, verbatim, and what `_port` folds each onto ==")
+    for harbour, count in harbours.most_common():
+        folded = _port(harbour)
+        mark = "" if folded == harbour else f"  ->  {folded}"
+        print(f"  {count:>5}  {harbour}{mark}")
+
     print(f"\n== priced labels this project's vocabulary declined "
           f"({sum(unnamed.values())} line(s), {len(unnamed)} spelling(s)) ==")
     for label, count in unnamed.most_common(args.sample):
