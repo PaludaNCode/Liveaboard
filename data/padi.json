@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-20",
+ "collected": "2026-09-21",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -43635,12 +43635,12 @@
    "name": "All Star - Ghani",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-21",
+    "dated": 58,
+    "first": "2026-09-28",
     "in_season": 18,
     "last": "2027-12-27",
     "priced": 18,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "all-star-ghani",
@@ -43658,12 +43658,12 @@
    "name": "All Star - Scuba Scene",
    "operator": "ALL STAR LIVEABOARDS",
    "sailings": {
-    "dated": 58,
-    "first": "2026-09-21",
+    "dated": 57,
+    "first": "2026-09-28",
     "in_season": 17,
     "last": "2027-12-27",
     "priced": 17,
-    "read": 58,
+    "read": 57,
     "unpriced": 0
    },
    "slug": "all-star-scuba-scene",
@@ -44270,13 +44270,13 @@
    "name": "Eriny",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 56,
+    "dated": 57,
     "first": "2026-10-03",
     "in_season": 18,
-    "last": "2027-12-25",
+    "last": "2030-10-05",
     "priced": 18,
-    "read": 56,
-    "unpriced": 0
+    "read": 57,
+    "unpriced": 1
    },
    "slug": "eriny",
    "specs": {
@@ -44365,7 +44365,7 @@
     "last": "2026-11-28",
     "priced": 0,
     "read": 10,
-    "unpriced": 9
+    "unpriced": 8
    },
    "slug": "my-galaxy",
    "specs": {
@@ -44382,12 +44382,12 @@
    "name": "Ghazala Adventure",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-21",
+    "dated": 61,
+    "first": "2026-09-28",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 62,
+    "read": 61,
     "unpriced": 0
    },
    "slug": "ghazala-adventure",
@@ -44404,12 +44404,12 @@
    "name": "Ghazala Explorer",
    "operator": "OCEAN TRIBE",
    "sailings": {
-    "dated": 62,
-    "first": "2026-09-21",
+    "dated": 61,
+    "first": "2026-09-28",
     "in_season": 18,
     "last": "2028-01-03",
     "priced": 18,
-    "read": 62,
+    "read": 61,
     "unpriced": 0
    },
    "slug": "ghazala-explorer",
@@ -44426,12 +44426,12 @@
    "name": "MY Grand Discovery",
    "operator": "DISCOVERY DIVERS",
    "sailings": {
-    "dated": 66,
+    "dated": 100,
     "first": "2026-09-26",
     "in_season": 18,
-    "last": "2027-12-25",
+    "last": "2028-08-19",
     "priced": 18,
-    "read": 66,
+    "read": 100,
     "unpriced": 0
    },
    "slug": "my-grand-discovery",
@@ -44555,12 +44555,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 9,
-    "first": "2026-09-21",
+    "dated": 8,
+    "first": "2026-09-29",
     "in_season": 0,
     "last": "2026-12-19",
     "priced": 0,
-    "read": 9,
+    "read": 8,
     "unpriced": 3
    },
    "slug": "my-lady-m",
@@ -44581,10 +44581,10 @@
     "dated": 100,
     "first": "2026-09-24",
     "in_season": 20,
-    "last": "2028-06-17",
+    "last": "2028-05-27",
     "priced": 17,
     "read": 100,
-    "unpriced": 32
+    "unpriced": 29
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -44916,13 +44916,13 @@
    "name": "South Moon 1",
    "operator": null,
    "sailings": {
-    "dated": 19,
+    "dated": 58,
     "first": "2026-09-26",
-    "in_season": 0,
-    "last": "2027-01-30",
+    "in_season": 18,
+    "last": "2027-12-25",
     "priced": 0,
-    "read": 19,
-    "unpriced": 0
+    "read": 58,
+    "unpriced": 39
    },
    "slug": "south-moon-1",
    "specs": {
