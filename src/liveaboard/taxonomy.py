@@ -98,6 +98,7 @@ class FeeCode(str, Enum):
     # out. Coast guard and navy are two authorities and stay two codes on the
     # same reasoning, even though no boat today bills both.
     LOCAL_FEES = "local_fees"
+    GOVERNMENT_FEE = "government_fee"
     HOSPITALITY_FEE = "hospitality_fee"
     ROUTE_SUPPLEMENT = "route_supplement"
     COAST_GUARD = "coast_guard"
@@ -165,6 +166,7 @@ FEE_LABELS: dict[FeeCode, str] = {
     # charge covers. Where the wording differs from these at all it survives
     # as the line's note, so the page always carries what was actually said.
     FeeCode.LOCAL_FEES: "Local fees",
+    FeeCode.GOVERNMENT_FEE: "Government fees",
     FeeCode.HOSPITALITY_FEE: "Hospitality fee",
     FeeCode.HYPERBARIC_LEVY: "Hyperbaric chamber levy",
     FeeCode.ROUTE_SUPPLEMENT: "Route supplement",
