@@ -3,6 +3,35 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-21
+
+```
+changes: HEAD -> 2026-09-21
+===========================
+
+price up (3)
+  2027-05-22  Blue Horizon           1,394 ->   1,743 USD  +349 (+25.0%)  Daedalus & St. John's
+  2027-07-31  Sunlight               1,033 ->   1,378 USD  +345 (+33.4%)  South Route: Daedalus - Rocky - Za
+  2027-05-15  Blue Horizon           1,221 ->   1,526 USD  +305 (+25.0%)  Northern Red Sea & Brothers
+
+price down (13)
+  2027-06-09  Destiny                2,239 ->   2,014 USD  -225 (-10.0%)  North Tiran - Dahab
+  2027-06-19  Destiny                1,607 ->   1,445 USD  -162 (-10.1%)  Brothers, Daedalus & Elphinstone
+  2027-06-26  Destiny                1,607 ->   1,445 USD  -162 (-10.1%)  Brothers, Daedalus & Elphinstone
+  2027-07-03  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-08  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  Brothers, Daedalus & Elphinstone
+  2027-05-15  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  Fury Shoals, Elphinstone & Safaga
+  2027-08-21  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North & Brothers
+  2027-07-10  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North & Tiran
+  2027-08-28  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North & Tiran
+  2027-08-14  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North & Wrecks
+  2027-07-17  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North Safaga Brothers
+  2027-05-22  Destiny                1,606 ->   1,445 USD  -161 (-10.0%)  North Tiran - Dahab
+  ... and 1 more not shown
+
+224 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-20
 
 ```
