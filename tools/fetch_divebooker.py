@@ -45,6 +45,7 @@ import gzip
 import json
 import sys
 import zlib
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -167,6 +168,14 @@ def main() -> int:
     vessels: dict[str, dict] = {}
     departures: dict[str, dict] = {}
     warnings: list[str] = []
+    # The fee census, counted as the book is read rather than by a second run
+    # over the same 92 pages. Every rule in `_read_fee_line` was written after
+    # a count; these are the counts that say what the rules bought.
+    bases: Counter[str] = Counter()
+    tiers: Counter[str] = Counter()
+    codes: Counter[str] = Counter()
+    unnamed: Counter[str] = Counter()
+    priced = unstated = fee_lines = 0
 
     for path in visiting:
         result = get(base + path)
@@ -191,7 +200,22 @@ def main() -> int:
             departures[f"{book.slug}::{row.start}"] = row.as_dict() | {"boat": book.slug}
             kept += 1
         warnings.extend(book.warnings)
+        for line in book.unnamed_fees:
+            unnamed[line] += 1
+        for lines in book.fees.values():
+            for fee in lines:
+                fee_lines += 1
+                codes[fee.code.value] += 1
+                tiers[fee.tier.value] += 1
+                if not fee.has_price:
+                    continue
+                priced += 1
+                if fee.unit_unstated:
+                    unstated += 1
+                else:
+                    bases[fee.basis.value] += 1
         print(f"  {path:<40} {kept:>3} in season of {len(book.departures):>3}"
+              f"  {len(book.fees):>2} fee block(s)"
               f"{'  ' + book.name if book.name else ''}", flush=True)
 
     fresh = {
@@ -227,6 +251,20 @@ def main() -> int:
     args.book.write_text(
         json.dumps(fresh, sort_keys=True, separators=(",", ":")) + "\n",
         encoding="utf-8")
+    # What the fee reader made of the fleet. Stated whether or not anybody
+    # asked, because a book nobody counted is a book nobody can say is worth
+    # publishing — and the two numbers that decide that are how many lines
+    # carry a price and how many of those carry a unit a total can use.
+    print(f"\n== the fee panel, as this run read it ==")
+    print(f"  {fee_lines} line(s) on {sum(1 for v in vessels.values() if v.get('fees'))} "
+          f"hull(s); {priced} priced, {unstated} of them with no unit stated")
+    print(f"  tiers : {dict(tiers.most_common())}")
+    print(f"  bases : {dict(bases.most_common())}")
+    print(f"  codes : {dict(codes.most_common(16))}")
+    print(f"  priced lines nothing could name ({sum(unnamed.values())}):")
+    for line, count in unnamed.most_common(30):
+        print(f"    {count:>4}x  {line}")
+
     print(f"\n{args.book}: {len(fresh['vessels'])} vessel(s), "
           f"{len(fresh['departures'])} departure(s), {len(warnings)} warning(s)")
     for line in warnings[:20]:
