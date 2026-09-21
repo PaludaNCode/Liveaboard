@@ -77,7 +77,8 @@ def main() -> int:
 
         blocks, warnings = db.fee_blocks(result.body)
         for block in blocks[: args.blocks]:
-            print(f"  {block.trip!r} ({block.nights} nights)")
+            print(f"  {block.trip!r} ({block.nights} nights) — "
+                  f"{'complete' if block.complete else 'INCOMPLETE'}")
             for fee in block.fees:
                 span = ("-" if fee.is_range else "")
                 print(f"    {fee.code.value:<20} {fee.tier.value:<10} "

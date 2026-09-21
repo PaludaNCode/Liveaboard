@@ -198,7 +198,7 @@ class VesselBook:
     country: str | None = None
     departures: list[Departure] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
-    fees: dict[str, list[ParsedFee]] = field(default_factory=dict)
+    fees: dict[str, tuple[list[ParsedFee], bool]] = field(default_factory=dict)
     """The *Price details* panel, **keyed on the trip and never on the boat**.
 
     Measured over all 92 hulls before it was written (run 35545965933): 603 of
@@ -233,8 +233,15 @@ class VesselBook:
             # No provenance per line: this whole file is one seller's reading
             # on one day, and the header says so once. The same reasoning
             # keeps the booking URL off every departure.
-            out["fees"] = {trip: to_fee_dicts(lines)
-                           for trip, lines in sorted(self.fees.items())}
+            #
+            # `lines` and `complete` in the shape `promote._padi_fees` already
+            # unwraps, so the two sellers' books arrive the same way: a partial
+            # disclosure produces no total on either side, and one shape means
+            # one rule rather than two that drift.
+            out["fees"] = {
+                trip: {"lines": to_fee_dicts(lines), "complete": complete}
+                for trip, (lines, complete) in sorted(self.fees.items())
+            }
         if self.unnamed_fees:
             # Named rather than counted, because what an unread charge needs
             # is a word added to `fees.LABEL_PATTERNS` and a count cannot say
@@ -592,7 +599,7 @@ def vessel(html: str, path: str) -> VesselBook:
         if not block.fees:
             continue
         if block.trip and block.trip in sold:
-            book.fees[block.trip] = block.fees
+            book.fees[block.trip] = (block.fees, block.complete)
         else:
             book.warnings.append(
                 f"{path}: a price panel names {block.trip!r}, which is not a "
@@ -802,6 +809,25 @@ class FeeBlock:
     trip: str | None = None
     nights: int | None = None
     fees: list[ParsedFee] = field(default_factory=list)
+    complete: bool = False
+    """Whether every charge a diver cannot decline is named, priced and scalable.
+
+    The same verdict `padi_com` reaches about its own book and for the same
+    reason: **a total built from part of a disclosure is the precise thing this
+    site was built to catch other people doing.** Only the *Obligatory
+    surcharges* column decides it — neither the optional lines nor the
+    inclusions can make it false, because a massage nobody can classify and a
+    transfer with no price say nothing about what a diver must pay.
+
+    Three ways it goes false, and the third is this seller's own: a mandatory
+    line whose label nothing could name, one with no figure, and one whose unit
+    is missing. The last is not a technicality — `FeeItem.span_for_trip`
+    refuses such a line outright, so a bill containing one cannot add up, and
+    calling it complete would publish a total short by whatever that line is.
+
+    An empty column is complete and empty, which is the seller saying the fare
+    covers everything: a disclosure, not a gap.
+    """
     unnamed: list[str] = field(default_factory=list)
     """Priced lines whose label this project's vocabulary declined, verbatim.
 
@@ -947,6 +973,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 block.trip = TRIP_SUFFIX.sub("", title).strip() or None
 
         found: dict[FeeCode, ParsedFee] = {}
+        unreadable = False
         for column in panel.get("columns") or []:
             if not isinstance(column, dict):
                 continue
@@ -959,11 +986,19 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 fee, unread = _read_fee_line(line, required)
                 if unread:
                     block.unnamed.append(unread)
+                    # Only in the obligatory column. A course nobody can name
+                    # in the *Extra cost* list says nothing about whether what
+                    # a diver must pay adds up.
+                    unreadable = unreadable or bool(required)
                 if fee is None:
                     continue
                 kept = found.get(fee.code)
                 if kept is None or _rank(fee) > _rank(kept):
                     found[fee.code] = fee
         block.fees = list(found.values())
+        owed = [fee for fee in block.fees if fee.tier is FeeTier.MANDATORY
+                and not fee.included]
+        block.complete = not unreadable and all(
+            fee.has_price and not fee.unit_unstated for fee in owed)
         blocks.append(block)
     return blocks, warnings

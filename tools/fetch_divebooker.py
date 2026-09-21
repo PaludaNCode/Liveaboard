@@ -175,7 +175,7 @@ def main() -> int:
     tiers: Counter[str] = Counter()
     codes: Counter[str] = Counter()
     unnamed: Counter[str] = Counter()
-    priced = unstated = fee_lines = 0
+    priced = unstated = fee_lines = complete_books = fee_books = 0
 
     for path in visiting:
         result = get(base + path)
@@ -202,7 +202,9 @@ def main() -> int:
         warnings.extend(book.warnings)
         for line in book.unnamed_fees:
             unnamed[line] += 1
-        for lines in book.fees.values():
+        for lines, complete in book.fees.values():
+            fee_books += 1
+            complete_books += bool(complete)
             for fee in lines:
                 fee_lines += 1
                 codes[fee.code.value] += 1
@@ -256,8 +258,15 @@ def main() -> int:
     # publishing — and the two numbers that decide that are how many lines
     # carry a price and how many of those carry a unit a total can use.
     print(f"\n== the fee panel, as this run read it ==")
-    print(f"  {fee_lines} line(s) on {sum(1 for v in vessels.values() if v.get('fees'))} "
-          f"hull(s); {priced} priced, {unstated} of them with no unit stated")
+    print(f"  {fee_lines} line(s) in {fee_books} trip book(s) on "
+          f"{sum(1 for v in vessels.values() if v.get('fees'))} hull(s); "
+          f"{priced} priced, {unstated} of them with no unit stated")
+    # The number that decides whether this seller can show a total at all: a
+    # bill missing one mandatory figure, or one whose unit is missing, cannot
+    # be added up, and a total built from part of a disclosure is the thing
+    # this site exists to catch other people doing.
+    print(f"  {complete_books} of {fee_books} book(s) name, price and scale "
+          f"every charge a diver cannot decline")
     print(f"  tiers : {dict(tiers.most_common())}")
     print(f"  bases : {dict(bases.most_common())}")
     print(f"  codes : {dict(codes.most_common(16))}")
