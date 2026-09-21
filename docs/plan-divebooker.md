@@ -31,10 +31,11 @@ commit that closes a stage, never afterwards from memory.
 | 7 — fixtures | **closed**: `tests/fixtures/divebooker-bella-2.jsonld.json`, real bytes |
 | 8 — the parser | **closed**: `scrape/divebooker_com.py`, `tools/fetch_divebooker.py`; discovery is the seller's search, paged on `p=` |
 | 9 — identity | **closed**: 59 of the 92 hulls mapped — 57 by the stated name rule, 2 by a person on the operator; 33 are boats this site does not carry |
-| 10 — promote | **closed for the fare**: 777 departures carry `divebooker_price` and its provenance; the fee book is read and not yet promoted |
-| 11 — the page | **not started**, and now blocked on the fee book rather than on stage 0 |
+| 9b — the fleet | **closed**: the 33 hulls neither other seller lists are minted under `divebooker_only`; 5 of them reach the page with 62 sailings |
+| 10 — promote | **closed**: 777 departures carry `divebooker_price`, 7 rows exist because this seller alone lists the date, the panel joins the itinerary through its departures' dates, and its book becomes a trip's own where neither other seller has one |
+| 11 — the page | **closed**: `best()` reads a list of bills, the seller chip is the set, the Seller column links three, `advertisedNote` names whichever seller quoted a berth it cannot total, and the fee panel carries a third table |
 | 12 — cadence | **closed**: `.github/workflows/divebooker.yml`, daily at 05:40 after the two sellers it is compared against |
-| 13 — guards | **closed for what exists**: 30 tests, code and committed data |
+| 13 — guards | **closed for what exists**: 65 tests, code and committed data, two fixtures of real bytes |
 | 14 — ship | on the branch, not merged |
 
 Stage 0 now has its measurement, and the whole fleet has been read against it.
@@ -67,9 +68,15 @@ added to that question:
   sellers go through.
 
 The owner has answered stage 0: read it as a third seller, aiming at rough
-comparable totals rather than at agreement to the cent. What is left is the
-order of work below — the fee book into the dataset, then the page, then the
-six extra sailings and the 33 hulls this site does not carry.
+comparable totals rather than at agreement to the cent. **It got the cent.**
+Dry-run end to end, Amelie's 2027-05-01 reads €435.43 + fuel 40, park 60, port
+25 on both sites — identical, through parsers that share nothing but
+`classify_label` and the `FeeItem` arithmetic.
+
+What is left is the data arriving, which happens the first time
+`divebooker.yml` runs, and whatever the entry bar and the dive count turn out
+to be worth: this source states both, and for the 33 hulls it alone lists
+there is no other answer.
 
 ## What is already done
 
