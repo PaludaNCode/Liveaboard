@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-22",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1269 sailings and the entry bar on 242 of 462 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1269 sailings and the entry bar on 243 of 462 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-21",
@@ -3941,14 +3941,143 @@
         }
       ],
       "requirements": {
-        "min_level": "advanced",
-        "min_logged_dives": 30,
+        "min_level": "advanced_50",
+        "min_logged_dives": 50,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 30 minimum logged dives required."
+        "notes": "AOWD or equivalent Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Advanced + 50 dives. The stricter is shown."
       },
-      "dives_read": true
+      "dives_read": true,
+      "divebooker_fees": [
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": true,
+          "note": "Scheduled group transfer airport - boat - airport: stated as included",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "tax_vat",
+          "included": false,
+          "note": "VAT 10% of trip cost (to be paid on board): listed with no price",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "visa",
+          "included": false,
+          "note": "Visa: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": false,
+          "note": "Nitrox: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": false,
+          "note": "Travel insurance: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Crew gratuities: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-22",
+            "url": "https://divebooker.com/scuba-scene-haz42"
+          }
+        }
+      ],
+      "divebooker_fees_complete": false
     },
     {
       "id": "all-star-red-sea--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -172646,6 +172775,16 @@
         "retrieved": "2026-09-22",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
       },
+      "divebooker_price": {
+        "amount": 1756.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-22",
+        "url": "https://divebooker.com/scuba-scene-haz42"
+      },
       "berths": [
         [
           0,
@@ -172839,6 +172978,16 @@
         "retrieved": "2026-09-22",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
       },
+      "divebooker_price": {
+        "amount": 1756.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-22",
+        "url": "https://divebooker.com/scuba-scene-haz42"
+      },
       "berths": [
         [
           0,
@@ -172901,6 +173050,16 @@
         "retrieved": "2026-09-22",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
       },
+      "divebooker_price": {
+        "amount": 2395.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-22",
+        "url": "https://divebooker.com/scuba-scene-haz42"
+      },
       "berths": [
         [
           0,
@@ -172955,6 +173114,16 @@
         "source_id": "padi.com",
         "retrieved": "2026-09-22",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
+      },
+      "divebooker_price": {
+        "amount": 2395.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-22",
+        "url": "https://divebooker.com/scuba-scene-haz42"
       },
       "berths": [
         [
@@ -173252,6 +173421,16 @@
         "retrieved": "2026-09-22",
         "url": "https://travel.padi.com/liveaboard/egypt/all-star-scuba-scene/"
       },
+      "divebooker_price": {
+        "amount": 1652.0,
+        "currency": "USD"
+      },
+      "divebooker_provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-22",
+        "url": "https://divebooker.com/scuba-scene-haz42"
+      },
       "berths": [
         [
           0,
@@ -173535,7 +173714,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -173627,7 +173806,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -173718,7 +173897,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -173810,7 +173989,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -173902,7 +174081,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -173994,7 +174173,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174086,7 +174265,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174178,7 +174357,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1367.0,
+        "amount": 1364.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174270,7 +174449,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1367.0,
+        "amount": 1364.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174362,7 +174541,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174454,7 +174633,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1317.0,
+        "amount": 1315.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174697,7 +174876,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1220.0,
+        "amount": 1217.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174789,7 +174968,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1220.0,
+        "amount": 1217.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174881,7 +175060,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1220.0,
+        "amount": 1217.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -174972,7 +175151,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/alsuraya/"
       },
       "divebooker_price": {
-        "amount": 1220.0,
+        "amount": 1217.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175062,7 +175241,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175121,7 +175300,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175180,7 +175359,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175239,7 +175418,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175298,7 +175477,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175357,7 +175536,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175416,7 +175595,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175475,7 +175654,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175534,7 +175713,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175593,7 +175772,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175652,7 +175831,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175711,7 +175890,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175770,7 +175949,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175829,7 +176008,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175888,7 +176067,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -175947,7 +176126,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176006,7 +176185,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176065,7 +176244,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176124,7 +176303,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176183,7 +176362,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176242,7 +176421,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176301,7 +176480,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176360,7 +176539,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176419,7 +176598,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176478,7 +176657,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176537,7 +176716,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176596,7 +176775,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176655,7 +176834,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176714,7 +176893,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176773,7 +176952,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -176832,7 +177011,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-safari/"
       },
       "divebooker_price": {
-        "amount": 499.0,
+        "amount": 498.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177055,7 +177234,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177120,7 +177299,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177185,7 +177364,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177250,7 +177429,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177315,7 +177494,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177380,7 +177559,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177445,7 +177624,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177510,7 +177689,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177575,7 +177754,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177640,7 +177819,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177705,7 +177884,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177770,7 +177949,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177835,7 +178014,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177900,7 +178079,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -177965,7 +178144,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178030,7 +178209,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178095,7 +178274,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178160,7 +178339,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178342,7 +178521,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178407,7 +178586,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178472,7 +178651,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178537,7 +178716,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178602,7 +178781,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178667,7 +178846,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/amelie-adventures/"
       },
       "divebooker_price": {
-        "amount": 557.0,
+        "amount": 556.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -178710,7 +178889,7 @@
       "start": "2027-05-01",
       "end": "2027-05-04",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178729,7 +178908,7 @@
       "start": "2027-05-05",
       "end": "2027-05-08",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178748,7 +178927,7 @@
       "start": "2027-05-08",
       "end": "2027-05-11",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178767,7 +178946,7 @@
       "start": "2027-05-12",
       "end": "2027-05-15",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178786,7 +178965,7 @@
       "start": "2027-05-15",
       "end": "2027-05-18",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178805,7 +178984,7 @@
       "start": "2027-05-19",
       "end": "2027-05-22",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178824,7 +179003,7 @@
       "start": "2027-05-22",
       "end": "2027-05-25",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178843,7 +179022,7 @@
       "start": "2027-05-26",
       "end": "2027-05-29",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178862,7 +179041,7 @@
       "start": "2027-05-29",
       "end": "2027-06-01",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178881,7 +179060,7 @@
       "start": "2027-06-02",
       "end": "2027-06-05",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178900,7 +179079,7 @@
       "start": "2027-06-05",
       "end": "2027-06-08",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178919,7 +179098,7 @@
       "start": "2027-06-09",
       "end": "2027-06-12",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178938,7 +179117,7 @@
       "start": "2027-06-12",
       "end": "2027-06-15",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178957,7 +179136,7 @@
       "start": "2027-06-16",
       "end": "2027-06-19",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178976,7 +179155,7 @@
       "start": "2027-06-19",
       "end": "2027-06-22",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -178995,7 +179174,7 @@
       "start": "2027-06-23",
       "end": "2027-06-26",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179014,7 +179193,7 @@
       "start": "2027-06-26",
       "end": "2027-06-29",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179033,7 +179212,7 @@
       "start": "2027-06-30",
       "end": "2027-07-03",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179052,7 +179231,7 @@
       "start": "2027-07-03",
       "end": "2027-07-06",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179071,7 +179250,7 @@
       "start": "2027-07-07",
       "end": "2027-07-10",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179090,7 +179269,7 @@
       "start": "2027-07-10",
       "end": "2027-07-13",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179109,7 +179288,7 @@
       "start": "2027-07-14",
       "end": "2027-07-17",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179128,7 +179307,7 @@
       "start": "2027-07-17",
       "end": "2027-07-20",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179147,7 +179326,7 @@
       "start": "2027-07-21",
       "end": "2027-07-24",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179166,7 +179345,7 @@
       "start": "2027-07-24",
       "end": "2027-07-27",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179185,7 +179364,7 @@
       "start": "2027-07-28",
       "end": "2027-07-31",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179204,7 +179383,7 @@
       "start": "2027-07-31",
       "end": "2027-08-03",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179223,7 +179402,7 @@
       "start": "2027-08-04",
       "end": "2027-08-07",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179242,7 +179421,7 @@
       "start": "2027-08-07",
       "end": "2027-08-10",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179261,7 +179440,7 @@
       "start": "2027-08-11",
       "end": "2027-08-14",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179280,7 +179459,7 @@
       "start": "2027-08-14",
       "end": "2027-08-17",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179299,7 +179478,7 @@
       "start": "2027-08-18",
       "end": "2027-08-21",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179318,7 +179497,7 @@
       "start": "2027-08-21",
       "end": "2027-08-24",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179337,7 +179516,7 @@
       "start": "2027-08-25",
       "end": "2027-08-28",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -179356,7 +179535,7 @@
       "start": "2027-08-28",
       "end": "2027-08-31",
       "price": {
-        "amount": 637.0,
+        "amount": 636.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -189258,7 +189437,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189335,7 +189514,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189412,7 +189591,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189489,7 +189668,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189566,7 +189745,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189643,7 +189822,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189720,7 +189899,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189797,7 +189976,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189874,7 +190053,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -189951,7 +190130,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190028,7 +190207,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190105,7 +190284,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190182,7 +190361,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190259,7 +190438,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190336,7 +190515,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190413,7 +190592,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-blue-storm/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190490,7 +190669,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190561,7 +190740,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190632,7 +190811,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190703,7 +190882,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190774,7 +190953,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190845,7 +191024,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190916,7 +191095,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -190987,7 +191166,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191058,7 +191237,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191129,7 +191308,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191200,7 +191379,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191271,7 +191450,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191342,7 +191521,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191413,7 +191592,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191484,7 +191663,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191555,7 +191734,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191626,7 +191805,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -191697,7 +191876,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
       "divebooker_price": {
-        "amount": 1068.0,
+        "amount": 1066.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -192569,7 +192748,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -192644,7 +192823,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -192719,7 +192898,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -192794,7 +192973,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -192983,7 +193162,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193058,7 +193237,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193133,7 +193312,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193208,7 +193387,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193283,7 +193462,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193358,7 +193537,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193433,7 +193612,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193508,7 +193687,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 2239.0,
+        "amount": 2011.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -193640,7 +193819,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1607.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195081,7 +195260,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1074.0,
+        "amount": 1072.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195167,7 +195346,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1074.0,
+        "amount": 1072.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195253,7 +195432,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195339,7 +195518,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195425,7 +195604,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195511,7 +195690,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195597,7 +195776,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195683,7 +195862,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195769,7 +195948,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 928.0,
+        "amount": 926.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195855,7 +196034,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1074.0,
+        "amount": 1072.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -195941,7 +196120,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1074.0,
+        "amount": 1072.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196027,7 +196206,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1074.0,
+        "amount": 1072.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196113,7 +196292,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196199,7 +196378,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196285,7 +196464,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196371,7 +196550,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196457,7 +196636,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196543,7 +196722,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-discovery-ii/"
       },
       "divebooker_price": {
-        "amount": 1025.0,
+        "amount": 1023.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196628,7 +196807,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196711,7 +196890,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196794,7 +196973,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196877,7 +197056,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -196960,7 +197139,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197043,7 +197222,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197126,7 +197305,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197209,7 +197388,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1895.0,
+        "amount": 1891.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197292,7 +197471,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197375,7 +197554,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197458,7 +197637,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1780.0,
+        "amount": 1777.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197541,7 +197720,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197624,7 +197803,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197707,7 +197886,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197790,7 +197969,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197873,7 +198052,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -197956,7 +198135,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 2814.0,
+        "amount": 2809.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198027,7 +198206,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198159,7 +198338,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198230,7 +198409,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198301,7 +198480,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198372,7 +198551,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198443,7 +198622,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198514,7 +198693,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198585,7 +198764,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198656,7 +198835,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198727,7 +198906,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198798,7 +198977,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198869,7 +199048,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -198940,7 +199119,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199011,7 +199190,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-silky/"
       },
       "divebooker_price": {
-        "amount": 1665.0,
+        "amount": 1662.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199143,7 +199322,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1321.0,
+        "amount": 1318.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199226,7 +199405,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1378.0,
+        "amount": 1375.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199309,7 +199488,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1378.0,
+        "amount": 1375.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199392,7 +199571,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1378.0,
+        "amount": 1375.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199475,7 +199654,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199558,7 +199737,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199641,7 +199820,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199724,7 +199903,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199807,7 +199986,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199890,7 +200069,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1034.0,
+        "amount": 1031.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -199973,7 +200152,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1034.0,
+        "amount": 1031.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200056,7 +200235,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1034.0,
+        "amount": 1031.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200139,7 +200318,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/dune-titan/"
       },
       "divebooker_price": {
-        "amount": 1378.0,
+        "amount": 1375.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200350,7 +200529,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1493.0,
+        "amount": 1490.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200442,7 +200621,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1378.0,
+        "amount": 1375.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200562,7 +200741,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200627,7 +200806,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200802,7 +200981,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200867,7 +201046,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -200959,7 +201138,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1493.0,
+        "amount": 1490.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -201079,7 +201258,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -201144,7 +201323,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-asmaa/"
       },
       "divebooker_price": {
-        "amount": 1493.0,
+        "amount": 1490.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202377,7 +202556,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1619.0,
+        "amount": 1616.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202466,7 +202645,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1505.0,
+        "amount": 1502.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202555,7 +202734,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1505.0,
+        "amount": 1502.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202644,7 +202823,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1838.0,
+        "amount": 1834.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202891,7 +203070,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1505.0,
+        "amount": 1502.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -202980,7 +203159,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-emperor-superior/"
       },
       "divebooker_price": {
-        "amount": 1505.0,
+        "amount": 1502.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204348,7 +204527,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 2263.0,
+        "amount": 2258.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204437,7 +204616,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204526,7 +204705,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204615,7 +204794,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1918.0,
+        "amount": 1914.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204704,7 +204883,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204793,7 +204972,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 2182.0,
+        "amount": 2178.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204882,7 +205061,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -204998,7 +205177,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -205087,7 +205266,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1798.0,
+        "amount": 1794.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -205650,7 +205829,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1683.0,
+        "amount": 1679.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -205739,7 +205918,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-adventure/"
       },
       "divebooker_price": {
-        "amount": 1683.0,
+        "amount": 1679.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -205828,7 +206007,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -205938,7 +206117,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206021,7 +206200,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206104,7 +206283,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206187,7 +206366,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1803.0,
+        "amount": 1800.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206297,7 +206476,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 2975.0,
+        "amount": 2969.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206407,7 +206586,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1683.0,
+        "amount": 1679.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206517,7 +206696,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206600,7 +206779,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1700.0,
+        "amount": 1697.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206683,7 +206862,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1700.0,
+        "amount": 1697.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206766,7 +206945,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206849,7 +207028,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1683.0,
+        "amount": 1679.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -206932,7 +207111,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ghazala-explorer/"
       },
       "divebooker_price": {
-        "amount": 1683.0,
+        "amount": 1679.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -207456,7 +207635,7 @@
       "start": "2027-08-05",
       "end": "2027-08-12",
       "price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207475,7 +207654,7 @@
       "start": "2027-07-22",
       "end": "2027-07-29",
       "price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207494,7 +207673,7 @@
       "start": "2027-05-27",
       "end": "2027-06-03",
       "price": {
-        "amount": 1364.0,
+        "amount": 1362.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207513,7 +207692,7 @@
       "start": "2027-06-17",
       "end": "2027-06-24",
       "price": {
-        "amount": 1364.0,
+        "amount": 1362.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207532,7 +207711,7 @@
       "start": "2027-05-06",
       "end": "2027-05-13",
       "price": {
-        "amount": 1292.0,
+        "amount": 1289.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207551,7 +207730,7 @@
       "start": "2027-05-20",
       "end": "2027-05-27",
       "price": {
-        "amount": 1292.0,
+        "amount": 1289.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207570,7 +207749,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1148.0,
+        "amount": 1146.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207589,7 +207768,7 @@
       "start": "2027-06-03",
       "end": "2027-06-10",
       "price": {
-        "amount": 1292.0,
+        "amount": 1289.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207608,7 +207787,7 @@
       "start": "2027-07-01",
       "end": "2027-07-08",
       "price": {
-        "amount": 1148.0,
+        "amount": 1146.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/golden-dolphin-i-haz38",
@@ -207639,7 +207818,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1722.0,
+        "amount": 1718.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -207727,7 +207906,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 2756.0,
+        "amount": 2750.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -207776,7 +207955,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 2526.0,
+        "amount": 2521.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -207825,7 +208004,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1837.0,
+        "amount": 1833.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -207874,7 +208053,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/golden-dolphin-iv?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1722.0,
+        "amount": 1718.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208144,7 +208323,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1269.0,
+        "amount": 1267.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208230,7 +208409,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1269.0,
+        "amount": 1267.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208316,7 +208495,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1269.0,
+        "amount": 1267.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208402,7 +208581,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208488,7 +208667,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208574,7 +208753,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208660,7 +208839,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208746,7 +208925,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208832,7 +209011,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -208918,7 +209097,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209004,7 +209183,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1221.0,
+        "amount": 1218.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209090,7 +209269,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1245.0,
+        "amount": 1242.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209176,7 +209355,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1196.0,
+        "amount": 1193.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209262,7 +209441,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1196.0,
+        "amount": 1193.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209348,7 +209527,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1196.0,
+        "amount": 1193.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209434,7 +209613,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1196.0,
+        "amount": 1193.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209520,7 +209699,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-grand-discovery/"
       },
       "divebooker_price": {
-        "amount": 1196.0,
+        "amount": 1193.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209625,7 +209804,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 806.0,
+        "amount": 804.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209705,7 +209884,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 647.0,
+        "amount": 646.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209784,7 +209963,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1361.0,
+        "amount": 1358.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209864,7 +210043,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -209943,7 +210122,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210022,7 +210201,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1295.0,
+        "amount": 1293.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210101,7 +210280,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1093.0,
+        "amount": 1091.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210180,7 +210359,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210260,7 +210439,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210339,7 +210518,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210419,7 +210598,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210499,7 +210678,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210579,7 +210758,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1093.0,
+        "amount": 1091.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210659,7 +210838,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210739,7 +210918,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1361.0,
+        "amount": 1358.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210818,7 +210997,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1152.0,
+        "amount": 1150.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210897,7 +211076,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1210.0,
+        "amount": 1208.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -210976,7 +211155,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/hammerhead-ii/"
       },
       "divebooker_price": {
-        "amount": 1093.0,
+        "amount": 1091.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -213442,7 +213621,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1492.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -213479,7 +213658,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1492.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -213543,7 +213722,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1492.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -213580,7 +213759,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1492.0,
+        "amount": 1489.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -213631,7 +213810,7 @@
       "start": "2027-05-29",
       "end": "2027-06-10",
       "price": {
-        "amount": 2250.0,
+        "amount": 2246.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/independence-ii-haz210",
@@ -213663,7 +213842,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 2170.0,
+        "amount": 2166.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216054,7 +216233,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216129,7 +216308,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216204,7 +216383,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216279,7 +216458,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216354,7 +216533,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216429,7 +216608,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216504,7 +216683,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216579,7 +216758,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216654,7 +216833,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216729,7 +216908,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216804,7 +216983,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1468.0,
+        "amount": 1465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216879,7 +217058,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -216954,7 +217133,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217029,7 +217208,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217104,7 +217283,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217179,7 +217358,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217254,7 +217433,7 @@
       },
       "promotion": "10% Off",
       "divebooker_price": {
-        "amount": 1437.0,
+        "amount": 1434.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217682,7 +217861,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1746.0,
+        "amount": 1742.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217765,7 +217944,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217848,7 +218027,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -217931,7 +218110,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218014,7 +218193,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218097,7 +218276,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218180,7 +218359,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218263,7 +218442,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218346,7 +218525,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218429,7 +218608,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1849.0,
+        "amount": 1846.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218512,7 +218691,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218595,7 +218774,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218742,7 +218921,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 2470.0,
+        "amount": 2465.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218788,7 +218967,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1746.0,
+        "amount": 1742.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218871,7 +219050,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -218954,7 +219133,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/my-odyssey/"
       },
       "divebooker_price": {
-        "amount": 1631.0,
+        "amount": 1628.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -219015,7 +219194,7 @@
       "start": "2027-07-22",
       "end": "2027-07-29",
       "price": {
-        "amount": 1664.0,
+        "amount": 1661.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219034,7 +219213,7 @@
       "start": "2027-06-17",
       "end": "2027-06-27",
       "price": {
-        "amount": 2583.0,
+        "amount": 2578.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219053,7 +219232,7 @@
       "start": "2027-08-05",
       "end": "2027-08-12",
       "price": {
-        "amount": 1664.0,
+        "amount": 1661.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219072,7 +219251,7 @@
       "start": "2027-06-10",
       "end": "2027-06-17",
       "price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219091,7 +219270,7 @@
       "start": "2027-07-15",
       "end": "2027-07-22",
       "price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219110,7 +219289,7 @@
       "start": "2027-08-12",
       "end": "2027-08-19",
       "price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -219129,7 +219308,7 @@
       "start": "2027-07-29",
       "end": "2027-08-05",
       "price": {
-        "amount": 2446.0,
+        "amount": 2441.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/omneia-spirit-haz385",
@@ -223622,7 +223801,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1596.0,
+        "amount": 1593.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -223687,7 +223866,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1596.0,
+        "amount": 1593.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -223752,7 +223931,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1596.0,
+        "amount": 1593.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -223982,7 +224161,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1596.0,
+        "amount": 1593.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224047,7 +224226,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1711.0,
+        "amount": 1708.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224112,7 +224291,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1711.0,
+        "amount": 1708.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224232,7 +224411,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1711.0,
+        "amount": 1708.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224627,7 +224806,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/red-sea-blue-force-2/"
       },
       "divebooker_price": {
-        "amount": 1711.0,
+        "amount": 1708.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224682,7 +224861,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224749,7 +224928,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224816,7 +224995,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224883,7 +225062,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -224950,7 +225129,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225017,7 +225196,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225084,7 +225263,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225151,7 +225330,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225218,7 +225397,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225285,7 +225464,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225352,7 +225531,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1275.0,
+        "amount": 1272.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225419,7 +225598,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225486,7 +225665,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225553,7 +225732,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225620,7 +225799,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/red-sea-explorer?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225698,7 +225877,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225777,7 +225956,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225856,7 +226035,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -225935,7 +226114,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226014,7 +226193,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226093,7 +226272,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1549.0,
+        "amount": 1546.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226172,7 +226351,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 2428.0,
+        "amount": 2424.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226251,7 +226430,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1704.0,
+        "amount": 1701.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226330,7 +226509,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1704.0,
+        "amount": 1701.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226409,7 +226588,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 2428.0,
+        "amount": 2424.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226488,7 +226667,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1498.0,
+        "amount": 1495.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226567,7 +226746,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1498.0,
+        "amount": 1495.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -226646,7 +226825,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/ms-royal-evolution/"
       },
       "divebooker_price": {
-        "amount": 1498.0,
+        "amount": 1495.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227086,7 +227265,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/sea-serpent?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1377.0,
+        "amount": 1374.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227186,7 +227365,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1584.0,
+        "amount": 1581.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227241,7 +227420,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1584.0,
+        "amount": 1581.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227296,7 +227475,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/sea-serpent-contessa?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1584.0,
+        "amount": 1581.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227688,7 +227867,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1608.0,
+        "amount": 1605.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227725,7 +227904,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1459.0,
+        "amount": 1456.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227762,7 +227941,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1459.0,
+        "amount": 1456.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227799,7 +227978,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227836,7 +228015,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227873,7 +228052,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227910,7 +228089,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227947,7 +228126,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -227984,7 +228163,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228021,7 +228200,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1252.0,
+        "amount": 1249.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228058,7 +228237,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1344.0,
+        "amount": 1341.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228095,7 +228274,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1344.0,
+        "amount": 1341.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228132,7 +228311,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1344.0,
+        "amount": 1341.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228169,7 +228348,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1344.0,
+        "amount": 1341.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228206,7 +228385,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1344.0,
+        "amount": 1341.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228243,7 +228422,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1367.0,
+        "amount": 1364.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228280,7 +228459,7 @@
       },
       "padi_only": true,
       "divebooker_price": {
-        "amount": 1367.0,
+        "amount": 1364.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -228993,7 +229172,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1166.0,
+        "amount": 1163.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229073,7 +229252,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1125.0,
+        "amount": 1123.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229153,7 +229332,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1166.0,
+        "amount": 1163.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229233,7 +229412,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 723.0,
+        "amount": 722.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229313,7 +229492,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 723.0,
+        "amount": 722.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229393,7 +229572,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1125.0,
+        "amount": 1123.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229473,7 +229652,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1125.0,
+        "amount": 1123.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229553,7 +229732,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229633,7 +229812,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1085.0,
+        "amount": 1083.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229713,7 +229892,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1085.0,
+        "amount": 1083.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229793,7 +229972,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1085.0,
+        "amount": 1083.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229873,7 +230052,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1085.0,
+        "amount": 1083.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -229953,7 +230132,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1045.0,
+        "amount": 1043.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -230033,7 +230212,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/serenity/"
       },
       "divebooker_price": {
-        "amount": 1045.0,
+        "amount": 1043.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -230815,7 +230994,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -230884,7 +231063,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -230953,7 +231132,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231022,7 +231201,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231091,7 +231270,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231160,7 +231339,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1746.0,
+        "amount": 1742.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231229,7 +231408,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1571.0,
+        "amount": 1568.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231298,7 +231477,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1650.0,
+        "amount": 1647.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231367,7 +231546,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1834.0,
+        "amount": 1831.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231436,7 +231615,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1650.0,
+        "amount": 1647.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231505,7 +231684,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231574,7 +231753,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231643,7 +231822,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231712,7 +231891,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231781,7 +231960,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231850,7 +232029,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1486.0,
+        "amount": 1483.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231919,7 +232098,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1650.0,
+        "amount": 1647.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -231988,7 +232167,7 @@
       },
       "promotion": "20% Off",
       "divebooker_price": {
-        "amount": 1746.0,
+        "amount": 1742.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232066,7 +232245,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232137,7 +232316,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232208,7 +232387,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232279,7 +232458,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232350,7 +232529,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232421,7 +232600,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232492,7 +232671,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232563,7 +232742,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232634,7 +232813,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232705,7 +232884,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232776,7 +232955,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232847,7 +233026,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232918,7 +233097,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -232989,7 +233168,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -233060,7 +233239,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -233131,7 +233310,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -233202,7 +233381,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/snefro-love/"
       },
       "divebooker_price": {
-        "amount": 803.0,
+        "amount": 801.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237520,7 +237699,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/ss-glorious-miss-nouran?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1756.0,
+        "amount": 1753.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237620,7 +237799,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1446.0,
+        "amount": 1443.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237681,7 +237860,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/ss-serena-dreams?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1274.0,
+        "amount": 1271.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237742,7 +237921,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237809,7 +237988,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237876,7 +238055,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -237943,7 +238122,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238010,7 +238189,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238077,7 +238256,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238144,7 +238323,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238211,7 +238390,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238278,7 +238457,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238345,7 +238524,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238412,7 +238591,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238479,7 +238658,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238546,7 +238725,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238670,7 +238849,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238737,7 +238916,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238804,7 +238983,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1263.0,
+        "amount": 1261.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -238871,7 +239050,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/star-jet?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240466,7 +240645,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1436.0,
+        "amount": 1433.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240549,7 +240728,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1436.0,
+        "amount": 1433.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240632,7 +240811,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1436.0,
+        "amount": 1433.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240715,7 +240894,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1436.0,
+        "amount": 1433.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240798,7 +240977,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1436.0,
+        "amount": 1433.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240881,7 +241060,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1321.0,
+        "amount": 1318.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -240964,7 +241143,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1390.0,
+        "amount": 1387.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241047,7 +241226,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1321.0,
+        "amount": 1318.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241130,7 +241309,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1321.0,
+        "amount": 1318.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241213,7 +241392,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1321.0,
+        "amount": 1318.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241296,7 +241475,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1551.0,
+        "amount": 1547.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241379,7 +241558,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241462,7 +241641,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241545,7 +241724,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241628,7 +241807,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/mv-tala/"
       },
       "divebooker_price": {
-        "amount": 1206.0,
+        "amount": 1203.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241858,7 +242037,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -241948,7 +242127,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242038,7 +242217,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242129,7 +242308,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242220,7 +242399,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242311,7 +242490,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242401,7 +242580,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1470.0,
+        "amount": 1467.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242491,7 +242670,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242742,7 +242921,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1562.0,
+        "amount": 1559.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242833,7 +243012,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1470.0,
+        "amount": 1467.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -242923,7 +243102,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1470.0,
+        "amount": 1467.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243014,7 +243193,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1562.0,
+        "amount": 1559.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243105,7 +243284,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1562.0,
+        "amount": 1559.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243195,7 +243374,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1562.0,
+        "amount": 1559.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243275,7 +243454,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/topaz?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1677.0,
+        "amount": 1674.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243360,7 +243539,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/topaz/"
       },
       "divebooker_price": {
-        "amount": 1470.0,
+        "amount": 1467.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243450,7 +243629,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243539,7 +243718,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243628,7 +243807,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243717,7 +243896,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243806,7 +243985,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243895,7 +244074,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -243984,7 +244163,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244073,7 +244252,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244162,7 +244341,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244251,7 +244430,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1769.0,
+        "amount": 1765.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244340,7 +244519,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1901.0,
+        "amount": 1897.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244429,7 +244608,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1901.0,
+        "amount": 1897.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244518,7 +244697,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1901.0,
+        "amount": 1897.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -244607,7 +244786,7 @@
         "url": "https://travel.padi.com/liveaboard/egypt/unity/"
       },
       "divebooker_price": {
-        "amount": 1901.0,
+        "amount": 1897.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245406,7 +245585,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245530,7 +245709,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245597,7 +245776,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245664,7 +245843,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245845,7 +246024,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245912,7 +246091,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=5/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -245979,7 +246158,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246046,7 +246225,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=6/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246113,7 +246292,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246180,7 +246359,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246247,7 +246426,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246314,7 +246493,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=7/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246381,7 +246560,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246448,7 +246627,7 @@
         "url": "https://www.liveaboard.com/diving/egypt/yachtiano?m=8/2027"
       },
       "divebooker_price": {
-        "amount": 1723.0,
+        "amount": 1719.0,
         "currency": "USD"
       },
       "divebooker_provenance": {
@@ -246559,16 +246738,16 @@
     "source": "divebooker.com",
     "read": "2026-09-22",
     "vessels": 92,
-    "departures": 887,
-    "in_season": 887,
-    "matched": 788,
+    "departures": 892,
+    "in_season": 892,
+    "matched": 793,
     "founded": 69,
     "unpriced": 30,
     "on_unmapped_vessels": 0,
     "unmatched": 30,
     "unmapped_vessels": [],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 887 in-season sailing(s), 788 land on a row one of the other two sellers founded, keyed on (boat, date), and 69 are rows this seller founded itself, on a date or a hull the other two do not list, and 30 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 892 in-season sailing(s), 793 land on a row one of the other two sellers founded, keyed on (boat, date), and 69 are rows this seller founded itself, on a date or a hull the other two do not list, and 30 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
   "sellers": [
     "liveaboard.com",
@@ -247816,8 +247995,8 @@
           "pct": 15,
           "says": "2026-2027 trips",
           "category": "Hot Deals",
-          "price": 1146,
-          "was": 1350,
+          "price": 1144,
+          "was": 1346,
           "url": "https://divebooker.com/alsuraya-haz503"
         },
         {
@@ -247838,8 +248017,8 @@
           "pct": 15,
           "says": "Oct 4 & 11, 2026",
           "category": "Money Saving Deals",
-          "price": 501,
-          "was": 589,
+          "price": 500,
+          "was": 588,
           "url": "https://divebooker.com/bella-2-haz432"
         },
         {
@@ -247879,8 +248058,8 @@
           "pct": 10,
           "says": "Sep - Dec, 2026 trips",
           "category": "Money Saving Deals",
-          "price": 1321,
-          "was": 1468,
+          "price": 1319,
+          "was": 1466,
           "url": "https://divebooker.com/destiny-haz523"
         },
         {
@@ -247901,8 +248080,8 @@
           "pct": 15,
           "says": "2026 - 2027 trips",
           "category": "Money Saving Deals",
-          "price": 892,
-          "was": 1050,
+          "price": 890,
+          "was": 1047,
           "url": "https://divebooker.com/discovery-ii-haz395"
         },
         {
@@ -247912,8 +248091,8 @@
           "pct": 10,
           "says": "Selected trips in 2026-2028",
           "category": "Money Saving Deals",
-          "price": 1214,
-          "was": 1350,
+          "price": 1212,
+          "was": 1346,
           "url": "https://divebooker.com/dune-longara-haz527"
         },
         {
@@ -247923,8 +248102,8 @@
           "pct": 10,
           "says": "Brothers, Daedalus, Elphinstone trip on Oct 10, 2026",
           "category": "Money Saving Deals",
-          "price": 1529,
-          "was": 1700,
+          "price": 1527,
+          "was": 1696,
           "url": "https://divebooker.com/silky-haz384"
         },
         {
@@ -247934,8 +248113,8 @@
           "pct": 10,
           "says": "North - Tiran on Oct 24, 2026",
           "category": "Money Saving Deals",
-          "price": 1968,
-          "was": 2186,
+          "price": 1963,
+          "was": 2182,
           "url": "https://divebooker.com/titan-haz386"
         },
         {
@@ -247945,8 +248124,8 @@
           "pct": 20,
           "says": "2026 - 2027 trips",
           "category": "Money Saving Deals",
-          "price": 1199,
-          "was": 1500,
+          "price": 1197,
+          "was": 1496,
           "url": "https://divebooker.com/grand-discovery-haz509"
         },
         {
@@ -247956,8 +248135,8 @@
           "pct": 15,
           "says": "Selected trips in 2027",
           "category": "Money Saving Deals",
-          "price": 660,
-          "was": 776,
+          "price": 658,
+          "was": 775,
           "url": "https://divebooker.com/hammerhead-ii-haz381"
         },
         {
@@ -247978,8 +248157,8 @@
           "pct": 11,
           "says": "Selected trips in 2026",
           "category": "Money Saving Deals",
-          "price": 1480,
-          "was": 1660,
+          "price": 1477,
+          "was": 1656,
           "url": "https://divebooker.com/odyssey-haz213"
         },
         {
@@ -247989,8 +248168,8 @@
           "pct": 10,
           "says": "2027 trips",
           "category": "Money Saving Deals",
-          "price": 1340,
-          "was": 1489,
+          "price": 1338,
+          "was": 1487,
           "url": "https://divebooker.com/odyssey-haz213"
         },
         {
@@ -248000,8 +248179,8 @@
           "pct": 10,
           "says": "Selected 2026-2027 trips",
           "category": "Money Saving Deals",
-          "price": 1364,
-          "was": 1514,
+          "price": 1361,
+          "was": 1512,
           "url": "https://divebooker.com/ocean-lovers-haz443"
         },
         {
@@ -248059,8 +248238,8 @@
           "pct": 10,
           "says": "Selected departures in 2026-2027!",
           "category": "Money Saving Deals",
-          "price": 2502,
-          "was": 2780,
+          "price": 2497,
+          "was": 2775,
           "url": "https://divebooker.com/royal-evolution-haz250"
         },
         {
@@ -248070,8 +248249,8 @@
           "pct": 30,
           "says": "2026 - 2027 trips",
           "category": "Hot Deals",
-          "price": 764,
-          "was": 1092,
+          "price": 763,
+          "was": 1091,
           "url": "https://divebooker.com/serenity-haz454"
         },
         {
@@ -248081,8 +248260,8 @@
           "pct": 20,
           "says": "2026-2027 trips",
           "category": "Money Saving Deals",
-          "price": 1293,
-          "was": 1617,
+          "price": 1291,
+          "was": 1614,
           "url": "https://divebooker.com/sindalahs-haz497"
         },
         {
@@ -248092,8 +248271,8 @@
           "pct": 10,
           "says": "2027 trips!",
           "category": "Money Saving Deals",
-          "price": 1151,
-          "was": 1279,
+          "price": 1149,
+          "was": 1277,
           "url": "https://divebooker.com/topaz-haz508"
         },
         {
@@ -248103,8 +248282,8 @@
           "pct": 10,
           "says": "Oct to Dec 2026",
           "category": "Money Saving Deals",
-          "price": 1336,
-          "was": 1485,
+          "price": 1333,
+          "was": 1481,
           "url": "https://divebooker.com/unity-haz538"
         }
       ],
