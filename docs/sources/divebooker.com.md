@@ -702,6 +702,51 @@ matches `fee`, `extra`, `includ` or `exclud`. Whatever this seller discloses
 about required extras, it is not on the vessel page in any form — rendered or
 streamed.
 
+### A long string is a row of its own, and the field holds a pointer
+
+Read 2026-09-22 by `tools/probe_divebooker_chunkref.py` over
+`/aml-hayaty-haz539`
+([run 35713736973](https://github.com/PaludaNCode/Liveaboard/actions/runs/35713736973)),
+because `programm` was shipping as the four characters `"$3e"` on all 492
+trips and the day-plan reader written for it was reading nothing.
+
+The payload is not one object. It is a stream of labelled rows, and a long
+string is hoisted into a row of its own:
+
+```
+3d:T510,<strong>Day 1:</strong><br />\r\nCheck-In &amp; welcome onboard…
+34:T10f1,Aml Hayaty liveaboard is a 38.5-metre Red Sea vessel…
+30:T11a8d,{"@context":"http://schema.org","@graph":[…
+```
+
+A label, `T`, **the text's length in hex bytes**, a comma, and then that many
+bytes. Wherever the value belongs the page writes `"$<label>"`, so `programm`
+reads `"$3d"` and a fee column's `text` can read `"$3f"`.
+
+Three things about it are load-bearing, and each is a way of getting it wrong:
+
+* **The length is the only thing that says where a row ends.** The text runs
+  past newlines — a day plan is mostly newlines — so a line-wise reader cuts
+  the plan at *Day 1* and reads the rest as more rows.
+* **The labels move between renders.** The same day plan was `$3e` at 09:57
+  and `$3d` at 10:03, on one hull, one page. A label written into a parser is
+  a number that happened to be true once, so a reference is resolved against
+  the payload it arrived in and nowhere else.
+* **A row may begin exactly where a push chunk does.** `$3f` was used on that
+  page and looked undeclared for that reason alone: nothing preceded its
+  label, so a rule wanting a newline in front of one found nothing. The chunk
+  holding it declared it plainly.
+
+Not every reference is text. `$1` is `"$Sreact.fragment"`, `$e` is a client
+module (`I[54062,…]`) and `$3e` on that render is an SVG path. A reference
+naming a row this reader does not keep is **left exactly as it is** —
+inventing text for it would be a guess wearing the page's clothes.
+
+The text is **markup**, because the seller writes it in an editor:
+`<strong>Day 2:</strong><br />` with `&amp;` between two reefs. So it is read
+as prose — tags out, entities decoded — before any reef reader sees it, or the
+fleet's reefs arrive as *Dolphin House &amp; Siyoul Kebir*.
+
 ## What is ruled out
 
 - **No browser.** Seven pages read over plain `urllib`, every one of them

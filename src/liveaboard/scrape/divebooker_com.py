@@ -1244,10 +1244,18 @@ class FeeBlock:
     """
 
 
+#: What ends a line in a column, and a line break is not always a newline.
+#: A column's `text` can be a chunk reference and a row's text is markup, so
+#: resolving one and then splitting on newlines alone would hand the reader a
+#: whole fee book as a single line -- which is a bill with one charge in it.
+LINE_BREAK = re.compile(r"[\r\n]+|<br\s*/?>|</(?:p|div|li|tr)\s*>",
+                        re.IGNORECASE)
+
+
 def _fee_lines(text: str) -> Iterator[str]:
     """The lines of one column, as the seller's prose breaks them."""
-    for line in re.split(r"[\r\n]+", text or ""):
-        line = line.strip(" \t-–—•* ")
+    for line in LINE_BREAK.split(text or ""):
+        line = _as_prose(line or "").strip(" \t-–—•* ")
         if line:
             yield line
 

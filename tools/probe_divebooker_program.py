@@ -120,8 +120,11 @@ def main() -> int:
         # that made `$3f` look undeclared.
         decoded = [json.loads(c) for c in fixture]
         joined = "".join(decoded)
-        refs = {m.group(1) for m in
-                re.finditer(r'"programm":"\$([0-9a-f]{1,4})"', joined)}
+        # Every reference the page uses, not the ones under a key this probe
+        # guessed: `programm` holds `{"title": "Program", "text": "$3d"}`, so
+        # a pattern written against `"programm":"$3d"` found none of them and
+        # carried back a fixture with no day plan in it.
+        refs = {m.group(1) for m in re.finditer(r'"\$([0-9a-f]{1,4})"', joined)}
         want = set()
         for i, part in enumerate(decoded):
             if "Price details" in part or '"programm"' in part:

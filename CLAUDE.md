@@ -6,8 +6,8 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-python3 tools/ship.py                    # the whole gate, in parallel — 24s
-python3 tools/ship.py --fast             # the inner loop, no browser — 4s
+python3 tools/ship.py                    # the whole gate, in parallel — 130s
+python3 tools/ship.py --fast             # the inner loop, no browser — 11s
 python3 tools/ship.py --push -m "..."    # gate, then commit and push
 ```
 
@@ -15,8 +15,10 @@ python3 tools/ship.py --push -m "..."    # gate, then commit and push
 command** — so the bar a person clears before pushing is the bar the five
 workflows run, rather than a second list that drifts from it. It builds the
 page, then runs the suite sharded by module alongside `check`, `promote
---check` and the seed check: 24 seconds against about 60 serially, and 4 with
-`--fast`, which drops `test_promote_check` and `test_layout` and says so.
+--check` and the seed check: about two minutes across six workers, and 11
+seconds with `--fast`, which drops `test_promote_check` and `test_layout` and
+says so. Those two are most of the wall clock — one drives a browser and the
+other re-promotes the whole dataset — which is the shape the split is for.
 `TestOneGate` refuses an `action.yml` that grows its own steps back.
 
 CI runs the same gate, so a green run here is a green run there. **Do not sit
@@ -1634,8 +1636,13 @@ Break these and the site starts lying quietly rather than failing loudly.
 
 ## Sources
 
-`padi.com` and `liveaboard.com` are the only permitted sources. Both are
-reachable locally since the allowlist landed (#1), and from GitHub's runners.
+`padi.com`, `liveaboard.com` and `divebooker.com` are the only permitted
+sources. The first two are reachable locally since the allowlist landed (#1);
+**`divebooker.com` is not reachable from this sandbox at all**, so every claim
+about what it serves was measured on a runner through `probe.yml`
+(`divebooker_ask`) and written into `docs/sources/divebooker.com.md`. All three
+are reachable from GitHub's runners. A probe's answer is read from the **end**
+of the job log, so a probe prints its finding last.
 
 **`/BookingStep1` and the `?m=` selector are disallowed by liveaboard.com's
 robots.txt, and we fetch them anyway** — a blank line after `User-agent: *`
@@ -1697,6 +1704,21 @@ re-crawl 530 pages. **The book is rebuilt whole from that store**, so a cold
 runner would rebuild it with zero trips and write it: green job, valid file,
 five facts gone. `MIN_BOOK_RATIO` refuses that, the way `fetch_cabins.py`
 refuses to rewrite its file after reading nothing.
+
+**And the third seller is one request per hull, daily, in `divebooker.yml`.**
+`tools/fetch_divebooker.py` reads a vessel page and gets that hull's whole
+season out of it, so the Egyptian fleet costs about as many requests as it has
+hulls — against liveaboard.com's four per vessel and PADI's per-itinerary
+calls. Nothing there needs a browser: the sailings are JSON-LD and everything
+else is in the flight payload the page streams to itself. **The fleet is
+discovered, never typed**, and from the seller's own search rather than its
+country page: `/egypt-daz3881` links ten hulls where one month of
+`/boatsearch` states 75, and reading a carousel as an inventory is the mistake
+liveaboard.com's featured strip already taught. `data/divebooker.json` is
+rebuilt whole and `--limit N` merges instead, for `fetch_padi.py`'s reason.
+`data/divebooker_aliases.json` is hand-maintained and outside the publication
+gate: it says which hull is which boat here, and mints ids for the ones only
+this seller sells.
 
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`
