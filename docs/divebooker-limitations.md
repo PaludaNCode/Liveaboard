@@ -63,8 +63,18 @@ before deciding what the third seller is allowed to say on the page.
    **And it reaches 21 of 906 sailings**, because the id is on the capped ten
    Events a hull publishes and nowhere else: the payload holds no trip id at
    all, measured with the ids we already had as the probe (run 35734945024).
-   What would widen it is the request the page makes when *Select cabin* is
-   pressed, which nobody has watched.
+   **What *Select cabin* does was the last lead, and it is closed** — watched
+   2026-09-22 with a browser and the network log open
+   ([run 35752878539](https://github.com/PaludaNCode/Liveaboard/actions/runs/35752878539),
+   `tools/probe_divebooker_select_cabin.py`). A press navigates to
+   `/boatorder/booking/?tripId=N` and the landing page calls
+   `GET /restapi/boatcart?tripId=N&useTravelCredit=true`, so the mechanism is
+   real — but Red Sea Aggressor II's page renders **6 pressable rows at first
+   paint and 6 after scrolling to the foot**, against 18 sailings this project
+   holds for that hull. The rest of the list is data the page ships and does
+   not draw, and a row that does not exist cannot be pressed. So the ceiling
+   is the source's, not the reader's, on this page: widening the ladder needs
+   a surface that lists the other sailings, which nobody has found.
    This entry used to read *"a fee book"* and *"a dive count, an entry bar, a
    cabin ladder"*, and all three turned out to be about the page nobody had
    opened.

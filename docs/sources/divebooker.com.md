@@ -1014,6 +1014,26 @@ markdown this seller does publish is `boatSpecials`, against a hull.
   `wait_until="networkidle"` times out at 45s here every time, so anything
   driving this host reads at `load`.
 
+  **And the question is closed, negatively, by the run after it**
+  ([run 35752878539](https://github.com/PaludaNCode/Liveaboard/actions/runs/35752878539)):
+  Red Sea Aggressor II's page renders **6 pressable *Select cabin* rows at
+  first paint, and 6 after a scroll to the foot** — against 18 sailings this
+  project holds for that hull and 906 across the fleet. A `--skip 10` pressed
+  nothing, because there was nothing at 10. So the rest of the departure list
+  **is not on this page as rows**: the `TouristTrip` chain that carries those
+  885 sailings is data the page ships and does not render as something a
+  visitor can book, and a row that does not exist cannot be pressed for an id.
+  The browser buys nothing here. Widening the ladder needs a **different
+  surface** — the seller's own search, or a departures view nobody has
+  opened — which is a new question and not this one; and the ~900-request,
+  75-minute estimate below is moot until such a surface is found, because
+  there is nothing to make 900 requests *for*.
+  **`/restapi/boatcart?tripId=N&useTravelCredit=true` is what the booking page
+  calls**, and it is worth writing down here: a JSON endpoint for the ladder,
+  where `fetch_divebooker_cabins.py` currently parses the page. Not acted on —
+  changing what that fetcher reads is its own probe, not a side effect of this
+  one.
+
   The original entry, for the record —
   [run 35750483433](https://github.com/PaludaNCode/Liveaboard/actions/runs/35750483433),
   `tools/probe_divebooker_select_cabin.py`, the first browser probe on this
