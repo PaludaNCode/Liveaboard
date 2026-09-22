@@ -80,6 +80,29 @@ PRESSABLE = re.compile(r"select\s*cabin|choose\s*cabin|book\s*now|select\s*room"
                        re.I)
 
 
+def described(request: Any) -> str:
+    """One request, as a line -- with its body where the body is text.
+
+    `request.post_data` decodes the raw bytes as UTF-8 and **raises** where
+    they are not: this page posts compressed bodies, and the first run of this
+    probe died inside Playwright's own event dispatch on
+    `'utf-8' codec can't decode byte 0x8b`. A probe that cannot print a request
+    it does not understand is a probe that stops at the first one, so the body
+    is asked for defensively and its absence is reported rather than raised.
+    """
+    line = f"{request.method} {request.url}"
+    try:
+        body = request.post_data
+    except Exception:  # noqa: BLE001 - a body that is not text is still data
+        raw = None
+        try:
+            raw = request.post_data_buffer
+        except Exception:  # noqa: BLE001
+            pass
+        return line + f"  <<{len(raw or b'')} byte(s), not text>>"
+    return line + (f"  <<{body[:400]}>>" if body else "")
+
+
 def hull_url(book: dict[str, Any], slug: str) -> str | None:
     record = (book.get("vessels") or {}).get(slug)
     if isinstance(record, dict) and record.get("url"):
@@ -100,12 +123,19 @@ def known_ids(book: dict[str, Any], slug: str) -> dict[str, str]:
     return out
 
 
-def anchors(page: Any) -> list[tuple[str, str]]:
-    """Every rendered control that could open a booking page, with its text."""
+def anchors(page: Any, cap: int) -> list[tuple[str, str]]:
+    """Every rendered control that could open a booking page, with its text.
+
+    Capped per selector, because the wide ones are wide on purpose: `button`
+    and `[class*='book']` match most of a page on a site whose name is one of
+    the words, and `inner_text()` on each is a layout per node. A ceiling on a
+    scan nobody has watched, not a measurement -- and an argument, so a run
+    that wants the whole page can ask for it.
+    """
     found: list[tuple[str, str]] = []
     seen: set[str] = set()
     for selector in CANDIDATES:
-        for node in page.query_selector_all(selector):
+        for node in page.query_selector_all(selector)[:cap]:
             try:
                 text = " ".join((node.inner_text() or "").split())[:60]
                 href = node.get_attribute("href") or ""
@@ -130,6 +160,9 @@ def main() -> int:
                         help="presses to make, after the DOM has been read")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--timeout", type=float, default=45.0)
+    parser.add_argument("--max-nodes", type=int, default=600,
+                        help="nodes to read per selector; the wide selectors "
+                             "match most of a page and each read is a layout")
     parser.add_argument("--executable", default=None)
     parser.add_argument("--dump-html", action="store_true",
                         help="print the markup of one departure row")
@@ -140,10 +173,19 @@ def main() -> int:
     book = json.loads(args.book.read_text(encoding="utf-8"))
     slug = args.vessel
     if not slug:
+        # The busiest hull **that already holds an id**, not the busiest hull.
+        # The ids we hold are this probe's control -- a field claiming to be
+        # the id has to reproduce one -- and the first run picked Red Sea
+        # Aggressor II, 18 sailings and not one id, which is the one shape
+        # that can answer nothing either way.
         counts: dict[str, int] = {}
         for row in (book.get("departures") or {}).values():
             counts[row.get("boat", "")] = counts.get(row.get("boat", ""), 0) + 1
-        slug = max(counts, key=lambda k: counts[k]) if counts else ""
+        with_ids = {boat for boat, count in counts.items()
+                    if known_ids(book, boat)}
+        pool = {boat: count for boat, count in counts.items()
+                if boat in with_ids} or counts
+        slug = max(pool, key=lambda k: pool[k]) if pool else ""
     url = hull_url(book, slug)
     if not url:
         print(f"?? {slug}: no vessel url in the committed book")
@@ -167,10 +209,7 @@ def main() -> int:
         # Every request the page makes, from the first byte. A press that
         # navigates and a press that fetches are different findings and only
         # the log tells them apart.
-        page.on("request", lambda request: asked.append(
-            f"{request.method} {request.url}"
-            + (f"  <<{(request.post_data or '')[:400]}>>"
-               if request.post_data else "")))
+        page.on("request", lambda request: asked.append(described(request)))
 
         # `networkidle` is what a probe wants -- the question is what the page
         # asks for once its own JavaScript has run -- and it is also what a
@@ -184,7 +223,7 @@ def main() -> int:
             page.wait_for_timeout(4000)
 
         # 1. The rendered DOM, which is the cheapest answer there could be.
-        rendered = anchors(page)
+        rendered = anchors(page, args.max_nodes)
         with_id = [(href, text) for href, text in rendered if TRIP_ID.search(href)]
         print(f"\n-- rendered controls: {len(rendered)}, "
               f"{len(with_id)} carrying a tripId")
@@ -211,7 +250,8 @@ def main() -> int:
             # row's control says the same words, so a set of seen labels would
             # press one row and call it the page.
             matched = []
-            for candidate in page.query_selector_all(",".join(CANDIDATES)):
+            for candidate in page.query_selector_all(
+                    ",".join(CANDIDATES))[:args.max_nodes]:
                 try:
                     words = " ".join((candidate.inner_text() or "").split())
                 except Exception:  # noqa: BLE001
