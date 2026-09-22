@@ -3,6 +3,39 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-22
+
+```
+changes: HEAD -> 2026-09-22
+===========================
+
+new departures (18)
+  2027-05-01  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-05-08  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-05-15  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-05-22  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-05-29  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-06-05  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-06-12  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-06-19  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-06-26  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-07-03  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-07-10  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  2027-07-17  Snefro Spirit          Sinai Classic                           1,375 USD liveaboard.com
+  ... and 6 more not shown
+
+bookable again (1)
+  2027-08-07  Oceanix                North & Brothers Liveaboard        liveaboard.com
+
+price down (1)
+  2027-05-01  Marselia Star          3,387 ->   3,382 USD  -5 (-0.1%)  CCR Reefs, Wrecks and Canyons Trip
+
+vessels seen for the first time (1)
+  Snefro Spirit
+
+849 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-21
 
 ```

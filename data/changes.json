@@ -1,6 +1,252 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-22",
+  "added": [
+   {
+    "id": "snefro-spirit-2027-05-01-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-05-01",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-05-08-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-05-08",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-05-15-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-05-15",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-05-22-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-05-22",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-05-29-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-05-29",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-06-05-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-06-05",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-06-12-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-06-12",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-06-19-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-06-19",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-06-26-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-06-26",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-07-03-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-07-03",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-07-10-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-07-10",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-07-17-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-07-17",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-07-24-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-07-24",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-07-31-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-07-31",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-08-07-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-08-07",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-08-14-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-08-14",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-08-21-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-08-21",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   },
+   {
+    "id": "snefro-spirit-2027-08-28-0",
+    "boat": "Snefro Spirit",
+    "title": "Sinai Classic",
+    "start": "2027-08-28",
+    "price": 1375.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "sold_out": [],
+  "returned": [
+   {
+    "id": "oceanix-2027-08-07-0",
+    "boat": "Oceanix",
+    "title": "North & Brothers Liveaboard",
+    "start": "2027-08-07",
+    "price": 1156.0,
+    "currency": "USD",
+    "sellers": [
+     "liveaboard.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [],
+  "price_down": [
+   {
+    "id": "marselia-star-2027-05-01-0",
+    "boat": "Marselia Star",
+    "title": "CCR Reefs, Wrecks and Canyons Trip",
+    "start": "2027-05-01",
+    "was": 3387.0,
+    "now": 3382.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.14762326542663123
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [
+   "Snefro Spirit"
+  ],
+  "fx": [],
+  "price_rounding": 849,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-22"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-21",
   "added": [],
   "sold_out": [],
@@ -6788,86 +7034,5 @@
   "availability_newly_read": false,
   "quiet": false,
   "day": "2026-09-13"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-12",
-  "added": [],
-  "sold_out": [
-   {
-    "id": "hammerhead-ii-2027-07-31-0",
-    "boat": "Hammerhead II",
-    "title": "Super Diversity: Daedalus - St. John's - Sataya (Fury Shoals)",
-    "start": "2027-07-31",
-    "price": 1223.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com",
-     "padi.com"
-    ]
-   }
-  ],
-  "returned": [
-   {
-    "id": "red-sea-aggressor-ii-2027-07-31-0",
-    "boat": "Red Sea Aggressor II",
-    "title": "Northern Red Sea, Ras Mohammed, Straits of Tiran",
-    "start": "2027-07-31",
-    "price": 2760.0,
-    "currency": "USD",
-    "sellers": [
-     "liveaboard.com",
-     "padi.com"
-    ]
-   }
-  ],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [
-   {
-    "id": "royal-evolution-2027-07-01-0",
-    "boat": "Royal Evolution",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-01",
-    "was": 1570.0,
-    "now": 1565.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.3184713375796179
-   },
-   {
-    "id": "royal-evolution-2027-07-08-0",
-    "boat": "Royal Evolution",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-08",
-    "was": 1570.0,
-    "now": 1565.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.3184713375796179
-   },
-   {
-    "id": "royal-evolution-2027-07-15-0",
-    "boat": "Royal Evolution",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-15",
-    "was": 1570.0,
-    "now": 1565.0,
-    "currency": "USD",
-    "delta": -5.0,
-    "pct": -0.3184713375796179
-   }
-  ],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 460,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-12"
  }
 ]
