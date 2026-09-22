@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-21",
+ "collected": "2026-09-22",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -2066,7 +2066,8 @@
     "abu nuhas",
     "rosalie moller",
     "gubal",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "giftun"
    ],
    "dives": 18,
    "fees": {
@@ -2185,7 +2186,8 @@
     "abu nuhas",
     "rosalie moller",
     "gubal",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "giftun"
    ],
    "dives": 8,
    "fees": {
@@ -3420,7 +3422,7 @@
     "ras mohammed",
     "tiran",
     "thistlegorm",
-    "small giftun"
+    "giftun"
    ],
    "dives": 18,
    "fees": {
@@ -5021,7 +5023,7 @@
     "daedalus",
     "elphinstone",
     "marsa shouna",
-    "small giftun"
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -5417,7 +5419,7 @@
     "tiran",
     "ras mohammed",
     "thistlegorm",
-    "small giftun"
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -5823,7 +5825,7 @@
     "abu nuhas",
     "rosalie moller",
     "gota abu ramada",
-    "small giftun"
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -5923,7 +5925,7 @@
     "panorama reef",
     "brothers",
     "gota abu ramada",
-    "small giftun"
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -15440,6 +15442,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -15538,6 +15547,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -15630,6 +15646,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -15722,6 +15745,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -15816,6 +15846,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -15910,6 +15947,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16008,6 +16052,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16104,6 +16155,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16200,6 +16258,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16297,6 +16362,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16391,6 +16463,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16417,6 +16496,7 @@
     "ras mohammed",
     "thistlegorm",
     "safaga",
+    "giftun",
     "salem express"
    ],
    "dives": 14,
@@ -16488,6 +16568,13 @@
       "included": true,
       "note": "Transfer from/to the airport (round-trip, only on boat arrival & departure days)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -16582,6 +16669,13 @@
       "included": true,
       "note": "Free nitrox (for certified nitrox divers)",
       "tier": "conditional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "government_fee",
+      "included": true,
+      "note": "Government taxes",
+      "tier": "mandatory"
      }
     ],
     "unreadable": []
@@ -17934,6 +18028,7 @@
     "ras mohammed",
     "thistlegorm",
     "safaga",
+    "giftun",
     "salem express"
    ],
    "dives": 14,
@@ -19353,6 +19448,7 @@
     "ras mohammed",
     "thistlegorm",
     "safaga",
+    "giftun",
     "salem express"
    ],
    "dives": 14,
@@ -22546,6 +22642,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -22630,6 +22736,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -22723,6 +22839,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -22811,6 +22937,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -22902,6 +23038,16 @@
       "tier": "conditional"
      },
      {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
+     },
+     {
       "basis": "per_trip",
       "code": "port_fees",
       "included": true,
@@ -22990,6 +23136,16 @@
       "code": "gear_rental",
       "note": "Full scuba set: Fins, mask, snorkel (ABC), Flashlight (torch), SMB (Surface Marker Buoy)",
       "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 100.0,
+       "currency": "USD"
+      },
+      "basis": "per_trip",
+      "code": "government_fee",
+      "note": "Government fee",
+      "tier": "optional"
      },
      {
       "basis": "per_trip",
@@ -25630,7 +25786,7 @@
    "boat_name": "MY Grand Discovery",
    "dive_sites": [
     "brothers",
-    "small giftun",
+    "giftun",
     "daedalus",
     "elphinstone",
     "salem express",
@@ -25710,7 +25866,7 @@
     "salem express",
     "panorama reef",
     "safaga",
-    "small giftun"
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -26693,7 +26849,8 @@
     "brothers",
     "thistlegorm",
     "abu nuhas",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "giftun"
    ],
    "dives": 17,
    "fees": {
@@ -29279,6 +29436,7 @@
    "boat_name": "MY Heaven Saphir",
    "dive_sites": [
     "sha'ab el erg",
+    "siyoul kebir",
     "abu nuhas",
     "ras mohammed",
     "gubal",
@@ -35223,7 +35381,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35316,7 +35474,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35412,7 +35570,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35505,7 +35663,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35598,7 +35756,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35694,7 +35852,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35786,7 +35944,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -35874,7 +36032,7 @@
        "currency": "EUR"
       },
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "note": "Port fees & permissions",
       "tier": "mandatory"
      },
@@ -37515,7 +37673,8 @@
     "salem express",
     "gubal",
     "panorama reef",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "siyoul kebir"
    ],
    "dives": 18,
    "fees": {
@@ -37616,7 +37775,8 @@
     "salem express",
     "gubal",
     "panorama reef",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "siyoul kebir"
    ],
    "dives": 18,
    "fees": {
@@ -37717,7 +37877,8 @@
     "salem express",
     "gubal",
     "panorama reef",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "siyoul kebir"
    ],
    "dives": 18,
    "fees": {
@@ -38089,7 +38250,8 @@
    "boat_name": "Seawolf Steel",
    "dive_sites": [
     "abu nuhas",
-    "gubal"
+    "gubal",
+    "giftun"
    ],
    "dives": 19,
    "fees": {
@@ -39162,6 +39324,7 @@
     "salem express",
     "gubal",
     "panorama reef",
+    "siyoul kebir",
     "ras mohammed"
    ],
    "dives": 19,
@@ -39253,6 +39416,7 @@
     "salem express",
     "gubal",
     "panorama reef",
+    "siyoul kebir",
     "ras mohammed"
    ],
    "dives": 19,
@@ -43187,7 +43351,7 @@
      },
      {
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "included": true,
       "note": "Harbour fees & dive permits",
       "tier": "mandatory"
@@ -43262,7 +43426,7 @@
      },
      {
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "included": true,
       "note": "Harbour fees & dive permits",
       "tier": "mandatory"
@@ -43339,7 +43503,7 @@
      },
      {
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "included": true,
       "note": "Harbour fees & dive permits",
       "tier": "mandatory"
@@ -43415,7 +43579,7 @@
      },
      {
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "included": true,
       "note": "Harbour fees & dive permits",
       "tier": "mandatory"
@@ -43493,7 +43657,7 @@
      },
      {
       "basis": "per_trip",
-      "code": "port_fees",
+      "code": "combined_fees",
       "included": true,
       "note": "Harbour fees & dive permits",
       "tier": "mandatory"
@@ -43884,12 +44048,12 @@
    "name": "Bella 3",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 73,
-    "first": "2026-09-22",
+    "dated": 72,
+    "first": "2026-10-01",
     "in_season": 22,
     "last": "2027-12-25",
     "priced": 22,
-    "read": 73,
+    "read": 72,
     "unpriced": 0
    },
    "slug": "bella-3",
@@ -44336,12 +44500,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 17,
-    "first": "2026-09-22",
+    "dated": 16,
+    "first": "2026-09-27",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 17,
+    "read": 16,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -44711,12 +44875,12 @@
    "name": "Reef Voyager",
    "operator": null,
    "sailings": {
-    "dated": 16,
-    "first": "2026-09-22",
+    "dated": 15,
+    "first": "2026-09-26",
     "in_season": 0,
     "last": "2026-12-26",
     "priced": 0,
-    "read": 16,
+    "read": 15,
     "unpriced": 1
    },
    "slug": "reef-voyager",
@@ -44824,12 +44988,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 56,
-    "first": "2026-09-22",
+    "dated": 55,
+    "first": "2026-09-29",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "snefro-love",
