@@ -379,7 +379,15 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     `unknown-operator`. Correct rather than missing: `Product.brand` here
     names the seller, and publishing *Divebooker.com* as the operator of an
     Egyptian boat is the mistake a fixture caught once already.
-17. ~~**The day plan and the reef list were both read and both silent.**~~
+17. ~~**The vocabulary this seller's reef list speaks.**~~ Closed 2026-09-22
+    by the owner: all 47 names place. A spelling of a reef this project
+    carries folds onto it, as do the four Ras Mohammed park dives and Abu
+    Ramada's three; the other 26 became chips of their own, because the fold
+    could not be measured — of the 20 documents naming *Blue Hole*, 12 name
+    Tiran, 8 Gubal and 8 Dahab. 19 new chips, 102 itineraries whose reef list
+    grew. The same names were unplaced in liveaboard.com's own prose, so this
+    was never only this seller's hole.
+18. ~~**The day plan and the reef list were both read and both silent.**~~
     Fixed 2026-09-22. `programm` held `"$3d"` — a reference into the page's
     streamed payload rather than the plan — on all 492 trips in the book, and
     `divesites` keeps the reef's name a step down under `map`, so the list
@@ -401,10 +409,11 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     place, and whether *Blue Hole* or *Abu Kafan* becomes a filter chip is a
     decision about the page rather than a parser fix. See
     `docs/sources/divebooker.com.md`, *A long string is a row of its own*.
-18. **The book reaches this repository through a job log.** The sandbox's
-    egress policy refuses divebooker.com *and* the blob host artifacts are
-    served from, so the runner prints the book as gzip+base64 and
-    `tools/land_divebooker.py` reassembles it. It is checksummed per line
-    because a hand-carried 17,400 characters failed once on one character.
-    This is a courier for the development sandbox, not a pipeline: the
-    scheduled job, when it exists, will write `data/divebooker.json` directly.
+19. ~~**The book reaches this repository through a job log.**~~ It does not,
+    since 2026-09-21: `divebooker.yml` writes `data/divebooker.json` directly,
+    daily. The gzip+base64 courier through a job log — checksummed per line,
+    because a hand-carried 17,400 characters failed once on one character —
+    was for the development sandbox before that job existed.
+    `tools/land_divebooker.py` stays for the sandbox's own sake: this session
+    cannot reach the host, so a book read on a runner still has no other way
+    home.
