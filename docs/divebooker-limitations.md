@@ -366,14 +366,45 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     silent.
     So a third of the panels is the ceiling, and the one lever that could
     raise it is the rule `_with_units_resolved` already applies to gear — join
-    the two books on the money and take only the unit. **That is measurable
-    now**: the fee book landed 2026-09-21, so both books sit in the repository
-    and the question can be answered offline.
+    the two books on the money and take only the unit.
+
+    **Measured 2026-09-22, offline over the committed books, and wired (#151).**
+    Of the 194 obligatory lines stating a figure and no period, **81 have a line
+    in one of the other two books with the same code and the exactly equal
+    figure**; 2 of those are refused because the two books state *different*
+    units for that pair, which is not a reading. What lands is **36 lines on 28
+    bills, 121 departures**, and the count of divebooker bills that reach a
+    Total goes **126 → 154** of 327. Nothing else moved: `promote --check` green
+    either side, the gate 135.5s before and 133.9s after, and `changes` reports
+    *nothing moved* — a bill this site learned to add up is not a price the
+    seller changed.
+
+    **All 36 units come back `per_trip`**, which is this fleet's own prior — 946
+    of the 1,046 mandatory lines the other two books state — so what the join
+    buys is not a different figure but a line that can be **scaled at all**. The
+    warrant is still the equality of the figures and never the prior: PADI
+    states *Local fees and fuel surcharge* at 320 EUR per trip and this seller
+    states the same words at the same figure with no period, which is one charge
+    read twice.
+
+    **Three guards, and each cost something.** A pair the two lenders disagree
+    about resolves nothing. A hull that declined an obligatory label lends its
+    bills no verdict — 3 hulls of 92, and `unnamed_fees` records the decline per
+    *hull*, so the refusal is the whole hull and 2 bills that would otherwise
+    flip do not. And the fill only ever *upgrades*, and only where a unit really
+    moved: `complete` is the parser's verdict over the page it read.
+
+    **117 obligatory lines on 27 boats still state a figure and no period**, and
+    `cli` prints that beside the count it fixed on every run — a number of what
+    was resolved with nothing beside it reads as *that was everything*, which is
+    the truncation this project refuses in its own change log. What they need is
+    the seller stating a period; no word added here can supply one.
 
     It is not the ceiling on the *page*, and the two must not be confused.
     Every sailing has a Total, because the vessel's own panel and PADI's book
     answer where this source cannot. What the unit limits is how often the
-    third column carries a total of its own — 127 itineraries today.
+    third column carries a total of its own — 154 itineraries after the join,
+    127 before it.
     40 obligatory lines in 9 spellings are still declined, and each is a
     deliberate refusal rather than a gap. *Government fees* is 35 of them, all
     on the Sea Serpent fleet, whose only other required line is a park fee with

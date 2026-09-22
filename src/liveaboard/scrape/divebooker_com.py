@@ -339,6 +339,21 @@ class VesselBook:
         return out
 
 
+OWED_MARK = "[owed] "
+"""How `unnamed_fees` marks a decline in the *obligatory* column.
+
+The prefix is read back: `promote` refuses to fill a unit onto any bill from a
+hull that declined an obligatory line, because such a bill may be missing a
+charge entirely and no total may be claimed over it. One spelling, exported
+rather than copied — a second copy of it there would drift, and the day it
+drifts is the day the refusal stops firing.
+
+**Hull-level, and that is what the file records.** `unnamed_fees` is one list
+per vessel, so nothing here says which of its trips lost the line; the refusal
+is therefore the whole hull, which errs towards saying less.
+"""
+
+
 #: A hull id wherever it appears — in an href, in the streamed payload, in a
 #: JSON string. The search page renders twenty links and states seventy-five,
 #: so what it *links* and what it *holds* are different questions.
@@ -1531,7 +1546,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                     # total nothing. Reported together and told apart, rather
                     # than filtered here -- both are charges going unread.
                     block.unnamed.append(
-                        f"[{'owed' if required else 'extra'}] {unread}")
+                        (OWED_MARK if required else "[extra] ") + unread)
                     # Only in the obligatory column. A course nobody can name
                     # in the *Extra cost* list says nothing about whether what
                     # a diver must pay adds up.

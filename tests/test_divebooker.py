@@ -1417,6 +1417,145 @@ class TestTheFeeBookReachesTheTripThroughItsDates(unittest.TestCase):
         self.assertFalse(found["complete"])
 
 
+
+class TestAUnitOneSellerLeftOffIsReadFromAnother(unittest.TestCase):
+    """`promote._bill_with_units_resolved` — the lever #151 asked to measure.
+
+    319 of this seller's 608 panels state a figure, a payer and no period —
+    *Route fees and enviromental taxes - 200-320 EUR per person* — and
+    `FeeItem.span_for_trip` refuses such a line, which silences the bill it
+    sits in. The other two books state the same charge at the same figure with
+    the unit as a field, so the unit is **read** rather than guessed.
+
+    The same rule `_with_units_resolved` already applies to rental gear, with
+    the same warrant: **the figures must match exactly, or nothing happens.**
+    That equality is what says the two lines are one charge; without it this
+    is one seller's unit on another seller's price.
+    """
+
+    OURS = [{"code": "combined_fees", "tier": "mandatory", "basis": "per_trip",
+             "included": False, "unit_unstated": True,
+             "amount": {"amount": 125.0, "currency": "EUR"},
+             "provenance": {"kind": "scraped", "source_id": "divebooker.com"},
+             "note": "Marine Park, Port Fees and Permissions: stated with no unit"}]
+
+    def their_line(self, **over):
+        line = {"code": "combined_fees", "tier": "mandatory",
+                "basis": "per_night", "included": False,
+                "amount": {"amount": 125.0, "currency": "EUR"},
+                "provenance": {"kind": "scraped", "source_id": "liveaboard.com"}}
+        line.update(over)
+        return line
+
+    def resolved(self, theirs, *, declined=(), complete=False):
+        from liveaboard.promote import _bill_with_units_resolved
+        bill = {"lines": [dict(line) for line in self.OURS],
+                "complete": complete}
+        return _bill_with_units_resolved(bill, theirs, declined)
+
+    def test_the_bill_adds_up_once_the_unit_is_read(self):
+        """126 books of the committed 327 total today; 28 more do after this."""
+        bill = self.resolved([self.their_line()])
+        self.assertTrue(bill["complete"])
+        self.assertFalse(bill["lines"][0]["unit_unstated"])
+        self.assertEqual(bill["lines"][0]["basis"], "per_night")
+
+    def test_whose_unit_it_is_stays_recoverable(self):
+        """A line filled this way is still this seller's line, and a reader
+        must be able to see which book scaled it — the gear fill's rule."""
+        line = self.resolved([self.their_line()])["lines"][0]
+        self.assertEqual(line["unit_from"], "liveaboard.com")
+        self.assertIn("liveaboard.com", line["note"])
+        self.assertIn("night", line["note"])
+        self.assertNotIn("stated with no unit", line["note"])
+
+    def test_only_the_unit_moves(self):
+        """Never the amount, never the tier, never the label."""
+        line = self.resolved([self.their_line(
+            tier="optional", amount_max={"amount": 900.0, "currency": "EUR"})
+        ])["lines"][0]
+        self.assertEqual(line["amount"], {"amount": 125.0, "currency": "EUR"})
+        self.assertEqual(line["tier"], "mandatory")
+        self.assertNotIn("amount_max", line)
+
+    def test_a_figure_that_is_not_equal_resolves_nothing(self):
+        """An approximate match is an inference, and an inference is not a
+        warrant to scale somebody else's charge."""
+        bill = self.resolved([self.their_line(
+            amount={"amount": 125.5, "currency": "EUR"})])
+        self.assertFalse(bill["complete"])
+        self.assertTrue(bill["lines"][0]["unit_unstated"])
+
+    def test_a_figure_in_another_currency_is_another_figure(self):
+        bill = self.resolved([self.their_line(
+            amount={"amount": 125.0, "currency": "USD"})])
+        self.assertTrue(bill["lines"][0]["unit_unstated"])
+
+    def test_two_books_disagreeing_about_the_unit_state_nothing(self):
+        """51 (code, figure) pairs in the committed books carry two different
+        bases. A pair that disagrees is not a reading, and taking either is
+        picking — which is `promote.itinerary_key`'s rule."""
+        bill = self.resolved([self.their_line(),
+                              self.their_line(basis="per_trip",
+                                              provenance={"kind": "scraped",
+                                                          "source_id": "padi.com"})])
+        self.assertFalse(bill["complete"])
+        self.assertTrue(bill["lines"][0]["unit_unstated"])
+
+    def test_two_books_agreeing_resolve_it(self):
+        """The same figure twice under one unit is two sellers saying it."""
+        bill = self.resolved([self.their_line(),
+                              self.their_line(provenance={"kind": "scraped",
+                                                          "source_id": "padi.com"})])
+        self.assertTrue(bill["complete"])
+
+    def test_a_hull_that_declined_an_obligatory_line_is_never_flipped(self):
+        """The bill may be short a charge nothing could name, and a unit says
+        nothing about that. Three hulls of 92 — dive-runner,
+        red-sea-blue-force-2, south-moon-2 — and the file records the decline
+        per hull, so the refusal is the whole hull.
+
+        **The unit is still read**, because it was: what the decline withholds
+        is the *total*, which is the claim the missing charge would falsify.
+        A fact is not unread by an unrelated gap, and the line's note goes on
+        saying who scaled it."""
+        bill = self.resolved([self.their_line()],
+                             declined=[db.OWED_MARK + "Entrance fee: 10EUR"])
+        self.assertFalse(bill["complete"])
+        self.assertFalse(bill["lines"][0]["unit_unstated"])
+
+    def test_a_decline_in_the_extras_column_stops_nothing(self):
+        """A course nobody can name says nothing about what a diver must pay."""
+        bill = self.resolved([self.their_line()],
+                             declined=["[extra] Padi Open Water Diver: 370EUR"])
+        self.assertTrue(bill["complete"])
+
+    def test_a_charge_with_no_figure_still_silences_the_bill(self):
+        """The other half of #151, and there is nothing to do about it: the
+        seller stated no price and this project does not invent one."""
+        from liveaboard.promote import _bill_with_units_resolved
+        bill = _bill_with_units_resolved(
+            {"lines": [dict(self.OURS[0]),
+                       {"code": "visa", "tier": "mandatory", "basis": "per_trip",
+                        "included": False, "amount": None,
+                        "provenance": {"kind": "scraped",
+                                       "source_id": "divebooker.com"},
+                        "note": "Visa: listed with no price"}],
+             "complete": False},
+            [self.their_line()], ())
+        self.assertFalse(bill["complete"])
+
+    def test_a_bill_already_complete_is_not_re_decided(self):
+        """Nothing here may take a verdict away from the parser that read the
+        page: the fill only ever fills a silence."""
+        self.assertTrue(self.resolved([], complete=True)["complete"])
+
+    def test_the_sellers_own_book_is_not_its_own_lender(self):
+        """A figure this seller stated twice is one seller, not a join."""
+        bill = self.resolved([self.their_line(
+            provenance={"kind": "scraped", "source_id": "divebooker.com"})])
+        self.assertTrue(bill["lines"][0]["unit_unstated"])
+
 class TestTheThirdBillAddsUpOrShowsNothing(unittest.TestCase):
     """`pricing.divebooker_lines`, which is where a third total comes from.
 

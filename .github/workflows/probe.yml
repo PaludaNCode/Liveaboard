@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,fixture,flight,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,selectcabin,fixture,flight,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -482,6 +482,30 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_trip_ids.py \
             --vessels "${{ inputs.divebooker_vessel || 'emperor-superior' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The one place left to look for the other 885, and the only probe here
+      # that needs a browser: the payload holds no trip id, so if the link
+      # exists at all it is written by the page's own JavaScript. Installed
+      # only when asked, because every other question on this host is answered
+      # over plain HTTP and a browser is two minutes of setup for nothing.
+      - name: Install Playwright
+        if: contains(inputs.divebooker_ask, 'selectcabin')
+        run: |
+          pip install --quiet playwright
+          playwright install --with-deps chromium
+
+      - name: What does *Select cabin* ask for
+        if: contains(inputs.divebooker_ask, 'selectcabin')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_select_cabin.py \
+            --vessel "${{ inputs.divebooker_vessel || '' }}" \
+            --clicks 3 \
+            ${{ inputs.dump_html && '--dump-html' || '' }} \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"

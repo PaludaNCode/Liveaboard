@@ -269,11 +269,19 @@ class TestAFigureWithNoUnitIsNotAPerTripFigure(unittest.TestCase):
         from liveaboard.promote import _with_units_resolved
 
         theirs = [{"code": "gear_rental", "basis": "per_diving_day",
-                   "amount": {"amount": 40.0, "currency": "EUR"}}]
+                   "amount": {"amount": 40.0, "currency": "EUR"},
+                   "provenance": {"kind": "scraped", "source_id": "padi.com"}}]
         resolved = _with_units_resolved([dict(self.fee)], theirs)[0]
         self.assertEqual(resolved["basis"], "per_diving_day")
         self.assertFalse(resolved["unit_unstated"])
-        self.assertIn("a diving day", resolved["note"])
+        self.assertIn("diving day", resolved["note"])
+        # And whose unit it is. The figure stays this seller's and the period
+        # is the other's, so the line has to be able to say both -- in a field
+        # as well as in prose, because prose is not somewhere a later reader
+        # can ask the question.
+        self.assertEqual(resolved["unit_from"], "padi.com")
+        self.assertIn("padi.com", resolved["note"])
+        self.assertIn("liveaboard.com", resolved["note"])
 
     def test_a_figure_the_other_seller_does_not_match_is_left_alone(self):
         """The equality is the warrant. A different figure is a different

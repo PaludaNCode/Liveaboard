@@ -989,10 +989,25 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 ## Not yet asked
 
 - **Where the other 885 booking ids come from.** The payload holds none, so the
-  page must ask for one when a row's *Select cabin* is pressed. What that
-  request is has not been watched — it needs a browser with the network log
-  open, which is a different kind of probe from every one here. Until then the
-  cabin ladder covers the ten sailings a hull publishes an Event for.
+  page must ask for one when a row's *Select cabin* is pressed — or write the
+  link itself once its own JavaScript has run. **The probe for it exists now**
+  (#152): `tools/probe_divebooker_select_cabin.py`, run from `probe.yml` with
+  `divebooker_ask: selectcabin`, which is the first browser probe on this host.
+  It asks the rendered DOM first, because an anchor already carrying a `tripId`
+  costs one page load per hull rather than one request per sailing, and only
+  then presses and prints every request the press makes. Nothing in it derives
+  an id: a sequence, a neighbouring sailing and a date are all forbidden, and a
+  row it finds no id for is reported as a row with no id. Until it has been run
+  and its answer written here, the cabin ladder covers the ten sailings a hull
+  publishes an Event for.
+  **And the size of the prize is worth having in view before it is built.**
+  Full coverage is ~900 requests, about 75 minutes a day at the five-second
+  pace this project gives a host stating no `Crawl-delay` — the largest single
+  crawl here, against liveaboard.com's 1,030 booking pages at 2s. What it buys
+  is this seller's room prices on ~900 rows against 14, and its own
+  `sumFreeSpaces` beside the other two sellers' counts. **Not** the *Places*
+  column: the per-room counts overlap, so the at-this-price slot stays empty
+  whatever the coverage.
 - **Which nesting is the departure list.** The working reading above, held
   against the dates: do the ten top-level Events appear among the forty-nine?
   Everything a parser does here depends on that answer.
