@@ -379,7 +379,25 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     `unknown-operator`. Correct rather than missing: `Product.brand` here
     names the seller, and publishing *Divebooker.com* as the operator of an
     Egyptian boat is the mistake a fixture caught once already.
-17. **The book reaches this repository through a job log.** The sandbox's
+17. ~~**The day plan and the reef list were both read and both silent.**~~
+    Fixed 2026-09-22. `programm` held `"$3d"` — a reference into the page's
+    streamed payload rather than the plan — on all 492 trips in the book, and
+    `divesites` keeps the reef's name a step down under `map`, so the list
+    answered on 0 of 492. Two readers shipped, tested and reading nothing, on
+    the one field this seller publishes that the other two do not.
+    `divebooker_com.chunk_table` follows the reference against the payload it
+    arrived in (**the labels move between renders** — the same plan was `$3e`
+    one hour and `$3d` the next), and the guard is three push chunks of real
+    bytes in `tests/fixtures/divebooker-day-plan.json`.
+    Over all 92 hulls
+    ([35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100)):
+    **605 of 606 trips carry a plan, 158 name a reef nothing else on that trip
+    does.** What it does not close is the vocabulary — 406 of this seller's
+    3,295 stated reef names, in 48 spellings, are ones this project does not
+    place, and whether *Blue Hole* or *Abu Kafan* becomes a filter chip is a
+    decision about the page rather than a parser fix. See
+    `docs/sources/divebooker.com.md`, *A long string is a row of its own*.
+18. **The book reaches this repository through a job log.** The sandbox's
     egress policy refuses divebooker.com *and* the blob host artifacts are
     served from, so the runner prints the book as gzip+base64 and
     `tools/land_divebooker.py` reassembles it. It is checksummed per line

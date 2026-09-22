@@ -72,7 +72,12 @@ the wrong place:
 Neither failed loudly, because the page had the other two sellers' reefs to
 print. Measured, fixed and guarded on 2026-09-22 against bytes carried back
 from a runner (`tests/fixtures/divebooker-day-plan.json`, three push chunks,
-the middle of which is a row header on its own).
+the first of which is a row header on its own). What the fix is worth, over
+all 92 hulls
+([run 35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100)):
+**605 of 606 trips carry a plan and 158 name a reef nothing else on that trip
+does.** It reaches the dataset the next time `divebooker.yml` runs, because
+the book is what `promote` reads and the book is what was holding `"$3d"`.
 
 Stage 0 now has its measurement, and the whole fleet has been read against it.
 Divebooker states a fare, a currency and both dates on every departure, so it

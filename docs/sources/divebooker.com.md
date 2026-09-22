@@ -762,15 +762,30 @@ fleet's reefs arrive as *Dolphin House &amp; Siyoul Kebir*. A fee column's
 newline: a resolved column split on newlines alone is a bill with one charge
 in it.
 
-**And following the reference is worth the reading.** Measured over six hulls
-by `tools/probe_divebooker_program.py`
-([run 35714720240](https://github.com/PaludaNCode/Liveaboard/actions/runs/35714720240)):
-14 of 14 trips carry a plan, **11 of them name a reef the trip's own
-`divesites` array and its name do not**, and the only references left
-unresolved are `$1` and `$e` — the fragment symbol and a client module, which
-are not text and are meant to be left alone. Aml Hayaty's *Mini Safari: Wrecks
-& Reefs* is the trip that named no reef at all in the published dataset; its
-plan names Thistlegorm, Abu Nuhas, Giftun and Siyoul Kebir.
+**And following the reference is worth the reading.** Measured over the whole
+fleet by `tools/probe_divebooker_program.py`
+([run 35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100),
+92 hulls): **605 of 606 trips carry a day plan**, and **158 of them name a reef
+the trip's own `divesites` list and its name do not**. Aml Hayaty's *Mini
+Safari: Wrecks & Reefs* is the trip that named no reef at all in the published
+dataset; its plan names Thistlegorm, Abu Nuhas, Giftun and Siyoul Kebir.
+
+What stays unresolved is five labels — `$1` (368 uses), `$e` (92), and `$22`,
+`$24`, `$25` on a handful of pages. None is a text row: `$1` is
+`"$Sreact.fragment"` and the rest are client modules, so leaving them is the
+right answer rather than a residue to chase.
+
+**The reef names are this seller's own vocabulary, and 12% of them land
+nowhere.** Over the same 92 hulls, 2,889 stated reefs are names this project
+already places and **406 are not, in 48 spellings** — led by *Panorama* (52,
+against our *panorama reef*), *Satayah* (34, against *sataya*), *Shaab Marsa
+Alam* (25), *Shaab Sharm* (23) and *Siyul Kebira* (20, where this seller's own
+day plan writes *Siyoul Kebir*). Two different questions sit in that list and
+it is deliberately **not acted on here**: a fold of a spelling for a reef the
+fleet already carries is one thing, and *Blue Hole*, *Abu Kafan* or *Anemone
+City* are reefs the site filter does not offer at all — minting chips for them
+is a decision about the page, not a parser fix. `CLAUDE.md` says not to
+lengthen that table without counting first; this is the count.
 
 ## What is ruled out
 
