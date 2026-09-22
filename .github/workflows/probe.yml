@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,fixture,flight,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -452,6 +452,21 @@ jobs:
           python3 tools/probe_divebooker_booking.py \
             --trips "${{ inputs.divebooker_trips || '254581' }}" \
             --vessels "${{ inputs.divebooker_vessel || 'argo-egypt,omneia-spirit' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # `programm` reads "Program\n$3e" on all 492 trips: a reference into the
+      # streamed payload rather than the day plan, so the reader shipped and
+      # reads nothing. This asks the page how those chunks are labelled rather
+      # than assuming a format -- which is what put the reference there.
+      - name: Where does a chunk reference point
+        if: contains(inputs.divebooker_ask, 'chunkref')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_chunkref.py \
+            --vessels "${{ inputs.divebooker_vessel || 'aml-hayaty' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
