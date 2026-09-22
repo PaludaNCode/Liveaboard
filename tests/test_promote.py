@@ -1458,6 +1458,102 @@ class TestADiveOnAPlaceFoldsIntoIt(unittest.TestCase):
         lists it beside Sataya and Fury Shoal."""
         self.assertEqual(self.sites("Dolphin House"), [])
 
+    def test_ras_mohammeds_park_dives_are_ras_mohammed(self):
+        """Four more of the park's own dives, named by the third seller's reef
+        list and by the first seller's prose. Same warrant as Shark Reef: the
+        park is how they are asked for, and 9 of the 16 documents naming
+        Anemone City name Ras Mohammed too."""
+        for name in ("Anemone City", "Shark Observatory", "Jackfish Alley",
+                     "Ras Ghozlani"):
+            with self.subTest(name=name):
+                self.assertEqual(self.sites(f"Dive 2 at {name}"),
+                                 ["ras mohammed"])
+
+    def test_every_dive_on_abu_ramada_is_abu_ramada(self):
+        """The island south of Giftun, dived at its north point, its erg and
+        its cave. One alias covers all three because each carries the island's
+        name, and the chip was already there under the Gota."""
+        for name in ("North Abu Ramada", "Erg Abu Ramada", "Abu Ramada Cave",
+                     "Gota Abu Ramada"):
+            with self.subTest(name=name):
+                self.assertEqual(self.sites(name), ["gota abu ramada"])
+
+
+class TestTheThirdSellersReefNames(unittest.TestCase):
+    """47 names, 353 mentions, and the rule that placed them.
+
+    `divesites` became readable on 2026-09-22 and states a reef list per trip.
+    The names are not this seller's alone — *Blue Hole* is in 46 of
+    liveaboard.com's own trip descriptions, *Carless Reef* in 17 — so what was
+    unplaced was unplaced on both sides.
+
+    **A fold is a claim; a name is not.** Where a name is a spelling of
+    something here, or a dive inside a park this table already folds, it
+    folds. Everything else became a chip of its own, because an itinerary
+    names every place it visits and the co-occurrence therefore settles
+    nothing: of the 20 documents naming Blue Hole, 12 name Tiran, 8 Gubal and
+    8 Dahab.
+    """
+
+    def sites(self, text):
+        from liveaboard.promote import _sites_from_name
+
+        return _sites_from_name(text)
+
+    def test_a_reef_this_project_carries_takes_the_spelling_it_carries(self):
+        for wrote, chip in (("Satayah", "sataya"),
+                            ("Siyul Kebira", "siyoul kebir"),
+                            ("Marsa Shoona", "marsa shouna"),
+                            ("Gota Kebira", "gota kebir"),
+                            ("Shaab Shear", "shaab sheer"),
+                            ("Panorama", "panorama reef"),
+                            ("Shaab Claude", "fury shoals"),
+                            ("Abu Fandera Bay", "fury shoals"),
+                            ("Malahy", "fury shoals"),
+                            ("Habili Gaffar", "st johns")):
+            with self.subTest(wrote=wrote):
+                self.assertEqual(self.sites(wrote), [chip])
+
+    def test_blue_hole_is_its_own_chip_and_not_dahab(self):
+        """Dahab is the right answer and the data cannot say so.
+
+        Which is the Dolphin House rule one reef along: a chip reading *Blue
+        Hole* costs the reader nothing, and a chip reading *Dahab* on a week
+        that never went there is the site lying quietly. The same holds for
+        every name whose place this project could not measure.
+        """
+        for name in ("Blue Hole", "Gabr el Bint", "Ras Abu Galum",
+                     "Great Canyon", "Small Crack"):
+            with self.subTest(name=name):
+                sites = self.sites(name)
+                self.assertEqual(sites, [name.lower()])
+                self.assertNotIn("dahab", sites)
+
+    def test_one_name_never_mints_two_chips(self):
+        """`panorama` is an alias rather than a hint for this reason: a hint
+        matching the bare word would have put *panorama* beside *panorama
+        reef* on every Safaga week."""
+        for name in ("Panorama Reef", "Gota Abu Ramada", "Abu Hashish North",
+                     "El Mina Wreck", "Carless Reef"):
+            with self.subTest(name=name):
+                self.assertEqual(len(self.sites(name)), 1, self.sites(name))
+
+    def test_every_reef_the_committed_book_states_is_placed(self):
+        """The publication gate half: a name nobody can place is a row the
+        site filter cannot reach, and this seller is the only source of a reef
+        list on the 33 hulls it alone sells."""
+        from published import raw
+
+        book = raw("divebooker.json")
+        unplaced = sorted({
+            site
+            for vessel in book.get("vessels", {}).values()
+            for trip in (vessel.get("trips") or {}).values()
+            for site in trip.get("sites") or []
+            if not self.sites(site)
+        })
+        self.assertEqual(unplaced, [])
+
 
 class TestTheReefsDescriptionsName(unittest.TestCase):
     """Vocabulary read out of the operators' own descriptions.

@@ -500,6 +500,20 @@ Break these and the site starts lying quietly rather than failing loudly.
   the name a step down, under `map`, and read at the entry's own level it
   answered on **0 of 492 trips**: a reef list that shipped, passed its
   fixture and read nothing.
+  **And what that list named, the vocabulary now places — 47 names, and only
+  a spelling folds.** Six are spellings of reefs already here, four are Ras
+  Mohammed park dives beside the five that park already folds, and Abu
+  Ramada's north point, erg and cave carry the island's own name. The other
+  26 are chips of their own, because **the fold could not be measured**: an
+  itinerary names every place it visits, so of the 20 documents naming *Blue
+  Hole*, 12 name Tiran, 8 Gubal and 8 Dahab. Dahab is the right answer and
+  the data cannot say so, which is the Dolphin House rule one reef along — a
+  chip reading *Blue Hole* costs the reader nothing, and one reading *Dahab*
+  on a week that never went there is the site lying quietly. Spelled as the
+  fleet spells them, plurality first: *Carless Reef* is 38 mentions against 2
+  for the reef's usual spelling. 19 new chips, 102 itineraries whose reef
+  list grew — and the same names sit unplaced in liveaboard.com's own prose,
+  so this was never only the third seller's hole.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
