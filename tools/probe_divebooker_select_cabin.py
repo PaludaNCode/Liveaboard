@@ -83,9 +83,10 @@ PRESS_SELECTOR = "a, button, [role='button']"
 """What is pressed, narrower than what is *read*.
 
 The census above casts wide on purpose -- the point of a probe is to find out
-what the markup is called. A press needs something that can be pressed, and
-handing the browser a selector it can filter in one call is the difference
-between a scan in seconds and one in minutes.
+what the markup is called. A press needs something that can be pressed, and a
+selector the browser filters in one call costs one round trip where reading a
+handle per node costs one each and handing them back to `evaluate` costs the
+same again. Reasoning about the protocol rather than a timing anybody took.
 """
 
 
@@ -132,12 +133,14 @@ def known_ids(book: dict[str, Any], slug: str) -> dict[str, str]:
     return out
 
 
-#: The scan itself, run **in the page** rather than over handles. The sync
-#: API costs a round trip per `inner_text()`, and the wide selectors are wide
-#: on purpose — `button` and `[class*='book']` match most of a page on a site
-#: with one of those words in its name. Four thousand round trips is what put
-#: the second run of this probe past thirteen minutes without printing
-#: anything, against one call that returns the same list.
+#: The scan itself, run **in the page** rather than over handles. The sync API
+#: costs a protocol round trip per `inner_text()`, and the wide selectors are
+#: wide on purpose — `button` and `[class*='book']` match most of a page on a
+#: site with one of those words in its name, so the count is in the thousands.
+#: One `evaluate` returns the same list for one round trip. Not measured
+#: against the per-handle version on this host: the run that would have said
+#: so was cancelled on a wrong reading of how long it had been going, and a
+#: number nobody took is exactly what this project does not put in a comment.
 SCAN = """(args) => {
   const [selectors, cap] = args;
   const out = [];
