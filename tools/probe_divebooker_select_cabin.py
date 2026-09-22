@@ -176,6 +176,11 @@ def main() -> int:
                              "the hull with the most sailings")
     parser.add_argument("--clicks", type=int, default=3,
                         help="presses to make, after the DOM has been read")
+    parser.add_argument("--skip", type=int, default=0,
+                        help="pressable rows to step over before pressing. "
+                             "The rows near the top are the ten Events the "
+                             "page publishes, whose ids this project already "
+                             "reads; only a row past them asks the question")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--timeout", type=float, default=45.0)
     parser.add_argument("--around", type=int, default=220,
@@ -279,13 +284,15 @@ def main() -> int:
                 if not pressed:
                     print("\n-- nothing on the page reads as *Select cabin*")
                 break
-            if pressed >= found:
-                print(f"\n-- {found} pressable row(s), all pressed")
+            if args.skip + pressed >= found:
+                print(f"\n-- {found} pressable row(s), "
+                      f"{args.skip} skipped, the rest pressed")
                 break
-            node = rows.nth(pressed)
+            node = rows.nth(args.skip + pressed)
             text = " ".join((node.inner_text() or "").split())
             if not pressed:
-                print(f"\n-- {found} row(s) read as pressable")
+                print(f"\n-- {found} row(s) read as pressable, "
+                      f"pressing from {args.skip}")
             before = len(asked)
             print(f"\n-- pressing {text[:50]!r}")
             try:
@@ -354,9 +361,13 @@ def main() -> int:
     # job log. Three shapes it can take and each is a different next step.
     print("\n== finding")
     if pressed_ids and in_bytes:
-        print(f"{len(in_bytes)} of {len(pressed_ids)} pressed id(s) are in the "
-              f"vessel page's own bytes — the link is readable without a "
-              f"browser, and the context above says under which key")
+        print(f"{len(in_bytes)} of {len(pressed_ids)} pressed id(s) are "
+              f"already in the vessel page's own bytes. **Read the context "
+              f"above before calling that coverage**: an id sitting in an "
+              f"Event's own `id` is one `fetch_divebooker.py` already keeps, "
+              f"so a press that lands on one of the ten Events the page "
+              f"publishes has asked nothing. The question is a row *past* "
+              f"them — see --skip")
     elif pressed_ids:
         print(f"the {len(pressed_ids)} id(s) a press produced are in none of "
               f"the vessel page's bytes: they are client state, so a ladder "

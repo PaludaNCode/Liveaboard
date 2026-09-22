@@ -988,8 +988,33 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 
 ## Not yet asked
 
-- **Where the other 885 booking ids come from. Asked 2026-09-22, and a press
-  answers it** —
+- **Where the other 885 booking ids come from. Asked 2026-09-22, and the first
+  reading of the answer was wrong.** It read: *"a press answers it … on Red
+  Sea Aggressor II, a hull whose Events state not one id, three presses of
+  Select cabin navigated to `?tripId=115971`, `?tripId=162922` and
+  `?tripId=142101` … so the id exists per departure row and the page has
+  it"*. The probe's own third step refutes it
+  ([run 35751606654](https://github.com/PaludaNCode/Liveaboard/actions/runs/35751606654)):
+  **both ids it re-checked are in the page's own bytes, inside an Event's
+  `id`** — `https://divebooker.com/red-sea-aggressor-ii-haz285#115971` — which
+  is exactly the fragment `fetch_divebooker.py` already keeps as `booking_id`.
+  They read as ids for a hull that states none only because those Events are
+  **2026** sailings, outside the published season, so no row in the book
+  carries them. A press on one of the ten Events a page publishes asks
+  nothing; the question is a row *past* them, which is what `--skip` is for.
+  The sentence is kept rather than deleted because it is the reason to look
+  again: a press landing on the rows nearest the top is the one case that
+  proves nothing and looks like proof.
+  **What the run does establish**, and these stand:
+  `/boatorder/booking/?tripId=N` is what a press navigates to, the landing
+  page then calls `GET /restapi/boatcart?tripId=N&useTravelCredit=true` —
+  a JSON endpoint for the ladder that nobody had seen — **no `tripId` is in
+  any `href`** on the rendered page (one control matched the probe's seven
+  selectors and none carried one), and **the page never goes idle**:
+  `wait_until="networkidle"` times out at 45s here every time, so anything
+  driving this host reads at `load`.
+
+  The original entry, for the record —
   [run 35750483433](https://github.com/PaludaNCode/Liveaboard/actions/runs/35750483433),
   `tools/probe_divebooker_select_cabin.py`, the first browser probe on this
   host. On **Red Sea Aggressor II, a hull whose Events state not one id**,
