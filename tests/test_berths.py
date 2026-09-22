@@ -286,23 +286,35 @@ class TestTheCommittedDataset(unittest.TestCase):
         sailing is, since the rungs across this fleet run from €500 to €2,900.
         Running the two passes an hour apart (``cabins.yml``) is what keeps
         the real figure near zero; this is the net under that.
+
+        **Each ladder answers to its own seller's fare**, which is the rule
+        `_drop_stale_ladder` keeps and the one this test had to learn when a
+        third seller arrived with a ladder of its own. The sellers disagree
+        about a berth on 52 of 777 joined sailings, so measuring divebooker's
+        rungs against the price liveaboard.com prints on the row reports a
+        real disagreement as a broken join — which is how it first fired, on
+        Topaz 2027-05-08 at 1,275 against 1,457.
         """
         from liveaboard.money import FxTable, Money
 
         fx = FxTable.from_dict(self.payload["fx"])
+        third = SELLERS.index("divebooker.com")
         checked = 0
         for departure in self.payload["departures"]:
             for block in departure.get("berths", []):
                 if not block[2]:
                     continue
-                quoted = Money.parse(departure["price"], "EUR")
+                own = departure["price"]
+                if block[0] == third and departure.get("divebooker_price"):
+                    own = departure["divebooker_price"]
+                quoted = Money.parse(own, "EUR")
                 advertised = float(fx.to_display(quoted)[0].amount)
                 cheapest = min(rung[1] for rung in block[2])
                 self.assertLessEqual(
                     abs(cheapest - advertised) / advertised, STALE_LADDER,
-                    f"{departure['id']}: row says {advertised:.0f}, "
-                    f"ladder starts at {cheapest} — too far apart to be a "
-                    f"night's repricing, so check the join",
+                    f"{departure['id']}: {SELLERS[block[0]]} says "
+                    f"{advertised:.0f}, its ladder starts at {cheapest} — too "
+                    f"far apart to be a night's repricing, so check the join",
                 )
                 checked += 1
 
