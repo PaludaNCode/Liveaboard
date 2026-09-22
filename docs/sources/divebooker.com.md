@@ -988,18 +988,31 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 
 ## Not yet asked
 
-- **Where the other 885 booking ids come from.** The payload holds none, so the
-  page must ask for one when a row's *Select cabin* is pressed — or write the
-  link itself once its own JavaScript has run. **The probe for it exists now**
-  (#152): `tools/probe_divebooker_select_cabin.py`, run from `probe.yml` with
-  `divebooker_ask: selectcabin`, which is the first browser probe on this host.
-  It asks the rendered DOM first, because an anchor already carrying a `tripId`
-  costs one page load per hull rather than one request per sailing, and only
-  then presses and prints every request the press makes. Nothing in it derives
-  an id: a sequence, a neighbouring sailing and a date are all forbidden, and a
-  row it finds no id for is reported as a row with no id. Until it has been run
-  and its answer written here, the cabin ladder covers the ten sailings a hull
-  publishes an Event for.
+- **Where the other 885 booking ids come from. Asked 2026-09-22, and a press
+  answers it** —
+  [run 35750483433](https://github.com/PaludaNCode/Liveaboard/actions/runs/35750483433),
+  `tools/probe_divebooker_select_cabin.py`, the first browser probe on this
+  host. On **Red Sea Aggressor II, a hull whose Events state not one id**,
+  three presses of *Select cabin* navigated to
+  `/boatorder/booking/?tripId=115971`, `?tripId=162922` and `?tripId=142101`,
+  and each landing page then called
+  `GET /restapi/boatcart?tripId=N&useTravelCredit=true`. So **the id exists per
+  departure row and the page has it**: it is not something only the capped ten
+  Events carry.
+  **It is not in an `href`, though** — the rendered page carried one control
+  matching any of the probe's seven selectors and **0 carrying a `tripId`**, so
+  the link is written by the row's own handler and a second read of the served
+  bytes will not pick it up on this hull. What is still open is whether those
+  three ids are *in* the bytes under a key nobody has enumerated, which decides
+  the price of full coverage: in the payload and the ladder costs no request
+  beyond the vessel page the crawl already reads; client state only, and it
+  costs a browser per hull. The probe asks that now, in its third step.
+  **And the page never goes idle** — `wait_until="networkidle"` times out at
+  45s here, every time, so anything driving this host reads it at `load`.
+  Nothing in the probe derives an id: a sequence, a neighbouring sailing and a
+  date are all forbidden, and a row it finds no id for is reported as a row
+  with no id. Until the third step has run, the cabin ladder covers the ten
+  sailings a hull publishes an Event for.
   **And the size of the prize is worth having in view before it is built.**
   Full coverage is ~900 requests, about 75 minutes a day at the five-second
   pace this project gives a host stating no `Crawl-delay` — the largest single

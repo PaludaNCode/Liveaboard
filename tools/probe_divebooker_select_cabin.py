@@ -123,31 +123,37 @@ def known_ids(book: dict[str, Any], slug: str) -> dict[str, str]:
     return out
 
 
-def anchors(page: Any, cap: int) -> list[tuple[str, str]]:
-    """Every rendered control that could open a booking page, with its text.
+#: The scan itself, run **in the page** rather than over handles. The sync
+#: API costs a round trip per `inner_text()`, and the wide selectors are wide
+#: on purpose — `button` and `[class*='book']` match most of a page on a site
+#: with one of those words in its name. Four thousand round trips is what put
+#: the second run of this probe past thirteen minutes without printing
+#: anything, against one call that returns the same list.
+SCAN = """(args) => {
+  const [selectors, cap] = args;
+  const out = [];
+  const seen = new Set();
+  for (const selector of selectors) {
+    const nodes = Array.from(document.querySelectorAll(selector)).slice(0, cap);
+    for (const node of nodes) {
+      const text = (node.innerText || node.textContent || "")
+        .replace(/\\s+/g, " ").trim().slice(0, 60);
+      const href = node.getAttribute("href") || "";
+      const mark = href + "::" + text;
+      if (seen.has(mark)) continue;
+      seen.add(mark);
+      out.push([href, text]);
+    }
+  }
+  return out;
+}"""
 
-    Capped per selector, because the wide ones are wide on purpose: `button`
-    and `[class*='book']` match most of a page on a site whose name is one of
-    the words, and `inner_text()` on each is a layout per node. A ceiling on a
-    scan nobody has watched, not a measurement -- and an argument, so a run
-    that wants the whole page can ask for it.
-    """
-    found: list[tuple[str, str]] = []
-    seen: set[str] = set()
-    for selector in CANDIDATES:
-        for node in page.query_selector_all(selector)[:cap]:
-            try:
-                text = " ".join((node.inner_text() or "").split())[:60]
-                href = node.get_attribute("href") or ""
-            except Exception:  # noqa: BLE001 - a detached node is not a failure
-                continue
-            mark = f"{href}::{text}"
-            if mark in seen:
-                continue
-            seen.add(mark)
-            if href or PRESSABLE.search(text):
-                found.append((href, text))
-    return found
+
+def anchors(page: Any, cap: int) -> list[tuple[str, str]]:
+    """Every rendered control that could open a booking page, with its text."""
+    found = page.evaluate(SCAN, [list(CANDIDATES), cap])
+    return [(href, text) for href, text in found
+            if href or PRESSABLE.search(text)]
 
 
 def main() -> int:
@@ -160,6 +166,8 @@ def main() -> int:
                         help="presses to make, after the DOM has been read")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--timeout", type=float, default=45.0)
+    parser.add_argument("--around", type=int, default=220,
+                        help="characters of payload to print around an id")
     parser.add_argument("--max-nodes", type=int, default=600,
                         help="nodes to read per selector; the wide selectors "
                              "match most of a page and each read is a layout")
@@ -249,15 +257,13 @@ def main() -> int:
             # press can navigate, which detaches every other handle, and every
             # row's control says the same words, so a set of seen labels would
             # press one row and call it the page.
-            matched = []
-            for candidate in page.query_selector_all(
-                    ",".join(CANDIDATES))[:args.max_nodes]:
-                try:
-                    words = " ".join((candidate.inner_text() or "").split())
-                except Exception:  # noqa: BLE001
-                    continue
-                if PRESSABLE.search(words):
-                    matched.append((candidate, words))
+            handles = page.query_selector_all(",".join(CANDIDATES))
+            words = page.evaluate(
+                "(n) => n.map(e => ((e.innerText || e.textContent || \"\")"
+                ".replace(/\\s+/g, \" \").trim()))",
+                handles[:args.max_nodes])
+            matched = [(handles[i], one) for i, one in enumerate(words)
+                       if PRESSABLE.search(one)]
             if not matched:
                 if not pressed:
                     print("\n-- nothing on the page reads as *Select cabin*")
@@ -295,24 +301,62 @@ def main() -> int:
                     break
                 time.sleep(args.delay)
 
+        # 3. And the question the presses raise: an id the page navigates to
+        # is an id the page **had**, so is it in the bytes the daily crawl
+        # already downloads? `probe_divebooker_trip_ids.py` asked this with
+        # the ids we hold and found none, on a hull whose Events state them;
+        # these are ids for a hull that states none, which is the case that
+        # matters. Decisive either way: in the payload, and full ladder
+        # coverage costs no request at all beyond the vessel page this crawl
+        # already reads; not in it, and the id is client state and a browser
+        # per hull is the price.
+        pressed_ids = sorted({TRIP_ID.search(one).group(1) for one in asked
+                              if db.HOST in one and TRIP_ID.search(one)})
+        if pressed_ids:
+            print(f"\n-- {len(pressed_ids)} id(s) the presses produced: "
+                  f"{', '.join(pressed_ids)}")
+            try:
+                page.goto(url, timeout=args.timeout * 1000, wait_until="load")
+                page.wait_for_timeout(4000)
+                served = page.content()
+            except Exception as exc:  # noqa: BLE001
+                served = ""
+                print(f"   could not re-read the hull page: {exc}")
+            for one in pressed_ids:
+                where = [m.start() for m in re.finditer(re.escape(one), served)]
+                if not where:
+                    print(f"   {one}: not in the page's own bytes")
+                    continue
+                print(f"   {one}: {len(where)} time(s) in the page's bytes")
+                for at in where[:3]:
+                    print("      …" + served[max(0, at - args.around):
+                                             at + args.around]
+                          .replace("\n", " ") + "…")
+            in_bytes = [one for one in pressed_ids if one in served]
+        else:
+            in_bytes = []
+
         browser.close()
 
-    # 3. The finding, last, because a probe's answer is read from the end of a
+    # The finding, last, because a probe's answer is read from the end of a
     # job log. Three shapes it can take and each is a different next step.
     print("\n== finding")
-    if ids and len(ids) >= sailings:
-        print(f"every one of {slug}'s {sailings} sailing(s) states a tripId in "
-              f"the rendered DOM: the ladder needs a browser per hull, not a "
-              f"request per sailing")
-    elif ids:
-        print(f"the rendered DOM carries {len(ids)} id(s) for {sailings} "
-              f"sailing(s) — more than the {len(held)} the Events state"
-              if len(ids) > len(held) else
-              f"the rendered DOM carries {len(ids)} id(s), the same ceiling as "
-              f"the {len(held)} the Events state")
+    if pressed_ids and in_bytes:
+        print(f"{len(in_bytes)} of {len(pressed_ids)} pressed id(s) are in the "
+              f"vessel page's own bytes — the link is readable without a "
+              f"browser, and the context above says under which key")
+    elif pressed_ids:
+        print(f"the {len(pressed_ids)} id(s) a press produced are in none of "
+              f"the vessel page's bytes: they are client state, so a ladder "
+              f"for every sailing costs a browser per hull")
+    if ids:
+        print(f"and the rendered DOM carries {len(ids)} id(s) in an href, "
+              f"against {sailings} sailing(s) and the {len(held)} the Events "
+              f"state — a second read of the page with a browser reaches them "
+              f"without a press")
     else:
-        print(f"no tripId is in the rendered DOM for {slug}; what the presses "
-              f"above asked for is the whole of what there is to go on")
+        print(f"no tripId is in an href on {slug}'s rendered page, so the "
+              f"press is what produces one")
     return 0
 
 
