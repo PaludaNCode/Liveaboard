@@ -1264,6 +1264,14 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 .deals-table tbody tr:hover .d-now, .deals-table tbody tr:hover .d-was,
 .deals-table tbody tr:hover .d-off { background:var(--row-hover); }
 .deals-table .d-when { white-space:nowrap; font-family:var(--font-mono); }
+/* The one cell here that is prose. It spans From and To because the seller
+   states which trips in words and no window at all, and `tbody td` is nowrap
+   for the departures table -- which reaches these cells too and put a
+   sentence off the right of the panel before it was measured (#150). */
+.deals-table .d-boatwide {
+  white-space:normal; font-family:inherit; color:var(--ink-dim);
+  min-width:11em;
+}
 .deals-table .d-boat { color:var(--ink); font-weight:600; }
 .deals-table .d-offer { color:var(--ink-dim); }
 .deals-table .d-now { font-family:var(--font-mono); color:var(--ink); white-space:nowrap; }
@@ -1303,6 +1311,14 @@ tbody tr.row.gone .dim { color:var(--ink-dim); }
 
 /* One campaign per block, because each carries its own conditions under it. */
 .deals-table .d-named + .d-named { margin-top:7px; }
+/* The two figures a boat-wide rate is drawn from, under the headline it came
+   with. `.d-was` is already struck through wherever a list price prints. */
+.deals-table .d-pair {
+  margin-top:3px; font-size:11px; white-space:nowrap;
+  font-family:var(--font-mono);
+}
+.deals-table .d-pair .p-now { margin-right:5px; color:var(--ink); }
+.deals-table .d-pair .p-was { text-decoration:line-through; color:var(--ink-faint); }
 
 /* The seller's small print, closed until asked for.
 

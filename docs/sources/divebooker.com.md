@@ -536,6 +536,82 @@ vocabulary drifts from the first. Only the *line* shape is this seller's.
   `unnamed_fees`. Counted is not enough: what an unread charge needs is the
   word, and a count cannot say which word.
 
+## The markdown the JSON-LD does not carry
+
+Read 2026-09-22 by `tools/probe_divebooker_specials.py` and
+`tools/probe_divebooker_boat_specials.py`, over the sixteen Egyptian hulls
+this seller's own specials listing links
+([run 35671398715](https://github.com/PaludaNCode/Liveaboard/actions/runs/35671398715)).
+
+**`/specials` is a from-price and a campaign line, and that is all.** All
+three spellings of it — `?et=3&e=1` (the sitemap's own), `?et=2&e=3881` (the
+Egypt scope `/boatsearch` uses) and the bare path — answer with **125 Offers,
+one per boat**: an `areaServed`, an `availability`, a `description` in the
+seller's words (*"Selected 2026 trips!"*), an `itemOffered` naming the hull,
+a `url` to its vessel page, and a `priceSpecification` that is a
+`UnitPriceSpecification` with a price, a currency and `unitText: "trip"`.
+**No date, and no figure the price is down from**, on any node on any of the
+three. `page=2` returns the same first entries, which is what PADI's deals
+shell did and the reason paging is measured here rather than assumed.
+
+**The pair is in the streamed payload, under `boatSpecials`.** One entry per
+hull, on all sixteen, and every one of them states all seventeen keys:
+
+```json
+{"id": "5398", "currencyId": "2", "tag": "SAVE UP TO 30%", "boatId": "464",
+ "name": "Aphrodite", "price": "1884", "old": "2355", "twoSpaces": "0",
+ "country": "Egypt", "img": "", "imgBoat": "…",
+ "descr": "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026", "terms": "",
+ "laTitle": "…", "categoryId": "1163", "category": "Money Saving Deals",
+ "book": {"text": "Check trips & availability", "url": ""}}
+```
+
+It matched nothing any earlier sweep asked about: the fee sweep asked for
+`fee|extra|includ|exclud` and the currency pass read `currencies` and `rates`.
+On Red Sea Aggressor II's 248 payload keys it is the **only** discount-shaped
+one.
+
+| | |
+|---|---|
+| Hulls carrying one | **16 of 16** the Egypt specials listing links, one entry each |
+| `price` is stated as | a string 10 times, an int 4, a float 2 — so it is read as a number, never as a type |
+| `terms` | non-empty on **4** — the three Aggressors and Blue Horizon — and stated nowhere else on the site |
+| `category` | *Money Saving Deals* 14, *Holiday Travel* 1, *Hot Deals* 1 |
+| `descr` | three dates with pipes on 3, a sentence on the rest. **Prose** |
+
+**The tag is not the pair, and it does not bound it.** A tag stating a flat
+rate agrees with `price`/`old` exactly — *SAVE 15%*, *SAVE 20%*, *SAVE 30%*,
+**6 of 6**. A tag saying *up to* agrees on 4 of 10, sits above the pair on 5
+(Sindalahs and Aphrodite say *up to 30%* over pairs at 20) and **below** it on
+one: Red Sea Aggressor V says *up to 63%* over a pair at **67**. So they are
+two claims the seller makes, not one stated twice, and neither is derived from
+the other — the rate this project publishes is the two stated figures, and the
+tag rides beside it in the seller's own words.
+
+**`currencyId` does not describe the figure, and that was measured.** The
+entry files Aphrodite under id 2 on a page whose own payload says
+`{"currencies": {"current": "USD"}}` — the same shape as `Offer.priceCurrency`
+reading EUR on three of four hulls, which is why `page_currency` exists. On
+the **8 hulls of 16** whose special names a figure the vessel page also states
+as a fare, the two are **equal as stated**: Bella 2 at 576, Alsuraya at 1,317,
+Aphrodite at 1,884, Sindalahs at 1,486, Discovery II at 1,025, and three more.
+Dividing by the rate this payload publishes for id 2 (`"2": "0.8704"`) matched
+a fare on **none** of them. So the figures take the page's currency and the id
+is recorded and not read.
+
+**What it cannot do is reach a sailing.** The entry names the boat, prices one
+trip and says which trips in `descr` — *"Sep 26, 2026 | Oct 24, 2026 | Dec 26,
+2026"* on one hull and *"Selected 2027 trips!"* on the next. Splitting the
+first would read a record out of a string that only sometimes is one, which is
+the mistake `itinerary_from_payload` already made with PADI's two harbours. So
+it is a row in the sale table and never a markdown on a departure: `promote`
+writes `deals.specials` and no row gets a `sale`, which is why the *On sale*
+chip counts exactly the sailings it counted before.
+
+**A campaign page adds nothing.** `/black-friday-liveaboard-diving-deals-iaz103`
+is one `Offer` and one `UnitPriceSpecification`, no figure beside a higher one,
+and it links one hull this site does not carry.
+
 ## The fleet, read whole
 
 Read 2026-09-20
@@ -631,12 +707,19 @@ streamed.
   with `TouristDestination×1, ItemList×1` and no priced node — a listing with
   nothing in it, which is the source's own way of saying so, and not the same
   as a page that failed. The distinction `carry_unread` exists for.
-- **No berth count, and no list price.** `Offer.availability` is
-  `https://schema.org/InStock` — a state, not a number — on every offer read,
-  and nothing in 219 departures states a struck-through or previous price.
-  Whatever this source becomes, *places left* and *on sale* are not questions
-  it can answer. `AggregateOffer` sits once per vessel page and is unread; it
-  is the only remaining candidate for a low/high figure.
+- ~~**No berth count, and no list price.**~~ **Half wrong, and the half that
+  was wrong is the third time on this host.** It read: *"`Offer.availability`
+  is `https://schema.org/InStock` — a state, not a number — on every offer
+  read, and nothing in 219 departures states a struck-through or previous
+  price. Whatever this source becomes, places left and on sale are not
+  questions it can answer."* Measured over the **JSON-LD**, which is where it
+  had been looked; the list price is in the streamed payload, under
+  `boatSpecials`, and the berth count is on the booking page behind *Select
+  cabin*. See *The markdown the JSON-LD does not carry* below.
+  `AggregateOffer` **is** read now and is not a markdown: one per vessel page,
+  `lowPrice`/`highPrice`/`offerCount` — Red Sea Aggressor II states 124 and
+  382 beside 144 offers, which is a spread over the boat's fares and not a
+  figure any of them is down from.
 - **"No fee book on the vessel page" was wrong, and the sweep is why.** It
   rested on 253 payload keys, none matching `fee`, `extra`, `includ` or
   `exclud` — and the panel is under a key called `details`. See *The fee book

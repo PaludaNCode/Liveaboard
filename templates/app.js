@@ -675,15 +675,27 @@
      Every price arrives already converted: normalisation is Python's job, and
      the only arithmetic below is picking a minimum out of numbers it settled. */
   var CABIN_NAMES = D.cabin_names || [];
-  /* SELLER_NAMES, not SELLERS. The Sold by chips further down declare their
-     own `var SELLERS` in this same function scope — an array of {id,label,n}
-     objects — and `var` has no block scope, so that second declaration wins
-     for the whole file including the lines above it. The ladder's own seller
-     heading was already reading it and would have printed "[object Object]"
-     the day a second seller filled a block (#92); it is guarded by
-     `blocks.length > 1`, which is why nothing has shown it yet. Two different
-     lists cannot share one name. */
-  var SELLER_NAMES = D.sellers || [];
+  /* SELLER_HOSTS, and the name is the whole point. This note used to read
+     "SELLER_NAMES, not SELLERS" — the Sold by chips declare their own `var
+     SELLERS` in this same function scope, `var` has no block scope, so that
+     second declaration wins for the whole file including the lines above it.
+     The rule it ended on was "two different lists cannot share one name", and
+     the file then gave the chips a second list under that very name anyway:
+     an object keyed `liveaboard`/`padi`/`divebooker`, declared later, winning
+     everywhere.
+
+     So every seller this list was for came out missing. The sales table's
+     Seller column read "? · 21 Sep" on all 24 rows — a markdown, its reading
+     date, and no seller — which is #139 with a percentage attached, and the
+     cabin ladder's own seller heading was one `blocks.length > 1` away from
+     the same. Nothing failed: a pooled *array* indexed by 0 and 1 against an
+     *object* keyed by words gives `undefined`, and both call sites have an
+     `|| ""` behind them.
+
+     The lesson is the one that was already written down, so this list is
+     named for what it holds — hosts, `liveaboard.com` — and the chips' short
+     labels are `SELLER_CHIPS`. */
+  var SELLER_HOSTS = D.sellers || [];
   var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2, BLOCK_ABOARD = 3;
   var RUNG_NAME = 0, RUNG_PRICE = 1, RUNG_LEFT = 2, RUNG_SUPP = 3;
 
@@ -710,7 +722,7 @@
     var blocks = d.berths || [];
     for (var n = 0; n < blocks.length; n++) {
       if (blocks[n][BLOCK_ABOARD] != null) {
-        return { n: blocks[n][BLOCK_ABOARD], who: SELLER_NAMES[blocks[n][BLOCK_SELLER]] || "" };
+        return { n: blocks[n][BLOCK_ABOARD], who: SELLER_HOSTS[blocks[n][BLOCK_SELLER]] || "" };
       }
     }
     return null;
@@ -719,7 +731,14 @@
   /* The day a seller's book was read. Two crawls, two days, and the date is
      the whole of what makes a count or a markdown a claim rather than a fact. */
   function sellerRead(seller) {
-    return seller === 1 ? D.meta.padi_berths_read : D.meta.berths_read;
+    if (seller === 0) return D.meta.berths_read;
+    if (seller === 1) return D.meta.padi_berths_read;
+    /* And nothing for a third. `berths_read` is the cabin crawl's day, and a
+       fallback that hands it to whichever seller asks would date the newest
+       seller's claim with the oldest seller's crawl -- which is the failure
+       `padi_berths_read` was split out to prevent, one seller later.
+       divebooker's own day travels on the block that carries its rows. */
+    return null;
   }
   function readOn(block) { return sellerRead(block[BLOCK_SELLER]); }
 
@@ -734,7 +753,7 @@
   function namedReadings(sellers) {
     return (sellers || []).map(function (s) {
       var day = sellerRead(s);
-      return (SELLER_NAMES[s] || "a seller") + (day ? " (" + shortDate(day) + ")" : "");
+      return (SELLER_HOSTS[s] || "a seller") + (day ? " (" + shortDate(day) + ")" : "");
     });
   }
 
@@ -929,7 +948,7 @@
      because those are the same keys the Seller column branches on and the
      row's own bill is built from. A second derivation here would be a second
      answer to "who sells this", and the two would drift. */
-  var SELLER_NAMES = {
+  var SELLER_CHIPS = {
     liveaboard: "liveaboard", padi: "PADI", divebooker: "divebooker"
   };
   /* The order sellers are printed in wherever more than one is named, and it
@@ -957,7 +976,7 @@
   function sellerOf(dep) { return sellersOf(dep).join("+"); }
 
   function sellerLabel(id) {
-    var who = id.split("+").map(function (k) { return SELLER_NAMES[k] || k; });
+    var who = id.split("+").map(function (k) { return SELLER_CHIPS[k] || k; });
     if (who.length === 1) return who[0] + " only";
     return who.slice(0, -1).join(", ") + " and " + who[who.length - 1];
   }
@@ -2899,6 +2918,40 @@
         exemplar: true
       });
     });
+    /* And the third seller's, which is a third shape again. divebooker states
+       a fare, the figure it says that fare is down from and a headline --
+       against **the boat**, naming no sailing anywhere. `says` is prose: one
+       hull lists three dates with pipes and the next writes "Selected 2027
+       trips!", so there is no window to print and the row says so rather than
+       showing two dashes that read like a hole in the data. */
+    (((deals.specials || {}).boats) || []).forEach(function (r) {
+      rows.push({
+        boat: r.boat_name, from: null, to: null,
+        /* The rate the two stated figures come to, which is the arithmetic
+           `promote` does over every other markdown here. Never the tag's own
+           number: "SAVE UP TO 30%" sits over pairs at 20 and "up to 63%" over
+           one at 67, so the tag bounds nothing and printing it as the rate
+           would publish whichever claim was larger. The tag is beside it, in
+           the seller's own words, under Offer. */
+        off: r.pct ? r.pct + "% off" : null,
+        names: [{ title: r.tag || "special", url: r.url || null,
+                  terms: r.terms || null, seller: "divebooker.com" }],
+        sellers: [(deals.specials || {}).seller],
+        read: [(deals.specials || {}).read],
+        of: null,
+        /* Not `exemplar`: PADI's dates are one real sailing and these are no
+           sailing at all. The cell has to tell those two apart. */
+        boatwide: true,
+        says: r.says,
+        /* The two figures the rate is drawn from. "−20%" against a price the
+           reader has to work out is a claim they cannot check, which is what
+           this page reports in other people — and this row has no fare beside
+           it to check against, because the seller's figure is a *from* price
+           for the boat rather than any sailing's. So it is printed, and
+           printed as what it is. */
+        price: r.price, was: r.was
+      });
+    });
     return rows.sort(function (a, b) {
       var x = (a.boat || "").toLowerCase(), y = (b.boat || "").toLowerCase();
       if (x !== y) return x < y ? -1 : 1;
@@ -2920,7 +2973,7 @@
     (row.sellers || []).forEach(function (seller, n) {
       var day = (row.read || [])[n];
       td.appendChild(el("span", "reading",
-        (SELLER_NAMES[seller] || "?") + (day ? " · " + shortDate(day) : "")));
+        (SELLER_HOSTS[seller] || "?") + (day ? " · " + shortDate(day) : "")));
     });
     return td;
   }
@@ -2962,9 +3015,11 @@
      wrong. Nothing here reads a date out of "before 30 Sep, 2026" to fill the
      validity window PADI does not publish -- that hole is stated on the row
      itself, and filling it from prose would be inventing the field. */
-  function offerTerms(said) {
+  function offerTerms(said, seller) {
     var box = el("details", "d-terms");
-    box.appendChild(el("summary", null, "What PADI says about it"));
+    box.appendChild(el("summary", null,
+      "What " + (seller === "divebooker.com" ? "divebooker" : "PADI") +
+      " says about it"));
     var list = el("ul", null);
     said.forEach(function (line) { list.appendChild(el("li", null, line)); });
     box.appendChild(list);
@@ -2987,7 +3042,22 @@
       tr.appendChild(el("td", "d-boat", "")).appendChild(boatLink(r.boat));
       var from = el("td", "d-when", r.from ? shortDate(r.from) : "—");
       var to = el("td", "d-when", r.to ? shortDate(r.to) : "—");
-      if (r.exemplar) {
+      if (r.boatwide) {
+        /* Which trips, in the seller's own words, because it states them in
+           no other form. "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026" looks
+           like three dates and "Selected 2027 trips!" is a sentence, so
+           splitting the first would read a record out of a string that only
+           sometimes is one -- and a date parsed out of it would fill a window
+           this seller does not publish. Printed under From, spanning both
+           cells, so the row never shows two dashes that read as missing data. */
+        from.colSpan = 2;
+        from.className = "d-when d-boatwide";
+        from.textContent = r.says || "trips not named";
+        from.title = "divebooker states this against the boat and not against " +
+          "a sailing, so there is no window. These are its own words for which " +
+          "trips it covers.";
+        to = null;
+      } else if (r.exemplar) {
         from.title = to.title = "The sailing PADI advertises this offer " +
           "against. It publishes no dates for the offer itself, so this is one " +
           "sailing rather than the window the discount covers.";
@@ -3001,7 +3071,7 @@
           "two dates is discounted — " + r.of + " that it sells this season.";
       }
       tr.appendChild(from);
-      tr.appendChild(to);
+      if (to) tr.appendChild(to);
       tr.appendChild(r.off
         ? el("td", "d-off", r.off)
         : el("td", "d-none", "rate not stated"));
@@ -3024,13 +3094,15 @@
             a.rel = "noopener";
             a.target = "_blank";
             a.textContent = named.title;
-            a.title = "The PADI Travel page this offer was read from";
+            a.title = named.seller === "divebooker.com"
+              ? "The divebooker.com page this special was read from"
+              : "The PADI Travel page this offer was read from";
             block.appendChild(a);
           } else {
             block.appendChild(document.createTextNode(named.title));
           }
           if (named.terms && named.terms.length) {
-            block.appendChild(offerTerms(named.terms));
+            block.appendChild(offerTerms(named.terms, named.seller));
           }
           offer.appendChild(block);
         });
@@ -3041,11 +3113,23 @@
            unnamed PADI offer is a hole in PADI's listing, not a booking page
            with nothing struck through. */
         offer.textContent = "—";
-        if (!r.exemplar) {
+        if (!r.exemplar && !r.boatwide) {
           offer.title = "liveaboard.com publishes no name for it. The " +
             "discount is a list price struck through beside the one it " +
             "charges, read off the booking page.";
         }
+      }
+      /* The pair, under the headline it belongs to, and only where the row
+         states one. `from` because it is the cheapest trip the special covers
+         and not this row's fare: there is no sailing on this row. */
+      if (r.price && r.was) {
+        var pair = el("div", "d-pair", "");
+        /* Not `.d-now`/`.d-was`: those are the *cell* rules the bill band is
+           painted with, and a tinted strip halfway through the Offer cell is
+           what reusing them buys. Same claim, its own two classes. */
+        pair.appendChild(el("span", "p-now", "from " + eur(r.price)));
+        pair.appendChild(el("span", "p-was", eur(r.was)));
+        offer.appendChild(pair);
       }
       tr.appendChild(offer);
       tr.appendChild(markedDownBy(r));
@@ -3449,9 +3533,22 @@
       fig(rates.length === 1 ? rates[0] + "%"
         : rates[rates.length - 1] + "–" + rates[0] + "%", "off");
     }
-    /* The oldest day anything here was read, not the freshest: three books
+    /* divebooker's boats are their own figure and are **not** added to the
+       one above. That count is boats with a discounted *sailing*; this seller
+       names no sailing, so folding the two would put a boat-wide headline
+       into a tally of sailings somebody can book. */
+    var advertised = ((deals.specials || {}).boats || []).length;
+    if (advertised) {
+      fig(advertised, advertised === 1 ? "boat advertised" : "boats advertised",
+          "divebooker.com states a markdown against the boat rather than " +
+          "against a sailing, so these are boats it advertises a special on " +
+          "and not departures anybody has priced.");
+    }
+
+    /* The oldest day anything here was read, not the freshest: four books
        feed this view and a summary is as fresh as its stalest half. */
-    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read]
+    var days = [deals.read, D.meta.berths_read, D.meta.padi_berths_read,
+                (deals.specials || {}).read]
       .filter(Boolean).sort();
     if (days.length) {
       fig(shortDate(days[0]), "read",
@@ -3570,6 +3667,16 @@
     line.appendChild(document.createTextNode(
       ", daily. liveaboard.com publishes no listing, so its markdowns are read " +
       "off the booking pages one at a time."));
+    /* And the third, whose shape is neither: it states a markdown on each
+       boat's own page, against the boat. Said here rather than left to the
+       rows, because a reader looking at a row with no dates on it should not
+       have to work out from a hover that the seller published none. */
+    if (((deals.specials || {}).boats || []).length) {
+      line.appendChild(document.createTextNode(
+        " divebooker.com states its own on each boat's page — a fare, the " +
+        "figure it is down from and a headline — against the boat rather " +
+        "than against a sailing, so those rows carry no dates."));
+    }
     return line;
   }
 
@@ -3715,13 +3822,14 @@
     var host = document.getElementById("dealsBody");
     if (!host || !deals) return false;
     var offers = deals.offers || [], fleet = (deals.on_sale || {}).boats || [];
+    var specials = ((deals.specials || {}).boats) || [];
     /* What is on sale, and nothing about what moved. The moves used to make
        this view exist on their own -- the day every sale on the fleet ended,
        "36 sailings are no longer 33% off" was the whole of what the panel had
        to say -- and they are reported in the refresh history now (#146). So a
        day with no discount anywhere has no sale view, which is the honest
        answer to "what is on sale" rather than an empty page. */
-    if (!offers.length && !fleet.length) return false;
+    if (!offers.length && !fleet.length && !specials.length) return false;
 
     var body = host;
     body.textContent = "";
@@ -3966,7 +4074,7 @@
       var ladder = (block[BLOCK_CABINS] || []).length;
       var read = readOn(block);
       var name = (blocks.length > 1 || !ladder)
-        ? '<p class="pseller">' + esc(SELLER_NAMES[block[BLOCK_SELLER]] || "") +
+        ? '<p class="pseller">' + esc(SELLER_HOSTS[block[BLOCK_SELLER]] || "") +
           (read ? '<span class="pread">read ' + shortDate(read) + "</span>" : "") + "</p>"
         : "";
       return name + (ladder ? ladderBody(d, block) : aboardOnly(block));

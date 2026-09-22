@@ -153,6 +153,17 @@ class Departure:
     trip: str | None = None
     price: float | None = None
     currency: str | None = None
+    """What the figures are in — **the page's, never the entry's `currencyId`**.
+
+    Measured, because this host has form: `Offer.priceCurrency` reads EUR on
+    three of four hulls whose own payload says the page rendered in USD, and
+    :func:`page_currency` exists because of it. `currencyId` is the same shape
+    of claim and fails the same way. On the 8 hulls of 16 whose special names a
+    figure the vessel page also states as a fare, the two are **equal as
+    stated** — Bella 2 at 576, Alsuraya at 1,317, Aphrodite at 1,884, all three
+    filed under `currencyId` 2 on a page whose own currency is USD. Dividing by
+    the rate this payload publishes for id 2 matched a fare on none of them.
+    """
     availability: str | None = None
     #: How many offers the page stated for this date. More than one is
     #: ordinary — Red Sea Aggressor IV states 161 offers over 143 sailings —
@@ -237,6 +248,13 @@ class VesselBook:
     wording and no sold-out flag is the only one of these worth a person's
     time, and a count that lumps all three together hides it.
     """
+    specials: list[Special] = field(default_factory=list)
+    """This boat's markdowns, as the seller advertises them on its own page.
+
+    A boat-wide claim and never a sailing's: see :class:`Special`. Empty is
+    *this seller advertises no special on this hull*, which is a reading and
+    not a silence — the page states the key either way.
+    """
     trips: dict[str, dict[str, Any]] = field(default_factory=dict)
     """What each trip states about itself: dives, entry bar, reefs, harbours.
 
@@ -291,6 +309,11 @@ class VesselBook:
             # is a word added to `fees.LABEL_PATTERNS` and a count cannot say
             # which word.
             out["unnamed_fees"] = sorted(set(self.unnamed_fees))
+        if self.specials:
+            # The boat's markdown, under the boat, because that is the whole
+            # extent of what it claims. A key under `departures` would put a
+            # boat-wide tag on a sailing the seller never named.
+            out["specials"] = [special.as_dict() for special in self.specials]
         return out
 
 
@@ -652,6 +675,13 @@ def vessel(html: str, path: str) -> VesselBook:
     book.name = organizer or product
 
     book.departures, book.warnings = departures(html)
+
+    # The boat's own markdown, out of the same bytes. Costs no request, and
+    # `docs/divebooker-limitations.md` said for weeks that this seller states
+    # none -- a verdict about the JSON-LD, which is the only place that had
+    # been looked.
+    book.specials, special_warnings = boat_specials(html)
+    book.warnings.extend(f"{path}: {note}" for note in special_warnings)
 
     # The fee panel, attached by the trip it sits in. A block naming a trip the
     # page does not sell is kept out and said out loud: this source states the
@@ -1466,6 +1496,173 @@ def _float(value: Any) -> float | None:
     except (TypeError, ValueError):
         return None
     return number if number > 0 else None
+
+
+#: The boat's own markdown, in the payload it streams to itself. Found by
+#: `tools/probe_divebooker_boat_specials.py`; nothing in the JSON-LD states
+#: it, which is why this source was recorded for weeks as one that publishes
+#: no list price at all.
+SPECIALS_AT = re.compile(r'"boatSpecials"\s*:\s*')
+
+
+@dataclass(slots=True)
+class Special:
+    """One markdown this seller advertises on one boat's own page.
+
+    **A fare beside the figure it is down from**, which is the shape this
+    project's whole sale mechanism is built on and the shape
+    `docs/divebooker-limitations.md` recorded this source as not having. That
+    entry was measured over the JSON-LD; the pair is in the streamed payload.
+
+    What it is **not** is a markdown against a sailing. The entry names the
+    boat and prices one trip, and says which trips in prose — *"Sep 26, 2026 |
+    Oct 24, 2026 | Dec 26, 2026"* on one hull and *"Selected 2027 trips"* on
+    the next — so nothing here reaches a departure. A row of this site's table
+    may not carry a percentage off this, and `promote` never offers it one.
+    """
+
+    boat: str | None = None
+    """`name`, the hull as this seller spells it. Never an operator: see
+    :func:`vessel`, and `Product.brand` here is *Divebooker.com*."""
+    tag: str | None = None
+    """The headline, verbatim: *SAVE UP TO 30%*, *SAVE 20%*.
+
+    **Not parsed for its number, and measured before that was decided.** Over
+    the 16 hulls this seller advertises in Egypt, a tag stating a flat rate
+    agrees with the pair exactly — *SAVE 15%*, *SAVE 20%*, *SAVE 30%*, 6 of 6.
+    A tag saying **up to** does not, and not only downwards: Sindalahs and
+    Aphrodite say *up to 30%* over pairs at 20, while Red Sea Aggressor V says
+    *up to 63%* over a pair at **67**. So the tag bounds nothing, the pair is
+    one trip's, and they are two claims the seller makes rather than one
+    stated twice. Both are printed, neither is derived from the other.
+    """
+    price: float | None = None
+    was: float | None = None
+    """The struck-through figure, `old`. Kept only where it is above `price`.
+
+    Stated by the seller, never reconstructed: dividing the fare by the tag's
+    percentage would round a figure into existence, which is the rule the
+    liveaboard.com sale marks already keep.
+    """
+    currency: str | None = None
+    says: str | None = None
+    """`descr`, verbatim — which trips the seller says this applies to.
+
+    Prose, and left as prose. One hull states three dates separated by pipes
+    and the next states *"Selected 2026-2027 trips!"*, so a parser that split
+    on the separator would read a record out of a sentence — the mistake
+    `itinerary_from_payload` already made with PADI's two harbours.
+    """
+    terms: list[str] = field(default_factory=list)
+    """The conditions the seller puts on its own offer, in its own words.
+
+    Non-empty on 4 of the 16 — the three Aggressors and Blue Horizon — and
+    stated nowhere else: *"Discounts cannot be applied retrospectively"*,
+    *"Departures can be added or removed at any time"*, *"the 'starting at'
+    price is based on deluxe accommodations"*. A rate printed without them is
+    printed more confidently than the seller printed it, which is this site's
+    own complaint about the pages it reads, so they travel with the rate —
+    the same rule PADI's `promotion.description` already earned.
+
+    Split on the seller's own line breaks and on nothing else. Each line is
+    one condition, which is what the source's `\r\n` says; the leading
+    bullet goes because it is punctuation, and no other word of it is touched.
+    """
+    category: str | None = None
+    """*Money Saving Deals* on every entry read — the seller's own filing."""
+
+    @property
+    def pct(self) -> int | None:
+        """What the two **stated** figures come to, or `None`.
+
+        The same arithmetic `promote._sale_for` does over liveaboard.com's
+        struck-through price, over two numbers the seller published, and it
+        rounds the same way: a cut too small to state is not a stated cut.
+        """
+        if not (self.price and self.was and self.was > self.price):
+            return None
+        return int(round(100 * (1 - self.price / self.was))) or None
+
+    def as_dict(self) -> dict[str, Any]:
+        out: dict[str, Any] = {}
+        for key in ("boat", "tag", "price", "was", "currency", "says",
+                    "terms", "category"):  # noqa: E501 - `terms` is a list
+            value = getattr(self, key)
+            if value:
+                out[key] = value
+        if self.pct:
+            out["pct"] = self.pct
+        return out
+
+
+def boat_specials(html: str) -> tuple[list[Special], list[str]]:
+    """Every markdown the vessel page states for its own boat.
+
+    One entry per hull on every hull read. It costs no request: these are the
+    same bytes `fetch_divebooker.py` already downloads for the departures and
+    the fee panel.
+
+    **The currency is the page's, not the entry's `currencyId`.** This host has
+    been caught once already publishing a currency label that does not describe
+    the figure beside it — `Offer.priceCurrency` reads EUR on three of four
+    hulls whose own payload says the page rendered in USD, which is the whole
+    reason :func:`page_currency` exists — so the id is not read as a code. It
+    is recorded, and the figures take the currency the page states.
+    """
+    text, dropped = payload_parts(html)
+    warnings: list[str] = []
+    if dropped:
+        warnings.append(f"{dropped} streamed chunk(s) did not decode")
+
+    currency = page_currency(html)
+    found: list[Special] = []
+    for match in SPECIALS_AT.finditer(text):
+        raw = balanced(text, match.end()) if match.end() < len(text) else None
+        if raw is None:
+            warnings.append("a boatSpecials value did not close")
+            continue
+        try:
+            node = json.loads(raw)
+        except json.JSONDecodeError:
+            warnings.append("a boatSpecials value did not parse as JSON")
+            continue
+        for entry in node if isinstance(node, list) else [node]:
+            if not isinstance(entry, dict):
+                continue
+            price, was = _float(entry.get("price")), _float(entry.get("old"))
+            # A markdown is a fare *below* what the seller says it was. An
+            # entry with no pair is a banner, and a banner is not a sale here.
+            if price is None or was is None or was <= price:
+                if entry.get("tag") or entry.get("descr"):
+                    warnings.append(
+                        f"a special on {entry.get('name')!r} states no pair: "
+                        f"price={entry.get('price')!r} old={entry.get('old')!r}")
+                continue
+            found.append(Special(
+                boat=_stated(entry.get("name")),
+                tag=_stated(entry.get("tag")),
+                price=price,
+                was=was,
+                currency=currency,
+                says=_stated(entry.get("descr")),
+                terms=_conditions(entry.get("terms")),
+                category=_stated(entry.get("category")),
+            ))
+    return found, warnings
+
+
+def _stated(value: Any) -> str | None:
+    """A string the source really wrote, or `None` for its silence."""
+    text = str(value).strip() if isinstance(value, str) else ""
+    return text or None
+
+
+def _conditions(value: Any) -> list[str]:
+    """One condition per line the seller wrote, verbatim but for its bullet."""
+    if not isinstance(value, str):
+        return []
+    lines = (line.strip().lstrip("*").strip() for line in value.splitlines())
+    return [line for line in lines if line]
 
 
 def booking_page(html: str) -> BookingPage:

@@ -294,6 +294,23 @@ def main() -> int:
     for line, count in unnamed.most_common(30):
         print(f"    {count:>4}x  {line}")
 
+    # The markdowns, per hull, with what the seller says about each. A run that
+    # reads something and prints nothing about it is how `fetch_padi.py` came
+    # to have "nobody ran it" as a failure mode -- and this one is a claim that
+    # can end overnight, so the day it read is the point of printing it.
+    marked = [(v.get("name") or hull, special)
+              for hull, v in sorted(vessels.items())
+              for special in (v.get("specials") or [])]
+    print(f"\n== the markdowns, as this run read them ==")
+    print(f"  {len(marked)} special(s) on "
+          f"{sum(1 for v in vessels.values() if v.get('specials'))} hull(s)")
+    for name, special in marked:
+        rate = f"-{special['pct']}%" if special.get("pct") else "no rate"
+        money = (f"{special.get('price')} from {special.get('was')} "
+                 f"{special.get('currency') or '?'}")
+        print(f"    {str(name)[:28]:<30} {rate:<8} {money:<28} "
+              f"{special.get('tag') or ''} | {special.get('says') or ''}")
+
     print(f"\n{args.book}: {len(fresh['vessels'])} vessel(s), "
           f"{len(fresh['departures'])} departure(s), {len(warnings)} warning(s)")
     for line in warnings[:20]:

@@ -14,11 +14,28 @@ before deciding what the third seller is allowed to say on the page.
    every offer read, and no node anywhere states a number. Over 219 departures
    there is not one count. So the *Places* column can never carry a divebooker
    figure, and nothing may imply otherwise.
-2. **A list price, so a markdown.** Nothing states a struck-through, previous
-   or was-price. The sale view's whole mechanism is the seller printing its
-   own list price beside its fare, and this seller does not. A divebooker row
-   can only ever read *not on sale* — which is why it must never be counted
-   into `deals.coverage` as if it had been asked.
+2. ~~**A list price, so a markdown.**~~ **Wrong, and this is the third entry
+   in this file to be wrong the same way.** It read: *"Nothing states a
+   struck-through, previous or was-price. The sale view's whole mechanism is
+   the seller printing its own list price beside its fare, and this seller
+   does not. A divebooker row can only ever read not on sale."* Measured over
+   the JSON-LD, which is the only place anybody had looked. The pair is in the
+   streamed payload, under `boatSpecials` — a `price`, an `old`, a headline
+   like *SAVE UP TO 30%*, the seller's own conditions and a sentence saying
+   which trips — on **16 of the 16** Egyptian hulls its specials listing
+   links, and the vessel page carrying it is one `fetch_divebooker.py` already
+   downloads every morning. `docs/sources/divebooker.com.md`, *The markdown
+   the JSON-LD does not carry*, has the census.
+
+   **What survives of it is the second clause, and it is the load-bearing
+   one.** The entry names the boat and **no sailing**: `descr` is prose — three
+   dates with pipes on one hull, *"Selected 2027 trips!"* on the next — so
+   there is nothing to key a departure on. A divebooker row in the departures
+   table still reads *not on sale*, the *On sale* chip still counts exactly the
+   sailings a seller marked down, and none of this may be counted into
+   `deals.coverage` as if this seller had been asked about a sailing. What it
+   is, is a row in the sale table: `promote` writes `deals.specials`, and the
+   panel says in so many words that the seller states it against the boat.
 3. **The operator.** `Product.brand` is `{"name": "Divebooker.com"}` — the
    seller — and `Event.organizer` is the hull (`Bella 2`). No company is named
    anywhere on the page. The operator goes on coming from liveaboard.com's

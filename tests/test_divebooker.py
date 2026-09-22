@@ -1609,3 +1609,206 @@ class TestTheThirdSellerAnswersLastAndTheSafetyBarDoesNot(unittest.TestCase):
         self.assertIn("divebooker_trip", chain)
         self.assertNotIn(" or _requirements", chain,
                          "the third seller's bar fell back into a fallback")
+
+
+SPECIALS = Path(__file__).resolve().parent / "fixtures" / "divebooker-specials.json"
+
+
+def specials_page(entries, currency: str = "USD") -> str:
+    """The boat's markdown put back the way the site streams it."""
+    body = json.dumps(
+        {"currencies": {"current": currency, "currentSymb": currency},
+         "rates": {"1": "1.0000", "2": "0.8704"},
+         "boatSpecials": list(entries)},
+        ensure_ascii=False)
+    return "<script>self.__next_f.push([1," + json.dumps(body) + "])</script>"
+
+
+class TestTheBoatsOwnMarkdown(unittest.TestCase):
+    """`boatSpecials`, on real bytes from three of the sixteen hulls.
+
+    `docs/divebooker-limitations.md` read for weeks: *"a list price, so a
+    markdown. Nothing states a struck-through, previous or was-price … a
+    divebooker row can only ever read not on sale"*. That was measured over
+    the JSON-LD, which is the only place anyone had looked, and the pair is in
+    the streamed payload — the third time on this host that a negative turned
+    out to be a statement about where somebody had searched.
+
+    The three entries are the shapes the fleet actually states: a price as a
+    string beside a tag saying *up to*, a price as a float beside a flat tag
+    with six conditions under it, and a third category.
+    """
+
+    def setUp(self):
+        self.entries = json.loads(SPECIALS.read_text(encoding="utf-8"))
+        self.found, self.warnings = db.boat_specials(specials_page(self.entries))
+
+    def test_every_entry_is_read_and_none_is_invented(self):
+        self.assertEqual(self.warnings, [])
+        self.assertEqual([s.boat for s in self.found],
+                         ["Aphrodite", "Blue Horizon", "South Moon 1"])
+
+    def test_a_price_is_read_however_the_source_types_it(self):
+        """`price` arrives as a string 10 times, an int 4 and a float 2."""
+        self.assertEqual([s.price for s in self.found], [1884.0, 896.7, 2076.0])
+        self.assertEqual([s.was for s in self.found], [2355.0, 1281.0, 2442.0])
+
+    def test_the_rate_is_the_two_stated_figures_and_never_the_tag(self):
+        """Aphrodite says *up to 30%* over a pair that comes to 20.
+
+        The tag bounds nothing — Red Sea Aggressor V says *up to 63%* over a
+        pair at 67 — so reading a number out of it would publish whichever of
+        the seller's two claims happened to be larger.
+        """
+        self.assertEqual([s.pct for s in self.found], [20, 30, 15])
+        self.assertEqual([s.tag for s in self.found],
+                         ["SAVE UP TO 30%", "SAVE 30%", "SAVE 15%"])
+
+    def test_the_currency_is_the_pages_and_not_the_entrys_label(self):
+        """`currencyId` 2 on a page that says it rendered in USD.
+
+        Read as a code it would price Aphrodite's 1,884 in euro, and the
+        vessel page states 1,884 as one of its own dollar fares. Same trap as
+        `Offer.priceCurrency`, same answer.
+        """
+        self.assertEqual({s.currency for s in self.found}, {"USD"})
+        self.assertEqual({s.currency for s in
+                          db.boat_specials(specials_page(self.entries, "EUR"))[0]},
+                         {"EUR"})
+
+    def test_which_trips_it_covers_stays_prose(self):
+        """One hull lists three dates with pipes; the next writes a sentence.
+
+        Splitting the first would read a record out of a string that only
+        sometimes is one — `itinerary_from_payload` already made that mistake
+        with PADI's two harbours, and 11 of 447 could not be split at all.
+        """
+        self.assertEqual([s.says for s in self.found],
+                         ["Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026",
+                          "Selected 2027 trips!",
+                          "Dec 26, 2026"])
+
+    def test_the_conditions_are_the_sellers_own_lines(self):
+        """Four of the sixteen state them, and they are not a gloss."""
+        self.assertEqual(self.found[1].terms[:2], [
+            "Cannot be combined with any other offers",
+            "Discounts cannot be applied retrospectively"])
+        self.assertEqual(self.found[0].terms, [],
+                         "an unstated condition is not an empty string")
+
+    def test_a_pair_that_is_not_a_markdown_is_refused_and_said_out_loud(self):
+        """A tag with no figure below its own is a banner, not a sale.
+
+        Silently dropping it is the failure this project names everywhere
+        else: a reader of the run log has to be able to tell a boat with no
+        special from one whose special this code could not price.
+        """
+        found, warnings = db.boat_specials(specials_page([
+            {"name": "Nobody", "tag": "SAVE 20%", "price": "800", "old": "800",
+             "descr": "Selected trips"}]))
+        self.assertEqual(found, [])
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("'Nobody'", warnings[0])
+
+    def test_a_page_with_no_special_is_not_a_page_that_failed(self):
+        self.assertEqual(db.boat_specials(specials_page([])), ([], []))
+
+
+class TestTheMarkdownReachesThePanelAndNoRow(unittest.TestCase):
+    """Driven through `promote`, because the claim is about where it stops.
+
+    This seller states a markdown against **the boat** and names no sailing
+    anywhere, so the one thing that must not happen is a departure carrying it
+    — a percentage against a berth is a different claim from a percentage
+    against a hull, and printing the second as the first is this site's
+    complaint about the pages it reads.
+    """
+
+    SEASON = (date(2027, 5, 1), date(2027, 8, 31))
+    ALIASES = {"aliases": {"aphrodite-haz464": "aphrodite"}}
+
+    def book(self, specials, hull="aphrodite-haz464"):
+        return {
+            "collected": "2026-09-21",
+            "departures": {
+                f"{hull}::2027-05-01": {
+                    "boat": hull, "start": "2027-05-01", "end": "2027-05-08",
+                    "trip": "Brothers, Daedalus & Elphinstone", "nights": 7,
+                    "price": 1884.0, "currency": "USD",
+                },
+            },
+            "vessels": {hull: {
+                "slug": hull, "name": "Aphrodite",
+                "url": f"https://divebooker.com/{hull}",
+                "specials": specials,
+            }},
+        }
+
+    def payload(self, specials, **kwargs):
+        from liveaboard.promote import promote
+        return promote(
+            {"scraped_at": "2026-09-21", "itineraries": [], "departures": []},
+            season=self.SEASON, divebooker=self.book(specials, **kwargs),
+            divebooker_aliases=self.ALIASES)
+
+    SPECIAL = {
+        "boat": "Aphrodite", "tag": "SAVE UP TO 30%", "pct": 20,
+        "price": 1884.0, "was": 2355.0, "currency": "USD",
+        "says": "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026",
+        "category": "Money Saving Deals",
+    }
+
+    def test_the_row_states_the_boat_the_rate_and_the_sellers_own_words(self):
+        block = self.payload([self.SPECIAL])["deals"]["specials"]
+        self.assertEqual(block["read"], "2026-09-21")
+        self.assertEqual(block["seller"], 2)
+        row, = block["boats"]
+        self.assertEqual(row["boat"], "aphrodite")
+        self.assertEqual(row["pct"], 20)
+        self.assertEqual(row["tag"], "SAVE UP TO 30%")
+        self.assertEqual(row["says"], "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026")
+        self.assertEqual(row["url"], "https://divebooker.com/aphrodite-haz464")
+
+    def test_no_departure_carries_it(self):
+        """The whole point. A boat-wide headline is not a sailing's markdown.
+
+        `_sale_for` reads one seller's fare beside the figure that seller says
+        it is down from, on one sailing. Nothing here answers that, so the On
+        sale chip counts exactly what it counted before.
+        """
+        payload = self.payload([self.SPECIAL])
+        self.assertTrue(payload["departures"], "the fixture founded no row")
+        self.assertEqual([d for d in payload["departures"] if d.get("sale")], [])
+        self.assertNotIn("on_sale", payload["deals"])
+
+    def test_the_cash_is_withheld_where_the_seller_stated_no_currency(self):
+        """A percentage is a ratio and needs no unit; a figure needs one.
+
+        Converting at a rate nobody published is the rule `_list_prices`
+        already keeps, one seller along.
+        """
+        row, = self.payload([dict(self.SPECIAL, currency=None)])[
+            "deals"]["specials"]["boats"]
+        self.assertEqual(row["pct"], 20)
+        self.assertNotIn("price", row)
+        self.assertNotIn("was", row)
+
+    def test_a_hull_this_site_does_not_carry_is_counted_and_not_named(self):
+        """Unlike PADI's listing, this reading is already scoped to Egypt by
+        the search it came from, so an unjoined hull is a boat this site does
+        not sell rather than one in another ocean. The count is what says the
+        row list is shorter than the reading was."""
+        payload = self.payload([self.SPECIAL], hull="stranger-haz1")
+        self.assertIsNone(payload.get("deals", {}).get("specials"))
+
+    def test_the_seller_is_named_the_way_every_other_seller_is(self):
+        """By index into the pooled list, so the panel, the Seller column and
+        the berth blocks cannot come to three spellings of one host."""
+        from liveaboard.promote import SELLERS
+        self.assertEqual(SELLERS[2], "divebooker.com")
+        self.assertEqual(self.payload([self.SPECIAL])["sellers"], SELLERS)
+
+    def test_promotion_stays_pure(self):
+        """`promote --check` compares byte for byte, so this cannot wobble."""
+        self.assertEqual(self.payload([self.SPECIAL])["deals"],
+                         self.payload([self.SPECIAL])["deals"])

@@ -1,0 +1,68 @@
+[
+ {
+  "id": "5398",
+  "currencyId": "2",
+  "tag": "SAVE UP TO 30%",
+  "boatId": "464",
+  "name": "Aphrodite",
+  "price": "1884",
+  "old": "2355",
+  "twoSpaces": "0",
+  "country": "Egypt",
+  "img": "",
+  "imgBoat": "https://media.divebooker.com/media/images/h300/1783611028f29f190e2c1925ca214f883015245998.jpg",
+  "descr": "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026",
+  "terms": "",
+  "laTitle": "Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026",
+  "categoryId": "1163",
+  "category": "Money Saving Deals",
+  "book": {
+   "text": "Check trips & availability",
+   "url": ""
+  }
+ },
+ {
+  "id": "4398",
+  "currencyId": "1",
+  "tag": "SAVE 30%",
+  "boatId": "92",
+  "name": "Blue Horizon",
+  "price": 896.7,
+  "old": 1281,
+  "twoSpaces": "0",
+  "country": "Egypt",
+  "img": "",
+  "imgBoat": "https://media.divebooker.com/media/images/h300/17163696816ffe6335232c8ec240d164aad7404ca5.jpg",
+  "descr": "Selected 2027 trips!",
+  "terms": "*Cannot be combined with any other offers\r\n*Discounts cannot be applied retrospectively\r\n*Departures can be added or removed at any time\r\n*Cannot be combined with any compensation voucher or loyalty discount\r\n*Standard group FOC deals apply\r\n*Standard payment and cancellation terms",
+  "laTitle": "Selected 2027 trips!",
+  "categoryId": "1163",
+  "category": "Money Saving Deals",
+  "book": {
+   "text": "Check trips & availability",
+   "url": ""
+  }
+ },
+ {
+  "id": "5462",
+  "currencyId": "2",
+  "tag": "SAVE 15%",
+  "boatId": "487",
+  "name": "South Moon 1",
+  "price": "2076",
+  "old": "2442",
+  "twoSpaces": "0",
+  "country": "Egypt",
+  "img": "",
+  "imgBoat": "https://media.divebooker.com/media/images/h300/17570566093dbbf094a91112ec81395c2a0dd7ed36.jpg",
+  "descr": "Dec 26, 2026",
+  "terms": "",
+  "laTitle": "Dec 26, 2026",
+  "categoryId": "1165",
+  "category": "Holiday Travel",
+  "book": {
+   "text": "Check trips & availability",
+   "url": ""
+  }
+ }
+]

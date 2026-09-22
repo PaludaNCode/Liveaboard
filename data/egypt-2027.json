@@ -245375,6 +245375,11 @@
     "fares": "published",
     "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 887 in-season sailing(s), 788 land on a row one of the other two sellers founded, keyed on (boat, date), and 69 are rows this seller founded itself, on a date or a hull the other two do not list, and 30 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
+  "sellers": [
+    "liveaboard.com",
+    "padi.com",
+    "divebooker.com"
+  ],
   "cabin_names": [
     "Lower Deck Twin Cabin",
     "Upper Deck Double Cabin",
@@ -245544,10 +245549,6 @@
     "Main Deck Suite B",
     "Upper Deck Suite C",
     "Sun Deck Penthouse Suite D"
-  ],
-  "sellers": [
-    "liveaboard.com",
-    "padi.com"
   ],
   "berths_read": "2026-09-21",
   "padi_berths_read": "2026-09-21",

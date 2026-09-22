@@ -1341,6 +1341,35 @@ Break these and the site starts lying quietly rather than failing loudly.
   percentage rather than showing PADI's 33% off a fare nobody cut. An unread
   booking page states nothing, which is not "no": 3 of the 5 PADI-only
   discounts are exactly that.
+  **And the third seller states one against the boat, which is a third shape
+  and not a third sailing.** `docs/divebooker-limitations.md` said for weeks
+  that divebooker publishes no list price at all and *"a divebooker row can
+  only ever read not on sale"* — measured over the JSON-LD, which is the only
+  place anybody had looked. The pair is in the streamed payload under
+  `boatSpecials`, on **16 of the 16** Egyptian hulls its own specials listing
+  links, in bytes `fetch_divebooker.py` already downloads every morning: a
+  `price`, an `old`, a headline, the seller's conditions and a sentence about
+  which trips. What survives of that entry is its second clause and it is the
+  load-bearing one — the entry names **no sailing**. `descr` is prose: *"Sep
+  26, 2026 | Oct 24, 2026 | Dec 26, 2026"* on one hull and *"Selected 2027
+  trips!"* on the next, and splitting the first is reading a record out of a
+  string that only sometimes is one. So it is a row in the sales table and
+  nothing else: no departure carries it, the *On sale* chip counts exactly the
+  sailings it counted before, and the sale row prints the seller's own words
+  under From instead of a window nobody published.
+  **The tag is beside the rate, never instead of it.** *SAVE 15%*, *SAVE 20%*
+  and *SAVE 30%* agree with `price`/`old` exactly, 6 of 6; *SAVE UP TO x%*
+  agrees on 4 of 10, sits above the pair on 5 and **below** it on one — Red
+  Sea Aggressor V says *up to 63%* over a pair at 67. Two claims, not one
+  stated twice, so the rate is the two stated figures and the tag rides beside
+  it verbatim. **And `currencyId` is another label that does not describe its
+  own figure**, exactly like `Offer.priceCurrency`: the entry files Aphrodite
+  under id 2 on a page whose payload says it rendered in USD, and on the 8
+  hulls whose special names a figure the vessel page also states, the two are
+  equal **as stated** — converting at the rate that payload publishes for id 2
+  matched nothing, ever. `/specials` itself is a from-price and a campaign
+  line: 125 offers, a `UnitPriceSpecification` apiece, no date and no figure
+  any price is down from, on all three spellings of the URL.
   **And the rate is printed with the fare it came off.** "−15%" against a
   figure the reader has to work out is a claim they cannot check, which is
   what this page reports in other people — and `sale.was` was sitting in the
