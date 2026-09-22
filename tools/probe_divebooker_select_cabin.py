@@ -79,6 +79,15 @@ CANDIDATES = (
 PRESSABLE = re.compile(r"select\s*cabin|choose\s*cabin|book\s*now|select\s*room",
                        re.I)
 
+PRESS_SELECTOR = "a, button, [role='button']"
+"""What is pressed, narrower than what is *read*.
+
+The census above casts wide on purpose -- the point of a probe is to find out
+what the markup is called. A press needs something that can be pressed, and
+handing the browser a selector it can filter in one call is the difference
+between a scan in seconds and one in minutes.
+"""
+
 
 def described(request: Any) -> str:
     """One request, as a line -- with its body where the body is text.
@@ -253,27 +262,27 @@ def main() -> int:
         # 2. What a press asks for, where the DOM carries no id.
         pressed = 0
         while pressed < args.clicks:
-            # Re-queried each round and taken by **position**, not by text: a
-            # press can navigate, which detaches every other handle, and every
-            # row's control says the same words, so a set of seen labels would
+            # A **locator**, and taken by position. The matching happens in
+            # the browser: reading a handle per node costs a protocol round
+            # trip each, and handing six hundred handles back as an argument
+            # costs the same again -- which is what put the press loop in
+            # minutes rather than seconds. Position rather than label, because
+            # a press can navigate (detaching every handle) and every row's
+            # control says the same three words, so a set of seen labels would
             # press one row and call it the page.
-            handles = page.query_selector_all(",".join(CANDIDATES))
-            words = page.evaluate(
-                "(n) => n.map(e => ((e.innerText || e.textContent || \"\")"
-                ".replace(/\\s+/g, \" \").trim()))",
-                handles[:args.max_nodes])
-            matched = [(handles[i], one) for i, one in enumerate(words)
-                       if PRESSABLE.search(one)]
-            if not matched:
+            rows = page.locator(PRESS_SELECTOR).filter(has_text=PRESSABLE)
+            found = rows.count()
+            if not found:
                 if not pressed:
                     print("\n-- nothing on the page reads as *Select cabin*")
                 break
-            if pressed >= len(matched):
-                print(f"\n-- {len(matched)} pressable row(s), all pressed")
+            if pressed >= found:
+                print(f"\n-- {found} pressable row(s), all pressed")
                 break
-            node, text = matched[pressed]
+            node = rows.nth(pressed)
+            text = " ".join((node.inner_text() or "").split())
             if not pressed:
-                print(f"\n-- {len(matched)} row(s) read as pressable")
+                print(f"\n-- {found} row(s) read as pressable")
             before = len(asked)
             print(f"\n-- pressing {text[:50]!r}")
             try:
