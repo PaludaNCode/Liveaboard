@@ -941,14 +941,31 @@ reading would not know.
 fetched by `tools/fetch_divebooker_cabins.py` since 2026-09-22 and allowed by
 this host's robots.txt.
 
-**The id costs no request.** A sailing's Event `@id` is the vessel page plus a
-fragment — `https://divebooker.com/bella-2-haz432#259223` — and that fragment
-**is** the `tripId`, on 6 of 6 sailings across two hulls and two dates. The
-crawl keeps it as `booking_id`, so the ladder run opens no vessel page at all:
-one request per sailing, about 900 of them, ~75 minutes at the five-second
-pace. It is its own workflow for the reason `cabins.yml` is one seller along,
-and it runs **after** the fleet read, because a ladder read a day after the
-fare it explains disagrees with it and `promote` drops such a ladder.
+**The id costs no request, and almost no sailing has one.** A sailing's Event
+`@id` is the vessel page plus a fragment —
+`https://divebooker.com/bella-2-haz432#259223` — and that fragment **is** the
+`tripId`, on 6 of 6 sailings across two hulls and two dates. The crawl keeps it
+as `booking_id`, so the ladder run opens no vessel page at all.
+
+But the Events that state one are the **capped ten per hull** this file
+establishes above, and the `TouristTrip` chain that states every other sailing
+carries no id: **21 of 906 in-season sailings have one.** Measured, then asked
+where the rest are —
+[run 35734945024](https://github.com/PaludaNCode/Liveaboard/actions/runs/35734945024),
+`tools/probe_divebooker_trip_ids.py`, with the ids we already hold as the
+probe: find those digits in the payload and print what they sit in. The answer
+is that **the payload holds no trip id at all.** The only keys in it carrying a
+number of that size are `orderId` and `fbAppId`, one each, and the one id on
+Emperor Superior's page appears exactly once — inside the JSON-LD Event node it
+came from. So the *Select cabin* link for the other 885 is not in the served
+bytes, and nothing here derives one: an id is a fact this project reads or does
+without.
+
+What that leaves is a real but narrow read — one request per sailing that has
+an id, about 21 of them, a couple of minutes. It is its own workflow for the
+reason `cabins.yml` is one seller along, and it runs **after** the fleet read,
+because a ladder read a day after the fare it explains disagrees with it and
+`promote` drops such a ladder.
 
 What one page states, per room: `cabinId`, a title, `sharing` (the seller's own
 flag for a berth against a room), `price.current`, `price.old`, `price.text`
@@ -971,6 +988,11 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 
 ## Not yet asked
 
+- **Where the other 885 booking ids come from.** The payload holds none, so the
+  page must ask for one when a row's *Select cabin* is pressed. What that
+  request is has not been watched — it needs a browser with the network log
+  open, which is a different kind of probe from every one here. Until then the
+  cabin ladder covers the ten sailings a hull publishes an Event for.
 - **Which nesting is the departure list.** The working reading above, held
   against the dates: do the ten top-level Events appear among the forty-nine?
   Everything a parser does here depends on that answer.

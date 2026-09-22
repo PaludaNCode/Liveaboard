@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,fixture,flight,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,tripids,fixture,flight,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -467,6 +467,21 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_chunkref.py \
             --vessels "${{ inputs.divebooker_vessel || 'aml-hayaty' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # 21 of 906 sailings carry a booking id, because the Events that state
+      # one are a capped ten per hull. This asks where the other 885 are, with
+      # the ids we hold as the probe: find those digits in the payload and
+      # print what they sit in.
+      - name: Where does a sailing's booking id live
+        if: contains(inputs.divebooker_ask, 'tripids')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_trip_ids.py \
+            --vessels "${{ inputs.divebooker_vessel || 'emperor-superior' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
