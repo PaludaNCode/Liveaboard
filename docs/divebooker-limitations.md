@@ -22,9 +22,10 @@ before deciding what the third seller is allowed to say on the page.
    the JSON-LD, which is the only place anybody had looked. The pair is in the
    streamed payload, under `boatSpecials` — a `price`, an `old`, a headline
    like *SAVE UP TO 30%*, the seller's own conditions and a sentence saying
-   which trips — on **16 of the 16** Egyptian hulls its specials listing
-   links, and the vessel page carrying it is one `fetch_divebooker.py` already
-   downloads every morning. `docs/sources/divebooker.com.md`, *The markdown
+   which trips — **30 of them on 29 hulls** across the Egyptian fleet, on
+   vessel pages `fetch_divebooker.py` already downloads every morning. Its own
+   specials listing links only 16 of those hulls, so that listing is a
+   carousel like the country page before it. `docs/sources/divebooker.com.md`, *The markdown
    the JSON-LD does not carry*, has the census.
 
    **What survives of it is the second clause, and it is the load-bearing
@@ -36,6 +37,13 @@ before deciding what the third seller is allowed to say on the page.
    `deals.coverage` as if this seller had been asked about a sailing. What it
    is, is a row in the sale table: `promote` writes `deals.specials`, and the
    panel says in so many words that the seller states it against the boat.
+
+   **And four of the thirty reach no row, for a reason worth keeping.**
+   Bismarck, Freedom III, Freedom IV and South Moon sell nothing inside the
+   published season — every one of their `descr` values names a date in late
+   2026 — so this site carries no boat for them to sit under. They are counted
+   into `specials.unmatched` rather than dropped, and `cli` prints the count:
+   a markdown this page cannot show is not a markdown that does not exist.
 3. **The operator.** `Product.brand` is `{"name": "Divebooker.com"}` — the
    seller — and `Event.organizer` is the hull (`Bella 2`). No company is named
    anywhere on the page. The operator goes on coming from liveaboard.com's

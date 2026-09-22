@@ -554,8 +554,8 @@ a `url` to its vessel page, and a `priceSpecification` that is a
 three. `page=2` returns the same first entries, which is what PADI's deals
 shell did and the reason paging is measured here rather than assumed.
 
-**The pair is in the streamed payload, under `boatSpecials`.** One entry per
-hull, on all sixteen, and every one of them states all seventeen keys:
+**The pair is in the streamed payload, under `boatSpecials`.** Every entry
+states all seventeen keys:
 
 ```json
 {"id": "5398", "currencyId": "2", "tag": "SAVE UP TO 30%", "boatId": "464",
@@ -571,22 +571,40 @@ It matched nothing any earlier sweep asked about: the fee sweep asked for
 On Red Sea Aggressor II's 248 payload keys it is the **only** discount-shaped
 one.
 
+**And the listing is a carousel, exactly as the country page was.** The whole
+Egyptian fleet, read by `fetch_divebooker.py` on 2026-09-22
+([run 35673161270](https://github.com/PaludaNCode/Liveaboard/actions/runs/35673161270)),
+carries **30 markdowns on 29 hulls** — the specials listing links 16 of them.
+So the vessel pages are the inventory here too, and reading `/specials` as one
+would be the mistake `/egypt-daz3881` already cost this project once.
+
+**It is a list, and one hull states two.** MY Odyssey publishes *SAVE UP TO
+10%* over *"Selected trips in 2026"* and *SAVE 10%* over *"2027 trips"* — two
+campaigns, two seasons, one hull — so a parser taking `[0]` would drop a
+markdown. 29 hulls, 30 entries.
+
 | | |
 |---|---|
-| Hulls carrying one | **16 of 16** the Egypt specials listing links, one entry each |
-| `price` is stated as | a string 10 times, an int 4, a float 2 — so it is read as a number, never as a type |
-| `terms` | non-empty on **4** — the three Aggressors and Blue Horizon — and stated nowhere else on the site |
-| `category` | *Money Saving Deals* 14, *Holiday Travel* 1, *Hot Deals* 1 |
-| `descr` | three dates with pipes on 3, a sentence on the rest. **Prose** |
+| Hulls carrying one | **29** of the 92 read; 16 of those are what the listing links |
+| Entries | **30** — MY Odyssey states two, everything else one |
+| `price` is stated as | a string, an int or a float — so it is read as a number, never as a type |
+| `terms` | non-empty on 4 of the first 16 — the three Aggressors and Blue Horizon — and stated nowhere else on the site |
+| `category` | *Money Saving Deals*, *Holiday Travel*, *Hot Deals* |
+| `descr` | three dates with pipes on some, a sentence on the rest. **Prose** |
 
-**The tag is not the pair, and it does not bound it.** A tag stating a flat
-rate agrees with `price`/`old` exactly — *SAVE 15%*, *SAVE 20%*, *SAVE 30%*,
-**6 of 6**. A tag saying *up to* agrees on 4 of 10, sits above the pair on 5
-(Sindalahs and Aphrodite say *up to 30%* over pairs at 20) and **below** it on
-one: Red Sea Aggressor V says *up to 63%* over a pair at **67**. So they are
-two claims the seller makes, not one stated twice, and neither is derived from
-the other — the rate this project publishes is the two stated figures, and the
-tag rides beside it in the seller's own words.
+**The tag is not the pair, and it does not bound it.** Over all 30:
+
+| Tag | Agrees with `price`/`old` | Above the pair | Below it |
+|---|---|---|---|
+| *SAVE n%* (17) | **17** | — | — |
+| *SAVE UP TO n%* (13) | 5 | 6 | **2** |
+
+A flat tag is exact, every time. An *up to* tag is not a ceiling either: Red
+Sea Aggressor V says *up to 63%* over a pair at **67**, and MY Odyssey says
+*up to 10%* over a pair at **11**. So they are two claims the seller makes,
+not one stated twice, and neither is derived from the other — the rate this
+project publishes is the two stated figures, and the tag rides beside it in
+the seller's own words.
 
 **`currencyId` does not describe the figure, and that was measured.** The
 entry files Aphrodite under id 2 on a page whose own payload says

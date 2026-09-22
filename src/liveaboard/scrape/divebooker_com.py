@@ -1528,13 +1528,14 @@ class Special:
     """The headline, verbatim: *SAVE UP TO 30%*, *SAVE 20%*.
 
     **Not parsed for its number, and measured before that was decided.** Over
-    the 16 hulls this seller advertises in Egypt, a tag stating a flat rate
-    agrees with the pair exactly — *SAVE 15%*, *SAVE 20%*, *SAVE 30%*, 6 of 6.
-    A tag saying **up to** does not, and not only downwards: Sindalahs and
-    Aphrodite say *up to 30%* over pairs at 20, while Red Sea Aggressor V says
-    *up to 63%* over a pair at **67**. So the tag bounds nothing, the pair is
-    one trip's, and they are two claims the seller makes rather than one
-    stated twice. Both are printed, neither is derived from the other.
+    all 30 markdowns the Egyptian fleet carries, a tag stating a flat rate
+    agrees with the pair exactly — *SAVE 15%*, *SAVE 20%*, *SAVE 30%*, **17 of
+    17**. A tag saying **up to** agrees on 5 of 13, and it is not a ceiling
+    either: it sits above the pair on 6 and **below** it on 2 — Red Sea
+    Aggressor V says *up to 63%* over a pair at 67, MY Odyssey *up to 10%*
+    over one at 11. So the tag bounds nothing, the pair is one trip's, and
+    they are two claims the seller makes rather than one stated twice. Both
+    are printed, neither is derived from the other.
     """
     price: float | None = None
     was: float | None = None
@@ -1598,9 +1599,12 @@ class Special:
 def boat_specials(html: str) -> tuple[list[Special], list[str]]:
     """Every markdown the vessel page states for its own boat.
 
-    One entry per hull on every hull read. It costs no request: these are the
-    same bytes `fetch_divebooker.py` already downloads for the departures and
-    the fee panel.
+    **A list, and one hull really does state two.** MY Odyssey publishes *SAVE
+    UP TO 10%* over *"Selected trips in 2026"* beside *SAVE 10%* over *"2027
+    trips"* — two campaigns on two seasons — so 29 hulls carry 30 entries and
+    a reader taking the first would drop a markdown. It costs no request
+    either way: these are the same bytes `fetch_divebooker.py` already
+    downloads for the departures and the fee panel.
 
     **The currency is the page's, not the entry's `currencyId`.** This host has
     been caught once already publishing a currency label that does not describe

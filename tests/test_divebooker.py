@@ -1713,6 +1713,39 @@ class TestTheBoatsOwnMarkdown(unittest.TestCase):
     def test_a_page_with_no_special_is_not_a_page_that_failed(self):
         self.assertEqual(db.boat_specials(specials_page([])), ([], []))
 
+    def test_one_hull_can_state_two_and_both_are_read(self):
+        """MY Odyssey advertises a 2026 campaign beside a 2027 one.
+
+        The 16-hull census said one entry per hull and the whole fleet said 30
+        on 29 — so the count was a fact about those sixteen, and a reader
+        taking the first entry would have dropped a real markdown. The census
+        is the shape, never the cardinality.
+        """
+        found, warnings = db.boat_specials(specials_page([
+            dict(self.entries[1], name="MY Odyssey", tag="SAVE UP TO 10%",
+                 price=1700, old=1907, descr="Selected trips in 2026"),
+            dict(self.entries[2], name="MY Odyssey", tag="SAVE 10%",
+                 price=1540, old=1711, descr="2027 trips"),
+        ]))
+        self.assertEqual(warnings, [])
+        self.assertEqual([s.pct for s in found], [11, 10])
+        self.assertEqual([s.says for s in found],
+                         ["Selected trips in 2026", "2027 trips"])
+
+    def test_an_up_to_tag_is_not_a_ceiling(self):
+        """It sits above the pair on 6 of 13 and below it on 2.
+
+        MY Odyssey says *up to 10%* over a pair at 11 and Red Sea Aggressor V
+        *up to 63%* over one at 67 — so a rate read off the tag would be wrong
+        in both directions, and clamping the pair to it would delete a
+        discount the seller's own two figures state.
+        """
+        found, _ = db.boat_specials(specials_page([
+            dict(self.entries[0], tag="SAVE UP TO 10%", price=1700, old=1907),
+        ]))
+        self.assertEqual(found[0].pct, 11)
+        self.assertEqual(found[0].tag, "SAVE UP TO 10%")
+
 
 class TestTheMarkdownReachesThePanelAndNoRow(unittest.TestCase):
     """Driven through `promote`, because the claim is about where it stops.

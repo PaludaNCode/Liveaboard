@@ -1346,10 +1346,13 @@ Break these and the site starts lying quietly rather than failing loudly.
   that divebooker publishes no list price at all and *"a divebooker row can
   only ever read not on sale"* — measured over the JSON-LD, which is the only
   place anybody had looked. The pair is in the streamed payload under
-  `boatSpecials`, on **16 of the 16** Egyptian hulls its own specials listing
-  links, in bytes `fetch_divebooker.py` already downloads every morning: a
-  `price`, an `old`, a headline, the seller's conditions and a sentence about
-  which trips. What survives of that entry is its second clause and it is the
+  `boatSpecials`, **30 of them on 29 hulls** across the Egyptian fleet, in
+  bytes `fetch_divebooker.py` already downloads every morning: a `price`, an
+  `old`, a headline, the seller's conditions and a sentence about which trips.
+  Its own specials listing links 16 of those hulls, so that listing is a
+  carousel like the country page before it — and one hull states **two**, MY
+  Odyssey advertising a 2026 campaign beside a 2027 one, so a reader taking
+  the first entry drops a markdown. What survives of that entry is its second clause and it is the
   load-bearing one — the entry names **no sailing**. `descr` is prose: *"Sep
   26, 2026 | Oct 24, 2026 | Dec 26, 2026"* on one hull and *"Selected 2027
   trips!"* on the next, and splitting the first is reading a record out of a
@@ -1357,12 +1360,12 @@ Break these and the site starts lying quietly rather than failing loudly.
   nothing else: no departure carries it, the *On sale* chip counts exactly the
   sailings it counted before, and the sale row prints the seller's own words
   under From instead of a window nobody published.
-  **The tag is beside the rate, never instead of it.** *SAVE 15%*, *SAVE 20%*
-  and *SAVE 30%* agree with `price`/`old` exactly, 6 of 6; *SAVE UP TO x%*
-  agrees on 4 of 10, sits above the pair on 5 and **below** it on one — Red
-  Sea Aggressor V says *up to 63%* over a pair at 67. Two claims, not one
-  stated twice, so the rate is the two stated figures and the tag rides beside
-  it verbatim. **And `currencyId` is another label that does not describe its
+  **The tag is beside the rate, never instead of it.** A flat tag agrees with
+  `price`/`old` exactly, **17 of 17**; *SAVE UP TO x%* agrees on 5 of 13, and
+  is not a ceiling either — it sits above the pair on 6 and **below** it on 2,
+  Red Sea Aggressor V saying *up to 63%* over a pair at 67 and MY Odyssey *up
+  to 10%* over one at 11. Two claims, not one stated twice, so the rate is the
+  two stated figures and the tag rides beside it verbatim. **And `currencyId` is another label that does not describe its
   own figure**, exactly like `Offer.priceCurrency`: the entry files Aphrodite
   under id 2 on a page whose payload says it rendered in USD, and on the 8
   hulls whose special names a figure the vessel page also states, the two are
