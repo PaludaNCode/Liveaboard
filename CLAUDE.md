@@ -253,8 +253,10 @@ Break these and the site starts lying quietly rather than failing loudly.
   it; a row states `pct` only from the seller whose fare it prints;
   `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
   `availability` fills the whole-sailing slot and not the at-price one, because
-  that was measured; divebooker states no berth count and no list price at all,
-  so it fills neither.
+  that was measured; divebooker states no berth count and no list
+  price **against a sailing**, so it fills neither — the markdown it does
+  publish names a hull and no date, which is a row in the sales table and
+  never a percentage on a departure.
   **A third arriving is what tested the rule.** `best()` was a pair with the
   one-seller case as its own early return, the seller chip's vocabulary for
   *more than one* was the word `both`, and `advertisedNote` named PADI by

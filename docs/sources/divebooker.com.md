@@ -745,7 +745,20 @@ inventing text for it would be a guess wearing the page's clothes.
 The text is **markup**, because the seller writes it in an editor:
 `<strong>Day 2:</strong><br />` with `&amp;` between two reefs. So it is read
 as prose — tags out, entities decoded — before any reef reader sees it, or the
-fleet's reefs arrive as *Dolphin House &amp; Siyoul Kebir*.
+fleet's reefs arrive as *Dolphin House &amp; Siyoul Kebir*. A fee column's
+`text` is the same shape, so a line there breaks on `<br>` as well as on a
+newline: a resolved column split on newlines alone is a bill with one charge
+in it.
+
+**And following the reference is worth the reading.** Measured over six hulls
+by `tools/probe_divebooker_program.py`
+([run 35714720240](https://github.com/PaludaNCode/Liveaboard/actions/runs/35714720240)):
+14 of 14 trips carry a plan, **11 of them name a reef the trip's own
+`divesites` array and its name do not**, and the only references left
+unresolved are `$1` and `$e` — the fragment symbol and a client module, which
+are not text and are meant to be left alone. Aml Hayaty's *Mini Safari: Wrecks
+& Reefs* is the trip that named no reef at all in the published dataset; its
+plan names Thistlegorm, Abu Nuhas, Giftun and Siyoul Kebir.
 
 ## What is ruled out
 

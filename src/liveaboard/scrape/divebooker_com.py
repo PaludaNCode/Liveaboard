@@ -1093,6 +1093,14 @@ def _as_prose(value: str) -> str:
     return " ".join(unescape(TAG.sub(" ", value)).split())
 
 
+def _stated_site(site: dict[str, Any]) -> str | None:
+    """One reef's name, from wherever this seller keeps it."""
+    for holder in (site.get("map"), site):
+        if isinstance(holder, dict) and isinstance(holder.get("name"), str):
+            return holder["name"].strip() or None
+    return None
+
+
 def _prose(node: Any) -> str | None:
     """Every string under a node, joined — whatever shape the node is.
 
@@ -1461,11 +1469,22 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 # publishes and a tidied copy would be a second vocabulary.
                 block.requirements = _stated_text(bar.get("expirience"))
                 block.certification = _stated_text(bar.get("sertification"))
+            # **The name is a step down, under `map`.** An entry is
+            # `{"type": "divesites", "map": {"name": "Siyul Kebira", …}}`,
+            # and reading `name` off the entry itself found one on **0 of
+            # 492 trips** in the committed book -- a reef list that shipped,
+            # was tested against a fixture with no `divesites` in it, and
+            # read nothing on every trip this seller sells. The entry's own
+            # `name` is kept as a fallback and has never fired. The two
+            # entries with no name at all are the harbours (`type` is
+            # `departure` and `arrival`), which state coordinates and are
+            # not reefs.
             block.sites = [
-                site["name"].strip()
+                name.strip()
                 for site in (owner.get("divesites") or [])
-                if isinstance(site, dict) and isinstance(site.get("name"), str)
-                and site["name"].strip()
+                if isinstance(site, dict)
+                for name in [_stated_site(site)]
+                if name
             ]
             block.programme = _prose(owner.get("programm"))
             block.port_from = _stated_name(owner.get("departurePort"))

@@ -1928,6 +1928,58 @@ class TestAChunkReferenceIsFollowedToTheRowItNames(unittest.TestCase):
             {"a": "Day 1: Abu Nuhas", "b": "$99",
              "c": ["Day 1: Abu Nuhas", "plain"]})
 
+    def test_the_day_plan_reaches_the_trip_as_prose_from_real_bytes(self):
+        """Aml Hayaty's *Mini Safari: Wrecks & Reefs*, as the page served it.
+
+        Three `self.__next_f.push` chunks carried back verbatim from a runner
+        on 2026-09-22, and the boundaries are why there are three: the first
+        is the string `3d:T510,` **and nothing else** — the row's label and
+        its length, with the day plan itself opening the chunk after it, and
+        the trip that points at it in the chunk after that. A reader that
+        wanted a newline in front of a row, or that read a row by its line,
+        finds nothing here.
+
+        It is also the trip that named no reef anywhere in the published
+        dataset. Its plan names four.
+        """
+        chunks = json.loads(
+            (Path(__file__).resolve().parent / "fixtures"
+             / "divebooker-day-plan.json").read_text(encoding="utf-8"))
+        self.assertEqual(json.loads(chunks[0]), "3d:T510,")
+        html = "".join(
+            "<script>self.__next_f.push([1," + chunk + "])</script>"
+            for chunk in chunks)
+
+        blocks, warnings = db.fee_blocks(html)
+        self.assertEqual(warnings, [])
+        block, = blocks
+        self.assertEqual(block.trip, "Mini Safari: Wrecks & Reefs")
+        self.assertTrue(block.programme.startswith("Program\nDay 1: Check-In"))
+        for reef in ("Dolphin House", "Siyoul Kebir", "Abu Nuhas",
+                     "Thistlegorm", "Giftun"):
+            self.assertIn(reef, block.programme)
+        self.assertNotIn("<", block.programme)
+        self.assertNotIn("&amp;", block.programme)
+
+    def test_a_reef_this_seller_states_is_a_step_below_the_entry(self):
+        """`divesites` holds `{"type": …, "map": {"name": …}}`.
+
+        Read at the entry's own level it answered on **0 of the 492 trips**
+        in the committed book, and nothing looked wrong: the list shipped
+        empty and the reefs came from the other two sellers. The harbours are
+        in the same list with no name at all — `departure` and `arrival`
+        state coordinates — and they are not reefs.
+        """
+        chunks = json.loads(
+            (Path(__file__).resolve().parent / "fixtures"
+             / "divebooker-day-plan.json").read_text(encoding="utf-8"))
+        html = "".join(
+            "<script>self.__next_f.push([1," + chunk + "])</script>"
+            for chunk in chunks)
+        block, = db.fee_blocks(html)[0]
+        self.assertEqual(block.sites, ["Siyul Kebira", "Abu Nuhas",
+                                       "Thistlegorm", "Small Giftun"])
+
     def test_the_day_plan_reaches_the_trip_as_prose(self):
         """End to end, and the markup comes off on the way.
 

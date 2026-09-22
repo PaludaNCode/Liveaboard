@@ -69,6 +69,8 @@ def main() -> int:
 
     trips = plans = new_reefs = 0
     unresolved: Counter[str] = Counter()
+    unknown_sites: Counter[str] = Counter()
+    known_sites = 0
     gained: list[tuple[str, str, list[str]]] = []
     fixture: list[str] = []
 
@@ -95,7 +97,14 @@ def main() -> int:
                 plans += 1
             already = set(_sites_from_name(block.trip or ""))
             for site in block.sites:
-                already.update(_sites_from_name(site))
+                found_here = _sites_from_name(site)
+                if found_here:
+                    known_sites += 1
+                else:
+                    # The seller's own spelling, and a reef this project
+                    # cannot name is a filter chip a reader cannot reach.
+                    unknown_sites[site] += 1
+                already.update(found_here)
             found = [s for s in _sites_from_name(plan) if s not in already]
             if found:
                 new_reefs += 1
@@ -109,6 +118,11 @@ def main() -> int:
     print(f"  {new_reefs} trip(s) name a reef in that plan and nowhere else")
     print(f"  {len(unresolved)} reference(s) left unresolved: "
           f"{dict(unresolved.most_common(8)) or 'none'}")
+    print(f"  {known_sites} stated reef(s) this project names, "
+          f"{sum(unknown_sites.values())} it does not "
+          f"({len(unknown_sites)} distinct)")
+    for name, n in unknown_sites.most_common(40):
+        print(f"    {n:>4}  {name}")
     for slug, trip, found in gained[:40]:
         print(f"    {slug:<24} {trip[:38]:<38} {', '.join(found)}")
 
