@@ -488,6 +488,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   silent, it is the difference between a row the site filter can reach and one
   it cannot — 47 rows on 19 itineraries, down to 4 on 3. The three that stay
   blank name no reef in any field, and blank is right for them.
+  **Six now, and the last two are the third seller's**: its own `divesites`
+  list, then its day plan. The list is more structured than PADI's blurb and
+  is still behind it, because easier to read is not an argument about being
+  right and nothing has measured the two against each other; what it answers
+  is the 33 hulls neither of the others carries, where every source above is
+  silent. The plan is behind the list for the same reason PADI's blurb sits
+  behind its day plan — prose is prose — and both go through
+  `_sites_from_name`, so a reef the fleet's vocabulary cannot place stays
+  unplaced rather than minting a chip nothing else shares. `divesites` holds
+  the name a step down, under `map`, and read at the entry's own level it
+  answered on **0 of 492 trips**: a reef list that shipped, passed its
+  fixture and read nothing.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is

@@ -479,6 +479,18 @@ no liveaboard.com trip title to parse a harbour out of and no PADI trip to
 ask, so all 69 of them read *Unknown* at both ends until these were read —
 on a page whose *Departs from* bank is what a reader filters the fleet with.
 
+**And `divesites` keeps the name a step down.** An entry is
+`{"type": "divesites", "map": {"name": "Siyul Kebira", "url": …, "latitude": …}}`
+and the list also carries the two harbours as `departure` and `arrival`
+entries, which state coordinates and no name. Read at the entry's own level
+the reef list answered on **0 of the 492 trips in the committed book** — it
+shipped, it was tested against a fixture with no `divesites` in it, and the
+reefs on the page came from the other two sellers throughout. The vocabulary
+is the seller's own (*Siyul Kebira* where its own day plan writes *Siyoul
+Kebir*, *Small Giftun* where the fleet writes *Giftun*), so every name goes
+through `_sites_from_name` like the operator's region list: what this
+project's table cannot place stays unplaced.
+
 #### Read end to end against the other seller's own panel
 
 Dry-run 2026-09-21: the two verbatim panels from the fixture injected into the
