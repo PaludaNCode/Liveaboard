@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,fixture,flight,search,listprice,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,chunkref,program,fixture,flight,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -467,6 +467,21 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_chunkref.py \
             --vessels "${{ inputs.divebooker_vessel || 'aml-hayaty' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # And whether resolving them buys anything: the day plan is what names
+      # the reefs a trip's own `divesites` array leaves out, so the number
+      # that decides this is trips naming a reef in the plan and nowhere else.
+      - name: Does the day plan arrive now
+        if: contains(inputs.divebooker_ask, 'program')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_program.py \
+            --limit "${{ inputs.divebooker_vessels || '6' }}" \
+            --fixture "${{ inputs.divebooker_vessel || 'aml-hayaty' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"

@@ -1855,3 +1855,98 @@ class TestTheMarkdownReachesThePanelAndNoRow(unittest.TestCase):
         """`promote --check` compares byte for byte, so this cannot wobble."""
         self.assertEqual(self.payload([self.SPECIAL])["deals"],
                          self.payload([self.SPECIAL])["deals"])
+
+
+def streamed(*parts: str) -> str:
+    """Several `self.__next_f.push` chunks, the way the page ships them.
+
+    Each part is a piece of the payload and the boundaries are deliberate: a
+    row may begin exactly where a chunk does, and a reader that only
+    recognises a row after a newline loses that one.
+    """
+    return "".join(
+        "<script>self.__next_f.push([1," + json.dumps(part) + "])</script>"
+        for part in parts)
+
+
+def text_row(label: str, body: str) -> str:
+    """One text row: the label, its length in hex **bytes**, and the text."""
+    return f"{label}:T{len(body.encode('utf-8')):x},{body}"
+
+
+class TestAChunkReferenceIsFollowedToTheRowItNames(unittest.TestCase):
+    """`programm` is a pointer, and for 492 trips it shipped as the day plan.
+
+    The page streams its long strings as separate rows and writes `"$3d"`
+    where the text belongs, so `_prose` was handed a four-character string and
+    the day-plan reader — written, tested and shipped — read nothing on every
+    trip in the book.
+
+    The row format was measured on a runner on 2026-09-22 rather than assumed
+    from the framework's name
+    ([run 35713736973](https://github.com/PaludaNCode/Liveaboard/actions/runs/35713736973)):
+    `3d:T510,<strong>Day 1:</strong>…` — a label, a length in hex bytes, and
+    then that many bytes of raw text. **The labels move between renders.** The
+    same day plan was `$3e` one hour and `$3d` the next, on one hull, which is
+    why a reference is resolved against the payload it arrived in and why no
+    label may be written into the parser.
+    """
+
+    def test_a_row_is_measured_in_bytes_and_never_in_lines(self):
+        """The text runs past newlines, and a day plan is mostly newlines.
+
+        A line-wise reader cuts *Day 1* off the front of the plan and then
+        reads the rest of it as more rows — which is the failure that looks
+        like a parser working.
+        """
+        plan = "Day 1:\nCheck-in\n2a: not a row at all\nDay 2:\nAbu Nuhas"
+        table = db.chunk_table("1:x\n" + text_row("3d", plan) + "\n")
+        self.assertEqual(table["3d"], plan)
+        self.assertNotIn("2a", table)
+
+    def test_a_row_that_begins_where_a_chunk_does_is_still_read(self):
+        """The stream is delivered in pieces and the pieces cut anywhere.
+
+        `$3f` was used on Aml Hayaty and reported undeclared for exactly this:
+        its row opened a push chunk, so nothing preceded the label and a rule
+        wanting a newline in front of it found nothing.
+        """
+        payload, _ = db.payload_parts(streamed(
+            "30:T4,abcd\n", text_row("3f", "Fuel surcharge: 10 EUR per day")))
+        table = db.chunk_table(payload)
+        self.assertEqual(table["3f"], "Fuel surcharge: 10 EUR per day")
+
+    def test_a_reference_this_page_does_not_declare_is_left_as_it_is(self):
+        """A row this reader did not keep is a component or an SVG path.
+
+        Inventing text for it would be worse than printing the reference: the
+        page said something and this would be a guess wearing its clothes.
+        """
+        table = db.chunk_table(text_row("3d", "Day 1: Abu Nuhas") + "\n")
+        self.assertEqual(
+            db.resolved({"a": "$3d", "b": "$99", "c": ["$3d", "plain"]}, table),
+            {"a": "Day 1: Abu Nuhas", "b": "$99",
+             "c": ["Day 1: Abu Nuhas", "plain"]})
+
+    def test_the_day_plan_reaches_the_trip_as_prose(self):
+        """End to end, and the markup comes off on the way.
+
+        The seller writes the plan in an editor, so it arrives as
+        `<strong>Day 2:</strong><br />` with `&amp;` between two reefs — and
+        the reef reader is given words, not tags.
+        """
+        plan = ('<strong>Day 2:</strong><br />\r\n'
+                'Dolphin House &amp; Siyoul Kebir<br />\r\n'
+                '<strong>Day 3:</strong><br />\r\nAbu Nuhas')
+        trips = json.dumps({"trips": [{
+            "name": "Mini Safari: Wrecks & Reefs (3 nights)",
+            "programm": "$3d",
+            "details": {"title": "Price details", "columns": []},
+        }]}, ensure_ascii=False)
+        blocks, warnings = db.fee_blocks(
+            streamed(trips + "\n", text_row("3d", plan)))
+        self.assertEqual(warnings, [])
+        block, = blocks
+        self.assertEqual(
+            block.programme,
+            "Day 2: Dolphin House & Siyoul Kebir Day 3: Abu Nuhas")
