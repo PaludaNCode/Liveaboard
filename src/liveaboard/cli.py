@@ -629,6 +629,30 @@ def cmd_promote(args: argparse.Namespace) -> int:
             f"    its fee panel reaches {billed} itinerar(ies), "
             f"{totals} of them complete enough to total"
         )
+        # #151, both halves. A unit this book left off and another states for
+        # the same charge at the same figure is read rather than guessed --
+        # and what did **not** resolve is printed beside it, because a count
+        # of what was fixed with nothing beside it reads as "that was
+        # everything", which is the truncation this project refuses in its own
+        # change log. The boats are named by count and not by list: what an
+        # unresolved figure needs is the *seller* to state a period, which no
+        # word here can supply.
+        borrowed = [line
+                    for i in payload.get("itineraries") or []
+                    for line in i.get("divebooker_fees") or []
+                    if line.get("unit_from")]
+        silent = [(i["boat_id"], line["code"])
+                  for i in payload.get("itineraries") or []
+                  for line in i.get("divebooker_fees") or []
+                  if line.get("unit_unstated") and not line.get("included")
+                  and line["tier"] == "mandatory"]
+        if borrowed or silent:
+            print(
+                f"    {len(borrowed)} fee line(s) took a unit from another "
+                f"book at the same figure; {len(silent)} obligatory line(s) "
+                f"on {len({boat for boat, _ in silent})} boat(s) still state a "
+                f"figure and no period, and no bill holding one is totalled"
+            )
         for slug in block["unmapped_vessels"]:
             # Named every run, like an unmatched PADI deal: a hull the alias
             # map does not know is a boat nobody has looked at, and a count

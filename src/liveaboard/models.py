@@ -116,6 +116,16 @@ class FeeItem:
     the top of what it did say it is not.
     """
 
+    unit_from: str | None = None
+    """The source id of the book this line borrowed its unit from, if any.
+
+    A figure one seller published, scaled by a period another seller states for
+    the same charge at the same figure -- `promote._with_units_resolved`. The
+    line is still the first seller's: only the unit moved. Kept as a field and
+    not only in the note, because whose reading scaled a charge is a fact about
+    two disclosures and prose is not somewhere a later reader can ask it.
+    """
+
     @property
     def label(self) -> str:
         return FEE_LABELS.get(self.code, self.code.value.replace("_", " ").title())
@@ -203,6 +213,7 @@ class FeeItem:
             provenance=Provenance.from_dict(prov) if prov else None,
             note=payload.get("note"),
             unit_unstated=bool(payload.get("unit_unstated", False)),
+            unit_from=payload.get("unit_from"),
         )
 
 

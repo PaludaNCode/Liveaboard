@@ -988,11 +988,84 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 
 ## Not yet asked
 
-- **Where the other 885 booking ids come from.** The payload holds none, so the
-  page must ask for one when a row's *Select cabin* is pressed. What that
-  request is has not been watched — it needs a browser with the network log
-  open, which is a different kind of probe from every one here. Until then the
-  cabin ladder covers the ten sailings a hull publishes an Event for.
+- **Where the other 885 booking ids come from. Asked 2026-09-22, and the first
+  reading of the answer was wrong.** It read: *"a press answers it … on Red
+  Sea Aggressor II, a hull whose Events state not one id, three presses of
+  Select cabin navigated to `?tripId=115971`, `?tripId=162922` and
+  `?tripId=142101` … so the id exists per departure row and the page has
+  it"*. The probe's own third step refutes it
+  ([run 35751606654](https://github.com/PaludaNCode/Liveaboard/actions/runs/35751606654)):
+  **both ids it re-checked are in the page's own bytes, inside an Event's
+  `id`** — `https://divebooker.com/red-sea-aggressor-ii-haz285#115971` — which
+  is exactly the fragment `fetch_divebooker.py` already keeps as `booking_id`.
+  They read as ids for a hull that states none only because those Events are
+  **2026** sailings, outside the published season, so no row in the book
+  carries them. A press on one of the ten Events a page publishes asks
+  nothing; the question is a row *past* them, which is what `--skip` is for.
+  The sentence is kept rather than deleted because it is the reason to look
+  again: a press landing on the rows nearest the top is the one case that
+  proves nothing and looks like proof.
+  **What the run does establish**, and these stand:
+  `/boatorder/booking/?tripId=N` is what a press navigates to, the landing
+  page then calls `GET /restapi/boatcart?tripId=N&useTravelCredit=true` —
+  a JSON endpoint for the ladder that nobody had seen — **no `tripId` is in
+  any `href`** on the rendered page (one control matched the probe's seven
+  selectors and none carried one), and **the page never goes idle**:
+  `wait_until="networkidle"` times out at 45s here every time, so anything
+  driving this host reads at `load`.
+
+  **And the question is closed, negatively, by the run after it**
+  ([run 35752878539](https://github.com/PaludaNCode/Liveaboard/actions/runs/35752878539)):
+  Red Sea Aggressor II's page renders **6 pressable *Select cabin* rows at
+  first paint, and 6 after a scroll to the foot** — against 18 sailings this
+  project holds for that hull and 906 across the fleet. A `--skip 10` pressed
+  nothing, because there was nothing at 10. So the rest of the departure list
+  **is not on this page as rows**: the `TouristTrip` chain that carries those
+  885 sailings is data the page ships and does not render as something a
+  visitor can book, and a row that does not exist cannot be pressed for an id.
+  The browser buys nothing here. Widening the ladder needs a **different
+  surface** — the seller's own search, or a departures view nobody has
+  opened — which is a new question and not this one; and the ~900-request,
+  75-minute estimate below is moot until such a surface is found, because
+  there is nothing to make 900 requests *for*.
+  **`/restapi/boatcart?tripId=N&useTravelCredit=true` is what the booking page
+  calls**, and it is worth writing down here: a JSON endpoint for the ladder,
+  where `fetch_divebooker_cabins.py` currently parses the page. Not acted on —
+  changing what that fetcher reads is its own probe, not a side effect of this
+  one.
+
+  The original entry, for the record —
+  [run 35750483433](https://github.com/PaludaNCode/Liveaboard/actions/runs/35750483433),
+  `tools/probe_divebooker_select_cabin.py`, the first browser probe on this
+  host. On **Red Sea Aggressor II, a hull whose Events state not one id**,
+  three presses of *Select cabin* navigated to
+  `/boatorder/booking/?tripId=115971`, `?tripId=162922` and `?tripId=142101`,
+  and each landing page then called
+  `GET /restapi/boatcart?tripId=N&useTravelCredit=true`. So **the id exists per
+  departure row and the page has it**: it is not something only the capped ten
+  Events carry.
+  **It is not in an `href`, though** — the rendered page carried one control
+  matching any of the probe's seven selectors and **0 carrying a `tripId`**, so
+  the link is written by the row's own handler and a second read of the served
+  bytes will not pick it up on this hull. What is still open is whether those
+  three ids are *in* the bytes under a key nobody has enumerated, which decides
+  the price of full coverage: in the payload and the ladder costs no request
+  beyond the vessel page the crawl already reads; client state only, and it
+  costs a browser per hull. The probe asks that now, in its third step.
+  **And the page never goes idle** — `wait_until="networkidle"` times out at
+  45s here, every time, so anything driving this host reads it at `load`.
+  Nothing in the probe derives an id: a sequence, a neighbouring sailing and a
+  date are all forbidden, and a row it finds no id for is reported as a row
+  with no id. Until the third step has run, the cabin ladder covers the ten
+  sailings a hull publishes an Event for.
+  **And the size of the prize is worth having in view before it is built.**
+  Full coverage is ~900 requests, about 75 minutes a day at the five-second
+  pace this project gives a host stating no `Crawl-delay` — the largest single
+  crawl here, against liveaboard.com's 1,030 booking pages at 2s. What it buys
+  is this seller's room prices on ~900 rows against 14, and its own
+  `sumFreeSpaces` beside the other two sellers' counts. **Not** the *Places*
+  column: the per-room counts overlap, so the at-this-price slot stays empty
+  whatever the coverage.
 - **Which nesting is the departure list.** The working reading above, held
   against the dates: do the ten top-level Events appear among the forty-nine?
   Everything a parser does here depends on that answer.

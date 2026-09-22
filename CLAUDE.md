@@ -300,6 +300,31 @@ Break these and the site starts lying quietly rather than failing loudly.
   money and takes only the unit; the figures must match exactly, because that
   equality is the whole warrant that the two lines are one charge. It replaced
   reasoning from sister vessels in `scrape/gear.py`, which had one of two wrong.
+  **And it is a rule about books rather than about gear, which is what the
+  third seller's bill proved (#151).** divebooker states a figure with a payer
+  and no period on 319 of its 608 panels — *Route fees and enviromental taxes -
+  200-320 EUR per person* — and one such line silences the whole bill, because
+  `divebooker_lines` will not total a book that does not *scale* every charge a
+  diver cannot decline. Read off the other two books at the exactly equal
+  figure, 36 units land and the bills that reach a Total go from 126 to 154 of
+  327, on 121 departures. All 36 are `per_trip`, which is the fleet's own prior
+  — so the warrant is the equality and never the prior, and what the join buys
+  is a line that can be scaled at all rather than a different figure.
+  **Three things may not be given up for it.** A pair the two lenders state
+  *different* units for resolves nothing: nothing here can say which of two
+  sellers read the operator right, and picking is `itinerary_key`'s rule. A
+  hull that declined an obligatory label lends its bills no verdict — such a
+  bill may be missing a charge entirely, and a unit says nothing about that; the
+  decline is recorded per **hull** (`divebooker_com.OWED_MARK`, read back rather
+  than re-spelled), so the refusal is the whole hull. And the fill only ever
+  *upgrades*, only where a unit really moved, because `complete` is the parser's
+  verdict over the page it read. What did not resolve is stated with what did —
+  117 obligatory lines on 27 boats — for the reason `changes` counts what it
+  truncates.
+  **A borrowed unit is marked wherever it appears**, like the gear estimate:
+  `FeeItem.unit_from` names the lending book and the line's own note names
+  **both** books, because a named seller beside an unnamed default is the
+  asymmetry this page refuses everywhere it prints a price.
   **`FeeBasis.PER_DIVING_DAY` came out of the same reading.** PADI's own
   vocabulary is `[40, "Diving day"]` and `PAYED_PER` mapped it to `PER_DAY`,
   which scales as `nights + 1` — days aboard, one more than the seller counts,

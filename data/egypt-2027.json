@@ -18728,7 +18728,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 a diving day — this page states no unit for it and the other seller prices the same set at the same figure by the diving day"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 — priced by the diving day: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the diving day",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -19083,7 +19084,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 a diving day — this page states no unit for it and the other seller prices the same set at the same figure by the diving day"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, Wetsuit €40 — priced by the diving day: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the diving day",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -32243,7 +32245,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -32711,7 +32714,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -33179,7 +33183,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -33649,7 +33654,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -33831,15 +33837,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-pearl-haz20"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -33912,7 +33919,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-pearl--north-safaga-hurghada-hurghada",
@@ -34116,7 +34123,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -34587,7 +34595,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -35057,7 +35066,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -35239,15 +35249,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-pearl-haz20"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -35320,7 +35331,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-pearl--north-tiran-dahab-hurghada-hurghada",
@@ -35524,7 +35535,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -35844,7 +35856,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 a week — this page states no unit for it and the other seller prices the same set at the same figure by the week"
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Snorkel Gear, Wetsuit €135 — priced by the week: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the week",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -36955,15 +36968,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-seas-haz21"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -37036,7 +37050,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-seas--brothers-daedalus-and-elphinstone-port-ghalib-port-ghalib",
@@ -37421,15 +37435,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-seas-haz21"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -37502,7 +37517,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-seas--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -37888,15 +37903,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-seas-haz21"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -37969,7 +37985,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-seas--north-safaga-hurghada-hurghada",
@@ -38822,15 +38838,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-seas-haz21"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -38903,7 +38920,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-seas--north-tiran-dahab-hurghada-hurghada",
@@ -40902,15 +40919,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-seas-haz21"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -40983,7 +41001,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-seas--tiran-special-hurghada-hurghada",
@@ -42284,15 +42302,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-storm-haz405"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -42365,7 +42384,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-storm--daedalus-fury-shoal-port-ghalib-port-ghalib",
@@ -43093,15 +43112,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-storm-haz405"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -43174,7 +43194,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "blue-storm--rocky-zabargad-st-johns-port-ghalib-port-ghalib",
@@ -44005,15 +44025,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Local fees and fuel surcharge: stated with no unit",
+          "note": "Local fees and fuel surcharge — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/blue-storm-haz405"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": null,
@@ -44086,7 +44107,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "carlton--classic-north-sharm-el-sheikh-sharm-el-sheikh",
@@ -45607,15 +45628,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -45688,7 +45710,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--brothers-daedalus-elphinstone-port-ghalib-port-ghalib",
@@ -45988,15 +46010,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -46069,7 +46092,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--daedalus-fury-shoals-st-john-s-port-ghalib-port-ghalib",
@@ -46602,15 +46625,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -46683,7 +46707,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--north-brothers-hurghada-hurghada",
@@ -46980,15 +47004,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -47061,7 +47086,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--north-tiran-hurghada-hurghada",
@@ -47361,15 +47386,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -47442,7 +47468,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--north-wrecks-hurghada-hurghada",
@@ -47744,15 +47770,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -47825,7 +47852,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--north-safaga-brothers-hurghada-port-ghalib",
@@ -48125,15 +48152,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -48206,7 +48234,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "destiny--north-tiran-dahab-hurghada-hurghada",
@@ -48739,15 +48767,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park and port fees: stated with no unit",
+          "note": "Park and port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/destiny-haz523"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -48820,7 +48849,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "discovery-i--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -54021,15 +54050,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -54613,15 +54643,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -55076,15 +55107,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -55538,15 +55570,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -56003,15 +56036,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -56465,15 +56499,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -56930,15 +56965,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -57391,15 +57427,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -57853,15 +57890,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/dune-longara-haz527"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -58294,15 +58332,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -58771,15 +58810,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -59522,15 +59562,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -60002,15 +60043,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -60484,15 +60526,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -60963,15 +61006,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -61443,15 +61487,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -61926,15 +61971,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/silky-haz384"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -62380,15 +62426,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -62831,15 +62878,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -63285,15 +63333,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -63737,15 +63786,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -64190,15 +64240,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -64645,15 +64696,16 @@
           "basis": "per_trip",
           "code": "service_charge",
           "included": false,
-          "note": "Service fees: stated with no unit",
+          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/titan-haz386"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -72424,7 +72476,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 a trip — this page states no unit for it and the other seller prices the same set at the same figure by the trip"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 — priced by the trip: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -73172,7 +73225,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 a trip — this page states no unit for it and the other seller prices the same set at the same figure by the trip"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 — priced by the trip: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -74203,7 +74257,8 @@
             "currency": "EUR"
           },
           "unit_unstated": false,
-          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 a trip — this page states no unit for it and the other seller prices the same set at the same figure by the trip"
+          "note": "Full equipment hire: BCD, Dive Computer, Fins, Mask, Regulator, SMB, Wetsuit €206 — priced by the trip: liveaboard.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
+          "unit_from": "padi.com"
         }
       ],
       "requirements": {
@@ -127323,15 +127378,16 @@
           "basis": "per_trip",
           "code": "port_fees",
           "included": false,
-          "note": "Port fees: stated with no unit",
+          "note": "Port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-ii-haz285"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -127341,15 +127397,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "Marine park fees: stated with no unit",
+          "note": "Marine park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-ii-haz285"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -127359,15 +127416,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Fuel Surcharge: stated with no unit",
+          "note": "Fuel Surcharge — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-ii-haz285"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -127468,7 +127526,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "red-sea-aggressor-ii--northern-red-sea-ras-mohamed-straits-of-tiran-hurghada-hurghada",
@@ -127869,15 +127927,16 @@
           "basis": "per_trip",
           "code": "port_fees",
           "included": false,
-          "note": "Port fees: stated with no unit",
+          "note": "Port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-ii-haz285"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -127887,15 +127946,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "Marine park fees: stated with no unit",
+          "note": "Marine park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-ii-haz285"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -128293,15 +128353,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Fuel surcharge: stated with no unit",
+          "note": "Fuel surcharge — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-iv-haz426"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -129196,15 +129257,16 @@
           "basis": "per_trip",
           "code": "fuel_surcharge",
           "included": false,
-          "note": "Fuel surcharge: stated with no unit",
+          "note": "Fuel surcharge — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-iv-haz426"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -130210,15 +130272,16 @@
           "basis": "per_trip",
           "code": "port_fees",
           "included": false,
-          "note": "Port fees: stated with no unit",
+          "note": "Port fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-v-haz466"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": {
@@ -130228,15 +130291,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "Marine park fees: stated with no unit",
+          "note": "Marine park fees — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-aggressor-v-haz466"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -130984,15 +131048,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Local taxes, port taxes, National park taxes, hyperbaric chamber and new environmental tax: stated with no unit",
+          "note": "Local taxes, port taxes, National park taxes, hyperbaric chamber and new environmental tax — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-blue-force-2-haz194"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -131366,15 +131431,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Local taxes, port taxes, National park taxes, hyperbaric chamber and new environmental tax: stated with no unit",
+          "note": "Local taxes, port taxes, National park taxes, hyperbaric chamber and new environmental tax — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/red-sea-blue-force-2-haz194"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -138961,15 +139027,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-haz16"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -139613,15 +139680,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-contessa-haz13"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -140029,15 +140097,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-contessa-haz13"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -140919,15 +140988,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-grand-haz12"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -141336,15 +141406,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-grand-haz12"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -149184,15 +149255,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -149202,15 +149274,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -149283,7 +149356,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "serenity--mini-wrecks-hurghada-hurghada",
@@ -149654,15 +149727,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -150106,15 +150180,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -150540,15 +150615,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -150558,15 +150634,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -150639,7 +150716,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "serenity--north-tiran-hurghada-hurghada",
@@ -150992,15 +151069,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -151010,15 +151088,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -151091,7 +151170,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "serenity--north-ras-mohamed-tiran-dahab-hurghada-hurghada",
@@ -151445,15 +151524,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -151463,15 +151543,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -151544,7 +151625,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "serenity--north-and-wrecks-hurghada-hurghada",
@@ -151898,15 +151979,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -151916,15 +151998,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -151997,7 +152080,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "serenity--safaga-and-hurghada-hurghada-hurghada",
@@ -152355,15 +152438,16 @@
           "basis": "per_trip",
           "code": "hospitality_fee",
           "included": false,
-          "note": "Hospitality fee - min: stated with no unit",
+          "note": "Hospitality fee - min — priced by the trip: divebooker.com states no unit for it, and padi.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "padi.com"
         },
         {
           "amount": {
@@ -152373,15 +152457,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "Park, port and fuel fees: stated with no unit",
+          "note": "Park, port and fuel fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/serenity-haz454"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -152454,7 +152539,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "sinaistar--brothers-daedalus-elphinstone-hurghada-hurghada",
@@ -157325,15 +157410,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "National park fees, port fees, environmental tax: stated with no unit",
+          "note": "National park fees, port fees, environmental tax — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/snefro-love-haz7"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -157406,7 +157492,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "snefro-pearl--mini-safari-thistlegorm-ras-mohammed-sharm-el-sheikh-sharm-el-sheikh",
@@ -157665,15 +157751,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "National park fees, port fees, environmental tax: stated with no unit",
+          "note": "National park fees, port fees, environmental tax — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/snefro-pearl-haz6"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -157746,7 +157833,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "snefro-spirit--sinai-classic-sharm-el-sheikh-sharm-el-sheikh",
@@ -158310,15 +158397,16 @@
           "basis": "per_trip",
           "code": "combined_fees",
           "included": false,
-          "note": "National park fees, port fees, environmental tax: stated with no unit",
+          "note": "National park fees, port fees, environmental tax — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/snefro-target-haz1"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -158391,7 +158479,7 @@
           }
         }
       ],
-      "divebooker_fees_complete": false
+      "divebooker_fees_complete": true
     },
     {
       "id": "ss-glorious-miss-nouran--fury-shoals-port-ghalib-port-ghalib",
@@ -158948,15 +159036,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-glorious-miss-nouran-haz374"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -159594,15 +159683,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-serena-dreams-haz375"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,
@@ -160012,15 +160102,16 @@
           "basis": "per_trip",
           "code": "marine_park",
           "included": false,
-          "note": "National park fees: stated with no unit",
+          "note": "National park fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
           "tier": "mandatory",
-          "unit_unstated": true,
+          "unit_unstated": false,
           "provenance": {
             "kind": "scraped",
             "source_id": "divebooker.com",
             "retrieved": "2026-09-22",
             "url": "https://divebooker.com/sea-serpent-serena-dreams-haz375"
-          }
+          },
+          "unit_from": "liveaboard.com"
         },
         {
           "amount": null,

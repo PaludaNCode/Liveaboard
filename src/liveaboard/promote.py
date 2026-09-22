@@ -17,7 +17,7 @@ from __future__ import annotations
 import re
 from collections import Counter, defaultdict
 from datetime import date
-from typing import Any, Mapping, Sequence
+from typing import Any, Container, Iterable, Mapping, Sequence
 
 from .classify import normalise
 from .taxonomy import DIVER_LEVEL_LABELS, DIVER_LEVEL_ORDER, DiverLevel, FeeBasis, FeeCode, FeeTier, SourceKind
@@ -2198,9 +2198,11 @@ def _divebooker_only_departures(
 
 
 def _with_units_resolved(
-    ours: list[dict[str, Any]], theirs: list[dict[str, Any]]
+    ours: list[dict[str, Any]],
+    theirs: list[dict[str, Any]],
+    without: Container[str | None] = (),
 ) -> list[dict[str, Any]]:
-    """Fill a unit one seller left off, from the other seller stating it.
+    """Fill a unit one seller left off, from another seller stating it.
 
     liveaboard.com's gear dialog prints a bundle as ``<span>EUR 200</span>``
     with nothing after it on five vessels, so `scrape/gear.py` records the
@@ -2224,28 +2226,146 @@ def _with_units_resolved(
     reasoning about a fleet.
 
     Only the unit moves. The amount, the code, the tier and the note stay this
-    seller's, so the line still says what its own page said.
+    seller's, so the line still says what its own page said -- and the line
+    records **whose** unit it borrowed, in `unit_from` and in its own note,
+    because a period this page scales a charge by is a fact about two
+    disclosures and a reader has to be able to see both of them.
+
+    `without` names source ids that may not lend: a figure one seller stated
+    twice is one seller, not a join.
     """
-    if not theirs:
+    stated = _units_stated(theirs, without)
+    if not stated:
         return ours
-    stated = {
-        (line["code"], _amount_key(line)): line.get("basis")
-        for line in theirs
-        if line.get("basis") and line.get("amount") is not None
-    }
     out = []
     for line in ours:
-        basis = stated.get((line["code"], _amount_key(line)))
-        if line.get("unit_unstated") and basis:
-            line = {**line, "basis": basis, "unit_unstated": False}
-            unit = basis.replace("per_", "").replace("_", " ")
-            line["note"] = (line.get("note") or "").replace(
-                ", with no unit stated",
-                f" a {unit} — this page states no unit for it and the other"
-                " seller prices the same set at the same figure by the " + unit,
-            )
+        found = stated.get((line["code"], _amount_key(line)))
+        if line.get("unit_unstated") and found:
+            basis, lender = found
+            line = {**line, "basis": basis, "unit_unstated": False,
+                    "unit_from": lender,
+                    "note": _noted_unit(
+                        line.get("note"), basis, lender,
+                        (line.get("provenance") or {}).get("source_id"))}
         out.append(line)
     return out
+
+
+def _units_stated(
+    lines: list[dict[str, Any]], without: Container[str | None] = (),
+) -> dict[tuple[Any, Any], tuple[str, str | None]]:
+    """What unit each (charge, figure) is billed in, where the books agree.
+
+    **A pair two books disagree about states nothing.** 51 (code, figure) pairs
+    in the committed books carry two different bases, and taking either is
+    picking -- `promote.itinerary_key`'s rule, which this project has paid for
+    once. Refused rather than ranked: nothing here can say which of two sellers
+    read the operator right, and a unit is a multiplier on somebody's bill.
+
+    A line that states no unit of its own lends none, which is what stops one
+    silence being filled out of another.
+    """
+    seen: dict[tuple[Any, Any], tuple[str, str | None]] = {}
+    refused: set[tuple[Any, Any]] = set()
+    for line in lines:
+        source = (line.get("provenance") or {}).get("source_id")
+        key = _amount_key(line)
+        basis = line.get("basis")
+        if source in without or key is None or not basis:
+            continue
+        if line.get("unit_unstated"):
+            continue
+        pair = (line["code"], key)
+        if pair in seen and seen[pair][0] != basis:
+            refused.add(pair)
+        seen.setdefault(pair, (basis, source))
+    for pair in refused:
+        seen.pop(pair, None)
+    return seen
+
+
+#: The two ways this project's readers write *the figure is here and the unit
+#: is not* -- `scrape/gear.py`'s and `scrape/fees.py`'s. Stripped before the
+#: borrowed unit is stated, because a note still saying no unit was stated,
+#: beside a line that now scales, is the panel contradicting itself the way
+#: `included` once read as `unstated` one column over.
+_NO_UNIT_CLAUSES = (", with no unit stated", ": stated with no unit")
+
+
+def _noted_unit(note: str | None, basis: str, lender: str | None,
+                mine: str | None) -> str:
+    """The line's own note, saying which book scaled it.
+
+    **Both sellers are named, or neither is.** A named seller beside an unnamed
+    default is the asymmetry this project refuses everywhere it prints a price,
+    and a borrowed unit is exactly a statement about two disclosures.
+    """
+    unit = basis.replace("per_", "").replace("_", " ")
+    stem = note or ""
+    for clause in _NO_UNIT_CLAUSES:
+        if stem.endswith(clause):
+            stem = stem[: -len(clause)]
+            break
+    said = (f"{mine} states no unit for it, and {lender} prices"
+            if mine and lender else
+            # Unreachable from the pipeline, where every line carries a
+            # provenance; reachable from a fixture that does not.
+            "the book that published it states no unit for it, and the book "
+            "it is matched against prices")
+    return (f"{stem} — " if stem else "") + (
+        f"priced by the {unit}: {said} the same charge at the same figure by "
+        f"the {unit}"
+    )
+
+
+def _bill_with_units_resolved(
+    bill: dict[str, Any],
+    theirs: list[dict[str, Any]],
+    declined: Iterable[str],
+) -> dict[str, Any]:
+    """One seller's whole bill, with a unit read off the others -- and re-judged.
+
+    #151: **319 of this seller's 608 panels state a figure with a payer and no
+    period** -- *Route fees and enviromental taxes - 200-320 EUR per person* --
+    and one such line silences the bill it sits in, because
+    `pricing.divebooker_lines` returns ``None`` unless the book names, prices
+    **and scales** every charge a diver cannot decline. Measured over the
+    committed books, the join `_with_units_resolved` already applies to rental
+    gear reads 36 of those units and takes 28 bills from silent to totalled, on
+    121 departures. All 36 come back `per_trip`, which is this fleet's own
+    prior -- 946 of the 1,046 mandatory lines the other two books state -- so
+    what the join buys is not a different figure but a line that can be scaled
+    at all.
+
+    **The verdict is only ever upgraded, and only by a unit that was read.**
+    `complete` is the parser's, reached over the page it read, and nothing here
+    may take it away; a bill where no unit moved is left exactly as that parser
+    left it, so this cannot re-decide a book on grounds it has not established.
+
+    **A hull that declined an obligatory line is refused outright.** Such a
+    bill may be missing a charge nothing could name -- Dive Runner's *Entrance
+    fee*, 10 EUR per person per day for the Strait of Tiran and 15 for Ras
+    Mohammed in one sentence -- and a unit says nothing about that. 3 hulls of
+    92, and `unnamed_fees` records the decline per **hull**, so the refusal is
+    the whole hull: where the file cannot say which trip lost the line, erring
+    towards saying less is the only direction available. The unit is still
+    read, because it was read; what is withheld is the total.
+    """
+    from .scrape.divebooker_com import OWED_MARK  # noqa: PLC0415
+
+    lines = bill["lines"]
+    mine = {(line.get("provenance") or {}).get("source_id") for line in lines}
+    filled = _with_units_resolved(lines, theirs, mine)
+    owed = [line for line in filled
+            if line["tier"] == FeeTier.MANDATORY.value
+            and not line.get("included")]
+    complete = bool(bill.get("complete")) or (
+        filled != lines
+        and not any(str(one).startswith(OWED_MARK) for one in declined)
+        and all(line.get("amount") is not None and not line.get("unit_unstated")
+                for line in owed)
+    )
+    return {"lines": filled, "complete": complete}
 
 
 def _amount_key(line: dict[str, Any]) -> tuple[Any, Any] | None:
@@ -2641,6 +2761,13 @@ def promote(
     divebooker_trip_facts: dict[str, dict[str, Any]] = {}
     divebooker_page: dict[str, str] = {}
     divebooker_named: dict[str, str] = {}
+    # The priced lines this project's vocabulary declined on each hull. A
+    # decline in the *obligatory* column is a charge the bill is missing rather
+    # than a word the page is missing, so no unit read off another book may
+    # turn such a bill into a total. Under our slug, which is what the
+    # itinerary loop holds, and per hull, which is the granularity
+    # `unnamed_fees` is written at.
+    divebooker_declines: dict[str, list[str]] = {}
     for hull, record in ((divebooker or {}).get("vessels") or {}).items():
         if record.get("fees"):
             divebooker_fee_books[hull] = record["fees"]
@@ -2649,6 +2776,9 @@ def promote(
         ours = divebooker_alias.get(hull)
         if not ours:
             continue
+        if record.get("unnamed_fees"):
+            divebooker_declines.setdefault(ours, []).extend(
+                record["unnamed_fees"])
         if record.get("url"):
             divebooker_page[ours] = record["url"]
         if record.get("name"):
@@ -3230,6 +3360,19 @@ def promote(
         # rank it against, and that is the case this covers -- the 33 Egyptian
         # hulls neither of the other two sellers carries, whose only fee book
         # is the *Price details* panel on their own divebooker page.
+        # And the third seller's own bill, resolved before anything reads it,
+        # because this is where the unit is missing at scale: that book states
+        # a figure and a payer and no period on 319 of its 608 panels, and one
+        # such line silences the whole bill. The lenders are the other two
+        # books for this same trip -- never this one's own lines, which would
+        # be one seller filling its own silence -- and a hull that declined an
+        # obligatory label gets no new verdict at all. See
+        # `_bill_with_units_resolved`.
+        if divebooker_fees is not None:
+            divebooker_fees = _bill_with_units_resolved(
+                divebooker_fees, (own_fees or []) + padi_lines,
+                divebooker_declines.get(slug) or (),
+            )
         divebooker_own = (divebooker_fees or {}).get("lines") or []
         fees_from_padi = not own_fees and bool(padi_lines)
         fees_from_divebooker = (not own_fees and not padi_lines
