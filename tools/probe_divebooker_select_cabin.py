@@ -172,7 +172,16 @@ def main() -> int:
             + (f"  <<{(request.post_data or '')[:400]}>>"
                if request.post_data else "")))
 
-        page.goto(url, timeout=args.timeout * 1000, wait_until="networkidle")
+        # `networkidle` is what a probe wants -- the question is what the page
+        # asks for once its own JavaScript has run -- and it is also what a
+        # page with a poller never reaches. Falling back to `load` keeps the
+        # probe answering something rather than failing on the wait.
+        try:
+            page.goto(url, timeout=args.timeout * 1000, wait_until="networkidle")
+        except Exception as exc:  # noqa: BLE001
+            print(f"   the page never went idle ({exc}); reading it at load")
+            page.goto(url, timeout=args.timeout * 1000, wait_until="load")
+            page.wait_for_timeout(4000)
 
         # 1. The rendered DOM, which is the cheapest answer there could be.
         rendered = anchors(page)
@@ -196,15 +205,29 @@ def main() -> int:
 
         # 2. What a press asks for, where the DOM carries no id.
         pressed = 0
-        for node in page.query_selector_all(",".join(CANDIDATES)):
-            if pressed >= args.clicks:
+        while pressed < args.clicks:
+            # Re-queried each round and taken by **position**, not by text: a
+            # press can navigate, which detaches every other handle, and every
+            # row's control says the same words, so a set of seen labels would
+            # press one row and call it the page.
+            matched = []
+            for candidate in page.query_selector_all(",".join(CANDIDATES)):
+                try:
+                    words = " ".join((candidate.inner_text() or "").split())
+                except Exception:  # noqa: BLE001
+                    continue
+                if PRESSABLE.search(words):
+                    matched.append((candidate, words))
+            if not matched:
+                if not pressed:
+                    print("\n-- nothing on the page reads as *Select cabin*")
                 break
-            try:
-                text = " ".join((node.inner_text() or "").split())
-            except Exception:  # noqa: BLE001
-                continue
-            if not PRESSABLE.search(text):
-                continue
+            if pressed >= len(matched):
+                print(f"\n-- {len(matched)} pressable row(s), all pressed")
+                break
+            node, text = matched[pressed]
+            if not pressed:
+                print(f"\n-- {len(matched)} row(s) read as pressable")
             before = len(asked)
             print(f"\n-- pressing {text[:50]!r}")
             try:
@@ -218,6 +241,19 @@ def main() -> int:
             print(f"   landed on {page.url}")
             pressed += 1
             time.sleep(args.delay)
+            if page.url != url:
+                # The press navigated, which is itself the answer for that row
+                # -- and it leaves every other control on a page that is no
+                # longer there. Back to the hull before the next one, so each
+                # press is asked of the same page.
+                try:
+                    page.goto(url, timeout=args.timeout * 1000,
+                              wait_until="load")
+                    page.wait_for_timeout(3000)
+                except Exception as exc:  # noqa: BLE001
+                    print(f"   could not return to the hull page: {exc}")
+                    break
+                time.sleep(args.delay)
 
         browser.close()
 
