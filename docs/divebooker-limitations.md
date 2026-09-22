@@ -60,6 +60,11 @@ before deciding what the third seller is allowed to say on the page.
    spaces beside a sailing total of 8, and adding them would triple the boat.
    The whole-sailing count is the seller's own figure, the rooms ship with
    their prices, and the at-this-price slot stays empty rather than guessed.
+   **And it reaches 21 of 906 sailings**, because the id is on the capped ten
+   Events a hull publishes and nowhere else: the payload holds no trip id at
+   all, measured with the ids we already had as the probe (run 35734945024).
+   What would widen it is the request the page makes when *Select cabin* is
+   pressed, which nobody has watched.
    This entry used to read *"a fee book"* and *"a dive count, an entry bar, a
    cabin ladder"*, and all three turned out to be about the page nobody had
    opened.

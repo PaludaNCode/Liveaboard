@@ -17,10 +17,13 @@ name: Read divebooker.com cabin ladders
 # So this runs directly after `divebooker.yml`, against the book that run
 # wrote and the ids it recorded.
 #
-# **What it costs.** About 900 sailings at the five-second pace this project
-# gives a host that states no `Crawl-delay`, so roughly 75 minutes. That pace
-# is the part that may not be cut to make the job shorter; the timeout is set
-# around it instead.
+# **What it costs, and how few sailings it reaches.** One request per sailing
+# that states a booking id, and only the **capped ten Events a hull publishes**
+# do — 21 of 906 in-season sailings. So this is a two-minute job, not the
+# 75-minute one the fleet would be. The payload holds no id for the other 885
+# (run 35734945024), so there is nothing here to widen it with; see
+# `docs/sources/divebooker.com.md`. The five-second pace is the part that may
+# not be cut to make it shorter.
 
 on:
   # Twenty minutes after divebooker.yml starts, which is long enough for the
@@ -49,9 +52,9 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    # 900 requests at five seconds is 75 minutes, and a job that dies at 45
-    # writes nothing at all: a capped book is a merge, a killed one is a run
-    # that read for an hour and threw it away.
+    # Room for the fleet's worth if the ids ever arrive, and no more: a job
+    # that dies mid-read writes nothing at all, where one that finishes writes
+    # what it got.
     timeout-minutes: 120
 
     # Resolved once, for `divebooker.yml`'s reason: `inputs` is null on a

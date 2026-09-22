@@ -1769,12 +1769,15 @@ this seller sells.
 
 **And its cabin ladders are a second pass, in `divebooker_cabins.yml`.**
 `tools/fetch_divebooker_cabins.py` opens `/boatorder/booking?tripId=` once per
-sailing — the id is the Event `@id` fragment the crawl now keeps as
-`booking_id`, so no vessel page is re-read — which is ~900 requests and about
-75 minutes at the five-second pace. Its own workflow for `cabins.yml`'s
-reason: two passes over two sets of URLs with two costs, and folding them
-would put 900 requests behind 92. It runs **after** the fleet read, because a
-ladder read a day after the fare it explains disagrees with it.
+sailing that states an id — the Event `@id` fragment, which the crawl now keeps
+as `booking_id`, so no vessel page is re-read. **That is 21 of 906 sailings**,
+because the Events stating one are the capped ten a hull publishes and the
+`TouristTrip` chain carries no id; the payload holds none either, measured with
+the ids we already had as the probe. So the ladder is a real but narrow read
+rather than the fleet's, and widening it needs a request nobody has watched
+yet. Its own workflow for `cabins.yml`'s reason — two passes over two sets of
+URLs — and it runs **after** the fleet read, because a ladder read a day after
+the fare it explains disagrees with it.
 
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`
