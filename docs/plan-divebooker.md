@@ -76,8 +76,12 @@ the first of which is a row header on its own). What the fix is worth, over
 all 92 hulls
 ([run 35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100)):
 **605 of 606 trips carry a plan and 158 name a reef nothing else on that trip
-does.** It reaches the dataset the next time `divebooker.yml` runs, because
-the book is what `promote` reads and the book is what was holding `"$3d"`.
+does.** It reached the dataset on the full run that afternoon
+([35718374554](https://github.com/PaludaNCode/Liveaboard/actions/runs/35718374554)),
+because the book is what `promote` reads and the book is what was holding
+`"$3d"`: **0 of 492 trips still hold a bare reference, 464 now carry this
+seller's reef list, and the itineraries naming no reef at all went 7 → 2** —
+a dolphin research week and a photography safari, which name none anywhere.
 
 Stage 0 now has its measurement, and the whole fleet has been read against it.
 Divebooker states a fare, a currency and both dates on every departure, so it

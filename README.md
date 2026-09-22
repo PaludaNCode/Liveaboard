@@ -166,9 +166,9 @@ Sites come from the operator's own description of the trip, then its region
 list, then the trip title, then — last, and only where all three are silent —
 PADI Travel's account of the same week. Last because it is the least
 structured, not because it is the second source to have been read.
-**455 of 462** itineraries name reefs, and the seven that do not — a charter
-request, three dolphin specials, a photography week, an eclipse tour and one
-mini-safari — stay blank rather than being guessed at (#52, #113). The ordering is the point: a
+**460 of 462** itineraries name reefs, and the two that do not — a dolphin
+research week and a photography safari — stay blank rather than being guessed
+at (#52, #113). The ordering is the point: a
 source is never merged into one above it, because PADI's blurb says Elphinstone
 and Brothers "are quite distant from one another" on a week that visits neither
 together, and unioning that in is how a St John's week once got badged BDE.
