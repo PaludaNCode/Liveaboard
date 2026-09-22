@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-22",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1269 sailings and the entry bar on 241 of 462 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1269 sailings and the entry bar on 242 of 462 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-21",
@@ -86988,11 +86988,13 @@
       "operator_id": "golden-dolphin",
       "boat_id": "golden-dolphin-iv",
       "nights": 7,
-      "dives": 20,
+      "dives": 17,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "elphinstone"
+        "elphinstone",
+        "fury shoals",
+        "abu dabab"
       ],
       "region": null,
       "summary": "The Golden Dolphin IV is a 46mtr/151ft long liveaboard in Egypt taking guests to some of the most iconic dive sites in the Red Sea.",
@@ -87180,13 +87182,14 @@
         }
       ],
       "requirements": {
-        "min_level": "open_water",
+        "min_level": "advanced",
         "min_logged_dives": 30,
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent"
+        "notes": "Advanced Open Water - 30 minimum logged dives required. Sources disagree: liveaboard.com states Advanced Open Water, PADI Travel states Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "divebooker_fees": [
         {
           "amount": null,
@@ -152038,11 +152041,16 @@
       "operator_id": "king-snefro-group",
       "boat_id": "snefro-spirit",
       "nights": 7,
-      "dives": 0,
+      "dives": 20,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
-      "dive_sites": [],
-      "region": "Sinai and Tiran",
+      "dive_sites": [
+        "thistlegorm",
+        "tiran",
+        "ras mohammed",
+        "gubal"
+      ],
+      "region": null,
       "summary": "The Snefro Spirit liveaboard eparts from Sharm el Sheikh for 7-nights exploring the Straits of Tiran. She caters for 18 guests in en-suite 9 cabins.",
       "source_url": "https://www.liveaboard.com/diving/egypt/snefro-spirit?m=8/2027",
       "fees": [
@@ -152216,7 +152224,16 @@
           "amount": null,
           "note": "Nitrox: stated as included"
         }
-      ]
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 15,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "Open Water - 15 minimum logged dives required."
+      },
+      "dives_read": true
     },
     {
       "id": "snefro-target--sinai-classic-sharm-el-sheikh-sharm-el-sheikh",

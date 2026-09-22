@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-18",
+  "collected": "2026-09-22",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -15074,6 +15074,65 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6118&tourID=434807&languageID=1&curr=USD&showPrices=false"
     },
+    "golden-dolphin-iv::South till Dolphin Reef - Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "golden-dolphin-iv",
+      "name": "South till Dolphin Reef - Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "434811",
+      "collected": "2026-09-22",
+      "regions": [
+        "Elphinstone",
+        "Fury Shoal",
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "fury shoals",
+        "abu dabab"
+      ],
+      "dives": 17,
+      "guests": 28,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Itinerary Highlights",
+          "text": "One of the great chances to discover the hidden treasures of the Red Sea! Take the time to explore different dive sites, such as Sataya – Fury Shoal – South, located south of Marsa Alam, and discover dolphins, turtles & much more of this magical world.",
+          "is_day": false
+        },
+        {
+          "heading": "Dive sites:",
+          "text": "Marsa Shuona, the corner and outside north of Shouna, is unique for its sprawling sand plateau. Littered in table corals of all shapes and sizes pick your depth on the gradual slope and see what's hiding beneath each one. Of course, blue spot rays are abundant, but certain times of year bring in breeding guitar rays and other surprises. Sataya (Dolphine reef) is located south of Marsa Alam, in the area of Wadi Gimal, where there is Shaab Sharm. A huge reef with colorful overgrown drop-offs on the north and north-west side, and a gorgonian wall between 17 m and 22 m in the east direction. The plateau on the east side, starting from 18 m to 32 m depth, with its coral block formations, is home to a lot of marine life. Doctor fishes, different kinds of reef fishes, napoleons, and small critters – very often, you see a turtle eating and resting. The plateau remains small along the south side of the main reef. Dolphins, sharks, and mantas patrol along the reef in the blue. Shilineat in Wadi Gimal is the aquarium. Along the beautiful hard coral garden on the west side. Abu Galawa Soraya lies in the western part of the Fury Shoals, about 12 km from Wadi Lahmi on the mainland. The site is not part of the large main reef, but rather a nameless, approximately 100 m wide, remote reef to the west. The site is popular because of its shallow depth, excellent visibility, and weak current; it offers perfect conditions even for beginners. Shaab Marsa Alam is a large semi-circular reef shaped like a bean. It is surrounded by a sandy bottom with isolated rock and reef formations. The north-eastern part is particularly impressive, with a unique and, above all, species-rich coral garden. It is not uncommon to see reef sharks here. If there is a current, and with a bit of luck, you can also see small black-tip sharks or Longimanus. To the south, in the lagoon, there is a small Wreck at around 17 m depth. Abu Dabbab, this dive site features friendly giant Green Sea Turtles that you can swim with up close and personal. In the shallow water, it is not rare to spot the bizarre-looking but completely harmless Guitar Shark. In addition to the big stuff, there are also superb macro subjects such as the ornate Ghost Pipe fish, the rare thorny seahorse, and the delicate Hairy Pygmy Pipe horse! Fury Shoals make up several reefs along the Southwest Red Sea coast, offering amazing scuba diving opportunities with some of the most pristine reefs in Egypt. The hard and soft corals are unspoiled and are a highlight of many dive sites, such as the Fury Shoal Garden. The marine life is also really great with all the usual reef fishes of the Red Sea and various species of reef Sharks (Whitetip, Grey) and even sometimes the curious Oceanic Whitetip Shark. Pelagic fishes such as Barracudas, Giant Trevallies, and Dogtooth Tunas are also common in the area. Shaab Maksur is a small but long reef with a plateau in the north and south, and drop-offs on the west and east sides. At the north terraced plateau, you can often see dolphins, barracudas, or reef sharks passing by. The south plateau, with its bigger coral block, is home to many species. Elphinstone, this long finger-like reef runs from north to south in the open Red Sea. Steep walls drop to the depths on the reef’s east and west sides, while the north and south ends of the reefs are marked by a submerged plateau. Sharks often swim by the spot to feed on the abundant reef fish population.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "Check-in onboard on the arrival day at 6:00 PM. Leaving the marina the next day before noon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2–6",
+          "text": "3–4 dives per day, depending on the routing. The realization of a diving cruise depends on weather, sea conditions, local regulations, and the skill of the divers taking part. A guarantee for visiting certain reefs cannot be given for these reasons.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7",
+          "text": "Last day (a day before departure), maximum two dives, afterward back to the marina.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8",
+          "text": "Check out at the latest on departure day at 10:00 AM. Transfer back to the airport.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Expect encounters with playful dolphins around Dolphin Reef, along with vibrant reef fish, turtles, and occasional reef sharks. At Elphinstone Reef, divers may spot oceanic whitetip sharks, hammerheads, and large schools of pelagic fish cruising along the dramatic walls. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6118&tourID=434811&languageID=1&curr=USD&showPrices=false"
+    },
     "golden-dolphin::Brother Islands (Hurghada - Hurghada)": {
       "boat": "golden-dolphin",
       "name": "Brother Islands (Hurghada - Hurghada)",
@@ -26133,6 +26192,63 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5439&tourID=422898&languageID=1&curr=USD&showPrices=false"
+    },
+    "snefro-spirit::Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "snefro-spirit",
+      "name": "Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)",
+      "tour_id": "441803",
+      "collected": "2026-09-22",
+      "regions": [
+        "Ras Mohammed",
+        "Thistlegorm",
+        "Straits Of Tiran",
+        "Jackson Reef",
+        "Woodhouse Reef",
+        "Gordon Reef"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "thistlegorm",
+        "tiran"
+      ],
+      "dives": 20,
+      "guests": 18,
+      "experience": "Open Water - 15 minimum logged dives required.",
+      "min_logged_dives": 15,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Important Information:",
+          "text": "One needs to be an Open Water certified diver or equivalent with at least 15 logged dives. An Advanced Open Water diver or equivalent is recommended for some of the more experienced dive sites visited on this safari. You must have dived in the last year and recorded this in your logbook to join this safari; if needed, Scuba Review is available onboard. Open Water Divers can join night dives if they have previously logged night dives. This trip is suitable for snorkelers to join and snorkel at the allowed sites. Guests who have not been diving for more than 1 year before check-in to the liveaboard must complete a refresher program and have this signed in their logbook (adhere to the recommendations made by the certifying training agency). Guests can also sign up for an online reactivation program. The water part will be on board. Participation in diving activities can be restricted if the guide has any doubts about any diver’s safety and/or qualifications. The responsible dive guide on board may restrict diving activities in the interest of safety if the experience level or fitness is not suitable for difficult dives.",
+          "is_day": false
+        },
+        {
+          "heading": "Sample Itinerary",
+          "text": "We do not announce a day-by-day plan but set up the best plan to cover all sites in the area, avoiding crowded sites and taking weather conditions and regulations into consideration.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "In the evening, starting from 18:00 H (6 PM) onwards, transfer to New Marina (El Wataneya) port and embark. Welcome aboard, cabin arrangement, and boat briefing. Permission to work with the port authority, sailing very early next morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 - 7",
+          "text": "The boat will sail to nearby Temple or Ras Katy for a check dive. The week-long safari will cover the area from the Strait of Tiran, Ras Mohamed National Park, and the Gulf of Suez, which is usually visited first. The National Park begins at the small bay of Marsa Ghazlani, followed by the larger and deeper bay of Marsa Bareika. Continuing along the coast to Ras Za’atar, Jackfish Alley, Eel Garden, and Shark Observatory, to the southern end of the peninsula with Anemone City, Shark Reef, and Yolanda Reef, and ending at the Quay. Because of the geographic position, this is a privileged area distinguished by strong, massive currents that transport large quantities of plankton and other food that give rise to an extraordinary growth of stony and soft corals and attract large schools of both reef and pelagic marine fauna, over a thousand species in all. Schooling barracuda, jackfish, tuna, and many kinds of sharks swim in these deep blue waters, especially in summer from June to August, sometimes early September. The safari will also take you to famous sites like the wrecks of Dunraven and Thistlegorm, Shag Rock, and the wreck of Kingston, sail to Shaab Ali where pods of dolphins are common, explore several spots at the Sha’ab Mahmoud reef system such as the Small Passage. Don’t miss the four famous reefs in the Strait of Tiran: Jackson, Thomas, Woodhouse, and Gordon Reef, probably the most interesting and richest in marine life. You can choose from several dive sites with superb walls and drift diving. In the afternoon of the 7th day, the boat will return to the Sharm area.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 evening / Day 8 early morning",
+          "text": "The last night will be spent at or close to the port onboard the liveaboard. Depending on the itinerary and/or administrative conditions, on week-long safaris, the last night might be arranged in a hotel. This is usually communicated in advance. Depending on your check-out and flight time, return to the New Marina (El Wataneya) port and disembark. Transfer to the airport or hotel, disembark at 12:00 H (noontime) latest.",
+          "is_day": true
+        },
+        {
+          "heading": "Highlights",
+          "text": "The all-time favorite is covering the world's top ten dive top spots such as Jackson Reef, Shark Reef, the World War II wreck of the Thistlegorm, and the Dunraven and you have a chance to swim or dive with wild dolphins. A hidden island is waiting too. You will Dive - Eat - Sleep - Repeat for one week with 20+ dives. Magnificent drift, reef, wreck and wall diving, caves, plateaus, and the big blue. Dive into an underwater world that is unique in both variety and the sheer number of species. LOCAL FEES (National Park, Environmental Tax & Departure): 90 € per person per trip. A full visa is required. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5440&tourID=441803&languageID=1&curr=USD&showPrices=false"
     },
     "snefro-target::Sinai Classic (Sharm El Sheikh - Sharm El Sheikh)": {
       "boat": "snefro-target",
