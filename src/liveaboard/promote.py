@@ -3891,6 +3891,37 @@ SITE_HINTS = (
     # than `samadai` at one trip: what makes a hint is that an operator sells a
     # dive there and no hint already contains it.
     "siyoul kebir",
+    # ---- Named by the third seller's per-trip reef list, and by the first
+    # seller's prose beside it ----
+    #
+    # `divesites` came back readable on 2026-09-22 and states 47 reef names
+    # this table did not place, over 353 mentions -- and they are not this
+    # seller's alone: *Blue Hole* is in 46 of liveaboard.com's own trip
+    # descriptions, *Carless Reef* in 17, *Wadi Gimal* in 26. They were read
+    # by nothing on either side.
+    #
+    # **A fold is a claim; a name is not.** The four Ras Mohammed park dives
+    # below fold, because that park's dives already do (Shark Reef, Yolanda,
+    # Beacon Rock) and the documents agree -- 9 of the 16 naming *Anemone
+    # City* name Ras Mohammed too. Everything here gets a chip of its own
+    # instead, because the fold could not be measured: an itinerary names
+    # every place it visits, so the 20 documents naming *Blue Hole* name
+    # Tiran on 12, Gubal on 8 and Dahab on 8. Dahab is the right answer and
+    # the data cannot say so, which is the Dolphin House rule one reef along
+    # -- and a chip reading *Blue Hole* costs the reader nothing, where a
+    # chip reading *Dahab* on a week that never went there is the site lying
+    # quietly.
+    #
+    # Spelled as the fleet spells them, plurality first, with the other
+    # spellings folded below: *Carless Reef* is 38 mentions against 2 for the
+    # reef's usual spelling, and inventing the tidy one would print a chip
+    # nobody wrote.
+    "abu basala", "abu hashish", "abu kafan", "blue hole", "carina",
+    "carless reef", "el fanadir", "el mina", "gabr el bint", "gota soraya",
+    "great canyon", "habili ohrob", "laguna reef", "marsa mubarak",
+    "paradise reef", "poseidon reef", "ras abu galum", "ras katy",
+    "shaab marsa alam", "shaab radir", "shaab sharm", "shaab umm usk",
+    "small crack", "tobia kebir", "torombi", "umm hararim", "wadi gimal",
 )
 """Dive-site names operators actually write, in a title or in their own prose.
 
@@ -4048,6 +4079,44 @@ SITE_ALIASES: dict[str, str] = {
     "giannis": "abu nuhas",
     "chrisoula": "abu nuhas",
     "kimon": "abu nuhas",
+    # ---- The third seller's spellings, and the dives it names inside a
+    # place already here ----
+    #
+    # Ras Mohammed's park again, four dives further in. Same warrant as
+    # Shark Reef and the Alternatives above: the park is how these are asked
+    # for, and the documents naming them name it too -- 9 of 16 for Anemone
+    # City, 9 of 12 for Shark Observatory, 9 of 11 for Jackfish Alley, 6 of 9
+    # for Ras Ghozlani.
+    "anemone city": "ras mohammed",
+    "shark observatory": "ras mohammed",
+    "jackfish alley": "ras mohammed",
+    "ras ghozlani": "ras mohammed",
+    # The island south of Giftun, whose Gota is the chip: the seller dives its
+    # north point, its erg and its cave and names each separately, and all
+    # three carry the island's name. One alias covers them because the match
+    # is on the words inside the name.
+    "abu ramada": "gota abu ramada",
+    # Spellings, each folded onto the spelling `SITE_HINTS` already carries --
+    # which is what picks the canonical here, not a count of the parsed sites.
+    "satayah": "sataya",
+    "siyul kebira": "siyoul kebir",
+    "marsa shoona": "marsa shouna",
+    "gota kebira": "gota kebir",
+    "shaab shear": "shaab sheer",
+    "shoab el sharm": "shaab sharm",
+    # The reef's usual spelling, folded onto the fleet's: 38 mentions of
+    # *Carless* against 2 of *Careless*.
+    "careless reef": "carless reef",
+    # Bare, because `panorama reef` is the chip and a hint matching the word
+    # alone would mint a second one for the same reef.
+    "panorama": "panorama reef",
+    # Three more members of families this table already folds: a third
+    # spelling of Abu Fandira and of El Malahi, both Fury Shoals; a second of
+    # Habili Gafaar, in St John's; and Shaab Claudio once more.
+    "abu fandera": "fury shoals",
+    "malahy": "fury shoals",
+    "shaab claude": "fury shoals",
+    "habili gaffar": "st johns",
 }
 # "Dolphin House" is deliberately absent. It is two reefs 400 km apart --
 # Sha'ab el Erg off Hurghada and Sha'ab Samadai off Marsa Alam -- and both are

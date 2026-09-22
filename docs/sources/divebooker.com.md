@@ -780,12 +780,31 @@ nowhere.** Over the same 92 hulls, 2,889 stated reefs are names this project
 already places and **406 are not, in 48 spellings** — led by *Panorama* (52,
 against our *panorama reef*), *Satayah* (34, against *sataya*), *Shaab Marsa
 Alam* (25), *Shaab Sharm* (23) and *Siyul Kebira* (20, where this seller's own
-day plan writes *Siyoul Kebir*). Two different questions sit in that list and
-it is deliberately **not acted on here**: a fold of a spelling for a reef the
-fleet already carries is one thing, and *Blue Hole*, *Abu Kafan* or *Anemone
-City* are reefs the site filter does not offer at all — minting chips for them
-is a decision about the page, not a parser fix. `CLAUDE.md` says not to
-lengthen that table without counting first; this is the count.
+day plan writes *Siyoul Kebir*). Two different questions sit in that list, and the
+owner took the second: **all 47 are placed now.**
+
+A spelling of a reef this project carries folds onto it (*Satayah*, *Siyul
+Kebira*, *Panorama*, *Marsa Shoona*, *Gota Kebira*, *Shaab Shear*), as do
+three more members of families already folded — a third spelling of Abu
+Fandira and of El Malahi into Fury Shoals, a second of Habili Gafaar into St
+John's — and the four Ras Mohammed park dives this seller names that the table
+did not: *Anemone City*, *Shark Observatory*, *Jackfish Alley*, *Ras Ghozlani*.
+Abu Ramada's north point, erg and cave fold onto the island's own chip.
+
+**Everything else became a chip of its own, and that is the measurement.** The
+obvious fold — *Blue Hole* is Dahab's — cannot be made from these documents,
+because an itinerary names every place it visits: of the 20 naming Blue Hole,
+**12 name Tiran, 8 Gubal and 8 Dahab**. That is the Dolphin House rule one reef
+along, so a name whose place this project cannot measure is printed as the name
+and nothing more. The chips are spelled the way the fleet spells them, plurality
+first: *Carless Reef* is 38 mentions against 2 for the reef's usual spelling,
+and inventing the tidy one would print a chip nobody wrote.
+
+What it bought, over the committed dataset: **19 new chips on the page and 102
+itineraries whose reef list grew**, 1,910 reef mentions to 2,052. Not only this
+seller's doing — the same names are in liveaboard.com's own prose, where
+nothing placed them either (*Blue Hole* on 46 trips, *Wadi Gimal* on 26,
+*Carless Reef* on 17).
 
 ## What is ruled out
 
