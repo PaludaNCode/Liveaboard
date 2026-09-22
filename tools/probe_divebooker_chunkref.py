@@ -46,7 +46,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--book", default=Path("data/divebooker.json"), type=Path)
     parser.add_argument("--vessels", default="aml-hayaty")
-    parser.add_argument("--refs", type=int, default=4, help="references to open")
+    parser.add_argument("--refs", type=int, default=16, help="references to open")
+    parser.add_argument("--chars", type=int, default=400, help="bytes to print")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     args = parser.parse_args()
@@ -85,11 +86,11 @@ def main() -> int:
         # Where the payload declares them. Printed raw, because the delimiter
         # and any length prefix are the whole question and a parser written
         # against a guess is what put us here.
-        for ref, _ in refs.most_common(args.refs):
+        for ref, _ in sorted(refs.items(), key=lambda kv: int(kv[0], 16))[:args.refs]:
             print(f"\n-- ${ref} declared? --")
             for m in re.finditer(rf'(?<![0-9a-zA-Z]){re.escape(ref)}:', joined):
                 at = m.start()
-                print(f"     at {at}: {joined[max(0, at - 24):at + 150]!r}")
+                print(f"     at {at}: {joined[max(0, at - 24):at + args.chars]!r}")
                 break
             else:
                 print("     no declaration found in the joined payload")
