@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,specials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,specials,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -480,6 +480,21 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_specials.py \
             --vessels "${{ inputs.divebooker_vessel || 'alsuraya,amelie' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # `/specials` turned out to be a from-price and a campaign line, with no
+      # figure it is down from and no date anywhere on it. What it did turn up
+      # is a payload key nobody had asked about -- `boatSpecials` -- on the
+      # vessel page this project already fetches every morning. This opens it.
+      - name: What boatSpecials holds
+        if: contains(inputs.divebooker_ask, 'boatspecials')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_boat_specials.py \
+            --vessels "${{ inputs.divebooker_vessels || '6' }}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"
