@@ -733,11 +733,12 @@
   function sellerRead(seller) {
     if (seller === 0) return D.meta.berths_read;
     if (seller === 1) return D.meta.padi_berths_read;
-    /* And nothing for a third. `berths_read` is the cabin crawl's day, and a
+    if (seller === 2) return D.meta.divebooker_berths_read || null;
+    /* And nothing for a fourth. `berths_read` is the cabin crawl's day, and a
        fallback that hands it to whichever seller asks would date the newest
        seller's claim with the oldest seller's crawl -- which is the failure
-       `padi_berths_read` was split out to prevent, one seller later.
-       divebooker's own day travels on the block that carries its rows. */
+       `padi_berths_read` was split out to prevent, and the reason the third
+       arrived with a date of its own rather than borrowing one. */
     return null;
   }
   function readOn(block) { return sellerRead(block[BLOCK_SELLER]); }

@@ -997,18 +997,23 @@ def _berth_blocks(
     sailing: dict[str, Any] | None,
     names: dict[str, int],
     fx_table: Any,
+    ladder: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """What each seller says is left on this sailing, and at what price.
 
-    A **list**, one block per seller, and both sellers fill one now ([#92]).
-    They are answering two different questions and the block has a slot for
-    each, because merging them would be a number neither of them published:
+    A **list**, one block per seller, and all three fill one ([#92]). They are
+    answering two different questions and the block has a slot for each,
+    because merging them would be a number none of them published:
 
     * **at the advertised price** -- summed across every room selling at it.
-      Only a ladder can say this, so only liveaboard.com does.
-    * **on the sailing** -- every berth still for sale at any price. Both say
-      it: liveaboard.com by adding its ladder up, PADI Travel as the single
-      figure it publishes instead of a ladder.
+      Only a ladder whose rooms do not overlap can say this, so only
+      liveaboard.com does: divebooker's three options on one Argo Egypt
+      sailing each state the same 8 berths.
+    * **on the sailing** -- every berth still for sale at any price. All three
+      say it: liveaboard.com by adding its ladder up, PADI Travel as the
+      single figure it publishes instead of a ladder, and divebooker.com as
+      `sumFreeSpaces`, which it states for the sailing beside rooms it does
+      not intend to be added.
 
     Which of the two PADI states was measured rather than assumed, and the
     answer is the second. Across the 584 sailings where both speak, PADI's
@@ -1026,6 +1031,10 @@ def _berth_blocks(
     A seller that states a count but no ladder simply has no ``cabins``. That
     is not a gap to fill with one invented rung: "24 places" and "24 places at
     £1,748" are different claims, and only the second is a ladder.
+
+    ``record`` is liveaboard.com's booking page, ``sailing`` PADI's row and
+    ``ladder`` divebooker's booking page. Each may be absent on its own, and
+    absent means nobody read it rather than nothing is left.
     """
     blocks: list[list[Any]] = []
 
@@ -1041,32 +1050,18 @@ def _berth_blocks(
         else None
     )
 
+    # The third seller's, built from its own booking page and appended after
+    # both. It answers the *second* question only, and by its own arithmetic:
+    # see `_divebooker_block`.
+    third = _divebooker_block(ladder, names, fx_table)
+    tail = [b for b in (padi_block, third) if b]
+
     if not record or not record.get("cabins"):
-        return [padi_block] if padi_block else []
+        return tail
 
-    rungs: list[list[Any]] = []
-    for cabin in record["cabins"]:
-        price = cabin.get("price")
-        if price is None:
-            # A cabin with no price is a rung with no height. It is dropped
-            # rather than drawn at zero, which would read as free.
-            continue
-        name = cabin.get("name") or "Cabin"
-        if name not in names:
-            names[name] = len(names)
-        # Normalisation happens in Python only: the browser sums lines that are
-        # switched on and converts nothing, so the ladder arrives in the
-        # display currency like every other figure on the page.
-        display = _to_display(price, record.get("currency") or "USD", fx_table)
-        rungs.append([
-            names[name],
-            display,
-            0 if cabin.get("sold_out") else cabin.get("berths"),
-            cabin.get("single_supplement_pct"),
-        ])
-
+    rungs = _rungs(record, names, fx_table)
     if not rungs:
-        return [padi_block] if padi_block else []
+        return tail
 
     cheapest = min(rung[1] for rung in rungs)
     at_cheapest = [rung for rung in rungs if rung[1] == cheapest]
@@ -1095,9 +1090,70 @@ def _berth_blocks(
     # is written once per departure, so a repeated "liveaboard.com" string is
     # 22 KB of one word. [seller, spots at the advertised price, cabins,
     # berths left on the sailing].
-    return [[SELLERS.index("liveaboard.com"), spots, rungs, aboard]] + (
-        [padi_block] if padi_block else []
-    )
+    return [[SELLERS.index("liveaboard.com"), spots, rungs, aboard]] + tail
+
+
+def _rungs(
+    record: dict[str, Any], names: dict[str, int], fx_table: Any
+) -> list[list[Any]]:
+    """One seller's rooms as ladder rungs, in the display currency.
+
+    Shared by the two sellers that publish a room list, because a second
+    converter is a second rounding: normalisation happens in Python only, so
+    the ladder arrives in the display currency like every other figure on the
+    page and the browser adds nothing to it.
+    """
+    rungs: list[list[Any]] = []
+    for cabin in record.get("cabins") or []:
+        price = cabin.get("price")
+        if price is None:
+            # A cabin with no price is a rung with no height. It is dropped
+            # rather than drawn at zero, which would read as free.
+            continue
+        name = cabin.get("name") or "Cabin"
+        if name not in names:
+            names[name] = len(names)
+        rungs.append([
+            names[name],
+            _to_display(price, record.get("currency") or "USD", fx_table),
+            0 if cabin.get("sold_out") else cabin.get("berths"),
+            cabin.get("single_supplement_pct"),
+        ])
+    return rungs
+
+
+def _divebooker_block(
+    ladder: dict[str, Any] | None, names: dict[str, int], fx_table: Any
+) -> list[Any] | None:
+    """The third seller's rooms, and the one count it may be asked for.
+
+    **Its per-room counts overlap, so nothing here sums them.** Three options
+    on Argo Egypt each state 8 free spaces beside a sailing total of 8: they
+    are one set of berths offered shared or private, and adding them triples
+    the boat. So the *at the advertised price* slot stays empty -- the rule
+    liveaboard.com's ladder answers it by (sum every room selling at the
+    cheapest price) is arithmetic this seller's rooms do not support -- and
+    the whole-sailing slot takes `sumFreeSpaces`, which the seller states for
+    the sailing itself.
+
+    That leaves this block shaped like PADI's on the counts and like
+    liveaboard.com's on the prices, which is exactly what the source
+    publishes: a room list with prices, and one number for the boat. The rungs
+    keep each room's own claim, unsummed, because the page takes a minimum
+    over them and never a total.
+    """
+    if not ladder:
+        return None
+    rungs = _rungs(ladder, names, fx_table)
+    aboard = ladder.get("free_spaces")
+    if not rungs and not isinstance(aboard, int):
+        return None
+    return [
+        SELLERS.index("divebooker.com"),
+        None,
+        rungs or None,
+        aboard if isinstance(aboard, int) and aboard >= 0 else None,
+    ]
 
 
 def _list_prices(
@@ -1620,7 +1676,9 @@ this sailing's, since the rungs across this fleet run from €500 to €2,900.
 
 
 def _drop_stale_ladder(
-    blocks: list[list[Any]], advertised: int | None
+    blocks: list[list[Any]],
+    advertised: int | None,
+    own: Mapping[int, int | None] | None = None,
 ) -> tuple[list[list[Any]], dict[int, int]]:
     """Refuse a ladder that contradicts the price it is supposed to explain.
 
@@ -1645,15 +1703,22 @@ def _drop_stale_ladder(
     €2,371 on all 36 rows. Naming who was dropped is what lets
     ``_list_prices`` ignore them and the panel say how many it could not read.
     """
-    if not advertised:
-        return blocks, {}
     kept: list[list[Any]] = []
     dropped: dict[int, int] = {}
     for block in blocks:
         rungs = block[2] if len(block) > 2 else None
-        if rungs:
+        # **Against its own seller's fare, where that seller states one.** The
+        # row prints one price and the sellers do not always agree about the
+        # berth -- 52 of 777 joined sailings differ, twelve of them Unity's
+        # whole season at a steady 1.43x -- so measuring a third seller's
+        # ladder against the first seller's fare would drop the ladders that
+        # are right about the disagreement this page exists to show. Falls
+        # back to the row's own figure, which is what the ladder explains
+        # wherever the seller quoted nothing of its own.
+        against = (own or {}).get(block[0]) or advertised
+        if rungs and against:
             cheapest = min(rung[1] for rung in rungs)
-            if abs(cheapest - advertised) / advertised > STALE_LADDER:
+            if abs(cheapest - against) / against > STALE_LADDER:
                 dropped[block[0]] = cheapest
                 continue
         kept.append(block)
@@ -2445,6 +2510,7 @@ def promote(
     sales: dict[str, Any] | None = None,
     divebooker: dict[str, Any] | None = None,
     divebooker_aliases: dict[str, Any] | None = None,
+    divebooker_cabins: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a dataset payload from a scrape candidate.
 
@@ -2606,6 +2672,19 @@ def promote(
     for record in ((cabins or {}).get("departures") or {}).values():
         if record.get("boat") and record.get("start"):
             cabin_book[berth_key(record["boat"], record["start"])] = record
+
+    # The third seller's ladders, read off its own booking pages by
+    # `fetch_divebooker_cabins.py` and keyed the same way, because a sailing is
+    # a vessel and a day on every seller here. Its own reading date, for the
+    # reason `padi_read` has one: a count is a claim, and the day it was made
+    # is most of what makes it one.
+    divebooker_ladders: dict[str, dict[str, Any]] = {}
+    divebooker_berths_read = (divebooker_cabins or {}).get("collected") or ""
+    for key, record in ((divebooker_cabins or {}).get("sailings") or {}).items():
+        boat, _, start = key.partition("::")
+        if record.get("boat") or boat:
+            divebooker_ladders[berth_key(record.get("boat") or boat,
+                                         record.get("start") or start)] = record
 
     # Cabin names pooled across the whole dataset rather than repeated per
     # sailing: 2,982 cabins share 157 names, and a boat's rooms are called the
@@ -3458,7 +3537,9 @@ def promote(
             # unread one.
             ladder = cabin_book.get(berth_key(slug, item["start"]))
             berths = _berth_blocks(
-                ladder, sailing_book.get(f"{slug}::{item['start']}"), cabin_names, fx_table
+                ladder, sailing_book.get(f"{slug}::{item['start']}"), cabin_names,
+                fx_table,
+                ladder=divebooker_ladders.get(berth_key(slug, item["start"])),
             )
             # A ladder whose bottom rung is nowhere near the price above it is
             # not this sailing's any more. Dropped and named rather than
@@ -3466,7 +3547,15 @@ def promote(
             advertised = _to_display(
                 float(item["price"]["amount"]), item["price"]["currency"], fx_table
             )
-            berths, outdated = _drop_stale_ladder(berths, advertised)
+            # And the third seller's ladder answers to the third seller's own
+            # fare, where it states one: the two disagree about a berth often
+            # enough that the row's figure is the wrong thing to hold it to.
+            own_fare = {}
+            if third and third.get("price") and third.get("currency"):
+                own_fare[SELLERS.index("divebooker.com")] = _to_display(
+                    float(third["price"]), third["currency"], fx_table
+                )
+            berths, outdated = _drop_stale_ladder(berths, advertised, own_fare)
             for seller, rung in sorted(outdated.items()):
                 # Which side is behind, said in the line. The drop is
                 # symmetric -- a ladder that disagrees with its row is not
@@ -3614,6 +3703,11 @@ def promote(
         # panel wrong, on the figure whose whole caveat is when it was true.
         if padi_read:
             payload["padi_berths_read"] = padi_read
+        # And the third's, for the third time the same reason: three crawls on
+        # three days, and one date over all of them dates two thirds of the
+        # panel wrong.
+        if divebooker_berths_read:
+            payload["divebooker_berths_read"] = divebooker_berths_read
         payload["berths_note"] = (
             "departures[].berths is one block per seller: "
             "[seller index into sellers, places left at the advertised price, "

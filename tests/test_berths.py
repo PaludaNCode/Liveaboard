@@ -505,3 +505,110 @@ class TestAStaleLadderCannotSpeak(unittest.TestCase):
         # which is how this one would come back.
         self.assertGreater(checked, 100, "almost no row states a list price")
 
+
+
+def ladder(*rooms: dict[str, object], free: int | None = 8,
+           currency: str = "EUR") -> dict[str, object]:
+    """One divebooker booking page, in the shape its fetcher writes."""
+    return {"boat": "test-boat", "start": "2027-05-01", "currency": currency,
+            "free_spaces": free, "cabins": list(rooms)}
+
+
+def room(name: str, price: float, berths: int | None) -> dict[str, object]:
+    return {"name": name, "price": price, "berths": berths}
+
+
+class TestTheThirdSellersLadderAnswersOneOfTheTwoQuestions(unittest.TestCase):
+    """Its rooms overlap, so nothing may be added up across them.
+
+    Three options on one Argo Egypt sailing each state 8 free spaces beside a
+    sailing total of 8 — the same berths offered shared or private. So this
+    seller states the whole-sailing count and cannot state the count at the
+    advertised price, which is the shape PADI already has for a different
+    reason, over a ladder liveaboard.com's shape already has.
+    """
+
+    def block(self, book, **kw):
+        blocks = _berth_blocks(None, None, {}, None, ladder=book, **kw)
+        return next(b for b in blocks if b[0] == SELLERS.index("divebooker.com"))
+
+    def test_the_sailing_total_is_the_sellers_own_figure(self):
+        block = self.block(ladder(room("Twin", 1272, 8), room("Suite", 1272, 8),
+                                  room("Private", 1272, 8), free=8))
+        self.assertEqual(block[3], 8, "the rooms were added up")
+
+    def test_the_count_at_the_advertised_price_is_left_unstated(self):
+        """Empty rather than 24, and empty rather than 8.
+
+        Not 24 because the rooms overlap, and not 8 either: that is the boat,
+        and this slot is the rooms selling at the price on the row. A seller
+        that cannot answer a question says nothing, which is the rule the fee
+        book keeps one field over.
+        """
+        self.assertIsNone(self.block(ladder(room("Twin", 1272, 8), free=8))[1])
+
+    def test_the_rooms_and_their_prices_still_ship(self):
+        block = self.block(ladder(room("Twin", 1200, 8), room("Suite", 1500, 2)))
+        self.assertEqual([rung[1] for rung in block[2]], [1200, 1500])
+        self.assertEqual([rung[2] for rung in block[2]], [8, 2])
+
+    def test_a_sailing_nobody_read_has_no_block(self):
+        """Absent is nobody looked, never nothing left — the oldest rule here."""
+        self.assertEqual(_berth_blocks(None, None, {}, None, ladder=None), [])
+
+    def test_the_three_sellers_keep_their_own_blocks(self):
+        blocks = _berth_blocks(
+            record(cabin("Twin", 1200, 4)), {"availability": 11}, {}, None,
+            ladder=ladder(room("Twin", 1200, 8), free=8),
+        )
+        self.assertEqual([b[0] for b in blocks],
+                         [SELLERS.index("liveaboard.com"),
+                          SELLERS.index("padi.com"),
+                          SELLERS.index("divebooker.com")])
+        self.assertEqual([b[3] for b in blocks], [4, 11, 8])
+
+
+class TestALadderAnswersToItsOwnSellersFare(unittest.TestCase):
+    """The stale rule, once there is more than one fare to be stale against.
+
+    The sellers do not always agree about a berth — 52 of 777 joined sailings
+    differ, twelve of them Unity's whole season at a steady 1.43x — so holding
+    a third seller's ladder to the first seller's fare would drop the ladders
+    that are right about the disagreement this page exists to publish.
+    """
+
+    def blocks(self):
+        return _berth_blocks(
+            record(cabin("Twin", 1000, 4)), None, {}, None,
+            ladder=ladder(room("Twin", 1430, 8)),
+        )
+
+    def test_its_own_fare_is_what_it_is_measured_against(self):
+        kept, dropped = _drop_stale_ladder(
+            self.blocks(), 1000, {SELLERS.index("divebooker.com"): 1430})
+        self.assertEqual(dropped, {})
+        self.assertEqual(len(kept), 2)
+
+    def test_the_rows_figure_would_have_dropped_it(self):
+        """Which is the measurement, not a hypothetical: without the per-seller
+        reference this ladder is 43% from the row and goes."""
+        _, dropped = _drop_stale_ladder(self.blocks(), 1000)
+        self.assertEqual(dropped, {SELLERS.index("divebooker.com"): 1430})
+
+    def test_a_ladder_that_contradicts_its_own_seller_still_goes(self):
+        _, dropped = _drop_stale_ladder(
+            self.blocks(), 1000,
+            {SELLERS.index("divebooker.com"): int(1430 * (1 + STALE_LADDER) + 50)})
+        self.assertIn(SELLERS.index("divebooker.com"), dropped)
+
+    def test_a_seller_with_no_fare_of_its_own_falls_back_to_the_row(self):
+        """Which is what the ladder explains wherever that seller quoted
+        nothing — on a row this seller alone lists, the row's price is already
+        its own."""
+        only_third = _berth_blocks(None, None, {}, None,
+                                   ladder=ladder(room("Twin", 1430, 8)))
+        kept, dropped = _drop_stale_ladder(only_third, 1430, {})
+        self.assertEqual(dropped, {})
+        self.assertEqual(len(kept), 1)
+        _, far = _drop_stale_ladder(only_third, 1000, {})
+        self.assertEqual(far, {SELLERS.index("divebooker.com"): 1430})

@@ -92,6 +92,10 @@ PUBLISHED = (
     # `divebooker_aliases.json` is not here, for the reason `padi_aliases.json`
     # is not: no crawl touches it.
     "divebooker.json",
+    # And its cabin ladders, which are a second pass over a second set of
+    # URLs -- `divebooker_cabins.yml`, the way `cabins.yml` sits beside the
+    # refresh.
+    "divebooker_cabins.json",
     "barren.json",
     "CHANGES.md",
     # The structured reports the history view renders. Written by the same
