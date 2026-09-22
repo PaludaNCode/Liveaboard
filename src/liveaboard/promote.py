@@ -3060,12 +3060,12 @@ def promote(
                  # Behind that seller's own structured list, because a plan is
                  # prose and a list is a list, and through `_sites_from_name`
                  # like everything else: what the vocabulary cannot already
-                 # place stays unplaced. Three of the five reefs in that plan
-                 # do — *Dolphin House* names two different reefs this dataset
-                 # carries separately, 600 km apart; *Giftun* is not *Small
-                 # Giftun*; *Siyoul Kebir* appears nowhere in the fleet — and
-                 # adding any of them from one boat's itinerary is the
-                 # BDE-badging mistake with a new name.
+                 # place stays unplaced. Four of the five reefs in that plan
+                 # do. *Dolphin House* is the one that does not, and it is
+                 # refused rather than missing: it names two different reefs
+                 # this dataset carries separately, 600 km apart, so placing
+                 # it from one boat's itinerary is the BDE-badging mistake
+                 # with a new name.
                  or _sites_from_name(divebooker_trip.get("programme") or ""))
 
         # The title's port pair beats the Event location, which is the country.

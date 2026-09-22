@@ -4,8 +4,9 @@
 
 Red Sea liveaboards advertise a berth price. That price is not the bill. Park
 fees, port dues, fuel, visa, nitrox, gear and the expected crew tip arrive
-afterwards and routinely add **30–60%**. This mines trip data from padi.com and
-liveaboard.com and reprices it the way you actually pay.
+afterwards and routinely add **30–60%**. This mines trip data from
+liveaboard.com, padi.com and divebooker.com and reprices it the way you
+actually pay.
 
 ```
 Brothers, Daedalus & Elphinstone · 1–8 May 2027
@@ -28,18 +29,24 @@ Locally: `build`, then open `site/index.html`.
 
 ## Status
 
-Live on real data: **1,122 departures, 402 itineraries, 77 boats, 47
+Live on real data: **1,269 departures, 462 itineraries, 83 boats, 47
 operators**, every price `scraped`.
 
-**Both sources are in use.** This said "padi.com is not wired up" until
-2026-08-30, by which point PADI Travel was supplying a berth price on 654
-sailings — 53 of which it is the only seller of — a berth count on 833, the
-entry bar and stated dive count on 441 trips, and the only fee book the 22
-vessels liveaboard.com sells no berths on have. Neither seller is ever allowed
-to speak for the other: a row states a discount only from the seller whose fare
-it prints, a row PADI alone lists carries no second price at all, and each
-markdown is dated to the day *that* seller's book was read — two crawls, two
-days, and one date over both dated half of them wrong.
+**Three sellers are in use, and none of them is the house.** This said
+"padi.com is not wired up" until 2026-08-30, by which point PADI Travel was
+supplying a berth price on 654 sailings — 53 of which it is the only seller of
+— a berth count on 833, the entry bar and stated dive count on 441 trips, and
+the only fee book the 22 vessels liveaboard.com sells no berths on have.
+divebooker.com was read third, in September, and states a fare on **every one
+of the 887 sailings** it lists in this season: 788 land on a row one of the
+other two founded, keyed on `(boat, date)`, and 69 are rows it founded itself
+on a date or a hull neither of the others carries. Reading order is a fact
+about this project rather than about any seller, so no seller is ever the
+default and none may speak for another: a row states a discount only from the
+seller whose fare it prints, a row one seller alone lists carries no second
+price at all, and each markdown is dated to the day *that* seller's book was
+read — three crawls on three days, and one date over all of them dated most of
+them wrong.
 
 **Nor is a seller allowed to speak about a reading this pipeline threw away.**
 A cabin ladder more than 3% from the price above it is not that sailing's, and
@@ -49,14 +56,18 @@ exactly €2,371. The rejected reading is now ignored everywhere, and the panel
 says how many sailings it could not read rather than reporting them as full
 price.
 
-Prices and availability come from a nightly crawl, and PADI's from a second one
-half an hour later (`padi.yml`). Fees, rental-gear prices and the vessel
-specification table need a browser — the site renders them client-side — so
-they come from a weekly Playwright run and are keyed by vessel, because they do
-not change with the month.
+Prices and availability come from a nightly crawl, PADI's from a second one
+half an hour later (`padi.yml`) and divebooker's from a third (`divebooker.yml`)
+— one source per workflow, so proving a two-request change against one seller
+never costs a sweep of the other two. Fees, rental-gear prices and the vessel
+specification table need a browser on liveaboard.com — the site renders them
+client-side — so they come from a weekly Playwright run and are keyed by
+vessel, because they do not change with the month.
 
-Both sources are reachable locally since the allowlist landed (#1), and from
-GitHub's runners. Either way, anything about what a source actually returns is
+liveaboard.com and padi.com are reachable locally since the allowlist landed
+(#1); divebooker.com is not, so everything this repository knows about what it
+serves was measured from a runner through `probe.yml`. All three are reachable
+from GitHub's runners. Either way, anything about what a source actually returns is
 settled by running a `tools/probe_*.py` against it and reading the answer, never
 by guessing at markup.
 
@@ -112,11 +123,13 @@ a row. Fees are written once per itinerary rather than once per departure, which
 is what they are a property of.
 
 That file holds three views, switched by the rail on the left and addressed by
-the URL hash: the trips table (`#trips`), the sailings a seller has marked down
+the URL hash: the trips table (`#trips`), what the sellers have marked down
 (`#sale`), and the change history (`#history`). Views rather than three files,
-for the reason above — the sale view is the trips view's own rows with the
-markdown filter held on, so a second document would ship the whole payload
-again to answer a question the first one already holds the data for.
+for the reason above — the payload is inlined, so a second document would ship
+those megabytes again to answer a question the first one already holds the data
+for. A filter is not a view either: the sale page is one row per unbroken run
+of discounted sailings, and the discounted sailings themselves under it, which
+is what the trips table with a chip held down could never say.
 
 ## Design
 
@@ -152,9 +165,10 @@ set of sites is a layer that can be wrong and answers nothing the sites do not.
 Sites come from the operator's own description of the trip, then its region
 list, then the trip title, then — last, and only where all three are silent —
 PADI Travel's account of the same week. Last because it is the least
-structured, not because it is the second source to have been read. **399 of 402** itineraries name
-reefs, one names only a direction and says so, and two name neither and stay
-blank rather than being guessed at (#52, #113). The ordering is the point: a
+structured, not because it is the second source to have been read.
+**455 of 462** itineraries name reefs, and the seven that do not — a charter
+request, three dolphin specials, a photography week, an eclipse tour and one
+mini-safari — stay blank rather than being guessed at (#52, #113). The ordering is the point: a
 source is never merged into one above it, because PADI's blurb says Elphinstone
 and Brothers "are quite distant from one another" on a week that visits neither
 together, and unioning that in is how a St John's week once got badged BDE.
@@ -173,10 +187,11 @@ its own floor. liveaboard.com states none, so the crawl runs at 2s.
 src/liveaboard/   taxonomy, money, models, pricing, changes, promote,
                   dataset, render, cli
         scrape/   polite fetcher, JSON-LD, liveaboard_com, padi_com,
-                  itinerary, fees, gear, vessel   (the last three need a browser)
+                  divebooker_com, itinerary, fees, gear, vessel
+                  (fees, gear and vessel need a browser)
 templates/        index.html + style.css + app.js + icon.svg, inlined at build time
 tools/            make_seed, fetch_fx, fetch_itineraries, fetch_deals,
-                  fetch_cabins, derive_sales, fetch_padi,
+                  fetch_cabins, derive_sales, fetch_padi, fetch_divebooker,
                   scrape_fees, reparse_candidate, probe_*
 data/seed/        the seed dataset
 tests/            stdlib unittest, no dependencies
@@ -193,6 +208,8 @@ tests/            stdlib unittest, no dependencies
 | `data/itineraries.json` | what each *trip* says about itself: reefs, dive count, group size, entry bar | yes |
 | `data/padi.json` | what PADI states per trip: the entry bar, the dive count, its own fee book | yes |
 | `data/padi_departures.json` | the same sailings as PADI sells them: one price and berth count per boat and day | yes |
+| `data/divebooker.json` | what divebooker.com states: its fleet, its sailings and fares, and one fee panel per trip and length | yes |
+| `data/divebooker_aliases.json` | which divebooker hull is which boat here, and the ids minted for the ones only it sells | yes — hand-maintained |
 | `data/padi_raw.json` | every field each PADI response published, parsed or not | no — gitignored, cached on the runner, CI artifact for 14 days |
 | `data/deals.json` | what PADI Travel is discounting, one entry per day it was read | yes |
 | `data/sales.json` | what liveaboard.com's booking pages were advertising, one entry per day they were read | yes |

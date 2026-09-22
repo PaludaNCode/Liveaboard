@@ -57,6 +57,28 @@ Hand-editing the input was never the shortcut: the dataset has to be what
 `promote` builds from what a fetch wrote, which is what `promote --check` is
 for, and the merge is what made a fetch possible.
 
+**And the row that did not move is the one that had something to say.** Eight
+itineraries named no reef before that run and eight after it, on a source that
+publishes a reef list *and* a day plan per trip. Both readers had shipped and
+both were reading nothing, for the same kind of reason — a value taken from
+the wrong place:
+
+* `programm` came back as `"Program\n$3d"` on **all 492 trips**. The page
+  streams its long strings as rows of their own and writes `"$<label>"` where
+  the text belongs, so the day-plan reader was handed four characters.
+* `divesites` answered on **0 of 492**. The reef's name is a step down, under
+  `map`; the entry's own `name` does not exist.
+
+Neither failed loudly, because the page had the other two sellers' reefs to
+print. Measured, fixed and guarded on 2026-09-22 against bytes carried back
+from a runner (`tests/fixtures/divebooker-day-plan.json`, three push chunks,
+the first of which is a row header on its own). What the fix is worth, over
+all 92 hulls
+([run 35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100)):
+**605 of 606 trips carry a plan and 158 name a reef nothing else on that trip
+does.** It reaches the dataset the next time `divebooker.yml` runs, because
+the book is what `promote` reads and the book is what was holding `"$3d"`.
+
 Stage 0 now has its measurement, and the whole fleet has been read against it.
 Divebooker states a fare, a currency and both dates on every departure, so it
 **can** be a third seller; it states no berth count on the vessel page, so it

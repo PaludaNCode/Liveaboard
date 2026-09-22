@@ -479,6 +479,18 @@ no liveaboard.com trip title to parse a harbour out of and no PADI trip to
 ask, so all 69 of them read *Unknown* at both ends until these were read —
 on a page whose *Departs from* bank is what a reader filters the fleet with.
 
+**And `divesites` keeps the name a step down.** An entry is
+`{"type": "divesites", "map": {"name": "Siyul Kebira", "url": …, "latitude": …}}`
+and the list also carries the two harbours as `departure` and `arrival`
+entries, which state coordinates and no name. Read at the entry's own level
+the reef list answered on **0 of the 492 trips in the committed book** — it
+shipped, it was tested against a fixture with no `divesites` in it, and the
+reefs on the page came from the other two sellers throughout. The vocabulary
+is the seller's own (*Siyul Kebira* where its own day plan writes *Siyoul
+Kebir*, *Small Giftun* where the fleet writes *Giftun*), so every name goes
+through `_sites_from_name` like the operator's region list: what this
+project's table cannot place stays unplaced.
+
 #### Read end to end against the other seller's own panel
 
 Dry-run 2026-09-21: the two verbatim panels from the fixture injected into the
@@ -701,6 +713,79 @@ payload, and the money-shaped ones are the seventeen above: **not one**
 matches `fee`, `extra`, `includ` or `exclud`. Whatever this seller discloses
 about required extras, it is not on the vessel page in any form — rendered or
 streamed.
+
+### A long string is a row of its own, and the field holds a pointer
+
+Read 2026-09-22 by `tools/probe_divebooker_chunkref.py` over
+`/aml-hayaty-haz539`
+([run 35713736973](https://github.com/PaludaNCode/Liveaboard/actions/runs/35713736973)),
+because `programm` was shipping as the four characters `"$3e"` on all 492
+trips and the day-plan reader written for it was reading nothing.
+
+The payload is not one object. It is a stream of labelled rows, and a long
+string is hoisted into a row of its own:
+
+```
+3d:T510,<strong>Day 1:</strong><br />\r\nCheck-In &amp; welcome onboard…
+34:T10f1,Aml Hayaty liveaboard is a 38.5-metre Red Sea vessel…
+30:T11a8d,{"@context":"http://schema.org","@graph":[…
+```
+
+A label, `T`, **the text's length in hex bytes**, a comma, and then that many
+bytes. Wherever the value belongs the page writes `"$<label>"`, so `programm`
+reads `"$3d"` and a fee column's `text` can read `"$3f"`.
+
+Three things about it are load-bearing, and each is a way of getting it wrong:
+
+* **The length is the only thing that says where a row ends.** The text runs
+  past newlines — a day plan is mostly newlines — so a line-wise reader cuts
+  the plan at *Day 1* and reads the rest as more rows.
+* **The labels move between renders.** The same day plan was `$3e` at 09:57
+  and `$3d` at 10:03, on one hull, one page. A label written into a parser is
+  a number that happened to be true once, so a reference is resolved against
+  the payload it arrived in and nowhere else.
+* **A row may begin exactly where a push chunk does.** `$3f` was used on that
+  page and looked undeclared for that reason alone: nothing preceded its
+  label, so a rule wanting a newline in front of one found nothing. The chunk
+  holding it declared it plainly.
+
+Not every reference is text. `$1` is `"$Sreact.fragment"`, `$e` is a client
+module (`I[54062,…]`) and `$3e` on that render is an SVG path. A reference
+naming a row this reader does not keep is **left exactly as it is** —
+inventing text for it would be a guess wearing the page's clothes.
+
+The text is **markup**, because the seller writes it in an editor:
+`<strong>Day 2:</strong><br />` with `&amp;` between two reefs. So it is read
+as prose — tags out, entities decoded — before any reef reader sees it, or the
+fleet's reefs arrive as *Dolphin House &amp; Siyoul Kebir*. A fee column's
+`text` is the same shape, so a line there breaks on `<br>` as well as on a
+newline: a resolved column split on newlines alone is a bill with one charge
+in it.
+
+**And following the reference is worth the reading.** Measured over the whole
+fleet by `tools/probe_divebooker_program.py`
+([run 35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100),
+92 hulls): **605 of 606 trips carry a day plan**, and **158 of them name a reef
+the trip's own `divesites` list and its name do not**. Aml Hayaty's *Mini
+Safari: Wrecks & Reefs* is the trip that named no reef at all in the published
+dataset; its plan names Thistlegorm, Abu Nuhas, Giftun and Siyoul Kebir.
+
+What stays unresolved is five labels — `$1` (368 uses), `$e` (92), and `$22`,
+`$24`, `$25` on a handful of pages. None is a text row: `$1` is
+`"$Sreact.fragment"` and the rest are client modules, so leaving them is the
+right answer rather than a residue to chase.
+
+**The reef names are this seller's own vocabulary, and 12% of them land
+nowhere.** Over the same 92 hulls, 2,889 stated reefs are names this project
+already places and **406 are not, in 48 spellings** — led by *Panorama* (52,
+against our *panorama reef*), *Satayah* (34, against *sataya*), *Shaab Marsa
+Alam* (25), *Shaab Sharm* (23) and *Siyul Kebira* (20, where this seller's own
+day plan writes *Siyoul Kebir*). Two different questions sit in that list and
+it is deliberately **not acted on here**: a fold of a spelling for a reef the
+fleet already carries is one thing, and *Blue Hole*, *Abu Kafan* or *Anemone
+City* are reefs the site filter does not offer at all — minting chips for them
+is a decision about the page, not a parser fix. `CLAUDE.md` says not to
+lengthen that table without counting first; this is the count.
 
 ## What is ruled out
 

@@ -6,8 +6,8 @@ price and reassembles the real bill. See README.md for the domain.
 ## Commands
 
 ```bash
-python3 tools/ship.py                    # the whole gate, in parallel — 24s
-python3 tools/ship.py --fast             # the inner loop, no browser — 4s
+python3 tools/ship.py                    # the whole gate, in parallel — 130s
+python3 tools/ship.py --fast             # the inner loop, no browser — 11s
 python3 tools/ship.py --push -m "..."    # gate, then commit and push
 ```
 
@@ -15,8 +15,10 @@ python3 tools/ship.py --push -m "..."    # gate, then commit and push
 command** — so the bar a person clears before pushing is the bar the five
 workflows run, rather than a second list that drifts from it. It builds the
 page, then runs the suite sharded by module alongside `check`, `promote
---check` and the seed check: 24 seconds against about 60 serially, and 4 with
-`--fast`, which drops `test_promote_check` and `test_layout` and says so.
+--check` and the seed check: about two minutes across six workers, and 11
+seconds with `--fast`, which drops `test_promote_check` and `test_layout` and
+says so. Those two are most of the wall clock — one drives a browser and the
+other re-promotes the whole dataset — which is the shape the split is for.
 `TestOneGate` refuses an `action.yml` that grows its own steps back.
 
 CI runs the same gate, so a green run here is a green run there. **Do not sit
@@ -251,8 +253,10 @@ Break these and the site starts lying quietly rather than failing loudly.
   it; a row states `pct` only from the seller whose fare it prints;
   `berths_read` and `padi_berths_read` are two crawls on two days; PADI's
   `availability` fills the whole-sailing slot and not the at-price one, because
-  that was measured; divebooker states no berth count and no list price at all,
-  so it fills neither.
+  that was measured; divebooker states no berth count and no list
+  price **against a sailing**, so it fills neither — the markdown it does
+  publish names a hull and no date, which is a row in the sales table and
+  never a percentage on a departure.
   **A third arriving is what tested the rule.** `best()` was a pair with the
   one-seller case as its own early return, the seller chip's vocabulary for
   *more than one* was the word `both`, and `advertisedNote` named PADI by
@@ -484,6 +488,18 @@ Break these and the site starts lying quietly rather than failing loudly.
   silent, it is the difference between a row the site filter can reach and one
   it cannot — 47 rows on 19 itineraries, down to 4 on 3. The three that stay
   blank name no reef in any field, and blank is right for them.
+  **Six now, and the last two are the third seller's**: its own `divesites`
+  list, then its day plan. The list is more structured than PADI's blurb and
+  is still behind it, because easier to read is not an argument about being
+  right and nothing has measured the two against each other; what it answers
+  is the 33 hulls neither of the others carries, where every source above is
+  silent. The plan is behind the list for the same reason PADI's blurb sits
+  behind its day plan — prose is prose — and both go through
+  `_sites_from_name`, so a reef the fleet's vocabulary cannot place stays
+  unplaced rather than minting a chip nothing else shares. `divesites` holds
+  the name a step down, under `map`, and read at the entry's own level it
+  answered on **0 of 492 trips**: a reef list that shipped, passed its
+  fixture and read nothing.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
@@ -1634,8 +1650,13 @@ Break these and the site starts lying quietly rather than failing loudly.
 
 ## Sources
 
-`padi.com` and `liveaboard.com` are the only permitted sources. Both are
-reachable locally since the allowlist landed (#1), and from GitHub's runners.
+`padi.com`, `liveaboard.com` and `divebooker.com` are the only permitted
+sources. The first two are reachable locally since the allowlist landed (#1);
+**`divebooker.com` is not reachable from this sandbox at all**, so every claim
+about what it serves was measured on a runner through `probe.yml`
+(`divebooker_ask`) and written into `docs/sources/divebooker.com.md`. All three
+are reachable from GitHub's runners. A probe's answer is read from the **end**
+of the job log, so a probe prints its finding last.
 
 **`/BookingStep1` and the `?m=` selector are disallowed by liveaboard.com's
 robots.txt, and we fetch them anyway** — a blank line after `User-agent: *`
@@ -1697,6 +1718,21 @@ re-crawl 530 pages. **The book is rebuilt whole from that store**, so a cold
 runner would rebuild it with zero trips and write it: green job, valid file,
 five facts gone. `MIN_BOOK_RATIO` refuses that, the way `fetch_cabins.py`
 refuses to rewrite its file after reading nothing.
+
+**And the third seller is one request per hull, daily, in `divebooker.yml`.**
+`tools/fetch_divebooker.py` reads a vessel page and gets that hull's whole
+season out of it, so the Egyptian fleet costs about as many requests as it has
+hulls — against liveaboard.com's four per vessel and PADI's per-itinerary
+calls. Nothing there needs a browser: the sailings are JSON-LD and everything
+else is in the flight payload the page streams to itself. **The fleet is
+discovered, never typed**, and from the seller's own search rather than its
+country page: `/egypt-daz3881` links ten hulls where one month of
+`/boatsearch` states 75, and reading a carousel as an inventory is the mistake
+liveaboard.com's featured strip already taught. `data/divebooker.json` is
+rebuilt whole and `--limit N` merges instead, for `fetch_padi.py`'s reason.
+`data/divebooker_aliases.json` is hand-maintained and outside the publication
+gate: it says which hull is which boat here, and mints ids for the ones only
+this seller sells.
 
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`

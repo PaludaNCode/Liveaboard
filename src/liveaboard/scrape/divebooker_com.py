@@ -47,6 +47,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field
+from html import unescape
 from datetime import date
 from typing import Any, Callable, Iterable, Iterator
 
@@ -820,6 +821,88 @@ def payload(html: str) -> str:
     return payload_parts(html)[0]
 
 
+#: A text row in the stream: a label, `T`, the text's length in **hex bytes**,
+#: a comma, and then that many bytes of raw text. Measured on a runner
+#: 2026-09-22 rather than assumed from the framework's name -- `3d:T510,` is
+#: Aml Hayaty's day plan and `34:T10f1,` is its vessel description, and the
+#: text of both runs on past newlines, so the length prefix is the only thing
+#: that says where a row ends. A line-wise reader would cut the day plan at
+#: *Day 1*.
+TEXT_ROW = re.compile(rb"\n([0-9a-f]{1,4}):T([0-9a-f]+),")
+
+#: The same row, matched where the reader already stands. The stream is
+#: delivered in `self.__next_f.push` chunks and a row may begin exactly where
+#: one of them does, so a rule that only recognises a row after a newline
+#: loses it: `$3f` was used on Aml Hayaty and reported undeclared for that
+#: reason alone, while the chunk holding it plainly declared it.
+ROW_HERE = re.compile(rb"([0-9a-f]{1,4}):T([0-9a-f]+),")
+
+#: What a value holding one of those rows looks like where it is used. The
+#: page writes the reference in place of the text, so `programm` reads
+#: `"$3d"` and a fee column's `text` reads `"$3f"` -- and on all 492 trips
+#: that string was shipped as the day plan itself, which is how a day-plan
+#: reader came to read nothing.
+CHUNK_REF = re.compile(r"^\$([0-9a-f]{1,4})$")
+
+
+def chunk_table(text: str) -> dict[str, str]:
+    """Every text row the stream declares, by its label.
+
+    Walked with a cursor rather than by scanning for every match, because a
+    row's text is arbitrary prose and may hold something shaped like the next
+    row's label. After a row of the declared length the stream is at the next
+    one, so the length is what advances the reader.
+
+    **The labels are per render and mean nothing across pages.** The same day
+    plan was `$3e` on 2026-09-22 morning and `$3d` an hour later, on the same
+    hull -- so a reference is resolved against the payload it arrived in, and
+    a label written into this file would be a number that happened to be true
+    once.
+    """
+    raw = text.encode("utf-8")
+    table: dict[str, str] = {}
+    at = 0
+    while at < len(raw):
+        # The row the cursor is already standing on, then the next one
+        # anywhere ahead. Both are needed: a text row is followed by the
+        # newline that ends it, and a row this reader skipped past -- a
+        # component, an SVG, a JSON island -- is reached only by searching.
+        if raw[at:at + 1] == b"\n":
+            at += 1
+        found = ROW_HERE.match(raw, at) or TEXT_ROW.search(raw, at)
+        if found is None:
+            return table
+        length = int(found.group(2), 16)
+        start = found.end()
+        table.setdefault(
+            found.group(1).decode("ascii"),
+            raw[start:start + length].decode("utf-8", "replace"),
+        )
+        at = start + length
+    return table
+
+
+def resolved(value: Any, table: dict[str, str]) -> Any:
+    """`value` with every chunk reference in it replaced by its text.
+
+    Applied to a whole parsed object rather than to the fields known to carry
+    one: which fields the page streams separately is the page's decision and
+    it changes with the render, so a caller naming them is a caller that goes
+    quietly stale. A reference the table does not hold is left exactly as it
+    is -- it points at a row this reader did not keep (a component, an SVG
+    path), and inventing text for it would be worse than printing the
+    reference.
+    """
+    if isinstance(value, str):
+        ref = CHUNK_REF.match(value)
+        return table.get(ref.group(1), value) if ref else value
+    if isinstance(value, dict):
+        return {key: resolved(item, table) for key, item in value.items()}
+    if isinstance(value, list):
+        return [resolved(item, table) for item in value]
+    return value
+
+
 def balanced(text: str, start: int) -> str | None:
     """The JSON value beginning at `start`, by counting brackets.
 
@@ -998,6 +1081,26 @@ def _stated_count(value: Any) -> int | None:
 NO_PORT = frozenset({"port is not stated"})
 
 
+#: A tag. The day plan is markup -- `<strong>Day 2:</strong><br />` with
+#: `&amp;` between two reefs -- because the seller writes it in an editor, so
+#: the strings under `programm` are HTML and reading them as text hands the
+#: reef parser *Dolphin House &amp; Siyoul Kebir*.
+TAG = re.compile(r"<[^>]+>")
+
+
+def _as_prose(value: str) -> str:
+    """One string as a reader sees it: no tags, no entities, one space."""
+    return " ".join(unescape(TAG.sub(" ", value)).split())
+
+
+def _stated_site(site: dict[str, Any]) -> str | None:
+    """One reef's name, from wherever this seller keeps it."""
+    for holder in (site.get("map"), site):
+        if isinstance(holder, dict) and isinstance(holder.get("name"), str):
+            return holder["name"].strip() or None
+    return None
+
+
 def _prose(node: Any) -> str | None:
     """Every string under a node, joined — whatever shape the node is.
 
@@ -1016,7 +1119,7 @@ def _prose(node: Any) -> str | None:
 
     def walk(value: Any) -> None:
         if isinstance(value, str):
-            text = value.strip()
+            text = _as_prose(value)
             if text:
                 out.append(text)
         elif isinstance(value, dict):
@@ -1149,10 +1252,18 @@ class FeeBlock:
     """
 
 
+#: What ends a line in a column, and a line break is not always a newline.
+#: A column's `text` can be a chunk reference and a row's text is markup, so
+#: resolving one and then splitting on newlines alone would hand the reader a
+#: whole fee book as a single line -- which is a bill with one charge in it.
+LINE_BREAK = re.compile(r"[\r\n]+|<br\s*/?>|</(?:p|div|li|tr)\s*>",
+                        re.IGNORECASE)
+
+
 def _fee_lines(text: str) -> Iterator[str]:
     """The lines of one column, as the seller's prose breaks them."""
-    for line in re.split(r"[\r\n]+", text or ""):
-        line = line.strip(" \t-–—•* ")
+    for line in LINE_BREAK.split(text or ""):
+        line = _as_prose(line or "").strip(" \t-–—•* ")
         if line:
             yield line
 
@@ -1296,6 +1407,9 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
     marine parks must not end an object.
     """
     text, dropped = payload_parts(html)
+    # Built once for the page: every value read below may be a reference into
+    # it, and the trip's day plan always is.
+    table = chunk_table(text)
     warnings: list[str] = []
     if dropped:
         # A chunk that would not decode is a piece of the page nobody read,
@@ -1321,7 +1435,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
             warnings.append("a price panel was not closed in the payload")
             continue
         try:
-            panel = json.loads(chunk)
+            panel = resolved(json.loads(chunk), table)
         except json.JSONDecodeError:
             warnings.append("a price panel did not parse as JSON")
             continue
@@ -1330,7 +1444,7 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
         bounds = owners.get(owner_at)
         if bounds:
             try:
-                owner = json.loads(text[bounds[0]:bounds[1] + 1])
+                owner = resolved(json.loads(text[bounds[0]:bounds[1] + 1]), table)
             except json.JSONDecodeError:
                 owner = {}
             # **`name`, not `title`.** The panel's own heading is `title` and
@@ -1355,11 +1469,22 @@ def fee_blocks(html: str) -> tuple[list[FeeBlock], list[str]]:
                 # publishes and a tidied copy would be a second vocabulary.
                 block.requirements = _stated_text(bar.get("expirience"))
                 block.certification = _stated_text(bar.get("sertification"))
+            # **The name is a step down, under `map`.** An entry is
+            # `{"type": "divesites", "map": {"name": "Siyul Kebira", …}}`,
+            # and reading `name` off the entry itself found one on **0 of
+            # 492 trips** in the committed book -- a reef list that shipped,
+            # was tested against a fixture with no `divesites` in it, and
+            # read nothing on every trip this seller sells. The entry's own
+            # `name` is kept as a fallback and has never fired. The two
+            # entries with no name at all are the harbours (`type` is
+            # `departure` and `arrival`), which state coordinates and are
+            # not reefs.
             block.sites = [
-                site["name"].strip()
+                name.strip()
                 for site in (owner.get("divesites") or [])
-                if isinstance(site, dict) and isinstance(site.get("name"), str)
-                and site["name"].strip()
+                if isinstance(site, dict)
+                for name in [_stated_site(site)]
+                if name
             ]
             block.programme = _prose(owner.get("programm"))
             block.port_from = _stated_name(owner.get("departurePort"))

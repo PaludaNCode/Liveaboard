@@ -1,12 +1,16 @@
-# Two sellers, one offer — how a markdown reaches the page
+# One offer, and the sellers that state it — how a markdown reaches the page
 
-Both sellers publish a markdown and both are read. liveaboard.com strikes the
-list price through beside every cabin, which `tools/fetch_cabins.py` reads
-nightly off the booking pages; PADI states `compareAtPrice` on a sailing and
-runs a deals listing on top, which `tools/fetch_padi.py` and
-`tools/fetch_deals.py` read daily. Neither is ever allowed to speak for the
-other, and neither is allowed to speak about a reading this pipeline threw
-away.
+Every seller here publishes a markdown and all of them are read.
+liveaboard.com strikes the list price through beside every cabin, which
+`tools/fetch_cabins.py` reads nightly off the booking pages; PADI states
+`compareAtPrice` on a sailing and runs a deals listing on top, which
+`tools/fetch_padi.py` and `tools/fetch_deals.py` read daily. divebooker.com
+came third and is a different shape again — its `boatSpecials` entry names a
+**hull** and no sailing, so it is a row in the sales table and never a
+percentage on a departure; see `docs/sources/divebooker.com.md`. **The counts
+below are liveaboard.com's and PADI's, measured before that**, and the rules
+are what generalised. No seller is ever allowed to speak for another, and none
+is allowed to speak about a reading this pipeline threw away.
 
 This file is what the panel means, and what has gone wrong in it before.
 

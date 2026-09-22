@@ -7,7 +7,11 @@ built on 2026-08-30 (77 boats, 46 operators, 402 itineraries, 1,122 sailings).
 actually bought, including the two joins §2 needed and the one it refused. The
 counts below are as first measured; where a section is done it says so. §2 and
 both of §3's identity holes closed on 2026-09-05 and say so in place, against a
-dataset that has since grown to 416 itineraries and 1,145 sailings.
+dataset that has since grown to 462 itineraries and 1,269 sailings — a third
+seller landed on 2026-09-21, which is where most of that growth came from and
+which closed §5's fee holes outright. Counts written against *two* sellers
+below are the measurement of the day they were taken, not a claim about today's
+dataset.
 
 Grouped by **why** it is empty, because that is what decides whether there is
 anything to do about it:
