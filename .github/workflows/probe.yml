@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,specials"
         type: string
         default: ""
       divebooker_sample:
@@ -465,6 +465,25 @@ jobs:
         run: |
           python3 tools/probe_divebooker_flight.py \
             --vessel "${{ inputs.divebooker_vessel || 'red-sea-aggressor-ii' }}"
+
+      # `docs/sources/divebooker.com.md` records "no list price" as a negative
+      # -- measured over 219 departures on vessel pages, and the same file's
+      # entry-point table names `/specials?et=3&e=1`, 130 priced trips with a
+      # `UnitPriceSpecification` apiece, which nobody has opened. A negative
+      # measured on one page is not a negative about a host, and "on sale" is
+      # the question it decides. Reads the deals page, the unread node type on
+      # a vessel page, and sweeps the streamed payload for a markdown-shaped
+      # key -- the sweep that missed the fee panel asked about four words.
+      - name: Does this seller state a list price anywhere
+        if: contains(inputs.divebooker_ask, 'specials')
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/probe_divebooker_specials.py \
+            --vessels "${{ inputs.divebooker_vessel || 'alsuraya,amelie' }}" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
       # The seller's own search, which says 75 boats for a month the country
       # page shows ten of. Open to us: the Disallow sits in the turnitinbot
