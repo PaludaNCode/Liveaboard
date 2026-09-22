@@ -647,6 +647,17 @@ def cmd_promote(args: argparse.Namespace) -> int:
             # one nothing has paired yet. Only a name tells those apart, and
             # only if somebody sees it.
             print(f"::warning::PADI deal on a vessel this site does not carry: {row['name']}")
+        # And the third seller's markdowns, which are their own shape: one per
+        # boat, no sailing named. Printed here for the same reason PADI's
+        # unmatched vessels are -- a count in a committed file that nobody
+        # reads is a count nobody acts on.
+        specials = block.get("specials") or {}
+        if specials:
+            print(
+                f"  divebooker markdowns read {specials.get('read', '?')}:"
+                f" {len(specials.get('boats') or [])} on boats this site carries,"
+                f" {specials.get('unmatched', 0)} on hulls it does not"
+            )
         moved = block.get("changes") or {}
         if moved.get("partial"):
             print("    a reading was truncated; new and withdrawn are not reported for it")

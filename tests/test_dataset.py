@@ -1997,8 +1997,14 @@ class TestTheSellerFilter(unittest.TestCase):
         self.assertIn('{ k: "source", t: "Seller",', self.app())
 
     def names(self) -> dict[str, str]:
-        block = re.search(r"var SELLER_NAMES = \{(.*?)\};", self.app(), re.S)
-        assert block, "SELLER_NAMES not found in app.js"
+        """The chips' own short labels.
+
+        `SELLER_CHIPS` since the rename: this list and the pooled host list
+        shared the name `SELLER_NAMES`, `var` has no block scope, and the
+        later one answered for both — see `TestNoTwoListsShareOneName`.
+        """
+        block = re.search(r"var SELLER_CHIPS = \{(.*?)\};", self.app(), re.S)
+        assert block, "SELLER_CHIPS not found in app.js"
         return dict(re.findall(r'(\w+):\s*"([^"]+)"', block.group(1)))
 
     def test_every_seller_has_a_name_and_it_is_not_a_direction(self) -> None:
@@ -3371,9 +3377,141 @@ class TestRefreshNewsIsReportedInOnePlace(unittest.TestCase):
     def test_a_day_with_no_discount_anywhere_has_no_sale_view(self) -> None:
         """The moves used to make the view exist on their own. They report
         elsewhere now, so "what is on sale" with nothing on sale is not a
-        page -- and `showView` may not leave the address naming it."""
+        page -- and `showView` may not leave the address naming it.
+
+        **Every book that can fill the view has to be in that test.** It read
+        two, and the day a third seller's markdown was the only thing on the
+        page the view would have refused to draw itself while `salesRows`
+        built rows for it -- a sale nobody could reach, and the strictly worse
+        half of the bug this test was written for.
+        """
         panel = self.app.split("function drawDeals(", 1)[1].split("\n  }", 1)[0]
-        self.assertIn("if (!offers.length && !fleet.length) return false;", panel)
+        self.assertIn(
+            "if (!offers.length && !fleet.length && !specials.length) "
+            "return false;", panel)
+
+
+class TestNoTwoListsShareOneName(unittest.TestCase):
+    """`var` has no block scope, so a repeated name is one name.
+
+    The file already carried the note — *"the Sold by chips declare their own
+    `var SELLERS` in this same function scope … two different lists cannot
+    share one name"* — and then declared a second `var SELLER_NAMES` anyway:
+    the pooled host list (`["liveaboard.com", …]`, indexed by number) and the
+    chips' short labels (`{liveaboard: …}`, keyed by word), one name, the
+    later one winning for the whole file.
+
+    Nothing threw. An array index into an object is `undefined` and both
+    readers have an `|| ""` behind them, so the sales table's Seller column
+    printed **"? · 21 Sep" on all 24 rows** — a markdown, the day it was read,
+    and no seller — and the cabin ladder's own seller heading was one
+    `blocks.length > 1` away from the same. This is the shape of #139: a claim
+    about a seller with the seller's name missing.
+
+    So the rule is asserted rather than written down again: no name is
+    declared twice in this file.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def test_no_var_is_declared_twice(self) -> None:
+        import re
+        app = self.APP.read_text(encoding="utf-8")
+        # Top-level-ish declarations only: the repeated `var` inside a loop
+        # body is a different animal and is not what bit.
+        seen: dict[str, int] = {}
+        for line in app.splitlines():
+            found = re.match(r"  var ([A-Z][A-Z0-9_]*)\s*=", line)
+            if found:
+                seen[found.group(1)] = seen.get(found.group(1), 0) + 1
+        twice = sorted(name for name, n in seen.items() if n > 1)
+        self.assertEqual(twice, [], "two lists are sharing one name again")
+
+    def test_the_pooled_hosts_are_what_names_a_seller(self) -> None:
+        """Every place that turns a seller *index* into a name reads the
+        pooled list `promote` writes, and nothing else can answer there."""
+        app = self.APP.read_text(encoding="utf-8")
+        self.assertIn("var SELLER_HOSTS = D.sellers || [];", app)
+        for reader in ("markedDownBy", "namedReadings"):
+            block = app.split("function " + reader + "(", 1)[1].split("\n  }", 1)[0]
+            self.assertIn("SELLER_HOSTS[", block)
+            self.assertNotIn("SELLER_CHIPS[", block)
+
+
+class TestABoatWideSaleIsNotASailingsSale(unittest.TestCase):
+    """divebooker states a markdown against the boat and names no sailing.
+
+    `docs/divebooker-limitations.md` had this seller down as publishing no
+    list price at all; the pair is in the streamed payload under
+    `boatSpecials`, on 16 of the 16 Egyptian hulls its own specials listing
+    links. What did **not** change is the half of that entry that matters:
+    `descr` is prose — *"Sep 26, 2026 | Oct 24, 2026 | Dec 26, 2026"* on one
+    hull and *"Selected 2027 trips!"* on the next — so there is no sailing to
+    key on and no window to print.
+
+    Three things follow, and each of them is a way this could ship wrong: the
+    rate must come off the two stated figures rather than the seller's own
+    *SAVE UP TO* headline, the row must say why it has no dates instead of
+    printing two dashes, and nothing here may reach a departure.
+    """
+
+    APP = ROOT / "templates" / "app.js"
+
+    def setUp(self) -> None:
+        self.app = self.APP.read_text(encoding="utf-8")
+        self.rows = self.app.split("function salesRows(", 1)[1].split("\n  }", 1)[0]
+        self.table = self.app.split("function salesTable(", 1)[1].split("\n  }", 1)[0]
+
+    def test_the_rate_is_the_stated_pair_and_never_the_headline(self) -> None:
+        """*SAVE UP TO 63%* sits over a pair coming to 67 on one hull and over
+        pairs coming to 20 on two others, so the tag bounds nothing in either
+        direction. `promote` states `pct` from the two figures; the tag goes
+        in the Offer cell, in the seller's own words."""
+        self.assertIn("r.pct ? r.pct + \"% off\" : null", self.rows)
+        self.assertNotIn("r.tag.match", self.rows)
+        self.assertNotIn("parseInt(r.tag", self.rows)
+
+    def test_the_row_says_why_it_has_no_dates(self) -> None:
+        """Two dashes under From and To read as a hole in the data. This is
+        not a hole: the seller published no window, and its own sentence about
+        which trips is the most that can honestly go there."""
+        self.assertIn("r.boatwide", self.table)
+        self.assertIn("from.colSpan = 2", self.table)
+        self.assertIn("r.says", self.table)
+
+    def test_a_boat_wide_row_is_not_padis_exemplar_sailing(self) -> None:
+        """PADI's dates are one real sailing it advertises the offer against;
+        these are no sailing at all. One flag for both would print PADI's
+        explanation over a row that has a different reason."""
+        self.assertIn("boatwide: true", self.rows)
+        self.assertNotIn("exemplar: true", self.rows.split("deals.specials", 1)[1])
+
+    def test_nothing_about_it_reaches_a_departure(self) -> None:
+        """The whole of the rule. `saleTag` prints one sailing's markdown and
+        `discountRates` counts them; a boat-wide headline in either would put
+        a percentage on berths no seller priced."""
+        for name in ("saleTag", "discountRates", "tripsOnSale", "saleOnly"):
+            block = self.app.split("function " + name + "(", 1)[1].split("\n  }", 1)[0]
+            self.assertNotIn("specials", block,
+                             name + " is reading a boat-wide sale as a sailing's")
+
+    def test_the_panel_names_the_seller_and_says_what_shape_it_is(self) -> None:
+        """A rate with no dates beside it, from a seller the page has not
+        named, is #139 with a percentage attached."""
+        source = self.app.split("function sourceLine(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("divebooker.com", source)
+        self.assertIn("against the boat rather ", source)
+        strip = self.app.split("function saleStrip(", 1)[1].split("\n  }", 1)[0]
+        self.assertIn("boats advertised", strip)
+
+    def test_the_strip_does_not_add_them_to_the_sailings_count(self) -> None:
+        """That figure is boats with a discounted sailing. Folding a boat-wide
+        headline into it would put a claim nobody can book inside a tally of
+        departures somebody can."""
+        strip = self.app.split("function saleStrip(", 1)[1].split("\n  }", 1)[0]
+        before = strip.split("var advertised", 1)[0]
+        self.assertIn("(sale.boats || [])", before)
+        self.assertNotIn("specials", before)
 
 
 class TestTheChangeReportIsRenderedRatherThanTranscribed(unittest.TestCase):

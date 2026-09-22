@@ -976,14 +976,19 @@ def berth_key(slug: str, start: str) -> str:
 # notes and named in `app.js`, so nothing has to count fields to read it.
 CABIN_FIELDS = 4
 
-SELLERS = ["liveaboard.com", "padi.com"]
-"""Who is selling, pooled and indexed by every berth block.
+SELLERS = ["liveaboard.com", "padi.com", "divebooker.com"]
+"""Who is selling, pooled and indexed by every seller-stamped field.
 
-Both names are here though only the first fills a block today: PADI sells 601
-of these same sailings and publishes an availability figure of its own, so the
-list that holds two answers is the list to write now rather than after a second
-seller arrives ([#92]). An index costs two bytes against a repeated string's
-twenty-two, on a field written once per departure.
+Two of the three fill a **berth block**: liveaboard.com states a cabin ladder
+and PADI an availability figure, and the list that holds two answers was
+written before the second arrived ([#92]). divebooker states no berth count at
+all, so it fills none — and it is on this list anyway, because the sale panel
+names it: `deals.specials` is its markdown and takes its seller from here, so
+the page names the three sellers one way rather than two.
+
+An index costs two bytes against a repeated string's twenty-two, on a field
+written once per departure. The order is the order these were read, which is a
+fact about this project and not about any seller.
 """
 
 
@@ -1198,6 +1203,99 @@ def _sale_for(
             if currency:
                 sale["was"] = _to_display(was, currency, fx_table)
     return sale
+
+
+def _specials_block(
+    divebooker: Mapping[str, Any] | None,
+    alias: Mapping[str, str],
+    boats: Mapping[str, Mapping[str, Any]],
+    pages: Mapping[str, str],
+    fx_table: Any,
+) -> dict[str, Any] | None:
+    """What the third seller advertises, one row per boat it marks down.
+
+    **A boat-wide claim, and that is the whole of it.** divebooker states a
+    markdown on the vessel page — a fare, the figure it says that fare is down
+    from, a headline like *SAVE UP TO 30%*, and a sentence about which trips —
+    and it names **no sailing**. `Special.says` is prose: *"Sep 26, 2026 | Oct
+    24, 2026 | Dec 26, 2026"* on one hull and *"Selected 2027 trips!"* on the
+    next, so there is no date to key on and no window to print. So nothing
+    here reaches a departure: no row gets a `sale`, `deals.on_sale` does not
+    grow a seller, and the On sale chip counts exactly the sailings it
+    counted before. A rate against a boat is a different claim from a rate
+    against a berth, and this site's whole complaint is about pages that print
+    the second when they have only the first.
+
+    Which is also why it is **not** folded onto a run the way `_name_the_runs`
+    folds PADI's offers. That fold is allowed because PADI names a sailing and
+    the run can be asked whether it contains it; this seller names none, so
+    there is nothing to test the fold against and a fold would be an assertion
+    nobody made.
+
+    The join is the hull, exactly: `data/divebooker_aliases.json` maps this
+    seller's slug to a boat id, which is the same map the fares and the fee
+    book already arrive through. A hull that maps to nothing is dropped and
+    counted rather than named on the page — the fleet this site publishes is
+    the fleet, and a boat it does not carry is not a sale a reader can act on.
+    """
+    read = (divebooker or {}).get("collected") or ""
+    rows: list[dict[str, Any]] = []
+    unmatched = 0
+    for hull, record in sorted(((divebooker or {}).get("vessels") or {}).items()):
+        ours = alias.get(hull)
+        if not ours or ours not in boats:
+            unmatched += sum(1 for _ in (record.get("specials") or []))
+            continue
+        for special in record.get("specials") or []:
+            price, was = special.get("price"), special.get("was")
+            currency = special.get("currency")
+            row: dict[str, Any] = {
+                "boat": ours,
+                "boat_name": str(boats[ours]["name"]),
+            }
+            for key in ("tag", "pct", "says", "category"):
+                if special.get(key):
+                    row[key] = special[key]
+            if special.get("terms"):
+                row["terms"] = list(special["terms"])
+            # The cash only where the seller said what it is in. A percentage
+            # is a ratio of two figures in the same unit and needs no
+            # currency; a figure does, and converting one at a rate nobody
+            # stated is the rule `_list_prices` already keeps.
+            if currency and isinstance(price, (int, float)):
+                row["price"] = _to_display(float(price), currency, fx_table)
+            if currency and isinstance(was, (int, float)):
+                row["was"] = _to_display(float(was), currency, fx_table)
+            if pages.get(ours):
+                row["url"] = pages[ours]
+            rows.append(row)
+
+    # A block with no rows and an `unmatched` count is still a block. Returning
+    # nothing there would drop the one number saying the reading was longer
+    # than the panel -- which is this project's oldest complaint about its own
+    # sources, made about itself. The page draws nothing from an empty `boats`,
+    # so nothing appears; the count reaches the build log, which is where the
+    # audience for it is.
+    if not rows and not unmatched:
+        return None
+    rows.sort(key=lambda r: (str(r["boat_name"]).lower(), r["boat"]))
+    block: dict[str, Any] = {
+        # The seller, by the index every other seller-stamped field on this
+        # page uses, so the panel names it the same way the Seller column and
+        # the berth blocks do rather than by a string of its own.
+        "seller": SELLERS.index("divebooker.com"),
+        "boats": rows,
+    }
+    if read:
+        block["read"] = read
+    if unmatched:
+        # Counted, not named: unlike PADI's deals listing this reading is
+        # already scoped to Egypt by the search it came from, so a hull that
+        # maps to nothing here is a boat this site does not carry rather than
+        # a boat in another ocean. The count is what says the row list is
+        # shorter than the reading was.
+        block["unmatched"] = unmatched
+    return block
 
 
 def _on_sale_summary(
@@ -3483,6 +3581,23 @@ def promote(
     # cabins, so a run with its book and no booking pages would otherwise ship
     # blocks whose seller index points into a `sellers` list that was never
     # written -- a number on the page attributed to nobody.
+    # What the third seller advertises, computed here so the pooled seller
+    # list below knows whether anything will index into it. Attached to the
+    # deals block further down, where the other two books' panels are built.
+    divebooker_specials = _specials_block(
+        divebooker, divebooker_alias, boats, divebooker_page, fx_table)
+
+    # The pool **every** seller-indexed field reads, so it ships wherever one
+    # of them does. It used to ride along with the cabin ladder, which was the
+    # only thing indexing into it -- and then a sale's `sellers`, a run's, and
+    # this seller's own markdown block all learned to, so a dataset with a
+    # markdown and no ladder would have shipped rows naming seller 2 with no
+    # list to look 2 up in. The page prints "a seller" there, which is the
+    # shape of #139: a claim about a host, with the host's name missing.
+    if (cabin_names or any(d.get("berths") for d in departures)
+            or any(d.get("sale") for d in departures)
+            or divebooker_specials):
+        payload["sellers"] = list(SELLERS)
     if cabin_names or any(d.get("berths") for d in departures):
         # The pool the ladder's first field indexes into, in the order names
         # were first seen -- which is promotion order, and promotion is pure,
@@ -3490,7 +3605,6 @@ def promote(
         payload["cabin_names"] = [
             name for name, _ in sorted(cabin_names.items(), key=lambda kv: kv[1])
         ]
-        payload["sellers"] = list(SELLERS)
         # One date for the whole book, so it is stated once rather than on 864
         # departures. It is the most load-bearing caveat here: a berth count is
         # what the seller claimed when it was read, and stale by morning.
@@ -3549,6 +3663,15 @@ def promote(
     )
     if on_sale:
         deals_block["on_sale"] = on_sale
+    # And what the *third* seller advertises, which is a third shape again.
+    # liveaboard.com strikes a list price through per cabin, so its evidence
+    # is a run of discounted sailings; PADI names one exemplar sailing per
+    # campaign; divebooker states a fare, the figure it is down from and a
+    # headline against **the boat**, naming no sailing anywhere. So it is a
+    # row in the sales table and nothing else: no departure carries it, and
+    # the On sale chip still counts only sailings a seller marked down.
+    if divebooker_specials:
+        deals_block["specials"] = divebooker_specials
     # And where PADI's listing only names a run this already carries, the name
     # goes on the run rather than into a row of its own: the two books publish
     # different shapes, not two sales.

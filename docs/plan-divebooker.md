@@ -59,9 +59,15 @@ for, and the merge is what made a fetch possible.
 
 Stage 0 now has its measurement, and the whole fleet has been read against it.
 Divebooker states a fare, a currency and both dates on every departure, so it
-**can** be a third seller; it states no berth count and no list price, so it
-can never fill the *places left* or *on sale* columns. What the fleet read
-added to that question:
+**can** be a third seller; it states no berth count on the vessel page, so it
+cannot fill the *places left* column from there. The other half of that
+sentence read *"and no list price, so it can never fill … the on sale
+column"*, and it was wrong: the markdown is in the streamed payload under
+`boatSpecials`, on 16 of the 16 Egyptian hulls its specials listing links.
+What stands is narrower and still decides the column — the entry names the
+**boat** and no sailing, so it is a row in the sale table and never a
+percentage on a departure. See `docs/sources/divebooker.com.md`, *The markdown
+the JSON-LD does not carry*. What the fleet read added to that question:
 
 * **92 hulls and 888 season sailings**, against the two sellers' 77 boats.
   59 hulls map to ours; **33 are Egyptian liveaboards neither of the other two
