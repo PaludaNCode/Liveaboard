@@ -1270,7 +1270,13 @@ def _specials_block(
                 row["url"] = pages[ours]
             rows.append(row)
 
-    if not rows:
+    # A block with no rows and an `unmatched` count is still a block. Returning
+    # nothing there would drop the one number saying the reading was longer
+    # than the panel -- which is this project's oldest complaint about its own
+    # sources, made about itself. The page draws nothing from an empty `boats`,
+    # so nothing appears; the count reaches the build log, which is where the
+    # audience for it is.
+    if not rows and not unmatched:
         return None
     rows.sort(key=lambda r: (str(r["boat_name"]).lower(), r["boat"]))
     block: dict[str, Any] = {

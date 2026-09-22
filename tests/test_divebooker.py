@@ -1797,8 +1797,18 @@ class TestTheMarkdownReachesThePanelAndNoRow(unittest.TestCase):
         """Unlike PADI's listing, this reading is already scoped to Egypt by
         the search it came from, so an unjoined hull is a boat this site does
         not sell rather than one in another ocean. The count is what says the
-        row list is shorter than the reading was."""
-        payload = self.payload([self.SPECIAL], hull="stranger-haz1")
+        row list is shorter than the reading was — and it survives a reading
+        where *every* hull is one, which is the case that would otherwise
+        return nothing and take the count with it.
+        """
+        block = self.payload([self.SPECIAL],
+                             hull="stranger-haz1")["deals"]["specials"]
+        self.assertEqual(block["boats"], [])
+        self.assertEqual(block["unmatched"], 1)
+
+    def test_a_reading_with_nothing_in_it_ships_no_block(self):
+        """An empty key is a claim, and page weight is load-bearing."""
+        payload = self.payload([])
         self.assertIsNone(payload.get("deals", {}).get("specials"))
 
     def test_the_seller_is_named_the_way_every_other_seller_is(self):
