@@ -49,10 +49,20 @@ before deciding what the third seller is allowed to say on the page.
    anywhere on the page. The operator goes on coming from liveaboard.com's
    vessel page, and the 33 hulls only this seller lists carry
    `unknown-operator`, which is the honest answer rather than a gap.
-4. **A cabin ladder.** No node states what a room costs or how many are left
-   at a price, so the *Places* column can never carry a figure from here. This
-   entry used to read *"a fee book"* and *"a dive count, an entry bar, a cabin
-   ladder"*, and two thirds of that was wrong — see below.
+4. ~~**A cabin ladder.**~~ Closed 2026-09-22. No node on the **vessel** page
+   states what a room costs or how many are left, which is what this entry
+   measured; the booking page behind *Select cabin* states both, and
+   `tools/fetch_divebooker_cabins.py` reads it one request per sailing. The id
+   costs nothing — a sailing's Event `@id` fragment is the `tripId` — and what
+   it buys is this seller's room prices and its own `sumFreeSpaces`.
+   **Its per-room counts overlap**, so the *Places* column still carries no
+   figure from here: three options on one Argo Egypt sailing each state 8 free
+   spaces beside a sailing total of 8, and adding them would triple the boat.
+   The whole-sailing count is the seller's own figure, the rooms ship with
+   their prices, and the at-this-price slot stays empty rather than guessed.
+   This entry used to read *"a fee book"* and *"a dive count, an entry bar, a
+   cabin ladder"*, and all three turned out to be about the page nobody had
+   opened.
 
 **Items 4 and 5 were a keyword sweep, and the sweep was the limitation.** They
 read: *"Nothing read carries a required-extras disclosure of any kind … the

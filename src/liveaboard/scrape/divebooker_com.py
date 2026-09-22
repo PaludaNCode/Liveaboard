@@ -182,14 +182,33 @@ class Departure:
     def nights(self) -> int | None:
         return _nights(self.start, self.end) if self.end else None
 
+    @property
+    def booking_id(self) -> str | None:
+        """The number behind *Select cabin*, out of the Event's own `@id`.
+
+        The id is the vessel page plus a fragment --
+        `https://divebooker.com/bella-2-haz432#259223` -- and that fragment
+        **is** the `tripId` the booking page takes, measured on six sailings
+        across two hulls and two dates. Digits only: a fragment that is not a
+        number is not an id this project will put in a query string.
+        """
+        _, _, fragment = (self.event_id or "").partition("#")
+        return fragment if fragment.isdigit() else None
+
     def as_dict(self) -> dict[str, Any]:
         """What the book keeps, which is less than what the page states.
 
         `url` is the vessel page on every row — the site links a sailing by a
         fragment, not a path — so writing it per departure is one constant
-        repeated 977 times. It lives on the vessel instead. `event_id` is that
-        fragment and goes the same way: nothing downstream keys on it, and a
-        field kept in case is a field nobody maintains.
+        repeated 977 times. It lives on the vessel instead.
+
+        **`booking_id` is that fragment, and it is kept now.** This docstring
+        used to drop it beside the url, on the rule that nothing downstream
+        keyed on it and a field kept in case is a field nobody maintains. That
+        was true until the cabin ladder: `/boatorder/booking?tripId=` takes
+        exactly this number, and without it the only way to a sailing's rooms
+        is to re-read all 92 vessel pages for a fragment this book had already
+        seen.
 
         `stated_by` is evidence for the folding rule rather than a fact about
         the sailing, so the vessel carries the counts and the row does not.
@@ -203,6 +222,8 @@ class Departure:
             out["nights"] = self.nights
         if self.offers > 1:
             out["offers"] = self.offers
+        if self.booking_id:
+            out["booking_id"] = self.booking_id
         return out
 
 
@@ -1599,6 +1620,14 @@ class BookingPage:
     offered as shared or private. Adding them would triple the boat.
     """
     cabins: list[CabinOption] = field(default_factory=list)
+    currency: str | None = None
+    """The page's own currency, by :func:`page_currency` and nothing else.
+
+    The same rule the vessel page needed: `Offer.priceCurrency` there is a
+    static per-vessel label that does not describe `Offer.price`, and a ladder
+    labelled in a currency it is not quoted in converts to a fare nobody
+    charges.
+    """
     warnings: list[str] = field(default_factory=list)
 
     @property
@@ -1606,6 +1635,43 @@ class BookingPage:
         """The bottom rung, which is what an advertised fare is elsewhere here."""
         priced = [c.price for c in self.cabins if c.price is not None]
         return min(priced) if priced else None
+
+    def as_dict(self) -> dict[str, Any]:
+        """One sailing's rooms, in the shape `promote` reads a ladder in.
+
+        **The per-room counts are the seller's own and are never summed.**
+        Three options on Argo Egypt each state 8 free spaces beside a sailing
+        total of 8: they are one set of berths offered shared or private, so
+        adding them triples the boat. `free_spaces` here is `sumFreeSpaces`,
+        which the seller states for the sailing, and the rooms carry theirs
+        unsummed.
+        """
+        out: dict[str, Any] = {}
+        if self.trip_id:
+            out["trip_id"] = self.trip_id
+        for key in ("start", "end", "currency"):
+            if getattr(self, key) is not None:
+                out[key] = getattr(self, key)
+        if self.free_spaces is not None:
+            out["free_spaces"] = self.free_spaces
+        rooms = []
+        for cabin in self.cabins:
+            room: dict[str, Any] = {}
+            if cabin.cabin_id:
+                room["cabin_id"] = cabin.cabin_id
+            if cabin.title:
+                room["name"] = cabin.title
+            for key, value in (("price", cabin.price),
+                               ("berths", cabin.free_spaces),
+                               ("sleeps", cabin.max_persons),
+                               ("shareable", cabin.sharing)):
+                if value is not None:
+                    room[key] = value
+            if room:
+                rooms.append(room)
+        if rooms:
+            out["cabins"] = rooms
+        return out
 
 
 def _int(value: Any) -> int | None:
@@ -1797,7 +1863,7 @@ def _conditions(value: Any) -> list[str]:
 def booking_page(html: str) -> BookingPage:
     """Read the cabin ladder and the berth count off one booking page."""
     text, dropped = payload_parts(html)
-    page = BookingPage()
+    page = BookingPage(currency=page_currency(html))
     if dropped:
         page.warnings.append(f"{dropped} streamed chunk(s) did not decode")
 

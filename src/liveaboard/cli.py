@@ -590,6 +590,11 @@ def cmd_promote(args: argparse.Namespace) -> int:
     divebooker_path = Path(args.divebooker)
     if divebooker_path.exists():
         divebooker = json.loads(divebooker_path.read_text(encoding="utf-8"))
+    divebooker_cabins = None
+    divebooker_cabins_path = Path(args.divebooker_cabins)
+    if divebooker_cabins_path.exists():
+        divebooker_cabins = json.loads(
+            divebooker_cabins_path.read_text(encoding="utf-8"))
     aliases_path = Path(args.divebooker_aliases)
     if aliases_path.exists():
         divebooker_aliases = json.loads(aliases_path.read_text(encoding="utf-8"))
@@ -598,6 +603,7 @@ def cmd_promote(args: argparse.Namespace) -> int:
         candidate, season=season, fees=fees, fx=fx, facts=facts, trips=trips,
         padi=padi, padi_departures=padi_departures, cabins=cabins, deals=deals,
         sales=sales, divebooker=divebooker, divebooker_aliases=divebooker_aliases,
+        divebooker_cabins=divebooker_cabins,
     )
 
     block = payload.get("divebooker")
@@ -1080,6 +1086,8 @@ def main(argv: list[str] | None = None) -> int:
     promote_cmd.add_argument("--deals", default=Path("data/deals.json"), type=Path)
     promote_cmd.add_argument("--sales", default=Path("data/sales.json"), type=Path)
     promote_cmd.add_argument("--divebooker", default=Path("data/divebooker.json"), type=Path)
+    promote_cmd.add_argument("--divebooker-cabins",
+                             default=Path("data/divebooker_cabins.json"), type=Path)
     promote_cmd.add_argument("--divebooker-aliases",
                              default=Path("data/divebooker_aliases.json"), type=Path)
     promote_cmd.add_argument("--season-start", default="2027-05-01")

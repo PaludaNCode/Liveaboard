@@ -1,0 +1,103 @@
+name: Read divebooker.com cabin ladders
+
+# What a room costs on the third seller, and how many berths are left — one
+# request per sailing against `/boatorder/booking?tripId=N`, the page behind
+# *Select cabin*.
+#
+# It is its own workflow for the reason `cabins.yml` is, one seller along: the
+# vessel page states a fare and the booking page states the ladder, and they
+# are two passes over two sets of URLs with two costs. Folding this into
+# `divebooker.yml` would put 900 requests behind 92 and make proving a change
+# to either cost both.
+#
+# **Ordering is load-bearing.** A ladder read a day after the fare it explains
+# disagrees with it — all 864 of liveaboard.com's sat up to 0.6% above their
+# own row when the two ran a day apart — and `promote` drops a ladder more
+# than 3% from the fare above it rather than publish a berth nobody can buy.
+# So this runs directly after `divebooker.yml`, against the book that run
+# wrote and the ids it recorded.
+#
+# **What it costs.** About 900 sailings at the five-second pace this project
+# gives a host that states no `Crawl-delay`, so roughly 75 minutes. That pace
+# is the part that may not be cut to make the job shorter; the timeout is set
+# around it instead.
+
+on:
+  # Twenty minutes after divebooker.yml starts, which is long enough for the
+  # 117-request fleet read and its publish to land: this run reads the book
+  # that one commits.
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap sailings read (0 = every sailing with a booking id)"
+        type: string
+        default: "3"
+      delay:
+        description: "Seconds between requests"
+        type: string
+        default: "5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: divebooker-cabins-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    # 900 requests at five seconds is 75 minutes, and a job that dies at 45
+    # writes nothing at all: a capped book is a merge, a killed one is a run
+    # that read for an hour and threw it away.
+    timeout-minutes: 120
+
+    # Resolved once, for `divebooker.yml`'s reason: `inputs` is null on a
+    # scheduled run, so `inputs.limit || 3` would quietly make the nightly job
+    # a three-sailing capped read that merges and looks healthy.
+    env:
+      LIMIT: ${{ github.event_name == 'schedule' && '0' || (inputs.limit || '3') }}
+      DELAY: ${{ inputs.delay || '5' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Only the tests that answer to `src/`: an assertion about committed
+      # data gates the commit below and must never stop the fetch that would
+      # correct it. See tests/published.py.
+      - name: Run the code's own tests
+        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+
+      - name: Read the cabin ladders
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          python3 tools/fetch_divebooker_cabins.py \
+            ${{ env.LIMIT != '0' && format('--limit {0}', env.LIMIT) || '' }} \
+            --delay "$DELAY" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+
+      # The reading, never the dataset built from it.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: divebooker-cabins-${{ github.run_id }}
+          path: data/divebooker_cabins.json
+          retention-days: 1
+
+  publish:
+    needs: fetch
+    uses: ./.github/workflows/publish.yml
+    with:
+      carry: divebooker-cabins-${{ github.run_id }}
+      fresh: data/divebooker_cabins.json
+      paths: "data/divebooker_cabins.json data/egypt-2027.json site/index.html"
+      subject: "data: read {today} divebooker cabin ladders"
+      nothing: "no divebooker cabin ladder has moved"

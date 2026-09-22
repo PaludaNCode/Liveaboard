@@ -209,6 +209,7 @@ tests/            stdlib unittest, no dependencies
 | `data/padi.json` | what PADI states per trip: the entry bar, the dive count, its own fee book | yes |
 | `data/padi_departures.json` | the same sailings as PADI sells them: one price and berth count per boat and day | yes |
 | `data/divebooker.json` | what divebooker.com states: its fleet, its sailings and fares, and one fee panel per trip and length | yes |
+| `data/divebooker_cabins.json` | what a room costs on divebooker.com and how many berths it says are left, one booking page per sailing | yes |
 | `data/divebooker_aliases.json` | which divebooker hull is which boat here, and the ids minted for the ones only it sells | yes — hand-maintained |
 | `data/padi_raw.json` | every field each PADI response published, parsed or not | no — gitignored, cached on the runner, CI artifact for 14 days |
 | `data/deals.json` | what PADI Travel is discounting, one entry per day it was read | yes |

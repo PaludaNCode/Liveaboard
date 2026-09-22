@@ -214,6 +214,20 @@ class TestTheBookingPageIsTheCabinLadder(unittest.TestCase):
         """
         self.assertEqual([c.was for c in self.page.cabins], [None, None, None])
 
+    def test_the_book_keeps_the_rooms_and_the_sellers_own_total(self):
+        """`as_dict` is what `fetch_divebooker_cabins.py` writes per sailing.
+
+        The rooms carry their own counts and the sailing carries
+        `sumFreeSpaces`; nothing in the record is a sum of the other.
+        """
+        record = self.page.as_dict()
+        self.assertEqual(record["trip_id"], "75551")
+        self.assertEqual(record["start"], "2026-12-05")
+        self.assertEqual(record["free_spaces"], 8)
+        self.assertEqual([room["berths"] for room in record["cabins"]], [8, 8, 8])
+        self.assertEqual({room["price"] for room in record["cabins"]}, {1272.0})
+        self.assertTrue(all("name" in room for room in record["cabins"]))
+
     def test_a_page_with_nothing_on_it_reads_as_nothing(self):
         """A *Route on Request* slot returns spaces and no cabin option.
 
@@ -226,6 +240,38 @@ class TestTheBookingPageIsTheCabinLadder(unittest.TestCase):
         self.assertEqual(empty.cabins, [])
         self.assertIsNone(empty.cheapest)
         self.assertEqual(empty.free_spaces, 25)
+
+
+class TestASailingCarriesTheIdItsCabinPageTakes(unittest.TestCase):
+    """The Event's `@id` fragment **is** the booking page's `tripId`.
+
+    Measured on six sailings across two hulls and two dates. The book kept
+    neither the url nor the fragment, on the rule that nothing downstream
+    keyed on it — and then the cabin ladder did, which is why `booking_id` is
+    in the record now: the alternative is re-reading 92 vessel pages for a
+    number this book has already seen.
+    """
+
+    def rows(self, nodes):
+        html = "".join(
+            '<script type="application/ld+json">%s</script>' % json.dumps(node)
+            for node in nodes)
+        return db.departures(html)[0]
+
+    def test_the_fragment_is_the_id_and_reaches_the_book(self):
+        nodes = json.loads(FIXTURE.read_text(encoding="utf-8"))
+        rows = self.rows(nodes)
+        self.assertEqual([row.booking_id for row in rows],
+                         ["259223", "259224", "259225"])
+        self.assertEqual(rows[0].as_dict()["booking_id"], "259223")
+
+    def test_a_fragment_that_is_not_a_number_is_not_an_id(self):
+        """It would reach a query string, so the shape is the whole check."""
+        row = db.Departure(start="2027-05-01",
+                           event_id="https://divebooker.com/bella-2-haz432#pay")
+        self.assertIsNone(row.booking_id)
+        self.assertNotIn("booking_id", row.as_dict())
+        self.assertIsNone(db.Departure(start="2027-05-01").booking_id)
 
 
 class TestTheDayPlanNamesReefsTheSiteListDoesNot(unittest.TestCase):

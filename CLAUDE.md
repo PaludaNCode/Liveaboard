@@ -1498,7 +1498,7 @@ Break these and the site starts lying quietly rather than failing loudly.
   seller, and both fill one ([#92]). A seller that states a count but no ladder
   gets no cabin list — *24 places* and *24 places at a stated price* are
   different claims, and only the second is a ladder.
-- **Two sellers, two counts, and never one number.** A block carries both
+- **Three sellers, two counts, and never one number.** A block carries both
   *at the advertised price* and *on the sailing*, because they are different
   questions and only a ladder answers the first. **Which one PADI's
   `availability` answers was measured, not assumed**: against liveaboard.com's
@@ -1513,6 +1513,25 @@ Break these and the site starts lying quietly rather than failing loudly.
   said it and the day they said it. The two crawls run on different days, so
   `berths_read` and `padi_berths_read` are separate: one date over two sellers
   dates half of them wrong.
+  **The third seller answers the second question only, and for a third
+  reason.** Its booking page — `/boatorder/booking?tripId=`, one request per
+  sailing, read by `divebooker_cabins.yml` after the fleet read — states a
+  price per room *and* a count per room, and those counts **overlap**: three
+  options on one Argo Egypt sailing each state 8 free spaces beside a sailing
+  total of 8, the same berths offered shared or private. Adding them triples
+  the boat, so the at-this-price slot stays empty and the whole-sailing slot
+  takes `sumFreeSpaces`, which the seller states for the sailing. The rooms
+  ship with their prices and their own counts, which the page minimises over
+  and never totals. `divebooker_berths_read` is its own crawl's day, for the
+  reason `padi_berths_read` is: three crawls on three days.
+  **And a ladder answers to its own seller's fare.** `_drop_stale_ladder`
+  takes a reference per seller, because the sellers disagree about a berth on
+  52 of 777 joined sailings — twelve of them Unity's whole season at a steady
+  1.43x — so holding a third seller's ladder to the first seller's price drops
+  the ladders that are right about the disagreement this page exists to show.
+  **No markdown is ever read off that ladder**: `price.old` is an empty string
+  on every option read, so what a real one looks like here has never been
+  seen, and this seller's markdown is `boatSpecials`, against a hull.
 - **A ladder that contradicts its row is not that row's ladder.** The advertised
   price *is* the bottom rung, on 864 of 864, so a rung far below it is not a
   cheaper berth on offer — it is last week's prices still on the shelf. The day
@@ -1747,6 +1766,15 @@ rebuilt whole and `--limit N` merges instead, for `fetch_padi.py`'s reason.
 `data/divebooker_aliases.json` is hand-maintained and outside the publication
 gate: it says which hull is which boat here, and mints ids for the ones only
 this seller sells.
+
+**And its cabin ladders are a second pass, in `divebooker_cabins.yml`.**
+`tools/fetch_divebooker_cabins.py` opens `/boatorder/booking?tripId=` once per
+sailing — the id is the Event `@id` fragment the crawl now keeps as
+`booking_id`, so no vessel page is re-read — which is ~900 requests and about
+75 minutes at the five-second pace. Its own workflow for `cabins.yml`'s
+reason: two passes over two sets of URLs with two costs, and folding them
+would put 900 requests behind 92. It runs **after** the fleet read, because a
+ladder read a day after the fare it explains disagrees with it.
 
 **A deal is a promotion, and PADI publishes them without a browser.**
 `/liveaboard-deals/` is an AngularJS shell — 272 KB, no prices, and a `page=`

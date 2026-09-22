@@ -933,6 +933,42 @@ on liveaboard.com, identical to the cent through two parsers sharing only
 panel is the boat's standing terms and a sailing can carry its own, this
 reading would not know.
 
+## The cabin ladder, and the one page that states it
+
+`/boatorder/booking?tripId=N`, behind *Select cabin*. Read 2026-09-21 by
+`tools/probe_divebooker_booking.py`
+([run 35667350917](https://github.com/PaludaNCode/Liveaboard/actions/runs/35667350917)),
+fetched by `tools/fetch_divebooker_cabins.py` since 2026-09-22 and allowed by
+this host's robots.txt.
+
+**The id costs no request.** A sailing's Event `@id` is the vessel page plus a
+fragment — `https://divebooker.com/bella-2-haz432#259223` — and that fragment
+**is** the `tripId`, on 6 of 6 sailings across two hulls and two dates. The
+crawl keeps it as `booking_id`, so the ladder run opens no vessel page at all:
+one request per sailing, about 900 of them, ~75 minutes at the five-second
+pace. It is its own workflow for the reason `cabins.yml` is one seller along,
+and it runs **after** the fleet read, because a ladder read a day after the
+fare it explains disagrees with it and `promote` drops such a ladder.
+
+What one page states, per room: `cabinId`, a title, `sharing` (the seller's own
+flag for a berth against a room), `price.current`, `price.old`, `price.text`
+(*"per person"* on every option read), `freeSpaces` and `maxPersons`. Per
+sailing: `sumFreeSpaces`, the dates and the trip id.
+
+**The per-room counts overlap and may never be summed.** Three options on one
+Argo Egypt sailing each state 8 free spaces beside a sailing total of 8: they
+are one set of berths offered shared or private. So this seller fills the
+*whole sailing* slot from `sumFreeSpaces` and leaves *at the advertised price*
+empty — the arithmetic liveaboard.com's ladder answers that question with
+(add every room selling at the cheapest price) is exactly what these rooms do
+not support. The rooms still ship with their prices and their own counts,
+which the page takes a minimum over and never a total.
+
+**And no markdown may be read off it yet.** `price.old` is an empty string on
+every option read, so what a real one looks like here has never been seen. It
+parses to nothing and nothing counts a divebooker discount from a ladder; the
+markdown this seller does publish is `boatSpecials`, against a hull.
+
 ## Not yet asked
 
 - **Which nesting is the departure list.** The working reading above, held

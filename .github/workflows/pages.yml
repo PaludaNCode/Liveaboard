@@ -45,6 +45,7 @@ on:
       - "Read trip itineraries"
       - "Read PADI Travel"
       - "Read divebooker.com"
+      - "Read divebooker.com cabin ladders"
       - "Re-promote"
     types: [completed]
   workflow_dispatch:
