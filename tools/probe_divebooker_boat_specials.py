@@ -51,7 +51,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from liveaboard.scrape import jsonld  # noqa: E402
 from liveaboard.scrape.base import FetchBlocked, PoliteFetcher  # noqa: E402
-from liveaboard.scrape.divebooker_com import balanced, payload_parts  # noqa: E402
+from liveaboard.scrape.divebooker_com import (  # noqa: E402
+    balanced,
+    page_currency,
+    payload_parts,
+)
 from probe_divebooker import repair_robots  # noqa: E402
 
 HOST = "divebooker.com"
@@ -217,7 +221,31 @@ def main() -> int:
         })
         if prices:
             print(f"  fares on this page: {len(prices)} distinct,"
-                  f" {prices[0]:.0f} to {prices[-1]:.0f}")
+                  f" {prices[0]:.0f} to {prices[-1]:.0f}"
+                  f" · page states {page_currency(page)}")
+
+        # **Which currency the special is in, measured rather than labelled.**
+        # `Offer.priceCurrency` on this host is a static per-vessel label that
+        # does not describe `Offer.price`, and `currencyId` is the same shape
+        # of claim — so it is tested the way that one was: against the page's
+        # own fares, which are in the page's own currency. A special whose
+        # figure is one of them is printed in the page's currency; one whose
+        # figure only lands after dividing by this payload's own rate for that
+        # id is in the currency the id names.
+        rates = next(iter(values_of(text, "rates")), None)
+        for row in entries(next(iter(values_of(text, "boatSpecials")), None)):
+            now = _number(row.get("price"))
+            rate = _number((rates or {}).get(str(row.get("currencyId"))))
+            if now is None:
+                continue
+            near = [f for f in prices if abs(f - now) < 1]
+            converted = now / rate if rate else None
+            near_converted = ([f for f in prices if abs(f - converted) < 1]
+                              if converted else [])
+            print(f"  the special's {now} against this page's own fares:"
+                  f" as stated {near or 'no match'};"
+                  f" divided by rate {rate} -> {converted}"
+                  f" {near_converted or 'no match'}")
 
     print("\n== across every hull read ==")
     for key in KEYS:
