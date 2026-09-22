@@ -392,7 +392,11 @@ the booking page's `tripId`, verified on both dates, 6 of 6. robots.txt allows
     Over all 92 hulls
     ([35715995100](https://github.com/PaludaNCode/Liveaboard/actions/runs/35715995100)):
     **605 of 606 trips carry a plan, 158 name a reef nothing else on that trip
-    does.** What it does not close is the vocabulary — 406 of this seller's
+    does**, and the full run after it
+    ([35718374554](https://github.com/PaludaNCode/Liveaboard/actions/runs/35718374554))
+    put that in the dataset: 0 of 492 trips still hold a bare reference, 464
+    carry this seller's reef list, and **the itineraries naming no reef went
+    7 → 2**. What it does not close is the vocabulary — 406 of this seller's
     3,295 stated reef names, in 48 spellings, are ones this project does not
     place, and whether *Blue Hole* or *Abu Kafan* becomes a filter chip is a
     decision about the page rather than a parser fix. See
