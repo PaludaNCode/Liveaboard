@@ -52,7 +52,7 @@ on:
         type: boolean
         default: false
       divebooker_ask:
-        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,specials,boatspecials"
+        description: "Which divebooker questions to ask: robots,shell,fare,currency,details,feeshape,feejoin,verdict,persailing,cabins,booking,fixture,flight,search,listprice,boatspecials"
         type: string
         default: ""
       divebooker_sample:
@@ -474,8 +474,12 @@ jobs:
       # the question it decides. Reads the deals page, the unread node type on
       # a vessel page, and sweeps the streamed payload for a markdown-shaped
       # key -- the sweep that missed the fee panel asked about four words.
+      # `listprice` rather than `specials`: `contains` is a substring test, so
+      # a token that is a substring of another runs both steps -- asking for
+      # `boatspecials` ran this one too, which is a probe nobody asked for
+      # making requests nobody counted.
       - name: Does this seller state a list price anywhere
-        if: contains(inputs.divebooker_ask, 'specials')
+        if: contains(inputs.divebooker_ask, 'listprice')
         run: |
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           python3 tools/probe_divebooker_specials.py \

@@ -116,7 +116,10 @@ def census(rows: list[dict], label: str) -> None:
         return
     counts: Counter[str] = Counter()
     for row in rows:
-        counts.update(row)
+        # `.keys()`, because `Counter.update` of a *mapping* adds its values --
+        # and an entry here holds a nested `book` object, so the census of what
+        # the source states died on the first hull carrying one.
+        counts.update(row.keys())
     total = len(rows)
     print(f"  {label}: {total} entr{'y' if total == 1 else 'ies'}")
     for key, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
@@ -184,6 +187,10 @@ def main() -> int:
             continue
         text, dropped = payload_parts(page)
         print(f"  payload {len(text) / 1024:.0f} KB, {dropped} chunk(s) undecodable")
+        for key in ("currencies", "rates"):
+            for value in values_of(text, key)[:1]:
+                print(f"  {key}: {json.dumps(value, ensure_ascii=False)[:200]}")
+
         for key in KEYS:
             values = values_of(text, key)
             rows = [row for value in values for row in entries(value)]
@@ -215,6 +222,17 @@ def main() -> int:
     print("\n== across every hull read ==")
     for key in KEYS:
         census(every[key], key)
+
+    print("\n== what the stated pair comes to, against the words beside it ==")
+    for row in every["boatSpecials"]:
+        now, before = _number(row.get("price")), _number(row.get("old"))
+        rate = f"{100 * (1 - now / before):.0f}%" if now and before and before > now else "—"
+        print(f"  {str(row.get('name'))[:28]:<30} {str(row.get('tag')):<18}"
+              f" {now} / {before} = {rate:<5} cur {row.get('currencyId')}"
+              f"  terms={row.get('terms')!r}")
+        print(f"      descr: {str(row.get('descr'))[:100]!r}")
+    kinds = Counter(type(row.get("price")).__name__ for row in every["boatSpecials"])
+    print(f"  price is stated as: {dict(kinds)}")
     print("\n  What this decides: an entry naming the boat and nothing else is a")
     print("  campaign line — the sale table can print it, a departure row cannot.")
     print("  An entry stating a rate and a window is a markdown, and the next")
