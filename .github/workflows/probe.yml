@@ -79,6 +79,10 @@ on:
         description: "Vessel slug for the flight probe, as the book names it"
         type: string
         default: "red-sea-aggressor-ii"
+      divebooker_skip:
+        description: "Pressable rows to step over before pressing (selectcabin). The rows near the top are the ten Events whose ids we already read; only a row past them asks the question"
+        type: string
+        default: "0"
       divebooker_trips:
         description: "tripId values for the booking probe, e.g. 254581"
         type: string
@@ -505,6 +509,7 @@ jobs:
           python3 tools/probe_divebooker_select_cabin.py \
             --vessel "${{ inputs.divebooker_vessel || '' }}" \
             --clicks 3 \
+            --skip "${{ inputs.divebooker_skip || '0' }}" \
             ${{ inputs.dump_html && '--dump-html' || '' }} \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}

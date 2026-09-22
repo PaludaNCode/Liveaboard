@@ -176,6 +176,10 @@ def main() -> int:
                              "the hull with the most sailings")
     parser.add_argument("--clicks", type=int, default=3,
                         help="presses to make, after the DOM has been read")
+    parser.add_argument("--scrolls", type=int, default=6,
+                        help="scrolls to the foot of the page before "
+                             "counting, since a row has to render before it "
+                             "can be pressed")
     parser.add_argument("--skip", type=int, default=0,
                         help="pressable rows to step over before pressing. "
                              "The rows near the top are the ten Events the "
@@ -246,6 +250,26 @@ def main() -> int:
             print(f"   the page never went idle ({exc}); reading it at load")
             page.goto(url, timeout=args.timeout * 1000, wait_until="load")
             page.wait_for_timeout(4000)
+
+        # 0. Whether the departure list even renders past the Events. The
+        # question is a row the page publishes no Event for, and such a row
+        # has to be on screen before it can be pressed: 906 sailings against
+        # ten Events a hull states means most of this list arrives, if at all,
+        # from scrolling or from a control nobody has pressed. Counted after
+        # each scroll rather than assumed, because "the rest of the list is
+        # below the fold" and "there is no rest of the list" look identical
+        # from a first paint.
+        rows = page.locator(PRESS_SELECTOR).filter(has_text=PRESSABLE)
+        seen_rows = rows.count()
+        print(f"\n-- {seen_rows} pressable row(s) at first paint")
+        for step in range(args.scrolls):
+            page.mouse.wheel(0, 20000)
+            page.wait_for_timeout(1500)
+            now = rows.count()
+            print(f"   after scroll {step + 1}: {now}")
+            if now == seen_rows:
+                break
+            seen_rows = now
 
         # 1. The rendered DOM, which is the cheapest answer there could be.
         rendered = anchors(page, args.max_nodes)
