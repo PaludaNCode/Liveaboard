@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-22",
+  "collected": "2026-09-23",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -1469,6 +1469,35 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=422602&languageID=1&curr=USD&showPrices=false"
     },
+    "alsuraya::Brothers, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "alsuraya",
+      "name": "15% Off: Brothers, Daedalus and Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "422602",
+      "collected": "2026-09-23",
+      "regions": [
+        "The Brothers",
+        "Daedalus",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "There is so much to see that you're spoilt for choice, but don’t forget to keep an eye out for the blue. This safari offers challenging dives, big drop-offs, beautiful coral walls, and plenty of large fish. Brother Islands, Daedalus & Elphinstone are a must for all die-hard Red Sea divers.",
+      "sections": [
+        {
+          "heading": "Sample Itinerary",
+          "text": "Day 1: Check-in from 4:00 PM on Alsuraya Liveaboard Welcome briefing, boat orientation & equipment setup Dinner on board Spend the first night at the marina Day 2: Safety & boat briefing 1st dive: Marsa Torombi 2nd dive: Marsa Torombi 3rd dive: Marsa Torombi (night dive) Day 3: 1st dive: Big Brother 2nd dive: Big Brother 3rd dive: Little Brother Day 4: 1st dive: Daedalus 2nd dive: Daedalus 3rd dive: Daedalus Day 5: 1st dive: Daedalus 2nd dive: Daedalus 3rd dive: Daedalus Day 6: 1st dive: Elphinstone 2nd dive: Elphinstone 3rd dive: Abu Dabbab 4th dive: Abu Dabbab (night dive) Day 7: 1st dive: Abu Dabbab 2nd dive: Marsa Shouna Day 8: Breakfast Check-out latest at 10:00 AM Expect a mix of vibrant reef life and big pelagic encounters on this itinerary. The Brothers, Daedalus, and Elphinstone are known for sightings of oceanic whitetip and hammerhead sharks, along with schools of barracuda, tuna, and trevallies cruising the drop-offs. You’ll also explore colorful coral gardens packed with reef fish, plus chances to spot turtles, eagle rays, and occasional dolphins along the way. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=422602&languageID=1&curr=USD&showPrices=false"
+    },
     "alsuraya::Daedalus, Rocky, Zabargad & Elphinstone (Port Ghalib - Port Ghalib)": {
       "boat": "alsuraya",
       "name": "10% Off: Daedalus, Rocky, Zabargad & Elphinstone (Port Ghalib - Port Ghalib)",
@@ -1497,6 +1526,40 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=422600&languageID=1&curr=USD&showPrices=false"
+    },
+    "alsuraya::Deadalus, Sataya, Fury Shoal (Port Ghalib - Port Ghalib)": {
+      "boat": "alsuraya",
+      "name": "15% Off: Deadalus, Sataya, Fury Shoal (Port Ghalib - Port Ghalib)",
+      "tour_id": "422615",
+      "collected": "2026-09-23",
+      "regions": [
+        "Elphinstone",
+        "Fury Shoal",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "fury shoals",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This route combines adventure, big fish encounters, and relaxed reef diving into one unforgettable Red Sea experience. Located in the open sea, Daedalus is famous for its steep walls covered in soft corals and for encounters with pelagic species. This is one of the best places in the Red Sea to spot hammerheads, grey reef sharks, and even thresher sharks. With exciting drift dives and spectacular drop-offs, Daedalus is a highlight for experienced divers. Sataya is a vast lagoon with crystal-clear waters and an impressive fringing reef. It is most famous for the large pods of spinner dolphins that regularly visit the lagoon. Both divers and snorkelers have the rare opportunity to encounter these playful creatures in their natural environment. Fury Shoal is a group of vibrant reefs in the southern Red Sea, offering an amazing variety of dive sites. From dramatic coral gardens and swim-throughs like Sha’ab Claudio to small wrecks such as Abu Galawa, the area provides both adventure and relaxing dives. Shallow lagoons, caves, and colorful reef walls make Fury Shoal a true diver’s paradise.",
+      "sections": [
+        {
+          "heading": "Who is this itinerary for?",
+          "text": "The combination of exhilarating drift dives at Daedalus with the colorful, more sheltered reefs of Sataya and Fury Shoal makes this itinerary ideal for divers who enjoy variety and adventure. Snorkelers will also find plenty to enjoy, especially at Sataya and Fury Shoal. A liveaboard adventure full of contrasts: thrilling shark encounters, playful dolphins, and stunning coral gardens – all in one journey.",
+          "is_day": false
+        },
+        {
+          "heading": "Sample Itinerary",
+          "text": "Day 1: Check-in from 4:00 PM on Alsuraya Liveaboard Welcome briefing, boat orientation & equipment setup Dinner on board Spend the first night at the marina Day 2: Safety & boat briefing 1st dive: Shaab Marsa Alam 2nd dive: Shaab Sharm Day 3: 1st dive: Shaab Maksur 2nd dive: Malahi 3rd dive: Claudia 4th dive: Dolphin House (night dive) Day 4: 1st dive: Dolphin House 2nd dive: Stairway to Heaven 3rd dive: Abu Galawa Soghayr 4th dive: Abu Galawa Soghayr (night dive) Day 5: 1st dive: Daedalus 2nd dive: Daedalus 3rd dive: Daedalus Day 6: 1st dive: Daedalus 2nd dive: Daedalus 3rd dive: Daedalus Day 7: 1st dive: Elphinstone 2nd dive: Elphinstone Day 8: Breakfast Check-out latest at 10:00 AM Experience the southern Red Sea’s incredible marine life, from thrilling shark encounters at Daedalus Reef—home to hammerheads, grey reef, and thresher sharks—to playful spinner dolphins in the crystal-clear lagoon of Sataya. Explore Fury Shoal’s colorful coral gardens, caves, and small wrecks teeming with reef fish. This itinerary blends adventure and tranquility, offering unforgettable dives with big pelagics, vibrant reefs, and dolphin encounters. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=422615&languageID=1&curr=USD&showPrices=false"
     },
     "alsuraya::Deadalus, St. John´s & Elphinstone (Port Ghalib - Port Ghalib)": {
       "boat": "alsuraya",
@@ -1559,6 +1622,69 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=422603&languageID=1&curr=USD&showPrices=false"
+    },
+    "alsuraya::North and Straits of Tiran (Hurghada - Hurghada)": {
+      "boat": "alsuraya",
+      "name": "North and Straits of Tiran (Hurghada - Hurghada)",
+      "tour_id": "373881",
+      "collected": "2026-09-23",
+      "regions": [
+        "Jackson Reef",
+        "Abu Nuhas",
+        "Thistlegorm",
+        "Gordon Reef",
+        "Ras Mohammed",
+        "Straits Of Tiran"
+      ],
+      "dive_sites": [
+        "tiran",
+        "abu nuhas",
+        "thistlegorm",
+        "ras mohammed"
+      ],
+      "dives": 21,
+      "guests": 24,
+      "experience": "Advanced Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "This 8-day Red Sea liveaboard combines legendary northern wrecks and southern reef adventures. From classic wrecks like Thistlegorm, Dunraven, and Abu Nuhas to vibrant reefs at Shark Yolanda, Giftun Island, and Dolphin House, the itinerary offers a perfect mix of historical wreck exploration, thrilling pelagic encounters, and stunning coral gardens. Both day and night dives are included for a complete Red Sea experience.",
+      "sections": [
+        {
+          "heading": "Sample Itinerary",
+          "text": "Day 1: Check-in from 4:00 PM on Alsuraya Liveaboard Welcome briefing, boat orientation & equipment setup Dinner on board Spend the first night at the marina Day 2: Safety & boat briefing 1st dive: Giftun Island 2nd dive: Dunraven Wreck 3rd dive: Shaab Mahmoud (night dive) Day 3: 1st dive: Shark Yolanda Reef 2nd dive: Jackfish Alley 3rd dive: Gordon Reef 4th dive: Gordon Reef (night dive) Day 4: 1st dive: Thomas Reef 2nd dive: Jacson Reef 3rd dive: Anemone City 4th dive: Thistlegorm (night dive) Day 5: 1st dive: Thistlegorm 2nd dive: Thistlegorm 3rd dive: Ulysses Wreck 4th dive: Gubal Island (night dive) Day 6: 1st dive: Abu Nuhas (Chrisoula K. wreck) 2nd dive: Abu Nuhas (Carnatic) 3rd dive: Abu Nuhas (Giannis D) 4th dive: Dolphin House (night dive) Day 7: 1st dive: Dolphin House 2nd dive: Umm Gamar Day 8: Breakfast Check-out latest at 10:00 AM Divers can expect hammerhead and reef sharks, large schools of barracuda, trevallies, and tuna around wrecks and walls. Northern wrecks like Thistlegorm and Abu Nuhas host colorful reef fish, turtles, and rays, while southern reefs like Dolphin House, Shark Yolanda, and Giftun Island offer playful dolphins and vibrant coral communities. Night dives reveal nocturnal critters and fascinating macro life, making this a rich and varied Red Sea adventure. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=373881&languageID=1&curr=USD&showPrices=false"
+    },
+    "alsuraya::North, Wrecks And Reefs (Hurghada - Hurghada)": {
+      "boat": "alsuraya",
+      "name": "North, Wrecks And Reefs (Hurghada - Hurghada)",
+      "tour_id": "373880",
+      "collected": "2026-09-23",
+      "regions": [
+        "Thistlegorm",
+        "Ras Mohammed",
+        "Abu Nuhas",
+        "Shark and Yolanda"
+      ],
+      "dive_sites": [
+        "thistlegorm",
+        "ras mohammed",
+        "abu nuhas"
+      ],
+      "dives": 21,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This 8-day Red Sea liveaboard adventure blends famous northern wrecks with southern reef and island dives. Highlights include historic wrecks such as Thistlegorm, Abu Nuhas, and Dunraven, along with stunning reefs at Shark Yolanda, Dolphin House, and Giftun Island. With both day and night dives, the itinerary offers a complete mix of wreck exploration, reef encounters, and vibrant marine life.",
+      "sections": [
+        {
+          "heading": "Sample Itinerary",
+          "text": "Day 1: Check-in from 4:00 PM on Alsuraya Liveaboard Welcome briefing, boat orientation & equipment setup Dinner on board Spend the first night at the marina Day 2: Safety & boat briefing 1st dive: Poseidon Reef 2nd dive: Dunraven Wreck 3rd dive: Shaab Mahmoud (night dive) Day 3: 1st dive: Shark Yolanda Reef 2nd dive: Anemone City 3rd dive: Thistlegorm 4th dive: Thistlegorm (night dive) Day 4: 1st dive: Thistlegorm 2nd dive: Kingston Wreck 3rd dive: Ulysses Wreck 4th dive: Gubal Island (night dive) Day 5: 1st dive: Abu Nuhas (Chrisoula K. wreck) 2nd dive: Abu Nuhas (Carnatic) 3rd dive: Abu Nuhas (Giannis D) 4th dive: Siyul Island (night dive) Day 6: 1st dive: Siyul Island 2nd dive: Umm Gamar 3rd dive: Dolphin House 4th dive: Dolphin House (night dive) Day 7: 1st dive: Dolphin House 2nd dive: El Mina Wreck / Giftun Island Day 8: Breakfast Check-out latest at 10:00 AM Expect encounters with hammerhead and reef sharks, large schools of barracuda, trevallies, and tuna near wrecks and walls. Reefs like Shark Yolanda, Dolphin House, and Giftun Island host turtles, rays, colorful reef fish, and playful dolphins, while night dives reveal nocturnal creatures and rich macro life, offering a full spectrum of Red Sea biodiversity. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6428&tourID=373880&languageID=1&curr=USD&showPrices=false"
     },
     "amelie-adventures::Best of Hurghada (Hurghada - Hurghada)": {
       "boat": "amelie-adventures",
@@ -29068,6 +29194,77 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5733&tourID=406611&languageID=1&curr=USD&showPrices=false"
     },
+    "topaz::Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)": {
+      "boat": "topaz",
+      "name": "Brother Islands - Daedalus - Elphinstone (Hurghada - Hurghada)",
+      "tour_id": "385367",
+      "collected": "2026-09-23",
+      "regions": [
+        "The Brothers",
+        "Salem Express",
+        "Elphinstone",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "brothers",
+        "salem express",
+        "elphinstone",
+        "daedalus"
+      ],
+      "dives": 18,
+      "guests": 28,
+      "experience": "Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This liveaboard safari takes divers to some of the Red Sea's most iconic offshore reefs. The adventure begins with the legendary Brother Islands—Small Brother and Big Brother—famed for their dramatic walls, strong currents, and regular sightings of large pelagics, including hammerhead sharks and dolphins. Next, explore Daedalus Reef, a remote marine park with sweeping walls, vibrant corals, and the chance to encounter schools of jacks, barracuda, and grey reef sharks. Its offshore location makes it one of Egypt's most thrilling dive experiences. The journey concludes at Elphinstone Reef, a must-visit for its sheer drop-offs, abundant soft corals, and frequent sightings of sharks and large pelagics. With challenging drift dives, pristine reef environments, and unforgettable encounters with big fish, the BDE route is perfect for experienced divers seeking adventure and the Red Sea's top offshore sites.",
+      "sections": [
+        {
+          "heading": "Possible Dive Sites on the Tour:",
+          "text": "Ras Disha. Wreck of the Salem Express. Middle Reef. Brother Islands. Daedalus. Elphinstone. Marsa Alam. Panorama Reef. El Mina Wreck.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check-in from 4:00 p.m. Welcome and safety briefing. Dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "1st dive - Ras Disha. 2nd dive - Wreck of the Salem Express. 3rd dive - Middle Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "1st dive - Big Brother South. 2nd dive - Big Brother (Numidia wreck). 3rd dive - Little Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "1st dive - Daedalus North. 2nd dive - Daedalus East. 3rd dive - Daedalus South.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "1st dive - Daedalus. 2nd dive - Daedalus. 3rd dive - Daedalus West.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "1st dive - Elphinstone North. 2nd dive - Elphinstone South. 3rd dive - Marsa Alam Area. 4th dive - Night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "1st dive - Panorama Reef. 2nd dive - El Mina Wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Breakfast. Check out by 10:00 a.m. at the latest. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=385367&languageID=1&curr=USD&showPrices=false"
+    },
     "topaz::Brother Islands - Daedalus - Elphinstone (Hurghada - Port Ghalib)": {
       "boat": "topaz",
       "name": "10% Off: Brother Islands - Daedalus - Elphinstone (Hurghada - Port Ghalib)",
@@ -29210,6 +29407,146 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408959&languageID=1&curr=USD&showPrices=false"
     },
+    "topaz::Brother Islands - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)": {
+      "boat": "topaz",
+      "name": "Brother Islands - Daedalus - Elphinstone (Port Ghalib - Port Ghalib)",
+      "tour_id": "408964",
+      "collected": "2026-09-23",
+      "regions": [
+        "Elphinstone",
+        "Daedalus",
+        "The Brothers",
+        "Salem Express"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "daedalus",
+        "brothers",
+        "salem express"
+      ],
+      "dives": 18,
+      "guests": 28,
+      "experience": "Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "This liveaboard safari takes divers to some of the Red Sea's most iconic offshore reefs. The adventure begins with the legendary Brother Islands—Small Brother and Big Brother—famed for their dramatic walls, strong currents, and regular sightings of large pelagics, including hammerhead sharks and dolphins. Next, explore Daedalus Reef, a remote marine park with sweeping walls, vibrant corals, and the chance to encounter schools of jacks, barracuda, and grey reef sharks. Its offshore location makes it one of Egypt's most thrilling dive experiences. The journey concludes at Elphinstone Reef, a must-visit for its sheer drop-offs, abundant soft corals, and frequent sightings of sharks and large pelagics. With challenging drift dives, pristine reef environments, and unforgettable encounters with big fish, the BDE route is perfect for experienced divers seeking adventure and the Red Sea's top offshore sites.",
+      "sections": [
+        {
+          "heading": "Possible Dive Sites on the Tour:",
+          "text": "Ras Disha. Wreck of the Salem Express. Middle Reef. Brother Islands. Daedalus. Elphinstone. Marsa Alam. Panorama Reef. El Mina Wreck.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Check-in from 4:00 p.m. Welcome and safety briefing. Dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "1st dive - Ras Disha. 2nd dive - Wreck of the Salem Express. 3rd dive - Middle Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "1st dive - Big Brother South. 2nd dive - Big Brother (Numidia wreck). 3rd dive - Little Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "1st dive - Daedalus North. 2nd dive - Daedalus East. 3rd dive - Daedalus South.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "1st dive - Daedalus. 2nd dive - Daedalus. 3rd dive - Daedalus West.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "1st dive - Elphinstone North. 2nd dive - Elphinstone South. 3rd dive - Marsa Alam Area. 4th dive - Night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "1st dive - Panorama Reef. 2nd dive - El Mina Wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Breakfast. Check out by 10:00 a.m. at the latest. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408964&languageID=1&curr=USD&showPrices=false"
+    },
+    "topaz::Daedalus - Rocky - Zabargad (Port Ghalib - Port Ghalib)": {
+      "boat": "topaz",
+      "name": "Daedalus - Rocky - Zabargad (Port Ghalib - Port Ghalib)",
+      "tour_id": "408959",
+      "collected": "2026-09-23",
+      "regions": [
+        "Daedalus",
+        "Zabargad",
+        "Rocky"
+      ],
+      "dive_sites": [
+        "daedalus",
+        "zabargad",
+        "rocky island"
+      ],
+      "dives": 18,
+      "guests": 28,
+      "experience": "Advanced Open Water - 35 minimum logged dives required.",
+      "min_logged_dives": 35,
+      "intro": "This safari aboard My Topaz sails from Port Ghalib to Abu Dabab, Daedalus Reef, Rocky Island, Zabargad, the Sataya area, and Elphinstone Reef before returning to Port Ghalib.",
+      "sections": [
+        {
+          "heading": "Day 1 – Arrival",
+          "text": "Arrival in Port Ghalib and transfer to the boat. Check-in, dinner, and overnight aboard the boat in the harbour.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Departure",
+          "text": "Departure from Port Ghalib in the morning, followed by a boat, dive, safety and equipment briefing. Dives at Abu Dabab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Daedalus Reef",
+          "text": "Three dives at Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Daedalus Reef",
+          "text": "Three dives at Daedalus Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Rocky Island & Zabargad",
+          "text": "Dives around Rocky Island and Zabargad.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – Sataya",
+          "text": "Dives at Sataya, Shaab Claude and Abu Galawa Soraya, with a night dive at Gota Bohar.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Return",
+          "text": "Dives at Elphinstone Reef and Abu Dabab, followed by the return to Port Ghalib.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Check-out",
+          "text": "Breakfast and check-out by 10:00 AM, followed by transfer to the airport or hotel.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Schools of more than 20 hammerhead sharks, tuna and barracuda at Daedalus Reef; whitetip sharks, grey reef sharks and manta rays at Rocky Island; and tuna, scorpionfish, leopard sharks, nurse sharks, angelfish, groupers, moray eels and blue-spotted stingrays at Zabargad. Abu Dabab is generally known for its resident turtles and dugongs, Sataya for its pod of spinner dolphins, and Elphinstone Reef for oceanic whitetip and hammerhead shark sightings. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408959&languageID=1&curr=USD&showPrices=false"
+    },
     "topaz::Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)": {
       "boat": "topaz",
       "name": "10% Off: Daedalus - Rocky - Zabargad - Elphinstone (Port Ghalib - Port Ghalib)",
@@ -29280,6 +29617,67 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408958&languageID=1&curr=USD&showPrices=false"
+    },
+    "topaz::Dancing with Dolphins - Dolphin Liveaboard Safari (Hurghada - Hurghada)": {
+      "boat": "topaz",
+      "name": "20% Off: Dancing with Dolphins - Dolphin Liveaboard Safari (Hurghada - Hurghada)",
+      "tour_id": "408972",
+      "collected": "2026-09-23",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 18,
+      "guests": 28,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "The Retreat Flow",
+          "text": "Each day includes: Dolphin sessions. Sunrise/sunset yoga. Breathwork & wellbeing workshops. Time to rest, read, and sunbathe. Chef-prepared meals + full crew service. A balanced week built for. clarity, energy, and ease.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Afternoon boarding on Topaz. Welcome drink. Meet the crew & group. Sunset sails toward Dolphin Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Early arrival at Dolphin Reef. Dolphin briefing. First dolphin swim. Afternoon session + sunset yoga.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "Morning dolphin swim. Wellbeing workshop. Afternoon dolphin session.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "Sunrise yoga Dolphin swim Free time on deck Optional freediving basics",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "Morning dolphins. Snorkeling/diving at a nearby reef (optional). Relaxed afternoon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6:",
+          "text": "Dolphins swim. Free afternoon (reading, sun, meditation). Closing circle + stargazing.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "Final dolphin session. Sail back toward port. Celebration dinner.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8:",
+          "text": "Arrival at the port. Breakfast + check-out. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6518&tourID=408972&languageID=1&curr=USD&showPrices=false"
     },
     "topaz::Dancing with Dolphins - Dolphin Liveaboard Safari (Port Ghalib - Port Ghalib)": {
       "boat": "topaz",

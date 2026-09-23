@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-22",
+ "collected": "2026-09-23",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -1112,6 +1112,7 @@
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
    "dive_sites": [
+    "shaab sharm",
     "abu dabab",
     "brothers",
     "daedalus",
@@ -1197,6 +1198,7 @@
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
    "dive_sites": [
+    "shaab sharm",
     "abu dabab",
     "brothers",
     "daedalus",
@@ -1282,6 +1284,7 @@
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
    "dive_sites": [
+    "shaab sharm",
     "abu dabab",
     "brothers",
     "daedalus",
@@ -1367,6 +1370,7 @@
    "boat": "alsuraya",
    "boat_name": "Alsuraya",
    "dive_sites": [
+    "shaab sharm",
     "abu dabab",
     "brothers",
     "daedalus",
@@ -1456,6 +1460,7 @@
     "gubal",
     "brothers",
     "abu nuhas",
+    "small crack",
     "ras mohammed"
    ],
    "dives": 12,
@@ -1711,8 +1716,10 @@
     "abu nuhas",
     "ras mohammed",
     "umm gamar",
+    "small crack",
     "sha'ab el erg",
-    "gota abu ramada"
+    "gota abu ramada",
+    "el mina"
    ],
    "dives": 18,
    "fees": {
@@ -1798,6 +1805,7 @@
     "gubal",
     "thistlegorm",
     "brothers",
+    "small crack",
     "ras mohammed"
    ],
    "dives": 18,
@@ -1883,6 +1891,10 @@
     "tiran",
     "ras mohammed",
     "dahab",
+    "blue hole",
+    "ras abu galum",
+    "gabr el bint",
+    "small crack",
     "gota abu ramada",
     "sha'ab el erg"
    ],
@@ -2067,7 +2079,9 @@
     "rosalie moller",
     "gubal",
     "sha'ab el erg",
-    "giftun"
+    "giftun",
+    "carless reef",
+    "gota abu ramada"
    ],
    "dives": 18,
    "fees": {
@@ -2187,7 +2201,9 @@
     "rosalie moller",
     "gubal",
     "sha'ab el erg",
-    "giftun"
+    "giftun",
+    "carless reef",
+    "gota abu ramada"
    ],
    "dives": 8,
    "fees": {
@@ -2775,7 +2791,8 @@
    "dive_sites": [
     "brothers",
     "daedalus",
-    "elphinstone"
+    "elphinstone",
+    "ras mohammed"
    ],
    "dives": 18,
    "fees": {
@@ -3701,6 +3718,7 @@
    "dive_sites": [
     "habili ali",
     "dangerous reef",
+    "paradise reef",
     "st johns"
    ],
    "dives": 18,
@@ -5416,6 +5434,8 @@
     "abu nuhas",
     "sha'ab el erg",
     "dahab",
+    "blue hole",
+    "gabr el bint",
     "tiran",
     "ras mohammed",
     "thistlegorm",
@@ -5515,7 +5535,8 @@
     "marsa shouna",
     "sataya",
     "sataya reef",
-    "fury shoals"
+    "fury shoals",
+    "shaab sharm"
    ],
    "dives": 17,
    "fees": {
@@ -6018,13 +6039,16 @@
    "boat_name": "MY AVO",
    "dive_sites": [
     "abu dabab",
+    "shaab marsa alam",
     "habili ali",
     "dangerous reef",
     "gota kebir",
     "st johns",
+    "gota soraya",
     "sataya",
     "sataya reef",
     "fury shoals",
+    "shaab sharm",
     "elphinstone"
    ],
    "dives": 17,
@@ -6124,6 +6148,7 @@
     "st johns",
     "sataya",
     "sataya reef",
+    "shaab marsa alam",
     "fury shoals",
     "elphinstone"
    ],
@@ -6224,6 +6249,7 @@
     "st johns",
     "sataya",
     "sataya reef",
+    "shaab marsa alam",
     "fury shoals",
     "elphinstone"
    ],
@@ -6334,6 +6360,7 @@
     "st johns",
     "sataya",
     "sataya reef",
+    "shaab marsa alam",
     "fury shoals",
     "elphinstone"
    ],
@@ -6438,6 +6465,7 @@
    "boat_name": "Bella 2",
    "dive_sites": [
     "dahab",
+    "blue hole",
     "tiran",
     "ras mohammed"
    ],
@@ -10214,7 +10242,8 @@
     "abu nuhas",
     "ras mohammed",
     "tiran",
-    "dahab"
+    "dahab",
+    "blue hole"
    ],
    "dives": 19,
    "fees": {
@@ -11061,6 +11090,7 @@
     "tiran",
     "dahab",
     "sha'ab el erg",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 15,
@@ -12256,7 +12286,8 @@
    "boat": "blue-storm",
    "boat_name": "MY Blue Storm",
    "dive_sites": [
-    "tiran"
+    "tiran",
+    "laguna reef"
    ],
    "dives": 19,
    "fees": {
@@ -13398,7 +13429,8 @@
    "dive_sites": [
     "ras mohammed",
     "tiran",
-    "dahab"
+    "dahab",
+    "blue hole"
    ],
    "dives": 17,
    "fees": {
@@ -13572,8 +13604,10 @@
    "dive_sites": [
     "ras mohammed",
     "thistlegorm",
+    "small crack",
     "gubal",
-    "tiran"
+    "tiran",
+    "ras katy"
    ],
    "dives": 20,
    "fees": {
@@ -13662,6 +13696,7 @@
    "boat": "carlton",
    "boat_name": "MY Carlton",
    "dive_sites": [
+    "small crack",
     "ras mohammed",
     "thistlegorm"
    ],
@@ -14117,7 +14152,8 @@
     "zabargad",
     "st johns",
     "habili ali",
-    "gota kebir"
+    "gota kebir",
+    "gota soraya"
    ],
    "dives": 17,
    "fees": {
@@ -14625,7 +14661,8 @@
     "st johns",
     "fury shoals",
     "habili ali",
-    "gota kebir"
+    "gota kebir",
+    "gota soraya"
    ],
    "dives": 17,
    "fees": {
@@ -15358,12 +15395,14 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "thistlegorm",
     "ras mohammed",
     "gubal",
     "abu nuhas",
     "safaga",
     "panorama reef",
+    "abu kafan",
     "brothers",
     "daedalus",
     "rocky island",
@@ -16288,6 +16327,7 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "thistlegorm",
     "ras mohammed",
     "abu nuhas",
@@ -16699,12 +16739,14 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "thistlegorm",
     "ras mohammed",
     "gubal",
     "abu nuhas",
     "safaga",
     "panorama reef",
+    "abu kafan",
     "brothers",
     "daedalus",
     "rocky island",
@@ -17822,6 +17864,7 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "thistlegorm",
     "ras mohammed",
     "abu nuhas",
@@ -19242,6 +19285,7 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "thistlegorm",
     "ras mohammed",
     "abu nuhas",
@@ -19552,7 +19596,8 @@
     "salem express",
     "panorama reef",
     "middle reef",
-    "tobia arbaa"
+    "tobia arbaa",
+    "tobia kebir"
    ],
    "dives": 14,
    "fees": {
@@ -19963,6 +20008,7 @@
     "safaga",
     "panorama reef",
     "middle reef",
+    "abu kafan",
     "ras mohammed"
    ],
    "dives": 20,
@@ -22115,8 +22161,10 @@
    "boat": "eriny",
    "boat_name": "Eriny",
    "dive_sites": [
+    "ras katy",
     "ras mohammed",
     "thistlegorm",
+    "small crack",
     "tiran",
     "gubal",
     "dahab"
@@ -22306,6 +22354,7 @@
    "dive_sites": [
     "thistlegorm",
     "tiran",
+    "ras katy",
     "ras mohammed",
     "gubal"
    ],
@@ -23458,7 +23507,8 @@
    "dive_sites": [
     "thistlegorm",
     "ras mohammed",
-    "tiran"
+    "tiran",
+    "laguna reef"
    ],
    "dives": 11,
    "fees": {
@@ -25866,6 +25916,7 @@
     "salem express",
     "panorama reef",
     "safaga",
+    "gota abu ramada",
     "giftun"
    ],
    "dives": 17,
@@ -26236,6 +26287,8 @@
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
    "dive_sites": [
+    "shaab marsa alam",
+    "shaab sharm",
     "fury shoals",
     "st johns",
     "sataya",
@@ -26544,7 +26597,9 @@
    "dive_sites": [
     "thistlegorm",
     "abu nuhas",
-    "brothers"
+    "brothers",
+    "panorama reef",
+    "gota abu ramada"
    ],
    "dives": 17,
    "fees": {
@@ -26645,7 +26700,9 @@
    "dive_sites": [
     "thistlegorm",
     "abu nuhas",
-    "brothers"
+    "brothers",
+    "panorama reef",
+    "gota abu ramada"
    ],
    "dives": 17,
    "fees": {
@@ -26746,7 +26803,9 @@
    "dive_sites": [
     "thistlegorm",
     "abu nuhas",
-    "brothers"
+    "brothers",
+    "panorama reef",
+    "gota abu ramada"
    ],
    "dives": 17,
    "fees": {
@@ -26846,11 +26905,13 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "panorama reef",
+    "abu kafan",
     "brothers",
     "thistlegorm",
     "abu nuhas",
     "sha'ab el erg",
-    "giftun"
+    "giftun",
+    "gota abu ramada"
    ],
    "dives": 17,
    "fees": {
@@ -26950,6 +27011,8 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "daedalus",
+    "shaab marsa alam",
+    "shaab sharm",
     "sataya",
     "sataya reef",
     "fury shoals"
@@ -27052,6 +27115,8 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "daedalus",
+    "shaab marsa alam",
+    "shaab sharm",
     "sataya",
     "sataya reef",
     "fury shoals"
@@ -27154,6 +27219,7 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "elphinstone",
+    "shaab marsa alam",
     "brothers",
     "daedalus"
    ],
@@ -27255,6 +27321,7 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "elphinstone",
+    "shaab marsa alam",
     "brothers",
     "daedalus"
    ],
@@ -27356,6 +27423,7 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "elphinstone",
+    "shaab marsa alam",
     "brothers",
     "daedalus"
    ],
@@ -27457,6 +27525,7 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "elphinstone",
+    "shaab marsa alam",
     "brothers",
     "daedalus"
    ],
@@ -27558,6 +27627,7 @@
    "boat_name": "Hammerhead II",
    "dive_sites": [
     "elphinstone",
+    "shaab marsa alam",
     "daedalus",
     "brothers"
    ],
@@ -27862,6 +27932,8 @@
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
    "dive_sites": [
+    "shaab marsa alam",
+    "shaab sharm",
     "daedalus",
     "rocky island",
     "zabargad",
@@ -27965,6 +28037,8 @@
    "boat": "hammerhead-ii",
    "boat_name": "Hammerhead II",
    "dive_sites": [
+    "shaab marsa alam",
+    "shaab sharm",
     "daedalus",
     "st johns",
     "sataya"
@@ -28169,6 +28243,7 @@
    "dive_sites": [
     "brothers",
     "daedalus",
+    "shaab marsa alam",
     "elphinstone"
    ],
    "dives": 18,
@@ -28274,6 +28349,7 @@
    "dive_sites": [
     "brothers",
     "daedalus",
+    "shaab marsa alam",
     "elphinstone"
    ],
    "dives": 18,
@@ -28379,6 +28455,7 @@
    "dive_sites": [
     "brothers",
     "daedalus",
+    "shaab marsa alam",
     "elphinstone"
    ],
    "dives": 18,
@@ -28484,6 +28561,7 @@
    "dive_sites": [
     "brothers",
     "daedalus",
+    "shaab marsa alam",
     "elphinstone"
    ],
    "dives": 18,
@@ -28591,7 +28669,8 @@
     "abu dabab",
     "daedalus",
     "zabargad",
-    "rocky island"
+    "rocky island",
+    "shaab sharm"
    ],
    "dives": 18,
    "fees": {
@@ -29018,7 +29097,8 @@
     "abu dabab",
     "rocky island",
     "zabargad",
-    "st johns"
+    "st johns",
+    "shaab sharm"
    ],
    "dives": 18,
    "fees": {
@@ -29225,10 +29305,12 @@
    "boat_name": "MY Heaven Saphir",
    "dive_sites": [
     "tiran",
+    "laguna reef",
     "ras mohammed",
     "abu nuhas",
     "thistlegorm",
-    "rosalie moller"
+    "rosalie moller",
+    "carless reef"
    ],
    "dives": 18,
    "fees": {
@@ -29441,7 +29523,8 @@
     "ras mohammed",
     "gubal",
     "thistlegorm",
-    "rosalie moller"
+    "rosalie moller",
+    "carless reef"
    ],
    "dives": 18,
    "fees": {
@@ -29548,7 +29631,8 @@
     "abu dabab",
     "st johns",
     "fury shoals",
-    "sataya"
+    "sataya",
+    "shaab sharm"
    ],
    "dives": 18,
    "fees": {
@@ -29646,6 +29730,104 @@
     "min_level": "open_water"
    },
    "title": "Southern Route \u2013 St. John\u2019s (Port Ghalib - Port Ghalib) 7 nights"
+  },
+  "high-wave::North & Dahab (Hurghada - Hurghada)": {
+   "boat": "high-wave",
+   "boat_name": "High Wave",
+   "dive_sites": [
+    "thistlegorm",
+    "abu nuhas",
+    "tiran",
+    "dahab",
+    "blue hole",
+    "ras mohammed"
+   ],
+   "dives": 18,
+   "fees": {
+    "complete": true,
+    "lines": [
+     {
+      "amount": {
+       "amount": 150.0,
+       "currency": "EUR"
+      },
+      "basis": "per_trip",
+      "code": "combined_fees",
+      "note": "Environmental and Route Fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "gratuities",
+      "note": "Tips for the crew",
+      "tier": "optional"
+     },
+     {
+      "amount": {
+       "amount": 6.0,
+       "currency": "EUR"
+      },
+      "basis": "per_dive",
+      "code": "nitrox",
+      "note": "Nitrox",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 30.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "gear_rental",
+      "note": "Full scuba set: Fins, mask, snorkel (ABC), Regulator, Wetsuit, BCD, SMB (Surface Marker Buoy)",
+      "tier": "conditional"
+     },
+     {
+      "amount": {
+       "amount": 8.0,
+       "currency": "EUR"
+      },
+      "basis": "per_diving_day",
+      "code": "tank_15l",
+      "note": "15 liter tanks",
+      "tier": "optional"
+     },
+     {
+      "basis": "per_trip",
+      "code": "port_fees",
+      "included": true,
+      "note": "Harbour fees",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "fuel_surcharge",
+      "included": true,
+      "note": "Fuel surcharges",
+      "tier": "mandatory"
+     },
+     {
+      "basis": "per_trip",
+      "code": "airport_transfer",
+      "included": true,
+      "note": "Transfer from/to local hotels (round-trip, only on boat arrival & departure days)",
+      "tier": "conditional"
+     }
+    ],
+    "unreadable": []
+   },
+   "name": "North & Dahab (Hurghada - Hurghada)",
+   "nights": 7,
+   "padi_id": 21676,
+   "padi_slug": "north-wrecks-hurghada-hurghada-7-nights-6",
+   "port_from": "Hurghada",
+   "port_to": "Hurghada",
+   "requirements": {
+    "min_level": "advanced",
+    "min_logged_dives": 50,
+    "recommended_logged_dives": 50
+   },
+   "title": "North & Dahab (Hurghada - Hurghada) 7 Nights"
   },
   "high-wave::North (Hurghada - Hurghada)": {
    "boat": "high-wave",
@@ -31230,7 +31412,8 @@
     "brothers",
     "salem express",
     "safaga",
-    "panorama reef"
+    "panorama reef",
+    "abu kafan"
    ],
    "dives": 26,
    "fees": {
@@ -31652,6 +31835,7 @@
     "st johns",
     "habili ali",
     "dangerous reef",
+    "paradise reef",
     "rocky island",
     "zabargad",
     "sataya",
@@ -32858,6 +33042,7 @@
     "brothers",
     "daedalus",
     "elphinstone",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 27,
@@ -32991,6 +33176,7 @@
     "brothers",
     "daedalus",
     "elphinstone",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 27,
@@ -33656,6 +33842,7 @@
     "thistlegorm",
     "tiran",
     "dahab",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 18,
@@ -34990,6 +35177,7 @@
    "dive_sites": [
     "thistlegorm",
     "tiran",
+    "small crack",
     "ras mohammed",
     "gubal"
    ],
@@ -35084,6 +35272,7 @@
    "boat": "reef-voyager",
    "boat_name": "Reef Voyager",
    "dive_sites": [
+    "ras katy",
     "ras mohammed",
     "thistlegorm"
    ],
@@ -36405,6 +36594,8 @@
     "thistlegorm",
     "tiran",
     "dahab",
+    "blue hole",
+    "gabr el bint",
     "ras mohammed"
    ],
    "dives": 18,
@@ -38076,6 +38267,7 @@
     "elphinstone",
     "abu dabab",
     "ras disha",
+    "abu kafan",
     "brothers"
    ],
    "dives": 19,
@@ -38164,7 +38356,10 @@
     "elphinstone",
     "st johns",
     "sataya",
-    "fury shoals"
+    "gota soraya",
+    "shaab sharm",
+    "fury shoals",
+    "gota kebir"
    ],
    "dives": 19,
    "fees": {
@@ -38690,6 +38885,7 @@
     "sataya",
     "habili ali",
     "fury shoals",
+    "gota kebir",
     "elphinstone"
    ],
    "dives": 19,
@@ -38781,6 +38977,7 @@
     "sataya",
     "habili ali",
     "fury shoals",
+    "gota kebir",
     "elphinstone"
    ],
    "dives": 19,
@@ -38871,7 +39068,8 @@
     "ras mohammed",
     "rosalie moller",
     "gubal",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "carless reef"
    ],
    "dives": 19,
    "fees": {
@@ -39233,7 +39431,8 @@
     "abu nuhas",
     "ras mohammed",
     "tiran",
-    "sha'ab el erg"
+    "sha'ab el erg",
+    "carless reef"
    ],
    "dives": 19,
    "fees": {
@@ -39678,7 +39877,9 @@
     "thistlegorm",
     "ras mohammed",
     "tiran",
-    "dahab"
+    "dahab",
+    "blue hole",
+    "gabr el bint"
    ],
    "dives": 19,
    "fees": {
@@ -40252,6 +40453,7 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 18,
@@ -40715,6 +40917,7 @@
    "dive_sites": [
     "thistlegorm",
     "tiran",
+    "ras katy",
     "ras mohammed",
     "gubal"
    ],
@@ -40799,8 +41002,9 @@
    "boat": "snefro-pearl",
    "boat_name": "Snefro Pearl",
    "dive_sites": [
-    "thistlegorm",
-    "ras mohammed"
+    "ras katy",
+    "ras mohammed",
+    "thistlegorm"
    ],
    "dives": 9,
    "fees": {
@@ -40884,8 +41088,8 @@
    "boat": "snefro-spirit",
    "boat_name": "Snefro Spirit",
    "dive_sites": [
-    "thistlegorm",
     "ras mohammed",
+    "thistlegorm",
     "tiran"
    ],
    "dives": 12,
@@ -40972,6 +41176,9 @@
    "dive_sites": [
     "tiran",
     "dahab",
+    "blue hole",
+    "gabr el bint",
+    "ras abu galum",
     "ras mohammed"
    ],
    "dives": 19,
@@ -41058,6 +41265,7 @@
    "dive_sites": [
     "thistlegorm",
     "tiran",
+    "ras katy",
     "ras mohammed",
     "gubal"
    ],
@@ -41137,7 +41345,8 @@
     "ras mohammed",
     "tiran",
     "rosalie moller",
-    "gubal"
+    "gubal",
+    "ras katy"
    ],
    "dives": 19,
    "fees": {
@@ -41211,8 +41420,10 @@
    "boat": "south-moon-1",
    "boat_name": "South Moon 1",
    "dive_sites": [
+    "ras katy",
     "ras mohammed",
     "thistlegorm",
+    "small crack",
     "gubal",
     "tiran"
    ],
@@ -41626,6 +41837,7 @@
     "elphinstone",
     "rocky island",
     "zabargad",
+    "marsa mubarak",
     "fury shoals"
    ],
    "dives": 18,
@@ -41893,6 +42105,7 @@
     "tiran",
     "rosalie moller",
     "dahab",
+    "blue hole",
     "ras mohammed"
    ],
    "dives": 18,
@@ -42157,6 +42370,7 @@
     "thistlegorm",
     "tiran",
     "dahab",
+    "blue hole",
     "ras mohammed",
     "abu nuhas"
    ],
@@ -43468,6 +43682,7 @@
     "thistlegorm",
     "abu nuhas",
     "dahab",
+    "blue hole",
     "tiran",
     "ras mohammed"
    ],
@@ -43867,9 +44082,9 @@
    "operator": "AMELIE SAFARI",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-23",
+    "first": "2026-10-01",
     "in_season": 31,
-    "last": "2027-11-10",
+    "last": "2027-11-14",
     "priced": 31,
     "read": 100,
     "unpriced": 0
@@ -43889,12 +44104,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 94,
-    "first": "2026-09-23",
+    "dated": 93,
+    "first": "2026-09-27",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 94,
+    "read": 93,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -44093,9 +44308,9 @@
    "operator": "MASTER LIVEABOARDS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-23",
+    "first": "2026-10-03",
     "in_season": 16,
-    "last": "2029-02-10",
+    "last": "2029-02-17",
     "priced": 16,
     "read": 100,
     "unpriced": 0
@@ -44657,12 +44872,12 @@
    "name": "High Wave",
    "operator": "RED SEA EXPLORERS",
    "sailings": {
-    "dated": 5,
+    "dated": 8,
     "first": "2026-09-26",
     "in_season": 0,
     "last": "2026-11-29",
     "priced": 0,
-    "read": 5,
+    "read": 8,
     "unpriced": 0
    },
    "slug": "high-wave",
@@ -45012,9 +45227,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-23",
+    "first": "2026-09-27",
     "in_season": 35,
-    "last": "2027-09-05",
+    "last": "2027-09-08",
     "priced": 35,
     "read": 100,
     "unpriced": 0
