@@ -1,6 +1,128 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-09-23",
+  "added": [],
+  "sold_out": [],
+  "returned": [],
+  "withdrawn": [],
+  "relisted": [],
+  "price_up": [
+   {
+    "id": "topaz-2027-08-28-0",
+    "boat": "Topaz",
+    "title": "Dancing with Dolphins - Dolphin Liveaboard Safari",
+    "start": "2027-08-28",
+    "was": 1275.0,
+    "now": 1923.0,
+    "currency": "USD",
+    "delta": 648.0,
+    "pct": 50.8235294117647
+   },
+   {
+    "id": "topaz-2027-07-10-0",
+    "boat": "Topaz",
+    "title": "Sataya Dolphin, Daedalus, Elphinstone",
+    "start": "2027-07-10",
+    "was": 1355.0,
+    "now": 1489.0,
+    "currency": "USD",
+    "delta": 134.0,
+    "pct": 9.889298892988931
+   },
+   {
+    "id": "alsuraya-2027-05-29-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-29",
+    "was": 1433.0,
+    "now": 1545.0,
+    "currency": "USD",
+    "delta": 112.0,
+    "pct": 7.815771109560362
+   },
+   {
+    "id": "alsuraya-2027-08-14-0",
+    "boat": "ALSURAYA",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-08-14",
+    "was": 1218.0,
+    "now": 1314.0,
+    "currency": "USD",
+    "delta": 96.0,
+    "pct": 7.8817733990147785
+   },
+   {
+    "id": "alsuraya-2027-08-28-0",
+    "boat": "ALSURAYA",
+    "title": "Daedalus, Sataya & Fury Shoals",
+    "start": "2027-08-28",
+    "was": 1218.0,
+    "now": 1314.0,
+    "currency": "USD",
+    "delta": 96.0,
+    "pct": 7.8817733990147785
+   }
+  ],
+  "price_down": [
+   {
+    "id": "alsuraya-2027-06-05-0",
+    "boat": "ALSURAYA",
+    "title": "North & Brothers",
+    "start": "2027-06-05",
+    "was": 1316.0,
+    "now": 1216.0,
+    "currency": "USD",
+    "delta": -100.0,
+    "pct": -7.598784194528875
+   },
+   {
+    "id": "emperor-superior-2027-07-31-0",
+    "boat": "Emperor Superior",
+    "title": "South & St. John's",
+    "start": "2027-07-31",
+    "was": 2706.0,
+    "now": 2701.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.18477457501847747
+   },
+   {
+    "id": "marselia-star-2027-05-01-0",
+    "boat": "Marselia Star",
+    "title": "CCR Reefs, Wrecks and Canyons Trip",
+    "start": "2027-05-01",
+    "was": 3382.0,
+    "now": 3377.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.14784151389710232
+   },
+   {
+    "id": "queen-sherry-2027-07-31-0",
+    "boat": "Queen Sherry",
+    "title": "Eclipse & Big Fish: Pelagic Trail Eclipse Totality",
+    "start": "2027-07-31",
+    "was": 2752.0,
+    "now": 2747.0,
+    "currency": "USD",
+    "delta": -5.0,
+    "pct": -0.1816860465116279
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 874,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-09-23"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-22",
   "added": [
    {
@@ -6895,144 +7017,5 @@
   "availability_newly_read": false,
   "quiet": false,
   "day": "2026-09-14"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-13",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": true,
-  "day": "2026-09-13"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-12",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [
-   {
-    "boat": "Bella 2",
-    "code": "private_guide",
-    "was": "not listed",
-    "now": "60 EUR / per_day"
-   },
-   {
-    "boat": "Bella 3",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "60 EUR / per_day"
-   },
-   {
-    "boat": "Carlton",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "50 EUR / per_day"
-   },
-   {
-    "boat": "Eriny",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "60 EUR / per_day"
-   },
-   {
-    "boat": "Ocean Lovers",
-    "code": "nitrox_course",
-    "was": "listed, no price",
-    "now": "250 EUR / per_trip"
-   },
-   {
-    "boat": "Ocean Lovers",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "500 EUR / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor II",
-    "code": "course",
-    "was": "listed, no price",
-    "now": "150-250 USD / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor II",
-    "code": "nitrox",
-    "was": "100-150 USD / per_trip",
-    "now": "80-150 USD / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor II",
-    "code": "nitrox_course",
-    "was": "listed, no price",
-    "now": "80-250 USD / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor V",
-    "code": "course",
-    "was": "listed, no price",
-    "now": "150-250 USD / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor V",
-    "code": "nitrox",
-    "was": "100-150 USD / per_trip",
-    "now": "80-150 USD / per_trip"
-   },
-   {
-    "boat": "Red Sea Aggressor V",
-    "code": "nitrox_course",
-    "was": "150-250 EUR / per_trip",
-    "now": "80-250 EUR / per_trip"
-   },
-   {
-    "boat": "Serenity",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "450 EUR / per_trip"
-   },
-   {
-    "boat": "Yachtiano",
-    "code": "course",
-    "was": "listed, no price",
-    "now": "190-650 EUR / per_trip"
-   },
-   {
-    "boat": "Yachtiano",
-    "code": "gear_rental",
-    "was": "285 EUR / per_trip",
-    "now": "300 EUR / per_week"
-   },
-   {
-    "boat": "Yachtiano",
-    "code": "nitrox_course",
-    "was": "listed, no price",
-    "now": "190 EUR / per_trip"
-   }
-  ],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-13"
  }
 ]

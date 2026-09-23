@@ -3,6 +3,28 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-23
+
+```
+changes: HEAD -> 2026-09-23
+===========================
+
+price up (5)
+  2027-08-28  Topaz                  1,275 ->   1,923 USD  +648 (+50.8%)  Dancing with Dolphins - Dolphin Li
+  2027-07-10  Topaz                  1,355 ->   1,489 USD  +134 (+9.9%)  Sataya Dolphin, Daedalus, Elphinst
+  2027-05-29  ALSURAYA               1,433 ->   1,545 USD  +112 (+7.8%)  Brothers, Daedalus & Elphinstone
+  2027-08-14  ALSURAYA               1,218 ->   1,314 USD  +96 (+7.9%)  Brothers, Daedalus & Elphinstone
+  2027-08-28  ALSURAYA               1,218 ->   1,314 USD  +96 (+7.9%)  Daedalus, Sataya & Fury Shoals
+
+price down (4)
+  2027-06-05  ALSURAYA               1,316 ->   1,216 USD  -100 (-7.6%)  North & Brothers
+  2027-07-31  Emperor Superior       2,706 ->   2,701 USD  -5 (-0.2%)  South & St. John's
+  2027-05-01  Marselia Star          3,382 ->   3,377 USD  -5 (-0.1%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-31  Queen Sherry           2,752 ->   2,747 USD  -5 (-0.2%)  Eclipse & Big Fish: Pelagic Trail 
+
+874 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-22
 
 ```
