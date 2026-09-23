@@ -317,16 +317,24 @@ parsed announced 126 sailings as newly sold out, and nobody had looked before.
 
 ## Next
 
-Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). The ones
-that would change what the page can say:
+Tracked in [issues](https://github.com/PaludaNCode/Liveaboard/issues). The two
+that are open, and what each would change:
 
-- **#52** 23 trips name no dive site and no direction, so the column a diver
-  filters on is blank for them. The trip detail is loaded by something other
-  than the `#tourid=` hash; finding that endpoint would give a per-trip site
-  list for all 314, not just the 23.
-- **#47** the gear spread is €40–333 a trip and unexplained. Whether the boats
-  with the cheapest berths charge most for kit is answerable from data already
-  committed, and would be a real finding for a price-transparency site.
+- **#151** divebooker states a fee book on 327 itineraries and only **154** of
+  them carry a bill this site can total. The blocker is the *unit*: a figure
+  with a payer and no period — *200–320 EUR per person* — cannot be scaled, and
+  one such line silences the whole bill. Reading the unit off another seller's
+  book at the exactly equal figure closed 28 of them; **117 obligatory lines on
+  27 boats** are still unscaled, and each one is a third column the page cannot
+  print.
 - **#6** price history from the git log. Every run is a commit, so *"this trip
   was €200 cheaper in March"* costs only the reading — and #48 built the diff.
+  Blocked on elapsed time rather than on code.
 
+Three came off this list rather than being done. **#52** (23 trips naming no
+dive site) is down to 2 of 462, and both name no reef in any field. **#47**
+answered itself: gear is priced independently of the boat — flat at about €200,
+so 18% of a cheap berth and 13% of a dear one, which is what the gear toggle
+now puts in the total. **#152** wanted the other 885 divebooker booking ids and
+found there is no row to press: the payload states no id for them, so the cabin
+ladder covers the ten sailings a hull publishes an Event for.
