@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-23",
+  "collected": "2026-09-24",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -7180,6 +7180,145 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6081&tourID=427145&languageID=1&curr=USD&showPrices=false"
+    },
+    "carlton::Minisafari - Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "carlton",
+      "name": "Minisafari – Tiran & Ras Mohamed (Sharm El Sheikh - Sharm El Sheikh)",
+      "tour_id": "427151",
+      "collected": "2026-09-24",
+      "regions": [
+        "Straits Of Tiran",
+        "Woodhouse Reef",
+        "Shark and Yolanda",
+        "Gordon Reef",
+        "Ras Mohammed",
+        "Jackson Reef"
+      ],
+      "dive_sites": [
+        "tiran",
+        "ras mohammed"
+      ],
+      "dives": 15,
+      "guests": 20,
+      "experience": "Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "The Red Sea is a great place to dive year-round; the best time to go is from spring to fall, when the weather is mild and visibility is good. The Red Sea is home to a diverse and vibrant ecosystem, and it is a popular destination for divers from all over the world. The region is home to a variety of shipwrecks, from ancient Roman ships to modern freighters. These wrecks provide a fascinating glimpse into the past, and they are also home to a wide variety of marine life. If you are interested in wreck diving, the Red Sea is a great place to go. Some of the best dive sites include Tiran Island and Ras Mohamed National Park, offering excellent diving opportunities for both beginners and experienced divers. You will dive multiple times a day during a weeklong liveaboard, typically three dives per day, and night dives are offered, with plenty of time in between to relax, eat, and socialize. We customize your trip to fit your interests and experience level.",
+      "sections": [
+        {
+          "heading": "Day 1:",
+          "text": "Arrival and check-in – dinner – safety & environmental briefing – cabin arrangement – equipment setup.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Depart early in the morning for a check dive at Temple – dive Jackfish Alley and the Wreck of Dunraven – night dive at Beacon.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "Early morning dive at Shark and Yolanda Reef – Ras Zatar – Ras Ghozlani – night dive at Temple.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "Early morning dive at Woodhouse Reef – Jackson Reef – Gordon Reef – night dive at Gordon Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "Early morning dive at Thomas Reef – Ras Um Sid – return to port at 13:00 and disembark.",
+          "is_day": true
+        },
+        {
+          "heading": "Ocean Life:",
+          "text": "The waters around Tiran and Ras Mohamed teem with life: reef sharks and Napoleon wrasse patrol the drop-offs, turtles glide over coral gardens, and schools of jack, snapper, and barracuda move through the strong currents. Night dives reveal moray eels, lionfish, and nudibranchs, while the region’s wrecks have become thriving artificial reefs for glassfish and groupers. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6081&tourID=427151&languageID=1&curr=USD&showPrices=false"
+    },
+    "carlton::Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "carlton",
+      "name": "Ras Mohamed - Thistlegorm (Sharm El Sheikh - Sharm El Sheikh)",
+      "tour_id": "435774",
+      "collected": "2026-09-24",
+      "regions": [
+        "Ras Mohammed",
+        "Thistlegorm"
+      ],
+      "dive_sites": [
+        "ras mohammed",
+        "thistlegorm"
+      ],
+      "dives": 6,
+      "guests": 20,
+      "experience": "Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "This short Red Sea mini-safari aboard Carlton combines two of Sharm El Sheikh's most iconic dive destinations: the reefs, walls and channels of Ras Mohamed National Park, and the SS Thistlegorm, one of the world's most famous wreck dives.",
+      "sections": [
+        {
+          "heading": "Day 1: Embarkation",
+          "text": "06.00 PM – 10.00 PM – Check-in and boarding in Sharm El Sheikh. Cabin allocation and welcome briefing. Dinner onboard.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Ras Mohamed National Park",
+          "text": "Full day of diving (up to 4 dives) around the reefs of Ras Mohamed National Park.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3: SS Thistlegorm & Disembarkation",
+          "text": "Morning dives (up to 2) at the SS Thistlegorm wreck. 04.30 PM – 05.30 PM – Return and disembarkation in Sharm El Sheikh.",
+          "is_day": true
+        },
+        {
+          "heading": "Marine Life:",
+          "text": "Reef sharks, barracuda, batfish and jacks around Ras Mohamed's walls and channels, with the Thistlegorm itself hosting resident lionfish, glassfish, batfish and turtles among its wartime cargo of trucks, motorbikes and railway wagons. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": false
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6081&tourID=435774&languageID=1&curr=USD&showPrices=false"
+    },
+    "carlton::Ras Mohamed - Thistlegorm - Tiran (Sharm El Sheikh - Sharm El Sheikh)": {
+      "boat": "carlton",
+      "name": "Ras Mohamed – Thistlegorm – Tiran (Sharm El Sheikh – Sharm El Sheikh)",
+      "tour_id": "442338",
+      "collected": "2026-09-24",
+      "regions": [],
+      "dive_sites": [],
+      "dives": 11,
+      "guests": 20,
+      "experience": "Open Water - 30 minimum logged dives required.",
+      "min_logged_dives": 30,
+      "intro": "The Red Sea is a great place to dive year-round; the best time to go is from spring to fall, when the weather is mild and the visibility is good. The Red Sea is home to a diverse and vibrant ecosystem, and it is a popular destination for divers from all over the world. The region is home to a variety of shipwrecks, from ancient Roman ships to modern freighters. These wrecks provide a fascinating glimpse into the past, and they are also home to a wide variety of marine life. If you are interested in wreck diving, the Red Sea is a great place to go. Some of the best dive sites are Tiran Island & The National Park Ras Mohamed, a place to dive for both beginners and experienced divers. You will dive multiple times a day during a weeklong liveaboard, typically three dives per day and Night Dives are offered, with plenty of time in between to relax, eat, and socialize. We customize your trip to fit your interests and experience level.",
+      "sections": [
+        {
+          "heading": "Day 1 – Sharm El Sheikh",
+          "text": "Arrive at Sharm el Sheikh International Airport, meet and greet. Transfer to Travco Jetty – light dinner, safety briefing, cabin arrangement and equipment setup. Meals Included: Dinner",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Ras Mohamed National Park",
+          "text": "Boat departs early morning at 7:00 AM. After breakfast, check dive at Temple, second dive at Jackfish Alley in the National Park, then Shark & Yolanda Reef, possible night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Dunraven, SS Thistlegorm & Shaab Ali",
+          "text": "Early morning dive at Dunraven, sail to SS Thistlegorm for 2 dives, swim with dolphins at Shaab Ali, possible night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Wreck Kingston, Ras Ghozlani & Gordon Reef",
+          "text": "Early morning dive at Wreck Kingston, then Ras Ghozlani and Gordon Reef, possible night dive.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Tiran & Return to Sharm El Sheikh",
+          "text": "Early morning dive at Thomas Reef, second dive at Jackson Reef & Woodhouse Reef, return to port at noon, check-out approx. 5:00 PM. Approx. 15 dives. The northern Red Sea offers an incredible mix of history and marine life, making it a dream destination for divers. Along the North Wreck and Tiran route, you'll explore legendary wrecks like the Thistlegorm, Giannis D, and Carnatic—now thriving artificial reefs teeming with life. Schools of batfish, barracudas, and snappers glide around the corals, while moray eels and lionfish hide among the wreck structures. In Tiran and Ras Mohammed National Park, crystal-clear waters reveal vibrant reefs where you might spot turtles, eagle rays, and even reef sharks. Depending on the season, playful dolphins and graceful manta rays often make an appearance, adding to the magic of this unforgettable diving adventure. The last dive will be on the final day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. All route destinations are subject to approval by Egyptian authorities, the coast guard, and port police. Routes may change at short notice due to weather conditions or official orders. The final itinerary will be determined in consultation with the group onboard. No refunds or compensation will be issued for missed dives due to weather, technical issues, or other changes, including Marine Park and port fees. Strong currents are common and must be taken into account. Night dives and snorkeling are prohibited in Ras Mohamed National Park. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6081&tourID=442338&languageID=1&curr=USD&showPrices=false"
     },
     "cu::Brothers - Daedalus - Elphinstone (Hurghada - Hurghada)": {
       "boat": "cu",

@@ -44875,7 +44875,7 @@
       "operator_id": "carlton-fleet",
       "boat_id": "carlton",
       "nights": 4,
-      "dives": 18,
+      "dives": 15,
       "port_from": "Sharm El Sheikh",
       "port_to": "Sharm El Sheikh",
       "dive_sites": [
@@ -45081,8 +45081,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "OWD or equivalent"
+        "notes": "Open Water - 30 minimum logged dives required. OWD or equivalent"
       },
+      "dives_read": true,
       "divebooker_fees": [
         {
           "amount": {
