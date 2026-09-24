@@ -3,6 +3,46 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-24
+
+```
+changes: HEAD -> 2026-09-24
+===========================
+
+now sold out (8)
+  2027-05-15  Hammerhead II          Brothers Light 3                   divebooker.com+liveaboard.com+padi.com
+  2027-06-26  DUNE Titan             Safaga Routes                      divebooker.com+liveaboard.com+padi.com
+  2027-07-03  DUNE Titan             Safaga Routes                      divebooker.com+liveaboard.com+padi.com
+  2027-07-10  DUNE Titan             Safaga Routes                      divebooker.com+liveaboard.com+padi.com
+  2027-07-17  DUNE Titan             North Ras Mohammed                 divebooker.com+liveaboard.com+padi.com
+  2027-07-17  Star Jet               Rocky, Zabargad, St. John's & Sata divebooker.com+liveaboard.com
+  2027-07-24  DUNE Titan             North Brothers                     divebooker.com+liveaboard.com+padi.com
+  2027-08-14  Hammerhead II          Sharks Obsession: Brothers - Daeda divebooker.com+liveaboard.com+padi.com
+
+bookable again (1)
+  2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  divebooker.com+liveaboard.com
+
+price up (1)
+  2027-08-16  Ghazala Adventure      1,677 ->   1,708 USD  +31 (+1.8%)  North, Tiran & Dahab
+
+price down (726)
+  2027-06-12  Carlton                1,065 ->     677 USD  -388 (-36.4%)  Minisafari - Tiran & Ras Mohammed
+  2027-05-01  Marselia Star          3,377 ->   3,359 USD  -18 (-0.5%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,805 ->   2,789 USD  -16 (-0.6%)  Best of Egypt
+  2027-07-29  Golden Dolphin IV      2,746 ->   2,731 USD  -15 (-0.5%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,747 ->   2,732 USD  -15 (-0.5%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-07-31  Emperor Superior       2,701 ->   2,687 USD  -14 (-0.5%)  South & St. John's
+  2027-05-15  Aphrodite              2,347 ->   2,334 USD  -13 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-05-29  Aphrodite              2,392 ->   2,379 USD  -13 (-0.5%)  Brothers, Daedalus & Elphinstone
+  2027-05-22  Aphrodite              2,267 ->   2,254 USD  -13 (-0.6%)  Deep South & St. John's
+  2027-07-24  Aphrodite              2,347 ->   2,334 USD  -13 (-0.6%)  North Dolphins
+  2027-05-08  Aphrodite              2,267 ->   2,254 USD  -13 (-0.6%)  North Wrecks
+  2027-08-21  Aphrodite              2,347 ->   2,334 USD  -13 (-0.6%)  North Wrecks
+  ... and 714 more not shown
+
+123 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-23
 
 ```
