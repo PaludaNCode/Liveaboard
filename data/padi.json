@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-23",
+ "collected": "2026-09-24",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44240,12 +44240,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 93,
-    "first": "2026-09-24",
+    "dated": 92,
+    "first": "2026-09-27",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 93,
+    "read": 92,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -44285,12 +44285,12 @@
    "name": "MY Blue",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 55,
-    "first": "2026-09-24",
+    "dated": 54,
+    "first": "2026-10-01",
     "in_season": 14,
     "last": "2027-12-30",
     "priced": 12,
-    "read": 55,
+    "read": 54,
     "unpriced": 8
    },
    "slug": "my-blue",
@@ -44353,12 +44353,12 @@
    "name": "MY Blue Pearl",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-24",
+    "dated": 58,
+    "first": "2026-10-01",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 59,
+    "read": 58,
     "unpriced": 0
    },
    "slug": "my-blue-pearl",
@@ -44376,12 +44376,12 @@
    "name": "MY Blue Seas",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 56,
-    "first": "2026-09-24",
+    "dated": 55,
+    "first": "2026-10-01",
     "in_season": 16,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 56,
+    "read": 55,
     "unpriced": 0
    },
    "slug": "my-blue-seas",
@@ -44399,12 +44399,12 @@
    "name": "MY Blue Storm",
    "operator": "BLUE PLANET",
    "sailings": {
-    "dated": 59,
-    "first": "2026-09-24",
+    "dated": 58,
+    "first": "2026-10-01",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 16,
-    "read": 59,
+    "read": 58,
     "unpriced": 1
    },
    "slug": "my-blue-storm",
@@ -44421,12 +44421,12 @@
    "name": "MY Carlton",
    "operator": null,
    "sailings": {
-    "dated": 48,
-    "first": "2026-09-24",
+    "dated": 47,
+    "first": "2026-10-02",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
-    "read": 48,
+    "read": 47,
     "unpriced": 1
    },
    "slug": "my-carlton",
@@ -44603,12 +44603,12 @@
    "name": "MV Emperor Elite",
    "operator": "EMPEROR DIVERS",
    "sailings": {
-    "dated": 77,
-    "first": "2026-09-24",
+    "dated": 76,
+    "first": "2026-10-01",
     "in_season": 13,
     "last": "2028-07-20",
     "priced": 13,
-    "read": 77,
+    "read": 76,
     "unpriced": 0
    },
    "slug": "mv-emperor-elite",
@@ -44672,9 +44672,9 @@
    "operator": "EXPLORER VENTURES",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-24",
+    "first": "2026-10-01",
     "in_season": 17,
-    "last": "2028-10-26",
+    "last": "2028-11-02",
     "priced": 17,
     "read": 100,
     "unpriced": 0
@@ -44850,12 +44850,12 @@
    "name": "MY Heaven Saphir",
    "operator": null,
    "sailings": {
-    "dated": 63,
-    "first": "2026-09-24",
+    "dated": 62,
+    "first": "2026-10-01",
     "in_season": 17,
     "last": "2027-12-30",
     "priced": 17,
-    "read": 63,
+    "read": 62,
     "unpriced": 1
    },
    "slug": "my-heaven-saphir",
@@ -44912,12 +44912,12 @@
    "name": "MY Independence II",
    "operator": null,
    "sailings": {
-    "dated": 27,
-    "first": "2026-09-24",
+    "dated": 26,
+    "first": "2026-10-01",
     "in_season": 10,
     "last": "2027-10-14",
     "priced": 7,
-    "read": 27,
+    "read": 26,
     "unpriced": 7
    },
    "slug": "my-independence-ii",
@@ -44958,12 +44958,12 @@
    "operator": null,
    "sailings": {
     "dated": 100,
-    "first": "2026-09-24",
+    "first": "2026-09-26",
     "in_season": 20,
-    "last": "2028-05-27",
+    "last": "2028-06-03",
     "priced": 17,
     "read": 100,
-    "unpriced": 29
+    "unpriced": 30
    },
    "slug": "new-sambo-safari-boat-2",
    "specs": {
@@ -45112,12 +45112,12 @@
    "name": "MS Royal Evolution",
    "operator": null,
    "sailings": {
-    "dated": 50,
-    "first": "2026-09-24",
+    "dated": 49,
+    "first": "2026-10-01",
     "in_season": 13,
     "last": "2028-04-27",
     "priced": 13,
-    "read": 50,
+    "read": 49,
     "unpriced": 0
    },
    "slug": "ms-royal-evolution",
@@ -45318,9 +45318,9 @@
    "operator": "RED SEA EXPLORERS",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-24",
+    "first": "2026-10-01",
     "in_season": 17,
-    "last": "2028-11-30",
+    "last": "2028-12-07",
     "priced": 17,
     "read": 100,
     "unpriced": 0
