@@ -3,6 +3,40 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-25
+
+```
+changes: HEAD -> 2026-09-25
+===========================
+
+now sold out (2)
+  2027-07-31  Discovery II           Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail  liveaboard.com
+
+bookable again (1)
+  2027-08-14  Hammerhead II          Brothers Light                     divebooker.com+liveaboard.com+padi.com
+
+withdrawn (1)
+  2027-07-31  JP Marine              Deep South Expedition: Secrets of  liveaboard.com
+
+price down (31)
+  2027-07-10  Hammerhead II          1,200 ->     722 USD  -478 (-39.8%)  Mini Safari: Abu Nuhas - Ras Moham
+  2027-08-14  Hammerhead II          1,200 ->     799 USD  -401 (-33.4%)  Brothers Light
+  2027-05-03  Blue Seas              1,992 ->   1,980 USD  -12 (-0.6%)  Rocky - Elba - St. John's - Elphin
+  2027-05-13  Blue Seas              2,049 ->   2,037 USD  -12 (-0.6%)  Rocky - Elba - St. John's - Elphin
+  2027-05-15  AVO                    1,956 ->   1,945 USD  -11 (-0.6%)  St. John's
+  2027-05-08  AVO                    1,956 ->   1,945 USD  -11 (-0.6%)  The Best of the South
+  2027-05-22  AVO                    1,956 ->   1,945 USD  -11 (-0.6%)  The Best of the South Classic
+  2027-05-29  ALSURAYA               1,545 ->   1,536 USD  -9 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-08-05  Blue Pearl             1,431 ->   1,422 USD  -9 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-05-27  Blue Storm             1,545 ->   1,536 USD  -9 (-0.6%)  Brothers, Daedalus & Elphinstone
+  2027-05-13  Blue Storm             1,545 ->   1,536 USD  -9 (-0.6%)  Daedalus, Rocky & Zabargad
+  2027-05-20  Blue Storm             1,545 ->   1,536 USD  -9 (-0.6%)  Rocky, Zabargad & St. John's
+  ... and 19 more not shown
+
+670 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-24
 
 ```
