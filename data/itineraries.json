@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-24",
+  "collected": "2026-09-25",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -2674,6 +2674,70 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439708&languageID=1&curr=USD&showPrices=false"
     },
+    "avo::Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Hurghada)": {
+      "boat": "avo",
+      "name": "Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Hurghada)",
+      "tour_id": "442380",
+      "collected": "2026-09-25",
+      "regions": [
+        "The Brothers",
+        "Daedalus",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "dives": 18,
+      "guests": 24,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "Explore the heart of the Red Sea's most iconic diving sites, known collectively as the Golden Triangle. These world-renowned locations — Brothers Islands, Daedalus, and Elphinstone — offer exhilarating drop-offs and thrilling encounters with oceanic whitetip sharks, hammerhead sharks, and many more species. This cruise is designed for experienced divers seeking an unforgettable adventure beneath the waves.",
+      "sections": [
+        {
+          "heading": "Day 1 – Welcome on Board",
+          "text": "Check-in from 5:00 PM. Guests board Avo in Port Ghalib and are welcomed by the crew ahead of departure.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Small Giftun & El Minya Wreck",
+          "text": "Dive 1: Small Giftun. Dive 2: El Minya Wreck.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3 – Elphinstone & Marsa Shouna",
+          "text": "Dive 3 and Dive 4: Elphinstone. Dive 5 and Dive 6: Marsa Shouna.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4 – Daedalus Reef",
+          "text": "Dive 7, Dive 8, Dive 9, and Dive 10: Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5 – Daedalus Reef",
+          "text": "Dive 11, Dive 12, and Dive 13: Daedalus.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6 – The Brothers",
+          "text": "Dive 14: Big Brother. Dive 15 and Dive 16: Small Brother.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7 – Gota Abu Ramada & Panorama Reef",
+          "text": "Dive 17: Gota Abu Ramada. Dive 18: Panorama Reef.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8 – Disembarkation",
+          "text": "Breakfast on board and farewell to the crew in Hurghada. From the pelagic-rich waters of Daedalus and Elphinstone to the legendary walls of the Brothers Islands, this cruise delivers the definitive Red Sea shark experience. This southern Red Sea route is famous for thrilling drift dives, deep walls, and encounters with large pelagic species. At the Brothers Islands, divers often spot oceanic whitetips, thresher sharks, and large tuna patrolling the drop-offs. Daedalus Reef offers a high chance to see schooling hammerheads and occasional manta rays, while Elphinstone is known for its stunning coral walls and sightings of oceanic whitetips and grey reef sharks. Rich coral gardens, anthias clouds, and diverse reef life make every dive vibrant and exciting. This itinerary is ideal for experienced divers seeking big fish action and pristine reefscapes. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=442380&languageID=1&curr=USD&showPrices=false"
+    },
     "avo::Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Port Ghalib)": {
       "boat": "avo",
       "name": "Brothers - Daedalus - Elphinstone (Golden Triangle) (Port Ghalib - Port Ghalib)",
@@ -2890,6 +2954,73 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439422&languageID=1&curr=USD&showPrices=false"
+    },
+    "avo::Dolphins Fury Shoals (Port Ghalib - Port Ghalib)": {
+      "boat": "avo",
+      "name": "Dolphins Fury Shoals (Port Ghalib - Port Ghalib)",
+      "tour_id": "439403",
+      "collected": "2026-09-25",
+      "regions": [
+        "Abu Dabab",
+        "Fury Shoal"
+      ],
+      "dive_sites": [
+        "abu dabab",
+        "fury shoals"
+      ],
+      "dives": 12,
+      "guests": 24,
+      "experience": "Open Water - 20 minimum logged dives required.",
+      "min_logged_dives": 20,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Dolphins, Coral, Drop-offs, and Canyons.",
+          "text": "Dive into the breathtaking chain of reefs known as the Fury Shoals, stretching 9 km from north to south and 30 km from east to west. This region is home to over twenty bank reefs, each offering stunning coral gardens, plateaus, and vibrant marine life. Experience the thrill of swimming freely with dolphins in their natural habitat and diving through captivating underwater landscapes. This cruise is designed for everyone — beginners, experienced divers, and even young adventurers.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1: Saturday",
+          "text": "Check-in at 5:00 PM.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2: Sunday",
+          "text": "Dive 1: Marsa Shouna. Dive 2: Abu Dabab.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3: Monday",
+          "text": "Dive 3: Shaab Maksour Interval: Snorkel with Dolphins. Dive 4: Sataya West (Dolphins).",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4: Tuesday",
+          "text": "Dive 5: Shaab Maksour south (Coral plateau) Interval: Fins Mask Snorkel with Dolphins. Dive 6: El Malahi.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5: Wednesday",
+          "text": "Dive 7: Sataya (Dolphins) Fin Mask Snorkel with Dolphins. Dive 8: Shaab Claudio.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 6: Thursday",
+          "text": "Dive 9: Bu Galawa Kebir. Dive 10: Abu Galawa. Dive 11: Shalanyat, sunset at Siyal Island.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7: Friday",
+          "text": "Dive 12: Shaab Sharm.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Saturday",
+          "text": "Check out at 10:00 AM. Beneath the surface of Fury Shoals, divers can discover a rich tapestry of marine life beyond its famous reef formations. Keep an eye out for hawksbill turtles gliding gracefully along the reef edges, giant moray eels peering from rocky crevices, and blue-spotted stingrays half-hidden in sandy lagoons. Schools of fusiliers and batfish often move in synchronized patterns through the clear water, while tiny cleaner shrimp and gobies work diligently at their reef \"stations.\" With calm lagoons and sheltered reef systems, the area also nurtures juvenile fish species, offering a fascinating glimpse into the Red Sea's thriving underwater nursery. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6556&tourID=439403&languageID=1&curr=USD&showPrices=false"
     },
     "avo::North - Ras Mohammed (Hurghada - Hurghada)": {
       "boat": "avo",
@@ -16599,6 +16730,60 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390020&languageID=1&curr=USD&showPrices=false"
     },
+    "hammerhead-ii::Brothers Light (Marsa Alam - Hurghada)": {
+      "boat": "hammerhead-ii",
+      "name": "15% Off: Brothers Light (Marsa Alam - Hurghada)",
+      "tour_id": "390024",
+      "collected": "2026-09-25",
+      "regions": [
+        "Abu Dabab",
+        "Elphinstone",
+        "The Brothers"
+      ],
+      "dive_sites": [
+        "abu dabab",
+        "elphinstone",
+        "brothers"
+      ],
+      "dives": 10,
+      "guests": 32,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": "The",
+      "sections": [
+        {
+          "heading": "Brothers Light",
+          "text": "itinerary offers an unforgettable diving adventure through some of the Red Sea’s most iconic sites. Starting from Marsa Alam and concluding in Hurghada, this route features world-class dive spots, including the stunning reefs of Marsa Alam, the dramatic drop-offs at Elphinstone, and the breathtaking marine biodiversity of the Brothers Islands. With a mix of reef and pelagic encounters, this itinerary is perfect for divers seeking variety and excitement.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1:",
+          "text": "Transfer to the port. Embark, settle into your cabin, and attend a boat briefing. Port authority permissions will be arranged, with the boat departing early the following morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2:",
+          "text": "Check dive at Marsa Alam Reef, followed by Elphinstone. Overnight sail to Brothers.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 3:",
+          "text": "Three dives at Brothers.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 4:",
+          "text": "(Dependent on authority permissions) Option 1: Three dives at Brothers. Option 2: Return to Elphinstone for three dives.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 5:",
+          "text": "Dive at Abu Dabab and Marsa Alam Reef. (*) the itinerary description provided by the boat operator. The last dive will be on the last day of the trip. Divers are recommended to wait for 24hours before flying after the last dive. Please note that the itineraries are examples only, We reserve the right to change the itinerary or specific agreed services, if force majeure, unforeseen, or unavoidable circumstances require us to do so.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6018&tourID=390024&languageID=1&curr=USD&showPrices=false"
+    },
     "hammerhead-ii::Brothers Light 3 (Marsa Alam - Hurghada)": {
       "boat": "hammerhead-ii",
       "name": "15% Off: Brothers Light 3 (Marsa Alam - Hurghada)",
@@ -21652,6 +21837,90 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5690&tourID=335597&languageID=1&curr=USD&showPrices=false"
+    },
+    "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Hurghada)": {
+      "boat": "red-sea-aggressor-iv",
+      "name": "Brothers, Daedalus, Elphinstone (Marsa Alam - Hurghada)",
+      "tour_id": "272333",
+      "collected": "2026-09-25",
+      "regions": [
+        "Elphinstone",
+        "The Brothers",
+        "Daedalus"
+      ],
+      "dive_sites": [
+        "elphinstone",
+        "brothers",
+        "daedalus"
+      ],
+      "dives": 27,
+      "guests": 26,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "BIG BROTHER:",
+          "text": "The Brothers (Big Brother and Little Brother, or in Arabic, El Akhawein) are two small islands in the Red Sea. They are situated 67 km out to sea from Al Qusayr. Above water, Big Brother features a lighthouse built by the British in 1883, which is manned by the Egyptian military. Underwater, there are two wrecks: Numidia and Aida. The walls of Big Brother plunge down into the blue at an almost-vertical angle. Shallow swim-throughs are concealed in the wall on the west side of the site, making them fun to discover. Hard and soft corals, including some Gorgonian fans, cover the reef, and the ubiquitous Anthias are found in the thousands. Fish of all sizes and species live here, including large pelagic life such as Hawksbill Turtles, Grey Reef Sharks, Thresher Sharks, Carcharhinus longimanus (from October/November), and occasionally, Hammerhead Sharks.",
+          "is_day": false
+        },
+        {
+          "heading": "LITTLE BROTHER:",
+          "text": "Little Brother is, as the name suggests, the smaller of the two islands and is located 1 km to the south of Big Brother. Much like Big Brother, the currents can be strong or nonexistent and often change at a moment's notice, adding to the adventure and excitement. Deep walls surround the island, with a glorious plateau in the north. Here, it feels like diving in an aquarium, with a huge variety of marine life, including Hawksbill Turtles, Grey Reef Sharks, Thresher Sharks, and Hammerhead Sharks. The 'Gorgonian Forest' lies in the southeast of the site. Longnose Hawkfish perch on the large Gorgonians; however, their shy temperament means they can be a challenge to photograph.",
+          "is_day": false
+        },
+        {
+          "heading": "DAEDALUS:",
+          "text": "This large reef, also referred to as Abu El Kizan, is found 80 km offshore from Marsa Alam. A lighthouse, built in 1861 by the British, stands tall on the small artificial island in the center of the reef and is today manned by the Egyptian military. Currents tend to be much more predictable here, and divers have an excellent opportunity to spot large pelagic life, such as schooling Hammerhead Sharks and Thresher Sharks, commonly seen in the north. Manta Rays can be found anywhere (from March to October), and Grey Reef Sharks and Whitetip Reef Sharks patrol the reef walls. Whale Sharks occasionally pass by in the summer months. Broccoli Corals in a range of candy colors grow out from the reef on all sides. There are pristine hard coral formations in the north and east, especially, while overhangs are home to schools of Glass Sweepers. The south plateau is covered in yellow Litophyton arboreum and Pulsing Xenia. The west has two spectacular sights: 'Anemone City,' a section of the reef wall covered in Magnificent Anemones, and, further southwest, another section of the wall covered in Elephant Ear Coral. In terms of topography, the very north of the reef is concave. Many different fish such as Wrasse, Parrotfish, Rabbitfish, and Unicornfish, congregate on top of the reef in the clear, shallow water.",
+          "is_day": false
+        },
+        {
+          "heading": "ELPHINSTONE:",
+          "text": "Elphinstone is a very famous, cigar-shaped reef that sits 6 km out to sea from Marsa Alam. There is a long plateau in the north and south of Elphinstone, with the rest of the reef being a steep, colorful wall rich in hard and soft corals. Currents are variable and can be strong or absent at times. While shark sightings are not guaranteed, Carcharhinus longimanus cruise in the shallows during the season, and every so often divers encounter Hammerhead Sharks, Grey Reef Sharks, Silky Sharks, and Manta Rays. Barracuda hang in the blue, and Cornetfish use divers for cover while they hunt the Anthias.",
+          "is_day": false
+        },
+        {
+          "heading": "MARSA SHOANA (Local – Marsa Alam):",
+          "text": "Marsa Shoana is an excellent local dive site and usually the first port of call on itineraries. A white sandy bottom meets a gentle, sloping reef with coral heads small, medium, and large, dotted about. Divers will encounter a variety of ecosystems, which in turn support a wide range of marine life, both big and small. Green Turtles, various Rays, and even Dolphins and Dugongs may surprise those enjoying the underwater realm.",
+          "is_day": false
+        },
+        {
+          "heading": "SHA'AB MAKSOUR (Sataya):",
+          "text": "Sha'ab Maksour is a large reef with a wide plateau in the north and south and walls on either side. There is plenty to see here, including schools of Snapper, Dogtooth Tuna, Hawksbill Turtles, and some of the healthiest hard corals your eyes will ever see. These corals cover the reef with mounds of Porites, Dome, and Mountain Corals in the shallower parts, as well as untouched Table Corals jutting out perpendicularly. Some exciting macro life, including Nembrotha megalocera, has also been sighted here.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1 (Saturday)",
+          "text": "Arrival at the harbor, boarding from 3:00 pm (May board any time after 3:00 pm, as the boat departs the dock Sunday morning, unless all guests arrive before 5:00 pm, in which case the yacht may depart Saturday evening)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Anytime from 8:00 am – 1:00 pm: Authority clearance & departure for first dive",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2 – Day 8 (Afternoon)",
+          "text": "Red Sea: Eat, Sleep & Dive (Diving at Brothers Islands and Safaga region)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 9 (Afternoon)",
+          "text": "2:00 pm – 4:00 pm: Return to the port",
+          "is_day": true
+        },
+        {
+          "heading": "Day 9 (Evening)",
+          "text": "6:00 pm: Cocktail party 7:00 pm: Dinner ashore (Dinner on the last night of the trip is the only meal not included in the cruise)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 10",
+          "text": "Check-out at 8:00 am During this Red Sea adventure, divers encounter an extraordinary variety of marine life, from the vibrant coral gardens and dense reef fish of Marsa Shoana and Sha’ab Maksour to the dramatic pelagic encounters at Brothers, Daedalus, and Elphinstone. Hawksbill and Green Turtles glide gracefully among soft and hard corals, while Grey Reef, Thresher, Silky, and occasional Hammerhead Sharks patrol the walls. Large schools of barracuda, jacks, and snappers swirl in the currents, manta rays drift through sunlit waters, and macro enthusiasts can spot nudibranchs, longnose hawkfish, and other elusive critters, creating a thrilling and diverse underwater experience across both reefs and wrecks. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6189&tourID=272333&languageID=1&curr=USD&showPrices=false"
     },
     "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Marsa Alam)": {
       "boat": "red-sea-aggressor-iv",

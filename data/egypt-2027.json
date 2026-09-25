@@ -16355,11 +16355,16 @@
       "operator_id": "seamad-cruises",
       "boat_id": "avo",
       "nights": 7,
-      "dives": 17,
+      "dives": 12,
       "port_from": "Port Ghalib",
       "port_to": "Port Ghalib",
       "dive_sites": [
-        "fury shoals"
+        "abu dabab",
+        "marsa shouna",
+        "sataya",
+        "fury shoals",
+        "shaab sharm",
+        "rocky island"
       ],
       "region": null,
       "summary": "The AVO offers Red Sea diving and 12 ensuite cabins, spacious decks, fresh cuisine, and expertly curated dive itineraries from Ras Mohamed to St. John&rsquo;s.",
@@ -16563,8 +16568,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "PADI Travel: 50+ logged dives recommended."
+        "notes": "PADI Travel: 50+ logged dives recommended. Sources disagree: liveaboard.com states Open Water, PADI Travel states Advanced Open Water. The stricter is shown."
       },
+      "dives_read": true,
       "padi_fees": [
         {
           "amount": {
@@ -91644,7 +91650,9 @@
       "port_from": "Marsa Alam",
       "port_to": "Hurghada",
       "dive_sites": [
-        "brothers"
+        "brothers",
+        "elphinstone",
+        "abu dabab"
       ],
       "region": null,
       "summary": "Hammerhead II liveaboard operates in the Egyptian Red Sea. With 16 cabins catering for up to 32 guests. Cabins have a/c and some come with private en suite facilities. Itineraries visit well known Red Sea dive hotspots Brothers, St Johns and Daedalus",
@@ -91860,8 +91868,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "AOWD or equivalent"
+        "notes": "Advanced Open Water - 50 minimum logged dives required. AOWD or equivalent"
       },
+      "dives_read": true,
       "divebooker_fees": [
         {
           "amount": {
@@ -258932,9 +258941,9 @@
     }
   },
   "entry_bar": {
-    "both": 154,
-    "disagree": 72,
-    "padi_stricter": 37,
+    "both": 155,
+    "disagree": 73,
+    "padi_stricter": 38,
     "ours_stricter": 35
   },
   "stale_ladders": [
