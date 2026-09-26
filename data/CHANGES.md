@@ -3,6 +3,18 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-26
+
+```
+changes: HEAD -> 2026-09-26
+===========================
+
+bookable again (1)
+  2027-07-31  Queen Sherry           Eclipse & Big Fish: Pelagic Trail  liveaboard.com
+
+854 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-25
 
 ```
