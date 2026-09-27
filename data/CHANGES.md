@@ -3,6 +3,15 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-27
+
+```
+changes: HEAD -> 2026-09-27
+===========================
+
+nothing moved, beyond 95 fare(s) shifting by under 5.
+```
+
 ## 2026-09-26
 
 ```
