@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-25",
+  "collected": "2026-09-27",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -12349,6 +12349,59 @@
         }
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=4418&tourID=353511&languageID=1&curr=USD&showPrices=false"
+    },
+    "emperor-asmaa::Safaga, Brothers & Elphinstone (Marsa Ghalib - Hurghada)": {
+      "boat": "emperor-asmaa",
+      "name": "Safaga, Brothers & Elphinstone (Marsa Ghalib - Hurghada)",
+      "tour_id": "353495",
+      "collected": "2026-09-27",
+      "regions": [
+        "Safaga",
+        "The Brothers",
+        "Salem Express",
+        "Elphinstone",
+        "Abu Dabab"
+      ],
+      "dive_sites": [
+        "safaga",
+        "brothers",
+        "salem express",
+        "elphinstone",
+        "abu dabab"
+      ],
+      "dives": 18,
+      "guests": 20,
+      "experience": "Advanced Open Water - 50 minimum logged dives required.",
+      "min_logged_dives": 50,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "Safaga, Brothers & Elphinstone:",
+          "text": "Panorama Reef, Middle Reef, Salem Express, Brother Islands, Abu Dabab, Elphinstone Sheer walls draped in colourful soft corals and gorgonian forests at the Brothers and Elphinstone. In Safaga, magnificent anemones, glass fish, and huge coral formations at Panorama Reef. Artificial reef of the Salem Express thriving with life; frogfish, blue-spotted stingrays, angel, and butterfly fish. A diverse range of marine life, such as tuna, barracudas, jacks, groupers, snappers, and reef sharks. Occasional hammerheads, silky and oceanic white tips, dolphins, and mantas. Rare chance to spot threshers.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1: Check Dive & Depart",
+          "text": "Guests arriving at the required airport on the check-in day will be met by a representative, wearing a uniform and holding a sign representing the boat for your trip. Check-in: We leave the port as soon as all the clients are on board.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2-6:",
+          "text": "The area around Safaga has some great diving, the best being the offshore reefs of Panorama Reef, Middle Reef, and Abu Kafan. Some divers say this area equals the great sites of Ras Mohamed. The diving offers a combination of shallow reef dives and drop-offs, as well as the famous wreck of the Salem Express. The Salem Express is a dramatic wreck dive. It is now home to a thriving underwater life, including a famous resident frogfish, blue-spotted stingrays, angel and butterfly fish. The ship itself is covered in a large quantity of hard and soft corals. It is one of the largest wrecks in the Egyptian Red Sea, roughly the same size as the Thistlegorm. There is superb wall diving at Panorama: on the south-east side of the plateau is a gorgonian and glassfish corner, with the whole plateau covered in soft corals, and on the south side is an anemone city. Hal Hal (Middle Reef) is a rarely chosen dive site due to its distance from the coast, which makes it a virgin spot. The north side is a drop off going down to 80 metres and is a perfect location to spot tunas, barracudas, turtles and sharks. The southern side has colourful coral gardens along with some caves and canyons. Abu Kafan is a 300-metre-long, narrow reef offering a plateau at both north and south tips. We normally jump in the water on the north plateau and glide with the frequent strong current southwards along the impressive walls covered with soft and black coral, giant fans and gorgonians. The Brother Islands are the pinnacles of two undersea mountains rising from the depths of the abyss and are located about 60 miles offshore. Part of the Marine Park Islands National Park, these islands offer stunning wall diving, with the walls covered in soft corals and forests of gorgonians, creating a kaleidoscope of ever-changing colours. They attract a diverse array of marine species and large pelagics. Large tuna, jacks, and snappers cruise in the blue, accompanied by occasional hammerheads, silvertips, silky and oceanic white tip sharks, and mantas. Even the rare thresher shark can be found here. Sightings of the grey reef shark are almost guaranteed on the North and South Plateaux of Small Brother. Abu Dabab is six reefs commonly known as “Father's Steps” or “Fathers Stepping Stones” and as the name suggests, a set of fairly shallow reefs ranging from depths of 25 metres to the seafloor. In between Abu Dabab II and III, at approximately 15 metres, is the wreckage of a small ship sunk after a fire in 2004. Elphinstone is approximately 30km from Port Ghalib; Elphinstone reef is 300 metres long with sheer walls richly covered in colourful pink and red soft corals and elegant red gorgonians descending to around 40 metres. Other areas of the reef have near-vertical cliffs, overhangs, small caves, and drop-offs of up to 100 metres. Elphinstone is known to experience some strong currents, attracting many diverse species such as barracuda, angel fish, groupers, Napoleons, morays, reef sharks, and great shoals of dogtooth tuna and jacks. Occasional sightings include dolphins, turtles, oceanic white tip, and hammerhead sharks.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 7:",
+          "text": "On the last diving day, 2 dives are available in the morning, whilst observing the rule of no diving within 24 hours of reaching altitude. We return to port at approximately 1 pm and moor here overnight. Evening-time pack up diving equipment, visit the marina, and settle any outstanding bills, ready to depart for the airport or hotel the following morning.",
+          "is_day": true
+        },
+        {
+          "heading": "Day 8: Return",
+          "text": "Check-out begins early morning on the day of disembarkation, with all guests departing by midday. Marine Life: Frogfish, Stingrays, amazing soft corals, tuna, barracuda, turtles, reef sharks, silky sharks, oceanic whitetips, manta rays, hammerheads, thresher sharks (on occasion), The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. Sample itineraries and maps are for illustrative purposes only. The exact route and sites visited are subject to change based on local regulations, guest experience, weather, and logistics, and are at the Captain's discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=4418&tourID=353495&languageID=1&curr=USD&showPrices=false"
     },
     "emperor-asmaa::Simply The Best (Hurghada - Marsa Ghalib)": {
       "boat": "emperor-asmaa",
