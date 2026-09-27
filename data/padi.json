@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-26",
+ "collected": "2026-09-27",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44104,12 +44104,12 @@
    "name": "Amelie Adventures",
    "operator": "AMELIE SAFARI",
    "sailings": {
-    "dated": 93,
-    "first": "2026-09-27",
+    "dated": 92,
+    "first": "2026-10-01",
     "in_season": 29,
     "last": "2027-10-30",
     "priced": 28,
-    "read": 93,
+    "read": 92,
     "unpriced": 1
    },
    "slug": "amelie-adventures",
@@ -44240,12 +44240,12 @@
    "name": "Bella 2",
    "operator": "BELLA LIVEABOARDS",
    "sailings": {
-    "dated": 92,
-    "first": "2026-09-27",
+    "dated": 91,
+    "first": "2026-10-04",
     "in_season": 32,
     "last": "2027-12-28",
     "priced": 32,
-    "read": 92,
+    "read": 91,
     "unpriced": 28
    },
    "slug": "bella-2",
@@ -44693,12 +44693,12 @@
    "name": "Freedom III",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 15,
-    "first": "2026-09-27",
+    "dated": 14,
+    "first": "2026-10-03",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 15,
+    "read": 14,
     "unpriced": 1
    },
    "slug": "freedom-iii",
@@ -44715,12 +44715,12 @@
    "name": "Freedom IV",
    "operator": "UMBI DIVERS",
    "sailings": {
-    "dated": 16,
-    "first": "2026-09-27",
+    "dated": 15,
+    "first": "2026-10-07",
     "in_season": 0,
     "last": "2027-02-03",
     "priced": 0,
-    "read": 16,
+    "read": 15,
     "unpriced": 1
    },
    "slug": "freedom-iv",
@@ -44894,12 +44894,12 @@
    "name": "My Iceberg",
    "operator": null,
    "sailings": {
-    "dated": 18,
-    "first": "2026-09-27",
+    "dated": 17,
+    "first": "2026-10-04",
     "in_season": 0,
     "last": "2027-01-25",
     "priced": 0,
-    "read": 18,
+    "read": 17,
     "unpriced": 1
    },
    "slug": "my-iceberg",
@@ -45012,7 +45012,7 @@
    },
    "slug": "red-sea-aggressor-ii",
    "specs": {
-    "cabins": 11,
+    "cabins": 13,
     "length_m": 42,
     "nitrox_free": false
    }
@@ -45227,9 +45227,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-27",
+    "first": "2026-09-30",
     "in_season": 35,
-    "last": "2027-09-08",
+    "last": "2027-09-12",
     "priced": 35,
     "read": 100,
     "unpriced": 0
