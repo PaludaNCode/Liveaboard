@@ -251871,7 +251871,7 @@
   ],
   "berths_read": "2026-09-26",
   "padi_berths_read": "2026-09-27",
-  "divebooker_berths_read": "2026-09-26",
+  "divebooker_berths_read": "2026-09-27",
   "berths_note": "departures[].berths is one block per seller: [seller index into sellers, places left at the advertised price, [cabins], berths left on the sailing]. Each cabin is [name index into cabin_names, price per person in the display currency, places left (0 = full, null = not stated), single-occupancy surcharge %]. Both counts are totals -- the first across every room selling at the advertised price, the second across every room at any price -- and either is null where any room it covers does not state a count, because one unstated figure makes the sum unknown rather than partial. The two are different claims and are never merged: PADI Travel publishes only the second, and it was measured against liveaboard.com's rather than assumed (77% exact, 88% within two berths, against 22% for the count at the advertised price). A seller that publishes a count but no ladder has a null cabin list: 24 places and 24 places at a stated price are different claims, and only the second is a ladder.",
   "deals": {
     "read": "2026-09-27",
