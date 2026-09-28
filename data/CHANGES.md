@@ -3,6 +3,25 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-28
+
+```
+changes: HEAD -> 2026-09-28
+===========================
+
+now sold out (2)
+  2027-07-24  Snefro Spirit          Sinai Classic                      divebooker.com+liveaboard.com
+  2027-07-31  Star Jet               Elphinstone - St. John's - Sataya  divebooker.com+liveaboard.com
+
+bookable again (1)
+  2027-07-31  Discovery II           Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+price down (1)
+  2027-08-16  Ghazala Adventure      1,709 ->   1,667 USD  -42 (-2.5%)  North, Tiran & Dahab
+
+858 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-27
 
 ```
