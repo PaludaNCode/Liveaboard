@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-28",
+ "collected": "2026-09-29",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -45199,12 +45199,12 @@
    "name": "MY Lady M",
    "operator": null,
    "sailings": {
-    "dated": 8,
-    "first": "2026-09-29",
+    "dated": 7,
+    "first": "2026-10-04",
     "in_season": 0,
     "last": "2026-12-19",
     "priced": 0,
-    "read": 8,
+    "read": 7,
     "unpriced": 3
    },
    "slug": "my-lady-m",
@@ -45468,12 +45468,12 @@
    "name": "Snefro Love",
    "operator": "KING SNEFRO",
    "sailings": {
-    "dated": 55,
-    "first": "2026-09-29",
+    "dated": 54,
+    "first": "2026-10-04",
     "in_season": 17,
     "last": "2027-12-23",
     "priced": 17,
-    "read": 55,
+    "read": 54,
     "unpriced": 0
    },
    "slug": "snefro-love",
@@ -45650,13 +45650,13 @@
    "name": "VIP One",
    "operator": null,
    "sailings": {
-    "dated": 15,
-    "first": "2026-09-29",
+    "dated": 14,
+    "first": "2026-10-06",
     "in_season": 0,
     "last": "2026-12-27",
     "priced": 0,
-    "read": 15,
-    "unpriced": 15
+    "read": 14,
+    "unpriced": 14
    },
    "slug": "vip-one",
    "specs": {
