@@ -3,6 +3,41 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-29
+
+```
+changes: HEAD -> 2026-09-29
+===========================
+
+now sold out (3)
+  2027-06-05  DUNE Silky             North Dahab Tiran                  divebooker.com+liveaboard.com+padi.com
+  2027-06-12  DUNE Longara           Daedalus, Elphinstone & Fury Shoal divebooker.com+liveaboard.com+padi.com
+  2027-08-07  Oceanix                Nord Brothers Safari               liveaboard.com
+
+bookable again (2)
+  2027-05-22  Oceanix                Brothers, Daedalus & Elphinstone   liveaboard.com
+  2027-07-24  Oceanix                Nord Brothers Safari               liveaboard.com
+
+withdrawn (3)
+  2027-06-04  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-06-11  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+  2027-06-18  Iceberg                Overnight Diving & Snorkelling     liveaboard.com
+
+re-listed — same sailing, new row (2)
+  2027-06-06  Iceberg                Hurghada North               divebooker.com+liveaboard.com -> divebooker.com  604 USD -> 665 USD
+  2027-06-13  Iceberg                Hurghada North               divebooker.com+liveaboard.com -> divebooker.com  604 USD -> 665 USD
+
+price up (1)
+  2027-07-10  Hammerhead II            722 ->     849 USD  +127 (+17.6%)  Mini Safari: Abu Nuhas - Ras Moham
+
+price down (3)
+  2027-08-21  Oceanix                1,262 ->   1,126 USD  -136 (-10.8%)  Sataya & Daedalus
+  2027-07-24  Oceanix                1,147 ->   1,024 USD  -123 (-10.7%)  Nord Brothers Safari
+  2027-08-07  Oceanix                1,147 ->   1,024 USD  -123 (-10.7%)  Nord Brothers Safari
+
+392 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-28
 
 ```
