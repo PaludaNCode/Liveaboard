@@ -488,8 +488,17 @@ shipped, it was tested against a fixture with no `divesites` in it, and the
 reefs on the page came from the other two sellers throughout. The vocabulary
 is the seller's own (*Siyul Kebira* where its own day plan writes *Siyoul
 Kebir*, *Small Giftun* where the fleet writes *Giftun*), so every name goes
-through `_sites_from_name` like the operator's region list: what this
+through `_sites_from_regions` like the operator's region list: what this
 project's table cannot place stays unplaced.
+
+**The list grows, and a new name blocks the publish.** On 2026-09-26 it began
+stating *Bells*, *Paradise* and *Ras Umm Sid*, and
+`test_every_reef_the_committed_book_states_is_placed` refused four fetches in a
+row (#153). A bare entry is a name where the same word in prose is not —
+*Paradise* is Paradise Reef as a list entry and an adjective in a sentence — so
+entry-only spellings go in `LIST_ENTRY_ALIASES`, never `SITE_ALIASES`. The fetch
+log does not print per-trip reefs; the names are in the failing publish job's
+assertion.
 
 #### Read end to end against the other seller's own panel
 

@@ -7,6 +7,7 @@ closing tags the page really omits.
 
 from __future__ import annotations
 
+import io
 import sys
 import unittest
 from pathlib import Path
@@ -252,6 +253,102 @@ class TestTheEntryBarVocabularyIsOrdered(unittest.TestCase):
             with self.subTest(cert=cert):
                 self.assertFalse(any(c.isdigit() for c in cert), cert)
 
+
+class TestANoNewsDiscoveryRunIsGreen(unittest.TestCase):
+    """#153. On 2026-09-26 discovery asked 134 harvested tour ids, 133
+    answered as trips the book already held, one answered nothing -- and the
+    run went red, because "added nothing" was read as "read nothing"."""
+
+    def run_main(self, out: Path, parsed: dict[str, TripDetail | None]) -> int:
+        from unittest import mock
+
+        page = " ".join(f"tourID={tour}" for tour in parsed) + " boatID=77"
+
+        class Fetched:
+            def __init__(self, body):
+                self.body = body
+
+        class Fetcher:
+            asked: list[str] = []
+
+            def __init__(self, **_):
+                pass
+
+            def get(self, url):
+                Fetcher.asked.append(url)
+                return Fetched(url)
+
+        def parse(body):
+            return parsed.get(body.removeprefix("frag:"), TripDetail())
+
+        argv = ["fetch_itineraries.py", "--archive", str(out.parent / "a.json"),
+                "--out", str(out), "--snapshots", str(out.parent / "s"),
+                "--delay", "0", "--discover"]
+        (out.parent / "a.json").write_text("{}", encoding="utf-8")
+        with mock.patch.object(sys, "argv", argv), \
+                mock.patch.object(fetch_itineraries, "wanted", lambda _: {}), \
+                mock.patch.object(fetch_itineraries, "unfragmented",
+                                  lambda *_: {"odyssey": 1}), \
+                mock.patch.object(fetch_itineraries, "listed_vessels",
+                                  lambda _: {"odyssey"}), \
+                mock.patch.object(fetch_itineraries, "vessel_page",
+                                  lambda slug: f"page:{page}"), \
+                mock.patch.object(fetch_itineraries, "endpoint",
+                                  lambda boat, tour: f"frag:{tour}"), \
+                mock.patch.object(fetch_itineraries, "PoliteFetcher", Fetcher), \
+                mock.patch.object(fetch_itineraries, "parse_trip", parse), \
+                mock.patch.object(fetch_itineraries, "report_coverage",
+                                  lambda *_: None), \
+                mock.patch("sys.stdout", new=io.StringIO()):
+            Fetcher.asked = []
+            code = fetch_itineraries.main()
+            self.asked = [u for u in Fetcher.asked if u.startswith("frag:")]
+            return code
+
+    def book(self, out: Path, name: str) -> None:
+        import json
+
+        record = {"boat": "odyssey", "name": name, "tour_id": "1"}
+        out.write_text(json.dumps({
+            "collected": "2026-09-01",
+            "trips": {itinerary_key("odyssey", name): record},
+        }), encoding="utf-8")
+
+    def test_one_miss_among_repeats_is_not_a_failure(self):
+        import json
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "itineraries.json"
+            self.book(out, "North")
+            repeat = TripDetail(name="North", regions=("Tiran",))
+            code = self.run_main(out, {"2": repeat, "3": repeat, "4": None})
+            self.assertEqual(code, 0)
+            written = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(written["repeat_tours"],
+                             {"2": itinerary_key("odyssey", "North"),
+                              "3": itinerary_key("odyssey", "North")})
+            # A remembered id is not a new trip, so the book is not fresher.
+            self.assertEqual(written["collected"], "2026-09-01")
+
+    def test_a_remembered_repeat_is_not_asked_again(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "itineraries.json"
+            self.book(out, "North")
+            repeat = TripDetail(name="North", regions=("Tiran",))
+            self.run_main(out, {"2": repeat, "3": repeat})
+            self.run_main(out, {"2": repeat, "3": repeat, "5": repeat})
+            self.assertEqual(self.asked, ["frag:5"])
+
+    def test_a_run_where_nothing_answered_is_still_red(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "itineraries.json"
+            self.book(out, "North")
+            self.assertEqual(self.run_main(out, {"2": None, "3": None}), 1)
 
 if __name__ == "__main__":
     unittest.main()

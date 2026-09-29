@@ -38,7 +38,6 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from liveaboard.promote import (  # noqa: E402
-    _sites_from_name,
     _sites_from_regions,
     itinerary_key,
 )
@@ -166,6 +165,33 @@ def load(path: Path) -> dict[str, Any]:
     return book
 
 
+def _collected(path: Path) -> str:
+    """The book's own date, kept when a run adds no trip to it."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("collected") or ""
+    except (OSError, ValueError):
+        return ""
+
+
+def load_repeats(path: Path) -> dict[str, str]:
+    """Tour ids already asked, which answered as a trip the book holds.
+
+    A vessel page lists a tour per departure pattern and several sell the same
+    week, so most ids discovery harvests are a second id for a trip already
+    read. Nothing remembered that, and every run asked all of them again --
+    134 requests a day for no new trip, which is how one transient miss among
+    them turned `itineraries.yml` red on 2026-09-26 (#153). Kept beside the
+    trips rather than inside a record, because a record's shape must not
+    depend on which pass found it.
+    """
+    if not path.exists():
+        return {}
+    try:
+        return dict(json.loads(path.read_text(encoding="utf-8")).get("repeat_tours") or {})
+    except (OSError, ValueError):
+        return {}
+
+
 def record(slug, boat_id, tour_id, name, detail, sites) -> dict[str, Any]:
     """One book entry, built the same way whichever pass found the tour.
 
@@ -290,6 +316,8 @@ def main() -> int:
     # them. A run knows nothing about the trips it did not visit, which is the
     # same rule `scrape_fees.py --limit` already follows.
     book = load(args.out)
+    repeats = load_repeats(args.out)
+    repeats_before = len(repeats)
 
     todo = list(trips) if args.refresh else [k for k in trips if k not in book]
     if args.limit:
@@ -301,6 +329,9 @@ def main() -> int:
     unknown: dict[str, int] = {}
     failed = 0
     added = 0
+    # Fragments that answered, whether or not they held anything new. What
+    # separates a run that read nothing from one that read only what it had.
+    answered = 0
 
     # Tour ids the archive cannot know about, harvested from the vessel page.
     #
@@ -318,6 +349,7 @@ def main() -> int:
     if args.discover:
         short = unfragmented(args.dataset, book)
         known_tours = {str(t.get("tour_id")) for t in book.values() if t.get("tour_id")}
+        known_tours |= set(repeats)
         listed = listed_vessels(args.fees)
         # A boat with no liveaboard.com vessel page has no page to harvest,
         # and asking for one is a 404 or a soft search page -- both of which
@@ -390,6 +422,7 @@ def main() -> int:
             print(f"  [{index}/{len(todo)}] {slug}: {name[:40]}: nothing parsed", flush=True)
             failed += 1
             continue
+        answered += 1
 
         # The regions are proper names -- "The Brothers" -- and the page filters
         # on canonical site keys. Folding them through the same recogniser the
@@ -398,7 +431,7 @@ def main() -> int:
         # names and we cannot is a gap in SITE_HINTS worth closing deliberately.
         sites = _sites_from_regions(detail.regions)
         for region in detail.regions:
-            if not _sites_from_name(region):
+            if not _sites_from_regions([region]):
                 unknown[region] = unknown.get(region, 0) + 1
 
         book[entry] = record(slug, boat_id, tour_id, name, detail, sites)
@@ -428,6 +461,7 @@ def main() -> int:
                   f"nothing parsed", flush=True)
             failed += 1
             continue
+        answered += 1
         if not detail.name:
             # Read, and unfileable. Counted separately from a failure because
             # it is not one: the fragment answered and did not say which trip
@@ -441,11 +475,13 @@ def main() -> int:
         if entry in book:
             # Two tour ids for one trip, which is ordinary: the vessel page
             # lists a tour per departure pattern and several sell the same
-            # week. Already read is already read.
+            # week. Already read is already read -- and remembered, so the
+            # next run does not ask again.
+            repeats[tour_id] = entry
             continue
         sites = _sites_from_regions(detail.regions)
         for region in detail.regions:
-            if not _sites_from_name(region):
+            if not _sites_from_regions([region]):
                 unknown[region] = unknown.get(region, 0) + 1
         book[entry] = record(slug, boat_id, tour_id, detail.name, detail, sites)
         added += 1
@@ -459,18 +495,25 @@ def main() -> int:
         print(f"\n{unnamed} discovered fragment(s) named no trip and were not filed")
 
 
-    if not added:
+    if not added and len(repeats) == repeats_before:
         # A run that read nothing must not rewrite the file: the only thing
         # that would change is the collected date, which would report the book
         # as fresh on the strength of 340 failed requests.
-        print(f"\nnothing read; {args.out} left as it was ({failed} failed)")
-        return 1 if failed else 0
+        print(f"\nnothing new; {args.out} left as it was "
+              f"({answered} answered, {failed} failed)")
+        # Red only when nothing answered at all. One miss among 134 answers
+        # is a page to ask again tomorrow, not a broken fetcher, and a run
+        # with nothing new to find is the ordinary case once the book is full.
+        return 1 if failed and not answered else 0
 
+    # Only a new trip makes the book fresh; a remembered repeat id does not.
+    collected = (date.today().isoformat() if added
+                 else _collected(args.out) or date.today().isoformat())
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(
         json.dumps(
             {
-                "collected": date.today().isoformat(),
+                "collected": collected,
                 "source": "liveaboard.com",
                 "note": (
                     "One itinerary fragment per trip, from /itinerary/getpopupv2. "
@@ -482,6 +525,7 @@ def main() -> int:
                     "parser change needs --refresh to reach trips already read."
                 ),
                 "trips": dict(sorted(book.items())),
+                "repeat_tours": dict(sorted(repeats.items())),
             },
             indent=2,
             ensure_ascii=False,
@@ -489,7 +533,8 @@ def main() -> int:
         + "\n",
         encoding="utf-8",
     )
-    print(f"\nwrote {args.out}: {len(book)} trips ({added} new), {failed} failed")
+    print(f"\nwrote {args.out}: {len(book)} trips ({added} new), "
+          f"{len(repeats) - repeats_before} repeat tour id(s) remembered, {failed} failed")
 
     if unknown:
         # Not an error. A region the operator names and SITE_HINTS does not is

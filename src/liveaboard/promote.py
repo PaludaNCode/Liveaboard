@@ -4159,6 +4159,16 @@ SITE_HINTS = (
     "paradise reef", "poseidon reef", "ras abu galum", "ras katy",
     "shaab marsa alam", "shaab radir", "shaab sharm", "shaab umm usk",
     "small crack", "tobia kebir", "torombi", "umm hararim", "wadi gimal",
+    # Two more from that list, which stopped the third seller publishing for
+    # four days from 2026-09-26 (#153). *Bells* is Dahab's dive into the Blue
+    # Hole -- liveaboard.com's own day plan says so, "Dive 6 & 7: Bells --
+    # Dive into the Blue Hole" -- and a chip of its own for Blue Hole's
+    # reason. *Ras Um Sid* is Sharm's headland, named in the first seller's
+    # prose beside Ras Zatar and Ras Ghozlani and **not** folded into Ras
+    # Mohammed with them: it is outside the park, and a fold is a claim.
+    # Spelled as the prose spells it, 7 mentions against the third seller's
+    # *Umm*, which folds below.
+    "bells", "ras um sid",
 )
 """Dive-site names operators actually write, in a title or in their own prose.
 
@@ -4354,6 +4364,7 @@ SITE_ALIASES: dict[str, str] = {
     "malahy": "fury shoals",
     "shaab claude": "fury shoals",
     "habili gaffar": "st johns",
+    "ras umm sid": "ras um sid",
 }
 # "Dolphin House" is deliberately absent. It is two reefs 400 km apart --
 # Sha'ab el Erg off Hurghada and Sha'ab Samadai off Marsa Alam -- and both are
@@ -4404,6 +4415,23 @@ def _region_from_name(name: str) -> str | None:
     return None
 
 
+LIST_ENTRY_ALIASES: dict[str, str] = {
+    "paradise": "paradise reef",
+}
+"""A name that is a reef only when it is the whole entry in a list of reefs.
+
+*Paradise* is how the third seller's `divesites` and the first seller's day
+plans ("Dive 3: Paradise. Dive 4: Paradise (Night)") write Paradise Reef, the
+St John's dive -- every divebooker list naming *Paradise Reef* is a St John's
+or deep-south week. It cannot be a `SITE_ALIASES` entry, because those match
+inside prose and "paradise" is an ordinary word there: "the paradise for
+hammerhead sharks" is a Daedalus week, and 30-odd trip descriptions call
+somewhere a diver's paradise. A list entry is a name and a sentence is not, so
+this table is read by :func:`_sites_from_regions` only, and only on an exact
+match of the whole entry.
+"""
+
+
 def _sites_from_regions(regions: Sequence[str]) -> list[str]:
     """The operator's curated place list, one entry at a time.
 
@@ -4413,7 +4441,8 @@ def _sites_from_regions(regions: Sequence[str]) -> list[str]:
     """
     sites: list[str] = []
     for region in regions:
-        sites = _also(sites, _sites_from_name(region))
+        whole = LIST_ENTRY_ALIASES.get(normalise(region))
+        sites = _also(sites, [whole] if whole else _sites_from_name(region))
     return sites
 
 
