@@ -1546,16 +1546,35 @@ class TestTheThirdSellersReefNames(unittest.TestCase):
 
         from liveaboard.promote import _sites_from_regions
 
+        from liveaboard.scrape.divebooker_com import fee_key
+
         # Through `_sites_from_regions`, which is the route `promote` reads
         # this list by: an entry is placed there that a sentence would not be.
+        #
+        # **And only over trips a row can come from.** A trip reaches the page
+        # through an in-season sailing that names it -- `_divebooker_trip`
+        # joins on `fee_key(trip, nights)` -- so a reef on a trip nobody can
+        # buy this season is a reef no filter chip will ever be asked for. On
+        # 2026-09-30 the search linked `/test-boat-trip-haz25`, the seller's
+        # own "Test Calypso", with one out-of-season sailing whose reef list
+        # names *Pecio de Las Calderas*, a Spanish wreck; the gate refused the
+        # whole seller's reading over a row that could not exist.
         book = raw("divebooker.json")
+        sold = {(d.get("boat"), fee_key(d.get("trip") or "", d.get("nights")))
+                for d in (book.get("departures") or {}).values()}
         unplaced = sorted({
             site
-            for vessel in book.get("vessels", {}).values()
-            for trip in (vessel.get("trips") or {}).values()
+            for slug, vessel in book.get("vessels", {}).items()
+            for key, trip in (vessel.get("trips") or {}).items()
+            if (slug, key) in sold
             for site in trip.get("sites") or []
             if not _sites_from_regions([site])
         })
+        # And the rule must still see something: a join that silently
+        # matched nothing would pass here for the wrong reason.
+        self.assertTrue(any((slug, key) in sold
+                            for slug, v in book.get("vessels", {}).items()
+                            for key in (v.get("trips") or {})))
         self.assertEqual(unplaced, [])
 
     def test_the_three_names_that_held_the_seller_back_are_placed(self):
