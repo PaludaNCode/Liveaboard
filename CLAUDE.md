@@ -556,7 +556,10 @@ Break these and the site starts lying quietly rather than failing loudly.
   entry** — `LIST_ENTRY_ALIASES`, read by `_sites_from_regions` alone — since
   as an alias it would match "the paradise for hammerhead sharks" on a
   Daedalus week. The gate asks that same function, because it is the route
-  `promote` reads the list by.
+  `promote` reads the list by, **and only over trips an in-season sailing
+  names** (312 of 510): on 2026-09-30 the seller's own *Test Calypso* hull
+  listed a Spanish wreck on a trip nobody can buy this season, and the gate
+  refused the whole reading over a row that could not exist.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
