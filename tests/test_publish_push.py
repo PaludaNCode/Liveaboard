@@ -62,7 +62,7 @@ def git(*args: str, cwd: Path, **kw) -> str:
 class TestTheCarriedInputsLandWhereThePipelineReadsThem(unittest.TestCase):
     """The handover has to arrive in `data/`, or the fetch is thrown away.
 
-    Every fetching job uploads paths under `data/`, so `upload-artifact@v4`
+    Every fetching job uploads paths under `data/`, so `upload-artifact`
     takes `data` as the least common ancestor and makes it the root of the
     archive: an artifact of `data/candidate.json` contains `candidate.json`.
     Downloaded without a `path:`, that unpacks at the workspace root, and

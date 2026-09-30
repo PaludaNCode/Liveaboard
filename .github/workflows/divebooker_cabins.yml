@@ -65,9 +65,9 @@ jobs:
       DELAY: ${{ inputs.delay || '5' }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -75,7 +75,7 @@ jobs:
       # data gates the commit below and must never stop the fetch that would
       # correct it. See tests/published.py.
       - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/code-tests
 
       - name: Read the cabin ladders
         run: |
@@ -89,7 +89,7 @@ jobs:
           exit "$status"
 
       # The reading, never the dataset built from it.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: divebooker-cabins-${{ github.run_id }}
           path: data/divebooker_cabins.json

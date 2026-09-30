@@ -60,9 +60,9 @@ jobs:
     timeout-minutes: 90
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -76,7 +76,7 @@ jobs:
       # A run that fetches and then refuses to publish is recoverable. One
       # that refuses to fetch is not.
       - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/code-tests
 
       # One source here, and not because the other is parked — that comment
       # stood until 2026-08-30 and both halves of it had stopped being true:
@@ -105,7 +105,7 @@ jobs:
 
       - name: Keep the raw pages as evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: snapshots-${{ github.run_id }}
           path: data/snapshots/
@@ -122,7 +122,7 @@ jobs:
       # already *is* yesterday's site, so the fallback could only ever produce
       # a commit that changed nothing -- and the publish action now suppresses
       # exactly that. A failed scrape skips the publish outright.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: steps.scrape.outcome == 'success'
         with:
           name: refresh-inputs-${{ github.run_id }}

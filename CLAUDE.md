@@ -58,6 +58,14 @@ holds both kinds and the default command runs both. Seven workflows run the
 code-only suite up front — six of them before fetching — and every one of them
 runs the whole suite afterwards through `.github/actions/checks`, so an
 assertion about committed data is reached only once there is a commit to gate.
+The up-front half runs through `.github/actions/code-tests`, **once per version
+of the code** (#156): a green run records a hash of `src/`, `tools/`, `tests/`,
+`templates/` and `.github/` in the Actions cache, and a later job on the same
+hash skips it and says so. A data commit changes none of those, so it was
+50–70 seconds a job retesting what the last job had just passed. `data/` is
+never in the key — a code-only test may not read it, and every commit would
+be a new key. The publish gate is untouched and runs the whole suite every
+time.
 `fees.yml` drives a browser and runs no up-front suite at all, which is the
 same rule taken to its end rather than an exception to it:
 
