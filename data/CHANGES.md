@@ -3,6 +3,35 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-09-30
+
+```
+changes: HEAD -> 2026-09-30
+===========================
+
+now sold out (3)
+  2027-05-15  MY Odyssey Liveaboard  Best of Tiran                      divebooker.com+liveaboard.com+padi.com
+  2027-07-04  Tala                   North                              divebooker.com+liveaboard.com+padi.com
+  2027-07-11  Tala                   North & Dahab                      divebooker.com+liveaboard.com+padi.com
+
+price down (361)
+  2027-05-01  Marselia Star          3,355 ->   3,345 USD  -10 (-0.3%)  CCR Reefs, Wrecks and Canyons Trip
+  2027-07-17  DUNE Silky             2,787 ->   2,778 USD  -9 (-0.3%)  Best of Egypt
+  2027-07-29  Golden Dolphin IV      2,729 ->   2,720 USD  -9 (-0.3%)  Daedalus, Rocky Island, Zabargad, 
+  2027-07-31  Queen Sherry           2,730 ->   2,721 USD  -9 (-0.3%)  Eclipse & Big Fish: Pelagic Trail 
+  2027-05-15  Aphrodite              2,332 ->   2,324 USD  -8 (-0.3%)  Brothers, Daedalus & Elphinstone
+  2027-07-24  Aphrodite              2,332 ->   2,324 USD  -8 (-0.3%)  North Dolphins
+  2027-08-21  Aphrodite              2,332 ->   2,324 USD  -8 (-0.3%)  North Wrecks
+  2027-07-03  Aphrodite              2,332 ->   2,324 USD  -8 (-0.3%)  North & Brothers
+  2027-07-31  Emperor Superior       2,684 ->   2,676 USD  -8 (-0.3%)  South & St. John's
+  2027-08-16  Golden Dolphin IV      2,501 ->   2,493 USD  -8 (-0.3%)  North, Safaga & Brothers
+  2027-08-12  Golden Imperial        2,501 ->   2,493 USD  -8 (-0.3%)  North - Straits of Tiran - Brother
+  2027-05-27  Royal Evolution        2,405 ->   2,397 USD  -8 (-0.3%)  Brothers, Daedalus, Rocky, St. Joh
+  ... and 349 more not shown
+
+532 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-29
 
 ```
