@@ -1537,6 +1537,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   beside it and `cabins.yml` runs an hour after the refresh. Ordering is
   load-bearing: read a day apart, all 864 ladders sat up to 0.6% above their
   own row, which is the panel disagreeing with the number that opened it.
+  **And it is read on a trigger, so it is dated per sailing (#154).** A
+  nightly census of ~1,010 booking pages caught 21 berth moves a night; the
+  rest was a 0.1% drift, which `probe_booking_currency.py` traced to the 23 of
+  40 boats that price in EUR being re-converted into the USD the session asks
+  for. `fetch_cabins.py --triggered` reads what the crawl says moved (fare,
+  currency, availability), what `STALE_LADDER` would drop, what was never read,
+  and a rotating third of the rest, so about 340 a night and no quiet ladder
+  older than two days. A ladder read on a day other than `berths_read` carries
+  that day as the block's fifth slot (`BLOCK_READ`), and the page prints it.
+  Omitted where it agrees, because the block ships on every departure. The
+  sales diff sets each sailing against **its own** previous reading and not
+  against yesterday's census, because consecutive days no longer overlap.
+  `census: true` on a dispatch still reads every departure.
   `berths` is a **list of seller blocks** because a sailing has more than one
   seller, and both fill one ([#92]). A seller that states a count but no ladder
   gets no cabin list — *24 places* and *24 places at a stated price* are

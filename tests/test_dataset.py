@@ -2303,7 +2303,7 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
     def test_a_sale_mark_dates_each_seller_separately(self):
         app = self.source()
         self.assertIn("function namedReadings(", app)
-        self.assertIn("namedReadings(d.sale.sellers)", app)
+        self.assertIn("namedReadings(d.sale.sellers, d)", app)
         self.assertNotIn(
             'var read = D.meta.berths_read ? ", read "', app,
             "the sale mark is stamping one crawl's date over both sellers again",

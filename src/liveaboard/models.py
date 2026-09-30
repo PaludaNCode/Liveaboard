@@ -525,7 +525,7 @@ class Departure:
     than recorded as having none.
     """
 
-    BLOCK_SELLER, BLOCK_SPOTS, BLOCK_CABINS, BLOCK_ABOARD = 0, 1, 2, 3
+    BLOCK_SELLER, BLOCK_SPOTS, BLOCK_CABINS, BLOCK_ABOARD, BLOCK_READ = 0, 1, 2, 3, 4
     """Positions inside one seller's block, named once.
 
     Mirrors the identical line in ``templates/app.js`` and the shape stated in

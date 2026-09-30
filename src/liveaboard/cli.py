@@ -720,13 +720,14 @@ def cmd_promote(args: argparse.Namespace) -> int:
                 f"    since {shifted['previous']}: {counts['started']} sailing(s)"
                 f" newly discounted, {counts['ended']} no longer,"
                 f" {counts['changed']} at a different rate,"
-                f" over {shifted['compared']} sailing(s) both readings covered"
+                f" over {shifted['compared']} sailing(s), each against its own"
+                f" previous reading"
             )
             if shifted.get("not_compared"):
-                # Never silent. A sailing only one reading covered has not come
-                # off sale; nobody looked at it.
-                print(f"    {shifted['not_compared']} sailing(s) were read on only"
-                      f" one of the two days and are not compared")
+                # Never silent. A sailing read for the first time has nothing
+                # to be a change from.
+                print(f"    {shifted['not_compared']} sailing(s) were read for the"
+                      f" first time and are not compared")
 
     if trips:
         book = {

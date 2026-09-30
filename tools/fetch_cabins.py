@@ -15,12 +15,15 @@ Written as its own tool rather than folded into the crawl, and unlike
 committed and every ``Event`` carries an ``@id`` of the form
 ``LA-{x}-{boatID}-{tourID}``. Both ids come straight out of the repository.
 
-**Every departure must be re-read, every run.** A trip's reefs do not change
-overnight, so the itinerary book is fetched once per trip and never again. A
-berth count changes the moment somebody books, and a discount ends. That makes
-this one request per *departure* -- about 890 a night -- which is a real cost
-rather than a free one, and the reason it is capped by default in CI and run
-deliberately here.
+**Every departure is re-read within three days, and the ones that moved the
+same day.** A berth count changes the moment somebody books, and a discount
+ends -- but it was measured doing so far less than a nightly census assumed:
+between the books of 2026-09-28 and 09-29, 697 of 1,030 ladders "changed" and
+676 of those moved price only, almost all by a factor of 0.999 -- the booking
+page re-converting into the session currency overnight. **21 sailings changed
+berth count** (#154). So ``--triggered`` reads what the crawl says moved and a
+rotating third of the rest (:func:`triggered`), and ``--limit 0`` without it is
+still the full census.
 
 **A capped run merges, it never replaces.** ``--limit N`` visits N departures
 and leaves the rest of the book alone: a run knows nothing about the sailings
@@ -92,8 +95,81 @@ def wanted(archive: dict[str, Any]) -> dict[str, dict[str, str]]:
                 # the glyph beside the price: "$" is four currencies this site
                 # sells in and the booking page renders the session's.
                 "currency": offer.get("priceCurrency") or "USD",
+                # Kept so the next run can tell a sailing the crawl says sold
+                # out, or re-opened, from one that did nothing.
+                "availability": offer.get("availability") or "",
             })
     return out
+
+
+ROTATE_DAYS = 3
+"""The oldest a ladder may get when nothing about its sailing moved.
+
+A rotating third of the fleet is read every day, so each quiet sailing is read
+every third day and its count is at most two days old -- dated per sailing on
+the page, never under the day the run happened. Anything the crawl says moved
+is read the same day regardless.
+"""
+
+STALE_LADDER = 0.03
+"""`promote.STALE_LADDER`'s figure, asked here before the fact: a ladder that
+would be dropped for contradicting its row is re-read rather than dropped."""
+
+
+def triggered(
+    sailings: dict[str, dict[str, Any]],
+    book: dict[str, dict[str, Any]],
+    today: date,
+) -> dict[str, str]:
+    """``{tour_id: why}`` for every sailing this run should read.
+
+    - **never read** -- nothing in the book to be stale;
+    - **moved** -- the crawl now states a different fare, currency or
+      availability from the one this ladder was read against, which is exactly
+      the sailing whose ladder went wrong overnight;
+    - **stale** -- its bottom rung sits past ``STALE_LADDER`` from the fare,
+      so `promote` would drop it: reading it again is the fix, and the only
+      one;
+    - **its turn** -- ``int(tour_id) % ROTATE_DAYS`` names the day, so a
+      third of the rest is read daily and no quiet ladder is older than
+      ``ROTATE_DAYS - 1`` days;
+    - **overdue** -- read ``ROTATE_DAYS`` or more days ago, which is the net
+      under a run that failed on a sailing's turn.
+    """
+    turn = today.toordinal() % ROTATE_DAYS
+    why: dict[str, str] = {}
+    for tour, entry in sailings.items():
+        record = book.get(tour)
+        if not record:
+            why[tour] = "never read"
+            continue
+        for field in ("advertised", "currency", "availability"):
+            then, now = record.get(field), entry.get(field)
+            if then is not None and str(then) != str(now or ""):
+                why[tour] = f"{field} moved"
+                break
+        if tour in why:
+            continue
+        cheapest = min((c["price"] for c in record.get("cabins") or []
+                        if c.get("price") is not None), default=None)
+        try:
+            fare = float(entry.get("advertised") or 0)
+        except ValueError:
+            fare = 0
+        if (cheapest is not None and fare
+                and record.get("currency") == entry.get("currency")
+                and abs(cheapest - fare) / fare > STALE_LADDER):
+            why[tour] = "stale"
+            continue
+        try:
+            age = (today - date.fromisoformat(record.get("collected") or "")).days
+        except ValueError:
+            age = ROTATE_DAYS
+        if age >= ROTATE_DAYS:
+            why[tour] = "overdue"
+        elif tour.isdigit() and int(tour) % ROTATE_DAYS == turn and age > 0:
+            why[tour] = "its turn"
+    return why
 
 
 def load(path: Path) -> dict[str, Any]:
@@ -113,6 +189,10 @@ def main() -> int:
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
     parser.add_argument("--limit", type=int, default=0, help="cap fetches (0 = all)")
     parser.add_argument("--delay", type=float, default=2.0)
+    parser.add_argument("--triggered", action="store_true",
+                        help="read only what moved, what is stale and a rotating "
+                             f"third of the rest, so no ladder is older than "
+                             f"{ROTATE_DAYS - 1} days (#154)")
     parser.add_argument("--tours", default="",
                         help="explicit boatid:tourid pairs, for proving a change")
     args = parser.parse_args()
@@ -138,6 +218,14 @@ def main() -> int:
         # Soonest first: a berth count matters most on the sailings people are
         # booking now, and a capped run should spend its requests there.
         todo = sorted(sailings, key=lambda t: (sailings[t]["start"], t))
+        if args.triggered:
+            why = triggered(sailings, book, date.today())
+            todo = [t for t in todo if t in why]
+            counts: dict[str, int] = {}
+            for reason in why.values():
+                counts[reason] = counts.get(reason, 0) + 1
+            print("triggered: " + ", ".join(
+                f"{n} {reason}" for reason, n in sorted(counts.items())))
         if args.limit:
             todo = todo[: args.limit]
 
@@ -196,6 +284,7 @@ def main() -> int:
             "collected": today,
             "currency": reading.currency,
             "advertised": advertised,
+            "availability": entry.get("availability") or "",
             "cabins": [c.as_dict() for c in reading.cabins],
             "source_url": url,
         }
@@ -233,8 +322,10 @@ def main() -> int:
                     "the red banner, which only appears at four or fewer) and "
                     "the stated single-occupancy surcharge. Berth counts are "
                     "the operator's claim on the day in `collected`, not "
-                    "verified inventory, and they go stale within hours. Not "
-                    "incremental: every departure is re-read every run."
+                    "verified inventory, and they go stale within hours. Each "
+                    "record's own `collected` is the day it was read: a "
+                    "sailing is re-read the day the crawl says it moved, and "
+                    "every third day otherwise."
                 ),
                 "departures": dict(sorted(book.items())),
             },

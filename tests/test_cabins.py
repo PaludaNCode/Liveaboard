@@ -30,6 +30,7 @@ sold out and prices every cabin anyway.
 from __future__ import annotations
 
 import unittest
+from datetime import date
 from pathlib import Path
 
 from liveaboard.scrape.cabins import parse_cabins
@@ -494,3 +495,85 @@ class TestSpotsAtTheAdvertisedPrice(unittest.TestCase):
         reading = parse_cabins(page, "USD")
         self.assertEqual([c.berths for c in reading.cabins], [4, None])
         self.assertIsNone(reading.berths_at_cheapest)
+
+
+class TestTheCabinReadIsTriggered(unittest.TestCase):
+    """#154. 21 of 1,030 sailings changed berth count between two nightly
+    censuses; the rest moved by a 0.1% re-conversion. A scheduled run reads
+    what moved and a rotating third of the rest."""
+
+    TODAY = date(2026, 9, 30)
+
+    def setUp(self):
+        import sys
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_cabins
+
+        self.fc = fetch_cabins
+
+    def entry(self, **over):
+        return {"advertised": "1200", "currency": "USD",
+                "availability": "https://schema.org/InStock"} | over
+
+    def read(self, collected="2026-09-29", price=1200.0, **over):
+        return {"advertised": "1200", "currency": "USD",
+                "availability": "https://schema.org/InStock",
+                "collected": collected, "cabins": [{"price": price}]} | over
+
+    def why(self, entry, record, tour=None):
+        # A tour id whose turn is not today, unless the test says otherwise.
+        tour = tour or next(str(n) for n in range(1000, 1010)
+                            if n % self.fc.ROTATE_DAYS
+                            != self.TODAY.toordinal() % self.fc.ROTATE_DAYS)
+        book = {tour: record} if record else {}
+        return self.fc.triggered({tour: entry}, book, self.TODAY).get(tour)
+
+    def test_a_quiet_sailing_off_its_turn_is_not_read(self):
+        self.assertIsNone(self.why(self.entry(), self.read()))
+
+    def test_a_sailing_never_read_is_read(self):
+        self.assertEqual(self.why(self.entry(), None), "never read")
+
+    def test_a_sailing_the_crawl_repriced_is_read_the_same_day(self):
+        self.assertEqual(self.why(self.entry(advertised="1100"), self.read()),
+                         "advertised moved")
+
+    def test_a_sailing_that_sold_out_is_read_the_same_day(self):
+        self.assertEqual(
+            self.why(self.entry(availability="https://schema.org/SoldOut"), self.read()),
+            "availability moved")
+
+    def test_a_ladder_promote_would_drop_is_read_again(self):
+        self.assertEqual(self.why(self.entry(), self.read(price=1000.0)), "stale")
+
+    def test_every_sailing_has_a_turn_within_the_window(self):
+        turn = next(str(n) for n in range(1000, 1010)
+                    if n % self.fc.ROTATE_DAYS == self.TODAY.toordinal() % self.fc.ROTATE_DAYS)
+        self.assertEqual(self.why(self.entry(), self.read(), tour=turn), "its turn")
+
+    def test_a_missed_turn_is_caught_as_overdue(self):
+        old = date.fromordinal(self.TODAY.toordinal() - self.fc.ROTATE_DAYS).isoformat()
+        self.assertEqual(self.why(self.entry(), self.read(collected=old)), "overdue")
+
+    def test_a_record_from_before_availability_was_kept_is_not_moved(self):
+        """Books written before the field existed hold no `availability`; a
+        missing reading is not a change, or the first run reads everything."""
+        record = self.read()
+        del record["availability"]
+        self.assertIsNone(self.why(self.entry(), record))
+
+
+
+class TestAPageInAnotherCurrencyIsRead(unittest.TestCase):
+    """Asked for EUR, the booking page writes the euro sign as an entity, and
+    a three-character glyph pattern read no cabin at all off it (#154)."""
+
+    def test_an_entity_glyph_is_a_glyph(self):
+        from liveaboard.scrape.cabins import NOW_PRICE, _money
+
+        html = ('<em class="not-italic mx-1">&#x20AC;</em> <span class="text-lg"'
+                ' translate=no>1,186</span>')
+        now = NOW_PRICE.search(html)
+        self.assertEqual(now.group(2), "1,186")
+        self.assertEqual(_money("&#x20AC;1,300"), (1300.0, "€"))

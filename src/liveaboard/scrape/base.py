@@ -107,6 +107,12 @@ class PoliteFetcher:
     delay: float = DEFAULT_DELAY_SECONDS
     timeout: float = 30.0
     user_agent: str = USER_AGENT
+    headers: dict[str, str] = field(default_factory=dict)
+    """Sent with every request beside the user agent.
+
+    For the one preference a page takes only from a cookie: liveaboard.com's
+    booking page renders in the session currency, which it keeps in
+    ``boardCookie_prefs_v2`` (#154)."""
     diagnose: bool = False
     """Print each page's structure as it is fetched.
 
@@ -180,7 +186,8 @@ class PoliteFetcher:
             raise FetchBlocked(f"robots.txt disallows {url}")
 
         self._wait(url)
-        request = urllib.request.Request(url, headers={"User-Agent": self.user_agent})
+        request = urllib.request.Request(
+            url, headers={"User-Agent": self.user_agent, **self.headers})
         try:
             with urllib.request.urlopen(request, timeout=self.timeout) as response:
                 body = response.read().decode("utf-8", errors="replace")

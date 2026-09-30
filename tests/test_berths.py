@@ -624,3 +624,22 @@ class TestALadderAnswersToItsOwnSellersFare(unittest.TestCase):
         self.assertEqual(len(kept), 1)
         _, far = _drop_stale_ladder(only_third, 1000, {})
         self.assertEqual(far, {SELLERS.index("divebooker.com"): 1430})
+
+
+class TestARotatedLadderIsDatedByItsOwnRead(unittest.TestCase):
+    """#154. A quiet sailing's ladder is read every third day, so the book's
+    day is not every ladder's day, and a count two days old may not wear the
+    run's date."""
+
+    def test_a_ladder_read_on_another_day_carries_that_day(self):
+        old = record(cabin("Twin", 1200, 4)) | {"collected": "2026-09-28"}
+        block, = _berth_blocks(old, None, {}, None, read_as_of="2026-09-30")
+        self.assertEqual(block[4], "2026-09-28")
+
+    def test_a_ladder_read_on_the_books_day_carries_nothing_extra(self):
+        """The block ships on every departure; the date is paid only where it
+        says something the header does not."""
+        fresh = record(cabin("Twin", 1200, 4)) | {"collected": "2026-09-30"}
+        block, = _berth_blocks(fresh, None, {}, None, read_as_of="2026-09-30")
+        self.assertEqual(len(block), 4)
+
