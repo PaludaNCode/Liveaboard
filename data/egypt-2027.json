@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-29",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1282 sailings and the entry bar on 242 of 472 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1282 sailings and the entry bar on 241 of 472 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-28",
@@ -56361,224 +56361,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Advanced Open Water - 50 minimum logged dives required. Sources disagree: liveaboard.com states Advanced + 50 dives, PADI Travel states Open Water. The stricter is shown."
+        "notes": "Advanced Open Water - 50 minimum logged dives required."
       },
-      "dives_read": true,
-      "divebooker_fees": [
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "private_guide",
-          "included": true,
-          "note": "Dive guide: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "nitrox",
-          "included": true,
-          "note": "Nitrox package: stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "alcohol",
-          "included": true,
-          "note": "Non-alcoholic beverages: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "government_fee",
-          "included": true,
-          "note": "Government taxes: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "airport_transfer",
-          "included": true,
-          "note": "Scheduled group transfer airport - boat - airport: stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "dive_insurance",
-          "included": true,
-          "note": "Free short-term DAN diving insurance (upon request): stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 10.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "USD"
-          },
-          "basis": "per_night",
-          "code": "fuel_surcharge",
-          "included": false,
-          "note": "Operator quotes \"Fuel surcharge\" as a range",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 50.0,
-            "currency": "EUR"
-          },
-          "basis": "per_trip",
-          "code": "environment_tax",
-          "included": false,
-          "note": "Environmental taxes: stated with no unit",
-          "tier": "mandatory",
-          "unit_unstated": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 60.0,
-            "currency": "EUR"
-          },
-          "basis": "per_trip",
-          "code": "service_charge",
-          "included": false,
-          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
-          "tier": "mandatory",
-          "unit_unstated": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          },
-          "unit_from": "liveaboard.com"
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "visa",
-          "included": false,
-          "note": "Visa: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "gear_rental",
-          "included": false,
-          "note": "Equipment rental: listed with no price",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "guided_diving",
-          "included": false,
-          "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "course",
-          "included": false,
-          "note": "Courses and training: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "gratuities",
-          "included": false,
-          "note": "Crew gratuities: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        }
-      ],
-      "divebooker_fees_complete": false
+      "dives_read": true
     },
     {
       "id": "dune-longara--fury-shoals-dolphin-trip-port-ghalib-port-ghalib",
@@ -58940,224 +58725,9 @@
         "max_depth_m": null,
         "nitrox_recommended": false,
         "strong_current": false,
-        "notes": "Open Water - 20 minimum logged dives required. OWD or equivalent"
+        "notes": "Open Water - 20 minimum logged dives required."
       },
-      "dives_read": true,
-      "divebooker_fees": [
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "private_guide",
-          "included": true,
-          "note": "Dive guide: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "nitrox",
-          "included": true,
-          "note": "Nitrox package: stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "alcohol",
-          "included": true,
-          "note": "Non-alcoholic beverages: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "government_fee",
-          "included": true,
-          "note": "Government taxes: stated as included",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "airport_transfer",
-          "included": true,
-          "note": "Scheduled group transfer airport - boat - airport: stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "dive_insurance",
-          "included": true,
-          "note": "Free short-term DAN diving insurance (upon request): stated as included",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 10.0,
-            "currency": "USD"
-          },
-          "amount_max": {
-            "amount": 20.0,
-            "currency": "USD"
-          },
-          "basis": "per_night",
-          "code": "fuel_surcharge",
-          "included": false,
-          "note": "Operator quotes \"Fuel surcharge\" as a range",
-          "tier": "mandatory",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 50.0,
-            "currency": "EUR"
-          },
-          "basis": "per_trip",
-          "code": "environment_tax",
-          "included": false,
-          "note": "Environmental taxes: stated with no unit",
-          "tier": "mandatory",
-          "unit_unstated": true,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": {
-            "amount": 60.0,
-            "currency": "EUR"
-          },
-          "basis": "per_trip",
-          "code": "service_charge",
-          "included": false,
-          "note": "Service fees — priced by the trip: divebooker.com states no unit for it, and liveaboard.com prices the same charge at the same figure by the trip",
-          "tier": "mandatory",
-          "unit_unstated": false,
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          },
-          "unit_from": "liveaboard.com"
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "visa",
-          "included": false,
-          "note": "Visa: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "gear_rental",
-          "included": false,
-          "note": "Equipment rental: listed with no price",
-          "tier": "conditional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "guided_diving",
-          "included": false,
-          "note": "Supervision fees for Level 1 divers and Level 2 divers beyond 20m: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "course",
-          "included": false,
-          "note": "Courses and training: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        },
-        {
-          "amount": null,
-          "basis": "per_trip",
-          "code": "gratuities",
-          "included": false,
-          "note": "Crew gratuities: listed with no price",
-          "tier": "optional",
-          "provenance": {
-            "kind": "scraped",
-            "source_id": "divebooker.com",
-            "retrieved": "2026-09-30",
-            "url": "https://divebooker.com/dune-longara-haz527"
-          }
-        }
-      ],
-      "divebooker_fees_complete": false
+      "dives_read": true
     },
     {
       "id": "dune-longara--north-brothers-safaga-port-ghalib",
@@ -190124,7 +189694,7 @@
       "start": "2027-05-01",
       "end": "2027-05-04",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190143,7 +189713,7 @@
       "start": "2027-05-05",
       "end": "2027-05-08",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190162,7 +189732,7 @@
       "start": "2027-05-08",
       "end": "2027-05-11",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190181,7 +189751,7 @@
       "start": "2027-05-12",
       "end": "2027-05-15",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190200,7 +189770,7 @@
       "start": "2027-05-15",
       "end": "2027-05-18",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190219,7 +189789,7 @@
       "start": "2027-05-19",
       "end": "2027-05-22",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190238,7 +189808,7 @@
       "start": "2027-05-22",
       "end": "2027-05-25",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190257,7 +189827,7 @@
       "start": "2027-05-26",
       "end": "2027-05-29",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190276,7 +189846,7 @@
       "start": "2027-05-29",
       "end": "2027-06-01",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190295,7 +189865,7 @@
       "start": "2027-06-02",
       "end": "2027-06-05",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190314,7 +189884,7 @@
       "start": "2027-06-05",
       "end": "2027-06-08",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190333,7 +189903,7 @@
       "start": "2027-06-09",
       "end": "2027-06-12",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190352,7 +189922,7 @@
       "start": "2027-06-12",
       "end": "2027-06-15",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190371,7 +189941,7 @@
       "start": "2027-06-16",
       "end": "2027-06-19",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190390,7 +189960,7 @@
       "start": "2027-06-19",
       "end": "2027-06-22",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190409,7 +189979,7 @@
       "start": "2027-06-23",
       "end": "2027-06-26",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190428,7 +189998,7 @@
       "start": "2027-06-26",
       "end": "2027-06-29",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190447,7 +190017,7 @@
       "start": "2027-06-30",
       "end": "2027-07-03",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190466,7 +190036,7 @@
       "start": "2027-07-03",
       "end": "2027-07-06",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190485,7 +190055,7 @@
       "start": "2027-07-07",
       "end": "2027-07-10",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190504,7 +190074,7 @@
       "start": "2027-07-10",
       "end": "2027-07-13",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190523,7 +190093,7 @@
       "start": "2027-07-14",
       "end": "2027-07-17",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190542,7 +190112,7 @@
       "start": "2027-07-17",
       "end": "2027-07-20",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190561,7 +190131,7 @@
       "start": "2027-07-21",
       "end": "2027-07-24",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190580,7 +190150,7 @@
       "start": "2027-07-24",
       "end": "2027-07-27",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190599,7 +190169,7 @@
       "start": "2027-07-28",
       "end": "2027-07-31",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190618,7 +190188,7 @@
       "start": "2027-07-31",
       "end": "2027-08-03",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190637,7 +190207,7 @@
       "start": "2027-08-04",
       "end": "2027-08-07",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190656,7 +190226,7 @@
       "start": "2027-08-07",
       "end": "2027-08-10",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190675,7 +190245,7 @@
       "start": "2027-08-11",
       "end": "2027-08-14",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190694,7 +190264,7 @@
       "start": "2027-08-14",
       "end": "2027-08-17",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190713,7 +190283,7 @@
       "start": "2027-08-18",
       "end": "2027-08-21",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190732,7 +190302,7 @@
       "start": "2027-08-21",
       "end": "2027-08-24",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190751,7 +190321,7 @@
       "start": "2027-08-25",
       "end": "2027-08-28",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -190770,7 +190340,7 @@
       "start": "2027-08-28",
       "end": "2027-08-31",
       "price": {
-        "amount": 631.0,
+        "amount": 627.0,
         "currency": "USD"
       },
       "booking_url": "https://divebooker.com/aml-hayaty-haz539",
@@ -208481,16 +208051,6 @@
         "retrieved": "2026-09-29",
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
       },
-      "divebooker_price": {
-        "amount": 1753.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/dune-longara-haz527"
-      },
       "berths": [
         [
           0,
@@ -209316,16 +208876,6 @@
         "source_id": "padi.com",
         "retrieved": "2026-09-29",
         "url": "https://travel.padi.com/liveaboard/egypt/dune-longara/"
-      },
-      "divebooker_price": {
-        "amount": 1753.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/dune-longara-haz527"
       },
       "berths": [
         [
@@ -260396,19 +259946,20 @@
   "divebooker": {
     "source": "divebooker.com",
     "read": "2026-09-30",
-    "vessels": 93,
-    "departures": 972,
-    "in_season": 972,
-    "matched": 806,
+    "vessels": 94,
+    "departures": 970,
+    "in_season": 970,
+    "matched": 804,
     "founded": 88,
     "unpriced": 63,
     "on_unmapped_vessels": 15,
     "unmatched": 63,
     "unmapped_vessels": [
-      "new-life"
+      "new-life",
+      "test-boat-trip"
     ],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 972 in-season sailing(s), 806 land on a row one of the other two sellers founded, keyed on (boat, date), and 88 are rows this seller founded itself, on a date or a hull the other two do not list, and 15 sit on hull(s) the alias map does not know, so nothing can be said about them, and 63 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 970 in-season sailing(s), 804 land on a row one of the other two sellers founded, keyed on (boat, date), and 88 are rows this seller founded itself, on a date or a hull the other two do not list, and 15 sit on hull(s) the alias map does not know, so nothing can be said about them, and 63 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
   "sellers": [
     "liveaboard.com",
