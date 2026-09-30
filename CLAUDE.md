@@ -539,6 +539,16 @@ Break these and the site starts lying quietly rather than failing loudly.
   for the reef's usual spelling. 19 new chips, 102 itineraries whose reef
   list grew — and the same names sit unplaced in liveaboard.com's own prose,
   so this was never only the third seller's hole.
+  **A new name there stops that seller publishing, and that is the gate
+  working (#153).** *Bells*, *Paradise* and *Ras Umm Sid* arrived on
+  2026-09-26 and the publish refused four mornings running. Bells and Ras Um
+  Sid are chips of their own, spelled as the prose spells them; Ras Um Sid is
+  named beside two Ras Mohammed dives and does not fold with them, because it
+  is outside the park. **Bare *Paradise* is a reef only as a whole list
+  entry** — `LIST_ENTRY_ALIASES`, read by `_sites_from_regions` alone — since
+  as an alias it would match "the paradise for hammerhead sharks" on a
+  Daedalus week. The gate asks that same function, because it is the route
+  `promote` reads the list by.
 - **The per-trip book beats the trip title, and never joins it.** `promote`
   merges `data/itineraries.json` — the operator's own reefs, dive count, group
   size and entry bar for one trip — the way it merges the fee book. Where it is
@@ -1756,7 +1766,11 @@ What one *trip* says about itself needs no browser and no crawl to find:
 `data/archive.json` and fetches `/itinerary/getpopupv2` over plain HTTP, in the
 daily refresh. Incremental — a trip already in `data/itineraries.json` is not
 re-fetched — so the first run is ~314 requests and every run after it is a
-handful. Everything else in the pipeline describes the boat's year.
+handful. **Discovery is incremental too**: a harvested tour id that answers as a
+trip the book already holds goes in `repeat_tours` and is never asked again.
+Nothing remembered them, so every run re-asked 134 ids for no new trip, and on
+2026-09-26 one miss among them turned the job red (#153) — a run with nothing
+new is the ordinary case, and it fails only when **nothing answered at all**. Everything else in the pipeline describes the boat's year.
 `itineraries.yml` runs it alone, capped (`--limit N`), which is how a change to
 the parser gets proved against three real trips before it is pointed at three
 hundred of somebody else's pages. A capped run merges into the book, like

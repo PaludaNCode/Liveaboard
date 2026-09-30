@@ -1544,15 +1544,49 @@ class TestTheThirdSellersReefNames(unittest.TestCase):
         list on the 33 hulls it alone sells."""
         from published import raw
 
+        from liveaboard.promote import _sites_from_regions
+
+        # Through `_sites_from_regions`, which is the route `promote` reads
+        # this list by: an entry is placed there that a sentence would not be.
         book = raw("divebooker.json")
         unplaced = sorted({
             site
             for vessel in book.get("vessels", {}).values()
             for trip in (vessel.get("trips") or {}).values()
             for site in trip.get("sites") or []
-            if not self.sites(site)
+            if not _sites_from_regions([site])
         })
         self.assertEqual(unplaced, [])
+
+    def test_the_three_names_that_held_the_seller_back_are_placed(self):
+        """#153: *Bells*, *Paradise* and *Ras Umm Sid* stopped the third
+        seller publishing from 2026-09-26. Each as the list states it."""
+        from liveaboard.promote import _sites_from_regions
+
+        for entry, chip in (("Bells", "bells"),
+                            ("Paradise", "paradise reef"),
+                            ("Ras Umm Sid", "ras um sid"),
+                            ("Ras Um Sid", "ras um sid")):
+            with self.subTest(entry=entry):
+                self.assertEqual(_sites_from_regions([entry]), [chip])
+
+    def test_ras_um_sid_is_not_ras_mohammed(self):
+        """Named beside Ras Zatar and Ras Ghozlani, which fold into the park;
+        Sharm's headland is outside it, and a fold is a claim."""
+        self.assertEqual(
+            self.sites("Ras Zatar, Ras Ghozlani, or maybe Ras Um Sid"),
+            ["ras um sid", "ras mohammed"])
+
+    def test_paradise_in_a_sentence_is_not_a_reef(self):
+        """A whole list entry is a name; a word inside prose is not. "The
+        paradise for hammerhead sharks" is a Daedalus week."""
+        from liveaboard.promote import _sites_from_regions
+
+        for text in ("At Daedalus, the paradise for hammerhead sharks",
+                     "a true diver's paradise"):
+            with self.subTest(text=text):
+                self.assertNotIn("paradise reef", self.sites(text))
+                self.assertNotIn("paradise reef", _sites_from_regions([text]))
 
 
 class TestTheReefsDescriptionsName(unittest.TestCase):
