@@ -1,5 +1,5 @@
 {
- "collected": "2026-09-29",
+ "collected": "2026-09-30",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -1893,6 +1893,7 @@
     "dahab",
     "blue hole",
     "ras abu galum",
+    "bells",
     "gabr el bint",
     "small crack",
     "gota abu ramada",
@@ -6467,7 +6468,8 @@
     "dahab",
     "blue hole",
     "tiran",
-    "ras mohammed"
+    "ras mohammed",
+    "ras um sid"
    ],
    "dives": 12,
    "fees": {
@@ -13607,6 +13609,7 @@
     "small crack",
     "gubal",
     "tiran",
+    "ras um sid",
     "ras katy"
    ],
    "dives": 20,
@@ -22167,7 +22170,8 @@
     "small crack",
     "tiran",
     "gubal",
-    "dahab"
+    "dahab",
+    "ras um sid"
    ],
    "dives": 20,
    "fees": {
@@ -23337,7 +23341,8 @@
    "dive_sites": [
     "thistlegorm",
     "tiran",
-    "ras mohammed"
+    "ras mohammed",
+    "ras um sid"
    ],
    "dives": 12,
    "fees": {
@@ -23508,7 +23513,8 @@
     "thistlegorm",
     "ras mohammed",
     "tiran",
-    "laguna reef"
+    "laguna reef",
+    "ras um sid"
    ],
    "dives": 11,
    "fees": {
@@ -34108,6 +34114,7 @@
     "tiran",
     "dahab",
     "blue hole",
+    "bells",
     "ras mohammed"
    ],
    "dives": 18,
@@ -35539,7 +35546,8 @@
    "dive_sites": [
     "ras katy",
     "ras mohammed",
-    "thistlegorm"
+    "thistlegorm",
+    "ras um sid"
    ],
    "dives": 10,
    "fees": {
@@ -36861,6 +36869,7 @@
     "dahab",
     "blue hole",
     "gabr el bint",
+    "bells",
     "ras mohammed"
    ],
    "dives": 18,
@@ -41269,7 +41278,8 @@
    "dive_sites": [
     "ras katy",
     "ras mohammed",
-    "thistlegorm"
+    "thistlegorm",
+    "ras um sid"
    ],
    "dives": 9,
    "fees": {
@@ -41355,7 +41365,8 @@
    "dive_sites": [
     "ras mohammed",
     "thistlegorm",
-    "tiran"
+    "tiran",
+    "ras um sid"
    ],
    "dives": 12,
    "fees": {
@@ -41444,6 +41455,7 @@
     "blue hole",
     "gabr el bint",
     "ras abu galum",
+    "bells",
     "ras mohammed"
    ],
    "dives": 19,
@@ -41690,7 +41702,8 @@
     "thistlegorm",
     "small crack",
     "gubal",
-    "tiran"
+    "tiran",
+    "ras um sid"
    ],
    "dives": 20,
    "fees": {
@@ -42371,6 +42384,7 @@
     "rosalie moller",
     "dahab",
     "blue hole",
+    "bells",
     "ras mohammed"
    ],
    "dives": 18,
@@ -44608,7 +44622,7 @@
     "cabins": 13,
     "length_m": 38,
     "nitrox_free": false,
-    "year_built": 2007
+    "year_built": 2005
    }
   },
   "blue-pearl": {
@@ -45429,7 +45443,7 @@
     "last": "2027-12-25",
     "priced": 18,
     "read": 54,
-    "unpriced": 8
+    "unpriced": 6
    },
    "slug": "seawolf-steel",
    "specs": {
@@ -45492,9 +45506,9 @@
    "operator": "KING SNEFRO",
    "sailings": {
     "dated": 100,
-    "first": "2026-09-30",
+    "first": "2026-10-04",
     "in_season": 35,
-    "last": "2027-09-12",
+    "last": "2027-09-15",
     "priced": 35,
     "read": 100,
     "unpriced": 0
