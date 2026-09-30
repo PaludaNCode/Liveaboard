@@ -23,3 +23,4 @@ site/data/
 # count rather than a price that is gone tomorrow, so yesterday's copy is
 # worth far less here than archive.json's is there.
 data/padi_raw.json
+.code-tested/

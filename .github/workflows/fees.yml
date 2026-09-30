@@ -53,9 +53,9 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -79,7 +79,7 @@ jobs:
       # rather than moved: the publish job checks out the tip, which already
       # holds the last good dataset, so the fallback could only ever commit
       # something identical to what was already there.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: steps.collect.outcome == 'success'
         with:
           name: fees-inputs-${{ github.run_id }}

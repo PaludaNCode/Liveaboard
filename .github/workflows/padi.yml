@@ -86,9 +86,9 @@ jobs:
       REFRESH: ${{ github.event_name != 'schedule' && inputs.refresh && '--refresh' || '' }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -96,7 +96,7 @@ jobs:
       # an assertion about committed data gates the commit below and must
       # never stop the fetch that would correct it. See tests/published.py.
       - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/code-tests
 
       # `data/padi_raw.json` is gitignored — 13 MB rewritten whole every run,
       # against archive.json's 1.8 MB, holding an entry bar rather than a price
@@ -110,7 +110,7 @@ jobs:
       # that is what decides which vessels are wanted at all, and dated so an
       # entry cannot be pinned open forever.
       - name: Restore the raw store
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: data/padi_raw.json
           key: padi-raw-${{ hashFiles('data/padi_aliases.json') }}-${{ github.run_id }}
@@ -142,7 +142,7 @@ jobs:
       # descriptions. Downloading this beats re-crawling for any of them.
       - name: Keep the raw store as evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: padi-raw-${{ github.run_id }}
           path: data/padi_raw.json
@@ -152,7 +152,7 @@ jobs:
       # Hand over the reading, never the dataset built from it. `publish.yml`
       # rebuilds both from the branch tip, so a derived file cannot arrive
       # stale -- see the note at the top of that file.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: padi-inputs-${{ github.run_id }}
           path: |

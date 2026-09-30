@@ -86,6 +86,53 @@ is capped at three departures by default while the schedule reads every one —
 proving a parser change must not cost the source 890 pages. It was manual
 altogether until the nightly cron landed; the cap is what is left of that.
 
+### The booking page's currency is a cookie, and most of the fleet prices in EUR (#154)
+
+**The page renders in the session's currency**, kept in the
+`boardCookie_prefs_v2` cookie as `currency%3DUSD` — set on the first response,
+from the visitor's origin (`var origin='US'`, `var custcurrency='USD'`).
+Sending `Cookie: boardCookie_prefs_v2=currency%3DEUR` renders the same page in
+EUR, and `GBP` works the same way. Ruled out, all answering in USD:
+`&currency=`, `&cur=`, `&curr=`, `&currencycode=`, `&c=`, and cookies named
+`currency`, `custcurrency`, `Currency`, `cur`. The switcher itself is
+`setCurrencyAsync('EUR')` in `site-bundle.js`, which is on a CDN this sandbox
+cannot reach. The cookie is the setting, so that code was not needed.
+`PoliteFetcher.headers` carries it.
+
+**Asked for EUR, the price glyph is an entity** (`&#x20AC;`), so `NOW_PRICE`
+read no cabin at all off any EUR page until it learned to take one.
+
+**Which currency a boat prices in** — `tools/probe_booking_currency.py`,
+2026-09-30, one sailing on each of 40 boats, read in both currencies. Every
+figure displayed is a whole number in either currency, so roundness says
+nothing. A multiple of five does: an operator prices in fives and tens, and a
+conversion lands on one by chance.
+
+| every rung a multiple of 5 in | boats | USD ladder moved since the committed book | crawl's fare equals the USD bottom rung |
+|---|---|---|---|
+| EUR only | 23 | 17 | 6 |
+| USD only | 3 | 0 | 3 |
+| neither | 12 | 2 | 10 |
+| both | 2 | 1 | 1 |
+
+So the nightly 0.1% drift is **EUR-priced boats re-converted into USD**. It
+moves within the hour, not only overnight: Amelie's cheapest berth read $495
+and then $493 ten minutes later, and Blue's $1,615 and then $1,610. The "neither"
+boats are the USD-priced ones with odd figures (Hammerhead II at $1,349, All
+Star Red Sea at $1,756), which do not drift. The same conversion explains why
+the ladder and the crawl's fare disagree by a few dollars on the EUR boats
+(17 of 23) and on almost no USD boat. The two passes convert at different
+moments.
+
+Not acted on, and here is what acting on it would need. `fetch_cabins.py`
+would read each boat in the currency it prices in, and the crawl's fare, which
+is in USD, would have to be converted before `STALE_LADDER` compares the two.
+The first reading after the switch would change currency on about 600
+sailings, and the change log already treats a currency switch as not a price
+move. What it buys is a ladder that stays put until the operator moves it,
+which is what would let a quiet sailing be read even less often than every
+third day.
+
 ### The operator, on a vessel page with no departures
 
 `Product.brand.name`, in the page's own JSON-LD:

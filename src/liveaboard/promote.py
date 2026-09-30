@@ -998,6 +998,7 @@ def _berth_blocks(
     names: dict[str, int],
     fx_table: Any,
     ladder: dict[str, Any] | None = None,
+    read_as_of: str = "",
 ) -> list[dict[str, Any]]:
     """What each seller says is left on this sailing, and at what price.
 
@@ -1089,8 +1090,20 @@ def _berth_blocks(
     # Positional, and the seller is an index into the dataset's pool: a block
     # is written once per departure, so a repeated "liveaboard.com" string is
     # 22 KB of one word. [seller, spots at the advertised price, cabins,
-    # berths left on the sailing].
-    return [[SELLERS.index("liveaboard.com"), spots, rungs, aboard]] + tail
+    # berths left on the sailing, and -- only where it is not the book's own
+    # day -- the day this ladder was read].
+    #
+    # **A rotated read is dated per sailing (#154).** `fetch_cabins.py
+    # --triggered` reads a sailing the day the crawl says it moved and every
+    # third day otherwise, so on any morning two thirds of the counts are one
+    # or two days old. `berths_read` is the run's day; a ladder read on
+    # another carries its own, and the page prints that one. Omitted where it
+    # agrees, because the block ships on every departure.
+    block: list[Any] = [SELLERS.index("liveaboard.com"), spots, rungs, aboard]
+    collected = record.get("collected") or ""
+    if collected and read_as_of and collected != read_as_of:
+        block.append(collected)
+    return [block] + tail
 
 
 def _rungs(
@@ -1420,7 +1433,11 @@ def _on_sale_summary(
             # shifted every date after it onto the wrong seller's name. That is
             # the one thing this pair exists to prevent, and it cannot happen to
             # a list that keeps its own holes.
-            row["read"] = [read.get(s) for s in row["sellers"]]
+            #
+            # And per run rather than per book, where a block dates itself: a
+            # rotated cabin read (#154) leaves some ladders a day or two old,
+            # so a run is dated by the stalest ladder inside it.
+            row["read"] = [_run_read(group, s, read.get(s)) for s in row["sellers"]]
             # A range only where the run really carries more than one, which is
             # rare: an operator discounts a season, not a sailing. Printing
             # "10-10%" everywhere to accommodate the exception is noise on every
@@ -1437,10 +1454,28 @@ def _on_sale_summary(
         # what a seller claimed when it was looked at, and it can end
         # overnight. Keyed by seller, and the panel's own heading takes the
         # oldest of them -- a summary is only as fresh as its stalest half.
-        "read": {str(seller): day for seller, day in sorted(read.items()) if day},
+        "read": {str(seller): min([day] + [r["read"][r["sellers"].index(seller)]
+                                           for r in rows if seller in r["sellers"]
+                                           and r["read"][r["sellers"].index(seller)]])
+                 for seller, day in sorted(read.items()) if day},
         "sailings": sum(1 for d in departures if d.get("sale")),
         "boats": rows,
     }
+
+
+def _run_read(group: list[dict[str, Any]], seller: int, book_day: str | None) -> str | None:
+    """The stalest day ``seller``'s evidence was read, over one run of sailings.
+
+    A block that carries its own date (``BLOCK_READ``) was read that day; one
+    that does not was read on the book's.
+    """
+    days = [
+        (block[4] if len(block) > 4 and block[4] else book_day)
+        for d in group for block in d.get("berths") or []
+        if block and block[0] == seller
+    ]
+    days = [day for day in days if day]
+    return min(days) if days else book_day
 
 
 def _name_the_runs(
@@ -1593,17 +1628,29 @@ def _sales_block(
         block["first_reading"] = True
         return block
 
-    previous = order[-2]
-    before = (days[previous] or {}).get("sailings") or {}
-    block["previous"] = previous
+    # **Each sailing against its own previous reading (#154)**, not against
+    # yesterday's whole census. `fetch_cabins.py --triggered` reads a sailing
+    # the day the crawl says it moved and every third day otherwise, so two
+    # consecutive days barely overlap and a day-to-day diff would compare
+    # almost nothing. The newest earlier day holding the key is that sailing's
+    # "before"; on a book of full censuses that is yesterday for every key,
+    # which is the diff this replaced.
+    before: dict[str, Any] = {}
+    since: dict[str, str] = {}
+    for earlier in order[:-1]:
+        for key, value in ((days[earlier] or {}).get("sailings") or {}).items():
+            before[key], since[key] = value, earlier
 
     both = set(now) & set(before)
     listed = {key for key in both if key.split("::")[0] in boats}
+    block["previous"] = min((since[k] for k in listed), default=order[-2])
     block["compared"] = len(listed)
     # Stated every time, with a count, because a change report that quietly
     # narrows its own scope reads as "that was everything" -- the failure this
-    # project exists to correct in other people.
-    block["not_compared"] = len(set(now) ^ set(before))
+    # project exists to correct in other people. What cannot be compared is a
+    # sailing read today with no earlier reading in the book; one not read
+    # today is simply not due, and is compared on the day it is.
+    block["not_compared"] = len(set(now) - set(before))
     if len(both) != len(listed):
         block["unlisted"] = len(both) - len(listed)
 
@@ -3683,6 +3730,7 @@ def promote(
                 ladder, sailing_book.get(f"{slug}::{item['start']}"), cabin_names,
                 fx_table,
                 ladder=divebooker_ladders.get(berth_key(slug, item["start"])),
+                read_as_of=cabin_read,
             )
             # A ladder whose bottom rung is nowhere near the price above it is
             # not this sailing's any more. Dropped and named rather than
@@ -3854,7 +3902,8 @@ def promote(
         payload["berths_note"] = (
             "departures[].berths is one block per seller: "
             "[seller index into sellers, places left at the advertised price, "
-            "[cabins], berths left on the sailing]. Each cabin is [name index "
+            "[cabins], berths left on the sailing, and -- only where it is not "
+            "berths_read -- the day that seller's ladder was read]. Each cabin is [name index "
             "into cabin_names, price per person in the display currency, "
             "places left (0 = full, null = not stated), single-occupancy "
             "surcharge %]. Both counts are totals -- the first across every "

@@ -1,0 +1,49 @@
+name: The code's own tests
+description: >
+  The code-only suite, once per version of the code (#156). Seven fetch jobs a
+  day ran it up front on a tree whose code no data commit ever touches -- 50 to
+  70 seconds each, retesting what the last run had just passed. A green run
+  records a hash of every file that can change what the suite asserts; a later
+  job on that same hash skips it and says so, and any code change is a new
+  hash and runs it. This gates the *fetch* only: the publish job's
+  `.github/actions/checks` still runs the whole suite over what is about to be
+  committed, every time.
+
+runs:
+  using: composite
+  steps:
+    # `data/` is left out on purpose. It changes on every commit, and a test
+    # this step runs may not read it -- that is what `LIVEABOARD_TESTS=code`
+    # means (tests/published.py) -- so including it would only make every key
+    # new and the cache worthless.
+    - id: key
+      shell: bash
+      run: >
+        echo "hash=${{ hashFiles('src/**', 'tools/**', 'tests/**',
+        'templates/**', '.github/**') }}" >> "$GITHUB_OUTPUT"
+
+    - id: seen
+      uses: actions/cache/restore@v5
+      with:
+        path: .code-tested
+        key: code-tested-${{ steps.key.outputs.hash }}
+        lookup-only: true
+
+    - if: steps.seen.outputs.cache-hit == 'true'
+      shell: bash
+      run: >
+        echo "the code at ${{ steps.key.outputs.hash }} already passed the
+        code-only suite; not running it again"
+
+    - if: steps.seen.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        mkdir -p .code-tested
+        echo "${{ steps.key.outputs.hash }}" > .code-tested/passed
+
+    - if: steps.seen.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: .code-tested
+        key: code-tested-${{ steps.key.outputs.hash }}

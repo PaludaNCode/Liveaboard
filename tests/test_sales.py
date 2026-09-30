@@ -255,7 +255,23 @@ class TestASailingOnlyOneReadingCovered(unittest.TestCase):
             day(("alia-soul::2027-05-01", on_sale())),
         )
         self.assertEqual(moved["moves"], [])
-        self.assertEqual((moved["compared"], moved["not_compared"]), (1, 1))
+        # Not counted as uncompared either, since #154: a sailing not read
+        # today is not due today, and is compared on the day it is read.
+        self.assertEqual((moved["compared"], moved["not_compared"]), (1, 0))
+
+    def test_a_rotated_sailing_is_compared_with_its_own_last_reading(self):
+        """#154. A sailing read every third day has no reading yesterday; its
+        sale ending is reported against the day it was last read."""
+        payload = promote(FLEET, season=SEASON, cabins=cabins(record()),
+                          sales=sale_book({
+                              "2026-08-26": day(("alia-soul::2027-05-01", on_sale())),
+                              "2026-08-28": day(("alia-soul::2027-05-08", on_sale())),
+                              "2026-08-29": day(("alia-soul::2027-05-01",
+                                                 [1000.0, None, "USD"])),
+                          }))
+        moved = payload["deals"]["on_sale_changes"]
+        self.assertEqual((moved["compared"], moved["previous"]), (1, "2026-08-26"))
+        self.assertEqual([m["kind"] for m in moved["moves"]], ["ended"])
 
     def test_a_sailing_missing_from_yesterday_is_not_a_sale_that_started(self):
         moved = self._moved(

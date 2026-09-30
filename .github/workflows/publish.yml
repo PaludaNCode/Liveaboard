@@ -134,18 +134,18 @@ jobs:
       # the workflow *started* from, which by now may be several data commits
       # behind -- and deriving from that is exactly the staleness this job
       # exists to prevent. Naming the branch resolves at checkout time.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
       # `path: data` is load-bearing, and leaving it off cost three days of
       # readings. Every fetching job uploads paths under `data/`, so
-      # upload-artifact@v4 takes `data` as the least common ancestor and makes
+      # upload-artifact takes `data` as the least common ancestor and makes
       # it the *root of the archive* -- an artifact of `data/candidate.json`
       # contains `candidate.json`. Downloaded with no `path:`, that unpacks at
       # the workspace root, so the crawl's candidate landed at
@@ -163,7 +163,7 @@ jobs:
       # reading and a quiet day are the same commit.
       - name: Take the inputs the fetch produced
         if: inputs.carry != ''
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: ${{ inputs.carry }}
           path: data

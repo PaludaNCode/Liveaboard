@@ -15,10 +15,14 @@ name: Read cabin prices and berths left
 # into the book rather than replacing it — it knows nothing about the sailings
 # it did not visit — exactly as `scrape_fees.py --limit` does.
 #
-# Unlike the itinerary book this is **not incremental**. A trip's reefs do not
-# change overnight; a berth count changes the moment somebody books. An
-# uncapped run is therefore about 890 requests, one per departure, and is a
-# real cost to spend deliberately rather than on a schedule that nobody chose.
+# The schedule reads **on a trigger, not a census** (#154). Measured between
+# the books of 2026-09-28 and 09-29: 697 of 1,030 ladders "changed", 676 of
+# them by price alone and almost all by a factor of 0.999 -- the booking page
+# re-converting overnight -- and 21 changed berth count. So a scheduled run
+# reads what the crawl says moved, every ladder that would be dropped as
+# stale, and a rotating third of the rest (`fetch_cabins.triggered`): about
+# 340 requests against 1,010, no quiet ladder more than two days old, and each
+# dated per sailing on the page. `census: true` on a dispatch reads the lot.
 #
 # Reading, not booking. Step one of a booking flow is a page with a form on it;
 # a GET renders it and submits nothing. The polite fetcher asks robots.txt
@@ -65,6 +69,10 @@ on:
         description: "Seconds between requests"
         type: string
         default: "2"
+      census:
+        description: "Read every departure rather than only what moved and whose turn it is"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -88,11 +96,15 @@ jobs:
       LIMIT: ${{ github.event_name == 'schedule' && '0' || (inputs.limit || '3') }}
       TOURS: ${{ github.event_name == 'schedule' && '' || inputs.tours }}
       DELAY: ${{ inputs.delay || '2' }}
+      # Triggered on the schedule and on an uncapped dispatch, unless the
+      # dispatch asks for the census. A capped dispatch is a proof and reads
+      # the first N sailings as it always has.
+      TRIGGERED: ${{ (github.event_name == 'schedule' || (inputs.limit == '0' && !inputs.census)) && '--triggered' || '' }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -106,7 +118,7 @@ jobs:
       # A run that fetches and then refuses to publish is recoverable. One
       # that refuses to fetch is not.
       - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/code-tests
 
       # The run summary is where a capped run is actually read: it prints each
       # sailing's cabin count, its cheapest berth and how many are left at it,
@@ -121,6 +133,7 @@ jobs:
             --out data/cabins.json \
             --snapshots data/snapshots \
             --delay "$DELAY" \
+            $TRIGGERED \
             "${scope[@]}" \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
@@ -138,7 +151,7 @@ jobs:
       # departures that failed, which the run itself names.
       - name: Keep the raw pages as evidence
         if: always() && (env.TOURS != '' || env.LIMIT != '0')
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: booking-snapshots-${{ github.run_id }}
           path: data/snapshots/
@@ -175,7 +188,7 @@ jobs:
       # Hand over the reading, never the dataset built from it. `publish.yml`
       # rebuilds both from the branch tip, so a derived file cannot arrive
       # stale -- see the note at the top of that file.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: cabins-inputs-${{ github.run_id }}
           path: |

@@ -58,6 +58,14 @@ holds both kinds and the default command runs both. Seven workflows run the
 code-only suite up front — six of them before fetching — and every one of them
 runs the whole suite afterwards through `.github/actions/checks`, so an
 assertion about committed data is reached only once there is a commit to gate.
+The up-front half runs through `.github/actions/code-tests`, **once per version
+of the code** (#156): a green run records a hash of `src/`, `tools/`, `tests/`,
+`templates/` and `.github/` in the Actions cache, and a later job on the same
+hash skips it and says so. A data commit changes none of those, so it was
+50–70 seconds a job retesting what the last job had just passed. `data/` is
+never in the key — a code-only test may not read it, and every commit would
+be a new key. The publish gate is untouched and runs the whole suite every
+time.
 `fees.yml` drives a browser and runs no up-front suite at all, which is the
 same rule taken to its end rather than an exception to it:
 
@@ -1529,6 +1537,19 @@ Break these and the site starts lying quietly rather than failing loudly.
   beside it and `cabins.yml` runs an hour after the refresh. Ordering is
   load-bearing: read a day apart, all 864 ladders sat up to 0.6% above their
   own row, which is the panel disagreeing with the number that opened it.
+  **And it is read on a trigger, so it is dated per sailing (#154).** A
+  nightly census of ~1,010 booking pages caught 21 berth moves a night; the
+  rest was a 0.1% drift, which `probe_booking_currency.py` traced to the 23 of
+  40 boats that price in EUR being re-converted into the USD the session asks
+  for. `fetch_cabins.py --triggered` reads what the crawl says moved (fare,
+  currency, availability), what `STALE_LADDER` would drop, what was never read,
+  and a rotating third of the rest, so about 340 a night and no quiet ladder
+  older than two days. A ladder read on a day other than `berths_read` carries
+  that day as the block's fifth slot (`BLOCK_READ`), and the page prints it.
+  Omitted where it agrees, because the block ships on every departure. The
+  sales diff sets each sailing against **its own** previous reading and not
+  against yesterday's census, because consecutive days no longer overlap.
+  `census: true` on a dispatch still reads every departure.
   `berths` is a **list of seller blocks** because a sailing has more than one
   seller, and both fill one ([#92]). A seller that states a count but no ladder
   gets no cabin list — *24 places* and *24 places at a stated price* are
@@ -1805,6 +1826,15 @@ rebuilt whole and `--limit N` merges instead, for `fetch_padi.py`'s reason.
 `data/divebooker_aliases.json` is hand-maintained and outside the publication
 gate: it says which hull is which boat here, and mints ids for the ones only
 this seller sells.
+**A hull with nothing in season is read weekly, not daily (#155)** — 29 of 93
+were, a third of the job. The book's `barren` stamps the day each was found
+empty; `barren_to_skip` holds one back for `BARREN_RECHECK_DAYS` and the skip is
+carried and named (`not_asked`), the crawl's rule. **Every way a hull starts
+selling later is kept**: a hull the search links for the first time is read at
+once, the verdict expires within the week, a hull stating a special is read
+daily (a markdown can end overnight), a boat either other seller sells in
+season is read daily off the committed dataset, and `recheck_all` on a dispatch
+reads the lot without forgetting the record.
 
 **And its cabin ladders are a second pass, in `divebooker_cabins.yml`.**
 `tools/fetch_divebooker_cabins.py` opens `/boatorder/booking?tripId=` once per

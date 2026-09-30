@@ -487,6 +487,49 @@ class TestAScheduledRunReadsEverything(unittest.TestCase):
                         "pipeline has scheduled sources; the pattern is stale")
 
 
+class TestTheFetchSuiteRunsOncePerVersionOfTheCode(unittest.TestCase):
+    """#156. The code-only suite in front of a fetch is keyed on the code.
+
+    Seven jobs a day ran it on a tree whose code no data commit touches. The
+    shared action skips a hash that already passed; these assert the three
+    things that keep the skip honest -- every fetch job goes through it, the
+    key never covers `data/` (or every commit is new and nothing is saved),
+    and what it runs is still the code-only suite and not the gate.
+    """
+
+    WORKFLOWS = ROOT / ".github" / "workflows"
+    ACTION = ROOT / ".github" / "actions" / "code-tests" / "action.yml"
+    USES = "uses: ./.github/actions/code-tests"
+
+    def test_every_suite_in_front_of_a_fetch_goes_through_the_action(self):
+        inline = []
+        for path in sorted(self.WORKFLOWS.glob("*.yml")):
+            body = path.read_text(encoding="utf-8")
+            if "LIVEABOARD_TESTS=code" in body:
+                inline.append(path.name)
+        self.assertEqual(inline, [], "run the code-only suite through "
+                         f"{self.USES} rather than inline")
+        users = [p.name for p in sorted(self.WORKFLOWS.glob("*.yml"))
+                 if self.USES in p.read_text(encoding="utf-8")]
+        self.assertGreaterEqual(len(users), 8, users)
+
+    def test_the_key_is_the_code_and_never_the_data(self):
+        body = self.ACTION.read_text(encoding="utf-8")
+        key = body[body.index("hashFiles("): body.index(")", body.index("hashFiles("))]
+        for tree in ("src/", "tools/", "tests/", "templates/", ".github/"):
+            self.assertIn(f"'{tree}**'", key, tree)
+        self.assertNotIn("data", key)
+
+    def test_what_it_runs_is_the_code_only_suite(self):
+        body = self.ACTION.read_text(encoding="utf-8")
+        self.assertIn("LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest "
+                      "discover -s tests", body)
+        # Recorded only after a pass: the write follows the suite in one
+        # `run`, under `bash -e`, so a red suite never reaches it.
+        run = body.index("unittest discover")
+        self.assertLess(run, body.index("mkdir -p .code-tested"))
+
+
 class TestEveryPushingWorkflowChecksItself(unittest.TestCase):
     """A job that pushes is the only CI its own commit will ever get.
 
@@ -2260,7 +2303,7 @@ class TestTheOffersPanelNamesItsSellers(unittest.TestCase):
     def test_a_sale_mark_dates_each_seller_separately(self):
         app = self.source()
         self.assertIn("function namedReadings(", app)
-        self.assertIn("namedReadings(d.sale.sellers)", app)
+        self.assertIn("namedReadings(d.sale.sellers, d)", app)
         self.assertNotIn(
             'var read = D.meta.berths_read ? ", read "', app,
             "the sale mark is stamping one crawl's date over both sellers again",

@@ -512,7 +512,7 @@
     /* Each seller under its own reading date, rather than one date appended to
        a list of them: the two books are read by two jobs two days apart, and a
        sale is exactly the kind of claim that expires between them. */
-    var who = namedReadings(d.sale.sellers);
+    var who = namedReadings(d.sale.sellers, d);
     /* No percentage has two causes — the discounting seller is not the one
        whose fare this row prints, or the markdown rounds to nothing — and the
        row does not carry which. So the tooltip states what is true of both
@@ -696,7 +696,8 @@
      named for what it holds — hosts, `liveaboard.com` — and the chips' short
      labels are `SELLER_CHIPS`. */
   var SELLER_HOSTS = D.sellers || [];
-  var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2, BLOCK_ABOARD = 3;
+  var BLOCK_SELLER = 0, BLOCK_SPOTS = 1, BLOCK_CABINS = 2, BLOCK_ABOARD = 3,
+      BLOCK_READ = 4;
   var RUNG_NAME = 0, RUNG_PRICE = 1, RUNG_LEFT = 2, RUNG_SUPP = 3;
 
   /* Berths left at the advertised price, across every room selling at it.
@@ -741,7 +742,11 @@
        arrived with a date of its own rather than borrowing one. */
     return null;
   }
-  function readOn(block) { return sellerRead(block[BLOCK_SELLER]); }
+  /* A block's own day where it states one: a rotated cabin read (#154) dates
+     each ladder, and one read two days ago may not borrow the run's date. */
+  function readOn(block) {
+    return block[BLOCK_READ] || sellerRead(block[BLOCK_SELLER]);
+  }
 
   /* "liveaboard.com (28 Aug) and padi.com (30 Aug)" — every seller in a list,
      each under its own reading date.
@@ -751,9 +756,14 @@
      the cabin crawl's day on 124 rows whose evidence is partly PADI's book from
      two days later and on 2 that are entirely it. Same fact, same rule, and now
      the same function. */
-  function namedReadings(sellers) {
+  function namedReadings(sellers, d) {
     return (sellers || []).map(function (s) {
       var day = sellerRead(s);
+      /* The sailing's own ladder date where its seller states one (#154): the
+         markdown was read off that ladder, on that day. */
+      (d && d.berths || []).forEach(function (b) {
+        if (b[BLOCK_SELLER] === s && b[BLOCK_READ]) day = b[BLOCK_READ];
+      });
       return (SELLER_HOSTS[s] || "a seller") + (day ? " (" + shortDate(day) + ")" : "");
     });
   }
@@ -3801,14 +3811,16 @@
        change list that quietly narrows its own scope reads as "that was
        everything", which is the thing this site exists to object to. */
     var one = shifted.compared === 1;
+    /* Each sailing against its own previous reading (#154): quiet sailings
+       are read every third day, so "both days" stopped being the unit. */
     var note = shifted.compared + (one ? " sailing was" : " sailings were") +
-      " read on both days and compared.";
+      " compared with " + (one ? "its" : "their") + " previous reading.";
     if (shifted.not_compared) {
       note += " " + shifted.not_compared + " more " +
-        (shifted.not_compared === 1 ? "was" : "were") + " read on only one of " +
-        "them and " + (shifted.not_compared === 1 ? "is" : "are") +
-        " not compared: a sailing missing from a reading has not come off sale, " +
-        "it has not been looked at.";
+        (shifted.not_compared === 1 ? "was" : "were") + " read for the first " +
+        "time and " + (shifted.not_compared === 1 ? "is" : "are") +
+        " not compared: a sailing nobody had read before has not gone on or " +
+        "off sale.";
     }
     box.appendChild(el("p", "deals-note", note));
     return box;

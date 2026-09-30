@@ -94,8 +94,11 @@ BEDS = re.compile(r"\bbeds?\b", re.I)
 # marks the numbers and nothing else, which makes it a better anchor than the
 # Tailwind classes around it, those being generated.
 LIST_PRICE = re.compile(r"<del[^>]*>\s*([^<]*?\d[\d,.]*)\s*</del>", re.I)
+# The glyph may arrive as an entity: asked for EUR, the page writes the euro
+# sign as `&#x20AC;`, six characters, and a three-character glyph read nothing
+# at all off any non-dollar page (#154). `unescape` below turns it back.
 NOW_PRICE = re.compile(
-    r"<em[^>]*>\s*([^\s<]{1,3})\s*</em>\s*<span[^>]*\btranslate=no[^>]*>\s*([\d,.]+)\s*</span>",
+    r"<em[^>]*>\s*([^\s<&]{1,3}|&#?\w{1,8};)\s*</em>\s*<span[^>]*\btranslate=no[^>]*>\s*([\d,.]+)\s*</span>",
     re.I,
 )
 
@@ -295,7 +298,8 @@ def _prose(markup: str) -> str:
 
 def _money(text: str) -> tuple[float | None, str]:
     """A figure and its currency mark, from "$ 688" or "€1,234.50"."""
-    match = re.search(r"([^\d\s]{0,3})\s*([\d,]+(?:\.\d{1,2})?)", text or "")
+    # Unescaped first: `&#x20AC;1,300` would otherwise read as 20.
+    match = re.search(r"([^\d\s]{0,3})\s*([\d,]+(?:\.\d{1,2})?)", unescape(text or ""))
     if not match:
         return None, ""
     try:
@@ -416,7 +420,7 @@ def parse_cabins(html: str, currency: str) -> CabinReading:
         price, glyph = (None, "")
         if now:
             price, _ = _money(now.group(2))
-            glyph = now.group(1).strip()
+            glyph = unescape(now.group(1)).strip()
         listed = LIST_PRICE.search(block)
         list_price, list_glyph = _money(listed.group(1)) if listed else (None, "")
 

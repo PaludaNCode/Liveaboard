@@ -35,9 +35,9 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -45,7 +45,7 @@ jobs:
       # gates the commit below and must never stop the fetch that would correct
       # it. See tests/published.py.
       - name: Run the code's own tests
-        run: LIVEABOARD_TESTS=code PYTHONPATH=src python3 -m unittest discover -s tests
+        uses: ./.github/actions/code-tests
 
       - name: Read today's rates
         run: python3 tools/fetch_fx.py --out data/fx.json
@@ -53,7 +53,7 @@ jobs:
       # Hand over the reading, never the dataset built from it. `publish.yml`
       # rebuilds both from the branch tip so a derived file cannot arrive
       # stale — see the note at the top of that file.
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: fx-inputs-${{ github.run_id }}
           path: data/fx.json
