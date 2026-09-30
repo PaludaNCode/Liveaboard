@@ -44,6 +44,10 @@ on:
         description: "Year-months to search, the seller's own ym format"
         type: string
         default: ""
+      recheck_all:
+        description: "Read every hull, including the ones held back as barren (#155)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -91,6 +95,7 @@ jobs:
             ${{ env.LIMIT != '0' && format('--limit {0}', env.LIMIT) || '' }} \
             --delay "$DELAY" \
             ${{ inputs.months && format('--months {0}', inputs.months) || '' }} \
+            ${{ inputs.recheck_all && '--recheck-all' || '' }} \
             | tee -a "$GITHUB_STEP_SUMMARY"
           status=${PIPESTATUS[0]}
           echo '```' >> "$GITHUB_STEP_SUMMARY"

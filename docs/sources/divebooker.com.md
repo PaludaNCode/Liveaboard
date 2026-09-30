@@ -1085,3 +1085,15 @@ markdown this seller does publish is `boatSpecials`, against a hull.
 - **Whether any fee disclosure exists at all.** Nothing read so far carries
   one, and *no fee lines means nobody looked* — so this is a question, not a
   finding that the source charges nothing.
+
+## A hull that sells nothing in season (#155)
+
+26 of the 92 hulls in the 2026-09-25 book, and 29 of 93 read on 09-29, stated
+no in-season sailing (`0 in season of N`, many `of 0`). Only 4 of the 26 map to
+a boat either other seller sells in season (Amelie, Bella 2, Bella 3, Sea
+Serpent Excellence), and 4 state a special (Bella 2, Bismarck, Freedom III,
+Freedom IV). `fetch_divebooker.barren_to_skip` holds the rest back for a week;
+the search is **not** a signal that a hull has opened — it links hulls whose
+page states no sailing at all, so being listed for an in-season month proves
+nothing.
+

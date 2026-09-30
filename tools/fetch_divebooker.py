@@ -68,6 +68,108 @@ enough for a season ending and tight enough that a silent wipe cannot pass.
 """
 
 
+BARREN_RECHECK_DAYS = 7
+"""How long "this hull sells nothing in season" is trusted (#155).
+
+The liveaboard.com crawl's number, for its reason: long enough to save the
+daily requests, short enough that a season opening is found within a week. On
+2026-09-29 29 of the 93 hulls the search links stated no in-season sailing and
+were each re-read every morning at a five-second delay -- a third of the job.
+"""
+
+
+def barren_to_skip(
+    previous: dict,
+    hulls: list[str],
+    today: date,
+    live_elsewhere: set[str],
+    aliases: dict[str, str],
+    recheck_all: bool = False,
+) -> tuple[set[str], dict[str, str]]:
+    """The hull paths this run may skip, and the barren record it starts from.
+
+    A hull is skipped only while **all** of these hold, and every one of them
+    is a way for a hull that starts selling later to come back:
+
+    - the last run to read it found **no in-season sailing** and it is in the
+      record, stamped with that day -- a hull the record has never seen, which
+      is every hull the search links for the first time, is read at once;
+    - that day is under ``BARREN_RECHECK_DAYS`` old, so every barren hull is
+      re-read at least weekly and a season opening is found within the week;
+    - it states **no special**, because a markdown is a claim that can end
+      overnight and carrying it a week would print a sale nobody offers;
+    - neither other seller sells an in-season sailing on the boat it maps to
+      (``live_elsewhere``, off the committed dataset), because a boat on sale
+      elsewhere is the likeliest to open here too and costs one request to ask;
+    - and the run was not told to ``--recheck-all``, which ignores the record
+      without discarding it.
+    """
+    record = dict(previous.get("barren") or {})
+    if recheck_all:
+        return set(), record
+    by_path = {str(v.get("url") or "").removeprefix(f"https://{db.HOST}"): slug
+               for slug, v in (previous.get("vessels") or {}).items()}
+    skip: set[str] = set()
+    for path in hulls:
+        slug = by_path.get(path)
+        if not slug or slug not in record:
+            continue
+        try:
+            age = (today - date.fromisoformat(record[slug])).days
+        except (TypeError, ValueError):
+            continue
+        if not 0 <= age < BARREN_RECHECK_DAYS:
+            continue
+        if (previous["vessels"][slug].get("specials")
+                or aliases.get(slug, slug) in live_elsewhere):
+            continue
+        skip.add(path)
+    return skip, record
+
+
+def carry_skipped(previous: dict, skip: set[str], vessels: dict,
+                  departures: dict) -> list[str]:
+    """Put back what the last run read on every hull this one skipped.
+
+    The vessel record and any departure it sold, unchanged, so the book a
+    skipping run writes says the same about those hulls as the one before
+    it. Returns the slugs carried, which the book names as ``not_asked``.
+    """
+    carried: list[str] = []
+    for slug, record in (previous.get("vessels") or {}).items():
+        path = str(record.get("url") or "").removeprefix(f"https://{db.HOST}")
+        if path in skip and slug not in vessels:
+            vessels[slug] = record
+            carried.append(slug)
+            for key, row in (previous.get("departures") or {}).items():
+                if row.get("boat") == slug:
+                    departures[key] = row
+    return sorted(carried)
+
+
+def sold_elsewhere(dataset: Path) -> set[str]:
+    """Boat ids with an in-season sailing in the committed dataset.
+
+    Whoever sold it: the dataset is every seller's rows, so this is a question
+    about the boat and not about any one of them.
+    """
+    if not dataset.exists():
+        return set()
+    try:
+        data = json.loads(dataset.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    boat_of = {i["id"]: i.get("boat_id") for i in data.get("itineraries") or []}
+    return {boat_of.get(d.get("itinerary_id")) for d in data.get("departures") or []} - {None}
+
+
+def load_aliases(path: Path) -> dict[str, str]:
+    try:
+        return dict(json.loads(path.read_text(encoding="utf-8")).get("aliases") or {})
+    except (OSError, ValueError):
+        return {}
+
+
 EMIT_WIDTH = 1000
 """Characters per printed line.
 
@@ -111,6 +213,14 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0, help="vessels to read, 0 for all")
     parser.add_argument("--delay", type=float, default=5.0)
     parser.add_argument("--book", default=BOOK, type=Path)
+    parser.add_argument("--dataset", default=Path("data/egypt-2027.json"), type=Path,
+                        help="the committed dataset, read only to know which "
+                             "boats another seller sells in season")
+    parser.add_argument("--aliases", default=Path("data/divebooker_aliases.json"),
+                        type=Path)
+    parser.add_argument("--recheck-all", action="store_true",
+                        help="read every hull, barren or not; the record is "
+                             "kept and re-stamped rather than discarded")
     parser.add_argument("--save-html", type=Path,
                         help="keep each page's bytes here, for fixtures")
     parser.add_argument("--snapshots", default=Path("data/snapshots"), type=Path)
@@ -164,7 +274,18 @@ def main() -> int:
               "empty book over a good one is exactly what MIN_BOOK_RATIO is for")
         return 1
 
-    visiting = hulls[: args.limit] if args.limit else hulls
+    existing = json.loads(args.book.read_text()) if args.book.exists() else {}
+    today = date.today()
+    skip, barren = barren_to_skip(
+        existing, hulls, today, sold_elsewhere(args.dataset),
+        load_aliases(args.aliases), recheck_all=args.recheck_all)
+    if skip:
+        print(f"-- skipping {len(skip)} hull(s) that sold nothing in season when "
+              f"last read; each is re-read within {BARREN_RECHECK_DAYS} days, at "
+              f"once if it states a special or another seller sells the boat")
+
+    visiting = [h for h in hulls if h not in skip]
+    visiting = visiting[: args.limit] if args.limit else visiting
     vessels: dict[str, dict] = {}
     departures: dict[str, dict] = {}
     warnings: list[str] = []
@@ -200,6 +321,12 @@ def main() -> int:
             departures[f"{book.slug}::{row.start}"] = row.as_dict() | {"boat": book.slug}
             kept += 1
         warnings.extend(book.warnings)
+        # Stamped on the day it was found empty, and cleared the day it is
+        # not: the record is what `barren_to_skip` trusts for a week.
+        if kept or book.specials:
+            barren.pop(book.slug, None)
+        else:
+            barren[book.slug] = today.isoformat()
         for line in book.unnamed_fees:
             unnamed[line] += 1
         for lines, complete in book.fees.values():
@@ -225,17 +352,24 @@ def main() -> int:
               f"  {len(book.fees):>2} fee block(s)"
               f"{'  ' + book.name if book.name else ''}{why}", flush=True)
 
+    # **A skipped hull is not an empty one.** Its last reading is carried --
+    # the vessel record and anything it sold -- and the skip is named, which
+    # is the crawl's `not_asked`: a page nobody opened says nothing, and a
+    # book that dropped the hull would read to `promote` as a withdrawal.
+    not_asked = carry_skipped(existing, skip, vessels, departures)
+
     fresh = {
-        "collected": date.today().isoformat(),
+        "collected": today.isoformat(),
         "source": db.SOURCE_ID,
         "scope": {"entity": args.entity, "months": months,
                   "from": args.season_start, "to": args.season_end},
         "vessels": vessels,
         "departures": departures,
         "warnings": warnings,
+        "barren": dict(sorted(barren.items())),
+        "not_asked": sorted(not_asked),
     }
 
-    existing = json.loads(args.book.read_text()) if args.book.exists() else {}
     before = len(existing.get("departures") or {})
     if args.limit and existing:
         # A capped run visited a slice and knows nothing about the rest, so it

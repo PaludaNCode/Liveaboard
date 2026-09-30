@@ -1813,6 +1813,15 @@ rebuilt whole and `--limit N` merges instead, for `fetch_padi.py`'s reason.
 `data/divebooker_aliases.json` is hand-maintained and outside the publication
 gate: it says which hull is which boat here, and mints ids for the ones only
 this seller sells.
+**A hull with nothing in season is read weekly, not daily (#155)** — 29 of 93
+were, a third of the job. The book's `barren` stamps the day each was found
+empty; `barren_to_skip` holds one back for `BARREN_RECHECK_DAYS` and the skip is
+carried and named (`not_asked`), the crawl's rule. **Every way a hull starts
+selling later is kept**: a hull the search links for the first time is read at
+once, the verdict expires within the week, a hull stating a special is read
+daily (a markdown can end overnight), a boat either other seller sells in
+season is read daily off the committed dataset, and `recheck_all` on a dispatch
+reads the lot without forgetting the record.
 
 **And its cabin ladders are a second pass, in `divebooker_cabins.yml`.**
 `tools/fetch_divebooker_cabins.py` opens `/boatorder/booking?tripId=` once per

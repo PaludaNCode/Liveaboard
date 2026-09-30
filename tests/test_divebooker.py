@@ -2187,3 +2187,65 @@ class TestAChunkReferenceIsFollowedToTheRowItNames(unittest.TestCase):
         self.assertEqual(
             block.programme,
             "Day 2: Dolphin House & Siyoul Kebir Day 3: Abu Nuhas")
+
+
+class TestABarrenHullIsSkippedOnlyWhileItStaysBarren(unittest.TestCase):
+    """#155. 29 of 93 hulls sold nothing in season and were read every day.
+    Each case below is one route by which a hull that starts selling later
+    is read again -- the skip is only worth having if none of them is lost."""
+
+    TODAY = date(2026, 9, 30)
+
+    def setUp(self):
+        import sys
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        import fetch_divebooker
+
+        self.skip = fetch_divebooker.barren_to_skip
+        self.days = fetch_divebooker.BARREN_RECHECK_DAYS
+
+    def book(self, stamped: str = "2026-09-28", **vessel):
+        return {
+            "vessels": {"lyra": {"url": f"https://{db.HOST}/lyra-haz402", **vessel}},
+            "barren": {"lyra": stamped},
+        }
+
+    def ask(self, previous, hulls=("/lyra-haz402",), elsewhere=(), recheck=False):
+        skip, _ = self.skip(previous, list(hulls), self.TODAY, set(elsewhere),
+                            {}, recheck_all=recheck)
+        return skip
+
+    def test_a_hull_found_empty_this_week_is_skipped(self):
+        self.assertEqual(self.ask(self.book()), {"/lyra-haz402"})
+
+    def test_a_hull_never_seen_is_read(self):
+        self.assertEqual(self.ask(self.book(), hulls=["/neo-haz406"]), set())
+        self.assertEqual(self.ask({}), set())
+
+    def test_the_verdict_expires(self):
+        old = date.fromordinal(self.TODAY.toordinal() - self.days).isoformat()
+        self.assertEqual(self.ask(self.book(stamped=old)), set())
+
+    def test_a_hull_stating_a_special_is_read_every_day(self):
+        self.assertEqual(self.ask(self.book(specials=[{"pct": 15}])), set())
+
+    def test_a_boat_another_seller_sells_in_season_is_read(self):
+        self.assertEqual(self.ask(self.book(), elsewhere=["lyra"]), set())
+
+    def test_recheck_all_skips_nothing_and_keeps_the_record(self):
+        skip, record = self.skip(self.book(), ["/lyra-haz402"], self.TODAY,
+                                 set(), {}, recheck_all=True)
+        self.assertEqual((skip, record), (set(), {"lyra": "2026-09-28"}))
+
+    def test_a_skipped_hull_is_carried_rather_than_dropped(self):
+        import fetch_divebooker
+
+        previous = self.book(name="Lyra") | {
+            "departures": {"lyra::2027-05-01": {"boat": "lyra", "start": "2027-05-01"}}}
+        vessels, departures = {}, {}
+        carried = fetch_divebooker.carry_skipped(
+            previous, {"/lyra-haz402"}, vessels, departures)
+        self.assertEqual(carried, ["lyra"])
+        self.assertEqual(vessels["lyra"]["name"], "Lyra")
+        self.assertIn("lyra::2027-05-01", departures)
