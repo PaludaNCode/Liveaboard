@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated": "2026-09-30",
   "default_currency": "EUR",
-  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1282 sailings and the entry bar on 241 of 472 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
+  "notes": "Prices and fee disclosures scraped from liveaboard.com. True cost adds every fee the operator lists, including the ones it states without a price. PADI Travel is read as a second source for its own berth price on 677 of 1288 sailings and the entry bar on 241 of 473 trips; where the two disagree about the bar the stricter is shown. On 180 sailings it is the only seller and the berth price is PADI's. The fees are the vessel's own panel, except on 42 trips whose boats liveaboard.com does not sell, where they are PADI's too.",
   "fx": {
     "display_currency": "EUR",
     "as_of": "2026-09-29",
@@ -45103,6 +45103,397 @@
         "notes": "Open Water - 30 minimum logged dives required. OWD or equivalent"
       },
       "dives_read": true,
+      "divebooker_fees": [
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "airport_transfer",
+          "included": false,
+          "note": "Individual Transfers (per way)",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "private_guide",
+          "included": true,
+          "note": "Dive Guide: stated as included",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "dive_insurance",
+          "included": false,
+          "note": "Diving insurance",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "marine_park",
+          "included": false,
+          "note": "Marine Park and Surcharges (in cash)",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "service_charge",
+          "included": false,
+          "note": "Service Charge (in cash)",
+          "tier": "mandatory",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gratuities",
+          "included": false,
+          "note": "Tips for the crew: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "alcohol",
+          "included": false,
+          "note": "Alcoholic Beverages: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "course",
+          "included": false,
+          "note": "Courses / Coaching: listed with no price",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": null,
+          "basis": "per_trip",
+          "code": "gear_rental",
+          "included": false,
+          "note": "Equipment Rental: listed with no price",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": {
+            "amount": 60.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "tank_15l",
+          "included": false,
+          "note": "15 Liter EAN",
+          "tier": "optional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        },
+        {
+          "amount": {
+            "amount": 1000.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "code": "nitrox",
+          "included": false,
+          "note": "EAN Nitrox Package Group (all Boat 20 PAX)",
+          "tier": "conditional",
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "divebooker.com",
+            "retrieved": "2026-09-30",
+            "url": "https://divebooker.com/carlton-haz488"
+          }
+        }
+      ],
+      "divebooker_fees_complete": true
+    },
+    {
+      "id": "carlton--ras-mohamed-tiran",
+      "name": "Ras Mohamed - Tiran",
+      "title": "Ras Mohammed & Tiran",
+      "operator_id": "carlton-fleet",
+      "boat_id": "carlton",
+      "nights": 4,
+      "dives": 8,
+      "port_from": "Sharm El Sheikh",
+      "port_to": "Sharm El Sheikh",
+      "dive_sites": [
+        "tiran",
+        "ras mohammed"
+      ],
+      "region": null,
+      "summary": "The Carlton liveaboard sails 7-day Red Sea itineraries to Ras Mohammed, Tiran, and St. John's, with 10 en suite cabins for up to 20 guests.",
+      "source_url": "https://www.liveaboard.com/diving/egypt/carlton?m=8/2027",
+      "fees": [
+        {
+          "code": "service_charge",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 90.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Mandatory Service Charge\" as a range"
+        },
+        {
+          "code": "marine_park",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 100.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 150.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"National Park Fees\" as a range"
+        },
+        {
+          "code": "airport_transfer",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 30.0,
+            "currency": "EUR"
+          },
+          "note": "Airport Transfer"
+        },
+        {
+          "code": "alcohol",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "Alcoholic Beverages: listed with no price"
+        },
+        {
+          "code": "nitrox",
+          "tier": "conditional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 40.0,
+            "currency": "EUR"
+          },
+          "amount_max": {
+            "amount": 80.0,
+            "currency": "EUR"
+          },
+          "note": "Operator quotes \"Nitrox\" as a range"
+        },
+        {
+          "code": "nitrox_course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 175.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "private_guide",
+          "tier": "optional",
+          "basis": "per_day",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 50.0,
+            "currency": "EUR"
+          }
+        },
+        {
+          "code": "course",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 225.0,
+            "currency": "EUR"
+          },
+          "note": "Scuba Diving Courses"
+        },
+        {
+          "code": "snorkel_gear",
+          "tier": "optional",
+          "basis": "per_trip",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "Snorkel Gear: listed with no price"
+        },
+        {
+          "code": "tax_vat",
+          "tier": "mandatory",
+          "basis": "per_trip",
+          "included": true,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": null,
+          "note": "VAT: stated as included"
+        },
+        {
+          "code": "gear_rental",
+          "tier": "optional",
+          "included": false,
+          "provenance": {
+            "kind": "scraped",
+            "source_id": "liveaboard.com",
+            "retrieved": "2026-09-27",
+            "url": "https://www.liveaboard.com/diving/egypt/carlton?m=5/2027"
+          },
+          "amount": {
+            "amount": 155.0,
+            "currency": "EUR"
+          },
+          "basis": "per_trip",
+          "note": "Full equipment hire: BCD, Fins, Mask, Regulator, Wetsuit"
+        }
+      ],
+      "requirements": {
+        "min_level": "open_water",
+        "min_logged_dives": 30,
+        "max_depth_m": null,
+        "nitrox_recommended": false,
+        "strong_current": false,
+        "notes": "OWD or equivalent"
+      },
       "divebooker_fees": [
         {
           "amount": {
@@ -201540,16 +201931,6 @@
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
-      },
       "berths": [
         [
           0,
@@ -201610,16 +201991,6 @@
         "source_id": "padi.com",
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
-      },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
       },
       "berths": [
         [
@@ -202257,16 +202628,6 @@
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
-      },
       "berths": [
         [
           0,
@@ -202329,16 +202690,6 @@
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
       },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
-      },
       "berths": [
         [
           0,
@@ -202399,16 +202750,6 @@
         "source_id": "padi.com",
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
-      },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
       },
       "berths": [
         [
@@ -202471,16 +202812,6 @@
         "source_id": "padi.com",
         "retrieved": "2026-09-30",
         "url": "https://travel.padi.com/liveaboard/egypt/my-carlton/"
-      },
-      "divebooker_price": {
-        "amount": 1052.0,
-        "currency": "USD"
-      },
-      "divebooker_provenance": {
-        "kind": "scraped",
-        "source_id": "divebooker.com",
-        "retrieved": "2026-09-30",
-        "url": "https://divebooker.com/carlton-haz488"
       },
       "berths": [
         [
@@ -202802,6 +203133,120 @@
           20
         ]
       ]
+    },
+    {
+      "id": "carlton-2027-05-02-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-05-02",
+      "end": "2027-05-06",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "carlton-2027-05-11-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-05-11",
+      "end": "2027-05-15",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "carlton-2027-07-22-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-07-22",
+      "end": "2027-07-26",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "carlton-2027-07-29-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-07-29",
+      "end": "2027-08-02",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "carlton-2027-08-03-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-08-03",
+      "end": "2027-08-07",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
+    },
+    {
+      "id": "carlton-2027-08-11-divebooker",
+      "itinerary_id": "carlton--ras-mohamed-tiran",
+      "start": "2027-08-11",
+      "end": "2027-08-15",
+      "price": {
+        "amount": 673.0,
+        "currency": "USD"
+      },
+      "booking_url": "https://divebooker.com/carlton-haz488",
+      "availability": "available",
+      "provenance": {
+        "kind": "scraped",
+        "source_id": "divebooker.com",
+        "retrieved": "2026-09-30",
+        "url": "https://divebooker.com/carlton-haz488"
+      },
+      "divebooker_only": true
     },
     {
       "id": "cu-2027-05-01-0",
@@ -259949,8 +260394,8 @@
     "vessels": 94,
     "departures": 970,
     "in_season": 970,
-    "matched": 804,
-    "founded": 88,
+    "matched": 798,
+    "founded": 94,
     "unpriced": 63,
     "on_unmapped_vessels": 15,
     "unmatched": 63,
@@ -259959,7 +260404,7 @@
       "test-boat-trip"
     ],
     "fares": "published",
-    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 970 in-season sailing(s), 804 land on a row one of the other two sellers founded, keyed on (boat, date), and 88 are rows this seller founded itself, on a date or a hull the other two do not list, and 15 sit on hull(s) the alias map does not know, so nothing can be said about them, and 63 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
+    "note": "divebooker.com states a fare on every departure and this dataset now publishes them, on the sailings it lists and nowhere else. What the withholding was waiting on was the currency: it comes from the page's own payload rather than from `Offer.priceCurrency`, which is a static per-vessel label that does not describe `Offer.price`, and read that way 725 of 777 joined sailings carry a figure identical to one of the other two sellers'. The 52 that do not are three sellers disagreeing about a berth, which is what this page draws — and they concentrate rather than scatter: twelve are Unity's whole season at a steady 1.43x. One row stands alone, Red Sea Aggressor IV on 2027-07-24 at exactly twice the other two for the same seven nights, and it is printed as the seller states it rather than dropped, because deleting a published price is the failure this site reports in other people. Of 970 in-season sailing(s), 798 land on a row one of the other two sellers founded, keyed on (boat, date), and 94 are rows this seller founded itself, on a date or a hull the other two do not list, and 15 sit on hull(s) the alias map does not know, so nothing can be said about them, and 63 reach no row at all, every one of them because this seller states no fare for that date — a route on request is an enquiry and not a berth anybody priced. See docs/divebooker-limitations.md."
   },
   "sellers": [
     "liveaboard.com",
@@ -261534,7 +261979,7 @@
       "moves": []
     },
     "coverage": {
-      "unread": 88
+      "unread": 94
     }
   },
   "entry_bar": {
