@@ -1,5 +1,5 @@
 {
-  "collected": "2026-09-29",
+  "collected": "2026-10-01",
   "source": "liveaboard.com",
   "note": "One itinerary fragment per trip, from /itinerary/getpopupv2. Regions, dive count, group size, entry bar and the operator's own sample itinerary are its words about this trip rather than about the boat. `days` is kept verbatim; which of those words are dive sites is decided in promote. Incremental: a trip already here is not re-fetched, so a parser change needs --refresh to reach trips already read.",
   "trips": {
@@ -22262,6 +22262,85 @@
       ],
       "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=5690&tourID=335597&languageID=1&curr=USD&showPrices=false"
     },
+    "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Hurghada - Marsa Alam)": {
+      "boat": "red-sea-aggressor-iv",
+      "name": "Brothers, Daedalus, Elphinstone (Hurghada - Marsa Alam)",
+      "tour_id": "405028",
+      "collected": "2026-10-01",
+      "regions": [
+        "The Brothers",
+        "Daedalus",
+        "Elphinstone"
+      ],
+      "dive_sites": [
+        "brothers",
+        "daedalus",
+        "elphinstone"
+      ],
+      "dives": 26,
+      "guests": 26,
+      "experience": "Open Water - No minimum logged dives required.",
+      "min_logged_dives": 0,
+      "intro": null,
+      "sections": [
+        {
+          "heading": "BIG BROTHER:",
+          "text": "The Brothers (Big Brother and Little Brother, or in Arabic, 'El Akhawein') are two small islands in the Red Sea. They are situated 67 km out to sea from Al Qusayr. Above water, Big Brother features a lighthouse which was built by the British in 1883 and is manned by the Egyptian military. Underwater, there are two wrecks: Numidia and Aida. The walls of Big Brother plunge down into the blue at an almost-vertical angle. Shallow swim-throughs are concealed in the wall on the west side of the site, making them fun to discover. Hard and soft corals, including some Gorgonian Fans, cover the reef, and the ubiquitous Anthias are found in the thousands. Fish of all sizes and species live here, including large pelagic life such as Hawksbill Turtles, Grey Reef Sharks, Thresher Sharks, Longimanus (from October/November), and occasionally, Hammerhead Sharks.",
+          "is_day": false
+        },
+        {
+          "heading": "LITTLE BROTHER:",
+          "text": "Little Brother is, as the name suggests, the smaller of the two islands and is located 1 km to the south of Big Brother. Much like Big Brother, the currents can be strong or not present at all, and they often change at a moment's notice, adding to the adventure and excitement. Deep walls surround the island with a glorious plateau in the north. Here, it feels like diving in an aquarium with a huge variety of marine life, including the larger Hawksbill Turtles, Grey Reef Sharks, Thresher Sharks, and Hammerhead Sharks. The 'Gorgonian Forest' lies in the southeast of the site. Longnose Hawkfish perch on the large Gorgonians; however, their shy temperament means they can be a challenge to photograph!",
+          "is_day": false
+        },
+        {
+          "heading": "DAEDALUS:",
+          "text": "This large reef, also referred to as Abu El Kizan, is found 80 km offshore from Marsa Alam. A lighthouse, which was built in 1861 by the British, stands tall on the small artificial island in the centre of the reef. Today, it is manned by the Egyptian military. Currents tend to be much more predictable here, and divers have an excellent opportunity to spot large pelagic life, such as schooling Hammerhead Sharks and Thresher Sharks, which are commonly seen in the north. Manta Rays can be found anywhere (from March to October), and Grey Reef Sharks and Whitetip Reef Sharks patrol the reef walls. Whale Sharks occasionally pass by in the summer months. Broccoli Corals in a range of candy colours grow out from the reef on all sides. There are pristine hard coral formations in the north and east, especially, while overhangs are home to schools of Glass Sweepers. The south plateau is covered in yellow Litophyton Arboreum and Pulsing Xenia. The West has two spectacular sights... 'Anemone City' is a section of the reef wall that is covered in Magnificent Anemone. Further down to the southwest is another section of the wall, which is covered in Elephant Ear Coral. In terms of topography, the very north of the reef is concave. Many different fish, such as Wrasse, Parrot Fish, Rabbit Fish, and Unicorn Fish, congregate on top of the reef in the clear, shallow water.",
+          "is_day": false
+        },
+        {
+          "heading": "ELPHINSTONE:",
+          "text": "Elphinstone is a very famous, cigar-shaped reef that sits 6 km out to sea from Marsa Alam. There is a long plateau in the north and south of Elphinstone, with the rest of the reef being a steep, colourful wall rich in hard and soft corals. Currents are variable, and can be strong or not present at all. While shark sightings are not guaranteed, the Longimanus cruises in the shallows in the season, and every so often, divers encounter Hammerhead Sharks, Grey Reef Sharks, Silky Sharks, and Manta Rays. Barracuda hang in the blue, and Cornet Fish use divers for cover while they hunt the Anthias.",
+          "is_day": false
+        },
+        {
+          "heading": "MARSA SHOANA:",
+          "text": "(Local - Marsa Alam) Marsa Shoana is an awesome local dive site in Marsa Alam, and normally our first port of call on our itineraries. A white sandy bottom meets a gentle, sloping reef with coral heads, small, medium, and large dotted about. Divers will come across lots of different ecosystems here, which, in turn, promise a wide variety of marine life, both big and small. Green Turtles, various Rays, and even Dolphins and Dugongs surprise those enjoying the underwater realm.",
+          "is_day": false
+        },
+        {
+          "heading": "SHA'AB MAKSOUR:",
+          "text": "(Sataya) Sha'ab Maksour is a large reef with a wide plateau in the north and south and a wall on either side. There is plenty to see here, including schools of Snapper, Dogtooth Tuna, Hawksbill Turtles, and some of the healthiest hard corals your eyes have seen! These corals cover this reef with mounds of Porites, Dome, and Mountain Corals nestled in the shallower parts, as well as untouched Table Corals jutting out perpendicularly. Some exciting macro life, including the Nembrotha Megalocera, has also been sighted here.",
+          "is_day": false
+        },
+        {
+          "heading": "Day 1",
+          "text": "Check in from 3:00 PM to 6:00 PM Stateroom orientation Set up dive gear Dinner Welcome and safety briefing Initial dive briefing Port authority clearances finalized",
+          "is_day": true
+        },
+        {
+          "heading": "Day 2",
+          "text": "Departure (based on port authority authorization) First dives begin",
+          "is_day": true
+        },
+        {
+          "heading": "Days 3 – 8",
+          "text": "Eat, sleep & dive 3–4 dives per day, including night dives",
+          "is_day": false
+        },
+        {
+          "heading": "Day 9",
+          "text": "2 morning dives Return to Port Ghalib Cocktail party on board Dinner off the yacht (not included)",
+          "is_day": true
+        },
+        {
+          "heading": "Day 10",
+          "text": "Check out by 8:00 AM Dive into the rich marine ecosystems of the Red Sea, where vibrant hard and soft corals attract an incredible variety of marine life. Divers may encounter Hammerhead Sharks, Thresher Sharks, Grey Reef Sharks, Manta Rays, Hawksbill Turtles, barracuda, dolphins, dugongs, and even seasonal Whale Sharks. The reefs and walls are also home to colorful reef fish, Anthias, Gorgonian fans, macro critters, and thriving coral gardens teeming with underwater life. The last dive will be on the penultimate day of the trip. Divers are recommended to wait for 24 hours before flying after the last dive. (*) The itinerary description is provided by the boat operator. Sample itineraries and maps are for illustrative purposes only, and the exact route and sites visited may change based on local regulations, guest experience, weather, and logistics, at the Captain’s discretion.",
+          "is_day": true
+        }
+      ],
+      "source_url": "https://www.liveaboard.com/itinerary/getpopupv2?boatID=6189&tourID=405028&languageID=1&curr=USD&showPrices=false"
+    },
     "red-sea-aggressor-iv::Brothers, Daedalus, Elphinstone (Marsa Alam - Hurghada)": {
       "boat": "red-sea-aggressor-iv",
       "name": "Brothers, Daedalus, Elphinstone (Marsa Alam - Hurghada)",
@@ -32142,6 +32221,7 @@
     "353017": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353018": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353019": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
+    "353020": "emperor-elite::South and St. Johns (Marsa Ghalib - Marsa Ghalib)",
     "353100": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
     "353101": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
     "353102": "emperor-superior::Reefs and Wrecks (Hurghada - Hurghada)",
@@ -32193,6 +32273,7 @@
     "391517": "iceberg::Hurghada North (Hurghada - Hurghada)",
     "400631": "iceberg::Special Wrecks / Hurghada North (Hurghada - Hurghada)",
     "400632": "iceberg::Hurghada North (Hurghada - Hurghada)",
+    "400633": "iceberg::Hurghada North (Hurghada - Hurghada)",
     "403130": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "403131": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
     "403132": "new-sambo::Fury Shoals Safari (Hamata - Hamata)",
