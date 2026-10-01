@@ -1,6 +1,327 @@
 [
  {
   "before": "HEAD",
+  "after": "2026-10-01",
+  "added": [],
+  "sold_out": [],
+  "returned": [
+   {
+    "id": "odyssey-2027-06-19-0",
+    "boat": "MY Odyssey Liveaboard",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-06-19",
+    "price": 1994.0,
+    "currency": "USD",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com",
+     "padi.com"
+    ]
+   }
+  ],
+  "withdrawn": [],
+  "relisted": [
+   {
+    "boat": "Carlton",
+    "start": "2027-05-01",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-05-02",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-05-08",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-05-11",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-07-17",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-07-22",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-07-24",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-07-29",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-07-31",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-08-03",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-08-07",
+    "title": "Classic North",
+    "was_title": "Classic North",
+    "sellers": [
+     "padi.com"
+    ],
+    "was_sellers": [
+     "liveaboard.com",
+     "padi.com"
+    ],
+    "price": 930.0,
+    "was_price": 1054.0,
+    "currency": "EUR",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   },
+   {
+    "boat": "Carlton",
+    "start": "2027-08-11",
+    "title": "Minisafari - Tiran & Ras Mohammed",
+    "was_title": "Ras Mohammed & Tiran",
+    "sellers": [
+     "divebooker.com",
+     "liveaboard.com"
+    ],
+    "was_sellers": [
+     "divebooker.com"
+    ],
+    "price": 674.0,
+    "was_price": 673.0,
+    "currency": "USD",
+    "was_currency": "USD",
+    "sellers_moved": true,
+    "repriced": false
+   }
+  ],
+  "price_up": [
+   {
+    "id": "blue-horizon-2027-05-08-0",
+    "boat": "Blue Horizon",
+    "title": "Brothers, Daedalus & Elphinstone",
+    "start": "2027-05-08",
+    "was": 1394.0,
+    "now": 1743.0,
+    "currency": "USD",
+    "delta": 349.0,
+    "pct": 25.03586800573888
+   }
+  ],
+  "price_down": [
+   {
+    "id": "emperor-superior-2027-05-22-0",
+    "boat": "Emperor Superior",
+    "title": "North & Easy",
+    "start": "2027-05-22",
+    "was": 1490.0,
+    "now": 1484.0,
+    "currency": "USD",
+    "delta": -6.0,
+    "pct": -0.4026845637583893
+   },
+   {
+    "id": "emperor-superior-2027-05-01-0",
+    "boat": "Emperor Superior",
+    "title": "Reefs & Wrecks",
+    "start": "2027-05-01",
+    "was": 1490.0,
+    "now": 1484.0,
+    "currency": "USD",
+    "delta": -6.0,
+    "pct": -0.4026845637583893
+   },
+   {
+    "id": "emperor-superior-2027-05-15-0",
+    "boat": "Emperor Superior",
+    "title": "Reefs & Wrecks",
+    "start": "2027-05-15",
+    "was": 1490.0,
+    "now": 1484.0,
+    "currency": "USD",
+    "delta": -6.0,
+    "pct": -0.4026845637583893
+   },
+   {
+    "id": "emperor-superior-2027-05-29-0",
+    "boat": "Emperor Superior",
+    "title": "Reefs & Wrecks",
+    "start": "2027-05-29",
+    "was": 1490.0,
+    "now": 1484.0,
+    "currency": "USD",
+    "delta": -6.0,
+    "pct": -0.4026845637583893
+   }
+  ],
+  "fees": [],
+  "vessels_gone": [],
+  "months_gone": [],
+  "vessels_new": [],
+  "fx": [],
+  "price_rounding": 691,
+  "renumbered": 0,
+  "availability_newly_read": false,
+  "quiet": false,
+  "day": "2026-10-01"
+ },
+ {
+  "before": "HEAD",
   "after": "2026-09-30",
   "added": [],
   "sold_out": [
@@ -4000,289 +4321,5 @@
   "availability_newly_read": false,
   "quiet": false,
   "day": "2026-09-22"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-21",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": true,
-  "day": "2026-09-21"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-21",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [],
-  "price_down": [],
-  "fees": [
-   {
-    "boat": "Ghazala Adventure",
-    "code": "course",
-    "was": "40-400 EUR / per_trip",
-    "now": "40-450 EUR / per_trip"
-   },
-   {
-    "boat": "Ghazala Adventure",
-    "code": "gear_rental",
-    "was": "190 EUR / per_trip",
-    "now": "190-200 EUR / per_trip"
-   },
-   {
-    "boat": "Ghazala Adventure",
-    "code": "nitrox_course",
-    "was": "135-150 EUR / per_trip",
-    "now": "135-160 EUR / per_trip"
-   },
-   {
-    "boat": "Ghazala Explorer",
-    "code": "course",
-    "was": "40-400 EUR / per_trip",
-    "now": "40-450 EUR / per_trip"
-   },
-   {
-    "boat": "Ghazala Explorer",
-    "code": "gear_rental",
-    "was": "190 EUR / per_trip",
-    "now": "190-200 EUR / per_trip"
-   },
-   {
-    "boat": "Ghazala Explorer",
-    "code": "nitrox_course",
-    "was": "135-150 EUR / per_trip",
-    "now": "135-160 EUR / per_trip"
-   },
-   {
-    "boat": "Golden Dolphin IV",
-    "code": "private_guide",
-    "was": "listed, no price",
-    "now": "450-900 EUR / per_trip"
-   }
-  ],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 0,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-21"
- },
- {
-  "before": "HEAD",
-  "after": "2026-09-21",
-  "added": [],
-  "sold_out": [],
-  "returned": [],
-  "withdrawn": [],
-  "relisted": [],
-  "price_up": [
-   {
-    "id": "blue-horizon-2027-05-22-0",
-    "boat": "Blue Horizon",
-    "title": "Daedalus & St. John's",
-    "start": "2027-05-22",
-    "was": 1394.0,
-    "now": 1743.0,
-    "currency": "USD",
-    "delta": 349.0,
-    "pct": 25.03586800573888
-   },
-   {
-    "id": "sunlight-2027-07-31-0",
-    "boat": "Sunlight",
-    "title": "South Route: Daedalus - Rocky - Zabargad",
-    "start": "2027-07-31",
-    "was": 1033.0,
-    "now": 1378.0,
-    "currency": "USD",
-    "delta": 345.0,
-    "pct": 33.39787028073572
-   },
-   {
-    "id": "blue-horizon-2027-05-15-0",
-    "boat": "Blue Horizon",
-    "title": "Northern Red Sea & Brothers",
-    "start": "2027-05-15",
-    "was": 1221.0,
-    "now": 1526.0,
-    "currency": "USD",
-    "delta": 305.0,
-    "pct": 24.97952497952498
-   }
-  ],
-  "price_down": [
-   {
-    "id": "destiny-2027-06-09-0",
-    "boat": "Destiny",
-    "title": "North Tiran - Dahab",
-    "start": "2027-06-09",
-    "was": 2239.0,
-    "now": 2014.0,
-    "currency": "USD",
-    "delta": -225.0,
-    "pct": -10.049129075480124
-   },
-   {
-    "id": "destiny-2027-06-19-0",
-    "boat": "Destiny",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-06-19",
-    "was": 1607.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -162.0,
-    "pct": -10.080896079651524
-   },
-   {
-    "id": "destiny-2027-06-26-0",
-    "boat": "Destiny",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-06-26",
-    "was": 1607.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -162.0,
-    "pct": -10.080896079651524
-   },
-   {
-    "id": "destiny-2027-07-03-0",
-    "boat": "Destiny",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-07-03",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-05-08-0",
-    "boat": "Destiny",
-    "title": "Brothers, Daedalus & Elphinstone",
-    "start": "2027-05-08",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-05-15-0",
-    "boat": "Destiny",
-    "title": "Fury Shoals, Elphinstone & Safaga",
-    "start": "2027-05-15",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-08-21-0",
-    "boat": "Destiny",
-    "title": "North & Brothers",
-    "start": "2027-08-21",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-07-10-0",
-    "boat": "Destiny",
-    "title": "North & Tiran",
-    "start": "2027-07-10",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-08-28-0",
-    "boat": "Destiny",
-    "title": "North & Tiran",
-    "start": "2027-08-28",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-08-14-0",
-    "boat": "Destiny",
-    "title": "North & Wrecks",
-    "start": "2027-08-14",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-07-17-0",
-    "boat": "Destiny",
-    "title": "North Safaga Brothers",
-    "start": "2027-07-17",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-05-22-0",
-    "boat": "Destiny",
-    "title": "North Tiran - Dahab",
-    "start": "2027-05-22",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   },
-   {
-    "id": "destiny-2027-07-24-0",
-    "boat": "Destiny",
-    "title": "St. John's, Fury Shoals & Elphinstone",
-    "start": "2027-07-24",
-    "was": 1606.0,
-    "now": 1445.0,
-    "currency": "USD",
-    "delta": -161.0,
-    "pct": -10.024906600249066
-   }
-  ],
-  "fees": [],
-  "vessels_gone": [],
-  "months_gone": [],
-  "vessels_new": [],
-  "fx": [],
-  "price_rounding": 224,
-  "renumbered": 0,
-  "availability_newly_read": false,
-  "quiet": false,
-  "day": "2026-09-21"
  }
 ]

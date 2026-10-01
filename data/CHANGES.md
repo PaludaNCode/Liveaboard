@@ -3,6 +3,41 @@
 One entry per refresh, newest first, written by `liveaboard.cli changes`.
 Do not edit by hand — the next run rewrites the file around this header.
 
+## 2026-10-01
+
+```
+changes: HEAD -> 2026-10-01
+===========================
+
+bookable again (1)
+  2027-06-19  MY Odyssey Liveaboard  Brothers, Daedalus & Elphinstone   divebooker.com+liveaboard.com+padi.com
+
+re-listed — same sailing, new row (12)
+  2027-05-01  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-05-02  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+  2027-05-08  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-05-11  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+  2027-07-17  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-07-22  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+  2027-07-24  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-07-29  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+  2027-07-31  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-08-03  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+  2027-08-07  Carlton                Classic North                liveaboard.com+padi.com -> padi.com  1,054 USD -> 930 EUR
+  2027-08-11  Carlton                Minisafari - Tiran & Ras Moh divebooker.com -> divebooker.com+liveaboard.com  673 USD -> 674 USD  Ras Mohammed & Tiran -> Minisafari - Tiran & Ras
+
+price up (1)
+  2027-05-08  Blue Horizon           1,394 ->   1,743 USD  +349 (+25.0%)  Brothers, Daedalus & Elphinstone
+
+price down (4)
+  2027-05-22  Emperor Superior       1,490 ->   1,484 USD  -6 (-0.4%)  North & Easy
+  2027-05-01  Emperor Superior       1,490 ->   1,484 USD  -6 (-0.4%)  Reefs & Wrecks
+  2027-05-15  Emperor Superior       1,490 ->   1,484 USD  -6 (-0.4%)  Reefs & Wrecks
+  2027-05-29  Emperor Superior       1,490 ->   1,484 USD  -6 (-0.4%)  Reefs & Wrecks
+
+691 further fare(s) moved by less than 5 — too small to be a decision, and mostly the source re-rounding; counted here rather than listed above
+```
+
 ## 2026-09-30
 
 ```
