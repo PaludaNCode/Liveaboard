@@ -1,5 +1,5 @@
 {
- "collected": "2026-10-01",
+ "collected": "2026-10-02",
  "source": "padi.com",
  "trips": {
   "all-star-ghani::Brothers Daedalus Elphinstone (Hurghada - Hurghada)": {
@@ -44487,7 +44487,8 @@
    "specs": {
     "cabins": 12,
     "length_m": 30,
-    "nitrox_free": false
+    "nitrox_free": false,
+    "year_built": 2023
    }
   },
   "avo": {
@@ -44509,7 +44510,8 @@
    "specs": {
     "cabins": 12,
     "length_m": 44,
-    "nitrox_free": true
+    "nitrox_free": true,
+    "year_built": 2024
    }
   },
   "bella-2": {
@@ -44701,12 +44703,12 @@
    "operator": null,
    "sailings": {
     "dated": 47,
-    "first": "2026-10-02",
+    "first": "2026-10-12",
     "in_season": 18,
     "last": "2027-11-27",
     "priced": 18,
     "read": 47,
-    "unpriced": 1
+    "unpriced": 0
    },
    "slug": "my-carlton",
    "specs": {
